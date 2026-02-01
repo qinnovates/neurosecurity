@@ -828,11 +828,172 @@
       background: rgba(0, 229, 255, 0.2);
       color: #fff;
     }
+
+    /* ── Accessibility Toggle ── */
+    .a11y-toggle {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1.2rem;
+      background: rgba(18, 18, 28, 0.95);
+      border: 1px solid var(--cyan-dim);
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cyan);
+      transition: all 0.3s ease;
+      -webkit-user-select: none;
+      user-select: none;
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .a11y-toggle:hover {
+      border-color: var(--cyan);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3), 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .a11y-toggle:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    .a11y-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .a11y-toggle-track {
+      width: 36px;
+      height: 20px;
+      border-radius: 100px;
+      background: var(--border);
+      position: relative;
+      transition: background 0.3s ease;
+    }
+
+    .a11y-toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .a11y-toggle.effects-on .a11y-toggle-track {
+      background: var(--cyan-dim);
+    }
+
+    .a11y-toggle.effects-on .a11y-toggle-track::after {
+      left: 19px;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+    }
+
+    .a11y-toggle.effects-on {
+      border-color: var(--border);
+      color: var(--text-secondary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .a11y-toggle.effects-on:hover {
+      border-color: var(--cyan-dim);
+      color: var(--text-primary);
+    }
+
+    /* ── Accessible Mode (default) ── */
+    body:not(.effects-enabled) #neural-bg {
+      display: none;
+    }
+
+    body:not(.effects-enabled) .fade-in {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    body:not(.effects-enabled) .hero h1 {
+      animation: none;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    body:not(.effects-enabled) .hero-badge-dot {
+      animation: none;
+    }
+
+    body:not(.effects-enabled) .scroll-indicator {
+      animation: none;
+    }
+
+    body:not(.effects-enabled) .project-card:hover,
+    body:not(.effects-enabled) .stat-card:hover,
+    body:not(.effects-enabled) .founder-card:hover {
+      transform: none;
+    }
+
+    /* ── Skip to content link (screen readers) ── */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      background: var(--cyan);
+      color: var(--bg-primary);
+      padding: 0.75rem 1.5rem;
+      z-index: 10000;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 0 0 8px 0;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* ── prefers-reduced-motion override ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      #neural-bg {
+        display: none;
+      }
+
+      .fade-in {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <canvas id="neural-bg"></canvas>
+  <a href="#about" class="skip-link">Skip to main content</a>
+
+  <canvas id="neural-bg" aria-hidden="true"></canvas>
+
+  <!-- Accessibility toggle -->
+  <button class="a11y-toggle" id="a11y-toggle" aria-label="Toggle BCI-accessible mode" title="Toggle BCI-accessible mode">
+    <span class="a11y-icon" aria-hidden="true">&#9881;</span>
+    <span class="a11y-label">BCI Accessible</span>
+    <span class="a11y-toggle-track"></span>
+  </button>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
@@ -886,7 +1047,7 @@
   </section>
 
   <!-- About -->
-  <section class="about" id="about">
+  <section class="about" id="about" role="main">
     <div class="container">
       <div class="about-grid">
         <div class="about-text fade-in">
@@ -1021,11 +1182,50 @@
   </footer>
 
   <script>
+    /* ── Accessibility Toggle ── */
+    (function() {
+      const toggle = document.getElementById('a11y-toggle');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let effectsOn = localStorage.getItem('qinnovate-effects');
+
+      // Default: effects OFF (accessible). If user previously enabled, respect that.
+      // If prefers-reduced-motion, always off.
+      if (prefersReduced) {
+        effectsOn = false;
+      } else if (effectsOn === null) {
+        effectsOn = false;
+      } else {
+        effectsOn = effectsOn === 'true';
+      }
+
+      var label = toggle.querySelector('.a11y-label');
+
+      function applyEffects(on) {
+        document.body.classList.toggle('effects-enabled', on);
+        toggle.classList.toggle('effects-on', on);
+        toggle.setAttribute('aria-pressed', on);
+        label.textContent = on ? 'Effects On' : 'BCI Accessible';
+        if (on) {
+          window.dispatchEvent(new CustomEvent('effects-on'));
+        } else {
+          window.dispatchEvent(new CustomEvent('effects-off'));
+        }
+      }
+
+      applyEffects(effectsOn);
+
+      toggle.addEventListener('click', function() {
+        effectsOn = !effectsOn;
+        localStorage.setItem('qinnovate-effects', effectsOn);
+        applyEffects(effectsOn);
+      });
+    })();
+
     /* ── Neural Network Canvas Background ── */
     (function() {
       const canvas = document.getElementById('neural-bg');
       const ctx = canvas.getContext('2d');
-      let w, h, nodes, mouse, animId;
+      let w, h, nodes, mouse, animId, running = false;
 
       const CONFIG = {
         nodeCount: 80,
@@ -1171,23 +1371,57 @@
         mouse.y = -1000;
       });
 
-      resize();
-      createNodes();
-      animate();
+      function start() {
+        if (running) return;
+        running = true;
+        resize();
+        createNodes();
+        animate();
+      }
+
+      function stop() {
+        if (!running) return;
+        running = false;
+        if (animId) cancelAnimationFrame(animId);
+        ctx.clearRect(0, 0, w, h);
+      }
+
+      // Only start if effects are enabled
+      if (document.body.classList.contains('effects-enabled')) {
+        start();
+      }
+
+      window.addEventListener('effects-on', start);
+      window.addEventListener('effects-off', stop);
     })();
 
-    /* ── Scroll Animations ── */
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    /* ── Scroll Animations (only when effects enabled) ── */
+    const fadeEls = document.querySelectorAll('.fade-in');
+    let observer;
 
-    document.querySelectorAll('.fade-in').forEach(function(el) {
-      observer.observe(el);
-    });
+    function startObserver() {
+      fadeEls.forEach(function(el) { el.classList.remove('visible'); });
+      observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      fadeEls.forEach(function(el) { observer.observe(el); });
+    }
+
+    function stopObserver() {
+      if (observer) { observer.disconnect(); observer = null; }
+      fadeEls.forEach(function(el) { el.classList.add('visible'); });
+    }
+
+    if (document.body.classList.contains('effects-enabled')) {
+      startObserver();
+    } else {
+      fadeEls.forEach(function(el) { el.classList.add('visible'); });
+    }
+
+    window.addEventListener('effects-on', startObserver);
+    window.addEventListener('effects-off', stopObserver);
 
     /* ── Nav scroll effect ── */
     window.addEventListener('scroll', function() {
