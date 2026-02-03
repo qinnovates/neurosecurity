@@ -23,6 +23,7 @@
                  img-src 'self' https: data:;
                  connect-src 'self' https://www.google-analytics.com https://analytics.google.com;
                  font-src 'self' https://fonts.gstatic.com;
+                 media-src 'self';
                  object-src 'none';
                  base-uri 'self';
                  form-action 'self' mailto:;
@@ -490,6 +491,47 @@
       color: var(--text-primary);
     }
 
+    /* -- BCI Toggle Easter Egg States -- */
+    .a11y-toggle.egg-hint {
+      border-color: var(--purple) !important;
+      color: var(--purple) !important;
+      box-shadow: 0 0 20px rgba(180, 74, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .a11y-toggle.egg-hint .a11y-toggle-track {
+      background: var(--purple-dim) !important;
+    }
+
+    .a11y-toggle.egg-hint .a11y-toggle-track::after {
+      background: var(--purple) !important;
+      box-shadow: 0 0 6px var(--purple) !important;
+    }
+
+    .a11y-toggle.egg-audio {
+      border-color: var(--purple) !important;
+      color: var(--purple) !important;
+      box-shadow: 0 0 25px rgba(180, 74, 255, 0.5), 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+      gap: 0.5rem;
+    }
+
+    .a11y-toggle.egg-audio .a11y-toggle-track,
+    .a11y-toggle.egg-audio .a11y-label {
+      display: none;
+    }
+
+    .a11y-toggle.egg-audio .a11y-icon {
+      font-size: 1.3rem;
+    }
+
+    @keyframes egg-audio-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(180, 74, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4); }
+      50% { box-shadow: 0 0 35px rgba(180, 74, 255, 0.6), 0 4px 20px rgba(0, 0, 0, 0.5); }
+    }
+
+    .a11y-toggle.egg-playing {
+      animation: egg-audio-pulse 1.5s ease-in-out infinite;
+    }
+
     /* -- Selection -- */
     ::selection {
       background: rgba(0, 229, 255, 0.2);
@@ -639,6 +681,84 @@
         effectsOn = !effectsOn;
         localStorage.setItem('qinnovate-effects', effectsOn);
         applyEffects(effectsOn);
+      });
+    })();
+
+    /* =============================================
+       BCI TOGGLE EASTER EGG
+       ============================================= */
+    (function() {
+      var toggle = document.getElementById('a11y-toggle');
+      var eggClicks = 0;
+      var eggTimer = null;
+      var eggState = 'idle'; // idle, hint, audio, playing
+      var eggAudio = null;
+
+      // Store original toggle content
+      var origIcon = toggle.querySelector('.a11y-icon').innerHTML;
+      var origLabel = toggle.querySelector('.a11y-label').textContent;
+
+      function resetEgg() {
+        eggClicks = 0;
+        eggState = 'idle';
+        toggle.classList.remove('egg-hint', 'egg-audio', 'egg-playing');
+        toggle.querySelector('.a11y-icon').innerHTML = origIcon;
+        toggle.querySelector('.a11y-label').textContent = origLabel;
+        toggle.querySelector('.a11y-label').style.display = '';
+        toggle.querySelector('.a11y-toggle-track').style.display = '';
+        if (eggAudio) {
+          eggAudio.pause();
+          eggAudio = null;
+        }
+      }
+
+      toggle.addEventListener('click', function() {
+        clearTimeout(eggTimer);
+
+        // Reset after inactivity
+        eggTimer = setTimeout(function() {
+          if (eggState !== 'playing') resetEgg();
+        }, 3000);
+
+        if (eggState === 'playing') return;
+
+        if (eggState === 'audio') {
+          // Play the audio
+          eggState = 'playing';
+          toggle.classList.add('egg-playing');
+          toggle.querySelector('.a11y-icon').innerHTML = '&#9654;';
+          eggAudio = new Audio('bci-easter-egg.mp3');
+          eggAudio.play();
+          eggAudio.addEventListener('ended', function() {
+            // Fade out and reset
+            toggle.style.transition = 'opacity 0.5s ease';
+            toggle.style.opacity = '0';
+            setTimeout(function() {
+              resetEgg();
+              toggle.style.opacity = '1';
+            }, 500);
+          });
+          return;
+        }
+
+        eggClicks++;
+
+        if (eggClicks >= 6 && eggState === 'hint') {
+          // Transform to audio button
+          eggState = 'audio';
+          toggle.classList.remove('egg-hint');
+          toggle.classList.add('egg-audio');
+          toggle.querySelector('.a11y-icon').innerHTML = '&#9835;';
+          clearTimeout(eggTimer);
+          // Reset after 8s if not clicked
+          eggTimer = setTimeout(function() {
+            if (eggState === 'audio') resetEgg();
+          }, 8000);
+        } else if (eggClicks >= 3 && eggState === 'idle') {
+          // Purple hint
+          eggState = 'hint';
+          toggle.classList.add('egg-hint');
+        }
       });
     })();
 
