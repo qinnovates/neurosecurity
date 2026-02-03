@@ -736,15 +736,22 @@
       }
 
       // Wheel drives progress
+      // Normalize: trackpads send many small events (deltaY 1-5),
+      // mouse wheels send fewer large events (deltaY 50-120).
+      // deltaMode 0 = pixels, 1 = lines (~40px), 2 = pages
       window.addEventListener('wheel', function(e) {
         if (introDone || !introState.active) return;
         e.preventDefault();
+        var dy = Math.abs(e.deltaY);
+        if (e.deltaMode === 1) dy *= 40;
+        else if (e.deltaMode === 2) dy *= 800;
+        // Clamp to avoid huge jumps, then scale
+        dy = Math.min(dy, 150);
+        var step = dy * 0.003;
         if (e.deltaY > 0) {
-          // Scroll down = progress forward
-          progress = Math.min(1, progress + Math.abs(e.deltaY) * 0.0008);
+          progress = Math.min(1, progress + step);
         } else {
-          // Scroll up = progress backward
-          progress = Math.max(0, progress - Math.abs(e.deltaY) * 0.0008);
+          progress = Math.max(0, progress - step);
         }
         updateIntro();
       }, { passive: false });
@@ -760,10 +767,11 @@
         if (introDone || !introState.active) return;
         var dy = touchLastY - e.touches[0].clientY; // positive = scroll down
         touchLastY = e.touches[0].clientY;
+        var step = Math.min(Math.abs(dy), 80) * 0.005;
         if (dy > 0) {
-          progress = Math.min(1, progress + dy * 0.002);
+          progress = Math.min(1, progress + step);
         } else {
-          progress = Math.max(0, progress + dy * 0.002);
+          progress = Math.max(0, progress - step);
         }
         updateIntro();
       }, { passive: true });
