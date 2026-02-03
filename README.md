@@ -4,6 +4,15 @@
 
 ---
 
+## Legacy Archive
+
+| Page | URL |
+|------|-----|
+| Site Archive | [/mindloft/legacy/](https://qinnovate.com/mindloft/legacy/) |
+| ONI Whitepaper (v1) | [/mindloft/legacy/whitepaper-oni/](https://qinnovate.com/mindloft/legacy/whitepaper-oni/) |
+
+---
+
 ## Sites
 
 | Site | URL | Source |
@@ -54,13 +63,6 @@
 | Attack & Defense Flow | [/mindloft/visualizations/10-attack-defense-flow.html](https://qinnovate.com/mindloft/visualizations/10-attack-defense-flow.html) |
 | Wave Spectrum Explorer | [/mindloft/visualizations/11-wave-spectrum-explorer.html](https://qinnovate.com/mindloft/visualizations/11-wave-spectrum-explorer.html) |
 | Design System | [/mindloft/visualizations/design-system.html](https://qinnovate.com/mindloft/visualizations/design-system.html) |
-
-### Legacy Archive
-
-| Page | URL |
-|------|-----|
-| Site Archive | [/mindloft/legacy/](https://qinnovate.com/mindloft/legacy/) |
-| ONI Whitepaper (v1) | [/mindloft/legacy/whitepaper-oni/](https://qinnovate.com/mindloft/legacy/whitepaper-oni/) |
 
 ---
 
