@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# ═══════════════════════════════════════
+# Not all who wander are lost.
+# But the curious ones check robots.txt.
+# And they definitely view source.
+# ═══════════════════════════════════════
