@@ -4,6 +4,18 @@
 
 ---
 
+> **New to GitHub? Start here.**
+>
+> If you landed here looking for our research, documentation, or the QIF framework — you're in the right place, just the wrong folder. GitHub hosts both the website code *and* the readable content, but in separate locations.
+>
+> The files you see here (HTML, JSON, JS) are the raw code that powers [qinnovate.com](https://qinnovate.com). They aren't meant to be read directly — they're what your browser turns into the website you see.
+>
+> **What you're looking for is here:** [github.com/qinnovates/mindloft/tree/main/docs](https://github.com/qinnovates/mindloft/tree/main/docs)
+>
+> That link takes you to the actual documentation, research publications, interactive tools, and the QIF whitepaper.
+
+---
+
 ## Legacy Archive
 
 | Page | URL |
