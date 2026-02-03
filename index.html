@@ -538,6 +538,38 @@
       color: #fff;
     }
 
+    /* -- Intro Animation -- */
+    .mystery-container {
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .mystery-container.revealed {
+      opacity: 1;
+    }
+
+    body.intro-mode {
+      overflow-y: auto;
+      height: auto;
+    }
+
+    .intro-spacer {
+      height: 800vh;
+      pointer-events: none;
+    }
+
+    .intro-progress {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      z-index: 1000;
+      transition: width 0.1s linear;
+      opacity: 0.6;
+    }
+
     /* -- prefers-reduced-motion override -- */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -552,6 +584,11 @@
 
       .mystery {
         text-shadow: none;
+      }
+
+      .mystery-container {
+        opacity: 1 !important;
+        transition: none !important;
       }
     }
   </style>
@@ -644,7 +681,180 @@
   <!-- Patience easter egg -->
   <div class="patience-text" id="patience-text">patience</div>
 
+  <!-- Intro scroll spacer (removed after intro completes) -->
+  <div class="intro-spacer" id="intro-spacer"></div>
+  <div class="intro-progress" id="intro-progress"></div>
+
   <script>
+    /* =============================================
+       INTRO ANIMATION CONTROLLER
+       ============================================= */
+    var introState = { active: false, progress: 0, phase: 0, completed: false, cleaning: false };
+
+    (function() {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var mysteryContainer = document.querySelector('.mystery-container');
+      var spacer = document.getElementById('intro-spacer');
+      var progressBar = document.getElementById('intro-progress');
+      var skipIntro = prefersReduced || localStorage.getItem('qi_intro_done') === 'true';
+
+      if (skipIntro) {
+        mysteryContainer.classList.add('revealed');
+        if (spacer) spacer.remove();
+        if (progressBar) progressBar.remove();
+        introState.completed = true;
+        return;
+      }
+
+      // First visit: activate intro mode
+      introState.active = true;
+      document.body.classList.add('intro-mode');
+
+      var decompressTriggered = false;
+
+      function getProgress() {
+        var scrollMax = document.body.scrollHeight - window.innerHeight;
+        if (scrollMax <= 0) return 0;
+        return Math.min(1, window.scrollY / scrollMax);
+      }
+
+      function onScroll() {
+        if (!introState.active || introState.completed || decompressTriggered || introState.cleaning) return;
+
+        var raw = getProgress();
+        var eased = Math.pow(raw, 1.8);
+        introState.progress = eased;
+
+        // Update progress bar
+        if (progressBar) progressBar.style.width = (raw * 100) + '%';
+
+        // Determine phase
+        if (eased < 0.01) {
+          introState.phase = 0;
+        } else if (eased < 0.8) {
+          introState.phase = 1;
+        } else if (eased < 0.99) {
+          introState.phase = 2;
+        }
+
+        // Trigger auto-decompress at bottom
+        if (raw >= 0.99 && !decompressTriggered) {
+          decompressTriggered = true;
+          introState.phase = 3;
+          triggerDecompress();
+        }
+      }
+
+      function triggerDecompress() {
+        var shells = window._threeShells;
+        var pg = window._introParallaxGroup;
+        var layers = window._introActiveLayers;
+
+        if (typeof gsap === 'undefined' || !shells || !pg) {
+          completeIntro();
+          return;
+        }
+
+        // Play the standby chime
+        try {
+          var chime = new Audio('mindloft-os-standby.mp3');
+          chime.volume = 0.6;
+          chime.play();
+        } catch(e) {}
+
+        var stackSpacing = 0.4;
+        var mp = 0.874;
+        var totalLayers = shells.meshes.length;
+
+        var tl = gsap.timeline({
+          onComplete: function() {
+            introState.phase = 4;
+            completeIntro();
+          }
+        });
+
+        // Animate each shell back to normal hero breathing state
+        shells.meshes.forEach(function(mesh, i) {
+          var origR = shells.origRadii[i];
+          var targetY = (i - (totalLayers - 1) / 2) * stackSpacing * mp;
+          var discScaleY = origR * (1 - mp * 0.92);
+
+          tl.to(mesh.scale, {
+            x: origR,
+            y: discScaleY,
+            z: origR,
+            duration: 2.0,
+            ease: 'elastic.out(1, 0.6)'
+          }, 0);
+
+          tl.to(mesh.position, {
+            x: 0,
+            y: targetY,
+            z: 0,
+            duration: 1.8,
+            ease: 'power3.out'
+          }, 0);
+        });
+
+        // Tilt back to 0
+        tl.to(pg.rotation, {
+          x: 0,
+          duration: 1.5,
+          ease: 'power3.out'
+        }, 0);
+
+        // Reset colors and uniforms to base
+        shells.meshes.forEach(function(mesh, i) {
+          var layer = layers ? layers[i] : null;
+          if (layer && shells.uniforms[i]) {
+            tl.to(shells.uniforms[i].uColor.value, {
+              x: layer.c[0],
+              y: layer.c[1],
+              z: layer.c[2],
+              duration: 1.2,
+              ease: 'power2.out'
+            }, 0.3);
+            tl.to(shells.uniforms[i].uGlowIntensity, {
+              value: (i === 0) ? 2.5 : 1.2,
+              duration: 1.0,
+              ease: 'power2.out'
+            }, 0.3);
+            tl.to(shells.uniforms[i].uOpacity, {
+              value: (i === 0) ? 0.7 : 0.45,
+              duration: 1.0,
+              ease: 'power2.out'
+            }, 0.3);
+          }
+        });
+      }
+
+      function completeIntro() {
+        // Reveal the "?"
+        mysteryContainer.classList.add('revealed');
+
+        // Mark cleaning to ignore scroll events during scroll-to-top
+        introState.cleaning = true;
+
+        // Remove spacer first (kills scroll height), then scroll to top
+        if (spacer) spacer.remove();
+        if (progressBar) progressBar.remove();
+        window.scrollTo({ top: 0 });
+
+        // Restore body to locked mode
+        document.body.classList.remove('intro-mode');
+        document.body.style.overflow = 'hidden';
+        document.body.style.height = '100vh';
+
+        // Mark complete
+        localStorage.setItem('qi_intro_done', 'true');
+        introState.active = false;
+        introState.completed = true;
+        introState.cleaning = false;
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
     /* =============================================
        ACCESSIBILITY TOGGLE
        ============================================= */
@@ -1298,6 +1508,7 @@
 
       window.addEventListener('wheel', function(e) {
         if (!running || resonanceMode) return;
+        if (introState.active && !introState.completed) return;
         if (e.deltaY < 0) {
           var t01 = springTarget / 2.0;
           var scrollRate = 0.002 + t01 * t01 * 0.006;
@@ -1314,10 +1525,12 @@
       // Touch support for spring
       var touchStartY = 0;
       window.addEventListener('touchstart', function(e) {
+        if (introState.active && !introState.completed) return;
         touchStartY = e.touches[0].clientY;
       }, { passive: true });
       window.addEventListener('touchmove', function(e) {
         if (!running || resonanceMode) return;
+        if (introState.active && !introState.completed) return;
         var dy = e.touches[0].clientY - touchStartY;
         touchStartY = e.touches[0].clientY;
         if (dy > 0) {
@@ -1409,6 +1622,99 @@
         if (resonanceMode && resonancePhase === 1) {
           springTarget = 2.0;
           springCompress += (2.0 - springCompress) * 0.15;
+        }
+
+        // ====== INTRO-DRIVEN ANIMATION ======
+        if (introState.active && !introState.completed) {
+          var ip = introState.progress;
+          var introPhase = introState.phase;
+
+          if (introPhase >= 3) {
+            // Phase 3-4: GSAP controls meshes — just keep rotating and rendering
+            dustCloud.rotation.y = t * 0.02;
+            dustCloud.rotation.x = Math.sin(t * 0.1) * 0.05;
+            renderer.render(scene, camera);
+            return;
+          }
+
+          // Phase 0: idle breathing — fall through to normal animation
+          if (introPhase === 0) {
+            // Let the normal per-shell animation handle breathing
+            // but suppress spring physics
+            springCompress = 0;
+            springTarget = 0;
+          } else {
+            // Phase 1-2: scroll-driven compression and tilt
+            var stackSp = 0.4;
+
+            // Compression amount (phase 1: progress 0→0.8)
+            var compressAmt = Math.min(1, ip / 0.8);
+
+            // Tilt amount (phase 2: progress 0.8→1.0)
+            var tiltAmt = (ip > 0.8) ? Math.min(1, (ip - 0.8) / 0.2) : 0;
+
+            // Auto-rotation speed boost proportional to compression
+            autoRotateGroup.rotation.y += compressAmt * 0.013;
+
+            var mp = 0.874;
+
+            shellMeshes.forEach(function(mesh, i) {
+              var origR = originalRadii[i];
+              var layer = activeLayers[i];
+              var breathing = 1 + Math.sin(t * 0.6 + i * 0.5) * 0.006;
+
+              // Normal resting position (matches hero breathing state)
+              var spreadY = (i - (totalLayers - 1) / 2) * stackSp * mp;
+
+              // Compress Y positions toward center
+              mesh.position.set(0, spreadY * (1 - compressAmt), 0);
+
+              // Normal disc scaleY, flatten further toward thin disc
+              var normalScaleY = origR * breathing * (1 - mp * 0.92);
+              var flatY = normalScaleY * (1 - compressAmt * 0.85);
+              var baseXZ = origR * breathing;
+              mesh.scale.set(baseXZ, Math.max(flatY, origR * 0.02), baseXZ);
+
+              // Color cycling proportional to compression
+              if (compressAmt > 0.05) {
+                var stepsFromL14 = (totalLayers - 1) - i;
+                var layerPhase = stepsFromL14 * 0.15;
+                var mtPos = (compressAmt * 0.6 + t * 0.25 + layerPhase) % 1.0;
+
+                var specR, specG, specB;
+                if (mtPos < 0.33) {
+                  var cst = mtPos / 0.33;
+                  specR = 0.00 + cst * 0.71; specG = 0.90 - cst * 0.61; specB = 1.00;
+                } else if (mtPos < 0.66) {
+                  var cst2 = (mtPos - 0.33) / 0.33;
+                  specR = 0.71 + cst2 * 0.29; specG = 0.29 - cst2 * 0.09; specB = 1.00 - cst2 * 0.20;
+                } else {
+                  var cst3 = (mtPos - 0.66) / 0.34;
+                  specR = 1.00 - cst3 * 1.00; specG = 0.20 + cst3 * 0.70; specB = 0.80 + cst3 * 0.20;
+                }
+
+                var blend = Math.min(1, compressAmt * 1.5);
+                shellUniforms[i].uColor.value.set(
+                  layer.c[0] + (specR - layer.c[0]) * blend,
+                  layer.c[1] + (specG - layer.c[1]) * blend,
+                  layer.c[2] + (specB - layer.c[2]) * blend
+                );
+                shellUniforms[i].uGlowIntensity.value = 1.2 + compressAmt * 2.0;
+                shellUniforms[i].uOpacity.value = 0.45 + compressAmt * 0.35;
+              }
+            });
+
+            // Apply tilt to parallaxGroup
+            parallaxGroup.rotation.x = tiltAmt * (Math.PI / 2);
+            parallaxGroup.rotation.y *= 0.9;
+
+            // Dust drift
+            dustCloud.rotation.y = t * 0.02;
+            dustCloud.rotation.x = Math.sin(t * 0.1) * 0.05;
+
+            renderer.render(scene, camera);
+            return;
+          }
         }
 
         // Per-shell animation
@@ -1646,6 +1952,7 @@
 
       function stop() {
         if (!running) return;
+        if (introState.active && !introState.completed) return; // Don't stop during intro
         running = false;
         if (animId) {
           cancelAnimationFrame(animId);
@@ -1662,7 +1969,10 @@
         renderer.render(scene, camera);
       }
 
-      if (document.body.classList.contains('effects-enabled')) {
+      if (introState.active && !introState.completed) {
+        // Intro requires animation loop regardless of effects toggle
+        start();
+      } else if (document.body.classList.contains('effects-enabled')) {
         start();
       } else {
         renderStaticFrame();
@@ -1671,8 +1981,10 @@
       window.addEventListener('effects-on', start);
       window.addEventListener('effects-off', stop);
 
-      // Expose shell meshes for resonance explosion
+      // Expose shell meshes for resonance explosion and intro
       window._threeShells = { meshes: shellMeshes, origRadii: originalRadii, uniforms: shellUniforms };
+      window._introParallaxGroup = parallaxGroup;
+      window._introActiveLayers = activeLayers;
     })();
 
     /* =============================================
