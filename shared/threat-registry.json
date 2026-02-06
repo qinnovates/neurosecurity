@@ -116,8 +116,11 @@
         "tactics": [
           "TA0002"
         ],
-        "techniques": [],
-        "note": "BCI-specific execution via crafted neural signals"
+        "techniques": [
+          "T1659",
+          "T1674"
+        ],
+        "note": "Maps to Content Injection (T1659) and Input Injection (T1674) — inject false content into BCI data stream"
       },
       "sources": [
         "Kohno et al. 2009",
@@ -147,8 +150,11 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "Neural-specific: disrupt/lock function via stimulation manipulation"
+        "techniques": [
+          "T1486",
+          "T1489"
+        ],
+        "note": "Maps to Data Encrypted for Impact (T1486, ransomware analog) + Service Stop (T1489, lock neural function)"
       },
       "sources": [
         "Pycroft et al. 2016"
@@ -243,7 +249,7 @@
           "TA0002"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Quantum-biological attack vector."
+        "note": "NO MITRE EQUIVALENT. Exploit ion channel quantum tunneling to inject false synaptic events. Physics-based attack with no digital analog."
       },
       "sources": [
         "Summhammer et al. 2012",
@@ -271,7 +277,7 @@
           "TA0002"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Protein-level quantum manipulation."
+        "note": "NO MITRE EQUIVALENT. THz stimulation triggers Davydov solitons in SNARE protein complexes. Quantum-biological — no digital analog."
       },
       "sources": [
         "Davydov 1973",
@@ -298,8 +304,11 @@
         "tactics": [
           "TA0002"
         ],
-        "techniques": [],
-        "note": "BCI neural data protocol exploitation"
+        "techniques": [
+          "T1565",
+          "T1565.002"
+        ],
+        "note": "Maps to Data Manipulation (T1565) — exploit neural data protocol to alter transmitted data"
       },
       "sources": [
         "Schroder et al. 2025"
@@ -329,8 +338,11 @@
         "tactics": [
           "TA0002"
         ],
-        "techniques": [],
-        "note": "Motor/cognitive command interception and modification"
+        "techniques": [
+          "T1557",
+          "T1565.002"
+        ],
+        "note": "Maps to Adversary-in-the-Middle (T1557) + Transmitted Data Manipulation (T1565.002) — intercept and modify motor/cognitive commands"
       },
       "sources": [
         "Kohno et al. 2009"
@@ -362,8 +374,11 @@
         "tactics": [
           "TA0002"
         ],
-        "techniques": [],
-        "note": "BCI-specific. RF injection of synthetic brainwave patterns."
+        "techniques": [
+          "T1659",
+          "T1200"
+        ],
+        "note": "Maps to Content Injection (T1659) + Hardware Additions (T1200) — RF device injects synthetic brainwave patterns"
       },
       "sources": [
         "Zhang et al. 2024"
@@ -393,7 +408,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Government-restricted EM weapon."
+        "note": "NO MITRE EQUIVALENT. Directed energy weapon — physics-based coupling at neural frequency (3-76 Hz). Government-restricted. Closest ICS: Manipulation of Control (T0831)."
       },
       "sources": [
         "NTIA Frequency Allocation Chart",
@@ -423,7 +438,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. BCI's own telemetry becomes attack vector."
+        "note": "NO MITRE EQUIVALENT. Nonlinear tissue mixing of attacker + BCI signals produces neural-range beat frequency. Novel physics-based coupling."
       },
       "sources": [
         "ITU Radio Regulations"
@@ -451,7 +466,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Directed energy auditory/neural effect."
+        "note": "NO MITRE EQUIVALENT. Pulsed microwave auditory/neural effect (Frey effect). Directed energy weapon — no digital/cyber analog."
       },
       "sources": [
         "Frey 1962",
@@ -481,7 +496,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "Weaponized non-invasive brain stimulation technique."
+        "note": "NO MITRE EQUIVALENT. Weaponized temporal interference stimulation (Grossman 2017). Two kHz+ signals produce neural-range beat at depth."
       },
       "sources": [
         "Grossman et al. 2017 (Cell)"
@@ -515,7 +530,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "Weaponized tACS principle. Lowest barrier to entry."
+        "note": "NO MITRE EQUIVALENT. Weaponized tACS — any carrier AM-modulated at neural frequency. Tissue demodulates. Lowest barrier to entry."
       },
       "sources": [
         "Datta et al. 2009"
@@ -542,7 +557,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "Physical destruction. Nation-state only."
+        "note": "NO MITRE EQUIVALENT. Physical thermal destruction of electrode-tissue boundary. Closest ICS: Damage to Property (T0879). Nation-state only."
       },
       "sources": [
         "US DoD Active Denial System (declassified)"
@@ -624,8 +639,10 @@
         "tactics": [
           "TA0005"
         ],
-        "techniques": [],
-        "note": "Adversarial perturbation of BCI signal processing"
+        "techniques": [
+          "T1565.001"
+        ],
+        "note": "Maps to Stored Data Manipulation (T1565.001) — adversarial perturbation corrupts BCI signal processing filters"
       },
       "sources": [
         "Liu et al. 2024"
@@ -651,8 +668,10 @@
         "tactics": [
           "TA0005"
         ],
-        "techniques": [],
-        "note": "Input-agnostic adversarial attack on BCI decoders"
+        "techniques": [
+          "T1565.001"
+        ],
+        "note": "Maps to Stored Data Manipulation (T1565.001) — input-agnostic adversarial perturbation that degrades any BCI decoder"
       },
       "sources": [
         "Liu et al. 2024",
@@ -679,8 +698,11 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "ML privacy attack applied to BCI training data"
+        "techniques": [
+          "T1005",
+          "T1530"
+        ],
+        "note": "Maps to Data from Local System (T1005) + Data from Cloud Storage (T1530) — infer membership in BCI training dataset"
       },
       "sources": [
         "Shokri et al. 2017"
@@ -706,8 +728,10 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "Privacy attack on federated BCI model training"
+        "techniques": [
+          "T1530"
+        ],
+        "note": "Maps to Data from Cloud Storage (T1530) — extract private neural data from federated learning gradients"
       },
       "sources": [
         "Zhu et al. 2019"
@@ -733,8 +757,10 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "Attack on closed-loop BCI feedback system"
+        "techniques": [
+          "T1565.002"
+        ],
+        "note": "Maps to Transmitted Data Manipulation (T1565.002) — falsify neurofeedback signals in closed-loop BCI"
       },
       "sources": [
         "Meng et al. 2024"
@@ -763,8 +789,10 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "Feedback loop destabilization attack"
+        "techniques": [
+          "T1565.002"
+        ],
+        "note": "Maps to Transmitted Data Manipulation (T1565.002) — perturb closed-loop to trigger cascading destabilization"
       },
       "sources": [
         "Meng et al. 2024"
@@ -795,8 +823,11 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "Neural DoS via electrode overstimulation"
+        "techniques": [
+          "T1498",
+          "T1499"
+        ],
+        "note": "Maps to Network DoS (T1498) + Endpoint DoS (T1499) — overwhelm neural tissue via electrode overstimulation"
       },
       "sources": [
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
@@ -825,8 +856,11 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "Neural DoS via excessive stimulation volume"
+        "techniques": [
+          "T1498",
+          "T1499"
+        ],
+        "note": "Maps to Network DoS (T1498) + Endpoint DoS (T1499) — flood neural pathways with excessive stimulation"
       },
       "sources": [
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
@@ -884,8 +918,10 @@
         "tactics": [
           "TA0005"
         ],
-        "techniques": [],
-        "note": "Selective packet dropping adapted for neural signals"
+        "techniques": [
+          "T1565.002"
+        ],
+        "note": "Maps to Transmitted Data Manipulation (T1565.002) — selectively drop/modify neural signal packets to alter perceived brain state"
       },
       "sources": [
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
@@ -947,8 +983,10 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "No MITRE equivalent. Involuntary motor control."
+        "techniques": [
+          "T1565"
+        ],
+        "note": "Maps loosely to Data Manipulation (T1565) — hijack motor commands to produce involuntary movement. BCI-specific severity beyond traditional data manipulation."
       },
       "sources": [
         "Kohno et al. 2009",
@@ -1008,7 +1046,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Psychological continuity attack."
+        "note": "NO MITRE EQUIVALENT. Long-term psychological continuity attack via gradual neural stimulation drift. No digital/cyber analog exists."
       },
       "sources": [
         "Yuste et al. 2017 (Neurorights)"
@@ -1037,7 +1075,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Cognitive manipulation."
+        "note": "NO MITRE EQUIVALENT. Direct cognitive manipulation via hippocampal stimulation. No digital/cyber analog — requires neural interface."
       },
       "sources": [
         "Bonaci et al. 2015"
@@ -1062,8 +1100,10 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "No MITRE equivalent. Involuntary cognitive disclosure."
+        "techniques": [
+          "T1119"
+        ],
+        "note": "Maps to Automated Collection (T1119) — trigger P300 evoked responses to involuntarily extract yes/no answers. BCI-specific interrogation technique."
       },
       "sources": [
         "Bonaci et al. 2015",
@@ -1089,8 +1129,11 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "No MITRE equivalent. Involuntary inner speech capture."
+        "techniques": [
+          "T1119",
+          "T1005"
+        ],
+        "note": "Maps to Automated Collection (T1119) + Data from Local System (T1005) — decode covert speech from neural signals. BCI-specific cognitive extraction."
       },
       "sources": [
         "Willett et al. 2023 (Nature)",
@@ -1119,7 +1162,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Attacks sense of free will."
+        "note": "NO MITRE EQUIVALENT. Manipulate user's sense of agency/free will via BCI stimulation. No digital/cyber analog — neurological attack."
       },
       "sources": [
         "Yuste et al. 2017 (Neurorights)",
@@ -1177,7 +1220,7 @@
           "TA0040"
         ],
         "techniques": [],
-        "note": "No MITRE equivalent. Attacks user's self-representation."
+        "note": "NO MITRE EQUIVALENT. Corrupt user's neural self-model / body representation. No digital/cyber analog — neurological identity attack."
       },
       "sources": [
         "Yuste et al. 2017 (Neurorights)"
@@ -1233,8 +1276,11 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "Infer sensitive attributes from neural metadata"
+        "techniques": [
+          "T1119",
+          "T1005"
+        ],
+        "note": "Maps to Automated Collection (T1119) + Data from Local System (T1005) — infer sensitive attributes (health, emotion, identity) from neural metadata"
       },
       "sources": [
         "Landau et al. 2020"
@@ -1354,8 +1400,11 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "Post-quantum cryptographic threat to BCI data"
+        "techniques": [
+          "T1557",
+          "T1530"
+        ],
+        "note": "Maps to Adversary-in-the-Middle (T1557, intercept) + Data from Cloud Storage (T1530, store). Record encrypted BCI traffic now, decrypt when quantum computers arrive."
       },
       "sources": [
         "Gidney 2025 (Google quantum roadmap)"
@@ -1411,8 +1460,11 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "Coordinated attack on standardized BCI platform"
+        "techniques": [
+          "T1072",
+          "T1498"
+        ],
+        "note": "Maps to Software Deployment Tools (T1072, mass compromise vector) + Network DoS (T1498). Coordinated attack on standardized BCI platform."
       },
       "sources": [
         "Schroder et al. 2025 (Yale worst-case scenario)"
@@ -1533,8 +1585,10 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "Neural-specific data collection via evoked responses"
+        "techniques": [
+          "T1119"
+        ],
+        "note": "Maps to Automated Collection (T1119) — automated harvesting of event-related potentials (P300, N400, etc.) from BCI signals"
       },
       "sources": [
         "Bonaci et al. 2015",
@@ -1563,8 +1617,11 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "Passive collection of mental state information"
+        "techniques": [
+          "T1119",
+          "T1005"
+        ],
+        "note": "Maps to Automated Collection (T1119) + Data from Local System (T1005) — passive collection of emotional/cognitive state from neural signals"
       },
       "sources": [
         "Landau et al. 2020"
@@ -1592,8 +1649,10 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "No MITRE equivalent. Extraction of memory-related neural patterns."
+        "techniques": [
+          "T1005"
+        ],
+        "note": "Maps to Data from Local System (T1005) — extract memory-encoded neural patterns. BCI-specific: no traditional system stores 'memories' as data."
       },
       "sources": [
         "Bonaci et al. 2015"
@@ -1624,8 +1683,11 @@
         "tactics": [
           "TA0040"
         ],
-        "techniques": [],
-        "note": "Nation-state cognitive warfare via BCI infrastructure"
+        "techniques": [
+          "T1498",
+          "T1565"
+        ],
+        "note": "Maps to Network DoS (T1498) + Data Manipulation (T1565) — nation-state cognitive warfare leveraging BCI infrastructure at scale"
       },
       "sources": [
         "NATO STO 2024 (Cognitive Warfare concept)"
@@ -1652,8 +1714,11 @@
         "tactics": [
           "TA0009"
         ],
-        "techniques": [],
-        "note": "Mass neural data collection for surveillance"
+        "techniques": [
+          "T1119",
+          "T1557"
+        ],
+        "note": "Maps to Automated Collection (T1119) + Adversary-in-the-Middle (T1557) — mass neural data interception and collection for surveillance"
       },
       "sources": [
         "Ienca & Andorno 2017 (Neurorights)"
@@ -1710,8 +1775,11 @@
         "tactics": [
           "TA0003"
         ],
-        "techniques": [],
-        "note": "BCI-specific persistence via calibration data corruption"
+        "techniques": [
+          "T1565.001",
+          "T1546"
+        ],
+        "note": "Maps to Stored Data Manipulation (T1565.001, corrupt calibration) + Event Triggered Execution (T1546, persist via calibration reload)"
       },
       "sources": [
         "Schroder et al. 2025"
@@ -1740,8 +1808,10 @@
         "tactics": [
           "TA0003"
         ],
-        "techniques": [],
-        "note": "BCI-specific persistence via learned neural patterns"
+        "techniques": [
+          "T1546"
+        ],
+        "note": "Maps to Event Triggered Execution (T1546) — persist via learned neural pathway patterns that trigger on brain state events"
       },
       "sources": [],
       "status": "THEORETICAL",
@@ -1767,8 +1837,10 @@
         "tactics": [
           "TA0003"
         ],
-        "techniques": [],
-        "note": "BCI-specific persistence via neural pathway modification"
+        "techniques": [
+          "T1546"
+        ],
+        "note": "Maps to Event Triggered Execution (T1546) — cross-session persistence via neural pathway modification that survives device reset"
       },
       "sources": [],
       "status": "THEORETICAL",
@@ -1794,8 +1866,10 @@
         "tactics": [
           "TA0005"
         ],
-        "techniques": [],
-        "note": "Evasion of QIF's own coherence metric"
+        "techniques": [
+          "T1036"
+        ],
+        "note": "Maps to Masquerading (T1036) — mimic legitimate neural coherence patterns to evade QIF detection"
       },
       "sources": [],
       "status": "THEORETICAL",
@@ -1821,8 +1895,10 @@
         "tactics": [
           "TA0005"
         ],
-        "techniques": [],
-        "note": "Below-threshold parameter modification"
+        "techniques": [
+          "T1027"
+        ],
+        "note": "Maps to Obfuscated Files or Information (T1027) — slow parameter drift stays below detection threshold to evade monitoring"
       },
       "sources": [],
       "status": "THEORETICAL",
@@ -1848,8 +1924,10 @@
         "tactics": [
           "TA0005"
         ],
-        "techniques": [],
-        "note": "Mask malicious signals with calibrated noise"
+        "techniques": [
+          "T1027"
+        ],
+        "note": "Maps to Obfuscated Files or Information (T1027) — inject calibrated noise to mask malicious signals from QI detection"
       },
       "sources": [],
       "status": "THEORETICAL",
