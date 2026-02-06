@@ -129,18 +129,24 @@ Think: **W3C** (Qinnovate) vs **Chrome** (Mindloft)
 
 ## Development Process
 
-Qinnovate operates through the **Continuous Iteration & Validation (CIV) lifecycle** — our approach to bridging academic R&D with industry deployment while maintaining rigorous governance throughout.
+Qinnovate operates through the **VERA Engine** (Validation • Ethics • Research • Authority) — our approach to standards development that prioritizes "time-to-truth" over "time-to-market."
 
-The CIV framework prioritizes **"time-to-truth"** over "time-to-market," embedding NIST/IEEE-aligned governance at every stage: from ideation through proof-of-concept development to validation and standardization.
+VERA fuses the Scientific Method with the Public Policy Cycle, ensuring every technological advancement is lab-proven and legally codified before release as authorized knowledge.
 
-**[Read the full CIV Lifecycle documentation →](processes/qinnovate-lifecycle.md)**
+**[Read the full VERA Engine documentation →](processes/qinnovate-lifecycle.md)**
+
+### Three-Phase Authority Cycle
+
+1. **Technical Lab (Research & Validation)** — Hypothesis formulation, controlled POC development, sandboxed lab testing
+2. **Governance Hub (The Filter)** — Data vetting via Q-Metrics, NIST/IEEE alignment, policy enforcement
+3. **External Council (Policy & Implementation)** — Independent peer review, policy formalization, authorized dissemination
 
 ### Key Principles
 
-- **Governance at the Center:** All research, POCs, and standards pass through ethics review
-- **Lab-Only Testing:** Security and capability POCs conducted exclusively in controlled environments
-- **Continuous Validation:** Findings immediately feed back into standards development
-- **Peer Review:** Academic and industry validation before publication
+- **Standards Authority Only:** Qinnovate excludes product deployment to maintain institutional independence
+- **Lab-Only Testing:** All POCs conducted exclusively in controlled environments with ethical oversight
+- **Scientific Rigor:** Every standard must be lab-proven before external validation
+- **Separation of Concerns:** Standards body (Qinnovate) remains independent from implementation entities (e.g., Mindloft)
 
 ---
 
