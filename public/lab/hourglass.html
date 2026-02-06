@@ -28,7 +28,7 @@
   --severity-high: #d29922;
   --severity-severe: #e3b341;
   --severity-silicon: #58a6ff;
-  --severity-interface: #f85149;
+  --severity-interface: #bc8cff;
   --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -319,7 +319,7 @@ main {
 .severity-badge.high { background: rgba(210,153,34,0.15); color: var(--severity-high); border: 1px solid rgba(210,153,34,0.3); }
 .severity-badge.severe { background: rgba(227,179,65,0.15); color: var(--severity-severe); border: 1px solid rgba(227,179,65,0.3); }
 .severity-badge.silicon { background: rgba(88,166,255,0.1); color: var(--severity-silicon); border: 1px solid rgba(88,166,255,0.2); }
-.severity-badge.interface { background: rgba(248,81,73,0.1); color: var(--severity-interface); border: 1px solid rgba(248,81,73,0.2); }
+.severity-badge.interface { background: rgba(188,140,255,0.1); color: #bc8cff; border: 1px solid rgba(188,140,255,0.2); }
 
 /* ── Band Detail View (Full Screen Overlay) ── */
 #band-detail {
@@ -790,7 +790,7 @@ function getBandColor(band) {
     high: '#d29922',
     severe: '#e3b341',
     silicon: '#58a6ff',
-    interface: '#f85149',
+    interface: '#bc8cff',
   };
   return colors[getSeverityClass(band.severity)] || '#58a6ff';
 }
@@ -864,13 +864,13 @@ class HourglassView {
           const sep = document.createElement('div');
           sep.className = 'zone-separator';
           const zoneName = band.zone === 'interface' ? 'I0 \u2014 Interface Bottleneck' :
-                          band.zone === 'silicon' ? 'Silicon Domain' : 'Neural Domain';
+                          band.zone === 'silicon' ? 'Synthetic Domain' : 'Neural Domain';
           sep.innerHTML = `<div class="line"></div><span class="zone-label">${zoneName}</span><div class="line"></div>`;
           main.appendChild(sep);
         } else {
           const sep = document.createElement('div');
           sep.className = 'zone-separator';
-          sep.innerHTML = `<div class="line"></div><span class="zone-label">Silicon Domain</span><div class="line"></div>`;
+          sep.innerHTML = `<div class="line"></div><span class="zone-label">Synthetic Domain</span><div class="line"></div>`;
           main.appendChild(sep);
         }
         prevZone = band.zone;
