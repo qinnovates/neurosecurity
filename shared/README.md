@@ -1,91 +1,112 @@
-# Classical↔Quantum Bridge
+# QIF Threat Registry
 
-This folder contains shared data structures and validation tools that bridge the **Classical (ONI 14-Layer)** and **Quantum (QIF 7-Band Hourglass)** BCI security models.
+This folder contains the unified BCI/neural security threat taxonomy using MITRE ATT&CK-compatible identifiers.
 
-## Architecture
+## Files
 
 ```
 shared/
-├── threat-matrix.json            # Master taxonomy with category codes
-├── validation/                   # Validation tools
-│   ├── bridge.py                 # ONI↔QIF validator
-│   ├── validate_metadata.py      # Metadata validation
+├── threat-registry.json         # 60 techniques, 11 tactics, MITRE-compatible (CURRENT)
+├── threat-matrix.json           # DEPRECATED - legacy ONI 24-technique matrix
+├── validation/                  # Validation tools
+│   ├── bridge.py                # ONI<>QIF validator
+│   ├── validate_metadata.py     # Metadata validation
 │   └── generate_progress.py     # Progress tracking
-└── README.md                     # This file
+└── README.md                    # This file
 ```
 
-## Single Source of Truth
+## threat-registry.json (Current)
 
-The `threat-matrix.json` file is the canonical source for all threat data. Each threat is mapped to **both** ONI layers (L1-L14) and QIF bands (N3/N2/N1/I0/S1/S2/S3).
+**60 techniques** across **11 MITRE-compatible tactics**, generated from `config.py` (as-code).
 
-### Category System
+### ID Scheme
 
-Threats are categorized using internal codes:
+| Range | Category | Count |
+|-------|----------|-------|
+| T2001-T2099 | Signal/Interface attacks | 9 |
+| T2100-T2199 | Directed Energy / Frequency-domain | 6 |
+| T2200-T2299 | Adversarial ML / Decoder attacks | 8 |
+| T2300-T2399 | Neuron-level / Biological attacks | 6 |
+| T2400-T2499 | Cognitive / Identity attacks | 10 |
+| T2500-T2599 | Infrastructure / Supply chain | 8 |
+| T2600-T2699 | Collection / Privacy | 6 |
+| T2700-T2799 | Reconnaissance / Profiling | 1 |
+| T2800-T2899 | Persistence / Evasion | 6 |
 
-| Code | Name | Description |
-|------|------|-------------|
-| **Κ** | Common | Elements shared across both ONI and QIF models |
-| **Δ** | Differences | Unique to one model only |
-| **Σ** | Sum | Combined total across both models |
+### Tactics
 
-**Note:** These Greek letters are internal category codes used in the JSON. When building user interfaces, translate them to human-readable labels using the `_meta.categories` definitions.
+| ID | Name | MITRE Native | Description |
+|----|------|:---:|-------------|
+| TA0043 | Reconnaissance | Yes | Profiling neural signals, mapping BCI networks |
+| TA0001 | Initial Access | Yes | Gaining access to BCI system or neural pathway |
+| TA0002 | Execution | Yes | Running attack payload on BCI or neural target |
+| TA0003 | Persistence | Yes | Maintaining foothold in BCI/neural system |
+| TA0005 | Defense Evasion | Yes | Avoiding detection by classical/quantum sensors |
+| TA0009 | Collection | Yes | Harvesting neural data, cognitive states |
+| TA0040 | Impact | Yes | Disrupting neural function, physical harm |
+| TA0050 | Neural Manipulation | **BCI-specific** | Direct neural state modification |
+| TA0051 | Cognitive Exploitation | **BCI-specific** | Exploiting cognitive processes |
+| TA0052 | Directed Energy | **BCI-specific** | EM/RF attacks on neural tissue |
+| TA0053 | Adversarial ML | **BCI-specific** | Attacking BCI decoder models |
 
-## Usage
+### MITRE Compatibility
 
-### Validate Consistency
+- **Technique IDs**: T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)
+- **Tactic IDs**: Standard MITRE TA#### where applicable; TA0050-TA0053 for BCI-specific
+- **Cross-references**: Each technique includes a `mitre` field linking to relevant ATT&CK techniques
 
-```bash
-python validation/bridge.py --validate    # Check consistency (0 errors = pass)
-```
+### Usage
 
-### Show Differences
-
-```bash
-python validation/bridge.py --diff        # Where models diverge
-```
-
-### Filter by Category
-
-```bash
-# In your code:
+```python
 import json
-with open('threat-matrix.json') as f:
-    data = json.load(f)
 
-# Get all common threats (Κ)
-common = [t for t in data['tactics'] if t.get('category') == 'Κ']
+with open('threat-registry.json') as f:
+    registry = json.load(f)
 
-# Get model-specific threats (Δ)
-differences = [t for t in data['tactics'] if t.get('category') == 'Δ']
+# All techniques
+print(f"{registry['statistics']['total_techniques']} techniques")
 
-# Get sum/total threats (Σ)
-total = [t for t in data['tactics'] if t.get('category') == 'Σ']
+# Filter by tactic
+execution = [t for t in registry['techniques'] if t['category'] == 'TA0002']
+
+# Filter by status
+confirmed = [t for t in registry['techniques'] if t['status'] == 'CONFIRMED']
+
+# Find MITRE cross-references
+with_mitre = [t for t in registry['techniques'] if t['mitre']['techniques']]
 ```
 
-## Layer→Band Migration
+```javascript
+// Browser / Node.js
+const registry = await fetch('threat-registry.json').then(r => r.json());
 
-The canonical translation between Classical layers (L1-L14) and Quantum bands is defined in `_meta.migration`:
-
-```json
-{
-  "L1-L7": "S3",      // Silicon infrastructure
-  "L8": "I0",         // Neural Gateway (physical interface)
-  "L9": "I0/N1",      // Boundary-spanning
-  "L10": "N1/N2",     // Boundary-spanning
-  "L11": "N2",        // Neural semantics
-  "L12-L14": "N3"     // Cognitive sovereignty
-}
+// Group by category
+const grouped = Object.groupBy(registry.techniques, t => t.category);
 ```
 
-## Adding New Threats
+### Status Levels
 
-When adding threats to `threat-matrix.json`:
+| Status | Count | Meaning |
+|--------|-------|---------|
+| CONFIRMED | 13 | Demonstrated in real BCI systems or documented incidents |
+| DEMONSTRATED | 15 | Proven in research/lab settings |
+| THEORETICAL | 19 | Physically plausible, not yet demonstrated |
+| EMERGING | 13 | Recently identified, under active research |
 
-1. Assign appropriate category code (**Κ**, **Δ**, or **Σ**)
-2. Map to both ONI layers and QIF bands
-3. Run validation: `python validation/bridge.py --validate`
-4. Ensure consistency check passes
+## threat-matrix.json (DEPRECATED)
+
+> **This file is deprecated.** It contains the legacy ONI-era taxonomy with 24 techniques using ONI-T### identifiers. All entries have been merged into `threat-registry.json` with MITRE-compatible IDs. See the `legacy_ids` field on each technique for the migration mapping.
+
+## Source of Truth
+
+The canonical source is `config.py` in the QIF Lab. The JSON is generated via:
+
+```bash
+cd qif-lab && python generate_threat_registry.py
+```
+
+Change config.py, re-run the generator, copy to this repo. As-code, single source of truth.
 
 ---
 
-*Last updated: 2026-02-05*
+*Last updated: 2026-02-06*
