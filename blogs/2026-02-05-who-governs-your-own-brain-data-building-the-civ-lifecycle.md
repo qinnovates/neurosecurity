@@ -1,3 +1,9 @@
+---
+title: "Who Governs Your Own Brain Data? Building the CIV Lifecycle"
+date_posted: "2026-02-05"
+tags: ["Neuroethics", "BrainComputerInterface", "QIF", "CognitiveLiberty", "DataGovernance"]
+---
+
 # Who Governs Your Own Brain Data? Building the CIV Lifecycle
 
 **Kevin Qi** | February 5, 2026 | **EXCLUSIVE**
