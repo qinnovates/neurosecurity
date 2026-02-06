@@ -155,34 +155,50 @@ VERA fuses the Scientific Method with the Public Policy Cycle, ensuring every te
 Qinnovate's standards development operates through a three-phase authority cycle, maintaining strict separation from product implementation:
 
 ```
-                     ┌─────────────────────┐
-                     │                     │
-                     │  PHASE 2:           │
-              ┌──────│  GOVERNANCE HUB     │──────┐
-              │      │  (The Filter)       │      │
-              │      │                     │      │
-              │      │  • Data Vetting     │      │
-              │      │  • NIST/IEEE        │      │
-              │      │  • Q-Metrics        │      │
-              │      └─────────────────────┘      │
-              │                                    │
-              │                                    │
-    ┌─────────▼──────────┐              ┌─────────▼──────────┐
-    │                    │              │                    │
-    │  PHASE 1:          │              │  PHASE 3:          │
-    │  TECHNICAL LAB     │              │  EXTERNAL COUNCIL  │
-    │                    │              │                    │
-    │  • Ideation        │              │  • Peer Review     │
-    │  • Controlled POC  │              │  • Policy          │
-    │  • Lab Isolation   │              │  • Dissemination   │
-    │                    │              │                    │
-    └────────────────────┘              └────────────────────┘
-             │                                     │
-             │                                     │
-             └──────────────┬──────────────────────┘
-                            │
-                    Perpetual Loop
-              (Time-to-Autonomy over Time-to-Market)
+              ┌────────────────────────┐
+              │   PHASE 1:             │
+              │   TECHNICAL LAB        │
+              │                        │
+              │   • Ideation           │
+              │   • Controlled POC     │
+              │   • Lab Isolation      │
+              └───────────┬────────────┘
+                          │
+                          │ Lab Data
+                          ▼
+                  ┌───────────────┐
+                  │               │
+                  │  GOVERNANCE   │◄─────────┐
+                  │      &        │          │
+                  │   STANDARDS   │          │
+                  │               │          │
+                  │  (NIST/IEEE)  │          │ Perpetual Loop
+                  └───────────────┘          │ (Time-to-Autonomy)
+                          │                  │
+                  Vetted  │                  │
+                   Data   │                  │
+                          ▼                  │
+              ┌────────────────────────┐     │
+              │   PHASE 2:             │     │
+              │   GOVERNANCE HUB       │     │
+              │                        │     │
+              │   • Data Vetting       │     │
+              │   • Q-Metrics          │     │
+              │   • Compliance         │     │
+              └───────────┬────────────┘     │
+                          │                  │
+                 Validated│                  │
+                 Standards│                  │
+                          ▼                  │
+              ┌────────────────────────┐     │
+              │   PHASE 3:             │     │
+              │   EXTERNAL COUNCIL     │     │
+              │                        │     │
+              │   • Peer Review        │     │
+              │   • Policy             │     │
+              │   • Dissemination      │─────┘
+              └────────────────────────┘
+                    Authorized Knowledge
 ```
 
 **The VERA Authority Cycle:**
