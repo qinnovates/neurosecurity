@@ -1,102 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-
-// News & Intel categories — as-code, extend by adding entries
-const categories = [
-  {
-    id: 'bci-security',
-    name: 'BCI Security',
-    icon: '&#9632;',
-    color: 'var(--color-accent-primary)',
-    description: 'Vulnerabilities, threat research, and defense strategies for neural interfaces.',
-    sources: [
-      { name: 'NIST Cybersecurity', url: 'https://www.nist.gov/cybersecurity' },
-      { name: 'IEEE Brain Initiative', url: 'https://brain.ieee.org/' },
-      { name: 'MITRE ATT&CK', url: 'https://attack.mitre.org/' },
-    ],
-  },
-  {
-    id: 'neurotechnology',
-    name: 'Neurotechnology',
-    icon: '&#9670;',
-    color: 'var(--color-accent-secondary)',
-    description: 'Device advances, clinical trials, FDA clearances, and industry developments.',
-    sources: [
-      { name: 'Neuralink', url: 'https://neuralink.com/blog/' },
-      { name: 'Synchron', url: 'https://synchron.com/' },
-      { name: 'BCI Society', url: 'https://bcisociety.org/' },
-      { name: 'OpenBCI', url: 'https://openbci.com/' },
-    ],
-  },
-  {
-    id: 'quantum',
-    name: 'Quantum Computing',
-    icon: '&#8734;',
-    color: 'var(--color-accent-tertiary)',
-    description: 'Quantum security, post-quantum cryptography, and quantum-neural intersections.',
-    sources: [
-      { name: 'NIST PQC', url: 'https://csrc.nist.gov/projects/post-quantum-cryptography' },
-      { name: 'Qiskit Blog', url: 'https://www.ibm.com/quantum/blog' },
-      { name: 'Quantum Computing Report', url: 'https://quantumcomputingreport.com/' },
-    ],
-  },
-  {
-    id: 'neuroethics',
-    name: 'Neuroethics & Policy',
-    icon: '&#9674;',
-    color: 'var(--color-status-safe)',
-    description: 'Cognitive liberty, neural data governance, regulatory frameworks, and rights.',
-    sources: [
-      { name: 'Neurorights Foundation', url: 'https://neurorightsfoundation.org/' },
-      { name: 'UNESCO Neuroethics', url: 'https://www.unesco.org/en/ethics-neurotechnology' },
-      { name: 'OECD Neurotechnology', url: 'https://www.oecd.org/en/topics/sub-issues/neurotechnology.html' },
-    ],
-  },
-  {
-    id: 'research',
-    name: 'Research & Academia',
-    icon: '&#9830;',
-    color: 'var(--color-text-muted)',
-    description: 'Published papers, preprints, and academic developments in neural security.',
-    sources: [
-      { name: 'arXiv Neuroscience', url: 'https://arxiv.org/list/q-bio.NC/recent' },
-      { name: 'Nature Neuroscience', url: 'https://www.nature.com/neuro/' },
-      { name: 'IEEE Xplore', url: 'https://ieeexplore.ieee.org/' },
-    ],
-  },
-];
-
-// Intelligence briefs — curated items (as-code, easy to extend)
-const briefs = [
-  {
-    date: '2026-02',
-    title: 'NIST Post-Quantum Cryptography Standards Finalized',
-    category: 'quantum',
-    summary: 'NIST has finalized three post-quantum cryptographic algorithms (ML-KEM, ML-DSA, SLH-DSA). These standards will directly impact BCI encryption protocols at QIF Band 3.',
-    relevance: 'QIF Band 3 (Protocol Security) specifications should reference these PQC standards for forward-secure neural data encryption.',
-  },
-  {
-    date: '2026-01',
-    title: 'Synchron Stentrode Receives FDA Breakthrough Device Designation',
-    summary: 'Endovascular BCI reaches another clinical milestone. The minimally invasive approach changes the attack surface analysis — no craniotomy means different physical security vectors.',
-    category: 'neurotechnology',
-    relevance: 'QIF I0 (Neural Gateway) threat model needs endovascular-specific vectors alongside traditional implanted devices.',
-  },
-  {
-    date: '2026-01',
-    title: 'UNESCO Publishes Recommendations on Neurotechnology Ethics',
-    summary: 'First intergovernmental framework for neurotechnology governance. Addresses cognitive liberty, mental privacy, and neural data as a special category.',
-    category: 'neuroethics',
-    relevance: 'QIF Band 7 (Cognitive Sovereignty) aligns with UNESCO cognitive liberty principles. Framework validation opportunity.',
-  },
-  {
-    date: '2026-01',
-    title: 'First Adversarial EEG Attack Demonstrated at IEEE S&P',
-    summary: 'Researchers demonstrate that adversarial perturbations in EEG signals can fool BCI decoders, causing misclassification of motor intent.',
-    category: 'bci-security',
-    relevance: 'Directly validates QIF threat model: adversarial signal injection at Band 5 (Signal Processing). Coherence metric could detect these perturbations.',
-  },
-];
+import { categories, briefs } from '../lib/news-data';
 ---
 
 <PageLayout
@@ -172,10 +76,44 @@ const briefs = [
     </div>
   </section>
 
-  <div class="mt-12 glass rounded-xl p-6 text-center reveal">
-    <p class="text-sm text-[var(--color-text-muted)]">
-      News & Intel is curated by the Qinnovate research team. Have a tip or source to suggest?
-      <a href="/about/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Get in touch</a>.
-    </p>
+  <!-- Subscribe Section -->
+  <div class="mt-16 glass rounded-xl p-8 reveal">
+    <div class="max-w-xl mx-auto text-center">
+      <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">Stay Informed</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        No spam. Neural security intel, delivered when it matters.
+      </p>
+
+      <form
+        action="https://buttondown.com/api/emails/embed-subscribe/qinnovate"
+        method="post"
+        target="_blank"
+        class="flex flex-col sm:flex-row gap-3 mb-4"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="flex-1 px-4 py-2.5 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-faint)] text-sm focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors"
+        />
+        <button
+          type="submit"
+          class="px-6 py-2.5 rounded-lg bg-[var(--color-accent-primary)] text-[var(--color-bg-primary)] text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer"
+        >
+          Subscribe
+        </button>
+      </form>
+
+      <a
+        href="/rss.xml"
+        class="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+        Subscribe via RSS
+      </a>
+    </div>
   </div>
 </PageLayout>

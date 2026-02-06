@@ -46,6 +46,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     "sameAs": ["https://github.com/qinnovates", "https://mindloft.org"]
   })} />
 
+  <!-- RSS autodiscovery -->
+  <link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml" />
+
   <title>{title} | Qinnovate</title>
 
   <!-- View Transitions -->
