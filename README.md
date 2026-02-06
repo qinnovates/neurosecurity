@@ -152,60 +152,22 @@ VERA fuses the Scientific Method with the Public Policy Cycle, ensuring every te
 
 ## 🔄 Standards Development via VERA Engine
 
-Qinnovate's standards development operates through a three-phase authority cycle, maintaining strict separation from product implementation:
+Qinnovate's standards development operates through the VERA Engine — a four-pillar authority cycle with governance at its core, maintaining strict separation from product implementation:
 
-```
-              ┌────────────────────────┐
-              │   PHASE 1:             │
-              │   TECHNICAL LAB        │
-              │                        │
-              │   • Ideation           │
-              │   • Controlled POC     │
-              │   • Lab Isolation      │
-              └───────────┬────────────┘
-                          │
-                          │ Lab Data
-                          ▼
-                  ┌───────────────┐
-                  │               │
-                  │  GOVERNANCE   │◄─────────┐
-                  │      &        │          │
-                  │   STANDARDS   │          │
-                  │               │          │
-                  │  (NIST/IEEE)  │          │ Perpetual Loop
-                  └───────────────┘          │ (Time-to-Autonomy)
-                          │                  │
-                  Vetted  │                  │
-                   Data   │                  │
-                          ▼                  │
-              ┌────────────────────────┐     │
-              │   PHASE 2:             │     │
-              │   GOVERNANCE HUB       │     │
-              │                        │     │
-              │   • Data Vetting       │     │
-              │   • Q-Metrics          │     │
-              │   • Compliance         │     │
-              └───────────┬────────────┘     │
-                          │                  │
-                 Validated│                  │
-                 Standards│                  │
-                          ▼                  │
-              ┌────────────────────────┐     │
-              │   PHASE 3:             │     │
-              │   EXTERNAL COUNCIL     │     │
-              │                        │     │
-              │   • Peer Review        │     │
-              │   • Policy             │     │
-              │   • Dissemination      │─────┘
-              └────────────────────────┘
-                    Authorized Knowledge
-```
+<div align="center">
 
-**The VERA Authority Cycle:**
+![VERA Engine](docs/images/vera-engine.png)
 
-1. **Technical Lab** — Research labs (like Mindloft's) develop hypotheses and controlled POCs in sandboxed environments
-2. **Governance Hub** — Qinnovate validates data against Q-Metrics and aligns with NIST/IEEE standards frameworks
-3. **External Council** — Independent experts conduct peer review and formalize standards as authorized knowledge
+</div>
+
+**The Four Pillars of VERA:**
+
+1. **Validation** — Lab-proven POCs in controlled environments (sandboxed, ethical oversight)
+2. **Ethics** — Neuroethics principles embedded at every stage (UNESCO, GDPR, FDA alignment)
+3. **Research** — Hypothesis formulation and scientific methodology (peer-reviewed findings)
+4. **Authority** — Independent external council formalizes standards as authorized knowledge
+
+**Central Governance:** NIST/IEEE-aligned standards body ensures Time-to-Autonomy over Time-to-Market
 
 **Key Distinction:** Qinnovate stops at authorized dissemination. Product deployment and commercial implementation are handled by separate entities to maintain standards body independence.
 

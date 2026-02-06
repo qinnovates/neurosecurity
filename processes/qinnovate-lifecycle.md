@@ -26,43 +26,60 @@ The **VERA Engine** is a perpetual loop that ensures every technological advance
 
 The VERA Engine is Qinnovate's core process for standards development — a perpetual loop that ensures every technological advancement is lab-proven and legally codified before it is released as authorized knowledge.
 
-### Phase 1: The Technical Lab (Research & Validation)
+<div align="center">
 
-**Ideation:** Formulating a hypothesis based on current gaps in standards.
+![VERA Engine](../docs/images/vera-engine.png)
 
-**Controlled POC:** Developing a Proof-of-Concept (exploit or feature).
+**Validation • Ethics • Research • Authority**
 
-**Lab Isolation:**
-- **Strict Requirement:** All POC testing occurs in a sandboxed lab environment to prevent real-world harm while gathering empirical data.
-- Security POCs test theoretical vulnerabilities exclusively in controlled settings
-- Feature POCs prototype new BCI capabilities with ethical oversight
-- Capability POCs validate detection methods and security mechanisms
+</div>
 
-### Phase 2: The Governance Hub (The Filter)
+### The Four Pillars
 
-**Data Vetting:** Lab results are measured against Q-Metrics (Quality/Quantitative benchmarks).
+#### Validation
 
-**NIST/IEEE Alignment:** The Governance Core ensures the data is formatted to update global standards.
+**Lab-Proven POCs:** All hypothesis testing occurs in controlled, sandboxed laboratory environments.
+
+**Controlled POC Development:**
+- **Security POCs:** Testing theoretical vulnerabilities exclusively in controlled settings
+- **Feature POCs:** Prototyping new BCI capabilities with ethical oversight
+- **Capability POCs:** Validating detection methods and security mechanisms
+
+**Strict Requirement:** All POC testing occurs in isolated environments to prevent real-world harm while gathering empirical data.
+
+#### Ethics
+
+**Neuroethics Embedded Throughout:** Every stage of the VERA cycle includes ethics vetting.
 
 **Built-In Policy Process:**
-- Research proposals must align with neuroethics principles from the start
+- Research proposals must align with neuroethics principles from the start (UNESCO, GDPR, FDA)
 - Lab testing follows strict ethical research constraints
 - Peer review includes ethics vetting alongside technical review
 - Standards publication requires full compliance documentation
 
-### Phase 3: The External Council (Policy & Implementation)
+**Data Vetting:** Lab results are measured against Q-Metrics (Quality/Quantitative benchmarks).
 
-**Independent Peer Review:** An external council of legal, ethical, and technical experts audits the lab's findings.
+#### Research
 
-**Policy Implementation:** The Council formalizes the "Truth." They translate lab data into an official Standard or Policy.
+**Scientific Methodology:** Hypothesis formulation based on current gaps in standards.
 
-**Deployment (Dissemination):** The verified "Truth" is deployed — not as code, but as **Authorized Knowledge** and updated protocols for the community to adopt.
+**NIST/IEEE Alignment:** The Governance Core ensures research data is formatted to update global standards.
+
+**Peer-Reviewed Findings:** All research undergoes rigorous academic and industry validation before standardization.
+
+#### Authority
+
+**Independent External Council:** A council of legal, ethical, and technical experts audits all findings.
+
+**Policy Implementation:** The Council formalizes validated research into official Standards or Policies.
+
+**Authorized Dissemination:** Verified knowledge is deployed — not as code, but as **Authorized Knowledge** and updated protocols for the community to adopt.
 
 **Perpetual Change:** This cycle ensures that every POC — whether discovering a flaw or introducing a capability — becomes a vital data point that forces the engine to perpetuate change, leading to stronger, more comprehensive standards.
 
 ---
 
-## Why Four Phases?
+## Why Four Pillars?
 
 Qinnovate deliberately excludes product deployment and commercial implementation from its process. These functions are handled by separate entities (such as Mindloft) to prevent bias in the standards development process.
 
