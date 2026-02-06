@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QIF v4.0 — Interactive Hourglass Architecture</title>
+<style>
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d1117;
+  --bg-surface: #161b22;
+  --bg-overlay: #1c2128;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --text-bright: #ffffff;
+  --green: #3fb950;
+  --red: #f85149;
+  --blue: #58a6ff;
+  --orange: #d29922;
+  --yellow: #e3b341;
+  --purple: #bc8cff;
+  --cyan: #39d2c0;
+  --severity-lethal: #ff4444;
+  --severity-critical: #ff6b35;
+  --severity-high: #d29922;
+  --severity-severe: #e3b341;
+  --severity-silicon: #58a6ff;
+  --severity-interface: #f85149;
+  --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { font-size: 14px; }
+body {
+  font-family: var(--font-mono);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Layout ── */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+header h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  letter-spacing: 0.05em;
+}
+
+header h1 span.version {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.toolbar-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.toolbar-btn:hover { border-color: var(--text-dim); background: var(--bg-overlay); }
+.toolbar-btn.active { border-color: var(--blue); color: var(--blue); background: rgba(88,166,255,0.1); }
+
+.toolbar-select {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  max-width: 200px;
+}
+
+.toolbar-select option { background: var(--bg-surface); }
+
+/* ── Main Content Area ── */
+main {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+#hourglass-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+/* ── Hourglass SVG ── */
+.hourglass-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.axis-label-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  width: 2rem;
+  flex-shrink: 0;
+}
+
+.axis-label-left .arrow-up,
+.axis-label-left .arrow-down {
+  font-size: 1.2rem;
+  color: var(--text-dim);
+}
+
+.axis-label-left .label-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hourglass-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.band-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.2rem 0;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+}
+
+.band-row:hover { background: rgba(255,255,255,0.03); border-radius: 4px; }
+.band-row:hover .band-bar { filter: brightness(1.2); }
+
+.band-id {
+  width: 2rem;
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.band-bar-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 2rem;
+}
+
+.band-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: var(--transition);
+  position: relative;
+  min-width: 20px;
+}
+
+.band-bar.pulse {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.6); box-shadow: 0 0 15px currentColor; }
+}
+
+.band-name {
+  width: 10rem;
+  font-size: 0.7rem;
+  color: var(--text);
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Zone Separators ── */
+.zone-separator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  margin: 0.15rem 0;
+}
+
+.zone-separator .line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.zone-separator .zone-label {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* ── X-Axis Label ── */
+.x-axis-label {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+}
+
+.x-axis-label .primary {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.x-axis-label .secondary {
+  font-size: 0.6rem;
+  color: rgba(139,148,158,0.6);
+}
+
+/* ── Tooltip ── */
+.tooltip {
+  position: fixed;
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  max-width: 300px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.tooltip.visible { opacity: 1; }
+
+.tooltip .tt-header {
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.tooltip .tt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.15rem 0;
+}
+
+.tooltip .tt-label { color: var(--text-dim); }
+.tooltip .tt-value { color: var(--text); text-align: right; }
+.tooltip .tt-hint { color: var(--text-dim); font-style: italic; margin-top: 0.4rem; font-size: 0.7rem; }
+
+/* ── Severity Badge ── */
+.severity-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.severity-badge.lethal { background: rgba(255,68,68,0.15); color: var(--severity-lethal); border: 1px solid rgba(255,68,68,0.3); }
+.severity-badge.critical { background: rgba(255,107,53,0.15); color: var(--severity-critical); border: 1px solid rgba(255,107,53,0.3); }
+.severity-badge.high { background: rgba(210,153,34,0.15); color: var(--severity-high); border: 1px solid rgba(210,153,34,0.3); }
+.severity-badge.severe { background: rgba(227,179,65,0.15); color: var(--severity-severe); border: 1px solid rgba(227,179,65,0.3); }
+.severity-badge.silicon { background: rgba(88,166,255,0.1); color: var(--severity-silicon); border: 1px solid rgba(88,166,255,0.2); }
+.severity-badge.interface { background: rgba(248,81,73,0.1); color: var(--severity-interface); border: 1px solid rgba(248,81,73,0.2); }
+
+/* ── Band Detail View (Full Screen Overlay) ── */
+#band-detail {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 100;
+  overflow-y: auto;
+  display: none;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+#band-detail.visible { display: block; opacity: 1; }
+
+.detail-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.back-btn:hover { border-color: var(--text-dim); background: var(--bg-surface); }
+
+.detail-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.detail-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.detail-body {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.detail-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.detail-section.full-width { grid-column: 1 / -1; }
+
+.detail-section h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-section ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.detail-section ul li {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.detail-kv {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 1rem;
+  font-size: 0.8rem;
+}
+
+.detail-kv dt { color: var(--text-dim); }
+.detail-kv dd { color: var(--text); }
+
+.detail-attack-row {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+}
+
+.detail-attack-row:last-child { border-bottom: none; }
+
+.detail-attack-name { font-weight: 600; color: var(--text-bright); }
+.detail-attack-meta { color: var(--text-dim); font-size: 0.7rem; margin-top: 0.2rem; }
+
+/* ── Frequency Spectrum Panel ── */
+#freq-panel {
+  width: 0;
+  overflow: hidden;
+  border-left: 1px solid var(--border);
+  background: var(--bg-surface);
+  transition: width var(--transition);
+  flex-shrink: 0;
+}
+
+#freq-panel.open { width: 280px; }
+
+.freq-panel-inner {
+  width: 280px;
+  padding: 1rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.freq-panel-inner h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.freq-ruler {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.freq-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  border-left: 3px solid transparent;
+  font-size: 0.7rem;
+  transition: var(--transition);
+}
+
+.freq-entry.neural { border-left-color: var(--green); }
+.freq-entry.silicon { border-left-color: var(--blue); }
+.freq-entry.attack { border-left-color: var(--red); background: rgba(248,81,73,0.05); }
+.freq-entry.restricted { opacity: 0.7; }
+
+.freq-entry .freq-name { flex: 1; color: var(--text); }
+.freq-entry .freq-range { color: var(--text-dim); font-size: 0.65rem; }
+
+.freq-section-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  padding: 0.5rem 0 0.25rem;
+  margin-top: 0.5rem;
+}
+
+/* ── Quantum Toggle ── */
+.quantum-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.quantum-switch label { color: var(--text-dim); cursor: pointer; }
+.quantum-switch label.active-label { color: var(--purple); }
+
+.toggle-track {
+  width: 36px;
+  height: 20px;
+  background: var(--border);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toggle-track.on { background: var(--purple); }
+
+.toggle-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--text-bright);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: var(--transition);
+}
+
+.toggle-track.on .toggle-thumb { left: 18px; }
+
+/* ── Quantum Callout ── */
+.quantum-callout {
+  display: none;
+  background: rgba(188,140,255,0.08);
+  border: 1px solid rgba(188,140,255,0.2);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 0.7rem;
+  color: var(--purple);
+  margin: 0 2rem;
+}
+
+.quantum-callout.visible { display: block; }
+
+/* ── Attack Simulator ── */
+.attack-list {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border);
+  padding: 1rem;
+  z-index: 10;
+  display: none;
+}
+
+.attack-list.open { display: block; }
+
+.attack-list h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+
+.attack-item {
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.75rem;
+}
+
+.attack-item:hover { background: var(--bg-overlay); border-color: var(--border); }
+.attack-item.selected { background: rgba(248,81,73,0.1); border-color: rgba(248,81,73,0.3); }
+
+.attack-item .attack-name { font-weight: 600; color: var(--text); }
+.attack-item .attack-bands { color: var(--text-dim); font-size: 0.65rem; margin-top: 0.15rem; }
+.attack-item .attack-coupling { color: var(--red); font-size: 0.6rem; }
+
+/* ── Device Info Panel ── */
+.device-info {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem;
+  display: none;
+  z-index: 10;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.device-info.visible { display: block; }
+
+.device-info .di-name { font-weight: 600; color: var(--text-bright); margin-bottom: 0.3rem; }
+.device-info .di-row { display: flex; gap: 1.5rem; color: var(--text-dim); flex-wrap: wrap; }
+.device-info .di-row span { white-space: nowrap; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .detail-body { grid-template-columns: 1fr; }
+  .band-name { width: 6rem; }
+  header { padding: 0.75rem 1rem; }
+  #hourglass-container { padding: 1rem; }
+  #freq-panel.open { width: 220px; }
+  .attack-list { width: 260px; }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <header>
+    <h1>QIF <span class="version">v4.0</span> Hourglass Architecture <span class="version">7-1-3</span></h1>
+    <div class="toolbar" id="toolbar"></div>
+  </header>
+
+  <div class="quantum-callout" id="quantum-callout">
+    Quantum Proven Mode — Determinacy levels shifted. N7 upgraded to Quantum Indeterminate (Level 7).
+    N6 upgraded to Quantum Uncertain (Level 6). No-cloning theorem confirmed at I0.
+    QI score provably richer than any classical-only metric for implanted BCIs.
+  </div>
+
+  <main>
+    <div id="hourglass-container"></div>
+    <div id="freq-panel">
+      <div class="freq-panel-inner" id="freq-panel-inner"></div>
+    </div>
+  </main>
+</div>
+
+<div id="band-detail"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+// QIF DATA — Inlined from qif-architecture-v4.json + config.py
+// ════════════════════════════════════════════════════════════════
+
+const QIF_DATA = {
+  bands: [
+    {id:"N7",name:"Neocortex",zone:"neural",description:"PFC, M1, S1, V1, A1, Broca, Wernicke, association cortex \u2014 executive function, language, movement, perception",brain_regions:["PFC","ACC","Broca","Wernicke","M1","S1_cortex","V1","A1","PMC","SMA","PPC"],dominant_freq_hz:"13-100 (Beta 13-30, Gamma 30-100)",L_m:[0.04,0.3],determinacy:"Quantum Uncertain",severity:"High",severity_description:"Cognitive impairment, motor paralysis, sensory loss, language disruption",qi_range:[0.3,0.5],hourglass_width:1.0,bci_devices:["Neuralink N1","Blackrock Utah Array","Precision Layer 7","ECoG grids","cortical DBS"]},
+    {id:"N6",name:"Limbic System",zone:"neural",description:"Hippocampus, amygdala, insula, ACC, cingulate \u2014 emotion, memory, interoception",brain_regions:["HIPP","BLA","insula","ACC","CeA","cingulate"],dominant_freq_hz:"4-13 (Theta 4-8, Alpha 8-13)",L_m:[0.3,1.0],determinacy:"Chaotic \u2192 Quantum Uncertain",severity:"High",severity_description:"Memory erasure, emotional dysregulation, PTSD trigger, addiction manipulation",qi_range:[0.2,0.4],hourglass_width:0.85,bci_devices:["NeuroPace RNS (depth)","DBS (ANT target)","depth electrodes"]},
+    {id:"N5",name:"Basal Ganglia",zone:"neural",description:"Striatum, GPi/GPe, STN, substantia nigra \u2014 motor selection, reward, habit",brain_regions:["striatum","GPi","GPe","STN","substantia_nigra"],dominant_freq_hz:"13-30 (Beta \u2014 pathological oscillations in Parkinson's)",L_m:[0.13,0.3],determinacy:"Chaotic",severity:"High",severity_description:"Movement disorders (Parkinson's, dystonia), reward hijacking, compulsive behavior",qi_range:[0.15,0.35],hourglass_width:0.65,bci_devices:["Medtronic Percept (STN)","Abbott Infinity (GPi)","Boston Scientific Vercise"]},
+    {id:"N4",name:"Diencephalon",zone:"neural",description:"Thalamus, hypothalamus \u2014 sensory gating, consciousness relay, autonomic regulation",brain_regions:["thalamus","hypothalamus","VIM","ANT","CM-Pf"],dominant_freq_hz:"4-13 (Alpha spindles, Theta)",L_m:[0.3,1.0],determinacy:"Stochastic \u2192 Chaotic",severity:"CRITICAL",severity_description:"Consciousness disruption, sensory blackout, sleep-wake cycle attack, thermal regulation failure",qi_range:[0.1,0.3],hourglass_width:0.5,bci_devices:["DBS (VIM for tremor)","thalamic depth electrodes","ANT stimulation for epilepsy"]},
+    {id:"N3",name:"Cerebellum",zone:"neural",description:"Cerebellar cortex, deep nuclei, vermis \u2014 motor coordination, timing, learning",brain_regions:["cerebellar_cortex","dentate_nucleus","fastigial_nucleus","vermis"],dominant_freq_hz:"50-100 (Purkinje cell complex spikes)",L_m:[0.04,0.08],determinacy:"Stochastic",severity:"High",severity_description:"Ataxia, coordination loss, speech disruption (dysarthria), motor learning impairment",qi_range:[0.1,0.25],hourglass_width:0.45,bci_devices:["Experimental cerebellar stimulation"]},
+    {id:"N2",name:"Brainstem",zone:"neural",description:"Medulla, pons, midbrain, cranial nerve nuclei \u2014 vital functions, arousal, reflexes",brain_regions:["medulla","pons","midbrain","reticular_formation","cranial_nuclei"],dominant_freq_hz:"0.5-4 (Delta, low-frequency rhythmic)",L_m:[1.0,null],determinacy:"Stochastic",severity:"LETHAL",severity_description:"Respiratory arrest, cardiac failure, loss of consciousness, cranial nerve paralysis",qi_range:[0.05,0.15],hourglass_width:0.3,bci_devices:["Vagus nerve stimulators","auditory brainstem implants","DBS (PPN for gait)"]},
+    {id:"N1",name:"Spinal Cord",zone:"neural",description:"Cervical, thoracic, lumbar, sacral, cauda equina \u2014 reflexes, peripheral motor/sensory relay",brain_regions:["cervical_cord","thoracic_cord","lumbar_cord","sacral_cord","cauda_equina"],dominant_freq_hz:"Reflex arcs (ms-scale, not oscillatory)",L_m:null,determinacy:"Stochastic",severity:"Severe",severity_description:"Paralysis (quadri/para), bladder/bowel dysfunction, chronic pain, autonomic dysreflexia",qi_range:[0.02,0.1],hourglass_width:0.25,bci_devices:["Spinal cord stimulators (SCS)","InterStim (sacral)","epidural stimulation","ONWARD ARC-IM"]},
+    {id:"I0",name:"Neural Interface",zone:"interface",description:"Electrode-tissue boundary, measurement/collapse, quasi-quantum zone",brain_regions:[],dominant_freq_hz:"N/A (boundary)",L_m:null,determinacy:"Quasi-quantum (\u0393D \u2208 (0,1))",severity:"Depends on adjacent N band",severity_description:"Interface degradation, impedance failure, tissue damage, signal corruption",qi_range:[0.01,0.1],hourglass_width:0.2,bci_devices:["All implanted/semi-invasive BCIs"]},
+    {id:"S1",name:"Analog / Near-Field",zone:"silicon",description:"Amplification, filtering, ADC/DAC, near-field EM (0 Hz \u2013 10 kHz)",brain_regions:[],dominant_freq_hz:"0-10 kHz",L_m:[3e4,null],determinacy:"Stochastic (analog noise)",severity:"N/A (silicon)",severity_description:"Signal corruption, ADC saturation, impedance artifact",qi_range:[0.001,0.01],hourglass_width:0.35,bci_devices:["All BCIs (analog front-end)"]},
+    {id:"S2",name:"Digital / Telemetry",zone:"silicon",description:"Decoding, classification, telemetry, MICS (10 kHz \u2013 1 GHz)",brain_regions:[],dominant_freq_hz:"10 kHz - 1 GHz",L_m:[0.3,3e4],determinacy:"Deterministic",severity:"N/A (silicon)",severity_description:"Data corruption, BLE exploit, MICS intermodulation, firmware compromise",qi_range:[0.0,0.0],hourglass_width:0.7,bci_devices:["All wireless BCIs (BLE, WiFi, MICS)"]},
+    {id:"S3",name:"Radio / Wireless / DE",zone:"silicon",description:"RF, wireless links, directed energy, application layer (1 GHz+)",brain_regions:[],dominant_freq_hz:"1 GHz+",L_m:[3e-5,0.3],determinacy:"Deterministic",severity:"N/A (silicon)",severity_description:"RF hijack, directed energy, cloud compromise, supply chain attack",qi_range:[0.0,0.0],hourglass_width:1.0,bci_devices:["BLE/WiFi consumer, satellite links, DE weapons"]},
+  ],
+
+  threat_model: [
+    // ── Classical attacks (v3.1 core) ──
+    {attack:"Signal injection",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (coherence metric)",notes:"Inject false signals at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency."},
+    {attack:"Neural ransomware",bands_str:"N3",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (QI score drop)",notes:"Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse."},
+    {attack:"Eavesdropping",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (Heisenberg disturbance)",notes:"Passive interception of neural signals at I0. Classically undetectable. Quantum: measurement disturbs state \u2014 detectable via QI anomaly."},
+    {attack:"Man-in-the-middle",bands_str:"I0",band_ids:["I0"],coupling:null,access:null,classical:"Partial",quantum:"Yes (no-cloning + Bell test)",notes:"Intercept and modify signals at I0 boundary. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption."},
+    {attack:"Quantum tunneling exploit",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling profile anomaly)",notes:"Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation."},
+    {attack:"Davydov soliton attack",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling term Q_tunnel)",notes:"Use THz stimulation to trigger Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0."},
+    {attack:"Identity spoofing",bands_str:"N3\u2013N7",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (quantum biometric)",notes:"Replicate user's neural signature to bypass authentication. Classical biometrics partially spoofable. Quantum neural signatures (if proven) are physically unclonable."},
+    // ── Silicon / cyber attacks (v3.1 additions) ──
+    {attack:"BLE/RF side-channel",bands_str:"S1\u2013S2",band_ids:["S1","S2"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (signal correlation)",notes:"Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. QI cross-band correlation detects exfiltration patterns."},
+    {attack:"Supply chain compromise",bands_str:"S2\u2013S3",band_ids:["S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (firmware attestation)",notes:"Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Affects all device classes. QI-enhanced firmware attestation detects unauthorized modifications."},
+    {attack:"Cloud infrastructure attack",bands_str:"S3",band_ids:["S3"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (QKD for data-in-transit)",notes:"Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit."},
+    {attack:"Neural data privacy breach",bands_str:"N1\u2013S3",band_ids:["N1","S1","S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (cross-band encryption)",notes:"Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud."},
+    {attack:"Harvest-now-decrypt-later",bands_str:"S3",band_ids:["S3"],coupling:null,access:null,classical:"No",quantum:"Prevented (QKD/PQC)",notes:"Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive \u2014 can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival."},
+    // ── Frequency-domain attacks (v3.2 Entry 28) ──
+    {attack:"ELF neural entrainment",bands_str:"S1\u2192N4\u2013N7",band_ids:["S1","N4","N5","N6","N7"],coupling:"DIRECT",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (Dsf anomaly detection)",notes:"3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability."},
+    {attack:"Intermodulation (BCI weaponized)",bands_str:"S2\u2192N4\u2013N6",band_ids:["S2","N4","N5","N6"],coupling:"INTERMODULATION",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (coherence + Dsf)",notes:"UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz \u2192 theta \u2192 N4 thalamus. Most dangerous coupling mechanism."},
+    {attack:"Pulsed microwave (Frey effect)",bands_str:"S3\u2192N2,N7",band_ids:["S3","N2","N7"],coupling:"ENVELOPE",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (temporal coherence)",notes:"S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion \u2192 cochlea perceives as sound. 'Havana Syndrome' model. PRF selects neural target: 40 Hz \u2192 N7 gamma, 10 Hz \u2192 N6 alpha, 4 Hz \u2192 N4 theta, 1 Hz \u2192 N2 delta."},
+    {attack:"Temporal interference (deep targeting)",bands_str:"S2\u2192N4\u2013N6",band_ids:["S2","N4","N5","N6"],coupling:"TEMPORAL_INTERFERENCE",access:"LICENSED",classical:"Yes",quantum:"Enhanced (beat frequency detection)",notes:"Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Grossman et al. 2017, Cell. Licensed frequencies \u2014 lower barrier than restricted."},
+    {attack:"Envelope modulation (stealth carrier)",bands_str:"S1\u2013S2\u2192any N",band_ids:["S1","S2","N1","N2","N3","N4","N5","N6","N7"],coupling:"ENVELOPE",access:"PUBLIC",classical:"Yes",quantum:"Enhanced (demodulation detection)",notes:"Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry \u2014 PUBLIC access. tACS therapeutic principle weaponized."},
+    {attack:"Directed energy (thermal I0 damage)",bands_str:"S3\u2192I0",band_ids:["S3","I0"],coupling:null,access:"CLASSIFIED",classical:"Yes",quantum:"N/A (physical damage, not signal)",notes:"mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only."},
+  ],
+
+  bci_device_classes: {
+    CONSUMER:{name:"Consumer",channels:"1-16",sampling_hz:"128-256",wireless:"BLE",qi_terms:3},
+    CONSUMER_PRO:{name:"Consumer Pro",channels:"5-32",sampling_hz:"128-256",wireless:"BLE/WiFi/USB",qi_terms:"3-4"},
+    RESEARCH:{name:"Research",channels:"8-256",sampling_hz:"250-38400",wireless:"WiFi/USB/wired",qi_terms:4},
+    CLINICAL:{name:"Clinical",channels:"32-256",sampling_hz:"1000-30000",wireless:"Wired/MICS",qi_terms:"4-5"},
+    IMPLANTED:{name:"Implanted",channels:"96-65536",sampling_hz:"20000-30000",wireless:"BLE/MICS/wired",qi_terms:"All 7+"},
+    STIMULATION:{name:"Stimulation",channels:"4-16",sampling_hz:"250-1000",wireless:"BLE/MICS/NFC",qi_terms:"4-5"},
+    AUDITORY_PROSTHESIS:{name:"Auditory Prosthesis",channels:"12-60+",sampling_hz:"Varies",wireless:"Proprietary RF/BLE",qi_terms:"3-5"},
+    OPTICAL:{name:"Optical (fNIRS)",channels:"8-52",sampling_hz:"10-100",wireless:"BLE/WiFi",qi_terms:"3-4"},
+  },
+
+  bci_devices: [
+    {manufacturer:"InteraXon",device:"Muse 2",channels:4,sampling_hz:256,wireless:"BLE",device_class:"CONSUMER",bands:["N7","N6"]},
+    {manufacturer:"NeuroSky",device:"MindWave Mobile 2",channels:1,sampling_hz:512,wireless:"BLE",device_class:"CONSUMER",bands:["N7"]},
+    {manufacturer:"EMOTIV",device:"EPOC X",channels:14,sampling_hz:256,wireless:"BLE/USB",device_class:"CONSUMER_PRO",bands:["N7","N6"]},
+    {manufacturer:"EMOTIV",device:"EPOC Flex",channels:32,sampling_hz:256,wireless:"BLE/USB",device_class:"CONSUMER_PRO",bands:["N7","N6","N5"]},
+    {manufacturer:"Neurosity",device:"Crown",channels:8,sampling_hz:256,wireless:"WiFi",device_class:"CONSUMER_PRO",bands:["N7"]},
+    {manufacturer:"OpenBCI",device:"Cyton",channels:8,sampling_hz:250,wireless:"WiFi/USB",device_class:"RESEARCH",bands:["N7","N6"]},
+    {manufacturer:"OpenBCI",device:"Cyton + Daisy",channels:16,sampling_hz:125,wireless:"WiFi/USB",device_class:"RESEARCH",bands:["N7","N6","N5"]},
+    {manufacturer:"g.tec",device:"g.Nautilus",channels:64,sampling_hz:500,wireless:"Wireless",device_class:"RESEARCH",bands:["N7","N6","N5"]},
+    {manufacturer:"g.tec",device:"g.HIamp",channels:256,sampling_hz:38400,wireless:"Wired",device_class:"RESEARCH",bands:["N7","N6","N5","N4"]},
+    {manufacturer:"BioSemi",device:"ActiveTwo",channels:256,sampling_hz:16384,wireless:"USB fiber",device_class:"RESEARCH",bands:["N7","N6","N5"]},
+    {manufacturer:"Brain Products",device:"actiCHamp Plus",channels:160,sampling_hz:100000,wireless:"USB",device_class:"RESEARCH",bands:["N7","N6","N5","N4"]},
+    {manufacturer:"Natus",device:"Xltek",channels:256,sampling_hz:1024,wireless:"Wired",device_class:"CLINICAL",bands:["N7","N6","N5","N4"]},
+    {manufacturer:"Ad-Tech Medical",device:"ECoG Grid/Strip",channels:256,sampling_hz:30000,wireless:"Wired",device_class:"CLINICAL",bands:["N7","N6","N5","N4","N3","I0"]},
+    {manufacturer:"Neuralink",device:"N1 (PRIME)",channels:1024,sampling_hz:20000,wireless:"BLE",device_class:"IMPLANTED",bands:["N7","I0","S1","S2","S3"]},
+    {manufacturer:"Blackrock Neurotech",device:"Utah Array",channels:128,sampling_hz:30000,wireless:"Wired",device_class:"IMPLANTED",bands:["N7","I0","S1"]},
+    {manufacturer:"Synchron",device:"Stentrode",channels:16,sampling_hz:1000,wireless:"BLE",device_class:"IMPLANTED",bands:["N7","I0","S1","S2","S3"]},
+    {manufacturer:"Precision Neuroscience",device:"Layer 7",channels:1024,sampling_hz:20000,wireless:"Wired",device_class:"IMPLANTED",bands:["N7","N6","I0","S1"]},
+    {manufacturer:"Paradromics",device:"Connexus DBI",channels:65536,sampling_hz:30000,wireless:"Wireless",device_class:"IMPLANTED",bands:["N7","I0","S1","S2","S3"]},
+    {manufacturer:"Medtronic",device:"Percept PC (DBS)",channels:4,sampling_hz:250,wireless:"BLE",device_class:"STIMULATION",bands:["N5","N4","I0","S1","S2"]},
+    {manufacturer:"NeuroPace",device:"RNS System",channels:4,sampling_hz:250,wireless:"NFC",device_class:"STIMULATION",bands:["N7","N6","I0","S1"]},
+    {manufacturer:"Medtronic",device:"InterStim X",channels:4,sampling_hz:null,wireless:"BLE",device_class:"STIMULATION",bands:["N1","I0","S1","S2"]},
+    {manufacturer:"Cochlear Ltd",device:"Nucleus CI632",channels:22,sampling_hz:null,wireless:"Proprietary RF",device_class:"AUDITORY_PROSTHESIS",bands:["N2","I0","S1","S2"]},
+    {manufacturer:"Kernel",device:"Flow (fNIRS)",channels:52,sampling_hz:100,wireless:"USB-C",device_class:"OPTICAL",bands:["N7","N6"]},
+    {manufacturer:"Cognixion",device:"ONE / Axon-R",channels:8,sampling_hz:null,wireless:"4G LTE",device_class:"CONSUMER_PRO",bands:["N7","S2","S3"]},
+    {manufacturer:"Elemind",device:"Elemind Headband",channels:3,sampling_hz:null,wireless:"BLE",device_class:"CONSUMER",bands:["N7","N6"]},
+    {manufacturer:"NeuroXess",device:"Flexible BCI",channels:256,sampling_hz:null,wireless:"Wireless",device_class:"IMPLANTED",bands:["N7","I0","S1","S2"]},
+    {manufacturer:"INBRAIN",device:"BCI-Tx (graphene)",channels:null,sampling_hz:null,wireless:"Wireless",device_class:"IMPLANTED",bands:["N7","N5","I0","S1","S2"]},
+    {manufacturer:"Battelle",device:"BrainSTORMS (DARPA N3)",channels:null,sampling_hz:null,wireless:"Helmet",device_class:"IMPLANTED",bands:["N7","N6","I0"]},
+  ],
+
+  quantum_proof: {
+    current: {N7:"Quantum Uncertain",N6:"Chaotic \u2192 QU"},
+    post_proof: {N7:"Quantum Indeterminate",N6:"Quantum Uncertain"},
+    bands_affected: {
+      N7:"Determinacy upgrades. Quantum terms always active.",
+      N6:"Determinacy upgrades. Limbic quantum effects confirmed.",
+      I0:"MAJOR \u2014 quantum channel confirmed at electrode-tissue boundary.",
+    }
+  },
+
+  freq_neural: [
+    {band:"High gamma",range:"60-100 Hz",mid:80,L:"0.3-5 mm"},
+    {band:"Low gamma",range:"30-60 Hz",mid:45,L:"1-10 mm"},
+    {band:"Beta",range:"13-30 Hz",mid:21,L:"1-30 cm"},
+    {band:"Alpha",range:"8-12 Hz",mid:10,L:"10-20 cm"},
+    {band:"Theta",range:"4-8 Hz",mid:6,L:"4-5 cm"},
+    {band:"Delta",range:"0.5-4 Hz",mid:2,L:"15-20 cm"},
+  ],
+
+  freq_silicon: [
+    {band:"ELF",range:"3-76 Hz",access:"RESTRICTED",attack:true},
+    {band:"SLF",range:"30-300 Hz",access:"RESTRICTED",attack:true},
+    {band:"VLF",range:"3-30 kHz",access:"RESTRICTED",attack:true},
+    {band:"LF",range:"30-300 kHz",access:"RESTRICTED"},
+    {band:"MF (AM)",range:"300 kHz-3 MHz",access:"LICENSED"},
+    {band:"HF",range:"3-30 MHz",access:"RESTRICTED"},
+    {band:"VHF",range:"30-300 MHz",access:"LICENSED"},
+    {band:"UHF-Mil",range:"225-400 MHz",access:"RESTRICTED",attack:true},
+    {band:"MICS",range:"402-405 MHz",access:"LICENSED"},
+    {band:"BLE/WiFi",range:"2.4 GHz",access:"PUBLIC"},
+    {band:"S-Band (Frey)",range:"2-4 GHz",access:"RESTRICTED",attack:true},
+    {band:"5G mid",range:"3.5-4.2 GHz",access:"LICENSED"},
+    {band:"X-Band radar",range:"8-12 GHz",access:"RESTRICTED"},
+    {band:"mm-wave",range:"28-39 GHz",access:"LICENSED"},
+    {band:"ADS",range:"95 GHz",access:"CLASSIFIED",attack:true},
+  ],
+};
+
+// ════════════════════════════════════════════════════════════════
+// UTILITIES
+// ════════════════════════════════════════════════════════════════
+
+function getSeverityClass(sev) {
+  if (!sev) return 'silicon';
+  const s = sev.toLowerCase();
+  if (s === 'lethal') return 'lethal';
+  if (s === 'critical') return 'critical';
+  if (s === 'high') return 'high';
+  if (s === 'severe') return 'severe';
+  if (s.includes('silicon') || s.includes('n/a')) return 'silicon';
+  if (s.includes('depends')) return 'interface';
+  return 'high';
+}
+
+function getBandColor(band) {
+  const colors = {
+    lethal: '#ff4444',
+    critical: '#ff6b35',
+    high: '#d29922',
+    severe: '#e3b341',
+    silicon: '#58a6ff',
+    interface: '#f85149',
+  };
+  return colors[getSeverityClass(band.severity)] || '#58a6ff';
+}
+
+function formatL(L_m) {
+  if (!L_m) return 'N/A';
+  const [lo, hi] = L_m;
+  const fmt = (v) => {
+    if (v === null) return '\u221e';
+    if (v >= 1000) return (v/1000).toFixed(0) + ' km';
+    if (v >= 1) return v.toFixed(1) + ' m';
+    if (v >= 0.01) return (v*100).toFixed(0) + ' cm';
+    if (v >= 0.001) return (v*1000).toFixed(1) + ' mm';
+    return (v*1e6).toFixed(0) + ' \u03bcm';
+  };
+  return fmt(lo) + ' \u2013 ' + fmt(hi);
+}
+
+function parseBandRange(str) {
+  // Parse "I0-N1" or "S1-S2" style ranges into band IDs
+  const allIds = QIF_DATA.bands.map(b => b.id);
+  const found = [];
+  for (const id of allIds) {
+    if (str.includes(id)) found.push(id);
+  }
+  return found;
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPONENT: HourglassView
+// ════════════════════════════════════════════════════════════════
+
+class HourglassView {
+  constructor(containerEl, data) {
+    this.el = containerEl;
+    this.data = data;
+    this.highlightedBands = new Set();
+    this.bandEls = {};
+    this.onBandClick = null;
+    this.onBandHover = null;
+    this.onBandLeave = null;
+  }
+
+  render() {
+    const wrap = document.createElement('div');
+    wrap.className = 'hourglass-wrap';
+
+    // Left axis
+    const axis = document.createElement('div');
+    axis.className = 'axis-label-left';
+    axis.innerHTML = `
+      <div class="arrow-up">\u2191</div>
+      <div class="label-text">DETERMINISTIC</div>
+      <div class="label-text" style="margin-top:0.5rem">INDETERMINISTIC</div>
+      <div class="arrow-down">\u2193</div>
+    `;
+    wrap.appendChild(axis);
+
+    // Main column
+    const main = document.createElement('div');
+    main.className = 'hourglass-main';
+
+    // Reverse: Silicon (top) → I0 (middle) → Neural (bottom) = physical layout
+    const bands = [...this.data.bands].reverse();
+    let prevZone = null;
+
+    for (const band of bands) {
+      // Zone separator
+      if (band.zone !== prevZone) {
+        if (prevZone !== null) {
+          const sep = document.createElement('div');
+          sep.className = 'zone-separator';
+          const zoneName = band.zone === 'interface' ? 'I0 \u2014 Interface Bottleneck' :
+                          band.zone === 'silicon' ? 'Silicon Domain' : 'Neural Domain';
+          sep.innerHTML = `<div class="line"></div><span class="zone-label">${zoneName}</span><div class="line"></div>`;
+          main.appendChild(sep);
+        } else {
+          const sep = document.createElement('div');
+          sep.className = 'zone-separator';
+          sep.innerHTML = `<div class="line"></div><span class="zone-label">Silicon Domain</span><div class="line"></div>`;
+          main.appendChild(sep);
+        }
+        prevZone = band.zone;
+      }
+
+      const row = document.createElement('div');
+      row.className = 'band-row';
+      row.dataset.bandId = band.id;
+
+      const idEl = document.createElement('div');
+      idEl.className = 'band-id';
+      idEl.textContent = band.id;
+
+      const barContainer = document.createElement('div');
+      barContainer.className = 'band-bar-container';
+
+      const bar = document.createElement('div');
+      bar.className = 'band-bar';
+      bar.style.width = (band.hourglass_width * 100) + '%';
+      bar.style.backgroundColor = getBandColor(band);
+      bar.style.color = getBandColor(band);
+      barContainer.appendChild(bar);
+
+      const nameEl = document.createElement('div');
+      nameEl.className = 'band-name';
+      nameEl.textContent = band.name;
+
+      row.appendChild(idEl);
+      row.appendChild(barContainer);
+      row.appendChild(nameEl);
+
+      row.addEventListener('click', () => this.onBandClick?.(band));
+      row.addEventListener('mouseenter', (e) => this.onBandHover?.(band, e));
+      row.addEventListener('mouseleave', () => this.onBandLeave?.(band));
+
+      this.bandEls[band.id] = { row, bar };
+      main.appendChild(row);
+    }
+
+    // X-axis label
+    const xAxis = document.createElement('div');
+    xAxis.className = 'x-axis-label';
+    xAxis.innerHTML = `
+      <div class="primary">\u2190 ATTACK SURFACE \u2192</div>
+      <div class="secondary">(state space)</div>
+    `;
+    main.appendChild(xAxis);
+
+    wrap.appendChild(main);
+    this.el.appendChild(wrap);
+  }
+
+  highlightBands(bandIds, color) {
+    // Reset all
+    for (const id of Object.keys(this.bandEls)) {
+      const {bar} = this.bandEls[id];
+      bar.classList.remove('pulse');
+      bar.style.opacity = bandIds.length > 0 ? '0.25' : '1';
+    }
+    // Highlight selected
+    for (const id of bandIds) {
+      if (this.bandEls[id]) {
+        const {bar} = this.bandEls[id];
+        bar.style.opacity = '1';
+        bar.classList.add('pulse');
+        if (color) bar.style.backgroundColor = color;
+      }
+    }
+    this.highlightedBands = new Set(bandIds);
+  }
+
+  clearHighlights() {
+    for (const id of Object.keys(this.bandEls)) {
+      const band = this.data.bands.find(b => b.id === id);
+      const {bar} = this.bandEls[id];
+      bar.classList.remove('pulse');
+      bar.style.opacity = '1';
+      bar.style.backgroundColor = getBandColor(band);
+    }
+    this.highlightedBands.clear();
+  }
+
+  updateDeterminacy(isQuantumProven) {
+    const qp = this.data.quantum_proof;
+    for (const band of this.data.bands) {
+      // No visual change needed on hourglass itself for now
+      // Detail view handles the text changes
+    }
+  }
+
+  destroy() {
+    this.el.innerHTML = '';
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPONENT: BandDetailView
+// ════════════════════════════════════════════════════════════════
+
+class BandDetailView {
+  constructor(containerEl, data) {
+    this.el = containerEl;
+    this.data = data;
+    this.quantumProven = false;
+  }
+
+  show(band) {
+    const sevClass = getSeverityClass(band.severity);
+    const det = this.quantumProven && this.data.quantum_proof.post_proof[band.id]
+      ? this.data.quantum_proof.post_proof[band.id]
+      : band.determinacy;
+
+    const attacks = this.data.threat_model.filter(a => a.band_ids.includes(band.id));
+    const devices = this.data.bci_devices.filter(d => d.bands.includes(band.id));
+
+    this.el.innerHTML = `
+      <div class="detail-header">
+        <button class="back-btn" id="detail-back">\u2190 Back</button>
+        <div>
+          <div class="detail-title">${band.id} \u2014 ${band.name}
+            <span class="severity-badge ${sevClass}">${band.severity}</span>
+            ${this.quantumProven && this.data.quantum_proof.bands_affected[band.id]
+              ? '<span class="severity-badge" style="background:rgba(188,140,255,0.15);color:#bc8cff;border:1px solid rgba(188,140,255,0.3);">QUANTUM</span>'
+              : ''}
+          </div>
+          <div class="detail-subtitle">${band.description}</div>
+        </div>
+      </div>
+      <div class="detail-body">
+        <div class="detail-section">
+          <h3>Physics</h3>
+          <dl class="detail-kv">
+            <dt>Frequency</dt><dd>${band.dominant_freq_hz}</dd>
+            <dt>Wavelength (L)</dt><dd>${formatL(band.L_m)}</dd>
+            <dt>Determinacy</dt><dd>${det}</dd>
+            <dt>QI Range</dt><dd>${band.qi_range[0].toFixed(2)} \u2013 ${band.qi_range[1].toFixed(2)}</dd>
+            <dt>State Space Width</dt><dd>${(band.hourglass_width * 100).toFixed(0)}%</dd>
+          </dl>
+          ${this.quantumProven && this.data.quantum_proof.bands_affected[band.id]
+            ? `<div style="margin-top:0.75rem;padding:0.5rem;background:rgba(188,140,255,0.08);border:1px solid rgba(188,140,255,0.2);border-radius:4px;font-size:0.75rem;color:#bc8cff;">
+                Quantum Proof Impact: ${this.data.quantum_proof.bands_affected[band.id]}
+               </div>`
+            : ''}
+        </div>
+        <div class="detail-section">
+          <h3>Brain Regions (${band.brain_regions.length})</h3>
+          ${band.brain_regions.length > 0
+            ? `<ul>${band.brain_regions.map(r => `<li>${r}</li>`).join('')}</ul>`
+            : `<div style="color:var(--text-dim);font-size:0.8rem;">No brain regions (${band.zone} zone)</div>`}
+        </div>
+        <div class="detail-section">
+          <h3>BCI Devices Targeting This Band (${devices.length})</h3>
+          ${devices.length > 0
+            ? `<ul>${devices.map(d => `<li>${d.manufacturer} ${d.device}${d.channels ? ' ('+d.channels+'ch)' : ''}</li>`).join('')}</ul>`
+            : `<div style="color:var(--text-dim);font-size:0.8rem;">Band-level: ${band.bci_devices.join(', ')}</div>`}
+        </div>
+        <div class="detail-section">
+          <h3>Attack Vectors (${attacks.length})</h3>
+          ${attacks.map(a => `
+            <div class="detail-attack-row">
+              <div class="detail-attack-name">${a.attack}</div>
+              <div class="detail-attack-meta">
+                Bands: ${a.bands_str}
+                ${a.coupling ? ' \u00b7 Coupling: <strong>' + a.coupling + '</strong>' : ''}
+                ${a.access ? ' \u00b7 Access: <strong>' + a.access + '</strong>' : ''}
+              </div>
+              <div class="detail-attack-meta">
+                Classical detection: <span style="color:${a.classical === 'Yes' ? 'var(--green)' : a.classical === 'Partial' ? 'var(--orange)' : 'var(--red)'}">${a.classical || 'N/A'}</span>
+                \u00b7 Quantum detection: <span style="color:var(--purple)">${a.quantum || 'N/A'}</span>
+              </div>
+              ${a.notes ? `<div class="detail-attack-meta" style="color:var(--text);margin-top:0.2rem;">${a.notes}</div>` : ''}
+            </div>
+          `).join('')}
+        </div>
+        <div class="detail-section full-width">
+          <h3>Severity Detail</h3>
+          <div style="font-size:0.85rem;color:var(--text);">${band.severity_description}</div>
+        </div>
+      </div>
+    `;
+
+    this.el.classList.add('visible');
+    document.getElementById('detail-back').addEventListener('click', () => this.hide());
+    document.addEventListener('keydown', this._escHandler = (e) => {
+      if (e.key === 'Escape') this.hide();
+    });
+  }
+
+  hide() {
+    this.el.classList.remove('visible');
+    setTimeout(() => { this.el.innerHTML = ''; }, 300);
+    if (this._escHandler) document.removeEventListener('keydown', this._escHandler);
+  }
+
+  destroy() {
+    this.hide();
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPONENT: AttackSimulator
+// ════════════════════════════════════════════════════════════════
+
+class AttackSimulator {
+  constructor(containerEl, data) {
+    this.el = containerEl;
+    this.data = data;
+    this.listEl = null;
+    this.selectedAttack = null;
+    this.onAttackSelect = null;
+    this.isOpen = false;
+  }
+
+  render() {
+    this.listEl = document.createElement('div');
+    this.listEl.className = 'attack-list';
+    this.listEl.innerHTML = `<h3>Attack Simulator</h3>`;
+
+    for (const atk of this.data.threat_model) {
+      const item = document.createElement('div');
+      item.className = 'attack-item';
+      item.innerHTML = `
+        <div class="attack-name">${atk.attack}</div>
+        <div class="attack-bands">${atk.bands_str}</div>
+        ${atk.coupling ? `<div class="attack-coupling">${atk.coupling}${atk.access ? ' \u00b7 ' + atk.access : ''}</div>` : ''}
+      `;
+      item.addEventListener('click', () => {
+        if (this.selectedAttack === atk) {
+          this.selectedAttack = null;
+          item.classList.remove('selected');
+          this.onAttackSelect?.(null);
+        } else {
+          this.listEl.querySelectorAll('.attack-item').forEach(i => i.classList.remove('selected'));
+          this.selectedAttack = atk;
+          item.classList.add('selected');
+          this.onAttackSelect?.(atk);
+        }
+      });
+      this.listEl.appendChild(item);
+    }
+
+    this.el.appendChild(this.listEl);
+  }
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+    this.listEl.classList.toggle('open', this.isOpen);
+    if (!this.isOpen) {
+      this.selectedAttack = null;
+      this.listEl.querySelectorAll('.attack-item').forEach(i => i.classList.remove('selected'));
+      this.onAttackSelect?.(null);
+    }
+  }
+
+  close() {
+    this.isOpen = false;
+    this.listEl?.classList.remove('open');
+  }
+
+  destroy() {
+    this.listEl?.remove();
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPONENT: DeviceOverlay
+// ════════════════════════════════════════════════════════════════
+
+class DeviceOverlay {
+  constructor(data) {
+    this.data = data;
+    this.selectedDevice = null;
+    this.onDeviceSelect = null;
+    this.infoEl = null;
+  }
+
+  createSelect() {
+    const sel = document.createElement('select');
+    sel.className = 'toolbar-select';
+    sel.innerHTML = '<option value="">Select BCI Device...</option>';
+
+    // Group by class
+    const groups = {};
+    for (const d of this.data.bci_devices) {
+      const cls = d.device_class;
+      if (!groups[cls]) groups[cls] = [];
+      groups[cls].push(d);
+    }
+
+    for (const [cls, devices] of Object.entries(groups)) {
+      const group = document.createElement('optgroup');
+      group.label = this.data.bci_device_classes[cls]?.name || cls;
+      for (const d of devices) {
+        const opt = document.createElement('option');
+        opt.value = d.device;
+        opt.textContent = `${d.manufacturer} ${d.device}`;
+        group.appendChild(opt);
+      }
+      sel.appendChild(group);
+    }
+
+    sel.addEventListener('change', () => {
+      const dev = this.data.bci_devices.find(d => d.device === sel.value);
+      this.selectedDevice = dev || null;
+      this.onDeviceSelect?.(dev);
+      this.showInfo(dev);
+    });
+
+    return sel;
+  }
+
+  showInfo(device) {
+    if (!this.infoEl) {
+      this.infoEl = document.createElement('div');
+      this.infoEl.className = 'device-info';
+      document.getElementById('hourglass-container').appendChild(this.infoEl);
+    }
+
+    if (!device) {
+      this.infoEl.classList.remove('visible');
+      return;
+    }
+
+    const cls = this.data.bci_device_classes[device.device_class];
+    this.infoEl.innerHTML = `
+      <div class="di-name">${device.manufacturer} ${device.device}</div>
+      <div class="di-row">
+        <span>${device.channels ? device.channels + ' ch' : 'N/A ch'}</span>
+        <span>${device.sampling_hz ? device.sampling_hz + ' Hz' : ''}</span>
+        <span>${device.wireless || ''}</span>
+        <span>${cls?.name || device.device_class}</span>
+        <span>QI terms: ${cls?.qi_terms || '?'}</span>
+      </div>
+    `;
+    this.infoEl.classList.add('visible');
+  }
+
+  destroy() {
+    this.infoEl?.remove();
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPONENT: QuantumToggle
+// ════════════════════════════════════════════════════════════════
+
+class QuantumToggle {
+  constructor() {
+    this.isProven = false;
+    this.onChange = null;
+  }
+
+  createEl() {
+    const wrap = document.createElement('div');
+    wrap.className = 'quantum-switch';
+
+    const labelCurrent = document.createElement('label');
+    labelCurrent.textContent = 'v4.0';
+    labelCurrent.className = 'active-label';
+
+    const track = document.createElement('div');
+    track.className = 'toggle-track';
+    const thumb = document.createElement('div');
+    thumb.className = 'toggle-thumb';
+    track.appendChild(thumb);
+
+    const labelQ = document.createElement('label');
+    labelQ.textContent = 'Quantum';
+
+    track.addEventListener('click', () => {
+      this.isProven = !this.isProven;
+      track.classList.toggle('on', this.isProven);
+      labelCurrent.className = this.isProven ? '' : 'active-label';
+      labelQ.className = this.isProven ? 'active-label' : '';
+      this.onChange?.(this.isProven);
+    });
+
+    wrap.appendChild(labelCurrent);
+    wrap.appendChild(track);
+    wrap.appendChild(labelQ);
+    return wrap;
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPONENT: FrequencySpectrum
+// ════════════════════════════════════════════════════════════════
+
+class FrequencySpectrum {
+  constructor(containerEl, data) {
+    this.el = containerEl;
+    this.data = data;
+    this.isOpen = false;
+  }
+
+  render() {
+    let html = '<h3>Frequency Spectrum</h3>';
+
+    html += '<div class="freq-section-title">Neural Oscillations</div>';
+    html += '<div class="freq-ruler">';
+    for (const f of this.data.freq_neural) {
+      html += `<div class="freq-entry neural">
+        <span class="freq-name">${f.band}</span>
+        <span class="freq-range">${f.range}</span>
+      </div>`;
+    }
+    html += '</div>';
+
+    html += '<div class="freq-section-title">Silicon / RF Allocations</div>';
+    html += '<div class="freq-ruler">';
+    for (const f of this.data.freq_silicon) {
+      const cls = ['freq-entry', 'silicon'];
+      if (f.attack) cls.push('attack');
+      if (f.access === 'RESTRICTED' || f.access === 'CLASSIFIED') cls.push('restricted');
+      html += `<div class="${cls.join(' ')}">
+        <span class="freq-name">${f.band}${f.attack ? ' \u26a0' : ''}${f.access === 'RESTRICTED' ? ' \ud83d\udd12' : ''}${f.access === 'CLASSIFIED' ? ' \u2588' : ''}</span>
+        <span class="freq-range">${f.range}</span>
+      </div>`;
+    }
+    html += '</div>';
+
+    html += `<div style="margin-top:1rem;font-size:0.6rem;color:var(--text-dim);">
+      <span style="color:var(--red);">\u26a0</span> Attack vector &nbsp;
+      <span>\ud83d\udd12</span> Restricted &nbsp;
+      <span>\u2588</span> Classified
+    </div>`;
+
+    this.el.innerHTML = html;
+  }
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+    document.getElementById('freq-panel').classList.toggle('open', this.isOpen);
+  }
+
+  close() {
+    this.isOpen = false;
+    document.getElementById('freq-panel').classList.remove('open');
+  }
+
+  destroy() {
+    this.el.innerHTML = '';
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// TOOLTIP
+// ════════════════════════════════════════════════════════════════
+
+class Tooltip {
+  constructor() {
+    this.el = document.getElementById('tooltip');
+  }
+
+  show(band, event) {
+    const det = band.determinacy;
+    const freq = band.dominant_freq_hz;
+    const L = formatL(band.L_m);
+
+    this.el.innerHTML = `
+      <div class="tt-header">${band.id} \u2014 ${band.name}</div>
+      <div class="tt-row"><span class="tt-label">f</span><span class="tt-value">${freq}</span></div>
+      <div class="tt-row"><span class="tt-label">L</span><span class="tt-value">${L}</span></div>
+      <div class="tt-row"><span class="tt-label">Severity</span><span class="tt-value">${band.severity}</span></div>
+      <div class="tt-row"><span class="tt-label">Determinacy</span><span class="tt-value">${det}</span></div>
+      <div class="tt-hint">\u25b8 Click for full detail</div>
+    `;
+
+    const x = event.clientX + 15;
+    const y = event.clientY - 10;
+    this.el.style.left = Math.min(x, window.innerWidth - 320) + 'px';
+    this.el.style.top = Math.min(y, window.innerHeight - 200) + 'px';
+    this.el.classList.add('visible');
+  }
+
+  hide() {
+    this.el.classList.remove('visible');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// APP — Wire everything together
+// ════════════════════════════════════════════════════════════════
+
+(function init() {
+  const container = document.getElementById('hourglass-container');
+  const toolbar = document.getElementById('toolbar');
+  const detailEl = document.getElementById('band-detail');
+  const freqPanelInner = document.getElementById('freq-panel-inner');
+  const calloutEl = document.getElementById('quantum-callout');
+
+  // Instantiate components
+  const hourglass = new HourglassView(container, QIF_DATA);
+  const detail = new BandDetailView(detailEl, QIF_DATA);
+  const attackSim = new AttackSimulator(container, QIF_DATA);
+  const deviceOverlay = new DeviceOverlay(QIF_DATA);
+  const quantumToggle = new QuantumToggle();
+  const freqSpectrum = new FrequencySpectrum(freqPanelInner, QIF_DATA);
+  const tooltip = new Tooltip();
+
+  // Render main view
+  hourglass.render();
+  attackSim.render();
+  freqSpectrum.render();
+
+  // ── Toolbar ──
+  const attackBtn = document.createElement('button');
+  attackBtn.className = 'toolbar-btn';
+  attackBtn.textContent = 'Attacks';
+  attackBtn.addEventListener('click', () => {
+    attackSim.toggle();
+    attackBtn.classList.toggle('active', attackSim.isOpen);
+    if (!attackSim.isOpen) hourglass.clearHighlights();
+  });
+
+  const deviceSelect = deviceOverlay.createSelect();
+
+  const freqBtn = document.createElement('button');
+  freqBtn.className = 'toolbar-btn';
+  freqBtn.textContent = 'Spectrum';
+  freqBtn.addEventListener('click', () => {
+    freqSpectrum.toggle();
+    freqBtn.classList.toggle('active', freqSpectrum.isOpen);
+  });
+
+  const qToggleEl = quantumToggle.createEl();
+
+  toolbar.appendChild(attackBtn);
+  toolbar.appendChild(deviceSelect);
+  toolbar.appendChild(freqBtn);
+  toolbar.appendChild(qToggleEl);
+
+  // ── Event wiring ──
+
+  // Band click → detail view
+  hourglass.onBandClick = (band) => {
+    detail.quantumProven = quantumToggle.isProven;
+    detail.show(band);
+    tooltip.hide();
+  };
+
+  // Band hover → tooltip
+  hourglass.onBandHover = (band, e) => {
+    tooltip.show(band, e);
+  };
+
+  hourglass.onBandLeave = () => {
+    tooltip.hide();
+  };
+
+  // Track mouse for tooltip repositioning
+  document.addEventListener('mousemove', (e) => {
+    if (tooltip.el.classList.contains('visible')) {
+      const x = e.clientX + 15;
+      const y = e.clientY - 10;
+      tooltip.el.style.left = Math.min(x, window.innerWidth - 320) + 'px';
+      tooltip.el.style.top = Math.min(y, window.innerHeight - 200) + 'px';
+    }
+  });
+
+  // Attack select → highlight bands
+  attackSim.onAttackSelect = (atk) => {
+    if (atk) {
+      hourglass.highlightBands(atk.band_ids, '#ff4444');
+    } else {
+      hourglass.clearHighlights();
+    }
+  };
+
+  // Device select → highlight bands
+  deviceOverlay.onDeviceSelect = (dev) => {
+    if (dev) {
+      hourglass.highlightBands(dev.bands, '#58a6ff');
+    } else {
+      hourglass.clearHighlights();
+    }
+  };
+
+  // Quantum toggle
+  quantumToggle.onChange = (isProven) => {
+    calloutEl.classList.toggle('visible', isProven);
+    detail.quantumProven = isProven;
+  };
+})();
+</script>
+</body>
+</html>
