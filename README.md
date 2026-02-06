@@ -10,7 +10,7 @@
 
 > *Like NIST for neurosecurity, IEEE for BCIs, W3C for neural interfaces*
 
-Qinnovate is a vendor-neutral standards body developing open frameworks, governance standards, and research for securing brain-computer interfaces.
+Qinnovate is a vendor-agnostic standards body developing open frameworks, governance standards, and research for securing brain-computer interfaces.
 
 ---
 
@@ -257,7 +257,7 @@ This ensures open access while allowing commercial implementations.
 
 **Defining open standards for the neural frontier**
 
-*Vendor-neutral · Community-driven · Academically rigorous*
+*Vendor-agnostic · Community-driven · Academically rigorous*
 
 </div>
 
