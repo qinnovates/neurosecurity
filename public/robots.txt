@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://qinnovate.com/sitemap-index.xml
+
 # ═══════════════════════════════════════
 # Not all who wander are lost.
 # But the curious ones check robots.txt.

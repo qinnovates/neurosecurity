@@ -1,0 +1,96 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { STATS } from '../lib/qif-constants';
+---
+
+<PageLayout
+  title="About"
+  description="About Qinnovate — the organization developing open standards for brain-computer interface security."
+  breadcrumbs={[{ label: 'About' }]}
+>
+  <div class="max-w-3xl">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-8">About Qinnovate</h1>
+
+    <div class="prose">
+      <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-8">
+        Qinnovate is an independent research initiative developing open security standards for the brain-computer interface era. We publish the <strong>Quantum Indeterministic Framework (QIF)</strong> — the first security model that spans from silicon hardware to cognitive sovereignty.
+      </p>
+
+      <h2>Mission</h2>
+      <p>
+        Brain-computer interfaces are advancing faster than the security standards to protect them. Neuralink has implanted its first patients. Synchron is in FDA trials. Blackrock Neurotech has been in human brains since 2004.
+      </p>
+      <p>
+        These devices are tested for safety and efficacy. They are not tested against adversarial threats.
+      </p>
+      <p>
+        Qinnovate exists to close that gap — developing the security specifications, threat models, and coherence metrics that the BCI industry needs before these devices reach mass adoption.
+      </p>
+
+      <h2>The Framework</h2>
+      <p>
+        QIF is an open, peer-reviewable security standard. It draws on three disciplines:
+      </p>
+      <ul>
+        <li><strong>Cybersecurity</strong> — Layered defense models, threat taxonomies, attack surface analysis</li>
+        <li><strong>Neuroscience</strong> — Neural signaling, coherence, scale-frequency invariants</li>
+        <li><strong>Quantum physics</strong> — Decoherence, tunneling, entanglement as security primitives</li>
+      </ul>
+      <p>
+        The result is the <strong>Hourglass Model</strong>: a 7-band, 3-domain architecture with the Neural Gateway (the physical BCI device) at its waist. Biology above. Silicon below. Every layer has defined threat vectors, coherence thresholds, and mitigation specifications.
+      </p>
+
+      <h2>Approach</h2>
+      <p>
+        Qinnovate follows the standards-body model: open publication, rigorous peer review, transparent methodology. All framework documents, equations, and reference implementations are publicly available.
+      </p>
+      <p>
+        We believe neural security standards must be developed openly — not behind closed doors. The people whose brains will be connected deserve to understand exactly how they're protected.
+      </p>
+
+      <h2>Founded By</h2>
+      <p>
+        Qinnovate was founded by <strong>Kevin Qi</strong>, a security researcher working at the intersection of cybersecurity, neuroscience, and quantum computing. Kevin developed QIF from first principles, beginning with a simple question: <em>what does the OSI model look like when one endpoint is a brain?</em>
+      </p>
+      <p>
+        The framework is developed in collaboration with <strong>Quantum Intelligence (QI)</strong> — a human-AI research partnership exploring the boundaries of computational neuroscience.
+      </p>
+
+      <h2>Open Standard</h2>
+      <p>
+        QIF is not a proprietary product. It's an open framework, freely available for researchers, device manufacturers, regulators, and security professionals to adopt, extend, and critique.
+      </p>
+
+      <div class="glass rounded-xl p-6 my-8 not-prose">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+          <div>
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{STATS.frameworkVersion}</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Framework</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{STATS.publications}</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Publications</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-status-safe)]">7</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Security Bands</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">Open</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">License</div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Contact</h2>
+      <p>
+        For collaboration, research inquiries, or framework feedback:
+      </p>
+      <ul>
+        <li>GitHub: <a href="https://github.com/qinnovates" target="_blank" rel="noopener noreferrer">github.com/qinnovates</a></li>
+        <li>Publications: <a href="https://medium.com/@qikevinl" target="_blank" rel="noopener noreferrer">medium.com/@qikevinl</a></li>
+        <li>Framework: <a href="https://mindloft.org" target="_blank" rel="noopener noreferrer">mindloft.org</a></li>
+      </ul>
+    </div>
+  </div>
+</PageLayout>

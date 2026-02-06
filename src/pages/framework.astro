@@ -1,0 +1,217 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { HOURGLASS_BANDS, COHERENCE, SCALE_FREQUENCY, QIF_VERSION } from '../lib/qif-constants';
+import Hourglass3D from '../components/Hourglass3D';
+---
+
+<PageLayout
+  title="QIF Framework"
+  description="The Quantum Indeterministic Framework — a 7-band hourglass security architecture for brain-computer interfaces."
+  breadcrumbs={[{ label: 'Framework' }]}
+  maxWidth="wide"
+>
+  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+    <!-- Sidebar (sticky TOC) -->
+    <aside class="hidden lg:block">
+      <nav class="sticky top-24 space-y-1" aria-label="Table of contents">
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
+        {[
+          { href: '#overview', label: 'Overview' },
+          { href: '#hourglass', label: 'Hourglass Model' },
+          { href: '#bands', label: '7 Bands' },
+          { href: '#coherence', label: 'Coherence Metric' },
+          { href: '#scale-frequency', label: 'Scale-Frequency' },
+          { href: '#threat-model', label: 'Threat Model' },
+        ].map((item) => (
+          <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="max-w-3xl">
+      <!-- Overview -->
+      <section id="overview" class="mb-20">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-6">
+          QIF Framework <span class="text-[var(--color-accent-primary)]">v{QIF_VERSION}</span>
+        </h1>
+        <div class="prose">
+          <p class="text-lg text-[var(--color-text-muted)]">
+            The Quantum Indeterministic Framework (QIF) is an open security standard for brain-computer interfaces. It defines the threat model, security architecture, and coherence metrics for protecting neural data at every layer — from hardware to human identity.
+          </p>
+          <p>
+            QIF answers a question no existing framework addresses: <em>how do you secure a system where one endpoint is a brain?</em> Existing cybersecurity models (OSI, MITRE ATT&CK, Zero Trust) handle silicon. Existing neuroethics frameworks handle consent and privacy. QIF bridges both — providing an engineering specification for the interface between them.
+          </p>
+        </div>
+      </section>
+
+      <!-- Hourglass Model -->
+      <section id="hourglass" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Hourglass Model</h2>
+        <div class="prose mb-8">
+          <p>
+            QIF v3.1 organizes BCI security into a <strong>7-band hourglass</strong> — a 3-1-3 symmetric architecture. The physical BCI device sits at the <strong>waist</strong> (I0, the Neural Gateway), with three biological bands above and three silicon bands below.
+          </p>
+          <p>
+            This topology mirrors how BCIs actually work: signals travel up from hardware through protocols to the brain, and commands travel down from cognition through processing to the device. The hourglass narrows at the exact point where biology meets silicon — the most critical attack surface.
+          </p>
+        </div>
+
+        <!-- Interactive 3D hourglass (React island) -->
+        <div class="my-12" id="hourglass-interactive">
+          <Hourglass3D client:visible />
+          <noscript>
+            <div class="max-w-lg mx-auto space-y-3">
+              {HOURGLASS_BANDS.map((band, i) => {
+                const widths = [100, 85, 70, 55, 70, 85, 100];
+                const width = widths[i];
+                return (
+                  <div
+                    class="glass rounded-lg p-5 mx-auto"
+                    style={`max-width: ${width}%; border-left: 3px solid ${band.color};`}
+                  >
+                    <div class="flex items-center gap-3">
+                      <span class="text-xs font-bold font-[family-name:var(--font-mono)]" style={`color: ${band.color};`}>{band.id}</span>
+                      <span class="text-sm font-semibold">{band.name}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </noscript>
+        </div>
+      </section>
+
+      <!-- Band Details -->
+      <section id="bands" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The 7 Bands</h2>
+        <div class="space-y-8">
+          {HOURGLASS_BANDS.map((band) => (
+            <div class="glass rounded-xl p-6" style={`border-left: 3px solid ${band.color};`}>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-sm font-bold font-[family-name:var(--font-mono)]" style={`color: ${band.color};`}>{band.id}</span>
+                <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">{band.name}</h3>
+                <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)] ml-auto">
+                  {band.domain}
+                </span>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)]">{band.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Coherence Metric -->
+      <section id="coherence" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Coherence Metric</h2>
+        <div class="prose mb-8">
+          <p>
+            The coherence metric provides a continuous, real-time measure of neural signal integrity. It collapses three variance dimensions — phase, temporal, and spatial — into a single security score between 0 and 1.
+          </p>
+        </div>
+
+        <!-- Equation display -->
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            {COHERENCE.formula}
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            where &sigma;&sup2;&psi; = phase variance, &sigma;&sup2;&tau; = temporal variance, &sigma;&sup2;&gamma; = spatial variance
+          </p>
+        </div>
+
+        <!-- Threshold zones -->
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="glass rounded-lg p-5 border-l-3" style={`border-left: 3px solid ${COHERENCE.thresholds.safe.color};`}>
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.safe.color};`}>
+              C<sub>s</sub> &gt; 0.6
+            </div>
+            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.safe.label}</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal integrity verified. Normal operating state.</p>
+          </div>
+          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.gateway.color};`}>
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.gateway.color};`}>
+              0.3 &le; C<sub>s</sub> &le; 0.6
+            </div>
+            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.gateway.label}</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-2">Anomalous variance detected. Enhanced monitoring.</p>
+          </div>
+          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.breach.color};`}>
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.breach.color};`}>
+              C<sub>s</sub> &lt; 0.3
+            </div>
+            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.breach.label}</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal compromise indicated. Defensive response triggered.</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-6">
+          <a href="/lab/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+            Try the interactive coherence calculator in QIF Lab &rarr;
+          </a>
+        </div>
+      </section>
+
+      <!-- Scale-Frequency -->
+      <section id="scale-frequency" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scale-Frequency Invariant</h2>
+        <div class="prose mb-8">
+          <p>
+            Neural oscillations follow a fundamental relationship: the product of frequency and spatial extent is approximately constant. This scale-frequency invariant defines how neural signals propagate and sets the physical constraints that any BCI security model must respect.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            v = f &times; &lambda;
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            k &asymp; 1&ndash;10 m&middot;Hz (NOT 10&sup6;)
+          </p>
+        </div>
+
+        <!-- Band data table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Frequency</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Spatial Extent</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">k</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SCALE_FREQUENCY.bands.map((band) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-medium">{band.name}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.frequency}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.extent}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{band.k}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Threat Model -->
+      <section id="threat-model" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Threat Model</h2>
+        <div class="prose">
+          <p>
+            QIF defines threat vectors at each band of the hourglass. The model spans from physical hardware attacks (Band 1) through protocol exploitation (Band 3), neural signal manipulation (Band 5-6), and cognitive integrity threats (Band 7).
+          </p>
+          <p>
+            The Neural Gateway (I0) represents the highest-risk surface — where digital signals become neural stimulation and neural readings become digital data. Every attack that crosses this boundary is potentially irreversible in ways that traditional cybersecurity never encounters.
+          </p>
+          <p>
+            For detailed threat taxonomy and mitigation specifications, see the <a href="https://mindloft.org/whitepaper/" target="_blank" rel="noopener noreferrer">QIF Whitepaper</a>.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>

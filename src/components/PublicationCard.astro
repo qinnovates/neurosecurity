@@ -1,0 +1,49 @@
+---
+import { readingTime, cleanTag } from '../lib/utils';
+
+interface Props {
+  title: string;
+  date: string | Date;
+  tags: string[];
+  slug: string;
+  body: string;
+}
+
+const { title, date, tags, slug, body } = Astro.props;
+
+const readTime = readingTime(body);
+const dateObj = date instanceof Date ? date : new Date(date);
+const formattedDate = dateObj.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+const dateISO = dateObj.toISOString();
+const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
+---
+
+<a href={`/publications/${slug}/`} class="block group">
+  <article class="glass rounded-xl p-6 card-hover h-full flex flex-col">
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {tags.slice(0, 3).map((tag) => (
+        <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/8 text-[var(--color-accent-primary)] border border-[var(--color-accent-primary)]/15">
+          {cleanTag(tag)}
+        </span>
+      ))}
+    </div>
+
+    <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
+      {title}
+    </h3>
+
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4 line-clamp-2 flex-1">
+      {excerpt}
+    </p>
+
+    <div class="flex items-center gap-3 text-xs text-[var(--color-text-faint)] mt-auto pt-3 border-t border-[var(--color-border)]">
+      <time datetime={dateISO}>{formattedDate}</time>
+      <span>&middot;</span>
+      <span>{readTime}</span>
+    </div>
+  </article>
+</a>

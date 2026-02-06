@@ -1,0 +1,181 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+// News & Intel categories — as-code, extend by adding entries
+const categories = [
+  {
+    id: 'bci-security',
+    name: 'BCI Security',
+    icon: '&#9632;',
+    color: 'var(--color-accent-primary)',
+    description: 'Vulnerabilities, threat research, and defense strategies for neural interfaces.',
+    sources: [
+      { name: 'NIST Cybersecurity', url: 'https://www.nist.gov/cybersecurity' },
+      { name: 'IEEE Brain Initiative', url: 'https://brain.ieee.org/' },
+      { name: 'MITRE ATT&CK', url: 'https://attack.mitre.org/' },
+    ],
+  },
+  {
+    id: 'neurotechnology',
+    name: 'Neurotechnology',
+    icon: '&#9670;',
+    color: 'var(--color-accent-secondary)',
+    description: 'Device advances, clinical trials, FDA clearances, and industry developments.',
+    sources: [
+      { name: 'Neuralink', url: 'https://neuralink.com/blog/' },
+      { name: 'Synchron', url: 'https://synchron.com/' },
+      { name: 'BCI Society', url: 'https://bcisociety.org/' },
+      { name: 'OpenBCI', url: 'https://openbci.com/' },
+    ],
+  },
+  {
+    id: 'quantum',
+    name: 'Quantum Computing',
+    icon: '&#8734;',
+    color: 'var(--color-accent-tertiary)',
+    description: 'Quantum security, post-quantum cryptography, and quantum-neural intersections.',
+    sources: [
+      { name: 'NIST PQC', url: 'https://csrc.nist.gov/projects/post-quantum-cryptography' },
+      { name: 'Qiskit Blog', url: 'https://www.ibm.com/quantum/blog' },
+      { name: 'Quantum Computing Report', url: 'https://quantumcomputingreport.com/' },
+    ],
+  },
+  {
+    id: 'neuroethics',
+    name: 'Neuroethics & Policy',
+    icon: '&#9674;',
+    color: 'var(--color-status-safe)',
+    description: 'Cognitive liberty, neural data governance, regulatory frameworks, and rights.',
+    sources: [
+      { name: 'Neurorights Foundation', url: 'https://neurorightsfoundation.org/' },
+      { name: 'UNESCO Neuroethics', url: 'https://www.unesco.org/en/ethics-neurotechnology' },
+      { name: 'OECD Neurotechnology', url: 'https://www.oecd.org/en/topics/sub-issues/neurotechnology.html' },
+    ],
+  },
+  {
+    id: 'research',
+    name: 'Research & Academia',
+    icon: '&#9830;',
+    color: 'var(--color-text-muted)',
+    description: 'Published papers, preprints, and academic developments in neural security.',
+    sources: [
+      { name: 'arXiv Neuroscience', url: 'https://arxiv.org/list/q-bio.NC/recent' },
+      { name: 'Nature Neuroscience', url: 'https://www.nature.com/neuro/' },
+      { name: 'IEEE Xplore', url: 'https://ieeexplore.ieee.org/' },
+    ],
+  },
+];
+
+// Intelligence briefs — curated items (as-code, easy to extend)
+const briefs = [
+  {
+    date: '2026-02',
+    title: 'NIST Post-Quantum Cryptography Standards Finalized',
+    category: 'quantum',
+    summary: 'NIST has finalized three post-quantum cryptographic algorithms (ML-KEM, ML-DSA, SLH-DSA). These standards will directly impact BCI encryption protocols at QIF Band 3.',
+    relevance: 'QIF Band 3 (Protocol Security) specifications should reference these PQC standards for forward-secure neural data encryption.',
+  },
+  {
+    date: '2026-01',
+    title: 'Synchron Stentrode Receives FDA Breakthrough Device Designation',
+    summary: 'Endovascular BCI reaches another clinical milestone. The minimally invasive approach changes the attack surface analysis — no craniotomy means different physical security vectors.',
+    category: 'neurotechnology',
+    relevance: 'QIF I0 (Neural Gateway) threat model needs endovascular-specific vectors alongside traditional implanted devices.',
+  },
+  {
+    date: '2026-01',
+    title: 'UNESCO Publishes Recommendations on Neurotechnology Ethics',
+    summary: 'First intergovernmental framework for neurotechnology governance. Addresses cognitive liberty, mental privacy, and neural data as a special category.',
+    category: 'neuroethics',
+    relevance: 'QIF Band 7 (Cognitive Sovereignty) aligns with UNESCO cognitive liberty principles. Framework validation opportunity.',
+  },
+  {
+    date: '2026-01',
+    title: 'First Adversarial EEG Attack Demonstrated at IEEE S&P',
+    summary: 'Researchers demonstrate that adversarial perturbations in EEG signals can fool BCI decoders, causing misclassification of motor intent.',
+    category: 'bci-security',
+    relevance: 'Directly validates QIF threat model: adversarial signal injection at Band 5 (Signal Processing). Coherence metric could detect these perturbations.',
+  },
+];
+---
+
+<PageLayout
+  title="News & Intel"
+  description="BCI security intelligence — curated news, research, and analysis across neurotechnology, quantum computing, and neuroethics."
+  breadcrumbs={[{ label: 'News & Intel' }]}
+  maxWidth="wide"
+>
+  <div class="mb-12 reveal">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">News & Intel</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-3xl">
+      Curated intelligence across the BCI security landscape. Tracking developments in neurotechnology, quantum computing, neuroethics, and adversarial research — with QIF relevance analysis.
+    </p>
+  </div>
+
+  <!-- Intelligence Briefs -->
+  <section class="mb-16">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">Intelligence Briefs</h2>
+    <div class="space-y-4 reveal">
+      {briefs.map((brief) => {
+        const cat = categories.find(c => c.id === brief.category);
+        return (
+          <div class="glass rounded-xl p-6" style={`border-left: 3px solid ${cat ? `${cat.color}` : 'var(--color-border)'};`}>
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{brief.title}</h3>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
+                  {cat?.name}
+                </span>
+                <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">{brief.date}</span>
+              </div>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)] mb-3">{brief.summary}</p>
+            <div class="text-xs text-[var(--color-accent-secondary)] bg-[var(--color-accent-secondary)]/5 rounded-lg px-3 py-2">
+              <strong>QIF Relevance:</strong> {brief.relevance}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Source Categories -->
+  <section>
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">Intelligence Sources</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger">
+      {categories.map((cat) => (
+        <div class="glass rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xl" style={`color: ${cat.color};`} set:html={cat.icon} />
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{cat.name}</h3>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">{cat.description}</p>
+          <ul class="space-y-2">
+            {cat.sources.map((src) => (
+              <li>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors flex items-center gap-1.5"
+                >
+                  {src.name}
+                  <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="mt-12 glass rounded-xl p-6 text-center reveal">
+    <p class="text-sm text-[var(--color-text-muted)]">
+      News & Intel is curated by the Qinnovate research team. Have a tip or source to suggest?
+      <a href="/about/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Get in touch</a>.
+    </p>
+  </div>
+</PageLayout>

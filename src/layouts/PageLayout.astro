@@ -1,0 +1,26 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  breadcrumbs?: { label: string; href?: string }[];
+  wide?: boolean;
+}
+
+const { title, description, ogImage, breadcrumbs, wide = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+  <Nav />
+  <main class:list={["pt-20 px-4 sm:px-6 lg:px-8 mx-auto", wide ? "max-w-7xl" : "max-w-5xl"]}>
+    {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>

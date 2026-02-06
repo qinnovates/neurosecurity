@@ -1,0 +1,94 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import { getCollection } from 'astro:content';
+import { getPostDate, readingTime, cleanTag } from '../../lib/utils';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort(
+  (a, b) => new Date(getPostDate(b.data)).getTime() - new Date(getPostDate(a.data)).getTime()
+);
+
+// Collect all unique tags
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags.map(cleanTag)))].sort();
+---
+
+<PageLayout
+  title="Publications"
+  description="Research publications, analysis, and field notes on brain-computer interface security from Qinnovate."
+  breadcrumbs={[{ label: 'Publications' }]}
+>
+  <div class="mb-16">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Publications</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-2xl">
+      Research, analysis, and field notes from the neural security frontier. {posts.length} publications and growing.
+    </p>
+  </div>
+
+  <!-- Tag filters (client-side) -->
+  <div class="mb-10 flex flex-wrap gap-2" id="tag-filters">
+    <button
+      data-tag="all"
+      class="tag-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30"
+    >
+      All
+    </button>
+    {allTags.map((tag) => (
+      <button
+        data-tag={tag}
+        class="tag-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+      >
+        {tag}
+      </button>
+    ))}
+  </div>
+
+  <!-- Publication grid -->
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="publications-grid">
+    {posts.map((post) => {
+      const date = getPostDate(post.data);
+      const tags = post.data.tags.map(cleanTag);
+      return (
+        <div data-tags={tags.join(',')}>
+          <PublicationCard
+            title={post.data.title}
+            date={date}
+            tags={post.data.tags}
+            slug={post.id}
+            body={post.body || ''}
+          />
+        </div>
+      );
+    })}
+  </div>
+</PageLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+  const cards = document.querySelectorAll<HTMLElement>('#publications-grid > div');
+
+  const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
+  const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+
+      // Update button styles
+      buttons.forEach((b) => {
+        b.className = `tag-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${inactiveClass} hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30`;
+      });
+      btn.className = `tag-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
+
+      // Filter cards
+      cards.forEach((card) => {
+        if (tag === 'all') {
+          card.style.display = '';
+        } else {
+          const cardTags = card.dataset.tags?.split(',') || [];
+          card.style.display = cardTags.includes(tag!) ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>

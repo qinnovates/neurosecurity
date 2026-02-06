@@ -1,0 +1,62 @@
+/**
+ * QIF Framework Constants — derived from qif_equations.py
+ * Single source of truth for all QIF values used on the site.
+ */
+
+export const QIF_VERSION = '3.1';
+export const QIF_ARCHITECTURE = 'Hourglass';
+export const QIF_BANDS = 7;
+export const QIF_ESTABLISHED = 2026;
+
+/** Hourglass bands (3-1-3 symmetric) */
+export const HOURGLASS_BANDS = [
+  { id: 'B7', name: 'Cognitive Sovereignty', domain: 'Biology', position: 'top', color: '#8b5cf6', description: 'Identity, agency, and cognitive liberty' },
+  { id: 'B6', name: 'Neural Semantics', domain: 'Biology', position: 'top', color: '#10b981', description: 'Meaning extraction, pattern interpretation' },
+  { id: 'B5', name: 'Signal Processing', domain: 'Biology', position: 'top', color: '#06b6d4', description: 'Neural signal acquisition and preprocessing' },
+  { id: 'I0', name: 'Neural Gateway', domain: 'Interface', position: 'waist', color: '#f59e0b', description: 'Physical interface — the BCI device at the tissue boundary' },
+  { id: 'B3', name: 'Protocol Security', domain: 'Silicon', position: 'bottom', color: '#3b82f6', description: 'Communication protocols, encryption, authentication' },
+  { id: 'B2', name: 'Network Transport', domain: 'Silicon', position: 'bottom', color: '#3b82f6', description: 'Data transport, routing, network security' },
+  { id: 'B1', name: 'Physical Layer', domain: 'Silicon', position: 'bottom', color: '#3b82f6', description: 'Hardware, firmware, physical security' },
+] as const;
+
+/** Coherence metric thresholds */
+export const COHERENCE = {
+  formula: 'Cₛ = e^(−(σ²ᵩ + σ²τ + σ²ᵧ))',
+  thresholds: {
+    safe: { min: 0.6, label: 'Coherent', color: '#10b981' },
+    gateway: { min: 0.3, max: 0.6, label: 'Gateway', color: '#f59e0b' },
+    breach: { max: 0.3, label: 'Breach', color: '#ef4444' },
+  },
+} as const;
+
+/** Scale-frequency invariant */
+export const SCALE_FREQUENCY = {
+  formula: 'v = f × λ',
+  k_range: '1-10 m·Hz',
+  bands: [
+    { name: 'Gamma', frequency: '30-100 Hz', extent: '~1 cm', k: '~1' },
+    { name: 'Theta', frequency: '4-8 Hz', extent: '~5 cm', k: '~3' },
+    { name: 'Alpha', frequency: '8-13 Hz', extent: '~15 cm', k: '~8' },
+    { name: 'Delta', frequency: '0.5-4 Hz', extent: '~18 cm', k: '~5' },
+  ],
+} as const;
+
+/** QI candidate equations */
+export const QI_CANDIDATES = {
+  additive: {
+    name: 'Candidate 1 (Additive)',
+    formula: 'QI(t) = C_class + (1-ΓD(t))·[Qi + Q_entangle] − Q_tunnel',
+  },
+  tensor: {
+    name: 'Candidate 2 (Tensor)',
+    formula: 'QI = C_class ⊗ e^(−S_quantum)',
+  },
+} as const;
+
+/** Publication stats */
+export const STATS = {
+  publications: 11,
+  frameworkVersion: `v${QIF_VERSION}`,
+  architecture: `${QIF_BANDS}-Band ${QIF_ARCHITECTURE}`,
+  established: QIF_ESTABLISHED,
+} as const;

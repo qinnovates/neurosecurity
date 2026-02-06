@@ -1,0 +1,138 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { QIF_VERSION } from '../lib/qif-constants';
+
+// Roadmap data (will be loaded from prd.json when available)
+const phases = [
+  {
+    version: 'v1.0',
+    title: 'Foundation',
+    status: 'completed' as const,
+    items: [
+      { label: 'OSI-inspired neural security model (14-layer)', done: true },
+      { label: 'Coherence metric definition', done: true },
+      { label: 'Scale-frequency invariant validation', done: true },
+      { label: 'Initial threat taxonomy', done: true },
+      { label: 'First 10 publications', done: true },
+    ],
+  },
+  {
+    version: 'v2.0',
+    title: '14-Layer Architecture',
+    status: 'completed' as const,
+    items: [
+      { label: '14-layer detailed specification', done: true },
+      { label: 'Layer-by-layer attack surface analysis', done: true },
+      { label: 'QI equation candidates (additive + tensor)', done: true },
+      { label: 'QIF Lab reference implementation', done: true },
+    ],
+  },
+  {
+    version: 'v3.1',
+    title: 'Hourglass (Current)',
+    status: 'active' as const,
+    items: [
+      { label: '7-band hourglass architecture (3-1-3)', done: true },
+      { label: 'Neural Gateway (I0) as physical waist', done: true },
+      { label: 'Whitepaper first draft', done: true },
+      { label: 'Neuroethics framework integration', done: false },
+      { label: 'Peer review cycle', done: false },
+    ],
+  },
+  {
+    version: 'v4.0',
+    title: 'Validation',
+    status: 'planned' as const,
+    items: [
+      { label: 'Synthetic BCI data validation', done: false },
+      { label: 'Coherence metric empirical testing', done: false },
+      { label: 'Cross-framework interoperability spec', done: false },
+      { label: 'Academic publication submission', done: false },
+    ],
+  },
+];
+
+function statusColor(status: string) {
+  switch (status) {
+    case 'completed': return 'var(--color-status-safe)';
+    case 'active': return 'var(--color-accent-primary)';
+    default: return 'var(--color-text-faint)';
+  }
+}
+
+function statusLabel(status: string) {
+  switch (status) {
+    case 'completed': return 'Complete';
+    case 'active': return 'In Progress';
+    default: return 'Planned';
+  }
+}
+---
+
+<PageLayout
+  title="Roadmap"
+  description="QIF Framework development roadmap — versioned milestones from foundation to validation."
+  breadcrumbs={[{ label: 'Roadmap' }]}
+>
+  <div class="max-w-3xl">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Framework Roadmap</h1>
+    <p class="text-lg text-[var(--color-text-muted)] mb-12">
+      QIF development follows a versioned release cycle. Current version: <strong class="text-[var(--color-accent-primary)]">v{QIF_VERSION}</strong> (Hourglass Architecture).
+    </p>
+
+    <div class="space-y-8">
+      {phases.map((phase, i) => {
+        const completedCount = phase.items.filter((item) => item.done).length;
+        const progress = Math.round((completedCount / phase.items.length) * 100);
+        const color = statusColor(phase.status);
+
+        return (
+          <div class="glass rounded-xl p-6 sm:p-8">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="text-sm font-bold font-[family-name:var(--font-mono)]" style={`color: ${color};`}>
+                    {phase.version}
+                  </span>
+                  <span class="text-xs px-2 py-0.5 rounded-full border" style={`color: ${color}; border-color: ${color}40;`}>
+                    {statusLabel(phase.status)}
+                  </span>
+                </div>
+                <h3 class="text-xl font-semibold font-[family-name:var(--font-heading)]">{phase.title}</h3>
+              </div>
+              <span class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">
+                {completedCount}/{phase.items.length}
+              </span>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="w-full h-1.5 rounded-full bg-[var(--color-bg-deep)] mb-5">
+              <div
+                class="h-full rounded-full transition-all duration-500"
+                style={`width: ${progress}%; background-color: ${color};`}
+              />
+            </div>
+
+            <!-- Items -->
+            <ul class="space-y-2.5">
+              {phase.items.map((item) => (
+                <li class="flex items-start gap-3 text-sm">
+                  {item.done ? (
+                    <svg class="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-status-safe)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <div class="w-4 h-4 mt-0.5 shrink-0 rounded-full border border-[var(--color-border)]" />
+                  )}
+                  <span class:list={[item.done ? "text-[var(--color-text-muted)]" : "text-[var(--color-text-primary)]"]}>
+                    {item.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</PageLayout>

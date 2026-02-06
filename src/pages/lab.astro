@@ -1,0 +1,196 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
+---
+
+<PageLayout
+  title="QIF Lab"
+  description="Interactive reference implementations of QIF equations — coherence calculator, scale-frequency explorer, and equation sandbox."
+  breadcrumbs={[{ label: 'Lab' }]}
+  maxWidth="wide"
+>
+  <div class="mb-12">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">QIF Lab</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-2xl">
+      Reference implementations of QIF equations. Validate coherence metrics, explore scale-frequency relationships, and test security thresholds.
+    </p>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-8">
+    <!-- Coherence Calculator -->
+    <div class="glass rounded-xl p-8" id="coherence-calc">
+      <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">Coherence Calculator</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        Adjust variance parameters to compute the coherence metric in real time.
+      </p>
+
+      <div class="space-y-6">
+        <!-- Phase variance slider -->
+        <div>
+          <div class="flex justify-between text-sm mb-2">
+            <label for="sigma-phi" class="text-[var(--color-text-muted)]">Phase variance (&sigma;&sup2;&psi;)</label>
+            <span id="sigma-phi-val" class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">0.10</span>
+          </div>
+          <input type="range" id="sigma-phi" min="0" max="2" step="0.01" value="0.10" class="w-full accent-[var(--color-accent-secondary)]" />
+        </div>
+
+        <!-- Temporal variance slider -->
+        <div>
+          <div class="flex justify-between text-sm mb-2">
+            <label for="sigma-tau" class="text-[var(--color-text-muted)]">Temporal variance (&sigma;&sup2;&tau;)</label>
+            <span id="sigma-tau-val" class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">0.10</span>
+          </div>
+          <input type="range" id="sigma-tau" min="0" max="2" step="0.01" value="0.10" class="w-full accent-[var(--color-accent-secondary)]" />
+        </div>
+
+        <!-- Spatial variance slider -->
+        <div>
+          <div class="flex justify-between text-sm mb-2">
+            <label for="sigma-gamma" class="text-[var(--color-text-muted)]">Spatial variance (&sigma;&sup2;&gamma;)</label>
+            <span id="sigma-gamma-val" class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">0.10</span>
+          </div>
+          <input type="range" id="sigma-gamma" min="0" max="2" step="0.01" value="0.10" class="w-full accent-[var(--color-accent-secondary)]" />
+        </div>
+
+        <!-- Result -->
+        <div class="glass rounded-lg p-6 text-center">
+          <div class="text-xs text-[var(--color-text-faint)] mb-2 font-[family-name:var(--font-mono)]">
+            {COHERENCE.formula}
+          </div>
+          <div class="text-4xl font-bold font-[family-name:var(--font-heading)]" id="coherence-result">
+            0.741
+          </div>
+          <div class="text-sm font-medium mt-2" id="coherence-status">
+            Coherent
+          </div>
+          <div class="w-full h-2 rounded-full bg-[var(--color-bg-deep)] mt-4">
+            <div id="coherence-bar" class="h-full rounded-full transition-all duration-300" style="width: 74.1%; background-color: #10b981;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scale-Frequency Explorer -->
+    <div class="glass rounded-xl p-8" id="scale-freq">
+      <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">Scale-Frequency Explorer</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        Neural oscillation bands mapped by frequency and spatial extent.
+      </p>
+
+      <!-- Visual representation -->
+      <div class="space-y-4 mb-8">
+        {SCALE_FREQUENCY.bands.map((band) => {
+          const maxExtent = 20; // cm
+          const extent = parseFloat(band.extent.replace(/[^0-9.]/g, ''));
+          const percent = (extent / maxExtent) * 100;
+          const freqParts = band.frequency.split('-');
+          const maxFreq = parseFloat(freqParts[freqParts.length - 1]);
+          // Color intensity based on frequency
+          const hue = maxFreq > 30 ? 280 : maxFreq > 8 ? 180 : maxFreq > 4 ? 200 : 220;
+          return (
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">{band.name}</span>
+                <span class="text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] text-xs">
+                  {band.frequency} &middot; {band.extent}
+                </span>
+              </div>
+              <div class="w-full h-8 rounded bg-[var(--color-bg-deep)] relative overflow-hidden">
+                <div
+                  class="h-full rounded flex items-center px-3 text-xs font-[family-name:var(--font-mono)] text-white/80"
+                  style={`width: ${percent}%; background: linear-gradient(90deg, hsl(${hue}, 60%, 40%), hsl(${hue}, 60%, 30%));`}
+                >
+                  k &asymp; {band.k}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
+          v = f &times; &lambda; &ensp;&rarr;&ensp; k &asymp; {SCALE_FREQUENCY.k_range}
+        </p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1">
+          The product of frequency and spatial extent is approximately constant across neural bands.
+        </p>
+      </div>
+    </div>
+
+    <!-- QI Equation Sandbox -->
+    <div class="glass rounded-xl p-8 lg:col-span-2">
+      <div class="flex items-center gap-3 mb-2">
+        <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)]">QI Equation Sandbox</h2>
+        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-accent-tertiary)]/30 text-[var(--color-accent-tertiary)]">
+          Coming Soon
+        </span>
+      </div>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        Interactive exploration of QI candidate equations — test both additive and tensor formulations with synthetic BCI data.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="glass-subtle rounded-lg p-4">
+          <h3 class="text-sm font-semibold mb-2">Candidate 1: Additive</h3>
+          <code class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] break-all">
+            QI(t) = C<sub>class</sub> + (1&minus;&Gamma;<sub>D</sub>(t))&middot;[Q<sub>i</sub> + Q<sub>entangle</sub>] &minus; Q<sub>tunnel</sub>
+          </code>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <h3 class="text-sm font-semibold mb-2">Candidate 2: Tensor</h3>
+          <code class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] break-all">
+            QI = C<sub>class</sub> &otimes; e<sup>&minus;S<sub>quantum</sub></sup>
+          </code>
+        </div>
+      </div>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  // Coherence Calculator
+  const sliders = ['sigma-phi', 'sigma-tau', 'sigma-gamma'].map((id) => ({
+    input: document.getElementById(id) as HTMLInputElement,
+    display: document.getElementById(`${id}-val`) as HTMLElement,
+  }));
+
+  const result = document.getElementById('coherence-result')!;
+  const status = document.getElementById('coherence-status')!;
+  const bar = document.getElementById('coherence-bar')!;
+
+  function updateCoherence() {
+    const values = sliders.map((s) => parseFloat(s.input.value));
+    values.forEach((v, i) => {
+      sliders[i].display.textContent = v.toFixed(2);
+    });
+
+    const sum = values.reduce((a, b) => a + b, 0);
+    const cs = Math.exp(-sum);
+
+    result.textContent = cs.toFixed(3);
+    bar.style.width = `${cs * 100}%`;
+
+    if (cs > 0.6) {
+      result.style.color = '#10b981';
+      status.textContent = 'Coherent';
+      status.style.color = '#10b981';
+      bar.style.backgroundColor = '#10b981';
+    } else if (cs > 0.3) {
+      result.style.color = '#f59e0b';
+      status.textContent = 'Gateway';
+      status.style.color = '#f59e0b';
+      bar.style.backgroundColor = '#f59e0b';
+    } else {
+      result.style.color = '#ef4444';
+      status.textContent = 'Breach';
+      status.style.color = '#ef4444';
+      bar.style.backgroundColor = '#ef4444';
+    }
+  }
+
+  sliders.forEach((s) => {
+    s.input.addEventListener('input', updateCoherence);
+  });
+
+  updateCoherence();
+</script>
