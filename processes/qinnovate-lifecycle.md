@@ -12,7 +12,7 @@ Qinnovate determined it is most logical to limit its scope to validation, ethics
 Standard CI/CD (Continuous Integration/Deployment) is too risky for high-stakes technology (BCI, AI, Security) because it treats "deployment" as the goal rather than "validation."
 
 ### The Pivot
-We shifted the focus from **Time-to-Market** to **Time-to-Truth.** We realized that "Truth" is only established when a hypothesis is proven in a lab and then vetted by an external body.
+We shifted the focus from **Time-to-Market** to **Time-to-Autonomy.** We realized that stakeholder autonomy requires validated, authoritative knowledge — established only when a hypothesis is proven in a lab and then vetted by an external body.
 
 ### The Integration
 We fused the **Scientific Method** (Left Loop) with the **Public Policy Cycle** (Right Loop). This ensures that technical discovery automatically triggers legal and ethical updates.

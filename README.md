@@ -129,7 +129,7 @@ Think: **W3C** (Qinnovate) vs **Chrome** (Mindloft)
 
 ## Development Process
 
-Qinnovate operates through the **VERA Engine** (Validation • Ethics • Research • Authority) — our approach to standards development that prioritizes "time-to-truth" over "time-to-market."
+Qinnovate operates through the **VERA Engine** (Validation • Ethics • Research • Authority) — our approach to standards development that prioritizes "time-to-autonomy" over "time-to-market."
 
 VERA fuses the Scientific Method with the Public Policy Cycle, ensuring every technological advancement is lab-proven and legally codified before release as authorized knowledge.
 
@@ -182,7 +182,7 @@ Qinnovate's standards development operates through a three-phase authority cycle
              └──────────────┬──────────────────────┘
                             │
                     Perpetual Loop
-              (Time-to-Truth over Time-to-Market)
+              (Time-to-Autonomy over Time-to-Market)
 ```
 
 **The VERA Authority Cycle:**
