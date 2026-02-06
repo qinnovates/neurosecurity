@@ -150,96 +150,50 @@ VERA fuses the Scientific Method with the Public Policy Cycle, ensuring every te
 
 ---
 
-## 🔄 Research Lifecycle (Continuous Innovation Cycle)
+## 🔄 Standards Development via VERA Engine
+
+Qinnovate's standards development operates through a three-phase authority cycle, maintaining strict separation from product implementation:
 
 ```
-                    QINNOVATE (Standards Body)
-                   ┌──────────────────────────┐
-                   │                          │
-            ┌──────│  📜 Standards            │
-            │      │  Publication             │
-            │      │  (QIF/ONI frameworks)    │
-            │      └──────────────────────────┘
-            │                 │
-    8. Public               │ 5. Publish
-    Dissemination           │ Standards
-            │                 │
-            │                 ▼
-    ┌───────────────┐   ┌──────────────────────────┐
-    │ 🌐 Community  │   │  ⚖️  Governance          │
-    │ Collaboration │◀──│  & Ethics Review         │
-    │ (Papers,      │   │  (UNESCO, GDPR, FDA)     │
-    │  Conferences) │   └──────────────────────────┘
-    └───────────────┘                │
-            │                        │ 6. Ethics
-            │                        │ Alignment
-            │                        ▼
-            │            ┌──────────────────────────┐
-            │            │  🔬 Committee Review     │
-            │            │  (Academic, Industry)    │
-            │            └──────────────────────────┘
-            │                        │
-            │                        │ 7. Peer
-            │                        │ Validation
-            ▼                        ▼
-    ┌─────────────────────────────────────────────┐
-    │                                             │
-    │        MINDLOFT (Product Company)           │
-    │                                             │
-    │  ┌────────────────────────────────────┐    │
-    │  │ 🛠️  Product Implementation        │    │
-    │  │ (Mindloft Core, SDK, Cloud)       │    │
-    │  └────────────────────────────────────┘    │
-    │                   │                         │
-    │                   │ 3. Build Products       │
-    │                   ▼                         │
-    │  ┌────────────────────────────────────┐    │
-    │  │ 📊 Real-World Deployment          │    │
-    │  │ (User feedback, metrics)          │    │
-    │  └────────────────────────────────────┘    │
-    │                   │                         │
-    └───────────────────┼─────────────────────────┘
-                        │
-                        │ 4. Gather
-                        │ Insights
-                        ▼
-           ┌──────────────────────────┐
-           │  🔍 Research             │
-           │  & Exploration           │
-           │  (Field notes, QIF-lab)  │
-           └──────────────────────────┘
-                        │
-                        │ 1. Experiment
-                        │ & Validate
-                        ▼
-           ┌──────────────────────────┐
-           │  ✅ Validation           │
-           │  (QIF-TRUTH.md)          │
-           │  Ready for standards     │
-           └──────────────────────────┘
-                        │
-                        │ 2. Canonicalize
-                        │
-                        └─────────────┐
-                                      │
-                    (Cycle continues) │
-                                      │
-                ┌─────────────────────┘
-                │
-                └──► Back to Standards Publication
+                     ┌─────────────────────┐
+                     │                     │
+                     │  PHASE 2:           │
+              ┌──────│  GOVERNANCE HUB     │──────┐
+              │      │  (The Filter)       │      │
+              │      │                     │      │
+              │      │  • Data Vetting     │      │
+              │      │  • NIST/IEEE        │      │
+              │      │  • Q-Metrics        │      │
+              │      └─────────────────────┘      │
+              │                                    │
+              │                                    │
+    ┌─────────▼──────────┐              ┌─────────▼──────────┐
+    │                    │              │                    │
+    │  PHASE 1:          │              │  PHASE 3:          │
+    │  TECHNICAL LAB     │              │  EXTERNAL COUNCIL  │
+    │                    │              │                    │
+    │  • Ideation        │              │  • Peer Review     │
+    │  • Controlled POC  │              │  • Policy          │
+    │  • Lab Isolation   │              │  • Dissemination   │
+    │                    │              │                    │
+    └────────────────────┘              └────────────────────┘
+             │                                     │
+             │                                     │
+             └──────────────┬──────────────────────┘
+                            │
+                    Perpetual Loop
+              (Time-to-Truth over Time-to-Market)
 ```
 
-**The Continuous Loop:**
-1. **Research** (Mindloft) → Experiment with new ideas
-2. **Validate** (Mindloft) → Test and canonicalize
-3. **Build** (Mindloft) → Implement in products
-4. **Deploy** (Mindloft) → Gather real-world feedback
-5. **Publish** (Qinnovate) → Release as open standards
-6. **Govern** (Qinnovate) → Align with ethics and compliance
-7. **Review** (Qinnovate) → Academic and industry validation
-8. **Disseminate** (Qinnovate) → Share with community
+**The VERA Authority Cycle:**
 
-**Key Principle:** Standards evolve from real implementations. Products implement validated standards.
+1. **Technical Lab** — Research labs (like Mindloft's) develop hypotheses and controlled POCs in sandboxed environments
+2. **Governance Hub** — Qinnovate validates data against Q-Metrics and aligns with NIST/IEEE standards frameworks
+3. **External Council** — Independent experts conduct peer review and formalize standards as authorized knowledge
+
+**Key Distinction:** Qinnovate stops at authorized dissemination. Product deployment and commercial implementation are handled by separate entities to maintain standards body independence.
+
+**[Learn more about the VERA Engine →](processes/qinnovate-lifecycle.md)**
 
 ---
 
@@ -268,6 +222,9 @@ qinnovates/qinnovate/
 │   ├── UNESCO_ALIGNMENT.md
 │   └── ... (9 governance documents)
 │
+├── processes/              # VERA Engine & workflows
+│   └── qinnovate-lifecycle.md  # VERA standards development cycle
+│
 └── docs/                   # qinnovate.com website
 ```
 
@@ -277,6 +234,7 @@ qinnovates/qinnovate/
 
 | Resource | Description |
 |----------|-------------|
+| [VERA Engine](processes/qinnovate-lifecycle.md) | Standards development process documentation |
 | [QIF Whitepaper](https://mindloft.org/qif-whitepaper/) | Interactive whitepaper with AI voiceover |
 | [QIF Framework](qif-framework/) | Complete QIF specification |
 | [ONI Framework](oni-framework/) | Complete ONI specification |
@@ -328,4 +286,4 @@ This ensures open access while allowing commercial implementations.
 ---
 
 *Established: 2026*
-*Updated: 2026-02-05*
+*Updated: 2026-02-06*
