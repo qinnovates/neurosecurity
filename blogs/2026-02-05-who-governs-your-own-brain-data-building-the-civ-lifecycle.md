@@ -98,8 +98,9 @@ If there are days I don't post, it means I'm busy working on back-end projects. 
 ## Further Reading
 
 - **[The CIV Lifecycle — Qinnovate Standards Repository](https://github.com/qinnovates/qinnovate)**
-- **[Question 12: Who Governs Your Own Brain Data?](#)** *(QIF Neuroethics Question Index)*
+- **[Question 12: Who Governs Your Own Brain Data?](https://github.com/qinnovates/qinnovate/blob/main/governance/QIF-NEUROETHICS.md#q12-who-governs-your-own-brain-data)** *(QIF Neuroethics Question Index)*
 - **[Qinnovate Engine Documentation](https://github.com/qinnovates/qinnovate#the-qinnovate-engine-continuous-iteration--validation-civ)**
+- **[Full QIF Neuroethics Document](https://github.com/qinnovates/qinnovate/blob/main/governance/QIF-NEUROETHICS.md)** *(All 12 Open Questions)*
 
 ---
 
