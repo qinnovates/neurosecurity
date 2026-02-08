@@ -1,6 +1,14 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
+import { THREAT_VECTORS, THREAT_TACTICS, THREAT_DOMAINS, QNIS_SPEC, getStatusStats, getQnisStats, getTacticsWithCounts } from '../lib/threat-data';
+
+const statusStats = getStatusStats();
+const qnisStats = getQnisStats();
+const tacticsWithCounts = getTacticsWithCounts();
+const totalTechniques = THREAT_VECTORS.length;
+const totalTactics = THREAT_TACTICS.length;
+const totalDomains = (THREAT_DOMAINS as any[]).length;
 ---
 
 <PageLayout
@@ -22,6 +30,8 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
           { href: '#hourglass', label: 'Hourglass Model' },
           { href: '#qi-equation', label: 'QI Equation' },
           { href: '#attack-surface', label: 'Attack Surface' },
+          { href: '#taxonomy', label: 'Locus Taxonomy' },
+          { href: '#qnis', label: 'QNIS Scoring' },
           { href: '#nsp', label: 'NSP Protocol' },
           { href: '#black-hole', label: 'Black Hole Principle' },
           { href: '#falsifiability', label: 'Falsifiability' },
@@ -341,7 +351,7 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.5 Severity Stratification</h3>
         <div class="prose">
           <p>
-            The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The 60-technique threat taxonomy (Section 6.5) assigns band-level targeting to each attack, enabling severity-scored risk assessment.
+            The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The {totalTechniques}-technique threat taxonomy (Section 6.5) assigns band-level targeting to each attack, enabling severity-scored risk assessment.
           </p>
         </div>
 
@@ -590,10 +600,332 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
         </div>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.3 Unified Threat Taxonomy</h3>
-        <div class="prose">
+        <div class="prose mb-6">
           <p>
-            QIF maintains a registry of <strong>64 attack techniques</strong> organized into 11 tactics across 7 operational domains using the <strong>QIF Locus Taxonomy</strong>. Tactics follow a domain.action naming convention (e.g. QIF-N.IJ = Neural Injection, QIF-C.EX = Cognitive Exploitation). Each technique is scored using <strong>QNIS v1.0</strong> (QIF Neural Impact Score), a BCI-specific vulnerability scoring system that prioritizes human impact (biological + cognitive) over system impact, with 12 metrics including Biological Impact, Cognitive Integrity, Reversibility, and Violation of Consent.
+            QIF maintains a registry of <strong>{totalTechniques} attack techniques</strong> organized into <strong>{totalTactics} tactics</strong> across <strong>{totalDomains} operational domains</strong> using the <strong>QIF Locus Taxonomy v1.0</strong>. Each technique is scored using <strong>QNIS v1.0</strong> (QIF Neural Impact Score), a BCI-specific vulnerability scoring system that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
           </p>
+        </div>
+      </section>
+
+      <!-- 6.4 QIF Locus Taxonomy -->
+      <section id="taxonomy" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.4 QIF Locus Taxonomy</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.1 Design Rationale</h3>
+        <div class="prose mb-8">
+          <p>
+            Existing threat taxonomies (MITRE ATT&amp;CK, CAPEC, CWE) were designed for traditional IT systems. They classify attacks by what happens to <em>software and networks</em>. Brain-computer interfaces require a taxonomy that classifies attacks by what happens to <em>neural tissue, cognition, and human identity</em>. This is a fundamentally different attack surface.
+          </p>
+          <p>
+            The QIF Locus Taxonomy addresses this gap. &ldquo;Locus&rdquo; refers to the anatomical or functional <em>location</em> where the attack operates &mdash; neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all {totalTechniques} known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.2 Nomenclature</h3>
+        <div class="prose mb-6">
+          <p>
+            Each tactic and technique follows a structured naming convention:
+          </p>
+        </div>
+
+        <!-- Nomenclature breakdown -->
+        <div class="glass rounded-xl p-8 mb-8">
+          <div class="text-center mb-6">
+            <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] tracking-wider">
+              QIF-<span class="text-[var(--color-accent-primary)]">N</span>.<span class="text-[var(--color-accent-secondary)]">IJ</span>
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2">Example: Neural Injection tactic</p>
+          </div>
+          <div class="grid sm:grid-cols-3 gap-4 text-center">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Prefix</p>
+              <p class="font-[family-name:var(--font-mono)] text-sm">QIF-</p>
+              <p class="text-xs text-[var(--color-text-muted)] mt-1">Framework namespace</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Domain Code</p>
+              <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-primary)]">N</p>
+              <p class="text-xs text-[var(--color-text-muted)] mt-1">One of {totalDomains} domains (Neural)</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Action Code</p>
+              <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-secondary)]">IJ</p>
+              <p class="text-xs text-[var(--color-text-muted)] mt-1">Two-letter action verb (Injection)</p>
+            </div>
+          </div>
+          <div class="border-t border-[var(--color-border)] mt-6 pt-6 text-center">
+            <p class="text-xs text-[var(--color-text-faint)] mb-2">Technique IDs use flat sequential numbering:</p>
+            <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)]">QIF-T0001 &hellip; QIF-T{String(totalTechniques).padStart(4, '0')}</p>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">No hierarchy encoded in IDs. New techniques append to the end.</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.3 Seven Operational Domains</h3>
+        <div class="prose mb-6">
+          <p>The {totalDomains} domains partition the BCI attack surface by the system being targeted:</p>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Code</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Domain</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(THREAT_DOMAINS as any[]).map((d: any) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold text-[var(--color-accent-primary)]">{d.code}</td>
+                  <td class="py-3 px-4 font-medium">{d.name}</td>
+                  <td class="py-3 px-4 text-[var(--color-text-muted)]">{d.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="prose mb-6">
+          <p>
+            Domains N, C, and P have <strong>no equivalent</strong> in traditional cybersecurity taxonomies. They represent attack surfaces that only exist when one endpoint of the system is a human brain. This is the fundamental gap that the Locus Taxonomy fills.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.4 Eleven Tactics</h3>
+        <div class="prose mb-6">
+          <p>Each domain contains one or more tactics, each describing an adversary&rsquo;s operational objective:</p>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Tactic ID</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Name</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Domain</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Techniques</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tacticsWithCounts.map((t) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{t.id}</td>
+                  <td class="py-3 px-4 font-medium">{t.name}</td>
+                  <td class="py-3 px-4 text-[var(--color-text-muted)]">{t.domain}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)]">{t.count}</td>
+                  <td class="py-3 px-4 text-[var(--color-text-muted)]">{t.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="glass rounded-xl p-5 mb-6" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Key distinction:</strong> Tactics QIF-N.MD (Neural Modulation), QIF-C.EX (Cognitive Exploitation), QIF-E.RD (Energy Radiation), and QIF-M.SV (Model Subversion) have <strong>no equivalent in any existing cybersecurity taxonomy</strong>. They were created for BCI-specific attack objectives that traditional frameworks cannot represent.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.5 Registry Structure</h3>
+        <div class="prose mb-6">
+          <p>
+            Each of the {totalTechniques} techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability (classical vs. QI-enhanced), evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a QNIS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
+          </p>
+        </div>
+
+        <!-- Evidence status breakdown -->
+        <div class="grid sm:grid-cols-4 gap-4 mb-8">
+          {([
+            { key: 'CONFIRMED' as const, label: 'Confirmed', desc: 'Real-world incidents', color: '#ef4444' },
+            { key: 'DEMONSTRATED' as const, label: 'Demonstrated', desc: 'Lab-proven attacks', color: '#f59e0b' },
+            { key: 'THEORETICAL' as const, label: 'Theoretical', desc: 'Plausible from principles', color: '#8b5cf6' },
+            { key: 'EMERGING' as const, label: 'Emerging', desc: 'Newly identified', color: '#06b6d4' },
+          ]).map((s) => (
+            <div class="glass rounded-lg p-4 text-center">
+              <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style={`color: ${s.color};`}>{statusStats[s.key]}</div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mt-1">{s.label}</div>
+              <p class="text-xs text-[var(--color-text-muted)] mt-1">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 6.5 QNIS Scoring -->
+      <section id="qnis" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.5 QNIS v1.0 &mdash; QIF Neural Impact Score</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.1 Why Not CVSS?</h3>
+        <div class="prose mb-8">
+          <p>
+            CVSS (Common Vulnerability Scoring System) is the industry standard for vulnerability scoring in traditional IT systems. However, CVSS measures impact in terms of confidentiality, integrity, and availability of <em>data and services</em>. It has no concept of:
+          </p>
+          <ul>
+            <li><strong>Biological damage</strong> &mdash; can this attack cause tissue harm, seizures, or neurological damage?</li>
+            <li><strong>Cognitive integrity</strong> &mdash; can this attack alter memory, perception, or sense of agency?</li>
+            <li><strong>Reversibility</strong> &mdash; can the damage be undone, or is it permanent?</li>
+            <li><strong>Violation of consent</strong> &mdash; does this attack bypass the subject&rsquo;s informed consent?</li>
+            <li><strong>Neuroplasticity effects</strong> &mdash; can repeated exposure cause lasting changes to neural pathways?</li>
+          </ul>
+          <p>
+            QNIS v1.0 retains the 0&ndash;10 scoring scale and metric-group structure familiar from CVSS, but replaces the CIA triad with <strong>BCI triad</strong> metrics (Biological Impact, Cognitive Integrity, Information Impact) and adds supplemental human-impact modifiers.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.2 Score Formula</h3>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            BaseScore = 0.3 &times; Exploitability + 0.7 &times; Impact
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            Human impact weighted 70%. System exploitability weighted 30%.
+          </p>
+        </div>
+        <div class="prose mb-8">
+          <p>
+            The 70/30 weighting is a deliberate inversion of traditional vulnerability scoring, which typically weights exploitability more heavily. In BCI security, a hard-to-exploit attack that causes cognitive damage is more dangerous than an easy-to-exploit attack that only affects device availability.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.3 Metric Groups</h3>
+
+        <!-- Exploitability Metrics -->
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4" style="color: var(--color-accent-secondary);">Exploitability Metrics (30%)</h4>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Metric</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Values</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">AV</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Network / Wireless / Local / Physical</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Attack Vector.</strong> Physical includes electrode contact. Wireless includes RF/BLE attacks on implants.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">AC</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Low / High</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Attack Complexity.</strong> High requires specialized neuroscience knowledge or calibrated equipment.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">PR</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Privileges Required.</strong> Low = BCI app-level access. High = firmware or clinical access.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">UI</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Passive / Active</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>User Interaction.</strong> Passive = user must be using BCI. Active = user must perform specific cognitive task.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Impact Metrics -->
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4" style="color: var(--color-accent-primary);">Impact Metrics (70%)</h4>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Metric</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Values</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #ef4444;">BI</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High / Critical</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Biological Impact.</strong> Physical harm to neural tissue. Critical = seizure induction, tissue damage.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #8b5cf6;">CI</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High / Critical</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Cognitive Integrity.</strong> Alteration of thought, memory, or identity. Critical = involuntary behavioral change.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #06b6d4;">II</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Information Impact.</strong> Exposure of neural data. High = raw brainwave exfiltration, cognitive state inference.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">S</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Unchanged / Changed</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Scope.</strong> Changed = attack affects systems beyond the target BCI (e.g., shared neural network).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Supplemental Metrics -->
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4" style="color: #f59e0b;">Supplemental &amp; Threat Metrics</h4>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Metric</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Values</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">R</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Automatic / Supported / Irreversible</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Reversibility.</strong> Can the damage be undone? Irreversible = permanent neural change.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">VC</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Implicit / Explicit</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Violation of Consent.</strong> Does the attack bypass informed consent? Explicit = clear neurological autonomy violation.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">NE</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Growth / Degenerative</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Neuroplasticity.</strong> Can repeated exposure cause lasting pathway changes? Degenerative = irreversible via LTP/LTD.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">E</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Unproven / PoC / Active</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Exploit Maturity.</strong> Evidence level: Active = used in real-world incidents.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.4 Vector Format</h3>
+        <div class="glass rounded-xl p-6 mb-8">
+          <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-3">Example: Signal Injection (QIF-T0001)</p>
+          <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all">
+            QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A
+          </p>
+          <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1 mt-4 text-xs text-[var(--color-text-muted)]">
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">AV:P</span> &mdash; Physical access required (electrode contact)</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">AC:L</span> &mdash; Low complexity (known technique)</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">BI:H</span> &mdash; High biological impact (neural tissue)</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">CI:H</span> &mdash; High cognitive integrity impact</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">R:S</span> &mdash; Reversibility requires clinical support</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">VC:E</span> &mdash; Explicit violation of consent</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">NE:G</span> &mdash; Neuroplastic growth effects possible</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">E:A</span> &mdash; Active: demonstrated in real-world settings</div>
+          </div>
+          <div class="border-t border-[var(--color-border)] mt-4 pt-4">
+            <p class="text-sm font-semibold">Score: <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">7.3 / 10.0</span> <span class="text-xs px-2 py-0.5 rounded-full ml-2" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">HIGH</span></p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.5 Severity Levels</h3>
+        <div class="grid sm:grid-cols-4 gap-4 mb-8">
+          <div class="glass rounded-lg p-4 text-center" style="border-left: 3px solid #ef4444;">
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style="color: #ef4444;">9.0&ndash;10.0</div>
+            <div class="text-xs font-semibold mt-1">Critical</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Irreversible neural damage or complete cognitive compromise</p>
+          </div>
+          <div class="glass rounded-lg p-4 text-center" style="border-left: 3px solid #f97316;">
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style="color: #f97316;">7.0&ndash;8.9</div>
+            <div class="text-xs font-semibold mt-1">High</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Significant biological or cognitive harm, clinical intervention required</p>
+          </div>
+          <div class="glass rounded-lg p-4 text-center" style="border-left: 3px solid #f59e0b;">
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style="color: #f59e0b;">4.0&ndash;6.9</div>
+            <div class="text-xs font-semibold mt-1">Medium</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Moderate impact, self-resolving or minor intervention</p>
+          </div>
+          <div class="glass rounded-lg p-4 text-center" style="border-left: 3px solid #10b981;">
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style="color: #10b981;">0.1&ndash;3.9</div>
+            <div class="text-xs font-semibold mt-1">Low</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Minimal human impact, primarily device/data level</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.6 Registry Distribution</h3>
+        <div class="prose mb-6">
+          <p>
+            Across all {totalTechniques} techniques, QNIS scoring produces the following severity distribution:
+          </p>
+        </div>
+        <div class="glass rounded-xl p-6 mb-8">
+          <div class="space-y-3">
+            {[
+              { label: 'Critical (9.0+)', count: qnisStats.critical, color: '#ef4444' },
+              { label: 'High (7.0\u20138.9)', count: qnisStats.high, color: '#f97316' },
+              { label: 'Medium (4.0\u20136.9)', count: qnisStats.medium, color: '#f59e0b' },
+              { label: 'Low (0.1\u20133.9)', count: qnisStats.low, color: '#10b981' },
+            ].filter(b => b.count > 0).map((b) => (
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="font-medium">{b.label}</span>
+                  <span class="font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{b.count} techniques</span>
+                </div>
+                <div class="w-full h-6 rounded bg-[var(--color-bg-deep)] overflow-hidden">
+                  <div class="h-full rounded" style={`width: ${((b.count / totalTechniques) * 100).toFixed(1)}%; background: ${b.color};`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-4">
+            The skew toward high severity is expected: BCI attacks inherently involve the human body, so most techniques carry significant biological, cognitive, or consent implications that inflate impact scores relative to traditional IT vulnerabilities.
+          </p>
+        </div>
+
+        <div class="text-center mt-6">
+          <a href="/threats/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+            Explore all {totalTechniques} techniques in the interactive Threat Registry &rarr;
+          </a>
         </div>
       </section>
 
@@ -788,6 +1120,9 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
             <li>An 11-band hourglass model derived from neuroanatomy and physics</li>
             <li>A unified equation QI(b,t) = e<sup>&minus;S(b,t)</sup> with Boltzmann-factor structure</li>
             <li>A five-mechanism attack coupling taxonomy</li>
+            <li>The <strong>QIF Locus Taxonomy</strong> &mdash; a BCI-native threat classification with {totalDomains} domains and {totalTactics} tactics</li>
+            <li><strong>QNIS v1.0</strong> &mdash; a neural impact scoring system that prioritizes human harm over system availability</li>
+            <li>A registry of {totalTechniques} attack techniques with evidence status and QNIS severity scores</li>
             <li>A post-quantum communication protocol (NSP)</li>
             <li>A content compression pipeline (Project Runemate)</li>
             <li>Explicit falsifiability conditions</li>

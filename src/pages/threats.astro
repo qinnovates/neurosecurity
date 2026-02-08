@@ -11,14 +11,14 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
 
 <PageLayout
   title="QIF Threat Registry"
-  description="Interactive attack matrix mapping 64 BCI threat techniques across 11 hourglass bands, 8 attack categories, and 4 evidence levels."
+  description={`Interactive attack matrix mapping ${THREAT_VECTORS.length} BCI threat techniques across 11 hourglass bands, 8 attack categories, and 4 evidence levels.`}
   breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'Threat Registry' }]}
   maxWidth="wide"
 >
   <div class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QIF Threat Registry</h1>
     <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
-      64 QIF Locus techniques across 11 tactics and 11 hourglass bands &mdash; scored with QNIS v1.0
+      {THREAT_VECTORS.length} QIF Locus techniques across {THREAT_CATEGORIES.length} categories and 11 hourglass bands &mdash; scored with QNIS v1.0
     </p>
 
     <!-- Status breakdown -->

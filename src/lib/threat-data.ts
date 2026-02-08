@@ -1,6 +1,6 @@
 /**
  * QIF Threat Data — adapter over shared/threat-registry.json (v3.0)
- * Single source of truth: all 64 techniques from the QIF Locus Taxonomy.
+ * Single source of truth: all techniques from the QIF Locus Taxonomy.
  * Scoring: QNIS v1.0 (QIF Neural Impact Score)
  */
 
@@ -179,4 +179,17 @@ export function getRegistryStats() {
 export function getTacticName(tacticId: string): string {
   const tactic = THREAT_TACTICS.find((t: any) => t.id === tacticId);
   return tactic ? (tactic as any).name : tacticId;
+}
+
+/** Get tactic details with computed technique counts */
+export function getTacticsWithCounts() {
+  return THREAT_TACTICS.map((t: any) => ({
+    id: t.id as string,
+    name: t.name as string,
+    domain: t.domain as string,
+    domain_code: t.domain_code as string,
+    action_code: t.action_code as string,
+    description: t.description as string,
+    count: THREAT_VECTORS.filter(v => v.tactic === t.id).length,
+  }));
 }

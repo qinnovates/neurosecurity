@@ -790,7 +790,7 @@ const QIF_DATA = {
     {id:"S3",name:"Radio / Wireless / DE",zone:"silicon",description:"RF, wireless links, directed energy, application layer (1 GHz+)",brain_regions:[],dominant_freq_hz:"1 GHz+",L_m:[3e-5,0.3],determinacy:"Deterministic",severity:"N/A (silicon)",severity_description:"RF hijack, directed energy, cloud compromise, supply chain attack",qi_range:[0.0,0.0],hourglass_width:1.0,bci_devices:["BLE/WiFi consumer, satellite links, DE weapons"]},
   ],
 
-  // Threat model — loaded async from /data/threat-registry.json (60 techniques)
+  // Threat model — loaded async from /data/threat-registry.json (64 techniques)
   // Fallback: 18 inline threats for offline/error resilience
   threat_model: [],
 
@@ -1612,7 +1612,7 @@ class Tooltip {
 // ════════════════════════════════════════════════════════════════
 
 // ════════════════════════════════════════════════════════════════
-// REGISTRY LOADER — fetch 60 techniques from shared registry
+// REGISTRY LOADER — fetch 64 techniques from shared registry
 // ════════════════════════════════════════════════════════════════
 
 async function loadRegistry() {

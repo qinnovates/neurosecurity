@@ -2,6 +2,22 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import { HOURGLASS_BANDS, COHERENCE, SCALE_FREQUENCY, QIF_VERSION } from '../lib/qif-constants';
 import Hourglass3D from '../components/Hourglass3D';
+import { THREAT_VECTORS, THREAT_TACTICS, THREAT_DOMAINS, getTacticsWithCounts } from '../lib/threat-data';
+
+const tacticsWithCounts = getTacticsWithCounts();
+const totalTechniques = THREAT_VECTORS.length;
+const totalTactics = THREAT_TACTICS.length;
+const totalDomains = (THREAT_DOMAINS as any[]).length;
+
+const tacticColors: Record<string, string> = {
+  'N': '#06b6d4',   // Neural → cyan
+  'C': '#f59e0b',   // Cognitive → amber
+  'P': '#ef4444',   // Physiological → red
+  'D': '#06b6d4',   // Data → cyan
+  'B': '#8b5cf6',   // BCI System → violet
+  'M': '#10b981',   // Model → emerald
+  'E': '#f97316',   // Energy → orange
+};
 ---
 
 <PageLayout
@@ -22,6 +38,8 @@ import Hourglass3D from '../components/Hourglass3D';
           { href: '#coherence', label: 'Coherence Metric' },
           { href: '#scale-frequency', label: 'Scale-Frequency' },
           { href: '#threat-model', label: 'Threat Model' },
+          { href: '#taxonomy', label: 'Locus Taxonomy' },
+          { href: '#qnis', label: 'QNIS Scoring' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -200,15 +218,71 @@ import Hourglass3D from '../components/Hourglass3D';
       <!-- Threat Model -->
       <section id="threat-model" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Threat Model</h2>
-        <div class="prose">
+        <div class="prose mb-8">
           <p>
             QIF defines threat vectors at each band of the hourglass. The model spans from physical hardware attacks (S3) through protocol exploitation (S1), neural signal manipulation (N1-N5), and cognitive integrity threats (N6-N7).
           </p>
           <p>
-            The Neural Interface (I0) represents the highest-risk surface — where digital signals become neural stimulation and neural readings become digital data. Every attack that crosses this boundary is potentially irreversible in ways that traditional cybersecurity never encounters.
+            The Neural Interface (I0) represents the highest-risk surface &mdash; where digital signals become neural stimulation and neural readings become digital data. Every attack that crosses this boundary is potentially irreversible in ways that traditional cybersecurity never encounters.
           </p>
+        </div>
+
+        <h3 id="taxonomy" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">QIF Locus Taxonomy</h3>
+        <div class="prose mb-6">
           <p>
-            For detailed threat taxonomy and mitigation specifications, see the <a href="/whitepaper/">QIF Whitepaper</a>.
+            QIF classifies attacks using the <strong>Locus Taxonomy</strong> &mdash; an original naming convention organized by the anatomical or functional <em>location</em> where the attack operates. {totalDomains} domains map to {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+          {tacticsWithCounts.map((t) => {
+            const color = tacticColors[t.domain_code] ?? '#94a3b8';
+            return (
+              <div class="glass rounded-lg p-3" style={`border-left: 3px solid ${color};`}>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold font-[family-name:var(--font-mono)]" style={`color: ${color};`}>{t.id}</span>
+                  <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">{t.count}</span>
+                </div>
+                <div class="text-sm font-medium mt-1">{t.name}</div>
+              </div>
+            );
+          })}
+        </div>
+
+        <h3 id="qnis" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">QNIS v1.0 Scoring</h3>
+        <div class="prose mb-6">
+          <p>
+            Each technique is scored using <strong>QNIS</strong> (QIF Neural Impact Score), a 0&ndash;10 scale that weights human impact at 70% and system exploitability at 30%. QNIS adds dimensions that CVSS lacks: Biological Impact, Cognitive Integrity, Reversibility, Violation of Consent, and Neuroplasticity.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-8">
+          <p class="text-center font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            BaseScore = 0.3 &times; Exploitability + 0.7 &times; Impact
+          </p>
+          <div class="grid grid-cols-4 gap-3 text-center">
+            <div>
+              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #ef4444;">9.0+</div>
+              <div class="text-xs text-[var(--color-text-faint)]">Critical</div>
+            </div>
+            <div>
+              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #f97316;">7.0&ndash;8.9</div>
+              <div class="text-xs text-[var(--color-text-faint)]">High</div>
+            </div>
+            <div>
+              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #f59e0b;">4.0&ndash;6.9</div>
+              <div class="text-xs text-[var(--color-text-faint)]">Medium</div>
+            </div>
+            <div>
+              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #10b981;">0.1&ndash;3.9</div>
+              <div class="text-xs text-[var(--color-text-faint)]">Low</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>
+            For the complete taxonomy derivation, QNIS metric definitions, and full technique registry, see the <a href="/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a> or explore the <a href="/threats/">interactive Threat Registry</a>.
           </p>
         </div>
       </section>

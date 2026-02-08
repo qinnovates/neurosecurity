@@ -1,6 +1,10 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
+import { THREAT_VECTORS, THREAT_TACTICS } from '../lib/threat-data';
+
+const totalTechniques = THREAT_VECTORS.length;
+const totalTactics = THREAT_TACTICS.length;
 ---
 
 <PageLayout
@@ -39,12 +43,12 @@ import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
     </a>
     <a href="/threats/" class="explore-card glass rounded-xl p-6 block group relative overflow-hidden">
       <div class="absolute top-3 right-3">
-        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-status-danger)]/10 text-[var(--color-status-danger)] font-semibold uppercase tracking-wider">64 techniques</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-status-danger)]/10 text-[var(--color-status-danger)] font-semibold uppercase tracking-wider">{totalTechniques} techniques</span>
       </div>
       <div class="text-3xl mb-4 text-[var(--color-status-danger)]">&#9888;</div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Threat Registry</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
-        64 BCI techniques using the QIF Locus Taxonomy across 11 tactics, scored with QNIS v1.0. Filter by severity, status, zone, or search.
+        {totalTechniques} BCI techniques using the QIF Locus Taxonomy across {totalTactics} tactics, scored with QNIS v1.0. Filter by severity, status, zone, or search.
       </p>
       <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; Attack vector registry</span>
     </a>

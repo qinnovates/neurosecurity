@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
+import { THREAT_VECTORS } from '../lib/threat-data';
 ---
 
 <PageLayout
@@ -38,7 +39,7 @@ import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
       <div class="text-2xl mb-3 text-[var(--color-status-danger)]">&#9888;</div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Threat Map</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
-        18 attack vectors mapped across bands and categories with severity heatmapping.
+        {THREAT_VECTORS.length} attack vectors mapped across bands and categories with severity heatmapping.
       </p>
       <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /threats/</span>
     </a>
