@@ -20,9 +20,9 @@ const BANDS: BandData[] = [
   { id: 'N2', name: 'Brainstem', domain: 'Neural', color: '#d9f99d', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
   { id: 'N1', name: 'Spinal Cord', domain: 'Neural', color: '#ecfccb', description: 'Cervical through sacral — reflexes, peripheral relay' },
   { id: 'I0', name: 'Neural Interface', domain: 'Interface', color: '#f59e0b', description: 'Electrode-tissue boundary — measurement/collapse, quasi-quantum zone' },
-  { id: 'S1', name: 'Analog / Near-Field', domain: 'Silicon', color: '#93c5fd', description: 'Amplification, ADC, near-field EM (0-10 kHz)' },
-  { id: 'S2', name: 'Digital / Telemetry', domain: 'Silicon', color: '#60a5fa', description: 'Decoding, BLE/WiFi, telemetry (10 kHz - 1 GHz)' },
-  { id: 'S3', name: 'Radio / Wireless / DE', domain: 'Silicon', color: '#3b82f6', description: 'RF, directed energy, application layer (1 GHz+)' },
+  { id: 'S1', name: 'Analog / Near-Field', domain: 'Synthetic', color: '#93c5fd', description: 'Amplification, ADC, near-field EM (0-10 kHz)' },
+  { id: 'S2', name: 'Digital / Telemetry', domain: 'Synthetic', color: '#60a5fa', description: 'Decoding, BLE/WiFi, telemetry (10 kHz - 1 GHz)' },
+  { id: 'S3', name: 'Radio / Wireless / DE', domain: 'Synthetic', color: '#3b82f6', description: 'RF, directed energy, application layer (1 GHz+)' },
 ];
 
 const BAND_RADII = [1.4, 1.3, 1.15, 1.0, 0.85, 0.7, 0.55, 0.45, 0.7, 0.9, 1.2];

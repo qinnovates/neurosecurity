@@ -27,7 +27,7 @@
   --severity-critical: #ff6b35;
   --severity-high: #d29922;
   --severity-severe: #e3b341;
-  --severity-silicon: #58a6ff;
+  --severity-synthetic: #58a6ff;
   --severity-interface: #bc8cff;
   --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
@@ -318,7 +318,7 @@ main {
 .severity-badge.critical { background: rgba(255,107,53,0.15); color: var(--severity-critical); border: 1px solid rgba(255,107,53,0.3); }
 .severity-badge.high { background: rgba(210,153,34,0.15); color: var(--severity-high); border: 1px solid rgba(210,153,34,0.3); }
 .severity-badge.severe { background: rgba(227,179,65,0.15); color: var(--severity-severe); border: 1px solid rgba(227,179,65,0.3); }
-.severity-badge.silicon { background: rgba(88,166,255,0.1); color: var(--severity-silicon); border: 1px solid rgba(88,166,255,0.2); }
+.severity-badge.synthetic { background: rgba(88,166,255,0.1); color: var(--severity-synthetic); border: 1px solid rgba(88,166,255,0.2); }
 .severity-badge.interface { background: rgba(188,140,255,0.1); color: #bc8cff; border: 1px solid rgba(188,140,255,0.2); }
 
 /* ── Band Detail View (Full Screen Overlay) ── */
@@ -476,7 +476,7 @@ main {
 }
 
 .freq-entry.neural { border-left-color: var(--green); }
-.freq-entry.silicon { border-left-color: var(--blue); }
+.freq-entry.synthetic { border-left-color: var(--blue); }
 .freq-entry.attack { border-left-color: var(--red); background: rgba(248,81,73,0.05); }
 .freq-entry.restricted { opacity: 0.7; }
 
@@ -658,9 +658,9 @@ const QIF_DATA = {
     {id:"N2",name:"Brainstem",zone:"neural",description:"Medulla, pons, midbrain, cranial nerve nuclei \u2014 vital functions, arousal, reflexes",brain_regions:["medulla","pons","midbrain","reticular_formation","cranial_nuclei"],dominant_freq_hz:"0.5-4 (Delta, low-frequency rhythmic)",L_m:[1.0,null],determinacy:"Stochastic",severity:"LETHAL",severity_description:"Respiratory arrest, cardiac failure, loss of consciousness, cranial nerve paralysis",qi_range:[0.05,0.15],hourglass_width:0.3,bci_devices:["Vagus nerve stimulators","auditory brainstem implants","DBS (PPN for gait)"]},
     {id:"N1",name:"Spinal Cord",zone:"neural",description:"Cervical, thoracic, lumbar, sacral, cauda equina \u2014 reflexes, peripheral motor/sensory relay",brain_regions:["cervical_cord","thoracic_cord","lumbar_cord","sacral_cord","cauda_equina"],dominant_freq_hz:"Reflex arcs (ms-scale, not oscillatory)",L_m:null,determinacy:"Stochastic",severity:"Severe",severity_description:"Paralysis (quadri/para), bladder/bowel dysfunction, chronic pain, autonomic dysreflexia",qi_range:[0.02,0.1],hourglass_width:0.25,bci_devices:["Spinal cord stimulators (SCS)","InterStim (sacral)","epidural stimulation","ONWARD ARC-IM"]},
     {id:"I0",name:"Neural Interface",zone:"interface",description:"Electrode-tissue boundary, measurement/collapse, quasi-quantum zone",brain_regions:[],dominant_freq_hz:"N/A (boundary)",L_m:null,determinacy:"Quasi-quantum (\u0393D \u2208 (0,1))",severity:"Depends on adjacent N band",severity_description:"Interface degradation, impedance failure, tissue damage, signal corruption",qi_range:[0.01,0.1],hourglass_width:0.2,bci_devices:["All implanted/semi-invasive BCIs"]},
-    {id:"S1",name:"Analog / Near-Field",zone:"silicon",description:"Amplification, filtering, ADC/DAC, near-field EM (0 Hz \u2013 10 kHz)",brain_regions:[],dominant_freq_hz:"0-10 kHz",L_m:[3e4,null],determinacy:"Stochastic (analog noise)",severity:"N/A (silicon)",severity_description:"Signal corruption, ADC saturation, impedance artifact",qi_range:[0.001,0.01],hourglass_width:0.35,bci_devices:["All BCIs (analog front-end)"]},
-    {id:"S2",name:"Digital / Telemetry",zone:"silicon",description:"Decoding, classification, telemetry, MICS (10 kHz \u2013 1 GHz)",brain_regions:[],dominant_freq_hz:"10 kHz - 1 GHz",L_m:[0.3,3e4],determinacy:"Deterministic",severity:"N/A (silicon)",severity_description:"Data corruption, BLE exploit, MICS intermodulation, firmware compromise",qi_range:[0.0,0.0],hourglass_width:0.7,bci_devices:["All wireless BCIs (BLE, WiFi, MICS)"]},
-    {id:"S3",name:"Radio / Wireless / DE",zone:"silicon",description:"RF, wireless links, directed energy, application layer (1 GHz+)",brain_regions:[],dominant_freq_hz:"1 GHz+",L_m:[3e-5,0.3],determinacy:"Deterministic",severity:"N/A (silicon)",severity_description:"RF hijack, directed energy, cloud compromise, supply chain attack",qi_range:[0.0,0.0],hourglass_width:1.0,bci_devices:["BLE/WiFi consumer, satellite links, DE weapons"]},
+    {id:"S1",name:"Analog / Near-Field",zone:"synthetic",description:"Amplification, filtering, ADC/DAC, near-field EM (0 Hz \u2013 10 kHz)",brain_regions:[],dominant_freq_hz:"0-10 kHz",L_m:[3e4,null],determinacy:"Stochastic (analog noise)",severity:"N/A (synthetic)",severity_description:"Signal corruption, ADC saturation, impedance artifact",qi_range:[0.001,0.01],hourglass_width:0.35,bci_devices:["All BCIs (analog front-end)"]},
+    {id:"S2",name:"Digital / Telemetry",zone:"synthetic",description:"Decoding, classification, telemetry, MICS (10 kHz \u2013 1 GHz)",brain_regions:[],dominant_freq_hz:"10 kHz - 1 GHz",L_m:[0.3,3e4],determinacy:"Deterministic",severity:"N/A (synthetic)",severity_description:"Data corruption, BLE exploit, MICS intermodulation, firmware compromise",qi_range:[0.0,0.0],hourglass_width:0.7,bci_devices:["All wireless BCIs (BLE, WiFi, MICS)"]},
+    {id:"S3",name:"Radio / Wireless / DE",zone:"synthetic",description:"RF, wireless links, directed energy, application layer (1 GHz+)",brain_regions:[],dominant_freq_hz:"1 GHz+",L_m:[3e-5,0.3],determinacy:"Deterministic",severity:"N/A (synthetic)",severity_description:"RF hijack, directed energy, cloud compromise, supply chain attack",qi_range:[0.0,0.0],hourglass_width:1.0,bci_devices:["BLE/WiFi consumer, satellite links, DE weapons"]},
   ],
 
   threat_model: [
@@ -672,7 +672,7 @@ const QIF_DATA = {
     {attack:"Quantum tunneling exploit",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling profile anomaly)",notes:"Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation."},
     {attack:"Davydov soliton attack",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling term Q_tunnel)",notes:"Use THz stimulation to trigger Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0."},
     {attack:"Identity spoofing",bands_str:"N3\u2013N7",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (quantum biometric)",notes:"Replicate user's neural signature to bypass authentication. Classical biometrics partially spoofable. Quantum neural signatures (if proven) are physically unclonable."},
-    // ── Silicon / cyber attacks (v3.1 additions) ──
+    // ── Synthetic / cyber attacks (v3.1 additions) ──
     {attack:"BLE/RF side-channel",bands_str:"S1\u2013S2",band_ids:["S1","S2"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (signal correlation)",notes:"Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. QI cross-band correlation detects exfiltration patterns."},
     {attack:"Supply chain compromise",bands_str:"S2\u2013S3",band_ids:["S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (firmware attestation)",notes:"Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Affects all device classes. QI-enhanced firmware attestation detects unauthorized modifications."},
     {attack:"Cloud infrastructure attack",bands_str:"S3",band_ids:["S3"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (QKD for data-in-transit)",notes:"Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit."},
@@ -748,7 +748,7 @@ const QIF_DATA = {
     {band:"Delta",range:"0.5-4 Hz",mid:2,L:"15-20 cm"},
   ],
 
-  freq_silicon: [
+  freq_synthetic: [
     {band:"ELF",range:"3-76 Hz",access:"RESTRICTED",attack:true},
     {band:"SLF",range:"30-300 Hz",access:"RESTRICTED",attack:true},
     {band:"VLF",range:"3-30 kHz",access:"RESTRICTED",attack:true},
@@ -772,13 +772,13 @@ const QIF_DATA = {
 // ════════════════════════════════════════════════════════════════
 
 function getSeverityClass(sev) {
-  if (!sev) return 'silicon';
+  if (!sev) return 'synthetic';
   const s = sev.toLowerCase();
   if (s === 'lethal') return 'lethal';
   if (s === 'critical') return 'critical';
   if (s === 'high') return 'high';
   if (s === 'severe') return 'severe';
-  if (s.includes('silicon') || s.includes('n/a')) return 'silicon';
+  if (s.includes('synthetic') || s.includes('n/a')) return 'synthetic';
   if (s.includes('depends')) return 'interface';
   return 'high';
 }
@@ -789,7 +789,7 @@ function getBandColor(band) {
     critical: '#ff6b35',
     high: '#d29922',
     severe: '#e3b341',
-    silicon: '#58a6ff',
+    synthetic: '#58a6ff',
     interface: '#bc8cff',
   };
   return colors[getSeverityClass(band.severity)] || '#58a6ff';
@@ -853,7 +853,7 @@ class HourglassView {
     const main = document.createElement('div');
     main.className = 'hourglass-main';
 
-    // Reverse: Silicon (top) → I0 (middle) → Neural (bottom) = physical layout
+    // Reverse: Synthetic (top) → I0 (middle) → Neural (bottom) = physical layout
     const bands = [...this.data.bands].reverse();
     let prevZone = null;
 
@@ -864,7 +864,7 @@ class HourglassView {
           const sep = document.createElement('div');
           sep.className = 'zone-separator';
           const zoneName = band.zone === 'interface' ? 'I0 \u2014 Interface Bottleneck' :
-                          band.zone === 'silicon' ? 'Synthetic Domain' : 'Neural Domain';
+                          band.zone === 'synthetic' ? 'Synthetic Domain' : 'Neural Domain';
           sep.innerHTML = `<div class="line"></div><span class="zone-label">${zoneName}</span><div class="line"></div>`;
           main.appendChild(sep);
         } else {
@@ -1279,10 +1279,10 @@ class FrequencySpectrum {
     }
     html += '</div>';
 
-    html += '<div class="freq-section-title">Silicon / RF Allocations</div>';
+    html += '<div class="freq-section-title">Synthetic / RF Allocations</div>';
     html += '<div class="freq-ruler">';
-    for (const f of this.data.freq_silicon) {
-      const cls = ['freq-entry', 'silicon'];
+    for (const f of this.data.freq_synthetic) {
+      const cls = ['freq-entry', 'synthetic'];
       if (f.attack) cls.push('attack');
       if (f.access === 'RESTRICTED' || f.access === 'CLASSIFIED') cls.push('restricted');
       html += `<div class="${cls.join(' ')}">
