@@ -1,6 +1,6 @@
 /**
  * QIF Threat Data — adapter over shared/threat-registry.json
- * Single source of truth: all 60 techniques come from the registry.
+ * Single source of truth: all 64 techniques come from the registry.
  *
  * Categories are inspired by MITRE ATT&CK but adapted for BCI/neural security.
  */

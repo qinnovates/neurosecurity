@@ -8,7 +8,7 @@
     "note": "Designed for future MITRE collaboration — our IDs can be adopted or cross-referenced without conflict."
   },
   "statistics": {
-    "total_techniques": 60,
+    "total_techniques": 64,
     "total_tactics": 11,
     "by_tactic": {
       "TA0002": 5,
@@ -31,19 +31,19 @@
     },
     "by_severity": {
       "critical": 16,
-      "high": 30,
-      "medium": 12,
-      "low": 2
+      "high": 34,
+      "medium": 13,
+      "low": 1
     },
     "by_ui_category": {
       "SI": 9,
       "SE": 4,
-      "DM": 12,
-      "DS": 6,
-      "PE": 6,
-      "CI": 8,
+      "DM": 13,
+      "DS": 7,
+      "PE": 8,
+      "CI": 7,
       "PS": 5,
-      "EX": 10
+      "EX": 11
     }
   },
   "tactics": [
@@ -177,7 +177,7 @@
       "sources": [
         "Pycroft et al. 2016"
       ],
-      "status": "THEORETICAL",
+      "status": "EMERGING",
       "severity": "critical",
       "ui_category": "DS",
       "notes": "Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse. Distinct from Neural DoS: ransomware implies conditional restoration.",
@@ -864,6 +864,37 @@
       "legacy_ids": []
     },
     {
+      "id": "T2209",
+      "attack": "Training data poisoning (model bias injection)",
+      "category": "TA0053",
+      "bands": "S2",
+      "band_ids": [
+        "S2"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Partial",
+      "quantum": "Enhanced (data provenance verification)",
+      "mitre": {
+        "tactics": [
+          "TA0053",
+          "TA0001"
+        ],
+        "techniques": [
+          "T1565.001"
+        ],
+        "note": "Maps to Stored Data Manipulation (T1565.001) — subtly contaminate training data to introduce systematic bias, distinct from backdoor insertion (T2201)"
+      },
+      "sources": [
+        "Biggio et al. 2012; Goldblum et al. 2022"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "DM",
+      "notes": "Subtly contaminate BCI training datasets to introduce systematic bias or weakness without creating a specific trigger (distinct from backdoor T2201). Degraded model performance appears as natural noise. Federated learning and crowd-sourced calibration data are vulnerable entry points.",
+      "legacy_ids": []
+    },
+    {
       "id": "T2301",
       "attack": "Neuronal jamming",
       "category": "TA0040",
@@ -964,7 +995,7 @@
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
       "status": "THEORETICAL",
-      "severity": "low",
+      "severity": "medium",
       "ui_category": "SE",
       "notes": "Systematically probe neural tissue via low-amplitude stimulation pulses to map functional connectivity, identify responsive regions, and characterize individual neural signatures. Prerequisite for targeted attacks.",
       "legacy_ids": []
@@ -1071,6 +1102,37 @@
       "legacy_ids": [
         "ONI-T020"
       ]
+    },
+    {
+      "id": "T2307",
+      "attack": "Battery drain attack (resource depletion)",
+      "category": "TA0040",
+      "bands": "S1–S2",
+      "band_ids": [
+        "S1",
+        "S2"
+      ],
+      "coupling": null,
+      "access": "PUBLIC",
+      "classical": "Yes",
+      "quantum": "Enhanced (power budget monitoring)",
+      "mitre": {
+        "tactics": [
+          "TA0040"
+        ],
+        "techniques": [
+          "T1499"
+        ],
+        "note": "Maps to Endpoint DoS (T1499) — force computationally expensive operations to drain implanted/wearable BCI battery"
+      },
+      "sources": [
+        "Martin et al. 2004 (implant battery attacks)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "DS",
+      "notes": "Force BCI processor to perform computationally expensive tasks (e.g., continuous high-rate sampling, unnecessary ML inference) to drain battery faster than normal. Critical for implanted BCIs where battery replacement requires surgery. Wearable BCIs also affected during critical use periods.",
+      "legacy_ids": []
     },
     {
       "id": "T2401",
@@ -1191,7 +1253,7 @@
       ],
       "status": "DEMONSTRATED",
       "severity": "high",
-      "ui_category": "CI",
+      "ui_category": "EX",
       "notes": "Present stimuli designed to elicit P300 ERP responses revealing private knowledge (PINs, faces, locations). BCI app stores could embed interrogation stimuli in games. Demonstrated on consumer EEG (EMOTIV, NeuroSky).",
       "legacy_ids": []
     },
@@ -1221,7 +1283,7 @@
         "Willett et al. 2023 (Nature)",
         "Meta FAIR 2023"
       ],
-      "status": "EMERGING",
+      "status": "DEMONSTRATED",
       "severity": "critical",
       "ui_category": "CI",
       "notes": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research.",
@@ -1345,7 +1407,7 @@
         "Frank et al. 2024"
       ],
       "status": "EMERGING",
-      "severity": "medium",
+      "severity": "high",
       "ui_category": "PE",
       "notes": "Present carefully designed visual/auditory/haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional) that reveal private information or prime the brain for subsequent attack. BCI app store is the attack surface.",
       "legacy_ids": []
@@ -1647,6 +1709,38 @@
       ]
     },
     {
+      "id": "T2509",
+      "attack": "Hardware fault injection (voltage/EM glitching)",
+      "category": "TA0001",
+      "bands": "S1–S2",
+      "band_ids": [
+        "S1",
+        "S2"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Enhanced (hardware attestation via QI)",
+      "mitre": {
+        "tactics": [
+          "TA0001",
+          "TA0005"
+        ],
+        "techniques": [
+          "T1195.003"
+        ],
+        "note": "Maps to Supply Chain Compromise: Compromise Hardware Supply Chain (T1195.003) — voltage/EM glitches bypass security checks on BCI processor"
+      },
+      "sources": [
+        "Bar-El et al. 2006 (fault injection survey)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "PE",
+      "notes": "Physical attack using voltage glitches, clock manipulation, or electromagnetic pulses to induce faults in BCI processor. Can bypass security checks, extract cryptographic keys, or cause unpredictable stimulation behavior. Requires physical proximity to device.",
+      "legacy_ids": []
+    },
+    {
       "id": "T2601",
       "attack": "Neural data privacy breach",
       "category": "TA0009",
@@ -1909,7 +2003,7 @@
         "Schroder et al. 2025"
       ],
       "status": "DEMONSTRATED",
-      "severity": "medium",
+      "severity": "high",
       "ui_category": "DM",
       "notes": "Subtly corrupt BCI calibration data to maintain influence over signal interpretation across device resets. Cryptographically signed calibration data prevents. Recalibration audits detect drift.",
       "legacy_ids": [
@@ -2071,6 +2165,39 @@
       "legacy_ids": [
         "ONI-T015"
       ]
+    },
+    {
+      "id": "T2807",
+      "attack": "User consent fatigue (neural permission flooding)",
+      "category": "TA0005",
+      "bands": "S2–S3→N7",
+      "band_ids": [
+        "S2",
+        "S3",
+        "N7"
+      ],
+      "coupling": null,
+      "access": "PUBLIC",
+      "classical": "Partial",
+      "quantum": "Enhanced (consent integrity via QI)",
+      "mitre": {
+        "tactics": [
+          "TA0005",
+          "TA0001"
+        ],
+        "techniques": [
+          "T1078"
+        ],
+        "note": "Maps to Valid Accounts (T1078) — flood BCI permission prompts until user mentally approves malicious request out of fatigue"
+      },
+      "sources": [
+        "Felt et al. 2012 (permission fatigue); Bonaci et al. 2015"
+      ],
+      "status": "EMERGING",
+      "severity": "medium",
+      "ui_category": "PE",
+      "notes": "Flood user with BCI-mediated permission requests until cognitive fatigue leads to reflexive approval of malicious requests. Exploits the neural-intent interface where 'yes/no' decisions may be captured from brain signals. BCI app ecosystems with frequent permission prompts are the attack surface.",
+      "legacy_ids": []
     }
   ],
   "deprecated": [
