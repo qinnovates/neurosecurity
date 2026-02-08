@@ -602,7 +602,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.3 Unified Threat Taxonomy</h3>
         <div class="prose mb-6">
           <p>
-            QIF maintains a registry of <strong>{totalTechniques} attack techniques</strong> organized into <strong>{totalTactics} tactics</strong> across <strong>{totalDomains} operational domains</strong> using the <strong>QIF Locus Taxonomy v1.0</strong>. Each technique is scored using <strong>QNIS v1.0</strong> (QIF Neural Impact Score), a BCI-specific vulnerability scoring system that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
+            QIF maintains a registry of <strong>{totalTechniques} attack techniques</strong> organized into <strong>{totalTactics} tactics</strong> across <strong>{totalDomains} operational domains</strong> using the <strong>QIF Locus Taxonomy v1.0</strong>, an original threat classification system developed by Qinnovate. Each technique is scored using <strong>QNIS v1.0</strong> (QIF Neural Impact Score), a BCI-specific vulnerability scoring system developed by Qinnovate as a purpose-built alternative to CVSS that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
           </p>
         </div>
       </section>
@@ -610,6 +610,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
       <!-- 6.4 QIF Locus Taxonomy -->
       <section id="taxonomy" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.4 QIF Locus Taxonomy</h2>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-6">Original classification system developed by Qinnovate</p>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.1 Design Rationale</h3>
         <div class="prose mb-8">
@@ -617,7 +618,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             Existing threat taxonomies (MITRE ATT&amp;CK, CAPEC, CWE) were designed for traditional IT systems. They classify attacks by what happens to <em>software and networks</em>. Brain-computer interfaces require a taxonomy that classifies attacks by what happens to <em>neural tissue, cognition, and human identity</em>. This is a fundamentally different attack surface.
           </p>
           <p>
-            The QIF Locus Taxonomy addresses this gap. &ldquo;Locus&rdquo; refers to the anatomical or functional <em>location</em> where the attack operates &mdash; neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all {totalTechniques} known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ.
+            The QIF Locus Taxonomy, developed by Qinnovate, addresses this gap. &ldquo;Locus&rdquo; refers to the anatomical or functional <em>location</em> where the attack operates &mdash; neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all {totalTechniques} known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is the first threat classification system purpose-built for neural interfaces.
           </p>
         </div>
 
@@ -752,11 +753,12 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
       <!-- 6.5 QNIS Scoring -->
       <section id="qnis" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.5 QNIS v1.0 &mdash; QIF Neural Impact Score</h2>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-6">Original scoring system developed by Qinnovate</p>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.1 Why Not CVSS?</h3>
         <div class="prose mb-8">
           <p>
-            CVSS (Common Vulnerability Scoring System) is the industry standard for vulnerability scoring in traditional IT systems. However, CVSS measures impact in terms of confidentiality, integrity, and availability of <em>data and services</em>. It has no concept of:
+            CVSS (Common Vulnerability Scoring System), maintained by FIRST.org, is the industry standard for vulnerability scoring in traditional IT systems. However, CVSS measures impact in terms of confidentiality, integrity, and availability of <em>data and services</em>. It has no concept of:
           </p>
           <ul>
             <li><strong>Biological damage</strong> &mdash; can this attack cause tissue harm, seizures, or neurological damage?</li>
@@ -766,7 +768,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <li><strong>Neuroplasticity effects</strong> &mdash; can repeated exposure cause lasting changes to neural pathways?</li>
           </ul>
           <p>
-            QNIS v1.0 retains the 0&ndash;10 scoring scale and metric-group structure familiar from CVSS, but replaces the CIA triad with <strong>BCI triad</strong> metrics (Biological Impact, Cognitive Integrity, Information Impact) and adds supplemental human-impact modifiers.
+            QNIS v1.0, developed by Qinnovate as a purpose-built alternative, retains the 0&ndash;10 scoring scale familiar from CVSS but replaces the CIA triad with <strong>BCI-native impact dimensions</strong> (Biological Impact, Cognitive Integrity, Information Impact) and adds supplemental human-impact modifiers. Where CVSS weights exploit and impact equally, QNIS weights human impact at 70% and system exploitability at 30%.
           </p>
         </div>
 
@@ -1120,8 +1122,8 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <li>An 11-band hourglass model derived from neuroanatomy and physics</li>
             <li>A unified equation QI(b,t) = e<sup>&minus;S(b,t)</sup> with Boltzmann-factor structure</li>
             <li>A five-mechanism attack coupling taxonomy</li>
-            <li>The <strong>QIF Locus Taxonomy</strong> &mdash; a BCI-native threat classification with {totalDomains} domains and {totalTactics} tactics</li>
-            <li><strong>QNIS v1.0</strong> &mdash; a neural impact scoring system that prioritizes human harm over system availability</li>
+            <li>The <strong>QIF Locus Taxonomy</strong> &mdash; an original BCI-native threat classification developed by Qinnovate, with {totalDomains} domains and {totalTactics} tactics</li>
+            <li><strong>QNIS v1.0</strong> &mdash; an original neural impact scoring system developed by Qinnovate that prioritizes human harm over system availability</li>
             <li>A registry of {totalTechniques} attack techniques with evidence status and QNIS severity scores</li>
             <li>A post-quantum communication protocol (NSP)</li>
             <li>A content compression pipeline (Project Runemate)</li>

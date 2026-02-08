@@ -60,7 +60,7 @@ const tacticColors: Record<string, string> = {
             The Quantum Indeterministic Framework (QIF) is an open security standard for brain-computer interfaces. It defines the threat model, security architecture, and coherence metrics for protecting neural data at every layer — from hardware to human identity.
           </p>
           <p>
-            QIF answers a question no existing framework addresses: <em>how do you secure a system where one endpoint is a brain?</em> Existing cybersecurity models (OSI, Zero Trust) handle synthetic systems. Existing neuroethics frameworks handle consent and privacy. QIF bridges both — providing an engineering specification for the interface between them, with its own taxonomy (QIF Locus) and scoring system (QNIS).
+            QIF answers a question no existing framework addresses: <em>how do you secure a system where one endpoint is a brain?</em> Existing cybersecurity models (OSI, Zero Trust) handle synthetic systems. Existing neuroethics frameworks handle consent and privacy. QIF bridges both with an engineering specification for the interface between them, including two original systems developed by Qinnovate: the <strong>QIF Locus Taxonomy</strong> for threat classification and <strong>QNIS</strong> (QIF Neural Impact Score) for vulnerability scoring.
           </p>
         </div>
       </section>
@@ -228,9 +228,10 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <h3 id="taxonomy" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">QIF Locus Taxonomy</h3>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">Original classification by Qinnovate</p>
         <div class="prose mb-6">
           <p>
-            QIF classifies attacks using the <strong>Locus Taxonomy</strong> &mdash; an original naming convention organized by the anatomical or functional <em>location</em> where the attack operates. {totalDomains} domains map to {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
+            QIF classifies attacks using the <strong>Locus Taxonomy</strong>, developed by Qinnovate as the first threat classification system purpose-built for neural interfaces. Organized by the anatomical or functional <em>locus</em> where the attack operates, {totalDomains} domains map to {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
           </p>
         </div>
 
@@ -250,9 +251,10 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <h3 id="qnis" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">QNIS v1.0 Scoring</h3>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">Original scoring system by Qinnovate</p>
         <div class="prose mb-6">
           <p>
-            Each technique is scored using <strong>QNIS</strong> (QIF Neural Impact Score), a 0&ndash;10 scale that weights human impact at 70% and system exploitability at 30%. QNIS adds dimensions that CVSS lacks: Biological Impact, Cognitive Integrity, Reversibility, Violation of Consent, and Neuroplasticity.
+            Each technique is scored using <strong>QNIS</strong> (QIF Neural Impact Score), developed by Qinnovate as a purpose-built alternative to CVSS for neural security. A 0&ndash;10 scale that weights human impact at 70% and system exploitability at 30%, QNIS adds dimensions that CVSS lacks: Biological Impact, Cognitive Integrity, Reversibility, Violation of Consent, and Neuroplasticity.
           </p>
         </div>
 

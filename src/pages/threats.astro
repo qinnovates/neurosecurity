@@ -18,7 +18,7 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
   <div class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QIF Threat Registry</h1>
     <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
-      {THREAT_VECTORS.length} QIF Locus techniques across {THREAT_CATEGORIES.length} categories and 11 hourglass bands &mdash; scored with QNIS v1.0
+      {THREAT_VECTORS.length} BCI attack techniques classified with Qinnovate&rsquo;s QIF Locus Taxonomy and scored with QNIS v1.0 across {THREAT_CATEGORIES.length} categories and 11 hourglass bands
     </p>
 
     <!-- Status breakdown -->
@@ -99,7 +99,7 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
           <span class="status-badge status-badge--EMERGING ml-1">emerging</span> = newly identified.
         </div>
         <div>
-          <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use the Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0&ndash;10.
+          <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0&ndash;10.
         </div>
       </div>
     </details>
