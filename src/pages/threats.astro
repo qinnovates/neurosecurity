@@ -1,46 +1,108 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { HOURGLASS_BANDS } from '../lib/qif-constants';
-import { THREAT_CATEGORIES, THREAT_VECTORS, SEVERITY_COLORS, ZONE_COLORS, getThreatStats } from '../lib/threat-data';
+import { THREAT_CATEGORIES, THREAT_VECTORS, SEVERITY_COLORS, STATUS_COLORS, ZONE_COLORS, getThreatStats, getStatusStats } from '../lib/threat-data';
 
 const stats = getThreatStats();
+const statusStats = getStatusStats();
 const bands = [...HOURGLASS_BANDS];
+const allThreatsJson = JSON.stringify(THREAT_VECTORS);
 ---
 
 <PageLayout
-  title="QIF Threat Map"
-  description="Interactive attack matrix mapping 18 BCI threat vectors across 11 hourglass bands and 8 attack categories."
-  breadcrumbs={[{ label: 'Lab', href: '/lab/' }, { label: 'Threat Map' }]}
+  title="QIF Threat Registry"
+  description="Interactive attack matrix mapping 60 MITRE-compatible BCI techniques across 11 hourglass bands, 8 attack categories, and 4 evidence levels."
+  breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'Threat Registry' }]}
   maxWidth="wide"
 >
   <div class="mb-8">
-    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">QIF Threat Map</h1>
-    <p class="text-lg text-[var(--color-text-muted)] max-w-3xl mb-6">
-      An interactive attack matrix mapping {stats.total} BCI threat vectors across the QIF hourglass topology. Inspired by MITRE ATT&CK, adapted for neural security.
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QIF Threat Registry</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
+      60 MITRE-compatible techniques across 11 tactics and 11 hourglass bands
     </p>
 
-    <!-- Stats bar -->
-    <div class="flex flex-wrap gap-4 mb-6">
-      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+    <!-- Status breakdown -->
+    <div class="flex flex-wrap gap-3 mb-4">
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>
+        <span class="text-[var(--color-text-faint)]">Confirmed</span>
+        <span class="font-bold">{statusStats.CONFIRMED}</span>
+      </div>
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
+        <span class="text-[var(--color-text-faint)]">Demonstrated</span>
+        <span class="font-bold">{statusStats.DEMONSTRATED}</span>
+      </div>
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#94a3b8]"></span>
+        <span class="text-[var(--color-text-faint)]">Theoretical</span>
+        <span class="font-bold">{statusStats.THEORETICAL}</span>
+      </div>
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#8b5cf6]"></span>
+        <span class="text-[var(--color-text-faint)]">Emerging</span>
+        <span class="font-bold">{statusStats.EMERGING}</span>
+      </div>
+    </div>
+
+    <!-- Severity stats bar -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
         <span class="text-[var(--color-text-faint)]">Total</span>
         <span class="font-bold ml-2">{stats.total}</span>
       </div>
-      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
         <span class="severity-dot severity-dot--critical"></span>
         <span class="text-[var(--color-text-faint)]">Critical</span>
         <span class="font-bold ml-1">{stats.critical}</span>
       </div>
-      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
         <span class="severity-dot severity-dot--high"></span>
         <span class="text-[var(--color-text-faint)]">High</span>
         <span class="font-bold ml-1">{stats.high}</span>
       </div>
-      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
         <span class="severity-dot severity-dot--medium"></span>
         <span class="text-[var(--color-text-faint)]">Medium</span>
         <span class="font-bold ml-1">{stats.medium}</span>
       </div>
+      {stats.low > 0 && (
+        <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
+          <span class="severity-dot severity-dot--low"></span>
+          <span class="text-[var(--color-text-faint)]">Low</span>
+          <span class="font-bold ml-1">{stats.low}</span>
+        </div>
+      )}
     </div>
+
+    <!-- How to read this -->
+    <details class="glass-subtle rounded-lg mb-6">
+      <summary class="px-4 py-3 text-sm font-medium cursor-pointer text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] select-none">
+        How to read this grid
+      </summary>
+      <div class="px-4 pb-4 text-sm text-[var(--color-text-muted)] space-y-3 border-t border-[var(--color-border)] pt-3">
+        <div>
+          <strong class="text-[var(--color-text-primary)]">Grid axes</strong> &mdash; Rows are hourglass bands (Neural N7&ndash;N1, Interface I0, Synthetic S1&ndash;S3). Columns are attack categories (Signal Injection, Eavesdropping, Data Manipulation, etc.).
+        </div>
+        <div>
+          <strong class="text-[var(--color-text-primary)]">Severity colors</strong> &mdash; Damage potential if the attack succeeds.
+          <span class="sev-badge sev-badge--critical ml-1">critical</span>
+          <span class="sev-badge sev-badge--high ml-1">high</span>
+          <span class="sev-badge sev-badge--medium ml-1">medium</span>
+          <span class="sev-badge sev-badge--low ml-1">low</span>
+        </div>
+        <div>
+          <strong class="text-[var(--color-text-primary)]">Status badges</strong> &mdash; Evidence level.
+          <span class="status-badge status-badge--CONFIRMED ml-1">confirmed</span> = real-world documented.
+          <span class="status-badge status-badge--DEMONSTRATED ml-1">demonstrated</span> = lab-proven.
+          <span class="status-badge status-badge--THEORETICAL ml-1">theoretical</span> = plausible from physics/neuroscience.
+          <span class="status-badge status-badge--EMERGING ml-1">emerging</span> = newly identified.
+        </div>
+        <div>
+          <strong class="text-[var(--color-text-primary)]">MITRE IDs</strong> &mdash; T2001&ndash;T2899 for BCI techniques (avoids collision with MITRE ATT&CK T1001&ndash;T1659). TA#### for tactics.
+        </div>
+      </div>
+    </details>
 
     <!-- Filter toolbar -->
     <div class="flex flex-wrap gap-3 items-center" id="filter-toolbar">
@@ -60,6 +122,24 @@ const bands = [...HOURGLASS_BANDS];
         </label>
         <label class="filter-chip active" data-severity="medium">
           <input type="checkbox" checked class="hidden" /> Medium
+        </label>
+        <label class="filter-chip active" data-severity="low">
+          <input type="checkbox" checked class="hidden" /> Low
+        </label>
+      </div>
+      <div class="flex gap-2 items-center text-sm">
+        <span class="text-[var(--color-text-faint)]">Status:</span>
+        <label class="filter-chip active" data-status="CONFIRMED">
+          <input type="checkbox" checked class="hidden" /> Confirmed
+        </label>
+        <label class="filter-chip active" data-status="DEMONSTRATED">
+          <input type="checkbox" checked class="hidden" /> Demonstrated
+        </label>
+        <label class="filter-chip active" data-status="THEORETICAL">
+          <input type="checkbox" checked class="hidden" /> Theoretical
+        </label>
+        <label class="filter-chip active" data-status="EMERGING">
+          <input type="checkbox" checked class="hidden" /> Emerging
         </label>
       </div>
       <div class="flex gap-2 items-center text-sm">
@@ -125,7 +205,6 @@ const bands = [...HOURGLASS_BANDS];
               <span class="text-xs text-[var(--color-text-muted)] ml-2 truncate">{band.name}</span>
             </div>
             {THREAT_CATEGORIES.map((cat) => {
-              // Find threats for this cell at build time for SSR
               const cellThreats = THREAT_VECTORS.filter(t =>
                 t.bands.includes(band.id as any) && t.category === cat.id
               );
@@ -288,6 +367,8 @@ const bands = [...HOURGLASS_BANDS];
   .map-cell--high:hover { background: rgba(245, 158, 11, 0.20); }
   .map-cell--medium { background: rgba(234, 179, 8, 0.08); }
   .map-cell--medium:hover { background: rgba(234, 179, 8, 0.18); }
+  .map-cell--low { background: rgba(148, 163, 184, 0.06); }
+  .map-cell--low:hover { background: rgba(148, 163, 184, 0.14); }
 
   .cell-inner {
     display: flex;
@@ -310,6 +391,7 @@ const bands = [...HOURGLASS_BANDS];
   .cell-sev-dot[data-sev="critical"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
   .cell-sev-dot[data-sev="high"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
   .cell-sev-dot[data-sev="medium"] { background: #eab308; box-shadow: 0 0 4px #eab308; }
+  .cell-sev-dot[data-sev="low"] { background: #94a3b8; box-shadow: 0 0 4px #94a3b8; }
 
   /* Severity dots in stats bar */
   .severity-dot {
@@ -323,6 +405,7 @@ const bands = [...HOURGLASS_BANDS];
   .severity-dot--critical { background: #ef4444; }
   .severity-dot--high { background: #f59e0b; }
   .severity-dot--medium { background: #eab308; }
+  .severity-dot--low { background: #94a3b8; }
 
   /* Filter chips */
   .filter-chip {
@@ -354,7 +437,7 @@ const bands = [...HOURGLASS_BANDS];
     top: 0;
     right: 0;
     bottom: 0;
-    width: 420px;
+    width: 460px;
     max-width: 90vw;
     z-index: 60;
     transform: translateX(100%);
@@ -440,6 +523,20 @@ const bands = [...HOURGLASS_BANDS];
     margin-top: 0.5rem;
   }
 
+  .detail-sources {
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    margin-top: 0.4rem;
+    font-style: italic;
+  }
+
+  .detail-mitre {
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    margin-top: 0.3rem;
+    font-family: var(--font-mono);
+  }
+
   .sev-badge {
     display: inline-block;
     padding: 0.1rem 0.5rem;
@@ -453,6 +550,22 @@ const bands = [...HOURGLASS_BANDS];
   .sev-badge--critical { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
   .sev-badge--high { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
   .sev-badge--medium { background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.3); }
+  .sev-badge--low { background: rgba(148,163,184,0.15); color: #94a3b8; border: 1px solid rgba(148,163,184,0.3); }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 99px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .status-badge--CONFIRMED { background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+  .status-badge--DEMONSTRATED { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+  .status-badge--THEORETICAL { background: rgba(148,163,184,0.12); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
+  .status-badge--EMERGING { background: rgba(139,92,246,0.12); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.2); }
 
   /* Hover tooltip */
   .map-tooltip {
@@ -462,7 +575,7 @@ const bands = [...HOURGLASS_BANDS];
     border-radius: 8px;
     padding: 0.6rem 0.8rem;
     font-size: 0.75rem;
-    max-width: 280px;
+    max-width: 300px;
     pointer-events: none;
     opacity: 0;
     z-index: 100;
@@ -502,59 +615,27 @@ const bands = [...HOURGLASS_BANDS];
   }
 </style>
 
-<script>
-  // ── Threat data inline for client-side interaction ──
-  const THREATS: Record<string, {
-    id: string; name: string; category: string; bands: string[];
-    severity: string; coupling: string | null; access: string | null;
-    classicalDetection: string; quantumDetection: string; description: string;
-    bandsStr: string;
-  }> = {};
+<script define:vars={{ allThreatsJson }}>
+  // ── Threat data from server ──
+  const ALL_THREATS = JSON.parse(allThreatsJson);
 
-  // Hydrate threat data from data attributes
-  document.querySelectorAll<HTMLElement>('.map-cell:not(.map-cell--empty)').forEach(cell => {
-    // Threats will be looked up by ID from the inline data below
-  });
-
-  // Inline all threat data for client
-  const ALL_THREATS = [
-    {id:'QTM-I0-SI-001',name:'Signal Injection',category:'SI',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'Yes',quantumDetection:'Enhanced (coherence metric)',description:'Inject false signals at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.',bandsStr:'I0–N1'},
-    {id:'QTM-N4-SI-002',name:'ELF Neural Entrainment',category:'SI',bands:['S1','N4','N5','N6','N7'],severity:'critical',coupling:'DIRECT',access:'RESTRICTED',classicalDetection:'Yes',quantumDetection:'Enhanced (Dsf anomaly detection)',description:'3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment.',bandsStr:'S1→N4–N7'},
-    {id:'QTM-N4-SI-003',name:'Intermodulation (BCI Weaponized)',category:'SI',bands:['S2','N4','N5','N6'],severity:'critical',coupling:'INTERMODULATION',access:'RESTRICTED',classicalDetection:'Yes',quantumDetection:'Enhanced (coherence + Dsf)',description:'UHF-Mil + MICS = neural-range beat frequency. BCI telemetry becomes part of the attack. Most dangerous coupling mechanism.',bandsStr:'S2→N4–N6'},
-    {id:'QTM-N7-SI-004',name:'Pulsed Microwave (Frey Effect)',category:'SI',bands:['S3','N2','N7'],severity:'high',coupling:'ENVELOPE',access:'RESTRICTED',classicalDetection:'Yes',quantumDetection:'Enhanced (temporal coherence)',description:'S-band pulsed microwave. Thermoelastic expansion → cochlea perceives as sound. Havana Syndrome model.',bandsStr:'S3→N2,N7'},
-    {id:'QTM-N4-SI-005',name:'Temporal Interference (Deep Targeting)',category:'SI',bands:['S2','N4','N5','N6'],severity:'high',coupling:'TEMPORAL_INTERFERENCE',access:'LICENSED',classicalDetection:'Yes',quantumDetection:'Enhanced (beat frequency detection)',description:'Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively.',bandsStr:'S2→N4–N6'},
-    {id:'QTM-N1-SI-006',name:'Envelope Modulation (Stealth Carrier)',category:'SI',bands:['S1','S2','N1','N2','N3','N4','N5','N6','N7'],severity:'high',coupling:'ENVELOPE',access:'PUBLIC',classicalDetection:'Yes',quantumDetection:'Enhanced (demodulation detection)',description:'Any carrier modulated at neural frequency. Tissue demodulates the envelope. Lowest barrier to entry.',bandsStr:'S1–S2→any N'},
-    {id:'QTM-I0-SI-007',name:'Quantum Tunneling Exploit',category:'SI',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Yes (tunneling profile anomaly)',description:'Exploit ion channel quantum tunneling to inject false synaptic events.',bandsStr:'I0–N1'},
-    {id:'QTM-I0-SI-008',name:'Davydov Soliton Attack',category:'SI',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Yes (tunneling term Q_tunnel)',description:'Use THz stimulation to trigger Davydov solitons in SNARE protein complexes.',bandsStr:'I0–N1'},
-    {id:'QTM-I0-SE-001',name:'Eavesdropping',category:'SE',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Yes (Heisenberg disturbance)',description:'Passive interception of neural signals at I0. Classically undetectable.',bandsStr:'I0–N1'},
-    {id:'QTM-S1-SE-002',name:'BLE/RF Side-Channel',category:'SE',bands:['S1','S2'],severity:'medium',coupling:null,access:'PUBLIC',classicalDetection:'Yes',quantumDetection:'Enhanced (signal correlation)',description:'Extract neural data from BLE/RF emissions via timing, power, or EM side-channels.',bandsStr:'S1–S2'},
-    {id:'QTM-I0-DM-001',name:'Man-in-the-Middle',category:'DM',bands:['I0'],severity:'critical',coupling:null,access:null,classicalDetection:'Partial',quantumDetection:'Yes (no-cloning + Bell test)',description:'Intercept and modify signals at I0 boundary. No-cloning theorem prevents perfect copy.',bandsStr:'I0'},
-    {id:'QTM-S2-DM-002',name:'Supply Chain Compromise',category:'DM',bands:['S2','S3'],severity:'high',coupling:null,access:null,classicalDetection:'Yes',quantumDetection:'Enhanced (firmware attestation)',description:'Tamper with BCI hardware/firmware during manufacturing or distribution.',bandsStr:'S2–S3'},
-    {id:'QTM-N3-DS-001',name:'Neural Ransomware',category:'DS',bands:['N3','N7','N6'],severity:'critical',coupling:null,access:null,classicalDetection:'Partial',quantumDetection:'Yes (QI score drop)',description:'Disrupt or lock neural function via stimulation manipulation. Closed-loop devices most vulnerable.',bandsStr:'N3'},
-    {id:'QTM-N3-PE-001',name:'Identity Spoofing',category:'PE',bands:['N3','N7','N6'],severity:'high',coupling:null,access:null,classicalDetection:'Partial',quantumDetection:'Yes (quantum biometric)',description:'Replicate neural signature to bypass authentication. Quantum signatures are physically unclonable.',bandsStr:'N3–N7'},
-    {id:'QTM-N1-CI-001',name:'Neural Data Privacy Breach',category:'CI',bands:['N1','S1','S2','S3'],severity:'high',coupling:null,access:null,classicalDetection:'Yes',quantumDetection:'Enhanced (cross-band encryption)',description:'Unauthorized access to recorded neural data. GDPR Article 9 special category data.',bandsStr:'N1–S3'},
-    {id:'QTM-I0-PS-001',name:'Directed Energy (Thermal I0 Damage)',category:'PS',bands:['S3','I0'],severity:'critical',coupling:null,access:'CLASSIFIED',classicalDetection:'Yes',quantumDetection:'N/A (physical damage)',description:'mm-wave/ADS directed energy. Electrode heating, tissue damage. Nation-state only.',bandsStr:'S3→I0'},
-    {id:'QTM-S3-EX-001',name:'Cloud Infrastructure Attack',category:'EX',bands:['S3'],severity:'medium',coupling:null,access:'PUBLIC',classicalDetection:'Yes',quantumDetection:'Enhanced (QKD for data-in-transit)',description:'Compromise cloud services processing neural data.',bandsStr:'S3'},
-    {id:'QTM-S3-EX-002',name:'Harvest-Now-Decrypt-Later',category:'EX',bands:['S3'],severity:'critical',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Prevented (QKD/PQC)',description:'Record encrypted BCI traffic now, decrypt when quantum computers arrive. Neural data is permanently sensitive.',bandsStr:'S3'},
-  ];
-
-  // Build lookup
+  const THREATS = {};
   for (const t of ALL_THREATS) {
     THREATS[t.id] = t;
   }
 
   // ── Tooltip ──
-  const tooltip = document.getElementById('map-tooltip')!;
+  const tooltip = document.getElementById('map-tooltip');
 
-  function showTooltip(cell: HTMLElement, e: MouseEvent) {
-    const threatIds: string[] = JSON.parse(cell.dataset.threats || '[]');
+  function showTooltip(cell, e) {
+    const threatIds = JSON.parse(cell.dataset.threats || '[]');
     if (threatIds.length === 0) return;
 
     const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
     let html = '';
     for (const t of threats) {
-      html += `<div class="tt-name">${t.name}</div>`;
-      html += `<div class="tt-meta">${t.severity.toUpperCase()} · ${t.bandsStr}${t.coupling ? ' · ' + t.coupling : ''}</div>`;
+      html += '<div class="tt-name">' + t.id + ' — ' + t.name + '</div>';
+      html += '<div class="tt-meta">' + t.severity.toUpperCase() + ' · ' + t.status + ' · ' + t.bandsStr + (t.coupling ? ' · ' + t.coupling : '') + '</div>';
     }
 
     tooltip.innerHTML = html;
@@ -562,8 +643,8 @@ const bands = [...HOURGLASS_BANDS];
     tooltip.classList.add('visible');
   }
 
-  function positionTooltip(e: MouseEvent) {
-    const x = Math.min(e.clientX + 12, window.innerWidth - 300);
+  function positionTooltip(e) {
+    const x = Math.min(e.clientX + 12, window.innerWidth - 320);
     const y = Math.min(e.clientY - 8, window.innerHeight - 150);
     tooltip.style.left = x + 'px';
     tooltip.style.top = y + 'px';
@@ -574,37 +655,64 @@ const bands = [...HOURGLASS_BANDS];
   }
 
   // ── Detail drawer ──
-  const drawer = document.getElementById('detail-drawer')!;
-  const drawerContent = document.getElementById('detail-content')!;
-  const drawerClose = document.getElementById('detail-close')!;
+  const drawer = document.getElementById('detail-drawer');
+  const drawerContent = document.getElementById('detail-content');
+  const drawerClose = document.getElementById('detail-close');
 
-  function openDrawer(cell: HTMLElement) {
-    const threatIds: string[] = JSON.parse(cell.dataset.threats || '[]');
+  const STATUS_BADGE_COLORS = {
+    CONFIRMED: { bg: 'rgba(239,68,68,0.12)', color: '#ef4444', border: 'rgba(239,68,68,0.2)' },
+    DEMONSTRATED: { bg: 'rgba(245,158,11,0.12)', color: '#f59e0b', border: 'rgba(245,158,11,0.2)' },
+    THEORETICAL: { bg: 'rgba(148,163,184,0.12)', color: '#94a3b8', border: 'rgba(148,163,184,0.2)' },
+    EMERGING: { bg: 'rgba(139,92,246,0.12)', color: '#8b5cf6', border: 'rgba(139,92,246,0.2)' },
+  };
+
+  function openDrawer(cell) {
+    const threatIds = JSON.parse(cell.dataset.threats || '[]');
     const band = cell.dataset.band;
     const category = cell.dataset.category;
 
     if (threatIds.length === 0) return;
 
     const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
-    let html = `<div style="margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--color-border);">
-      <div style="font-size:0.7rem;color:var(--color-text-faint);font-family:var(--font-mono);">${band} × ${category}</div>
-      <div style="font-size:1.1rem;font-weight:600;margin-top:0.25rem;">${threats.length} Threat${threats.length !== 1 ? 's' : ''}</div>
-    </div>`;
+    let html = '<div style="margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--color-border);">' +
+      '<div style="font-size:0.7rem;color:var(--color-text-faint);font-family:var(--font-mono);">' + band + ' \u00d7 ' + category + '</div>' +
+      '<div style="font-size:1.1rem;font-weight:600;margin-top:0.25rem;">' + threats.length + ' Threat' + (threats.length !== 1 ? 's' : '') + '</div>' +
+    '</div>';
 
     for (const t of threats) {
-      const sevClass = t.severity;
-      html += `<div class="detail-threat">
-        <div class="detail-threat-name">${t.name} <span class="sev-badge sev-badge--${sevClass}">${t.severity}</span></div>
-        <div class="detail-threat-id">${t.id}</div>
-        <dl class="detail-meta">
-          <dt>Bands</dt><dd>${t.bandsStr}</dd>
-          ${t.coupling ? `<dt>Coupling</dt><dd>${t.coupling}</dd>` : ''}
-          ${t.access ? `<dt>Access</dt><dd>${t.access}</dd>` : ''}
-          <dt>Classical</dt><dd style="color:${t.classicalDetection === 'Yes' ? '#10b981' : t.classicalDetection === 'Partial' ? '#f59e0b' : '#ef4444'}">${t.classicalDetection}</dd>
-          <dt>Quantum</dt><dd style="color:#8b5cf6">${t.quantumDetection}</dd>
-        </dl>
-        <div class="detail-description">${t.description}</div>
-      </div>`;
+      const sc = STATUS_BADGE_COLORS[t.status] || STATUS_BADGE_COLORS.THEORETICAL;
+      const statusBadge = '<span style="display:inline-block;padding:0.1rem 0.4rem;border-radius:99px;font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;background:' + sc.bg + ';color:' + sc.color + ';border:1px solid ' + sc.border + ';">' + t.status + '</span>';
+
+      html += '<div class="detail-threat">' +
+        '<div class="detail-threat-name">' + t.name + ' <span class="sev-badge sev-badge--' + t.severity + '">' + t.severity + '</span> ' + statusBadge + '</div>' +
+        '<div class="detail-threat-id">' + t.id + '</div>' +
+        '<dl class="detail-meta">' +
+          '<dt>Bands</dt><dd>' + t.bandsStr + '</dd>' +
+          (t.coupling ? '<dt>Coupling</dt><dd>' + t.coupling + '</dd>' : '') +
+          (t.access ? '<dt>Access</dt><dd>' + t.access + '</dd>' : '') +
+          '<dt>Classical</dt><dd style="color:' + (t.classicalDetection === 'Yes' ? '#10b981' : t.classicalDetection === 'Partial' ? '#f59e0b' : '#ef4444') + '">' + t.classicalDetection + '</dd>' +
+          '<dt>Quantum</dt><dd style="color:#8b5cf6">' + t.quantumDetection + '</dd>' +
+        '</dl>' +
+        '<div class="detail-description">' + t.description + '</div>';
+
+      // MITRE cross-reference
+      if (t.mitre && (t.mitre.tactics.length > 0 || t.mitre.techniques.length > 0)) {
+        html += '<div class="detail-mitre">';
+        if (t.mitre.tactics.length > 0) {
+          html += t.mitre.tactics.join(', ');
+        }
+        if (t.mitre.techniques.length > 0) {
+          html += ' \u00b7 ' + t.mitre.techniques.join(', ');
+        }
+        html += '</div>';
+      }
+
+      // Sources
+      if (t.sources && t.sources.length > 0) {
+        html += '<div class="detail-sources">Sources: ' + t.sources.join('; ') + '</div>';
+      }
+
+      html += '</div>';
     }
 
     drawerContent.innerHTML = html;
@@ -616,52 +724,44 @@ const bands = [...HOURGLASS_BANDS];
   }
 
   drawerClose.addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeDrawer();
   });
 
   // ── Cell interactions ──
-  document.querySelectorAll<HTMLElement>('.map-cell:not(.map-cell--empty)').forEach(cell => {
-    cell.addEventListener('mouseenter', (e) => showTooltip(cell, e as MouseEvent));
-    cell.addEventListener('mousemove', (e) => positionTooltip(e as MouseEvent));
+  document.querySelectorAll('.map-cell:not(.map-cell--empty)').forEach(function(cell) {
+    cell.addEventListener('mouseenter', function(e) { showTooltip(cell, e); });
+    cell.addEventListener('mousemove', function(e) { positionTooltip(e); });
     cell.addEventListener('mouseleave', hideTooltip);
-    cell.addEventListener('click', () => {
+    cell.addEventListener('click', function() {
       hideTooltip();
       openDrawer(cell);
     });
   });
 
   // ── Filters ──
-  const searchInput = document.getElementById('search-input') as HTMLInputElement;
-  const severityFilters = document.querySelectorAll<HTMLElement>('.filter-chip[data-severity]');
-  const zoneFilters = document.querySelectorAll<HTMLElement>('.filter-chip[data-zone]');
+  const searchInput = document.getElementById('search-input');
+  const severityFilters = document.querySelectorAll('.filter-chip[data-severity]');
+  const statusFilters = document.querySelectorAll('.filter-chip[data-status]');
+  const zoneFilters = document.querySelectorAll('.filter-chip[data-zone]');
 
-  function getActiveSeverities(): Set<string> {
-    const active = new Set<string>();
-    severityFilters.forEach(f => {
-      if (f.classList.contains('active')) active.add(f.dataset.severity!);
-    });
-    return active;
-  }
-
-  function getActiveZones(): Set<string> {
-    const active = new Set<string>();
-    zoneFilters.forEach(f => {
-      if (f.classList.contains('active')) active.add(f.dataset.zone!);
+  function getActiveSet(chips, attr) {
+    const active = new Set();
+    chips.forEach(function(f) {
+      if (f.classList.contains('active')) active.add(f.dataset[attr]);
     });
     return active;
   }
 
   function applyFilters() {
     const query = searchInput.value.toLowerCase().trim();
-    const activeSeverities = getActiveSeverities();
-    const activeZones = getActiveZones();
+    const activeSeverities = getActiveSet(severityFilters, 'severity');
+    const activeStatuses = getActiveSet(statusFilters, 'status');
+    const activeZones = getActiveSet(zoneFilters, 'zone');
 
-    // Filter cells
-    document.querySelectorAll<HTMLElement>('.map-cell').forEach(cell => {
+    document.querySelectorAll('.map-cell').forEach(function(cell) {
       const zone = cell.dataset.zone || '';
-      const severity = cell.dataset.severity || '';
-      const threatIds: string[] = JSON.parse(cell.dataset.threats || '[]');
+      const threatIds = JSON.parse(cell.dataset.threats || '[]');
 
       // Zone filter
       if (!activeZones.has(zone)) {
@@ -675,22 +775,27 @@ const bands = [...HOURGLASS_BANDS];
         return;
       }
 
-      // Severity filter
-      const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
-      const hasMatchingSeverity = threats.some(t => activeSeverities.has(t.severity));
-      if (!hasMatchingSeverity) {
+      // Get matching threats
+      const threats = threatIds.map(function(id) { return THREATS[id]; }).filter(Boolean);
+
+      // Severity + status filter — at least one threat must match both
+      const hasMatch = threats.some(function(t) {
+        return activeSeverities.has(t.severity) && activeStatuses.has(t.status);
+      });
+      if (!hasMatch) {
         cell.classList.add('filtered-out');
         return;
       }
 
       // Search filter
       if (query) {
-        const matchesSearch = threats.some(t =>
-          t.name.toLowerCase().includes(query) ||
-          t.description.toLowerCase().includes(query) ||
-          t.id.toLowerCase().includes(query) ||
-          (t.coupling && t.coupling.toLowerCase().includes(query))
-        );
+        const matchesSearch = threats.some(function(t) {
+          return t.name.toLowerCase().includes(query) ||
+            t.description.toLowerCase().includes(query) ||
+            t.id.toLowerCase().includes(query) ||
+            (t.coupling && t.coupling.toLowerCase().includes(query)) ||
+            (t.tactic && t.tactic.toLowerCase().includes(query));
+        });
         if (!matchesSearch) {
           cell.classList.add('filtered-out');
           return;
@@ -701,26 +806,24 @@ const bands = [...HOURGLASS_BANDS];
     });
 
     // Filter row headers by zone
-    document.querySelectorAll<HTMLElement>('.map-row-header').forEach(header => {
+    document.querySelectorAll('.map-row-header').forEach(function(header) {
       const zone = header.dataset.zone || '';
       header.classList.toggle('filtered-out', !activeZones.has(zone));
     });
   }
 
   // Wire up filter chips
-  severityFilters.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chip.classList.toggle('active');
-      applyFilters();
+  function wireChips(chips) {
+    chips.forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        chip.classList.toggle('active');
+        applyFilters();
+      });
     });
-  });
-
-  zoneFilters.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chip.classList.toggle('active');
-      applyFilters();
-    });
-  });
+  }
+  wireChips(severityFilters);
+  wireChips(statusFilters);
+  wireChips(zoneFilters);
 
   searchInput.addEventListener('input', applyFilters);
 </script>

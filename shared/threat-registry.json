@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "generated_from": "qif-lab/src/config.py",
   "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
   "mitre_compatibility": {
@@ -28,6 +28,22 @@
       "THEORETICAL": 19,
       "DEMONSTRATED": 15,
       "EMERGING": 13
+    },
+    "by_severity": {
+      "critical": 16,
+      "high": 30,
+      "medium": 12,
+      "low": 2
+    },
+    "by_ui_category": {
+      "SI": 9,
+      "SE": 4,
+      "DM": 12,
+      "DS": 6,
+      "PE": 6,
+      "CI": 8,
+      "PS": 5,
+      "EX": 10
     }
   },
   "tactics": [
@@ -127,6 +143,8 @@
         "Bonaci et al. 2015"
       ],
       "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "SI",
       "notes": "Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.",
       "legacy_ids": [
         "ONI-T007"
@@ -160,6 +178,8 @@
         "Pycroft et al. 2016"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "DS",
       "notes": "Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse. Distinct from Neural DoS: ransomware implies conditional restoration.",
       "legacy_ids": []
     },
@@ -194,6 +214,8 @@
         "Schroder et al. 2025"
       ],
       "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "SE",
       "notes": "Passive interception of neural signals. At I0: quantum measurement disturbs state (detectable). At S1-S3: classical RF interception, most consumer BCIs transmit unencrypted. Merges ONI-T001 (Signal Profiling), ONI-T023 (Unencrypted Data Interception).",
       "legacy_ids": [
         "ONI-T001",
@@ -228,6 +250,8 @@
         "Martinovic et al. 2012"
       ],
       "status": "DEMONSTRATED",
+      "severity": "critical",
+      "ui_category": "DM",
       "notes": "Intercept and modify signals at I0 boundary or BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption.",
       "legacy_ids": []
     },
@@ -256,6 +280,8 @@
         "Salari et al. 2015"
       ],
       "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "SI",
       "notes": "Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile.",
       "legacy_ids": []
     },
@@ -284,6 +310,8 @@
         "Scott 1992"
       ],
       "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "SI",
       "notes": "THz stimulation triggers Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0. Exploits energy transport in alpha-helix protein structures.",
       "legacy_ids": []
     },
@@ -314,6 +342,8 @@
         "Schroder et al. 2025"
       ],
       "status": "DEMONSTRATED",
+      "severity": "medium",
+      "ui_category": "DM",
       "notes": "Exploit weaknesses in BCI data protocols to inject commands or alter data formatting, bypassing security controls. Targets the digital decoding/telemetry pipeline.",
       "legacy_ids": [
         "ONI-T008"
@@ -348,6 +378,8 @@
         "Kohno et al. 2009"
       ],
       "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "SI",
       "notes": "Intercept and modify motor commands or cognitive instructions in transit through the BCI system. Targets closed-loop stimulation devices. Intent verification detects command-intent mismatch.",
       "legacy_ids": [
         "ONI-T009"
@@ -384,6 +416,8 @@
         "Zhang et al. 2024"
       ],
       "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "SI",
       "notes": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals.",
       "legacy_ids": []
     },
@@ -415,6 +449,8 @@
         "US Navy ELF program (declassified)"
       ],
       "status": "CONFIRMED",
+      "severity": "critical",
+      "ui_category": "SI",
       "notes": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability.",
       "legacy_ids": []
     },
@@ -444,6 +480,8 @@
         "ITU Radio Regulations"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "SI",
       "notes": "UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz theta. Most dangerous coupling mechanism. QI CANNOT detect from signal data alone -- requires resonance shield.",
       "legacy_ids": []
     },
@@ -473,6 +511,8 @@
         "Lin 1978"
       ],
       "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "PS",
       "notes": "S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion causes cochlea to perceive as sound. Havana Syndrome model. PRF selects neural target: 40 Hz gamma, 10 Hz alpha, 4 Hz theta, 1 Hz delta.",
       "legacy_ids": []
     },
@@ -502,6 +542,8 @@
         "Grossman et al. 2017 (Cell)"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "SI",
       "notes": "Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Licensed frequencies -- lower barrier than restricted.",
       "legacy_ids": []
     },
@@ -536,6 +578,8 @@
         "Datta et al. 2009"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "SI",
       "notes": "Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry (PUBLIC access). tACS therapeutic principle weaponized.",
       "legacy_ids": []
     },
@@ -563,6 +607,8 @@
         "US DoD Active Denial System (declassified)"
       ],
       "status": "CONFIRMED",
+      "severity": "critical",
+      "ui_category": "PS",
       "notes": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only.",
       "legacy_ids": []
     },
@@ -591,6 +637,8 @@
         "Zhang et al. 2024 (Professor X attack on EEG models)"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "DM",
       "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms.",
       "legacy_ids": []
     },
@@ -619,6 +667,8 @@
         "Meng et al. 2024"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "DM",
       "notes": "Backdoor persists through transfer learning from pre-trained BCI models. Attacker poisons upstream model, downstream users inherit the backdoor. Common in EEG foundation model paradigm.",
       "legacy_ids": []
     },
@@ -648,6 +698,8 @@
         "Liu et al. 2024"
       ],
       "status": "DEMONSTRATED",
+      "severity": "medium",
+      "ui_category": "DM",
       "notes": "Craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on.",
       "legacy_ids": []
     },
@@ -678,6 +730,8 @@
         "Moosavi-Dezfooli et al. 2017"
       ],
       "status": "DEMONSTRATED",
+      "severity": "medium",
+      "ui_category": "DM",
       "notes": "Single perturbation pattern that fools BCI decoder regardless of input. Works across subjects and sessions. Pre-computed offline, applied in real-time. Lower sophistication than targeted attacks.",
       "legacy_ids": []
     },
@@ -708,6 +762,8 @@
         "Shokri et al. 2017"
       ],
       "status": "EMERGING",
+      "severity": "medium",
+      "ui_category": "EX",
       "notes": "Determine if a specific person's neural data was used to train a BCI model. Reveals participation in clinical trials, neurological conditions. GDPR Article 9 implications.",
       "legacy_ids": []
     },
@@ -737,6 +793,8 @@
         "Zhu et al. 2019"
       ],
       "status": "EMERGING",
+      "severity": "medium",
+      "ui_category": "EX",
       "notes": "Reconstruct individual neural data from shared gradients in federated BCI training. Multi-site clinical trials share model updates. Gradient inversion recovers raw EEG with high fidelity.",
       "legacy_ids": []
     },
@@ -766,6 +824,8 @@
         "Meng et al. 2024"
       ],
       "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "DS",
       "notes": "Manipulate neurofeedback display or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable.",
       "legacy_ids": []
     },
@@ -798,6 +858,8 @@
         "Meng et al. 2024"
       ],
       "status": "EMERGING",
+      "severity": "critical",
+      "ui_category": "DS",
       "notes": "Small adversarial perturbation injected into closed-loop BCI amplifies through feedback cycle. Each loop iteration increases deviation until system destabilizes. NeuroPace RNS, DBS with LFP sensing vulnerable.",
       "legacy_ids": []
     },
@@ -833,6 +895,8 @@
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "DS",
       "notes": "Overwhelm targeted neurons via continuous high-frequency stimulation through compromised electrodes. Prevents normal neural signaling. Analogous to radio jamming. Implanted BCIs with stimulation capability.",
       "legacy_ids": []
     },
@@ -866,6 +930,8 @@
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "PS",
       "notes": "Flood neural tissue with maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required.",
       "legacy_ids": []
     },
@@ -898,6 +964,8 @@
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
       "status": "THEORETICAL",
+      "severity": "low",
+      "ui_category": "SE",
       "notes": "Systematically probe neural tissue via low-amplitude stimulation pulses to map functional connectivity, identify responsive regions, and characterize individual neural signatures. Prerequisite for targeted attacks.",
       "legacy_ids": []
     },
@@ -927,6 +995,8 @@
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
       "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "DM",
       "notes": "Compromised BCI firmware selectively drops or forwards neural signals based on content. Filter out specific cognitive states while passing others. Subtle censorship of neural output.",
       "legacy_ids": []
     },
@@ -959,6 +1029,8 @@
         "Kohno et al. 2009"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "DS",
       "notes": "Overwhelm neural pathways with excessive stimulation or signal flooding causing temporary dysfunction or distress. Rate limiting at I0 and emergency shutdown are primary defenses.",
       "legacy_ids": [
         "ONI-T019"
@@ -993,6 +1065,8 @@
         "Schroder et al. 2025"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "PS",
       "notes": "Force involuntary motor actions by injecting false motor commands through compromised BCI motor interfaces. Intent verification compares commands against detected cognitive intent. Physical safety interlocks required.",
       "legacy_ids": [
         "ONI-T020"
@@ -1025,6 +1099,8 @@
         "Maiorana et al. 2016"
       ],
       "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "PE",
       "notes": "Replicate user's neural signature to bypass BCI authentication. Classical biometrics (ERP templates, brainprint) are partially spoofable. If quantum neural signatures exist, no-cloning makes them physically unclonable.",
       "legacy_ids": []
     },
@@ -1052,6 +1128,8 @@
         "Yuste et al. 2017 (Neurorights)"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "CI",
       "notes": "Long-term subtle manipulation of cognitive patterns leading to gradual personality changes or identity confusion. Targets L14 (Identity/Cognitive Sovereignty). Detectable via longitudinal QI baseline comparison. Neurorights: psychological continuity.",
       "legacy_ids": [
         "ONI-T021"
@@ -1081,6 +1159,8 @@
         "Bonaci et al. 2015"
       ],
       "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "CI",
       "notes": "Inject false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable.",
       "legacy_ids": []
     },
@@ -1110,6 +1190,8 @@
         "Martinovic et al. 2012"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "CI",
       "notes": "Present stimuli designed to elicit P300 ERP responses revealing private knowledge (PINs, faces, locations). BCI app stores could embed interrogation stimuli in games. Demonstrated on consumer EEG (EMOTIV, NeuroSky).",
       "legacy_ids": []
     },
@@ -1140,6 +1222,8 @@
         "Meta FAIR 2023"
       ],
       "status": "EMERGING",
+      "severity": "critical",
+      "ui_category": "CI",
       "notes": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research.",
       "legacy_ids": []
     },
@@ -1169,6 +1253,8 @@
         "Goering et al. 2021"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "CI",
       "notes": "Manipulate sense of agency -- user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty.",
       "legacy_ids": []
     },
@@ -1199,6 +1285,8 @@
         "Maiorana et al. 2016"
       ],
       "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "EX",
       "notes": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted.",
       "legacy_ids": []
     },
@@ -1226,6 +1314,8 @@
         "Yuste et al. 2017 (Neurorights)"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "CI",
       "notes": "Corrupt the neural representation of self (body ownership, self-other boundary, autobiographical memory). Targets insula, TPJ, mPFC. Could cause depersonalization, dissociation, or false self-recognition. Neurorights: mental integrity.",
       "legacy_ids": []
     },
@@ -1255,6 +1345,8 @@
         "Frank et al. 2024"
       ],
       "status": "EMERGING",
+      "severity": "medium",
+      "ui_category": "PE",
       "notes": "Present carefully designed visual/auditory/haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional) that reveal private information or prime the brain for subsequent attack. BCI app store is the attack surface.",
       "legacy_ids": []
     },
@@ -1286,6 +1378,8 @@
         "Landau et al. 2020"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "EX",
       "notes": "Infer sensitive personal attributes (health conditions, sexual orientation, political beliefs, cognitive decline) from BCI usage metadata and neural signal statistics without decoding content. Side-channel on cognition.",
       "legacy_ids": []
     },
@@ -1317,6 +1411,8 @@
         "Schroder et al. 2025"
       ],
       "status": "CONFIRMED",
+      "severity": "medium",
+      "ui_category": "SE",
       "notes": "Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. Merges ONI-T002 (Side-Channel Analysis).",
       "legacy_ids": [
         "ONI-T002",
@@ -1351,6 +1447,8 @@
         "Schroder et al. 2025"
       ],
       "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "PE",
       "notes": "Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Merges ONI-T006 (Firmware Backdoor). QI-enhanced firmware attestation detects unauthorized modifications.",
       "legacy_ids": [
         "ONI-T006"
@@ -1381,6 +1479,8 @@
         "Schroder et al. 2025"
       ],
       "status": "CONFIRMED",
+      "severity": "medium",
+      "ui_category": "EX",
       "notes": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit.",
       "legacy_ids": []
     },
@@ -1410,6 +1510,8 @@
         "Gidney 2025 (Google quantum roadmap)"
       ],
       "status": "CONFIRMED",
+      "severity": "critical",
+      "ui_category": "EX",
       "notes": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival.",
       "legacy_ids": []
     },
@@ -1440,6 +1542,8 @@
         "Schroder et al. 2025"
       ],
       "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "PE",
       "notes": "Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required.",
       "legacy_ids": []
     },
@@ -1470,6 +1574,8 @@
         "Schroder et al. 2025 (Yale worst-case scenario)"
       ],
       "status": "EMERGING",
+      "severity": "critical",
+      "ui_category": "DS",
       "notes": "Coordinated attack exploiting standardized BCI platforms affecting millions simultaneously. Yale Digital Ethics Center worst-case scenario. Monoculture risk: one vulnerability, all devices. Merges ONI-T024 (Mass Neural Manipulation).",
       "legacy_ids": [
         "ONI-T024"
@@ -1500,6 +1606,8 @@
         "Kohno et al. 2009"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "PE",
       "notes": "Physical manipulation or replacement of neural electrodes to inject malicious signals or intercept legitimate neural data. Impedance monitoring detects electrode tampering. Tamper-evident seals for implants.",
       "legacy_ids": [
         "ONI-T004"
@@ -1531,6 +1639,8 @@
         "Schroder et al. 2025 (Yale)"
       ],
       "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "PE",
       "notes": "Exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth.",
       "legacy_ids": [
         "ONI-T022"
@@ -1565,6 +1675,8 @@
         "GDPR Article 9"
       ],
       "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "CI",
       "notes": "Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud.",
       "legacy_ids": []
     },
@@ -1595,6 +1707,8 @@
         "Martinovic et al. 2012"
       ],
       "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "EX",
       "notes": "Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes. BCI apps can embed covert stimulus-response protocols.",
       "legacy_ids": [
         "ONI-T016"
@@ -1627,6 +1741,8 @@
         "Landau et al. 2020"
       ],
       "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "EX",
       "notes": "Record patterns that reveal attention, emotion, fatigue, or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs.",
       "legacy_ids": [
         "ONI-T017"
@@ -1658,6 +1774,8 @@
         "Bonaci et al. 2015"
       ],
       "status": "THEORETICAL",
+      "severity": "critical",
+      "ui_category": "EX",
       "notes": "Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution.",
       "legacy_ids": [
         "ONI-T018"
@@ -1693,6 +1811,8 @@
         "NATO STO 2024 (Cognitive Warfare concept)"
       ],
       "status": "EMERGING",
+      "severity": "critical",
+      "ui_category": "PS",
       "notes": "State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets.",
       "legacy_ids": []
     },
@@ -1724,6 +1844,8 @@
         "Ienca & Andorno 2017 (Neurorights)"
       ],
       "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "EX",
       "notes": "Systematic collection of neural data from consumer BCI populations for surveillance purposes. Workplace attention monitoring, law enforcement lie detection, social credit via neural markers. Neurorights: mental privacy.",
       "legacy_ids": []
     },
@@ -1753,6 +1875,8 @@
         "Schroder et al. 2025"
       ],
       "status": "CONFIRMED",
+      "severity": "low",
+      "ui_category": "SE",
       "notes": "Discover topology of BCI networks: communication pathways between electrodes, processing units, and external interfaces. Prerequisite for targeted attacks. Deploy honeypot nodes and dynamic addressing.",
       "legacy_ids": [
         "ONI-T003"
@@ -1785,6 +1909,8 @@
         "Schroder et al. 2025"
       ],
       "status": "DEMONSTRATED",
+      "severity": "medium",
+      "ui_category": "DM",
       "notes": "Subtly corrupt BCI calibration data to maintain influence over signal interpretation across device resets. Cryptographically signed calibration data prevents. Recalibration audits detect drift.",
       "legacy_ids": [
         "ONI-T012"
@@ -1815,6 +1941,8 @@
       },
       "sources": [],
       "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "DM",
       "notes": "Embed recurring attack patterns that survive system resets by exploiting learned neural pathways or stored calibration data. Leverages neuroplasticity -- brain adapts to malicious patterns, making them harder to remove.",
       "legacy_ids": [
         "ONI-T010"
@@ -1844,6 +1972,8 @@
       },
       "sources": [],
       "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "CI",
       "notes": "Persistent modification of neural pathway configurations or cognitive associations that survive across BCI sessions. Targets long-term potentiation mechanisms. Session isolation prevents cross-session contamination.",
       "legacy_ids": [
         "ONI-T011"
@@ -1873,6 +2003,8 @@
       },
       "sources": [],
       "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "DM",
       "notes": "Craft malicious signals that maintain legitimate coherence scores (Cs) to bypass QI metric. Directly attacks QIF's detection mechanism. Defense: multi-factor signal validation, behavioral analysis beyond coherence, ensemble detection.",
       "legacy_ids": [
         "ONI-T013"
@@ -1902,6 +2034,8 @@
       },
       "sources": [],
       "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "DM",
       "notes": "Slowly modify neural parameters below detection thresholds to accumulate significant changes over time. Exploit adaptive baseline algorithms. Cumulative change detection and trend analysis are primary defenses.",
       "legacy_ids": [
         "ONI-T014"
@@ -1931,6 +2065,8 @@
       },
       "sources": [],
       "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "DM",
       "notes": "Add carefully calibrated noise to mask malicious signal components from detection algorithms. Targets QI's sigma-phi (phase) and sigma-gamma (amplitude) terms. Multi-channel cross-validation detects inconsistent noise patterns.",
       "legacy_ids": [
         "ONI-T015"

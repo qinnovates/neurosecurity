@@ -581,8 +581,135 @@ main {
 .attack-item.selected { background: rgba(248,81,73,0.1); border-color: rgba(248,81,73,0.3); }
 
 .attack-item .attack-name { font-weight: 600; color: var(--text); }
+.attack-item .attack-id { color: var(--text-dim); font-size: 0.6rem; font-family: var(--font-mono); }
 .attack-item .attack-bands { color: var(--text-dim); font-size: 0.65rem; margin-top: 0.15rem; }
 .attack-item .attack-coupling { color: var(--red); font-size: 0.6rem; }
+
+/* Status dots */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.status-dot.confirmed { background: #ef4444; }
+.status-dot.demonstrated { background: #f59e0b; }
+.status-dot.theoretical { background: #94a3b8; }
+.status-dot.emerging { background: #8b5cf6; }
+
+/* Status badges (text) */
+.status-badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 99px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.status-badge.confirmed { background: rgba(239,68,68,0.12); color: #ef4444; }
+.status-badge.demonstrated { background: rgba(245,158,11,0.12); color: #f59e0b; }
+.status-badge.theoretical { background: rgba(148,163,184,0.12); color: #94a3b8; }
+.status-badge.emerging { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+
+/* Severity badges for threats */
+.sev-badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 99px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.sev-badge.critical { background: rgba(239,68,68,0.15); color: #ef4444; }
+.sev-badge.high { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.sev-badge.medium { background: rgba(234,179,8,0.15); color: #eab308; }
+.sev-badge.low { background: rgba(148,163,184,0.15); color: #94a3b8; }
+
+/* Attack search input */
+.attack-search {
+  width: 100%;
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+  outline: none;
+}
+.attack-search:focus { border-color: var(--blue); }
+.attack-search::placeholder { color: var(--text-dim); }
+
+/* Tactic group */
+.tactic-group { margin-bottom: 0.5rem; }
+.tactic-header {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  padding: 0.4rem 0.3rem 0.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  user-select: none;
+}
+.tactic-header:hover { color: var(--text); }
+.tactic-header .tactic-chevron {
+  font-size: 0.55rem;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.tactic-header .tactic-chevron.collapsed { transform: rotate(-90deg); }
+.tactic-header .tactic-count {
+  color: var(--text-dim);
+  font-size: 0.55rem;
+  margin-left: auto;
+}
+.tactic-body { overflow: hidden; }
+.tactic-body.collapsed { display: none; }
+
+/* Attack stats bar */
+.attack-stats {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+  font-size: 0.6rem;
+}
+.attack-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-dim);
+}
+
+/* MITRE cross-ref in detail */
+.mitre-ref {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+  font-family: var(--font-mono);
+}
+.mitre-ref .mitre-tag {
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 0.6rem;
+  margin: 0.1rem 0.15rem;
+}
+.source-list {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
+  font-style: italic;
+}
 
 /* ── Device Info Panel ── */
 .device-info {
@@ -663,28 +790,29 @@ const QIF_DATA = {
     {id:"S3",name:"Radio / Wireless / DE",zone:"silicon",description:"RF, wireless links, directed energy, application layer (1 GHz+)",brain_regions:[],dominant_freq_hz:"1 GHz+",L_m:[3e-5,0.3],determinacy:"Deterministic",severity:"N/A (silicon)",severity_description:"RF hijack, directed energy, cloud compromise, supply chain attack",qi_range:[0.0,0.0],hourglass_width:1.0,bci_devices:["BLE/WiFi consumer, satellite links, DE weapons"]},
   ],
 
-  threat_model: [
-    // ── Classical attacks (v3.1 core) ──
-    {attack:"Signal injection",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (coherence metric)",notes:"Inject false signals at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency."},
-    {attack:"Neural ransomware",bands_str:"N3",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (QI score drop)",notes:"Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse."},
-    {attack:"Eavesdropping",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (Heisenberg disturbance)",notes:"Passive interception of neural signals at I0. Classically undetectable. Quantum: measurement disturbs state \u2014 detectable via QI anomaly."},
-    {attack:"Man-in-the-middle",bands_str:"I0",band_ids:["I0"],coupling:null,access:null,classical:"Partial",quantum:"Yes (no-cloning + Bell test)",notes:"Intercept and modify signals at I0 boundary. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption."},
-    {attack:"Quantum tunneling exploit",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling profile anomaly)",notes:"Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation."},
-    {attack:"Davydov soliton attack",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling term Q_tunnel)",notes:"Use THz stimulation to trigger Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0."},
-    {attack:"Identity spoofing",bands_str:"N3\u2013N7",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (quantum biometric)",notes:"Replicate user's neural signature to bypass authentication. Classical biometrics partially spoofable. Quantum neural signatures (if proven) are physically unclonable."},
-    // ── Silicon / cyber attacks (v3.1 additions) ──
-    {attack:"BLE/RF side-channel",bands_str:"S1\u2013S2",band_ids:["S1","S2"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (signal correlation)",notes:"Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. QI cross-band correlation detects exfiltration patterns."},
-    {attack:"Supply chain compromise",bands_str:"S2\u2013S3",band_ids:["S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (firmware attestation)",notes:"Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Affects all device classes. QI-enhanced firmware attestation detects unauthorized modifications."},
-    {attack:"Cloud infrastructure attack",bands_str:"S3",band_ids:["S3"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (QKD for data-in-transit)",notes:"Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit."},
-    {attack:"Neural data privacy breach",bands_str:"N1\u2013S3",band_ids:["N1","S1","S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (cross-band encryption)",notes:"Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud."},
-    {attack:"Harvest-now-decrypt-later",bands_str:"S3",band_ids:["S3"],coupling:null,access:null,classical:"No",quantum:"Prevented (QKD/PQC)",notes:"Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive \u2014 can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival."},
-    // ── Frequency-domain attacks (v3.2 Entry 28) ──
-    {attack:"ELF neural entrainment",bands_str:"S1\u2192N4\u2013N7",band_ids:["S1","N4","N5","N6","N7"],coupling:"DIRECT",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (Dsf anomaly detection)",notes:"3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability."},
-    {attack:"Intermodulation (BCI weaponized)",bands_str:"S2\u2192N4\u2013N6",band_ids:["S2","N4","N5","N6"],coupling:"INTERMODULATION",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (coherence + Dsf)",notes:"UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz \u2192 theta \u2192 N4 thalamus. Most dangerous coupling mechanism."},
-    {attack:"Pulsed microwave (Frey effect)",bands_str:"S3\u2192N2,N7",band_ids:["S3","N2","N7"],coupling:"ENVELOPE",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (temporal coherence)",notes:"S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion \u2192 cochlea perceives as sound. 'Havana Syndrome' model. PRF selects neural target: 40 Hz \u2192 N7 gamma, 10 Hz \u2192 N6 alpha, 4 Hz \u2192 N4 theta, 1 Hz \u2192 N2 delta."},
-    {attack:"Temporal interference (deep targeting)",bands_str:"S2\u2192N4\u2013N6",band_ids:["S2","N4","N5","N6"],coupling:"TEMPORAL_INTERFERENCE",access:"LICENSED",classical:"Yes",quantum:"Enhanced (beat frequency detection)",notes:"Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Grossman et al. 2017, Cell. Licensed frequencies \u2014 lower barrier than restricted."},
-    {attack:"Envelope modulation (stealth carrier)",bands_str:"S1\u2013S2\u2192any N",band_ids:["S1","S2","N1","N2","N3","N4","N5","N6","N7"],coupling:"ENVELOPE",access:"PUBLIC",classical:"Yes",quantum:"Enhanced (demodulation detection)",notes:"Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry \u2014 PUBLIC access. tACS therapeutic principle weaponized."},
-    {attack:"Directed energy (thermal I0 damage)",bands_str:"S3\u2192I0",band_ids:["S3","I0"],coupling:null,access:"CLASSIFIED",classical:"Yes",quantum:"N/A (physical damage, not signal)",notes:"mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only."},
+  // Threat model — loaded async from /data/threat-registry.json (60 techniques)
+  // Fallback: 18 inline threats for offline/error resilience
+  threat_model: [],
+
+  _fallback_threats: [
+    {id:"T2001",attack:"Signal injection",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (coherence metric)",notes:"Inject false signals at electrode-tissue boundary.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0002"],techniques:["T1659"],note:""},sources:[]},
+    {id:"T2002",attack:"Neural ransomware",bands_str:"N3",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (QI score drop)",notes:"Disrupt or lock neural function via stimulation manipulation.",status:"THEORETICAL",severity:"critical",mitre:{tactics:["TA0040"],techniques:[],note:""},sources:[]},
+    {id:"T2003",attack:"Eavesdropping",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (Heisenberg disturbance)",notes:"Passive interception of neural signals at I0.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
+    {id:"T2004",attack:"Man-in-the-middle",bands_str:"I0",band_ids:["I0"],coupling:null,access:null,classical:"Partial",quantum:"Yes (no-cloning + Bell test)",notes:"Intercept and modify signals at I0 boundary.",status:"DEMONSTRATED",severity:"high",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
+    {id:"T2005",attack:"Quantum tunneling exploit",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling profile anomaly)",notes:"Exploit ion channel quantum tunneling to inject false synaptic events.",status:"THEORETICAL",severity:"high",mitre:{tactics:["TA0002"],techniques:[],note:""},sources:[]},
+    {id:"T2006",attack:"Davydov soliton attack",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling term Q_tunnel)",notes:"Use THz stimulation to trigger Davydov solitons in SNARE protein complexes.",status:"THEORETICAL",severity:"high",mitre:{tactics:["TA0002"],techniques:[],note:""},sources:[]},
+    {id:"T2007",attack:"Identity spoofing",bands_str:"N3–N7",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (quantum biometric)",notes:"Replicate user's neural signature to bypass authentication.",status:"DEMONSTRATED",severity:"high",mitre:{tactics:["TA0001"],techniques:[],note:""},sources:[]},
+    {id:"T2030",attack:"BLE/RF side-channel",bands_str:"S1–S2",band_ids:["S1","S2"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (signal correlation)",notes:"Extract neural data from BLE/RF emissions via side-channels.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
+    {id:"T2031",attack:"Supply chain compromise",bands_str:"S2–S3",band_ids:["S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (firmware attestation)",notes:"Tamper with BCI hardware/firmware during manufacturing.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0001"],techniques:[],note:""},sources:[]},
+    {id:"T2032",attack:"Cloud infrastructure attack",bands_str:"S3",band_ids:["S3"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (QKD for data-in-transit)",notes:"Compromise cloud services processing neural data.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0001"],techniques:[],note:""},sources:[]},
+    {id:"T2040",attack:"Neural data privacy breach",bands_str:"N1–S3",band_ids:["N1","S1","S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (cross-band encryption)",notes:"Unauthorized access to recorded neural data across any band.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
+    {id:"T2041",attack:"Harvest-now-decrypt-later",bands_str:"S3",band_ids:["S3"],coupling:null,access:null,classical:"No",quantum:"Prevented (QKD/PQC)",notes:"Record encrypted BCI traffic now, decrypt with future quantum computers.",status:"EMERGING",severity:"critical",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
+    {id:"T2050",attack:"ELF neural entrainment",bands_str:"S1→N4–N7",band_ids:["S1","N4","N5","N6","N7"],coupling:"DIRECT",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (Dsf anomaly detection)",notes:"3-76 Hz government-restricted ELF entrainment.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
+    {id:"T2051",attack:"Intermodulation (BCI weaponized)",bands_str:"S2→N4–N6",band_ids:["S2","N4","N5","N6"],coupling:"INTERMODULATION",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (coherence + Dsf)",notes:"UHF-Mil + MICS = neural-range beat frequency.",status:"DEMONSTRATED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
+    {id:"T2052",attack:"Pulsed microwave (Frey effect)",bands_str:"S3→N2,N7",band_ids:["S3","N2","N7"],coupling:"ENVELOPE",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (temporal coherence)",notes:"S-band pulsed microwave — Havana Syndrome model.",status:"DEMONSTRATED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
+    {id:"T2053",attack:"Temporal interference (deep targeting)",bands_str:"S2→N4–N6",band_ids:["S2","N4","N5","N6"],coupling:"TEMPORAL_INTERFERENCE",access:"LICENSED",classical:"Yes",quantum:"Enhanced (beat frequency detection)",notes:"Two kHz+ signals create neural-range beat frequency at intersection.",status:"DEMONSTRATED",severity:"high",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
+    {id:"T2054",attack:"Envelope modulation (stealth carrier)",bands_str:"S1–S2→any N",band_ids:["S1","S2","N1","N2","N3","N4","N5","N6","N7"],coupling:"ENVELOPE",access:"PUBLIC",classical:"Yes",quantum:"Enhanced (demodulation detection)",notes:"Any carrier modulated at neural frequency. Lowest barrier.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
+    {id:"T2055",attack:"Directed energy (thermal I0 damage)",bands_str:"S3→I0",band_ids:["S3","I0"],coupling:null,access:"CLASSIFIED",classical:"Yes",quantum:"N/A (physical damage, not signal)",notes:"mm-wave/ADS directed energy — destroys I0 integrity.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
   ],
 
   bci_device_classes: {
@@ -1029,21 +1157,38 @@ class BandDetailView {
         </div>
         <div class="detail-section">
           <h3>Attack Vectors (${attacks.length})</h3>
-          ${attacks.map(a => `
+          ${attacks.map(a => {
+            const statusCls = (a.status || 'theoretical').toLowerCase();
+            const sevCls = (a.severity || 'medium').toLowerCase();
+            const mitreTags = a.mitre ? [
+              ...(a.mitre.tactics || []).map(t => `<span class="mitre-tag">${t}</span>`),
+              ...(a.mitre.techniques || []).map(t => `<span class="mitre-tag">${t}</span>`),
+            ].join('') : '';
+            const sourcesList = (a.sources && a.sources.length > 0)
+              ? `<div class="source-list">Sources: ${a.sources.join('; ')}</div>` : '';
+            return `
             <div class="detail-attack-row">
-              <div class="detail-attack-name">${a.attack}</div>
+              <div class="detail-attack-name">
+                <span class="status-dot ${statusCls}"></span>
+                ${a.id ? `<span style="color:var(--text-dim);font-size:0.7rem;font-family:var(--font-mono);">${a.id}</span> — ` : ''}
+                ${a.attack}
+                <span class="sev-badge ${sevCls}" style="margin-left:0.3rem;">${a.severity || ''}</span>
+                <span class="status-badge ${statusCls}" style="margin-left:0.2rem;">${a.status || ''}</span>
+              </div>
               <div class="detail-attack-meta">
-                Bands: ${a.bands_str}
-                ${a.coupling ? ' \u00b7 Coupling: <strong>' + a.coupling + '</strong>' : ''}
-                ${a.access ? ' \u00b7 Access: <strong>' + a.access + '</strong>' : ''}
+                Bands: ${a.bands_str || a.bands || ''}
+                ${a.coupling ? ' · Coupling: <strong>' + a.coupling + '</strong>' : ''}
+                ${a.access ? ' · Access: <strong>' + a.access + '</strong>' : ''}
               </div>
               <div class="detail-attack-meta">
                 Classical detection: <span style="color:${a.classical === 'Yes' ? 'var(--green)' : a.classical === 'Partial' ? 'var(--orange)' : 'var(--red)'}">${a.classical || 'N/A'}</span>
-                \u00b7 Quantum detection: <span style="color:var(--purple)">${a.quantum || 'N/A'}</span>
+                · Quantum detection: <span style="color:var(--purple)">${a.quantum || 'N/A'}</span>
               </div>
+              ${mitreTags ? `<div class="mitre-ref">MITRE: ${mitreTags}${a.mitre?.note ? ' — ' + a.mitre.note : ''}</div>` : ''}
               ${a.notes ? `<div class="detail-attack-meta" style="color:var(--text);margin-top:0.2rem;">${a.notes}</div>` : ''}
-            </div>
-          `).join('')}
+              ${sourcesList}
+            </div>`;
+          }).join('')}
         </div>
         <div class="detail-section full-width">
           <h3>Severity Detail</h3>
@@ -1082,37 +1227,150 @@ class AttackSimulator {
     this.selectedAttack = null;
     this.onAttackSelect = null;
     this.isOpen = false;
+    this.searchTerm = '';
   }
 
   render() {
     this.listEl = document.createElement('div');
     this.listEl.className = 'attack-list';
-    this.listEl.innerHTML = `<h3>Attack Simulator</h3>`;
 
-    for (const atk of this.data.threat_model) {
-      const item = document.createElement('div');
-      item.className = 'attack-item';
-      item.innerHTML = `
-        <div class="attack-name">${atk.attack}</div>
-        <div class="attack-bands">${atk.bands_str}</div>
-        ${atk.coupling ? `<div class="attack-coupling">${atk.coupling}${atk.access ? ' \u00b7 ' + atk.access : ''}</div>` : ''}
-      `;
-      item.addEventListener('click', () => {
-        if (this.selectedAttack === atk) {
-          this.selectedAttack = null;
-          item.classList.remove('selected');
-          this.onAttackSelect?.(null);
-        } else {
-          this.listEl.querySelectorAll('.attack-item').forEach(i => i.classList.remove('selected'));
-          this.selectedAttack = atk;
-          item.classList.add('selected');
-          this.onAttackSelect?.(atk);
-        }
-      });
-      this.listEl.appendChild(item);
+    // Header with count
+    const total = this.data.threat_model.length;
+    const headerEl = document.createElement('h3');
+    headerEl.textContent = `Attack Simulator (${total})`;
+    this.listEl.appendChild(headerEl);
+
+    // Stats bar
+    const statsEl = document.createElement('div');
+    statsEl.className = 'attack-stats';
+    const statusCounts = {CONFIRMED:0, DEMONSTRATED:0, THEORETICAL:0, EMERGING:0};
+    for (const a of this.data.threat_model) {
+      if (a.status && statusCounts[a.status] !== undefined) statusCounts[a.status]++;
     }
+    for (const [s, c] of Object.entries(statusCounts)) {
+      if (c > 0) {
+        const span = document.createElement('span');
+        span.className = 'attack-stat';
+        span.innerHTML = `<span class="status-dot ${s.toLowerCase()}"></span>${c} ${s.charAt(0) + s.slice(1).toLowerCase()}`;
+        statsEl.appendChild(span);
+      }
+    }
+    this.listEl.appendChild(statsEl);
+
+    // Search input
+    const searchInput = document.createElement('input');
+    searchInput.className = 'attack-search';
+    searchInput.placeholder = 'Search attacks...';
+    searchInput.type = 'text';
+    searchInput.addEventListener('input', () => {
+      this.searchTerm = searchInput.value.toLowerCase();
+      this._filterItems();
+    });
+    this.listEl.appendChild(searchInput);
+
+    // Group attacks by tactic
+    this.bodyEl = document.createElement('div');
+    this._renderGroups();
+    this.listEl.appendChild(this.bodyEl);
 
     this.el.appendChild(this.listEl);
+  }
+
+  _renderGroups() {
+    this.bodyEl.innerHTML = '';
+    this.attackItemEls = [];
+
+    // Build tactic groups
+    const tacticMap = new Map();
+    for (const atk of this.data.threat_model) {
+      const tactic = atk.tactic || atk.category || 'Unknown';
+      if (!tacticMap.has(tactic)) tacticMap.set(tactic, []);
+      tacticMap.get(tactic).push(atk);
+    }
+
+    // Look up tactic names from registry data if available
+    const tacticNames = {};
+    if (this.data._registry_tactics) {
+      for (const t of this.data._registry_tactics) {
+        tacticNames[t.id] = t.name;
+      }
+    }
+
+    for (const [tactic, attacks] of tacticMap) {
+      const group = document.createElement('div');
+      group.className = 'tactic-group';
+      group.dataset.tactic = tactic;
+
+      const tacticName = tacticNames[tactic] || tactic;
+      const header = document.createElement('div');
+      header.className = 'tactic-header';
+      header.innerHTML = `<span class="tactic-chevron">▼</span> ${tactic} — ${tacticName} <span class="tactic-count">${attacks.length}</span>`;
+
+      const body = document.createElement('div');
+      body.className = 'tactic-body';
+
+      header.addEventListener('click', () => {
+        const chevron = header.querySelector('.tactic-chevron');
+        body.classList.toggle('collapsed');
+        chevron.classList.toggle('collapsed');
+      });
+
+      for (const atk of attacks) {
+        const item = document.createElement('div');
+        item.className = 'attack-item';
+        item.dataset.attackId = atk.id || '';
+
+        const statusClass = (atk.status || 'theoretical').toLowerCase();
+        const sevClass = (atk.severity || 'medium').toLowerCase();
+
+        item.innerHTML = `
+          <div class="attack-name">
+            <span class="status-dot ${statusClass}"></span>
+            ${atk.attack}
+          </div>
+          <div style="display:flex;gap:0.4rem;align-items:center;margin-top:0.15rem;flex-wrap:wrap;">
+            ${atk.id ? `<span class="attack-id">${atk.id}</span>` : ''}
+            <span class="sev-badge ${sevClass}">${atk.severity || 'unknown'}</span>
+            <span class="status-badge ${statusClass}">${atk.status || 'unknown'}</span>
+          </div>
+          <div class="attack-bands">${atk.bands_str || atk.bands || ''}</div>
+          ${atk.coupling ? `<div class="attack-coupling">${atk.coupling}${atk.access ? ' · ' + atk.access : ''}</div>` : ''}
+        `;
+
+        item.addEventListener('click', () => {
+          if (this.selectedAttack === atk) {
+            this.selectedAttack = null;
+            item.classList.remove('selected');
+            this.onAttackSelect?.(null);
+          } else {
+            this.listEl.querySelectorAll('.attack-item').forEach(i => i.classList.remove('selected'));
+            this.selectedAttack = atk;
+            item.classList.add('selected');
+            this.onAttackSelect?.(atk);
+          }
+        });
+
+        this.attackItemEls.push({ el: item, atk, groupEl: group });
+        body.appendChild(item);
+      }
+
+      group.appendChild(header);
+      group.appendChild(body);
+      this.bodyEl.appendChild(group);
+    }
+  }
+
+  _filterItems() {
+    const term = this.searchTerm;
+    for (const {el, atk, groupEl} of this.attackItemEls) {
+      const text = `${atk.attack} ${atk.id || ''} ${atk.bands_str || ''} ${atk.coupling || ''} ${atk.status || ''} ${atk.severity || ''} ${atk.notes || ''}`.toLowerCase();
+      el.style.display = text.includes(term) ? '' : 'none';
+    }
+    // Show/hide tactic groups based on whether any children are visible
+    for (const group of this.bodyEl.querySelectorAll('.tactic-group')) {
+      const visibleItems = group.querySelectorAll('.attack-item:not([style*="display: none"])');
+      group.style.display = visibleItems.length > 0 ? '' : 'none';
+    }
   }
 
   toggle() {
@@ -1279,7 +1537,7 @@ class FrequencySpectrum {
     }
     html += '</div>';
 
-    html += '<div class="freq-section-title">Silicon / RF Allocations</div>';
+    html += '<div class="freq-section-title">Synthetic / RF Allocations</div>';
     html += '<div class="freq-ruler">';
     for (const f of this.data.freq_silicon) {
       const cls = ['freq-entry', 'silicon'];
@@ -1355,7 +1613,45 @@ class Tooltip {
 // APP — Wire everything together
 // ════════════════════════════════════════════════════════════════
 
-(function init() {
+// ════════════════════════════════════════════════════════════════
+// REGISTRY LOADER — fetch 60 techniques from shared registry
+// ════════════════════════════════════════════════════════════════
+
+async function loadRegistry() {
+  try {
+    const resp = await fetch('/data/threat-registry.json');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const registry = await resp.json();
+    QIF_DATA.threat_model = registry.techniques.map(t => ({
+      id: t.id,
+      attack: t.attack,
+      bands_str: t.bands,
+      band_ids: t.band_ids,
+      coupling: t.coupling,
+      access: t.access,
+      classical: t.classical,
+      quantum: t.quantum,
+      notes: t.notes,
+      status: t.status,
+      severity: t.severity,
+      mitre: t.mitre,
+      sources: t.sources,
+      ui_category: t.ui_category,
+      tactic: t.category,
+      category: t.category,
+    }));
+    QIF_DATA._registry_tactics = registry.tactics || [];
+    console.log(`Registry loaded: ${QIF_DATA.threat_model.length} techniques`);
+  } catch (e) {
+    console.warn('Registry fetch failed, using 18-threat inline fallback:', e.message);
+    QIF_DATA.threat_model = QIF_DATA._fallback_threats;
+  }
+}
+
+(async function init() {
+  // Load registry before rendering components
+  await loadRegistry();
+
   const container = document.getElementById('hourglass-container');
   const toolbar = document.getElementById('toolbar');
   const detailEl = document.getElementById('band-detail');

@@ -3,8 +3,9 @@
   "type": "module",
   "version": "2.0.0",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "prebuild": "mkdir -p docs/data && cp shared/threat-registry.json docs/data/threat-registry.json",
+    "dev": "npm run prebuild && astro dev",
+    "build": "npm run prebuild && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "fetch-news": "node scripts/fetch-news.mjs"
