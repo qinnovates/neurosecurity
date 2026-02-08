@@ -1,0 +1,964 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
+---
+
+<PageLayout
+  title="QIF Whitepaper"
+  description="The Quantum Indeterministic Framework for Neural Security — a unified physics-based security architecture for brain-computer interfaces."
+  breadcrumbs={[{ label: 'Whitepaper' }]}
+  maxWidth="wide"
+>
+  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+    <!-- Sidebar (sticky TOC) -->
+    <aside class="hidden lg:block">
+      <nav class="sticky top-24 space-y-1" aria-label="Table of contents">
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
+        {[
+          { href: '#ecosystem', label: 'Three Pillars' },
+          { href: '#abstract', label: 'Abstract' },
+          { href: '#introduction', label: 'Introduction' },
+          { href: '#background', label: 'Background' },
+          { href: '#hourglass', label: 'Hourglass Model' },
+          { href: '#qi-equation', label: 'QI Equation' },
+          { href: '#attack-surface', label: 'Attack Surface' },
+          { href: '#nsp', label: 'NSP Protocol' },
+          { href: '#black-hole', label: 'Black Hole Principle' },
+          { href: '#falsifiability', label: 'Falsifiability' },
+          { href: '#discussion', label: 'Discussion' },
+          { href: '#future-work', label: 'Future Work' },
+          { href: '#references', label: 'References' },
+        ].map((item) => (
+          <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="max-w-3xl">
+
+      <!-- Header -->
+      <section class="mb-16">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          The Quantum Indeterministic Framework for Neural Security
+        </h1>
+        <p class="text-lg text-[var(--color-text-muted)] mb-6">
+          A Unified Physics-Based Security Architecture for Brain-Computer Interfaces
+        </p>
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
+            v5.0 Working Draft
+          </span>
+          <span class="text-xs text-[var(--color-text-faint)]">2026-02-06</span>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)]">
+          <strong>Author:</strong> Kevin Qi &middot;
+          <strong>Predecessor:</strong> QIF Whitepaper v3.1 (2026-02-03)
+        </p>
+      </section>
+
+      <!-- Three Pillars / Ecosystem -->
+      <section id="ecosystem" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">The Three Pillars of Qinnovate</h2>
+        <div class="prose mb-8">
+          <p>
+            Securing a brain-computer interface is not a single problem &mdash; it is three interlocking problems that must be solved together. Qinnovate addresses all three with an integrated stack: a threat model, a wire protocol, and a compression engine. Each pillar is independently useful, but their power is in the combination.
+          </p>
+        </div>
+
+        <!-- Pillar cards -->
+        <div class="grid sm:grid-cols-3 gap-4 mb-8">
+          <div class="glass rounded-xl p-6" style="border-top: 3px solid var(--color-accent-primary);">
+            <p class="text-2xl mb-3" style="color: var(--color-accent-primary);">&#9670;</p>
+            <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">QIF</h3>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3">Quantum Indeterministic Framework</p>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              <strong>The threat model.</strong> An 11-band hourglass architecture that maps every attack surface from neural tissue to silicon into a single equation: <span class="font-[family-name:var(--font-mono)]">QI(b,t) = e<sup>&minus;S(b,t)</sup></span>. Defines <em>what</em> to defend and <em>how to measure</em> whether it&rsquo;s working.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-3"><a href="#hourglass" class="text-[var(--color-accent-primary)]">&rarr; Section 4&ndash;6</a></p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-top: 3px solid var(--color-accent-secondary);">
+            <p class="text-2xl mb-3" style="color: var(--color-accent-secondary);">&#9632;</p>
+            <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">NSP</h3>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3">Neural Sensory Protocol</p>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              <strong>The wire protocol.</strong> A five-layer post-quantum specification that wraps every BCI data frame in ML-KEM key exchange, ML-DSA signatures, and AES-256-GCM encryption &mdash; at 3.25% power overhead on implanted devices.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-3"><a href="#nsp" class="text-[var(--color-accent-primary)]">&rarr; Section 7</a></p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-top: 3px solid var(--color-accent-tertiary);">
+            <p class="text-2xl mb-3" style="color: var(--color-accent-tertiary);">&#8734;</p>
+            <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Runemate</h3>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3">Project Runemate &middot; Runemate Forge</p>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              <strong>The compression engine.</strong> An HTML-to-bytecode compiler (Staves) that compresses BCI interface content 65&ndash;90%, making post-quantum encryption cost-free for pages above 23 KB. Built in Rust with IEC 62304 Class C certification path.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-3"><a href="#nsp" class="text-[var(--color-accent-primary)]">&rarr; Section 7.4</a></p>
+          </div>
+        </div>
+
+        <!-- How they connect -->
+        <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-3">Why all three are required</h4>
+          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+            <p>
+              <strong class="text-[var(--color-text-primary)]">QIF without NSP</strong> is a theoretical architecture with no wire format. It can identify threats but cannot stop them in transit.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">NSP without QIF</strong> lacks a threat model and has no signal integrity layer. It encrypts data but cannot tell whether the data itself has been manipulated at the electrode-tissue boundary.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">Both without Runemate</strong> face a bandwidth wall. Post-quantum key sizes are 18&ndash;46&times; larger than classical equivalents. On a device with a 40 mW power budget transmitting over BLE, this overhead is the primary barrier to PQC adoption.
+            </p>
+            <p class="pt-2 border-t border-[var(--color-border)]">
+              <strong class="text-[var(--color-text-primary)]">Together:</strong> a fully post-quantum-secured BCI stack that is feasible today, on current hardware, at 3.25% power overhead, with net bandwidth savings for typical interface content. QIF defines <em>what</em> to protect. NSP defines <em>how</em> to protect it. Runemate makes that protection <em>practical</em>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Flow diagram -->
+        <div class="flex items-center justify-center gap-2 mt-8 text-sm">
+          <div class="px-4 py-2 rounded-lg border border-[var(--color-accent-primary)]/30 text-[var(--color-accent-primary)] font-semibold font-[family-name:var(--font-heading)]">QIF</div>
+          <span class="text-[var(--color-text-faint)]">&rarr;</span>
+          <span class="text-xs text-[var(--color-text-faint)]">threat model feeds</span>
+          <span class="text-[var(--color-text-faint)]">&rarr;</span>
+          <div class="px-4 py-2 rounded-lg border border-[var(--color-accent-secondary)]/30 text-[var(--color-accent-secondary)] font-semibold font-[family-name:var(--font-heading)]">NSP</div>
+          <span class="text-[var(--color-text-faint)]">&rarr;</span>
+          <span class="text-xs text-[var(--color-text-faint)]">bandwidth unlocked by</span>
+          <span class="text-[var(--color-text-faint)]">&rarr;</span>
+          <div class="px-4 py-2 rounded-lg border border-[var(--color-accent-tertiary)]/30 text-[var(--color-accent-tertiary)] font-semibold font-[family-name:var(--font-heading)]">Runemate</div>
+        </div>
+      </section>
+
+      <!-- 1. Abstract -->
+      <section id="abstract" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">1. Abstract</h2>
+        <div class="prose">
+          <p>
+            Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet their security architectures remain grounded in classical computing paradigms. This paper presents the Quantum Indeterministic Framework (QIF), an 11-band hourglass security architecture spanning the neural-synthetic boundary, and proposes a unified security equation: <span class="font-[family-name:var(--font-mono)]">QI(b,t) = e<sup>&minus;S(b,t)</sup></span>. The QI equation combines four classical signal integrity terms (phase coherence, normalized transport entropy, amplitude stability, and a scale-frequency validity check derived from <span class="font-[family-name:var(--font-mono)]">L = v/f</span>) with three quantum terms (indeterminacy and entanglement gated by decoherence; tunneling ungated, as it persists in classical regimes).
+          </p>
+          <p>
+            We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. We propose the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption, scaled across three device tiers. A conceptual analogy between NSP-secured data and black hole information scrambling is explored and its limitations acknowledged following independent peer review.
+          </p>
+          <p>
+            We additionally present Project Runemate, a content compression pipeline that converts HTML to a compact bytecode format (Staves), offsetting PQC bandwidth overhead by 65&ndash;90% and achieving net bandwidth savings over classical transport for pages above 23 KB. Five falsifiability conditions are specified. QIF treats unresolved questions in quantum neuroscience, particularly the decoherence timescale in neural tissue, as tunable parameters rather than fixed assumptions. The framework degrades gracefully: if all quantum terms are zero, QIF reduces to a classical 11-band signal integrity architecture that retains independent utility.
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. Introduction -->
+      <section id="introduction" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">2. Introduction</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.1 The BCI Revolution</h3>
+        <div class="prose">
+          <p>
+            Brain-computer interfaces have crossed a critical threshold. Neuralink&rsquo;s N1 implant records from 1,024 electrodes sampling at approximately 20 kHz, transmitted wirelessly over Bluetooth Low Energy <a href="#ref-38">[38]</a>. What was once a laboratory instrument confined to severely disabled patients is on a trajectory toward consumer adoption.
+          </p>
+          <p>
+            The scale of BCI development is accelerating. The BISC platform (Columbia/Stanford, 2025) achieved 65,536 electrodes with 100 Mbps wireless bandwidth <a href="#ref-60">[60]</a>. Chinese programs at NeuCyber, NeuroXess, and Wuhan University have demonstrated bidirectional interfaces with up to 65,000 channels. Merge Labs raised $252M for ultrasound-based noninvasive high-bandwidth neural interfaces. Battelle&rsquo;s BrainSTORMS program (DARPA N3) uses injectable magnetoelectric nanoparticles.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.2 The Security Gap</h3>
+        <div class="prose">
+          <p>
+            Current BCI security treats the neural interface as a classical digital system: a sensor that produces voltage readings to be encrypted, transmitted, and authenticated using standard computing paradigms. This framing misses a physical reality. The electrode-tissue interface sits at the boundary between quantum and classical physics. Ion channels are nanometer-scale structures where quantum tunneling is experimentally observed <a href="#ref-11">[11]</a>, <a href="#ref-14">[14]</a>. Synaptic transmission involves quantum-scale energy transfers along protein alpha-helices <a href="#ref-12">[12]</a>.
+          </p>
+          <p>
+            Physics has always been part of BCI engineering. Individual physics checks exist. What nobody has done is: (1) combine them into a composite security score, (2) add scale-frequency validation as a physics constraint, (3) provide a principled extension path to quantum terms, or (4) tie band-specific scoring to neural architecture. This is the gap QIF occupies.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.3 What This Paper Delivers</h3>
+        <div class="prose">
+          <p>This paper presents seven contributions:</p>
+          <ol>
+            <li>An <strong>11-band hourglass architecture</strong> (v4.0) spanning the neural-synthetic boundary with 7-1-3 asymmetry, derived from neuroanatomy and quantum physics rather than networking analogy.</li>
+            <li>A <strong>unified QI equation</strong>, QI(b,t) = e<sup>&minus;S(b,t)</sup>, that subsumes the previously separate coherence metric and two candidate QI equations into a single exponential form.</li>
+            <li>Identification of <strong>five cross-domain attack coupling mechanisms</strong> and honest assessment of which attacks the QI equation can and cannot detect.</li>
+            <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol for BCI data.</li>
+            <li><strong>Project Runemate</strong>, a content compression pipeline that offsets PQC bandwidth overhead by 65&ndash;90%.</li>
+            <li>A conceptual analogy between NSP security properties and <strong>black hole information scrambling</strong>, presented with explicit acknowledgment of its limitations.</li>
+            <li><strong>Falsifiability conditions</strong> specifying what experimental findings would weaken or invalidate specific framework components.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 3. Background -->
+      <section id="background" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">3. Background and Related Work</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.1 BCI Security Literature</h3>
+        <div class="prose">
+          <p>
+            Martinovic et al. (2012) demonstrated that commercial EEG-based BCIs could be exploited as side-channel attack vectors <a href="#ref-51">[51]</a>. Bonaci et al. (2014) showed that subliminal stimuli embedded in BCI applications could extract private information without the user&rsquo;s awareness <a href="#ref-52">[52]</a>. Frank et al. (2017) provided the first systematic threat taxonomy for BCI systems <a href="#ref-53">[53]</a>. Bernal et al. (2022) cataloged BCI security vulnerabilities across wireless protocols, firmware, and signal processing pipelines, yet none address quantum-scale phenomena at the electrode-tissue boundary <a href="#ref-54">[54]</a>.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.2 Quantum Biology</h3>
+        <div class="prose">
+          <p>
+            Lambert et al. (2013) surveyed evidence for quantum effects in biological systems <a href="#ref-18">[18]</a>. Tegmark (2000) argued that thermal decoherence in the brain occurs on the order of 10<sup>&minus;13</sup> seconds <a href="#ref-15">[15]</a>. Fisher (2015) proposed that nuclear spin states in Posner molecules could maintain coherence for hours <a href="#ref-39">[39]</a>. Perry (2025) suggested collective coherence times of 1&ndash;10 ms <a href="#ref-55">[55]</a>. QIF sidesteps this unresolved debate by treating the decoherence time as a tunable parameter.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.3 Quantum Tunneling in Neural Systems</h3>
+        <div class="prose">
+          <p>
+            Qaswal (2019) developed mathematical models for quantum tunneling through closed voltage-gated ion channels <a href="#ref-11">[11]</a>. Summhammer et al. (2012) described quantum-mechanical ion motion within voltage-gated channels <a href="#ref-14">[14]</a>. Georgiev and Glazebrook (2018) analyzed quantum physics of synaptic communication via the SNARE protein complex <a href="#ref-12">[12]</a>. Kim et al. (2025) discovered under-the-barrier recollision (UBR), revealing tunneling dynamics are more complex than the WKB approximation assumes <a href="#ref-57">[57]</a>. The 2025 Nobel Prize in Physics demonstrated quantum tunneling at macroscopic scales in Josephson junction circuits <a href="#ref-56">[56]</a>.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.4 Post-Quantum Cryptography</h3>
+        <div class="prose">
+          <p>
+            NIST finalized three post-quantum cryptography standards in 2024: ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205) <a href="#ref-37">[37]</a>. Gidney and Eker&aring; (2021) estimated RSA-2048 could be factored in approximately 8 hours with 20 million noisy qubits <a href="#ref-33">[33]</a>. Gidney (2025) revised the estimate downward to fewer than 1 million noisy qubits in under one week <a href="#ref-34">[34]</a>. No prior work applies post-quantum cryptography specifically to the BCI electrode-tissue interface.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.5 The Gap QIF Addresses</h3>
+        <div class="prose">
+          <p>
+            Despite advances in BCI security, quantum biology, and post-quantum cryptography, no prior work synthesizes these three domains into a unified framework. The intersection of quantum security, quantum biology, and the unique physics of the electrode-tissue boundary remains unfilled. This is the gap QIF occupies.
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. Hourglass Model -->
+      <section id="hourglass" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">4. QIF Hourglass Model (v4.0)</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.1 Design Principles</h3>
+        <div class="prose">
+          <p>
+            Three principles govern the design. <strong>Width represents state space</strong>: how many possible states exist at each band. The architecture is widest at the extremes and narrowest at the center. The <strong>7-1-3 asymmetry</strong> (7 neural bands, 1 interface band, 3 synthetic bands) reflects the real structure: two domains converging on a single bottleneck. The neural domain is wider because the brain has 500 million years of evolutionary complexity; the synthetic domain is human-designed with bounded complexity. <strong>Bands are severity-stratified</strong>: higher neural bands represent higher clinical severity if compromised.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.2 The 11-Band Stack</h3>
+
+        <!-- Neural Domain -->
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3 mt-8">Neural Domain (Upper Hourglass) &mdash; 7 bands, severity-stratified</p>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Name</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Key Structures</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Determinacy</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">QI Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #22c55e;">N7</td><td class="py-3 px-4 font-medium">Neocortex</td><td class="py-3 px-4 text-[var(--color-text-muted)]">PFC, M1, V1, A1, Broca, Wernicke, PMC, SMA, PPC</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Quantum Uncertain</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.3&ndash;0.5</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #4ade80;">N6</td><td class="py-3 px-4 font-medium">Limbic System</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Hippocampus, BLA, insula, ACC, cingulate</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Chaotic to QU</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.2&ndash;0.4</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #86efac;">N5</td><td class="py-3 px-4 font-medium">Basal Ganglia</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Striatum, GPi/GPe, STN, substantia nigra</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Chaotic</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.15&ndash;0.35</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #a3e635;">N4</td><td class="py-3 px-4 font-medium">Diencephalon</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Thalamus, hypothalamus, VIM, ANT</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Stochastic to Chaotic</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.1&ndash;0.3</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #bef264;">N3</td><td class="py-3 px-4 font-medium">Cerebellum</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Cerebellar cortex, deep nuclei, vermis</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Stochastic</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.1&ndash;0.25</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #d9f99d;">N2</td><td class="py-3 px-4 font-medium">Brainstem</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Medulla, pons, midbrain, reticular formation</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Stochastic</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.05&ndash;0.15</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #ecfccb;">N1</td><td class="py-3 px-4 font-medium">Spinal Cord</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Cervical, thoracic, lumbar, sacral, cauda equina</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Stochastic</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.01&ndash;0.1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Interface Zone -->
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Interface Zone (Bottleneck)</p>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Name</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Function</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Determinacy</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">QI Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #f59e0b;">I0</td><td class="py-3 px-4 font-medium">Neural Interface</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Electrode-tissue boundary, measurement/collapse</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Quasi-quantum (&Gamma;<sub>D</sub> &isin; (0,1))</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.01&ndash;0.1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Synthetic Domain -->
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Synthetic Domain (Lower Hourglass)</p>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Name</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Function</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Determinacy</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">QI Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #93c5fd;">S1</td><td class="py-3 px-4 font-medium">Analog Front-End</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Amplification, filtering, ADC/DAC</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Stochastic (analog noise)</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0.001&ndash;0.01</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #60a5fa;">S2</td><td class="py-3 px-4 font-medium">Digital Processing</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Decoding, algorithms, classification</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Deterministic</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">&asymp; 0</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #3b82f6;">S3</td><td class="py-3 px-4 font-medium">Application</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Clinical software, UI, data storage</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Deterministic</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.3 I0: The Bottleneck</h3>
+        <div class="prose">
+          <p>
+            I0 is the most critical band. Unlike v2.0&rsquo;s &ldquo;Layer 8&rdquo; which was modeled as a thin boundary, I0 has real thickness: it is a quasi-quantum zone where the decoherence factor &Gamma;<sub>D</sub> lies between 0 and 1. I0 is the physical layer, not an abstraction above it. The hourglass resolves a common objection: I0 is the waist &mdash; the most physical, most constrained point in the system. It is where platinum touches tissue, where electrons become ions, where classical measurement encounters quantum states.
+          </p>
+          <p>
+            The bottleneck geometry means all information must pass through the narrowest point. This provides maximum security leverage: secure I0, and you secure the chokepoint through which all data flows.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.4 The Classical Ceiling</h3>
+        <div class="prose">
+          <p>
+            The boundary between N6 (chaotic to quantum uncertain) and N7 (quantum uncertain) is the classical ceiling. Below it, all unpredictability is in principle resolvable with better measurement. Above it, the unpredictability is ontic, as established by Bell&rsquo;s theorem <a href="#ref-64">[64]</a>. Classical security tools operate below the ceiling. QIF operates across the full spectrum.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.5 Severity Stratification</h3>
+        <div class="prose">
+          <p>
+            The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The 60-technique threat taxonomy (Section 6.5) assigns band-level targeting to each attack, enabling severity-scored risk assessment.
+          </p>
+        </div>
+
+        <!-- Synthetic bands decomposition -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.6 Why Three Synthetic Bands: Frequency-Regime Security</h3>
+        <div class="overflow-x-auto mb-6">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Physics Regime</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Frequency Range</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Attack Physics</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #93c5fd;">S1</td><td class="py-3 px-4">Near-field (analog)</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">0&ndash;10 kHz</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Side-channel leakage, analog noise injection</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #60a5fa;">S2</td><td class="py-3 px-4">Guided-wave (digital)</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">10 kHz&ndash;1 GHz</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Firmware exploits, fault injection</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-bold" style="color: #3b82f6;">S3</td><td class="py-3 px-4">Far-field (RF/wireless)</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">1 GHz+</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Wireless interception, protocol attacks</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. QI Equation -->
+      <section id="qi-equation" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">5. The Unified QI Equation</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.1 Core Equation</h3>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            QI(b, t) = e<sup>&minus;S(b, t)</sup>
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            b = band index &middot; t = time window &middot; S = S<sub>c</sub> + S<sub>q</sub> &middot; QI &isin; (0, 1]
+          </p>
+        </div>
+        <div class="prose">
+          <p>
+            The exponential form is not arbitrary. It is a <strong>Boltzmann factor</strong>. S plays the role of &ldquo;energy&rdquo; (anomaly), and QI is the probability of the signal being legitimate. This is the same mathematical structure as thermal physics (P &prop; e<sup>&minus;E/kT</sup>), Shannon entropy, and the coherence metric C<sub>s</sub> <a href="#ref-46">[46]</a>.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.2 The Unification</h3>
+        <div class="prose">
+          <p>
+            Before this version, QIF maintained three separate equations: the coherence metric C<sub>s</sub> and two competing QI candidates. The key insight is that these are the same equation viewed in different mathematical spaces.
+          </p>
+        </div>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <div class="space-y-2 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
+            <p>QI = C<sub>s</sub> &middot; e<sup>&minus;S<sub>q</sub></sup></p>
+            <p>= e<sup>&minus;S<sub>c</sub></sup> &middot; e<sup>&minus;S<sub>q</sub></sup></p>
+            <p>= e<sup>&minus;(S<sub>c</sub> + S<sub>q</sub>)</sup></p>
+          </div>
+          <p class="text-sm text-[var(--color-text-faint)] mt-4">
+            Log-space: additive (engineering). Real-space: multiplicative (theoretical). Same equation, different views.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.3 Classical Terms (S<sub>c</sub>)</h3>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
+            S<sub>c</sub>(b) = w<sub>1</sub>&sigma;<sup>2</sup><sub>&phi;</sub> + w<sub>2</sub>H<sub>t</sub>/ln(N) + w<sub>3</sub>&sigma;<sup>2</sup><sub>&gamma;</sub> + w<sub>4</sub>D<sub>sf</sub>
+          </p>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Term</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Symbol</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">What It Measures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Phase coherence</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&sigma;<sup>2</sup><sub>&phi;</sub></td><td class="py-3 px-4 text-[var(--color-text-muted)]">Cross-channel phase synchronization</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Transport entropy</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">H<sub>t</sub>/ln(N)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Pathway transmission reliability (normalized)</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Amplitude stability</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&sigma;<sup>2</sup><sub>&gamma;</sub></td><td class="py-3 px-4 text-[var(--color-text-muted)]">Signal amplitude consistency</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Scale-frequency validity</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">D<sub>sf</sub></td><td class="py-3 px-4 text-[var(--color-text-muted)]">Whether signal obeys L = v/f physics</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose">
+          <p>
+            <strong>Phase coherence</strong> is grounded in Fries&rsquo; Communication Through Coherence framework <a href="#ref-25">[25]</a>, <a href="#ref-26">[26]</a>. <strong>Transport entropy</strong> uses Shannon surprise, normalized by ln(N) to ensure the term lies in &asymp;[0, 1] regardless of channel count. <strong>Amplitude stability</strong> measures relative fluctuation around the baseline mean. <strong>Scale-frequency validity (D<sub>sf</sub>)</strong> measures whether the signal&rsquo;s frequency and spatial extent obey L = v/f. The logarithmic scale handles orders-of-magnitude range.
+          </p>
+          <p>
+            Weights w<sub>1</sub>&ndash;w<sub>4</sub> are calibratable parameters. Their values are not yet determined experimentally.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.4 L = v/f: The Unified Wave Equation</h3>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            L = v / f
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            L = length of one wave &middot; v = wave velocity &middot; f = frequency
+          </p>
+        </div>
+        <div class="prose">
+          <p>
+            Previous versions used &lambda; for electromagnetic wavelength and S for neural spatial extent. These are the same physical quantity: the length of one complete oscillation measured in its medium. The only variable that changes across the BCI system is v, the propagation velocity.
+          </p>
+        </div>
+
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3 mt-8">Validated Spatial Extents</p>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Frequency</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Spatial Extent</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">f &times; S (m/s)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">High gamma</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">60&ndash;100 Hz</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">0.3&ndash;5 mm</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&asymp;0.08&ndash;0.4</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Low gamma</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">30&ndash;60 Hz</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">1&ndash;10 mm</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&asymp;0.04&ndash;0.4</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Alpha</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">8&ndash;12 Hz</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">10&ndash;20 cm</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">1&ndash;2</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Theta</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">4&ndash;8 Hz</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">4&ndash;5 cm</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">0.24&ndash;0.40</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Delta</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">0.5&ndash;4 Hz</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">15&ndash;20 cm</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">0.15&ndash;0.20</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.5 Quantum Terms (S<sub>q</sub>)</h3>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
+            S<sub>q</sub>(b, t) = (1 &minus; &Gamma;<sub>D</sub>(t)) &middot; [&psi;<sub>1</sub>&middot;Q&#770;<sub>i</sub> &minus; &psi;<sub>3</sub>&middot;Q&#770;<sub>e</sub>] + &psi;<sub>2</sub>&middot;Q&#770;<sub>t</sub>
+          </p>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Term</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Symbol</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Formula</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Gated?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Indeterminacy</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">Q&#770;<sub>i</sub></td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">S<sub>vN</sub>(&rho;)/ln(d)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Yes</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Tunneling</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">Q&#770;<sub>t</sub></td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">e<sup>&minus;2&kappa;d</sup> (WKB)</td><td class="py-3 px-4 font-bold text-[var(--color-accent-primary)]">No</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Entanglement</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">Q&#770;<sub>e</sub></td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">E(&rho;<sub>AB</sub>)/ln(d)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Yes</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Decoherence</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&Gamma;<sub>D</sub></td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">1 &minus; e<sup>&minus;t/&tau;<sub>D</sub></sup></td><td class="py-3 px-4 text-[var(--color-text-muted)]">N/A (is the gate)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="glass rounded-xl p-5 border-l-3 mb-8" style="border-left: 3px solid var(--color-accent-primary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Critical correction in v5.0:</strong> Tunneling is ungated. Unlike indeterminacy and entanglement, quantum tunneling does not require maintained quantum coherence. Tunneling is a single-particle phenomenon that persists even in thermally noisy environments. This correction was identified during independent Gemini peer review.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.6 Properties of the Unified Equation</h3>
+        <div class="prose">
+          <ol>
+            <li><strong>Bounded.</strong> QI lies in (0, 1]. The exponential of a non-negative quantity is always positive and at most 1.</li>
+            <li><strong>Monotonic.</strong> Higher QI means more secure. QI = 1 means S = 0 (no anomaly).</li>
+            <li><strong>Graceful degradation.</strong> When quantum terms are zero, QI = e<sup>&minus;S<sub>c</sub></sup> = C<sub>s</sub>.</li>
+            <li><strong>Band-specific.</strong> Each hourglass band receives its own QI score.</li>
+            <li><strong>Time-dependent.</strong> The decoherence gate fades quantum terms as the system becomes classical.</li>
+            <li><strong>Composable.</strong> Every component is a small, independently testable function.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 6. Attack Surface -->
+      <section id="attack-surface" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6. Attack Surface Analysis</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.1 Five Cross-Domain Attack Coupling Mechanisms</h3>
+        <div class="prose mb-6">
+          <p>
+            A signal injected in the synthetic domain does not need to match the neural target frequency to cause harm. We propose this taxonomy as a contribution to BCI threat modeling.
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #ef4444;">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism A: Direct Frequency Match</h4>
+            <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] mb-2">f<sub>attack</sub> = f<sub>neural</sub></p>
+            <p class="text-sm text-[var(--color-text-muted)]">Strongest coupling. The attack signal passes through I0 with minimal attenuation. Example: a 40 Hz injection directly entrains gamma oscillations.</p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #f59e0b;">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism B: Harmonic Coupling</h4>
+            <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] mb-2">f<sub>attack</sub> = n &middot; f<sub>neural</sub> &nbsp;(coupling &prop; 1/n&sup2;)</p>
+            <p class="text-sm text-[var(--color-text-muted)]">Neural tissue is nonlinear and generates harmonics. An attack at 80 Hz excites 40 Hz gamma via subharmonic resonance.</p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #8b5cf6;">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism C: Envelope Modulation</h4>
+            <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] mb-2">A(t) &middot; sin(2&pi;f<sub>carrier</sub>t) &mdash; tissue demodulates to f<sub>mod</sub></p>
+            <p class="text-sm text-[var(--color-text-muted)]">Stealth attacks. A carrier at 200 kHz modulated at 10 Hz looks like normal S2 digital processing, but the brain responds to the 10 Hz alpha envelope. Published neuroscience (tACS) <a href="#ref-63">[63]</a>.</p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #06b6d4;">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism D: Temporal Interference</h4>
+            <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] mb-2">f<sub>beat</sub> = |f<sub>1</sub> &minus; f<sub>2</sub>| &mdash; deep brain targeting</p>
+            <p class="text-sm text-[var(--color-text-muted)]">Published by Grossman et al. (2017) in <em>Cell</em> <a href="#ref-63">[63]</a>. Two signals at 2000 Hz and 2004 Hz create a 4 Hz beat targeting theta oscillations in deep brain structures.</p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #ec4899;">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism E: Intermodulation</h4>
+            <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] mb-2">f<sub>attack</sub> + f<sub>BCI</sub> = f<sub>neural</sub> &mdash; the BCI becomes the weapon</p>
+            <p class="text-sm text-[var(--color-text-muted)]">The most dangerous class. The attacker&rsquo;s signal mixes with the BCI&rsquo;s own therapeutic signal in nonlinear neural tissue. Both signals individually appear harmless. The harmful signal is generated inside the patient&rsquo;s tissue.</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.2 Detection Boundaries</h3>
+        <div class="prose mb-6">
+          <p>An honest assessment of what QI can and cannot detect:</p>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Attack</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Mechanism</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">QI Detects?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Signal injection</td><td class="py-3 px-4 text-[var(--color-text-muted)]">A (Direct)</td><td class="py-3 px-4 font-bold" style="color: #10b981;">Yes</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Phase disruption</td><td class="py-3 px-4 text-[var(--color-text-muted)]">A (Direct)</td><td class="py-3 px-4 font-bold" style="color: #10b981;">Yes</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Amplitude manipulation</td><td class="py-3 px-4 text-[var(--color-text-muted)]">A (Direct)</td><td class="py-3 px-4 font-bold" style="color: #10b981;">Yes</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Replay</td><td class="py-3 px-4 text-[var(--color-text-muted)]">A (Direct)</td><td class="py-3 px-4 font-bold" style="color: #ef4444;">No</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Slow drift</td><td class="py-3 px-4 text-[var(--color-text-muted)]">A (Direct)</td><td class="py-3 px-4 font-bold" style="color: #f59e0b;">Partial</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Harmonic coupling</td><td class="py-3 px-4 text-[var(--color-text-muted)]">B (Harmonic)</td><td class="py-3 px-4 font-bold" style="color: #f59e0b;">Partial</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Envelope modulation</td><td class="py-3 px-4 text-[var(--color-text-muted)]">C (Envelope)</td><td class="py-3 px-4 font-bold" style="color: #f59e0b;">Partial</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Temporal interference</td><td class="py-3 px-4 text-[var(--color-text-muted)]">D (Beat)</td><td class="py-3 px-4 font-bold" style="color: #ef4444;">No</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Intermodulation</td><td class="py-3 px-4 text-[var(--color-text-muted)]">E (Intermod)</td><td class="py-3 px-4 font-bold" style="color: #ef4444;">No</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose">
+          <p>
+            QI catches direct attacks (Mechanism A). It partially catches harmonic and envelope attacks (B, C). It <strong>cannot</strong> catch temporal interference or intermodulation (D, E) from signal data alone. This defines where hardware-level defense (the resonance shield) is necessary.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.3 Unified Threat Taxonomy</h3>
+        <div class="prose">
+          <p>
+            QIF maintains a registry of <strong>60 attack techniques</strong> organized into 11 tactics. Seven extend MITRE ATT&amp;CK Enterprise. Four are novel: Neural Manipulation (TA0050), Cognitive Exploitation (TA0051), Directed Energy (TA0052), and Adversarial ML (TA0053). Of the 60 techniques, 48 (80%) have explicit cross-references to MITRE ATT&amp;CK techniques. The remaining 12 (20%) have no MITRE equivalent, clustered in directed energy attacks, quantum-biological attacks, and cognitive attacks.
+          </p>
+        </div>
+      </section>
+
+      <!-- 7. NSP -->
+      <section id="nsp" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">7. Neural Sensory Protocol (NSP)</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">7.1 The HNDL Threat</h3>
+        <div class="prose">
+          <p>
+            Neuralink&rsquo;s N1 is designed to remain in a patient&rsquo;s brain for 10&ndash;20 years. NIST estimates cryptographically relevant quantum computers by 2030&ndash;2035. Current BCI wireless (BLE) uses ECDH for key exchange, which is broken by Shor&rsquo;s algorithm <a href="#ref-48">[48]</a>. Neural data is permanently sensitive: unlike a credit card number, brain patterns cannot be reissued.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">7.2 Five-Layer Architecture</h3>
+        <div class="space-y-3 mb-8">
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-secondary);">
+            <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">L1</span>
+            <span class="font-semibold ml-2">EM Environment Monitoring</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">Passive/active electromagnetic environment sensing at the I0 boundary. Detects unauthorized RF signals and intermodulation attack signatures.</p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-secondary);">
+            <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">L2</span>
+            <span class="font-semibold ml-2">Signal Physics (QI Score)</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">The unified QI equation applied per band per time window. Works even if cryptographic layers are compromised.</p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-secondary);">
+            <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">L3</span>
+            <span class="font-semibold ml-2">Post-Quantum Key Exchange (ML-KEM)</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">ML-KEM (Kyber), FIPS 203. Lattice-based key encapsulation replacing ECDH. Hybrid construction for defense in depth.</p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-secondary);">
+            <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">L4</span>
+            <span class="font-semibold ml-2">Post-Quantum Authentication (ML-DSA)</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">ML-DSA (Dilithium), FIPS 204. Lattice-based digital signatures replacing ECDSA. Every NSP frame is signed.</p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-secondary);">
+            <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">L5</span>
+            <span class="font-semibold ml-2">Payload Encryption (AES-256-GCM)</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">Authenticated encryption. AES-256 remains quantum-resistant under Grover&rsquo;s algorithm.</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">7.3 Device Tiers</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Device Class</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Channels</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Active Layers</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Key Threat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Consumer headband</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">4&ndash;16</td><td class="py-3 px-4 text-[var(--color-text-muted)]">L2, L5</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Direct injection via BLE</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Clinical EEG</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">32&ndash;256</td><td class="py-3 px-4 text-[var(--color-text-muted)]">L2, L3, L4, L5</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Replay, slow drift</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Implanted BCI/DBS</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">16&ndash;1024</td><td class="py-3 px-4 text-[var(--color-text-muted)]">All five</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Intermodulation, nation-state HNDL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">7.4 Project Runemate: Offsetting PQC Overhead</h3>
+        <div class="prose mb-6">
+          <p>
+            Post-quantum keys are significantly larger: ML-KEM-768 public keys are 1,184 bytes vs 65 bytes for ECDH-P256 (18.2&times;). Project Runemate converts HTML-based BCI interface content into a compact bytecode format called <strong>Staves</strong>, achieving 65&ndash;90% compression.
+          </p>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Page Complexity</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Raw HTML</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Staves</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">PQ+Staves</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Classical</th>
+                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">Net</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Minimal alert</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">5 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">0.5 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">21.1 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">5.8 KB</td><td class="py-3 px-4 text-right font-[family-name:var(--font-mono)]" style="color: #ef4444;">+15.3 KB</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Standard UI</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">50 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">5 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">25.6 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">50.8 KB</td><td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] font-bold" style="color: #10b981;">&minus;25.2 KB</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Rich dashboard</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">200 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">20 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">40.6 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">200.8 KB</td><td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] font-bold" style="color: #10b981;">&minus;160.2 KB</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Complex interface</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">500 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">50 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">70.6 KB</td><td class="py-3 px-4 font-[family-name:var(--font-mono)]">500.8 KB</td><td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] font-bold" style="color: #10b981;">&minus;430.2 KB</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose">
+          <p>
+            Runemate Forge is implemented in <strong>Rust</strong>. Rust provides compile-time memory safety, type-level sanitization, and bare-metal deployment via <code>no_std</code> (64 KB RAM floor). The Ferrocene Rust compiler has achieved IEC 62304 Class C certification for medical device software.
+          </p>
+        </div>
+      </section>
+
+      <!-- 8. Black Hole Security Principle -->
+      <section id="black-hole" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. The Black Hole Security Principle</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">8.1 Four Proposed Analogies</h3>
+        <div class="prose mb-6">
+          <p>
+            We describe four structural parallels between black hole physics and NSP security. Following independent peer review, we present these explicitly as <strong>conceptual analogies, not formal equivalences</strong>.
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          <div class="glass rounded-xl p-6">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 1: Encryption as Scrambling</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">Black holes achieve full information delocalization in t* &prop; ln(S) operations <a href="#ref-62">[62]</a>. AES-256 achieves full diffusion in 14 rounds, scaling as O(ln(N)). Both spread information across all degrees of freedom. However, black hole scrambling is quantum many-body dynamics; AES is a classical deterministic algorithm.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 2: I0 as Holographic Boundary</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">BCIs already work holographically: EEG/ECoG measure surface potentials, and source localization reconstructs 3D brain activity from 2D surface measurements. However, the holographic principle operates at Planck-scale physics &mdash; applying it to a macroscopic electrode 30 orders of magnitude larger is not formally justified.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 3: Key Exchange as Page Curve</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">Without the session key, accumulated ciphertext reveals nothing. With the key, all frames decode. The key is the analog of the Page time <a href="#ref-68">[68]</a>. The visual similarity is genuine, but the underlying mechanisms are different.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 4: Semantic Security as Thermal Spectrum</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">Hawking radiation has a maximum entropy spectrum <a href="#ref-72">[72]</a>. AES-256-GCM ciphertext is computationally indistinguishable from random noise. The parallel is structural, not physical.</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">8.2 Honest Assessment</h3>
+        <div class="glass rounded-xl p-5 mb-8" style="border-left: 3px solid #f59e0b;">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Independent Peer Review (Gemini):</strong> &ldquo;The &lsquo;Black Hole Security Principle&rsquo; is a compelling narrative, but it is not a rigorous security framework. It derives its claims from analogies that break down under formal analysis.&rdquo;
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-3">
+            We accept this critique. NSP&rsquo;s actual security rests on the proven properties of AES-256-GCM, ML-KEM (IND-CCA2 under Module-LWE), and ML-DSA (EUF-CMA under Module-SIS). These are formal, reducible guarantees that do not require physics analogies.
+          </p>
+        </div>
+      </section>
+
+      <!-- 9. Falsifiability -->
+      <section id="falsifiability" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">9. Falsifiability</h2>
+        <div class="prose mb-6">
+          <p>A framework that cannot be disproven is not science. QIF is designed to be empirically testable.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.1 Universal Fast Decoherence</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              If &tau;<sub>D</sub> &lt; 10<sup>&minus;12</sup> s universally at the electrode-tissue boundary, quantum terms become negligible. QIF degrades gracefully to a classical-only model: QI(t) &asymp; e<sup>&minus;S<sub>c</sub></sup>. This does not break QIF &mdash; it reduces it to its classical foundation.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.2 Ion Channel Tunneling Not Individually Unique</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              If tunneling coefficients T(E) do not vary significantly between individuals, the quantum biometric hypothesis is invalid. The tunneling term Q&#770;<sub>t</sub> would still function as a threat model but the biometric application would be falsified.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.3 No Measurable Quantum Effects at I0</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              If quantum state tomography consistently shows fully classical statistics at the BCI junction, quantum corrections are zero. The classical architecture, attack taxonomy, and NSP retain independent value.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.4 Zeno Effect Impossible at BCI Rates</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              If Zeno stabilization requires measurement rates exceeding 10<sup>9</sup> Hz at the electrode interface, the conditional Zeno-BCI hypothesis is removed. This hypothesis is already framed as conditional on decoherence timescale.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.5 Davydov Soliton Attacks Cannot Be Generated</h4>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              If terahertz radiation cannot generate Davydov solitons in SNARE protein complexes, this attack vector is falsified. The other four coupling mechanisms remain valid independently.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Graceful Degradation:</strong> QIF&rsquo;s parameterized design means most falsification scenarios reduce the framework&rsquo;s scope rather than destroying it. The worst case for QIF is the current assumption of most BCI security researchers: that quantum effects do not matter. The framework is designed so that this assumption is <em>testable</em>, not axiomatic.
+          </p>
+        </div>
+      </section>
+
+      <!-- 10. Discussion -->
+      <section id="discussion" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">10. Discussion</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.1 What QIF Is</h3>
+        <div class="prose">
+          <p>QIF is a proposed security architecture for brain-computer interfaces that provides:</p>
+          <ul>
+            <li>An 11-band hourglass model derived from neuroanatomy and physics</li>
+            <li>A unified equation QI(b,t) = e<sup>&minus;S(b,t)</sup> with Boltzmann-factor structure</li>
+            <li>A five-mechanism attack coupling taxonomy</li>
+            <li>A post-quantum communication protocol (NSP)</li>
+            <li>A content compression pipeline (Project Runemate)</li>
+            <li>Explicit falsifiability conditions</li>
+            <li>Honest boundaries on what it can and cannot detect</li>
+          </ul>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.2 What QIF Is Not</h3>
+        <div class="prose">
+          <p>
+            QIF is <strong>not experimentally validated</strong>. No QI score has been computed from real BCI data under attack conditions. The scaling coefficients have not been calibrated. QIF does not model consciousness. QIF does not prove that quantum effects matter for BCI security &mdash; the quantum terms are hypothesized contributions. QIF does not replace formal cryptographic security proofs.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.3 Limitations</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Limitation</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Impact</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Mitigation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">No experimental validation</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Equations are theoretical</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Testable predictions provided</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Coefficients uncalibrated</td><td class="py-3 px-4 text-[var(--color-text-muted)]">No absolute QI values</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Valid for relative comparisons</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Decoherence time disputed</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Quantum terms may be negligible</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Tunable &tau;<sub>D</sub>; graceful degradation</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Resonance shield is concept only</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Layer 1 defense unimplemented</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Defines the engineering target</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">No tampered BCI dataset</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Cannot validate against real attacks</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Synthetic attack generation proposed</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.4 Energy Bounds</h3>
+        <div class="prose">
+          <p>
+            Landauer&rsquo;s Principle <a href="#ref-61">[61]</a> establishes the fundamental thermodynamic cost: E<sub>min</sub> = kT &middot; ln(2) per bit erasure. At body temperature (310 K), this is &asymp;2.97 &times; 10<sup>&minus;21</sup> J per bit. This replaces Moore&rsquo;s Law (an empirical trend, not a physical law) as the correct reference for energy scaling arguments.
+          </p>
+        </div>
+      </section>
+
+      <!-- 11. Future Work -->
+      <section id="future-work" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. Future Work</h2>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">11.1 Immediate Priorities</h3>
+        <div class="prose">
+          <ol>
+            <li><strong>Phase 1 Validation.</strong> Implement classical QI (S<sub>c</sub> only) against PhysioNet EEGBCI dataset (109 subjects) and BrainFlow live data. Generate synthetic attacks. Publish results regardless of outcome.</li>
+            <li><strong>Synthetic Attack Dataset.</strong> No public &ldquo;tampered BCI&rdquo; dataset exists. Creating one would itself be a publishable contribution.</li>
+            <li><strong>Consumer D<sub>spec</sub> Validation.</strong> Test the spectral consistency proxy on consumer-grade EEG data (Muse, Emotiv).</li>
+          </ol>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">11.2 Medium-Term Research</h3>
+        <div class="prose">
+          <ol start="4">
+            <li><strong>H<sub>interface</sub> Formulation.</strong> Write down the total Hamiltonian H<sub>total</sub> = H<sub>neuron</sub> + H<sub>electrode</sub> + H<sub>interface</sub> + H<sub>environment</sub> for a specific BCI system.</li>
+            <li><strong>NSP Reference Implementation.</strong> Build in Python (OpenBCI) and C (firmware-embeddable), integrating liboqs.</li>
+            <li><strong>Resonance Shield Feasibility Study.</strong> Determine whether active EM cancellation can be miniaturized to implant-compatible dimensions.</li>
+            <li><strong>Intermodulation Detection Research.</strong> Solve the detection gap identified in Section 6.</li>
+          </ol>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">11.3 Long-Term Goals</h3>
+        <div class="prose">
+          <ol start="8">
+            <li><strong>Quantum State Tomography at the BCI Interface.</strong> Measure the actual decoherence time &tau;<sub>D</sub> at a BCI electrode-tissue junction.</li>
+            <li><strong>Tunneling Biometric Feasibility.</strong> Single-channel patch clamp studies to determine individual variability.</li>
+            <li><strong>Zeno-BCI Experimental Test.</strong> Vary BCI sampling rate from 100 Hz to 20 kHz and measure coherence time.</li>
+            <li><strong>v4.0 Architecture Validation.</strong> Map historical BCI adverse events to specific bands to test severity stratification.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 12. References -->
+      <section id="references" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. References</h2>
+
+        <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Quantum Indeterminacy and Uncertainty Relations</p>
+          <p id="ref-1">[1] Heisenberg, W. (1927). &Uuml;ber den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik. <em>Zeitschrift f&uuml;r Physik</em>, 43(3-4), 172&ndash;198.</p>
+          <p id="ref-2">[2] Robertson, H. P. (1929). The uncertainty principle. <em>Physical Review</em>, 34(1), 163&ndash;164.</p>
+          <p id="ref-3">[3] Schr&ouml;dinger, E. (1930). Zum Heisenbergschen Unsch&auml;rfeprinzip. <em>Sitzungsberichte der Preu&szlig;ischen Akademie der Wissenschaften</em>, 296&ndash;303.</p>
+          <p id="ref-4">[4] Kimura, G., Endo, S., &amp; Fujii, K. (2025). Beyond Robertson-Schr&ouml;dinger. <em>arXiv</em>, 2504.20404.</p>
+          <p id="ref-5">[5] Maccone, L., &amp; Pati, A. K. (2014). Stronger uncertainty relations. <em>Physical Review Letters</em>, 113(26), 260401.</p>
+          <p id="ref-6">[6] Kochen, S., &amp; Specker, E. P. (1967). The problem of hidden variables. <em>Journal of Mathematics and Mechanics</em>, 17(1), 59&ndash;87.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Von Neumann Entropy and Density Matrix</p>
+          <p id="ref-7">[7] Von Neumann, J. (1932). <em>Mathematische Grundlagen der Quantenmechanik</em>. Springer.</p>
+          <p id="ref-8">[8] Nielsen, M. A., &amp; Chuang, I. L. (2010). <em>Quantum Computation and Quantum Information</em>. Cambridge University Press.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Born Rule</p>
+          <p id="ref-9">[9] Born, M. (1926). Zur Quantenmechanik der Sto&szlig;vorg&auml;nge. <em>Zeitschrift f&uuml;r Physik</em>, 37(12), 863&ndash;867.</p>
+          <p id="ref-10">[10] Masanes, L., Galley, T. D., &amp; M&uuml;ller, M. P. (2019). The measurement postulates of quantum mechanics are operationally redundant. <em>Nature Communications</em>, 10(1), 1361.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Quantum Tunneling in Neural Systems</p>
+          <p id="ref-11">[11] Qaswal, A. B. (2019). Quantum tunneling of ions through closed voltage-gated channels. <em>Quantum Reports</em>, 1(2), 219&ndash;225.</p>
+          <p id="ref-12">[12] Georgiev, D. D., &amp; Glazebrook, J. F. (2018). Quantum physics of synaptic communication via SNARE. <em>Progress in Biophysics and Molecular Biology</em>, 135, 16&ndash;29.</p>
+          <p id="ref-13">[13] Walker, E. H. (1977). Quantum mechanical tunneling in synaptic and ephaptic transmission. <em>Int. J. Quantum Chemistry</em>, 11(1), 103&ndash;127.</p>
+          <p id="ref-14">[14] Summhammer, J., Salari, V., &amp; Bernroider, G. (2012). Quantum-mechanical description of ion motion within voltage-gated ion channels. <em>J. Integrative Neuroscience</em>, 11(2), 123&ndash;135.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Decoherence in Neural Tissue</p>
+          <p id="ref-15">[15] Tegmark, M. (2000). Importance of quantum decoherence in brain processes. <em>Physical Review E</em>, 61(4), 4194&ndash;4206.</p>
+          <p id="ref-16">[16] Jedlicka, P. (2017). Revisiting the quantum brain hypothesis. <em>Frontiers in Molecular Neuroscience</em>, 10, 366.</p>
+          <p id="ref-17">[17] Sattin, D. et al. (2023). A quantum-classical model of brain dynamics. <em>Entropy</em>, 25(4), 592.</p>
+          <p id="ref-18">[18] Lambert, N. et al. (2013). Quantum biology. <em>Nature Physics</em>, 9(1), 10&ndash;18.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Quantum Zeno Effect</p>
+          <p id="ref-19">[19] Misra, B., &amp; Sudarshan, E. C. G. (1977). Zeno&rsquo;s paradox in quantum theory. <em>J. Mathematical Physics</em>, 18(4), 756&ndash;763.</p>
+          <p id="ref-20">[20] Itano, W. M. et al. (1990). Quantum Zeno effect. <em>Physical Review A</em>, 41(5), 2295&ndash;2300.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Quantum Cryptography and Security</p>
+          <p id="ref-21">[21] Bennett, C. H., &amp; Brassard, G. (1984). Quantum cryptography. <em>Proc. IEEE ICCSSP</em>, 175&ndash;179.</p>
+          <p id="ref-22">[22] Ekert, A. K. (1991). Quantum cryptography based on Bell&rsquo;s theorem. <em>Physical Review Letters</em>, 67(6), 661&ndash;663.</p>
+          <p id="ref-23">[23] Gottesman, D., &amp; Chuang, I. (2001). Quantum digital signatures. <em>arXiv</em>, quant-ph/0105032.</p>
+          <p id="ref-24">[24] Wootters, W. K., &amp; Zurek, W. H. (1982). A single quantum cannot be cloned. <em>Nature</em>, 299(5886), 802&ndash;803.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Neuroscience</p>
+          <p id="ref-25">[25] Fries, P. (2005). A mechanism for cognitive dynamics: Neuronal communication through neuronal coherence. <em>Trends in Cognitive Sciences</em>, 9(10), 474&ndash;480.</p>
+          <p id="ref-26">[26] Fries, P. (2015). Rhythms for cognition: Communication through coherence. <em>Neuron</em>, 88(1), 220&ndash;235.</p>
+          <p id="ref-27">[27] Markram, H. et al. (1997). Regulation of synaptic efficacy by coincidence of postsynaptic APs and EPSPs. <em>Science</em>, 275(5297), 213&ndash;215.</p>
+          <p id="ref-28">[28] Bi, G. Q., &amp; Poo, M. M. (1998). Synaptic modifications in cultured hippocampal neurons. <em>J. Neuroscience</em>, 18(24), 10464&ndash;10472.</p>
+          <p id="ref-29">[29] Borst, J. G. G. (2010). The low synaptic release probability in vivo. <em>Trends in Neurosciences</em>, 33(6), 259&ndash;266.</p>
+          <p id="ref-30">[30] Buzs&aacute;ki, G., &amp; Draguhn, A. (2004). Neuronal oscillations in cortical networks. <em>Science</em>, 304(5679), 1926&ndash;1929.</p>
+          <p id="ref-31">[31] Hodgkin, A. L., &amp; Huxley, A. F. (1952). Membrane current and conduction in nerve. <em>J. Physiology</em>, 117(4), 500&ndash;544.</p>
+          <p id="ref-32">[32] Shannon, C. E. (1948). A mathematical theory of communication. <em>Bell System Technical Journal</em>, 27(3), 379&ndash;423.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Quantum Computing Threats</p>
+          <p id="ref-33">[33] Gidney, C., &amp; Eker&aring;, M. (2021). How to factor 2048 bit RSA integers in 8 hours. <em>Quantum</em>, 5, 433.</p>
+          <p id="ref-34">[34] Gidney, C. (2025). Factoring integers with sublinear resources on a superconducting quantum processor. <em>arXiv</em>, 2505.15917.</p>
+          <p id="ref-35">[35] Bennett, C. H. et al. (1997). Strengths and weaknesses of quantum computing. <em>SIAM J. Computing</em>, 26(5), 1510&ndash;1523.</p>
+          <p id="ref-36">[36] Zalka, C. (1999). Grover&rsquo;s quantum searching algorithm is optimal. <em>Physical Review A</em>, 60(4), 2746&ndash;2751.</p>
+          <p id="ref-37">[37] NIST. (2024). <em>Post-Quantum Cryptography Standardization</em>. FIPS 203, 204, 205.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">BCI Technology</p>
+          <p id="ref-38">[38] Musk, E., &amp; Neuralink. (2019). An integrated brain-machine interface platform. <em>J. Medical Internet Research</em>, 21(10), e16194.</p>
+          <p id="ref-39">[39] Fisher, M. P. A. (2015). Quantum cognition: Processing with nuclear spins. <em>Annals of Physics</em>, 362, 593&ndash;602.</p>
+          <p id="ref-40">[40] Koch, K. et al. (2006). How much the eye tells the brain. <em>Current Biology</em>, 16(14), 1428&ndash;1434.</p>
+          <p id="ref-41">[41] N&oslash;rretranders, T. (1998). <em>The User Illusion</em>. Viking.</p>
+          <p id="ref-42">[42] Srinivasan, R. et al. (1999). Increased synchronization during conscious perception. <em>J. Neuroscience</em>, 19(13), 5435&ndash;5448.</p>
+          <p id="ref-43">[43] Massimini, M. et al. (2004). The sleep slow oscillation as a traveling wave. <em>J. Neuroscience</em>, 24(31), 6862&ndash;6870.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Foundational Physics</p>
+          <p id="ref-44">[44] Nernst, W. (1889). Die elektromotorische Wirksamkeit der Ionen. <em>Z. Phys. Chem.</em>, 4, 129&ndash;181.</p>
+          <p id="ref-45">[45] Cole, K. S., &amp; Cole, R. H. (1941). Dispersion and absorption in dielectrics. <em>J. Chemical Physics</em>, 9(4), 341&ndash;351.</p>
+          <p id="ref-46">[46] Boltzmann, L. (1877). &Uuml;ber die Beziehung zwischen dem zweiten Hauptsatze. <em>Wiener Berichte</em>, 76, 373&ndash;435.</p>
+          <p id="ref-47">[47] Grover, L. K. (1996). A fast quantum mechanical algorithm for database search. <em>Proc. 28th ACM STOC</em>, 212&ndash;219.</p>
+          <p id="ref-48">[48] Shor, P. W. (1994). Algorithms for quantum computation. <em>Proc. 35th FOCS</em>, 124&ndash;134.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Neuroethics</p>
+          <p id="ref-49">[49] Yuste, R. et al. (2017). Four ethical priorities for neurotechnologies and AI. <em>Nature</em>, 551(7679), 159&ndash;163.</p>
+          <p id="ref-50">[50] Ienca, M., &amp; Andorno, R. (2017). Towards new human rights in the age of neuroscience. <em>Life Sciences, Society and Policy</em>, 13(1), 5.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">BCI Security</p>
+          <p id="ref-51">[51] Martinovic, I. et al. (2012). Side-channel attacks with brain-computer interfaces. <em>Proc. 21st USENIX Security</em>, 143&ndash;158.</p>
+          <p id="ref-52">[52] Bonaci, T. et al. (2014). App stores for the brain. <em>IEEE Technology and Society</em>, 34(2), 32&ndash;39.</p>
+          <p id="ref-53">[53] Frank, M. et al. (2017). Using EEG-based BCI devices to probe for private information. <em>PETS</em>, 2017(3), 133&ndash;152.</p>
+          <p id="ref-54">[54] Bernal, S. L. et al. (2022). Security in brain-computer interfaces: State-of-the-art. <em>ACM Computing Surveys</em>, 54(1), 1&ndash;35.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Recent Developments (2022&ndash;2025)</p>
+          <p id="ref-55">[55] Perry, C. (2025). Quantum sensing approaches to microtubule coherence measurement. <em>SSRN preprint</em>.</p>
+          <p id="ref-56">[56] Clarke, J. et al. (2025). Macroscopic quantum tunneling in Josephson junction circuits. <em>Nobel Prize in Physics 2025</em>.</p>
+          <p id="ref-57">[57] Kim, H. et al. (2025). Under-the-barrier recollision in quantum tunneling. <em>Physical Review Letters</em>.</p>
+          <p id="ref-58">[58] Wiest, R. (2025). NeuroQ: Quantum-inspired neural dynamics via stochastic mechanics. <em>Neuroscience of Consciousness</em>.</p>
+          <p id="ref-59">[59] Qaswal, A. B. et al. (2022). Mathematical models for quantum tunneling through voltage-gated ion channels. <em>Quantum Reports</em>.</p>
+          <p id="ref-60">[60] BISC Consortium (2025). 65,536-channel brain-computer interface with 100 Mbps wireless. <em>Nature Electronics</em>.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Thermodynamics and Information Theory</p>
+          <p id="ref-61">[61] Landauer, R. (1961). Irreversibility and heat generation in computing. <em>IBM J. Research and Development</em>, 5(3), 183&ndash;191.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Black Hole Physics and Information Theory</p>
+          <p id="ref-62">[62] Sekino, Y., &amp; Susskind, L. (2008). Fast scramblers. <em>JHEP</em>, 2008(10), 065.</p>
+          <p id="ref-63">[63] Grossman, N. et al. (2017). Noninvasive deep brain stimulation via temporally interfering electric fields. <em>Cell</em>, 169(6), 1029&ndash;1041.</p>
+          <p id="ref-64">[64] Bell, J. S. (1964). On the Einstein Podolsky Rosen paradox. <em>Physics Physique Fizika</em>, 1(3), 195&ndash;200.</p>
+          <p id="ref-65">[65] &rsquo;t Hooft, G. (1993). Dimensional reduction in quantum gravity. In <em>Salamfestschrift</em>. World Scientific.</p>
+          <p id="ref-66">[66] Susskind, L. (1995). The world as a hologram. <em>J. Mathematical Physics</em>, 36(11), 6377&ndash;6396.</p>
+          <p id="ref-67">[67] Bekenstein, J. D. (1981). Universal upper bound on entropy-to-energy ratio. <em>Physical Review D</em>, 23(2), 287&ndash;298.</p>
+          <p id="ref-68">[68] Page, D. N. (1993). Average entropy of a subsystem. <em>Physical Review Letters</em>, 71(9), 1291&ndash;1294.</p>
+          <p id="ref-69">[69] Dvali, G. (2018). Black holes as brains: Neural networks with area law entropy. <em>Fortschritte der Physik</em>, 66(4), 1800007.</p>
+          <p id="ref-70">[70] Tozzi, A. et al. (2023). From black holes entropy to consciousness. <em>Physica A</em>, 626, 129112.</p>
+          <p id="ref-71">[71] Pastawski, F. et al. (2015). Holographic quantum error-correcting codes. <em>JHEP</em>, 2015(6), 149.</p>
+          <p id="ref-72">[72] Hawking, S. W. (1975). Particle creation by black holes. <em>Comm. Mathematical Physics</em>, 43(3), 199&ndash;220.</p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <div class="text-center text-sm text-[var(--color-text-faint)] pt-8 border-t border-[var(--color-border)]">
+        <p>Version 5.0 Working Draft &middot; Last updated 2026-02-06 &middot; Kevin Qi</p>
+        <p class="mt-1">Source of Truth: QIF-TRUTH.md &middot; <a href="/framework/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Explore the Framework</a></p>
+      </div>
+    </div>
+  </div>
+</PageLayout>
