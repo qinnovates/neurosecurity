@@ -130,6 +130,15 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
           <span class="text-[var(--color-text-faint)]">&rarr;</span>
           <div class="px-4 py-2 rounded-lg border border-[var(--color-accent-tertiary)]/30 text-[var(--color-accent-tertiary)] font-semibold font-[family-name:var(--font-heading)]">Runemate</div>
         </div>
+
+        <!-- Interactive explorer CTA -->
+        <div class="text-center mt-8">
+          <a href="/visualizations/qi/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            Explore the QI Equation interactively &rarr;
+          </a>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">Click into each band, simulate attacks, and watch the QI score respond in real time</p>
+        </div>
       </section>
 
       <!-- 1. Abstract -->
@@ -230,6 +239,13 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
       <!-- 4. Hourglass Model -->
       <section id="hourglass" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">4. QIF Hourglass Model (v4.0)</h2>
+
+        <div class="glass rounded-lg p-4 mb-8 flex items-center gap-3" style="border-left: 3px solid var(--color-accent-tertiary);">
+          <svg class="w-5 h-5 text-[var(--color-accent-tertiary)] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <a href="/visualizations/qi/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] font-medium transition-colors">Open the interactive QI Explorer</a> to click into each band, adjust parameters, and simulate attacks in real time. Or explore the <a href="/framework/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">3D hourglass model</a> on the Framework page.
+          </p>
+        </div>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.1 Design Principles</h3>
         <div class="prose">
@@ -355,13 +371,18 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">5. The Unified QI Equation</h2>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.1 Core Equation</h3>
-        <div class="glass rounded-xl p-8 text-center mb-8">
+        <div class="glass rounded-xl p-8 text-center mb-4">
           <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
             QI(b, t) = e<sup>&minus;S(b, t)</sup>
           </p>
           <p class="text-sm text-[var(--color-text-faint)]">
             b = band index &middot; t = time window &middot; S = S<sub>c</sub> + S<sub>q</sub> &middot; QI &isin; (0, 1]
           </p>
+        </div>
+        <div class="text-center mb-8">
+          <a href="/visualizations/qi/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+            See this equation in action &rarr;
+          </a>
         </div>
         <div class="prose">
           <p>
