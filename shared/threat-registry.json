@@ -3,13 +3,13 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
   "statistics": {
-    "total_techniques": 64,
+    "total_techniques": 65,
     "total_tactics": 11,
     "total_domains": 7,
     "by_tactic": {
       "QIF-B.EV": 4,
       "QIF-B.IN": 5,
-      "QIF-C.EX": 10,
+      "QIF-C.EX": 11,
       "QIF-C.IM": 4,
       "QIF-D.HV": 8,
       "QIF-E.RD": 6,
@@ -20,19 +20,19 @@
       "QIF-P.DS": 7
     },
     "by_status": {
-      "CONFIRMED": 13,
+      "CONFIRMED": 14,
       "DEMONSTRATED": 18,
       "EMERGING": 14,
       "THEORETICAL": 19
     },
     "by_severity": {
-      "critical": 16,
+      "critical": 17,
       "high": 34,
       "low": 1,
       "medium": 13
     },
     "by_ui_category": {
-      "CI": 7,
+      "CI": 8,
       "DM": 13,
       "DS": 7,
       "EX": 11,
@@ -42,6 +42,7 @@
       "SI": 9
     },
     "by_qnis_severity": {
+      "critical": 1,
       "high": 42,
       "low": 4,
       "medium": 18
@@ -2529,6 +2530,47 @@
         ],
         "secondary_tactics": [
           "QIF-B.IN"
+        ]
+      }
+    },
+    {
+      "id": "QIF-T0065",
+      "attack": "Algorithmic psychosis induction (recommendation weaponization)",
+      "tactic": "QIF-C.EX",
+      "bands": "S3→S2→N5–N7",
+      "band_ids": [
+        "S3",
+        "S2",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "coupling": null,
+      "access": "PUBLIC",
+      "classical": "Partial",
+      "quantum": "Enhanced (cognitive coherence degradation tracked via QI)",
+      "sources": [
+        "Haidt & Twenge 2023 (social media & mental health); Bail et al. 2018 (echo chambers & polarization); Hao 2021 (Facebook internal research, WSJ); Gonzalez-Bailon et al. 2023 (algorithmic feed effects); Howes & Kapur 2009 (dopamine hypothesis of schizophrenia); Kelleher et al. 2012 (psychotic-like experiences & environmental risk factors); Montague et al. 2012 (computational psychiatry)"
+      ],
+      "status": "CONFIRMED",
+      "severity": "critical",
+      "ui_category": "CI",
+      "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI — it operates through normal sensory channels (screen → eyes → visual cortex → limbic system → prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:H/CI:C/CI:C/S:C/R:D/VC:C/NE:H/E:A",
+        "score": 9.1,
+        "severity": "critical"
+      },
+      "cross_references": {
+        "related_ids": [],
+        "secondary_tactics": [
+          "QIF-C.IM",
+          "QIF-D.HV",
+          "QIF-M.SV",
+          "QIF-P.DS"
         ]
       }
     }

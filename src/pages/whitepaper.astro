@@ -32,6 +32,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           { href: '#attack-surface', label: 'Attack Surface' },
           { href: '#taxonomy', label: 'Locus Taxonomy' },
           { href: '#qnis', label: 'QNIS Scoring' },
+          { href: '#case-study', label: 'Case Study' },
           { href: '#nsp', label: 'NSP Protocol' },
           { href: '#black-hole', label: 'Black Hole Principle' },
           { href: '#falsifiability', label: 'Falsifiability' },
@@ -928,6 +929,163 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           <a href="/threats/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
             Explore all {totalTechniques} techniques in the interactive Threat Registry &rarr;
           </a>
+        </div>
+      </section>
+
+      <!-- 6.6 Case Study -->
+      <section id="case-study" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.6 Case Study: Algorithmic Psychosis Induction</h2>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-status-danger)] mb-6">QIF-T0065 &middot; QNIS 9.1 (Critical) &middot; Status: Confirmed</p>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.6.1 The Attack</h3>
+        <div class="prose mb-8">
+          <p>
+            A recommendation algorithm profiles a user&rsquo;s psychological vulnerabilities through behavioral data &mdash; watch time, engagement spikes, emotional triggers, search history &mdash; then systematically curates content designed to destabilize cognitive function. The algorithm acts as both the reconnaissance tool and the delivery mechanism. No exploit code is required. No malware is installed. The platform functions exactly as designed.
+          </p>
+          <p>
+            This is not hypothetical. Internal research from major social media platforms, leaked in 2021, documented that recommendation algorithms amplified content associated with eating disorders, self-harm, and suicidal ideation in adolescent users (Hao, 2021). Longitudinal studies have linked algorithmic feed exposure to increased rates of anxiety, depression, and psychotic-spectrum experiences in vulnerable populations (Haidt &amp; Twenge, 2023). Sub-clinical psychotic experiences are common and exacerbated by environmental stressors (Kelleher et al., 2012), and the dopaminergic mechanisms underlying psychosis &mdash; the system that assigns salience to stimuli &mdash; are precisely what engagement-optimized algorithms exploit (Howes &amp; Kapur, 2009). The algorithm does not need to &ldquo;intend&rdquo; harm &mdash; optimization for engagement metrics produces the same outcome as a deliberate attack when the most engaging content is also the most destabilizing.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.6.2 Kill Chain Through the Locus Taxonomy</h3>
+        <div class="prose mb-6">
+          <p>
+            This attack traverses five QIF Locus tactics in sequence. Traditional taxonomies would classify it as &ldquo;misinformation&rdquo; or &ldquo;content moderation failure&rdquo; &mdash; categories that obscure the neurological mechanism and severity. The Locus Taxonomy maps the actual path of harm:
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">QIF-D.HV</span>
+              <span class="text-sm font-semibold">Stage 1: Data Harvest</span>
+              <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">Band S3</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              The algorithm collects behavioral signals: dwell time on distressing content, late-night usage patterns, engagement with conspiracy or paranoia-adjacent material, social isolation indicators. This builds a vulnerability profile without the user&rsquo;s knowledge or consent.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">QIF-M.SV</span>
+              <span class="text-sm font-semibold">Stage 2: Model Subversion</span>
+              <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">Band S3&rarr;S2</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              The recommendation model is weaponized &mdash; not through external compromise, but through its own optimization objective. This is endogenous subversion: the model&rsquo;s legitimate goal (maximize engagement) is perverted to serve a harmful outcome, distinguishing it from external model poisoning or tampering. Maximizing engagement selects for emotionally destabilizing content. The model&rsquo;s reward function and the attacker&rsquo;s intent become indistinguishable.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">QIF-C.IM</span>
+              <span class="text-sm font-semibold">Stage 3: Cognitive Imprinting</span>
+              <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">Band S2&rarr;N7</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              Repeated exposure to curated triggering content rewrites cognitive patterns over days and weeks. The user sees the content consciously, but the curation itself is invisible. Each piece of content reinforces a narrative framework that progressively distorts perception of reality.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">QIF-C.EX</span>
+              <span class="text-sm font-semibold">Stage 4: Cognitive Exploitation</span>
+              <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">Band N6&rarr;N7</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              The brain&rsquo;s pattern-matching and threat-detection systems are exploited until they malfunction. Paranoia, hypervigilance, and conspiratorial thinking emerge as the limbic system (N6) receives persistent false-threat signals, and the prefrontal cortex (N7) cannot override them fast enough.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">QIF-P.DS</span>
+              <span class="text-sm font-semibold">Stage 5: Physiological Disruption</span>
+              <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">Band N5&rarr;N7</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              Psychosis manifests as a neurological event: measurable changes in dopaminergic signaling, prefrontal cortex function, and sleep architecture. This is not metaphorical harm &mdash; it is physiological damage mediated through cognitive channels.
+            </p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.6.3 QNIS Scoring Breakdown</h3>
+        <div class="prose mb-6">
+          <p>
+            CVSS cannot score this attack. It has no concept of cognitive integrity, neuroplasticity, or consent violation. Under CVSS, a recommendation algorithm is not a vulnerability. Under QNIS, it scores 9.1 (Critical):
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-8">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] font-medium">QNIS Metric</th>
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] font-medium">Value</th>
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] font-medium">Rationale</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">AV (Attack Vector)</td><td class="py-2 px-3 font-medium">Wireless</td><td class="py-2 px-3 text-[var(--color-text-muted)]">Delivered over the internet to any connected device</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">AC (Complexity)</td><td class="py-2 px-3 font-medium">Low</td><td class="py-2 px-3 text-[var(--color-text-muted)]">Algorithm operates autonomously; no per-target customization needed</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">PR (Privileges)</td><td class="py-2 px-3 font-medium">None</td><td class="py-2 px-3 text-[var(--color-text-muted)]">Any user who opens the app is a target</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">UI (User Interaction)</td><td class="py-2 px-3 font-medium">None</td><td class="py-2 px-3 text-[var(--color-text-muted)]">No out-of-the-ordinary action required; attack triggers through normal platform use</td></tr>
+                <tr class="border-b border-[var(--color-border)]/30"><td colspan="3" class="py-2 px-3 text-xs font-semibold text-[var(--color-text-faint)] uppercase tracking-wider">Impact Metrics (70% weight)</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">BI (Biological Impact)</td><td class="py-2 px-3 font-medium" style="color: #ef4444;">High</td><td class="py-2 px-3 text-[var(--color-text-muted)]">Psychosis involves measurable neurochemical and structural changes</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">CI (Cognitive Integrity)</td><td class="py-2 px-3 font-medium" style="color: #ef4444;">Critical</td><td class="py-2 px-3 text-[var(--color-text-muted)]">Reality perception fundamentally altered; sense of agency compromised</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">R (Reversibility)</td><td class="py-2 px-3 font-medium" style="color: #ef4444;">Difficult</td><td class="py-2 px-3 text-[var(--color-text-muted)]">Psychotic episodes can cause lasting cognitive changes; recovery not guaranteed</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">VC (Consent Violation)</td><td class="py-2 px-3 font-medium" style="color: #ef4444;">Critical</td><td class="py-2 px-3 text-[var(--color-text-muted)]">User never consented to psychological targeting; ToS do not constitute informed consent for cognitive manipulation</td></tr>
+                <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 px-3 font-[family-name:var(--font-mono)]">NE (Neuroplasticity)</td><td class="py-2 px-3 font-medium" style="color: #f97316;">High</td><td class="py-2 px-3 text-[var(--color-text-muted)]">Repeated exposure reshapes neural pathways; adolescent brains especially vulnerable</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mt-4">
+            <strong>Final score: 9.1 (Critical).</strong> The high Impact weight (70%) correctly prioritizes the human harm. A scoring system that weights exploit complexity equally with impact would underrate this attack because it is technically simple to execute.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.6.4 The BCI Amplifier</h3>
+        <div class="prose mb-8">
+          <p>
+            This attack already works through a screen. A brain-computer interface makes it catastrophically more effective across every dimension of the kill chain:
+          </p>
+        </div>
+
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Dimension</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Via Screen (Today)</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Via BCI (Tomorrow)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Profiling</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Behavioral proxies (watch time, clicks, scrolling speed)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Direct neural state: knows you are anxious, not just that you paused on a video</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Delivery</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Visual/auditory via screen (conscious filtering possible)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Neural stimulation that bypasses conscious filtering entirely</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Feedback loop</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Minutes to hours (engagement metrics, session-level)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Milliseconds (real-time neural response monitoring, stimulus-level)</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Neuroplasticity</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Gradual (weeks to months of repeated viewing)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Accelerated (direct stimulation reshapes pathways faster than sensory input)</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">Detection</td><td class="py-3 px-4 text-[var(--color-text-muted)]">User can recognize content as disturbing and close the app</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Stimulation may not be consciously perceptible at all</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.6.5 Implications</h3>
+        <div class="prose mb-8">
+          <p>
+            <strong>Intent is irrelevant to the score.</strong> QNIS produces the same 9.1 whether a nation-state deliberately weaponizes a feed to induce psychosis in a target population, or a platform negligently optimizes for engagement while ignoring psychiatric harm. This is a deliberate departure from traditional threat modeling, which assumes an adversary with intent. In BCI security, the outcome is the threat &mdash; not the motivation behind it.
+          </p>
+          <p>
+            <strong>The legal vacuum.</strong> This attack operates in a regulatory gray area. Current frameworks for negligence and product liability have not been tested against cognitive manipulation at scale. Terms of service do not constitute informed consent for neurological targeting. QIF provides a formal language to describe the harm &mdash; a prerequisite for future legal and regulatory frameworks that do not yet exist.
+          </p>
+          <p>
+            <strong>Population-level risk.</strong> This case study describes an individual target, but the attack scales to millions simultaneously. Algorithmic destabilization of cognitive function across a population produces mass delusion, social fracturing, and public health crises that are currently framed as political or cultural problems &mdash; not security incidents. QIF reframes them as what they are: attacks on cognitive integrity, scoreable, classifiable, and defensible.
+          </p>
+        </div>
+
+        <div class="prose">
+          <p>
+            This analysis demonstrates that QIF&rsquo;s taxonomy and scoring systems are not speculative. They provide a necessary framework for formalizing neurological harm that is already occurring, and for securing the technologies that will define the next decade of human-computer interaction.
+          </p>
         </div>
       </section>
 
