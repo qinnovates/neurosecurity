@@ -14,7 +14,7 @@ Qinnovate is a standards body. Security issues in the standards themselves shoul
 
 If you discover a security vulnerability in the QIF specification or governance standards, please report it responsibly:
 
-**Email:** security@qinnovate.com
+**Email:** kevin@qinnovate.com
 
 **Please include:**
 - Description of the vulnerability
@@ -45,8 +45,8 @@ Qinnovate maintains security through:
 
 ## Security Contacts
 
-- **Standards Security:** security@qinnovate.com
-- **General Contact:** standards@qinnovate.com
+- **Standards Security:** kevin@qinnovate.com
+- **General Contact:** kevin@qinnovate.com
 - **Maintainer:** Kevin Qi (@qikevinl)
 
 ---

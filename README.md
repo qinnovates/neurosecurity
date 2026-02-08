@@ -227,7 +227,7 @@ Qinnovate seeks partnerships with:
 - **Industry** — Vendor-neutral implementation guidance
 - **Regulators** — FDA, EU, regulatory framework development
 
-**Contact:** standards@qinnovate.com
+**Contact:** kevin@qinnovate.com
 
 ---
 
@@ -237,7 +237,7 @@ All content in this repository is licensed under **CC BY-NC-ND 4.0** (Creative C
 
 You may share with attribution, but commercial use and modifications require explicit written permission from the copyright holder.
 
-For licensing inquiries: standards@qinnovate.com
+For licensing inquiries: kevin@qinnovate.com
 
 ---
 
