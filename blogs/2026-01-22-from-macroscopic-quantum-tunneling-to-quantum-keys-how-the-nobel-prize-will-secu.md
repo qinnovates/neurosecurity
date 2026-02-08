@@ -77,7 +77,7 @@ There’s a traversal. There’s a duration. There’s something happening insid
 
 ### Why This Matters Now.
 
-While classical IT and Security was built on the traditional networking model, **the quantum leap across the peak is not as far as it seems.** As BCIs connect networks to neurons, as quantum computers break encryption, all this is happening at the exponential rate of Mohr’s Law.
+While classical IT and Security was built on the traditional networking model, **the quantum leap across the peak is not as far as it seems.** As BCIs connect networks to neurons, as quantum computers break encryption, all this is happening at the exponential rate of Moore’s Law.
 
 The parallel between quantum tunneling and VPN tunneling isn’t just linguistic. It marks the boundary between two eras, **Classical** and **Indeterminance**.
 

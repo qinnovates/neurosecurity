@@ -35,7 +35,7 @@ We have no shared vocabulary for these questions.
 
 ![](https://cdn-images-1.medium.com/max/1024/1*EjTbAqn5VItv1FyS0yHoIA.png)
 
-I’m publishing an open framework called **ONI** a 14-layer model that extends the OSI stack into biological territory. Each layer has characteristic frequencies, spatial scales, and critically — attack surfaces.
+I'm publishing an open framework called **QIF** a 14-layer model that extends the OSI stack into biological territory. Each layer has characteristic frequencies, spatial scales, and critically — attack surfaces.
 
 - **Layers 1–7:** Traditional OSI
 - **Layers 8–10:** Neural interface domain (electrodes, local field potentials, oscillatory patterns)

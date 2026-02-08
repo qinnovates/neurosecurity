@@ -89,6 +89,13 @@ export const categories: Category[] = [
 export const briefs: Brief[] = [
   {
     date: '2026-02',
+    title: 'Apple BCI-HID Protocol Makes Brain Control a Native Input Method',
+    category: 'neurotechnology',
+    summary: 'Apple\'s BCI Human Interface Device protocol, demonstrated with Synchron\'s Stentrode, makes neural signals a native input alongside touch and voice in iOS/iPadOS/visionOS. First public demo: ALS patient controlled iPad entirely by thought (Aug 2025). Meanwhile, OpenAI invested $250M in Merge Labs for non-invasive neural interfaces.',
+    relevance: 'Billions of Apple devices become potential BCI endpoints. BCI-HID uses BLE transport with no PQ crypto. NSP device class tiers (T1/T2/T3) provide the compliance framework the MIND Act needs. QIF Band 3 and I0 threat models need Apple ecosystem-specific analysis.',
+  },
+  {
+    date: '2026-02',
     title: 'NIST Post-Quantum Cryptography Standards Finalized',
     category: 'quantum',
     summary: 'NIST has finalized three post-quantum cryptographic algorithms (ML-KEM, ML-DSA, SLH-DSA). These standards will directly impact BCI encryption protocols at QIF Band 3.',

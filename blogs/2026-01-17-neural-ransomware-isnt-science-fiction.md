@@ -94,7 +94,7 @@ Step 5: Extortion- Pay or suffer. The attacker demands cryptocurrency. The victi
 
 ### How It Works Tomorrow
 
-The brain is not a replaceable silicon-based endpoint. Neuroscience is only beginning to comprehend the wonders of the mind. With the progression of AI and BCIs, we are getting exponentially closer thanks to Mohr’s Law.
+The brain is not a replaceable silicon-based endpoint. Neuroscience is only beginning to comprehend the wonders of the mind. With the progression of AI and BCIs, we are getting exponentially closer thanks to Moore’s Law.
 
 Traditional cyber frameworks model how attacks succeed; ONI models when signals should never be allowed to touch neural tissue in the first place.
 
