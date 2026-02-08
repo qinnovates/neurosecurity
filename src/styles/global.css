@@ -271,6 +271,7 @@ code, pre {
 .reveal-stagger.revealed > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
 .reveal-stagger.revealed > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
 .reveal-stagger.revealed > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.revealed > *:nth-child(n+8) { transition-delay: 560ms; opacity: 1; transform: translateY(0); }
 
 /* ═══ Pagefind Search UI ═══ */
 .pagefind-ui {

@@ -1,6 +1,64 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import FeedCard from '../components/FeedCard.astro';
+import { getCollection } from 'astro:content';
 import { categories, briefs } from '../lib/news-data';
+import { getPostDate, readingTime, cleanTag } from '../lib/utils';
+import { fetchExternalNews } from '../lib/fetch-feeds';
+import type { FeedItem, PublicationItem, BriefItem } from '../lib/feed-types';
+
+// --- Build all three streams ---
+
+// 1. Blog posts → PublicationItem[]
+const allPosts = await getCollection('blog');
+const publicationItems: PublicationItem[] = allPosts.map((post) => {
+  const body = post.body || '';
+  const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
+  return {
+    type: 'publication' as const,
+    title: post.data.title,
+    date: getPostDate(post.data),
+    slug: post.id,
+    excerpt,
+    tags: post.data.tags.map(cleanTag),
+    readTime: readingTime(body),
+  };
+});
+
+// 2. Intelligence briefs → BriefItem[]
+const briefItems: BriefItem[] = briefs.map((brief) => {
+  const cat = categories.find((c) => c.id === brief.category);
+  // Normalize YYYY-MM to YYYY-MM-15 for sorting
+  const date = brief.date.length === 7 ? `${brief.date}-15` : brief.date;
+  return {
+    type: 'brief' as const,
+    title: brief.title,
+    date,
+    category: brief.category,
+    categoryColor: cat?.color || 'var(--color-border)',
+    categoryName: cat?.name || brief.category,
+    summary: brief.summary,
+    relevance: brief.relevance,
+    url: brief.url,
+  };
+});
+
+// 3. External news → ExternalItem[]
+const externalItems = await fetchExternalNews();
+
+// Merge & sort by date (newest first)
+const allItems: FeedItem[] = [...publicationItems, ...briefItems, ...externalItems]
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+// Category mapping for blog tags
+function inferCategory(tags: string[]): string {
+  const tagSet = new Set(tags.map((t) => t.toLowerCase()));
+  if (tagSet.has('bci') || tagSet.has('neurosecurity') || tagSet.has('neural ransomware')) return 'bci-security';
+  if (tagSet.has('neuralink') || tagSet.has('synchron') || tagSet.has('apple') || tagSet.has('openbci')) return 'neurotechnology';
+  if (tagSet.has('postquantum') || tagSet.has('quantum') || tagSet.has('qkd')) return 'quantum';
+  if (tagSet.has('neuroethics') || tagSet.has('neuralprivacy') || tagSet.has('mindact')) return 'neuroethics';
+  return 'research';
+}
 ---
 
 <PageLayout
@@ -16,39 +74,74 @@ import { categories, briefs } from '../lib/news-data';
     </p>
   </div>
 
-  <!-- Intelligence Briefs -->
-  <section class="mb-16">
-    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">Intelligence Briefs</h2>
-    <div class="space-y-4 reveal">
-      {briefs.map((brief) => {
-        const cat = categories.find(c => c.id === brief.category);
-        return (
-          <div class="glass rounded-xl p-6" style={`border-left: 3px solid ${cat ? `${cat.color}` : 'var(--color-border)'};`}>
-            <div class="flex items-start justify-between gap-4 mb-3">
-              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{brief.title}</h3>
-              <div class="flex items-center gap-2 shrink-0">
-                <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
-                  {cat?.name}
-                </span>
-                <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">{brief.date}</span>
-              </div>
-            </div>
-            <p class="text-sm text-[var(--color-text-muted)] mb-3">{brief.summary}</p>
-            <div class="text-xs text-[var(--color-accent-secondary)] bg-[var(--color-accent-secondary)]/5 rounded-lg px-3 py-2">
-              <strong>QIF Relevance:</strong> {brief.relevance}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  </section>
+  <!-- Filter bar -->
+  <div class="mb-10 flex flex-wrap gap-2 reveal" id="feed-filters">
+    <button
+      data-filter="all"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30"
+    >
+      All ({allItems.length})
+    </button>
+    <button
+      data-filter="publication"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+    >
+      Qinnovate ({publicationItems.length})
+    </button>
+    <button
+      data-filter="brief"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+    >
+      Intel Briefs ({briefItems.length})
+    </button>
+    {externalItems.length > 0 && (
+      <button
+        data-filter="external"
+        class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+      >
+        External ({externalItems.length})
+      </button>
+    )}
 
-  <!-- Source Categories -->
-  <section>
-    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">Intelligence Sources</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger">
+    {/* Category filters */}
+    <span class="w-px h-6 bg-[var(--color-border)] mx-1 self-center"></span>
+    {categories.map((cat) => (
+      <button
+        data-filter={`cat-${cat.id}`}
+        class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+      >
+        {cat.name}
+      </button>
+    ))}
+  </div>
+
+  <!-- Unified feed grid -->
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-grid">
+    {allItems.map((item) => {
+      const dataType = item.type;
+      const dataCategory =
+        item.type === 'publication'
+          ? inferCategory(item.tags)
+          : item.type === 'brief'
+            ? item.category
+            : item.category;
+      return (
+        <div data-type={dataType} data-category={dataCategory}>
+          <FeedCard item={item} />
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Intelligence Sources (collapsed) -->
+  <details class="mt-16 glass rounded-xl reveal">
+    <summary class="p-6 cursor-pointer text-lg font-semibold font-[family-name:var(--font-heading)] hover:text-[var(--color-accent-primary)] transition-colors select-none">
+      Intelligence Sources
+      <span class="text-xs text-[var(--color-text-faint)] font-normal ml-2">({categories.reduce((sum, c) => sum + c.sources.length, 0)} sources across {categories.length} categories)</span>
+    </summary>
+    <div class="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {categories.map((cat) => (
-        <div class="glass rounded-xl p-6">
+        <div>
           <div class="flex items-center gap-3 mb-3">
             <span class="text-xl" style={`color: ${cat.color};`} set:html={cat.icon} />
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{cat.name}</h3>
@@ -74,7 +167,7 @@ import { categories, briefs } from '../lib/news-data';
         </div>
       ))}
     </div>
-  </section>
+  </details>
 
   <!-- Subscribe Section -->
   <div class="mt-16 glass rounded-xl p-8 reveal">
@@ -117,3 +210,37 @@ import { categories, briefs } from '../lib/news-data';
     </div>
   </div>
 </PageLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.feed-btn');
+  const cards = document.querySelectorAll<HTMLElement>('#feed-grid > div');
+
+  const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
+  const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!;
+
+      // Update button styles
+      buttons.forEach((b) => {
+        b.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${inactiveClass} hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30`;
+      });
+      btn.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
+
+      // Filter cards
+      cards.forEach((card) => {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else if (filter.startsWith('cat-')) {
+          // Category filter
+          const catId = filter.slice(4);
+          card.style.display = card.dataset.category === catId ? '' : 'none';
+        } else {
+          // Type filter (publication, brief, external)
+          card.style.display = card.dataset.type === filter ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>

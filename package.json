@@ -19,6 +19,7 @@
     "@types/three": "^0.172.0",
     "astro": "^5.17.0",
     "astro-pagefind": "^1.8.5",
+    "fast-xml-parser": "^4.5.3",
     "katex": "^0.16.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

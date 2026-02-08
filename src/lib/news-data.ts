@@ -20,6 +20,7 @@ export interface Brief {
   category: string;
   summary: string;
   relevance: string;
+  url?: string;
 }
 
 export const categories: Category[] = [
@@ -93,6 +94,7 @@ export const briefs: Brief[] = [
     category: 'neurotechnology',
     summary: 'Apple\'s BCI Human Interface Device protocol, demonstrated with Synchron\'s Stentrode, makes neural signals a native input alongside touch and voice in iOS/iPadOS/visionOS. First public demo: ALS patient controlled iPad entirely by thought (Aug 2025). Meanwhile, OpenAI invested $250M in Merge Labs for non-invasive neural interfaces.',
     relevance: 'Billions of Apple devices become potential BCI endpoints. BCI-HID uses BLE transport with no PQ crypto. NSP device class tiers (T1/T2/T3) provide the compliance framework the MIND Act needs. QIF Band 3 and I0 threat models need Apple ecosystem-specific analysis.',
+    url: '/publications/2026-02-07-apple-just-made-brain-control-a-native-input-method-now-what/',
   },
   {
     date: '2026-02',
@@ -100,6 +102,7 @@ export const briefs: Brief[] = [
     category: 'quantum',
     summary: 'NIST has finalized three post-quantum cryptographic algorithms (ML-KEM, ML-DSA, SLH-DSA). These standards will directly impact BCI encryption protocols at QIF Band 3.',
     relevance: 'QIF Band 3 (Protocol Security) specifications should reference these PQC standards for forward-secure neural data encryption.',
+    url: 'https://csrc.nist.gov/projects/post-quantum-cryptography',
   },
   {
     date: '2026-01',
@@ -107,6 +110,7 @@ export const briefs: Brief[] = [
     summary: 'Endovascular BCI reaches another clinical milestone. The minimally invasive approach changes the attack surface analysis — no craniotomy means different physical security vectors.',
     category: 'neurotechnology',
     relevance: 'QIF I0 (Neural Gateway) threat model needs endovascular-specific vectors alongside traditional implanted devices.',
+    url: 'https://synchron.com/',
   },
   {
     date: '2026-01',
@@ -114,6 +118,7 @@ export const briefs: Brief[] = [
     summary: 'First intergovernmental framework for neurotechnology governance. Addresses cognitive liberty, mental privacy, and neural data as a special category.',
     category: 'neuroethics',
     relevance: 'QIF Band 7 (Cognitive Sovereignty) aligns with UNESCO cognitive liberty principles. Framework validation opportunity.',
+    url: 'https://www.unesco.org/en/ethics-neurotechnology',
   },
   {
     date: '2026-01',
@@ -121,5 +126,6 @@ export const briefs: Brief[] = [
     summary: 'Researchers demonstrate that adversarial perturbations in EEG signals can fool BCI decoders, causing misclassification of motor intent.',
     category: 'bci-security',
     relevance: 'Directly validates QIF threat model: adversarial signal injection at Band 5 (Signal Processing). Coherence metric could detect these perturbations.',
+    url: 'https://ieeexplore.ieee.org/',
   },
 ];
