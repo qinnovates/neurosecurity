@@ -268,7 +268,6 @@ These are the questions we should be asking now — before brain-computer in
 
 The coherence metric is one piece of a larger framework I’ve been developing. The goal isn’t to solve everything. It’s to create a scaffold that neuroscientists, security engineers, and ethicists can stress-test, criticize, and improve.
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=799da714238e)
 
 ---
 

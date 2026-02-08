@@ -149,4 +149,3 @@ The brain isn’t a computer that happens to be biological. It’s a biological 
    
 Understanding it is the first step toward building brain-computer interfaces that work with the brain’s architecture rather than against it.
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=5be5598eac1f)

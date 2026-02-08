@@ -63,4 +63,3 @@ I’m sharing this framework to start a conversation. I don’t have all the ans
 
 > **Edit 2/1/26: ONI just evolved to it’s next form, ONIX (just kidding about the name). Check Qinnovate.com for details! You won’t want to miss this.**
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=3ca381b95c29)

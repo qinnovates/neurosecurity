@@ -110,4 +110,3 @@ The options are limitless. There’s no right or wrong answer, so long as it sui
 
 What would you do?
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=1e43f4e3283e)

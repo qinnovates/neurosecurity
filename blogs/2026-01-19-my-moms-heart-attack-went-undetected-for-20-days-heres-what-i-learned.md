@@ -118,4 +118,3 @@ It’s only a matter of time.
 
 > *“One of the great challenges in life is knowing enough about a subject to think you’re right, but not enough about the subject to know you’re wrong”*
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=ec8d113a26e1)

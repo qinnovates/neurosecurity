@@ -326,11 +326,8 @@ If you’re a security researcher: This field needs you. The attack surface is e
    
 **The brain-computer interface is here, the next frontier. Let’s make sure we’re ready.**
 
-<https://medium.com/media/a3175b6a8327b063747ce4d3003d668b/href>
-
 **Edit: 2/1/26-** *ONI* is being deprecated and replaced with a future-proof model accounting for *Quantum Indeterminancy.*
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=e3f9efe4ffb1)
 
 ---
 

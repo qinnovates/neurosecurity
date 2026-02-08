@@ -94,4 +94,3 @@ The ONI Framework is my attempt to fill that gap — to create the security 
 
 > ***Edit 2/1/26:*** *ONI is being deprecated and phased out with a more future-proof model accounting for quantum interdeterminancy.*
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=87b46d292219)

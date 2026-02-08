@@ -91,7 +91,6 @@ Neil was right: the challenge isn’t knowing enough to think you’re right, bu
 
 **Related articles:** — [The OSI of Mind: Securing Human-AI Interfaces](https://medium.com/@qikevinl/the-osi-of-mind-securing-human-ai-interfaces-3ca381b95c29) — [Your Brain Has a Spam Filter](https://medium.com/@qikevinl/your-brain-has-a-spam-filter-can-we-reverse-engineer-it-799da714238e) — [Your Brain Needs a Firewall](https://medium.com/@qikevinl/your-brain-needs-a-firewall-heres-what-it-would-look-like-87b46d292219) — [Neural Ransomware Isn’t Science Fiction](https://medium.com/@qikevinl/neural-ransomware-isnt-science-fiction-e3f9efe4ffb1) — [Can Hackers Attack Quantum Computers Across Time and Space?](https://medium.com/@qikevinl/quantum-hacking)
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=300f943faea1)
 
 ---
 

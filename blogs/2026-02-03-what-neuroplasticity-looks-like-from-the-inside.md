@@ -124,7 +124,7 @@ But good science starts with someone saying: *that's weird. Let me write it down
 
 · · ·
 
-*This post is adapted from the [QIF Field Journal](https://github.com/qinnovates/mindloft/blob/main/neurosecurity/qif/QIF-FIELD-JOURNAL.md) — a living, append-only research journal maintained alongside the QIF framework.*
+*This post is adapted from the [QIF Field Journal](https://github.com/qinnovates/mindloft/blob/main/archived/qif/QIF-FIELD-JOURNAL.md) — a living, append-only research journal maintained alongside the QIF framework.*
 
 *Part of the [QIF (Quantum Indeterministic Framework for Neural Security)](https://github.com/qinnovates/mindloft/) research.*
 
