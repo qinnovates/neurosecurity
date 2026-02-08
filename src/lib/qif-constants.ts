@@ -3,20 +3,24 @@
  * Single source of truth for all QIF values used on the site.
  */
 
-export const QIF_VERSION = '3.1';
+export const QIF_VERSION = '4.0';
 export const QIF_ARCHITECTURE = 'Hourglass';
-export const QIF_BANDS = 7;
+export const QIF_BANDS = 11;
 export const QIF_ESTABLISHED = 2026;
 
-/** Hourglass bands (3-1-3 symmetric) */
+/** Hourglass bands (7-1-3 asymmetric) */
 export const HOURGLASS_BANDS = [
-  { id: 'B7', name: 'Cognitive Sovereignty', domain: 'Biology', position: 'top', color: '#8b5cf6', description: 'Identity, agency, and cognitive liberty' },
-  { id: 'B6', name: 'Neural Semantics', domain: 'Biology', position: 'top', color: '#10b981', description: 'Meaning extraction, pattern interpretation' },
-  { id: 'B5', name: 'Signal Processing', domain: 'Biology', position: 'top', color: '#06b6d4', description: 'Neural signal acquisition and preprocessing' },
-  { id: 'I0', name: 'Neural Gateway', domain: 'Interface', position: 'waist', color: '#f59e0b', description: 'Physical interface — the BCI device at the tissue boundary' },
-  { id: 'B3', name: 'Protocol Security', domain: 'Silicon', position: 'bottom', color: '#3b82f6', description: 'Communication protocols, encryption, authentication' },
-  { id: 'B2', name: 'Network Transport', domain: 'Silicon', position: 'bottom', color: '#3b82f6', description: 'Data transport, routing, network security' },
-  { id: 'B1', name: 'Physical Layer', domain: 'Silicon', position: 'bottom', color: '#3b82f6', description: 'Hardware, firmware, physical security' },
+  { id: 'N7', name: 'Neocortex', zone: 'neural', color: '#22c55e', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
+  { id: 'N6', name: 'Limbic System', zone: 'neural', color: '#4ade80', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
+  { id: 'N5', name: 'Basal Ganglia', zone: 'neural', color: '#86efac', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
+  { id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#a3e635', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
+  { id: 'N3', name: 'Cerebellum', zone: 'neural', color: '#bef264', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
+  { id: 'N2', name: 'Brainstem', zone: 'neural', color: '#d9f99d', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
+  { id: 'N1', name: 'Spinal Cord', zone: 'neural', color: '#ecfccb', description: 'Cervical through sacral — reflexes, peripheral relay' },
+  { id: 'I0', name: 'Neural Interface', zone: 'interface', color: '#f59e0b', description: 'Electrode-tissue boundary — measurement/collapse, quasi-quantum zone' },
+  { id: 'S1', name: 'Analog / Near-Field', zone: 'silicon', color: '#93c5fd', description: 'Amplification, ADC, near-field EM (0-10 kHz)' },
+  { id: 'S2', name: 'Digital / Telemetry', zone: 'silicon', color: '#60a5fa', description: 'Decoding, BLE/WiFi, telemetry (10 kHz - 1 GHz)' },
+  { id: 'S3', name: 'Radio / Wireless / DE', zone: 'silicon', color: '#3b82f6', description: 'RF, directed energy, application layer (1 GHz+)' },
 ] as const;
 
 /** Coherence metric thresholds */
@@ -60,7 +64,7 @@ export const PILLARS = [
     name: 'QIF',
     fullName: 'Quantum Indeterministic Framework',
     tagline: 'The security architecture',
-    description: 'A 7-band hourglass model that maps every threat surface — from neural tissue to silicon — into a single, auditable framework.',
+    description: 'An 11-band hourglass model that maps every threat surface — from neural tissue to silicon — into a single, auditable framework.',
     href: '/framework/',
     icon: '&#9670;',
     color: 'var(--color-accent-primary)',

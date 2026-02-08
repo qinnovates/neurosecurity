@@ -29,19 +29,31 @@ const phases = [
   },
   {
     version: 'v3.1',
-    title: 'Hourglass (Current)',
-    status: 'active' as const,
+    title: 'Hourglass (7-band)',
+    status: 'completed' as const,
     items: [
       { label: '7-band hourglass architecture (3-1-3)', done: true },
       { label: 'Neural Gateway (I0) as physical waist', done: true },
       { label: 'Whitepaper first draft', done: true },
-      { label: 'Neuroethics framework integration', done: false },
-      { label: 'Peer review cycle', done: false },
+      { label: 'Neuroethics framework integration', done: true },
+      { label: 'Peer review cycle', done: true },
     ],
   },
   {
     version: 'v4.0',
-    title: 'Validation',
+    title: 'Hourglass v4.0 (Current)',
+    status: 'active' as const,
+    items: [
+      { label: '11-band hourglass architecture (7-1-3)', done: true },
+      { label: 'QIF framework Python package', done: true },
+      { label: 'NSP v0.3 protocol specification', done: true },
+      { label: 'Break-it test suite (10 attack types)', done: true },
+      { label: 'Academic whitepaper v5', done: true },
+    ],
+  },
+  {
+    version: 'v5.0',
+    title: 'Validation & Peer Review',
     status: 'planned' as const,
     items: [
       { label: 'Synthetic BCI data validation', done: false },

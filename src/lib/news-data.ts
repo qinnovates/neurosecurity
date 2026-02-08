@@ -124,7 +124,7 @@ export const briefs: Brief[] = [
     title: 'Synchron Stentrode Receives FDA Breakthrough Device Designation',
     summary: 'Endovascular BCI reaches another clinical milestone. The minimally invasive approach changes the attack surface analysis — no craniotomy means different physical security vectors.',
     category: 'neurotechnology',
-    relevance: 'QIF I0 (Neural Gateway) threat model needs endovascular-specific vectors alongside traditional implanted devices.',
+    relevance: 'QIF I0 (Neural Interface) threat model needs endovascular-specific vectors alongside traditional implanted devices.',
     url: 'https://synchron.com/',
   },
   {

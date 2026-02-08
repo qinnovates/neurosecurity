@@ -12,16 +12,20 @@ interface BandData {
 }
 
 const BANDS: BandData[] = [
-  { id: 'B7', name: 'Cognitive Sovereignty', domain: 'Biology', color: '#8b5cf6', description: 'Identity, agency, and cognitive liberty' },
-  { id: 'B6', name: 'Neural Semantics', domain: 'Biology', color: '#10b981', description: 'Meaning extraction, pattern interpretation' },
-  { id: 'B5', name: 'Signal Processing', domain: 'Biology', color: '#06b6d4', description: 'Neural signal acquisition and preprocessing' },
-  { id: 'I0', name: 'Neural Gateway', domain: 'Interface', color: '#f59e0b', description: 'Physical interface — BCI device at tissue boundary' },
-  { id: 'B3', name: 'Protocol Security', domain: 'Silicon', color: '#3b82f6', description: 'Communication protocols, encryption, authentication' },
-  { id: 'B2', name: 'Network Transport', domain: 'Silicon', color: '#3b82f6', description: 'Data transport, routing, network security' },
-  { id: 'B1', name: 'Physical Layer', domain: 'Silicon', color: '#3b82f6', description: 'Hardware, firmware, physical security' },
+  { id: 'N7', name: 'Neocortex', domain: 'Neural', color: '#22c55e', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
+  { id: 'N6', name: 'Limbic System', domain: 'Neural', color: '#4ade80', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
+  { id: 'N5', name: 'Basal Ganglia', domain: 'Neural', color: '#86efac', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
+  { id: 'N4', name: 'Diencephalon', domain: 'Neural', color: '#a3e635', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
+  { id: 'N3', name: 'Cerebellum', domain: 'Neural', color: '#bef264', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
+  { id: 'N2', name: 'Brainstem', domain: 'Neural', color: '#d9f99d', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
+  { id: 'N1', name: 'Spinal Cord', domain: 'Neural', color: '#ecfccb', description: 'Cervical through sacral — reflexes, peripheral relay' },
+  { id: 'I0', name: 'Neural Interface', domain: 'Interface', color: '#f59e0b', description: 'Electrode-tissue boundary — measurement/collapse, quasi-quantum zone' },
+  { id: 'S1', name: 'Analog / Near-Field', domain: 'Silicon', color: '#93c5fd', description: 'Amplification, ADC, near-field EM (0-10 kHz)' },
+  { id: 'S2', name: 'Digital / Telemetry', domain: 'Silicon', color: '#60a5fa', description: 'Decoding, BLE/WiFi, telemetry (10 kHz - 1 GHz)' },
+  { id: 'S3', name: 'Radio / Wireless / DE', domain: 'Silicon', color: '#3b82f6', description: 'RF, directed energy, application layer (1 GHz+)' },
 ];
 
-const BAND_RADII = [1.4, 1.2, 1.0, 0.7, 1.0, 1.2, 1.4];
+const BAND_RADII = [1.4, 1.3, 1.15, 1.0, 0.85, 0.7, 0.55, 0.45, 0.7, 0.9, 1.2];
 const BAND_HEIGHT = 0.35;
 const GAP = 0.08;
 
