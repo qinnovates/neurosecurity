@@ -47,6 +47,8 @@ export const categories: Category[] = [
       { name: 'Synchron', url: 'https://synchron.com/' },
       { name: 'BCI Society', url: 'https://bcisociety.org/' },
       { name: 'OpenBCI', url: 'https://openbci.com/' },
+      { name: 'Merge Labs', url: 'https://mergelabs.com/' },
+      { name: 'Paradromics', url: 'https://paradromics.com/' },
     ],
   },
   {
@@ -71,6 +73,7 @@ export const categories: Category[] = [
       { name: 'Neurorights Foundation', url: 'https://neurorightsfoundation.org/' },
       { name: 'UNESCO Neuroethics', url: 'https://www.unesco.org/en/ethics-neurotechnology' },
       { name: 'OECD Neurotechnology', url: 'https://www.oecd.org/en/topics/sub-issues/neurotechnology.html' },
+      { name: 'Congress.gov', url: 'https://www.congress.gov/' },
     ],
   },
   {
@@ -83,6 +86,18 @@ export const categories: Category[] = [
       { name: 'arXiv Neuroscience', url: 'https://arxiv.org/list/q-bio.NC/recent' },
       { name: 'Nature Neuroscience', url: 'https://www.nature.com/neuro/' },
       { name: 'IEEE Xplore', url: 'https://ieeexplore.ieee.org/' },
+    ],
+  },
+  {
+    id: 'industry',
+    name: 'Industry & Funding',
+    icon: '&#9650;',
+    color: 'var(--color-accent-secondary)',
+    description: 'Funding rounds, acquisitions, product launches, and market analysis in neurotech and BCI.',
+    sources: [
+      { name: 'TechCrunch', url: 'https://techcrunch.com/' },
+      { name: 'STAT News', url: 'https://www.statnews.com/' },
+      { name: 'Fierce Biotech', url: 'https://www.fiercebiotech.com/' },
     ],
   },
 ];

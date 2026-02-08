@@ -19,7 +19,8 @@ const parser = new XMLParser({
   attributeNamePrefix: '@_',
 });
 
-function isRelevant(title: string, summary: string): boolean {
+function isRelevant(title: string, summary: string, feed: FeedSource): boolean {
+  if (feed.skipKeywordFilter) return true;
   const text = `${title} ${summary}`.toLowerCase();
   return RELEVANCE_KEYWORDS.some((kw) => text.includes(kw));
 }
@@ -41,7 +42,7 @@ function extractItems(xml: string, feed: FeedSource): ExternalItem[] {
     for (const item of list.slice(0, feed.maxItems)) {
       const title = item.title || '';
       const summary = item.description || '';
-      if (!isRelevant(title, summary)) continue;
+      if (!isRelevant(title, summary, feed)) continue;
       items.push({
         type: 'external',
         title: typeof title === 'string' ? title : String(title),
@@ -65,7 +66,7 @@ function extractItems(xml: string, feed: FeedSource): ExternalItem[] {
     for (const entry of list.slice(0, feed.maxItems)) {
       const title = entry.title?.['#text'] || entry.title || '';
       const summary = entry.summary?.['#text'] || entry.summary || entry.content?.['#text'] || '';
-      if (!isRelevant(title, summary)) continue;
+      if (!isRelevant(title, summary, feed)) continue;
       const link = Array.isArray(entry.link)
         ? entry.link.find((l: any) => l['@_rel'] === 'alternate')?.['@_href'] || entry.link[0]?.['@_href']
         : entry.link?.['@_href'] || entry.link || '';
