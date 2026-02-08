@@ -70,8 +70,8 @@ const bands = [...HOURGLASS_BANDS];
         <label class="filter-chip active" data-zone="interface">
           <input type="checkbox" checked class="hidden" /> Interface
         </label>
-        <label class="filter-chip active" data-zone="silicon">
-          <input type="checkbox" checked class="hidden" /> Silicon
+        <label class="filter-chip active" data-zone="synthetic">
+          <input type="checkbox" checked class="hidden" /> Synthetic
         </label>
       </div>
     </div>
@@ -95,7 +95,7 @@ const bands = [...HOURGLASS_BANDS];
       {bands.map((band, i) => {
         const prevBand = i > 0 ? bands[i - 1] : null;
         const showSeparator = prevBand && prevBand.zone !== band.zone;
-        const zoneName = band.zone === 'interface' ? 'I\u2080 Interface' : band.zone === 'silicon' ? 'Synthetic Domain' : 'Neural Domain';
+        const zoneName = band.zone === 'interface' ? 'I\u2080 Interface' : band.zone === 'synthetic' ? 'Synthetic Domain' : 'Neural Domain';
 
         return (
           <>

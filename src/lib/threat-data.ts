@@ -313,7 +313,7 @@ export const SEVERITY_COLORS = {
 export const ZONE_COLORS = {
   neural: { accent: '#22c55e', bg: 'rgba(34, 197, 94, 0.05)' },
   interface: { accent: '#f59e0b', bg: 'rgba(245, 158, 11, 0.08)' },
-  silicon: { accent: '#3b82f6', bg: 'rgba(59, 130, 246, 0.05)' },
+  synthetic: { accent: '#3b82f6', bg: 'rgba(59, 130, 246, 0.05)' },
 } as const;
 
 /** Helper: get threats for a specific band+category intersection */
