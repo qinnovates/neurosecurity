@@ -1,124 +1,195 @@
 {
-  "version": "2.0",
+  "version": "3.0",
   "generated_from": "qif-lab/src/config.py",
   "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
-  "mitre_compatibility": {
-    "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
-    "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",
-    "note": "Designed for future MITRE collaboration — our IDs can be adopted or cross-referenced without conflict."
-  },
   "statistics": {
     "total_techniques": 64,
     "total_tactics": 11,
+    "total_domains": 7,
     "by_tactic": {
-      "TA0002": 5,
-      "TA0040": 6,
-      "TA0009": 8,
-      "TA0050": 3,
-      "TA0052": 6,
-      "TA0053": 8,
-      "TA0043": 3,
-      "TA0051": 10,
-      "TA0001": 4,
-      "TA0003": 4,
-      "TA0005": 3
+      "QIF-B.EV": 4,
+      "QIF-B.IN": 5,
+      "QIF-C.EX": 10,
+      "QIF-C.IM": 4,
+      "QIF-D.HV": 8,
+      "QIF-E.RD": 6,
+      "QIF-M.SV": 9,
+      "QIF-N.IJ": 5,
+      "QIF-N.MD": 3,
+      "QIF-N.SC": 3,
+      "QIF-P.DS": 7
     },
     "by_status": {
       "CONFIRMED": 13,
-      "THEORETICAL": 19,
-      "DEMONSTRATED": 15,
-      "EMERGING": 13
+      "DEMONSTRATED": 18,
+      "EMERGING": 14,
+      "THEORETICAL": 19
     },
     "by_severity": {
       "critical": 16,
       "high": 34,
-      "medium": 13,
-      "low": 1
+      "low": 1,
+      "medium": 13
     },
     "by_ui_category": {
-      "SI": 9,
-      "SE": 4,
+      "CI": 7,
       "DM": 13,
       "DS": 7,
+      "EX": 11,
       "PE": 8,
-      "CI": 7,
       "PS": 5,
-      "EX": 11
+      "SE": 4,
+      "SI": 9
+    },
+    "by_qnis_severity": {
+      "high": 42,
+      "low": 4,
+      "medium": 18
     }
   },
   "tactics": [
     {
-      "id": "TA0043",
-      "name": "Reconnaissance",
-      "mitre_native": true,
-      "description": "Profiling neural signals, mapping BCI networks, fingerprinting devices"
+      "id": "QIF-N.SC",
+      "name": "Neural Scan",
+      "domain": "Neural",
+      "domain_code": "N",
+      "action_code": "SC",
+      "description": "Profiling neural signals, mapping BCI topology, fingerprinting devices and neural activity patterns.",
+      "legacy_ids": [
+        "TA0043"
+      ],
+      "legacy_name": "Reconnaissance"
     },
     {
-      "id": "TA0001",
-      "name": "Initial Access",
-      "mitre_native": true,
-      "description": "Gaining access to BCI system or neural pathway via electrodes, RF, firmware"
+      "id": "QIF-B.IN",
+      "name": "BCI Intrusion",
+      "domain": "BCI System",
+      "domain_code": "B",
+      "action_code": "IN",
+      "description": "Gaining initial access to a BCI system or neural pathway via electrodes, RF, firmware, or supply chain.",
+      "legacy_ids": [
+        "TA0001"
+      ],
+      "legacy_name": "Initial Access"
     },
     {
-      "id": "TA0002",
-      "name": "Execution",
-      "mitre_native": true,
-      "description": "Running attack payload on BCI hardware or injecting malicious neural signals"
+      "id": "QIF-N.IJ",
+      "name": "Neural Injection",
+      "domain": "Neural",
+      "domain_code": "N",
+      "action_code": "IJ",
+      "description": "Injecting malicious signals at the electrode-tissue boundary or into the BCI data pipeline.",
+      "legacy_ids": [
+        "TA0002"
+      ],
+      "legacy_name": "Execution"
     },
     {
-      "id": "TA0003",
-      "name": "Persistence",
-      "mitre_native": true,
-      "description": "Maintaining foothold across BCI sessions via calibration, learned patterns"
+      "id": "QIF-C.IM",
+      "name": "Cognitive Imprinting",
+      "domain": "Cognitive",
+      "domain_code": "C",
+      "action_code": "IM",
+      "description": "Maintaining foothold across BCI sessions via calibration poisoning, learned neural patterns, or memory implants.",
+      "legacy_ids": [
+        "TA0003"
+      ],
+      "legacy_name": "Persistence"
     },
     {
-      "id": "TA0005",
-      "name": "Defense Evasion",
-      "mitre_native": true,
-      "description": "Avoiding detection by QI metrics, coherence checks, anomaly detectors"
+      "id": "QIF-B.EV",
+      "name": "BCI Evasion",
+      "domain": "BCI System",
+      "domain_code": "B",
+      "action_code": "EV",
+      "description": "Avoiding detection by QI coherence metrics, anomaly detectors, and safety mechanisms.",
+      "legacy_ids": [
+        "TA0005"
+      ],
+      "legacy_name": "Defense Evasion"
     },
     {
-      "id": "TA0009",
-      "name": "Collection",
-      "mitre_native": true,
-      "description": "Harvesting neural data, cognitive states, memory patterns, ERP responses"
+      "id": "QIF-D.HV",
+      "name": "Data Harvest",
+      "domain": "Data",
+      "domain_code": "D",
+      "action_code": "HV",
+      "description": "Harvesting neural data, cognitive states, memory patterns, ERP responses, and biometric signatures.",
+      "legacy_ids": [
+        "TA0009"
+      ],
+      "legacy_name": "Collection"
     },
     {
-      "id": "TA0040",
-      "name": "Impact",
-      "mitre_native": true,
-      "description": "Disrupting neural function, causing physical harm, denying BCI service"
+      "id": "QIF-P.DS",
+      "name": "Physiological Disruption",
+      "domain": "Physiological",
+      "domain_code": "P",
+      "action_code": "DS",
+      "description": "Disrupting neural function, causing physical harm, denying BCI service, or weaponizing motor output.",
+      "legacy_ids": [
+        "TA0040"
+      ],
+      "legacy_name": "Impact"
     },
     {
-      "id": "TA0050",
-      "name": "Neural Manipulation",
-      "mitre_native": false,
-      "description": "Direct neural state modification via stimulation, entrainment, or signal injection. No MITRE equivalent."
+      "id": "QIF-N.MD",
+      "name": "Neural Modulation",
+      "domain": "Neural",
+      "domain_code": "N",
+      "action_code": "MD",
+      "description": "Direct neural state modification via stimulation, entrainment, or signal injection. No traditional cybersecurity equivalent.",
+      "legacy_ids": [
+        "TA0050",
+        "QIF-TA0050"
+      ],
+      "legacy_name": "Neural Manipulation"
     },
     {
-      "id": "TA0051",
+      "id": "QIF-C.EX",
       "name": "Cognitive Exploitation",
-      "mitre_native": false,
-      "description": "Exploiting cognitive processes (memory, attention, identity, agency). No MITRE equivalent."
+      "domain": "Cognitive",
+      "domain_code": "C",
+      "action_code": "EX",
+      "description": "Exploiting cognitive processes including memory, attention, identity, and agency. No traditional cybersecurity equivalent.",
+      "legacy_ids": [
+        "TA0051",
+        "QIF-TA0051"
+      ],
+      "legacy_name": "Cognitive Exploitation"
     },
     {
-      "id": "TA0052",
-      "name": "Directed Energy",
-      "mitre_native": false,
-      "description": "EM/RF attacks on neural tissue or BCI hardware via frequency-domain coupling. No MITRE equivalent."
+      "id": "QIF-E.RD",
+      "name": "Energy Radiation",
+      "domain": "Energy",
+      "domain_code": "E",
+      "action_code": "RD",
+      "description": "EM/RF attacks on neural tissue or BCI hardware via frequency-domain coupling. No traditional cybersecurity equivalent.",
+      "legacy_ids": [
+        "TA0052",
+        "QIF-TA0052"
+      ],
+      "legacy_name": "Directed Energy"
     },
     {
-      "id": "TA0053",
-      "name": "Adversarial ML",
-      "mitre_native": false,
-      "description": "Attacking BCI decoder/classifier models via poisoning, backdoors, or adversarial inputs. Partial overlap with MITRE TA0042 (Resource Development)."
+      "id": "QIF-M.SV",
+      "name": "Model Subversion",
+      "domain": "Model",
+      "domain_code": "M",
+      "action_code": "SV",
+      "description": "Attacking BCI decoder/classifier models via poisoning, backdoors, adversarial inputs, or gradient leakage.",
+      "legacy_ids": [
+        "TA0053",
+        "QIF-TA0053"
+      ],
+      "legacy_name": "Adversarial ML"
     }
   ],
   "techniques": [
     {
-      "id": "T2001",
+      "id": "QIF-T0001",
       "attack": "Signal injection",
-      "category": "TA0002",
+      "tactic": "QIF-N.IJ",
       "bands": "I0–N1",
       "band_ids": [
         "I0",
@@ -128,16 +199,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (coherence metric)",
-      "mitre": {
-        "tactics": [
-          "TA0002"
-        ],
-        "techniques": [
-          "T1659",
-          "T1674"
-        ],
-        "note": "Maps to Content Injection (T1659) and Input Injection (T1674) — inject false content into BCI data stream"
-      },
       "sources": [
         "Kohno et al. 2009",
         "Bonaci et al. 2015"
@@ -148,12 +209,25 @@
       "notes": "Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.",
       "legacy_ids": [
         "ONI-T007"
-      ]
+      ],
+      "legacy_technique_id": "T2001",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1659",
+          "T1674"
+        ]
+      }
     },
     {
-      "id": "T2002",
+      "id": "QIF-T0002",
       "attack": "Neural ransomware",
-      "category": "TA0040",
+      "tactic": "QIF-P.DS",
       "bands": "N3–N7",
       "band_ids": [
         "N3",
@@ -164,16 +238,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Yes (QI score drop)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1486",
-          "T1489"
-        ],
-        "note": "Maps to Data Encrypted for Impact (T1486, ransomware analog) + Service Stop (T1489, lock neural function)"
-      },
       "sources": [
         "Pycroft et al. 2016"
       ],
@@ -181,12 +245,25 @@
       "severity": "critical",
       "ui_category": "DS",
       "notes": "Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse. Distinct from Neural DoS: ransomware implies conditional restoration.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2002",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:N/E:U",
+        "score": 6.7,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1486",
+          "T1489"
+        ]
+      }
     },
     {
-      "id": "T2003",
+      "id": "QIF-T0003",
       "attack": "Eavesdropping / signal interception",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "I0–S3",
       "band_ids": [
         "I0",
@@ -199,15 +276,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Yes (Heisenberg disturbance at I0)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1040"
-        ],
-        "note": "Network sniffing adapted for BCI signals"
-      },
       "sources": [
         "Kohno et al. 2009",
         "Landau et al. 2020",
@@ -220,12 +288,24 @@
       "legacy_ids": [
         "ONI-T001",
         "ONI-T023"
-      ]
+      ],
+      "legacy_technique_id": "T2003",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:C/R:I/VC:E/NE:N/E:A",
+        "score": 7.7,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1040"
+        ]
+      }
     },
     {
-      "id": "T2004",
+      "id": "QIF-T0004",
       "attack": "Man-in-the-middle",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "I0–S2",
       "band_ids": [
         "I0",
@@ -236,16 +316,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Yes (no-cloning + Bell test)",
-      "mitre": {
-        "tactics": [
-          "TA0009",
-          "TA0002"
-        ],
-        "techniques": [
-          "T1557"
-        ],
-        "note": "Adversary-in-the-middle adapted for BCI data path"
-      },
       "sources": [
         "Martinovic et al. 2012"
       ],
@@ -253,12 +323,27 @@
       "severity": "critical",
       "ui_category": "DM",
       "notes": "Intercept and modify signals at I0 boundary or BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2004",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:P",
+        "score": 6.6,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1557"
+        ],
+        "secondary_tactics": [
+          "QIF-N.IJ"
+        ]
+      }
     },
     {
-      "id": "T2005",
+      "id": "QIF-T0005",
       "attack": "Quantum tunneling exploit",
-      "category": "TA0002",
+      "tactic": "QIF-N.IJ",
       "bands": "I0–N1",
       "band_ids": [
         "I0",
@@ -268,13 +353,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Yes (tunneling profile anomaly)",
-      "mitre": {
-        "tactics": [
-          "TA0002"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Exploit ion channel quantum tunneling to inject false synaptic events. Physics-based attack with no digital analog."
-      },
       "sources": [
         "Summhammer et al. 2012",
         "Salari et al. 2015"
@@ -283,12 +361,19 @@
       "severity": "high",
       "ui_category": "SI",
       "notes": "Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2005",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.2,
+        "severity": "high"
+      }
     },
     {
-      "id": "T2006",
+      "id": "QIF-T0006",
       "attack": "Davydov soliton attack",
-      "category": "TA0002",
+      "tactic": "QIF-N.IJ",
       "bands": "I0–N1",
       "band_ids": [
         "I0",
@@ -298,13 +383,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Yes (tunneling term Q_tunnel)",
-      "mitre": {
-        "tactics": [
-          "TA0002"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. THz stimulation triggers Davydov solitons in SNARE protein complexes. Quantum-biological — no digital analog."
-      },
       "sources": [
         "Davydov 1973",
         "Scott 1992"
@@ -313,12 +391,19 @@
       "severity": "high",
       "ui_category": "SI",
       "notes": "THz stimulation triggers Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0. Exploits energy transport in alpha-helix protein structures.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2006",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.2,
+        "severity": "high"
+      }
     },
     {
-      "id": "T2007",
+      "id": "QIF-T0007",
       "attack": "Protocol manipulation",
-      "category": "TA0002",
+      "tactic": "QIF-N.IJ",
       "bands": "S1–S2",
       "band_ids": [
         "S1",
@@ -328,16 +413,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (protocol integrity via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0002"
-        ],
-        "techniques": [
-          "T1565",
-          "T1565.002"
-        ],
-        "note": "Maps to Data Manipulation (T1565) — exploit neural data protocol to alter transmitted data"
-      },
       "sources": [
         "Schroder et al. 2025"
       ],
@@ -347,12 +422,25 @@
       "notes": "Exploit weaknesses in BCI data protocols to inject commands or alter data formatting, bypassing security controls. Targets the digital decoding/telemetry pipeline.",
       "legacy_ids": [
         "ONI-T008"
-      ]
+      ],
+      "legacy_technique_id": "T2007",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565",
+          "T1565.002"
+        ]
+      }
     },
     {
-      "id": "T2008",
+      "id": "QIF-T0008",
       "attack": "Command hijacking",
-      "category": "TA0002",
+      "tactic": "QIF-N.IJ",
       "bands": "S2–N7",
       "band_ids": [
         "S2",
@@ -364,16 +452,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (intent verification via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0002"
-        ],
-        "techniques": [
-          "T1557",
-          "T1565.002"
-        ],
-        "note": "Maps to Adversary-in-the-Middle (T1557) + Transmitted Data Manipulation (T1565.002) — intercept and modify motor/cognitive commands"
-      },
       "sources": [
         "Kohno et al. 2009"
       ],
@@ -383,12 +461,25 @@
       "notes": "Intercept and modify motor commands or cognitive instructions in transit through the BCI system. Targets closed-loop stimulation devices. Intent verification detects command-intent mismatch.",
       "legacy_ids": [
         "ONI-T009"
-      ]
+      ],
+      "legacy_technique_id": "T2008",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1557",
+          "T1565.002"
+        ]
+      }
     },
     {
-      "id": "T2009",
+      "id": "QIF-T0009",
       "attack": "RF false brainwave injection",
-      "category": "TA0050",
+      "tactic": "QIF-N.MD",
       "bands": "S1–S2→N4–N7",
       "band_ids": [
         "S1",
@@ -402,16 +493,6 @@
       "access": "PUBLIC",
       "classical": "Partial",
       "quantum": "Enhanced (Dsf + coherence)",
-      "mitre": {
-        "tactics": [
-          "TA0002"
-        ],
-        "techniques": [
-          "T1659",
-          "T1200"
-        ],
-        "note": "Maps to Content Injection (T1659) + Hardware Additions (T1200) — RF device injects synthetic brainwave patterns"
-      },
       "sources": [
         "Zhang et al. 2024"
       ],
@@ -419,12 +500,28 @@
       "severity": "high",
       "ui_category": "SI",
       "notes": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2009",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
+        "score": 7.6,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1659",
+          "T1200"
+        ],
+        "secondary_tactics": [
+          "QIF-N.IJ"
+        ]
+      }
     },
     {
-      "id": "T2101",
+      "id": "QIF-T0010",
       "attack": "ELF neural entrainment",
-      "category": "TA0052",
+      "tactic": "QIF-E.RD",
       "bands": "S1→N4–N7",
       "band_ids": [
         "S1",
@@ -437,13 +534,6 @@
       "access": "RESTRICTED",
       "classical": "Yes",
       "quantum": "Enhanced (Dsf anomaly detection)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Directed energy weapon — physics-based coupling at neural frequency (3-76 Hz). Government-restricted. Closest ICS: Manipulation of Control (T0831)."
-      },
       "sources": [
         "NTIA Frequency Allocation Chart",
         "US Navy ELF program (declassified)"
@@ -452,12 +542,24 @@
       "severity": "critical",
       "ui_category": "SI",
       "notes": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2101",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:A",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2102",
+      "id": "QIF-T0011",
       "attack": "Intermodulation (BCI signal weaponized)",
-      "category": "TA0052",
+      "tactic": "QIF-E.RD",
       "bands": "S2→N4–N6",
       "band_ids": [
         "S2",
@@ -469,13 +571,6 @@
       "access": "RESTRICTED",
       "classical": "Yes",
       "quantum": "Enhanced (coherence + Dsf)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Nonlinear tissue mixing of attacker + BCI signals produces neural-range beat frequency. Novel physics-based coupling."
-      },
       "sources": [
         "ITU Radio Regulations"
       ],
@@ -483,12 +578,24 @@
       "severity": "critical",
       "ui_category": "SI",
       "notes": "UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz theta. Most dangerous coupling mechanism. QI CANNOT detect from signal data alone -- requires resonance shield.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2102",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
+        "score": 6.4,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2103",
+      "id": "QIF-T0012",
       "attack": "Pulsed microwave (Frey effect)",
-      "category": "TA0052",
+      "tactic": "QIF-E.RD",
       "bands": "S3→N2,N7",
       "band_ids": [
         "S3",
@@ -499,13 +606,6 @@
       "access": "RESTRICTED",
       "classical": "Yes",
       "quantum": "Enhanced (temporal coherence)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Pulsed microwave auditory/neural effect (Frey effect). Directed energy weapon — no digital/cyber analog."
-      },
       "sources": [
         "Frey 1962",
         "Lin 1978"
@@ -514,12 +614,24 @@
       "severity": "high",
       "ui_category": "PS",
       "notes": "S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion causes cochlea to perceive as sound. Havana Syndrome model. PRF selects neural target: 40 Hz gamma, 10 Hz alpha, 4 Hz theta, 1 Hz delta.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2103",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:A",
+        "score": 6.4,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2104",
+      "id": "QIF-T0013",
       "attack": "Temporal interference (deep targeting)",
-      "category": "TA0052",
+      "tactic": "QIF-E.RD",
       "bands": "S2→N4–N6",
       "band_ids": [
         "S2",
@@ -531,13 +643,6 @@
       "access": "LICENSED",
       "classical": "Yes",
       "quantum": "Enhanced (beat frequency detection)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Weaponized temporal interference stimulation (Grossman 2017). Two kHz+ signals produce neural-range beat at depth."
-      },
       "sources": [
         "Grossman et al. 2017 (Cell)"
       ],
@@ -545,12 +650,24 @@
       "severity": "high",
       "ui_category": "SI",
       "notes": "Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Licensed frequencies -- lower barrier than restricted.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2104",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:A/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:P",
+        "score": 6.5,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2105",
+      "id": "QIF-T0014",
       "attack": "Envelope modulation (stealth carrier)",
-      "category": "TA0052",
+      "tactic": "QIF-E.RD",
       "bands": "S1–S2→any N",
       "band_ids": [
         "S1",
@@ -567,13 +684,6 @@
       "access": "PUBLIC",
       "classical": "Yes",
       "quantum": "Enhanced (demodulation detection)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Weaponized tACS — any carrier AM-modulated at neural frequency. Tissue demodulates. Lowest barrier to entry."
-      },
       "sources": [
         "Datta et al. 2009"
       ],
@@ -581,12 +691,24 @@
       "severity": "high",
       "ui_category": "SI",
       "notes": "Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry (PUBLIC access). tACS therapeutic principle weaponized.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2105",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
+        "score": 7.6,
+        "severity": "high"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2106",
+      "id": "QIF-T0015",
       "attack": "Directed energy (thermal I0 damage)",
-      "category": "TA0052",
+      "tactic": "QIF-E.RD",
       "bands": "S3→I0",
       "band_ids": [
         "S3",
@@ -596,13 +718,6 @@
       "access": "CLASSIFIED",
       "classical": "Yes",
       "quantum": "N/A (physical damage, not signal)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Physical thermal destruction of electrode-tissue boundary. Closest ICS: Damage to Property (T0879). Nation-state only."
-      },
       "sources": [
         "US DoD Active Denial System (declassified)"
       ],
@@ -610,12 +725,24 @@
       "severity": "critical",
       "ui_category": "PS",
       "notes": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2106",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:C/CI:L/II:L/S:U/R:I/VC:E/NE:N/E:A",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2201",
+      "id": "QIF-T0016",
       "attack": "Professor X backdoor (training-time)",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S2",
       "band_ids": [
         "S2"
@@ -624,15 +751,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (QI decoder integrity check)",
-      "mitre": {
-        "tactics": [
-          "TA0042"
-        ],
-        "techniques": [
-          "T1195.002"
-        ],
-        "note": "Supply chain via ML model poisoning"
-      },
       "sources": [
         "Zhang et al. 2024 (Professor X attack on EEG models)"
       ],
@@ -640,12 +758,24 @@
       "severity": "high",
       "ui_category": "DM",
       "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2201",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1195.002"
+        ]
+      }
     },
     {
-      "id": "T2202",
+      "id": "QIF-T0017",
       "attack": "Transfer learning backdoor",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S2",
       "band_ids": [
         "S2"
@@ -654,15 +784,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (QI decoder integrity check)",
-      "mitre": {
-        "tactics": [
-          "TA0042"
-        ],
-        "techniques": [
-          "T1195.002"
-        ],
-        "note": "Backdoor via pre-trained BCI model"
-      },
       "sources": [
         "Meng et al. 2024"
       ],
@@ -670,12 +791,24 @@
       "severity": "high",
       "ui_category": "DM",
       "notes": "Backdoor persists through transfer learning from pre-trained BCI models. Attacker poisons upstream model, downstream users inherit the backdoor. Common in EEG foundation model paradigm.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2202",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1195.002"
+        ]
+      }
     },
     {
-      "id": "T2203",
+      "id": "QIF-T0018",
       "attack": "Adversarial filter attack",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S1–S2",
       "band_ids": [
         "S1",
@@ -685,15 +818,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (signal integrity via Dsf)",
-      "mitre": {
-        "tactics": [
-          "TA0005"
-        ],
-        "techniques": [
-          "T1565.001"
-        ],
-        "note": "Maps to Stored Data Manipulation (T1565.001) — adversarial perturbation corrupts BCI signal processing filters"
-      },
       "sources": [
         "Liu et al. 2024"
       ],
@@ -701,12 +825,27 @@
       "severity": "medium",
       "ui_category": "DM",
       "notes": "Craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2203",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "score": 7.1,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565.001"
+        ],
+        "secondary_tactics": [
+          "QIF-B.EV"
+        ]
+      }
     },
     {
-      "id": "T2204",
+      "id": "QIF-T0019",
       "attack": "Universal adversarial perturbation (UAP)",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S1–S2",
       "band_ids": [
         "S1",
@@ -716,15 +855,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (coherence detects non-biological patterns)",
-      "mitre": {
-        "tactics": [
-          "TA0005"
-        ],
-        "techniques": [
-          "T1565.001"
-        ],
-        "note": "Maps to Stored Data Manipulation (T1565.001) — input-agnostic adversarial perturbation that degrades any BCI decoder"
-      },
       "sources": [
         "Liu et al. 2024",
         "Moosavi-Dezfooli et al. 2017"
@@ -733,12 +863,27 @@
       "severity": "medium",
       "ui_category": "DM",
       "notes": "Single perturbation pattern that fools BCI decoder regardless of input. Works across subjects and sessions. Pre-computed offline, applied in real-time. Lower sophistication than targeted attacks.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2204",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "score": 7.1,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565.001"
+        ],
+        "secondary_tactics": [
+          "QIF-B.EV"
+        ]
+      }
     },
     {
-      "id": "T2205",
+      "id": "QIF-T0020",
       "attack": "Membership inference on neural data",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S2–S3",
       "band_ids": [
         "S2",
@@ -748,16 +893,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (differential privacy via QI noise)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1005",
-          "T1530"
-        ],
-        "note": "Maps to Data from Local System (T1005) + Data from Cloud Storage (T1530) — infer membership in BCI training dataset"
-      },
       "sources": [
         "Shokri et al. 2017"
       ],
@@ -765,12 +900,28 @@
       "severity": "medium",
       "ui_category": "EX",
       "notes": "Determine if a specific person's neural data was used to train a BCI model. Reveals participation in clinical trials, neurological conditions. GDPR Article 9 implications.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2205",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
+        "score": 7.1,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1005",
+          "T1530"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV"
+        ]
+      }
     },
     {
-      "id": "T2206",
+      "id": "QIF-T0021",
       "attack": "Federated gradient leakage",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S2–S3",
       "band_ids": [
         "S2",
@@ -780,15 +931,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (gradient encryption via PQC)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1530"
-        ],
-        "note": "Maps to Data from Cloud Storage (T1530) — extract private neural data from federated learning gradients"
-      },
       "sources": [
         "Zhu et al. 2019"
       ],
@@ -796,12 +938,27 @@
       "severity": "medium",
       "ui_category": "EX",
       "notes": "Reconstruct individual neural data from shared gradients in federated BCI training. Multi-site clinical trials share model updates. Gradient inversion recovers raw EEG with high fidelity.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2206",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
+        "score": 7.1,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1530"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV"
+        ]
+      }
     },
     {
-      "id": "T2207",
+      "id": "QIF-T0022",
       "attack": "Neurofeedback falsification",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S2→N7",
       "band_ids": [
         "S2",
@@ -811,15 +968,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (closed-loop coherence monitoring)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1565.002"
-        ],
-        "note": "Maps to Transmitted Data Manipulation (T1565.002) — falsify neurofeedback signals in closed-loop BCI"
-      },
       "sources": [
         "Meng et al. 2024"
       ],
@@ -827,12 +975,27 @@
       "severity": "high",
       "ui_category": "DS",
       "notes": "Manipulate neurofeedback display or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2207",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:I/VC:I/NE:D/E:U",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565.002"
+        ],
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2208",
+      "id": "QIF-T0023",
       "attack": "Closed-loop perturbation cascade",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S2→I0→N5–N7",
       "band_ids": [
         "S2",
@@ -845,15 +1008,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (QI detects cascade divergence)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1565.002"
-        ],
-        "note": "Maps to Transmitted Data Manipulation (T1565.002) — perturb closed-loop to trigger cascading destabilization"
-      },
       "sources": [
         "Meng et al. 2024"
       ],
@@ -861,12 +1015,27 @@
       "severity": "critical",
       "ui_category": "DS",
       "notes": "Small adversarial perturbation injected into closed-loop BCI amplifies through feedback cycle. Each loop iteration increases deviation until system destabilizes. NeuroPace RNS, DBS with LFP sensing vulnerable.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2208",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:C/R:S/VC:I/NE:G/E:U",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565.002"
+        ],
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2209",
+      "id": "QIF-T0024",
       "attack": "Training data poisoning (model bias injection)",
-      "category": "TA0053",
+      "tactic": "QIF-M.SV",
       "bands": "S2",
       "band_ids": [
         "S2"
@@ -875,16 +1044,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (data provenance verification)",
-      "mitre": {
-        "tactics": [
-          "TA0053",
-          "TA0001"
-        ],
-        "techniques": [
-          "T1565.001"
-        ],
-        "note": "Maps to Stored Data Manipulation (T1565.001) — subtly contaminate training data to introduce systematic bias, distinct from backdoor insertion (T2201)"
-      },
       "sources": [
         "Biggio et al. 2012; Goldblum et al. 2022"
       ],
@@ -892,12 +1051,27 @@
       "severity": "high",
       "ui_category": "DM",
       "notes": "Subtly contaminate BCI training datasets to introduce systematic bias or weakness without creating a specific trigger (distinct from backdoor T2201). Degraded model performance appears as natural noise. Federated learning and crowd-sourced calibration data are vulnerable entry points.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2209",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565.001"
+        ],
+        "secondary_tactics": [
+          "QIF-B.IN"
+        ]
+      }
     },
     {
-      "id": "T2301",
+      "id": "QIF-T0025",
       "attack": "Neuronal jamming",
-      "category": "TA0040",
+      "tactic": "QIF-P.DS",
       "bands": "I0→N2–N7",
       "band_ids": [
         "I0",
@@ -912,16 +1086,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (coherence collapse detection)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1498",
-          "T1499"
-        ],
-        "note": "Maps to Network DoS (T1498) + Endpoint DoS (T1499) — overwhelm neural tissue via electrode overstimulation"
-      },
       "sources": [
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
@@ -929,12 +1093,25 @@
       "severity": "high",
       "ui_category": "DS",
       "notes": "Overwhelm targeted neurons via continuous high-frequency stimulation through compromised electrodes. Prevents normal neural signaling. Analogous to radio jamming. Implanted BCIs with stimulation capability.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2301",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1498",
+          "T1499"
+        ]
+      }
     },
     {
-      "id": "T2302",
+      "id": "QIF-T0026",
       "attack": "Neuronal flooding",
-      "category": "TA0040",
+      "tactic": "QIF-P.DS",
       "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
@@ -947,16 +1124,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (rate anomaly via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1498",
-          "T1499"
-        ],
-        "note": "Maps to Network DoS (T1498) + Endpoint DoS (T1499) — flood neural pathways with excessive stimulation"
-      },
       "sources": [
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
@@ -964,12 +1131,25 @@
       "severity": "critical",
       "ui_category": "PS",
       "notes": "Flood neural tissue with maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2302",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:C/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
+        "score": 7.2,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1498",
+          "T1499"
+        ]
+      }
     },
     {
-      "id": "T2303",
+      "id": "QIF-T0027",
       "attack": "Neuronal scanning",
-      "category": "TA0043",
+      "tactic": "QIF-N.SC",
       "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
@@ -982,15 +1162,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (Heisenberg disturbance reveals probing)",
-      "mitre": {
-        "tactics": [
-          "TA0043"
-        ],
-        "techniques": [
-          "T1595"
-        ],
-        "note": "Active scanning adapted for neural tissue mapping"
-      },
       "sources": [
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
@@ -998,12 +1169,24 @@
       "severity": "medium",
       "ui_category": "SE",
       "notes": "Systematically probe neural tissue via low-amplitude stimulation pulses to map functional connectivity, identify responsive regions, and characterize individual neural signatures. Prerequisite for targeted attacks.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2303",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:L/II:H/S:C/R:A/VC:I/NE:N/E:U",
+        "score": 6.5,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1595"
+        ]
+      }
     },
     {
-      "id": "T2304",
+      "id": "QIF-T0028",
       "attack": "Neural selective forwarding",
-      "category": "TA0050",
+      "tactic": "QIF-N.MD",
       "bands": "I0–S1",
       "band_ids": [
         "I0",
@@ -1013,15 +1196,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (completeness check via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0005"
-        ],
-        "techniques": [
-          "T1565.002"
-        ],
-        "note": "Maps to Transmitted Data Manipulation (T1565.002) — selectively drop/modify neural signal packets to alter perceived brain state"
-      },
       "sources": [
         "Lopez-Moreno et al. 2024 (Murcia taxonomy)"
       ],
@@ -1029,12 +1203,27 @@
       "severity": "high",
       "ui_category": "DM",
       "notes": "Compromised BCI firmware selectively drops or forwards neural signals based on content. Filter out specific cognitive states while passing others. Subtle censorship of neural output.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2304",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565.002"
+        ],
+        "secondary_tactics": [
+          "QIF-B.EV"
+        ]
+      }
     },
     {
-      "id": "T2305",
+      "id": "QIF-T0029",
       "attack": "Neural DoS (stimulation flood)",
-      "category": "TA0040",
+      "tactic": "QIF-P.DS",
       "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
@@ -1047,15 +1236,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (QI rate limiting)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1498"
-        ],
-        "note": "Denial of service adapted for neural systems"
-      },
       "sources": [
         "Kohno et al. 2009"
       ],
@@ -1065,12 +1245,24 @@
       "notes": "Overwhelm neural pathways with excessive stimulation or signal flooding causing temporary dysfunction or distress. Rate limiting at I0 and emergency shutdown are primary defenses.",
       "legacy_ids": [
         "ONI-T019"
-      ]
+      ],
+      "legacy_technique_id": "T2305",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1498"
+        ]
+      }
     },
     {
-      "id": "T2306",
+      "id": "QIF-T0030",
       "attack": "Motor hijacking",
-      "category": "TA0050",
+      "tactic": "QIF-N.MD",
       "bands": "I0→N5–N7",
       "band_ids": [
         "I0",
@@ -1082,15 +1274,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (intent-command coherence via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1565"
-        ],
-        "note": "Maps loosely to Data Manipulation (T1565) — hijack motor commands to produce involuntary movement. BCI-specific severity beyond traditional data manipulation."
-      },
       "sources": [
         "Kohno et al. 2009",
         "Schroder et al. 2025"
@@ -1101,12 +1284,27 @@
       "notes": "Force involuntary motor actions by injecting false motor commands through compromised BCI motor interfaces. Intent verification compares commands against detected cognitive intent. Physical safety interlocks required.",
       "legacy_ids": [
         "ONI-T020"
-      ]
+      ],
+      "legacy_technique_id": "T2306",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.2,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565"
+        ],
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2307",
+      "id": "QIF-T0031",
       "attack": "Battery drain attack (resource depletion)",
-      "category": "TA0040",
+      "tactic": "QIF-P.DS",
       "bands": "S1–S2",
       "band_ids": [
         "S1",
@@ -1116,15 +1314,6 @@
       "access": "PUBLIC",
       "classical": "Yes",
       "quantum": "Enhanced (power budget monitoring)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1499"
-        ],
-        "note": "Maps to Endpoint DoS (T1499) — force computationally expensive operations to drain implanted/wearable BCI battery"
-      },
       "sources": [
         "Martin et al. 2004 (implant battery attacks)"
       ],
@@ -1132,12 +1321,24 @@
       "severity": "medium",
       "ui_category": "DS",
       "notes": "Force BCI processor to perform computationally expensive tasks (e.g., continuous high-rate sampling, unnecessary ML inference) to drain battery faster than normal. Critical for implanted BCIs where battery replacement requires surgery. Wearable BCIs also affected during critical use periods.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2307",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
+        "score": 6.5,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1499"
+        ]
+      }
     },
     {
-      "id": "T2401",
+      "id": "QIF-T0032",
       "attack": "Identity spoofing (neural biometric)",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N3–N7",
       "band_ids": [
         "N3",
@@ -1148,15 +1349,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Yes (quantum biometric unforgeable if proven)",
-      "mitre": {
-        "tactics": [
-          "TA0001"
-        ],
-        "techniques": [
-          "T1078"
-        ],
-        "note": "Valid account access via neural biometric spoofing"
-      },
       "sources": [
         "Maiorana et al. 2016"
       ],
@@ -1164,12 +1356,27 @@
       "severity": "high",
       "ui_category": "PE",
       "notes": "Replicate user's neural signature to bypass BCI authentication. Classical biometrics (ERP templates, brainprint) are partially spoofable. If quantum neural signatures exist, no-cloning makes them physically unclonable.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2401",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1078"
+        ],
+        "secondary_tactics": [
+          "QIF-B.IN"
+        ]
+      }
     },
     {
-      "id": "T2402",
+      "id": "QIF-T0033",
       "attack": "Identity erosion (long-term personality drift)",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -1179,13 +1386,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (longitudinal QI baseline tracking)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Long-term psychological continuity attack via gradual neural stimulation drift. No digital/cyber analog exists."
-      },
       "sources": [
         "Yuste et al. 2017 (Neurorights)"
       ],
@@ -1195,12 +1395,24 @@
       "notes": "Long-term subtle manipulation of cognitive patterns leading to gradual personality changes or identity confusion. Targets L14 (Identity/Cognitive Sovereignty). Detectable via longitudinal QI baseline comparison. Neurorights: psychological continuity.",
       "legacy_ids": [
         "ONI-T021"
-      ]
+      ],
+      "legacy_technique_id": "T2402",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:I/VC:E/NE:D/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2403",
+      "id": "QIF-T0034",
       "attack": "Working memory poisoning",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -1210,13 +1422,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Enhanced (hippocampal coherence anomaly)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Direct cognitive manipulation via hippocampal stimulation. No digital/cyber analog — requires neural interface."
-      },
       "sources": [
         "Bonaci et al. 2015"
       ],
@@ -1224,12 +1429,24 @@
       "severity": "high",
       "ui_category": "CI",
       "notes": "Inject false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2403",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2404",
+      "id": "QIF-T0035",
       "attack": "P300 interrogation",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N7",
       "band_ids": [
         "N7"
@@ -1238,15 +1455,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (ERP privacy filter via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1119"
-        ],
-        "note": "Maps to Automated Collection (T1119) — trigger P300 evoked responses to involuntarily extract yes/no answers. BCI-specific interrogation technique."
-      },
       "sources": [
         "Bonaci et al. 2015",
         "Martinovic et al. 2012"
@@ -1255,12 +1463,27 @@
       "severity": "high",
       "ui_category": "EX",
       "notes": "Present stimuli designed to elicit P300 ERP responses revealing private knowledge (PINs, faces, locations). BCI app stores could embed interrogation stimuli in games. Demonstrated on consumer EEG (EMOTIV, NeuroSky).",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2404",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "score": 7.5,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1119"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV"
+        ]
+      }
     },
     {
-      "id": "T2405",
+      "id": "QIF-T0036",
       "attack": "Thought decoding (covert speech)",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N7",
       "band_ids": [
         "N7"
@@ -1269,16 +1492,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (neural data encryption via NSP)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1119",
-          "T1005"
-        ],
-        "note": "Maps to Automated Collection (T1119) + Data from Local System (T1005) — decode covert speech from neural signals. BCI-specific cognitive extraction."
-      },
       "sources": [
         "Willett et al. 2023 (Nature)",
         "Meta FAIR 2023"
@@ -1287,12 +1500,28 @@
       "severity": "critical",
       "ui_category": "CI",
       "notes": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2405",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "score": 7.5,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1119",
+          "T1005"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV"
+        ]
+      }
     },
     {
-      "id": "T2406",
+      "id": "QIF-T0037",
       "attack": "Agency manipulation",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N5–N7",
       "band_ids": [
         "N5",
@@ -1303,13 +1532,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Enhanced (agency coherence via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Manipulate user's sense of agency/free will via BCI stimulation. No digital/cyber analog — neurological attack."
-      },
       "sources": [
         "Yuste et al. 2017 (Neurorights)",
         "Goering et al. 2021"
@@ -1318,12 +1540,24 @@
       "severity": "critical",
       "ui_category": "CI",
       "notes": "Manipulate sense of agency -- user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2406",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2407",
+      "id": "QIF-T0038",
       "attack": "Brainprint theft",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -1333,16 +1567,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (quantum biometric if proven)",
-      "mitre": {
-        "tactics": [
-          "TA0009",
-          "TA0006"
-        ],
-        "techniques": [
-          "T1003"
-        ],
-        "note": "Credential access via neural biometric extraction"
-      },
       "sources": [
         "Maiorana et al. 2016"
       ],
@@ -1350,12 +1574,27 @@
       "severity": "high",
       "ui_category": "EX",
       "notes": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2407",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:G/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1003"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV"
+        ]
+      }
     },
     {
-      "id": "T2408",
+      "id": "QIF-T0039",
       "attack": "Self-model corruption",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -1365,13 +1604,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Enhanced (identity baseline via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [],
-        "note": "NO MITRE EQUIVALENT. Corrupt user's neural self-model / body representation. No digital/cyber analog — neurological identity attack."
-      },
       "sources": [
         "Yuste et al. 2017 (Neurorights)"
       ],
@@ -1379,12 +1611,24 @@
       "severity": "critical",
       "ui_category": "CI",
       "notes": "Corrupt the neural representation of self (body ownership, self-other boundary, autobiographical memory). Targets insula, TPJ, mPFC. Could cause depersonalization, dissociation, or false self-recognition. Neurorights: mental integrity.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2408",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:D/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "secondary_tactics": [
+          "QIF-P.DS"
+        ]
+      }
     },
     {
-      "id": "T2409",
+      "id": "QIF-T0040",
       "attack": "Neurophishing",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "S3→N7",
       "band_ids": [
         "S3",
@@ -1394,15 +1638,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (stimulus-response coherence via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0001"
-        ],
-        "techniques": [
-          "T1566"
-        ],
-        "note": "Phishing adapted for BCI context"
-      },
       "sources": [
         "Frank et al. 2024"
       ],
@@ -1410,12 +1645,27 @@
       "severity": "high",
       "ui_category": "PE",
       "notes": "Present carefully designed visual/auditory/haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional) that reveal private information or prime the brain for subsequent attack. BCI app store is the attack surface.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2409",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:A/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1566"
+        ],
+        "secondary_tactics": [
+          "QIF-B.IN"
+        ]
+      }
     },
     {
-      "id": "T2410",
+      "id": "QIF-T0041",
       "attack": "Cognitive biometric inference",
-      "category": "TA0051",
+      "tactic": "QIF-C.EX",
       "bands": "N6–N7→S3",
       "band_ids": [
         "N6",
@@ -1426,16 +1676,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (data minimization via QI privacy filter)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1119",
-          "T1005"
-        ],
-        "note": "Maps to Automated Collection (T1119) + Data from Local System (T1005) — infer sensitive attributes (health, emotion, identity) from neural metadata"
-      },
       "sources": [
         "Landau et al. 2020"
       ],
@@ -1443,12 +1683,28 @@
       "severity": "high",
       "ui_category": "EX",
       "notes": "Infer sensitive personal attributes (health conditions, sexual orientation, political beliefs, cognitive decline) from BCI usage metadata and neural signal statistics without decoding content. Side-channel on cognition.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2410",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1119",
+          "T1005"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV"
+        ]
+      }
     },
     {
-      "id": "T2501",
+      "id": "QIF-T0042",
       "attack": "BLE/RF side-channel",
-      "category": "TA0043",
+      "tactic": "QIF-N.SC",
       "bands": "S1–S2",
       "band_ids": [
         "S1",
@@ -1458,16 +1714,6 @@
       "access": "PUBLIC",
       "classical": "Yes",
       "quantum": "Enhanced (signal correlation)",
-      "mitre": {
-        "tactics": [
-          "TA0043",
-          "TA0009"
-        ],
-        "techniques": [
-          "T1040"
-        ],
-        "note": "Network sniffing / side-channel via BLE emissions"
-      },
       "sources": [
         "Bonaci et al. 2015",
         "Schroder et al. 2025"
@@ -1479,12 +1725,27 @@
       "legacy_ids": [
         "ONI-T002",
         "ONI-T005"
-      ]
+      ],
+      "legacy_technique_id": "T2501",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
+        "score": 5.3,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1040"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV"
+        ]
+      }
     },
     {
-      "id": "T2502",
+      "id": "QIF-T0043",
       "attack": "Supply chain compromise (firmware backdoor)",
-      "category": "TA0001",
+      "tactic": "QIF-B.IN",
       "bands": "S2–S3",
       "band_ids": [
         "S2",
@@ -1494,17 +1755,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (firmware attestation)",
-      "mitre": {
-        "tactics": [
-          "TA0001"
-        ],
-        "techniques": [
-          "T1195",
-          "T1195.001",
-          "T1195.002"
-        ],
-        "note": "Direct MITRE mapping: supply chain compromise"
-      },
       "sources": [
         "Schroder et al. 2025"
       ],
@@ -1514,12 +1764,26 @@
       "notes": "Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Merges ONI-T006 (Firmware Backdoor). QI-enhanced firmware attestation detects unauthorized modifications.",
       "legacy_ids": [
         "ONI-T006"
-      ]
+      ],
+      "legacy_technique_id": "T2502",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:H/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
+        "score": 4.4,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1195",
+          "T1195.001",
+          "T1195.002"
+        ]
+      }
     },
     {
-      "id": "T2503",
+      "id": "QIF-T0044",
       "attack": "Cloud infrastructure attack",
-      "category": "TA0001",
+      "tactic": "QIF-B.IN",
       "bands": "S3",
       "band_ids": [
         "S3"
@@ -1528,15 +1792,6 @@
       "access": "PUBLIC",
       "classical": "Yes",
       "quantum": "Enhanced (QKD/PQC for data-in-transit)",
-      "mitre": {
-        "tactics": [
-          "TA0001"
-        ],
-        "techniques": [
-          "T1190"
-        ],
-        "note": "Exploit public-facing BCI cloud API"
-      },
       "sources": [
         "Schroder et al. 2025"
       ],
@@ -1544,12 +1799,24 @@
       "severity": "medium",
       "ui_category": "EX",
       "notes": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2503",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
+        "score": 4.5,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1190"
+        ]
+      }
     },
     {
-      "id": "T2504",
+      "id": "QIF-T0045",
       "attack": "Harvest-now-decrypt-later",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "S3",
       "band_ids": [
         "S3"
@@ -1558,16 +1825,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Prevented (PQC/QKD)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1557",
-          "T1530"
-        ],
-        "note": "Maps to Adversary-in-the-Middle (T1557, intercept) + Data from Cloud Storage (T1530, store). Record encrypted BCI traffic now, decrypt when quantum computers arrive."
-      },
       "sources": [
         "Gidney 2025 (Google quantum roadmap)"
       ],
@@ -1575,12 +1832,25 @@
       "severity": "critical",
       "ui_category": "EX",
       "notes": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2504",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
+        "score": 6.5,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1557",
+          "T1530"
+        ]
+      }
     },
     {
-      "id": "T2505",
+      "id": "QIF-T0046",
       "attack": "OTA firmware weaponization",
-      "category": "TA0003",
+      "tactic": "QIF-C.IM",
       "bands": "S2–S3",
       "band_ids": [
         "S2",
@@ -1590,16 +1860,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (signed update + attestation)",
-      "mitre": {
-        "tactics": [
-          "TA0003",
-          "TA0001"
-        ],
-        "techniques": [
-          "T1195.002"
-        ],
-        "note": "Software supply chain via OTA update mechanism"
-      },
       "sources": [
         "Schroder et al. 2025"
       ],
@@ -1607,12 +1867,27 @@
       "severity": "high",
       "ui_category": "PE",
       "notes": "Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2505",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:N/AC:H/PR:H/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1195.002"
+        ],
+        "secondary_tactics": [
+          "QIF-B.IN"
+        ]
+      }
     },
     {
-      "id": "T2506",
+      "id": "QIF-T0047",
       "attack": "Mass BCI compromise (platform attack)",
-      "category": "TA0040",
+      "tactic": "QIF-P.DS",
       "bands": "S2–S3",
       "band_ids": [
         "S2",
@@ -1622,16 +1897,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (decentralized key management via NSP)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1072",
-          "T1498"
-        ],
-        "note": "Maps to Software Deployment Tools (T1072, mass compromise vector) + Network DoS (T1498). Coordinated attack on standardized BCI platform."
-      },
       "sources": [
         "Schroder et al. 2025 (Yale worst-case scenario)"
       ],
@@ -1641,12 +1906,25 @@
       "notes": "Coordinated attack exploiting standardized BCI platforms affecting millions simultaneously. Yale Digital Ethics Center worst-case scenario. Monoculture risk: one vulnerability, all devices. Merges ONI-T024 (Mass Neural Manipulation).",
       "legacy_ids": [
         "ONI-T024"
-      ]
+      ],
+      "legacy_technique_id": "T2506",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
+        "score": 7.5,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1072",
+          "T1498"
+        ]
+      }
     },
     {
-      "id": "T2507",
+      "id": "QIF-T0048",
       "attack": "Electrode compromise (physical tamper)",
-      "category": "TA0001",
+      "tactic": "QIF-B.IN",
       "bands": "I0",
       "band_ids": [
         "I0"
@@ -1655,15 +1933,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (impedance + coherence anomaly at I0)",
-      "mitre": {
-        "tactics": [
-          "TA0001"
-        ],
-        "techniques": [
-          "T1200"
-        ],
-        "note": "Hardware additions — physical electrode manipulation"
-      },
       "sources": [
         "Kohno et al. 2009"
       ],
@@ -1673,12 +1942,24 @@
       "notes": "Physical manipulation or replacement of neural electrodes to inject malicious signals or intercept legitimate neural data. Impedance monitoring detects electrode tampering. Tamper-evident seals for implants.",
       "legacy_ids": [
         "ONI-T004"
-      ]
+      ],
+      "legacy_technique_id": "T2507",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
+        "score": 4.3,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1200"
+        ]
+      }
     },
     {
-      "id": "T2508",
+      "id": "QIF-T0049",
       "attack": "Wireless authentication bypass",
-      "category": "TA0001",
+      "tactic": "QIF-B.IN",
       "bands": "S2–S3",
       "band_ids": [
         "S2",
@@ -1688,15 +1969,6 @@
       "access": "PUBLIC",
       "classical": "Yes",
       "quantum": "Enhanced (quantum-resistant auth via NSP)",
-      "mitre": {
-        "tactics": [
-          "TA0001"
-        ],
-        "techniques": [
-          "T1078"
-        ],
-        "note": "Weak BCI authentication exploitation"
-      },
       "sources": [
         "Schroder et al. 2025 (Yale)"
       ],
@@ -1706,12 +1978,24 @@
       "notes": "Exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth.",
       "legacy_ids": [
         "ONI-T022"
-      ]
+      ],
+      "legacy_technique_id": "T2508",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
+        "score": 4.7,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1078"
+        ]
+      }
     },
     {
-      "id": "T2509",
+      "id": "QIF-T0050",
       "attack": "Hardware fault injection (voltage/EM glitching)",
-      "category": "TA0001",
+      "tactic": "QIF-B.IN",
       "bands": "S1–S2",
       "band_ids": [
         "S1",
@@ -1721,16 +2005,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (hardware attestation via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0001",
-          "TA0005"
-        ],
-        "techniques": [
-          "T1195.003"
-        ],
-        "note": "Maps to Supply Chain Compromise: Compromise Hardware Supply Chain (T1195.003) — voltage/EM glitches bypass security checks on BCI processor"
-      },
       "sources": [
         "Bar-El et al. 2006 (fault injection survey)"
       ],
@@ -1738,12 +2012,27 @@
       "severity": "high",
       "ui_category": "PE",
       "notes": "Physical attack using voltage glitches, clock manipulation, or electromagnetic pulses to induce faults in BCI processor. Can bypass security checks, extract cryptographic keys, or cause unpredictable stimulation behavior. Requires physical proximity to device.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2509",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
+        "score": 4.5,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1195.003"
+        ],
+        "secondary_tactics": [
+          "QIF-B.EV"
+        ]
+      }
     },
     {
-      "id": "T2601",
+      "id": "QIF-T0051",
       "attack": "Neural data privacy breach",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "N1–S3",
       "band_ids": [
         "N1",
@@ -1755,15 +2044,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (cross-band encryption via NSP)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1005"
-        ],
-        "note": "Data from local system — neural data access"
-      },
       "sources": [
         "Landau et al. 2020",
         "GDPR Article 9"
@@ -1772,12 +2052,24 @@
       "severity": "high",
       "ui_category": "CI",
       "notes": "Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2601",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:N/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
+        "score": 6.8,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1005"
+        ]
+      }
     },
     {
-      "id": "T2602",
+      "id": "QIF-T0052",
       "attack": "ERP harvesting",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -1787,15 +2079,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (ERP privacy filter via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1119"
-        ],
-        "note": "Maps to Automated Collection (T1119) — automated harvesting of event-related potentials (P300, N400, etc.) from BCI signals"
-      },
       "sources": [
         "Bonaci et al. 2015",
         "Martinovic et al. 2012"
@@ -1806,12 +2089,24 @@
       "notes": "Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes. BCI apps can embed covert stimulus-response protocols.",
       "legacy_ids": [
         "ONI-T016"
-      ]
+      ],
+      "legacy_technique_id": "T2602",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:P",
+        "score": 7.0,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1119"
+        ]
+      }
     },
     {
-      "id": "T2603",
+      "id": "QIF-T0053",
       "attack": "Cognitive state capture",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -1821,16 +2116,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (cognitive privacy filter)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1119",
-          "T1005"
-        ],
-        "note": "Maps to Automated Collection (T1119) + Data from Local System (T1005) — passive collection of emotional/cognitive state from neural signals"
-      },
       "sources": [
         "Landau et al. 2020"
       ],
@@ -1840,12 +2125,25 @@
       "notes": "Record patterns that reveal attention, emotion, fatigue, or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs.",
       "legacy_ids": [
         "ONI-T017"
-      ]
+      ],
+      "legacy_technique_id": "T2603",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:A",
+        "score": 7.1,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1119",
+          "T1005"
+        ]
+      }
     },
     {
-      "id": "T2604",
+      "id": "QIF-T0054",
       "attack": "Memory extraction",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -1855,15 +2153,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Enhanced (hippocampal signal encryption via NSP)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1005"
-        ],
-        "note": "Maps to Data from Local System (T1005) — extract memory-encoded neural patterns. BCI-specific: no traditional system stores 'memories' as data."
-      },
       "sources": [
         "Bonaci et al. 2015"
       ],
@@ -1873,12 +2162,24 @@
       "notes": "Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution.",
       "legacy_ids": [
         "ONI-T018"
-      ]
+      ],
+      "legacy_technique_id": "T2604",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:U",
+        "score": 6.9,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1005"
+        ]
+      }
     },
     {
-      "id": "T2605",
+      "id": "QIF-T0055",
       "attack": "BCI cognitive warfare",
-      "category": "TA0040",
+      "tactic": "QIF-P.DS",
       "bands": "S3→N4–N7",
       "band_ids": [
         "S3",
@@ -1891,16 +2192,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (multi-band anomaly via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0040"
-        ],
-        "techniques": [
-          "T1498",
-          "T1565"
-        ],
-        "note": "Maps to Network DoS (T1498) + Data Manipulation (T1565) — nation-state cognitive warfare leveraging BCI infrastructure at scale"
-      },
       "sources": [
         "NATO STO 2024 (Cognitive Warfare concept)"
       ],
@@ -1908,12 +2199,25 @@
       "severity": "critical",
       "ui_category": "PS",
       "notes": "State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2605",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1498",
+          "T1565"
+        ]
+      }
     },
     {
-      "id": "T2606",
+      "id": "QIF-T0056",
       "attack": "Neuro-surveillance",
-      "category": "TA0009",
+      "tactic": "QIF-D.HV",
       "bands": "N6–N7→S3",
       "band_ids": [
         "N6",
@@ -1924,16 +2228,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (NSP end-to-end encryption)",
-      "mitre": {
-        "tactics": [
-          "TA0009"
-        ],
-        "techniques": [
-          "T1119",
-          "T1557"
-        ],
-        "note": "Maps to Automated Collection (T1119) + Adversary-in-the-Middle (T1557) — mass neural data interception and collection for surveillance"
-      },
       "sources": [
         "Ienca & Andorno 2017 (Neurorights)"
       ],
@@ -1941,12 +2235,25 @@
       "severity": "high",
       "ui_category": "EX",
       "notes": "Systematic collection of neural data from consumer BCI populations for surveillance purposes. Workplace attention monitoring, law enforcement lie detection, social credit via neural markers. Neurorights: mental privacy.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2606",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:U",
+        "score": 6.5,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1119",
+          "T1557"
+        ]
+      }
     },
     {
-      "id": "T2701",
+      "id": "QIF-T0057",
       "attack": "Network mapping (BCI topology)",
-      "category": "TA0043",
+      "tactic": "QIF-N.SC",
       "bands": "S2–S3",
       "band_ids": [
         "S2",
@@ -1956,15 +2263,6 @@
       "access": null,
       "classical": "Yes",
       "quantum": "Enhanced (quantum-aware network segmentation)",
-      "mitre": {
-        "tactics": [
-          "TA0043"
-        ],
-        "techniques": [
-          "T1046"
-        ],
-        "note": "Network service discovery adapted for BCI mesh"
-      },
       "sources": [
         "Schroder et al. 2025"
       ],
@@ -1974,12 +2272,24 @@
       "notes": "Discover topology of BCI networks: communication pathways between electrodes, processing units, and external interfaces. Prerequisite for targeted attacks. Deploy honeypot nodes and dynamic addressing.",
       "legacy_ids": [
         "ONI-T003"
-      ]
+      ],
+      "legacy_technique_id": "T2701",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
+        "score": 5.1,
+        "severity": "medium"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1046"
+        ]
+      }
     },
     {
-      "id": "T2801",
+      "id": "QIF-T0058",
       "attack": "Calibration poisoning",
-      "category": "TA0003",
+      "tactic": "QIF-C.IM",
       "bands": "S1–S2",
       "band_ids": [
         "S1",
@@ -1989,16 +2299,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (calibration integrity via QI baseline)",
-      "mitre": {
-        "tactics": [
-          "TA0003"
-        ],
-        "techniques": [
-          "T1565.001",
-          "T1546"
-        ],
-        "note": "Maps to Stored Data Manipulation (T1565.001, corrupt calibration) + Event Triggered Execution (T1546, persist via calibration reload)"
-      },
       "sources": [
         "Schroder et al. 2025"
       ],
@@ -2008,12 +2308,25 @@
       "notes": "Subtly corrupt BCI calibration data to maintain influence over signal interpretation across device resets. Cryptographically signed calibration data prevents. Recalibration audits detect drift.",
       "legacy_ids": [
         "ONI-T012"
-      ]
+      ],
+      "legacy_technique_id": "T2801",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:P",
+        "score": 7.5,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1565.001",
+          "T1546"
+        ]
+      }
     },
     {
-      "id": "T2802",
+      "id": "QIF-T0059",
       "attack": "Pattern lock (learned pathway persistence)",
-      "category": "TA0003",
+      "tactic": "QIF-C.IM",
       "bands": "S1–S2→N7",
       "band_ids": [
         "S1",
@@ -2024,15 +2337,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (pattern integrity via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0003"
-        ],
-        "techniques": [
-          "T1546"
-        ],
-        "note": "Maps to Event Triggered Execution (T1546) — persist via learned neural pathway patterns that trigger on brain state events"
-      },
       "sources": [],
       "status": "THEORETICAL",
       "severity": "medium",
@@ -2040,12 +2344,24 @@
       "notes": "Embed recurring attack patterns that survive system resets by exploiting learned neural pathways or stored calibration data. Leverages neuroplasticity -- brain adapts to malicious patterns, making them harder to remove.",
       "legacy_ids": [
         "ONI-T010"
-      ]
+      ],
+      "legacy_technique_id": "T2802",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:I/VC:E/NE:D/E:U",
+        "score": 7.4,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1546"
+        ]
+      }
     },
     {
-      "id": "T2803",
+      "id": "QIF-T0060",
       "attack": "Memory implant (cross-session persistence)",
-      "category": "TA0003",
+      "tactic": "QIF-C.IM",
       "bands": "N6–N7",
       "band_ids": [
         "N6",
@@ -2055,15 +2371,6 @@
       "access": null,
       "classical": "No",
       "quantum": "Enhanced (cognitive state verification via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0003"
-        ],
-        "techniques": [
-          "T1546"
-        ],
-        "note": "Maps to Event Triggered Execution (T1546) — cross-session persistence via neural pathway modification that survives device reset"
-      },
       "sources": [],
       "status": "THEORETICAL",
       "severity": "high",
@@ -2071,12 +2378,24 @@
       "notes": "Persistent modification of neural pathway configurations or cognitive associations that survive across BCI sessions. Targets long-term potentiation mechanisms. Session isolation prevents cross-session contamination.",
       "legacy_ids": [
         "ONI-T011"
-      ]
+      ],
+      "legacy_technique_id": "T2803",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:D/E:U",
+        "score": 7.3,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1546"
+        ]
+      }
     },
     {
-      "id": "T2804",
+      "id": "QIF-T0061",
       "attack": "Coherence mimicry",
-      "category": "TA0005",
+      "tactic": "QIF-B.EV",
       "bands": "I0–S1",
       "band_ids": [
         "I0",
@@ -2086,15 +2405,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (multi-factor beyond coherence)",
-      "mitre": {
-        "tactics": [
-          "TA0005"
-        ],
-        "techniques": [
-          "T1036"
-        ],
-        "note": "Maps to Masquerading (T1036) — mimic legitimate neural coherence patterns to evade QIF detection"
-      },
       "sources": [],
       "status": "THEORETICAL",
       "severity": "high",
@@ -2102,12 +2412,24 @@
       "notes": "Craft malicious signals that maintain legitimate coherence scores (Cs) to bypass QI metric. Directly attacks QIF's detection mechanism. Defense: multi-factor signal validation, behavioral analysis beyond coherence, ensemble detection.",
       "legacy_ids": [
         "ONI-T013"
-      ]
+      ],
+      "legacy_technique_id": "T2804",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
+        "score": 2.6,
+        "severity": "low"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1036"
+        ]
+      }
     },
     {
-      "id": "T2805",
+      "id": "QIF-T0062",
       "attack": "Gradual drift (slow parameter shift)",
-      "category": "TA0005",
+      "tactic": "QIF-B.EV",
       "bands": "S1→N7",
       "band_ids": [
         "S1",
@@ -2117,15 +2439,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (long-term baseline tracking via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0005"
-        ],
-        "techniques": [
-          "T1027"
-        ],
-        "note": "Maps to Obfuscated Files or Information (T1027) — slow parameter drift stays below detection threshold to evade monitoring"
-      },
       "sources": [],
       "status": "THEORETICAL",
       "severity": "medium",
@@ -2133,12 +2446,24 @@
       "notes": "Slowly modify neural parameters below detection thresholds to accumulate significant changes over time. Exploit adaptive baseline algorithms. Cumulative change detection and trend analysis are primary defenses.",
       "legacy_ids": [
         "ONI-T014"
-      ]
+      ],
+      "legacy_technique_id": "T2805",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
+        "score": 2.6,
+        "severity": "low"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1027"
+        ]
+      }
     },
     {
-      "id": "T2806",
+      "id": "QIF-T0063",
       "attack": "Noise injection (detection masking)",
-      "category": "TA0005",
+      "tactic": "QIF-B.EV",
       "bands": "I0–S1",
       "band_ids": [
         "I0",
@@ -2148,15 +2473,6 @@
       "access": null,
       "classical": "Partial",
       "quantum": "Enhanced (noise-resilient QI + multi-channel cross-validation)",
-      "mitre": {
-        "tactics": [
-          "TA0005"
-        ],
-        "techniques": [
-          "T1027"
-        ],
-        "note": "Maps to Obfuscated Files or Information (T1027) — inject calibrated noise to mask malicious signals from QI detection"
-      },
       "sources": [],
       "status": "THEORETICAL",
       "severity": "medium",
@@ -2164,12 +2480,24 @@
       "notes": "Add carefully calibrated noise to mask malicious signal components from detection algorithms. Targets QI's sigma-phi (phase) and sigma-gamma (amplitude) terms. Multi-channel cross-validation detects inconsistent noise patterns.",
       "legacy_ids": [
         "ONI-T015"
-      ]
+      ],
+      "legacy_technique_id": "T2806",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
+        "score": 2.6,
+        "severity": "low"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1027"
+        ]
+      }
     },
     {
-      "id": "T2807",
+      "id": "QIF-T0064",
       "attack": "User consent fatigue (neural permission flooding)",
-      "category": "TA0005",
+      "tactic": "QIF-B.EV",
       "bands": "S2–S3→N7",
       "band_ids": [
         "S2",
@@ -2180,16 +2508,6 @@
       "access": "PUBLIC",
       "classical": "Partial",
       "quantum": "Enhanced (consent integrity via QI)",
-      "mitre": {
-        "tactics": [
-          "TA0005",
-          "TA0001"
-        ],
-        "techniques": [
-          "T1078"
-        ],
-        "note": "Maps to Valid Accounts (T1078) — flood BCI permission prompts until user mentally approves malicious request out of fatigue"
-      },
       "sources": [
         "Felt et al. 2012 (permission fatigue); Bonaci et al. 2015"
       ],
@@ -2197,14 +2515,121 @@
       "severity": "medium",
       "ui_category": "PE",
       "notes": "Flood user with BCI-mediated permission requests until cognitive fatigue leads to reflexive approval of malicious requests. Exploits the neural-intent interface where 'yes/no' decisions may be captured from brain signals. BCI app ecosystems with frequent permission prompts are the attack surface.",
-      "legacy_ids": []
+      "legacy_ids": [],
+      "legacy_technique_id": "T2807",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:E/NE:N/E:U",
+        "score": 2.8,
+        "severity": "low"
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1078"
+        ],
+        "secondary_tactics": [
+          "QIF-B.IN"
+        ]
+      }
     }
   ],
   "deprecated": [
     {
       "file": "shared/threat-matrix.json",
       "reason": "Legacy ONI-era threat matrix (24 techniques, ONI-T### IDs). Superseded by this registry.",
-      "migration": "All ONI-T### techniques merged into T2000+ range. See legacy_ids field on each technique."
+      "migration": "All ONI-T### techniques merged into QIF-T#### range. See legacy_ids field on each technique."
+    },
+    {
+      "schema": "v2.0 (MITRE-compatible IDs)",
+      "reason": "QIF-T2xxx IDs replaced with QIF-T0xxx sequential IDs in v3.0. MITRE tactic IDs (TA####) replaced with QIF Locus Taxonomy IDs.",
+      "migration": "See legacy_technique_id field on each technique. Tactic legacy_ids on each tactic definition."
     }
-  ]
+  ],
+  "taxonomy": "QIF Locus Taxonomy v1.0",
+  "scoring": "QNIS v1.0 (QIF Neural Impact Score)",
+  "generated": "2026-02-08T08:48:14Z",
+  "legacy_mitre_compatibility": {
+    "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
+    "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",
+    "note": "DEPRECATED: QIF now uses the Locus Taxonomy with original identifiers. Legacy MITRE cross-references preserved in technique cross_references field."
+  },
+  "domains": [
+    {
+      "code": "N",
+      "name": "Neural",
+      "description": "Direct interface with neural tissue — signal manipulation, electrode boundary, ion channels."
+    },
+    {
+      "code": "C",
+      "name": "Cognitive",
+      "description": "Higher-order psychological processes — memory, attention, identity, agency."
+    },
+    {
+      "code": "P",
+      "name": "Physiological",
+      "description": "Somatic systems — motor control, autonomic functions, physical harm."
+    },
+    {
+      "code": "D",
+      "name": "Data",
+      "description": "Information acquisition and manipulation — brainwave recordings, neural metadata."
+    },
+    {
+      "code": "B",
+      "name": "BCI System",
+      "description": "Hardware/software of the BCI device — firmware, protocols, authentication."
+    },
+    {
+      "code": "M",
+      "name": "Model",
+      "description": "Machine learning models used in BCI — decoders, classifiers, feedback systems."
+    },
+    {
+      "code": "E",
+      "name": "Energy",
+      "description": "Directed energy attacks — ELF, microwave, RF, temporal interference."
+    }
+  ],
+  "qnis_spec": {
+    "version": "1.0",
+    "name": "QIF Neural Impact Score",
+    "description": "BCI-specific vulnerability scoring system. Prioritizes human impact (biological + cognitive) over system impact.",
+    "score_range": "0.0 - 10.0",
+    "formula": "BaseScore = (0.3 * Exploitability) + (0.7 * Impact)",
+    "severity_levels": {
+      "none": "0.0",
+      "low": "0.1 - 3.9",
+      "medium": "4.0 - 6.9",
+      "high": "7.0 - 8.9",
+      "critical": "9.0 - 10.0"
+    },
+    "metrics": {
+      "exploitability": [
+        "AV (Attack Vector)",
+        "AC (Attack Complexity)",
+        "PR (Privileges Required)",
+        "UI (User Interaction)"
+      ],
+      "impact": [
+        "BI (Biological Impact)",
+        "CI (Cognitive Integrity)",
+        "II (Information Impact)",
+        "S (Scope)"
+      ],
+      "supplemental": [
+        "R (Reversibility)",
+        "VC (Violation of Consent)",
+        "NE (Neuroplasticity)"
+      ],
+      "threat": [
+        "E (Exploit Maturity)"
+      ],
+      "environmental": [
+        "SC (Safety Criticality)",
+        "CR (Cognitive Resilience)",
+        "BR (Biological Resilience)"
+      ]
+    },
+    "vector_format": "QNIS:1.0/AV:<V>/AC:<V>/PR:<V>/UI:<V>/BI:<V>/CI:<V>/II:<V>/S:<V>/R:<V>/VC:<V>/NE:<V>/E:<V>"
+  }
 }

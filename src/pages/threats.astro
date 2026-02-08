@@ -11,14 +11,14 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
 
 <PageLayout
   title="QIF Threat Registry"
-  description="Interactive attack matrix mapping 64 MITRE-compatible BCI techniques across 11 hourglass bands, 8 attack categories, and 4 evidence levels."
+  description="Interactive attack matrix mapping 64 BCI threat techniques across 11 hourglass bands, 8 attack categories, and 4 evidence levels."
   breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'Threat Registry' }]}
   maxWidth="wide"
 >
   <div class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QIF Threat Registry</h1>
     <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
-      64 MITRE-compatible techniques across 11 tactics and 11 hourglass bands
+      64 QIF Locus techniques across 11 tactics and 11 hourglass bands &mdash; scored with QNIS v1.0
     </p>
 
     <!-- Status breakdown -->
@@ -99,7 +99,7 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
           <span class="status-badge status-badge--EMERGING ml-1">emerging</span> = newly identified.
         </div>
         <div>
-          <strong class="text-[var(--color-text-primary)]">MITRE IDs</strong> &mdash; T2001&ndash;T2899 for BCI techniques (avoids collision with MITRE ATT&CK T1001&ndash;T1659). TA#### for tactics.
+          <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use the Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0&ndash;10.
         </div>
       </div>
     </details>
@@ -530,9 +530,16 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
     font-style: italic;
   }
 
-  .detail-mitre {
+  .detail-qnis {
     font-size: 0.7rem;
     color: var(--color-text-faint);
+    margin-top: 0.3rem;
+    font-family: var(--font-mono);
+  }
+
+  .detail-tactic {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
     margin-top: 0.3rem;
     font-family: var(--font-mono);
   }
@@ -695,16 +702,15 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
         '</dl>' +
         '<div class="detail-description">' + t.description + '</div>';
 
-      // MITRE cross-reference
-      if (t.mitre && (t.mitre.tactics.length > 0 || t.mitre.techniques.length > 0)) {
-        html += '<div class="detail-mitre">';
-        if (t.mitre.tactics.length > 0) {
-          html += t.mitre.tactics.join(', ');
-        }
-        if (t.mitre.techniques.length > 0) {
-          html += ' \u00b7 ' + t.mitre.techniques.join(', ');
-        }
-        html += '</div>';
+      // QNIS score + tactic
+      if (t.qnis && t.qnis.score > 0) {
+        html += '<div class="detail-qnis">QNIS ' + t.qnis.score.toFixed(1) + ' (' + t.qnis.severity + ') — ' + t.qnis.vector + '</div>';
+      }
+      html += '<div class="detail-tactic">' + t.tactic + '</div>';
+
+      // Cross-references (secondary tactics)
+      if (t.crossRefs && t.crossRefs.secondary_tactics && t.crossRefs.secondary_tactics.length > 0) {
+        html += '<div class="detail-tactic">Also: ' + t.crossRefs.secondary_tactics.join(', ') + '</div>';
       }
 
       // Sources

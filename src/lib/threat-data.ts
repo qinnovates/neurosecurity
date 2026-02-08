@@ -1,8 +1,7 @@
 /**
- * QIF Threat Data — adapter over shared/threat-registry.json
- * Single source of truth: all 64 techniques come from the registry.
- *
- * Categories are inspired by MITRE ATT&CK but adapted for BCI/neural security.
+ * QIF Threat Data — adapter over shared/threat-registry.json (v3.0)
+ * Single source of truth: all 64 techniques from the QIF Locus Taxonomy.
+ * Scoring: QNIS v1.0 (QIF Neural Impact Score)
  */
 
 import { HOURGLASS_BANDS } from './qif-constants';
@@ -20,27 +19,41 @@ export const THREAT_CATEGORIES = [
   { id: 'EX', name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
 ] as const;
 
-/** MITRE tactics from registry */
+/** QIF Locus Tactics from registry */
 export const THREAT_TACTICS = registry.tactics;
+
+/** QIF Operational Domains */
+export const THREAT_DOMAINS = (registry as any).domains ?? [];
+
+/** QNIS specification */
+export const QNIS_SPEC = (registry as any).qnis_spec ?? null;
 
 export type CategoryId = typeof THREAT_CATEGORIES[number]['id'];
 export type BandId = typeof HOURGLASS_BANDS[number]['id'];
 export type Severity = 'critical' | 'high' | 'medium' | 'low';
+export type QnisSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
 export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING';
 export type AccessLevel = 'PUBLIC' | 'LICENSED' | 'RESTRICTED' | 'CLASSIFIED' | null;
 
+export interface QnisScore {
+  version: string;
+  vector: string;
+  score: number;
+  severity: QnisSeverity;
+}
+
 export interface ThreatVector {
-  /** MITRE-compatible ID: T2### */
+  /** QIF technique ID: QIF-T#### */
   id: string;
   /** Display name */
   name: string;
   /** UI category for grid column */
   category: CategoryId;
-  /** MITRE tactic ID */
+  /** QIF Locus Tactic ID (e.g. QIF-N.IJ) */
   tactic: string;
   /** Hourglass bands affected */
   bands: BandId[];
-  /** Severity level */
+  /** Severity level (original assessment) */
   severity: Severity;
   /** Evidence status */
   status: Status;
@@ -56,20 +69,22 @@ export interface ThreatVector {
   description: string;
   /** Original band string from hourglass data */
   bandsStr: string;
-  /** MITRE cross-reference */
-  mitre: { tactics: string[]; techniques: string[]; note: string };
+  /** QNIS v1.0 scoring data */
+  qnis: QnisScore;
+  /** Cross-references (related IDs, secondary tactics) */
+  crossRefs: { related_ids?: string[]; secondary_tactics?: string[] } | null;
   /** Academic sources */
   sources: string[];
 }
 
 /** Transform registry techniques → ThreatVector[] */
-export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map(t => ({
+export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) => ({
   id: t.id,
   name: t.attack,
-  category: (t as any).ui_category as CategoryId,
-  tactic: t.category,
+  category: t.ui_category as CategoryId,
+  tactic: t.tactic,
   bands: t.band_ids as unknown as BandId[],
-  severity: (t as any).severity as Severity,
+  severity: t.severity as Severity,
   status: t.status as Status,
   coupling: t.coupling,
   access: t.access as AccessLevel,
@@ -77,8 +92,9 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map(t => ({
   quantumDetection: t.quantum,
   description: t.notes,
   bandsStr: t.bands,
-  mitre: t.mitre,
-  sources: t.sources,
+  qnis: t.qnis ?? { version: '1.0', vector: '', score: 0, severity: 'none' },
+  crossRefs: t.cross_references ?? null,
+  sources: t.sources ?? [],
 }));
 
 /** Severity color map */
@@ -138,6 +154,15 @@ export function getStatusStats() {
   return stats;
 }
 
+/** Helper: count threats per QNIS severity */
+export function getQnisStats() {
+  const stats: Record<QnisSeverity, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
+  for (const t of THREAT_VECTORS) {
+    stats[t.qnis.severity]++;
+  }
+  return stats;
+}
+
 /** Registry metadata */
 export function getRegistryStats() {
   return {
@@ -146,5 +171,12 @@ export function getRegistryStats() {
     totalTactics: THREAT_TACTICS.length,
     severity: getThreatStats(),
     status: getStatusStats(),
+    qnis: getQnisStats(),
   };
+}
+
+/** Lookup tactic name by ID */
+export function getTacticName(tacticId: string): string {
+  const tactic = THREAT_TACTICS.find((t: any) => t.id === tacticId);
+  return tactic ? (tactic as any).name : tacticId;
 }

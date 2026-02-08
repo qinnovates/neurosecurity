@@ -688,14 +688,14 @@ main {
   color: var(--text-dim);
 }
 
-/* MITRE cross-ref in detail */
-.mitre-ref {
+/* Tactic/QNIS cross-ref in detail */
+.tactic-ref {
   font-size: 0.7rem;
   color: var(--text-dim);
   margin-top: 0.3rem;
   font-family: var(--font-mono);
 }
-.mitre-ref .mitre-tag {
+.tactic-ref .tactic-tag {
   display: inline-block;
   padding: 0.1rem 0.3rem;
   background: var(--bg-overlay);
@@ -795,24 +795,24 @@ const QIF_DATA = {
   threat_model: [],
 
   _fallback_threats: [
-    {id:"T2001",attack:"Signal injection",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (coherence metric)",notes:"Inject false signals at electrode-tissue boundary.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0002"],techniques:["T1659"],note:""},sources:[]},
-    {id:"T2002",attack:"Neural ransomware",bands_str:"N3",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (QI score drop)",notes:"Disrupt or lock neural function via stimulation manipulation.",status:"THEORETICAL",severity:"critical",mitre:{tactics:["TA0040"],techniques:[],note:""},sources:[]},
-    {id:"T2003",attack:"Eavesdropping",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (Heisenberg disturbance)",notes:"Passive interception of neural signals at I0.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
-    {id:"T2004",attack:"Man-in-the-middle",bands_str:"I0",band_ids:["I0"],coupling:null,access:null,classical:"Partial",quantum:"Yes (no-cloning + Bell test)",notes:"Intercept and modify signals at I0 boundary.",status:"DEMONSTRATED",severity:"high",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
-    {id:"T2005",attack:"Quantum tunneling exploit",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling profile anomaly)",notes:"Exploit ion channel quantum tunneling to inject false synaptic events.",status:"THEORETICAL",severity:"high",mitre:{tactics:["TA0002"],techniques:[],note:""},sources:[]},
-    {id:"T2006",attack:"Davydov soliton attack",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling term Q_tunnel)",notes:"Use THz stimulation to trigger Davydov solitons in SNARE protein complexes.",status:"THEORETICAL",severity:"high",mitre:{tactics:["TA0002"],techniques:[],note:""},sources:[]},
-    {id:"T2007",attack:"Identity spoofing",bands_str:"N3–N7",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (quantum biometric)",notes:"Replicate user's neural signature to bypass authentication.",status:"DEMONSTRATED",severity:"high",mitre:{tactics:["TA0001"],techniques:[],note:""},sources:[]},
-    {id:"T2030",attack:"BLE/RF side-channel",bands_str:"S1–S2",band_ids:["S1","S2"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (signal correlation)",notes:"Extract neural data from BLE/RF emissions via side-channels.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
-    {id:"T2031",attack:"Supply chain compromise",bands_str:"S2–S3",band_ids:["S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (firmware attestation)",notes:"Tamper with BCI hardware/firmware during manufacturing.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0001"],techniques:[],note:""},sources:[]},
-    {id:"T2032",attack:"Cloud infrastructure attack",bands_str:"S3",band_ids:["S3"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (QKD for data-in-transit)",notes:"Compromise cloud services processing neural data.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0001"],techniques:[],note:""},sources:[]},
-    {id:"T2040",attack:"Neural data privacy breach",bands_str:"N1–S3",band_ids:["N1","S1","S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (cross-band encryption)",notes:"Unauthorized access to recorded neural data across any band.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
-    {id:"T2041",attack:"Harvest-now-decrypt-later",bands_str:"S3",band_ids:["S3"],coupling:null,access:null,classical:"No",quantum:"Prevented (QKD/PQC)",notes:"Record encrypted BCI traffic now, decrypt with future quantum computers.",status:"EMERGING",severity:"critical",mitre:{tactics:["TA0009"],techniques:[],note:""},sources:[]},
-    {id:"T2050",attack:"ELF neural entrainment",bands_str:"S1→N4–N7",band_ids:["S1","N4","N5","N6","N7"],coupling:"DIRECT",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (Dsf anomaly detection)",notes:"3-76 Hz government-restricted ELF entrainment.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
-    {id:"T2051",attack:"Intermodulation (BCI weaponized)",bands_str:"S2→N4–N6",band_ids:["S2","N4","N5","N6"],coupling:"INTERMODULATION",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (coherence + Dsf)",notes:"UHF-Mil + MICS = neural-range beat frequency.",status:"DEMONSTRATED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
-    {id:"T2052",attack:"Pulsed microwave (Frey effect)",bands_str:"S3→N2,N7",band_ids:["S3","N2","N7"],coupling:"ENVELOPE",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (temporal coherence)",notes:"S-band pulsed microwave — Havana Syndrome model.",status:"DEMONSTRATED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
-    {id:"T2053",attack:"Temporal interference (deep targeting)",bands_str:"S2→N4–N6",band_ids:["S2","N4","N5","N6"],coupling:"TEMPORAL_INTERFERENCE",access:"LICENSED",classical:"Yes",quantum:"Enhanced (beat frequency detection)",notes:"Two kHz+ signals create neural-range beat frequency at intersection.",status:"DEMONSTRATED",severity:"high",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
-    {id:"T2054",attack:"Envelope modulation (stealth carrier)",bands_str:"S1–S2→any N",band_ids:["S1","S2","N1","N2","N3","N4","N5","N6","N7"],coupling:"ENVELOPE",access:"PUBLIC",classical:"Yes",quantum:"Enhanced (demodulation detection)",notes:"Any carrier modulated at neural frequency. Lowest barrier.",status:"CONFIRMED",severity:"high",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
-    {id:"T2055",attack:"Directed energy (thermal I0 damage)",bands_str:"S3→I0",band_ids:["S3","I0"],coupling:null,access:"CLASSIFIED",classical:"Yes",quantum:"N/A (physical damage, not signal)",notes:"mm-wave/ADS directed energy — destroys I0 integrity.",status:"CONFIRMED",severity:"critical",mitre:{tactics:["TA0052"],techniques:[],note:""},sources:[]},
+    {id:"QIF-T0001",attack:"Signal injection",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (coherence metric)",notes:"Inject false signals at electrode-tissue boundary.",status:"CONFIRMED",severity:"high",tactic:"QIF-N.IJ",sources:[]},
+    {id:"QIF-T0002",attack:"Neural ransomware",bands_str:"N3",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (QI score drop)",notes:"Disrupt or lock neural function via stimulation manipulation.",status:"THEORETICAL",severity:"critical",tactic:"QIF-P.DS",sources:[]},
+    {id:"QIF-T0003",attack:"Eavesdropping",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (Heisenberg disturbance)",notes:"Passive interception of neural signals at I0.",status:"CONFIRMED",severity:"high",tactic:"QIF-D.HV",sources:[]},
+    {id:"QIF-T0004",attack:"Man-in-the-middle",bands_str:"I0",band_ids:["I0"],coupling:null,access:null,classical:"Partial",quantum:"Yes (no-cloning + Bell test)",notes:"Intercept and modify signals at I0 boundary.",status:"DEMONSTRATED",severity:"critical",tactic:"QIF-D.HV",sources:[]},
+    {id:"QIF-T0005",attack:"Quantum tunneling exploit",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling profile anomaly)",notes:"Exploit ion channel quantum tunneling to inject false synaptic events.",status:"THEORETICAL",severity:"high",tactic:"QIF-N.IJ",sources:[]},
+    {id:"QIF-T0006",attack:"Davydov soliton attack",bands_str:"I0–N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling term Q_tunnel)",notes:"Use THz stimulation to trigger Davydov solitons in SNARE protein complexes.",status:"THEORETICAL",severity:"high",tactic:"QIF-N.IJ",sources:[]},
+    {id:"QIF-T0007",attack:"Identity spoofing",bands_str:"N3–N7",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (quantum biometric)",notes:"Replicate user's neural signature to bypass authentication.",status:"DEMONSTRATED",severity:"high",tactic:"QIF-B.IN",sources:[]},
+    {id:"QIF-T0020",attack:"BLE/RF side-channel",bands_str:"S1–S2",band_ids:["S1","S2"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (signal correlation)",notes:"Extract neural data from BLE/RF emissions via side-channels.",status:"CONFIRMED",severity:"high",tactic:"QIF-D.HV",sources:[]},
+    {id:"QIF-T0021",attack:"Supply chain compromise",bands_str:"S2–S3",band_ids:["S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (firmware attestation)",notes:"Tamper with BCI hardware/firmware during manufacturing.",status:"CONFIRMED",severity:"critical",tactic:"QIF-B.IN",sources:[]},
+    {id:"QIF-T0022",attack:"Cloud infrastructure attack",bands_str:"S3",band_ids:["S3"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (QKD for data-in-transit)",notes:"Compromise cloud services processing neural data.",status:"CONFIRMED",severity:"high",tactic:"QIF-B.IN",sources:[]},
+    {id:"QIF-T0043",attack:"Neural data privacy breach",bands_str:"N1–S3",band_ids:["N1","S1","S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (cross-band encryption)",notes:"Unauthorized access to recorded neural data across any band.",status:"CONFIRMED",severity:"critical",tactic:"QIF-D.HV",sources:[]},
+    {id:"QIF-T0045",attack:"Harvest-now-decrypt-later",bands_str:"S3",band_ids:["S3"],coupling:null,access:null,classical:"No",quantum:"Prevented (QKD/PQC)",notes:"Record encrypted BCI traffic now, decrypt with future quantum computers.",status:"EMERGING",severity:"critical",tactic:"QIF-D.HV",sources:[]},
+    {id:"QIF-T0010",attack:"ELF neural entrainment",bands_str:"S1→N4–N7",band_ids:["S1","N4","N5","N6","N7"],coupling:"DIRECT",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (Dsf anomaly detection)",notes:"3-76 Hz government-restricted ELF entrainment.",status:"CONFIRMED",severity:"critical",tactic:"QIF-E.RD",sources:[]},
+    {id:"QIF-T0011",attack:"Intermodulation (BCI signal weaponized)",bands_str:"S2→N4–N6",band_ids:["S2","N4","N5","N6"],coupling:"INTERMODULATION",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (coherence + Dsf)",notes:"UHF-Mil + MICS = neural-range beat frequency.",status:"DEMONSTRATED",severity:"critical",tactic:"QIF-E.RD",sources:[]},
+    {id:"QIF-T0012",attack:"Pulsed microwave (Frey effect)",bands_str:"S3→N2,N7",band_ids:["S3","N2","N7"],coupling:"ENVELOPE",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (temporal coherence)",notes:"S-band pulsed microwave — Havana Syndrome model.",status:"DEMONSTRATED",severity:"critical",tactic:"QIF-E.RD",sources:[]},
+    {id:"QIF-T0013",attack:"Temporal interference (deep targeting)",bands_str:"S2→N4–N6",band_ids:["S2","N4","N5","N6"],coupling:"TEMPORAL_INTERFERENCE",access:"LICENSED",classical:"Yes",quantum:"Enhanced (beat frequency detection)",notes:"Two kHz+ signals create neural-range beat frequency at intersection.",status:"DEMONSTRATED",severity:"high",tactic:"QIF-E.RD",sources:[]},
+    {id:"QIF-T0014",attack:"Envelope modulation (stealth carrier)",bands_str:"S1–S2→any N",band_ids:["S1","S2","N1","N2","N3","N4","N5","N6","N7"],coupling:"ENVELOPE",access:"PUBLIC",classical:"Yes",quantum:"Enhanced (demodulation detection)",notes:"Any carrier modulated at neural frequency. Lowest barrier.",status:"CONFIRMED",severity:"high",tactic:"QIF-E.RD",sources:[]},
+    {id:"QIF-T0015",attack:"Directed energy (thermal I0 damage)",bands_str:"S3→I0",band_ids:["S3","I0"],coupling:null,access:"CLASSIFIED",classical:"Yes",quantum:"N/A (physical damage, not signal)",notes:"mm-wave/ADS directed energy — destroys I0 integrity.",status:"CONFIRMED",severity:"critical",tactic:"QIF-E.RD",sources:[]},
   ],
 
   bci_device_classes: {
@@ -1160,10 +1160,8 @@ class BandDetailView {
           ${attacks.map(a => {
             const statusCls = (a.status || 'theoretical').toLowerCase();
             const sevCls = (a.severity || 'medium').toLowerCase();
-            const mitreTags = a.mitre ? [
-              ...(a.mitre.tactics || []).map(t => `<span class="mitre-tag">${t}</span>`),
-              ...(a.mitre.techniques || []).map(t => `<span class="mitre-tag">${t}</span>`),
-            ].join('') : '';
+            const tacticTag = a.tactic ? `<span class="tactic-tag">${a.tactic}</span>` : '';
+            const qnisTag = a.qnis ? `<span class="tactic-tag">QNIS ${a.qnis.score.toFixed(1)}</span>` : '';
             const sourcesList = (a.sources && a.sources.length > 0)
               ? `<div class="source-list">Sources: ${a.sources.join('; ')}</div>` : '';
             return `
@@ -1184,7 +1182,7 @@ class BandDetailView {
                 Classical detection: <span style="color:${a.classical === 'Yes' ? 'var(--green)' : a.classical === 'Partial' ? 'var(--orange)' : 'var(--red)'}">${a.classical || 'N/A'}</span>
                 · Quantum detection: <span style="color:var(--purple)">${a.quantum || 'N/A'}</span>
               </div>
-              ${mitreTags ? `<div class="mitre-ref">MITRE: ${mitreTags}${a.mitre?.note ? ' — ' + a.mitre.note : ''}</div>` : ''}
+              ${tacticTag || qnisTag ? `<div class="tactic-ref">${tacticTag}${qnisTag}</div>` : ''}
               ${a.notes ? `<div class="detail-attack-meta" style="color:var(--text);margin-top:0.2rem;">${a.notes}</div>` : ''}
               ${sourcesList}
             </div>`;
@@ -1634,11 +1632,11 @@ async function loadRegistry() {
       notes: t.notes,
       status: t.status,
       severity: t.severity,
-      mitre: t.mitre,
-      sources: t.sources,
+      sources: t.sources || [],
       ui_category: t.ui_category,
-      tactic: t.category,
-      category: t.category,
+      tactic: t.tactic || t.category,
+      category: t.tactic || t.category,
+      qnis: t.qnis || null,
     }));
     QIF_DATA._registry_tactics = registry.tactics || [];
     console.log(`Registry loaded: ${QIF_DATA.threat_model.length} techniques`);

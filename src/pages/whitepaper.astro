@@ -592,7 +592,7 @@ import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.3 Unified Threat Taxonomy</h3>
         <div class="prose">
           <p>
-            QIF maintains a registry of <strong>60 attack techniques</strong> organized into 11 tactics. Seven extend MITRE ATT&amp;CK Enterprise. Four are novel: Neural Manipulation (TA0050), Cognitive Exploitation (TA0051), Directed Energy (TA0052), and Adversarial ML (TA0053). Of the 60 techniques, 48 (80%) have explicit cross-references to MITRE ATT&amp;CK techniques. The remaining 12 (20%) have no MITRE equivalent, clustered in directed energy attacks, quantum-biological attacks, and cognitive attacks.
+            QIF maintains a registry of <strong>64 attack techniques</strong> organized into 11 tactics across 7 operational domains using the <strong>QIF Locus Taxonomy</strong>. Tactics follow a domain.action naming convention (e.g. QIF-N.IJ = Neural Injection, QIF-C.EX = Cognitive Exploitation). Each technique is scored using <strong>QNIS v1.0</strong> (QIF Neural Impact Score), a BCI-specific vulnerability scoring system that prioritizes human impact (biological + cognitive) over system impact, with 12 metrics including Biological Impact, Cognitive Integrity, Reversibility, and Violation of Consent.
           </p>
         </div>
       </section>

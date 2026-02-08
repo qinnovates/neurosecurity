@@ -33,7 +33,7 @@ export const categories: Category[] = [
     sources: [
       { name: 'NIST Cybersecurity', url: 'https://www.nist.gov/cybersecurity' },
       { name: 'IEEE Brain Initiative', url: 'https://brain.ieee.org/' },
-      { name: 'MITRE ATT&CK', url: 'https://attack.mitre.org/' },
+      { name: 'CISA Advisories', url: 'https://www.cisa.gov/news-events/cybersecurity-advisories' },
     ],
   },
   {
