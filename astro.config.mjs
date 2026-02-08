@@ -6,6 +6,7 @@ import pagefind from 'astro-pagefind';
 
 export default defineConfig({
   site: 'https://qinnovate.com',
+  publicDir: 'docs',
   integrations: [
     react(),
     sitemap(),
