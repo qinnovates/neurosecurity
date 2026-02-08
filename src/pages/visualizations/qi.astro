@@ -92,12 +92,14 @@ import Nav from '../../components/Nav.astro';
   #sidebar button.attack:hover { background: #2a1520; color: #f88; }
 
   #toggle-sidebar {
-    position: fixed; right: 12px; top: 72px; z-index: 60; background: #141828;
-    border: 1px solid #1a2030; color: #8bf; font-family: inherit; font-size: 11px;
-    padding: 6px 12px; cursor: pointer; border-radius: 4px; transition: right 0.3s, background 0.2s;
+    position: fixed; top: 72px; left: 50%; transform: translateX(-50%); z-index: 60;
+    background: rgba(20,24,40,0.85); border: 1px solid #2a3060; color: #8bf;
+    font-family: inherit; font-size: 12px; padding: 8px 20px; cursor: pointer;
+    border-radius: 6px; transition: background 0.2s, border-color 0.2s;
+    backdrop-filter: blur(8px); letter-spacing: 0.5px;
   }
-  #toggle-sidebar:hover { background: #1e2540; color: #aab; }
-  #sidebar.open + #toggle-sidebar { right: calc(240px + 12px); }
+  #toggle-sidebar:hover { background: rgba(30,37,64,0.95); border-color: #4488aa; color: #adf; }
+  #sidebar.open + #toggle-sidebar { left: calc(50% - 120px); }
 
   /* ── TOOLTIP ── */
   #tooltip {
@@ -194,7 +196,7 @@ import Nav from '../../components/Nav.astro';
   <h3>INFO</h3>
   <button id="btn-info">Show Guide</button>
 </div>
-<button id="toggle-sidebar">Controls</button>
+<button id="toggle-sidebar">&#x2699; Controls</button>
 
 <!-- I0 DETECTION SYSTEM -->
 <div id="i0-status"></div>
@@ -694,7 +696,7 @@ addEventListener('click', function(e) {
 addEventListener('keydown', function(e) {
   if (e.code === 'Space') { e.preventDefault(); decoherencePulse = true; pulseStart = time; }
   if (e.key === 't') { tunnelingActive = !tunnelingActive; document.getElementById('btn-tunnel').textContent = 'Tunneling: ' + (tunnelingActive ? 'ON' : 'OFF'); document.getElementById('btn-tunnel').classList.toggle('active', tunnelingActive); }
-  if (e.key === 'Tab') { e.preventDefault(); document.getElementById('sidebar').classList.toggle('open'); }
+  if (e.key === 'Tab') { e.preventDefault(); var sb = document.getElementById('sidebar'); sb.classList.toggle('open'); document.getElementById('toggle-sidebar').textContent = sb.classList.contains('open') ? '\u2715 Close' : '\u2699 Controls'; }
   if (e.key === '=' || e.key === '+') speed = Math.min(5, speed + 0.5);
   if (e.key === '-') speed = Math.max(0.1, speed - 0.5);
   if (e.key === 'ArrowRight' && !tourEl.classList.contains('hidden')) tourNext();
@@ -749,7 +751,11 @@ document.getElementById('tour-reopen').addEventListener('click', function() { to
 tourRender();
 
 // -- SIDEBAR --
-document.getElementById('toggle-sidebar').addEventListener('click', function() { document.getElementById('sidebar').classList.toggle('open'); });
+document.getElementById('toggle-sidebar').addEventListener('click', function() {
+  var sb = document.getElementById('sidebar');
+  sb.classList.toggle('open');
+  this.textContent = sb.classList.contains('open') ? '\u2715 Close' : '\u2699 Controls';
+});
 document.querySelectorAll('#sidebar input[type=range][data-key]').forEach(function(el) {
   el.addEventListener('input', function() { var key = el.dataset.key; var val = parseFloat(el.value); if (key in w) w[key] = val; if (key in psi) psi[key] = val; el.nextElementSibling.textContent = val.toFixed(1); });
 });
