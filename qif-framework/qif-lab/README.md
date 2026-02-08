@@ -209,4 +209,4 @@ All effects respect `prefers-reduced-motion`. PDF output is unaffected.
 
 ---
 
-*Built with Quantum Intelligence (QI) — Kevin Qi + Claude, thinking together.*
+*Built by Kevin Qi — Qinnovate*

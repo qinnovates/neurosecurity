@@ -73,7 +73,7 @@ COLORS = {
 ```
 
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
-> — Quantum Intelligence (Kevin Qi + Claude)
+> — Kevin Qi
 
 **Version:** 3.0 (Working Draft) | **Collaboration:** `{python} FRAMEWORK['collaboration']` | **GitHub:** `{python} FRAMEWORK['github']`
 
@@ -681,4 +681,4 @@ df_threats.style.hide(axis='index')
 
 *QIF Whitepaper v3.1 — Generated from code. Change the equation, re-render, paper updates.*
 
-*Authors: Kevin Qi, with Claude (Anthropic) | Quantum Intelligence (QI) | 2026-02-02*
+*Authors: Kevin Qi | 2026-02-02*

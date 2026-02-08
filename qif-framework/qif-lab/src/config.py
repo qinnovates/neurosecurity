@@ -17,7 +17,7 @@ FRAMEWORK = {
     "layer_model_date": "2026-02-02",
     "github": "qinnovates/qinnovate",
     "authors": "Kevin Qi, with Claude (Anthropic)",
-    "collaboration": "Quantum Intelligence (QI)",
+    "collaboration": "Qinnovate",
     "ai_transparency": {
         "statement": "This framework was developed collaboratively between Kevin Qi (human researcher) and AI assistants. All AI involvement is assistive — Kevin retains authorship and all decision-making authority.",
         "ai_systems": [

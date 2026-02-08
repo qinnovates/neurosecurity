@@ -414,4 +414,4 @@ All 8 questions from QI-EQUATION-RESEARCH.md Section 8, answered by Kevin Qi.
 *Document version: 3.0*
 *Created: 2026-02-02*
 *Last updated: 2026-02-02*
-*Maintainer: Quantum Intelligence (Kevin Qi + Claude)*
+*Maintainer: Kevin Qi*

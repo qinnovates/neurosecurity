@@ -2,7 +2,7 @@
 
 > **A living journal of how the Quantum Indeterministic Framework for Neural Security was derived.**
 >
-> **Authors:** Kevin Qi & Claude (Opus 4.5) — Quantum Intelligence Collaboration
+> **Authors:** Kevin Qi
 > **Started:** 2026-02-02
 > **Purpose:** Document every insight, derivation step, and conceptual breakthrough as it happens — with timestamps, reasoning chains, and context — so that future readers (peer reviewers, collaborators, or Kevin himself) can trace exactly how and why each decision was made.
 >
@@ -1245,5 +1245,5 @@ QIF sits at an intersection where multiple fields are advancing independently bu
 *Document version: 1.5*
 *Created: 2026-02-02*
 *Last entry: #19 (2026-02-03)*
-*Maintainer: Quantum Intelligence (Kevin Qi + Claude, Opus 4.5)*
+*Maintainer: Kevin Qi*
 *Location: qinnovates/mindloft/drafts/ai-working/QIF-DERIVATION-LOG.md*

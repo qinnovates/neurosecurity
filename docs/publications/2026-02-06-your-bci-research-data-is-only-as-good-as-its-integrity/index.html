@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="BCI research data integrity security checklist. 35 controls for hardware, software, procedural, and network protections against data tampering in brain-computer interface experiments."><link rel="canonical" href="https://qinnovate.com/publications/2026-02-06-your-bci-research-data-is-only-as-good-as-its-integrity/"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui' fill='%2306b6d4'%3EQ%3C/text%3E%3C/svg%3E"><!-- Open Graph --><meta property="og:title" content="Your BCI Research Data Is Only as Good as Its Integrity"><meta property="og:description" content="BCI research data integrity security checklist. 35 controls for hardware, software, procedural, and network protections against data tampering in brain-computer interface experiments."><meta property="og:url" content="https://qinnovate.com/publications/2026-02-06-your-bci-research-data-is-only-as-good-as-its-integrity/"><meta property="og:site_name" content="Qinnovate"><meta property="og:type" content="article"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Your BCI Research Data Is Only as Good as Its Integrity"><meta name="twitter:description" content="BCI research data integrity security checklist. 35 controls for hardware, software, procedural, and network protections against data tampering in brain-computer interface experiments."><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Your BCI Research Data Is Only as Good as Its Integrity","author":{"@type":"Person","name":"Kevin Qi"},"datePublished":"2026-02-06","publisher":{"@type":"Organization","name":"Qinnovate","url":"https://qinnovate.com"},"description":"BCI research data integrity security checklist. 35 controls for hardware, software, procedural, and network protections against data tampering in brain-computer interface experiments."}</script><!-- RSS autodiscovery --><link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml"><title>Your BCI Research Data Is Only as Good as Its Integrity | Qinnovate</title><!-- View Transitions --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Google Analytics 4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKB9RWW0C2');
+  </script><!-- Theme initialization (prevent flash) --><script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const theme = saved || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script><link rel="stylesheet" href="/_astro/about.DkZKPXeg.css"></head> <body class="min-h-screen">  <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" data-astro-transition-persist="astro-zscz5gm2-1"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/" class="flex items-center gap-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-secondary)] transition-colors"> <span class="text-2xl font-bold font-[family-name:var(--font-heading)]">Q</span> <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline">innovate</span> </a> <!-- Desktop links --> <div class="hidden md:flex items-center gap-1"> <a href="/framework/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> Framework </a><a href="/publications/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"> Publications </a><a href="/news/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> News &amp; Intel </a><a href="/lab/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> Lab </a><a href="/about/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> About </a> </div> <!-- Right side --> <div class="flex items-center gap-3"> <!-- Theme toggle --> <button id="theme-toggle" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5 transition-colors" aria-label="Toggle theme"> <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path> </svg> <svg id="moon-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path> </svg> </button> <!-- Mobile menu button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5 transition-colors" aria-label="Open menu" aria-expanded="false"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]"> <div class="px-4 py-3 space-y-1"> <a href="/framework/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> Framework </a><a href="/publications/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"> Publications </a><a href="/news/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> News &amp; Intel </a><a href="/lab/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> Lab </a><a href="/about/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-white/5"> About </a> </div> </div> </nav> <script type="module">function c(){const i=document.getElementById("theme-toggle"),n=document.getElementById("sun-icon"),d=document.getElementById("moon-icon");function o(){document.documentElement.getAttribute("data-theme")==="dark"?(n?.classList.add("hidden"),d?.classList.remove("hidden")):(n?.classList.remove("hidden"),d?.classList.add("hidden"))}o(),i?.addEventListener("click",()=>{const a=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",a),localStorage.setItem("theme",a),o()});const e=document.getElementById("mobile-menu-btn"),s=document.getElementById("mobile-menu");e?.addEventListener("click",()=>{const t=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",String(!t)),s?.classList.toggle("hidden")}),document.addEventListener("astro:before-swap",()=>{s?.classList.add("hidden"),e?.setAttribute("aria-expanded","false")})}c();document.addEventListener("astro:after-swap",c);</script> <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"> <nav aria-label="Breadcrumb" class="text-sm text-[var(--color-text-faint)] mb-6"> <ol class="flex items-center gap-2 flex-wrap"> <li> <a href="/" class="hover:text-[var(--color-accent-primary)] transition-colors">Home</a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <a href="/publications/" class="hover:text-[var(--color-accent-primary)] transition-colors"> Publications </a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <span class="text-[var(--color-text-muted)]">BCI Research Data Integrity</span> </li>  </ol> </nav> <!-- Article header --> <header class="mb-12"> <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] leading-tight mb-4"> Your BCI Research Data Is Only as Good as Its Integrity </h1> <p class="text-lg text-[var(--color-text-muted)] mb-6 italic">A security checklist for anyone building, testing, or publishing brain-computer interface research</p> <div class="flex flex-wrap items-center gap-4 text-sm text-[var(--color-text-faint)]"> <time datetime="2026-02-06T00:00:00.000Z">February 6, 2026</time>  <span>&middot;</span> <a href="https://medium.com/@qikevinl" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-primary)] transition-colors">
+Original source
+</a>  </div> <div class="flex flex-wrap gap-2 mt-4"> <span class="text-xs px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]"> bci </span><span class="text-xs px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]"> cybersecurity </span><span class="text-xs px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]"> neuroscience </span><span class="text-xs px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]"> dataintergrity </span><span class="text-xs px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]"> qif </span><span class="text-xs px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]"> securitybestpractices </span><span class="text-xs px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]"> research </span> </div> </header> <!-- Article body --> <div class="prose">
+
+<p>&middot; &middot; &middot;</p>
+
+<p>Let me be blunt about something.</p>
+
+<p>If you&rsquo;re doing BCI research and you haven&rsquo;t thought about data integrity, your research might already be worthless. And you wouldn&rsquo;t know it.</p>
+
+<p>I don&rsquo;t mean that to be dramatic. I mean it literally. The most sophisticated analysis, the most elegant experimental design, the most promising results. None of it matters if someone tampered with your data. Or if you can&rsquo;t prove they didn&rsquo;t.</p>
+
+<p>This is the threat nobody in the BCI research community wants to talk about. Not physical harm. Not someone hijacking a brain implant. The real, immediate, right-now threat is <strong>data integrity attacks</strong>. An attacker who compromises your system can inject fake neural patterns, modify recordings, or manipulate timestamps. And just like that, your research is garbage.</p>
+
+<p>This is especially dangerous for subtle phenomena. If you&rsquo;re studying something like synesthesia, where the effects show up as small timing differences or connectivity patterns buried in noisy EEG data, contamination can hide in plain sight.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h2 id="why-bci-data-is-uniquely-vulnerable">Why BCI Data Is Uniquely Vulnerable</h2>
+
+<p>Not all research data is created equal. BCI data has specific properties that make it a nightmare to protect.</p>
+
+<p><strong>Neural signals are complex and variable.</strong> There&rsquo;s no &ldquo;normal&rdquo; brain signal. Every person&rsquo;s data looks different. Every session looks different. That variability is exactly what makes fake data plausible. An attacker doesn&rsquo;t need to generate perfect synthetic EEG. They just need to generate data that&rsquo;s plausible enough to pass statistical checks. And given how noisy real neural data is, the bar for &ldquo;plausible&rdquo; is disturbingly low.</p>
+
+<p><strong>Statistical analyses depend on clean datasets across many trials.</strong> BCI research typically involves hundreds or thousands of trials aggregated across subjects. One compromised session can shift your p-values. A handful of injected trials can create a false positive that looks real. You publish, someone tries to replicate, it fails, and your reputation takes the hit.</p>
+
+<p><strong>Contamination may go undetected for months.</strong> Unlike a ransomware attack where you know immediately something is wrong, data integrity attacks are silent. Your pipeline keeps running. Your analyses keep producing results. The tampering only surfaces when someone can&rsquo;t replicate your findings. Or when you notice statistical anomalies that don&rsquo;t make sense. By then, months of work might be compromised.</p>
+
+<p><strong>Individual variation makes anomalies harder to spot.</strong> In most engineering disciplines, you&rsquo;d catch injected data because it doesn&rsquo;t match the known distribution. In neuroscience, the distribution is so wide and person-specific that anomalies blend right in. One person&rsquo;s artifact is another person&rsquo;s signal. That ambiguity is an attacker&rsquo;s best friend.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h2 id="the-full-security-checklist-35-controls">The Full Security Checklist: 35 Controls</h2>
+
+<p>I&rsquo;ve organized these into five categories. You don&rsquo;t need all 35 on day one. But you should know what&rsquo;s available and work toward layering them in based on how critical your research is.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h3>Hardware-Level Protections</h3>
+
+<p>These are your physical foundation. If your hardware is compromised, nothing above it matters.</p>
+
+<p><strong>1. Air-gap during data collection.</strong> No network connectivity while recording. Full stop. Your BCI collection system should not be on WiFi, Bluetooth, or any network while actively recording neural data. This is the single most effective control you can implement. If an attacker can&rsquo;t reach your system, they can&rsquo;t tamper with live data.</p>
+
+<p><strong>2. Write-once / write-protected storage.</strong> Use hardware write-protected SD cards or WORM (Write Once Read Many) media for raw data. Once the data is written, it can&rsquo;t be modified. Not by an attacker, not by a buggy script, not by anyone. Physical write protection beats software write protection every time because software can be bypassed. A hardware switch can&rsquo;t.</p>
+
+<p><strong>3. Physical security.</strong> Secure your devices between sessions. This sounds obvious, but I&rsquo;ve seen university labs where BCI headsets sit on open shelves in unlocked rooms overnight. Tamper-evident seals on device enclosures aren&rsquo;t paranoia. They&rsquo;re basic hygiene. If someone had physical access to your recording hardware for 20 minutes, would you know?</p>
+
+<p><strong>4. Separate power domains.</strong> Battery-powered analog frontend isolated from digital processing. The analog stage (the part actually touching the electrodes and amplifying microvolt signals) should have its own power supply, completely separate from the digital processing unit. This prevents power-line injection attacks and eliminates a whole class of electromagnetic interference that could be used to manipulate readings.</p>
+
+<p><strong>5. Optoisolators.</strong> Galvanic isolation between your ADC (analog-to-digital converter) and your processing unit. Light goes across. Electricity doesn&rsquo;t. An optoisolator ensures that even if your digital side is compromised, the attacker can&rsquo;t inject signals back into your analog measurement chain. It&rsquo;s a one-way valve for data.</p>
+
+<p><strong>6. Input protection circuits.</strong> Resistors (10-100k&#8486;), TVS diodes, and capacitors (1-10&#956;F) between electrodes and amplifiers. This protects against both accidental damage and deliberate signal injection. If someone tries to feed a crafted electrical signal through the electrodes to corrupt your recording, these components clamp it before it reaches the amplifier.</p>
+
+<p><strong>7. Hardware crypto modules.</strong> TPM (Trusted Platform Module) or a dedicated secure element for signing data at capture time. The moment your ADC produces a digital sample, a hardware crypto module signs it. This creates a cryptographic proof that the data existed in exactly that form at exactly that time. Modifying the data later breaks the signature. This is the gold standard for provenance.</p>
+
+<p><strong>8. Firmware write-protection.</strong> Physical jumpers or fuses that prevent firmware modification. If your BCI device has programmable firmware (most do), an attacker who gains access could modify the firmware to silently alter data before it&rsquo;s even recorded. Physical write protection means the firmware can&rsquo;t be changed without someone physically opening the device and flipping a switch.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h3>Software-Level Protections</h3>
+
+<p>These protect your data from capture through analysis.</p>
+
+<p><strong>9. Immediate cryptographic hashing.</strong> SHA-256 (or better) of raw data files the moment they&rsquo;re written. Not later. Not when you get around to it. The hash gets computed as part of the recording pipeline. This gives you a checksum you can verify at any point in the future. If the file has been modified by even one bit, the hash won&rsquo;t match.</p>
+
+<p><strong>10. Digital signatures.</strong> Sign data with a private key at collection time, verify before analysis. This goes beyond hashing. A hash tells you the file hasn&rsquo;t changed. A signature tells you <em>who</em> created it and <em>when</em>. Your collection system has a private key (ideally stored in a hardware crypto module, see #7). Every file gets signed at creation. Before any analysis runs, the signature is verified.</p>
+
+<p><strong>11. Timestamp validation.</strong> Cross-reference timestamps with external time sources. Check for gaps or anomalies. If an attacker modifies your data, they usually have to touch the timestamps too. Cross-referencing with an independent NTP server or GPS time source can catch discrepancies. Look for gaps, duplicates, or timestamps that don&rsquo;t align with your session logs.</p>
+
+<p><strong>12. Read-only root filesystem.</strong> Boot from an immutable OS image during collection. Your recording system&rsquo;s operating system should be read-only. No writes to the root filesystem during collection. This prevents an attacker from modifying system binaries, installing rootkits, or altering configuration files. The system boots the same way every time because nothing can change it.</p>
+
+<p><strong>13. Checksums in metadata.</strong> Embed hashes within data file headers. Don&rsquo;t just hash the whole file. Embed per-block or per-segment checksums inside the file format itself. This lets you pinpoint exactly where tampering occurred, not just that it happened somewhere in the file.</p>
+
+<p><strong>14. Version control for analysis code.</strong> Git with signed commits for all processing scripts. Every script that touches your data should be in version control. Signed commits prove that the code hasn&rsquo;t been tampered with after the fact. This is also critical for reproducibility. If someone questions your results, you can point to the exact commit that produced them.</p>
+
+<p><strong>15. Audit logging.</strong> Immutable logs of all system access and data operations. Every time someone logs into your collection system, copies a file, runs an analysis, or modifies a configuration, it gets logged. And those logs need to be immutable. Write them to a separate system, a WORM drive, or a remote syslog server that the collection system can write to but not modify.</p>
+
+<p><strong>16. Baseline noise profiling.</strong> Record your device-specific noise &ldquo;fingerprint&rdquo; and detect deviations. Every BCI device has a characteristic noise profile. Environmental factors, component aging, and electromagnetic interference create a signature that&rsquo;s unique to your setup. Record this baseline. If the noise profile suddenly changes without a known cause (new environment, replaced component), that&rsquo;s a red flag.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h3>Procedural and Operational Controls</h3>
+
+<p>Technology alone isn&rsquo;t enough. How you run your lab matters just as much.</p>
+
+<p><strong>17. Chain of custody documentation.</strong> Track who accessed devices and when. This is standard in forensics and clinical trials. It should be standard in BCI research too. A physical logbook or digital system that records every time someone touches the hardware, moves a data file, or accesses the analysis system.</p>
+
+<p><strong>18. Reproducibility verification.</strong> Re-test critical subjects if findings seem anomalous. If you get results that seem too clean, too strong, or too convenient, don&rsquo;t just celebrate. Run the experiment again. Ideally with a different operator. If the results hold up, great. If they don&rsquo;t, you may have caught something.</p>
+
+<p><strong>19. Blind data collection.</strong> The operator running the recording session doesn&rsquo;t know the experimental hypotheses. This isn&rsquo;t just good science, it&rsquo;s good security. An insider who knows what results you&rsquo;re looking for can subtly manipulate the setup to produce them. Blinding removes that vector.</p>
+
+<p><strong>20. Duplicate recordings.</strong> Use two independent BCI systems simultaneously for high-stakes experiments. This is expensive and impractical for routine work. But for the experiment that&rsquo;s going to anchor your publication or your dissertation? Two systems, two independent data streams. If they disagree, you know something is wrong.</p>
+
+<p><strong>21. Offline processing only.</strong> Transfer data via physical media to air-gapped analysis systems. Your raw data goes from the collection system to a USB drive (write-protected after transfer), then to a completely separate computer that has never been on the internet. Analysis happens there. This sounds extreme. For publication-quality research, it&rsquo;s appropriate.</p>
+
+<p><strong>22. Pre-registration.</strong> Register your hypotheses and analysis plans before data collection. This protects against a specific attack: someone who compromises your data post-hoc to make it support a different hypothesis. If your analysis plan is locked in before collection starts, post-hoc manipulation is much harder to pull off.</p>
+
+<p><strong>23. Regular calibration checks.</strong> Known signal injection to verify system integrity. Feed a known calibration signal into your system at regular intervals. If the output doesn&rsquo;t match the expected result, your system may have been tampered with. Think of it like zeroing a scale before you weigh something. You do it every time because you need to trust the measurement.</p>
+
+<p><strong>24. Secure supply chain.</strong> Source components from verified suppliers. Check for tampering. This applies especially to DIY and open-source BCI builds. If you&rsquo;re buying components from random online sellers, you have no idea if they&rsquo;re genuine or if they&rsquo;ve been modified. Buy from authorized distributors. Inspect boards for unexpected components. Document where everything came from.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h3>Data Management</h3>
+
+<p>How you store and handle data after collection is just as important as how you collect it.</p>
+
+<p><strong>25. Immutable raw data archives.</strong> Never modify originals. Only work with copies. This is the cardinal rule. Your raw data files are sacred. Once collected, they never change. Every analysis runs against a copy. If you need to filter, epoch, re-reference, or transform the data, that happens on a duplicate. The original stays untouched, forever.</p>
+
+<p><strong>26. Blockchain logging (for high-stakes research).</strong> A distributed ledger of data collection events. I know &ldquo;blockchain&rdquo; triggers eye rolls. But for clinical trials or research that might face legal scrutiny, a distributed, immutable record of when data was collected, by whom, and with what hash is genuinely useful. You don&rsquo;t need Ethereum. A private, permissioned ledger is fine.</p>
+
+<p><strong>27. Multi-party verification.</strong> Multiple researchers independently verify data integrity. Don&rsquo;t be the only person who checks. Have at least one other lab member independently verify file hashes, review audit logs, and spot-check data quality. Fresh eyes catch things you&rsquo;ve gone blind to.</p>
+
+<p><strong>28. Metadata richness.</strong> Record device serial numbers, firmware versions, environmental conditions. The more metadata you capture at collection time, the harder it is to fabricate convincing fake data later. An attacker would need to not only forge the neural signals but also match the device serial number, the firmware hash, the room temperature, the impedance values at each electrode, and the operator&rsquo;s initials.</p>
+
+<p><strong>29. Anomaly detection algorithms.</strong> Automated scanning for statistically improbable patterns. Run your collected data through automated sanity checks. Look for segments with suspiciously low noise, statistically impossible consistency across trials, or frequency content that doesn&rsquo;t match known neural physiology. Automate this so it runs on every dataset before analysis begins.</p>
+
+<p><strong>30. Secure backup strategy.</strong> 3-2-1 rule with at least one offline, geographically separated copy. Three copies of your data, on two different types of media, with one copy offsite. At least one of those copies should be offline (not connected to any network). If your lab burns down, gets flooded, or gets ransomwared, your data survives.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h3>Network Security (If Connectivity Is Required)</h3>
+
+<p>Sometimes you need your system online. When you do, lock it down.</p>
+
+<p><strong>31. VPN with mutual authentication.</strong> Never expose a BCI device directly to the internet. If your BCI system needs to send data somewhere, it goes through a VPN tunnel with mutual certificate authentication. Both sides prove their identity before any data flows. The BCI device should never have a public IP address. Ever.</p>
+
+<p><strong>32. Certificate pinning.</strong> Prevent man-in-the-middle attacks on data uploads. Don&rsquo;t just use TLS. Pin the specific certificate your server presents. This way, even if an attacker compromises a certificate authority (it&rsquo;s happened), they can&rsquo;t intercept your data in transit.</p>
+
+<p><strong>33. Encrypted channels.</strong> TLS 1.3 or higher for any data transmission. No exceptions. No fallbacks to older protocols. TLS 1.2 at absolute minimum, and only if 1.3 isn&rsquo;t available on both ends. Anything older has known vulnerabilities.</p>
+
+<p><strong>34. Network segmentation.</strong> BCI devices on an isolated VLAN with strict firewall rules. Your BCI collection system gets its own network segment. It can talk to exactly the systems it needs to (data storage, maybe a time server) and nothing else. Default deny everything.</p>
+
+<p><strong>35. Intrusion detection.</strong> Monitor for unauthorized access attempts. Run an IDS/IPS on the network segment where your BCI systems live. Log everything. Alert on anomalies. If someone is probing your network at 3 AM, you want to know about it before they get to your data.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h2 id="putting-it-into-practice-raspberry-pi-bci-example">Putting It Into Practice: Raspberry Pi BCI Example</h2>
+
+<p>If you&rsquo;re building a DIY BCI on a Raspberry Pi (and a lot of researchers are), here&rsquo;s what a minimal viable security setup looks like:</p>
+
+<ol>
+<li>Raspberry Pi boots from a <strong>read-only SD card</strong></li>
+<li>Raw EEG data writes to a <strong>hardware write-protected USB drive</strong></li>
+<li>A Python script calculates the <strong>SHA-256 hash</strong> immediately after each recording session</li>
+<li>Hashes stored in a <strong>separate log file</strong> with timestamps</li>
+<li>Physical device kept in a <strong>locked case</strong> between sessions</li>
+<li>All processing done on a <strong>separate offline computer</strong></li>
+<li>Original data files are <strong>never modified</strong>, only analyzed as copies</li>
+</ol>
+
+<p>That&rsquo;s seven controls. They cost almost nothing to implement. And they block the vast majority of realistic attacks.</p>
+
+<p>If you&rsquo;re doing publication-quality research and the stakes are higher, add these:</p>
+
+<ul>
+<li>Hardware security module (HSM) to sign data at capture</li>
+<li>Two independent BCI systems recording simultaneously</li>
+<li>Automated baseline noise comparison between sessions</li>
+<li>Pre-registered analysis plans in a public registry</li>
+<li>Complete chain of custody documentation</li>
+<li>Independent lab verification of random data samples</li>
+</ul>
+
+<p>&middot; &middot; &middot;</p>
+
+<h2 id="how-to-know-if-your-data-has-been-compromised">How to Know If Your Data Has Been Compromised</h2>
+
+<p>These are the warning signs. If you see any of them, stop and investigate before you publish.</p>
+
+<p><strong>Unusually &ldquo;clean&rdquo; signals.</strong> Real neural data is messy. If your recordings have less physiological noise than you&rsquo;d expect for the electrode type, location, and subject, something might be wrong.</p>
+
+<p><strong>Results that seem too good to be true.</strong> If your effect sizes are dramatically larger than the literature suggests, or your p-values are suspiciously small, treat that as a red flag, not a celebration.</p>
+
+<p><strong>Timing patterns that don&rsquo;t match known neural latencies.</strong> Neural responses have well-characterized timing. An ERP component that shows up 50ms earlier or later than it should is worth investigating.</p>
+
+<p><strong>Sudden changes in noise characteristics between sessions.</strong> If the noise floor shifts dramatically between sessions with no change in hardware, environment, or subject, something changed that shouldn&rsquo;t have.</p>
+
+<p><strong>Missing or irregular timestamps.</strong> Gaps in your timestamp stream, duplicate timestamps, or timestamps that drift relative to an external clock all suggest tampering.</p>
+
+<p><strong>File modification dates that don&rsquo;t match collection logs.</strong> If your audit log says the file was created at 2:15 PM but the filesystem says it was last modified at 4:30 AM, you have a problem.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h2 id="the-priority-five">The Priority Five</h2>
+
+<p>You don&rsquo;t need to implement all 35 controls tomorrow. Start with these five. They prevent over 90% of realistic data integrity attacks:</p>
+
+<ol>
+<li><strong>Air-gap during collection</strong> - Take the system offline while recording</li>
+<li><strong>Write-protected storage</strong> - Use media that physically can&rsquo;t be modified</li>
+<li><strong>Immediate cryptographic hashing</strong> - SHA-256 every file the moment it&rsquo;s created</li>
+<li><strong>Read-only OS during recording</strong> - Boot from an immutable image</li>
+<li><strong>Physical security of devices</strong> - Lock them up between sessions</li>
+</ol>
+
+<p>Five controls. You can implement all of them this week. The difference between research that can be trusted and research that can be questioned is often just this: did you protect the data at the point of collection?</p>
+
+<p>The most sophisticated analysis in the world means nothing if the underlying data has been tampered with.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<h2 id="from-the-qinnovate-sentinel-lab">From the Qinnovate Sentinel Lab</h2>
+
+<p>This post is part of Mindloft&rsquo;s ongoing series on BCI security best practices, published by the <strong>Qinnovate Sentinel Lab</strong>. We&rsquo;re building the security standards for brain-computer interfaces before the industry needs them. Not after the first breach.</p>
+
+<p>The QIF framework, the NSP protocol, and everything we publish here exists for one reason: to make sure that when BCI technology is ready to help people, the security is already there waiting for it.</p>
+
+<p>More from this series coming soon. If you&rsquo;re doing BCI research and want to talk security, <a href="https://github.com/qinnovate/mindloft/">find us on GitHub</a>.</p>
+
+<p>&middot; &middot; &middot;</p>
+
+<p><strong>Sub-Tags:</strong> #BCI #DataIntegrity #Cybersecurity #Neuroscience #QIF #Research #SecurityBestPractices #EEG #RaspberryPi #NeuroSecurity</p>
+<hr>
+<p><em>Follow my work and research. Collaborate and contribute on <a href="https://github.com/qinnovate/mindloft/">GitHub</a>.</em></p>
+
+</div> <!-- Article footer --> <footer class="mt-16 pt-8 border-t border-[var(--color-border)]"> <a href="/publications/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+&larr; All publications
+</a> </footer> </article> <footer class="border-t border-[var(--color-border)] mt-24"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"> <div class="grid grid-cols-2 md:grid-cols-4 gap-8"> <!-- Brand column --> <div class="col-span-2 md:col-span-1"> <a href="/" class="text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]">
+Qinnovate
+</a> <p class="mt-3 text-sm text-[var(--color-text-muted)] leading-relaxed">
+Advancing brain-computer interface security through the Quantum Indeterministic Framework.
+</p> <p class="mt-4 text-xs text-[var(--color-text-faint)]">
+QIF v3.1 Hourglass &middot; Open Framework
+</p> </div> <div> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4"> Framework </h3> <ul class="space-y-3"> <li> <a href="/framework/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> QIF Overview </a> </li><li> <a href="/framework/#hourglass" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> Hourglass Model </a> </li><li> <a href="/framework/#coherence" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> Coherence Metric </a> </li> </ul> </div><div> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4"> Resources </h3> <ul class="space-y-3"> <li> <a href="/publications/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> Publications </a> </li><li> <a href="/news/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> News &amp; Intel </a> </li><li> <a href="/lab/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> QIF Lab </a> </li><li> <a href="/rss.xml" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> RSS Feed </a> </li> </ul> </div><div> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4"> Connect </h3> <ul class="space-y-3"> <li> <a href="https://github.com/qinnovate" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer"> GitHub </a> </li><li> <a href="https://medium.com/@qikevinl" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer"> Medium </a> </li><li> <a href="/about/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"> About </a> </li> </ul> </div> </div> <div class="mt-12 pt-8 border-t border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-center gap-4"> <p class="text-xs text-[var(--color-text-faint)]">
+&copy; 2026 Qinnovate. QIF is an open research framework.
+</p> <a href="/ctf/" class="text-xs text-[var(--color-text-faint)] hover:text-[var(--color-accent-tertiary)] transition-colors" title="Challenge yourself">
+?
+</a> </div> </div> </footer>  <!-- Scroll-driven reveal observer --> <script type="module">function o(){const t=new IntersectionObserver(e=>{e.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),t.unobserve(r.target))})},{threshold:.1,rootMargin:"0px 0px -40px 0px"});document.querySelectorAll(".reveal").forEach(e=>t.observe(e))}o();document.addEventListener("astro:after-swap",o);</script> </body> </html>

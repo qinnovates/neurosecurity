@@ -191,4 +191,4 @@ This transparency lives in the Derivation Log — one place, chronological, comp
 *Created: 2026-02-02*
 *Updated: 2026-02-02 (added Validation Pipeline, Gemini protocol, research tracking, transparency)*
 *Lives next to: QIF-TRUTH.md*
-*Maintainer: Quantum Intelligence (Kevin Qi + Claude)*
+*Maintainer: Kevin Qi*

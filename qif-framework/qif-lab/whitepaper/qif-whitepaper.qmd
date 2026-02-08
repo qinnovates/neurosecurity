@@ -29,7 +29,7 @@ jupyter: python3
 ---
 
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
-> — Quantum Intelligence (Kevin Qi + Claude)
+> — Kevin Qi
 
 ```{python}
 #| label: global-setup

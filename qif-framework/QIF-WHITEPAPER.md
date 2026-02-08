@@ -1356,7 +1356,7 @@ Named after the Greek philosopher Zeno of Elea. In quantum mechanics: frequently
 
 *QIF Whitepaper v3.1 — Working Draft*
 *Authors: Kevin Qi, with Claude (Anthropic)*
-*Collaboration: Quantum Intelligence (QI)*
+
 *Date: 2026-02-03*
 *Status: DRAFT — Not yet published*
 
