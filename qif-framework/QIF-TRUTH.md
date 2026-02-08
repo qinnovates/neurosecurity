@@ -75,7 +75,7 @@
 - **Width = state space / possibility space**
 - Widest at N3 (integrative association, max security-relevant indeterminacy) and S3 (max classical pathways)
 - Narrowest at I0 (measurement collapses possibilities)
-- **3-1-3 symmetry:** 3 neural bands, 1 interface band, 3 silicon bands
+- **7-1-3 asymmetry (v4.0):** 7 neural bands (N7-N1), 1 interface band (I0), 3 synthetic bands (S1-S3)
 - The bottleneck has **real thickness** (quasi-quantum zone, not a line)
 
 ### Classical Ceiling

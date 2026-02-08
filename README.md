@@ -23,11 +23,13 @@ Qinnovate is a vendor-agnostic standards body developing open frameworks, govern
 ## What is Qinnovate?
 
 Qinnovate houses:
-- **QIF (Quantum Indeterministic Framework)** — Quantum BCI security model (7-band hourglass)
-- **ONI (Open Neurosecurity Interoperability)** — Classical BCI security model (14-layer architecture)
+- **QIF (Quantum Indeterministic Framework)** — 11-band hourglass BCI security model (v4.0)
+- **NSP (Neural Sensory Protocol)** — Post-quantum wire protocol for BCI data links
+- **Project Runemate** — HTML-to-bytecode compression engine (65-90% savings)
+- **ONI (Open Neurosecurity Interoperability)** — Classical BCI security model (14-layer, legacy complement)
 - **Classical-Quantum Bridge** — Shared threat taxonomy mapping both frameworks
 - **Neuroethics Standards** — UNESCO alignment, GDPR/HIPAA compliance, informed consent frameworks
-- **Threat Intelligence** — BCI attack taxonomy, threat matrix, security patterns
+- **Threat Intelligence** — 60 MITRE-compatible techniques (T2001-T2899), 18 attack vectors, BCI device registry
 - **Governance** — Regulatory compliance frameworks, transparency protocols
 
 ---
@@ -38,10 +40,11 @@ Qinnovate houses:
 
 **Quantum BCI security** - The first framework to incorporate quantum mechanical principles into BCI security.
 
-- **Architecture:** 7-band hourglass model (3-1-3 symmetric: S3/S2/S1/I0/N1/N2/N3)
+- **Architecture:** 11-band hourglass model (7-1-3 asymmetric: N7-N1 / I0 / S1-S3)
+- **Three Pillars:** QIF (threat model) + NSP (wire protocol) + Runemate (compression)
 - **Status:** Active development
-- **Version:** 3.1 Hourglass
-- **License:** Apache 2.0
+- **Version:** 4.0
+- **Equation:** QI(b,t) = e^(-S(b,t)) — unified Boltzmann security score
 
 [Read the specification](qif-framework/)
 
@@ -49,7 +52,7 @@ Qinnovate houses:
 
 **Classical BCI security** - OSI extension model providing classical security architecture for BCIs.
 
-- **Architecture:** 14-layer model (L1-L14: Silicon to Cognitive Sovereignty)
+- **Architecture:** 14-layer model (L1-L14: Synthetic to Cognitive Sovereignty)
 - **Status:** Active (classical complement to QIF)
 - **Version:** 2.x
 - **License:** Apache 2.0
@@ -96,7 +99,7 @@ Academic papers, technical specifications, and research findings:
 ### QIF Research
 - **Quantum indeterminacy** in neural security
 - **Decoherence** and quantum threats
-- **7-band hourglass** architecture
+- **11-band hourglass** architecture (7-1-3 asymmetric)
 - Comprehensive whitepaper with equations-as-code
 
 [Browse ONI research](oni-framework/publications/)
@@ -123,7 +126,7 @@ Think: **W3C** (Qinnovate) vs **Chrome** (Mindloft)
 
 - **Contributing:** Open to academic researchers, security experts, neuroethicists
 - **Governance:** Community-driven standards development
-- **License:** Apache 2.0 (standards), CC-BY 4.0 (research)
+- **License:** CC BY-NC-ND 4.0
 
 ---
 
@@ -169,39 +172,62 @@ Pushes to `main` trigger automated build and deploy via GitHub Actions.
 
 ```
 qinnovates/qinnovate/
-├── src/                    # Astro website source
-├── blogs/                  # Blog posts (Markdown content collection)
-├── public/                 # Static assets, CNAME, fonts
-├── scripts/                # RSS feed fetcher
-├── package.json            # Astro dependencies
-├── astro.config.mjs        # Astro configuration
+├── src/                    # Astro 5 website source
+│   ├── pages/              # Site pages (see Website Pages below)
+│   ├── components/         # Astro + React components (Nav, Footer, Hourglass3D, etc.)
+│   ├── layouts/            # BaseLayout, PageLayout, PublicationLayout
+│   ├── lib/                # qif-constants.ts, threat-data.ts, utils.ts
+│   └── styles/             # global.css (Tailwind 4)
 │
-├── qif-framework/          # Quantum BCI security (7-band)
+├── blogs/                  # 14 blog posts (Markdown content collection)
+├── docs/                   # Static assets served by Astro (publicDir)
+│   ├── CNAME               # qinnovate.com
+│   ├── fonts/              # Inter, JetBrains Mono
+│   └── images/             # SVG dividers, OG images
+├── public/                 # Additional static assets
+│   └── lab/hourglass.html  # Interactive 11-band layer explorer
+├── scripts/                # RSS feed fetcher (fetch-news.mjs)
+│
+├── qif-framework/          # QIF specification (11-band hourglass)
 │   ├── framework/          # 9 architectural documents
 │   ├── qif-lab/            # Equation testing & validation
-│   ├── QIF-WHITEPAPER.md   # Comprehensive research
+│   ├── QIF-WHITEPAPER.md   # Comprehensive research paper
 │   └── QIF-TRUTH.md        # Canonical source of truth
 │
-├── oni-framework/          # Classical BCI security (14-layer)
+├── oni-framework/          # ONI specification (14-layer, legacy complement)
 │   ├── framework/          # Python package + specs
 │   ├── publications/       # 31 research papers
 │   └── INDEX.md            # Main wiki
 │
 ├── shared/                 # Classical-Quantum bridge
-│   ├── threat-matrix.json  # Threat taxonomy
-│   └── validation/         # Bridge validation tools
+│   ├── threat-matrix.json  # Cross-model threat taxonomy
+│   └── threat-registry.json # 60 MITRE-compatible techniques (T2001-T2899)
 │
-├── governance/             # Neuroethics & regulatory
-│   └── ... (9 governance documents)
-│
+├── governance/             # Neuroethics & regulatory (9 documents)
 ├── processes/              # VERA Engine & workflows
-│   └── qinnovate-lifecycle.md
 │
 └── .github/workflows/      # CI/CD pipelines
     ├── deploy.yml          # Astro build + GitHub Pages deploy
     ├── update-news.yml     # Daily RSS feed cache update
-    └── ...
+    └── wiki-sync.yml       # GitHub Wiki auto-sync
 ```
+
+### Website Pages
+
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | Home | Hero, three pillars, hourglass preview, latest publications |
+| `/framework/` | Framework | QIF v4.0 specification with interactive 3D hourglass |
+| `/whitepaper/` | Whitepaper | QIF v5.0 whitepaper — three pillars, unified equation, 72 references |
+| `/nsp/` | NSP | Neural Sensory Protocol v0.3 — five-layer post-quantum spec |
+| `/runemate/` | Runemate | Project Runemate — HTML-to-Staves compression engine |
+| `/explore/` | Explore | All interactive visualizations in one hub |
+| `/threats/` | Threats | 18 attack vectors mapped across 11 bands with severity heatmap |
+| `/publications/` | Publications | Blog posts and research papers |
+| `/news/` | News & Intel | Aggregated RSS feed from BCI/neurosecurity sources |
+| `/about/` | About | Mission, team, contact |
+| `/lab/hourglass.html` | Layer Explorer | Interactive 11-band hourglass with click-into-details |
+| `/visualizations/qi/` | QI Explorer | 3D Boltzmann landscape with real-time equation simulation |
 
 ---
 
@@ -210,7 +236,7 @@ qinnovates/qinnovate/
 | Resource | Description |
 |----------|-------------|
 | [VERA Engine](processes/qinnovate-lifecycle.md) | Standards development process documentation |
-| [QIF Whitepaper](https://mindloft.org/qif-whitepaper/) | Interactive whitepaper with AI voiceover |
+| [QIF Whitepaper](https://qinnovate.com/whitepaper/) | QIF v5.0 whitepaper — three pillars, 11-band model, unified equation |
 | [QIF Framework](qif-framework/) | Complete QIF specification |
 | [ONI Framework](oni-framework/) | Complete ONI specification |
 | [Classical-Quantum Bridge](shared/) | Threat taxonomy mapping |
@@ -261,4 +287,4 @@ For licensing inquiries: kevin@qinnovate.com
 ---
 
 *Established: 2026*
-*Updated: 2026-02-07*
+*Updated: 2026-02-08*

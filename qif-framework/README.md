@@ -67,8 +67,8 @@ The original ONI Framework put the Neural Gateway at Layer 8 (middle of a 14-lay
 
 ## Key Concepts
 
-- **The Funnel Model** — Biology narrows to a neck (BCI), then widens into silicon. Not a stack — a cycle.
-- **7-Band Hourglass** — N3/N2/N1 | I0 | S1/S2/S3 (3 neural bands, 1 interface, 3 silicon bands)
+- **The Funnel Model** — Biology narrows to a neck (BCI), then widens into synthetic systems. Not a stack — a cycle.
+- **11-Band Hourglass (v4.0)** — N7-N1 | I0 | S1-S3 (7 neural bands, 1 interface, 3 synthetic bands)
 - **Quantum Integer (Q)** — A labeled gap for quantum unknowns at each ring. Like Mendeleev's empty boxes.
 - **Defense-in-Depth Rings** — 7 concentric security rings from governance (outer) to neural data (core).
 - **DSKE** — Distributed Symmetric Key Establishment: quantum-safe encryption without quantum hardware at the implant.

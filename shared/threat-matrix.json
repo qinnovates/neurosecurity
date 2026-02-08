@@ -962,7 +962,7 @@
     {
       "id": "TA0009",
       "name": "Infrastructure Attacks",
-      "description": "Attacks targeting BCI supporting infrastructure (silicon domain)",
+      "description": "Attacks targeting BCI supporting infrastructure (synthetic domain)",
       "mitre_mapping": null,
       "techniques": [
         {

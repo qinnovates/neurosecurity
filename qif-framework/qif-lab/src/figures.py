@@ -98,7 +98,7 @@ def fig_layer_architecture():
     # Zone labels — compute y positions dynamically
     neural_ys = [n - 1 - i for i, b in enumerate(BANDS) if b["zone"] == "neural"]
     interface_ys = [n - 1 - i for i, b in enumerate(BANDS) if b["zone"] == "interface"]
-    silicon_ys = [n - 1 - i for i, b in enumerate(BANDS) if b["zone"] == "silicon"]
+    synthetic_ys = [n - 1 - i for i, b in enumerate(BANDS) if b["zone"] == "synthetic"]
 
     ax.text(1.15, sum(neural_ys) / len(neural_ys) + 0.42, 'Neural\nDomain',
             ha='left', va='center', fontsize=10,
@@ -106,9 +106,9 @@ def fig_layer_architecture():
     ax.text(1.15, sum(interface_ys) / len(interface_ys) + 0.42, 'Interface\nZone',
             ha='left', va='center', fontsize=10,
             color=zone_colors['interface'], fontweight='bold')
-    ax.text(1.15, sum(silicon_ys) / len(silicon_ys) + 0.42, 'Silicon\nDomain',
+    ax.text(1.15, sum(synthetic_ys) / len(synthetic_ys) + 0.42, 'Synthetic\nDomain',
             ha='left', va='center', fontsize=10,
-            color=zone_colors['silicon'], fontweight='bold')
+            color=zone_colors['synthetic'], fontweight='bold')
 
     # Classical ceiling line — between N2 and N3 (dynamic)
     n3_y = n - 1 - 0 + 0.42  # N3 is first band
