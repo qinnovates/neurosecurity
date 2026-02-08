@@ -4,8 +4,9 @@ on:
   push:
     branches: [main, develop]
     paths:
-      - 'MAIN/**/*.py'
-      - 'autodidactive/**/*.py'
+      - 'qif-framework/**/*.py'
+      - 'oni-framework/**/*.py'
+      - 'governance/**/*.py'
       - '.github/workflows/security-audit.yml'
   pull_request:
     branches: [main, develop]
