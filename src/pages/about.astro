@@ -1,6 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import { STATS } from '../lib/qif-constants';
+import { STATS, PILLARS } from '../lib/qif-constants';
 ---
 
 <PageLayout
@@ -16,6 +16,26 @@ import { STATS } from '../lib/qif-constants';
         Qinnovate is an independent research initiative developing open security standards for the brain-computer interface era. We publish the <strong>Quantum Indeterministic Framework (QIF)</strong> — the first security model that spans from silicon hardware to cognitive sovereignty.
       </p>
 
+      <h2>What We Build</h2>
+      <p>
+        Qinnovate develops three interlocking technologies that together pave the road to a secure BCI future:
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4 my-8 not-prose">
+      {PILLARS.map((pillar) => (
+        <a href={pillar.href} class="glass rounded-xl p-5 card-hover group">
+          <div class="text-xl mb-2" style={`color: ${pillar.color}`} set:html={pillar.icon} />
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+            {pillar.name}
+          </h3>
+          <p class="text-xs text-[var(--color-text-faint)] mb-2">{pillar.tagline}</p>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{pillar.description}</p>
+        </a>
+      ))}
+    </div>
+
+    <div class="prose">
       <h2>Mission</h2>
       <p>
         Brain-computer interfaces are advancing faster than the security standards to protect them. Neuralink has implanted its first patients. Synchron is in FDA trials. Blackrock Neurotech has been in human brains since 2004.

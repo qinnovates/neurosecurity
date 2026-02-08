@@ -6,7 +6,7 @@ import TrustBar from '../components/TrustBar.astro';
 import PublicationCard from '../components/PublicationCard.astro';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '../lib/utils';
-import { HOURGLASS_BANDS, STATS } from '../lib/qif-constants';
+import { HOURGLASS_BANDS, STATS, PILLARS } from '../lib/qif-constants';
 import HeroParticles from '../components/HeroParticles';
 import '../styles/global.css';
 
@@ -14,29 +14,6 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => new Date(getPostDate(b.data)).getTime() - new Date(getPostDate(a.data)).getTime())
   .slice(0, 4);
 
-const frameworkCards = [
-  {
-    title: 'What is QIF?',
-    description: 'A security framework for brain-computer interfaces, grounded in quantum indeterminacy and neural signal integrity.',
-    href: '/framework/',
-    icon: '&#9670;',
-    color: 'var(--color-accent-primary)',
-  },
-  {
-    title: 'The Hourglass Model',
-    description: `${STATS.architecture} architecture spanning from silicon infrastructure to cognitive sovereignty.`,
-    href: '/framework/#hourglass',
-    icon: '&#9674;',
-    color: 'var(--color-accent-secondary)',
-  },
-  {
-    title: 'Coherence Metric',
-    description: 'A mathematical measure of neural signal integrity across phase, temporal, and spatial dimensions.',
-    href: '/framework/#coherence',
-    icon: '&#8734;',
-    color: 'var(--color-accent-tertiary)',
-  },
-];
 ---
 
 <BaseLayout title="Qinnovate — Securing the Neural Frontier" description="Qinnovate develops open standards and frameworks for brain-computer interface security. Home of the Quantum Indeterministic Framework (QIF).">
@@ -97,24 +74,30 @@ const frameworkCards = [
     </div>
   </section>
 
-  <!-- ═══ FRAMEWORK OVERVIEW ═══ -->
+  <!-- ═══ THREE PILLARS ═══ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
     <div class="text-center mb-12 reveal">
-      <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">The Standard</h2>
+      <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">Three Pillars</h2>
       <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        QIF defines the security architecture for neural interfaces — a layered model that spans from silicon to cognition.
+        QIF defines the threats. NSP implements the protocol. Runemate compresses so post-quantum encryption costs nothing.
       </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6 reveal reveal-stagger">
-      {frameworkCards.map((card) => (
-        <a href={card.href} class="glass rounded-xl p-6 card-hover group">
-          <div class="text-2xl mb-4" style={`color: ${card.color}`} set:html={card.icon} />
-          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
-            {card.title}
+      {PILLARS.map((pillar) => (
+        <a href={pillar.href} class="glass rounded-xl p-6 card-hover group">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-2xl" style={`color: ${pillar.color}`} set:html={pillar.icon} />
+            <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
+              v{pillar.version} &middot; {pillar.status}
+            </span>
+          </div>
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+            {pillar.name}
           </h3>
+          <p class="text-xs text-[var(--color-text-faint)] mb-3">{pillar.tagline}</p>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-            {card.description}
+            {pillar.description}
           </p>
         </a>
       ))}

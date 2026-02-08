@@ -32,7 +32,7 @@ export const COHERENCE = {
 /** Scale-frequency invariant */
 export const SCALE_FREQUENCY = {
   formula: 'v = f × λ',
-  k_range: '1-10 m·Hz',
+  k_range: '1-10 m/s',
   bands: [
     { name: 'Gamma', frequency: '30-100 Hz', extent: '~1 cm', k: '~1' },
     { name: 'Theta', frequency: '4-8 Hz', extent: '~5 cm', k: '~3' },
@@ -52,6 +52,47 @@ export const QI_CANDIDATES = {
     formula: 'QI = C_class ⊗ e^(−S_quantum)',
   },
 } as const;
+
+/** Three pillars of Qinnovate */
+export const PILLARS = [
+  {
+    id: 'qif',
+    name: 'QIF',
+    fullName: 'Quantum Indeterministic Framework',
+    tagline: 'The security architecture',
+    description: 'A 7-band hourglass model that maps every threat surface — from neural tissue to silicon — into a single, auditable framework.',
+    href: '/framework/',
+    icon: '&#9670;',
+    color: 'var(--color-accent-primary)',
+    version: QIF_VERSION,
+    status: 'Published',
+  },
+  {
+    id: 'nsp',
+    name: 'NSP',
+    fullName: 'Neural Sensory Protocol',
+    tagline: 'The wire protocol',
+    description: 'An RFC-style post-quantum protocol that secures BCI data links with five defense layers at 3.25% power overhead.',
+    href: '/nsp/',
+    icon: '&#9632;',
+    color: 'var(--color-accent-secondary)',
+    version: '0.3',
+    status: 'Draft RFC',
+  },
+  {
+    id: 'runemate',
+    name: 'Runemate',
+    fullName: 'Project Runemate',
+    toolName: 'Runemate Forge',
+    tagline: 'The compression engine',
+    description: 'An HTML-to-bytecode compiler that compresses content 65-90%, making post-quantum encryption cost-free above 30 KB. Runemate Forge compiles HTML into Staves bytecode.',
+    href: '/runemate/',
+    icon: '&#8734;',
+    color: 'var(--color-accent-tertiary)',
+    version: '0.1',
+    status: 'PoC Complete',
+  },
+] as const;
 
 /** Publication stats */
 export const STATS = {

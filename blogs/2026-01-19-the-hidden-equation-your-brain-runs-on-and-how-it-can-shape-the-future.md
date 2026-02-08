@@ -21,23 +21,23 @@ Let me show you the math. Don’t worry — it’s one equation, and it’s�
 
 > **f × S ≈ k**
 
-Where ***f*** is *frequency* (how fast something happens), ***S*** is *spatial scale* (how big the area involved is), and **k** is a constant — approximately **1–10 m·Hz** for neural systems (equivalent to the axonal conduction velocity in meters per second; Buzsáki & Draguhn, 2004; Nunez, 2000).  
+Where ***f*** is *frequency* (how fast something happens), ***S*** is *spatial scale* (how big the area involved is), and **k** is a constant — approximately **1–10 m/s** for neural systems (equivalent to the axonal conduction velocity in meters per second; Buzsáki & Draguhn, 2004; Nunez, 2000).  
   
 Let’s test it:
 
-> **Action potentials:** ~1000 Hz × ~1 micrometer = 10⁻³ m·Hz… wait, that’s not 1⁰⁶.
+> **Action potentials:** ~1000 Hz × ~1 micrometer = 10⁻³ m/s… wait, that’s not 1⁰⁶.
 
 Okay, I oversimplified. The real relationship is more *nuanced* — it’s about the characteristic frequency and spatial extent of coherent activity at each level.
 
 Now, let’s try again with the actual numbers:
 
-**Gamma oscillations (attention, binding):** ~40 Hz × ~1 cm cortical coherence ≈ 0.4 m·Hz
+**Gamma oscillations (attention, binding):** ~40 Hz × ~1 cm cortical coherence ≈ 0.4 m/s
 
-**Theta rhythms (memory encoding):** ~6 Hz × ~5 cm hippocampal extent ≈ 0.3 m·Hz
+**Theta rhythms (memory encoding):** ~6 Hz × ~5 cm hippocampal extent ≈ 0.3 m/s
 
-**Alpha rhythms (relaxed wakefulness):** ~10 Hz × ~15 cm thalamocortical ≈ 1.5 m·Hz
+**Alpha rhythms (relaxed wakefulness):** ~10 Hz × ~15 cm thalamocortical ≈ 1.5 m/s
 
-**Delta waves (deep sleep):** ~1 Hz × ~18 cm whole-cortex ≈ 0.18 m·Hz
+**Delta waves (deep sleep):** ~1 Hz × ~18 cm whole-cortex ≈ 0.18 m/s
 
 The constant isn’t exactly 1⁰⁶ — it varies by an order of magnitude or so. But across nine orders of magnitude in frequency and spatial scale, keeping the product within one order of magnitude is remarkable.  
    
