@@ -11,7 +11,7 @@ import Nav from '../../components/Nav.astro';
 
 <style is:global>
   /* Force dark background for this fullscreen viz page */
-  body { background: #08090e !important; overflow: hidden; font-family: 'Courier New', monospace; color: #aab; }
+  html, body { background: #08090e !important; overflow: hidden; font-family: 'Courier New', monospace; color: #aab; margin: 0; padding: 0; width: 100%; height: 100dvh; }
   canvas#viz { display: block; position: fixed; inset: 0; z-index: 0; }
 
   /* ── GUIDED TOUR ── */
@@ -70,9 +70,11 @@ import Nav from '../../components/Nav.astro';
 
   /* ── SIDEBAR CONTROLS ── */
   #sidebar {
-    position: fixed; right: 0; top: 0; width: 220px; height: 100%; background: rgba(8,10,16,0.95);
-    border-left: 1px solid #151820; z-index: 50; padding: 14px; padding-top: 72px; overflow-y: auto;
-    transform: translateX(220px); transition: transform 0.3s;
+    position: fixed; right: 0; top: 0; width: 240px; max-width: 80vw; height: 100dvh;
+    background: rgba(8,10,16,0.97);
+    border-left: 1px solid #151820; z-index: 55; padding: 14px; padding-top: 72px; overflow-y: auto;
+    transform: translateX(100%); transition: transform 0.3s;
+    box-sizing: border-box;
   }
   #sidebar.open { transform: translateX(0); }
   #sidebar h3 { color: #556; font-size: 10px; margin: 12px 0 6px; letter-spacing: 1px; font-weight: normal; }
@@ -90,11 +92,12 @@ import Nav from '../../components/Nav.astro';
   #sidebar button.attack:hover { background: #2a1520; color: #f88; }
 
   #toggle-sidebar {
-    position: fixed; right: 8px; top: 72px; z-index: 60; background: #141828;
-    border: 1px solid #1a2030; color: #556; font-family: inherit; font-size: 11px;
-    padding: 5px 10px; cursor: pointer; border-radius: 2px;
+    position: fixed; right: 12px; top: 72px; z-index: 60; background: #141828;
+    border: 1px solid #1a2030; color: #8bf; font-family: inherit; font-size: 11px;
+    padding: 6px 12px; cursor: pointer; border-radius: 4px; transition: right 0.3s, background 0.2s;
   }
-  #toggle-sidebar:hover { color: #8bf; }
+  #toggle-sidebar:hover { background: #1e2540; color: #aab; }
+  #sidebar.open + #toggle-sidebar { right: calc(240px + 12px); }
 
   /* ── TOOLTIP ── */
   #tooltip {
@@ -160,7 +163,6 @@ import Nav from '../../components/Nav.astro';
 <button id="tour-reopen">? Guide</button>
 
 <!-- SIDEBAR -->
-<button id="toggle-sidebar">Controls</button>
 <div id="sidebar">
   <h3>CLASSICAL WEIGHTS (&Sigma;<sub>c</sub>)</h3>
   <label>w<sub>1</sub> &sigma;&sup2;&phi; <input type="range" min="0" max="3" step="0.1" value="1" data-key="w1"> <span class="val-display">1.0</span></label>
@@ -192,6 +194,7 @@ import Nav from '../../components/Nav.astro';
   <h3>INFO</h3>
   <button id="btn-info">Show Guide</button>
 </div>
+<button id="toggle-sidebar">Controls</button>
 
 <!-- I0 DETECTION SYSTEM -->
 <div id="i0-status"></div>

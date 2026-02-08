@@ -1,0 +1,726 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { HOURGLASS_BANDS } from '../lib/qif-constants';
+import { THREAT_CATEGORIES, THREAT_VECTORS, SEVERITY_COLORS, ZONE_COLORS, getThreatStats } from '../lib/threat-data';
+
+const stats = getThreatStats();
+const bands = [...HOURGLASS_BANDS];
+---
+
+<PageLayout
+  title="QIF Threat Map"
+  description="Interactive attack matrix mapping 18 BCI threat vectors across 11 hourglass bands and 8 attack categories."
+  breadcrumbs={[{ label: 'Lab', href: '/lab/' }, { label: 'Threat Map' }]}
+  maxWidth="wide"
+>
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">QIF Threat Map</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-3xl mb-6">
+      An interactive attack matrix mapping {stats.total} BCI threat vectors across the QIF hourglass topology. Inspired by MITRE ATT&CK, adapted for neural security.
+    </p>
+
+    <!-- Stats bar -->
+    <div class="flex flex-wrap gap-4 mb-6">
+      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+        <span class="text-[var(--color-text-faint)]">Total</span>
+        <span class="font-bold ml-2">{stats.total}</span>
+      </div>
+      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+        <span class="severity-dot severity-dot--critical"></span>
+        <span class="text-[var(--color-text-faint)]">Critical</span>
+        <span class="font-bold ml-1">{stats.critical}</span>
+      </div>
+      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+        <span class="severity-dot severity-dot--high"></span>
+        <span class="text-[var(--color-text-faint)]">High</span>
+        <span class="font-bold ml-1">{stats.high}</span>
+      </div>
+      <div class="glass-subtle rounded-lg px-4 py-2 text-sm">
+        <span class="severity-dot severity-dot--medium"></span>
+        <span class="text-[var(--color-text-faint)]">Medium</span>
+        <span class="font-bold ml-1">{stats.medium}</span>
+      </div>
+    </div>
+
+    <!-- Filter toolbar -->
+    <div class="flex flex-wrap gap-3 items-center" id="filter-toolbar">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search threats..."
+        class="glass-subtle rounded-lg px-3 py-2 text-sm w-48 focus:outline-none focus:border-[var(--color-accent-primary)] border border-transparent"
+      />
+      <div class="flex gap-2 items-center text-sm">
+        <span class="text-[var(--color-text-faint)]">Severity:</span>
+        <label class="filter-chip active" data-severity="critical">
+          <input type="checkbox" checked class="hidden" /> Critical
+        </label>
+        <label class="filter-chip active" data-severity="high">
+          <input type="checkbox" checked class="hidden" /> High
+        </label>
+        <label class="filter-chip active" data-severity="medium">
+          <input type="checkbox" checked class="hidden" /> Medium
+        </label>
+      </div>
+      <div class="flex gap-2 items-center text-sm">
+        <span class="text-[var(--color-text-faint)]">Zone:</span>
+        <label class="filter-chip active" data-zone="neural">
+          <input type="checkbox" checked class="hidden" /> Neural
+        </label>
+        <label class="filter-chip active" data-zone="interface">
+          <input type="checkbox" checked class="hidden" /> Interface
+        </label>
+        <label class="filter-chip active" data-zone="silicon">
+          <input type="checkbox" checked class="hidden" /> Silicon
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Threat Map Grid -->
+  <div class="threat-map-scroll">
+    <div class="threat-map" id="threat-map">
+      <!-- Header row -->
+      <div class="map-header-corner">
+        <span class="text-xs text-[var(--color-text-faint)]">Band &darr; &ensp; Category &rarr;</span>
+      </div>
+      {THREAT_CATEGORIES.map((cat) => (
+        <div class="map-header-cell" title={cat.description}>
+          <div class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{cat.id}</div>
+          <div class="text-[10px] text-[var(--color-text-faint)] leading-tight mt-0.5">{cat.name}</div>
+        </div>
+      ))}
+
+      <!-- Band rows -->
+      {bands.map((band, i) => {
+        const prevBand = i > 0 ? bands[i - 1] : null;
+        const showSeparator = prevBand && prevBand.zone !== band.zone;
+        const zoneName = band.zone === 'interface' ? 'I\u2080 Interface' : band.zone === 'silicon' ? 'Synthetic Domain' : 'Neural Domain';
+
+        return (
+          <>
+            {showSeparator && (
+              <div class="map-zone-separator" style={`grid-column: 1 / -1;`}>
+                <div class="zone-line"></div>
+                <span class="zone-label-text">{zoneName}</span>
+                <div class="zone-line"></div>
+              </div>
+            )}
+            {i === 0 && (
+              <div class="map-zone-separator" style="grid-column: 1 / -1;">
+                <div class="zone-line"></div>
+                <span class="zone-label-text">Neural Domain</span>
+                <div class="zone-line"></div>
+              </div>
+            )}
+            <div
+              class:list={[
+                "map-row-header",
+                band.zone === 'interface' && "map-row-header--interface",
+              ]}
+              data-band-id={band.id}
+              data-zone={band.zone}
+            >
+              <span class="font-[family-name:var(--font-mono)] text-xs font-bold" style={`color: ${band.color}`}>{band.id}</span>
+              <span class="text-xs text-[var(--color-text-muted)] ml-2 truncate">{band.name}</span>
+            </div>
+            {THREAT_CATEGORIES.map((cat) => {
+              // Find threats for this cell at build time for SSR
+              const cellThreats = THREAT_VECTORS.filter(t =>
+                t.bands.includes(band.id as any) && t.category === cat.id
+              );
+              const maxSev = cellThreats.length > 0
+                ? (['critical', 'high', 'medium', 'low'] as const).find(s => cellThreats.some(t => t.severity === s)) || null
+                : null;
+
+              return (
+                <div
+                  class:list={[
+                    "map-cell",
+                    maxSev && `map-cell--${maxSev}`,
+                    band.zone === 'interface' && "map-cell--interface",
+                    cellThreats.length === 0 && "map-cell--empty",
+                  ]}
+                  data-band={band.id}
+                  data-category={cat.id}
+                  data-zone={band.zone}
+                  data-threats={JSON.stringify(cellThreats.map(t => t.id))}
+                  data-severity={maxSev || ''}
+                >
+                  {cellThreats.length > 0 && (
+                    <div class="cell-inner">
+                      <span class="cell-count">{cellThreats.length}</span>
+                      <span class="cell-sev-dot" data-sev={maxSev}></span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Detail Panel (side drawer) -->
+  <div class="detail-drawer" id="detail-drawer">
+    <div class="detail-drawer-inner" id="detail-drawer-inner">
+      <button class="detail-close" id="detail-close" aria-label="Close">&times;</button>
+      <div id="detail-content"></div>
+    </div>
+  </div>
+
+  <!-- Hover Tooltip -->
+  <div class="map-tooltip" id="map-tooltip"></div>
+</PageLayout>
+
+<style>
+  /* ═══ Threat Map Grid ═══ */
+  .threat-map-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2rem;
+  }
+
+  .threat-map {
+    display: grid;
+    grid-template-columns: 160px repeat(8, minmax(100px, 1fr));
+    gap: 1px;
+    min-width: 960px;
+  }
+
+  /* Header */
+  .map-header-corner {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: var(--color-bg-deep);
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .map-header-cell {
+    background: var(--color-bg-surface);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+    cursor: help;
+  }
+
+  /* Zone separator */
+  .map-zone-separator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--color-bg-deep);
+  }
+
+  .zone-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .zone-label-text {
+    font-size: 0.65rem;
+    color: var(--color-text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  /* Row headers */
+  .map-row-header {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--color-bg-deep);
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    min-height: 44px;
+  }
+
+  .map-row-header--interface {
+    background: rgba(245, 158, 11, 0.05);
+    border-top: 1px solid rgba(245, 158, 11, 0.15);
+    border-bottom: 1px solid rgba(245, 158, 11, 0.15);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.08);
+  }
+
+  /* Grid cells */
+  .map-cell {
+    background: var(--color-bg-surface);
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .map-cell--empty {
+    cursor: default;
+    opacity: 0.4;
+  }
+
+  .map-cell:not(.map-cell--empty):hover {
+    transform: scale(1.05);
+    z-index: 1;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  }
+
+  .map-cell--interface {
+    background: rgba(245, 158, 11, 0.05);
+  }
+
+  /* Severity heat colors */
+  .map-cell--critical { background: rgba(239, 68, 68, 0.12); }
+  .map-cell--critical:hover { background: rgba(239, 68, 68, 0.22); }
+  .map-cell--high { background: rgba(245, 158, 11, 0.10); }
+  .map-cell--high:hover { background: rgba(245, 158, 11, 0.20); }
+  .map-cell--medium { background: rgba(234, 179, 8, 0.08); }
+  .map-cell--medium:hover { background: rgba(234, 179, 8, 0.18); }
+
+  .cell-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .cell-count {
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+  }
+
+  .cell-sev-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .cell-sev-dot[data-sev="critical"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
+  .cell-sev-dot[data-sev="high"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
+  .cell-sev-dot[data-sev="medium"] { background: #eab308; box-shadow: 0 0 4px #eab308; }
+
+  /* Severity dots in stats bar */
+  .severity-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .severity-dot--critical { background: #ef4444; }
+  .severity-dot--high { background: #f59e0b; }
+  .severity-dot--medium { background: #eab308; }
+
+  /* Filter chips */
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    border-radius: 99px;
+    border: 1px solid var(--color-border);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--color-text-faint);
+    user-select: none;
+  }
+
+  .filter-chip.active {
+    border-color: var(--color-accent-secondary);
+    color: var(--color-accent-secondary);
+    background: rgba(6, 182, 212, 0.1);
+  }
+
+  .filter-chip:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  /* Detail drawer */
+  .detail-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 420px;
+    max-width: 90vw;
+    z-index: 60;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .detail-drawer.open {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .detail-drawer-inner {
+    height: 100%;
+    overflow-y: auto;
+    background: var(--color-bg-surface);
+    border-left: 1px solid var(--color-border);
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .detail-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .detail-close:hover {
+    border-color: var(--color-text-primary);
+    color: var(--color-text-primary);
+    background: var(--color-bg-elevated);
+  }
+
+  /* Detail content */
+  .detail-threat {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .detail-threat:last-child { border-bottom: none; }
+
+  .detail-threat-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-threat-id {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+  }
+
+  .detail-meta dt { color: var(--color-text-faint); }
+  .detail-meta dd { color: var(--color-text-primary); }
+
+  .detail-description {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+
+  .sev-badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 99px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .sev-badge--critical { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+  .sev-badge--high { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+  .sev-badge--medium { background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.3); }
+
+  /* Hover tooltip */
+  .map-tooltip {
+    position: fixed;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+    max-width: 280px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: opacity 0.15s;
+  }
+
+  .map-tooltip.visible { opacity: 1; }
+
+  .map-tooltip .tt-name {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 0.2rem;
+  }
+
+  .map-tooltip .tt-meta {
+    color: var(--color-text-faint);
+    font-size: 0.7rem;
+  }
+
+  /* Hidden by filter */
+  .map-cell.filtered-out {
+    opacity: 0.08 !important;
+    pointer-events: none;
+  }
+
+  .map-row-header.filtered-out {
+    opacity: 0.3;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .threat-map {
+      grid-template-columns: 120px repeat(8, 90px);
+    }
+    .detail-drawer { width: 100%; max-width: 100vw; }
+  }
+</style>
+
+<script>
+  // ── Threat data inline for client-side interaction ──
+  const THREATS: Record<string, {
+    id: string; name: string; category: string; bands: string[];
+    severity: string; coupling: string | null; access: string | null;
+    classicalDetection: string; quantumDetection: string; description: string;
+    bandsStr: string;
+  }> = {};
+
+  // Hydrate threat data from data attributes
+  document.querySelectorAll<HTMLElement>('.map-cell:not(.map-cell--empty)').forEach(cell => {
+    // Threats will be looked up by ID from the inline data below
+  });
+
+  // Inline all threat data for client
+  const ALL_THREATS = [
+    {id:'QTM-I0-SI-001',name:'Signal Injection',category:'SI',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'Yes',quantumDetection:'Enhanced (coherence metric)',description:'Inject false signals at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.',bandsStr:'I0–N1'},
+    {id:'QTM-N4-SI-002',name:'ELF Neural Entrainment',category:'SI',bands:['S1','N4','N5','N6','N7'],severity:'critical',coupling:'DIRECT',access:'RESTRICTED',classicalDetection:'Yes',quantumDetection:'Enhanced (Dsf anomaly detection)',description:'3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment.',bandsStr:'S1→N4–N7'},
+    {id:'QTM-N4-SI-003',name:'Intermodulation (BCI Weaponized)',category:'SI',bands:['S2','N4','N5','N6'],severity:'critical',coupling:'INTERMODULATION',access:'RESTRICTED',classicalDetection:'Yes',quantumDetection:'Enhanced (coherence + Dsf)',description:'UHF-Mil + MICS = neural-range beat frequency. BCI telemetry becomes part of the attack. Most dangerous coupling mechanism.',bandsStr:'S2→N4–N6'},
+    {id:'QTM-N7-SI-004',name:'Pulsed Microwave (Frey Effect)',category:'SI',bands:['S3','N2','N7'],severity:'high',coupling:'ENVELOPE',access:'RESTRICTED',classicalDetection:'Yes',quantumDetection:'Enhanced (temporal coherence)',description:'S-band pulsed microwave. Thermoelastic expansion → cochlea perceives as sound. Havana Syndrome model.',bandsStr:'S3→N2,N7'},
+    {id:'QTM-N4-SI-005',name:'Temporal Interference (Deep Targeting)',category:'SI',bands:['S2','N4','N5','N6'],severity:'high',coupling:'TEMPORAL_INTERFERENCE',access:'LICENSED',classicalDetection:'Yes',quantumDetection:'Enhanced (beat frequency detection)',description:'Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively.',bandsStr:'S2→N4–N6'},
+    {id:'QTM-N1-SI-006',name:'Envelope Modulation (Stealth Carrier)',category:'SI',bands:['S1','S2','N1','N2','N3','N4','N5','N6','N7'],severity:'high',coupling:'ENVELOPE',access:'PUBLIC',classicalDetection:'Yes',quantumDetection:'Enhanced (demodulation detection)',description:'Any carrier modulated at neural frequency. Tissue demodulates the envelope. Lowest barrier to entry.',bandsStr:'S1–S2→any N'},
+    {id:'QTM-I0-SI-007',name:'Quantum Tunneling Exploit',category:'SI',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Yes (tunneling profile anomaly)',description:'Exploit ion channel quantum tunneling to inject false synaptic events.',bandsStr:'I0–N1'},
+    {id:'QTM-I0-SI-008',name:'Davydov Soliton Attack',category:'SI',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Yes (tunneling term Q_tunnel)',description:'Use THz stimulation to trigger Davydov solitons in SNARE protein complexes.',bandsStr:'I0–N1'},
+    {id:'QTM-I0-SE-001',name:'Eavesdropping',category:'SE',bands:['I0','N1'],severity:'high',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Yes (Heisenberg disturbance)',description:'Passive interception of neural signals at I0. Classically undetectable.',bandsStr:'I0–N1'},
+    {id:'QTM-S1-SE-002',name:'BLE/RF Side-Channel',category:'SE',bands:['S1','S2'],severity:'medium',coupling:null,access:'PUBLIC',classicalDetection:'Yes',quantumDetection:'Enhanced (signal correlation)',description:'Extract neural data from BLE/RF emissions via timing, power, or EM side-channels.',bandsStr:'S1–S2'},
+    {id:'QTM-I0-DM-001',name:'Man-in-the-Middle',category:'DM',bands:['I0'],severity:'critical',coupling:null,access:null,classicalDetection:'Partial',quantumDetection:'Yes (no-cloning + Bell test)',description:'Intercept and modify signals at I0 boundary. No-cloning theorem prevents perfect copy.',bandsStr:'I0'},
+    {id:'QTM-S2-DM-002',name:'Supply Chain Compromise',category:'DM',bands:['S2','S3'],severity:'high',coupling:null,access:null,classicalDetection:'Yes',quantumDetection:'Enhanced (firmware attestation)',description:'Tamper with BCI hardware/firmware during manufacturing or distribution.',bandsStr:'S2–S3'},
+    {id:'QTM-N3-DS-001',name:'Neural Ransomware',category:'DS',bands:['N3','N7','N6'],severity:'critical',coupling:null,access:null,classicalDetection:'Partial',quantumDetection:'Yes (QI score drop)',description:'Disrupt or lock neural function via stimulation manipulation. Closed-loop devices most vulnerable.',bandsStr:'N3'},
+    {id:'QTM-N3-PE-001',name:'Identity Spoofing',category:'PE',bands:['N3','N7','N6'],severity:'high',coupling:null,access:null,classicalDetection:'Partial',quantumDetection:'Yes (quantum biometric)',description:'Replicate neural signature to bypass authentication. Quantum signatures are physically unclonable.',bandsStr:'N3–N7'},
+    {id:'QTM-N1-CI-001',name:'Neural Data Privacy Breach',category:'CI',bands:['N1','S1','S2','S3'],severity:'high',coupling:null,access:null,classicalDetection:'Yes',quantumDetection:'Enhanced (cross-band encryption)',description:'Unauthorized access to recorded neural data. GDPR Article 9 special category data.',bandsStr:'N1–S3'},
+    {id:'QTM-I0-PS-001',name:'Directed Energy (Thermal I0 Damage)',category:'PS',bands:['S3','I0'],severity:'critical',coupling:null,access:'CLASSIFIED',classicalDetection:'Yes',quantumDetection:'N/A (physical damage)',description:'mm-wave/ADS directed energy. Electrode heating, tissue damage. Nation-state only.',bandsStr:'S3→I0'},
+    {id:'QTM-S3-EX-001',name:'Cloud Infrastructure Attack',category:'EX',bands:['S3'],severity:'medium',coupling:null,access:'PUBLIC',classicalDetection:'Yes',quantumDetection:'Enhanced (QKD for data-in-transit)',description:'Compromise cloud services processing neural data.',bandsStr:'S3'},
+    {id:'QTM-S3-EX-002',name:'Harvest-Now-Decrypt-Later',category:'EX',bands:['S3'],severity:'critical',coupling:null,access:null,classicalDetection:'No',quantumDetection:'Prevented (QKD/PQC)',description:'Record encrypted BCI traffic now, decrypt when quantum computers arrive. Neural data is permanently sensitive.',bandsStr:'S3'},
+  ];
+
+  // Build lookup
+  for (const t of ALL_THREATS) {
+    THREATS[t.id] = t;
+  }
+
+  // ── Tooltip ──
+  const tooltip = document.getElementById('map-tooltip')!;
+
+  function showTooltip(cell: HTMLElement, e: MouseEvent) {
+    const threatIds: string[] = JSON.parse(cell.dataset.threats || '[]');
+    if (threatIds.length === 0) return;
+
+    const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
+    let html = '';
+    for (const t of threats) {
+      html += `<div class="tt-name">${t.name}</div>`;
+      html += `<div class="tt-meta">${t.severity.toUpperCase()} · ${t.bandsStr}${t.coupling ? ' · ' + t.coupling : ''}</div>`;
+    }
+
+    tooltip.innerHTML = html;
+    positionTooltip(e);
+    tooltip.classList.add('visible');
+  }
+
+  function positionTooltip(e: MouseEvent) {
+    const x = Math.min(e.clientX + 12, window.innerWidth - 300);
+    const y = Math.min(e.clientY - 8, window.innerHeight - 150);
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
+  }
+
+  // ── Detail drawer ──
+  const drawer = document.getElementById('detail-drawer')!;
+  const drawerContent = document.getElementById('detail-content')!;
+  const drawerClose = document.getElementById('detail-close')!;
+
+  function openDrawer(cell: HTMLElement) {
+    const threatIds: string[] = JSON.parse(cell.dataset.threats || '[]');
+    const band = cell.dataset.band;
+    const category = cell.dataset.category;
+
+    if (threatIds.length === 0) return;
+
+    const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
+    let html = `<div style="margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--color-border);">
+      <div style="font-size:0.7rem;color:var(--color-text-faint);font-family:var(--font-mono);">${band} × ${category}</div>
+      <div style="font-size:1.1rem;font-weight:600;margin-top:0.25rem;">${threats.length} Threat${threats.length !== 1 ? 's' : ''}</div>
+    </div>`;
+
+    for (const t of threats) {
+      const sevClass = t.severity;
+      html += `<div class="detail-threat">
+        <div class="detail-threat-name">${t.name} <span class="sev-badge sev-badge--${sevClass}">${t.severity}</span></div>
+        <div class="detail-threat-id">${t.id}</div>
+        <dl class="detail-meta">
+          <dt>Bands</dt><dd>${t.bandsStr}</dd>
+          ${t.coupling ? `<dt>Coupling</dt><dd>${t.coupling}</dd>` : ''}
+          ${t.access ? `<dt>Access</dt><dd>${t.access}</dd>` : ''}
+          <dt>Classical</dt><dd style="color:${t.classicalDetection === 'Yes' ? '#10b981' : t.classicalDetection === 'Partial' ? '#f59e0b' : '#ef4444'}">${t.classicalDetection}</dd>
+          <dt>Quantum</dt><dd style="color:#8b5cf6">${t.quantumDetection}</dd>
+        </dl>
+        <div class="detail-description">${t.description}</div>
+      </div>`;
+    }
+
+    drawerContent.innerHTML = html;
+    drawer.classList.add('open');
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+  }
+
+  drawerClose.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // ── Cell interactions ──
+  document.querySelectorAll<HTMLElement>('.map-cell:not(.map-cell--empty)').forEach(cell => {
+    cell.addEventListener('mouseenter', (e) => showTooltip(cell, e as MouseEvent));
+    cell.addEventListener('mousemove', (e) => positionTooltip(e as MouseEvent));
+    cell.addEventListener('mouseleave', hideTooltip);
+    cell.addEventListener('click', () => {
+      hideTooltip();
+      openDrawer(cell);
+    });
+  });
+
+  // ── Filters ──
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const severityFilters = document.querySelectorAll<HTMLElement>('.filter-chip[data-severity]');
+  const zoneFilters = document.querySelectorAll<HTMLElement>('.filter-chip[data-zone]');
+
+  function getActiveSeverities(): Set<string> {
+    const active = new Set<string>();
+    severityFilters.forEach(f => {
+      if (f.classList.contains('active')) active.add(f.dataset.severity!);
+    });
+    return active;
+  }
+
+  function getActiveZones(): Set<string> {
+    const active = new Set<string>();
+    zoneFilters.forEach(f => {
+      if (f.classList.contains('active')) active.add(f.dataset.zone!);
+    });
+    return active;
+  }
+
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase().trim();
+    const activeSeverities = getActiveSeverities();
+    const activeZones = getActiveZones();
+
+    // Filter cells
+    document.querySelectorAll<HTMLElement>('.map-cell').forEach(cell => {
+      const zone = cell.dataset.zone || '';
+      const severity = cell.dataset.severity || '';
+      const threatIds: string[] = JSON.parse(cell.dataset.threats || '[]');
+
+      // Zone filter
+      if (!activeZones.has(zone)) {
+        cell.classList.add('filtered-out');
+        return;
+      }
+
+      // Empty cells
+      if (threatIds.length === 0) {
+        cell.classList.remove('filtered-out');
+        return;
+      }
+
+      // Severity filter
+      const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
+      const hasMatchingSeverity = threats.some(t => activeSeverities.has(t.severity));
+      if (!hasMatchingSeverity) {
+        cell.classList.add('filtered-out');
+        return;
+      }
+
+      // Search filter
+      if (query) {
+        const matchesSearch = threats.some(t =>
+          t.name.toLowerCase().includes(query) ||
+          t.description.toLowerCase().includes(query) ||
+          t.id.toLowerCase().includes(query) ||
+          (t.coupling && t.coupling.toLowerCase().includes(query))
+        );
+        if (!matchesSearch) {
+          cell.classList.add('filtered-out');
+          return;
+        }
+      }
+
+      cell.classList.remove('filtered-out');
+    });
+
+    // Filter row headers by zone
+    document.querySelectorAll<HTMLElement>('.map-row-header').forEach(header => {
+      const zone = header.dataset.zone || '';
+      header.classList.toggle('filtered-out', !activeZones.has(zone));
+    });
+  }
+
+  // Wire up filter chips
+  severityFilters.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('active');
+      applyFilters();
+    });
+  });
+
+  zoneFilters.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('active');
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', applyFilters);
+</script>

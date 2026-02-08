@@ -4,43 +4,46 @@ import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
 ---
 
 <PageLayout
-  title="QIF Lab"
-  description="Interactive reference implementations of QIF equations — coherence calculator, scale-frequency explorer, and equation sandbox."
-  breadcrumbs={[{ label: 'Lab' }]}
+  title="Explore QIF"
+  description="Interactive visualizations and tools for exploring the Quantum Indeterministic Framework — layer explorer, equation simulator, threat map, and more."
+  breadcrumbs={[{ label: 'Explore' }]}
   maxWidth="wide"
 >
   <div class="mb-12">
-    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">QIF Lab</h1>
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Explore QIF</h1>
     <p class="text-lg text-[var(--color-text-muted)] max-w-2xl">
-      Interactive tools for exploring the QIF framework. Visualize the hourglass architecture, map threat vectors, and validate equations.
+      Interactive visualizations and tools for exploring the Quantum Indeterministic Framework. Click into layers, simulate attacks, and validate equations.
     </p>
   </div>
 
-  <!-- Tool Cards -->
+  <!-- Primary Visualizations -->
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-    <a href="/visualizations/qi/" class="lab-card glass rounded-xl p-6 block group">
-      <div class="text-2xl mb-3 text-[var(--color-accent-tertiary)]">&#9670;</div>
-      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QI Equation Explorer</h2>
-      <p class="text-sm text-[var(--color-text-muted)] mb-4">
-        Interactive 3D visualization of the QIF hourglass with real-time QI equation computation.
-      </p>
-      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /visualizations/qi/</span>
-    </a>
-    <a href="/lab/hourglass.html" class="lab-card glass rounded-xl p-6 block group">
-      <div class="text-2xl mb-3 text-[var(--color-status-warn)]">&#9632;</div>
+    <a href="/lab/hourglass.html" class="explore-card glass rounded-xl p-6 block group relative overflow-hidden">
+      <div class="absolute top-3 right-3">
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] font-semibold uppercase tracking-wider">Featured</span>
+      </div>
+      <div class="text-3xl mb-4 text-[var(--color-status-warn)]">&#9632;</div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Layer Explorer</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
-        Drill into all 11 hourglass bands with attack vectors, BCI devices, and frequency spectrum.
+        Drill into all 11 hourglass bands. Click any layer to see attack vectors, real BCI devices, frequency ranges, and clinical severity ratings.
       </p>
-      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /lab/hourglass.html</span>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; Interactive hourglass</span>
     </a>
-    <a href="/threats/" class="lab-card glass rounded-xl p-6 block group">
-      <div class="text-2xl mb-3 text-[var(--color-status-danger)]">&#9888;</div>
-      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Threat Map</h2>
+    <a href="/visualizations/qi/" class="explore-card glass rounded-xl p-6 block group">
+      <div class="text-3xl mb-4 text-[var(--color-accent-tertiary)]">&#9670;</div>
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QI Equation Explorer</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
-        18 attack vectors mapped across bands and categories with severity heatmapping.
+        Interactive 3D visualization of the QIF hourglass with real-time QI equation computation. Adjust parameters and watch the Boltzmann landscape respond.
       </p>
-      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /threats/</span>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; 3D Boltzmann landscape</span>
+    </a>
+    <a href="/threats/" class="explore-card glass rounded-xl p-6 block group">
+      <div class="text-3xl mb-4 text-[var(--color-status-danger)]">&#9888;</div>
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Threat Map</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        18 attack vectors mapped across bands and categories with severity heatmapping. Filter by band, category, or severity.
+      </p>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; Attack vector registry</span>
     </a>
   </div>
 
@@ -120,7 +123,6 @@ import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
           const percent = (extent / maxExtent) * 100;
           const freqParts = band.frequency.split('-');
           const maxFreq = parseFloat(freqParts[freqParts.length - 1]);
-          // Color intensity based on frequency
           const hue = maxFreq > 30 ? 280 : maxFreq > 8 ? 180 : maxFreq > 4 ? 200 : 220;
           return (
             <div>
@@ -231,11 +233,11 @@ import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
 </script>
 
 <style>
-  .lab-card {
+  .explore-card {
     transition: transform 0.2s ease, border-color 0.2s ease;
     text-decoration: none;
   }
-  .lab-card:hover {
+  .explore-card:hover {
     transform: translateY(-2px);
     border-color: var(--color-border-hover);
   }
