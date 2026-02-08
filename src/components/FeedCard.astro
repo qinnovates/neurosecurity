@@ -1,0 +1,155 @@
+---
+import type { FeedItem } from '../lib/feed-types';
+
+interface Props {
+  item: FeedItem;
+}
+
+const { item } = Astro.props;
+
+// Determine link href and target
+const href =
+  item.type === 'publication'
+    ? `/publications/${item.slug}/`
+    : item.type === 'brief'
+      ? item.url || undefined
+      : item.url;
+
+const isExternal = item.type === 'external' || (item.type === 'brief' && item.url?.startsWith('http'));
+const target = isExternal ? '_blank' : undefined;
+const rel = isExternal ? 'noopener noreferrer' : undefined;
+
+// Border style
+const borderStyle =
+  item.type === 'publication'
+    ? 'border-left: 3px solid var(--color-accent-primary);'
+    : item.type === 'brief'
+      ? `border-left: 3px solid ${item.categoryColor};`
+      : 'border-left: 3px dashed var(--color-text-faint);';
+
+// Badge
+const badgeLabel =
+  item.type === 'publication'
+    ? 'Qinnovate'
+    : item.type === 'brief'
+      ? 'Intel Brief'
+      : 'External';
+
+const badgeColor =
+  item.type === 'publication'
+    ? 'var(--color-accent-primary)'
+    : item.type === 'brief'
+      ? item.categoryColor
+      : 'var(--color-text-faint)';
+
+// Date formatting
+const dateObj = new Date(item.date);
+const formattedDate = dateObj.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+{href ? (
+  <a href={href} target={target} rel={rel} class="block group">
+    <article class="glass rounded-xl p-6 card-hover h-full flex flex-col" style={borderStyle}>
+      {/* Header: badge + meta */}
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <div class="flex items-center gap-2">
+          <span
+            class="text-[10px] font-semibold px-2 py-0.5 rounded-full border"
+            style={`color: ${badgeColor}; border-color: ${badgeColor}; background: color-mix(in srgb, ${badgeColor} 8%, transparent);`}
+          >
+            {badgeLabel}
+          </span>
+          {item.type === 'publication' && item.tags.slice(0, 2).map((tag) => (
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/8 text-[var(--color-accent-primary)] border border-[var(--color-accent-primary)]/15">
+              {tag}
+            </span>
+          ))}
+          {item.type === 'brief' && (
+            <span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
+              {item.categoryName}
+            </span>
+          )}
+          {item.type === 'external' && (
+            <span class="text-[10px] text-[var(--color-text-faint)]">{item.source}</span>
+          )}
+        </div>
+        <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] shrink-0">
+          {formattedDate}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
+        {item.title}
+        {isExternal && (
+          <svg class="inline-block w-3 h-3 ml-1 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+        )}
+      </h3>
+
+      {/* Body */}
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 line-clamp-2 flex-1">
+        {item.type === 'publication' ? item.excerpt : item.type === 'brief' ? item.summary : item.summary}
+      </p>
+
+      {/* QIF Relevance (briefs only) */}
+      {item.type === 'brief' && item.relevance && (
+        <div class="text-xs text-[var(--color-accent-secondary)] bg-[var(--color-accent-secondary)]/5 rounded-lg px-3 py-2 mb-3">
+          <strong>QIF Relevance:</strong> {item.relevance}
+        </div>
+      )}
+
+      {/* Footer */}
+      <div class="flex items-center gap-3 text-xs text-[var(--color-text-faint)] mt-auto pt-3 border-t border-[var(--color-border)]">
+        {item.type === 'publication' && <span>{item.readTime}</span>}
+        {item.type === 'external' && <span>{item.source}</span>}
+        {item.type === 'brief' && <span>Intelligence Brief</span>}
+      </div>
+    </article>
+  </a>
+) : (
+  <article class="glass rounded-xl p-6 h-full flex flex-col" style={borderStyle}>
+    {/* Same content but not wrapped in a link */}
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <div class="flex items-center gap-2">
+        <span
+          class="text-[10px] font-semibold px-2 py-0.5 rounded-full border"
+          style={`color: ${badgeColor}; border-color: ${badgeColor}; background: color-mix(in srgb, ${badgeColor} 8%, transparent);`}
+        >
+          {badgeLabel}
+        </span>
+        {item.type === 'brief' && (
+          <span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
+            {item.categoryName}
+          </span>
+        )}
+      </div>
+      <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] shrink-0">
+        {formattedDate}
+      </span>
+    </div>
+
+    <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2">
+      {item.title}
+    </h3>
+
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 line-clamp-2 flex-1">
+      {item.type === 'brief' ? item.summary : ''}
+    </p>
+
+    {item.type === 'brief' && item.relevance && (
+      <div class="text-xs text-[var(--color-accent-secondary)] bg-[var(--color-accent-secondary)]/5 rounded-lg px-3 py-2 mb-3">
+        <strong>QIF Relevance:</strong> {item.relevance}
+      </div>
+    )}
+
+    <div class="flex items-center gap-3 text-xs text-[var(--color-text-faint)] mt-auto pt-3 border-t border-[var(--color-border)]">
+      <span>Intelligence Brief</span>
+    </div>
+  </article>
+)}

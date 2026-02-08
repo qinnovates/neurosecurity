@@ -1,0 +1,22 @@
+---
+import { STATS } from '../lib/qif-constants';
+---
+
+<div class="flex flex-wrap items-center justify-center gap-6 text-sm text-[var(--color-text-faint)]">
+  <span class="flex items-center gap-2">
+    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-secondary)]"></span>
+    {STATS.architecture}
+  </span>
+  <span class="flex items-center gap-2">
+    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)]"></span>
+    {STATS.publications} Publications
+  </span>
+  <span class="flex items-center gap-2">
+    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)]"></span>
+    Open Framework
+  </span>
+  <span class="flex items-center gap-2">
+    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-status-safe)]"></span>
+    Est. {STATS.established}
+  </span>
+</div>

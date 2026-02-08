@@ -1,0 +1,382 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import {
+  NSP_VERSION,
+  NSP_STATUS,
+  NSP_FIPS,
+  NSP_LAYERS,
+  NSP_DEVICE_TIERS,
+  NSP_POWER,
+  NSP_PQC_SIZES,
+  NSP_PIPELINE,
+  NSP_KEY_LIFECYCLE,
+} from '../lib/nsp-constants';
+---
+
+<PageLayout
+  title="NSP Protocol"
+  description="The Neural Sensory Protocol — a post-quantum cryptographic specification for securing brain-computer interface data streams."
+  breadcrumbs={[{ label: 'NSP Protocol' }]}
+  maxWidth="wide"
+>
+  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+    <!-- Sidebar (sticky TOC) -->
+    <aside class="hidden lg:block">
+      <nav class="sticky top-24 space-y-1" aria-label="Table of contents">
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
+        {[
+          { href: '#overview', label: 'Overview' },
+          { href: '#layers', label: '5-Layer Stack' },
+          { href: '#tiers', label: 'Device Tiers' },
+          { href: '#power', label: 'Power Budget' },
+          { href: '#pqc', label: 'PQC Key Sizes' },
+          { href: '#pipeline', label: 'Pipeline' },
+          { href: '#spec', label: 'Specification' },
+        ].map((item) => (
+          <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="max-w-3xl">
+      <!-- Overview -->
+      <section id="overview" class="mb-20">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          Neural Sensory Protocol <span class="text-[var(--color-accent-primary)]">v{NSP_VERSION}</span>
+        </h1>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
+            {NSP_STATUS}
+          </span>
+        </div>
+        <div class="prose">
+          <p class="text-lg text-[var(--color-text-muted)]">
+            Brain-computer interfaces produce some of the most sensitive data in existence &mdash; raw neural signals that encode thoughts, intentions, and neurological health. Today, most BCI data streams are protected by classical cryptography that a sufficiently powerful quantum computer could break retroactively. This is the <strong>Harvest Now, Decrypt Later</strong> (HNDL) threat: an adversary records encrypted neural data today and decrypts it years from now when quantum hardware matures.
+          </p>
+          <p>
+            The Neural Sensory Protocol (NSP) is a wire-level specification designed to close that window. It defines how BCI devices compress, authenticate, encrypt, and sign neural data frames using <strong>post-quantum cryptography</strong> &mdash; ensuring that data captured today remains secure against both classical and quantum adversaries for the lifetime of the device.
+          </p>
+          <p>
+            NSP builds on four NIST-standardized algorithms:
+          </p>
+          <ul>
+            {NSP_FIPS.map((fips) => (
+              <li class="font-[family-name:var(--font-mono)] text-sm">{fips}</li>
+            ))}
+          </ul>
+          <p>
+            Together, these provide hybrid key exchange, lattice-based digital signatures, hash-based firmware authentication, and authenticated symmetric encryption &mdash; all within the power and bandwidth constraints of implanted and wearable neural devices.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5-Layer Stack -->
+      <section id="layers" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">5-Layer Defense Stack</h2>
+        <div class="prose mb-8">
+          <p>
+            NSP organizes its security controls into five independent defense layers. Each layer maps to a specific QIF hourglass band and activates based on device tier. The stack is ordered from the outermost environmental monitoring (Layer 5) down to the hardware root of trust (Layer 1).
+          </p>
+        </div>
+        <div class="space-y-4">
+          {[...NSP_LAYERS].reverse().map((layer) => (
+            <div class="glass rounded-xl p-6" style={`border-left: 3px solid var(--color-accent-primary);`}>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">L{layer.id}</span>
+                <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">{layer.name}</h3>
+                <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)] ml-auto whitespace-nowrap">
+                  {layer.qifBand}
+                </span>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)] mb-3">{layer.scope}</p>
+              <div class="flex gap-2">
+                {layer.tiers.map((tier) => (
+                  <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-text-faint)]">
+                    {tier}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Device Tiers -->
+      <section id="tiers" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Device Tiers</h2>
+        <div class="prose mb-8">
+          <p>
+            Not every BCI device has the same compute budget, risk profile, or regulatory requirements. NSP defines three device tiers &mdash; each activating progressively more defense layers as the stakes increase from consumer headbands to surgically implanted neural interfaces.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4">
+          {NSP_DEVICE_TIERS.map((tier) => (
+            <div class="glass rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{tier.id}</span>
+                <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{tier.name}</h3>
+              </div>
+              <div class="space-y-3">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Examples</p>
+                  <p class="text-sm text-[var(--color-text-muted)]">{tier.examples.join(', ')}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Active Layers</p>
+                  <div class="flex gap-1.5">
+                    {tier.activeLayers.map((l) => (
+                      <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-0.5 rounded border border-[var(--color-accent-primary)]/30 text-[var(--color-accent-primary)]">
+                        L{l}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Key Exchange</p>
+                  <p class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{tier.keyExchange}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Secure Enclave</p>
+                  <p class="text-sm text-[var(--color-text-muted)]">{tier.secureEnclave}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Power Budget -->
+      <section id="power" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Power Budget</h2>
+        <div class="prose mb-8">
+          <p>
+            Implanted BCIs operate on micro-watt budgets. NSP&rsquo;s entire cryptographic stack &mdash; compression, QI scoring, encryption, and signing &mdash; must fit within a strict power ceiling to avoid reducing device battery life or increasing thermal dissipation near brain tissue.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-4xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-2">
+            {NSP_POWER.totalOverheadPercent}%
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]" set:html={`of ${NSP_POWER.budgetPower_mW} mW budget &mdash; ${NSP_POWER.totalOverhead_mW} mW total overhead`} />
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">
+            Reference platform: {NSP_POWER.referencePlatform} ({NSP_POWER.nominalPower_mW} mW nominal)
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Operation</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Power</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Frequency</th>
+                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">% of Budget</th>
+              </tr>
+            </thead>
+            <tbody>
+              {NSP_POWER.breakdown.map((row) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-medium">{row.operation}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{row.power_mW} mW</td>
+                  <td class="py-3 px-4 text-[var(--color-text-muted)]">{row.frequency}</td>
+                  <td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{row.percent}%</td>
+                </tr>
+              ))}
+              <tr class="border-t-2 border-[var(--color-border)]">
+                <td class="py-3 px-4 font-semibold">Total</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] font-semibold">{NSP_POWER.totalOverhead_mW} mW</td>
+                <td class="py-3 px-4"></td>
+                <td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] font-semibold text-[var(--color-accent-tertiary)]">{NSP_POWER.totalOverheadPercent}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-[var(--color-text-faint)] mt-4" set:html={`Maximum allowed: ${NSP_POWER.maxAllowedPercent}% &mdash; current overhead is well within budget.`} />
+      </section>
+
+      <!-- PQC Key Sizes -->
+      <section id="pqc" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Post-Quantum Key Sizes</h2>
+        <div class="prose mb-8">
+          <p>
+            Post-quantum algorithms trade larger key and signature sizes for resistance to quantum attacks. The table below shows the size cost of migrating from classical to post-quantum primitives &mdash; and why NSP uses hybrid schemes that combine both.
+          </p>
+        </div>
+
+        <!-- Key Exchange comparison -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">Key Exchange</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Property</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Classical</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Post-Quantum</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-3 px-4 font-medium">Algorithm</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{NSP_PQC_SIZES.keyExchange.classical.algorithm}</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{NSP_PQC_SIZES.keyExchange.postQuantum.algorithm}</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-3 px-4 font-medium">Public Key</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{NSP_PQC_SIZES.keyExchange.classical.publicKey_bytes} bytes</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{NSP_PQC_SIZES.keyExchange.postQuantum.publicKey_bytes} bytes</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-3 px-4 font-medium">Ciphertext</td>
+                <td class="py-3 px-4 text-[var(--color-text-faint)]" set:html="&mdash;" />
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{NSP_PQC_SIZES.keyExchange.postQuantum.ciphertext_bytes} bytes</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-3 px-4 font-medium">Shared Secret</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{NSP_PQC_SIZES.keyExchange.classical.sharedSecret_bytes} bytes</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{NSP_PQC_SIZES.keyExchange.postQuantum.sharedSecret_bytes} bytes</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">
+            Public key size increase: <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)] font-semibold">{NSP_PQC_SIZES.keyExchange.multiplier}x</span>
+          </p>
+        </div>
+
+        <!-- Signatures comparison -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">Digital Signatures</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Property</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Classical</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Post-Quantum</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-3 px-4 font-medium">Algorithm</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{NSP_PQC_SIZES.signatures.classical.algorithm}</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{NSP_PQC_SIZES.signatures.postQuantum.algorithm}</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-3 px-4 font-medium">Public Key</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{NSP_PQC_SIZES.signatures.classical.publicKey_bytes} bytes</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{NSP_PQC_SIZES.signatures.postQuantum.publicKey_bytes} bytes</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-3 px-4 font-medium">Signature</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{NSP_PQC_SIZES.signatures.classical.signature_bytes} bytes</td>
+                <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{NSP_PQC_SIZES.signatures.postQuantum.signature_bytes} bytes</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">
+            Signature size increase: <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)] font-semibold">{NSP_PQC_SIZES.signatures.multiplier}x</span>
+          </p>
+        </div>
+
+        <!-- Additional algorithms -->
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="glass rounded-xl p-6">
+            <h4 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Hash-Based Signatures</h4>
+            <p class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] mb-2">{NSP_PQC_SIZES.hashBased.algorithm}</p>
+            <div class="space-y-1 text-sm text-[var(--color-text-muted)]">
+              <p>Public key: <span class="font-[family-name:var(--font-mono)]">{NSP_PQC_SIZES.hashBased.publicKey_bytes} bytes</span></p>
+              <p>Signature: <span class="font-[family-name:var(--font-mono)]">{NSP_PQC_SIZES.hashBased.signature_bytes} bytes</span></p>
+            </div>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2">{NSP_PQC_SIZES.hashBased.usage}</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h4 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Symmetric Encryption</h4>
+            <p class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] mb-2">{NSP_PQC_SIZES.symmetric.algorithm}</p>
+            <div class="space-y-1 text-sm text-[var(--color-text-muted)]">
+              <p>Key: <span class="font-[family-name:var(--font-mono)]">{NSP_PQC_SIZES.symmetric.key_bits} bits</span></p>
+              <p>Nonce: <span class="font-[family-name:var(--font-mono)]">{NSP_PQC_SIZES.symmetric.nonce_bytes} bytes</span> / Tag: <span class="font-[family-name:var(--font-mono)]">{NSP_PQC_SIZES.symmetric.tag_bytes} bytes</span></p>
+            </div>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2">{NSP_PQC_SIZES.symmetric.quantumNote}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pipeline -->
+      <section id="pipeline" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Frame Pipeline</h2>
+        <div class="prose mb-8">
+          <p>
+            Every neural data frame passes through a fixed five-stage pipeline. The order is non-negotiable: compress first (to reduce ciphertext size), compute the QI integrity score (on raw data, before encryption obscures anomalies), build the frame header, encrypt the payload, then sign the entire frame with a Merkle tree for efficient batch verification.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          {NSP_PIPELINE.map((step, i) => (
+            <div>
+              <div class="glass rounded-xl p-5 flex items-center gap-4">
+                <span class="text-xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] w-8 text-center shrink-0">
+                  {i + 1}
+                </span>
+                <div class="h-px flex-1 border-t border-dashed border-[var(--color-border)]"></div>
+                <span class="text-base font-semibold font-[family-name:var(--font-heading)]">{step}</span>
+              </div>
+              {i < NSP_PIPELINE.length - 1 && (
+                <div class="flex justify-center py-1">
+                  <span class="text-[var(--color-text-faint)] text-lg" set:html="&darr;" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div class="glass rounded-xl p-5 mt-6 border-l-3" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Why this order?</strong> Compressing before encryption avoids ciphertext expansion. Computing QI before encryption ensures anomaly detection operates on plaintext signals. Signing last covers the entire frame &mdash; header, ciphertext, and QI score &mdash; so any tampering is detectable.
+          </p>
+        </div>
+      </section>
+
+      <!-- Specification -->
+      <section id="spec" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Specification</h2>
+        <div class="prose mb-8">
+          <p>
+            The full NSP specification is published as an open RFC-style document covering frame format, handshake protocol, key lifecycle, error handling, and compliance requirements. It is currently in <strong>{NSP_STATUS}</strong> status and open for peer review.
+          </p>
+          <p>
+            Key lifecycle parameters:
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-8">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Device Lifetime</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.deviceLifetime_years} years</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Session Key Rotation</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.sessionKeyRotation_seconds}s</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">DRK Rotation (Max)</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.drkRotation_days} days</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">DRK Rotation (Recommended)</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.drkRotation_recommended_days} days</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>
+            The specification is maintained alongside the QIF framework. For the complete document, see the <a href="https://mindloft.org/whitepaper/" target="_blank" rel="noopener noreferrer">QIF Whitepaper</a> which includes the NSP specification as a companion protocol.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>

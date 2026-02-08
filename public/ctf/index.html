@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DKB9RWW0C2');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QInnovate</title>
+  <meta name="description" content="QInnovate — Securing the Neural Frontier.">
+  <meta property="og:title" content="QInnovate">
+  <meta property="og:description" content="Securing the Neural Frontier.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qinnovate.com/">
+  <meta property="og:image" content="https://qinnovate.com/mindloft/images/ONI_Banner_Logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QInnovate">
+  <meta name="twitter:description" content="Securing the Neural Frontier.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0f'/><text x='50' y='62' font-family='Arial' font-size='48' font-weight='bold' fill='%2300e5ff' text-anchor='middle'>Q</text></svg>">
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com https://www.googletagmanager.com;
+                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                 img-src 'self' https: data:;
+                 connect-src 'self' https://www.google-analytics.com https://analytics.google.com;
+                 font-src 'self' https://fonts.gstatic.com;
+                 media-src 'self';
+                 object-src 'none';
+                 base-uri 'self';
+                 form-action 'self' mailto:;
+                 frame-ancestors 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKB9RWW0C2');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Three.js (pinned version with SRI) -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"
+          integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O"
+          crossorigin="anonymous"></script>
+
+  <!-- GSAP (for resonance explosion) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+          integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
+          crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #0e0e16;
+      --bg-card: #12121c;
+      --bg-card-hover: #181826;
+      --cyan: #00e5ff;
+      --cyan-dim: #00a2b3;
+      --purple: #b44aff;
+      --purple-dim: #7b2fbf;
+      --text-primary: #e8e8ef;
+      --text-secondary: #8888a0;
+      --text-muted: #55556a;
+      --border: #1e1e30;
+      --glow-cyan: 0 0 30px rgba(0, 229, 255, 0.3);
+      --glow-purple: 0 0 30px rgba(180, 74, 255, 0.3);
+      --gradient-accent: linear-gradient(135deg, var(--cyan), var(--purple));
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* -- Three.js Canvas Background -- */
+    #three-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* -- Mystery Layer -- */
+    .mystery-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .mystery {
+      font-size: clamp(6rem, 15vw, 14rem);
+      font-weight: 200;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      pointer-events: auto;
+      user-select: none;
+      -webkit-user-select: none;
+      position: relative;
+      transition: transform 0.3s ease;
+      text-shadow: 0 0 40px rgba(0, 229, 255, 0.3), 0 0 80px rgba(180, 74, 255, 0.15);
+      animation: mystery-glow 4s ease-in-out infinite;
+    }
+
+    .mystery:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 60px rgba(0, 229, 255, 0.5), 0 0 120px rgba(180, 74, 255, 0.3);
+    }
+
+    .mystery.completed {
+      text-shadow: 0 0 60px rgba(34, 198, 141, 0.6), 0 0 120px rgba(34, 198, 141, 0.3);
+      animation: mystery-glow-teal 4s ease-in-out infinite;
+    }
+
+    @keyframes mystery-glow {
+      0%, 100% { text-shadow: 0 0 40px rgba(0, 229, 255, 0.3), 0 0 80px rgba(180, 74, 255, 0.15); }
+      50% { text-shadow: 0 0 60px rgba(180, 74, 255, 0.4), 0 0 100px rgba(0, 229, 255, 0.2); }
+    }
+
+    @keyframes mystery-glow-teal {
+      0%, 100% { text-shadow: 0 0 40px rgba(34, 198, 141, 0.5), 0 0 80px rgba(34, 198, 141, 0.2); }
+      50% { text-shadow: 0 0 70px rgba(34, 198, 141, 0.7), 0 0 120px rgba(34, 198, 141, 0.35); }
+    }
+
+    /* Score dots */
+    .score-dots {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      pointer-events: none;
+    }
+
+    .score-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid var(--text-muted);
+      background: transparent;
+      transition: all 0.5s ease;
+    }
+
+    .score-dot.filled {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    .score-dot.filled.all-complete {
+      background: #22C68D;
+      border-color: #22C68D;
+      box-shadow: 0 0 8px #22C68D;
+    }
+
+    /* -- Modal Overlay -- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .modal-hint {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    /* Hidden flag input */
+    .flag-input-wrapper {
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    .flag-input {
+      width: 100%;
+      background: transparent;
+      border: 1px solid transparent;
+      color: rgba(255, 255, 255, 0.03);
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      font-family: monospace;
+      outline: none;
+      border-radius: 4px;
+      opacity: 0.03;
+      transition: opacity 0.3s ease, border-color 0.3s ease;
+    }
+
+    .flag-input:focus {
+      opacity: 0.6;
+      border-color: var(--cyan-dim);
+      color: var(--cyan);
+    }
+
+    .flag-feedback {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+      color: var(--cyan);
+    }
+
+    /* -- Recruitment Modal -- */
+    .recruit-card {
+      text-align: left;
+    }
+
+    .recruit-card .modal-title {
+      text-align: center;
+    }
+
+    .recruit-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .recruit-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .recruit-input,
+    .recruit-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .recruit-input:focus,
+    .recruit-textarea:focus {
+      border-color: var(--cyan-dim);
+    }
+
+    .recruit-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .recruit-checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .recruit-checkbox-row input[type="checkbox"] {
+      accent-color: var(--cyan);
+    }
+
+    .recruit-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      background: var(--gradient-accent);
+      color: var(--bg-primary);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .recruit-submit:hover {
+      box-shadow: 0 4px 30px rgba(0, 229, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* -- Resonance overlay text -- */
+    .resonance-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .resonance-text {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--cyan);
+      text-shadow: 0 0 30px var(--cyan), 0 0 60px rgba(0, 229, 255, 0.4);
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    /* -- Patience easter egg -- */
+    .patience-text {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8px;
+      color: var(--text-muted);
+      z-index: 60;
+      pointer-events: none;
+      opacity: 0;
+      font-family: monospace;
+    }
+
+    /* -- Accessibility Toggle -- */
+    .a11y-toggle {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1.2rem;
+      background: rgba(18, 18, 28, 0.95);
+      border: 1px solid var(--cyan-dim);
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cyan);
+      transition: all 0.3s ease;
+      -webkit-user-select: none;
+      user-select: none;
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .a11y-toggle:hover {
+      border-color: var(--cyan);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3), 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .a11y-toggle:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    .a11y-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .a11y-toggle-track {
+      width: 36px;
+      height: 20px;
+      border-radius: 100px;
+      background: var(--border);
+      position: relative;
+      transition: background 0.3s ease;
+    }
+
+    .a11y-toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .a11y-toggle.effects-on .a11y-toggle-track {
+      background: var(--cyan-dim);
+    }
+
+    .a11y-toggle.effects-on .a11y-toggle-track::after {
+      left: 19px;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+    }
+
+    .a11y-toggle.effects-on {
+      border-color: var(--border);
+      color: var(--text-secondary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .a11y-toggle.effects-on:hover {
+      border-color: var(--cyan-dim);
+      color: var(--text-primary);
+    }
+
+    /* -- BCI Toggle Easter Egg States -- */
+    .a11y-toggle.egg-hint {
+      border-color: var(--purple) !important;
+      color: var(--purple) !important;
+      box-shadow: 0 0 20px rgba(180, 74, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .a11y-toggle.egg-hint .a11y-toggle-track {
+      background: var(--purple-dim) !important;
+    }
+
+    .a11y-toggle.egg-hint .a11y-toggle-track::after {
+      background: var(--purple) !important;
+      box-shadow: 0 0 6px var(--purple) !important;
+    }
+
+    .a11y-toggle.egg-audio {
+      border-color: var(--purple) !important;
+      color: var(--purple) !important;
+      box-shadow: 0 0 25px rgba(180, 74, 255, 0.5), 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+      gap: 0.5rem;
+    }
+
+    .a11y-toggle.egg-audio .a11y-toggle-track,
+    .a11y-toggle.egg-audio .a11y-label {
+      display: none;
+    }
+
+    .a11y-toggle.egg-audio .a11y-icon {
+      font-size: 1.3rem;
+    }
+
+    @keyframes egg-audio-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(180, 74, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4); }
+      50% { box-shadow: 0 0 35px rgba(180, 74, 255, 0.6), 0 4px 20px rgba(0, 0, 0, 0.5); }
+    }
+
+    .a11y-toggle.egg-playing {
+      animation: egg-audio-pulse 1.5s ease-in-out infinite;
+    }
+
+    /* -- Selection -- */
+    ::selection {
+      background: rgba(0, 229, 255, 0.2);
+      color: #fff;
+    }
+
+    /* -- Intro Animation -- */
+    .mystery-container {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .mystery-container.revealed {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+
+    /* -- prefers-reduced-motion override -- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      #three-canvas {
+        display: none;
+      }
+
+      .mystery {
+        text-shadow: none;
+      }
+
+      .mystery-container {
+        opacity: 1 !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!--
+  ╔═══════════════════════════════════════════════════════════╗
+  ║          N E U R A L   A R C H I T E C T U R E           ║
+  ╠═══════════════════════════════════════════════════════════╣
+  ║                                                           ║
+  ║   L14  ████████████████████████  Identity Layer           ║
+  ║   L13  ██████████████████████    Semantic Layer           ║
+  ║   L12  ████████████████████      Cognitive Session        ║
+  ║   L11  ██████████████████        Cognitive Transport      ║
+  ║   L10  ████████████████          Neural Protocol          ║
+  ║   L9   ██████████████            Signal Processing        ║
+  ║   L8   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  Neural Gateway ⚡       ║
+  ║   L7   ████████████████████████  Application Interface    ║
+  ║   L6   ██████████████████████    Presentation             ║
+  ║   L5   ████████████████████      Session                  ║
+  ║   L4   ██████████████████        Transport                ║
+  ║   L3   ████████████████          Protocol                 ║
+  ║   L2   ██████████████            Signal Processing        ║
+  ║   L1   ████████████              Physical Carrier          ║
+  ║                                                           ║
+  ║   "The first layer is always visible                      ║
+  ║    to those who look."                                    ║
+  ║                                                           ║
+  ║   QI{cur1ous_m1nds_s33_b3yond}                           ║
+  ║                                                           ║
+  ╚═══════════════════════════════════════════════════════════╝
+-->
+
+  <div id="three-canvas" aria-hidden="true"></div>
+
+  <!-- Accessibility toggle -->
+  <button class="a11y-toggle" id="a11y-toggle" aria-label="Toggle BCI-accessible mode" title="Toggle BCI-accessible mode">
+    <span class="a11y-icon" aria-hidden="true">&#9881;</span>
+    <span class="a11y-label">BCI Accessible</span>
+    <span class="a11y-toggle-track"></span>
+  </button>
+
+  <!-- Mystery element (hidden until intro completes or returning visitor) -->
+  <div class="mystery-container" style="visibility:hidden;opacity:0;transform:scale(0.3)">
+    <div class="mystery" id="mystery" role="button" aria-label="Click to interact" tabindex="0">?</div>
+    <div class="score-dots" id="score-dots">
+      <div class="score-dot" data-idx="0"></div>
+      <div class="score-dot" data-idx="1"></div>
+      <div class="score-dot" data-idx="2"></div>
+    </div>
+  </div>
+
+  <!-- Coming Soon Modal -->
+  <div class="modal-overlay" id="modal-coming-soon">
+    <div class="modal-card">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-title">Coming Soon</div>
+      <p class="modal-hint">"Are you just going to click things, or are you going to look deeper?"</p>
+      <div class="flag-input-wrapper">
+        <input type="text" class="flag-input" id="flag-input" placeholder="|" autocomplete="off" spellcheck="false">
+        <div class="flag-feedback" id="flag-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recruitment Modal -->
+  <div class="modal-overlay" id="modal-recruit">
+    <div class="modal-card recruit-card">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-title">Congratulations.</div>
+      <p class="recruit-text">Your creativity is exactly what we're looking for.<br>We're building security for the neural frontier. Interested?</p>
+      <form class="recruit-form" id="recruit-form">
+        <input type="email" class="recruit-input" id="recruit-email" placeholder="your@email.com" required>
+        <label class="recruit-checkbox-row">
+          <input type="checkbox" id="recruit-newsletter">
+          Keep me updated on QInnovate research
+        </label>
+        <textarea class="recruit-textarea" id="recruit-ideas" placeholder="Ideas, feedback, or what drew you here..."></textarea>
+        <button type="submit" class="recruit-submit">Get in Touch &rarr;</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Resonance flag overlay -->
+  <div class="resonance-overlay" id="resonance-overlay">
+    <div class="resonance-text" id="resonance-text"></div>
+  </div>
+
+  <!-- Patience easter egg -->
+  <div class="patience-text" id="patience-text">patience</div>
+
+
+  <script>
+    /* =============================================
+       INTRO ANIMATION CONTROLLER
+       Uses wheel/touch events to accumulate progress.
+       No scroll spacer needed — body stays overflow:hidden.
+       ============================================= */
+    var introState = { active: false, progress: 0, completed: false };
+
+    (function() {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var mysteryContainer = document.querySelector('.mystery-container');
+      var scoreDots = document.getElementById('score-dots');
+      var skipIntro = prefersReduced || localStorage.getItem('qi_intro_done') === 'true';
+
+      // Remove spacer/progress — not needed for wheel-driven approach
+      var spacer = document.getElementById('intro-spacer');
+      var progressBar = document.getElementById('intro-progress');
+      if (spacer) spacer.remove();
+      if (progressBar) progressBar.remove();
+
+      if (skipIntro) {
+        mysteryContainer.style.visibility = 'visible';
+        mysteryContainer.style.opacity = '1';
+        mysteryContainer.style.transform = 'scale(1)';
+        mysteryContainer.classList.add('revealed');
+        introState.completed = true;
+        return;
+      }
+
+      // First visit: activate intro
+      introState.active = true;
+      if (scoreDots) scoreDots.style.display = 'none';
+
+      var progress = 0; // 0→1
+      var chimePlayed = false;
+      var introDone = false;
+
+      function updateIntro() {
+        if (introDone) return;
+
+        // Phase 1 (0→0.7): compress layers
+        if (progress < 0.7) {
+          var compressAmount = (progress / 0.7) * 2.0;
+          window._introSpringOverride = compressAmount;
+          mysteryContainer.style.opacity = '0';
+          mysteryContainer.style.transform = 'scale(0.3)';
+        } else {
+          // Phase 2 (0.7→1.0): layers stay compressed, reveal "?"
+          window._introSpringOverride = 2.0;
+
+          var revealT = Math.min(1, (progress - 0.7) / 0.3);
+          var easedReveal = revealT * revealT;
+          var scale = 0.3 + easedReveal * 0.7;
+          mysteryContainer.style.visibility = 'visible';
+          mysteryContainer.style.opacity = String(easedReveal);
+          mysteryContainer.style.transform = 'scale(' + scale + ')';
+
+          if (!chimePlayed && revealT > 0.1) {
+            chimePlayed = true;
+            try {
+              var chime = new Audio('mindloft-os-standby.mp3');
+              chime.volume = 0.6;
+              chime.play();
+            } catch(e) {}
+          }
+
+          if (revealT >= 0.99 && !introDone) {
+            introDone = true;
+            completeIntro();
+          }
+        }
+      }
+
+      // Wheel drives progress
+      // Normalize: trackpads send many small events (deltaY 1-5),
+      // mouse wheels send fewer large events (deltaY 50-120).
+      // deltaMode 0 = pixels, 1 = lines (~40px), 2 = pages
+      window.addEventListener('wheel', function(e) {
+        if (introDone || !introState.active) return;
+        e.preventDefault();
+        var dy = Math.abs(e.deltaY);
+        if (e.deltaMode === 1) dy *= 40;
+        else if (e.deltaMode === 2) dy *= 800;
+        // Clamp to avoid huge jumps, then scale
+        dy = Math.min(dy, 150);
+        var step = dy * 0.003;
+        if (e.deltaY > 0) {
+          progress = Math.min(1, progress + step);
+        } else {
+          progress = Math.max(0, progress - step);
+        }
+        updateIntro();
+      }, { passive: false });
+
+      // Touch drives progress
+      var touchLastY = 0;
+      window.addEventListener('touchstart', function(e) {
+        if (introDone || !introState.active) return;
+        touchLastY = e.touches[0].clientY;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', function(e) {
+        if (introDone || !introState.active) return;
+        var dy = touchLastY - e.touches[0].clientY; // positive = scroll down
+        touchLastY = e.touches[0].clientY;
+        var step = Math.min(Math.abs(dy), 80) * 0.005;
+        if (dy > 0) {
+          progress = Math.min(1, progress + step);
+        } else {
+          progress = Math.max(0, progress - step);
+        }
+        updateIntro();
+      }, { passive: true });
+
+      function completeIntro() {
+        mysteryContainer.style.opacity = '1';
+        mysteryContainer.style.transform = 'scale(1)';
+        mysteryContainer.classList.add('revealed');
+        if (scoreDots) scoreDots.style.display = '';
+
+        window._introSpringOverride = undefined;
+
+        localStorage.setItem('qi_intro_done', 'true');
+        introState.active = false;
+        introState.completed = true;
+      }
+    })();
+
+    /* =============================================
+       ACCESSIBILITY TOGGLE
+       ============================================= */
+    (function() {
+      var toggle = document.getElementById('a11y-toggle');
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var effectsOn = localStorage.getItem('qinnovate-effects');
+
+      if (prefersReduced) {
+        effectsOn = false;
+      } else if (effectsOn === null) {
+        effectsOn = false;
+      } else {
+        effectsOn = effectsOn === 'true';
+      }
+
+      var label = toggle.querySelector('.a11y-label');
+
+      function applyEffects(on) {
+        document.body.classList.toggle('effects-enabled', on);
+        toggle.classList.toggle('effects-on', on);
+        toggle.setAttribute('aria-pressed', on);
+        label.textContent = on ? 'Effects On' : 'BCI Accessible';
+        if (on) {
+          window.dispatchEvent(new CustomEvent('effects-on'));
+        } else {
+          window.dispatchEvent(new CustomEvent('effects-off'));
+        }
+      }
+
+      applyEffects(effectsOn);
+
+      toggle.addEventListener('click', function() {
+        effectsOn = !effectsOn;
+        localStorage.setItem('qinnovate-effects', effectsOn);
+        applyEffects(effectsOn);
+      });
+    })();
+
+    /* =============================================
+       BCI TOGGLE EASTER EGG
+       ============================================= */
+    (function() {
+      var toggle = document.getElementById('a11y-toggle');
+      var eggClicks = 0;
+      var eggTimer = null;
+      var eggState = 'idle'; // idle, hint, audio, playing
+      var eggAudio = null;
+
+      // Store original toggle content
+      var origIcon = toggle.querySelector('.a11y-icon').innerHTML;
+      var origLabel = toggle.querySelector('.a11y-label').textContent;
+
+      function resetEgg() {
+        eggClicks = 0;
+        eggState = 'idle';
+        toggle.classList.remove('egg-hint', 'egg-audio', 'egg-playing');
+        toggle.querySelector('.a11y-icon').innerHTML = origIcon;
+        toggle.querySelector('.a11y-label').textContent = origLabel;
+        toggle.querySelector('.a11y-label').style.display = '';
+        toggle.querySelector('.a11y-toggle-track').style.display = '';
+        if (eggAudio) {
+          eggAudio.pause();
+          eggAudio = null;
+        }
+      }
+
+      toggle.addEventListener('click', function() {
+        clearTimeout(eggTimer);
+
+        // Reset after inactivity
+        eggTimer = setTimeout(function() {
+          if (eggState !== 'playing') resetEgg();
+        }, 3000);
+
+        if (eggState === 'playing') return;
+
+        if (eggState === 'audio') {
+          // Play the audio
+          eggState = 'playing';
+          toggle.classList.add('egg-playing');
+          toggle.querySelector('.a11y-icon').innerHTML = '&#9654;';
+          eggAudio = new Audio('bci-easter-egg.mp3');
+          eggAudio.play();
+          eggAudio.addEventListener('ended', function() {
+            // Fade out and reset
+            toggle.style.transition = 'opacity 0.5s ease';
+            toggle.style.opacity = '0';
+            setTimeout(function() {
+              resetEgg();
+              toggle.style.opacity = '1';
+            }, 500);
+          });
+          return;
+        }
+
+        eggClicks++;
+
+        if (eggClicks >= 6 && eggState === 'hint') {
+          // Transform to audio button
+          eggState = 'audio';
+          toggle.classList.remove('egg-hint');
+          toggle.classList.add('egg-audio');
+          toggle.querySelector('.a11y-icon').innerHTML = '&#9835;';
+          clearTimeout(eggTimer);
+          // Reset after 8s if not clicked
+          eggTimer = setTimeout(function() {
+            if (eggState === 'audio') resetEgg();
+          }, 8000);
+        } else if (eggClicks >= 3 && eggState === 'idle') {
+          // Purple hint
+          eggState = 'hint';
+          toggle.classList.add('egg-hint');
+        }
+      });
+    })();
+
+    /* =============================================
+       CTF FLAG SYSTEM
+       ============================================= */
+    (function() {
+      var FLAG_HASHES = {
+        flag1: '6ed41d74cd1cdbf645ebeabb4ceb896d8b1bf69b8b17dc0a7cf9784b52896a53',
+        flag2: 'c5536cef856d79ca1ad03de950862cc7fb2ccf99b2d8930c47bc2217743d6821',
+        flag3: 'f660ef0ce92e71183b90ccf5a61f262b7a680fb1c4c5242e8aea48ea40ea21ba'
+      };
+
+      var ctfState = JSON.parse(localStorage.getItem('qi_ctf') || '{"flags":[],"score":0}');
+
+      function saveState() {
+        localStorage.setItem('qi_ctf', JSON.stringify(ctfState));
+      }
+
+      async function sha256(text) {
+        var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text.trim()));
+        return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+      }
+
+      function updateScoreUI() {
+        var dots = document.querySelectorAll('.score-dot');
+        var mysteryEl = document.getElementById('mystery');
+        var allComplete = ctfState.score >= 3;
+
+        dots.forEach(function(dot, i) {
+          if (i < ctfState.score) {
+            dot.classList.add('filled');
+            if (allComplete) dot.classList.add('all-complete');
+          }
+        });
+
+        if (allComplete) {
+          mysteryEl.classList.add('completed');
+        }
+      }
+
+      async function validateFlag(input) {
+        var hex = await sha256(input);
+        for (var key in FLAG_HASHES) {
+          if (FLAG_HASHES[key] === hex && ctfState.flags.indexOf(key) === -1) {
+            ctfState.flags.push(key);
+            ctfState.score = ctfState.flags.length;
+            saveState();
+            updateScoreUI();
+            return key;
+          }
+        }
+        return null;
+      }
+
+      // Expose for other modules
+      window._ctf = {
+        validate: validateFlag,
+        state: ctfState,
+        updateUI: updateScoreUI
+      };
+
+      // Init score dots on load
+      updateScoreUI();
+    })();
+
+    /* =============================================
+       MODAL SYSTEM
+       ============================================= */
+    (function() {
+      var mysteryEl = document.getElementById('mystery');
+      var comingSoon = document.getElementById('modal-coming-soon');
+      var recruit = document.getElementById('modal-recruit');
+      var flagInput = document.getElementById('flag-input');
+      var flagFeedback = document.getElementById('flag-feedback');
+      var recruitForm = document.getElementById('recruit-form');
+
+      function openModal(modal) {
+        modal.classList.add('active');
+        // Focus management
+        setTimeout(function() {
+          if (modal === comingSoon && flagInput) flagInput.focus();
+          if (modal === recruit) {
+            var emailInput = document.getElementById('recruit-email');
+            if (emailInput) emailInput.focus();
+          }
+        }, 100);
+      }
+
+      function closeModal(modal) {
+        modal.classList.remove('active');
+      }
+
+      function closeAll() {
+        closeModal(comingSoon);
+        closeModal(recruit);
+      }
+
+      mysteryEl.addEventListener('click', function() {
+        if (window._ctf.state.score >= 3) {
+          openModal(recruit);
+        } else {
+          openModal(comingSoon);
+        }
+      });
+
+      mysteryEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          mysteryEl.click();
+        }
+      });
+
+      // Close on overlay click
+      [comingSoon, recruit].forEach(function(modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) closeModal(modal);
+        });
+        modal.querySelector('.modal-close').addEventListener('click', function() {
+          closeModal(modal);
+        });
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAll();
+      });
+
+      // Flag input validation
+      var debounceTimer;
+      flagInput.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        var val = flagInput.value;
+        if (!val || val.length < 4) {
+          flagFeedback.textContent = '';
+          return;
+        }
+        debounceTimer = setTimeout(function() {
+          window._ctf.validate(val).then(function(result) {
+            if (result) {
+              flagFeedback.textContent = 'Flag captured: ' + result.toUpperCase().replace('FLAG', 'Flag ');
+              flagFeedback.style.color = '#22C68D';
+              flagInput.value = '';
+              setTimeout(function() {
+                flagFeedback.textContent = '';
+                flagFeedback.style.color = '';
+                // If all 3 now, close and reopen as recruit
+                if (window._ctf.state.score >= 3) {
+                  closeModal(comingSoon);
+                }
+              }, 2000);
+            }
+          });
+        }, 300);
+      });
+
+      // Recruitment form
+      recruitForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = document.getElementById('recruit-email').value;
+        var newsletter = document.getElementById('recruit-newsletter').checked;
+        var ideas = document.getElementById('recruit-ideas').value;
+
+        var subject = 'CTF Complete';
+        var body = 'Email: ' + email + '\n\n';
+        body += 'Newsletter: ' + (newsletter ? 'Yes' : 'No') + '\n\n';
+        if (ideas) body += 'Ideas/Feedback:\n' + ideas + '\n\n';
+        body += 'Flags captured: ' + window._ctf.state.flags.join(', ');
+
+        window.location.href = 'mailto:kevin@qinnovate.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      });
+
+      // Triple-click easter egg on mystery
+      var clickCount = 0;
+      var clickTimer;
+      mysteryEl.addEventListener('click', function() {
+        clickCount++;
+        clearTimeout(clickTimer);
+        if (clickCount >= 3) {
+          clickCount = 0;
+          var p = document.getElementById('patience-text');
+          p.style.opacity = '1';
+          setTimeout(function() { p.style.opacity = '0'; }, 1000);
+          return;
+        }
+        clickTimer = setTimeout(function() { clickCount = 0; }, 400);
+      });
+    })();
+
+    /* =============================================
+       FLAG 2: CONSOLE CHALLENGE (PERSISTENCE)
+       ============================================= */
+    (function() {
+      // Styled console messages on load
+      console.log('%c\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557', 'color:#00e5ff;font-family:monospace');
+      console.log('%c\u2551  NEURAL GATEWAY \u2014 L8 FIREWALL            \u2551', 'color:#00e5ff;font-family:monospace');
+      console.log('%c\u2551  Status: MONITORING                      \u2551', 'color:#d97706;font-family:monospace');
+      console.log('%c\u2551  Try: window.handshake()                 \u2551', 'color:#b44aff;font-family:monospace');
+      console.log('%c\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d', 'color:#00e5ff;font-family:monospace');
+
+      function typeWriter(text, color, delay) {
+        return new Promise(function(resolve) {
+          var chars = '';
+          var i = 0;
+          function next() {
+            if (i < text.length) {
+              chars += text[i];
+              console.clear();
+              console.log('%c' + chars + '\u2588', 'color:' + color + ';font-family:monospace;font-size:14px');
+              i++;
+              setTimeout(next, delay);
+            } else {
+              console.clear();
+              console.log('%c' + text, 'color:' + color + ';font-family:monospace;font-size:14px');
+              resolve();
+            }
+          }
+          next();
+        });
+      }
+
+      window.handshake = function(freq) {
+        if (freq === undefined || freq === null) {
+          return 'Protocol mismatch. Expected frequency: ???';
+        }
+        if (freq !== 14) {
+          return 'Frequency ' + freq + ' rejected. The architecture defines the frequency.';
+        }
+
+        // Correct answer
+        console.log('%c\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557', 'color:#22C68D;font-family:monospace');
+        console.log('%c\u2551  HANDSHAKE ACCEPTED                      \u2551', 'color:#22C68D;font-family:monospace');
+        console.log('%c\u2551  Frequency: 14 layers confirmed           \u2551', 'color:#22C68D;font-family:monospace');
+        console.log('%c\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d', 'color:#22C68D;font-family:monospace');
+
+        var flag = 'QI{p3rs1st3nc3_cr4cks_th3_c0d3}';
+        setTimeout(function() {
+          console.log('%c' + flag, 'color:#00e5ff;font-family:monospace;font-size:16px;text-shadow:0 0 10px #00e5ff');
+          console.log('%cSubmit this flag in the ? modal to claim it.', 'color:#8888a0;font-family:monospace;font-size:11px');
+          // Auto-validate
+          window._ctf.validate(flag);
+        }, 500);
+
+        return 'Access granted.';
+      };
+
+      // "help" keylogger easter egg
+      var helpBuffer = '';
+      document.addEventListener('keydown', function(e) {
+        // Only track when no modal is open and no input is focused
+        if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+
+        helpBuffer += e.key.toLowerCase();
+        if (helpBuffer.length > 10) helpBuffer = helpBuffer.slice(-10);
+
+        if (helpBuffer.endsWith('help')) {
+          console.log('%c\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510', 'color:#b44aff;font-family:monospace');
+          console.log('%c\u2502  Three gates. Three keys.            \u2502', 'color:#b44aff;font-family:monospace');
+          console.log('%c\u2502  The curious read the source.        \u2502', 'color:#b44aff;font-family:monospace');
+          console.log('%c\u2502  The persistent talk to the gateway. \u2502', 'color:#b44aff;font-family:monospace');
+          console.log('%c\u2502  The resonant know the code.         \u2502', 'color:#b44aff;font-family:monospace');
+          console.log('%c\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518', 'color:#b44aff;font-family:monospace');
+          helpBuffer = '';
+        }
+      });
+
+      // Window width 1337 easter egg
+      function checkWidth() {
+        if (window.innerWidth === 1337) {
+          console.log('%c// nice width', 'color:#55556a;font-family:monospace;font-style:italic');
+        }
+      }
+      window.addEventListener('resize', checkWidth);
+      checkWidth();
+    })();
+
+    /* =============================================
+       FLAG 3: KONAMI CODE (RESONANCE)
+       ============================================= */
+    (function() {
+      var konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+      var konamiPos = 0;
+      var resonanceActive = false;
+
+      document.addEventListener('keydown', function(e) {
+        // Don't trigger in inputs
+        if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+
+        var expected = konamiSequence[konamiPos];
+        if (e.key === expected || e.key.toLowerCase() === expected) {
+          konamiPos++;
+          if (konamiPos === konamiSequence.length) {
+            konamiPos = 0;
+            if (!resonanceActive) triggerResonance();
+          }
+        } else {
+          konamiPos = 0;
+        }
+      });
+
+      function triggerResonance() {
+        if (resonanceActive) return;
+        resonanceActive = true;
+
+        // Signal Three.js to enter resonance mode
+        window.dispatchEvent(new CustomEvent('resonance-start'));
+
+        // After 3s: show flag text
+        setTimeout(function() {
+          var overlay = document.getElementById('resonance-overlay');
+          var text = document.getElementById('resonance-text');
+          var flag = 'QI{r3s0nanc3_unl0cks_th3_futur3}';
+
+          overlay.style.display = 'flex';
+          text.textContent = flag;
+
+          // Fade in
+          requestAnimationFrame(function() {
+            text.style.opacity = '1';
+          });
+
+          // Auto validate
+          window._ctf.validate(flag);
+
+          // After 5s: fade out and reset
+          setTimeout(function() {
+            text.style.opacity = '0';
+            setTimeout(function() {
+              overlay.style.display = 'none';
+              window.dispatchEvent(new CustomEvent('resonance-end'));
+              resonanceActive = false;
+            }, 1000);
+          }, 5000);
+        }, 3000);
+      }
+    })();
+
+    /* =============================================
+       THREE.JS: 14-LAYER CONCENTRIC SPHERES
+       ============================================= */
+    (function() {
+      var threeContainer = document.getElementById('three-canvas');
+      if (!threeContainer || typeof THREE === 'undefined') return;
+
+      var renderer, scene, camera, autoRotateGroup, parallaxGroup;
+      var shellMeshes = [], shellUniforms = [];
+      var dustCloud;
+      var clock;
+      var animId = null;
+      var running = false;
+
+      var isMobile = window.innerWidth <= 768;
+
+      var layerConfigs = [
+        { id:'L8',  r:1.72, c:[0.00, 0.60, 0.70], fp:2.0 },
+        { id:'L9',  r:1.52, c:[0.00, 0.78, 0.85], fp:2.8 },
+        { id:'L10', r:1.38, c:[0.15, 0.72, 0.90], fp:2.6 },
+        { id:'L11', r:1.24, c:[0.30, 0.55, 0.92], fp:2.4 },
+        { id:'L12', r:1.10, c:[0.45, 0.40, 0.90], fp:2.3 },
+        { id:'L13', r:0.96, c:[0.58, 0.30, 0.88], fp:2.2 },
+        { id:'L14', r:0.82, c:[0.71, 0.29, 1.00], fp:2.0 },
+      ];
+
+      var mobileIdx = [0, 2, 4, 6];
+      var activeLayers = isMobile ? mobileIdx.map(function(i) { return layerConfigs[i]; }) : layerConfigs;
+      var originalRadii = activeLayers.map(function(l) { return l.r; });
+      var totalLayers = activeLayers.length;
+
+      // Resonance mode state
+      var resonanceMode = false;
+      var resonancePhase = 0; // 0=idle, 1=converge, 2=explode
+
+      // Fresnel shader
+      var fresnelVert = [
+        'varying vec3 vNormal;',
+        'varying vec3 vViewPos;',
+        'varying vec3 vWorldPos;',
+        'void main() {',
+        '  vNormal = normalize(normalMatrix * normal);',
+        '  vec4 mv = modelViewMatrix * vec4(position, 1.0);',
+        '  vViewPos = -mv.xyz;',
+        '  vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;',
+        '  gl_Position = projectionMatrix * mv;',
+        '}'
+      ].join('\n');
+
+      var fresnelFrag = [
+        'uniform vec3 uColor;',
+        'uniform float uOpacity;',
+        'uniform float uFresnelPower;',
+        'uniform float uGlowIntensity;',
+        'uniform float uTime;',
+        'uniform float uActiveGlow;',
+        'varying vec3 vNormal;',
+        'varying vec3 vViewPos;',
+        'varying vec3 vWorldPos;',
+        'void main() {',
+        '  vec3 vd = normalize(vViewPos);',
+        '  float fresnel = pow(1.0 - abs(dot(vd, vNormal)), uFresnelPower);',
+        '  float shimmer = 1.0 + 0.08 * sin(uTime * 2.0 + vNormal.x * 12.0);',
+        '  float ripple1 = sin(vWorldPos.x * 4.0 + uTime * 0.8) * cos(vWorldPos.z * 3.5 + uTime * 0.6);',
+        '  float ripple2 = sin(vWorldPos.x * 6.0 - uTime * 0.5 + 1.7) * cos(vWorldPos.z * 5.0 + uTime * 0.4);',
+        '  float poolEffect = 0.5 + 0.3 * ripple1 + 0.2 * ripple2;',
+        '  float electricPool = mix(1.0, poolEffect * 1.4 + 0.3, uActiveGlow);',
+        '  float outerGlow = pow(fresnel, 1.2) * uActiveGlow;',
+        '  vec3 glowColor = mix(uColor, vec3(1.0), outerGlow * 0.6);',
+        '  float alpha = fresnel * uOpacity * shimmer * electricPool;',
+        '  alpha += outerGlow * 0.35;',
+        '  vec3 col = glowColor * (1.0 + fresnel * uGlowIntensity + outerGlow * 1.5);',
+        '  gl_FragColor = vec4(col, alpha);',
+        '}'
+      ].join('\n');
+
+      // Gateway shader (for L8)
+      var gatewayFrag = [
+        'uniform vec3 uColor;',
+        'uniform float uOpacity;',
+        'uniform float uTime;',
+        'uniform float uActiveGlow;',
+        'varying vec3 vNormal;',
+        'varying vec3 vViewPos;',
+        'varying vec3 vWorldPos;',
+        'void main() {',
+        '  vec3 vd = normalize(vViewPos);',
+        '  float fresnel = pow(1.0 - abs(dot(vd, vNormal)), 2.5);',
+        '  float pulse = 0.6 + 0.4 * sin(uTime * 3.0);',
+        '  float energy = fresnel * pulse;',
+        '  float scan = 0.5 + 0.5 * sin(vNormal.y * 20.0 + uTime * 4.0);',
+        '  energy += scan * 0.15 * fresnel;',
+        '  float ripple1 = sin(vWorldPos.x * 3.0 + uTime * 0.6) * cos(vWorldPos.z * 2.5 + uTime * 0.4);',
+        '  float ripple2 = sin(vWorldPos.x * 5.0 - uTime * 0.35 + 2.1) * cos(vWorldPos.z * 4.0 + uTime * 0.3);',
+        '  float poolEffect = 0.5 + 0.3 * ripple1 + 0.2 * ripple2;',
+        '  float electricPool = mix(1.0, poolEffect * 1.6 + 0.2, uActiveGlow);',
+        '  float outerGlow = pow(fresnel, 1.0) * uActiveGlow;',
+        '  vec3 glowColor = mix(uColor, vec3(1.0, 0.95, 0.85), outerGlow * 0.5);',
+        '  energy *= electricPool;',
+        '  energy += outerGlow * 0.4;',
+        '  vec3 col = glowColor * (1.0 + energy * 2.0 + outerGlow * 2.0);',
+        '  gl_FragColor = vec4(col, energy * uOpacity + outerGlow * 0.3);',
+        '}'
+      ].join('\n');
+
+      function initScene() {
+        renderer = new THREE.WebGLRenderer({
+          alpha: true,
+          antialias: !isMobile,
+          powerPreference: 'high-performance'
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x0a0a0f, 1);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
+        threeContainer.appendChild(renderer.domElement);
+
+        scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x0a0a0f, 0.035);
+        camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 1.07, 7.87);
+
+        autoRotateGroup = new THREE.Group();
+        parallaxGroup = new THREE.Group();
+        scene.add(autoRotateGroup);
+        autoRotateGroup.add(parallaxGroup);
+        autoRotateGroup.position.y = 0.5;
+
+        scene.add(new THREE.AmbientLight(0x0a1a2a, 0.3));
+        var keyLight = new THREE.PointLight(0x00e5ff, 2.0, 25);
+        keyLight.position.set(4, 3, 5);
+        scene.add(keyLight);
+        var fillLight = new THREE.PointLight(0xb44aff, 1.2, 20);
+        fillLight.position.set(-3, -2, 3);
+        scene.add(fillLight);
+        var rimLight = new THREE.PointLight(0x00e5ff, 1.5, 20);
+        rimLight.position.set(0, 1, -5);
+        scene.add(rimLight);
+
+        var shellGeo = new THREE.SphereGeometry(1, isMobile ? 32 : 64, isMobile ? 24 : 48);
+
+        activeLayers.forEach(function(layer, idx) {
+          var isGW = (idx === 0);
+          var u = {
+            uColor: { value: new THREE.Vector3(layer.c[0], layer.c[1], layer.c[2]) },
+            uOpacity: { value: isGW ? 0.7 : 0.45 },
+            uFresnelPower: { value: layer.fp },
+            uGlowIntensity: { value: isGW ? 2.5 : 1.2 },
+            uTime: { value: 0 },
+            uActiveGlow: { value: 0.0 }
+          };
+          var mat = new THREE.ShaderMaterial({
+            uniforms: u,
+            vertexShader: fresnelVert,
+            fragmentShader: isGW ? gatewayFrag : fresnelFrag,
+            transparent: true,
+            side: THREE.FrontSide,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+          });
+          var mesh = new THREE.Mesh(shellGeo, mat);
+          mesh.scale.setScalar(layer.r);
+          parallaxGroup.add(mesh);
+          shellMeshes.push(mesh);
+          shellUniforms.push(u);
+        });
+
+        // Ambient Dust
+        var dustCount = isMobile ? 80 : 200;
+        var dPos = new Float32Array(dustCount * 3);
+        for (var i = 0; i < dustCount; i++) {
+          dPos[i * 3]     = (Math.random() - 0.5) * 10;
+          dPos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+          dPos[i * 3 + 2] = (Math.random() - 0.5) * 6;
+        }
+        var dustGeo = new THREE.BufferGeometry();
+        dustGeo.setAttribute('position', new THREE.BufferAttribute(dPos, 3));
+        dustCloud = new THREE.Points(dustGeo, new THREE.PointsMaterial({
+          color: 0x00c8e5, size: 0.015, transparent: true, opacity: 0.3,
+          depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+        }));
+        scene.add(dustCloud);
+
+        clock = new THREE.Clock();
+      }
+
+      // Mouse parallax
+      var mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', function(e) {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      // Spring compression state
+      var springCompress = 0;
+      var springTarget = 0;
+      var rippleWavePos = 0;
+      var rippleIntensity = 0;
+
+      window.addEventListener('wheel', function(e) {
+        if (!running || resonanceMode) return;
+        if (window._introSpringOverride !== undefined) return;
+        if (e.deltaY < 0) {
+          var t01 = springTarget / 2.0;
+          var scrollRate = 0.002 + t01 * t01 * 0.006;
+          springTarget = Math.min(2.0, springTarget + Math.abs(e.deltaY) * scrollRate);
+          if (springTarget > 0.3) {
+            rippleWavePos += Math.abs(e.deltaY) * 0.008;
+            rippleIntensity = Math.min(1, rippleIntensity + Math.abs(e.deltaY) * 0.015);
+          }
+        } else if (e.deltaY > 0) {
+          springTarget = Math.max(0, springTarget - Math.abs(e.deltaY) * 0.006);
+        }
+      }, { passive: true });
+
+      // Touch support for spring
+      var touchStartY = 0;
+      window.addEventListener('touchstart', function(e) {
+        if (window._introSpringOverride !== undefined) return;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      window.addEventListener('touchmove', function(e) {
+        if (!running || resonanceMode) return;
+        if (window._introSpringOverride !== undefined) return;
+        var dy = e.touches[0].clientY - touchStartY;
+        touchStartY = e.touches[0].clientY;
+        if (dy > 0) {
+          var t01t = springTarget / 2.0;
+          var touchRate = 0.002 + t01t * t01t * 0.006;
+          springTarget = Math.min(2.0, springTarget + dy * touchRate);
+          if (springTarget > 0.3) {
+            rippleWavePos += dy * 0.008;
+            rippleIntensity = Math.min(1, rippleIntensity + dy * 0.015);
+          }
+        } else if (dy < 0) {
+          springTarget = Math.max(0, springTarget + dy * 0.006);
+        }
+      }, { passive: true });
+
+      // Resonance event handlers
+      window.addEventListener('resonance-start', function() {
+        resonanceMode = true;
+        resonancePhase = 1;
+        // Force spring to max for convergence
+        springTarget = 2.0;
+      });
+
+      window.addEventListener('resonance-end', function() {
+        resonancePhase = 0;
+        resonanceMode = false;
+        springTarget = 0;
+        springCompress = 0;
+        // Reset shell opacities
+        shellMeshes.forEach(function(mesh, i) {
+          mesh.material.uniforms.uOpacity.value = (i === 0) ? 0.7 : 0.45;
+          mesh.scale.setScalar(originalRadii[i]);
+        });
+      });
+
+      // Resize handler
+      function onResize() {
+        if (!renderer) return;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+      window.addEventListener('resize', onResize);
+
+      // Animation loop
+      function animate() {
+        animId = requestAnimationFrame(animate);
+
+        var t = clock.getElapsedTime();
+
+        shellUniforms.forEach(function(u) { u.uTime.value = t; });
+
+        // Auto-rotation (faster during resonance)
+        var rotSpeed = resonanceMode ? 0.015 : 0.002;
+        autoRotateGroup.rotation.y += rotSpeed;
+        autoRotateGroup.rotation.x = Math.sin(t * 0.15) * 0.08;
+
+        // Mouse parallax
+        var parallaxStr = 1.0;
+        if (springCompress > 0.05) {
+          var springParallax = Math.min(1, springCompress * 2);
+          parallaxStr = Math.max(parallaxStr, springParallax);
+        }
+        var tiltMultX = 0.20;
+        var tiltMultY = 0.08;
+        if (springCompress > 0.05) {
+          var springTiltBoost = Math.min(1, springCompress * 2);
+          tiltMultX = 2.0 + springTiltBoost * 1.0;
+          tiltMultY = 0.25 + springTiltBoost * 0.2;
+        }
+
+        if (springCompress < 0.05) {
+          var autoTiltX = Math.sin(t * 0.25) * 0.04 + mouseY * tiltMultX * parallaxStr;
+          var autoTiltY = Math.sin(t * 0.15) * 0.01 + mouseX * tiltMultY * parallaxStr;
+          parallaxGroup.rotation.x += (autoTiltX - parallaxGroup.rotation.x) * 0.06;
+          parallaxGroup.rotation.y += (autoTiltY - parallaxGroup.rotation.y) * 0.04;
+        } else {
+          parallaxGroup.rotation.x *= 0.92;
+          parallaxGroup.rotation.y *= 0.92;
+        }
+
+        // Spring physics
+        if (window._introSpringOverride !== undefined) {
+          // Intro: scroll drives spring directly, no decay
+          springTarget = window._introSpringOverride;
+          springCompress += (springTarget - springCompress) * 0.12;
+        } else {
+          springTarget *= 0.992;
+          springCompress += (springTarget - springCompress) * 0.08;
+        }
+        if (springCompress < 0.2) { rippleWavePos = 0; rippleIntensity = 0; }
+        rippleIntensity *= 0.97;
+
+        // Resonance: hold spring at max during convergence phase
+        if (resonanceMode && resonancePhase === 1) {
+          springTarget = 2.0;
+          springCompress += (2.0 - springCompress) * 0.15;
+        }
+
+        // Per-shell animation
+        var stackSpacing = 0.4;
+        var heroBreathing = (springCompress < 0.01);
+
+        shellMeshes.forEach(function(mesh, i) {
+          var origR = originalRadii[i];
+          var layer = activeLayers[i];
+          var isGW = (i === 0);
+          var breathing = 1 + Math.sin(t * 0.6 + i * 0.5) * 0.006;
+
+          var stackY = (i - (totalLayers - 1) / 2) * stackSpacing;
+
+          // Spring coil compression
+          if (springCompress > 0.001 && i > 0) {
+            var stepsAboveAnchor = i;
+            var maxSteps = totalLayers - 1;
+            var springRatio = (stepsAboveAnchor / maxSteps);
+            springRatio = springRatio * springRatio;
+            var anchorY = (0 - (totalLayers - 1) / 2) * stackSpacing;
+            var pullAmount = (stackY - anchorY) * springRatio * springCompress;
+            stackY -= pullAmount;
+          }
+
+          // Tunnel perspective growth
+          var scaleExtra = 1.0;
+          if (springCompress > 0.01) {
+            var depthRatio = i / (totalLayers - 1);
+            var baseGrow = 0.25;
+            var extraGrow = 0.45;
+            scaleExtra = 1 + springCompress * (baseGrow + depthRatio * extraGrow);
+          }
+
+          var mp = 0.874;
+          var discScaleY = origR * breathing * (1 - mp * 0.92);
+          var stackScaleXZ = origR * breathing * scaleExtra;
+
+          mesh.scale.set(stackScaleXZ, discScaleY, stackScaleXZ);
+          mesh.position.set(0, stackY * mp, 0);
+
+          // Sphere formation at peak compression
+          if (springCompress > 0.6) {
+            var sphereBlend = Math.min(1, (springCompress - 0.6) / 0.4);
+            sphereBlend = sphereBlend * sphereBlend;
+
+            var centerY = 0;
+            mesh.position.y += (centerY - mesh.position.y) * sphereBlend;
+            mesh.position.x *= (1 - sphereBlend * 0.8);
+            mesh.position.z *= (1 - sphereBlend * 0.8);
+
+            var currentXZ = mesh.scale.x;
+            var currentY = mesh.scale.y;
+            mesh.scale.y = currentY + (currentXZ - currentY) * sphereBlend;
+
+            var sphereR = origR * breathing;
+            mesh.scale.x += (sphereR - mesh.scale.x) * sphereBlend * 0.7;
+            mesh.scale.y += (sphereR - mesh.scale.y) * sphereBlend * 0.7;
+            mesh.scale.z += (sphereR - mesh.scale.z) * sphereBlend * 0.7;
+
+            mesh.rotation.x *= (1 - sphereBlend);
+            mesh.rotation.y *= (1 - sphereBlend);
+          }
+
+          // Per-layer mouse parallax during spring
+          if (springCompress > 0.05 && !resonanceMode) {
+            var l14Idx = totalLayers - 1;
+            var distFromCenter = Math.abs(i - l14Idx);
+            var layerParallax = (distFromCenter / l14Idx) * Math.min(1, springCompress * 2);
+            mesh.position.x += mouseX * layerParallax * 0.4;
+            mesh.position.y += -mouseY * layerParallax * 0.3;
+          }
+
+          // White ripple wave
+          if (rippleIntensity > 0.01 && springCompress > 0.3 && shellUniforms[i]) {
+            var layerPos = (totalLayers - 1 - i) / (totalLayers - 1);
+            var waveFront = (rippleWavePos * 0.8) % 1.4;
+            var dist = Math.abs(layerPos - waveFront);
+            dist = Math.min(dist, Math.abs(layerPos - waveFront + 1.4));
+            dist = Math.min(dist, Math.abs(layerPos - waveFront - 1.4));
+            var wave = Math.exp(-dist * dist * 40) * rippleIntensity;
+            var c = shellUniforms[i].uColor.value;
+            c.x += (1.0 - c.x) * wave * 0.7;
+            c.y += (1.0 - c.y) * wave * 0.7;
+            c.z += (1.0 - c.z) * wave * 0.7;
+            shellUniforms[i].uGlowIntensity.value += wave * 4.0;
+            shellUniforms[i].uOpacity.value += wave * 0.3;
+          }
+
+          // Hero breathing
+          if (heroBreathing && !resonanceMode) {
+            var stepsFromTop = (totalLayers - 1) - i;
+            var wavePhase = stepsFromTop * 0.4;
+            var glowPulse = (Math.sin(t * 0.6 - wavePhase) + 1) * 0.5;
+            glowPulse = glowPulse * glowPulse;
+            glowPulse *= 0.35;
+
+            var bcc = layer.c;
+            if (isGW) {
+              var l8Cycle = (Math.sin(t * 0.25) + 1.0) * 0.5;
+              var l8A = [0.00, 0.55, 0.75];
+              var l8B = [0.00, 0.70, 0.65];
+              bcc = [
+                l8A[0] + (l8B[0] - l8A[0]) * l8Cycle,
+                l8A[1] + (l8B[1] - l8A[1]) * l8Cycle,
+                l8A[2] + (l8B[2] - l8A[2]) * l8Cycle
+              ];
+            }
+
+            var gp = isGW ? 0 : glowPulse;
+
+            var wavePos2 = (Math.sin(t * 0.3) + 1.0) * 0.5 * (totalLayers - 1);
+            var waveDist = Math.abs(i - wavePos2);
+            var colorBoost = Math.max(0, 1.0 - waveDist * 0.25);
+            colorBoost = colorBoost * 0.6;
+            var cb = isGW ? 0 : colorBoost;
+
+            shellUniforms[i].uColor.value.set(
+              bcc[0] + (1.0 - bcc[0]) * gp + (bcc[0] - 0.5) * cb * 0.5,
+              bcc[1] + (1.0 - bcc[1]) * gp + (bcc[1] - 0.5) * cb * 0.5,
+              bcc[2] + (1.0 - bcc[2]) * gp + (bcc[2] - 0.5) * cb * 0.5
+            );
+            shellUniforms[i].uGlowIntensity.value = 1.5 + glowPulse * 2.0 + cb * 1.5;
+            shellUniforms[i].uOpacity.value = 0.6 + glowPulse * 0.2 + cb * 0.15;
+
+            if (i === totalLayers - 1 || isGW) {
+              shellUniforms[i].uActiveGlow.value = 0.3 + glowPulse * 0.4;
+            }
+
+            var ripplePhase = i * 0.45;
+            var ripple1 = Math.sin(t * 0.5 - ripplePhase) * 0.004;
+            var ripple2 = Math.sin(t * 0.8 - ripplePhase * 1.3) * 0.002;
+            var rippleScale = 1.0 + ripple1 + ripple2;
+            mesh.scale.x *= rippleScale;
+            mesh.scale.z *= rippleScale;
+
+            var layerRatio = i / (totalLayers - 1);
+            var expCompress = Math.pow(layerRatio, 2.5);
+            var accPhase = i * 0.35;
+            var accBreathAmp = (0.012 + expCompress * 0.16);
+            var accBreath = Math.sin(t * 0.4 - accPhase) * accBreathAmp;
+            mesh.position.y += accBreath;
+
+            var invRatio = 1.0 - layerRatio;
+            var compressAmt = Math.abs(accBreath) / 0.30;
+            var scaleBoostVal = 1.0 + (1.0 - compressAmt) * invRatio * 0.06;
+            mesh.scale.x *= scaleBoostVal;
+            mesh.scale.z *= scaleBoostVal;
+
+          } else if (!resonanceMode) {
+            // Spring active: color cycling
+            if (springCompress > 0.01) {
+              var stepsFromL14 = (totalLayers - 1) - i;
+              var layerPhase = stepsFromL14 * 0.15;
+              var l14SpeedBoost = (stepsFromL14 === 0) ? springCompress * springCompress * 1.5 : 0;
+              var mtPos = (springCompress * 0.6 + t * (0.25 + l14SpeedBoost) + layerPhase) % 1.0;
+
+              var specR, specG, specB;
+              if (mtPos < 0.33) {
+                var st = mtPos / 0.33;
+                specR = 0.00 + st * 0.71; specG = 0.90 - st * 0.61; specB = 1.00;
+              } else if (mtPos < 0.66) {
+                var st2 = (mtPos - 0.33) / 0.33;
+                specR = 0.71 + st2 * 0.29; specG = 0.29 - st2 * 0.09; specB = 1.00 - st2 * 0.20;
+              } else {
+                var st3 = (mtPos - 0.66) / 0.34;
+                specR = 1.00 - st3 * 1.00; specG = 0.20 + st3 * 0.70; specB = 0.80 + st3 * 0.20;
+              }
+
+              var blend = Math.min(1, springCompress * 1.5);
+              shellUniforms[i].uColor.value.set(
+                layer.c[0] + (specR - layer.c[0]) * blend,
+                layer.c[1] + (specG - layer.c[1]) * blend,
+                layer.c[2] + (specB - layer.c[2]) * blend
+              );
+
+              if (stepsFromL14 === 0 && springCompress > 0.3) {
+                var l14PulseSpeed = 2.0 + springCompress * springCompress * 6.0;
+                var l14Pulse = (Math.sin(t * l14PulseSpeed) + 1.0) * 0.5;
+                shellUniforms[i].uGlowIntensity.value += l14Pulse * (1.0 + springCompress * 1.5);
+                shellUniforms[i].uActiveGlow.value = Math.max(shellUniforms[i].uActiveGlow.value, l14Pulse * springCompress * 0.4);
+              }
+
+              if (isGW && springCompress > 0.01) {
+                var l8SpringGrow = 1 + springCompress * 0.35;
+                mesh.scale.x *= l8SpringGrow;
+                mesh.scale.z *= l8SpringGrow;
+                var targetY = mesh.scale.x;
+                mesh.scale.y += (targetY - mesh.scale.y) * springCompress;
+                shellUniforms[i].uGlowIntensity.value = 2.5 + springCompress * 2.0;
+              }
+            }
+          }
+
+          // Resonance mode: accelerated color cycling
+          if (resonanceMode) {
+            var resT = t * 3.0 + i * 0.3;
+            var resPos = resT % 1.0;
+            var rR, rG, rB;
+            if (resPos < 0.33) {
+              var s = resPos / 0.33;
+              rR = s * 0.71; rG = 0.90 - s * 0.61; rB = 1.00;
+            } else if (resPos < 0.66) {
+              var s2 = (resPos - 0.33) / 0.33;
+              rR = 0.71 + s2 * 0.29; rG = 0.29 - s2 * 0.09; rB = 1.00 - s2 * 0.20;
+            } else {
+              var s3 = (resPos - 0.66) / 0.34;
+              rR = 1.00 - s3 * 1.00; rG = 0.20 + s3 * 0.70; rB = 0.80 + s3 * 0.20;
+            }
+            shellUniforms[i].uColor.value.set(rR, rG, rB);
+            shellUniforms[i].uGlowIntensity.value = 3.0 + Math.sin(t * 4) * 1.5;
+            shellUniforms[i].uActiveGlow.value = 0.8;
+            shellUniforms[i].uOpacity.value = 0.8;
+          }
+        });
+
+        // Resonance explosion phase (triggered by GSAP from outside)
+        // The convergence happens naturally via spring physics above
+
+        // Dust drift
+        dustCloud.rotation.y = t * 0.02;
+        dustCloud.rotation.x = Math.sin(t * 0.1) * 0.05;
+
+        renderer.render(scene, camera);
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+        threeContainer.style.display = '';
+        if (!renderer) initScene();
+        clock.start();
+        animate();
+      }
+
+      function stop() {
+        if (!running) return;
+        if (window._introSpringOverride !== undefined) return; // Don't stop during intro
+        running = false;
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+        if (clock) clock.stop();
+        springCompress = 0;
+        springTarget = 0;
+        if (renderer) renderer.render(scene, camera);
+      }
+
+      function renderStaticFrame() {
+        if (!renderer) initScene();
+        renderer.render(scene, camera);
+      }
+
+      if (introState.active) {
+        // Intro requires animation loop regardless of effects toggle
+        start();
+      } else if (document.body.classList.contains('effects-enabled')) {
+        start();
+      } else {
+        renderStaticFrame();
+      }
+
+      window.addEventListener('effects-on', start);
+      window.addEventListener('effects-off', stop);
+
+      // Expose shell meshes for resonance explosion
+      window._threeShells = { meshes: shellMeshes, origRadii: originalRadii, uniforms: shellUniforms };
+    })();
+
+    /* =============================================
+       RESONANCE EXPLOSION (GSAP)
+       ============================================= */
+    (function() {
+      window.addEventListener('resonance-start', function() {
+        if (typeof gsap === 'undefined') return;
+        var shells = window._threeShells;
+        if (!shells) return;
+
+        // After 2.5s convergence, trigger explosion
+        setTimeout(function() {
+          shells.meshes.forEach(function(mesh, i) {
+            var explodeR = shells.origRadii[i] * 3;
+            gsap.to(mesh.scale, {
+              x: explodeR,
+              y: explodeR,
+              z: explodeR,
+              duration: 1.5,
+              ease: 'power2.out'
+            });
+            gsap.to(mesh.material.uniforms.uOpacity, {
+              value: 0,
+              duration: 1.5,
+              ease: 'power2.out'
+            });
+          });
+        }, 2500);
+      });
+    })();
+  </script>
+
+
+</body>
+</html>

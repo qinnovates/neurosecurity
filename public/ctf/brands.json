@@ -1,0 +1,216 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "schema": "qinnovates-brands-v1",
+    "last_updated": "2026-02-01",
+    "consumers": [
+      "qinnovates.github.io/brand-loader.js",
+      "_tools/scripts/sync_brands.py"
+    ],
+    "note": "Org-level brand config. Division data synced from mindloft brand.json via sync_brands.py. Do NOT edit divisions block manually."
+  },
+  "org": {
+    "name": "Qinnovates",
+    "domain": "qinnovate.com",
+    "tagline": "Life's most important connections deserve the most thought.",
+    "mission": "Brain-computer interfaces are here \u2014 and they have no universal security standard. This framework provides the shared language that makes an entire industry of neural security possible.",
+    "social": {
+      "github": "https://github.com/qinnovates",
+      "medium": "https://medium.com/@qikevinl"
+    },
+    "analytics": {
+      "google_analytics_id": null
+    },
+    "seo": {
+      "title": "Qinnovates \u2014 Quantum Neural Security Research",
+      "description": "Open research organization building security standards for brain-computer interfaces. Home of QIF, TARA, and the 14-layer neural security model.",
+      "keywords": [
+        "BCI security",
+        "neural security",
+        "brain-computer interface",
+        "QIF",
+        "quantum indeterministic framework",
+        "TARA",
+        "neurosecurity"
+      ]
+    },
+    "team": {
+      "founder": "Kevin Qi"
+    }
+  },
+  "theme": {
+    "colors": {
+      "cyan_accent": "#00e5ff",
+      "purple_accent": "#b44aff",
+      "background_primary": "#0a0a0f",
+      "background_deep": "#050a14",
+      "text_primary": "#e0e0e0",
+      "text_secondary": "#a0a0a0",
+      "brand_teal": "#22C68D",
+      "gateway_amber": "#d97706",
+      "identity_purple": "#9E61EB"
+    },
+    "gradients": {
+      "hero": "linear-gradient(135deg, #0a0a0f 0%, #0d1525 50%, #0a0a0f 100%)",
+      "cyan_glow": "radial-gradient(circle, rgba(0,229,255,0.15) 0%, transparent 70%)",
+      "purple_glow": "radial-gradient(circle, rgba(180,74,255,0.15) 0%, transparent 70%)",
+      "card": "linear-gradient(145deg, rgba(0,229,255,0.05) 0%, rgba(180,74,255,0.05) 100%)"
+    },
+    "fonts": {
+      "primary": "Inter",
+      "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      "mono": "'JetBrains Mono', 'Fira Code', monospace"
+    },
+    "glows": {
+      "cyan": "0 0 20px rgba(0,229,255,0.3)",
+      "purple": "0 0 20px rgba(180,74,255,0.3)",
+      "teal": "0 0 20px rgba(34,198,141,0.3)"
+    }
+  },
+  "divisions": {
+    "mindloft": {
+      "name": "Mindloft",
+      "slogan": "Let's mind our way.",
+      "tagline": "A Safe Space With You In Mind",
+      "repo": "qinnovates/mindloft",
+      "projects": {
+        "qif": {
+          "full_name": "The Quantum Indeterministic Framework for Neural Security",
+          "short_name": "QIF",
+          "pronunciation": "CHIEF",
+          "subtitle": "A Model for Quantum Neural Interfaces",
+          "tagline": "Life's most important connections deserve the most thought.",
+          "version": "2.0.0",
+          "description": "A ground-up architectural redesign of BCI security, built from neuroscience constraints. The funnel model, quantum integer, and defense-in-depth rings for quantum neural interfaces."
+        },
+        "tara": {
+          "acronym": "TARA",
+          "full_name": "Telemetry Analysis & Response Automation",
+          "name": "TARA Stack",
+          "tagline": "Protection for the neural frontier",
+          "slogan": "Named after the Buddhist goddess of protection.",
+          "version": "0.8.1",
+          "description": "A neural security stack for BCI security monitoring, simulation, and attack testing. Real-time security analysis for brain-computer interfaces."
+        },
+        "oni": {
+          "_comment": "Legacy branding \u2014 kept for package compatibility",
+          "acronym": "ONI",
+          "full_name": "Open Neurosecurity Interoperability",
+          "name": "ONI Framework",
+          "tagline": "The OSI of Mind",
+          "version": "0.2.2"
+        }
+      },
+      "layers": {
+        "_comment": "Single source of truth for 14-layer model. L1-L7 Silicon, L8 Gateway, L9-L14 Biology (hourglass/funnel model)",
+        "silicon": [
+          {
+            "id": "L1",
+            "name": "Physical Carrier",
+            "zone": "Physical",
+            "color": "#1e3a5f"
+          },
+          {
+            "id": "L2",
+            "name": "Signal Processing",
+            "zone": "Data Link",
+            "color": "#1e4d6f"
+          },
+          {
+            "id": "L3",
+            "name": "Protocol",
+            "zone": "Network",
+            "color": "#1e5f7f"
+          },
+          {
+            "id": "L4",
+            "name": "Transport",
+            "zone": "Transport",
+            "color": "#1e6f8f"
+          },
+          {
+            "id": "L5",
+            "name": "Session",
+            "zone": "Session",
+            "color": "#1e7f9f"
+          },
+          {
+            "id": "L6",
+            "name": "Presentation",
+            "zone": "Presentation",
+            "color": "#1e8faf"
+          },
+          {
+            "id": "L7",
+            "name": "Application Interface",
+            "zone": "Application",
+            "color": "#2d9fbf"
+          }
+        ],
+        "gateway": [
+          {
+            "id": "L8",
+            "name": "Neural Gateway",
+            "zone": "Firewall",
+            "color": "#d97706",
+            "highlight": true
+          }
+        ],
+        "biology": [
+          {
+            "id": "L9",
+            "name": "Signal Processing",
+            "zone": "Filtering",
+            "color": "#14532d"
+          },
+          {
+            "id": "L10",
+            "name": "Neural Protocol",
+            "zone": "Encoding",
+            "color": "#166534"
+          },
+          {
+            "id": "L11",
+            "name": "Cognitive Transport",
+            "zone": "Delivery",
+            "color": "#15803d"
+          },
+          {
+            "id": "L12",
+            "name": "Cognitive Session",
+            "zone": "Context",
+            "color": "#16a34a"
+          },
+          {
+            "id": "L13",
+            "name": "Semantic Layer",
+            "zone": "Intent",
+            "color": "#22c55e"
+          },
+          {
+            "id": "L14",
+            "name": "Identity Layer",
+            "zone": "Self",
+            "color": "#9E61EB"
+          }
+        ]
+      },
+      "brand_color": {
+        "_comment": "The teal where L9 and L10 overlap \u2014 two biological layers in harmony.",
+        "hex": "#22C68D",
+        "rgb": [
+          34,
+          198,
+          141
+        ],
+        "name": "Neurosec Teal"
+      },
+      "stats": {
+        "_comment": "Manual stats only. Auto-updating stats (commits, tools) are fetched via GitHub API in docs/index.html",
+        "security_layers": 14,
+        "threat_signatures": 46,
+        "learning_portals": 1
+      }
+    }
+  }
+}

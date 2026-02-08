@@ -20,19 +20,19 @@ Qinnovate is a vendor-agnostic standards body developing open frameworks, govern
 
 </div>
 
-## 🏛️ What is Qinnovate?
+## What is Qinnovate?
 
 Qinnovate houses:
 - **QIF (Quantum Indeterministic Framework)** — Quantum BCI security model (7-band hourglass)
 - **ONI (Open Neurosecurity Interoperability)** — Classical BCI security model (14-layer architecture)
-- **Classical↔Quantum Bridge** — Shared threat taxonomy mapping both frameworks
+- **Classical-Quantum Bridge** — Shared threat taxonomy mapping both frameworks
 - **Neuroethics Standards** — UNESCO alignment, GDPR/HIPAA compliance, informed consent frameworks
 - **Threat Intelligence** — BCI attack taxonomy, threat matrix, security patterns
 - **Governance** — Regulatory compliance frameworks, transparency protocols
 
 ---
 
-## 📋 Dual-Framework Architecture
+## Dual-Framework Architecture
 
 ### QIF (Quantum Indeterministic Framework)
 
@@ -43,32 +43,32 @@ Qinnovate houses:
 - **Version:** 3.1 Hourglass
 - **License:** Apache 2.0
 
-[Read the specification →](qif-framework/)
+[Read the specification](qif-framework/)
 
 ### ONI (Open Neurosecurity Interoperability)
 
 **Classical BCI security** - OSI extension model providing classical security architecture for BCIs.
 
-- **Architecture:** 14-layer model (L1-L14: Silicon → Cognitive Sovereignty)
+- **Architecture:** 14-layer model (L1-L14: Silicon to Cognitive Sovereignty)
 - **Status:** Active (classical complement to QIF)
 - **Version:** 2.x
 - **License:** Apache 2.0
 
-[Read the specification →](oni-framework/)
+[Read the specification](oni-framework/)
 
-### Classical↔Quantum Bridge
+### Classical-Quantum Bridge
 
 The **shared bridge** maps threats and security controls across both frameworks:
 
-- **Threat matrix** categorized with Κ (common), Δ (differences), Σ (sum)
-- **Layer→Band translation** (e.g., L8 → I0, L9 → I0/N1)
+- **Threat matrix** categorized with K (common), D (differences), S (sum)
+- **Layer-Band translation** (e.g., L8 to I0, L9 to I0/N1)
 - **Validation tools** for consistency checking
 
-[Explore the bridge →](shared/)
+[Explore the bridge](shared/)
 
 ---
 
-## ⚖️ Governance & Neuroethics
+## Governance & Neuroethics
 
 Qinnovate maintains comprehensive governance standards:
 
@@ -80,11 +80,11 @@ Qinnovate maintains comprehensive governance standards:
 - **Transparency Protocol** — Human-AI collaboration audit trails
 - **QIF Neuroethics** — 11 open questions on quantum biometric governance
 
-[View governance standards →](governance/)
+[View governance standards](governance/)
 
 ---
 
-## 🔬 Research & Publications
+## Research & Publications
 
 Academic papers, technical specifications, and research findings:
 
@@ -99,12 +99,12 @@ Academic papers, technical specifications, and research findings:
 - **7-band hourglass** architecture
 - Comprehensive whitepaper with equations-as-code
 
-[Browse ONI research →](oni-framework/publications/)
-[Browse QIF research →](qif-framework/)
+[Browse ONI research](oni-framework/publications/)
+[Browse QIF research](qif-framework/)
 
 ---
 
-## 🌐 Ecosystem
+## Ecosystem
 
 ### Implementations
 
@@ -129,11 +129,11 @@ Think: **W3C** (Qinnovate) vs **Chrome** (Mindloft)
 
 ## Development Process
 
-Qinnovate operates through the **VERA Engine** (Validation • Ethics • Research • Authority) — our approach to standards development that prioritizes "time-to-autonomy" over "time-to-market."
+Qinnovate operates through the **VERA Engine** (Validation, Ethics, Research, Authority) — our approach to standards development that prioritizes "time-to-autonomy" over "time-to-market."
 
 VERA fuses the Scientific Method with the Public Policy Cycle, ensuring every technological advancement is lab-proven and legally codified before release as authorized knowledge.
 
-**[Read the full VERA Engine documentation →](processes/qinnovate-lifecycle.md)**
+**[Read the full VERA Engine documentation](processes/qinnovate-lifecycle.md)**
 
 ### Three-Phase Authority Cycle
 
@@ -150,35 +150,32 @@ VERA fuses the Scientific Method with the Public Policy Cycle, ensuring every te
 
 ---
 
-## 🔄 Standards Development via VERA Engine
+## Website
 
-Qinnovate's standards development operates through the VERA Engine — a four-pillar authority cycle with governance at its core, maintaining strict separation from product implementation:
+The website ([qinnovate.com](https://qinnovate.com)) is built with [Astro](https://astro.build/) 5.x and lives in this repo.
 
-<div align="center">
+```bash
+npm install
+npm run dev      # localhost:4321
+npm run build    # outputs to dist/
+npm run preview  # preview production build
+```
 
-![VERA Engine](docs/images/vera-engine.png)
-
-</div>
-
-**The Four Pillars of VERA:**
-
-1. **Validation** — Lab-proven POCs in controlled environments (sandboxed, ethical oversight)
-2. **Ethics** — Neuroethics principles embedded at every stage (UNESCO, GDPR, FDA alignment)
-3. **Research** — Hypothesis formulation and scientific methodology (peer-reviewed findings)
-4. **Authority** — Independent external council formalizes standards as authorized knowledge
-
-**Central Governance:** NIST/IEEE-aligned standards body ensures Time-to-Autonomy over Time-to-Market
-
-**Key Distinction:** Qinnovate stops at authorized dissemination. Product deployment and commercial implementation are handled by separate entities to maintain standards body independence.
-
-**[Learn more about the VERA Engine →](processes/qinnovate-lifecycle.md)**
+Pushes to `main` trigger automated build and deploy via GitHub Actions.
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 qinnovates/qinnovate/
+├── src/                    # Astro website source
+├── blogs/                  # Blog posts (Markdown content collection)
+├── public/                 # Static assets, CNAME, fonts
+├── scripts/                # RSS feed fetcher
+├── package.json            # Astro dependencies
+├── astro.config.mjs        # Astro configuration
+│
 ├── qif-framework/          # Quantum BCI security (7-band)
 │   ├── framework/          # 9 architectural documents
 │   ├── qif-lab/            # Equation testing & validation
@@ -190,25 +187,25 @@ qinnovates/qinnovate/
 │   ├── publications/       # 31 research papers
 │   └── INDEX.md            # Main wiki
 │
-├── shared/                 # Classical↔Quantum bridge
-│   ├── threat-matrix.json  # Κ/Δ/Σ threat taxonomy
+├── shared/                 # Classical-Quantum bridge
+│   ├── threat-matrix.json  # Threat taxonomy
 │   └── validation/         # Bridge validation tools
 │
 ├── governance/             # Neuroethics & regulatory
-│   ├── NEUROETHICS_ALIGNMENT.md
-│   ├── TRANSPARENCY.md
-│   ├── UNESCO_ALIGNMENT.md
 │   └── ... (9 governance documents)
 │
 ├── processes/              # VERA Engine & workflows
-│   └── qinnovate-lifecycle.md  # VERA standards development cycle
+│   └── qinnovate-lifecycle.md
 │
-└── docs/                   # qinnovate.com website
+└── .github/workflows/      # CI/CD pipelines
+    ├── deploy.yml          # Astro build + GitHub Pages deploy
+    ├── update-news.yml     # Daily RSS feed cache update
+    └── ...
 ```
 
 ---
 
-## 📚 Resources
+## Resources
 
 | Resource | Description |
 |----------|-------------|
@@ -216,13 +213,13 @@ qinnovates/qinnovate/
 | [QIF Whitepaper](https://mindloft.org/qif-whitepaper/) | Interactive whitepaper with AI voiceover |
 | [QIF Framework](qif-framework/) | Complete QIF specification |
 | [ONI Framework](oni-framework/) | Complete ONI specification |
-| [Classical↔Quantum Bridge](shared/) | Threat taxonomy mapping |
+| [Classical-Quantum Bridge](shared/) | Threat taxonomy mapping |
 | [Governance Docs](governance/) | Neuroethics and compliance standards |
 | [Website](https://qinnovate.com) | Official standards body site |
 
 ---
 
-## 🤝 Partnerships & Collaboration
+## Partnerships & Collaboration
 
 Qinnovate seeks partnerships with:
 - **Universities** — Academic research collaboration
@@ -234,7 +231,7 @@ Qinnovate seeks partnerships with:
 
 ---
 
-## 📄 License
+## License
 
 - **Standards & Specifications:** Apache 2.0 License
 - **Research Publications:** CC-BY 4.0
@@ -244,7 +241,7 @@ This ensures open access while allowing commercial implementations.
 
 ---
 
-## 🔗 Links
+## Links
 
 - **Website:** [qinnovate.com](https://qinnovate.com)
 - **Product Implementation:** [mindloft.org](https://mindloft.org)
@@ -257,11 +254,11 @@ This ensures open access while allowing commercial implementations.
 
 **Defining open standards for the neural frontier**
 
-*Vendor-agnostic · Community-driven · Academically rigorous*
+*Vendor-agnostic, Community-driven, Academically rigorous*
 
 </div>
 
 ---
 
 *Established: 2026*
-*Updated: 2026-02-06*
+*Updated: 2026-02-07*
