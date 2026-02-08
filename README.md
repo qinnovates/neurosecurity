@@ -1,6 +1,6 @@
 <div align="center">
 
-![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/docs/images/divider-qinnovate.svg)
+![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/public/images/divider-qinnovate.svg)
 
 </div>
 
@@ -16,7 +16,7 @@ Qinnovate is a vendor-agnostic standards body developing open frameworks, govern
 
 <div align="center">
 
-![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/docs/images/divider-qinnovate.svg)
+![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/public/images/divider-qinnovate.svg)
 
 </div>
 
@@ -233,11 +233,11 @@ Qinnovate seeks partnerships with:
 
 ## License
 
-- **Standards & Specifications:** Apache 2.0 License
-- **Research Publications:** CC-BY 4.0
-- **Governance Documents:** CC-BY 4.0
+All content in this repository is licensed under **CC BY-NC-ND 4.0** (Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International).
 
-This ensures open access while allowing commercial implementations.
+You may share with attribution, but commercial use and modifications require explicit written permission from the copyright holder.
+
+For licensing inquiries: standards@qinnovate.com
 
 ---
 
