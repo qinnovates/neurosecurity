@@ -16,16 +16,35 @@ interface Props {
 
 const { title, date: rawDate, tags, source, subtitle } = Astro.props;
 const date = rawDate instanceof Date ? rawDate : new Date(rawDate);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pubBreadcrumbs = [
+  { label: 'Publications', href: '/publications/' },
+  { label: title },
+];
 ---
 
-<BaseLayout title={title} description={subtitle || `${title} — Qinnovate Publications`}>
+<BaseLayout
+  title={title}
+  description={subtitle || `${title} — Qinnovate Publications`}
+  ogType="article"
+  articleMeta={{ publishedTime: date.toISOString(), author: "Qinnovate", tags }}
+  breadcrumbs={pubBreadcrumbs}
+>
   <Nav />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-    <Breadcrumbs items={[
-      { label: 'Publications', href: '/publications/' },
-      { label: title },
-    ]} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": title,
+      "description": subtitle || title,
+      "datePublished": date.toISOString(),
+      "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
+      "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
+      "mainEntityOfPage": canonicalURL.toString(),
+    })} />
+
+    <Breadcrumbs items={pubBreadcrumbs} />
 
     <!-- Article header -->
     <header class="mb-12">

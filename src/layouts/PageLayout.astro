@@ -16,7 +16,7 @@ interface Props {
 const { title, description, ogImage, breadcrumbs, wide = false } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage}>
+<BaseLayout title={title} description={description} ogImage={ogImage} breadcrumbs={breadcrumbs}>
   <Nav />
   <main class:list={["pt-20 px-4 sm:px-6 lg:px-8 mx-auto", wide ? "max-w-7xl" : "max-w-5xl"]}>
     {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}

@@ -49,6 +49,16 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
 
     <!-- Main content -->
     <div class="max-w-3xl">
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "QIF Whitepaper: Quantum Indeterministic Framework for Neural Security",
+        "description": "A unified physics-based security architecture for brain-computer interfaces, featuring the QIF Hourglass Model, QI Equation, Neural Security Protocol, and QIF Locus Taxonomy.",
+        "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
+        "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
+        "datePublished": "2026-02-01",
+        "mainEntityOfPage": "https://qinnovate.com/whitepaper/",
+      })} />
 
       <!-- Header -->
       <section class="mb-16">
@@ -157,7 +167,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">1. Abstract</h2>
         <div class="prose">
           <p>
-            Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet their security architectures remain grounded in classical computing paradigms. This paper presents the Quantum Indeterministic Framework (QIF), an 11-band hourglass security architecture spanning the neural-synthetic boundary, and proposes a unified security equation: <span class="font-[family-name:var(--font-mono)]">QI(b,t) = e<sup>&minus;S(b,t)</sup></span>. The QI equation combines four classical signal integrity terms (phase coherence, normalized transport entropy, amplitude stability, and a scale-frequency validity check derived from <span class="font-[family-name:var(--font-mono)]">L = v/f</span>) with three quantum terms (indeterminacy and entanglement gated by decoherence; tunneling ungated, as it persists in classical regimes).
+            Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet their security architectures remain grounded in classical computing paradigms. This paper presents the Quantum Indeterministic Framework (QIF), an 11-band hourglass security architecture spanning the neural-synthetic boundary, and proposes a unified security equation: <span class="font-[family-name:var(--font-mono)]">QI(b,t) = e<sup>&minus;S(b,t)</sup></span>. The per-band formulation is grounded in spectral decomposition via the Short-Time Fourier Transform (STFT), which serves as both the bridge from raw time-domain signals to band-indexed security scoring and the primary detection mechanism for three of five identified attack coupling mechanisms. The QI equation combines four classical signal integrity terms (phase coherence, normalized transport entropy, amplitude stability, and a scale-frequency validity check derived from <span class="font-[family-name:var(--font-mono)]">L = v/f</span>) with three quantum terms (indeterminacy and entanglement gated by decoherence; tunneling ungated, as it persists in classical regimes).
           </p>
           <p>
             We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. We propose the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption, scaled across three device tiers. A conceptual analogy between NSP-secured data and black hole information scrambling is explored and its limitations acknowledged following independent peer review.
@@ -352,7 +362,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">4.5 Severity Stratification</h3>
         <div class="prose">
           <p>
-            The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The {totalTechniques}-technique threat taxonomy (Section 6.5) assigns band-level targeting to each attack, enabling severity-scored risk assessment.
+            The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The {totalTechniques}-technique threat taxonomy (Section 6.3&ndash;6.4) assigns band-level targeting to each attack, enabling severity-scored risk assessment via the QNIS framework (Section 6.5).
           </p>
         </div>
 
@@ -448,9 +458,118 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           <p>
             Weights w<sub>1</sub>&ndash;w<sub>4</sub> are calibratable parameters. Their values are not yet determined experimentally.
           </p>
+          <p>
+            Each of these terms is computed <em>per band</em>, which raises a practical question: how does the system separate a raw BCI signal into individual frequency bands in the first place? The next section addresses this.
+          </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.4 L = v/f: The Unified Wave Equation</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.4 Spectral Decomposition: From Time Domain to Per-Band Security</h3>
+        <div class="prose mb-6">
+          <p>
+            The QI equation is indexed by band: <span class="font-[family-name:var(--font-mono)]">QI(b, t)</span>. But raw BCI signals arrive as a single time-domain voltage trace &mdash; a composite of every frequency band superimposed. Before any band-level security scoring can occur, the signal must be decomposed into its constituent frequency components. This is the role of the <strong>Fourier transform</strong>.
+          </p>
+        </div>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            X(f) = &int;<sub>&minus;&infin;</sub><sup>&infin;</sup> x(t) &middot; e<sup>&minus;i2&pi;ft</sup> dt
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            Decomposes a time-domain signal x(t) into its frequency-domain representation X(f)
+          </p>
+        </div>
+        <div class="prose mb-6">
+          <p>
+            The analogy is a prism splitting white light into a rainbow. A raw EEG trace is &ldquo;white light&rdquo; &mdash; all neural oscillations mixed together. The Fourier transform is the prism: it separates the signal into delta (0.5&ndash;4 Hz), theta (4&ndash;8 Hz), alpha (8&ndash;12 Hz), beta (12&ndash;30 Hz), and gamma (30&ndash;100+ Hz) components, each of which maps to a specific neural band in the hourglass model.
+          </p>
+        </div>
+
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4">5.4.1 The Signal Processing Pipeline</h4>
+        <div class="prose mb-6">
+          <p>
+            In practice, BCI signals are non-stationary &mdash; their frequency content changes over time. A standard Fourier transform gives global frequency content but loses temporal resolution. QIF therefore specifies the <strong>Short-Time Fourier Transform (STFT)</strong> as the decomposition method, which windows the signal into overlapping segments and transforms each independently:
+          </p>
+        </div>
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            STFT&#123;x(t)&#125;(&tau;, f) = &int;<sub>&minus;&infin;</sub><sup>&infin;</sup> x(t) &middot; w(t &minus; &tau;) &middot; e<sup>&minus;i2&pi;ft</sup> dt
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            w(t &minus; &tau;) = sliding window function &middot; &tau; = window center time
+          </p>
+        </div>
+        <div class="prose mb-6">
+          <p>
+            This produces a <strong>spectrogram</strong>: a 2D map of frequency power over time. Each time-frequency bin becomes a data point for QI computation. The pipeline:
+          </p>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Step</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Operation</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Output</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Feeds Into</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">1</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Raw signal acquisition (S1 band)</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">x(t) &mdash; voltage trace</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Step 2</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">2</td><td class="py-3 px-4 text-[var(--color-text-muted)]">STFT / wavelet decomposition (S2 band)</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">P(b, t) &mdash; per-band power</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Steps 3 &amp; 4</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">3</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Per-band classical anomaly scoring</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">S<sub>c</sub>(b, t)</td><td class="py-3 px-4 text-[var(--color-text-muted)]">QI equation</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-medium">4</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Spectral anomaly detection</td><td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">Attack signature flags</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Coupling analysis (Section 6.1)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4">5.4.2 Why Spectral Decomposition Is a Security Primitive</h4>
+        <div class="prose mb-6">
+          <p>
+            The frequency decomposition is not just preprocessing &mdash; it is the primary attack detection mechanism for three of the five coupling mechanisms defined in Section 6.1:
+          </p>
+        </div>
+        <div class="space-y-4 mb-8">
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #10b981;">
+            <h5 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism A (Direct) &mdash; Spectral power spike</h5>
+            <p class="text-sm text-[var(--color-text-muted)]">An injected 40 Hz signal appears as anomalous power in the gamma band. The STFT reveals it directly: P(gamma, t) exceeds baseline. The &sigma;<sup>2</sup><sub>&gamma;</sub> term in S<sub>c</sub> catches this as amplitude instability.</p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #f59e0b;">
+            <h5 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism B (Harmonic) &mdash; Unexpected spectral peaks</h5>
+            <p class="text-sm text-[var(--color-text-muted)]">An 80 Hz attack exciting 40 Hz gamma via subharmonic resonance produces spectral energy at both 80 Hz and 40 Hz. The decomposition reveals the 80 Hz peak &mdash; an anomalous component absent from the patient&rsquo;s baseline spectral fingerprint.</p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid #06b6d4;">
+            <h5 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Mechanism D (Temporal Interference) &mdash; Beat frequency detection</h5>
+            <p class="text-sm text-[var(--color-text-muted)]">Two kHz-range signals (e.g., 2000 Hz + 2004 Hz) create a 4 Hz beat. The STFT shows anomalous power in the theta band <em>and</em> at the kHz carriers &mdash; a spectral signature that no natural neural process produces. While QI alone cannot detect this from neural-band data (Section 6.2), broadband spectral monitoring at I0/S1 can.</p>
+          </div>
+        </div>
+        <div class="prose mb-6">
+          <p>
+            The spectral decomposition also enables <strong>baseline fingerprinting</strong>: a patient&rsquo;s resting-state power spectrum (the relative power in each band) presents a <strong>highly individualized signature</strong> suitable for biometric authentication <a href="#ref-25">[25]</a>. While less immutable than physical biometrics (the spectrum varies with cognitive state, fatigue, and alertness), the spectral baseline is stable enough that deviations &mdash; unexpected energy in a band, shifted peak frequencies, anomalous cross-frequency coupling &mdash; are reliable attack indicators even when the injected signal individually appears innocuous.
+          </p>
+          <p>
+            This is the formal bridge between the Fourier transform (row 7 in the Physics Table) and the per-band QI equation. Without spectral decomposition, the band index <em>b</em> in <span class="font-[family-name:var(--font-mono)]">QI(b, t)</span> has no computable meaning. With it, every classical term in S<sub>c</sub> &mdash; phase coherence, transport entropy, amplitude stability, scale-frequency validity &mdash; can be independently evaluated per band. By resolving the phase and amplitude per band, the STFT provides the necessary inputs to compute phase coherence (&sigma;<sup>2</sup><sub>&phi;</sub>), transport entropy (H<sub>t</sub>), and amplitude stability (&sigma;<sup>2</sup><sub>&gamma;</sub>) independently for each band.
+          </p>
+        </div>
+
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4">5.4.3 Practical Constraints and Complementary Methods</h4>
+        <div class="prose mb-6">
+          <p>
+            <strong>Artifact rejection.</strong> Raw BCI signals are contaminated by non-neural sources: muscle activity (EMG), eye blinks (EOG), and 50/60 Hz power line noise. These artifacts create massive power fluctuations in specific bands that could be misidentified as Mechanism A attacks. Any credible implementation of the pipeline <strong>must</strong> include artifact detection and removal &mdash; via independent component analysis (ICA), spatial filtering, or targeted regression &mdash; <em>before</em> the signal reaches QI scoring. This is a preprocessing requirement at S2, not an optional enhancement.
+          </p>
+          <p>
+            <strong>The time-frequency tradeoff (Heisenberg-Gabor limit).</strong> The STFT window function w(t) imposes a fundamental resolution tradeoff: a short window provides good temporal resolution (pinpointing <em>when</em> an event occurs) but poor frequency resolution, while a long window provides good frequency resolution but poor temporal resolution. An attacker could exploit a long window by using a very short, pulsed injection that gets temporally smeared and lost. QIF implementations must tune the window size to the threat model of the specific BCI application &mdash; therapeutic devices prioritize frequency resolution (steady-state stimulation attacks), while high-bandwidth interfaces prioritize temporal resolution (event-related attacks).
+          </p>
+          <p>
+            <strong>Real-time constraints.</strong> Implanted BCIs operate under severe power and compute budgets (typical: 40 mW, ARM Cortex-M class processor). A full STFT on every sample is expensive. QIF permits a tiered approach: a simple bandpass filter bank for real-time on-device triage (lightweight, catches Mechanism A), with the full STFT and spectral anomaly analysis computed in S2/S3 on the external processor or in offline post-hoc analysis. The real-time filter bank approach is standard in commercial BCI firmware (Medtronic Percept, Neuralink N1).
+          </p>
+          <p>
+            <strong>Complementary metrics.</strong> Two additional spectral measures strengthen attack detection beyond per-band power: <strong>Spectral entropy</strong> measures the disorder of the frequency distribution; an injected pure tone drastically reduces entropy in its band even at low power, catching subtle Mechanism A attacks that fall below simple power thresholds. <strong>Cross-frequency coupling (CFC)</strong> &mdash; particularly phase-amplitude coupling between theta and gamma &mdash; is a well-studied neural phenomenon whose baseline patterns are patient-specific; an attacker disrupting or mimicking CFC constitutes a more sophisticated attack that per-band power alone would miss. Both metrics can be derived from the same STFT output with minimal additional computation.
+          </p>
+          <p>
+            With the spectral decomposition pipeline established, we can now address the physics that governs the spatial extent of each band &mdash; and thus the fourth classical term, D<sub>sf</sub>, which validates whether the measured scale-frequency product falls within physically plausible bounds.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.5 L = v/f: The Unified Wave Equation</h3>
         <div class="glass rounded-xl p-8 text-center mb-8">
           <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
             L = v / f
@@ -486,7 +605,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </table>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.5 Quantum Terms (S<sub>q</sub>)</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.6 Quantum Terms (S<sub>q</sub>)</h3>
         <div class="glass rounded-xl p-8 text-center mb-8">
           <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
             S<sub>q</sub>(b, t) = (1 &minus; &Gamma;<sub>D</sub>(t)) &middot; [&psi;<sub>1</sub>&middot;Q&#770;<sub>i</sub> &minus; &psi;<sub>3</sub>&middot;Q&#770;<sub>e</sub>] + &psi;<sub>2</sub>&middot;Q&#770;<sub>t</sub>
@@ -516,7 +635,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.6 Properties of the Unified Equation</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">5.7 Properties of the Unified Equation</h3>
         <div class="prose">
           <ol>
             <li><strong>Bounded.</strong> QI lies in (0, 1]. The exponential of a non-negative quantity is always positive and at most 1.</li>
@@ -589,14 +708,14 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
               <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Slow drift</td><td class="py-3 px-4 text-[var(--color-text-muted)]">A (Direct)</td><td class="py-3 px-4 font-bold" style="color: #f59e0b;">Partial</td></tr>
               <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Harmonic coupling</td><td class="py-3 px-4 text-[var(--color-text-muted)]">B (Harmonic)</td><td class="py-3 px-4 font-bold" style="color: #f59e0b;">Partial</td></tr>
               <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Envelope modulation</td><td class="py-3 px-4 text-[var(--color-text-muted)]">C (Envelope)</td><td class="py-3 px-4 font-bold" style="color: #f59e0b;">Partial</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Temporal interference</td><td class="py-3 px-4 text-[var(--color-text-muted)]">D (Beat)</td><td class="py-3 px-4 font-bold" style="color: #ef4444;">No</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Temporal interference</td><td class="py-3 px-4 text-[var(--color-text-muted)]">D (Beat)</td><td class="py-3 px-4 font-bold" style="color: #f59e0b;">Partial<sup>&dagger;</sup></td></tr>
               <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4">Intermodulation</td><td class="py-3 px-4 text-[var(--color-text-muted)]">E (Intermod)</td><td class="py-3 px-4 font-bold" style="color: #ef4444;">No</td></tr>
             </tbody>
           </table>
         </div>
         <div class="prose">
           <p>
-            QI catches direct attacks (Mechanism A). It partially catches harmonic and envelope attacks (B, C). It <strong>cannot</strong> catch temporal interference or intermodulation (D, E) from signal data alone. This defines where hardware-level defense (the resonance shield) is necessary.
+            QI catches direct attacks (Mechanism A). It partially catches harmonic and envelope attacks (B, C). Intermodulation (E) is undetectable from signal data alone, requiring hardware-level defense (the resonance shield). <sup>&dagger;</sup>Temporal interference (D) cannot be detected from neural-band QI scoring alone, but broadband spectral monitoring at I0/S1 reveals the kHz-range carrier signals as anomalous spectral energy absent from any natural neural process (Section 5.4.2). This elevates Mechanism D from &ldquo;undetectable&rdquo; to &ldquo;detectable with extended monitoring.&rdquo;
           </p>
         </div>
 
@@ -1275,19 +1394,16 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.1 What QIF Is</h3>
         <div class="prose">
-          <p>QIF is a proposed security architecture for brain-computer interfaces that provides:</p>
-          <ul>
-            <li>An 11-band hourglass model derived from neuroanatomy and physics</li>
-            <li>A unified equation QI(b,t) = e<sup>&minus;S(b,t)</sup> with Boltzmann-factor structure</li>
-            <li>A five-mechanism attack coupling taxonomy</li>
-            <li>The <strong>QIF Locus Taxonomy</strong> &mdash; an original BCI-native threat classification developed by Qinnovate, with {totalDomains} domains and {totalTactics} tactics</li>
-            <li><strong>QNIS v1.0</strong> &mdash; an original neural impact scoring system developed by Qinnovate that prioritizes human harm over system availability</li>
-            <li>A registry of {totalTechniques} attack techniques with evidence status and QNIS severity scores</li>
-            <li>A post-quantum communication protocol (NSP)</li>
-            <li>A content compression pipeline (Project Runemate)</li>
-            <li>Explicit falsifiability conditions</li>
-            <li>Honest boundaries on what it can and cannot detect</li>
-          </ul>
+          <p>This paper delivered the seven contributions outlined in Section 2.3:</p>
+          <ol>
+            <li>An <strong>11-band hourglass architecture</strong> (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy and quantum physics (Section 4).</li>
+            <li>A <strong>unified QI equation</strong>, QI(b,t) = e<sup>&minus;S(b,t)</sup>, grounded in spectral decomposition via the STFT and combining classical signal integrity with quantum terms (Section 5).</li>
+            <li>Identification of <strong>five cross-domain attack coupling mechanisms</strong> with honest detection boundaries, supported by the <strong>QIF Locus Taxonomy</strong> ({totalDomains} domains, {totalTactics} tactics, {totalTechniques} techniques) and <strong>QNIS v1.0</strong> neural impact scoring (Section 6).</li>
+            <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM, ML-DSA, and AES-256-GCM (Section 7).</li>
+            <li><strong>Project Runemate</strong>, a content compression pipeline offsetting PQC bandwidth overhead by 65&ndash;90% (Section 7).</li>
+            <li>A conceptual analogy between NSP security and <strong>black hole information scrambling</strong>, with explicit limitations acknowledged (Section 8).</li>
+            <li><strong>Falsifiability conditions</strong> specifying what experimental findings would weaken or invalidate specific framework components (Section 9).</li>
+          </ol>
         </div>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.2 What QIF Is Not</h3>
