@@ -1,0 +1,1451 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { HOURGLASS_BANDS } from '../lib/qif-constants';
+import { THREAT_VECTORS, THREAT_TACTICS, SEVERITY_COLORS, STATUS_COLORS, ZONE_COLORS, getTacticName } from '../lib/threat-data';
+
+const allThreatsJson = JSON.stringify(THREAT_VECTORS);
+const allTacticsJson = JSON.stringify(THREAT_TACTICS);
+const bandsJson = JSON.stringify(HOURGLASS_BANDS);
+---
+
+<PageLayout
+  title="Threat Explorer — Attack Chain Visualizer"
+  description="Graph-based attack chain visualizer for QIF threat techniques. Search, pivot, and trace kill chains across the 11-band hourglass."
+  breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'Threat Explorer' }]}
+  wide={true}
+>
+  <div class="explorer-layout" id="explorer-root">
+    <!-- Left: Hourglass sidebar -->
+    <aside class="hourglass-sidebar" id="hourglass-sidebar">
+      <div class="hourglass-title">Hourglass</div>
+      <div class="hourglass-bands" id="hourglass-bands">
+        {HOURGLASS_BANDS.map((band) => (
+          <div
+            class:list={["hg-band", `hg-band--${band.zone}`]}
+            data-band-id={band.id}
+            title={`${band.id}: ${band.name} — ${band.description}`}
+          >
+            <span class="hg-band-id">{band.id}</span>
+            <span class="hg-band-name">{band.name}</span>
+          </div>
+        ))}
+      </div>
+      <div class="hourglass-legend">
+        <span class="hg-leg hg-leg--neural">Neural</span>
+        <span class="hg-leg hg-leg--interface">Interface</span>
+        <span class="hg-leg hg-leg--synthetic">Synthetic</span>
+      </div>
+    </aside>
+
+    <!-- Center: search + graph + kill chain -->
+    <div class="graph-area">
+      <!-- Search bar -->
+      <div class="search-bar" id="search-bar">
+        <div class="search-input-wrap">
+          <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <input
+            type="text"
+            id="graph-search"
+            placeholder="Search techniques, tactics, or keywords..."
+            autocomplete="off"
+          />
+          <button class="search-clear xe-hidden" id="search-clear">&times;</button>
+        </div>
+        <div class="search-dropdown xe-hidden" id="search-dropdown"></div>
+      </div>
+
+      <!-- Example chips (empty state) -->
+      <div class="empty-state" id="empty-state">
+        <div class="empty-prompt">Search for an attack outcome, technique, or keyword</div>
+        <div class="example-chips">
+          <button class="example-chip" data-query="induced psychosis">induced psychosis</button>
+          <button class="example-chip" data-query="motor hijack">motor hijack</button>
+          <button class="example-chip" data-query="eavesdropping">eavesdropping</button>
+          <button class="example-chip" data-query="firmware">firmware</button>
+          <button class="example-chip" data-query="memory poisoning">memory poisoning</button>
+        </div>
+      </div>
+
+      <!-- SVG graph container -->
+      <div class="graph-container xe-hidden" id="graph-container">
+        <svg id="graph-svg" width="100%" height="100%">
+          <defs>
+            <marker id="arrow-secondary" viewBox="0 0 10 10" refX="10" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-text-faint)" opacity="0.5" />
+            </marker>
+          </defs>
+          <g id="graph-edges"></g>
+          <g id="graph-nodes"></g>
+        </svg>
+        <div class="graph-hint xe-hidden" id="graph-hint">Click any node to pivot. Hover for details. The hourglass shows affected bands.</div>
+      </div>
+
+      <!-- Kill chain phase bar -->
+      <div class="killchain-bar" id="killchain-bar">
+        <div class="kc-label">Kill Chain</div>
+        <div class="kc-phases" id="kc-phases"></div>
+      </div>
+    </div>
+
+    <!-- Right: Detail panel -->
+    <aside class="detail-panel xe-hidden" id="detail-panel">
+      <button class="detail-panel-close" id="detail-panel-close">&times;</button>
+      <div id="detail-panel-content"></div>
+    </aside>
+  </div>
+
+  <!-- Hover tooltip -->
+  <div class="graph-tooltip" id="graph-tooltip"></div>
+</PageLayout>
+
+<style is:global>
+  /* ═══ Layout ═══ */
+  .explorer-layout {
+    display: grid;
+    grid-template-columns: 160px 1fr 0px;
+    gap: 0;
+    min-height: calc(100vh - 180px);
+    margin: -0.5rem -1rem 0;
+    transition: grid-template-columns 0.3s ease;
+  }
+
+  .explorer-layout.panel-open {
+    grid-template-columns: 160px 1fr 380px;
+  }
+
+  /* ═══ Hourglass Sidebar ═══ */
+  .hourglass-sidebar {
+    padding: 0.75rem 0.5rem;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .hourglass-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-faint);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .hourglass-bands {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .hg-band {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.4rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    opacity: 0.4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hg-band.active {
+    opacity: 1;
+  }
+
+  .hg-band.neighbor-active {
+    opacity: 0.65;
+  }
+
+  .hg-band--neural {
+    background: rgba(34, 197, 94, 0.06);
+    border-left: 2px solid transparent;
+  }
+  .hg-band--neural.active {
+    background: rgba(34, 197, 94, 0.18);
+    border-left-color: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.2);
+  }
+  .hg-band--neural.neighbor-active {
+    background: rgba(34, 197, 94, 0.10);
+    border-left-color: rgba(34, 197, 94, 0.4);
+  }
+
+  .hg-band--interface {
+    background: rgba(245, 158, 11, 0.06);
+    border-left: 2px solid transparent;
+  }
+  .hg-band--interface.active {
+    background: rgba(245, 158, 11, 0.18);
+    border-left-color: #f59e0b;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+  }
+  .hg-band--interface.neighbor-active {
+    background: rgba(245, 158, 11, 0.10);
+    border-left-color: rgba(245, 158, 11, 0.4);
+  }
+
+  .hg-band--synthetic {
+    background: rgba(59, 130, 246, 0.06);
+    border-left: 2px solid transparent;
+  }
+  .hg-band--synthetic.active {
+    background: rgba(59, 130, 246, 0.18);
+    border-left-color: #3b82f6;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+  }
+  .hg-band--synthetic.neighbor-active {
+    background: rgba(59, 130, 246, 0.10);
+    border-left-color: rgba(59, 130, 246, 0.4);
+  }
+
+  /* Hourglass widths - 7-1-3 shape */
+  .hg-band[data-band-id="N7"] { width: 100%; }
+  .hg-band[data-band-id="N6"] { width: 92%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="N5"] { width: 84%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="N4"] { width: 72%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="N3"] { width: 60%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="N2"] { width: 52%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="N1"] { width: 46%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="I0"] { width: 40%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="S1"] { width: 55%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="S2"] { width: 72%; margin-left: auto; margin-right: auto; }
+  .hg-band[data-band-id="S3"] { width: 88%; margin-left: auto; margin-right: auto; }
+
+  .hg-band-id {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    min-width: 1.6rem;
+  }
+  .hg-band--neural .hg-band-id { color: #22c55e; }
+  .hg-band--interface .hg-band-id { color: #f59e0b; }
+  .hg-band--synthetic .hg-band-id { color: #3b82f6; }
+
+  .hg-band-name {
+    font-size: 0.55rem;
+    color: var(--color-text-faint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .hourglass-legend {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .hg-leg {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hg-leg--neural { color: #22c55e; }
+  .hg-leg--interface { color: #f59e0b; }
+  .hg-leg--synthetic { color: #3b82f6; }
+
+  @keyframes band-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  .hg-band.active {
+    animation: band-pulse 2s ease-in-out infinite;
+  }
+
+  /* ═══ Graph Area ═══ */
+  .graph-area {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    position: relative;
+  }
+
+  /* ═══ Search Bar ═══ */
+  .search-bar {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    z-index: 20;
+  }
+
+  .search-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-bg-deep);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0 0.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .search-input-wrap:focus-within {
+    border-color: var(--color-accent-primary);
+  }
+
+  .search-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-text-faint);
+    flex-shrink: 0;
+  }
+
+  #graph-search {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+    outline: none;
+    font-family: inherit;
+  }
+
+  #graph-search::placeholder {
+    color: var(--color-text-faint);
+  }
+
+  .search-clear {
+    background: none;
+    border: none;
+    color: var(--color-text-faint);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0 0.25rem;
+    line-height: 1;
+  }
+  .search-clear:hover { color: var(--color-text-primary); }
+
+  .search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 1rem;
+    right: 1rem;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    max-height: 320px;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  .search-result {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .search-result:last-child { border-bottom: none; }
+  .search-result:hover, .search-result.highlighted {
+    background: var(--color-accent-primary)/10;
+    background: rgba(6, 182, 212, 0.08);
+  }
+
+  .sr-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .sr-name {
+    flex: 1;
+    font-size: 0.8rem;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sr-tactic {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-faint);
+    flex-shrink: 0;
+  }
+
+  /* ═══ Empty State ═══ */
+  .empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .empty-prompt {
+    font-size: 1rem;
+    color: var(--color-text-faint);
+    text-align: center;
+  }
+
+  .example-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .example-chip {
+    padding: 0.4rem 0.8rem;
+    border-radius: 99px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-surface);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .example-chip:hover {
+    border-color: var(--color-accent-secondary);
+    color: var(--color-accent-secondary);
+    background: rgba(6, 182, 212, 0.08);
+  }
+
+  /* ═══ Graph Container ═══ */
+  .graph-container {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+    max-height: calc(100vh - 260px);
+    overflow: hidden;
+  }
+
+  #graph-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .graph-hint {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    background: var(--color-bg-elevated);
+    padding: 0.3rem 0.75rem;
+    border-radius: 99px;
+    border: 1px solid var(--color-border);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* ═══ Kill Chain Bar ═══ */
+  .killchain-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--color-border);
+    overflow-x: auto;
+    flex-shrink: 0;
+  }
+
+  .kc-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-faint);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .kc-phases {
+    display: flex;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .kc-phase {
+    flex: 1;
+    padding: 0.3rem 0.25rem;
+    text-align: center;
+    font-size: 0.55rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-faint);
+    background: var(--color-bg-deep);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+  }
+
+  .kc-phase.active {
+    color: #22d3ee;
+    background: rgba(6, 182, 212, 0.25);
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.35);
+    font-weight: 700;
+  }
+
+  .kc-phase.connected {
+    color: var(--color-text-primary);
+    background: rgba(6, 182, 212, 0.10);
+  }
+
+  /* ═══ Detail Panel ═══ */
+  .detail-panel {
+    border-left: 1px solid var(--color-border);
+    background: var(--color-bg-surface);
+    overflow-y: auto;
+    padding: 1.25rem;
+    position: relative;
+  }
+
+  .detail-panel-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 2;
+  }
+  .detail-panel-close:hover {
+    border-color: var(--color-text-primary);
+    color: var(--color-text-primary);
+  }
+
+  .dp-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .dp-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+    padding-right: 2rem;
+    font-family: var(--font-heading);
+  }
+
+  .dp-id {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-faint);
+  }
+
+  .dp-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+  }
+
+  .dp-badge {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: 99px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .dp-qnis-bar {
+    margin-top: 0.5rem;
+  }
+
+  .dp-qnis-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .dp-qnis-track {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-bg-deep);
+    overflow: hidden;
+  }
+
+  .dp-qnis-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+
+  .dp-section {
+    margin-top: 0.75rem;
+  }
+
+  .dp-section-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-faint);
+    margin-bottom: 0.35rem;
+  }
+
+  .dp-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .dp-meta dt { color: var(--color-text-faint); }
+  .dp-meta dd { color: var(--color-text-primary); }
+
+  .dp-description {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .dp-connections {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .dp-conn-group-title {
+    font-size: 0.6rem;
+    color: var(--color-text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.35rem;
+  }
+
+  .dp-conn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 0.7rem;
+  }
+  .dp-conn:hover {
+    background: rgba(6, 182, 212, 0.08);
+  }
+
+  .dp-conn-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dp-conn-name {
+    flex: 1;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dp-conn-id {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-text-faint);
+    flex-shrink: 0;
+  }
+
+  .dp-sources {
+    font-size: 0.65rem;
+    color: var(--color-text-faint);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ═══ Graph Tooltip ═══ */
+  .graph-tooltip {
+    position: fixed;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75rem;
+    max-width: 280px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: opacity 0.15s;
+  }
+  .graph-tooltip.visible { opacity: 1; }
+
+  /* ═══ SVG graph styles ═══ */
+  .graph-edge {
+    stroke: var(--color-text-faint);
+    stroke-opacity: 0.2;
+    fill: none;
+  }
+  .graph-edge--secondary { stroke-opacity: 0.35; stroke-width: 1.5; }
+  .graph-edge--sibling { stroke-opacity: 0.12; stroke-dasharray: 4 3; stroke-width: 1; }
+  .graph-edge--band { stroke-opacity: 0.08; stroke-dasharray: 2 4; stroke-width: 0.8; }
+
+  .graph-node {
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  .graph-node:hover { filter: brightness(1.3); }
+
+  .node-label {
+    font-size: 9px;
+    fill: var(--color-text-muted);
+    text-anchor: middle;
+    pointer-events: none;
+    font-family: var(--font-mono);
+  }
+
+  @keyframes node-pulse {
+    0%, 100% { r: attr(r); opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* ═══ Responsive ═══ */
+  @media (max-width: 1024px) {
+    .explorer-layout {
+      grid-template-columns: 1fr;
+    }
+    .explorer-layout.panel-open {
+      grid-template-columns: 1fr;
+    }
+    .hourglass-sidebar {
+      display: none;
+    }
+    .detail-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 380px;
+      max-width: 90vw;
+      z-index: 60;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+    .detail-panel.mobile-open {
+      transform: translateX(0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .detail-panel {
+      width: 100%;
+      max-width: 100vw;
+    }
+  }
+
+  /* Custom hide class scoped to explorer — avoids colliding with Tailwind .hidden */
+  .xe-hidden { display: none !important; }
+</style>
+
+<script define:vars={{ allThreatsJson, allTacticsJson, bandsJson }}>
+  // ═══ Data ═══
+  const ALL_THREATS = JSON.parse(allThreatsJson);
+  const ALL_TACTICS = JSON.parse(allTacticsJson);
+  const ALL_BANDS = JSON.parse(bandsJson);
+
+  const THREATS_BY_ID = {};
+  for (const t of ALL_THREATS) THREATS_BY_ID[t.id] = t;
+
+  const THREATS_BY_TACTIC = {};
+  for (const t of ALL_THREATS) {
+    if (!THREATS_BY_TACTIC[t.tactic]) THREATS_BY_TACTIC[t.tactic] = [];
+    THREATS_BY_TACTIC[t.tactic].push(t);
+  }
+
+  // Kill chain order
+  const KILLCHAIN_ORDER = [
+    'QIF-N.SC', 'QIF-B.IN', 'QIF-N.IJ', 'QIF-C.IM', 'QIF-B.EV',
+    'QIF-D.HV', 'QIF-P.DS', 'QIF-N.MD', 'QIF-C.EX', 'QIF-E.RD', 'QIF-M.SV'
+  ];
+
+  const SEVERITY_COLORS = {
+    critical: '#ef4444',
+    high: '#f59e0b',
+    medium: '#eab308',
+    low: '#94a3b8',
+  };
+
+  const STATUS_COLORS = {
+    CONFIRMED: '#ef4444',
+    DEMONSTRATED: '#f59e0b',
+    THEORETICAL: '#94a3b8',
+    EMERGING: '#8b5cf6',
+  };
+
+  const ZONE_COLORS = {
+    neural: '#22c55e',
+    interface: '#f59e0b',
+    synthetic: '#3b82f6',
+  };
+
+  // ═══ DOM refs ═══
+  const searchInput = document.getElementById('graph-search');
+  const searchClear = document.getElementById('search-clear');
+  const searchDropdown = document.getElementById('search-dropdown');
+  const emptyState = document.getElementById('empty-state');
+  const graphContainer = document.getElementById('graph-container');
+  const graphHint = document.getElementById('graph-hint');
+  const graphSvg = document.getElementById('graph-svg');
+  const edgesGroup = document.getElementById('graph-edges');
+  const nodesGroup = document.getElementById('graph-nodes');
+  const kcPhases = document.getElementById('kc-phases');
+  const detailPanel = document.getElementById('detail-panel');
+  const detailContent = document.getElementById('detail-panel-content');
+  const detailClose = document.getElementById('detail-panel-close');
+  const explorerRoot = document.getElementById('explorer-root');
+  const tooltip = document.getElementById('graph-tooltip');
+  const hgBands = document.querySelectorAll('.hg-band');
+
+  let currentCenter = null;
+  let searchHighlightIdx = -1;
+  let firstSelection = true;
+
+  // ═══ Kill Chain Init ═══
+  function initKillChain() {
+    kcPhases.innerHTML = '';
+    for (const tacticId of KILLCHAIN_ORDER) {
+      const tactic = ALL_TACTICS.find(function(t) { return t.id === tacticId; });
+      const el = document.createElement('div');
+      el.className = 'kc-phase';
+      el.dataset.tacticId = tacticId;
+      el.textContent = tactic ? tactic.action_code : tacticId.split('.')[1];
+      el.title = tactic ? tactic.name + ': ' + tactic.description : tacticId;
+      kcPhases.appendChild(el);
+    }
+  }
+  initKillChain();
+
+  // ═══ Edge Computation ═══
+  function computeEdges(centerThreat) {
+    const edges = [];
+    const neighborIds = new Set();
+
+    // 1. Secondary tactic links (strongest)
+    if (centerThreat.crossRefs && centerThreat.crossRefs.secondary_tactics) {
+      for (const tacticId of centerThreat.crossRefs.secondary_tactics) {
+        const tacticThreats = THREATS_BY_TACTIC[tacticId] || [];
+        for (const t of tacticThreats) {
+          if (t.id === centerThreat.id) continue;
+          edges.push({ source: centerThreat.id, target: t.id, type: 'secondary' });
+          neighborIds.add(t.id);
+        }
+      }
+    }
+
+    // Also check other threats whose secondary_tactics point to center's tactic
+    for (const t of ALL_THREATS) {
+      if (t.id === centerThreat.id || neighborIds.has(t.id)) continue;
+      if (t.crossRefs && t.crossRefs.secondary_tactics && t.crossRefs.secondary_tactics.includes(centerThreat.tactic)) {
+        edges.push({ source: t.id, target: centerThreat.id, type: 'secondary' });
+        neighborIds.add(t.id);
+      }
+    }
+
+    // 2. Tactic siblings (weak) — limit to 4 most severe
+    const siblings = (THREATS_BY_TACTIC[centerThreat.tactic] || [])
+      .filter(function(t) { return t.id !== centerThreat.id && !neighborIds.has(t.id); })
+      .sort(function(a, b) { return b.qnis.score - a.qnis.score; })
+      .slice(0, 4);
+    for (const t of siblings) {
+      edges.push({ source: centerThreat.id, target: t.id, type: 'sibling' });
+      neighborIds.add(t.id);
+    }
+
+    // 3. Band co-occurrence — techniques sharing 3+ bands, limit to 3
+    const centerBands = new Set(centerThreat.bands);
+    const bandMatches = ALL_THREATS
+      .filter(function(t) {
+        if (t.id === centerThreat.id || neighborIds.has(t.id)) return false;
+        let overlap = 0;
+        for (const b of t.bands) { if (centerBands.has(b)) overlap++; }
+        return overlap >= 3;
+      })
+      .sort(function(a, b) { return b.qnis.score - a.qnis.score; })
+      .slice(0, 3);
+    for (const t of bandMatches) {
+      edges.push({ source: centerThreat.id, target: t.id, type: 'band' });
+      neighborIds.add(t.id);
+    }
+
+    return { edges: edges, neighborIds: neighborIds };
+  }
+
+  // ═══ Force Simulation ═══
+  function runForceLayout(centerNode, neighborNodes, edges, width, height) {
+    const cx = width / 2;
+    const cy = height / 2;
+    const nodes = [centerNode].concat(neighborNodes);
+
+    // Initialize positions - center in middle, neighbors in circle
+    centerNode.x = cx;
+    centerNode.y = cy;
+    centerNode.fx = cx;
+    centerNode.fy = cy;
+
+    const angleStep = (2 * Math.PI) / Math.max(neighborNodes.length, 1);
+    const radius = Math.min(width, height) * 0.3;
+    for (let i = 0; i < neighborNodes.length; i++) {
+      const n = neighborNodes[i];
+      n.x = cx + radius * Math.cos(angleStep * i - Math.PI / 2);
+      n.y = cy + radius * Math.sin(angleStep * i - Math.PI / 2);
+    }
+
+    // Edge index map
+    const edgeIndex = {};
+    for (const e of edges) {
+      if (!edgeIndex[e.source]) edgeIndex[e.source] = [];
+      if (!edgeIndex[e.target]) edgeIndex[e.target] = [];
+      edgeIndex[e.source].push(e);
+      edgeIndex[e.target].push(e);
+    }
+
+    // Simple force sim: 60 iterations
+    for (let iter = 0; iter < 60; iter++) {
+      const damping = 0.9 * (1 - iter / 60);
+
+      // Repulsion between all nodes
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i];
+          const b = nodes[j];
+          let dx = b.x - a.x;
+          let dy = b.y - a.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          const force = 3000 / (dist * dist);
+          const fx = (dx / dist) * force;
+          const fy = (dy / dist) * force;
+          if (!a.fx) { a.x -= fx * damping; a.y -= fy * damping; }
+          if (!b.fx) { b.x += fx * damping; b.y += fy * damping; }
+        }
+      }
+
+      // Spring attraction along edges
+      for (const e of edges) {
+        const a = nodes.find(function(n) { return n.id === e.source; });
+        const b = nodes.find(function(n) { return n.id === e.target; });
+        if (!a || !b) continue;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        const targetDist = e.type === 'secondary' ? 140 : e.type === 'sibling' ? 180 : 200;
+        const force = (dist - targetDist) * 0.02;
+        const fx = (dx / dist) * force;
+        const fy = (dy / dist) * force;
+        if (!a.fx) { a.x += fx * damping; a.y += fy * damping; }
+        if (!b.fx) { b.x -= fx * damping; b.y -= fy * damping; }
+      }
+
+      // Center gravity
+      for (const n of nodes) {
+        if (n.fx) continue;
+        n.x += (cx - n.x) * 0.01 * damping;
+        n.y += (cy - n.y) * 0.01 * damping;
+      }
+
+      // Boundary constraint
+      const pad = 40;
+      for (const n of nodes) {
+        if (n.fx) continue;
+        n.x = Math.max(pad, Math.min(width - pad, n.x));
+        n.y = Math.max(pad, Math.min(height - pad, n.y));
+      }
+    }
+
+    return nodes;
+  }
+
+  // ═══ Rendering ═══
+  function getNodeColor(threat) {
+    const band = ALL_BANDS.find(function(b) { return b.id === (threat.bands[0] || ''); });
+    if (band) return ZONE_COLORS[band.zone] || '#94a3b8';
+    return '#94a3b8';
+  }
+
+  function getNodeRadius(threat) {
+    const score = threat.qnis ? threat.qnis.score : 0;
+    return 14 + (score / 10) * 12; // 14-26px
+  }
+
+  function renderGraph(centerThreat) {
+    currentCenter = centerThreat;
+
+    // Show container + panel FIRST so getBoundingClientRect gives final layout width
+    emptyState.classList.add('xe-hidden');
+    graphContainer.classList.remove('xe-hidden');
+    detailPanel.classList.remove('xe-hidden');
+    detailPanel.classList.add('mobile-open');
+
+    // Disable grid transition so panel-open snaps instantly (no mid-transition measurement)
+    explorerRoot.style.transition = 'none';
+    explorerRoot.classList.add('panel-open');
+
+    // Force layout reflow at the FINAL grid state before measuring
+    void explorerRoot.offsetHeight;
+
+    const rect = graphContainer.getBoundingClientRect();
+    const w = rect.width || 600;
+    const h = Math.min(rect.height, window.innerHeight - 260) || 500;
+
+    // Re-enable transition for future changes
+    requestAnimationFrame(function() { explorerRoot.style.transition = ''; });
+    graphSvg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+
+    const { edges, neighborIds } = computeEdges(centerThreat);
+    const neighbors = Array.from(neighborIds).map(function(id) { return THREATS_BY_ID[id]; }).filter(Boolean);
+
+    // Build node objects
+    const centerNode = { id: centerThreat.id, threat: centerThreat, isCenter: true };
+    const neighborNodes = neighbors.map(function(t) {
+      return { id: t.id, threat: t, isCenter: false };
+    });
+
+    // Force layout
+    const allNodes = runForceLayout(centerNode, neighborNodes, edges, w, h);
+    const nodeMap = {};
+    for (const n of allNodes) nodeMap[n.id] = n;
+
+    // Clear
+    edgesGroup.innerHTML = '';
+    nodesGroup.innerHTML = '';
+
+    // Draw edges
+    for (const e of edges) {
+      const a = nodeMap[e.source];
+      const b = nodeMap[e.target];
+      if (!a || !b) continue;
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', a.x);
+      line.setAttribute('y1', a.y);
+      line.setAttribute('x2', b.x);
+      line.setAttribute('y2', b.y);
+      line.classList.add('graph-edge', 'graph-edge--' + e.type);
+      edgesGroup.appendChild(line);
+    }
+
+    // Draw nodes
+    for (const n of allNodes) {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.classList.add('graph-node');
+      g.dataset.threatId = n.id;
+
+      const r = getNodeRadius(n.threat);
+      const fill = getNodeColor(n.threat);
+      const strokeColor = SEVERITY_COLORS[n.threat.severity] || '#94a3b8';
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', n.x);
+      circle.setAttribute('cy', n.y);
+      circle.setAttribute('r', r);
+      circle.setAttribute('fill', fill);
+      circle.setAttribute('fill-opacity', n.isCenter ? '0.35' : '0.2');
+      circle.setAttribute('stroke', strokeColor);
+      circle.setAttribute('stroke-width', n.isCenter ? '2.5' : '1.5');
+
+      if (n.isCenter) {
+        // Pulse animation for center node
+        const animate = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        animate.setAttribute('attributeName', 'stroke-opacity');
+        animate.setAttribute('values', '1;0.4;1');
+        animate.setAttribute('dur', '2s');
+        animate.setAttribute('repeatCount', 'indefinite');
+        circle.appendChild(animate);
+      }
+
+      g.appendChild(circle);
+
+      // Label
+      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.classList.add('node-label');
+      label.setAttribute('x', n.x);
+      label.setAttribute('y', n.y + r + 12);
+      // Truncate long names
+      const displayName = n.threat.name.length > 22 ? n.threat.name.substring(0, 20) + '\u2026' : n.threat.name;
+      label.textContent = displayName;
+      g.appendChild(label);
+
+      // Interaction
+      g.addEventListener('mouseenter', function(ev) { showTooltip(n.threat, ev); });
+      g.addEventListener('mousemove', function(ev) { positionTooltip(ev); });
+      g.addEventListener('mouseleave', hideTooltip);
+      g.addEventListener('click', function() {
+        hideTooltip();
+        selectThreat(n.threat);
+      });
+      g.addEventListener('dblclick', function() {
+        openDetailPanel(n.threat);
+      });
+
+      nodesGroup.appendChild(g);
+    }
+
+    if (firstSelection) {
+      graphHint.classList.remove('xe-hidden');
+      firstSelection = false;
+      setTimeout(function() { graphHint.classList.add('xe-hidden'); }, 6000);
+    }
+
+    // Update hourglass
+    updateHourglass(centerThreat, neighbors);
+
+    // Update kill chain
+    updateKillChain(centerThreat, neighbors);
+
+    // Open detail panel for center
+    openDetailPanel(centerThreat);
+  }
+
+  function selectThreat(threat) {
+    renderGraph(threat);
+    searchInput.value = '';
+    searchDropdown.classList.add('xe-hidden');
+    searchClear.classList.add('xe-hidden');
+  }
+
+  // ═══ Hourglass Update ═══
+  function updateHourglass(centerThreat, neighbors) {
+    const centerBands = new Set(centerThreat.bands);
+    const neighborBands = new Set();
+    for (const n of neighbors) {
+      for (const b of n.bands) neighborBands.add(b);
+    }
+
+    hgBands.forEach(function(el) {
+      const bandId = el.dataset.bandId;
+      el.classList.remove('active', 'neighbor-active');
+      if (centerBands.has(bandId)) {
+        el.classList.add('active');
+      } else if (neighborBands.has(bandId)) {
+        el.classList.add('neighbor-active');
+      }
+    });
+  }
+
+  // ═══ Kill Chain Update ═══
+  function updateKillChain(centerThreat, neighbors) {
+    const activeTactics = new Set([centerThreat.tactic]);
+    if (centerThreat.crossRefs && centerThreat.crossRefs.secondary_tactics) {
+      for (const t of centerThreat.crossRefs.secondary_tactics) activeTactics.add(t);
+    }
+    const connectedTactics = new Set();
+    for (const n of neighbors) {
+      connectedTactics.add(n.tactic);
+    }
+
+    document.querySelectorAll('.kc-phase').forEach(function(el) {
+      const id = el.dataset.tacticId;
+      el.classList.remove('active', 'connected');
+      if (activeTactics.has(id)) {
+        el.classList.add('active');
+      } else if (connectedTactics.has(id)) {
+        el.classList.add('connected');
+      }
+    });
+  }
+
+  // ═══ Detail Panel ═══
+  function openDetailPanel(threat) {
+    const sevColor = SEVERITY_COLORS[threat.severity] || '#94a3b8';
+    const statColor = STATUS_COLORS[threat.status] || '#94a3b8';
+    const qnisScore = threat.qnis ? threat.qnis.score : 0;
+    const qnisSeverity = threat.qnis ? threat.qnis.severity : 'none';
+    const qnisColor = SEVERITY_COLORS[qnisSeverity] || '#94a3b8';
+
+    // Find tactic name
+    const tactic = ALL_TACTICS.find(function(t) { return t.id === threat.tactic; });
+    const tacticName = tactic ? tactic.name : threat.tactic;
+    const phaseNum = KILLCHAIN_ORDER.indexOf(threat.tactic) + 1;
+
+    let html = '<div class="dp-header">';
+    html += '<div class="dp-name">' + escHtml(threat.name) + '</div>';
+    html += '<div class="dp-id">' + threat.id + '</div>';
+    html += '<div class="dp-badges">';
+    html += '<span class="dp-badge" style="background:' + sevColor + '20;color:' + sevColor + ';border:1px solid ' + sevColor + '40;">' + threat.severity + '</span>';
+    html += '<span class="dp-badge" style="background:' + statColor + '20;color:' + statColor + ';border:1px solid ' + statColor + '40;">' + threat.status + '</span>';
+    html += '</div>';
+
+    // QNIS bar
+    html += '<div class="dp-qnis-bar">';
+    html += '<div class="dp-qnis-label"><span style="color:var(--color-text-faint)">QNIS</span><span style="color:' + qnisColor + ';font-family:var(--font-mono);font-weight:700">' + qnisScore.toFixed(1) + '</span></div>';
+    html += '<div class="dp-qnis-track"><div class="dp-qnis-fill" style="width:' + (qnisScore * 10) + '%;background:' + qnisColor + '"></div></div>';
+    html += '</div>';
+    html += '</div>';
+
+    // Meta
+    html += '<div class="dp-section"><div class="dp-section-title">Details</div>';
+    html += '<dl class="dp-meta">';
+    html += '<dt>Tactic</dt><dd>' + escHtml(tacticName) + (phaseNum > 0 ? ' (Phase ' + phaseNum + ')' : '') + '</dd>';
+    html += '<dt>Category</dt><dd>' + threat.category + '</dd>';
+    html += '<dt>Bands</dt><dd>' + escHtml(threat.bandsStr) + '</dd>';
+    if (threat.coupling) html += '<dt>Coupling</dt><dd>' + escHtml(threat.coupling) + '</dd>';
+    if (threat.access) html += '<dt>Access</dt><dd>' + threat.access + '</dd>';
+    html += '<dt>Classical</dt><dd style="color:' + (threat.classicalDetection === 'Yes' ? '#10b981' : threat.classicalDetection === 'Partial' ? '#f59e0b' : '#ef4444') + '">' + escHtml(threat.classicalDetection) + '</dd>';
+    html += '<dt>Quantum</dt><dd style="color:#8b5cf6">' + escHtml(threat.quantumDetection) + '</dd>';
+    html += '</dl></div>';
+
+    // Description
+    html += '<div class="dp-section"><div class="dp-section-title">Description</div>';
+    html += '<div class="dp-description">' + escHtml(threat.description) + '</div></div>';
+
+    // QNIS vector
+    if (threat.qnis && threat.qnis.vector) {
+      html += '<div class="dp-section"><div class="dp-section-title">QNIS Vector</div>';
+      html += '<div style="font-size:0.65rem;font-family:var(--font-mono);color:var(--color-text-faint);word-break:break-all;">' + escHtml(threat.qnis.vector) + '</div></div>';
+    }
+
+    // Connections
+    if (currentCenter && currentCenter.id === threat.id) {
+      const { edges, neighborIds } = computeEdges(threat);
+
+      // Group by type
+      const groups = { secondary: [], sibling: [], band: [] };
+      const seen = new Set();
+      for (const e of edges) {
+        const neighborId = e.source === threat.id ? e.target : e.source;
+        if (seen.has(neighborId)) continue;
+        seen.add(neighborId);
+        const neighbor = THREATS_BY_ID[neighborId];
+        if (!neighbor) continue;
+        groups[e.type].push(neighbor);
+      }
+
+      html += '<div class="dp-section"><div class="dp-section-title">Connections</div><div class="dp-connections">';
+
+      if (groups.secondary.length > 0) {
+        html += '<div class="dp-conn-group-title">Secondary Tactic Links</div>';
+        for (const n of groups.secondary) {
+          html += renderConnItem(n);
+        }
+      }
+      if (groups.sibling.length > 0) {
+        html += '<div class="dp-conn-group-title">Tactic Siblings</div>';
+        for (const n of groups.sibling) {
+          html += renderConnItem(n);
+        }
+      }
+      if (groups.band.length > 0) {
+        html += '<div class="dp-conn-group-title">Band Overlap</div>';
+        for (const n of groups.band) {
+          html += renderConnItem(n);
+        }
+      }
+
+      html += '</div></div>';
+    }
+
+    // Sources
+    if (threat.sources && threat.sources.length > 0) {
+      html += '<div class="dp-section"><div class="dp-section-title">Sources</div>';
+      html += '<div class="dp-sources">' + escHtml(threat.sources.join('; ')) + '</div></div>';
+    }
+
+    detailContent.innerHTML = html;
+
+    // Wire up connection clicks
+    detailContent.querySelectorAll('.dp-conn').forEach(function(el) {
+      el.addEventListener('click', function() {
+        const tid = el.dataset.threatId;
+        const t = THREATS_BY_ID[tid];
+        if (t) selectThreat(t);
+      });
+    });
+
+    // Show panel
+    detailPanel.classList.remove('xe-hidden');
+    detailPanel.classList.add('mobile-open');
+    explorerRoot.classList.add('panel-open');
+  }
+
+  function renderConnItem(neighbor) {
+    const color = SEVERITY_COLORS[neighbor.severity] || '#94a3b8';
+    return '<div class="dp-conn" data-threat-id="' + neighbor.id + '">' +
+      '<span class="dp-conn-dot" style="background:' + color + '"></span>' +
+      '<span class="dp-conn-name">' + escHtml(neighbor.name) + '</span>' +
+      '<span class="dp-conn-id">' + neighbor.id + '</span>' +
+    '</div>';
+  }
+
+  function closeDetailPanel() {
+    detailPanel.classList.add('xe-hidden');
+    detailPanel.classList.remove('mobile-open');
+    explorerRoot.classList.remove('panel-open');
+  }
+
+  detailClose.addEventListener('click', closeDetailPanel);
+
+  // ═══ Tooltip ═══
+  function showTooltip(threat, ev) {
+    const sevColor = SEVERITY_COLORS[threat.severity] || '#94a3b8';
+    tooltip.innerHTML =
+      '<div style="font-weight:600;color:var(--color-text-primary);margin-bottom:0.15rem;">' + escHtml(threat.name) + '</div>' +
+      '<div style="font-size:0.65rem;color:var(--color-text-faint);font-family:var(--font-mono);">' + threat.id + ' \u00b7 ' +
+      '<span style="color:' + sevColor + '">' + threat.severity + '</span> \u00b7 QNIS ' + (threat.qnis ? threat.qnis.score.toFixed(1) : '?') + '</div>' +
+      '<div style="font-size:0.65rem;color:var(--color-text-faint);margin-top:0.15rem;">' + escHtml(threat.bandsStr) + '</div>';
+    positionTooltip(ev);
+    tooltip.classList.add('visible');
+  }
+
+  function positionTooltip(ev) {
+    const x = Math.min(ev.clientX + 14, window.innerWidth - 300);
+    const y = Math.min(ev.clientY - 10, window.innerHeight - 120);
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
+  }
+
+  // ═══ Search ═══
+  function fuzzyMatch(query, text) {
+    return text.toLowerCase().includes(query.toLowerCase());
+  }
+
+  function searchThreats(query) {
+    if (!query || query.length < 2) return [];
+    const q = query.toLowerCase();
+    return ALL_THREATS
+      .filter(function(t) {
+        return t.name.toLowerCase().includes(q) ||
+          t.id.toLowerCase().includes(q) ||
+          t.description.toLowerCase().includes(q) ||
+          t.tactic.toLowerCase().includes(q) ||
+          (t.coupling && t.coupling.toLowerCase().includes(q)) ||
+          t.bandsStr.toLowerCase().includes(q) ||
+          t.category.toLowerCase().includes(q);
+      })
+      .sort(function(a, b) { return b.qnis.score - a.qnis.score; })
+      .slice(0, 8);
+  }
+
+  function renderSearchResults(results) {
+    if (results.length === 0) {
+      searchDropdown.classList.add('xe-hidden');
+      return;
+    }
+
+    searchDropdown.innerHTML = '';
+    for (let i = 0; i < results.length; i++) {
+      const t = results[i];
+      const div = document.createElement('div');
+      div.className = 'search-result';
+      div.dataset.index = i;
+      div.dataset.threatId = t.id;
+      div.innerHTML =
+        '<span class="sr-dot" style="background:' + (SEVERITY_COLORS[t.severity] || '#94a3b8') + '"></span>' +
+        '<span class="sr-name">' + escHtml(t.name) + '</span>' +
+        '<span class="sr-tactic">' + t.tactic.split('-')[1] + '</span>';
+      div.addEventListener('click', function() {
+        selectThreat(t);
+      });
+      searchDropdown.appendChild(div);
+    }
+    searchDropdown.classList.remove('xe-hidden');
+    searchHighlightIdx = -1;
+  }
+
+  searchInput.addEventListener('input', function() {
+    const val = searchInput.value.trim();
+    searchClear.classList.toggle('xe-hidden', val.length === 0);
+    renderSearchResults(searchThreats(val));
+  });
+
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    searchClear.classList.add('xe-hidden');
+    searchDropdown.classList.add('xe-hidden');
+  });
+
+  // Keyboard nav in dropdown
+  searchInput.addEventListener('keydown', function(e) {
+    const items = searchDropdown.querySelectorAll('.search-result');
+    if (items.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      searchHighlightIdx = Math.min(searchHighlightIdx + 1, items.length - 1);
+      items.forEach(function(el, i) { el.classList.toggle('highlighted', i === searchHighlightIdx); });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      searchHighlightIdx = Math.max(searchHighlightIdx - 1, 0);
+      items.forEach(function(el, i) { el.classList.toggle('highlighted', i === searchHighlightIdx); });
+    } else if (e.key === 'Enter' && searchHighlightIdx >= 0) {
+      e.preventDefault();
+      const tid = items[searchHighlightIdx].dataset.threatId;
+      const t = THREATS_BY_ID[tid];
+      if (t) selectThreat(t);
+    } else if (e.key === 'Escape') {
+      searchDropdown.classList.add('xe-hidden');
+    }
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-bar')) {
+      searchDropdown.classList.add('xe-hidden');
+    }
+  });
+
+  // ═══ Example Chips ═══
+  document.querySelectorAll('.example-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      const query = chip.dataset.query;
+      searchInput.value = query;
+      searchClear.classList.remove('xe-hidden');
+      const results = searchThreats(query);
+      if (results.length > 0) {
+        selectThreat(results[0]);
+      }
+    });
+  });
+
+  // ═══ Escape to close ═══
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeDetailPanel();
+      searchDropdown.classList.add('xe-hidden');
+    }
+  });
+
+  // ═══ Resize handler ═══
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (currentCenter) renderGraph(currentCenter);
+    }, 200);
+  });
+
+  // ═══ HTML escape ═══
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+</script>
