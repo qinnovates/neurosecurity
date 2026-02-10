@@ -260,31 +260,40 @@ const tacticColors: Record<string, string> = {
 
         <div class="glass rounded-xl p-6 mb-8">
           <p class="text-center font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            BaseScore = 0.3 &times; Exploitability + 0.7 &times; Impact
+            NISS = (3.0&times;BI + 2.5&times;CG + 2.0&times;CV + 1.5&times;RV + 1.0&times;NP) / 10.0
           </p>
-          <div class="grid grid-cols-4 gap-3 text-center">
+          <div class="grid grid-cols-5 gap-3 text-center text-xs">
             <div>
-              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #ef4444;">9.0+</div>
-              <div class="text-xs text-[var(--color-text-faint)]">Critical</div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">BI</div>
+              <div class="text-[var(--color-text-faint)]">Biological Impact</div>
+              <div class="text-[var(--color-text-muted)] mt-0.5">Weight 3.0</div>
             </div>
             <div>
-              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #f97316;">7.0&ndash;8.9</div>
-              <div class="text-xs text-[var(--color-text-faint)]">High</div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CG</div>
+              <div class="text-[var(--color-text-faint)]">Cognitive Integrity</div>
+              <div class="text-[var(--color-text-muted)] mt-0.5">Weight 2.5</div>
             </div>
             <div>
-              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #f59e0b;">4.0&ndash;6.9</div>
-              <div class="text-xs text-[var(--color-text-faint)]">Medium</div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CV</div>
+              <div class="text-[var(--color-text-faint)]">Consent Violation</div>
+              <div class="text-[var(--color-text-muted)] mt-0.5">Weight 2.0</div>
             </div>
             <div>
-              <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: #10b981;">0.1&ndash;3.9</div>
-              <div class="text-xs text-[var(--color-text-faint)]">Low</div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">RV</div>
+              <div class="text-[var(--color-text-faint)]">Reversibility</div>
+              <div class="text-[var(--color-text-muted)] mt-0.5">Weight 1.5</div>
+            </div>
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">NP</div>
+              <div class="text-[var(--color-text-faint)]">Neuroplasticity</div>
+              <div class="text-[var(--color-text-muted)] mt-0.5">Weight 1.0</div>
             </div>
           </div>
         </div>
 
         <div class="prose">
           <p>
-            For the complete taxonomy derivation, NISS metric definitions, and full technique registry, see the <a href="/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a> or explore the <a href="/TARA/">TARA Registrar</a>.
+            For the complete scoring methodology, see the <a href="/scoring/">NISS Scoring page</a>. For the full technique registry, explore the <a href="/TARA/">TARA Registrar</a>. The complete taxonomy derivation and metric definitions are in the <a href="/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a>.
           </p>
         </div>
       </section>

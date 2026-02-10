@@ -3,7 +3,7 @@
  * Single source of truth for all Runemate values used on the site.
  */
 
-export const RUNEMATE_VERSION = '0.1';
+export const RUNEMATE_VERSION = '0.3';
 export const RUNEMATE_STATUS = 'PoC Complete';
 export const RUNEMATE_PROJECT_NAME = 'Project Runemate';
 export const RUNEMATE_TOOL_NAME = 'Runemate Forge';

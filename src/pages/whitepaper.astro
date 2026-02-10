@@ -85,7 +85,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">The Three Pillars of Qinnovate</h2>
         <div class="prose mb-8">
           <p>
-            Securing a brain-computer interface is not a single problem &mdash; it is three interlocking problems that must be solved together. Qinnovate addresses all three with an integrated stack: a threat model, a wire protocol, and a compression engine. Each pillar is independently useful, but their power is in the combination.
+            Securing a brain-computer interface is not a single problem &mdash; it is three interlocking problems that must be solved together. Qinnovate addresses all three with an integrated stack: a threat model, a wire protocol, and a compiler. Each pillar is independently useful, but their power is in the combination.
           </p>
         </div>
 
@@ -114,7 +114,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Runemate</h3>
             <p class="text-xs text-[var(--color-text-faint)] mb-3">Project Runemate &middot; Runemate Forge</p>
             <p class="text-sm text-[var(--color-text-muted)]">
-              <strong>The compression engine.</strong> An HTML-to-bytecode compiler (Staves) that compresses BCI interface content 65&ndash;90%, making post-quantum encryption cost-free for pages above 23 KB. Built in Rust with IEC 62304 Class C certification path.
+              <strong>The compiler.</strong> An HTML-to-Staves bytecode compiler that compresses BCI interface content 65&ndash;90%, making post-quantum encryption viable on implants. 200 KB on-chip footprint. Built in Rust with IEC 62304 Class C certification path.
             </p>
             <p class="text-xs text-[var(--color-text-faint)] mt-3"><a href="#nsp" class="text-[var(--color-accent-primary)]">&rarr; Section 7.4</a></p>
           </div>
@@ -1017,98 +1017,82 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.2 Score Formula</h3>
         <div class="glass rounded-xl p-8 text-center mb-8">
           <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            BaseScore = 0.3 &times; Exploitability + 0.7 &times; Impact
+            NISS = (3.0&times;BI + 2.5&times;CG + 2.0&times;CV + 1.5&times;RV + 1.0&times;NP) / 10.0
           </p>
           <p class="text-sm text-[var(--color-text-faint)]">
-            Human impact weighted 70%. System exploitability weighted 30%.
+            Biological harm weighted highest (30%). Score range: 0.0 &ndash; 10.0.
           </p>
         </div>
         <div class="prose mb-8">
           <p>
-            The 70/30 weighting is a deliberate inversion of traditional vulnerability scoring, which typically weights exploitability more heavily. In BCI security, a hard-to-exploit attack that causes cognitive damage is more dangerous than an easy-to-exploit attack that only affects device availability.
+            The weight ordering (BI &gt; CG &gt; CV &gt; RV &gt; NP) is a deliberate priority: tissue damage first, then cognitive integrity, then consent, then permanence, then neuroplasticity. A vulnerability that causes neural tissue damage always scores higher than one that violates consent alone. Exploitability metrics are captured by the companion CVSS v4.0 base vector, not by NISS.
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.3 Metric Groups</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.3 Dual-Vector Architecture</h3>
+        <div class="prose mb-6">
+          <p>
+            NISS v1.0 follows FIRST.org&rsquo;s CVSS v4.0 extension framework (&sect;3.11). Exploitability metrics (AV, AC, AT, PR, UI) and system impact metrics (VC, VI, VA, SC, SI, SA) are captured by the standard CVSS v4.0 base vector. NISS adds five <em>extension</em> metrics that CVSS structurally cannot express. Every scored technique carries both vectors side by side.
+          </p>
+        </div>
 
-        <!-- Exploitability Metrics -->
-        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4" style="color: var(--color-accent-secondary);">Exploitability Metrics (30%)</h4>
+        <!-- NISS Extension Metrics -->
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4" style="color: var(--color-accent-primary);">NISS Extension Metrics (5)</h4>
         <div class="overflow-x-auto mb-8">
           <table class="w-full text-sm">
             <thead>
               <tr class="border-b border-[var(--color-border)]">
                 <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Metric</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Weight</th>
                 <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Values</th>
                 <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">AV</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Network / Wireless / Local / Physical</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Attack Vector.</strong> Network = internet-reachable (cloud BCI platforms). Wireless = RF/BLE/ultrasonic attacks on implant telemetry. Local = on-device firmware or app-level access. Physical = direct electrode contact or surgical-phase tampering.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">AC</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Low / High</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Attack Complexity.</strong> High requires specialized neuroscience knowledge or calibrated equipment.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">PR</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Privileges Required.</strong> Low = BCI app-level access. High = firmware or clinical access.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">UI</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Passive / Active</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>User Interaction.</strong> None = attack succeeds on an idle implant. Passive = user must be wearing or transmitting with the BCI. Active = user must perform a specific cognitive task (e.g., motor imagery, P300 response) that opens the attack window.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #ef4444;">BI</td><td class="py-3 px-4 text-[var(--color-text-muted)]">3.0</td><td class="py-3 px-4 text-[var(--color-text-muted)]">N / L / M / H / C</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Biological Impact.</strong> Direct harm to neural tissue or physiological function. H/C triggers PINS flag.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #8b5cf6;">CG</td><td class="py-3 px-4 text-[var(--color-text-muted)]">2.5</td><td class="py-3 px-4 text-[var(--color-text-muted)]">N / L / M / H / C</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Cognitive Integrity.</strong> Impact on thought, perception, memory, identity, or decision-making.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #06b6d4;">CV</td><td class="py-3 px-4 text-[var(--color-text-muted)]">2.0</td><td class="py-3 px-4 text-[var(--color-text-muted)]">N / P / E / I</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Consent Violation.</strong> Degree of violation of informed consent. I (Implicit/covert) = patient cannot detect manipulation.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #f59e0b;">RV</td><td class="py-3 px-4 text-[var(--color-text-muted)]">1.5</td><td class="py-3 px-4 text-[var(--color-text-muted)]">F / T / P / I</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Reversibility.</strong> Whether damage can be undone. I (Irreversible) triggers PINS flag.</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #10b981;">NP</td><td class="py-3 px-4 text-[var(--color-text-muted)]">1.0</td><td class="py-3 px-4 text-[var(--color-text-muted)]">N / L / M / H / T</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Neuroplasticity.</strong> Whether the attack exploits or induces neuroplastic changes. T = therapeutic intent (TARA dual-use).</td></tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Impact Metrics -->
-        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4" style="color: var(--color-accent-primary);">Impact Metrics (70%)</h4>
-        <div class="overflow-x-auto mb-8">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-[var(--color-border)]">
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Metric</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Values</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #ef4444;">BI</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High / Critical</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Biological Impact.</strong> Physical harm to neural tissue. Critical = seizure induction, tissue damage.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #8b5cf6;">CI</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High / Critical</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Cognitive Integrity.</strong> Alteration of thought, memory, or identity. Critical = involuntary behavioral change.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium" style="color: #06b6d4;">II</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Low / High</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Information Impact.</strong> Exposure of neural data. High = raw brainwave exfiltration, cognitive state inference.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">S</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Unchanged / Changed</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Scope.</strong> Changed = attack affects systems beyond the target BCI (e.g., shared neural network).</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Supplemental Metrics -->
-        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4" style="color: #f59e0b;">Supplemental &amp; Threat Metrics</h4>
-        <div class="overflow-x-auto mb-8">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-[var(--color-border)]">
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Metric</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Values</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">R</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Automatic / Supported / Irreversible</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Reversibility.</strong> Can the damage be undone? Irreversible = permanent neural change.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">VC</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Implicit / Explicit</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Violation of Consent.</strong> Does the attack bypass informed consent? Explicit = clear neurological autonomy violation.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">NE</td><td class="py-3 px-4 text-[var(--color-text-muted)]">None / Growth / Degenerative</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Neuroplasticity.</strong> Can repeated exposure cause lasting pathway changes? Degenerative = irreversible via LTP/LTD.</td></tr>
-              <tr class="border-b border-[var(--color-border)]/50"><td class="py-3 px-4 font-[family-name:var(--font-mono)] font-medium">E</td><td class="py-3 px-4 text-[var(--color-text-muted)]">Unproven / PoC / Active</td><td class="py-3 px-4 text-[var(--color-text-muted)]"><strong>Exploit Maturity.</strong> Evidence level: Active = used in real-world incidents.</td></tr>
-            </tbody>
-          </table>
+        <!-- PINS Flag -->
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 3px solid #ef4444;">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">PINS Flag &mdash; Potential Impact to Neural Safety</p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <span class="font-[family-name:var(--font-mono)]">PINS = true</span> when BI &ge; High OR RV = Irreversible. Triggers mandatory safety review regardless of overall NISS score. 31 of 71 techniques (44%) are PINS-flagged.
+          </p>
         </div>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.4 Vector Format</h3>
         <div class="glass rounded-xl p-6 mb-8">
           <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-3">Example: Signal Injection (QIF-T0001)</p>
-          <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all">
-            NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A
-          </p>
+          <div class="space-y-3 mb-4">
+            <div>
+              <p class="text-xs text-[var(--color-text-faint)] mb-1">NISS Extension Vector</p>
+              <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all">
+                NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T
+              </p>
+            </div>
+            <div>
+              <p class="text-xs text-[var(--color-text-faint)] mb-1">Companion CVSS v4.0 Base Vector</p>
+              <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-text-muted)] break-all">
+                CVSS:4.0/AV:P/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:L
+              </p>
+            </div>
+          </div>
           <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1 mt-4 text-xs text-[var(--color-text-muted)]">
-            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">AV:P</span> &mdash; Physical access required (electrode contact)</div>
-            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">AC:L</span> &mdash; Low complexity (known technique)</div>
             <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">BI:H</span> &mdash; High biological impact (neural tissue)</div>
-            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">CI:H</span> &mdash; High cognitive integrity impact</div>
-            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">R:S</span> &mdash; Reversibility requires clinical support</div>
-            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">VC:E</span> &mdash; Explicit violation of consent</div>
-            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">NE:G</span> &mdash; Neuroplastic growth effects possible</div>
-            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">E:A</span> &mdash; Active: demonstrated in real-world settings</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">CG:H</span> &mdash; High cognitive integrity impact</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">CV:E</span> &mdash; Explicit consent violation</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">RV:P</span> &mdash; Partially reversible</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">NP:T</span> &mdash; Therapeutic neuroplastic effect</div>
+            <div><span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">PINS</span> &mdash; Flagged (BI &ge; H)</div>
           </div>
           <div class="border-t border-[var(--color-border)] mt-4 pt-4">
-            <p class="text-sm font-semibold">Score: <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">7.3 / 10.0</span> <span class="text-xs px-2 py-0.5 rounded-full ml-2" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">HIGH</span></p>
+            <p class="text-sm font-semibold">NISS Score: <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">6.9 / 10.0</span> <span class="text-xs px-2 py-0.5 rounded-full ml-2" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">MEDIUM</span> <span class="text-xs px-2 py-0.5 rounded-full ml-1" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">PINS</span></p>
           </div>
         </div>
 

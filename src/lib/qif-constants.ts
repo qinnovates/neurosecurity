@@ -88,19 +88,19 @@ export const PILLARS = [
     name: 'Runemate',
     fullName: 'Project Runemate',
     toolName: 'Runemate Forge',
-    tagline: 'The compression engine',
-    description: 'An HTML-to-bytecode compiler that compresses content 65-90%, making post-quantum encryption cost-free above 30 KB. Runemate Forge compiles HTML into Staves bytecode.',
+    tagline: 'The compiler',
+    description: 'An HTML-to-Staves bytecode compiler that compresses BCI interface content 65-90%, making post-quantum encryption viable on implants. Written in Rust, 200 KB on-chip.',
     href: '/runemate/',
     icon: '&#8734;',
     color: 'var(--color-accent-tertiary)',
-    version: '0.1',
+    version: '0.3',
     status: 'PoC Complete',
   },
 ] as const;
 
 /** Publication stats */
 export const STATS = {
-  publications: 11,
+  publications: 16,
   frameworkVersion: `v${QIF_VERSION}`,
   architecture: `${QIF_BANDS}-Band ${QIF_ARCHITECTURE}`,
   established: QIF_ESTABLISHED,
