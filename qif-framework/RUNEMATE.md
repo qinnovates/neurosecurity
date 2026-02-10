@@ -685,5 +685,147 @@ The PoC achieves 64-79% compression. Phase 2 targets:
 
 ---
 
+## Derivation Log
+
+> Chronological journal of architectural discoveries, integration insights, and breakthroughs.
+> **Rule:** This log ONLY GROWS. Never delete or edit past entries. Corrections get new entries.
+
+---
+
+### Entry R-001: Servo/wgpu/NSP — The Full BCI-Safe Rendering Pipeline
+
+**Date:** 2026-02-10
+**Context:** Conversation about whether websites can be rendered entirely in Rust, triggered by Kevin's question: "is it theoretically possible to render websites using only rust?"
+**AI Systems:** Claude Opus 4.6 (architecture analysis, feasibility assessment)
+**Human Decision:** Kevin identified the strategic connection to NSP and Runemate's mission
+
+#### Discovery
+
+The entire pipeline from network transport to GPU rendering can be built in Rust with zero C/C++ in the critical path. This is not theoretical — the components exist today:
+
+1. **Servo** (servo.org) — Mozilla's browser engine, written in Rust. Modular crate architecture. Uses SpiderMonkey for JS (C++ dependency, but isolatable). Already referenced in RUNEMATE.md Section 3 ("Why Rust" table, line 251) and used via Taffy (Servo-derived layout crate).
+
+2. **wgpu** — Rust-native WebGPU implementation. Maps to Metal (macOS/iOS), Vulkan (Linux/Android), DX12 (Windows). Provides GPU rendering without touching C/C++ graphics drivers at the API level.
+
+3. **NSP** — Our post-quantum wire protocol, also Rust. Designed to replace TLS for BCI data links.
+
+#### The Integration Path: NSP ↔ Servo
+
+Both are Rust. No FFI boundary needed. Servo's networking stack uses `hyper` (Rust HTTP) over `rustls` (Rust TLS). NSP can swap in at the transport layer:
+
+```
+Current Servo stack:        BCI-safe stack:
+  Internet                    Internet
+  → rustls (TLS)              → NSP (post-quantum, Rust)
+  → hyper (HTTP)              → hyper (HTTP)
+  → Servo (parsing/layout)    → Servo (parsing/layout)
+  → wgpu (GPU rendering)      → wgpu (GPU rendering)
+  → display                   → neural interface
+```
+
+The swap is architecturally clean: `rustls` is a trait-based TLS implementation. NSP can implement the same `Session`/`Stream` traits, making it a drop-in replacement at the transport layer. No changes needed upstream in `hyper` or Servo's content pipeline.
+
+#### Three.js Compatibility
+
+Kevin asked: "Can Servo render three.js?"
+
+- **JS execution:** Servo uses SpiderMonkey (C++, but sandboxed). Three.js runs as standard JavaScript.
+- **WebGL:** Partially supported in Servo. Three.js WebGL renderer works for basic scenes.
+- **WebGPU (better path):** three.js has a `WebGPURenderer` that targets the WebGPU API. Servo + wgpu would provide native WebGPU support, meaning three.js renders through an all-Rust GPU pipeline.
+
+```
+three.js (JS) → WebGPURenderer → WebGPU API → wgpu (Rust) → Metal/Vulkan → GPU
+```
+
+This is the preferred path over WebGL for BCI rendering — WebGPU is the future standard and wgpu is the reference implementation.
+
+#### Why This Matters for Runemate
+
+**The Chromium problem:** Meta, Google, and Apple all use Chromium-derived rendering engines (Blink, WebKit) — ~35 million lines of C/C++. These engines produce weekly CVEs. They are currently used in AR/VR headsets that sit inches from the brain. When BCIs connect to the web, running Chromium's attack surface next to neural tissue is a security nightmare.
+
+**Runemate's two-path strategy:**
+
+| Path | Use Case | Engine | Status |
+|------|----------|--------|--------|
+| **Staves (Phase 1-3)** | Implant rendering, resource-constrained chips | The Scribe (custom, ~200 KB no_std) | Architecture phase |
+| **Servo+NSP (new)** | Gateway rendering, external BCI headsets, non-implant BCIs | Servo (full browser, ~5-10 MB) | Components exist, integration needed |
+
+Staves remains the right solution for implanted chips (resource constraints, no_std, sub-1MB). But for non-implant BCIs (headsets, external devices, AR glasses), a full browser engine is needed. Servo is the only memory-safe option.
+
+**The full BCI-safe pipeline:**
+```
+Internet → NSP (Rust, post-quantum) → HTTP → Content
+  → Servo (Rust, memory-safe parsing/layout)
+  → wgpu (Rust, GPU rendering)
+  → neural interface
+```
+
+No C/C++ in the critical path. Every component is Rust. Every component is memory-safe. This is the trust stack for consumer BCIs connecting to the open web.
+
+#### Architectural Implications
+
+1. **Forge enhancement:** The Forge (Section 3) currently compiles HTML→Staves. With Servo integration, the Forge can also serve as a **validator** — render content in Servo first, compare visual output to Stave rendering, catch discrepancies.
+
+2. **Phase 2 acceleration:** Servo's modular crates can be used selectively. We already use Taffy (Servo-derived layout). We can pull in `html5ever` (Servo's HTML parser) and `cssparser` (Servo's CSS parser) — both listed in Section 3's architecture — without taking the full Servo dependency.
+
+3. **NSP as a platform:** If NSP integrates cleanly with Servo, any Servo-based application inherits post-quantum security. This turns NSP from a BCI-specific protocol into an internet-wide security layer. The vision: "HTTPS had to exist before e-commerce. NSP has to exist before a brain safely interfaces with a website."
+
+4. **Consumer BCI focus:** Kevin's one-sentence vision: *"I'm building the security layer that has to exist before consumer BCIs can safely connect to anything."* Servo+NSP is how that vision reaches non-implant BCIs (the near-term market).
+
+#### Status
+
+- **Servo:** Active development (Linux Foundation). Modular crate architecture. WebGPU support in progress via wgpu.
+- **wgpu:** Mature. Powers Firefox's WebGPU. Cross-platform (Metal, Vulkan, DX12).
+- **NSP-Servo integration:** Not yet attempted. Architectural analysis confirms feasibility. No blocking technical issues identified.
+- **Priority:** Document and track. Implementation deferred until NSP core protocol is stable (post-RFC).
+
+#### Dependencies
+
+- NSP protocol spec finalization (prerequisite for any integration)
+- Servo WebGPU maturity (in progress upstream)
+- RUNEMATE.md Section 3 already references Servo and Taffy — no architectural conflicts
+
+---
+
+### Entry R-002: Neural Systems Language (NSL) — Domain-Specific Language Concept
+
+**Date:** 2026-02-10  |  **Status:** Phase 4+ (deprioritized by R-003)
+
+Rust is systems-level. A BCI-specific DSL could eliminate generality overhead (arena memory, native rendering types, compiler-enforced constant-time crypto, power budget annotations). Recommended path: transpile to Rust. Historical precedent: CUDA, SPARK/Ada, Solidity.
+
+---
+
+### Entry R-003: TARA as Safety Specification for Visual Cortex Rendering
+
+**Date:** 2026-02-10  |  **Status:** Conceptual architecture
+
+Visual cortex rendering needs electrode patterns, not pixels. TARA's dual-use mapping (attack = unwanted hallucination, therapy = visual prosthesis) becomes the safety spec. Therapeutic parameters (amplitude, frequency, duration, charge density) become compiler constraints. Three safety gates: TARA (compile time), NSP (transport), QI (runtime).
+
+---
+
+### Entry R-004: Dual-Pipeline Architecture — Game Engine + Neural Renderer
+
+**Date:** 2026-02-10  |  **Status:** Conceptual
+
+Pipeline A (Game Engine/Bevy, gateway): performance-priority, sandboxed, restartable. Pipeline B (Neural Renderer/Scribe, implant): safety-priority, TARA-bounded, formally verified, never crashes. Forge translates between them. Latency converges: Phase 2 ~121ms → Phase 3 ~21ms (faster than eyes). Staves v2 extends to 3D scene graphs.
+
+---
+
+### Entry R-005: Two Research Paths — Synesthesia Cohort + Congenital Blindness
+
+**Date:** 2026-02-10  |  **Status:** Research program concept
+
+Option 1: Recruit synesthesia volunteer cohort, map cross-modal pathways, produce biological rendering vocabulary. Option 2: Congenital blindness, bottom-up calibration per patient. Both use same stack. NOT "study Kevin's brain" — proper cohort research with IRB, Qinnovate leads with security first.
+
+---
+
+### Entry R-006: Partnership Strategy — OpenBCI + Ethics Foundation
+
+**Date:** 2026-02-10  |  **Status:** Partnership outreach phase
+
+OpenBCI recruiting perfect-vision participants = entry point for synesthesia cohort. Partner strategy: Qinnovate = security layer everyone integrates. Ethics as architectural constraints: NSP encrypts all neural data (PQ), TARA bounds every stimulation, QI detects distress in real-time, Apache 2.0 for full auditability. "Trust is verified, not assumed."
+
+---
+
 *Part of the QIF (Quantum Indeterministic Framework) ecosystem.*
 *"HTML was designed for screens. Staves was designed for brains."*
