@@ -126,7 +126,7 @@ Think: **W3C** (Qinnovate) vs **Chrome** (Mindloft)
 
 - **Contributing:** Open to academic researchers, security experts, neuroethicists
 - **Governance:** Community-driven standards development
-- **License:** CC BY-NC-ND 4.0
+- **License:** Apache 2.0
 
 ---
 
@@ -259,11 +259,9 @@ Qinnovate seeks partnerships with:
 
 ## License
 
-All content in this repository is licensed under **CC BY-NC-ND 4.0** (Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International).
+All content in this repository is licensed under the **Apache License, Version 2.0**.
 
-You may share with attribution, but commercial use and modifications require explicit written permission from the copyright holder.
-
-For licensing inquiries: kevin@qinnovate.com
+You may use, modify, and distribute freely with attribution. See [LICENSE](LICENSE) for full terms.
 
 ---
 
