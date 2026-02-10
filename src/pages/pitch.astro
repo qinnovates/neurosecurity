@@ -4,8 +4,8 @@
  * ~12 slides, 15-minute walkthrough, 15 min discussion
  * Reveal.js via CDN, Apple Keynote aesthetic (white, system-ui, crystal glass)
  */
-import { HOURGLASS_BANDS, QIF_VERSION, QIF_BANDS, PILLARS, COHERENCE } from '../lib/qif-constants';
-import { THREAT_VECTORS, getThreatStats, getTaraStats } from '../lib/threat-data';
+import { HOURGLASS_BANDS, QIF_VERSION, QIF_BANDS, PILLARS } from '../lib/qif-constants';
+import { getThreatStats, getTaraStats } from '../lib/threat-data';
 import { NSP_VERSION, NSP_LAYERS, NSP_POWER } from '../lib/nsp-constants';
 
 const stats = getThreatStats();
@@ -135,9 +135,7 @@ const nspShortLabels: Record<number, string> = {
       font-weight: 500;
     }
 
-    .mono { font-family: ui-monospace, "SF Mono", monospace; }
     .faint { color: var(--text-tertiary); }
-    .muted { color: var(--text-secondary); }
     .accent { color: var(--accent); }
     .cyan { color: var(--accent-secondary); }
     .purple { color: var(--accent-tertiary); }
@@ -325,17 +323,17 @@ const nspShortLabels: Record<number, string> = {
       will-change: transform;
     }
 
-    /* Past slides: frosted glass peeking from top */
+    /* Past slides: frosted glass peeking from left */
     .reveal.slide .slides > section:not([data-transition]).past {
-      transform: translate3d(0, -72%, -30px) scale(0.88) !important;
-      opacity: 0.45 !important;
+      transform: translate3d(-82%, 0, -30px) scale(0.88) !important;
+      opacity: 0.4 !important;
       filter: blur(12px) saturate(120%) !important;
     }
 
-    /* Future slides: frosted glass peeking from bottom */
+    /* Future slides: frosted glass peeking from right */
     .reveal.slide .slides > section:not([data-transition]).future {
-      transform: translate3d(0, 72%, -30px) scale(0.88) !important;
-      opacity: 0.45 !important;
+      transform: translate3d(82%, 0, -30px) scale(0.88) !important;
+      opacity: 0.4 !important;
       filter: blur(12px) saturate(120%) !important;
     }
 
@@ -488,6 +486,88 @@ const nspShortLabels: Record<number, string> = {
       mix-blend-mode: multiply;
     }
 
+    /* ═══ Glass Orbs (ONI-style floating circles) ═══ */
+    .glass-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .glass-orb {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      background: radial-gradient(circle at 30% 30%,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0.08) 40%,
+        rgba(255, 255, 255, 0.02) 70%,
+        transparent 100%);
+      box-shadow:
+        inset 0 0 30px rgba(255, 255, 255, 0.15),
+        inset -8px -8px 20px rgba(0, 0, 0, 0.03),
+        0 4px 24px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(8px) saturate(140%);
+      -webkit-backdrop-filter: blur(8px) saturate(140%);
+      will-change: transform;
+    }
+    .glass-orb::after {
+      content: '';
+      position: absolute;
+      top: 12%;
+      left: 18%;
+      width: 35%;
+      height: 25%;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      filter: blur(6px);
+    }
+    .glass-orb--1 {
+      width: 280px; height: 280px;
+      top: -60px; right: -40px;
+      animation: orb-float-1 20s ease-in-out infinite alternate;
+    }
+    .glass-orb--2 {
+      width: 180px; height: 180px;
+      bottom: 8%; left: -30px;
+      animation: orb-float-2 16s ease-in-out infinite alternate;
+    }
+    .glass-orb--3 {
+      width: 120px; height: 120px;
+      top: 35%; left: 8%;
+      animation: orb-float-3 22s ease-in-out infinite alternate;
+    }
+    .glass-orb--4 {
+      width: 90px; height: 90px;
+      top: 15%; left: 55%;
+      animation: orb-float-4 18s ease-in-out infinite alternate;
+    }
+    .glass-orb--5 {
+      width: 200px; height: 200px;
+      bottom: -40px; right: 15%;
+      animation: orb-float-5 24s ease-in-out infinite alternate;
+    }
+    @keyframes orb-float-1 {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-3vw, 5vh) scale(1.05); }
+    }
+    @keyframes orb-float-2 {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(4vw, -3vh) scale(0.95); }
+    }
+    @keyframes orb-float-3 {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(2vw, -4vh) scale(1.08); }
+    }
+    @keyframes orb-float-4 {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-2vw, 3vh) scale(0.92); }
+    }
+    @keyframes orb-float-5 {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(3vw, -2vh) scale(1.03); }
+    }
+
     /* Ensure Reveal sits above background layers */
     .reveal-viewport,
     .reveal-viewport .reveal,
@@ -546,6 +626,15 @@ const nspShortLabels: Record<number, string> = {
     </filter>
     <rect width="100%" height="100%" filter="url(#noise)" />
   </svg>
+
+  <!-- Glass orbs (ONI-style floating circles) -->
+  <div class="glass-orbs" aria-hidden="true">
+    <div class="glass-orb glass-orb--1"></div>
+    <div class="glass-orb glass-orb--2"></div>
+    <div class="glass-orb glass-orb--3"></div>
+    <div class="glass-orb glass-orb--4"></div>
+    <div class="glass-orb glass-orb--5"></div>
+  </div>
 
   <div class="reveal">
     <div class="slides">
