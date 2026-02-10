@@ -112,14 +112,14 @@ const nspShortLabels: Record<number, string> = {
     /* ═══ Components ═══ */
 
     .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 16px;
       padding: 16px;
       text-align: left;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 16px rgba(0, 0, 0, 0.04);
     }
 
     .glass h3 { margin: 0 0 4px 0; font-size: 0.8em; }
@@ -302,28 +302,46 @@ const nspShortLabels: Record<number, string> = {
     /* Fragment fade-in */
     .reveal .fragment { transition: all 0.5s var(--ease); }
 
-    /* ═══ Glass-Pane Z-Depth Transitions ═══ */
+    /* ═══ iOS Liquid Glass Carousel ═══ */
     .reveal .slides {
-      perspective: 1400px;
+      perspective: 1200px;
       perspective-origin: 50% 50%;
     }
-    .reveal.slide .slides > section {
-      transition: transform 0.9s var(--ease),
-                  opacity 0.9s var(--ease),
-                  filter 0.9s var(--ease) !important;
+
+    /* Every slide is a frosted glass pane */
+    .reveal .slides > section {
+      border-radius: 24px !important;
+      overflow: hidden !important;
+      background: rgba(255, 255, 255, 0.78) !important;
+      backdrop-filter: blur(32px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+      box-shadow:
+        0 4px 32px rgba(0, 0, 0, 0.05),
+        0 0 0 1px rgba(255, 255, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+      transition: transform 0.7s var(--ease),
+                  opacity 0.7s var(--ease),
+                  backdrop-filter 0.7s var(--ease) !important;
+      will-change: transform;
     }
+
+    /* Past slides: peeking from top */
     .reveal.slide .slides > section:not([data-transition]).past {
-      transform: translate3d(-100%, 0, -600px) rotateY(4deg) !important;
-      opacity: 0 !important;
-      filter: blur(12px) !important;
+      transform: translate3d(0, -72%, -30px) scale(0.88) !important;
+      opacity: 0.3 !important;
+      filter: blur(3px) !important;
     }
+
+    /* Future slides: peeking from bottom */
     .reveal.slide .slides > section:not([data-transition]).future {
-      transform: translate3d(100%, 0, -600px) rotateY(-4deg) !important;
-      opacity: 0 !important;
-      filter: blur(12px) !important;
+      transform: translate3d(0, 72%, -30px) scale(0.88) !important;
+      opacity: 0.3 !important;
+      filter: blur(3px) !important;
     }
+
+    /* Present slide: centered, full scale, crystal clear */
     .reveal.slide .slides > section.present {
-      transform: translate3d(0, 0, 0) rotateY(0) !important;
+      transform: translate3d(0, 0, 0) scale(1) !important;
       opacity: 1 !important;
       filter: none !important;
     }
@@ -470,15 +488,15 @@ const nspShortLabels: Record<number, string> = {
       mix-blend-mode: multiply;
     }
 
-    /* Ensure Reveal sits above background layers with transparent bg */
+    /* Ensure Reveal sits above background layers */
     .reveal-viewport,
     .reveal-viewport .reveal,
-    .reveal-viewport .reveal .slides,
-    .reveal-viewport .reveal .slides section {
+    .reveal-viewport .reveal .slides {
       background: transparent !important;
     }
-    .reveal-viewport { position: relative; z-index: 3; }
-    .reveal { position: relative; z-index: 3; }
+    .reveal-viewport { position: relative; z-index: 3; overflow: visible !important; }
+    .reveal { position: relative; z-index: 3; overflow: visible !important; }
+    .reveal .slides { overflow: visible !important; }
 
     @media (max-width: 768px) {
       .grid-3 { grid-template-columns: 1fr; }
@@ -893,8 +911,8 @@ const nspShortLabels: Record<number, string> = {
         <p class="label">Thank you</p>
         <h2 style="margin-bottom: 8px;">You named this field.<br />Let me help build it.</h2>
         <p style="font-size: 0.58em; max-width: 420px; margin: 8px auto 0;">
-          Everything is open source. I'm looking for mentorship, not funding.
-          Point me in the right direction and I'll do the work.
+          Everything is open source, Apache 2.0.
+          I'll do the work.
         </p>
         <div class="links" style="margin-top: 22px;">
           <a class="link" href="https://qinnovate.com" target="_blank">qinnovate.com</a>
@@ -940,6 +958,7 @@ const nspShortLabels: Record<number, string> = {
       margin: 0.07,
       transition: 'slide',
       transitionSpeed: 'default',
+      viewDistance: 2,
       center: true,
       controls: true,
       controlsLayout: 'edges',
@@ -1042,5 +1061,6 @@ const nspShortLabels: Record<number, string> = {
       initWidget();
     })();
   </script>
+
 </body>
 </html>
