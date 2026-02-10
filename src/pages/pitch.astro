@@ -325,18 +325,18 @@ const nspShortLabels: Record<number, string> = {
       will-change: transform;
     }
 
-    /* Past slides: peeking from top */
+    /* Past slides: frosted glass peeking from top */
     .reveal.slide .slides > section:not([data-transition]).past {
       transform: translate3d(0, -72%, -30px) scale(0.88) !important;
-      opacity: 0.3 !important;
-      filter: blur(3px) !important;
+      opacity: 0.45 !important;
+      filter: blur(12px) saturate(120%) !important;
     }
 
-    /* Future slides: peeking from bottom */
+    /* Future slides: frosted glass peeking from bottom */
     .reveal.slide .slides > section:not([data-transition]).future {
       transform: translate3d(0, 72%, -30px) scale(0.88) !important;
-      opacity: 0.3 !important;
-      filter: blur(3px) !important;
+      opacity: 0.45 !important;
+      filter: blur(12px) saturate(120%) !important;
     }
 
     /* Present slide: centered, full scale, crystal clear */
