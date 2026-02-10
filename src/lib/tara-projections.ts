@@ -176,8 +176,8 @@ const securityProjection: ProjectionConfig = {
     html += dlRow('Quantum', t.quantumDetection, 'color:#8b5cf6');
     html += '</dl>';
     html += `<div class="detail-description">${t.description}</div>`;
-    if (t.qnis && t.qnis.score > 0) {
-      html += `<div class="detail-qnis">QNIS ${t.qnis.score.toFixed(1)} (${t.qnis.severity}) \u2014 ${t.qnis.vector}</div>`;
+    if (t.niss && t.niss.score > 0) {
+      html += `<div class="detail-niss">NISS ${t.niss.score.toFixed(1)} (${t.niss.severity}) \u2014 ${t.niss.vector}</div>`;
     }
     html += `<div class="detail-tactic">${t.tactic}</div>`;
     if (t.crossRefs?.secondary_tactics?.length) {

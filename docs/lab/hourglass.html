@@ -688,7 +688,7 @@ main {
   color: var(--text-dim);
 }
 
-/* Tactic/QNIS cross-ref in detail */
+/* Tactic/NISS cross-ref in detail */
 .tactic-ref {
   font-size: 0.7rem;
   color: var(--text-dim);
@@ -1161,7 +1161,7 @@ class BandDetailView {
             const statusCls = (a.status || 'theoretical').toLowerCase();
             const sevCls = (a.severity || 'medium').toLowerCase();
             const tacticTag = a.tactic ? `<span class="tactic-tag">${a.tactic}</span>` : '';
-            const qnisTag = a.qnis ? `<span class="tactic-tag">QNIS ${a.qnis.score.toFixed(1)}</span>` : '';
+            const nissTag = a.niss ? `<span class="tactic-tag">NISS ${a.niss.score.toFixed(1)}</span>` : '';
             const sourcesList = (a.sources && a.sources.length > 0)
               ? `<div class="source-list">Sources: ${a.sources.join('; ')}</div>` : '';
             return `
@@ -1182,7 +1182,7 @@ class BandDetailView {
                 Classical detection: <span style="color:${a.classical === 'Yes' ? 'var(--green)' : a.classical === 'Partial' ? 'var(--orange)' : 'var(--red)'}">${a.classical || 'N/A'}</span>
                 · Quantum detection: <span style="color:var(--purple)">${a.quantum || 'N/A'}</span>
               </div>
-              ${tacticTag || qnisTag ? `<div class="tactic-ref">${tacticTag}${qnisTag}</div>` : ''}
+              ${tacticTag || nissTag ? `<div class="tactic-ref">${tacticTag}${nissTag}</div>` : ''}
               ${a.notes ? `<div class="detail-attack-meta" style="color:var(--text);margin-top:0.2rem;">${a.notes}</div>` : ''}
               ${sourcesList}
             </div>`;
@@ -1636,7 +1636,7 @@ async function loadRegistry() {
       ui_category: t.ui_category,
       tactic: t.tactic || t.category,
       category: t.tactic || t.category,
-      qnis: t.qnis || null,
+      niss: t.niss || null,
     }));
     QIF_DATA._registry_tactics = registry.tactics || [];
     console.log(`Registry loaded: ${QIF_DATA.threat_model.length} techniques`);

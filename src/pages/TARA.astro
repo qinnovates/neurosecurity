@@ -136,7 +136,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
             <span class="status-badge status-badge--EMERGING ml-1">emerging</span> = newly identified.
           </div>
           <div>
-            <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0&ndash;10.
+            <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). NISS scores rate neural impact 0&ndash;10.
           </div>
         </div>
       </div>
@@ -633,7 +633,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     font-style: italic;
   }
 
-  .detail-qnis {
+  .detail-niss {
     font-size: 0.7rem;
     color: var(--color-text-faint);
     margin-top: 0.3rem;
@@ -883,8 +883,8 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
       html += '<dt>Quantum</dt><dd style="color:#8b5cf6">' + t.quantumDetection + '</dd>';
       html += '</dl>';
       html += '<div class="detail-description">' + t.description + '</div>';
-      if (t.qnis && t.qnis.score > 0) {
-        html += '<div class="detail-qnis">QNIS ' + t.qnis.score.toFixed(1) + ' (' + t.qnis.severity + ') \u2014 ' + t.qnis.vector + '</div>';
+      if (t.niss && t.niss.score > 0) {
+        html += '<div class="detail-niss">NISS ' + t.niss.score.toFixed(1) + ' (' + t.niss.severity + ') \u2014 ' + t.niss.vector + '</div>';
       }
       html += '<div class="detail-tactic">' + t.tactic + '</div>';
       if (t.crossRefs && t.crossRefs.secondary_tactics && t.crossRefs.secondary_tactics.length > 0) {
@@ -1125,7 +1125,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   // ═══════════════════════════════════════════════════════════════
 
   var GRID_AXES_HTML = '<div><strong class="text-[var(--color-text-primary)]">Grid axes</strong> \u2014 Rows are hourglass bands (Neural N7\u2013N1, Interface I0, Synthetic S1\u2013S3). Columns are attack categories (Signal Injection, Eavesdropping, Data Manipulation, etc.).</div>';
-  var QIF_IDS_HTML = '<div><strong class="text-[var(--color-text-primary)]">QIF IDs</strong> \u2014 QIF-T0001+ for techniques. Tactics use Qinnovate\u2019s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0\u201310.</div>';
+  var QIF_IDS_HTML = '<div><strong class="text-[var(--color-text-primary)]">QIF IDs</strong> \u2014 QIF-T0001+ for techniques. Tactics use Qinnovate\u2019s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). NISS scores rate neural impact 0\u201310.</div>';
 
   function updateHowToRead(projId) {
     var proj = PROJECTIONS[projId];

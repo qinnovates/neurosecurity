@@ -72,7 +72,7 @@ Every TARA entry now carries four projections:
 
 **Governance:** What safeguards are required. Consent. Amplitude ceilings. Charge density limits. Real-time monitoring requirements. Which NSP layers govern this mechanism. Regulatory classification.
 
-All existing security fields (technique ID, attack name, tactic, severity, QNIS score, evidence level) remain unchanged. Security researchers see no difference in their workflow. The new fields are additive.
+All existing security fields (technique ID, attack name, tactic, severity, NISS score, evidence level) remain unchanged. Security researchers see no difference in their workflow. The new fields are additive.
 
 For the 18 pure-silicon techniques that have no therapeutic analog, the therapeutic field is null. For the 10 ambiguous techniques (digital vector, biological payload), the therapeutic field is marked speculative with explicit uncertainty. We do not overclaim. We document what maps, what does not, and where the research frontier is.
 
@@ -83,7 +83,7 @@ Here is one entry, stripped to its core, to show what this looks like in practic
 | Projection | Content |
 |------------|---------|
 | **Mechanism** | Electrode current delivery. Electromagnetic coupling. Parameters: amplitude (mA), frequency (Hz), pulse width (us), waveform, target region. |
-| **Security** | Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. QNIS severity: 7.3 (high). |
+| **Security** | Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. NISS severity: 7.3 (high). |
 | **Therapeutic** | Deep brain stimulation (DBS). FDA-approved for Parkinson's disease, essential tremor, dystonia, OCD, epilepsy. Devices: Medtronic Percept PC, Abbott Infinity, Boston Scientific Vercise. Also in Phase III trials for major depression and Alzheimer's. |
 | **Diagnostic** | Cortical stimulation mapping for pre-surgical epilepsy localization. |
 | **Governance** | Informed consent required. Amplitude ceiling: 10mA. Charge density ceiling: 30 uC/cm2. Real-time impedance and coherence monitoring. FDA Class III (PMA pathway). NSP layers L3, L5. |
@@ -112,8 +112,8 @@ Tara (तारा) also means "star" in Sanskrit. In Tibetan Buddhism, Tara is 
 | Jan 18 | 0 | First commit. Just the question. |
 | Feb 2 | — | **Hourglass model.** 14-layer OSI stack scrapped. 3 versions in one day. 102 sources validated. |
 | Feb 6 | 60 | **NSP formalized.** 6-layer protocol. v4.0 in code. 3 inventories merged. |
-| Feb 7 | — | **QNIS created.** BCI-specific severity scoring. CVSS cannot score brains. |
-| Feb 8 | 65 | **QNIS v1.0 finalized.** Spectral decomposition. Every technique scored for neural impact. |
+| Feb 7 | — | **NISS created.** BCI-specific severity scoring. CVSS cannot score brains. |
+| Feb 8 | 65 | **NISS v1.0 finalized.** Spectral decomposition. Every technique scored for neural impact. |
 | Feb 9 | 71 | **TARA named.** Phase dynamics. Dual-use gap analysis. Atlas born. |
 
 </noscript>
@@ -154,7 +154,7 @@ Transparency about the state of this work:
 - The cross-layer threat synthesis (from ~20 siloed techniques to 71 unified techniques) is a framework contribution. The 22 theoretical techniques in particular are derived from known physics but have not been observed in real BCI systems.
 - The dual-use mapping (attack mechanism = therapeutic mechanism) is the core hypothesis of TARA. The individual pairings (signal injection = DBS, entrainment = tACS) reference published science on both sides. The systematic claim that this pattern holds across 35-40 techniques has not been independently verified.
 - NSP (Neural Sensory Protocol) has not been validated against real BCI hardware or real neural signals. The six-layer validation stack is a design, not a tested implementation.
-- The QNIS scoring methodology has not been externally calibrated.
+- The NISS scoring methodology has not been externally calibrated.
 - The intermodulation attack class and separatrix exploitation class are novel to QIF. The underlying physics is published; the security framing is ours.
 
 **What we need from the community:**

@@ -189,7 +189,7 @@ The boundary between N6 (chaotic to quantum uncertain) and N7 (quantum uncertain
 
 ### 4.5 Severity Stratification
 
-The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The threat taxonomy (Section 6.3--6.4) assigns band-level targeting to each attack, enabling severity-scored risk assessment via the QNIS framework (Section 6.5).
+The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The threat taxonomy (Section 6.3--6.4) assigns band-level targeting to each attack, enabling severity-scored risk assessment via the NISS framework (Section 6.5).
 
 ### 4.6 Why Three Synthetic Bands: Frequency-Regime Security
 
@@ -400,7 +400,7 @@ QI catches direct attacks (Mechanism A). It partially catches harmonic and envel
 
 ### 6.3 Unified Threat Taxonomy
 
-QIF maintains a registry of **71 attack techniques** organized into **11 tactics** across **7 operational domains** using the **QIF Locus Taxonomy v1.0**, a BCI-native threat classification system. Each technique is scored using **QNIS v1.0** (QIF Neural Impact Score), a purpose-built alternative to CVSS that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
+QIF maintains a registry of **71 attack techniques** organized into **11 tactics** across **7 operational domains** using the **QIF Locus Taxonomy v1.0**, a BCI-native threat classification system. Each technique is scored using **NISS v1.0** (Neural Impact Scoring System), a purpose-built alternative to CVSS that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
 
 ## 6.4 QIF Locus Taxonomy
 
@@ -470,7 +470,7 @@ Each domain contains one or more tactics, each describing an adversary's operati
 
 ### 6.4.5 Registry Structure
 
-Each of the 71 techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability (classical vs. QI-enhanced), evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a QNIS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
+Each of the 71 techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability (classical vs. QI-enhanced), evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a NISS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
 
 Evidence status breakdown:
 
@@ -481,7 +481,7 @@ Evidence status breakdown:
 | Theoretical | 22 | Plausible from principles |
 | Emerging | 16 | Newly identified |
 
-## 6.5 QNIS v1.0 --- QIF Neural Impact Score
+## 6.5 NISS v1.0 --- Neural Impact Scoring System
 
 *BCI-native vulnerability scoring system*
 
@@ -495,7 +495,7 @@ CVSS (Common Vulnerability Scoring System), maintained by FIRST.org, is the indu
 - **Violation of consent** --- does this attack bypass the subject's informed consent?
 - **Neuroplasticity effects** --- can repeated exposure cause lasting changes to neural pathways?
 
-QNIS v1.0, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **BCI-native impact dimensions** (Biological Impact, Cognitive Integrity, Information Impact) and adds supplemental human-impact modifiers. Where CVSS weights exploit and impact equally, QNIS weights human impact at 70% and system exploitability at 30%.
+NISS v1.0, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **BCI-native impact dimensions** (Biological Impact, Cognitive Integrity, Information Impact) and adds supplemental human-impact modifiers. Where CVSS weights exploit and impact equally, NISS weights human impact at 70% and system exploitability at 30%.
 
 ### 6.5.2 Score Formula
 
@@ -538,7 +538,7 @@ The 70/30 weighting is a deliberate inversion of traditional vulnerability scori
 
 Example: Signal Injection (QIF-T0001)
 
-`QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A`
+`NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A`
 
 - `AV:P` --- Physical access required (electrode contact)
 - `AC:L` --- Low complexity (known technique)
@@ -562,7 +562,7 @@ Example: Signal Injection (QIF-T0001)
 
 ### 6.5.6 Registry Distribution
 
-Across all 71 techniques, QNIS scoring produces the following severity distribution:
+Across all 71 techniques, NISS scoring produces the following severity distribution:
 
 | Severity | Count |
 |----------|-------|
@@ -575,7 +575,7 @@ The skew toward high severity is expected: BCI attacks inherently involve the hu
 
 ## 6.6 Case Study: Algorithmic Psychosis Induction
 
-QIF-T0065 -- QNIS 9.1 (Critical) -- Status: Confirmed
+QIF-T0065 -- NISS 9.1 (Critical) -- Status: Confirmed
 
 ### 6.6.1 The Attack
 
@@ -607,11 +607,11 @@ The brain's pattern-matching and threat-detection systems are exploited until th
 
 Psychosis manifests as a neurological event: measurable changes in dopaminergic signaling, prefrontal cortex function, and sleep architecture. This is not metaphorical harm --- it is physiological damage mediated through cognitive channels.
 
-### 6.6.3 QNIS Scoring Breakdown
+### 6.6.3 NISS Scoring Breakdown
 
-CVSS cannot score this attack. It has no concept of cognitive integrity, neuroplasticity, or consent violation. Under CVSS, a recommendation algorithm is not a vulnerability. Under QNIS, it scores 9.1 (Critical):
+CVSS cannot score this attack. It has no concept of cognitive integrity, neuroplasticity, or consent violation. Under CVSS, a recommendation algorithm is not a vulnerability. Under NISS, it scores 9.1 (Critical):
 
-| QNIS Metric | Value | Rationale |
+| NISS Metric | Value | Rationale |
 |-------------|-------|-----------|
 | AV (Attack Vector) | Wireless | Delivered over the internet to any connected device |
 | AC (Complexity) | Low | Algorithm operates autonomously; no per-target customization needed |
@@ -640,7 +640,7 @@ This attack already works through a screen. A brain-computer interface makes it 
 
 ### 6.6.5 Implications
 
-**Intent is irrelevant to the score.** QNIS produces the same 9.1 whether a nation-state deliberately weaponizes a feed to induce psychosis in a target population, or a platform negligently optimizes for engagement while ignoring psychiatric harm. This is a deliberate departure from traditional threat modeling, which assumes an adversary with intent. In BCI security, the outcome is the threat --- not the motivation behind it.
+**Intent is irrelevant to the score.** NISS produces the same 9.1 whether a nation-state deliberately weaponizes a feed to induce psychosis in a target population, or a platform negligently optimizes for engagement while ignoring psychiatric harm. This is a deliberate departure from traditional threat modeling, which assumes an adversary with intent. In BCI security, the outcome is the threat --- not the motivation behind it.
 
 **The legal vacuum.** This attack operates in a regulatory gray area. Current frameworks for negligence and product liability have not been tested against cognitive manipulation at scale. Terms of service do not constitute informed consent for neurological targeting. QIF provides a formal language to describe the harm --- a prerequisite for future legal and regulatory frameworks that do not yet exist.
 
@@ -666,7 +666,7 @@ TARA reorganizes the threat registry by **physical mechanism** rather than by ad
 
 **Security Projection**
 
-Attack technique, tactic, severity (QNIS), detection methods, evidence status. The view a security researcher needs.
+Attack technique, tactic, severity (NISS), detection methods, evidence status. The view a security researcher needs.
 
 **Clinical Projection**
 
@@ -690,11 +690,11 @@ This architecture draws structural inspiration from biological databases: the [K
 
 In June 2025, the FDA finalized [Section 524B of the FD&C Act](https://www.federalregister.gov/documents/2025/06/27/2025-11669/cybersecurity-in-medical-devices-quality-system-considerations-and-content-of-premarket-submissions) [87], which legally requires cybersecurity for any "cyber device": medical devices with software that can connect to the internet. Every wireless BCI on the market or in clinical trials falls under this mandate. Manufacturers must submit cybersecurity plans, software bills of materials (SBOMs), and vulnerability management processes. Non-compliance means denied market authorization.
 
-Section 524B is a mandate, not a map. It tells manufacturers they need cybersecurity but does not specify BCI-specific threats, how neural signals differ from network packets, or what happens when the same physical mechanism constitutes both an attack and a therapy. QIF provides the framework. NSP provides the protocol. QNIS provides the scoring. TARA provides the atlas that maps every mechanism across all four dimensions simultaneously, giving manufacturers, clinicians, regulators, and engineers a shared language for securing neural devices.
+Section 524B is a mandate, not a map. It tells manufacturers they need cybersecurity but does not specify BCI-specific threats, how neural signals differ from network packets, or what happens when the same physical mechanism constitutes both an attack and a therapy. QIF provides the framework. NSP provides the protocol. NISS provides the scoring. TARA provides the atlas that maps every mechanism across all four dimensions simultaneously, giving manufacturers, clinicians, regulators, and engineers a shared language for securing neural devices.
 
 ## 7. Neural Sensory Protocol (NSP)
 
-The QI equation measures integrity. The Locus Taxonomy classifies threats. QNIS scores their severity. TARA maps them across security and medicine. What is missing is the wire protocol that enforces these protections in real time on a living neural interface.
+The QI equation measures integrity. The Locus Taxonomy classifies threats. NISS scores their severity. TARA maps them across security and medicine. What is missing is the wire protocol that enforces these protections in real time on a living neural interface.
 
 NSP is not only a security protocol. It is the trust layer that enables therapeutic BCI deployment. Without a validated, physics-based integrity protocol built into the device, no regulator will approve consumer neural stimulation. NSP provides that foundation: a protocol analogous to TLS for the web, but designed for the unique physics of the electrode-tissue interface. Where TLS validates the integrity of data in transit between servers, NSP validates the integrity of signals crossing the boundary between silicon and biology.
 
@@ -779,7 +779,7 @@ This paper delivered the seven contributions outlined in Section 2.5:
 
 1. An **11-band hourglass architecture** (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy and quantum physics (Section 4).
 2. A **unified QI equation**, $QI(b,t) = e^{-S(b,t)}$, grounded in spectral decomposition via the STFT and combining classical signal integrity with quantum terms (Section 5).
-3. Identification of **five cross-domain attack coupling mechanisms** with honest detection boundaries, supported by the **QIF Locus Taxonomy** (7 domains, 11 tactics, 71 techniques) and **QNIS v1.0** neural impact scoring (Section 6).
+3. Identification of **five cross-domain attack coupling mechanisms** with honest detection boundaries, supported by the **QIF Locus Taxonomy** (7 domains, 11 tactics, 71 techniques) and **NISS v1.0** neural impact scoring (Section 6).
 4. **TARA** (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry bridging security and clinical communities through four dimensional projections of every catalogued technique (Section 6.7).
 5. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM, ML-DSA, and AES-256-GCM, serving as the trust layer for therapeutic BCI deployment (Section 7).
 6. **Project Runemate**, a content compression pipeline offsetting PQC bandwidth overhead by 65--90% (Section 7).
@@ -826,7 +826,7 @@ Landauer's Principle [61] establishes the fundamental thermodynamic cost: $E_{\t
 9. **Tunneling Biometric Feasibility.** Single-channel patch clamp studies to determine individual variability.
 10. **Zeno-BCI Experimental Test.** Vary BCI sampling rate from 100 Hz to 20 kHz and measure coherence time.
 11. **v4.0 Architecture Validation.** Map historical BCI adverse events to specific bands to test severity stratification.
-12. **Socio-Legal Framework Integration.** Investigate how QIF/QNIS/TARA can provide a concrete technical foundation for emerging legal and policy frameworks addressing cognitive liberty, neurological privacy, and algorithmic accountability.
+12. **Socio-Legal Framework Integration.** Investigate how QIF/NISS/TARA can provide a concrete technical foundation for emerging legal and policy frameworks addressing cognitive liberty, neurological privacy, and algorithmic accountability.
 
 ---
 

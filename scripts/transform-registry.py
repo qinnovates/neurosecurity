@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Transform qtara-registrar.json to QIF Locus Taxonomy + QNIS v1.0 scoring.
+Transform qtara-registrar.json to QIF Locus Taxonomy + NISS v1.0 scoring.
 
 This script:
 1. Replaces MITRE-derived tactic IDs with QIF Locus Taxonomy IDs
 2. Renumbers all technique IDs from QIF-T2xxx to QIF-T0001+
-3. Adds QNIS v1.0 scoring vectors and base scores
+3. Adds NISS v1.0 scoring vectors and base scores
 4. Removes all MITRE references
 5. Updates statistics
 """
@@ -138,7 +138,7 @@ for t in LOCUS_TACTICS:
         TACTIC_MAP[lid] = t["id"]
 
 # ============================================================
-# QNIS v1.0 SCORING
+# NISS v1.0 SCORING
 # ============================================================
 
 # Metric weights
@@ -170,8 +170,8 @@ TACTIC_DEFAULTS = {
     "QIF-M.SV": {"BI": "L", "CI": "H", "II": "H", "VC": "I", "NE": "G", "R": "A"},   # Subversion: model attack
 }
 
-def compute_qnis_score(v):
-    """Compute QNIS v1.0 base score from vector dict."""
+def compute_niss_score(v):
+    """Compute NISS v1.0 base score from vector dict."""
     av = AV_WEIGHTS[v["AV"]]
     ac = AC_WEIGHTS[v["AC"]]
     pr = PR_WEIGHTS[v["PR"]]
@@ -204,15 +204,15 @@ def compute_qnis_score(v):
     return round(min(10.0, base), 1)
 
 def vector_to_string(v):
-    """Convert vector dict to QNIS string format."""
-    parts = [f"QNIS:1.0"]
+    """Convert vector dict to NISS string format."""
+    parts = [f"NISS:1.0"]
     for key in ["AV", "AC", "PR", "UI", "BI", "CI", "II", "S", "R", "VC", "NE", "E"]:
         if key in v:
             parts.append(f"{key}:{v[key]}")
     return "/".join(parts)
 
 def score_to_severity(score):
-    """Map QNIS score to severity label."""
+    """Map NISS score to severity label."""
     if score == 0.0:
         return "none"
     elif score <= 3.9:
@@ -225,13 +225,13 @@ def score_to_severity(score):
         return "critical"
 
 # ============================================================
-# PER-TECHNIQUE QNIS ASSIGNMENTS
+# PER-TECHNIQUE NISS ASSIGNMENTS
 # ============================================================
 # Assigned based on: attack characteristics, bands, coupling, access,
 # classical/quantum detectability, existing severity, and notes analysis.
 
-def assign_qnis(tech, new_tactic):
-    """Assign QNIS vector based on tactic defaults + technique characteristics."""
+def assign_niss(tech, new_tactic):
+    """Assign NISS vector based on tactic defaults + technique characteristics."""
     severity = tech.get("severity", "medium")
     status = tech.get("status", "THEORETICAL")
     bands = tech.get("band_ids", [])
@@ -475,11 +475,11 @@ def main():
         # New sequential ID
         new_id = f"QIF-T{i+1:04d}"
 
-        # Assign QNIS (tactic-aware)
-        qnis_vector = assign_qnis(tech, new_tactic)
-        qnis_score = compute_qnis_score(qnis_vector)
-        qnis_severity = score_to_severity(qnis_score)
-        qnis_string = vector_to_string(qnis_vector)
+        # Assign NISS (tactic-aware)
+        niss_vector = assign_niss(tech, new_tactic)
+        niss_score = compute_niss_score(niss_vector)
+        niss_severity = score_to_severity(niss_score)
+        niss_string = vector_to_string(niss_vector)
 
         # Build cross-references (replace mitre field)
         cross_refs = {}
@@ -518,11 +518,11 @@ def main():
             "notes": cleaned_notes,
             "legacy_ids": tech.get("legacy_ids", []),
             "legacy_technique_id": old_id,
-            "qnis": {
+            "niss": {
                 "version": "1.0",
-                "vector": qnis_string,
-                "score": qnis_score,
-                "severity": qnis_severity,
+                "vector": niss_string,
+                "score": niss_score,
+                "severity": niss_severity,
             },
         }
 
@@ -538,7 +538,7 @@ def main():
     # ============================================================
     reg["version"] = "3.0"
     reg["taxonomy"] = "QIF Locus Taxonomy v1.0"
-    reg["scoring"] = "QNIS v1.0 (QIF Neural Impact Score)"
+    reg["scoring"] = "NISS v1.0 (Neural Impact Scoring System)"
     reg["generated"] = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # Remove old MITRE compatibility section
@@ -553,7 +553,7 @@ def main():
     by_status = {}
     by_severity = {}
     by_ui_cat = {}
-    by_qnis_severity = {}
+    by_niss_severity = {}
 
     for t in new_techniques:
         tac = t["tactic"]
@@ -568,8 +568,8 @@ def main():
         ui = t["ui_category"]
         by_ui_cat[ui] = by_ui_cat.get(ui, 0) + 1
 
-        qsev = t["qnis"]["severity"]
-        by_qnis_severity[qsev] = by_qnis_severity.get(qsev, 0) + 1
+        qsev = t["niss"]["severity"]
+        by_niss_severity[qsev] = by_niss_severity.get(qsev, 0) + 1
 
     reg["statistics"] = {
         "total_techniques": len(new_techniques),
@@ -579,7 +579,7 @@ def main():
         "by_status": dict(sorted(by_status.items())),
         "by_severity": dict(sorted(by_severity.items())),
         "by_ui_category": dict(sorted(by_ui_cat.items())),
-        "by_qnis_severity": dict(sorted(by_qnis_severity.items())),
+        "by_niss_severity": dict(sorted(by_niss_severity.items())),
     }
 
     # ============================================================
@@ -612,11 +612,11 @@ def main():
     ]
 
     # ============================================================
-    # 7. Add QNIS specification reference
+    # 7. Add NISS specification reference
     # ============================================================
-    reg["qnis_spec"] = {
+    reg["niss_spec"] = {
         "version": "1.0",
-        "name": "QIF Neural Impact Score",
+        "name": "Neural Impact Scoring System",
         "description": "BCI-specific vulnerability scoring system. Prioritizes human impact (biological + cognitive) over system impact.",
         "score_range": "0.0 - 10.0",
         "formula": "BaseScore = (0.3 * Exploitability) + (0.7 * Impact)",
@@ -634,7 +634,7 @@ def main():
             "threat": ["E (Exploit Maturity)"],
             "environmental": ["SC (Safety Criticality)", "CR (Cognitive Resilience)", "BR (Biological Resilience)"]
         },
-        "vector_format": "QNIS:1.0/AV:<V>/AC:<V>/PR:<V>/UI:<V>/BI:<V>/CI:<V>/II:<V>/S:<V>/R:<V>/VC:<V>/NE:<V>/E:<V>"
+        "vector_format": "NISS:1.0/AV:<V>/AC:<V>/PR:<V>/UI:<V>/BI:<V>/CI:<V>/II:<V>/S:<V>/R:<V>/VC:<V>/NE:<V>/E:<V>"
     }
 
     # ============================================================
@@ -645,7 +645,7 @@ def main():
 
     print(f"✓ Transformed {len(new_techniques)} techniques")
     print(f"✓ {len(LOCUS_TACTICS)} Locus tactics")
-    print(f"✓ QNIS scores: {by_qnis_severity}")
+    print(f"✓ NISS scores: {by_niss_severity}")
     print(f"✓ By tactic: {by_tactic}")
 
     # Also copy to docs/data/

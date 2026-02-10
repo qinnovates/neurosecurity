@@ -169,9 +169,9 @@
       "id": "M-011",
       "entry": 40,
       "date": "2026-02-07",
-      "title": "QNIS Created",
+      "title": "NISS Created",
       "short": "BCI-specific severity scoring",
-      "description": "QNIS (QIF Neural Impact Score) created because CVSS cannot account for biological reversibility, cognitive integrity impact, or neural tissue interaction. A severity metric built for brains, not servers.",
+      "description": "NISS (Neural Impact Scoring System) created because CVSS cannot account for biological reversibility, cognitive integrity impact, or neural tissue interaction. A severity metric built for brains, not servers.",
       "category": "scoring",
       "type": "milestone",
       "metrics": {
@@ -184,9 +184,9 @@
       "id": "M-012",
       "entry": 43,
       "date": "2026-02-08",
-      "title": "QNIS v1.0 Finalized",
+      "title": "NISS v1.0 Finalized",
       "short": "Every technique scored for neural impact",
-      "description": "QNIS v1.0 scoring methodology finalized. Spectral decomposition bridge connects raw neural signals to per-band QI scoring. Every technique now carries severity calibrated to neural, not just digital, impact.",
+      "description": "NISS v1.0 scoring methodology finalized. Spectral decomposition bridge connects raw neural signals to per-band QI scoring. Every technique now carries severity calibrated to neural, not just digital, impact.",
       "category": "scoring",
       "type": "milestone",
       "metrics": {
@@ -280,8 +280,8 @@
       "entry": 50,
       "date": "2026-02-09",
       "title": "Framework Complete (v1)",
-      "short": "QIF + NSP + QNIS + TARA",
-      "description": "First complete version of the full stack: QIF (framework), NSP (protocol), QNIS (scoring), TARA (atlas). 50 derivation log entries. 7 days of formal derivation. 4 framework versions. Ready for independent peer review.",
+      "short": "QIF + NSP + NISS + TARA",
+      "description": "First complete version of the full stack: QIF (framework), NSP (protocol), NISS (scoring), TARA (atlas). 50 derivation log entries. 7 days of formal derivation. 4 framework versions. Ready for independent peer review.",
       "category": "milestone",
       "type": "milestone",
       "metrics": {
@@ -290,7 +290,7 @@
         "log_entries": 50,
         "days_of_derivation": 7,
         "framework_versions": 4,
-        "components": ["QIF", "NSP", "QNIS", "TARA"]
+        "components": ["QIF", "NSP", "NISS", "TARA"]
       }
     }
   ],
@@ -298,7 +298,7 @@
     "origin": { "label": "Origin", "color": "#64748b" },
     "framework": { "label": "QIF Framework", "color": "#06b6d4" },
     "protocol": { "label": "NSP Protocol", "color": "#8b5cf6" },
-    "scoring": { "label": "QNIS Scoring", "color": "#f59e0b" },
+    "scoring": { "label": "NISS Scoring", "color": "#f59e0b" },
     "registry": { "label": "Threat Registry", "color": "#ef4444" },
     "atlas": { "label": "TARA Atlas", "color": "#10b981" },
     "milestone": { "label": "Major Milestone", "color": "#ffffff" }

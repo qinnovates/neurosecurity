@@ -41,7 +41,7 @@
       "SE": 4,
       "SI": 10
     },
-    "by_qnis_severity": {
+    "by_niss_severity": {
       "critical": 3,
       "high": 46,
       "low": 4,
@@ -224,9 +224,9 @@
         "ONI-T007"
       ],
       "legacy_technique_id": "T2001",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A",
+        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A",
         "score": 7.3,
         "severity": "high"
       },
@@ -313,9 +313,9 @@
       "notes": "Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse. Distinct from Neural DoS: ransomware implies conditional restoration.",
       "legacy_ids": [],
       "legacy_technique_id": "T2002",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:N/E:U",
         "score": 6.7,
         "severity": "medium"
       },
@@ -410,9 +410,9 @@
         "ONI-T023"
       ],
       "legacy_technique_id": "T2003",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:C/R:I/VC:E/NE:N/E:A",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:C/R:I/VC:E/NE:N/E:A",
         "score": 7.7,
         "severity": "high"
       },
@@ -497,9 +497,9 @@
       "notes": "Intercept and modify signals at I0 boundary or BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption.",
       "legacy_ids": [],
       "legacy_technique_id": "T2004",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:P",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:P",
         "score": 6.6,
         "severity": "medium"
       },
@@ -586,9 +586,9 @@
       "notes": "Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile.",
       "legacy_ids": [],
       "legacy_technique_id": "T2005",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.2,
         "severity": "high"
       },
@@ -664,9 +664,9 @@
       "notes": "THz stimulation triggers Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0. Exploits energy transport in alpha-helix protein structures.",
       "legacy_ids": [],
       "legacy_technique_id": "T2006",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.2,
         "severity": "high"
       },
@@ -743,9 +743,9 @@
         "ONI-T008"
       ],
       "legacy_technique_id": "T2007",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
         "score": 7.4,
         "severity": "high"
       },
@@ -828,9 +828,9 @@
         "ONI-T009"
       ],
       "legacy_technique_id": "T2008",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.4,
         "severity": "high"
       },
@@ -919,9 +919,9 @@
       "notes": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals.",
       "legacy_ids": [],
       "legacy_technique_id": "T2009",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
         "score": 7.6,
         "severity": "high"
       },
@@ -1014,9 +1014,9 @@
       "notes": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability.",
       "legacy_ids": [],
       "legacy_technique_id": "T2101",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:A",
+        "vector": "NISS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:A",
         "score": 7.3,
         "severity": "high"
       },
@@ -1103,9 +1103,9 @@
       "notes": "UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz theta. Most dangerous coupling mechanism. QI CANNOT detect from signal data alone -- requires resonance shield.",
       "legacy_ids": [],
       "legacy_technique_id": "T2102",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
         "score": 6.4,
         "severity": "medium"
       },
@@ -1191,9 +1191,9 @@
       "notes": "S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion causes cochlea to perceive as sound. Havana Syndrome model. PRF selects neural target: 40 Hz gamma, 10 Hz alpha, 4 Hz theta, 1 Hz delta.",
       "legacy_ids": [],
       "legacy_technique_id": "T2103",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:A",
+        "vector": "NISS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:A",
         "score": 6.4,
         "severity": "medium"
       },
@@ -1278,9 +1278,9 @@
       "notes": "Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Licensed frequencies -- lower barrier than restricted.",
       "legacy_ids": [],
       "legacy_technique_id": "T2104",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:A/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:P",
+        "vector": "NISS:1.0/AV:A/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:P",
         "score": 6.5,
         "severity": "medium"
       },
@@ -1371,9 +1371,9 @@
       "notes": "Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry (PUBLIC access). tACS therapeutic principle weaponized.",
       "legacy_ids": [],
       "legacy_technique_id": "T2105",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
         "score": 7.6,
         "severity": "high"
       },
@@ -1457,9 +1457,9 @@
       "notes": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only.",
       "legacy_ids": [],
       "legacy_technique_id": "T2106",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:C/CI:L/II:L/S:U/R:I/VC:E/NE:N/E:A",
+        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:C/CI:L/II:L/S:U/R:I/VC:E/NE:N/E:A",
         "score": 7.3,
         "severity": "high"
       },
@@ -1543,9 +1543,9 @@
       "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms.",
       "legacy_ids": [],
       "legacy_technique_id": "T2201",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
         "score": 7.3,
         "severity": "high"
       },
@@ -1608,9 +1608,9 @@
       "notes": "Backdoor persists through transfer learning from pre-trained BCI models. Attacker poisons upstream model, downstream users inherit the backdoor. Common in EEG foundation model paradigm.",
       "legacy_ids": [],
       "legacy_technique_id": "T2202",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
         "score": 7.3,
         "severity": "high"
       },
@@ -1674,9 +1674,9 @@
       "notes": "Craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on.",
       "legacy_ids": [],
       "legacy_technique_id": "T2203",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
         "score": 7.1,
         "severity": "high"
       },
@@ -1744,9 +1744,9 @@
       "notes": "Single perturbation pattern that fools BCI decoder regardless of input. Works across subjects and sessions. Pre-computed offline, applied in real-time. Lower sophistication than targeted attacks.",
       "legacy_ids": [],
       "legacy_technique_id": "T2204",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
         "score": 7.1,
         "severity": "high"
       },
@@ -1813,9 +1813,9 @@
       "notes": "Determine if a specific person's neural data was used to train a BCI model. Reveals participation in clinical trials, neurological conditions. GDPR Article 9 implications.",
       "legacy_ids": [],
       "legacy_technique_id": "T2205",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
         "score": 7.1,
         "severity": "high"
       },
@@ -1896,9 +1896,9 @@
       "notes": "Reconstruct individual neural data from shared gradients in federated BCI training. Multi-site clinical trials share model updates. Gradient inversion recovers raw EEG with high fidelity.",
       "legacy_ids": [],
       "legacy_technique_id": "T2206",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
         "score": 7.1,
         "severity": "high"
       },
@@ -1978,9 +1978,9 @@
       "notes": "Manipulate neurofeedback display or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable.",
       "legacy_ids": [],
       "legacy_technique_id": "T2207",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:I/VC:I/NE:D/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:I/VC:I/NE:D/E:U",
         "score": 7.4,
         "severity": "high"
       },
@@ -2073,9 +2073,9 @@
       "notes": "Small adversarial perturbation injected into closed-loop BCI amplifies through feedback cycle. Each loop iteration increases deviation until system destabilizes. NeuroPace RNS, DBS with LFP sensing vulnerable.",
       "legacy_ids": [],
       "legacy_technique_id": "T2208",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:C/R:S/VC:I/NE:G/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:C/R:S/VC:I/NE:G/E:U",
         "score": 7.4,
         "severity": "high"
       },
@@ -2161,9 +2161,9 @@
       "notes": "Subtly contaminate BCI training datasets to introduce systematic bias or weakness without creating a specific trigger (distinct from backdoor T2201). Degraded model performance appears as natural noise. Federated learning and crowd-sourced calibration data are vulnerable entry points.",
       "legacy_ids": [],
       "legacy_technique_id": "T2209",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
         "score": 7.3,
         "severity": "high"
       },
@@ -2235,9 +2235,9 @@
       "notes": "Overwhelm targeted neurons via continuous high-frequency stimulation through compromised electrodes. Prevents normal neural signaling. Analogous to radio jamming. Implanted BCIs with stimulation capability.",
       "legacy_ids": [],
       "legacy_technique_id": "T2301",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
+        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
         "score": 7.3,
         "severity": "high"
       },
@@ -2322,9 +2322,9 @@
       "notes": "Flood neural tissue with maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required.",
       "legacy_ids": [],
       "legacy_technique_id": "T2302",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:C/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:C/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
         "score": 7.2,
         "severity": "high"
       },
@@ -2412,9 +2412,9 @@
       "notes": "Systematically probe neural tissue via low-amplitude stimulation pulses to map functional connectivity, identify responsive regions, and characterize individual neural signatures. Prerequisite for targeted attacks.",
       "legacy_ids": [],
       "legacy_technique_id": "T2303",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:L/II:H/S:C/R:A/VC:I/NE:N/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:L/II:H/S:C/R:A/VC:I/NE:N/E:U",
         "score": 6.5,
         "severity": "medium"
       },
@@ -2496,9 +2496,9 @@
       "notes": "Compromised BCI firmware selectively drops or forwards neural signals based on content. Filter out specific cognitive states while passing others. Subtle censorship of neural output.",
       "legacy_ids": [],
       "legacy_technique_id": "T2304",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.4,
         "severity": "high"
       },
@@ -2587,9 +2587,9 @@
         "ONI-T019"
       ],
       "legacy_technique_id": "T2305",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
+        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
         "score": 7.3,
         "severity": "high"
       },
@@ -2678,9 +2678,9 @@
         "ONI-T020"
       ],
       "legacy_technique_id": "T2306",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.2,
         "severity": "high"
       },
@@ -2770,9 +2770,9 @@
       "notes": "Force BCI processor to perform computationally expensive tasks (e.g., continuous high-rate sampling, unnecessary ML inference) to drain battery faster than normal. Critical for implanted BCIs where battery replacement requires surgery. Wearable BCIs also affected during critical use periods.",
       "legacy_ids": [],
       "legacy_technique_id": "T2307",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
         "score": 6.5,
         "severity": "medium"
       },
@@ -2837,9 +2837,9 @@
       "notes": "Replicate user's neural signature to bypass BCI authentication. Classical biometrics (ERP templates, brainprint) are partially spoofable. If quantum neural signatures exist, no-cloning makes them physically unclonable.",
       "legacy_ids": [],
       "legacy_technique_id": "T2401",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -2926,9 +2926,9 @@
         "ONI-T021"
       ],
       "legacy_technique_id": "T2402",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:I/VC:E/NE:D/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:I/VC:E/NE:D/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -3009,9 +3009,9 @@
       "notes": "Inject false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable.",
       "legacy_ids": [],
       "legacy_technique_id": "T2403",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -3094,9 +3094,9 @@
       "notes": "Present stimuli designed to elicit P300 ERP responses revealing private knowledge (PINs, faces, locations). BCI app stores could embed interrogation stimuli in games. Demonstrated on consumer EEG (EMOTIV, NeuroSky).",
       "legacy_ids": [],
       "legacy_technique_id": "T2404",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
         "score": 7.5,
         "severity": "high"
       },
@@ -3182,9 +3182,9 @@
       "notes": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research.",
       "legacy_ids": [],
       "legacy_technique_id": "T2405",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
         "score": 7.5,
         "severity": "high"
       },
@@ -3274,9 +3274,9 @@
       "notes": "Manipulate sense of agency -- user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty.",
       "legacy_ids": [],
       "legacy_technique_id": "T2406",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -3358,9 +3358,9 @@
       "notes": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted.",
       "legacy_ids": [],
       "legacy_technique_id": "T2407",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:G/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -3445,9 +3445,9 @@
       "notes": "Corrupt the neural representation of self (body ownership, self-other boundary, autobiographical memory). Targets insula, TPJ, mPFC. Could cause depersonalization, dissociation, or false self-recognition. Neurorights: mental integrity.",
       "legacy_ids": [],
       "legacy_technique_id": "T2408",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:D/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:D/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -3530,9 +3530,9 @@
       "notes": "Present carefully designed visual/auditory/haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional) that reveal private information or prime the brain for subsequent attack. BCI app store is the attack surface.",
       "legacy_ids": [],
       "legacy_technique_id": "T2409",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:A/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:A/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -3616,9 +3616,9 @@
       "notes": "Infer sensitive personal attributes (health conditions, sexual orientation, political beliefs, cognitive decline) from BCI usage metadata and neural signal statistics without decoding content. Side-channel on cognition.",
       "legacy_ids": [],
       "legacy_technique_id": "T2410",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
+        "vector": "NISS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
         "score": 7.4,
         "severity": "high"
       },
@@ -3709,9 +3709,9 @@
         "ONI-T005"
       ],
       "legacy_technique_id": "T2501",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
         "score": 5.3,
         "severity": "medium"
       },
@@ -3783,9 +3783,9 @@
         "ONI-T006"
       ],
       "legacy_technique_id": "T2502",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:H/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:H/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
         "score": 4.4,
         "severity": "medium"
       },
@@ -3850,9 +3850,9 @@
       "notes": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit.",
       "legacy_ids": [],
       "legacy_technique_id": "T2503",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
+        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
         "score": 4.5,
         "severity": "medium"
       },
@@ -3917,9 +3917,9 @@
       "notes": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival.",
       "legacy_ids": [],
       "legacy_technique_id": "T2504",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
+        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
         "score": 6.5,
         "severity": "medium"
       },
@@ -3984,9 +3984,9 @@
       "notes": "Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required.",
       "legacy_ids": [],
       "legacy_technique_id": "T2505",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:N/AC:H/PR:H/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:N/AC:H/PR:H/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
         "score": 7.4,
         "severity": "high"
       },
@@ -4056,9 +4056,9 @@
         "ONI-T024"
       ],
       "legacy_technique_id": "T2506",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
         "score": 7.5,
         "severity": "high"
       },
@@ -4124,9 +4124,9 @@
         "ONI-T004"
       ],
       "legacy_technique_id": "T2507",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
+        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
         "score": 4.3,
         "severity": "medium"
       },
@@ -4196,9 +4196,9 @@
         "ONI-T022"
       ],
       "legacy_technique_id": "T2508",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
         "score": 4.7,
         "severity": "medium"
       },
@@ -4264,9 +4264,9 @@
       "notes": "Physical attack using voltage glitches, clock manipulation, or electromagnetic pulses to induce faults in BCI processor. Can bypass security checks, extract cryptographic keys, or cause unpredictable stimulation behavior. Requires physical proximity to device.",
       "legacy_ids": [],
       "legacy_technique_id": "T2509",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
         "score": 4.5,
         "severity": "medium"
       },
@@ -4340,9 +4340,9 @@
       "notes": "Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud.",
       "legacy_ids": [],
       "legacy_technique_id": "T2601",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:N/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
+        "vector": "NISS:1.0/AV:N/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
         "score": 6.8,
         "severity": "medium"
       },
@@ -4424,9 +4424,9 @@
         "ONI-T016"
       ],
       "legacy_technique_id": "T2602",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:P",
+        "vector": "NISS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:P",
         "score": 7.0,
         "severity": "high"
       },
@@ -4512,9 +4512,9 @@
         "ONI-T017"
       ],
       "legacy_technique_id": "T2603",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:A",
+        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:A",
         "score": 7.1,
         "severity": "high"
       },
@@ -4601,9 +4601,9 @@
         "ONI-T018"
       ],
       "legacy_technique_id": "T2604",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:U",
         "score": 6.9,
         "severity": "medium"
       },
@@ -4688,9 +4688,9 @@
       "notes": "State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets.",
       "legacy_ids": [],
       "legacy_technique_id": "T2605",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:L/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
         "score": 7.4,
         "severity": "high"
       },
@@ -4756,9 +4756,9 @@
       "notes": "Systematic collection of neural data from consumer BCI populations for surveillance purposes. Workplace attention monitoring, law enforcement lie detection, social credit via neural markers. Neurorights: mental privacy.",
       "legacy_ids": [],
       "legacy_technique_id": "T2606",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:U",
         "score": 6.5,
         "severity": "medium"
       },
@@ -4843,9 +4843,9 @@
         "ONI-T003"
       ],
       "legacy_technique_id": "T2701",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
+        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
         "score": 5.1,
         "severity": "medium"
       },
@@ -4927,9 +4927,9 @@
         "ONI-T012"
       ],
       "legacy_technique_id": "T2801",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:P",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:P",
         "score": 7.5,
         "severity": "high"
       },
@@ -5012,9 +5012,9 @@
         "ONI-T010"
       ],
       "legacy_technique_id": "T2802",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:I/VC:E/NE:D/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:I/VC:E/NE:D/E:U",
         "score": 7.4,
         "severity": "high"
       },
@@ -5096,9 +5096,9 @@
         "ONI-T011"
       ],
       "legacy_technique_id": "T2803",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:L/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:D/E:U",
+        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:D/E:U",
         "score": 7.3,
         "severity": "high"
       },
@@ -5181,9 +5181,9 @@
         "ONI-T013"
       ],
       "legacy_technique_id": "T2804",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
         "score": 2.6,
         "severity": "low"
       },
@@ -5266,9 +5266,9 @@
         "ONI-T014"
       ],
       "legacy_technique_id": "T2805",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
         "score": 2.6,
         "severity": "low"
       },
@@ -5351,9 +5351,9 @@
         "ONI-T015"
       ],
       "legacy_technique_id": "T2806",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
         "score": 2.6,
         "severity": "low"
       },
@@ -5438,9 +5438,9 @@
       "notes": "Flood user with BCI-mediated permission requests until cognitive fatigue leads to reflexive approval of malicious requests. Exploits the neural-intent interface where 'yes/no' decisions may be captured from brain signals. BCI app ecosystems with frequent permission prompts are the attack surface.",
       "legacy_ids": [],
       "legacy_technique_id": "T2807",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:E/NE:N/E:U",
+        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:E/NE:N/E:U",
         "score": 2.8,
         "severity": "low"
       },
@@ -5523,9 +5523,9 @@
       "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI — it operates through normal sensory channels (screen → eyes → visual cortex → limbic system → prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
       "legacy_ids": [],
       "legacy_technique_id": null,
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:H/CI:C/CI:C/S:C/R:D/VC:C/NE:H/E:A",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:H/CI:C/CI:C/S:C/R:D/VC:C/NE:H/E:A",
         "score": 9.1,
         "severity": "critical"
       },
@@ -5614,9 +5614,9 @@
       "notes": "Manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0045), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2061",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
         "score": 6.8,
         "severity": "high"
       },
@@ -5709,9 +5709,9 @@
       "notes": "Replay recorded or GAN-synthesized neural signals that reproduce the dynamical system trajectory of legitimate brain activity. 20 verified attack methods exist (2012-2025) spanning RF injection (Brain-Hack), GAN synthesis (ATGAN, EEG-GAN), template replay, subliminal probing (66.7% success), and adversarial ML (Professor X backdoors, universal perturbations). Current BCI systems have 0% detection rate against sophisticated replays. CRITICAL DUAL-USE: The same replay physics enables therapeutic applications (vision restoration, sensory prosthetics). Defense: Biological TLS validation (spatial dipole patterns, H-H temporal compliance, 1/f scaling, microstate compliance, challenge-response), phase space attractor geometry validation. Priority case study per Kevin. Derivation Log Entries 45-46.",
       "legacy_ids": [],
       "legacy_technique_id": "T2062",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:A",
+        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:A",
         "score": 9.4,
         "severity": "critical"
       },
@@ -5806,9 +5806,9 @@
       "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting→seizure, sleep→wake, focused→confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) — a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2063",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:M/PR:H/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:P",
+        "vector": "NISS:1.0/AV:P/AC:M/PR:H/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:P",
         "score": 9.0,
         "severity": "critical"
       },
@@ -5900,9 +5900,9 @@
       "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2064",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
         "score": 6.5,
         "severity": "high"
       },
@@ -5992,9 +5992,9 @@
       "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization — effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2065",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:H/S:C/R:D/VC:E/NE:G/E:U",
+        "vector": "NISS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:H/S:C/R:D/VC:E/NE:G/E:U",
         "score": 7.5,
         "severity": "high"
       },
@@ -6083,9 +6083,9 @@
       "notes": "Exploit the re-enrollment or adaptive baseline update window in BCI authentication systems. When a BCI recalibrates (daily calibration, post-seizure reset, firmware update, drift correction), inject adversarial signals during the enrollment period to corrupt the stored baseline. Three windows: (1) initial enrollment, (2) periodic recalibration, (3) drift-triggered adaptation. Once the baseline is poisoned, all subsequent authentication is compromised. This is the fundamental vulnerability that motivated QIF's baseline-free 'Biological TLS' architecture: by validating signals against universal biological physics (spatial dipole patterns, H-H compliance, 1/f scaling, microstates) rather than individual baselines, the entire attack surface is eliminated. Defense: Biological TLS validation (no baselines needed), multi-session enrollment consistency checks, anomaly detection during calibration windows. Derivation Log Entry 46.",
       "legacy_ids": [],
       "legacy_technique_id": "T2066",
-      "qnis": {
+      "niss": {
         "version": "1.0",
-        "vector": "QNIS:1.0/AV:P/AC:M/PR:L/UI:R/BI:H/CI:H/II:H/S:C/R:S/VC:E/NE:G/E:P",
+        "vector": "NISS:1.0/AV:P/AC:M/PR:L/UI:R/BI:H/CI:H/II:H/S:C/R:S/VC:E/NE:G/E:P",
         "score": 7.2,
         "severity": "high"
       },
@@ -6165,7 +6165,7 @@
     }
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
-  "scoring": "QNIS v1.0 (QIF Neural Impact Score)",
+  "scoring": "NISS v1.0 (Neural Impact Scoring System)",
   "generated": "2026-02-09T04:30:00Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
@@ -6209,9 +6209,9 @@
       "description": "Directed energy attacks — ELF, microwave, RF, temporal interference."
     }
   ],
-  "qnis_spec": {
+  "niss_spec": {
     "version": "1.0",
-    "name": "QIF Neural Impact Score",
+    "name": "Neural Impact Scoring System",
     "description": "BCI-specific vulnerability scoring system. Prioritizes human impact (biological + cognitive) over system impact.",
     "score_range": "0.0 - 10.0",
     "formula": "BaseScore = (0.3 * Exploitability) + (0.7 * Impact)",
@@ -6249,7 +6249,7 @@
         "BR (Biological Resilience)"
       ]
     },
-    "vector_format": "QNIS:1.0/AV:<V>/AC:<V>/PR:<V>/UI:<V>/BI:<V>/CI:<V>/II:<V>/S:<V>/R:<V>/VC:<V>/NE:<V>/E:<V>"
+    "vector_format": "NISS:1.0/AV:<V>/AC:<V>/PR:<V>/UI:<V>/BI:<V>/CI:<V>/II:<V>/S:<V>/R:<V>/VC:<V>/NE:<V>/E:<V>"
   },
   "tara_spec": {
     "version": "1.0",

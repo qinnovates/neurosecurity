@@ -260,7 +260,7 @@ That's the passion behind all of this. That's why I'm pushing to get this indust
 
 CVSS was designed for IT vulnerabilities — buffer overflows, SQL injection, privilege escalation. Stretching it to score "memory erasure via hippocampal stimulation" is like scoring earthquake damage with a car crash severity scale. The domains are fundamentally different. A "critical" CVSS score means data breach or system compromise. A "critical" BCI threat means someone's motor cortex fires involuntarily, or their memories get rewritten, or their sense of self destabilizes. These aren't the same category of harm.
 
-So I chose to build QIF's own taxonomy. Its own scoring system. Its own language. QNIS — QIF Neural Impact Score — instead of CVSS. Original architecture that honors what makes BCI threats unique: they target cognition, identity, and bodily autonomy, not servers and databases.
+So I chose to build QIF's own taxonomy. Its own scoring system. Its own language. NISS — Neural Impact Scoring System — instead of CVSS. Original architecture that honors what makes BCI threats unique: they target cognition, identity, and bodily autonomy, not servers and databases.
 
 This decision changed what QIF is. Before, it was "applying security concepts to BCIs." After, it's "building a new security discipline." The first borrows authority. The second earns it.
 
@@ -271,7 +271,7 @@ I also think there's a pattern across this journal: Entry 002 was about seeing t
 **Connected to:**
 - Entry 004 — neural protocols from scratch instead of adapting HTTP
 - Entry 003 — you can't answer "who governs brain data?" using a framework designed for server patches
-- QIF-DERIVATION-LOG Entry 43 — full QNIS specification and taxonomy
+- QIF-DERIVATION-LOG Entry 43 — full NISS specification and taxonomy
 
 **Mood:** Conviction. Like drawing a line in the sand and knowing it's the right line.
 

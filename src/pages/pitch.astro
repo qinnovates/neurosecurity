@@ -2,7 +2,7 @@
 /**
  * QIF Pitch Presentation — Kohno Meeting
  * ~12 slides, 15-minute walkthrough, 15 min discussion
- * Reveal.js via CDN, styled with qinnovate design tokens
+ * Reveal.js via CDN, Apple Keynote aesthetic (white, system-ui, crystal glass)
  */
 import { HOURGLASS_BANDS, QIF_VERSION, QIF_BANDS, PILLARS, COHERENCE } from '../lib/qif-constants';
 import { THREAT_VECTORS, getThreatStats, getTaraStats } from '../lib/threat-data';
@@ -16,9 +16,9 @@ const dualUsePct = Math.round((dualUseCount / taraStats.total) * 100);
 
 // Resolve pillar CSS var colors to hex for inline styles
 const colorMap: Record<string, string> = {
-  'var(--color-accent-primary)': '#3b82f6',
-  'var(--color-accent-secondary)': '#06b6d4',
-  'var(--color-accent-tertiary)': '#8b5cf6',
+  'var(--color-accent-primary)': '#2563eb',
+  'var(--color-accent-secondary)': '#0891b2',
+  'var(--color-accent-tertiary)': '#7c3aed',
 };
 function hex(c: string): string { return colorMap[c] ?? c; }
 
@@ -37,88 +37,72 @@ const nspShortLabels: Record<number, string> = {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QIF Pitch | Qinnovate</title>
+  <title>Qinnovate | Pitch</title>
   <meta name="robots" content="noindex, nofollow" />
 
-  <style is:global>
-    @font-face {
-      font-family: "Space Grotesk";
-      src: url("/fonts/SpaceGrotesk-Variable.woff2") format("woff2");
-      font-weight: 300 700;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Inter";
-      src: url("/fonts/Inter-Variable.woff2") format("woff2");
-      font-weight: 100 900;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "JetBrains Mono";
-      src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
-      font-weight: 100 800;
-      font-display: swap;
-    }
-  </style>
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
 
   <style is:global>
     :root {
-      --bg-deep: #0b1121;
-      --bg-surface: #111a30;
-      --bg-elevated: #1e2a4a;
-      --accent-primary: #3b82f6;
-      --accent-secondary: #06b6d4;
-      --accent-tertiary: #8b5cf6;
-      --text-primary: #f1f5f9;
-      --text-muted: #a8b8cf;
-      --text-faint: #7289aa;
-      --glass-bg: rgba(15, 23, 42, 0.55);
-      --glass-border: rgba(255, 255, 255, 0.06);
-      --safe: #10b981;
-      --warn: #f59e0b;
-      --danger: #ef4444;
-      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+      --bg: #ffffff;
+      --bg-surface: #f8fafc;
+      --bg-elevated: #f1f5f9;
+      --accent: #2563eb;
+      --accent-secondary: #0891b2;
+      --accent-tertiary: #7c3aed;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #94a3b8;
+      --border: rgba(15, 23, 42, 0.08);
+      --glass-bg: rgba(255, 255, 255, 0.72);
+      --glass-border: rgba(15, 23, 42, 0.06);
+      --safe: #059669;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    /* ═══ Typography — system-ui (SF Pro on macOS) ═══ */
     .reveal {
-      font-family: "Inter", system-ui, sans-serif;
-      color: var(--text-primary);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
     }
 
     .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      color: var(--text-primary);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
       text-transform: none;
       font-weight: 600;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.025em;
     }
 
-    .reveal h1 { font-size: 2.8em; font-weight: 700; letter-spacing: -0.02em; }
-    .reveal h2 { font-size: 1.7em; font-weight: 600; letter-spacing: -0.01em; }
-    .reveal h3 { font-size: 1.15em; }
+    .reveal h1 { font-size: 2.2em; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+    .reveal h2 { font-size: 1.35em; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+    .reveal h3 { font-size: 0.85em; font-weight: 600; }
 
     .reveal p, .reveal li {
-      color: var(--text-muted);
-      line-height: 1.7;
-      font-size: 0.85em;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      font-size: 0.62em;
     }
 
     .reveal code {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
       background: var(--bg-elevated);
       padding: 0.1em 0.35em;
-      border-radius: 4px;
-      font-size: 0.85em;
+      border-radius: 5px;
+      font-size: 0.82em;
+      color: var(--accent);
     }
 
-    .reveal .progress { color: var(--accent-primary); height: 3px; }
-    .reveal .controls button { color: var(--accent-primary); }
+    .reveal .progress { color: var(--accent); height: 2px; }
+    .reveal .controls button { color: var(--text-tertiary); }
     .reveal .slide-number {
-      color: var(--text-faint);
-      font-family: "JetBrains Mono", monospace;
+      color: var(--text-tertiary);
+      font-family: ui-monospace, "SF Mono", monospace;
       font-size: 11px;
       background: transparent;
       right: 16px;
@@ -129,91 +113,81 @@ const nspShortLabels: Record<number, string> = {
 
     .glass {
       background: var(--glass-bg);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 24px;
+      border-radius: 12px;
+      padding: 16px;
       text-align: left;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      position: relative;
-      overflow: hidden;
-    }
-    .glass::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-      pointer-events: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
     }
 
-    .glass h3 { margin: 0 0 6px 0; font-size: 1em; }
-    .glass p { margin: 0; font-size: 0.72em; color: var(--text-muted); }
+    .glass h3 { margin: 0 0 4px 0; font-size: 0.8em; }
+    .glass p { margin: 0; font-size: 0.55em; color: var(--text-secondary); }
 
     .tag {
       display: inline-block;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.55em;
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 0.42em;
       padding: 2px 8px;
-      border-radius: 6px;
+      border-radius: 100px;
       margin-bottom: 6px;
+      font-weight: 500;
     }
 
-    .mono { font-family: "JetBrains Mono", monospace; }
-    .heading { font-family: "Space Grotesk", system-ui, sans-serif; }
-    .faint { color: var(--text-faint); }
-    .muted { color: var(--text-muted); }
-    .accent { color: var(--accent-primary); }
+    .mono { font-family: ui-monospace, "SF Mono", monospace; }
+    .faint { color: var(--text-tertiary); }
+    .muted { color: var(--text-secondary); }
+    .accent { color: var(--accent); }
     .cyan { color: var(--accent-secondary); }
     .purple { color: var(--accent-tertiary); }
 
     .label {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.52em;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.42em;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-faint);
-      margin-bottom: 10px;
+      letter-spacing: 0.12em;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+      font-weight: 500;
     }
 
     /* Stat cards */
-    .stats { display: flex; gap: 14px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .stats { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
     .stat {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 14px 22px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 18px;
       text-align: center;
-      min-width: 110px;
+      min-width: 90px;
     }
     .stat .n {
-      font-family: "Space Grotesk", system-ui;
-      font-size: 2.2em;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 1.6em;
       font-weight: 700;
       line-height: 1;
       margin-bottom: 3px;
-      text-shadow: 0 0 30px currentColor;
+      letter-spacing: -0.02em;
     }
     .stat .l {
-      font-size: 0.6em;
-      color: var(--text-faint);
+      font-size: 0.44em;
+      color: var(--text-tertiary);
       text-transform: uppercase;
       letter-spacing: 0.06em;
+      font-weight: 500;
     }
 
     /* Quote */
-    .quote { max-width: 780px; margin: 0 auto; }
+    .quote { max-width: 640px; margin: 0 auto; }
     .quote blockquote {
       border-left: none;
-      padding: 14px 0 14px 24px;
+      padding: 14px 0 14px 22px;
       margin: 0;
-      font-size: 1.1em;
-      color: var(--text-primary);
+      font-size: 0.82em;
+      color: var(--text);
       font-style: italic;
-      line-height: 1.55;
+      line-height: 1.5;
       text-align: left;
       position: relative;
     }
@@ -223,81 +197,93 @@ const nspShortLabels: Record<number, string> = {
       left: 0;
       top: 0;
       bottom: 0;
-      width: 4px;
+      width: 3px;
       border-radius: 2px;
-      background: linear-gradient(180deg, var(--accent-tertiary), var(--accent-secondary));
+      background: linear-gradient(180deg, var(--accent), var(--accent-secondary));
     }
     .quote .cite {
-      font-size: 0.6em;
-      color: var(--text-faint);
-      margin-top: 14px;
+      font-size: 0.5em;
+      color: var(--text-tertiary);
+      margin-top: 10px;
       font-style: normal;
       text-align: left;
-      padding-left: 24px;
+      padding-left: 22px;
     }
 
     /* Grid layouts */
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; text-align: left; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; text-align: left; }
     .grid-2 .span { grid-column: 1 / -1; text-align: center; }
 
     /* Band list */
     .bands { list-style: none; padding: 0; margin: 0; }
-    .bands li { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 0.65em; }
-    .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-    .bid { font-family: "JetBrains Mono", monospace; color: var(--text-primary); width: 26px; font-size: 0.9em; }
-    .bname { color: var(--text-muted); }
+    .bands li { display: flex; align-items: center; gap: 6px; padding: 1px 0; font-size: 0.5em; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .bid { font-family: ui-monospace, "SF Mono", monospace; color: var(--text); width: 22px; font-size: 0.9em; font-weight: 600; }
+    .bname { color: var(--text-secondary); }
 
     /* NSP layers */
-    .layers { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
+    .layers { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; }
     .layer {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--glass-bg); border: 1px solid var(--glass-border);
-      border-radius: 10px; padding: 9px 14px; font-size: 0.65em; text-align: left;
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 12px; font-size: 0.5em; text-align: left;
     }
-    .layer .ln { font-family: "Space Grotesk", system-ui; font-weight: 700; font-size: 1.15em; min-width: 22px; color: var(--accent-secondary); }
-    .layer .ll { color: var(--text-primary); font-weight: 500; }
-    .layer .ls { color: var(--text-faint); font-size: 0.85em; margin-left: auto; }
+    .layer .ln { font-weight: 700; font-size: 1.1em; min-width: 20px; color: var(--accent-secondary); }
+    .layer .ll { color: var(--text); font-weight: 500; }
+    .layer .ls { color: var(--text-tertiary); font-size: 0.85em; margin-left: auto; }
 
     /* Dual-use mapping */
-    .dualmap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px 16px; align-items: center; font-size: 0.72em; }
-    .dualmap .a { text-align: right; color: var(--danger); }
-    .dualmap .arrow { color: var(--accent-secondary); font-size: 1.1em; animation: arrow-pulse 4s ease-in-out infinite; }
+    .dualmap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px 12px; align-items: center; font-size: 0.55em; }
+    .dualmap .a { text-align: right; color: var(--danger); font-weight: 500; }
+    .dualmap .arrow { color: var(--accent-secondary); font-size: 1em; animation: arrow-pulse 4s ease-in-out infinite; }
     @keyframes arrow-pulse {
-      0%, 100% { opacity: 0.5; }
+      0%, 100% { opacity: 0.4; }
       50% { opacity: 1; }
     }
-    .dualmap .t { text-align: left; color: var(--safe); }
+    .dualmap .t { text-align: left; color: var(--safe); font-weight: 500; }
 
     /* Honest list */
-    .gaps { text-align: left; max-width: 680px; margin: 16px auto 0; }
-    .gaps li { margin-bottom: 10px; font-size: 0.75em; padding-left: 6px; }
-    .gaps li strong { color: var(--text-primary); }
+    .gaps { text-align: left; max-width: 580px; margin: 12px auto 0; }
+    .gaps li { margin-bottom: 8px; font-size: 0.55em; padding-left: 6px; }
+    .gaps li strong { color: var(--text); }
 
     /* Research questions */
-    .questions { text-align: left; max-width: 700px; margin: 16px auto 0; }
+    .questions { text-align: left; max-width: 600px; margin: 12px auto 0; }
     .questions li {
-      position: relative; padding-left: 18px; margin-bottom: 14px; font-size: 0.72em;
+      position: relative; padding-left: 16px; margin-bottom: 10px; font-size: 0.55em;
     }
     .questions li::before {
-      content: ''; position: absolute; left: 0; top: 7px;
-      width: 7px; height: 7px; border-radius: 50%; background: var(--accent-primary);
+      content: ''; position: absolute; left: 0; top: 6px;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
     }
-    .questions li strong { color: var(--text-primary); }
-    .questions li em { color: var(--text-faint); font-size: 0.9em; }
+    .questions li strong { color: var(--text); }
+    .questions li em { color: var(--text-tertiary); font-size: 0.9em; }
 
     /* Contact */
-    .links { display: flex; gap: 16px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+    .links { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
     .link {
-      background: var(--glass-bg); border: 1px solid var(--glass-border);
-      border-radius: 10px; padding: 10px 18px;
-      color: var(--text-primary); text-decoration: none; font-size: 0.7em;
-      transition: border-color 0.5s var(--ease-premium), transform 0.5s var(--ease-premium);
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 100px; padding: 8px 18px;
+      color: var(--text); text-decoration: none; font-size: 0.52em; font-weight: 500;
+      transition: all 0.5s var(--ease);
     }
-    .link:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+    .link:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-1px); }
 
-    /* Fragment fade-in tweak */
-    .reveal .fragment { transition: all 0.5s var(--ease-premium); }
+    /* Clickable stat cards */
+    a.stat {
+      text-decoration: none;
+      transition: all 0.3s var(--ease);
+      cursor: pointer;
+    }
+    a.stat:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Fragment fade-in */
+    .reveal .fragment { transition: all 0.5s var(--ease); }
 
     /* ═══ Music toggle ═══ */
     .music-toggle {
@@ -312,21 +298,21 @@ const nspShortLabels: Record<number, string> = {
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      color: var(--text-faint);
+      color: var(--text-tertiary);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: border-color 0.5s var(--ease-premium), color 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
+      transition: all 0.5s var(--ease);
     }
     .music-toggle:hover {
-      border-color: var(--accent-secondary);
-      color: var(--accent-secondary);
+      border-color: var(--accent);
+      color: var(--accent);
     }
     .music-toggle.playing {
-      border-color: var(--accent-secondary);
-      color: var(--accent-secondary);
-      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.2);
     }
     .music-toggle svg { width: 16px; height: 16px; }
     .music-toggle .icon-pause { display: none; }
@@ -335,124 +321,110 @@ const nspShortLabels: Record<number, string> = {
 
     #sc-player { position: absolute; left: -9999px; width: 1px; height: 1px; }
 
-    /* ═══ Layer 0: Aurora Background ═══ */
+    /* ═══ Ambient Background ═══ */
     .aurora-layer {
       position: fixed;
       inset: 0;
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
-      background: #0b1121;
+      background: #ffffff;
     }
     .aurora-blob {
       position: absolute;
       border-radius: 50%;
       will-change: transform;
     }
-    .aurora-blob--indigo {
-      width: 60vw;
-      height: 60vw;
-      top: -20%;
-      left: -10%;
-      background: radial-gradient(circle, #6366f1 0%, transparent 70%);
-      opacity: 0.15;
-      filter: blur(80px);
+    .aurora-blob--blue {
+      width: 50vw;
+      height: 50vw;
+      top: -15%;
+      right: -10%;
+      background: radial-gradient(circle, #dbeafe 0%, transparent 70%);
+      opacity: 0.8;
+      filter: blur(60px);
       animation: aurora-drift-1 18s ease-in-out infinite alternate;
     }
     .aurora-blob--cyan {
-      width: 50vw;
-      height: 50vw;
-      bottom: -15%;
-      right: -10%;
-      background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
-      opacity: 0.18;
-      filter: blur(100px);
-      animation: aurora-drift-2 14s ease-in-out infinite alternate;
-    }
-    .aurora-blob--purple {
       width: 45vw;
       height: 45vw;
-      top: 30%;
-      right: 20%;
-      background: radial-gradient(circle, #a855f7 0%, transparent 70%);
-      opacity: 0.12;
-      filter: blur(120px);
+      bottom: -10%;
+      left: -8%;
+      background: radial-gradient(circle, #cffafe 0%, transparent 70%);
+      opacity: 0.6;
+      filter: blur(80px);
+      animation: aurora-drift-2 14s ease-in-out infinite alternate;
+    }
+    .aurora-blob--violet {
+      width: 35vw;
+      height: 35vw;
+      top: 40%;
+      left: 30%;
+      background: radial-gradient(circle, #ede9fe 0%, transparent 70%);
+      opacity: 0.5;
+      filter: blur(100px);
       animation: aurora-drift-3 16s ease-in-out infinite alternate;
     }
     @keyframes aurora-drift-1 {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(8vw, 6vh) scale(1.1); }
+      100% { transform: translate(5vw, 4vh) scale(1.08); }
     }
     @keyframes aurora-drift-2 {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-6vw, -8vh) scale(1.05); }
+      100% { transform: translate(-4vw, -5vh) scale(1.05); }
     }
     @keyframes aurora-drift-3 {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-4vw, 5vh) scale(0.95); }
+      100% { transform: translate(-3vw, 3vh) scale(0.95); }
     }
 
-    /* ═══ Layer 1: Suprematist Geometry ═══ */
-    .geo-layer {
+    /* Flowing wave overlay */
+    .wave-layer {
       position: fixed;
       inset: 0;
       z-index: 1;
-      overflow: hidden;
       pointer-events: none;
+      overflow: hidden;
     }
-    .geo-circle {
+    .wave-layer svg {
       position: absolute;
-      width: 40vw;
-      height: 40vw;
-      top: -8%;
-      right: -8%;
-      border: 2px solid rgba(255, 255, 255, 0.04);
-      border-radius: 50%;
-      animation: geo-rotate 60s linear infinite;
+      width: 250%;
+      left: -75%;
     }
-    .geo-rect {
-      position: absolute;
-      width: 25vw;
-      height: 35vh;
-      bottom: 5%;
-      left: -5%;
-      border: 2px solid rgba(255, 255, 255, 0.03);
-      border-radius: 4px;
-      transform: rotate(12deg);
-      animation: geo-drift 30s ease-in-out infinite alternate;
+    .wave-layer .wave-1 { top: 8%;  animation: wave-flow-1 14s ease-in-out infinite alternate; }
+    .wave-layer .wave-2 { top: 22%; animation: wave-flow-2 18s ease-in-out infinite alternate; }
+    .wave-layer .wave-3 { top: 42%; animation: wave-flow-3 16s ease-in-out infinite alternate; }
+    .wave-layer .wave-4 { top: 62%; animation: wave-flow-4 20s ease-in-out infinite alternate; }
+    .wave-layer .wave-5 { top: 80%; animation: wave-flow-5 15s ease-in-out infinite alternate; }
+    @keyframes wave-flow-1 {
+      0%   { transform: translateX(0) scaleY(1); }
+      100% { transform: translateX(12%) scaleY(1.15); }
     }
-    .geo-square {
-      position: absolute;
-      width: 8vw;
-      height: 8vw;
-      top: 45%;
-      left: 8%;
-      border: 2px solid rgba(255, 255, 255, 0.04);
-      border-radius: 2px;
-      transform: rotate(45deg);
-      animation: geo-pulse 8s ease-in-out infinite;
+    @keyframes wave-flow-2 {
+      0%   { transform: translateX(0) scaleY(1); }
+      100% { transform: translateX(-10%) scaleY(0.85); }
     }
-    @keyframes geo-rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes wave-flow-3 {
+      0%   { transform: translateX(0) scaleY(1); }
+      100% { transform: translateX(8%) scaleY(1.2); }
     }
-    @keyframes geo-drift {
-      0% { transform: rotate(12deg) translate(0, 0); }
-      100% { transform: rotate(15deg) translate(2vw, -3vh); }
+    @keyframes wave-flow-4 {
+      0%   { transform: translateX(0) scaleY(1); }
+      100% { transform: translateX(-14%) scaleY(0.9); }
     }
-    @keyframes geo-pulse {
-      0%, 100% { opacity: 0.03; }
-      50% { opacity: 0.06; }
+    @keyframes wave-flow-5 {
+      0%   { transform: translateX(0) scaleY(1); }
+      100% { transform: translateX(10%) scaleY(1.1); }
     }
 
-    /* ═══ Layer 2: Noise Texture ═══ */
+    /* Noise texture */
     .noise-layer {
       position: fixed;
       inset: 0;
       z-index: 2;
       pointer-events: none;
-      opacity: 0.03;
-      mix-blend-mode: overlay;
+      opacity: 0.025;
+      mix-blend-mode: multiply;
     }
 
     /* Ensure Reveal sits above background layers with transparent bg */
@@ -472,22 +444,41 @@ const nspShortLabels: Record<number, string> = {
     }
   </style>
 </head>
-<body style="background: #0b1121;">
-  <!-- Layer 0: Aurora Background -->
+<body style="background: #ffffff;">
+  <!-- Ambient color washes -->
   <div class="aurora-layer" aria-hidden="true">
-    <div class="aurora-blob aurora-blob--indigo"></div>
+    <div class="aurora-blob aurora-blob--blue"></div>
     <div class="aurora-blob aurora-blob--cyan"></div>
-    <div class="aurora-blob aurora-blob--purple"></div>
+    <div class="aurora-blob aurora-blob--violet"></div>
   </div>
 
-  <!-- Layer 1: Suprematist Geometry -->
-  <div class="geo-layer" aria-hidden="true">
-    <div class="geo-circle"></div>
-    <div class="geo-rect"></div>
-    <div class="geo-square"></div>
+  <!-- Flowing waves -->
+  <div class="wave-layer" aria-hidden="true">
+    <svg class="wave-1" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 C180,30 360,130 540,70 C720,10 900,120 1080,80 C1260,40 1350,110 1440,80" fill="none" stroke="rgba(37,99,235,0.06)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0,95 C200,50 400,140 600,85 C800,30 1000,130 1200,90 C1350,60 1400,100 1440,95" fill="none" stroke="rgba(8,145,178,0.04)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M0,65 C160,110 340,20 520,65 C700,110 880,25 1060,70 C1240,115 1380,40 1440,65" fill="none" stroke="rgba(37,99,235,0.03)" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+    <svg class="wave-2" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 C240,40 480,140 720,80 C960,20 1200,130 1440,90" fill="none" stroke="rgba(8,145,178,0.055)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0,70 C300,120 600,30 900,75 C1200,120 1380,45 1440,70" fill="none" stroke="rgba(37,99,235,0.035)" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="wave-3" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,75 C200,120 400,25 600,80 C800,135 1000,30 1200,75 C1360,110 1420,55 1440,75" fill="none" stroke="rgba(37,99,235,0.07)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M0,55 C260,100 520,10 780,60 C1040,110 1300,15 1440,55" fill="none" stroke="rgba(124,58,237,0.03)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M0,95 C180,50 360,130 540,90 C720,50 900,125 1080,85 C1260,45 1380,120 1440,95" fill="none" stroke="rgba(8,145,178,0.035)" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+    <svg class="wave-4" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,85 C300,30 600,140 900,80 C1200,20 1350,120 1440,85" fill="none" stroke="rgba(8,145,178,0.06)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0,100 C220,60 440,135 660,95 C880,55 1100,130 1320,90 C1400,75 1440,100 1440,100" fill="none" stroke="rgba(37,99,235,0.04)" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="wave-5" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,70 C160,120 340,20 540,75 C740,130 920,30 1100,80 C1280,130 1400,50 1440,70" fill="none" stroke="rgba(37,99,235,0.05)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0,90 C280,45 560,135 840,85 C1120,35 1340,125 1440,90" fill="none" stroke="rgba(124,58,237,0.025)" stroke-width="1" stroke-linecap="round"/>
+    </svg>
   </div>
 
-  <!-- Layer 2: Noise Texture -->
+  <!-- Noise texture -->
   <svg class="noise-layer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
     <filter id="noise">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch" />
@@ -500,15 +491,15 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 1. TITLE ═══ -->
       <section>
-        <p class="label">Qinnovate &mdash; Open Standards for Neural Security</p>
-        <h1 style="margin-bottom: 0;">QIF</h1>
-        <p style="font-size: 1.05em; color: var(--accent-secondary); margin-top: 6px;" class="heading">
-          Security Architecture for the Neural Stack
+        <p class="label">Open Standards for Neural Security</p>
+        <h1 style="margin-bottom: 0;">Qinnovate</h1>
+        <p style="font-size: 0.72em; color: var(--accent); margin-top: 6px; font-weight: 500;">
+          The missing security layer for brain-computer interfaces.
         </p>
-        <div style="margin-top: 32px;">
-          <p style="font-size: 0.7em; color: var(--text-primary); margin: 0;">Kevin Qi</p>
-          <p style="font-size: 0.5em; margin-top: 4px;" class="faint">
-            qinnovate.com &nbsp;|&nbsp; v{QIF_VERSION} &nbsp;|&nbsp; Apache 2.0
+        <div style="margin-top: 28px;">
+          <p style="font-size: 0.55em; color: var(--text); margin: 0; font-weight: 500;">Kevin Qi</p>
+          <p style="font-size: 0.4em; margin-top: 4px;" class="faint">
+            qinnovate.com &nbsp;|&nbsp; QIF v{QIF_VERSION} &nbsp;|&nbsp; Apache 2.0
           </p>
         </div>
         <aside class="notes">
@@ -519,7 +510,7 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 2. THE ORIGIN — Kohno's own words ═══ -->
       <section>
-        <p class="label">Neurosurgical Focus, 2009</p>
+        <p class="label">Where this started</p>
         <div class="quote">
           <blockquote>
             "Neurosecurity is a term we are using to refer to security, privacy,
@@ -527,13 +518,12 @@ const nspShortLabels: Record<number, string> = {
           </blockquote>
           <p class="cite">
             Denning, Matsuoka &amp; <strong>Kohno</strong><br />
-            <em>Neurosecurity: Security and Privacy for Neural Devices</em><br />
-            Neurosurgical Focus 27(1):E7, July 2009
+            <em>Neurosurgical Focus</em> 27(1):E7, July 2009
           </p>
         </div>
-        <p style="font-size: 0.7em; margin-top: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
-          You coined the term. You defined the field.<br />
-          I've been trying to build the architecture you called for.
+        <p style="font-size: 0.58em; margin-top: 20px; max-width: 480px; margin-left: auto; margin-right: auto; color: var(--text);">
+          You named the field. You defined the problem.<br />
+          <span style="color: var(--accent);">Let me help build the architecture.</span>
         </p>
         <aside class="notes">
           This is the paper that started everything for me. You, Denning, and Matsuoka
@@ -544,9 +534,9 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 3. THE GAP ═══ -->
       <section>
-        <h2>16 Years Later</h2>
-        <p style="max-width: 620px; margin: 10px auto 0;">
-          The community produced excellent point solutions but no unifying structure.
+        <h2>The field has a structural problem.</h2>
+        <p style="max-width: 520px; margin: 8px auto 0;">
+          16 years of excellent research. No unified framework to connect it.
         </p>
         <div class="stats">
           <div class="stat">
@@ -566,7 +556,7 @@ const nspShortLabels: Record<number, string> = {
             <div class="l">Post-quantum<br />neural protocols</div>
           </div>
         </div>
-        <p style="font-size: 0.55em; margin-top: 20px;" class="faint">
+        <p style="font-size: 0.38em; margin-top: 14px;" class="faint">
           Martinovic 2012 &middot; Takabi 2016 &middot; Frank 2017 &middot; Bernal 2021 &middot; Landau 2020 &middot; Meng 2023
         </p>
         <aside class="notes">
@@ -578,21 +568,19 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 4. WHAT I BUILT — Three Pillars ═══ -->
       <section>
-        <h2>What I Built</h2>
-        <p style="max-width: 520px; margin: 4px auto 0;">
-          Three interlocking open specifications.
-        </p>
+        <p class="label">Three open specifications</p>
+        <h2>A complete security stack for neural interfaces.</h2>
         <div class="grid-3">
           {PILLARS.map(p => {
             const c = hex(p.color);
             return (
             <div class="glass">
-              <span class="tag" style={`background: ${c}20; color: ${c}; border: 1px solid ${c}40;`}>
+              <span class="tag" style={`background: ${c}10; color: ${c}; border: 1px solid ${c}25;`}>
                 {p.name} v{p.version}
               </span>
               <h3 style={`color: ${c};`}>{p.fullName}</h3>
               <p>{p.tagline}</p>
-              <p style="margin-top: 6px; font-size: 0.62em;" class="faint">{p.description}</p>
+              <p style="margin-top: 4px; font-size: 0.48em;" class="faint">{p.description}</p>
             </div>
           )})}
         </div>
@@ -608,10 +596,10 @@ const nspShortLabels: Record<number, string> = {
       <section>
         <div class="grid-2">
           <div class="span">
-            <h2>The Hourglass Model</h2>
-            <p style="font-size: 0.72em; max-width: 580px; margin: 4px auto 0;">
-              {QIF_BANDS} bands across three zones. The OSI model couldn't represent tissue,
-              so I built one that does.
+            <h2>One model. Both sides of the electrode.</h2>
+            <p style="font-size: 0.55em; max-width: 480px; margin: 4px auto 0;">
+              {QIF_BANDS} bands across three zones. OSI stops at silicon.
+              This goes through tissue.
             </p>
           </div>
           <div>
@@ -626,17 +614,17 @@ const nspShortLabels: Record<number, string> = {
             </ul>
           </div>
           <div>
-            <div class="glass" style="padding: 14px 18px;">
-              <h3 style="font-size: 0.8em; color: var(--safe); margin-bottom: 4px;">Neural (N7-N1)</h3>
-              <p style="font-size: 0.62em;">Biology. Cannot be patched or rebooted.</p>
+            <div class="glass" style="padding: 10px 14px;">
+              <h3 style="font-size: 0.65em; color: var(--safe); margin-bottom: 2px;">Neural (N7-N1)</h3>
+              <p style="font-size: 0.48em;">Biology. Cannot be patched or rebooted.</p>
             </div>
-            <div class="glass" style="padding: 14px 18px; margin-top: 8px;">
-              <h3 style="font-size: 0.8em; color: var(--warn); margin-bottom: 4px;">Interface (I0)</h3>
-              <p style="font-size: 0.62em;">The waist. Electrode-tissue boundary. Where physics changes.</p>
+            <div class="glass" style="padding: 10px 14px; margin-top: 6px;">
+              <h3 style="font-size: 0.65em; color: var(--warn); margin-bottom: 2px;">Interface (I0)</h3>
+              <p style="font-size: 0.48em;">The waist. Where physics changes.</p>
             </div>
-            <div class="glass" style="padding: 14px 18px; margin-top: 8px;">
-              <h3 style="font-size: 0.8em; color: var(--accent-primary); margin-bottom: 4px;">Synthetic (S1-S3)</h3>
-              <p style="font-size: 0.62em;">Silicon. Can encrypt, can patch, can monitor.</p>
+            <div class="glass" style="padding: 10px 14px; margin-top: 6px;">
+              <h3 style="font-size: 0.65em; color: var(--accent); margin-bottom: 2px;">Synthetic (S1-S3)</h3>
+              <p style="font-size: 0.48em;">Silicon. Encryptable, patchable, monitorable.</p>
             </div>
           </div>
         </div>
@@ -648,48 +636,50 @@ const nspShortLabels: Record<number, string> = {
         </aside>
       </section>
 
-      <!-- ═══ 6. THREAT TAXONOMY ═══ -->
+      <!-- ═══ 6. THREAT REGISTRY & SCORING ═══ -->
       <section>
-        <h2>Threat Taxonomy</h2>
-        <p style="max-width: 580px; margin: 8px auto 0;">
-          MITRE ATT&CK for neural interfaces. Every technique mapped to hourglass bands,
-          scored across six impact dimensions.
+        <p class="label">TARA &mdash; Therapeutic Atlas of Risks and Applications</p>
+        <h2>Threat registry and vulnerability scoring.</h2>
+        <p style="max-width: 480px; margin: 6px auto 0;">
+          Every technique mapped to hourglass bands and scored with NISS &mdash; a neural-specific severity metric.
         </p>
         <div class="stats">
-          <div class="stat">
+          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
             <div class="n accent">{stats.total}</div>
-            <div class="l">Techniques</div>
-          </div>
-          <div class="stat">
+            <div class="l">Techniques<br />catalogued</div>
+          </a>
+          <a class="stat" href="https://qinnovate.com/framework/" target="_blank">
             <div class="n cyan">{QIF_BANDS}</div>
             <div class="l">Hourglass<br />bands</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
             <div class="n" style="color: var(--danger);">{stats.critical}</div>
             <div class="l">Critical<br />severity</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/scoring/" target="_blank">
             <div class="n purple">6</div>
-            <div class="l">QNIS scoring<br />dimensions</div>
-          </div>
+            <div class="l">NISS scoring<br />dimensions</div>
+          </a>
         </div>
-        <p style="font-size: 0.52em; margin-top: 18px;" class="faint">
-          Live at qinnovate.com/TARA &mdash; filterable by band, severity, tactic, and dual-use classification
+        <p style="font-size: 0.4em; margin-top: 14px;" class="faint">
+          Click any card above &mdash; browsable at qinnovate.com/TARA
         </p>
         <aside class="notes">
-          Every technique has a QNIS score, like CVSS but for neural systems. It scores
+          Every technique has a NISS score — like CVSS but for neural systems. It scores
           across reversibility, cognitive impact, tissue risk, consent requirements, and
-          two more dimensions. The whole registry is browsable on the site.
+          two more dimensions. The whole registry is browsable on the site. Click any card
+          to see the live data.
         </aside>
       </section>
 
       <!-- ═══ 7. NSP PROTOCOL ═══ -->
       <section>
-        <h2>NSP: The Wire Protocol</h2>
-        <p style="max-width: 580px; margin: 8px auto 0;">
-          Post-quantum cryptography for BCI data streams. FIPS 203/204/205 compliant.
+        <p class="label">Neural Sensory Protocol v{NSP_VERSION}</p>
+        <h2>Post-quantum crypto that fits on an implant.</h2>
+        <p style="max-width: 480px; margin: 4px auto 0;">
+          Five defense layers. FIPS 203/204/205 compliant. {NSP_POWER.totalOverheadPercent}% power overhead.
         </p>
-        <div class="layers" style="max-width: 660px; margin: 16px auto 0;">
+        <div class="layers" style="max-width: 560px; margin: 10px auto 0;">
           {NSP_LAYERS.map(layer => (
             <div class="layer">
               <span class="ln">L{layer.id}</span>
@@ -698,15 +688,15 @@ const nspShortLabels: Record<number, string> = {
             </div>
           ))}
         </div>
-        <div class="stats" style="margin-top: 16px;">
-          <div class="stat">
-            <div class="n cyan">{NSP_POWER.totalOverheadPercent}%</div>
+        <div class="stats" style="margin-top: 10px;">
+          <a class="stat" href="https://qinnovate.com/nsp/" target="_blank">
+            <div class="n accent">{NSP_POWER.totalOverheadPercent}%</div>
             <div class="l">Power<br />overhead</div>
-          </div>
-          <div class="stat">
-            <div class="n cyan">v{NSP_VERSION}</div>
+          </a>
+          <a class="stat" href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/NSP-PROTOCOL-SPEC.md" target="_blank">
+            <div class="n accent">v{NSP_VERSION}</div>
             <div class="l">Draft RFC</div>
-          </div>
+          </a>
         </div>
         <aside class="notes">
           The power budget is modeled, not measured. 3.25% of a 10mW implantable budget.
@@ -718,26 +708,21 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 8. THE DUAL-USE DISCOVERY ═══ -->
       <section>
-        <h2>The Discovery That Changed Everything</h2>
-        <p style="max-width: 620px; margin: 10px auto 0;">
-          I started cataloguing attacks. The same physical mechanisms kept appearing
-          on the therapeutic side.
+        <h2>Every attack mechanism<br />has a therapeutic twin.</h2>
+        <p style="max-width: 480px; margin: 8px auto 0;">
+          The threat registry revealed something unexpected. The same physics
+          that enables an attack enables a therapy.
         </p>
-        <div style="margin-top: 20px;">
-          <p style="font-size: 0.88em; color: var(--text-primary); line-height: 1.7;">
-            Signal injection is also deep brain stimulation.<br />
-            Replay attacks share physics with neurofeedback.<br />
-            <strong style="color: var(--accent-secondary);">The difference is consent, dosage, and oversight.</strong>
+        <div style="margin-top: 16px;">
+          <p style="font-size: 0.68em; color: var(--text); line-height: 1.7;">
+            Signal injection <span style="color: var(--accent);">=</span> deep brain stimulation.<br />
+            Replay attacks <span style="color: var(--accent);">=</span> neurofeedback protocols.<br />
+            <strong style="color: var(--accent);">The difference is consent, dosage, and oversight.</strong>
           </p>
         </div>
-        <div style="margin-top: 24px;">
-          <p class="mono" style="font-size: 0.6em; color: var(--accent-secondary);">
-            TARA &mdash; Therapeutic Atlas of Risks and Applications
-          </p>
-          <p style="font-size: 0.55em; margin-top: 4px;" class="faint">
-            Same mechanism. Four projections: Security / Clinical / Governance / Engineering
-          </p>
-        </div>
+        <p style="font-size: 0.4em; margin-top: 16px;" class="faint">
+          Same mechanism. Four projections: Security / Clinical / Governance / Engineering
+        </p>
         <aside class="notes">
           This is the part I think connects most to your current work at the Center for
           Digital Ethics. The security framework became a dual-use map. The same physics
@@ -749,19 +734,15 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 9. DUAL-USE MAPPING ═══ -->
       <section>
-        <h2>Dual-Use Mapping</h2>
-        <p style="max-width: 580px; margin: 8px auto 0;">
-          ~{dualUsePct}% of catalogued techniques have therapeutic analogs today.
-          The gap is the research agenda.
-        </p>
-        <div class="dualmap" style="max-width: 560px; margin: 20px auto 0;">
+        <h2>~{dualUsePct}% map today. The rest define the frontier.</h2>
+        <div class="dualmap" style="max-width: 460px; margin: 14px auto 0;">
           <span class="a">Signal injection</span><span class="arrow">&rarr;</span><span class="t">Deep brain stimulation</span>
           <span class="a">Phase replay</span><span class="arrow">&rarr;</span><span class="t">Neurostimulation protocols</span>
           <span class="a">Adversarial perturbation</span><span class="arrow">&rarr;</span><span class="t">Seizure suppression</span>
           <span class="a">Slow drift manipulation</span><span class="arrow">&rarr;</span><span class="t">Adaptive neuromodulation</span>
           <span class="a">EM side-channel</span><span class="arrow">&rarr;</span><span class="t">TMS / tDCS diagnostics</span>
         </div>
-        <div class="stats" style="margin-top: 20px;">
+        <div class="stats" style="margin-top: 14px;">
           <div class="stat">
             <div class="n" style="color: var(--safe);">{taraStats.dualUse.confirmed}</div>
             <div class="l">Confirmed</div>
@@ -789,15 +770,11 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 10. WHERE IT BREAKS ═══ -->
       <section>
-        <h2>Where It Breaks</h2>
-        <p style="max-width: 580px; margin: 8px auto 0;">
-          What I don't know. Where I need help.
-        </p>
+        <h2>What I don't know yet.</h2>
         <ul class="gaps" style="list-style: none; padding: 0;">
           <li>
             <strong style="color: var(--warn);">No empirical validation.</strong>
-            Derived from literature and first principles. Needs testing against real BCI
-            hardware and patient data.
+            Derived from literature and first principles. Currently limited to BrainFlow synthetic data. Needs real BCI hardware and patient data.
           </li>
           <li>
             <strong style="color: var(--warn);">Power budget is modeled, not measured.</strong>
@@ -805,12 +782,11 @@ const nspShortLabels: Record<number, string> = {
           </li>
           <li>
             <strong style="color: var(--warn);">~40% of techniques have no therapeutic analog.</strong>
-            The dual-use claim has real limits. I've scoped them explicitly.
+            The dual-use insight has real limits. I've scoped them explicitly.
           </li>
           <li>
-            <strong style="color: var(--warn);">Solo researcher with AI verification.</strong>
-            Claude and Gemini helped validate, but I have no wet-lab collaborators and no
-            access to patient data.
+            <strong style="color: var(--warn);">Solo researcher, AI-assisted.</strong>
+            Claude and Gemini helped validate. No wet-lab collaborators or patient data access.
           </li>
         </ul>
         <aside class="notes">
@@ -823,27 +799,27 @@ const nspShortLabels: Record<number, string> = {
 
       <!-- ═══ 11. WHAT I'M LOOKING FOR ═══ -->
       <section>
-        <h2>What I'd Like to Explore Together</h2>
+        <h2>Four questions only you can answer.</h2>
         <ul class="questions" style="list-style: none; padding: 0;">
           <li>
             <strong>Does the hourglass model hold?</strong><br />
-            <em>Does an 11-band architecture meaningfully capture the BCI threat surface,
+            <em>Does an {QIF_BANDS}-band architecture meaningfully capture the BCI threat surface,
             or are there gaps the model misses?</em>
           </li>
           <li>
             <strong>Can TARA inform governance?</strong><br />
-            <em>Your Center for Digital Ethics focus: could a dual-use registry help
-            regulators distinguish therapeutic vs. adversarial use of the same mechanism?</em>
+            <em>Could a dual-use registry help regulators distinguish therapeutic
+            vs. adversarial use of the same mechanism?</em>
           </li>
           <li>
-            <strong>Is the NSP power budget realistic?</strong><br />
-            <em>{NSP_POWER.totalOverheadPercent}% on a 10mW implant. Is that feasible, or does PQC on-device need
+            <strong>Is {NSP_POWER.totalOverheadPercent}% power overhead realistic?</strong><br />
+            <em>Post-quantum crypto on a 10mW implant. Feasible, or does it need
             a fundamentally different approach?</em>
           </li>
           <li>
             <strong>Where should I go next?</strong><br />
             <em>Graduate program, industry lab, independent research? I want your honest
-            assessment of the most productive path forward.</em>
+            read on the most productive path.</em>
           </li>
         </ul>
         <aside class="notes">
@@ -857,18 +833,18 @@ const nspShortLabels: Record<number, string> = {
       <!-- ═══ 12. THANK YOU ═══ -->
       <section>
         <p class="label">Thank you</p>
-        <h2 style="margin-bottom: 6px;">You named this field.<br />I'd like to help build it.</h2>
-        <p style="font-size: 0.75em; max-width: 480px; margin: 10px auto 0;">
-          Everything is open. I'm looking for mentorship, not funding.
+        <h2 style="margin-bottom: 8px;">You named this field.<br />Let me help build it.</h2>
+        <p style="font-size: 0.58em; max-width: 420px; margin: 8px auto 0;">
+          Everything is open source. I'm looking for mentorship, not funding.
           Point me in the right direction and I'll do the work.
         </p>
-        <div class="links" style="margin-top: 28px;">
+        <div class="links" style="margin-top: 22px;">
           <a class="link" href="https://qinnovate.com" target="_blank">qinnovate.com</a>
           <a class="link" href="https://qinnovate.com/framework/" target="_blank">Framework</a>
           <a class="link" href="https://qinnovate.com/TARA/" target="_blank">TARA Atlas</a>
           <a class="link" href="https://github.com/qinnovates" target="_blank">GitHub</a>
         </div>
-        <p style="font-size: 0.5em; margin-top: 28px;" class="faint">
+        <p style="font-size: 0.38em; margin-top: 22px;" class="faint">
           Kevin Qi &nbsp;|&nbsp; Qinnovate &nbsp;|&nbsp; Open Standard &nbsp;|&nbsp; Apache 2.0
         </p>
         <aside class="notes">
@@ -897,7 +873,7 @@ const nspShortLabels: Record<number, string> = {
   <script is:inline src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script is:inline src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
   <script is:inline>
-    Reveal.initialize({
+    var revealReady = Reveal.initialize({
       hash: true,
       slideNumber: 'c/t',
       showSlideNumber: 'all',
@@ -974,6 +950,22 @@ const nspShortLabels: Record<number, string> = {
         } else {
           widget.play();
         }
+      });
+
+      // Auto-play music on first slide advance (wait for Reveal to be ready)
+      var musicStarted = false;
+      revealReady.then(function() {
+        Reveal.on('slidechanged', function(event) {
+          if (!musicStarted && event.indexh >= 1) {
+            musicStarted = true;
+            if (widgetReady && widget) {
+              widget.play();
+            } else {
+              pendingPlay = true;
+              toggle.classList.add('playing');
+            }
+          }
+        });
       });
 
       initWidget();

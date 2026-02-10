@@ -157,7 +157,7 @@ Each entry follows this structure:
 | 36 | 2026-02-06 | Synthetic Domain Rename, I0 as Domain-Indeterminate Superposition | Validated |
 | 37 | 2026-02-06 ~late night | Unified Neural Security Taxonomy: MITRE ATT&CK-Compatible BCI Threat Registry | Implemented — 60 techniques, 11 tactics, config.py updated |
 | 38 | 2026-02-06 | MITRE ATT&CK Gap Analysis — Cross-Reference Population | Implemented — coverage 28.3% → 80.0%, 28 unique MITRE IDs, 12 genuinely novel |
-| 43 | 2026-02-08 ~04:30 AM | QIF Locus Taxonomy + QNIS: Why Original IP Over CVSS/MITRE Adoption | Decision — strategic and legal rationale documented |
+| 43 | 2026-02-08 ~04:30 AM | QIF Locus Taxonomy + NISS: Why Original IP Over CVSS/MITRE Adoption | Decision — strategic and legal rationale documented |
 
 ---
 
@@ -4408,10 +4408,10 @@ This also provides a strong counter-argument to the OSI-layering objection. OSI 
 
 ---
 
-## Entry 43: QIF Locus Taxonomy + QNIS: Why Original IP Over CVSS/MITRE Adoption
+## Entry 43: QIF Locus Taxonomy + NISS: Why Original IP Over CVSS/MITRE Adoption
 
 **Date:** 2026-02-08, ~04:30 AM
-**Context:** After implementing the QIF Locus Taxonomy (Entry 37, superseded) and QNIS v1.0 scoring system, Kevin asked whether CVSS is open source and whether QIF should use CVSS directly instead of maintaining QNIS as a separate scoring system. This triggered a legal and strategic analysis.
+**Context:** After implementing the QIF Locus Taxonomy (Entry 37, superseded) and NISS v1.0 scoring system, Kevin asked whether CVSS is open source and whether QIF should use CVSS directly instead of maintaining NISS as a separate scoring system. This triggered a legal and strategic analysis.
 **Builds on:** Entries 37 (original MITRE-compatible taxonomy), 38 (MITRE gap analysis)
 **Supersedes:** Entry 37's MITRE ATT&CK framing (all MITRE references removed from codebase)
 **Status:** Decision -- strategic and legal rationale documented
@@ -4444,9 +4444,9 @@ CVSS is owned by FIRST.org and licensed under **CC-BY-SA** (Creative Commons Att
 - The QIF Locus naming convention (`QIF-[Domain].[Action]`, e.g., QIF-N.IJ for Neural Injection) encodes *where* the attack operates anatomically, which is the critical differentiator for BCI security
 - 12 of 64 techniques were genuinely novel with no MITRE analog at all (Entry 38)
 
-**CVSS replaced with QNIS (QIF Neural Impact Score).** Reasoning:
+**CVSS replaced with NISS (Neural Impact Scoring System).** Reasoning:
 
-| Dimension | CVSS | QNIS |
+| Dimension | CVSS | NISS |
 |-----------|------|------|
 | **Weighting** | Equal exploit vs impact | 70% human impact, 30% exploitability |
 | **BCI metrics** | None -- no Biological Impact, Cognitive Integrity, Reversibility, Consent, Neuroplasticity | All five built in as first-class Impact metrics |
@@ -4455,7 +4455,7 @@ CVSS is owned by FIRST.org and licensed under **CC-BY-SA** (Creative Commons Att
 | **Positioning** | QIF would be "a CVSS extension" -- derivative | QIF is the authority -- original IP |
 | **Prior art** | Acknowledgment sufficient (nominative fair use) | Whitepaper section 6.5.1 "Why Not CVSS" provides comparative analysis |
 
-The fundamental problem with CVSS for BCI: it treats all vulnerabilities through the lens of system availability and data confidentiality. A BCI attack that causes seizures, implants false memories, or violates cognitive sovereignty doesn't map to CVSS Availability/Integrity/Confidentiality. QNIS's 70% Impact weighting with BCI-native dimensions (Biological Impact, Cognitive Integrity, Reversibility, Consent Violation, Neuroplasticity) captures what actually matters when the target is a human brain.
+The fundamental problem with CVSS for BCI: it treats all vulnerabilities through the lens of system availability and data confidentiality. A BCI attack that causes seizures, implants false memories, or violates cognitive sovereignty doesn't map to CVSS Availability/Integrity/Confidentiality. NISS's 70% Impact weighting with BCI-native dimensions (Biological Impact, Cognitive Integrity, Reversibility, Consent Violation, Neuroplasticity) captures what actually matters when the target is a human brain.
 
 ### 4. Legal Position
 
@@ -4467,10 +4467,10 @@ The fundamental problem with CVSS for BCI: it treats all vulnerabilities through
 ### 5. Implementation (Already Complete)
 
 - **QIF Locus Taxonomy v1.0:** 7 domains, 11 tactics, `QIF-[Domain].[Action]` format, 64 techniques (QIF-T0001 through QIF-T0064)
-- **QNIS v1.0:** 12 metrics (4 Exploitability + 6 Impact + 2 Supplemental), `BaseScore = 0.3 * Exploitability + 0.7 * Impact`, all 64 techniques scored
+- **NISS v1.0:** 12 metrics (4 Exploitability + 6 Impact + 2 Supplemental), `BaseScore = 0.3 * Exploitability + 0.7 * Impact`, all 64 techniques scored
 - **All MITRE references removed** from `shared/threat-registry.json`, website, and whitepaper
 - **As-code enforcement:** All counts, distributions, and stats derived from `shared/threat-registry.json` at build time -- zero hardcoded values across entire site
-- **Commits:** e1d3bb9 (taxonomy + QNIS), 1944c39 (as-code enforcement)
+- **Commits:** e1d3bb9 (taxonomy + NISS), 1944c39 (as-code enforcement)
 
 ### 6. The Principle
 
@@ -4483,7 +4483,7 @@ The analogy: you wouldn't score earthquake damage using a car crash severity sca
 - QIF is now **fully independent** of external classification/scoring frameworks
 - The framework can be licensed under any terms Kevin chooses (not constrained by CC-BY-SA)
 - Comparative references to CVSS and MITRE strengthen the whitepaper by showing awareness of existing standards
-- Future work: consider submitting QIF Locus Taxonomy and QNIS to a standards body (FIRST, NIST, or ISO) for independent validation
+- Future work: consider submitting QIF Locus Taxonomy and NISS to a standards body (FIRST, NIST, or ISO) for independent validation
 
 ---
 
@@ -5461,7 +5461,7 @@ The schema adds four new objects to each technique entry, all backward-compatibl
 3. **`diagnostic`** — Diagnostic use of the same mechanism (cortical stimulation mapping, EEG monitoring, etc.). Optional.
 4. **`governance`** — Consent requirements, safety constraints (amplitude ceilings, charge density limits, monitoring requirements), regulatory class, NSP layer mappings.
 
-All existing fields (id, attack, tactic, bands, qnis, etc.) remain unchanged. Security researchers see no difference in their query patterns. The new fields are additive.
+All existing fields (id, attack, tactic, bands, niss, etc.) remain unchanged. Security researchers see no difference in their query patterns. The new fields are additive.
 
 ### Entry 49 Integration
 

@@ -1,7 +1,7 @@
 /**
  * QIF Threat Data — adapter over shared/qtara-registrar.json
  * Single source of truth: all techniques from the QIF Locus Taxonomy.
- * Scoring: QNIS v1.0 (QIF Neural Impact Score)
+ * Scoring: NISS v1.0 (Neural Impact Scoring System)
  * TARA: Therapeutic Atlas of Risks and Applications (four-projection overlay)
  */
 
@@ -26,8 +26,8 @@ export const THREAT_TACTICS = registry.tactics;
 /** QIF Operational Domains */
 export const THREAT_DOMAINS = (registry as any).domains ?? [];
 
-/** QNIS specification */
-export const QNIS_SPEC = (registry as any).qnis_spec ?? null;
+/** NISS specification */
+export const NISS_SPEC = (registry as any).niss_spec ?? null;
 
 /** TARA specification */
 export const TARA_SPEC = (registry as any).tara_spec ?? null;
@@ -35,7 +35,7 @@ export const TARA_SPEC = (registry as any).tara_spec ?? null;
 export type CategoryId = typeof THREAT_CATEGORIES[number]['id'];
 export type BandId = typeof HOURGLASS_BANDS[number]['id'];
 export type Severity = 'critical' | 'high' | 'medium' | 'low';
-export type QnisSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
+export type NissSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
 export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING';
 export type AccessLevel = 'PUBLIC' | 'LICENSED' | 'RESTRICTED' | 'CLASSIFIED' | null;
 export type DualUse = 'confirmed' | 'probable' | 'possible' | 'silicon_only';
@@ -75,11 +75,11 @@ export interface TaraProjection {
   engineering: TaraEngineering;
 }
 
-export interface QnisScore {
+export interface NissScore {
   version: string;
   vector: string;
   score: number;
-  severity: QnisSeverity;
+  severity: NissSeverity;
 }
 
 export interface ThreatVector {
@@ -109,8 +109,8 @@ export interface ThreatVector {
   description: string;
   /** Original band string from hourglass data */
   bandsStr: string;
-  /** QNIS v1.0 scoring data */
-  qnis: QnisScore;
+  /** NISS v1.0 scoring data */
+  niss: NissScore;
   /** Cross-references (related IDs, secondary tactics) */
   crossRefs: { related_ids?: string[]; secondary_tactics?: string[] } | null;
   /** Academic sources */
@@ -134,7 +134,7 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   quantumDetection: t.quantum,
   description: t.notes,
   bandsStr: t.bands,
-  qnis: t.qnis ?? { version: '1.0', vector: '', score: 0, severity: 'none' },
+  niss: t.niss ?? { version: '1.0', vector: '', score: 0, severity: 'none' },
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
   tara: t.tara ?? null,
@@ -197,11 +197,11 @@ export function getStatusStats() {
   return stats;
 }
 
-/** Helper: count threats per QNIS severity */
-export function getQnisStats() {
-  const stats: Record<QnisSeverity, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
+/** Helper: count threats per NISS severity */
+export function getNissStats() {
+  const stats: Record<NissSeverity, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
   for (const t of THREAT_VECTORS) {
-    stats[t.qnis.severity]++;
+    stats[t.niss.severity]++;
   }
   return stats;
 }
@@ -214,7 +214,7 @@ export function getRegistryStats() {
     totalTactics: THREAT_TACTICS.length,
     severity: getThreatStats(),
     status: getStatusStats(),
-    qnis: getQnisStats(),
+    niss: getNissStats(),
   };
 }
 

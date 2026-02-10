@@ -4,7 +4,7 @@ TARA Enrichment — Therapeutic Atlas of Risks and Applications
 Adds four-projection overlay data to each technique in qtara-registrar.json.
 
 Projections:
-  1. Security  — existing fields (attack, tactic, severity, qnis, etc.)
+  1. Security  — existing fields (attack, tactic, severity, niss, etc.)
   2. Clinical  — therapeutic analog, conditions, FDA status, evidence
   3. Governance — consent, safety ceilings, monitoring, regulations
   4. Engineering — coupling, parameters, hardware, detection

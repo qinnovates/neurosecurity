@@ -572,25 +572,25 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     letter-spacing: 0.04em;
   }
 
-  .dp-qnis-bar {
+  .dp-niss-bar {
     margin-top: 0.5rem;
   }
 
-  .dp-qnis-label {
+  .dp-niss-label {
     display: flex;
     justify-content: space-between;
     font-size: 0.7rem;
     margin-bottom: 0.2rem;
   }
 
-  .dp-qnis-track {
+  .dp-niss-track {
     height: 6px;
     border-radius: 3px;
     background: var(--color-bg-deep);
     overflow: hidden;
   }
 
-  .dp-qnis-fill {
+  .dp-niss-fill {
     height: 100%;
     border-radius: 3px;
     transition: width 0.3s ease;
@@ -872,7 +872,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     // 2. Tactic siblings (weak) — limit to 4 most severe
     const siblings = (THREATS_BY_TACTIC[centerThreat.tactic] || [])
       .filter(function(t) { return t.id !== centerThreat.id && !neighborIds.has(t.id); })
-      .sort(function(a, b) { return b.qnis.score - a.qnis.score; })
+      .sort(function(a, b) { return b.niss.score - a.niss.score; })
       .slice(0, 4);
     for (const t of siblings) {
       edges.push({ source: centerThreat.id, target: t.id, type: 'sibling' });
@@ -888,7 +888,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
         for (const b of t.bands) { if (centerBands.has(b)) overlap++; }
         return overlap >= 3;
       })
-      .sort(function(a, b) { return b.qnis.score - a.qnis.score; })
+      .sort(function(a, b) { return b.niss.score - a.niss.score; })
       .slice(0, 3);
     for (const t of bandMatches) {
       edges.push({ source: centerThreat.id, target: t.id, type: 'band' });
@@ -990,7 +990,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
   }
 
   function getNodeRadius(threat) {
-    const score = threat.qnis ? threat.qnis.score : 0;
+    const score = threat.niss ? threat.niss.score : 0;
     return 14 + (score / 10) * 12; // 14-26px
   }
 
@@ -1174,9 +1174,9 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
   function openDetailPanel(threat) {
     const sevColor = SEVERITY_COLORS[threat.severity] || '#94a3b8';
     const statColor = STATUS_COLORS[threat.status] || '#94a3b8';
-    const qnisScore = threat.qnis ? threat.qnis.score : 0;
-    const qnisSeverity = threat.qnis ? threat.qnis.severity : 'none';
-    const qnisColor = SEVERITY_COLORS[qnisSeverity] || '#94a3b8';
+    const nissScore = threat.niss ? threat.niss.score : 0;
+    const nissSeverity = threat.niss ? threat.niss.severity : 'none';
+    const nissColor = SEVERITY_COLORS[nissSeverity] || '#94a3b8';
 
     // Find tactic name
     const tactic = ALL_TACTICS.find(function(t) { return t.id === threat.tactic; });
@@ -1191,10 +1191,10 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     html += '<span class="dp-badge" style="background:' + statColor + '20;color:' + statColor + ';border:1px solid ' + statColor + '40;">' + threat.status + '</span>';
     html += '</div>';
 
-    // QNIS bar
-    html += '<div class="dp-qnis-bar">';
-    html += '<div class="dp-qnis-label"><span style="color:var(--color-text-faint)">QNIS</span><span style="color:' + qnisColor + ';font-family:var(--font-mono);font-weight:700">' + qnisScore.toFixed(1) + '</span></div>';
-    html += '<div class="dp-qnis-track"><div class="dp-qnis-fill" style="width:' + (qnisScore * 10) + '%;background:' + qnisColor + '"></div></div>';
+    // NISS bar
+    html += '<div class="dp-niss-bar">';
+    html += '<div class="dp-niss-label"><span style="color:var(--color-text-faint)">NISS</span><span style="color:' + nissColor + ';font-family:var(--font-mono);font-weight:700">' + nissScore.toFixed(1) + '</span></div>';
+    html += '<div class="dp-niss-track"><div class="dp-niss-fill" style="width:' + (nissScore * 10) + '%;background:' + nissColor + '"></div></div>';
     html += '</div>';
     html += '</div>';
 
@@ -1214,10 +1214,10 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     html += '<div class="dp-section"><div class="dp-section-title">Description</div>';
     html += '<div class="dp-description">' + escHtml(threat.description) + '</div></div>';
 
-    // QNIS vector
-    if (threat.qnis && threat.qnis.vector) {
-      html += '<div class="dp-section"><div class="dp-section-title">QNIS Vector</div>';
-      html += '<div style="font-size:0.65rem;font-family:var(--font-mono);color:var(--color-text-faint);word-break:break-all;">' + escHtml(threat.qnis.vector) + '</div></div>';
+    // NISS vector
+    if (threat.niss && threat.niss.vector) {
+      html += '<div class="dp-section"><div class="dp-section-title">NISS Vector</div>';
+      html += '<div style="font-size:0.65rem;font-family:var(--font-mono);color:var(--color-text-faint);word-break:break-all;">' + escHtml(threat.niss.vector) + '</div></div>';
     }
 
     // Connections
@@ -1306,7 +1306,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     tooltip.innerHTML =
       '<div style="font-weight:600;color:var(--color-text-primary);margin-bottom:0.15rem;">' + escHtml(threat.name) + '</div>' +
       '<div style="font-size:0.65rem;color:var(--color-text-faint);font-family:var(--font-mono);">' + threat.id + ' \u00b7 ' +
-      '<span style="color:' + sevColor + '">' + threat.severity + '</span> \u00b7 QNIS ' + (threat.qnis ? threat.qnis.score.toFixed(1) : '?') + '</div>' +
+      '<span style="color:' + sevColor + '">' + threat.severity + '</span> \u00b7 NISS ' + (threat.niss ? threat.niss.score.toFixed(1) : '?') + '</div>' +
       '<div style="font-size:0.65rem;color:var(--color-text-faint);margin-top:0.15rem;">' + escHtml(threat.bandsStr) + '</div>';
     positionTooltip(ev);
     tooltip.classList.add('visible');
@@ -1341,7 +1341,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
           t.bandsStr.toLowerCase().includes(q) ||
           t.category.toLowerCase().includes(q);
       })
-      .sort(function(a, b) { return b.qnis.score - a.qnis.score; })
+      .sort(function(a, b) { return b.niss.score - a.niss.score; })
       .slice(0, 8);
   }
 
