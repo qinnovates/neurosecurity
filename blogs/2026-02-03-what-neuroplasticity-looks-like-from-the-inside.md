@@ -6,12 +6,6 @@ source: "https://medium.com/@qikevinl"
 tags: ["#Neuroscience", "#Synesthesia", "#Neuroplasticity", "#BrainComputerInterface", "#QIF", "#FieldJournal"]
 ---
 
-# What Neuroplasticity Looks Like From the Inside
-
-### *A field journal from the intersection of synesthesia, code, and computational neuroscience*
-
-· · ·
-
 I cried for the first time in a long time last night. Not from sadness — from clarity.
 
 I'd been working through the QIF framework — equations, whitepaper, neuroethics, all of it — and for the first time, every piece connected. Not abstractly. I mean I could *see* the path. The whitepaper, the ethics questions, the framework architecture — they stopped being separate tasks and became one thing.

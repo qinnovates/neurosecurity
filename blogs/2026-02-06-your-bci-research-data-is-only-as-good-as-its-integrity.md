@@ -6,12 +6,6 @@ source: "https://medium.com/@qikevinl"
 tags: ["#BCI", "#Cybersecurity", "#Neuroscience", "#DataIntegrity", "#QIF", "#SecurityBestPractices", "#Research"]
 ---
 
-# Your BCI Research Data Is Only as Good as Its Integrity
-
-### *A security checklist for anyone building, testing, or publishing brain-computer interface research*
-
-· · ·
-
 Let me be blunt about something.
 
 If you're doing BCI research and you haven't thought about data integrity, your research might already be worthless. And you wouldn't know it.

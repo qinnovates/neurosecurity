@@ -6,124 +6,59 @@ const spec = NISS_SPEC as any;
 const nissStats = getNissStats();
 const totalTechniques = THREAT_VECTORS.length;
 
-// Metric definitions with full details
-const exploitabilityMetrics = [
+// NISS v1.0 Extension Metrics (5 metrics that extend CVSS v4.0)
+const extensionMetrics = [
   {
-    id: 'AV', name: 'Attack Vector',
-    description: 'How the attacker reaches the target BCI system.',
+    id: 'BI', name: 'Biological Impact', weight: 3.0,
+    description: 'Direct harm to neural tissue, organs, or physiological function. This dimension has no equivalent in CVSS. It captures seizure induction, tissue damage, involuntary motor activation, and other physical consequences unique to devices that interface with biology.',
     values: [
-      { code: 'P', label: 'Physical', weight: 'Lowest', description: 'Requires hands-on access to the device or implant.' },
-      { code: 'L', label: 'Local', weight: 'Low', description: 'Requires local system access (e.g., compromised host PC).' },
-      { code: 'A', label: 'Adjacent', weight: 'Medium', description: 'Attack from an adjacent network or Bluetooth range.' },
-      { code: 'W', label: 'Wireless', weight: 'High', description: 'Over-the-air RF attack, no physical proximity required.' },
-      { code: 'N', label: 'Network', weight: 'Highest', description: 'Remote attack via internet-connected infrastructure.' },
+      { code: 'N', label: 'None', description: 'No tissue interaction or physical harm.' },
+      { code: 'L', label: 'Low', description: 'Temporary discomfort, minor sensory disruption, reversible tissue stress.' },
+      { code: 'M', label: 'Medium', description: 'Moderate physiological disruption requiring monitoring or intervention.' },
+      { code: 'H', label: 'High', description: 'Significant tissue damage, seizure induction, involuntary motor activation. Triggers PINS flag.' },
+      { code: 'C', label: 'Critical', description: 'Life-threatening or permanently disabling neural harm. Triggers PINS flag.' },
     ],
   },
   {
-    id: 'AC', name: 'Attack Complexity',
-    description: 'Conditions beyond the attacker\'s control that must exist for the attack to succeed.',
+    id: 'CG', name: 'Cognitive Integrity', weight: 2.5,
+    description: 'Impact on thought processes, perception, memory, identity, or decision-making. CVSS has no concept of thought privacy or cognitive autonomy. CG captures everything from partial intent decoding to full perception manipulation.',
     values: [
-      { code: 'H', label: 'High', weight: 'Lower', description: 'Specialized conditions required (timing, patient state, rare configuration).' },
-      { code: 'L', label: 'Low', weight: 'Higher', description: 'No specialized conditions. Attack is reliably reproducible.' },
+      { code: 'N', label: 'None', description: 'No cognitive impact.' },
+      { code: 'L', label: 'Low', description: 'Decoded intent partially exposed, minor perceptual distortion.' },
+      { code: 'M', label: 'Medium', description: 'Significant cognitive state inference or moderate perception manipulation.' },
+      { code: 'H', label: 'High', description: 'Full thought decoding, identity inference, or perception manipulation.' },
+      { code: 'C', label: 'Critical', description: 'Cognitive coercion, identity modification, or complete loss of cognitive autonomy.' },
     ],
   },
   {
-    id: 'PR', name: 'Privileges Required',
-    description: 'Level of authentication or access needed before exploitation.',
+    id: 'CV', name: 'Consent Violation', weight: 2.0,
+    description: 'Degree of violation of informed consent or cognitive autonomy. CVSS does not model consent boundaries. CV captures the difference between operating within assumed consent and covert neural manipulation.',
     values: [
-      { code: 'H', label: 'High', weight: 'Lower', description: 'Administrative or clinical-level access required.' },
-      { code: 'L', label: 'Low', weight: 'Medium', description: 'Basic user-level access sufficient.' },
-      { code: 'N', label: 'None', weight: 'Higher', description: 'No authentication required.' },
-    ],
-  },
-  {
-    id: 'UI', name: 'User Interaction',
-    description: 'Whether the patient or operator must take an action for the attack to succeed.',
-    values: [
-      { code: 'R', label: 'Required', weight: 'Lower', description: 'Patient or clinician must perform an action (e.g., accept a pairing request).' },
-      { code: 'N', label: 'Not Required', weight: 'Higher', description: 'Attack succeeds without any user action.' },
-    ],
-  },
-];
-
-const impactMetrics = [
-  {
-    id: 'BI', name: 'Biological Impact',
-    description: 'Potential for physical harm to neural tissue or bodily function. This dimension has no equivalent in CVSS.',
-    values: [
-      { code: 'N', label: 'None', weight: 'Lowest', description: 'No tissue interaction or physical harm.' },
-      { code: 'L', label: 'Low', weight: 'Medium', description: 'Temporary discomfort, minor sensory disruption, reversible tissue stress.' },
-      { code: 'H', label: 'High', weight: 'Highest', description: 'Seizure induction, tissue damage, involuntary motor activation, or irreversible neural harm.' },
-    ],
-  },
-  {
-    id: 'CI', name: 'Cognitive Integrity',
-    description: 'Impact on thought privacy, perception accuracy, or cognitive autonomy. This dimension has no equivalent in CVSS.',
-    values: [
-      { code: 'N', label: 'None', weight: 'Lowest', description: 'No cognitive impact.' },
-      { code: 'L', label: 'Low', weight: 'Medium', description: 'Decoded intent partially exposed, minor perceptual distortion.' },
-      { code: 'H', label: 'High', weight: 'Highest', description: 'Full thought decoding, identity inference, perception manipulation, or cognitive coercion.' },
-    ],
-  },
-  {
-    id: 'II', name: 'Information Impact',
-    description: 'Confidentiality, integrity, and availability of neural data — the closest analog to traditional CVSS impact metrics.',
-    values: [
-      { code: 'N', label: 'None', weight: 'Lowest', description: 'No data impact.' },
-      { code: 'L', label: 'Low', weight: 'Medium', description: 'Partial data exposure or minor data corruption.' },
-      { code: 'H', label: 'High', weight: 'Highest', description: 'Full neural recording exfiltration, data destruction, or complete loss of data integrity.' },
-    ],
-  },
-  {
-    id: 'S', name: 'Scope',
-    description: 'Whether the vulnerability impacts resources beyond its security scope.',
-    values: [
-      { code: 'U', label: 'Unchanged', weight: 'Lower', description: 'Impact limited to the vulnerable component.' },
-      { code: 'C', label: 'Changed', weight: 'Higher', description: 'Impact extends beyond the vulnerable component (e.g., implant compromise affects connected hospital systems).' },
-    ],
-  },
-];
-
-const supplementalMetrics = [
-  {
-    id: 'R', name: 'Reversibility',
-    description: 'Whether the damage caused by the attack can be undone. Biological systems cannot be patched or rebooted — this dimension is critical for neural security.',
-    values: [
-      { code: 'R', label: 'Reversible', description: 'Effects fully reverse when attack stops (e.g., jamming).' },
-      { code: 'S', label: 'Slowly reversible', description: 'Effects reverse over hours to days (e.g., neuroplastic adaptation after prolonged stimulation).' },
-      { code: 'P', label: 'Partially reversible', description: 'Some effects permanent, some reversible (e.g., partial tissue scarring with functional recovery).' },
-      { code: 'I', label: 'Irreversible', description: 'Permanent damage (e.g., neural tissue destruction, irreversible cognitive change).' },
-    ],
-  },
-  {
-    id: 'VC', name: 'Violation of Consent',
-    description: 'The degree to which the attack violates the patient\'s informed consent or cognitive liberty.',
-    values: [
-      { code: 'A', label: 'Assumed', description: 'Operating within broadly assumed consent boundaries.' },
-      { code: 'I', label: 'Implicit', description: 'Action not explicitly consented to but within reasonable expectations.' },
+      { code: 'N', label: 'None', description: 'Operating within explicitly consented boundaries.' },
+      { code: 'P', label: 'Partial', description: 'Action exceeds scope of original consent but remains within reasonable expectations.' },
       { code: 'E', label: 'Explicit', description: 'Clear violation of explicitly stated consent boundaries.' },
+      { code: 'I', label: 'Implicit (covert)', description: 'Covert manipulation the patient cannot detect or know to refuse.' },
     ],
   },
   {
-    id: 'NE', name: 'Neuroplasticity',
-    description: 'Whether the attack exploits or induces neuroplastic changes — the brain\'s ability to rewire itself. Prolonged exposure can cause lasting structural changes.',
+    id: 'RV', name: 'Reversibility', weight: 1.5,
+    description: 'Whether the damage caused by the attack can be undone. IT assets can be restored from backup. Neural tissue cannot be rebooted. RV captures the permanence gradient from fully reversible to irreversible neural harm.',
+    values: [
+      { code: 'F', label: 'Full', description: 'Effects fully reverse when attack stops (e.g., jamming, temporary interference).' },
+      { code: 'T', label: 'Temporary', description: 'Effects reverse over hours to days (e.g., neuroplastic adaptation after prolonged stimulation).' },
+      { code: 'P', label: 'Partial', description: 'Some effects permanent, some reversible (e.g., partial tissue scarring with functional recovery).' },
+      { code: 'I', label: 'Irreversible', description: 'Permanent damage — neural tissue destruction, irreversible cognitive change. Triggers PINS flag.' },
+    ],
+  },
+  {
+    id: 'NP', name: 'Neuroplasticity', weight: 1.0,
+    description: 'Whether the attack exploits or induces neuroplastic changes — the brain\'s ability to rewire itself. Prolonged exposure to adversarial stimulation can cause lasting structural changes. This has no digital equivalent.',
     values: [
       { code: 'N', label: 'None', description: 'No neuroplastic effect.' },
-      { code: 'G', label: 'Negligible', description: 'Minor or transient plasticity effects.' },
-      { code: 'S', label: 'Significant', description: 'Measurable neuroplastic reorganization (e.g., altered neural pathways, changed sensory processing).' },
-    ],
-  },
-];
-
-const threatMetrics = [
-  {
-    id: 'E', name: 'Exploit Maturity',
-    description: 'The current real-world status of known exploits for this technique.',
-    values: [
-      { code: 'U', label: 'Unproven', description: 'No known exploit code or technique exists.' },
-      { code: 'P', label: 'Proof-of-concept', description: 'Demonstrated in controlled research settings.' },
-      { code: 'F', label: 'Functional', description: 'Reliable exploit exists and has been replicated.' },
-      { code: 'A', label: 'Active', description: 'Actively used in real-world attacks or red-team exercises.' },
+      { code: 'L', label: 'Low', description: 'Minor or transient plasticity effects.' },
+      { code: 'M', label: 'Medium', description: 'Moderate neuroplastic reorganization requiring monitoring.' },
+      { code: 'H', label: 'High', description: 'Significant neuroplastic reorganization — altered neural pathways, changed sensory processing.' },
+      { code: 'T', label: 'Therapeutic', description: 'Neuroplastic effect consistent with therapeutic intent (relevant for TARA dual-use mapping).' },
     ],
   },
 ];
@@ -135,11 +70,14 @@ const severityLevels = [
   { range: '0.1 – 3.9', label: 'Low', color: '#10b981', description: 'Minor impact — temporary disruption, limited data exposure, or attacks requiring high privilege and physical access.' },
   { range: '0.0', label: 'None', color: '#94a3b8', description: 'Informational. No measurable impact on biological, cognitive, or information security.' },
 ];
+
+// PINS-flagged count
+const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
 ---
 
 <PageLayout
   title="NISS Scoring"
-  description="Neural Impact Scoring System — a purpose-built vulnerability scoring methodology for brain-computer interface security."
+  description="Neural Impact Scoring System — the first CVSS v4.0 extension for brain-computer interface security."
   breadcrumbs={[{ label: 'NISS Scoring' }]}
   maxWidth="wide"
 >
@@ -150,13 +88,12 @@ const severityLevels = [
         <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
         {[
           { href: '#overview', label: 'Overview' },
-          { href: '#why', label: 'Why Not CVSS?' },
+          { href: '#architecture', label: 'Architecture' },
+          { href: '#gap-analysis', label: 'Gap Analysis' },
+          { href: '#metrics', label: 'Extension Metrics' },
+          { href: '#pins', label: 'PINS Flag' },
           { href: '#formula', label: 'Formula' },
           { href: '#severity', label: 'Severity Levels' },
-          { href: '#exploitability', label: 'Exploitability' },
-          { href: '#impact', label: 'Impact' },
-          { href: '#supplemental', label: 'Supplemental' },
-          { href: '#threat', label: 'Threat Intelligence' },
           { href: '#vector', label: 'Vector Format' },
           { href: '#examples', label: 'Examples' },
         ].map((item) => (
@@ -177,33 +114,29 @@ const severityLevels = [
         </h1>
         <div class="flex flex-wrap items-center gap-3 mb-6">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
-            First CVSS v4.0 Extension for Neural Security
+            CVSS v4.0 Extension
           </span>
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-tertiary)] text-[var(--color-accent-tertiary)]">
-            by Qinnovate
+            FIRST.org §3.11
           </span>
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-text-faint)]/30 text-[var(--color-text-faint)]">
-            71 techniques mapped to CVSS v4.0 + MITRE ATT&amp;CK
+            5 Extension Metrics · {totalTechniques} Techniques Scored
           </span>
         </div>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            NISS is the first CVSS v4.0 extension designed for brain-computer interface security. Following FIRST.org's extension framework (CVSS v4.0 User Guide &sect;3.11), NISS adds neural-specific dimensions that CVSS structurally cannot express: biological tissue damage, cognitive integrity violation, neural reversibility, consent boundaries, and neuroplasticity effects.
+            NISS is the first CVSS v4.0 extension designed for brain-computer interface security. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS adds five neural-specific metrics that ride <strong>alongside</strong> CVSS v4.0 base vectors — not replace them.
           </p>
           <p>
-            Qinnovate mapped all 71 TARA techniques to CVSS v4.0 base metrics and found that <strong>94.4% cannot be fully scored by CVSS alone</strong>. Of these, 73.2% require metrics that exist only in NISS. Where CVSS weights exploitability and system impact equally, NISS inverts the priority: <strong>70% human impact, 30% system exploitability</strong>. A vulnerability that can cause irreversible neural tissue damage scores higher than one that exfiltrates data, because brains cannot be patched or rebooted.
+            Every technique in the <a href="/TARA/">TARA registry</a> carries both a CVSS v4.0 base vector (exploitability and system impact) and a NISS extension vector (biological, cognitive, and consent impact). The two together give the complete picture: how the attack works <em>and</em> what it does to the patient.
           </p>
         </div>
 
         <!-- Stats row -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-8">
           <div class="glass rounded-xl p-4 text-center">
             <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalTechniques}</div>
-            <div class="text-xs text-[var(--color-text-faint)] mt-1">Techniques scored</div>
-          </div>
-          <div class="glass rounded-xl p-4 text-center">
-            <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #ef4444;">{nissStats.critical}</div>
-            <div class="text-xs text-[var(--color-text-faint)] mt-1">Critical</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Techniques</div>
           </div>
           <div class="glass rounded-xl p-4 text-center">
             <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #f97316;">{nissStats.high}</div>
@@ -213,44 +146,84 @@ const severityLevels = [
             <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #f59e0b;">{nissStats.medium}</div>
             <div class="text-xs text-[var(--color-text-faint)] mt-1">Medium</div>
           </div>
+          <div class="glass rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #10b981;">{nissStats.low}</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Low</div>
+          </div>
+          <div class="glass rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #ef4444;">{pinsFlagged}</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">PINS Flagged</div>
+          </div>
         </div>
       </section>
 
-      <!-- Why Not CVSS? -->
-      <section id="why" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Why not CVSS?</h2>
+      <!-- Architecture -->
+      <section id="architecture" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Architecture: Extending CVSS, Not Replacing It</h2>
         <div class="prose mb-8">
           <p>
-            The Common Vulnerability Scoring System (CVSS) was designed for IT infrastructure: servers, networks, and software. It assumes that assets are digital, replaceable, and patchable. None of these assumptions hold for neural interfaces. Qinnovate's complete mapping of 71 BCI techniques to CVSS v4.0 base vectors empirically proves that CVSS is structurally insufficient:
+            CVSS v4.0 provides a robust framework for scoring exploitability and system impact. NISS does not duplicate that work. Instead, it follows FIRST.org's official extension mechanism (§3.11) to add five metrics that capture dimensions CVSS was never designed to express.
+          </p>
+          <p>
+            Every scored technique carries <strong>two vectors</strong> side by side:
           </p>
         </div>
 
-        <!-- Empirical evidence callout -->
-        <div class="glass rounded-xl p-5 mb-6 border-l-4 border-[var(--color-accent-primary)]">
-          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Empirical finding: 94.4% of BCI techniques cannot be fully scored by CVSS v4.0</p>
-          <div class="grid grid-cols-3 gap-4 text-center mt-3">
-            <div>
-              <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">4</div>
-              <div class="text-xs text-[var(--color-text-faint)]">CVSS sufficient (5.6%)</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #f59e0b;">15</div>
-              <div class="text-xs text-[var(--color-text-faint)]">CVSS + Safety partial (21.1%)</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #ef4444;">52</div>
-              <div class="text-xs text-[var(--color-text-faint)]">NISS required (73.2%)</div>
-            </div>
+        <div class="space-y-3 mb-6">
+          <div class="glass rounded-xl p-5 border-l-4 border-[var(--color-accent-primary)]">
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">CVSS v4.0 Base Vector</p>
+            <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-primary)] break-all">CVSS:4.0/AV:&lt;V&gt;/AC:&lt;V&gt;/AT:&lt;V&gt;/PR:&lt;V&gt;/UI:&lt;V&gt;/VC:&lt;V&gt;/VI:&lt;V&gt;/VA:&lt;V&gt;/SC:&lt;V&gt;/SI:&lt;V&gt;/SA:&lt;V&gt;</p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2">How the attack works: vector, complexity, privileges, user interaction, system impact</p>
+          </div>
+          <div class="glass rounded-xl p-5 border-l-4 border-[var(--color-accent-tertiary)]">
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS v1.0 Extension Vector</p>
+            <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-tertiary)] break-all">NISS:1.0/BI:&lt;V&gt;/CG:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;</p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2">What it does to the patient: biological harm, cognitive impact, consent violation, reversibility, neuroplasticity</p>
           </div>
         </div>
+
+        <div class="prose">
+          <p>
+            This dual-vector architecture means security teams can triage using familiar CVSS scores, while BCI-specific teams see the neural dimensions that determine whether a vulnerability is a software bug or a patient safety emergency.
+          </p>
+        </div>
+      </section>
+
+      <!-- Gap Analysis -->
+      <section id="gap-analysis" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Gap Analysis: Why CVSS Alone Is Insufficient</h2>
+        <div class="prose mb-8">
+          <p>
+            Qinnovate mapped all {totalTechniques} TARA techniques to CVSS v4.0 base vectors. The result: <strong>94.4% cannot be fully scored by CVSS alone</strong>. Each technique falls into one of three gap groups:
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3 mb-8">
+          <div class="glass rounded-xl p-5 border-t-4 border-[var(--color-accent-secondary)]">
+            <div class="text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">4</div>
+            <div class="text-sm font-semibold mb-2">Gap Group 1</div>
+            <p class="text-xs text-[var(--color-text-muted)]">CVSS v4.0 sufficient. Base metrics fully capture the vulnerability. Pure-silicon attacks (firmware, supply chain) with no biological component.</p>
+          </div>
+          <div class="glass rounded-xl p-5 border-t-4" style="border-color: #f59e0b;">
+            <div class="text-3xl font-bold font-[family-name:var(--font-heading)]" style="color: #f59e0b;">17</div>
+            <div class="text-sm font-semibold mb-2">Gap Group 2</div>
+            <p class="text-xs text-[var(--color-text-muted)]">CVSS + Safety partial. Base metrics capture exploitability but miss biological or cognitive impact. Supplemental Safety metric helps but is insufficient.</p>
+          </div>
+          <div class="glass rounded-xl p-5 border-t-4 border-[var(--color-accent-primary)]">
+            <div class="text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">50</div>
+            <div class="text-sm font-semibold mb-2">Gap Group 3</div>
+            <p class="text-xs text-[var(--color-text-muted)]">NISS required. Vulnerability cannot be meaningfully scored without extension metrics. Tissue interaction, cognitive manipulation, consent violation, or neuroplastic effects.</p>
+          </div>
+        </div>
+
         <div class="grid gap-4 sm:grid-cols-2">
           {[
-            { gap: 'No biological impact metric', detail: 'CVSS cannot distinguish between a server crash and a seizure. NISS adds Biological Impact (BI) to score tissue-level harm.' },
-            { gap: 'No cognitive integrity metric', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Integrity (CI).' },
-            { gap: 'No reversibility dimension', detail: 'IT assets can be restored from backup. Neural tissue cannot. NISS adds Reversibility (R) to score permanence of damage.' },
-            { gap: 'No consent model', detail: 'CVSS does not consider whether an attack violates informed consent or cognitive liberty. NISS adds Violation of Consent (VC).' },
-            { gap: 'No neuroplasticity tracking', detail: 'Prolonged exposure to adversarial stimulation can physically rewire the brain. NISS adds Neuroplasticity (NE).' },
-            { gap: 'Wrong weighting', detail: 'CVSS weights exploitability and impact roughly equally. NISS weights human impact at 70% because the endpoint is a person, not a server.' },
+            { gap: 'No biological impact metric', detail: 'CVSS cannot distinguish between a server crash and a seizure. NISS adds Biological Impact (BI) — weight 3.0, the highest.' },
+            { gap: 'No cognitive integrity metric', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Integrity (CG) — weight 2.5.' },
+            { gap: 'No consent model', detail: 'CVSS does not model informed consent or cognitive liberty. NISS adds Consent Violation (CV) — weight 2.0.' },
+            { gap: 'No reversibility dimension', detail: 'IT assets restore from backup. Neural tissue cannot. NISS adds Reversibility (RV) — weight 1.5.' },
+            { gap: 'No neuroplasticity tracking', detail: 'Prolonged adversarial stimulation physically rewires the brain. NISS adds Neuroplasticity (NP) — weight 1.0.' },
+            { gap: 'Wrong priority weighting', detail: 'CVSS weights system metrics equally. NISS weights BI highest (3.0) because the endpoint is a person, not a server.' },
           ].map(item => (
             <div class="glass rounded-xl p-5">
               <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)] mb-2">{item.gap}</h3>
@@ -260,27 +233,107 @@ const severityLevels = [
         </div>
       </section>
 
-      <!-- Formula -->
-      <section id="formula" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scoring Formula</h2>
-        <div class="glass rounded-xl p-8 text-center mb-6">
-          <p class="text-xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            BaseScore = 0.3 &times; Exploitability + 0.7 &times; Impact
+      <!-- Extension Metrics -->
+      <section id="metrics" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Extension Metrics</h2>
+        <p class="text-sm text-[var(--color-text-faint)] mb-6">5 dimensions &ensp;|&ensp; All unique to NISS &ensp;|&ensp; No CVSS equivalent</p>
+        {extensionMetrics.map(metric => (
+          <div class="mb-10">
+            <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1">
+              <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{metric.id}</span> — {metric.name}
+              <span class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">Weight: {metric.weight}</span>
+            </h3>
+            <p class="text-sm text-[var(--color-text-muted)] mb-3">{metric.description}</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Code</th>
+                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Value</th>
+                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {metric.values.map(v => (
+                    <tr class="border-b border-[var(--color-border)]/50">
+                      <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] font-semibold">{v.code}</td>
+                      <td class="py-2 px-3 font-semibold">{v.label}</td>
+                      <td class="py-2 px-3 text-[var(--color-text-muted)]">{v.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <!-- PINS Flag -->
+      <section id="pins" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">PINS Flag</h2>
+        <div class="glass rounded-xl p-6 border-l-4 border-[#ef4444] mb-6">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
+            Potential Impact to Neural Safety (PINS)
           </p>
-          <p class="text-sm text-[var(--color-text-faint)]">
-            Score range: 0.0 &ndash; 10.0 &ensp;|&ensp; Human impact weighted at 70%
+          <p class="font-[family-name:var(--font-mono)] text-sm text-[#ef4444] mb-3">
+            PINS = true &ensp;when&ensp; BI &ge; High &ensp;OR&ensp; RV = Irreversible
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            A boolean flag indicating the vulnerability may cause irreversible neural harm. When PINS is true, the technique triggers mandatory safety review regardless of the overall NISS score. {pinsFlagged} of {totalTechniques} techniques ({((pinsFlagged / totalTechniques) * 100).toFixed(0)}%) are PINS-flagged.
           </p>
         </div>
         <div class="prose">
           <p>
-            <strong>Exploitability</strong> (30%) measures how accessible the attack is: attack vector, complexity, privileges required, and user interaction needed. These four metrics mirror CVSS base metrics.
+            PINS exists because a NISS score of 4.0 (medium) could still involve irreversible neural damage if the overall weighted average is pulled down by low consent or neuroplasticity scores. The flag catches this: any technique that can permanently alter neural tissue gets flagged for safety review, period.
           </p>
+        </div>
+      </section>
+
+      <!-- Formula -->
+      <section id="formula" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scoring Formula</h2>
+        <div class="glass rounded-xl p-8 text-center mb-6">
+          <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            NISS = (3.0&times;BI + 2.5&times;CG + 2.0&times;CV + 1.5&times;RV + 1.0&times;NP) / 10.0
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            Score range: 0.0 – 10.0 &ensp;|&ensp; BI weighted highest (biological harm first)
+          </p>
+        </div>
+
+        <div class="prose mb-6">
           <p>
-            <strong>Impact</strong> (70%) measures what happens to the patient: biological tissue damage, cognitive integrity violation, information compromise, and whether the attack scope extends beyond the vulnerable component. Two of these four metrics &mdash; Biological Impact and Cognitive Integrity &mdash; are unique to NISS.
+            The weights reflect a deliberate priority ordering: <strong>biological harm first</strong> (BI = 3.0), then cognitive integrity (CG = 2.5), then consent (CV = 2.0), then reversibility (RV = 1.5), then neuroplasticity (NP = 1.0). A vulnerability that causes neural tissue damage always scores higher than one that violates consent alone.
           </p>
-          <p>
-            <strong>Supplemental metrics</strong> (Reversibility, Violation of Consent, Neuroplasticity) and <strong>Threat Intelligence</strong> (Exploit Maturity) modify the base score contextually.
-          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Metric</th>
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Weight</th>
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Share</th>
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { id: 'BI', w: 3.0, share: '30%', why: 'Tissue damage is the most severe consequence — brains cannot be patched' },
+                { id: 'CG', w: 2.5, share: '25%', why: 'Cognitive autonomy is the most personal asset a person has' },
+                { id: 'CV', w: 2.0, share: '20%', why: 'Consent violation undermines the entire trust model for medical BCI' },
+                { id: 'RV', w: 1.5, share: '15%', why: 'Permanence of damage amplifies all other impacts' },
+                { id: 'NP', w: 1.0, share: '10%', why: 'Neuroplastic exploitation is insidious but typically requires sustained exposure' },
+              ].map(r => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] font-semibold">{r.id}</td>
+                  <td class="py-2 px-3 font-semibold">{r.w}</td>
+                  <td class="py-2 px-3 text-[var(--color-accent-secondary)]">{r.share}</td>
+                  <td class="py-2 px-3 text-[var(--color-text-muted)]">{r.why}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -300,162 +353,29 @@ const severityLevels = [
         </div>
       </section>
 
-      <!-- Exploitability Metrics -->
-      <section id="exploitability" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Exploitability Metrics</h2>
-        <p class="text-sm text-[var(--color-text-faint)] mb-6">Weight: 30% of base score &ensp;|&ensp; 4 dimensions &ensp;|&ensp; Mirrors CVSS base metrics</p>
-        {exploitabilityMetrics.map(metric => (
-          <div class="mb-8">
-            <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1">
-              <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{metric.id}</span> &mdash; {metric.name}
-            </h3>
-            <p class="text-sm text-[var(--color-text-muted)] mb-3">{metric.description}</p>
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-[var(--color-border)]">
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Code</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Value</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {metric.values.map(v => (
-                    <tr class="border-b border-[var(--color-border)]/50">
-                      <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] font-semibold">{v.code}</td>
-                      <td class="py-2 px-3 font-semibold">{v.label}</td>
-                      <td class="py-2 px-3 text-[var(--color-text-muted)]">{v.description}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <!-- Impact Metrics -->
-      <section id="impact" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Impact Metrics</h2>
-        <p class="text-sm text-[var(--color-text-faint)] mb-6">Weight: 70% of base score &ensp;|&ensp; 4 dimensions &ensp;|&ensp; BI and CI are unique to NISS</p>
-        {impactMetrics.map(metric => (
-          <div class="mb-8">
-            <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1">
-              <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{metric.id}</span> &mdash; {metric.name}
-              {(metric.id === 'BI' || metric.id === 'CI') && (
-                <span class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">NISS-only</span>
-              )}
-            </h3>
-            <p class="text-sm text-[var(--color-text-muted)] mb-3">{metric.description}</p>
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-[var(--color-border)]">
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Code</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Value</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {metric.values.map(v => (
-                    <tr class="border-b border-[var(--color-border)]/50">
-                      <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] font-semibold">{v.code}</td>
-                      <td class="py-2 px-3 font-semibold">{v.label}</td>
-                      <td class="py-2 px-3 text-[var(--color-text-muted)]">{v.description}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <!-- Supplemental Metrics -->
-      <section id="supplemental" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Supplemental Metrics</h2>
-        <p class="text-sm text-[var(--color-text-faint)] mb-6">3 dimensions &ensp;|&ensp; All unique to NISS &ensp;|&ensp; No CVSS equivalent</p>
-        {supplementalMetrics.map(metric => (
-          <div class="mb-8">
-            <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1">
-              <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{metric.id}</span> &mdash; {metric.name}
-              <span class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">NISS-only</span>
-            </h3>
-            <p class="text-sm text-[var(--color-text-muted)] mb-3">{metric.description}</p>
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-[var(--color-border)]">
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Code</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Value</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {metric.values.map(v => (
-                    <tr class="border-b border-[var(--color-border)]/50">
-                      <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] font-semibold">{v.code}</td>
-                      <td class="py-2 px-3 font-semibold">{v.label}</td>
-                      <td class="py-2 px-3 text-[var(--color-text-muted)]">{v.description}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <!-- Threat Intelligence -->
-      <section id="threat" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Threat Intelligence</h2>
-        <p class="text-sm text-[var(--color-text-faint)] mb-6">1 dimension &ensp;|&ensp; Temporal modifier</p>
-        {threatMetrics.map(metric => (
-          <div class="mb-8">
-            <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1">
-              <span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{metric.id}</span> &mdash; {metric.name}
-            </h3>
-            <p class="text-sm text-[var(--color-text-muted)] mb-3">{metric.description}</p>
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-[var(--color-border)]">
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Code</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Value</th>
-                    <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {metric.values.map(v => (
-                    <tr class="border-b border-[var(--color-border)]/50">
-                      <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] font-semibold">{v.code}</td>
-                      <td class="py-2 px-3 font-semibold">{v.label}</td>
-                      <td class="py-2 px-3 text-[var(--color-text-muted)]">{v.description}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ))}
-      </section>
-
       <!-- Vector Format -->
       <section id="vector" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Vector Format</h2>
         <div class="prose mb-6">
           <p>
-            Every scored technique carries a NISS vector string that encodes all metric values in a compact, machine-readable format:
+            Every scored technique carries a compact NISS vector string alongside its CVSS v4.0 base vector. The two together form a complete vulnerability assessment:
+          </p>
+        </div>
+        <div class="glass rounded-xl p-6 mb-4">
+          <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-2">NISS Extension Vector</p>
+          <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all">
+            NISS:1.0/BI:&lt;V&gt;/CG:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;
           </p>
         </div>
         <div class="glass rounded-xl p-6 mb-6">
-          <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all">
-            NISS:1.0/AV:&lt;V&gt;/AC:&lt;V&gt;/PR:&lt;V&gt;/UI:&lt;V&gt;/BI:&lt;V&gt;/CI:&lt;V&gt;/II:&lt;V&gt;/S:&lt;V&gt;/R:&lt;V&gt;/VC:&lt;V&gt;/NE:&lt;V&gt;/E:&lt;V&gt;
+          <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-2">Companion CVSS v4.0 Base Vector</p>
+          <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-primary)] break-all">
+            CVSS:4.0/AV:&lt;V&gt;/AC:&lt;V&gt;/AT:&lt;V&gt;/PR:&lt;V&gt;/UI:&lt;V&gt;/VC:&lt;V&gt;/VI:&lt;V&gt;/VA:&lt;V&gt;/SC:&lt;V&gt;/SI:&lt;V&gt;/SA:&lt;V&gt;
           </p>
         </div>
         <div class="prose">
           <p>
-            The vector string is designed to be human-readable and diff-friendly, allowing security researchers to quickly compare scoring across techniques and identify which dimensions drive severity differences.
+            Both vectors are designed to be human-readable, machine-parseable, and diff-friendly. Security teams can compare CVSS vectors with standard tooling. BCI safety teams can filter and sort on NISS dimensions (e.g., "show all techniques with BI:H or BI:C") for targeted safety review.
           </p>
         </div>
       </section>
@@ -464,7 +384,7 @@ const severityLevels = [
       <section id="examples" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scored Examples</h2>
         <p class="text-sm text-[var(--color-text-muted)] mb-6">
-          Three examples from the <a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">TARA registry</a> showing how NISS scores reflect real differences in neural risk.
+          Three examples from the <a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">TARA registry</a> showing how NISS + CVSS vectors work together.
         </p>
         <div class="space-y-4">
           {THREAT_VECTORS.filter(t => ['QIF-T0001', 'QIF-T0003', 'QIF-T0045'].includes(t.id)).map(t => (
@@ -473,18 +393,28 @@ const severityLevels = [
                 <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)]">
                   <span class="font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">{t.id}</span> {t.name}
                 </h3>
-                <span class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${t.niss.severity === 'critical' ? '#ef4444' : t.niss.severity === 'high' ? '#f97316' : t.niss.severity === 'medium' ? '#f59e0b' : '#10b981'};`}>
-                  {t.niss.score.toFixed(1)}
-                </span>
+                <div class="flex items-center gap-2">
+                  {t.niss.pins && (
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#ef4444]/10 text-[#ef4444]">PINS</span>
+                  )}
+                  <span class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${t.niss.severity === 'critical' ? '#ef4444' : t.niss.severity === 'high' ? '#f97316' : t.niss.severity === 'medium' ? '#f59e0b' : '#10b981'};`}>
+                    {t.niss.score.toFixed(1)}
+                  </span>
+                </div>
               </div>
-              <p class="text-xs text-[var(--color-text-muted)] mb-2">{t.description}</p>
-              <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-faint)] break-all">{t.niss.vector}</p>
+              <p class="text-xs text-[var(--color-text-muted)] mb-3">{t.description}</p>
+              <div class="space-y-1">
+                <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-tertiary)] break-all">NISS: {t.niss.vector}</p>
+                {t.cvss && (
+                  <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-primary)] break-all">CVSS: {t.cvss.base_vector}</p>
+                )}
+              </div>
             </div>
           ))}
         </div>
         <div class="mt-8 prose">
           <p>
-            All {totalTechniques} techniques are scored and browsable in the <a href="/TARA/">TARA Registrar</a>. The scoring methodology is documented in the <a href="/whitepaper/#niss">QIF Whitepaper &sect;6.5</a>.
+            All {totalTechniques} techniques are scored and browsable in the <a href="/TARA/">TARA Registrar</a>. The scoring methodology is documented in the <a href="/whitepaper/#niss">QIF Whitepaper §6.5</a>.
           </p>
         </div>
       </section>

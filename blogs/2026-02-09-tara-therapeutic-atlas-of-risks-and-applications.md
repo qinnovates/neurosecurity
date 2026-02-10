@@ -6,12 +6,6 @@ source: "https://qinnovate.com"
 tags: ["#TARA", "#NeurosecurityEngineering", "#QIF", "#NSP", "#BCI", "#TherapeuticAtlas", "#DualUse", "#Tinnitus", "#Alzheimers"]
 ---
 
-# TARA: When a Threat Registry Became a Map for Healing
-
-### *How 71 BCI attack techniques read backwards became a therapeutic atlas, and why we named it after the Buddhist goddess of compassion*
-
-· · ·
-
 ## Twenty-Two Days
 
 On January 18, 2026, the first commit to the [QIF repository](https://github.com/qinnovates) landed. Zero techniques. Zero threats cataloged. Just a question: what does a security model look like when the endpoint is not a server but a human brain?
@@ -169,11 +163,11 @@ Stating these limitations is not a weakness. It maps exactly where the work need
 
 ## What Comes Next
 
-Phase 1 is adding the four TARA projections (mechanism, therapeutic, diagnostic, governance) to all 71 entries. The schema is designed and has been through internal review. Phase 2 is the website: toggleable views on the [Runemate registry page](https://qinnovate.com/runemate/) so each community sees their projection. Phase 3 is what matters most: independent review by BCI researchers and clinicians who can validate the therapeutic mappings against real patient data and real hardware.
+Phase 1 is adding the four TARA projections (mechanism, therapeutic, diagnostic, governance) to all 71 entries. The schema is designed and has been through internal review. Phase 2 is the website: toggleable views on the [TARA registry page](https://qinnovate.com/TARA/) so each community sees their projection. Phase 3 is what matters most: independent review by BCI researchers and clinicians who can validate the therapeutic mappings against real patient data and real hardware.
 
 The dual-use mapping in particular needs scrutiny from domain experts. A security engineer can identify shared physical mechanisms. Whether those mechanisms translate to viable therapies in specific clinical contexts requires neuroscientists and physicians. We are actively seeking collaborators for this validation.
 
-The [complete registry](https://qinnovate.com/runemate/) is public. Every technique has a severity score, detection status, coupling mechanism, and evidence level. Researchers can use it, extend it, challenge it.
+The [complete registry](https://qinnovate.com/TARA/) is public. Every technique has a severity score, detection status, coupling mechanism, and evidence level. Researchers can use it, extend it, challenge it.
 
 · · ·
 
@@ -279,7 +273,7 @@ I hope this is the start of finding novel ways to fix the things we have been to
 - [IAEA Nuclear Materials Framework](https://www.iaea.org/)
 
 *QIF Framework:*
-- [QIF Threat Registry (Runemate)](https://qinnovate.com/runemate/)
+- [QIF Threat Registry (TARA)](https://qinnovate.com/TARA/)
 - [QIF Framework and NSP Protocol](https://qinnovate.com)
 
 *Research conducted January-February 2026. Research synthesis assisted by Claude (Anthropic). All original ideas, frameworks, and conclusions are the author's own. Independent peer review of the TARA architecture and therapeutic mappings is in progress.*

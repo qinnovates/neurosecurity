@@ -6,12 +6,6 @@ source: "https://qinnovate.com"
 tags: ["#BCI", "#Apple", "#Synchron", "#Neurosecurity", "#QIF", "#PostQuantum", "#NeuralPrivacy", "#MINDAct", "#NSP"]
 ---
 
-# Apple Just Made Brain Control a Native Input Method. Now What?
-
-### *The BCI-HID protocol, Synchron's thought-controlled iPad, and why the MIND Act needs a technical standard*
-
-· · ·
-
 On August 4, 2025, a 64-year-old man named Mark opened an iPad, browsed the home screen, launched apps, and typed a message. He did not use his hands. He did not use his voice. He did not use his eyes.
 
 Mark has ALS. He is a participant in Synchron's COMMAND clinical trial. A device called the Stentrode sits inside a blood vessel on the surface of his motor cortex, implanted through his jugular vein without ever opening his skull. It reads his neural signals, translates motor intention into digital commands, and sends them to the iPad over Bluetooth.

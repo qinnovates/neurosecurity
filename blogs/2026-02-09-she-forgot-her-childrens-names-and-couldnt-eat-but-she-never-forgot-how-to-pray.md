@@ -6,12 +6,6 @@ source: "https://qinnovate.com"
 tags: ["#BCI", "#Alzheimers", "#Neurosecurity", "#QIF", "#NSP", "#Tinnitus", "#VisionRestoration", "#CognitiveSovereignty"]
 ---
 
-# She Forgot Her Children's Names and Couldn't Eat, But She Never Forgot How to Pray
-
-### *How a security engineer's question about the OSI model led to a framework protecting the most intimate technology ever built*
-
-· · ·
-
 ## The Framework That Came From a Question
 
 I believe we can treat conditions we have been told to accept.
