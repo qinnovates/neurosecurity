@@ -4,16 +4,22 @@ import { getCollection } from 'astro:content';
 
 const currentPath = Astro.url.pathname;
 
-const links = [
-  { href: '/framework/', label: 'Framework' },
-  { href: '/nsp/', label: 'NSP' },
-  { href: '/runemate/', label: 'Runemate' },
-  { href: '/news/', label: 'News' },
-  { href: '/explore/', label: 'Explore' },
-  { href: '/TARA/', label: 'TARA' },
-  { href: '/glossary/', label: 'Glossary' },
-  { href: '/about/', label: 'About' },
+const techLinks = [
+  { href: '/framework/', label: 'QIF Framework', desc: 'The 11-band hourglass security architecture' },
+  { href: '/nsp/', label: 'NSP Protocol', desc: 'Post-quantum wire protocol for BCI data links' },
+  { href: '/runemate/', label: 'Runemate', desc: 'HTML-to-bytecode compression engine' },
+  { href: '/TARA/', label: 'TARA', desc: 'Therapeutic Atlas of Risks & Applications' },
+  { href: '/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification document' },
 ];
+
+const resourceLinks = [
+  { href: '/news/', label: 'News', desc: 'Latest publications and updates' },
+  { href: '/explore/', label: 'Explore', desc: 'Interactive visualizations and tools' },
+  { href: '/glossary/', label: 'Glossary', desc: 'QIF terminology reference' },
+];
+
+const isTechActive = ['/framework/', '/nsp/', '/runemate/', '/TARA/', '/whitepaper/'].some(p => currentPath.startsWith(p));
+const isResourceActive = ['/news/', '/explore/', '/glossary/', '/publications/'].some(p => currentPath.startsWith(p));
 
 const govDocs = (await getCollection('governance'))
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
@@ -32,22 +38,95 @@ const isGovActive = currentPath.startsWith('/governance/');
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-1">
-        {links.map((link) => (
-          <a
-            href={link.href}
+        <!-- Technology dropdown -->
+        <div class="relative" data-dropdown="tech">
+          <button
             class:list={[
-              "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              currentPath.startsWith(link.href)
+              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              isTechActive
                 ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
             ]}
           >
-            {link.label}
-          </a>
-        ))}
+            Technology
+            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
+            <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden">
+              <div class="p-2">
+                {techLinks.map((link) => (
+                  <a
+                    href={link.href}
+                    class:list={[
+                      "block px-3 py-2.5 rounded-lg transition-colors",
+                      currentPath.startsWith(link.href)
+                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                    ]}
+                  >
+                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
+                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resources dropdown -->
+        <div class="relative" data-dropdown="resources">
+          <button
+            class:list={[
+              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              isResourceActive
+                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+            ]}
+          >
+            Resources
+            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
+            <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden">
+              <div class="p-2">
+                {resourceLinks.map((link) => (
+                  <a
+                    href={link.href}
+                    class:list={[
+                      "block px-3 py-2.5 rounded-lg transition-colors",
+                      currentPath.startsWith(link.href) || (link.href === '/news/' && currentPath.startsWith('/publications/'))
+                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                    ]}
+                  >
+                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
+                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About (flat link) -->
+        <a
+          href="/about/"
+          class:list={[
+            "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            currentPath.startsWith('/about/')
+              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+          ]}
+        >
+          About
+        </a>
 
         <!-- Governance dropdown -->
-        <div class="relative" id="gov-dropdown">
+        <div class="relative" data-dropdown="gov">
           <a
             href="/governance/"
             class:list={[
@@ -62,9 +141,7 @@ const isGovActive = currentPath.startsWith('/governance/');
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </a>
-
-          <!-- Dropdown panel -->
-          <div class="gov-menu absolute right-0 top-full pt-2 hidden" id="gov-menu">
+          <div class="dropdown-menu absolute right-0 top-full pt-2 hidden">
             <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
               <div class="p-2 max-h-[70vh] overflow-y-auto">
                 {govDocs.map((doc) => (
@@ -141,24 +218,89 @@ const isGovActive = currentPath.startsWith('/governance/');
   <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]">
     <div class="px-4 py-3 space-y-1">
-      {links.map((link) => (
-        <a
-          href={link.href}
+      <!-- Mobile Technology section -->
+      <div>
+        <button
+          data-mobile-toggle="tech"
           class:list={[
-            "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            currentPath.startsWith(link.href)
+            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            isTechActive
               ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          {link.label}
-        </a>
-      ))}
+          Technology
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="tech" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div data-mobile-list="tech" class="hidden pl-3 space-y-0.5 mt-1">
+          {techLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
+                currentPath.startsWith(link.href)
+                  ? "text-[var(--color-accent-primary)]"
+                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
 
-      <!-- Mobile governance section -->
+      <!-- Mobile Resources section -->
+      <div>
+        <button
+          data-mobile-toggle="resources"
+          class:list={[
+            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            isResourceActive
+              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+          ]}
+        >
+          Resources
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="resources" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div data-mobile-list="resources" class="hidden pl-3 space-y-0.5 mt-1">
+          {resourceLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
+                currentPath.startsWith(link.href) || (link.href === '/news/' && currentPath.startsWith('/publications/'))
+                  ? "text-[var(--color-accent-primary)]"
+                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- About (flat) -->
+      <a
+        href="/about/"
+        class:list={[
+          "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+          currentPath.startsWith('/about/')
+            ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+        ]}
+      >
+        About
+      </a>
+
+      <!-- Mobile Governance section -->
       <div class="pt-2 border-t border-[var(--color-border)] mt-2">
         <button
-          id="mobile-gov-toggle"
+          data-mobile-toggle="gov"
           class:list={[
             "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
             isGovActive
@@ -167,11 +309,11 @@ const isGovActive = currentPath.startsWith('/governance/');
           ]}
         >
           Governance
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" id="mobile-gov-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="gov" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
-        <div id="mobile-gov-list" class="hidden pl-3 space-y-0.5 mt-1">
+        <div data-mobile-list="gov" class="hidden pl-3 space-y-0.5 mt-1">
           {govDocs.map((doc) => (
             <a
               href={`/governance/${doc.id}/`}
@@ -219,47 +361,51 @@ const isGovActive = currentPath.startsWith('/governance/');
       mobileMenu?.classList.toggle('hidden');
     });
 
-    // Close mobile menu on navigation
     document.addEventListener('astro:before-swap', () => {
       mobileMenu?.classList.add('hidden');
       menuBtn?.setAttribute('aria-expanded', 'false');
     });
 
-    // Governance desktop dropdown (hover)
-    const govDropdown = document.getElementById('gov-dropdown');
-    const govMenu = document.getElementById('gov-menu');
-    let govTimeout: ReturnType<typeof setTimeout>;
+    // Desktop dropdowns (hover + focus)
+    document.querySelectorAll<HTMLElement>('[data-dropdown]').forEach((dropdown) => {
+      const menu = dropdown.querySelector<HTMLElement>('.dropdown-menu');
+      let timeout: ReturnType<typeof setTimeout>;
 
-    function showGov() {
-      clearTimeout(govTimeout);
-      govMenu?.classList.remove('hidden');
-    }
-
-    function hideGov() {
-      govTimeout = setTimeout(() => {
-        govMenu?.classList.add('hidden');
-      }, 150);
-    }
-
-    govDropdown?.addEventListener('mouseenter', showGov);
-    govDropdown?.addEventListener('mouseleave', hideGov);
-
-    // Also allow focus-based opening for keyboard nav
-    govDropdown?.addEventListener('focusin', showGov);
-    govDropdown?.addEventListener('focusout', (e) => {
-      if (!govDropdown.contains((e as FocusEvent).relatedTarget as Node)) {
-        hideGov();
+      function show() {
+        // Close any other open dropdowns first
+        document.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(m => {
+          if (m !== menu) m.classList.add('hidden');
+        });
+        clearTimeout(timeout);
+        menu?.classList.remove('hidden');
       }
+
+      function hide() {
+        timeout = setTimeout(() => {
+          menu?.classList.add('hidden');
+        }, 150);
+      }
+
+      dropdown.addEventListener('mouseenter', show);
+      dropdown.addEventListener('mouseleave', hide);
+      dropdown.addEventListener('focusin', show);
+      dropdown.addEventListener('focusout', (e) => {
+        if (!dropdown.contains((e as FocusEvent).relatedTarget as Node)) {
+          hide();
+        }
+      });
     });
 
-    // Mobile governance toggle
-    const mobileGovToggle = document.getElementById('mobile-gov-toggle');
-    const mobileGovList = document.getElementById('mobile-gov-list');
-    const mobileGovChevron = document.getElementById('mobile-gov-chevron');
+    // Mobile accordion toggles
+    document.querySelectorAll<HTMLElement>('[data-mobile-toggle]').forEach((btn) => {
+      const key = btn.getAttribute('data-mobile-toggle');
+      const list = document.querySelector<HTMLElement>(`[data-mobile-list="${key}"]`);
+      const chevron = document.querySelector<HTMLElement>(`[data-chevron="${key}"]`);
 
-    mobileGovToggle?.addEventListener('click', () => {
-      mobileGovList?.classList.toggle('hidden');
-      mobileGovChevron?.classList.toggle('rotate-180');
+      btn.addEventListener('click', () => {
+        list?.classList.toggle('hidden');
+        chevron?.classList.toggle('rotate-180');
+      });
     });
 
     // Search modal
@@ -283,7 +429,6 @@ const isGovActive = currentPath.startsWith('/governance/');
     searchBackdrop?.addEventListener('click', closeSearch);
 
     document.addEventListener('keydown', (e) => {
-      // Cmd/Ctrl+K to open
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         if (searchModal?.classList.contains('hidden')) {
@@ -292,13 +437,11 @@ const isGovActive = currentPath.startsWith('/governance/');
           closeSearch();
         }
       }
-      // Escape to close
       if (e.key === 'Escape') {
         closeSearch();
       }
     });
 
-    // Close on navigation
     document.addEventListener('astro:before-swap', closeSearch);
   }
 
