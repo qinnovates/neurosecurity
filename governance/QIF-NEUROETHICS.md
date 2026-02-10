@@ -1,3 +1,9 @@
+---
+title: "NeuroEthics — Running Questions & Thesis Foundation"
+description: "Open ethical questions QIF raises and thesis foundation for neuroethics research"
+order: 10
+---
+
 # QIF NeuroEthics — Running Questions & Thesis Foundation
 
 > **Living document.** These are the open ethical questions that QIF raises — questions that *must* be answered before quantum-aware BCI security can be deployed responsibly. This document grows as Kevin Qi pursues neuroethics in graduate school, filling unknowns from a position of rigorous academic inquiry.

@@ -1,3 +1,9 @@
+---
+title: "Post-Deployment Ethics"
+description: "Ethical obligations for neural device lifecycle management and end-of-life"
+order: 7
+---
+
 # QIF Framework: Post-Deployment Ethics
 
 > Ethical obligations for neural device lifecycle management, maintenance, and end-of-life considerations.

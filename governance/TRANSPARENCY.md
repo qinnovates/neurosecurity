@@ -1,3 +1,9 @@
+---
+title: "Transparency Statement"
+description: "Auditable record of Human-AI collaboration in QIF Framework development"
+order: 4
+---
+
 # Transparency Statement: Human-AI Collaboration in QIF Framework
 
 > This document serves as an auditable record of how AI tools were integrated into the development of the QIF (Quantum Indeterministic Framework for Neural Security), demonstrating principles of Responsible AI, cognitive boundary maintenance, and Human-in-the-Loop (HITL) methodology.

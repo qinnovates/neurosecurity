@@ -1,3 +1,9 @@
+---
+title: "Pediatric & Incapacity Considerations"
+description: "Ethical guidelines for neural device use in minors and individuals with limited capacity"
+order: 8
+---
+
 # QIF Framework: Pediatric and Incapacity Considerations
 
 > Ethical guidelines for neural device use in minors and individuals with limited decision-making capacity.

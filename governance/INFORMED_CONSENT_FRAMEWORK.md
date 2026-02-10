@@ -1,3 +1,9 @@
+---
+title: "Informed Consent Framework"
+description: "Guidelines for ethical consent in brain-computer interface deployment"
+order: 3
+---
+
 # QIF Framework: Informed Consent Framework for Neural Devices
 
 > Guidelines for ethical consent in brain-computer interface deployment, informed by neuroethics research.

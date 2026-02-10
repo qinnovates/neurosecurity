@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection, render } from 'astro:content';
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('governance');
+  return docs.map((doc) => ({
+    params: { slug: doc.id },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+
+const breadcrumbs = [
+  { label: 'Governance', href: '/governance/' },
+  { label: doc.data.title },
+];
+---
+
+<BaseLayout
+  title={doc.data.title}
+  description={doc.data.description || `${doc.data.title} — Qinnovate Governance`}
+  breadcrumbs={breadcrumbs}
+>
+  <Nav />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="mb-12">
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] leading-tight mb-4">
+        {doc.data.title}
+      </h1>
+      {doc.data.description && (
+        <p class="text-lg text-[var(--color-text-muted)] italic">{doc.data.description}</p>
+      )}
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <footer class="mt-16 pt-8 border-t border-[var(--color-border)]">
+      <a href="/governance/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+        &larr; All governance documents
+      </a>
+    </footer>
+  </article>
+
+  <Footer />
+</BaseLayout>

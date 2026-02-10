@@ -1,3 +1,9 @@
+---
+title: "Accessibility Statement & Requirements"
+description: "WCAG 2.2 AA compliance for QIF tools and website"
+order: 1
+---
+
 # Accessibility Statement & Requirements
 
 > **Qinnovate** is committed to ensuring digital accessibility for all users, including people with disabilities, neurodivergent individuals, and BCI (brain-computer interface) users.

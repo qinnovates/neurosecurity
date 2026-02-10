@@ -14,4 +14,13 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const governance = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './governance' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    order: z.number().default(99),
+  }),
+});
+
+export const collections = { blog, governance };

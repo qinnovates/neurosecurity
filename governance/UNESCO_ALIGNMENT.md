@@ -1,3 +1,9 @@
+---
+title: "UNESCO Neurotechnology Ethics Alignment"
+description: "Mapping QIF to the UNESCO Recommendation on the Ethics of Neurotechnology"
+order: 9
+---
+
 # QIF Framework: UNESCO Neurotechnology Ethics Alignment
 
 > Mapping the QIF Framework to the UNESCO Recommendation on the Ethics of Neurotechnology (2025) — the first global normative framework for neurotechnology governance.

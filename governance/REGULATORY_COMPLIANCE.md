@@ -1,3 +1,9 @@
+---
+title: "Regulatory Compliance Guide"
+description: "Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment"
+order: 5
+---
+
 # QIF Framework: Regulatory Compliance Guide
 
 > Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment.

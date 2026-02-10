@@ -1,3 +1,9 @@
+---
+title: "Data Policy & FAQ"
+description: "Data handling, privacy protections, and FAQs about neural data security"
+order: 6
+---
+
 # QIF Framework Data Policy & FAQ
 
 > **Comprehensive guide to data handling, privacy protections, and frequently asked questions about neural data security in the QIF Framework.**

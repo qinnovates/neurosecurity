@@ -1,3 +1,9 @@
+---
+title: "Neuroethics Alignment"
+description: "How the QIF Framework addresses core principles of neuroethics and cognitive liberty"
+order: 2
+---
+
 # QIF Framework: Neuroethics Alignment
 
 > How the QIF Framework addresses core principles of neuroethics and cognitive liberty.

@@ -1,0 +1,42 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = await getCollection('governance');
+const sorted = docs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+---
+
+<PageLayout
+  title="Governance"
+  description="Ethics, compliance, and transparency documents for the QIF Framework."
+  breadcrumbs={[{ label: 'Governance' }]}
+>
+  <div class="mb-12 reveal">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Governance</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-3xl">
+      Ethics, compliance, and transparency documents governing the QIF Framework and Qinnovate standards development.
+    </p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger">
+    {sorted.map((doc) => (
+      <a href={`/governance/${doc.id}/`} class="block group">
+        <article class="glass rounded-xl p-6 card-hover h-full flex flex-col">
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
+            {doc.data.title}
+          </h3>
+          {doc.data.description && (
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
+              {doc.data.description}
+            </p>
+          )}
+          <div class="mt-4 pt-3 border-t border-[var(--color-border)]">
+            <span class="text-xs text-[var(--color-accent-primary)] font-medium group-hover:underline">
+              Read document &rarr;
+            </span>
+          </div>
+        </article>
+      </a>
+    ))}
+  </div>
+</PageLayout>
