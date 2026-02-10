@@ -6,7 +6,7 @@
  */
 import { HOURGLASS_BANDS, QIF_VERSION, QIF_BANDS, PILLARS, COHERENCE } from '../lib/qif-constants';
 import { THREAT_VECTORS, getThreatStats, getTaraStats } from '../lib/threat-data';
-import { NSP_VERSION } from '../lib/nsp-constants';
+import { NSP_VERSION, NSP_LAYERS, NSP_POWER } from '../lib/nsp-constants';
 
 const stats = getThreatStats();
 const taraStats = getTaraStats();
@@ -21,6 +21,15 @@ const colorMap: Record<string, string> = {
   'var(--color-accent-tertiary)': '#8b5cf6',
 };
 function hex(c: string): string { return colorMap[c] ?? c; }
+
+// Short labels for NSP layers in the pitch deck (derived from scope)
+const nspShortLabels: Record<number, string> = {
+  1: 'SPHINCS+ boot',
+  2: 'ML-KEM + ECDH',
+  3: 'Per-frame scoring',
+  4: 'Test-time training',
+  5: 'Spectral scanning',
+};
 ---
 
 <!DOCTYPE html>
@@ -57,8 +66,8 @@ function hex(c: string): string { return colorMap[c] ?? c; }
 
   <style is:global>
     :root {
-      --bg-deep: #0e1525;
-      --bg-surface: #182038;
+      --bg-deep: #0b1121;
+      --bg-surface: #111a30;
       --bg-elevated: #1e2a4a;
       --accent-primary: #3b82f6;
       --accent-secondary: #06b6d4;
@@ -66,14 +75,13 @@ function hex(c: string): string { return colorMap[c] ?? c; }
       --text-primary: #f1f5f9;
       --text-muted: #a8b8cf;
       --text-faint: #7289aa;
-      --glass-bg: rgba(24, 32, 56, 0.65);
-      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-bg: rgba(15, 23, 42, 0.55);
+      --glass-border: rgba(255, 255, 255, 0.06);
       --safe: #10b981;
       --warn: #f59e0b;
       --danger: #ef4444;
+      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
     }
-
-    .reveal-viewport { background: var(--bg-deep); }
 
     .reveal {
       font-family: "Inter", system-ui, sans-serif;
@@ -88,14 +96,14 @@ function hex(c: string): string { return colorMap[c] ?? c; }
       letter-spacing: -0.01em;
     }
 
-    .reveal h1 { font-size: 2.4em; font-weight: 700; }
-    .reveal h2 { font-size: 1.65em; font-weight: 600; }
+    .reveal h1 { font-size: 2.8em; font-weight: 700; letter-spacing: -0.02em; }
+    .reveal h2 { font-size: 1.7em; font-weight: 600; letter-spacing: -0.01em; }
     .reveal h3 { font-size: 1.15em; }
 
     .reveal p, .reveal li {
       color: var(--text-muted);
       line-height: 1.7;
-      font-size: 0.88em;
+      font-size: 0.85em;
     }
 
     .reveal code {
@@ -127,6 +135,19 @@ function hex(c: string): string { return colorMap[c] ?? c; }
       border-radius: 16px;
       padding: 24px;
       text-align: left;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+    .glass::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      pointer-events: none;
     }
 
     .glass h3 { margin: 0 0 6px 0; font-size: 1em; }
@@ -151,9 +172,9 @@ function hex(c: string): string { return colorMap[c] ?? c; }
 
     .label {
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.48em;
+      font-size: 0.52em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: var(--text-faint);
       margin-bottom: 10px;
     }
@@ -170,10 +191,11 @@ function hex(c: string): string { return colorMap[c] ?? c; }
     }
     .stat .n {
       font-family: "Space Grotesk", system-ui;
-      font-size: 1.9em;
+      font-size: 2.2em;
       font-weight: 700;
       line-height: 1;
       margin-bottom: 3px;
+      text-shadow: 0 0 30px currentColor;
     }
     .stat .l {
       font-size: 0.6em;
@@ -185,14 +207,25 @@ function hex(c: string): string { return colorMap[c] ?? c; }
     /* Quote */
     .quote { max-width: 780px; margin: 0 auto; }
     .quote blockquote {
-      border-left: 4px solid var(--accent-tertiary);
+      border-left: none;
       padding: 14px 0 14px 24px;
       margin: 0;
-      font-size: 1.05em;
+      font-size: 1.1em;
       color: var(--text-primary);
       font-style: italic;
       line-height: 1.55;
       text-align: left;
+      position: relative;
+    }
+    .quote blockquote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--accent-tertiary), var(--accent-secondary));
     }
     .quote .cite {
       font-size: 0.6em;
@@ -229,7 +262,11 @@ function hex(c: string): string { return colorMap[c] ?? c; }
     /* Dual-use mapping */
     .dualmap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px 16px; align-items: center; font-size: 0.72em; }
     .dualmap .a { text-align: right; color: var(--danger); }
-    .dualmap .arrow { color: var(--accent-secondary); font-size: 1.1em; }
+    .dualmap .arrow { color: var(--accent-secondary); font-size: 1.1em; animation: arrow-pulse 4s ease-in-out infinite; }
+    @keyframes arrow-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
     .dualmap .t { text-align: left; color: var(--safe); }
 
     /* Honest list */
@@ -255,12 +292,12 @@ function hex(c: string): string { return colorMap[c] ?? c; }
       background: var(--glass-bg); border: 1px solid var(--glass-border);
       border-radius: 10px; padding: 10px 18px;
       color: var(--text-primary); text-decoration: none; font-size: 0.7em;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.5s var(--ease-premium), transform 0.5s var(--ease-premium);
     }
     .link:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
 
     /* Fragment fade-in tweak */
-    .reveal .fragment { transition: all 0.3s ease; }
+    .reveal .fragment { transition: all 0.5s var(--ease-premium); }
 
     /* ═══ Music toggle ═══ */
     .music-toggle {
@@ -280,7 +317,7 @@ function hex(c: string): string { return colorMap[c] ?? c; }
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+      transition: border-color 0.5s var(--ease-premium), color 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
     }
     .music-toggle:hover {
       border-color: var(--accent-secondary);
@@ -298,6 +335,136 @@ function hex(c: string): string { return colorMap[c] ?? c; }
 
     #sc-player { position: absolute; left: -9999px; width: 1px; height: 1px; }
 
+    /* ═══ Layer 0: Aurora Background ═══ */
+    .aurora-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: #0b1121;
+    }
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+    }
+    .aurora-blob--indigo {
+      width: 60vw;
+      height: 60vw;
+      top: -20%;
+      left: -10%;
+      background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+      opacity: 0.15;
+      filter: blur(80px);
+      animation: aurora-drift-1 18s ease-in-out infinite alternate;
+    }
+    .aurora-blob--cyan {
+      width: 50vw;
+      height: 50vw;
+      bottom: -15%;
+      right: -10%;
+      background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+      opacity: 0.18;
+      filter: blur(100px);
+      animation: aurora-drift-2 14s ease-in-out infinite alternate;
+    }
+    .aurora-blob--purple {
+      width: 45vw;
+      height: 45vw;
+      top: 30%;
+      right: 20%;
+      background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+      opacity: 0.12;
+      filter: blur(120px);
+      animation: aurora-drift-3 16s ease-in-out infinite alternate;
+    }
+    @keyframes aurora-drift-1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(8vw, 6vh) scale(1.1); }
+    }
+    @keyframes aurora-drift-2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-6vw, -8vh) scale(1.05); }
+    }
+    @keyframes aurora-drift-3 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-4vw, 5vh) scale(0.95); }
+    }
+
+    /* ═══ Layer 1: Suprematist Geometry ═══ */
+    .geo-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .geo-circle {
+      position: absolute;
+      width: 40vw;
+      height: 40vw;
+      top: -8%;
+      right: -8%;
+      border: 2px solid rgba(255, 255, 255, 0.04);
+      border-radius: 50%;
+      animation: geo-rotate 60s linear infinite;
+    }
+    .geo-rect {
+      position: absolute;
+      width: 25vw;
+      height: 35vh;
+      bottom: 5%;
+      left: -5%;
+      border: 2px solid rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+      transform: rotate(12deg);
+      animation: geo-drift 30s ease-in-out infinite alternate;
+    }
+    .geo-square {
+      position: absolute;
+      width: 8vw;
+      height: 8vw;
+      top: 45%;
+      left: 8%;
+      border: 2px solid rgba(255, 255, 255, 0.04);
+      border-radius: 2px;
+      transform: rotate(45deg);
+      animation: geo-pulse 8s ease-in-out infinite;
+    }
+    @keyframes geo-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes geo-drift {
+      0% { transform: rotate(12deg) translate(0, 0); }
+      100% { transform: rotate(15deg) translate(2vw, -3vh); }
+    }
+    @keyframes geo-pulse {
+      0%, 100% { opacity: 0.03; }
+      50% { opacity: 0.06; }
+    }
+
+    /* ═══ Layer 2: Noise Texture ═══ */
+    .noise-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.03;
+      mix-blend-mode: overlay;
+    }
+
+    /* Ensure Reveal sits above background layers with transparent bg */
+    .reveal-viewport,
+    .reveal-viewport .reveal,
+    .reveal-viewport .reveal .slides,
+    .reveal-viewport .reveal .slides section {
+      background: transparent !important;
+    }
+    .reveal-viewport { position: relative; z-index: 3; }
+    .reveal { position: relative; z-index: 3; }
+
     @media (max-width: 768px) {
       .grid-3 { grid-template-columns: 1fr; }
       .grid-2 { grid-template-columns: 1fr; }
@@ -305,7 +472,29 @@ function hex(c: string): string { return colorMap[c] ?? c; }
     }
   </style>
 </head>
-<body>
+<body style="background: #0b1121;">
+  <!-- Layer 0: Aurora Background -->
+  <div class="aurora-layer" aria-hidden="true">
+    <div class="aurora-blob aurora-blob--indigo"></div>
+    <div class="aurora-blob aurora-blob--cyan"></div>
+    <div class="aurora-blob aurora-blob--purple"></div>
+  </div>
+
+  <!-- Layer 1: Suprematist Geometry -->
+  <div class="geo-layer" aria-hidden="true">
+    <div class="geo-circle"></div>
+    <div class="geo-rect"></div>
+    <div class="geo-square"></div>
+  </div>
+
+  <!-- Layer 2: Noise Texture -->
+  <svg class="noise-layer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)" />
+  </svg>
+
   <div class="reveal">
     <div class="slides">
 
@@ -501,15 +690,17 @@ function hex(c: string): string { return colorMap[c] ?? c; }
           Post-quantum cryptography for BCI data streams. FIPS 203/204/205 compliant.
         </p>
         <div class="layers" style="max-width: 660px; margin: 16px auto 0;">
-          <div class="layer"><span class="ln">L1</span><span class="ll">Hardware Root of Trust</span><span class="ls">SPHINCS+ boot</span></div>
-          <div class="layer"><span class="ln">L2</span><span class="ll">Hybrid PQC Key Exchange</span><span class="ls">ML-KEM + ECDH</span></div>
-          <div class="layer"><span class="ln">L3</span><span class="ll">QI Signal Integrity</span><span class="ls">Per-frame scoring</span></div>
-          <div class="layer"><span class="ln">L4</span><span class="ll">Adaptive Detection</span><span class="ls">Test-time training</span></div>
-          <div class="layer"><span class="ln">L5</span><span class="ll">Emergency Shutoff</span><span class="ls">Hardware kill switch</span></div>
+          {NSP_LAYERS.map(layer => (
+            <div class="layer">
+              <span class="ln">L{layer.id}</span>
+              <span class="ll">{layer.name}</span>
+              <span class="ls">{nspShortLabels[layer.id] ?? ''}</span>
+            </div>
+          ))}
         </div>
         <div class="stats" style="margin-top: 16px;">
           <div class="stat">
-            <div class="n cyan">3.25%</div>
+            <div class="n cyan">{NSP_POWER.totalOverheadPercent}%</div>
             <div class="l">Power<br />overhead</div>
           </div>
           <div class="stat">
@@ -610,7 +801,7 @@ function hex(c: string): string { return colorMap[c] ?? c; }
           </li>
           <li>
             <strong style="color: var(--warn);">Power budget is modeled, not measured.</strong>
-            3.25% overhead on paper. Needs silicon prototyping.
+            {NSP_POWER.totalOverheadPercent}% overhead on paper. Needs silicon prototyping.
           </li>
           <li>
             <strong style="color: var(--warn);">~40% of techniques have no therapeutic analog.</strong>
@@ -646,7 +837,7 @@ function hex(c: string): string { return colorMap[c] ?? c; }
           </li>
           <li>
             <strong>Is the NSP power budget realistic?</strong><br />
-            <em>3.25% on a 10mW implant. Is that feasible, or does PQC on-device need
+            <em>{NSP_POWER.totalOverheadPercent}% on a 10mW implant. Is that feasible, or does PQC on-device need
             a fundamentally different approach?</em>
           </li>
           <li>
@@ -714,7 +905,7 @@ function hex(c: string): string { return colorMap[c] ?? c; }
       height: 720,
       margin: 0.07,
       transition: 'fade',
-      transitionSpeed: 'fast',
+      transitionSpeed: 'default',
       center: true,
       controls: true,
       controlsLayout: 'edges',
