@@ -203,7 +203,25 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.3 What This Paper Delivers</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.3 Statement of Novelty</h3>
+        <div class="prose mb-8">
+          <p>
+            The core novelty of the Quantum Indeterministic Framework is the <strong>synthesis of three disparate research fields &mdash; quantum biology, BCI security, and post-quantum cryptography &mdash; into a single, unified, and empirically falsifiable architecture.</strong> While prior work exists in each domain individually, QIF is the first framework to formally connect them.
+          </p>
+          <p>
+            Specifically, the contributions are not the individual components, but their integration:
+          </p>
+          <ul>
+            <li><strong>From Physics to Protocol.</strong> QIF provides a continuous architectural path from quantum-scale phenomena at the electrode-tissue boundary (ion channel tunneling, decoherence dynamics) to a post-quantum cryptographic wire protocol (NSP). No other framework bridges this physical-to-digital gap.</li>
+            <li><strong>A Unified Metric.</strong> The QI equation (QI = e<sup>&minus;S</sup>) provides a single mathematical object combining classical signal integrity with hypothesized quantum terms. It makes security a measurable, physics-based quantity at the neural interface itself, rather than a property of the downstream digital system alone.</li>
+            <li><strong>Mechanism-First Taxonomy.</strong> The Locus Taxonomy and TARA registry are the first threat classification systems designed for the unique dual-use nature of neural interfaces, where attack vectors and therapeutic mechanisms share the same physics.</li>
+          </ul>
+          <p>
+            Previous BCI security frameworks have treated the brain as a classical data source. QIF rejects this premise and builds a new architecture from the physical reality of the neural-synthetic boundary. This synthesis creates a new paradigm for neurosecurity engineering.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.4 What This Paper Delivers</h3>
         <div class="prose">
           <p>This paper presents eight contributions:</p>
           <ol>
@@ -221,7 +239,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
 
       <!-- 2.4 The Containment Principle -->
       <section id="containment" class="mb-20">
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.4 The Containment Principle</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.5 The Containment Principle</h3>
         <div class="prose">
           <p>
             Every civilization that has built critical infrastructure has independently converged on a single architectural pattern: <em>containment</em>. The word &ldquo;paradise&rdquo; descends from the Old Persian <em>pairi-daeza</em> &mdash; a walled enclosure designed to separate a restorative interior from a hostile exterior <a href="#ref-74">[74]</a>. This is not metaphor. It is engineering.
@@ -820,7 +838,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </div>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.3 Seven Operational Domains</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.3 {totalDomains} Operational Domains</h3>
         <div class="prose mb-6">
           <p>The {totalDomains} domains partition the BCI attack surface by the system being targeted:</p>
         </div>
@@ -850,7 +868,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.4 Eleven Tactics</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.4.4 {totalTactics} Tactics</h3>
         <div class="prose mb-6">
           <p>Each domain contains one or more tactics, each describing an adversary&rsquo;s operational objective:</p>
         </div>
@@ -1101,7 +1119,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             A recommendation algorithm profiles a user&rsquo;s psychological vulnerabilities through behavioral data &mdash; watch time, engagement spikes, emotional triggers, search history &mdash; then systematically curates content designed to destabilize cognitive function. The algorithm acts as both the reconnaissance tool and the delivery mechanism. No exploit code is required. No malware is installed. The platform functions exactly as designed.
           </p>
           <p>
-            This is not hypothetical. Internal research from major social media platforms, leaked in 2021, documented that recommendation algorithms amplified content associated with eating disorders, self-harm, and suicidal ideation in adolescent users (Hao, 2021). Longitudinal studies have linked algorithmic feed exposure to increased rates of anxiety, depression, and psychotic-spectrum experiences in vulnerable populations (Haidt &amp; Twenge, 2023). Sub-clinical psychotic experiences are common and exacerbated by environmental stressors (Kelleher et al., 2012), and the dopaminergic mechanisms underlying psychosis &mdash; the system that assigns salience to stimuli &mdash; are precisely what engagement-optimized algorithms exploit (Howes &amp; Kapur, 2009). The algorithm does not need to &ldquo;intend&rdquo; harm &mdash; optimization for engagement metrics produces the same outcome as a deliberate attack when the most engaging content is also the most destabilizing.
+            This is not hypothetical. Internal research from major social media platforms, leaked in 2021, documented that recommendation algorithms amplified content associated with eating disorders, self-harm, and suicidal ideation in adolescent users <a href="#ref-88">[88]</a>. Longitudinal studies have linked algorithmic feed exposure to increased rates of anxiety, depression, and psychotic-spectrum experiences in vulnerable populations <a href="#ref-89">[89]</a>. Sub-clinical psychotic experiences are common and exacerbated by environmental stressors <a href="#ref-90">[90]</a>, and the dopaminergic mechanisms underlying psychosis &mdash; the system that assigns salience to stimuli &mdash; are precisely what engagement-optimized algorithms exploit <a href="#ref-91">[91]</a>. The algorithm does not need to &ldquo;intend&rdquo; harm &mdash; optimization for engagement metrics produces the same outcome as a deliberate attack when the most engaging content is also the most destabilizing.
           </p>
         </div>
 
@@ -1502,7 +1520,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.1 What QIF Is</h3>
         <div class="prose">
-          <p>This paper delivered the eight contributions outlined in Section 2.3:</p>
+          <p>This paper delivered the eight contributions outlined in Section 2.4:</p>
           <ol>
             <li>An <strong>11-band hourglass architecture</strong> (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy and quantum physics (Section 4).</li>
             <li>A <strong>unified QI equation</strong>, QI(b,t) = e<sup>&minus;S(b,t)</sup>, grounded in spectral decomposition via the STFT and combining classical signal integrity with quantum terms (Section 5).</li>
@@ -1711,6 +1729,12 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           <p id="ref-85">[85] Landau, O., Cohen, A., Gordon, S., &amp; Nissim, N. (2020). Mind your mind: EEG-based brain-computer interfaces and their security in cyber space. <em>ACM Computing Surveys</em>, 53(1), Article 1. DOI: 10.1145/3372043</p>
           <p id="ref-86">[86] Lozano, A. M. et al. (2019). Deep brain stimulation: current challenges and future directions. <em>Nature Reviews Neurology</em>, 15(3), 148&ndash;160. DOI: 10.1038/s41582-018-0128-2</p>
           <p id="ref-87">[87] U.S. Food and Drug Administration. (2023). Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions. Section 524B of the FD&amp;C Act (as amended by the Consolidated Appropriations Act, 2023).</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">Algorithmic Psychosis Case Study</p>
+          <p id="ref-88">[88] Wells, G., Horwitz, J., &amp; Seetharaman, D. (2021). Facebook knows Instagram is toxic for teen girls, company documents show. <em>The Wall Street Journal</em>, September 14, 2021.</p>
+          <p id="ref-89">[89] Twenge, J. M., Haidt, J., Lozano, J., &amp; Cummins, K. M. (2022). Specification curve analysis shows that social media use is linked to poor mental health, especially among girls. <em>Acta Psychologica</em>, 223, 103512. DOI: 10.1016/j.actpsy.2022.103512</p>
+          <p id="ref-90">[90] Kelleher, I., Connor, D., Clarke, M. C., Devlin, N., Harley, M., &amp; Cannon, M. (2012). Prevalence of psychotic symptoms in childhood and adolescence: a systematic review and meta-analysis. <em>Psychological Medicine</em>, 42(9), 1857&ndash;1863. DOI: 10.1017/S0033291711002960</p>
+          <p id="ref-91">[91] Howes, O. D., &amp; Kapur, S. (2009). The dopamine hypothesis of schizophrenia: version III &mdash; the final common pathway. <em>Schizophrenia Bulletin</em>, 35(3), 549&ndash;562. DOI: 10.1093/schbul/sbp006</p>
         </div>
       </section>
 
