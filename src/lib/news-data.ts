@@ -113,6 +113,14 @@ export const briefs: Brief[] = [
   },
   {
     date: '2026-02',
+    title: 'OpenAI Invests $250M in Sam Altman\'s Brain-Computer Interface Startup Merge Labs',
+    category: 'industry',
+    summary: 'OpenAI led a $250M funding round for Merge Labs, Sam Altman\'s non-invasive BCI startup building consumer-grade neural interfaces. The investment signals that the AI industry sees brain-computer interfaces as the next input modality — not a research curiosity, but infrastructure.',
+    relevance: 'Consumer-grade BCIs at scale mean millions of unsecured neural endpoints. Non-invasive devices lower the attack barrier (no surgery = wider deployment = larger attack surface). QIF threat models for Bands S1-S3 and I0 need consumer device class analysis. NSP device tiers become critical for mass-market compliance.',
+    url: 'https://openai.com/index/investing-in-merge-labs/',
+  },
+  {
+    date: '2026-02',
     title: 'NIST Post-Quantum Cryptography Standards Finalized',
     category: 'quantum',
     summary: 'NIST has finalized three post-quantum cryptographic algorithms (ML-KEM, ML-DSA, SLH-DSA). These standards will directly impact BCI encryption protocols at QIF Band 3.',
