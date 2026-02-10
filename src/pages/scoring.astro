@@ -175,20 +175,23 @@ const severityLevels = [
         <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
           Neural Impact Scoring System <span class="text-[var(--color-accent-primary)]">v1.0</span>
         </h1>
-        <div class="flex items-center gap-3 mb-6">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
-            Original Specification
+            First CVSS v4.0 Extension for Neural Security
           </span>
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-tertiary)] text-[var(--color-accent-tertiary)]">
             by Qinnovate
           </span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-text-faint)]/30 text-[var(--color-text-faint)]">
+            71 techniques mapped to CVSS v4.0 + MITRE ATT&amp;CK
+          </span>
         </div>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            NISS is a purpose-built vulnerability scoring system for brain-computer interface security. It replaces CVSS for neural contexts by adding dimensions that traditional IT scoring cannot capture: biological tissue damage, cognitive integrity violation, neural reversibility, consent boundaries, and neuroplasticity effects.
+            NISS is the first CVSS v4.0 extension designed for brain-computer interface security. Following FIRST.org's extension framework (CVSS v4.0 User Guide &sect;3.11), NISS adds neural-specific dimensions that CVSS structurally cannot express: biological tissue damage, cognitive integrity violation, neural reversibility, consent boundaries, and neuroplasticity effects.
           </p>
           <p>
-            Where CVSS weights exploitability and system impact equally, NISS inverts the priority: <strong>70% human impact, 30% system exploitability</strong>. A vulnerability that can cause irreversible neural tissue damage scores higher than one that exfiltrates data &mdash; because brains cannot be patched or rebooted.
+            Qinnovate mapped all 71 TARA techniques to CVSS v4.0 base metrics and found that <strong>94.4% cannot be fully scored by CVSS alone</strong>. Of these, 73.2% require metrics that exist only in NISS. Where CVSS weights exploitability and system impact equally, NISS inverts the priority: <strong>70% human impact, 30% system exploitability</strong>. A vulnerability that can cause irreversible neural tissue damage scores higher than one that exfiltrates data, because brains cannot be patched or rebooted.
           </p>
         </div>
 
@@ -218,8 +221,27 @@ const severityLevels = [
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Why not CVSS?</h2>
         <div class="prose mb-8">
           <p>
-            The Common Vulnerability Scoring System (CVSS) was designed for IT infrastructure &mdash; servers, networks, and software. It assumes that assets are digital, replaceable, and patchable. None of these assumptions hold for neural interfaces:
+            The Common Vulnerability Scoring System (CVSS) was designed for IT infrastructure: servers, networks, and software. It assumes that assets are digital, replaceable, and patchable. None of these assumptions hold for neural interfaces. Qinnovate's complete mapping of 71 BCI techniques to CVSS v4.0 base vectors empirically proves that CVSS is structurally insufficient:
           </p>
+        </div>
+
+        <!-- Empirical evidence callout -->
+        <div class="glass rounded-xl p-5 mb-6 border-l-4 border-[var(--color-accent-primary)]">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Empirical finding: 94.4% of BCI techniques cannot be fully scored by CVSS v4.0</p>
+          <div class="grid grid-cols-3 gap-4 text-center mt-3">
+            <div>
+              <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">4</div>
+              <div class="text-xs text-[var(--color-text-faint)]">CVSS sufficient (5.6%)</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #f59e0b;">15</div>
+              <div class="text-xs text-[var(--color-text-faint)]">CVSS + Safety partial (21.1%)</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: #ef4444;">52</div>
+              <div class="text-xs text-[var(--color-text-faint)]">NISS required (73.2%)</div>
+            </div>
+          </div>
         </div>
         <div class="grid gap-4 sm:grid-cols-2">
           {[

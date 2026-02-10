@@ -992,7 +992,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
       <!-- 6.5 NISS Scoring -->
       <section id="niss" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.5 NISS v1.0 &mdash; Neural Impact Scoring System</h2>
-        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-6">BCI-native vulnerability scoring system</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-6">First CVSS v4.0 extension for neural security &ensp;|&ensp; 71 techniques mapped to CVSS v4.0 + MITRE ATT&amp;CK</p>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.1 Why Not CVSS?</h3>
         <div class="prose mb-8">
@@ -1007,7 +1007,10 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <li><strong>Neuroplasticity effects</strong> &mdash; can repeated exposure cause lasting changes to neural pathways?</li>
           </ul>
           <p>
-            NISS v1.0, developed by Qinnovate as a purpose-built alternative, retains the 0&ndash;10 scoring scale familiar from CVSS but replaces the CIA triad with <strong>BCI-native impact dimensions</strong> (Biological Impact, Cognitive Integrity, Information Impact) and adds supplemental human-impact modifiers. Where CVSS weights exploit and impact equally, NISS weights human impact at 70% and system exploitability at 30%.
+            NISS v1.0, developed by Qinnovate as the first CVSS v4.0 extension for neural security (following FIRST.org&rsquo;s extension framework, User Guide &sect;3.11), retains the 0&ndash;10 scoring scale familiar from CVSS but adds <strong>BCI-native impact dimensions</strong> (Biological Impact, Cognitive Integrity, Information Impact) and supplemental human-impact modifiers. Where CVSS weights exploit and impact equally, NISS weights human impact at 70% and system exploitability at 30%.
+          </p>
+          <p>
+            Qinnovate&rsquo;s complete mapping of all 71 TARA techniques to CVSS v4.0 base vectors empirically demonstrates that <strong>94.4% of BCI threat techniques cannot be fully scored by CVSS v4.0 alone</strong>, with 73.2% requiring metrics that exist only in NISS. This mapping represents the first systematic application of CVSS v4.0 and MITRE ATT&amp;CK-style technique classification to brain-computer interface security.
           </p>
         </div>
 
