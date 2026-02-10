@@ -302,6 +302,32 @@ const nspShortLabels: Record<number, string> = {
     /* Fragment fade-in */
     .reveal .fragment { transition: all 0.5s var(--ease); }
 
+    /* ═══ Glass-Pane Z-Depth Transitions ═══ */
+    .reveal .slides {
+      perspective: 1400px;
+      perspective-origin: 50% 50%;
+    }
+    .reveal.slide .slides > section {
+      transition: transform 0.9s var(--ease),
+                  opacity 0.9s var(--ease),
+                  filter 0.9s var(--ease) !important;
+    }
+    .reveal.slide .slides > section:not([data-transition]).past {
+      transform: translate3d(-100%, 0, -600px) rotateY(4deg) !important;
+      opacity: 0 !important;
+      filter: blur(12px) !important;
+    }
+    .reveal.slide .slides > section:not([data-transition]).future {
+      transform: translate3d(100%, 0, -600px) rotateY(-4deg) !important;
+      opacity: 0 !important;
+      filter: blur(12px) !important;
+    }
+    .reveal.slide .slides > section.present {
+      transform: translate3d(0, 0, 0) rotateY(0) !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+
     /* ═══ Music toggle ═══ */
     .music-toggle {
       position: fixed;
@@ -912,7 +938,7 @@ const nspShortLabels: Record<number, string> = {
       width: 1280,
       height: 720,
       margin: 0.07,
-      transition: 'fade',
+      transition: 'slide',
       transitionSpeed: 'default',
       center: true,
       controls: true,
@@ -996,6 +1022,19 @@ const nspShortLabels: Record<number, string> = {
               pendingPlay = true;
               toggle.classList.add('playing');
             }
+          }
+          // Glass-pane parallax — background layers drift with slide index
+          var center = 6;
+          var delta = event.indexh - center;
+          var aurora = document.querySelector('.aurora-layer');
+          var waves = document.querySelector('.wave-layer');
+          if (aurora) {
+            aurora.style.transition = 'transform 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
+            aurora.style.transform = 'translate(' + (delta * 1.5) + 'vw, 0)';
+          }
+          if (waves) {
+            waves.style.transition = 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            waves.style.transform = 'translate(' + (delta * 0.8) + 'vw, 0)';
           }
         });
       });
