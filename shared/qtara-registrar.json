@@ -42,10 +42,15 @@
       "SI": 10
     },
     "by_niss_severity": {
-      "critical": 3,
-      "high": 46,
-      "low": 4,
-      "medium": 18
+      "critical": 0,
+      "high": 14,
+      "medium": 32,
+      "low": 24,
+      "none": 1
+    },
+    "niss_cvss_mapping": {
+      "pins_flagged": 31,
+      "by_gap_group": { "1": 4, "2": 17, "3": 50 }
     },
     "tara": {
       "version": "1.0",
@@ -226,9 +231,10 @@
       "legacy_technique_id": "T2001",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -288,6 +294,13 @@
           ],
           "detection": "Impedance anomaly detection, waveform verification, current leakage monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Tissue harm from signal injection and cognitive alteration not expressible in CVSS"
       }
     },
     {
@@ -315,9 +328,10 @@
       "legacy_technique_id": "T2002",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:N/E:U",
-        "score": 6.7,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -378,6 +392,13 @@
           ],
           "detection": "Stimulation parameter monitoring, impedance trending, battery state tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:L/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Neural function locking and conditional restoration have no CVSS equivalent"
       }
     },
     {
@@ -412,9 +433,10 @@
       "legacy_technique_id": "T2003",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:C/R:I/VC:E/NE:N/E:A",
-        "score": 7.7,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -472,6 +494,13 @@
           ],
           "detection": "RF spectrum monitoring, cable shielding verification, encryption validation"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:C",
+        "gap_group": 3,
+        "gap_summary": "Passive neural thought interception — mental privacy not covered by CVSS confidentiality"
       }
     },
     {
@@ -499,9 +528,10 @@
       "legacy_technique_id": "T2004",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:P",
-        "score": 6.6,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -561,6 +591,13 @@
           ],
           "detection": "End-to-end latency monitoring, cryptographic integrity checks, signal fingerprinting"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:H/VA:L/SC:H/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Neural signal modification in transit affects cognition beyond data integrity"
       }
     },
     {
@@ -588,9 +625,10 @@
       "legacy_technique_id": "T2005",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.2,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "tara": {
         "mechanism": "Exploitation of quantum tunneling effects at nanoscale electrode-tissue junctions",
@@ -639,6 +677,13 @@
           ],
           "detection": "Tunneling current anomaly detection, junction impedance spectroscopy"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Ion-channel quantum manipulation has no CVSS physical impact analog"
       }
     },
     {
@@ -666,9 +711,10 @@
       "legacy_technique_id": "T2006",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.2,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "tara": {
         "mechanism": "Davydov soliton propagation in protein alpha-helices at electrode-tissue interface",
@@ -717,6 +763,13 @@
           ],
           "detection": "Infrared absorption spectroscopy, protein conformational monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:L/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Protein-level soliton manipulation is below CVSS's abstraction layer"
       }
     },
     {
@@ -745,9 +798,10 @@
       "legacy_technique_id": "T2007",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:N/RV:P/NP:N",
+        "score": 4.4,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -800,6 +854,13 @@
           ],
           "detection": "Protocol conformance testing, sequence number validation, timing analysis"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Classical pipeline corruption with downstream neural impact partially captured by Safety"
       }
     },
     {
@@ -830,9 +891,10 @@
       "legacy_technique_id": "T2008",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -891,6 +953,13 @@
           ],
           "detection": "Command pattern anomaly detection, user intent verification, behavioral consistency checks"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Involuntary motor control hijacking has no CVSS availability/integrity mapping"
       }
     },
     {
@@ -921,9 +990,10 @@
       "legacy_technique_id": "T2009",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
-        "score": 7.6,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S",
+        "score": 7.4,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -986,6 +1056,13 @@
           ],
           "detection": "RF spectrum analysis, field strength monitoring, EEG artifact detection"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Brainwave entrainment causing lasting neural pattern changes not expressible in CVSS"
       }
     },
     {
@@ -1016,9 +1093,10 @@
       "legacy_technique_id": "T2101",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:A",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S",
+        "score": 7.4,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -1077,6 +1155,13 @@
           ],
           "detection": "EEG phase-locking analysis, spectral power monitoring at stimulation frequency"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:Y/R:U/V:D",
+        "gap_group": 3,
+        "gap_summary": "Seizure risk from ELF exposure not captured by CVSS availability"
       }
     },
     {
@@ -1105,9 +1190,10 @@
       "legacy_technique_id": "T2102",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
-        "score": 6.4,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S",
+        "score": 7.4,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -1165,6 +1251,13 @@
           ],
           "detection": "Spectral analysis for unexpected intermodulation products, dual-frequency monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "BCI signal weaponization via intermodulation creates novel tissue/cognitive harm"
       }
     },
     {
@@ -1193,9 +1286,10 @@
       "legacy_technique_id": "T2103",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:A",
-        "score": 6.4,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:H/CG:L/CV:E/RV:P/NP:T",
+        "score": 6.1,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -1252,6 +1346,13 @@
           ],
           "detection": "RF power density monitoring, thermal imaging, SAR dosimetry"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:H/SC:N/SI:L/SA:H",
+        "supplemental": "S:P/AU:Y/R:U/V:D",
+        "gap_group": 3,
+        "gap_summary": "Microwave auditory effect and tissue heating go beyond CVSS availability"
       }
     },
     {
@@ -1280,9 +1381,10 @@
       "legacy_technique_id": "T2104",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:A/AC:H/PR:N/UI:P/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:P",
-        "score": 6.5,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S",
+        "score": 7.4,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -1340,6 +1442,13 @@
           ],
           "detection": "Finite element modeling validation, EEG monitoring of entrainment at target frequency"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Non-invasive deep brain stimulation impact not in CVSS scope"
       }
     },
     {
@@ -1373,9 +1482,10 @@
       "legacy_technique_id": "T2105",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:P/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
-        "score": 7.6,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:I/RV:P/NP:S",
+        "score": 6.4,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -1433,6 +1543,13 @@
           ],
           "detection": "Demodulation analysis of all incident signals; envelope frequency extraction"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Covert cognitive manipulation via envelope modulation has no CVSS equivalent"
       }
     },
     {
@@ -1459,9 +1576,10 @@
       "legacy_technique_id": "T2106",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:C/CI:L/II:L/S:U/R:I/VC:E/NE:N/E:A",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:C/CG:N/CV:E/RV:I/NP:N",
+        "score": 6.5,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -1520,6 +1638,13 @@
           ],
           "detection": "Tissue temperature monitoring, impedance changes, thermal imaging"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H",
+        "supplemental": "S:P/AU:Y/R:I/V:C",
+        "gap_group": 3,
+        "gap_summary": "Irreversible tissue destruction — CVSS availability cannot express permanence"
       }
     },
     {
@@ -1545,9 +1670,10 @@
       "legacy_technique_id": "T2201",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
+        "score": 4.9,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -1585,6 +1711,13 @@
           ],
           "detection": "Neural Cleanse, activation clustering, spectral signature analysis of model weights"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:L/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 2,
+        "gap_summary": "ML misclassification causing wrong BCI output partially captured by Safety metric"
       }
     },
     {
@@ -1610,9 +1743,10 @@
       "legacy_technique_id": "T2202",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
+        "score": 4.9,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -1650,6 +1784,13 @@
           ],
           "detection": "Model diff analysis, behavioral testing on known inputs, weight distribution analysis"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:L/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Backdoor in transfer learning model partially captured by Safety metric"
       }
     },
     {
@@ -1676,9 +1817,10 @@
       "legacy_technique_id": "T2203",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
-        "score": 7.1,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:N",
+        "score": 4.4,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -1719,6 +1861,13 @@
           ],
           "detection": "Input validation, filter integrity monitoring, adversarial example detection"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:L/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Adversarial filter manipulation partially captured by Safety metric"
       }
     },
     {
@@ -1746,9 +1895,10 @@
       "legacy_technique_id": "T2204",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
-        "score": 7.1,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:N",
+        "score": 4.4,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -1789,6 +1939,13 @@
           ],
           "detection": "UAP detection via input preprocessing, certified defense bounds"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:L/SI:H/SA:L",
+        "supplemental": "S:P/AU:Y/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Cross-subject perturbation partially captured by Safety metric"
       }
     },
     {
@@ -1815,9 +1972,10 @@
       "legacy_technique_id": "T2205",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
-        "score": 7.1,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -1872,6 +2030,13 @@
           ],
           "detection": "Differential privacy enforcement, membership inference testing, audit logging"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Mental state inference from membership attacks partially captured by data privacy"
       }
     },
     {
@@ -1898,9 +2063,10 @@
       "legacy_technique_id": "T2206",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:U",
-        "score": 7.1,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -1954,6 +2120,13 @@
           ],
           "detection": "Gradient norm clipping, secure aggregation verification, reconstruction testing"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Neural data gradient leakage partially captured by confidentiality metrics"
       }
     },
     {
@@ -1980,9 +2153,10 @@
       "legacy_technique_id": "T2207",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:I/VC:I/NE:D/E:U",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:I/RV:P/NP:S",
+        "score": 6.4,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -2046,6 +2220,13 @@
           ],
           "detection": "Feedback-signal correlation verification, display integrity hashing, outcome trend analysis"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Wrong neurofeedback therapy causing neural harm not expressible in CVSS"
       }
     },
     {
@@ -2075,9 +2256,10 @@
       "legacy_technique_id": "T2208",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:H/S:C/R:S/VC:I/NE:G/E:U",
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S",
         "score": 7.4,
-        "severity": "high"
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -2138,6 +2320,13 @@
           ],
           "detection": "Loop gain monitoring, oscillation detection, stimulation parameter trending"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Cascading closed-loop stimulation with runaway neural effects not in CVSS"
       }
     },
     {
@@ -2163,9 +2352,10 @@
       "legacy_technique_id": "T2209",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:H/S:U/R:A/VC:I/NE:G/E:P",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
+        "score": 4.9,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -2206,6 +2396,13 @@
           ],
           "detection": "Data provenance verification, bias metrics, cross-validation with independent data"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:L/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Training data bias causing systematic BCI misclassification partially captured"
       }
     },
     {
@@ -2237,9 +2434,10 @@
       "legacy_technique_id": "T2301",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:N",
+        "score": 6.4,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -2295,6 +2493,13 @@
           ],
           "detection": "RF spectrum monitoring, signal-to-noise trending, artifact detection algorithms"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Neural signal blocking causing cognitive disruption beyond CVSS availability"
       }
     },
     {
@@ -2324,9 +2529,10 @@
       "legacy_technique_id": "T2302",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:C/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
-        "score": 7.2,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -2385,6 +2591,13 @@
           ],
           "detection": "Current overload monitoring, seizure detection, post-stimulation EEG assessment"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:Y/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Seizure induction via neuronal flooding not expressible as CVSS impact"
       }
     },
     {
@@ -2414,9 +2627,10 @@
       "legacy_technique_id": "T2303",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:L/II:H/S:C/R:A/VC:I/NE:N/E:U",
-        "score": 6.5,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:L/CG:L/CV:I/RV:F/NP:N",
+        "score": 2.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -2472,6 +2686,13 @@
           ],
           "detection": "Probe pattern recognition, scan rate monitoring, unauthorized stimulation detection"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:P/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Active neural probing reveals cognitive state — partially captured by confidentiality"
       }
     },
     {
@@ -2498,9 +2719,10 @@
       "legacy_technique_id": "T2304",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -2558,6 +2780,13 @@
           ],
           "detection": "Channel dropout monitoring, signal completeness verification, forwarding consistency checks"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Selective neural signal dropping/modification affects cognition beyond data integrity"
       }
     },
     {
@@ -2589,9 +2818,10 @@
       "legacy_technique_id": "T2305",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:P",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -2649,6 +2879,13 @@
           ],
           "detection": "Charge density monitoring, tissue impedance trending, stimulation artifact analysis"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:Y/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Stimulation flood causing tissue harm and cognitive disruption beyond CVSS DoS"
       }
     },
     {
@@ -2680,9 +2917,10 @@
       "legacy_technique_id": "T2306",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.2,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:C/CV:E/RV:P/NP:T",
+        "score": 7.8,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -2746,6 +2984,13 @@
           ],
           "detection": "Intent verification, movement trajectory analysis, force/torque monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Involuntary motor control with cognitive integrity violation has no CVSS mapping"
       }
     },
     {
@@ -2772,9 +3017,10 @@
       "legacy_technique_id": "T2307",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:U/R:S/VC:E/NE:N/E:U",
-        "score": 6.5,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:L/CG:N/CV:N/RV:F/NP:N",
+        "score": 1.0,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -2812,6 +3058,13 @@
           ],
           "detection": "Battery drain rate monitoring, power consumption anomaly detection"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:L",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 1,
+        "gap_summary": "Pure resource depletion — standard CVSS availability sufficient"
       }
     },
     {
@@ -2839,9 +3092,10 @@
       "legacy_technique_id": "T2401",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -2900,6 +3154,13 @@
           ],
           "detection": "Liveness detection, presentation attack detection, template freshness verification"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
+        "supplemental": "S:N/AU:N/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Neural biometric bypass partially captured by CVSS authentication metrics"
       }
     },
     {
@@ -2928,9 +3189,10 @@
       "legacy_technique_id": "T2402",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:I/VC:E/NE:D/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:I/NP:S",
+        "score": 8.0,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -2985,6 +3247,13 @@
           ],
           "detection": "Longitudinal personality metric tracking, behavioral change detection, patient self-report"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:I/V:C",
+        "gap_group": 3,
+        "gap_summary": "Irreversible personality alteration — CVSS cannot express identity/selfhood damage"
       }
     },
     {
@@ -3011,9 +3280,10 @@
       "legacy_technique_id": "T2403",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:E/RV:P/NP:T",
+        "score": 5.9,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "secondary_tactics": [
@@ -3070,6 +3340,13 @@
           ],
           "detection": "Working memory performance monitoring, theta power spectral analysis, sustained activity tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Working memory corruption affects cognitive function beyond data integrity"
       }
     },
     {
@@ -3096,9 +3373,10 @@
       "legacy_technique_id": "T2404",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
-        "score": 7.5,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
+        "score": 3.7,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3158,6 +3436,13 @@
           ],
           "detection": "Stimulus audit logging, P300 amplitude monitoring, unauthorized stimulus detection"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Brain response extraction for interrogation — mental privacy not in CVSS"
       }
     },
     {
@@ -3184,9 +3469,10 @@
       "legacy_technique_id": "T2405",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
-        "score": 7.5,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:C/CV:E/RV:F/NP:N",
+        "score": 4.5,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3248,6 +3534,13 @@
           ],
           "detection": "Decode activation monitoring, unauthorized access detection, data provenance tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Inner speech decoding violates cognitive sovereignty — no CVSS equivalent"
       }
     },
     {
@@ -3276,9 +3569,10 @@
       "legacy_technique_id": "T2406",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:P/NP:S",
+        "score": 7.2,
+        "severity": "high",
+        "pins": false
       },
       "cross_references": {
         "secondary_tactics": [
@@ -3334,6 +3628,13 @@
           ],
           "detection": "Agency scale monitoring, intentional binding measurement, self-report tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Free will violation and agency manipulation have no CVSS mapping"
       }
     },
     {
@@ -3360,9 +3661,10 @@
       "legacy_technique_id": "T2407",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:G/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:I/NP:N",
+        "score": 5.2,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -3421,6 +3723,13 @@
           ],
           "detection": "Template access logging, cross-session consistency checks, theft detection via usage patterns"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:I/V:C",
+        "gap_group": 3,
+        "gap_summary": "Unreplaceable neural biometric theft — CVSS cannot express non-resettable credential loss"
       }
     },
     {
@@ -3447,9 +3756,10 @@
       "legacy_technique_id": "T2408",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:C/II:H/S:U/R:S/VC:E/NE:D/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:I/NP:S",
+        "score": 8.0,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -3506,6 +3816,13 @@
           ],
           "detection": "Self-model integrity assessment, depersonalization scales, real-time psychological monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:I/V:C",
+        "gap_group": 3,
+        "gap_summary": "Permanent self-perception alteration — CVSS has no identity/selfhood dimension"
       }
     },
     {
@@ -3532,9 +3849,10 @@
       "legacy_technique_id": "T2409",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:A/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:H/CV:I/RV:P/NP:T",
+        "score": 3.9,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3591,6 +3909,13 @@
           ],
           "detection": "Stimulus audit logging, subliminal content detection, behavioral anomaly monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Neural social engineering exploiting BCI trust signals beyond CVSS scope"
       }
     },
     {
@@ -3618,9 +3943,10 @@
       "legacy_technique_id": "T2410",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:S/VC:E/NE:G/E:P",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3681,6 +4007,13 @@
           ],
           "detection": "Inference audit logging, purpose-limitation enforcement, access control on derived data"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Cognitive biometric inference partially captured by CVSS confidentiality"
       }
     },
     {
@@ -3711,9 +4044,10 @@
       "legacy_technique_id": "T2501",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
-        "score": 5.3,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3757,6 +4091,13 @@
           ],
           "detection": "RF emission monitoring, protocol compliance testing, traffic analysis detection"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Passive RF collection of neural data partially captured by confidentiality"
       }
     },
     {
@@ -3785,9 +4126,10 @@
       "legacy_technique_id": "T2502",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:H/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
-        "score": 4.4,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:L/CG:L/CV:I/RV:P/NP:N",
+        "score": 3.6,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3827,6 +4169,13 @@
           ],
           "detection": "Firmware attestation, hardware integrity verification, supply chain provenance tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:H/AT:P/PR:N/UI:N/VC:H/VI:H/VA:L/SC:H/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Supply chain firmware backdoor with neural impact partially captured by Safety"
       }
     },
     {
@@ -3852,9 +4201,10 @@
       "legacy_technique_id": "T2503",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
-        "score": 4.5,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3894,6 +4244,13 @@
           ],
           "detection": "Cloud security monitoring, API anomaly detection, data access auditing"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:H/VI:L/VA:L/SC:H/SI:L/SA:L",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Cloud attack on neural data partially captured by standard CVSS"
       }
     },
     {
@@ -3919,9 +4276,10 @@
       "legacy_technique_id": "T2504",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
-        "score": 6.5,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -3960,6 +4318,13 @@
           ],
           "detection": "Encrypted traffic volume monitoring, data exfiltration detection, PQC migration tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Future quantum decryption of neural data partially captured by confidentiality"
       }
     },
     {
@@ -3986,9 +4351,10 @@
       "legacy_technique_id": "T2505",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:N/AC:H/PR:H/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:I/RV:P/NP:T",
+        "score": 5.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -4030,6 +4396,13 @@
           ],
           "detection": "Firmware signature verification, update integrity checks, behavioral monitoring post-update"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "OTA firmware weaponization causing tissue/cognitive harm beyond CVSS"
       }
     },
     {
@@ -4058,9 +4431,10 @@
       "legacy_technique_id": "T2506",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
-        "score": 7.5,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -4099,6 +4473,13 @@
           ],
           "detection": "Fleet-wide anomaly detection, platform integrity monitoring, segmentation verification"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:H/SC:L/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Mass BCI compromise with neural impact at scale not expressible in CVSS"
       }
     },
     {
@@ -4126,9 +4507,10 @@
       "legacy_technique_id": "T2507",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
-        "score": 4.3,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+        "score": 6.9,
+        "severity": "medium",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -4170,6 +4552,13 @@
           ],
           "detection": "Impedance change detection, physical tamper indicators, electrode characterization drift"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Physical electrode tamper causing tissue harm beyond CVSS physical access"
       }
     },
     {
@@ -4198,9 +4587,10 @@
       "legacy_technique_id": "T2508",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:A",
-        "score": 4.7,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:N/RV:F/NP:N",
+        "score": 0.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4240,6 +4630,13 @@
           ],
           "detection": "Authentication attempt monitoring, unauthorized connection detection, pairing audit log"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:N/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
+        "supplemental": "S:N/AU:N/R:A/V:D",
+        "gap_group": 1,
+        "gap_summary": "Standard wireless authentication bypass — CVSS sufficient"
       }
     },
     {
@@ -4266,9 +4663,10 @@
       "legacy_technique_id": "T2509",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:L/II:L/S:U/R:A/VC:I/NE:N/E:P",
-        "score": 4.5,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:H/CG:L/CV:N/RV:P/NP:N",
+        "score": 3.6,
+        "severity": "low",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -4313,6 +4711,13 @@
           ],
           "detection": "Fault detection circuits, redundant computation verification, power rail monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:H/AT:P/PR:N/UI:N/VC:L/VI:H/VA:H/SC:N/SI:L/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 3,
+        "gap_summary": "Hardware fault injection causing neural pathway disruption beyond CVSS"
       }
     },
     {
@@ -4342,9 +4747,10 @@
       "legacy_technique_id": "T2601",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:N/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:A",
-        "score": 6.8,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:E/RV:F/NP:N",
+        "score": 2.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4397,6 +4803,13 @@
           ],
           "detection": "Data loss prevention, access anomaly detection, exfiltration monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:Y/R:A/V:C",
+        "gap_group": 3,
+        "gap_summary": "Neural data breach violating mental privacy beyond standard confidentiality"
       }
     },
     {
@@ -4426,9 +4839,10 @@
       "legacy_technique_id": "T2602",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:L/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:P",
-        "score": 7.0,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
+        "score": 3.7,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4486,6 +4900,13 @@
           ],
           "detection": "Stimulus audit logging, unauthorized ERP extraction detection, data access monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "ERP harvesting reveals cognitive state — mental privacy not in CVSS"
       }
     },
     {
@@ -4514,9 +4935,10 @@
       "legacy_technique_id": "T2603",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:A",
-        "score": 7.1,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
+        "score": 3.7,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4575,6 +4997,13 @@
           ],
           "detection": "Classification audit logging, unauthorized state capture detection, data flow monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Cognitive state capture of emotions/attention beyond CVSS confidentiality"
       }
     },
     {
@@ -4603,9 +5032,10 @@
       "legacy_technique_id": "T2604",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:N/CI:H/II:H/S:U/R:I/VC:E/NE:N/E:U",
-        "score": 6.9,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:C/CV:E/RV:F/NP:N",
+        "score": 4.5,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4661,6 +5091,13 @@
           ],
           "detection": "Memory protocol audit logging, unauthorized access detection, hippocampal activity monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Deep memory retrieval violates cognitive sovereignty — no CVSS equivalent"
       }
     },
     {
@@ -4690,9 +5127,10 @@
       "legacy_technique_id": "T2605",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:L/PR:L/UI:N/BI:H/CI:L/II:L/S:C/R:S/VC:E/NE:N/E:U",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:C/CV:E/RV:P/NP:S",
+        "score": 8.3,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -4731,6 +5169,13 @@
           ],
           "detection": "Fleet-wide behavioral anomaly detection, cognitive assessment population baselines, whistleblower channels"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:L/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Military BCI cognitive warfare with tissue and cognitive harm beyond CVSS"
       }
     },
     {
@@ -4758,9 +5203,10 @@
       "legacy_technique_id": "T2606",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:L/PR:N/UI:N/BI:N/CI:L/II:H/S:U/R:I/VC:E/NE:N/E:U",
-        "score": 6.5,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
+        "score": 3.7,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4817,6 +5263,13 @@
           ],
           "detection": "Monitoring consent verification, duration limit enforcement, data retention audit"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Ongoing neural monitoring violates cognitive privacy beyond CVSS"
       }
     },
     {
@@ -4845,9 +5298,10 @@
       "legacy_technique_id": "T2701",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:N/AC:H/PR:L/UI:N/BI:N/CI:L/II:H/S:U/R:A/VC:I/NE:N/E:A",
-        "score": 5.1,
-        "severity": "medium"
+        "vector": "NISS:1.0/BI:N/CG:N/CV:N/RV:F/NP:N",
+        "score": 0.0,
+        "severity": "none",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4901,6 +5355,13 @@
           ],
           "detection": "Unauthorized scan detection, network probe monitoring, topology change alerting"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 1,
+        "gap_summary": "BCI topology recon — standard CVSS reconnaissance sufficient"
       }
     },
     {
@@ -4929,9 +5390,10 @@
       "legacy_technique_id": "T2801",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:P",
-        "score": 7.5,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
+        "score": 4.9,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -4987,6 +5449,13 @@
           ],
           "detection": "Calibration data integrity hashing, cross-session consistency checks, performance drift monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:L/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 2,
+        "gap_summary": "Calibration poisoning causing model drift partially captured by Safety"
       }
     },
     {
@@ -5014,9 +5483,10 @@
       "legacy_technique_id": "T2802",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:I/VC:E/NE:D/E:U",
-        "score": 7.4,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
+        "score": 5.4,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5072,6 +5542,13 @@
           ],
           "detection": "Cross-session performance pattern analysis, pathway stability monitoring, unlearning protocols"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Learned neural pathway persistence causing lasting cognitive change"
       }
     },
     {
@@ -5098,9 +5575,10 @@
       "legacy_technique_id": "T2803",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:L/AC:H/PR:L/UI:N/BI:L/CI:H/II:L/S:U/R:S/VC:E/NE:D/E:U",
-        "score": 7.3,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:P/NP:S",
+        "score": 7.2,
+        "severity": "high",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5157,6 +5635,13 @@
           ],
           "detection": "Sleep stage monitoring, stimulation audit logging, memory assessment tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Cross-session memory implant affecting identity beyond CVSS scope"
       }
     },
     {
@@ -5183,9 +5668,10 @@
       "legacy_technique_id": "T2804",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
-        "score": 2.6,
-        "severity": "low"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:N/RV:F/NP:N",
+        "score": 0.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5242,6 +5728,13 @@
           ],
           "detection": "Multi-dimensional validation (coherence + spatial + temporal + spectral), anomaly detection beyond single metric"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:L/SA:N",
+        "supplemental": "S:N/AU:N/R:A/V:D",
+        "gap_group": 1,
+        "gap_summary": "Detection evasion technique — standard CVSS sufficient"
       }
     },
     {
@@ -5268,9 +5761,10 @@
       "legacy_technique_id": "T2805",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
-        "score": 2.6,
-        "severity": "low"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
+        "score": 5.4,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5327,6 +5821,13 @@
           ],
           "detection": "Cumulative drift detection, rate-of-change trending, baseline comparison over time"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Slow parameter drift causing cumulative cognitive harm beyond CVSS"
       }
     },
     {
@@ -5353,9 +5854,10 @@
       "legacy_technique_id": "T2806",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:I/NE:N/E:U",
-        "score": 2.6,
-        "severity": "low"
+        "vector": "NISS:1.0/BI:L/CG:L/CV:N/RV:F/NP:N",
+        "score": 1.8,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5413,6 +5915,13 @@
           ],
           "detection": "SNR trending, noise spectrum analysis, signal integrity verification against known-clean baseline"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:N/VI:L/VA:L/SC:N/SI:L/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Noise injection for detection masking partially captured by integrity"
       }
     },
     {
@@ -5440,9 +5949,10 @@
       "legacy_technique_id": "T2807",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:H/PR:L/UI:N/BI:N/CI:N/II:L/S:U/R:A/VC:E/NE:N/E:U",
-        "score": 2.8,
-        "severity": "low"
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:P/NP:T",
+        "score": 3.1,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5496,6 +6006,13 @@
           ],
           "detection": "Permission request rate monitoring, approval pattern analysis, cognitive load estimation"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
+        "supplemental": "S:P/AU:Y/R:A/V:D",
+        "gap_group": 3,
+        "gap_summary": "Consent fatigue exploiting neural trust patterns beyond CVSS social engineering"
       }
     },
     {
@@ -5525,9 +6042,10 @@
       "legacy_technique_id": null,
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:H/CI:C/CI:C/S:C/R:D/VC:C/NE:H/E:A",
-        "score": 9.1,
-        "severity": "critical"
+        "vector": "NISS:1.0/BI:H/CG:C/CV:E/RV:P/NP:S",
+        "score": 8.3,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [],
@@ -5584,6 +6102,13 @@
           ],
           "detection": "Content safety scoring, user mental health monitoring, recommendation diversity enforcement"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Psychosis induction causing severe cognitive and biological harm beyond CVSS"
       }
     },
     {
@@ -5616,9 +6141,10 @@
       "legacy_technique_id": "T2061",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
-        "score": 6.8,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
+        "score": 5.4,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5680,6 +6206,13 @@
           ],
           "detection": "Phase space trajectory curvature monitoring, Lyapunov exponent trending, cumulative displacement tracking"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Imperceptible cognitive drift with cumulative harm beyond CVSS"
       }
     },
     {
@@ -5711,9 +6244,10 @@
       "legacy_technique_id": "T2062",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:W/AC:L/PR:N/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:A",
-        "score": 9.4,
-        "severity": "critical"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
+        "score": 4.9,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5778,6 +6312,13 @@
           ],
           "detection": "Biological TLS (spatial dipole, H-H compliance, 1/f scaling, microstate, challenge-response), phase space attractor validation"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:D",
+        "gap_group": 3,
+        "gap_summary": "Phase dynamics replay affecting neural synchronization beyond CVSS"
       }
     },
     {
@@ -5808,9 +6349,10 @@
       "legacy_technique_id": "T2063",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:M/PR:H/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:P",
-        "score": 9.0,
-        "severity": "critical"
+        "vector": "NISS:1.0/BI:C/CG:H/CV:E/RV:P/NP:S",
+        "score": 8.4,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -5871,6 +6413,13 @@
           ],
           "detection": "Critical slowing down (autocorrelation + variance trending), parameter boundary monitoring, state transition prediction"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Seizure induction via neural bifurcation forcing — no CVSS equivalent for tissue harm"
       }
     },
     {
@@ -5902,9 +6451,10 @@
       "legacy_technique_id": "T2064",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
-        "score": 6.5,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
+        "score": 3.7,
+        "severity": "low",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -5965,6 +6515,13 @@
           ],
           "detection": "Transition rate monitoring, probe pattern detection, unauthorized phase space analysis detection"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Meta-biometric extraction from separatrix dynamics beyond CVSS confidentiality"
       }
     },
     {
@@ -5994,9 +6551,10 @@
       "legacy_technique_id": "T2065",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:H/S:C/R:D/VC:E/NE:G/E:U",
-        "score": 7.5,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S",
+        "score": 7.4,
+        "severity": "high",
+        "pins": true
       },
       "cross_references": {
         "related_ids": [
@@ -6058,6 +6616,13 @@
           ],
           "detection": "Interspike interval distribution analysis, firing mode classification, tonic current monitoring"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Tonic/phasic neural mode switching causing tissue and cognitive harm beyond CVSS"
       }
     },
     {
@@ -6085,9 +6650,10 @@
       "legacy_technique_id": "T2066",
       "niss": {
         "version": "1.0",
-        "vector": "NISS:1.0/AV:P/AC:M/PR:L/UI:R/BI:H/CI:H/II:H/S:C/R:S/VC:E/NE:G/E:P",
-        "score": 7.2,
-        "severity": "high"
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
+        "score": 5.4,
+        "severity": "medium",
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -6149,6 +6715,13 @@
           ],
           "detection": "Baseline-free biological TLS (eliminates baseline dependency), historical comparison, multi-session validation"
         }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "Baseline adaptation poisoning causing persistent cognitive drift beyond CVSS"
       }
     }
   ],
@@ -6212,9 +6785,17 @@
   "niss_spec": {
     "version": "1.0",
     "name": "Neural Impact Scoring System",
-    "description": "BCI-specific vulnerability scoring system. Prioritizes human impact (biological + cognitive) over system impact.",
+    "type": "CVSS v4.0 Extension (FIRST.org Section 3.11)",
+    "description": "First registered CVSS v4.0 extension for brain-computer interface security. Five extension metrics capture biological, cognitive, and consent dimensions that CVSS base metrics cannot express. NISS vectors ride alongside CVSS v4.0 base vectors, not replace them.",
     "score_range": "0.0 - 10.0",
-    "formula": "BaseScore = (0.3 * Exploitability) + (0.7 * Impact)",
+    "formula": "PINS_score = (w_BI * BI + w_CG * CG + w_CV * CV + w_RV * RV + w_NP * NP) / 10.0",
+    "weights": {
+      "BI": 3.0,
+      "CG": 2.5,
+      "CV": 2.0,
+      "RV": 1.5,
+      "NP": 1.0
+    },
     "severity_levels": {
       "none": "0.0",
       "low": "0.1 - 3.9",
@@ -6222,34 +6803,56 @@
       "high": "7.0 - 8.9",
       "critical": "9.0 - 10.0"
     },
-    "metrics": {
-      "exploitability": [
-        "AV (Attack Vector)",
-        "AC (Attack Complexity)",
-        "PR (Privileges Required)",
-        "UI (User Interaction)"
-      ],
-      "impact": [
-        "BI (Biological Impact)",
-        "CI (Cognitive Integrity)",
-        "II (Information Impact)",
-        "S (Scope)"
-      ],
-      "supplemental": [
-        "R (Reversibility)",
-        "VC (Violation of Consent)",
-        "NE (Neuroplasticity)"
-      ],
-      "threat": [
-        "E (Exploit Maturity)"
-      ],
-      "environmental": [
-        "SC (Safety Criticality)",
-        "CR (Cognitive Resilience)",
-        "BR (Biological Resilience)"
-      ]
+    "pins_flag": {
+      "name": "Potential Impact to Neural Safety",
+      "condition": "BI >= High OR RV = Irreversible",
+      "description": "Boolean flag indicating the vulnerability may cause irreversible neural harm. Triggers mandatory safety review."
     },
-    "vector_format": "NISS:1.0/AV:<V>/AC:<V>/PR:<V>/UI:<V>/BI:<V>/CI:<V>/II:<V>/S:<V>/R:<V>/VC:<V>/NE:<V>/E:<V>"
+    "extension_metrics": [
+      {
+        "id": "BI",
+        "name": "Biological Impact",
+        "description": "Direct harm to neural tissue, organs, or physiological function",
+        "values": { "N": "None", "L": "Low", "M": "Medium", "H": "High", "C": "Critical" }
+      },
+      {
+        "id": "CG",
+        "name": "Cognitive Integrity",
+        "description": "Impact on thought processes, perception, memory, identity, or decision-making",
+        "values": { "N": "None", "L": "Low", "M": "Medium", "H": "High", "C": "Critical" }
+      },
+      {
+        "id": "CV",
+        "name": "Consent Violation",
+        "description": "Degree of violation of informed consent or autonomy",
+        "values": { "N": "None", "P": "Partial", "E": "Explicit", "I": "Implicit (covert)" }
+      },
+      {
+        "id": "RV",
+        "name": "Reversibility",
+        "description": "Whether effects can be reversed after exploitation",
+        "values": { "F": "Full", "P": "Partial", "T": "Temporary", "I": "Irreversible" }
+      },
+      {
+        "id": "NP",
+        "name": "Neuroplasticity",
+        "description": "Exploitation of brain adaptation mechanisms for persistent effect",
+        "values": { "N": "None", "L": "Low", "M": "Medium", "H": "High", "T": "Therapeutic" }
+      }
+    ],
+    "gap_groups": {
+      "1": "CVSS v4.0 sufficient — base metrics fully capture the vulnerability",
+      "2": "CVSS + Safety partial — base metrics capture exploitability but miss biological/cognitive impact",
+      "3": "NISS required — vulnerability cannot be meaningfully scored without extension metrics"
+    },
+    "vector_format": "NISS:1.0/BI:<V>/CG:<V>/CV:<V>/RV:<V>/NP:<V>",
+    "companion_cvss_format": "CVSS:4.0/AV:<V>/AC:<V>/AT:<V>/PR:<V>/UI:<V>/VC:<V>/VI:<V>/VA:<V>/SC:<V>/SI:<V>/SA:<V>",
+    "statistics": {
+      "total_techniques": 71,
+      "by_gap_group": { "1": 4, "2": 17, "3": 50 },
+      "pins_flagged": 31,
+      "by_severity": { "critical": 0, "high": 14, "medium": 32, "low": 24, "none": 1 }
+    }
   },
   "tara_spec": {
     "version": "1.0",

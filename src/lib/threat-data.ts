@@ -80,6 +80,15 @@ export interface NissScore {
   vector: string;
   score: number;
   severity: NissSeverity;
+  pins: boolean;
+}
+
+export interface CvssScore {
+  version: string;
+  base_vector: string;
+  supplemental: string;
+  gap_group: 1 | 2 | 3;
+  gap_summary: string;
 }
 
 export interface ThreatVector {
@@ -109,8 +118,10 @@ export interface ThreatVector {
   description: string;
   /** Original band string from hourglass data */
   bandsStr: string;
-  /** NISS v1.0 scoring data */
+  /** NISS v1.0 scoring data (extension metrics: BI, CG, CV, RV, NP) */
   niss: NissScore;
+  /** CVSS v4.0 scoring data (base + supplemental metrics) */
+  cvss: CvssScore | null;
   /** Cross-references (related IDs, secondary tactics) */
   crossRefs: { related_ids?: string[]; secondary_tactics?: string[] } | null;
   /** Academic sources */
@@ -134,7 +145,8 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   quantumDetection: t.quantum,
   description: t.notes,
   bandsStr: t.bands,
-  niss: t.niss ?? { version: '1.0', vector: '', score: 0, severity: 'none' },
+  niss: t.niss ?? { version: '1.0', vector: '', score: 0, severity: 'none', pins: false },
+  cvss: t.cvss ?? null,
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
   tara: t.tara ?? null,
