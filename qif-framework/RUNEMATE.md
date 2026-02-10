@@ -827,5 +827,13 @@ OpenBCI recruiting perfect-vision participants = entry point for synesthesia coh
 
 ---
 
+### Entry R-007: Neural Environment Mapping — RF Techniques as Medical Calibration (PRIMARY USE CASE)
+
+**Date:** 2026-02-10  |  **Status:** Conceptual. Designated primary QIF use case.
+
+Adversarial RF mapping (Bluetooth/WiFi through walls) and medical neural mapping (calibration pulses through tissue) are the same technique: send signal, measure response, build spatial model. Same physics, same math (inverse problems, tomography), different medium and intent. TARA dual-use at its purest — the attack (unauthorized neural reconnaissance) and therapy (visual prosthesis calibration) share identical mechanisms. The boundary is consent + NSP encryption. Neural mapping data is the most sensitive biometric possible (brain topology, irrevocable). NSP enforces: PQ encryption at generation, authenticated sessions, session resumption without retransmitting full model, forward secrecy. Calibration map becomes per-patient Forge compiler config — TARA bounds checked against individual thresholds. Cross-log: QIF #54, Runemate R-007, NSP N-001.
+
+---
+
 *Part of the QIF (Quantum Indeterministic Framework) ecosystem.*
 *"HTML was designed for screens. Staves was designed for brains."*
