@@ -16,7 +16,7 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
 ---
 
 <!DOCTYPE html>
-<html lang="en-US" data-theme="dark">
+<html lang="en-US" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -93,11 +93,7 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
 
   <!-- Theme initialization (prevent flash) -->
   <script is:inline>
-    (function() {
-      const saved = localStorage.getItem('theme');
-      const theme = saved || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
+    (function(){ document.documentElement.setAttribute('data-theme', 'light'); })();
   </script>
 </head>
 <body class="min-h-screen">

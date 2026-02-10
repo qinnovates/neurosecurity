@@ -25,12 +25,29 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
         {THREAT_VECTORS.length} BCI techniques mapped across {THREAT_CATEGORIES.length} categories and 11 hourglass bands &mdash; every attack vector is also a therapeutic application
       </p>
 
+      <!-- Context introduction for newcomers -->
+      <div class="glass-subtle rounded-xl p-5 mb-6 text-sm text-[var(--color-text-muted)]">
+        <p class="mb-2">
+          <strong class="text-[var(--color-text-primary)]">What is TARA?</strong>
+          Every BCI technique that can harm a patient can also heal one. TARA maps {THREAT_VECTORS.length} known brain-computer interface techniques across four dimensions:
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3">
+          <div><strong class="text-[var(--color-accent-primary)]">Security</strong> &mdash; Attack severity and evidence</div>
+          <div><strong class="text-[#0891b2]">Clinical</strong> &mdash; Therapeutic applications and FDA status</div>
+          <div><strong class="text-[#d97706]">Governance</strong> &mdash; Consent tiers and regulations</div>
+          <div><strong class="text-[var(--color-accent-tertiary)]">Engineering</strong> &mdash; Physical coupling and hardware</div>
+        </div>
+        <p class="mt-3 text-xs text-[var(--color-text-faint)]">
+          Switch tabs to view the same grid through each lens. Click any colored cell to see full details.
+        </p>
+      </div>
+
       <!-- TARA Projection Tabs -->
-      <nav class="tara-tabs" id="tara-tabs" aria-label="TARA projection">
-        <button class="tara-tab active" data-projection="security">Security</button>
-        <button class="tara-tab" data-projection="clinical">Clinical</button>
-        <button class="tara-tab" data-projection="governance">Governance</button>
-        <button class="tara-tab" data-projection="engineering">Engineering</button>
+      <nav class="tara-tabs" id="tara-tabs" role="radiogroup" aria-label="TARA projection">
+        <button class="tara-tab active" data-projection="security" role="radio" aria-checked="true">Security</button>
+        <button class="tara-tab" data-projection="clinical" role="radio" aria-checked="false">Clinical</button>
+        <button class="tara-tab" data-projection="governance" role="radio" aria-checked="false">Governance</button>
+        <button class="tara-tab" data-projection="engineering" role="radio" aria-checked="false">Engineering</button>
       </nav>
 
       <!-- Stats bar (rebuilt per projection) -->
@@ -88,12 +105,19 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
         </div>
       </div>
 
-      <!-- How to read this (updated per projection) -->
-      <details class="glass-subtle rounded-lg mb-6" id="how-to-read">
-        <summary class="px-4 py-3 text-sm font-medium cursor-pointer text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] select-none">
-          How to read this grid
-        </summary>
-        <div class="px-4 pb-4 text-sm text-[var(--color-text-muted)] space-y-3 border-t border-[var(--color-border)] pt-3" id="how-to-read-body">
+      <!-- Always-visible legend bar (rebuilt per projection by JS) -->
+      <div id="legend-bar" class="flex flex-wrap items-center gap-4 text-xs text-[var(--color-text-faint)] mb-4 px-1">
+        <!-- Default: Security legend (server-rendered for initial load) -->
+        <div class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded" style="background: rgba(239, 68, 68, 0.35);"></span> Critical</div>
+        <div class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded" style="background: rgba(245, 158, 11, 0.30);"></span> High</div>
+        <div class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded" style="background: rgba(234, 179, 8, 0.25);"></span> Medium</div>
+        <div class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded" style="background: rgba(148, 163, 184, 0.25);"></span> Low</div>
+        <button id="legend-help-btn" class="ml-2 w-5 h-5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-hover)] text-xs cursor-pointer flex items-center justify-center" aria-label="How to read this grid" title="How to read this grid">?</button>
+      </div>
+
+      <!-- Expanded help (hidden by default, toggled by ? button) -->
+      <div id="how-to-read" class="glass-subtle rounded-lg mb-6 hidden">
+        <div class="px-4 py-3 text-sm text-[var(--color-text-muted)] space-y-3" id="how-to-read-body">
           <div>
             <strong class="text-[var(--color-text-primary)]">Grid axes</strong> &mdash; Rows are hourglass bands (Neural N7&ndash;N1, Interface I0, Synthetic S1&ndash;S3). Columns are attack categories (Signal Injection, Eavesdropping, Data Manipulation, etc.).
           </div>
@@ -115,7 +139,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
             <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0&ndash;10.
           </div>
         </div>
-      </details>
+      </div>
 
       <!-- Filter toolbar -->
       <div class="flex flex-wrap gap-3 items-center" id="filter-toolbar">
@@ -250,22 +274,24 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
 </PageLayout>
 
 <style>
-  /* ═══ TARA Tabs ═══ */
+  /* ═══ TARA Tabs (Segmented Control) ═══ */
   .tara-tabs {
-    display: flex;
-    gap: 0.25rem;
-    margin-bottom: 1rem;
+    display: inline-flex;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    padding: 3px;
+    margin-bottom: 1.25rem;
+    gap: 2px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 2px;
   }
   .tara-tabs::-webkit-scrollbar { display: none; }
 
   .tara-tab {
-    padding: 0.4rem 1rem;
-    border-radius: 99px;
-    border: 1px solid var(--color-border);
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    border: none;
     background: transparent;
     color: var(--color-text-muted);
     font-size: 0.8rem;
@@ -273,16 +299,16 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
   }
   .tara-tab:hover {
-    border-color: var(--color-text-muted);
     color: var(--color-text-primary);
   }
   .tara-tab.active {
-    border-color: var(--color-accent-primary);
-    color: var(--color-accent-primary);
-    background: rgba(139, 92, 246, 0.1);
+    background: white;
+    color: var(--color-text-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
   }
 
   /* ═══ Threat Map Grid ═══ */
@@ -351,7 +377,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     padding: 0.5rem 0.75rem;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
     min-height: 44px;
   }
 
@@ -366,7 +392,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   .map-cell {
     background: var(--color-bg-surface);
     padding: 0.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -381,7 +407,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   .map-cell:not(.map-cell--empty):hover {
     transform: scale(1.05);
     z-index: 1;
-    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    box-shadow: 0 0 12px rgba(0,0,0,0.12);
   }
 
   .map-cell--interface { background: rgba(245, 158, 11, 0.05); }
@@ -447,26 +473,26 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     border-radius: 50%;
     transition: background 0.2s, box-shadow 0.2s;
   }
-  .cell-sev-dot[data-sev="critical"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
-  .cell-sev-dot[data-sev="high"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
-  .cell-sev-dot[data-sev="medium"] { background: #eab308; box-shadow: 0 0 4px #eab308; }
-  .cell-sev-dot[data-sev="low"] { background: #94a3b8; box-shadow: 0 0 4px #94a3b8; }
+  .cell-sev-dot[data-sev="critical"] { background: #ef4444; }
+  .cell-sev-dot[data-sev="high"] { background: #f59e0b; }
+  .cell-sev-dot[data-sev="medium"] { background: #eab308; }
+  .cell-sev-dot[data-sev="low"] { background: #94a3b8; }
   /* Clinical dot colors */
-  .cell-sev-dot[data-sev="confirmed"] { background: #10b981; box-shadow: 0 0 4px #10b981; }
-  .cell-sev-dot[data-sev="probable"] { background: #06b6d4; box-shadow: 0 0 4px #06b6d4; }
-  .cell-sev-dot[data-sev="possible"] { background: #8b5cf6; box-shadow: 0 0 4px #8b5cf6; }
-  .cell-sev-dot[data-sev="silicon_only"] { background: #94a3b8; box-shadow: 0 0 4px #94a3b8; }
+  .cell-sev-dot[data-sev="confirmed"] { background: #10b981; }
+  .cell-sev-dot[data-sev="probable"] { background: #06b6d4; }
+  .cell-sev-dot[data-sev="possible"] { background: #8b5cf6; }
+  .cell-sev-dot[data-sev="silicon_only"] { background: #94a3b8; }
   /* Governance dot colors */
-  .cell-sev-dot[data-sev="standard"] { background: #22c55e; box-shadow: 0 0 4px #22c55e; }
-  .cell-sev-dot[data-sev="enhanced"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
-  .cell-sev-dot[data-sev="IRB"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
-  .cell-sev-dot[data-sev="prohibited"] { background: #7f1d1d; box-shadow: 0 0 4px #7f1d1d; }
+  .cell-sev-dot[data-sev="standard"] { background: #22c55e; }
+  .cell-sev-dot[data-sev="enhanced"] { background: #f59e0b; }
+  .cell-sev-dot[data-sev="IRB"] { background: #ef4444; }
+  .cell-sev-dot[data-sev="prohibited"] { background: #7f1d1d; }
   /* Engineering dot colors */
-  .cell-sev-dot[data-sev="electromagnetic"] { background: #3b82f6; box-shadow: 0 0 4px #3b82f6; }
-  .cell-sev-dot[data-sev="mechanical"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
-  .cell-sev-dot[data-sev="thermal"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
-  .cell-sev-dot[data-sev="optical"] { background: #a855f7; box-shadow: 0 0 4px #a855f7; }
-  .cell-sev-dot[data-sev="none"] { background: #94a3b8; box-shadow: 0 0 4px #94a3b8; }
+  .cell-sev-dot[data-sev="electromagnetic"] { background: #3b82f6; }
+  .cell-sev-dot[data-sev="mechanical"] { background: #f59e0b; }
+  .cell-sev-dot[data-sev="thermal"] { background: #ef4444; }
+  .cell-sev-dot[data-sev="optical"] { background: #a855f7; }
+  .cell-sev-dot[data-sev="none"] { background: #94a3b8; }
 
   /* Severity dots in stats bar */
   .severity-dot {
@@ -663,7 +689,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     pointer-events: none;
     opacity: 0;
     z-index: 100;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     transition: opacity 0.15s;
   }
 
@@ -732,7 +758,10 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   var statsBar = document.getElementById('stats-bar');
   var dimFilters = document.getElementById('dimension-filters');
   var zoneFiltersEl = document.getElementById('zone-filters');
+  var howToRead = document.getElementById('how-to-read');
   var howToReadBody = document.getElementById('how-to-read-body');
+  var legendBar = document.getElementById('legend-bar');
+  var legendHelpBtn = document.getElementById('legend-help-btn');
   var tooltip = document.getElementById('map-tooltip');
   var drawer = document.getElementById('detail-drawer');
   var drawerContent = document.getElementById('detail-content');
@@ -1104,6 +1133,55 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   }
 
   // ═══════════════════════════════════════════════════════════════
+  // Legend bar rebuild
+  // ═══════════════════════════════════════════════════════════════
+
+  var LEGEND_SWATCHES = {
+    security: [
+      { color: 'rgba(239, 68, 68, 0.35)', label: 'Critical' },
+      { color: 'rgba(245, 158, 11, 0.30)', label: 'High' },
+      { color: 'rgba(234, 179, 8, 0.25)', label: 'Medium' },
+      { color: 'rgba(148, 163, 184, 0.25)', label: 'Low' },
+    ],
+    clinical: [
+      { color: 'rgba(16, 185, 129, 0.35)', label: 'Confirmed' },
+      { color: 'rgba(6, 182, 212, 0.30)', label: 'Probable' },
+      { color: 'rgba(139, 92, 246, 0.25)', label: 'Possible' },
+      { color: 'rgba(148, 163, 184, 0.25)', label: 'Silicon Only' },
+    ],
+    governance: [
+      { color: 'rgba(34, 197, 94, 0.30)', label: 'Standard' },
+      { color: 'rgba(245, 158, 11, 0.30)', label: 'Enhanced' },
+      { color: 'rgba(239, 68, 68, 0.35)', label: 'IRB' },
+      { color: 'rgba(127, 29, 29, 0.40)', label: 'Prohibited' },
+    ],
+    engineering: [
+      { color: 'rgba(59, 130, 246, 0.35)', label: 'EM' },
+      { color: 'rgba(245, 158, 11, 0.30)', label: 'Mechanical' },
+      { color: 'rgba(239, 68, 68, 0.30)', label: 'Thermal' },
+      { color: 'rgba(168, 85, 247, 0.30)', label: 'Optical' },
+      { color: 'rgba(148, 163, 184, 0.25)', label: 'None' },
+    ],
+  };
+
+  function rebuildLegend(projId) {
+    var swatches = LEGEND_SWATCHES[projId] || LEGEND_SWATCHES.security;
+    var html = '';
+    for (var i = 0; i < swatches.length; i++) {
+      html += '<div class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded" style="background:' + swatches[i].color + ';"></span> ' + swatches[i].label + '</div>';
+    }
+    html += '<button id="legend-help-btn" class="ml-2 w-5 h-5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-hover)] text-xs cursor-pointer flex items-center justify-center" aria-label="How to read this grid" title="How to read this grid">?</button>';
+    legendBar.innerHTML = html;
+    // Re-wire the help button
+    var newBtn = document.getElementById('legend-help-btn');
+    if (newBtn) {
+      newBtn.addEventListener('click', function() {
+        howToRead.classList.toggle('hidden');
+      });
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════
   // Projection-aware filter application
   // ═══════════════════════════════════════════════════════════════
 
@@ -1263,9 +1341,11 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     activeProjection = projId;
     threatPage.setAttribute('data-projection', projId);
 
-    // 1. Tab active state
+    // 1. Tab active state + aria
     tabsNav.querySelectorAll('.tara-tab').forEach(function(tab) {
-      tab.classList.toggle('active', tab.dataset.projection === projId);
+      var isActive = tab.dataset.projection === projId;
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-checked', String(isActive));
     });
 
     // 2. Grid recoloring
@@ -1277,8 +1357,9 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     // 4. Filters
     rebuildFilters(projId);
 
-    // 5. How to read
+    // 5. How to read + legend
     updateHowToRead(projId);
+    rebuildLegend(projId);
 
     // 6. Re-apply filters
     applyFilters();
@@ -1336,6 +1417,13 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   // ═══════════════════════════════════════════════════════════════
 
   (function init() {
+    // Wire up legend help button
+    if (legendHelpBtn) {
+      legendHelpBtn.addEventListener('click', function() {
+        howToRead.classList.toggle('hidden');
+      });
+    }
+
     var hash = window.location.hash.replace('#', '');
     if (hash && PROJECTIONS[hash]) {
       switchProjection(hash);

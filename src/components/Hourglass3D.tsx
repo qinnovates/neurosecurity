@@ -86,7 +86,7 @@ function HourglassBand({
       <Text
         position={[radius + 0.3, 0, 0]}
         fontSize={0.12}
-        color={isHovered ? '#e2e8f0' : '#94a3b8'}
+        color={isHovered ? '#1f2937' : '#6b7280'}
         anchorX="left"
         anchorY="middle"
         font="/fonts/Inter-Variable.woff2"
@@ -165,7 +165,7 @@ export default function Hourglass3D() {
             bottom: '16px',
             left: '50%',
             transform: 'translateX(-50%)',
-            background: 'rgba(15, 20, 32, 0.85)',
+            background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(12px)',
             border: `1px solid ${band.color}40`,
             borderRadius: '12px',
@@ -178,10 +178,10 @@ export default function Hourglass3D() {
           <div style={{ fontSize: '12px', fontFamily: 'monospace', color: band.color, marginBottom: '4px' }}>
             {band.id} — {band.domain}
           </div>
-          <div style={{ fontSize: '16px', fontWeight: 600, color: '#e2e8f0', marginBottom: '4px' }}>
+          <div style={{ fontSize: '16px', fontWeight: 600, color: '#1f2937', marginBottom: '4px' }}>
             {band.name}
           </div>
-          <div style={{ fontSize: '13px', color: '#94a3b8' }}>
+          <div style={{ fontSize: '13px', color: '#4b5563' }}>
             {band.description}
           </div>
         </div>
