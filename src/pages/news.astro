@@ -46,9 +46,33 @@ const briefItems: BriefItem[] = briefs.map((brief) => {
 // 3. External news → ExternalItem[]
 const externalItems = await fetchExternalNews();
 
-// Merge & sort by date (newest first)
-const allItems: FeedItem[] = [...publicationItems, ...briefItems, ...externalItems]
+// Merge with weighted interleave: Qinnovate + Intel first, external woven in
+// Strategy: sort each stream by date, then interleave so original content leads
+// while external items provide market context between every few Qinnovate items
+const ownContent: FeedItem[] = [...publicationItems, ...briefItems]
   .sort((a, b) => b.date.localeCompare(a.date));
+const extContent: FeedItem[] = [...externalItems]
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+// Interleave: 2 own items, then 1 external, repeat — shows our work first
+// while demonstrating the broader market momentum
+const allItems: FeedItem[] = [];
+let ownIdx = 0;
+let extIdx = 0;
+while (ownIdx < ownContent.length || extIdx < extContent.length) {
+  // Add up to 2 own items
+  for (let i = 0; i < 2 && ownIdx < ownContent.length; i++) {
+    allItems.push(ownContent[ownIdx++]);
+  }
+  // Add 1 external item
+  if (extIdx < extContent.length) {
+    allItems.push(extContent[extIdx++]);
+  }
+}
+// Append any remaining external items at the end
+while (extIdx < extContent.length) {
+  allItems.push(extContent[extIdx++]);
+}
 
 // Category mapping for blog tags
 function inferCategory(tags: string[]): string {
@@ -63,14 +87,14 @@ function inferCategory(tags: string[]): string {
 
 <PageLayout
   title="News"
-  description="BCI security news, research, and analysis from Qinnovate and across the industry."
+  description="Neural security research, industry intelligence, and the emerging BCI market — from Qinnovate and across the field."
   breadcrumbs={[{ label: 'News' }]}
   maxWidth="wide"
 >
   <div class="mb-12 reveal">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">News</h1>
     <p class="text-lg text-[var(--color-text-muted)] max-w-3xl">
-      BCI security news, research, and analysis from Qinnovate and across the industry.
+      Neural security research, industry intelligence, and the emerging BCI market — from Qinnovate and across the field.
     </p>
   </div>
 
