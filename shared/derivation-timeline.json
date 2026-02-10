@@ -1,0 +1,310 @@
+{
+  "meta": {
+    "name": "QIF Derivation Timeline",
+    "description": "Curated milestones from the QIF Derivation Log. Powers the dynamic timeline on qinnovate.com. Add new entries as breakthroughs occur — the timeline renders automatically.",
+    "source": "QIF-DERIVATION-LOG.md",
+    "version": "1.0",
+    "last_updated": "2026-02-09",
+    "total_log_entries": 50,
+    "total_milestones": 18
+  },
+  "milestones": [
+    {
+      "id": "M-001",
+      "entry": 0,
+      "date": "2026-01-18",
+      "title": "First Commit",
+      "short": "Repository created",
+      "description": "First commit to the QIF repository. Zero techniques. Zero framework. Just the question: what does a security model look like when the endpoint is a human brain?",
+      "category": "origin",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 0,
+        "framework_version": null,
+        "log_entries": 0
+      }
+    },
+    {
+      "id": "M-002",
+      "entry": 1,
+      "date": "2026-02-02",
+      "title": "OSI Rejected",
+      "short": "14-layer model scrapped",
+      "description": "The legacy 14-layer model based on the OSI stack was recognized as meaningless for BCI. A brain is not a network. Framework redesign initiated.",
+      "category": "framework",
+      "type": "aha",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v2.0-deprecated",
+        "log_entries": 1
+      }
+    },
+    {
+      "id": "M-003",
+      "entry": 7,
+      "date": "2026-02-02",
+      "title": "Hourglass Conceived",
+      "short": "Two stacks, one interface",
+      "description": "Circular topology evolved into the hourglass geometry. Silicon bands above, neural bands below, pinching at the electrode-tissue interface (I0). The shape that defines QIF.",
+      "category": "framework",
+      "type": "aha",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v3.0",
+        "log_entries": 7
+      }
+    },
+    {
+      "id": "M-004",
+      "entry": 15,
+      "date": "2026-02-02",
+      "title": "v3.1 Validated",
+      "short": "3-1-3 symmetric model confirmed",
+      "description": "7-band symmetric hourglass (3 silicon, I0 interface, 3 neural) validated by 3 independent research agents against 102 sources. The architecture that holds.",
+      "category": "framework",
+      "type": "milestone",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v3.1",
+        "log_entries": 15,
+        "sources_validated": 102
+      }
+    },
+    {
+      "id": "M-005",
+      "entry": 18,
+      "date": "2026-02-03",
+      "title": "Hamiltonian Root",
+      "short": "QI grounded in physics formalism",
+      "description": "The QI equation was grounded in Hamiltonian formalism. Not a heuristic score but a quantity derived from the system's energy landscape. The unifying mathematical root.",
+      "category": "framework",
+      "type": "aha",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v3.1",
+        "log_entries": 18
+      }
+    },
+    {
+      "id": "M-006",
+      "entry": 24,
+      "date": "2026-02-06",
+      "title": "NSP Formalized",
+      "short": "6-layer physics-based validation protocol",
+      "description": "Neural Sensory Protocol designed as a 6-layer validation stack. Physics-based authentication using spectral invariants, microstate compliance, and challenge-response. Biological TLS.",
+      "category": "protocol",
+      "type": "milestone",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v3.1",
+        "log_entries": 24,
+        "nsp_layers": 6
+      }
+    },
+    {
+      "id": "M-007",
+      "entry": 28,
+      "date": "2026-02-06",
+      "title": "L=v/f Unification",
+      "short": "Frequency-spatial mapping unified",
+      "description": "The relationship between neural oscillation frequency and spatial extent unified into a single equation. Five coupling mechanisms identified (electromagnetic, acoustic, optical, thermal, mechanical).",
+      "category": "framework",
+      "type": "aha",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v4.0",
+        "log_entries": 28,
+        "coupling_mechanisms": 5
+      }
+    },
+    {
+      "id": "M-008",
+      "entry": 31,
+      "date": "2026-02-06",
+      "title": "Post-Quantum Crypto",
+      "short": "Harvest-now-decrypt-later identified",
+      "description": "Neural data has a decades-long sensitivity window. Harvest-now-decrypt-later is a real threat to BCI recordings. ML-KEM and ML-DSA integrated into NSP.",
+      "category": "protocol",
+      "type": "aha",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v4.0",
+        "log_entries": 31
+      }
+    },
+    {
+      "id": "M-009",
+      "entry": 34,
+      "date": "2026-02-06",
+      "title": "v4.0 Implemented",
+      "short": "11 bands in code",
+      "description": "Full v4.0 hourglass implemented in code: 11 bands, coupling mechanisms, as-code diagram generation. The framework became software, not just a document.",
+      "category": "framework",
+      "type": "milestone",
+      "metrics": {
+        "techniques": null,
+        "framework_version": "v4.0",
+        "log_entries": 34,
+        "bands": 11
+      }
+    },
+    {
+      "id": "M-010",
+      "entry": 37,
+      "date": "2026-02-06",
+      "title": "60 Threats Mapped",
+      "short": "Three inventories unified",
+      "description": "Three separate threat inventories merged into one unified taxonomy. 60 techniques across 11 MITRE-compatible tactics spanning 7 domains from silicon to biology.",
+      "category": "registry",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 60,
+        "framework_version": "v4.0",
+        "log_entries": 37,
+        "tactics": 11,
+        "domains": 7
+      }
+    },
+    {
+      "id": "M-011",
+      "entry": 40,
+      "date": "2026-02-07",
+      "title": "QNIS Created",
+      "short": "BCI-specific severity scoring",
+      "description": "QNIS (QIF Neural Impact Score) created because CVSS cannot account for biological reversibility, cognitive integrity impact, or neural tissue interaction. A severity metric built for brains, not servers.",
+      "category": "scoring",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 60,
+        "framework_version": "v4.0",
+        "log_entries": 40
+      }
+    },
+    {
+      "id": "M-012",
+      "entry": 43,
+      "date": "2026-02-08",
+      "title": "QNIS v1.0 Finalized",
+      "short": "Every technique scored for neural impact",
+      "description": "QNIS v1.0 scoring methodology finalized. Spectral decomposition bridge connects raw neural signals to per-band QI scoring. Every technique now carries severity calibrated to neural, not just digital, impact.",
+      "category": "scoring",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 65,
+        "framework_version": "v4.0",
+        "log_entries": 43
+      }
+    },
+    {
+      "id": "M-013",
+      "entry": 45,
+      "date": "2026-02-09",
+      "title": "Phase Dynamics Discovered",
+      "short": "Dynamical systems meet neural security",
+      "description": "Dynamical systems theory applied to BCI security. Six new attack classes discovered: separatrix exploitation, bifurcation forcing, adiabatic drift, phase replay, integrator/resonator switching, baseline poisoning. Biological TLS concept born.",
+      "category": "framework",
+      "type": "aha",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 45,
+        "new_attack_classes": 6
+      }
+    },
+    {
+      "id": "M-014",
+      "entry": 47,
+      "date": "2026-02-09",
+      "title": "DSM Dissolved into NSP",
+      "short": "No new acronym needed",
+      "description": "Dynamical systems monitoring folded into NSP layers L3-L5 instead of creating a parallel system. Design principle: deepen existing components, do not add new ones.",
+      "category": "protocol",
+      "type": "aha",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 47
+      }
+    },
+    {
+      "id": "M-015",
+      "entry": 48,
+      "date": "2026-02-09",
+      "title": "NSP Enables Medicine",
+      "short": "Security protocol becomes trust layer",
+      "description": "NSP reframed: not a brake on research but the built-in protection protocol that enables therapeutic BCI deployment. Without it, no regulator approves consumer neural stimulation devices. Security is not the obstacle. It is the enabler.",
+      "category": "protocol",
+      "type": "aha",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 48
+      }
+    },
+    {
+      "id": "M-016",
+      "entry": 49,
+      "date": "2026-02-09",
+      "title": "Dual-Use Gap Analysis",
+      "short": "Attack mechanisms map to therapies",
+      "description": "Systematic audit of all 71 techniques. 35-40 have published therapeutic counterparts. 10 ambiguous. 18-20 pure silicon with no therapeutic analog. The dual-use principle: same physics, different intent. The gap is the research agenda.",
+      "category": "registry",
+      "type": "aha",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 49,
+        "therapeutic_mapped": "35-40",
+        "ambiguous": "~10",
+        "silicon_only": "18-20"
+      }
+    },
+    {
+      "id": "M-017",
+      "entry": 50,
+      "date": "2026-02-09",
+      "title": "TARA Named",
+      "short": "Therapeutic Atlas of Risks and Applications",
+      "description": "The threat registry became TARA: Therapeutic Atlas of Risks and Applications. Mechanism-first Rosetta Stone architecture with four projections (security, clinical, diagnostic, governance). Named after the Buddhist bodhisattva of compassion and protection.",
+      "category": "atlas",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 50,
+        "projections": 4
+      }
+    },
+    {
+      "id": "M-018",
+      "entry": 50,
+      "date": "2026-02-09",
+      "title": "Framework Complete (v1)",
+      "short": "QIF + NSP + QNIS + TARA",
+      "description": "First complete version of the full stack: QIF (framework), NSP (protocol), QNIS (scoring), TARA (atlas). 50 derivation log entries. 7 days of formal derivation. 4 framework versions. Ready for independent peer review.",
+      "category": "milestone",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 50,
+        "days_of_derivation": 7,
+        "framework_versions": 4,
+        "components": ["QIF", "NSP", "QNIS", "TARA"]
+      }
+    }
+  ],
+  "categories": {
+    "origin": { "label": "Origin", "color": "#64748b" },
+    "framework": { "label": "QIF Framework", "color": "#06b6d4" },
+    "protocol": { "label": "NSP Protocol", "color": "#8b5cf6" },
+    "scoring": { "label": "QNIS Scoring", "color": "#f59e0b" },
+    "registry": { "label": "Threat Registry", "color": "#ef4444" },
+    "atlas": { "label": "TARA Atlas", "color": "#10b981" },
+    "milestone": { "label": "Major Milestone", "color": "#ffffff" }
+  },
+  "types": {
+    "milestone": { "label": "Milestone", "icon": "◆", "description": "Major deliverable or version release" },
+    "aha": { "label": "Aha Moment", "icon": "✦", "description": "Insight or breakthrough that changed the framework's direction" }
+  }
+}
