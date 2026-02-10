@@ -1,11 +1,20 @@
 [
   {
     "type": "external",
-    "title": "brain-computer interface Archives - Semiconductor Engineering",
+    "title": "SurfAge-Net: A Hierarchical Surface-Based Network for Interpretable Fine-Grained Brain Age Prediction",
+    "date": "2026-02-10",
+    "url": "https://arxiv.org/abs/2602.06994",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.06994v1 Announce Type: new \nAbstract: Brain age prediction serves as a powerful framework for assessing brain status and detecting deviations associated with neurodevelopmental and neurodeg",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Chinese researchers complete world’s first in-orbit test of BCI devices - Global Times",
     "date": "2026-02-09",
-    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9pbzNtbkRUU2hVYUR6SXFjUXk0eXJ6bE5lR0NTRm5MU3ZEMXN0OHEtRkREZ2xhNUdZS2h2TDFYQ3pQZ2JaTjJKa2JTUjc3X0RiOVVPdFNtV0c2RHRUZGRWTnNhRmZWNTRh?oc=5",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1TLUl2aDB6cTdBbS0yb0VTSVRYaFNtc0xMMkZhX2ROYlhmYlF3c0FXWG5oRU4xbWJXR0Q3UG9lQW1qSTRWRVRDdDl1RndFRmd5ampEcEhFZG5TcEg5RHpfeFpB?oc=5",
     "source": "Google News — BCI",
-    "summary": "brain-computer interface Archives&nbsp;&nbsp;Semiconductor Engineering",
+    "summary": "Chinese researchers complete world’s first in-orbit test of BCI devices&nbsp;&nbsp;Global Times",
     "category": "neurotechnology"
   },
   {
@@ -16,15 +25,6 @@
     "source": "Google News — Neuralink",
     "summary": "Don’t Let Elon Musk Implant a Device in Your Skull&nbsp;&nbsp;Home ❧ Current Affairs",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Encoding syntactic objects and Merge operations in function spaces",
-    "date": "2026-02-09",
-    "url": "https://arxiv.org/abs/2507.13501",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2507.13501v2 Announce Type: replace-cross \nAbstract: We provide a mathematical argument showing that, given a representation of lexical items as functions (wavelets, for instance) in some functi",
-    "category": "research"
   },
   {
     "type": "external",
@@ -151,6 +151,15 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
+    "date": "2025-10-05",
+    "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
