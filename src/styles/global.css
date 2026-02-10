@@ -21,7 +21,7 @@
   --color-glass-border: rgba(0, 0, 0, 0.06);
 
   /* Typography */
-  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-heading: "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
