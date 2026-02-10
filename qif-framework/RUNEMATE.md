@@ -44,7 +44,7 @@ But the deeper innovation is this: Staves is not just compressed HTML. It is the
 | **Neural calibration protocol** | Research concept | 1-2 — Basic principles | RF-to-neural mapping isomorphism identified (R-007); requires clinical validation |
 | **Visual cortex rendering** | Research concept | 1 — Basic principles | Synesthesia + congenital blindness research paths identified; requires IRB, cohort, years of research |
 
-> **Reading guide:** Sections 1-15 describe **production-ready engineering** (TRL 3-4). Sections 16-17 describe **research-stage architecture** (TRL 1-2) that depends on fundamental neuroscience breakthroughs. Both are included because the Phase 1 architecture was designed to support the Phase 2/3 research path — the decisions are entangled.
+> **Reading guide:** Sections 1-15 describe **production-ready engineering** (TRL 3-4). Sections 16-17 describe **research-stage architecture** (TRL 1-2) that depends on fundamental neuroscience breakthroughs. Sections 18-19 cover developer experience and regulatory strategy. Both research and regulatory content are included because the Phase 1 architecture was designed to support the Phase 2/3 research path — the decisions are entangled.
 
 ---
 
@@ -71,6 +71,7 @@ But the deeper innovation is this: Staves is not just compressed HTML. It is the
 | 16 | [Phase 2 Architecture](#16-phase-2-architecture-visual-cortex-rendering) | Electrode rendering, Staves v2, calibration, Bevy bridge, error recovery |
 | 17 | [Post-Quantum Compliance Gaps](#17-post-quantum-compliance-gaps-pqkc) | 8 PQKC gaps with solution designs |
 | 18 | [Developer Tooling](#18-developer-tooling-and-experience) | Build tools, Scribe simulator, debugging, authoring guidelines |
+| 19 | [Regulatory Strategy](#19-regulatory-strategy) | FDA classification, IEC 62304, dual-pipeline separation, pathway |
 | — | [References](#references) | Standards, papers, tools |
 | A | [Derivation Log](#appendix-a-derivation-log) | Architectural discovery journal (R-001 through R-007) |
 
@@ -417,6 +418,63 @@ fn render(content: SanitizedContent) -> Staves {
     compile_to_staves(content.0)
 }
 ```
+
+### Prior Art: Why a Custom Bytecode?
+
+The most natural question: why not use an existing serialization format?
+
+| Alternative | Why It Was Considered | Why It Was Rejected |
+|------------|----------------------|---------------------|
+| **Protocol Buffers** | Industry standard, compact binary, schema-defined | No rendering model. Protobuf encodes *data*, not *layout*. A BCI dashboard needs spatial positioning, style resolution, and tree structure — Protobuf has none of these. You'd need to invent a schema that reinvents Staves anyway, plus lose the compile-time CSS resolution. |
+| **CBOR / MessagePack** | Even more compact than Protobuf, self-describing | Same problem — no layout semantics. Also self-describing formats carry schema overhead in every message, while Staves uses a fixed opcode table (zero per-message schema cost). |
+| **FlatBuffers** | Zero-copy deserialization, good for embedded | Better fit than Protobuf (supports tree structures), but still no rendering model. Also, FlatBuffers requires the full schema at both ends — Staves opcodes are fixed and known to the Scribe at compile time. |
+| **WebAssembly** | Universal bytecode, runs everywhere | WASM is a *computation* bytecode, not a *content* bytecode. A WASM module that renders a dashboard is ~50-200 KB (includes layout logic, rendering code). A Stave encoding the same dashboard is ~2-5 KB (content only, rendering logic is in the Scribe). The 40-100x size difference matters when transmitting over BLE to an implant. |
+| **Compressed HTML (gzip/brotli)** | Simple, well-understood | Compression ratios are good (~70-80%) but the Scribe still needs to parse HTML at runtime. HTML parsing requires ~500 KB of code (html5ever alone). Staves moves parsing to the Forge (gateway) and sends pre-parsed, pre-resolved bytecode — the Scribe is an interpreter, not a parser. |
+| **SVG subset** | Vector graphics, compact, declarative | Good for static images, but no layout model (no flexbox, no text flow, no interactivity). BCI dashboards need structured layout, not just shapes. Staves supports an SVG opcode subset (Section 4.5) for simple shapes within the layout model. |
+
+**The fundamental difference:** Existing serialization formats encode *data*. Staves encodes *rendered content* — a pre-compiled DOM tree with resolved styles, bounded resources, and a known-safe opcode set. This distinction enables three things no generic format provides:
+
+1. **Compile-time safety** — TARA can validate electrode patterns in the bytecode before delivery. You can't TARA-validate a Protobuf message without understanding its rendering semantics.
+2. **Sub-millisecond interpretation** — The Scribe dispatches opcodes, it doesn't parse text. Render time is O(opcodes), not O(HTML complexity).
+3. **Bounded resource consumption** — Max nodes, max depth, max styles, max string pool are all enforced by the format. No generic serialization format provides this.
+
+### Rust Crate Dependency Map
+
+The Forge and Scribe are Rust projects. Here's what exists vs. what needs to be written:
+
+```
+THE FORGE (Gateway — Rust, std)
+├── html5ever       ✅ EXISTS  (Servo's HTML parser, production-grade)
+├── cssparser       ✅ EXISTS  (Servo's CSS parser, production-grade)
+├── selectors       ✅ EXISTS  (Servo's CSS selector engine)
+├── markup5ever     ✅ EXISTS  (Servo's shared HTML/XML utilities)
+├── staves-encode   ❌ WRITE   Staves bytecode emitter (Section 4)
+├── forge-sanitize  ❌ WRITE   HTML sanitization engine (Section 5.1)
+├── forge-resolve   ❌ WRITE   CSS cascade resolver → StyleEntry (Section 5.1)
+├── forge-delta     ❌ WRITE   Delta compilation (Section 5.2)
+├── tara-validate   ❌ WRITE   TARA bounds checker (Section 11)
+└── nsp-client      ❌ WRITE   NSP session management (depends on NSP crate)
+
+THE SCRIBE (Implant — Rust, no_std)
+├── taffy           ✅ EXISTS  (Servo-derived layout engine, no_std, ~40 KB)
+├── staves-decode   ❌ WRITE   Staves bytecode interpreter (Section 4)
+├── scribe-render   ❌ WRITE   Framebuffer/display driver abstraction
+├── scribe-events   ❌ WRITE   Declarative event dispatcher (Section 3)
+├── nsp-device      ❌ WRITE   NSP device-side protocol (depends on NSP crate)
+└── qi-monitor      ❌ WRITE   QI scoring integration (Section 13)
+
+SHARED / EXTERNAL
+├── nsp             ❌ WRITE   NSP protocol crate (specified in NSP-PROTOCOL-SPEC.md)
+├── ml-kem          ✅ EXISTS  (pqcrypto-rs crate, safe Rust wrapper)
+├── ml-dsa          ✅ EXISTS  (pqcrypto-rs crate)
+├── aes-gcm         ✅ EXISTS  (RustCrypto aes-gcm crate, no_std)
+├── hkdf            ✅ EXISTS  (RustCrypto hkdf crate, no_std)
+└── sha2            ✅ EXISTS  (RustCrypto sha2 crate, no_std)
+```
+
+**Summary:** 11 crates exist (production-grade). 10 crates need writing. Of the 10, the critical path is: `staves-encode` → `staves-decode` → `forge-sanitize` → `forge-resolve` → `nsp` (the rest can follow in parallel).
+
+**Python PoC → Rust migration path:** The existing Python PoC (`runemate-poc/staves_compiler.py`) validates the compression ratios and bytecode format. The Rust rewrite is not a port — it's a from-scratch implementation against the Staves v1.0 spec (Section 4), using html5ever/cssparser where the Python PoC uses BeautifulSoup/manual parsing. The PoC's test HTML files and expected bytecode outputs (Section 11, conformance tests) become the Rust implementation's acceptance tests.
 
 ---
 
@@ -1496,6 +1554,80 @@ fn transmit(pattern: ValidatedPattern, channel: &mut NspChannel) { ... }
 
 ## 12. Roadmap
 
+### Phase 1 Ship Criteria (v1.0 Definition of Done)
+
+Phase 1 is **complete** when all of the following are true:
+
+| # | Criterion | Measurement | Target |
+|---|-----------|-------------|--------|
+| 1 | Forge compiles HTML/CSS to valid Staves | All 111+ conformance tests pass (Section 11) | 100% pass rate |
+| 2 | Scribe interprets Staves on desktop | `scribe-sim` renders all test Staves correctly | Visual match with Forge input |
+| 3 | Scribe runs on ARM Cortex-M4 | `no_std` build, tested on nRF52840-DK | Binary < 200 KB, renders within 500ms timeout |
+| 4 | Compression meets target | 3+ realistic BCI pages tested | >65% compression (matching Python PoC) |
+| 5 | PQ offset demonstrated | End-to-end: Forge → NSP → Scribe, measure total bytes | PQ+Staves < Classical+HTML for >50 KB pages |
+| 6 | `staves-verify` passes CI | Static analysis tool validates all outputs | Zero false negatives on adversarial inputs |
+| 7 | Fuzz testing complete | cargo-fuzz on Scribe interpreter | 1M+ iterations, zero crashes |
+| 8 | Delta compilation works | Modify HTML, verify delta produces identical output to full recompile | Byte-for-byte match on all test cases |
+
+**What v1.0 does NOT require:** Neural rendering, electrode patterns, TARA bounds, Bevy integration, calibration protocol, clinical validation. These are Phase 2+.
+
+**What someone can DO with v1.0:** Compile any BCI dashboard HTML into a compact, sanitized, PQ-ready bytecode that renders on a resource-constrained chip. This is immediately useful for any BCI company shipping a product with an on-device UI.
+
+### Dependency Graph
+
+What blocks what. Read bottom-to-top — lower items must exist before upper items can be built.
+
+```
+PHASE 3 (2027+)
+  Neural Markup Language v1.0
+  Visual cortex rendering validation
+    ├── requires: Synesthesia cohort data OR congenital blindness calibration data
+    ├── requires: IRB approval + clinical partners (OpenBCI, Paradromics)
+    └── requires: Phase 2.5 calibration protocol working on hardware
+                                    │
+PHASE 2.5 (Q4 2026 - Q1 2027)      │
+  Neural calibration protocol       │
+    ├── requires: NSP session resumption (PQKC Gap #1)
+    ├── requires: NSP batch signatures (PQKC Gap #2)
+    ├── requires: Electrode hardware (partner-provided)
+    └── requires: TARA constraint grammar formalized
+                                    │
+PHASE 2 (Q3-Q4 2026)               │
+  Dual-pipeline + on-chip runtime   │
+    ├── requires: Scribe on real hardware (nRF52840-DK or similar)
+    ├── requires: NSP Rust crate (transport layer)
+    ├── requires: Bevy integration (Pipeline A)
+    ├── requires: Staves v2 opcode extension
+    └── requires: Phase 1 complete ←─── GATE
+                                    │
+PHASE 1 (Q2 2026) ◄── YOU ARE HERE │
+  Staves v1 + Forge + Scribe       │
+    ├── staves-encode (Rust)        │  ← CRITICAL PATH START
+    ├── staves-decode (Rust)        │
+    ├── forge-sanitize (Rust)       │
+    ├── forge-resolve (Rust)        │
+    ├── scribe-render (Rust, no_std)│
+    ├── staves-verify (Rust)        │
+    ├── scribe-sim (Rust, std)      │
+    └── conformance test suite      │
+                                    │
+EXISTING (available today)          │
+    ├── html5ever, cssparser, selectors (Servo crates)
+    ├── taffy (layout engine, no_std)
+    ├── pqcrypto-rs (ML-KEM, ML-DSA)
+    ├── RustCrypto (AES-GCM, HKDF, SHA-256)
+    ├── Python PoC (validates compression ratios)
+    └── Staves v1.0 spec (this document)
+```
+
+**Critical path for Phase 1:** `staves-encode` → `forge-sanitize` → `forge-resolve` → conformance tests → `staves-decode` → `scribe-render` → hardware validation. Estimated: 8-12 weeks for a single Rust developer. Parallelizable: `staves-verify` and `scribe-sim` can be built concurrently once `staves-encode`/`staves-decode` exist.
+
+**External dependencies (cannot be parallelized):**
+- **Phase 2:** NSP Rust crate (separate project, own timeline)
+- **Phase 2.5:** Electrode hardware from partner (OpenBCI Galea or similar)
+- **Phase 2.5:** IRB approval (3-6 months typical for non-invasive studies)
+- **Phase 3:** Clinical collaboration agreement (legal + institutional)
+
 ### Phase 1: Prove the Math (Q2 2026)
 
 - [ ] Implement Staves bytecode format specification
@@ -2316,6 +2448,70 @@ Developers targeting Staves should follow these guidelines for optimal compressi
 
 ---
 
+## 19. Regulatory Strategy
+
+The Scribe interpreter running on an implanted BCI is **Software as a Medical Device (SaMD)** under FDA and EU MDR classification. This section outlines the regulatory intent — not a complete regulatory submission, but the architectural decisions that enable one.
+
+### 19.1 Classification
+
+| Component | Classification | Rationale |
+|-----------|---------------|-----------|
+| **Scribe (implant)** | FDA Class II or III (SaMD) | Software that directly controls electrode stimulation in neural tissue. Class depends on whether it controls stimulation autonomously (III) or only under clinician supervision (II). |
+| **Forge (gateway)** | FDA Class I or exempt | Software that compiles content for display. Does not directly control stimulation. Analogous to a content management system. |
+| **NSP (transport)** | Part of device system | Cryptographic transport is part of the implant's communication subsystem, not independently classified. |
+| **TARA bounds** | Safety specification | Not software — a safety parameter set. Referenced in the Scribe's design history file (DHF). |
+
+### 19.2 IEC 62304 Software Lifecycle
+
+IEC 62304 (Medical device software lifecycle) is the primary standard for SaMD development. Runemate's architecture was designed with IEC 62304 compliance in mind:
+
+| IEC 62304 Requirement | Runemate Architecture Feature |
+|-----------------------|------------------------------|
+| **Software safety classification** | Pipeline B (Scribe) is Class C (can cause death/serious injury). Pipeline A (Bevy) is Class A (no harm possible — isolated by FDA separation). |
+| **Software architecture document** | This specification (Sections 3-7) serves as the foundation. |
+| **Software detailed design** | Staves bytecode format (Section 4), Forge pipeline (Section 5), NSP integration (Section 6). |
+| **Software unit verification** | 111+ conformance test vectors (Section 11) with expected bytecode outputs. |
+| **Software integration testing** | End-to-end: Forge → NSP → Scribe → render. Defined in v1.0 ship criteria (Section 12). |
+| **Risk management (ISO 14971)** | TARA provides the hazard analysis. 71 attack-therapy pairs map to risks. Three safety gates (compile-time, transport, runtime) are risk controls. |
+| **SOUP identification** | Rust crate dependency map (Section 3) identifies all Software of Unknown Provenance. Servo crates (html5ever, cssparser, taffy) and RustCrypto crates are SOUP. |
+| **Anomaly resolution** | QI closed-loop (Section 13) provides real-time anomaly detection. Error recovery (Section 16.5) defines response to every anomaly class. |
+| **Maintenance** | Scribe firmware lifecycle (Section 11) defines secure update mechanism with rollback. |
+
+### 19.3 FDA Dual-Pipeline Separation
+
+The dual-pipeline architecture (Section 3) is a regulatory architecture, not just a technical one:
+
+```
+Pipeline A (Bevy, game engine)          Pipeline B (Scribe, neural renderer)
+─────────────────────────────           ─────────────────────────────────────
+NOT safety-critical                     SAFETY-CRITICAL
+Class A software                        Class C software
+Can crash → restart                     Can NEVER crash → formally verified
+Performance-optimized                   Safety-optimized
+Changes: standard software release      Changes: require re-verification
+No FDA submission required              Full 510(k) or De Novo submission
+```
+
+**The Forge is the regulatory boundary.** Content enters Pipeline A (unregulated). The Forge translates it into TARA-bounded Staves (regulated). Pipeline B only receives validated content. This separation means updates to the game engine, content, or UI do NOT trigger re-verification of the safety-critical path — only changes to the Forge translation rules or the Scribe interpreter require re-submission.
+
+### 19.4 Predicate Devices and Regulatory Pathway
+
+| Pathway | Applicability | Precedent |
+|---------|--------------|-----------|
+| **510(k)** | If a substantially equivalent predicate exists (e.g., existing visual prosthesis with on-device UI) | Second Sight Argus II (PMA P120001) — discontinued but established the regulatory pathway for visual cortex stimulation |
+| **De Novo** | If no predicate exists for a BCI with secure neural rendering | More likely for Phase 2+. De Novo establishes a new classification and creates a predicate for future devices. |
+| **Pre-Submission (Q-Sub)** | Recommended before formal submission to discuss classification and testing requirements | Qinnovate should request a Pre-Submission meeting with FDA CDRH before Phase 2 hardware integration |
+
+### 19.5 What This Means for Implementation
+
+1. **Phase 1 has no regulatory burden.** Desktop software (Forge, scribe-sim, staves-verify) is not SaMD. Build freely.
+2. **Phase 2 triggers IEC 62304** the moment Scribe firmware runs on implant-grade hardware. Design history file (DHF) must be started before writing implant code.
+3. **TARA is the risk management backbone.** ISO 14971 requires a risk management file. TARA's 71 attack-therapy pairs + three safety gates constitute a strong initial hazard analysis.
+4. **Formal verification (Kani/Prusti) is a regulatory asset,** not just good engineering. FDA increasingly accepts formal methods as evidence of software safety.
+5. **Open-source helps, not hurts.** FDA accepts open-source SaMD. Apache 2.0 licensing allows regulatory auditors to inspect the full codebase. Transparency builds trust.
+
+---
+
 ## References
 
 ### Standards and Specifications
@@ -2367,6 +2563,14 @@ Developers targeting Staves should follow these guidelines for optimal compressi
 27. Nordic Semiconductor (2023). nRF52840 Product Specification v1.1. Document no. PS v1.1. (Power consumption: Tables 42-43; Memory: Table 1)
 28. ISO 14708-3:2017. Implants for surgery — Active implantable medical devices — Part 3: Implantable neurostimulators
 29. IEC 60601-1:2005+A2:2020. Medical electrical equipment — Part 1: General requirements for basic safety and essential performance
+
+### Regulatory
+
+30. IEC 62304:2006+A1:2015. Medical device software — Software life cycle processes
+31. ISO 14971:2019. Medical devices — Application of risk management to medical devices
+32. FDA (2021). Predetermined Change Control Plans for Machine Learning-Enabled Medical Devices. Guidance Document
+33. FDA (2023). Software as a Medical Device (SaMD): Clinical Evaluation. Guidance Document
+34. EU MDR 2017/745. Regulation on medical devices. Annex I — General Safety and Performance Requirements
 
 ---
 
