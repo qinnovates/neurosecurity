@@ -11,6 +11,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   site: 'https://qinnovate.com',
   publicDir: 'docs',
+  redirects: {
+    '/threats/': '/TARA/',
+  },
   integrations: [
     react(),
     sitemap(),
