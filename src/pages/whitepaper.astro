@@ -26,6 +26,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           { href: '#ecosystem', label: 'Three Pillars' },
           { href: '#abstract', label: 'Abstract' },
           { href: '#introduction', label: 'Introduction' },
+          { href: '#containment', label: 'Containment Principle' },
           { href: '#background', label: 'Background' },
           { href: '#hourglass', label: 'Hourglass Model' },
           { href: '#qi-equation', label: 'QI Equation' },
@@ -217,6 +218,40 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         </div>
       </section>
 
+      <!-- 2.4 The Containment Principle -->
+      <section id="containment" class="mb-20">
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.4 The Containment Principle</h3>
+        <div class="prose">
+          <p>
+            Every civilization that has built critical infrastructure has independently converged on a single architectural pattern: <em>containment</em>. The word &ldquo;paradise&rdquo; descends from the Old Persian <em>pairi-daeza</em> &mdash; a walled enclosure designed to separate a restorative interior from a hostile exterior <a href="#ref-74">[74]</a>. This is not metaphor. It is engineering.
+          </p>
+          <p>
+            Frederick Law Olmsted&rsquo;s Central Park (1858) implements a layered acoustic defense architecture: a sandstone perimeter wall, dense vegetation screening borders, sunken transverse roads eight feet below grade to conceal commercial traffic, 18,000 trees across 843 acres of woodland canopy, water features for psychoacoustic masking, geometric distance attenuation, and grade-separated circulation across 36 bridges <a href="#ref-75">[75]</a>. The result is measurable: Manhattan street noise of 75&ndash;85 dB(A) is attenuated to 53&ndash;54 dB(A) at the park interior &mdash; a 21&ndash;31 dB reduction that makes the deep interior sound four to eight times quieter than the surrounding city <a href="#ref-76">[76]</a>. Olmsted explicitly named noise as one of the urban stressors the park was designed to counteract, writing that scenery should produce &ldquo;relaxing and unbending of faculties made tense by the strain, noise and artificial surroundings of urban life.&rdquo;
+          </p>
+          <p>
+            This is not an isolated design choice. The Theater of Epidaurus (~340 BCE) uses corrugated limestone seating as a frequency filter, suppressing crowd noise below 500&nbsp;Hz while passing human speech above it &mdash; a principle confirmed by Georgia Tech researchers in 2007 to be identical to modern ridged acoustic padding <a href="#ref-77">[77]</a>. Japanese gardens embed tuned acoustic instruments (<em>suikinkutsu</em>, <em>shishi-odoshi</em>) into landscape architecture. Medieval monastery cloisters function as &ldquo;the architecture of silence&rdquo; &mdash; stone quadrangles that physically maintain the acoustic conditions required for contemplation.
+          </p>
+          <p>
+            The pattern is invariant across domains. Acoustic barriers follow the mass law: transmission loss increases by 6&nbsp;dB per doubling of frequency or mass per unit area. The blood-brain barrier (BBB) imposes a molecular weight cutoff at approximately 400 Daltons and a lipophilicity filter, blocking 100% of large-molecule neurotherapeutics and over 98% of small-molecule drugs <a href="#ref-78">[78]</a>. Network firewalls implement default-deny policies with selective allow rules. Cell membranes maintain a lipid bilayer that blocks ions by default, admitting them only through specific transport proteins. Faraday cages attenuate electromagnetic fields with frequency-dependent shielding effectiveness. In every case, the architecture does not aim for total impermeability &mdash; it attenuates harmful signals below a <em>damage threshold</em> while preserving the passage of necessary signals.
+          </p>
+          <p>
+            Maturana and Varela (1972) formalized this observation in their theory of autopoiesis: a living system produces and maintains its own boundary, and that boundary is not incidental to cognition &mdash; it is a <em>precondition</em> for it <a href="#ref-79">[79]</a>. Kaplan and Kaplan&rsquo;s Attention Restoration Theory (1989) demonstrates that the restorative environment requires four conditions &mdash; being away, fascination, extent, and compatibility &mdash; all of which require sensory containment as prerequisites <a href="#ref-80">[80]</a>. Ulrich (1984) showed that surgical patients with a view of trees recovered faster, required fewer analgesic doses, and received fewer negative evaluative comments in nurses&rsquo; notes, compared to patients facing a brick wall <a href="#ref-81">[81]</a>. The contained natural environment simultaneously enables cognitive restoration (replenishing directed attention) and physiological restoration (shifting from sympathetic to parasympathetic activation).
+          </p>
+          <p>
+            Seven invariant properties emerge across all containment architectures: (1)&nbsp;<strong>selective permeability</strong> &mdash; no boundary is fully impermeable; it must pass necessary signals while blocking harmful ones; (2)&nbsp;<strong>frequency-dependent attenuation</strong> &mdash; every boundary attenuates different signal types differently; (3)&nbsp;<strong>threshold-based design</strong> &mdash; containment attenuates threats below a damage threshold, not to zero; (4)&nbsp;<strong>layered redundancy</strong> &mdash; multiple independent layers whose total attenuation exceeds the sum of parts; (5)&nbsp;<strong>active maintenance</strong> &mdash; containment is a process requiring continuous energy, not a static structure; (6)&nbsp;<strong>adaptation to threat spectrum</strong> &mdash; static containment eventually fails as threats evolve; (7)&nbsp;<strong>breach consequence cascade</strong> &mdash; when containment fails, consequences propagate inward through the protected space.
+          </p>
+          <p>
+            The brain already has containment architecture. The BBB&rsquo;s endothelial tight junctions, backed by astrocyte endfeet and pericytes, constitute a layered defense that has maintained neural tissue integrity for hundreds of millions of years of vertebrate evolution. But BCI electrode implantation <em>physically breaches</em> this architecture. The insertion creates localized BBB disruption, allowing blood serum proteins to leak into neural tissue, triggering an immune cascade that produces a glial scar around the electrode and chronic neuronal loss at the implantation site <a href="#ref-82">[82]</a>. The mismatch in Young&rsquo;s modulus between rigid electrodes and soft tissue causes ongoing mechanical damage with every micromotion.
+          </p>
+          <p>
+            The classical physics of what this containment protects was formalized by Hodgkin and Huxley (1952), whose Nobel Prize&ndash;winning conductance model describes action potential propagation through voltage-gated ion channels <a href="#ref-73">[73]</a>. QIF&rsquo;s tunneling term Q&#770;<sub>t</sub> is the quantum correction to this classical model (Section 3.3), and the containment architecture must account for both classical and quantum-scale signal propagation.
+          </p>
+          <p>
+            QIF is, at its foundation, containment architecture for the electrode-tissue interface &mdash; the first proposed engineered boundary designed to attenuate harmful signals below a neural damage threshold (C<sub>s</sub>&nbsp;&gt;&nbsp;0.6) while preserving the functional neural signaling that the interface exists to measure. The 11-band hourglass is the architecture of that boundary. The QI equation is its measurement. NSP is the protocol that enforces it. Like Olmsted&rsquo;s layered acoustic defense, QIF does not rely on a single barrier. Like the BBB, it is frequency-selective. Like every containment architecture that has endured, it is designed around a threshold &mdash; not perfection, but sufficiency.
+          </p>
+        </div>
+      </section>
+
       <!-- 3. Background -->
       <section id="background" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">3. Background and Related Work</h2>
@@ -224,7 +259,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.1 BCI Security Literature</h3>
         <div class="prose">
           <p>
-            Martinovic et al. (2012) demonstrated that commercial EEG-based BCIs could be exploited as side-channel attack vectors <a href="#ref-51">[51]</a>. Bonaci et al. (2014) showed that subliminal stimuli embedded in BCI applications could extract private information without the user&rsquo;s awareness <a href="#ref-52">[52]</a>. Frank et al. (2017) provided the first systematic threat taxonomy for BCI systems <a href="#ref-53">[53]</a>. Bernal et al. (2022) cataloged BCI security vulnerabilities across wireless protocols, firmware, and signal processing pipelines, yet none address quantum-scale phenomena at the electrode-tissue boundary <a href="#ref-54">[54]</a>.
+            Martinovic et al. (2012) demonstrated that commercial EEG-based BCIs could be exploited as side-channel attack vectors <a href="#ref-51">[51]</a>. Bonaci et al. (2014) showed that subliminal stimuli embedded in BCI applications could extract private information without the user&rsquo;s awareness <a href="#ref-52">[52]</a>. Frank et al. (2017) provided the first systematic threat taxonomy for BCI systems <a href="#ref-53">[53]</a>. Bernal et al. (2022) cataloged BCI security vulnerabilities across wireless protocols, firmware, and signal processing pipelines, yet none address quantum-scale phenomena at the electrode-tissue boundary <a href="#ref-54">[54]</a>. Spectral analysis &mdash; specifically the Fourier transform and its derivatives &mdash; is already foundational in network intrusion detection, side-channel analysis, and adversarial ML; QIF extends this paradigm to the neural-synthetic boundary, where frequency-domain decomposition becomes a security primitive (Section 5.4).
           </p>
         </div>
 
@@ -238,7 +273,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.3 Quantum Tunneling in Neural Systems</h3>
         <div class="prose">
           <p>
-            Qaswal (2019) developed mathematical models for quantum tunneling through closed voltage-gated ion channels <a href="#ref-11">[11]</a>. Summhammer et al. (2012) described quantum-mechanical ion motion within voltage-gated channels <a href="#ref-14">[14]</a>. Georgiev and Glazebrook (2018) analyzed quantum physics of synaptic communication via the SNARE protein complex <a href="#ref-12">[12]</a>. Kim et al. (2025) discovered under-the-barrier recollision (UBR), revealing tunneling dynamics are more complex than the WKB approximation assumes <a href="#ref-57">[57]</a>. The 2025 Nobel Prize in Physics demonstrated quantum tunneling at macroscopic scales in Josephson junction circuits <a href="#ref-56">[56]</a>.
+            The classical foundation for neural signal modeling was established by Hodgkin and Huxley (1952), whose Nobel Prize-winning conductance model described action potential propagation through voltage-gated ion channels using deterministic differential equations <a href="#ref-73">[73]</a>. The Hodgkin-Huxley model treats ion channels as classical gates &mdash; either open or closed, with transition rates governed by macroscopic voltage. Subsequent work has revealed quantum-mechanical phenomena at the same ion channel scale that the classical model cannot capture. Qaswal (2019) developed mathematical models for quantum tunneling through <em>closed</em> voltage-gated ion channels <a href="#ref-11">[11]</a> &mdash; a process forbidden by the Hodgkin-Huxley framework but permitted by quantum mechanics. Summhammer et al. (2012) described quantum-mechanical ion motion within voltage-gated channels <a href="#ref-14">[14]</a>. Georgiev and Glazebrook (2018) analyzed quantum physics of synaptic communication via the SNARE protein complex <a href="#ref-12">[12]</a>. Kim et al. (2025) discovered under-the-barrier recollision (UBR), revealing tunneling dynamics are more complex than the WKB approximation assumes <a href="#ref-57">[57]</a>. The 2025 Nobel Prize in Physics demonstrated quantum tunneling at macroscopic scales in Josephson junction circuits <a href="#ref-56">[56]</a>. QIF&rsquo;s tunneling term Q&#770;<sub>t</sub> is, in effect, the quantum correction to Hodgkin-Huxley: it quantifies the security-relevant leakage current that the classical model assumes to be zero.
           </p>
         </div>
 
@@ -1583,6 +1618,16 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           <p id="ref-70">[70] Tozzi, A. et al. (2023). From black holes entropy to consciousness. <em>Physica A</em>, 626, 129112.</p>
           <p id="ref-71">[71] Pastawski, F. et al. (2015). Holographic quantum error-correcting codes. <em>JHEP</em>, 2015(6), 149.</p>
           <p id="ref-72">[72] Hawking, S. W. (1975). Particle creation by black holes. <em>Comm. Mathematical Physics</em>, 43(3), 199&ndash;220.</p>
+          <p id="ref-73">[73] Hodgkin, A. L., &amp; Huxley, A. F. (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. <em>Journal of Physiology</em>, 117(4), 500&ndash;544.</p>
+          <p id="ref-74">[74] UNESCO World Heritage Centre. (2011). The Persian Garden. Inscription on the World Heritage List, No. 1372.</p>
+          <p id="ref-75">[75] Olmsted, F. L., &amp; Vaux, C. (1858). Description of a plan for the improvement of the Central Park: &ldquo;Greensward.&rdquo; Board of Commissioners of the Central Park.</p>
+          <p id="ref-76">[76] King, A., Caltagirone, C., Steers, C., &amp; Slaboch, N. (2018). Mapping tranquility &mdash; a case study of the Central Park soundscape. <em>INTER-NOISE 2018</em>, Chicago.</p>
+          <p id="ref-77">[77] Declercq, N. F., &amp; Dekeyser, C. S. A. (2007). Acoustic diffraction effects at the Hellenistic amphitheatre of Epidaurus. <em>Journal of the Acoustical Society of America</em>, 121(4), 2011&ndash;2022.</p>
+          <p id="ref-78">[78] Pardridge, W. M. (2005). The blood-brain barrier: bottleneck in brain drug development. <em>NeuroRx</em>, 2(1), 3&ndash;14.</p>
+          <p id="ref-79">[79] Maturana, H. R., &amp; Varela, F. J. (1972). <em>Autopoiesis and Cognition: The Realization of the Living</em>. D. Reidel Publishing.</p>
+          <p id="ref-80">[80] Kaplan, R., &amp; Kaplan, S. (1989). <em>The Experience of Nature: A Psychological Perspective</em>. Cambridge University Press.</p>
+          <p id="ref-81">[81] Ulrich, R. S. (1984). View through a window may influence recovery from surgery. <em>Science</em>, 224(4647), 420&ndash;421.</p>
+          <p id="ref-82">[82] Polikov, V. S., Tresco, P. A., &amp; Reichert, W. M. (2005). Response of brain tissue to chronically implanted neural electrodes. <em>Journal of Neuroscience Methods</em>, 148(1), 1&ndash;18.</p>
         </div>
       </section>
 
