@@ -58,18 +58,56 @@ BCI chip runtime (interprets + renders)
 
 **Goal:** Prove that PQ-secured BCI communication can be MORE bandwidth-efficient than classical, not less.
 
-### Phase 2: Neural Rendering Engine
+### Phase 2: Neural Rendering Engine (Dual-Pipeline)
 
-Staves (semantic bytecode)
-      | Visual cortex stimulation patterns
-      v
-Direct neural perception (no screen required)
+Two parallel pipelines with different security models:
 
-**Goal:** Enable blind users to "see" web content through visual cortex BCI. Staves is designed for brains, not screens.
+```
+PIPELINE A — Game Engine (gateway)        PIPELINE B — Neural Renderer (implant)
++----------------------------------+     +----------------------------------+
+| Bevy (Rust ECS, wgpu)           |     | The Scribe (Rust no_std)         |
+| 3D scenes, immersive content    |     | Electrode pattern generation     |
+| Security: sandbox, isolation    |     | Security: TARA-bounded, verified |
+| Priority: PERFORMANCE           |     | Priority: SAFETY                 |
+| ~5-50 MB                        |     | ~200 KB                          |
++----------------------------------+     +----------------------------------+
+          |                                        ^
+          |     The Forge (translation layer)       |
+          +------> Staves v2 (3D electrode ------->+
+                   pattern streams @ 60fps)
+```
+
+Staves v2 extends from 2D layout to 3D scene graphs — meshes, transforms, lights compiled into electrode activation patterns at 60fps. TARA therapeutic bounds enforced at compile time. NSP secures the delivery channel.
+
+**Goal:** Direct neural perception. Visual cortex rendering doesn't need pixels, color spaces, or GPU rasterization. It needs electrode activation patterns, stimulation intensity (uA), temporal sequences, and retinotopic mapping. The Forge compiles semantic content into electrode stimulation patterns bounded by TARA's therapeutic window.
+
+### Phase 2.5: Neural Calibration (NSP Beaconing)
+
+Before any visual cortex stimulation, the system must map the electrode-tissue interface per-patient. This uses the same physics as adversarial RF environment mapping (Bluetooth/WiFi through walls) — send signal, measure response, build spatial model — but secured by NSP.
+
+```
+NSP calibration beacon → electrode → neural tissue response
+        → measure amplitude, latency, propagation
+        → build per-patient retinotopic/connectivity model
+        → cryptographically bind model to device + patient identity
+        → store encrypted for session resumption
+```
+
+The calibration map becomes a per-patient Forge compiler configuration. TARA bounds are checked against THIS patient's measured thresholds, not generic population values.
+
+**Goal:** Personalized safety. Every patient's neural rendering pipeline is calibrated to their specific electrode-tissue interface and validated against their individual response thresholds.
 
 ### Phase 3: Universal Neural Markup
 
 A new markup language simpler than HTML, designed from the ground up for neural rendering. Not a translation OF web languages, but a replacement designed for how brains process information.
+
+Two research paths inform Phase 3's rendering vocabulary:
+
+1. **Synesthesia cohort (top-down):** Recruit synesthetes who volunteer to help advance vision restoration. Map cross-modal pathways (fMRI/EEG) to produce a biological rendering vocabulary — how brains naturally compile non-visual information into visual perception. TARA bounds derived from observed natural activation levels.
+
+2. **Congenital blindness (bottom-up):** For those born blind, visual cortex may be repurposed through cross-modal plasticity. Requires per-patient calibration: stimulate, observe, build perceptual vocabulary from scratch. TARA bounds from conservative clinical thresholds, tightened as data accumulates.
+
+Both paths use the same stack: Staves → Forge → TARA bounds → NSP → electrodes → QI validation. The only difference is the rendering vocabulary source.
 
 **Goal:** The way HTML replaced typewriters for screens, Staves replaces HTML for neural interfaces.
 
@@ -88,11 +126,13 @@ A new markup language simpler than HTML, designed from the ground up for neural 
 
 ### System Architecture
 
+#### Phase 1: Gateway → Implant (Screen Rendering)
+
 ```
 GATEWAY (Rust, std)                    BCI CHIP (Rust, no_std)
 +------------------------+            +------------------------+
 | The Forge              |            | The Scribe             |
-|   html5ever parser     |  PQ-TLS   |   Staves interpreter   |
+|   html5ever parser     |  NSP      |   Staves interpreter   |
 |   cssparser            |---------->|   Layout engine        |
 |   Staves bytecode emit |  (ML-KEM  |   Type-safe sanitizer  |
 |   Sanitization engine  |  + X25519)|   Framebuffer driver   |
@@ -102,6 +142,52 @@ GATEWAY (Rust, std)                    BCI CHIP (Rust, no_std)
        ~5-10 MB                             ~200 KB - 1 MB
        Runs on phone/hub                    Runs on implant
 ```
+
+#### Phase 2: Dual-Pipeline (Screen + Neural Rendering)
+
+```
+PIPELINE A — Performance               PIPELINE B — Safety
++----------------------------------+   +----------------------------------+
+| Bevy Game Engine (Rust, std)     |   | The Scribe (Rust, no_std)        |
+|   ECS architecture               |   |   Electrode pattern generator    |
+|   wgpu rendering (Metal/Vulkan)  |   |   TARA-bounded compiler          |
+|   3D scenes, immersive content   |   |   Per-patient calibration map    |
+|   Plugin system for BCI events   |   |   Constant-time crypto           |
+|   Sandboxed, process-isolated    |   |   Formally verified              |
+|   ~5-50 MB                       |   |   ~200 KB                        |
++----------------------------------+   +----------------------------------+
+          |                                        ^
+          v                                        |
++----------------------------------+   +----------------------------------+
+| The Forge (translation layer)    |   | NSP Secure Channel               |
+|   Scene graph → electrode map    |   |   Batch signatures (Merkle tree) |
+|   TARA bounds enforcement        |   |   Session resumption (PQ-PSK)    |
+|   Per-patient calibration apply  |   |   Calibration data binding       |
+|   Staves v2 bytecode emission    |   |   Forward secrecy                |
++----------------------------------+   +----------------------------------+
+
+          FDA SEPARATION: Pipeline A (non-safety) | Pipeline B (safety-critical)
+```
+
+**Why two pipelines:** Pipeline A prioritizes performance (if it crashes, restart). Pipeline B prioritizes safety (can NEVER crash — it's driving electrodes in neural tissue). FDA requires safety-critical path isolated from non-safety-critical path. The Forge bridges them, translating rich 3D content into TARA-bounded electrode patterns.
+
+#### Non-Implant BCIs: Servo + NSP Path
+
+For headsets, external BCIs, and AR glasses (non-implant devices with more resources):
+
+```
+Internet → NSP (post-quantum, Rust) → HTTP → Content
+  → Servo (Rust, memory-safe parsing/layout)
+  → wgpu (Rust, GPU rendering)
+  → display / neural interface
+```
+
+Servo is the only memory-safe browser engine. It replaces Chromium's 35M lines of C/C++ (weekly CVEs) with a modular Rust crate architecture. NSP swaps into Servo's transport layer at the trait level — `rustls` Session/Stream traits, drop-in replacement. No FFI boundary.
+
+| Path | Use Case | Engine | Size |
+|------|----------|--------|------|
+| **Staves/Scribe** | Implants, resource-constrained chips | The Scribe (custom, no_std) | ~200 KB |
+| **Servo+NSP** | Headsets, external BCIs, AR glasses | Servo (full browser) | ~5-10 MB |
 
 ### Supported CSS Subset & Layout Strategy
 
@@ -514,6 +600,59 @@ The Scribe interpreter is firmware burned into the implant. Updates must be hand
 
 These mitigations are deferred to Phase 2 (on-chip runtime) when actual power measurements on real hardware will inform the threat model.
 
+### TARA Integration (Phase 2 Safety Specification)
+
+In Phase 2 (visual cortex rendering), TARA's 71 attack-therapy pairs become **compiler constraints** in the Forge. This is the architectural insight from R-003: every stimulation pattern the Forge emits must pass through TARA's therapeutic window before delivery.
+
+**How it works:** TARA's dual-use mapping shows that signal injection into visual cortex is both an attack (unwanted hallucination) and therapy (visual prosthesis). The boundary is consent, dosage, and oversight. TARA's therapeutic parameters become hard limits in the Forge compiler:
+
+| Parameter | Constraint | Source |
+|-----------|-----------|--------|
+| Max stimulation amplitude | Per-electrode uA cap | Clinical literature (Shannon 1992, McCreery 1990) + per-patient calibration |
+| Safe frequency range | Band-pass filter on temporal patterns | Neural oscillation safety data + patient-specific thresholds |
+| Pulse duration limits | Max duration per stimulation event | Charge density limits (uC/cm^2 per phase) |
+| Charge density ceiling | Total charge per unit area per phase | Shannon equation: `log(D) = k - log(Q)` where k ~= 1.5-2.0 |
+| Recovery intervals | Minimum gap between stimulation events | Tissue recovery time (prevents cumulative damage) |
+| Retinotopic bounds | Spatial extent of activation pattern | Per-patient calibration map (Section 12) |
+
+**Three safety gates — no other BCI system has all three:**
+
+1. **TARA (compile time):** Forge rejects any electrode pattern exceeding therapeutic bounds BEFORE it reaches the wire. This is a compiler error, not a runtime check.
+2. **NSP (transport):** All electrode patterns encrypted, authenticated, and batch-signed. Provenance chain from Forge to Scribe.
+3. **QI (runtime):** Closed-loop integrity scoring detects anomalous neural response DURING stimulation. Automatic stop if distress or unexpected activation detected.
+
+**Compile-time enforcement example:**
+
+```rust
+struct ElectrodePattern {
+    amplitudes: [MicroAmps; 128],  // Per-electrode
+    frequency: Hertz,
+    duration: Microseconds,
+    charge_density: MicroCoulombsPerCm2,
+}
+
+impl ElectrodePattern {
+    fn validate(&self, patient_cal: &CalibrationMap) -> Result<ValidatedPattern, TaraViolation> {
+        // Check each parameter against TARA bounds + patient calibration
+        for (i, amp) in self.amplitudes.iter().enumerate() {
+            if amp > &patient_cal.max_amplitude[i] {
+                return Err(TaraViolation::AmplitudeExceeded { electrode: i, max: patient_cal.max_amplitude[i] });
+            }
+        }
+        if self.charge_density > patient_cal.max_charge_density {
+            return Err(TaraViolation::ChargeDensityExceeded);
+        }
+        // ... additional bounds checks
+        Ok(ValidatedPattern(self.clone()))
+    }
+}
+
+// Only ValidatedPattern can be sent to NSP — compiler enforces this
+fn transmit(pattern: ValidatedPattern, channel: &mut NspChannel) { ... }
+```
+
+**Residual risk:** TARA bounds are derived from published literature and per-patient calibration. If the calibration map is inaccurate (electrode migration, tissue changes over time), bounds may be too permissive. Mitigation: QI closed-loop detects anomalous response in real-time, and recalibration is triggered automatically when QI scores degrade.
+
 ---
 
 ## 8. Roadmap
@@ -527,20 +666,45 @@ These mitigations are deferred to Phase 2 (on-chip runtime) when actual power me
 - [ ] Create before/after chart for pitch deck
 - [ ] Validate Rust no_std binary size targets
 
-### Phase 2: On-Chip Runtime (Q3 2026)
+### Phase 2: On-Chip Runtime + Dual-Pipeline (Q3-Q4 2026)
 
 - [ ] Build Scribe interpreter (Staves to framebuffer/display commands)
 - [ ] Integrate with NSP protocol for PQ-secured delivery
 - [ ] Test on RISC-V / ARM Cortex-M dev boards
-- [ ] Power consumption measurements
-- [ ] Sanitization fuzzing (attempt injection through Staves)
+- [ ] Power consumption measurements (including PQ crypto overhead)
+- [ ] Sanitization fuzzing (attempt injection through Staves) — 1M+ iterations with cargo-fuzz
+- [ ] Evaluate Bevy as Pipeline A game engine (ECS architecture, wgpu, plugin system)
+- [ ] Implement Forge translation layer: Bevy scene graph → Staves v2 electrode patterns
+- [ ] TARA constraint grammar: formalize therapeutic parameters as compiler constraints
+- [ ] Implement TARA bounds checking in Forge (compile-time rejection of unsafe patterns)
+- [ ] NSP batch signatures: Merkle tree implementation for 60fps streaming (~3KB/sec vs ~198KB/sec)
+- [ ] NSP session resumption: PSK-based 0-RTT reconnect with PQ forward secrecy
+- [ ] Staves v2 format: extend bytecode from 2D layout to 3D scene graphs (meshes, transforms, lights)
+- [ ] Benchmark dual-pipeline latency: Bevy → Forge → Scribe end-to-end
+
+### Phase 2.5: Neural Calibration Protocol (Q4 2026 - Q1 2027)
+
+- [ ] Design NSP calibration beaconing protocol (probe → measure → model → bind)
+- [ ] Implement calibration data binding: `HKDF(DRK || patient_id, "nsp-calibration-bind", cal_hash)`
+- [ ] Per-patient Forge compiler configuration from calibration map
+- [ ] Partner outreach: OpenBCI (Galea headset, active IRB, participant pool)
+- [ ] Literature review: RF-inspired neural mapping in existing medical BCI systems
+- [ ] IRB preparation for synesthesia cohort study
+- [ ] Benchmark NSP on implant-grade MCU (ML-KEM power measurement)
+- [ ] Formal verification of PQ implementation (Kani/Prusti constant-time proof)
 
 ### Phase 3: Visual Cortex Rendering (2027+)
 
-- [ ] Map Staves semantic elements to visual cortex stimulation patterns
-- [ ] Collaborate with visual prosthesis researchers
-- [ ] Accessibility-first design (spatial audio, haptic, visual cortex)
-- [ ] Neural Markup Language v1.0 specification
+- [ ] Synesthesia cohort: recruit volunteers, map cross-modal pathways (fMRI/EEG)
+- [ ] Extract biological rendering vocabulary from synesthete observation data
+- [ ] Congenital blindness path: per-patient calibration → perceptual vocabulary building
+- [ ] Derive TARA bounds from observed natural activation (synesthesia) and clinical thresholds (blindness)
+- [ ] Staves v2 → electrode pattern validation against per-patient calibration maps
+- [ ] Latency convergence: demonstrate Phase 3 target (~21ms, faster than biological vision ~50-150ms)
+- [ ] Neural Markup Language v1.0 specification (informed by both research paths)
+- [ ] Accessibility design: spatial audio + haptic + visual cortex multimodal rendering
+- [ ] OpenBCI / Paradromics integration testing (NSP SDK on partner hardware)
+- [ ] FDA regulatory separation validation (Pipeline A non-safety / Pipeline B safety-critical)
 
 ---
 
@@ -673,15 +837,304 @@ The PoC achieves 64-79% compression. Phase 2 targets:
 
 ---
 
+## 12. Phase 2 Architecture: Visual Cortex Rendering
+
+This section formalizes the architectural discoveries from the Derivation Log (R-001 through R-007) into specification-grade detail.
+
+### 12.1 Rendering Target: Electrodes, Not Pixels
+
+Visual cortex rendering fundamentally differs from screen rendering. The Scribe's Phase 2 output is not a framebuffer — it is an electrode activation pattern stream.
+
+| Dimension | Screen Rendering (Phase 1) | Neural Rendering (Phase 2) |
+|-----------|--------------------------|---------------------------|
+| **Output unit** | Pixel (RGB color) | Electrode activation (uA current) |
+| **Spatial model** | Fixed grid (1920x1080) | Per-patient retinotopic map (variable geometry) |
+| **Temporal model** | Frame rate (60fps vsync) | Stimulation timing (pulse width, inter-pulse interval, recovery) |
+| **Color** | RGB/HSL color space | Stimulation intensity (perceived brightness correlates with amplitude) |
+| **Layout** | CSS box model | Electrode neighborhood activation patterns |
+| **Safety model** | None (pixels can't harm you) | TARA therapeutic bounds (electrodes can cause seizure, tissue damage, hallucination) |
+
+The Forge compiler's job changes from "produce a framebuffer" to "produce a time-series of electrode activation patterns that, when delivered through the electrode array, elicit the intended visual perception in the patient's visual cortex."
+
+### 12.2 Staves v2: 3D Electrode Pattern Streams
+
+Staves v1 encodes 2D layout (blocks, flex, text, styles). Staves v2 extends the bytecode to encode 3D scene graphs as electrode pattern streams at 60fps.
+
+**New opcodes (Staves v2):**
+
+| Opcode | Name | Arguments | Purpose |
+|--------|------|-----------|---------|
+| 0x40 | ELECTRODE_MAP | cal_hash: u32 | Load per-patient calibration map (verified by hash) |
+| 0x41 | ACTIVATE | electrode_id: u16, amplitude: u16, duration: u16 | Single electrode activation |
+| 0x42 | PATTERN | pattern_id: u16, scale: u8 | Activate a named pattern from the rendering vocabulary |
+| 0x43 | SEQUENCE | count: u16, interval_us: u16 | Begin timed sequence of activations |
+| 0x44 | END_SEQUENCE | | End timed sequence |
+| 0x45 | SPATIAL_REF | x: i16, y: i16, z: i16 | Reference point in retinotopic coordinates |
+| 0x46 | INTENSITY | level: u8 | Set intensity for subsequent activations (0-255 mapped to patient's calibrated range) |
+| 0x47 | TEMPORAL_FADE | start: u8, end: u8, duration_ms: u16 | Fade intensity over time |
+| 0x48 | TARA_BOUND | param_id: u8, max_value: u16 | Embed TARA constraint in bytecode (Scribe verifies at decode time) |
+
+**Staves v2 header extension:**
+
+```
+STAVE HEADER v2 (24 bytes, extends v1's 16 bytes):
+  Magic:              4 bytes  "STAV"
+  Version:            2 bytes  uint16 (>= 0x0200 for v2)
+  Min Scribe version: 2 bytes  uint16
+  String pool offset: 4 bytes  uint32
+  Style table offset: 4 bytes  uint32
+  Calibration hash:   4 bytes  uint32  (NEW: hash of required patient calibration map)
+  Electrode count:    2 bytes  uint16  (NEW: number of electrodes in target array)
+  Max charge density: 2 bytes  uint16  (NEW: TARA bound, uC/cm^2 * 100)
+```
+
+**Rendering vocabulary:** Phase 3 research (synesthesia cohort + congenital blindness) will produce a library of named patterns — reusable electrode activation templates that produce consistent perceptions. The `PATTERN` opcode references these by ID, similar to how Staves v1 references styles by index. The vocabulary is per-patient (different brains produce different patterns for the same perception) and stored in the calibration map.
+
+### 12.3 Neural Calibration Protocol
+
+Before any visual cortex stimulation, the system must map the electrode-tissue interface per-patient. This uses the same physics as adversarial RF environment mapping — send signal, measure response, build spatial model — but secured by NSP.
+
+**Calibration phases:**
+
+| Phase | Action | Output | Duration |
+|-------|--------|--------|----------|
+| 1. Probe | NSP sends authenticated calibration pulses through each electrode (TARA-bounded, conservative) | Per-electrode impedance profile | ~5-10 min |
+| 2. Map | Measure neural response to known stimulation patterns across electrode neighborhoods | Retinotopic connectivity model | ~30-60 min |
+| 3. Threshold | Gradually increase stimulation to find per-electrode perception thresholds | Per-electrode amplitude/frequency ranges | ~15-30 min |
+| 4. Vocabulary | Deliver compound patterns, record patient perception reports | Initial rendering vocabulary | ~60+ min |
+| 5. Bind | Cryptographically bind calibration model to device + patient identity | CalibrationBinding token | Immediate |
+
+**Calibration data structure:**
+
+```rust
+struct CalibrationMap {
+    patient_id: PatientId,              // Pseudonymous identifier
+    device_drk_hash: [u8; 32],          // Hash of Device Root Key (binding)
+    electrode_count: u16,
+    impedance_profile: Vec<Impedance>,  // Per-electrode impedance
+    retinotopic_map: RetinotopicModel,  // Spatial connectivity model
+    max_amplitude: Vec<MicroAmps>,      // Per-electrode TARA bound
+    max_charge_density: MicroCoulombsPerCm2, // Global TARA bound
+    frequency_range: (Hertz, Hertz),    // Safe band-pass
+    recovery_interval: Microseconds,    // Minimum inter-stimulation gap
+    vocabulary: Vec<NamedPattern>,      // Learned rendering primitives
+    calibration_date: Timestamp,
+    binding: CalibrationBinding,        // HKDF(DRK || patient_id, "nsp-cal-bind", hash)
+}
+```
+
+**Security properties:**
+- Calibration data encrypted with PQ crypto the instant it's generated (NSP)
+- Binding ensures model is useless without the matching device root key AND patient identity
+- Session resumption allows reconnect without full recalibration (PSK-derived state)
+- Forward secrecy protects historical calibration sessions
+- Recalibration triggered automatically when QI scores degrade (electrode drift, tissue changes)
+
+### 12.4 Latency Convergence
+
+The dual-pipeline architecture has a measurable latency convergence path:
+
+| Phase | Pipeline | Path | Estimated Latency |
+|-------|----------|------|-------------------|
+| 1 (current) | Screen only | Game engine → GPU → screen → eyes → visual cortex | ~16ms render + ~50-150ms biological |
+| 2 (early) | Dual | Game engine → Forge → NSP → Scribe → electrodes → visual cortex | ~5ms compile + ~10ms NSP + ~6ms Scribe + ~100ms neural propagation = **~121ms** |
+| 3 (mature) | Direct | Game engine → Forge as rendering backend → electrodes | ~5ms compile + ~10ms NSP + ~6ms Scribe = **~21ms** (neural propagation reduced with cortical adaptation) |
+
+**Phase 3 inflection point:** Direct neural rendering (~21ms end-to-end) becomes FASTER than biological vision (~50-150ms for retina → LGN → V1 processing). The bottleneck in biological vision is the retina and lateral geniculate nucleus. Direct V1 stimulation bypasses both.
+
+**Latency budget per component:**
+
+| Component | Budget | Basis |
+|-----------|--------|-------|
+| Forge compilation (Staves v2) | 5 ms | Scene graph diff + electrode pattern generation |
+| NSP encryption + transmission | 10 ms | AES-256-GCM + BLE 5.0 (~2 Mbps) for ~2 KB pattern |
+| Scribe decode + validation | 3 ms | Stave header + TARA bounds + opcode dispatch |
+| Electrode driver | 3 ms | DAC setup + multiplexer addressing |
+| **Total silicon path** | **21 ms** | |
+| Neural propagation (V1 response) | 50-100 ms | Cortical processing (adapts/reduces over time) |
+| **Total perceived** | **71-121 ms** | Phase 2 noticeable; Phase 3 approaches imperceptible |
+
+---
+
+## 13. Post-Quantum Compliance Gaps (PQKC)
+
+NSP provides post-quantum security for BCI data links. But real-time neural rendering at 60fps exposes protocol gaps that must be addressed for Runemate Phase 2. These are engineering problems, not theoretical — each has a concrete solution path.
+
+### Gap 1: Session Resumption (CRITICAL)
+
+**Problem:** Full PQ handshake = ~20.6 KB key exchange. Every reconnect repeats it. Implants reconnect constantly (signal drops, power cycling, patient movement). At dozens of reconnects per hour, the handshake tax becomes significant: 204 KB+ wasted bandwidth, hundreds of milliseconds latency, battery drain.
+
+**Solution:** PSK-based 0-RTT session resumption with PQ forward secrecy (analogous to TLS 1.3 0-RTT). The PSK is derived from the previous session's master secret via HKDF:
+
+```
+resumption_psk = HKDF-Expand(master_secret, "nsp-resumption", 32)
+```
+
+Reconnect cost drops from ~20.6 KB to ~1 KB (PSK identifier + nonce + finished). Forward secrecy maintained because each session derives a new master secret even when resuming.
+
+**Additional requirement for calibration:** Session resumption must preserve the calibration state. The patient's electrode-tissue map doesn't change between reconnects — retransmitting it wastes bandwidth and delays rendering. The calibration map hash is bound to the resumed session via the CalibrationBinding token.
+
+**Status:** Extension needed in NSP v0.4. Protocol design complete (N-001). Implementation pending.
+
+### Gap 2: Batch Signatures (CRITICAL)
+
+**Problem:** Signing every electrode pattern frame individually at 60fps = ~198 KB/sec in PQ signatures (ML-DSA-65 signatures are ~3,309 bytes each). This overwhelms the implant's radio bandwidth and power budget.
+
+**Solution:** Merkle tree batching. Collect N frames (e.g., 8 frames = 133ms window), build a hash tree, sign only the root. Receiver verifies root signature + Merkle proof per frame.
+
+```
+Frame 0  Frame 1  Frame 2  Frame 3  Frame 4  Frame 5  Frame 6  Frame 7
+  |        |        |        |        |        |        |        |
+  H0       H1       H2       H3       H4       H5       H6       H7
+    \      /          \      /          \      /          \      /
+     H01                H23              H45                H67
+       \                /                  \                /
+        H0123                              H4567
+              \                          /
+               ROOT  ←── ML-DSA signature (3,309 bytes, ONCE per 8 frames)
+```
+
+**Per-frame cost with batching (N=8):**
+- Merkle proof: ~7 hashes × 32 bytes = 224 bytes
+- Amortized signature: 3,309 / 8 = ~414 bytes
+- Total per frame: ~638 bytes (vs 3,309 bytes without batching = **5.2x reduction**)
+- Total per second: ~38 KB/sec (vs ~198 KB/sec = **5.2x reduction**)
+
+**Tradeoff:** Batching introduces latency equal to the batch window (133ms for N=8). For neural rendering where the total pipeline is 71-121ms, an additional 133ms may be unacceptable. Tuning options:
+- N=4 (67ms batch, ~76 KB/sec) — better latency, higher overhead
+- N=2 (33ms batch, ~114 KB/sec) — minimal latency impact
+- N=1 (no batching, 198 KB/sec) — current behavior, fallback for safety-critical single frames
+
+**Status:** Extension needed in NSP v0.4. Math validated. Implementation pending.
+
+### Gap 3: Certificate Compression (HIGH)
+
+**Problem:** PQ certificates are 5-15x larger than classical equivalents. NSP's compact certificate format (not X.509) helps, but each ML-DSA-65 certificate is still ~5,933 bytes (vs 169 bytes classical). Certificate chain verification eats memory and bandwidth on constrained implants.
+
+**Solution options:**
+1. **Certificate-by-reference:** Gateway sends certificate hash during handshake. Scribe looks up full certificate from on-chip storage (pre-provisioned during manufacturing).
+2. **Certificate compression:** Apply Brotli/CBOR compression to certificate payloads. PQ certificates have structure that compresses ~30-40%.
+3. **Implicit certificates:** ECQV-style implicit certificates adapted for lattice keys (research needed — not standardized for PQ).
+
+**Recommended:** Certificate-by-reference for implants (pre-provisioned keys), full certificates for headsets/external BCIs (more memory available).
+
+**Status:** Design phase. Pre-provisioning approach is simplest and most secure.
+
+### Gap 4: On-Chip PQ Acceleration (HIGH)
+
+**Problem:** ML-KEM and ML-DSA are compute-heavy. Software-only implementation on a Cortex-M4 @ 100 MHz:
+- ML-KEM-768 encapsulation: ~5-10 ms
+- ML-DSA-65 sign: ~15-30 ms
+- ML-DSA-65 verify: ~5-10 ms
+
+These are acceptable for handshakes but add up during key rotation and batch signature verification at 60fps.
+
+**Solution:** NTT (Number Theoretic Transform) coprocessor — dedicated silicon for the core lattice operation, analogous to AES-NI for symmetric crypto. NTT is the computational bottleneck in both ML-KEM and ML-DSA.
+
+**Interim solution:** Optimized Rust assembly for NTT on ARM NEON / RISC-V Vector extensions. The `pqcrypto-rs` crate supports platform-specific optimizations.
+
+**Status:** Hardware acceleration is a chip vendor conversation. Software optimization is immediate.
+
+### Gap 5: Key Rotation Overhead (MEDIUM)
+
+**Problem:** NSP specifies key rotation every 30-60 seconds. PQ key rotation = 2,276 bytes per rotation (17x classical). Over a 1-hour session: 60 rotations × 2,276 = ~136 KB of key material.
+
+**Solution:** Symmetric ratchet between rotations. Use HKDF to derive forward-secure frame keys from the current session key without a full PQ key exchange. Full PQ rotation only on schedule or when forward secrecy requires it.
+
+```
+frame_key[n+1] = HKDF-Expand(frame_key[n], "nsp-ratchet", 32)
+```
+
+This is already partially specified in NSP v0.3 (Section 7, key lifecycle). The gap is formalizing when full PQ rotation vs symmetric ratchet is required.
+
+**Status:** Partially addressed. Formalization needed in NSP v0.4.
+
+### Gap 6: Hybrid Deprecation Path (MEDIUM)
+
+**Problem:** NSP v0.3 specifies hybrid key exchange (X25519 + ML-KEM-768). Running both indefinitely doubles handshake overhead. But dropping classical too early risks interoperability breakage with legacy gateway devices.
+
+**Deprecation timeline (proposed):**
+
+| Year | Policy | Rationale |
+|------|--------|-----------|
+| 2026-2028 | Hybrid mandatory | Transition period. Classical provides fallback. |
+| 2029-2030 | Hybrid default, PQ-only allowed | NIST PQ standards battle-tested. Early adopters can go PQ-only. |
+| 2031+ | PQ-only mandatory, hybrid deprecated | Classical algorithms retired per NSA CNSA 2.0 timeline. |
+
+**For implants with 20-year lifetimes:** Devices manufactured in 2026 must support PQ-only mode even if hybrid is the default. The firmware update mechanism (Section 7.5) allows deprecation policy to be updated in-field.
+
+**Status:** Policy decision. Proposed timeline above. Subject to NIST/NSA guidance updates.
+
+### Gap 7: Formal Verification of PQ Implementation (HIGH)
+
+**Problem:** PQ algorithms are newer than classical alternatives. Subtle implementation bugs — timing side channels, fault injection vulnerabilities, incorrect NTT implementations — are more likely and harder to catch through testing alone. A timing side channel in ML-KEM on an implant chip leaks the session key.
+
+**Solution:** Formal verification using Rust-compatible tools:
+- **Kani:** Bounded model checking for Rust. Proves absence of panics, overflows, and out-of-bounds access.
+- **Prusti:** Deductive verification. Can prove constant-time execution paths.
+- **ct-verif / dudect:** Timing leakage detection through statistical analysis.
+
+**Verification targets:**
+1. ML-KEM encapsulation/decapsulation: constant-time proof
+2. ML-DSA sign/verify: constant-time proof
+3. NTT implementation: correctness proof (matches reference)
+4. HKDF key derivation: no secret-dependent branching
+
+**Status:** Research phase. Kani supports the Rust subset used in crypto implementations. Prusti integration needs investigation.
+
+### Gap 8: Hierarchical Key Storage (MEDIUM)
+
+**Problem:** The implant needs multiple key tiers — device identity (permanent, burned at manufacturing), session keys (ephemeral, per-connection), group keys (for broadcast electrode patterns), calibration binding keys (per-patient). No specification exists for how these tiers interact in the PQ context.
+
+**Solution:** Hierarchical key derivation tree (inspired by BIP-32 but for lattice keys):
+
+```
+Device Root Key (DRK) — permanent, hardware-protected
+  ├── Identity Key = HKDF(DRK, "nsp-identity")
+  ├── Session Master = ML-KEM decapsulation result
+  │     ├── Frame Key[n] = HKDF(session_master, "nsp-frame" || n)
+  │     ├── Calibration Key = HKDF(session_master, "nsp-calibration")
+  │     └── Resumption PSK = HKDF(session_master, "nsp-resumption")
+  └── Group Key = HKDF(DRK, "nsp-group" || group_id)
+        └── Broadcast Frame Key[n] = HKDF(group_key, "nsp-broadcast" || n)
+```
+
+All derived keys are symmetric (AES-256). Only the DRK and session establishment use asymmetric PQ crypto. This minimizes the amount of PQ key material stored on-chip.
+
+**Storage budget:**
+
+| Key | Size | Lifetime | Storage |
+|-----|------|----------|---------|
+| DRK (ML-KEM-768 private) | 2,400 B | Permanent | Secure element |
+| DRK (ML-DSA-65 private) | 4,032 B | Permanent | Secure element |
+| Identity cert | 5,933 B | Permanent | Flash |
+| Session master | 32 B | Per-session | SRAM |
+| Frame key | 32 B | Per-frame | SRAM |
+| Calibration key | 32 B | Per-calibration | SRAM |
+| Resumption PSK | 32 B | Cached | Flash |
+| **Total permanent** | **~12.4 KB** | | Secure element + flash |
+| **Total ephemeral** | **~128 B** | | SRAM |
+
+**Status:** Design complete. Aligns with NSP Section 7 (key lifecycle). Formalization needed.
+
+---
+
 ## References
 
 - FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM)
 - FIPS 204: Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
 - FIPS 205: Stateless Hash-Based Digital Signature Algorithm (SLH-DSA)
+- Shannon, R.V. (1992): A model of safe levels for electrical stimulation
+- McCreery, D.B. et al. (1990): Charge density and charge per phase as cofactors in neural injury
 - Arditi et al. (2024): Refusal in Language Models Is Mediated by a Single Direction
 - Servo Browser Engine: https://servo.org (modular Rust crates)
+- Bevy Game Engine: https://bevyengine.org (Rust ECS, wgpu rendering)
+- wgpu: https://wgpu.rs (Rust-native WebGPU implementation)
 - wasm3: https://github.com/nicholasgasior/wasm3 (60 KB WASM interpreter)
 - NSP Protocol Specification: see NSP-PROTOCOL-SPEC.md
+- TARA (Therapeutic Atlas of Risks and Applications): see threat-registry.json
+- Kani Model Checker: https://model-checking.github.io/kani/
+- Prusti Verifier: https://www.pm.inf.ethz.ch/research/prusti.html
 
 ---
 
@@ -789,49 +1242,210 @@ No C/C++ in the critical path. Every component is Rust. Every component is memor
 
 ### Entry R-002: Neural Systems Language (NSL) — Domain-Specific Language Concept
 
-**Date:** 2026-02-10  |  **Status:** Phase 4+ (deprioritized by R-003)
+**Date:** 2026-02-10
+**Context:** Kevin asked: "is RUST the lowest level? are you able to create another language that is more efficient given all the languages you know? I think its feasible to build one with security + rendering in mind?"
+**AI Systems:** Claude Opus 4.6 (feasibility analysis, language design)
+**Human Decision:** Kevin proposed purpose-built language for BCI security + rendering
 
-Rust is systems-level. A BCI-specific DSL could eliminate generality overhead (arena memory, native rendering types, compiler-enforced constant-time crypto, power budget annotations). Recommended path: transpile to Rust. Historical precedent: CUDA, SPARK/Ada, Solidity.
+#### Discovery
+
+Rust is systems-level (same as C, compiles to machine code via LLVM). Can't go meaningfully lower without losing portability/safety. But a domain-specific language AT the same level could eliminate Rust's generality overhead: arena-only memory (simpler than borrow checker), compiler-enforced constant-time crypto, native rendering primitives, power budget annotations, built-in DSP, formal verification in the type system.
+
+Historical precedent: CUDA (GPUs), SPARK/Ada (avionics), Solidity (smart contracts), GLSL/HLSL (shading). Every time a domain got important enough, a purpose-built language won.
+
+**Recommended path:** DSL that transpiles to Rust (NSL → Rust → LLVM → machine code). Gets domain-specific guarantees without losing Rust's 150K+ crate ecosystem.
+
+**Connection to Staves:** Staves is already a DSL for content. NSL extends the principle to systems programming. "C was designed for computers. NSL was designed for the computers inside brains."
+
+**Status:** Phase 4+ (long-term). Document now, build later. Deprioritized by R-003 (TARA + Rust is the near-term path).
 
 ---
 
 ### Entry R-003: TARA as Safety Specification for Visual Cortex Rendering
 
-**Date:** 2026-02-10  |  **Status:** Conceptual architecture
+**Date:** 2026-02-10
+**Context:** Kevin said: "if its a BCI we dont need all that overhead. Rust would be a good framework to use and we can do it just for visual rendering based on visual cortex and how we're mapping TARA to the therapeutics."
+**AI Systems:** Claude Opus 4.6 (architecture refinement)
+**Human Decision:** Kevin identified that screen rendering is irrelevant for visual cortex BCIs; TARA's therapeutic mappings should serve as the safety bounds for the rendering engine
 
-Visual cortex rendering needs electrode patterns, not pixels. TARA's dual-use mapping (attack = unwanted hallucination, therapy = visual prosthesis) becomes the safety spec. Therapeutic parameters (amplitude, frequency, duration, charge density) become compiler constraints. Three safety gates: TARA (compile time), NSP (transport), QI (runtime).
+#### The Insight
+
+Visual cortex rendering doesn't need pixels, color spaces, GPU rasterization, or fonts. It needs: electrode activation patterns, stimulation intensity (μA), temporal sequences, retinotopic mapping, and per-patient threshold calibration. The "renderer" compiles semantic content into electrode stimulation patterns.
+
+TARA's dual-use mapping becomes the **safety specification**: signal injection into visual cortex is both an attack (unwanted hallucination) and therapy (visual prosthesis). The boundary is consent, dosage, oversight. TARA's therapeutic parameters (max amplitude, safe frequency, duration limits, charge density, recovery intervals) become **compiler constraints**. Patterns exceeding therapeutic bounds are rejected at compile time.
+
+#### The Pipeline
+
+```
+Staves semantic content → Forge (compile to electrode patterns)
+  → TARA safety bounds check (within therapeutic window?)
+  → NSP secure delivery → Visual cortex perception
+  → QI validates neural response (closed loop)
+```
+
+Three safety gates: TARA (compile time), NSP (transport), QI (runtime). No other BCI system has all three.
+
+**Why Rust is correct:** no_std for implant chips, formal verification tools (Kani, Prusti), the security innovation is the architecture (TARA-bounded parameters), not the language. NSL (R-002) deprioritized.
+
+**Status:** Conceptual. Requires: TARA parameter formalization, retinotopic mapping research, visual prosthesis collaborators.
 
 ---
 
 ### Entry R-004: Dual-Pipeline Architecture — Game Engine + Neural Renderer
 
-**Date:** 2026-02-10  |  **Status:** Conceptual
+**Date:** 2026-02-10
+**Context:** Kevin said: "We would need a game engine to run parallel and the security there can be solved differently and there may be a lag initially but I can see how we can get to my vision"
+**AI Systems:** Claude Opus 4.6 (architecture synthesis)
+**Human Decision:** Kevin identified two separate security domains requiring different security models
 
-Pipeline A (Game Engine/Bevy, gateway): performance-priority, sandboxed, restartable. Pipeline B (Neural Renderer/Scribe, implant): safety-priority, TARA-bounded, formally verified, never crashes. Forge translates between them. Latency converges: Phase 2 ~121ms → Phase 3 ~21ms (faster than eyes). Staves v2 extends to 3D scene graphs.
+#### The Architecture Split
+
+**Pipeline A — Game Engine (gateway):** Bevy (Rust, ECS, wgpu), ~5-50 MB. Security = sandboxing, process isolation. If it crashes, restart. Priority: PERFORMANCE.
+
+**Pipeline B — Neural Renderer (implant):** The Scribe (Rust no_std), ~200 KB. Security = TARA-bounded, formally verified, constant-time crypto. Can NEVER crash. Priority: SAFETY.
+
+The Forge translates between them. This separation is also a regulatory necessity — FDA requires safety-critical path isolated from non-safety-critical path.
+
+#### Latency Convergence
+
+- Phase 1: Game engine → screen → eyes → brain (current, ~16ms)
+- Phase 2: Game engine → Forge translation → electrode patterns → visual cortex (~121ms total, noticeable but functional)
+- Phase 3: Game engine → Forge as rendering backend → electrodes directly (~21ms, FASTER than eyes at ~50-150ms)
+
+#### Staves v2
+
+Extends from 2D layout to 3D scene graphs (meshes, transforms, lights) as electrode pattern streams at 60fps. Same TARA bounds, same NSP, same QI. Bytecode scales from dashboards to immersive environments.
+
+**Status:** Conceptual. Bevy evaluation needed. Staves v2 format is future work.
 
 ---
 
 ### Entry R-005: Two Research Paths — Synesthesia Cohort + Congenital Blindness
 
-**Date:** 2026-02-10  |  **Status:** Research program concept
+**Date:** 2026-02-10
+**Context:** Kevin identified two paths for visual cortex rendering research, connecting his personal synesthesia to a broader research program
+**AI Systems:** Claude Opus 4.6 (research program design)
+**Human Decision:** Kevin proposed synesthesia cohort (not self-study) and the congenital blindness mission
 
-Option 1: Recruit synesthesia volunteer cohort, map cross-modal pathways, produce biological rendering vocabulary. Option 2: Congenital blindness, bottom-up calibration per patient. Both use same stack. NOT "study Kevin's brain" — proper cohort research with IRB, Qinnovate leads with security first.
+#### Option 1: Synesthesia Research Cohort
+
+Recruit synesthetes who volunteer to help cure blindness. Map cross-modal pathways (fMRI/EEG) to produce a biological rendering vocabulary — how brains naturally compile non-visual information into visual perception. TARA bounds derived from observed natural activation. Faster path (biological ground truth exists).
+
+#### Option 2: Congenital Blindness (Bottom-Up)
+
+For those born blind, visual cortex may be repurposed (cross-modal plasticity). Can't assume retinotopic map is intact. Requires: stimulate → observe → calibrate → build per-patient perceptual vocabulary. TARA bounds from conservative clinical thresholds. Slower but higher humanitarian impact.
+
+**Both paths use the same stack:** Staves → Forge → TARA bounds → NSP → electrodes → QI validation. The only difference is the rendering vocabulary source.
+
+#### Correction: Framing
+
+This is NOT "study Kevin's brain." It's a proper research program: volunteer cohort recruitment, IRB approval, control groups, peer review. Qinnovate leads with security first — TARA safety bounds, NSP secure delivery, QI validation must exist BEFORE any visual cortex stimulation at scale. Kevin is a founder who understands the problem firsthand, not "the test subject."
+
+**Status:** Research program concept. Requires neuroscience collaborators, IRB, fMRI/EEG access.
 
 ---
 
-### Entry R-006: Partnership Strategy — OpenBCI + Ethics Foundation
+### Entry R-006: Partnership Strategy — OpenBCI + Industry Collaboration + Ethics Foundation
 
-**Date:** 2026-02-10  |  **Status:** Partnership outreach phase
+**Date:** 2026-02-10
+**Context:** Kevin identified OpenBCI as actively recruiting research participants with perfect vision, and proposed partnering with BCI companies to accelerate the research while maintaining ethical standards
+**AI Systems:** Claude Opus 4.6 (partnership strategy)
+**Human Decision:** Kevin insisted on ethics-first approach: "my moral compass of ETHICS is ensured. Security and data privacy is very important"
 
-OpenBCI recruiting perfect-vision participants = entry point for synesthesia cohort. Partner strategy: Qinnovate = security layer everyone integrates. Ethics as architectural constraints: NSP encrypts all neural data (PQ), TARA bounds every stimulation, QI detects distress in real-time, Apache 2.0 for full auditability. "Trust is verified, not assumed."
+#### OpenBCI Partnership Concept
+
+OpenBCI is recruiting participants with perfect vision for visual processing research. This is the exact entry point for the synesthesia cohort (R-005). Partnership: OpenBCI brings hardware (Galea headset, electrode arrays), active IRB protocols, participant pool, and lab infrastructure. Qinnovate brings TARA safety specification, NSP security, QI validation, and the synesthesia cohort concept.
+
+#### Broader Partner Strategy
+
+| Partner | They bring | We bring | Goal |
+|---------|-----------|----------|------|
+| OpenBCI | Hardware, participants, lab | TARA safety spec, NSP | Visual cortex mapping |
+| Neurable | Consumer BCI headphones | NSP wire protocol | Secure consumer connectivity |
+| Kernel | Flow headset, imaging | QIF threat framework | Enterprise neural data security |
+| Paradromics | High-bandwidth implant | NSP + Staves + Scribe | Implant-grade secure rendering |
+
+**Qinnovate's role:** The security layer everyone integrates. HTTPS of BCIs — every company needs it, nobody wants to build it themselves.
+
+#### Ethics as Foundation (Non-Negotiable)
+
+Kevin's ethical requirements are architectural constraints, not aspirations:
+
+1. **Data privacy:** NSP encrypts all neural data with post-quantum crypto. Never exists in plaintext outside secure channel. Consent cryptographically enforced, not just form-signed.
+2. **TARA as ethical guardrail:** Every stimulation pattern checked against therapeutic bounds. Dual-use risks catalogued upfront, prevention built into compiler.
+3. **QI closed-loop:** System detects distress/anomalous response and stops automatically. Real-time, not clinician-noticed.
+4. **Open standards:** Apache 2.0. Everyone can audit the safety spec. Trust is verified, not assumed.
+
+The pitch to partners: "We're not asking you to trust us. We're giving you a framework where trust is mathematically verified."
+
+**Status:** Partnership outreach phase. OpenBCI is first target. Denning/Kohno meeting may surface additional collaborators.
+
+#### Dependencies
+
+- R-003 (TARA safety spec — the value proposition we bring to partners)
+- R-005 (synesthesia cohort — the research program partners would participate in)
+- Email to Denning/Kohno (may connect to visual prosthesis researchers)
+- QIF governance docs (neuroethics standards for research protocols)
 
 ---
 
-### Entry R-007: Neural Environment Mapping — RF Techniques as Medical Calibration (PRIMARY USE CASE)
+### Entry R-007: Neural Environment Mapping — Adversarial RF Techniques as Medical Calibration
 
-**Date:** 2026-02-10  |  **Status:** Conceptual. Designated primary QIF use case.
+**Date:** 2026-02-10
+**Context:** Kevin connected adversarial Bluetooth/WiFi environment mapping to medical neural mapping: "we can leverage the same way adversaries can use bluetooth and wifi to map out an environment. We just need something broadcasting securely just for medical use-cases like this! NSP!!!!"
+**AI Systems:** Claude Opus 4.6 (connection analysis, TARA dual-use mapping)
+**Human Decision:** Kevin identified the RF-to-neural mapping isomorphism and NSP as the security boundary. Designated this as the PRIMARY use-case example for QIF.
 
-Adversarial RF mapping (Bluetooth/WiFi through walls) and medical neural mapping (calibration pulses through tissue) are the same technique: send signal, measure response, build spatial model. Same physics, same math (inverse problems, tomography), different medium and intent. TARA dual-use at its purest — the attack (unauthorized neural reconnaissance) and therapy (visual prosthesis calibration) share identical mechanisms. The boundary is consent + NSP encryption. Neural mapping data is the most sensitive biometric possible (brain topology, irrevocable). NSP enforces: PQ encryption at generation, authenticated sessions, session resumption without retransmitting full model, forward secrecy. Calibration map becomes per-patient Forge compiler config — TARA bounds checked against individual thresholds. Cross-log: QIF #54, Runemate R-007, NSP N-001.
+#### Discovery
+
+Adversarial RF environment mapping and medical neural environment mapping are the same technique applied to different media:
+
+| Dimension | Adversarial RF Mapping | Medical Neural Mapping |
+|-----------|----------------------|----------------------|
+| **Medium** | RF through walls/structures | Electrical signals through neural tissue |
+| **Method** | Send signal, measure reflection/attenuation/timing | Send calibration pulse, measure neural response (amplitude, latency, propagation) |
+| **Output** | Spatial model of physical environment | Retinotopic/connectivity model of electrode-tissue interface |
+| **Math** | Inverse problems, signal propagation, tomography | Same — inverse problems, signal propagation, neural tomography |
+| **Intent** | Unauthorized reconnaissance | Authorized calibration for visual prosthesis |
+| **Data sensitivity** | Building layout (moderate) | Brain topology (extreme — irrevocable biometric) |
+
+This is TARA dual-use at its purest. The attack technique (mapping neural architecture without consent = surveillance) has a direct therapeutic analog (calibration for visual prosthesis = essential medical procedure). Same mechanism, same physics, same math. The boundary is consent, authorization, and encryption.
+
+#### Why NSP Is the Enforcement Layer
+
+Neural mapping data — electrode response profiles, per-patient calibration models, visual cortex topology — is the most sensitive biometric data that exists. Brain topology cannot be reset. If leaked, an adversary can craft targeted stimulation that bypasses generic safety bounds.
+
+NSP enforces:
+1. **Encryption at generation:** PQ crypto the instant mapping data is captured
+2. **Authenticated sessions:** Only authorized clinician + authorized device
+3. **Session resumption:** Remapping after reconnect without retransmitting full model (PQKC gap #1)
+4. **Forward secrecy:** Historical mapping data stays encrypted even if current key compromised
+
+#### Connection to Runemate Pipeline
+
+Solves the calibration problem for both research paths (R-005):
+- **Synesthesia cohort:** Probe → measure cross-modal response → build rendering vocabulary. The mapping IS the experiment.
+- **Congenital blindness:** Stimulate → observe → calibrate → build per-patient perceptual map.
+- **Forge compiler (R-003):** Calibration map becomes per-patient compiler configuration. TARA bounds checked against THIS patient's thresholds, not generic values.
+
+#### Primary Use Case Designation
+
+Kevin designated this as the PRIMARY use-case example for all QIF materials. Reasoning:
+- Instant comprehension (everyone knows WiFi/Bluetooth mapping)
+- Demonstrates TARA dual-use in one sentence
+- Makes NSP necessity visceral (brain topology = permanent, irrevocable)
+- Connects to real products and active research (OpenBCI, visual prosthetics)
+- Testable with existing hardware today
+
+#### Cross-Log Entry
+
+This insight spans three specifications:
+- **QIF (Entry #54):** TARA dual-use classification, new registry technique
+- **Runemate (this entry R-007):** Calibration pipeline architecture
+- **NSP (N-001):** Protocol requirements for calibration data security
+
+**Status:** Conceptual. Designated primary QIF use case.
+**Dependencies:** R-003, R-005, R-006, QIF Entry #54, NSP N-001, PQKC gap #1.
 
 ---
 
