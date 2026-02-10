@@ -1,33 +1,62 @@
-Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
-
+Qinnovate Multi-License Structure
 Copyright (c) 2026 Kevin Qi / Qinnovate
 
-This work is licensed under the Creative Commons
-Attribution-NonCommercial-NoDerivatives 4.0 International License.
+This repository contains multiple types of content under different licenses:
 
-You are free to:
+1. FRAMEWORK SPECIFICATIONS (CC BY-SA 4.0)
+   QIF hourglass architecture, NSP protocol specification, TARA schema
+   definitions, QNIS scoring methodology, hourglass band definitions.
+   License: https://creativecommons.org/licenses/by-sa/4.0/
+   You may use, adapt, and implement freely with attribution.
+   Modifications must be shared under the same terms.
 
-  Share — copy and redistribute the material in any medium or format
+2. THREAT REGISTRY DATA (CC BY-NC-SA 4.0)
+   TARA technique entries, severity scores, therapeutic/diagnostic/governance
+   projections, attack chain mappings.
+   License: https://creativecommons.org/licenses/by-nc-sa/4.0/
+   Researchers may extend and publish for non-commercial purposes.
+   Commercial use requires a separate license from Qinnovate.
 
-Under the following terms:
+3. BLOG POSTS & EDITORIAL CONTENT (CC BY 4.0)
+   All blog posts, case studies, and editorial content.
+   License: https://creativecommons.org/licenses/by/4.0/
+   Share, quote, excerpt, translate, republish freely — including
+   commercially — with attribution to Qinnovate.
 
-  Attribution — You must give appropriate credit, provide a link to
-  the license, and indicate if changes were made. You may do so in
-  any reasonable manner, but not in any way that suggests the licensor
-  endorses you or your use.
+4. QIF WHITEPAPER (CC BY-ND 4.0)
+   The QIF whitepaper and formal technical publications.
+   License: https://creativecommons.org/licenses/by-nd/4.0/
+   Share and cite freely — including commercially — with attribution.
+   Must be shared in original, unmodified form.
 
-  NonCommercial — You may not use the material for commercial purposes.
+5. WEBSITE CODE (MIT License)
+   Astro components, layouts, styling, build configuration.
+   See MIT license terms below.
 
-  NoDerivatives — If you remix, transform, or build upon the material,
-  you may not distribute the modified material without explicit written
-  permission from the copyright holder.
+For commercial licensing of the threat registry data or other permissions
+not covered above, contact: kevin@qinnovate.com
 
-No additional restrictions — You may not apply legal terms or
-technological measures that legally restrict others from doing
-anything the license permits.
+Full licensing details: https://qinnovate.com/licensing/
 
-For commercial licensing, derivative works, or other permissions
-not covered by this license, contact: kevin@qinnovate.com
+---
 
-Full license text:
-https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
+MIT License (Website Code)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the website source code (Astro components, layouts, styling, and build
+configuration) in this repository, to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject
+to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

@@ -3,47 +3,47 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
   "statistics": {
-    "total_techniques": 65,
+    "total_techniques": 71,
     "total_tactics": 11,
     "total_domains": 7,
     "by_tactic": {
-      "QIF-B.EV": 4,
+      "QIF-B.EV": 5,
       "QIF-B.IN": 5,
       "QIF-C.EX": 11,
-      "QIF-C.IM": 4,
-      "QIF-D.HV": 8,
+      "QIF-C.IM": 5,
+      "QIF-D.HV": 9,
       "QIF-E.RD": 6,
       "QIF-M.SV": 9,
-      "QIF-N.IJ": 5,
-      "QIF-N.MD": 3,
+      "QIF-N.IJ": 6,
+      "QIF-N.MD": 5,
       "QIF-N.SC": 3,
       "QIF-P.DS": 7
     },
     "by_status": {
       "CONFIRMED": 14,
-      "DEMONSTRATED": 18,
-      "EMERGING": 14,
-      "THEORETICAL": 19
+      "DEMONSTRATED": 19,
+      "EMERGING": 16,
+      "THEORETICAL": 22
     },
     "by_severity": {
-      "critical": 17,
-      "high": 34,
+      "critical": 20,
+      "high": 37,
       "low": 1,
       "medium": 13
     },
     "by_ui_category": {
       "CI": 8,
-      "DM": 13,
+      "DM": 15,
       "DS": 7,
-      "EX": 11,
+      "EX": 12,
       "PE": 8,
-      "PS": 5,
+      "PS": 7,
       "SE": 4,
-      "SI": 9
+      "SI": 10
     },
     "by_qnis_severity": {
-      "critical": 1,
-      "high": 42,
+      "critical": 3,
+      "high": 46,
       "low": 4,
       "medium": 18
     }
@@ -2573,6 +2573,263 @@
           "QIF-P.DS"
         ]
       }
+    },
+    {
+      "id": "QIF-T0066",
+      "attack": "Slow drift / boiling frog (adiabatic phase space manipulation)",
+      "tactic": "QIF-B.EV",
+      "bands": "I0→N1–N7",
+      "band_ids": [
+        "I0",
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "coupling": null,
+      "access": "RESTRICTED",
+      "classical": "Partial (traditional IDS slow-rate evasion)",
+      "quantum": "Enhanced (phase space trajectory tracking via QI detects curvature changes invisible to threshold monitors)",
+      "sources": [
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience); Strogatz 2015 (Nonlinear Dynamics and Chaos); Breakspear 2017 (Dynamic models of large-scale brain activity, Nature Neuroscience)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "DM",
+      "notes": "Manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0045), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2061",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:L/S:C/R:S/VC:E/NE:G/E:U",
+        "score": 6.8,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0045"
+        ],
+        "secondary_tactics": [
+          "QIF-N.MD",
+          "QIF-C.IM"
+        ]
+      }
+    },
+    {
+      "id": "QIF-T0067",
+      "attack": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
+      "tactic": "QIF-N.IJ",
+      "bands": "S1→I0→N1–N7",
+      "band_ids": [
+        "S1",
+        "I0",
+        "N1",
+        "N3",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "coupling": null,
+      "access": "PUBLIC",
+      "classical": "Partial (replay attacks exist in traditional auth)",
+      "quantum": "Enhanced (phase space attractor validation, challenge-response hysteresis, biological TLS)",
+      "sources": [
+        "Martinovic et al. 2012 (On the Feasibility of Side-Channel Attacks with BCIs, USENIX Security); Marcel & Millan 2007 (Person authentication using brainwaves); Zhang et al. 2024 (ATGAN attention-based temporal GAN for EEG); Hartmann et al. 2025 (EEG-GAN toolkit); Fosch-Villaronga et al. 2023 (Brain-Hack: RF injection across BCI types); Frank et al. 2017 (Subliminal probing, NDSS); Chen et al. 2024 (Professor X backdoor); Bonaci et al. 2014 (Neurofeedback hijacking)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "critical",
+      "ui_category": "SI",
+      "notes": "Replay recorded or GAN-synthesized neural signals that reproduce the dynamical system trajectory of legitimate brain activity. 20 verified attack methods exist (2012-2025) spanning RF injection (Brain-Hack), GAN synthesis (ATGAN, EEG-GAN), template replay, subliminal probing (66.7% success), and adversarial ML (Professor X backdoors, universal perturbations). Current BCI systems have 0% detection rate against sophisticated replays. CRITICAL DUAL-USE: The same replay physics enables therapeutic applications (vision restoration, sensory prosthetics). Defense: Biological TLS validation (spatial dipole patterns, H-H temporal compliance, 1/f scaling, microstate compliance, challenge-response), phase space attractor geometry validation. Priority case study per Kevin. Derivation Log Entries 45-46.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2062",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:W/AC:L/PR:N/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:A",
+        "score": 9.4,
+        "severity": "critical"
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0003",
+          "QIF-T0004",
+          "QIF-T0015"
+        ],
+        "secondary_tactics": [
+          "QIF-B.EV",
+          "QIF-N.MD",
+          "QIF-C.EX"
+        ]
+      }
+    },
+    {
+      "id": "QIF-T0068",
+      "attack": "Bifurcation forcing (critical parameter manipulation to trigger neural state transitions)",
+      "tactic": "QIF-N.MD",
+      "bands": "I0→N1–N5",
+      "band_ids": [
+        "I0",
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5"
+      ],
+      "coupling": null,
+      "access": "RESTRICTED",
+      "classical": "None (no traditional cybersecurity equivalent)",
+      "quantum": "Native (bifurcation detection via critical slowing down — universal precursor with no baseline required)",
+      "sources": [
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience — bifurcation classification); Breakspear 2017 (Dynamic models of large-scale brain activity); Scheffer et al. 2009 (Early-warning signals for critical transitions, Nature); Maturana et al. 2020 (Critical slowing down as biomarker for seizure); Jirsa et al. 2014 (On the nature of seizure dynamics, Brain)"
+      ],
+      "status": "EMERGING",
+      "severity": "critical",
+      "ui_category": "PS",
+      "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting→seizure, sleep→wake, focused→confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) — a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2063",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:M/PR:H/UI:N/BI:C/CI:C/II:H/S:C/R:D/VC:C/NE:H/E:P",
+        "score": 9.0,
+        "severity": "critical"
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0066"
+        ],
+        "secondary_tactics": [
+          "QIF-P.DS",
+          "QIF-N.IJ"
+        ]
+      }
+    },
+    {
+      "id": "QIF-T0069",
+      "attack": "Separatrix leakage (meta-biometric extraction from dynamical transition observations)",
+      "tactic": "QIF-D.HV",
+      "bands": "N3–N7→I0→S1",
+      "band_ids": [
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7",
+        "I0",
+        "S1"
+      ],
+      "coupling": null,
+      "access": "LICENSED",
+      "classical": "Partial (side-channel attacks exist but not via dynamical transitions)",
+      "quantum": "Enhanced (phase space reconstruction reveals transition boundaries unique to individual neural dynamics)",
+      "sources": [
+        "Finn et al. 2015 (Functional connectome fingerprinting, Nature Neuroscience); Martinovic et al. 2012 (P300 side-channel, USENIX Security); Da Silva Castanheira et al. 2021 (Individual brain charting, NeuroImage); Izhikevich 2007 (separatrix geometry in neural models)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "EX",
+      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2064",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:U",
+        "score": 6.5,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0009",
+          "QIF-T0012"
+        ],
+        "secondary_tactics": [
+          "QIF-N.SC",
+          "QIF-E.RD"
+        ]
+      }
+    },
+    {
+      "id": "QIF-T0070",
+      "attack": "Integrator/resonator type switching (tonic excitability manipulation)",
+      "tactic": "QIF-N.MD",
+      "bands": "I0→N1–N4",
+      "band_ids": [
+        "I0",
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ],
+      "coupling": null,
+      "access": "RESTRICTED",
+      "classical": "None (no traditional cybersecurity equivalent)",
+      "quantum": "Native (QI detects computational mode shifts via firing pattern analysis — integrator vs resonator signatures are distinct)",
+      "sources": [
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience — integrator/resonator classification); Prescott et al. 2008 (Biophysical basis for three distinct dynamical mechanisms of action potential initiation, PLoS Computational Biology)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "PS",
+      "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization — effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2065",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:H/PR:H/UI:N/BI:H/CI:H/II:H/S:C/R:D/VC:E/NE:G/E:U",
+        "score": 7.5,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0068"
+        ],
+        "secondary_tactics": [
+          "QIF-P.DS",
+          "QIF-N.IJ"
+        ]
+      }
+    },
+    {
+      "id": "QIF-T0071",
+      "attack": "Baseline adaptation poisoning (re-enrollment window exploitation)",
+      "tactic": "QIF-C.IM",
+      "bands": "S1→S2→I0",
+      "band_ids": [
+        "S1",
+        "S2",
+        "I0"
+      ],
+      "coupling": null,
+      "access": "LICENSED",
+      "classical": "Partial (credential stuffing during password reset)",
+      "quantum": "Enhanced (baseline-free biological TLS eliminates the attack surface entirely — no baselines to poison)",
+      "sources": [
+        "Bigdely-Shamlo et al. 2015 (Brain activity-based image classification, Journal of Neural Engineering); Arias-Cabarcos et al. 2021 (EEG biometric system attacks); Debie et al. 2020 (Cross-session/cross-device replay)"
+      ],
+      "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "DM",
+      "notes": "Exploit the re-enrollment or adaptive baseline update window in BCI authentication systems. When a BCI recalibrates (daily calibration, post-seizure reset, firmware update, drift correction), inject adversarial signals during the enrollment period to corrupt the stored baseline. Three windows: (1) initial enrollment, (2) periodic recalibration, (3) drift-triggered adaptation. Once the baseline is poisoned, all subsequent authentication is compromised. This is the fundamental vulnerability that motivated QIF's baseline-free 'Biological TLS' architecture: by validating signals against universal biological physics (spatial dipole patterns, H-H compliance, 1/f scaling, microstates) rather than individual baselines, the entire attack surface is eliminated. Defense: Biological TLS validation (no baselines needed), multi-session enrollment consistency checks, anomaly detection during calibration windows. Derivation Log Entry 46.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2066",
+      "qnis": {
+        "version": "1.0",
+        "vector": "QNIS:1.0/AV:P/AC:M/PR:L/UI:R/BI:H/CI:H/II:H/S:C/R:S/VC:E/NE:G/E:P",
+        "score": 7.2,
+        "severity": "high"
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0066",
+          "QIF-T0067"
+        ],
+        "secondary_tactics": [
+          "QIF-B.EV",
+          "QIF-B.IN"
+        ]
+      }
     }
   ],
   "deprecated": [
@@ -2589,7 +2846,7 @@
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "QNIS v1.0 (QIF Neural Impact Score)",
-  "generated": "2026-02-08T08:48:14Z",
+  "generated": "2026-02-09T04:30:00Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",

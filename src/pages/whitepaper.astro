@@ -259,7 +259,10 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">3.1 BCI Security Literature</h3>
         <div class="prose">
           <p>
-            Martinovic et al. (2012) demonstrated that commercial EEG-based BCIs could be exploited as side-channel attack vectors <a href="#ref-51">[51]</a>. Bonaci et al. (2014) showed that subliminal stimuli embedded in BCI applications could extract private information without the user&rsquo;s awareness <a href="#ref-52">[52]</a>. Frank et al. (2017) provided the first systematic threat taxonomy for BCI systems <a href="#ref-53">[53]</a>. Bernal et al. (2022) cataloged BCI security vulnerabilities across wireless protocols, firmware, and signal processing pipelines, yet none address quantum-scale phenomena at the electrode-tissue boundary <a href="#ref-54">[54]</a>. Spectral analysis &mdash; specifically the Fourier transform and its derivatives &mdash; is already foundational in network intrusion detection, side-channel analysis, and adversarial ML; QIF extends this paradigm to the neural-synthetic boundary, where frequency-domain decomposition becomes a security primitive (Section 5.4).
+            Denning, Matsuoka and Kohno (2009) published the foundational paper &ldquo;Neurosecurity: Security and Privacy for Neural Devices&rdquo; in <em>Neurosurgical Focus</em>, coining the term &ldquo;neurosecurity&rdquo; and establishing BCI security as a formal research discipline <a href="#ref-83">[83]</a>. Martinovic et al. (2012) provided the first experimental demonstration, showing that commercial EEG-based BCIs could be exploited as side-channel attack vectors to extract private information from involuntary brain responses <a href="#ref-51">[51]</a>. Pycroft et al. (2016) coined &ldquo;brainjacking&rdquo; and enumerated 9 attack techniques specific to implanted neurostimulators <a href="#ref-84">[84]</a>. Bonaci et al. (2014) showed that subliminal stimuli embedded in BCI applications could extract private information without the user&rsquo;s awareness <a href="#ref-52">[52]</a>. Landau, Puzis and Nissim (2020) mapped attacks across BCI and communication layers in <em>ACM Computing Surveys</em> <a href="#ref-85">[85]</a>. Frank et al. (2017) provided the first systematic threat taxonomy for BCI systems <a href="#ref-53">[53]</a>. Bernal et al. (2022) built the most comprehensive taxonomy to date, cataloging BCI security vulnerabilities across wireless protocols, firmware, and signal processing pipelines <a href="#ref-54">[54]</a>.
+          </p>
+          <p>
+            This body of work established BCI security as a legitimate research area. However, the existing literature exhibits three gaps. First, no unified taxonomy organizes BCI threats the way MITRE ATT&amp;CK organizes traditional cybersecurity threats &mdash; techniques remain scattered across domain-specific papers. Second, none address quantum-scale phenomena at the electrode-tissue boundary. Third, none map the therapeutic dimension: the observation that many attack mechanisms share the same physics as established medical therapies. QIF addresses all three gaps. Spectral analysis &mdash; specifically the Fourier transform and its derivatives &mdash; is already foundational in network intrusion detection, side-channel analysis, and adversarial ML; QIF extends this paradigm to the neural-synthetic boundary, where frequency-domain decomposition becomes a security primitive (Section 5.4).
           </p>
         </div>
 
@@ -1243,9 +1246,78 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         </div>
       </section>
 
+      <!-- 6.7 TARA -->
+      <section id="tara" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.7 TARA &mdash; Therapeutic Atlas of Risks and Applications</h2>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-6">Dual-use mechanism registry bridging security and medicine</p>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.7.1 The Dual-Use Observation</h3>
+        <div class="prose">
+          <p>
+            A systematic audit of the {totalTechniques}-technique registry revealed an unexpected pattern: the physical mechanisms underlying many attack techniques are identical to the mechanisms underlying established medical therapies. Signal injection (QIF-T0001) uses the same electrode current delivery as deep brain stimulation (DBS), which treats Parkinson&rsquo;s disease, essential tremor, dystonia, OCD, and epilepsy in over 160,000 patients worldwide <a href="#ref-86">[86]</a>. Neural entrainment manipulation uses the same frequency-locking physics as therapeutic transcranial alternating current stimulation (tACS). Bifurcation forcing operates in the same dynamical parameter space as controlled DBS that shifts neural dynamics toward a healthy attractor state.
+          </p>
+          <p>
+            The preliminary breakdown: <strong>35 to 40 techniques</strong> where the attack mechanism has a published therapeutic counterpart (electrode stimulation, entrainment, neuromodulation), roughly <strong>10 ambiguous cases</strong> where the attack vector is digital but the payload affects tissue, and <strong>18 to 20 pure-silicon techniques</strong> (firmware, supply chain, ML model attacks) with no therapeutic analog. Same electrode. Same current. Same physics. Different intent, consent, and oversight.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.7.2 Mechanism-First Architecture</h3>
+        <div class="prose">
+          <p>
+            TARA reorganizes the threat registry by <strong>physical mechanism</strong> rather than by adversarial intent. Each mechanism entry carries four dimensional projections:
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4 my-6">
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid #ef4444;">
+            <span class="font-semibold">Security Projection</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">Attack technique, tactic, severity (QNIS), detection methods, evidence status. The view a security researcher needs.</p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid #10b981;">
+            <span class="font-semibold">Clinical Projection</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">Therapeutic modality, conditions treated, FDA approval status, named devices, evidence level. The view a clinician needs.</p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid #06b6d4;">
+            <span class="font-semibold">Diagnostic Projection</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">Clinical observation use: cortical stimulation mapping, EEG monitoring, seizure detection. Null if no diagnostic application exists.</p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid #8b5cf6;">
+            <span class="font-semibold">Governance Projection</span>
+            <p class="text-sm text-[var(--color-text-muted)] mt-1">Consent requirements, amplitude ceilings, charge density limits, real-time monitoring mandates, regulatory classification, applicable NSP layers.</p>
+          </div>
+        </div>
+        <div class="prose">
+          <p>
+            This architecture draws structural inspiration from biological databases: the <a href="https://www.genome.jp/kegg/" target="_blank">KEGG database</a> maps genes to pathways to diseases to drugs (four views, one substrate), the <a href="http://geneontology.org/" target="_blank">Gene Ontology</a> maps proteins across three orthogonal axes, and MITRE D3FEND uses Digital Artifacts as the bridge between offense and defense. TARA applies the same principle to neural interfaces: the mechanism is the Rosetta Stone that translates between communities that do not currently speak to each other.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.7.3 Framing Principle</h3>
+        <div class="prose">
+          <p>
+            <strong>Therapeutic use is the default. Adversarial use is the deviation.</strong> This follows the IAEA model for nuclear materials (peaceful use is presumed; weapons use is the exception) and the DURC framework for biological research (beneficial use is presumed; misapplication is governed). The governance projection on every TARA entry specifies the safeguards required to keep a mechanism in the therapeutic column.
+          </p>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.7.4 Regulatory Context</h3>
+        <div class="prose">
+          <p>
+            In June 2025, the FDA finalized <a href="https://www.federalregister.gov/documents/2025/06/27/2025-11669/cybersecurity-in-medical-devices-quality-system-considerations-and-content-of-premarket-submissions" target="_blank">Section 524B of the FD&amp;C Act</a> <a href="#ref-87">[87]</a>, which legally requires cybersecurity for any &ldquo;cyber device&rdquo;: medical devices with software that can connect to the internet. Every wireless BCI on the market or in clinical trials falls under this mandate. Manufacturers must submit cybersecurity plans, software bills of materials (SBOMs), and vulnerability management processes. Non-compliance means denied market authorization.
+          </p>
+          <p>
+            Section 524B is a mandate, not a map. It tells manufacturers they need cybersecurity but does not specify BCI-specific threats, how neural signals differ from network packets, or what happens when the same physical mechanism constitutes both an attack and a therapy. QIF provides the framework. NSP provides the protocol. QNIS provides the scoring. TARA provides the atlas that maps every mechanism across all four dimensions simultaneously, giving manufacturers, clinicians, regulators, and engineers a shared language for securing neural devices.
+          </p>
+        </div>
+      </section>
+
       <!-- 7. NSP -->
       <section id="nsp" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">7. Neural Sensory Protocol (NSP)</h2>
+
+        <div class="prose mb-8">
+          <p>
+            NSP is not only a security protocol. It is the trust layer that enables therapeutic BCI deployment. Without a validated, physics-based integrity protocol built into the device, no regulator will approve consumer neural stimulation. NSP provides that foundation: a protocol analogous to TLS for the web, but designed for the unique physics of the electrode-tissue interface. Where TLS validates the integrity of data in transit between servers, NSP validates the integrity of signals crossing the boundary between silicon and biology.
+          </p>
+        </div>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">7.1 The HNDL Threat</h3>
         <div class="prose">
