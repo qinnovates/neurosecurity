@@ -211,6 +211,7 @@ import Nav from '../../components/Nav.astro';
 </div>
 
 <script is:inline>
+var vizStopped = false;
 const C = document.getElementById('viz');
 const ctx = C.getContext('2d');
 const tooltip = document.getElementById('tooltip');
@@ -644,6 +645,7 @@ function drawEquation(t) {
 // -- MAIN LOOP --
 var lastTs = 0, frame = 0;
 function tick(ts) {
+  if (vizStopped) return;
   requestAnimationFrame(tick);
   var dt = Math.min((ts - lastTs) / 1000, 0.05) * speed;
   lastTs = ts; time += dt; frame++;
@@ -773,6 +775,18 @@ document.getElementById('atk-reset').addEventListener('click', function() {
   attackBoost.sigma_phi = 0; attackBoost.sigma_gamma = 0; attackBoost.qi_boost = 0; attackBoost.qe_suppress = 0; attackBoost.qt_boost = 0;
   Object.assign(w, { w1: 1, w2: 1, w3: 1, w4: 1 }); Object.assign(psi, { p1: 1, p2: 1, p3: 1 }); i0GateAnim = 0;
   document.querySelectorAll('#sidebar input[type=range][data-key]').forEach(function(el) { el.value = 1; el.nextElementSibling.textContent = '1.0'; });
+});
+
+// -- CLEANUP on View Transition navigation --
+document.addEventListener('astro:before-swap', function() {
+  vizStopped = true;
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
+  document.documentElement.style.background = '';
+  document.body.style.background = '';
+  document.body.style.height = '';
+  document.body.style.margin = '';
+  document.body.style.padding = '';
 });
 </script>
 

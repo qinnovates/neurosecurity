@@ -1,7 +1,8 @@
 /**
- * QIF Threat Data — adapter over shared/threat-registry.json (v3.0)
+ * QIF Threat Data — adapter over shared/threat-registry.json (v4.0)
  * Single source of truth: all techniques from the QIF Locus Taxonomy.
  * Scoring: QNIS v1.0 (QIF Neural Impact Score)
+ * TARA: Therapeutic Atlas of Risks and Applications (four-projection overlay)
  */
 
 import { HOURGLASS_BANDS } from './qif-constants';
@@ -28,12 +29,51 @@ export const THREAT_DOMAINS = (registry as any).domains ?? [];
 /** QNIS specification */
 export const QNIS_SPEC = (registry as any).qnis_spec ?? null;
 
+/** TARA specification */
+export const TARA_SPEC = (registry as any).tara_spec ?? null;
+
 export type CategoryId = typeof THREAT_CATEGORIES[number]['id'];
 export type BandId = typeof HOURGLASS_BANDS[number]['id'];
 export type Severity = 'critical' | 'high' | 'medium' | 'low';
 export type QnisSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
 export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING';
 export type AccessLevel = 'PUBLIC' | 'LICENSED' | 'RESTRICTED' | 'CLASSIFIED' | null;
+export type DualUse = 'confirmed' | 'probable' | 'possible' | 'silicon_only';
+export type ConsentTier = 'standard' | 'enhanced' | 'IRB' | 'prohibited';
+export type FdaStatus = 'cleared' | 'approved' | 'breakthrough' | 'investigational' | 'none' | 'N/A';
+export type EvidenceLevel = 'meta_analysis' | 'RCT' | 'cohort' | 'case_series' | 'preclinical' | 'theoretical' | 'N/A';
+
+export interface TaraClinical {
+  therapeutic_analog: string;
+  conditions: string[];
+  fda_status: FdaStatus;
+  evidence_level: EvidenceLevel;
+  safe_parameters: string;
+  sources: string[];
+}
+
+export interface TaraGovernance {
+  consent_tier: ConsentTier;
+  safety_ceiling: string;
+  monitoring: string[];
+  regulations: string[];
+  data_classification: string;
+}
+
+export interface TaraEngineering {
+  coupling: string[];
+  parameters: Record<string, string>;
+  hardware: string[];
+  detection: string;
+}
+
+export interface TaraProjection {
+  mechanism: string;
+  dual_use: DualUse;
+  clinical: TaraClinical | null;
+  governance: TaraGovernance;
+  engineering: TaraEngineering;
+}
 
 export interface QnisScore {
   version: string;
@@ -75,6 +115,8 @@ export interface ThreatVector {
   crossRefs: { related_ids?: string[]; secondary_tactics?: string[] } | null;
   /** Academic sources */
   sources: string[];
+  /** TARA projection data (clinical, governance, engineering overlays) */
+  tara: TaraProjection | null;
 }
 
 /** Transform registry techniques → ThreatVector[] */
@@ -95,6 +137,7 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   qnis: t.qnis ?? { version: '1.0', vector: '', score: 0, severity: 'none' },
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
+  tara: t.tara ?? null,
 }));
 
 /** Severity color map */
@@ -192,4 +235,105 @@ export function getTacticsWithCounts() {
     description: t.description as string,
     count: THREAT_VECTORS.filter(v => v.tactic === t.id).length,
   }));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TARA — Therapeutic Atlas of Risks and Applications
+// Four-projection overlay: Security (existing), Clinical, Governance, Engineering
+// ═══════════════════════════════════════════════════════════════
+
+/** Dual-use classification colors */
+export const DUAL_USE_COLORS = {
+  confirmed: { bg: 'rgba(16, 185, 129, 0.15)', border: 'rgba(16, 185, 129, 0.3)', text: '#10b981' },
+  probable: { bg: 'rgba(6, 182, 212, 0.15)', border: 'rgba(6, 182, 212, 0.3)', text: '#06b6d4' },
+  possible: { bg: 'rgba(139, 92, 246, 0.15)', border: 'rgba(139, 92, 246, 0.3)', text: '#8b5cf6' },
+  silicon_only: { bg: 'rgba(148, 163, 184, 0.15)', border: 'rgba(148, 163, 184, 0.3)', text: '#94a3b8' },
+} as const;
+
+/** FDA status colors */
+export const FDA_STATUS_COLORS = {
+  cleared: { bg: 'rgba(16, 185, 129, 0.12)', text: '#10b981' },
+  approved: { bg: 'rgba(34, 197, 94, 0.12)', text: '#22c55e' },
+  breakthrough: { bg: 'rgba(6, 182, 212, 0.12)', text: '#06b6d4' },
+  investigational: { bg: 'rgba(245, 158, 11, 0.12)', text: '#f59e0b' },
+  none: { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' },
+  'N/A': { bg: 'rgba(100, 116, 139, 0.12)', text: '#64748b' },
+} as const;
+
+/** Consent tier colors */
+export const CONSENT_TIER_COLORS = {
+  standard: { bg: 'rgba(34, 197, 94, 0.12)', text: '#22c55e' },
+  enhanced: { bg: 'rgba(245, 158, 11, 0.12)', text: '#f59e0b' },
+  IRB: { bg: 'rgba(239, 68, 68, 0.12)', text: '#ef4444' },
+  prohibited: { bg: 'rgba(127, 29, 29, 0.2)', text: '#ef4444' },
+} as const;
+
+/** Filter: techniques with clinical therapeutic analogs */
+export function getClinicalTechniques(): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.tara?.clinical != null);
+}
+
+/** Filter: silicon-only techniques (no therapeutic analog) */
+export function getSiliconOnlyTechniques(): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.tara?.dual_use === 'silicon_only');
+}
+
+/** Filter: techniques by dual-use classification */
+export function getTechniquesByDualUse(classification: DualUse): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.tara?.dual_use === classification);
+}
+
+/** Filter: techniques by FDA status of their therapeutic analog */
+export function getTechniquesByFdaStatus(status: FdaStatus): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.tara?.clinical?.fda_status === status);
+}
+
+/** Filter: techniques by consent tier */
+export function getTechniquesByConsentTier(tier: ConsentTier): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.tara?.governance.consent_tier === tier);
+}
+
+/** Filter: techniques by coupling mechanism */
+export function getTechniquesByCoupling(mechanism: string): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.tara?.engineering.coupling.includes(mechanism));
+}
+
+/** Filter: techniques that treat a specific condition */
+export function getTechniquesByCondition(condition: string): ThreatVector[] {
+  const lc = condition.toLowerCase();
+  return THREAT_VECTORS.filter(t =>
+    t.tara?.clinical?.conditions.some(c => c.toLowerCase().includes(lc))
+  );
+}
+
+/** TARA statistics summary */
+export function getTaraStats() {
+  const dualUse: Record<DualUse, number> = { confirmed: 0, probable: 0, possible: 0, silicon_only: 0 };
+  const fdaStatus: Record<FdaStatus, number> = { cleared: 0, approved: 0, breakthrough: 0, investigational: 0, none: 0, 'N/A': 0 };
+  const consentTier: Record<ConsentTier, number> = { standard: 0, enhanced: 0, IRB: 0, prohibited: 0 };
+  const conditions = new Map<string, number>();
+  let clinicalCount = 0;
+
+  for (const t of THREAT_VECTORS) {
+    if (!t.tara) continue;
+    dualUse[t.tara.dual_use]++;
+    consentTier[t.tara.governance.consent_tier]++;
+    if (t.tara.clinical) {
+      clinicalCount++;
+      fdaStatus[t.tara.clinical.fda_status]++;
+      for (const c of t.tara.clinical.conditions) {
+        conditions.set(c, (conditions.get(c) ?? 0) + 1);
+      }
+    }
+  }
+
+  return {
+    total: THREAT_VECTORS.length,
+    withTara: THREAT_VECTORS.filter(t => t.tara).length,
+    clinicalCount,
+    dualUse,
+    fdaStatus,
+    consentTier,
+    topConditions: [...conditions.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20),
+  };
 }
