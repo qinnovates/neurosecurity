@@ -35,7 +35,6 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           { href: '#qnis', label: 'QNIS Scoring' },
           { href: '#case-study', label: 'Case Study' },
           { href: '#nsp', label: 'NSP Protocol' },
-          { href: '#black-hole', label: 'Black Hole Principle' },
           { href: '#falsifiability', label: 'Falsifiability' },
           { href: '#discussion', label: 'Discussion' },
           { href: '#future-work', label: 'Future Work' },
@@ -171,7 +170,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet their security architectures remain grounded in classical computing paradigms. This paper presents the Quantum Indeterministic Framework (QIF), an 11-band hourglass security architecture spanning the neural-synthetic boundary, and proposes a unified security equation: <span class="font-[family-name:var(--font-mono)]">QI(b,t) = e<sup>&minus;S(b,t)</sup></span>. The per-band formulation is grounded in spectral decomposition via the Short-Time Fourier Transform (STFT), which serves as both the bridge from raw time-domain signals to band-indexed security scoring and the primary detection mechanism for three of five identified attack coupling mechanisms. The QI equation combines four classical signal integrity terms (phase coherence, normalized transport entropy, amplitude stability, and a scale-frequency validity check derived from <span class="font-[family-name:var(--font-mono)]">L = v/f</span>) with three quantum terms (indeterminacy and entanglement gated by decoherence; tunneling ungated, as it persists in classical regimes).
           </p>
           <p>
-            We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. We propose the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption, scaled across three device tiers. A conceptual analogy between NSP-secured data and black hole information scrambling is explored and its limitations acknowledged following independent peer review.
+            We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. We propose the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption, scaled across three device tiers and reframed as the trust layer enabling therapeutic BCI deployment.
           </p>
           <p>
             We additionally present Project Runemate, a content compression pipeline that converts HTML to a compact bytecode format (Staves), offsetting PQC bandwidth overhead by 65&ndash;90% and achieving net bandwidth savings over classical transport for pages above 23 KB. Five falsifiability conditions are specified. QIF treats unresolved questions in quantum neuroscience, particularly the decoherence timescale in neural tissue, as tunable parameters rather than fixed assumptions. The framework degrades gracefully: if all quantum terms are zero, QIF reduces to a classical 11-band signal integrity architecture that retains independent utility.
@@ -183,7 +182,28 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
       <section id="introduction" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">2. Introduction</h2>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.1 The BCI Revolution</h3>
+        <section id="containment">
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.1 The Containment Principle</h3>
+        <div class="prose">
+          <p>
+            Every civilization that has built critical infrastructure has independently converged on a single architectural pattern: <em>containment</em>. The word &ldquo;paradise&rdquo; descends from the Old Persian <em>pairi-daeza</em> &mdash; a walled enclosure designed to separate a restorative interior from a hostile exterior <a href="#ref-74">[74]</a>. This is not metaphor. It is engineering.
+          </p>
+          <p>
+            The pattern is invariant across domains and millennia. The Theater of Epidaurus (~340 BCE) uses corrugated limestone seating as a frequency filter, suppressing crowd noise below 500&nbsp;Hz while passing human speech &mdash; a principle confirmed to be identical to modern acoustic padding <a href="#ref-77">[77]</a>. Frederick Law Olmsted&rsquo;s Central Park (1858) implements a layered acoustic defense: walls, vegetation, sunken roads, water features, and 18,000 trees attenuate Manhattan&rsquo;s 85 dB street noise to 54 dB at the interior &mdash; making the park sound four times quieter than the city surrounding it <a href="#ref-75">[75]</a><a href="#ref-76">[76]</a>. The blood-brain barrier (BBB) imposes a molecular weight cutoff at approximately 400 Daltons, blocking over 98% of small-molecule drugs <a href="#ref-78">[78]</a>. Network firewalls, cell membranes, and Faraday cages all implement the same strategy: selective, threshold-based attenuation that preserves necessary signals while blocking harmful ones.
+          </p>
+          <p>
+            Seven invariant properties emerge across all containment architectures: (1)&nbsp;<strong>selective permeability</strong>; (2)&nbsp;<strong>frequency-dependent attenuation</strong>; (3)&nbsp;<strong>threshold-based design</strong>; (4)&nbsp;<strong>layered redundancy</strong>; (5)&nbsp;<strong>active maintenance</strong>; (6)&nbsp;<strong>adaptation to threat spectrum</strong>; (7)&nbsp;<strong>breach consequence cascade</strong>. Maturana and Varela (1972) formalized this in their theory of autopoiesis: a living system produces and maintains its own boundary, and that boundary is a <em>precondition</em> for cognition, not incidental to it <a href="#ref-79">[79]</a>.
+          </p>
+          <p>
+            The brain already has containment architecture. The BBB&rsquo;s endothelial tight junctions, backed by astrocyte endfeet and pericytes, have maintained neural tissue integrity for hundreds of millions of years. But BCI electrode implantation <em>physically breaches</em> this architecture, creating localized BBB disruption, immune cascades, glial scarring, and chronic neuronal loss <a href="#ref-82">[82]</a>. The classical physics of what this containment protects was formalized by Hodgkin and Huxley (1952) <a href="#ref-73">[73]</a>, whose conductance model treats ion channels as deterministic gates &mdash; effective, but incomplete at the nanoscale where quantum tunneling permits ion current through classically &ldquo;closed&rdquo; channels. Any containment architecture for BCIs must account for both classical and quantum-scale signal propagation.
+          </p>
+          <p>
+            QIF is, at its foundation, containment architecture for the electrode-tissue interface &mdash; the first proposed engineered boundary designed to attenuate harmful signals below a neural damage threshold while preserving the functional signaling the interface exists to measure. The 11-band hourglass is the architecture of that boundary. The QI equation is its measurement. NSP is the protocol that enforces it.
+          </p>
+        </div>
+        </section>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.2 The BCI Revolution</h3>
         <div class="prose">
           <p>
             Brain-computer interfaces have crossed a critical threshold. Neuralink&rsquo;s N1 implant records from 1,024 electrodes sampling at approximately 20 kHz, transmitted wirelessly over Bluetooth Low Energy <a href="#ref-38">[38]</a>. What was once a laboratory instrument confined to severely disabled patients is on a trajectory toward consumer adoption.
@@ -193,7 +213,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.2 The Security Gap</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.3 The Security Gap</h3>
         <div class="prose">
           <p>
             Current BCI security treats the neural interface as a classical digital system: a sensor that produces voltage readings to be encrypted, transmitted, and authenticated using standard computing paradigms. This framing misses a physical reality. The electrode-tissue interface sits at the boundary between quantum and classical physics. Ion channels are nanometer-scale structures where quantum tunneling is experimentally observed <a href="#ref-11">[11]</a>, <a href="#ref-14">[14]</a>. Synaptic transmission involves quantum-scale energy transfers along protein alpha-helices <a href="#ref-12">[12]</a>.
@@ -203,7 +223,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.3 Statement of Novelty</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.4 Statement of Novelty</h3>
         <div class="prose mb-8">
           <p>
             The core novelty of the Quantum Indeterministic Framework is the <strong>synthesis of three disparate research fields &mdash; quantum biology, BCI security, and post-quantum cryptography &mdash; into a single, unified, and empirically falsifiable architecture.</strong> While prior work exists in each domain individually, QIF is the first framework to formally connect them.
@@ -221,9 +241,9 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.4 What This Paper Delivers</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.5 What This Paper Delivers</h3>
         <div class="prose">
-          <p>This paper presents eight contributions:</p>
+          <p>This paper presents seven contributions:</p>
           <ol>
             <li>An <strong>11-band hourglass architecture</strong> (v4.0) spanning the neural-synthetic boundary with 7-1-3 asymmetry, derived from neuroanatomy and quantum physics rather than networking analogy.</li>
             <li>A <strong>unified QI equation</strong>, QI(b,t) = e<sup>&minus;S(b,t)</sup>, that subsumes the previously separate coherence metric and two candidate QI equations into a single exponential form.</li>
@@ -231,43 +251,8 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <li><strong>TARA</strong> (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry that maps every technique to its security, clinical, diagnostic, and governance projections.</li>
             <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol for BCI data, reframed as the trust layer enabling therapeutic deployment.</li>
             <li><strong>Project Runemate</strong>, a content compression pipeline that offsets PQC bandwidth overhead by 65&ndash;90%.</li>
-            <li>A conceptual analogy between NSP security properties and <strong>black hole information scrambling</strong>, presented with explicit acknowledgment of its limitations.</li>
             <li><strong>Falsifiability conditions</strong> specifying what experimental findings would weaken or invalidate specific framework components.</li>
           </ol>
-        </div>
-      </section>
-
-      <!-- 2.4 The Containment Principle -->
-      <section id="containment" class="mb-20">
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.5 The Containment Principle</h3>
-        <div class="prose">
-          <p>
-            Every civilization that has built critical infrastructure has independently converged on a single architectural pattern: <em>containment</em>. The word &ldquo;paradise&rdquo; descends from the Old Persian <em>pairi-daeza</em> &mdash; a walled enclosure designed to separate a restorative interior from a hostile exterior <a href="#ref-74">[74]</a>. This is not metaphor. It is engineering.
-          </p>
-          <p>
-            Frederick Law Olmsted&rsquo;s Central Park (1858) implements a layered acoustic defense architecture: a sandstone perimeter wall, dense vegetation screening borders, sunken transverse roads eight feet below grade to conceal commercial traffic, 18,000 trees across 843 acres of woodland canopy, water features for psychoacoustic masking, geometric distance attenuation, and grade-separated circulation across 36 bridges <a href="#ref-75">[75]</a>. The result is measurable: Manhattan street noise of 75&ndash;85 dB(A) is attenuated to 53&ndash;54 dB(A) at the park interior &mdash; a 21&ndash;31 dB reduction that makes the deep interior sound four to eight times quieter than the surrounding city <a href="#ref-76">[76]</a>. Olmsted explicitly named noise as one of the urban stressors the park was designed to counteract, writing that scenery should produce &ldquo;relaxing and unbending of faculties made tense by the strain, noise and artificial surroundings of urban life.&rdquo;
-          </p>
-          <p>
-            This is not an isolated design choice. The Theater of Epidaurus (~340 BCE) uses corrugated limestone seating as a frequency filter, suppressing crowd noise below 500&nbsp;Hz while passing human speech above it &mdash; a principle confirmed by Georgia Tech researchers in 2007 to be identical to modern ridged acoustic padding <a href="#ref-77">[77]</a>. Japanese gardens embed tuned acoustic instruments (<em>suikinkutsu</em>, <em>shishi-odoshi</em>) into landscape architecture. Medieval monastery cloisters function as &ldquo;the architecture of silence&rdquo; &mdash; stone quadrangles that physically maintain the acoustic conditions required for contemplation.
-          </p>
-          <p>
-            The pattern is invariant across domains. Acoustic barriers follow the mass law: transmission loss increases by 6&nbsp;dB per doubling of frequency or mass per unit area. The blood-brain barrier (BBB) imposes a molecular weight cutoff at approximately 400 Daltons and a lipophilicity filter, blocking 100% of large-molecule neurotherapeutics and over 98% of small-molecule drugs <a href="#ref-78">[78]</a>. Network firewalls implement default-deny policies with selective allow rules. Cell membranes maintain a lipid bilayer that blocks ions by default, admitting them only through specific transport proteins. Faraday cages attenuate electromagnetic fields with frequency-dependent shielding effectiveness. While the physical signals differ &mdash; from acoustic pressure waves to macromolecules to electromagnetic fields &mdash; the architectural strategy is functionally identical: selective, threshold-based attenuation that preserves the passage of necessary signals while blocking harmful ones.
-          </p>
-          <p>
-            Maturana and Varela (1972) formalized this observation in their theory of autopoiesis: a living system produces and maintains its own boundary, and that boundary is not incidental to cognition &mdash; it is a <em>precondition</em> for it <a href="#ref-79">[79]</a>. Kaplan and Kaplan&rsquo;s Attention Restoration Theory (1989) demonstrates that the restorative environment requires four conditions &mdash; being away, fascination, extent, and compatibility &mdash; all of which require sensory containment as prerequisites <a href="#ref-80">[80]</a>. Ulrich (1984) showed that surgical patients with a view of trees recovered faster, required fewer analgesic doses, and received fewer negative evaluative comments in nurses&rsquo; notes, compared to patients facing a brick wall <a href="#ref-81">[81]</a>. The contained natural environment simultaneously enables cognitive restoration (replenishing directed attention) and physiological restoration (shifting from sympathetic to parasympathetic activation).
-          </p>
-          <p>
-            Seven invariant properties emerge across all containment architectures: (1)&nbsp;<strong>selective permeability</strong> &mdash; no boundary is fully impermeable; it must pass necessary signals while blocking harmful ones; (2)&nbsp;<strong>frequency-dependent attenuation</strong> &mdash; every boundary attenuates different signal types differently; (3)&nbsp;<strong>threshold-based design</strong> &mdash; containment attenuates threats below a damage threshold, not to zero; (4)&nbsp;<strong>layered redundancy</strong> &mdash; multiple independent layers whose total attenuation exceeds the sum of parts; (5)&nbsp;<strong>active maintenance</strong> &mdash; containment is a process requiring continuous energy, not a static structure; (6)&nbsp;<strong>adaptation to threat spectrum</strong> &mdash; static containment eventually fails as threats evolve; (7)&nbsp;<strong>breach consequence cascade</strong> &mdash; when containment fails, consequences propagate inward through the protected space.
-          </p>
-          <p>
-            The brain already has containment architecture. The BBB&rsquo;s endothelial tight junctions, backed by astrocyte endfeet and pericytes, constitute a layered defense that has maintained neural tissue integrity for hundreds of millions of years of vertebrate evolution. But BCI electrode implantation <em>physically breaches</em> this architecture. The insertion creates localized BBB disruption, allowing blood serum proteins to leak into neural tissue, triggering an immune cascade that produces a glial scar around the electrode and chronic neuronal loss at the implantation site <a href="#ref-82">[82]</a>. The mismatch in Young&rsquo;s modulus between rigid electrodes and soft tissue causes ongoing mechanical damage with every micromotion.
-          </p>
-          <p>
-            The classical physics of what this containment protects was formalized by Hodgkin and Huxley (1952), whose Nobel Prize&ndash;winning conductance model describes action potential propagation through voltage-gated ion channels <a href="#ref-73">[73]</a>. H-H treats ion channels as deterministic gates &mdash; a model that is highly effective but incomplete at the nanoscale, where quantum tunneling permits ion current through classically &ldquo;closed&rdquo; channels. QIF&rsquo;s tunneling term Q&#770;<sub>t</sub> is proposed not as a replacement, but as the necessary quantum correction to this classical model at the electrode-tissue boundary (Section 3.3). Any containment architecture for BCIs must account for both classical and quantum-scale signal propagation.
-          </p>
-          <p>
-            QIF is, at its foundation, containment architecture for the electrode-tissue interface &mdash; the first proposed engineered boundary designed to attenuate harmful signals below a neural damage threshold (C<sub>s</sub>&nbsp;&gt;&nbsp;0.6) while preserving the functional neural signaling that the interface exists to measure. The 11-band hourglass is the architecture of that boundary. The QI equation is its measurement. NSP is the protocol that enforces it. Like Olmsted&rsquo;s layered acoustic defense, QIF&rsquo;s 11-band hourglass is a multi-layered boundary. Like the BBB, it is designed for frequency-selective permeability. And like every containment architecture that has endured, it is built not for absolute perfection, but for threshold-based sufficiency.
-          </p>
         </div>
       </section>
 
@@ -540,10 +525,58 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </p>
         </div>
 
-        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4">5.4.1 The Signal Processing Pipeline</h4>
+        <h4 class="text-base font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4">5.4.1 The Signal Processing Pipeline: From Voltage to Verdict</h4>
         <div class="prose mb-6">
           <p>
-            In practice, BCI signals are non-stationary &mdash; their frequency content changes over time. A standard Fourier transform gives global frequency content but loses temporal resolution. QIF therefore specifies the <strong>Short-Time Fourier Transform (STFT)</strong> as the decomposition method, which windows the signal into overlapping segments and transforms each independently:
+            In practice, BCI signals are non-stationary &mdash; their frequency content changes over time. A standard Fourier transform gives global frequency content but loses temporal resolution. QIF therefore specifies the <strong>Short-Time Fourier Transform (STFT)</strong> as the core decomposition method. The STFT windows the signal into overlapping segments and transforms each independently, producing a <strong>spectrogram</strong>: a 2D map of frequency power over time. Each time-frequency bin becomes a data point for QI computation. The pipeline acts as a prism, then a set of judges for each color:
+          </p>
+        </div>
+
+        <!-- Pipeline flow diagram -->
+        <div class="my-8 overflow-x-auto">
+          <svg width="100%" viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" class="max-w-3xl mx-auto">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-text-faint)"/>
+              </marker>
+            </defs>
+            <g fill="var(--color-text-muted)" font-size="11">
+              <rect x="10" y="30" width="120" height="55" rx="6" fill="var(--color-bg-deep)" stroke="var(--color-border)" stroke-width="1"/>
+              <text x="70" y="52" font-family="var(--font-mono)" font-size="12" text-anchor="middle" fill="var(--color-text-primary)">x(t)</text>
+              <text x="70" y="72" text-anchor="middle">Raw Voltage</text>
+
+              <path d="M 135 57 L 178 57" stroke="var(--color-text-faint)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <rect x="183" y="30" width="120" height="55" rx="6" fill="var(--color-bg-deep)" stroke="var(--color-accent-primary)" stroke-width="1.5"/>
+              <text x="243" y="52" font-family="var(--font-mono)" font-size="12" text-anchor="middle" fill="var(--color-accent-primary)">STFT</text>
+              <text x="243" y="72" text-anchor="middle">Spectral Prism</text>
+
+              <path d="M 308 57 L 351 57" stroke="var(--color-text-faint)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <rect x="356" y="25" width="120" height="65" rx="6" fill="var(--color-bg-deep)" stroke="var(--color-border)" stroke-width="1"/>
+              <text x="416" y="47" font-family="var(--font-mono)" font-size="12" text-anchor="middle" fill="var(--color-text-primary)">P(b, t)</text>
+              <text x="416" y="65" text-anchor="middle">Spectrogram</text>
+              <text x="416" y="80" font-size="9" text-anchor="middle" fill="var(--color-text-faint)">Time-Frequency Map</text>
+
+              <path d="M 481 57 L 524 57" stroke="var(--color-text-faint)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <rect x="529" y="25" width="120" height="65" rx="6" fill="var(--color-bg-deep)" stroke="var(--color-border)" stroke-width="1"/>
+              <text x="589" y="47" font-family="var(--font-mono)" font-size="11" text-anchor="middle" fill="var(--color-text-primary)">S(b,t) = Sc + Sq</text>
+              <text x="589" y="65" text-anchor="middle">Per-Band Scoring</text>
+              <text x="589" y="80" font-size="9" text-anchor="middle" fill="var(--color-text-faint)">Anomaly Detection</text>
+
+              <path d="M 654 57 L 697 57" stroke="var(--color-text-faint)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <rect x="702" y="30" width="70" height="55" rx="6" fill="var(--color-bg-deep)" stroke="var(--color-accent-primary)" stroke-width="1.5"/>
+              <text x="737" y="52" font-family="var(--font-mono)" font-size="14" text-anchor="middle" fill="var(--color-accent-primary)">QI</text>
+              <text x="737" y="72" text-anchor="middle">Verdict</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="prose mb-6">
+          <p>
+            The STFT equation that powers this decomposition:
           </p>
         </div>
         <div class="glass rounded-xl p-8 text-center mb-8">
@@ -556,7 +589,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         </div>
         <div class="prose mb-6">
           <p>
-            This produces a <strong>spectrogram</strong>: a 2D map of frequency power over time. Each time-frequency bin becomes a data point for QI computation. The pipeline:
+            The detailed pipeline steps:
           </p>
         </div>
         <div class="overflow-x-auto mb-8">
@@ -1426,81 +1459,40 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         </div>
       </section>
 
-      <!-- 8. Black Hole Security Principle -->
-      <section id="black-hole" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. The Black Hole Security Principle</h2>
-
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">8.1 Four Proposed Analogies</h3>
-        <div class="prose mb-6">
-          <p>
-            We describe four structural parallels between black hole physics and NSP security. Following independent peer review, we present these explicitly as <strong>conceptual analogies, not formal equivalences</strong>.
-          </p>
-        </div>
-
-        <div class="space-y-4 mb-8">
-          <div class="glass rounded-xl p-6">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 1: Encryption as Scrambling</h4>
-            <p class="text-sm text-[var(--color-text-muted)]">Black holes achieve full information delocalization in t* &prop; ln(S) operations <a href="#ref-62">[62]</a>. AES-256 achieves full diffusion in 14 rounds, scaling as O(ln(N)). Both spread information across all degrees of freedom. However, black hole scrambling is quantum many-body dynamics; AES is a classical deterministic algorithm.</p>
-          </div>
-          <div class="glass rounded-xl p-6">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 2: I0 as Holographic Boundary</h4>
-            <p class="text-sm text-[var(--color-text-muted)]">BCIs already work holographically: EEG/ECoG measure surface potentials, and source localization reconstructs 3D brain activity from 2D surface measurements. However, the holographic principle operates at Planck-scale physics &mdash; applying it to a macroscopic electrode 30 orders of magnitude larger is not formally justified.</p>
-          </div>
-          <div class="glass rounded-xl p-6">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 3: Key Exchange as Page Curve</h4>
-            <p class="text-sm text-[var(--color-text-muted)]">Without the session key, accumulated ciphertext reveals nothing. With the key, all frames decode. The key is the analog of the Page time <a href="#ref-68">[68]</a>. The visual similarity is genuine, but the underlying mechanisms are different.</p>
-          </div>
-          <div class="glass rounded-xl p-6">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">Analogy 4: Semantic Security as Thermal Spectrum</h4>
-            <p class="text-sm text-[var(--color-text-muted)]">Hawking radiation has a maximum entropy spectrum <a href="#ref-72">[72]</a>. AES-256-GCM ciphertext is computationally indistinguishable from random noise. The parallel is structural, not physical.</p>
-          </div>
-        </div>
-
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">8.2 Honest Assessment</h3>
-        <div class="glass rounded-xl p-5 mb-8" style="border-left: 3px solid #f59e0b;">
-          <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">Independent Peer Review (Gemini):</strong> &ldquo;The &lsquo;Black Hole Security Principle&rsquo; is a compelling narrative, but it is not a rigorous security framework. It derives its claims from analogies that break down under formal analysis.&rdquo;
-          </p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-3">
-            We accept this critique. NSP&rsquo;s actual security rests on the proven properties of AES-256-GCM, ML-KEM (IND-CCA2 under Module-LWE), and ML-DSA (EUF-CMA under Module-SIS). These are formal, reducible guarantees that do not require physics analogies.
-          </p>
-        </div>
-      </section>
-
-      <!-- 9. Falsifiability -->
+      <!-- 8. Falsifiability -->
       <section id="falsifiability" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">9. Falsifiability</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. Falsifiability</h2>
         <div class="prose mb-6">
           <p>A framework that cannot be disproven is not science. QIF is designed to be empirically testable.</p>
         </div>
 
         <div class="space-y-4">
           <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.1 Universal Fast Decoherence</h4>
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">8.1 Universal Fast Decoherence</h4>
             <p class="text-sm text-[var(--color-text-muted)]">
               If &tau;<sub>D</sub> &lt; 10<sup>&minus;12</sup> s universally at the electrode-tissue boundary, quantum terms become negligible. QIF degrades gracefully to a classical-only model: QI(t) &asymp; e<sup>&minus;S<sub>c</sub></sup>. This does not break QIF &mdash; it reduces it to its classical foundation.
             </p>
           </div>
           <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.2 Ion Channel Tunneling Not Individually Unique</h4>
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">8.2 Ion Channel Tunneling Not Individually Unique</h4>
             <p class="text-sm text-[var(--color-text-muted)]">
               If tunneling coefficients T(E) do not vary significantly between individuals, the quantum biometric hypothesis is invalid. The tunneling term Q&#770;<sub>t</sub> would still function as a threat model but the biometric application would be falsified.
             </p>
           </div>
           <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.3 No Measurable Quantum Effects at I0</h4>
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">8.3 No Measurable Quantum Effects at I0</h4>
             <p class="text-sm text-[var(--color-text-muted)]">
               If quantum state tomography consistently shows fully classical statistics at the BCI junction, quantum corrections are zero. The classical architecture, attack taxonomy, and NSP retain independent value.
             </p>
           </div>
           <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.4 Zeno Effect Impossible at BCI Rates</h4>
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">8.4 Zeno Effect Impossible at BCI Rates</h4>
             <p class="text-sm text-[var(--color-text-muted)]">
               If Zeno stabilization requires measurement rates exceeding 10<sup>9</sup> Hz at the electrode interface, the conditional Zeno-BCI hypothesis is removed. This hypothesis is already framed as conditional on decoherence timescale.
             </p>
           </div>
           <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">9.5 Davydov Soliton Attacks Cannot Be Generated</h4>
+            <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-2">8.5 Davydov Soliton Attacks Cannot Be Generated</h4>
             <p class="text-sm text-[var(--color-text-muted)]">
               If terahertz radiation cannot generate Davydov solitons in SNARE protein complexes, this attack vector is falsified. The other four coupling mechanisms remain valid independently.
             </p>
@@ -1514,13 +1506,13 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         </div>
       </section>
 
-      <!-- 10. Discussion -->
+      <!-- 9. Discussion -->
       <section id="discussion" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">10. Discussion</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">9. Discussion</h2>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.1 What QIF Is</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">9.1 What QIF Is</h3>
         <div class="prose">
-          <p>This paper delivered the eight contributions outlined in Section 2.4:</p>
+          <p>This paper delivered the seven contributions outlined in Section 2.5:</p>
           <ol>
             <li>An <strong>11-band hourglass architecture</strong> (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy and quantum physics (Section 4).</li>
             <li>A <strong>unified QI equation</strong>, QI(b,t) = e<sup>&minus;S(b,t)</sup>, grounded in spectral decomposition via the STFT and combining classical signal integrity with quantum terms (Section 5).</li>
@@ -1528,19 +1520,18 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <li><strong>TARA</strong> (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry bridging security and clinical communities through four dimensional projections of every catalogued technique (Section 6.7).</li>
             <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM, ML-DSA, and AES-256-GCM, serving as the trust layer for therapeutic BCI deployment (Section 7).</li>
             <li><strong>Project Runemate</strong>, a content compression pipeline offsetting PQC bandwidth overhead by 65&ndash;90% (Section 7).</li>
-            <li>A conceptual analogy between NSP security and <strong>black hole information scrambling</strong>, with explicit limitations acknowledged (Section 8).</li>
-            <li><strong>Falsifiability conditions</strong> specifying what experimental findings would weaken or invalidate specific framework components (Section 9).</li>
+            <li><strong>Falsifiability conditions</strong> specifying what experimental findings would weaken or invalidate specific framework components (Section 8).</li>
           </ol>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.2 What QIF Is Not</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">9.2 What QIF Is Not</h3>
         <div class="prose">
           <p>
             QIF is <strong>not experimentally validated</strong>. No QI score has been computed from real BCI data under attack conditions. The scaling coefficients have not been calibrated. QIF does not model consciousness. QIF does not prove that quantum effects matter for BCI security &mdash; the quantum terms are hypothesized contributions. QIF does not replace formal cryptographic security proofs.
           </p>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.3 Limitations</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">9.3 Limitations</h3>
         <div class="overflow-x-auto mb-8">
           <table class="w-full text-sm">
             <thead>
@@ -1560,7 +1551,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </table>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.4 Energy Bounds</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">9.4 Energy Bounds</h3>
         <div class="prose">
           <p>
             Landauer&rsquo;s Principle <a href="#ref-61">[61]</a> establishes the fundamental thermodynamic cost: E<sub>min</sub> = kT &middot; ln(2) per bit erasure. At body temperature (310 K), this is &asymp;2.97 &times; 10<sup>&minus;21</sup> J per bit. This replaces Moore&rsquo;s Law (an empirical trend, not a physical law) as the correct reference for energy scaling arguments.
@@ -1568,11 +1559,11 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         </div>
       </section>
 
-      <!-- 11. Future Work -->
+      <!-- 10. Future Work -->
       <section id="future-work" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. Future Work</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">10. Future Work</h2>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">11.1 Immediate Priorities</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.1 Immediate Priorities</h3>
         <div class="prose">
           <ol>
             <li><strong>Phase 1 Validation.</strong> Implement classical QI (S<sub>c</sub> only) against PhysioNet EEGBCI dataset (109 subjects) and BrainFlow live data. Generate synthetic attacks. Publish results regardless of outcome.</li>
@@ -1581,7 +1572,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </ol>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">11.2 Medium-Term Research</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.2 Medium-Term Research</h3>
         <div class="prose">
           <ol start="4">
             <li><strong>H<sub>interface</sub> Formulation.</strong> Write down the total Hamiltonian H<sub>total</sub> = H<sub>neuron</sub> + H<sub>electrode</sub> + H<sub>interface</sub> + H<sub>environment</sub> for a specific BCI system.</li>
@@ -1593,7 +1584,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           </ol>
         </div>
 
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">11.3 Long-Term Goals</h3>
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.3 Long-Term Goals</h3>
         <div class="prose">
           <ol start="8">
             <li><strong>Quantum State Tomography at the BCI Interface.</strong> Measure the actual decoherence time &tau;<sub>D</sub> at a BCI electrode-tissue junction.</li>
@@ -1604,9 +1595,9 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         </div>
       </section>
 
-      <!-- 12. References -->
+      <!-- 11. References -->
       <section id="references" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. References</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. References</h2>
 
         <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Quantum Indeterminacy and Uncertainty Relations</p>
