@@ -12,16 +12,17 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
 ---
 
 <PageLayout
-  title="QIF Threat Registry"
-  description={`Interactive attack matrix mapping ${THREAT_VECTORS.length} BCI threat techniques across 11 hourglass bands, 8 attack categories, and 4 TARA projections.`}
-  breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'Threat Registry' }]}
+  title="QTARA — Therapeutic Atlas of Risks & Applications"
+  description={`${THREAT_VECTORS.length} BCI techniques mapped across security, clinical, governance, and engineering projections. Each technique viewed as both an attack vector and a therapeutic application.`}
+  breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'QTARA Registry' }]}
   maxWidth="wide"
 >
   <div id="threat-page" data-projection="security">
     <div class="mb-8">
-      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QIF Threat Registry</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QTARA Registry</h1>
+      <p class="text-sm text-[var(--color-text-muted)] opacity-70 -mt-1 mb-1">Therapeutic Atlas of Risks &amp; Applications</p>
       <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
-        {THREAT_VECTORS.length} BCI attack techniques classified with Qinnovate&rsquo;s QIF Locus Taxonomy and scored with QNIS v1.0 across {THREAT_CATEGORIES.length} categories and 11 hourglass bands
+        {THREAT_VECTORS.length} BCI techniques mapped across {THREAT_CATEGORIES.length} categories and 11 hourglass bands &mdash; every attack vector is also a therapeutic application
       </p>
 
       <!-- TARA Projection Tabs -->
