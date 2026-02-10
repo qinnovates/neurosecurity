@@ -52,6 +52,8 @@ In six weeks, Claude and I built the following. Every equation derived, every th
 
 **[10 governance documents](https://qinnovate.com/governance)**. Accessibility, consent, neuroethics, pediatric use, data policy, regulatory mapping (FDA, EU MDR, neurorights legislation), post-deployment monitoring, and UNESCO alignment.
 
+MITRE ATT&CK covers enterprise, mobile, cloud, and industrial control systems. It does not cover brain-computer interfaces. CVSS scores vulnerabilities across every domain in information security. It has no metrics for biological tissue, cognitive integrity, or consent violation. No one had mapped these frameworks into living neural systems before. TARA and NISS are the first.
+
 One researcher. Six weeks. A whitepaper, a threat registry, a scoring system, a wire protocol, a neural rendering engine, and governance documentation.
 
 ## The Discovery That Changed Everything
