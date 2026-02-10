@@ -1,13 +1,61 @@
 # Runemate Forge: Neural Markup Translation for Post-Quantum BCI
 
-> A lightweight translation service that compiles web languages (HTML/CSS/JS) into "Staves" --
+> A lightweight translation service that compiles web languages (HTML/CSS/JS) into "Staves" —
 > a sanitized, compact bytecode designed for neural rendering on BCI chips.
 >
 > **Project Status:** Requirements / Architecture Phase
-> **Version:** 0.1 (2026-02-07)
+> **Version:** 0.3 (2026-02-10)
 > **Author:** Kevin Qi
 > **Parent Framework:** QIF (Quantum Indeterministic Framework)
 > **Delivery Protocol:** NSP (Neural Security Protocol)
+
+---
+
+## Executive Summary
+
+Post-quantum cryptography is non-negotiable for BCIs — neural data cannot be reset like a password, and harvest-now-decrypt-later attacks make classical crypto a ticking time bomb for implants with 10-20 year lifetimes. But PQ algorithms come with 25x larger handshakes and 35x larger certificates.
+
+**Runemate Forge** solves this by compressing web content 65-90% through a purpose-built bytecode called **Staves**. The net result: PQ-secured BCI communication is *more* bandwidth-efficient than classical crypto with raw HTML. The PQ tax pays for itself on the first dashboard load.
+
+But the deeper innovation is this: Staves is not just compressed HTML. It is the first markup language designed for brains, not screens. When visual cortex BCIs mature, Staves becomes the rendering language for neural perception — enabling blind users to "see" web content without a display. The same physics that lets an adversary map your house through WiFi lets a clinician calibrate a visual prosthesis through electrodes. The difference is NSP.
+
+**Key results:**
+- **65-90% compression** of BCI web content (PoC-validated on 3 realistic pages)
+- **Full PQ offset** in 2-14 page loads (amortized over a session, Staves + PQ beats classical + HTML)
+- **200 KB on-chip footprint** for the Scribe interpreter (fits any implant-grade MCU)
+- **+0.3 mW power overhead** (0.75% of 40 mW implant thermal budget)
+- **Three independent safety gates** for neural rendering: TARA (compile-time), NSP (transport), QI (runtime)
+- **111+ conformance test vectors** with reference bytecode outputs
+- **8 post-quantum compliance gaps** identified with concrete solution paths
+
+**Technology:** Entire critical path in Rust. Zero C/C++. Memory-safe from transport to rendering.
+
+---
+
+## Table of Contents
+
+| # | Section | Description |
+|---|---------|-------------|
+| — | [Executive Summary](#executive-summary) | Value proposition and key results |
+| 1 | [The Problem](#1-the-problem) | PQ overhead challenge for BCIs |
+| 2 | [The Vision](#2-the-vision) | Phase 1-3 roadmap from translation to neural rendering |
+| 3 | [Architecture](#3-architecture) | System design, naming, dual-pipeline, CSS subset, interactivity |
+| 4 | [Staves Bytecode Format (v1.0)](#4-staves-bytecode-format-v10) | Complete binary spec: header, string pool, style table, 40+ opcodes |
+| 5 | [Forge Compiler Pipeline](#5-forge-compiler-pipeline) | 4-stage compilation, delta encoding, target awareness |
+| 6 | [NSP Frame Integration](#6-nsp-frame-integration) | Fragmentation, frame types, 60fps streaming mode |
+| 7 | [Power Budget Analysis](#7-power-budget-analysis) | Component breakdown on Cortex-M4F reference platform |
+| 8 | [The Compression Math](#8-the-compression-math) | Worst-case analysis and PQ offset calculations |
+| 9 | [Streaming Overhead](#9-streaming-overhead-unaffected) | Symmetric crypto cost at 60fps (unaffected by PQ) |
+| 10 | [On-Chip Requirements](#10-on-chip-requirements) | Memory, Flash, SRAM budgets and WASM portability option |
+| 11 | [Security](#11-security-built-in-not-bolted-on) | Threat model, TARA integration, conformance tests, firmware lifecycle |
+| 12 | [Roadmap](#12-roadmap) | Phase 1-3 milestones with timeline |
+| 13 | [Integration with QIF](#13-integration-with-qif) | Hourglass band mapping and QI closed-loop verification |
+| 14 | [The Pitch](#14-the-pitch-for-qif-whitepaper) | Whitepaper-ready summary paragraph |
+| 15 | [PoC Benchmark Results](#15-proof-of-concept-benchmark-results-actual-data) | Compression ratios, PQ offset analysis, session amortization |
+| 16 | [Phase 2 Architecture](#16-phase-2-architecture-visual-cortex-rendering) | Electrode rendering, Staves v2, calibration, Bevy bridge, error recovery |
+| 17 | [Post-Quantum Compliance Gaps](#17-post-quantum-compliance-gaps-pqkc) | 8 PQKC gaps with solution designs |
+| — | [References](#references) | Standards, papers, tools |
+| A | [Derivation Log](#appendix-a-derivation-log) | Architectural discovery journal (R-001 through R-007) |
 
 ---
 
@@ -2180,26 +2228,56 @@ All derived keys are symmetric (AES-256). Only the DRK and session establishment
 
 ## References
 
-- FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM)
-- FIPS 204: Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
-- FIPS 205: Stateless Hash-Based Digital Signature Algorithm (SLH-DSA)
-- Shannon, R.V. (1992): A model of safe levels for electrical stimulation
-- McCreery, D.B. et al. (1990): Charge density and charge per phase as cofactors in neural injury
-- Arditi et al. (2024): Refusal in Language Models Is Mediated by a Single Direction
-- Servo Browser Engine: https://servo.org (modular Rust crates)
-- Bevy Game Engine: https://bevyengine.org (Rust ECS, wgpu rendering)
-- wgpu: https://wgpu.rs (Rust-native WebGPU implementation)
-- wasm3: https://github.com/nicholasgasior/wasm3 (60 KB WASM interpreter)
-- NSP Protocol Specification: see NSP-PROTOCOL-SPEC.md
-- TARA (Therapeutic Atlas of Risks and Applications): see threat-registry.json
-- Kani Model Checker: https://model-checking.github.io/kani/
-- Prusti Verifier: https://www.pm.inf.ethz.ch/research/prusti.html
+### Standards and Specifications
+
+1. NIST (2024). FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard. doi:10.6028/NIST.FIPS.203
+2. NIST (2024). FIPS 204: Module-Lattice-Based Digital Signature Algorithm Standard. doi:10.6028/NIST.FIPS.204
+3. NIST (2024). FIPS 205: Stateless Hash-Based Digital Signature Algorithm Standard. doi:10.6028/NIST.FIPS.205
+4. Qi, K. (2026). NSP Protocol Specification v0.3. Qinnovate. See NSP-PROTOCOL-SPEC.md
+5. Qi, K. (2026). TARA: Therapeutic Atlas of Risks and Applications. Qinnovate. See threat-registry.json
+6. Qi, K. (2026). QIF: Quantum Indeterministic Framework for Neural Security. Qinnovate Whitepaper v5.2
+
+### Neurostimulation Safety
+
+7. Shannon, R.V. (1992). A model of safe levels for electrical stimulation. *IEEE Transactions on Biomedical Engineering*, 39(4), 424-426. doi:10.1109/10.126616
+8. McCreery, D.B., Agnew, W.F., Yuen, T.G.H., & Bullara, L. (1990). Charge density and charge per phase as cofactors in neural injury induced by electrical stimulation. *IEEE Transactions on Biomedical Engineering*, 37(10), 996-1001. doi:10.1109/10.102812
+9. Cogan, S.F. (2008). Neural stimulation and recording electrodes. *Annual Review of Biomedical Engineering*, 10, 275-309. doi:10.1146/annurev.bioeng.10.061807.160518
+10. Merrill, D.R., Bikson, M., & Jefferys, J.G.R. (2005). Electrical stimulation of excitable tissue: design of efficacious and safe protocols. *Journal of Neuroscience Methods*, 141(2), 171-198. doi:10.1016/j.jneumeth.2004.10.020
+
+### BCI Security
+
+11. Denning, T., Matsuoka, Y., & Kohno, T. (2009). Neurosecurity: security and privacy for neural devices. *Neurosurgical Focus*, 27(1), E7. doi:10.3171/2009.4.FOCUS0985
+12. Pycroft, L., Boccard, S.G., Owen, S.L.F., et al. (2016). Brainjacking: Implant security issues in invasive neuromodulation. *World Neurosurgery*, 92, 454-462. doi:10.1016/j.wneu.2016.05.010
+13. Bernal, S.L., Celdrán, A.H., Pérez, G.M., et al. (2021). Security in brain-computer interfaces: State-of-the-art, opportunities, and future challenges. *ACM Computing Surveys*, 54(1), 1-35. doi:10.1145/3427376
+
+### Visual Prosthetics and Neural Rendering
+
+14. Beauchamp, M.S., Oswalt, D., Sun, P., et al. (2020). Dynamic stimulation of visual cortex produces form vision in sighted and blind humans. *Cell*, 181(4), 774-783. doi:10.1016/j.cell.2020.04.033
+15. Chen, X., Wang, F., Fernandez, E., & Bhardwaj, R. (2020). Developments in visual prostheses: a review. *Science China Information Sciences*, 63, 211101. doi:10.1007/s11432-020-2882-x
+16. Fernández, E. (2018). Development of visual neuroprostheses: trends and challenges. *Bioelectronic Medicine*, 4, 12. doi:10.1186/s42234-018-0013-8
+
+### Software and Tools
+
+17. Servo Browser Engine. https://servo.org — Modular Rust browser engine (HTML/CSS parsing, layout)
+18. Bevy Game Engine. https://bevyengine.org — Rust ECS architecture with wgpu rendering
+19. wgpu. https://wgpu.rs — Rust-native WebGPU implementation (Metal/Vulkan/DX12)
+20. wasm3. https://github.com/nicholasgasior/wasm3 — Lightweight WebAssembly interpreter (~60 KB)
+21. Taffy. https://github.com/DioxusLabs/taffy — Servo-derived Rust layout engine (flexbox/block, no_std)
+22. Kani Model Checker. https://model-checking.github.io/kani/ — Rust formal verification via CBMC
+23. Prusti Verifier. https://www.pm.inf.ethz.ch/research/prusti.html — Rust verification based on Viper
+
+### Post-Quantum Cryptography
+
+24. Avanzi, R., et al. (2024). CRYSTALS-Kyber (ML-KEM) Algorithm Specifications and Supporting Documentation. NIST PQC Standardization
+25. Ducas, L., et al. (2024). CRYSTALS-Dilithium (ML-DSA) Algorithm Specifications and Supporting Documentation. NIST PQC Standardization
+26. Bernstein, D.J., & Lange, T. (2017). Post-quantum cryptography. *Nature*, 549, 188-194. doi:10.1038/nature23461
 
 ---
 
-## Derivation Log
+## Appendix A: Derivation Log
 
 > Chronological journal of architectural discoveries, integration insights, and breakthroughs.
+> This appendix documents the research process that produced the specifications above.
 > **Rule:** This log ONLY GROWS. Never delete or edit past entries. Corrections get new entries.
 
 ---
