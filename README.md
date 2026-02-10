@@ -201,7 +201,7 @@ qinnovates/qinnovate/
 │
 ├── shared/                 # Classical-Quantum bridge
 │   ├── threat-matrix.json  # Cross-model threat taxonomy
-│   └── threat-registry.json # 60 MITRE-compatible techniques (T2001-T2899)
+│   └── qtara-registrar.json  # 71 TARA-enriched techniques (QIF-T0001+)
 │
 ├── governance/             # Neuroethics & regulatory (9 documents)
 ├── processes/              # VERA Engine & workflows

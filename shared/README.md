@@ -6,7 +6,7 @@ This folder contains the unified BCI/neural security threat taxonomy using MITRE
 
 ```
 shared/
-├── threat-registry.json         # 60 techniques, 11 tactics, MITRE-compatible (CURRENT)
+├── qtara-registrar.json         # 60 techniques, 11 tactics, MITRE-compatible (CURRENT)
 ├── threat-matrix.json           # DEPRECATED - legacy ONI 24-technique matrix
 ├── validation/                  # Validation tools
 │   ├── bridge.py                # ONI<>QIF validator
@@ -15,7 +15,7 @@ shared/
 └── README.md                    # This file
 ```
 
-## threat-registry.json (Current)
+## qtara-registrar.json (Current)
 
 **60 techniques** across **11 MITRE-compatible tactics**, generated from `config.py` (as-code).
 
@@ -60,7 +60,7 @@ shared/
 ```python
 import json
 
-with open('threat-registry.json') as f:
+with open('qtara-registrar.json') as f:
     registry = json.load(f)
 
 # All techniques
@@ -78,7 +78,7 @@ with_mitre = [t for t in registry['techniques'] if t['mitre']['techniques']]
 
 ```javascript
 // Browser / Node.js
-const registry = await fetch('threat-registry.json').then(r => r.json());
+const registry = await fetch('qtara-registrar.json').then(r => r.json());
 
 // Group by category
 const grouped = Object.groupBy(registry.techniques, t => t.category);
@@ -95,7 +95,7 @@ const grouped = Object.groupBy(registry.techniques, t => t.category);
 
 ## threat-matrix.json (DEPRECATED)
 
-> **This file is deprecated.** It contains the legacy ONI-era taxonomy with 24 techniques using ONI-T### identifiers. All entries have been merged into `threat-registry.json` with MITRE-compatible IDs. See the `legacy_ids` field on each technique for the migration mapping.
+> **This file is deprecated.** It contains the legacy ONI-era taxonomy with 24 techniques using ONI-T### identifiers. All entries have been merged into `qtara-registrar.json` with MITRE-compatible IDs. See the `legacy_ids` field on each technique for the migration mapping.
 
 ## Source of Truth
 

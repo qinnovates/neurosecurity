@@ -1,259 +1,289 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { HOURGLASS_BANDS } from '../lib/qif-constants';
-import { THREAT_CATEGORIES, THREAT_VECTORS, SEVERITY_COLORS, STATUS_COLORS, ZONE_COLORS, getThreatStats, getStatusStats } from '../lib/threat-data';
+import { THREAT_CATEGORIES, THREAT_VECTORS, getThreatStats, getStatusStats } from '../lib/threat-data';
+import { getProjectionConfigForClient } from '../lib/tara-projections';
 
 const stats = getThreatStats();
 const statusStats = getStatusStats();
 const bands = [...HOURGLASS_BANDS];
 const allThreatsJson = JSON.stringify(THREAT_VECTORS);
+const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
 ---
 
 <PageLayout
   title="QIF Threat Registry"
-  description={`Interactive attack matrix mapping ${THREAT_VECTORS.length} BCI threat techniques across 11 hourglass bands, 8 attack categories, and 4 evidence levels.`}
+  description={`Interactive attack matrix mapping ${THREAT_VECTORS.length} BCI threat techniques across 11 hourglass bands, 8 attack categories, and 4 TARA projections.`}
   breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'Threat Registry' }]}
   maxWidth="wide"
 >
-  <div class="mb-8">
-    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QIF Threat Registry</h1>
-    <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
-      {THREAT_VECTORS.length} BCI attack techniques classified with Qinnovate&rsquo;s QIF Locus Taxonomy and scored with QNIS v1.0 across {THREAT_CATEGORIES.length} categories and 11 hourglass bands
-    </p>
+  <div id="threat-page" data-projection="security">
+    <div class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">QIF Threat Registry</h1>
+      <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
+        {THREAT_VECTORS.length} BCI attack techniques classified with Qinnovate&rsquo;s QIF Locus Taxonomy and scored with QNIS v1.0 across {THREAT_CATEGORIES.length} categories and 11 hourglass bands
+      </p>
 
-    <!-- Status breakdown -->
-    <div class="flex flex-wrap gap-3 mb-4">
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>
-        <span class="text-[var(--color-text-faint)]">Confirmed</span>
-        <span class="font-bold">{statusStats.CONFIRMED}</span>
-      </div>
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
-        <span class="text-[var(--color-text-faint)]">Demonstrated</span>
-        <span class="font-bold">{statusStats.DEMONSTRATED}</span>
-      </div>
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#94a3b8]"></span>
-        <span class="text-[var(--color-text-faint)]">Theoretical</span>
-        <span class="font-bold">{statusStats.THEORETICAL}</span>
-      </div>
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#8b5cf6]"></span>
-        <span class="text-[var(--color-text-faint)]">Emerging</span>
-        <span class="font-bold">{statusStats.EMERGING}</span>
-      </div>
-    </div>
+      <!-- TARA Projection Tabs -->
+      <nav class="tara-tabs" id="tara-tabs" aria-label="TARA projection">
+        <button class="tara-tab active" data-projection="security">Security</button>
+        <button class="tara-tab" data-projection="clinical">Clinical</button>
+        <button class="tara-tab" data-projection="governance">Governance</button>
+        <button class="tara-tab" data-projection="engineering">Engineering</button>
+      </nav>
 
-    <!-- Severity stats bar -->
-    <div class="flex flex-wrap gap-3 mb-6">
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
-        <span class="text-[var(--color-text-faint)]">Total</span>
-        <span class="font-bold ml-2">{stats.total}</span>
-      </div>
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
-        <span class="severity-dot severity-dot--critical"></span>
-        <span class="text-[var(--color-text-faint)]">Critical</span>
-        <span class="font-bold ml-1">{stats.critical}</span>
-      </div>
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
-        <span class="severity-dot severity-dot--high"></span>
-        <span class="text-[var(--color-text-faint)]">High</span>
-        <span class="font-bold ml-1">{stats.high}</span>
-      </div>
-      <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
-        <span class="severity-dot severity-dot--medium"></span>
-        <span class="text-[var(--color-text-faint)]">Medium</span>
-        <span class="font-bold ml-1">{stats.medium}</span>
-      </div>
-      {stats.low > 0 && (
-        <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
-          <span class="severity-dot severity-dot--low"></span>
-          <span class="text-[var(--color-text-faint)]">Low</span>
-          <span class="font-bold ml-1">{stats.low}</span>
+      <!-- Stats bar (rebuilt per projection) -->
+      <div id="stats-bar">
+        <!-- Default: Security stats (server-rendered for initial load) -->
+        <div class="flex flex-wrap gap-3 mb-4">
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>
+            <span class="text-[var(--color-text-faint)]">Confirmed</span>
+            <span class="font-bold">{statusStats.CONFIRMED}</span>
+          </div>
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
+            <span class="text-[var(--color-text-faint)]">Demonstrated</span>
+            <span class="font-bold">{statusStats.DEMONSTRATED}</span>
+          </div>
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#94a3b8]"></span>
+            <span class="text-[var(--color-text-faint)]">Theoretical</span>
+            <span class="font-bold">{statusStats.THEORETICAL}</span>
+          </div>
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#8b5cf6]"></span>
+            <span class="text-[var(--color-text-faint)]">Emerging</span>
+            <span class="font-bold">{statusStats.EMERGING}</span>
+          </div>
         </div>
-      )}
-    </div>
-
-    <!-- How to read this -->
-    <details class="glass-subtle rounded-lg mb-6">
-      <summary class="px-4 py-3 text-sm font-medium cursor-pointer text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] select-none">
-        How to read this grid
-      </summary>
-      <div class="px-4 pb-4 text-sm text-[var(--color-text-muted)] space-y-3 border-t border-[var(--color-border)] pt-3">
-        <div>
-          <strong class="text-[var(--color-text-primary)]">Grid axes</strong> &mdash; Rows are hourglass bands (Neural N7&ndash;N1, Interface I0, Synthetic S1&ndash;S3). Columns are attack categories (Signal Injection, Eavesdropping, Data Manipulation, etc.).
-        </div>
-        <div>
-          <strong class="text-[var(--color-text-primary)]">Severity colors</strong> &mdash; Damage potential if the attack succeeds.
-          <span class="sev-badge sev-badge--critical ml-1">critical</span>
-          <span class="sev-badge sev-badge--high ml-1">high</span>
-          <span class="sev-badge sev-badge--medium ml-1">medium</span>
-          <span class="sev-badge sev-badge--low ml-1">low</span>
-        </div>
-        <div>
-          <strong class="text-[var(--color-text-primary)]">Status badges</strong> &mdash; Evidence level.
-          <span class="status-badge status-badge--CONFIRMED ml-1">confirmed</span> = real-world documented.
-          <span class="status-badge status-badge--DEMONSTRATED ml-1">demonstrated</span> = lab-proven.
-          <span class="status-badge status-badge--THEORETICAL ml-1">theoretical</span> = plausible from physics/neuroscience.
-          <span class="status-badge status-badge--EMERGING ml-1">emerging</span> = newly identified.
-        </div>
-        <div>
-          <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0&ndash;10.
-        </div>
-      </div>
-    </details>
-
-    <!-- Filter toolbar -->
-    <div class="flex flex-wrap gap-3 items-center" id="filter-toolbar">
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Search threats..."
-        class="glass-subtle rounded-lg px-3 py-2 text-sm w-48 focus:outline-none focus:border-[var(--color-accent-primary)] border border-transparent"
-      />
-      <div class="flex gap-2 items-center text-sm">
-        <span class="text-[var(--color-text-faint)]">Severity:</span>
-        <label class="filter-chip active" data-severity="critical">
-          <input type="checkbox" checked class="hidden" /> Critical
-        </label>
-        <label class="filter-chip active" data-severity="high">
-          <input type="checkbox" checked class="hidden" /> High
-        </label>
-        <label class="filter-chip active" data-severity="medium">
-          <input type="checkbox" checked class="hidden" /> Medium
-        </label>
-        <label class="filter-chip active" data-severity="low">
-          <input type="checkbox" checked class="hidden" /> Low
-        </label>
-      </div>
-      <div class="flex gap-2 items-center text-sm">
-        <span class="text-[var(--color-text-faint)]">Status:</span>
-        <label class="filter-chip active" data-status="CONFIRMED">
-          <input type="checkbox" checked class="hidden" /> Confirmed
-        </label>
-        <label class="filter-chip active" data-status="DEMONSTRATED">
-          <input type="checkbox" checked class="hidden" /> Demonstrated
-        </label>
-        <label class="filter-chip active" data-status="THEORETICAL">
-          <input type="checkbox" checked class="hidden" /> Theoretical
-        </label>
-        <label class="filter-chip active" data-status="EMERGING">
-          <input type="checkbox" checked class="hidden" /> Emerging
-        </label>
-      </div>
-      <div class="flex gap-2 items-center text-sm">
-        <span class="text-[var(--color-text-faint)]">Zone:</span>
-        <label class="filter-chip active" data-zone="neural">
-          <input type="checkbox" checked class="hidden" /> Neural
-        </label>
-        <label class="filter-chip active" data-zone="interface">
-          <input type="checkbox" checked class="hidden" /> Interface
-        </label>
-        <label class="filter-chip active" data-zone="synthetic">
-          <input type="checkbox" checked class="hidden" /> Synthetic
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Threat Map Grid -->
-  <div class="threat-map-scroll">
-    <div class="threat-map" id="threat-map">
-      <!-- Header row -->
-      <div class="map-header-corner">
-        <span class="text-xs text-[var(--color-text-faint)]">Band &darr; &ensp; Category &rarr;</span>
-      </div>
-      {THREAT_CATEGORIES.map((cat) => (
-        <div class="map-header-cell" title={cat.description}>
-          <div class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{cat.id}</div>
-          <div class="text-[10px] text-[var(--color-text-faint)] leading-tight mt-0.5">{cat.name}</div>
-        </div>
-      ))}
-
-      <!-- Band rows -->
-      {bands.map((band, i) => {
-        const prevBand = i > 0 ? bands[i - 1] : null;
-        const showSeparator = prevBand && prevBand.zone !== band.zone;
-        const zoneName = band.zone === 'interface' ? 'I\u2080 Interface' : band.zone === 'synthetic' ? 'Synthetic Domain' : 'Neural Domain';
-
-        return (
-          <>
-            {showSeparator && (
-              <div class="map-zone-separator" style={`grid-column: 1 / -1;`}>
-                <div class="zone-line"></div>
-                <span class="zone-label-text">{zoneName}</span>
-                <div class="zone-line"></div>
-              </div>
-            )}
-            {i === 0 && (
-              <div class="map-zone-separator" style="grid-column: 1 / -1;">
-                <div class="zone-line"></div>
-                <span class="zone-label-text">Neural Domain</span>
-                <div class="zone-line"></div>
-              </div>
-            )}
-            <div
-              class:list={[
-                "map-row-header",
-                band.zone === 'interface' && "map-row-header--interface",
-              ]}
-              data-band-id={band.id}
-              data-zone={band.zone}
-            >
-              <span class="font-[family-name:var(--font-mono)] text-xs font-bold" style={`color: ${band.color}`}>{band.id}</span>
-              <span class="text-xs text-[var(--color-text-muted)] ml-2 truncate">{band.name}</span>
+        <div class="flex flex-wrap gap-3 mb-6">
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
+            <span class="text-[var(--color-text-faint)]">Total</span>
+            <span class="font-bold ml-2">{stats.total}</span>
+          </div>
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
+            <span class="severity-dot severity-dot--critical"></span>
+            <span class="text-[var(--color-text-faint)]">Critical</span>
+            <span class="font-bold ml-1">{stats.critical}</span>
+          </div>
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
+            <span class="severity-dot severity-dot--high"></span>
+            <span class="text-[var(--color-text-faint)]">High</span>
+            <span class="font-bold ml-1">{stats.high}</span>
+          </div>
+          <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
+            <span class="severity-dot severity-dot--medium"></span>
+            <span class="text-[var(--color-text-faint)]">Medium</span>
+            <span class="font-bold ml-1">{stats.medium}</span>
+          </div>
+          {stats.low > 0 && (
+            <div class="glass-subtle rounded-lg px-3 py-1.5 text-sm">
+              <span class="severity-dot severity-dot--low"></span>
+              <span class="text-[var(--color-text-faint)]">Low</span>
+              <span class="font-bold ml-1">{stats.low}</span>
             </div>
-            {THREAT_CATEGORIES.map((cat) => {
-              const cellThreats = THREAT_VECTORS.filter(t =>
-                t.bands.includes(band.id as any) && t.category === cat.id
-              );
-              const maxSev = cellThreats.length > 0
-                ? (['critical', 'high', 'medium', 'low'] as const).find(s => cellThreats.some(t => t.severity === s)) || null
-                : null;
+          )}
+        </div>
+      </div>
 
-              return (
-                <div
-                  class:list={[
-                    "map-cell",
-                    maxSev && `map-cell--${maxSev}`,
-                    band.zone === 'interface' && "map-cell--interface",
-                    cellThreats.length === 0 && "map-cell--empty",
-                  ]}
-                  data-band={band.id}
-                  data-category={cat.id}
-                  data-zone={band.zone}
-                  data-threats={JSON.stringify(cellThreats.map(t => t.id))}
-                  data-severity={maxSev || ''}
-                >
-                  {cellThreats.length > 0 && (
-                    <div class="cell-inner">
-                      <span class="cell-count">{cellThreats.length}</span>
-                      <span class="cell-sev-dot" data-sev={maxSev}></span>
-                    </div>
-                  )}
+      <!-- How to read this (updated per projection) -->
+      <details class="glass-subtle rounded-lg mb-6" id="how-to-read">
+        <summary class="px-4 py-3 text-sm font-medium cursor-pointer text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] select-none">
+          How to read this grid
+        </summary>
+        <div class="px-4 pb-4 text-sm text-[var(--color-text-muted)] space-y-3 border-t border-[var(--color-border)] pt-3" id="how-to-read-body">
+          <div>
+            <strong class="text-[var(--color-text-primary)]">Grid axes</strong> &mdash; Rows are hourglass bands (Neural N7&ndash;N1, Interface I0, Synthetic S1&ndash;S3). Columns are attack categories (Signal Injection, Eavesdropping, Data Manipulation, etc.).
+          </div>
+          <div>
+            <strong class="text-[var(--color-text-primary)]">Severity colors</strong> &mdash; Damage potential if the attack succeeds.
+            <span class="sev-badge sev-badge--critical ml-1">critical</span>
+            <span class="sev-badge sev-badge--high ml-1">high</span>
+            <span class="sev-badge sev-badge--medium ml-1">medium</span>
+            <span class="sev-badge sev-badge--low ml-1">low</span>
+          </div>
+          <div>
+            <strong class="text-[var(--color-text-primary)]">Status badges</strong> &mdash; Evidence level.
+            <span class="status-badge status-badge--CONFIRMED ml-1">confirmed</span> = real-world documented.
+            <span class="status-badge status-badge--DEMONSTRATED ml-1">demonstrated</span> = lab-proven.
+            <span class="status-badge status-badge--THEORETICAL ml-1">theoretical</span> = plausible from physics/neuroscience.
+            <span class="status-badge status-badge--EMERGING ml-1">emerging</span> = newly identified.
+          </div>
+          <div>
+            <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0&ndash;10.
+          </div>
+        </div>
+      </details>
+
+      <!-- Filter toolbar -->
+      <div class="flex flex-wrap gap-3 items-center" id="filter-toolbar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search threats..."
+          class="glass-subtle rounded-lg px-3 py-2 text-sm w-48 focus:outline-none focus:border-[var(--color-accent-primary)] border border-transparent"
+        />
+        <!-- Dimension-specific filters (rebuilt per projection) -->
+        <div id="dimension-filters">
+          <div class="flex gap-2 items-center text-sm">
+            <span class="text-[var(--color-text-faint)]">Severity:</span>
+            <label class="filter-chip active" data-severity="critical"><input type="checkbox" checked class="hidden" /> Critical</label>
+            <label class="filter-chip active" data-severity="high"><input type="checkbox" checked class="hidden" /> High</label>
+            <label class="filter-chip active" data-severity="medium"><input type="checkbox" checked class="hidden" /> Medium</label>
+            <label class="filter-chip active" data-severity="low"><input type="checkbox" checked class="hidden" /> Low</label>
+          </div>
+          <div class="flex gap-2 items-center text-sm">
+            <span class="text-[var(--color-text-faint)]">Status:</span>
+            <label class="filter-chip active" data-status="CONFIRMED"><input type="checkbox" checked class="hidden" /> Confirmed</label>
+            <label class="filter-chip active" data-status="DEMONSTRATED"><input type="checkbox" checked class="hidden" /> Demonstrated</label>
+            <label class="filter-chip active" data-status="THEORETICAL"><input type="checkbox" checked class="hidden" /> Theoretical</label>
+            <label class="filter-chip active" data-status="EMERGING"><input type="checkbox" checked class="hidden" /> Emerging</label>
+          </div>
+        </div>
+        <!-- Zone filters (constant across projections) -->
+        <div id="zone-filters" class="flex gap-2 items-center text-sm">
+          <span class="text-[var(--color-text-faint)]">Zone:</span>
+          <label class="filter-chip active" data-zone="neural"><input type="checkbox" checked class="hidden" /> Neural</label>
+          <label class="filter-chip active" data-zone="interface"><input type="checkbox" checked class="hidden" /> Interface</label>
+          <label class="filter-chip active" data-zone="synthetic"><input type="checkbox" checked class="hidden" /> Synthetic</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Threat Map Grid -->
+    <div class="threat-map-scroll">
+      <div class="threat-map" id="threat-map">
+        <!-- Header row -->
+        <div class="map-header-corner">
+          <span class="text-xs text-[var(--color-text-faint)]">Band &darr; &ensp; Category &rarr;</span>
+        </div>
+        {THREAT_CATEGORIES.map((cat) => (
+          <div class="map-header-cell" title={cat.description}>
+            <div class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{cat.id}</div>
+            <div class="text-[10px] text-[var(--color-text-faint)] leading-tight mt-0.5">{cat.name}</div>
+          </div>
+        ))}
+
+        <!-- Band rows -->
+        {bands.map((band, i) => {
+          const prevBand = i > 0 ? bands[i - 1] : null;
+          const showSeparator = prevBand && prevBand.zone !== band.zone;
+          const zoneName = band.zone === 'interface' ? 'I\u2080 Interface' : band.zone === 'synthetic' ? 'Synthetic Domain' : 'Neural Domain';
+
+          return (
+            <>
+              {showSeparator && (
+                <div class="map-zone-separator" style={`grid-column: 1 / -1;`}>
+                  <div class="zone-line"></div>
+                  <span class="zone-label-text">{zoneName}</span>
+                  <div class="zone-line"></div>
                 </div>
-              );
-            })}
-          </>
-        );
-      })}
-    </div>
-  </div>
+              )}
+              {i === 0 && (
+                <div class="map-zone-separator" style="grid-column: 1 / -1;">
+                  <div class="zone-line"></div>
+                  <span class="zone-label-text">Neural Domain</span>
+                  <div class="zone-line"></div>
+                </div>
+              )}
+              <div
+                class:list={[
+                  "map-row-header",
+                  band.zone === 'interface' && "map-row-header--interface",
+                ]}
+                data-band-id={band.id}
+                data-zone={band.zone}
+              >
+                <span class="font-[family-name:var(--font-mono)] text-xs font-bold" style={`color: ${band.color}`}>{band.id}</span>
+                <span class="text-xs text-[var(--color-text-muted)] ml-2 truncate">{band.name}</span>
+              </div>
+              {THREAT_CATEGORIES.map((cat) => {
+                const cellThreats = THREAT_VECTORS.filter(t =>
+                  t.bands.includes(band.id as any) && t.category === cat.id
+                );
+                const maxSev = cellThreats.length > 0
+                  ? (['critical', 'high', 'medium', 'low'] as const).find(s => cellThreats.some(t => t.severity === s)) || null
+                  : null;
 
-  <!-- Detail Panel (side drawer) -->
-  <div class="detail-drawer" id="detail-drawer">
-    <div class="detail-drawer-inner" id="detail-drawer-inner">
-      <button class="detail-close" id="detail-close" aria-label="Close">&times;</button>
-      <div id="detail-content"></div>
+                return (
+                  <div
+                    class:list={[
+                      "map-cell",
+                      maxSev && `map-cell--${maxSev}`,
+                      band.zone === 'interface' && "map-cell--interface",
+                      cellThreats.length === 0 && "map-cell--empty",
+                    ]}
+                    data-band={band.id}
+                    data-category={cat.id}
+                    data-zone={band.zone}
+                    data-threats={JSON.stringify(cellThreats.map(t => t.id))}
+                    data-severity={maxSev || ''}
+                  >
+                    {cellThreats.length > 0 && (
+                      <div class="cell-inner">
+                        <span class="cell-count">{cellThreats.length}</span>
+                        <span class="cell-sev-dot" data-sev={maxSev}></span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </>
+          );
+        })}
+      </div>
     </div>
-  </div>
 
-  <!-- Hover Tooltip -->
-  <div class="map-tooltip" id="map-tooltip"></div>
+    <!-- Detail Panel (side drawer) -->
+    <div class="detail-drawer" id="detail-drawer">
+      <div class="detail-drawer-inner" id="detail-drawer-inner">
+        <button class="detail-close" id="detail-close" aria-label="Close">&times;</button>
+        <div id="detail-content"></div>
+      </div>
+    </div>
+
+    <!-- Hover Tooltip -->
+    <div class="map-tooltip" id="map-tooltip"></div>
+  </div>
 </PageLayout>
 
 <style>
+  /* ═══ TARA Tabs ═══ */
+  .tara-tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .tara-tabs::-webkit-scrollbar { display: none; }
+
+  .tara-tab {
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+  }
+  .tara-tab:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-text-primary);
+  }
+  .tara-tab.active {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: rgba(139, 92, 246, 0.1);
+  }
+
   /* ═══ Threat Map Grid ═══ */
   .threat-map-scroll {
     overflow-x: auto;
@@ -345,10 +375,7 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
     position: relative;
   }
 
-  .map-cell--empty {
-    cursor: default;
-    opacity: 0.4;
-  }
+  .map-cell--empty { cursor: default; opacity: 0.4; }
 
   .map-cell:not(.map-cell--empty):hover {
     transform: scale(1.05);
@@ -356,19 +383,49 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
   }
 
-  .map-cell--interface {
-    background: rgba(245, 158, 11, 0.05);
-  }
+  .map-cell--interface { background: rgba(245, 158, 11, 0.05); }
 
-  /* Severity heat colors */
-  .map-cell--critical { background: rgba(239, 68, 68, 0.12); }
-  .map-cell--critical:hover { background: rgba(239, 68, 68, 0.22); }
-  .map-cell--high { background: rgba(245, 158, 11, 0.10); }
-  .map-cell--high:hover { background: rgba(245, 158, 11, 0.20); }
-  .map-cell--medium { background: rgba(234, 179, 8, 0.08); }
-  .map-cell--medium:hover { background: rgba(234, 179, 8, 0.18); }
-  .map-cell--low { background: rgba(148, 163, 184, 0.06); }
-  .map-cell--low:hover { background: rgba(148, 163, 184, 0.14); }
+  /* ═══ Cell color classes — Security (severity, default) ═══ */
+  .map-cell--critical, .map-cell--sev-critical { background: rgba(239, 68, 68, 0.12); }
+  .map-cell--critical:hover, .map-cell--sev-critical:hover { background: rgba(239, 68, 68, 0.22); }
+  .map-cell--high, .map-cell--sev-high { background: rgba(245, 158, 11, 0.10); }
+  .map-cell--high:hover, .map-cell--sev-high:hover { background: rgba(245, 158, 11, 0.20); }
+  .map-cell--medium, .map-cell--sev-medium { background: rgba(234, 179, 8, 0.08); }
+  .map-cell--medium:hover, .map-cell--sev-medium:hover { background: rgba(234, 179, 8, 0.18); }
+  .map-cell--low, .map-cell--sev-low { background: rgba(148, 163, 184, 0.06); }
+  .map-cell--low:hover, .map-cell--sev-low:hover { background: rgba(148, 163, 184, 0.14); }
+
+  /* ═══ Cell color classes — Clinical (dual-use) ═══ */
+  .map-cell--du-confirmed { background: rgba(16, 185, 129, 0.12); }
+  .map-cell--du-confirmed:hover { background: rgba(16, 185, 129, 0.22); }
+  .map-cell--du-probable { background: rgba(6, 182, 212, 0.10); }
+  .map-cell--du-probable:hover { background: rgba(6, 182, 212, 0.20); }
+  .map-cell--du-possible { background: rgba(139, 92, 246, 0.08); }
+  .map-cell--du-possible:hover { background: rgba(139, 92, 246, 0.18); }
+  .map-cell--du-silicon_only { background: rgba(148, 163, 184, 0.06); }
+  .map-cell--du-silicon_only:hover { background: rgba(148, 163, 184, 0.14); }
+
+  /* ═══ Cell color classes — Governance (consent tier) ═══ */
+  .map-cell--ct-standard { background: rgba(34, 197, 94, 0.10); }
+  .map-cell--ct-standard:hover { background: rgba(34, 197, 94, 0.20); }
+  .map-cell--ct-enhanced { background: rgba(245, 158, 11, 0.10); }
+  .map-cell--ct-enhanced:hover { background: rgba(245, 158, 11, 0.20); }
+  .map-cell--ct-IRB { background: rgba(239, 68, 68, 0.12); }
+  .map-cell--ct-IRB:hover { background: rgba(239, 68, 68, 0.22); }
+  .map-cell--ct-prohibited { background: rgba(127, 29, 29, 0.18); }
+  .map-cell--ct-prohibited:hover { background: rgba(127, 29, 29, 0.28); }
+
+  /* ═══ Cell color classes — Engineering (coupling) ═══ */
+  .map-cell--cp-electromagnetic { background: rgba(59, 130, 246, 0.12); }
+  .map-cell--cp-electromagnetic:hover { background: rgba(59, 130, 246, 0.22); }
+  .map-cell--cp-mechanical { background: rgba(245, 158, 11, 0.10); }
+  .map-cell--cp-mechanical:hover { background: rgba(245, 158, 11, 0.20); }
+  .map-cell--cp-thermal { background: rgba(239, 68, 68, 0.10); }
+  .map-cell--cp-thermal:hover { background: rgba(239, 68, 68, 0.20); }
+  .map-cell--cp-optical { background: rgba(168, 85, 247, 0.10); }
+  .map-cell--cp-optical:hover { background: rgba(168, 85, 247, 0.20); }
+  .map-cell--cp-none { background: rgba(148, 163, 184, 0.06); }
+  .map-cell--cp-none:hover { background: rgba(148, 163, 184, 0.14); }
 
   .cell-inner {
     display: flex;
@@ -387,11 +444,28 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
     width: 6px;
     height: 6px;
     border-radius: 50%;
+    transition: background 0.2s, box-shadow 0.2s;
   }
   .cell-sev-dot[data-sev="critical"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
   .cell-sev-dot[data-sev="high"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
   .cell-sev-dot[data-sev="medium"] { background: #eab308; box-shadow: 0 0 4px #eab308; }
   .cell-sev-dot[data-sev="low"] { background: #94a3b8; box-shadow: 0 0 4px #94a3b8; }
+  /* Clinical dot colors */
+  .cell-sev-dot[data-sev="confirmed"] { background: #10b981; box-shadow: 0 0 4px #10b981; }
+  .cell-sev-dot[data-sev="probable"] { background: #06b6d4; box-shadow: 0 0 4px #06b6d4; }
+  .cell-sev-dot[data-sev="possible"] { background: #8b5cf6; box-shadow: 0 0 4px #8b5cf6; }
+  .cell-sev-dot[data-sev="silicon_only"] { background: #94a3b8; box-shadow: 0 0 4px #94a3b8; }
+  /* Governance dot colors */
+  .cell-sev-dot[data-sev="standard"] { background: #22c55e; box-shadow: 0 0 4px #22c55e; }
+  .cell-sev-dot[data-sev="enhanced"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
+  .cell-sev-dot[data-sev="IRB"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
+  .cell-sev-dot[data-sev="prohibited"] { background: #7f1d1d; box-shadow: 0 0 4px #7f1d1d; }
+  /* Engineering dot colors */
+  .cell-sev-dot[data-sev="electromagnetic"] { background: #3b82f6; box-shadow: 0 0 4px #3b82f6; }
+  .cell-sev-dot[data-sev="mechanical"] { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
+  .cell-sev-dot[data-sev="thermal"] { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
+  .cell-sev-dot[data-sev="optical"] { background: #a855f7; box-shadow: 0 0 4px #a855f7; }
+  .cell-sev-dot[data-sev="none"] { background: #94a3b8; box-shadow: 0 0 4px #94a3b8; }
 
   /* Severity dots in stats bar */
   .severity-dot {
@@ -427,8 +501,10 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
     background: rgba(6, 182, 212, 0.1);
   }
 
-  .filter-chip:hover {
-    border-color: var(--color-text-muted);
+  .filter-chip:hover { border-color: var(--color-text-muted); }
+
+  #dimension-filters {
+    display: contents;
   }
 
   /* Detail drawer */
@@ -609,9 +685,7 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
     pointer-events: none;
   }
 
-  .map-row-header.filtered-out {
-    opacity: 0.3;
-  }
+  .map-row-header.filtered-out { opacity: 0.3; }
 
   /* Responsive */
   @media (max-width: 768px) {
@@ -622,152 +696,448 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
   }
 </style>
 
-<script define:vars={{ allThreatsJson }}>
-  // ── Threat data from server ──
-  const ALL_THREATS = JSON.parse(allThreatsJson);
+<script define:vars={{ allThreatsJson, projectionConfigJson }}>
+  // ═══════════════════════════════════════════════════════════════
+  // TARA Multi-Pane Threat Registry — Client-Side Controller
+  //
+  // All projection config is driven by data from tara-projections.ts,
+  // serialized at build time. The rendering functions below are generic
+  // and operate on that config — no hardcoded projection logic.
+  // ═══════════════════════════════════════════════════════════════
 
-  const THREATS = {};
-  for (const t of ALL_THREATS) {
-    THREATS[t.id] = t;
+  // ── Data from server ──
+  var ALL_THREATS = JSON.parse(allThreatsJson);
+  var PROJ_CONFIG = JSON.parse(projectionConfigJson);
+
+  var THREATS = {};
+  for (var i = 0; i < ALL_THREATS.length; i++) {
+    THREATS[ALL_THREATS[i].id] = ALL_THREATS[i];
   }
 
-  // ── Tooltip ──
-  const tooltip = document.getElementById('map-tooltip');
-
-  function showTooltip(cell, e) {
-    const threatIds = JSON.parse(cell.dataset.threats || '[]');
-    if (threatIds.length === 0) return;
-
-    const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
-    let html = '';
-    for (const t of threats) {
-      html += '<div class="tt-name">' + t.id + ' — ' + t.name + '</div>';
-      html += '<div class="tt-meta">' + t.severity.toUpperCase() + ' · ' + t.status + ' · ' + t.bandsStr + (t.coupling ? ' · ' + t.coupling : '') + '</div>';
-    }
-
-    tooltip.innerHTML = html;
-    positionTooltip(e);
-    tooltip.classList.add('visible');
+  // Build projection lookup
+  var PROJECTIONS = {};
+  for (var p = 0; p < PROJ_CONFIG.projections.length; p++) {
+    var proj = PROJ_CONFIG.projections[p];
+    PROJECTIONS[proj.id] = proj;
   }
 
-  function positionTooltip(e) {
-    const x = Math.min(e.clientX + 12, window.innerWidth - 320);
-    const y = Math.min(e.clientY - 8, window.innerHeight - 150);
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
+  // ── State ──
+  var activeProjection = 'security';
+  var lastOpenedCell = null;
+
+  // ── DOM refs ──
+  var threatPage = document.getElementById('threat-page');
+  var tabsNav = document.getElementById('tara-tabs');
+  var statsBar = document.getElementById('stats-bar');
+  var dimFilters = document.getElementById('dimension-filters');
+  var zoneFiltersEl = document.getElementById('zone-filters');
+  var howToReadBody = document.getElementById('how-to-read-body');
+  var tooltip = document.getElementById('map-tooltip');
+  var drawer = document.getElementById('detail-drawer');
+  var drawerContent = document.getElementById('detail-content');
+  var drawerClose = document.getElementById('detail-close');
+  var searchInput = document.getElementById('search-input');
+
+  // ═══════════════════════════════════════════════════════════════
+  // Value extractors per projection (can't serialize functions,
+  // so we define them client-side keyed by projection ID)
+  // ═══════════════════════════════════════════════════════════════
+
+  var VALUE_EXTRACTORS = {
+    security: function(t) { return t.severity; },
+    clinical: function(t) { return t.tara ? t.tara.dual_use : null; },
+    governance: function(t) { return t.tara ? t.tara.governance.consent_tier : null; },
+    engineering: function(t) {
+      if (!t.tara || !t.tara.engineering || !t.tara.engineering.coupling || t.tara.engineering.coupling.length === 0) return 'none';
+      return t.tara.engineering.coupling[0];
+    },
+  };
+
+  // ═══════════════════════════════════════════════════════════════
+  // Filter matchers per projection
+  // ═══════════════════════════════════════════════════════════════
+
+  var FILTER_MATCHERS = {
+    security: function(t, active) {
+      var sevSet = active['severity'];
+      var statusSet = active['status'];
+      if (sevSet && !sevSet.has(t.severity)) return false;
+      if (statusSet && !statusSet.has(t.status)) return false;
+      return true;
+    },
+    clinical: function(t, active) {
+      var duSet = active['dualuse'];
+      var fdaSet = active['fda'];
+      if (duSet && !duSet.has(t.tara ? t.tara.dual_use : '')) return false;
+      if (fdaSet) {
+        var fdaVal = (t.tara && t.tara.clinical) ? t.tara.clinical.fda_status : 'none';
+        if (!fdaSet.has(fdaVal)) return false;
+      }
+      return true;
+    },
+    governance: function(t, active) {
+      var ctSet = active['consent'];
+      if (ctSet && !ctSet.has(t.tara ? t.tara.governance.consent_tier : '')) return false;
+      return true;
+    },
+    engineering: function(t, active) {
+      var cpSet = active['coupling'];
+      if (!cpSet) return true;
+      var val = 'none';
+      if (t.tara && t.tara.engineering && t.tara.engineering.coupling && t.tara.engineering.coupling.length > 0) {
+        val = t.tara.engineering.coupling[0];
+      }
+      return cpSet.has(val);
+    },
+  };
+
+  // ═══════════════════════════════════════════════════════════════
+  // Detail renderers per projection
+  // ═══════════════════════════════════════════════════════════════
+
+  function makeBadge(text, bg, color, border) {
+    var b = border ? 'border:1px solid ' + border + ';' : '';
+    return '<span style="display:inline-block;padding:0.1rem 0.4rem;border-radius:99px;font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;background:' + bg + ';color:' + color + ';' + b + '">' + text + '</span>';
   }
 
-  function hideTooltip() {
-    tooltip.classList.remove('visible');
-  }
-
-  // ── Detail drawer ──
-  const drawer = document.getElementById('detail-drawer');
-  const drawerContent = document.getElementById('detail-content');
-  const drawerClose = document.getElementById('detail-close');
-
-  const STATUS_BADGE_COLORS = {
+  var STATUS_BADGE_COLORS = {
     CONFIRMED: { bg: 'rgba(239,68,68,0.12)', color: '#ef4444', border: 'rgba(239,68,68,0.2)' },
     DEMONSTRATED: { bg: 'rgba(245,158,11,0.12)', color: '#f59e0b', border: 'rgba(245,158,11,0.2)' },
     THEORETICAL: { bg: 'rgba(148,163,184,0.12)', color: '#94a3b8', border: 'rgba(148,163,184,0.2)' },
     EMERGING: { bg: 'rgba(139,92,246,0.12)', color: '#8b5cf6', border: 'rgba(139,92,246,0.2)' },
   };
 
-  function openDrawer(cell) {
-    const threatIds = JSON.parse(cell.dataset.threats || '[]');
-    const band = cell.dataset.band;
-    const category = cell.dataset.category;
+  var DUAL_USE_BADGE = {
+    confirmed: { bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)' },
+    probable: { bg: 'rgba(6,182,212,0.15)', color: '#06b6d4', border: 'rgba(6,182,212,0.3)' },
+    possible: { bg: 'rgba(139,92,246,0.15)', color: '#8b5cf6', border: 'rgba(139,92,246,0.3)' },
+    silicon_only: { bg: 'rgba(148,163,184,0.15)', color: '#94a3b8', border: 'rgba(148,163,184,0.3)' },
+  };
 
-    if (threatIds.length === 0) return;
+  var FDA_BADGE = {
+    cleared: { bg: 'rgba(16,185,129,0.12)', color: '#10b981' },
+    approved: { bg: 'rgba(34,197,94,0.12)', color: '#22c55e' },
+    breakthrough: { bg: 'rgba(6,182,212,0.12)', color: '#06b6d4' },
+    investigational: { bg: 'rgba(245,158,11,0.12)', color: '#f59e0b' },
+    none: { bg: 'rgba(148,163,184,0.12)', color: '#94a3b8' },
+    'N/A': { bg: 'rgba(100,116,139,0.12)', color: '#64748b' },
+  };
 
-    const threats = threatIds.map(id => THREATS[id]).filter(Boolean);
-    let html = '<div style="margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--color-border);">' +
-      '<div style="font-size:0.7rem;color:var(--color-text-faint);font-family:var(--font-mono);">' + band + ' \u00d7 ' + category + '</div>' +
-      '<div style="font-size:1.1rem;font-weight:600;margin-top:0.25rem;">' + threats.length + ' Threat' + (threats.length !== 1 ? 's' : '') + '</div>' +
-    '</div>';
+  var CONSENT_BADGE = {
+    standard: { bg: 'rgba(34,197,94,0.12)', color: '#22c55e' },
+    enhanced: { bg: 'rgba(245,158,11,0.12)', color: '#f59e0b' },
+    IRB: { bg: 'rgba(239,68,68,0.12)', color: '#ef4444' },
+    prohibited: { bg: 'rgba(127,29,29,0.2)', color: '#ef4444' },
+  };
 
-    for (const t of threats) {
-      const sc = STATUS_BADGE_COLORS[t.status] || STATUS_BADGE_COLORS.THEORETICAL;
-      const statusBadge = '<span style="display:inline-block;padding:0.1rem 0.4rem;border-radius:99px;font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;background:' + sc.bg + ';color:' + sc.color + ';border:1px solid ' + sc.border + ';">' + t.status + '</span>';
+  var COUPLING_BADGE = {
+    electromagnetic: { bg: 'rgba(59,130,246,0.15)', color: '#3b82f6', border: 'rgba(59,130,246,0.3)' },
+    mechanical: { bg: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)' },
+    thermal: { bg: 'rgba(239,68,68,0.15)', color: '#ef4444', border: 'rgba(239,68,68,0.3)' },
+    optical: { bg: 'rgba(168,85,247,0.15)', color: '#a855f7', border: 'rgba(168,85,247,0.3)' },
+    none: { bg: 'rgba(148,163,184,0.15)', color: '#94a3b8', border: 'rgba(148,163,184,0.3)' },
+  };
 
-      html += '<div class="detail-threat">' +
-        '<div class="detail-threat-name">' + t.name + ' <span class="sev-badge sev-badge--' + t.severity + '">' + t.severity + '</span> ' + statusBadge + '</div>' +
-        '<div class="detail-threat-id">' + t.id + '</div>' +
-        '<dl class="detail-meta">' +
-          '<dt>Bands</dt><dd>' + t.bandsStr + '</dd>' +
-          (t.coupling ? '<dt>Coupling</dt><dd>' + t.coupling + '</dd>' : '') +
-          (t.access ? '<dt>Access</dt><dd>' + t.access + '</dd>' : '') +
-          '<dt>Classical</dt><dd style="color:' + (t.classicalDetection === 'Yes' ? '#10b981' : t.classicalDetection === 'Partial' ? '#f59e0b' : '#ef4444') + '">' + t.classicalDetection + '</dd>' +
-          '<dt>Quantum</dt><dd style="color:#8b5cf6">' + t.quantumDetection + '</dd>' +
-        '</dl>' +
-        '<div class="detail-description">' + t.description + '</div>';
-
-      // QNIS score + tactic
+  var DETAIL_RENDERERS = {
+    security: function(t) {
+      var sc = STATUS_BADGE_COLORS[t.status] || STATUS_BADGE_COLORS.THEORETICAL;
+      var statusBdg = makeBadge(t.status, sc.bg, sc.color, sc.border);
+      var html = '<div class="detail-threat-name">' + t.name + ' <span class="sev-badge sev-badge--' + t.severity + '">' + t.severity + '</span> ' + statusBdg + '</div>';
+      html += '<div class="detail-threat-id">' + t.id + '</div>';
+      html += '<dl class="detail-meta">';
+      html += '<dt>Bands</dt><dd>' + t.bandsStr + '</dd>';
+      if (t.coupling) html += '<dt>Coupling</dt><dd>' + t.coupling + '</dd>';
+      if (t.access) html += '<dt>Access</dt><dd>' + t.access + '</dd>';
+      var detColor = t.classicalDetection === 'Yes' ? '#10b981' : t.classicalDetection === 'Partial' ? '#f59e0b' : '#ef4444';
+      html += '<dt>Classical</dt><dd style="color:' + detColor + '">' + t.classicalDetection + '</dd>';
+      html += '<dt>Quantum</dt><dd style="color:#8b5cf6">' + t.quantumDetection + '</dd>';
+      html += '</dl>';
+      html += '<div class="detail-description">' + t.description + '</div>';
       if (t.qnis && t.qnis.score > 0) {
-        html += '<div class="detail-qnis">QNIS ' + t.qnis.score.toFixed(1) + ' (' + t.qnis.severity + ') — ' + t.qnis.vector + '</div>';
+        html += '<div class="detail-qnis">QNIS ' + t.qnis.score.toFixed(1) + ' (' + t.qnis.severity + ') \u2014 ' + t.qnis.vector + '</div>';
       }
       html += '<div class="detail-tactic">' + t.tactic + '</div>';
-
-      // Cross-references (secondary tactics)
       if (t.crossRefs && t.crossRefs.secondary_tactics && t.crossRefs.secondary_tactics.length > 0) {
         html += '<div class="detail-tactic">Also: ' + t.crossRefs.secondary_tactics.join(', ') + '</div>';
       }
-
-      // Sources
       if (t.sources && t.sources.length > 0) {
         html += '<div class="detail-sources">Sources: ' + t.sources.join('; ') + '</div>';
       }
+      return html;
+    },
 
-      html += '</div>';
+    clinical: function(t) {
+      var du = t.tara ? t.tara.dual_use : 'silicon_only';
+      var duC = DUAL_USE_BADGE[du] || DUAL_USE_BADGE.silicon_only;
+      var duBdg = makeBadge(du.replace('_', ' '), duC.bg, duC.color, duC.border);
+      var html = '<div class="detail-threat-name">' + t.name + ' ' + duBdg + '</div>';
+      html += '<div class="detail-threat-id">' + t.id + '</div>';
+
+      if (t.tara && t.tara.clinical) {
+        var c = t.tara.clinical;
+        var fdaC = FDA_BADGE[c.fda_status] || FDA_BADGE.none;
+        var fdaBdg = makeBadge(c.fda_status, fdaC.bg, fdaC.color);
+        html += '<div style="margin:0.5rem 0;font-size:0.85rem;color:var(--color-text-primary);font-weight:600;">' + c.therapeutic_analog + '</div>';
+        html += '<div style="margin-bottom:0.5rem;">' + fdaBdg + ' <span style="font-size:0.7rem;color:var(--color-text-faint);margin-left:0.3rem;">Evidence: ' + c.evidence_level + '</span></div>';
+        if (c.conditions && c.conditions.length > 0) {
+          html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-bottom:0.4rem;"><strong>Conditions:</strong></div>';
+          html += '<ul style="font-size:0.75rem;color:var(--color-text-muted);margin:0 0 0.5rem 1rem;padding:0;">';
+          for (var j = 0; j < c.conditions.length; j++) html += '<li>' + c.conditions[j] + '</li>';
+          html += '</ul>';
+        }
+        if (c.safe_parameters) {
+          html += '<div style="font-size:0.75rem;color:var(--color-text-muted);"><strong>Safe parameters:</strong> ' + c.safe_parameters + '</div>';
+        }
+        if (c.sources && c.sources.length > 0) {
+          html += '<div class="detail-sources">Clinical sources: ' + c.sources.join('; ') + '</div>';
+        }
+      } else {
+        html += '<div style="font-size:0.8rem;color:var(--color-text-faint);font-style:italic;margin-top:0.5rem;">No therapeutic analog \u2014 pure digital/silicon attack vector</div>';
+      }
+      return html;
+    },
+
+    governance: function(t) {
+      if (!t.tara) return '<div class="detail-threat-name">' + t.name + '</div><div class="detail-threat-id">' + t.id + '</div><div style="font-size:0.8rem;color:var(--color-text-faint);">No governance data</div>';
+      var gov = t.tara.governance;
+      var ctC = CONSENT_BADGE[gov.consent_tier] || CONSENT_BADGE.standard;
+      var ctBdg = makeBadge(gov.consent_tier, ctC.bg, ctC.color);
+      var html = '<div class="detail-threat-name">' + t.name + ' ' + ctBdg + '</div>';
+      html += '<div class="detail-threat-id">' + t.id + '</div>';
+      html += '<dl class="detail-meta">';
+      html += '<dt>Safety Ceiling</dt><dd>' + gov.safety_ceiling + '</dd>';
+      html += '<dt>Data Class.</dt><dd>' + gov.data_classification + '</dd>';
+      html += '</dl>';
+      if (gov.monitoring && gov.monitoring.length > 0) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.4rem;"><strong>Monitoring:</strong></div>';
+        html += '<ul style="font-size:0.75rem;color:var(--color-text-muted);margin:0 0 0.4rem 1rem;padding:0;">';
+        for (var m = 0; m < gov.monitoring.length; m++) html += '<li>' + gov.monitoring[m].replace(/_/g, ' ') + '</li>';
+        html += '</ul>';
+      }
+      if (gov.regulations && gov.regulations.length > 0) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);"><strong>Regulations:</strong></div>';
+        html += '<ul style="font-size:0.75rem;color:var(--color-text-muted);margin:0 0 0 1rem;padding:0;">';
+        for (var r = 0; r < gov.regulations.length; r++) html += '<li>' + gov.regulations[r] + '</li>';
+        html += '</ul>';
+      }
+      return html;
+    },
+
+    engineering: function(t) {
+      if (!t.tara || !t.tara.engineering) return '<div class="detail-threat-name">' + t.name + '</div><div class="detail-threat-id">' + t.id + '</div><div style="font-size:0.8rem;color:var(--color-text-faint);">No engineering data</div>';
+      var eng = t.tara.engineering;
+      var couplingVal = (eng.coupling && eng.coupling.length > 0) ? eng.coupling[0] : 'none';
+      var cpC = COUPLING_BADGE[couplingVal] || COUPLING_BADGE.none;
+      var cpBdg = makeBadge(couplingVal, cpC.bg, cpC.color, cpC.border);
+      var html = '<div class="detail-threat-name">' + t.name + ' ' + cpBdg + '</div>';
+      html += '<div class="detail-threat-id">' + t.id + '</div>';
+      var paramKeys = Object.keys(eng.parameters || {});
+      if (paramKeys.length > 0) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.5rem;"><strong>Parameters:</strong></div>';
+        html += '<dl class="detail-meta">';
+        for (var pk = 0; pk < paramKeys.length; pk++) {
+          html += '<dt>' + paramKeys[pk].replace(/_/g, ' ') + '</dt><dd>' + eng.parameters[paramKeys[pk]] + '</dd>';
+        }
+        html += '</dl>';
+      }
+      if (eng.hardware && eng.hardware.length > 0) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.4rem;"><strong>Hardware:</strong></div>';
+        html += '<ul style="font-size:0.75rem;color:var(--color-text-muted);margin:0 0 0.4rem 1rem;padding:0;">';
+        for (var h = 0; h < eng.hardware.length; h++) html += '<li>' + eng.hardware[h].replace(/_/g, ' ') + '</li>';
+        html += '</ul>';
+      }
+      if (eng.detection) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.3rem;"><strong>Detection:</strong> ' + eng.detection + '</div>';
+      }
+      return html;
+    },
+  };
+
+  // ═══════════════════════════════════════════════════════════════
+  // Grid recoloring
+  // ═══════════════════════════════════════════════════════════════
+
+  // All possible color class prefixes for stripping
+  var COLOR_PREFIXES = ['map-cell--critical', 'map-cell--high', 'map-cell--medium', 'map-cell--low',
+    'map-cell--sev-critical', 'map-cell--sev-high', 'map-cell--sev-medium', 'map-cell--sev-low',
+    'map-cell--du-confirmed', 'map-cell--du-probable', 'map-cell--du-possible', 'map-cell--du-silicon_only',
+    'map-cell--ct-standard', 'map-cell--ct-enhanced', 'map-cell--ct-IRB', 'map-cell--ct-prohibited',
+    'map-cell--cp-electromagnetic', 'map-cell--cp-mechanical', 'map-cell--cp-thermal', 'map-cell--cp-optical', 'map-cell--cp-none'];
+
+  function recolorGrid(projId) {
+    var proj = PROJECTIONS[projId];
+    var prefix = proj.cellClassPrefix;
+    var ranking = proj.valueRanking;
+    var extractor = VALUE_EXTRACTORS[projId];
+
+    document.querySelectorAll('.map-cell').forEach(function(cell) {
+      var threatIds = JSON.parse(cell.dataset.threats || '[]');
+
+      // Strip all color classes
+      for (var ci = 0; ci < COLOR_PREFIXES.length; ci++) {
+        cell.classList.remove(COLOR_PREFIXES[ci]);
+      }
+
+      if (threatIds.length === 0) return;
+
+      var threats = threatIds.map(function(id) { return THREATS[id]; }).filter(Boolean);
+
+      // Find dominant value (hottest by ranking)
+      var dominant = null;
+      for (var ri = 0; ri < ranking.length; ri++) {
+        for (var ti = 0; ti < threats.length; ti++) {
+          var val = extractor(threats[ti]);
+          if (val === ranking[ri]) {
+            dominant = val;
+            break;
+          }
+        }
+        if (dominant) break;
+      }
+
+      // Apply new color class
+      if (dominant) {
+        // For security projection, use original class names (backward compat)
+        if (projId === 'security') {
+          cell.classList.add('map-cell--' + dominant);
+        } else {
+          cell.classList.add('map-cell--' + prefix + '-' + dominant);
+        }
+      }
+
+      // Update dot indicator
+      var dot = cell.querySelector('.cell-sev-dot');
+      if (dot) {
+        dot.setAttribute('data-sev', dominant || '');
+      }
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // Stats bar rebuild
+  // ═══════════════════════════════════════════════════════════════
+
+  function rebuildStats(projId) {
+    var proj = PROJECTIONS[projId];
+    var statRows = proj.stats;
+    var extractor = VALUE_EXTRACTORS[projId];
+
+    // For engineering, compute counts dynamically from threat data
+    if (projId === 'engineering') {
+      var counts = {};
+      for (var ei = 0; ei < ALL_THREATS.length; ei++) {
+        var val = extractor(ALL_THREATS[ei]);
+        counts[val] = (counts[val] || 0) + 1;
+      }
+      // Patch counts into the stat items
+      for (var sr = 0; sr < statRows.length; sr++) {
+        for (var si = 0; si < statRows[sr].items.length; si++) {
+          var item = statRows[sr].items[si];
+          if (counts[item.key] !== undefined) {
+            item.count = counts[item.key];
+          }
+        }
+      }
     }
 
-    drawerContent.innerHTML = html;
-    drawer.classList.add('open');
+    var html = '';
+    for (var r = 0; r < statRows.length; r++) {
+      html += '<div class="flex flex-wrap gap-3 mb-' + (r < statRows.length - 1 ? '4' : '6') + '">';
+      for (var s = 0; s < statRows[r].items.length; s++) {
+        var it = statRows[r].items[s];
+        html += '<div class="glass-subtle rounded-lg px-3 py-1.5 text-sm flex items-center gap-2">';
+        if (it.dotColor) {
+          html += '<span class="w-2 h-2 rounded-full" style="background:' + it.dotColor + ';"></span>';
+        }
+        html += '<span class="text-[var(--color-text-faint)]">' + it.label + '</span>';
+        html += '<span class="font-bold">' + it.count + '</span>';
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+    statsBar.innerHTML = html;
   }
 
-  function closeDrawer() {
-    drawer.classList.remove('open');
-  }
+  // ═══════════════════════════════════════════════════════════════
+  // Filter rebuild
+  // ═══════════════════════════════════════════════════════════════
 
-  drawerClose.addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeDrawer();
-  });
+  function rebuildFilters(projId) {
+    var proj = PROJECTIONS[projId];
+    var groups = proj.filters;
 
-  // ── Cell interactions ──
-  document.querySelectorAll('.map-cell:not(.map-cell--empty)').forEach(function(cell) {
-    cell.addEventListener('mouseenter', function(e) { showTooltip(cell, e); });
-    cell.addEventListener('mousemove', function(e) { positionTooltip(e); });
-    cell.addEventListener('mouseleave', hideTooltip);
-    cell.addEventListener('click', function() {
-      hideTooltip();
-      openDrawer(cell);
+    var html = '';
+    for (var g = 0; g < groups.length; g++) {
+      var grp = groups[g];
+      html += '<div class="flex gap-2 items-center text-sm">';
+      html += '<span class="text-[var(--color-text-faint)]">' + grp.label + ':</span>';
+      for (var v = 0; v < grp.values.length; v++) {
+        var val = grp.values[v];
+        html += '<label class="filter-chip active" data-' + grp.attr + '="' + val.key + '">';
+        html += '<input type="checkbox" checked class="hidden" /> ' + val.label;
+        html += '</label>';
+      }
+      html += '</div>';
+    }
+    dimFilters.innerHTML = html;
+
+    // Wire up new chips
+    dimFilters.querySelectorAll('.filter-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        chip.classList.toggle('active');
+        applyFilters();
+      });
     });
-  });
+  }
 
-  // ── Filters ──
-  const searchInput = document.getElementById('search-input');
-  const severityFilters = document.querySelectorAll('.filter-chip[data-severity]');
-  const statusFilters = document.querySelectorAll('.filter-chip[data-status]');
-  const zoneFilters = document.querySelectorAll('.filter-chip[data-zone]');
+  // ═══════════════════════════════════════════════════════════════
+  // How to read this grid (updated per projection)
+  // ═══════════════════════════════════════════════════════════════
 
-  function getActiveSet(chips, attr) {
-    const active = new Set();
-    chips.forEach(function(f) {
-      if (f.classList.contains('active')) active.add(f.dataset[attr]);
+  var GRID_AXES_HTML = '<div><strong class="text-[var(--color-text-primary)]">Grid axes</strong> \u2014 Rows are hourglass bands (Neural N7\u2013N1, Interface I0, Synthetic S1\u2013S3). Columns are attack categories (Signal Injection, Eavesdropping, Data Manipulation, etc.).</div>';
+  var QIF_IDS_HTML = '<div><strong class="text-[var(--color-text-primary)]">QIF IDs</strong> \u2014 QIF-T0001+ for techniques. Tactics use Qinnovate\u2019s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). QNIS scores rate neural impact 0\u201310.</div>';
+
+  function updateHowToRead(projId) {
+    var proj = PROJECTIONS[projId];
+    howToReadBody.innerHTML = GRID_AXES_HTML + proj.explanation.body + QIF_IDS_HTML;
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // Projection-aware filter application
+  // ═══════════════════════════════════════════════════════════════
+
+  function getActiveSetFromContainer(container, attr) {
+    var active = new Set();
+    container.querySelectorAll('.filter-chip').forEach(function(f) {
+      if (f.classList.contains('active')) {
+        // Get the data-attribute value
+        active.add(f.dataset[attr]);
+      }
     });
     return active;
   }
 
   function applyFilters() {
-    const query = searchInput.value.toLowerCase().trim();
-    const activeSeverities = getActiveSet(severityFilters, 'severity');
-    const activeStatuses = getActiveSet(statusFilters, 'status');
-    const activeZones = getActiveSet(zoneFilters, 'zone');
+    var query = searchInput.value.toLowerCase().trim();
+    var proj = PROJECTIONS[activeProjection];
+    var matcher = FILTER_MATCHERS[activeProjection];
+
+    // Collect active dimension filter values
+    var activeValues = {};
+    for (var g = 0; g < proj.filters.length; g++) {
+      var grp = proj.filters[g];
+      activeValues[grp.attr] = getActiveSetFromContainer(dimFilters, grp.attr);
+    }
+
+    // Zone filters
+    var activeZones = new Set();
+    zoneFiltersEl.querySelectorAll('.filter-chip').forEach(function(f) {
+      if (f.classList.contains('active')) activeZones.add(f.dataset.zone);
+    });
 
     document.querySelectorAll('.map-cell').forEach(function(cell) {
-      const zone = cell.dataset.zone || '';
-      const threatIds = JSON.parse(cell.dataset.threats || '[]');
+      var zone = cell.dataset.zone || '';
+      var threatIds = JSON.parse(cell.dataset.threats || '[]');
 
       // Zone filter
       if (!activeZones.has(zone)) {
@@ -782,11 +1152,11 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
       }
 
       // Get matching threats
-      const threats = threatIds.map(function(id) { return THREATS[id]; }).filter(Boolean);
+      var threats = threatIds.map(function(id) { return THREATS[id]; }).filter(Boolean);
 
-      // Severity + status filter — at least one threat must match both
-      const hasMatch = threats.some(function(t) {
-        return activeSeverities.has(t.severity) && activeStatuses.has(t.status);
+      // Dimension filter — at least one threat must match
+      var hasMatch = threats.some(function(t) {
+        return matcher(t, activeValues);
       });
       if (!hasMatch) {
         cell.classList.add('filtered-out');
@@ -795,12 +1165,12 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
 
       // Search filter
       if (query) {
-        const matchesSearch = threats.some(function(t) {
-          return t.name.toLowerCase().includes(query) ||
-            t.description.toLowerCase().includes(query) ||
-            t.id.toLowerCase().includes(query) ||
-            (t.coupling && t.coupling.toLowerCase().includes(query)) ||
-            (t.tactic && t.tactic.toLowerCase().includes(query));
+        var matchesSearch = threats.some(function(t) {
+          return t.name.toLowerCase().indexOf(query) !== -1 ||
+            t.description.toLowerCase().indexOf(query) !== -1 ||
+            t.id.toLowerCase().indexOf(query) !== -1 ||
+            (t.coupling && t.coupling.toLowerCase().indexOf(query) !== -1) ||
+            (t.tactic && t.tactic.toLowerCase().indexOf(query) !== -1);
         });
         if (!matchesSearch) {
           cell.classList.add('filtered-out');
@@ -813,23 +1183,162 @@ const allThreatsJson = JSON.stringify(THREAT_VECTORS);
 
     // Filter row headers by zone
     document.querySelectorAll('.map-row-header').forEach(function(header) {
-      const zone = header.dataset.zone || '';
+      var zone = header.dataset.zone || '';
       header.classList.toggle('filtered-out', !activeZones.has(zone));
     });
   }
 
-  // Wire up filter chips
-  function wireChips(chips) {
-    chips.forEach(function(chip) {
-      chip.addEventListener('click', function() {
-        chip.classList.toggle('active');
-        applyFilters();
-      });
-    });
-  }
-  wireChips(severityFilters);
-  wireChips(statusFilters);
-  wireChips(zoneFilters);
+  // ═══════════════════════════════════════════════════════════════
+  // Drawer
+  // ═══════════════════════════════════════════════════════════════
 
+  function openDrawer(cell) {
+    var threatIds = JSON.parse(cell.dataset.threats || '[]');
+    var band = cell.dataset.band;
+    var category = cell.dataset.category;
+    if (threatIds.length === 0) return;
+
+    lastOpenedCell = cell;
+    var threats = threatIds.map(function(id) { return THREATS[id]; }).filter(Boolean);
+    var renderer = DETAIL_RENDERERS[activeProjection];
+
+    var html = '<div style="margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--color-border);">' +
+      '<div style="font-size:0.7rem;color:var(--color-text-faint);font-family:var(--font-mono);">' + band + ' \u00d7 ' + category + '</div>' +
+      '<div style="font-size:1.1rem;font-weight:600;margin-top:0.25rem;">' + threats.length + ' Threat' + (threats.length !== 1 ? 's' : '') + '</div>' +
+      '<div style="font-size:0.6rem;color:var(--color-text-faint);margin-top:0.15rem;text-transform:uppercase;letter-spacing:0.08em;">' + PROJECTIONS[activeProjection].label + ' view</div>' +
+    '</div>';
+
+    for (var i = 0; i < threats.length; i++) {
+      html += '<div class="detail-threat">' + renderer(threats[i]) + '</div>';
+    }
+
+    drawerContent.innerHTML = html;
+    drawer.classList.add('open');
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    lastOpenedCell = null;
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // Tooltip
+  // ═══════════════════════════════════════════════════════════════
+
+  function showTooltip(cell, e) {
+    var threatIds = JSON.parse(cell.dataset.threats || '[]');
+    if (threatIds.length === 0) return;
+
+    var threats = threatIds.map(function(id) { return THREATS[id]; }).filter(Boolean);
+    var html = '';
+    for (var i = 0; i < threats.length; i++) {
+      var t = threats[i];
+      html += '<div class="tt-name">' + t.id + ' \u2014 ' + t.name + '</div>';
+      html += '<div class="tt-meta">' + t.severity.toUpperCase() + ' \u00b7 ' + t.status + ' \u00b7 ' + t.bandsStr + (t.coupling ? ' \u00b7 ' + t.coupling : '') + '</div>';
+    }
+
+    tooltip.innerHTML = html;
+    positionTooltip(e);
+    tooltip.classList.add('visible');
+  }
+
+  function positionTooltip(e) {
+    var x = Math.min(e.clientX + 12, window.innerWidth - 320);
+    var y = Math.min(e.clientY - 8, window.innerHeight - 150);
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // Projection switching — the main orchestrator
+  // ═══════════════════════════════════════════════════════════════
+
+  function switchProjection(projId) {
+    if (!PROJECTIONS[projId]) return;
+    activeProjection = projId;
+    threatPage.setAttribute('data-projection', projId);
+
+    // 1. Tab active state
+    tabsNav.querySelectorAll('.tara-tab').forEach(function(tab) {
+      tab.classList.toggle('active', tab.dataset.projection === projId);
+    });
+
+    // 2. Grid recoloring
+    recolorGrid(projId);
+
+    // 3. Stats bar
+    rebuildStats(projId);
+
+    // 4. Filters
+    rebuildFilters(projId);
+
+    // 5. How to read
+    updateHowToRead(projId);
+
+    // 6. Re-apply filters
+    applyFilters();
+
+    // 7. If drawer is open, re-render with new projection
+    if (drawer.classList.contains('open') && lastOpenedCell) {
+      openDrawer(lastOpenedCell);
+    }
+
+    // 8. URL hash
+    window.history.replaceState(null, '', '#' + projId);
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // Event wiring
+  // ═══════════════════════════════════════════════════════════════
+
+  // Tab clicks
+  tabsNav.querySelectorAll('.tara-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      switchProjection(tab.dataset.projection);
+    });
+  });
+
+  // Drawer
+  drawerClose.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Cell interactions
+  document.querySelectorAll('.map-cell:not(.map-cell--empty)').forEach(function(cell) {
+    cell.addEventListener('mouseenter', function(e) { showTooltip(cell, e); });
+    cell.addEventListener('mousemove', function(e) { positionTooltip(e); });
+    cell.addEventListener('mouseleave', hideTooltip);
+    cell.addEventListener('click', function() {
+      hideTooltip();
+      openDrawer(cell);
+    });
+  });
+
+  // Zone filter chips (constant, wired once)
+  zoneFiltersEl.querySelectorAll('.filter-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chip.classList.toggle('active');
+      applyFilters();
+    });
+  });
+
+  // Search
   searchInput.addEventListener('input', applyFilters);
+
+  // ═══════════════════════════════════════════════════════════════
+  // Init: check URL hash for initial projection
+  // ═══════════════════════════════════════════════════════════════
+
+  (function init() {
+    var hash = window.location.hash.replace('#', '');
+    if (hash && PROJECTIONS[hash]) {
+      switchProjection(hash);
+    }
+    // Security is default — already server-rendered
+  })();
 </script>

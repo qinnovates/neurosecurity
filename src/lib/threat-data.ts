@@ -1,12 +1,12 @@
 /**
- * QIF Threat Data — adapter over shared/threat-registry.json (v4.0)
+ * QIF Threat Data — adapter over shared/qtara-registrar.json (v4.0)
  * Single source of truth: all techniques from the QIF Locus Taxonomy.
  * Scoring: QNIS v1.0 (QIF Neural Impact Score)
  * TARA: Therapeutic Atlas of Risks and Applications (four-projection overlay)
  */
 
 import { HOURGLASS_BANDS } from './qif-constants';
-import registry from '@shared/threat-registry.json';
+import registry from '@shared/qtara-registrar.json';
 
 /** Attack categories (columns in the threat map) */
 export const THREAT_CATEGORIES = [
@@ -266,6 +266,15 @@ export const CONSENT_TIER_COLORS = {
   enhanced: { bg: 'rgba(245, 158, 11, 0.12)', text: '#f59e0b' },
   IRB: { bg: 'rgba(239, 68, 68, 0.12)', text: '#ef4444' },
   prohibited: { bg: 'rgba(127, 29, 29, 0.2)', text: '#ef4444' },
+} as const;
+
+/** Engineering coupling type colors */
+export const COUPLING_COLORS = {
+  electromagnetic: { bg: 'rgba(59, 130, 246, 0.15)', border: 'rgba(59, 130, 246, 0.3)', text: '#3b82f6' },
+  mechanical: { bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.3)', text: '#f59e0b' },
+  thermal: { bg: 'rgba(239, 68, 68, 0.15)', border: 'rgba(239, 68, 68, 0.3)', text: '#ef4444' },
+  optical: { bg: 'rgba(168, 85, 247, 0.15)', border: 'rgba(168, 85, 247, 0.3)', text: '#a855f7' },
+  none: { bg: 'rgba(148, 163, 184, 0.15)', border: 'rgba(148, 163, 184, 0.3)', text: '#94a3b8' },
 } as const;
 
 /** Filter: techniques with clinical therapeutic analogs */

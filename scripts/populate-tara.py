@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 TARA Enrichment — Therapeutic Atlas of Risks and Applications
-Adds four-projection overlay data to each technique in threat-registry.json.
+Adds four-projection overlay data to each technique in qtara-registrar.json.
 
 Projections:
   1. Security  — existing fields (attack, tactic, severity, qnis, etc.)
@@ -10,7 +10,7 @@ Projections:
   4. Engineering — coupling, parameters, hardware, detection
 
 Run: python3 scripts/populate-tara.py
-Output: updates shared/threat-registry.json in-place
+Output: updates shared/qtara-registrar.json in-place
 
 Named after Tara, the Buddhist bodhisattva of compassion and protection.
 """
@@ -20,7 +20,7 @@ import os
 import copy
 from pathlib import Path
 
-REGISTRY_PATH = Path(__file__).parent.parent / "shared" / "threat-registry.json"
+REGISTRY_PATH = Path(__file__).parent.parent / "shared" / "qtara-registrar.json"
 
 # ═══════════════════════════════════════════════════════════════════
 # TARA Schema Specification (added to registry top-level)

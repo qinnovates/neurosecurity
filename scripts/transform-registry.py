@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Transform threat-registry.json to QIF Locus Taxonomy + QNIS v1.0 scoring.
+Transform qtara-registrar.json to QIF Locus Taxonomy + QNIS v1.0 scoring.
 
 This script:
 1. Replaces MITRE-derived tactic IDs with QIF Locus Taxonomy IDs
@@ -423,7 +423,7 @@ def clean_notes(notes):
 
 
 def main():
-    registry_path = Path(__file__).parent.parent / "shared" / "threat-registry.json"
+    registry_path = Path(__file__).parent.parent / "shared" / "qtara-registrar.json"
 
     with open(registry_path, "r") as f:
         reg = json.load(f)
@@ -649,7 +649,7 @@ def main():
     print(f"✓ By tactic: {by_tactic}")
 
     # Also copy to docs/data/
-    docs_path = Path(__file__).parent.parent / "docs" / "data" / "threat-registry.json"
+    docs_path = Path(__file__).parent.parent / "docs" / "data" / "qtara-registrar.json"
     docs_path.parent.mkdir(parents=True, exist_ok=True)
     with open(docs_path, "w") as f:
         json.dump(reg, f, indent=2, ensure_ascii=False)
