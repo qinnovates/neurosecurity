@@ -3,7 +3,7 @@
  * Single source of truth for all QIF values used on the site.
  */
 
-export const QIF_VERSION = '4.0';
+export const QIF_VERSION = '5.2';
 export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;
 export const QIF_ESTABLISHED = 2026;

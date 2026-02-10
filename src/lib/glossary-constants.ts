@@ -33,7 +33,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Hourglass Model',
     type: 'architecture',
     shortDef: 'QIF\'s 11-band (7-1-3) asymmetric security architecture for BCIs.',
-    fullDef: 'The core architectural pattern of QIF v4.0. Seven neural bands (N7 Neocortex through N1 Spinal Cord) sit above the waist, with the Neural Interface (I0) at the narrowest point and three synthetic bands (S1-S3) below. The hourglass shape reflects the physical reality of BCIs: signals funnel through the electrode-tissue boundary.',
+    fullDef: 'The core architectural pattern of QIF. Seven neural bands (N7 Neocortex through N1 Spinal Cord) sit above the waist, with the Neural Interface (I0) at the narrowest point and three synthetic bands (S1-S3) below. The hourglass shape reflects the physical reality of BCIs: signals funnel through the electrode-tissue boundary.',
     relatedTerms: ['neural-interface', 'neural-domain', 'synthetic-domain'],
     href: '/framework/#hourglass',
     tags: ['architecture', 'core'],

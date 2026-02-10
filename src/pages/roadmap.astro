@@ -41,8 +41,8 @@ const phases = [
   },
   {
     version: 'v4.0',
-    title: 'Hourglass v4.0 (Current)',
-    status: 'active' as const,
+    title: 'Hourglass v4.0',
+    status: 'completed' as const,
     items: [
       { label: '11-band hourglass architecture (7-1-3)', done: true },
       { label: 'QIF framework Python package', done: true },
@@ -52,13 +52,16 @@ const phases = [
     ],
   },
   {
-    version: 'v5.0',
-    title: 'Validation & Peer Review',
-    status: 'planned' as const,
+    version: `v${QIF_VERSION}`,
+    title: `Hourglass v${QIF_VERSION} (Current)`,
+    status: 'active' as const,
     items: [
+      { label: 'TARA: Therapeutic Atlas of Risks & Applications', done: true },
+      { label: 'QNIS v1.0 neural impact scoring', done: true },
+      { label: 'Phase dynamics integration into NSP', done: true },
+      { label: 'Dual-use gap analysis (71 techniques)', done: true },
       { label: 'Synthetic BCI data validation', done: false },
       { label: 'Coherence metric empirical testing', done: false },
-      { label: 'Cross-framework interoperability spec', done: false },
       { label: 'Academic publication submission', done: false },
     ],
   },

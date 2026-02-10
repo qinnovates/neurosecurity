@@ -1,5 +1,5 @@
 /**
- * QIF Threat Data — adapter over shared/qtara-registrar.json (v4.0)
+ * QIF Threat Data — adapter over shared/qtara-registrar.json
  * Single source of truth: all techniques from the QIF Locus Taxonomy.
  * Scoring: QNIS v1.0 (QIF Neural Impact Score)
  * TARA: Therapeutic Atlas of Risks and Applications (four-projection overlay)
