@@ -1,8 +1,8 @@
-# ONI Framework: Regulatory Compliance Guide
+# QIF Framework: Regulatory Compliance Guide
 
-> Mapping ONI-compliant BCIs to regulatory requirements for safe, legal deployment.
+> Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment.
 
-**Last Updated:** 2026-01-30
+**Last Updated:** 2026-02-10
 **Version:** 2.0
 **Status:** Living Document — US & International Coverage
 
@@ -20,8 +20,8 @@
   - [National Institute of Standards and Technology (NIST)](#national-institute-of-standards-and-technology-nist)
   - [State-Level Regulations](#state-level-regulations)
 - [US Federal Legislation](#us-federal-legislation)
-- [ONI Compliance Matrix](#oni-compliance-matrix)
-- [ONI-Compliant BCI Requirements](#oni-compliant-bci-requirements)
+- [QIF Compliance Matrix](#qif-compliance-matrix)
+- [QIF-Compliant BCI Requirements](#qif-compliant-bci-requirements)
 - [Certification Pathway](#certification-pathway)
 - [International Regulatory Landscape](#international-regulatory-landscape)
 - [References](#references)
@@ -32,9 +32,9 @@
 
 Brain-Computer Interfaces (BCIs) represent one of the most consequential technological developments of the 21st century. As these devices transition from research laboratories to consumer markets, the regulatory framework governing their deployment will determine whether this technology serves humanity or endangers it.
 
-**The ONI Framework establishes security and safety standards that complement—and in some cases exceed—existing regulatory requirements.** This document maps ONI compliance to US federal and state regulations, international frameworks, and emerging neurotechnology legislation worldwide, identifying gaps that manufacturers, regulators, and policymakers must address before mass BCI adoption.
+**The QIF Framework establishes security and safety standards that complement—and in some cases exceed—existing regulatory requirements.** This document maps QIF compliance to US federal and state regulations, international frameworks, and emerging neurotechnology legislation worldwide, identifying gaps that manufacturers, regulators, and policymakers must address before mass BCI adoption.
 
-> **Key Principle:** Mass adoption of BCIs is inevitable. The question is not *whether* but *how*. ONI-compliant devices prioritize security, privacy, and human sovereignty from the design phase—not as regulatory afterthoughts.
+> **Key Principle:** Mass adoption of BCIs is inevitable. The question is not *whether* but *how*. QIF-compliant devices prioritize security, privacy, and human sovereignty from the design phase—not as regulatory afterthoughts.
 
 ---
 
@@ -53,7 +53,7 @@ We are currently in a critical regulatory window. BCIs are transitioning from:
 
 ### Consequences of Delayed Action
 
-| Risk Category | Without Proactive Regulation | With ONI-Compliant Framework |
+| Risk Category | Without Proactive Regulation | With QIF-Compliant Framework |
 |---------------|------------------------------|------------------------------|
 | **Security Incidents** | Neural ransomware, cognitive hijacking, mass exploitation | Defense-in-depth, attack detection, rapid response |
 | **Privacy Violations** | Thought surveillance, neural data harvesting, identity theft | Encrypted transport, data minimization, consent enforcement |
@@ -78,13 +78,13 @@ The FDA is the primary regulator for medical BCIs in the United States. BCI devi
 
 #### Key FDA Regulations
 
-| Regulation | Citation | ONI Alignment |
+| Regulation | Citation | QIF Alignment |
 |------------|----------|---------------|
-| **Quality System Regulation** | 21 CFR Part 820 | ONI L8-L14 validation checkpoints map to design controls |
+| **Quality System Regulation** | 21 CFR Part 820 | QIF L8-L14 validation checkpoints map to design controls |
 | **Medical Device Reporting** | 21 CFR Part 803 | NSAM alerting provides adverse event detection |
-| **Unique Device Identification** | 21 CFR Part 830 | ONI node identification supports UDI requirements |
-| **Cybersecurity Guidance** | FDA-2023-D-0100 | **Direct alignment** — ONI exceeds current FDA cyber guidance |
-| **Software as Medical Device** | IMDRF/SaMD | ONI firmware security addresses SaMD concerns |
+| **Unique Device Identification** | 21 CFR Part 830 | QIF node identification supports UDI requirements |
+| **Cybersecurity Guidance** | FDA-2023-D-0100 | **Direct alignment** — QIF exceeds current FDA cyber guidance |
+| **Software as Medical Device** | IMDRF/SaMD | QIF firmware security addresses SaMD concerns |
 
 #### FDA Breakthrough Device Designation
 
@@ -95,17 +95,17 @@ Several BCI companies have received Breakthrough Device Designation:
 - **Neuralink** — N1 implant
 - **Paradromics** — High-bandwidth cortical interface
 
-> **ONI Recommendation:** Breakthrough designation should require demonstrated cybersecurity architecture. Current designation focuses on therapeutic benefit without mandating security standards.
+> **QIF Recommendation:** Breakthrough designation should require demonstrated cybersecurity architecture. Current designation focuses on therapeutic benefit without mandating security standards.
 
 #### FDA Cybersecurity Requirements
 
 The FDA's 2023 guidance on cybersecurity for medical devices establishes:
 
-| Requirement | FDA Expectation | ONI Implementation |
+| Requirement | FDA Expectation | QIF Implementation |
 |-------------|-----------------|-------------------|
-| **Threat Modeling** | Identify attack vectors | ONI 14-layer attack surface mapping |
+| **Threat Modeling** | Identify attack vectors | QIF layered attack surface mapping |
 | **Security by Design** | Built-in security controls | L8 Neural Firewall, coherence validation |
-| **Software Bill of Materials** | Component transparency | ONI component registry |
+| **Software Bill of Materials** | Component transparency | QIF component registry |
 | **Vulnerability Management** | Ongoing security updates | NSAM continuous monitoring |
 | **Incident Response** | Breach detection/response | Alert escalation, quarantine protocols |
 
@@ -124,9 +124,9 @@ BCIs with wireless capabilities fall under FCC jurisdiction for electromagnetic 
 | **47 CFR Part 95** | Medical Device Radio (MICS) | Implanted device telemetry |
 | **SAR Limits** | Specific Absorption Rate | RF exposure near brain tissue |
 
-#### ONI-FCC Alignment
+#### QIF-FCC Alignment
 
-| FCC Concern | ONI Solution |
+| FCC Concern | QIF Solution |
 |-------------|--------------|
 | Electromagnetic interference | L1-L2 signal integrity validation |
 | Unauthorized transmission | L8 firewall blocks rogue RF |
@@ -140,15 +140,15 @@ Neural data constitutes Protected Health Information (PHI) under HIPAA when coll
 
 #### HIPAA Requirements
 
-| Rule | Requirements | ONI Alignment |
+| Rule | Requirements | QIF Alignment |
 |------|--------------|---------------|
-| **Privacy Rule** | Minimum necessary use, patient consent, disclosure limits | ONI data minimization, consent framework |
-| **Security Rule** | Administrative, physical, technical safeguards | ONI L6-L14 encryption, access controls |
+| **Privacy Rule** | Minimum necessary use, patient consent, disclosure limits | QIF data minimization, consent framework |
+| **Security Rule** | Administrative, physical, technical safeguards | QIF L6-L14 encryption, access controls |
 | **Breach Notification** | 60-day notification for breaches >500 individuals | NSAM detection enables rapid breach identification |
 
 #### Neural Data Classification
 
-| Data Type | HIPAA Status | ONI Protection |
+| Data Type | HIPAA Status | QIF Protection |
 |-----------|--------------|----------------|
 | Raw EEG/neural signals | PHI if linked to individual | Encrypted at L6, anonymized at L10 |
 | Decoded intentions/commands | PHI — highly sensitive | Never stored, processed ephemerally |
@@ -165,10 +165,10 @@ The FTC regulates consumer BCIs marketed outside medical contexts (wellness, pro
 
 #### FTC Authority
 
-| Area | FTC Concern | ONI Relevance |
+| Area | FTC Concern | QIF Relevance |
 |------|-------------|---------------|
 | **Deceptive Practices** | False claims about BCI capabilities | Honest coherence reporting |
-| **Unfair Practices** | Inadequate data security | ONI security baseline |
+| **Unfair Practices** | Inadequate data security | QIF security baseline |
 | **Children's Privacy (COPPA)** | Under-13 protections | Pediatric BCI considerations |
 | **Health Claims** | Wellness vs. medical distinctions | Clear device classification |
 
@@ -188,16 +188,16 @@ NIST provides cybersecurity frameworks that apply to BCI manufacturers.
 
 #### Applicable Frameworks
 
-| Framework | Application | ONI Mapping |
+| Framework | Application | QIF Mapping |
 |-----------|-------------|-------------|
-| **NIST Cybersecurity Framework (CSF) 2.0** | Identify, Protect, Detect, Respond, Recover | ONI lifecycle security |
-| **NIST SP 800-53** | Security and Privacy Controls | ONI control implementation |
+| **NIST Cybersecurity Framework (CSF) 2.0** | Identify, Protect, Detect, Respond, Recover | QIF lifecycle security |
+| **NIST SP 800-53** | Security and Privacy Controls | QIF control implementation |
 | **NIST SP 800-183** | Networks of Things | L1-L7 network security |
 | **NIST AI RMF** | AI Risk Management | Cognitive layer (L13-L14) governance |
 
-#### NIST CSF → ONI Mapping
+#### NIST CSF → QIF Mapping
 
-| NIST Function | NIST Categories | ONI Implementation |
+| NIST Function | NIST Categories | QIF Implementation |
 |---------------|-----------------|-------------------|
 | **IDENTIFY** | Asset Management, Risk Assessment | 14-layer asset inventory, attack surface mapping |
 | **PROTECT** | Access Control, Data Security, Maintenance | L8 Firewall, Coherence validation, secure updates |
@@ -238,7 +238,7 @@ With SB 1223 (effective January 2025), California's CCPA now explicitly covers n
 | Right to Opt-Out | Decline neural data sale — explicit opt-in required for sensitive neural data |
 | Right to Non-Discrimination | No penalties for exercising neural data rights |
 
-> **ONI Position:** While state-level action demonstrates urgency, fragmentation creates compliance complexity. Federal neural data legislation is needed — see the MIND Act below.
+> **QIF Position:** While state-level action demonstrates urgency, fragmentation creates compliance complexity. Federal neural data legislation is needed — see the MIND Act below.
 
 ---
 
@@ -263,23 +263,23 @@ Key provisions:
 - Requires informed consent standards for neurotechnology research
 - Addresses Harvest-Now-Decrypt-Later threats to neural data
 
-> **ONI Alignment:** The MIND Act's cybersecurity requirements align directly with ONI's 14-layer security model. ONI-compliant devices would meet or exceed the proposed federal standards.
+> **QIF Alignment:** The MIND Act's cybersecurity requirements align directly with QIF's 14-layer security model. QIF-compliant devices would meet or exceed the proposed federal standards.
 
 ---
 
-## ONI Compliance Matrix
+## QIF Compliance Matrix
 
-This matrix maps ONI Framework components to regulatory requirements.
+This matrix maps QIF Framework components to regulatory requirements.
 
 ### Legend
 
-- ✅ **Full Alignment** — ONI meets or exceeds requirement
-- ⚠️ **Partial Alignment** — ONI addresses concern, regulatory gap exists
+- ✅ **Full Alignment** — QIF meets or exceeds requirement
+- ⚠️ **Partial Alignment** — QIF addresses concern, regulatory gap exists
 - 🔲 **Future Work** — Requirement identified, implementation planned
 
 ### Compliance Matrix
 
-| Requirement | FDA | FCC | HIPAA | FTC | NIST | ONI Component |
+| Requirement | FDA | FCC | HIPAA | FTC | NIST | QIF Component |
 |-------------|-----|-----|-------|-----|------|---------------|
 | **Threat Modeling** | ✅ | — | — | — | ✅ | 14-Layer Attack Surface |
 | **Access Control** | ✅ | — | ✅ | ✅ | ✅ | L8 Firewall Authentication |
@@ -297,68 +297,68 @@ This matrix maps ONI Framework components to regulatory requirements.
 
 ---
 
-## ONI-Compliant BCI Requirements
+## QIF-Compliant BCI Requirements
 
-For a BCI to be considered ONI-compliant, it must implement the following:
+For a BCI to be considered QIF-compliant, it must implement the following:
 
 ### Mandatory Requirements
 
-| ID | Requirement | ONI Layer | Regulatory Basis |
+| ID | Requirement | QIF Layer | Regulatory Basis |
 |----|-------------|-----------|------------------|
-| **ONI-R1** | 14-layer security architecture documentation | All | FDA Cybersecurity Guidance |
-| **ONI-R2** | Real-time coherence validation (Cₛ ≥ 0.7 threshold) | L8-L10 | Signal integrity |
-| **ONI-R3** | Neural Gateway firewall with authentication | L8 | Access control |
-| **ONI-R4** | End-to-end encryption for neural data | L6 | HIPAA Security Rule |
-| **ONI-R5** | NSAM continuous monitoring | L9-L14 | NIST Detect function |
-| **ONI-R6** | Kohno threat taxonomy implementation | L11-L14 | Privacy by design |
-| **ONI-R7** | Incident response and alerting | All | FDA MDR, HIPAA Breach |
-| **ONI-R8** | Secure boot and signed firmware | L1-L3 | Supply chain security |
-| **ONI-R9** | Audit logging with tamper evidence | All | HIPAA, NIST |
-| **ONI-R10** | Fail-safe degradation modes | L8 | Patient safety |
+| **QIF-R1** | 14-layer security architecture documentation | All | FDA Cybersecurity Guidance |
+| **QIF-R2** | Real-time coherence validation (Cₛ ≥ 0.7 threshold) | L8-L10 | Signal integrity |
+| **QIF-R3** | Neural Gateway firewall with authentication | L8 | Access control |
+| **QIF-R4** | End-to-end encryption for neural data | L6 | HIPAA Security Rule |
+| **QIF-R5** | NSAM continuous monitoring | L9-L14 | NIST Detect function |
+| **QIF-R6** | Kohno threat taxonomy implementation | L11-L14 | Privacy by design |
+| **QIF-R7** | Incident response and alerting | All | FDA MDR, HIPAA Breach |
+| **QIF-R8** | Secure boot and signed firmware | L1-L3 | Supply chain security |
+| **QIF-R9** | Audit logging with tamper evidence | All | HIPAA, NIST |
+| **QIF-R10** | Fail-safe degradation modes | L8 | Patient safety |
 
 ### Recommended Enhancements
 
 | ID | Enhancement | Benefit |
 |----|-------------|---------|
-| **ONI-E1** | Quantum-resistant cryptography | Future-proofing |
-| **ONI-E2** | Federated learning for model updates | Privacy preservation |
-| **ONI-E3** | Hardware security module (HSM) | Key protection |
-| **ONI-E4** | Zero-knowledge proofs for verification | Privacy-preserving audit |
+| **QIF-E1** | Quantum-resistant cryptography | Future-proofing |
+| **QIF-E2** | Federated learning for model updates | Privacy preservation |
+| **QIF-E3** | Hardware security module (HSM) | Key protection |
+| **QIF-E4** | Zero-knowledge proofs for verification | Privacy-preserving audit |
 
 ---
 
 ## Certification Pathway
 
-### Proposed ONI Certification Levels
+### Proposed QIF Certification Levels
 
 | Level | Name | Requirements | Use Cases |
 |-------|------|--------------|-----------|
-| **Level 1** | ONI-Basic | ONI-R1 through ONI-R5 | Research devices |
-| **Level 2** | ONI-Clinical | All mandatory (R1-R10) | Medical BCIs |
-| **Level 3** | ONI-Consumer | R1-R10 + FTC compliance | Consumer devices |
-| **Level 4** | ONI-Critical | All requirements + E1-E4 | High-risk/military |
+| **Level 1** | QIF-Basic | QIF-R1 through QIF-R5 | Research devices |
+| **Level 2** | QIF-Clinical | All mandatory (R1-R10) | Medical BCIs |
+| **Level 3** | QIF-Consumer | R1-R10 + FTC compliance | Consumer devices |
+| **Level 4** | QIF-Critical | All requirements + E1-E4 | High-risk/military |
 
 ### Certification Process
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    ONI CERTIFICATION PATHWAY                     │
+│                    QIF CERTIFICATION PATHWAY                     │
 └─────────────────────────────────────────────────────────────────┘
 
 Phase 1: Self-Assessment
-├── Complete ONI compliance checklist
+├── Complete QIF compliance checklist
 ├── Document 14-layer architecture
 └── Identify gaps
 
 Phase 2: Third-Party Audit
 ├── Security architecture review
-├── Penetration testing (ONI attack scenarios)
+├── Penetration testing (QIF attack scenarios)
 └── Code/firmware review
 
 Phase 3: Certification
 ├── Submit audit report
 ├── Remediate findings
-└── Receive ONI certification
+└── Receive QIF certification
 
 Phase 4: Ongoing Compliance
 ├── Annual recertification
@@ -372,11 +372,11 @@ Phase 4: Ongoing Compliance
 
 ### Global Normative Frameworks
 
-| Framework | Scope | Status | ONI Alignment |
+| Framework | Scope | Status | QIF Alignment |
 |-----------|-------|--------|---------------|
 | **UNESCO Recommendation on the Ethics of Neurotechnology (2025)** | First global normative framework — 194 Member States | Adopted November 2025 | **15 of 17 elements fully implemented** — see [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) |
 | **OECD Responsible Innovation in Neurotechnology (2019)** | Policy guidelines for OECD member nations | Active | Accountability, transparency, safety addressed |
-| **Council of Europe Strategic Action Plan on Neurotechnology (2025)** | Human rights-based framework for 46 member states | Adopted January 2025 | Aligns with ONI's rights-based approach to cognitive liberty and mental integrity |
+| **Council of Europe Strategic Action Plan on Neurotechnology (2025)** | Human rights-based framework for 46 member states | Adopted January 2025 | Aligns with QIF's rights-based approach to cognitive liberty and mental integrity |
 
 ### Latin American Neurorights Legislation
 
@@ -392,10 +392,10 @@ Latin America leads globally in constitutional and legislative neurorights prote
 
 ### European Union
 
-| Regulation | Scope | Status | ONI Alignment |
+| Regulation | Scope | Status | QIF Alignment |
 |------------|-------|--------|---------------|
-| **EU MDR 2017/745** | Medical Device Regulation | Active | ONI certification pathway maps to MDR requirements |
-| **GDPR** | Data Protection | Active | ONI data minimization, consent, and encryption align |
+| **EU MDR 2017/745** | Medical Device Regulation | Active | QIF certification pathway maps to MDR requirements |
+| **GDPR** | Data Protection | Active | QIF data minimization, consent, and encryption align |
 | **EU AI Act** | AI Systems (including BCIs) | Phased 2025-2027 | High-risk AI transparency requirements met via documentation |
 | **EU Neurotechnology Legislative Package** | Dedicated neurotech regulation | Under development (2026) | Anticipated to incorporate UNESCO Recommendation principles |
 
@@ -422,8 +422,8 @@ Latin America leads globally in constitutional and legislative neurorights prote
 |--------------|---------------------|-----------|
 | **ISO** | ISO 13485 (QMS), ISO 27001 (InfoSec), ISO 14971 (Risk) | Quality, security, and risk management for medical devices |
 | **IEC** | IEC 62443 (Industrial cybersecurity), IEC 60601 (Medical electrical) | Cybersecurity and electrical safety for neural devices |
-| **IEEE** | **P2794** (Neural Interface Research Reporting Standard) | Standardizes how neural interface research is documented and reported — directly relevant to ONI's transparency requirements |
-| **IEEE** | **P2731** (Brain-Computer Interface Terminology Standard) | Establishes common vocabulary for BCI development — supports ONI's 14-layer naming conventions |
+| **IEEE** | **P2794** (Neural Interface Research Reporting Standard) | Standardizes how neural interface research is documented and reported — directly relevant to QIF's transparency requirements |
+| **IEEE** | **P2731** (Brain-Computer Interface Terminology Standard) | Establishes common vocabulary for BCI development — supports QIF's 14-layer naming conventions |
 | **IEEE** | IEEE 7000 series (Ethics in Autonomous Systems) | Ethical design principles for AI and autonomous systems |
 | **IMDRF** | International Medical Device Regulators Forum | Global coordination of medical device regulation |
 | **Neurorights Foundation** | Advocacy and policy advisory | Founded by Rafael Yuste (Columbia); instrumental in Chile's neurorights legislation; advises multiple governments on neurotechnology governance |
@@ -497,7 +497,7 @@ Latin America leads globally in constitutional and legislative neurorights prote
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0 | 2026-01-25 | Initial release — US regulatory focus |
-| 2.0 | 2026-01-30 | Major expansion: added enacted US state legislation (Colorado H.B. 24-1058, California SB 1223, Montana SB 163, Connecticut SB 1295), US MIND Act (S. 2925), international regulatory landscape (UNESCO 2025, Council of Europe, Latin American neurorights, Spain, EU developments), IEEE standards (P2794, P2731), and Neurorights Foundation |
+| 2.0 | 2026-02-10 | Major expansion: added enacted US state legislation (Colorado H.B. 24-1058, California SB 1223, Montana SB 163, Connecticut SB 1295), US MIND Act (S. 2925), international regulatory landscape (UNESCO 2025, Council of Europe, Latin American neurorights, Spain, EU developments), IEEE standards (P2794, P2731), and Neurorights Foundation |
 
 ---
 
@@ -514,4 +514,4 @@ Latin America leads globally in constitutional and legislative neurorights prote
 
 *This is a living document. As regulations evolve and international frameworks are added, this guide will be updated to reflect current requirements.*
 
-← Back to [INDEX.md](../INDEX.md)
+← Back to [Governance](/governance/)

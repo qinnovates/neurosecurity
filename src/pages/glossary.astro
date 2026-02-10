@@ -1,0 +1,278 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { GLOSSARY_TERMS, TERM_TYPES, getSortedTerms, getAlphabetIndex } from '../lib/glossary-constants';
+
+const sortedTerms = getSortedTerms();
+const alphabet = getAlphabetIndex();
+const typeEntries = Object.entries(TERM_TYPES);
+---
+
+<PageLayout
+  title="QIF Glossary"
+  description="Complete reference of QIF terminology — equations, architecture, principles, protocols, and attack types."
+  breadcrumbs={[{ label: 'Glossary' }]}
+  maxWidth="wide"
+>
+  <div class="lg:grid lg:grid-cols-[220px_1fr] lg:gap-12">
+    <!-- Sidebar -->
+    <aside class="hidden lg:block">
+      <nav class="sticky top-24 space-y-4" aria-label="Glossary navigation">
+        <!-- A-Z index -->
+        <div>
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-2">A-Z</p>
+          <div class="flex flex-wrap gap-1">
+            {alphabet.map((letter) => (
+              <a
+                href={`#letter-${letter}`}
+                class="w-7 h-7 flex items-center justify-center rounded text-xs font-mono font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/10 transition-colors"
+              >
+                {letter}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Type filters -->
+        <div>
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-2">By Type</p>
+          <div class="space-y-1">
+            <button
+              data-filter="all"
+              class="filter-btn active block w-full text-left text-sm py-1.5 pl-3 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors border-l-2 border-transparent"
+            >
+              All ({GLOSSARY_TERMS.length})
+            </button>
+            {typeEntries.map(([key, val]) => {
+              const count = GLOSSARY_TERMS.filter(t => t.type === key).length;
+              if (count === 0) return null;
+              return (
+                <button
+                  data-filter={key}
+                  class="filter-btn block w-full text-left text-sm py-1.5 pl-3 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors border-l-2 border-transparent"
+                >
+                  <span class="inline-block w-2 h-2 rounded-full mr-2" style={`background: ${val.color};`}></span>
+                  {val.label} ({count})
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="max-w-3xl">
+      <section class="mb-12">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          QIF Glossary
+        </h1>
+        <p class="text-lg text-[var(--color-text-muted)] mb-6">
+          Complete reference of QIF terminology. {GLOSSARY_TERMS.length} terms covering architecture, equations, metrics, protocols, principles, and attack types.
+        </p>
+
+        <!-- Search -->
+        <div class="relative mb-8">
+          <input
+            type="text"
+            id="glossary-search"
+            placeholder="Search terms..."
+            class="w-full glass rounded-lg px-4 py-3 pl-10 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-faint)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-primary)]/40"
+          />
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-faint)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </div>
+
+        <!-- Mobile type pills -->
+        <div class="lg:hidden flex flex-wrap gap-2 mb-8">
+          <button data-filter="all" class="filter-btn active text-xs px-3 py-1.5 rounded-full glass font-medium">All</button>
+          {typeEntries.map(([key, val]) => {
+            const count = GLOSSARY_TERMS.filter(t => t.type === key).length;
+            if (count === 0) return null;
+            return (
+              <button
+                data-filter={key}
+                class="filter-btn text-xs px-3 py-1.5 rounded-full glass font-medium text-[var(--color-text-muted)]"
+              >
+                {val.label}
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Terms grouped by letter -->
+      <div id="glossary-list">
+        {alphabet.map((letter) => {
+          const letterTerms = sortedTerms.filter(t => t.term[0].toUpperCase() === letter);
+          return (
+            <section id={`letter-${letter}`} class="mb-12 letter-group">
+              <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)] mb-4 sticky top-16 bg-[var(--color-bg-primary)] py-2 z-10 border-b border-[var(--color-border)]">
+                {letter}
+              </h2>
+              <div class="space-y-4">
+                {letterTerms.map((term) => {
+                  const typeInfo = TERM_TYPES[term.type];
+                  return (
+                    <div
+                      class="glass rounded-xl p-5 term-card"
+                      data-type={term.type}
+                      data-term={term.term.toLowerCase()}
+                      data-def={term.shortDef.toLowerCase()}
+                      style={`border-left: 3px solid ${typeInfo.color};`}
+                    >
+                      <div class="flex items-start justify-between gap-3 mb-2">
+                        <div class="flex items-center gap-3 flex-wrap">
+                          {term.href ? (
+                            <a href={term.href} class="text-base font-semibold font-[family-name:var(--font-heading)] hover:text-[var(--color-accent-primary)] transition-colors">
+                              {term.term}
+                            </a>
+                          ) : (
+                            <span class="text-base font-semibold font-[family-name:var(--font-heading)]">{term.term}</span>
+                          )}
+                          <span
+                            class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                            style={`color: ${typeInfo.color}; background: ${typeInfo.color}15;`}
+                          >
+                            {typeInfo.label}
+                          </span>
+                        </div>
+                      </div>
+                      <p class="text-sm text-[var(--color-text-muted)] mb-2">{term.shortDef}</p>
+
+                      <!-- Expandable full definition -->
+                      <details class="group">
+                        <summary class="text-xs text-[var(--color-accent-primary)] cursor-pointer hover:text-[var(--color-accent-secondary)] transition-colors select-none">
+                          More detail
+                        </summary>
+                        <div class="mt-3 pt-3 border-t border-[var(--color-border)]/50">
+                          <p class="text-sm text-[var(--color-text-secondary)]">{term.fullDef}</p>
+
+                          {term.formula && (
+                            <div class="mt-3 glass rounded-lg p-3 text-center">
+                              <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
+                                {term.formula}
+                              </code>
+                            </div>
+                          )}
+
+                          {term.relatedTerms && term.relatedTerms.length > 0 && (
+                            <div class="mt-3 flex flex-wrap gap-1.5">
+                              <span class="text-xs text-[var(--color-text-faint)]">Related:</span>
+                              {term.relatedTerms.map((rel) => {
+                                const related = GLOSSARY_TERMS.find(t => t.id === rel);
+                                return related ? (
+                                  <a
+                                    href={`#letter-${related.term[0].toUpperCase()}`}
+                                    class="text-xs px-2 py-0.5 rounded-full glass text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"
+                                  >
+                                    {related.term}
+                                  </a>
+                                ) : null;
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      </details>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      <!-- No results message -->
+      <div id="no-results" class="hidden text-center py-12">
+        <p class="text-[var(--color-text-muted)]">No terms match your search.</p>
+      </div>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .filter-btn.active {
+    color: var(--color-accent-primary);
+    border-left-color: var(--color-accent-primary);
+    background: color-mix(in srgb, var(--color-accent-primary) 8%, transparent);
+  }
+
+  /* Mobile pills */
+  @media (max-width: 1023px) {
+    .filter-btn.active {
+      background: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
+      color: var(--color-accent-primary);
+      border-left-color: transparent;
+    }
+  }
+
+  .term-card.hidden-by-filter,
+  .term-card.hidden-by-search {
+    display: none;
+  }
+
+  .letter-group.empty-group {
+    display: none;
+  }
+</style>
+
+<script>
+  function initGlossary() {
+    const searchInput = document.getElementById('glossary-search') as HTMLInputElement;
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const termCards = document.querySelectorAll<HTMLElement>('.term-card');
+    const letterGroups = document.querySelectorAll<HTMLElement>('.letter-group');
+    const noResults = document.getElementById('no-results');
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function updateVisibility() {
+      let visibleCount = 0;
+
+      termCards.forEach((card) => {
+        const matchesFilter = activeFilter === 'all' || card.dataset.type === activeFilter;
+        const matchesSearch = !searchQuery ||
+          card.dataset.term?.includes(searchQuery) ||
+          card.dataset.def?.includes(searchQuery);
+
+        card.classList.toggle('hidden-by-filter', !matchesFilter);
+        card.classList.toggle('hidden-by-search', !matchesSearch);
+
+        if (matchesFilter && matchesSearch) visibleCount++;
+      });
+
+      // Hide empty letter groups
+      letterGroups.forEach((group) => {
+        const visible = group.querySelectorAll('.term-card:not(.hidden-by-filter):not(.hidden-by-search)');
+        group.classList.toggle('empty-group', visible.length === 0);
+      });
+
+      if (noResults) {
+        noResults.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    // Filter buttons
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Activate all buttons with this filter value (desktop + mobile)
+        document.querySelectorAll<HTMLButtonElement>(`.filter-btn[data-filter="${btn.dataset.filter}"]`)
+          .forEach(b => b.classList.add('active'));
+        activeFilter = btn.dataset.filter || 'all';
+        updateVisibility();
+      });
+    });
+
+    // Search
+    searchInput?.addEventListener('input', () => {
+      searchQuery = searchInput.value.toLowerCase().trim();
+      updateVisibility();
+    });
+  }
+
+  initGlossary();
+  document.addEventListener('astro:after-swap', initGlossary);
+</script>

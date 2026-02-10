@@ -1,9 +1,9 @@
-# ONI Framework Data Policy & FAQ
+# QIF Framework Data Policy & FAQ
 
-> **Comprehensive guide to data handling, privacy protections, and frequently asked questions about neural data security in the ONI Framework.**
+> **Comprehensive guide to data handling, privacy protections, and frequently asked questions about neural data security in the QIF Framework.**
 
 **Version:** 1.0
-**Last Updated:** 2026-01-26
+**Last Updated:** 2026-02-10
 **Status:** Living Document
 
 ---
@@ -21,7 +21,7 @@
 
 ## 1. Data Collection Overview
 
-### What Data Does ONI Process?
+### What Data Does QIF Process?
 
 | Data Type | Processed Locally | Transmitted to TARA | Notes |
 |-----------|-------------------|---------------------|-------|
@@ -70,7 +70,7 @@ TARA monitors neural security without accessing neural content:
 | **Device** | Full | Local processing and protection |
 | **TARA Stack** | Scores only | Security monitoring, anomaly detection |
 | **AI Models** | Encrypted gradients only | Collective learning (federated) |
-| **ONI Team** | Aggregate statistics only | Framework improvement |
+| **QIF Team** | Aggregate statistics only | Framework improvement |
 | **Third Parties** | ❌ None | Never sold, shared, or accessed |
 
 ### Federated AI Training
@@ -151,11 +151,11 @@ privacy_config = {
 
 ### General Questions
 
-#### Q: What is the ONI Framework?
-**A:** ONI (Open Neurosecurity Interoperability) is an open-source security framework for brain-computer interfaces. It defines 14 layers spanning silicon (traditional computing) to synapse (biological neural activity), providing standardized security measures at each level.
+#### Q: What is the QIF Framework?
+**A:** QIF (Quantum Indeterministic Framework for Neural Security) is an open-source security framework for brain-computer interfaces. It defines 14 layers spanning silicon (traditional computing) to synapse (biological neural activity), providing standardized security measures at each level.
 
-#### Q: Is ONI a surveillance tool?
-**A:** **No.** ONI is explicitly designed for **defense and protection**, not surveillance. The framework:
+#### Q: Is QIF a surveillance tool?
+**A:** **No.** QIF is explicitly designed for **defense and protection**, not surveillance. The framework:
 - Never decodes thoughts or intentions
 - Never transmits raw neural data
 - Exists to protect users FROM unauthorized access
@@ -163,8 +163,8 @@ privacy_config = {
 
 See our [Privacy & Ethics Statement](../README.md#privacy--ethics-statement) for our formal commitment.
 
-#### Q: Who created ONI?
-**A:** ONI was created by Kevin Qi (qikevinl) with AI assistance from Claude (Anthropic). It builds on academic research from the University of Washington (Kohno et al.), Columbia, Yale, and other institutions. All contributions are documented in our [Transparency Statement](TRANSPARENCY.md).
+#### Q: Who created QIF?
+**A:** QIF was created by Kevin Qi (qikevinl) with AI assistance from Claude (Anthropic). It builds on academic research from the University of Washington (Kohno et al.), Columbia, Yale, and other institutions. All contributions are documented in our [Transparency Statement](TRANSPARENCY.md).
 
 ---
 
@@ -235,8 +235,8 @@ Where:
 
 Your neural patterns never leave your device.
 
-#### Q: What attacks does ONI protect against?
-**A:** ONI addresses threats across all 14 layers:
+#### Q: What attacks does QIF protect against?
+**A:** QIF addresses threats across all 14 layers:
 - **Signal Injection:** Malicious signals trying to influence neural activity
 - **Eavesdropping:** Unauthorized reading of neural data
 - **Denial of Service:** Blocking legitimate neural communication
@@ -244,10 +244,10 @@ Your neural patterns never leave your device.
 - **MRI/EMI Interference:** Environmental threats
 - **Replay Attacks:** Replaying recorded signals
 
-See [ONI_LAYERS.md](../oni-framework/ONI_LAYERS.md) for complete threat model.
+See [the QIF Hourglass Architecture](/framework/) for complete threat model.
 
-#### Q: Is ONI open source?
-**A:** Yes. ONI is licensed under Apache 2.0:
+#### Q: Is QIF open source?
+**A:** Yes. QIF is licensed under Apache 2.0:
 - Free to use, modify, and distribute
 - No proprietary dependencies
 - Full transparency in implementation
@@ -257,8 +257,8 @@ See [ONI_LAYERS.md](../oni-framework/ONI_LAYERS.md) for complete threat model.
 
 ### Ethical Questions
 
-#### Q: How does ONI handle consent?
-**A:** ONI implements a **continuous consent model** based on Lázaro-Muñoz et al. research:
+#### Q: How does QIF handle consent?
+**A:** QIF implements a **continuous consent model** based on Lázaro-Muñoz et al. research:
 - **Initial consent** before device activation
 - **Ongoing consent** for significant changes
 - **Granular scopes** (read, write, store, transmit)
@@ -268,7 +268,7 @@ See [ONI_LAYERS.md](../oni-framework/ONI_LAYERS.md) for complete threat model.
 See [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md).
 
 #### Q: What about children and vulnerable populations?
-**A:** ONI includes specific protections:
+**A:** QIF includes specific protections:
 - **Minors (age 7-17):** Require both guardian consent AND child assent
 - **Incapacitated adults:** Supported decision-making model
 - **Transitional (age 16-17):** Increasing autonomy with guardian oversight
@@ -278,7 +278,7 @@ See [PEDIATRIC_CONSIDERATIONS.md](PEDIATRIC_CONSIDERATIONS.md).
 #### Q: How do I report security vulnerabilities?
 **A:** Please report security issues responsibly:
 - Email: [security contact to be established]
-- GitHub Security Advisories: [ONI Repository](https://github.com/qinnovates/mindloft/security)
+- GitHub Security Advisories: [QIF Repository](https://github.com/qinnovates/mindloft/security)
 - Do NOT disclose publicly until patched
 
 ---
@@ -347,13 +347,13 @@ Settings → Privacy → Opt Out Options:
 
 ---
 
-*This document is part of the ONI Framework governance documentation. For questions not covered here, please open a GitHub issue or contact the maintainers.*
+*This document is part of the QIF Framework governance documentation. For questions not covered here, please open a GitHub issue or contact the maintainers.*
 
 **Document History:**
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | 2026-01-26 | Initial release |
+| 1.0 | 2026-02-10 | Initial release |
 
 ---
 
-← Back to [INDEX.md](../INDEX.md) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [REGULATORY_COMPLIANCE.md](REGULATORY_COMPLIANCE.md)
+← Back to [Governance](/governance/) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [REGULATORY_COMPLIANCE.md](REGULATORY_COMPLIANCE.md)

@@ -1,8 +1,8 @@
-# ONI Framework: Informed Consent Framework for Neural Devices
+# QIF Framework: Informed Consent Framework for Neural Devices
 
 > Guidelines for ethical consent in brain-computer interface deployment, informed by neuroethics research.
 
-**Last Updated:** 2026-01-24
+**Last Updated:** 2026-02-10
 **Version:** 1.0
 **Status:** Active Development
 
@@ -15,7 +15,7 @@
   - [Pre-Deployment Consent](#1-pre-deployment-consent)
   - [Continuous Consent Model](#2-continuous-consent-model)
   - [Understanding Requirements](#3-understanding-requirements)
-- [Consent Validation in ONI Framework](#consent-validation-in-oni-framework)
+- [Consent Validation in QIF Framework](#consent-validation-in-oni-framework)
   - [Integration with Neural Firewall (L8)](#integration-with-neural-firewall-l8)
   - [Consent as Authentication Requirement](#consent-as-authentication-requirement)
   - [Consent Revocation Rights](#consent-revocation-rights)
@@ -24,7 +24,7 @@
   - [Automaticity and Control](#automaticity-and-control)
   - [Enhancement vs. Treatment](#enhancement-vs-treatment)
 - [Consent Documentation Requirements](#consent-documentation-requirements)
-- [Integration with ONI Modules](#integration-with-oni-modules)
+- [Integration with QIF Modules](#integration-with-oni-modules)
 - [Gaps and Future Work](#gaps-and-future-work)
 - [References](#references)
 
@@ -32,7 +32,7 @@
 
 ## Overview
 
-This document establishes informed consent requirements for ONI-compliant neural devices. It draws on empirical neuroethics research, particularly the work of [Gabriel Lázaro-Muñoz and colleagues](https://bioethics.hms.harvard.edu/faculty-staff/gabriel-lazaro-munoz) at Harvard Medical School and Massachusetts General Hospital, who have conducted extensive research on consent challenges in adaptive deep brain stimulation (aDBS) and brain-computer interfaces.
+This document establishes informed consent requirements for QIF-compliant neural devices. It draws on empirical neuroethics research, particularly the work of [Gabriel Lázaro-Muñoz and colleagues](https://bioethics.hms.harvard.edu/faculty-staff/gabriel-lazaro-munoz) at Harvard Medical School and Massachusetts General Hospital, who have conducted extensive research on consent challenges in adaptive deep brain stimulation (aDBS) and brain-computer interfaces.
 
 **Key Finding:** In interviews with aDBS researchers, 74% identified informed consent as a pressing ethical challenge (Lázaro-Muñoz et al., 2020).
 
@@ -42,9 +42,9 @@ This document establishes informed consent requirements for ONI-compliant neural
 
 ### 1. Pre-Deployment Consent
 
-Before any ONI-compliant neural device can be activated, the following must be documented:
+Before any QIF-compliant neural device can be activated, the following must be documented:
 
-| Requirement | Description | ONI Component |
+| Requirement | Description | QIF Component |
 |-------------|-------------|---------------|
 | **Purpose Disclosure** | Clear explanation of what the device will do | L13 Semantic Layer documentation |
 | **Data Collection Scope** | What neural data will be recorded, stored, processed | Privacy Score (Pₛ) categories |
@@ -77,7 +77,7 @@ Unlike traditional one-time consent, neural devices require **ongoing consent ve
 
 Researchers have identified specific comprehension challenges:
 
-| Challenge | Mitigation Strategy | ONI Implementation |
+| Challenge | Mitigation Strategy | QIF Implementation |
 |-----------|---------------------|-------------------|
 | **Therapeutic misconception** | Explicit disclosure that device is experimental | Consent validation check |
 | **Complexity of automaticity** | Pre/post-operative counseling on adaptive behavior | Educational materials requirement |
@@ -86,11 +86,11 @@ Researchers have identified specific comprehension challenges:
 
 ---
 
-## Consent Validation in ONI Framework
+## Consent Validation in QIF Framework
 
 ### Integration with Neural Firewall (L8)
 
-The ONI Neural Firewall must verify consent state before processing signals:
+The QIF Neural Firewall must verify consent state before processing signals:
 
 ```python
 class ConsentState(Enum):
@@ -119,7 +119,7 @@ This means:
 
 ### Consent Revocation Rights
 
-Users must retain the ability to revoke consent at any time. The ONI Framework implements this as:
+Users must retain the ability to revoke consent at any time. The QIF Framework implements this as:
 
 | Revocation Type | Effect | Restoration |
 |-----------------|--------|-------------|
@@ -144,7 +144,7 @@ Research by Lázaro-Muñoz et al. emphasizes **relational autonomy** — recogni
 
 > "Engage stakeholders early regarding intervention preferences" — Lázaro-Muñoz et al. (2020)
 
-ONI-compliant devices should:
+QIF-compliant devices should:
 1. Identify authorized stakeholders during initial consent
 2. Define escalation paths for borderline decisions (ACCEPT_FLAG states)
 3. Document preferences for device control distribution
@@ -158,7 +158,7 @@ ONI-compliant devices should:
 
 Adaptive neural devices raise unique autonomy concerns:
 
-| Concern | Percentage of Researchers | ONI Response |
+| Concern | Percentage of Researchers | QIF Response |
 |---------|--------------------------|--------------|
 | Autonomy and device control | 57% | User Override Interface requirement |
 | Automatic stimulation effects | 83% | Amplitude bounds, rate limiting |
@@ -172,7 +172,7 @@ Per Lázaro-Muñoz et al. (2022) research on enhancement:
 
 > "100% of researchers felt aDBS should remain restricted to treatment until researchers achieve better understanding of normal brain circuitry."
 
-ONI Framework position:
+QIF Framework position:
 - Current framework optimized for **therapeutic applications**
 - Enhancement use cases require **additional ethical review**
 - Dual-use concerns (military, performance) require explicit consent scope
@@ -220,9 +220,9 @@ Every consent record must include:
 
 ---
 
-## Integration with ONI Modules
+## Integration with QIF Modules
 
-| ONI Module | Consent Integration |
+| QIF Module | Consent Integration |
 |------------|---------------------|
 | `oni.firewall` | Consent state check before ACCEPT |
 | `oni.neurosecurity.anonymizer` | Consent scope defines allowlist |
@@ -252,4 +252,4 @@ Zuk, P., Torgerson, L., & Sierra-Mercado, D. (2019). Neuroethics of neuromodulat
 
 ---
 
-← Back to [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [INDEX.md](../INDEX.md)
+← Back to [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [Governance](/governance/)

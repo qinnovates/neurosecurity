@@ -1,0 +1,792 @@
+---
+/**
+ * QIF Pitch Presentation — Kohno Meeting
+ * ~12 slides, 15-minute walkthrough, 15 min discussion
+ * Reveal.js via CDN, styled with qinnovate design tokens
+ */
+import { HOURGLASS_BANDS, QIF_VERSION, QIF_BANDS, PILLARS, COHERENCE } from '../lib/qif-constants';
+import { THREAT_VECTORS, getThreatStats, getTaraStats } from '../lib/threat-data';
+import { NSP_VERSION } from '../lib/nsp-constants';
+
+const stats = getThreatStats();
+const taraStats = getTaraStats();
+
+const dualUseCount = taraStats.dualUse.confirmed + taraStats.dualUse.probable;
+const dualUsePct = Math.round((dualUseCount / taraStats.total) * 100);
+
+// Resolve pillar CSS var colors to hex for inline styles
+const colorMap: Record<string, string> = {
+  'var(--color-accent-primary)': '#3b82f6',
+  'var(--color-accent-secondary)': '#06b6d4',
+  'var(--color-accent-tertiary)': '#8b5cf6',
+};
+function hex(c: string): string { return colorMap[c] ?? c; }
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QIF Pitch | Qinnovate</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <style is:global>
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("/fonts/SpaceGrotesk-Variable.woff2") format("woff2");
+      font-weight: 300 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Inter";
+      src: url("/fonts/Inter-Variable.woff2") format("woff2");
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+      font-weight: 100 800;
+      font-display: swap;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+
+  <style is:global>
+    :root {
+      --bg-deep: #0e1525;
+      --bg-surface: #182038;
+      --bg-elevated: #1e2a4a;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #06b6d4;
+      --accent-tertiary: #8b5cf6;
+      --text-primary: #f1f5f9;
+      --text-muted: #a8b8cf;
+      --text-faint: #7289aa;
+      --glass-bg: rgba(24, 32, 56, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --safe: #10b981;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    .reveal-viewport { background: var(--bg-deep); }
+
+    .reveal {
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--text-primary);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      color: var(--text-primary);
+      text-transform: none;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .reveal h1 { font-size: 2.4em; font-weight: 700; }
+    .reveal h2 { font-size: 1.65em; font-weight: 600; }
+    .reveal h3 { font-size: 1.15em; }
+
+    .reveal p, .reveal li {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.88em;
+    }
+
+    .reveal code {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      background: var(--bg-elevated);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    .reveal .progress { color: var(--accent-primary); height: 3px; }
+    .reveal .controls button { color: var(--accent-primary); }
+    .reveal .slide-number {
+      color: var(--text-faint);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      background: transparent;
+      right: 16px;
+      bottom: 10px;
+    }
+
+    /* ═══ Components ═══ */
+
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: left;
+    }
+
+    .glass h3 { margin: 0 0 6px 0; font-size: 1em; }
+    .glass p { margin: 0; font-size: 0.72em; color: var(--text-muted); }
+
+    .tag {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55em;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .mono { font-family: "JetBrains Mono", monospace; }
+    .heading { font-family: "Space Grotesk", system-ui, sans-serif; }
+    .faint { color: var(--text-faint); }
+    .muted { color: var(--text-muted); }
+    .accent { color: var(--accent-primary); }
+    .cyan { color: var(--accent-secondary); }
+    .purple { color: var(--accent-tertiary); }
+
+    .label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.48em;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-faint);
+      margin-bottom: 10px;
+    }
+
+    /* Stat cards */
+    .stats { display: flex; gap: 14px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .stat {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 14px 22px;
+      text-align: center;
+      min-width: 110px;
+    }
+    .stat .n {
+      font-family: "Space Grotesk", system-ui;
+      font-size: 1.9em;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .stat .l {
+      font-size: 0.6em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Quote */
+    .quote { max-width: 780px; margin: 0 auto; }
+    .quote blockquote {
+      border-left: 4px solid var(--accent-tertiary);
+      padding: 14px 0 14px 24px;
+      margin: 0;
+      font-size: 1.05em;
+      color: var(--text-primary);
+      font-style: italic;
+      line-height: 1.55;
+      text-align: left;
+    }
+    .quote .cite {
+      font-size: 0.6em;
+      color: var(--text-faint);
+      margin-top: 14px;
+      font-style: normal;
+      text-align: left;
+      padding-left: 24px;
+    }
+
+    /* Grid layouts */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; text-align: left; }
+    .grid-2 .span { grid-column: 1 / -1; text-align: center; }
+
+    /* Band list */
+    .bands { list-style: none; padding: 0; margin: 0; }
+    .bands li { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 0.65em; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .bid { font-family: "JetBrains Mono", monospace; color: var(--text-primary); width: 26px; font-size: 0.9em; }
+    .bname { color: var(--text-muted); }
+
+    /* NSP layers */
+    .layers { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
+    .layer {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: 10px; padding: 9px 14px; font-size: 0.65em; text-align: left;
+    }
+    .layer .ln { font-family: "Space Grotesk", system-ui; font-weight: 700; font-size: 1.15em; min-width: 22px; color: var(--accent-secondary); }
+    .layer .ll { color: var(--text-primary); font-weight: 500; }
+    .layer .ls { color: var(--text-faint); font-size: 0.85em; margin-left: auto; }
+
+    /* Dual-use mapping */
+    .dualmap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px 16px; align-items: center; font-size: 0.72em; }
+    .dualmap .a { text-align: right; color: var(--danger); }
+    .dualmap .arrow { color: var(--accent-secondary); font-size: 1.1em; }
+    .dualmap .t { text-align: left; color: var(--safe); }
+
+    /* Honest list */
+    .gaps { text-align: left; max-width: 680px; margin: 16px auto 0; }
+    .gaps li { margin-bottom: 10px; font-size: 0.75em; padding-left: 6px; }
+    .gaps li strong { color: var(--text-primary); }
+
+    /* Research questions */
+    .questions { text-align: left; max-width: 700px; margin: 16px auto 0; }
+    .questions li {
+      position: relative; padding-left: 18px; margin-bottom: 14px; font-size: 0.72em;
+    }
+    .questions li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent-primary);
+    }
+    .questions li strong { color: var(--text-primary); }
+    .questions li em { color: var(--text-faint); font-size: 0.9em; }
+
+    /* Contact */
+    .links { display: flex; gap: 16px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+    .link {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: 10px; padding: 10px 18px;
+      color: var(--text-primary); text-decoration: none; font-size: 0.7em;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .link:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+
+    /* Fragment fade-in tweak */
+    .reveal .fragment { transition: all 0.3s ease; }
+
+    /* ═══ Music toggle ═══ */
+    .music-toggle {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      z-index: 100;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-faint);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    .music-toggle:hover {
+      border-color: var(--accent-secondary);
+      color: var(--accent-secondary);
+    }
+    .music-toggle.playing {
+      border-color: var(--accent-secondary);
+      color: var(--accent-secondary);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+    }
+    .music-toggle svg { width: 16px; height: 16px; }
+    .music-toggle .icon-pause { display: none; }
+    .music-toggle.playing .icon-play { display: none; }
+    .music-toggle.playing .icon-pause { display: block; }
+
+    #sc-player { position: absolute; left: -9999px; width: 1px; height: 1px; }
+
+    @media (max-width: 768px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .stats { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══ 1. TITLE ═══ -->
+      <section>
+        <p class="label">Qinnovate &mdash; Open Standards for Neural Security</p>
+        <h1 style="margin-bottom: 0;">QIF</h1>
+        <p style="font-size: 1.05em; color: var(--accent-secondary); margin-top: 6px;" class="heading">
+          Security Architecture for the Neural Stack
+        </p>
+        <div style="margin-top: 32px;">
+          <p style="font-size: 0.7em; color: var(--text-primary); margin: 0;">Kevin Qi</p>
+          <p style="font-size: 0.5em; margin-top: 4px;" class="faint">
+            qinnovate.com &nbsp;|&nbsp; v{QIF_VERSION} &nbsp;|&nbsp; Apache 2.0
+          </p>
+        </div>
+        <aside class="notes">
+          Thank you for making time. I know your schedule is demanding, so I'll keep this tight
+          and leave plenty of room for your questions. I'm here to learn from you, not to sell anything.
+        </aside>
+      </section>
+
+      <!-- ═══ 2. THE ORIGIN — Kohno's own words ═══ -->
+      <section>
+        <p class="label">Neurosurgical Focus, 2009</p>
+        <div class="quote">
+          <blockquote>
+            "Neurosecurity is a term we are using to refer to security, privacy,
+            and ethical issues related to neural devices."
+          </blockquote>
+          <p class="cite">
+            Denning, Matsuoka &amp; <strong>Kohno</strong><br />
+            <em>Neurosecurity: Security and Privacy for Neural Devices</em><br />
+            Neurosurgical Focus 27(1):E7, July 2009
+          </p>
+        </div>
+        <p style="font-size: 0.7em; margin-top: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          You coined the term. You defined the field.<br />
+          I've been trying to build the architecture you called for.
+        </p>
+        <aside class="notes">
+          This is the paper that started everything for me. You, Denning, and Matsuoka
+          literally named the field. I've been working to build the technical scaffolding
+          underneath that vision.
+        </aside>
+      </section>
+
+      <!-- ═══ 3. THE GAP ═══ -->
+      <section>
+        <h2>16 Years Later</h2>
+        <p style="max-width: 620px; margin: 10px auto 0;">
+          The community produced excellent point solutions but no unifying structure.
+        </p>
+        <div class="stats">
+          <div class="stat">
+            <div class="n" style="color: var(--warn);">~20</div>
+            <div class="l">Published BCI<br />attack papers</div>
+          </div>
+          <div class="stat">
+            <div class="n" style="color: var(--danger);">0</div>
+            <div class="l">Unified threat<br />frameworks</div>
+          </div>
+          <div class="stat">
+            <div class="n" style="color: var(--danger);">0</div>
+            <div class="l">Wire-level<br />BCI crypto</div>
+          </div>
+          <div class="stat">
+            <div class="n" style="color: var(--danger);">0</div>
+            <div class="l">Post-quantum<br />neural protocols</div>
+          </div>
+        </div>
+        <p style="font-size: 0.55em; margin-top: 20px;" class="faint">
+          Martinovic 2012 &middot; Takabi 2016 &middot; Frank 2017 &middot; Bernal 2021 &middot; Landau 2020 &middot; Meng 2023
+        </p>
+        <aside class="notes">
+          Martinovic showed P300 side-channels in 2012. Takabi catalogued BCI threats.
+          Frank demonstrated EEG spoofing. But nobody built a unified model that
+          accounts for both the silicon and the biology. That's the gap.
+        </aside>
+      </section>
+
+      <!-- ═══ 4. WHAT I BUILT — Three Pillars ═══ -->
+      <section>
+        <h2>What I Built</h2>
+        <p style="max-width: 520px; margin: 4px auto 0;">
+          Three interlocking open specifications.
+        </p>
+        <div class="grid-3">
+          {PILLARS.map(p => {
+            const c = hex(p.color);
+            return (
+            <div class="glass">
+              <span class="tag" style={`background: ${c}20; color: ${c}; border: 1px solid ${c}40;`}>
+                {p.name} v{p.version}
+              </span>
+              <h3 style={`color: ${c};`}>{p.fullName}</h3>
+              <p>{p.tagline}</p>
+              <p style="margin-top: 6px; font-size: 0.62em;" class="faint">{p.description}</p>
+            </div>
+          )})}
+        </div>
+        <aside class="notes">
+          QIF is the threat model. NSP is the wire protocol. Runemate solves the bandwidth
+          problem that makes post-quantum encryption practical on implantable power budgets.
+          All three are open spec, Apache 2.0. I don't want to sell certifications. I want
+          the field to adopt this.
+        </aside>
+      </section>
+
+      <!-- ═══ 5. THE HOURGLASS ═══ -->
+      <section>
+        <div class="grid-2">
+          <div class="span">
+            <h2>The Hourglass Model</h2>
+            <p style="font-size: 0.72em; max-width: 580px; margin: 4px auto 0;">
+              {QIF_BANDS} bands across three zones. The OSI model couldn't represent tissue,
+              so I built one that does.
+            </p>
+          </div>
+          <div>
+            <ul class="bands">
+              {HOURGLASS_BANDS.map(b => (
+                <li>
+                  <span class="dot" style={`background: ${b.color};`}></span>
+                  <span class="bid">{b.id}</span>
+                  <span class="bname">{b.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div class="glass" style="padding: 14px 18px;">
+              <h3 style="font-size: 0.8em; color: var(--safe); margin-bottom: 4px;">Neural (N7-N1)</h3>
+              <p style="font-size: 0.62em;">Biology. Cannot be patched or rebooted.</p>
+            </div>
+            <div class="glass" style="padding: 14px 18px; margin-top: 8px;">
+              <h3 style="font-size: 0.8em; color: var(--warn); margin-bottom: 4px;">Interface (I0)</h3>
+              <p style="font-size: 0.62em;">The waist. Electrode-tissue boundary. Where physics changes.</p>
+            </div>
+            <div class="glass" style="padding: 14px 18px; margin-top: 8px;">
+              <h3 style="font-size: 0.8em; color: var(--accent-primary); margin-bottom: 4px;">Synthetic (S1-S3)</h3>
+              <p style="font-size: 0.62em;">Silicon. Can encrypt, can patch, can monitor.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          The key insight: the hourglass pinches at I0, the electrode-tissue boundary.
+          Above it, you're in biology where you can't deploy patches. Below it, you're
+          in silicon where classical security tools work. The interface layer is where
+          the hardest problems live, and it's where your 2009 paper focused.
+        </aside>
+      </section>
+
+      <!-- ═══ 6. THREAT TAXONOMY ═══ -->
+      <section>
+        <h2>Threat Taxonomy</h2>
+        <p style="max-width: 580px; margin: 8px auto 0;">
+          MITRE ATT&CK for neural interfaces. Every technique mapped to hourglass bands,
+          scored across six impact dimensions.
+        </p>
+        <div class="stats">
+          <div class="stat">
+            <div class="n accent">{stats.total}</div>
+            <div class="l">Techniques</div>
+          </div>
+          <div class="stat">
+            <div class="n cyan">{QIF_BANDS}</div>
+            <div class="l">Hourglass<br />bands</div>
+          </div>
+          <div class="stat">
+            <div class="n" style="color: var(--danger);">{stats.critical}</div>
+            <div class="l">Critical<br />severity</div>
+          </div>
+          <div class="stat">
+            <div class="n purple">6</div>
+            <div class="l">QNIS scoring<br />dimensions</div>
+          </div>
+        </div>
+        <p style="font-size: 0.52em; margin-top: 18px;" class="faint">
+          Live at qinnovate.com/TARA &mdash; filterable by band, severity, tactic, and dual-use classification
+        </p>
+        <aside class="notes">
+          Every technique has a QNIS score, like CVSS but for neural systems. It scores
+          across reversibility, cognitive impact, tissue risk, consent requirements, and
+          two more dimensions. The whole registry is browsable on the site.
+        </aside>
+      </section>
+
+      <!-- ═══ 7. NSP PROTOCOL ═══ -->
+      <section>
+        <h2>NSP: The Wire Protocol</h2>
+        <p style="max-width: 580px; margin: 8px auto 0;">
+          Post-quantum cryptography for BCI data streams. FIPS 203/204/205 compliant.
+        </p>
+        <div class="layers" style="max-width: 660px; margin: 16px auto 0;">
+          <div class="layer"><span class="ln">L1</span><span class="ll">Hardware Root of Trust</span><span class="ls">SPHINCS+ boot</span></div>
+          <div class="layer"><span class="ln">L2</span><span class="ll">Hybrid PQC Key Exchange</span><span class="ls">ML-KEM + ECDH</span></div>
+          <div class="layer"><span class="ln">L3</span><span class="ll">QI Signal Integrity</span><span class="ls">Per-frame scoring</span></div>
+          <div class="layer"><span class="ln">L4</span><span class="ll">Adaptive Detection</span><span class="ls">Test-time training</span></div>
+          <div class="layer"><span class="ln">L5</span><span class="ll">Emergency Shutoff</span><span class="ls">Hardware kill switch</span></div>
+        </div>
+        <div class="stats" style="margin-top: 16px;">
+          <div class="stat">
+            <div class="n cyan">3.25%</div>
+            <div class="l">Power<br />overhead</div>
+          </div>
+          <div class="stat">
+            <div class="n cyan">v{NSP_VERSION}</div>
+            <div class="l">Draft RFC</div>
+          </div>
+        </div>
+        <aside class="notes">
+          The power budget is modeled, not measured. 3.25% of a 10mW implantable budget.
+          That's the theoretical ceiling. Runemate compression is what makes PQC key sizes
+          practical at BCI bandwidths. I'd love your take on whether these constraints are
+          realistic for implantable devices.
+        </aside>
+      </section>
+
+      <!-- ═══ 8. THE DUAL-USE DISCOVERY ═══ -->
+      <section>
+        <h2>The Discovery That Changed Everything</h2>
+        <p style="max-width: 620px; margin: 10px auto 0;">
+          I started cataloguing attacks. The same physical mechanisms kept appearing
+          on the therapeutic side.
+        </p>
+        <div style="margin-top: 20px;">
+          <p style="font-size: 0.88em; color: var(--text-primary); line-height: 1.7;">
+            Signal injection is also deep brain stimulation.<br />
+            Replay attacks share physics with neurofeedback.<br />
+            <strong style="color: var(--accent-secondary);">The difference is consent, dosage, and oversight.</strong>
+          </p>
+        </div>
+        <div style="margin-top: 24px;">
+          <p class="mono" style="font-size: 0.6em; color: var(--accent-secondary);">
+            TARA &mdash; Therapeutic Atlas of Risks and Applications
+          </p>
+          <p style="font-size: 0.55em; margin-top: 4px;" class="faint">
+            Same mechanism. Four projections: Security / Clinical / Governance / Engineering
+          </p>
+        </div>
+        <aside class="notes">
+          This is the part I think connects most to your current work at the Center for
+          Digital Ethics. The security framework became a dual-use map. The same physics
+          that makes an attack dangerous makes a therapy effective. The distinguishing
+          variables are ethical, not physical: informed consent, dosage control, clinical
+          oversight. That's a governance problem, not just an engineering problem.
+        </aside>
+      </section>
+
+      <!-- ═══ 9. DUAL-USE MAPPING ═══ -->
+      <section>
+        <h2>Dual-Use Mapping</h2>
+        <p style="max-width: 580px; margin: 8px auto 0;">
+          ~{dualUsePct}% of catalogued techniques have therapeutic analogs today.
+          The gap is the research agenda.
+        </p>
+        <div class="dualmap" style="max-width: 560px; margin: 20px auto 0;">
+          <span class="a">Signal injection</span><span class="arrow">&rarr;</span><span class="t">Deep brain stimulation</span>
+          <span class="a">Phase replay</span><span class="arrow">&rarr;</span><span class="t">Neurostimulation protocols</span>
+          <span class="a">Adversarial perturbation</span><span class="arrow">&rarr;</span><span class="t">Seizure suppression</span>
+          <span class="a">Slow drift manipulation</span><span class="arrow">&rarr;</span><span class="t">Adaptive neuromodulation</span>
+          <span class="a">EM side-channel</span><span class="arrow">&rarr;</span><span class="t">TMS / tDCS diagnostics</span>
+        </div>
+        <div class="stats" style="margin-top: 20px;">
+          <div class="stat">
+            <div class="n" style="color: var(--safe);">{taraStats.dualUse.confirmed}</div>
+            <div class="l">Confirmed</div>
+          </div>
+          <div class="stat">
+            <div class="n cyan">{taraStats.dualUse.probable}</div>
+            <div class="l">Probable</div>
+          </div>
+          <div class="stat">
+            <div class="n faint">{taraStats.dualUse.silicon_only}</div>
+            <div class="l">Silicon only</div>
+          </div>
+          <div class="stat">
+            <div class="n" style="color: var(--safe);">{taraStats.clinicalCount}</div>
+            <div class="l">Clinical data</div>
+          </div>
+        </div>
+        <aside class="notes">
+          31 confirmed, 15 probable. 16 are silicon-only with no therapeutic mapping today.
+          That gap is honest. Some attack vectors might never have therapeutic analogs, and
+          I don't want to overclaim. But the pattern is strong enough that I think the
+          framework itself is a useful tool for thinking about both sides simultaneously.
+        </aside>
+      </section>
+
+      <!-- ═══ 10. WHERE IT BREAKS ═══ -->
+      <section>
+        <h2>Where It Breaks</h2>
+        <p style="max-width: 580px; margin: 8px auto 0;">
+          What I don't know. Where I need help.
+        </p>
+        <ul class="gaps" style="list-style: none; padding: 0;">
+          <li>
+            <strong style="color: var(--warn);">No empirical validation.</strong>
+            Derived from literature and first principles. Needs testing against real BCI
+            hardware and patient data.
+          </li>
+          <li>
+            <strong style="color: var(--warn);">Power budget is modeled, not measured.</strong>
+            3.25% overhead on paper. Needs silicon prototyping.
+          </li>
+          <li>
+            <strong style="color: var(--warn);">~40% of techniques have no therapeutic analog.</strong>
+            The dual-use claim has real limits. I've scoped them explicitly.
+          </li>
+          <li>
+            <strong style="color: var(--warn);">Solo researcher with AI verification.</strong>
+            Claude and Gemini helped validate, but I have no wet-lab collaborators and no
+            access to patient data.
+          </li>
+        </ul>
+        <aside class="notes">
+          I want to be completely honest with you about what this is and what it isn't.
+          It's a framework, not a product. It's derived, not empirical. I've tried to be
+          rigorous about scoping claims, but I know the biggest thing missing is contact
+          with reality. That's what I'm hoping to get help with.
+        </aside>
+      </section>
+
+      <!-- ═══ 11. WHAT I'M LOOKING FOR ═══ -->
+      <section>
+        <h2>What I'd Like to Explore Together</h2>
+        <ul class="questions" style="list-style: none; padding: 0;">
+          <li>
+            <strong>Does the hourglass model hold?</strong><br />
+            <em>Does an 11-band architecture meaningfully capture the BCI threat surface,
+            or are there gaps the model misses?</em>
+          </li>
+          <li>
+            <strong>Can TARA inform governance?</strong><br />
+            <em>Your Center for Digital Ethics focus: could a dual-use registry help
+            regulators distinguish therapeutic vs. adversarial use of the same mechanism?</em>
+          </li>
+          <li>
+            <strong>Is the NSP power budget realistic?</strong><br />
+            <em>3.25% on a 10mW implant. Is that feasible, or does PQC on-device need
+            a fundamentally different approach?</em>
+          </li>
+          <li>
+            <strong>Where should I go next?</strong><br />
+            <em>Graduate program, industry lab, independent research? I want your honest
+            assessment of the most productive path forward.</em>
+          </li>
+        </ul>
+        <aside class="notes">
+          These aren't hypothetical questions. I genuinely don't know the answers, and
+          you're one of the few people in the world who can help me think through them.
+          The last question is personal. I'm trying to figure out the right path to make
+          the most impact with this work.
+        </aside>
+      </section>
+
+      <!-- ═══ 12. THANK YOU ═══ -->
+      <section>
+        <p class="label">Thank you</p>
+        <h2 style="margin-bottom: 6px;">You named this field.<br />I'd like to help build it.</h2>
+        <p style="font-size: 0.75em; max-width: 480px; margin: 10px auto 0;">
+          Everything is open. I'm looking for mentorship, not funding.
+          Point me in the right direction and I'll do the work.
+        </p>
+        <div class="links" style="margin-top: 28px;">
+          <a class="link" href="https://qinnovate.com" target="_blank">qinnovate.com</a>
+          <a class="link" href="https://qinnovate.com/framework/" target="_blank">Framework</a>
+          <a class="link" href="https://qinnovate.com/TARA/" target="_blank">TARA Atlas</a>
+          <a class="link" href="https://github.com/qinnovates" target="_blank">GitHub</a>
+        </div>
+        <p style="font-size: 0.5em; margin-top: 28px;" class="faint">
+          Kevin Qi &nbsp;|&nbsp; Qinnovate &nbsp;|&nbsp; Open Standard &nbsp;|&nbsp; Apache 2.0
+        </p>
+        <aside class="notes">
+          Thank you. I mean this sincerely. Your 2009 paper is why this work exists.
+          Everything is public, everything is open source. I'm not selling anything.
+          I'm asking for guidance from someone who's been thinking about this longer
+          than almost anyone.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Music toggle -->
+  <button class="music-toggle" id="music-toggle" title="Toggle music">
+    <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21" /></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="4" height="18" /><rect x="15" y="3" width="4" height="18" /></svg>
+  </button>
+
+  <!-- SoundCloud Widget (hidden) -->
+  <iframe id="sc-player"
+    scrolling="no" frameborder="no" allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/keviano/kulhi-loach&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+  </iframe>
+
+  <script is:inline src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script is:inline>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      width: 1280,
+      height: 720,
+      margin: 0.07,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      center: true,
+      controls: true,
+      controlsLayout: 'edges',
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      touch: true,
+      plugins: [ RevealNotes ],
+    });
+  </script>
+
+  <!-- SoundCloud Widget API -->
+  <script is:inline src="https://w.soundcloud.com/player/api.js"></script>
+  <script is:inline>
+    (function() {
+      var toggle = document.getElementById('music-toggle');
+      var iframe = document.getElementById('sc-player');
+      var widget = null;
+      var widgetReady = false;
+      var isPlaying = false;
+      var pendingPlay = false;
+
+      function initWidget() {
+        if (typeof SC === 'undefined' || !SC.Widget) {
+          setTimeout(initWidget, 100);
+          return;
+        }
+        widget = SC.Widget(iframe);
+        widget.bind(SC.Widget.Events.READY, function() {
+          widgetReady = true;
+          widget.setVolume(40);
+          if (pendingPlay) {
+            pendingPlay = false;
+            widget.play();
+          }
+        });
+        widget.bind(SC.Widget.Events.PLAY, function() {
+          isPlaying = true;
+          toggle.classList.add('playing');
+        });
+        widget.bind(SC.Widget.Events.PAUSE, function() {
+          isPlaying = false;
+          toggle.classList.remove('playing');
+        });
+        widget.bind(SC.Widget.Events.FINISH, function() {
+          widget.seekTo(0);
+          widget.play();
+        });
+        widget.bind(SC.Widget.Events.ERROR, function() {
+          isPlaying = false;
+          toggle.classList.remove('playing');
+        });
+      }
+
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        if (!widgetReady || !widget) {
+          pendingPlay = true;
+          toggle.classList.add('playing');
+          return;
+        }
+        if (isPlaying) {
+          widget.pause();
+        } else {
+          widget.play();
+        }
+      });
+
+      initWidget();
+    })();
+  </script>
+</body>
+</html>

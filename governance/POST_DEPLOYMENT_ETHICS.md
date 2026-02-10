@@ -1,8 +1,8 @@
-# ONI Framework: Post-Deployment Ethics
+# QIF Framework: Post-Deployment Ethics
 
 > Ethical obligations for neural device lifecycle management, maintenance, and end-of-life considerations.
 
-**Last Updated:** 2026-01-24
+**Last Updated:** 2026-02-10
 **Version:** 1.0
 **Status:** Active Development
 
@@ -14,7 +14,7 @@
 - [The Post-Deployment Gap](#the-post-deployment-gap)
   - [Current Reality](#current-reality)
   - [Ethical Problem Statement](#ethical-problem-statement)
-- [ONI Framework Obligations](#oni-framework-obligations)
+- [QIF Framework Obligations](#qif-framework-obligations)
   - [Lifecycle Planning Requirement](#1-lifecycle-planning-requirement)
   - [Maintenance Obligation Categories](#2-maintenance-obligation-categories)
   - [Abandonment Prevention](#3-abandonment-prevention)
@@ -25,7 +25,7 @@
 - [Cost and Access Barriers](#cost-and-access-barriers)
 - [Device Removal Ethics](#device-removal-ethics)
 - [Stakeholder Responsibilities](#stakeholder-responsibilities)
-- [Integration with ONI Modules](#integration-with-oni-modules)
+- [Integration with QIF Modules](#integration-with-oni-modules)
 - [Future Work](#future-work)
 - [References](#references)
 
@@ -63,11 +63,11 @@ When a person receives an experimental neural implant that provides significant 
 
 ---
 
-## ONI Framework Obligations
+## QIF Framework Obligations
 
 ### 1. Lifecycle Planning Requirement
 
-ONI-compliant deployments must include documented lifecycle plans:
+QIF-compliant deployments must include documented lifecycle plans:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -85,7 +85,7 @@ ONI-compliant deployments must include documented lifecycle plans:
 
 ### 2. Maintenance Obligation Categories
 
-| Category | Minimum Standard | ONI Requirement |
+| Category | Minimum Standard | QIF Requirement |
 |----------|------------------|-----------------|
 | **Hardware maintenance** | Battery replacement, component repair | Documented service pathway |
 | **Software updates** | Security patches, bug fixes | Update delivery mechanism |
@@ -96,7 +96,7 @@ ONI-compliant deployments must include documented lifecycle plans:
 
 **Device abandonment** occurs when a neural implant remains in a patient's body without proper support or a clear plan for management.
 
-| Abandonment Type | Prevention Strategy | ONI Implementation |
+| Abandonment Type | Prevention Strategy | QIF Implementation |
 |------------------|---------------------|-------------------|
 | **Manufacturer abandonment** | Contractual maintenance obligations | Deployment prerequisites |
 | **Clinical abandonment** | Care transition protocols | Documented handoff procedures |
@@ -202,11 +202,11 @@ Principles for removal decisions:
 
 ---
 
-## Integration with ONI Modules
+## Integration with QIF Modules
 
 ### Lifecycle Monitoring
 
-| ONI Component | Post-Deployment Role |
+| QIF Component | Post-Deployment Role |
 |---------------|---------------------|
 | `tara.nsam` | Device health monitoring, anomaly detection |
 | `oni.firewall` | Continued security validation |
@@ -215,7 +215,7 @@ Principles for removal decisions:
 
 ### Graceful Degradation
 
-ONI-compliant devices should support **graceful degradation**:
+QIF-compliant devices should support **graceful degradation**:
 
 ```
 Full Function ──► Limited Function ──► Safe Mode ──► Standby ──► Removal
@@ -231,7 +231,7 @@ Full Function ──► Limited Function ──► Safe Mode ──► Standby �
 
 ### L11-L14 Standards Development
 
-The ONI Framework's upper layers (L11-L14: Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer) currently reference "Emerging neuroethics frameworks" for standards alignment. Unlike the lower layers:
+The QIF Framework's upper layers (L11-L14: Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer) currently reference "Emerging neuroethics frameworks" for standards alignment. Unlike the lower layers:
 
 | Layer Range | Current Standards | Status |
 |-------------|-------------------|--------|
@@ -251,8 +251,8 @@ The ONI Framework's upper layers (L11-L14: Cognitive Transport, Cognitive Sessio
 **Actions (When Standards Emerge):**
 1. Monitor emerging neuroethics frameworks from UNESCO, OECD, IEEE
 2. Engage with standards bodies as L11-L14 guidelines develop
-3. Contribute ONI framework principles to standards development efforts
-4. Map ONI L11-L14 definitions to emerging standards as they mature
+3. Contribute QIF framework principles to standards development efforts
+4. Map QIF L11-L14 definitions to emerging standards as they mature
 
 **Tracking:** See `prd.json` future work item `future-l11-l14-standards-development`
 
@@ -266,4 +266,4 @@ Lázaro-Muñoz, G., et al. (2020). Researcher Perspectives on Ethical Considerat
 
 ---
 
-← Back to [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md) | [INDEX.md](../INDEX.md)
+← Back to [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md) | [Governance](/governance/)

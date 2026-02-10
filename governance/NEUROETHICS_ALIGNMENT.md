@@ -1,8 +1,8 @@
-# ONI Framework: Neuroethics Alignment
+# QIF Framework: Neuroethics Alignment
 
-> How the ONI Framework addresses core principles of neuroethics and cognitive liberty.
+> How the QIF Framework addresses core principles of neuroethics and cognitive liberty.
 
-**Last Updated:** 2026-01-30
+**Last Updated:** 2026-02-10
 **Version:** 1.2
 
 ---
@@ -30,15 +30,15 @@
 
 ## Overview
 
-The ONI Framework was designed with neuroethical principles as foundational constraints, not afterthoughts. This document maps each framework component to the ethical principles it protects and explains the design decisions through a neuroethics lens.
+The QIF Framework was designed with neuroethical principles as foundational constraints, not afterthoughts. This document maps each framework component to the ethical principles it protects and explains the design decisions through a neuroethics lens.
 
 ---
 
 ## Privacy & Ethics Statement
 
-**ONI is NOT a surveillance framework.**
+**QIF is NOT a surveillance framework.**
 
-The ONI Framework exists to **protect** neural privacy and ensure the **integrity** of brain-computer interfaces. Its purpose is:
+The QIF Framework exists to **protect** neural privacy and ensure the **integrity** of brain-computer interfaces. Its purpose is:
 
 - **Defense** against malicious attacks (nation-state actors, cybercriminals, ransomware)
 - **Protection** from accidental risks (MRI exposure, electromagnetic interference, device malfunction)
@@ -54,7 +54,7 @@ The framework provides security without requiring surveillance. Signal integrity
 
 The following principles are widely recognized in neuroethics literature (Ienca & Andorno, 2017; Yuste et al., 2017; UNESCO IBC, 2021; UNESCO Recommendation on the Ethics of Neurotechnology, 2025):
 
-> **See also:** [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) — comprehensive mapping of ONI to all three pillars of the UNESCO Recommendation on the Ethics of Neurotechnology (2025), the first global normative framework adopted by 194 Member States.
+> **See also:** [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) — comprehensive mapping of QIF to all three pillars of the UNESCO Recommendation on the Ethics of Neurotechnology (2025), the first global normative framework adopted by 194 Member States.
 
 | Principle | Definition | Threat Without Protection |
 |-----------|------------|---------------------------|
@@ -72,7 +72,7 @@ The following principles are widely recognized in neuroethics literature (Ienca 
 
 **The Problem**: How does a person (or their BCI) know if a neural signal is genuinely from their own brain versus injected by an attacker?
 
-**ONI Solution**: The coherence metric quantifies signal trustworthiness across three dimensions:
+**QIF Solution**: The coherence metric quantifies signal trustworthiness across three dimensions:
 
 | Component | What It Measures | Authenticity Protection |
 |-----------|------------------|------------------------|
@@ -93,7 +93,7 @@ The following principles are widely recognized in neuroethics literature (Ienca 
 
 **The Problem**: How do you prevent unauthorized neural signals from reaching the brain (input attacks) or unauthorized reading of neural signals (output attacks)?
 
-**ONI Solution**: Zero-trust security at the Neural Gateway (Layer 8), where electrodes meet neurons.
+**QIF Solution**: Zero-trust security at the Neural Gateway (Layer 8), where electrodes meet neurons.
 
 | Firewall Feature | Liberty/Integrity Protection |
 |------------------|------------------------------|
@@ -120,14 +120,14 @@ Low Coherence + Valid Auth = REJECT (harm prevention)
 
 **The Problem**: Where can attacks occur? Where should defenses be placed?
 
-**ONI Solution**: A complete architectural model from molecules to applications, with attack surfaces and defenses catalogued at each layer.
+**QIF Solution**: A complete architectural model from molecules to applications, with attack surfaces and defenses catalogued at each layer.
 
-| Layer Range | Ethical Concern | ONI Contribution |
+| Layer Range | Ethical Concern | QIF Contribution |
 |-------------|-----------------|------------------|
 | L1-L3 (Molecular→Microcircuit) | Biological manipulation at cellular level | Identifies attack surfaces; notes biological defenses |
 | L4-L7 (Regional→Behavioral) | Higher-order cognitive manipulation | Maps system-level vulnerabilities |
 | L8 (Neural Gateway) | The critical boundary | Places firewall at bio-digital interface |
-| L9-L14 (Biology) | Neural/cognitive attack vectors | ONI-specific neurodefense applies |
+| L9-L14 (Biology) | Neural/cognitive attack vectors | QIF-specific neurodefense applies |
 
 **Ethical Reasoning**: You cannot protect what you cannot name. The 14-layer model provides *vocabulary* for discussing neural security across disciplines (neuroscience, security, ethics, law).
 
@@ -142,7 +142,7 @@ Low Coherence + Valid Auth = REJECT (harm prevention)
 
 **The Problem**: How do you detect signals that are technically "correct" but biologically implausible?
 
-**ONI Solution**: The f × S ≈ k invariant validates that signal frequencies match the spatial scale they claim to originate from.
+**QIF Solution**: The f × S ≈ k invariant validates that signal frequencies match the spatial scale they claim to originate from.
 
 | Check | What It Catches | Integrity Protection |
 |-------|-----------------|---------------------|
@@ -158,7 +158,7 @@ Low Coherence + Valid Auth = REJECT (harm prevention)
 
 **The Problem**: How do you detect if someone is accessing neural signals through unauthorized pathways?
 
-**ONI Solution**: Transport variance (σ²τ) measures pathway integrity based on expected reliability of biological signal routes.
+**QIF Solution**: Transport variance (σ²τ) measures pathway integrity based on expected reliability of biological signal routes.
 
 **Ethical Reasoning**: If a signal arrives via an unexpected pathway (bypassing normal synaptic routes), it may indicate:
 - Unauthorized access point
@@ -173,7 +173,7 @@ By modeling expected pathway reliability, the system can flag signals that "took
 
 **The Problem**: Who has final say over what enters or exits the neural space?
 
-**ONI Solution**: The firewall's REJECT decision is absolute. Rejected signals do not reach neural tissue.
+**QIF Solution**: The firewall's REJECT decision is absolute. Rejected signals do not reach neural tissue.
 
 **Ethical Design Principles**:
 
@@ -200,13 +200,13 @@ By modeling expected pathway reliability, the system can flag signals that "took
 
 ## Stakeholder Perspectives (Lázaro-Muñoz Framework)
 
-Research by [Gabriel Lázaro-Muñoz et al.](https://bioethics.hms.harvard.edu/faculty-staff/gabriel-lazaro-munoz) at Harvard Medical School and Massachusetts General Hospital provides empirical grounding for ONI's ethical framework through extensive stakeholder interviews.
+Research by [Gabriel Lázaro-Muñoz et al.](https://bioethics.hms.harvard.edu/faculty-staff/gabriel-lazaro-munoz) at Harvard Medical School and Massachusetts General Hospital provides empirical grounding for QIF's ethical framework through extensive stakeholder interviews.
 
 ### Researcher-Identified Ethical Concerns
 
 From interviews with 23 adaptive DBS researchers (Lázaro-Muñoz et al., 2020):
 
-| Concern | Frequency | ONI Framework Response |
+| Concern | Frequency | QIF Framework Response |
 |---------|-----------|----------------------|
 | **Data Privacy & Security** | 91% | Coherence validation, Privacy Score (Pₛ), BCI Anonymizer |
 | **Risks & Safety** | 83% | Amplitude bounds, rate limiting, REJECT decisions |
@@ -219,7 +219,7 @@ From interviews with 23 adaptive DBS researchers (Lázaro-Muñoz et al., 2020):
 
 ### Multi-Stakeholder Decision Model
 
-ONI recognizes that neural device decisions involve multiple stakeholders with legitimate interests:
+QIF recognizes that neural device decisions involve multiple stakeholders with legitimate interests:
 
 | Stakeholder | Role | Framework Integration |
 |-------------|------|----------------------|
@@ -231,7 +231,7 @@ ONI recognizes that neural device decisions involve multiple stakeholders with l
 
 ### Relational Autonomy
 
-Rather than strict individual autonomy, ONI adopts a **relational autonomy** model:
+Rather than strict individual autonomy, QIF adopts a **relational autonomy** model:
 
 > "Patients could identify a close caregiver to provide assistance" in treatment decisions. — Lázaro-Muñoz et al., 2020
 
@@ -276,7 +276,7 @@ For populations requiring additional protections, see:
 
 ## Alignment with Regulatory Frameworks
 
-| Framework | ONI Alignment |
+| Framework | QIF Alignment |
 |-----------|---------------|
 | **UNESCO Recommendation on Ethics of Neurotechnology (2025)** | **15 of 17 elements fully implemented** — see [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) for complete mapping |
 | **UNESCO IBC Report on Ethical Issues of Neurotechnology (2021)** | All five ethical challenges addressed: mental integrity, psychological continuity, autonomy, mental privacy, accessibility |
@@ -319,4 +319,4 @@ Muñoz, K. A., Blumenthal-Barby, J., Storch, E. A., Torgerson, L., & Lázaro-Mu�
 
 ---
 
-← Back to [INDEX.md](../INDEX.md) | [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) | [TRANSPARENCY.md](TRANSPARENCY.md)
+← Back to [Governance](/governance/) | [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) | [TRANSPARENCY.md](TRANSPARENCY.md)

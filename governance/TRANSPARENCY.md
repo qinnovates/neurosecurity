@@ -199,7 +199,7 @@ Using AI for efficiency creates a risk: cognitive offloading may trade deep unde
 | Date | Topic | AI Systems | Human Decision | Derivation Log |
 |------|-------|------------|----------------|----------------|
 | 2026-02-02 | QIF v3.1 whitepaper review | Gemini 2.5 (independent critique) | Accepted structural feedback, rejected some scope suggestions | Entry #16 |
-| 2026-02-03 | ONI L8 positioning + L14 consciousness scope | Gemini 2.5 (independent review) + Claude Opus 4.5 (research agent) + Aurora (synthesis) | PENDING — awaiting results | Entry #20 |
+| 2026-02-03 | QIF L8 positioning + L14 consciousness scope | Gemini 2.5 (independent review) + Claude Opus 4.5 (research agent) + Aurora (synthesis) | PENDING — awaiting results | Entry #20 |
 | 2026-02-03 | NIST CSF adoption for project structure | Claude Opus 4.5 (proposed mapping) | Kevin selected NIST over Kill Chain and STRIDE | Entry #21 |
 
 ### Non-AI Tools
@@ -258,7 +258,7 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 - Rejection/modification rate demonstrates active oversight
 
 ### Explainability
-- The ONI Framework itself embodies XAI principles (every firewall decision has traceable reasoning)
+- The QIF Framework itself embodies XAI principles (every firewall decision has traceable reasoning)
 - This document explains *how* AI was used, not just *that* it was used
 
 ---

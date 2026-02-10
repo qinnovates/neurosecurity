@@ -1,10 +1,10 @@
 # Accessibility Statement & Requirements
 
-> **ONI Framework** is committed to ensuring digital accessibility for all users, including people with disabilities, neurodivergent individuals, and BCI (brain-computer interface) users.
+> **QIF Framework** is committed to ensuring digital accessibility for all users, including people with disabilities, neurodivergent individuals, and BCI (brain-computer interface) users.
 
-**Last Updated:** 2026-02-01
+**Last Updated:** 2026-02-10
 **WCAG Version:** 2.2 Level AA (target)
-**Scope:** Python packages (ONI Academy, TARA) + GitHub Pages site (visualizations, whitepaper, documentation)
+**Scope:** Python packages (QIF Academy, TARA) + GitHub Pages site (visualizations, whitepaper, documentation)
 
 ---
 
@@ -25,7 +25,7 @@
 
 ## 1. Compliance Standards
 
-ONI targets compliance with the following accessibility standards and regulations:
+QIF targets compliance with the following accessibility standards and regulations:
 
 ### 1.1 International Standards
 
@@ -40,7 +40,7 @@ ONI targets compliance with the following accessibility standards and regulation
 
 | Regulation | Jurisdiction | Applies To | Relevance |
 |------------|-------------|------------|-----------|
-| **ADA Title II** | US (public entities) | Government-funded projects | If ONI receives federal/state funding |
+| **ADA Title II** | US (public entities) | Government-funded projects | If QIF receives federal/state funding |
 | **ADA Title III** | US (public accommodation) | Websites as places of public accommodation | Applies to public-facing GitHub Pages |
 | **Section 508** | US (federal) | ICT procured/developed by federal agencies | Required if used in federally funded research |
 | **European Accessibility Act (EAA)** | EU | Digital products/services after June 2025 | Applies to EU-accessible web content |
@@ -53,7 +53,7 @@ WCAG 2.2 organizes requirements under four principles: **Perceivable, Operable, 
 
 #### Perceivable
 
-| Criterion | ID | Requirement | ONI Applicability |
+| Criterion | ID | Requirement | QIF Applicability |
 |-----------|----|-------------|-------------------|
 | Non-text Content | 1.1.1 | Alt text for all non-decorative images | All pages — diagrams, SVG icons, WebGL canvases |
 | Captions (Prerecorded) | 1.2.2 | Captions for video/audio content | Demo videos (if embedded) |
@@ -73,7 +73,7 @@ WCAG 2.2 organizes requirements under four principles: **Perceivable, Operable, 
 
 #### Operable
 
-| Criterion | ID | Requirement | ONI Applicability |
+| Criterion | ID | Requirement | QIF Applicability |
 |-----------|----|-------------|-------------------|
 | Keyboard | 2.1.1 | All functionality via keyboard | All interactive viz, menus, controls |
 | No Keyboard Trap | 2.1.2 | Users can always Tab away | Modal panels, TTP detail |
@@ -95,7 +95,7 @@ WCAG 2.2 organizes requirements under four principles: **Perceivable, Operable, 
 
 #### Understandable
 
-| Criterion | ID | Requirement | ONI Applicability |
+| Criterion | ID | Requirement | QIF Applicability |
 |-----------|----|-------------|-------------------|
 | Language of Page | 3.1.1 | `lang` attribute on `<html>` | All pages |
 | Language of Parts | 3.1.2 | `lang` on foreign language text | Mathematical notation, Latin terms |
@@ -109,7 +109,7 @@ WCAG 2.2 organizes requirements under four principles: **Perceivable, Operable, 
 
 #### Robust
 
-| Criterion | ID | Requirement | ONI Applicability |
+| Criterion | ID | Requirement | QIF Applicability |
 |-----------|----|-------------|-------------------|
 | Parsing | 4.1.1 | Valid HTML | All pages |
 | Name, Role, Value | 4.1.2 | ARIA roles and states for custom widgets | Custom controls, SVG interactions |
@@ -255,7 +255,7 @@ WCAG 2.2 organizes requirements under four principles: **Perceivable, Operable, 
 
 ## 3. GitHub Pages Site Requirements
 
-The GitHub Pages site at `qinnovates.github.io/ONI/` hosts 12+ interactive visualizations, a whitepaper, and documentation. These are self-contained HTML files with inline CSS/JS, WebGL (Three.js), and SVG animations.
+The GitHub Pages site at `qinnovate.com/` hosts 12+ interactive visualizations, a whitepaper, and documentation. These are self-contained HTML files with inline CSS/JS, WebGL (Three.js), and SVG animations.
 
 ### 3.1 Current Gaps
 
@@ -319,7 +319,7 @@ The GitHub Pages site at `qinnovates.github.io/ONI/` hosts 12+ interactive visua
 
 ## 4. Python Package Compliance (Current)
 
-Both **ONI Academy** and **TARA** user interfaces currently meet WCAG 2.1 Level AA standards.
+Both **QIF Academy** and **TARA** user interfaces currently meet WCAG 2.1 Level AA standards.
 
 ### 4.1 Conformance Level
 
@@ -336,7 +336,7 @@ Both **ONI Academy** and **TARA** user interfaces currently meet WCAG 2.1 Level 
 
 ### 4.2 Color Contrast Ratios
 
-#### ONI Academy
+#### QIF Academy
 
 All colors tested against primary background `#0f0f1a`:
 
@@ -392,7 +392,7 @@ All colors tested against primary background `#0a0a0f`:
 
 ## 5. BCI Accessibility Mode
 
-> **Purpose:** Enable P300/EEG-based BCI browser users who cannot scroll, hover, or use keyboard input to navigate the full ONI site.
+> **Purpose:** Enable P300/EEG-based BCI browser users who cannot scroll, hover, or use keyboard input to navigate the full QIF site.
 
 ### 5.1 BCI Mode Specification
 
@@ -466,7 +466,7 @@ When a user enables BCI-friendly mode via this toggle, a one-time feedback modal
 | `oni-bci-mode-enabled` | `'true'` / absent | Persists BCI mode toggle state across sessions |
 | `oni-bci-feedback-shown` | `'true'` / absent | Prevents repeat display of feedback modal |
 
-**Implementation:** `docs/index.html` — CSS (`#oni-bci-toggle`, `#oni-bci-feedback-overlay`), HTML (BCI toggle button + feedback dialog), JS (within animation toggle IIFE).
+**Implementation:** `docs/index.html` — CSS (`#qif-bci-toggle`, `#qif-bci-feedback-overlay`), HTML (BCI toggle button + feedback dialog), JS (within animation toggle IIFE).
 
 **Note:** The `body.bci-mode` class is applied when the toggle is active. BCI-specific CSS overrides (Section 5.3) hook into this class. The animation toggle (`body.reduced-motion`) and BCI toggle (`body.bci-mode`) are independent — users can enable either or both.
 
@@ -490,18 +490,18 @@ BCI Mode should be implemented **after all visualization pages are finalized** t
 
 ## 6. Accessible Landing Site Plan
 
-> **Purpose:** A separate, dedicated accessible version of the ONI site that users with disabilities can land on directly.
+> **Purpose:** A separate, dedicated accessible version of the QIF site that users with disabilities can land on directly.
 
 ### 6.1 Site Architecture
 
 ```
-qinnovates.github.io/ONI/accessible/
+qinnovate.com/accessible/
 ├── index.html          # Accessible landing page
 ├── layers.html         # 14-layer model (text + static diagrams)
 ├── threats.html        # Attack taxonomy (searchable table)
 ├── whitepaper.html     # Whitepaper (simplified layout)
 ├── visualizations.html # Links to accessible versions of each viz
-└── about.html          # About ONI + accessibility statement
+└── about.html          # About QIF + accessibility statement
 ```
 
 ### 6.2 Design Principles
@@ -519,7 +519,7 @@ qinnovates.github.io/ONI/accessible/
 
 The accessible landing page should provide:
 
-- **Site purpose** — What ONI is, one paragraph
+- **Site purpose** — What QIF is, one paragraph
 - **Navigation menu** — Large, clearly labeled links to each section
 - **Accessibility features** — What accommodations are available
 - **BCI Mode toggle** — For P300/EEG browser users
@@ -615,7 +615,7 @@ These changes are low-effort and should be applied to all pages immediately:
 
 ```bash
 # Run Lighthouse accessibility audit
-npx lighthouse https://qinnovates.github.io/ONI/ --only-categories=accessibility --output=json
+npx lighthouse https://qinnovate.com/ --only-categories=accessibility --output=json
 ```
 
 Target: >= 95 score on all pages.
@@ -627,7 +627,7 @@ Target: >= 95 score on all pages.
 npm install -g @axe-core/cli
 
 # Scan a page
-axe https://qinnovates.github.io/ONI/visualizations/index.html
+axe https://qinnovate.com/visualizations/index.html
 ```
 
 Target: 0 critical and serious violations.
@@ -681,7 +681,7 @@ When possible, test with actual assistive technology users:
 
 | File | Purpose |
 |------|---------|
-| `oni-framework/oni/ui/styles.py` | ONI Academy styles (WCAG compliant) |
+| `oni-framework/oni/ui/styles.py` | QIF Academy styles (WCAG compliant) |
 | `tara-nsec-platform/tara_mvp/ui/styles.py` | TARA styles (WCAG compliant) |
 | `governance/scripts/check_accessibility.py` | Automated compliance checker |
 | `.github/workflows/accessibility.yml` | CI/CD accessibility workflow |
@@ -769,7 +769,7 @@ on:
 
 ## 10. Feedback
 
-We welcome feedback on the accessibility of ONI Framework interfaces.
+We welcome feedback on the accessibility of QIF Framework interfaces.
 
 Please report accessibility issues:
 - **GitHub Issues:** https://github.com/qinnovates/mindloft/issues
@@ -792,9 +792,9 @@ For urgent accessibility requests, include "ACCESSIBILITY" in the issue title.
 
 ---
 
-*This accessibility requirements document was created on 2026-02-01.*
-*ONI Framework is committed to continuous accessibility improvement.*
+*This accessibility requirements document was created on 2026-02-10.*
+*QIF Framework is committed to continuous accessibility improvement.*
 
 ---
 
-← Back to [INDEX.md](../INDEX.md) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [TRANSPARENCY.md](TRANSPARENCY.md)
+← Back to [Governance](/governance/) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [TRANSPARENCY.md](TRANSPARENCY.md)

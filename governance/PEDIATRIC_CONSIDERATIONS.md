@@ -1,8 +1,8 @@
-# ONI Framework: Pediatric and Incapacity Considerations
+# QIF Framework: Pediatric and Incapacity Considerations
 
 > Ethical guidelines for neural device use in minors and individuals with limited decision-making capacity.
 
-**Last Updated:** 2026-01-24
+**Last Updated:** 2026-02-10
 **Version:** 1.0
 **Status:** Active Development
 
@@ -26,7 +26,7 @@
   - [Variable Capacity](#variable-capacity)
   - [Advance Directives for Neural Devices](#advance-directives-for-neural-devices)
 - [Special Protections](#special-protections)
-- [Integration with ONI Framework](#integration-with-oni-framework)
+- [Integration with QIF Framework](#integration-with-oni-framework)
 - [References](#references)
 
 ---
@@ -43,7 +43,7 @@ This document addresses the unique ethical challenges of deploying neural device
 
 ## Scope of Application
 
-This document applies to ONI-compliant devices deployed in:
+This document applies to QIF-compliant devices deployed in:
 
 | Population | Age/Capacity | Key Considerations |
 |------------|--------------|-------------------|
@@ -69,7 +69,7 @@ Research with 29 clinicians caring for pediatric patients identified four pressi
 
 ### Adolescent-Specific Concerns
 
-| Issue | Clinician Concern Rate | ONI Implication |
+| Issue | Clinician Concern Rate | QIF Implication |
 |-------|----------------------|-----------------|
 | **Adolescent assent capacity** | 80% | Age-appropriate assent protocols required |
 | **Identity formation effects** | High | Device effects on developing sense of self |
@@ -132,7 +132,7 @@ If a minor expresses dissent:
 
 ### The Developing Brain
 
-| Factor | Consideration | ONI Implication |
+| Factor | Consideration | QIF Implication |
 |--------|---------------|-----------------|
 | **Brain plasticity** | Higher adaptability, unknown long-term effects | Conservative thresholds |
 | **Developmental milestones** | Device may affect normal development | Milestone monitoring |
@@ -221,7 +221,7 @@ If a minor expresses dissent:
 
 ---
 
-## Integration with ONI Framework
+## Integration with QIF Framework
 
 ### Proposed Consent State Extension
 
@@ -248,4 +248,4 @@ Muñoz, K. A., & Lázaro-Muñoz, G. (2021). Pressing ethical issues in consideri
 
 ---
 
-← Back to [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md) | [INDEX.md](../INDEX.md)
+← Back to [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md) | [Governance](/governance/)
