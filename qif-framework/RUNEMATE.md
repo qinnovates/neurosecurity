@@ -355,7 +355,555 @@ fn render(content: SanitizedContent) -> Staves {
 
 ---
 
-## 4. The Compression Math
+## 4. Staves Bytecode Format (v1.0)
+
+This section is the formal specification of the Staves binary format. An implementation that correctly produces and consumes this format is a conformant Forge compiler and Scribe interpreter, respectively.
+
+### 4.1 File Structure
+
+A Stave file (`.stav`) consists of four contiguous sections in fixed order:
+
+```
++------------------+
+| HEADER (16 B)    |  Fixed-size metadata
++------------------+
+| STRING POOL      |  Variable-length, null-terminated UTF-8 strings
++------------------+
+| STYLE TABLE      |  Fixed-size style entries, referenced by index
++------------------+
+| DOM STREAM       |  Opcode sequence describing the document tree
++------------------+
+```
+
+All multi-byte integers are **little-endian**. All offsets are byte offsets from the start of the file.
+
+### 4.2 Header (16 bytes)
+
+```
+Offset  Size  Field               Description
+------  ----  ------------------  -------------------------------------------
+0x00    4 B   magic               ASCII "STAV" (0x53 0x54 0x41 0x56)
+0x02    2 B   staves_version      Format version (0x0100 = v1.0)
+0x04    2 B   min_scribe_version  Minimum Scribe firmware version required
+0x06    4 B   string_pool_offset  Byte offset of string pool section
+0x0A    4 B   style_table_offset  Byte offset of style table section
+0x0E    2 B   dom_stream_offset   Byte offset of DOM stream section
+```
+
+**Validation:** The Scribe MUST reject any file where:
+- `magic` != "STAV"
+- `staves_version` > supported version
+- `min_scribe_version` > firmware version
+- Any offset points outside file bounds
+- `string_pool_offset` < 16 (header size)
+- Offsets are not in ascending order (string pool < style table < DOM stream)
+
+### 4.3 String Pool
+
+Variable-length section containing all text content and attribute values. Strings are stored contiguously, null-terminated, UTF-8 encoded.
+
+```
+String Pool Layout:
++--------+------+---------+------+---------+------+-----+
+| count  | len0 | bytes0  | 0x00 | len1    | bytes1| ... |
+| (2 B)  |(2 B) | (var)   |      | (2 B)  | (var) |     |
++--------+------+---------+------+---------+------+-----+
+```
+
+| Field | Size | Description |
+|-------|------|-------------|
+| `count` | 2 B (uint16) | Number of strings in pool |
+| Per string: `length` | 2 B (uint16) | Byte length of string (excluding null terminator) |
+| Per string: `bytes` | variable | UTF-8 encoded string content |
+| Per string: terminator | 1 B | 0x00 null byte |
+
+**Limits:**
+- Max string count: 512 entries
+- Max individual string length: 4,096 bytes
+- Max total string pool size: 32,768 bytes (32 KB)
+- String index: uint16 (0-based, referenced by opcodes)
+
+**Encoding:** All strings are valid UTF-8. The Forge MUST sanitize strings at compile time — no control characters (except \n, \t), no null bytes within strings, no overlong encodings. The Scribe MUST validate UTF-8 on decode and reject malformed strings.
+
+### 4.4 Style Table
+
+Fixed-size section containing pre-resolved CSS property sets. Each style entry is a complete, flattened set of visual properties — no selector matching required at runtime. The Forge resolves the CSS cascade at compile time.
+
+```
+Style Table Layout:
++--------+-------------------+-------------------+-----+
+| count  | StyleEntry[0]     | StyleEntry[1]     | ... |
+| (2 B)  | (24 B)            | (24 B)            |     |
++--------+-------------------+-------------------+-----+
+```
+
+**StyleEntry (24 bytes):**
+
+```
+Offset  Size  Field               Encoding
+------  ----  ------------------  -------------------------------------------
+0x00    1 B   display             enum: 0=none, 1=block, 2=flex, 3=inline
+0x01    1 B   flex_direction      enum: 0=row, 1=column, 2=row-reverse, 3=column-reverse
+0x02    1 B   flex_wrap           enum: 0=nowrap, 1=wrap
+0x03    1 B   justify_content     enum: 0=start, 1=center, 2=end, 3=space-between, 4=space-around, 5=space-evenly
+0x04    1 B   align_items         enum: 0=start, 1=center, 2=end, 3=stretch, 4=baseline
+0x05    1 B   position            enum: 0=static, 1=relative, 2=absolute, 3=fixed
+0x06    1 B   overflow            enum: 0=visible, 1=hidden, 2=scroll
+0x07    1 B   text_align          enum: 0=left, 1=center, 2=right
+0x08    2 B   width               uint16: pixels (0 = auto, 0xFFFF = 100%)
+0x0A    2 B   height              uint16: pixels (0 = auto, 0xFFFF = 100%)
+0x0C    1 B   margin_top          uint8: pixels (0-255)
+0x0D    1 B   margin_right        uint8: pixels
+0x0E    1 B   margin_bottom       uint8: pixels
+0x0F    1 B   margin_left         uint8: pixels
+0x10    1 B   padding_top         uint8: pixels
+0x11    1 B   padding_right       uint8: pixels
+0x12    1 B   padding_bottom      uint8: pixels
+0x13    1 B   padding_left        uint8: pixels
+0x14    3 B   color               RGB (1 byte each)
+0x17    3 B   background_color    RGB (1 byte each)
+0x1A    1 B   font_size           uint8: pixels (8-72 mapped, 0 = inherit)
+0x1B    1 B   font_weight         enum: 0=normal (400), 1=bold (700)
+```
+
+Total: 28 bytes per entry. (Corrected from 24 to 28 to fit all fields.)
+
+**Limits:**
+- Max style entries: 256
+- Style index: uint8 (0-based, referenced by OPEN_TAG opcode)
+
+**Design rationale:** 28 bytes per style entry × 256 max entries = 7,168 bytes max style table. This is a fixed, bounded memory cost. The Forge deduplicates identical style sets at compile time — 10 elements sharing the same CSS produce 1 style entry referenced 10 times.
+
+### 4.5 DOM Stream: Opcode Table (v1.0)
+
+The DOM stream is a linear sequence of opcodes that the Scribe executes to build the DOM tree. Opcodes are variable-length, identified by a 1-byte opcode ID.
+
+**Notation:** `u8` = 1 byte unsigned, `u16` = 2 bytes unsigned (little-endian), `str_idx` = uint16 string pool index, `sty_idx` = uint8 style table index.
+
+#### Structure Opcodes
+
+| Opcode | ID | Arguments | Size | Description |
+|--------|-----|-----------|------|-------------|
+| OPEN_TAG | 0x01 | `tag_id: u8, style_idx: u8, node_id: u16` | 5 B | Open element. Pushes onto node stack. |
+| CLOSE_TAG | 0x02 | (none) | 1 B | Close current element. Pops node stack. |
+| TEXT | 0x03 | `str_idx: u16` | 3 B | Text content node (references string pool). |
+| VOID_TAG | 0x04 | `tag_id: u8, style_idx: u8, node_id: u16` | 5 B | Self-closing element (hr, br, img placeholder). |
+| EOF | 0x00 | (none) | 1 B | End of DOM stream. |
+
+#### Tag IDs
+
+| ID | Tag | Semantic Role |
+|----|-----|---------------|
+| 0x01 | div | Generic container |
+| 0x02 | span | Inline container |
+| 0x03 | p | Paragraph |
+| 0x04 | h1 | Heading level 1 |
+| 0x05 | h2 | Heading level 2 |
+| 0x06 | h3 | Heading level 3 |
+| 0x07 | h4 | Heading level 4 |
+| 0x08 | button | Interactive button |
+| 0x09 | input | Input field |
+| 0x0A | label | Form label |
+| 0x0B | ul | Unordered list |
+| 0x0C | ol | Ordered list |
+| 0x0D | li | List item |
+| 0x0E | table | Table |
+| 0x0F | tr | Table row |
+| 0x10 | td | Table cell |
+| 0x11 | th | Table header cell |
+| 0x12 | header | Page header region |
+| 0x13 | footer | Page footer region |
+| 0x14 | nav | Navigation region |
+| 0x15 | section | Content section |
+| 0x16 | article | Article content |
+| 0x17 | aside | Sidebar content |
+| 0x18 | form | Form container |
+| 0x19 | hr | Horizontal rule (void) |
+| 0x1A | br | Line break (void) |
+| 0x1B | strong | Bold text |
+| 0x1C | em | Italic text |
+| 0x1D | code | Monospace/code text |
+| 0x1E | pre | Preformatted block |
+| 0x1F | a | Link (href stored as attribute) |
+
+**Reserved:** 0x20-0x3F for future HTML elements. 0x40+ reserved for Staves v2 neural opcodes (Section 16).
+
+#### Attribute Opcodes
+
+| Opcode | ID | Arguments | Size | Description |
+|--------|-----|-----------|------|-------------|
+| ATTR | 0x10 | `attr_id: u8, value_idx: u16` | 4 B | Set attribute on current element. |
+| EVENT | 0x11 | `event_type: u8, action_idx: u16` | 4 B | Attach declarative event handler. |
+
+| Attr ID | Name | Value Type |
+|---------|------|-----------|
+| 0x01 | id | string |
+| 0x02 | class | string (for accessibility/semantics, not styling) |
+| 0x03 | href | string (sanitized URL — Forge validates scheme whitelist) |
+| 0x04 | src | string (asset reference only — no external URLs) |
+| 0x05 | alt | string (accessibility text) |
+| 0x06 | placeholder | string |
+| 0x07 | value | string |
+| 0x08 | type | string (input type: text, number, password, checkbox) |
+| 0x09 | name | string (form field name) |
+| 0x0A | role | string (ARIA role) |
+| 0x0B | aria-label | string (accessibility) |
+
+| Event Type | ID | Behavior |
+|------------|-----|----------|
+| on-click | 0x01 | SEND: action to Gateway (round-trip) |
+| on-toggle | 0x02 | TOGGLE: local visibility (no round-trip) |
+| on-input | 0x03 | INPUT: buffer locally, send on submit |
+
+#### Layout Hint Opcodes
+
+| Opcode | ID | Arguments | Size | Description |
+|--------|-----|-----------|------|-------------|
+| FLEX_GROW | 0x20 | `value: u8` | 2 B | Set flex-grow on current element (0-255). |
+| FLEX_SHRINK | 0x21 | `value: u8` | 2 B | Set flex-shrink on current element. |
+| FLEX_BASIS | 0x22 | `value: u16` | 3 B | Set flex-basis in pixels. |
+| MIN_WIDTH | 0x23 | `value: u16` | 3 B | Minimum width constraint. |
+| MAX_WIDTH | 0x24 | `value: u16` | 3 B | Maximum width constraint. |
+| MIN_HEIGHT | 0x25 | `value: u16` | 3 B | Minimum height constraint. |
+| MAX_HEIGHT | 0x26 | `value: u16` | 3 B | Maximum height constraint. |
+| BORDER | 0x27 | `width: u8, r: u8, g: u8, b: u8` | 5 B | Border (uniform, all sides). |
+| LINE_HEIGHT | 0x28 | `value: u8` | 2 B | Line height in pixels. |
+| GAP | 0x29 | `value: u8` | 2 B | Flex gap in pixels. |
+
+#### SVG Opcodes (Simplified Subset)
+
+| Opcode | ID | Arguments | Size | Description |
+|--------|-----|-----------|------|-------------|
+| SVG_BEGIN | 0x30 | `width: u16, height: u16` | 5 B | Open SVG viewport. |
+| SVG_END | 0x31 | (none) | 1 B | Close SVG viewport. |
+| SVG_RECT | 0x32 | `x: u16, y: u16, w: u16, h: u16, r: u8, g: u8, b: u8` | 11 B | Rectangle. |
+| SVG_CIRCLE | 0x33 | `cx: u16, cy: u16, radius: u16, r: u8, g: u8, b: u8` | 9 B | Circle. |
+| SVG_LINE | 0x34 | `x1: u16, y1: u16, x2: u16, y2: u16, r: u8, g: u8, b: u8` | 11 B | Line. |
+| SVG_TEXT | 0x35 | `x: u16, y: u16, str_idx: u16, font_size: u8` | 7 B | Text at position. |
+| SVG_PATH | 0x36 | `str_idx: u16` | 3 B | SVG path data (d attribute, stored as string). |
+
+#### Icon Opcode
+
+| Opcode | ID | Arguments | Size | Description |
+|--------|-----|-----------|------|-------------|
+| ICON | 0x38 | `glyph_id: u16` | 3 B | Render icon from on-chip icon font (Material Symbols subset). |
+
+### 4.6 Worked Example
+
+**Input HTML:**
+
+```html
+<div class="card" style="display:flex; flex-direction:column; padding:16px; background:#1a1a2e;">
+  <h2 style="color:#fff; font-size:18px;">Battery Status</h2>
+  <p style="color:#aaa;">87% — Estimated 14h remaining</p>
+  <button onclick="sendAction('refresh')">Refresh</button>
+</div>
+```
+
+**Compiled Stave (annotated):**
+
+```
+HEADER (16 bytes):
+  53 54 41 56        magic: "STAV"
+  00 01              staves_version: 0x0100 (v1.0)
+  00 01              min_scribe_version: 0x0001
+  10 00 00 00        string_pool_offset: 16
+  XX XX XX XX        style_table_offset: (computed after string pool)
+  XX XX              dom_stream_offset: (computed after style table)
+
+STRING POOL (3 strings):
+  03 00              count: 3
+  0E 00  "Battery Status" 00
+  23 00  "87% — Estimated 14h remaining" 00
+  07 00  "Refresh" 00
+
+STYLE TABLE (3 entries):
+  03 00              count: 3
+  [0] card style:    display=flex, flex_dir=column, padding=16 all, bg=#1a1a2e
+  [1] heading style: color=#ffffff, font_size=18, font_weight=bold
+  [2] text style:    color=#aaaaaa
+
+DOM STREAM:
+  01 01 00 01 00     OPEN_TAG div, style[0], node_id=1
+    01 05 01 02 00   OPEN_TAG h2, style[1], node_id=2
+      03 00 00       TEXT str[0] ("Battery Status")
+    02               CLOSE_TAG
+    01 03 02 03 00   OPEN_TAG p, style[2], node_id=3
+      03 01 00       TEXT str[1] ("87% — Estimated...")
+    02               CLOSE_TAG
+    01 08 00 04 00   OPEN_TAG button, default style, node_id=4
+      11 01 02 00    EVENT on-click, action=str[2] ("Refresh")
+      03 02 00       TEXT str[2] ("Refresh")
+    02               CLOSE_TAG
+  02                 CLOSE_TAG
+  00                 EOF
+
+TOTAL: ~130 bytes (vs ~260 bytes raw HTML = 50% reduction on this tiny example)
+       (Real dashboards with repeated structure achieve 65-80%.)
+```
+
+### 4.7 Resource Limits (Enforced by Scribe)
+
+These limits are hard-coded in the Scribe firmware. Any Stave exceeding them is rejected before rendering (error E002).
+
+| Resource | Limit | Rationale |
+|----------|-------|-----------|
+| Total file size | 65,536 B (64 KB) | SRAM budget on implant chip |
+| DOM node count | 2,048 | Memory for node array |
+| DOM nesting depth | 32 | Stack depth for iterative traversal |
+| String pool entries | 512 | Index space (uint16 is generous, but pool size caps real usage) |
+| String pool total size | 32,768 B (32 KB) | Half of max file size |
+| Individual string length | 4,096 B | Prevent single-string OOM |
+| Style table entries | 256 | Index space (uint8) |
+| SVG path data length | 2,048 B | Prevent complex path OOM |
+| Attributes per element | 8 | Bounded attribute parsing |
+| Events per element | 2 | Bounded event table |
+| Render timeout | 500 ms | Hard backstop for CPU-bound attacks |
+| Delta updates per second | 10 | Prevent relayout storm |
+
+---
+
+## 5. Forge Compiler Pipeline
+
+The Forge is a multi-pass compiler that transforms HTML/CSS into Staves bytecode. It runs on the gateway (phone, hub, or clinical workstation) — not on the implant. Compilation is a build-time operation, not a runtime interpretation.
+
+### 5.1 Compilation Stages
+
+```
+Stage 1        Stage 2         Stage 3         Stage 4         Stage 5
+HTML source → Parse (AST) → Sanitize → Resolve Styles → Emit Bytecode → .stav file
+                  |              |              |                |
+              html5ever     Allowlist      Cascade          String pool
+              cssparser     filter         resolution       Style dedup
+                            JS strip       Flatten to       Opcode gen
+                            URL validate   StyleEntry       Node ID assign
+```
+
+### Stage 1: Parse
+
+**Input:** HTML string + CSS (inline styles, `<style>` blocks, or external stylesheets fetched by the gateway).
+
+**Tools:** `html5ever` (Servo's HTML5 parser, Rust) and `cssparser` (Servo's CSS parser, Rust). Both are mature, fuzz-tested crates used in a shipping browser engine.
+
+**Output:** HTML DOM tree + CSS rule set (selectors + declarations).
+
+**Error handling:** Malformed HTML is parsed in quirks mode (html5ever handles this). Malformed CSS properties are discarded with a compiler warning. The Forge never fails to produce output — it degrades gracefully.
+
+### Stage 2: Sanitize
+
+**Input:** Parsed DOM tree.
+
+**Operations:**
+1. **Tag allowlist:** Only tags with a defined Tag ID (Section 4.5) pass through. Unknown tags are replaced with `<div>` (preserving children) and a compiler warning is emitted.
+2. **Attribute allowlist:** Only attributes with a defined Attr ID pass through. Unknown attributes are discarded.
+3. **JavaScript elimination:** All `<script>` tags, `on*` attributes (except Staves event model), and `javascript:` URLs are stripped. This is a hard removal — there is no JS execution path in Staves.
+4. **URL sanitization:** `href` and `src` attributes are validated against a scheme allowlist (`https:`, `staves:`, `asset:`). All other schemes (including `data:`, `javascript:`, `blob:`) are rejected.
+5. **Content sanitization:** All text content is validated as UTF-8, control characters stripped (except `\n`, `\t`), and HTML entities decoded to Unicode.
+
+**Output:** Sanitized DOM tree (guaranteed safe for rendering).
+
+### Stage 3: Resolve Styles
+
+**Input:** Sanitized DOM tree + CSS rule set.
+
+**Operations:**
+1. **Selector matching:** For each DOM node, find all matching CSS selectors. Apply cascade rules (specificity, source order, `!important`).
+2. **Property resolution:** For each node, compute the final value of every supported CSS property (Section 4.4 StyleEntry fields). Unsupported properties are discarded with a compiler warning.
+3. **Inheritance:** Properties like `color`, `font-size`, and `text-align` inherit from parent if not explicitly set. The Forge resolves inheritance at compile time — the Scribe never needs to walk up the tree.
+4. **Deduplication:** Identical resolved style sets are merged into a single StyleEntry. The Forge tracks which nodes share identical styles and assigns them the same style index.
+5. **Fallbacks:** Unsupported CSS values fall back to safe defaults:
+   - `position: sticky` → `position: relative`
+   - `display: grid` → `display: block`
+   - `display: table` → `display: block`
+   - Viewport units → pixel equivalent at compile time (assuming 320px viewport width)
+   - `calc()` → computed value at compile time (if computable) or fallback
+
+**Output:** DOM tree with per-node style indices pointing into the deduplicated StyleEntry table.
+
+### Stage 4: Emit Bytecode
+
+**Input:** Styled DOM tree + deduped style table.
+
+**Operations:**
+1. **String pool construction:** Traverse DOM, collect all text content and attribute values. Deduplicate identical strings. Assign sequential indices.
+2. **Style table serialization:** Write StyleEntry structs in index order (28 bytes each).
+3. **Node ID assignment:** Breadth-first traversal. Each node gets a sequential uint16 ID. These IDs are stable for delta updates — the gateway tracks the mapping.
+4. **DOM stream generation:** Depth-first traversal of the styled DOM tree. Emit opcodes for each node:
+   - Element: `OPEN_TAG(tag_id, style_idx, node_id)` + children + `CLOSE_TAG`
+   - Text: `TEXT(str_idx)`
+   - Void element: `VOID_TAG(tag_id, style_idx, node_id)`
+   - Attributes: `ATTR(attr_id, value_idx)` immediately after OPEN_TAG
+   - Events: `EVENT(event_type, action_idx)` immediately after attributes
+5. **Header computation:** Calculate section offsets, write header.
+6. **Resource limit validation:** Verify the output doesn't exceed any Scribe limit (Section 4.7). If it does, emit a compiler error — not a warning. Oversized Staves are never produced.
+
+**Output:** Complete `.stav` binary file.
+
+### 5.2 Delta Compilation
+
+When user interaction triggers a state change, the Forge doesn't recompile from scratch. It maintains an in-memory representation of the last-compiled Stave and computes a minimal diff.
+
+**Delta compilation algorithm:**
+1. Recompile the changed portion of the DOM (usually one subtree).
+2. Compare new node tree against the previous node tree (by node ID).
+3. For each changed node: emit the appropriate delta opcode (Section 3, Delta Stave format).
+4. Unchanged subtrees produce zero delta opcodes.
+5. Package delta opcodes with a sequence counter and any new string pool entries.
+
+**Correctness guarantee:** `apply(full_stave, delta_1, delta_2, ..., delta_n)` MUST produce identical render output to `compile(current_html)`. The Forge conformance test suite (Section 11, Compiler Verification) validates this property.
+
+### 5.3 Scribe Target Awareness
+
+The Forge queries the Scribe's capabilities during the NSP handshake:
+
+| Capability | Reported By Scribe | Forge Behavior |
+|------------|-------------------|----------------|
+| `scribe_version` | Firmware version | Emit only opcodes supported by this version |
+| `max_nodes` | Node limit (default 2,048) | Reject or simplify if exceeded |
+| `max_stave_size` | Size limit (default 64 KB) | Reject or simplify if exceeded |
+| `icon_font` | Icon set ID and glyph count | Only emit ICON opcodes for available glyphs |
+| `display_width` | Pixels (or electrode count for Phase 2) | Resolve viewport-relative units |
+| `display_height` | Pixels (or electrode rows for Phase 2) | Resolve viewport-relative units |
+| `color_depth` | Bits per channel (1, 4, 8) | Quantize colors to target depth |
+
+This information is exchanged once during session establishment. The Forge compiles all Staves for that session to the reported target profile.
+
+---
+
+## 6. NSP Frame Integration
+
+Staves ride inside NSP data frames. This section specifies how Stave payloads are packetized, reassembled, and authenticated within the NSP protocol.
+
+### 6.1 Stave-in-Frame Packing
+
+NSP frames have a maximum payload size determined by the device class (NSP-PROTOCOL-SPEC.md Section 8):
+
+| Device Class | Max NSP Payload | Typical Radio MTU |
+|-------------|-----------------|-------------------|
+| Class A (implant) | 512 B | BLE 5.0: 251 B |
+| Class B (headset) | 2,048 B | WiFi: 1,500 B |
+| Class C (clinical) | 65,536 B | Ethernet: 1,500 B |
+
+Most Staves exceed a single frame. Fragmentation is required.
+
+### 6.2 Fragmentation Protocol
+
+```
+NSP Frame Header (existing):
+  [sequence_number: u32] [frame_type: u8] [payload_length: u16] [...]
+
+Stave Fragment Header (8 bytes, inside NSP payload):
+  content_type:   u8    0x20 = full Stave, 0x21 = delta Stave, 0x22 = calibration data
+  fragment_index: u8    0-based fragment number
+  fragment_total: u8    total fragments in this Stave
+  stave_id:       u16   identifier for reassembly (wraps at 65535)
+  total_size:     u16   total Stave size in bytes (for pre-allocation)
+  reserved:       u8    0x00
+```
+
+**Reassembly rules:**
+1. Scribe allocates `total_size` bytes on receiving fragment 0.
+2. Subsequent fragments are copied into the buffer at `fragment_index * (mtu - 8)`.
+3. When all `fragment_total` fragments received: validate header, render.
+4. If any fragment is missing after 500ms: discard all fragments for that `stave_id`, request retransmission.
+5. If a new `stave_id` arrives before the current one is complete: discard incomplete Stave (newer content supersedes).
+
+**Authentication:** Each NSP frame is individually authenticated (AES-256-GCM auth tag). Additionally, the complete reassembled Stave is verified against the Merkle tree batch signature (Section 17, Gap 2) if batch signing is active.
+
+### 6.3 Frame Type Allocation
+
+| NSP Frame Type | Content | Direction |
+|---------------|---------|-----------|
+| 0x20 | Full Stave (fragmented) | Gateway → Scribe |
+| 0x21 | Delta Stave | Gateway → Scribe |
+| 0x22 | Calibration data (Phase 2) | Bidirectional |
+| 0x23 | Electrode pattern stream (Phase 2, 60fps) | Gateway → Scribe |
+| 0x30 | Event message (compact) | Scribe → Gateway |
+| 0x31 | Capability report | Scribe → Gateway |
+| 0x32 | Error report | Scribe → Gateway |
+| 0x33 | QI score report | Scribe → Gateway |
+
+### 6.4 Streaming Mode (Phase 2)
+
+For real-time electrode pattern delivery at 60fps, the overhead of fragmentation and reassembly is unacceptable. Streaming mode uses a fixed-size frame optimized for low latency:
+
+```
+Electrode Pattern Frame (frame type 0x23):
+  sequence:       u32    monotonic frame counter
+  timestamp_us:   u32    microsecond timestamp (wraps at ~71 minutes)
+  electrode_count: u16   number of electrodes in this frame
+  pattern_data:   [u16; electrode_count]  per-electrode amplitude (uA * 10)
+  tara_hash:      u16    truncated hash of TARA bounds used (integrity check)
+  merkle_proof:   [u8; 224]  Merkle path for batch signature verification (7 × 32 B)
+```
+
+**Frame size for 128-electrode array:** 4 + 4 + 2 + 256 + 2 + 224 = **492 bytes** per frame. At 60fps: **29.5 KB/sec**. Within BLE 5.0 throughput (~125 KB/sec usable).
+
+---
+
+## 7. Power Budget Analysis
+
+The <5% overhead claim (NSP-PROTOCOL-SPEC.md) requires validation against the full Runemate stack. This section breaks down power consumption per component on a reference implant platform.
+
+### 7.1 Reference Platform
+
+| Parameter | Value |
+|-----------|-------|
+| MCU | ARM Cortex-M4F @ 100 MHz |
+| SRAM | 256 KB |
+| Flash | 1 MB |
+| Radio | BLE 5.0 (nRF52840-class) |
+| Total power budget | 40 mW (implant thermal limit) |
+
+### 7.2 Component Power Breakdown
+
+| Component | Active Power | Duty Cycle | Average Power | % of Budget |
+|-----------|-------------|------------|---------------|-------------|
+| **MCU (Scribe interpreter)** | 12 mW | 5% (render on demand) | 0.6 mW | 1.5% |
+| **MCU (NSP crypto)** | 15 mW | 2% (handshake + key rotation) | 0.3 mW | 0.75% |
+| **MCU (QI scoring)** | 12 mW | 10% (continuous monitoring) | 1.2 mW | 3.0% |
+| **Radio TX** | 18 mW | 3% (event messages, QI reports) | 0.54 mW | 1.35% |
+| **Radio RX** | 12 mW | 8% (receive Staves, deltas) | 0.96 mW | 2.4% |
+| **Analog front-end** | 8 mW | 100% (continuous neural recording) | 8.0 mW | 20.0% |
+| **Electrode driver (Phase 2)** | 15 mW | 15% (stimulation duty cycle) | 2.25 mW | 5.6% |
+| **Idle / sleep** | 0.01 mW | remaining | ~0.01 mW | ~0% |
+| | | | | |
+| **Total (Phase 1, no stimulation)** | | | **11.6 mW** | **29%** |
+| **Total (Phase 2, with stimulation)** | | | **13.85 mW** | **34.6%** |
+| **Headroom** | | | **26.15 mW** | **65.4%** |
+
+### 7.3 Runemate-Specific Overhead
+
+Compared to a BCI system WITHOUT Staves rendering:
+
+| Without Runemate | With Runemate | Delta |
+|-----------------|---------------|-------|
+| No UI rendering | Scribe: 0.6 mW avg | +0.6 mW |
+| Raw data over NSP | Staves over NSP (smaller payloads = less radio time) | -0.2 mW |
+| No delta updates | Delta Staves (90% smaller than full) | -0.1 mW |
+| | | |
+| **Net Runemate overhead** | | **+0.3 mW (0.75% of 40 mW budget)** |
+
+**The Staves compression actually reduces radio power** by transmitting less data. The net overhead of adding a full rendering engine to the implant is under 1% of the power budget.
+
+### 7.4 Phase 2 Streaming Power
+
+At 60fps electrode pattern streaming:
+
+| Component | Calculation | Power |
+|-----------|------------|-------|
+| Pattern decode | 492 B × 60fps = 29.5 KB/s @ 12 mW MCU, ~20% duty | 2.4 mW |
+| TARA validation | Per-frame bounds check, ~0.1 ms per frame | 0.07 mW |
+| Radio RX | 29.5 KB/s @ 12 mW, ~25% duty | 3.0 mW |
+| Electrode driver | 128 electrodes, 15 mW peak, 15% duty | 2.25 mW |
+| Batch signature verify | Merkle proof, 1 verify per 8 frames | 0.2 mW |
+| **Total streaming** | | **7.92 mW (19.8% of budget)** |
+
+Streaming adds significant load but remains well within the 40 mW thermal envelope with headroom for QI monitoring and NSP crypto.
+
+---
+
+## 8. The Compression Math
 
 ### Compression Edge Cases (Worst-Case Analysis)
 
@@ -417,7 +965,7 @@ Net per hour:              -1,651 to -8,851 KB saved
 
 ---
 
-## 5. Streaming Overhead (Unaffected)
+## 9. Streaming Overhead (Unaffected)
 
 Critical insight: PQ adds ZERO per-frame overhead during neural data streaming.
 
@@ -431,7 +979,7 @@ AES-256 is already quantum-resistant. The PQ algorithms (ML-KEM, ML-DSA) are onl
 
 ---
 
-## 6. On-Chip Requirements
+## 10. On-Chip Requirements
 
 ### Minimum Viable Specification
 
@@ -464,7 +1012,7 @@ Phase 2 option: compile Staves to WASM modules. Run via wasm3 interpreter (~60 K
 
 ---
 
-## 7. Security: Built-In, Not Bolted On
+## 11. Security: Built-In, Not Bolted On
 
 Unlike HTML/CSS/JS where security is layered on top (CSP headers, sanitization libraries, WAFs), Staves has security at the language level:
 
@@ -613,7 +1161,7 @@ In Phase 2 (visual cortex rendering), TARA's 71 attack-therapy pairs become **co
 | Pulse duration limits | Max duration per stimulation event | Charge density limits (uC/cm^2 per phase) |
 | Charge density ceiling | Total charge per unit area per phase | Shannon equation: `log(D) = k - log(Q)` where k ~= 1.5-2.0 |
 | Recovery intervals | Minimum gap between stimulation events | Tissue recovery time (prevents cumulative damage) |
-| Retinotopic bounds | Spatial extent of activation pattern | Per-patient calibration map (Section 12) |
+| Retinotopic bounds | Spatial extent of activation pattern | Per-patient calibration map (Section 16) |
 
 **Three safety gates — no other BCI system has all three:**
 
@@ -655,7 +1203,7 @@ fn transmit(pattern: ValidatedPattern, channel: &mut NspChannel) { ... }
 
 ---
 
-## 8. Roadmap
+## 12. Roadmap
 
 ### Phase 1: Prove the Math (Q2 2026)
 
@@ -708,7 +1256,7 @@ fn transmit(pattern: ValidatedPattern, channel: &mut NspChannel) { ... }
 
 ---
 
-## 9. Integration with QIF
+## 13. Integration with QIF
 
 Runemate Forge plugs into the QIF Hourglass at specific bands. Note: QIF bands describe the logical stack of a BCI system, and Runemate components span both the gateway and implant sides.
 
@@ -747,7 +1295,7 @@ This creates a **closed-loop verification**: Forge compiles → NSP delivers →
 
 ---
 
-## 10. The Pitch (For QIF Whitepaper)
+## 14. The Pitch (For QIF Whitepaper)
 
 > Post-quantum cryptography is essential for BCIs -- neural data cannot be reset like a password,
 > and harvest-now-decrypt-later attacks make classical crypto a ticking time bomb for implants
@@ -765,7 +1313,7 @@ This creates a **closed-loop verification**: Forge compiles → NSP delivers →
 
 ---
 
-## 11. Proof-of-Concept Benchmark Results (Actual Data)
+## 15. Proof-of-Concept Benchmark Results (Actual Data)
 
 The following results were generated by the Runemate Forge PoC compiler (`runemate-poc/staves_compiler.py`)
 running against three realistic BCI web pages.
@@ -837,7 +1385,7 @@ The PoC achieves 64-79% compression. Phase 2 targets:
 
 ---
 
-## 12. Phase 2 Architecture: Visual Cortex Rendering
+## 16. Phase 2 Architecture: Visual Cortex Rendering
 
 This section formalizes the architectural discoveries from the Derivation Log (R-001 through R-007) into specification-grade detail.
 
@@ -956,7 +1504,7 @@ The dual-pipeline architecture has a measurable latency convergence path:
 
 ---
 
-## 13. Post-Quantum Compliance Gaps (PQKC)
+## 17. Post-Quantum Compliance Gaps (PQKC)
 
 NSP provides post-quantum security for BCI data links. But real-time neural rendering at 60fps exposes protocol gaps that must be addressed for Runemate Phase 2. These are engineering problems, not theoretical — each has a concrete solution path.
 
