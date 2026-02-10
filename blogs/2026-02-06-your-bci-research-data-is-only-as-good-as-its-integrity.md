@@ -205,7 +205,7 @@ The most sophisticated analysis in the world means nothing if the underlying dat
 
 ## From the Qinnovate Sentinel Lab
 
-This post is part of Mindloft's ongoing series on BCI security best practices, published by the **Qinnovate Sentinel Lab**. We're building the security standards for brain-computer interfaces before the industry needs them. Not after the first breach.
+This post is part of Qinnovate's ongoing series on BCI security best practices, published by the **Qinnovate Sentinel Lab**. We're building the security standards for brain-computer interfaces before the industry needs them. Not after the first breach.
 
 The QIF framework, the NSP protocol, and everything we publish here exists for one reason: to make sure that when BCI technology is ready to help people, the security is already there waiting for it.
 
