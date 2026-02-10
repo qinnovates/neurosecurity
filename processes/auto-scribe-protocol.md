@@ -187,48 +187,6 @@ The derivation log is the bridge between informal discovery and formal standardi
 
 ---
 
-## Configuration for Claude Code Users
-
-The auto-scribe behavior is configured in two places:
-
-### 1. MEMORY.md (Agent Instruction)
-
-Add this to your project's MEMORY.md or CLAUDE.md:
-
-```markdown
-**AUTO-SCRIBE (MANDATORY):** When an "AHA" moment or architectural insight
-emerges in conversation, immediately spawn a background agent to write it
-to the appropriate derivation log. Don't wait for the user to ask. Identify
-which log it belongs to (QIF-DERIVATION-LOG.md, RUNEMATE.md Derivation Log,
-or create new ones for tangential topics). The agent should write the entry
-in lab-notebook style (date, context, AI systems used, human decision,
-discovery, implications, status, dependencies).
-```
-
-### 2. Agent Spawn Configuration
-
-When spawning a scribe agent, use these parameters:
-
-```
-Agent type: general-purpose
-Run in background: true (never interrupt the main conversation)
-Task description: "Auto-scribe [ENTRY-ID] [brief title]"
-Prompt: Include the full entry content and target file path
-```
-
-The background agent writes the entry and returns silently. The main conversation continues uninterrupted.
-
-### Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| Agent can't write to file | Write the entry from the main process instead. Background agents may have restricted permissions in some configurations. |
-| Entry doesn't match template | Edit from main process. Template compliance matters for consistency. |
-| Wrong log targeted | Add a correction entry to the correct log referencing the misplaced one. |
-| Duplicate entries | Keep the more detailed one. Add "Superseded by [ID]" to the other. |
-
----
-
 ## Related Resources
 
 - [VERA Engine (Qinnovate Lifecycle)](./qinnovate-lifecycle.md)
