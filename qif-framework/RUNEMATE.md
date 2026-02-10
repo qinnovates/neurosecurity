@@ -1054,29 +1054,251 @@ The Scribe is fuzz-tested against malicious input. The Forge must be verified to
 
 **Staves Conformance Test Suite:**
 
-A suite of reference HTML inputs with expected Staves outputs. The Forge MUST pass all tests before any release:
+A suite of reference HTML inputs with expected Staves outputs. The Forge MUST pass all tests before any release. Each test vector specifies exact input HTML, expected bytecode output (hex), and the property being validated.
 
-| Test Category | Tests | Purpose |
+| Test Category | Count | Purpose |
 |--------------|-------|---------|
-| Basic elements | 20+ | Every supported HTML tag produces correct opcode |
-| Style resolution | 15+ | CSS selectors resolve correctly, cascade priority order |
-| Attribute encoding | 10+ | All attribute types encode/decode roundtrip |
-| Edge cases | 10+ | Empty elements, deeply nested, max-size strings, unicode |
-| Reject cases | 10+ | Unsupported tags/CSS handled gracefully, warnings emitted |
-| Delta compilation | 10+ | Delta Staves produce identical result to full recompile |
+| Basic elements | 31 | Every supported HTML tag (0x01-0x1F) produces correct opcode |
+| Style resolution | 18 | CSS selectors resolve correctly, cascade priority order |
+| Attribute encoding | 12 | All attribute types encode/decode roundtrip |
+| Edge cases | 14 | Empty elements, deeply nested, max-size strings, unicode |
+| Reject cases | 11 | Unsupported tags/CSS handled gracefully, warnings emitted |
+| Delta compilation | 10 | Delta Staves produce identical result to full recompile |
 | Roundtrip | All | `Forge(html) → Stave → Scribe.render()` matches expected visual output |
+| **Phase 2: TARA** | 15 | Electrode patterns validated against TARA bounds |
+| **Total** | **111+** | |
+
+#### Reference Test Vectors (v1.0)
+
+**T001 — Empty document:**
+```
+Input:  <html><body></body></html>
+Output: 53 54 41 56       # Magic: "STAV"
+        01 00             # Version: 1.0
+        00 00             # Min Scribe: 0.0 (any)
+        00 00 00 10       # String pool offset: 16
+        00 00 00 10       # Style table offset: 16 (empty pool)
+        00 10             # DOM stream offset: 16
+        04 0C             # VOID_TAG body (tag 0x0C)
+        00                # EOF
+Validates: Minimal valid Stave. Empty body produces a single VOID_TAG, not OPEN/CLOSE pair.
+```
+
+**T002 — Single paragraph with text:**
+```
+Input:  <p>Hello, world!</p>
+Output: 53 54 41 56 01 00 00 00   # Header (version 1.0)
+        00 00 00 10               # String pool at offset 16
+        ...                       # String pool: "Hello, world!\0" (14 bytes)
+        ...                       # Style table: (empty)
+        01 0E                     # OPEN_TAG p (tag 0x0E)
+        03 00 00                  # TEXT string_idx=0 (→ "Hello, world!")
+        02                        # CLOSE_TAG
+        00                        # EOF
+Validates: Text content stored in string pool, referenced by index. OPEN/CLOSE wrapping.
+```
+
+**T003 — Nested elements (div > ul > li):**
+```
+Input:  <div><ul><li>Item 1</li><li>Item 2</li></ul></div>
+Output: ...
+        01 03             # OPEN_TAG div
+        01 16             # OPEN_TAG ul
+        01 17             # OPEN_TAG li
+        03 00 00          # TEXT "Item 1"
+        02                # CLOSE_TAG (li)
+        01 17             # OPEN_TAG li
+        03 01 00          # TEXT "Item 2"
+        02                # CLOSE_TAG (li)
+        02                # CLOSE_TAG (ul)
+        02                # CLOSE_TAG (div)
+        00                # EOF
+Validates: Nesting depth tracked correctly. Multiple siblings at same depth.
+```
+
+**T004 — Style resolution with cascade:**
+```
+Input:  <div style="color: #FF0000; font-size: 16px;">
+          <span style="color: #0000FF;">Blue overrides red</span>
+        </div>
+Output: Style table entry 0: { color: 0xFF0000, font_size: 16, ... }
+        Style table entry 1: { color: 0x0000FF, font_size: 16, ... }  # inherits font-size
+        DOM: OPEN_TAG div, style_idx=0
+             OPEN_TAG span, style_idx=1
+             TEXT "Blue overrides red"
+             CLOSE_TAG CLOSE_TAG EOF
+Validates: Child inherits parent's font-size but overrides color. Cascade resolution at compile time.
+```
+
+**T005 — Attribute with href (link):**
+```
+Input:  <a href="https://qinnovate.com">Link</a>
+Output: ...
+        01 1F             # OPEN_TAG a (tag 0x1F)
+        10 01 00 02 00    # ATTR attr_id=1 (href), value_idx=2 ("https://qinnovate.com")
+        03 03 00          # TEXT "Link"
+        02                # CLOSE_TAG
+        00                # EOF
+Validates: Attributes encoded after OPEN_TAG, before child content.
+```
+
+**T006 — Void element (img, br):**
+```
+Input:  <p>Line 1<br>Line 2</p>
+Output: ...
+        01 0E             # OPEN_TAG p
+        03 00 00          # TEXT "Line 1"
+        04 0A             # VOID_TAG br (tag 0x0A, no CLOSE needed)
+        03 01 00          # TEXT "Line 2"
+        02                # CLOSE_TAG (p)
+        00                # EOF
+Validates: Void elements use VOID_TAG (0x04), never OPEN/CLOSE pair.
+```
+
+**T007 — Max nesting depth (32):**
+```
+Input:  32 nested <div> elements
+Output: 32 OPEN_TAG opcodes, content, 32 CLOSE_TAG opcodes
+Validates: Compiles successfully at depth=32. Scribe renders without stack overflow.
+```
+
+**T008 — Exceeds max nesting depth (33):**
+```
+Input:  33 nested <div> elements
+Output: COMPILE ERROR — Forge rejects with "Maximum nesting depth (32) exceeded"
+Validates: Forge enforces depth limit at compile time, not runtime.
+```
+
+**T009 — Unsupported CSS property (graceful fallback):**
+```
+Input:  <div style="position: sticky; color: red;">Content</div>
+Output: Style entry: { position: RELATIVE, color: 0xFF0000, ... }
+        WARNING: "position: sticky not supported, falling back to relative"
+Validates: Unsupported CSS produces warning + safe fallback, not error.
+```
+
+**T010 — Unsupported HTML tag (graceful fallback):**
+```
+Input:  <marquee>Scrolling text</marquee>
+Output: 01 03             # OPEN_TAG div (fallback — unknown tag → div)
+        03 00 00          # TEXT "Scrolling text" (children preserved)
+        02                # CLOSE_TAG
+        WARNING: "Unknown tag 'marquee' replaced with 'div'"
+Validates: Unknown tags replaced with div. Children preserved. Warning emitted.
+```
+
+**T011 — String pool overflow (max 512 entries):**
+```
+Input:  HTML with 513 unique text nodes
+Output: COMPILE ERROR — "String pool capacity exceeded (512 max)"
+Validates: Forge rejects before producing an invalid Stave.
+```
+
+**T012 — Delta compilation correctness:**
+```
+Input A: <div><p>Original</p></div>
+Input B: <div><p>Modified</p></div>  (only text changed)
+Full compile of B:  [expected full Stave bytes]
+Delta from A→B:     [DELTA_TEXT string_idx=0, new_value="Modified"]
+Apply(A, delta):    [must equal full compile of B, byte-for-byte]
+Validates: Delta produces identical output to full recompile.
+```
+
+**T013 — XSS attempt (script injection):**
+```
+Input:  <div><script>alert('xss')</script><p>Safe content</p></div>
+Output: 01 03             # OPEN_TAG div (script tag stripped entirely)
+        01 0E             # OPEN_TAG p
+        03 00 00          # TEXT "Safe content"
+        02 02 00          # CLOSE_TAG CLOSE_TAG EOF
+Validates: <script> tags and their content are completely removed. No warning — expected behavior.
+```
+
+**T014 — Event handler stripping:**
+```
+Input:  <button onclick="malicious()">Click</button>
+Output: 01 1A             # OPEN_TAG button
+        03 00 00          # TEXT "Click"
+        02 00             # CLOSE_TAG EOF
+        (no onclick attribute emitted — JS event handlers stripped by sanitizer)
+Validates: JavaScript event handlers removed during sanitization stage.
+```
+
+**T015 — Unicode text (CJK, emoji, RTL):**
+```
+Input:  <p>Hello 世界 🌍 مرحبا</p>
+Output: String pool: "Hello 世界 🌍 مرحبا\0" (UTF-8 encoded, 26 bytes)
+        TEXT opcode references string pool entry correctly
+Validates: UTF-8 encoded correctly in string pool. Multi-byte characters handled.
+```
+
+#### Phase 2 Test Vectors (TARA / Electrode)
+
+**T101 — TARA bounds check (within limits):**
+```
+Input:  ElectrodePattern { amplitudes: [100; 128], frequency: 50Hz,
+        charge_density: 20 uC/cm² }
+CalMap: max_amplitude: [200; 128], max_charge_density: 30 uC/cm²
+Output: ValidatedPattern (success)
+Validates: Pattern within all TARA bounds passes validation.
+```
+
+**T102 — TARA bounds check (single electrode exceeds):**
+```
+Input:  ElectrodePattern { amplitudes: [100, 100, ..., 250, ..., 100], ... }
+CalMap: max_amplitude: [200; 128]
+Output: Err(TaraViolation::AmplitudeExceeded { electrode: 47, max: 200 })
+Validates: Single electrode violation identified with correct index.
+```
+
+**T103 — TARA attenuation recovery:**
+```
+Input:  Pattern with electrode 47 at 250uA (max 200uA)
+Recovery: Attenuate — scale factor = 200/250 = 0.8
+Output: All amplitudes scaled by 0.8. Electrode 47: 200uA (at limit).
+        All others: 80uA (within limits). ValidatedPattern (success).
+Validates: Uniform attenuation preserves spatial pattern at reduced intensity.
+```
+
+**T104 — Charge density violation (not attenuatable):**
+```
+Input:  charge_density: 50 uC/cm², max: 30 uC/cm²
+Output: TaraRecovery::Silence (charge density exceeds by >50%, not safe to attenuate)
+Validates: Charge density violations go straight to silence, not attenuation.
+```
+
+**T105 — Calibration map binding verification:**
+```
+Input:  Staves v2 with calibration_hash = 0xDEADBEEF
+Scribe: loaded CalibrationMap with hash = 0xCAFEBABE
+Output: Scribe rejects Stave — E007: CalibrationMapMismatch
+Validates: Stave compiled for one patient cannot be applied to another.
+```
 
 **Staves Verifier (`staves-verify` CLI tool):**
 
 A standalone binary that statically analyzes any `.stav` file and checks:
-1. Header integrity (magic, version, offsets)
-2. String pool validity (all indices in bounds, no dangling refs)
-3. Style table validity (all property IDs known, all value indices valid)
-4. DOM structure validity (balanced OPEN/CLOSE tags, no orphan CLOSE)
-5. Resource limits (node count, depth, total size within bounds)
-6. Opcode validity (no unknown opcodes, all arguments well-formed)
+1. Header integrity (magic, version, offsets within file bounds)
+2. String pool validity (all indices in bounds, no dangling refs, valid UTF-8)
+3. Style table validity (all property IDs known, all value indices valid, entry count <= 256)
+4. DOM structure validity (balanced OPEN/CLOSE tags, no orphan CLOSE, depth <= 32)
+5. Resource limits (node count <= 2,048, total size <= 64 KB)
+6. Opcode validity (no unknown opcodes, all arguments well-formed, no truncated arguments)
+7. Cross-reference integrity (all string/style indices referenced in DOM exist in respective tables)
 
-This tool runs as a CI gate: no Stave ships without passing verification.
+Exit codes:
+```
+0: Valid Stave, all checks passed
+1: Header corruption (bad magic, invalid offsets)
+2: String pool error (OOB index, invalid UTF-8)
+3: Style table error (unknown property, OOB value)
+4: DOM structure error (unbalanced tags, depth exceeded)
+5: Resource limit exceeded
+6: Unknown/malformed opcode
+7: Cross-reference integrity failure
+```
+
+This tool runs as a CI gate: no Stave ships without passing verification. It is also embedded in the Scribe as a subset (checks 1-6 run on every received Stave, check 7 is Forge-side only due to cost).
 
 ### Gateway Threat Model
 
@@ -1389,7 +1611,7 @@ The PoC achieves 64-79% compression. Phase 2 targets:
 
 This section formalizes the architectural discoveries from the Derivation Log (R-001 through R-007) into specification-grade detail.
 
-### 12.1 Rendering Target: Electrodes, Not Pixels
+### 16.1 Rendering Target: Electrodes, Not Pixels
 
 Visual cortex rendering fundamentally differs from screen rendering. The Scribe's Phase 2 output is not a framebuffer — it is an electrode activation pattern stream.
 
@@ -1404,7 +1626,7 @@ Visual cortex rendering fundamentally differs from screen rendering. The Scribe'
 
 The Forge compiler's job changes from "produce a framebuffer" to "produce a time-series of electrode activation patterns that, when delivered through the electrode array, elicit the intended visual perception in the patient's visual cortex."
 
-### 12.2 Staves v2: 3D Electrode Pattern Streams
+### 16.2 Staves v2: 3D Electrode Pattern Streams
 
 Staves v1 encodes 2D layout (blocks, flex, text, styles). Staves v2 extends the bytecode to encode 3D scene graphs as electrode pattern streams at 60fps.
 
@@ -1438,7 +1660,7 @@ STAVE HEADER v2 (24 bytes, extends v1's 16 bytes):
 
 **Rendering vocabulary:** Phase 3 research (synesthesia cohort + congenital blindness) will produce a library of named patterns — reusable electrode activation templates that produce consistent perceptions. The `PATTERN` opcode references these by ID, similar to how Staves v1 references styles by index. The vocabulary is per-patient (different brains produce different patterns for the same perception) and stored in the calibration map.
 
-### 12.3 Neural Calibration Protocol
+### 16.3 Neural Calibration Protocol
 
 Before any visual cortex stimulation, the system must map the electrode-tissue interface per-patient. This uses the same physics as adversarial RF environment mapping — send signal, measure response, build spatial model — but secured by NSP.
 
@@ -1478,7 +1700,7 @@ struct CalibrationMap {
 - Forward secrecy protects historical calibration sessions
 - Recalibration triggered automatically when QI scores degrade (electrode drift, tissue changes)
 
-### 12.4 Latency Convergence
+### 16.4 Latency Convergence
 
 The dual-pipeline architecture has a measurable latency convergence path:
 
@@ -1501,6 +1723,295 @@ The dual-pipeline architecture has a measurable latency convergence path:
 | **Total silicon path** | **21 ms** | |
 | Neural propagation (V1 response) | 50-100 ms | Cortical processing (adapts/reduces over time) |
 | **Total perceived** | **71-121 ms** | Phase 2 noticeable; Phase 3 approaches imperceptible |
+
+### 16.5 Error Recovery at 60fps
+
+At 60fps electrode streaming, TARA rejections and transport errors are inevitable over a long session. The system must handle them without perceptual disruption, seizure risk, or data loss.
+
+#### Error Classes
+
+| Class | Example | Frequency | Severity |
+|-------|---------|-----------|----------|
+| **TARA rejection** | Forge emits pattern exceeding per-patient bounds (calibration drift, amplitude overshoot) | ~0.1-1% of frames during dynamic scenes | Critical — blocked pattern would have delivered unsafe charge |
+| **NSP frame loss** | BLE packet dropped, CRC failure, interference | ~0.5-2% of frames (BLE 5.0 typical) | Medium — missing frame = missing visual update |
+| **QI anomaly** | Scribe detects anomalous neural response during stimulation | Rare (~0.01%) but safety-critical | Critical — possible tissue distress or seizure precursor |
+| **Sequence gap** | Frame arrives out of order (sequence counter skip) | ~0.1% | Low — reorderable within window |
+| **Merkle verify fail** | Batch signature check fails on reassembled batch | Very rare | High — possible tampering or corruption |
+
+#### Recovery Strategies
+
+**TARA Rejection (compile-time, in Forge):**
+
+```rust
+enum TaraRecovery {
+    /// Scale the pattern down to fit within bounds (preferred)
+    Attenuate {
+        original: ElectrodePattern,
+        scaled: ValidatedPattern,
+        scale_factor: f32,  // 0.0-1.0, how much we reduced
+    },
+    /// Replace with last known safe pattern (hold frame)
+    HoldPrevious {
+        held_frame: ValidatedPattern,
+        hold_count: u16,    // How many frames we've been holding
+    },
+    /// Replace with silence (zero stimulation)
+    Silence {
+        duration_frames: u16,
+    },
+}
+```
+
+**Recovery priority order:**
+1. **Attenuate:** Scale all amplitudes by a uniform factor until the pattern fits within TARA bounds. Preserves spatial information at reduced intensity. The Forge calculates the maximum safe scale factor: `scale = min(patient_cal.max_amplitude[i] / pattern.amplitudes[i])` across all electrodes. If scale >= 0.5, the attenuated pattern is used (perceptually dimmer but recognizable).
+2. **Hold previous:** If attenuation produces scale < 0.5 (pattern too distorted to be useful), hold the last successfully validated pattern. Maximum hold duration: 5 frames (83ms) — beyond this, perception becomes noticeably stale.
+3. **Silence:** If hold duration exceeded OR if the rejection is on charge density (not just amplitude), emit zero-stimulation frames. Safe but causes a perceptual gap (brief "blackout" in the rendered region).
+
+**Latency impact:** Attenuation adds ~0.1ms (one multiply per electrode). Hold and silence add zero — they bypass the compilation pipeline entirely.
+
+**NSP Frame Loss (transport):**
+
+| Frames lost | Strategy | Perceptual impact |
+|-------------|----------|-------------------|
+| 1 | Interpolate: Scribe averages previous + next frame when next arrives | Imperceptible at 60fps (16.7ms gap) |
+| 2-3 | Hold last frame + request retransmission | Minor flicker (33-50ms) |
+| 4+ | Enter degraded mode: reduce to 30fps, double frame hold duration | Noticeable but stable |
+| 10+ (167ms) | Emergency: cease stimulation, display "Signal Lost" via built-in Stave | Patient perceives blackout, clinician alerted |
+
+**Interpolation (single frame loss):**
+```
+frame[missing] = (frame[previous].pattern_data + frame[next].pattern_data) / 2
+```
+Each electrode amplitude is averaged independently. TARA bounds are re-checked on the interpolated frame — if interpolation produces an out-of-bounds pattern (possible if previous and next are at opposite extremes), the interpolated frame is clamped to bounds rather than rejected.
+
+**QI Anomaly (runtime, on Scribe):**
+
+QI anomaly detection triggers an immediate safety response:
+
+```rust
+enum QiResponse {
+    /// Score slightly degraded — reduce intensity by 25%, continue monitoring
+    Attenuate25,
+    /// Score significantly degraded — halt stimulation, hold neural recording
+    HaltStimulation,
+    /// Score critical — full emergency stop, alert clinician
+    EmergencyStop,
+}
+
+fn qi_check(response: &NeuralResponse, expected: &ExpectedResponse) -> QiResponse {
+    let qi_score = compute_qi(response, expected);
+    match qi_score {
+        s if s >= 0.7 => QiResponse::Attenuate25,    // Mild anomaly
+        s if s >= 0.3 => QiResponse::HaltStimulation,  // Significant anomaly
+        _ => QiResponse::EmergencyStop,                 // Critical
+    }
+}
+```
+
+**Emergency stop sequence (< 1ms total):**
+1. All electrode drivers set to zero (hardware-level, not software) — **0.1ms**
+2. NSP alert message to Gateway with QI score + last 10 frames of neural data — **0.5ms**
+3. Scribe enters safe mode (built-in status Stave, neural recording continues) — **0.2ms**
+4. Gateway alerts clinician with full event log — **immediate (over existing connection)**
+
+**Sequence gaps and Merkle failures** are handled by the NSP layer (Section 6.2 fragmentation protocol). Merkle verification failure triggers full batch re-request and increments a tamper counter. Three consecutive Merkle failures within 10 seconds → NSP session renegotiation.
+
+#### Frame Budget Accounting
+
+At 60fps, each frame has a 16.7ms budget:
+
+| Step | Budget | Includes error recovery? |
+|------|--------|------------------------|
+| NSP decrypt + authenticate | 2 ms | + 0.5ms for Merkle verify |
+| TARA bounds check | 0.3 ms | + 0.1ms for attenuation if needed |
+| Scribe decode + render | 3 ms | Unchanged (rendering is pattern agnostic) |
+| Electrode driver setup | 3 ms | Unchanged |
+| QI scoring | 2 ms | + 0.5ms for response classification |
+| **Total** | **10.3 ms** | **11.4 ms worst case** |
+| **Headroom** | **6.4 ms** | **5.3 ms worst case** |
+
+Even with error recovery overhead, every frame completes within budget with >30% headroom.
+
+### 16.6 Bevy-to-Staves Bridge (Pipeline A → Pipeline B)
+
+The Forge translates Bevy's ECS (Entity Component System) scene representation into Staves v2 electrode patterns. This bridge is the critical translation layer between the game engine (performance-oriented, crash-tolerant) and the neural renderer (safety-critical, formally bounded).
+
+#### ECS-to-Electrode Mapping
+
+Bevy represents scenes as entities with components. The Forge reads the Bevy scene graph and maps relevant components to electrode activation patterns:
+
+| Bevy Component | Staves v2 Opcode | Mapping Logic |
+|---------------|-----------------|---------------|
+| `Transform` (position, rotation, scale) | `SPATIAL_REF` (0x45) | World-space position → retinotopic coordinates via patient calibration map |
+| `Visibility` / `ComputedVisibility` | `INTENSITY` (0x46) | Visible = patient's calibrated intensity, hidden = 0 |
+| `PointLight` / `DirectionalLight` | `INTENSITY` (0x46) + `TEMPORAL_FADE` (0x47) | Light intensity → electrode amplitude. Attenuation curve → fade pattern |
+| `Color` / `StandardMaterial.base_color` | `INTENSITY` (0x46) | Luminance channel extracted (HSL.L). Hue/saturation discarded in v2 (no color perception model yet) |
+| `Mesh` (3D geometry) | `PATTERN` (0x42) | Mesh silhouette projected onto electrode grid → spatial activation pattern |
+| `AnimationPlayer` | `SEQUENCE` (0x43) / `END_SEQUENCE` (0x44) | Keyframe timeline → timed activation sequences |
+| `Camera` | Viewport projection | Determines which scene region maps to the electrode array's field of view |
+| Custom: `BciEvent` | `ACTIVATE` (0x41) | Direct electrode control for non-visual BCI events (haptic, notification) |
+
+#### Scene Graph Extraction
+
+The Forge runs as a Bevy plugin — it registers a system that executes after Bevy's render stage:
+
+```rust
+// Forge Bevy plugin — runs every frame after render
+fn forge_extract_system(
+    scene_query: Query<(&Transform, &ComputedVisibility, Option<&Handle<Mesh>>,
+                         Option<&PointLight>, Option<&StandardMaterial>)>,
+    camera_query: Query<(&Camera, &GlobalTransform)>,
+    calibration: Res<PatientCalibration>,
+    mut forge_state: ResMut<ForgeState>,
+) {
+    let (camera, cam_transform) = camera_query.single();
+
+    // 1. Project visible entities into 2D electrode space
+    let mut electrode_contributions: Vec<ElectrodeContribution> = Vec::new();
+
+    for (transform, visibility, mesh, light, material) in scene_query.iter() {
+        if !visibility.is_visible() { continue; }
+
+        // World position → screen space → retinotopic coordinates
+        let screen_pos = camera.world_to_viewport(cam_transform, transform.translation);
+        let retino_pos = calibration.screen_to_retinotopic(screen_pos);
+
+        // Determine which electrodes this entity affects
+        let affected = calibration.electrodes_near(retino_pos, transform.scale);
+
+        // Calculate contribution (intensity, pattern)
+        let intensity = compute_intensity(light, material, transform);
+
+        for electrode_id in affected {
+            electrode_contributions.push(ElectrodeContribution {
+                electrode_id,
+                amplitude: intensity * calibration.max_amplitude[electrode_id],
+                source_entity: entity,
+            });
+        }
+    }
+
+    // 2. Merge contributions per electrode (additive, then TARA-clamp)
+    let merged = merge_contributions(&electrode_contributions);
+
+    // 3. Apply TARA bounds
+    let pattern = ElectrodePattern::from_merged(merged);
+    match pattern.validate(&calibration.tara_bounds) {
+        Ok(validated) => forge_state.emit_frame(validated),
+        Err(violation) => forge_state.recover(violation, &calibration),
+    }
+}
+```
+
+#### Projection Pipeline
+
+The full Bevy-to-electrode projection pipeline:
+
+```
+Bevy Scene Graph
+    │
+    ▼
+┌─────────────────────┐
+│ 1. Visibility Cull  │  Discard entities outside camera frustum or
+│                     │  marked invisible. Reduces processing to
+│                     │  visible scene only.
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│ 2. Depth Sort       │  Sort visible entities by distance from camera.
+│                     │  Closer entities occlude farther ones in the
+│                     │  electrode projection (no transparency model
+│                     │  in v2 — binary occlusion).
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│ 3. Screen Project   │  Transform 3D world coordinates → 2D screen
+│                     │  coordinates via camera projection matrix.
+│                     │  Standard perspective/orthographic projection.
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│ 4. Retinotopic Map  │  Screen coordinates → electrode coordinates
+│                     │  via patient's calibration map. This is the
+│                     │  non-trivial step: electrode positions are
+│                     │  irregular and patient-specific. Uses nearest-
+│                     │  neighbor interpolation on the calibration
+│                     │  mesh (typically 64-256 electrode positions).
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│ 5. Contribution     │  For each electrode: sum contributions from
+│    Merge            │  all entities that project onto it. Additive
+│                     │  blending with intensity falloff by distance
+│                     │  from electrode center. Capped at electrode's
+│                     │  TARA maximum amplitude.
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│ 6. TARA Validate    │  Full pattern → ValidatedPattern via TARA
+│                     │  bounds check (Section 11). Attenuation or
+│                     │  recovery per Section 16.5 if validation fails.
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│ 7. Staves v2 Emit   │  ValidatedPattern → Staves v2 bytecode
+│                     │  (ELECTRODE_MAP, ACTIVATE, PATTERN opcodes).
+│                     │  Delta compression against previous frame.
+│                     │  NSP framing (Section 6).
+└─────────────────────┘
+```
+
+#### Delta Optimization for Streaming
+
+At 60fps, most frames are nearly identical to the previous frame (camera movement, slow animations). The Forge tracks per-electrode amplitude changes:
+
+```rust
+struct ForgeState {
+    previous_pattern: Option<ValidatedPattern>,
+    frame_counter: u32,
+}
+
+impl ForgeState {
+    fn emit_frame(&mut self, current: ValidatedPattern) {
+        if let Some(ref prev) = self.previous_pattern {
+            let changed_electrodes = diff_patterns(prev, &current);
+
+            // If <10% of electrodes changed, send delta
+            if changed_electrodes.len() < current.electrode_count / 10 {
+                self.emit_delta(changed_electrodes);
+            } else {
+                // Full frame (scene transition, fast movement)
+                self.emit_full(current.clone());
+            }
+        } else {
+            // First frame — always full
+            self.emit_full(current.clone());
+        }
+        self.previous_pattern = Some(current);
+        self.frame_counter += 1;
+    }
+}
+```
+
+**Bandwidth savings:** During typical BCI usage (reading dashboards, slow scene transitions), 80-90% of frames are delta-encoded. Average frame size drops from 492 bytes (full) to ~60-80 bytes (delta with 10-15 electrode changes). This reduces streaming bandwidth from 29.5 KB/sec to ~4-5 KB/sec for most sessions.
+
+#### Phase 2 Limitations (Acknowledged)
+
+Current v2 mapping is intentionally constrained:
+
+| Limitation | Reason | Future Path |
+|-----------|--------|-------------|
+| No color model | No validated perceptual model for color via electrical stimulation | Phase 3: synesthesia cohort research (R-005) may reveal color-intensity mappings |
+| Binary occlusion (no transparency) | Additive electrode blending can't represent semi-transparent overlays | Phase 3: temporal multiplexing (alternating frames for foreground/background) |
+| No texture mapping | Electrode resolution (~64-256 points) far below texture detail | Higher-density arrays (Paradromics, 10K+ electrodes) may enable spatial texturing |
+| Luminance only | HSL luminance is a crude proxy for perceived brightness via stimulation | Phase 3: per-patient brightness curve calibration replaces linear assumption |
+| Fixed 60fps | Some patients may perceive flicker at 60Hz electrical stimulation | Configurable per-patient refresh rate in calibration map (30-120fps) |
 
 ---
 
