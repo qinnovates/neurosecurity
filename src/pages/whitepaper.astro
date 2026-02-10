@@ -205,12 +205,13 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.3 What This Paper Delivers</h3>
         <div class="prose">
-          <p>This paper presents seven contributions:</p>
+          <p>This paper presents eight contributions:</p>
           <ol>
             <li>An <strong>11-band hourglass architecture</strong> (v4.0) spanning the neural-synthetic boundary with 7-1-3 asymmetry, derived from neuroanatomy and quantum physics rather than networking analogy.</li>
             <li>A <strong>unified QI equation</strong>, QI(b,t) = e<sup>&minus;S(b,t)</sup>, that subsumes the previously separate coherence metric and two candidate QI equations into a single exponential form.</li>
             <li>Identification of <strong>five cross-domain attack coupling mechanisms</strong> and honest assessment of which attacks the QI equation can and cannot detect.</li>
-            <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol for BCI data.</li>
+            <li><strong>TARA</strong> (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry that maps every technique to its security, clinical, diagnostic, and governance projections.</li>
+            <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol for BCI data, reframed as the trust layer enabling therapeutic deployment.</li>
             <li><strong>Project Runemate</strong>, a content compression pipeline that offsets PQC bandwidth overhead by 65&ndash;90%.</li>
             <li>A conceptual analogy between NSP security properties and <strong>black hole information scrambling</strong>, presented with explicit acknowledgment of its limitations.</li>
             <li><strong>Falsifiability conditions</strong> specifying what experimental findings would weaken or invalidate specific framework components.</li>
@@ -1501,12 +1502,13 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">10.1 What QIF Is</h3>
         <div class="prose">
-          <p>This paper delivered the seven contributions outlined in Section 2.3:</p>
+          <p>This paper delivered the eight contributions outlined in Section 2.3:</p>
           <ol>
             <li>An <strong>11-band hourglass architecture</strong> (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy and quantum physics (Section 4).</li>
             <li>A <strong>unified QI equation</strong>, QI(b,t) = e<sup>&minus;S(b,t)</sup>, grounded in spectral decomposition via the STFT and combining classical signal integrity with quantum terms (Section 5).</li>
             <li>Identification of <strong>five cross-domain attack coupling mechanisms</strong> with honest detection boundaries, supported by the <strong>QIF Locus Taxonomy</strong> ({totalDomains} domains, {totalTactics} tactics, {totalTechniques} techniques) and <strong>QNIS v1.0</strong> neural impact scoring (Section 6).</li>
-            <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM, ML-DSA, and AES-256-GCM (Section 7).</li>
+            <li><strong>TARA</strong> (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry bridging security and clinical communities through four dimensional projections of every catalogued technique (Section 6.7).</li>
+            <li>The <strong>Neural Sensory Protocol (NSP)</strong>, a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM, ML-DSA, and AES-256-GCM, serving as the trust layer for therapeutic BCI deployment (Section 7).</li>
             <li><strong>Project Runemate</strong>, a content compression pipeline offsetting PQC bandwidth overhead by 65&ndash;90% (Section 7).</li>
             <li>A conceptual analogy between NSP security and <strong>black hole information scrambling</strong>, with explicit limitations acknowledged (Section 8).</li>
             <li><strong>Falsifiability conditions</strong> specifying what experimental findings would weaken or invalidate specific framework components (Section 9).</li>
@@ -1568,6 +1570,8 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <li><strong>NSP Reference Implementation.</strong> Build in Python (OpenBCI) and C (firmware-embeddable), integrating liboqs.</li>
             <li><strong>Resonance Shield Feasibility Study.</strong> Determine whether active EM cancellation can be miniaturized to implant-compatible dimensions.</li>
             <li><strong>Intermodulation Detection Research.</strong> Solve the detection gap identified in Section 6.</li>
+            <li><strong>TARA Clinical Validation.</strong> Populate the clinical and diagnostic projections of TARA with practising neurologists and BCI researchers. Priority: validate the ~35&ndash;40 Category 1 (clear therapeutic mapping) entries against published neuromodulation protocols, and resolve the ~10 ambiguous Category 2 entries through expert panel consensus.</li>
+            <li><strong>TARA Governance Projection.</strong> Map each TARA entry to applicable regulatory frameworks (FDA 524B, EU MDR, ISO 14971) and generate per-technique compliance checklists for manufacturers.</li>
           </ol>
         </div>
 
@@ -1700,12 +1704,19 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
           <p id="ref-80">[80] Kaplan, R., &amp; Kaplan, S. (1989). <em>The Experience of Nature: A Psychological Perspective</em>. Cambridge University Press.</p>
           <p id="ref-81">[81] Ulrich, R. S. (1984). View through a window may influence recovery from surgery. <em>Science</em>, 224(4647), 420&ndash;421.</p>
           <p id="ref-82">[82] Polikov, V. S., Tresco, P. A., &amp; Reichert, W. M. (2005). Response of brain tissue to chronically implanted neural electrodes. <em>Journal of Neuroscience Methods</em>, 148(1), 1&ndash;18.</p>
+
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mt-6 mb-3">BCI Security Lineage</p>
+          <p id="ref-83">[83] Denning, T., Matsuoka, Y., &amp; Kohno, T. (2009). Neurosecurity: security and privacy for neural devices. <em>Neurosurgical Focus</em>, 27(1), E7. DOI: 10.3171/2009.4.FOCUS0985</p>
+          <p id="ref-84">[84] Pycroft, L. et al. (2016). Brainjacking: implant security issues in invasive neuromodulation. <em>World Neurosurgery</em>, 92, 454&ndash;462. DOI: 10.1016/j.wneu.2016.05.010</p>
+          <p id="ref-85">[85] Landau, O. et al. (2020). Mind your privacy: privacy leakage through BCI applications using machine learning. <em>Knowledge-Based Systems</em>, 198, 105932. DOI: 10.1016/j.knosys.2020.105932</p>
+          <p id="ref-86">[86] Lozano, A. M. et al. (2019). Deep brain stimulation: current challenges and future directions. <em>Nature Reviews Neurology</em>, 15(3), 148&ndash;160. DOI: 10.1038/s41582-018-0128-2</p>
+          <p id="ref-87">[87] U.S. Food and Drug Administration. (2023). Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions. Section 524B of the FD&amp;C Act (as amended by the Consolidated Appropriations Act, 2023).</p>
         </div>
       </section>
 
       <!-- Footer -->
       <div class="text-center text-sm text-[var(--color-text-faint)] pt-8 border-t border-[var(--color-border)]">
-        <p>Version 5.0 Working Draft &middot; Last updated 2026-02-06 &middot; Kevin Qi</p>
+        <p>Version 5.1 Working Draft &middot; Last updated 2026-02-09 &middot; Kevin Qi</p>
         <p class="mt-1">Source of Truth: QIF-TRUTH.md &middot; <a href="/framework/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Explore the Framework</a></p>
       </div>
     </div>
