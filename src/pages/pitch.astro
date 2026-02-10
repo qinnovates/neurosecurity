@@ -234,14 +234,31 @@ const nspShortLabels: Record<number, string> = {
     .layer .ls { color: var(--text-tertiary); font-size: 0.85em; margin-left: auto; }
 
     /* Dual-use mapping */
-    .dualmap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px 12px; align-items: center; font-size: 0.55em; }
-    .dualmap .a { text-align: right; color: var(--danger); font-weight: 500; }
-    .dualmap .arrow { color: var(--accent-secondary); font-size: 1em; animation: arrow-pulse 4s ease-in-out infinite; }
-    @keyframes arrow-pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    .dualmap { display: flex; flex-direction: column; gap: 5px; font-size: 0.52em; }
+    .dualrow {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 0 14px;
+      align-items: center; padding: 7px 16px; border-radius: 8px;
+      background: var(--bg-surface); border: 1px solid transparent;
+      transition: all 0.4s var(--ease); position: relative; cursor: default;
     }
-    .dualmap .t { text-align: left; color: var(--safe); font-weight: 500; }
+    .dualrow:hover {
+      border-color: var(--accent); background: rgba(37, 99, 235, 0.04);
+      transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+    }
+    .dualrow .a { text-align: right; color: var(--danger); font-weight: 600; }
+    .dualrow .arrow {
+      color: var(--accent-secondary); font-size: 1.1em; font-weight: 300;
+      transition: transform 0.4s var(--ease);
+    }
+    .dualrow:hover .arrow { transform: translateX(3px); color: var(--accent); }
+    .dualrow .t { text-align: left; color: var(--safe); font-weight: 600; }
+    .dualrow .tip {
+      grid-column: 1 / -1; font-size: 0.82em; color: var(--text-tertiary);
+      font-weight: 400; line-height: 1.4; padding-top: 4px;
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: all 0.4s var(--ease);
+    }
+    .dualrow:hover .tip { max-height: 80px; opacity: 1; }
 
     /* Honest list */
     .gaps { text-align: left; max-width: 580px; margin: 12px auto 0; }
@@ -539,22 +556,22 @@ const nspShortLabels: Record<number, string> = {
           16 years of excellent research. No unified framework to connect it.
         </p>
         <div class="stats">
-          <div class="stat">
+          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
             <div class="n" style="color: var(--warn);">~20</div>
             <div class="l">Published BCI<br />attack papers</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/framework/" target="_blank">
             <div class="n" style="color: var(--danger);">0</div>
             <div class="l">Unified threat<br />frameworks</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/nsp/" target="_blank">
             <div class="n" style="color: var(--danger);">0</div>
             <div class="l">Wire-level<br />BCI crypto</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/nsp/" target="_blank">
             <div class="n" style="color: var(--danger);">0</div>
             <div class="l">Post-quantum<br />neural protocols</div>
-          </div>
+          </a>
         </div>
         <p style="font-size: 0.38em; margin-top: 14px;" class="faint">
           Martinovic 2012 &middot; Takabi 2016 &middot; Frank 2017 &middot; Bernal 2021 &middot; Landau 2020 &middot; Meng 2023
@@ -735,30 +752,45 @@ const nspShortLabels: Record<number, string> = {
       <!-- ═══ 9. DUAL-USE MAPPING ═══ -->
       <section>
         <h2>~{dualUsePct}% map today. The rest define the frontier.</h2>
-        <div class="dualmap" style="max-width: 460px; margin: 14px auto 0;">
-          <span class="a">Signal injection</span><span class="arrow">&rarr;</span><span class="t">Deep brain stimulation</span>
-          <span class="a">Phase replay</span><span class="arrow">&rarr;</span><span class="t">Neurostimulation protocols</span>
-          <span class="a">Adversarial perturbation</span><span class="arrow">&rarr;</span><span class="t">Seizure suppression</span>
-          <span class="a">Slow drift manipulation</span><span class="arrow">&rarr;</span><span class="t">Adaptive neuromodulation</span>
-          <span class="a">EM side-channel</span><span class="arrow">&rarr;</span><span class="t">TMS / tDCS diagnostics</span>
+        <div class="dualmap" style="max-width: 520px; margin: 14px auto 0;">
+          <div class="dualrow">
+            <span class="a">Signal injection</span><span class="arrow">&rarr;</span><span class="t">Deep brain stimulation</span>
+            <span class="tip">Same electrical pulse that hijacks motor commands powers therapeutic DBS for Parkinson's and depression.</span>
+          </div>
+          <div class="dualrow">
+            <span class="a">Phase replay</span><span class="arrow">&rarr;</span><span class="t">Neurostimulation protocols</span>
+            <span class="tip">Replaying neural patterns to spoof identity uses the same mechanism as closed-loop stimulation restoring lost function.</span>
+          </div>
+          <div class="dualrow">
+            <span class="a">Adversarial perturbation</span><span class="arrow">&rarr;</span><span class="t">Seizure suppression</span>
+            <span class="tip">Perturbations that disrupt neural decoding use the same principle as responsive neurostimulation (RNS) disrupting seizure onset.</span>
+          </div>
+          <div class="dualrow">
+            <span class="a">Slow drift manipulation</span><span class="arrow">&rarr;</span><span class="t">Adaptive neuromodulation</span>
+            <span class="tip">Gradual parameter drift that poisons calibration is the same adaptive mechanism adjusting stimulation to changing neural states.</span>
+          </div>
+          <div class="dualrow">
+            <span class="a">EM side-channel</span><span class="arrow">&rarr;</span><span class="t">TMS / tDCS diagnostics</span>
+            <span class="tip">EM emissions that leak neural data use the same coupling exploited by transcranial magnetic and current stimulation for therapy.</span>
+          </div>
         </div>
         <div class="stats" style="margin-top: 14px;">
-          <div class="stat">
+          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
             <div class="n" style="color: var(--safe);">{taraStats.dualUse.confirmed}</div>
             <div class="l">Confirmed</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
             <div class="n cyan">{taraStats.dualUse.probable}</div>
             <div class="l">Probable</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
             <div class="n faint">{taraStats.dualUse.silicon_only}</div>
             <div class="l">Silicon only</div>
-          </div>
-          <div class="stat">
+          </a>
+          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
             <div class="n" style="color: var(--safe);">{taraStats.clinicalCount}</div>
             <div class="l">Clinical data</div>
-          </div>
+          </a>
         </div>
         <aside class="notes">
           31 confirmed, 15 probable. 16 are silicon-only with no therapeutic mapping today.
