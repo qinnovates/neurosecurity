@@ -70,7 +70,7 @@ TARA monitors neural security without accessing neural content:
 | **Device** | Full | Local processing and protection |
 | **TARA Stack** | Scores only | Security monitoring, anomaly detection |
 | **AI Models** | Encrypted gradients only | Collective learning (federated) |
-| **QIF Team** | Aggregate statistics only | Framework improvement |
+| **Qinnovate Team** | Aggregate statistics only | Framework improvement |
 | **Third Parties** | ❌ None | Never sold, shared, or accessed |
 
 ### Federated AI Training
@@ -152,7 +152,7 @@ privacy_config = {
 ### General Questions
 
 #### Q: What is the QIF Framework?
-**A:** QIF (Quantum Indeterministic Framework for Neural Security) is an open-source security framework for brain-computer interfaces. It defines 14 layers spanning silicon (traditional computing) to synapse (biological neural activity), providing standardized security measures at each level.
+**A:** QIF (Quantum Indeterministic Framework for Neural Security) is an open-source security framework for brain-computer interfaces. It uses a 7-band hourglass architecture spanning silicon to synapse, providing standardized security measures at each level.
 
 #### Q: Is QIF a surveillance tool?
 **A:** **No.** QIF is explicitly designed for **defense and protection**, not surveillance. The framework:
@@ -236,7 +236,7 @@ Where:
 Your neural patterns never leave your device.
 
 #### Q: What attacks does QIF protect against?
-**A:** QIF addresses threats across all 14 layers:
+**A:** QIF addresses threats across all bands of the hourglass model:
 - **Signal Injection:** Malicious signals trying to influence neural activity
 - **Eavesdropping:** Unauthorized reading of neural data
 - **Denial of Service:** Blocking legitimate neural communication
@@ -278,7 +278,7 @@ See [PEDIATRIC_CONSIDERATIONS.md](PEDIATRIC_CONSIDERATIONS.md).
 #### Q: How do I report security vulnerabilities?
 **A:** Please report security issues responsibly:
 - Email: [security contact to be established]
-- GitHub Security Advisories: [QIF Repository](https://github.com/qinnovates/mindloft/security)
+- GitHub Security Advisories: [QIF Repository](https://github.com/qinnovates/qinnovate/security)
 - Do NOT disclose publicly until patched
 
 ---
@@ -352,7 +352,7 @@ Settings → Privacy → Opt Out Options:
 **Document History:**
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | 2026-02-10 | Initial release |
+| 1.0 | 2026-01-26 | Initial release |
 
 ---
 

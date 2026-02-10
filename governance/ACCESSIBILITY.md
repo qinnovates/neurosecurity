@@ -1,10 +1,10 @@
 # Accessibility Statement & Requirements
 
-> **QIF Framework** is committed to ensuring digital accessibility for all users, including people with disabilities, neurodivergent individuals, and BCI (brain-computer interface) users.
+> **Qinnovate** is committed to ensuring digital accessibility for all users, including people with disabilities, neurodivergent individuals, and BCI (brain-computer interface) users.
 
 **Last Updated:** 2026-02-10
 **WCAG Version:** 2.2 Level AA (target)
-**Scope:** Python packages (QIF Academy, TARA) + GitHub Pages site (visualizations, whitepaper, documentation)
+**Scope:** QIF-compliant tools, Astro website (qinnovate.com), and reference implementations
 
 ---
 
@@ -25,7 +25,7 @@
 
 ## 1. Compliance Standards
 
-QIF targets compliance with the following accessibility standards and regulations:
+Qinnovate targets compliance with the following accessibility standards and regulations:
 
 ### 1.1 International Standards
 
@@ -40,7 +40,7 @@ QIF targets compliance with the following accessibility standards and regulation
 
 | Regulation | Jurisdiction | Applies To | Relevance |
 |------------|-------------|------------|-----------|
-| **ADA Title II** | US (public entities) | Government-funded projects | If QIF receives federal/state funding |
+| **ADA Title II** | US (public entities) | Government-funded projects | If Qinnovate receives federal/state funding |
 | **ADA Title III** | US (public accommodation) | Websites as places of public accommodation | Applies to public-facing GitHub Pages |
 | **Section 508** | US (federal) | ICT procured/developed by federal agencies | Required if used in federally funded research |
 | **European Accessibility Act (EAA)** | EU | Digital products/services after June 2025 | Applies to EU-accessible web content |
@@ -319,7 +319,7 @@ The GitHub Pages site at `qinnovate.com/` hosts 12+ interactive visualizations, 
 
 ## 4. Python Package Compliance (Current)
 
-Both **QIF Academy** and **TARA** user interfaces currently meet WCAG 2.1 Level AA standards.
+QIF-compliant reference implementations currently meet WCAG 2.1 Level AA standards.
 
 ### 4.1 Conformance Level
 
@@ -336,7 +336,7 @@ Both **QIF Academy** and **TARA** user interfaces currently meet WCAG 2.1 Level 
 
 ### 4.2 Color Contrast Ratios
 
-#### QIF Academy
+#### QIF Reference UI
 
 All colors tested against primary background `#0f0f1a`:
 
@@ -392,7 +392,7 @@ All colors tested against primary background `#0a0a0f`:
 
 ## 5. BCI Accessibility Mode
 
-> **Purpose:** Enable P300/EEG-based BCI browser users who cannot scroll, hover, or use keyboard input to navigate the full QIF site.
+> **Purpose:** Enable P300/EEG-based BCI browser users who cannot scroll, hover, or use keyboard input to navigate the full Qinnovate site.
 
 ### 5.1 BCI Mode Specification
 
@@ -490,7 +490,7 @@ BCI Mode should be implemented **after all visualization pages are finalized** t
 
 ## 6. Accessible Landing Site Plan
 
-> **Purpose:** A separate, dedicated accessible version of the QIF site that users with disabilities can land on directly.
+> **Purpose:** A separate, dedicated accessible version of the Qinnovate site that users with disabilities can land on directly.
 
 ### 6.1 Site Architecture
 
@@ -501,7 +501,7 @@ qinnovate.com/accessible/
 ├── threats.html        # Attack taxonomy (searchable table)
 ├── whitepaper.html     # Whitepaper (simplified layout)
 ├── visualizations.html # Links to accessible versions of each viz
-└── about.html          # About QIF + accessibility statement
+└── about.html          # About Qinnovate + accessibility statement
 ```
 
 ### 6.2 Design Principles
@@ -615,7 +615,7 @@ These changes are low-effort and should be applied to all pages immediately:
 
 ```bash
 # Run Lighthouse accessibility audit
-npx lighthouse https://qinnovate.com/ --only-categories=accessibility --output=json
+npx lighthouse https://qinnovate.com --only-categories=accessibility --output=json
 ```
 
 Target: >= 95 score on all pages.
@@ -627,7 +627,7 @@ Target: >= 95 score on all pages.
 npm install -g @axe-core/cli
 
 # Scan a page
-axe https://qinnovate.com/visualizations/index.html
+axe https://qinnovate.com/visualizations/
 ```
 
 Target: 0 critical and serious violations.
@@ -769,10 +769,10 @@ on:
 
 ## 10. Feedback
 
-We welcome feedback on the accessibility of QIF Framework interfaces.
+We welcome feedback on the accessibility of Qinnovate interfaces.
 
 Please report accessibility issues:
-- **GitHub Issues:** https://github.com/qinnovates/mindloft/issues
+- **GitHub Issues:** https://github.com/qinnovates/qinnovate/issues
 - **Label:** `accessibility`
 - **Include:** Page URL, assistive technology used, description of barrier
 
@@ -792,8 +792,8 @@ For urgent accessibility requests, include "ACCESSIBILITY" in the issue title.
 
 ---
 
-*This accessibility requirements document was created on 2026-02-10.*
-*QIF Framework is committed to continuous accessibility improvement.*
+*This accessibility requirements document was created on 2026-02-01.*
+*Qinnovate is committed to continuous accessibility improvement.*
 
 ---
 
