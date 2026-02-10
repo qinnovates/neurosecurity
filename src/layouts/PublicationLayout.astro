@@ -18,7 +18,7 @@ const { title, date: rawDate, tags, source, subtitle } = Astro.props;
 const date = rawDate instanceof Date ? rawDate : new Date(rawDate);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pubBreadcrumbs = [
-  { label: 'Publications', href: '/publications/' },
+  { label: 'News', href: '/news/' },
   { label: title },
 ];
 ---
@@ -84,8 +84,8 @@ const pubBreadcrumbs = [
 
     <!-- Article footer -->
     <footer class="mt-16 pt-8 border-t border-[var(--color-border)]">
-      <a href="/publications/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
-        &larr; All publications
+      <a href="/news/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+        &larr; All news
       </a>
     </footer>
   </article>
