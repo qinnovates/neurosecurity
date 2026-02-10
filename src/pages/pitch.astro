@@ -40,6 +40,7 @@ const nspShortLabels: Record<number, string> = {
   <title>Qinnovate | Pitch</title>
   <meta name="robots" content="noindex, nofollow" />
 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
 
@@ -306,20 +307,15 @@ const nspShortLabels: Record<number, string> = {
       perspective-origin: 50% 50%;
     }
 
-    /* Every slide is a frosted glass pane */
+    /* Slides are transparent text layers — Three.js provides the glass */
     .reveal .slides > section {
       border-radius: 24px !important;
       overflow: hidden !important;
-      background: rgba(255, 255, 255, 0.78) !important;
-      backdrop-filter: blur(32px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
-      box-shadow:
-        0 4px 32px rgba(0, 0, 0, 0.05),
-        0 0 0 1px rgba(255, 255, 255, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+      padding: 48px 56px !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      box-shadow: none !important;
       transition: transform 0.7s var(--ease),
-                  opacity 0.7s var(--ease),
-                  backdrop-filter 0.7s var(--ease) !important;
+                  opacity 0.7s var(--ease) !important;
       will-change: transform;
     }
 
@@ -486,86 +482,14 @@ const nspShortLabels: Record<number, string> = {
       mix-blend-mode: multiply;
     }
 
-    /* ═══ Glass Orbs (ONI-style floating circles) ═══ */
-    .glass-orbs {
+    /* ═══ Three.js Glass Canvas ═══ */
+    #glass-scene {
       position: fixed;
       inset: 0;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
-      overflow: hidden;
-    }
-    .glass-orb {
-      position: absolute;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255, 255, 255, 0.5);
-      background: radial-gradient(circle at 30% 30%,
-        rgba(255, 255, 255, 0.25) 0%,
-        rgba(255, 255, 255, 0.08) 40%,
-        rgba(255, 255, 255, 0.02) 70%,
-        transparent 100%);
-      box-shadow:
-        inset 0 0 30px rgba(255, 255, 255, 0.15),
-        inset -8px -8px 20px rgba(0, 0, 0, 0.03),
-        0 4px 24px rgba(0, 0, 0, 0.04);
-      backdrop-filter: blur(8px) saturate(140%);
-      -webkit-backdrop-filter: blur(8px) saturate(140%);
-      will-change: transform;
-    }
-    .glass-orb::after {
-      content: '';
-      position: absolute;
-      top: 12%;
-      left: 18%;
-      width: 35%;
-      height: 25%;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.35);
-      filter: blur(6px);
-    }
-    .glass-orb--1 {
-      width: 280px; height: 280px;
-      top: -60px; right: -40px;
-      animation: orb-float-1 20s ease-in-out infinite alternate;
-    }
-    .glass-orb--2 {
-      width: 180px; height: 180px;
-      bottom: 8%; left: -30px;
-      animation: orb-float-2 16s ease-in-out infinite alternate;
-    }
-    .glass-orb--3 {
-      width: 120px; height: 120px;
-      top: 35%; left: 8%;
-      animation: orb-float-3 22s ease-in-out infinite alternate;
-    }
-    .glass-orb--4 {
-      width: 90px; height: 90px;
-      top: 15%; left: 55%;
-      animation: orb-float-4 18s ease-in-out infinite alternate;
-    }
-    .glass-orb--5 {
-      width: 200px; height: 200px;
-      bottom: -40px; right: 15%;
-      animation: orb-float-5 24s ease-in-out infinite alternate;
-    }
-    @keyframes orb-float-1 {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-3vw, 5vh) scale(1.05); }
-    }
-    @keyframes orb-float-2 {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(4vw, -3vh) scale(0.95); }
-    }
-    @keyframes orb-float-3 {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(2vw, -4vh) scale(1.08); }
-    }
-    @keyframes orb-float-4 {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-2vw, 3vh) scale(0.92); }
-    }
-    @keyframes orb-float-5 {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(3vw, -2vh) scale(1.03); }
+      width: 100%;
+      height: 100%;
     }
 
     /* Ensure Reveal sits above background layers */
@@ -627,14 +551,8 @@ const nspShortLabels: Record<number, string> = {
     <rect width="100%" height="100%" filter="url(#noise)" />
   </svg>
 
-  <!-- Glass orbs (ONI-style floating circles) -->
-  <div class="glass-orbs" aria-hidden="true">
-    <div class="glass-orb glass-orb--1"></div>
-    <div class="glass-orb glass-orb--2"></div>
-    <div class="glass-orb glass-orb--3"></div>
-    <div class="glass-orb glass-orb--4"></div>
-    <div class="glass-orb glass-orb--5"></div>
-  </div>
+  <!-- Three.js glass panes -->
+  <canvas id="glass-scene" aria-hidden="true"></canvas>
 
   <div class="reveal">
     <div class="slides">
@@ -1149,6 +1067,234 @@ const nspShortLabels: Record<number, string> = {
 
       initWidget();
     })();
+  </script>
+
+  <!-- Three.js Glass Pane Scene -->
+  <script is:inline>
+  window.addEventListener('load', function() {
+    var canvas = document.getElementById('glass-scene');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    var W = window.innerWidth;
+    var H = window.innerHeight;
+
+    // --- Renderer (alpha for HTML to show through) ---
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(W, H);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 2.5;
+
+    // --- Scene & Camera ---
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
+    camera.position.set(0, 0, 5.5);
+
+    // --- Lighting (strong for visible specular on glass) ---
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    var keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    keyLight.position.set(2, 4, 5);
+    scene.add(keyLight);
+    var fillLight = new THREE.DirectionalLight(0x93b5ff, 0.6);
+    fillLight.position.set(-3, 1, 3);
+    scene.add(fillLight);
+    var rimLight = new THREE.DirectionalLight(0x67e8f9, 0.4);
+    rimLight.position.set(0, -2, 4);
+    scene.add(rimLight);
+
+    // --- Rich environment map for Fresnel reflections ---
+    var pmrem = new THREE.PMREMGenerator(renderer);
+    pmrem.compileEquirectangularShader();
+    var envScene = new THREE.Scene();
+    envScene.background = new THREE.Color(0xe8edf5);
+
+    // Strong colored lights for visible reflections in glass
+    var el1 = new THREE.PointLight(0x6390ff, 20, 25);
+    el1.position.set(6, 4, 3);
+    envScene.add(el1);
+    var el2 = new THREE.PointLight(0x22d3ee, 15, 25);
+    el2.position.set(-5, -3, 4);
+    envScene.add(el2);
+    var el3 = new THREE.PointLight(0xc4b5fd, 12, 25);
+    el3.position.set(0, 6, -3);
+    envScene.add(el3);
+    var el4 = new THREE.PointLight(0xffffff, 25, 20);
+    el4.position.set(0, 0, 8);
+    envScene.add(el4);
+
+    // Bright reflective surfaces in env for glass to pick up
+    var sGeo = new THREE.SphereGeometry(1.0, 32, 32);
+    var sMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0, metalness: 1 });
+    [[-4, 2, -6], [4, -1, -6], [0, 4, -8]].forEach(function(pos) {
+      var s = new THREE.Mesh(sGeo, sMat);
+      s.position.set(pos[0], pos[1], pos[2]);
+      envScene.add(s);
+    });
+    // Large white plane for broad soft reflection
+    var planeGeo = new THREE.PlaneGeometry(20, 20);
+    var planeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3, metalness: 0 });
+    var bgPlane = new THREE.Mesh(planeGeo, planeMat);
+    bgPlane.position.set(0, 0, -10);
+    envScene.add(bgPlane);
+
+    var envMap = pmrem.fromScene(envScene, 0, 0.1, 100).texture;
+    pmrem.dispose();
+
+    // --- Glass material (reflective + visible Fresnel) ---
+    var glassMat = new THREE.MeshPhysicalMaterial({
+      metalness: 0.1,
+      roughness: 0.0,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.02,
+      envMap: envMap,
+      envMapIntensity: 4.0,
+      reflectivity: 1.0,
+      color: new THREE.Color(0xd8e4ff),
+      transparent: true,
+      opacity: 0.45,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+
+    // --- Rounded rectangle shape ---
+    function roundedRect(w, h, r) {
+      var s = new THREE.Shape();
+      var hw = w / 2, hh = h / 2;
+      s.moveTo(-hw + r, -hh);
+      s.lineTo(hw - r, -hh);
+      s.quadraticCurveTo(hw, -hh, hw, -hh + r);
+      s.lineTo(hw, hh - r);
+      s.quadraticCurveTo(hw, hh, hw - r, hh);
+      s.lineTo(-hw + r, hh);
+      s.quadraticCurveTo(-hw, hh, -hw, hh - r);
+      s.lineTo(-hw, -hh + r);
+      s.quadraticCurveTo(-hw, -hh, -hw + r, -hh);
+      return s;
+    }
+
+    // --- Create panes ---
+    var SLIDES = 12;
+    var PW = 3.8;
+    var PH = 2.15;
+    var GAP = 4.2;
+    var CR = 0.14;
+
+    var geo = new THREE.ExtrudeGeometry(roundedRect(PW, PH, CR), {
+      depth: 0.04,
+      bevelEnabled: true,
+      bevelThickness: 0.01,
+      bevelSize: 0.01,
+      bevelSegments: 3
+    });
+
+    var group = new THREE.Group();
+    var panes = [];
+
+    for (var i = 0; i < SLIDES; i++) {
+      var mat = glassMat.clone();
+      var mesh = new THREE.Mesh(geo, mat);
+      mesh.position.x = i * GAP;
+
+      // Bright edge wireframe (glass card border)
+      var edges = new THREE.EdgesGeometry(geo, 10);
+      var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.8,
+      }));
+      mesh.add(line);
+
+      group.add(mesh);
+      panes.push({ mesh: mesh, mat: mat, line: line.material });
+    }
+    scene.add(group);
+
+    // --- Animation state ---
+    var targetX = 0;
+    var animStartX = 0;
+    var animStartTime = 0;
+    var animDuration = 750;
+    var currentSlide = 0;
+
+    function easeOutExpo(t) {
+      return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+
+    function setSlide(idx) {
+      currentSlide = idx;
+      animStartX = group.position.x;
+      animStartTime = performance.now();
+      targetX = -idx * GAP;
+
+      // Adjust per-pane appearance by distance
+      panes.forEach(function(p, i) {
+        var dist = Math.abs(i - idx);
+        if (dist === 0) {
+          p.mat.opacity = 0.18;
+          p.mat.envMapIntensity = 2.0;
+          p.mat.clearcoat = 1.0;
+          p.line.opacity = 0.45;
+          p.mesh.visible = true;
+        } else if (dist <= 1) {
+          p.mat.opacity = 0.12;
+          p.mat.envMapIntensity = 1.2;
+          p.mat.clearcoat = 0.5;
+          p.line.opacity = 0.2;
+          p.mesh.visible = true;
+        } else if (dist <= 2) {
+          p.mat.opacity = 0.06;
+          p.mat.envMapIntensity = 0.6;
+          p.mat.clearcoat = 0.2;
+          p.line.opacity = 0.08;
+          p.mesh.visible = true;
+        } else {
+          p.mesh.visible = false;
+        }
+      });
+    }
+
+    // --- Render loop ---
+    var clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      var t = clock.getElapsedTime();
+
+      // Eased position transition
+      var elapsed = performance.now() - animStartTime;
+      var progress = Math.min(elapsed / animDuration, 1);
+      var eased = easeOutExpo(progress);
+      group.position.x = animStartX + (targetX - animStartX) * eased;
+
+      // Idle: subtle breathing rotation (glass catches light differently)
+      panes.forEach(function(p, i) {
+        if (!p.mesh.visible) return;
+        var dist = Math.abs(i - currentSlide);
+        var amp = dist === 0 ? 1 : 0.3;
+        p.mesh.rotation.y = Math.sin(t * 0.4 + i * 0.8) * 0.015 * amp;
+        p.mesh.rotation.x = Math.cos(t * 0.3 + i * 0.6) * 0.008 * amp;
+      });
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // --- Resize ---
+    window.addEventListener('resize', function() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      camera.aspect = W / H;
+      camera.updateProjectionMatrix();
+      renderer.setSize(W, H);
+    });
+
+    // --- Hook Reveal ---
+    revealReady.then(function() {
+      Reveal.on('slidechanged', function(e) {
+        setSlide(e.indexh);
+      });
+    });
+  });
   </script>
 
 </body>

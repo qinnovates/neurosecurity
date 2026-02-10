@@ -142,31 +142,28 @@ const isGovActive = currentPath.startsWith('/governance/');
             </svg>
           </a>
           <div class="dropdown-menu absolute right-0 top-full pt-2 hidden">
-            <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
-              <div class="p-2 max-h-[70vh] overflow-y-auto">
+            <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-56 overflow-hidden">
+              <div class="p-1.5">
                 {govDocs.map((doc) => (
                   <a
                     href={`/governance/${doc.id}/`}
                     class:list={[
-                      "block px-3 py-2.5 rounded-lg transition-colors",
+                      "block px-3 py-1.5 rounded-lg text-sm transition-colors",
                       currentPath === `/governance/${doc.id}/`
-                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10 font-medium"
                         : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
                     ]}
                   >
-                    <span class="text-sm font-medium block leading-snug">{doc.data.title}</span>
-                    {doc.data.description && (
-                      <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{doc.data.description}</span>
-                    )}
+                    {doc.data.title}
                   </a>
                 ))}
               </div>
-              <div class="border-t border-[var(--color-border)] p-2">
+              <div class="border-t border-[var(--color-border)] p-1.5">
                 <a
                   href="/governance/"
-                  class="block px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/10 transition-colors"
+                  class="block px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/10 transition-colors"
                 >
-                  View all governance docs &rarr;
+                  View all &rarr;
                 </a>
               </div>
             </div>
