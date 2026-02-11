@@ -1,6 +1,15 @@
 [
   {
     "type": "external",
+    "title": "Recovering Whole-Brain Causal Connectivity under Indirect Observation with Applications to Human EEG and fMRI",
+    "date": "2026-02-11",
+    "url": "https://arxiv.org/abs/2602.09034",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.09034v1 Announce Type: new \nAbstract: Inferring directed connectivity from neuroimaging is an ill-posed inverse problem: recorded signals are distorted by hemodynamic filtering and volume c",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "CorTec announces second successful human implant for BCI system - MassDevice",
     "date": "2026-02-10",
     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPUXhWbEpMcEhUZlJBSEhUbHRUeVBqUWxyTXFoNEc1a3kwYl95ay1SXzBHUGtycHFRTkNEUl9IZnFad1VVd2xfUmZRbXVFVHZjQWlUZFZ0a3hxbHJJSkFFZjFkV0VaQjRFUkRmanl5MnpRY25zN2VJcEdsVXBQUkFienJXY19DUWZOOGJPYjVUTGo1M2dVYnc?oc=5",
@@ -10,21 +19,12 @@
   },
   {
     "type": "external",
-    "title": "First test of wireless brain-computer chip in space claimed by China - Interesting Engineering",
+    "title": "Neuralink Files $8.2M Remodel At Del Valle Site - Hoodline",
     "date": "2026-02-10",
-    "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5iTVVLZnRwSlBReXBtVXlCWkFDNm5fRVNrUmdIMXRrbUU5alRKM014aG9pWEtmM2VLYjY0clVQQmxVajZlck95LUJlb080bjVRNkJUMWdjbnBRVDJrQ0xlRTE4WUxLVGY1OHNacWJtQmxEVURKTGhvVkxQU3VyUQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "First test of wireless brain-computer chip in space claimed by China&nbsp;&nbsp;Interesting Engineering",
+    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNUVpqak05emhIRENkdGpXLVIyZkhZdXVQS1JSdEpJdkhQNzNoTXpnb2FVMkZqVWxpRm9ZSnFOUHhneURmbFowdGJ6bGJTcXhDSmJaZ2dWYS1EdHlLRlY5SlprUmhhQkd2dzNZWHN0N3ZGeUY4cm1ZTWFyQmxwaXh0SmYzb3dOYlQtamN2TGZxSQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Files $8.2M Remodel At Del Valle Site&nbsp;&nbsp;Hoodline",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "SurfAge-Net: A Hierarchical Surface-Based Network for Interpretable Fine-Grained Brain Age Prediction",
-    "date": "2026-02-10",
-    "url": "https://arxiv.org/abs/2602.06994",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.06994v1 Announce Type: new \nAbstract: Brain age prediction serves as a powerful framework for assessing brain status and detecting deviations associated with neurodevelopmental and neurodeg",
-    "category": "research"
   },
   {
     "type": "external",
@@ -42,24 +42,6 @@
     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNN2w5d3lkSWN1aFRBeGQ2SGNwb19GaUwyWVJTVmJzeFotNjRDNDhPQlo1SHNoYVFuS19jM1ZFX3lNWVVLNGR5V3R6em14NEI1SlpnSnhzWVVoVlFpY0NjR3ZSWHNYTHJlVUI4NnVDLWdsQ0ZQUm5PUl83WWxwNzNhakdTLS12QVJMYlhoU0NlbWYyeUlrdVFZ?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Don’t Let Elon Musk Implant a Device in Your Skull&nbsp;&nbsp;Home ❧ Current Affairs",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Chinese scientists develop stretchable electrodes for invasive BCI, breaking key bottleneck - Global Times",
-    "date": "2026-02-07",
-    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1INkZmekdEZEEzdEhBRzNUT0ZJVU1zc1JZN0prc0lPOXFTclBpUk04RjY2WGxaVDNIa2oteE1IdVRaWTlXamx3YVJ3bXJ5WFVLZ0R4N0V4MThRU0F3UU9PZUFR?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Chinese scientists develop stretchable electrodes for invasive BCI, breaking key bottleneck&nbsp;&nbsp;Global Times",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk has already tapped into the brains of 21 people, thousands more to follow in 2026 with mass production of Neuralink chip - 3DVF",
-    "date": "2026-02-07",
-    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNMW9tbVlIMktqZTJLaWJtbFRERXRUc3VCYlVRUjVkYXB0NVZERlRuSFVKcWhoejlTYzdxUkI3QVdYSkZkeTZrVVNuX2hieWRhMUotdGZfd1pFVHgtV0ZFNjIyb1h0Q2ROLXBtQjhPRm5TYWNNbUJWaHF3d3dHX2xoRGZmdllFbGNJU292WnhoaEdVRHBvbHpkNGhQcXRJbXVEcy1PLWVTMy1JeUxHVWdwUVZUUE1uZjFDQlFnUmlB?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk has already tapped into the brains of 21 people, thousands more to follow in 2026 with mass production of Neuralink chip&nbsp;&nbsp;3DVF",
     "category": "neurotechnology"
   },
   {
@@ -118,11 +100,29 @@
   },
   {
     "type": "external",
+    "title": "Investing in Merge Labs - OpenAI",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Investing in Merge Labs&nbsp;&nbsp;OpenAI",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says - Fierce Biotech",
+    "date": "2026-01-02",
+    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQYXdTY3MxMnRVV1QtMjBFZFUtNFpHRWV4OHItaFFPRWFwQWl0b2dVNGJjbjVQZDFXYnNWekZjcVU4Sm5YeWFBSjF2dzBoRUpwQVVZckhXZDdRV29vYV9POFFsNjJIQnVQcGVrTkJfTGlPbkJucEpSckwtcElpaEJZZnYzVUE0cndZQ2VwVjluTnRwa0hiXzJBU0F0NlhPUXUzWkNuWG40MnBoUmRkM3JRUVBQSExvcGFvVDlkYXZ2X013dw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says&nbsp;&nbsp;Fierce Biotech",
     "category": "neurotechnology"
   },
   {
