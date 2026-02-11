@@ -1,0 +1,231 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import data from '../data/milestones.json';
+
+const milestones = data.timeline;
+const metrics = data.metrics;
+
+// Sort reverse chronological (most recent first)
+const sorted = [...milestones].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// Calculate span stats
+const dates = milestones.map(m => new Date(m.date).getTime());
+const firstDate = new Date(Math.min(...dates));
+const lastDate = new Date(Math.max(...dates));
+const daySpan = Math.max(1, Math.round((lastDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)));
+
+// Category badge colors
+const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
+  framework:  { bg: 'rgba(37, 99, 235, 0.1)',  text: '#2563eb', border: 'rgba(37, 99, 235, 0.25)' },
+  protocol:   { bg: 'rgba(79, 70, 229, 0.1)',   text: '#4f46e5', border: 'rgba(79, 70, 229, 0.25)' },
+  research:   { bg: 'rgba(217, 119, 6, 0.1)',    text: '#d97706', border: 'rgba(217, 119, 6, 0.25)' },
+  scoring:    { bg: 'rgba(6, 182, 212, 0.1)',    text: '#0891b2', border: 'rgba(6, 182, 212, 0.25)' },
+  security:   { bg: 'rgba(239, 68, 68, 0.1)',    text: '#ef4444', border: 'rgba(239, 68, 68, 0.25)' },
+  standards:  { bg: 'rgba(16, 185, 129, 0.1)',   text: '#10b981', border: 'rgba(16, 185, 129, 0.25)' },
+};
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// Dashboard metrics layout
+const dashboardItems = [
+  { label: 'Techniques Catalogued', value: metrics.techniques_catalogued, color: '#2563eb' },
+  { label: 'CVSS Vectors Mapped', value: metrics.cvss_vectors_mapped, color: '#0891b2' },
+  { label: 'NISS Vectors Scored', value: metrics.niss_vectors_scored, color: '#7c3aed' },
+  { label: 'Therapeutic Mappings', value: metrics.therapeutic_mappings, color: '#d97706' },
+  { label: 'PoCs Built', value: metrics.pocs_built, color: '#ef4444' },
+  { label: 'CWEs Demonstrated', value: metrics.cwes_demonstrated, color: '#ef4444' },
+  { label: 'CVEs Filed', value: metrics.cves_filed, color: '#10b981' },
+  { label: 'Standards Submitted', value: metrics.standards_submitted, color: '#10b981' },
+  { label: 'Specifications Published', value: metrics.specifications_published, color: '#4f46e5' },
+];
+---
+
+<PageLayout
+  title="Milestones"
+  description="A timeline of QIF framework milestones — tracking progress from foundation to standards submission."
+  breadcrumbs={[{ label: 'Milestones' }]}
+>
+  <div class="max-w-3xl">
+    <!-- Hero -->
+    <div class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Milestones</h1>
+      <p class="text-lg text-[var(--color-text-muted)] mb-6">
+        Building the foundation for neural security, one breakthrough at a time.
+      </p>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border)]">
+        <span class="text-sm font-medium text-[var(--color-text-primary)]">
+          {sorted.length} milestones in {daySpan} days
+        </span>
+        <span class="text-xs text-[var(--color-text-faint)]">
+          {formatDate(firstDate.toISOString().slice(0, 10))} &mdash; {formatDate(lastDate.toISOString().slice(0, 10))}
+        </span>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="mb-12">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">By the Numbers</h2>
+      <div class="dashboard-grid">
+        {dashboardItems.map((item) => (
+          <div class="dashboard-card glass-subtle rounded-xl p-4">
+            <div class="dashboard-value" style={`color: ${item.color};`}>
+              {item.value}
+            </div>
+            <div class="dashboard-label">
+              {item.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="mb-4">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-6 text-[var(--color-text-primary)]">Timeline</h2>
+    </div>
+    <div class="timeline-container">
+      {sorted.map((milestone, i) => {
+        const colors = categoryColors[milestone.category] || categoryColors.framework;
+        return (
+          <div class="timeline-item reveal" style={`--reveal-delay: ${i * 80}ms;`}>
+            <!-- Timeline connector -->
+            <div class="timeline-track">
+              <div class="timeline-dot" style={`background-color: ${colors.text};`} />
+              {i < sorted.length - 1 && <div class="timeline-line" />}
+            </div>
+
+            <!-- Card -->
+            <div class="timeline-card glass-subtle rounded-xl p-5 sm:p-6 card-hover">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <time class="text-xs font-medium font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]" datetime={milestone.date}>
+                  {formatDate(milestone.date)}
+                </time>
+                <span
+                  class="text-xs font-medium px-2 py-0.5 rounded-full border capitalize"
+                  style={`color: ${colors.text}; background-color: ${colors.bg}; border-color: ${colors.border};`}
+                >
+                  {milestone.category}
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold font-[family-name:var(--font-heading)] mb-1.5">
+                {milestone.title}
+              </h3>
+              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                {milestone.description}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  /* Dashboard */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .dashboard-card {
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .dashboard-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .dashboard-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+
+  .dashboard-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 639px) {
+    .dashboard-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .dashboard-value {
+      font-size: 1.35rem;
+    }
+
+    .dashboard-label {
+      font-size: 0.6rem;
+    }
+  }
+
+  /* Timeline */
+  .timeline-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 4rem;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 1rem;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .timeline-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 1.5rem;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .timeline-line {
+    width: 2px;
+    flex-grow: 1;
+    background-color: var(--color-border);
+    margin-top: 0.5rem;
+  }
+
+  .timeline-card {
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 639px) {
+    .timeline-item {
+      grid-template-columns: 16px 1fr;
+      gap: 0.75rem;
+    }
+
+    .timeline-dot {
+      width: 8px;
+      height: 8px;
+      margin-top: 1.25rem;
+    }
+  }
+</style>

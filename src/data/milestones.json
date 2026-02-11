@@ -1,0 +1,67 @@
+{
+  "metrics": {
+    "techniques_catalogued": 71,
+    "tactics": 11,
+    "domains": 7,
+    "cvss_vectors_mapped": 71,
+    "niss_vectors_scored": 71,
+    "cves_filed": 0,
+    "pocs_built": 1,
+    "cwes_demonstrated": 3,
+    "standards_submitted": 1,
+    "therapeutic_mappings": 43,
+    "specifications_published": 3,
+    "days_active": null
+  },
+  "timeline": [
+    {
+      "date": "2026-01-15",
+      "title": "QIF Framework v1.0 Published",
+      "description": "71 attack techniques across 11 tactics and 7 domains. Full threat registry with MITRE ATT&CK-style IDs.",
+      "category": "framework",
+      "icon": "shield"
+    },
+    {
+      "date": "2026-01-20",
+      "title": "NSP Protocol Specification Released",
+      "description": "Post-quantum neural security protocol. Under 4% implant power budget. Wire-level encryption for BCI data streams.",
+      "category": "protocol",
+      "icon": "lock"
+    },
+    {
+      "date": "2026-01-28",
+      "title": "TARA Atlas Published",
+      "description": "Dual-use atlas mapping 71 attack techniques to therapeutic analogs. 60% of attack mechanisms have clinical counterparts.",
+      "category": "research",
+      "icon": "book"
+    },
+    {
+      "date": "2026-02-08",
+      "title": "NISS v1.0 Specification Complete",
+      "description": "First CVSS v4.0 extension for neural interfaces. Five metrics: Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, Neuroplasticity.",
+      "category": "scoring",
+      "icon": "calculator"
+    },
+    {
+      "date": "2026-02-10",
+      "title": "71 CVSS v4.0 Base Vector Mappings Complete",
+      "description": "Every technique in the QIF threat registry mapped to a CVSS v4.0 base vector with companion NISS extension vector.",
+      "category": "scoring",
+      "icon": "map"
+    },
+    {
+      "date": "2026-02-11",
+      "title": "First BCI PoC Exploit: liblsl",
+      "description": "Three-phase exploit chain demonstrating unauthenticated neural data access in Lab Streaming Layer. CWE-306, CWE-319, CWE-345.",
+      "category": "security",
+      "icon": "terminal"
+    },
+    {
+      "date": "2026-02-11",
+      "title": "NISS Submitted to FIRST.org CVSS SIG",
+      "description": "Formal proposal sent to cvss@first.org for NISS registration as a CVSS v4.0 extension under Section 3.11 of the User Guide.",
+      "category": "standards",
+      "icon": "send"
+    }
+  ]
+}
