@@ -3,9 +3,9 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
   "statistics": {
-    "total_techniques": 71,
-    "total_tactics": 11,
-    "total_domains": 7,
+    "total_techniques": 79,
+    "total_tactics": 15,
+    "total_domains": 8,
     "by_tactic": {
       "QIF-B.EV": 5,
       "QIF-B.IN": 5,
@@ -17,56 +17,59 @@
       "QIF-N.IJ": 6,
       "QIF-N.MD": 5,
       "QIF-N.SC": 3,
-      "QIF-P.DS": 7
+      "QIF-P.DS": 7,
+      "QIF-S.FP": 1,
+      "QIF-S.HV": 5,
+      "QIF-S.RP": 2
     },
     "by_status": {
-      "CONFIRMED": 14,
-      "DEMONSTRATED": 19,
-      "EMERGING": 16,
-      "THEORETICAL": 22
+      "CONFIRMED": 15,
+      "DEMONSTRATED": 21,
+      "EMERGING": 19,
+      "THEORETICAL": 24
     },
     "by_severity": {
-      "critical": 20,
-      "high": 37,
+      "critical": 21,
+      "high": 43,
       "low": 1,
-      "medium": 13
+      "medium": 14
     },
     "by_ui_category": {
-      "CI": 8,
+      "CI": 9,
       "DM": 15,
       "DS": 7,
-      "EX": 12,
+      "EX": 13,
       "PE": 8,
       "PS": 7,
-      "SE": 4,
+      "SE": 10,
       "SI": 10
     },
     "by_niss_severity": {
       "critical": 0,
       "high": 21,
-      "medium": 26,
-      "low": 23,
+      "medium": 27,
+      "low": 30,
       "none": 1
     },
     "niss_cvss_mapping": {
       "pins_flagged": 31,
       "by_gap_group": {
-        "1": 4,
-        "2": 17,
-        "3": 50
+        "1": 5,
+        "2": 22,
+        "3": 52
       }
     },
     "tara": {
       "version": "1.0",
-      "enriched_techniques": 71,
+      "enriched_techniques": 79,
       "dual_use_breakdown": {
-        "confirmed": 31,
-        "probable": 15,
+        "confirmed": 37,
+        "probable": 16,
         "possible": 9,
-        "silicon_only": 16
+        "silicon_only": 17
       },
-      "techniques_with_clinical_analog": 55,
-      "techniques_silicon_only": 16
+      "techniques_with_clinical_analog": 62,
+      "techniques_silicon_only": 17
     }
   },
   "tactics": [
@@ -205,6 +208,46 @@
         "QIF-TA0053"
       ],
       "legacy_name": "Adversarial ML"
+    },
+    {
+      "id": "QIF-S.RP",
+      "name": "Sensor Repurposing",
+      "domain": "Consumer Sensor Exploitation",
+      "domain_code": "S",
+      "action_code": "RP",
+      "description": "Exploiting consumer device sensors for unintended purposes, such as reprogramming audio output as input or converting earbuds into neural recording platforms.",
+      "legacy_ids": [],
+      "legacy_name": "Sensor Repurposing"
+    },
+    {
+      "id": "QIF-S.FP",
+      "name": "Sensor Fingerprinting",
+      "domain": "Consumer Sensor Exploitation",
+      "domain_code": "S",
+      "action_code": "FP",
+      "description": "Using consumer device sensors for covert biometric identification, including ear canal acoustic profiling, vascular mapping, and physiological signature extraction.",
+      "legacy_ids": [],
+      "legacy_name": "Sensor Fingerprinting"
+    },
+    {
+      "id": "QIF-S.HV",
+      "name": "Sensor Harvest",
+      "domain": "Consumer Sensor Exploitation",
+      "domain_code": "S",
+      "action_code": "HV",
+      "description": "Extracting physiological, biometric, or cognitive data through consumer device sensors without user awareness, including vital signs, body composition, and neural activity.",
+      "legacy_ids": [],
+      "legacy_name": "Sensor Data Harvest"
+    },
+    {
+      "id": "QIF-S.CH",
+      "name": "Sensor Chaining",
+      "domain": "Consumer Sensor Exploitation",
+      "domain_code": "S",
+      "action_code": "CH",
+      "description": "Combining multiple consumer sensor exploitation techniques to build comprehensive physiological or cognitive profiles, creating attack chains that progress from acoustic to neural to cognitive exploitation.",
+      "legacy_ids": [],
+      "legacy_name": "Sensor Chain"
     }
   ],
   "techniques": [
@@ -212,7 +255,7 @@
       "id": "QIF-T0001",
       "attack": "Signal injection",
       "tactic": "QIF-N.IJ",
-      "bands": "I0\u2013N1",
+      "bands": "I0–N1",
       "band_ids": [
         "I0",
         "N1"
@@ -259,7 +302,7 @@
           ],
           "fda_status": "cleared",
           "evidence_level": "RCT",
-          "safe_parameters": "1-2 mA, 20-30 min sessions, 35 cm\u00b2 electrode area",
+          "safe_parameters": "1-2 mA, 20-30 min sessions, 35 cm² electrode area",
           "sources": [
             "Brunoni et al. 2012 (Arch Gen Psychiatry)",
             "Lefaucheur et al. 2017 (Clin Neurophysiol)"
@@ -311,7 +354,7 @@
       "id": "QIF-T0002",
       "attack": "Neural ransomware",
       "tactic": "QIF-P.DS",
-      "bands": "N3\u2013N7",
+      "bands": "N3–N7",
       "band_ids": [
         "N3",
         "N7",
@@ -356,7 +399,7 @@
           ],
           "fda_status": "approved",
           "evidence_level": "RCT",
-          "safe_parameters": "Device-specific (Medtronic, NeuroPace): 1-5V, 60-450\u03bcs pulse width, 130-185 Hz",
+          "safe_parameters": "Device-specific (Medtronic, NeuroPace): 1-5V, 60-450μs pulse width, 130-185 Hz",
           "sources": [
             "Lozano et al. 2019 (Nature Reviews Neuroscience)",
             "Morrell 2011 (Neurosurgery)"
@@ -409,7 +452,7 @@
       "id": "QIF-T0003",
       "attack": "Eavesdropping / signal interception",
       "tactic": "QIF-D.HV",
-      "bands": "I0\u2013S3",
+      "bands": "I0–S3",
       "band_ids": [
         "I0",
         "N1",
@@ -504,14 +547,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:C",
         "gap_group": 3,
-        "gap_summary": "Passive neural thought interception \u2014 mental privacy not covered by CVSS confidentiality"
+        "gap_summary": "Passive neural thought interception — mental privacy not covered by CVSS confidentiality"
       }
     },
     {
       "id": "QIF-T0004",
       "attack": "Man-in-the-middle",
       "tactic": "QIF-D.HV",
-      "bands": "I0\u2013S2",
+      "bands": "I0–S2",
       "band_ids": [
         "I0",
         "S1",
@@ -608,7 +651,7 @@
       "id": "QIF-T0005",
       "attack": "Quantum tunneling exploit",
       "tactic": "QIF-N.IJ",
-      "bands": "I0\u2013N1",
+      "bands": "I0–N1",
       "band_ids": [
         "I0",
         "N1"
@@ -694,7 +737,7 @@
       "id": "QIF-T0006",
       "attack": "Davydov soliton attack",
       "tactic": "QIF-N.IJ",
-      "bands": "I0\u2013N1",
+      "bands": "I0–N1",
       "band_ids": [
         "I0",
         "N1"
@@ -780,7 +823,7 @@
       "id": "QIF-T0007",
       "attack": "Protocol manipulation",
       "tactic": "QIF-N.IJ",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -871,7 +914,7 @@
       "id": "QIF-T0008",
       "attack": "Command hijacking",
       "tactic": "QIF-N.IJ",
-      "bands": "S2\u2013N7",
+      "bands": "S2–N7",
       "band_ids": [
         "S2",
         "N7",
@@ -970,7 +1013,7 @@
       "id": "QIF-T0009",
       "attack": "RF false brainwave injection",
       "tactic": "QIF-N.MD",
-      "bands": "S1\u2013S2\u2192N4\u2013N7",
+      "bands": "S1–S2→N4–N7",
       "band_ids": [
         "S1",
         "S2",
@@ -1073,7 +1116,7 @@
       "id": "QIF-T0010",
       "attack": "ELF neural entrainment",
       "tactic": "QIF-E.RD",
-      "bands": "S1\u2192N4\u2013N7",
+      "bands": "S1→N4–N7",
       "band_ids": [
         "S1",
         "N4",
@@ -1172,7 +1215,7 @@
       "id": "QIF-T0011",
       "attack": "Intermodulation (BCI signal weaponized)",
       "tactic": "QIF-E.RD",
-      "bands": "S2\u2192N4\u2013N6",
+      "bands": "S2→N4–N6",
       "band_ids": [
         "S2",
         "N4",
@@ -1268,7 +1311,7 @@
       "id": "QIF-T0012",
       "attack": "Pulsed microwave (Frey effect)",
       "tactic": "QIF-E.RD",
-      "bands": "S3\u2192N2,N7",
+      "bands": "S3→N2,N7",
       "band_ids": [
         "S3",
         "N2",
@@ -1363,7 +1406,7 @@
       "id": "QIF-T0013",
       "attack": "Temporal interference (deep targeting)",
       "tactic": "QIF-E.RD",
-      "bands": "S2\u2192N4\u2013N6",
+      "bands": "S2→N4–N6",
       "band_ids": [
         "S2",
         "N4",
@@ -1459,7 +1502,7 @@
       "id": "QIF-T0014",
       "attack": "Envelope modulation (stealth carrier)",
       "tactic": "QIF-E.RD",
-      "bands": "S1\u2013S2\u2192any N",
+      "bands": "S1–S2→any N",
       "band_ids": [
         "S1",
         "S2",
@@ -1560,7 +1603,7 @@
       "id": "QIF-T0015",
       "attack": "Directed energy (thermal I0 damage)",
       "tactic": "QIF-E.RD",
-      "bands": "S3\u2192I0",
+      "bands": "S3→I0",
       "band_ids": [
         "S3",
         "I0"
@@ -1648,7 +1691,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H",
         "supplemental": "S:P/AU:Y/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Irreversible tissue destruction \u2014 CVSS availability cannot express permanence"
+        "gap_summary": "Irreversible tissue destruction — CVSS availability cannot express permanence"
       }
     },
     {
@@ -1801,7 +1844,7 @@
       "id": "QIF-T0018",
       "attack": "Adversarial filter attack",
       "tactic": "QIF-M.SV",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -1878,7 +1921,7 @@
       "id": "QIF-T0019",
       "attack": "Universal adversarial perturbation (UAP)",
       "tactic": "QIF-M.SV",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -1956,7 +1999,7 @@
       "id": "QIF-T0020",
       "attack": "Membership inference on neural data",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -2020,7 +2063,7 @@
             "IEC 62304"
           ],
           "data_classification": "sensitive_neural",
-          "safety_ceiling": "Differential privacy \u03b5<1 for neural training data"
+          "safety_ceiling": "Differential privacy ε<1 for neural training data"
         },
         "engineering": {
           "coupling": [],
@@ -2047,7 +2090,7 @@
       "id": "QIF-T0021",
       "attack": "Federated gradient leakage",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -2137,7 +2180,7 @@
       "id": "QIF-T0022",
       "attack": "Neurofeedback falsification",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2192N7",
+      "bands": "S2→N7",
       "band_ids": [
         "S2",
         "N7"
@@ -2237,7 +2280,7 @@
       "id": "QIF-T0023",
       "attack": "Closed-loop perturbation cascade",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2192I0\u2192N5\u2013N7",
+      "bands": "S2→I0→N5–N7",
       "band_ids": [
         "S2",
         "I0",
@@ -2413,7 +2456,7 @@
       "id": "QIF-T0025",
       "attack": "Neuronal jamming",
       "tactic": "QIF-P.DS",
-      "bands": "I0\u2192N2\u2013N7",
+      "bands": "I0→N2–N7",
       "band_ids": [
         "I0",
         "N2",
@@ -2510,7 +2553,7 @@
       "id": "QIF-T0026",
       "attack": "Neuronal flooding",
       "tactic": "QIF-P.DS",
-      "bands": "I0\u2192N4\u2013N7",
+      "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
         "N4",
@@ -2608,7 +2651,7 @@
       "id": "QIF-T0027",
       "attack": "Neuronal scanning",
       "tactic": "QIF-N.SC",
-      "bands": "I0\u2192N4\u2013N7",
+      "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
         "N4",
@@ -2696,14 +2739,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 2,
-        "gap_summary": "Active neural probing reveals cognitive state \u2014 partially captured by confidentiality"
+        "gap_summary": "Active neural probing reveals cognitive state — partially captured by confidentiality"
       }
     },
     {
       "id": "QIF-T0028",
       "attack": "Neural selective forwarding",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2013S1",
+      "bands": "I0–S1",
       "band_ids": [
         "I0",
         "S1"
@@ -2797,7 +2840,7 @@
       "id": "QIF-T0029",
       "attack": "Neural DoS (stimulation flood)",
       "tactic": "QIF-P.DS",
-      "bands": "I0\u2192N4\u2013N7",
+      "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
         "N4",
@@ -2896,7 +2939,7 @@
       "id": "QIF-T0030",
       "attack": "Motor hijacking",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2192N5\u2013N7",
+      "bands": "I0→N5–N7",
       "band_ids": [
         "I0",
         "N5",
@@ -3001,7 +3044,7 @@
       "id": "QIF-T0031",
       "attack": "Battery drain attack (resource depletion)",
       "tactic": "QIF-P.DS",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -3068,14 +3111,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:L",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Pure resource depletion \u2014 standard CVSS availability sufficient"
+        "gap_summary": "Pure resource depletion — standard CVSS availability sufficient"
       }
     },
     {
       "id": "QIF-T0032",
       "attack": "Identity spoofing (neural biometric)",
       "tactic": "QIF-C.EX",
-      "bands": "N3\u2013N7",
+      "bands": "N3–N7",
       "band_ids": [
         "N3",
         "N7",
@@ -3171,7 +3214,7 @@
       "id": "QIF-T0033",
       "attack": "Identity erosion (long-term personality drift)",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3257,14 +3300,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Irreversible personality alteration \u2014 CVSS cannot express identity/selfhood damage"
+        "gap_summary": "Irreversible personality alteration — CVSS cannot express identity/selfhood damage"
       }
     },
     {
       "id": "QIF-T0034",
       "attack": "Working memory poisoning",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3446,7 +3489,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Brain response extraction for interrogation \u2014 mental privacy not in CVSS"
+        "gap_summary": "Brain response extraction for interrogation — mental privacy not in CVSS"
       }
     },
     {
@@ -3544,14 +3587,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Inner speech decoding violates cognitive sovereignty \u2014 no CVSS equivalent"
+        "gap_summary": "Inner speech decoding violates cognitive sovereignty — no CVSS equivalent"
       }
     },
     {
       "id": "QIF-T0037",
       "attack": "Agency manipulation",
       "tactic": "QIF-C.EX",
-      "bands": "N5\u2013N7",
+      "bands": "N5–N7",
       "band_ids": [
         "N5",
         "N6",
@@ -3645,7 +3688,7 @@
       "id": "QIF-T0038",
       "attack": "Brainprint theft",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3733,14 +3776,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Unreplaceable neural biometric theft \u2014 CVSS cannot express non-resettable credential loss"
+        "gap_summary": "Unreplaceable neural biometric theft — CVSS cannot express non-resettable credential loss"
       }
     },
     {
       "id": "QIF-T0039",
       "attack": "Self-model corruption",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3826,14 +3869,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Permanent self-perception alteration \u2014 CVSS has no identity/selfhood dimension"
+        "gap_summary": "Permanent self-perception alteration — CVSS has no identity/selfhood dimension"
       }
     },
     {
       "id": "QIF-T0040",
       "attack": "Neurophishing",
       "tactic": "QIF-C.EX",
-      "bands": "S3\u2192N7",
+      "bands": "S3→N7",
       "band_ids": [
         "S3",
         "N7"
@@ -3926,7 +3969,7 @@
       "id": "QIF-T0041",
       "attack": "Cognitive biometric inference",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7\u2192S3",
+      "bands": "N6–N7→S3",
       "band_ids": [
         "N6",
         "N7",
@@ -4024,7 +4067,7 @@
       "id": "QIF-T0042",
       "attack": "BLE/RF side-channel",
       "tactic": "QIF-N.SC",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -4108,7 +4151,7 @@
       "id": "QIF-T0043",
       "attack": "Supply chain compromise (firmware backdoor)",
       "tactic": "QIF-B.IN",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4335,7 +4378,7 @@
       "id": "QIF-T0046",
       "attack": "OTA firmware weaponization",
       "tactic": "QIF-C.IM",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4413,7 +4456,7 @@
       "id": "QIF-T0047",
       "attack": "Mass BCI compromise (platform attack)",
       "tactic": "QIF-P.DS",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4569,7 +4612,7 @@
       "id": "QIF-T0049",
       "attack": "Wireless authentication bypass",
       "tactic": "QIF-B.IN",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4640,14 +4683,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:N/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Standard wireless authentication bypass \u2014 CVSS sufficient"
+        "gap_summary": "Standard wireless authentication bypass — CVSS sufficient"
       }
     },
     {
       "id": "QIF-T0050",
       "attack": "Hardware fault injection (voltage/EM glitching)",
       "tactic": "QIF-B.IN",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -4728,7 +4771,7 @@
       "id": "QIF-T0051",
       "attack": "Neural data privacy breach",
       "tactic": "QIF-D.HV",
-      "bands": "N1\u2013S3",
+      "bands": "N1–S3",
       "band_ids": [
         "N1",
         "S1",
@@ -4820,7 +4863,7 @@
       "id": "QIF-T0052",
       "attack": "ERP harvesting",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -4910,14 +4953,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "ERP harvesting reveals cognitive state \u2014 mental privacy not in CVSS"
+        "gap_summary": "ERP harvesting reveals cognitive state — mental privacy not in CVSS"
       }
     },
     {
       "id": "QIF-T0053",
       "attack": "Cognitive state capture",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -4966,7 +5009,7 @@
           "safe_parameters": "State monitoring for therapeutic purpose only; no surveillance; patient controls data sharing",
           "sources": [
             "Dehais et al. 2019 (Front Hum Neurosci)",
-            "M\u00fchl et al. 2014 (Front Neurosci)"
+            "Mühl et al. 2014 (Front Neurosci)"
           ]
         },
         "governance": {
@@ -5014,7 +5057,7 @@
       "id": "QIF-T0054",
       "attack": "Memory extraction",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -5101,14 +5144,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Deep memory retrieval violates cognitive sovereignty \u2014 no CVSS equivalent"
+        "gap_summary": "Deep memory retrieval violates cognitive sovereignty — no CVSS equivalent"
       }
     },
     {
       "id": "QIF-T0055",
       "attack": "BCI cognitive warfare",
       "tactic": "QIF-P.DS",
-      "bands": "S3\u2192N4\u2013N7",
+      "bands": "S3→N4–N7",
       "band_ids": [
         "S3",
         "N4",
@@ -5186,7 +5229,7 @@
       "id": "QIF-T0056",
       "attack": "Neuro-surveillance",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7\u2192S3",
+      "bands": "N6–N7→S3",
       "band_ids": [
         "N6",
         "N7",
@@ -5280,7 +5323,7 @@
       "id": "QIF-T0057",
       "attack": "Network mapping (BCI topology)",
       "tactic": "QIF-N.SC",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -5365,14 +5408,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "BCI topology recon \u2014 standard CVSS reconnaissance sufficient"
+        "gap_summary": "BCI topology recon — standard CVSS reconnaissance sufficient"
       }
     },
     {
       "id": "QIF-T0058",
       "attack": "Calibration poisoning",
       "tactic": "QIF-C.IM",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -5466,7 +5509,7 @@
       "id": "QIF-T0059",
       "attack": "Pattern lock (learned pathway persistence)",
       "tactic": "QIF-C.IM",
-      "bands": "S1\u2013S2\u2192N7",
+      "bands": "S1–S2→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -5559,7 +5602,7 @@
       "id": "QIF-T0060",
       "attack": "Memory implant (cross-session persistence)",
       "tactic": "QIF-C.IM",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -5652,7 +5695,7 @@
       "id": "QIF-T0061",
       "attack": "Coherence mimicry",
       "tactic": "QIF-B.EV",
-      "bands": "I0\u2013S1",
+      "bands": "I0–S1",
       "band_ids": [
         "I0",
         "S1"
@@ -5738,14 +5781,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:L/SA:N",
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Detection evasion technique \u2014 standard CVSS sufficient"
+        "gap_summary": "Detection evasion technique — standard CVSS sufficient"
       }
     },
     {
       "id": "QIF-T0062",
       "attack": "Gradual drift (slow parameter shift)",
       "tactic": "QIF-B.EV",
-      "bands": "S1\u2192N7",
+      "bands": "S1→N7",
       "band_ids": [
         "S1",
         "N7"
@@ -5838,7 +5881,7 @@
       "id": "QIF-T0063",
       "attack": "Noise injection (detection masking)",
       "tactic": "QIF-B.EV",
-      "bands": "I0\u2013S1",
+      "bands": "I0–S1",
       "band_ids": [
         "I0",
         "S1"
@@ -5872,7 +5915,7 @@
         "mechanism": "Injection of noise into BCI data pipeline to mask ongoing attack signatures",
         "dual_use": "probable",
         "clinical": {
-          "therapeutic_analog": "Stochastic resonance (SR) \u2014 adding noise to enhance weak signal detection",
+          "therapeutic_analog": "Stochastic resonance (SR) — adding noise to enhance weak signal detection",
           "conditions": [
             "sensory enhancement (hearing, touch)",
             "balance improvement in elderly",
@@ -5932,7 +5975,7 @@
       "id": "QIF-T0064",
       "attack": "User consent fatigue (neural permission flooding)",
       "tactic": "QIF-B.EV",
-      "bands": "S2\u2013S3\u2192N7",
+      "bands": "S2–S3→N7",
       "band_ids": [
         "S2",
         "S3",
@@ -6023,7 +6066,7 @@
       "id": "QIF-T0065",
       "attack": "Algorithmic psychosis induction (recommendation weaponization)",
       "tactic": "QIF-C.EX",
-      "bands": "S3\u2192S2\u2192N5\u2013N7",
+      "bands": "S3→S2→N5–N7",
       "band_ids": [
         "S3",
         "S2",
@@ -6041,7 +6084,7 @@
       "status": "CONFIRMED",
       "severity": "critical",
       "ui_category": "CI",
-      "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI \u2014 it operates through normal sensory channels (screen \u2192 eyes \u2192 visual cortex \u2192 limbic system \u2192 prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
+      "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI — it operates through normal sensory channels (screen → eyes → visual cortex → limbic system → prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
       "legacy_ids": [],
       "legacy_technique_id": null,
       "niss": {
@@ -6119,7 +6162,7 @@
       "id": "QIF-T0066",
       "attack": "Slow drift / boiling frog (adiabatic phase space manipulation)",
       "tactic": "QIF-B.EV",
-      "bands": "I0\u2192N1\u2013N7",
+      "bands": "I0→N1–N7",
       "band_ids": [
         "I0",
         "N1",
@@ -6223,7 +6266,7 @@
       "id": "QIF-T0067",
       "attack": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
       "tactic": "QIF-N.IJ",
-      "bands": "S1\u2192I0\u2192N1\u2013N7",
+      "bands": "S1→I0→N1–N7",
       "band_ids": [
         "S1",
         "I0",
@@ -6329,7 +6372,7 @@
       "id": "QIF-T0068",
       "attack": "Bifurcation forcing (critical parameter manipulation to trigger neural state transitions)",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2192N1\u2013N5",
+      "bands": "I0→N1–N5",
       "band_ids": [
         "I0",
         "N1",
@@ -6341,14 +6384,14 @@
       "coupling": null,
       "access": "RESTRICTED",
       "classical": "None (no traditional cybersecurity equivalent)",
-      "quantum": "Native (bifurcation detection via critical slowing down \u2014 universal precursor with no baseline required)",
+      "quantum": "Native (bifurcation detection via critical slowing down — universal precursor with no baseline required)",
       "sources": [
-        "Izhikevich 2007 (Dynamical Systems in Neuroscience \u2014 bifurcation classification); Breakspear 2017 (Dynamic models of large-scale brain activity); Scheffer et al. 2009 (Early-warning signals for critical transitions, Nature); Maturana et al. 2020 (Critical slowing down as biomarker for seizure); Jirsa et al. 2014 (On the nature of seizure dynamics, Brain)"
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience — bifurcation classification); Breakspear 2017 (Dynamic models of large-scale brain activity); Scheffer et al. 2009 (Early-warning signals for critical transitions, Nature); Maturana et al. 2020 (Critical slowing down as biomarker for seizure); Jirsa et al. 2014 (On the nature of seizure dynamics, Brain)"
       ],
       "status": "EMERGING",
       "severity": "critical",
       "ui_category": "PS",
-      "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting\u2192seizure, sleep\u2192wake, focused\u2192confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) \u2014 a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
+      "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting→seizure, sleep→wake, focused→confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) — a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2063",
       "niss": {
@@ -6423,14 +6466,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Seizure induction via neural bifurcation forcing \u2014 no CVSS equivalent for tissue harm"
+        "gap_summary": "Seizure induction via neural bifurcation forcing — no CVSS equivalent for tissue harm"
       }
     },
     {
       "id": "QIF-T0069",
       "attack": "Separatrix leakage (meta-biometric extraction from dynamical transition observations)",
       "tactic": "QIF-D.HV",
-      "bands": "N3\u2013N7\u2192I0\u2192S1",
+      "bands": "N3–N7→I0→S1",
       "band_ids": [
         "N3",
         "N4",
@@ -6450,7 +6493,7 @@
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "EX",
-      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry \u2014 the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
+      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2064",
       "niss": {
@@ -6532,7 +6575,7 @@
       "id": "QIF-T0070",
       "attack": "Integrator/resonator type switching (tonic excitability manipulation)",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2192N1\u2013N4",
+      "bands": "I0→N1–N4",
       "band_ids": [
         "I0",
         "N1",
@@ -6543,14 +6586,14 @@
       "coupling": null,
       "access": "RESTRICTED",
       "classical": "None (no traditional cybersecurity equivalent)",
-      "quantum": "Native (QI detects computational mode shifts via firing pattern analysis \u2014 integrator vs resonator signatures are distinct)",
+      "quantum": "Native (QI detects computational mode shifts via firing pattern analysis — integrator vs resonator signatures are distinct)",
       "sources": [
-        "Izhikevich 2007 (Dynamical Systems in Neuroscience \u2014 integrator/resonator classification); Prescott et al. 2008 (Biophysical basis for three distinct dynamical mechanisms of action potential initiation, PLoS Computational Biology)"
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience — integrator/resonator classification); Prescott et al. 2008 (Biophysical basis for three distinct dynamical mechanisms of action potential initiation, PLoS Computational Biology)"
       ],
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "PS",
-      "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization \u2014 effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
+      "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization — effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2065",
       "niss": {
@@ -6633,7 +6676,7 @@
       "id": "QIF-T0071",
       "attack": "Baseline adaptation poisoning (re-enrollment window exploitation)",
       "tactic": "QIF-C.IM",
-      "bands": "S1\u2192S2\u2192I0",
+      "bands": "S1→S2→I0",
       "band_ids": [
         "S1",
         "S2",
@@ -6642,7 +6685,7 @@
       "coupling": null,
       "access": "LICENSED",
       "classical": "Partial (credential stuffing during password reset)",
-      "quantum": "Enhanced (baseline-free biological TLS eliminates the attack surface entirely \u2014 no baselines to poison)",
+      "quantum": "Enhanced (baseline-free biological TLS eliminates the attack surface entirely — no baselines to poison)",
       "sources": [
         "Bigdely-Shamlo et al. 2015 (Brain activity-based image classification, Journal of Neural Engineering); Arias-Cabarcos et al. 2021 (EEG biometric system attacks); Debie et al. 2020 (Cross-session/cross-device replay)"
       ],
@@ -6727,6 +6770,943 @@
         "gap_group": 3,
         "gap_summary": "Baseline adaptation poisoning causing persistent cognitive drift beyond CVSS"
       }
+    },
+    {
+      "id": "QIF-T0072",
+      "attack": "Transducer inversion (acoustic eavesdropping via speaker-to-microphone reprogramming)",
+      "tactic": "QIF-S.RP",
+      "bands": "S1→S2→S3",
+      "band_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No (purely classical hardware/firmware exploit)",
+      "sources": [
+        "Guri et al. 2017 (SPEAKE(a)R: Turn Speakers to Microphones for Fun and Profit, arXiv:1611.07350)",
+        "RealTek HD Audio Codec specification (jack retasking registers)",
+        "Deshotels 2014 (Inaudible sound as a covert channel)"
+      ],
+      "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "SE",
+      "notes": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional — a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2067",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+        "score": 2.0,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1195.002",
+          "T1557",
+          "T1040"
+        ],
+        "secondary_tactics": [
+          "QIF-B.IN",
+          "QIF-D.HV"
+        ]
+      },
+      "tara": {
+        "mechanism": "Electromagnetic transducer bidirectionality exploited via codec register retasking to convert audio output hardware into covert microphone",
+        "dual_use": "silicon_only",
+        "clinical": null,
+        "governance": {
+          "consent_tier": "standard",
+          "monitoring": [
+            "firmware_integrity",
+            "codec_register_state",
+            "audio_routing_audit",
+            "supply_chain_verification"
+          ],
+          "regulations": [
+            "FCC Part 15",
+            "ECPA (18 U.S.C. § 2511)",
+            "GDPR Art. 5",
+            "EU Cyber Resilience Act"
+          ],
+          "data_classification": "PII",
+          "safety_ceiling": "Audio codec jack retasking registers should be locked post-boot; firmware signing mandatory; supply chain attestation"
+        },
+        "engineering": {
+          "coupling": [
+            "acoustic",
+            "electromagnetic"
+          ],
+          "parameters": {
+            "frequency_response_Hz": "20-3400 (degraded vs dedicated mic)",
+            "SNR_dB": "~25 (sufficient for speech intelligibility)",
+            "codec_registers": "RealTek jack retasking (vendor-specific)"
+          },
+          "hardware": [
+            "electromagnetic_transducer",
+            "audio_codec_with_retasking",
+            "ADC_path"
+          ],
+          "detection": "Codec register monitoring, jack sense state auditing, firmware integrity verification, unexpected ADC activity on output channels"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:C",
+        "gap_group": 1,
+        "gap_summary": "Standard eavesdropping via hardware repurposing; CVSS confidentiality metrics apply well"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-B.IN",
+          "QIF-D.HV"
+        ],
+        "note": "Speaker→mic repurposing enables BCI intrusion pathway and data harvest"
+      }
+    },
+    {
+      "id": "QIF-T0073",
+      "attack": "Ear-canal neural eavesdropping via modified consumer earbud (supply chain in-ear EEG)",
+      "tactic": "QIF-S.RP",
+      "bands": "S1→I0→N1–N3",
+      "band_ids": [
+        "S1",
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "coupling": "CONTACT",
+      "access": null,
+      "classical": "Partial (EEG artifact detection exists but not in consumer devices)",
+      "quantum": "Enhanced (QI coherence metric would detect unauthorized neural data acquisition if deployed)",
+      "sources": [
+        "Kaveh et al. 2020 (In-ear EEG: robust, unobtrusive, automatic, IEEE Trans Biomed Eng)",
+        "Idun Technologies 2023 (Guardian in-ear EEG sensor)",
+        "Debener et al. 2015 (cEEGrid: compact ear-EEG, J Neural Eng)",
+        "Bleichner & Debener 2017 (Concealed, unobtrusive ear-centered EEG acquisition, Front Hum Neurosci)",
+        "Looney et al. 2012 (In-the-ear recording concept, IEEE EMBC)"
+      ],
+      "status": "EMERGING",
+      "severity": "critical",
+      "ui_category": "SE",
+      "notes": "The ear canal is 5-10mm from temporal cortex through the canal wall and temporal bone — close enough for a conductive ear tip with a high-gain biopotential amplifier to capture cortical EEG. Commercial in-ear EEG has been proven viable (Idun Guardian, cEEGrid, Cognionics). In a supply chain attack, a consumer earbud is modified to include: (1) a conductive silicone ear tip that makes galvanic contact with ear canal skin, (2) a sub-$5 biopotential amplifier (e.g., ADS1299 or TI ADS129x family) hidden in the earbud housing, and (3) modified firmware that multiplexes captured EEG data alongside normal audio. The captured signals include auditory evoked potentials (AEP), P300 attention markers, N400 semantic processing indicators, and alpha/theta power reflecting cognitive state. Generic earbuds lacking proprietary authentication (unlike Apple AirPods with W1/H1 chip) are the attack surface. The attacker gets continuous neural telemetry from a device the target wears voluntarily for hours daily. This is the bridge technique between QIF-T0072 (acoustic eavesdropping) and QIF-T0074 (cognitive inference): it turns a consumer audio device into a covert neural recording platform.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2068",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+        "score": 2.7,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0003",
+          "QIF-T0072",
+          "QIF-T0074",
+          "QIF-T0079",
+          "T1195.002"
+        ],
+        "secondary_tactics": [
+          "QIF-B.IN",
+          "QIF-N.SC",
+          "QIF-D.HV"
+        ]
+      },
+      "tara": {
+        "mechanism": "Conductive ear tip and embedded biopotential amplifier in consumer earbud captures in-ear EEG from temporal cortex via ear canal proximity",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "In-ear EEG for seizure detection, sleep staging, cognitive monitoring",
+          "conditions": [
+            "epilepsy monitoring (continuous ambulatory EEG)",
+            "sleep disorder diagnosis",
+            "ADHD attention monitoring",
+            "anesthesia depth monitoring"
+          ],
+          "fda_status": "investigational",
+          "evidence_level": "cohort",
+          "safe_parameters": "Passive recording only; conductive gel ear tips; <100 µV signal range; no stimulation",
+          "sources": [
+            "Kaveh et al. 2020 (IEEE Trans Biomed Eng)",
+            "Debener et al. 2015 (J Neural Eng, cEEGrid validation)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "signal_quality",
+            "data_encryption_status",
+            "access_audit_log",
+            "supply_chain_verification"
+          ],
+          "regulations": [
+            "HIPAA",
+            "GDPR Art. 9",
+            "21 CFR Part 11",
+            "EU AI Act (high-risk biometric)",
+            "proposed neurorights legislation"
+          ],
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "Neural data collection requires explicit informed consent; ear-tip biocompatibility (ISO 10993); data encrypted at rest and in transit"
+        },
+        "engineering": {
+          "coupling": [
+            "electromagnetic",
+            "galvanic"
+          ],
+          "parameters": {
+            "electrode_distance_mm": "5-10 (canal wall to temporal cortex)",
+            "signal_range_uV": "1-100",
+            "bandwidth_Hz": "0.5-100",
+            "amplifier_gain": "1000-10000x",
+            "ADC_bits": "24"
+          },
+          "hardware": [
+            "conductive_ear_tip",
+            "biopotential_amplifier",
+            "24bit_ADC",
+            "bluetooth_transceiver",
+            "earbud_housing"
+          ],
+          "detection": "Impedance monitoring at ear tip contact, unexpected BLE data volume, firmware integrity verification, current draw anomaly detection"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:P/AU:Y/R:A/V:C",
+        "gap_group": 3,
+        "gap_summary": "Covert neural data capture from consumer device — mental privacy violation not expressible in CVSS confidentiality"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-T0003",
+          "QIF-N.SC",
+          "QIF-D.HV"
+        ],
+        "note": "Earbud→EEG repurposing feeds neural scanning and data harvest; relates to T0003 (signal injection)"
+      }
+    },
+    {
+      "id": "QIF-T0074",
+      "attack": "Cognitive inference from longitudinal in-ear EEG (personalized cognitive profiling)",
+      "tactic": "QIF-S.HV",
+      "bands": "N3–N7→S2→S3",
+      "band_ids": [
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7",
+        "S2",
+        "S3"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Enhanced (QI privacy filter enables data minimization; coherence metric detects unauthorized cognitive profiling)",
+      "sources": [
+        "Martinovic et al. 2012 (On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces, USENIX Security)",
+        "Landau et al. 2020 (Mind Reading: An Idea Whose Time Has Come?)",
+        "Roy et al. 2019 (Deep learning-based EEG analysis, J Neural Eng)",
+        "Kostas et al. 2021 (BENDR: EEG foundation model, Front Hum Neurosci)",
+        "Chen et al. 2024 (Large-scale EEG pre-training for cognitive state decoding)"
+      ],
+      "status": "EMERGING",
+      "severity": "critical",
+      "ui_category": "EX",
+      "notes": "Given continuous in-ear EEG from QIF-T0073, an ML pipeline trained on the target's neural data over days-to-weeks builds a personalized cognitive profile. Phase 1: baseline extraction (resting alpha power, theta/beta ratio, individual alpha frequency). Phase 2: event-related feature learning (P300 amplitude to stimuli, N400 to semantic content, auditory steady-state responses). Phase 3: longitudinal pattern recognition (attention cycles, emotional valence responses, fatigue signatures, cognitive load indicators). Phase 4: adaptive exploitation — the attacker can now predict the target's cognitive state in real-time and optimize content delivery (ads, misinformation, persuasion) to moments of maximal susceptibility (high theta/low beta = low vigilance, elevated P300 = high attention to specific content). This is the cognitive analog of behavioral advertising but operating on neural signals rather than click patterns. Foundation models for EEG (BENDR, LaBraM) make transfer learning from small per-user datasets feasible. The attack chain is: QIF-T0072 (acoustic access) → QIF-T0073 (neural data capture) → QIF-T0074 (cognitive exploitation).",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2069",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:H/CV:I/RV:F/NP:T",
+        "score": 4.4,
+        "severity": "medium",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0041",
+          "QIF-T0073",
+          "QIF-T0036",
+          "T1005",
+          "T1119"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV",
+          "QIF-M.SV",
+          "QIF-C.EX"
+        ]
+      },
+      "tara": {
+        "mechanism": "Machine learning model trained on longitudinal in-ear EEG data to infer cognitive states, build personalized profiles, and enable adaptive neural-targeted content manipulation",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Longitudinal EEG monitoring for neurofeedback and cognitive rehabilitation",
+          "conditions": [
+            "ADHD neurofeedback training",
+            "depression treatment monitoring (alpha asymmetry tracking)",
+            "cognitive decline early detection (MCI/Alzheimer's)",
+            "personalized learning optimization"
+          ],
+          "fda_status": "cleared",
+          "evidence_level": "RCT",
+          "safe_parameters": "Informed consent for cognitive profiling; purpose limitation to therapeutic goals; data minimization; right to deletion",
+          "sources": [
+            "Arns et al. 2009 (Biol Psychology, neurofeedback for ADHD)",
+            "Babiloni et al. 2016 (Neurobiol Aging, EEG biomarkers)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "IRB",
+          "monitoring": [
+            "cognitive_assessment",
+            "behavioral_tracking",
+            "informed_consent_renewal",
+            "model_output_audit"
+          ],
+          "regulations": [
+            "HIPAA",
+            "GDPR Art. 9 (biometric data)",
+            "GDPR Art. 22 (automated decision-making)",
+            "EU AI Act (high-risk biometric processing)",
+            "proposed neurorights legislation",
+            "FTC Act Section 5 (unfair practices)"
+          ],
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "Cognitive profiling requires explicit opt-in consent; model interpretability mandatory; no dark-pattern exploitation of inferred states; right to cognitive liberty"
+        },
+        "engineering": {
+          "coupling": [
+            "computational"
+          ],
+          "parameters": {
+            "training_data_hours": "10-100 (personalization threshold)",
+            "features": "spectral_power, ERPs, connectivity, temporal_dynamics",
+            "model_type": "transformer/CNN (fine-tuned from EEG foundation model)",
+            "inference_latency_ms": "<500",
+            "classification_accuracy": "70-90% (state-dependent)"
+          },
+          "hardware": [
+            "ML_inference_engine",
+            "EEG_feature_pipeline",
+            "cloud_or_edge_compute",
+            "content_delivery_system"
+          ],
+          "detection": "Cognitive profiling audit logging, neural data access monitoring, model output explainability, anomalous content personalization detection"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
+        "supplemental": "S:P/AU:Y/R:A/V:D",
+        "gap_group": 3,
+        "gap_summary": "Longitudinal cognitive profiling and adaptive neural manipulation — cognitive liberty violation has no CVSS equivalent"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-T0041",
+          "QIF-C.EX",
+          "QIF-M.SV"
+        ],
+        "note": "Cognitive profiling via consumer sensors feeds cognitive exploitation and model subversion"
+      }
+    },
+    {
+      "id": "QIF-T0075",
+      "attack": "Ultrasonic sonar vital sign extraction (inaudible Doppler physiological sensing)",
+      "tactic": "QIF-S.HV",
+      "bands": "S1→S2→S3",
+      "band_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "coupling": "ACOUSTIC",
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No (purely classical acoustic physics)",
+      "sources": [
+        "Wang et al. 2019 (UltraSense: contactless vital sign monitoring via ultrasound, ACM MobiSys)",
+        "Nandakumar et al. 2015 (Contactless Sleep Apnea Detection on Smartphones, ACM MobiSys)",
+        "Xu et al. 2019 (Waveear: phone-based ear biometric via ultrasonic, IEEE INFOCOM)",
+        "Ling et al. 2020 (UltraGesture: fine-grained gesture recognition via ultrasonic)",
+        "Google Pixel Soli/Nest Hub Sleep Sensing (production deployment of radar/ultrasonic vital signs)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "SE",
+      "notes": "A phone or earbud speaker emits an inaudible continuous-wave ultrasonic tone (18-22 kHz, within transducer bandwidth but above human hearing threshold). The built-in microphone captures the reflected signal. Chest wall motion from breathing (amplitude: ~5mm) and heartbeat (amplitude: ~0.1mm) create Doppler shifts in the reflected ultrasound that are demodulable with standard DSP. The technique is: (1) covert — the ultrasonic tone is inaudible to the target, (2) contactless — works from across a room (demonstrated up to 0.5m for heart rate, several meters for respiration), (3) requires NO hardware modification — stock smartphone speakers and microphones are sufficient, and (4) can be deployed as a background process in any app with microphone permission. Google's Nest Hub Sleep Sensing and academic research (UltraSense, Nandakumar et al.) have demonstrated production-quality vital sign extraction via this method. Attack scenario: any app with mic access silently emits ultrasound and extracts heart rate, breathing rate, and movement patterns. Combined with QIF-T0079 (ear canal fingerprinting), the attacker gets identity + vitals from the same acoustic pipeline.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2070",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:E/RV:F/NP:N",
+        "score": 1.4,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0076",
+          "QIF-T0078",
+          "QIF-T0079",
+          "T1040",
+          "T1123"
+        ],
+        "secondary_tactics": [
+          "QIF-N.SC",
+          "QIF-D.HV"
+        ]
+      },
+      "tara": {
+        "mechanism": "Inaudible ultrasonic continuous-wave emission from consumer speaker with Doppler shift analysis of reflected signal to extract cardiac and respiratory micro-movements",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Contactless vital sign monitoring for sleep studies and elder care",
+          "conditions": [
+            "sleep apnea detection (FDA-cleared: Google Nest Hub)",
+            "contactless infant breathing monitoring",
+            "elder care fall detection and vital signs",
+            "post-surgical respiration monitoring"
+          ],
+          "fda_status": "cleared",
+          "evidence_level": "RCT",
+          "safe_parameters": "Ultrasonic emission <85 dB SPL at 20cm; within OSHA hearing conservation limits; no tissue heating at consumer power levels",
+          "sources": [
+            "Nandakumar et al. 2015 (MobiSys, sleep apnea)",
+            "Google 2021 (Nest Hub 2nd gen sleep sensing, FCC/FDA clearance)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "ultrasonic_emission_detection",
+            "microphone_access_audit",
+            "data_encryption_status",
+            "app_permission_review"
+          ],
+          "regulations": [
+            "HIPAA (if health data derived)",
+            "GDPR Art. 9 (health data)",
+            "FCC Part 15 (ultrasonic emissions)",
+            "FDA 510(k) (if marketed as health device)"
+          ],
+          "data_classification": "PHI",
+          "safety_ceiling": "Ultrasonic emission power within consumer device limits; informed consent for physiological monitoring; data retention limits"
+        },
+        "engineering": {
+          "coupling": [
+            "acoustic"
+          ],
+          "parameters": {
+            "carrier_frequency_kHz": "18-22",
+            "doppler_shift_Hz": "0.01-5 (heartbeat/breathing modulation)",
+            "range_m": "0.1-3 (heart rate), 0.5-8 (respiration)",
+            "SNR_requirement_dB": ">15"
+          },
+          "hardware": [
+            "consumer_speaker",
+            "consumer_microphone",
+            "DSP_processor"
+          ],
+          "detection": "Ultrasonic emission spectrum monitoring (18-22 kHz band), microphone permission auditing, unexpected speaker activity during idle, spectral analysis of ambient ultrasound"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Covert physiological data extraction partially captured by CVSS confidentiality; health privacy dimension not fully expressed"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-D.HV",
+          "QIF-P.DS"
+        ],
+        "note": "Ultrasonic vital sign extraction feeds physiological data harvest"
+      }
+    },
+    {
+      "id": "QIF-T0076",
+      "attack": "Haptic motor body sonar (taptic engine repurposing for tissue impedance profiling)",
+      "tactic": "QIF-S.HV",
+      "bands": "S1→S2",
+      "band_ids": [
+        "S1",
+        "S2"
+      ],
+      "coupling": "ACOUSTIC",
+      "access": "RESTRICTED",
+      "classical": "Yes",
+      "quantum": "No (classical acoustic impedance measurement)",
+      "sources": [
+        "Ding et al. 2020 (Body-area acoustic sensing: skin vibration for health monitoring)",
+        "Chen et al. 2021 (EarHealth: in-ear acoustic sensing for health monitoring, ACM IMWUT)",
+        "Yao et al. 2022 (Vibration-based tissue characterization with consumer wearables)",
+        "Apple Taptic Engine patents (linear resonant actuator, broadband excitation capability)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "SE",
+      "notes": "A phone's haptic actuator (e.g., Apple Taptic Engine, linear resonant actuator) is driven at known frequencies (100 Hz - 5 kHz sweep) while in contact with the body. The built-in accelerometer and/or microphone measures the tissue response: acoustic impedance varies by tissue type (bone, muscle, fat, fluid), depth, and composition. This is a simplified form of acoustic impedance spectroscopy or elastography using consumer hardware. The technique requires: (1) physical contact between device and body (phone against skin), (2) firmware-level or jailbreak access to drive the haptic motor at arbitrary frequencies (consumer APIs limit haptic patterns), and (3) raw accelerometer access at high sample rates. Potential extractions: body composition estimation, subcutaneous fluid detection (edema), bone density approximation, tissue stiffness changes. This is significantly lower resolution than clinical ultrasound elastography but could distinguish gross tissue categories. The attack surface is narrow (requires physical contact + firmware access), but wearable devices (Apple Watch, fitness bands) that maintain constant skin contact and contain both haptic motors and accelerometers present an always-on version of this attack.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2071",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:E/RV:F/NP:N",
+        "score": 1.4,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0075",
+          "QIF-T0078",
+          "T1005"
+        ],
+        "secondary_tactics": [
+          "QIF-N.SC",
+          "QIF-D.HV"
+        ]
+      },
+      "tara": {
+        "mechanism": "Haptic actuator driven at swept frequencies against body surface; accelerometer measures tissue acoustic impedance response for composition profiling",
+        "dual_use": "probable",
+        "clinical": {
+          "therapeutic_analog": "Acoustic impedance spectroscopy for body composition and edema monitoring",
+          "conditions": [
+            "body composition assessment (fat/muscle ratio)",
+            "edema detection (heart failure monitoring)",
+            "bone density screening",
+            "wound healing monitoring"
+          ],
+          "fda_status": "none",
+          "evidence_level": "preclinical",
+          "safe_parameters": "Haptic motor output <2G acceleration; frequency sweep within consumer actuator range; no tissue heating",
+          "sources": [
+            "Ding et al. 2020 (body-area acoustic sensing)",
+            "Chen et al. 2021 (ACM IMWUT, EarHealth)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "haptic_motor_usage_audit",
+            "accelerometer_access_logging",
+            "firmware_integrity",
+            "data_encryption_status"
+          ],
+          "regulations": [
+            "HIPAA (if health data derived)",
+            "GDPR Art. 9 (health data)",
+            "IEC 60601-1 (if used as medical device)",
+            "FDA 510(k) (if marketed for body composition)"
+          ],
+          "data_classification": "PHI",
+          "safety_ceiling": "Haptic output within consumer device safety limits; informed consent for body composition data; no sustained high-frequency vibration"
+        },
+        "engineering": {
+          "coupling": [
+            "acoustic",
+            "mechanical"
+          ],
+          "parameters": {
+            "frequency_sweep_Hz": "100-5000",
+            "accelerometer_sample_rate_Hz": ">1000",
+            "contact_force_N": "1-5 (phone against skin)",
+            "resolution": "gross tissue type (bone/muscle/fat/fluid)"
+          },
+          "hardware": [
+            "linear_resonant_actuator",
+            "accelerometer",
+            "MEMS_microphone",
+            "DSP_processor"
+          ],
+          "detection": "Unexpected haptic motor activation patterns, accelerometer access during non-UI haptic events, firmware integrity verification"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:P/AC:H/AT:P/PR:H/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:N/AU:N/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Body composition extraction via consumer hardware partially captured by CVSS; health data sensitivity not fully expressed"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-D.HV"
+        ],
+        "note": "Haptic body sonar feeds physiological data harvest"
+      }
+    },
+    {
+      "id": "QIF-T0077",
+      "attack": "IR vascular mapping via Face ID system (NIR hemoglobin absorption imaging)",
+      "tactic": "QIF-S.HV",
+      "bands": "S1→S2→S3",
+      "band_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "coupling": "OPTICAL",
+      "access": "RESTRICTED",
+      "classical": "Yes",
+      "quantum": "No (classical near-infrared spectroscopy)",
+      "sources": [
+        "Apple TrueDepth Camera System (Face ID, 30,000 IR dots at 940nm)",
+        "Crouzet et al. 2016 (Cerebrovascular mapping using NIR, NeuroImage)",
+        "Gupta et al. 2020 (Vein pattern recognition biometrics, IEEE Access)",
+        "Krishnaswamy & Baranoski 2004 (Bio-physically based rendering of human skin)",
+        "Hardeberg & Farup 2004 (NIR skin penetration depth models)"
+      ],
+      "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "SE",
+      "notes": "Apple's Face ID TrueDepth system projects 30,000 infrared dots at 940nm onto the user's face and reads the reflection pattern with an IR camera. At 940nm, photons penetrate skin to a depth of 2-5mm — well into the dermal vascular layer. Oxygenated hemoglobin (HbO2) and deoxygenated hemoglobin (Hb) have different absorption coefficients at 940nm, meaning the reflected dot pattern encodes subsurface vascular topology: arterial vs venous vessels, vessel diameter, branching patterns, and oxygenation gradients. This vascular map is a permanent biometric (unlike facial features, which change with age/surgery/expression) and is unique per individual (even identical twins have different vascular topology). In the attack scenario, a jailbroken iPhone or compromised Face ID firmware extracts raw IR reflection data (normally processed in the Secure Enclave and discarded) during routine phone unlock. The target never knows their vascular biometric has been captured. Every phone unlock becomes a silent biometric scan. This is analogous to fingerprinting (unreplaceable biometric) but captured at range and without the target's awareness. Combined with QIF-T0078 (pulse waveform), the same IR system yields both vascular structure and cardiac dynamics.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2072",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+        "score": 2.0,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0032",
+          "QIF-T0078",
+          "QIF-T0036",
+          "T1040",
+          "T1556"
+        ],
+        "secondary_tactics": [
+          "QIF-N.SC",
+          "QIF-B.IN",
+          "QIF-D.HV"
+        ]
+      },
+      "tara": {
+        "mechanism": "Face ID IR dot projector (940nm) captures subsurface vascular topology via differential hemoglobin absorption; raw IR data extracted from compromised Secure Enclave pipeline",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Near-infrared spectroscopy (NIRS) for cerebral and peripheral vascular imaging",
+          "conditions": [
+            "peripheral artery disease screening",
+            "diabetic vascular assessment",
+            "tissue oxygenation monitoring (wound care)",
+            "cerebral hemodynamics (fNIRS)"
+          ],
+          "fda_status": "cleared",
+          "evidence_level": "RCT",
+          "safe_parameters": "940nm NIR at Face ID power levels (<1 mW/cm²); IEC 62471 photobiological safety; no thermal risk at consumer power",
+          "sources": [
+            "Crouzet et al. 2016 (NeuroImage, cerebrovascular NIR)",
+            "Gupta et al. 2020 (IEEE Access, vein pattern biometrics)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "secure_enclave_integrity",
+            "IR_sensor_access_audit",
+            "biometric_data_handling",
+            "firmware_integrity"
+          ],
+          "regulations": [
+            "GDPR Art. 9 (biometric data)",
+            "Illinois BIPA (biometric data capture without consent)",
+            "CCPA (biometric identifiers)",
+            "IEC 62471 (photobiological safety)",
+            "proposed neurorights legislation"
+          ],
+          "data_classification": "PII",
+          "safety_ceiling": "IR exposure within IEC 62471 exempt group; biometric data processed in Secure Enclave; raw IR data never leaves hardware security module"
+        },
+        "engineering": {
+          "coupling": [
+            "optical"
+          ],
+          "parameters": {
+            "wavelength_nm": 940,
+            "dot_count": 30000,
+            "skin_penetration_mm": "2-5",
+            "frame_rate_Hz": 30,
+            "power_mW_cm2": "<1"
+          },
+          "hardware": [
+            "VCSEL_dot_projector",
+            "IR_camera",
+            "secure_enclave",
+            "depth_processor"
+          ],
+          "detection": "Secure Enclave attestation, IR sensor access logging, unexpected TrueDepth API usage, jailbreak detection"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:L/AC:H/AT:P/PR:H/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:N/R:U/V:C",
+        "gap_group": 2,
+        "gap_summary": "Permanent vascular biometric extraction partially captured by CVSS; unreplaceable biometric loss (like neural biometric) not fully expressible"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-T0032",
+          "QIF-D.HV",
+          "QIF-B.IN"
+        ],
+        "note": "IR vascular mapping feeds biometric identity + data harvest + intrusion targeting"
+      }
+    },
+    {
+      "id": "QIF-T0078",
+      "attack": "LiDAR remote pulse detection (laser Doppler vibrometry for cardiac waveform extraction)",
+      "tactic": "QIF-S.HV",
+      "bands": "S1→S2→S3",
+      "band_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "coupling": "OPTICAL",
+      "access": "RESTRICTED",
+      "classical": "Yes",
+      "quantum": "No (classical Doppler vibrometry)",
+      "sources": [
+        "Apple iPhone LiDAR Scanner (dToF, 940nm VCSEL array, introduced iPhone 12 Pro)",
+        "Bernal et al. 2018 (Non-contact physiological monitoring using laser Doppler vibrometry)",
+        "Antognoli et al. 2020 (Contactless heart rate measurement via laser Doppler vibrometry, Sensors)",
+        "Sun et al. 2022 (Smartphone LiDAR for physiological sensing, IEEE Sensors J)",
+        "Rothberg et al. 2017 (Comprehensive review of laser Doppler vibrometry, Opt Lasers Eng)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "SE",
+      "notes": "The iPhone LiDAR scanner uses a VCSEL (vertical-cavity surface-emitting laser) array emitting pulsed 940nm infrared laser light and a SPAD (single-photon avalanche diode) detector array measuring time-of-flight. In normal operation, it measures depth for AR applications. However, the same hardware can function as a simplified laser Doppler vibrometer (LDV): when the laser beam reflects off skin, the pulse wave from cardiac activity causes micro-vibrations (amplitude ~1-10 µm) on the skin surface. These vibrations create measurable Doppler shifts or time-of-flight variations in the reflected laser signal. Extracting the cardiac pulse waveform from LiDAR data requires raw access to the SPAD photodetector output (timing resolution in picoseconds) rather than the processed depth map. This requires either a jailbreak, hardware teardown, or compromised firmware. The extracted pulse waveform contains: heart rate, heart rate variability (HRV), pulse transit time (correlated with blood pressure), and potentially cardiac arrhythmia signatures. Unlike QIF-T0075 (ultrasonic sonar), this is optical and directional, requiring line-of-sight but working at greater precision for skin-surface vibrations. Range is limited to ~5m (LiDAR operational range) but could be extended with higher-power laser sources.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2073",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:E/RV:F/NP:N",
+        "score": 1.4,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0075",
+          "QIF-T0077",
+          "T1040",
+          "T1005"
+        ],
+        "secondary_tactics": [
+          "QIF-N.SC",
+          "QIF-D.HV"
+        ]
+      },
+      "tara": {
+        "mechanism": "iPhone VCSEL LiDAR array measures skin surface micro-vibrations via Doppler shift in reflected 940nm laser; pulse waveform extracted from raw SPAD photodetector timing data",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Laser Doppler vibrometry for contactless cardiac monitoring",
+          "conditions": [
+            "contactless vital sign monitoring in burn units",
+            "neonatal heart rate monitoring (no adhesive sensors)",
+            "remote triage in mass casualty events",
+            "sleep lab cardiac monitoring"
+          ],
+          "fda_status": "investigational",
+          "evidence_level": "cohort",
+          "safe_parameters": "940nm laser at Class 1 eye-safe power levels (IEC 60825-1); <1 mW accessible emission; no tissue heating",
+          "sources": [
+            "Bernal et al. 2018 (Laser Doppler vibrometry for physiology)",
+            "Antognoli et al. 2020 (Sensors, LDV heart rate)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "LiDAR_sensor_access_audit",
+            "raw_SPAD_data_access",
+            "firmware_integrity",
+            "data_encryption_status"
+          ],
+          "regulations": [
+            "HIPAA (if health data derived)",
+            "GDPR Art. 9 (health data)",
+            "IEC 60825-1 (laser safety Class 1)",
+            "FDA 510(k) (if marketed for cardiac monitoring)"
+          ],
+          "data_classification": "PHI",
+          "safety_ceiling": "Laser emission within IEC 60825-1 Class 1 limits; raw SPAD data access requires hardware security module bypass; informed consent for physiological data extraction"
+        },
+        "engineering": {
+          "coupling": [
+            "optical"
+          ],
+          "parameters": {
+            "wavelength_nm": 940,
+            "detector_type": "SPAD (single-photon avalanche diode)",
+            "timing_resolution_ps": "<100",
+            "skin_vibration_amplitude_um": "1-10",
+            "operational_range_m": "0.5-5",
+            "laser_class": "1 (eye-safe)"
+          },
+          "hardware": [
+            "VCSEL_array",
+            "SPAD_detector_array",
+            "time_correlator",
+            "DSP_processor"
+          ],
+          "detection": "LiDAR sensor access logging, unexpected dToF measurements directed at people, raw SPAD data access monitoring, jailbreak detection"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:L/AC:H/AT:P/PR:H/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:N/AU:N/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Contactless cardiac waveform extraction partially captured by CVSS confidentiality; physiological privacy dimension not fully expressed"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-D.HV"
+        ],
+        "note": "LiDAR pulse detection feeds physiological data harvest"
+      }
+    },
+    {
+      "id": "QIF-T0079",
+      "attack": "Ear canal acoustic fingerprinting (ANC echo profiling for covert identification)",
+      "tactic": "QIF-S.FP",
+      "bands": "S1→S2→S3",
+      "band_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "coupling": "ACOUSTIC",
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No (classical acoustic resonance measurement)",
+      "sources": [
+        "NEC Corporation 2016 (Ear acoustic authentication technology)",
+        "Gao et al. 2019 (EarEcho: Continuous ear canal authentication, ACM IMWUT)",
+        "Fan et al. 2021 (HeadFi: continuous earphone authentication using ear biometrics, ACM SenSys)",
+        "Apple AirPods Pro ANC system (feedforward + feedback microphones, adaptive transparency)",
+        "Akkermans et al. 2005 (Acoustic ear recognition, IEEE ICB)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "CI",
+      "notes": "Active noise cancellation (ANC) earbuds already contain the complete hardware for ear canal acoustic fingerprinting: an inward-facing (feedback) microphone that measures sound inside the ear canal, an outward-facing (feedforward) microphone, and a speaker that can emit probe tones. When the speaker emits a broadband chirp or swept sine, the inward-facing microphone captures the echo profile shaped by the ear canal's unique geometry: length (~25mm), diameter (~7mm), tympanic membrane compliance, and the specific curvature of the bends. This acoustic transfer function is a biometric — NEC demonstrated it for authentication with >99% accuracy. In the attack scenario, the ANC system's existing probe tones (used for adaptive fit detection and transparency mode calibration) are leveraged to silently fingerprint the wearer without their knowledge. The earbuds know WHO is wearing them at all times. Combined with audioplethysmography (PPG via in-ear speaker/mic measuring blood volume changes), the same hardware simultaneously provides identity + heart rate: a silent surveillance pipeline requiring zero hardware modification on ANC earbuds. Attack surface: firmware update, compromised ANC calibration routine, or malicious SDK in earbud companion app.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2074",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+        "score": 2.0,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "QIF-T0032",
+          "QIF-T0036",
+          "QIF-T0073",
+          "QIF-T0075",
+          "T1040",
+          "T1556"
+        ],
+        "secondary_tactics": [
+          "QIF-D.HV",
+          "QIF-B.IN",
+          "QIF-N.SC"
+        ]
+      },
+      "tara": {
+        "mechanism": "ANC earbud speaker emits probe tone; feedback microphone captures ear canal echo profile shaped by unique anatomical geometry; acoustic transfer function serves as biometric identifier",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Ear canal acoustic authentication for medical device access control",
+          "conditions": [
+            "hearing aid personalization (acoustic fit verification)",
+            "continuous authentication for hearing-assistive BCIs",
+            "otoacoustic emission screening (newborn hearing tests)",
+            "middle ear health monitoring (tympanometry equivalent)"
+          ],
+          "fda_status": "none",
+          "evidence_level": "cohort",
+          "safe_parameters": "Probe tones within ANC operational range (20 Hz - 10 kHz); SPL within hearing safety limits (<85 dB); brief duration (<100ms per probe)",
+          "sources": [
+            "NEC Corporation 2016 (ear acoustic authentication)",
+            "Gao et al. 2019 (ACM IMWUT, EarEcho)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "ANC_probe_tone_audit",
+            "biometric_data_handling",
+            "firmware_integrity",
+            "companion_app_permissions"
+          ],
+          "regulations": [
+            "GDPR Art. 9 (biometric data)",
+            "Illinois BIPA (biometric collection without consent)",
+            "CCPA (biometric identifiers)",
+            "EU AI Act (biometric identification systems)"
+          ],
+          "data_classification": "PII",
+          "safety_ceiling": "Acoustic probe within hearing safety limits; biometric data processed locally (not transmitted); explicit consent for identification use; ear canal biometric treated as irrevocable"
+        },
+        "engineering": {
+          "coupling": [
+            "acoustic"
+          ],
+          "parameters": {
+            "probe_type": "broadband chirp or swept sine",
+            "frequency_range_Hz": "200-8000",
+            "probe_duration_ms": "10-100",
+            "identification_accuracy_pct": ">99 (NEC demonstration)",
+            "canal_length_mm": "~25",
+            "canal_diameter_mm": "~7"
+          },
+          "hardware": [
+            "ANC_speaker",
+            "feedback_microphone",
+            "feedforward_microphone",
+            "DSP_processor"
+          ],
+          "detection": "ANC probe tone frequency/timing audit, unexpected acoustic measurements outside ANC calibration cycle, biometric data transmission monitoring, firmware integrity verification"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Covert biometric identification via consumer earbud partially captured by CVSS; irrevocable biometric capture dimension not fully expressed"
+      },
+      "feeds_into": {
+        "targets": [
+          "QIF-T0032",
+          "QIF-T0036",
+          "QIF-B.IN"
+        ],
+        "note": "Ear canal fingerprinting feeds biometric identity + targeted BCI intrusion"
+      }
     }
   ],
   "deprecated": [
@@ -6753,37 +7733,37 @@
     {
       "code": "N",
       "name": "Neural",
-      "description": "Direct interface with neural tissue \u2014 signal manipulation, electrode boundary, ion channels."
+      "description": "Direct interface with neural tissue — signal manipulation, electrode boundary, ion channels."
     },
     {
       "code": "C",
       "name": "Cognitive",
-      "description": "Higher-order psychological processes \u2014 memory, attention, identity, agency."
+      "description": "Higher-order psychological processes — memory, attention, identity, agency."
     },
     {
       "code": "P",
       "name": "Physiological",
-      "description": "Somatic systems \u2014 motor control, autonomic functions, physical harm."
+      "description": "Somatic systems — motor control, autonomic functions, physical harm."
     },
     {
       "code": "D",
       "name": "Data",
-      "description": "Information acquisition and manipulation \u2014 brainwave recordings, neural metadata."
+      "description": "Information acquisition and manipulation — brainwave recordings, neural metadata."
     },
     {
       "code": "B",
       "name": "BCI System",
-      "description": "Hardware/software of the BCI device \u2014 firmware, protocols, authentication."
+      "description": "Hardware/software of the BCI device — firmware, protocols, authentication."
     },
     {
       "code": "M",
       "name": "Model",
-      "description": "Machine learning models used in BCI \u2014 decoders, classifiers, feedback systems."
+      "description": "Machine learning models used in BCI — decoders, classifiers, feedback systems."
     },
     {
       "code": "E",
       "name": "Energy",
-      "description": "Directed energy attacks \u2014 ELF, microwave, RF, temporal interference."
+      "description": "Directed energy attacks — ELF, microwave, RF, temporal interference."
     }
   ],
   "niss_spec": {
@@ -6896,7 +7876,7 @@
   },
   "tara_spec": {
     "version": "1.0",
-    "name": "TARA \u2014 Therapeutic Atlas of Risks and Applications",
+    "name": "TARA — Therapeutic Atlas of Risks and Applications",
     "description": "Mechanism-first Rosetta Stone. Same physical phenomenon, four stakeholder views. Security researchers see attack vectors. Clinicians see therapeutic modalities. Regulators see compliance requirements. Engineers see physical parameters.",
     "dual_use_classifications": {
       "confirmed": "Published therapeutic and security applications exist for this mechanism",
@@ -6934,6 +7914,16 @@
       "restricted": "Restricted access (need-to-know basis)",
       "internal": "Internal operational data",
       "public": "Publicly available information"
+    }
+  },
+  "schema_extensions": {
+    "feeds_into": {
+      "added": "2026-02-11",
+      "description": "Links S-domain (Consumer Sensor Exploitation) techniques to core TARA techniques and tactics they enable in the BCI attack chain",
+      "format": {
+        "targets": "Array of TARA technique IDs (QIF-Txxxx) and/or tactic IDs (QIF-X.YY)",
+        "note": "Human-readable explanation of the relationship"
+      }
     }
   }
 }

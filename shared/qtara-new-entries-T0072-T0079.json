@@ -2,8 +2,8 @@
   {
     "id": "QIF-T0072",
     "attack": "Transducer inversion (acoustic eavesdropping via speaker-to-microphone reprogramming)",
-    "tactic": "QIF-D.HV",
-    "bands": "S1\u2192S2\u2192S3",
+    "tactic": "QIF-S.RP",
+    "bands": "S1→S2→S3",
     "band_ids": [
       "S1",
       "S2",
@@ -21,7 +21,7 @@
     "status": "CONFIRMED",
     "severity": "high",
     "ui_category": "SE",
-    "notes": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional \u2014 a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
+    "notes": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional — a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
     "legacy_ids": [],
     "legacy_technique_id": "T2067",
     "niss": {
@@ -38,7 +38,8 @@
         "T1040"
       ],
       "secondary_tactics": [
-        "QIF-B.IN"
+        "QIF-B.IN",
+        "QIF-D.HV"
       ]
     },
     "tara": {
@@ -55,7 +56,7 @@
         ],
         "regulations": [
           "FCC Part 15",
-          "ECPA (18 U.S.C. \u00a7 2511)",
+          "ECPA (18 U.S.C. § 2511)",
           "GDPR Art. 5",
           "EU Cyber Resilience Act"
         ],
@@ -86,13 +87,20 @@
       "supplemental": "S:N/AU:Y/R:A/V:C",
       "gap_group": 1,
       "gap_summary": "Standard eavesdropping via hardware repurposing; CVSS confidentiality metrics apply well"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-B.IN",
+        "QIF-D.HV"
+      ],
+      "note": "Speaker→mic repurposing enables BCI intrusion pathway and data harvest"
     }
   },
   {
     "id": "QIF-T0073",
     "attack": "Ear-canal neural eavesdropping via modified consumer earbud (supply chain in-ear EEG)",
-    "tactic": "QIF-D.HV",
-    "bands": "S1\u2192I0\u2192N1\u2013N3",
+    "tactic": "QIF-S.RP",
+    "bands": "S1→I0→N1–N3",
     "band_ids": [
       "S1",
       "I0",
@@ -114,7 +122,7 @@
     "status": "EMERGING",
     "severity": "critical",
     "ui_category": "SE",
-    "notes": "The ear canal is 5-10mm from temporal cortex through the canal wall and temporal bone \u2014 close enough for a conductive ear tip with a high-gain biopotential amplifier to capture cortical EEG. Commercial in-ear EEG has been proven viable (Idun Guardian, cEEGrid, Cognionics). In a supply chain attack, a consumer earbud is modified to include: (1) a conductive silicone ear tip that makes galvanic contact with ear canal skin, (2) a sub-$5 biopotential amplifier (e.g., ADS1299 or TI ADS129x family) hidden in the earbud housing, and (3) modified firmware that multiplexes captured EEG data alongside normal audio. The captured signals include auditory evoked potentials (AEP), P300 attention markers, N400 semantic processing indicators, and alpha/theta power reflecting cognitive state. Generic earbuds lacking proprietary authentication (unlike Apple AirPods with W1/H1 chip) are the attack surface. The attacker gets continuous neural telemetry from a device the target wears voluntarily for hours daily. This is the bridge technique between QIF-T0072 (acoustic eavesdropping) and QIF-T0074 (cognitive inference): it turns a consumer audio device into a covert neural recording platform.",
+    "notes": "The ear canal is 5-10mm from temporal cortex through the canal wall and temporal bone — close enough for a conductive ear tip with a high-gain biopotential amplifier to capture cortical EEG. Commercial in-ear EEG has been proven viable (Idun Guardian, cEEGrid, Cognionics). In a supply chain attack, a consumer earbud is modified to include: (1) a conductive silicone ear tip that makes galvanic contact with ear canal skin, (2) a sub-$5 biopotential amplifier (e.g., ADS1299 or TI ADS129x family) hidden in the earbud housing, and (3) modified firmware that multiplexes captured EEG data alongside normal audio. The captured signals include auditory evoked potentials (AEP), P300 attention markers, N400 semantic processing indicators, and alpha/theta power reflecting cognitive state. Generic earbuds lacking proprietary authentication (unlike Apple AirPods with W1/H1 chip) are the attack surface. The attacker gets continuous neural telemetry from a device the target wears voluntarily for hours daily. This is the bridge technique between QIF-T0072 (acoustic eavesdropping) and QIF-T0074 (cognitive inference): it turns a consumer audio device into a covert neural recording platform.",
     "legacy_ids": [],
     "legacy_technique_id": "T2068",
     "niss": {
@@ -134,7 +142,8 @@
       ],
       "secondary_tactics": [
         "QIF-B.IN",
-        "QIF-N.SC"
+        "QIF-N.SC",
+        "QIF-D.HV"
       ]
     },
     "tara": {
@@ -150,7 +159,7 @@
         ],
         "fda_status": "investigational",
         "evidence_level": "cohort",
-        "safe_parameters": "Passive recording only; conductive gel ear tips; <100 \u00b5V signal range; no stimulation",
+        "safe_parameters": "Passive recording only; conductive gel ear tips; <100 µV signal range; no stimulation",
         "sources": [
           "Kaveh et al. 2020 (IEEE Trans Biomed Eng)",
           "Debener et al. 2015 (J Neural Eng, cEEGrid validation)"
@@ -201,14 +210,22 @@
       "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
       "supplemental": "S:P/AU:Y/R:A/V:C",
       "gap_group": 3,
-      "gap_summary": "Covert neural data capture from consumer device \u2014 mental privacy violation not expressible in CVSS confidentiality"
+      "gap_summary": "Covert neural data capture from consumer device — mental privacy violation not expressible in CVSS confidentiality"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-T0003",
+        "QIF-N.SC",
+        "QIF-D.HV"
+      ],
+      "note": "Earbud→EEG repurposing feeds neural scanning and data harvest; relates to T0003 (signal injection)"
     }
   },
   {
     "id": "QIF-T0074",
     "attack": "Cognitive inference from longitudinal in-ear EEG (personalized cognitive profiling)",
-    "tactic": "QIF-C.EX",
-    "bands": "N3\u2013N7\u2192S2\u2192S3",
+    "tactic": "QIF-S.HV",
+    "bands": "N3–N7→S2→S3",
     "band_ids": [
       "N3",
       "N4",
@@ -232,7 +249,7 @@
     "status": "EMERGING",
     "severity": "critical",
     "ui_category": "EX",
-    "notes": "Given continuous in-ear EEG from QIF-T0073, an ML pipeline trained on the target's neural data over days-to-weeks builds a personalized cognitive profile. Phase 1: baseline extraction (resting alpha power, theta/beta ratio, individual alpha frequency). Phase 2: event-related feature learning (P300 amplitude to stimuli, N400 to semantic content, auditory steady-state responses). Phase 3: longitudinal pattern recognition (attention cycles, emotional valence responses, fatigue signatures, cognitive load indicators). Phase 4: adaptive exploitation \u2014 the attacker can now predict the target's cognitive state in real-time and optimize content delivery (ads, misinformation, persuasion) to moments of maximal susceptibility (high theta/low beta = low vigilance, elevated P300 = high attention to specific content). This is the cognitive analog of behavioral advertising but operating on neural signals rather than click patterns. Foundation models for EEG (BENDR, LaBraM) make transfer learning from small per-user datasets feasible. The attack chain is: QIF-T0072 (acoustic access) \u2192 QIF-T0073 (neural data capture) \u2192 QIF-T0074 (cognitive exploitation).",
+    "notes": "Given continuous in-ear EEG from QIF-T0073, an ML pipeline trained on the target's neural data over days-to-weeks builds a personalized cognitive profile. Phase 1: baseline extraction (resting alpha power, theta/beta ratio, individual alpha frequency). Phase 2: event-related feature learning (P300 amplitude to stimuli, N400 to semantic content, auditory steady-state responses). Phase 3: longitudinal pattern recognition (attention cycles, emotional valence responses, fatigue signatures, cognitive load indicators). Phase 4: adaptive exploitation — the attacker can now predict the target's cognitive state in real-time and optimize content delivery (ads, misinformation, persuasion) to moments of maximal susceptibility (high theta/low beta = low vigilance, elevated P300 = high attention to specific content). This is the cognitive analog of behavioral advertising but operating on neural signals rather than click patterns. Foundation models for EEG (BENDR, LaBraM) make transfer learning from small per-user datasets feasible. The attack chain is: QIF-T0072 (acoustic access) → QIF-T0073 (neural data capture) → QIF-T0074 (cognitive exploitation).",
     "legacy_ids": [],
     "legacy_technique_id": "T2069",
     "niss": {
@@ -252,7 +269,8 @@
       ],
       "secondary_tactics": [
         "QIF-D.HV",
-        "QIF-M.SV"
+        "QIF-M.SV",
+        "QIF-C.EX"
       ]
     },
     "tara": {
@@ -318,14 +336,22 @@
       "base_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
       "supplemental": "S:P/AU:Y/R:A/V:D",
       "gap_group": 3,
-      "gap_summary": "Longitudinal cognitive profiling and adaptive neural manipulation \u2014 cognitive liberty violation has no CVSS equivalent"
+      "gap_summary": "Longitudinal cognitive profiling and adaptive neural manipulation — cognitive liberty violation has no CVSS equivalent"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-T0041",
+        "QIF-C.EX",
+        "QIF-M.SV"
+      ],
+      "note": "Cognitive profiling via consumer sensors feeds cognitive exploitation and model subversion"
     }
   },
   {
     "id": "QIF-T0075",
     "attack": "Ultrasonic sonar vital sign extraction (inaudible Doppler physiological sensing)",
-    "tactic": "QIF-D.HV",
-    "bands": "S1\u2192S2\u2192S3",
+    "tactic": "QIF-S.HV",
+    "bands": "S1→S2→S3",
     "band_ids": [
       "S1",
       "S2",
@@ -345,7 +371,7 @@
     "status": "DEMONSTRATED",
     "severity": "high",
     "ui_category": "SE",
-    "notes": "A phone or earbud speaker emits an inaudible continuous-wave ultrasonic tone (18-22 kHz, within transducer bandwidth but above human hearing threshold). The built-in microphone captures the reflected signal. Chest wall motion from breathing (amplitude: ~5mm) and heartbeat (amplitude: ~0.1mm) create Doppler shifts in the reflected ultrasound that are demodulable with standard DSP. The technique is: (1) covert \u2014 the ultrasonic tone is inaudible to the target, (2) contactless \u2014 works from across a room (demonstrated up to 0.5m for heart rate, several meters for respiration), (3) requires NO hardware modification \u2014 stock smartphone speakers and microphones are sufficient, and (4) can be deployed as a background process in any app with microphone permission. Google's Nest Hub Sleep Sensing and academic research (UltraSense, Nandakumar et al.) have demonstrated production-quality vital sign extraction via this method. Attack scenario: any app with mic access silently emits ultrasound and extracts heart rate, breathing rate, and movement patterns. Combined with QIF-T0079 (ear canal fingerprinting), the attacker gets identity + vitals from the same acoustic pipeline.",
+    "notes": "A phone or earbud speaker emits an inaudible continuous-wave ultrasonic tone (18-22 kHz, within transducer bandwidth but above human hearing threshold). The built-in microphone captures the reflected signal. Chest wall motion from breathing (amplitude: ~5mm) and heartbeat (amplitude: ~0.1mm) create Doppler shifts in the reflected ultrasound that are demodulable with standard DSP. The technique is: (1) covert — the ultrasonic tone is inaudible to the target, (2) contactless — works from across a room (demonstrated up to 0.5m for heart rate, several meters for respiration), (3) requires NO hardware modification — stock smartphone speakers and microphones are sufficient, and (4) can be deployed as a background process in any app with microphone permission. Google's Nest Hub Sleep Sensing and academic research (UltraSense, Nandakumar et al.) have demonstrated production-quality vital sign extraction via this method. Attack scenario: any app with mic access silently emits ultrasound and extracts heart rate, breathing rate, and movement patterns. Combined with QIF-T0079 (ear canal fingerprinting), the attacker gets identity + vitals from the same acoustic pipeline.",
     "legacy_ids": [],
     "legacy_technique_id": "T2070",
     "niss": {
@@ -364,7 +390,8 @@
         "T1123"
       ],
       "secondary_tactics": [
-        "QIF-N.SC"
+        "QIF-N.SC",
+        "QIF-D.HV"
       ]
     },
     "tara": {
@@ -427,13 +454,20 @@
       "supplemental": "S:N/AU:Y/R:A/V:D",
       "gap_group": 2,
       "gap_summary": "Covert physiological data extraction partially captured by CVSS confidentiality; health privacy dimension not fully expressed"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-P.DS"
+      ],
+      "note": "Ultrasonic vital sign extraction feeds physiological data harvest"
     }
   },
   {
     "id": "QIF-T0076",
     "attack": "Haptic motor body sonar (taptic engine repurposing for tissue impedance profiling)",
-    "tactic": "QIF-D.HV",
-    "bands": "S1\u2192S2",
+    "tactic": "QIF-S.HV",
+    "bands": "S1→S2",
     "band_ids": [
       "S1",
       "S2"
@@ -468,7 +502,8 @@
         "T1005"
       ],
       "secondary_tactics": [
-        "QIF-N.SC"
+        "QIF-N.SC",
+        "QIF-D.HV"
       ]
     },
     "tara": {
@@ -533,13 +568,19 @@
       "supplemental": "S:N/AU:N/R:A/V:D",
       "gap_group": 2,
       "gap_summary": "Body composition extraction via consumer hardware partially captured by CVSS; health data sensitivity not fully expressed"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV"
+      ],
+      "note": "Haptic body sonar feeds physiological data harvest"
     }
   },
   {
     "id": "QIF-T0077",
     "attack": "IR vascular mapping via Face ID system (NIR hemoglobin absorption imaging)",
-    "tactic": "QIF-D.HV",
-    "bands": "S1\u2192S2\u2192S3",
+    "tactic": "QIF-S.HV",
+    "bands": "S1→S2→S3",
     "band_ids": [
       "S1",
       "S2",
@@ -559,7 +600,7 @@
     "status": "EMERGING",
     "severity": "high",
     "ui_category": "SE",
-    "notes": "Apple's Face ID TrueDepth system projects 30,000 infrared dots at 940nm onto the user's face and reads the reflection pattern with an IR camera. At 940nm, photons penetrate skin to a depth of 2-5mm \u2014 well into the dermal vascular layer. Oxygenated hemoglobin (HbO2) and deoxygenated hemoglobin (Hb) have different absorption coefficients at 940nm, meaning the reflected dot pattern encodes subsurface vascular topology: arterial vs venous vessels, vessel diameter, branching patterns, and oxygenation gradients. This vascular map is a permanent biometric (unlike facial features, which change with age/surgery/expression) and is unique per individual (even identical twins have different vascular topology). In the attack scenario, a jailbroken iPhone or compromised Face ID firmware extracts raw IR reflection data (normally processed in the Secure Enclave and discarded) during routine phone unlock. The target never knows their vascular biometric has been captured. Every phone unlock becomes a silent biometric scan. This is analogous to fingerprinting (unreplaceable biometric) but captured at range and without the target's awareness. Combined with QIF-T0078 (pulse waveform), the same IR system yields both vascular structure and cardiac dynamics.",
+    "notes": "Apple's Face ID TrueDepth system projects 30,000 infrared dots at 940nm onto the user's face and reads the reflection pattern with an IR camera. At 940nm, photons penetrate skin to a depth of 2-5mm — well into the dermal vascular layer. Oxygenated hemoglobin (HbO2) and deoxygenated hemoglobin (Hb) have different absorption coefficients at 940nm, meaning the reflected dot pattern encodes subsurface vascular topology: arterial vs venous vessels, vessel diameter, branching patterns, and oxygenation gradients. This vascular map is a permanent biometric (unlike facial features, which change with age/surgery/expression) and is unique per individual (even identical twins have different vascular topology). In the attack scenario, a jailbroken iPhone or compromised Face ID firmware extracts raw IR reflection data (normally processed in the Secure Enclave and discarded) during routine phone unlock. The target never knows their vascular biometric has been captured. Every phone unlock becomes a silent biometric scan. This is analogous to fingerprinting (unreplaceable biometric) but captured at range and without the target's awareness. Combined with QIF-T0078 (pulse waveform), the same IR system yields both vascular structure and cardiac dynamics.",
     "legacy_ids": [],
     "legacy_technique_id": "T2072",
     "niss": {
@@ -579,7 +620,8 @@
       ],
       "secondary_tactics": [
         "QIF-N.SC",
-        "QIF-B.IN"
+        "QIF-B.IN",
+        "QIF-D.HV"
       ]
     },
     "tara": {
@@ -595,7 +637,7 @@
         ],
         "fda_status": "cleared",
         "evidence_level": "RCT",
-        "safe_parameters": "940nm NIR at Face ID power levels (<1 mW/cm\u00b2); IEC 62471 photobiological safety; no thermal risk at consumer power",
+        "safe_parameters": "940nm NIR at Face ID power levels (<1 mW/cm²); IEC 62471 photobiological safety; no thermal risk at consumer power",
         "sources": [
           "Crouzet et al. 2016 (NeuroImage, cerebrovascular NIR)",
           "Gupta et al. 2020 (IEEE Access, vein pattern biometrics)"
@@ -645,13 +687,21 @@
       "supplemental": "S:N/AU:N/R:U/V:C",
       "gap_group": 2,
       "gap_summary": "Permanent vascular biometric extraction partially captured by CVSS; unreplaceable biometric loss (like neural biometric) not fully expressible"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-T0032",
+        "QIF-D.HV",
+        "QIF-B.IN"
+      ],
+      "note": "IR vascular mapping feeds biometric identity + data harvest + intrusion targeting"
     }
   },
   {
     "id": "QIF-T0078",
     "attack": "LiDAR remote pulse detection (laser Doppler vibrometry for cardiac waveform extraction)",
-    "tactic": "QIF-D.HV",
-    "bands": "S1\u2192S2\u2192S3",
+    "tactic": "QIF-S.HV",
+    "bands": "S1→S2→S3",
     "band_ids": [
       "S1",
       "S2",
@@ -671,7 +721,7 @@
     "status": "THEORETICAL",
     "severity": "high",
     "ui_category": "SE",
-    "notes": "The iPhone LiDAR scanner uses a VCSEL (vertical-cavity surface-emitting laser) array emitting pulsed 940nm infrared laser light and a SPAD (single-photon avalanche diode) detector array measuring time-of-flight. In normal operation, it measures depth for AR applications. However, the same hardware can function as a simplified laser Doppler vibrometer (LDV): when the laser beam reflects off skin, the pulse wave from cardiac activity causes micro-vibrations (amplitude ~1-10 \u00b5m) on the skin surface. These vibrations create measurable Doppler shifts or time-of-flight variations in the reflected laser signal. Extracting the cardiac pulse waveform from LiDAR data requires raw access to the SPAD photodetector output (timing resolution in picoseconds) rather than the processed depth map. This requires either a jailbreak, hardware teardown, or compromised firmware. The extracted pulse waveform contains: heart rate, heart rate variability (HRV), pulse transit time (correlated with blood pressure), and potentially cardiac arrhythmia signatures. Unlike QIF-T0075 (ultrasonic sonar), this is optical and directional, requiring line-of-sight but working at greater precision for skin-surface vibrations. Range is limited to ~5m (LiDAR operational range) but could be extended with higher-power laser sources.",
+    "notes": "The iPhone LiDAR scanner uses a VCSEL (vertical-cavity surface-emitting laser) array emitting pulsed 940nm infrared laser light and a SPAD (single-photon avalanche diode) detector array measuring time-of-flight. In normal operation, it measures depth for AR applications. However, the same hardware can function as a simplified laser Doppler vibrometer (LDV): when the laser beam reflects off skin, the pulse wave from cardiac activity causes micro-vibrations (amplitude ~1-10 µm) on the skin surface. These vibrations create measurable Doppler shifts or time-of-flight variations in the reflected laser signal. Extracting the cardiac pulse waveform from LiDAR data requires raw access to the SPAD photodetector output (timing resolution in picoseconds) rather than the processed depth map. This requires either a jailbreak, hardware teardown, or compromised firmware. The extracted pulse waveform contains: heart rate, heart rate variability (HRV), pulse transit time (correlated with blood pressure), and potentially cardiac arrhythmia signatures. Unlike QIF-T0075 (ultrasonic sonar), this is optical and directional, requiring line-of-sight but working at greater precision for skin-surface vibrations. Range is limited to ~5m (LiDAR operational range) but could be extended with higher-power laser sources.",
     "legacy_ids": [],
     "legacy_technique_id": "T2073",
     "niss": {
@@ -689,7 +739,8 @@
         "T1005"
       ],
       "secondary_tactics": [
-        "QIF-N.SC"
+        "QIF-N.SC",
+        "QIF-D.HV"
       ]
     },
     "tara": {
@@ -755,13 +806,19 @@
       "supplemental": "S:N/AU:N/R:A/V:D",
       "gap_group": 2,
       "gap_summary": "Contactless cardiac waveform extraction partially captured by CVSS confidentiality; physiological privacy dimension not fully expressed"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV"
+      ],
+      "note": "LiDAR pulse detection feeds physiological data harvest"
     }
   },
   {
     "id": "QIF-T0079",
     "attack": "Ear canal acoustic fingerprinting (ANC echo profiling for covert identification)",
-    "tactic": "QIF-N.SC",
-    "bands": "S1\u2192S2\u2192S3",
+    "tactic": "QIF-S.FP",
+    "bands": "S1→S2→S3",
     "band_ids": [
       "S1",
       "S2",
@@ -781,7 +838,7 @@
     "status": "DEMONSTRATED",
     "severity": "high",
     "ui_category": "CI",
-    "notes": "Active noise cancellation (ANC) earbuds already contain the complete hardware for ear canal acoustic fingerprinting: an inward-facing (feedback) microphone that measures sound inside the ear canal, an outward-facing (feedforward) microphone, and a speaker that can emit probe tones. When the speaker emits a broadband chirp or swept sine, the inward-facing microphone captures the echo profile shaped by the ear canal's unique geometry: length (~25mm), diameter (~7mm), tympanic membrane compliance, and the specific curvature of the bends. This acoustic transfer function is a biometric \u2014 NEC demonstrated it for authentication with >99% accuracy. In the attack scenario, the ANC system's existing probe tones (used for adaptive fit detection and transparency mode calibration) are leveraged to silently fingerprint the wearer without their knowledge. The earbuds know WHO is wearing them at all times. Combined with audioplethysmography (PPG via in-ear speaker/mic measuring blood volume changes), the same hardware simultaneously provides identity + heart rate: a silent surveillance pipeline requiring zero hardware modification on ANC earbuds. Attack surface: firmware update, compromised ANC calibration routine, or malicious SDK in earbud companion app.",
+    "notes": "Active noise cancellation (ANC) earbuds already contain the complete hardware for ear canal acoustic fingerprinting: an inward-facing (feedback) microphone that measures sound inside the ear canal, an outward-facing (feedforward) microphone, and a speaker that can emit probe tones. When the speaker emits a broadband chirp or swept sine, the inward-facing microphone captures the echo profile shaped by the ear canal's unique geometry: length (~25mm), diameter (~7mm), tympanic membrane compliance, and the specific curvature of the bends. This acoustic transfer function is a biometric — NEC demonstrated it for authentication with >99% accuracy. In the attack scenario, the ANC system's existing probe tones (used for adaptive fit detection and transparency mode calibration) are leveraged to silently fingerprint the wearer without their knowledge. The earbuds know WHO is wearing them at all times. Combined with audioplethysmography (PPG via in-ear speaker/mic measuring blood volume changes), the same hardware simultaneously provides identity + heart rate: a silent surveillance pipeline requiring zero hardware modification on ANC earbuds. Attack surface: firmware update, compromised ANC calibration routine, or malicious SDK in earbud companion app.",
     "legacy_ids": [],
     "legacy_technique_id": "T2074",
     "niss": {
@@ -802,7 +859,8 @@
       ],
       "secondary_tactics": [
         "QIF-D.HV",
-        "QIF-B.IN"
+        "QIF-B.IN",
+        "QIF-N.SC"
       ]
     },
     "tara": {
@@ -868,6 +926,14 @@
       "supplemental": "S:N/AU:Y/R:A/V:D",
       "gap_group": 2,
       "gap_summary": "Covert biometric identification via consumer earbud partially captured by CVSS; irrevocable biometric capture dimension not fully expressed"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-T0032",
+        "QIF-T0036",
+        "QIF-B.IN"
+      ],
+      "note": "Ear canal fingerprinting feeds biometric identity + targeted BCI intrusion"
     }
   }
 ]
