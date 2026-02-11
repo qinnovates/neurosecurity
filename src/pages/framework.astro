@@ -33,6 +33,7 @@ const tacticColors: Record<string, string> = {
         <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
         {[
           { href: '#overview', label: 'Overview' },
+          { href: '#foundations', label: 'Foundations' },
           { href: '#hourglass', label: 'Hourglass Model' },
           { href: '#bands', label: '11 Bands' },
           { href: '#coherence', label: 'Coherence Metric' },
@@ -62,6 +63,43 @@ const tacticColors: Record<string, string> = {
           <p>
             QIF answers a question no existing framework addresses: <em>how do you secure a system where one endpoint is a brain?</em> Existing cybersecurity models (OSI, Zero Trust) handle synthetic systems. Existing neuroethics frameworks handle consent and privacy. QIF bridges both with an engineering specification for the interface between them, including two original systems developed by Qinnovate: the <strong>QIF Locus Taxonomy</strong> for threat classification and <strong>NISS</strong> (Neural Impact Scoring System) for vulnerability scoring.
           </p>
+        </div>
+      </section>
+
+      <!-- Foundational Frameworks -->
+      <section id="foundations" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Derived From Three Frameworks</h2>
+        <div class="prose mb-8">
+          <p>
+            QIF's hourglass architecture didn't emerge from a single discipline. It was derived by finding a structural pattern across three independent models — each spanning ~7-8 layers, each covering roughly one order of magnitude per layer in spatial scale. The hourglass is where networking meets neuroscience at the physical interface.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="glass rounded-xl p-6" style="border-top: 3px solid #3b82f6;">
+            <div class="text-sm font-bold font-[family-name:var(--font-mono)] text-[#3b82f6] mb-2">01</div>
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">OSI Model</h3>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3">ISO/IEC 7498-1, 1984</p>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+              The 7-layer networking stack. The pedagogical starting point for thinking about layered security — proving that complex systems become manageable when decomposed into well-defined abstraction boundaries.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-top: 3px solid #10b981;">
+            <div class="text-sm font-bold font-[family-name:var(--font-mono)] text-[#10b981] mb-2">02</div>
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">Kandel's Nervous System Hierarchy</h3>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3">Eric Kandel et al., <em>Principles of Neural Science</em></p>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+              The 7-level CNS organization from molecular to whole-brain. The neuroscience foundation for QIF's neural bands — demonstrating that the nervous system itself is a layered architecture with distinct security surfaces at each level.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-top: 3px solid #f59e0b;">
+            <div class="text-sm font-bold font-[family-name:var(--font-mono)] text-[#f59e0b] mb-2">03</div>
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">Campbell's Biology</h3>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3">Campbell et al., <em>Biology</em></p>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+              The 8-level biological organization from atoms to organisms. The cross-domain validation that layered architecture is a universal organizing principle — not just an engineering convenience, but a pattern that nature converges on independently.
+            </p>
+          </div>
         </div>
       </section>
 
