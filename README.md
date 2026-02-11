@@ -1,6 +1,6 @@
 <div align="center">
 
-![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/public/images/divider-qinnovate.svg)
+![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/docs/images/divider-qinnovate.svg)
 
 </div>
 
@@ -22,7 +22,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | **[TARA](https://qinnovate.com/TARA/)** | 71 attack-therapy technique pairs across 7 domains and 11 tactics. The dual-use atlas. | v1.0, published |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.3, draft |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
-| **[Runemate](https://qinnovate.com/runemate/)** | HTML-to-bytecode compiler for bandwidth-constrained BCIs. 62-77% compression. | v0.3, spec |
+| **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.3, spec |
 | **[Governance](https://qinnovate.com/governance/)** | 10 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
 
 ---
@@ -103,7 +103,9 @@ The scoring extension. First CVSS v4.0 extension designed for neural interfaces.
 
 ### Runemate
 
-The compiler. Translates HTML/CSS into Staves bytecode for bandwidth-constrained BCIs. 62-77% compression. The Forge (gateway compiler, Rust std) compiles content. The Scribe (implant interpreter, Rust no_std, ~200KB) renders it. TARA validates every output pattern before delivery.
+The rendering pipeline. Phase 1 compiles HTML/CSS into Staves bytecode for bandwidth-constrained BCIs (62-77% compression, screens and headsets). Phase 2/3 compiles semantic content into electrode stimulation patterns for direct cortical rendering. The long-term goal is vision restoration: translating visual information into signals a blind patient's visual cortex can interpret.
+
+The Forge (gateway compiler, Rust std) compiles content. The Scribe (implant interpreter, Rust no_std, ~200KB) renders it. TARA validates every output pattern before delivery, bounding both attack severity and therapeutic safety.
 
 Runemate paves the road for BCI content delivery the way W3C paved the road for web content. The bytecode format, the safety bounds, the rendering model: these become the shared infrastructure that BCI manufacturers build on.
 
