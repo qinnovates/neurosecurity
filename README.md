@@ -50,8 +50,9 @@ Qinnovate exists because these organizations proved that open standards make ent
 | Organization | What They Standardized | What We Learn From Them |
 |-------------|----------------------|------------------------|
 | **[FIRST.org](https://first.org)** | CVSS (vulnerability scoring), CSIRT coordination | NISS extends their CVSS v4.0 framework for neural impact |
-| **[MITRE](https://mitre.org)** | CVE (vulnerability IDs), ATT&CK (adversary tactics) | TARA uses MITRE-style technique IDs (QIF-T0001+) across 7 domains |
-| **[NIST](https://nist.gov)** | Cybersecurity Framework, post-quantum crypto (FIPS 203/204) | QIF aligns with NIST CSF; NSP implements ML-KEM/ML-DSA |
+| **[MITRE](https://mitre.org)** | ATT&CK (adversary tactics and techniques framework) | TARA uses ATT&CK-style technique IDs (QIF-T0001+) across 7 domains |
+| **[CVE Program](https://cve.org)** | Vulnerability identifiers (CVE-XXXX-XXXXX), operated by MITRE since 1999, transitioning to [CVE Foundation](https://www.thecvefoundation.org/) | TARA technique IDs complement CVE by covering BCI-specific threats that don't map to traditional software vulns |
+| **[NIST](https://nist.gov)** | Cybersecurity Framework, NVD (enriches CVEs with CVSS scores), post-quantum crypto (FIPS 203/204) | QIF aligns with NIST CSF; NSP implements ML-KEM/ML-DSA |
 | **[IEEE](https://ieee.org)** | Electrical/electronics/computing standards | QIF's 11-band model follows IEEE standards methodology |
 | **[W3C](https://w3.org)** | HTML, CSS, WebAssembly, accessibility (WCAG) | Runemate compiles W3C standards (HTML/CSS) to neural bytecode |
 | **[IETF](https://ietf.org)** | TCP/IP, TLS, HTTP, DNS (via RFCs) | NSP is designed as an RFC-style protocol specification |
