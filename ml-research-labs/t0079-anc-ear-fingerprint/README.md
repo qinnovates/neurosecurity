@@ -122,12 +122,12 @@ These results validate that the pipeline works end-to-end. Real ear canal data i
 
 ## Reproduction
 
-The PoC code is in the [Mindloft tools repo](https://github.com/qinnovates/mindloft/tree/main/tools/ctf/t0079-anc-fingerprint).
+The PoC code is in the [Mindloft tools repo](https://github.com/qinnovates/mindloft/tree/main/tools/ml-research-labs/t0079-anc-fingerprint).
 
 ```bash
 # Clone and install
 git clone https://github.com/qinnovates/mindloft.git
-cd mindloft/tools/ctf/t0079-anc-fingerprint
+cd mindloft/tools/ml-research-labs/t0079-anc-fingerprint
 pip install -r requirements.txt
 
 # Run demo with synthetic data (no hardware needed)

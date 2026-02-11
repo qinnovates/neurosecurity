@@ -1,6 +1,6 @@
-# Security Labs
+# ML Research Labs
 
-Reproducible security research from the TARA threat registry. Each lab is a self-contained proof-of-concept demonstrating a real vulnerability in neural interface or consumer sensor technology.
+Reproducible ML and security research from the TARA threat registry. Each lab is a self-contained proof-of-concept demonstrating a real vulnerability in neural interface or consumer sensor technology.
 
 These labs exist to:
 1. Prove that theoretical TARA threats are exploitable in practice
@@ -24,7 +24,7 @@ Each lab contains:
 - Results from synthetic and/or real-world testing
 - Responsible disclosure status and next steps
 
-The actual exploit code lives in the [Mindloft tools repo](https://github.com/qinnovates/mindloft/tree/main/tools/ctf/) — these writeups document the research methodology and findings for the standards community.
+The actual code lives in the [Mindloft tools repo](https://github.com/qinnovates/mindloft/tree/main/tools/ml-research-labs/) — these writeups document the research methodology and findings for the standards community.
 
 ## Responsible Disclosure
 
