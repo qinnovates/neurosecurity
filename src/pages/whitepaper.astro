@@ -1007,7 +1007,7 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
             <li><strong>Neuroplasticity effects</strong> &mdash; can repeated exposure cause lasting changes to neural pathways?</li>
           </ul>
           <p>
-            NISS v1.0, developed by Qinnovate as the first CVSS v4.0 extension for neural security (following FIRST.org&rsquo;s extension framework, User Guide &sect;3.11), retains the 0&ndash;10 scoring scale familiar from CVSS but adds <strong>BCI-native impact dimensions</strong> (Biological Impact, Cognitive Integrity, Information Impact) and supplemental human-impact modifiers. Where CVSS weights exploit and impact equally, NISS weights human impact at 70% and system exploitability at 30%.
+            NISS v1.0, developed by Qinnovate as the first CVSS v4.0 extension for neural security (following FIRST.org&rsquo;s extension framework, User Guide &sect;3.11), retains the 0&ndash;10 scoring scale familiar from CVSS but adds <strong>five BCI-native impact dimensions</strong> (Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, Neuroplasticity). NISS uses equal-weight default scoring with optional context profiles for deployment-specific prioritization.
           </p>
           <p>
             Qinnovate&rsquo;s complete mapping of all 71 TARA techniques to CVSS v4.0 base vectors empirically demonstrates that <strong>94.4% of BCI threat techniques cannot be fully scored by CVSS v4.0 alone</strong>, with 73.2% requiring metrics that exist only in NISS. This mapping represents the first systematic application of CVSS v4.0 and MITRE ATT&amp;CK-style technique classification to brain-computer interface security.
@@ -1017,15 +1017,15 @@ const totalDomains = (THREAT_DOMAINS as any[]).length;
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.2 Score Formula</h3>
         <div class="glass rounded-xl p-8 text-center mb-8">
           <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            NISS = (3.0&times;BI + 2.5&times;CG + 2.0&times;CV + 1.5&times;RV + 1.0&times;NP) / 10.0
+            NISS = (BI + CG + CV + RV + NP) / 5
           </p>
           <p class="text-sm text-[var(--color-text-faint)]">
-            Biological harm weighted highest (30%). Score range: 0.0 &ndash; 10.0.
+            Equal weights (default). Context profiles available for Clinical, Research, Consumer, Military. Score range: 0.0 &ndash; 10.0.
           </p>
         </div>
         <div class="prose mb-8">
           <p>
-            The weight ordering (BI &gt; CG &gt; CV &gt; RV &gt; NP) is a deliberate priority: tissue damage first, then cognitive integrity, then consent, then permanence, then neuroplasticity. A vulnerability that causes neural tissue damage always scores higher than one that violates consent alone. Exploitability metrics are captured by the companion CVSS v4.0 base vector, not by NISS.
+            The default equal-weight formula ensures no a priori bias toward any impact dimension, following the same principle as CVSS v4.0 base scoring. Organizations apply context profiles (Clinical: BI&times;2, RV&times;2; Research: CG&times;2, CV&times;2; etc.) to shift priorities based on deployment context. Exploitability metrics are captured by the companion CVSS v4.0 base vector, not by NISS.
           </p>
         </div>
 

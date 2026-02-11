@@ -43,14 +43,18 @@
     },
     "by_niss_severity": {
       "critical": 0,
-      "high": 14,
-      "medium": 32,
-      "low": 24,
+      "high": 21,
+      "medium": 26,
+      "low": 23,
       "none": 1
     },
     "niss_cvss_mapping": {
       "pins_flagged": 31,
-      "by_gap_group": { "1": 4, "2": 17, "3": 50 }
+      "by_gap_group": {
+        "1": 4,
+        "2": 17,
+        "3": 50
+      }
     },
     "tara": {
       "version": "1.0",
@@ -208,7 +212,7 @@
       "id": "QIF-T0001",
       "attack": "Signal injection",
       "tactic": "QIF-N.IJ",
-      "bands": "I0–N1",
+      "bands": "I0\u2013N1",
       "band_ids": [
         "I0",
         "N1"
@@ -232,7 +236,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -255,7 +259,7 @@
           ],
           "fda_status": "cleared",
           "evidence_level": "RCT",
-          "safe_parameters": "1-2 mA, 20-30 min sessions, 35 cm² electrode area",
+          "safe_parameters": "1-2 mA, 20-30 min sessions, 35 cm\u00b2 electrode area",
           "sources": [
             "Brunoni et al. 2012 (Arch Gen Psychiatry)",
             "Lefaucheur et al. 2017 (Clin Neurophysiol)"
@@ -307,7 +311,7 @@
       "id": "QIF-T0002",
       "attack": "Neural ransomware",
       "tactic": "QIF-P.DS",
-      "bands": "N3–N7",
+      "bands": "N3\u2013N7",
       "band_ids": [
         "N3",
         "N7",
@@ -329,7 +333,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -352,7 +356,7 @@
           ],
           "fda_status": "approved",
           "evidence_level": "RCT",
-          "safe_parameters": "Device-specific (Medtronic, NeuroPace): 1-5V, 60-450μs pulse width, 130-185 Hz",
+          "safe_parameters": "Device-specific (Medtronic, NeuroPace): 1-5V, 60-450\u03bcs pulse width, 130-185 Hz",
           "sources": [
             "Lozano et al. 2019 (Nature Reviews Neuroscience)",
             "Morrell 2011 (Neurosurgery)"
@@ -405,7 +409,7 @@
       "id": "QIF-T0003",
       "attack": "Eavesdropping / signal interception",
       "tactic": "QIF-D.HV",
-      "bands": "I0–S3",
+      "bands": "I0\u2013S3",
       "band_ids": [
         "I0",
         "N1",
@@ -434,7 +438,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -500,14 +504,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:C",
         "gap_group": 3,
-        "gap_summary": "Passive neural thought interception — mental privacy not covered by CVSS confidentiality"
+        "gap_summary": "Passive neural thought interception \u2014 mental privacy not covered by CVSS confidentiality"
       }
     },
     {
       "id": "QIF-T0004",
       "attack": "Man-in-the-middle",
       "tactic": "QIF-D.HV",
-      "bands": "I0–S2",
+      "bands": "I0\u2013S2",
       "band_ids": [
         "I0",
         "S1",
@@ -529,7 +533,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -604,7 +608,7 @@
       "id": "QIF-T0005",
       "attack": "Quantum tunneling exploit",
       "tactic": "QIF-N.IJ",
-      "bands": "I0–N1",
+      "bands": "I0\u2013N1",
       "band_ids": [
         "I0",
         "N1"
@@ -626,7 +630,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -690,7 +694,7 @@
       "id": "QIF-T0006",
       "attack": "Davydov soliton attack",
       "tactic": "QIF-N.IJ",
-      "bands": "I0–N1",
+      "bands": "I0\u2013N1",
       "band_ids": [
         "I0",
         "N1"
@@ -712,7 +716,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -776,7 +780,7 @@
       "id": "QIF-T0007",
       "attack": "Protocol manipulation",
       "tactic": "QIF-N.IJ",
-      "bands": "S1–S2",
+      "bands": "S1\u2013S2",
       "band_ids": [
         "S1",
         "S2"
@@ -799,7 +803,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:N/RV:P/NP:N",
-        "score": 4.4,
+        "score": 4.1,
         "severity": "medium",
         "pins": true
       },
@@ -867,7 +871,7 @@
       "id": "QIF-T0008",
       "attack": "Command hijacking",
       "tactic": "QIF-N.IJ",
-      "bands": "S2–N7",
+      "bands": "S2\u2013N7",
       "band_ids": [
         "S2",
         "N7",
@@ -892,7 +896,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -966,7 +970,7 @@
       "id": "QIF-T0009",
       "attack": "RF false brainwave injection",
       "tactic": "QIF-N.MD",
-      "bands": "S1–S2→N4–N7",
+      "bands": "S1\u2013S2\u2192N4\u2013N7",
       "band_ids": [
         "S1",
         "S2",
@@ -1069,7 +1073,7 @@
       "id": "QIF-T0010",
       "attack": "ELF neural entrainment",
       "tactic": "QIF-E.RD",
-      "bands": "S1→N4–N7",
+      "bands": "S1\u2192N4\u2013N7",
       "band_ids": [
         "S1",
         "N4",
@@ -1168,7 +1172,7 @@
       "id": "QIF-T0011",
       "attack": "Intermodulation (BCI signal weaponized)",
       "tactic": "QIF-E.RD",
-      "bands": "S2→N4–N6",
+      "bands": "S2\u2192N4\u2013N6",
       "band_ids": [
         "S2",
         "N4",
@@ -1264,7 +1268,7 @@
       "id": "QIF-T0012",
       "attack": "Pulsed microwave (Frey effect)",
       "tactic": "QIF-E.RD",
-      "bands": "S3→N2,N7",
+      "bands": "S3\u2192N2,N7",
       "band_ids": [
         "S3",
         "N2",
@@ -1287,7 +1291,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:L/CV:E/RV:P/NP:T",
-        "score": 6.1,
+        "score": 5.7,
         "severity": "medium",
         "pins": true
       },
@@ -1359,7 +1363,7 @@
       "id": "QIF-T0013",
       "attack": "Temporal interference (deep targeting)",
       "tactic": "QIF-E.RD",
-      "bands": "S2→N4–N6",
+      "bands": "S2\u2192N4\u2013N6",
       "band_ids": [
         "S2",
         "N4",
@@ -1455,7 +1459,7 @@
       "id": "QIF-T0014",
       "attack": "Envelope modulation (stealth carrier)",
       "tactic": "QIF-E.RD",
-      "bands": "S1–S2→any N",
+      "bands": "S1\u2013S2\u2192any N",
       "band_ids": [
         "S1",
         "S2",
@@ -1483,8 +1487,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:I/RV:P/NP:S",
-        "score": 6.4,
-        "severity": "medium",
+        "score": 8.1,
+        "severity": "high",
         "pins": true
       },
       "cross_references": {
@@ -1556,7 +1560,7 @@
       "id": "QIF-T0015",
       "attack": "Directed energy (thermal I0 damage)",
       "tactic": "QIF-E.RD",
-      "bands": "S3→I0",
+      "bands": "S3\u2192I0",
       "band_ids": [
         "S3",
         "I0"
@@ -1577,7 +1581,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:C/CG:N/CV:E/RV:I/NP:N",
-        "score": 6.5,
+        "score": 5.4,
         "severity": "medium",
         "pins": true
       },
@@ -1644,7 +1648,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H",
         "supplemental": "S:P/AU:Y/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Irreversible tissue destruction — CVSS availability cannot express permanence"
+        "gap_summary": "Irreversible tissue destruction \u2014 CVSS availability cannot express permanence"
       }
     },
     {
@@ -1671,7 +1675,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
-        "score": 4.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": false
       },
@@ -1744,7 +1748,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
-        "score": 4.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": false
       },
@@ -1797,7 +1801,7 @@
       "id": "QIF-T0018",
       "attack": "Adversarial filter attack",
       "tactic": "QIF-M.SV",
-      "bands": "S1–S2",
+      "bands": "S1\u2013S2",
       "band_ids": [
         "S1",
         "S2"
@@ -1818,7 +1822,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:N",
-        "score": 4.4,
+        "score": 5.4,
         "severity": "medium",
         "pins": false
       },
@@ -1874,7 +1878,7 @@
       "id": "QIF-T0019",
       "attack": "Universal adversarial perturbation (UAP)",
       "tactic": "QIF-M.SV",
-      "bands": "S1–S2",
+      "bands": "S1\u2013S2",
       "band_ids": [
         "S1",
         "S2"
@@ -1896,7 +1900,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:N",
-        "score": 4.4,
+        "score": 5.4,
         "severity": "medium",
         "pins": false
       },
@@ -1952,7 +1956,7 @@
       "id": "QIF-T0020",
       "attack": "Membership inference on neural data",
       "tactic": "QIF-M.SV",
-      "bands": "S2–S3",
+      "bands": "S2\u2013S3",
       "band_ids": [
         "S2",
         "S3"
@@ -1973,7 +1977,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -2016,7 +2020,7 @@
             "IEC 62304"
           ],
           "data_classification": "sensitive_neural",
-          "safety_ceiling": "Differential privacy ε<1 for neural training data"
+          "safety_ceiling": "Differential privacy \u03b5<1 for neural training data"
         },
         "engineering": {
           "coupling": [],
@@ -2043,7 +2047,7 @@
       "id": "QIF-T0021",
       "attack": "Federated gradient leakage",
       "tactic": "QIF-M.SV",
-      "bands": "S2–S3",
+      "bands": "S2\u2013S3",
       "band_ids": [
         "S2",
         "S3"
@@ -2064,7 +2068,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -2133,7 +2137,7 @@
       "id": "QIF-T0022",
       "attack": "Neurofeedback falsification",
       "tactic": "QIF-M.SV",
-      "bands": "S2→N7",
+      "bands": "S2\u2192N7",
       "band_ids": [
         "S2",
         "N7"
@@ -2154,8 +2158,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:I/RV:P/NP:S",
-        "score": 6.4,
-        "severity": "medium",
+        "score": 8.1,
+        "severity": "high",
         "pins": true
       },
       "cross_references": {
@@ -2233,7 +2237,7 @@
       "id": "QIF-T0023",
       "attack": "Closed-loop perturbation cascade",
       "tactic": "QIF-M.SV",
-      "bands": "S2→I0→N5–N7",
+      "bands": "S2\u2192I0\u2192N5\u2013N7",
       "band_ids": [
         "S2",
         "I0",
@@ -2353,7 +2357,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
-        "score": 4.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": false
       },
@@ -2409,7 +2413,7 @@
       "id": "QIF-T0025",
       "attack": "Neuronal jamming",
       "tactic": "QIF-P.DS",
-      "bands": "I0→N2–N7",
+      "bands": "I0\u2192N2\u2013N7",
       "band_ids": [
         "I0",
         "N2",
@@ -2435,7 +2439,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:N",
-        "score": 6.4,
+        "score": 5.4,
         "severity": "medium",
         "pins": true
       },
@@ -2506,7 +2510,7 @@
       "id": "QIF-T0026",
       "attack": "Neuronal flooding",
       "tactic": "QIF-P.DS",
-      "bands": "I0→N4–N7",
+      "bands": "I0\u2192N4\u2013N7",
       "band_ids": [
         "I0",
         "N4",
@@ -2530,7 +2534,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -2604,7 +2608,7 @@
       "id": "QIF-T0027",
       "attack": "Neuronal scanning",
       "tactic": "QIF-N.SC",
-      "bands": "I0→N4–N7",
+      "bands": "I0\u2192N4\u2013N7",
       "band_ids": [
         "I0",
         "N4",
@@ -2628,7 +2632,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 3.4,
         "severity": "low",
         "pins": false
       },
@@ -2692,14 +2696,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 2,
-        "gap_summary": "Active neural probing reveals cognitive state — partially captured by confidentiality"
+        "gap_summary": "Active neural probing reveals cognitive state \u2014 partially captured by confidentiality"
       }
     },
     {
       "id": "QIF-T0028",
       "attack": "Neural selective forwarding",
       "tactic": "QIF-N.MD",
-      "bands": "I0–S1",
+      "bands": "I0\u2013S1",
       "band_ids": [
         "I0",
         "S1"
@@ -2720,7 +2724,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -2793,7 +2797,7 @@
       "id": "QIF-T0029",
       "attack": "Neural DoS (stimulation flood)",
       "tactic": "QIF-P.DS",
-      "bands": "I0→N4–N7",
+      "bands": "I0\u2192N4\u2013N7",
       "band_ids": [
         "I0",
         "N4",
@@ -2819,7 +2823,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -2892,7 +2896,7 @@
       "id": "QIF-T0030",
       "attack": "Motor hijacking",
       "tactic": "QIF-N.MD",
-      "bands": "I0→N5–N7",
+      "bands": "I0\u2192N5\u2013N7",
       "band_ids": [
         "I0",
         "N5",
@@ -2918,7 +2922,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:C/CV:E/RV:P/NP:T",
-        "score": 7.8,
+        "score": 7.1,
         "severity": "high",
         "pins": true
       },
@@ -2997,7 +3001,7 @@
       "id": "QIF-T0031",
       "attack": "Battery drain attack (resource depletion)",
       "tactic": "QIF-P.DS",
-      "bands": "S1–S2",
+      "bands": "S1\u2013S2",
       "band_ids": [
         "S1",
         "S2"
@@ -3018,7 +3022,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:N/CV:N/RV:F/NP:N",
-        "score": 1.0,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -3064,14 +3068,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:L",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Pure resource depletion — standard CVSS availability sufficient"
+        "gap_summary": "Pure resource depletion \u2014 standard CVSS availability sufficient"
       }
     },
     {
       "id": "QIF-T0032",
       "attack": "Identity spoofing (neural biometric)",
       "tactic": "QIF-C.EX",
-      "bands": "N3–N7",
+      "bands": "N3\u2013N7",
       "band_ids": [
         "N3",
         "N7",
@@ -3093,7 +3097,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -3167,7 +3171,7 @@
       "id": "QIF-T0033",
       "attack": "Identity erosion (long-term personality drift)",
       "tactic": "QIF-C.EX",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3253,14 +3257,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Irreversible personality alteration — CVSS cannot express identity/selfhood damage"
+        "gap_summary": "Irreversible personality alteration \u2014 CVSS cannot express identity/selfhood damage"
       }
     },
     {
       "id": "QIF-T0034",
       "attack": "Working memory poisoning",
       "tactic": "QIF-C.EX",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3281,7 +3285,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:E/RV:P/NP:T",
-        "score": 5.9,
+        "score": 5.7,
         "severity": "medium",
         "pins": false
       },
@@ -3374,7 +3378,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
-        "score": 3.7,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -3442,7 +3446,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Brain response extraction for interrogation — mental privacy not in CVSS"
+        "gap_summary": "Brain response extraction for interrogation \u2014 mental privacy not in CVSS"
       }
     },
     {
@@ -3470,8 +3474,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:C/CV:E/RV:F/NP:N",
-        "score": 4.5,
-        "severity": "medium",
+        "score": 3.4,
+        "severity": "low",
         "pins": false
       },
       "cross_references": {
@@ -3540,14 +3544,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Inner speech decoding violates cognitive sovereignty — no CVSS equivalent"
+        "gap_summary": "Inner speech decoding violates cognitive sovereignty \u2014 no CVSS equivalent"
       }
     },
     {
       "id": "QIF-T0037",
       "attack": "Agency manipulation",
       "tactic": "QIF-C.EX",
-      "bands": "N5–N7",
+      "bands": "N5\u2013N7",
       "band_ids": [
         "N5",
         "N6",
@@ -3570,7 +3574,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:P/NP:S",
-        "score": 7.2,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -3641,7 +3645,7 @@
       "id": "QIF-T0038",
       "attack": "Brainprint theft",
       "tactic": "QIF-C.EX",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3662,7 +3666,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:I/NP:N",
-        "score": 5.2,
+        "score": 4.7,
         "severity": "medium",
         "pins": true
       },
@@ -3729,14 +3733,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Unreplaceable neural biometric theft — CVSS cannot express non-resettable credential loss"
+        "gap_summary": "Unreplaceable neural biometric theft \u2014 CVSS cannot express non-resettable credential loss"
       }
     },
     {
       "id": "QIF-T0039",
       "attack": "Self-model corruption",
       "tactic": "QIF-C.EX",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -3822,14 +3826,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Permanent self-perception alteration — CVSS has no identity/selfhood dimension"
+        "gap_summary": "Permanent self-perception alteration \u2014 CVSS has no identity/selfhood dimension"
       }
     },
     {
       "id": "QIF-T0040",
       "attack": "Neurophishing",
       "tactic": "QIF-C.EX",
-      "bands": "S3→N7",
+      "bands": "S3\u2192N7",
       "band_ids": [
         "S3",
         "N7"
@@ -3850,8 +3854,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:I/RV:P/NP:T",
-        "score": 3.9,
-        "severity": "low",
+        "score": 5.7,
+        "severity": "medium",
         "pins": false
       },
       "cross_references": {
@@ -3922,7 +3926,7 @@
       "id": "QIF-T0041",
       "attack": "Cognitive biometric inference",
       "tactic": "QIF-C.EX",
-      "bands": "N6–N7→S3",
+      "bands": "N6\u2013N7\u2192S3",
       "band_ids": [
         "N6",
         "N7",
@@ -3944,7 +3948,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4020,7 +4024,7 @@
       "id": "QIF-T0042",
       "attack": "BLE/RF side-channel",
       "tactic": "QIF-N.SC",
-      "bands": "S1–S2",
+      "bands": "S1\u2013S2",
       "band_ids": [
         "S1",
         "S2"
@@ -4045,7 +4049,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4104,7 +4108,7 @@
       "id": "QIF-T0043",
       "attack": "Supply chain compromise (firmware backdoor)",
       "tactic": "QIF-B.IN",
-      "bands": "S2–S3",
+      "bands": "S2\u2013S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4127,8 +4131,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:L/CV:I/RV:P/NP:N",
-        "score": 3.6,
-        "severity": "low",
+        "score": 4.7,
+        "severity": "medium",
         "pins": false
       },
       "cross_references": {
@@ -4202,7 +4206,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4277,7 +4281,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
-        "score": 1.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4331,7 +4335,7 @@
       "id": "QIF-T0046",
       "attack": "OTA firmware weaponization",
       "tactic": "QIF-C.IM",
-      "bands": "S2–S3",
+      "bands": "S2\u2013S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4352,8 +4356,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:I/RV:P/NP:T",
-        "score": 5.9,
-        "severity": "medium",
+        "score": 7.1,
+        "severity": "high",
         "pins": true
       },
       "cross_references": {
@@ -4409,7 +4413,7 @@
       "id": "QIF-T0047",
       "attack": "Mass BCI compromise (platform attack)",
       "tactic": "QIF-P.DS",
-      "bands": "S2–S3",
+      "bands": "S2\u2013S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4432,7 +4436,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -4508,7 +4512,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
-        "score": 6.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -4565,7 +4569,7 @@
       "id": "QIF-T0049",
       "attack": "Wireless authentication bypass",
       "tactic": "QIF-B.IN",
-      "bands": "S2–S3",
+      "bands": "S2\u2013S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4588,7 +4592,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:N/RV:F/NP:N",
-        "score": 0.8,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -4636,14 +4640,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:N/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Standard wireless authentication bypass — CVSS sufficient"
+        "gap_summary": "Standard wireless authentication bypass \u2014 CVSS sufficient"
       }
     },
     {
       "id": "QIF-T0050",
       "attack": "Hardware fault injection (voltage/EM glitching)",
       "tactic": "QIF-B.IN",
-      "bands": "S1–S2",
+      "bands": "S1\u2013S2",
       "band_ids": [
         "S1",
         "S2"
@@ -4664,7 +4668,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:L/CV:N/RV:P/NP:N",
-        "score": 3.6,
+        "score": 3.4,
         "severity": "low",
         "pins": true
       },
@@ -4724,7 +4728,7 @@
       "id": "QIF-T0051",
       "attack": "Neural data privacy breach",
       "tactic": "QIF-D.HV",
-      "bands": "N1–S3",
+      "bands": "N1\u2013S3",
       "band_ids": [
         "N1",
         "S1",
@@ -4748,7 +4752,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:E/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -4816,7 +4820,7 @@
       "id": "QIF-T0052",
       "attack": "ERP harvesting",
       "tactic": "QIF-D.HV",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -4840,7 +4844,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
-        "score": 3.7,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4906,14 +4910,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "ERP harvesting reveals cognitive state — mental privacy not in CVSS"
+        "gap_summary": "ERP harvesting reveals cognitive state \u2014 mental privacy not in CVSS"
       }
     },
     {
       "id": "QIF-T0053",
       "attack": "Cognitive state capture",
       "tactic": "QIF-D.HV",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -4936,7 +4940,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
-        "score": 3.7,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4962,7 +4966,7 @@
           "safe_parameters": "State monitoring for therapeutic purpose only; no surveillance; patient controls data sharing",
           "sources": [
             "Dehais et al. 2019 (Front Hum Neurosci)",
-            "Mühl et al. 2014 (Front Neurosci)"
+            "M\u00fchl et al. 2014 (Front Neurosci)"
           ]
         },
         "governance": {
@@ -5010,7 +5014,7 @@
       "id": "QIF-T0054",
       "attack": "Memory extraction",
       "tactic": "QIF-D.HV",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -5033,8 +5037,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:C/CV:E/RV:F/NP:N",
-        "score": 4.5,
-        "severity": "medium",
+        "score": 3.4,
+        "severity": "low",
         "pins": false
       },
       "cross_references": {
@@ -5097,14 +5101,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Deep memory retrieval violates cognitive sovereignty — no CVSS equivalent"
+        "gap_summary": "Deep memory retrieval violates cognitive sovereignty \u2014 no CVSS equivalent"
       }
     },
     {
       "id": "QIF-T0055",
       "attack": "BCI cognitive warfare",
       "tactic": "QIF-P.DS",
-      "bands": "S3→N4–N7",
+      "bands": "S3\u2192N4\u2013N7",
       "band_ids": [
         "S3",
         "N4",
@@ -5128,7 +5132,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:C/CV:E/RV:P/NP:S",
-        "score": 8.3,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -5182,7 +5186,7 @@
       "id": "QIF-T0056",
       "attack": "Neuro-surveillance",
       "tactic": "QIF-D.HV",
-      "bands": "N6–N7→S3",
+      "bands": "N6\u2013N7\u2192S3",
       "band_ids": [
         "N6",
         "N7",
@@ -5204,7 +5208,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
-        "score": 3.7,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -5276,7 +5280,7 @@
       "id": "QIF-T0057",
       "attack": "Network mapping (BCI topology)",
       "tactic": "QIF-N.SC",
-      "bands": "S2–S3",
+      "bands": "S2\u2013S3",
       "band_ids": [
         "S2",
         "S3"
@@ -5361,14 +5365,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "BCI topology recon — standard CVSS reconnaissance sufficient"
+        "gap_summary": "BCI topology recon \u2014 standard CVSS reconnaissance sufficient"
       }
     },
     {
       "id": "QIF-T0058",
       "attack": "Calibration poisoning",
       "tactic": "QIF-C.IM",
-      "bands": "S1–S2",
+      "bands": "S1\u2013S2",
       "band_ids": [
         "S1",
         "S2"
@@ -5391,7 +5395,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
-        "score": 4.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": false
       },
@@ -5462,7 +5466,7 @@
       "id": "QIF-T0059",
       "attack": "Pattern lock (learned pathway persistence)",
       "tactic": "QIF-C.IM",
-      "bands": "S1–S2→N7",
+      "bands": "S1\u2013S2\u2192N7",
       "band_ids": [
         "S1",
         "S2",
@@ -5484,8 +5488,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
-        "score": 5.4,
-        "severity": "medium",
+        "score": 7.4,
+        "severity": "high",
         "pins": false
       },
       "cross_references": {
@@ -5555,7 +5559,7 @@
       "id": "QIF-T0060",
       "attack": "Memory implant (cross-session persistence)",
       "tactic": "QIF-C.IM",
-      "bands": "N6–N7",
+      "bands": "N6\u2013N7",
       "band_ids": [
         "N6",
         "N7"
@@ -5576,7 +5580,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:P/NP:S",
-        "score": 7.2,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -5648,7 +5652,7 @@
       "id": "QIF-T0061",
       "attack": "Coherence mimicry",
       "tactic": "QIF-B.EV",
-      "bands": "I0–S1",
+      "bands": "I0\u2013S1",
       "band_ids": [
         "I0",
         "S1"
@@ -5669,7 +5673,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:N/RV:F/NP:N",
-        "score": 0.8,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -5734,14 +5738,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:L/SA:N",
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Detection evasion technique — standard CVSS sufficient"
+        "gap_summary": "Detection evasion technique \u2014 standard CVSS sufficient"
       }
     },
     {
       "id": "QIF-T0062",
       "attack": "Gradual drift (slow parameter shift)",
       "tactic": "QIF-B.EV",
-      "bands": "S1→N7",
+      "bands": "S1\u2192N7",
       "band_ids": [
         "S1",
         "N7"
@@ -5762,8 +5766,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
-        "score": 5.4,
-        "severity": "medium",
+        "score": 7.4,
+        "severity": "high",
         "pins": false
       },
       "cross_references": {
@@ -5834,7 +5838,7 @@
       "id": "QIF-T0063",
       "attack": "Noise injection (detection masking)",
       "tactic": "QIF-B.EV",
-      "bands": "I0–S1",
+      "bands": "I0\u2013S1",
       "band_ids": [
         "I0",
         "S1"
@@ -5855,7 +5859,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:L/CV:N/RV:F/NP:N",
-        "score": 1.8,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -5868,7 +5872,7 @@
         "mechanism": "Injection of noise into BCI data pipeline to mask ongoing attack signatures",
         "dual_use": "probable",
         "clinical": {
-          "therapeutic_analog": "Stochastic resonance (SR) — adding noise to enhance weak signal detection",
+          "therapeutic_analog": "Stochastic resonance (SR) \u2014 adding noise to enhance weak signal detection",
           "conditions": [
             "sensory enhancement (hearing, touch)",
             "balance improvement in elderly",
@@ -5928,7 +5932,7 @@
       "id": "QIF-T0064",
       "attack": "User consent fatigue (neural permission flooding)",
       "tactic": "QIF-B.EV",
-      "bands": "S2–S3→N7",
+      "bands": "S2\u2013S3\u2192N7",
       "band_ids": [
         "S2",
         "S3",
@@ -5950,8 +5954,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:P/NP:T",
-        "score": 3.1,
-        "severity": "low",
+        "score": 5.0,
+        "severity": "medium",
         "pins": false
       },
       "cross_references": {
@@ -6019,7 +6023,7 @@
       "id": "QIF-T0065",
       "attack": "Algorithmic psychosis induction (recommendation weaponization)",
       "tactic": "QIF-C.EX",
-      "bands": "S3→S2→N5–N7",
+      "bands": "S3\u2192S2\u2192N5\u2013N7",
       "band_ids": [
         "S3",
         "S2",
@@ -6037,13 +6041,13 @@
       "status": "CONFIRMED",
       "severity": "critical",
       "ui_category": "CI",
-      "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI — it operates through normal sensory channels (screen → eyes → visual cortex → limbic system → prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
+      "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI \u2014 it operates through normal sensory channels (screen \u2192 eyes \u2192 visual cortex \u2192 limbic system \u2192 prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
       "legacy_ids": [],
       "legacy_technique_id": null,
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:H/CG:C/CV:E/RV:P/NP:S",
-        "score": 8.3,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -6115,7 +6119,7 @@
       "id": "QIF-T0066",
       "attack": "Slow drift / boiling frog (adiabatic phase space manipulation)",
       "tactic": "QIF-B.EV",
-      "bands": "I0→N1–N7",
+      "bands": "I0\u2192N1\u2013N7",
       "band_ids": [
         "I0",
         "N1",
@@ -6142,8 +6146,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
-        "score": 5.4,
-        "severity": "medium",
+        "score": 7.4,
+        "severity": "high",
         "pins": false
       },
       "cross_references": {
@@ -6219,7 +6223,7 @@
       "id": "QIF-T0067",
       "attack": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
       "tactic": "QIF-N.IJ",
-      "bands": "S1→I0→N1–N7",
+      "bands": "S1\u2192I0\u2192N1\u2013N7",
       "band_ids": [
         "S1",
         "I0",
@@ -6245,7 +6249,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
-        "score": 4.9,
+        "score": 6.4,
         "severity": "medium",
         "pins": false
       },
@@ -6325,7 +6329,7 @@
       "id": "QIF-T0068",
       "attack": "Bifurcation forcing (critical parameter manipulation to trigger neural state transitions)",
       "tactic": "QIF-N.MD",
-      "bands": "I0→N1–N5",
+      "bands": "I0\u2192N1\u2013N5",
       "band_ids": [
         "I0",
         "N1",
@@ -6337,20 +6341,20 @@
       "coupling": null,
       "access": "RESTRICTED",
       "classical": "None (no traditional cybersecurity equivalent)",
-      "quantum": "Native (bifurcation detection via critical slowing down — universal precursor with no baseline required)",
+      "quantum": "Native (bifurcation detection via critical slowing down \u2014 universal precursor with no baseline required)",
       "sources": [
-        "Izhikevich 2007 (Dynamical Systems in Neuroscience — bifurcation classification); Breakspear 2017 (Dynamic models of large-scale brain activity); Scheffer et al. 2009 (Early-warning signals for critical transitions, Nature); Maturana et al. 2020 (Critical slowing down as biomarker for seizure); Jirsa et al. 2014 (On the nature of seizure dynamics, Brain)"
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience \u2014 bifurcation classification); Breakspear 2017 (Dynamic models of large-scale brain activity); Scheffer et al. 2009 (Early-warning signals for critical transitions, Nature); Maturana et al. 2020 (Critical slowing down as biomarker for seizure); Jirsa et al. 2014 (On the nature of seizure dynamics, Brain)"
       ],
       "status": "EMERGING",
       "severity": "critical",
       "ui_category": "PS",
-      "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting→seizure, sleep→wake, focused→confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) — a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
+      "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting\u2192seizure, sleep\u2192wake, focused\u2192confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) \u2014 a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2063",
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:C/CG:H/CV:E/RV:P/NP:S",
-        "score": 8.4,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -6419,14 +6423,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Seizure induction via neural bifurcation forcing — no CVSS equivalent for tissue harm"
+        "gap_summary": "Seizure induction via neural bifurcation forcing \u2014 no CVSS equivalent for tissue harm"
       }
     },
     {
       "id": "QIF-T0069",
       "attack": "Separatrix leakage (meta-biometric extraction from dynamical transition observations)",
       "tactic": "QIF-D.HV",
-      "bands": "N3–N7→I0→S1",
+      "bands": "N3\u2013N7\u2192I0\u2192S1",
       "band_ids": [
         "N3",
         "N4",
@@ -6446,13 +6450,13 @@
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "EX",
-      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
+      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry \u2014 the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2064",
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N",
-        "score": 3.7,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -6528,7 +6532,7 @@
       "id": "QIF-T0070",
       "attack": "Integrator/resonator type switching (tonic excitability manipulation)",
       "tactic": "QIF-N.MD",
-      "bands": "I0→N1–N4",
+      "bands": "I0\u2192N1\u2013N4",
       "band_ids": [
         "I0",
         "N1",
@@ -6539,14 +6543,14 @@
       "coupling": null,
       "access": "RESTRICTED",
       "classical": "None (no traditional cybersecurity equivalent)",
-      "quantum": "Native (QI detects computational mode shifts via firing pattern analysis — integrator vs resonator signatures are distinct)",
+      "quantum": "Native (QI detects computational mode shifts via firing pattern analysis \u2014 integrator vs resonator signatures are distinct)",
       "sources": [
-        "Izhikevich 2007 (Dynamical Systems in Neuroscience — integrator/resonator classification); Prescott et al. 2008 (Biophysical basis for three distinct dynamical mechanisms of action potential initiation, PLoS Computational Biology)"
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience \u2014 integrator/resonator classification); Prescott et al. 2008 (Biophysical basis for three distinct dynamical mechanisms of action potential initiation, PLoS Computational Biology)"
       ],
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "PS",
-      "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization — effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
+      "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization \u2014 effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2065",
       "niss": {
@@ -6629,7 +6633,7 @@
       "id": "QIF-T0071",
       "attack": "Baseline adaptation poisoning (re-enrollment window exploitation)",
       "tactic": "QIF-C.IM",
-      "bands": "S1→S2→I0",
+      "bands": "S1\u2192S2\u2192I0",
       "band_ids": [
         "S1",
         "S2",
@@ -6638,7 +6642,7 @@
       "coupling": null,
       "access": "LICENSED",
       "classical": "Partial (credential stuffing during password reset)",
-      "quantum": "Enhanced (baseline-free biological TLS eliminates the attack surface entirely — no baselines to poison)",
+      "quantum": "Enhanced (baseline-free biological TLS eliminates the attack surface entirely \u2014 no baselines to poison)",
       "sources": [
         "Bigdely-Shamlo et al. 2015 (Brain activity-based image classification, Journal of Neural Engineering); Arias-Cabarcos et al. 2021 (EEG biometric system attacks); Debie et al. 2020 (Cross-session/cross-device replay)"
       ],
@@ -6651,8 +6655,8 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
-        "score": 5.4,
-        "severity": "medium",
+        "score": 7.4,
+        "severity": "high",
         "pins": false
       },
       "cross_references": {
@@ -6749,114 +6753,150 @@
     {
       "code": "N",
       "name": "Neural",
-      "description": "Direct interface with neural tissue — signal manipulation, electrode boundary, ion channels."
+      "description": "Direct interface with neural tissue \u2014 signal manipulation, electrode boundary, ion channels."
     },
     {
       "code": "C",
       "name": "Cognitive",
-      "description": "Higher-order psychological processes — memory, attention, identity, agency."
+      "description": "Higher-order psychological processes \u2014 memory, attention, identity, agency."
     },
     {
       "code": "P",
       "name": "Physiological",
-      "description": "Somatic systems — motor control, autonomic functions, physical harm."
+      "description": "Somatic systems \u2014 motor control, autonomic functions, physical harm."
     },
     {
       "code": "D",
       "name": "Data",
-      "description": "Information acquisition and manipulation — brainwave recordings, neural metadata."
+      "description": "Information acquisition and manipulation \u2014 brainwave recordings, neural metadata."
     },
     {
       "code": "B",
       "name": "BCI System",
-      "description": "Hardware/software of the BCI device — firmware, protocols, authentication."
+      "description": "Hardware/software of the BCI device \u2014 firmware, protocols, authentication."
     },
     {
       "code": "M",
       "name": "Model",
-      "description": "Machine learning models used in BCI — decoders, classifiers, feedback systems."
+      "description": "Machine learning models used in BCI \u2014 decoders, classifiers, feedback systems."
     },
     {
       "code": "E",
       "name": "Energy",
-      "description": "Directed energy attacks — ELF, microwave, RF, temporal interference."
+      "description": "Directed energy attacks \u2014 ELF, microwave, RF, temporal interference."
     }
   ],
   "niss_spec": {
     "version": "1.0",
-    "name": "Neural Impact Scoring System",
-    "type": "CVSS v4.0 Extension (FIRST.org Section 3.11)",
-    "description": "First registered CVSS v4.0 extension for brain-computer interface security. Five extension metrics capture biological, cognitive, and consent dimensions that CVSS base metrics cannot express. NISS vectors ride alongside CVSS v4.0 base vectors, not replace them.",
-    "score_range": "0.0 - 10.0",
-    "formula": "PINS_score = (w_BI * BI + w_CG * CG + w_CV * CV + w_RV * RV + w_NP * NP) / 10.0",
-    "weights": {
-      "BI": 3.0,
-      "CG": 2.5,
-      "CV": 2.0,
-      "RV": 1.5,
-      "NP": 1.0
-    },
-    "severity_levels": {
-      "none": "0.0",
-      "low": "0.1 - 3.9",
-      "medium": "4.0 - 6.9",
-      "high": "7.0 - 8.9",
-      "critical": "9.0 - 10.0"
-    },
-    "pins_flag": {
-      "name": "Potential Impact to Neural Safety",
-      "condition": "BI >= High OR RV = Irreversible",
-      "description": "Boolean flag indicating the vulnerability may cause irreversible neural harm. Triggers mandatory safety review."
-    },
-    "extension_metrics": [
-      {
-        "id": "BI",
+    "metrics": {
+      "BI": {
         "name": "Biological Impact",
-        "description": "Direct harm to neural tissue, organs, or physiological function",
-        "values": { "N": "None", "L": "Low", "M": "Medium", "H": "High", "C": "Critical" }
+        "values": {
+          "N": 0.0,
+          "L": 3.3,
+          "H": 6.7,
+          "C": 10.0
+        },
+        "description": "Severity of tissue damage from neural interface attacks"
       },
-      {
-        "id": "CG",
+      "CG": {
         "name": "Cognitive Integrity",
-        "description": "Impact on thought processes, perception, memory, identity, or decision-making",
-        "values": { "N": "None", "L": "Low", "M": "Medium", "H": "High", "C": "Critical" }
+        "values": {
+          "N": 0.0,
+          "L": 3.3,
+          "H": 6.7,
+          "C": 10.0
+        },
+        "description": "Degree of cognitive function alteration or disruption"
       },
-      {
-        "id": "CV",
+      "CV": {
         "name": "Consent Violation",
-        "description": "Degree of violation of informed consent or autonomy",
-        "values": { "N": "None", "P": "Partial", "E": "Explicit", "I": "Implicit (covert)" }
+        "values": {
+          "N": 0.0,
+          "P": 3.3,
+          "E": 6.7,
+          "I": 10.0
+        },
+        "description": "Whether the attack violates neural data consent"
       },
-      {
-        "id": "RV",
+      "RV": {
         "name": "Reversibility",
-        "description": "Whether effects can be reversed after exploitation",
-        "values": { "F": "Full", "P": "Partial", "T": "Temporary", "I": "Irreversible" }
+        "values": {
+          "F": 0.0,
+          "T": 3.3,
+          "P": 6.7,
+          "I": 10.0
+        },
+        "description": "Whether neural or biological damage can be reversed"
       },
-      {
-        "id": "NP",
+      "NP": {
         "name": "Neuroplasticity",
-        "description": "Exploitation of brain adaptation mechanisms for persistent effect",
-        "values": { "N": "None", "L": "Low", "M": "Medium", "H": "High", "T": "Therapeutic" }
+        "values": {
+          "N": 0.0,
+          "T": 5.0,
+          "S": 10.0
+        },
+        "description": "Whether the attack causes lasting neural pathway changes"
       }
-    ],
-    "gap_groups": {
-      "1": "CVSS v4.0 sufficient — base metrics fully capture the vulnerability",
-      "2": "CVSS + Safety partial — base metrics capture exploitability but miss biological/cognitive impact",
-      "3": "NISS required — vulnerability cannot be meaningfully scored without extension metrics"
     },
-    "vector_format": "NISS:1.0/BI:<V>/CG:<V>/CV:<V>/RV:<V>/NP:<V>",
-    "companion_cvss_format": "CVSS:4.0/AV:<V>/AC:<V>/AT:<V>/PR:<V>/UI:<V>/VC:<V>/VI:<V>/VA:<V>/SC:<V>/SI:<V>/SA:<V>",
-    "statistics": {
-      "total_techniques": 71,
-      "by_gap_group": { "1": 4, "2": 17, "3": 50 },
-      "pins_flagged": 31,
-      "by_severity": { "critical": 0, "high": 14, "medium": 32, "low": 24, "none": 1 }
-    }
+    "formula": "NISS = (BI + CG + CV + RV + NP) / 5",
+    "weights": {
+      "default": {
+        "BI": 1.0,
+        "CG": 1.0,
+        "CV": 1.0,
+        "RV": 1.0,
+        "NP": 1.0
+      }
+    },
+    "context_profiles": {
+      "clinical": {
+        "BI": 2.0,
+        "CG": 1.5,
+        "CV": 1.0,
+        "RV": 2.0,
+        "NP": 1.0
+      },
+      "research": {
+        "BI": 1.0,
+        "CG": 2.0,
+        "CV": 2.0,
+        "RV": 1.0,
+        "NP": 1.5
+      },
+      "consumer": {
+        "BI": 1.0,
+        "CG": 1.5,
+        "CV": 2.0,
+        "RV": 1.0,
+        "NP": 1.0
+      },
+      "military": {
+        "BI": 2.0,
+        "CG": 2.0,
+        "CV": 0.5,
+        "RV": 1.5,
+        "NP": 1.5
+      }
+    },
+    "pins": {
+      "description": "Potential Impact to Neural Safety",
+      "trigger": "BI >= H OR RV == I",
+      "type": "boolean"
+    },
+    "severity_scale": {
+      "none": "0.0",
+      "low": "0.1-3.9",
+      "medium": "4.0-6.9",
+      "high": "7.0-8.9",
+      "critical": "9.0-10.0"
+    },
+    "rounding": "ceil(score * 10) / 10",
+    "vector_format": "NISS:1.0/BI:<v>/CG:<v>/CV:<v>/RV:<v>/NP:<v>"
   },
   "tara_spec": {
     "version": "1.0",
-    "name": "TARA — Therapeutic Atlas of Risks and Applications",
+    "name": "TARA \u2014 Therapeutic Atlas of Risks and Applications",
     "description": "Mechanism-first Rosetta Stone. Same physical phenomenon, four stakeholder views. Security researchers see attack vectors. Clinicians see therapeutic modalities. Regulators see compliance requirements. Engineers see physical parameters.",
     "dual_use_classifications": {
       "confirmed": "Published therapeutic and security applications exist for this mechanism",

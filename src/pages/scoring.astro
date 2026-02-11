@@ -7,58 +7,55 @@ const nissStats = getNissStats();
 const totalTechniques = THREAT_VECTORS.length;
 
 // NISS v1.0 Extension Metrics (5 metrics that extend CVSS v4.0)
+// Reconciled: equal weights (1.0 all), context profiles available separately
 const extensionMetrics = [
   {
-    id: 'BI', name: 'Biological Impact', weight: 3.0,
+    id: 'BI', name: 'Biological Impact', weight: 1.0,
     description: 'Direct harm to neural tissue, organs, or physiological function. This dimension has no equivalent in CVSS. It captures seizure induction, tissue damage, involuntary motor activation, and other physical consequences unique to devices that interface with biology.',
     values: [
-      { code: 'N', label: 'None', description: 'No tissue interaction or physical harm.' },
-      { code: 'L', label: 'Low', description: 'Temporary discomfort, minor sensory disruption, reversible tissue stress.' },
-      { code: 'M', label: 'Medium', description: 'Moderate physiological disruption requiring monitoring or intervention.' },
-      { code: 'H', label: 'High', description: 'Significant tissue damage, seizure induction, involuntary motor activation. Triggers PINS flag.' },
-      { code: 'C', label: 'Critical', description: 'Life-threatening or permanently disabling neural harm. Triggers PINS flag.' },
+      { code: 'N', label: 'None', score: '0.0', description: 'No tissue interaction or physical harm.' },
+      { code: 'L', label: 'Low', score: '3.3', description: 'Temporary discomfort, minor sensory disruption, reversible tissue stress.' },
+      { code: 'H', label: 'High', score: '6.7', description: 'Significant tissue damage, seizure induction, involuntary motor activation. Triggers PINS flag.' },
+      { code: 'C', label: 'Critical', score: '10.0', description: 'Life-threatening or permanently disabling neural harm. Triggers PINS flag.' },
     ],
   },
   {
-    id: 'CG', name: 'Cognitive Integrity', weight: 2.5,
+    id: 'CG', name: 'Cognitive Integrity', weight: 1.0,
     description: 'Impact on thought processes, perception, memory, identity, or decision-making. CVSS has no concept of thought privacy or cognitive autonomy. CG captures everything from partial intent decoding to full perception manipulation.',
     values: [
-      { code: 'N', label: 'None', description: 'No cognitive impact.' },
-      { code: 'L', label: 'Low', description: 'Decoded intent partially exposed, minor perceptual distortion.' },
-      { code: 'M', label: 'Medium', description: 'Significant cognitive state inference or moderate perception manipulation.' },
-      { code: 'H', label: 'High', description: 'Full thought decoding, identity inference, or perception manipulation.' },
-      { code: 'C', label: 'Critical', description: 'Cognitive coercion, identity modification, or complete loss of cognitive autonomy.' },
+      { code: 'N', label: 'None', score: '0.0', description: 'No cognitive impact.' },
+      { code: 'L', label: 'Low', score: '3.3', description: 'Decoded intent partially exposed, minor perceptual distortion.' },
+      { code: 'H', label: 'High', score: '6.7', description: 'Full thought decoding, identity inference, or perception manipulation.' },
+      { code: 'C', label: 'Critical', score: '10.0', description: 'Cognitive coercion, identity modification, or complete loss of cognitive autonomy.' },
     ],
   },
   {
-    id: 'CV', name: 'Consent Violation', weight: 2.0,
-    description: 'Degree of violation of informed consent or cognitive autonomy. CVSS does not model consent boundaries. CV captures the difference between operating within assumed consent and covert neural manipulation.',
+    id: 'CV', name: 'Consent Violation', weight: 1.0,
+    description: 'Degree of violation of informed consent or cognitive autonomy. CVSS does not model consent boundaries. CV captures the difference between operating within assumed consent and covert neural manipulation. Ordered by severity: covert (Implicit) violations are worse than detectable (Explicit) ones.',
     values: [
-      { code: 'N', label: 'None', description: 'Operating within explicitly consented boundaries.' },
-      { code: 'P', label: 'Partial', description: 'Action exceeds scope of original consent but remains within reasonable expectations.' },
-      { code: 'E', label: 'Explicit', description: 'Clear violation of explicitly stated consent boundaries.' },
-      { code: 'I', label: 'Implicit (covert)', description: 'Covert manipulation the patient cannot detect or know to refuse.' },
+      { code: 'N', label: 'None', score: '0.0', description: 'Operating within explicitly consented boundaries.' },
+      { code: 'P', label: 'Partial', score: '3.3', description: 'Action exceeds scope of original consent but subject retains some awareness.' },
+      { code: 'E', label: 'Explicit', score: '6.7', description: 'Direct violation of explicit consent boundaries, but detectable by the subject.' },
+      { code: 'I', label: 'Implicit (covert)', score: '10.0', description: 'Covert manipulation the patient cannot detect or know to refuse. Highest severity.' },
     ],
   },
   {
-    id: 'RV', name: 'Reversibility', weight: 1.5,
+    id: 'RV', name: 'Reversibility', weight: 1.0,
     description: 'Whether the damage caused by the attack can be undone. IT assets can be restored from backup. Neural tissue cannot be rebooted. RV captures the permanence gradient from fully reversible to irreversible neural harm.',
     values: [
-      { code: 'F', label: 'Full', description: 'Effects fully reverse when attack stops (e.g., jamming, temporary interference).' },
-      { code: 'T', label: 'Temporary', description: 'Effects reverse over hours to days (e.g., neuroplastic adaptation after prolonged stimulation).' },
-      { code: 'P', label: 'Partial', description: 'Some effects permanent, some reversible (e.g., partial tissue scarring with functional recovery).' },
-      { code: 'I', label: 'Irreversible', description: 'Permanent damage — neural tissue destruction, irreversible cognitive change. Triggers PINS flag.' },
+      { code: 'F', label: 'Full', score: '0.0', description: 'Effects fully reverse when attack stops (e.g., jamming, temporary interference).' },
+      { code: 'T', label: 'Temporary', score: '3.3', description: 'Effects reverse over hours to days with no permanent damage expected.' },
+      { code: 'P', label: 'Partial', score: '6.7', description: 'Some effects permanent, some reversible (e.g., partial tissue scarring with functional recovery).' },
+      { code: 'I', label: 'Irreversible', score: '10.0', description: 'Permanent damage — neural tissue destruction, irreversible cognitive change. Triggers PINS flag.' },
     ],
   },
   {
     id: 'NP', name: 'Neuroplasticity', weight: 1.0,
     description: 'Whether the attack exploits or induces neuroplastic changes — the brain\'s ability to rewire itself. Prolonged exposure to adversarial stimulation can cause lasting structural changes. This has no digital equivalent.',
     values: [
-      { code: 'N', label: 'None', description: 'No neuroplastic effect.' },
-      { code: 'L', label: 'Low', description: 'Minor or transient plasticity effects.' },
-      { code: 'M', label: 'Medium', description: 'Moderate neuroplastic reorganization requiring monitoring.' },
-      { code: 'H', label: 'High', description: 'Significant neuroplastic reorganization — altered neural pathways, changed sensory processing.' },
-      { code: 'T', label: 'Therapeutic', description: 'Neuroplastic effect consistent with therapeutic intent (relevant for TARA dual-use mapping).' },
+      { code: 'N', label: 'None', score: '0.0', description: 'No neuroplastic effect.' },
+      { code: 'T', label: 'Temporary', score: '5.0', description: 'Short-term synaptic changes that decay within hours to days.' },
+      { code: 'S', label: 'Structural', score: '10.0', description: 'Long-term or permanent neural pathway changes — synaptic consolidation, dendritic remodeling, cortical reorganization.' },
     ],
   },
 ];
@@ -218,12 +215,12 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
 
         <div class="grid gap-4 sm:grid-cols-2">
           {[
-            { gap: 'No biological impact metric', detail: 'CVSS cannot distinguish between a server crash and a seizure. NISS adds Biological Impact (BI) — weight 3.0, the highest.' },
-            { gap: 'No cognitive integrity metric', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Integrity (CG) — weight 2.5.' },
-            { gap: 'No consent model', detail: 'CVSS does not model informed consent or cognitive liberty. NISS adds Consent Violation (CV) — weight 2.0.' },
-            { gap: 'No reversibility dimension', detail: 'IT assets restore from backup. Neural tissue cannot. NISS adds Reversibility (RV) — weight 1.5.' },
-            { gap: 'No neuroplasticity tracking', detail: 'Prolonged adversarial stimulation physically rewires the brain. NISS adds Neuroplasticity (NP) — weight 1.0.' },
-            { gap: 'Wrong priority weighting', detail: 'CVSS weights system metrics equally. NISS weights BI highest (3.0) because the endpoint is a person, not a server.' },
+            { gap: 'No biological impact metric', detail: 'CVSS cannot distinguish between a server crash and a seizure. NISS adds Biological Impact (BI) with 4 severity levels.' },
+            { gap: 'No cognitive integrity metric', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Integrity (CG) with 4 severity levels.' },
+            { gap: 'No consent model', detail: 'CVSS does not model informed consent or cognitive liberty. NISS adds Consent Violation (CV) — ordered by detectability, with covert violations ranked highest.' },
+            { gap: 'No reversibility dimension', detail: 'IT assets restore from backup. Neural tissue cannot. NISS adds Reversibility (RV) with 4 levels from Full to Irreversible.' },
+            { gap: 'No neuroplasticity tracking', detail: 'Prolonged adversarial stimulation physically rewires the brain. NISS adds Neuroplasticity (NP) — None, Temporary, or Structural.' },
+            { gap: 'Context-blind scoring', detail: 'CVSS uses one set of weights. NISS provides equal-weight defaults plus context profiles (Clinical, Research, Consumer, Military) that shift priorities by deployment context.' },
           ].map(item => (
             <div class="glass rounded-xl p-5">
               <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)] mb-2">{item.gap}</h3>
@@ -294,46 +291,58 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scoring Formula</h2>
         <div class="glass rounded-xl p-8 text-center mb-6">
           <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            NISS = (3.0&times;BI + 2.5&times;CG + 2.0&times;CV + 1.5&times;RV + 1.0&times;NP) / 10.0
+            NISS = (BI + CG + CV + RV + NP) / 5
           </p>
           <p class="text-sm text-[var(--color-text-faint)]">
-            Score range: 0.0 – 10.0 &ensp;|&ensp; BI weighted highest (biological harm first)
+            Score range: 0.0 – 10.0 &ensp;|&ensp; Equal weights (default) &ensp;|&ensp; Context profiles available
           </p>
         </div>
 
         <div class="prose mb-6">
           <p>
-            The weights reflect a deliberate priority ordering: <strong>biological harm first</strong> (BI = 3.0), then cognitive integrity (CG = 2.5), then consent (CV = 2.0), then reversibility (RV = 1.5), then neuroplasticity (NP = 1.0). A vulnerability that causes neural tissue damage always scores higher than one that violates consent alone.
+            The default formula uses <strong>equal weights</strong> for all five metrics — each dimension contributes equally to the composite score. This follows the same principle as CVSS v4.0 base scoring: no a priori bias toward any impact dimension. Organizations can apply <strong>context profiles</strong> that shift weights based on deployment context (see below).
           </p>
         </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-[var(--color-border)]">
-                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Metric</th>
-                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Weight</th>
-                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Share</th>
-                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Rationale</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { id: 'BI', w: 3.0, share: '30%', why: 'Tissue damage is the most severe consequence — brains cannot be patched' },
-                { id: 'CG', w: 2.5, share: '25%', why: 'Cognitive autonomy is the most personal asset a person has' },
-                { id: 'CV', w: 2.0, share: '20%', why: 'Consent violation undermines the entire trust model for medical BCI' },
-                { id: 'RV', w: 1.5, share: '15%', why: 'Permanence of damage amplifies all other impacts' },
-                { id: 'NP', w: 1.0, share: '10%', why: 'Neuroplastic exploitation is insidious but typically requires sustained exposure' },
-              ].map(r => (
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] font-semibold">{r.id}</td>
-                  <td class="py-2 px-3 font-semibold">{r.w}</td>
-                  <td class="py-2 px-3 text-[var(--color-accent-secondary)]">{r.share}</td>
-                  <td class="py-2 px-3 text-[var(--color-text-muted)]">{r.why}</td>
+        <div class="glass rounded-xl p-6 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Context Profiles</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            Organizations MAY apply context-specific weight profiles. The general formula is: <code class="text-[var(--color-accent-tertiary)]">NISS = (w_BI×BI + w_CG×CG + w_CV×CV + w_RV×RV + w_NP×NP) / Σw</code>
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Profile</th>
+                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">BI</th>
+                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">CG</th>
+                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">CV</th>
+                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">RV</th>
+                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">NP</th>
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Emphasis</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {[
+                  { name: 'Default', bi: 1.0, cg: 1.0, cv: 1.0, rv: 1.0, np: 1.0, focus: 'Equal — general purpose' },
+                  { name: 'Clinical', bi: 2.0, cg: 1.5, cv: 1.0, rv: 2.0, np: 1.0, focus: 'Patient safety first' },
+                  { name: 'Research', bi: 1.0, cg: 2.0, cv: 2.0, rv: 1.0, np: 1.5, focus: 'Subject rights and data integrity' },
+                  { name: 'Consumer', bi: 1.0, cg: 1.5, cv: 2.0, rv: 1.0, np: 1.0, focus: 'Neural data privacy' },
+                  { name: 'Military', bi: 2.0, cg: 2.0, cv: 0.5, rv: 1.5, np: 1.5, focus: 'Cognitive warfare defense' },
+                ].map(p => (
+                  <tr class="border-b border-[var(--color-border)]/50">
+                    <td class="py-2 px-3 font-semibold text-[var(--color-text-primary)]">{p.name}</td>
+                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.bi}</td>
+                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.cg}</td>
+                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.cv}</td>
+                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.rv}</td>
+                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.np}</td>
+                    <td class="py-2 px-3 text-[var(--color-text-muted)]">{p.focus}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 

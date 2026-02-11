@@ -147,7 +147,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     type: 'metric',
     shortDef: 'First CVSS v4.0 extension for neural security (0-10 scale).',
     fullDef: 'Developed by Qinnovate as the first CVSS v4.0 extension for neural security, following FIRST.org\'s extension framework (User Guide §3.11). Five extension metrics: Biological Impact (BI, weight 3.0), Cognitive Integrity (CG, 2.5), Consent Violation (CV, 2.0), Reversibility (RV, 1.5), Neuroplasticity (NP, 1.0). Every technique carries both a NISS extension vector and a CVSS v4.0 base vector. 94.4% of 71 TARA techniques require NISS for full-fidelity scoring. PINS flag triggers when BI >= High or RV = Irreversible. Severity: Critical (9.0+), High (7.0-8.9), Medium (4.0-6.9), Low (0.1-3.9).',
-    formula: 'NISS = (3.0×BI + 2.5×CG + 2.0×CV + 1.5×RV + 1.0×NP) / 10.0',
+    formula: 'NISS = (BI + CG + CV + RV + NP) / 5',
     relatedTerms: ['locus-taxonomy', 'tara'],
     href: '/scoring/',
     tags: ['metric', 'original'],
