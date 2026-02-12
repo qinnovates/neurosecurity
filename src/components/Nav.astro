@@ -138,6 +138,19 @@ const isGovActive = currentPath.startsWith('/governance/');
           Milestones
         </a>
 
+        <!-- Consulting (flat link) -->
+        <a
+          href="/consulting/"
+          class:list={[
+            "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            currentPath.startsWith('/consulting/')
+              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+          ]}
+        >
+          Consulting
+        </a>
+
         <!-- Governance dropdown -->
         <div class="relative" data-dropdown="gov">
           <a
@@ -318,6 +331,19 @@ const isGovActive = currentPath.startsWith('/governance/');
         ]}
       >
         Milestones
+      </a>
+
+      <!-- Consulting (flat) -->
+      <a
+        href="/consulting/"
+        class:list={[
+          "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+          currentPath.startsWith('/consulting/')
+            ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+        ]}
+      >
+        Consulting
       </a>
 
       <!-- Mobile Governance section -->

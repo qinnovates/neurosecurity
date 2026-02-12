@@ -1,0 +1,714 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { QIF_VERSION, STATS } from '../lib/qif-constants';
+import '../styles/global.css';
+
+const services = [
+  {
+    id: 'compliance',
+    icon: '&#8853;',
+    color: 'var(--color-accent-tertiary)',
+    name: 'Regulatory Readiness',
+    tagline: 'QIF-mapped documentation for FDA, EU MDR, and neuroethics requirements',
+    description: 'The FDA\'s Refuse to Accept policy means devices without adequate cybersecurity documentation don\'t get reviewed. Qinnovate maps your device\'s threat surface to FDA premarket cybersecurity guidance and EU MDR essential requirements using QIF bands — so your submission speaks the regulator\'s language. For deep regulatory counsel, Qinnovate partners with specialized compliance firms.',
+    deliverables: ['QIF-to-FDA cybersecurity mapping', 'Threat documentation for regulatory submission', 'Neural data governance framework', 'Referral to specialized regulatory counsel'],
+  },
+  {
+    id: 'threat-modeling',
+    icon: '&#9670;',
+    color: 'var(--color-accent-primary)',
+    name: 'BCI Threat Modeling',
+    tagline: 'Map your attack surface before adversaries do',
+    description: 'Full-spectrum threat analysis of your neural device architecture using QIF\'s 11-band hourglass model. Every threat surface is mapped — from neural tissue and the electrode-tissue interface through the analog front-end to wireless telemetry.',
+    deliverables: ['QIF band-by-band threat map', 'NISS severity scores per vector', 'Prioritized remediation roadmap', 'MITRE ATT&CK cross-reference'],
+  },
+  {
+    id: 'security-assessment',
+    icon: '&#9632;',
+    color: 'var(--color-accent-secondary)',
+    name: 'Security Assessment',
+    tagline: 'End-to-end audit of BCI and neural data systems',
+    description: 'Penetration testing, architecture review, and vulnerability assessment for brain-computer interfaces, neural data pipelines, and medical device ecosystems. Qinnovate tests what others can\'t — because the threat model was built here.',
+    deliverables: ['Vulnerability report with CVSS + NISS scoring', 'Firmware and protocol analysis', 'Neural data flow audit', 'Executive summary for board and regulators'],
+  },
+  {
+    id: 'research',
+    icon: '&#9733;',
+    color: 'var(--color-status-safe)',
+    name: 'Research & Advisory',
+    tagline: 'Technical advisory for labs and startups at the bio-digital boundary',
+    description: 'Joint research, co-authored publications, and ongoing technical advisory for academic labs, neurotech startups, and government agencies developing the next generation of neural interfaces — building security in from day one.',
+    deliverables: ['Technical advisory retainer', 'Co-authored publications', 'Architecture review sessions', 'Conference and grant support'],
+  },
+];
+
+const engagements = [
+  {
+    name: 'Rapid Assessment',
+    duration: '1–2 weeks',
+    description: 'Targeted review of a specific system, protocol, or compliance question. Fast turnaround for teams that need answers now.',
+    color: 'var(--color-accent-secondary)',
+  },
+  {
+    name: 'Full Engagement',
+    duration: '4–12 weeks',
+    description: 'Comprehensive threat modeling, security assessment, and remediation planning. End-to-end coverage for pre-market or pre-deployment systems.',
+    color: 'var(--color-accent-primary)',
+  },
+  {
+    name: 'Retainer',
+    duration: 'Ongoing',
+    description: 'Continuous advisory, quarterly assessments, and on-call support. For organizations building long-term neural security posture.',
+    color: 'var(--color-accent-tertiary)',
+  },
+];
+---
+
+<BaseLayout
+  title="Consulting — Qinnovate"
+  description="BCI security consulting from Kevin Qi, author of the QIF standard. Threat modeling, FDA cybersecurity compliance, and security assessments for brain-computer interfaces and neural devices."
+>
+  <Nav />
+
+  <!-- ═══ HERO — Problem-first ═══ -->
+  <section class="relative min-h-[70vh] flex items-center justify-center px-4 overflow-hidden">
+    <div class="absolute inset-0 bg-[var(--color-bg-deep)]">
+      <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse at 50% 40%, rgba(59,130,246,0.12) 0%, transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(6,182,212,0.08) 0%, transparent 50%);"></div>
+    </div>
+
+    <div class="relative z-10 text-center max-w-4xl mx-auto pt-24 pb-16">
+      <p class="text-sm font-medium tracking-[0.2em] uppercase text-[var(--color-accent-secondary)] mb-6">
+        Qinnovate Consulting
+      </p>
+
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.1]">
+        <span class="text-[var(--color-text-primary)]">1.2 billion neural data points collected daily.</span>
+        <br />
+        <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
+          No security standard protects them.
+        </span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
+        Qinnovate created the QIF standard — the first open security framework for brain-computer interfaces. Kevin Qi, the framework's author, works directly with teams to implement it.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="#contact"
+          class="px-8 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
+        >
+          Schedule a Threat Briefing
+        </a>
+        <a
+          href="#services"
+          class="px-8 py-3.5 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
+        >
+          View Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS BAR — Credibility anchors ═══ -->
+  <section class="border-y border-[var(--color-border)] bg-[var(--color-bg-deep)]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">11</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">Security Bands Modeled</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">99</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">BCI Attack Techniques Catalogued</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">15</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">Threat Tactics in TARA Registry</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-status-safe)]">v{QIF_VERSION}</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">QIF Framework (Open Standard)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE PROBLEM ═══ -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="max-w-3xl">
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-6">The security gap is real</h2>
+      <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          Neuralink has implanted patients. Synchron is in FDA trials. Blackrock Neurotech has been in human brains since 2004. These devices are tested for safety and efficacy. <strong class="text-[var(--color-text-primary)]">They are not tested against adversarial threats.</strong>
+        </p>
+        <p>
+          There is no OWASP for neural interfaces. No MITRE ATT&CK for brain-computer systems. No established methodology for assessing whether a BCI can be compromised, what the blast radius looks like, or how to remediate it.
+        </p>
+        <p>
+          <strong class="text-[var(--color-text-primary)]">Qinnovate built that methodology.</strong> The QIF standard, the TARA threat registry, and the NISS scoring system exist because Kevin Qi wrote them. When you work with Qinnovate, you're working with the person who defined the threat landscape — not a consultant learning it on your dime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CASE STUDY — Real work ═══ -->
+  <section class="border-y border-[var(--color-border)] bg-[var(--color-bg-deep)]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="mb-10">
+        <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Recent Work</p>
+        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)]">What a TARA Assessment Looks Like</h2>
+      </div>
+
+      <!-- Main case study -->
+      <div class="glass rounded-xl p-6 sm:p-8 mb-8" style="border-left: 4px solid var(--color-accent-primary);">
+        <div class="flex items-start gap-3 mb-4">
+          <span class="text-xs font-semibold uppercase tracking-wider px-2 py-1 rounded-full bg-[var(--color-status-breach)]/10 text-[var(--color-status-breach)]">CVE Disclosed</span>
+          <span class="text-xs font-semibold uppercase tracking-wider px-2 py-1 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">CVSS 8.6 High</span>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2">
+          Consumer Audio to Neural Eavesdropping: A 5-Level Attack Chain
+        </h3>
+
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6">
+          While extending the TARA threat registry to cover consumer devices upstream of neural interfaces, Qinnovate identified a 9-year-old vulnerability in RealTek HD Audio codec drivers. Any software process can silently reprogram a headphone jack to function as a microphone. No elevated privileges. No user notification. Publicly demonstrated since 2016. Never assigned a CVE.
+        </p>
+
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6">
+          The assessment didn't stop at the software bug. The full attack escalation was mapped: from acoustic eavesdropping through transducer inversion, to physiological monitoring via in-ear sensors, to neural signal capture from the temporal lobe through modified ear tips. The physics is governed by the same Maxwell's equations at every level. Apple AirPods (proprietary codec pipeline) were tested against generic Bluetooth earbuds (Redmi) to characterize the security gap between protected and unprotected audio paths.
+        </p>
+
+        <!-- Results grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <div class="glass rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-status-breach)]">1</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Unfiled CVE discovered</div>
+          </div>
+          <div class="glass rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">5</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Attack levels mapped</div>
+          </div>
+          <div class="glass rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">5</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">QIF bands crossed</div>
+          </div>
+          <div class="glass rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">3</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">New TARA techniques added</div>
+          </div>
+        </div>
+
+        <!-- Attack chain visualization -->
+        <div class="glass rounded-lg p-5 mb-6">
+          <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-3">Attack Escalation Chain</p>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-start gap-3">
+              <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] shrink-0">L0</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Acoustic eavesdropping</strong> — Invert speaker to microphone via RealTek codec retasking (CWE-862)</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] shrink-0">L1</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Persistent surveillance</strong> — Supply chain firmware modification of generic earbuds (no proprietary protocol to bypass)</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)] shrink-0">L2</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Physiological eavesdropping</strong> — Conductive ear tip + high-gain amplifier captures heart rate, stress response</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-[var(--color-status-breach)]/10 text-[var(--color-status-breach)] shrink-0">L3</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Neural eavesdropping</strong> — In-ear EEG captures auditory evoked potentials, P300 attention markers, N400 semantic processing</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-[var(--color-status-breach)]/10 text-[var(--color-status-breach)] shrink-0">L4</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Cognitive inference</strong> — ML model trained on longitudinal neural data builds personalized cognitive profile without consent</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deliverables -->
+        <div class="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-6">
+          <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] sm:col-span-2 mb-1">Deliverables</p>
+          <div class="text-sm text-[var(--color-text-muted)] flex items-start gap-2">
+            <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+            CVE disclosure filed to TWCERT/CC, RealTek, and MITRE
+          </div>
+          <div class="text-sm text-[var(--color-text-muted)] flex items-start gap-2">
+            <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+            Full physics derivation (Maxwell's equations through all 5 levels)
+          </div>
+          <div class="text-sm text-[var(--color-text-muted)] flex items-start gap-2">
+            <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+            Apple vs generic Bluetooth security gap analysis
+          </div>
+          <div class="text-sm text-[var(--color-text-muted)] flex items-start gap-2">
+            <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+            3 new TARA technique IDs (QIF-T0072 through T0074)
+          </div>
+          <div class="text-sm text-[var(--color-text-muted)] flex items-start gap-2">
+            <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+            Cross-band threat map (S1, S2, S3, I0, N1)
+          </div>
+          <div class="text-sm text-[var(--color-text-muted)] flex items-start gap-2">
+            <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+            Dual-use therapeutic analogs identified (epilepsy, sleep staging)
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 text-sm">
+          <a href="/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">
+            Read the full write-up &#8594;
+          </a>
+          <a href="/TARA/" class="text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] transition-colors">
+            View TARA registry &#8594;
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom callout -->
+      <div class="glass rounded-xl p-5 text-center">
+        <p class="text-sm text-[var(--color-text-muted)]">
+          This is what TARA-driven assessment looks like. A framework designed for BCI security found an unfiled CVE in consumer audio hardware because it traces attack chains across the full stack, from physics through software through biology.
+        </p>
+        <a href="#contact" class="inline-block mt-4 text-sm font-medium text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+          See how this applies to your system &#8594;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHO THIS IS FOR (moved before Services) ═══ -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="mb-12">
+      <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Industries</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)]">Who This Is For</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="glass rounded-xl p-6">
+        <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">Neurotech Companies</h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          Startups and scale-ups building implantable or wearable neural devices. Build security into the architecture from day one — not bolt it on before FDA submission.
+        </p>
+      </div>
+      <div class="glass rounded-xl p-6">
+        <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">Medical Device Manufacturers</h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          Companies navigating FDA premarket cybersecurity requirements for devices that interface with the nervous system. Every requirement mapped to QIF bands.
+        </p>
+      </div>
+      <div class="glass rounded-xl p-6">
+        <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">Research Institutions</h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          Universities and labs running BCI trials, collecting neural data, or developing next-generation interfaces. The threat model your IRB doesn't know to ask for.
+        </p>
+      </div>
+      <div class="glass rounded-xl p-6">
+        <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">Regulators & Policy Teams</h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          Government agencies, standards bodies, and policy organizations developing neural security guidelines. Technical depth that informs regulation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="border-y border-[var(--color-border)] bg-[var(--color-bg-deep)] py-20" id="services">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-12">
+      <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Services</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)]">What Qinnovate Does</h2>
+    </div>
+
+    <div class="space-y-6">
+      {services.map((service) => (
+        <div class="glass rounded-xl p-6 sm:p-8" id={service.id}>
+          <div class="flex items-start gap-4">
+            <div class="text-2xl shrink-0 mt-1" style={`color: ${service.color}`} set:html={service.icon} />
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1">{service.name}</h3>
+              <p class="text-sm font-medium text-[var(--color-text-faint)] mb-4">{service.tagline}</p>
+              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-5">{service.description}</p>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">Deliverables</p>
+                <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-1.5">
+                  {service.deliverables.map((d) => (
+                    <li class="text-sm text-[var(--color-text-muted)] flex items-start gap-2">
+                      <span class="text-[var(--color-accent-primary)] mt-1 shrink-0">&#8250;</span>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 text-center">
+      <a
+        href="#contact"
+        class="inline-flex px-8 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
+      >
+        Schedule a Threat Briefing
+      </a>
+    </div>
+    </div>
+  </section>
+
+  <!-- ═══ ENGAGEMENT MODELS ═══ -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="mb-12">
+        <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Engagement Models</p>
+        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)]">How It Works</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        {engagements.map((eng) => (
+          <div class="glass rounded-xl p-6">
+            <div class="text-xs font-semibold uppercase tracking-wider mb-3" style={`color: ${eng.color}`}>
+              {eng.duration}
+            </div>
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-3">{eng.name}</h3>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{eng.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT THE AUTHOR ═══ -->
+  <section class="border-y border-[var(--color-border)] bg-[var(--color-bg-deep)]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="mb-12">
+        <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Who You'll Work With</p>
+        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)]">Talk to the Author, Not a Sales Team</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="md:col-span-1">
+          <div class="glass rounded-xl p-6 text-center">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[var(--color-accent-primary)] to-[var(--color-accent-tertiary)] mx-auto mb-4 flex items-center justify-center text-3xl font-bold text-white font-[family-name:var(--font-heading)]">
+              KQ
+            </div>
+            <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Kevin Qi</h3>
+            <p class="text-sm text-[var(--color-text-faint)] mt-1">Founder &amp; Framework Author</p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-3">consulting@qinnovate.com</p>
+          </div>
+        </div>
+        <div class="md:col-span-2 space-y-4">
+          <div>
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-3">Framework Author</h3>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+              QIF, TARA, NISS, and NSP were all created by Kevin Qi at Qinnovate. When you engage Qinnovate, you work directly with the person who defined the threat model — not a consultant referencing someone else's work.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-3">Cross-Domain Expertise</h3>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+              BCI security sits at the intersection of cybersecurity, neuroscience, and quantum physics. Qinnovate doesn't just understand one side — the QIF framework connects all three.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-3">Open Standard, Honest Assessment</h3>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+              The framework is open and peer-reviewable. Assessments are transparent. No proprietary black-box tools — you get a model you can verify, challenge, and build on.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RESOURCES — Downloadable assets ═══ -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="mb-12">
+      <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Resources</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)]">Start Here</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-6">
+      <a href="/whitepaper/" class="glass rounded-xl p-6 card-hover group">
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-3">Whitepaper</p>
+        <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
+          QIF Whitepaper v{QIF_VERSION}
+        </h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          The full QIF specification — 11-band architecture, coherence metrics, and threat modeling methodology.
+        </p>
+      </a>
+      <a href="/TARA/" class="glass rounded-xl p-6 card-hover group">
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-tertiary)] mb-3">Threat Registry</p>
+        <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-tertiary)] transition-colors">
+          TARA Registry
+        </h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          99 catalogued BCI attack techniques with NISS severity scores, MITRE mappings, and clinical overlays.
+        </p>
+      </a>
+      <a href="/framework/" class="glass rounded-xl p-6 card-hover group">
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-secondary)] mb-3">Framework</p>
+        <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">
+          Interactive Explorer
+        </h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          Explore the 11-band hourglass model, band-level threat breakdowns, and the full scoring system.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT FORM ═══ -->
+  <section class="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]" id="contact">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <!-- Left: Copy -->
+        <div>
+          <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Get Started</p>
+          <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-6">Schedule a Threat Briefing</h2>
+          <p class="text-[var(--color-text-muted)] leading-relaxed mb-8">
+            Tell Qinnovate about your system and security challenges. Kevin will respond within 48 hours with a recommended engagement and scope.
+          </p>
+
+          <div class="space-y-4 text-sm mb-8">
+            <div class="flex items-start gap-3">
+              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+              <span class="text-[var(--color-text-muted)]">No sales pitch — you'll hear honestly if Qinnovate is the right fit</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+              <span class="text-[var(--color-text-muted)]">NDA available before first conversation if needed</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
+              <span class="text-[var(--color-text-muted)]">Response within 48 hours</span>
+            </div>
+          </div>
+
+          <!-- Free readiness call CTA -->
+          <div class="glass rounded-lg p-4 mb-6">
+            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1">Not sure yet?</p>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+              Book a free 30-minute BCI security readiness call. No obligation — just an honest assessment of where you stand and what you'd need.
+            </p>
+            <a
+              href="https://cal.com/qinnovate/readiness"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex px-5 py-2 rounded-lg border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)] text-sm font-medium hover:bg-[var(--color-accent-primary)]/10 transition-colors"
+            >
+              Book a Free Call
+            </a>
+          </div>
+
+          <p class="text-sm text-[var(--color-text-faint)]">
+            Or reach out directly: <a href="mailto:consulting@qinnovate.com" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">consulting@qinnovate.com</a>
+          </p>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <form id="consulting-form" class="space-y-5">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="name" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Name *</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Work Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors"
+                  placeholder="you@company.com"
+                />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="org" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Organization *</label>
+                <input
+                  type="text"
+                  id="org"
+                  name="organization"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors"
+                  placeholder="Company or institution"
+                />
+              </div>
+              <div>
+                <label for="role" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Your Role</label>
+                <input
+                  type="text"
+                  id="role"
+                  name="role"
+                  class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors"
+                  placeholder="e.g. CTO, Head of Security, PI"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="service" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Service Interest</label>
+              <select
+                id="service"
+                name="service"
+                class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors"
+              >
+                <option value="">Select a service</option>
+                <option value="threat-modeling">BCI Threat Modeling</option>
+                <option value="security-assessment">Security Assessment</option>
+                <option value="compliance">Regulatory Readiness</option>
+                <option value="research">Research & Advisory</option>
+                <option value="incident">Incident Response</option>
+                <option value="other">Other / Not Sure</option>
+              </select>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="timeline" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Timeline</label>
+                <select
+                  id="timeline"
+                  name="timeline"
+                  class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors"
+                >
+                  <option value="">When do you need this?</option>
+                  <option value="urgent">Urgent (within 2 weeks)</option>
+                  <option value="soon">Soon (1–3 months)</option>
+                  <option value="planning">Planning phase (3+ months)</option>
+                  <option value="ongoing">Ongoing / Retainer</option>
+                </select>
+              </div>
+              <div>
+                <label for="budget" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Budget Range</label>
+                <select
+                  id="budget"
+                  name="budget"
+                  class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors"
+                >
+                  <option value="">Approximate budget</option>
+                  <option value="under-10k">Under $10k</option>
+                  <option value="10k-25k">$10k – $25k</option>
+                  <option value="25k-50k">$25k – $50k</option>
+                  <option value="50k-plus">$50k+</option>
+                  <option value="unsure">Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Tell Us About Your Project *</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows="4"
+                class="w-full px-4 py-2.5 rounded-lg bg-[var(--color-bg-deep)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-colors resize-y"
+                placeholder="What are you building? What's your biggest security concern? Any regulatory deadlines?"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full px-6 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors text-sm"
+            >
+              Schedule a Threat Briefing
+            </button>
+
+            <p class="text-xs text-[var(--color-text-faint)] text-center">
+              Kevin responds within 48 hours. No spam. No sales automation.
+            </p>
+
+            <!-- Success/error messages -->
+            <div id="form-success" class="hidden rounded-lg bg-[var(--color-status-safe)]/10 border border-[var(--color-status-safe)]/30 p-4">
+              <p class="text-sm text-[var(--color-status-safe)] font-medium">Request received. We'll be in touch within 48 hours.</p>
+            </div>
+            <div id="form-error" class="hidden rounded-lg bg-[var(--color-status-breach)]/10 border border-[var(--color-status-breach)]/30 p-4">
+              <p class="text-sm text-[var(--color-status-breach)] font-medium">Something went wrong. Please try again or email us directly.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // ====== PASTE YOUR GOOGLE APPS SCRIPT URL HERE ======
+  const GOOGLE_SCRIPT_URL = '';
+  // =====================================================
+
+  function initForm() {
+    const form = document.getElementById('consulting-form') as HTMLFormElement;
+    const success = document.getElementById('form-success');
+    const error = document.getElementById('form-error');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      success?.classList.add('hidden');
+      error?.classList.add('hidden');
+
+      const formData = new FormData(form);
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      // Build JSON payload from form fields
+      const payload: Record<string, string> = {};
+      formData.forEach((value, key) => { payload[key] = value.toString(); });
+
+      try {
+        if (!GOOGLE_SCRIPT_URL) {
+          // Fallback: mailto if Google Script URL not configured yet
+          const subject = encodeURIComponent(`Consulting Inquiry: ${payload.service || 'General'} — ${payload.organization}`);
+          const body = encodeURIComponent(
+            `Name: ${payload.name}\nEmail: ${payload.email}\nRole: ${payload.role}\nOrganization: ${payload.organization}\nService: ${payload.service}\nTimeline: ${payload.timeline}\nBudget: ${payload.budget}\n\n${payload.message}`
+          );
+          window.location.href = `mailto:consulting@qinnovate.com?subject=${subject}&body=${body}`;
+          success?.classList.remove('hidden');
+          return;
+        }
+
+        const res = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: { 'Content-Type': 'text/plain' }, // text/plain avoids CORS preflight
+        });
+
+        const result = await res.json();
+
+        if (result.result === 'success') {
+          form.reset();
+          success?.classList.remove('hidden');
+        } else {
+          error?.classList.remove('hidden');
+        }
+      } catch {
+        error?.classList.remove('hidden');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    });
+  }
+
+  initForm();
+  document.addEventListener('astro:after-swap', initForm);
+</script>

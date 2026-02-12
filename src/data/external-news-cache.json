@@ -1,29 +1,38 @@
 [
   {
     "type": "external",
-    "title": "Recovering Whole-Brain Causal Connectivity under Indirect Observation with Applications to Human EEG and fMRI",
-    "date": "2026-02-11",
-    "url": "https://arxiv.org/abs/2602.09034",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.09034v1 Announce Type: new \nAbstract: Inferring directed connectivity from neuroimaging is an ill-posed inverse problem: recorded signals are distorted by hemodynamic filtering and volume c",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "CorTec announces second successful human implant for BCI system - MassDevice",
-    "date": "2026-02-10",
-    "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPUXhWbEpMcEhUZlJBSEhUbHRUeVBqUWxyTXFoNEc1a3kwYl95ay1SXzBHUGtycHFRTkNEUl9IZnFad1VVd2xfUmZRbXVFVHZjQWlUZFZ0a3hxbHJJSkFFZjFkV0VaQjRFUkRmanl5MnpRY25zN2VJcEdsVXBQUkFienJXY19DUWZOOGJPYjVUTGo1M2dVYnc?oc=5",
+    "title": "'Tipping point' reached in creation of brain chips to help 'unlock' minds of people with paralysis - Sky News",
+    "date": "2026-02-12",
+    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQY1FibEl5WWY0amRZY05VM0pQbFI1d3JrVTlvMndIckZxUm9jTGdYQnNxemZuc2dWWERMd0NKdktkdW9LamZ0b0ZrMWNXQ2tjcWUtTUlHekFVNzhNN0xHZnFWNHNlTWxmc0ZhT2VuZ181bWlRZ2Vkd2hDaTcwMmxva2tmMm5xa3NPSHpvRmNBWFVEWE5QQlJDeEpSbTdPbnRZeFkxRjdlb0ZzMU1xVU9pYV9sWkhiRERWYXBnT1NXXzhkaEVES2FwYlR3?oc=5",
     "source": "Google News — BCI",
-    "summary": "CorTec announces second successful human implant for BCI system&nbsp;&nbsp;MassDevice",
+    "summary": "'Tipping point' reached in creation of brain chips to help 'unlock' minds of people with paralysis&nbsp;&nbsp;Sky News",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Neuralink Files $8.2M Remodel At Del Valle Site - Hoodline",
+    "title": "Applications of endovascular brain–computer interface in patients with Alzheimer's disease - EurekAlert!",
+    "date": "2026-02-12",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE44QWpsM0hkYlNvS3VqOHVwMFcteHg1TWhKR0ZZSzBwVE41RHQ1bTNIQmVfWTVZbGlhV2lrWFNxWElaZnRoNFV2UmZIMXIzaWIzSWc0RGFXeWZNRW1I?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Applications of endovascular brain–computer interface in patients with Alzheimer's disease&nbsp;&nbsp;EurekAlert!",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "ENIGMA: EEG-to-Image in 15 Minutes Using Less Than 1% of the Parameters",
+    "date": "2026-02-12",
+    "url": "https://arxiv.org/abs/2602.10361",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.10361v1 Announce Type: new \nAbstract: To be practical for real-life applications, models for brain-computer interfaces must be easily and quickly deployable on new subjects, effective on af",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk's brain chip company wires up $8.2M Texas upgrades - MySA",
     "date": "2026-02-10",
-    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNUVpqak05emhIRENkdGpXLVIyZkhZdXVQS1JSdEpJdkhQNzNoTXpnb2FVMkZqVWxpRm9ZSnFOUHhneURmbFowdGJ6bGJTcXhDSmJaZ2dWYS1EdHlLRlY5SlprUmhhQkd2dzNZWHN0N3ZGeUY4cm1ZTWFyQmxwaXh0SmYzb3dOYlQtamN2TGZxSQ?oc=5",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPX29jNVY5cjdlMmhlTzNkX0doekVDRzhCaGRURTBDdDBmZjRRTUZwLXVaSW9pU2NGNHFaX2ZtUVNzSGgwbGJDWkl0bXlIaEZIYzJ6ZVcwbFFCRGJqRnIyTXNlMTYyTVpUbHlyOHl4RW1zTjdMTUhUOGpTTDlQRE1QdnJTRWFVMHhiM2YzOG9n?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Neuralink Files $8.2M Remodel At Del Valle Site&nbsp;&nbsp;Hoodline",
+    "summary": "Elon Musk's brain chip company wires up $8.2M Texas upgrades&nbsp;&nbsp;MySA",
     "category": "neurotechnology"
   },
   {
@@ -82,15 +91,6 @@
   },
   {
     "type": "external",
-    "title": "Elon Musk's Neuralink says it has 21 participants enrolled in trials - Reuters",
-    "date": "2026-01-28",
-    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQRFFGTTJhUVdWRXlRa3VsaTFvSVpQZktNRkNUSGNKcWl1Ql9JZ2YzODNJNXlvZ19rVnpKa2VqQ0Zyb3BiNWxEbzhrd1gxdi1CZmRxVzhMOHVaT2NTd2toOWIwSlp0cTIwUjVkY280OVRGT1BPdTMyOU9RSkFRcEJxQlEtYjF3ZXJsQ1d0dm5xcjlFWTdMeVUwSkFFVExIa0RVQXFkOXBDU185bmVTLTdiZDFJZkRqQWNf?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk's Neuralink says it has 21 participants enrolled in trials&nbsp;&nbsp;Reuters",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "OpenAI invests in Sam Altman’s brain-computer interface startup - NR Times",
     "date": "2026-01-21",
     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNakVXLU85bWgxYW1CRWlFUk80dkR3WHBuelFuZDNrWnZfSno3eU5Vc3B0bHRqM29DbTd2TmNiY1V3SEI5alJHZnJjLUZHS1ZJTk9CNXphQkxYczFzV0FMZExRQlZlSXFWV2VieVM4dnU5R1BaQVZaNEh3T1pwbUZFQUdHZzctUDlsSkU1V3pkYjBtbVhFcFE?oc=5",
@@ -118,11 +118,20 @@
   },
   {
     "type": "external",
-    "title": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says - Fierce Biotech",
-    "date": "2026-01-02",
-    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQYXdTY3MxMnRVV1QtMjBFZFUtNFpHRWV4OHItaFFPRWFwQWl0b2dVNGJjbjVQZDFXYnNWekZjcVU4Sm5YeWFBSjF2dzBoRUpwQVVZckhXZDdRV29vYV9POFFsNjJIQnVQcGVrTkJfTGlPbkJucEpSckwtcElpaEJZZnYzVUE0cndZQ2VwVjluTnRwa0hiXzJBU0F0NlhPUXUzWkNuWG40MnBoUmRkM3JRUVBQSExvcGFvVDlkYXZ2X013dw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says&nbsp;&nbsp;Fierce Biotech",
+    "title": "Meta AI chief Alexandr Wang says will have kids only after Elon Musk’s Neuralink … - Times of India",
+    "date": "2026-01-04",
+    "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNaVVVeElVTUV3djZpMG92cUZzZkdtLTBYSkh6RW1BbFYzVVNiMHJaTE1PdVpwMFlXaGlWX3dNRFpmMjdsa3huMFpkUldkVE1KNFM4emN0OHdtazhMeW1mNjMwRlVHRFNTWlFMaFVqSzQzaXJfYVBDLWZiaE15Q3A2UXpEdEQ5UXdONThPWEM2SXpUXzBrM2VxdHBxRTFfa19UTXA5eHBaczNwZWxiMlNwTlVZemlzdk9VSG1yOTBZdm9IUlhlNkJMRTV3a3lSLTNidFlSWFFKSFdyTHpzVDdfdUtZWjdFdS1wcV9RcDlkRlphNTA5N2fSAfsBQVVfeXFMTjI1YVJWQU4xektZMXJqMzExNkt4UElDWThEamRKWnc1TFd3aExoQy1fVmdZdFh4SUFrem4xQy03Mk9SdzhFaEV3U09sSkxINFJXYWVINVNNMF9DeVctVDRQS05UMnI2ckFnTVFzUWZ5V3R4MElJNTB2RGxQdGthVjFtcHVWVHlEc2tUcGRlc2R1MzZ0bzByeWxnWVF0T1h3RFlFRnpnQzVNYzdvcktRMnlnU1pKcllJVC1Sa2d2UDQ5VVJGcmNYakVMdURKZ1l5b0xZT3NXZnpQSEFTNTkwRXA5QXMwcENHR1FCUndsV2xGV3U1djBFWnFFY28?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Meta AI chief Alexandr Wang says will have kids only after Elon Musk’s Neuralink …&nbsp;&nbsp;Times of India",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says - Reuters",
+    "date": "2026-01-01",
+    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
     "category": "neurotechnology"
   },
   {
