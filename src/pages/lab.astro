@@ -1,7 +1,9 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
+import { COHERENCE, SCALE_FREQUENCY, HOURGLASS_BANDS } from '../lib/qif-constants';
 import { THREAT_VECTORS } from '../lib/threat-data';
+
+const bands = [...HOURGLASS_BANDS];
 ---
 
 <PageLayout
@@ -31,7 +33,7 @@ import { THREAT_VECTORS } from '../lib/threat-data';
       <div class="text-2xl mb-3 text-[var(--color-status-warn)]">&#9632;</div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Layer Explorer</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
-        Drill into all 11 hourglass bands with attack vectors, BCI devices, and frequency spectrum.
+        Drill into all {bands.length} hourglass bands with attack vectors, BCI devices, and frequency spectrum.
       </p>
       <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /lab/hourglass.html</span>
     </a>

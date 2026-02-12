@@ -22,7 +22,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
       <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">TARA Registrar</h1>
       <p class="text-sm text-[var(--color-text-muted)] opacity-70 -mt-1 mb-1">Therapeutic Atlas of Risks &amp; Applications</p>
       <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
-        {THREAT_VECTORS.length} BCI techniques mapped to CVSS v4.0 base vectors and MITRE ATT&amp;CK-style technique IDs across {THREAT_CATEGORIES.length} categories and 11 hourglass bands. Every attack vector is also a therapeutic application.
+        {THREAT_VECTORS.length} BCI techniques mapped to CVSS v4.0 base vectors and MITRE ATT&amp;CK-style technique IDs across {THREAT_CATEGORIES.length} categories and {bands.length} hourglass bands. Every attack vector is also a therapeutic application.
       </p>
 
       <!-- Context introduction for newcomers -->
@@ -136,7 +136,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
             <span class="status-badge status-badge--EMERGING ml-1">emerging</span> = newly identified.
           </div>
           <div>
-            <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). NISS scores rate neural impact 0&ndash;10.
+            <strong class="text-[var(--color-text-primary)]">QIF IDs</strong> &mdash; QIF-T0001+ for techniques. Tactics use Qinnovate&rsquo;s TARA Taxonomy (e.g. QIF-N.IJ = Neural Injection). NISS scores rate neural impact 0&ndash;10.
           </div>
         </div>
       </div>
@@ -1125,7 +1125,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   // ═══════════════════════════════════════════════════════════════
 
   var GRID_AXES_HTML = '<div><strong class="text-[var(--color-text-primary)]">Grid axes</strong> \u2014 Rows are hourglass bands (Neural N7\u2013N1, Interface I0, Synthetic S1\u2013S3). Columns are attack categories (Signal Injection, Eavesdropping, Data Manipulation, etc.).</div>';
-  var QIF_IDS_HTML = '<div><strong class="text-[var(--color-text-primary)]">QIF IDs</strong> \u2014 QIF-T0001+ for techniques. Tactics use Qinnovate\u2019s Locus Taxonomy (e.g. QIF-N.IJ = Neural Injection). NISS scores rate neural impact 0\u201310.</div>';
+  var QIF_IDS_HTML = '<div><strong class="text-[var(--color-text-primary)]">QIF IDs</strong> \u2014 QIF-T0001+ for techniques. Tactics use Qinnovate\u2019s TARA Taxonomy (e.g. QIF-N.IJ = Neural Injection). NISS scores rate neural impact 0\u201310.</div>';
 
   function updateHowToRead(projId) {
     var proj = PROJECTIONS[projId];

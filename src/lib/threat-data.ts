@@ -1,6 +1,6 @@
 /**
  * QIF Threat Data — adapter over shared/qtara-registrar.json
- * Single source of truth: all techniques from the QIF Locus Taxonomy.
+ * Single source of truth: all techniques from the QIF TARA Taxonomy.
  * Scoring: NISS v1.0 (Neural Impact Scoring System)
  * TARA: Therapeutic Atlas of Risks and Applications (four-projection overlay)
  */
@@ -20,7 +20,7 @@ export const THREAT_CATEGORIES = [
   { id: 'EX', name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
 ] as const;
 
-/** QIF Locus Tactics from registry */
+/** TARA Tactics from registry */
 export const THREAT_TACTICS = registry.tactics;
 
 /** QIF Operational Domains */
@@ -98,7 +98,7 @@ export interface ThreatVector {
   name: string;
   /** UI category for grid column */
   category: CategoryId;
-  /** QIF Locus Tactic ID (e.g. QIF-N.IJ) */
+  /** TARA Tactic ID (e.g. QIF-N.IJ) */
   tactic: string;
   /** Hourglass bands affected */
   bands: BandId[];

@@ -88,12 +88,12 @@ export const PILLARS = [
     name: 'TARA',
     fullName: 'Therapeutic Atlas of Risks & Applications',
     tagline: 'The clinical-security map',
-    description: 'Every BCI technique that can harm a patient can also heal one. TARA maps 71+ techniques across security, clinical, governance, and engineering projections — bridging threat modeling and therapeutic research.',
+    description: 'Every BCI technique that can harm a patient can also heal one. TARA maps techniques across security, clinical, governance, and engineering projections — bridging threat modeling and therapeutic research.',
     href: '/TARA/',
     icon: '&#8853;',
     color: 'var(--color-accent-tertiary)',
     version: '1.0',
-    status: '71 Techniques',
+    status: 'Live Registry',
   },
 ] as const;
 
