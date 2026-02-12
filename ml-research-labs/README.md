@@ -12,7 +12,7 @@ These labs exist to:
 
 | ID | Name | Target | Status | Key Result |
 |----|------|--------|--------|------------|
-| [T0079](t0079-anc-ear-fingerprint/) | ANC Ear Canal Fingerprinting | Consumer ANC earbuds (AirPods, Sony WF) | PoC Complete | 97.5% identification, 3.33% EER |
+| [T0079](t0079-anc-ear-fingerprint/) | ANC Ear Canal Fingerprinting | Consumer ANC earbuds (any Bluetooth) | Hardware Validated | >99% intra-subject, covert masking at -47 dB PMR |
 | [LSL-CVE](../poc/lsl-cve/) | Lab Streaming Layer Exfiltration | liblsl (all versions) | CVE Filed | Zero-auth neural data access |
 
 ## How to Use

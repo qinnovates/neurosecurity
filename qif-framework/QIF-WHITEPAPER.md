@@ -470,7 +470,7 @@ Each domain contains one or more tactics, each describing an adversary's operati
 
 ### 6.4.5 Registry Structure
 
-Each of the 71 techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability (classical vs. QI-enhanced), evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a NISS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
+Each of the 99 techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability (classical vs. QI-enhanced), evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a NISS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
 
 Evidence status breakdown:
 
@@ -495,19 +495,49 @@ CVSS (Common Vulnerability Scoring System), maintained by FIRST.org, is the indu
 - **Violation of consent** --- does this attack bypass the subject's informed consent?
 - **Neuroplasticity effects** --- can repeated exposure cause lasting changes to neural pathways?
 
-NISS v1.0, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **BCI-native impact dimensions** (Biological Impact, Cognitive Integrity, Information Impact) and adds supplemental human-impact modifiers. Where CVSS weights exploit and impact equally, NISS weights human impact at 70% and system exploitability at 30%.
+NISS v1.0, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **five BCI-native impact dimensions**: Biological Impact (BI), Cognitive Integrity (CG), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). The default NISS score is a simple equal-weight average of these five dimensions, ensuring no single dimension dominates without domain-specific justification. Optional **context profiles** (Clinical, Research, Consumer, Military) provide weight overrides for domain-specific scoring.
 
 ### 6.5.2 Score Formula
 
-$$\text{BaseScore} = 0.3 \times \text{Exploitability} + 0.7 \times \text{Impact}$$
+**Default profile (equal weights):**
 
-Human impact weighted 70%. System exploitability weighted 30%.
+$$\text{NISS} = \frac{BI + CG + CV + RV + NP}{5}$$
 
-The 70/30 weighting is a deliberate inversion of traditional vulnerability scoring, which typically weights exploitability more heavily. In BCI security, a hard-to-exploit attack that causes cognitive damage is more dangerous than an easy-to-exploit attack that only affects device availability.
+Each dimension is scored on a 0.0--10.0 scale. The default equal-weight average ensures no single impact dimension dominates without domain-specific justification. All fractional results are ceiling-rounded to the nearest 0.1.
+
+**Context profile (weighted):**
+
+$$\text{NISS} = \frac{w_{BI} \cdot BI + w_{CG} \cdot CG + w_{CV} \cdot CV + w_{RV} \cdot RV + w_{NP} \cdot NP}{\sum w}$$
+
+Context profiles provide optional weight overrides for domain-specific environments where certain impact dimensions carry disproportionate significance. See Section 6.5.6 for profile definitions.
 
 ### 6.5.3 Metric Groups
 
-#### Exploitability Metrics (30%)
+#### Impact Dimensions (NISS Score)
+
+The five core dimensions constitute the NISS score. Each is scored on a 0.0--10.0 scale using discrete severity levels.
+
+| Metric | Code | Levels | Scale | Description |
+|--------|------|--------|-------|-------------|
+| **Biological Impact** | BI | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Physical harm to neural tissue. None = no tissue effect. Low = transient discomfort. High = seizure risk, tissue stress. Critical = tissue damage, life-threatening. |
+| **Cognitive Integrity** | CG | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Alteration of thought, memory, or identity. None = no cognitive effect. Low = minor cognitive interference. High = significant cognitive disruption. Critical = involuntary behavioral change, identity compromise. |
+| **Consent Violation** | CV | N / P / E / I | 0.0 / 3.3 / 6.7 / 10.0 | Degree to which informed consent is bypassed. None = fully consented. Partial = incomplete disclosure. Explicit = clear neurological autonomy violation. Implicit = covert manipulation without the subject's awareness. |
+| **Reversibility** | RV | F / T / P / I | 0.0 / 3.3 / 6.7 / 10.0 | Whether the damage can be undone. Fully reversible = spontaneous recovery. Temporary = resolves with clinical support. Partial = incomplete recovery even with intervention. Irreversible = permanent neural change. |
+| **Neuroplasticity** | NP | N / T / S | 0.0 / 5.0 / 10.0 | Lasting changes to neural pathways from repeated exposure. None = no pathway modification. Temporary = transient plasticity that reverses when exposure stops. Structural = irreversible pathway reorganization via LTP/LTD. |
+
+Note: "Therapeutic" is a *use case*, not a severity level. A therapeutic intervention that causes structural neuroplasticity scores NP=S regardless of clinical intent --- the NISS score measures impact magnitude, not purpose.
+
+#### PINS Trigger (Priority Incident Notification)
+
+An attack triggers PINS --- immediate escalation to clinical and security teams --- when:
+
+> **BI $\in$ {H, C}** OR **RV = I**
+
+This threshold captures the two conditions where delayed response risks irreversible patient harm: high or critical biological impact, or irreversible damage of any kind.
+
+#### Exploitability Qualifiers
+
+Exploitability metrics characterize the attack vector but do not contribute to the NISS score. They are recorded in the vector string for threat intelligence and risk triage.
 
 | Metric | Values | Description |
 |--------|--------|-------------|
@@ -516,40 +546,37 @@ The 70/30 weighting is a deliberate inversion of traditional vulnerability scori
 | PR | None / Low / High | **Privileges Required.** Low = BCI app-level access. High = firmware or clinical access. |
 | UI | None / Passive / Active | **User Interaction.** None = attack succeeds on an idle implant. Passive = user must be wearing or transmitting with the BCI. Active = user must perform a specific cognitive task (e.g., motor imagery, P300 response) that opens the attack window. |
 
-#### Impact Metrics (70%)
+#### Supplemental Threat Metadata
 
 | Metric | Values | Description |
 |--------|--------|-------------|
-| BI | None / Low / High / Critical | **Biological Impact.** Physical harm to neural tissue. Critical = seizure induction, tissue damage. |
-| CI | None / Low / High / Critical | **Cognitive Integrity.** Alteration of thought, memory, or identity. Critical = involuntary behavioral change. |
-| II | None / Low / High | **Information Impact.** Exposure of neural data. High = raw brainwave exfiltration, cognitive state inference. |
 | S | Unchanged / Changed | **Scope.** Changed = attack affects systems beyond the target BCI (e.g., shared neural network). |
-
-#### Supplemental & Threat Metrics
-
-| Metric | Values | Description |
-|--------|--------|-------------|
-| R | Automatic / Supported / Irreversible | **Reversibility.** Can the damage be undone? Irreversible = permanent neural change. |
-| VC | None / Implicit / Explicit | **Violation of Consent.** Does the attack bypass informed consent? Explicit = clear neurological autonomy violation. |
-| NE | None / Growth / Degenerative | **Neuroplasticity.** Can repeated exposure cause lasting pathway changes? Degenerative = irreversible via LTP/LTD. |
 | E | Unproven / PoC / Active | **Exploit Maturity.** Evidence level: Active = used in real-world incidents. |
 
 ### 6.5.4 Vector Format
 
 Example: Signal Injection (QIF-T0001)
 
-`NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CI:H/II:L/S:U/R:S/VC:E/NE:G/E:A`
+`NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CG:H/CV:E/RV:T/NP:T/S:U/E:A`
+
+**Impact dimensions (NISS score):**
+
+- `BI:H` --- High biological impact (6.7): seizure risk, neural tissue stress
+- `CG:H` --- High cognitive integrity impact (6.7): significant cognitive disruption
+- `CV:E` --- Explicit consent violation (6.7): clear neurological autonomy violation
+- `RV:T` --- Temporary reversibility (3.3): resolves with clinical support
+- `NP:T` --- Temporary neuroplasticity (5.0): transient pathway effects
+
+$$\text{NISS} = \frac{6.7 + 6.7 + 6.7 + 3.3 + 5.0}{5} = \frac{28.4}{5} = 5.7$$
+
+**Score: 5.7 / 10.0** --- MEDIUM
+
+**Exploitability qualifiers:**
 
 - `AV:P` --- Physical access required (electrode contact)
 - `AC:L` --- Low complexity (known technique)
-- `BI:H` --- High biological impact (neural tissue)
-- `CI:H` --- High cognitive integrity impact
-- `R:S` --- Reversibility requires clinical support
-- `VC:E` --- Explicit violation of consent
-- `NE:G` --- Neuroplastic growth effects possible
-- `E:A` --- Active: demonstrated in real-world settings
 
-**Score: 7.3 / 10.0** --- HIGH
+**PINS trigger:** BI = H $\rightarrow$ **PINS activated** (immediate clinical escalation)
 
 ### 6.5.5 Severity Levels
 
@@ -560,9 +587,22 @@ Example: Signal Injection (QIF-T0001)
 | 4.0--6.9 | Medium | Moderate impact, self-resolving or minor intervention |
 | 0.1--3.9 | Low | Minimal human impact, primarily device/data level |
 
-### 6.5.6 Registry Distribution
+### 6.5.6 Context Profiles
 
-Across all 71 techniques, NISS scoring produces the following severity distribution:
+The default equal-weight formula treats all five impact dimensions as equally important. In practice, different deployment contexts have different risk priorities. NISS v1.0 defines four optional context profiles that override the default weights:
+
+| Profile | $w_{BI}$ | $w_{CG}$ | $w_{CV}$ | $w_{RV}$ | $w_{NP}$ | Rationale |
+|---------|----------|----------|----------|----------|----------|-----------|
+| **Clinical** | 2.0 | 1.5 | 1.0 | 2.0 | 1.0 | Patient safety paramount; biological harm and irreversibility dominate risk calculus. |
+| **Research** | 1.0 | 2.0 | 2.0 | 1.0 | 1.5 | Subject cognitive integrity and informed consent are the primary ethical obligations. |
+| **Consumer** | 1.0 | 1.5 | 2.0 | 1.0 | 1.0 | Consent and cognitive integrity weigh heavily; users cannot be expected to understand technical risk. |
+| **Military** | 2.0 | 2.0 | 0.5 | 1.5 | 1.5 | Biological and cognitive impact are mission-critical; consent weight reduced in operational context. |
+
+Context profiles are applied using the weighted formula from Section 6.5.2. The profile is recorded in the vector string (e.g., `CP:Clinical`). When no profile is specified, the default equal-weight average applies.
+
+### 6.5.7 Registry Distribution
+
+Across all 99 techniques in the TARA registry, NISS scoring produces the following severity distribution:
 
 | Severity | Count |
 |----------|-------|
@@ -575,7 +615,7 @@ The skew toward high severity is expected: BCI attacks inherently involve the hu
 
 ## 6.6 Case Study: Algorithmic Psychosis Induction
 
-QIF-T0065 -- NISS 9.1 (Critical) -- Status: Confirmed
+QIF-T0065 -- NISS 8.7 (High) -- Status: Confirmed
 
 ### 6.6.1 The Attack
 
@@ -609,22 +649,25 @@ Psychosis manifests as a neurological event: measurable changes in dopaminergic 
 
 ### 6.6.3 NISS Scoring Breakdown
 
-CVSS cannot score this attack. It has no concept of cognitive integrity, neuroplasticity, or consent violation. Under CVSS, a recommendation algorithm is not a vulnerability. Under NISS, it scores 9.1 (Critical):
+CVSS cannot score this attack. It has no concept of cognitive integrity, neuroplasticity, or consent violation. Under CVSS, a recommendation algorithm is not a vulnerability. Under NISS, it scores 8.7 (High):
 
-| NISS Metric | Value | Rationale |
-|-------------|-------|-----------|
-| AV (Attack Vector) | Wireless | Delivered over the internet to any connected device |
-| AC (Complexity) | Low | Algorithm operates autonomously; no per-target customization needed |
-| PR (Privileges) | None | Any user who opens the app is a target |
-| UI (User Interaction) | None | No out-of-the-ordinary action required; attack triggers through normal platform use |
-| **Impact Metrics (70% weight)** | | |
-| BI (Biological Impact) | **High** | Psychosis involves measurable neurochemical and structural changes |
-| CI (Cognitive Integrity) | **Critical** | Reality perception fundamentally altered; sense of agency compromised |
-| R (Reversibility) | **Difficult** | Psychotic episodes can cause lasting cognitive changes; recovery not guaranteed |
-| VC (Consent Violation) | **Critical** | User never consented to psychological targeting; ToS do not constitute informed consent for cognitive manipulation |
-| NE (Neuroplasticity) | **High** | Repeated exposure reshapes neural pathways; adolescent brains especially vulnerable |
+| NISS Metric | Value | Score | Rationale |
+|-------------|-------|-------|-----------|
+| **Impact Dimensions** | | | |
+| BI (Biological Impact) | **High** | 6.7 | Psychosis involves measurable neurochemical and structural changes |
+| CG (Cognitive Integrity) | **Critical** | 10.0 | Reality perception fundamentally altered; sense of agency compromised |
+| CV (Consent Violation) | **Implicit** | 10.0 | User never consented to psychological targeting; manipulation is covert --- ToS do not constitute informed consent |
+| RV (Reversibility) | **Partial** | 6.7 | Psychotic episodes can cause lasting cognitive changes; recovery not guaranteed |
+| NP (Neuroplasticity) | **Structural** | 10.0 | Repeated exposure reshapes neural pathways via LTP/LTD; adolescent brains especially vulnerable |
+| **Exploitability Qualifiers** | | | |
+| AV (Attack Vector) | Network | --- | Delivered over the internet to any connected device |
+| AC (Complexity) | Low | --- | Algorithm operates autonomously; no per-target customization needed |
+| PR (Privileges) | None | --- | Any user who opens the app is a target |
+| UI (User Interaction) | Passive | --- | User opens the app and scrolls; no out-of-the-ordinary action required beyond normal platform use |
 
-**Final score: 9.1 (Critical).** The high Impact weight (70%) correctly prioritizes the human harm. A scoring system that weights exploit complexity equally with impact would underrate this attack because it is technically simple to execute.
+$$\text{NISS} = \frac{6.7 + 10.0 + 10.0 + 6.7 + 10.0}{5} = \frac{43.4}{5} = 8.7$$
+
+**Final score: 8.7 / 10.0 (High).** PINS triggered: BI = H. The NISS score captures the severity of human impact across all five dimensions. The exploitability qualifiers (all favorable to the attacker: wireless, low complexity, no privileges, no interaction) make this attack particularly dangerous in practice, though they do not inflate the impact score itself.
 
 ### 6.6.4 The BCI Amplifier
 
@@ -640,7 +683,7 @@ This attack already works through a screen. A brain-computer interface makes it 
 
 ### 6.6.5 Implications
 
-**Intent is irrelevant to the score.** NISS produces the same 9.1 whether a nation-state deliberately weaponizes a feed to induce psychosis in a target population, or a platform negligently optimizes for engagement while ignoring psychiatric harm. This is a deliberate departure from traditional threat modeling, which assumes an adversary with intent. In BCI security, the outcome is the threat --- not the motivation behind it.
+**Intent is irrelevant to the score.** NISS produces the same 8.7 whether a nation-state deliberately weaponizes a feed to induce psychosis in a target population, or a platform negligently optimizes for engagement while ignoring psychiatric harm. This is a deliberate departure from traditional threat modeling, which assumes an adversary with intent. In BCI security, the outcome is the threat --- not the motivation behind it.
 
 **The legal vacuum.** This attack operates in a regulatory gray area. Current frameworks for negligence and product liability have not been tested against cognitive manipulation at scale. Terms of service do not constitute informed consent for neurological targeting. QIF provides a formal language to describe the harm --- a prerequisite for future legal and regulatory frameworks that do not yet exist.
 
@@ -779,7 +822,7 @@ This paper delivered the seven contributions outlined in Section 2.5:
 
 1. An **11-band hourglass architecture** (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy and quantum physics (Section 4).
 2. A **unified QI equation**, $QI(b,t) = e^{-S(b,t)}$, grounded in spectral decomposition via the STFT and combining classical signal integrity with quantum terms (Section 5).
-3. Identification of **five cross-domain attack coupling mechanisms** with honest detection boundaries, supported by the **QIF Locus Taxonomy** (7 domains, 11 tactics, 71 techniques) and **NISS v1.0** neural impact scoring (Section 6).
+3. Identification of **five cross-domain attack coupling mechanisms** with honest detection boundaries, supported by the **QIF Locus Taxonomy** (8 domains, 15 tactics, 99 techniques) and **NISS v1.0** neural impact scoring (Section 6).
 4. **TARA** (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry bridging security and clinical communities through four dimensional projections of every catalogued technique (Section 6.7).
 5. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM, ML-DSA, and AES-256-GCM, serving as the trust layer for therapeutic BCI deployment (Section 7).
 6. **Project Runemate**, a content compression pipeline offsetting PQC bandwidth overhead by 65--90% (Section 7).

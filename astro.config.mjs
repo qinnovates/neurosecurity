@@ -13,6 +13,8 @@ export default defineConfig({
   publicDir: 'docs',
   redirects: {
     '/threats/': '/TARA/',
+    '/niss': '/scoring/',
+    '/niss/': '/scoring/',
   },
   integrations: [
     react(),
