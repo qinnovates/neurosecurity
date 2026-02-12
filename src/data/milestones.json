@@ -51,8 +51,8 @@
     },
     {
       "date": "2026-02-11",
-      "title": "First BCI PoC Exploit: liblsl",
-      "description": "Three-phase exploit chain demonstrating unauthenticated neural data access in Lab Streaming Layer. CWE-306, CWE-319, CWE-345.",
+      "title": "First BCI Software PoC Exploit",
+      "description": "Three-phase exploit chain against a widely-used BCI data streaming library. Responsible disclosure in progress.",
       "category": "security",
       "icon": "terminal"
     },
