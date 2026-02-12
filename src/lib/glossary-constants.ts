@@ -146,7 +146,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'NISS (Neural Impact Scoring System)',
     type: 'metric',
     shortDef: 'First CVSS v4.0 extension for neural security (0-10 scale).',
-    fullDef: 'Developed by Qinnovate as the first CVSS v4.0 extension for neural security, following FIRST.org\'s extension framework (User Guide §3.11). Five equally-weighted extension metrics: Biological Impact (BI), Cognitive Integrity (CG), Consent Violation (CV), Reversibility (RV), Neuroplasticity (NP). Context profiles (Clinical, Research, Consumer, Military) provide domain-specific weighting. Every technique carries both a NISS extension vector and a CVSS v4.0 base vector. 94.4% of 71 TARA techniques require NISS for full-fidelity scoring. PINS flag triggers when BI >= High or RV = Irreversible. Severity: Critical (9.0+), High (7.0-8.9), Medium (4.0-6.9), Low (0.1-3.9).',
+    fullDef: 'Developed by Qinnovate as the first CVSS v4.0 extension for neural security, following FIRST.org\'s extension framework (User Guide §3.11). Five equally-weighted extension metrics: Biological Impact (BI), Cognitive Integrity (CG), Consent Violation (CV), Reversibility (RV), Neuroplasticity (NP). Context profiles (Clinical, Research, Consumer, Military) provide domain-specific weighting. Every technique carries both a NISS extension vector and a CVSS v4.0 base vector. 94.4% of TARA techniques require NISS for full-fidelity scoring. PINS flag triggers when BI >= High or RV = Irreversible. Severity: Critical (9.0+), High (7.0-8.9), Medium (4.0-6.9), Low (0.1-3.9).',
     formula: 'NISS = (BI + CG + CV + RV + NP) / 5',
     relatedTerms: ['tara-taxonomy', 'tara'],
     href: '/scoring/',

@@ -1,15 +1,15 @@
 {
   "metrics": {
-    "techniques_catalogued": 79,
+    "techniques_catalogued": 99,
     "tactics": 15,
     "domains": 8,
-    "cvss_vectors_mapped": 79,
-    "niss_vectors_scored": 79,
+    "cvss_vectors_mapped": 99,
+    "niss_vectors_scored": 99,
     "cves_filed": 1,
     "pocs_built": 1,
     "cwes_demonstrated": 3,
     "standards_submitted": 1,
-    "therapeutic_mappings": 62,
+    "therapeutic_mappings": 74,
     "specifications_published": 3,
     "days_active": null
   },
@@ -73,7 +73,14 @@
     {
       "date": "2026-02-11",
       "title": "Consumer Sensor Exploitation Domain Added",
-      "description": "New 8th domain (S) with 4 tactics and 8 techniques covering upstream consumer device attacks. Registry expanded to 79 techniques across 15 tactics and 8 domains.",
+      "description": "New 8th domain (S) with 4 tactics and 8 initial techniques covering upstream consumer device attacks. Later expanded to 28 S-domain techniques (99 total).",
+      "category": "framework",
+      "icon": "shield"
+    },
+    {
+      "date": "2026-02-11",
+      "title": "S-Domain Expanded to 28 Techniques (T0080–T0099)",
+      "description": "20 new consumer sensor techniques across audio, optical, IMU, RF, thermal, and biometric categories. 5 chain techniques document multi-stage escalation paths. Registry reaches 99 techniques.",
       "category": "framework",
       "icon": "shield"
     }

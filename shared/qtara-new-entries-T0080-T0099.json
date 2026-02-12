@@ -1,0 +1,2164 @@
+[
+  {
+    "id": "QIF-T0080",
+    "attack": "Gyroscope acoustic eavesdropping (MEMS speech capture via resonant frequency aliasing)",
+    "tactic": "QIF-S.RP",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (purely classical MEMS resonance exploit)",
+    "sources": [
+      "Michalevsky et al. 2014 (Gyrophone: Recognizing Speech from Gyroscope Signals, USENIX Security)",
+      "Zhang et al. 2017 (AccelWord: Energy-efficient voice command recognition via accelerometer)",
+      "Anand & Saxena 2018 (Speechless: Analyzing the Threat to Speech Privacy from Smartphone Motion Sensors, IEEE S&P)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "high",
+    "ui_category": "SE",
+    "notes": "MEMS gyroscopes in smartphones sample at 100-200 Hz, with mechanical resonant frequencies in the audible speech range (100-8000 Hz). When sound waves strike the MEMS proof mass, they induce vibrations that alias into the gyroscope output. Michalevsky et al. (2014) demonstrated that gyroscope data alone can reconstruct intelligible speech features, identify speakers, and detect spoken digits \u2014 all without microphone permission. Android allowed gyroscope access without any permission until API level 33. This creates a covert audio surveillance channel through an 'inertial' sensor that apps access freely. Combined with accelerometer data (T0081), reconstruction quality improves significantly. The attack requires no hardware modification \u2014 only a software app with motion sensor access.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2075",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:E/RV:F/NP:N",
+      "score": 1.4,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0072",
+        "QIF-T0081",
+        "QIF-T0083",
+        "T1123"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "MEMS gyroscope mechanical resonance captures airborne acoustic vibrations; speech features reconstructed via signal processing of motion sensor output",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "standard",
+        "monitoring": [
+          "motion_sensor_access_audit",
+          "gyroscope_sampling_rate_monitoring",
+          "app_permission_review"
+        ],
+        "regulations": [
+          "ECPA (18 U.S.C. \u00a7 2511)",
+          "GDPR Art. 5",
+          "Android sensor permission policy"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Motion sensor access should require explicit permission; sampling rate capped below speech-relevant frequencies when audio permission not granted"
+      },
+      "engineering": {
+        "coupling": [
+          "acoustic",
+          "mechanical"
+        ],
+        "parameters": {
+          "gyroscope_sample_rate_Hz": "100-200",
+          "resonant_frequency_Hz": "100-8000 (MEMS-dependent)",
+          "speech_reconstruction_accuracy": "~65% digit recognition",
+          "SNR_requirement_dB": ">10"
+        },
+        "hardware": [
+          "MEMS_gyroscope",
+          "DSP_processor"
+        ],
+        "detection": "Gyroscope access frequency monitoring, anomalous continuous sampling patterns, app behavior analysis for motion-to-audio correlation"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 1,
+      "gap_summary": "Covert eavesdropping via motion sensor; CVSS confidentiality metrics apply but permission-bypass dimension not captured"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV"
+      ],
+      "note": "Gyroscope audio capture feeds ambient data harvest"
+    }
+  },
+  {
+    "id": "QIF-T0081",
+    "attack": "Accelerometer speech reconstruction (vibration-to-audio via surface-coupled MEMS)",
+    "tactic": "QIF-S.RP",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical vibration analysis)",
+    "sources": [
+      "Zhang et al. 2019 (AccelEve: Eavesdropping via Accelerometers on Smartphones, IEEE S&P Workshop)",
+      "Ba et al. 2020 (Learning-based Practical Smartphone Eavesdropping with Built-in Accelerometer, NDSS)",
+      "Han et al. 2012 (ACComplice: accelerometer side channel, ACM CCS)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "high",
+    "ui_category": "SE",
+    "notes": "Modern smartphone accelerometers (ADXL345, BMI270) have sufficient sensitivity to capture speech vibrations transmitted through surfaces. When a phone lies on a table during a conversation, or is held against the ear during a call, speech vibrations propagate through the phone chassis to the MEMS accelerometer. Ba et al. (2020) used deep learning to reconstruct intelligible speech from accelerometer data alone, achieving speaker identification and keyword recognition. Unlike the gyroscope attack (T0080), accelerometers benefit from direct surface coupling \u2014 speech vibrations transmitted through desks, tables, or the user's hand provide stronger signal. Like T0080, accelerometer access required no permission on Android until recent API changes. The combination of gyroscope + accelerometer data (sensor fusion) significantly improves reconstruction quality over either sensor alone.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2076",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:E/RV:F/NP:N",
+      "score": 1.4,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0072",
+        "QIF-T0080",
+        "QIF-T0083",
+        "QIF-T0087",
+        "T1123"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "MEMS accelerometer captures speech vibrations transmitted through surfaces or phone chassis; deep learning reconstructs intelligible audio from motion sensor data",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "standard",
+        "monitoring": [
+          "accelerometer_access_audit",
+          "sensor_sampling_rate_monitoring",
+          "app_permission_review"
+        ],
+        "regulations": [
+          "ECPA (18 U.S.C. \u00a7 2511)",
+          "GDPR Art. 5",
+          "Android sensor permission policy"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Accelerometer access should require permission when sampling above speech-relevant thresholds; surface coupling mitigated by isolation mounts"
+      },
+      "engineering": {
+        "coupling": [
+          "acoustic",
+          "mechanical"
+        ],
+        "parameters": {
+          "accelerometer_sample_rate_Hz": "100-500",
+          "sensitivity_mg": "0.1-1.0",
+          "speech_reconstruction_WER": "~30-50% (deep learning)",
+          "surface_coupling_gain_dB": "+10-20 vs airborne"
+        },
+        "hardware": [
+          "MEMS_accelerometer",
+          "ML_inference_engine"
+        ],
+        "detection": "Accelerometer access pattern monitoring, anomalous continuous high-rate sampling, correlation with ambient audio events"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 1,
+      "gap_summary": "Eavesdropping via accelerometer; standard confidentiality metrics apply"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV"
+      ],
+      "note": "Accelerometer speech capture feeds ambient data harvest"
+    }
+  },
+  {
+    "id": "QIF-T0082",
+    "attack": "Ultrasonic cross-device tracking (inaudible beacon correlation for user identification)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "ACOUSTIC",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical acoustic signaling)",
+    "sources": [
+      "Mavroudis et al. 2017 (On the Privacy and Security of the Ultrasound Ecosystem, PoPETS)",
+      "Arp et al. 2017 (Privacy Threats through Ultrasonic Side Channels on Mobile Devices, IEEE EuroS&P)",
+      "Silverpush, Lisnr, SilverPush SDK (commercial ultrasonic tracking)"
+    ],
+    "status": "CONFIRMED",
+    "severity": "high",
+    "ui_category": "CI",
+    "notes": "Advertisers and tracking firms embed inaudible ultrasonic beacons (18-22 kHz) in TV commercials, web ads, and in-store audio. Any device with microphone access (phone, tablet, smart speaker) within acoustic range can detect these beacons and report them to a tracking server. This enables cross-device user identification (linking phone, laptop, TV viewing), physical location tracking (in-store beacons), and de-anonymization of Tor/VPN users (TV ad beacons correlate with browsing sessions). Silverpush was found embedded in 234 Android apps (2017). The beacons are inaudible to humans but easily detected by consumer microphones. Combined with QIF-T0075 (ultrasonic sonar), the same frequency band serves both tracking and physiological surveillance. This technique requires no hardware modification \u2014 only software with microphone permission.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2077",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0075",
+        "QIF-T0079",
+        "T1040",
+        "T1071"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "Inaudible ultrasonic beacons (18-22 kHz) embedded in audio content detected by consumer device microphones for cross-device user tracking and location correlation",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "standard",
+        "monitoring": [
+          "ultrasonic_spectrum_analysis",
+          "microphone_access_audit",
+          "network_beacon_correlation"
+        ],
+        "regulations": [
+          "GDPR Art. 5 (transparency)",
+          "FTC Act Section 5",
+          "ePrivacy Directive"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Ultrasonic beacon detection should be disclosed; microphone access for tracking requires explicit consent; frequency filtering above 18 kHz by default"
+      },
+      "engineering": {
+        "coupling": [
+          "acoustic"
+        ],
+        "parameters": {
+          "beacon_frequency_kHz": "18-22",
+          "beacon_duration_ms": "50-500",
+          "detection_range_m": "1-10",
+          "encoding": "frequency-shift or amplitude modulation"
+        },
+        "hardware": [
+          "consumer_speaker",
+          "consumer_microphone",
+          "DSP_processor"
+        ],
+        "detection": "Ultrasonic spectrum monitoring (18-22 kHz), microphone access auditing, network traffic analysis for beacon reporting endpoints"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 1,
+      "gap_summary": "Cross-device tracking via ultrasonic beacons; CVSS confidentiality metrics partially capture privacy loss"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "Ultrasonic tracking feeds identity correlation and reconnaissance"
+    }
+  },
+  {
+    "id": "QIF-T0083",
+    "attack": "Acoustic keystroke inference (typing sound classification for credential extraction)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "ACOUSTIC",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical acoustic pattern recognition)",
+    "sources": [
+      "Harrison & Matyunin 2023 (A Practical Deep Learning-Based Acoustic Side Channel Attack on Keyboards, IEEE European Symposium on Security and Privacy Workshops)",
+      "Zhuang et al. 2009 (Keyboard Acoustic Emanations Revisited, ACM TISSEC)",
+      "Compagno et al. 2017 (Don't Skype & Type! Acoustic Eavesdropping in Voice-Over-IP, ACM CCS)"
+    ],
+    "status": "CONFIRMED",
+    "severity": "high",
+    "ui_category": "CI",
+    "notes": "Each key on a keyboard produces a subtly different acoustic signature based on its position, the mechanical structure beneath it, and the user's typing dynamics. Harrison & Matyunin (2023) achieved 95% keystroke classification accuracy using a deep learning model trained on laptop keyboard audio captured by a nearby phone. The attack works over Zoom/Skype calls (Compagno et al. 2017), enabling remote credential theft during video conferences. Attack scenarios: (1) malicious app with microphone access on the same desk, (2) nearby compromised smart speaker, (3) during a video call where keyboard sounds leak through the microphone. This technique pairs with accelerometer keystroke inference (T0087) for multi-modal confirmation, significantly reducing error rates.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2078",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0080",
+        "QIF-T0081",
+        "QIF-T0087",
+        "T1056.001"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "Deep learning classification of keyboard acoustic emanations to reconstruct typed text including credentials and sensitive content",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "standard",
+        "monitoring": [
+          "microphone_access_audit",
+          "audio_classification_detection",
+          "VoIP_audio_filtering"
+        ],
+        "regulations": [
+          "ECPA (18 U.S.C. \u00a7 2511)",
+          "GDPR Art. 5",
+          "CFAA (credential theft)"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Microphone access disclosure; VoIP clients should filter keyboard frequency bands; keystroke sounds should be suppressed in conferencing software"
+      },
+      "engineering": {
+        "coupling": [
+          "acoustic"
+        ],
+        "parameters": {
+          "classification_accuracy_pct": ">95 (nearby phone), ~60 (VoIP)",
+          "frequency_range_Hz": "1000-16000",
+          "model_type": "CNN/transformer on mel spectrograms",
+          "training_data": "~25 keystrokes per key"
+        },
+        "hardware": [
+          "consumer_microphone",
+          "ML_inference_engine"
+        ],
+        "detection": "Audio stream analysis for keystroke patterns, VoIP audio filtering, acoustic noise injection for keystroke masking"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 1,
+      "gap_summary": "Credential theft via acoustic side channel; CVSS confidentiality applies well"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-B.IN"
+      ],
+      "note": "Keystroke inference feeds credential harvest and potential system intrusion"
+    }
+  },
+  {
+    "id": "QIF-T0084",
+    "attack": "Remote photoplethysmography (camera-based pulse and blood oxygen extraction)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "OPTICAL",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical optical measurement)",
+    "sources": [
+      "Verkruysse et al. 2008 (Remote plethysmographic imaging using ambient light, Optics Express)",
+      "Poh et al. 2011 (Advancements in Noncontact, Multiparameter Physiological Measurements Using a Webcam, IEEE Trans Biomed Eng)",
+      "Chen & McDuff 2018 (DeepPhys: Video-Based Physiological Measurement Using Convolutional Attention Networks, ECCV)",
+      "Liu et al. 2023 (EfficientPhys: enabling simple, fast and accurate camera-based vitals measurement)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "high",
+    "ui_category": "SE",
+    "notes": "Standard RGB webcams and phone cameras can detect the subtle skin color changes caused by blood volume pulses beneath the skin surface. Each heartbeat modulates hemoglobin concentration in facial capillaries, creating sub-pixel intensity variations in the green channel (540nm peak absorption of hemoglobin). Modern deep learning models (DeepPhys, EfficientPhys) extract heart rate, heart rate variability, breathing rate, and blood oxygen saturation from webcam video with near-clinical accuracy \u2014 even through video compression artifacts on Zoom/Teams calls. Attack scenario: any app with camera access (video call, face filter, AR app) silently extracts physiological data. The user consents to video, not to vital sign monitoring. This technique has been demonstrated at distances up to 3m with consumer cameras and works under variable ambient lighting conditions.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2079",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:E/RV:F/NP:N",
+      "score": 1.4,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0075",
+        "QIF-T0077",
+        "QIF-T0093",
+        "T1040"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "RGB camera captures sub-pixel skin color variations from cardiac blood volume pulses; deep learning extracts heart rate, HRV, respiratory rate, and SpO2 from video",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Contactless vital sign monitoring for telemedicine and patient screening",
+        "conditions": [
+          "remote patient monitoring (telemedicine vitals)",
+          "neonatal heart rate monitoring (non-contact)",
+          "mental health stress screening (HRV analysis)",
+          "pain assessment (autonomic response detection)"
+        ],
+        "fda_status": "investigational",
+        "evidence_level": "cohort",
+        "safe_parameters": "Standard RGB camera at ambient light; no active illumination required; operates within normal video call conditions",
+        "sources": [
+          "Poh et al. 2011 (IEEE Trans Biomed Eng, webcam vitals)",
+          "Chen & McDuff 2018 (ECCV, DeepPhys)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "enhanced",
+        "monitoring": [
+          "camera_access_audit",
+          "video_processing_pipeline_audit",
+          "physiological_data_extraction_detection"
+        ],
+        "regulations": [
+          "HIPAA (if health data derived)",
+          "GDPR Art. 9 (health data)",
+          "FTC Act Section 5",
+          "EU AI Act (biometric processing)"
+        ],
+        "data_classification": "PHI",
+        "safety_ceiling": "Camera-based vital sign extraction requires explicit consent beyond video permission; data minimization for physiological features"
+      },
+      "engineering": {
+        "coupling": [
+          "optical"
+        ],
+        "parameters": {
+          "camera_resolution": "640x480 minimum",
+          "frame_rate_fps": ">15",
+          "heart_rate_accuracy_bpm": "\u00b12-5",
+          "SpO2_accuracy_pct": "\u00b12-3",
+          "working_distance_m": "0.3-3"
+        },
+        "hardware": [
+          "RGB_camera",
+          "ML_inference_engine"
+        ],
+        "detection": "Camera access auditing, video processing pipeline monitoring, detection of physiological feature extraction in video frames"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 2,
+      "gap_summary": "Covert physiological extraction from video partially captured by CVSS; health privacy dimension not fully expressed"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "Camera-based PPG feeds physiological data harvest and identity profiling"
+    }
+  },
+  {
+    "id": "QIF-T0085",
+    "attack": "Eye tracking cognitive state inference (gaze pattern analysis for attention and intent profiling)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192N3\u2192N7",
+    "band_ids": [
+      "S1",
+      "S2",
+      "N3",
+      "N7"
+    ],
+    "coupling": "OPTICAL",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "Enhanced (QI coherence metric detects unauthorized cognitive profiling if deployed)",
+    "sources": [
+      "Katsini et al. 2020 (The Role of Eye Gaze in Security and Privacy Applications, ACM Computing Surveys)",
+      "Sluganovic et al. 2018 (Using Reflexive Eye Movements for Fast Challenge-Response Authentication, USENIX Security)",
+      "Apple Vision Pro eye tracking (visionOS gaze-based interaction)",
+      "Meta Quest Pro eye tracking (Meta Presence Platform)",
+      "Liebling & Preibusch 2014 (Privacy of Web Search via Eye Tracking, PoPETS)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "critical",
+    "ui_category": "EX",
+    "notes": "Eye tracking hardware is now standard in AR/VR headsets (Apple Vision Pro, Meta Quest Pro, PSVR2) and available as peripherals for laptops (Tobii). Gaze patterns reveal far more than where someone looks: pupil dilation indicates cognitive load and arousal, saccade patterns reveal reading comprehension and attention, fixation duration maps interest and engagement, and smooth pursuit movements indicate prediction and anticipation. Research has demonstrated extraction of: sexual orientation, political affiliation, cognitive disorders (ADHD, dyslexia, autism), emotional state, deception, and even personality traits from eye tracking data alone. In VR/AR headsets, eye tracking runs continuously for foveated rendering (a legitimate performance optimization), creating an always-on cognitive surveillance channel. The user consents to eye tracking for UI interaction, not for cognitive profiling. This is the closest consumer-sensor analog to neural eavesdropping without any BCI hardware.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2080",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:H/CV:I/RV:F/NP:N",
+      "score": 3.4,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0074",
+        "QIF-T0041",
+        "QIF-T0036",
+        "T1005"
+      ],
+      "secondary_tactics": [
+        "QIF-C.EX",
+        "QIF-D.HV",
+        "QIF-M.SV"
+      ]
+    },
+    "tara": {
+      "mechanism": "Eye tracking hardware in AR/VR headsets captures gaze patterns, pupil dilation, saccades, and fixations; ML models infer cognitive states, personality traits, and intent",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Eye tracking for neurological assessment and cognitive rehabilitation",
+        "conditions": [
+          "ADHD diagnosis (saccade pattern analysis)",
+          "autism spectrum screening (gaze pattern biomarkers)",
+          "traumatic brain injury assessment",
+          "Alzheimer's early detection (reading pattern changes)"
+        ],
+        "fda_status": "cleared",
+        "evidence_level": "RCT",
+        "safe_parameters": "IR illumination within IEC 62471 limits; gaze data processed locally; cognitive inferences require explicit consent",
+        "sources": [
+          "Katsini et al. 2020 (ACM Computing Surveys, eye gaze in security)",
+          "Sluganovic et al. 2018 (USENIX Security, reflexive eye movements)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "IRB",
+        "monitoring": [
+          "eye_tracking_data_access_audit",
+          "cognitive_inference_pipeline_audit",
+          "data_retention_limits",
+          "purpose_limitation_enforcement"
+        ],
+        "regulations": [
+          "GDPR Art. 9 (biometric data)",
+          "GDPR Art. 22 (automated decision-making)",
+          "EU AI Act (high-risk biometric)",
+          "Illinois BIPA",
+          "proposed neurorights legislation"
+        ],
+        "data_classification": "sensitive_neural",
+        "safety_ceiling": "Eye tracking cognitive inference requires explicit opt-in beyond foveated rendering consent; purpose limitation mandatory; right to cognitive liberty"
+      },
+      "engineering": {
+        "coupling": [
+          "optical"
+        ],
+        "parameters": {
+          "sampling_rate_Hz": "60-120",
+          "accuracy_degrees": "0.5-1.0",
+          "pupil_dilation_resolution_mm": "0.01",
+          "cognitive_state_inference_latency_ms": "<500"
+        },
+        "hardware": [
+          "IR_LED_illuminator",
+          "eye_tracking_camera",
+          "ML_inference_engine",
+          "AR_VR_headset"
+        ],
+        "detection": "Eye tracking data access audit logging, cognitive inference model detection, anomalous data retention patterns, purpose limitation enforcement"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
+      "supplemental": "S:P/AU:Y/R:A/V:D",
+      "gap_group": 3,
+      "gap_summary": "Cognitive state inference from eye tracking \u2014 mental privacy violation not expressible in CVSS; closest consumer analog to neural eavesdropping"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-C.EX",
+        "QIF-D.HV",
+        "QIF-M.SV"
+      ],
+      "note": "Eye tracking cognitive profiling feeds cognitive exploitation and model training"
+    }
+  },
+  {
+    "id": "QIF-T0086",
+    "attack": "Ambient light sensor side-channel exfiltration (screen content inference via reflected light)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "OPTICAL",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical optical side channel)",
+    "sources": [
+      "Zhang & Lian 2024 (Eavesdropping on Controller Area Network via Ambient Light Sensor, ACM CCS)",
+      "Spreitzer et al. 2018 (Systematic Classification of Side-Channel Attacks: A Case Study for Mobile Devices, IEEE Communications Surveys)",
+      "Mosenia et al. 2017 (PinMe: Tracking a Smartphone User around the World, IEEE Trans Multi-Scale Computing Systems)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "medium",
+    "ui_category": "SE",
+    "notes": "Ambient light sensors (ALS) in smartphones and tablets are low-resolution photometers (typically 16-bit, 10-100 Hz) that measure environmental illumination for auto-brightness. Since the ALS is near the display, it also captures light reflected back from the display itself and from nearby surfaces illuminated by the display. This creates a side channel: the ALS output correlates with screen content. While the ALS cannot reconstruct a full image, it can distinguish between dark and light screens, detect page scrolling patterns, identify video content by temporal light signatures, and in some cases infer text content via character-level luminance patterns. Crucially, ALS access requires no permission on most mobile platforms \u2014 it's treated as a low-risk environmental sensor. This makes it an unrestricted exfiltration channel for screen activity patterns.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2081",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:P/RV:F/NP:N",
+      "score": 0.7,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0084",
+        "T1005",
+        "T1040"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "Ambient light sensor captures display-reflected light variations to infer screen content, scrolling patterns, and user activity without requiring camera or screen capture permissions",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "standard",
+        "monitoring": [
+          "ALS_access_frequency_audit",
+          "sensor_data_exfiltration_detection"
+        ],
+        "regulations": [
+          "GDPR Art. 5",
+          "ECPA",
+          "ePrivacy Directive"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "ALS sampling rate should be limited when screen content could be inferred; permission model should gate high-frequency ALS access"
+      },
+      "engineering": {
+        "coupling": [
+          "optical"
+        ],
+        "parameters": {
+          "ALS_resolution_bits": "16",
+          "sampling_rate_Hz": "10-100",
+          "content_inference_accuracy": "Activity classification (~80%), text inference (limited)",
+          "requires_permission": "No (most platforms)"
+        },
+        "hardware": [
+          "ambient_light_sensor",
+          "DSP_processor"
+        ],
+        "detection": "ALS access frequency monitoring, correlation analysis between ALS data and known screen content patterns"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:H/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+      "supplemental": "S:N/AU:N/R:A/V:D",
+      "gap_group": 1,
+      "gap_summary": "Low-bandwidth side channel; CVSS confidentiality captures the data loss adequately"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV"
+      ],
+      "note": "ALS side channel feeds screen activity data harvest"
+    }
+  },
+  {
+    "id": "QIF-T0087",
+    "attack": "Accelerometer keystroke inference (touchscreen tap localization for PIN/password recovery)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical vibration analysis)",
+    "sources": [
+      "Owusu et al. 2012 (ACCessory: Password Inference using Accelerometers on Smartphones, ACM HotMobile)",
+      "Cai & Chen 2011 (TouchLogger: Inferring Keystrokes on Touch Screen from Smartphone Motion, USENIX HotSec)",
+      "Miluzzo et al. 2012 (TapPrints: Your Finger Taps Have Fingerprints, ACM MobiSys)"
+    ],
+    "status": "CONFIRMED",
+    "severity": "high",
+    "ui_category": "CI",
+    "notes": "When a user taps on a touchscreen, the phone tilts slightly depending on the tap location relative to the device's center of mass. The accelerometer and gyroscope capture these micro-tilts, and the pattern differs for each key position on the virtual keyboard. Owusu et al. (2012) demonstrated 4-digit PIN recovery from accelerometer data alone, and Miluzzo et al. (2012) showed that tap signatures are consistent enough for user identification. The attack works because: (1) different screen positions produce distinct tilt vectors, (2) typing rhythm provides temporal constraints, and (3) language models constrain character sequences. Combined with acoustic keystroke inference (T0083), the multi-modal approach achieves near-perfect accuracy. Since motion sensor access traditionally required no permission, any app could silently capture PIN entry.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2082",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0081",
+        "QIF-T0083",
+        "QIF-T0088",
+        "T1056.001"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-B.IN"
+      ]
+    },
+    "tara": {
+      "mechanism": "Accelerometer and gyroscope capture micro-tilt patterns from touchscreen taps; ML models localize tap positions to recover PINs, passwords, and typed text",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "standard",
+        "monitoring": [
+          "motion_sensor_access_audit",
+          "tap_pattern_detection",
+          "concurrent_keyboard_sensor_access"
+        ],
+        "regulations": [
+          "CFAA",
+          "ECPA",
+          "GDPR Art. 5",
+          "Android/iOS sensor permission policy"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Motion sensor access during keyboard input should be restricted; sensor data should not be accessible concurrent with authentication UI"
+      },
+      "engineering": {
+        "coupling": [
+          "mechanical"
+        ],
+        "parameters": {
+          "PIN_recovery_accuracy_pct": "~70-80 (4-digit PIN)",
+          "accelerometer_sample_rate_Hz": "100-200",
+          "requires_training": "per-device calibration helps",
+          "fusion_with_T0083": "near-perfect accuracy"
+        },
+        "hardware": [
+          "MEMS_accelerometer",
+          "MEMS_gyroscope",
+          "ML_inference_engine"
+        ],
+        "detection": "Motion sensor access correlation with keyboard display, anomalous high-rate sampling during authentication, sensor permission auditing"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 1,
+      "gap_summary": "Credential theft via motion sensors; CVSS confidentiality metrics apply well"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-B.IN"
+      ],
+      "note": "Tap localization feeds credential harvest and system intrusion"
+    }
+  },
+  {
+    "id": "QIF-T0088",
+    "attack": "Gait biometric identification (IMU-based walking pattern fingerprint for persistent tracking)",
+    "tactic": "QIF-S.FP",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical motion pattern analysis)",
+    "sources": [
+      "Muaaz & Mayrhofer 2017 (Smartphone-based Gait Recognition: From Authentication to Imitation, IEEE Trans Mobile Computing)",
+      "Ngo et al. 2014 (The Largest Inertial Sensor-Based Gait Database, Pattern Recognition)",
+      "Sprager & Juric 2015 (Inertial Sensor-Based Gait Recognition: A Review, Sensors)"
+    ],
+    "status": "CONFIRMED",
+    "severity": "high",
+    "ui_category": "CI",
+    "notes": "Every person has a unique gait signature determined by limb length ratios, joint flexibility, muscle strength distribution, and neurological motor control patterns. Smartphone IMU sensors (accelerometer + gyroscope) carried in a pocket capture this signature with high fidelity \u2014 Muaaz & Mayrhofer (2017) achieved >95% identification accuracy across 175 subjects. The gait signature is: (1) difficult to spoof (requires altering unconscious motor patterns), (2) captured passively (phone in pocket during normal walking), (3) persistent across sessions and devices, and (4) capturable without any explicit permission. Gait biometrics enable persistent user tracking even when other identifiers (cookies, device IDs, face) are unavailable. Combined with T0089 (neurological profiling), gait data also reveals health conditions affecting motor control.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2083",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0079",
+        "QIF-T0089",
+        "QIF-T0091",
+        "QIF-T0093",
+        "T1040"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "Smartphone IMU sensors capture unique walking patterns determined by biomechanics and neurological motor control; ML models fingerprint individuals for persistent tracking",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Gait analysis for rehabilitation and neurological monitoring",
+        "conditions": [
+          "Parkinson's disease gait monitoring",
+          "fall risk assessment in elderly",
+          "post-stroke rehabilitation tracking",
+          "orthopedic recovery monitoring"
+        ],
+        "fda_status": "cleared",
+        "evidence_level": "cohort",
+        "safe_parameters": "Passive IMU recording during normal ambulation; no active stimulation; data processed locally",
+        "sources": [
+          "Sprager & Juric 2015 (Sensors, gait recognition review)",
+          "Ngo et al. 2014 (Pattern Recognition, gait database)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "enhanced",
+        "monitoring": [
+          "IMU_continuous_access_audit",
+          "gait_template_storage_audit",
+          "biometric_data_handling"
+        ],
+        "regulations": [
+          "GDPR Art. 9 (biometric data)",
+          "Illinois BIPA",
+          "CCPA (biometric identifiers)",
+          "EU AI Act (biometric identification)"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Gait biometric extraction requires explicit consent; templates treated as irrevocable biometric; data minimization mandatory"
+      },
+      "engineering": {
+        "coupling": [
+          "mechanical"
+        ],
+        "parameters": {
+          "identification_accuracy_pct": ">95",
+          "IMU_sample_rate_Hz": "50-100",
+          "template_stability_days": ">30",
+          "walking_sample_required_steps": "~20-50"
+        },
+        "hardware": [
+          "MEMS_accelerometer",
+          "MEMS_gyroscope",
+          "ML_inference_engine"
+        ],
+        "detection": "Continuous IMU access monitoring, gait template computation detection, biometric data transmission monitoring"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 2,
+      "gap_summary": "Persistent biometric tracking via gait; irrevocable biometric dimension not fully expressed in CVSS"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "Gait fingerprinting feeds persistent identity tracking and reconnaissance"
+    }
+  },
+  {
+    "id": "QIF-T0089",
+    "attack": "Tremor and movement neurological profiling (IMU-based motor disorder detection and health inference)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192N1\u2192N7",
+    "band_ids": [
+      "S1",
+      "S2",
+      "N1",
+      "N7"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Yes",
+    "quantum": "Enhanced (QI coherence metric detects neurological anomalies if deployed)",
+    "sources": [
+      "Arora et al. 2015 (Detecting and monitoring the symptoms of Parkinson's disease using smartphones, J Med Internet Res)",
+      "Bot et al. 2016 (mPower: a smartphone study of Parkinson disease, Scientific Data)",
+      "Giancardo et al. 2016 (Computer keyboard interaction as an indicator of early Parkinson's disease, Scientific Reports)",
+      "Adams et al. 2017 (Tremor detection from smartphone accelerometer data, IEEE EMBC)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "critical",
+    "ui_category": "SE",
+    "notes": "Smartphone IMU sensors can detect pathological tremor patterns characteristic of neurological conditions: Parkinson's resting tremor (4-6 Hz), essential tremor (8-12 Hz), cerebellar tremor (3-5 Hz), and physiological tremor changes from medication, fatigue, or substance use. The mPower study (Bot et al. 2016) enrolled 16,000 participants and demonstrated that smartphone sensor data alone can distinguish Parkinson's patients from healthy controls with >90% accuracy. Beyond tremor, fine motor control degradation (touchscreen interaction patterns, typing dynamics) reveals cognitive decline, medication effects, intoxication levels, and fatigue. This is covert neurological diagnosis without the subject's knowledge or consent \u2014 the phone becomes a continuous neurological monitor. The data reveals protected health information about neurological conditions, substance use, and cognitive function from sensors that require no permission.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2084",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+      "score": 2.7,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0074",
+        "QIF-T0088",
+        "QIF-T0085",
+        "T1005"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-N.SC",
+        "QIF-C.EX"
+      ]
+    },
+    "tara": {
+      "mechanism": "Smartphone IMU sensors detect pathological tremor frequencies and fine motor control degradation to infer neurological conditions, medication effects, and cognitive state",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Remote Parkinson's monitoring and neurological screening",
+        "conditions": [
+          "Parkinson's disease symptom tracking (mPower study)",
+          "essential tremor monitoring",
+          "multiple sclerosis motor assessment",
+          "medication effect monitoring (levodopa response tracking)"
+        ],
+        "fda_status": "investigational",
+        "evidence_level": "cohort",
+        "safe_parameters": "Passive IMU recording; no active stimulation; data processed per HIPAA; informed consent for neurological inference",
+        "sources": [
+          "Bot et al. 2016 (Scientific Data, mPower study)",
+          "Arora et al. 2015 (J Med Internet Res, smartphone Parkinson's detection)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "IRB",
+        "monitoring": [
+          "IMU_continuous_access_audit",
+          "tremor_analysis_detection",
+          "health_inference_pipeline_audit"
+        ],
+        "regulations": [
+          "HIPAA",
+          "GDPR Art. 9 (health data)",
+          "ADA (disability disclosure)",
+          "GINA (genetic information)",
+          "EU AI Act (high-risk health AI)"
+        ],
+        "data_classification": "PHI",
+        "safety_ceiling": "Neurological inference from consumer sensors requires explicit informed consent; health condition predictions must be validated clinically; no discriminatory use"
+      },
+      "engineering": {
+        "coupling": [
+          "mechanical"
+        ],
+        "parameters": {
+          "tremor_frequency_bands_Hz": "3-12",
+          "PD_detection_accuracy_pct": ">90",
+          "IMU_sample_rate_Hz": "50-200",
+          "minimum_recording_duration_s": "10-30"
+        },
+        "hardware": [
+          "MEMS_accelerometer",
+          "MEMS_gyroscope",
+          "ML_inference_engine"
+        ],
+        "detection": "Tremor analysis algorithm detection, continuous IMU sampling monitoring, health inference model output auditing"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:P/AU:Y/R:A/V:D",
+      "gap_group": 3,
+      "gap_summary": "Covert neurological diagnosis from consumer sensors \u2014 health condition revelation and cognitive state inference not expressible in CVSS"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC",
+        "QIF-C.EX"
+      ],
+      "note": "Neurological profiling feeds health data harvest and cognitive exploitation"
+    }
+  },
+  {
+    "id": "QIF-T0090",
+    "attack": "WiFi CSI passive body sensing (through-wall vital sign detection via channel state information)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "RF",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical RF propagation analysis)",
+    "sources": [
+      "Liu et al. 2019 (Wireless Sensing for Human Activity: A Survey, IEEE Communications Surveys)",
+      "Zeng et al. 2020 (FarSense: pushing the range limit of WiFi-based respiration sensing, ACM MobiSys)",
+      "Wang et al. 2017 (TensorBeat: Tensor Decomposition for Monitoring Multiperson Breathing Beats with Commodity WiFi, ACM Trans Intelligent Systems and Technology)",
+      "Jiang et al. 2020 (Towards 3D Human Pose Construction Using WiFi, ACM MobiCom)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "critical",
+    "ui_category": "SE",
+    "notes": "WiFi Channel State Information (CSI) captures the multipath propagation characteristics between WiFi transmitter and receiver. Human body movements \u2014 including breathing (chest wall motion ~5mm), heartbeat (body surface vibration ~0.1mm), and walking \u2014 modulate the WiFi signal propagation paths. By analyzing CSI patterns, an attacker can detect presence, count people, track movement, extract vital signs, and even reconstruct coarse body poses \u2014 all without any device on the target's person. The sensing works through walls (standard drywall, up to 2-3 walls). FarSense demonstrated breathing detection at 8m range. Attack scenario: any WiFi access point or router with modified firmware extracts CSI and performs passive surveillance of all humans in range. No camera, no microphone, no wearable needed \u2014 just ambient WiFi signals. This is passive radar using existing infrastructure.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2085",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0075",
+        "QIF-T0084",
+        "QIF-T0098",
+        "T1040",
+        "T1557"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "WiFi CSI analysis detects human body movements (breathing, heartbeat, gait) through multipath signal modulation; works through walls without any device on the target",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Contactless in-home health monitoring for elderly care",
+        "conditions": [
+          "elderly fall detection (no wearable required)",
+          "sleep apnea monitoring (through-mattress breathing detection)",
+          "post-surgical recovery monitoring",
+          "smart home health sensing"
+        ],
+        "fda_status": "investigational",
+        "evidence_level": "cohort",
+        "safe_parameters": "Standard WiFi power levels (< FCC Part 15 limits); passive sensing (no additional radiation); informed consent for monitoring",
+        "sources": [
+          "Liu et al. 2019 (IEEE, WiFi sensing survey)",
+          "Zeng et al. 2020 (ACM MobiSys, FarSense)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "enhanced",
+        "monitoring": [
+          "CSI_extraction_detection",
+          "router_firmware_integrity",
+          "unusual_WiFi_traffic_patterns"
+        ],
+        "regulations": [
+          "ECPA (electronic surveillance)",
+          "GDPR Art. 5",
+          "Fourth Amendment (US, through-wall surveillance)",
+          "EU AI Act"
+        ],
+        "data_classification": "PHI",
+        "safety_ceiling": "Through-wall sensing requires explicit consent from all monitored persons; router firmware integrity mandatory; CSI extraction should be detectable"
+      },
+      "engineering": {
+        "coupling": [
+          "electromagnetic"
+        ],
+        "parameters": {
+          "WiFi_standard": "802.11n/ac/ax",
+          "CSI_subcarriers": "30-256",
+          "breathing_detection_range_m": "1-8",
+          "through_wall_capability": "2-3 standard walls",
+          "heart_rate_accuracy_bpm": "\u00b13-5"
+        },
+        "hardware": [
+          "WiFi_AP_with_CSI_support",
+          "modified_firmware",
+          "signal_processing_backend"
+        ],
+        "detection": "CSI extraction monitoring on WiFi chipset, unusual AP firmware, anomalous WiFi traffic volume or patterns, RF sensing countermeasures"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:H/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 2,
+      "gap_summary": "Through-wall passive surveillance via WiFi; physical privacy intrusion and health data extraction partially captured by CVSS"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "WiFi CSI sensing feeds physiological data harvest and presence detection"
+    }
+  },
+  {
+    "id": "QIF-T0091",
+    "attack": "BLE physical-layer device fingerprinting (radio frequency imperfection tracking)",
+    "tactic": "QIF-S.FP",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "RF",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical RF fingerprinting)",
+    "sources": [
+      "Becker et al. 2022 (Tracking Anonymized Bluetooth Devices, PoPETS)",
+      "Das et al. 2018 (Tracking Mobile Web Users Through Motion Sensors, NDSS)",
+      "Ramsey et al. 2020 (BLE Device Tracking via Physical Layer Fingerprinting, IEEE CNS)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "high",
+    "ui_category": "CI",
+    "notes": "Every Bluetooth Low Energy (BLE) transmitter has unique analog imperfections in its radio hardware: carrier frequency offset (CFO), I/Q imbalance, power amplifier nonlinearity, and phase noise characteristics. These imperfections are manufacturing artifacts that are stable, unique per device, and impossible to change via software \u2014 they are the RF equivalent of a fingerprint. Becker et al. (2022) demonstrated that BLE physical-layer fingerprinting can track devices even when using MAC address randomization (the privacy feature specifically designed to prevent tracking). This defeats Apple's and Google's BLE privacy protections. Attack scenario: passive BLE receivers at strategic locations (malls, airports, streets) fingerprint passing devices. The user's phone continuously advertises BLE (for AirDrop, Find My, COVID exposure notifications), and each advertisement carries the device's unchangeable RF fingerprint. This enables persistent location tracking despite all software-level privacy measures.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2086",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0079",
+        "QIF-T0088",
+        "QIF-T0082",
+        "T1040",
+        "T1120"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "Passive BLE receiver extracts unique physical-layer radio imperfections (CFO, I/Q imbalance) from BLE advertisements to track devices despite MAC address randomization",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "enhanced",
+        "monitoring": [
+          "BLE_fingerprinting_detection",
+          "RF_scanning_infrastructure_audit",
+          "location_data_collection_audit"
+        ],
+        "regulations": [
+          "GDPR Art. 5 (purpose limitation)",
+          "ePrivacy Directive",
+          "CCPA",
+          "ECPA"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Physical-layer fingerprinting defeats software privacy measures; regulatory frameworks need updating for hardware-level tracking; BLE chipset randomization of analog characteristics needed"
+      },
+      "engineering": {
+        "coupling": [
+          "electromagnetic"
+        ],
+        "parameters": {
+          "CFO_resolution_Hz": "<100",
+          "identification_accuracy_pct": ">90",
+          "tracking_persistence": "permanent (hardware-determined)",
+          "BLE_advertisement_interval_ms": "20-10240"
+        },
+        "hardware": [
+          "SDR_receiver_or_modified_BLE_chipset",
+          "signal_processing_backend"
+        ],
+        "detection": "Detection of passive BLE scanning infrastructure, RF environment monitoring, anomalous BLE receiver deployments"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 2,
+      "gap_summary": "Persistent device tracking defeating privacy controls; irrevocable hardware fingerprint dimension not fully expressed in CVSS"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "BLE fingerprinting feeds persistent location tracking and device identification"
+    }
+  },
+  {
+    "id": "QIF-T0092",
+    "attack": "Thermal facial stress and emotion inference (IR thermography for autonomic nervous system state extraction)",
+    "tactic": "QIF-S.HV",
+    "bands": "S1\u2192S2\u2192N7",
+    "band_ids": [
+      "S1",
+      "S2",
+      "N7"
+    ],
+    "coupling": "OPTICAL",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical thermal imaging)",
+    "sources": [
+      "Engert et al. 2014 (Exploring the Use of Thermal Imaging to Assess Stress, PLOS ONE)",
+      "Abdelrahman et al. 2017 (Cognitive Heat: Exploring the Usage of Thermal Imaging to Unobtrusively Estimate Cognitive Load, ACM IMWUT)",
+      "Pavlidis et al. 2002 (Thermal Image Analysis for Polygraph Testing, IEEE Engineering in Medicine and Biology)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "high",
+    "ui_category": "SE",
+    "notes": "The autonomic nervous system modulates facial skin temperature through vasoconstriction/vasodilation in response to stress, cognitive load, deception, arousal, and emotional states. Periorbital temperature (around the eyes) drops during stress as blood redirects to core muscles. Nasal tip temperature correlates with cognitive load. Forehead temperature maps to anxiety. Thermal cameras (LWIR, 8-14 \u00b5m) capture these patterns contactlessly. While consumer thermal cameras are not yet standard in phones, they are available as accessories (FLIR One, Seek Thermal), integrated into some laptops (for presence detection), and standard in many security/surveillance systems. Pavlidis et al. (2002) demonstrated thermal imaging as a polygraph alternative. As thermal sensors become cheaper and more integrated into consumer devices, this becomes a passive emotion/stress surveillance channel.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2087",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:L/CV:E/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0077",
+        "QIF-T0084",
+        "QIF-T0085",
+        "T1040"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-C.EX"
+      ]
+    },
+    "tara": {
+      "mechanism": "Thermal IR camera captures facial temperature distribution modulated by autonomic nervous system; ML models infer stress, cognitive load, emotion, and deception from thermal patterns",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Thermal imaging for pain assessment and autonomic function testing",
+        "conditions": [
+          "pain assessment (objective thermal correlates)",
+          "anxiety disorder monitoring (periorbital temperature)",
+          "PTSD arousal detection",
+          "neuropathy assessment (thermal regulation dysfunction)"
+        ],
+        "fda_status": "cleared",
+        "evidence_level": "cohort",
+        "safe_parameters": "Passive thermal imaging (no radiation emitted); LWIR 8-14 \u00b5m detection only; standard room temperature conditions",
+        "sources": [
+          "Engert et al. 2014 (PLOS ONE, thermal stress imaging)",
+          "Pavlidis et al. 2002 (IEEE EMB, thermal polygraph)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "enhanced",
+        "monitoring": [
+          "thermal_camera_access_audit",
+          "emotion_inference_pipeline_audit",
+          "data_retention_limits"
+        ],
+        "regulations": [
+          "GDPR Art. 9 (health data)",
+          "EU AI Act (emotion recognition systems)",
+          "HIPAA",
+          "Illinois BIPA"
+        ],
+        "data_classification": "PHI",
+        "safety_ceiling": "Emotion inference from thermal imaging requires explicit consent; EU AI Act may ban emotion recognition in certain contexts; data minimization mandatory"
+      },
+      "engineering": {
+        "coupling": [
+          "optical"
+        ],
+        "parameters": {
+          "wavelength_um": "8-14 (LWIR)",
+          "temperature_resolution_K": "0.05-0.1",
+          "frame_rate_Hz": "9-60",
+          "spatial_resolution_pixels": "160x120 to 640x480",
+          "working_distance_m": "0.5-5"
+        },
+        "hardware": [
+          "LWIR_thermal_camera",
+          "ML_inference_engine"
+        ],
+        "detection": "Thermal camera access auditing, emotion inference model detection, unexpected IR sensor activation"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 3,
+      "gap_summary": "Emotional state inference from thermal imaging \u2014 psychological privacy dimension not expressible in CVSS"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-C.EX"
+      ],
+      "note": "Thermal emotion inference feeds psychological data harvest and cognitive exploitation"
+    }
+  },
+  {
+    "id": "QIF-T0093",
+    "attack": "PPG pulse waveform biometric identification (cardiac signature fingerprinting via wearable optical sensor)",
+    "tactic": "QIF-S.FP",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "OPTICAL",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical photoplethysmography)",
+    "sources": [
+      "Biswas et al. 2019 (CorNET: Deep Learning Framework for PPG-Based Heart Rate Estimation and Biometric Identification, IEEE Trans Biomed Eng)",
+      "Yadav et al. 2018 (Evaluation of PPG biometrics for authentication, IEEE ICB)",
+      "Kavsaoglu et al. 2023 (PPG-based biometric identification: A comprehensive review, Expert Systems with Applications)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "high",
+    "ui_category": "CI",
+    "notes": "Photoplethysmography (PPG) sensors in smartwatches and fitness trackers measure blood volume changes through green LED light reflected from the wrist. The PPG waveform shape is unique per individual \u2014 determined by cardiac output, arterial stiffness, vessel geometry, and autonomic tone. Biswas et al. (2019) demonstrated >98% identification accuracy using deep learning on PPG waveforms. Unlike heart rate (a single number), the full PPG waveform is a rich biometric containing: pulse amplitude, dicrotic notch depth, systolic/diastolic ratio, pulse transit time, and waveform morphology. This biometric is continuously captured by any wearable with a heart rate sensor (Apple Watch, Fitbit, Galaxy Watch, Oura Ring). The user consents to heart rate monitoring, not to biometric identification from their cardiac waveform. Combined with T0088 (gait) and T0079 (ear canal), the attacker has three independent biometric channels from consumer devices.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2088",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0077",
+        "QIF-T0079",
+        "QIF-T0084",
+        "QIF-T0088",
+        "T1040"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "Wearable PPG sensor captures unique cardiac pulse waveform morphology determined by cardiovascular physiology; deep learning extracts biometric identity from waveform features",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "PPG-based cardiovascular health monitoring",
+        "conditions": [
+          "atrial fibrillation detection (Apple Watch FDA clearance)",
+          "blood pressure estimation (pulse wave analysis)",
+          "sleep apnea screening (SpO2 + pulse waveform)",
+          "vascular stiffness assessment"
+        ],
+        "fda_status": "cleared",
+        "evidence_level": "RCT",
+        "safe_parameters": "Green LED at standard wearable power levels; Class 1 device; continuous wear monitoring",
+        "sources": [
+          "Biswas et al. 2019 (IEEE Trans Biomed Eng, PPG biometrics)",
+          "Apple 2020 (Apple Watch AFib detection, FDA De Novo clearance)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "enhanced",
+        "monitoring": [
+          "PPG_raw_data_access_audit",
+          "biometric_template_storage",
+          "waveform_export_monitoring"
+        ],
+        "regulations": [
+          "GDPR Art. 9 (biometric data)",
+          "Illinois BIPA",
+          "CCPA (biometric identifiers)",
+          "HIPAA (cardiovascular health data)"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "PPG biometric identification requires explicit consent beyond health monitoring; cardiac waveform templates treated as irrevocable biometric; data minimization mandatory"
+      },
+      "engineering": {
+        "coupling": [
+          "optical"
+        ],
+        "parameters": {
+          "LED_wavelength_nm": "530 (green)",
+          "sampling_rate_Hz": "25-250",
+          "identification_accuracy_pct": ">98",
+          "template_stability": "high (cardiovascular structure is stable)"
+        },
+        "hardware": [
+          "green_LED",
+          "photodetector",
+          "wearable_housing",
+          "ML_inference_engine"
+        ],
+        "detection": "PPG raw data access auditing, biometric template computation detection, unusual waveform data export"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 2,
+      "gap_summary": "Cardiac biometric extraction from wearable; irrevocable biometric dimension not fully expressed in CVSS"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "PPG biometric fingerprinting feeds persistent cardiac identity tracking"
+    }
+  },
+  {
+    "id": "QIF-T0094",
+    "attack": "Magnetometer speaker-leakage eavesdropping (magnetic field emanation capture from speaker voice coils)",
+    "tactic": "QIF-S.RP",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "ELECTROMAGNETIC",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical electromagnetic emanation)",
+    "sources": [
+      "Matyunin et al. 2019 (MagneticSpy: Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting, ACM WiSec)",
+      "Guri et al. 2020 (MAGNETO: Covert Channel between Air-Gapped Systems and Nearby Smartphones via CPU-Generated Magnetic Fields)",
+      "Zhang et al. 2020 (MagAttack: Eavesdropping on Headphone Magnetic Leakage)"
+    ],
+    "status": "DEMONSTRATED",
+    "severity": "high",
+    "ui_category": "SE",
+    "notes": "Speaker voice coils are electromagnets \u2014 when driven by audio current, they produce proportional magnetic field emanations. Smartphone magnetometers (used for compass/navigation) are sensitive enough to detect these emanations from nearby speakers, earbuds, or headphones. Zhang et al. (2020) demonstrated that a smartphone's magnetometer placed within 10-20 cm of earbuds can reconstruct the audio being played, including speech. This creates an eavesdropping channel through magnetic emanations rather than acoustic leakage \u2014 it works even when the audio is not audible (noise-canceling headphones, low volume). Matyunin et al. (2019) showed that magnetometer data can also fingerprint websites and applications by their characteristic audio/vibration patterns. Magnetometer access requires no permission on most platforms, making this an unrestricted side channel.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2089",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:E/RV:F/NP:N",
+      "score": 1.4,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0072",
+        "QIF-T0080",
+        "QIF-T0081",
+        "T1040",
+        "T1123"
+      ],
+      "secondary_tactics": [
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "Smartphone magnetometer captures electromagnetic emanations from nearby speaker voice coils to reconstruct audio content without acoustic coupling",
+      "dual_use": "silicon_only",
+      "clinical": null,
+      "governance": {
+        "consent_tier": "standard",
+        "monitoring": [
+          "magnetometer_access_audit",
+          "EM_emanation_monitoring",
+          "proximity_detection"
+        ],
+        "regulations": [
+          "ECPA (18 U.S.C. \u00a7 2511)",
+          "GDPR Art. 5",
+          "FCC Part 15 (incidental emissions)"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Magnetometer access should require permission when used at high sampling rates; speaker shielding reduces magnetic emanations; distance increases attenuation rapidly"
+      },
+      "engineering": {
+        "coupling": [
+          "electromagnetic"
+        ],
+        "parameters": {
+          "magnetometer_sensitivity_uT": "0.01-0.1",
+          "effective_range_cm": "10-20",
+          "audio_reconstruction_quality": "intelligible speech at close range",
+          "requires_permission": "No (most platforms)"
+        },
+        "hardware": [
+          "MEMS_magnetometer",
+          "signal_processing_backend"
+        ],
+        "detection": "Magnetometer access frequency monitoring, correlation with nearby speaker activity, EM shielding of speaker voice coils"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+      "supplemental": "S:N/AU:N/R:A/V:D",
+      "gap_group": 1,
+      "gap_summary": "Eavesdropping via magnetic emanation; CVSS confidentiality metrics apply adequately"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV"
+      ],
+      "note": "Magnetometer eavesdropping feeds ambient audio data harvest"
+    }
+  },
+  {
+    "id": "QIF-T0095",
+    "attack": "Acoustic-to-neural profiling pipeline (consumer earbud escalation from audio to cognitive exploitation)",
+    "tactic": "QIF-S.CH",
+    "bands": "S1\u2192S2\u2192S3\u2192I0\u2192N1\u2192N7",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3",
+      "I0",
+      "N1",
+      "N7"
+    ],
+    "coupling": "ACOUSTIC",
+    "access": null,
+    "classical": "Partial",
+    "quantum": "Enhanced (QI coherence metric detects unauthorized neural data acquisition)",
+    "sources": [
+      "Chain synthesis from: QIF-T0072 \u2192 QIF-T0073 \u2192 QIF-T0074 \u2192 QIF-T0079",
+      "Kaveh et al. 2020 (In-ear EEG, IEEE Trans Biomed Eng)",
+      "Martinovic et al. 2012 (BCI side channels, USENIX Security)",
+      "NEC Corporation 2016 (Ear acoustic authentication)"
+    ],
+    "status": "EMERGING",
+    "severity": "critical",
+    "ui_category": "EX",
+    "notes": "This technique documents the complete escalation chain from a single compromised consumer earbud to cognitive profiling. The chain proceeds: (1) T0072 \u2014 Speaker-to-mic reprogramming gives ambient audio eavesdropping, (2) T0079 \u2014 Ear canal acoustic fingerprinting silently identifies the wearer, (3) T0073 \u2014 Modified earbud with conductive ear tip captures in-ear EEG, (4) T0074 \u2014 Longitudinal EEG data feeds ML model for cognitive profiling. The end state: a single pair of compromised earbuds provides identity + ambient audio + continuous neural telemetry + personalized cognitive vulnerability profile \u2014 all from a device the target voluntarily wears for hours daily. Each step in the chain has been independently demonstrated or is emerging. The complete chain represents a consumer-device pathway to cognitive exploitation without any traditional BCI hardware. This is the canonical example of why the S-domain exists: consumer sensors as a pre-BCI attack surface.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2090",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:H/CV:I/RV:F/NP:T",
+      "score": 4.4,
+      "severity": "medium",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0072",
+        "QIF-T0073",
+        "QIF-T0074",
+        "QIF-T0079"
+      ],
+      "secondary_tactics": [
+        "QIF-S.RP",
+        "QIF-S.FP",
+        "QIF-S.HV",
+        "QIF-C.EX",
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "Multi-stage escalation chain: speaker repurposing \u2192 ear canal fingerprinting \u2192 in-ear EEG capture \u2192 ML-based cognitive profiling, all from a single compromised consumer earbud",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Integrated hearing health + cognitive monitoring earbuds",
+        "conditions": [
+          "hearing aid with cognitive load monitoring",
+          "seizure detection + audio therapy delivery",
+          "neurofeedback training via earbuds"
+        ],
+        "fda_status": "investigational",
+        "evidence_level": "preclinical",
+        "safe_parameters": "Each chain stage within individual safety bounds; cumulative data collection requires enhanced consent",
+        "sources": [
+          "Kaveh et al. 2020 (IEEE Trans Biomed Eng)",
+          "NEC 2016 (ear acoustic authentication)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "IRB",
+        "monitoring": [
+          "multi_stage_chain_detection",
+          "cumulative_data_correlation_audit",
+          "neural_data_access_monitoring"
+        ],
+        "regulations": [
+          "All regulations from T0072-T0074 apply cumulatively",
+          "proposed neurorights legislation",
+          "EU AI Act (high-risk biometric + cognitive)"
+        ],
+        "data_classification": "sensitive_neural",
+        "safety_ceiling": "Full chain represents cognitive sovereignty violation; each escalation stage should trigger independent consent; supply chain integrity for earbuds critical"
+      },
+      "engineering": {
+        "coupling": [
+          "acoustic",
+          "electromagnetic",
+          "galvanic",
+          "computational"
+        ],
+        "parameters": {
+          "chain_stages": 4,
+          "escalation_time": "minutes (hardware) to weeks (cognitive model training)",
+          "data_types": "audio + identity + EEG + cognitive profile",
+          "single_device": true
+        },
+        "hardware": [
+          "modified_consumer_earbud",
+          "conductive_ear_tip",
+          "biopotential_amplifier",
+          "BLE_transceiver",
+          "cloud_ML_backend"
+        ],
+        "detection": "Multi-stage chain detection requires monitoring acoustic, biometric, neural, and cognitive data pipelines simultaneously; supply chain attestation most effective"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
+      "supplemental": "S:P/AU:Y/R:A/V:C",
+      "gap_group": 3,
+      "gap_summary": "Multi-stage escalation from consumer sensor to cognitive profiling \u2014 cumulative privacy and cognitive liberty violation far exceeds any single CVSS metric"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-C.EX",
+        "QIF-M.SV",
+        "QIF-D.HV"
+      ],
+      "note": "Complete earbud escalation chain feeds cognitive exploitation, model subversion, and comprehensive data harvest"
+    }
+  },
+  {
+    "id": "QIF-T0096",
+    "attack": "Multi-modal biometric fusion attack (cross-sensor identity correlation for persistent tracking)",
+    "tactic": "QIF-S.CH",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical pattern fusion)",
+    "sources": [
+      "Chain synthesis from: QIF-T0079 (ear canal) + QIF-T0088 (gait) + QIF-T0091 (BLE) + QIF-T0093 (PPG)",
+      "Ross et al. 2006 (Handbook of Multibiometrics, Springer)",
+      "Hadid et al. 2015 (Biometrics Systems Under Spoofing Attack: An Evaluation Methodology and Lessons Learned, IEEE Signal Processing Magazine)"
+    ],
+    "status": "EMERGING",
+    "severity": "critical",
+    "ui_category": "CI",
+    "notes": "By fusing biometric signatures from multiple consumer sensors \u2014 ear canal acoustics (T0079), gait pattern (T0088), BLE RF fingerprint (T0091), PPG waveform (T0093), and eye tracking (T0085 if VR/AR) \u2014 an attacker creates a multi-modal biometric profile that is virtually impossible to evade. Each individual biometric can potentially be disrupted (change earbuds, alter gait, disable Bluetooth), but the fusion of 3+ biometric channels provides robust identification even if individual channels are degraded. The fusion operates at the feature level (concatenated feature vectors) or decision level (majority voting across classifiers). This technique weaponizes the ubiquity of consumer sensors: the average person carries 10+ sensors across phone, watch, and earbuds. The combination creates a biometric surveillance net that no single privacy measure can defeat.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2091",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0079",
+        "QIF-T0085",
+        "QIF-T0088",
+        "QIF-T0091",
+        "QIF-T0093"
+      ],
+      "secondary_tactics": [
+        "QIF-S.FP",
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "Fusion of biometric signatures from multiple consumer sensors (acoustic, IMU, RF, optical) to create robust multi-modal identity profile resistant to individual channel disruption",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Multi-modal patient identification for medication safety",
+        "conditions": [
+          "patient identification in hospitals (multi-factor biometric)",
+          "elderly person identification in care facilities",
+          "clinical trial participant verification"
+        ],
+        "fda_status": "none",
+        "evidence_level": "preclinical",
+        "safe_parameters": "Each sensor within individual safety bounds; fusion layer is computational only",
+        "sources": [
+          "Ross et al. 2006 (Handbook of Multibiometrics)",
+          "Hadid et al. 2015 (IEEE SPM, biometric spoofing)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "IRB",
+        "monitoring": [
+          "cross_sensor_correlation_detection",
+          "multi_modal_fusion_audit",
+          "biometric_data_aggregation_monitoring"
+        ],
+        "regulations": [
+          "GDPR Art. 9 (biometric data)",
+          "Illinois BIPA",
+          "EU AI Act (biometric identification)",
+          "CCPA"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Multi-modal biometric fusion creates near-irrevocable identity profile; exceeds single-biometric consent requirements; aggregate biometric data requires enhanced protection"
+      },
+      "engineering": {
+        "coupling": [
+          "computational"
+        ],
+        "parameters": {
+          "modalities": "3-5 (acoustic, IMU, RF, optical, cardiac)",
+          "fusion_strategy": "feature-level or decision-level",
+          "identification_accuracy_pct": ">99 (3+ modalities)",
+          "robustness_to_channel_loss": "maintains ID with any 2 of 4 channels"
+        },
+        "hardware": [
+          "multi_sensor_consumer_devices",
+          "ML_fusion_engine"
+        ],
+        "detection": "Cross-sensor data correlation monitoring, multi-modal biometric computation detection, aggregation audit logging"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:U/V:D",
+      "gap_group": 2,
+      "gap_summary": "Multi-modal biometric fusion creating near-irrevocable identity profile; aggregate biometric dimension exceeds individual CVSS confidentiality"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "Multi-modal biometric fusion feeds persistent identity tracking at near-perfect accuracy"
+    }
+  },
+  {
+    "id": "QIF-T0097",
+    "attack": "Cross-device physiological correlation (phone + watch + earbuds comprehensive health profiling)",
+    "tactic": "QIF-S.CH",
+    "bands": "S1\u2192S2\u2192S3\u2192N7",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3",
+      "N7"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Yes",
+    "quantum": "Enhanced (QI coherence metric detects unauthorized health profiling if deployed)",
+    "sources": [
+      "Chain synthesis from: T0075 (ultrasonic) + T0084 (rPPG) + T0089 (tremor) + T0090 (WiFi CSI) + T0093 (PPG)",
+      "Majumder et al. 2017 (Wearable Sensors for Remote Health Monitoring, Sensors)",
+      "Dunn et al. 2021 (Wearables and the medical revolution, Personalized Medicine)"
+    ],
+    "status": "THEORETICAL",
+    "severity": "critical",
+    "ui_category": "SE",
+    "notes": "The average consumer now carries 3+ sensor-equipped devices: smartphone (accelerometer, gyroscope, magnetometer, barometer, camera, microphone, ambient light, proximity, WiFi, BLE), smartwatch (PPG, accelerometer, gyroscope, SpO2, skin temperature, ECG), and earbuds (microphone, accelerometer, proximity, potentially EEG). By correlating physiological data across all devices simultaneously, an attacker builds a comprehensive health profile far exceeding what any single device captures: cardiac health (watch PPG + phone rPPG), respiratory health (phone ultrasonic + WiFi CSI), neurological health (earbud IMU tremor + phone motor patterns), mental health (watch HRV + earbud audio context + phone screen activity), and metabolic health (activity + sleep + heart rate patterns). The correlation also eliminates single-sensor noise and improves accuracy. This technique doesn't require hardware modification \u2014 only software-level data aggregation across apps on a shared platform (e.g., iOS HealthKit, Google Health Connect).",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2092",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:F/NP:N",
+      "score": 2.7,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0075",
+        "QIF-T0084",
+        "QIF-T0089",
+        "QIF-T0090",
+        "QIF-T0093"
+      ],
+      "secondary_tactics": [
+        "QIF-S.HV",
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "Cross-device physiological data correlation across phone + watch + earbuds to build comprehensive health profile exceeding single-device capability",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Multi-device remote patient monitoring for chronic disease management",
+        "conditions": [
+          "heart failure decompensation prediction (multi-sensor)",
+          "diabetes management (activity + sleep + heart rate correlation)",
+          "mental health monitoring (multi-modal behavioral markers)",
+          "clinical trial endpoint monitoring"
+        ],
+        "fda_status": "investigational",
+        "evidence_level": "cohort",
+        "safe_parameters": "Each device within individual safety bounds; data aggregation requires platform-level health data consent",
+        "sources": [
+          "Majumder et al. 2017 (Sensors, wearable remote health monitoring)",
+          "Dunn et al. 2021 (Personalized Medicine, wearables)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "IRB",
+        "monitoring": [
+          "cross_device_data_correlation_audit",
+          "health_data_aggregation_monitoring",
+          "platform_API_access_audit"
+        ],
+        "regulations": [
+          "HIPAA",
+          "GDPR Art. 9",
+          "EU AI Act (high-risk health AI)",
+          "21 CFR Part 11",
+          "proposed digital health regulations"
+        ],
+        "data_classification": "PHI",
+        "safety_ceiling": "Cross-device health profiling exceeds individual device consent; platform-level health data access requires comprehensive informed consent; purpose limitation for health inference"
+      },
+      "engineering": {
+        "coupling": [
+          "computational"
+        ],
+        "parameters": {
+          "devices_correlated": "3+ (phone, watch, earbuds)",
+          "sensor_modalities": "10+ across devices",
+          "health_domains_covered": "cardiac, respiratory, neurological, mental, metabolic",
+          "data_aggregation": "platform API (HealthKit/Health Connect) or direct app access"
+        },
+        "hardware": [
+          "smartphone",
+          "smartwatch",
+          "consumer_earbuds",
+          "cloud_aggregation_backend"
+        ],
+        "detection": "Cross-app data sharing monitoring, health data API access auditing, unusual data aggregation patterns across device ecosystem"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:P/AU:Y/R:A/V:D",
+      "gap_group": 3,
+      "gap_summary": "Comprehensive cross-device health profiling \u2014 aggregate health privacy violation far exceeds individual sensor CVSS scores"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-S.HV"
+      ],
+      "note": "Cross-device health profiling feeds comprehensive physiological data harvest"
+    }
+  },
+  {
+    "id": "QIF-T0098",
+    "attack": "WiFi + camera passive surveillance fusion (through-wall presence detection with visual identification)",
+    "tactic": "QIF-S.CH",
+    "bands": "S1\u2192S2\u2192S3",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "coupling": "RF",
+    "access": null,
+    "classical": "Yes",
+    "quantum": "No (classical signal fusion)",
+    "sources": [
+      "Chain synthesis from: QIF-T0084 (rPPG) + QIF-T0090 (WiFi CSI)",
+      "Li et al. 2019 (Wi-Fi See It All: Generative Adversarial Network Augmented Transparent Sensing, ACM SenSys)",
+      "Zhao et al. 2018 (Through-Wall Human Pose Estimation Using Radio Signals, CVPR)"
+    ],
+    "status": "EMERGING",
+    "severity": "critical",
+    "ui_category": "SE",
+    "notes": "WiFi CSI (T0090) provides through-wall presence detection, vital signs, and coarse pose estimation but cannot visually identify targets. Cameras (T0084) provide visual identification and remote PPG but require line of sight. By fusing WiFi CSI and camera data, an attacker achieves persistent surveillance that combines the strengths of both: WiFi tracks targets through walls and identifies them by body shape/gait, while cameras provide visual identification when line of sight is available. The fusion enables: handoff tracking (camera identifies person entering a building, WiFi CSI tracks them inside), activity recognition (WiFi CSI classifies activity, camera confirms), and vital sign correlation (WiFi breathing rate + camera heart rate). Zhao et al. (2018) demonstrated that WiFi signals alone can reconstruct 2D human poses comparable to visual skeleton tracking. This creates a surveillance system that requires no devices on the target and works through physical barriers.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2093",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
+      "score": 2.0,
+      "severity": "low",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0084",
+        "QIF-T0090",
+        "T1040",
+        "T1557"
+      ],
+      "secondary_tactics": [
+        "QIF-S.HV",
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ]
+    },
+    "tara": {
+      "mechanism": "Fusion of WiFi CSI through-wall sensing with camera-based visual identification for persistent surveillance that works through physical barriers",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Ambient assisted living for elderly monitoring",
+        "conditions": [
+          "elderly fall detection (through-wall + visual confirmation)",
+          "dementia patient monitoring in care facilities",
+          "post-surgical recovery activity monitoring"
+        ],
+        "fda_status": "none",
+        "evidence_level": "preclinical",
+        "safe_parameters": "Standard WiFi power levels; standard camera; passive sensing only; informed consent from all monitored persons",
+        "sources": [
+          "Zhao et al. 2018 (CVPR, RF-based pose estimation)",
+          "Li et al. 2019 (ACM SenSys, WiFi transparent sensing)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "IRB",
+        "monitoring": [
+          "WiFi_CSI_extraction_detection",
+          "camera_surveillance_audit",
+          "fusion_system_deployment_detection"
+        ],
+        "regulations": [
+          "Fourth Amendment (US, through-wall surveillance)",
+          "ECPA",
+          "GDPR Art. 5",
+          "EU AI Act (biometric surveillance)"
+        ],
+        "data_classification": "PII",
+        "safety_ceiling": "Through-wall surveillance constitutes warrantless search in most jurisdictions; requires explicit consent from all monitored persons; deployment detection mechanisms needed"
+      },
+      "engineering": {
+        "coupling": [
+          "electromagnetic",
+          "optical"
+        ],
+        "parameters": {
+          "WiFi_detection_range_m": "1-10 through walls",
+          "camera_identification_range_m": "1-50 line of sight",
+          "pose_estimation_accuracy": "comparable to visual skeleton tracking (WiFi alone)",
+          "fusion_strategy": "temporal correlation + identity handoff"
+        },
+        "hardware": [
+          "WiFi_AP_with_CSI_support",
+          "RGB_camera",
+          "fusion_backend"
+        ],
+        "detection": "CSI extraction monitoring, camera placement auditing, fusion system network traffic analysis"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:H/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+      "supplemental": "S:N/AU:Y/R:A/V:D",
+      "gap_group": 2,
+      "gap_summary": "Through-wall surveillance fusion; physical privacy intrusion and persistent tracking exceed standard CVSS confidentiality"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-D.HV",
+        "QIF-N.SC"
+      ],
+      "note": "WiFi + camera fusion feeds comprehensive surveillance and persistent identity tracking"
+    }
+  },
+  {
+    "id": "QIF-T0099",
+    "attack": "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
+    "tactic": "QIF-S.CH",
+    "bands": "S1\u2192S2\u2192S3\u2192I0\u2192N1\u2192N7",
+    "band_ids": [
+      "S1",
+      "S2",
+      "S3",
+      "I0",
+      "N1",
+      "N7"
+    ],
+    "coupling": null,
+    "access": null,
+    "classical": "Partial",
+    "quantum": "Enhanced (QI coherence metric monitors S-domain-to-BCI transition integrity)",
+    "sources": [
+      "Chain synthesis from: S-domain techniques \u2192 core TARA BCI techniques",
+      "Yuste et al. 2017 (Four ethical priorities for neurotechnologies and AI, Nature)",
+      "Ienca & Andorno 2017 (Towards new human rights in the age of neuroscience, Life Sciences Society and Policy)",
+      "Landau et al. 2020 (Mind Reading: An Idea Whose Time Has Come?)"
+    ],
+    "status": "THEORETICAL",
+    "severity": "critical",
+    "ui_category": "EX",
+    "notes": "This capstone technique documents the full S-domain-to-BCI escalation kill chain: how consumer sensor exploitation serves as reconnaissance and preparation for subsequent BCI attacks. The chain proceeds in phases: (1) RECON \u2014 Consumer sensors (phone, watch, earbuds) establish behavioral baseline: gait patterns (T0088), cardiac signature (T0093), neurological profile (T0089), cognitive patterns (T0085 if VR/AR). (2) FINGERPRINT \u2014 Multi-modal biometric fusion (T0096) creates persistent identity profile. (3) PROFILE \u2014 Cross-device correlation (T0097) builds comprehensive health/cognitive baseline. (4) ESCALATE \u2014 When the target receives a BCI (medical implant, consumer neural interface), the attacker's pre-existing profile informs: optimal attack parameters for neural injection (calibrated to individual's neural baseline), personalized evasion of anomaly detection (trained on their 'normal'), and targeted cognitive exploitation (leveraging known cognitive vulnerabilities). The S-domain reconnaissance makes BCI attacks more effective, more targeted, and harder to detect. This technique represents the strategic justification for the entire S-domain: consumer sensors are the advance scout for future BCI exploitation.",
+    "legacy_ids": [],
+    "legacy_technique_id": "T2094",
+    "niss": {
+      "version": "1.0",
+      "vector": "NISS:1.0/BI:N/CG:H/CV:I/RV:T/NP:T",
+      "score": 5.3,
+      "severity": "medium",
+      "pins": false
+    },
+    "cross_references": {
+      "related_ids": [
+        "QIF-T0001",
+        "QIF-T0003",
+        "QIF-T0041",
+        "QIF-T0074",
+        "QIF-T0088",
+        "QIF-T0089",
+        "QIF-T0093",
+        "QIF-T0095",
+        "QIF-T0096",
+        "QIF-T0097"
+      ],
+      "secondary_tactics": [
+        "QIF-S.RP",
+        "QIF-S.FP",
+        "QIF-S.HV",
+        "QIF-B.IN",
+        "QIF-C.EX",
+        "QIF-N.SC",
+        "QIF-D.HV"
+      ]
+    },
+    "tara": {
+      "mechanism": "Full S-domain-to-BCI escalation: consumer sensor reconnaissance builds behavioral/physiological/cognitive baseline that informs and optimizes subsequent BCI attack parameters",
+      "dual_use": "confirmed",
+      "clinical": {
+        "therapeutic_analog": "Pre-surgical neurological baseline assessment for BCI implant calibration",
+        "conditions": [
+          "BCI implant pre-surgical planning (behavioral baseline)",
+          "neural interface calibration (cognitive baseline)",
+          "personalized neuroprosthetic fitting",
+          "rehabilitation baseline assessment"
+        ],
+        "fda_status": "investigational",
+        "evidence_level": "preclinical",
+        "safe_parameters": "Pre-implant assessment conducted under clinical protocol; informed consent for all data collection phases; data used only for therapeutic calibration",
+        "sources": [
+          "Yuste et al. 2017 (Nature, neurotechnology ethics)",
+          "Ienca & Andorno 2017 (neurorights)"
+        ]
+      },
+      "governance": {
+        "consent_tier": "IRB",
+        "monitoring": [
+          "cross_domain_escalation_detection",
+          "pre_BCI_reconnaissance_audit",
+          "consumer_to_neural_data_pipeline_monitoring"
+        ],
+        "regulations": [
+          "All consumer sensor regulations + all BCI regulations apply cumulatively",
+          "proposed neurorights legislation",
+          "EU AI Act",
+          "HIPAA"
+        ],
+        "data_classification": "sensitive_neural",
+        "safety_ceiling": "Consumer sensor data collected pre-BCI must not persist into BCI context without explicit re-consent; S-domain-to-BCI data handoff is a critical consent boundary; cognitive sovereignty requires clean break between consumer and neural data domains"
+      },
+      "engineering": {
+        "coupling": [
+          "acoustic",
+          "electromagnetic",
+          "optical",
+          "mechanical",
+          "computational"
+        ],
+        "parameters": {
+          "recon_phase_duration": "weeks to months",
+          "escalation_phases": 4,
+          "data_types": "behavioral + physiological + biometric + cognitive",
+          "BCI_attack_effectiveness_improvement": "estimated 2-5x with S-domain recon"
+        },
+        "hardware": [
+          "consumer_phone",
+          "smartwatch",
+          "earbuds",
+          "BCI_implant_or_interface"
+        ],
+        "detection": "S-domain-to-BCI transition monitoring is the critical detection point; consumer data aggregation auditing; BCI calibration data provenance verification"
+      }
+    },
+    "cvss": {
+      "version": "4.0",
+      "base_vector": "CVSS:4.0/AV:N/AC:H/AT:P/PR:L/UI:N/VC:H/VI:H/VA:L/SC:H/SI:H/SA:L",
+      "supplemental": "S:P/AU:Y/R:U/V:C",
+      "gap_group": 3,
+      "gap_summary": "Full consumer-to-BCI kill chain \u2014 the culmination of all S-domain techniques feeding BCI exploitation; cognitive sovereignty violation at maximum scope; no CVSS equivalent"
+    },
+    "feeds_into": {
+      "targets": [
+        "QIF-B.IN",
+        "QIF-N.SC",
+        "QIF-N.IJ",
+        "QIF-C.EX",
+        "QIF-D.HV",
+        "QIF-M.SV"
+      ],
+      "note": "Capstone technique: S-domain reconnaissance feeds all core BCI attack tactics with personalized, pre-calibrated attack parameters"
+    }
+  }
+]
