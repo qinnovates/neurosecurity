@@ -62,6 +62,20 @@
       "description": "Formal proposal sent to cvss@first.org for NISS registration as a CVSS v4.0 extension under Section 3.11 of the User Guide.",
       "category": "standards",
       "icon": "send"
+    },
+    {
+      "date": "2026-02-11",
+      "title": "First CVE Filed via TARA Framework",
+      "description": "CWE-862 (Missing Authorization) on RealTek HD Audio codec jack retasking. 9-year-old unfiled vulnerability found through systematic gap analysis. Disclosed to TWCERT/CC, RealTek, and MITRE.",
+      "category": "security",
+      "icon": "alert"
+    },
+    {
+      "date": "2026-02-11",
+      "title": "Consumer Sensor Exploitation Domain Added",
+      "description": "New 8th domain (S) with 4 tactics and 8 techniques covering upstream consumer device attacks. Registry expanded to 79 techniques across 15 tactics and 8 domains.",
+      "category": "framework",
+      "icon": "shield"
     }
   ]
 }

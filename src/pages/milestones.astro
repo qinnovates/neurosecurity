@@ -1,9 +1,21 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import data from '../data/milestones.json';
+import { getRegistryStats, getTaraStats } from '../lib/threat-data';
 
 const milestones = data.timeline;
-const metrics = data.metrics;
+// Dynamic metrics from registry (single source of truth) + static milestones
+const reg = getRegistryStats();
+const tara = getTaraStats();
+const metrics = {
+  ...data.metrics,
+  techniques_catalogued: reg.totalTechniques,
+  tactics: reg.totalTactics,
+  domains: (reg as any).total_domains ?? data.metrics.domains,
+  cvss_vectors_mapped: reg.totalTechniques,
+  niss_vectors_scored: reg.totalTechniques,
+  therapeutic_mappings: tara.clinicalCount,
+};
 
 // Sort reverse chronological (most recent first)
 const sorted = [...milestones].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
