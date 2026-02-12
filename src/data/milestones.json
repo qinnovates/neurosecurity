@@ -1,15 +1,15 @@
 {
   "metrics": {
-    "techniques_catalogued": 71,
-    "tactics": 11,
-    "domains": 7,
-    "cvss_vectors_mapped": 71,
-    "niss_vectors_scored": 71,
-    "cves_filed": 0,
+    "techniques_catalogued": 79,
+    "tactics": 15,
+    "domains": 8,
+    "cvss_vectors_mapped": 79,
+    "niss_vectors_scored": 79,
+    "cves_filed": 1,
     "pocs_built": 1,
     "cwes_demonstrated": 3,
     "standards_submitted": 1,
-    "therapeutic_mappings": 43,
+    "therapeutic_mappings": 62,
     "specifications_published": 3,
     "days_active": null
   },
