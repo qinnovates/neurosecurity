@@ -5,10 +5,10 @@ import { getCollection } from 'astro:content';
 const currentPath = Astro.url.pathname;
 
 const techLinks = [
-  { href: '/framework/', label: 'QIF Framework', desc: 'The 11-band hourglass security architecture' },
-  { href: '/nsp/', label: 'NSP Protocol', desc: 'Post-quantum wire protocol for BCI data links' },
-  { href: '/runemate/', label: 'Runemate', desc: 'HTML-to-Staves bytecode compiler for BCI firmware' },
-  { href: '/TARA/', label: 'TARA', desc: 'Therapeutic Atlas of Risks & Applications' },
+  { href: '/framework/', label: 'QIF Framework', desc: 'The 11-band hourglass governance architecture' },
+  { href: '/nsp/', label: 'NSP Protocol', desc: 'Secure communication protocol for patient safety and privacy' },
+  { href: '/runemate/', label: 'Runemate', desc: 'Compiler enabling on-device security for neural implants' },
+  { href: '/TARA/', label: 'TARA', desc: 'Risk taxonomy — attacks, ethical risks, and therapeutic applications' },
   { href: '/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification document' },
 ];
 
@@ -138,17 +138,17 @@ const isGovActive = currentPath.startsWith('/governance/');
           Milestones
         </a>
 
-        <!-- Consulting (flat link) -->
+        <!-- Adopt (flat link) -->
         <a
-          href="/consulting/"
+          href="/adopt/"
           class:list={[
             "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            currentPath.startsWith('/consulting/')
+            currentPath.startsWith('/adopt/')
               ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          Consulting
+          Adopt
         </a>
 
         <!-- Governance dropdown -->
@@ -333,17 +333,17 @@ const isGovActive = currentPath.startsWith('/governance/');
         Milestones
       </a>
 
-      <!-- Consulting (flat) -->
+      <!-- Adopt (flat) -->
       <a
-        href="/consulting/"
+        href="/adopt/"
         class:list={[
           "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-          currentPath.startsWith('/consulting/')
+          currentPath.startsWith('/adopt/')
             ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
             : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
         ]}
       >
-        Consulting
+        Adopt
       </a>
 
       <!-- Mobile Governance section -->
