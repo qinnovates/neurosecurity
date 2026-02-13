@@ -18,6 +18,9 @@
 > - An external paper or discovery shifts how we understand the framework
 >
 > **Truth flows outward:** QIF-TRUTH.md → repo docs → blog posts
+>
+> ## Glossary Sync Rule (MANDATORY)
+> **When ANY new equation, principle, concept, metric, or term is added to this document, a corresponding entry MUST be added to `src/lib/glossary-constants.ts` (website glossary).** The glossary is NOT auto-generated — it is a manual TypeScript array. Every entry needs: id, term, type, shortDef (ELI5 — one sentence a non-expert understands), fullDef (full explanation with numbers), formula (if applicable), relatedTerms, and tags. If you add an equation here and skip the glossary, it's a bug.
 
 ---
 
