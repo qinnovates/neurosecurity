@@ -155,12 +155,132 @@ def quantum_gate(t: float, tau_d: float) -> float:
 
 
 # ──────────────────────────────────────────────
-# Quantum Tunneling
+# Physical Constants
 # ──────────────────────────────────────────────
 
-# Physical constants
 HBAR = 1.0546e-34   # Reduced Planck constant (J·s)
+K_B = 1.38e-23      # Boltzmann constant (J/K)
 M_E = 9.109e-31     # Electron mass (kg) — used as reference
+
+
+# ──────────────────────────────────────────────
+# Energy-Time Security Bounds (Entry 51-52)
+# ──────────────────────────────────────────────
+
+def tau_d_critical(T: float = 310.0) -> float:
+    """τD_critical = ℏ/(2kT)
+
+    Physics-motivated default decoherence time. This is the timescale
+    at which thermal noise overwhelms quantum coherence. Matches
+    Tegmark's estimate at body temperature (~1.2e-14 s).
+
+    Anything longer than this requires a biological shielding mechanism.
+
+    Args:
+        T: Temperature in Kelvin (default: 310 K = body temperature)
+
+    Returns:
+        Critical decoherence time in seconds.
+    """
+    if T <= 0:
+        return float('inf')  # At absolute zero, coherence persists
+    return HBAR / (2 * K_B * T)
+
+
+def margolus_levitin_limit(E: float) -> float:
+    """max ops/sec = 2E/(πℏ)
+
+    The absolute speed limit of computation for any physical system.
+    No adversary — regardless of technology — can perform more
+    operations per second than this on a system with energy E.
+
+    Args:
+        E: Total system energy in Joules.
+
+    Returns:
+        Maximum operations per second.
+    """
+    if E <= 0:
+        return 0.0
+    return (2 * E) / (np.pi * HBAR)
+
+
+def landauer_measurement_floor(N: int, T: float = 310.0) -> float:
+    """E_measurement ≥ N × kT × ln(2)
+
+    Minimum energy cost per sample for a BCI with N channels.
+    This is the energy floor below which classical measurement
+    cannot function — the heat tax on information.
+
+    Args:
+        N: Number of channels/electrodes.
+        T: Temperature in Kelvin (default: body temperature)
+
+    Returns:
+        Minimum measurement energy in Joules per sample.
+    """
+    return N * K_B * T * np.log(2)
+
+
+def energy_time_resolution(dt_sample: float) -> float:
+    """ΔE_min = ℏ/(2·Δt)
+
+    Minimum detectable energy change at a given sampling rate.
+    Anything below this is fundamentally undetectable — not
+    because of bad instruments, but because of physics.
+
+    Args:
+        dt_sample: Sampling interval in seconds (1/sampling_rate).
+
+    Returns:
+        Minimum detectable energy change in Joules.
+    """
+    if dt_sample <= 0:
+        return float('inf')
+    return HBAR / (2 * dt_sample)
+
+
+def security_gap_oom(dt_sample: float, T: float = 310.0) -> float:
+    """Orders of magnitude between BCI resolution and thermal noise.
+
+    The gap between what a BCI can detect (ΔE_min) and what
+    thermal noise produces (kT). Larger gap = bigger blind spot.
+
+    Args:
+        dt_sample: Sampling interval in seconds.
+        T: Temperature in Kelvin.
+
+    Returns:
+        Gap in orders of magnitude (log10 scale).
+    """
+    delta_E = energy_time_resolution(dt_sample)
+    kT = K_B * T
+    if delta_E <= 0 or kT <= 0:
+        return 0.0
+    return np.log10(kT / delta_E)
+
+
+def classical_quantum_crossover(T: float = 310.0) -> float:
+    """N_crossover where N × kT × ln(2) ≈ πℏ/2
+
+    The number of channels/qubits at which the thermal cost
+    equals the quantum floor. Below this N, quantum effects
+    dominate. Above it, classical thermal effects dominate.
+
+    Args:
+        T: Temperature in Kelvin.
+
+    Returns:
+        Crossover channel count (will be fractional).
+    """
+    if T <= 0:
+        return float('inf')
+    return (np.pi * HBAR / 2) / (K_B * T * np.log(2))
+
+
+# ──────────────────────────────────────────────
+# Quantum Tunneling
+# ──────────────────────────────────────────────
 
 def tunneling_coefficient(V0: float, E: float, d: float, m: float = M_E) -> float:
     """T ≈ e^(−2κd) where κ = √(2m(V₀−E))/ℏ

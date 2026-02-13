@@ -188,6 +188,7 @@ Where v = axonal conduction velocity (NOT a universal constant k).
 | Fourier transform | X(f) = ∫x(t)·e^(−i2πft)dt | Established |
 | Cole-Cole dispersion | ε*(ω) = ε∞ + ΣᵢΔεᵢ/(1+(jωτᵢ)^(1−αᵢ)) + σₛ/(jωε₀) | Established |
 | Landauer's Principle | E_min = kT·ln(2) per bit erasure | Established |
+| Margolus-Levitin theorem | ops/sec ≤ 2E/(πℏ) — maximum computational speed of any physical system | Established (1998) |
 
 ### 3.4 Quantum Equations (security layer)
 
@@ -195,7 +196,8 @@ Where v = axonal conduction velocity (NOT a universal constant k).
 |----------|---------|--------|
 | No-Cloning Theorem | Cannot copy arbitrary unknown quantum state | Established (1982) |
 | Bell States | \|Φ⁺⟩ = (1/√2)(\|00⟩ + \|11⟩) | Established |
-| Heisenberg Uncertainty | ΔxΔp ≥ ℏ/2 | Established |
+| Heisenberg Uncertainty (position-momentum) | ΔxΔp ≥ ℏ/2 | Established |
+| Energy-Time Uncertainty | ΔEΔt ≥ ℏ/2 | Established |
 | Robertson-Schrödinger | σ²_A·σ²_B ≥ \|⟨[A,B]⟩/2i\|² + \|⟨{A,B}⟩/2 − ⟨A⟩⟨B⟩\|² | Established |
 | Von Neumann entropy | S(ρ) = −Tr(ρ ln ρ) | Established |
 | Born rule | P(x) = \|ψ(x)\|² | Established |
@@ -318,13 +320,33 @@ All quantum terms (ΓD, SvN, Q̂t, E(ρAB)) are derived from the system Hamilton
 | Σq missing weights, wrong sign | Added ψ₁,ψ₂,ψ₃ weights; Q̂e now subtracted (protective) | QwQ-32B math review (2026-02-07) |
 | §4.1 band index list (v3.1) | Updated to v4.0: N7–N1, I0, S1–S3 | Grok-3 consistency review (2026-02-07) |
 
-### 4.8 Open Research Questions
+### 4.8 Energy-Time Security Bounds (Entry 51, 2026-02-13)
+
+Three physical floors constrain what ANY BCI — classical or quantum — can do:
+
+**Floor 1 — Landauer (classical energy cost):** Every measurement at I0 costs at least N × kT ln 2 energy. For Neuralink (1024 channels, T = 310 K): E_measurement ≥ 3.04 × 10⁻¹⁸ J per sample. This is the minimum energy budget for classical BCI security to function.
+
+**Floor 2 — Margolus-Levitin (quantum speed limit):** Maximum operations/sec = 2E/(πℏ). For Neuralink (24.7 mW power budget): max ops ≈ 1.49 × 10³² ops/sec. This is the physics-derived ceiling on quantum attack bandwidth — no adversary can exceed this regardless of technology.
+
+**Floor 3 — Energy-time uncertainty (fundamental resolution):** ΔE_min = ℏ/(2·Δt_sample). At 20 kHz sampling (Δt = 50 μs): ΔE_min ≈ 1.06 × 10⁻³⁰ J ≈ 6.6 × 10⁻¹² eV. Compare to thermal noise: kT ≈ 26.7 meV. **The gap is ~10 orders of magnitude.** Classical BCIs cannot see quantum-scale effects — not because of bad engineering, but because of physics.
+
+**Physics-motivated τD bound:** The default decoherence time is derivable: τD_critical = ℏ/(2kT). At body temperature: τD_critical ≈ 1.2 × 10⁻¹⁴ s (matches Tegmark estimate). Anything longer requires a biological shielding mechanism (Posner molecules, microtubule confinement, etc.). τD remains tunable, but now has a physics-derived default rather than being fully free.
+
+**Classical-quantum crossover condition:** The transition from classical to quantum regime occurs when:
+```
+N × kT × ln(2) ≈ πℏ/2
+```
+For N channels at temperature T. This determines where Σc dominates (classical) vs where Σq dominates (quantum) in the QI equation.
+
+### 4.9 Open Research Questions
 
 1. Decoherence time in neural tissue: 10⁻¹³ s (Tegmark) vs 10⁻⁵ s (recent) — 8 OOM disagreement
 2. Biological entanglement: Fisher's Posner molecules — speculative, unverified
 3. Quantum tunneling as biometric: Novel proposal, no prior literature — needs experimental design
 4. Zeno-BCI effect: Does 1kHz+ sampling stabilize quantum states? — novel hypothesis
 5. Silicon-tissue interface: No quantum-level theoretical framework exists for this boundary
+6. Energy-aware decoherence gate: Should ΓD depend on (N, E, T) instead of just t? — Entry 51 transition equation proposes this
+7. Margolus-Levitin security ceiling: Can the computational speed limit be used to bound quantum attack bandwidth in practice?
 
 ---
 
