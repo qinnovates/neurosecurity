@@ -1,30 +1,39 @@
 [
   {
     "type": "external",
+    "title": "Kandu trial highlights positive outcomes with IpsiHand BCI system - MassDevice",
+    "date": "2026-02-13",
+    "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOLUpzQzU3WExXdVBQUTB5ckRhQjg0anRyNW1iMFQxYy1JQlEycWM1X1ZxcHlLVndoRkJaRU1yTFQ5U1d5VHZYTU14dWpHRjNpTmdSZm5hLUdDTnpIVmFfWi1RRmpHQmwtazNiZllhVGxyU1ZnbmdQWUxRTEJLa3lKWHFxSQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Kandu trial highlights positive outcomes with IpsiHand BCI system&nbsp;&nbsp;MassDevice",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "CL API: Real-Time Closed-Loop Interactions with Biological Neural Networks",
+    "date": "2026-02-13",
+    "url": "https://arxiv.org/abs/2602.11632",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.11632v1 Announce Type: new \nAbstract: Biological neural networks (BNNs) are increasingly explored for their rich dynamics, parallelism, and adaptive behavior. Beyond understanding their fun",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "TAVAE: A VAE with Adaptable Priors Explains Contextual Modulation in the Visual Cortex",
+    "date": "2026-02-13",
+    "url": "https://arxiv.org/abs/2602.11956",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.11956v1 Announce Type: new \nAbstract: The brain interprets visual information through learned regularities, a computation formalized as probabilistic inference under a prior. The visual cor",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "'Tipping point' reached in creation of brain chips to help 'unlock' minds of people with paralysis - Sky News",
     "date": "2026-02-12",
     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQY1FibEl5WWY0amRZY05VM0pQbFI1d3JrVTlvMndIckZxUm9jTGdYQnNxemZuc2dWWERMd0NKdktkdW9LamZ0b0ZrMWNXQ2tjcWUtTUlHekFVNzhNN0xHZnFWNHNlTWxmc0ZhT2VuZ181bWlRZ2Vkd2hDaTcwMmxva2tmMm5xa3NPSHpvRmNBWFVEWE5QQlJDeEpSbTdPbnRZeFkxRjdlb0ZzMU1xVU9pYV9sWkhiRERWYXBnT1NXXzhkaEVES2FwYlR3?oc=5",
     "source": "Google News — BCI",
     "summary": "'Tipping point' reached in creation of brain chips to help 'unlock' minds of people with paralysis&nbsp;&nbsp;Sky News",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Applications of endovascular brain–computer interface in patients with Alzheimer's disease - EurekAlert!",
-    "date": "2026-02-12",
-    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE44QWpsM0hkYlNvS3VqOHVwMFcteHg1TWhKR0ZZSzBwVE41RHQ1bTNIQmVfWTVZbGlhV2lrWFNxWElaZnRoNFV2UmZIMXIzaWIzSWc0RGFXeWZNRW1I?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Applications of endovascular brain–computer interface in patients with Alzheimer's disease&nbsp;&nbsp;EurekAlert!",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "ENIGMA: EEG-to-Image in 15 Minutes Using Less Than 1% of the Parameters",
-    "date": "2026-02-12",
-    "url": "https://arxiv.org/abs/2602.10361",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.10361v1 Announce Type: new \nAbstract: To be practical for real-life applications, models for brain-computer interfaces must be easily and quickly deployable on new subjects, effective on af",
-    "category": "research"
   },
   {
     "type": "external",
@@ -37,20 +46,20 @@
   },
   {
     "type": "external",
-    "title": "Chinese researchers complete world’s first in-orbit test of BCI devices - Global Times",
-    "date": "2026-02-09",
-    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1TLUl2aDB6cTdBbS0yb0VTSVRYaFNtc0xMMkZhX2ROYlhmYlF3c0FXWG5oRU4xbWJXR0Q3UG9lQW1qSTRWRVRDdDl1RndFRmd5ampEcEhFZG5TcEg5RHpfeFpB?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Chinese researchers complete world’s first in-orbit test of BCI devices&nbsp;&nbsp;Global Times",
+    "title": "Neuralink’s Next Frontier: Can a Brain Implant Give Sight to Those Born Blind? - Aish.com",
+    "date": "2026-02-10",
+    "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOMWt6a1JuanRtRDRPMFJ6aEtqU19IdHA3LTBMZlBucmNCU05QNGxCdWVjek9nU2VQeWpBTVBNZnAzRFBLdm90eFVhRm1wWEhGcElKY2YtbGpZUDNnSWk4UWJSWnI3ZEZMT3AwUzNORTdSbnJJel8tWTAxT2p5WVpIYjEyMmZ1VktLbmJ0NUwxNzVGQ2pvN2hKVA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink’s Next Frontier: Can a Brain Implant Give Sight to Those Born Blind?&nbsp;&nbsp;Aish.com",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Don’t Let Elon Musk Implant a Device in Your Skull - Home ❧ Current Affairs",
-    "date": "2026-02-09",
-    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNN2w5d3lkSWN1aFRBeGQ2SGNwb19GaUwyWVJTVmJzeFotNjRDNDhPQlo1SHNoYVFuS19jM1ZFX3lNWVVLNGR5V3R6em14NEI1SlpnSnhzWVVoVlFpY0NjR3ZSWHNYTHJlVUI4NnVDLWdsQ0ZQUm5PUl83WWxwNzNhakdTLS12QVJMYlhoU0NlbWYyeUlrdVFZ?oc=5",
+    "title": "Elon Musk has already tapped into the brains of 21 people, thousands more to follow in 2026 with mass production of Neuralink chip - 3DVF",
+    "date": "2026-02-07",
+    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNMW9tbVlIMktqZTJLaWJtbFRERXRUc3VCYlVRUjVkYXB0NVZERlRuSFVKcWhoejlTYzdxUkI3QVdYSkZkeTZrVVNuX2hieWRhMUotdGZfd1pFVHgtV0ZFNjIyb1h0Q2ROLXBtQjhPRm5TYWNNbUJWaHF3d3dHX2xoRGZmdllFbGNJU292WnhoaEdVRHBvbHpkNGhQcXRJbXVEcy1PLWVTMy1JeUxHVWdwUVZUUE1uZjFDQlFnUmlB?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Don’t Let Elon Musk Implant a Device in Your Skull&nbsp;&nbsp;Home ❧ Current Affairs",
+    "summary": "Elon Musk has already tapped into the brains of 21 people, thousands more to follow in 2026 with mass production of Neuralink chip&nbsp;&nbsp;3DVF",
     "category": "neurotechnology"
   },
   {
@@ -73,21 +82,30 @@
   },
   {
     "type": "external",
-    "title": "Man given Musk's Neuralink brain chip in UK trial says it 'feels magical' and gives new hope - Sky News",
-    "date": "2026-01-29",
-    "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOSXAtMVRrUjU0Q3VnQmVueXVEZ1pyb0NNdFVQbTdmSDBaQ012amNBUWFhVUZNRnY1RHRiQURaNFBOcDhRQ3ZaOGJxYk9ubmdDekgyemdIb2gyaDRfd3hHUVpmdVlNRl9NMkwtZXlmV2ZUSEw2cmlJX0dOc1J1V21JU2IwcmdkWEFUaV92RnNjdDZKS3RvRFlsMEt2Y1ZQTEVqMzhDTG5CZmNYZklqRUxYanBhUlBFYlU4TFFxR0ZtWURDajQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Man given Musk's Neuralink brain chip in UK trial says it 'feels magical' and gives new hope&nbsp;&nbsp;Sky News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
     "date": "2026-01-29",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Two Years of Telepathy - Neuralink",
+    "date": "2026-01-28",
+    "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk's Neuralink says it has 21 participants enrolled in trials - Reuters",
+    "date": "2026-01-28",
+    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQRFFGTTJhUVdWRXlRa3VsaTFvSVpQZktNRkNUSGNKcWl1Ql9JZ2YzODNJNXlvZ19rVnpKa2VqQ0Zyb3BiNWxEbzhrd1gxdi1CZmRxVzhMOHVaT2NTd2toOWIwSlp0cTIwUjVkY280OVRGT1BPdTMyOU9RSkFRcEJxQlEtYjF3ZXJsQ1d0dm5xcjlFWTdMeVUwSkFFVExIa0RVQXFkOXBDU185bmVTLTdiZDFJZkRqQWNf?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk's Neuralink says it has 21 participants enrolled in trials&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -118,20 +136,11 @@
   },
   {
     "type": "external",
-    "title": "Meta AI chief Alexandr Wang says will have kids only after Elon Musk’s Neuralink … - Times of India",
-    "date": "2026-01-04",
-    "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNaVVVeElVTUV3djZpMG92cUZzZkdtLTBYSkh6RW1BbFYzVVNiMHJaTE1PdVpwMFlXaGlWX3dNRFpmMjdsa3huMFpkUldkVE1KNFM4emN0OHdtazhMeW1mNjMwRlVHRFNTWlFMaFVqSzQzaXJfYVBDLWZiaE15Q3A2UXpEdEQ5UXdONThPWEM2SXpUXzBrM2VxdHBxRTFfa19UTXA5eHBaczNwZWxiMlNwTlVZemlzdk9VSG1yOTBZdm9IUlhlNkJMRTV3a3lSLTNidFlSWFFKSFdyTHpzVDdfdUtZWjdFdS1wcV9RcDlkRlphNTA5N2fSAfsBQVVfeXFMTjI1YVJWQU4xektZMXJqMzExNkt4UElDWThEamRKWnc1TFd3aExoQy1fVmdZdFh4SUFrem4xQy03Mk9SdzhFaEV3U09sSkxINFJXYWVINVNNMF9DeVctVDRQS05UMnI2ckFnTVFzUWZ5V3R4MElJNTB2RGxQdGthVjFtcHVWVHlEc2tUcGRlc2R1MzZ0bzByeWxnWVF0T1h3RFlFRnpnQzVNYzdvcktRMnlnU1pKcllJVC1Sa2d2UDQ5VVJGcmNYakVMdURKZ1l5b0xZT3NXZnpQSEFTNTkwRXA5QXMwcENHR1FCUndsV2xGV3U1djBFWnFFY28?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Meta AI chief Alexandr Wang says will have kids only after Elon Musk’s Neuralink …&nbsp;&nbsp;Times of India",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says - Reuters",
-    "date": "2026-01-01",
-    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
+    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
