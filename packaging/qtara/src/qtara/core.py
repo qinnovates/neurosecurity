@@ -11,6 +11,12 @@ class TaraLoader:
         self.data_path = data_path
         self._registry: Optional[TaraRegistry] = None
 
+    @property
+    def registry(self) -> TaraRegistry:
+        if not self._registry:
+            self.load()
+        return self._registry
+
     def load(self) -> TaraRegistry:
         if not self.data_path.exists():
             raise FileNotFoundError(f"TARA registry file not found at {self.data_path}")

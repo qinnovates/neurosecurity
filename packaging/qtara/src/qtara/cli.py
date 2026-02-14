@@ -25,6 +25,9 @@ def main():
     stix_parser = subparsers.add_parser("stix", help="Export techniques to STIX 2.1 JSON")
     stix_parser.add_argument("--output", help="Output file path", default="stix_bundle.json")
 
+    # Cite Command
+    subparsers.add_parser("cite", help="Get BibTeX citation for TARA")
+
     args = parser.parse_args()
 
     loader = TaraLoader()
@@ -77,6 +80,17 @@ def main():
         with open(args.output, 'w') as f:
             json.dump(bundle, f, indent=2)
         console.print(f"[green]Successfully exported {len(techniques)} techniques to {args.output}[/green]")
+
+    elif args.command == "cite":
+        bibtex = """@techreport{qinnovate2026tara,
+  author = {Qi, Kevin},
+  title = {TARA: Therapeutic Atlas of Risks and Applications for Neural Security},
+  institution = {Qinnovate Open Standards},
+  year = {2026},
+  url = {https://qinnovate.com/TARA},
+  version = {1.0}
+}"""
+        console.print(Panel(bibtex, title="BibTeX Citation", subtitle="Please cite TARA when using this data in academic work", expand=False))
 
     else:
         parser.print_help()
