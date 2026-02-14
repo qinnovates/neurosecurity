@@ -24,7 +24,7 @@
     },
     {
       "id": "neural-stream-01",
-      "title": "Lab Signal Protocol (Industry Standard)",
+      "title": "Popular BCI Protocol Library (Industry Standard)",
       "summary": "Three-phase exploit chain against the de-facto industry standard for neural data streaming. Responsible disclosure in progress; private channel established.",
       "status": "disclosed",
       "date": "2026-02-11",

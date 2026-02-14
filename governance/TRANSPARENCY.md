@@ -6,11 +6,11 @@ order: 4
 
 # Transparency Statement: Human-AI Collaboration in QIF Framework
 
-> This document serves as an auditable record of how AI tools were integrated into the development of the QIF (Quantified Interconnection Framework (QIF)for Neural Security), demonstrating principles of Responsible AI, cognitive boundary maintenance, and Human-in-the-Loop (HITL) methodology.
+> This document serves as an auditable record of how AI tools were integrated into the development of the QIF (Quantified Interconnection Framework for Neural Security), demonstrating principles of Responsible AI, cognitive boundary maintenance, and Human-in-the-Loop (HITL) methodology.
 
 **Last Updated:** 2026-02-14
-**Document Version:** 2.0
-**Detailed Derivation Timeline:** [`QIF-DERIVATION-LOG.md`](../../../drafts/ai-working/QIF-DERIVATION-LOG.md) — Complete chronological record of every derivation, decision, AI contribution, and validation result with timestamps and reasoning chains.
+**Document Version:** 6.1
+**Detailed Derivation Timeline:** [`QIF-DERIVATION-LOG.md`](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md) — Complete chronological record of every derivation, decision, AI contribution, and validation result with timestamps and reasoning chains.
 
 ---
 
@@ -29,9 +29,9 @@ This document:
 | Document | What It Contains |
 |----------|-----------------|
 | **This file (TRANSPARENCY.md)** | Collaboration methodology, contribution matrix, correction examples, tool disclosure |
-| **[QIF-DERIVATION-LOG.md](../../../drafts/ai-working/QIF-DERIVATION-LOG.md)** | Complete timestamped timeline of every derivation, insight, AI contribution, validation result, and decision — from project inception (2026-01-18) to present. **Start here for the full audit trail.** |
-| **[QIF-RESEARCH-SOURCES.md](../../../drafts/ai-working/QIF-RESEARCH-SOURCES.md)** | All 102+ research sources compiled during AI-assisted validation sessions, with attribution to which agent/tool found each source |
-| **[PROPAGATION.md](../../../drafts/ai-working/PROPAGATION.md)** | Validation pipeline: when and how independent review (including cross-AI review) is triggered |
+| **[QIF-DERIVATION-LOG.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md)** | Complete timestamped timeline of every derivation, insight, AI contribution, validation result, and decision — from project inception (2026-01-18) to present. **Start here for the full audit trail.** |
+| **[QIF-RESEARCH-SOURCES.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-RESEARCH-SOURCES.md)** | All 102+ research sources compiled during AI-assisted validation sessions, with attribution to which agent/tool found each source |
+| **[PROPAGATION.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/PROPAGATION.md)** | Validation pipeline: when and how independent review (including cross-AI review) is triggered |
 
 ---
 
@@ -46,7 +46,8 @@ Every contribution is categorized by its cognitive origin. AI assistance is trea
 | Domain | Human Contribution | AI Contribution | Boundary Notes |
 |--------|-------------------|-----------------|----------------|
 | **Conceptual Architecture** | 14-layer model concept, OSI-mirrored 7-layer silicon side, attack surface identification, layer-to-ethics mapping | Co-mapping of biological layers (nervous system analogs for L9-L14) | Human conceived the dual-stack structure and knew 7 silicon layers were required (mirroring OSI); AI assisted in mapping the biological nervous system layers |
-| **v3.0/v3.1 Hourglass Architecture** | All 6 architectural decisions (7-band, 3-1-3 symmetry, N3 rename, amygdala split, cerebellum spanning, QI range philosophy), rejection of N4 band | Co-derivation of hourglass geometry (Entries 1-13), research agent validation (102 sources), implementation across codebase | Human made all final decisions; AI proposed options and implemented choices. See Derivation Log Entries 14-15. |
+| **Hourglass Architecture (v6.1)** | All architectural decisions (11-band, 7-1-3 asymmetry, N3 rename, amygdala split, cerebellum spanning, QI range philosophy), selection of interfaces | Co-derivation of hourglass geometry (Entries 1-13), research agent validation (102 sources), implementation across codebase | Human made all final decisions; AI proposed options and implemented choices. See Derivation Log Entries 14-15. |
+| **NSP Core & Forge Integration** | Handshake protocol state machine, session key derivation logic, HTML-to-Staves compiler design, security-critical code paths | Rust syntax generation, serialization boilerplate, unit test scaffolding | Human designed the secure neural pipeline; AI assisted with boilerplate and Rust implementation. |
 | **Mathematical Formulas** | Cₛ coherence metric conception, variable selection (σ²φ, σ²τ, σ²γ), security interpretations | LaTeX formatting, notation consistency | Human selected which variances matter for security; AI formatted |
 | **Security Decisions** | Zero-trust architecture choice, firewall placement at L8, rejection thresholds | None | All security-critical decisions made by human judgment |
 | **Quantum Security Concepts** | TTT as security primitive, QPUF authentication proposal, liminal phase hypothesis | Literature organization | Novel security applications are human contributions |
@@ -122,15 +123,6 @@ This example illustrates why domain expertise cannot be fully offloaded to AI �
 - **Files Corrected**: CLAUDE.md, AGENTS.md, TARA/API.md, TARA/CLAUDE.md, PERSONAS.md, app.py, CoherenceGauge.tsx, coherence.tsx
 - **Lesson**: Legacy notation from early development propagated to auxiliary documentation without review against authoritative sources. This underscores the importance of establishing clear truth hierarchies (TechDoc > Implementation > Supporting docs).
 
-### Correction Rate
-
-Across the development of ONI Framework v0.1.0:
-- **Total AI suggestions reviewed**: ~200+
-- **Accepted without modification**: ~60%
-- **Accepted with modification**: ~25%
-- **Rejected entirely**: ~15%
-
-The 40% modification/rejection rate demonstrates active critical engagement, not passive acceptance.
 
 ---
 
@@ -195,15 +187,15 @@ Using AI for efficiency creates a risk: cognitive offloading may trade deep unde
 
 **Note on Multi-Model Approach**: Using multiple AI models serves as a form of epistemic hygiene — cross-referencing outputs between ChatGPT, DeepSeek, Gemini, Claude, and blind comparisons via LMArena helps identify model-specific biases or hallucinations. When models disagree, human judgment adjudicates by consulting primary sources.
 
-**Note on Chronological Progression**: Before the repository was created, the author used ChatGPT during the first week (mid-January 2026) to bounce ideas and externalize a framework vision that had been forming over years of thinking about BCI security, neuroscience, and quantum mechanics. Claude became the primary tool from repo creation (2026-01-18) onward, handling implementation, documentation, and co-derivation of the mathematical framework. For the complete timestamped timeline of every AI interaction, see the [AI Collaboration Timeline in QIF-DERIVATION-LOG.md](../../../drafts/ai-working/QIF-DERIVATION-LOG.md#ai-collaboration-timeline).
+**Note on Chronological Progression**: Before the repository was created, the author used ChatGPT during the first week (mid-January 2026) to bounce ideas and externalize a framework vision that had been forming over years of thinking about BCI security, neuroscience, and quantum mechanics. Claude became the primary tool from repo creation (2026-01-18) onward, handling implementation, documentation, and co-derivation of the mathematical framework. For the complete timestamped timeline of every AI interaction, see the [AI Collaboration Timeline in QIF-DERIVATION-LOG.md](../qif-framework/QIF-DERIVATION-LOG.md#ai-collaboration-timeline).
 
-**Note on Cross-AI Validation (added 2026-02-02)**: To counteract potential confirmation bias from the primary development AI (Claude), significant framework changes now trigger an independent review by a different AI system (Gemini 2.5 via CLI). The reviewing AI receives the full whitepaper with no prior context and is instructed to provide unsoftened criticism. This is formalized in the [Validation Pipeline](../../../drafts/ai-working/PROPAGATION.md) (Section E). Results are logged in the [Derivation Log](../../../drafts/ai-working/QIF-DERIVATION-LOG.md).
+**Note on Cross-AI Validation (added 2026-02-02)**: To counteract potential confirmation bias from the primary development AI (Claude), significant framework changes now trigger an independent review by a different AI system (Gemini 2.5 via CLI). The reviewing AI receives the full whitepaper with no prior context and is instructed to provide unsoftened criticism. This is formalized in the [Validation Pipeline](../qif-framework/PROPAGATION.md) (Section E). Results are logged in the [Derivation Log](../qif-framework/QIF-DERIVATION-LOG.md).
 
 **Note on Automatic Documentation (added 2026-02-03)**: All multi-AI validation sessions, architectural reviews, and significant framework decisions are now **automatically documented** in both the Derivation Log and this Transparency Statement at the time they occur. This includes: which AI systems were involved, what roles they played, what the human decided vs. what AI suggested, and the rationale for the decision. This practice is mandatory for all future sessions — not retroactive documentation, but real-time audit trail creation.
 
 ### Cross-AI Validation Sessions
 
-> **Authoritative source:** The complete record of all validation sessions lives in the [Derivation Log](../../../drafts/ai-working/QIF-DERIVATION-LOG.md). This table is a summary index. If it drifts out of sync, the Derivation Log is canonical.
+> **Authoritative source:** The complete record of all validation sessions lives in the [Derivation Log](../qif-framework/QIF-DERIVATION-LOG.md). This table is a summary index. If it drifts out of sync, the Derivation Log is canonical.
 
 #### Phase 1: Independent Review Established (Feb 2–3)
 
