@@ -34,8 +34,15 @@ const sections = [
 ];
 ---
 
-<footer class="border-t border-[var(--color-border)] mt-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<footer class="border-t border-[var(--color-border)] mt-24 relative overflow-hidden">
+  <!-- Background brand mark -->
+  <div class="footer-brand-bg select-none pointer-events-none" aria-hidden="true">
+    <span class="footer-brand font-bold font-[family-name:var(--font-heading)] leading-none bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
+      QINNOVATE
+    </span>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       <!-- Brand column -->
       <div class="col-span-2 md:col-span-1">
@@ -78,28 +85,22 @@ const sections = [
       </p>
     </div>
   </div>
-
-  <!-- Brand mark -->
-  <div class="relative overflow-hidden select-none" aria-hidden="true">
-    <div class="footer-brand-wrap">
-      <span class="footer-brand font-bold font-[family-name:var(--font-heading)] leading-none bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-        QINNOVATE
-      </span>
-    </div>
-  </div>
 </footer>
 
 <style>
-  .footer-brand-wrap {
+  .footer-brand-bg {
+    position: absolute;
+    bottom: 0;
+    right: -10%;
     display: flex;
-    justify-content: flex-end;
-    margin-right: -10%;
-    padding-bottom: 1rem;
+    align-items: flex-end;
+    z-index: 0;
   }
 
   .footer-brand {
-    font-size: clamp(4rem, 15vw, 14rem);
+    font-size: clamp(5rem, 18vw, 16rem);
     letter-spacing: -0.03em;
-    opacity: 0.15;
+    opacity: 0.07;
+    line-height: 0.8;
   }
 </style>
