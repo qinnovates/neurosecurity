@@ -1394,7 +1394,8 @@ class Tooltip {
   // ── Toolbar ──
   const attackBtn = document.createElement('button');
   attackBtn.className = 'toolbar-btn';
-  attackBtn.textContent = 'Attacks';
+  attackBtn.textContent = 'Attack Simulator';
+  attackBtn.title = 'Simulate attack paths across QIF bands';
   attackBtn.addEventListener('click', () => {
     attackSim.toggle();
     attackBtn.classList.toggle('active', attackSim.isOpen);
@@ -1405,7 +1406,8 @@ class Tooltip {
 
   const freqBtn = document.createElement('button');
   freqBtn.className = 'toolbar-btn';
-  freqBtn.textContent = 'Spectrum';
+  freqBtn.textContent = 'Frequency Spectrum';
+  freqBtn.title = 'View operating frequencies for each QIF band';
   freqBtn.addEventListener('click', () => {
     freqSpectrum.toggle();
     freqBtn.classList.toggle('active', freqSpectrum.isOpen);

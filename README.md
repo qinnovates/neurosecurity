@@ -22,9 +22,9 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | **[Preprint](https://doi.org/10.5281/zenodo.18640106)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) | v1.0, published |
 | **[TARA](https://qinnovate.com/TARA/)** | 102 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
 | **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
-| **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.3, draft |
+| **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
-| **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.3, spec |
+| **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.4, Secure Pipe Verified |
 | **[Governance](https://qinnovate.com/governance/)** | 10 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
 
 ---
@@ -81,6 +81,7 @@ The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocor
 The wire protocol. Post-quantum encryption (ML-KEM, ML-DSA, AES-256-GCM) at the frame level. Designed for implant-class hardware: sub-4ms latency, under 4% power overhead on ARM Cortex-M4.
 
 - **Spec:** [qinnovate.com/nsp](https://qinnovate.com/nsp/)
+- **Implementation:** [src/lib/nsp-core/](src/lib/nsp-core/) (Rust, PQ-secure)
 
 ### TARA (Therapeutic Atlas of Risks and Applications)
 
@@ -114,7 +115,8 @@ The Forge (gateway compiler, Rust std) compiles content. The Scribe (implant int
 
 Runemate paves the road for BCI content delivery the way W3C paved the road for web content. The bytecode format, the safety bounds, the rendering model: these become the shared infrastructure that BCI manufacturers build on.
 
-- **Spec:** [qinnovate.com/runemate](https://qinnovate.com/runemate/) (v0.3, 19 sections, ~2900 lines)
+- **Spec:** [qinnovate.com/runemate](https://qinnovate.com/runemate/) (v0.4, 19 sections, ~2900 lines)
+- **Compiler:** [src/lib/runemate-forge/](src/lib/runemate-forge/) (HTML-to-Staves, encrypted)
 - **Full specification:** [qif-framework/RUNEMATE.md](qif-framework/RUNEMATE.md)
 
 ### Governance

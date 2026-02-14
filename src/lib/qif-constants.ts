@@ -93,7 +93,7 @@ export const PILLARS = [
     icon: '&#9632;',
     color: 'var(--color-accent-secondary)',
     version: '0.4',
-    status: 'In Development',
+    status: 'Secure Core Complete',
   },
   {
     id: 'runemate',
@@ -105,7 +105,7 @@ export const PILLARS = [
     icon: '&#9670;',
     color: 'var(--color-accent-tertiary)',
     version: '0.4',
-    status: 'Research & Specs',
+    status: 'Secure Pipe Verified',
   },
 ] as const;
 
