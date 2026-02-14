@@ -5813,7 +5813,7 @@ This framework is aligned with NIMH's Research Domain Criteria (RDoC) approach â
 ## Entry 54: TARA Interactive Visualization & Dual-Use Toggle {#entry-54-tara-interactive-visualization--dual-use-toggle}
 
 **Date:** 2026-02-14
-**Context:** User requested TARA Atlas upgrade for MIT portfolio clarity and industry adoption.
+**Context:** User requested TARA Atlas upgrade for high-rigor academic portfolio clarity and industry adoption.
 **AI Systems:** Antigravity (Gemini 2.0 Pro)
 **Human Decision:** Explicitly model the "Dual-Use Dilemma" by toggling the SAME data between "Attacker" and "Therapeutic" perspectives, rather than separate datasets.
 
@@ -5832,7 +5832,7 @@ This proves the **Dual-Use Dilemma**: the mechanism (e.g., "Neural Stimulation")
 ### Implications for QIF
 
 1.  **TARA is a Mechanism Registry**: It is no longer just a "threat" list. It is a catalog of bio-digital interactions.
-2.  **Systems Thinking**: The interactive link between 3D model (physics) and Grid (semantics) demonstrates the "Systems Thinking" required for MIT-level work.
+2.  **Systems Thinking**: The interactive link between 3D model (physics) and Grid (semantics) demonstrates the "Systems Thinking" required for graduate-level work.
 3.  **Transparency**: This work led to the update of `governance/TRANSPARENCY.md` to include Antigravity, ensuring full compliance with VERA protocols.
 
 ### Status
