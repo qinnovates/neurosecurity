@@ -8,6 +8,15 @@ use aes_gcm::{
 };
 use thiserror::Error;
 
+mod messages;
+pub use messages::*;
+
+mod session;
+pub use session::Session;
+
+mod handshake;
+pub use handshake::*;
+
 #[derive(Error, Debug)]
 pub enum NspError {
     #[error("Cryptographic operation failed: {0}")]
