@@ -107,6 +107,18 @@ export const PILLARS = [
     version: '0.4',
     status: 'Secure Pipe Verified',
   },
+  {
+    id: 'tara',
+    name: 'TARA',
+    fullName: 'Therapeutic Applications & Risk Assessment',
+    tagline: 'The dual-use atlas',
+    description: 'A systematic classification of BCI techniques, mapping every attack to its therapeutic analog. Includes the Neural Impact Chain and DSM-5-TR diagnostic mapping.',
+    href: '/TARA/',
+    icon: '&#9650;',
+    color: '#f59e0b',
+    version: '1.0',
+    status: 'Atlas Published',
+  },
 ] as const;
 
 /** Publication stats — publications count is updated at build time via prebuild script */

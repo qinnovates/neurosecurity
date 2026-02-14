@@ -12,18 +12,30 @@
       "summary": "CWE-862 (Missing Authorization) — 9-year-old unfiled vulnerability found through TARA systematic gap analysis.",
       "status": "filed",
       "date": "2026-02-11",
-      "cwes": ["CWE-862"],
-      "disclosed_to": ["TWCERT/CC", "RealTek", "MITRE"],
+      "cwes": [
+        "CWE-862"
+      ],
+      "disclosed_to": [
+        "TWCERT/CC",
+        "RealTek",
+        "MITRE"
+      ],
       "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
-      "id": "liblsl",
-      "title": "LSL BCI Data Streaming Library",
-      "summary": "Three-phase exploit chain against a widely-used BCI data streaming library. Private disclosure channel requested.",
+      "id": "neural-stream-01",
+      "title": "Lab Signal Protocol (Industry Standard)",
+      "summary": "Three-phase exploit chain against the de-facto industry standard for neural data streaming. Responsible disclosure in progress; private channel established.",
       "status": "disclosed",
       "date": "2026-02-11",
-      "cwes": ["CWE-787", "CWE-190", "CWE-125"],
-      "disclosed_to": ["sccn/liblsl maintainers"],
+      "cwes": [
+        "CWE-787",
+        "CWE-190",
+        "CWE-125"
+      ],
+      "disclosed_to": [
+        "Protocol maintainers"
+      ],
       "href": null
     }
   ],

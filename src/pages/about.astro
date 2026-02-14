@@ -22,7 +22,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
       </p>
     </div>
 
-    <div class="grid sm:grid-cols-3 gap-4 my-8 not-prose">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 my-8 not-prose">
       {PILLARS.map((pillar) => (
         <a href={pillar.href} class="glass rounded-xl p-5 card-hover group">
           <div class="text-xl mb-2" style={`color: ${pillar.color}`} set:html={pillar.icon} />
@@ -30,7 +30,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
             {pillar.name}
           </h3>
           <p class="text-xs text-[var(--color-text-faint)] mb-2">{pillar.tagline}</p>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{pillar.description}</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{pillar.description}</p>
         </a>
       ))}
     </div>
@@ -75,7 +75,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         QIF was derived from first principles in 7 days of formal derivation — 50 log entries, 4 framework versions, from zero techniques to a complete stack. Every breakthrough, every dead end, every pivot is documented.
       </p>
       <p>
-        <a href="/milestones/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">View the full derivation timeline &rarr;</a>
+        <a href="/about/milestones/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">View the full derivation timeline &rarr;</a>
       </p>
 
       <h2>Open Standard</h2>
