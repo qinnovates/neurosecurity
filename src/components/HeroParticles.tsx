@@ -136,18 +136,21 @@ function WavePoints() {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
+        {/* @ts-expect-error: R3F type mismatch for bufferAttribute args */}
         <bufferAttribute
           attach="attributes-position"
           count={numParticles}
           array={positions}
           itemSize={3}
         />
+        {/* @ts-expect-error: R3F type mismatch for bufferAttribute args */}
         <bufferAttribute
           attach="attributes-scale"
           count={numParticles}
           array={scales}
           itemSize={1}
         />
+        {/* @ts-expect-error: R3F type mismatch for bufferAttribute args */}
         <bufferAttribute
           attach="attributes-color"
           count={numParticles}

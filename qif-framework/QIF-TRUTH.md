@@ -508,7 +508,32 @@ NSP-secured BCI data crossing the encryption boundary becomes indistinguishable 
 
 **Security implication:** No other BCI security approach has a physics-derived information-theoretic foundation. The Black Hole Security Principle provides provable guarantees grounded in established physics (not just "we used strong encryption").
 
+
 Full derivations: QIF-DERIVATION-LOG.md Entry 35
+
+---
+
+## 10. TARA Interactive Visualization (Entry 54, 2026-02-14)
+
+### 10.1 The "Connected System" Principle
+TARA is not a static list; it is a **cyber-physical system**.
+- **Physics Layer (3D Hourglass)**: Represents the physical interface (I0) and tissue interaction.
+- **Semantic Layer (Threat Grid)**: Represents the logical attack vectors and clinical outcomes.
+- **Interaction**: Clicking a 3D band (Physics) filters the Grid (Semantics). This proves that *physical location determines logical capability*.
+
+### 10.2 The Dual-Use Toggle (Neuroethics)
+To strictly adhere to VERA neuroethics, the system **MUST** allow toggling between:
+1.  **Attacker Perspective**: Shows "Kill Chain", "Severity", "Exploit".
+2.  **Therapeutic Perspective**: Shows "Clinical Pathway", "Beneficence", "Treatment".
+
+**The Data is Identical.** The *perspective* changes. This visualizes the **Dual-Use Dilemma**: the same mechanism used to cure (DBS) can be used to harm (Signal Injection).
+
+### 10.3 Diagnostic Mapping (Neural Impact Chain)
+- **Mechanism:** Attack Vector → I0 Interface → Brain Structure → Cognitive Function → Psychiatric Diagnosis.
+- **Classification:** DSM-5-TR Clusters (Cognitive/Psychotic, Mood/Trauma, Motor, etc.).
+- **Purpose:** Translates technical signal disruption into recognizable clinical risk.
+
+---
 
 ---
 

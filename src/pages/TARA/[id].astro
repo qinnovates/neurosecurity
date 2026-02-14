@@ -1,0 +1,118 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { THREAT_VECTORS, SEVERITY_COLORS } from '../../lib/threat-data';
+
+export function getStaticPaths() {
+  return THREAT_VECTORS.map((threat) => ({
+    params: { id: threat.id },
+    props: { threat },
+  }));
+}
+
+const { threat } = Astro.props;
+const severityColor = SEVERITY_COLORS[threat.severity] || SEVERITY_COLORS.low;
+---
+
+<PageLayout
+  title={`${threat.id}: ${threat.name} | TARA Atlas`}
+  description={threat.description}
+  breadcrumbs={[
+    { label: 'Explore', href: '/explore/' },
+    { label: 'TARA', href: '/TARA/' },
+    { label: threat.id }
+  ]}
+  maxWidth="narrow"
+>
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-2">
+      <h1 class="text-3xl font-bold font-mono">{threat.id}</h1>
+      <span
+        class="px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider border"
+        style={`background:${severityColor.bg}; color:${severityColor.text}; border-color:${severityColor.border}`}
+      >
+        {threat.severity}
+      </span>
+    </div>
+    <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-4">{threat.name}</h2>
+    <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-6">
+      {threat.description}
+    </p>
+
+    <!-- Metadata Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+      <div class="glass-subtle rounded-lg p-4">
+        <h3 class="text-xs font-bold uppercase text-[var(--color-text-faint)] mb-2">Technique Details</h3>
+        <dl class="text-sm space-y-2">
+          <div class="flex justify-between">
+            <dt class="text-[var(--color-text-muted)]">Tactic</dt>
+            <dd class="font-mono">{threat.tactic}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-[var(--color-text-muted)]">Status</dt>
+            <dd>{threat.status}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-[var(--color-text-muted)]">Bands</dt>
+            <dd>{threat.bands.join(', ')}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="glass-subtle rounded-lg p-4">
+        <h3 class="text-xs font-bold uppercase text-[var(--color-text-faint)] mb-2">Scoring</h3>
+        <div class="text-sm space-y-2">
+           <div>
+             <span class="text-[var(--color-text-muted)] block text-xs">NISS v1.0</span>
+             <code class="text-xs break-all">{threat.niss.vector}</code>
+           </div>
+           {threat.cvss && (
+             <div>
+               <span class="text-[var(--color-text-muted)] block text-xs">CVSS v4.0</span>
+               <code class="text-xs break-all">{threat.cvss.base_vector}</code>
+             </div>
+           )}
+        </div>
+      </div>
+    </div>
+
+    <!-- Dual Use Section -->
+    {threat.tara && (
+      <div class="glass rounded-xl p-6 border-l-4 border-green-500 mb-8">
+        <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-3 flex items-center gap-2">
+          <span class="text-green-500">✚</span> Therapeutic Application
+        </h3>
+        <p class="text-sm text-[var(--color-text-muted)] mb-4">{threat.tara.mechanism}</p>
+
+        {threat.tara.clinical && (
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <h4 class="text-xs font-bold uppercase text-[var(--color-text-faint)] mb-1">Clinical Analog</h4>
+              <p class="text-sm font-medium">{threat.tara.clinical.therapeutic_analog}</p>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold uppercase text-[var(--color-text-faint)] mb-1">Treats</h4>
+              <ul class="text-sm list-disc pl-4 text-[var(--color-text-muted)]">
+                {threat.tara.clinical.conditions.map(c => <li>{c}</li>)}
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+
+    <!-- GitHub Edit Link -->
+    <div class="mt-12 pt-6 border-t border-[var(--color-border)] flex justify-between items-center text-sm">
+      <span class="text-[var(--color-text-faint)]">QIF Standardization Body</span>
+      <a
+        href={`https://github.com/qinnovates/qinnovate/blob/main/shared/qtara-registrar.json`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-[var(--color-accent-primary)] hover:underline"
+      >
+        <span>Edit this on GitHub</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 3C6.77 6.5 6.73 6.6 7 2.5c0-1.5 1-2.5 1-2.5 0-1.15 0-2.35 0-3.5-.73 1.02-1.08 2.25-1 3.5-.32 1.48-.32 3 0 4.5.27 1.4.35 2.85 1 5.5v4"></path></svg>
+      </a>
+    </div>
+
+  </div>
+</PageLayout>

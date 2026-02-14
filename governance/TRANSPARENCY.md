@@ -190,6 +190,7 @@ Using AI for efficiency creates a risk: cognitive offloading may trade deep unde
 | Claude Research Agents | 3 specialized (quantum physics, neuroscience, cybersecurity) | Validation of v3.1 architecture against 102 external sources | Validation |
 | Gemini (Google) | Gemini 2.5 (CLI) | **Independent peer review and validation** — full whitepaper critique with no prior context, framework stress-testing, TARA mechanism validation, NISS scoring review, email/communications review, and cross-AI validation of architectural decisions | Validation (Primary) |
 | Gemini (Google) | Gemini 1.5/2.0 | Research verification, cross-model validation, alternative perspectives, early concept validation | Validation (Secondary) |
+| Antigravity (Google) | Gemini 2.0 Pro (Exp) | **TARA Atlas Enhancement** — Refactoring TARA from static grid to interactive 3D visualization, implementing "Attacker vs. Doctor" dual-mode toggle, and establishing vendor-agnostic sync workflows. Introduced 2026-02-14. | Implementation (Primary) |
 | LMArena (LMSYS) | Blind comparison | Unbiased initial concept exploration, cross-model validation | Exploratory |
 
 **Note on Multi-Model Approach**: Using multiple AI models serves as a form of epistemic hygiene — cross-referencing outputs between ChatGPT, DeepSeek, Gemini, Claude, and blind comparisons via LMArena helps identify model-specific biases or hallucinations. When models disagree, human judgment adjudicates by consulting primary sources.

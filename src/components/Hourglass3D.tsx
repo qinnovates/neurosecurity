@@ -19,6 +19,8 @@ const BANDS = HOURGLASS_BANDS.map((b) => ({
   description: b.description,
 }));
 
+type BandData = typeof BANDS[number];
+
 const BAND_RADII = [...HOURGLASS_RADII];
 const BAND_HEIGHT = 0.35;
 const GAP = 0.08;
@@ -29,12 +31,14 @@ function HourglassBand({
   radius,
   isHovered,
   onHover,
+  onClick,
 }: {
   band: BandData;
   index: number;
   radius: number;
   isHovered: boolean;
   onHover: (idx: number | null) => void;
+  onClick: () => void;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const totalHeight = BANDS.length * (BAND_HEIGHT + GAP) - GAP;
@@ -53,8 +57,9 @@ function HourglassBand({
     <group position={[0, y, 0]}>
       <mesh
         ref={meshRef}
-        onPointerEnter={() => onHover(index)}
-        onPointerLeave={() => onHover(null)}
+        onPointerEnter={(e) => { e.stopPropagation(); onHover(index); }}
+        onPointerLeave={(e) => { e.stopPropagation(); onHover(null); }}
+        onClick={(e) => { e.stopPropagation(); onClick(); }}
       >
         <cylinderGeometry args={[radius, radius, BAND_HEIGHT, 32]} />
         <meshStandardMaterial
@@ -91,18 +96,22 @@ function HourglassBand({
   );
 }
 
-function Scene({ onBandHover }: { onBandHover: (idx: number | null) => void }) {
-  const [hoveredBand, setHoveredBand] = useState<number | null>(null);
+interface SceneProps {
+  onBandHover: (idx: number | null) => void;
+  activeIndex: number | null;
+  onBandClick: (idx: number) => void;
+}
+
+function Scene({ onBandHover, activeIndex, onBandClick }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
-    if (groupRef.current && hoveredBand === null) {
+    if (groupRef.current && activeIndex === null) {
       groupRef.current.rotation.y += delta * 0.15;
     }
   });
 
   const handleHover = (idx: number | null) => {
-    setHoveredBand(idx);
     onBandHover(idx);
   };
 
@@ -119,8 +128,9 @@ function Scene({ onBandHover }: { onBandHover: (idx: number | null) => void }) {
             band={band}
             index={i}
             radius={BAND_RADII[i]}
-            isHovered={hoveredBand === i}
+            isHovered={activeIndex === i}
             onHover={handleHover}
+            onClick={() => onBandClick(i)}
           />
         ))}
       </group>
@@ -136,19 +146,38 @@ function Scene({ onBandHover }: { onBandHover: (idx: number | null) => void }) {
   );
 }
 
-export default function Hourglass3D() {
+interface Hourglass3DProps {
+  highlightBandId?: string | null;
+  onBandClick?: (bandId: string) => void;
+  className?: string;
+}
+
+export default function Hourglass3D({ highlightBandId, onBandClick, className }: Hourglass3DProps) {
   const [hoveredBand, setHoveredBand] = useState<number | null>(null);
-  const band = hoveredBand !== null ? BANDS[hoveredBand] : null;
+
+  // Determine active band: prop overrides local hover
+  const activeIndex = useMemo(() => {
+    if (highlightBandId) {
+      return BANDS.findIndex(b => b.id === highlightBandId);
+    }
+    return hoveredBand;
+  }, [highlightBandId, hoveredBand]);
+
+  const band = activeIndex !== null && activeIndex !== -1 ? BANDS[activeIndex] : null;
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+    <div className={className} style={{ position: 'relative', width: '100%', height: '100%' }}>
       <Canvas
         camera={{ position: [0, 0.5, 4], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
-        <Scene onBandHover={setHoveredBand} />
+        <Scene
+          onBandHover={setHoveredBand}
+          activeIndex={activeIndex ?? null}
+          onBandClick={(idx) => onBandClick?.(BANDS[idx].id)}
+        />
       </Canvas>
 
       {/* Info panel */}
