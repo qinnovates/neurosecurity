@@ -51,7 +51,7 @@ Every contribution is categorized by its cognitive origin. AI assistance is trea
 | **Security Decisions** | Zero-trust architecture choice, firewall placement at L8, rejection thresholds | None | All security-critical decisions made by human judgment |
 | **Quantum Security Concepts** | TTT as security primitive, QPUF authentication proposal, liminal phase hypothesis | Literature organization | Novel security applications are human contributions |
 | **Code Implementation** | Algorithm design, API decisions, security-critical logic | Syntax generation, boilerplate, docstrings | Human reviewed all generated code for security implications |
-| **Research Synthesis** | Source selection, relevance judgment, argument construction, conclusions | Initial literature summaries | All AI summaries verified against primary sources |
+| **Research Synthesis** | Source selection, relevance judgment, argument construction, conclusions | Initial literature summaries (Claude), independent validation and critique (Gemini) | All AI summaries verified against primary sources; Gemini served as independent reviewer to counter single-model bias |
 | **Technical Writing** | All original analysis, ethical arguments, novel hypotheses | Structural suggestions, grammar, APA formatting | Human wrote arguments; AI assisted with presentation |
 | **Blog Posts** | Core narratives, analogies, original insights | Draft structuring, SEO optimization | Human voice and perspective preserved throughout |
 
@@ -188,8 +188,8 @@ Using AI for efficiency creates a risk: cognitive offloading may trade deep unde
 | Claude (Anthropic) | Claude Opus 4.5 | Code assistance, documentation drafting, research synthesis, co-derivation of hourglass model. **Primary tool from repo creation (2026-01-18) onward.** | Primary |
 | Claude Code | CLI | Repository management, file operations, git workflows, agent orchestration | Primary |
 | Claude Research Agents | 3 specialized (quantum physics, neuroscience, cybersecurity) | Validation of v3.1 architecture against 102 external sources | Validation |
-| Gemini (Google) | Gemini 2.5 (CLI) | **Independent peer review** — full whitepaper critique with no prior context (cross-AI validation) | Validation |
-| Gemini (Google) | Gemini 1.5/2.0 | Research verification, cross-model validation, alternative perspectives | Secondary |
+| Gemini (Google) | Gemini 2.5 (CLI) | **Independent peer review and validation** — full whitepaper critique with no prior context, framework stress-testing, TARA mechanism validation, NISS scoring review, email/communications review, and cross-AI validation of architectural decisions | Validation (Primary) |
+| Gemini (Google) | Gemini 1.5/2.0 | Research verification, cross-model validation, alternative perspectives, early concept validation | Validation (Secondary) |
 | LMArena (LMSYS) | Blind comparison | Unbiased initial concept exploration, cross-model validation | Exploratory |
 
 **Note on Multi-Model Approach**: Using multiple AI models serves as a form of epistemic hygiene — cross-referencing outputs between ChatGPT, DeepSeek, Gemini, Claude, and blind comparisons via LMArena helps identify model-specific biases or hallucinations. When models disagree, human judgment adjudicates by consulting primary sources.
