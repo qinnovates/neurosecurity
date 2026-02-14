@@ -1,0 +1,504 @@
+<!DOCTYPE html><html lang="en-US" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Ethical obligations for neural device lifecycle management and end-of-life"><link rel="canonical" href="https://qinnovate.com/governance/post_deployment_ethics/"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui' fill='%2306b6d4'%3EQ%3C/text%3E%3C/svg%3E"><!-- Open Graph --><meta property="og:title" content="Post-Deployment Ethics"><meta property="og:description" content="Ethical obligations for neural device lifecycle management and end-of-life"><meta property="og:url" content="https://qinnovate.com/governance/post_deployment_ethics/"><meta property="og:site_name" content="Qinnovate"><meta property="og:type" content="website"><meta property="og:image" content="https://qinnovate.com/images/og-default.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Post-Deployment Ethics"><meta name="twitter:description" content="Ethical obligations for neural device lifecycle management and end-of-life"><meta name="twitter:image" content="https://qinnovate.com/images/og-default.png"><meta name="twitter:creator" content="@qikevinl"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Qinnovate","url":"https://qinnovate.com","description":"Open standards and frameworks for brain-computer interface security.","foundingDate":"2026","sameAs":["https://github.com/qinnovates"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://qinnovate.com/"},{"@type":"ListItem","position":2,"name":"Governance","item":"https://qinnovate.com/governance/"},{"@type":"ListItem","position":3,"name":"Post-Deployment Ethics"}]}</script><!-- RSS autodiscovery --><link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml"><title>Post-Deployment Ethics | Qinnovate</title><!-- View Transitions --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Google Analytics 4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKB9RWW0C2');
+  </script><!-- Theme initialization (prevent flash) --><script>
+    (function(){ document.documentElement.setAttribute('data-theme', 'light'); })();
+  </script><link rel="stylesheet" href="/_astro/TARA.w5QsKvtK.css">
+<link rel="stylesheet" href="/_astro/TARA.Bno3uEji.css"></head> <body class="min-h-screen">  <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" data-astro-transition-persist="astro-zscz5gm2-1"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity"> <span class="text-2xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">Q</span> <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline text-[var(--color-text-primary)]">innovate</span> </a> <!-- Desktop links --> <div class="hidden md:flex items-center gap-1"> <!-- About (flat link) --> <a href="/about/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+</a> <!-- Technology dropdown --> <div class="relative" data-dropdown="tech"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/framework/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">QIF Framework</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">The 11-band hourglass governance architecture</span> </a><a href="/nsp/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">NSP Protocol</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Secure communication protocol for patient safety and privacy</span> </a><a href="/runemate/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Runemate</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Compiler enabling on-device security for neural implants</span> </a><a href="/TARA/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">TARA</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Risk taxonomy — attacks, ethical risks, and therapeutic applications</span> </a><a href="/whitepaper/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Whitepaper</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Full QIF specification document</span> </a> </div> </div> </div> </div> <!-- Resources dropdown --> <div class="relative" data-dropdown="resources"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden"> <div class="p-2"> <a href="/news/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">News</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Latest publications and updates</span> </a><a href="/explore/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Explore</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Interactive visualizations and tools</span> </a><a href="/glossary/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Glossary</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">QIF terminology reference</span> </a> </div> </div> </div> </div> <!-- Engage dropdown --> <div class="relative" data-dropdown="engage"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/adopt/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Adopt the Standard</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Integrate QIF into your organization or research</span> </a><a href="/advisory/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Advisory Services</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Hands-on guidance for BCI security implementation</span> </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Get Involved</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Contribute on GitHub — issues, PRs, discussions</span> </a> </div> </div> </div> </div> <!-- Governance dropdown --> <div class="relative" data-dropdown="gov"> <a href="/governance/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute right-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/governance/#core" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Core Standards</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Code of Conduct, Transparency, Data Policy, Accessibility</span> </a><a href="/governance/#ethics" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Ethics &amp; Rights</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Neuroethics, Informed Consent, Pediatric, Post-Deployment</span> </a><a href="/governance/#compliance" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Compliance</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Regulatory, UNESCO Alignment, QIF Neuroethics</span> </a> </div> </div> </div> </div> </div> <!-- Right side --> <div class="flex items-center gap-3"> <!-- GitHub link --> <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="GitHub"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path> </svg> </a> <!-- Search button --> <button id="search-btn" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Search"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path> </svg> </button> <!-- Mobile menu button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Open menu" aria-expanded="false"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]"> <div class="px-4 py-3 space-y-1"> <!-- About (flat) --> <a href="/about/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+</a> <!-- Mobile Technology section --> <div> <button data-mobile-toggle="tech" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="tech" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="tech" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/framework/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> QIF Framework </a><a href="/nsp/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> NSP Protocol </a><a href="/runemate/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Runemate </a><a href="/TARA/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> TARA </a><a href="/whitepaper/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Whitepaper </a> </div> </div> <!-- Mobile Resources section --> <div> <button data-mobile-toggle="resources" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="resources" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="resources" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/news/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> News </a><a href="/explore/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Explore </a><a href="/glossary/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Glossary </a> </div> </div> <!-- Mobile Engage section --> <div> <button data-mobile-toggle="engage" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="engage" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="engage" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/adopt/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Adopt the Standard </a><a href="/advisory/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Advisory Services </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Get Involved </a> </div> </div> <!-- Mobile Governance section --> <div class="pt-2 border-t border-[var(--color-border)] mt-2"> <button data-mobile-toggle="gov" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="gov" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="gov" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/governance/#core" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Core Standards </a><a href="/governance/#ethics" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Ethics &amp; Rights </a><a href="/governance/#compliance" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Compliance </a> </div> </div> </div> </div> </nav> <!-- Search modal --> <div id="search-modal" class="fixed inset-0 z-[100] hidden"> <div id="search-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div> <div class="relative max-w-2xl mx-auto mt-20 px-4"> <div class="glass rounded-xl p-4 shadow-2xl" id="search-container"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;showSubResults&#34;:true}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.tZYucdM2.js"></script> </div> </div> </div> <script type="module">function u(){const n=document.getElementById("mobile-menu-btn"),i=document.getElementById("mobile-menu");n?.addEventListener("click",()=>{const e=n.getAttribute("aria-expanded")==="true";n.setAttribute("aria-expanded",String(!e)),i?.classList.toggle("hidden")}),document.addEventListener("astro:before-swap",()=>{i?.classList.add("hidden"),n?.setAttribute("aria-expanded","false")}),document.querySelectorAll("[data-dropdown]").forEach(e=>{const t=e.querySelector(".dropdown-menu");let a;function c(){document.querySelectorAll(".dropdown-menu").forEach(o=>{o!==t&&o.classList.add("hidden")}),clearTimeout(a),t?.classList.remove("hidden")}function l(){a=setTimeout(()=>{t?.classList.add("hidden")},150)}e.addEventListener("mouseenter",c),e.addEventListener("mouseleave",l),e.addEventListener("focusin",c),e.addEventListener("focusout",o=>{e.contains(o.relatedTarget)||l()})}),document.querySelectorAll("[data-mobile-toggle]").forEach(e=>{const t=e.getAttribute("data-mobile-toggle"),a=document.querySelector(`[data-mobile-list="${t}"]`),c=document.querySelector(`[data-chevron="${t}"]`);e.addEventListener("click",()=>{a?.classList.toggle("hidden"),c?.classList.toggle("rotate-180")})});const m=document.getElementById("search-btn"),d=document.getElementById("search-modal"),h=document.getElementById("search-backdrop");function r(){d?.classList.remove("hidden"),setTimeout(()=>{d?.querySelector(".pagefind-ui__search-input")?.focus()},50)}function s(){d?.classList.add("hidden")}m?.addEventListener("click",r),h?.addEventListener("click",s),document.addEventListener("keydown",e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),d?.classList.contains("hidden")?r():s()),e.key==="Escape"&&s()}),document.addEventListener("astro:before-swap",s)}u();document.addEventListener("astro:after-swap",u);</script> <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"> <nav aria-label="Breadcrumb" class="text-sm text-[var(--color-text-faint)] mb-6"> <ol class="flex items-center gap-2 flex-wrap"> <li> <a href="/" class="hover:text-[var(--color-accent-primary)] transition-colors">Home</a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <a href="/governance/" class="hover:text-[var(--color-accent-primary)] transition-colors"> Governance </a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <span class="text-[var(--color-text-muted)]">Post-Deployment Ethics</span> </li>  </ol> </nav> <header class="mb-12"> <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] leading-tight mb-4"> Post-Deployment Ethics </h1> <p class="text-lg text-[var(--color-text-muted)] italic">Ethical obligations for neural device lifecycle management and end-of-life</p> </header> <div class="prose"> <h1 id="qif-framework-post-deployment-ethics">QIF Framework: Post-Deployment Ethics</h1>
+<blockquote>
+<p>Ethical obligations for neural device lifecycle management, maintenance, and end-of-life considerations.</p>
+</blockquote>
+<p><strong>Last Updated:</strong> 2026-02-10
+<strong>Version:</strong> 1.0
+<strong>Status:</strong> Active Development</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#the-post-deployment-gap">The Post-Deployment Gap</a>
+<ul>
+<li><a href="#current-reality">Current Reality</a></li>
+<li><a href="#ethical-problem-statement">Ethical Problem Statement</a></li>
+</ul>
+</li>
+<li><a href="#qif-framework-obligations">QIF Framework Obligations</a>
+<ul>
+<li><a href="#1-lifecycle-planning-requirement">Lifecycle Planning Requirement</a></li>
+<li><a href="#2-maintenance-obligation-categories">Maintenance Obligation Categories</a></li>
+<li><a href="#3-abandonment-prevention">Abandonment Prevention</a></li>
+</ul>
+</li>
+<li><a href="#transition-planning">Transition Planning</a>
+<ul>
+<li><a href="#pre-deployment-disclosure-requirements">Pre-Deployment Disclosure Requirements</a></li>
+<li><a href="#transition-decision-framework">Transition Decision Framework</a></li>
+<li><a href="#ethical-decision-criteria">Ethical Decision Criteria</a></li>
+</ul>
+</li>
+<li><a href="#cost-and-access-barriers">Cost and Access Barriers</a></li>
+<li><a href="#device-removal-ethics">Device Removal Ethics</a></li>
+<li><a href="#stakeholder-responsibilities">Stakeholder Responsibilities</a></li>
+<li><a href="#integration-with-oni-modules">Integration with QIF Modules</a></li>
+<li><a href="#future-work">Future Work</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<hr>
+<h2 id="overview">Overview</h2>
+<p>This document addresses the ethical obligations that extend beyond initial device deployment. It is informed by groundbreaking research from <a href="https://pubmed.ncbi.nlm.nih.gov/35926784/">Gabriel Lázaro-Muñoz et al.</a> at Harvard Medical School and Massachusetts General Hospital, whose 2022 <em>Brain Stimulation</em> paper represents the first in-depth examination of post-trial access challenges for implanted neural devices.</p>
+<p><strong>Critical Finding:</strong> Post-trial access to beneficial implantable neural devices is generally not ensured, and lack of post-trial access is ethically problematic when participants do not have alternatives.</p>
+<hr>
+<h2 id="the-post-deployment-gap">The Post-Deployment Gap</h2>
+<h3 id="current-reality">Current Reality</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Issue</th><th>Finding</th><th>Source</th></tr></thead><tbody><tr><td><strong>No safety net</strong></td><td>”None of them have a safety net in place where they can ensure access”</td><td>Lázaro-Muñoz, 2022</td></tr><tr><td><strong>High maintenance costs</strong></td><td>$10,000+ per year for device maintenance, battery replacement, technical support</td><td>Industry analysis</td></tr><tr><td><strong>No uniform requirements</strong></td><td>In the US, no legal requirements for post-trial services</td><td>Regulatory review</td></tr><tr><td><strong>Manufacturer obligations</strong></td><td>”Nothing ensures device manufacturers have to provide parts or cover maintenance”</td><td>Lázaro-Muñoz, 2022</td></tr></tbody></table>
+<h3 id="ethical-problem-statement">Ethical Problem Statement</h3>
+<p>When a person receives an experimental neural implant that provides significant benefit, and then that device is removed or unsupported after a trial ends, the result can be:</p>
+<ol>
+<li><strong>Regression to pre-treatment state</strong> — Loss of therapeutic benefit</li>
+<li><strong>Psychological harm</strong> — Having experienced improvement, returning to baseline</li>
+<li><strong>Physical risks</strong> — Abandoned hardware in the body</li>
+<li><strong>Financial burden</strong> — Costs shifted entirely to patient</li>
+</ol>
+<blockquote>
+<p>“Like taking away a part of myself” — Participant description of post-trial device loss</p>
+</blockquote>
+<hr>
+<h2 id="qif-framework-obligations">QIF Framework Obligations</h2>
+<h3 id="1-lifecycle-planning-requirement">1. Lifecycle Planning Requirement</h3>
+<p>QIF-compliant deployments must include documented lifecycle plans:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                  DEVICE LIFECYCLE STAGES                     │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│                                                             │</span></span>
+<span class="line"><span>│  Pre-deployment ──► Active Use ──► Transition ──► End-of-Life│</span></span>
+<span class="line"><span>│       │                │              │              │       │</span></span>
+<span class="line"><span>│       ▼                ▼              ▼              ▼       │</span></span>
+<span class="line"><span>│  Consent includes   Maintenance    Alternative     Removal   │</span></span>
+<span class="line"><span>│  post-trial plan    obligations    planning       support    │</span></span>
+<span class="line"><span>│                                                             │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────────┘</span></span></code></pre>
+<h3 id="2-maintenance-obligation-categories">2. Maintenance Obligation Categories</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Category</th><th>Minimum Standard</th><th>QIF Requirement</th></tr></thead><tbody><tr><td><strong>Hardware maintenance</strong></td><td>Battery replacement, component repair</td><td>Documented service pathway</td></tr><tr><td><strong>Software updates</strong></td><td>Security patches, bug fixes</td><td>Update delivery mechanism</td></tr><tr><td><strong>Clinical support</strong></td><td>Ongoing medical monitoring</td><td>Referral network documented</td></tr><tr><td><strong>Technical support</strong></td><td>Device troubleshooting</td><td>Support channel specification</td></tr></tbody></table>
+<h3 id="3-abandonment-prevention">3. Abandonment Prevention</h3>
+<p><strong>Device abandonment</strong> occurs when a neural implant remains in a patient’s body without proper support or a clear plan for management.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Abandonment Type</th><th>Prevention Strategy</th><th>QIF Implementation</th></tr></thead><tbody><tr><td><strong>Manufacturer abandonment</strong></td><td>Contractual maintenance obligations</td><td>Deployment prerequisites</td></tr><tr><td><strong>Clinical abandonment</strong></td><td>Care transition protocols</td><td>Documented handoff procedures</td></tr><tr><td><strong>Financial abandonment</strong></td><td>Funding pathway identification</td><td>Cost disclosure at consent</td></tr><tr><td><strong>Technical abandonment</strong></td><td>Open specifications</td><td>Interoperability standards</td></tr></tbody></table>
+<hr>
+<h2 id="transition-planning">Transition Planning</h2>
+<h3 id="pre-deployment-disclosure-requirements">Pre-Deployment Disclosure Requirements</h3>
+<p>Before device activation, the following must be disclosed per INFORMED_CONSENT_FRAMEWORK.md:</p>
+<ol>
+<li><strong>Expected device lifespan</strong> — How long will hardware function?</li>
+<li><strong>Maintenance schedule</strong> — What ongoing services are needed?</li>
+<li><strong>Cost projections</strong> — Who pays for what, and for how long?</li>
+<li><strong>End-of-study plans</strong> — What happens when research concludes?</li>
+<li><strong>Alternative pathways</strong> — What options exist if this device is unavailable?</li>
+</ol>
+<h3 id="transition-decision-framework">Transition Decision Framework</h3>
+<p>When device status must change (end of trial, device failure, manufacturer exit):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> TransitionDecision</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Enum</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">    CONTINUE_SUPPORT</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 1</span><span style="color:#6A737D">      # Maintain current device with new provider</span></span>
+<span class="line"><span style="color:#79B8FF">    UPGRADE_PATHWAY</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 2</span><span style="color:#6A737D">       # Transition to commercial/approved version</span></span>
+<span class="line"><span style="color:#79B8FF">    ALTERNATIVE_THERAPY</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 3</span><span style="color:#6A737D">   # Switch to different intervention</span></span>
+<span class="line"><span style="color:#79B8FF">    SAFE_REMOVAL</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 4</span><span style="color:#6A737D">          # Explant with proper medical support</span></span>
+<span class="line"><span style="color:#79B8FF">    MANAGED_DECLINE</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 5</span><span style="color:#6A737D">       # Device winds down with clinical oversight</span></span></code></pre>
+<h3 id="ethical-decision-criteria">Ethical Decision Criteria</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Criterion</th><th>Weight</th><th>Considerations</th></tr></thead><tbody><tr><td><strong>User preference</strong></td><td>Highest</td><td>Autonomous choice respected</td></tr><tr><td><strong>Clinical benefit</strong></td><td>High</td><td>Continued therapeutic value</td></tr><tr><td><strong>Safety risk</strong></td><td>High</td><td>Risks of continued use vs. removal</td></tr><tr><td><strong>Resource availability</strong></td><td>Moderate</td><td>Feasibility of options</td></tr><tr><td><strong>Precedent setting</strong></td><td>Moderate</td><td>Implications for future patients</td></tr></tbody></table>
+<hr>
+<h2 id="cost-and-access-barriers">Cost and Access Barriers</h2>
+<h3 id="known-barriers-lázaro-muñoz-2022">Known Barriers (Lázaro-Muñoz, 2022)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Barrier</th><th>Impact</th><th>Mitigation Strategy</th></tr></thead><tbody><tr><td><strong>Insurance gaps</strong></td><td>Coverage ends with trial</td><td>Pre-deployment insurance pathway</td></tr><tr><td><strong>Proprietary parts</strong></td><td>Only manufacturer can service</td><td>Open specification requirements</td></tr><tr><td><strong>Specialist access</strong></td><td>Few clinicians trained</td><td>Training and referral networks</td></tr><tr><td><strong>Geographic barriers</strong></td><td>Rural/international patients</td><td>Telemedicine and distributed care</td></tr></tbody></table>
+<h3 id="funding-recommendations">Funding Recommendations</h3>
+<p>Based on researcher interviews (Lázaro-Muñoz et al., 2020):</p>
+<ol>
+<li><strong>Provide rechargeable conventional batteries</strong> at study conclusion</li>
+<li><strong>Secure supplementary funding mechanisms</strong> before trial starts</li>
+<li><strong>Involve device manufacturers</strong> in coverage solutions</li>
+<li><strong>Establish institutional contingency funds</strong> for device maintenance</li>
+</ol>
+<hr>
+<h2 id="device-removal-ethics">Device Removal Ethics</h2>
+<h3 id="when-removal-is-indicated">When Removal is Indicated</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Scenario</th><th>Ethical Considerations</th><th>Required Process</th></tr></thead><tbody><tr><td><strong>User request</strong></td><td>Autonomy respected</td><td>Counseling, informed consent for removal</td></tr><tr><td><strong>Device malfunction</strong></td><td>Beneficence (prevent harm)</td><td>Clinical assessment, alternatives considered</td></tr><tr><td><strong>Trial conclusion</strong></td><td>Justice (equitable treatment)</td><td>Transition plan execution</td></tr><tr><td><strong>Safety concern</strong></td><td>Non-maleficence</td><td>Immediate clinical review</td></tr></tbody></table>
+<h3 id="removal-decision-support">Removal Decision Support</h3>
+<blockquote>
+<p>“The device must never hold the user hostage.”</p>
+</blockquote>
+<p>Principles for removal decisions:</p>
+<ol>
+<li><strong>No coercion</strong> — Users should never feel trapped by device dependency</li>
+<li><strong>Full information</strong> — Clear explanation of post-removal state</li>
+<li><strong>Reversibility consideration</strong> — Can the device be reimplanted if desired?</li>
+<li><strong>Psychological support</strong> — Address identity and adjustment concerns</li>
+</ol>
+<hr>
+<h2 id="stakeholder-responsibilities">Stakeholder Responsibilities</h2>
+<h3 id="responsibility-matrix">Responsibility Matrix</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Stakeholder</th><th>Pre-Deployment</th><th>Active Use</th><th>Transition</th><th>End-of-Life</th></tr></thead><tbody><tr><td><strong>Manufacturer</strong></td><td>Lifecycle cost disclosure</td><td>Maintenance provision</td><td>Transition support</td><td>Part availability</td></tr><tr><td><strong>Researcher/Clinic</strong></td><td>Protocol clarity</td><td>Clinical oversight</td><td>Care handoff</td><td>Referral pathway</td></tr><tr><td><strong>Funder</strong></td><td>Sustainability plan</td><td>Coverage continuation</td><td>Transition funding</td><td>Removal coverage</td></tr><tr><td><strong>Patient/User</strong></td><td>Informed decision</td><td>Adherence, reporting</td><td>Preference expression</td><td>Final choice</td></tr><tr><td><strong>Regulator</strong></td><td>Guidelines development</td><td>Compliance monitoring</td><td>Transition oversight</td><td>Outcome tracking</td></tr></tbody></table>
+<hr>
+<h2 id="integration-with-qif-modules">Integration with QIF Modules</h2>
+<h3 id="lifecycle-monitoring">Lifecycle Monitoring</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>QIF Component</th><th>Post-Deployment Role</th></tr></thead><tbody><tr><td><code>tara.nsam</code></td><td>Device health monitoring, anomaly detection</td></tr><tr><td><code>oni.firewall</code></td><td>Continued security validation</td></tr><tr><td>Consent records</td><td>Transition authorization tracking</td></tr><tr><td>TRANSPARENCY.md</td><td>Documentation of lifecycle decisions</td></tr></tbody></table>
+<h3 id="graceful-degradation">Graceful Degradation</h3>
+<p>QIF-compliant devices should support <strong>graceful degradation</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Full Function ──► Limited Function ──► Safe Mode ──► Standby ──► Removal</span></span>
+<span class="line"><span>     │                  │                 │            │           │</span></span>
+<span class="line"><span>     ▼                  ▼                 ▼            ▼           ▼</span></span>
+<span class="line"><span> All features      Core only        Monitoring    Recording    Inert</span></span>
+<span class="line"><span> active            active           only          only</span></span></code></pre>
+<hr>
+<h2 id="future-work">Future Work</h2>
+<h3 id="l11-l14-standards-development">L11-L14 Standards Development</h3>
+<p>The QIF Framework’s upper layers (L11-L14: Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer) currently reference “Emerging neuroethics frameworks” for standards alignment. Unlike the lower layers:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Layer Range</th><th>Current Standards</th><th>Status</th></tr></thead><tbody><tr><td>L1-L7</td><td>IEEE, IETF</td><td>Mature</td></tr><tr><td>L8-L10</td><td>IEC 62443, FDA guidance</td><td>Established</td></tr><tr><td><strong>L11-L14</strong></td><td><strong>Emerging neuroethics frameworks</strong></td><td><strong>Not yet mature</strong></td></tr></tbody></table>
+<p><strong>Gap:</strong> No established international standards exist for cognitive and identity-layer security in neural interfaces.</p>
+<p><strong>Required Collaboration:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Stakeholder Type</th><th>Examples</th><th>Role</th></tr></thead><tbody><tr><td><strong>Subject Matter Experts</strong></td><td>Neuroethicists, cognitive scientists, BCI researchers</td><td>Define requirements and validate approaches</td></tr><tr><td><strong>Governing Agencies</strong></td><td>FDA, EU MDR, IEEE, UNESCO, OECD</td><td>Develop regulatory frameworks and standards</td></tr></tbody></table>
+<p><strong>Actions (When Standards Emerge):</strong></p>
+<ol>
+<li>Monitor emerging neuroethics frameworks from UNESCO, OECD, IEEE</li>
+<li>Engage with standards bodies as L11-L14 guidelines develop</li>
+<li>Contribute QIF framework principles to standards development efforts</li>
+<li>Map QIF L11-L14 definitions to emerging standards as they mature</li>
+</ol>
+<p><strong>Tracking:</strong> See <code>prd.json</code> future work item <code>future-l11-l14-standards-development</code></p>
+<hr>
+<h2 id="references">References</h2>
+<p>Lázaro-Muñoz, G., Pham, M. T., Muñoz, K. A., et al. (2022). Post-trial access in implanted neural device research: Device maintenance, abandonment, and cost. <em>Brain Stimulation</em>, 15(5), 1029-1036. <a href="https://doi.org/10.1016/j.brs.2022.07.051">https://doi.org/10.1016/j.brs.2022.07.051</a></p>
+<p>Lázaro-Muñoz, G., et al. (2020). Researcher Perspectives on Ethical Considerations in Adaptive Deep Brain Stimulation Trials. <em>Frontiers in Human Neuroscience</em>, 14, 578695.</p>
+<hr>
+<p>← Back to <a href="INFORMED_CONSENT_FRAMEWORK.md">INFORMED_CONSENT_FRAMEWORK.md</a> | <a href="/governance/">Governance</a></p> </div> <footer class="mt-16 pt-8 border-t border-[var(--color-border)]"> <a href="/governance/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+&larr; All governance documents
+</a> </footer> </article> <footer class="border-t border-[var(--color-border)] mt-24 relative overflow-hidden" data-astro-cid-sz7xmlte> <!-- Background brand mark --> <div class="footer-brand-bg select-none pointer-events-none" aria-hidden="true" data-astro-cid-sz7xmlte> <span class="footer-brand font-bold font-[family-name:var(--font-heading)] leading-none bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent" data-astro-cid-sz7xmlte>
+QINNOVATE
+</span> </div> <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" data-astro-cid-sz7xmlte> <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-astro-cid-sz7xmlte> <!-- Brand column --> <div class="col-span-2 md:col-span-1" data-astro-cid-sz7xmlte> <a href="/" class="text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]" data-astro-cid-sz7xmlte>
+Qinnovate Neural Alliance
+</a> <p class="mt-3 text-sm text-[var(--color-text-muted)] leading-relaxed" data-astro-cid-sz7xmlte>
+Introducing the heart of neurotechnology, starting governed by neuroethics and neurosecurity principles.
+</p> <p class="mt-4 text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+QIF v6.0 Hourglass &middot; Open Framework
+</p> </div> <div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Technology </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/framework/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Framework </a> </li><li data-astro-cid-sz7xmlte> <a href="/nsp/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NSP Protocol </a> </li><li data-astro-cid-sz7xmlte> <a href="/runemate/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Project Runemate </a> </li><li data-astro-cid-sz7xmlte> <a href="/TARA/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> TARA Atlas </a> </li><li data-astro-cid-sz7xmlte> <a href="/scoring/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NISS Scoring </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Resources </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/news/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> News </a> </li><li data-astro-cid-sz7xmlte> <a href="/lab/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Lab </a> </li><li data-astro-cid-sz7xmlte> <a href="/rss.xml" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> RSS Feed </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Connect </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> GitHub </a> </li><li data-astro-cid-sz7xmlte> <a href="https://medium.com/@qikevinl" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> Medium </a> </li><li data-astro-cid-sz7xmlte> <a href="/about/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> About </a> </li><li data-astro-cid-sz7xmlte> <a href="/advisory/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Advisory </a> </li><li data-astro-cid-sz7xmlte> <a href="/licensing/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Licensing </a> </li> </ul> </div> </div> <div class="mt-12 pt-8 border-t border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-center gap-4" data-astro-cid-sz7xmlte> <p class="text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+&copy; 2026 Qinnovate Neural Alliance. QIF is an open research framework.
+</p> </div> </div> </footer>   <!-- Scroll-driven reveal observer --> <script type="module">function o(){const t=new IntersectionObserver(e=>{e.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),t.unobserve(r.target))})},{threshold:.1,rootMargin:"0px 0px -40px 0px"});document.querySelectorAll(".reveal").forEach(e=>t.observe(e))}o();document.addEventListener("astro:after-swap",o);</script> </body> </html>

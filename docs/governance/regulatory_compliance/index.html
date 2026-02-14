@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en-US" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment"><link rel="canonical" href="https://qinnovate.com/governance/regulatory_compliance/"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui' fill='%2306b6d4'%3EQ%3C/text%3E%3C/svg%3E"><!-- Open Graph --><meta property="og:title" content="Regulatory Compliance Guide"><meta property="og:description" content="Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment"><meta property="og:url" content="https://qinnovate.com/governance/regulatory_compliance/"><meta property="og:site_name" content="Qinnovate"><meta property="og:type" content="website"><meta property="og:image" content="https://qinnovate.com/images/og-default.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Regulatory Compliance Guide"><meta name="twitter:description" content="Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment"><meta name="twitter:image" content="https://qinnovate.com/images/og-default.png"><meta name="twitter:creator" content="@qikevinl"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Qinnovate","url":"https://qinnovate.com","description":"Open standards and frameworks for brain-computer interface security.","foundingDate":"2026","sameAs":["https://github.com/qinnovates"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://qinnovate.com/"},{"@type":"ListItem","position":2,"name":"Governance","item":"https://qinnovate.com/governance/"},{"@type":"ListItem","position":3,"name":"Regulatory Compliance Guide"}]}</script><!-- RSS autodiscovery --><link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml"><title>Regulatory Compliance Guide | Qinnovate</title><!-- View Transitions --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Google Analytics 4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKB9RWW0C2');
+  </script><!-- Theme initialization (prevent flash) --><script>
+    (function(){ document.documentElement.setAttribute('data-theme', 'light'); })();
+  </script><link rel="stylesheet" href="/_astro/TARA.w5QsKvtK.css">
+<link rel="stylesheet" href="/_astro/TARA.Bno3uEji.css"></head> <body class="min-h-screen">  <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" data-astro-transition-persist="astro-zscz5gm2-1"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity"> <span class="text-2xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">Q</span> <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline text-[var(--color-text-primary)]">innovate</span> </a> <!-- Desktop links --> <div class="hidden md:flex items-center gap-1"> <!-- About (flat link) --> <a href="/about/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+</a> <!-- Technology dropdown --> <div class="relative" data-dropdown="tech"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/framework/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">QIF Framework</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">The 11-band hourglass governance architecture</span> </a><a href="/nsp/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">NSP Protocol</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Secure communication protocol for patient safety and privacy</span> </a><a href="/runemate/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Runemate</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Compiler enabling on-device security for neural implants</span> </a><a href="/TARA/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">TARA</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Risk taxonomy — attacks, ethical risks, and therapeutic applications</span> </a><a href="/whitepaper/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Whitepaper</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Full QIF specification document</span> </a> </div> </div> </div> </div> <!-- Resources dropdown --> <div class="relative" data-dropdown="resources"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden"> <div class="p-2"> <a href="/news/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">News</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Latest publications and updates</span> </a><a href="/explore/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Explore</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Interactive visualizations and tools</span> </a><a href="/glossary/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Glossary</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">QIF terminology reference</span> </a> </div> </div> </div> </div> <!-- Engage dropdown --> <div class="relative" data-dropdown="engage"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/adopt/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Adopt the Standard</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Integrate QIF into your organization or research</span> </a><a href="/advisory/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Advisory Services</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Hands-on guidance for BCI security implementation</span> </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Get Involved</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Contribute on GitHub — issues, PRs, discussions</span> </a> </div> </div> </div> </div> <!-- Governance dropdown --> <div class="relative" data-dropdown="gov"> <a href="/governance/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute right-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/governance/#core" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Core Standards</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Code of Conduct, Transparency, Data Policy, Accessibility</span> </a><a href="/governance/#ethics" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Ethics &amp; Rights</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Neuroethics, Informed Consent, Pediatric, Post-Deployment</span> </a><a href="/governance/#compliance" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Compliance</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Regulatory, UNESCO Alignment, QIF Neuroethics</span> </a> </div> </div> </div> </div> </div> <!-- Right side --> <div class="flex items-center gap-3"> <!-- GitHub link --> <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="GitHub"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path> </svg> </a> <!-- Search button --> <button id="search-btn" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Search"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path> </svg> </button> <!-- Mobile menu button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Open menu" aria-expanded="false"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]"> <div class="px-4 py-3 space-y-1"> <!-- About (flat) --> <a href="/about/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+</a> <!-- Mobile Technology section --> <div> <button data-mobile-toggle="tech" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="tech" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="tech" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/framework/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> QIF Framework </a><a href="/nsp/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> NSP Protocol </a><a href="/runemate/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Runemate </a><a href="/TARA/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> TARA </a><a href="/whitepaper/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Whitepaper </a> </div> </div> <!-- Mobile Resources section --> <div> <button data-mobile-toggle="resources" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="resources" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="resources" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/news/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> News </a><a href="/explore/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Explore </a><a href="/glossary/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Glossary </a> </div> </div> <!-- Mobile Engage section --> <div> <button data-mobile-toggle="engage" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="engage" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="engage" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/adopt/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Adopt the Standard </a><a href="/advisory/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Advisory Services </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Get Involved </a> </div> </div> <!-- Mobile Governance section --> <div class="pt-2 border-t border-[var(--color-border)] mt-2"> <button data-mobile-toggle="gov" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="gov" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="gov" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/governance/#core" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Core Standards </a><a href="/governance/#ethics" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Ethics &amp; Rights </a><a href="/governance/#compliance" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Compliance </a> </div> </div> </div> </div> </nav> <!-- Search modal --> <div id="search-modal" class="fixed inset-0 z-[100] hidden"> <div id="search-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div> <div class="relative max-w-2xl mx-auto mt-20 px-4"> <div class="glass rounded-xl p-4 shadow-2xl" id="search-container"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;showSubResults&#34;:true}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.tZYucdM2.js"></script> </div> </div> </div> <script type="module">function u(){const n=document.getElementById("mobile-menu-btn"),i=document.getElementById("mobile-menu");n?.addEventListener("click",()=>{const e=n.getAttribute("aria-expanded")==="true";n.setAttribute("aria-expanded",String(!e)),i?.classList.toggle("hidden")}),document.addEventListener("astro:before-swap",()=>{i?.classList.add("hidden"),n?.setAttribute("aria-expanded","false")}),document.querySelectorAll("[data-dropdown]").forEach(e=>{const t=e.querySelector(".dropdown-menu");let a;function c(){document.querySelectorAll(".dropdown-menu").forEach(o=>{o!==t&&o.classList.add("hidden")}),clearTimeout(a),t?.classList.remove("hidden")}function l(){a=setTimeout(()=>{t?.classList.add("hidden")},150)}e.addEventListener("mouseenter",c),e.addEventListener("mouseleave",l),e.addEventListener("focusin",c),e.addEventListener("focusout",o=>{e.contains(o.relatedTarget)||l()})}),document.querySelectorAll("[data-mobile-toggle]").forEach(e=>{const t=e.getAttribute("data-mobile-toggle"),a=document.querySelector(`[data-mobile-list="${t}"]`),c=document.querySelector(`[data-chevron="${t}"]`);e.addEventListener("click",()=>{a?.classList.toggle("hidden"),c?.classList.toggle("rotate-180")})});const m=document.getElementById("search-btn"),d=document.getElementById("search-modal"),h=document.getElementById("search-backdrop");function r(){d?.classList.remove("hidden"),setTimeout(()=>{d?.querySelector(".pagefind-ui__search-input")?.focus()},50)}function s(){d?.classList.add("hidden")}m?.addEventListener("click",r),h?.addEventListener("click",s),document.addEventListener("keydown",e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),d?.classList.contains("hidden")?r():s()),e.key==="Escape"&&s()}),document.addEventListener("astro:before-swap",s)}u();document.addEventListener("astro:after-swap",u);</script> <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"> <nav aria-label="Breadcrumb" class="text-sm text-[var(--color-text-faint)] mb-6"> <ol class="flex items-center gap-2 flex-wrap"> <li> <a href="/" class="hover:text-[var(--color-accent-primary)] transition-colors">Home</a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <a href="/governance/" class="hover:text-[var(--color-accent-primary)] transition-colors"> Governance </a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <span class="text-[var(--color-text-muted)]">Regulatory Compliance Guide</span> </li>  </ol> </nav> <header class="mb-12"> <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] leading-tight mb-4"> Regulatory Compliance Guide </h1> <p class="text-lg text-[var(--color-text-muted)] italic">Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment</p> </header> <div class="prose"> <h1 id="qif-framework-regulatory-compliance-guide">QIF Framework: Regulatory Compliance Guide</h1>
+<blockquote>
+<p>Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment.</p>
+</blockquote>
+<p><strong>Last Updated:</strong> 2026-02-10
+<strong>Version:</strong> 2.0
+<strong>Status:</strong> Living Document — US &#x26; International Coverage</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><a href="#why-compliance-matters-now">Why Compliance Matters Now</a></li>
+<li><a href="#us-regulatory-landscape">US Regulatory Landscape</a>
+<ul>
+<li><a href="#food-and-drug-administration-fda">Food and Drug Administration (FDA)</a></li>
+<li><a href="#federal-communications-commission-fcc">Federal Communications Commission (FCC)</a></li>
+<li><a href="#health-insurance-portability-and-accountability-act-hipaa">Health Insurance Portability and Accountability Act (HIPAA)</a></li>
+<li><a href="#federal-trade-commission-ftc">Federal Trade Commission (FTC)</a></li>
+<li><a href="#national-institute-of-standards-and-technology-nist">National Institute of Standards and Technology (NIST)</a></li>
+<li><a href="#state-level-regulations">State-Level Regulations</a></li>
+</ul>
+</li>
+<li><a href="#us-federal-legislation">US Federal Legislation</a></li>
+<li><a href="#qif-compliance-matrix">QIF Compliance Matrix</a></li>
+<li><a href="#qif-compliant-bci-requirements">QIF-Compliant BCI Requirements</a></li>
+<li><a href="#certification-pathway">Certification Pathway</a></li>
+<li><a href="#international-regulatory-landscape">International Regulatory Landscape</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Brain-Computer Interfaces (BCIs) represent one of the most consequential technological developments of the 21st century. As these devices transition from research laboratories to consumer markets, the regulatory framework governing their deployment will determine whether this technology serves humanity or endangers it.</p>
+<p><strong>The QIF Framework establishes security and safety standards that complement—and in some cases exceed—existing regulatory requirements.</strong> This document maps QIF compliance to US federal and state regulations, international frameworks, and emerging neurotechnology legislation worldwide, identifying gaps that manufacturers, regulators, and policymakers must address before mass BCI adoption.</p>
+<blockquote>
+<p><strong>Key Principle:</strong> Mass adoption of BCIs is inevitable. The question is not <em>whether</em> but <em>how</em>. QIF-compliant devices prioritize security, privacy, and human sovereignty from the design phase—not as regulatory afterthoughts.</p>
+</blockquote>
+<hr>
+<h2 id="why-compliance-matters-now">Why Compliance Matters Now</h2>
+<h3 id="the-regulatory-window">The Regulatory Window</h3>
+<p>We are currently in a critical regulatory window. BCIs are transitioning from:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Phase</th><th>Characteristics</th><th>Regulatory Posture</th></tr></thead><tbody><tr><td><strong>Research</strong> (2000-2020)</td><td>Academic labs, small cohorts, IRB oversight</td><td>Minimal commercial regulation</td></tr><tr><td><strong>Early Clinical</strong> (2020-2026)</td><td>FDA breakthrough designations, compassionate use</td><td>Emerging medical device framework</td></tr><tr><td><strong>Consumer Transition</strong> (2026-2030)</td><td>Non-invasive consumer devices, wellness claims</td><td>Regulatory gap — unclear jurisdiction</td></tr><tr><td><strong>Mass Adoption</strong> (2030+)</td><td>Widespread deployment, critical infrastructure</td><td><strong>Urgent need for comprehensive framework</strong></td></tr></tbody></table>
+<h3 id="consequences-of-delayed-action">Consequences of Delayed Action</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Risk Category</th><th>Without Proactive Regulation</th><th>With QIF-Compliant Framework</th></tr></thead><tbody><tr><td><strong>Security Incidents</strong></td><td>Neural ransomware, cognitive hijacking, mass exploitation</td><td>Defense-in-depth, attack detection, rapid response</td></tr><tr><td><strong>Privacy Violations</strong></td><td>Thought surveillance, neural data harvesting, identity theft</td><td>Encrypted transport, data minimization, consent enforcement</td></tr><tr><td><strong>Public Trust</strong></td><td>Backlash, adoption resistance, restrictive legislation</td><td>Informed adoption, transparent security, ethical deployment</td></tr><tr><td><strong>International Competition</strong></td><td>Fragmented standards, race to bottom</td><td>Unified standards, global interoperability</td></tr></tbody></table>
+<hr>
+<h2 id="us-regulatory-landscape">US Regulatory Landscape</h2>
+<h3 id="food-and-drug-administration-fda">Food and Drug Administration (FDA)</h3>
+<p>The FDA is the primary regulator for medical BCIs in the United States. BCI devices fall under the Medical Device classification.</p>
+<h4 id="device-classification">Device Classification</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Class</th><th>Risk Level</th><th>Examples</th><th>Regulatory Pathway</th></tr></thead><tbody><tr><td><strong>Class I</strong></td><td>Low</td><td>External EEG headbands (wellness)</td><td>General Controls, Exempt</td></tr><tr><td><strong>Class II</strong></td><td>Moderate</td><td>Non-invasive neurofeedback, cochlear implants</td><td>510(k) Premarket Notification</td></tr><tr><td><strong>Class III</strong></td><td>High</td><td>Implanted neural interfaces, deep brain stimulators</td><td>Premarket Approval (PMA)</td></tr></tbody></table>
+<h4 id="key-fda-regulations">Key FDA Regulations</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Regulation</th><th>Citation</th><th>QIF Alignment</th></tr></thead><tbody><tr><td><strong>Quality System Regulation</strong></td><td>21 CFR Part 820</td><td>QIF L8-L14 validation checkpoints map to design controls</td></tr><tr><td><strong>Medical Device Reporting</strong></td><td>21 CFR Part 803</td><td>NSAM alerting provides adverse event detection</td></tr><tr><td><strong>Unique Device Identification</strong></td><td>21 CFR Part 830</td><td>QIF node identification supports UDI requirements</td></tr><tr><td><strong>Cybersecurity Guidance</strong></td><td>FDA-2023-D-0100</td><td><strong>Direct alignment</strong> — QIF exceeds current FDA cyber guidance</td></tr><tr><td><strong>Software as Medical Device</strong></td><td>IMDRF/SaMD</td><td>QIF firmware security addresses SaMD concerns</td></tr></tbody></table>
+<h4 id="fda-breakthrough-device-designation">FDA Breakthrough Device Designation</h4>
+<p>Several BCI companies have received Breakthrough Device Designation:</p>
+<ul>
+<li><strong>Synchron</strong> — Stentrode endovascular BCI</li>
+<li><strong>Blackrock Neurotech</strong> — Utah Array systems</li>
+<li><strong>Neuralink</strong> — N1 implant</li>
+<li><strong>Paradromics</strong> — High-bandwidth cortical interface</li>
+</ul>
+<blockquote>
+<p><strong>QIF Recommendation:</strong> Breakthrough designation should require demonstrated cybersecurity architecture. Current designation focuses on therapeutic benefit without mandating security standards.</p>
+</blockquote>
+<h4 id="fda-cybersecurity-requirements">FDA Cybersecurity Requirements</h4>
+<p>The FDA’s 2023 guidance on cybersecurity for medical devices establishes:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Requirement</th><th>FDA Expectation</th><th>QIF Implementation</th></tr></thead><tbody><tr><td><strong>Threat Modeling</strong></td><td>Identify attack vectors</td><td>QIF layered attack surface mapping</td></tr><tr><td><strong>Security by Design</strong></td><td>Built-in security controls</td><td>L8 Neural Firewall, coherence validation</td></tr><tr><td><strong>Software Bill of Materials</strong></td><td>Component transparency</td><td>QIF component registry</td></tr><tr><td><strong>Vulnerability Management</strong></td><td>Ongoing security updates</td><td>NSAM continuous monitoring</td></tr><tr><td><strong>Incident Response</strong></td><td>Breach detection/response</td><td>Alert escalation, quarantine protocols</td></tr></tbody></table>
+<hr>
+<h3 id="federal-communications-commission-fcc">Federal Communications Commission (FCC)</h3>
+<p>BCIs with wireless capabilities fall under FCC jurisdiction for electromagnetic emissions and spectrum use.</p>
+<h4 id="applicable-regulations">Applicable Regulations</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Regulation</th><th>Scope</th><th>BCI Relevance</th></tr></thead><tbody><tr><td><strong>47 CFR Part 15</strong></td><td>Unlicensed devices</td><td>Consumer EEG, Bluetooth/WiFi BCIs</td></tr><tr><td><strong>47 CFR Part 18</strong></td><td>Industrial/scientific/medical</td><td>Medical-grade implants</td></tr><tr><td><strong>47 CFR Part 95</strong></td><td>Medical Device Radio (MICS)</td><td>Implanted device telemetry</td></tr><tr><td><strong>SAR Limits</strong></td><td>Specific Absorption Rate</td><td>RF exposure near brain tissue</td></tr></tbody></table>
+<h4 id="qif-fcc-alignment">QIF-FCC Alignment</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>FCC Concern</th><th>QIF Solution</th></tr></thead><tbody><tr><td>Electromagnetic interference</td><td>L1-L2 signal integrity validation</td></tr><tr><td>Unauthorized transmission</td><td>L8 firewall blocks rogue RF</td></tr><tr><td>Spectrum security</td><td>Transport layer authentication</td></tr></tbody></table>
+<hr>
+<h3 id="health-insurance-portability-and-accountability-act-hipaa">Health Insurance Portability and Accountability Act (HIPAA)</h3>
+<p>Neural data constitutes Protected Health Information (PHI) under HIPAA when collected in healthcare contexts.</p>
+<h4 id="hipaa-requirements">HIPAA Requirements</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Rule</th><th>Requirements</th><th>QIF Alignment</th></tr></thead><tbody><tr><td><strong>Privacy Rule</strong></td><td>Minimum necessary use, patient consent, disclosure limits</td><td>QIF data minimization, consent framework</td></tr><tr><td><strong>Security Rule</strong></td><td>Administrative, physical, technical safeguards</td><td>QIF L6-L14 encryption, access controls</td></tr><tr><td><strong>Breach Notification</strong></td><td>60-day notification for breaches >500 individuals</td><td>NSAM detection enables rapid breach identification</td></tr></tbody></table>
+<h4 id="neural-data-classification">Neural Data Classification</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Data Type</th><th>HIPAA Status</th><th>QIF Protection</th></tr></thead><tbody><tr><td>Raw EEG/neural signals</td><td>PHI if linked to individual</td><td>Encrypted at L6, anonymized at L10</td></tr><tr><td>Decoded intentions/commands</td><td>PHI — highly sensitive</td><td>Never stored, processed ephemerally</td></tr><tr><td>Cognitive state inferences</td><td>PHI — derived health data</td><td>Kohno taxonomy protection</td></tr><tr><td>Device telemetry</td><td>PHI if linked</td><td>Pseudonymized device IDs</td></tr></tbody></table>
+<blockquote>
+<p><strong>Critical Gap:</strong> HIPAA was designed for medical records, not real-time neural streams. New regulatory frameworks are needed for continuous neural data flows.</p>
+</blockquote>
+<hr>
+<h3 id="federal-trade-commission-ftc">Federal Trade Commission (FTC)</h3>
+<p>The FTC regulates consumer BCIs marketed outside medical contexts (wellness, productivity, gaming).</p>
+<h4 id="ftc-authority">FTC Authority</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Area</th><th>FTC Concern</th><th>QIF Relevance</th></tr></thead><tbody><tr><td><strong>Deceptive Practices</strong></td><td>False claims about BCI capabilities</td><td>Honest coherence reporting</td></tr><tr><td><strong>Unfair Practices</strong></td><td>Inadequate data security</td><td>QIF security baseline</td></tr><tr><td><strong>Children’s Privacy (COPPA)</strong></td><td>Under-13 protections</td><td>Pediatric BCI considerations</td></tr><tr><td><strong>Health Claims</strong></td><td>Wellness vs. medical distinctions</td><td>Clear device classification</td></tr></tbody></table>
+<h4 id="ftc-enforcement-actions-precedents">FTC Enforcement Actions (Precedents)</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Case</th><th>Relevance to BCIs</th></tr></thead><tbody><tr><td><strong>FTC v. Lumosity (2016)</strong></td><td>Brain training claims must be substantiated</td></tr><tr><td><strong>FTC v. Practice Fusion (2020)</strong></td><td>Health tech data practices scrutinized</td></tr><tr><td><strong>FTC v. BetterHelp (2023)</strong></td><td>Mental health data requires heightened protection</td></tr></tbody></table>
+<hr>
+<h3 id="national-institute-of-standards-and-technology-nist">National Institute of Standards and Technology (NIST)</h3>
+<p>NIST provides cybersecurity frameworks that apply to BCI manufacturers.</p>
+<h4 id="applicable-frameworks">Applicable Frameworks</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Framework</th><th>Application</th><th>QIF Mapping</th></tr></thead><tbody><tr><td><strong>NIST Cybersecurity Framework (CSF) 2.0</strong></td><td>Identify, Protect, Detect, Respond, Recover</td><td>QIF lifecycle security</td></tr><tr><td><strong>NIST SP 800-53</strong></td><td>Security and Privacy Controls</td><td>QIF control implementation</td></tr><tr><td><strong>NIST SP 800-183</strong></td><td>Networks of Things</td><td>L1-L7 network security</td></tr><tr><td><strong>NIST AI RMF</strong></td><td>AI Risk Management</td><td>Cognitive layer (L13-L14) governance</td></tr></tbody></table>
+<h4 id="nist-csf--qif-mapping">NIST CSF → QIF Mapping</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>NIST Function</th><th>NIST Categories</th><th>QIF Implementation</th></tr></thead><tbody><tr><td><strong>IDENTIFY</strong></td><td>Asset Management, Risk Assessment</td><td>14-layer asset inventory, attack surface mapping</td></tr><tr><td><strong>PROTECT</strong></td><td>Access Control, Data Security, Maintenance</td><td>L8 Firewall, Coherence validation, secure updates</td></tr><tr><td><strong>DETECT</strong></td><td>Anomalies, Continuous Monitoring</td><td>NSAM, Scale-frequency anomaly detection</td></tr><tr><td><strong>RESPOND</strong></td><td>Response Planning, Communications</td><td>Alert escalation, quarantine protocols</td></tr><tr><td><strong>RECOVER</strong></td><td>Recovery Planning, Improvements</td><td>Failsafe modes, post-incident learning</td></tr></tbody></table>
+<hr>
+<h3 id="state-level-regulations">State-Level Regulations</h3>
+<p>Several US states have enacted neural data protections, with a growing wave of legislation since 2024.</p>
+<h4 id="enacted-state-legislation">Enacted State Legislation</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>State</th><th>Legislation</th><th>Effective</th><th>Key Provisions</th></tr></thead><tbody><tr><td><strong>Colorado</strong></td><td>H.B. 24-1058 (Neurotechnology Privacy)</td><td>August 2024</td><td>First US state law explicitly protecting neural data; classifies neural data as “sensitive data” under the Colorado Privacy Act; requires opt-in consent for collection; prohibits neural data sale without consent</td></tr><tr><td><strong>California</strong></td><td>SB 1223 (Neurorights Act)</td><td>January 2025</td><td>Amends CCPA to include neural data as “sensitive personal information”; grants right to delete neural data; prohibits neural data sale without explicit consent; covers both medical and consumer neurotechnology</td></tr><tr><td><strong>Montana</strong></td><td>SB 163 (Neural Data Privacy)</td><td>October 2025</td><td>Classifies neural data as protected health information; requires informed consent for neural data collection; establishes penalties for unauthorized neural data access</td></tr><tr><td><strong>Connecticut</strong></td><td>SB 1295 (Neurotechnology Protection)</td><td>July 2026</td><td>Comprehensive neurotechnology consumer protection; requires transparency in neural data processing; establishes neural data minimization requirements</td></tr></tbody></table>
+<h4 id="proposed-state-legislation">Proposed State Legislation</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>State</th><th>Legislation</th><th>Status</th><th>Key Provisions</th></tr></thead><tbody><tr><td><strong>Minnesota</strong></td><td>HF 1370</td><td>Proposed 2024</td><td>Neural data consent requirements</td></tr><tr><td><strong>New York</strong></td><td>A8749</td><td>Proposed 2024</td><td>Brain-computer interface privacy</td></tr></tbody></table>
+<h4 id="california-consumer-privacy-act-ccpa-implications">California Consumer Privacy Act (CCPA) Implications</h4>
+<p>With SB 1223 (effective January 2025), California’s CCPA now explicitly covers neural data:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>CCPA Right</th><th>Neural Data Application</th></tr></thead><tbody><tr><td>Right to Know</td><td>What neural data is collected, including inferred cognitive states</td></tr><tr><td>Right to Delete</td><td>Erasure of neural recordings and derived data</td></tr><tr><td>Right to Opt-Out</td><td>Decline neural data sale — explicit opt-in required for sensitive neural data</td></tr><tr><td>Right to Non-Discrimination</td><td>No penalties for exercising neural data rights</td></tr></tbody></table>
+<blockquote>
+<p><strong>QIF Position:</strong> While state-level action demonstrates urgency, fragmentation creates compliance complexity. Federal neural data legislation is needed — see the MIND Act below.</p>
+</blockquote>
+<hr>
+<h3 id="us-federal-legislation">US Federal Legislation</h3>
+<h4 id="mind-act-s-2925">MIND Act (S. 2925)</h4>
+<p>The <strong>Mental-health Innovation and Neurotechnology Development (MIND) Act</strong> (S. 2925), introduced in September 2025, represents the first US federal bill specifically addressing neurotechnology governance.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Aspect</th><th>Detail</th></tr></thead><tbody><tr><td><strong>Bill Number</strong></td><td>S. 2925</td></tr><tr><td><strong>Introduced</strong></td><td>September 2025</td></tr><tr><td><strong>Sponsors</strong></td><td>Bipartisan coalition</td></tr><tr><td><strong>Status</strong></td><td>Committee consideration</td></tr><tr><td><strong>Scope</strong></td><td>Federal neurotechnology standards, neural data protection, research ethics</td></tr></tbody></table>
+<p>Key provisions:</p>
+<ul>
+<li>Establishes federal standards for neural data collection, storage, and sharing</li>
+<li>Creates a Neurotechnology Advisory Committee under HHS</li>
+<li>Mandates cybersecurity requirements for neural devices receiving federal funding</li>
+<li>Requires informed consent standards for neurotechnology research</li>
+<li>Addresses Harvest-Now-Decrypt-Later threats to neural data</li>
+</ul>
+<blockquote>
+<p><strong>QIF Alignment:</strong> The MIND Act’s cybersecurity requirements align directly with QIF’s 14-layer security model. QIF-compliant devices would meet or exceed the proposed federal standards.</p>
+</blockquote>
+<hr>
+<h2 id="qif-compliance-matrix">QIF Compliance Matrix</h2>
+<p>This matrix maps QIF Framework components to regulatory requirements.</p>
+<h3 id="legend">Legend</h3>
+<ul>
+<li>✅ <strong>Full Alignment</strong> — QIF meets or exceeds requirement</li>
+<li>⚠️ <strong>Partial Alignment</strong> — QIF addresses concern, regulatory gap exists</li>
+<li>🔲 <strong>Future Work</strong> — Requirement identified, implementation planned</li>
+</ul>
+<h3 id="compliance-matrix">Compliance Matrix</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Requirement</th><th>FDA</th><th>FCC</th><th>HIPAA</th><th>FTC</th><th>NIST</th><th>QIF Component</th></tr></thead><tbody><tr><td><strong>Threat Modeling</strong></td><td>✅</td><td>—</td><td>—</td><td>—</td><td>✅</td><td>14-Layer Attack Surface</td></tr><tr><td><strong>Access Control</strong></td><td>✅</td><td>—</td><td>✅</td><td>✅</td><td>✅</td><td>L8 Firewall Authentication</td></tr><tr><td><strong>Data Encryption</strong></td><td>✅</td><td>—</td><td>✅</td><td>✅</td><td>✅</td><td>L6 Presentation Layer</td></tr><tr><td><strong>Signal Integrity</strong></td><td>✅</td><td>✅</td><td>—</td><td>—</td><td>✅</td><td>Coherence Metric (Cₛ)</td></tr><tr><td><strong>Anomaly Detection</strong></td><td>✅</td><td>—</td><td>—</td><td>—</td><td>✅</td><td>NSAM, Scale-Frequency</td></tr><tr><td><strong>Incident Response</strong></td><td>✅</td><td>—</td><td>✅</td><td>—</td><td>✅</td><td>Alert Escalation</td></tr><tr><td><strong>Audit Trail</strong></td><td>✅</td><td>—</td><td>✅</td><td>—</td><td>✅</td><td>Event Logging</td></tr><tr><td><strong>Consent Management</strong></td><td>⚠️</td><td>—</td><td>✅</td><td>✅</td><td>—</td><td>Consent Framework</td></tr><tr><td><strong>Data Minimization</strong></td><td>—</td><td>—</td><td>✅</td><td>✅</td><td>✅</td><td>Kohno Privacy Filters</td></tr><tr><td><strong>Secure Updates</strong></td><td>✅</td><td>—</td><td>—</td><td>—</td><td>✅</td><td>Signed Firmware</td></tr><tr><td><strong>Device Identity</strong></td><td>✅</td><td>✅</td><td>—</td><td>—</td><td>✅</td><td>Node Identification</td></tr><tr><td><strong>RF Safety</strong></td><td>—</td><td>✅</td><td>—</td><td>—</td><td>—</td><td>L1-L2 Validation</td></tr><tr><td><strong>Breach Detection</strong></td><td>⚠️</td><td>—</td><td>✅</td><td>✅</td><td>✅</td><td>NSAM Alerting</td></tr></tbody></table>
+<hr>
+<h2 id="qif-compliant-bci-requirements">QIF-Compliant BCI Requirements</h2>
+<p>For a BCI to be considered QIF-compliant, it must implement the following:</p>
+<h3 id="mandatory-requirements">Mandatory Requirements</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>ID</th><th>Requirement</th><th>QIF Layer</th><th>Regulatory Basis</th></tr></thead><tbody><tr><td><strong>QIF-R1</strong></td><td>14-layer security architecture documentation</td><td>All</td><td>FDA Cybersecurity Guidance</td></tr><tr><td><strong>QIF-R2</strong></td><td>Real-time coherence validation (Cₛ ≥ 0.7 threshold)</td><td>L8-L10</td><td>Signal integrity</td></tr><tr><td><strong>QIF-R3</strong></td><td>Neural Gateway firewall with authentication</td><td>L8</td><td>Access control</td></tr><tr><td><strong>QIF-R4</strong></td><td>End-to-end encryption for neural data</td><td>L6</td><td>HIPAA Security Rule</td></tr><tr><td><strong>QIF-R5</strong></td><td>NSAM continuous monitoring</td><td>L9-L14</td><td>NIST Detect function</td></tr><tr><td><strong>QIF-R6</strong></td><td>Kohno threat taxonomy implementation</td><td>L11-L14</td><td>Privacy by design</td></tr><tr><td><strong>QIF-R7</strong></td><td>Incident response and alerting</td><td>All</td><td>FDA MDR, HIPAA Breach</td></tr><tr><td><strong>QIF-R8</strong></td><td>Secure boot and signed firmware</td><td>L1-L3</td><td>Supply chain security</td></tr><tr><td><strong>QIF-R9</strong></td><td>Audit logging with tamper evidence</td><td>All</td><td>HIPAA, NIST</td></tr><tr><td><strong>QIF-R10</strong></td><td>Fail-safe degradation modes</td><td>L8</td><td>Patient safety</td></tr></tbody></table>
+<h3 id="recommended-enhancements">Recommended Enhancements</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>ID</th><th>Enhancement</th><th>Benefit</th></tr></thead><tbody><tr><td><strong>QIF-E1</strong></td><td>Quantum-resistant cryptography</td><td>Future-proofing</td></tr><tr><td><strong>QIF-E2</strong></td><td>Federated learning for model updates</td><td>Privacy preservation</td></tr><tr><td><strong>QIF-E3</strong></td><td>Hardware security module (HSM)</td><td>Key protection</td></tr><tr><td><strong>QIF-E4</strong></td><td>Zero-knowledge proofs for verification</td><td>Privacy-preserving audit</td></tr></tbody></table>
+<hr>
+<h2 id="certification-pathway">Certification Pathway</h2>
+<h3 id="proposed-qif-certification-levels">Proposed QIF Certification Levels</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Level</th><th>Name</th><th>Requirements</th><th>Use Cases</th></tr></thead><tbody><tr><td><strong>Level 1</strong></td><td>QIF-Basic</td><td>QIF-R1 through QIF-R5</td><td>Research devices</td></tr><tr><td><strong>Level 2</strong></td><td>QIF-Clinical</td><td>All mandatory (R1-R10)</td><td>Medical BCIs</td></tr><tr><td><strong>Level 3</strong></td><td>QIF-Consumer</td><td>R1-R10 + FTC compliance</td><td>Consumer devices</td></tr><tr><td><strong>Level 4</strong></td><td>QIF-Critical</td><td>All requirements + E1-E4</td><td>High-risk/military</td></tr></tbody></table>
+<h3 id="certification-process">Certification Process</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                    QIF CERTIFICATION PATHWAY                     │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────────────┘</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Phase 1: Self-Assessment</span></span>
+<span class="line"><span>├── Complete QIF compliance checklist</span></span>
+<span class="line"><span>├── Document 14-layer architecture</span></span>
+<span class="line"><span>└── Identify gaps</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Phase 2: Third-Party Audit</span></span>
+<span class="line"><span>├── Security architecture review</span></span>
+<span class="line"><span>├── Penetration testing (QIF attack scenarios)</span></span>
+<span class="line"><span>└── Code/firmware review</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Phase 3: Certification</span></span>
+<span class="line"><span>├── Submit audit report</span></span>
+<span class="line"><span>├── Remediate findings</span></span>
+<span class="line"><span>└── Receive QIF certification</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Phase 4: Ongoing Compliance</span></span>
+<span class="line"><span>├── Annual recertification</span></span>
+<span class="line"><span>├── Incident reporting</span></span>
+<span class="line"><span>└── Vulnerability disclosure</span></span></code></pre>
+<hr>
+<h2 id="international-regulatory-landscape">International Regulatory Landscape</h2>
+<h3 id="global-normative-frameworks">Global Normative Frameworks</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Framework</th><th>Scope</th><th>Status</th><th>QIF Alignment</th></tr></thead><tbody><tr><td><strong>UNESCO Recommendation on the Ethics of Neurotechnology (2025)</strong></td><td>First global normative framework — 194 Member States</td><td>Adopted November 2025</td><td><strong>15 of 17 elements fully implemented</strong> — see <a href="UNESCO_ALIGNMENT.md">UNESCO_ALIGNMENT.md</a></td></tr><tr><td><strong>OECD Responsible Innovation in Neurotechnology (2019)</strong></td><td>Policy guidelines for OECD member nations</td><td>Active</td><td>Accountability, transparency, safety addressed</td></tr><tr><td><strong>Council of Europe Strategic Action Plan on Neurotechnology (2025)</strong></td><td>Human rights-based framework for 46 member states</td><td>Adopted January 2025</td><td>Aligns with QIF’s rights-based approach to cognitive liberty and mental integrity</td></tr></tbody></table>
+<h3 id="latin-american-neurorights-legislation">Latin American Neurorights Legislation</h3>
+<p>Latin America leads globally in constitutional and legislative neurorights protections:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Country</th><th>Legislation</th><th>Status</th><th>Key Provisions</th></tr></thead><tbody><tr><td><strong>Chile</strong></td><td>Constitutional Amendment (Art. 19 §1)</td><td>Enacted October 2021</td><td><strong>First country in the world</strong> to constitutionally protect neurorights; protects mental integrity and prohibits unauthorized brain data collection</td></tr><tr><td><strong>Chile</strong></td><td>Neuroprotection Law (Law 21.383)</td><td>Enacted October 2021</td><td>Implementing legislation; classifies neural data as organ tissue (cannot be commercialized); requires informed consent for neurotechnology</td></tr><tr><td><strong>Brazil</strong></td><td>Rio Grande do Sul State Amendment</td><td>Enacted 2024</td><td>State-level constitutional protection of neural data; first Brazilian jurisdiction to codify neurorights</td></tr><tr><td><strong>Brazil</strong></td><td>Federal Neurorights Bill</td><td>Under consideration</td><td>Federal constitutional amendment modeled on Chilean approach</td></tr><tr><td><strong>Mexico</strong></td><td>General Law on Neurotechnology (GLNN)</td><td>Under consideration</td><td>Comprehensive national neurotechnology governance framework</td></tr></tbody></table>
+<h3 id="european-union">European Union</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Regulation</th><th>Scope</th><th>Status</th><th>QIF Alignment</th></tr></thead><tbody><tr><td><strong>EU MDR 2017/745</strong></td><td>Medical Device Regulation</td><td>Active</td><td>QIF certification pathway maps to MDR requirements</td></tr><tr><td><strong>GDPR</strong></td><td>Data Protection</td><td>Active</td><td>QIF data minimization, consent, and encryption align</td></tr><tr><td><strong>EU AI Act</strong></td><td>AI Systems (including BCIs)</td><td>Phased 2025-2027</td><td>High-risk AI transparency requirements met via documentation</td></tr><tr><td><strong>EU Neurotechnology Legislative Package</strong></td><td>Dedicated neurotech regulation</td><td>Under development (2026)</td><td>Anticipated to incorporate UNESCO Recommendation principles</td></tr></tbody></table>
+<h3 id="spain">Spain</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Framework</th><th>Status</th><th>Key Provisions</th></tr></thead><tbody><tr><td><strong>Digital Rights Charter</strong></td><td>Adopted 2021</td><td>Includes neurorights provisions guaranteeing mental privacy and cognitive integrity; non-binding but establishes policy direction</td></tr></tbody></table>
+<h3 id="other-jurisdictions">Other Jurisdictions</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Region</th><th>Key Considerations</th></tr></thead><tbody><tr><td><strong>United Kingdom</strong></td><td>Post-Brexit UKCA marking, UK GDPR, active neurotechnology ethics review</td></tr><tr><td><strong>Canada</strong></td><td>Health Canada medical device licensing, active neurorights policy discussion</td></tr><tr><td><strong>Australia</strong></td><td>TGA regulation, Privacy Act 1988, emerging neurotech ethics guidelines</td></tr><tr><td><strong>Japan</strong></td><td>PMDA approval, APPI data protection, active BCI research governance</td></tr><tr><td><strong>China</strong></td><td>NMPA regulation, data localization, significant state BCI investment</td></tr><tr><td><strong>South Korea</strong></td><td>Emerging neurotechnology ethics framework, KFDA medical device oversight</td></tr></tbody></table>
+<h3 id="international-standards-bodies">International Standards Bodies</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Organization</th><th>Standard/Initiative</th><th>Relevance</th></tr></thead><tbody><tr><td><strong>ISO</strong></td><td>ISO 13485 (QMS), ISO 27001 (InfoSec), ISO 14971 (Risk)</td><td>Quality, security, and risk management for medical devices</td></tr><tr><td><strong>IEC</strong></td><td>IEC 62443 (Industrial cybersecurity), IEC 60601 (Medical electrical)</td><td>Cybersecurity and electrical safety for neural devices</td></tr><tr><td><strong>IEEE</strong></td><td><strong>P2794</strong> (Neural Interface Research Reporting Standard)</td><td>Standardizes how neural interface research is documented and reported — directly relevant to QIF’s transparency requirements</td></tr><tr><td><strong>IEEE</strong></td><td><strong>P2731</strong> (Brain-Computer Interface Terminology Standard)</td><td>Establishes common vocabulary for BCI development — supports QIF’s 14-layer naming conventions</td></tr><tr><td><strong>IEEE</strong></td><td>IEEE 7000 series (Ethics in Autonomous Systems)</td><td>Ethical design principles for AI and autonomous systems</td></tr><tr><td><strong>IMDRF</strong></td><td>International Medical Device Regulators Forum</td><td>Global coordination of medical device regulation</td></tr><tr><td><strong>Neurorights Foundation</strong></td><td>Advocacy and policy advisory</td><td>Founded by Rafael Yuste (Columbia); instrumental in Chile’s neurorights legislation; advises multiple governments on neurotechnology governance</td></tr></tbody></table>
+<hr>
+<h2 id="references">References</h2>
+<h3 id="us-regulations">US Regulations</h3>
+<ol>
+<li>
+<p>Food and Drug Administration. (2023). <em>Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions</em>. FDA-2023-D-0100.</p>
+</li>
+<li>
+<p>U.S. Department of Health and Human Services. (2013). <em>HIPAA Security Rule</em>. 45 CFR Part 160 and Part 164.</p>
+</li>
+<li>
+<p>Federal Communications Commission. (2023). <em>Title 47 Code of Federal Regulations</em>.</p>
+</li>
+<li>
+<p>National Institute of Standards and Technology. (2024). <em>Cybersecurity Framework 2.0</em>. NIST CSF 2.0.</p>
+</li>
+<li>
+<p>National Institute of Standards and Technology. (2020). <em>Security and Privacy Controls for Information Systems and Organizations</em>. NIST SP 800-53 Rev. 5.</p>
+</li>
+</ol>
+<h3 id="us-state--federal-neurotechnology-legislation">US State &#x26; Federal Neurotechnology Legislation</h3>
+<ol start="6">
+<li>
+<p>Colorado General Assembly. (2024). <em>H.B. 24-1058: Concerning Protections for Biological and Neural Data</em>. Signed into law August 2024.</p>
+</li>
+<li>
+<p>California Legislature. (2024). <em>SB 1223: California Consumer Privacy Act — Neurorights</em>. Effective January 1, 2025. Amends CCPA to classify neural data as sensitive personal information.</p>
+</li>
+<li>
+<p>Montana Legislature. (2025). <em>SB 163: Neural Data Privacy Act</em>. Effective October 2025.</p>
+</li>
+<li>
+<p>Connecticut General Assembly. (2026). <em>SB 1295: An Act Concerning Neurotechnology Consumer Protection</em>. Effective July 2026.</p>
+</li>
+<li>
+<p>U.S. Senate. (2025). <em>S. 2925: Mental-health Innovation and Neurotechnology Development (MIND) Act</em>. Introduced September 2025.</p>
+</li>
+</ol>
+<h3 id="international-frameworks--legislation">International Frameworks &#x26; Legislation</h3>
+<ol start="11">
+<li>
+<p>UNESCO. (2025). <em>Recommendation on the Ethics of Neurotechnology</em>. Adopted at the 43rd session of the General Conference, November 12, 2025. <a href="https://www.unesco.org/en/ethics-neurotech/recommendation">https://www.unesco.org/en/ethics-neurotech/recommendation</a></p>
+</li>
+<li>
+<p>UNESCO. (2021). <em>Ethical Issues of Neurotechnology</em>. International Bioethics Committee (IBC). <a href="https://unesdoc.unesco.org/ark:/48223/pf0000378724">https://unesdoc.unesco.org/ark:/48223/pf0000378724</a></p>
+</li>
+<li>
+<p>OECD. (2019). <em>Recommendation on Responsible Innovation in Neurotechnology</em>. <a href="https://legalinstruments.oecd.org/api/print?ids=658&#x26;Lang=en">https://legalinstruments.oecd.org/api/print?ids=658&#x26;Lang=en</a></p>
+</li>
+<li>
+<p>Council of Europe. (2025). <em>Strategic Action Plan on Neurotechnology</em>. Adopted January 2025.</p>
+</li>
+<li>
+<p>Republic of Chile. (2021). <em>Constitutional Amendment on Neurorights</em> (Art. 19 §1) and <em>Neuroprotection Law</em> (Law 21.383). October 2021.</p>
+</li>
+<li>
+<p>Spain. (2021). <em>Digital Rights Charter</em>. Includes neurorights provisions.</p>
+</li>
+</ol>
+<h3 id="academic-sources">Academic Sources</h3>
+<ol start="17">
+<li>
+<p>Kohno, T., &#x26; Narayanan, A. (2009). Security and Privacy of Medical Devices. <em>Proceedings of IEEE S&#x26;P</em>.</p>
+</li>
+<li>
+<p>Bonaci, T., Calo, R., &#x26; Chizeck, H. J. (2015). App Stores for the Brain: Privacy &#x26; Security in Brain-Computer Interfaces. <em>IEEE Ethics</em>.</p>
+</li>
+<li>
+<p>Yuste, R., et al. (2017). Four ethical priorities for neurotechnologies and AI. <em>Nature</em>, 551, 159-163.</p>
+</li>
+<li>
+<p>Ienca, M., &#x26; Andorno, R. (2017). Towards new human rights in the age of neuroscience and neurotechnology. <em>Life Sciences, Society and Policy</em>, 13(1), 5.</p>
+</li>
+</ol>
+<h3 id="industry-standards">Industry Standards</h3>
+<ol start="21">
+<li>
+<p>International Medical Device Regulators Forum. (2017). <em>Software as a Medical Device: Possible Framework for Risk Categorization and Corresponding Considerations</em>.</p>
+</li>
+<li>
+<p>Association for the Advancement of Medical Instrumentation. (2022). <em>AAMI TIR57: Principles for Medical Device Security—Risk Management</em>.</p>
+</li>
+<li>
+<p>IEEE Standards Association. (in development). <em>P2794: Standard for Reporting in Neural Interface Research</em>. Active working group.</p>
+</li>
+<li>
+<p>IEEE Standards Association. (in development). <em>P2731: Standard for Brain-Computer Interface Terminology</em>. Active working group.</p>
+</li>
+</ol>
+<hr>
+<h2 id="document-history">Document History</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Version</th><th>Date</th><th>Changes</th></tr></thead><tbody><tr><td>1.0</td><td>2026-01-25</td><td>Initial release — US regulatory focus</td></tr><tr><td>2.0</td><td>2026-02-10</td><td>Major expansion: added enacted US state legislation (Colorado H.B. 24-1058, California SB 1223, Montana SB 163, Connecticut SB 1295), US MIND Act (S. 2925), international regulatory landscape (UNESCO 2025, Council of Europe, Latin American neurorights, Spain, EU developments), IEEE standards (P2794, P2731), and Neurorights Foundation</td></tr></tbody></table>
+<hr>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li><a href="NEUROETHICS_ALIGNMENT.md">NEUROETHICS_ALIGNMENT.md</a> — Ethical principles mapping</li>
+<li><a href="UNESCO_ALIGNMENT.md">UNESCO_ALIGNMENT.md</a> — Comprehensive UNESCO Recommendation mapping</li>
+<li><a href="INFORMED_CONSENT_FRAMEWORK.md">INFORMED_CONSENT_FRAMEWORK.md</a> — Consent requirements</li>
+<li><a href="POST_DEPLOYMENT_ETHICS.md">POST_DEPLOYMENT_ETHICS.md</a> — Lifecycle obligations</li>
+<li><a href="PEDIATRIC_CONSIDERATIONS.md">PEDIATRIC_CONSIDERATIONS.md</a> — Minors and incapacity</li>
+<li><a href="TRANSPARENCY.md">TRANSPARENCY.md</a> — Human-AI collaboration audit</li>
+</ul>
+<hr>
+<p><em>This is a living document. As regulations evolve and international frameworks are added, this guide will be updated to reflect current requirements.</em></p>
+<p>← Back to <a href="/governance/">Governance</a></p> </div> <footer class="mt-16 pt-8 border-t border-[var(--color-border)]"> <a href="/governance/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+&larr; All governance documents
+</a> </footer> </article> <footer class="border-t border-[var(--color-border)] mt-24 relative overflow-hidden" data-astro-cid-sz7xmlte> <!-- Background brand mark --> <div class="footer-brand-bg select-none pointer-events-none" aria-hidden="true" data-astro-cid-sz7xmlte> <span class="footer-brand font-bold font-[family-name:var(--font-heading)] leading-none bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent" data-astro-cid-sz7xmlte>
+QINNOVATE
+</span> </div> <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" data-astro-cid-sz7xmlte> <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-astro-cid-sz7xmlte> <!-- Brand column --> <div class="col-span-2 md:col-span-1" data-astro-cid-sz7xmlte> <a href="/" class="text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]" data-astro-cid-sz7xmlte>
+Qinnovate Neural Alliance
+</a> <p class="mt-3 text-sm text-[var(--color-text-muted)] leading-relaxed" data-astro-cid-sz7xmlte>
+Introducing the heart of neurotechnology, starting governed by neuroethics and neurosecurity principles.
+</p> <p class="mt-4 text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+QIF v6.0 Hourglass &middot; Open Framework
+</p> </div> <div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Technology </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/framework/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Framework </a> </li><li data-astro-cid-sz7xmlte> <a href="/nsp/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NSP Protocol </a> </li><li data-astro-cid-sz7xmlte> <a href="/runemate/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Project Runemate </a> </li><li data-astro-cid-sz7xmlte> <a href="/TARA/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> TARA Atlas </a> </li><li data-astro-cid-sz7xmlte> <a href="/scoring/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NISS Scoring </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Resources </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/news/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> News </a> </li><li data-astro-cid-sz7xmlte> <a href="/lab/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Lab </a> </li><li data-astro-cid-sz7xmlte> <a href="/rss.xml" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> RSS Feed </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Connect </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> GitHub </a> </li><li data-astro-cid-sz7xmlte> <a href="https://medium.com/@qikevinl" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> Medium </a> </li><li data-astro-cid-sz7xmlte> <a href="/about/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> About </a> </li><li data-astro-cid-sz7xmlte> <a href="/advisory/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Advisory </a> </li><li data-astro-cid-sz7xmlte> <a href="/licensing/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Licensing </a> </li> </ul> </div> </div> <div class="mt-12 pt-8 border-t border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-center gap-4" data-astro-cid-sz7xmlte> <p class="text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+&copy; 2026 Qinnovate Neural Alliance. QIF is an open research framework.
+</p> </div> </div> </footer>   <!-- Scroll-driven reveal observer --> <script type="module">function o(){const t=new IntersectionObserver(e=>{e.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),t.unobserve(r.target))})},{threshold:.1,rootMargin:"0px 0px -40px 0px"});document.querySelectorAll(".reveal").forEach(e=>t.observe(e))}o();document.addEventListener("astro:after-swap",o);</script> </body> </html>

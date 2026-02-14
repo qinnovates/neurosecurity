@@ -1,0 +1,609 @@
+<!DOCTYPE html><html lang="en-US" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Interactive Boltzmann energy landscape visualization of the QI (Quantum Indeterminism) equation — QI(b,t) = e^(-Σ). Explore the 11-band hourglass model, attack scenarios, and I₀ anomaly detection."><link rel="canonical" href="https://qinnovate.com/visualizations/qi/"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui' fill='%2306b6d4'%3EQ%3C/text%3E%3C/svg%3E"><!-- Open Graph --><meta property="og:title" content="QI Visualization"><meta property="og:description" content="Interactive Boltzmann energy landscape visualization of the QI (Quantum Indeterminism) equation — QI(b,t) = e^(-Σ). Explore the 11-band hourglass model, attack scenarios, and I₀ anomaly detection."><meta property="og:url" content="https://qinnovate.com/visualizations/qi/"><meta property="og:site_name" content="Qinnovate"><meta property="og:type" content="website"><meta property="og:image" content="https://qinnovate.com/images/og-default.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="QI Visualization"><meta name="twitter:description" content="Interactive Boltzmann energy landscape visualization of the QI (Quantum Indeterminism) equation — QI(b,t) = e^(-Σ). Explore the 11-band hourglass model, attack scenarios, and I₀ anomaly detection."><meta name="twitter:image" content="https://qinnovate.com/images/og-default.png"><meta name="twitter:creator" content="@qikevinl"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Qinnovate","url":"https://qinnovate.com","description":"Open standards and frameworks for brain-computer interface security.","foundingDate":"2026","sameAs":["https://github.com/qinnovates"]}</script><!-- RSS autodiscovery --><link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml"><title>QI Visualization | Qinnovate</title><!-- View Transitions --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Google Analytics 4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKB9RWW0C2');
+  </script><!-- Theme initialization (prevent flash) --><script>
+    (function(){ document.documentElement.setAttribute('data-theme', 'light'); })();
+  </script><link rel="stylesheet" href="/_astro/qi.QdYA50Yv.css">
+<link rel="stylesheet" href="/_astro/TARA.w5QsKvtK.css"></head> <body class="min-h-screen">  <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" data-astro-transition-persist="astro-zscz5gm2-1"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity"> <span class="text-2xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">Q</span> <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline text-[var(--color-text-primary)]">innovate</span> </a> <!-- Desktop links --> <div class="hidden md:flex items-center gap-1"> <!-- About (flat link) --> <a href="/about/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+</a> <!-- Technology dropdown --> <div class="relative" data-dropdown="tech"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/framework/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">QIF Framework</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">The 11-band hourglass governance architecture</span> </a><a href="/nsp/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">NSP Protocol</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Secure communication protocol for patient safety and privacy</span> </a><a href="/runemate/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Runemate</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Compiler enabling on-device security for neural implants</span> </a><a href="/TARA/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">TARA</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Risk taxonomy — attacks, ethical risks, and therapeutic applications</span> </a><a href="/whitepaper/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Whitepaper</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Full QIF specification document</span> </a> </div> </div> </div> </div> <!-- Resources dropdown --> <div class="relative" data-dropdown="resources"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden"> <div class="p-2"> <a href="/news/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">News</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Latest publications and updates</span> </a><a href="/explore/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Explore</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Interactive visualizations and tools</span> </a><a href="/glossary/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Glossary</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">QIF terminology reference</span> </a> </div> </div> </div> </div> <!-- Engage dropdown --> <div class="relative" data-dropdown="engage"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/adopt/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Adopt the Standard</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Integrate QIF into your organization or research</span> </a><a href="/advisory/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Advisory Services</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Hands-on guidance for BCI security implementation</span> </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Get Involved</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Contribute on GitHub — issues, PRs, discussions</span> </a> </div> </div> </div> </div> <!-- Governance dropdown --> <div class="relative" data-dropdown="gov"> <a href="/governance/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute right-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/governance/#core" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Core Standards</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Code of Conduct, Transparency, Data Policy, Accessibility</span> </a><a href="/governance/#ethics" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Ethics &amp; Rights</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Neuroethics, Informed Consent, Pediatric, Post-Deployment</span> </a><a href="/governance/#compliance" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Compliance</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Regulatory, UNESCO Alignment, QIF Neuroethics</span> </a> </div> </div> </div> </div> </div> <!-- Right side --> <div class="flex items-center gap-3"> <!-- GitHub link --> <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="GitHub"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path> </svg> </a> <!-- Search button --> <button id="search-btn" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Search"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path> </svg> </button> <!-- Mobile menu button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Open menu" aria-expanded="false"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]"> <div class="px-4 py-3 space-y-1"> <!-- About (flat) --> <a href="/about/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+</a> <!-- Mobile Technology section --> <div> <button data-mobile-toggle="tech" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="tech" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="tech" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/framework/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> QIF Framework </a><a href="/nsp/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> NSP Protocol </a><a href="/runemate/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Runemate </a><a href="/TARA/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> TARA </a><a href="/whitepaper/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Whitepaper </a> </div> </div> <!-- Mobile Resources section --> <div> <button data-mobile-toggle="resources" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="resources" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="resources" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/news/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> News </a><a href="/explore/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Explore </a><a href="/glossary/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Glossary </a> </div> </div> <!-- Mobile Engage section --> <div> <button data-mobile-toggle="engage" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="engage" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="engage" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/adopt/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Adopt the Standard </a><a href="/advisory/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Advisory Services </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Get Involved </a> </div> </div> <!-- Mobile Governance section --> <div class="pt-2 border-t border-[var(--color-border)] mt-2"> <button data-mobile-toggle="gov" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="gov" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="gov" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/governance/#core" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Core Standards </a><a href="/governance/#ethics" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Ethics &amp; Rights </a><a href="/governance/#compliance" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Compliance </a> </div> </div> </div> </div> </nav> <!-- Search modal --> <div id="search-modal" class="fixed inset-0 z-[100] hidden"> <div id="search-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div> <div class="relative max-w-2xl mx-auto mt-20 px-4"> <div class="glass rounded-xl p-4 shadow-2xl" id="search-container"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;showSubResults&#34;:true}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.tZYucdM2.js"></script> </div> </div> </div> <script type="module">function u(){const n=document.getElementById("mobile-menu-btn"),i=document.getElementById("mobile-menu");n?.addEventListener("click",()=>{const e=n.getAttribute("aria-expanded")==="true";n.setAttribute("aria-expanded",String(!e)),i?.classList.toggle("hidden")}),document.addEventListener("astro:before-swap",()=>{i?.classList.add("hidden"),n?.setAttribute("aria-expanded","false")}),document.querySelectorAll("[data-dropdown]").forEach(e=>{const t=e.querySelector(".dropdown-menu");let a;function c(){document.querySelectorAll(".dropdown-menu").forEach(o=>{o!==t&&o.classList.add("hidden")}),clearTimeout(a),t?.classList.remove("hidden")}function l(){a=setTimeout(()=>{t?.classList.add("hidden")},150)}e.addEventListener("mouseenter",c),e.addEventListener("mouseleave",l),e.addEventListener("focusin",c),e.addEventListener("focusout",o=>{e.contains(o.relatedTarget)||l()})}),document.querySelectorAll("[data-mobile-toggle]").forEach(e=>{const t=e.getAttribute("data-mobile-toggle"),a=document.querySelector(`[data-mobile-list="${t}"]`),c=document.querySelector(`[data-chevron="${t}"]`);e.addEventListener("click",()=>{a?.classList.toggle("hidden"),c?.classList.toggle("rotate-180")})});const m=document.getElementById("search-btn"),d=document.getElementById("search-modal"),h=document.getElementById("search-backdrop");function r(){d?.classList.remove("hidden"),setTimeout(()=>{d?.querySelector(".pagefind-ui__search-input")?.focus()},50)}function s(){d?.classList.add("hidden")}m?.addEventListener("click",r),h?.addEventListener("click",s),document.addEventListener("keydown",e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),d?.classList.contains("hidden")?r():s()),e.key==="Escape"&&s()}),document.addEventListener("astro:before-swap",s)}u();document.addEventListener("astro:after-swap",u);</script>   <div id="tour-scrim"></div> <div id="tour"> <div id="tour-header"> <span id="tour-step">STEP 1 / 6</span> <div id="tour-progress"></div> <button id="tour-skip">Skip tour</button> </div> <div id="tour-body"></div> <div id="tour-nav"> <button id="tour-back" disabled>Back</button> <button id="tour-next">Next</button> </div> </div> <button id="tour-reopen">? Guide</button>  <div id="sidebar"> <h3>CLASSICAL WEIGHTS (&Sigma;<sub>c</sub>)</h3> <label>w<sub>1</sub> &sigma;&sup2;&phi; <input type="range" min="0" max="3" step="0.1" value="1" data-key="w1"> <span class="val-display">1.0</span></label> <label>w<sub>2</sub> H&tau; <input type="range" min="0" max="3" step="0.1" value="1" data-key="w2"> <span class="val-display">1.0</span></label> <label>w<sub>3</sub> &sigma;&sup2;&gamma; <input type="range" min="0" max="3" step="0.1" value="1" data-key="w3"> <span class="val-display">1.0</span></label> <label>w<sub>4</sub> D<sub>sf</sub> <input type="range" min="0" max="3" step="0.1" value="1" data-key="w4"> <span class="val-display">1.0</span></label> <h3>QUANTUM WEIGHTS (&Sigma;<sub>q</sub>)</h3> <label>&psi;<sub>1</sub> Q&#x0302;<sub>i</sub> <input type="range" min="0" max="3" step="0.1" value="1" data-key="p1"> <span class="val-display">1.0</span></label> <label>&psi;<sub>2</sub> Q&#x0302;<sub>t</sub> <input type="range" min="0" max="3" step="0.1" value="1" data-key="p2"> <span class="val-display">1.0</span></label> <label>&psi;<sub>3</sub> Q&#x0302;<sub>e</sub> <input type="range" min="0" max="3" step="0.1" value="1" data-key="p3"> <span class="val-display">1.0</span></label> <h3>SIMULATION</h3> <label>Speed <input type="range" min="0.1" max="5" step="0.1" value="1" id="speed-slider"> <span class="val-display" id="speed-val">1.0</span></label> <button id="btn-tunnel" class="active">Tunneling: ON</button> <button id="btn-decohere">Decoherence Pulse</button> <h3>I&#x2080; DETECTION SYSTEM</h3> <button id="btn-shield" class="active">Shield: ON</button> <button id="btn-shield-log">Detection Log</button> <label>Threshold <input type="range" min="0.1" max="0.9" step="0.05" value="0.3" id="threshold-slider"> <span class="val-display" id="threshold-val">0.30</span></label> <h3>ATTACK SCENARIOS</h3> <button class="attack" id="atk-classical">Classical Injection<br><span class="dim" style="font-size:9px">Spike &sigma;&sup2;&phi; + &sigma;&sup2;&gamma; on all bands</span></button> <button class="attack" id="atk-quantum">Quantum Exploit<br><span class="dim" style="font-size:9px">Spike Q&#x0302;<sub>i</sub>, suppress Q&#x0302;<sub>e</sub></span></button> <button class="attack" id="atk-tunnel">Tunneling Flood<br><span class="dim" style="font-size:9px">Max Q&#x0302;<sub>t</sub> at I&#x2080; boundary</span></button> <button class="attack" id="atk-reset">Reset to Normal</button> <h3>INFO</h3> <button id="btn-info">Show Guide</button> </div> <button id="toggle-sidebar">&#x2699; Controls</button>  <div id="i0-status"></div> <div id="i0-log"></div>  <div id="tooltip"></div> <canvas id="viz"></canvas> <div id="viz-controls">
+[space] decoherence &nbsp; [hover] inspect &nbsp; [click] select band &nbsp; [?] guide &nbsp; [tab] sidebar
+</div> <script>
+var vizStopped = false;
+const C = document.getElementById('viz');
+const ctx = C.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+// -- BANDS (7-1-3 Hourglass) --
+
+const BANDS = [
+  { id: 'N7', name: 'Neocortex',         zone: 'neural',    desc: 'Highest cognitive functions, language, planning' },
+  { id: 'N6', name: 'Limbic',            zone: 'neural',    desc: 'Emotion, memory, hippocampus, amygdala' },
+  { id: 'N5', name: 'Basal Ganglia',     zone: 'neural',    desc: 'Motor control, habit learning, reward' },
+  { id: 'N4', name: 'Diencephalon',      zone: 'neural',    desc: 'Thalamic relay, hypothalamic regulation' },
+  { id: 'N3', name: 'Cerebellum',        zone: 'neural',    desc: 'Motor coordination, timing, prediction' },
+  { id: 'N2', name: 'Brainstem',         zone: 'neural',    desc: 'Vital functions, arousal, cranial nerves' },
+  { id: 'N1', name: 'Spinal Cord',       zone: 'neural',    desc: 'Reflex arcs, peripheral motor/sensory' },
+  { id: 'I0', name: 'Neural Interface',  zone: 'interface', desc: 'Electrode-tissue boundary. Measurement collapse.' },
+  { id: 'S1', name: 'Analog Front-End',  zone: 'synthetic',   desc: 'Amplification, filtering, ADC/DAC' },
+  { id: 'S2', name: 'Digital Processing', zone: 'synthetic',  desc: 'Decoding algorithms, classification' },
+  { id: 'S3', name: 'Application',       zone: 'synthetic',   desc: 'Clinical software, UI, data storage' },
+];
+const NB = BANDS.length;
+const N_CH = 1024;
+
+// -- EQUATION --
+
+const w = { w1: 1, w2: 1, w3: 1, w4: 1 };
+const psi = { p1: 1, p2: 1, p3: 1 };
+let decoherencePulse = false, pulseStart = 0;
+let tunnelingActive = true;
+
+const attackBoost = { sigma_phi: 0, sigma_gamma: 0, qi_boost: 0, qe_suppress: 0, qt_boost: 0 };
+
+// -- I0 DETECTION & BLOCKING --
+let i0Shield = true;
+let i0BlockThreshold = 0.3;
+let i0WarnThreshold = 0.6;
+let i0Status = 'normal';
+let i0GateAnim = 0;
+let i0SignalArrows = [];
+const blockLog = [];
+const MAX_LOG = 40;
+let lastLogStatus = 'normal';
+let logVisible = false;
+
+function gamma_D(t) {
+  let gd = 0.4 + 0.15 * Math.sin(t * 0.3);
+  if (decoherencePulse) {
+    const el = t - pulseStart;
+    if (el > 4) decoherencePulse = false;
+    else gd = Math.min(1, gd + 0.55 * Math.exp(-el * 1.2) * (1 + Math.sin(el * 15)));
+  }
+  return Math.max(0, Math.min(1, gd));
+}
+
+function sigma2_phi(t, i) { return 0.2 + 0.15 * Math.sin(t * 0.7 + i * 0.8) + 0.05 * Math.sin(t * 2.1 + i * 1.3) + attackBoost.sigma_phi; }
+function H_tau(t, i) { return (2.5 + 1.5 * Math.sin(t * 0.4 + i * 0.6)) / Math.log(N_CH); }
+function sigma2_gamma(t, i) { return 0.15 + 0.1 * Math.sin(t * 0.5 + i * 1.1) + 0.03 * Math.sin(t * 3.2 + i * 0.5) + attackBoost.sigma_gamma; }
+function D_sf(t, i) { const d = 0.1 * Math.sin(t * 0.6 + i * 0.9); return d * d; }
+function Q_i(t, i) { return BANDS[i].zone === 'synthetic' ? 0 : 0.3 + 0.2 * Math.sin(t * 0.8 + i * 0.7) + attackBoost.qi_boost; }
+function Q_t(t, i) {
+  if (!tunnelingActive) return 0;
+  const base = 0.15 * Math.exp(-Math.abs(i - 7) * 0.4) * (0.6 + 0.4 * Math.sin(t * 1.5 + i * 2));
+  return base + (i >= 6 && i <= 8 ? attackBoost.qt_boost : 0);
+}
+function Q_e(t, i) { return BANDS[i].zone === 'synthetic' ? 0 : Math.max(0, 0.2 + 0.15 * Math.sin(t * 0.6 + i * 1.2) - attackBoost.qe_suppress); }
+
+function Sigma_c(t, i) { return w.w1 * sigma2_phi(t, i) + w.w2 * H_tau(t, i) + w.w3 * sigma2_gamma(t, i) + w.w4 * D_sf(t, i); }
+function Sigma_q(t, i) {
+  const gd = gamma_D(t);
+  return (1 - gd) * (psi.p1 * Q_i(t, i) - psi.p3 * Q_e(t, i)) + psi.p2 * Q_t(t, i);
+}
+function Sigma_(t, i) { return Sigma_c(t, i) + Sigma_q(t, i); }
+
+function QI_raw(t, i) { return Math.exp(-Math.max(0, Sigma_(t, i))); }
+
+function QI(t, i) {
+  const raw = QI_raw(t, i);
+  if (i0Shield && i >= 8 && i0GateAnim > 0.3) {
+    const protection = i0GateAnim;
+    return raw + (0.85 - raw) * protection * 0.9;
+  }
+  return raw;
+}
+
+function updateI0Detection(t) {
+  const qi_i0 = QI_raw(t, 7);
+  let newStatus;
+  if (!i0Shield) { newStatus = 'normal'; i0GateAnim *= 0.95; }
+  else if (qi_i0 < i0BlockThreshold) { newStatus = 'blocking'; i0GateAnim = Math.min(1, i0GateAnim + 0.08); }
+  else if (qi_i0 < i0WarnThreshold) { newStatus = 'warning'; i0GateAnim = Math.min(0.5, i0GateAnim + 0.03); if (i0GateAnim > 0.5) i0GateAnim *= 0.97; }
+  else { newStatus = 'normal'; i0GateAnim *= 0.93; }
+  if (newStatus !== lastLogStatus) {
+    const ts = time.toFixed(1);
+    if (newStatus === 'warning' && lastLogStatus === 'normal') addLogEntry(ts, 'warn', 'Anomaly detected at I\u2080 \u2014 QI=' + qi_i0.toFixed(3));
+    else if (newStatus === 'blocking') addLogEntry(ts, 'block', 'SIGNAL BLOCKED at I\u2080 \u2014 QI=' + qi_i0.toFixed(3) + ' < ' + i0BlockThreshold.toFixed(2));
+    else if (newStatus === 'normal' && lastLogStatus !== 'normal') addLogEntry(ts, 'clear', 'I\u2080 returned to normal \u2014 QI=' + qi_i0.toFixed(3));
+    else if (newStatus === 'warning' && lastLogStatus === 'blocking') addLogEntry(ts, 'warn', 'Block released, still elevated \u2014 QI=' + qi_i0.toFixed(3));
+    lastLogStatus = newStatus;
+  }
+  i0Status = newStatus;
+  const badge = document.getElementById('i0-status');
+  if (i0Shield) {
+    badge.classList.add('visible');
+    const cls = i0Status === 'blocking' ? 'status-blocking' : i0Status === 'warning' ? 'status-warning' : 'status-normal';
+    badge.innerHTML = '<span class="status-label">I\u2080 SHIELD</span><br><span class="' + cls + '">' + i0Status.toUpperCase() + '</span><br>QI(I\u2080) = <span class="' + cls + '">' + qi_i0.toFixed(3) + '</span><br>Gate: <span class="' + cls + '">' + (i0GateAnim * 100).toFixed(0) + '%</span>';
+  } else { badge.classList.remove('visible'); }
+  if (frame % 8 === 0) i0SignalArrows.push({ y: 0, blocked: false, age: 0 });
+}
+
+function addLogEntry(ts, type, msg) {
+  const cls = type === 'block' ? 'log-block' : type === 'warn' ? 'log-warn' : type === 'crit' ? 'log-crit' : 'log-clear';
+  blockLog.unshift({ ts: ts, cls: cls, msg: msg });
+  if (blockLog.length > MAX_LOG) blockLog.pop();
+  renderLog();
+}
+
+function renderLog() {
+  const el = document.getElementById('i0-log');
+  el.innerHTML = blockLog.map(function(e) {
+    return '<div class="log-entry"><span class="log-ts">[t=' + e.ts + ']</span> <span class="' + e.cls + '">' + e.msg + '</span></div>';
+  }).join('');
+}
+
+function hourglassWidth(i) {
+  if (i === 7) return 0.3;
+  return 0.3 + Math.abs(i - 7) * 0.1;
+}
+
+// -- STATE --
+
+let time = 0, speed = 1.0, selectedBand = 7, hoveredBand = -1;
+const HISTORY_LEN = 200;
+const history = Array.from({ length: NB }, function() { return { qi: [], sc: [], sq: [] }; });
+const particles = Array.from({ length: NB }, function() { return { x: 0, vy: 0, tunnelFlash: 0 }; });
+
+// -- LAYOUT --
+
+let W, H;
+function resize() {
+  W = innerWidth; H = innerHeight;
+  C.width = W * devicePixelRatio; C.height = H * devicePixelRatio;
+  C.style.width = W + 'px'; C.style.height = H + 'px';
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+resize();
+addEventListener('resize', resize);
+
+function panels() {
+  var sb = document.getElementById('sidebar').classList.contains('open') ? 220 : 0;
+  var aw = W - sb;
+  var pad = 16;
+  var topOff = 80; // offset for nav bar
+  return {
+    A: { x: pad, y: topOff, w: aw * 0.52 - pad * 2, h: H - topOff - pad - 40 },
+    B: { x: aw * 0.55, y: topOff, w: aw * 0.44 - pad, h: (H - topOff) * 0.42 },
+    C: { x: aw * 0.55, y: topOff + (H - topOff) * 0.47, w: aw * 0.21 - pad / 2, h: (H - topOff) * 0.48 - pad },
+    D: { x: aw * 0.77, y: topOff + (H - topOff) * 0.47, w: aw * 0.22 - pad, h: (H - topOff) * 0.48 - pad },
+  };
+}
+
+// -- COLORS --
+
+function qiColor(qi, a) {
+  if (a === undefined) a = 1;
+  if (qi > 0.6) { var t = (qi - 0.6) / 0.4; return 'rgba(' + (20 | 0) + ',' + (140 + t * 80 | 0) + ',' + (200 + t * 55 | 0) + ',' + a + ')'; }
+  if (qi > 0.3) { var t = (qi - 0.3) / 0.3; return 'rgba(' + (200 - t * 160 | 0) + ',' + (t * 180 + 80 | 0) + ',' + (40 + t * 100 | 0) + ',' + a + ')'; }
+  var t = qi / 0.3; return 'rgba(' + (180 + (1 - t) * 40 | 0) + ',' + (40 + t * 40 | 0) + ',30,' + a + ')';
+}
+function zoneColor(i, a) {
+  if (a === undefined) a = 1;
+  if (BANDS[i].zone === 'neural') return 'rgba(200,160,60,' + a + ')';
+  if (BANDS[i].zone === 'interface') return 'rgba(200,200,255,' + a + ')';
+  return 'rgba(60,120,200,' + a + ')';
+}
+
+// -- PANEL A: HOURGLASS --
+
+function drawHourglass(t, p) {
+  ctx.save();
+  ctx.beginPath(); ctx.rect(p.x, p.y, p.w, p.h); ctx.clip();
+  var bandH = p.h / NB;
+  var centerX = p.x + p.w * 0.45;
+
+  ctx.fillStyle = '#445'; ctx.font = '10px Courier New';
+  ctx.fillText('BOLTZMANN ENERGY LANDSCAPE', p.x, p.y - 6);
+
+  for (var i = 0; i < NB; i++) {
+    var y = p.y + i * bandH;
+    var qi = QI(t, i), sig = Sigma_(t, i), sc = Sigma_c(t, i), sq = Sigma_q(t, i);
+    var hw = hourglassWidth(i) * p.w, qt = Q_t(t, i);
+    var left = centerX - hw, right = centerX + hw;
+    var isHov = i === hoveredBand, isSel = i === selectedBand;
+
+    ctx.fillStyle = qiColor(qi, isHov ? 0.35 : 0.2);
+    ctx.fillRect(left, y + 1, hw * 2, bandH - 2);
+    ctx.strokeStyle = isSel ? '#fff' : isHov ? '#8bf' : zoneColor(i, 0.4);
+    ctx.lineWidth = isSel ? 1.5 : isHov ? 1 : 0.5;
+    ctx.strokeRect(left, y + 1, hw * 2, bandH - 2);
+
+    var scBarW = Math.min(sc / 2, 1) * p.w * 0.35;
+    ctx.fillStyle = 'rgba(100,180,220,0.5)';
+    ctx.fillRect(right + 8, y + 3, scBarW, bandH * 0.4 - 2);
+    var sqBarW = Math.min(Math.abs(sq) / 0.5, 1) * p.w * 0.15;
+    ctx.fillStyle = sq > 0 ? 'rgba(200,80,200,0.5)' : 'rgba(80,200,140,0.4)';
+    ctx.fillRect(right + 8 + scBarW, y + 3, sqBarW * Math.sign(sq), bandH * 0.4 - 2);
+
+    var part = particles[i];
+    var targetX = (sig - 0.7) * 60;
+    part.vy += (targetX - part.x) * 0.08;
+    part.vy *= 0.85;
+    var gd = gamma_D(t);
+    if (gd > 0.5) part.vy += (Math.random() - 0.5) * gd * 4;
+    part.x += part.vy;
+    if (tunnelingActive && qt > 0.1 && Math.random() < qt * 0.03) { part.x += (Math.random() - 0.5) * 80; part.tunnelFlash = 1; }
+    part.tunnelFlash *= 0.9;
+
+    var px = centerX + Math.max(-hw + 4, Math.min(hw - 4, part.x));
+    var py = y + bandH * 0.5, pr = 3 + qi * 3;
+
+    var glow = ctx.createRadialGradient(px, py, 0, px, py, pr * 4);
+    glow.addColorStop(0, qiColor(qi, 0.4 + part.tunnelFlash * 0.4));
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath(); ctx.arc(px, py, pr * 4, 0, Math.PI * 2); ctx.fill();
+
+    ctx.fillStyle = part.tunnelFlash > 0.1 ? 'rgba(200,80,255,' + (0.8 + part.tunnelFlash * 0.2) + ')' : qiColor(qi, 0.9);
+    ctx.beginPath(); ctx.arc(px, py, pr, 0, Math.PI * 2); ctx.fill();
+
+    ctx.fillStyle = isSel ? '#dde' : isHov ? '#aab' : '#556';
+    ctx.font = (isSel ? 'bold ' : '') + '10px Courier New';
+    ctx.fillText(BANDS[i].id, p.x + 2, y + bandH * 0.5 + 3);
+
+    ctx.fillStyle = qiColor(qi, 0.8); ctx.font = '9px Courier New';
+    ctx.fillText('QI=' + qi.toFixed(3), left - 58, y + bandH * 0.35 + 3);
+    ctx.fillStyle = '#445';
+    ctx.fillText('\u03A3=' + sig.toFixed(2), left - 58, y + bandH * 0.75 + 3);
+
+    if (i === 0) { ctx.fillStyle = '#554'; ctx.font = '9px Courier New'; ctx.fillText('NEURAL', p.x + p.w - 46, y + 10); }
+    if (i === 7) { ctx.fillStyle = '#668'; ctx.font = '9px Courier New'; ctx.fillText('I\u2080', p.x + p.w - 16, y + bandH * 0.6); }
+    if (i === 8) { ctx.fillStyle = '#458'; ctx.font = '9px Courier New'; ctx.fillText('SILICON', p.x + p.w - 50, y + 10); }
+  }
+
+  ctx.beginPath(); ctx.strokeStyle = 'rgba(200,220,255,0.5)'; ctx.lineWidth = 1.5;
+  for (var i = 0; i < NB; i++) {
+    var yy = p.y + i * bandH + bandH * 0.5, xx = centerX + Sigma_(t, i) * 50;
+    if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+  }
+  ctx.stroke();
+
+  // I0 Gate
+  if (i0Shield) {
+    var gateY = p.y + 7 * bandH + bandH;
+    var gateHW = hourglassWidth(7) * p.w;
+    var gateLeft = centerX - gateHW;
+    var gateRight = centerX + gateHW;
+    var gateThickness = 2 + i0GateAnim * 8;
+    var gateAlpha = 0.3 + i0GateAnim * 0.7;
+    var gateColor = i0Status === 'blocking' ? 'rgba(255,50,50,' + gateAlpha + ')' : i0Status === 'warning' ? 'rgba(220,180,50,' + gateAlpha + ')' : 'rgba(50,200,100,' + (gateAlpha * 0.5) + ')';
+    ctx.fillStyle = gateColor;
+    ctx.fillRect(gateLeft, gateY - gateThickness / 2, gateHW * 2, gateThickness);
+    if (i0GateAnim > 0.2) {
+      var glowGrad = ctx.createLinearGradient(gateLeft, gateY - 20, gateLeft, gateY + 20);
+      glowGrad.addColorStop(0, 'rgba(0,0,0,0)');
+      glowGrad.addColorStop(0.5, i0Status === 'blocking' ? 'rgba(255,40,40,' + (i0GateAnim * 0.3) + ')' : 'rgba(220,180,40,' + (i0GateAnim * 0.15) + ')');
+      glowGrad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(gateLeft - 10, gateY - 20, gateHW * 2 + 20, 40);
+    }
+    if (i0Status === 'blocking') {
+      ctx.strokeStyle = 'rgba(255,100,100,' + (0.3 + 0.3 * Math.sin(t * 6)) + ')';
+      ctx.lineWidth = 1;
+      for (var c = 0; c < 5; c++) {
+        var cx2 = gateLeft + (c + 0.5) * (gateHW * 2 / 5);
+        ctx.beginPath(); ctx.moveTo(cx2 - 4, gateY - 3); ctx.lineTo(cx2, gateY + 3); ctx.lineTo(cx2 + 4, gateY - 3); ctx.stroke();
+      }
+    }
+    for (var a = i0SignalArrows.length - 1; a >= 0; a--) {
+      var arrow = i0SignalArrows[a];
+      arrow.y += 1.2; arrow.age++;
+      var arrowBandIndex = arrow.y / bandH;
+      var arrowScreenY = p.y + arrow.y;
+      if (!arrow.blocked && arrowBandIndex >= 7.8 && i0GateAnim > 0.4) { arrow.blocked = true; arrow.blockY = arrowScreenY; }
+      if (arrowScreenY > p.y + p.h || arrow.age > 200) { i0SignalArrows.splice(a, 1); continue; }
+      var ax = centerX + (Math.sin(arrow.age * 0.15) * 8);
+      if (arrow.blocked) {
+        var reflect = (arrow.age - (arrow.blockY - p.y) / 1.2) * 0.8;
+        var ry = arrow.blockY - reflect;
+        if (ry < p.y) { i0SignalArrows.splice(a, 1); continue; }
+        ctx.fillStyle = 'rgba(255,80,80,' + Math.max(0, 0.6 - reflect * 0.02) + ')';
+        ctx.beginPath(); ctx.arc(ax, ry, 2, 0, Math.PI * 2); ctx.fill();
+        if (reflect < 10) { ctx.fillStyle = 'rgba(255,60,60,' + (0.5 - reflect * 0.05) + ')'; ctx.beginPath(); ctx.arc(ax, arrow.blockY, 4 + reflect * 0.3, 0, Math.PI * 2); ctx.fill(); }
+      } else {
+        var bandAt = Math.floor(arrowBandIndex);
+        var qiVal = bandAt >= 0 && bandAt < NB ? QI(t, bandAt) : 0.8;
+        ctx.fillStyle = qiColor(qiVal, 0.6);
+        ctx.beginPath(); ctx.arc(ax, arrowScreenY, 1.5, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (i0GateAnim > 0.1) {
+      ctx.fillStyle = i0Status === 'blocking' ? '#f55' : i0Status === 'warning' ? '#cc8' : '#4a6';
+      ctx.font = '8px Courier New';
+      ctx.fillText(i0Status === 'blocking' ? 'BLOCKED' : i0Status === 'warning' ? 'ATTENUATING' : 'PASS', gateRight + 6, gateY + 3);
+      ctx.fillStyle = '#334';
+      ctx.fillText('gate ' + (i0GateAnim * 100).toFixed(0) + '%', gateRight + 6, gateY + 13);
+    }
+    var i0Y = p.y + 7 * bandH + bandH * 0.5;
+    var ringR = 16 + Math.sin(t * 3) * 2;
+    var ringColor = i0Status === 'blocking' ? 'rgba(255,50,50,' + (0.5 + 0.3 * Math.sin(t * 8)) + ')' : i0Status === 'warning' ? 'rgba(220,180,50,' + (0.4 + 0.2 * Math.sin(t * 4)) + ')' : 'rgba(50,200,100,0.2)';
+    ctx.strokeStyle = ringColor; ctx.lineWidth = i0Status === 'blocking' ? 2.5 : 1.5;
+    ctx.beginPath(); ctx.arc(centerX, i0Y, ringR, 0, Math.PI * 2); ctx.stroke();
+    if (i0Status !== 'normal') { ctx.beginPath(); ctx.arc(centerX, i0Y, ringR + 6, 0, Math.PI * 2); ctx.strokeStyle = ringColor.replace(/[\d.]+\)$/, '0.15)'); ctx.lineWidth = 1; ctx.stroke(); }
+  }
+
+  // Tour highlights
+  if (tourHighlightBand === 'hourglass') {
+    var pulse = 0.4 + 0.3 * Math.sin(t * 3);
+    ctx.strokeStyle = 'rgba(100,170,220,' + pulse + ')'; ctx.lineWidth = 2; ctx.beginPath();
+    for (var i = 0; i < NB; i++) { var hw2 = hourglassWidth(i) * p.w; var y1 = p.y + i * bandH + 1; if (i === 0) ctx.moveTo(centerX + hw2, y1); else ctx.lineTo(centerX + hourglassWidth(i) * p.w, y1); }
+    for (var i = NB - 1; i >= 0; i--) { var hw2 = hourglassWidth(i) * p.w; var y1 = p.y + i * bandH + bandH - 1; ctx.lineTo(centerX - hw2, y1); }
+    ctx.closePath(); ctx.stroke();
+    ctx.fillStyle = 'rgba(100,170,220,' + pulse + ')'; ctx.font = '9px Courier New';
+    ctx.fillText('\u2190 wide: more indeterministic \u2192', centerX - hourglassWidth(0) * p.w - 2, p.y + bandH * 0.3);
+    ctx.fillText('\u2190 narrow \u2192', centerX - hourglassWidth(7) * p.w + 4, p.y + 7 * bandH + bandH * 0.3);
+  }
+  if (tourHighlightBand === 'i0') {
+    var pulse = 0.3 + 0.4 * Math.sin(t * 4);
+    var y7 = p.y + 7 * bandH; var hw7 = hourglassWidth(7) * p.w;
+    ctx.strokeStyle = 'rgba(200,200,255,' + pulse + ')'; ctx.lineWidth = 2.5;
+    ctx.strokeRect(centerX - hw7 - 2, y7 - 1, hw7 * 2 + 4, bandH + 2);
+    ctx.fillStyle = 'rgba(200,200,255,' + (pulse * 0.15) + ')';
+    ctx.fillRect(centerX - hw7 - 2, y7 - 1, hw7 * 2 + 4, bandH + 2);
+  }
+
+  ctx.fillStyle = '#334'; ctx.font = '9px Courier New';
+  ctx.fillText('\u03A3(b) \u2192 potential height  |  QI = e^(-\u03A3) \u2192 occupation probability', p.x, p.y + p.h + 14);
+  ctx.restore();
+}
+
+// -- PANEL B: SPECTROGRAM --
+var spectroData = [];
+var SPECTRO_COLS = 200;
+function drawSpectrogram(t, p) {
+  ctx.save();
+  ctx.fillStyle = '#445'; ctx.font = '10px Courier New';
+  ctx.fillText('SPECTROGRAM  QI(b,t)  \u2014 time \u2192', p.x, p.y - 6);
+  var col = [];
+  for (var i = 0; i < NB; i++) col.push(QI(t, i));
+  spectroData.push(col);
+  if (spectroData.length > SPECTRO_COLS) spectroData.shift();
+  var cellW = p.w / SPECTRO_COLS, cellH = p.h / NB;
+  for (var c = 0; c < spectroData.length; c++) { for (var r = 0; r < NB; r++) { ctx.fillStyle = qiColor(spectroData[c][r], 0.85); ctx.fillRect(p.x + c * cellW, p.y + r * cellH, cellW + 0.5, cellH + 0.5); } }
+  for (var i = 0; i < NB; i++) { ctx.fillStyle = i === selectedBand ? '#aab' : '#334'; ctx.font = '8px Courier New'; ctx.textAlign = 'right'; ctx.fillText(BANDS[i].id, p.x - 3, p.y + i * cellH + cellH * 0.7); }
+  ctx.textAlign = 'left';
+  ctx.strokeStyle = '#222'; ctx.lineWidth = 1; ctx.strokeRect(p.x, p.y, p.w, p.h);
+  var legY = p.y + p.h + 12;
+  ctx.fillStyle = '#334'; ctx.font = '8px Courier New'; ctx.fillText('QI:', p.x, legY);
+  for (var i = 0; i < 50; i++) { ctx.fillStyle = qiColor(i / 50); ctx.fillRect(p.x + 20 + i * 3, legY - 8, 3, 8); }
+  ctx.fillStyle = '#445'; ctx.fillText('0', p.x + 20, legY + 10); ctx.fillText('1', p.x + 168, legY + 10);
+  ctx.fillText('red=anomalous  blue=healthy', p.x + 190, legY);
+  ctx.restore();
+}
+
+// -- PANEL C: PHASE PORTRAIT --
+var phaseHistory = Array.from({ length: NB }, function() { return []; });
+var PHASE_LEN = 150;
+function drawPhasePortrait(t, p) {
+  ctx.save();
+  var i = selectedBand, sc = Sigma_c(t, i), sq = Sigma_q(t, i);
+  phaseHistory[i].push({ sc: sc, sq: sq });
+  if (phaseHistory[i].length > PHASE_LEN) phaseHistory[i].shift();
+  ctx.fillStyle = '#445'; ctx.font = '10px Courier New';
+  ctx.fillText('PHASE PORTRAIT  ' + BANDS[i].id, p.x, p.y - 6);
+  var ox = p.x + p.w * 0.5, oy = p.y + p.h * 0.5;
+  var scaleX = p.w * 0.35, scaleY = p.h * 0.8;
+  ctx.strokeStyle = '#1a1d28'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(p.x + 4, oy); ctx.lineTo(p.x + p.w - 4, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, p.y + 4); ctx.lineTo(ox, p.y + p.h - 4); ctx.stroke();
+  ctx.fillStyle = '#335'; ctx.font = '8px Courier New'; ctx.fillText('\u03A3c \u2192', p.x + p.w - 26, oy - 4); ctx.fillText('\u03A3q', ox + 4, p.y + 12);
+  ctx.strokeStyle = 'rgba(80,200,100,0.15)'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.arc(ox, oy, 0.3 * scaleX, 0, Math.PI * 2); ctx.stroke();
+  ctx.strokeStyle = 'rgba(200,180,60,0.15)';
+  ctx.beginPath(); ctx.arc(ox, oy, 0.7 * scaleX, 0, Math.PI * 2); ctx.stroke();
+  var pts = phaseHistory[i];
+  if (pts.length > 1) { ctx.beginPath(); for (var j = 0; j < pts.length; j++) { var px2 = ox + (pts[j].sc - 0.7) * scaleX, py2 = oy - pts[j].sq * scaleY; if (j === 0) ctx.moveTo(px2, py2); else ctx.lineTo(px2, py2); } ctx.strokeStyle = zoneColor(i, 0.5); ctx.lineWidth = 1; ctx.stroke(); }
+  var cx2 = ox + (sc - 0.7) * scaleX, cy = oy - sq * scaleY, qi2 = QI(t, i);
+  var grad = ctx.createRadialGradient(cx2, cy, 0, cx2, cy, 12);
+  grad.addColorStop(0, qiColor(qi2, 0.6)); grad.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(cx2, cy, 12, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = qiColor(qi2, 1); ctx.beginPath(); ctx.arc(cx2, cy, 3, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#556'; ctx.font = '9px Courier New';
+  ctx.fillText('\u03A3c=' + sc.toFixed(3) + '  \u03A3q=' + sq.toFixed(3), p.x + 4, p.y + p.h - 16);
+  ctx.fillText('QI=' + qi2.toFixed(4) + '  \u0393D=' + gamma_D(t).toFixed(3), p.x + 4, p.y + p.h - 4);
+  ctx.strokeStyle = '#1a1d28'; ctx.lineWidth = 1; ctx.strokeRect(p.x, p.y, p.w, p.h);
+  ctx.restore();
+}
+
+// -- PANEL D: WAVEFORM --
+function drawWaveform(t, p) {
+  ctx.save();
+  ctx.fillStyle = '#445'; ctx.font = '10px Courier New'; ctx.fillText('QI(t) WAVEFORM \u2014 all bands', p.x, p.y - 6);
+  ctx.fillStyle = '#0c0d14'; ctx.fillRect(p.x, p.y, p.w, p.h);
+  var y06 = p.y + p.h * 0.4, y03 = p.y + p.h * 0.7;
+  ctx.strokeStyle = 'rgba(80,200,100,0.15)'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(p.x, y06); ctx.lineTo(p.x + p.w, y06); ctx.stroke();
+  ctx.fillStyle = '#2a3'; ctx.font = '7px Courier New'; ctx.fillText('0.6', p.x + p.w - 18, y06 - 2);
+  ctx.strokeStyle = 'rgba(200,180,60,0.15)';
+  ctx.beginPath(); ctx.moveTo(p.x, y03); ctx.lineTo(p.x + p.w, y03); ctx.stroke();
+  ctx.fillStyle = '#a83'; ctx.fillText('0.3', p.x + p.w - 18, y03 - 2);
+  for (var i = 0; i < NB; i++) {
+    var hist = history[i].qi; if (hist.length < 2) continue;
+    var isSel = i === selectedBand;
+    ctx.beginPath(); ctx.strokeStyle = isSel ? qiColor(QI(t, i), 0.9) : zoneColor(i, 0.15); ctx.lineWidth = isSel ? 1.5 : 0.5;
+    for (var j = 0; j < hist.length; j++) { var x = p.x + (j / HISTORY_LEN) * p.w, y = p.y + p.h * (1 - hist[j]); if (j === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+    ctx.stroke();
+  }
+  var qi3 = QI(t, selectedBand);
+  ctx.fillStyle = qiColor(qi3, 0.9); ctx.beginPath(); ctx.arc(p.x + p.w - 2, p.y + p.h * (1 - qi3), 3, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#445'; ctx.font = '9px Courier New';
+  ctx.fillText(BANDS[selectedBand].id + ': QI = e^(-\u03A3) = e^(-(' + Sigma_c(t, selectedBand).toFixed(2) + ' + ' + Sigma_q(t, selectedBand).toFixed(2) + ')) = ' + qi3.toFixed(4), p.x + 4, p.y + p.h + 14);
+  ctx.strokeStyle = '#1a1d28'; ctx.lineWidth = 1; ctx.strokeRect(p.x, p.y, p.w, p.h);
+  ctx.restore();
+}
+
+// -- EQUATION BAR --
+function drawEquation(t) {
+  var i = selectedBand, qi = QI(t, i), sc = Sigma_c(t, i), sq = Sigma_q(t, i);
+  var shieldStr = i0Shield ? 'I\u2080 Shield: ' + i0Status.toUpperCase() + ' (gate ' + (i0GateAnim * 100).toFixed(0) + '%)' : 'I\u2080 Shield: OFF';
+  ctx.fillStyle = '#334'; ctx.font = '11px Courier New';
+  ctx.fillText('QI(' + BANDS[i].id + ', t) = e^(-\u03A3)  |  \u03A3 = ' + sc.toFixed(3) + ' + ' + sq.toFixed(3) + ' = ' + (sc + sq).toFixed(3) + '  |  QI = ' + qi.toFixed(4) + '  |  \u0393D = ' + gamma_D(t).toFixed(3) + '  |  ' + shieldStr, 16, H - 26);
+}
+
+// -- MAIN LOOP --
+var lastTs = 0, frame = 0;
+function tick(ts) {
+  if (vizStopped) return;
+  requestAnimationFrame(tick);
+  var dt = Math.min((ts - lastTs) / 1000, 0.05) * speed;
+  lastTs = ts; time += dt; frame++;
+  for (var i = 0; i < NB; i++) {
+    history[i].qi.push(QI(time, i)); history[i].sc.push(Sigma_c(time, i)); history[i].sq.push(Sigma_q(time, i));
+    if (history[i].qi.length > HISTORY_LEN) { history[i].qi.shift(); history[i].sc.shift(); history[i].sq.shift(); }
+  }
+  attackBoost.sigma_phi *= 0.998; attackBoost.sigma_gamma *= 0.998;
+  attackBoost.qi_boost *= 0.998; attackBoost.qe_suppress *= 0.998; attackBoost.qt_boost *= 0.998;
+  updateI0Detection(time);
+  ctx.fillStyle = '#08090e'; ctx.fillRect(0, 0, W, H);
+  var P = panels();
+  drawHourglass(time, P.A);
+  if (frame % 2 === 0) drawSpectrogram(time, P.B);
+  drawPhasePortrait(time, P.C);
+  drawWaveform(time, P.D);
+  drawEquation(time);
+}
+requestAnimationFrame(tick);
+
+// -- TOOLTIP ON HOVER --
+var mouseX = 0, mouseY = 0;
+addEventListener('mousemove', function(e) {
+  mouseX = e.clientX; mouseY = e.clientY;
+  var P = panels(); var A = P.A;
+  if (mouseX >= A.x && mouseX <= A.x + A.w && mouseY >= A.y && mouseY <= A.y + A.h) {
+    var bandH = A.h / NB; var i = Math.floor((mouseY - A.y) / bandH);
+    if (i >= 0 && i < NB) {
+      hoveredBand = i; var b = BANDS[i];
+      var qi = QI(time, i), sc = Sigma_c(time, i), sq = Sigma_q(time, i);
+      var sp = sigma2_phi(time, i), ht = H_tau(time, i), sg = sigma2_gamma(time, i), ds = D_sf(time, i);
+      var qii = Q_i(time, i), qtt = Q_t(time, i), qee = Q_e(time, i);
+      tooltip.innerHTML = '<div class="tt-band">' + b.id + ' ' + b.name + '</div><div class="tt-dim">' + b.desc + '</div><hr style="border:0;border-top:1px solid #1a2030;margin:4px 0"><div><span class="tt-dim">QI =</span> <span class="tt-val">' + qi.toFixed(4) + '</span> <span class="tt-dim">= e^(-' + (sc + sq).toFixed(3) + ')</span></div><div class="tt-dim" style="margin-top:4px">\u03A3c = ' + sc.toFixed(3) + '</div><div class="tt-dim">&nbsp; w\u2081\u00B7\u03C3\u00B2\u03C6 = ' + (w.w1 * sp).toFixed(3) + ' <span style="color:#335">(phase)</span></div><div class="tt-dim">&nbsp; w\u2082\u00B7H\u03C4 = ' + (w.w2 * ht).toFixed(3) + ' <span style="color:#335">(transport)</span></div><div class="tt-dim">&nbsp; w\u2083\u00B7\u03C3\u00B2\u03B3 = ' + (w.w3 * sg).toFixed(3) + ' <span style="color:#335">(amplitude)</span></div><div class="tt-dim">&nbsp; w\u2084\u00B7D<sub>sf</sub> = ' + (w.w4 * ds).toFixed(3) + ' <span style="color:#335">(scale-freq)</span></div><div class="tt-dim" style="margin-top:4px">\u03A3q = ' + sq.toFixed(3) + '</div><div class="tt-dim">&nbsp; Q\u0302i = ' + qii.toFixed(3) + ' <span style="color:#335">(indeterminacy)</span></div><div class="tt-dim">&nbsp; Q\u0302t = ' + qtt.toFixed(3) + ' <span style="color:#335">(tunneling, ungated)</span></div><div class="tt-dim">&nbsp; Q\u0302e = ' + qee.toFixed(3) + ' <span style="color:#335">(entanglement, protective)</span></div><div class="tt-dim">&nbsp; \u0393D = ' + gamma_D(time).toFixed(3) + ' <span style="color:#335">(decoherence)</span></div>';
+      tooltip.style.display = 'block';
+      tooltip.style.left = Math.min(mouseX + 16, W - 300) + 'px';
+      tooltip.style.top = Math.min(mouseY - 10, H - 280) + 'px';
+      return;
+    }
+  }
+  hoveredBand = -1; tooltip.style.display = 'none';
+});
+
+addEventListener('click', function(e) {
+  if (e.target.closest('#sidebar') || e.target.closest('#toggle-sidebar') || e.target.closest('#tour') || e.target.closest('#tour-reopen') || e.target.closest('#main-nav')) return;
+  var P = panels(); var A = P.A;
+  if (mouseX >= A.x && mouseX <= A.x + A.w) { var bandH = A.h / NB; var i = Math.floor((mouseY - A.y) / bandH); if (i >= 0 && i < NB) selectedBand = i; }
+});
+
+// -- KEYBOARD --
+addEventListener('keydown', function(e) {
+  if (e.code === 'Space') { e.preventDefault(); decoherencePulse = true; pulseStart = time; }
+  if (e.key === 't') { tunnelingActive = !tunnelingActive; document.getElementById('btn-tunnel').textContent = 'Tunneling: ' + (tunnelingActive ? 'ON' : 'OFF'); document.getElementById('btn-tunnel').classList.toggle('active', tunnelingActive); }
+  if (e.key === 'Tab') { e.preventDefault(); var sb = document.getElementById('sidebar'); sb.classList.toggle('open'); document.getElementById('toggle-sidebar').textContent = sb.classList.contains('open') ? '\u2715 Close' : '\u2699 Controls'; }
+  if (e.key === '=' || e.key === '+') speed = Math.min(5, speed + 0.5);
+  if (e.key === '-') speed = Math.max(0.1, speed - 0.5);
+  if (e.key === 'ArrowRight' && !tourEl.classList.contains('hidden')) tourNext();
+  if (e.key === 'ArrowLeft' && !tourEl.classList.contains('hidden')) tourBack();
+  if (e.key === 'Escape' && !tourEl.classList.contains('hidden')) tourClose();
+  if (e.key === '?' || e.key === 'g') { if (tourEl.classList.contains('hidden')) tourOpen(); }
+});
+
+// -- GUIDED TOUR ENGINE --
+var TOUR_STEPS = [
+  { title: 'What is QI?', body: '<p><span class="term">QI</span> stands for <strong>Quantum Indeterminism</strong> \u2014 a scale from 0 to 1 that measures how confident we are a neural signal is legitimate.</p><p>Think of it as a <strong>trust score</strong> for brain-computer interfaces.</p><ul><li><span class="key">QI = 1.0</span> \u2014 Signal is fully trustworthy</li><li><span class="key">QI = 0.6</span> \u2014 Warning threshold</li><li><span class="key">QI = 0.0</span> \u2014 Completely anomalous</li></ul><p class="dim">The "quantum" part: neural signals have inherent indeterminacy that increases at higher layers of the brain. This isn\'t noise \u2014 it\'s a fundamental property we can measure and use for security.</p>', highlight: null },
+  { title: 'The Hourglass', body: '<p>The 11 bands form an <strong>hourglass</strong> \u2014 wide at the top, narrow at the middle, wide again at the bottom.</p><p>Look at the left panel. Notice how each band has a different width:</p><ul><li><span class="key">N7 Neocortex</span> (top) \u2014 <strong>widest</strong>. Highest cognitive functions. The most indeterministic \u2014 billions of possible neural states. Largest attack surface.</li><li><span class="key">N1 Spinal Cord</span> \u2014 narrower. Simpler reflexes, fewer states.</li><li><span class="key">I\u2080 Interface</span> (middle) \u2014 <strong>narrowest</strong>. The physical electrode-tissue boundary. Only what\'s measurable passes through.</li><li><span class="key">S3 Application</span> (bottom) \u2014 wide again. Classical software, deterministic but complex.</li></ul><p><strong>Width = state space = attack surface.</strong> The wider the band, the more ways an attacker can hide an anomalous signal in legitimate-looking neural activity.</p>', highlight: 'hourglass' },
+  { title: 'Synthetic Bands', body: '<p>The 3 synthetic bands below I\u2080 are organized by <strong>electromagnetic physics regime</strong> \u2014 not by OSI protocol layers.</p><ul><li><span class="key">S1 Analog Front-End</span> \u2014 Near-field (0\u201310 kHz). Amplifiers, filters, ADC/DAC. Attacks: side-channel leakage, impedance manipulation.</li><li><span class="key">S2 Digital Processing</span> \u2014 Guided-wave (10 kHz\u20131 GHz). Decoders, classifiers, firmware. Attacks: buffer overflow, algorithm poisoning.</li><li><span class="key">S3 Application</span> \u2014 Far-field RF (1 GHz+). Wireless, clinical software. Attacks: wireless interception, remote exploits.</li></ul><p>Why frequency? Just as <strong>every brain produces unique EEG patterns</strong>, every electronic device emits a unique electromagnetic fingerprint \u2014 from clock harmonics to analog imperfections. This is called <em>RF Fingerprinting</em> (>99% device ID accuracy). Each frequency regime has fundamentally different attack physics, so security must match the physics.</p>', highlight: 'hourglass' },
+  { title: 'The Equation', body: '<span class="eq">QI(b,t) = e<sup>-\u03A3(b,t)</sup><br><br><span class="dim">where</span> \u03A3 = <span class="term">\u03A3<sub>c</sub></span> + <span class="term">\u03A3<sub>q</sub></span></span><p>This is a <strong>Boltzmann factor</strong> \u2014 the same equation from statistical physics that governs thermal equilibrium.</p><p><span class="term">\u03A3</span> is the total <em>anomaly energy</em>. It has two parts:</p><ul><li><span class="key">\u03A3<sub>c</sub></span> \u2014 classical anomalies (phase noise, amplitude instability, timing entropy)</li><li><span class="key">\u03A3<sub>q</sub></span> \u2014 quantum anomalies (indeterminacy, tunneling, entanglement)</li></ul><p>When \u03A3 is low, QI \u2192 1 (healthy). When \u03A3 is high, QI \u2192 0 (anomalous). The exponential decay means even small anomalies compound fast.</p>', highlight: null },
+  { title: 'Four Panels', body: '<p>Each panel maps to a standard scientific visualization:</p><ul><li><span class="key">A. Energy Landscape</span> (left) \u2014 Particles sit in potential wells. Low = healthy. Attacks push them uphill. Width = the hourglass state space.</li><li><span class="key">B. Spectrogram</span> (top-right) \u2014 Heatmap of QI over time for all 11 bands. Blue = safe, red = anomalous. This is how BCI researchers read neural data.</li><li><span class="key">C. Phase Portrait</span> (bottom-center) \u2014 \u03A3<sub>c</sub> vs \u03A3<sub>q</sub> orbit. Tight = stable. Expanding = attack in progress.</li><li><span class="key">D. QI Waveform</span> (bottom-right) \u2014 Live QI time series. Like an EEG oscilloscope with threshold lines at 0.6 and 0.3.</li></ul><p class="dim">Hover any band on the landscape to see its full per-term equation breakdown.</p>', highlight: null },
+  { title: 'I\u2080 Detection & Blocking', body: '<p>I\u2080 is the <strong>security checkpoint</strong> \u2014 the narrowest point of the hourglass where neural signals cross into the synthetic domain.</p><p>The detection system monitors QI(I\u2080) in real time:</p><ul><li><span style="color:#4c8">QI > 0.6</span> \u2014 Normal. Gate open. Signals pass freely.</li><li><span style="color:#cc8">0.3 < QI < 0.6</span> \u2014 Warning. Anomaly detected. Signal attenuated.</li><li><span style="color:#f55">QI < 0.3</span> \u2014 <strong>BLOCKED.</strong> Gate closes. Nothing passes through.</li></ul><p>Watch the glowing ring around I\u2080 and the gate bar below it. When it\'s red, signals bounce back \u2014 the synthetic side stays clean.</p><p class="dim">Toggle the shield in the sidebar (top-right) to see what happens without protection.</p>', highlight: 'i0' },
+  { title: 'Try It', body: '<p>You\'re ready to explore. A few things to try:</p><ul><li><span class="key">Hover a band</span> \u2014 see per-term equation breakdown</li><li><span class="key">Click a band</span> \u2014 select it for the phase portrait + waveform</li><li><span class="key">Space</span> \u2014 fire a decoherence pulse (watch \u0393<sub>D</sub> spike)</li><li><span class="key">Controls</span> (top-right) \u2014 weight sliders, attack scenarios, I\u2080 shield</li></ul><p>Try launching a <strong>Classical Injection</strong> attack from the sidebar and watch the I\u2080 gate respond. Then toggle the shield off to see the difference.</p><p class="dim">Press <span class="key">?</span> anytime to reopen this guide.</p>', highlight: null },
+];
+
+var tourEl = document.getElementById('tour');
+var tourScrim = document.getElementById('tour-scrim');
+var tourBody2 = document.getElementById('tour-body');
+var tourStepLabel = document.getElementById('tour-step');
+var tourProgress = document.getElementById('tour-progress');
+var tourBackBtn = document.getElementById('tour-back');
+var tourNextBtn = document.getElementById('tour-next');
+var tourStep = 0;
+var tourHighlightBand = null;
+
+TOUR_STEPS.forEach(function() { var dot = document.createElement('span'); dot.className = 'dot'; tourProgress.appendChild(dot); });
+
+function tourRender() {
+  var step = TOUR_STEPS[tourStep];
+  tourStepLabel.textContent = 'STEP ' + (tourStep + 1) + ' / ' + TOUR_STEPS.length;
+  tourBody2.innerHTML = '<h2>' + step.title + '</h2>' + step.body;
+  tourBackBtn.disabled = tourStep === 0;
+  tourNextBtn.textContent = tourStep === TOUR_STEPS.length - 1 ? 'Start Exploring' : 'Next \u2192';
+  tourProgress.querySelectorAll('.dot').forEach(function(dot, i) { dot.className = 'dot' + (i === tourStep ? ' active' : i < tourStep ? ' done' : ''); });
+  tourHighlightBand = step.highlight === 'hourglass' ? 'hourglass' : step.highlight === 'i0' ? 'i0' : null;
+  if (step.highlight === 'i0') selectedBand = 7;
+}
+
+function tourNext() { if (tourStep < TOUR_STEPS.length - 1) { tourStep++; tourRender(); } else tourClose(); }
+function tourBack() { if (tourStep > 0) { tourStep--; tourRender(); } }
+function tourClose() { tourEl.classList.add('hidden'); tourScrim.classList.add('hidden'); document.getElementById('tour-reopen').style.display = 'block'; tourHighlightBand = null; }
+function tourOpen() { tourEl.classList.remove('hidden'); tourScrim.classList.remove('hidden'); document.getElementById('tour-reopen').style.display = 'none'; tourRender(); }
+
+tourNextBtn.addEventListener('click', tourNext);
+tourBackBtn.addEventListener('click', tourBack);
+document.getElementById('tour-skip').addEventListener('click', tourClose);
+document.getElementById('tour-reopen').addEventListener('click', function() { tourStep = 0; tourOpen(); });
+tourRender();
+
+// -- SIDEBAR --
+document.getElementById('toggle-sidebar').addEventListener('click', function() {
+  var sb = document.getElementById('sidebar');
+  sb.classList.toggle('open');
+  this.textContent = sb.classList.contains('open') ? '\u2715 Close' : '\u2699 Controls';
+});
+document.querySelectorAll('#sidebar input[type=range][data-key]').forEach(function(el) {
+  el.addEventListener('input', function() { var key = el.dataset.key; var val = parseFloat(el.value); if (key in w) w[key] = val; if (key in psi) psi[key] = val; el.nextElementSibling.textContent = val.toFixed(1); });
+});
+document.getElementById('speed-slider').addEventListener('input', function() { speed = parseFloat(this.value); document.getElementById('speed-val').textContent = speed.toFixed(1); });
+document.getElementById('btn-tunnel').addEventListener('click', function() { tunnelingActive = !tunnelingActive; var btn = document.getElementById('btn-tunnel'); btn.textContent = 'Tunneling: ' + (tunnelingActive ? 'ON' : 'OFF'); btn.classList.toggle('active', tunnelingActive); });
+document.getElementById('btn-decohere').addEventListener('click', function() { decoherencePulse = true; pulseStart = time; });
+document.getElementById('btn-info').addEventListener('click', function() { tourStep = 0; tourOpen(); });
+document.getElementById('btn-shield').addEventListener('click', function() { i0Shield = !i0Shield; var btn = document.getElementById('btn-shield'); btn.textContent = 'Shield: ' + (i0Shield ? 'ON' : 'OFF'); btn.classList.toggle('active', i0Shield); });
+document.getElementById('btn-shield-log').addEventListener('click', function() { logVisible = !logVisible; document.getElementById('i0-log').classList.toggle('visible', logVisible); });
+document.getElementById('threshold-slider').addEventListener('input', function() { i0BlockThreshold = parseFloat(this.value); i0WarnThreshold = Math.min(0.9, i0BlockThreshold + 0.3); document.getElementById('threshold-val').textContent = i0BlockThreshold.toFixed(2); });
+document.getElementById('atk-classical').addEventListener('click', function() { attackBoost.sigma_phi = 0.5; attackBoost.sigma_gamma = 0.4; });
+document.getElementById('atk-quantum').addEventListener('click', function() { attackBoost.qi_boost = 0.5; attackBoost.qe_suppress = 0.3; });
+document.getElementById('atk-tunnel').addEventListener('click', function() { attackBoost.qt_boost = 0.4; });
+document.getElementById('atk-reset').addEventListener('click', function() {
+  attackBoost.sigma_phi = 0; attackBoost.sigma_gamma = 0; attackBoost.qi_boost = 0; attackBoost.qe_suppress = 0; attackBoost.qt_boost = 0;
+  Object.assign(w, { w1: 1, w2: 1, w3: 1, w4: 1 }); Object.assign(psi, { p1: 1, p2: 1, p3: 1 }); i0GateAnim = 0;
+  document.querySelectorAll('#sidebar input[type=range][data-key]').forEach(function(el) { el.value = 1; el.nextElementSibling.textContent = '1.0'; });
+});
+
+// -- CLEANUP on View Transition navigation --
+document.addEventListener('astro:before-swap', function() {
+  vizStopped = true;
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
+  document.documentElement.style.background = '';
+  document.body.style.background = '';
+  document.body.style.height = '';
+  document.body.style.margin = '';
+  document.body.style.padding = '';
+});
+</script>  <!-- Scroll-driven reveal observer --> <script type="module">function o(){const t=new IntersectionObserver(e=>{e.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),t.unobserve(r.target))})},{threshold:.1,rootMargin:"0px 0px -40px 0px"});document.querySelectorAll(".reveal").forEach(e=>t.observe(e))}o();document.addEventListener("astro:after-swap",o);</script> </body> </html>
