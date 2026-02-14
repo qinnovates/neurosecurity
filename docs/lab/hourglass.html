@@ -3,40 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QIF v4.0 — Interactive Hourglass Architecture</title>
+<title>QIF v6.0 — Interactive Hourglass Architecture</title>
 <style>
 /* ── Reset & Base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0d1117;
-  --bg-surface: #161b22;
-  --bg-overlay: #1c2128;
-  --border: #30363d;
-  --text: #e6edf3;
-  --text-dim: #8b949e;
-  --text-bright: #ffffff;
-  --green: #3fb950;
-  --red: #f85149;
-  --blue: #58a6ff;
-  --orange: #d29922;
-  --yellow: #e3b341;
-  --purple: #bc8cff;
-  --cyan: #39d2c0;
-  --severity-lethal: #ff4444;
-  --severity-critical: #ff6b35;
-  --severity-high: #d29922;
-  --severity-severe: #e3b341;
-  --severity-synthetic: #58a6ff;
-  --severity-interface: #bc8cff;
+  --bg: #faf9f6;
+  --bg-surface: #f0eee9;
+  --bg-overlay: #e8e6e1;
+  --border: rgba(0, 0, 0, 0.1);
+  --text: #4b5563;
+  --text-dim: #6b7280;
+  --text-bright: #1f2937;
+  --green: #16a34a;
+  --red: #dc2626;
+  --blue: #2563eb;
+  --orange: #d97706;
+  --yellow: #ca8a04;
+  --purple: #7c3aed;
+  --cyan: #0891b2;
+  --severity-lethal: #dc2626;
+  --severity-critical: #ea580c;
+  --severity-high: #d97706;
+  --severity-severe: #ca8a04;
+  --severity-synthetic: #2563eb;
+  --severity-interface: #7c3aed;
   --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-heading: "Inter", system-ui, sans-serif;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 html { font-size: 14px; }
 body {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -61,10 +64,11 @@ header {
 }
 
 header h1 {
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-bright);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 }
 
 header h1 span.version {
@@ -116,8 +120,8 @@ header h1 span.version {
 }
 
 .toolbar-btn .btn-icon { font-size: 1rem; }
-.toolbar-btn:hover { border-color: var(--text-dim); background: rgba(255,255,255,0.06); }
-.toolbar-btn.active { border-color: var(--blue); color: var(--blue); background: rgba(88,166,255,0.1); }
+.toolbar-btn:hover { border-color: var(--text-dim); background: rgba(0,0,0,0.04); }
+.toolbar-btn.active { border-color: var(--blue); color: var(--blue); background: rgba(37,99,235,0.08); }
 
 .toolbar-select {
   background: var(--bg-overlay);
@@ -139,7 +143,8 @@ header h1 span.version {
 .walkthrough-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -147,17 +152,17 @@ header h1 span.version {
 }
 
 .walkthrough-card {
-  background: var(--bg-surface);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 2rem 2.5rem;
   max-width: 520px;
   width: 90%;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
 
 .walkthrough-card h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: 1.3rem;
   color: var(--text-bright);
   margin-bottom: 1.25rem;
@@ -181,7 +186,7 @@ header h1 span.version {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
-  background: rgba(88,166,255,0.15);
+  background: rgba(37,99,235,0.1);
   color: var(--blue);
   display: flex;
   align-items: center;
@@ -313,12 +318,13 @@ main {
   transition: var(--transition);
 }
 
-.band-row:hover { background: rgba(255,255,255,0.03); border-radius: 4px; }
+.band-row:hover { background: rgba(0,0,0,0.03); border-radius: 4px; }
 .band-row:hover .band-bar { filter: brightness(1.2); }
 
 .band-id {
   width: 2rem;
   text-align: right;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-dim);
@@ -414,7 +420,7 @@ main {
   opacity: 0;
   transition: opacity 0.15s;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .tooltip.visible { opacity: 1; }
@@ -448,12 +454,12 @@ main {
   letter-spacing: 0.05em;
 }
 
-.severity-badge.lethal { background: rgba(255,68,68,0.15); color: var(--severity-lethal); border: 1px solid rgba(255,68,68,0.3); }
-.severity-badge.critical { background: rgba(255,107,53,0.15); color: var(--severity-critical); border: 1px solid rgba(255,107,53,0.3); }
-.severity-badge.high { background: rgba(210,153,34,0.15); color: var(--severity-high); border: 1px solid rgba(210,153,34,0.3); }
-.severity-badge.severe { background: rgba(227,179,65,0.15); color: var(--severity-severe); border: 1px solid rgba(227,179,65,0.3); }
-.severity-badge.synthetic { background: rgba(88,166,255,0.1); color: var(--severity-synthetic); border: 1px solid rgba(88,166,255,0.2); }
-.severity-badge.interface { background: rgba(188,140,255,0.1); color: #bc8cff; border: 1px solid rgba(188,140,255,0.2); }
+.severity-badge.lethal { background: rgba(220,38,38,0.08); color: var(--severity-lethal); border: 1px solid rgba(220,38,38,0.2); }
+.severity-badge.critical { background: rgba(234,88,12,0.08); color: var(--severity-critical); border: 1px solid rgba(234,88,12,0.2); }
+.severity-badge.high { background: rgba(217,119,6,0.08); color: var(--severity-high); border: 1px solid rgba(217,119,6,0.2); }
+.severity-badge.severe { background: rgba(202,138,4,0.08); color: var(--severity-severe); border: 1px solid rgba(202,138,4,0.2); }
+.severity-badge.synthetic { background: rgba(37,99,235,0.06); color: var(--severity-synthetic); border: 1px solid rgba(37,99,235,0.15); }
+.severity-badge.interface { background: rgba(124,58,237,0.06); color: var(--severity-interface); border: 1px solid rgba(124,58,237,0.15); }
 
 /* ── Detail Tabs ── */
 .detail-tabs {
@@ -485,9 +491,9 @@ main {
 }
 
 .detail-tab:hover { color: var(--text); background: var(--bg-overlay); border-color: var(--text-dim); border-bottom-color: transparent; }
-.detail-tab.active { color: var(--text-bright); background: var(--bg-overlay); border-bottom-color: var(--blue); border-color: var(--blue); }
-.detail-tab.active-green { color: var(--green); background: rgba(63,185,80,0.08); border-bottom-color: var(--green); border-color: var(--green); }
-.detail-tab.active-amber { color: var(--orange); background: rgba(210,153,34,0.08); border-bottom-color: var(--orange); border-color: var(--orange); }
+.detail-tab.active { color: var(--text-bright); background: var(--bg); border-bottom-color: var(--blue); border-color: var(--blue); }
+.detail-tab.active-green { color: var(--green); background: rgba(22,163,74,0.05); border-bottom-color: var(--green); border-color: var(--green); }
+.detail-tab.active-amber { color: var(--orange); background: rgba(217,119,6,0.05); border-bottom-color: var(--orange); border-color: var(--orange); }
 
 .detail-tab .tab-count {
   font-size: 0.75rem;
@@ -510,12 +516,12 @@ main {
 }
 
 /* ── Therapeutic Section (green accent) ── */
-.detail-therapeutic h3 { color: var(--green); border-bottom-color: rgba(63,185,80,0.3); }
+.detail-therapeutic h3 { color: var(--green); border-bottom-color: rgba(22,163,74,0.2); }
 
 .therapeutic-tag {
   display: inline-block;
-  background: rgba(63,185,80,0.1);
-  border: 1px solid rgba(63,185,80,0.25);
+  background: rgba(22,163,74,0.06);
+  border: 1px solid rgba(22,163,74,0.2);
   color: var(--green);
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
@@ -523,9 +529,9 @@ main {
   margin: 0.15rem;
 }
 
-.therapeutic-tag.fda-approved { background: rgba(63,185,80,0.2); border-color: rgba(63,185,80,0.4); font-weight: 600; }
-.therapeutic-tag.fda-cleared { background: rgba(88,166,255,0.15); border-color: rgba(88,166,255,0.3); color: var(--blue); }
-.therapeutic-tag.fda-investigational { background: rgba(210,153,34,0.12); border-color: rgba(210,153,34,0.25); color: var(--orange); }
+.therapeutic-tag.fda-approved { background: rgba(22,163,74,0.1); border-color: rgba(22,163,74,0.3); font-weight: 600; }
+.therapeutic-tag.fda-cleared { background: rgba(37,99,235,0.06); border-color: rgba(37,99,235,0.2); color: var(--blue); }
+.therapeutic-tag.fda-investigational { background: rgba(217,119,6,0.06); border-color: rgba(217,119,6,0.2); color: var(--orange); }
 .therapeutic-tag.fda-none { background: var(--bg-overlay); border-color: var(--border); color: var(--text-dim); }
 
 .therapeutic-tag.evidence { font-style: italic; background: var(--bg-overlay); border-color: var(--border); color: var(--text-dim); }
@@ -543,7 +549,7 @@ main {
 .therapeutic-card .tc-params { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; font-style: italic; }
 
 /* ── DSM-5 Section (amber accent) ── */
-.detail-dsm5 h3 { color: var(--orange); border-bottom-color: rgba(210,153,34,0.3); }
+.detail-dsm5 h3 { color: var(--orange); border-bottom-color: rgba(217,119,6,0.2); }
 
 .dsm-code-badge {
   display: inline-block;
@@ -552,8 +558,8 @@ main {
   font-size: 0.7rem;
   font-weight: 600;
   margin: 0.15rem;
-  background: rgba(210,153,34,0.12);
-  border: 1px solid rgba(210,153,34,0.3);
+  background: rgba(217,119,6,0.06);
+  border: 1px solid rgba(217,119,6,0.2);
   color: var(--orange);
 }
 
@@ -648,7 +654,7 @@ main {
   color: var(--text);
   padding: 0.4rem 0.75rem;
   border-radius: 6px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   cursor: pointer;
   transition: var(--transition);
@@ -657,6 +663,7 @@ main {
 .back-btn:hover { border-color: var(--text-dim); background: var(--bg-surface); }
 
 .detail-title {
+  font-family: var(--font-heading);
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--text-bright);
@@ -776,7 +783,7 @@ main {
 
 .freq-entry.neural { border-left-color: var(--green); }
 .freq-entry.synthetic { border-left-color: var(--blue); }
-.freq-entry.attack { border-left-color: var(--red); background: rgba(248,81,73,0.05); }
+.freq-entry.attack { border-left-color: var(--red); background: rgba(220,38,38,0.04); }
 .freq-entry.restricted { opacity: 0.7; }
 
 .freq-entry .freq-name { flex: 1; color: var(--text); }
@@ -835,7 +842,7 @@ main {
   font-family: var(--font-sans);
   padding: 0.6rem 1rem;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(to right, var(--bg-surface), rgba(88,166,255,0.04), var(--bg-surface));
+  background: linear-gradient(to right, var(--bg-surface), rgba(37,99,235,0.03), var(--bg-surface));
   transition: opacity 0.3s, max-height 0.3s;
   max-height: 3rem;
   display: flex;
@@ -849,8 +856,8 @@ main {
 
 .quantum-callout {
   display: none;
-  background: rgba(188,140,255,0.08);
-  border: 1px solid rgba(188,140,255,0.2);
+  background: rgba(124,58,237,0.05);
+  border: 1px solid rgba(124,58,237,0.15);
   border-radius: 6px;
   padding: 0.6rem 1rem;
   font-size: 0.7rem;
@@ -896,7 +903,7 @@ main {
 }
 
 .attack-item:hover { background: var(--bg-overlay); border-color: var(--border); }
-.attack-item.selected { background: rgba(248,81,73,0.1); border-color: rgba(248,81,73,0.3); }
+.attack-item.selected { background: rgba(220,38,38,0.06); border-color: rgba(220,38,38,0.2); }
 
 .attack-item .attack-name { font-weight: 600; color: var(--text); }
 .attack-item .attack-bands { color: var(--text-dim); font-size: 0.65rem; margin-top: 0.15rem; }
@@ -908,7 +915,7 @@ main {
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--bg-overlay);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.75rem 1.25rem;
@@ -916,7 +923,7 @@ main {
   display: none;
   z-index: 10;
   max-width: 500px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .device-info.visible { display: block; }
@@ -942,7 +949,7 @@ main {
 
 <div id="app">
   <header>
-    <h1>QIF <span class="version">v4.0</span> Hourglass Architecture <span class="version">7-1-3</span></h1>
+    <h1>QIF <span class="version">v6.0</span> Hourglass Architecture <span class="version">7-1-3</span></h1>
     <div class="toolbar" id="toolbar"></div>
   </header>
 
@@ -1139,14 +1146,14 @@ function getSeverityClass(sev) {
 
 function getBandColor(band) {
   const colors = {
-    lethal: '#ff4444',
-    critical: '#ff6b35',
-    high: '#d29922',
-    severe: '#e3b341',
-    synthetic: '#58a6ff',
-    interface: '#bc8cff',
+    lethal: '#dc2626',
+    critical: '#ea580c',
+    high: '#d97706',
+    severe: '#ca8a04',
+    synthetic: '#2563eb',
+    interface: '#7c3aed',
   };
-  return colors[getSeverityClass(band.severity)] || '#58a6ff';
+  return colors[getSeverityClass(band.severity)] || '#2563eb';
 }
 
 function formatL(L_m) {
@@ -1366,7 +1373,7 @@ class BandDetailView {
           <div class="detail-title">${band.id} \u2014 ${band.name}
             <span class="severity-badge ${sevClass}">${band.severity}</span>
             ${this.quantumProven && this.data.quantum_proof.bands_affected[band.id]
-              ? '<span class="severity-badge" style="background:rgba(188,140,255,0.15);color:#bc8cff;border:1px solid rgba(188,140,255,0.3);">QUANTUM</span>'
+              ? '<span class="severity-badge" style="background:rgba(124,58,237,0.08);color:var(--purple);border:1px solid rgba(124,58,237,0.2);">QUANTUM</span>'
               : ''}
           </div>
           <div class="detail-subtitle">${band.description}</div>
@@ -1388,7 +1395,7 @@ class BandDetailView {
             <dt>State Space Width</dt><dd>${(band.hourglass_width * 100).toFixed(0)}%</dd>
           </dl>
           ${this.quantumProven && this.data.quantum_proof.bands_affected[band.id]
-            ? `<div style="margin-top:0.75rem;padding:0.5rem;background:rgba(188,140,255,0.08);border:1px solid rgba(188,140,255,0.2);border-radius:4px;font-size:0.75rem;color:#bc8cff;">
+            ? `<div style="margin-top:0.75rem;padding:0.5rem;background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.15);border-radius:4px;font-size:0.75rem;color:var(--purple);">
                 Quantum Proof Impact: ${this.data.quantum_proof.bands_affected[band.id]}
                </div>`
             : ''}
@@ -2025,12 +2032,36 @@ class Tooltip {
     if (e.target === e.currentTarget) hideWalkthrough(false);
   });
 
-  // Show walkthrough on first visit
-  try {
-    if (!localStorage.getItem('qif-walkthrough-dismissed')) {
-      showWalkthrough();
+  // ── Hash navigation — open band from URL hash (e.g. #N7) ──
+  function handleHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return false;
+    const band = QIF_DATA.bands.find(b => b.id === hash);
+    if (band) {
+      hint?.classList.add('hidden');
+      detail.quantumProven = quantumToggle.isProven;
+      detail.registrar = registrarData;
+      // Small delay to let registrar data load
+      setTimeout(() => {
+        detail.registrar = registrarData;
+        detail.show(band);
+      }, 300);
+      return true;
     }
-  } catch(e) { showWalkthrough(); }
+    return false;
+  }
+
+  window.addEventListener('hashchange', handleHash);
+
+  // On load: if hash present, open that band; otherwise show walkthrough
+  const hashHandled = handleHash();
+  if (!hashHandled) {
+    try {
+      if (!localStorage.getItem('qif-walkthrough-dismissed')) {
+        showWalkthrough();
+      }
+    } catch(e) { showWalkthrough(); }
+  }
 })();
 </script>
 </body>
