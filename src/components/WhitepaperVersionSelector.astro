@@ -1,0 +1,55 @@
+---
+interface Props {
+  currentVersion: string;
+}
+
+const { currentVersion } = Astro.props;
+
+const versions = [
+  { label: 'v6.0', href: '/whitepaper/', current: true },
+  { label: 'v5.2', href: '/whitepaper/v5/', current: false },
+  { label: 'v3.1', href: '/whitepaper/v3/', current: false },
+  { label: 'v2.0', href: '/whitepaper/v2/', current: false },
+];
+---
+
+<div class="glass rounded-lg p-3 mb-4">
+  <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-2">Version</p>
+  <div class="space-y-1">
+    {versions.map((v) => {
+      const isActive = v.label === currentVersion;
+      return (
+        <a
+          href={v.href}
+          class:list={[
+            'group flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors',
+            isActive
+              ? 'text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10'
+              : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-surface)]',
+          ]}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          <span
+            class:list={[
+              'w-1.5 h-1.5 rounded-full shrink-0',
+              isActive
+                ? 'bg-[var(--color-accent-primary)]'
+                : 'bg-[var(--color-border)] group-hover:bg-[var(--color-text-faint)]',
+            ]}
+          />
+          <span class="font-medium">{v.label}</span>
+          {!isActive && (
+            <span class="ml-auto text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-faint)] border border-[var(--color-border)] rounded px-1 py-0.5 leading-none">
+              Archive
+            </span>
+          )}
+          {isActive && (
+            <span class="ml-auto text-[10px] font-medium uppercase tracking-wide text-[var(--color-accent-primary)]">
+              Current
+            </span>
+          )}
+        </a>
+      );
+    })}
+  </div>
+</div>

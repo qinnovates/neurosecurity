@@ -4,6 +4,30 @@ import { getCollection } from 'astro:content';
 
 const docs = await getCollection('governance');
 const sorted = docs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+// Build a lookup by ID for categorization
+const byId: Record<string, typeof sorted[number]> = {};
+for (const doc of sorted) {
+  byId[doc.id] = doc;
+}
+
+const categories = [
+  {
+    label: 'Core Standards',
+    color: 'var(--color-accent-primary)',
+    ids: ['TRANSPARENCY', 'DATA_POLICY_FAQ', 'ACCESSIBILITY'],
+  },
+  {
+    label: 'Ethics & Rights',
+    color: 'var(--color-accent-tertiary)',
+    ids: ['NEUROETHICS_ALIGNMENT', 'INFORMED_CONSENT_FRAMEWORK', 'PEDIATRIC_CONSIDERATIONS', 'POST_DEPLOYMENT_ETHICS'],
+  },
+  {
+    label: 'Compliance',
+    color: 'var(--color-accent-secondary)',
+    ids: ['REGULATORY_COMPLIANCE', 'UNESCO_ALIGNMENT', 'QIF-NEUROETHICS'],
+  },
+];
 ---
 
 <PageLayout
@@ -18,25 +42,34 @@ const sorted = docs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
     </p>
   </div>
 
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger">
-    {sorted.map((doc) => (
-      <a href={`/governance/${doc.id}/`} class="block group">
-        <article class="glass rounded-xl p-6 card-hover h-full flex flex-col">
-          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
-            {doc.data.title}
-          </h3>
-          {doc.data.description && (
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
-              {doc.data.description}
-            </p>
-          )}
-          <div class="mt-4 pt-3 border-t border-[var(--color-border)]">
-            <span class="text-xs text-[var(--color-accent-primary)] font-medium group-hover:underline">
-              Read document &rarr;
-            </span>
-          </div>
-        </article>
-      </a>
+  <div class="grid md:grid-cols-3 gap-8 reveal reveal-stagger">
+    {categories.map((cat) => (
+      <div class="glass-subtle rounded-xl p-6">
+        <h2 class="text-sm font-semibold uppercase tracking-wider mb-5" style={`color: ${cat.color}`}>
+          {cat.label}
+        </h2>
+        <div class="space-y-4">
+          {cat.ids.map((id) => {
+            const doc = byId[id];
+            if (!doc) return null;
+            return (
+              <a href={`/governance/${doc.id}/`} class="block group">
+                <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] leading-snug group-hover:text-[var(--color-accent-primary)] transition-colors">
+                  {doc.data.title}
+                </h3>
+                {doc.data.description && (
+                  <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">
+                    {doc.data.description}
+                  </p>
+                )}
+                <span class="text-xs text-[var(--color-accent-primary)] font-medium mt-2 inline-block group-hover:underline">
+                  Read document &rarr;
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
     ))}
   </div>
 </PageLayout>

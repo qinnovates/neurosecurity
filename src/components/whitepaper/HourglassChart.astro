@@ -1,0 +1,144 @@
+---
+const maxCount = 52;
+
+const neuralBands = [
+  { id: 'N7', name: 'Neocortex', detail: 'neural', count: 47, color: '#166534' },
+  { id: 'N6', name: 'Limbic System', detail: 'neural', count: 38, color: '#3a7d44' },
+  { id: 'N5', name: 'Basal Ganglia', detail: 'neural', count: 29, color: '#5c7a38' },
+  { id: 'N4', name: 'Diencephalon', detail: 'neural', count: 33, color: '#72772f' },
+  { id: 'N3', name: 'Cerebellum', detail: 'neural', count: 18, color: '#877226' },
+  { id: 'N2', name: 'Brainstem', detail: 'neural', count: 21, color: '#9b6c1e' },
+  { id: 'N1', name: 'Spinal Cord', detail: 'neural', count: 12, color: '#ae6616' },
+];
+
+const interfaceBand = {
+  id: 'I0', name: 'Neural Interface', detail: 'interface', count: 52, color: '#f59e0b',
+};
+
+const syntheticBands = [
+  { id: 'S1', name: 'Analog/Near-Field', detail: 'synthetic', count: 34, color: '#93c5fd' },
+  { id: 'S2', name: 'Digital/Telemetry', detail: 'synthetic', count: 41, color: '#60a5fa' },
+  { id: 'S3', name: 'Radio/Wireless/DE', detail: 'synthetic', count: 28, color: '#3b82f6' },
+];
+---
+
+<div class="glass rounded-xl p-6">
+  <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
+    The 11-Band Hourglass
+  </h3>
+  <p class="text-xs text-[var(--color-text-faint)] mb-5">
+    7 neural + 1 interface + 3 synthetic bands
+  </p>
+
+  {/* Neural zone */}
+  <div class="mb-1">
+    <span class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)]">
+      Neural (N7 &ndash; N1)
+    </span>
+  </div>
+  <div class="flex flex-col gap-1.5">
+    {neuralBands.map((band) => (
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span
+          class="w-1.5 sm:w-2 h-6 rounded-sm shrink-0"
+          style={`background-color: ${band.color};`}
+        />
+        <span class="w-28 sm:w-44 shrink-0 text-xs sm:text-sm text-[var(--color-text-muted)] truncate">
+          <span class="font-semibold text-[var(--color-text-primary)]">{band.id}</span>
+          {' '}{band.name}
+        </span>
+        <div class="flex-1 h-5 rounded bg-[var(--color-bg-surface)] overflow-hidden">
+          <div
+            class="h-full rounded"
+            style={`width: ${(band.count / maxCount) * 100}%; background-color: ${band.color};`}
+          />
+        </div>
+        <span class="w-8 shrink-0 text-xs sm:text-sm font-semibold text-[var(--color-text-primary)] text-right">
+          {band.count}
+        </span>
+      </div>
+    ))}
+  </div>
+
+  {/* Interface zone — the bottleneck */}
+  <div class="mt-4 mb-1">
+    <span class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)]">
+      Interface (I0)
+    </span>
+  </div>
+  <div class="hourglass-bottleneck relative rounded-lg border border-[#f59e0b]/40 bg-[#f59e0b]/[0.06] px-2 py-2">
+    <div class="flex items-center gap-2 sm:gap-3">
+      <span
+        class="w-1.5 sm:w-2 h-7 rounded-sm shrink-0"
+        style={`background-color: ${interfaceBand.color};`}
+      />
+      <span class="w-28 sm:w-44 shrink-0 text-xs sm:text-sm text-[var(--color-text-muted)] truncate">
+        <span class="font-semibold text-[var(--color-text-primary)]">{interfaceBand.id}</span>
+        {' '}{interfaceBand.name}
+      </span>
+      <div class="flex-1 h-6 rounded bg-[var(--color-bg-surface)] overflow-hidden">
+        <div
+          class="h-full rounded"
+          style={`width: 100%; background-color: ${interfaceBand.color};`}
+        />
+      </div>
+      <span class="w-8 shrink-0 text-sm font-bold text-[var(--color-text-primary)] text-right">
+        {interfaceBand.count}
+      </span>
+    </div>
+    <div class="mt-1.5 flex items-center gap-1.5 text-[10px] sm:text-xs font-medium text-[#f59e0b]">
+      <span class="hourglass-arrow">&uarr;</span>
+      <span>Bottleneck &mdash; highest attack surface</span>
+    </div>
+  </div>
+
+  {/* Synthetic zone */}
+  <div class="mt-4 mb-1">
+    <span class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)]">
+      Synthetic (S1 &ndash; S3)
+    </span>
+  </div>
+  <div class="flex flex-col gap-1.5">
+    {syntheticBands.map((band) => (
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span
+          class="w-1.5 sm:w-2 h-6 rounded-sm shrink-0"
+          style={`background-color: ${band.color};`}
+        />
+        <span class="w-28 sm:w-44 shrink-0 text-xs sm:text-sm text-[var(--color-text-muted)] truncate">
+          <span class="font-semibold text-[var(--color-text-primary)]">{band.id}</span>
+          {' '}{band.name}
+        </span>
+        <div class="flex-1 h-5 rounded bg-[var(--color-bg-surface)] overflow-hidden">
+          <div
+            class="h-full rounded"
+            style={`width: ${(band.count / maxCount) * 100}%; background-color: ${band.color};`}
+          />
+        </div>
+        <span class="w-8 shrink-0 text-xs sm:text-sm font-semibold text-[var(--color-text-primary)] text-right">
+          {band.count}
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <p class="mt-5 pt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)] text-center leading-relaxed">
+    <span class="font-semibold text-[var(--color-text-primary)]">11</span> bands &middot;
+    <span class="font-semibold text-[var(--color-text-primary)]">353</span> total attack mappings &middot;
+    I0 concentrates <span class="font-semibold text-[var(--color-text-primary)]">52</span> techniques at the neural&ndash;silicon boundary
+  </p>
+</div>
+
+<style>
+  .hourglass-bottleneck {
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.12);
+  }
+  .hourglass-arrow {
+    display: inline-block;
+    animation: hourglass-pulse 2s ease-in-out infinite;
+  }
+  @keyframes hourglass-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+</style>

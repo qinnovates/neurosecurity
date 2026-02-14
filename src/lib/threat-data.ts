@@ -3,6 +3,8 @@
  * Single source of truth: all techniques from the QIF TARA Taxonomy.
  * Scoring: NISS v1.0 (Neural Impact Scoring System)
  * TARA: Therapeutic Atlas of Risks and Applications (four-projection overlay)
+ * Projections: Modality (merged Security+Engineering), Clinical, Diagnostic (DSM-5-TR), Governance
+ * Neural Impact Chain (NIC): Technique → Band → Structure → Function → NISS + DSM
  */
 
 import { HOURGLASS_BANDS } from './qif-constants';
@@ -42,6 +44,24 @@ export type DualUse = 'confirmed' | 'probable' | 'possible' | 'silicon_only';
 export type ConsentTier = 'standard' | 'enhanced' | 'IRB' | 'prohibited';
 export type FdaStatus = 'cleared' | 'approved' | 'breakthrough' | 'investigational' | 'none' | 'N/A';
 export type EvidenceLevel = 'meta_analysis' | 'RCT' | 'cohort' | 'case_series' | 'preclinical' | 'theoretical' | 'N/A';
+export type DiagnosticCluster = 'cognitive_psychotic' | 'mood_trauma' | 'motor_neurocognitive' | 'persistent_personality' | 'non_diagnostic';
+export type Dsm5Confidence = 'established' | 'probable' | 'theoretical';
+export type Dsm5RiskClass = 'direct' | 'indirect' | 'none';
+
+export interface Dsm5Diagnosis {
+  code: string;
+  name: string;
+  confidence: Dsm5Confidence;
+}
+
+export interface Dsm5DiagProfile {
+  primary: Dsm5Diagnosis[];
+  secondary: Dsm5Diagnosis[];
+  risk_class: Dsm5RiskClass;
+  cluster: DiagnosticCluster;
+  pathway: string;
+  niss_correlation: string;
+}
 
 export interface TaraClinical {
   therapeutic_analog: string;
@@ -73,6 +93,7 @@ export interface TaraProjection {
   clinical: TaraClinical | null;
   governance: TaraGovernance;
   engineering: TaraEngineering;
+  dsm5: Dsm5DiagProfile | null;
 }
 
 export interface NissScore {
@@ -280,6 +301,24 @@ export const CONSENT_TIER_COLORS = {
   prohibited: { bg: 'rgba(127, 29, 29, 0.2)', text: '#ef4444' },
 } as const;
 
+/** Diagnostic cluster colors (NISS-DSM Bridge driven) */
+export const DIAGNOSTIC_CLUSTER_COLORS = {
+  cognitive_psychotic: { bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.3)', text: '#f59e0b' },
+  mood_trauma: { bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.3)', text: '#eab308' },
+  motor_neurocognitive: { bg: 'rgba(239, 68, 68, 0.15)', border: 'rgba(239, 68, 68, 0.3)', text: '#ef4444' },
+  persistent_personality: { bg: 'rgba(168, 85, 247, 0.15)', border: 'rgba(168, 85, 247, 0.3)', text: '#a855f7' },
+  non_diagnostic: { bg: 'rgba(148, 163, 184, 0.15)', border: 'rgba(148, 163, 184, 0.3)', text: '#94a3b8' },
+} as const;
+
+/** Diagnostic cluster display labels */
+export const DIAGNOSTIC_CLUSTER_LABELS: Record<DiagnosticCluster, string> = {
+  cognitive_psychotic: 'Cognitive/Psychotic',
+  mood_trauma: 'Mood/Trauma',
+  motor_neurocognitive: 'Motor/Neurocognitive',
+  persistent_personality: 'Persistent/Personality',
+  non_diagnostic: 'Non-Diagnostic',
+} as const;
+
 /** Engineering coupling type colors */
 export const COUPLING_COLORS = {
   electromagnetic: { bg: 'rgba(59, 130, 246, 0.15)', border: 'rgba(59, 130, 246, 0.3)', text: '#3b82f6' },
@@ -325,6 +364,53 @@ export function getTechniquesByCondition(condition: string): ThreatVector[] {
   return THREAT_VECTORS.filter(t =>
     t.tara?.clinical?.conditions.some(c => c.toLowerCase().includes(lc))
   );
+}
+
+/** DSM-5-TR specification from registry */
+export const DSM5_SPEC = (registry as any).dsm5_spec ?? null;
+
+/** Filter: techniques by diagnostic cluster */
+export function getTechniquesByDiagCluster(cluster: DiagnosticCluster): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.tara?.dsm5?.cluster === cluster);
+}
+
+/** Filter: techniques by DSM-5 code */
+export function getTechniquesByDsm5Code(code: string): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => {
+    const dsm = t.tara?.dsm5;
+    if (!dsm) return false;
+    return dsm.primary.some(d => d.code === code) || dsm.secondary.some(d => d.code === code);
+  });
+}
+
+/** DSM-5-TR diagnostic statistics */
+export function getDsm5Stats() {
+  const clusters: Record<DiagnosticCluster, number> = {
+    cognitive_psychotic: 0, mood_trauma: 0, motor_neurocognitive: 0,
+    persistent_personality: 0, non_diagnostic: 0,
+  };
+  const riskClass: Record<Dsm5RiskClass, number> = { direct: 0, indirect: 0, none: 0 };
+  const codes = new Map<string, number>();
+  let withDsm5 = 0;
+
+  for (const t of THREAT_VECTORS) {
+    const dsm = t.tara?.dsm5;
+    if (!dsm) continue;
+    withDsm5++;
+    clusters[dsm.cluster]++;
+    riskClass[dsm.risk_class]++;
+    for (const d of dsm.primary) {
+      codes.set(d.code, (codes.get(d.code) ?? 0) + 1);
+    }
+  }
+
+  return {
+    total: THREAT_VECTORS.length,
+    withDsm5,
+    clusters,
+    riskClass,
+    topCodes: [...codes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20),
+  };
 }
 
 /** TARA statistics summary */

@@ -1,0 +1,61 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import WhitepaperVersionSelector from '../../components/WhitepaperVersionSelector.astro';
+---
+
+<PageLayout
+  title="QIF Whitepaper v2.0"
+  description="Archived QIF Whitepaper version 2.0"
+  breadcrumbs={[{ label: 'Whitepaper', href: '/whitepaper/' }, { label: 'v2.0' }]}
+  wide={true}
+>
+  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+    <aside class="hidden lg:block">
+      <WhitepaperVersionSelector currentVersion="v2.0" />
+    </aside>
+    <div class="max-w-3xl">
+      <div class="mb-8 p-4 rounded-lg border-2 border-amber-400/50 bg-amber-50/50">
+        <div class="flex items-center gap-2 mb-1">
+          <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+          <span class="font-semibold text-amber-800">Archived Version</span>
+        </div>
+        <p class="text-sm text-amber-700">
+          This is a placeholder for <strong>v2.0</strong> of the QIF Whitepaper.
+          <a href="/whitepaper/" class="underline font-medium">Read the current version (v6.0) →</a>
+        </p>
+      </div>
+
+      <section class="mb-16">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          QIF Whitepaper v2.0
+        </h1>
+        <p class="text-lg text-[var(--color-text-muted)] mb-6">
+          Foundational Hourglass Architecture
+        </p>
+        <div class="flex flex-wrap items-center gap-3 mb-8">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-amber-400 text-amber-600">
+            v2.0 Archived
+          </span>
+          <span class="text-xs text-[var(--color-text-faint)]">2026-01-20</span>
+        </div>
+      </section>
+
+      <section class="glass rounded-xl p-8 text-center">
+        <p class="text-[var(--color-text-muted)] mb-4">
+          Version 2.0 established the foundational hourglass architecture and initial threat cataloguing.
+          This version has been superseded by v3.1, v5.2, and v6.0.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/whitepaper/" class="px-4 py-2 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium text-sm hover:opacity-90 transition-opacity">
+            Read Current Version →
+          </a>
+          <a href="/whitepaper/v5/" class="px-4 py-2 rounded-lg glass text-[var(--color-accent-primary)] font-medium text-sm hover:bg-white/50 transition-colors">
+            View v5.2 →
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>

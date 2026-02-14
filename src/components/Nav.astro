@@ -38,6 +38,19 @@ const isGovActive = currentPath.startsWith('/governance/');
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-1">
+        <!-- About (flat link) -->
+        <a
+          href="/about/"
+          class:list={[
+            "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            currentPath.startsWith('/about/')
+              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+          ]}
+        >
+          About
+        </a>
+
         <!-- Technology dropdown -->
         <div class="relative" data-dropdown="tech">
           <button
@@ -112,19 +125,6 @@ const isGovActive = currentPath.startsWith('/governance/');
           </div>
         </div>
 
-        <!-- About (flat link) -->
-        <a
-          href="/about/"
-          class:list={[
-            "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            currentPath.startsWith('/about/')
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          About
-        </a>
-
         <!-- Milestones (flat link) -->
         <a
           href="/milestones/"
@@ -195,6 +195,7 @@ const isGovActive = currentPath.startsWith('/governance/');
             </div>
           </div>
         </div>
+
       </div>
 
       <!-- Right side -->
@@ -241,6 +242,19 @@ const isGovActive = currentPath.startsWith('/governance/');
   <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]">
     <div class="px-4 py-3 space-y-1">
+      <!-- About (flat) -->
+      <a
+        href="/about/"
+        class:list={[
+          "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+          currentPath.startsWith('/about/')
+            ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+        ]}
+      >
+        About
+      </a>
+
       <!-- Mobile Technology section -->
       <div>
         <button
@@ -307,19 +321,6 @@ const isGovActive = currentPath.startsWith('/governance/');
         </div>
       </div>
 
-      <!-- About (flat) -->
-      <a
-        href="/about/"
-        class:list={[
-          "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-          currentPath.startsWith('/about/')
-            ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-        ]}
-      >
-        About
-      </a>
-
       <!-- Milestones (flat) -->
       <a
         href="/milestones/"
@@ -384,6 +385,7 @@ const isGovActive = currentPath.startsWith('/governance/');
           </a>
         </div>
       </div>
+
     </div>
   </div>
 </nav>

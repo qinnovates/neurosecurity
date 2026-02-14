@@ -43,7 +43,7 @@ const posts = (await getCollection('blog'))
       </h1>
 
       <p class="text-lg sm:text-xl text-[var(--color-text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed">
-        BCIs are in human brains. No governance standard addresses both the security risks and the therapeutic potential. Qinnovate builds the open frameworks to close that gap — to establish trust and safety before mass adoption.
+        The first open standard mapping BCI techniques to neural mechanisms, clinical outcomes, and psychiatric diagnoses. Qinnovate builds the governance frameworks the neural frontier needs — before mass adoption, not after.
       </p>
 
       <!-- Three Pillars — integrated into hero -->
@@ -90,6 +90,37 @@ const posts = (await getCollection('blog'))
       <svg class="w-5 h-5 text-[var(--color-text-faint)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
       </svg>
+    </div>
+  </section>
+
+  <!-- ═══ MILESTONE CALLOUT ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="glass rounded-xl p-6 sm:p-8 reveal" style="border-left: 4px solid var(--color-accent-secondary);">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+        <div class="flex-1">
+          <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-2">New</p>
+          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2">
+            Neural Impact Chain
+          </h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+            First formal mapping between BCI security techniques and DSM-5-TR psychiatric diagnoses via neural mechanism chains. Every attack vector is now traced from physical mechanism to clinical outcome.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <a
+            href="/TARA/#diagnostic"
+            class="px-5 py-2.5 rounded-lg bg-[var(--color-accent-secondary)] text-white font-medium text-sm hover:bg-[var(--color-accent-secondary)]/90 transition-colors text-center"
+          >
+            Explore Diagnostic View
+          </a>
+          <a
+            href="/news/"
+            class="px-5 py-2.5 rounded-lg glass text-[var(--color-text-primary)] font-medium text-sm hover:bg-white/10 transition-colors text-center"
+          >
+            Read the Blog
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -170,6 +201,32 @@ const posts = (await getCollection('blog'))
           body={post.body || ''}
         />
       ))}
+    </div>
+  </section>
+
+  <!-- ═══ ADOPTION CTA ═══ -->
+  <section class="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center reveal">
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">
+        The standard is open. Start here.
+      </h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-8">
+        No login, no paywall. Read the spec, explore the threat registry, and adopt the standard at your own pace.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/TARA/"
+          class="px-8 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
+        >
+          Explore the Standard
+        </a>
+        <a
+          href="/adopt/"
+          class="px-8 py-3.5 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
+        >
+          Get Involved
+        </a>
+      </div>
     </div>
   </section>
 

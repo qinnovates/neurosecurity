@@ -1,0 +1,103 @@
+---
+const steps = [
+  { label: 'Attack Technique', detail: '99 catalogued', color: '#ef4444' },
+  { label: 'Hourglass Band', detail: '11 bands', color: '#f59e0b' },
+  { label: 'Neural Structure', detail: 'Targeted anatomy', color: '#22c55e' },
+  { label: 'Function Impact', detail: 'Cognitive/Motor/Affective', color: '#06b6d4' },
+  { label: 'NISS Score', detail: '5 neural metrics', color: '#8b5cf6' },
+  { label: 'DSM-5-TR', detail: 'Diagnostic mapping', color: '#ec4899' },
+];
+---
+
+<div class="glass rounded-xl p-6">
+  <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
+    The Neural Impact Chain
+  </h3>
+  <p class="text-xs text-[var(--color-text-faint)] mb-5">
+    First-ever mapping from security severity to psychiatric diagnosis
+  </p>
+
+  {/* Chain flow */}
+  <div class="chain-flow flex flex-col md:flex-row items-stretch md:items-center gap-0">
+    {steps.map((step, i) => (
+      <>
+        {/* Step box */}
+        <div
+          class="chain-step flex-1 min-w-0 rounded-lg border-l-[3px] px-3 py-2.5 bg-[var(--color-bg-surface)]"
+          style={`border-left-color: ${step.color};`}
+        >
+          <div class="text-xs sm:text-sm font-semibold text-[var(--color-text-primary)] leading-tight">
+            {step.label}
+          </div>
+          <div class="text-[10px] sm:text-xs text-[var(--color-text-faint)] leading-tight mt-0.5">
+            {step.detail}
+          </div>
+        </div>
+        {/* Arrow (not after last item) */}
+        {i < steps.length - 1 && (
+          <div class="chain-arrow flex items-center justify-center shrink-0">
+            <span class="chain-arrow-h hidden md:block text-[var(--color-text-faint)] text-lg leading-none px-1">&rarr;</span>
+            <span class="chain-arrow-v block md:hidden text-[var(--color-text-faint)] text-lg leading-none py-0.5">&darr;</span>
+          </div>
+        )}
+      </>
+    ))}
+  </div>
+
+  {/* Example trace */}
+  <div class="mt-5 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] px-4 py-3">
+    <div class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1.5">
+      Example Trace
+    </div>
+    <p class="text-xs text-[var(--color-text-muted)] leading-relaxed font-mono break-words">
+      <span class="text-[#ef4444]">Transcranial Magnetic Stimulation (QIF-T0042)</span>
+      <span class="text-[var(--color-text-faint)]"> &rarr; </span>
+      <span class="text-[#f59e0b]">N7 Neocortex</span>
+      <span class="text-[var(--color-text-faint)]"> &rarr; </span>
+      <span class="text-[#22c55e]">Prefrontal cortex</span>
+      <span class="text-[var(--color-text-faint)]"> &rarr; </span>
+      <span class="text-[#06b6d4]">Executive function disruption</span>
+      <span class="text-[var(--color-text-faint)]"> &rarr; </span>
+      <span class="text-[#8b5cf6]">NISS 7.4 (high)</span>
+      <span class="text-[var(--color-text-faint)]"> &rarr; </span>
+      <span class="text-[#ec4899]">F06.7 Mild neurocognitive disorder</span>
+    </p>
+  </div>
+
+  <p class="mt-4 pt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)] text-center leading-relaxed">
+    Each of the <span class="font-semibold text-[var(--color-text-primary)]">99</span> techniques traces a complete path from exploit to diagnosis
+  </p>
+</div>
+
+<style>
+  .chain-flow {
+    gap: 0;
+  }
+  .chain-step {
+    transition: background-color 0.15s ease;
+  }
+  /* Vertical layout on mobile */
+  @media (max-width: 767px) {
+    .chain-flow {
+      gap: 0;
+    }
+    .chain-step {
+      border-left-width: 3px;
+    }
+    .chain-arrow {
+      padding: 2px 0;
+    }
+  }
+  /* Horizontal layout on desktop */
+  @media (min-width: 768px) {
+    .chain-flow {
+      gap: 0;
+    }
+    .chain-step {
+      border-left-width: 3px;
+    }
+    .chain-arrow {
+      padding: 0 2px;
+    }
+  }
+</style>

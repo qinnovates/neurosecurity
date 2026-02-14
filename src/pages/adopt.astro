@@ -115,6 +115,14 @@ const participationTiers = [
     </div>
   </section>
 
+  <!-- ═══ COMING SOON BANNER ═══ -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <div class="glass" style="border-left: 4px solid var(--color-accent-primary); padding: 1rem 1.5rem; margin-bottom: 2rem;">
+      <p style="margin: 0; font-weight: 600;">Coming Soon</p>
+      <p style="margin: 0.25rem 0 0; opacity: 0.8; font-size: 0.9rem;">Early adopter program launching Q2 2026. Sign up below to be notified.</p>
+    </div>
+  </div>
+
   <!-- ═══ THE HOURGLASS MODEL ═══ -->
   <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="text-center mb-12">
@@ -438,7 +446,7 @@ const participationTiers = [
           </div>
 
           <p class="text-sm text-[var(--color-text-faint)]">
-            Or email directly: <a href="mailto:adopt@qinnovate.com" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">adopt@qinnovate.com</a>
+            Or email directly: <a href="mailto:advisory@qinnovate.com" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">advisory@qinnovate.com</a>
           </p>
         </div>
 
@@ -560,7 +568,7 @@ const participationTiers = [
           const body = encodeURIComponent(
             `Name: ${payload.name}\nEmail: ${payload.email}\nOrganization: ${payload.organization}\nInterest: ${payload.interest}\n\n${payload.message}`
           );
-          window.location.href = `mailto:adopt@qinnovate.com?subject=${subject}&body=${body}`;
+          window.location.href = `mailto:advisory@qinnovate.com?subject=${subject}&body=${body}`;
           success?.classList.remove('hidden');
           return;
         }

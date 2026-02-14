@@ -409,6 +409,53 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     relatedTerms: ['cognitive-liberty', 'mental-privacy'],
     tags: ['principle', 'governance'],
   },
+
+  // === DSM-5-TR Diagnostic Mapping (Entry 53) ===
+  {
+    id: 'neural-impact-chain',
+    term: 'Neural Impact Chain (NIC)',
+    type: 'concept',
+    shortDef: 'The pipeline that connects a BCI technique to a psychiatric diagnosis: Technique \u2192 Band \u2192 Structure \u2192 Function \u2192 NISS + DSM.',
+    fullDef: 'A unified model that traces how a BCI technique produces psychiatric risk. The hourglass band tells you which brain structure is targeted. The structure tells you which cognitive function is affected. NISS quantifies the impact (how much), and DSM-5-TR qualifies it (what kind of diagnosis). The band is the Rosetta Stone connecting both systems.',
+    relatedTerms: ['hourglass-model', 'niss', 'dsm5-diagnostic-mapping', 'diagnostic-cluster'],
+    tags: ['concept', 'clinical', 'tara'],
+  },
+  {
+    id: 'dsm5-diagnostic-mapping',
+    term: 'DSM-5-TR Diagnostic Mapping',
+    type: 'concept',
+    shortDef: 'Maps each BCI technique to the psychiatric diagnoses it could trigger or worsen, using ICD-10-CM codes.',
+    fullDef: 'Every TARA technique that touches a neural band (N1\u2013N7 or I0) is mapped to DSM-5-TR diagnoses via the Neural Impact Chain. Primary diagnoses are directly implicated by the technique\'s mechanism; secondary diagnoses are downstream risks. Each mapping includes a confidence level (established, probable, theoretical), risk class (direct, indirect, none), and the neural pathway chain.',
+    relatedTerms: ['neural-impact-chain', 'niss-dsm-bridge', 'diagnostic-cluster', 'risk-class'],
+    tags: ['concept', 'clinical', 'tara'],
+  },
+  {
+    id: 'niss-dsm-bridge',
+    term: 'NISS-DSM Bridge',
+    type: 'concept',
+    shortDef: 'The link between NISS scores (how bad) and DSM diagnoses (what kind). Each NISS metric predicts a different diagnostic cluster.',
+    fullDef: 'Maps NISS metrics to diagnostic risk domains: BI (Biological Impact) \u2192 Motor/Neurocognitive, CG (Cognitive Integrity) \u2192 Cognitive/Psychotic, CV (Consent Violation) \u2192 Mood/Trauma, NP (Neuroplasticity) \u2192 Persistent/Personality, RV (Reversibility) \u2192 Chronicity modifier. This is the quantitative-to-qualitative bridge that makes NISS scores clinically interpretable.',
+    relatedTerms: ['niss', 'neural-impact-chain', 'diagnostic-cluster'],
+    tags: ['concept', 'clinical', 'metric'],
+  },
+  {
+    id: 'diagnostic-cluster',
+    term: 'Diagnostic Cluster',
+    type: 'concept',
+    shortDef: 'One of five groupings that color the Diagnostic projection: Cognitive/Psychotic, Mood/Trauma, Motor/Neurocognitive, Persistent/Personality, or Non-Diagnostic.',
+    fullDef: 'Clusters group DSM-5-TR chapters by shared neural mechanism rather than traditional nosology. Each technique is assigned to the cluster with the highest combined score from band weights and NISS bonuses. Aligned with NIMH\'s Research Domain Criteria (RDoC) approach \u2014 a bottom-up neurobiological taxonomy applied to BCI safety.',
+    relatedTerms: ['niss-dsm-bridge', 'dsm5-diagnostic-mapping'],
+    tags: ['concept', 'clinical', 'tara'],
+  },
+  {
+    id: 'risk-class',
+    term: 'Risk Class (DSM)',
+    type: 'concept',
+    shortDef: 'Whether a BCI technique can directly trigger a diagnosis, indirectly contribute, or has no diagnostic relevance.',
+    fullDef: 'Three levels: "direct" means the technique\'s mechanism can trigger or worsen the mapped diagnosis (e.g., limbic disruption \u2192 depression). "indirect" means downstream or secondary risk. "none" applies to silicon-only techniques with no neural pathway. Determined by band membership and dual-use classification.',
+    relatedTerms: ['dsm5-diagnostic-mapping', 'diagnostic-cluster'],
+    tags: ['concept', 'clinical', 'tara'],
+  },
 ] as const;
 
 /** Get terms sorted alphabetically */

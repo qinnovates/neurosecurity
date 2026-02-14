@@ -67,8 +67,8 @@ const engagements = [
 ---
 
 <BaseLayout
-  title="Consulting — Qinnovate"
-  description="BCI security consulting from Kevin Qi, author of the QIF standard. Threat modeling, FDA cybersecurity compliance, and security assessments for brain-computer interfaces and neural devices."
+  title="Advisory — Qinnovate"
+  description="BCI security advisory from Kevin Qi, author of the QIF standard. Threat modeling, FDA cybersecurity compliance, and security assessments for brain-computer interfaces and neural devices."
 >
   <Nav />
 
@@ -80,7 +80,7 @@ const engagements = [
 
     <div class="relative z-10 text-center max-w-4xl mx-auto pt-24 pb-16">
       <p class="text-sm font-medium tracking-[0.2em] uppercase text-[var(--color-accent-secondary)] mb-6">
-        Qinnovate Consulting
+        Qinnovate Advisory
       </p>
 
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.1]">
@@ -396,7 +396,7 @@ const engagements = [
             </div>
             <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Kevin Qi</h3>
             <p class="text-sm text-[var(--color-text-faint)] mt-1">Founder &amp; Framework Author</p>
-            <p class="text-xs text-[var(--color-text-faint)] mt-3">consulting@qinnovate.com</p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-3">research@qinnovate.com</p>
           </div>
         </div>
         <div class="md:col-span-2 space-y-4">
@@ -467,51 +467,34 @@ const engagements = [
       <div class="grid md:grid-cols-2 gap-12 items-start">
         <!-- Left: Copy -->
         <div>
-          <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Get Started</p>
-          <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-6">Schedule a Threat Briefing</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-6">Get in Touch</h2>
           <p class="text-[var(--color-text-muted)] leading-relaxed mb-8">
-            Tell Qinnovate about your system and security challenges. Kevin will respond within 48 hours with a recommended engagement and scope.
+            Whether you're adopting QIF, contributing to TARA, or exploring a research collaboration &mdash; we'd like to hear from you.
           </p>
 
-          <div class="space-y-4 text-sm mb-8">
+          <div class="space-y-5 text-sm mb-8">
             <div class="flex items-start gap-3">
-              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
-              <span class="text-[var(--color-text-muted)]">No sales pitch — you'll hear honestly if Qinnovate is the right fit</span>
+              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#8250;</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Adopting QIF?</strong> The specification is self-serve. Reach out if you need guidance on mapping QIF to your device architecture or regulatory submission.</span>
             </div>
             <div class="flex items-start gap-3">
-              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
-              <span class="text-[var(--color-text-muted)]">NDA available before first conversation if needed</span>
+              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#8250;</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Security research?</strong> We red team BCI devices and neural data pipelines. If you're building a neural interface and want it tested, let's talk.</span>
             </div>
             <div class="flex items-start gap-3">
-              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#10003;</span>
-              <span class="text-[var(--color-text-muted)]">Response within 48 hours</span>
+              <span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#8250;</span>
+              <span class="text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">Contributing?</strong> Submit new TARA techniques, validate NISS scores, or join a working group.</span>
             </div>
-          </div>
-
-          <!-- Free readiness call CTA -->
-          <div class="glass rounded-lg p-4 mb-6">
-            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1">Not sure yet?</p>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
-              Book a free 30-minute BCI security readiness call. No obligation — just an honest assessment of where you stand and what you'd need.
-            </p>
-            <a
-              href="https://cal.com/qinnovate/readiness"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex px-5 py-2 rounded-lg border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)] text-sm font-medium hover:bg-[var(--color-accent-primary)]/10 transition-colors"
-            >
-              Book a Free Call
-            </a>
           </div>
 
           <p class="text-sm text-[var(--color-text-faint)]">
-            Or reach out directly: <a href="mailto:consulting@qinnovate.com" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">consulting@qinnovate.com</a>
+            Or email directly: <a href="mailto:research@qinnovate.com" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">research@qinnovate.com</a>
           </p>
         </div>
 
         <!-- Right: Form -->
         <div class="glass rounded-xl p-6 sm:p-8">
-          <form id="consulting-form" class="space-y-5">
+          <form id="advisory-form" class="space-y-5">
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
                 <label for="name" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Name *</label>
@@ -655,7 +638,7 @@ const engagements = [
   // =====================================================
 
   function initForm() {
-    const form = document.getElementById('consulting-form') as HTMLFormElement;
+    const form = document.getElementById('advisory-form') as HTMLFormElement;
     const success = document.getElementById('form-success');
     const error = document.getElementById('form-error');
 
@@ -677,11 +660,11 @@ const engagements = [
       try {
         if (!GOOGLE_SCRIPT_URL) {
           // Fallback: mailto if Google Script URL not configured yet
-          const subject = encodeURIComponent(`Consulting Inquiry: ${payload.service || 'General'} — ${payload.organization}`);
+          const subject = encodeURIComponent(`Advisory Inquiry: ${payload.service || 'General'} — ${payload.organization}`);
           const body = encodeURIComponent(
             `Name: ${payload.name}\nEmail: ${payload.email}\nRole: ${payload.role}\nOrganization: ${payload.organization}\nService: ${payload.service}\nTimeline: ${payload.timeline}\nBudget: ${payload.budget}\n\n${payload.message}`
           );
-          window.location.href = `mailto:consulting@qinnovate.com?subject=${subject}&body=${body}`;
+          window.location.href = `mailto:research@qinnovate.com?subject=${subject}&body=${body}`;
           success?.classList.remove('hidden');
           return;
         }

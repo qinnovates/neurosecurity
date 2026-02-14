@@ -1,0 +1,43 @@
+---
+const maxCount = 28;
+
+const clusters = [
+  { name: 'Cognitive/Psychotic', count: 28, color: '#f59e0b' },
+  { name: 'Mood/Trauma', count: 24, color: '#eab308' },
+  { name: 'Motor/Neurocognitive', count: 22, color: '#ef4444' },
+  { name: 'Non-Diagnostic', count: 16, color: '#94a3b8' },
+  { name: 'Persistent/Personality', count: 9, color: '#a855f7' },
+];
+---
+
+<div class="glass rounded-xl p-6">
+  <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
+    DSM-5-TR Diagnostic Clusters
+  </h3>
+  <p class="text-xs text-[var(--color-text-faint)] mb-4">
+    Neural Impact Chain mapping: attack technique &rarr; psychiatric outcome
+  </p>
+
+  <div class="flex flex-col gap-3">
+    {clusters.map((cluster) => (
+      <div class="flex items-center gap-3">
+        <span class="w-40 sm:w-48 shrink-0 text-sm text-[var(--color-text-muted)] text-right truncate">
+          {cluster.name}
+        </span>
+        <div class="flex-1 h-7 rounded bg-[var(--color-bg-surface)] overflow-hidden">
+          <div
+            class="h-full rounded"
+            style={`width: ${(cluster.count / maxCount) * 100}%; background-color: ${cluster.color};`}
+          />
+        </div>
+        <span class="w-8 shrink-0 text-sm font-semibold text-[var(--color-text-primary)] text-right">
+          {cluster.count}
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <p class="mt-4 pt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)] text-center leading-relaxed">
+    First-ever systematic mapping between BCI attack vectors and DSM-5-TR diagnostic outcomes
+  </p>
+</div>
