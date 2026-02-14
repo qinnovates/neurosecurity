@@ -321,6 +321,47 @@ for band in BANDS:
 pd.DataFrame(rows)
 ```
 
+### 3.1 Anatomical Mapping to Bands
+
+Each band in the QIF hourglass corresponds to a specific anatomical region and functional domain. This mapping is critical for neurosurgeons and clinicians determining the security boundaries of an implant.
+
+| Band | Primary Region | Functional Domain | Risk Category |
+|------|----------------|-------------------|---------------|
+| **N7** | Prefrontal Cortex | Executive Function, Self-Identity | High (Cognitive Hijacking) |
+| **N6** | Motor/Sensory Cortex | Volitional Movement, Perception | Medium-High (Motor Control) |
+| **N5** | Thalamus/Limbic | Sensory Gating, Emotion | Medium (Affective Injection) |
+| **I0** | Electrode-Tissue Boundary | Signal Transduction | **Critical (Interface Compromise)** |
+| **S1** | Analog Frontend | Amplification, Filtering | Medium (Signal Spoofing) |
+| **S2** | Signal Processor | Feature Extraction | Medium (Data Manipulation) |
+| **S3** | Wireless/Logic | Transmission, API | High (Remote Exploit) |
+
+### 3.2 The NSP Protocol Stack
+
+Neural Security Protocol (NSP) governs the transport layer of the framework. It mirrors the OSI model but is optimized for the power constraints of implanted devices.
+
+```{mermaid}
+graph TD
+    subgraph "Neural Domain"
+        L5[L5: Semantic - Cognition/Intent]
+        L4[L4: Synaptic - Feature Mapping]
+    end
+    subgraph "Interface Zone"
+        L3["L3: Transduction - I0 Interface (Quantum/Classical)"]
+    end
+    subgraph "Silicon Domain"
+        L2[L2: Frame - Post-Quantum Encryption]
+        L1[L1: Physical - Radio/Analog]
+    end
+    L5 --- L4
+    L4 --- L3
+    L3 --- L2
+    L2 --- L1
+    
+    style L3 fill:#9b59b6,color:#fff
+    style L2 fill:#3498db,color:#fff
+    style L4 fill:#2ecc71,color:#fff
+```
+
 ```{python}
 #| label: fig-hourglass
 #| fig-cap: "QIF v3.0 — 7-Band Hourglass (3-1-3 symmetric). Width = state space. Narrowest at I0 (measurement bottleneck). Classical ceiling between N2 and N3."
@@ -580,6 +621,60 @@ pd.DataFrame(THREAT_MODEL).rename(columns={
     'attack': 'Attack Type', 'bands': 'Band(s)',
     'classical': 'Classical Detection?', 'quantum': 'Quantum Detection?'
 })
+```
+
+## 6.7 The Dual-Use Dilemma: Mechanism over Intent
+
+Historically, security frameworks categorize "Signal Injection" as an attack. In neurosecurity, signal injection is the mechanism for Deep Brain Stimulation (DBS) — a critical therapy for Parkinson's. QIF differentiates based on **Consent, Dosage, and Timing**, not the physical mechanism itself.
+
+```{mermaid}
+graph LR
+    A[Synthetic Signal] --> B{Physical Mechanism}
+    B --> C[Direct Injection]
+    B --> D[Temporal Interference]
+    
+    C --> E{Consent/Authorization}
+    D --> E
+    
+    E -- YES --> F[Therapeutic Modality]
+    E -- NO --> G[Adversarial Attack]
+    
+    F --> H{Dosage/Boundary}
+    H -- Safe --> I[Recovery/Regulation]
+    H -- Excessive --> J[Iatrogenic Harm]
+    
+    style G fill:#e74c3c,color:#fff
+    style F fill:#2ecc71,color:#fff
+    style I fill:#2ecc71,color:#fff
+    style J fill:#f39c12,color:#fff
+```
+
+## 6.8 NISS: Neural Impact Scoring System
+
+The **NISS v1.0** extends CVSS v4.0 with five dimensions specific to human-digital interconnection.
+
+```{python}
+#| label: fig-niss-radar
+#| fig-cap: "NISS Radar Chart: A profile of a 'Neural Signal Hijacking' event. Values represent impact severity (0-10)."
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+labels = ['Biological (BI)', 'Cognitive (CG)', 'Consent (CV)', 'Reversibility (RV)', 'Neuroplasticity (NP)']
+stats = [8, 9, 10, 4, 7] # Example profile
+
+angles = np.linspace(0, 2*np.pi, len(labels), endpoint=False).tolist()
+stats += stats[:1]
+angles += angles[:1]
+
+fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+ax.fill(angles, stats, color='#9b59b6', alpha=0.3)
+ax.plot(angles, stats, color='#9b59b6', linewidth=2)
+ax.set_yticklabels([])
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(labels, fontsize=10, fontweight='bold')
+ax.set_title('Neural Impact Profile (NISS)', size=15, pad=20)
+plt.show()
 ```
 
 ## Scenario Testing (Live Computation)
