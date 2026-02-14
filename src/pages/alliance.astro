@@ -15,7 +15,7 @@ const services = [
     name: 'Regulatory Readiness',
     tagline: 'QIF-mapped documentation for FDA, EU MDR, and neuroethics requirements',
     description: 'The FDA\'s Refuse to Accept policy means devices without adequate cybersecurity documentation don\'t get reviewed. Qinnovate maps your device\'s threat surface to FDA premarket cybersecurity guidance and EU MDR essential requirements using QIF bands — so your submission speaks the regulator\'s language. For deep regulatory counsel, Qinnovate partners with specialized compliance firms.',
-    deliverables: ['QIF-to-FDA cybersecurity mapping', 'Threat documentation for regulatory submission', 'Neural data governance framework', 'Referral to specialized regulatory counsel'],
+    deliverables: ['QIF-to-FDA cybersecurity mapping', 'Threat documentation for regulatory submission', 'Neural data governance framework', 'Referral to specialized Alliance counsel'],
   },
   {
     id: 'threat-modeling',
@@ -120,19 +120,19 @@ const engagements = [
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
         <div>
           <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">11</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">Security Bands Modeled</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">Bands Modeled</div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">99</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">BCI Attack Techniques Catalogued</div>
+          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">71+</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">Threat Techniques Catalogued</div>
         </div>
         <div>
           <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">15</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">Threat Tactics in TARA Atlas</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">Threat Tactics in Atlas</div>
         </div>
         <div>
           <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-status-safe)]">v{QIF_VERSION}</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">QIF Framework (Open Standard)</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">QIF Framework</div>
         </div>
       </div>
     </div>
@@ -496,7 +496,7 @@ const engagements = [
 
         <!-- Right: Form -->
         <div class="glass rounded-xl p-6 sm:p-8">
-          <form id="advisory-form" class="space-y-5">
+          <form id="alliance-form" class="space-y-5">
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
                 <label for="name" class="block text-sm font-medium text-[var(--color-text-primary)] mb-1.5">Name *</label>
@@ -640,7 +640,7 @@ const engagements = [
   // =====================================================
 
   function initForm() {
-    const form = document.getElementById('advisory-form') as HTMLFormElement;
+    const form = document.getElementById('alliance-form') as HTMLFormElement;
     const success = document.getElementById('form-success');
     const error = document.getElementById('form-error');
 
@@ -662,7 +662,7 @@ const engagements = [
       try {
         if (!GOOGLE_SCRIPT_URL) {
           // Fallback: mailto if Google Script URL not configured yet
-          const subject = encodeURIComponent(`Advisory Inquiry: ${payload.service || 'General'} — ${payload.organization}`);
+          const subject = encodeURIComponent(`Alliance Inquiry: ${payload.service || 'General'} — ${payload.organization}`);
           const body = encodeURIComponent(
             `Name: ${payload.name}\nEmail: ${payload.email}\nRole: ${payload.role}\nOrganization: ${payload.organization}\nService: ${payload.service}\nTimeline: ${payload.timeline}\nBudget: ${payload.budget}\n\n${payload.message}`
           );
