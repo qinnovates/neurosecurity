@@ -13679,7 +13679,7 @@
     },
     {
       "id": "QIF-T0090",
-      "attack": "WiFi CSI passive body sensing (through-wall vital sign detection via channel state information)",
+      "attack": "WiFi CSI passive body sensing (through-wall vital sign detection and 3D pose reconstruction via dedicated CSI hardware)",
       "tactic": "QIF-S.HV",
       "bands": "S1→S2→S3",
       "band_ids": [
@@ -15404,7 +15404,7 @@
           ]
         },
         "governance": {
-          "consent_tier": "informed",
+          "consent_tier": "standard",
           "monitoring": ["ambient_light_sensor_polling_rate_audit", "screen_content_correlation_detection"],
           "regulations": ["GDPR Art. 9 (biometric/health data)", "HIPAA (if health data derived)", "FTC (deceptive sensor practices)"],
           "data_classification": "PII",
@@ -15447,7 +15447,7 @@
     },
     {
       "id": "QIF-T0103",
-      "attack": "WiFi CSI respiratory and biometric inference (physiological surveillance via Channel State Information without dedicated sensors)",
+      "attack": "WiFi CSI consumer-grade respiratory and gait biometric inference (passive HIPAA-regulated physiological surveillance via commodity WiFi without dedicated hardware)",
       "tactic": "QIF-S.HV",
       "bands": "S3→S2",
       "band_ids": ["S3", "S2"],

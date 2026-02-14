@@ -1,9 +1,12 @@
 ---
+import { getThreatStats } from '../../lib/threat-data';
+
+const stats = getThreatStats();
 const bars = [
-  { label: 'Critical', count: 29, color: '#ef4444', pct: (29 / 54) * 100 },
-  { label: 'High', count: 54, color: '#f59e0b', pct: 100 },
-  { label: 'Medium', count: 17, color: '#eab308', pct: (17 / 54) * 100 },
-  { label: 'Low', count: 3, color: '#94a3b8', pct: (3 / 54) * 100 },
+  { label: 'Critical', count: stats.critical, color: '#ef4444', pct: (stats.critical / stats.high) * 100 },
+  { label: 'High', count: stats.high, color: '#f59e0b', pct: 100 },
+  { label: 'Medium', count: stats.medium, color: '#eab308', pct: (stats.medium / stats.high) * 100 },
+  { label: 'Low', count: stats.low, color: '#94a3b8', pct: (stats.low / stats.high) * 100 },
 ];
 ---
 
@@ -37,6 +40,6 @@ const bars = [
   </div>
 
   <p class="mt-4 pt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)] text-center">
-    <span class="font-semibold text-[var(--color-text-primary)]">103</span> techniques catalogued
+    <span class="font-semibold text-[var(--color-text-primary)]">{stats.total}</span> techniques catalogued
   </p>
 </div>

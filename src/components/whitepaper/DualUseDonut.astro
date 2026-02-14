@@ -1,12 +1,15 @@
 ---
-const total = 103;
+import { getTaraStats } from '../../lib/threat-data';
+
+const tara = getTaraStats();
+const total = tara.total;
 const circumference = 2 * Math.PI * 70; // ≈ 439.82
 
 const segments = [
-  { label: 'Confirmed', count: 53, color: '#10b981' },
-  { label: 'Probable', count: 16, color: '#06b6d4' },
-  { label: 'Possible', count: 9, color: '#8b5cf6' },
-  { label: 'Silicon Only', count: 25, color: '#94a3b8' },
+  { label: 'Confirmed', count: tara.dualUse.confirmed, color: '#10b981' },
+  { label: 'Probable', count: tara.dualUse.probable, color: '#06b6d4' },
+  { label: 'Possible', count: tara.dualUse.possible, color: '#8b5cf6' },
+  { label: 'Silicon Only', count: tara.dualUse.silicon_only, color: '#94a3b8' },
 ];
 
 // Calculate dasharray lengths and cumulative offsets
@@ -18,7 +21,8 @@ const arcs = segments.map((seg) => {
   return { ...seg, length, offset };
 });
 
-const therapeuticCount = 53 + 16 + 9; // confirmed + probable + possible = 78
+const therapeuticCount = tara.dualUse.confirmed + tara.dualUse.probable + tara.dualUse.possible;
+const therapeuticPct = ((therapeuticCount / total) * 100).toFixed(1);
 ---
 
 <div class="glass rounded-xl p-6">
@@ -31,7 +35,7 @@ const therapeuticCount = 53 + 16 + 9; // confirmed + probable + possible = 78
 
   {/* Donut chart */}
   <div class="flex justify-center">
-    <svg viewBox="0 0 200 200" class="w-48 h-48" role="img" aria-label="Dual-use donut chart showing 78 of 103 techniques have therapeutic potential">
+    <svg viewBox="0 0 200 200" class="w-48 h-48" role="img" aria-label={`Dual-use donut chart showing ${therapeuticCount} of ${total} techniques have therapeutic potential`}>
       {/* Background track */}
       <circle
         cx="100" cy="100" r="70"
@@ -103,6 +107,6 @@ const therapeuticCount = 53 + 16 + 9; // confirmed + probable + possible = 78
   </div>
 
   <p class="mt-4 pt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)] text-center leading-relaxed">
-    <span class="font-semibold text-[var(--color-text-primary)]">75.7%</span> of catalogued techniques have confirmed or probable therapeutic applications
+    <span class="font-semibold text-[var(--color-text-primary)]">{therapeuticPct}%</span> of catalogued techniques have confirmed or probable therapeutic applications
   </p>
 </div>
