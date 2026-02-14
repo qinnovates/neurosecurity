@@ -107,18 +107,6 @@ export const PILLARS = [
     version: '0.4',
     status: 'Secure Core Complete',
   },
-  {
-    id: 'runemate',
-    name: 'Runemate',
-    fullName: 'Project Runemate',
-    tagline: 'The neural bytecode',
-    description: 'A post-quantum compression layer that makes BCI data streams securable. Compresses web content 65-90% into Staves bytecode to offset PQ overhead.',
-    href: '/runemate/',
-    icon: '&#9670;',
-    color: 'var(--color-accent-tertiary)',
-    version: '0.4',
-    status: 'Secure Pipe Verified',
-  },
 ] as const;
 
 /** Publication stats — publications count is updated at build time via prebuild script */
