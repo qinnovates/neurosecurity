@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qtara"
+version = "0.1.0"
+authors = [
+  { name="Qinnovate", email="security@qinnovate.com" },
+]
+description = "Threat Analysis & Risk Assessment (TARA) Framework for Neural Security"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "stix2>=3.0.0",
+    "rich>=13.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/qinnovates/qinnovate"
+"Bug Tracker" = "https://github.com/qinnovates/qinnovate/issues"
+
+[project.scripts]
+qtara = "qtara.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+qtara = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

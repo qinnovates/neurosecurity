@@ -1,0 +1,2572 @@
+{
+  "type": "bundle",
+  "id": "bundle--f0b0e97f-ae3a-4e02-8efa-f0d99a776e18",
+  "spec_version": "2.1",
+  "objects": [
+    {
+      "type": "identity",
+      "id": "identity--qinnovate-tara",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Qinnovate Interface Framework (QIF)",
+      "identity_class": "organization",
+      "sectors": [
+        "technology",
+        "healthcare",
+        "research"
+      ],
+      "contact_information": "security@qinnovate.com"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--65e849dd-2639-5620-bf5a-869d513904ac",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Signal injection",
+      "description": "Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0001",
+          "url": "https://qinnovate.com/TARA/QIF-T0001"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2013N1",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--e3a39d53-741c-5c5c-87e9-4c300e3fefb8",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neural ransomware",
+      "description": "Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse. Distinct from Neural DoS: ransomware implies conditional restoration.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0002",
+          "url": "https://qinnovate.com/TARA/QIF-T0002"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "N3\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--3e6b11b5-6948-5bee-99d4-870c96ab8494",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Eavesdropping / signal interception",
+      "description": "Passive interception of neural signals. At I0: quantum measurement disturbs state (detectable). At S1-S3: classical RF interception, most consumer BCIs transmit unencrypted. Merges ONI-T001 (Signal Profiling), ONI-T023 (Unencrypted Data Interception).",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0003",
+          "url": "https://qinnovate.com/TARA/QIF-T0003"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2013S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--e130f35c-6354-5d00-bc75-bb60bac8cc71",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Man-in-the-middle",
+      "description": "Intercept and modify signals at I0 boundary or BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0004",
+          "url": "https://qinnovate.com/TARA/QIF-T0004"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "I0\u2013S2",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--fe3f6249-b55d-5a08-98d9-95c4e97e378f",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Quantum tunneling exploit",
+      "description": "Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0005",
+          "url": "https://qinnovate.com/TARA/QIF-T0005"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2013N1",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--f8b26e96-eb90-5733-9b81-4a295b3cb751",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Davydov soliton attack",
+      "description": "THz stimulation triggers Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0. Exploits energy transport in alpha-helix protein structures.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0006",
+          "url": "https://qinnovate.com/TARA/QIF-T0006"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2013N1",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--e170a498-6910-5dec-89b5-ed223b2035fb",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Protocol manipulation",
+      "description": "Exploit weaknesses in BCI data protocols to inject commands or alter data formatting, bypassing security controls. Targets the digital decoding/telemetry pipeline.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0007",
+          "url": "https://qinnovate.com/TARA/QIF-T0007"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2013S2",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--5bf47882-c305-5497-906d-95a057f3b0c1",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Command hijacking",
+      "description": "Intercept and modify motor commands or cognitive instructions in transit through the BCI system. Targets closed-loop stimulation devices. Intent verification detects command-intent mismatch.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0008",
+          "url": "https://qinnovate.com/TARA/QIF-T0008"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--ed0f09a7-0d16-5c15-b35b-71904b40d1fa",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "RF false brainwave injection",
+      "description": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0009",
+          "url": "https://qinnovate.com/TARA/QIF-T0009"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2013S2\u2192N4\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--1b89236d-9e10-5bf1-bbc5-020eb5b4523a",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "ELF neural entrainment",
+      "description": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0010",
+          "url": "https://qinnovate.com/TARA/QIF-T0010"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192N4\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--1f52eec2-5d3f-5f81-b412-2947876c43d1",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Intermodulation (BCI signal weaponized)",
+      "description": "UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz theta. Most dangerous coupling mechanism. QI CANNOT detect from signal data alone -- requires resonance shield.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0011",
+          "url": "https://qinnovate.com/TARA/QIF-T0011"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S2\u2192N4\u2013N6",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--74853efc-8834-55d4-8b80-51bc2cdda5cb",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Pulsed microwave (Frey effect)",
+      "description": "S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion causes cochlea to perceive as sound. Havana Syndrome model. PRF selects neural target: 40 Hz gamma, 10 Hz alpha, 4 Hz theta, 1 Hz delta.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0012",
+          "url": "https://qinnovate.com/TARA/QIF-T0012"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S3\u2192N2,N7",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--67c6e1ab-42a8-5ab0-ac2e-38c533c7910d",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Temporal interference (deep targeting)",
+      "description": "Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Licensed frequencies -- lower barrier than restricted.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0013",
+          "url": "https://qinnovate.com/TARA/QIF-T0013"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2\u2192N4\u2013N6",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--708d88c7-73d5-5f68-b7ce-b08de55496d6",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Envelope modulation (stealth carrier)",
+      "description": "Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry (PUBLIC access). tACS therapeutic principle weaponized.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0014",
+          "url": "https://qinnovate.com/TARA/QIF-T0014"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2013S2\u2192any N",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--d8ccca91-6599-50f7-bde4-2556e376d495",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Directed energy (thermal I0 damage)",
+      "description": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0015",
+          "url": "https://qinnovate.com/TARA/QIF-T0015"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S3\u2192I0",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--c9959857-4964-50fe-9951-eec19c4ef5f9",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Professor X backdoor (training-time)",
+      "description": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0016",
+          "url": "https://qinnovate.com/TARA/QIF-T0016"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--4b8ba578-008a-5327-8659-2915662ca509",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Transfer learning backdoor",
+      "description": "Backdoor persists through transfer learning from pre-trained BCI models. Attacker poisons upstream model, downstream users inherit the backdoor. Common in EEG foundation model paradigm.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0017",
+          "url": "https://qinnovate.com/TARA/QIF-T0017"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--66ed16c8-2778-5326-b03e-4eb76e49eaf3",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Adversarial filter attack",
+      "description": "Craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0018",
+          "url": "https://qinnovate.com/TARA/QIF-T0018"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2013S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--76d764e2-fb74-5620-817e-0476cea29a4b",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Universal adversarial perturbation (UAP)",
+      "description": "Single perturbation pattern that fools BCI decoder regardless of input. Works across subjects and sessions. Pre-computed offline, applied in real-time. Lower sophistication than targeted attacks.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0019",
+          "url": "https://qinnovate.com/TARA/QIF-T0019"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2013S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--2d088e85-741f-5f5c-8ee4-e7aa5a0b647c",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Membership inference on neural data",
+      "description": "Determine if a specific person's neural data was used to train a BCI model. Reveals participation in clinical trials, neurological conditions. GDPR Article 9 implications.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0020",
+          "url": "https://qinnovate.com/TARA/QIF-T0020"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S2\u2013S3",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--567060ca-5837-5dd1-916f-b5a65046f51b",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Federated gradient leakage",
+      "description": "Reconstruct individual neural data from shared gradients in federated BCI training. Multi-site clinical trials share model updates. Gradient inversion recovers raw EEG with high fidelity.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0021",
+          "url": "https://qinnovate.com/TARA/QIF-T0021"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S2\u2013S3",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--70d4d54a-a885-527f-a31a-8c9db0105780",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neurofeedback falsification",
+      "description": "Manipulate neurofeedback display or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0022",
+          "url": "https://qinnovate.com/TARA/QIF-T0022"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--2c9249f1-64af-5b5d-a700-a0fe3fb2cd5c",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Closed-loop perturbation cascade",
+      "description": "Small adversarial perturbation injected into closed-loop BCI amplifies through feedback cycle. Each loop iteration increases deviation until system destabilizes. NeuroPace RNS, DBS with LFP sensing vulnerable.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0023",
+          "url": "https://qinnovate.com/TARA/QIF-T0023"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S2\u2192I0\u2192N5\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--c8ac7742-ce82-5ab2-bb21-50c1a9fe737f",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Training data poisoning (model bias injection)",
+      "description": "Subtly contaminate BCI training datasets to introduce systematic bias or weakness without creating a specific trigger (distinct from backdoor T2201). Degraded model performance appears as natural noise. Federated learning and crowd-sourced calibration data are vulnerable entry points.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0024",
+          "url": "https://qinnovate.com/TARA/QIF-T0024"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--e8c0ada3-2375-5741-8db1-47015678feed",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neuronal jamming",
+      "description": "Overwhelm targeted neurons via continuous high-frequency stimulation through compromised electrodes. Prevents normal neural signaling. Analogous to radio jamming. Implanted BCIs with stimulation capability.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0025",
+          "url": "https://qinnovate.com/TARA/QIF-T0025"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2192N2\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--c6010b28-8632-59d6-a79d-e75e9d1fbe35",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neuronal flooding",
+      "description": "Flood neural tissue with maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0026",
+          "url": "https://qinnovate.com/TARA/QIF-T0026"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "I0\u2192N4\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--5b4d5885-be67-554c-8fbf-3bf4bd7cc34d",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neuronal scanning",
+      "description": "Systematically probe neural tissue via low-amplitude stimulation pulses to map functional connectivity, identify responsive regions, and characterize individual neural signatures. Prerequisite for targeted attacks.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0027",
+          "url": "https://qinnovate.com/TARA/QIF-T0027"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "I0\u2192N4\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--aa1ed84e-c152-54f9-b350-172e1dca6df8",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neural selective forwarding",
+      "description": "Compromised BCI firmware selectively drops or forwards neural signals based on content. Filter out specific cognitive states while passing others. Subtle censorship of neural output.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0028",
+          "url": "https://qinnovate.com/TARA/QIF-T0028"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2013S1",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--5296758f-ce30-5dd7-894b-c778f003b2c9",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neural DoS (stimulation flood)",
+      "description": "Overwhelm neural pathways with excessive stimulation or signal flooding causing temporary dysfunction or distress. Rate limiting at I0 and emergency shutdown are primary defenses.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0029",
+          "url": "https://qinnovate.com/TARA/QIF-T0029"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2192N4\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--e21a1555-4829-56fa-9353-be297471c9bd",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Motor hijacking",
+      "description": "Force involuntary motor actions by injecting false motor commands through compromised BCI motor interfaces. Intent verification compares commands against detected cognitive intent. Physical safety interlocks required.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0030",
+          "url": "https://qinnovate.com/TARA/QIF-T0030"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "I0\u2192N5\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--fff45196-268b-55ba-851c-f817cfa47768",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Battery drain attack (resource depletion)",
+      "description": "Force BCI processor to perform computationally expensive tasks (e.g., continuous high-rate sampling, unnecessary ML inference) to drain battery faster than normal. Critical for implanted BCIs where battery replacement requires surgery. Wearable BCIs also affected during critical use periods.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0031",
+          "url": "https://qinnovate.com/TARA/QIF-T0031"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2013S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--41b2c12b-a58f-547b-b2b7-f1dd234d4c1e",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Identity spoofing (neural biometric)",
+      "description": "Replicate user's neural signature to bypass BCI authentication. Classical biometrics (ERP templates, brainprint) are partially spoofable. If quantum neural signatures exist, no-cloning makes them physically unclonable.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0032",
+          "url": "https://qinnovate.com/TARA/QIF-T0032"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N3\u2013N7",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--b0ff3a51-d9ef-55dd-9bc7-6b5700eb73a6",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Identity erosion (long-term personality drift)",
+      "description": "Long-term subtle manipulation of cognitive patterns leading to gradual personality changes or identity confusion. Targets L14 (Identity/Cognitive Sovereignty). Detectable via longitudinal QI baseline comparison. Neurorights: psychological continuity.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0033",
+          "url": "https://qinnovate.com/TARA/QIF-T0033"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--fd6fa7a9-d3e2-5ff1-a223-e20a9e8abd45",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Working memory poisoning",
+      "description": "Inject false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0034",
+          "url": "https://qinnovate.com/TARA/QIF-T0034"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--43a53f90-010c-5d67-9645-5df053597e93",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "P300 interrogation",
+      "description": "Present stimuli designed to elicit P300 ERP responses revealing private knowledge (PINs, faces, locations). BCI app stores could embed interrogation stimuli in games. Demonstrated on consumer EEG (EMOTIV, NeuroSky).",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0035",
+          "url": "https://qinnovate.com/TARA/QIF-T0035"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--b52bb8b9-948e-5dcf-8d1f-1def5b681334",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Thought decoding (covert speech)",
+      "description": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0036",
+          "url": "https://qinnovate.com/TARA/QIF-T0036"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--56a249ef-108b-5ff3-a2be-09f3be3e5afc",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Agency manipulation",
+      "description": "Manipulate sense of agency -- user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0037",
+          "url": "https://qinnovate.com/TARA/QIF-T0037"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "N5\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--695f1796-5e40-5f56-994c-fbfdadd8c950",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Brainprint theft",
+      "description": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0038",
+          "url": "https://qinnovate.com/TARA/QIF-T0038"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--b3a1990c-e655-5a0b-9cb2-0ee599b9c77b",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Self-model corruption",
+      "description": "Corrupt the neural representation of self (body ownership, self-other boundary, autobiographical memory). Targets insula, TPJ, mPFC. Could cause depersonalization, dissociation, or false self-recognition. Neurorights: mental integrity.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0039",
+          "url": "https://qinnovate.com/TARA/QIF-T0039"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--af611e35-2fd3-5dca-b170-35c546744ec3",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neurophishing",
+      "description": "Present carefully designed visual/auditory/haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional) that reveal private information or prime the brain for subsequent attack. BCI app store is the attack surface.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0040",
+          "url": "https://qinnovate.com/TARA/QIF-T0040"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S3\u2192N7",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--d0f565bf-71a0-58c6-aebd-526c2fd97a6b",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Cognitive biometric inference",
+      "description": "Infer sensitive personal attributes (health conditions, sexual orientation, political beliefs, cognitive decline) from BCI usage metadata and neural signal statistics without decoding content. Side-channel on cognition.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0041",
+          "url": "https://qinnovate.com/TARA/QIF-T0041"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N6\u2013N7\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--4e436050-6633-5cd8-a14a-ad03623a5315",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "BLE/RF side-channel",
+      "description": "Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. Merges ONI-T002 (Side-Channel Analysis).",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0042",
+          "url": "https://qinnovate.com/TARA/QIF-T0042"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2013S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--5d3d961a-a812-5ddf-9046-6990cfe55acd",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Supply chain compromise (firmware backdoor)",
+      "description": "Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Merges ONI-T006 (Firmware Backdoor). QI-enhanced firmware attestation detects unauthorized modifications.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0043",
+          "url": "https://qinnovate.com/TARA/QIF-T0043"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2\u2013S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--ce2e8db7-79f2-5936-9fc5-c97d2659dd31",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Cloud infrastructure attack",
+      "description": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0044",
+          "url": "https://qinnovate.com/TARA/QIF-T0044"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--595cf7de-6007-57f3-bc42-ae13d011ad84",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Harvest-now-decrypt-later",
+      "description": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0045",
+          "url": "https://qinnovate.com/TARA/QIF-T0045"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--967794a0-d224-5a81-ac14-f0ebddc737a2",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "OTA firmware weaponization",
+      "description": "Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0046",
+          "url": "https://qinnovate.com/TARA/QIF-T0046"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2\u2013S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--81f39616-5af2-599d-be45-a974012ce5d3",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Mass BCI compromise (platform attack)",
+      "description": "Coordinated attack exploiting standardized BCI platforms affecting millions simultaneously. Yale Digital Ethics Center worst-case scenario. Monoculture risk: one vulnerability, all devices. Merges ONI-T024 (Mass Neural Manipulation).",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0047",
+          "url": "https://qinnovate.com/TARA/QIF-T0047"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S2\u2013S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--91193e57-b7d4-56fd-ae14-c2f56c6de273",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Electrode compromise (physical tamper)",
+      "description": "Physical manipulation or replacement of neural electrodes to inject malicious signals or intercept legitimate neural data. Impedance monitoring detects electrode tampering. Tamper-evident seals for implants.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0048",
+          "url": "https://qinnovate.com/TARA/QIF-T0048"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--0beba944-0c1a-588a-b184-f1d961dbb0ad",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Wireless authentication bypass",
+      "description": "Exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0049",
+          "url": "https://qinnovate.com/TARA/QIF-T0049"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S2\u2013S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--db0fa22c-bf97-5c3c-8f69-0b60781c10de",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Hardware fault injection (voltage/EM glitching)",
+      "description": "Physical attack using voltage glitches, clock manipulation, or electromagnetic pulses to induce faults in BCI processor. Can bypass security checks, extract cryptographic keys, or cause unpredictable stimulation behavior. Requires physical proximity to device.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0050",
+          "url": "https://qinnovate.com/TARA/QIF-T0050"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2013S2",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--d3af7a43-0077-5758-94c2-3c3a2e32c6dc",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neural data privacy breach",
+      "description": "Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0051",
+          "url": "https://qinnovate.com/TARA/QIF-T0051"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N1\u2013S3",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--8f09be86-0c76-5bcd-9ccd-39da1089bf38",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "ERP harvesting",
+      "description": "Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes. BCI apps can embed covert stimulus-response protocols.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0052",
+          "url": "https://qinnovate.com/TARA/QIF-T0052"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--1f6e5559-7857-5be1-90b4-e0624f24bb9e",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Cognitive state capture",
+      "description": "Record patterns that reveal attention, emotion, fatigue, or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0053",
+          "url": "https://qinnovate.com/TARA/QIF-T0053"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--93e79858-676b-5dde-9efa-737a9b0edcea",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Memory extraction",
+      "description": "Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0054",
+          "url": "https://qinnovate.com/TARA/QIF-T0054"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--34c76beb-d468-59f8-b533-4ce4e39e1141",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "BCI cognitive warfare",
+      "description": "State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0055",
+          "url": "https://qinnovate.com/TARA/QIF-T0055"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S3\u2192N4\u2013N7",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--6e88f06d-9edb-5e74-a3ce-99b0d62f76b9",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neuro-surveillance",
+      "description": "Systematic collection of neural data from consumer BCI populations for surveillance purposes. Workplace attention monitoring, law enforcement lie detection, social credit via neural markers. Neurorights: mental privacy.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0056",
+          "url": "https://qinnovate.com/TARA/QIF-T0056"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N6\u2013N7\u2192S3",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--22350e73-c27c-5e09-8c89-64e5d5f9e02f",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Network mapping (BCI topology)",
+      "description": "Discover topology of BCI networks: communication pathways between electrodes, processing units, and external interfaces. Prerequisite for targeted attacks. Deploy honeypot nodes and dynamic addressing.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0057",
+          "url": "https://qinnovate.com/TARA/QIF-T0057"
+        }
+      ],
+      "x_qif_severity": "low",
+      "x_qif_bands": "S2\u2013S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--f345a5fe-20cf-5b52-8531-423f1a996773",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Calibration poisoning",
+      "description": "Subtly corrupt BCI calibration data to maintain influence over signal interpretation across device resets. Cryptographically signed calibration data prevents. Recalibration audits detect drift.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0058",
+          "url": "https://qinnovate.com/TARA/QIF-T0058"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2013S2",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--98696073-6c57-5c9a-8739-db887c6ae5f9",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Pattern lock (learned pathway persistence)",
+      "description": "Embed recurring attack patterns that survive system resets by exploiting learned neural pathways or stored calibration data. Leverages neuroplasticity -- brain adapts to malicious patterns, making them harder to remove.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0059",
+          "url": "https://qinnovate.com/TARA/QIF-T0059"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2013S2\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--ce8c84ed-21f1-5076-bc14-6b5890acda57",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Memory implant (cross-session persistence)",
+      "description": "Persistent modification of neural pathway configurations or cognitive associations that survive across BCI sessions. Targets long-term potentiation mechanisms. Session isolation prevents cross-session contamination.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0060",
+          "url": "https://qinnovate.com/TARA/QIF-T0060"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N6\u2013N7",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--ecbbc532-73cc-5e2b-ad20-69fdc1d4fcf8",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Coherence mimicry",
+      "description": "Craft malicious signals that maintain legitimate coherence scores (Cs) to bypass QI metric. Directly attacks QIF's detection mechanism. Defense: multi-factor signal validation, behavioral analysis beyond coherence, ensemble detection.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0061",
+          "url": "https://qinnovate.com/TARA/QIF-T0061"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2013S1",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--13d028fe-c965-5eb6-a21b-d6d8798eed57",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Gradual drift (slow parameter shift)",
+      "description": "Slowly modify neural parameters below detection thresholds to accumulate significant changes over time. Exploit adaptive baseline algorithms. Cumulative change detection and trend analysis are primary defenses.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0062",
+          "url": "https://qinnovate.com/TARA/QIF-T0062"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--a17da97f-6144-5652-9e5b-a5393c0cf4f3",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Noise injection (detection masking)",
+      "description": "Add carefully calibrated noise to mask malicious signal components from detection algorithms. Targets QI's sigma-phi (phase) and sigma-gamma (amplitude) terms. Multi-channel cross-validation detects inconsistent noise patterns.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0063",
+          "url": "https://qinnovate.com/TARA/QIF-T0063"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "I0\u2013S1",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--93624a4b-1282-5a6a-98ce-7045f5bfc8a2",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "User consent fatigue (neural permission flooding)",
+      "description": "Flood user with BCI-mediated permission requests until cognitive fatigue leads to reflexive approval of malicious requests. Exploits the neural-intent interface where 'yes/no' decisions may be captured from brain signals. BCI app ecosystems with frequent permission prompts are the attack surface.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0064",
+          "url": "https://qinnovate.com/TARA/QIF-T0064"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S2\u2013S3\u2192N7",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--08caec24-689c-5428-9928-2f422faa7185",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Algorithmic psychosis induction (recommendation weaponization)",
+      "description": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI \u2014 it operates through normal sensory channels (screen \u2192 eyes \u2192 visual cortex \u2192 limbic system \u2192 prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0065",
+          "url": "https://qinnovate.com/TARA/QIF-T0065"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S3\u2192S2\u2192N5\u2013N7",
+      "x_qif_dual_use": "possible"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--f6537b76-0f12-5c93-baa1-bb67082da1c7",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Slow drift / boiling frog (adiabatic phase space manipulation)",
+      "description": "Manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0045), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0066",
+          "url": "https://qinnovate.com/TARA/QIF-T0066"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2192N1\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--998e23ee-7057-52e0-8823-78044d413d5d",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
+      "description": "Replay recorded or GAN-synthesized neural signals that reproduce the dynamical system trajectory of legitimate brain activity. 20 verified attack methods exist (2012-2025) spanning RF injection (Brain-Hack), GAN synthesis (ATGAN, EEG-GAN), template replay, subliminal probing (66.7% success), and adversarial ML (Professor X backdoors, universal perturbations). Current BCI systems have 0% detection rate against sophisticated replays. CRITICAL DUAL-USE: The same replay physics enables therapeutic applications (vision restoration, sensory prosthetics). Defense: Biological TLS validation (spatial dipole patterns, H-H temporal compliance, 1/f scaling, microstate compliance, challenge-response), phase space attractor geometry validation. Priority case study per Kevin. Derivation Log Entries 45-46.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0067",
+          "url": "https://qinnovate.com/TARA/QIF-T0067"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192I0\u2192N1\u2013N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--ec95830f-4061-58b6-88ee-d0bf43c8ec89",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Bifurcation forcing (critical parameter manipulation to trigger neural state transitions)",
+      "description": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting\u2192seizure, sleep\u2192wake, focused\u2192confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) \u2014 a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0068",
+          "url": "https://qinnovate.com/TARA/QIF-T0068"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "I0\u2192N1\u2013N5",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--cc979f0d-e40a-5aef-99fb-e3c386362336",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Separatrix leakage (meta-biometric extraction from dynamical transition observations)",
+      "description": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry \u2014 the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0069",
+          "url": "https://qinnovate.com/TARA/QIF-T0069"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "N3\u2013N7\u2192I0\u2192S1",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--34ddc816-8297-52b0-a1a6-fe6d267b6cdb",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Integrator/resonator type switching (tonic excitability manipulation)",
+      "description": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization \u2014 effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0070",
+          "url": "https://qinnovate.com/TARA/QIF-T0070"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "I0\u2192N1\u2013N4",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--bf2fe35c-5f50-5eb5-a52a-54bb0632fd67",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Baseline adaptation poisoning (re-enrollment window exploitation)",
+      "description": "Exploit the re-enrollment or adaptive baseline update window in BCI authentication systems. When a BCI recalibrates (daily calibration, post-seizure reset, firmware update, drift correction), inject adversarial signals during the enrollment period to corrupt the stored baseline. Three windows: (1) initial enrollment, (2) periodic recalibration, (3) drift-triggered adaptation. Once the baseline is poisoned, all subsequent authentication is compromised. This is the fundamental vulnerability that motivated QIF's baseline-free 'Biological TLS' architecture: by validating signals against universal biological physics (spatial dipole patterns, H-H compliance, 1/f scaling, microstates) rather than individual baselines, the entire attack surface is eliminated. Defense: Biological TLS validation (no baselines needed), multi-session enrollment consistency checks, anomaly detection during calibration windows. Derivation Log Entry 46.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0071",
+          "url": "https://qinnovate.com/TARA/QIF-T0071"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192I0",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--5ab0aefc-24eb-56cd-8520-fcb125e65086",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Transducer inversion (acoustic eavesdropping via speaker-to-microphone reprogramming)",
+      "description": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional \u2014 a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0072",
+          "url": "https://qinnovate.com/TARA/QIF-T0072"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--cfc0ed60-6c3b-5220-ba17-de0807e15807",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Ear-canal neural eavesdropping via modified consumer earbud (supply chain in-ear EEG)",
+      "description": "The ear canal is 5-10mm from temporal cortex through the canal wall and temporal bone \u2014 close enough for a conductive ear tip with a high-gain biopotential amplifier to capture cortical EEG. Commercial in-ear EEG has been proven viable (Idun Guardian, cEEGrid, Cognionics). In a supply chain attack, a consumer earbud is modified to include: (1) a conductive silicone ear tip that makes galvanic contact with ear canal skin, (2) a sub-$5 biopotential amplifier (e.g., ADS1299 or TI ADS129x family) hidden in the earbud housing, and (3) modified firmware that multiplexes captured EEG data alongside normal audio. The captured signals include auditory evoked potentials (AEP), P300 attention markers, N400 semantic processing indicators, and alpha/theta power reflecting cognitive state. Generic earbuds lacking proprietary authentication (unlike Apple AirPods with W1/H1 chip) are the attack surface. The attacker gets continuous neural telemetry from a device the target wears voluntarily for hours daily. This is the bridge technique between QIF-T0072 (acoustic eavesdropping) and QIF-T0074 (cognitive inference): it turns a consumer audio device into a covert neural recording platform.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0073",
+          "url": "https://qinnovate.com/TARA/QIF-T0073"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192I0\u2192N1\u2013N3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--82643c40-723c-5d00-86b2-1d9a75644535",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Cognitive inference from longitudinal in-ear EEG (personalized cognitive profiling)",
+      "description": "Given continuous in-ear EEG from QIF-T0073, an ML pipeline trained on the target's neural data over days-to-weeks builds a personalized cognitive profile. Phase 1: baseline extraction (resting alpha power, theta/beta ratio, individual alpha frequency). Phase 2: event-related feature learning (P300 amplitude to stimuli, N400 to semantic content, auditory steady-state responses). Phase 3: longitudinal pattern recognition (attention cycles, emotional valence responses, fatigue signatures, cognitive load indicators). Phase 4: adaptive exploitation \u2014 the attacker can now predict the target's cognitive state in real-time and optimize content delivery (ads, misinformation, persuasion) to moments of maximal susceptibility (high theta/low beta = low vigilance, elevated P300 = high attention to specific content). This is the cognitive analog of behavioral advertising but operating on neural signals rather than click patterns. Foundation models for EEG (BENDR, LaBraM) make transfer learning from small per-user datasets feasible. The attack chain is: QIF-T0072 (acoustic access) \u2192 QIF-T0073 (neural data capture) \u2192 QIF-T0074 (cognitive exploitation).",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0074",
+          "url": "https://qinnovate.com/TARA/QIF-T0074"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "N3\u2013N7\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--0890e727-bad0-5a79-9909-6dea46a5ef00",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Ultrasonic sonar vital sign extraction (inaudible Doppler physiological sensing)",
+      "description": "A phone or earbud speaker emits an inaudible continuous-wave ultrasonic tone (18-22 kHz, within transducer bandwidth but above human hearing threshold). The built-in microphone captures the reflected signal. Chest wall motion from breathing (amplitude: ~5mm) and heartbeat (amplitude: ~0.1mm) create Doppler shifts in the reflected ultrasound that are demodulable with standard DSP. The technique is: (1) covert \u2014 the ultrasonic tone is inaudible to the target, (2) contactless \u2014 works from across a room (demonstrated up to 0.5m for heart rate, several meters for respiration), (3) requires NO hardware modification \u2014 stock smartphone speakers and microphones are sufficient, and (4) can be deployed as a background process in any app with microphone permission. Google's Nest Hub Sleep Sensing and academic research (UltraSense, Nandakumar et al.) have demonstrated production-quality vital sign extraction via this method. Attack scenario: any app with mic access silently emits ultrasound and extracts heart rate, breathing rate, and movement patterns. Combined with QIF-T0079 (ear canal fingerprinting), the attacker gets identity + vitals from the same acoustic pipeline.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0075",
+          "url": "https://qinnovate.com/TARA/QIF-T0075"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--dafeaa71-ad5b-5ae4-8c15-1e12ec98d386",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Haptic motor body sonar (taptic engine repurposing for tissue impedance profiling)",
+      "description": "A phone's haptic actuator (e.g., Apple Taptic Engine, linear resonant actuator) is driven at known frequencies (100 Hz - 5 kHz sweep) while in contact with the body. The built-in accelerometer and/or microphone measures the tissue response: acoustic impedance varies by tissue type (bone, muscle, fat, fluid), depth, and composition. This is a simplified form of acoustic impedance spectroscopy or elastography using consumer hardware. The technique requires: (1) physical contact between device and body (phone against skin), (2) firmware-level or jailbreak access to drive the haptic motor at arbitrary frequencies (consumer APIs limit haptic patterns), and (3) raw accelerometer access at high sample rates. Potential extractions: body composition estimation, subcutaneous fluid detection (edema), bone density approximation, tissue stiffness changes. This is significantly lower resolution than clinical ultrasound elastography but could distinguish gross tissue categories. The attack surface is narrow (requires physical contact + firmware access), but wearable devices (Apple Watch, fitness bands) that maintain constant skin contact and contain both haptic motors and accelerometers present an always-on version of this attack.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0076",
+          "url": "https://qinnovate.com/TARA/QIF-T0076"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2192S2",
+      "x_qif_dual_use": "probable"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--2b6ba010-7fa3-5f33-bb9e-dded5ff067f0",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "IR vascular mapping via Face ID system (NIR hemoglobin absorption imaging)",
+      "description": "Apple's Face ID TrueDepth system projects 30,000 infrared dots at 940nm onto the user's face and reads the reflection pattern with an IR camera. At 940nm, photons penetrate skin to a depth of 2-5mm \u2014 well into the dermal vascular layer. Oxygenated hemoglobin (HbO2) and deoxygenated hemoglobin (Hb) have different absorption coefficients at 940nm, meaning the reflected dot pattern encodes subsurface vascular topology: arterial vs venous vessels, vessel diameter, branching patterns, and oxygenation gradients. This vascular map is a permanent biometric (unlike facial features, which change with age/surgery/expression) and is unique per individual (even identical twins have different vascular topology). In the attack scenario, a jailbroken iPhone or compromised Face ID firmware extracts raw IR reflection data (normally processed in the Secure Enclave and discarded) during routine phone unlock. The target never knows their vascular biometric has been captured. Every phone unlock becomes a silent biometric scan. This is analogous to fingerprinting (unreplaceable biometric) but captured at range and without the target's awareness. Combined with QIF-T0078 (pulse waveform), the same IR system yields both vascular structure and cardiac dynamics.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0077",
+          "url": "https://qinnovate.com/TARA/QIF-T0077"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--f8ec7517-b036-53e7-b064-a6335620fe21",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "LiDAR remote pulse detection (laser Doppler vibrometry for cardiac waveform extraction)",
+      "description": "The iPhone LiDAR scanner uses a VCSEL (vertical-cavity surface-emitting laser) array emitting pulsed 940nm infrared laser light and a SPAD (single-photon avalanche diode) detector array measuring time-of-flight. In normal operation, it measures depth for AR applications. However, the same hardware can function as a simplified laser Doppler vibrometer (LDV): when the laser beam reflects off skin, the pulse wave from cardiac activity causes micro-vibrations (amplitude ~1-10 \u00b5m) on the skin surface. These vibrations create measurable Doppler shifts or time-of-flight variations in the reflected laser signal. Extracting the cardiac pulse waveform from LiDAR data requires raw access to the SPAD photodetector output (timing resolution in picoseconds) rather than the processed depth map. This requires either a jailbreak, hardware teardown, or compromised firmware. The extracted pulse waveform contains: heart rate, heart rate variability (HRV), pulse transit time (correlated with blood pressure), and potentially cardiac arrhythmia signatures. Unlike QIF-T0075 (ultrasonic sonar), this is optical and directional, requiring line-of-sight but working at greater precision for skin-surface vibrations. Range is limited to ~5m (LiDAR operational range) but could be extended with higher-power laser sources.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0078",
+          "url": "https://qinnovate.com/TARA/QIF-T0078"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--30aab200-4aa1-5611-b836-125a11e5804d",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Ear canal acoustic fingerprinting (ANC echo profiling for covert identification)",
+      "description": "Active noise cancellation (ANC) earbuds already contain the complete hardware for ear canal acoustic fingerprinting: an inward-facing (feedback) microphone that measures sound inside the ear canal, an outward-facing (feedforward) microphone, and a speaker that can emit probe tones. When the speaker emits a broadband chirp or swept sine, the inward-facing microphone captures the echo profile shaped by the ear canal's unique geometry: length (~25mm), diameter (~7mm), tympanic membrane compliance, and the specific curvature of the bends. This acoustic transfer function is a biometric \u2014 NEC demonstrated it for authentication with >99% accuracy. In the attack scenario, the ANC system's existing probe tones (used for adaptive fit detection and transparency mode calibration) are leveraged to silently fingerprint the wearer without their knowledge. The earbuds know WHO is wearing them at all times. Combined with audioplethysmography (PPG via in-ear speaker/mic measuring blood volume changes), the same hardware simultaneously provides identity + heart rate: a silent surveillance pipeline requiring zero hardware modification on ANC earbuds. Attack surface: firmware update, compromised ANC calibration routine, or malicious SDK in earbud companion app.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0079",
+          "url": "https://qinnovate.com/TARA/QIF-T0079"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--2e7f2fb8-e74a-53a9-8be7-51876828aca5",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Gyroscope acoustic eavesdropping (MEMS speech capture via resonant frequency aliasing)",
+      "description": "MEMS gyroscopes in smartphones sample at 100-200 Hz, with mechanical resonant frequencies in the audible speech range (100-8000 Hz). When sound waves strike the MEMS proof mass, they induce vibrations that alias into the gyroscope output. Michalevsky et al. (2014) demonstrated that gyroscope data alone can reconstruct intelligible speech features, identify speakers, and detect spoken digits \u2014 all without microphone permission. Android allowed gyroscope access without any permission until API level 33. This creates a covert audio surveillance channel through an 'inertial' sensor that apps access freely. Combined with accelerometer data (T0081), reconstruction quality improves significantly. The attack requires no hardware modification \u2014 only a software app with motion sensor access.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0080",
+          "url": "https://qinnovate.com/TARA/QIF-T0080"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--a51237c6-117e-5e20-ad54-377f3bd1c1a1",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Accelerometer speech reconstruction (vibration-to-audio via surface-coupled MEMS)",
+      "description": "Modern smartphone accelerometers (ADXL345, BMI270) have sufficient sensitivity to capture speech vibrations transmitted through surfaces. When a phone lies on a table during a conversation, or is held against the ear during a call, speech vibrations propagate through the phone chassis to the MEMS accelerometer. Ba et al. (2020) used deep learning to reconstruct intelligible speech from accelerometer data alone, achieving speaker identification and keyword recognition. Unlike the gyroscope attack (T0080), accelerometers benefit from direct surface coupling \u2014 speech vibrations transmitted through desks, tables, or the user's hand provide stronger signal. Like T0080, accelerometer access required no permission on Android until recent API changes. The combination of gyroscope + accelerometer data (sensor fusion) significantly improves reconstruction quality over either sensor alone.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0081",
+          "url": "https://qinnovate.com/TARA/QIF-T0081"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--2d96496c-44a9-5d04-ad4c-442b7bec7c5d",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Ultrasonic cross-device tracking (inaudible beacon correlation for user identification)",
+      "description": "Advertisers and tracking firms embed inaudible ultrasonic beacons (18-22 kHz) in TV commercials, web ads, and in-store audio. Any device with microphone access (phone, tablet, smart speaker) within acoustic range can detect these beacons and report them to a tracking server. This enables cross-device user identification (linking phone, laptop, TV viewing), physical location tracking (in-store beacons), and de-anonymization of Tor/VPN users (TV ad beacons correlate with browsing sessions). Silverpush was found embedded in 234 Android apps (2017). The beacons are inaudible to humans but easily detected by consumer microphones. Combined with QIF-T0075 (ultrasonic sonar), the same frequency band serves both tracking and physiological surveillance. This technique requires no hardware modification \u2014 only software with microphone permission.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0082",
+          "url": "https://qinnovate.com/TARA/QIF-T0082"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--89be9d2f-1fde-5275-abda-3154b1c92197",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Acoustic keystroke inference (typing sound classification for credential extraction)",
+      "description": "Each key on a keyboard produces a subtly different acoustic signature based on its position, the mechanical structure beneath it, and the user's typing dynamics. Harrison & Matyunin (2023) achieved 95% keystroke classification accuracy using a deep learning model trained on laptop keyboard audio captured by a nearby phone. The attack works over Zoom/Skype calls (Compagno et al. 2017), enabling remote credential theft during video conferences. Attack scenarios: (1) malicious app with microphone access on the same desk, (2) nearby compromised smart speaker, (3) during a video call where keyboard sounds leak through the microphone. This technique pairs with accelerometer keystroke inference (T0087) for multi-modal confirmation, significantly reducing error rates.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0083",
+          "url": "https://qinnovate.com/TARA/QIF-T0083"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--0fd787a1-49b1-5a14-af89-edbf2eccbf21",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Remote photoplethysmography (camera-based pulse and blood oxygen extraction)",
+      "description": "Standard RGB webcams and phone cameras can detect the subtle skin color changes caused by blood volume pulses beneath the skin surface. Each heartbeat modulates hemoglobin concentration in facial capillaries, creating sub-pixel intensity variations in the green channel (540nm peak absorption of hemoglobin). Modern deep learning models (DeepPhys, EfficientPhys) extract heart rate, heart rate variability, breathing rate, and blood oxygen saturation from webcam video with near-clinical accuracy \u2014 even through video compression artifacts on Zoom/Teams calls. Attack scenario: any app with camera access (video call, face filter, AR app) silently extracts physiological data. The user consents to video, not to vital sign monitoring. This technique has been demonstrated at distances up to 3m with consumer cameras and works under variable ambient lighting conditions.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0084",
+          "url": "https://qinnovate.com/TARA/QIF-T0084"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--9b2c8272-ba12-5c99-929a-b1223c4be9a7",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Eye tracking cognitive state inference (gaze pattern analysis for attention and intent profiling)",
+      "description": "Eye tracking hardware is now standard in AR/VR headsets (Apple Vision Pro, Meta Quest Pro, PSVR2) and available as peripherals for laptops (Tobii). Gaze patterns reveal far more than where someone looks: pupil dilation indicates cognitive load and arousal, saccade patterns reveal reading comprehension and attention, fixation duration maps interest and engagement, and smooth pursuit movements indicate prediction and anticipation. Research has demonstrated extraction of: sexual orientation, political affiliation, cognitive disorders (ADHD, dyslexia, autism), emotional state, deception, and even personality traits from eye tracking data alone. In VR/AR headsets, eye tracking runs continuously for foveated rendering (a legitimate performance optimization), creating an always-on cognitive surveillance channel. The user consents to eye tracking for UI interaction, not for cognitive profiling. This is the closest consumer-sensor analog to neural eavesdropping without any BCI hardware.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0085",
+          "url": "https://qinnovate.com/TARA/QIF-T0085"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192N3\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--9e0879b1-1ef9-5868-a679-6775f36c0679",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Ambient light sensor side-channel exfiltration (screen content inference via reflected light)",
+      "description": "Ambient light sensors (ALS) in smartphones and tablets are low-resolution photometers (typically 16-bit, 10-100 Hz) that measure environmental illumination for auto-brightness. Since the ALS is near the display, it also captures light reflected back from the display itself and from nearby surfaces illuminated by the display. This creates a side channel: the ALS output correlates with screen content. While the ALS cannot reconstruct a full image, it can distinguish between dark and light screens, detect page scrolling patterns, identify video content by temporal light signatures, and in some cases infer text content via character-level luminance patterns. Crucially, ALS access requires no permission on most mobile platforms \u2014 it's treated as a low-risk environmental sensor. This makes it an unrestricted exfiltration channel for screen activity patterns.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0086",
+          "url": "https://qinnovate.com/TARA/QIF-T0086"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--f1defd18-e815-5680-a88c-657e43b55aa2",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Accelerometer keystroke inference (touchscreen tap localization for PIN/password recovery)",
+      "description": "When a user taps on a touchscreen, the phone tilts slightly depending on the tap location relative to the device's center of mass. The accelerometer and gyroscope capture these micro-tilts, and the pattern differs for each key position on the virtual keyboard. Owusu et al. (2012) demonstrated 4-digit PIN recovery from accelerometer data alone, and Miluzzo et al. (2012) showed that tap signatures are consistent enough for user identification. The attack works because: (1) different screen positions produce distinct tilt vectors, (2) typing rhythm provides temporal constraints, and (3) language models constrain character sequences. Combined with acoustic keystroke inference (T0083), the multi-modal approach achieves near-perfect accuracy. Since motion sensor access traditionally required no permission, any app could silently capture PIN entry.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0087",
+          "url": "https://qinnovate.com/TARA/QIF-T0087"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--5d0bf8c5-bfa4-5e81-8ed9-070973197984",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Gait biometric identification (IMU-based walking pattern fingerprint for persistent tracking)",
+      "description": "Every person has a unique gait signature determined by limb length ratios, joint flexibility, muscle strength distribution, and neurological motor control patterns. Smartphone IMU sensors (accelerometer + gyroscope) carried in a pocket capture this signature with high fidelity \u2014 Muaaz & Mayrhofer (2017) achieved >95% identification accuracy across 175 subjects. The gait signature is: (1) difficult to spoof (requires altering unconscious motor patterns), (2) captured passively (phone in pocket during normal walking), (3) persistent across sessions and devices, and (4) capturable without any explicit permission. Gait biometrics enable persistent user tracking even when other identifiers (cookies, device IDs, face) are unavailable. Combined with T0089 (neurological profiling), gait data also reveals health conditions affecting motor control.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0088",
+          "url": "https://qinnovate.com/TARA/QIF-T0088"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--26354957-4562-5cfe-926d-b8a33f9ba37e",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Tremor and movement neurological profiling (IMU-based motor disorder detection and health inference)",
+      "description": "Smartphone IMU sensors can detect pathological tremor patterns characteristic of neurological conditions: Parkinson's resting tremor (4-6 Hz), essential tremor (8-12 Hz), cerebellar tremor (3-5 Hz), and physiological tremor changes from medication, fatigue, or substance use. The mPower study (Bot et al. 2016) enrolled 16,000 participants and demonstrated that smartphone sensor data alone can distinguish Parkinson's patients from healthy controls with >90% accuracy. Beyond tremor, fine motor control degradation (touchscreen interaction patterns, typing dynamics) reveals cognitive decline, medication effects, intoxication levels, and fatigue. This is covert neurological diagnosis without the subject's knowledge or consent \u2014 the phone becomes a continuous neurological monitor. The data reveals protected health information about neurological conditions, substance use, and cognitive function from sensors that require no permission.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0089",
+          "url": "https://qinnovate.com/TARA/QIF-T0089"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192N1\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--d96586b3-8df0-5e0a-96ff-fa4d4ab85c26",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "WiFi CSI passive body sensing (through-wall vital signs, 3D pose reconstruction, respiratory and gait biometric inference via dedicated or commodity WiFi hardware)",
+      "description": "WiFi Channel State Information (CSI) captures the multipath propagation characteristics between WiFi transmitter and receiver. Human body movements \u2014 including breathing (chest wall motion ~5mm), heartbeat (body surface vibration ~0.1mm), and walking \u2014 modulate the WiFi signal propagation paths. Two attack profiles: (1) DEDICATED HARDWARE \u2014 modified firmware on CSI-capable APs enables through-wall sensing (2-3 standard walls), 3D pose reconstruction, and multi-person vital sign extraction at up to 8m range. (2) CONSUMER-GRADE \u2014 standard WiFi chipsets (Intel 5300, Atheros, ESP32) with CSI-enabled drivers extract respiratory rate (\u00b11 bpm at 3m) and gait identity (93% single-person, 78% multi-person) without dedicated hardware. Respiratory modulation: phase shift \u0394\u03c6 = 4\u03c0\u00d7\u0394d/\u03bb \u2248 0.4-1.2 radians at 5 GHz (chest displacement 4-12mm). Gait produces Doppler shifts f_d = 2v\u00d7cos(\u03b8)/\u03bb \u2248 40 Hz at walking speed. CSI matrix: H(f,t) \u2208 C^(N_tx \u00d7 N_rx \u00d7 N_sub). CRITICAL REGULATORY GAP: Respiratory rate = PHI under HIPAA (45 CFR 160.103) when linked to individual. Gait biometric = special category data under GDPR Art. 9. No consent mechanism exists for incidental WiFi CSI health data collection \u2014 a router collecting CSI for 'network optimization' simultaneously collects respiratory data from everyone in range. This is passive radar using existing infrastructure.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0090",
+          "url": "https://qinnovate.com/TARA/QIF-T0090"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--99df24e2-6722-5350-a39d-2ea4220c8ff9",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "BLE physical-layer device fingerprinting (radio frequency imperfection tracking)",
+      "description": "Every Bluetooth Low Energy (BLE) transmitter has unique analog imperfections in its radio hardware: carrier frequency offset (CFO), I/Q imbalance, power amplifier nonlinearity, and phase noise characteristics. These imperfections are manufacturing artifacts that are stable, unique per device, and impossible to change via software \u2014 they are the RF equivalent of a fingerprint. Becker et al. (2022) demonstrated that BLE physical-layer fingerprinting can track devices even when using MAC address randomization (the privacy feature specifically designed to prevent tracking). This defeats Apple's and Google's BLE privacy protections. Attack scenario: passive BLE receivers at strategic locations (malls, airports, streets) fingerprint passing devices. The user's phone continuously advertises BLE (for AirDrop, Find My, COVID exposure notifications), and each advertisement carries the device's unchangeable RF fingerprint. This enables persistent location tracking despite all software-level privacy measures.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0091",
+          "url": "https://qinnovate.com/TARA/QIF-T0091"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--68d927f2-8f1d-5efa-96a3-0015c9a60768",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Thermal facial stress and emotion inference (IR thermography for autonomic nervous system state extraction)",
+      "description": "The autonomic nervous system modulates facial skin temperature through vasoconstriction/vasodilation in response to stress, cognitive load, deception, arousal, and emotional states. Periorbital temperature (around the eyes) drops during stress as blood redirects to core muscles. Nasal tip temperature correlates with cognitive load. Forehead temperature maps to anxiety. Thermal cameras (LWIR, 8-14 \u00b5m) capture these patterns contactlessly. While consumer thermal cameras are not yet standard in phones, they are available as accessories (FLIR One, Seek Thermal), integrated into some laptops (for presence detection), and standard in many security/surveillance systems. Pavlidis et al. (2002) demonstrated thermal imaging as a polygraph alternative. As thermal sensors become cheaper and more integrated into consumer devices, this becomes a passive emotion/stress surveillance channel.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0092",
+          "url": "https://qinnovate.com/TARA/QIF-T0092"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--68bc7678-c80c-5b94-8188-62a3daf1530f",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "PPG pulse waveform biometric identification (cardiac signature fingerprinting via wearable optical sensor)",
+      "description": "Photoplethysmography (PPG) sensors in smartwatches and fitness trackers measure blood volume changes through green LED light reflected from the wrist. The PPG waveform shape is unique per individual \u2014 determined by cardiac output, arterial stiffness, vessel geometry, and autonomic tone. Biswas et al. (2019) demonstrated >98% identification accuracy using deep learning on PPG waveforms. Unlike heart rate (a single number), the full PPG waveform is a rich biometric containing: pulse amplitude, dicrotic notch depth, systolic/diastolic ratio, pulse transit time, and waveform morphology. This biometric is continuously captured by any wearable with a heart rate sensor (Apple Watch, Fitbit, Galaxy Watch, Oura Ring). The user consents to heart rate monitoring, not to biometric identification from their cardiac waveform. Combined with T0088 (gait) and T0079 (ear canal), the attacker has three independent biometric channels from consumer devices.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0093",
+          "url": "https://qinnovate.com/TARA/QIF-T0093"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--6d222305-1210-598e-a36b-c98c15e674a0",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Magnetometer speaker-leakage eavesdropping (magnetic field emanation capture from speaker voice coils)",
+      "description": "Speaker voice coils are electromagnets \u2014 when driven by audio current, they produce proportional magnetic field emanations. Smartphone magnetometers (used for compass/navigation) are sensitive enough to detect these emanations from nearby speakers, earbuds, or headphones. Zhang et al. (2020) demonstrated that a smartphone's magnetometer placed within 10-20 cm of earbuds can reconstruct the audio being played, including speech. This creates an eavesdropping channel through magnetic emanations rather than acoustic leakage \u2014 it works even when the audio is not audible (noise-canceling headphones, low volume). Matyunin et al. (2019) showed that magnetometer data can also fingerprint websites and applications by their characteristic audio/vibration patterns. Magnetometer access requires no permission on most platforms, making this an unrestricted side channel.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0094",
+          "url": "https://qinnovate.com/TARA/QIF-T0094"
+        }
+      ],
+      "x_qif_severity": "high",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "silicon_only"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--1c3d3491-582b-5c6a-9c19-62ae066985cf",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Acoustic-to-neural profiling pipeline (consumer earbud escalation from audio to cognitive exploitation)",
+      "description": "This technique documents the complete escalation chain from a single compromised consumer earbud to cognitive profiling. The chain proceeds: (1) T0072 \u2014 Speaker-to-mic reprogramming gives ambient audio eavesdropping, (2) T0079 \u2014 Ear canal acoustic fingerprinting silently identifies the wearer, (3) T0073 \u2014 Modified earbud with conductive ear tip captures in-ear EEG, (4) T0074 \u2014 Longitudinal EEG data feeds ML model for cognitive profiling. The end state: a single pair of compromised earbuds provides identity + ambient audio + continuous neural telemetry + personalized cognitive vulnerability profile \u2014 all from a device the target voluntarily wears for hours daily. Each step in the chain has been independently demonstrated or is emerging. The complete chain represents a consumer-device pathway to cognitive exploitation without any traditional BCI hardware. This is the canonical example of why the S-domain exists: consumer sensors as a pre-BCI attack surface.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0095",
+          "url": "https://qinnovate.com/TARA/QIF-T0095"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192S3\u2192I0\u2192N1\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--79e67ab4-de7d-5a33-a159-2d6cd6a2053d",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Multi-modal biometric fusion attack (cross-sensor identity correlation for persistent tracking)",
+      "description": "By fusing biometric signatures from multiple consumer sensors \u2014 ear canal acoustics (T0079), gait pattern (T0088), BLE RF fingerprint (T0091), PPG waveform (T0093), and eye tracking (T0085 if VR/AR) \u2014 an attacker creates a multi-modal biometric profile that is virtually impossible to evade. Each individual biometric can potentially be disrupted (change earbuds, alter gait, disable Bluetooth), but the fusion of 3+ biometric channels provides robust identification even if individual channels are degraded. The fusion operates at the feature level (concatenated feature vectors) or decision level (majority voting across classifiers). This technique weaponizes the ubiquity of consumer sensors: the average person carries 10+ sensors across phone, watch, and earbuds. The combination creates a biometric surveillance net that no single privacy measure can defeat.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0096",
+          "url": "https://qinnovate.com/TARA/QIF-T0096"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--75b66da4-b8ca-53b7-a023-f4cae9ab347a",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Cross-device physiological correlation (phone + watch + earbuds comprehensive health profiling)",
+      "description": "The average consumer now carries 3+ sensor-equipped devices: smartphone (accelerometer, gyroscope, magnetometer, barometer, camera, microphone, ambient light, proximity, WiFi, BLE), smartwatch (PPG, accelerometer, gyroscope, SpO2, skin temperature, ECG), and earbuds (microphone, accelerometer, proximity, potentially EEG). By correlating physiological data across all devices simultaneously, an attacker builds a comprehensive health profile far exceeding what any single device captures: cardiac health (watch PPG + phone rPPG), respiratory health (phone ultrasonic + WiFi CSI), neurological health (earbud IMU tremor + phone motor patterns), mental health (watch HRV + earbud audio context + phone screen activity), and metabolic health (activity + sleep + heart rate patterns). The correlation also eliminates single-sensor noise and improves accuracy. This technique doesn't require hardware modification \u2014 only software-level data aggregation across apps on a shared platform (e.g., iOS HealthKit, Google Health Connect).",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0097",
+          "url": "https://qinnovate.com/TARA/QIF-T0097"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192S3\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--3271f56d-b6d8-5c19-967c-a358d2b2dbf1",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "WiFi + camera passive surveillance fusion (through-wall presence detection with visual identification)",
+      "description": "WiFi CSI (T0090) provides through-wall presence detection, vital signs, and coarse pose estimation but cannot visually identify targets. Cameras (T0084) provide visual identification and remote PPG but require line of sight. By fusing WiFi CSI and camera data, an attacker achieves persistent surveillance that combines the strengths of both: WiFi tracks targets through walls and identifies them by body shape/gait, while cameras provide visual identification when line of sight is available. The fusion enables: handoff tracking (camera identifies person entering a building, WiFi CSI tracks them inside), activity recognition (WiFi CSI classifies activity, camera confirms), and vital sign correlation (WiFi breathing rate + camera heart rate). Zhao et al. (2018) demonstrated that WiFi signals alone can reconstruct 2D human poses comparable to visual skeleton tracking. This creates a surveillance system that requires no devices on the target and works through physical barriers.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0098",
+          "url": "https://qinnovate.com/TARA/QIF-T0098"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192S3",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--f77605af-ae94-5a94-8657-f9a23e786e54",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
+      "description": "This capstone technique documents the full S-domain-to-BCI escalation kill chain: how consumer sensor exploitation serves as reconnaissance and preparation for subsequent BCI attacks. The chain proceeds in phases: (1) RECON \u2014 Consumer sensors (phone, watch, earbuds) establish behavioral baseline: gait patterns (T0088), cardiac signature (T0093), neurological profile (T0089), cognitive patterns (T0085 if VR/AR). (2) FINGERPRINT \u2014 Multi-modal biometric fusion (T0096) creates persistent identity profile. (3) PROFILE \u2014 Cross-device correlation (T0097) builds comprehensive health/cognitive baseline. (4) ESCALATE \u2014 When the target receives a BCI (medical implant, consumer neural interface), the attacker's pre-existing profile informs: optimal attack parameters for neural injection (calibrated to individual's neural baseline), personalized evasion of anomaly detection (trained on their 'normal'), and targeted cognitive exploitation (leveraging known cognitive vulnerabilities). The S-domain reconnaissance makes BCI attacks more effective, more targeted, and harder to detect. This technique represents the strategic justification for the entire S-domain: consumer sensors are the advance scout for future BCI exploitation.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0099",
+          "url": "https://qinnovate.com/TARA/QIF-T0099"
+        }
+      ],
+      "x_qif_severity": "critical",
+      "x_qif_bands": "S1\u2192S2\u2192S3\u2192I0\u2192N1\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--5a69bbc7-4928-5b64-a97c-a48d82bdff9f",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Neural steganographic encoding (inaudible audio watermarking for covert neural command/biofingerprint channel)",
+      "description": "Embedding data in audio signals below the human hearing threshold (>18 kHz ultrasonic or <20 Hz infrasonic) or within psychoacoustic masking bands of audible content. The encoded signal is imperceptible to the listener but decodable by a receiver with knowledge of the encoding scheme. In the adversarial case, the hidden channel carries covert commands, tracking identifiers, or subliminal cues targeting auditory processing pathways (e.g., triggering pre-conditioned responses or influencing decision-making). In the protective case, the same physics enables steganographic embedding of neural biofingerprints for authentication \u2014 the signal evokes a measurable auditory evoked potential (AEP) unique to the individual's cochlear geometry and auditory cortex response, functioning as a biometric watermark. Initial enrollment/profiling phase required to capture individual's unique AEP response. Practical constraints include target device's ability to accurately reproduce encoded frequencies and effective transmission range (1-10m). Psychoacoustic masking threshold follows: T_mask(f) = L_masker - (sf \u00d7 |f - f_masker|) where sf is the spreading factor (~25 dB/Bark on upper slope, ~10 dB/Bark on lower slope). Auditory steady-state response (ASSR) at 40 Hz provides the mechanism for neural biofingerprint verification. Proves TARA's cross-domain dual-use thesis: same physics operates as attack vector, defense mechanism, and therapeutic tool.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0100",
+          "url": "https://qinnovate.com/TARA/QIF-T0100"
+        }
+      ],
+      "x_qif_severity": "low",
+      "x_qif_bands": "S3\u2192S1\u2192I0\u2192N1\u2192N4\u2192N7",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--e5e44e3c-3f7c-5bd5-9b6e-e36c96c858b8",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Multi-modal keystroke inference via acoustic-optical-RF fusion (password/input recovery without mic/camera permissions)",
+      "description": "Fusion of three independent side channels from a single mobile device to reconstruct user input without requiring microphone, camera, or accessibility permissions. (1) Keystroke acoustic emanations: each key press produces a distinct acoustic signature (1-20 kHz broadband impulse, classifiable via MFCC + CNN at ~95% accuracy on laptops, lower but still viable on touchscreens). (2) Screen optical emission: display luminance changes of ~0.1-1% per character insertion detectable by ambient light sensor at <0.01 lux sensitivity. (3) WiFi CSI: finger movements modulate OFDM subcarrier phase \u2014 \u03c3\u00b2_phase > threshold indicates keystroke events. Individual channel accuracy: 60-70% acoustic, 40-50% optical, 55-65% WiFi CSI. Fused via CRF/LSTM with temporal cross-correlation alignment: >95% accuracy with 30+ training samples per key. Critical insight: apps requesting speaker + WiFi permissions (trivially granted) achieve side-channel equivalent to camera + microphone (heavily restricted). Permission model does not reflect actual threat.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0101",
+          "url": "https://qinnovate.com/TARA/QIF-T0101"
+        }
+      ],
+      "x_qif_severity": "medium",
+      "x_qif_bands": "S3\u2192S2\u2192S1",
+      "x_qif_dual_use": "confirmed"
+    },
+    {
+      "type": "attack-pattern",
+      "id": "attack-pattern--0d15d3b0-4743-5a60-ab6b-b7d44318531e",
+      "spec_version": "2.1",
+      "created": "2026-01-01T00:00:00.000Z",
+      "modified": "2026-02-14T00:00:00.000Z",
+      "name": "Passive facial geometry estimation via display-as-illuminator inverse photometry (presence/orientation detection without camera)",
+      "description": "The device display functions as a structured light source \u2014 each frame emits a known photon distribution. Reflected light from the user's face is captured by the ambient light sensor (ALS). The known spectral emission S(x,y,\u03bb) and measured reflected irradiance E_sensor = \u222b\u222b \u03c1(x,y)cos(\u03b8)S(x,y,\u03bb)/r\u00b2 dA constrain an inverse photometry problem. CRITICAL FEASIBILITY CAVEAT: A single ALS integrates the entire reflected light field into one scalar value, making 3D geometric reconstruction an ill-posed inverse problem. With current single-sensor hardware, achievable resolution is limited to basic presence detection, head orientation, and coarse proximity estimation \u2014 NOT high-fidelity facial geometry. Identity matching might be feasible only against a small template library with strong a priori constraints. Future multi-pixel ALS or multi-sensor arrays could significantly improve reconstruction fidelity. Despite geometric limitations, the same ALS reliably detects physiological signals: pulse-modulated skin reflectance for PPG heart rate (demonstrated in Samsung Galaxy phones) and skin color variations for SpO2 estimation.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "qif-interaction-chain",
+          "phase_name": "exploitation"
+        }
+      ],
+      "external_references": [
+        {
+          "source_name": "QIF TARA",
+          "external_id": "QIF-T0102",
+          "url": "https://qinnovate.com/TARA/QIF-T0102"
+        }
+      ],
+      "x_qif_severity": "low",
+      "x_qif_bands": "S3\u2192S2",
+      "x_qif_dual_use": "confirmed"
+    }
+  ]
+}
