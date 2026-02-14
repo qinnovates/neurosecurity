@@ -97,21 +97,6 @@ const principles = [
 >
   <Nav />
 
-  <!-- ═══ ACTIVE DEVELOPMENT BANNER ═══ -->
-  <div class="bg-gradient-to-r from-[var(--color-accent-tertiary)]/20 via-[var(--color-accent-primary)]/15 to-[var(--color-accent-secondary)]/20 border-b border-[var(--color-accent-tertiary)]/30">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
-      <span class="text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[var(--color-accent-tertiary)]/20 text-[var(--color-accent-tertiary)] border border-[var(--color-accent-tertiary)]/30">
-        In Active Development
-      </span>
-      <p class="text-sm text-[var(--color-text-muted)]">
-        The Neural Alliance is forming. We are actively seeking <strong class="text-[var(--color-text-primary)]">founding partners</strong> to shape governance, certification, and the future of neural security standards.
-      </p>
-      <a href="#join" class="text-sm font-medium text-[var(--color-accent-tertiary)] hover:text-[var(--color-accent-primary)] transition-colors whitespace-nowrap">
-        Get involved &#8594;
-      </a>
-    </div>
-  </div>
-
   <!-- ═══ HERO ═══ -->
   <section class="relative min-h-[65vh] flex items-center justify-center px-4 overflow-hidden">
     <div class="absolute inset-0 bg-[var(--color-bg-deep)]">
@@ -119,6 +104,16 @@ const principles = [
     </div>
 
     <div class="relative z-10 text-center max-w-4xl mx-auto pt-24 pb-16">
+      <!-- ═══ ACTIVE DEVELOPMENT BANNER ═══ -->
+      <div class="inline-flex flex-col sm:flex-row items-center gap-2 mb-8 px-5 py-3 rounded-xl bg-gradient-to-r from-[var(--color-accent-tertiary)]/15 via-[var(--color-accent-primary)]/10 to-[var(--color-accent-secondary)]/15 border border-[var(--color-accent-tertiary)]/30">
+        <span class="text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[var(--color-accent-tertiary)]/20 text-[var(--color-accent-tertiary)] border border-[var(--color-accent-tertiary)]/30">
+          In Active Development
+        </span>
+        <p class="text-sm text-[var(--color-text-muted)]">
+          Actively seeking <strong class="text-[var(--color-text-primary)]">founding partners</strong> to shape the future of neural security standards.
+        </p>
+      </div>
+
       <p class="text-sm font-medium tracking-[0.2em] uppercase text-[var(--color-accent-secondary)] mb-6">
         Qinnovate Neural Alliance
       </p>
@@ -338,57 +333,6 @@ const principles = [
             </ul>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ CASE STUDY — Credibility ═══ -->
-  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div class="mb-10">
-      <p class="text-sm font-medium tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-3">Track Record</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)]">Standards Built from Real Research</h2>
-    </div>
-
-    <div class="glass rounded-xl p-6 sm:p-8" style="border-left: 4px solid var(--color-accent-primary);">
-      <div class="flex items-start gap-3 mb-4">
-        <span class="text-xs font-semibold uppercase tracking-wider px-2 py-1 rounded-full bg-[var(--color-status-breach)]/10 text-[var(--color-status-breach)]">CVE Disclosed</span>
-        <span class="text-xs font-semibold uppercase tracking-wider px-2 py-1 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">CVSS 8.6 High</span>
-      </div>
-
-      <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2">
-        Consumer Audio to Neural Eavesdropping: A 5-Level Attack Chain
-      </h3>
-
-      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6">
-        The Alliance's threat modeling methodology discovered a 9-year-old vulnerability in RealTek HD Audio codec drivers while extending the TARA atlas. Any software process can silently reprogram a headphone jack to function as a microphone — and trace the attack chain from acoustic eavesdropping through physiological monitoring to neural signal capture. This is why standards matter: frameworks find what point solutions miss.
-      </p>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-        <div class="glass rounded-lg p-4 text-center">
-          <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-status-breach)]">1</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">Unfiled CVE discovered</div>
-        </div>
-        <div class="glass rounded-lg p-4 text-center">
-          <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">5</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">Attack levels mapped</div>
-        </div>
-        <div class="glass rounded-lg p-4 text-center">
-          <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">5</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">QIF bands crossed</div>
-        </div>
-        <div class="glass rounded-lg p-4 text-center">
-          <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">3</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">New TARA techniques</div>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-4 text-sm">
-        <a href="/publications/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">
-          Read the full write-up &#8594;
-        </a>
-        <a href="/TARA/" class="text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] transition-colors">
-          View TARA atlas &#8594;
-        </a>
       </div>
     </div>
   </section>
