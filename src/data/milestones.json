@@ -1,15 +1,15 @@
 {
   "metrics": {
-    "techniques_catalogued": 99,
+    "techniques_catalogued": 103,
     "tactics": 15,
     "domains": 8,
-    "cvss_vectors_mapped": 99,
-    "niss_vectors_scored": 99,
+    "cvss_vectors_mapped": 103,
+    "niss_vectors_scored": 103,
     "cves_filed": 1,
     "pocs_built": 1,
     "cwes_demonstrated": 3,
     "standards_submitted": 1,
-    "therapeutic_mappings": 74,
+    "therapeutic_mappings": 78,
     "specifications_published": 3,
     "days_active": null
   },
@@ -83,6 +83,34 @@
       "description": "20 new consumer sensor techniques across audio, optical, IMU, RF, thermal, and biometric categories. 5 chain techniques document multi-stage escalation paths. Registry reaches 99 techniques.",
       "category": "framework",
       "icon": "shield"
+    },
+    {
+      "date": "2026-02-12",
+      "title": "DSM-5-TR Neural Impact Chain Mapping",
+      "description": "First-ever mapping from BCI security severity to psychiatric diagnosis. All 103 techniques mapped to DSM-5-TR diagnostic clusters via the Neural Impact Chain: Technique \u2192 Band \u2192 Structure \u2192 Function \u2192 NISS \u2192 DSM-5.",
+      "category": "research",
+      "icon": "brain"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "Registry Crosses 100 Techniques",
+      "description": "4 new consumer device side-channel techniques (T0100\u2013T0103): neural steganographic encoding, multi-modal keystroke inference, screen photometry sensing, and WiFi CSI respiratory inference. All confirmed dual-use with clinical applications.",
+      "category": "framework",
+      "icon": "shield"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "Whitepaper v6.0 Published",
+      "description": "Narrative rewrite: 8 interactive visualizations, QIF derivation story, TARA reading guide, DSM-5-TR neural impact chain, HIPAA and GDPR governance integration. Audience-driven adoption section for clinicians, psychologists, researchers, engineers, and standards bodies.",
+      "category": "publication",
+      "icon": "book"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "TARA Changelog System",
+      "description": "Dynamic changelog added to TARA registry. Recent additions auto-render on the TARA page and whitepaper with therapeutic highlights. GitHub-trackable via structured JSON changelog.",
+      "category": "framework",
+      "icon": "list"
     }
   ]
 }

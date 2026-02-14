@@ -15,7 +15,7 @@ const categories = [
   {
     label: 'Core Standards',
     color: 'var(--color-accent-primary)',
-    ids: ['TRANSPARENCY', 'DATA_POLICY_FAQ', 'ACCESSIBILITY'],
+    ids: ['CODE_OF_CONDUCT', 'TRANSPARENCY', 'DATA_POLICY_FAQ', 'ACCESSIBILITY'],
   },
   {
     label: 'Ethics & Rights',
@@ -44,7 +44,7 @@ const categories = [
 
   <div class="grid md:grid-cols-3 gap-8 reveal reveal-stagger">
     {categories.map((cat) => (
-      <div class="glass-subtle rounded-xl p-6">
+      <div class="glass-subtle rounded-xl p-6" id={cat.label === 'Core Standards' ? 'core' : cat.label === 'Ethics & Rights' ? 'ethics' : 'compliance'}>
         <h2 class="text-sm font-semibold uppercase tracking-wider mb-5" style={`color: ${cat.color}`}>
           {cat.label}
         </h2>

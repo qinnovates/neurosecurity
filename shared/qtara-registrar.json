@@ -3,7 +3,7 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
   "statistics": {
-    "total_techniques": 99,
+    "total_techniques": 103,
     "total_tactics": 15,
     "total_domains": 8,
     "by_tactic": {
@@ -19,21 +19,24 @@
       "QIF-C.IM": 5,
       "QIF-B.EV": 5,
       "QIF-S.RP": 5,
-      "QIF-S.HV": 14,
+      "QIF-S.HV": 16,
       "QIF-S.FP": 4,
-      "QIF-S.CH": 5
+      "QIF-S.CH": 6,
+      "QIF-S.SC": 2
     },
     "by_status": {
       "CONFIRMED": 19,
       "EMERGING": 22,
-      "DEMONSTRATED": 32,
-      "THEORETICAL": 26
+      "DEMONSTRATED": 34,
+      "THEORETICAL": 26,
+      "PLAUSIBLE": 1,
+      "SPECULATIVE": 1
     },
     "by_severity": {
       "high": 54,
       "critical": 29,
-      "medium": 15,
-      "low": 1
+      "medium": 17,
+      "low": 3
     },
     "by_ui_category": {
       "SI": 10,
@@ -41,15 +44,15 @@
       "SE": 20,
       "DM": 15,
       "PS": 7,
-      "EX": 16,
+      "EX": 18,
       "PE": 8,
-      "CI": 16
+      "CI": 18
     },
     "by_niss_severity": {
       "critical": 0,
       "high": 21,
       "medium": 29,
-      "low": 48,
+      "low": 52,
       "none": 1
     },
     "niss_cvss_mapping": {
@@ -62,34 +65,75 @@
     },
     "tara": {
       "version": "1.0",
-      "enriched_techniques": 99,
+      "enriched_techniques": 103,
       "dual_use_breakdown": {
-        "confirmed": 49,
+        "confirmed": 53,
         "probable": 16,
         "possible": 9,
         "silicon_only": 25
       },
-      "techniques_with_clinical_analog": 74,
+      "techniques_with_clinical_analog": 78,
       "techniques_silicon_only": 25,
       "dsm5": {
         "version": "1.0",
-        "techniques_with_dsm5": 99,
+        "techniques_with_dsm5": 103,
         "unique_dsm_codes": 15,
         "cluster_breakdown": {
           "motor_neurocognitive": 16,
           "cognitive_psychotic": 16,
           "mood_trauma": 21,
-          "non_diagnostic": 39,
+          "non_diagnostic": 43,
           "persistent_personality": 7
         },
         "risk_class_breakdown": {
           "direct": 51,
           "indirect": 9,
-          "none": 39
+          "none": 43
         }
       }
     }
   },
+  "changelog": [
+    {
+      "version": "1.4",
+      "date": "2026-02-13",
+      "title": "Consumer Device Side-Channel Techniques",
+      "summary": "4 new techniques extending TARA into consumer device side-channel domains — neural steganography, multi-modal sensor fusion keystroke inference, display-as-illuminator photometry, and WiFi CSI physiological sensing. All confirmed dual-use with validated clinical applications.",
+      "added": ["QIF-T0100", "QIF-T0101", "QIF-T0102", "QIF-T0103"],
+      "therapeutic_highlights": [
+        "ABR audiometry and tinnitus masking therapy (T0100)",
+        "Parkinson's detection via keystroke dynamics and tremor characterization (T0101)",
+        "Contactless heart rate and SpO2 via screen-based PPG (T0102)",
+        "WiFi-based sleep apnea detection, elder care, and COPD monitoring (T0103)"
+      ]
+    },
+    {
+      "version": "1.3",
+      "date": "2026-02-11",
+      "title": "S-Domain Consumer Sensor Expansion",
+      "summary": "28 new S-domain techniques across audio, optical, IMU, RF, thermal, and biometric categories. 5 chain techniques document multi-stage escalation paths from consumer devices to neural exploitation.",
+      "added_range": ["QIF-T0072", "QIF-T0099"],
+      "therapeutic_highlights": [
+        "Ear-canal neural monitoring for locked-in syndrome communication",
+        "Remote photoplethysmography for contactless vital signs",
+        "Gait analysis for Parkinson's medication timing",
+        "WiFi CSI body sensing for post-surgical recovery"
+      ]
+    },
+    {
+      "version": "1.0",
+      "date": "2026-01-15",
+      "title": "Initial TARA Registry",
+      "summary": "71 foundational BCI techniques across neural injection, protocol disruption, data harvesting, neural manipulation, evasion, cognitive exploitation, biometric invasion, and countermeasures.",
+      "added_range": ["QIF-T0001", "QIF-T0071"],
+      "therapeutic_highlights": [
+        "Transcranial magnetic stimulation for depression treatment",
+        "Deep brain stimulation for Parkinson's management",
+        "Neurofeedback for ADHD and anxiety therapy",
+        "ERP-based communication for locked-in patients"
+      ]
+    }
+  ],
   "tactics": [
     {
       "id": "QIF-N.SC",

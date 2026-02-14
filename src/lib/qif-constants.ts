@@ -91,7 +91,7 @@ export const PILLARS = [
   },
   {
     id: 'tara',
-    name: 'TARA Registrar',
+    name: 'TARA Registry',
     fullName: 'Therapeutic Atlas of Risks & Applications',
     tagline: 'Therapeutic Atlas of Risks',
     description: 'A dual-use registry of 103 BCI techniques — each entry an attack vector, an ethical risk, and a therapeutic application. Every technique that can harm a brain can also heal one. TARA is the proof.',

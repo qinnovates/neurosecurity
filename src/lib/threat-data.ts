@@ -413,6 +413,34 @@ export function getDsm5Stats() {
   };
 }
 
+/** TARA changelog entries from the registry */
+export interface ChangelogEntry {
+  version: string;
+  date: string;
+  title: string;
+  summary: string;
+  added?: string[];
+  added_range?: string[];
+  therapeutic_highlights: string[];
+  techniques?: ThreatVector[];
+}
+
+export function getChangelog(): ChangelogEntry[] {
+  const raw = (registry as any).changelog ?? [];
+  return raw.map((entry: any) => {
+    const ids = entry.added ?? [];
+    const techniques = ids.length > 0
+      ? THREAT_VECTORS.filter(t => ids.includes(t.id))
+      : [];
+    return { ...entry, techniques };
+  });
+}
+
+export function getLatestChangelog(): ChangelogEntry | null {
+  const log = getChangelog();
+  return log.length > 0 ? log[0] : null;
+}
+
 /** TARA statistics summary */
 export function getTaraStats() {
   const dualUse: Record<DualUse, number> = { confirmed: 0, probable: 0, possible: 0, silicon_only: 0 };

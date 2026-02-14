@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import WhitepaperVersionSelector from '../../components/WhitepaperVersionSelector.astro';
 import { getWhitepaperStats } from '../../lib/whitepaper-stats';
+import { getLatestChangelog } from '../../lib/threat-data';
 import { PILLARS } from '../../lib/qif-constants';
 
 // Visualization components
@@ -15,6 +16,7 @@ import ConsentTierChart from '../../components/whitepaper/ConsentTierChart.astro
 import NeuralImpactChain from '../../components/whitepaper/NeuralImpactChain.astro';
 
 const stats = getWhitepaperStats();
+const latestChange = getLatestChangelog();
 ---
 
 <PageLayout
@@ -314,6 +316,22 @@ const stats = getWhitepaperStats();
           <p>
             Of the {stats.totalTechniques} techniques, {stats.tara.dualUse.confirmed} have <strong>confirmed</strong> therapeutic applications &mdash; published clinical use with evidence. Another {stats.tara.dualUse.probable} are <strong>probable</strong> (under active investigation) and {stats.tara.dualUse.possible} are <strong>possible</strong> (theoretical mapping exists). Only {stats.tara.dualUse.silicon_only} are pure silicon-only vectors with no known tissue analog.
           </p>
+
+          {latestChange && (
+            <div class="glass-subtle rounded-lg p-4 mt-4" style="border-left: 3px solid var(--color-status-safe);">
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-status-safe)] mb-1">Latest &middot; v{latestChange.version}</p>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">{latestChange.title}: {latestChange.added?.length ?? 0} new techniques, all with confirmed clinical applications.</p>
+              <ul class="text-xs text-[var(--color-text-muted)] space-y-0.5 mb-2">
+                {latestChange.therapeutic_highlights.map((h: string) => (
+                  <li class="flex items-start gap-1.5">
+                    <span class="text-[var(--color-status-safe)] shrink-0">+</span>
+                    {h}
+                  </li>
+                ))}
+              </ul>
+              <a href="/TARA/" class="text-xs text-[var(--color-accent-primary)] hover:underline">View recent additions in the TARA Registry &rarr;</a>
+            </div>
+          )}
         </div>
 
         <!-- How to Read TARA -->
