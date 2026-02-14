@@ -1,5 +1,5 @@
 ---
-title: "Your Headphones Know Your Heart Rate — Even Without a Heart Rate Sensor"
+title: "Your Headphones Know Your Biometrics — No Health Sensor Required"
 subtitle: "28 ways consumer sensors extract biometric, physiological, and cognitive data without dedicated health hardware, and why the attack chain ends at your brain"
 date_posted: "2026-02-11"
 source: "https://qinnovate.com"
