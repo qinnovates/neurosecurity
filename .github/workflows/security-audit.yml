@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Full history for comprehensive scanning
 
@@ -204,7 +204,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
   #   steps:
-  #     - uses: actions/checkout@v4
+  #     - uses: actions/checkout@v6
   #       with:
   #         fetch-depth: 0
   #     - uses: trufflesecurity/trufflehog@main
