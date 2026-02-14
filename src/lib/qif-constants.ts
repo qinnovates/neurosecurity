@@ -91,15 +91,15 @@ export const PILLARS = [
   },
   {
     id: 'tara',
-    name: 'TARA Registry',
-    fullName: 'Therapeutic Atlas of Risks & Applications',
-    tagline: 'Therapeutic Atlas of Risks',
-    description: 'A dual-use registry of 103 BCI techniques — each entry an attack vector, an ethical risk, and a therapeutic application. Every technique that can harm a brain can also heal one. TARA is the proof.',
+    name: 'TARA Atlas',
+    fullName: 'Therapeutic Applications & Risk Assessment',
+    tagline: 'One standard for both sides of the brain.',
+    description: 'A dual-use atlas of BCI techniques, each entry an attack vector, an ethical risk, and a therapeutic application. Every technique that can harm a brain can also heal one. TARA is the proof.',
     href: '/TARA/',
     icon: '&#8853;',
     color: 'var(--color-accent-tertiary)',
     version: '1.0',
-    status: 'Live Registry',
+    status: 'Live Atlas',
   },
 ] as const;
 

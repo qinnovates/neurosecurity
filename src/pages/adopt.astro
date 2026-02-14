@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
+import { THREAT_VECTORS } from '../lib/threat-data';
+const totalTechniques = THREAT_VECTORS.length;
 import '../styles/global.css';
 
 const steps = [
@@ -16,7 +18,7 @@ const steps = [
     number: '02',
     title: 'Assess Your Device',
     description: 'Map your neural device to QIF\'s 11-band model. Use TARA to identify relevant attack techniques across every band. Score findings with NISS.',
-    link: { href: '/TARA/', label: 'Browse TARA Registry' },
+    link: { href: '/TARA/', label: 'Browse TARA Atlas' },
   },
   {
     number: '03',
@@ -47,7 +49,7 @@ const participationTiers = [
 
 <BaseLayout
   title="Adopt QIF — Qinnovate"
-  description="Adopt the Quantum Indeterministic Framework for brain-computer interface security. The specification, threat registry, and scoring system are open and free."
+  description="Adopt the Quantum Indeterministic Framework for brain-computer interface security. The specification, threat atlas, and scoring system are open and free."
 >
   <Nav />
 
@@ -71,7 +73,7 @@ const participationTiers = [
       </h1>
 
       <p class="text-lg sm:text-xl text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
-        QIF maps every threat surface from silicon to cortex. TARA catalogs 103 techniques. NISS scores what CVSS cannot. The specification is open, free, and ready to use.
+        QIF maps every threat surface from silicon to cortex. TARA catalogs {totalTechniques} techniques. NISS scores what CVSS cannot. The specification is open, free, and ready to use.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -100,7 +102,7 @@ const participationTiers = [
           <div class="text-xs text-[var(--color-text-faint)] mt-1">Security Bands</div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">103</div>
+          <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{totalTechniques}</div>
           <div class="text-xs text-[var(--color-text-faint)] mt-1">Catalogued Techniques (TARA)</div>
         </div>
         <div>
@@ -198,7 +200,7 @@ const participationTiers = [
     <div class="mb-12 max-w-3xl">
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">The standard is open.</h2>
       <p class="text-[var(--color-text-muted)] leading-relaxed">
-        The QIF specification, TARA threat registry, and NISS scoring system are published under Apache 2.0. No login, no account, no paywall. Read the spec, assess your device, and adopt the standard at your own pace.
+        The QIF specification, TARA threat atlas, and NISS scoring system are published under Apache 2.0. No login, no account, no paywall. Read the spec, assess your device, and adopt the standard at your own pace.
       </p>
     </div>
 
@@ -213,12 +215,12 @@ const participationTiers = [
         </p>
       </a>
       <a href="/TARA/" class="glass rounded-xl p-6 card-hover group">
-        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-tertiary)] mb-3">Threat Registry</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-tertiary)] mb-3">Threat Atlas</p>
         <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-tertiary)] transition-colors">
-          TARA Registry
+          TARA Atlas
         </h3>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          103 BCI techniques with NISS severity scores, MITRE mappings, and clinical overlays.
+          {totalTechniques} BCI techniques with NISS severity scores, MITRE mappings, and clinical overlays.
         </p>
       </a>
       <a href="/governance/" class="glass rounded-xl p-6 card-hover group">
@@ -319,7 +321,7 @@ const participationTiers = [
           Read the full analysis &#8594;
         </a>
         <a href="/TARA/" class="text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] transition-colors">
-          View the TARA registry &#8594;
+          View the TARA atlas &#8594;
         </a>
       </div>
     </div>
@@ -343,7 +345,7 @@ const participationTiers = [
         <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-status-safe)] mb-3">Publish</p>
         <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2">Feed the Standard</h3>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          Every validated attack and defense goes into TARA with full NISS scoring, MITRE mappings, and remediation guidance. The registry grows from real research.
+          Every validated attack and defense goes into TARA with full NISS scoring, MITRE mappings, and remediation guidance. The atlas grows from real research.
         </p>
       </div>
     </div>

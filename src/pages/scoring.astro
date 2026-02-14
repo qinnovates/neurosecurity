@@ -125,7 +125,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
             NISS is the first CVSS v4.0 extension designed for brain-computer interface security. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS adds five neural-specific metrics that ride <strong>alongside</strong> CVSS v4.0 base vectors — not replace them.
           </p>
           <p>
-            Every technique in the <a href="/TARA/">TARA registry</a> carries both a CVSS v4.0 base vector (exploitability and system impact) and a NISS extension vector (biological, cognitive, and consent impact). The two together give the complete picture: how the attack works <em>and</em> what it does to the patient.
+            Every technique in the <a href="/TARA/">TARA atlas</a> carries both a CVSS v4.0 base vector (exploitability and system impact) and a NISS extension vector (biological, cognitive, and consent impact). The two together give the complete picture: how the attack works <em>and</em> what it does to the patient.
           </p>
         </div>
 
@@ -393,7 +393,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
       <section id="examples" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scored Examples</h2>
         <p class="text-sm text-[var(--color-text-muted)] mb-6">
-          Three examples from the <a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">TARA registry</a> showing how NISS + CVSS vectors work together.
+          Three examples from the <a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">TARA atlas</a> showing how NISS + CVSS vectors work together.
         </p>
         <div class="space-y-4">
           {THREAT_VECTORS.filter(t => ['QIF-T0001', 'QIF-T0003', 'QIF-T0045'].includes(t.id)).map(t => (
@@ -423,7 +423,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
         <div class="mt-8 prose">
           <p>
-            All {totalTechniques} techniques are scored and browsable in the <a href="/TARA/">TARA Registrar</a>. The scoring methodology is documented in the <a href="/whitepaper/#niss">QIF Whitepaper §6.5</a>.
+            All {totalTechniques} techniques are scored and browsable in the <a href="/TARA/">TARA Atlas</a>. The scoring methodology is documented in the <a href="/whitepaper/#niss">QIF Whitepaper §6.5</a>.
           </p>
         </div>
       </section>

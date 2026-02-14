@@ -13,15 +13,15 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
 ---
 
 <PageLayout
-  title="TARA — Therapeutic Atlas of Risks & Applications"
+  title="TARA, Therapeutic Applications & Risk Assessment"
   description={`${THREAT_VECTORS.length} BCI techniques mapped across modality, clinical, diagnostic, and governance projections. Each technique viewed as both an attack vector and a therapeutic application.`}
-  breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'TARA Registrar' }]}
+  breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'TARA Atlas' }]}
   maxWidth="wide"
 >
   <div id="threat-page" data-projection="modality">
     <div class="mb-8">
-      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">TARA Registrar</h1>
-      <p class="text-sm text-[var(--color-text-muted)] opacity-70 -mt-1 mb-1">Therapeutic Atlas of Risks &amp; Applications</p>
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">TARA Atlas</h1>
+      <p class="text-sm text-[var(--color-text-muted)] opacity-70 -mt-1 mb-1">Therapeutic Applications &amp; Risk Assessment</p>
       <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
         {THREAT_VECTORS.length} BCI techniques mapped to CVSS v4.0 base vectors across {THREAT_CATEGORIES.length} categories and {bands.length} hourglass bands. Every attack vector is also a therapeutic application.
       </p>

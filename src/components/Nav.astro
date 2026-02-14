@@ -134,19 +134,6 @@ const isGovActive = currentPath.startsWith('/governance/');
           </div>
         </div>
 
-        <!-- Milestones (flat link) -->
-        <a
-          href="/milestones/"
-          class:list={[
-            "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            currentPath.startsWith('/milestones/')
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          Milestones
-        </a>
-
         <!-- Engage dropdown -->
         <div class="relative" data-dropdown="engage">
           <button
@@ -346,19 +333,6 @@ const isGovActive = currentPath.startsWith('/governance/');
           ))}
         </div>
       </div>
-
-      <!-- Milestones (flat) -->
-      <a
-        href="/milestones/"
-        class:list={[
-          "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-          currentPath.startsWith('/milestones/')
-            ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-        ]}
-      >
-        Milestones
-      </a>
 
       <!-- Mobile Engage section -->
       <div>

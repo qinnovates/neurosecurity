@@ -2,7 +2,7 @@
  * QIF Threat Data — adapter over shared/qtara-registrar.json
  * Single source of truth: all techniques from the QIF TARA Taxonomy.
  * Scoring: NISS v1.0 (Neural Impact Scoring System)
- * TARA: Therapeutic Atlas of Risks and Applications (four-projection overlay)
+ * TARA: Therapeutic Applications & Risk Assessment (four-projection overlay)
  * Projections: Modality (merged Security+Engineering), Clinical, Diagnostic (DSM-5-TR), Governance
  * Neural Impact Chain (NIC): Technique → Band → Structure → Function → NISS + DSM
  */
@@ -271,7 +271,7 @@ export function getTacticsWithCounts() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// TARA — Therapeutic Atlas of Risks and Applications
+// TARA — Therapeutic Applications & Risk Assessment
 // Four-projection overlay: Security (existing), Clinical, Governance, Engineering
 // ═══════════════════════════════════════════════════════════════
 

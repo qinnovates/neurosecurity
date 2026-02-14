@@ -3,7 +3,7 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
   "statistics": {
-    "total_techniques": 103,
+    "total_techniques": 102,
     "total_tactics": 15,
     "total_domains": 8,
     "by_tactic": {
@@ -19,7 +19,7 @@
       "QIF-C.IM": 5,
       "QIF-B.EV": 5,
       "QIF-S.RP": 5,
-      "QIF-S.HV": 16,
+      "QIF-S.HV": 15,
       "QIF-S.FP": 4,
       "QIF-S.CH": 6,
       "QIF-S.SC": 2
@@ -27,7 +27,7 @@
     "by_status": {
       "CONFIRMED": 19,
       "EMERGING": 22,
-      "DEMONSTRATED": 34,
+      "DEMONSTRATED": 33,
       "THEORETICAL": 26,
       "PLAUSIBLE": 1,
       "SPECULATIVE": 1
@@ -35,7 +35,7 @@
     "by_severity": {
       "high": 54,
       "critical": 29,
-      "medium": 17,
+      "medium": 16,
       "low": 3
     },
     "by_ui_category": {
@@ -44,7 +44,7 @@
       "SE": 20,
       "DM": 15,
       "PS": 7,
-      "EX": 18,
+      "EX": 17,
       "PE": 8,
       "CI": 18
     },
@@ -52,43 +52,43 @@
       "critical": 0,
       "high": 21,
       "medium": 29,
-      "low": 52,
+      "low": 51,
       "none": 1
     },
     "niss_cvss_mapping": {
       "pins_flagged": 31,
       "by_gap_group": {
         "3": 58,
-        "2": 29,
+        "2": 28,
         "1": 12
       }
     },
     "tara": {
       "version": "1.0",
-      "enriched_techniques": 103,
+      "enriched_techniques": 102,
       "dual_use_breakdown": {
-        "confirmed": 53,
+        "confirmed": 52,
         "probable": 16,
         "possible": 9,
         "silicon_only": 25
       },
-      "techniques_with_clinical_analog": 78,
+      "techniques_with_clinical_analog": 77,
       "techniques_silicon_only": 25,
       "dsm5": {
         "version": "1.0",
-        "techniques_with_dsm5": 103,
+        "techniques_with_dsm5": 102,
         "unique_dsm_codes": 15,
         "cluster_breakdown": {
           "motor_neurocognitive": 16,
           "cognitive_psychotic": 16,
           "mood_trauma": 21,
-          "non_diagnostic": 43,
+          "non_diagnostic": 42,
           "persistent_personality": 7
         },
         "risk_class_breakdown": {
           "direct": 51,
           "indirect": 9,
-          "none": 43
+          "none": 42
         }
       }
     }
@@ -98,13 +98,14 @@
       "version": "1.4",
       "date": "2026-02-13",
       "title": "Consumer Device Side-Channel Techniques",
-      "summary": "4 new techniques extending TARA into consumer device side-channel domains — neural steganography, multi-modal sensor fusion keystroke inference, display-as-illuminator photometry, and WiFi CSI physiological sensing. All confirmed dual-use with validated clinical applications.",
-      "added": ["QIF-T0100", "QIF-T0101", "QIF-T0102", "QIF-T0103"],
+      "summary": "3 new techniques extending TARA into consumer device side-channel domains — neural steganography, multi-modal sensor fusion keystroke inference, and display-as-illuminator photometry. WiFi CSI consumer-grade capabilities merged into T0090. All confirmed dual-use with validated clinical applications.",
+      "added": ["QIF-T0100", "QIF-T0101", "QIF-T0102"],
+      "merged": [{"from": "QIF-T0103", "into": "QIF-T0090", "reason": "Consumer-grade WiFi CSI respiratory/gait inference shares the same physical mechanism as T0090 (OFDM subcarrier analysis); merged to cover both dedicated and commodity hardware scenarios."}],
       "therapeutic_highlights": [
         "ABR audiometry and tinnitus masking therapy (T0100)",
         "Parkinson's detection via keystroke dynamics and tremor characterization (T0101)",
         "Contactless heart rate and SpO2 via screen-based PPG (T0102)",
-        "WiFi-based sleep apnea detection, elder care, and COPD monitoring (T0103)"
+        "WiFi-based sleep apnea detection, elder care, and COPD monitoring (T0090, expanded)"
       ]
     },
     {
@@ -123,7 +124,7 @@
     {
       "version": "1.0",
       "date": "2026-01-15",
-      "title": "Initial TARA Registry",
+      "title": "Initial TARA Atlas",
       "summary": "71 foundational BCI techniques across neural injection, protocol disruption, data harvesting, neural manipulation, evasion, cognitive exploitation, biometric invasion, and countermeasures.",
       "added_range": ["QIF-T0001", "QIF-T0071"],
       "therapeutic_highlights": [
@@ -13679,7 +13680,7 @@
     },
     {
       "id": "QIF-T0090",
-      "attack": "WiFi CSI passive body sensing (through-wall vital sign detection and 3D pose reconstruction via dedicated CSI hardware)",
+      "attack": "WiFi CSI passive body sensing (through-wall vital signs, 3D pose reconstruction, respiratory and gait biometric inference via dedicated or commodity WiFi hardware)",
       "tactic": "QIF-S.HV",
       "bands": "S1→S2→S3",
       "band_ids": [
@@ -13693,14 +13694,18 @@
       "quantum": "No (classical RF propagation analysis)",
       "sources": [
         "Liu et al. 2019 (Wireless Sensing for Human Activity: A Survey, IEEE Communications Surveys)",
+        "Liu et al. 2015 (WiFi respiration monitoring)",
         "Zeng et al. 2020 (FarSense: pushing the range limit of WiFi-based respiration sensing, ACM MobiSys)",
         "Wang et al. 2017 (TensorBeat: Tensor Decomposition for Monitoring Multiperson Breathing Beats with Commodity WiFi, ACM Trans Intelligent Systems and Technology)",
-        "Jiang et al. 2020 (Towards 3D Human Pose Construction Using WiFi, ACM MobiCom)"
+        "Wang et al. 2016 (WiFi-based gait recognition)",
+        "Jiang et al. 2020 (Towards 3D Human Pose Construction Using WiFi, ACM MobiCom)",
+        "Ali et al. 2015 (WiKey: keystroke recognition from WiFi CSI, MobiCom)",
+        "Ma et al. 2019 (WiFi sensing with CSI: a survey, ACM Computing Surveys)"
       ],
       "status": "DEMONSTRATED",
       "severity": "critical",
       "ui_category": "SE",
-      "notes": "WiFi Channel State Information (CSI) captures the multipath propagation characteristics between WiFi transmitter and receiver. Human body movements — including breathing (chest wall motion ~5mm), heartbeat (body surface vibration ~0.1mm), and walking — modulate the WiFi signal propagation paths. By analyzing CSI patterns, an attacker can detect presence, count people, track movement, extract vital signs, and even reconstruct coarse body poses — all without any device on the target's person. The sensing works through walls (standard drywall, up to 2-3 walls). FarSense demonstrated breathing detection at 8m range. Attack scenario: any WiFi access point or router with modified firmware extracts CSI and performs passive surveillance of all humans in range. No camera, no microphone, no wearable needed — just ambient WiFi signals. This is passive radar using existing infrastructure.",
+      "notes": "WiFi Channel State Information (CSI) captures the multipath propagation characteristics between WiFi transmitter and receiver. Human body movements — including breathing (chest wall motion ~5mm), heartbeat (body surface vibration ~0.1mm), and walking — modulate the WiFi signal propagation paths. Two attack profiles: (1) DEDICATED HARDWARE — modified firmware on CSI-capable APs enables through-wall sensing (2-3 standard walls), 3D pose reconstruction, and multi-person vital sign extraction at up to 8m range. (2) CONSUMER-GRADE — standard WiFi chipsets (Intel 5300, Atheros, ESP32) with CSI-enabled drivers extract respiratory rate (±1 bpm at 3m) and gait identity (93% single-person, 78% multi-person) without dedicated hardware. Respiratory modulation: phase shift Δφ = 4π×Δd/λ ≈ 0.4-1.2 radians at 5 GHz (chest displacement 4-12mm). Gait produces Doppler shifts f_d = 2v×cos(θ)/λ ≈ 40 Hz at walking speed. CSI matrix: H(f,t) ∈ C^(N_tx × N_rx × N_sub). CRITICAL REGULATORY GAP: Respiratory rate = PHI under HIPAA (45 CFR 160.103) when linked to individual. Gait biometric = special category data under GDPR Art. 9. No consent mechanism exists for incidental WiFi CSI health data collection — a router collecting CSI for 'network optimization' simultaneously collects respiratory data from everyone in range. This is passive radar using existing infrastructure.",
       "legacy_ids": [],
       "legacy_technique_id": "T2085",
       "niss": {
@@ -13713,33 +13718,45 @@
       "cross_references": {
         "related_ids": [
           "QIF-T0075",
+          "QIF-T0080",
+          "QIF-T0081",
           "QIF-T0084",
+          "QIF-T0088",
+          "QIF-T0093",
           "QIF-T0098",
+          "QIF-T0101",
           "T1040",
           "T1557"
         ],
         "secondary_tactics": [
           "QIF-D.HV",
-          "QIF-N.SC"
+          "QIF-N.SC",
+          "QIF-S.RP",
+          "QIF-S.FP"
         ]
       },
       "tara": {
-        "mechanism": "WiFi CSI analysis detects human body movements (breathing, heartbeat, gait) through multipath signal modulation; works through walls without any device on the target",
+        "mechanism": "WiFi OFDM subcarrier amplitude and phase modulation by human body movement, respiration, and gait; works through walls without any device on the target; both dedicated CSI hardware and commodity WiFi chipsets enable contactless physiological surveillance",
         "dual_use": "confirmed",
         "clinical": {
-          "therapeutic_analog": "Contactless in-home health monitoring for elderly care",
+          "therapeutic_analog": "Contactless vital sign monitoring for sleep studies, elder care, and post-surgical recovery",
           "conditions": [
-            "elderly fall detection (no wearable required)",
-            "sleep apnea monitoring (through-mattress breathing detection)",
-            "post-surgical recovery monitoring",
+            "contactless sleep apnea detection (Liu et al. 2015, demonstrated ±1 bpm)",
+            "elderly fall detection and activity monitoring (no wearable required)",
+            "post-surgical respiration monitoring without chest bands (burn patients)",
+            "PTSD and anxiety monitoring via nocturnal breathing pattern analysis",
+            "COPD exacerbation early warning via respiratory pattern changes",
+            "Parkinson's gait analysis for medication timing optimization",
             "smart home health sensing"
           ],
           "fda_status": "investigational",
           "evidence_level": "cohort",
-          "safe_parameters": "Standard WiFi power levels (< FCC Part 15 limits); passive sensing (no additional radiation); informed consent for monitoring",
+          "safe_parameters": "Standard WiFi power levels (100 mW EIRP, < FCC Part 15 limits); passive sensing only (no additional RF emission); informed consent for monitoring",
           "sources": [
             "Liu et al. 2019 (IEEE, WiFi sensing survey)",
-            "Zeng et al. 2020 (ACM MobiSys, FarSense)"
+            "Liu et al. 2015 (WiFi respiration, demonstrated ±1 bpm)",
+            "Zeng et al. 2020 (ACM MobiSys, FarSense)",
+            "Wang et al. 2017 (WiFi fall detection)"
           ]
         },
         "governance": {
@@ -13747,16 +13764,21 @@
           "monitoring": [
             "CSI_extraction_detection",
             "router_firmware_integrity",
-            "unusual_WiFi_traffic_patterns"
+            "unusual_WiFi_traffic_patterns",
+            "respiratory_data_access_log",
+            "multi_person_anonymization_check"
           ],
           "regulations": [
+            "HIPAA (respiratory rate = PHI when linked to individual)",
+            "GDPR Art. 9 (health data, behavioral biometrics)",
             "ECPA (electronic surveillance)",
-            "GDPR Art. 5",
             "Fourth Amendment (US, through-wall surveillance)",
-            "EU AI Act"
+            "FCC Part 15 (WiFi emissions)",
+            "EU AI Act",
+            "proposed neurorights legislation (cognitive state inference)"
           ],
           "data_classification": "PHI",
-          "safety_ceiling": "Through-wall sensing requires explicit consent from all monitored persons; router firmware integrity mandatory; CSI extraction should be detectable"
+          "safety_ceiling": "Through-wall sensing requires explicit consent from all monitored persons; router firmware integrity mandatory; CSI extraction should be detectable; informed consent for health data derivation; data retention limits; anonymization for incidental collection; no CSI health data without explicit opt-in"
         },
         "engineering": {
           "coupling": [
@@ -13764,25 +13786,31 @@
           ],
           "parameters": {
             "WiFi_standard": "802.11n/ac/ax",
-            "CSI_subcarriers": "30-256",
+            "wifi_frequency_GHz": "2.4 or 5",
+            "CSI_subcarriers": "30-256 (52 for 802.11n, 256 for 802.11ac)",
+            "CSI_sampling_rate_Hz": "100-1000",
             "breathing_detection_range_m": "1-8",
-            "through_wall_capability": "2-3 standard walls",
-            "heart_rate_accuracy_bpm": "±3-5"
+            "through_wall_capability": "2-3 standard walls (dedicated hardware)",
+            "heart_rate_accuracy_bpm": "±3-5 (dedicated), ±1 at 3m (consumer-grade respiration)",
+            "gait_id_accuracy_percent": "93 (single-person), 78 (multi-person)",
+            "respiratory_phase_shift_rad": "0.4-1.2 (at 5 GHz)",
+            "gait_doppler_Hz": "~40 (at 5 GHz, walking)"
           },
           "hardware": [
-            "WiFi_AP_with_CSI_support",
+            "WiFi_AP_with_CSI_support (dedicated)",
+            "Intel_5300_NIC_or_ESP32_or_Nexmon (consumer-grade)",
             "modified_firmware",
             "signal_processing_backend"
           ],
-          "detection": "CSI extraction monitoring on WiFi chipset, unusual AP firmware, anomalous WiFi traffic volume or patterns, RF sensing countermeasures"
+          "detection": "CSI extraction monitoring on WiFi chipset, unusual AP firmware, anomalous WiFi traffic volume or patterns, respiratory-band filtering (0.1-0.5 Hz) in WiFi processing pipeline, RF sensing countermeasures"
         },
         "dsm5": {
           "primary": [],
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only — no neural pathway",
-          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+          "pathway": "S-domain only — respiratory/gait data does not traverse neural pathway. Chains to N-domain if respiratory patterns used for cognitive state inference (stress detection).",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping. CV:I reflects through-wall surveillance and health data collection without consent."
         }
       },
       "cvss": {
@@ -13790,14 +13818,17 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:H/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
-        "gap_summary": "Through-wall passive surveillance via WiFi; physical privacy intrusion and health data extraction partially captured by CVSS"
+        "gap_summary": "Through-wall passive surveillance via WiFi; health privacy (HIPAA PHI), behavioral biometric (GDPR Art. 9), and regulatory consent gap dimensions not expressible in CVSS. Consumer-grade variant (PR:N/AT:N) has lower barrier to entry."
       },
       "feeds_into": {
         "targets": [
           "QIF-D.HV",
-          "QIF-N.SC"
+          "QIF-N.SC",
+          "QIF-S.HV",
+          "QIF-S.RP",
+          "QIF-S.FP"
         ],
-        "note": "WiFi CSI sensing feeds physiological data harvest and presence detection"
+        "note": "WiFi CSI sensing feeds physiological data harvest, presence detection, behavioral profiling, and identity fingerprinting; chains to cognitive state inference via breathing pattern analysis"
       }
     },
     {
@@ -15285,7 +15316,7 @@
         "pins": false
       },
       "cross_references": {
-        "related_ids": ["QIF-T0080", "QIF-T0085", "QIF-T0096", "QIF-T0103"],
+        "related_ids": ["QIF-T0080", "QIF-T0085", "QIF-T0090", "QIF-T0096"],
         "secondary_tactics": ["QIF-S.SC", "QIF-S.RP", "QIF-C.EX"]
       },
       "tara": {
@@ -15444,112 +15475,12 @@
         "targets": ["QIF-S.FP", "QIF-S.RP"],
         "note": "Presence and physiological data feed identity profiling and behavioral reconnaissance"
       }
-    },
-    {
-      "id": "QIF-T0103",
-      "attack": "WiFi CSI consumer-grade respiratory and gait biometric inference (passive HIPAA-regulated physiological surveillance via commodity WiFi without dedicated hardware)",
-      "tactic": "QIF-S.HV",
-      "bands": "S3→S2",
-      "band_ids": ["S3", "S2"],
-      "coupling": "ELECTROMAGNETIC",
-      "access": null,
-      "classical": "Yes",
-      "quantum": "No",
-      "sources": [
-        "Liu et al. 2015 (WiFi respiration monitoring)",
-        "Ali et al. 2015 (WiKey: keystroke recognition from WiFi CSI, MobiCom)",
-        "Wang et al. 2016 (WiFi-based gait recognition)",
-        "Zeng et al. 2020 (WiFi CSI activity recognition survey, IEEE Comms Surveys & Tutorials)",
-        "Ma et al. 2019 (WiFi sensing with CSI: a survey, ACM Computing Surveys)"
-      ],
-      "status": "DEMONSTRATED",
-      "severity": "medium",
-      "ui_category": "EX",
-      "notes": "WiFi Channel State Information (CSI) encodes the multipath propagation environment including reflections from the human body. Human respiration modulates body radar cross-section at 0.1-0.5 Hz, creating periodic CSI fluctuations. Gait produces characteristic Doppler shifts (f_d = 2v×cos(θ)/λ ≈ 40 Hz at 5 GHz for walking speed ~1.2 m/s). Body composition affects overall multipath profile. An adversary with WiFi CSI access — obtainable via standard chipset APIs (Intel 5300, Atheros, ESP32) — can extract respiratory rate (±1 bpm at 3m), gait identity (93% single-person), and presence detection without any sensors beyond the WiFi radio. Respiratory rate = PHI under HIPAA (45 CFR 160.103) when linked to individual. Gait biometric = special category data under GDPR Art. 9. CRITICAL REGULATORY GAP: No consent mechanism exists for incidental WiFi CSI health data collection. A router collecting CSI for 'network optimization' simultaneously collects respiratory data from everyone in range. Phase shift from respiration: Δφ = 4π×Δd/λ ≈ 0.4-1.2 radians at 5 GHz (chest displacement 4-12mm, 8-24mm round trip). CSI matrix: H(f,t) ∈ C^(N_tx × N_rx × N_sub). Emotional state inference via breathing pattern irregularity is an active but less robust research area compared to basic respiratory/gait sensing.",
-      "legacy_ids": [],
-      "legacy_technique_id": "T2103",
-      "niss": {
-        "version": "1.0",
-        "vector": "NISS:1.0/BI:N/CG:N/CV:P/RV:F/NP:N",
-        "score": 1.4,
-        "severity": "low",
-        "pins": false
-      },
-      "cross_references": {
-        "related_ids": ["QIF-T0080", "QIF-T0081", "QIF-T0088", "QIF-T0093", "QIF-T0101"],
-        "secondary_tactics": ["QIF-S.HV", "QIF-S.RP", "QIF-S.FP"]
-      },
-      "tara": {
-        "mechanism": "WiFi OFDM subcarrier amplitude and phase modulation by human body movement, respiration, and gait; CSI extraction from standard WiFi chipsets enables contactless physiological surveillance",
-        "dual_use": "confirmed",
-        "clinical": {
-          "therapeutic_analog": "Contactless vital sign monitoring for sleep studies, elder care, and post-surgical recovery",
-          "conditions": [
-            "contactless sleep apnea detection (Liu et al. 2015, demonstrated)",
-            "elder care fall detection and activity monitoring (Wang et al. 2017)",
-            "post-surgical respiration monitoring without chest bands (burn patients)",
-            "PTSD and anxiety monitoring via nocturnal breathing pattern analysis",
-            "COPD exacerbation early warning via respiratory pattern changes",
-            "Parkinson's gait analysis for medication timing optimization"
-          ],
-          "fda_status": "investigational",
-          "evidence_level": "cohort",
-          "safe_parameters": "Standard WiFi power levels (100 mW EIRP); passive sensing only; no additional RF emission; within FCC Part 15 limits",
-          "sources": [
-            "Liu et al. 2015 (WiFi respiration, demonstrated ±1 bpm)",
-            "Wang et al. 2017 (WiFi fall detection)",
-            "Zeng et al. 2020 (IEEE survey)"
-          ]
-        },
-        "governance": {
-          "consent_tier": "enhanced",
-          "monitoring": ["CSI_extraction_audit", "respiratory_data_access_log", "multi_person_anonymization_check"],
-          "regulations": ["HIPAA (respiratory rate = PHI when linked to individual)", "GDPR Art. 9 (health data, behavioral biometrics)", "FCC Part 15 (WiFi emissions)", "proposed neurorights legislation (cognitive state inference)"],
-          "data_classification": "PHI",
-          "safety_ceiling": "Standard WiFi operation; informed consent for health data derivation; data retention limits; anonymization for incidental collection; no CSI health data without explicit opt-in"
-        },
-        "engineering": {
-          "coupling": ["electromagnetic"],
-          "parameters": {
-            "wifi_frequency_GHz": "2.4 or 5",
-            "wavelength_cm": "12.5 (2.4 GHz) or 6 (5 GHz)",
-            "respiratory_phase_shift_rad": "0.4-1.2 (at 5 GHz)",
-            "gait_doppler_Hz": "~40 (at 5 GHz, walking)",
-            "respiration_accuracy_bpm": "±1 at 3m",
-            "gait_id_accuracy_percent": "93 (single-person), 78 (multi-person)",
-            "CSI_subcarriers": "52 (802.11n) to 256 (802.11ac)",
-            "CSI_sampling_rate_Hz": "100-1000",
-            "detection_range_m": "1-8 (respiration), 1-5 (gait)"
-          },
-          "hardware": ["standard_wifi_chipset", "Intel_5300_NIC_or_ESP32_or_Nexmon"],
-          "detection": "CSI extraction outside normal network operations, unexpected CSI logging, respiratory-band filtering (0.1-0.5 Hz) in WiFi processing pipeline"
-        },
-        "dsm5": {
-          "primary": [],
-          "secondary": [],
-          "risk_class": "none",
-          "cluster": "non_diagnostic",
-          "pathway": "S-domain only — respiratory/gait data does not traverse neural pathway. Chains to N-domain if respiratory patterns used for cognitive state inference (stress detection).",
-          "niss_correlation": "Silicon-only technique — no diagnostic mapping. CV:P reflects health data collection without consent."
-        }
-      },
-      "cvss": {
-        "version": "4.0",
-        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
-        "supplemental": "S:N/AU:Y/R:A/V:D",
-        "gap_group": 2,
-        "gap_summary": "WiFi CSI physiological surveillance partially captured by CVSS confidentiality; health privacy (HIPAA PHI), behavioral biometric, and regulatory consent gap dimensions not expressible in CVSS"
-      },
-      "feeds_into": {
-        "targets": ["QIF-S.HV", "QIF-S.RP", "QIF-S.FP", "QIF-D.HV"],
-        "note": "Respiratory and gait data feed health surveillance, behavioral profiling, and identity fingerprinting; chains to cognitive state inference via breathing pattern analysis"
-      }
     }
   ],
   "deprecated": [
     {
       "file": "shared/threat-matrix.json",
-      "reason": "Legacy ONI-era threat matrix (24 techniques, ONI-T### IDs). Superseded by this registry.",
+      "reason": "Legacy ONI-era threat matrix (24 techniques, ONI-T### IDs). Superseded by this atlas.",
       "migration": "All ONI-T### techniques merged into QIF-T#### range. See legacy_ids field on each technique."
     },
     {
@@ -15713,7 +15644,7 @@
   },
   "tara_spec": {
     "version": "1.0",
-    "name": "TARA — Therapeutic Atlas of Risks and Applications",
+    "name": "TARA — Therapeutic Applications & Risk Assessment",
     "description": "Mechanism-first Rosetta Stone. Same physical phenomenon, four stakeholder views. Security researchers see attack vectors. Clinicians see therapeutic modalities. Regulators see compliance requirements. Engineers see physical parameters.",
     "dual_use_classifications": {
       "confirmed": "Published therapeutic and security applications exist for this mechanism",

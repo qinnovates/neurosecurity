@@ -264,8 +264,8 @@
       "entry": 50,
       "date": "2026-02-09",
       "title": "TARA Named",
-      "short": "Therapeutic Atlas of Risks and Applications",
-      "description": "The threat registry became TARA: Therapeutic Atlas of Risks and Applications. Mechanism-first Rosetta Stone architecture with four projections (security, clinical, diagnostic, governance). Named after the Buddhist bodhisattva of compassion and protection.",
+      "short": "Therapeutic Applications & Risk Assessment",
+      "description": "The threat registry became TARA: Therapeutic Applications & Risk Assessment. Mechanism-first Rosetta Stone architecture with four projections (security, clinical, diagnostic, governance). Named after the Buddhist bodhisattva of compassion and protection.",
       "category": "atlas",
       "type": "milestone",
       "metrics": {
@@ -299,7 +299,7 @@
     "framework": { "label": "QIF Framework", "color": "#06b6d4" },
     "protocol": { "label": "NSP Protocol", "color": "#8b5cf6" },
     "scoring": { "label": "NISS Scoring", "color": "#f59e0b" },
-    "registry": { "label": "Threat Registry", "color": "#ef4444" },
+    "registry": { "label": "Threat Atlas", "color": "#ef4444" },
     "atlas": { "label": "TARA Atlas", "color": "#10b981" },
     "milestone": { "label": "Major Milestone", "color": "#ffffff" }
   },

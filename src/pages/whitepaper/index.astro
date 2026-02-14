@@ -21,7 +21,7 @@ const latestChange = getLatestChangelog();
 
 <PageLayout
   title="QIF Whitepaper v6.0"
-  description="The Quantum Indeterministic Framework — an open security standard for brain-computer interfaces. 103 techniques, 11 bands, 5 neural-specific scoring metrics."
+  description={`The Quantum Indeterministic Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
 >
@@ -36,7 +36,7 @@ const latestChange = getLatestChangelog();
             { href: '#problem', label: 'The Problem' },
             { href: '#approach', label: 'Our Approach' },
             { href: '#hourglass', label: 'The Hourglass' },
-            { href: '#tara', label: 'TARA Registry' },
+            { href: '#tara', label: 'TARA Atlas' },
             { href: '#niss', label: 'NISS Scoring' },
             { href: '#neural-impact', label: 'Neural Impact Chain' },
             { href: '#governance', label: 'Governance' },
@@ -58,7 +58,7 @@ const latestChange = getLatestChangelog();
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "QIF Whitepaper v6.0: An Open Security Standard for Brain-Computer Interfaces",
-        "description": "The Quantum Indeterministic Framework — 103 techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.",
+        "description": `The Quantum Indeterministic Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-13",
@@ -73,7 +73,7 @@ const latestChange = getLatestChangelog();
           An Open Security Standard for Brain-Computer Interfaces
         </h1>
         <p class="text-lg text-[var(--color-text-muted)] mb-6">
-          103 catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics.<br />
+          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics.<br />
           One framework to map, measure, and mitigate threats to the human brain.
         </p>
         <div class="flex flex-wrap items-center gap-3 mb-4">
@@ -235,7 +235,7 @@ const latestChange = getLatestChangelog();
             Seven bands are <strong>neural</strong> (N7 Neocortex through N1 Spinal Cord), representing biological tissue with distinct functional properties and vulnerability profiles. One band is the <strong>interface</strong> (I0), the electrode-tissue boundary where biological signals are converted to digital data &mdash; and where the highest concentration of techniques converges. Three bands are <strong>synthetic</strong> (S1 Analog through S3 Radio/Wireless), covering the electronic processing and communication chain.
           </p>
           <p>
-            The hourglass shape is deliberate. I0, the neural interface band, constitutes the architectural chokepoint. All signals must traverse this point. With 53 of the 103 catalogued techniques targeting this band, it represents over half of the total threat surface. Securing I0 is the single highest-leverage investment in BCI safety.
+            The hourglass shape is deliberate. I0, the neural interface band, constitutes the architectural chokepoint. All signals must traverse this point. With over half of the {stats.totalTechniques} catalogued techniques targeting this band, it represents the majority of the total threat surface. Securing I0 is the single highest-leverage investment in BCI safety.
           </p>
         </div>
 
@@ -281,13 +281,13 @@ const latestChange = getLatestChangelog();
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 4. TARA REGISTRY                                          -->
+      <!-- 4. TARA ATLAS                                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="tara" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">4. TARA Registry</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">4. TARA Atlas</h2>
         <div class="prose mb-8">
           <p>
-            TARA &mdash; the Therapeutic Atlas of Risks and Applications &mdash; is a dual-use registry of {stats.totalTechniques} BCI techniques. Each entry functions simultaneously as a risk vector, an ethical concern, and a potential therapeutic application. Transcranial magnetic stimulation can treat depression but also induce seizures; deep brain stimulation can manage Parkinson's yet cause involuntary movement. The same mechanisms capable of healing can also inflict harm.
+            TARA, the Therapeutic Applications &amp; Risk Assessment, is a dual-use atlas of {stats.totalTechniques} BCI techniques. Each entry functions simultaneously as a risk vector, an ethical concern, and a potential therapeutic application. Transcranial magnetic stimulation can treat depression but also induce seizures; deep brain stimulation can manage Parkinson's yet cause involuntary movement. The same mechanisms capable of healing can also inflict harm.
           </p>
           <p>
             This inherent duality is the central insight of TARA. Security and clinical safety are not distinct challenges but rather two perspectives on the same fundamental problem. TARA elucidates this through four explicit projections:
@@ -329,14 +329,14 @@ const latestChange = getLatestChangelog();
                   </li>
                 ))}
               </ul>
-              <a href="/TARA/" class="text-xs text-[var(--color-accent-primary)] hover:underline">View recent additions in the TARA Registry &rarr;</a>
+              <a href="/TARA/" class="text-xs text-[var(--color-accent-primary)] hover:underline">View recent additions in the TARA Atlas &rarr;</a>
             </div>
           )}
         </div>
 
         <!-- How to Read TARA -->
         <div class="glass rounded-xl p-6 mb-8" style="border-left: 3px solid var(--color-accent-tertiary);">
-          <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-4">How to Read the TARA Registry</h4>
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-4">How to Read the TARA Atlas</h4>
           <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
             <p>
               TARA is structured as an interactive grid. Each row is a technique (identified by a QIF-T ID). Each column depends on which <strong>projection</strong> you are viewing:
@@ -370,7 +370,7 @@ const latestChange = getLatestChangelog();
 
         <div class="text-center">
           <a href="/TARA/" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">
-            Open the TARA Registry &rarr;
+            Open the TARA Atlas &rarr;
           </a>
           <p class="text-xs text-[var(--color-text-faint)] mt-2">Browse the full grid. Click any cell. Switch between all four projections.</p>
         </div>
@@ -476,7 +476,7 @@ const latestChange = getLatestChangelog();
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6. The Neural Impact Chain</h2>
         <div class="prose mb-8">
           <p>
-            The Neural Impact Chain (NIC) outlines a six-stage mapping that links techniques to potential psychiatric diagnoses. For each technique within the TARA registry, the chain traces the targeted hourglass band, the affected neural structure, the disrupted cognitive or motor function, the resulting NISS score, and the corresponding DSM-5-TR diagnostic category.
+            The Neural Impact Chain (NIC) outlines a six-stage mapping that links techniques to potential psychiatric diagnoses. For each technique within the TARA atlas, the chain traces the targeted hourglass band, the affected neural structure, the disrupted cognitive or motor function, the resulting NISS score, and the corresponding DSM-5-TR diagnostic category.
           </p>
           <p>
             To our knowledge, this represents the <strong>first systematic mapping from cybersecurity severity to psychiatric diagnosis</strong>. It establishes a verifiable claim: specific techniques, applied to specific neural bands, produce predictable functional impacts that correspond to recognized diagnostic categories.
@@ -538,7 +538,7 @@ const latestChange = getLatestChangelog();
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">7. Governance</h2>
         <div class="prose mb-8">
           <p>
-            Each technique within the TARA registry is assigned a consent tier reflecting the minimum regulatory oversight necessary for its deployment. These tiers are derived directly from NISS scores: higher biological impact, lower reversibility, and greater consent violation necessitate stricter governance.
+            Each technique within the TARA atlas is assigned a consent tier reflecting the minimum regulatory oversight necessary for its deployment. These tiers are derived directly from NISS scores: higher biological impact, lower reversibility, and greater consent violation necessitate stricter governance.
           </p>
         </div>
 
@@ -638,7 +638,7 @@ const latestChange = getLatestChangelog();
               <h3 class="font-semibold font-[family-name:var(--font-heading)]">Researchers</h3>
             </div>
             <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
-              <li>Use the <a href="/TARA/">TARA registry</a> to identify risk profiles for BCI techniques in your studies</li>
+              <li>Use the <a href="/TARA/">TARA atlas</a> to identify risk profiles for BCI techniques in your studies</li>
               <li>Apply <a href="/scoring/">NISS scoring</a> to quantify neural impact in vulnerability reports</li>
               <li>Reference the <a href="#neural-impact">Neural Impact Chain</a> for technique-to-diagnosis mapping</li>
               <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.0. Qinnovate. Available at qinnovate.com</code></li>
@@ -720,7 +720,7 @@ const latestChange = getLatestChangelog();
 
         <div class="glass rounded-xl p-6 text-center">
           <p class="text-[var(--color-text-muted)] text-sm mb-4">
-            QIF, its underlying standards, and the TARA registry are all maintained as open resources. For developers of devices that interface with the brain, we offer support in securing these critical systems.
+            QIF, its underlying standards, and the TARA atlas are all maintained as open resources. For developers of devices that interface with the brain, we offer support in securing these critical systems.
           </p>
           <div class="flex flex-wrap justify-center gap-4">
             <a href="https://github.com/qinnovates" class="px-4 py-2 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium text-sm hover:opacity-90 transition-opacity">

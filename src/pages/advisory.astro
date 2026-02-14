@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { QIF_VERSION, STATS } from '../lib/qif-constants';
+import { THREAT_VECTORS } from '../lib/threat-data';
+const totalTechniques = THREAT_VECTORS.length;
 import '../styles/global.css';
 
 const services = [
@@ -126,7 +128,7 @@ const engagements = [
         </div>
         <div>
           <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">15</div>
-          <div class="text-xs text-[var(--color-text-faint)] mt-1">Threat Tactics in TARA Registry</div>
+          <div class="text-xs text-[var(--color-text-faint)] mt-1">Threat Tactics in TARA Atlas</div>
         </div>
         <div>
           <div class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-status-safe)]">v{QIF_VERSION}</div>
@@ -148,7 +150,7 @@ const engagements = [
           There is no OWASP for neural interfaces. No threat taxonomy for brain-computer systems. No established methodology for assessing whether a BCI can be compromised, what the blast radius looks like, or how to remediate it.
         </p>
         <p>
-          <strong class="text-[var(--color-text-primary)]">Qinnovate built that methodology.</strong> The QIF standard, the TARA threat registry, and the NISS scoring system exist because Kevin Qi wrote them. When you work with Qinnovate, you're working with the person who defined the threat landscape — not a consultant learning it on your dime.
+          <strong class="text-[var(--color-text-primary)]">Qinnovate built that methodology.</strong> The QIF standard, the TARA threat atlas, and the NISS scoring system exist because Kevin Qi wrote them. When you work with Qinnovate, you're working with the person who defined the threat landscape — not a consultant learning it on your dime.
         </p>
       </div>
     </div>
@@ -174,7 +176,7 @@ const engagements = [
         </h3>
 
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6">
-          While extending the TARA threat registry to cover consumer devices upstream of neural interfaces, Qinnovate identified a 9-year-old vulnerability in RealTek HD Audio codec drivers. Any software process can silently reprogram a headphone jack to function as a microphone. No elevated privileges. No user notification. Publicly demonstrated since 2016. Never assigned a CVE.
+          While extending the TARA threat atlas to cover consumer devices upstream of neural interfaces, Qinnovate identified a 9-year-old vulnerability in RealTek HD Audio codec drivers. Any software process can silently reprogram a headphone jack to function as a microphone. No elevated privileges. No user notification. Publicly demonstrated since 2016. Never assigned a CVE.
         </p>
 
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6">
@@ -262,7 +264,7 @@ const engagements = [
             Read the full write-up &#8594;
           </a>
           <a href="/TARA/" class="text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] transition-colors">
-            View TARA registry &#8594;
+            View TARA atlas &#8594;
           </a>
         </div>
       </div>
@@ -441,12 +443,12 @@ const engagements = [
         </p>
       </a>
       <a href="/TARA/" class="glass rounded-xl p-6 card-hover group">
-        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-tertiary)] mb-3">Threat Registry</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-tertiary)] mb-3">Threat Atlas</p>
         <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-tertiary)] transition-colors">
-          TARA Registry
+          TARA Atlas
         </h3>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          103 catalogued BCI techniques with NISS severity scores, MITRE mappings, and clinical overlays.
+          {totalTechniques} catalogued BCI techniques with NISS severity scores, MITRE mappings, and clinical overlays.
         </p>
       </a>
       <a href="/framework/" class="glass rounded-xl p-6 card-hover group">

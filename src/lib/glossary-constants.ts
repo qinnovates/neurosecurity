@@ -176,10 +176,10 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   },
   {
     id: 'tara',
-    term: 'TARA (Therapeutic Atlas of Risks and Applications)',
+    term: 'TARA (Therapeutic Applications & Risk Assessment)',
     type: 'component',
-    shortDef: 'Interactive threat registrar mapping BCI attack vectors across four domains.',
-    fullDef: 'A comprehensive threat registry platform organizing BCI threats across Security, Clinical, Governance, and Engineering domains. Contains technique entries scored with NISS and classified using the TARA Taxonomy. Provides filterable, searchable access to the full QIF threat model.',
+    shortDef: 'Interactive threat atlas mapping BCI attack vectors across four domains.',
+    fullDef: 'A comprehensive threat atlas organizing BCI threats across Security, Clinical, Governance, and Engineering domains. Contains technique entries scored with NISS and classified using the TARA Taxonomy. Provides filterable, searchable access to the full QIF threat model.',
     relatedTerms: ['niss', 'tara-taxonomy'],
     href: '/TARA/',
     tags: ['component', 'original'],

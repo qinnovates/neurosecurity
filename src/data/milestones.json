@@ -1,102 +1,162 @@
 {
   "metrics": {
-    "techniques_catalogued": 103,
+    "techniques_catalogued": 102,
     "tactics": 15,
     "domains": 8,
-    "cvss_vectors_mapped": 103,
-    "niss_vectors_scored": 103,
-    "cves_filed": 1,
-    "pocs_built": 1,
-    "cwes_demonstrated": 3,
-    "standards_submitted": 1,
-    "therapeutic_mappings": 78,
-    "specifications_published": 3,
     "days_active": null
   },
+  "disclosures": [
+    {
+      "id": "realtek-hda",
+      "title": "RealTek HD Audio Codec Jack Retasking",
+      "summary": "CWE-862 (Missing Authorization) — 9-year-old unfiled vulnerability found through TARA systematic gap analysis.",
+      "status": "filed",
+      "date": "2026-02-11",
+      "cwes": ["CWE-862"],
+      "disclosed_to": ["TWCERT/CC", "RealTek", "MITRE"],
+      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
+    },
+    {
+      "id": "liblsl",
+      "title": "LSL BCI Data Streaming Library",
+      "summary": "Three-phase exploit chain against a widely-used BCI data streaming library. Private disclosure channel requested.",
+      "status": "disclosed",
+      "date": "2026-02-11",
+      "cwes": ["CWE-787", "CWE-190", "CWE-125"],
+      "disclosed_to": ["sccn/liblsl maintainers"],
+      "href": null
+    }
+  ],
+  "standards": [
+    {
+      "id": "niss-first",
+      "title": "NISS v1.0",
+      "body": "FIRST.org CVSS SIG",
+      "summary": "Formal proposal for NISS registration as a CVSS v4.0 extension under Section 3.11 of the User Guide.",
+      "status": "submitted",
+      "date": "2026-02-11",
+      "href": "/scoring/"
+    }
+  ],
+  "specifications": [
+    {
+      "id": "qif-whitepaper",
+      "title": "QIF Whitepaper",
+      "version": "6.0",
+      "summary": "Open security standard for brain-computer interfaces — hourglass architecture, threat modeling, neural impact scoring.",
+      "href": "/whitepaper/"
+    },
+    {
+      "id": "nsp-protocol",
+      "title": "NSP Protocol",
+      "version": "0.3",
+      "summary": "Post-quantum neural security protocol. Five defense layers at 3.25% implant power budget.",
+      "href": "/nsp/"
+    },
+    {
+      "id": "niss-scoring",
+      "title": "NISS Scoring System",
+      "version": "1.0",
+      "summary": "CVSS v4.0 extension for neural interfaces. Five metrics: Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, Neuroplasticity.",
+      "href": "/scoring/"
+    }
+  ],
   "timeline": [
     {
       "date": "2026-01-15",
       "title": "QIF Framework v1.0 Published",
       "description": "71 attack techniques across 11 tactics and 7 domains. Full threat registry with TARA technique IDs.",
       "category": "framework",
-      "icon": "shield"
+      "icon": "shield",
+      "href": "/framework/"
     },
     {
       "date": "2026-01-20",
       "title": "NSP Protocol Specification Released",
       "description": "Post-quantum neural security protocol. Under 4% implant power budget. Wire-level encryption for BCI data streams.",
       "category": "protocol",
-      "icon": "lock"
+      "icon": "lock",
+      "href": "/nsp/"
     },
     {
       "date": "2026-01-28",
       "title": "TARA Atlas Published",
       "description": "Dual-use atlas mapping 71 attack techniques to therapeutic analogs. 60% of attack mechanisms have clinical counterparts.",
       "category": "research",
-      "icon": "book"
+      "icon": "book",
+      "href": "/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/"
     },
     {
       "date": "2026-02-08",
       "title": "NISS v1.0 Specification Complete",
       "description": "First CVSS v4.0 extension for neural interfaces. Five metrics: Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, Neuroplasticity.",
       "category": "scoring",
-      "icon": "calculator"
+      "icon": "calculator",
+      "href": "/scoring/"
     },
     {
       "date": "2026-02-10",
       "title": "71 CVSS v4.0 Base Vector Mappings Complete",
       "description": "Every technique in the QIF threat registry mapped to a CVSS v4.0 base vector with companion NISS extension vector.",
       "category": "scoring",
-      "icon": "map"
+      "icon": "map",
+      "href": "/scoring/"
     },
     {
       "date": "2026-02-11",
       "title": "First BCI Software PoC Exploit",
       "description": "Three-phase exploit chain against a widely-used BCI data streaming library. Responsible disclosure in progress.",
       "category": "security",
-      "icon": "terminal"
+      "icon": "terminal",
+      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "date": "2026-02-11",
       "title": "NISS Submitted to FIRST.org CVSS SIG",
       "description": "Formal proposal sent to cvss@first.org for NISS registration as a CVSS v4.0 extension under Section 3.11 of the User Guide.",
       "category": "standards",
-      "icon": "send"
+      "icon": "send",
+      "href": "/scoring/"
     },
     {
       "date": "2026-02-11",
       "title": "First CVE Filed via TARA Framework",
       "description": "CWE-862 (Missing Authorization) on RealTek HD Audio codec jack retasking. 9-year-old unfiled vulnerability found through systematic gap analysis. Disclosed to TWCERT/CC, RealTek, and MITRE.",
       "category": "security",
-      "icon": "alert"
+      "icon": "alert",
+      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "date": "2026-02-11",
       "title": "Consumer Sensor Exploitation Domain Added",
       "description": "New 8th domain (S) with 4 tactics and 8 initial techniques covering upstream consumer device attacks. Later expanded to 28 S-domain techniques (99 total).",
       "category": "framework",
-      "icon": "shield"
+      "icon": "shield",
+      "href": "/TARA/"
     },
     {
       "date": "2026-02-11",
-      "title": "S-Domain Expanded to 28 Techniques (T0080–T0099)",
+      "title": "S-Domain Expanded to 28 Techniques (T0080\u2013T0099)",
       "description": "20 new consumer sensor techniques across audio, optical, IMU, RF, thermal, and biometric categories. 5 chain techniques document multi-stage escalation paths. Registry reaches 99 techniques.",
       "category": "framework",
-      "icon": "shield"
+      "icon": "shield",
+      "href": "/TARA/"
     },
     {
       "date": "2026-02-12",
       "title": "DSM-5-TR Neural Impact Chain Mapping",
       "description": "First-ever mapping from BCI security severity to psychiatric diagnosis. All techniques mapped to DSM-5-TR diagnostic clusters via the Neural Impact Chain. See the whitepaper v6 or TARA changelog for details.",
       "category": "research",
-      "icon": "brain"
+      "icon": "brain",
+      "href": "/news/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
     },
     {
       "date": "2026-02-13",
       "title": "Registry Crosses 100 Techniques",
-      "description": "4 new consumer device side-channel techniques (T0100\u2013T0103): neural steganographic encoding, multi-modal keystroke inference, screen photometry sensing, and WiFi CSI respiratory inference. All confirmed dual-use with clinical applications.",
+      "description": "3 new consumer device side-channel techniques (T0100\u2013T0102): neural steganographic encoding, multi-modal keystroke inference, and screen photometry sensing. WiFi CSI consumer-grade capabilities merged into T0090. All confirmed dual-use with clinical applications.",
       "category": "framework",
-      "icon": "shield"
+      "icon": "shield",
+      "href": "/TARA/"
     }
   ]
 }
