@@ -70,7 +70,7 @@
   },
   "projects": {
     "qif": {
-      "full_name": "The Quantum Indeterministic Framework for Neural Security",
+      "full_name": "The Quantified Interconnection Framework for Neural Security",
       "short_name": "QIF",
       "pronunciation": "CHIEF",
       "subtitle": "A Model for Quantum Neural Interfaces",
@@ -100,30 +100,105 @@
   "layers": {
     "_comment": "Single source of truth for 14-layer model. L1-L7 Silicon, L8 Gateway, L9-L14 Biology (hourglass/funnel model)",
     "silicon": [
-      { "id": "L1", "name": "Physical Carrier", "zone": "Physical", "color": "#1e3a5f" },
-      { "id": "L2", "name": "Signal Processing", "zone": "Data Link", "color": "#1e4d6f" },
-      { "id": "L3", "name": "Protocol", "zone": "Network", "color": "#1e5f7f" },
-      { "id": "L4", "name": "Transport", "zone": "Transport", "color": "#1e6f8f" },
-      { "id": "L5", "name": "Session", "zone": "Session", "color": "#1e7f9f" },
-      { "id": "L6", "name": "Presentation", "zone": "Presentation", "color": "#1e8faf" },
-      { "id": "L7", "name": "Application Interface", "zone": "Application", "color": "#2d9fbf" }
+      {
+        "id": "L1",
+        "name": "Physical Carrier",
+        "zone": "Physical",
+        "color": "#1e3a5f"
+      },
+      {
+        "id": "L2",
+        "name": "Signal Processing",
+        "zone": "Data Link",
+        "color": "#1e4d6f"
+      },
+      {
+        "id": "L3",
+        "name": "Protocol",
+        "zone": "Network",
+        "color": "#1e5f7f"
+      },
+      {
+        "id": "L4",
+        "name": "Transport",
+        "zone": "Transport",
+        "color": "#1e6f8f"
+      },
+      {
+        "id": "L5",
+        "name": "Session",
+        "zone": "Session",
+        "color": "#1e7f9f"
+      },
+      {
+        "id": "L6",
+        "name": "Presentation",
+        "zone": "Presentation",
+        "color": "#1e8faf"
+      },
+      {
+        "id": "L7",
+        "name": "Application Interface",
+        "zone": "Application",
+        "color": "#2d9fbf"
+      }
     ],
     "gateway": [
-      { "id": "L8", "name": "Neural Gateway", "zone": "Firewall", "color": "#d97706", "highlight": true }
+      {
+        "id": "L8",
+        "name": "Neural Gateway",
+        "zone": "Firewall",
+        "color": "#d97706",
+        "highlight": true
+      }
     ],
     "biology": [
-      { "id": "L9", "name": "Signal Processing", "zone": "Filtering", "color": "#14532d" },
-      { "id": "L10", "name": "Neural Protocol", "zone": "Encoding", "color": "#166534" },
-      { "id": "L11", "name": "Cognitive Transport", "zone": "Delivery", "color": "#15803d" },
-      { "id": "L12", "name": "Cognitive Session", "zone": "Context", "color": "#16a34a" },
-      { "id": "L13", "name": "Semantic Layer", "zone": "Intent", "color": "#22c55e" },
-      { "id": "L14", "name": "Identity Layer", "zone": "Self", "color": "#9E61EB" }
+      {
+        "id": "L9",
+        "name": "Signal Processing",
+        "zone": "Filtering",
+        "color": "#14532d"
+      },
+      {
+        "id": "L10",
+        "name": "Neural Protocol",
+        "zone": "Encoding",
+        "color": "#166534"
+      },
+      {
+        "id": "L11",
+        "name": "Cognitive Transport",
+        "zone": "Delivery",
+        "color": "#15803d"
+      },
+      {
+        "id": "L12",
+        "name": "Cognitive Session",
+        "zone": "Context",
+        "color": "#16a34a"
+      },
+      {
+        "id": "L13",
+        "name": "Semantic Layer",
+        "zone": "Intent",
+        "color": "#22c55e"
+      },
+      {
+        "id": "L14",
+        "name": "Identity Layer",
+        "zone": "Self",
+        "color": "#9E61EB"
+      }
     ]
   },
   "brand_color": {
     "_comment": "The teal where L9 and L10 overlap — two biological layers in harmony.",
     "hex": "#22C68D",
-    "rgb": [34, 198, 141],
+    "rgb": [
+      34,
+      198,
+      141
+    ],
     "name": "Neurosec Teal"
   },
   "stats": {

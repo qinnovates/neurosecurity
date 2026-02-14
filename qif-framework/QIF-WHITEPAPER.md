@@ -1,6 +1,6 @@
 # QIF Whitepaper v5.2
 
-## The Quantum Indeterministic Framework for Neural Security
+## QIF: Quantified Interconnection Framework for Neural Security
 
 ### A Unified Physics-Based Security Architecture for Brain-Computer Interfaces
 
@@ -21,7 +21,7 @@
 
 Securing a brain-computer interface is not a single problem --- it is three interlocking problems that must be solved together. Qinnovate addresses all three with an integrated stack: a threat model, a wire protocol, and a compression engine. Each pillar is independently useful, but their power is in the combination.
 
-### QIF --- Quantum Indeterministic Framework
+### QIF --- Quantified Interconnection Framework
 
 **The threat model.** An 11-band hourglass architecture that maps every attack surface from neural tissue to synthetic systems into a single equation: `QI(b,t) = e^{-S(b,t)}`. Defines *what* to defend and *how to measure* whether it's working.
 
@@ -49,7 +49,7 @@ Securing a brain-computer interface is not a single problem --- it is three inte
 
 ## 1. Abstract
 
-Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet their security architectures remain grounded in classical computing paradigms. This paper presents the Quantum Indeterministic Framework (QIF), an 11-band hourglass security architecture spanning the neural-synthetic boundary, and proposes a unified security equation: `QI(b,t) = e^{-S(b,t)}`. The per-band formulation is grounded in spectral decomposition via the Short-Time Fourier Transform (STFT), which serves as both the bridge from raw time-domain signals to band-indexed security scoring and the primary detection mechanism for three of five identified attack coupling mechanisms. The QI equation combines four classical signal integrity terms (phase coherence, normalized transport entropy, amplitude stability, and a scale-frequency validity check derived from `L = v/f`) with three quantum terms (indeterminacy and entanglement gated by decoherence; tunneling ungated, as it persists in classical regimes).
+Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet their security architectures remain grounded in classical computing paradigms. This paper presents the Quantified Interconnection Framework (QIF), an 11-band hourglass security architecture spanning the neural-synthetic boundary, and proposes a unified security equation: `QI(b,t) = e^{-S(b,t)}`. The per-band formulation is grounded in spectral decomposition via the Short-Time Fourier Transform (STFT), which serves as both the bridge from raw time-domain signals to band-indexed security scoring and the primary detection mechanism for three of five identified attack coupling mechanisms. The QI equation combines four classical signal integrity terms (phase coherence, normalized transport entropy, amplitude stability, and a scale-frequency validity check derived from `L = v/f`) with three quantum terms (indeterminacy and entanglement gated by decoherence; tunneling ungated, as it persists in classical regimes).
 
 We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. We propose the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating QI scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption, scaled across three device tiers and reframed as the trust layer enabling therapeutic BCI deployment.
 
@@ -91,7 +91,7 @@ Physics has always been part of BCI engineering. Individual physics checks exist
 
 ### 2.4 Statement of Novelty
 
-The core novelty of the Quantum Indeterministic Framework is the **synthesis of three disparate research fields --- quantum biology, BCI security, and post-quantum cryptography --- into a single, unified, and empirically falsifiable architecture.** While prior work exists in each domain individually, QIF is the first framework to formally connect them.
+The core novelty of the Quantified Interconnection Framework is the **synthesis of three disparate research fields --- quantum biology, BCI security, and post-quantum cryptography --- into a single, unified, and empirically falsifiable architecture.** While prior work exists in each domain individually, QIF is the first framework to formally connect them.
 
 Specifically, the contributions are not the individual components, but their integration:
 

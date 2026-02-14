@@ -26,7 +26,7 @@
 
 ## 1. Framework Identity
 
-- **Name:** QIF — Quantum Indeterministic Framework for Neural Security
+- **Name:** QIF — Quantified Interconnection Framework for Neural Security
 - **Pronunciation:** "CHIEF"
 - **Predecessor:** ONI (Organic Neural Interface) — deprecated
 - **Layer model version:** v4.0 Hourglass (2026-02-06)

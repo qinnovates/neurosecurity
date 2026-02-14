@@ -23,20 +23,20 @@ capture:
 \caption{CVSS v4.0 gap analysis across 102 TARA techniques.}
 \label{tab:gap}
 \small
-\begin{tabular}{@{}c l r l@{}}
+\begin{tabularx}{\textwidth}{@{}c X r l@{}}
 \toprule
 \textbf{Group} & \textbf{Gap Description} & \textbf{Count} & \textbf{Example} \\
 \midrule
 1 & CVSS captures most impact; NISS adds nuance &
-    12 & Pure digital attacks with minor neural context \\
-2 & CVSS captures exploitability but misses half the impact &
-    28 & Attacks with both system and biological consequences \\
-3 & CVSS fundamentally cannot express the primary impact &
-    58 & Cognitive, consent, or tissue-damage--dominant attacks \\
+    12 & Digital-only \\
+2 & CVSS captures exploitability but misses half &
+    28 & Mixed impact \\
+3 & CVSS fundamentally cannot express primary impact &
+    58 & Neural-dominant \\
 \midrule
   & \textbf{Techniques needing NISS extension} & \textbf{98} & \textbf{96.1\%} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 Group~3---where CVSS fundamentally cannot express the primary impact---contains
@@ -190,7 +190,8 @@ NISS supports four context profiles with differential weights:
 The NISS vector rides alongside the CVSS v4.0 base vector:
 
 \begin{lstlisting}
-CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N
+CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/
+  VC:H/VI:H/VA:H/SC:N/SI:N/SA:N
 NISS:1.0/BI:H/CG:C/CV:I/RV:P/NP:S
 \end{lstlisting}
 

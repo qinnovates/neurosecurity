@@ -43,6 +43,12 @@
 - Update `shared/` JSON files for data changes, which are copied to `docs/data` during build.
 - Documentation is a primary product; keep markdown clean and standard.
 
+## Cross-AI Validation Protocol
+After ANY cross-AI validation session (Gemini review, multi-model cycle, independent peer review),
+append a row to `governance/TRANSPARENCY.md` > Cross-AI Validation Sessions table BEFORE ending
+the session. Format: `| Date | Topic | AI Systems | Human Decision | Derivation Log Ref |`
+This applies to all agents (Claude, Antigravity, etc.) working in this repo.
+
 ## Standards & Governance (Scale)
 - **QIF (Security)**: All architectural changes must align with the 11-band hourglass model.
 - **TARA (Threats)**: New techniques must be scored with NISS (Neural Impact Scoring System).

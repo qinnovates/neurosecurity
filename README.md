@@ -65,7 +65,7 @@ Qinnovate exists because these organizations proved that open standards make ent
 
 ## Architecture
 
-### QIF (Quantum Indeterministic Framework)
+### QIF (Quantified Interconnection Framework)
 
 The security model. An 11-band hourglass architecture: 7 silicon bands (S3 Radio down to S1 Analog), a physical interface boundary (I0, the electrode-tissue interface), and 3 neural bands (N1 Peripheral up to N3 Cortical).
 

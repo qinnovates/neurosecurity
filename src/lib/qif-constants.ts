@@ -63,12 +63,16 @@ export const QI_CANDIDATES = {
   },
 } as const;
 
+export const QIF_NAME = "Quantified Interconnection Framework";
+export const QIF_FULL_NAME = "Quantified Interconnection Framework (QIF)";
+export const QIF_DESCRIPTION = "The first open standard for brain-computer interface security, mapping the boundary where silicon meets neuron through an 11-band hourglass architecture.";
+
 /** Three pillars of Qinnovate */
 export const PILLARS = [
   {
     id: 'qif',
     name: 'QIF Model',
-    fullName: 'Quantum Indeterministic Framework',
+    fullName: 'Quantified Interconnection Framework',
     tagline: 'The governance architecture',
     description: 'The OSI of Mind. An 11-band hourglass model mapping every surface — from neural tissue to synthetic systems — where security threats and ethical risks converge. One auditable framework for both.',
     href: '/framework/',

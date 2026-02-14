@@ -1,7 +1,7 @@
 {
   "version": "4.0",
   "generated_from": "qif-lab/src/config.py",
-  "framework": "QIF (Quantum Indeterministic Framework for Neural Security)",
+  "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
     "total_techniques": 102,
     "total_tactics": 15,
@@ -99,8 +99,18 @@
       "date": "2026-02-13",
       "title": "Consumer Device Side-Channel Techniques",
       "summary": "3 new techniques extending TARA into consumer device side-channel domains — neural steganography, multi-modal sensor fusion keystroke inference, and display-as-illuminator photometry. WiFi CSI consumer-grade capabilities merged into T0090. All confirmed dual-use with validated clinical applications.",
-      "added": ["QIF-T0100", "QIF-T0101", "QIF-T0102"],
-      "merged": [{"from": "QIF-T0103", "into": "QIF-T0090", "reason": "Consumer-grade WiFi CSI respiratory/gait inference shares the same physical mechanism as T0090 (OFDM subcarrier analysis); merged to cover both dedicated and commodity hardware scenarios."}],
+      "added": [
+        "QIF-T0100",
+        "QIF-T0101",
+        "QIF-T0102"
+      ],
+      "merged": [
+        {
+          "from": "QIF-T0103",
+          "into": "QIF-T0090",
+          "reason": "Consumer-grade WiFi CSI respiratory/gait inference shares the same physical mechanism as T0090 (OFDM subcarrier analysis); merged to cover both dedicated and commodity hardware scenarios."
+        }
+      ],
       "therapeutic_highlights": [
         "ABR audiometry and tinnitus masking therapy (T0100)",
         "Parkinson's detection via keystroke dynamics and tremor characterization (T0101)",
@@ -113,7 +123,10 @@
       "date": "2026-02-11",
       "title": "S-Domain Consumer Sensor Expansion",
       "summary": "28 new S-domain techniques across audio, optical, IMU, RF, thermal, and biometric categories. 5 chain techniques document multi-stage escalation paths from consumer devices to neural exploitation.",
-      "added_range": ["QIF-T0072", "QIF-T0099"],
+      "added_range": [
+        "QIF-T0072",
+        "QIF-T0099"
+      ],
       "therapeutic_highlights": [
         "Ear-canal neural monitoring for locked-in syndrome communication",
         "Remote photoplethysmography for contactless vital signs",
@@ -126,7 +139,10 @@
       "date": "2026-01-15",
       "title": "Initial TARA Atlas",
       "summary": "71 foundational BCI techniques across neural injection, protocol disruption, data harvesting, neural manipulation, evasion, cognitive exploitation, biometric invasion, and countermeasures.",
-      "added_range": ["QIF-T0001", "QIF-T0071"],
+      "added_range": [
+        "QIF-T0001",
+        "QIF-T0071"
+      ],
       "therapeutic_highlights": [
         "Transcranial magnetic stimulation for depression treatment",
         "Deep brain stimulation for Parkinson's management",
@@ -15193,7 +15209,14 @@
       "attack": "Neural steganographic encoding (inaudible audio watermarking for covert neural command/biofingerprint channel)",
       "tactic": "QIF-S.CH",
       "bands": "S3→S1→I0→N1→N4→N7",
-      "band_ids": ["S3", "S1", "I0", "N1", "N4", "N7"],
+      "band_ids": [
+        "S3",
+        "S1",
+        "I0",
+        "N1",
+        "N4",
+        "N7"
+      ],
       "coupling": "ACOUSTIC",
       "access": null,
       "classical": "Yes",
@@ -15220,8 +15243,17 @@
         "pins": false
       },
       "cross_references": {
-        "related_ids": ["QIF-T0072", "QIF-T0073", "QIF-T0074", "QIF-T0079"],
-        "secondary_tactics": ["QIF-S.CH", "QIF-S.FP", "QIF-N.SC"]
+        "related_ids": [
+          "QIF-T0072",
+          "QIF-T0073",
+          "QIF-T0074",
+          "QIF-T0079"
+        ],
+        "secondary_tactics": [
+          "QIF-S.CH",
+          "QIF-S.FP",
+          "QIF-N.SC"
+        ]
       },
       "tara": {
         "mechanism": "Inaudible audio carriers (ultrasonic 18-22 kHz or infrasonic <20 Hz) or psychoacoustically masked signals embedded within audible content, propagating through consumer audio hardware to auditory nerve and cortex",
@@ -15247,13 +15279,24 @@
         },
         "governance": {
           "consent_tier": "enhanced",
-          "monitoring": ["ultrasonic_emission_detection", "psychoacoustic_analysis", "AEP_enrollment_audit", "data_encryption_status"],
-          "regulations": ["HIPAA (if health/biometric data derived)", "GDPR Art. 9 (biometric data)", "FCC Part 15 (ultrasonic emissions)"],
+          "monitoring": [
+            "ultrasonic_emission_detection",
+            "psychoacoustic_analysis",
+            "AEP_enrollment_audit",
+            "data_encryption_status"
+          ],
+          "regulations": [
+            "HIPAA (if health/biometric data derived)",
+            "GDPR Art. 9 (biometric data)",
+            "FCC Part 15 (ultrasonic emissions)"
+          ],
           "data_classification": "sensitive_biometric",
           "safety_ceiling": "Audio emissions within consumer SPL limits; informed consent for any biometric enrollment; AEP data encrypted at rest and in transit"
         },
         "engineering": {
-          "coupling": ["acoustic"],
+          "coupling": [
+            "acoustic"
+          ],
           "parameters": {
             "carrier_frequency_kHz": "18-22 (ultrasonic) or 0.002-0.020 (infrasonic)",
             "data_rate_bps": "50-200 (ultrasonic), up to 1000 (spread-spectrum)",
@@ -15261,7 +15304,11 @@
             "SNR_requirement_dB": ">10",
             "encoding_schemes": "FSK, OFDM, spread-spectrum"
           },
-          "hardware": ["consumer_speaker", "consumer_microphone", "DSP_processor"],
+          "hardware": [
+            "consumer_speaker",
+            "consumer_microphone",
+            "DSP_processor"
+          ],
           "detection": "Spectral analysis of audio output for ultrasonic/infrasonic components, psychoacoustic masking anomaly detection, AEP baseline comparison"
         },
         "dsm5": {
@@ -15281,7 +15328,11 @@
         "gap_summary": "Covert channel partially captured by CVSS confidentiality; neural biofingerprint and subliminal cognitive dimensions not expressible"
       },
       "feeds_into": {
-        "targets": ["QIF-S.CH", "QIF-S.FP", "QIF-N.SC"],
+        "targets": [
+          "QIF-S.CH",
+          "QIF-S.FP",
+          "QIF-N.SC"
+        ],
         "note": "Enables covert command channels and biometric authentication; chains with T0072-T0074 audio techniques"
       }
     },
@@ -15290,7 +15341,11 @@
       "attack": "Multi-modal keystroke inference via acoustic-optical-RF fusion (password/input recovery without mic/camera permissions)",
       "tactic": "QIF-S.SC",
       "bands": "S3→S2→S1",
-      "band_ids": ["S3", "S2", "S1"],
+      "band_ids": [
+        "S3",
+        "S2",
+        "S1"
+      ],
       "coupling": "ACOUSTIC+ELECTROMAGNETIC+OPTICAL",
       "access": null,
       "classical": "Yes",
@@ -15316,8 +15371,17 @@
         "pins": false
       },
       "cross_references": {
-        "related_ids": ["QIF-T0080", "QIF-T0085", "QIF-T0090", "QIF-T0096"],
-        "secondary_tactics": ["QIF-S.SC", "QIF-S.RP", "QIF-C.EX"]
+        "related_ids": [
+          "QIF-T0080",
+          "QIF-T0085",
+          "QIF-T0090",
+          "QIF-T0096"
+        ],
+        "secondary_tactics": [
+          "QIF-S.SC",
+          "QIF-S.RP",
+          "QIF-C.EX"
+        ]
       },
       "tara": {
         "mechanism": "Temporal fusion of acoustic keystroke emanations, screen optical luminance changes, and WiFi CSI phase variance to reconstruct typed input including passwords",
@@ -15342,13 +15406,25 @@
         },
         "governance": {
           "consent_tier": "enhanced",
-          "monitoring": ["side_channel_emission_audit", "permission_scope_review", "multi_sensor_correlation_detection"],
-          "regulations": ["HIPAA (if health data inferred)", "GDPR Art. 9 (behavioral biometrics)", "FTC (deceptive data practices)"],
+          "monitoring": [
+            "side_channel_emission_audit",
+            "permission_scope_review",
+            "multi_sensor_correlation_detection"
+          ],
+          "regulations": [
+            "HIPAA (if health data inferred)",
+            "GDPR Art. 9 (behavioral biometrics)",
+            "FTC (deceptive data practices)"
+          ],
           "data_classification": "PII",
           "safety_ceiling": "Side-channel monitoring requires explicit informed consent; fused biometric/behavioral data subject to data minimization requirements"
         },
         "engineering": {
-          "coupling": ["acoustic", "electromagnetic", "optical"],
+          "coupling": [
+            "acoustic",
+            "electromagnetic",
+            "optical"
+          ],
           "parameters": {
             "acoustic_bandwidth_Hz": "1-20000",
             "optical_sensitivity_lux": "<0.01",
@@ -15357,7 +15433,11 @@
             "fusion_accuracy_percent": ">95 (with 30+ training samples/key)",
             "individual_channel_accuracy": "60-70% acoustic, 40-50% optical, 55-65% CSI"
           },
-          "hardware": ["device_microphone_or_nearby_mic", "ambient_light_sensor", "wifi_chipset_with_CSI"],
+          "hardware": [
+            "device_microphone_or_nearby_mic",
+            "ambient_light_sensor",
+            "wifi_chipset_with_CSI"
+          ],
           "detection": "Anomalous correlation between acoustic/optical/RF sensors, unexpected ambient light sensor polling frequency, WiFi CSI extraction outside normal network operations"
         },
         "dsm5": {
@@ -15377,7 +15457,10 @@
         "gap_summary": "Multi-modal side-channel partially captured by CVSS confidentiality; behavioral biometric inference and permission model gap not expressible"
       },
       "feeds_into": {
-        "targets": ["QIF-C.EX", "QIF-S.RP"],
+        "targets": [
+          "QIF-C.EX",
+          "QIF-S.RP"
+        ],
         "note": "Password recovery enables downstream account compromise; behavioral data feeds cognitive profiling"
       }
     },
@@ -15386,7 +15469,10 @@
       "attack": "Passive facial geometry estimation via display-as-illuminator inverse photometry (presence/orientation detection without camera)",
       "tactic": "QIF-S.SC",
       "bands": "S3→S2",
-      "band_ids": ["S3", "S2"],
+      "band_ids": [
+        "S3",
+        "S2"
+      ],
       "coupling": "OPTICAL",
       "access": null,
       "classical": "Yes",
@@ -15411,8 +15497,14 @@
         "pins": false
       },
       "cross_references": {
-        "related_ids": ["QIF-T0101", "QIF-T0096"],
-        "secondary_tactics": ["QIF-S.SC", "QIF-S.FP"]
+        "related_ids": [
+          "QIF-T0101",
+          "QIF-T0096"
+        ],
+        "secondary_tactics": [
+          "QIF-S.SC",
+          "QIF-S.FP"
+        ]
       },
       "tara": {
         "mechanism": "Display photon emission reflects off user's face; ambient light sensor captures aggregate reflected irradiance; inverse photometry estimates facial presence, orientation, and physiological signals",
@@ -15436,13 +15528,22 @@
         },
         "governance": {
           "consent_tier": "standard",
-          "monitoring": ["ambient_light_sensor_polling_rate_audit", "screen_content_correlation_detection"],
-          "regulations": ["GDPR Art. 9 (biometric/health data)", "HIPAA (if health data derived)", "FTC (deceptive sensor practices)"],
+          "monitoring": [
+            "ambient_light_sensor_polling_rate_audit",
+            "screen_content_correlation_detection"
+          ],
+          "regulations": [
+            "GDPR Art. 9 (biometric/health data)",
+            "HIPAA (if health data derived)",
+            "FTC (deceptive sensor practices)"
+          ],
           "data_classification": "PII",
           "safety_ceiling": "Normal display operation; passive sensing; informed consent for any biometric or health data derivation"
         },
         "engineering": {
-          "coupling": ["optical"],
+          "coupling": [
+            "optical"
+          ],
           "parameters": {
             "display_luminance_nits": "500-1000",
             "spectral_range_nm": "430-660 (RGB primaries)",
@@ -15452,7 +15553,10 @@
             "ALS_sampling_rate_Hz": "10-200",
             "achievable_resolution": "presence/orientation/proximity (single ALS); ~10-20 landmarks (multi-sensor, speculative)"
           },
-          "hardware": ["device_display", "ambient_light_sensor"],
+          "hardware": [
+            "device_display",
+            "ambient_light_sensor"
+          ],
           "detection": "Anomalous ALS polling frequency, screen content modulation patterns inconsistent with UI rendering, correlation between display changes and ALS readings"
         },
         "dsm5": {
@@ -15472,7 +15576,10 @@
         "gap_summary": "Ambient light sensor side channel partially captured by CVSS; physiological data extraction dimension not expressible"
       },
       "feeds_into": {
-        "targets": ["QIF-S.FP", "QIF-S.RP"],
+        "targets": [
+          "QIF-S.FP",
+          "QIF-S.RP"
+        ],
         "note": "Presence and physiological data feed identity profiling and behavioral reconnaissance"
       }
     }

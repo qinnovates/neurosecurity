@@ -158,7 +158,7 @@ privacy_config = {
 ### General Questions
 
 #### Q: What is the QIF Framework?
-**A:** QIF (Quantum Indeterministic Framework for Neural Security) is an open-source security framework for brain-computer interfaces. It uses a 7-band hourglass architecture spanning silicon to synapse, providing standardized security measures at each level.
+**A:** QIF (Quantified Interconnection Framework) for Neural Security is an open-source security framework for brain-computer interfaces. It uses a 7-band hourglass architecture spanning silicon to synapse, providing standardized security measures at each level.
 
 #### Q: Is QIF a surveillance tool?
 **A:** **No.** QIF is explicitly designed for **defense and protection**, not surveillance. The framework:

@@ -40,7 +40,7 @@ For a neurodivergent mind, that last part is transformative. My brain generates 
 
 In six weeks, Claude and I built the following. Every equation derived, every threat catalogued, every protocol spec written through deep technical dialogue. All of it published and live.
 
-**[QIF](https://qinnovate.com/whitepaper)** (Quantum Indeterministic Framework for Neural Security). An 11-band hourglass security architecture for neural interfaces, modeled on the internet protocol stack's hourglass topology. Seven bands of silicon on one side, a physical interface boundary in the middle, three bands of biology on the other. The first unified reference architecture for BCI manufacturers and regulators. Published whitepaper v5.2.
+**[QIF](https://qinnovate.com/whitepaper)** (Quantified Interconnection Framework (QIF)for Neural Security). An 11-band hourglass security architecture for neural interfaces, modeled on the internet protocol stack's hourglass topology. Seven bands of silicon on one side, a physical interface boundary in the middle, three bands of biology on the other. The first unified reference architecture for BCI manufacturers and regulators. Published whitepaper v5.2.
 
 **[NSP](https://qinnovate.com/nsp)** (Neural Security Protocol). A post-quantum wire protocol for BCI data links, future-proofed against harvest-now-decrypt-later attacks targeting implants with 10 to 20 year lifetimes. Frame-level encryption with negotiable group sizes (down to single-frame for closed-loop therapeutic BCIs requiring sub-4ms latency) and under 4% power overhead on implant-class hardware.
 
