@@ -19,6 +19,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v5.2, published |
+| **[Preprint](https://doi.org/10.5281/zenodo.18640106)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) | v1.0, published |
 | **[TARA](https://qinnovate.com/TARA/)** | 71 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
 | **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.3, draft |
@@ -71,6 +72,7 @@ Qinnovate exists because these organizations proved that open standards make ent
 The security model. An 11-band hourglass architecture: 7 silicon bands (S3 Radio down to S1 Analog), a physical interface boundary (I0, the electrode-tissue interface), and 3 neural bands (N1 Peripheral up to N3 Cortical).
 
 - **Whitepaper:** [qinnovate.com/whitepaper](https://qinnovate.com/whitepaper/) (v5.2, 30 pages)
+- **Academic Preprint:** [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) (25 pages, CC-BY 4.0)
 - **Specification:** [qif-framework/](qif-framework/)
 - **Interactive explorer:** [qinnovate.com/lab/hourglass.html](https://qinnovate.com/lab/hourglass.html)
 
@@ -225,4 +227,4 @@ Qinnovate seeks partnerships with researchers, standards bodies, BCI manufacture
 
 ---
 
-*Founded 2026 · Updated 2026-02-12*
+*Founded 2026 · Updated 2026-02-14*

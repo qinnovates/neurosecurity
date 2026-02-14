@@ -31,6 +31,8 @@ jupyter: python3
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
 > — Kevin Qi
 
+> **Academic Preprint:** [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
+
 ```{python}
 #| label: global-setup
 #| include: false

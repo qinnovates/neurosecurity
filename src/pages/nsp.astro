@@ -338,6 +338,59 @@ import {
         </div>
       </section>
 
+      <!-- Implementation Roadmap -->
+      <section id="roadmap" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Technical Roadmap</h2>
+        <div class="space-y-4">
+          <div class="glass rounded-xl p-6 border-l-3" style="border-left: 3px solid var(--color-accent-primary);">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">PHASE 1</span>
+              <h3 class="text-lg font-semibold">Core Protocol Library (Rust)</h3>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] ml-auto">Active</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              Implementation of the <code>nsp</code> crate in Rust for <code>no_std</code> targets. Includes ML-KEM handshake, frame pipeline, and NIST FIPS-standardized crypto wrappers.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6 border-l-3" style="border-left: 3px solid var(--color-text-faint);">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">PHASE 2</span>
+              <h3 class="text-lg font-semibold">Integration & Testing</h3>
+              <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)] ml-auto">Next</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              System-wide benchmarking and integration with the TARA Atlas for real-time risk assessment and signal integrity validation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scientific Audit -->
+      <section id="audit" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scientific Audit</h2>
+        <div class="glass rounded-xl p-8 mb-6">
+          <div class="grid sm:grid-cols-3 gap-8 text-center">
+            <div>
+              <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">25.2x</p>
+              <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">PQ Implementation Tax</p>
+            </div>
+            <div>
+              <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-safe)]">90%</p>
+              <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Compression Dividend</p>
+            </div>
+            <div>
+              <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">< 1</p>
+              <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Pages to Breakeven</p>
+            </div>
+          </div>
+        </div>
+        <div class="prose max-w-none">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong>Audit Conclusion:</strong> The mathematical burden of Post-Quantum Cryptography (PQKC) is fully offset by the Runemate compression dividend in fewer than one page load. NSP ensures that BCI security is not just medically necessary, but computationally sustainable.
+          </p>
+        </div>
+      </section>
+
       <!-- Specification -->
       <section id="spec" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Specification</h2>

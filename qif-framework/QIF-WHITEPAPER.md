@@ -9,11 +9,12 @@
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
 > — Kevin Qi
 
-**Version:** 5.2 (Working Draft)
-**Date:** 2026-02-10
+**Version:** 6.1 (Working Draft)
+**Date:** 2026-02-14
 **Author:** Kevin Qi
-**Predecessor:** QIF Whitepaper v3.1 (2026-02-03)
+**Predecessor:** QIF Whitepaper v6.0
 **Status:** DRAFT
+**Academic Preprint:** [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
 
 ---
 

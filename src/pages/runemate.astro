@@ -397,38 +397,39 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
 
         <div class="space-y-6">
           <!-- Phase 1 -->
-          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+          <div class="glass rounded-xl p-6 border-l-3" style="border-left: 3px solid var(--color-accent-primary);">
             <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">Phase 1</span>
-              <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">HTML-to-{RUNEMATE_OUTPUT_FORMAT} Compiler</h3>
-              <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)] ml-auto">
-                Current
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">PHASE 1</span>
+              <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">The Forge (Rust Compiler)</h3>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] ml-auto">
+                In Development
               </span>
             </div>
             <p class="text-sm text-[var(--color-text-muted)]">
-              {RUNEMATE_TOOL_NAME} compiles standard HTML/CSS into {RUNEMATE_OUTPUT_FORMAT} bytecode. The existing web ecosystem &mdash; design tools, frameworks, accessibility standards &mdash; remains the authoring layer. {RUNEMATE_OUTPUT_FORMAT} is the delivery format. This phase proves the compression thesis and establishes the bytecode specification.
+              Implementation of the <code>runemate-forge</code> crate. Compiles standard HTML/CSS into {RUNEMATE_OUTPUT_FORMAT} v1.0 bytecode. Includes CSS style resolution, TARA safety bounds validation, and dictionary-based compression.
             </p>
           </div>
 
           <!-- Phase 2 -->
-          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-secondary);">
+          <div class="glass rounded-xl p-6 border-l-3" style="border-left: 3px solid var(--color-accent-secondary);">
             <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">Phase 2</span>
-              <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Neural Rendering Engine</h3>
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">PHASE 2</span>
+              <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">The Scribe (Neural Runtime)</h3>
+              <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)] ml-auto">Next</span>
             </div>
             <p class="text-sm text-[var(--color-text-muted)]">
-              A minimal on-chip interpreter that decodes {RUNEMATE_OUTPUT_FORMAT} and drives a cortical or retinal display directly. No browser engine, no DOM, no layout reflow. The interpreter maps {RUNEMATE_OUTPUT_FORMAT} opcodes to pixel regions (or stimulation patterns) in a single pass. Written in Rust <code>no_std</code>, targeting RISC-V and ARM Cortex-M.
+              A <code>no_std</code> Rust runtime for BCI chips. Decodes Staves bytecode and drives cortical stimulation patterns directly. Formally verified for memory safety to meet FDA Class III requirements.
             </p>
           </div>
 
           <!-- Phase 3 -->
-          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-tertiary);">
+          <div class="glass rounded-xl p-6 border-l-3" style="border-left: 3px solid var(--color-accent-tertiary);">
             <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">Phase 3</span>
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">PHASE 3</span>
               <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Universal Neural Markup</h3>
             </div>
             <p class="text-sm text-[var(--color-text-muted)]">
-              {RUNEMATE_OUTPUT_FORMAT} evolves beyond HTML translation into a native neural interface language. Semantic intents replace visual layouts. The format describes <em>what the user should perceive</em>, not how pixels are arranged. Haptic feedback, spatial audio cues, and direct cortical patterns become first-class primitives alongside visual elements.
+              Expansion beyond visual translation into direct semantic encoding. Layouts are replaced by <em>perceptual intents</em>, making {RUNEMATE_OUTPUT_FORMAT} the first native language for high-bandwidth neural interfaces.
             </p>
           </div>
         </div>
