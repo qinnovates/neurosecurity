@@ -60,6 +60,16 @@ impl ClientHandshake {
     pub fn take_session(mut self) -> Option<Session> {
         self.session.take()
     }
+
+    /// Get client's DSA public key for server verification
+    pub fn public_key_bytes(&self) -> &[u8] {
+        self.dsa.public_key_bytes()
+    }
+
+    /// Get client's KEM public key for server encapsulation
+    pub fn kem_public_key_bytes(&self) -> &[u8] {
+        self.kem.public_key_bytes()
+    }
     
     /// Create ClientHello message
     pub fn create_hello(&mut self) -> Result<ClientHello, NspError> {

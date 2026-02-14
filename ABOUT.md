@@ -6,8 +6,6 @@ Part of how I think is understanding how things break so I can make them better.
 
 ## Why This Exists
 
-My work ethic comes from watching my father, an autodidactic electrical engineer from China, navigate a world that spoke a different tongue. Despite deep technical knowledge, he had no formal education and immigrated here starting as a dishwasher to help pay for his father's woodworking factory, which eventually burned to the ground. That fire nearly cost our family the ancestral home: a single roof in a small fishing village that sheltered three generations at once. Watching him engineer a life for us out of nothing taught me what grit truly is.
-
 To me, engineering isn't just a career. It's a survival mechanism — turning uncertainty into something measurable and actionable.
 
 ## The Insight

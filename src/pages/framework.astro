@@ -36,11 +36,11 @@ const tacticColors: Record<string, string> = {
           { href: '#foundations', label: 'Foundations' },
           { href: '#hourglass', label: 'Hourglass Model' },
           { href: '#bands', label: '11 Bands' },
-          { href: '#coherence', label: 'Coherence Metric' },
           { href: '#scale-frequency', label: 'Scale-Frequency' },
           { href: '#threat-model', label: 'Threat Model' },
           { href: '#taxonomy', label: 'TARA Taxonomy' },
           { href: '#niss', label: 'NISS Scoring' },
+          { href: '#coherence', label: 'Coherence Metric' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -121,7 +121,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <!-- Interactive 3D hourglass (React island) -->
-        <div class="my-12" id="hourglass-interactive">
+        <div class="my-12" id="hourglass-interactive" style="min-height: 520px;">
           <Hourglass3D client:only="react" />
           <noscript>
             <div class="max-w-lg mx-auto space-y-3">
@@ -161,57 +161,6 @@ const tacticColors: Record<string, string> = {
               <p class="text-sm text-[var(--color-text-muted)]">{band.description}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <!-- Coherence Metric -->
-      <section id="coherence" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Coherence Metric</h2>
-        <div class="prose mb-8">
-          <p>
-            The coherence metric provides a continuous, real-time measure of neural signal integrity. It collapses three variance dimensions — phase, temporal, and spatial — into a single security score between 0 and 1.
-          </p>
-        </div>
-
-        <!-- Equation display -->
-        <div class="glass rounded-xl p-8 text-center mb-8">
-          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            {COHERENCE.formula}
-          </p>
-          <p class="text-sm text-[var(--color-text-faint)]">
-            where &sigma;&sup2;&psi; = phase variance, &sigma;&sup2;&tau; = temporal variance, &sigma;&sup2;&gamma; = spatial variance
-          </p>
-        </div>
-
-        <!-- Threshold zones -->
-        <div class="grid sm:grid-cols-3 gap-4">
-          <div class="glass rounded-lg p-5 border-l-3" style={`border-left: 3px solid ${COHERENCE.thresholds.safe.color};`}>
-            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.safe.color};`}>
-              C<sub>s</sub> &gt; 0.6
-            </div>
-            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.safe.label}</div>
-            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal integrity verified. Normal operating state.</p>
-          </div>
-          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.gateway.color};`}>
-            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.gateway.color};`}>
-              0.3 &le; C<sub>s</sub> &le; 0.6
-            </div>
-            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.gateway.label}</div>
-            <p class="text-xs text-[var(--color-text-muted)] mt-2">Anomalous variance detected. Enhanced monitoring.</p>
-          </div>
-          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.breach.color};`}>
-            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.breach.color};`}>
-              C<sub>s</sub> &lt; 0.3
-            </div>
-            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.breach.label}</div>
-            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal compromise indicated. Defensive response triggered.</p>
-          </div>
-        </div>
-
-        <div class="text-center mt-6">
-          <a href="/explore/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
-            Try the interactive coherence calculator in QIF Lab &rarr;
-          </a>
         </div>
       </section>
 
@@ -341,6 +290,57 @@ const tacticColors: Record<string, string> = {
           <p>
             For the complete scoring methodology, see the <a href="/scoring/">NISS Scoring page</a>. For the full technique atlas, explore the <a href="/TARA/">TARA Atlas</a>. The complete taxonomy derivation and metric definitions are in the <a href="/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a>.
           </p>
+        </div>
+      </section>
+
+      <!-- Coherence Metric -->
+      <section id="coherence" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Coherence Metric</h2>
+        <div class="prose mb-8">
+          <p>
+            The coherence metric provides a continuous, real-time measure of neural signal integrity. It collapses three variance dimensions — phase, temporal, and spatial — into a single security score between 0 and 1.
+          </p>
+        </div>
+
+        <!-- Equation display -->
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            {COHERENCE.formula}
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            where &sigma;&sup2;&psi; = phase variance, &sigma;&sup2;&tau; = temporal variance, &sigma;&sup2;&gamma; = spatial variance
+          </p>
+        </div>
+
+        <!-- Threshold zones -->
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="glass rounded-lg p-5 border-l-3" style={`border-left: 3px solid ${COHERENCE.thresholds.safe.color};`}>
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.safe.color};`}>
+              C<sub>s</sub> &gt; 0.6
+            </div>
+            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.safe.label}</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal integrity verified. Normal operating state.</p>
+          </div>
+          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.gateway.color};`}>
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.gateway.color};`}>
+              0.3 &le; C<sub>s</sub> &le; 0.6
+            </div>
+            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.gateway.label}</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-2">Anomalous variance detected. Enhanced monitoring.</p>
+          </div>
+          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.breach.color};`}>
+            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.breach.color};`}>
+              C<sub>s</sub> &lt; 0.3
+            </div>
+            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.breach.label}</div>
+            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal compromise indicated. Defensive response triggered.</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-6">
+          <a href="/explore/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+            Try the interactive coherence calculator in QIF Lab &rarr;
+          </a>
         </div>
       </section>
     </div>

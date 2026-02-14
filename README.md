@@ -18,9 +18,9 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
-| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v5.2, published |
+| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.1, published |
 | **[Preprint](https://doi.org/10.5281/zenodo.18640106)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) | v1.0, published |
-| **[TARA](https://qinnovate.com/TARA/)** | 71 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
+| **[TARA](https://qinnovate.com/TARA/)** | 102 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
 | **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.3, draft |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
@@ -31,11 +31,11 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 ## The TARA Insight
 
-TARA started as an attack matrix. I catalogued 71 BCI attack techniques from a pure security mindset, and something unexpected happened: the same mechanisms kept showing up on the therapeutic side.
+TARA started as an attack matrix. I catalogued 102 BCI attack techniques from a pure security mindset, and something unexpected happened: the same mechanisms kept showing up on the therapeutic side.
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. Replay attacks are a threat. Repetitive stimulation protocols are a treatment. The RF mapping techniques an adversary uses to map a building through WiFi walls are the same physics a clinician would use to calibrate a visual prosthesis through electrodes.
 
-About 60% of the 71 techniques map to a therapeutic counterpart today. The boundary between attack and therapy is not mechanism. It is consent, dosage, and oversight.
+About 75% of the 102 techniques map to a therapeutic counterpart today. The boundary between attack and therapy is not mechanism. It is consent, dosage, and oversight.
 
 This means the same framework that scores whether an attack is dangerous can also bound whether a therapy is safe. TARA is both a threat registry and a safety specification. The dual-use mapping is the point.
 
@@ -52,7 +52,7 @@ Qinnovate exists because these organizations proved that open standards make ent
 | Organization | What They Standardized | What We Learn From Them |
 |-------------|----------------------|------------------------|
 | **[FIRST.org](https://first.org)** | CVSS (vulnerability scoring), CSIRT coordination | NISS extends their CVSS v4.0 framework for neural impact |
-| **[MITRE](https://mitre.org)** | ATT&CK (adversary tactics and techniques framework) | TARA uses ATT&CK-style technique IDs (QIF-T0001+) across 7 domains |
+| **[MITRE](https://mitre.org)** | ATT&CK (adversary tactics and techniques framework) | TARA uses ATT&CK-style technique IDs (QIF-T0001+) across 8 domains |
 | **[CVE Program](https://cve.org)** | Vulnerability identifiers (CVE-XXXX-XXXXX), operated by MITRE since 1999, transitioning to [CVE Foundation](https://www.thecvefoundation.org/) | TARA technique IDs complement CVE by covering BCI-specific threats that don't map to traditional software vulns |
 | **[NIST](https://nist.gov)** | Cybersecurity Framework, NVD (enriches CVEs with CVSS scores), post-quantum crypto (FIPS 203/204) | QIF aligns with NIST CSF; NSP implements ML-KEM/ML-DSA |
 | **[IEEE](https://ieee.org)** | Electrical/electronics/computing standards | QIF's 11-band model follows IEEE standards methodology |
@@ -69,9 +69,9 @@ Qinnovate exists because these organizations proved that open standards make ent
 
 ### QIF (Quantified Interconnection Framework)
 
-The security model. An 11-band hourglass architecture: 7 silicon bands (S3 Radio down to S1 Analog), a physical interface boundary (I0, the electrode-tissue interface), and 3 neural bands (N1 Peripheral up to N3 Cortical).
+The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spinal Cord), a physical interface boundary (I0, the electrode-tissue interface), and 3 silicon bands (S1 Analog up to S3 Radio/Wireless).
 
-- **Whitepaper:** [qinnovate.com/whitepaper](https://qinnovate.com/whitepaper/) (v5.2, 30 pages)
+- **Whitepaper:** [qinnovate.com/whitepaper](https://qinnovate.com/whitepaper/) (v6.1)
 - **Academic Preprint:** [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) (25 pages, CC-BY 4.0)
 - **Specification:** [qif-framework/](qif-framework/)
 - **Interactive explorer:** [qinnovate.com/lab/hourglass.html](https://qinnovate.com/lab/hourglass.html)
@@ -84,7 +84,7 @@ The wire protocol. Post-quantum encryption (ML-KEM, ML-DSA, AES-256-GCM) at the 
 
 ### TARA (Therapeutic Atlas of Risks and Applications)
 
-The threat-therapy registry. 71 techniques across 7 domains (Access, Collection, Execution, Impact, Persistence, Reconnaissance, Exfiltration) and 11 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs (QIF-T0001 through QIF-T0071).
+The threat-therapy registry. 102 techniques across 8 domains (Access, Collection, Execution, Impact, Persistence, Reconnaissance, Exfiltration, Evasion) and 15 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs (QIF-T0001 through QIF-T0102).
 
 - **Registry:** [qinnovate.com/TARA](https://qinnovate.com/TARA/)
 - **API:** [qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json) (STIX 2.1 Feed)
@@ -152,9 +152,9 @@ npm run preview
 | Route | Description |
 |-------|-------------|
 | `/` | Home |
-| `/whitepaper/` | QIF v5.2 whitepaper (30 pages) |
+| `/whitepaper/` | QIF v6.1 whitepaper |
 | `/framework/` | Interactive 3D hourglass model |
-| `/TARA/` | 71-technique threat-therapy registry with filtering |
+| `/TARA/` | 102-technique threat-therapy registry with filtering |
 | `/nsp/` | Neural Security Protocol spec |
 | `/runemate/` | Runemate compression engine spec |
 | `/scoring/` | NISS v1.0 scoring system |
@@ -177,32 +177,40 @@ qinnovates/qinnovate/
 │   ├── pages/                  # 18 page routes
 │   ├── components/             # Nav, Footer, Hourglass3D, etc.
 │   ├── layouts/                # BaseLayout, PageLayout
-│   ├── lib/                    # qif-constants.ts, threat-data.ts, runemate-constants.ts
+│   ├── lib/                    # qif-constants.ts, threat-data.ts
 │   └── styles/                 # global.css (Tailwind 4)
 │
 ├── qif-framework/              # QIF specification
 │   ├── framework/              # 9 architectural documents
 │   ├── tara-threat/            # TARA threat registry source
 │   ├── qif-lab/                # Equation testing
-│   ├── QIF-WHITEPAPER.md       # v5.2 whitepaper
+│   ├── QIF-WHITEPAPER.md       # v6.1 whitepaper
 │   ├── QIF-TRUTH.md            # Canonical source of truth
-│   └── RUNEMATE.md             # Runemate v0.3 spec (19 sections)
+│   └── RUNEMATE.md             # Runemate v0.3 spec
 │
 ├── shared/                     # Cross-cutting data
-│   └── qtara-registrar.json    # 71 TARA techniques with CVSS + NISS vectors
+│   └── qtara-registrar.json    # 102 TARA techniques (CVSS + NISS)
+│
+├── packaging/                  # Published packages
+│   └── qtara/                  # Python SDK (pip install qtara)
+│
+├── paper/                      # Academic publications
+│   ├── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640106)
+│   └── woot26/                 # WOOT '26 submission (deadline Mar 3)
+│
+├── crates/                     # Rust implementations
+│   └── nsp/                    # Neural Security Protocol (Rust)
 │
 ├── governance/                 # 10 neuroethics documents
 ├── blogs/                      # 16 blog posts (Astro content collection)
-├── research/                   # Research notes
 ├── processes/                  # Standards development lifecycle
+├── scripts/                    # RSS fetcher, TARA tools, utilities
 │
 ├── oni-framework/              # ONI 14-layer model (legacy, preserved)
-├── oni-legacy/                 # ONI archive (demos, publications)
 │
 ├── docs/                       # Static assets (CNAME, fonts, images)
 ├── public/                     # Additional static assets
-├── scripts/                    # RSS fetcher, utilities
-└── .github/workflows/          # CI/CD (deploy, news update, wiki sync)
+└── .github/workflows/          # CI/CD (deploy, news, wiki sync)
 ```
 
 ---

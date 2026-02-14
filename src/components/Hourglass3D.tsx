@@ -171,7 +171,7 @@ export default function Hourglass3D({ highlightBandId, onBandClick, className }:
   return (
     <div className={className} style={{ position: 'relative', width: '100%', height: '100%' }}>
       <Canvas
-        camera={{ position: [0, 0.5, 4], fov: 45 }}
+        camera={{ position: [0, 0.3, 6], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
