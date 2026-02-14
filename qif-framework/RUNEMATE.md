@@ -6,7 +6,7 @@
 > **Project Status:** Requirements / Architecture Phase
 > **Version:** 0.3 (2026-02-10)
 > **Author:** Kevin Qi
-> **Parent Framework:** QIF (Quantum Indeterministic Framework)
+> **Parent Framework:** QIF (Quantified Interconnection Framework)
 > **Delivery Protocol:** NSP (Neural Security Protocol)
 
 ---
@@ -2521,7 +2521,7 @@ No FDA submission required              Full 510(k) or De Novo submission
 3. NIST (2024). FIPS 205: Stateless Hash-Based Digital Signature Algorithm Standard. doi:10.6028/NIST.FIPS.205
 4. Qi, K. (2026). NSP Protocol Specification v0.3. Qinnovate. See NSP-PROTOCOL-SPEC.md
 5. Qi, K. (2026). TARA: Therapeutic Atlas of Risks and Applications. Qinnovate. See threat-registry.json
-6. Qi, K. (2026). QIF: Quantum Indeterministic Framework for Neural Security. Qinnovate Whitepaper v5.2
+6. Qi, K. (2026). QIF: Quantified Interconnection Framework for Neural Security. Qinnovate Whitepaper v5.2
 
 ### Neurostimulation Safety
 
@@ -2886,5 +2886,5 @@ This insight spans three specifications:
 
 ---
 
-*Part of the QIF (Quantum Indeterministic Framework) ecosystem.*
+*Part of the QIF (Quantified Interconnection Framework) ecosystem.*
 *"HTML was designed for screens. Staves was designed for brains."*

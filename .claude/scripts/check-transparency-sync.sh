@@ -6,7 +6,17 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 TRANSPARENCY="$REPO_ROOT/governance/TRANSPARENCY.md"
-DERIV_LOG="$REPO_ROOT/../drafts/ai-working/QIF-DERIVATION-LOG.md"
+# Check multiple possible locations for the Derivation Log
+DERIV_LOG=""
+for candidate in \
+    "$REPO_ROOT/qif-framework/QIF-DERIVATION-LOG.md" \
+    "$REPO_ROOT/../mindloft/drafts/ai-working/QIF-DERIVATION-LOG.md" \
+    "$REPO_ROOT/../drafts/ai-working/QIF-DERIVATION-LOG.md"; do
+    if [ -f "$candidate" ]; then
+        DERIV_LOG="$candidate"
+        break
+    fi
+done
 
 # Count data rows in TRANSPARENCY.md validation table (lines starting with | 2026-)
 TRANS_COUNT=$(grep -cE '^\| 2026-' "$TRANSPARENCY" 2>/dev/null || echo 0)

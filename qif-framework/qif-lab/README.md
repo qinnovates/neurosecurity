@@ -2,7 +2,7 @@
 
 > **The QIF whitepaper is generated as-code.** All figures, tables, and computed values are produced by Python code that reads from a single configuration source (`config.py`) and equation implementation (`qif_equations.py`). Change the equations, re-render, the paper updates.
 
-**Framework:** QIF (Quantum Indeterministic Framework for Neural Security)
+**Framework:** QIF (Quantified Interconnection Framework for Neural Security)
 **Author:** Kevin Qi, with Claude (Anthropic)
 **License:** Apache 2.0
 
@@ -200,7 +200,7 @@ All effects respect `prefers-reduced-motion`. PDF output is unaffected.
 ```bibtex
 @misc{qi2026qif,
   author = {Qi, Kevin and Claude (Anthropic)},
-  title = {QIF: Quantum Indeterministic Framework for Neural Security},
+  title = {QIF: Quantified Interconnection Framework for Neural Security},
   year = {2026},
   url = {https://github.com/qinnovates/qinnovate},
   note = {Working draft}

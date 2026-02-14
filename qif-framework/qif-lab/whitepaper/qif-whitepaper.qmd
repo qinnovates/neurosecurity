@@ -1,5 +1,5 @@
 ---
-title: "QIF — Quantum Indeterministic Framework for Neural Security"
+title: "QIF — Quantified Interconnection Framework for Neural Security"
 subtitle: "Why the Next Generation of Brain-Computer Interfaces Needs Quantum-Aware Protection"
 author: "Kevin Qi, with Claude (Anthropic)"
 date: "2026-02-02"
@@ -47,7 +47,7 @@ from src.synthetic_data import generate_custom_signals, SCENARIOS
 
 ## Abstract {.unnumbered}
 
-Brain-computer interfaces (BCIs) are advancing from experimental medical devices toward consumer technology, yet their security frameworks remain rooted entirely in classical computing paradigms. This paper introduces the **Quantum Indeterministic Framework (QIF)**, a 7-band symmetric hourglass (3-1-3) security architecture derived from neuroscience and quantum physics that addresses a critical blind spot: quantum-scale phenomena at the electrode-tissue interface that may be invisible to classical detection, if operationally significant.
+Brain-computer interfaces (BCIs) are advancing from experimental medical devices toward consumer technology, yet their security frameworks remain rooted entirely in classical computing paradigms. This paper introduces the **Quantified Interconnection Framework (QIF)**, a 7-band symmetric hourglass (3-1-3) security architecture derived from neuroscience and quantum physics that addresses a critical blind spot: quantum-scale phenomena at the electrode-tissue interface that may be invisible to classical detection, if operationally significant.
 
 We present the QI equation in two complementary forms — an additive engineering model and a tensor-product theoretical model — that unify 21 established equations into a single security metric. The framework maps 8 open questions in quantum neuroscience as tunable parameters, making the equation future-proof. We identify six novel contributions and propose five testable experimental predictions.
 

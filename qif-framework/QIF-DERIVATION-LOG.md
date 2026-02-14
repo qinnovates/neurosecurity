@@ -1,6 +1,6 @@
 # QIF Framework Derivation Log
 
-> **A living journal of how the Quantum Indeterministic Framework for Neural Security was derived.**
+> **A living journal of how the Quantified Interconnection Framework for Neural Security was derived.**
 >
 > **Authors:** Kevin Qi
 > **Started:** 2026-02-02

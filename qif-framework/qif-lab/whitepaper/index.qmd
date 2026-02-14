@@ -1,5 +1,5 @@
 ---
-title: "QIF — Quantum Indeterministic Framework for Neural Security"
+title: "QIF — Quantified Interconnection Framework for Neural Security"
 subtitle: "Why the Next Generation of Brain-Computer Interfaces Needs Quantum-Aware Protection"
 author: "Kevin Qi, with Claude (Anthropic)"
 date: "2026-02-02"
