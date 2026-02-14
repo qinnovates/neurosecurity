@@ -4,7 +4,7 @@
  */
 
 export const RUNEMATE_VERSION = '0.4';
-export const RUNEMATE_STATUS = 'Implementation Roadmap Started';
+export const RUNEMATE_STATUS = 'Compiler Foundation & Secure Pipe Verified';
 export const RUNEMATE_PROJECT_NAME = 'Project Runemate';
 export const RUNEMATE_TOOL_NAME = 'Runemate Forge';
 export const RUNEMATE_OUTPUT_FORMAT = 'Staves';

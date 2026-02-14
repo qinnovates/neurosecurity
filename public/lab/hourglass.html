@@ -858,8 +858,8 @@ class HourglassView {
     axis.className = 'axis-label-left';
     axis.innerHTML = `
       <div class="arrow-up">\u2191</div>
-      <div class="label-text">DETERMINISTIC</div>
-      <div class="label-text" style="margin-top:0.5rem">INDETERMINISTIC</div>
+      <div class="label-text">INDETERMINISTIC</div>
+      <div class="label-text" style="margin-top:0.5rem">DETERMINISTIC</div>
       <div class="arrow-down">\u2193</div>
     `;
     wrap.appendChild(axis);
@@ -868,8 +868,8 @@ class HourglassView {
     const main = document.createElement('div');
     main.className = 'hourglass-main';
 
-    // Reverse: Synthetic (top) → I0 (middle) → Neural (bottom) = physical layout
-    const bands = [...this.data.bands].reverse();
+    // Neural (top) → I0 (middle) → Synthetic (bottom) = brain-down layout
+    const bands = [...this.data.bands];
     let prevZone = null;
 
     for (const band of bands) {
@@ -885,7 +885,7 @@ class HourglassView {
         } else {
           const sep = document.createElement('div');
           sep.className = 'zone-separator';
-          sep.innerHTML = `<div class="line"></div><span class="zone-label">Synthetic Domain</span><div class="line"></div>`;
+          sep.innerHTML = `<div class="line"></div><span class="zone-label">Neural Domain</span><div class="line"></div>`;
           main.appendChild(sep);
         }
         prevZone = band.zone;
