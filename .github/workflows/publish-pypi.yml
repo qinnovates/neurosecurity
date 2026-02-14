@@ -1,4 +1,4 @@
-name: Publish qtara to PyPI
+name: Publish qtara
 
 on:
   push:
@@ -7,13 +7,17 @@ on:
       - 'shared/qtara-registrar.json'
       - 'packaging/qtara/**'
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build-n-publish:
-    name: Build and publish to PyPI
+    name: Build and publish qtara
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -27,6 +31,13 @@ jobs:
     - name: Sync TARA data
       run: python scripts/sync-package-data.py
 
+    - name: Extract version
+      id: version
+      run: |
+        VERSION=$(python -c "import tomllib; print(tomllib.load(open('packaging/qtara/pyproject.toml','rb'))['project']['version'])")
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+        echo "tag=qtara-v$VERSION" >> "$GITHUB_OUTPUT"
+
     - name: Build binary wheel and source tarball
       run: |
         cd packaging/qtara
@@ -37,4 +48,39 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
-        twine upload packaging/qtara/dist/*
+        twine upload --skip-existing packaging/qtara/dist/*
+
+    - name: Create GitHub Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TAG="${{ steps.version.outputs.tag }}"
+        VERSION="${{ steps.version.outputs.version }}"
+
+        # Check if release already exists
+        if gh release view "$TAG" > /dev/null 2>&1; then
+          echo "Release $TAG already exists, skipping"
+          exit 0
+        fi
+
+        gh release create "$TAG" \
+          --title "qtara v${VERSION}" \
+          --notes "## qtara v${VERSION}
+
+        TARA threat registry and neural impact scoring for BCI security.
+
+        ### Install
+        \`\`\`bash
+        pip install qtara==${VERSION}
+        \`\`\`
+
+        ### PyPI
+        https://pypi.org/project/qtara/${VERSION}/
+
+        ### What's included
+        - Full TARA threat registry (71 techniques)
+        - NISS neural impact scoring
+        - STIX 2.1 export
+        - CLI tools
+        " \
+          packaging/qtara/dist/*

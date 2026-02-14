@@ -78,6 +78,10 @@ body {
   border: 1px solid var(--color-glass-border);
 }
 
+.nav-dropdown {
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .glass-subtle {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px) saturate(150%);
