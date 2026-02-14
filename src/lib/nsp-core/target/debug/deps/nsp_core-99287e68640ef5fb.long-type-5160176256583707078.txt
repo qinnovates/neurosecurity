@@ -1,0 +1,6 @@
+fips204::types::PrivateKey<fips204::::ml_dsa_44::PrivateKey::{constant#0}, fips204::::ml_dsa_44::PrivateKey::{constant#1}>
+fips204::types::PrivateKey<fips204::::ml_dsa_65::PrivateKey::{constant#0}, fips204::::ml_dsa_65::PrivateKey::{constant#1}>
+fips204::types::PrivateKey<fips204::::ml_dsa_87::PrivateKey::{constant#0}, fips204::::ml_dsa_87::PrivateKey::{constant#1}>
+fips204::types::PublicKey<fips204::::ml_dsa_44::PublicKey::{constant#0}, fips204::::ml_dsa_44::PublicKey::{constant#1}>
+fips204::types::PublicKey<fips204::::ml_dsa_65::PublicKey::{constant#0}, fips204::::ml_dsa_65::PublicKey::{constant#1}>
+fips204::types::PublicKey<fips204::::ml_dsa_87::PublicKey::{constant#0}, fips204::::ml_dsa_87::PublicKey::{constant#1}>

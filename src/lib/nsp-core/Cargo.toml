@@ -1,0 +1,13 @@
+[package]
+name = "nsp-core"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aes-gcm = "0.10.3"
+fips203 = "0.4.3"
+fips204 = "0.4.6"
+hex = "0.4.3"
+rand_core = "0.10.0"
+serde = { version = "1.0.228", features = ["derive"] }
+thiserror = "2.0.18"

@@ -1,0 +1,14 @@
+/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/deps/thiserror-664ffd55da8d150e.d: /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/lib.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/aserror.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/display.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/var.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/private.rs /Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/build/thiserror-daed64f8fa54280a/out/private.rs
+
+/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/deps/libthiserror-664ffd55da8d150e.rlib: /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/lib.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/aserror.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/display.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/var.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/private.rs /Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/build/thiserror-daed64f8fa54280a/out/private.rs
+
+/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/deps/libthiserror-664ffd55da8d150e.rmeta: /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/lib.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/aserror.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/display.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/var.rs /Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/private.rs /Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/build/thiserror-daed64f8fa54280a/out/private.rs
+
+/Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/lib.rs:
+/Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/aserror.rs:
+/Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/display.rs:
+/Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/var.rs:
+/Users/mac/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.18/src/private.rs:
+/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/build/thiserror-daed64f8fa54280a/out/private.rs:
+
+# env-dep:OUT_DIR=/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/src/lib/nsp-core/target/release/build/thiserror-daed64f8fa54280a/out

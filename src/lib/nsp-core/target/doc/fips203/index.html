@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="IntegrityChain: FIPS 203 Module-Lattice-Based Key-Encapsulation Mechanism Standard"><title>fips203 - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="fips203" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.1 (01f6ddf75 2026-02-11)" data-channel="1.93.1" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate fips203</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../fips203/index.html">fips203</a><span class="version">0.4.3</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#integritychain-fips-203-module-lattice-based-key-encapsulation-mechanism-standard" title="IntegrityChain: FIPS 203 Module-Lattice-Based Key-Encapsulation Mechanism Standard">IntegrityChain: FIPS 203 Module-Lattice-Based Key-Encapsulation Mechanism Standard</a><ul><li><a href="#notes" title="Notes">Notes</a></li><li><a href="#license" title="License">License</a></li></ul></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#constants" title="Constants">Constants</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>fips203</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/fips203/lib.rs.html#1-426">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="integritychain-fips-203-module-lattice-based-key-encapsulation-mechanism-standard"><a class="doc-anchor" href="#integritychain-fips-203-module-lattice-based-key-encapsulation-mechanism-standard">§</a><a href="https://github.com/integritychain/">IntegrityChain</a>: FIPS 203 Module-Lattice-Based Key-Encapsulation Mechanism Standard</h2>
+<p><a href="https://crates.io/crates/fips203"><img src="https://img.shields.io/crates/v/fips203" alt="crate" /></a>
+<a href="https://docs.rs/fips203/"><img src="https://docs.rs/fips203/badge.svg" alt="Docs" /></a>
+<a href="https://github.com/integritychain/fips203/actions?query=workflow%3Atest"><img src="https://github.com/integritychain/fips203/workflows/test/badge.svg" alt="Build Status" /></a>
+<img src="https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg" alt="Apache2/MIT licensed" />
+<img src="https://img.shields.io/badge/rustc-1.70+-blue.svg" alt="Rust Version" />
+<a href="https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&amp;can=1&amp;q=proj:fips203"><img src="https://oss-fuzz-build-logs.storage.googleapis.com/badges/fips203.svg" alt="Fuzzing Status" /></a></p>
+<p><a href="https://csrc.nist.gov/pubs/fips/203/final">FIPS 203</a> Module-Lattice-Based Key-Encapsulation Mechanism Standard written in pure Rust for server, desktop, browser
+and embedded applications. The source repository includes examples demonstrating benchmarking, code provenance, an
+embedded target, constant-time statistical measurements, a fuzzing harness, WASM execution, C FFI and Python bindings.</p>
+<p>This crate implements the <strong>released</strong> FIPS 203 standard in pure Rust with minimal and mainstream dependencies, <strong>and
+without any unsafe code</strong>. All three security parameter sets are fully supported and tested. The implementation operates
+in constant-time (outside of rho, which is part of the encapsulation key sent across the trust boundary in the clear),
+does not require the standard library, e.g. <code>#[no_std]</code>, has no heap allocations, e.g. no <code>alloc</code> needed, and optionally
+exposes the <code>RNG</code> so it is suitable for the full range of applications down to the bare-metal. The API is stabilized
+and the code is heavily biased towards safety and correctness; further performance optimizations will be implemented
+as the standard matures. This crate will quickly follow any future changes to FIPS 203 as they become available.</p>
+<p>See <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf</a> for a full description of the target functionality.</p>
+<p>The functionality is extremely simple to use, as demonstrated by the following example.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Use the desired target parameter set.
+</span><span class="kw">use </span>fips203::ml_kem_512; <span class="comment">// Could also be ml_kem_768 or ml_kem_1024. 
+</span><span class="kw">use </span>fips203::traits::{Decaps, Encaps, KeyGen, SerDes};
+
+<span class="comment">// Alice runs `try_keygen()` and then serializes the encaps key `ek` for Bob (to bytes).
+</span><span class="kw">let </span>(alice_ek, alice_dk) = ml_kem_512::KG::try_keygen().unwrap();
+<span class="kw">let </span>alice_ek_bytes = alice_ek.into_bytes();
+
+<span class="comment">// Alice sends the encaps key `ek_bytes` to Bob.
+</span><span class="kw">let </span>bob_ek_bytes = alice_ek_bytes;
+
+<span class="comment">// Bob deserializes the encaps `ek_bytes` and then runs `encaps() to get the shared 
+// secret `ssk` and ciphertext `ct`. He serializes the ciphertext `ct` for Alice (to bytes).
+</span><span class="kw">let </span>bob_ek = ml_kem_512::EncapsKey::try_from_bytes(bob_ek_bytes).unwrap();
+<span class="kw">let </span>(bob_ssk_bytes, bob_ct) = bob_ek.try_encaps().unwrap();
+<span class="kw">let </span>bob_ct_bytes = bob_ct.into_bytes();
+
+<span class="comment">// Bob sends the ciphertext `ct_bytes` to Alice
+</span><span class="kw">let </span>alice_ct_bytes = bob_ct_bytes;
+
+<span class="comment">// Alice deserializes the ciphertext `ct` and runs `decaps()` with her decaps key
+</span><span class="kw">let </span>alice_ct = ml_kem_512::CipherText::try_from_bytes(alice_ct_bytes).unwrap();
+<span class="kw">let </span>alice_ssk_bytes = alice_dk.try_decaps(<span class="kw-2">&amp;</span>alice_ct).unwrap();
+
+<span class="comment">// Alice and Bob will now have the same secret key
+</span><span class="macro">assert_eq!</span>(bob_ssk_bytes, alice_ssk_bytes);</code></pre></div>
+<p>The Rust <a href="https://docs.rs/fips203/">Documentation</a> lives under each <strong>Module</strong> corresponding to the desired
+<a href="#modules">security parameter</a> below.</p>
+<h3 id="notes"><a class="doc-anchor" href="#notes">§</a>Notes</h3>
+<ul>
+<li>This crate is fully functional and corresponds to the <strong>released final</strong> FIPS 203.</li>
+<li>Constant-time operation targets the source-code level only on the latest version of Rust, with
+confirmation via manual review/inspection, the embedded target, and the <code>dudect</code> dynamic measurements.</li>
+<li>Note that FIPS 203 places specific requirements on randomness per section 3.3, hence the exposed <code>RNG</code>.</li>
+<li>Requires Rust <strong>1.70</strong> or higher. The minimum supported Rust version (MSRV) may be changed in the future,
+but it will be done with a minor version bump (when the major version is larger than 0).</li>
+<li>All on-by-default features of this library are covered by <code>SemVer</code>.</li>
+<li>The FIPS 203 standard is ‘new’ and so this software is experimental – USE AT YOUR OWN RISK!</li>
+</ul>
+<h3 id="license"><a class="doc-anchor" href="#license">§</a>License</h3>
+<p>Contents are licensed under either the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License Version 2.0</a>
+or <a href="http://opensource.org/licenses/MIT">MIT license</a> at your option.</p>
+<h4 id="contribution"><a class="doc-anchor" href="#contribution">§</a>Contribution</h4>
+<p>Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as
+defined in the Apache-2.0 license, shall be dual licensed as above without any additional terms or conditions.</p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="ml_kem_512/index.html" title="mod fips203::ml_kem_512">ml_<wbr>kem_<wbr>512</a></dt><dd>Functionality for the ML-KEM-512 security parameter set, which is claimed to be in security category 1, see
+table 2 &amp; 3 on page 39 of spec.</dd><dt><a class="mod" href="ml_kem_768/index.html" title="mod fips203::ml_kem_768">ml_<wbr>kem_<wbr>768</a></dt><dd>Functionality for the ML-KEM-768 security parameter set, which is claimed to be in security category 3, see
+table 2 &amp; 3 on page 39 of spec.</dd><dt><a class="mod" href="ml_kem_1024/index.html" title="mod fips203::ml_kem_1024">ml_<wbr>kem_<wbr>1024</a></dt><dd>Functionality for the ML-KEM-1024 security parameter set, which is claimed to be in security category 5, see
+table 2 &amp; 3 on page 39 of spec.</dd><dt><a class="mod" href="traits/index.html" title="mod fips203::traits">traits</a></dt><dd>All functionality is covered by traits, such that consumers can utilize trait objects if desired.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.RngError.html" title="struct fips203::RngError">RngError</a></dt><dd>These <code>rand_core</code> types are re-exported so that users of fips203 do not
+have to worry about using the exactly correct version of <code>rand_core</code>.
+Error type of random number generators</dd><dt><a class="struct" href="struct.SharedSecretKey.html" title="struct fips203::SharedSecretKey">Shared<wbr>Secret<wbr>Key</a></dt><dd>The (opaque) secret key that can be de/serialized by each party.</dd></dl><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><dl class="item-table"><dt><a class="constant" href="constant.SSK_LEN.html" title="constant fips203::SSK_LEN">SSK_LEN</a></dt><dd>Shared Secret Key length for all ML-KEM variants (in bytes)</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.CryptoRng.html" title="trait fips203::CryptoRng">Crypto<wbr>Rng</a></dt><dd>These <code>rand_core</code> types are re-exported so that users of fips203 do not
+have to worry about using the exactly correct version of <code>rand_core</code>.
+A marker trait used to indicate that an <a href="trait.RngCore.html" title="trait fips203::RngCore"><code>RngCore</code></a> or <a href="https://rust-random.github.io/rand/rand_core/block/trait.BlockRngCore.html" title="trait rand_core::block::BlockRngCore"><code>BlockRngCore</code></a>
+implementation is supposed to be cryptographically secure.</dd><dt><a class="trait" href="trait.RngCore.html" title="trait fips203::RngCore">RngCore</a></dt><dd>These <code>rand_core</code> types are re-exported so that users of fips203 do not
+have to worry about using the exactly correct version of <code>rand_core</code>.
+The core of a random number generator.</dd></dl></section></div></main></body></html>
