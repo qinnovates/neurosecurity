@@ -3,7 +3,9 @@
  * Single source of truth for all QIF values used on the site.
  */
 
-export const QIF_VERSION = '6.0';
+export const QIF_VERSION = '6.1';
+export const LATEST_WHITEPAPER_VERSION = '6.1';
+export const LATEST_WHITEPAPER_HREF = '/whitepaper/';
 export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;
 export const QIF_ESTABLISHED = 2026;
@@ -90,7 +92,7 @@ export const PILLARS = [
     href: '/nsp/',
     icon: '&#9632;',
     color: 'var(--color-accent-secondary)',
-    version: '0.1-rust',
+    version: '0.4',
     status: 'In Development',
   },
   {
@@ -102,7 +104,7 @@ export const PILLARS = [
     href: '/runemate/',
     icon: '&#9670;',
     color: 'var(--color-accent-tertiary)',
-    version: '0.3',
+    version: '0.4',
     status: 'Research & Specs',
   },
 ] as const;

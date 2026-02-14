@@ -3,8 +3,8 @@
  * Single source of truth for all NSP values used on the site.
  */
 
-export const NSP_VERSION = '0.3';
-export const NSP_STATUS = 'Draft RFC';
+export const NSP_VERSION = '0.4';
+export const NSP_STATUS = 'In Development (Rust)';
 export const NSP_FIPS = ['FIPS 203 (ML-KEM)', 'FIPS 204 (ML-DSA)', 'FIPS 205 (SLH-DSA)', 'FIPS 197 (AES-256-GCM)'] as const;
 
 /** Five independent defense layers */
