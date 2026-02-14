@@ -36,11 +36,11 @@ const tacticColors: Record<string, string> = {
           { href: '#foundations', label: 'Foundations' },
           { href: '#hourglass', label: 'Hourglass Model' },
           { href: '#bands', label: '11 Bands' },
-          { href: '#scale-frequency', label: 'Scale-Frequency' },
           { href: '#threat-model', label: 'Threat Model' },
           { href: '#taxonomy', label: 'TARA Taxonomy' },
           { href: '#niss', label: 'NISS Scoring' },
           { href: '#coherence', label: 'Coherence Metric' },
+          { href: '#scale-frequency', label: 'Scale-Frequency' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -161,49 +161,6 @@ const tacticColors: Record<string, string> = {
               <p class="text-sm text-[var(--color-text-muted)]">{band.description}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <!-- Scale-Frequency -->
-      <section id="scale-frequency" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scale-Frequency Invariant</h2>
-        <div class="prose mb-8">
-          <p>
-            Neural oscillations follow a fundamental relationship: the product of frequency and spatial extent is approximately constant. This scale-frequency invariant defines how neural signals propagate and sets the physical constraints that any BCI security model must respect.
-          </p>
-        </div>
-
-        <div class="glass rounded-xl p-8 text-center mb-8">
-          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            v = f &times; &lambda;
-          </p>
-          <p class="text-sm text-[var(--color-text-faint)]">
-            k &asymp; 1&ndash;10 m/s (NOT 10&sup6;)
-          </p>
-        </div>
-
-        <!-- Band data table -->
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-[var(--color-border)]">
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Frequency</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Spatial Extent</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">k</th>
-              </tr>
-            </thead>
-            <tbody>
-              {SCALE_FREQUENCY.bands.map((band) => (
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-3 px-4 font-medium">{band.name}</td>
-                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.frequency}</td>
-                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.extent}</td>
-                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{band.k}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </section>
 
@@ -341,6 +298,49 @@ const tacticColors: Record<string, string> = {
           <a href="/explore/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
             Try the interactive coherence calculator in QIF Lab &rarr;
           </a>
+        </div>
+      </section>
+
+      <!-- Scale-Frequency -->
+      <section id="scale-frequency" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scale-Frequency Invariant</h2>
+        <div class="prose mb-8">
+          <p>
+            Neural oscillations follow a fundamental relationship: the product of frequency and spatial extent is approximately constant. This scale-frequency invariant defines how neural signals propagate and sets the physical constraints that any BCI security model must respect.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-8 text-center mb-8">
+          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
+            v = f &times; &lambda;
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)]">
+            k &asymp; 1&ndash;10 m/s (NOT 10&sup6;)
+          </p>
+        </div>
+
+        <!-- Band data table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Frequency</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Spatial Extent</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">k</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SCALE_FREQUENCY.bands.map((band) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-medium">{band.name}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.frequency}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.extent}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{band.k}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
     </div>

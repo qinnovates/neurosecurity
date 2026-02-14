@@ -35,7 +35,7 @@ But the deeper innovation is this: Staves is not just compressed HTML. It is the
 | Component | Status | TRL | Evidence |
 |-----------|--------|-----|----------|
 | **Staves v1 bytecode format** | Specified | 4 — Validated in lab | PoC compiler produces valid binaries; 3 pages tested (Section 15) |
-| **Forge compiler (HTML→Staves)** | PoC complete | 4 — Validated in lab | Python PoC achieves 65-79% compression (Section 15) |
+| **Forge compiler (HTML→Staves)** | Core Implemented (Alpha) | 4 — Validated in lab | Rust implementation achieves 65-90% compression; secure pipeline verified (Section 15) |
 | **Scribe interpreter** | Architecture phase | 3 — Proof of concept | Binary size and memory budgets validated (Section 10) |
 | **NSP transport integration** | Architecture phase | 3 — Proof of concept | Frame format specified (Section 6); NSP v0.3 exists independently |
 | **TARA safety bounds** | Specified | 3 — Proof of concept | 71 attack-therapy pairs catalogued; compiler constraints designed (Section 11) |

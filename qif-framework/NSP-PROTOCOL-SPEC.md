@@ -1,10 +1,10 @@
 # Neural Sensory Protocol (NSP) — Protocol Specification
 
 ```
-Title:          Neural Sensory Protocol (NSP) v0.3
-Version:        0.3
-Date:           2026-02-06
-Status:         Draft
+Title:          Neural Sensory Protocol (NSP) v0.4
+Version:        0.4
+Date:           2026-02-14
+Status:         Implemented (Alpha)
 Author:         Kevin Qi (Qinnovate)
 Framework:      QIF v4.0 Hourglass Model (11-band, 7-1-3)
 ```

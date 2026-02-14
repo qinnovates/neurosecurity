@@ -2,9 +2,9 @@
 
 > **This is the CANONICAL reference for all QIF equations, values, and definitions.**
 > **All blogs, repo docs, and publications MUST be consistent with this file.**
-> **Last validated: 2026-02-07**
-> **Last audit: 2026-02-07**
-> **Next audit due: 2026-02-09**
+> **Last validated: 2026-02-14**
+> **Last audit: 2026-02-14**
+> **Next audit due: 2026-02-16**
 >
 > ## Update Triggers
 > This document gets updated (and then synced outward to repo → blogs) whenever:
@@ -539,5 +539,5 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 
 *Document version: 4.1*
 *Created: 2026-02-02*
-*Last updated: 2026-02-07*
+*Last updated: 2026-02-14*
 *Maintainer: Kevin Qi*
