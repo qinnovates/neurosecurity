@@ -45,7 +45,7 @@ Every contribution is categorized by its cognitive origin. AI assistance is trea
 
 | Domain | Human Contribution | AI Contribution | Boundary Notes |
 |--------|-------------------|-----------------|----------------|
-| **Conceptual Architecture** | Original 14-layer ONI model design, attack surface identification, layer-to-ethics mapping | None | Purely human ideation; AI was not consulted on framework structure |
+| **Conceptual Architecture** | 14-layer model concept, OSI-mirrored 7-layer silicon side, attack surface identification, layer-to-ethics mapping | Co-mapping of biological layers (nervous system analogs for L9-L14) | Human conceived the dual-stack structure and knew 7 silicon layers were required (mirroring OSI); AI assisted in mapping the biological nervous system layers |
 | **v3.0/v3.1 Hourglass Architecture** | All 6 architectural decisions (7-band, 3-1-3 symmetry, N3 rename, amygdala split, cerebellum spanning, QI range philosophy), rejection of N4 band | Co-derivation of hourglass geometry (Entries 1-13), research agent validation (102 sources), implementation across codebase | Human made all final decisions; AI proposed options and implemented choices. See Derivation Log Entries 14-15. |
 | **Mathematical Formulas** | Cₛ coherence metric conception, variable selection (σ²φ, σ²τ, σ²γ), security interpretations | LaTeX formatting, notation consistency | Human selected which variances matter for security; AI formatted |
 | **Security Decisions** | Zero-trust architecture choice, firewall placement at L8, rejection thresholds | None | All security-critical decisions made by human judgment |
