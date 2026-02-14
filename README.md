@@ -25,7 +25,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
 | **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.4, Secure Pipe Verified |
-| **[Governance](https://qinnovate.com/governance/)** | 10 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
+| **[Governance](https://qinnovate.com/governance/)** | 11 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
 
 ---
 
@@ -121,11 +121,12 @@ Runemate paves the road for BCI content delivery the way W3C paved the road for 
 
 ### Governance
 
-10 published documents covering the full neuroethics landscape:
+11 published documents covering the full neuroethics landscape:
 
 | Document | Scope |
 |----------|-------|
 | [Accessibility](governance/ACCESSIBILITY.md) | Inclusive BCI design requirements |
+| [Code of Conduct](governance/CODE_OF_CONDUCT.md) | Community standards and contribution guidelines |
 | [Data Policy](governance/DATA_POLICY_FAQ.md) | Neural data handling, retention, deletion |
 | [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent protocols |
 | [Neuroethics Alignment](governance/NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
@@ -138,78 +139,47 @@ Runemate paves the road for BCI content delivery the way W3C paved the road for 
 
 ---
 
-## Website
-
-[qinnovate.com](https://qinnovate.com) is built with [Astro](https://astro.build/) 5.x and deployed via GitHub Pages.
-
-```bash
-npm install
-npm run dev      # localhost:4321
-npm run build
-npm run preview
-```
-
-### Pages
-
-| Route | Description |
-|-------|-------------|
-| `/` | Home |
-| `/whitepaper/` | QIF v6.1 whitepaper |
-| `/framework/` | Interactive 3D hourglass model |
-| `/TARA/` | 102-technique threat-therapy registry with filtering |
-| `/nsp/` | Neural Security Protocol spec |
-| `/runemate/` | Runemate compression engine spec |
-| `/scoring/` | NISS v1.0 scoring system |
-| `/governance/` | 10 neuroethics documents |
-| `/publications/` | 16 blog posts and research papers |
-| `/news/` | Aggregated BCI/neurosecurity RSS feed |
-| `/roadmap/` | Development roadmap with milestones |
-| `/glossary/` | Framework terminology |
-| `/explore/` | Interactive visualizations hub |
-| `/lab/hourglass.html` | Click-into-detail 11-band explorer |
-| `/about/` | Mission, author, contact |
-
----
-
 ## Repository Structure
 
 ```
 qinnovates/qinnovate/
-├── src/                        # Astro 5 website
-│   ├── pages/                  # 18 page routes
+├── qif-framework/              # QIF specification
+│   ├── framework/              # 10 architectural documents
+│   ├── tara-threat/            # TARA threat registry source
+│   ├── qif-lab/                # Equation testing
+│   ├── QIF-WHITEPAPER.md       # v6.1 whitepaper
+│   ├── QIF-TRUTH.md            # Canonical source of truth
+│   └── RUNEMATE.md             # Runemate v0.4 spec
+│
+├── shared/                     # Cross-cutting data
+│   └── qtara-registrar.json    # 102 TARA techniques (CVSS + NISS)
+│
+├── governance/                 # 11 neuroethics documents
+├── paper/                      # Academic publications
+│   ├── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640106)
+│   └── woot26/                 # WOOT '26 submission (deadline Mar 3)
+│
+├── packaging/                  # Published packages
+│   └── qtara/                  # Python SDK (pip install qtara)
+│
+├── crates/                     # Rust implementations
+│   └── nsp/                    # Neural Security Protocol (Rust)
+│
+├── ml-research-labs/            # Validated research & case studies
+│   └── t0079-anc-ear-fingerprint/  # ANC biometric fingerprinting
+│
+├── blogs/                      # 18 blog posts (Astro content collection)
+├── processes/                  # Standards development lifecycle
+├── scripts/                    # RSS fetcher, TARA tools, utilities
+│
+├── src/                        # Astro 5 website (qinnovate.com)
+│   ├── pages/                  # Page routes
 │   ├── components/             # Nav, Footer, Hourglass3D, etc.
 │   ├── layouts/                # BaseLayout, PageLayout
 │   ├── lib/                    # qif-constants.ts, threat-data.ts
 │   └── styles/                 # global.css (Tailwind 4)
 │
-├── qif-framework/              # QIF specification
-│   ├── framework/              # 9 architectural documents
-│   ├── tara-threat/            # TARA threat registry source
-│   ├── qif-lab/                # Equation testing
-│   ├── QIF-WHITEPAPER.md       # v6.1 whitepaper
-│   ├── QIF-TRUTH.md            # Canonical source of truth
-│   └── RUNEMATE.md             # Runemate v0.3 spec
-│
-├── shared/                     # Cross-cutting data
-│   └── qtara-registrar.json    # 102 TARA techniques (CVSS + NISS)
-│
-├── packaging/                  # Published packages
-│   └── qtara/                  # Python SDK (pip install qtara)
-│
-├── paper/                      # Academic publications
-│   ├── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640106)
-│   └── woot26/                 # WOOT '26 submission (deadline Mar 3)
-│
-├── crates/                     # Rust implementations
-│   └── nsp/                    # Neural Security Protocol (Rust)
-│
-├── governance/                 # 10 neuroethics documents
-├── blogs/                      # 16 blog posts (Astro content collection)
-├── processes/                  # Standards development lifecycle
-├── scripts/                    # RSS fetcher, TARA tools, utilities
-│
 ├── oni-framework/              # ONI 14-layer model (legacy, preserved)
-│
 ├── docs/                       # Static assets (CNAME, fonts, images)
 ├── public/                     # Additional static assets
 └── .github/workflows/          # CI/CD (deploy, news, wiki sync)
