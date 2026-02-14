@@ -18,8 +18,9 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
-| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. The threat model. | v5.2, published |
-| **[TARA](https://qinnovate.com/TARA/)** | 71 attack-therapy technique pairs across 7 domains and 11 tactics. The dual-use atlas. | v1.0, published |
+| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v5.2, published |
+| **[TARA](https://qinnovate.com/TARA/)** | 71 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
+| **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.3, draft |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
 | **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.3, spec |
@@ -84,7 +85,9 @@ The wire protocol. Post-quantum encryption (ML-KEM, ML-DSA, AES-256-GCM) at the 
 The threat-therapy registry. 71 techniques across 7 domains (Access, Collection, Execution, Impact, Persistence, Reconnaissance, Exfiltration) and 11 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs (QIF-T0001 through QIF-T0071).
 
 - **Registry:** [qinnovate.com/TARA](https://qinnovate.com/TARA/)
+- **API:** [qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json) (STIX 2.1 Feed)
 - **Data:** [shared/qtara-registrar.json](shared/qtara-registrar.json)
+- **SDK:** `pip install qtara`
 
 ### NISS (Neural Impact Scoring System)
 

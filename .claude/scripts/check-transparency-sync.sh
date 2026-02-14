@@ -38,6 +38,6 @@ if [ -n "$DERIV_LOG" ] && [ -f "$DERIV_LOG" ]; then
         echo "Run a manual review if the Derivation Log has grown since last sync."
     fi
 else
-    echo "WARNING: Derivation Log not found at $DERIV_LOG"
-    echo "Check that the path is correct relative to the repo root."
+    echo "WARNING: Derivation Log not found."
+    echo "Checked: qif-framework/, ../mindloft/drafts/ai-working/, ../drafts/ai-working/"
 fi

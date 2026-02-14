@@ -54,6 +54,44 @@ Returns TARA data formatted as **STIX 2.1 (Structured Threat Information Express
 curl https://qinnovate.com/api/stix.json
 ```
 
+## Python SDK (`qtara`)
+
+For researchers and developers, we provide an official Python package to interact with the QIF/TARA framework.
+
+### Installation
+```bash
+pip install qtara
+```
+
+### CLI Usage
+```bash
+# List all critical threats in the registry
+qtara list --severity critical
+
+# Get detailed info on a specific mechanism
+qtara info TARA-001
+
+# Generate an academic citation for your research
+qtara cite
+```
+
+### Programmatic Usage
+You can use `qtara` to load and validate STIX data from this API:
+
+```python
+import requests
+from qtara import STIXImporter # Hypothetical helper
+
+# Fetch the live STIX feed
+response = requests.get("https://qinnovate.com/api/stix.json")
+stix_data = response.json()
+
+# Process TARA objects
+for obj in stix_data['objects']:
+    if obj['type'] == 'attack-pattern':
+        print(f"Verified Threat: {obj['name']}")
+```
+
 **Response Format:**
 ```json
 {

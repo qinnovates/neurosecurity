@@ -143,7 +143,17 @@ Despite advances in BCI security, quantum biology, and post-quantum cryptography
 
 ## 4. QIF Hourglass Model (v4.0)
 
-[Interactive Hourglass Visualization]
+### 4.1 3D Hourglass Visualization Standard
+
+The complexity of an 11-band neural-synthetic stack requires more than a 2D diagram can provide. QIF v5.2 adopts the **3D Hourglass Model** as its canonical visualization.
+
+- **Vertical Axis (Z)**: Represents **Temporal Depth**. Lower frequencies (Delta) occupy the broader base/top, while high-frequency interfaces (I0/S1) form the narrow, high-density center.
+- **Radial Axis (XY)**: Represents **State Space Complexity**. The width of each band corresponds to the number of degrees of freedom (e.g., N7 Neocortex having the highest radial extent).
+- **Core Stability**: The central Scribe/Forge interaction forms the "axle" of the hourglass, representing the minimal trusted computing base (TCB) of the entire system.
+
+### 4.2 Impact Chain Visualization
+
+Aggregated threats are visualized using a **Neural Impact Chain (Network Graph)**. This creates a directed acyclic graph (DAG) where nodes represent hourglass bands and edges represent exploit paths (Mechanism A--E). This allow security operators to see not just *what* is targeted, but the **propagation path** through the neural hierarchy.
 
 ### 4.1 Design Principles
 
@@ -775,7 +785,31 @@ Authenticated encryption. AES-256 remains quantum-resistant under Grover's algor
 | Clinical EEG | 32--256 | L2, L3, L4, L5 | Replay, slow drift |
 | Implanted BCI/DBS | 16--1024 | All five | Intermodulation, nation-state HNDL |
 
-### 7.4 Project Runemate: Offsetting PQC Overhead
+### 7.4 Standardized Threat Intelligence (STIX 2.1)
+
+To bridge the gap between neurosecurity and traditional SOC operations, TARA data is exported as **STIX 2.1 (Structured Threat Information Expression)**. 
+
+QIF mappings to STIX 2.1 objects:
+- **TARA Mechanisms** -> `attack-pattern`
+- **Neural Impacts** -> `relationship` (targeting)
+- **Clinical Modalities** -> `identity` (targeting sector: medical)
+- **NISS Scores** -> `external_references` (custom metadata)
+
+This enables existing Security Information and Event Management (SIEM) systems to ingest BCI threat data alongside traditional network indicators, the first such integration in the neurosecurity domain.
+
+### 7.5 Reference Implementation: `qtara` Python Package
+
+QIF provides an official reference implementation for researchers and developers: the **`qtara` Python Library**. `qtara` serves as the CLI and SDK for the framework, enabling:
+- **Registry Management**: Programmatic access to the TARA registry.
+- **Compliance Export**: Automated conversion of local threat data to STIX 2.1 JSON.
+- **Academic Tooling**: Automated BibTeX generation for framework citations (`qtara cite`).
+
+```bash
+pip install qtara
+qtara list --severity critical
+```
+
+### 7.6 Project Runemate: Offsetting PQC Overhead
 
 Post-quantum keys are significantly larger: ML-KEM-768 public keys are 1,184 bytes vs 65 bytes for ECDH-P256 (18.2x). Project Runemate converts HTML-based BCI interface content into a compact bytecode format called **Staves**, achieving 65--90% compression.
 
