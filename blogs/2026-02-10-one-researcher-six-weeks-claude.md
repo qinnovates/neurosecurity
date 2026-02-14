@@ -14,7 +14,7 @@ HTTPS had to exist before e-commerce. TLS had to exist before online banking. Th
 
 I am a cybersecurity professional. Fifteen years building defensive infrastructure across financial services, media, consumer tech, and biotech. I have led security engineering and threat hunting teams, architecting SIEM environments processing petabytes of logs for tens of millions of users. I know how systems break. I spent my career finding the cracks and closing them.
 
-I am neurodivergent. I have ADHD. I once asked for an autism evaluation during a hospital visit. They told me I was having an episode. I think I was having a meltdown. Many autistic people in my life have recognized the pattern in me since. I have not pursued a formal diagnosis, but I stopped treating the observation as coincidence a long time ago. The way my brain works, I see connections between things that other people file into separate departments. Cybersecurity and neuroscience. Quantum physics and protocol design. Threat hunting and therapeutic medicine. To me, these are not different fields. They are the same system viewed from different angles.
+I am neurodivergent. I have ADHD. I once asked for an autism evaluation during a hospital visit. They told me I was having an episode. I think I was having a meltdown. Today, I own my neuro spectrum. I do not need a label to understand how my mind works. The way my brain works, I see connections between things that other people file into separate departments. Cybersecurity and neuroscience. Quantum physics and protocol design. Threat hunting and therapeutic medicine. To me, these are not different fields. They are the same system viewed from different angles.
 
 That cross-wiring is how I found the gap.
 
