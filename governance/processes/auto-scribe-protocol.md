@@ -1,3 +1,9 @@
+---
+title: "Auto-Scribe Protocol: Derivation Log System"
+description: "How Qinnovate captures research breakthroughs in real-time using derivation logs."
+order: 90
+---
+
 # Auto-Scribe Protocol: Derivation Log System
 
 Every architectural insight, equation discovery, or conceptual breakthrough in Qinnovate's research gets captured in real-time using the Auto-Scribe protocol. This document explains how the system works, how to use it, and how to contribute.

@@ -1,3 +1,9 @@
+---
+title: "The VERA Engine: Validation, Ethics, Research, Authority"
+description: "Qinnovate's standards development lifecycle and governance flywheel."
+order: 91
+---
+
 # The VERA Engine: Validation • Ethics • Research • Authority
 
 To arrive at this final model, we stripped away the "move fast and break things" mentality of traditional software and replaced it with a scientific and legal "flywheel."
@@ -28,7 +34,7 @@ The VERA Engine is Qinnovate's core process for standards development — a perp
 
 <div align="center">
 
-![VERA Engine](../docs/images/vera-engine.png)
+![VERA Engine](../../docs/images/vera-engine.png)
 
 **Validation • Ethics • Research • Authority**
 

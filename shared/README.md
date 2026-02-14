@@ -6,12 +6,16 @@ This folder contains the unified BCI/neural security threat taxonomy using MITRE
 
 ```
 shared/
-├── qtara-registrar.json         # 60 techniques, 11 tactics, MITRE-compatible (CURRENT)
-├── threat-matrix.json           # DEPRECATED - legacy ONI 24-technique matrix
+├── qtara-registrar.json         # 102 techniques, 11 tactics, MITRE-compatible (CURRENT)
+├── derivation-timeline.json     # QIF derivation history
 ├── validation/                  # Validation tools
 │   ├── bridge.py                # ONI<>QIF validator
 │   ├── validate_metadata.py     # Metadata validation
 │   └── generate_progress.py     # Progress tracking
+├── archive/                     # Deprecated / merged data
+│   ├── threat-matrix.json       # Legacy ONI 24-technique matrix (merged into qtara-registrar)
+│   ├── qtara-new-entries-T0072-T0079.json  # Staging data (merged)
+│   └── qtara-new-entries-T0080-T0099.json  # Staging data (merged)
 └── README.md                    # This file
 ```
 

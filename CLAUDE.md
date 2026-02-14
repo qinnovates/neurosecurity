@@ -28,9 +28,14 @@
   - `layouts/`: Page layouts
   - `lib/`: Utility functions and constants
 - `qif-framework/`: QIF security specification docs
-- `governance/`: Policy and ethics documents
+- `governance/`: Policy, ethics, and process documents
+  - `processes/`: Standards development lifecycle
 - `shared/`: Shared data (Source of Truth)
-- `public/`: Static assets
+  - `archive/`: Deprecated/merged data files
+- `scripts/`: RSS fetcher, TARA tools, utilities
+  - `forms/`: Consulting form & Apps Script handler
+- `archive/`: Legacy projects (e.g. oni-framework)
+- `docs/`: Built site / GitHub Pages output
 
 ## Tech Stack
 - Framework: Astro 5.x

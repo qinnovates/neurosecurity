@@ -62,6 +62,7 @@ Qinnovate exists because these organizations proved that open standards make ent
 | **[ISO](https://iso.org)** | Quality, safety, medical device standards (14971, 62304) | Runemate's regulatory strategy maps to IEC 62304 |
 | **[OWASP](https://owasp.org)** | Web application security (Top 10, testing guides) | TARA threat categories parallel OWASP's structured approach |
 | **[FDA](https://fda.gov)** | Medical device approval (510(k), De Novo, PMA) | Runemate's Scribe targets FDA Class II/III software classification |
+| **[ISACA](https://isaca.org)** | IT governance, risk management, and audit frameworks (COBIT) | Qinnovate Neural Alliance follows their model for neutral, professional governance and specialized auditing |
 
 ---
 
@@ -152,9 +153,12 @@ qinnovates/qinnovate/
 │   └── RUNEMATE.md             # Runemate v0.4 spec
 │
 ├── shared/                     # Cross-cutting data
-│   └── qtara-registrar.json    # 102 TARA techniques (CVSS + NISS)
+│   ├── qtara-registrar.json    # 102 TARA techniques (CVSS + NISS)
+│   └── archive/                # Deprecated/merged data files
 │
 ├── governance/                 # 11 neuroethics documents
+│   └── processes/              # Standards development lifecycle
+│
 ├── paper/                      # Academic publications
 │   ├── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640106)
 │   └── woot26/                 # WOOT '26 submission (deadline Mar 3)
@@ -165,12 +169,12 @@ qinnovates/qinnovate/
 ├── crates/                     # Rust implementations
 │   └── nsp/                    # Neural Security Protocol (Rust)
 │
-├── ml-research-labs/            # Validated research & case studies
+├── ml-research-labs/           # Validated research & case studies
 │   └── t0079-anc-ear-fingerprint/  # ANC biometric fingerprinting
 │
 ├── blogs/                      # 18 blog posts (Astro content collection)
-├── processes/                  # Standards development lifecycle
 ├── scripts/                    # RSS fetcher, TARA tools, utilities
+│   └── forms/                  # Consulting form & Apps Script handler
 │
 ├── src/                        # Astro 5 website (qinnovate.com)
 │   ├── pages/                  # Page routes
@@ -179,9 +183,10 @@ qinnovates/qinnovate/
 │   ├── lib/                    # qif-constants.ts, threat-data.ts
 │   └── styles/                 # global.css (Tailwind 4)
 │
-├── oni-framework/              # ONI 14-layer model (legacy, preserved)
-├── docs/                       # Static assets (CNAME, fonts, images)
-├── public/                     # Additional static assets
+├── archive/                    # Legacy projects (preserved)
+│   └── oni-framework/          # ONI 14-layer model
+│
+├── docs/                       # Built site / GitHub Pages output
 └── .github/workflows/          # CI/CD (deploy, news, wiki sync)
 ```
 
