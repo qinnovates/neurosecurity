@@ -82,7 +82,7 @@ For neurodivergent researchers especially, this changes the game. My brain does 
 
 ## What Comes Next
 
-I submitted an application to Anthropic's AI for Science Program. I am applying to graduate programs in BCI security for Fall 2026 at Georgetown, Georgia Tech, and Johns Hopkins.
+I submitted an application to Anthropic's AI for Science Program. I am applying to graduate programs in neuroethics for Fall 2026.
 
 But I did not wait for permission to start. The work is done. The framework is published. The code is open source. The governance documents exist.
 

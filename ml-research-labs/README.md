@@ -24,7 +24,7 @@ Each lab contains:
 - Results from synthetic and/or real-world testing
 - Responsible disclosure status and next steps
 
-The actual code lives in the [Mindloft tools repo](https://github.com/qinnovates/mindloft/tree/main/tools/ml-research-labs/) — these writeups document the research methodology and findings for the standards community.
+These writeups document the research methodology and findings for the standards community.
 
 ## Responsible Disclosure
 

@@ -6,7 +6,7 @@ title: "Introduction: The Quantum Blind Spot"
 #| label: setup
 #| include: false
 import sys, os
-sys.path.insert(0, '/Users/mac/Documents/PROJECTS/qinnovates/mindloft/drafts/ai-working/qif-lab')
+sys.path.insert(0, '/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/qif-framework/qif-lab')
 ```
 
 ::: {.callout-note}

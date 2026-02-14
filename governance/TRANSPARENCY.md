@@ -301,8 +301,8 @@ Update log maintained in git history.
 For questions about this transparency statement or the human-AI collaboration methodology:
 
 **Author**: Kevin L. Qi
-**Repository**: https://github.com/qinnovates/mindloft
-**Support This Research**: [Funding & Sponsorship](https://github.com/qinnovates/mindloft/blob/main/.github/FUNDING.yml)
+**Repository**: https://github.com/qinnovates/qinnovate
+**Support This Research**: [Funding & Sponsorship](.github/FUNDING.yml)
 
 ---
 

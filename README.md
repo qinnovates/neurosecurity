@@ -202,19 +202,6 @@ qinnovates/qinnovate/
 
 ---
 
-## Ecosystem
-
-**Qinnovate** defines the standards. **[Mindloft](https://github.com/qinnovates/mindloft)** is where ideas, products, and experiments live.
-
-| | Qinnovate | Mindloft |
-|---|---|---|
-| Role | Standards body | Creative workshop + product lab |
-| Analogy | W3C / NIST / IEEE | The workshop that builds on those standards |
-| Content | Specs, protocols, governance, blog posts | Ideas, tools, experiments, educational content |
-| Site | [qinnovate.com](https://qinnovate.com) | [mindloft.org](https://mindloft.org) |
-
----
-
 ## Collaboration
 
 Qinnovate seeks partnerships with researchers, standards bodies, BCI manufacturers, and regulators. The framework is Apache 2.0 because trust is verified, not assumed.

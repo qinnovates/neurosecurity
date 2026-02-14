@@ -351,6 +351,6 @@ And those threats? They're not theoretical. They're being prepared for right now
 
 ---
 
-*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/mindloft/).*
+*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*
 
 *Originally published on [Cybersecurity Writeups](https://cybersecuritywriteups.com/can-hackers-attack-quantum-computers-across-time-and-space-the-truth-is-far-more-terrifying-d74e41a2223a) on January 21, 2026 at 23:55:00 GMT*

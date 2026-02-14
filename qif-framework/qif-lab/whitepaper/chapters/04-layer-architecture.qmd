@@ -6,7 +6,7 @@ title: "The QIF Layer Architecture"
 #| label: setup
 #| include: false
 import sys, os
-sys.path.insert(0, '/Users/mac/Documents/PROJECTS/qinnovates/mindloft/drafts/ai-working/qif-lab')
+sys.path.insert(0, '/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/qif-framework/qif-lab')
 from src.config import BANDS, ZONES, BRAIN_REGION_MAP, FRAMEWORK, DETERMINACY_SPECTRUM, V2_TO_V3_MIGRATION
 import pandas as pd
 ```

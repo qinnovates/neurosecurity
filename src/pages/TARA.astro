@@ -13,16 +13,16 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
 
 <PageLayout
   title="TARA — Therapeutic Atlas of Risks & Applications"
-  description={`${THREAT_VECTORS.length} BCI techniques mapped across security, clinical, governance, and engineering projections. Each technique viewed as both an attack vector and a therapeutic application.`}
+  description={`${THREAT_VECTORS.length} BCI techniques mapped across modality, clinical, diagnostic, and governance projections. Each technique viewed as both an attack vector and a therapeutic application.`}
   breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'TARA Registrar' }]}
   maxWidth="wide"
 >
-  <div id="threat-page" data-projection="security">
+  <div id="threat-page" data-projection="modality">
     <div class="mb-8">
       <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-2">TARA Registrar</h1>
       <p class="text-sm text-[var(--color-text-muted)] opacity-70 -mt-1 mb-1">Therapeutic Atlas of Risks &amp; Applications</p>
       <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
-        {THREAT_VECTORS.length} BCI techniques mapped to CVSS v4.0 base vectors and MITRE ATT&amp;CK-style technique IDs across {THREAT_CATEGORIES.length} categories and {bands.length} hourglass bands. Every attack vector is also a therapeutic application.
+        {THREAT_VECTORS.length} BCI techniques mapped to CVSS v4.0 base vectors across {THREAT_CATEGORIES.length} categories and {bands.length} hourglass bands. Every attack vector is also a therapeutic application.
       </p>
 
       <!-- Context introduction for newcomers -->
@@ -32,10 +32,10 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
           Every BCI technique that can harm a patient can also heal one. TARA maps {THREAT_VECTORS.length} known brain-computer interface techniques across four dimensions:
         </p>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3">
-          <div><strong class="text-[var(--color-accent-primary)]">Security</strong> &mdash; Attack severity and evidence</div>
+          <div><strong class="text-[var(--color-accent-primary)]">Modality</strong> &mdash; Impact severity and physical mechanism</div>
           <div><strong class="text-[#0891b2]">Clinical</strong> &mdash; Therapeutic applications and FDA status</div>
-          <div><strong class="text-[#d97706]">Governance</strong> &mdash; Consent tiers and regulations</div>
-          <div><strong class="text-[var(--color-accent-tertiary)]">Engineering</strong> &mdash; Physical coupling and hardware</div>
+          <div><strong class="text-[#d97706]">Diagnostic</strong> &mdash; DSM-5-TR psychiatric mapping</div>
+          <div><strong class="text-[var(--color-accent-tertiary)]">Governance</strong> &mdash; Consent tiers and regulations</div>
         </div>
         <p class="mt-3 text-xs text-[var(--color-text-faint)]">
           Switch tabs to view the same grid through each lens. Click any colored cell to see full details.
@@ -44,11 +44,23 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
 
       <!-- TARA Projection Tabs -->
       <nav class="tara-tabs" id="tara-tabs" role="radiogroup" aria-label="TARA projection">
-        <button class="tara-tab active" data-projection="security" role="radio" aria-checked="true">Security</button>
+        <button class="tara-tab active" data-projection="modality" role="radio" aria-checked="true">Modality</button>
         <button class="tara-tab" data-projection="clinical" role="radio" aria-checked="false">Clinical</button>
+        <button class="tara-tab" data-projection="diagnostic" role="radio" aria-checked="false">Diagnostic</button>
         <button class="tara-tab" data-projection="governance" role="radio" aria-checked="false">Governance</button>
-        <button class="tara-tab" data-projection="engineering" role="radio" aria-checked="false">Engineering</button>
       </nav>
+
+      <!-- Projection description (changes per tab) -->
+      <div id="projection-desc" class="text-sm text-[var(--color-text-muted)] mb-4 -mt-2" style="min-height: 1.5rem;">
+        How each technique works — toggle between impact severity and physical mechanism
+      </div>
+
+      <!-- Sub-view toggle (visible only for Modality projection) -->
+      <div id="subview-toggle" class="flex gap-1 mb-3 text-xs" style="display:flex;">
+        <span class="text-[var(--color-text-faint)] mr-1 self-center">Color by:</span>
+        <button class="subview-btn active" data-subview="impact">Impact</button>
+        <button class="subview-btn" data-subview="mechanism">Mechanism</button>
+      </div>
 
       <!-- Stats bar (rebuilt per projection) -->
       <div id="stats-bar">
@@ -311,6 +323,30 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     font-weight: 600;
   }
 
+  /* ═══ Sub-view toggle (Modality projection) ═══ */
+  .subview-btn {
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+  }
+  .subview-btn:hover {
+    color: var(--color-text-primary);
+    border-color: rgba(148, 163, 184, 0.4);
+  }
+  .subview-btn.active {
+    background: rgba(var(--color-accent-primary-rgb, 59, 130, 246), 0.1);
+    color: var(--color-accent-primary);
+    border-color: var(--color-accent-primary);
+    font-weight: 600;
+  }
+
   /* ═══ Threat Map Grid ═══ */
   .threat-map-scroll {
     overflow-x: auto;
@@ -453,6 +489,18 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   .map-cell--cp-optical:hover { background: rgba(168, 85, 247, 0.20); }
   .map-cell--cp-none { background: rgba(148, 163, 184, 0.06); }
   .map-cell--cp-none:hover { background: rgba(148, 163, 184, 0.14); }
+
+  /* ═══ Cell color classes — Diagnostic (DSM-5-TR clusters) ═══ */
+  .map-cell--dc-cognitive_psychotic { background: rgba(245, 158, 11, 0.12); }
+  .map-cell--dc-cognitive_psychotic:hover { background: rgba(245, 158, 11, 0.22); }
+  .map-cell--dc-mood_trauma { background: rgba(234, 179, 8, 0.10); }
+  .map-cell--dc-mood_trauma:hover { background: rgba(234, 179, 8, 0.20); }
+  .map-cell--dc-motor_neurocognitive { background: rgba(239, 68, 68, 0.12); }
+  .map-cell--dc-motor_neurocognitive:hover { background: rgba(239, 68, 68, 0.22); }
+  .map-cell--dc-persistent_personality { background: rgba(168, 85, 247, 0.10); }
+  .map-cell--dc-persistent_personality:hover { background: rgba(168, 85, 247, 0.20); }
+  .map-cell--dc-non_diagnostic { background: rgba(148, 163, 184, 0.06); }
+  .map-cell--dc-non_diagnostic:hover { background: rgba(148, 163, 184, 0.14); }
 
   .cell-inner {
     display: flex;
@@ -749,8 +797,16 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   }
 
   // ── State ──
-  var activeProjection = 'security';
+  var activeProjection = 'modality';
+  var activeSubView = 'impact'; // For modality projection: 'impact' or 'mechanism'
   var lastOpenedCell = null;
+
+  var PROJECTION_DESCRIPTIONS = {
+    modality: 'How each technique works — toggle between impact severity and physical mechanism',
+    clinical: 'Therapeutic applications, FDA status, and evidence levels',
+    diagnostic: 'DSM-5-TR psychiatric diagnoses mapped via the Neural Impact Chain',
+    governance: 'Consent requirements and regulatory classifications',
+  };
 
   // ── DOM refs ──
   var threatPage = document.getElementById('threat-page');
@@ -774,13 +830,17 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   // ═══════════════════════════════════════════════════════════════
 
   var VALUE_EXTRACTORS = {
-    security: function(t) { return t.severity; },
-    clinical: function(t) { return t.tara ? t.tara.dual_use : null; },
-    governance: function(t) { return t.tara ? t.tara.governance.consent_tier : null; },
-    engineering: function(t) {
-      if (!t.tara || !t.tara.engineering || !t.tara.engineering.coupling || t.tara.engineering.coupling.length === 0) return 'none';
-      return t.tara.engineering.coupling[0];
+    modality: function(t) {
+      // Sub-view aware: impact uses severity, mechanism uses coupling
+      if (activeSubView === 'mechanism') {
+        if (!t.tara || !t.tara.engineering || !t.tara.engineering.coupling || t.tara.engineering.coupling.length === 0) return 'none';
+        return t.tara.engineering.coupling[0];
+      }
+      return t.severity;
     },
+    clinical: function(t) { return t.tara ? t.tara.dual_use : null; },
+    diagnostic: function(t) { return (t.tara && t.tara.dsm5) ? t.tara.dsm5.cluster : null; },
+    governance: function(t) { return t.tara ? t.tara.governance.consent_tier : null; },
   };
 
   // ═══════════════════════════════════════════════════════════════
@@ -788,11 +848,19 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   // ═══════════════════════════════════════════════════════════════
 
   var FILTER_MATCHERS = {
-    security: function(t, active) {
+    modality: function(t, active) {
       var sevSet = active['severity'];
       var statusSet = active['status'];
+      var cpSet = active['coupling'];
       if (sevSet && !sevSet.has(t.severity)) return false;
       if (statusSet && !statusSet.has(t.status)) return false;
+      if (cpSet) {
+        var val = 'none';
+        if (t.tara && t.tara.engineering && t.tara.engineering.coupling && t.tara.engineering.coupling.length > 0) {
+          val = t.tara.engineering.coupling[0];
+        }
+        if (!cpSet.has(val)) return false;
+      }
       return true;
     },
     clinical: function(t, active) {
@@ -805,19 +873,17 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
       }
       return true;
     },
+    diagnostic: function(t, active) {
+      var clusterSet = active['cluster'];
+      var rcSet = active['riskclass'];
+      if (clusterSet && !clusterSet.has((t.tara && t.tara.dsm5) ? t.tara.dsm5.cluster : '')) return false;
+      if (rcSet && !rcSet.has((t.tara && t.tara.dsm5) ? t.tara.dsm5.risk_class : '')) return false;
+      return true;
+    },
     governance: function(t, active) {
       var ctSet = active['consent'];
       if (ctSet && !ctSet.has(t.tara ? t.tara.governance.consent_tier : '')) return false;
       return true;
-    },
-    engineering: function(t, active) {
-      var cpSet = active['coupling'];
-      if (!cpSet) return true;
-      var val = 'none';
-      if (t.tara && t.tara.engineering && t.tara.engineering.coupling && t.tara.engineering.coupling.length > 0) {
-        val = t.tara.engineering.coupling[0];
-      }
-      return cpSet.has(val);
     },
   };
 
@@ -868,8 +934,37 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     none: { bg: 'rgba(148,163,184,0.15)', color: '#94a3b8', border: 'rgba(148,163,184,0.3)' },
   };
 
+  var CLUSTER_BADGE = {
+    cognitive_psychotic: { bg: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)' },
+    mood_trauma: { bg: 'rgba(234,179,8,0.15)', color: '#eab308', border: 'rgba(234,179,8,0.3)' },
+    motor_neurocognitive: { bg: 'rgba(239,68,68,0.15)', color: '#ef4444', border: 'rgba(239,68,68,0.3)' },
+    persistent_personality: { bg: 'rgba(168,85,247,0.15)', color: '#a855f7', border: 'rgba(168,85,247,0.3)' },
+    non_diagnostic: { bg: 'rgba(148,163,184,0.15)', color: '#94a3b8', border: 'rgba(148,163,184,0.3)' },
+  };
+
+  var CLUSTER_LABELS = {
+    cognitive_psychotic: 'Cognitive/Psychotic',
+    mood_trauma: 'Mood/Trauma',
+    motor_neurocognitive: 'Motor/Neurocognitive',
+    persistent_personality: 'Persistent/Personality',
+    non_diagnostic: 'Non-Diagnostic',
+  };
+
+  var RISK_CLASS_BADGE = {
+    direct: { bg: 'rgba(239,68,68,0.12)', color: '#ef4444', border: 'rgba(239,68,68,0.2)' },
+    indirect: { bg: 'rgba(245,158,11,0.12)', color: '#f59e0b', border: 'rgba(245,158,11,0.2)' },
+    none: { bg: 'rgba(148,163,184,0.12)', color: '#94a3b8', border: 'rgba(148,163,184,0.2)' },
+  };
+
+  var CONFIDENCE_BADGE = {
+    established: { bg: 'rgba(16,185,129,0.12)', color: '#10b981' },
+    probable: { bg: 'rgba(245,158,11,0.12)', color: '#f59e0b' },
+    theoretical: { bg: 'rgba(148,163,184,0.12)', color: '#94a3b8' },
+  };
+
   var DETAIL_RENDERERS = {
-    security: function(t) {
+    modality: function(t) {
+      // Merged security + engineering detail
       var sc = STATUS_BADGE_COLORS[t.status] || STATUS_BADGE_COLORS.THEORETICAL;
       var statusBdg = makeBadge(t.status, sc.bg, sc.color, sc.border);
       var html = '<div class="detail-threat-name">' + t.name + ' <span class="sev-badge sev-badge--' + t.severity + '">' + t.severity + '</span> ' + statusBdg + '</div>';
@@ -885,6 +980,31 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
       html += '<div class="detail-description">' + t.description + '</div>';
       if (t.niss && t.niss.score > 0) {
         html += '<div class="detail-niss">NISS ' + t.niss.score.toFixed(1) + ' (' + t.niss.severity + ') \u2014 ' + t.niss.vector + '</div>';
+      }
+      // Engineering data
+      if (t.tara && t.tara.engineering) {
+        var eng = t.tara.engineering;
+        var couplingVal = (eng.coupling && eng.coupling.length > 0) ? eng.coupling[0] : 'none';
+        var cpC = COUPLING_BADGE[couplingVal] || COUPLING_BADGE.none;
+        var cpBdg = makeBadge(couplingVal, cpC.bg, cpC.color, cpC.border);
+        html += '<div style="margin-top:0.5rem;font-size:0.75rem;color:var(--color-text-muted);"><strong>Mechanism:</strong> ' + cpBdg + '</div>';
+        var paramKeys = Object.keys(eng.parameters || {});
+        if (paramKeys.length > 0) {
+          html += '<dl class="detail-meta">';
+          for (var pk = 0; pk < paramKeys.length; pk++) {
+            html += '<dt>' + paramKeys[pk].replace(/_/g, ' ') + '</dt><dd>' + eng.parameters[paramKeys[pk]] + '</dd>';
+          }
+          html += '</dl>';
+        }
+        if (eng.hardware && eng.hardware.length > 0) {
+          html += '<div style="font-size:0.75rem;color:var(--color-text-muted);"><strong>Hardware:</strong></div>';
+          html += '<ul style="font-size:0.75rem;color:var(--color-text-muted);margin:0 0 0.4rem 1rem;padding:0;">';
+          for (var h = 0; h < eng.hardware.length; h++) html += '<li>' + eng.hardware[h].replace(/_/g, ' ') + '</li>';
+          html += '</ul>';
+        }
+        if (eng.detection) {
+          html += '<div style="font-size:0.75rem;color:var(--color-text-muted);"><strong>Detection:</strong> ' + eng.detection + '</div>';
+        }
       }
       html += '<div class="detail-tactic">' + t.tactic + '</div>';
       if (t.crossRefs && t.crossRefs.secondary_tactics && t.crossRefs.secondary_tactics.length > 0) {
@@ -953,31 +1073,48 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
       return html;
     },
 
-    engineering: function(t) {
-      if (!t.tara || !t.tara.engineering) return '<div class="detail-threat-name">' + t.name + '</div><div class="detail-threat-id">' + t.id + '</div><div style="font-size:0.8rem;color:var(--color-text-faint);">No engineering data</div>';
-      var eng = t.tara.engineering;
-      var couplingVal = (eng.coupling && eng.coupling.length > 0) ? eng.coupling[0] : 'none';
-      var cpC = COUPLING_BADGE[couplingVal] || COUPLING_BADGE.none;
-      var cpBdg = makeBadge(couplingVal, cpC.bg, cpC.color, cpC.border);
-      var html = '<div class="detail-threat-name">' + t.name + ' ' + cpBdg + '</div>';
+    diagnostic: function(t) {
+      var dsm = (t.tara && t.tara.dsm5) ? t.tara.dsm5 : null;
+      var cluster = dsm ? dsm.cluster : 'non_diagnostic';
+      var clC = CLUSTER_BADGE[cluster] || CLUSTER_BADGE.non_diagnostic;
+      var clBdg = makeBadge(CLUSTER_LABELS[cluster] || cluster, clC.bg, clC.color, clC.border);
+      var rc = dsm ? dsm.risk_class : 'none';
+      var rcC = RISK_CLASS_BADGE[rc] || RISK_CLASS_BADGE.none;
+      var rcBdg = makeBadge('risk: ' + rc, rcC.bg, rcC.color, rcC.border);
+      var html = '<div class="detail-threat-name">' + t.name + ' ' + clBdg + ' ' + rcBdg + '</div>';
       html += '<div class="detail-threat-id">' + t.id + '</div>';
-      var paramKeys = Object.keys(eng.parameters || {});
-      if (paramKeys.length > 0) {
-        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.5rem;"><strong>Parameters:</strong></div>';
-        html += '<dl class="detail-meta">';
-        for (var pk = 0; pk < paramKeys.length; pk++) {
-          html += '<dt>' + paramKeys[pk].replace(/_/g, ' ') + '</dt><dd>' + eng.parameters[paramKeys[pk]] + '</dd>';
-        }
-        html += '</dl>';
+      if (!dsm || cluster === 'non_diagnostic') {
+        html += '<div style="font-size:0.8rem;color:var(--color-text-faint);font-style:italic;margin-top:0.5rem;">Silicon-only technique \u2014 no direct psychiatric diagnostic mapping.</div>';
+        return html;
       }
-      if (eng.hardware && eng.hardware.length > 0) {
-        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.4rem;"><strong>Hardware:</strong></div>';
+      if (dsm.pathway) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.5rem;"><strong>Neural pathway:</strong> ' + dsm.pathway + '</div>';
+      }
+      if (dsm.niss_correlation) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.2rem;"><strong>NISS \u2192 DSM:</strong> ' + dsm.niss_correlation + '</div>';
+      }
+      if (dsm.primary && dsm.primary.length > 0) {
+        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.5rem;"><strong>Primary diagnoses:</strong></div>';
         html += '<ul style="font-size:0.75rem;color:var(--color-text-muted);margin:0 0 0.4rem 1rem;padding:0;">';
-        for (var h = 0; h < eng.hardware.length; h++) html += '<li>' + eng.hardware[h].replace(/_/g, ' ') + '</li>';
+        for (var i = 0; i < dsm.primary.length; i++) {
+          var d = dsm.primary[i];
+          var confC = CONFIDENCE_BADGE[d.confidence] || CONFIDENCE_BADGE.theoretical;
+          var confBdg = makeBadge(d.confidence, confC.bg, confC.color);
+          html += '<li><code style="font-size:0.7rem;background:rgba(148,163,184,0.1);padding:0.1rem 0.3rem;border-radius:3px;">' + d.code + '</code> ' + d.name + ' ' + confBdg + '</li>';
+        }
         html += '</ul>';
       }
-      if (eng.detection) {
-        html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.3rem;"><strong>Detection:</strong> ' + eng.detection + '</div>';
+      if (dsm.secondary && dsm.secondary.length > 0) {
+        html += '<details style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.3rem;">';
+        html += '<summary style="cursor:pointer;"><strong>Secondary diagnoses</strong> (' + dsm.secondary.length + ')</summary>';
+        html += '<ul style="margin:0.2rem 0 0 1rem;padding:0;">';
+        for (var j = 0; j < dsm.secondary.length; j++) {
+          var sd = dsm.secondary[j];
+          var sConfC = CONFIDENCE_BADGE[sd.confidence] || CONFIDENCE_BADGE.theoretical;
+          var sConfBdg = makeBadge(sd.confidence, sConfC.bg, sConfC.color);
+          html += '<li><code style="font-size:0.7rem;background:rgba(148,163,184,0.1);padding:0.1rem 0.3rem;border-radius:3px;">' + sd.code + '</code> ' + sd.name + ' ' + sConfBdg + '</li>';
+        }
+        html += '</ul></details>';
       }
       return html;
     },
@@ -992,13 +1129,26 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     'map-cell--sev-critical', 'map-cell--sev-high', 'map-cell--sev-medium', 'map-cell--sev-low',
     'map-cell--du-confirmed', 'map-cell--du-probable', 'map-cell--du-possible', 'map-cell--du-silicon_only',
     'map-cell--ct-standard', 'map-cell--ct-enhanced', 'map-cell--ct-IRB', 'map-cell--ct-prohibited',
-    'map-cell--cp-electromagnetic', 'map-cell--cp-mechanical', 'map-cell--cp-thermal', 'map-cell--cp-optical', 'map-cell--cp-none'];
+    'map-cell--cp-electromagnetic', 'map-cell--cp-mechanical', 'map-cell--cp-thermal', 'map-cell--cp-optical', 'map-cell--cp-none',
+    'map-cell--dc-cognitive_psychotic', 'map-cell--dc-mood_trauma', 'map-cell--dc-motor_neurocognitive', 'map-cell--dc-persistent_personality', 'map-cell--dc-non_diagnostic'];
 
   function recolorGrid(projId) {
     var proj = PROJECTIONS[projId];
     var prefix = proj.cellClassPrefix;
     var ranking = proj.valueRanking;
     var extractor = VALUE_EXTRACTORS[projId];
+
+    // Handle sub-views for modality projection
+    if (projId === 'modality' && proj.subViews) {
+      var sv = null;
+      for (var si = 0; si < proj.subViews.length; si++) {
+        if (proj.subViews[si].id === activeSubView) { sv = proj.subViews[si]; break; }
+      }
+      if (sv) {
+        prefix = sv.cellClassPrefix;
+        ranking = sv.valueRanking;
+      }
+    }
 
     document.querySelectorAll('.map-cell').forEach(function(cell) {
       var threatIds = JSON.parse(cell.dataset.threats || '[]');
@@ -1027,8 +1177,8 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
 
       // Apply new color class
       if (dominant) {
-        // For security projection, use original class names (backward compat)
-        if (projId === 'security') {
+        // For modality/impact sub-view, use original class names (backward compat with CSS)
+        if (projId === 'modality' && activeSubView === 'impact') {
           cell.classList.add('map-cell--' + dominant);
         } else {
           cell.classList.add('map-cell--' + prefix + '-' + dominant);
@@ -1052,23 +1202,7 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
     var statRows = proj.stats;
     var extractor = VALUE_EXTRACTORS[projId];
 
-    // For engineering, compute counts dynamically from threat data
-    if (projId === 'engineering') {
-      var counts = {};
-      for (var ei = 0; ei < ALL_THREATS.length; ei++) {
-        var val = extractor(ALL_THREATS[ei]);
-        counts[val] = (counts[val] || 0) + 1;
-      }
-      // Patch counts into the stat items
-      for (var sr = 0; sr < statRows.length; sr++) {
-        for (var si = 0; si < statRows[sr].items.length; si++) {
-          var item = statRows[sr].items[si];
-          if (counts[item.key] !== undefined) {
-            item.count = counts[item.key];
-          }
-        }
-      }
-    }
+    // No special-case needed — all stats are computed at build time
 
     var html = '';
     for (var r = 0; r < statRows.length; r++) {
@@ -1348,6 +1482,16 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
       tab.setAttribute('aria-checked', String(isActive));
     });
 
+    // 1b. Update projection description
+    var projDesc = document.getElementById('projection-desc');
+    if (projDesc) projDesc.textContent = PROJECTION_DESCRIPTIONS[projId] || '';
+
+    // 1c. Show/hide sub-view toggle
+    var svToggle = document.getElementById('subview-toggle');
+    if (svToggle) {
+      svToggle.style.display = (projId === 'modality') ? 'flex' : 'none';
+    }
+
     // 2. Grid recoloring
     recolorGrid(projId);
 
@@ -1381,6 +1525,19 @@ const projectionConfigJson = JSON.stringify(getProjectionConfigForClient());
   tabsNav.querySelectorAll('.tara-tab').forEach(function(tab) {
     tab.addEventListener('click', function() {
       switchProjection(tab.dataset.projection);
+    });
+  });
+
+  // Sub-view toggle for Modality
+  document.querySelectorAll('.subview-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activeSubView = btn.dataset.subview;
+      document.querySelectorAll('.subview-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.subview === activeSubView);
+      });
+      // Recolor grid with new sub-view
+      recolorGrid('modality');
+      applyFilters();
     });
   });
 

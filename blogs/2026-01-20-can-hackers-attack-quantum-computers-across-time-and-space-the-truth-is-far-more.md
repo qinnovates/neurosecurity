@@ -297,7 +297,7 @@ And those threats? They’re not theoretical. They’re being prepared for right
 - [IEEE Xplore: Reconstructing Quantum Circuits via Side Channels](https://ieeexplore.ieee.org/document/9951250/)
 - [arXiv: Classification of Quantum Computer Fault Injection Attacks](https://arxiv.org/pdf/2309.05478)
 
-*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/mindloft/).*
+*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*
 
 *Sub-Tags: #QuantumComputing #Cybersecurity #Cryptography #QuantumMechanics #PostQuantum #InfoSec*
 

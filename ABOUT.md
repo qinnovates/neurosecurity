@@ -41,11 +41,11 @@ Like the OSI model and the periodic table, QIF is a living framework: organizing
 
 ## The Framework
 
-**Qinnovate** is the standards body — where forward thinking begins. **Mindloft** is the product company — where research is built, tested, and shipped. And **QIF** (Quantum Indeterministic Framework for Neural Security) is the flagship research: security engineering grounded in neuroethics, developing rigorous, testable frameworks that protect cognitive fingerprints as we enter the age of brain-computer interfaces. The "Quantum" is literal — neural signals exhibit quantum-scale indeterminacy at the synaptic level, and that irreducible unpredictability is what makes each person's cognitive signature fundamentally uncloneable. QIF builds security architecture on that physical foundation.
+**Qinnovate** is the standards body — where forward thinking begins. **QIF** (Quantum Indeterministic Framework for Neural Security) is the flagship research: security engineering grounded in neuroethics, developing rigorous, testable frameworks that protect cognitive fingerprints as we enter the age of brain-computer interfaces. The "Quantum" is literal — neural signals exhibit quantum-scale indeterminacy at the synaptic level, and that irreducible unpredictability is what makes each person's cognitive signature fundamentally uncloneable. QIF builds security architecture on that physical foundation.
 
 Our minds deserve the same security architecture we've built for our networks. QIF is that architecture.
 
-The framework now includes [9 governance documents](https://github.com/qinnovates/mindloft/tree/main/MAIN/governance) mapping technical controls to neuroethics principles, the UNESCO Recommendation on the Ethics of Neurotechnology (2025), and regulatory requirements across US federal, state, and international jurisdictions.
+The framework now includes [9 governance documents](governance/) mapping technical controls to neuroethics principles, the UNESCO Recommendation on the Ethics of Neurotechnology (2025), and regulatory requirements across US federal, state, and international jurisdictions.
 
 A mentor once taught me: we don't give answers to other people's ponders. We give guidance. A framework. One that is simple yet answers itself as time moves on. One that works with or without us.
 
@@ -61,4 +61,3 @@ If you work with electrodes, patient data, BCI signal processing, neuroethics, o
 
 *Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl)*
 
-*For the full personal story behind this work, see the [Mindloft ABOUT](https://github.com/qinnovates/mindloft/blob/main/ABOUT.md).*

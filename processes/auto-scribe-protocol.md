@@ -83,7 +83,7 @@ Create a new derivation log when insights emerge that don't fit existing logs. E
 
 Each log exists in two locations:
 
-1. **Source of truth:** `qinnovates/mindloft/drafts/ai-working/` — full detail, verbose reasoning, all context
+1. **Source of truth:** `qinnovates/qinnovate/qif-framework/` — full detail, verbose reasoning, all context
 2. **Standards copy:** `qinnovates/qinnovate/qif-framework/` — same entries, may be condensed for public consumption
 
 **Propagation order:** Always write to the source of truth first, then sync to the standards copy.

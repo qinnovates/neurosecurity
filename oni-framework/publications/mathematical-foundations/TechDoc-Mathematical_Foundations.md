@@ -570,5 +570,5 @@ Welch, P. D. (1967). The use of fast Fourier transform for the estimation of pow
 
 *Document created: 2026-01-29*
 *Author: Kevin Qi + Claude (QI Collaboration)*
-*For: ONI Framework — qinnovates/mindloft*
+*For: ONI Framework — qinnovates/qinnovate*
 *Location: MAIN/legacy-core/publications/mathematical-foundations/TechDoc-Mathematical_Foundations.md*

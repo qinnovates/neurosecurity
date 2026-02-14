@@ -1,6 +1,6 @@
 # 🚨 01 — Why Revamp
 
-> **Tracking:** [GitHub Issue #30](https://github.com/qinnovates/mindloft/issues/30)
+> **Tracking:** [GitHub Issue #30](https://github.com/qinnovates/qinnovate/issues/30)
 
 ---
 

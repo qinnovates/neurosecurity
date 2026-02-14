@@ -1375,7 +1375,7 @@ Version:        0.2
 Status:         Draft
 Date:           2026-02-06
 Author:         Kevin Qi (Qinnovate)
-Location:       qinnovates/mindloft/drafts/ai-working/
+Location:       qinnovates/qinnovate/qif-framework/
 Related:        NSP-PITCH.md, NSP-USE-CASE.md, QIF-TRUTH.md
 Reviewed by:    Gemini (Google, independent peer review)
 Changes in 0.2: Fixed 5 weaknesses from Gemini review round 1:

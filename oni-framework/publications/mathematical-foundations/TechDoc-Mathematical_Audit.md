@@ -379,5 +379,5 @@ Correcting these errors actually opens productive research directions:
 
 *Document created: 2026-01-29*
 *Author: Kevin Qi + Claude (QI Collaboration)*
-*For: ONI Framework — qinnovates/mindloft*
+*For: ONI Framework — qinnovates/qinnovate*
 *Location: MAIN/legacy-core/publications/mathematical-foundations/TechDoc-Mathematical_Audit.md*

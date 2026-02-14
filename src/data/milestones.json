@@ -17,7 +17,7 @@
     {
       "date": "2026-01-15",
       "title": "QIF Framework v1.0 Published",
-      "description": "71 attack techniques across 11 tactics and 7 domains. Full threat registry with MITRE ATT&CK-style IDs.",
+      "description": "71 attack techniques across 11 tactics and 7 domains. Full threat registry with TARA technique IDs.",
       "category": "framework",
       "icon": "shield"
     },

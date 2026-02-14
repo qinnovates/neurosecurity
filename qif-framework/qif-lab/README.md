@@ -202,7 +202,7 @@ All effects respect `prefers-reduced-motion`. PDF output is unaffected.
   author = {Qi, Kevin and Claude (Anthropic)},
   title = {QIF: Quantum Indeterministic Framework for Neural Security},
   year = {2026},
-  url = {https://github.com/qinnovates/mindloft},
+  url = {https://github.com/qinnovates/qinnovate},
   note = {Working draft}
 }
 ```

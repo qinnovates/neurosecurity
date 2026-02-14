@@ -504,7 +504,7 @@ The CIV lifecycle is Qinnovate's answer to this governance vacuum — a process 
 
 **Qinnovate:** Partner with industry leaders (Apple, Neuralink, academic institutions) to pioneer standards before regulation lags behind technology.
 
-**Mindloft:** Build a research playground where talented individuals can innovate on open-source BCI frameworks while staying aligned with a north star of **creativity entangled with ethics and security**.
+Build a research playground where talented individuals can innovate on open-source BCI frameworks while staying aligned with a north star of **creativity entangled with ethics and security**.
 
 The goal: ensure that when consumer BCIs arrive, we have answers to "who governs your own brain data?" — answers built on rigorous research, multi-stakeholder collaboration, and proactive policy development.
 
@@ -559,5 +559,5 @@ The goal: ensure that when consumer BCIs arrive, we have answers to "who governs
 
 *Version: 1.0*
 *Created: 2026-02-02*
-*Location: qinnovates/mindloft/drafts/ai-working/QIF-NEUROETHICS.md*
+*Location: qinnovates/qinnovate/governance/QIF-NEUROETHICS.md*
 *Pipeline: STAGING (drafts) — will move to PROD when academic paper is complete*

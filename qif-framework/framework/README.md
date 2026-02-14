@@ -1,7 +1,7 @@
 # ONI Framework v2 — Architectural Redesign
 
 > **Status:** 🔧 Active Design Phase
-> **Tracking:** [GitHub Issue #30](https://github.com/qinnovates/mindloft/issues/30)
+> **Tracking:** [GitHub Issue #30](https://github.com/qinnovates/qinnovate/issues/30)
 > **Author:** Kevin Qi
 > **Started:** 2026-02-01
 

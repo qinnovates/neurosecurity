@@ -81,7 +81,7 @@ The VERA Engine is Qinnovate's core process for standards development — a perp
 
 ## Why Four Pillars?
 
-Qinnovate deliberately excludes product deployment and commercial implementation from its process. These functions are handled by separate entities (such as Mindloft) to prevent bias in the standards development process.
+Qinnovate deliberately excludes product deployment and commercial implementation from its process. These functions are handled by separate entities to prevent bias in the standards development process.
 
 **Separation of Concerns:**
 - **Qinnovate:** Standards body (validation, ethics, research, authority)
@@ -93,7 +93,7 @@ This mirrors how organizations like NIST and IEEE maintain independence from pro
 
 ## The Evolution: From CIV to VERA
 
-**Note:** The original Continuous Iteration & Validation (CIV) framework has been repurposed for Mindloft's future use and will be expanded for their research labs. CIV's emphasis on continuous deployment made it better suited for product development cycles rather than standards body governance.
+**Note:** The original Continuous Iteration & Validation (CIV) framework has been repurposed for product development use. CIV's emphasis on continuous deployment made it better suited for product development cycles rather than standards body governance.
 
 VERA represents Qinnovate's maturation from a development-focused lifecycle to a standards-focused authority cycle.
 

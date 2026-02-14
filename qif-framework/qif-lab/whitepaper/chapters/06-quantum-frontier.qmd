@@ -6,7 +6,7 @@ title: "The Quantum Frontier"
 #| label: setup
 #| include: false
 import sys, os
-sys.path.insert(0, '/Users/mac/Documents/PROJECTS/qinnovates/mindloft/drafts/ai-working/qif-lab')
+sys.path.insert(0, '/Users/mac/Documents/PROJECTS/qinnovates/qinnovate/qif-framework/qif-lab')
 import numpy as np
 import pandas as pd
 from src.config import DECOHERENCE_CAMPS, DEFAULT_C1_PARAMS

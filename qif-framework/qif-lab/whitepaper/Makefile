@@ -15,7 +15,7 @@ VOICE       ?= af_heart
 AUDIO_DIR   := audio
 OUTPUT_DIR  := _output
 OUTPUT_HTML := $(OUTPUT_DIR)/qif-whitepaper.html
-DEPLOY_DIR  := /Users/mac/Documents/PROJECTS/qinnovates/mindloft/main/docs/whitepaper
+DEPLOY_DIR  := /Users/mac/Documents/PROJECTS/qinnovates/qinnovate/docs/whitepaper
 
 .PHONY: whitepaper render audio mp3 deploy clean help
 

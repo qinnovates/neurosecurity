@@ -59,7 +59,6 @@ jobs:
           **Links**
           - [GitHub Repo](https://github.com/qinnovates/qinnovate)
           - [Website](https://qinnovate.com)
-          - [Mindloft (Products)](https://mindloft.org)
           EOF
 
       - name: Commit and push to wiki

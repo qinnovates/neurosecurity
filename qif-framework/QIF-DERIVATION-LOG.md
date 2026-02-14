@@ -23,6 +23,7 @@
 
 | Date | Event | Link |
 |------|-------|------|
+| 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping via Neural Impact Chain: First formal BCI threat-to-psychiatric-diagnosis taxonomy. NISS-DSM Bridge. 5 diagnostic clusters. Modality projection (merged Security+Engineering). | [Entry 53](#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain) |
 | 2026-02-13 | Three Floors + QIF Integration: Landauer, Margolus-Levitin, ΔEΔt applied to QI equation, whitepaper, and code | [Entry 52](#entry-52-three-floors--energy-time-security-bounds-applied-to-qif) |
 | 2026-02-13 | P=E/t → ΔEΔt → Computational Scaling: Classical-Quantum Transition Equation | [Entry 51](#entry-51-pet-to-deltaedelta-t-computational-scaling-the-classical-quantum-transition-equation) |
 | 2026-02-09 | TARA (Therapeutic Atlas of Risks and Applications): Registry reframed from threat catalog to dual-use mechanism atlas. Mechanism-first Rosetta Stone architecture. Therapeutics leads, risks replaces exploits. Buddhist/Sanskrit resonance (Tara = star, bodhisattva of compassion). Schema v4.0: mechanism + therapeutic + diagnostic + governance projections. Gemini 8/10. | [Entry 50](#entry-50-tara--therapeutic-atlas-of-risks-and-applications) |
@@ -879,7 +880,7 @@ Every band in v3.0 corresponds to a real functional stage in a BCI system. Every
 ## Entry 15: QIF v3.1 — 7-Band Symmetric Model (Validated by External Research)
 
 **Date:** 2026-02-02
-**Location:** `qinnovates/mindloft/drafts/ai-working/qif-lab/`
+**Location:** `qinnovates/qinnovate/qif-framework/qif-lab/`
 **Status:** IMPLEMENTED
 **Depends on:** Entry 14
 
@@ -5697,7 +5698,111 @@ The N_crossover being 10⁻¹⁴ means: at body temperature, the quantum floor i
 
 ---
 
+---
+
+## Entry 53: TARA-to-DSM-5-TR Diagnostic Mapping via Neural Impact Chain {#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain}
+
+**Date:** 2026-02-13
+**Context:** We have 99 BCI techniques, each mapped to hourglass bands, NISS scores, clinical analogs, governance tiers, and engineering parameters. Missing: formal mapping to psychiatric diagnoses. If a BCI attack disrupts your amygdala, what DSM-5-TR diagnosis does that correspond to? No one has answered this systematically.
+
+### The Insight: Neural Impact Chain (NIC)
+
+NISS and DSM-5-TR are **dual projections of the same neural impact**:
+- NISS gives you the *quantitative* measurement (how much damage, how reversible)
+- DSM gives you the *qualitative* diagnosis (what kind of psychiatric condition)
+- Both derive from the same thing: **which brain structures and functions are affected**
+
+The hourglass band is the Rosetta Stone:
+
+```
+Technique → Band → Brain Structure → Cognitive Function → NISS (quantitative) + DSM (qualitative)
+```
+
+This is the Neural Impact Chain (NIC).
+
+### The NISS-DSM Bridge
+
+Each NISS metric predicts a different diagnostic risk domain:
+
+| NISS Metric | What It Measures | Predicted DSM Cluster |
+|-------------|------------------|-----------------------|
+| BI (Biological Impact) | Tissue/structural damage | Motor/Neurocognitive |
+| CG (Cognitive Integrity) | Cognitive function disruption | Cognitive/Psychotic |
+| CV (Consent Violation) | Autonomy violation | Mood/Trauma |
+| RV (Reversibility) | Recovery potential | Chronicity modifier |
+| NP (Neuroplasticity) | Lasting neural change | Persistent/Personality |
+
+This bridge is what makes NISS scores **clinically interpretable**. A technique with CV:E (Elevated) and CG:H (High) maps to the mood/trauma and cognitive/psychotic clusters — meaning depression, PTSD, and psychotic features are the primary diagnostic risks.
+
+### The Band-to-DSM Lookup Table
+
+The mapping was validated against neuroscience literature and reviewed by Gemini 2.5 Pro (which called it "exceptionally well-structured"):
+
+| Band | Brain Structures | Primary DSM Chapters |
+|------|-----------------|---------------------|
+| N7 | PFC, M1, V1, Broca, Wernicke | Schizophrenia (F20), MDD (F32), ADHD (F90), OCD (F42) |
+| N6 | Hippocampus, amygdala, insula | MDD (F32), GAD (F41.1), PTSD (F43.10), Dissociative (F44) |
+| N5 | Striatum, STN, substantia nigra | ADHD (F90), Substance Use (F10), OCD (F42), Tic (F95) |
+| N4 | Thalamus, hypothalamus | Schizophrenia (F20), Sleep-Wake (G47), Dissociative (F44) |
+| N3 | Cerebellar cortex, deep nuclei | Motor Coordination (F82), ASD (F84) |
+| N2 | Medulla, pons, midbrain | Sleep-Wake (G47), Panic (F41.0) |
+| N1 | Spinal cord | Somatic Symptom/Pain (F45), Conversion (F44.4) |
+| I0 | Electrode-tissue boundary | Adjustment Disorder (F43.2) |
+| S1-S3 | Silicon layers | No diagnostic mapping (risk_class: "none") |
+
+### Five Diagnostic Clusters
+
+Rather than color-coding by 16 DSM chapters (violating Miller's Law: 7±2), we group into 5 neurobiologically-driven clusters:
+
+1. **Cognitive/Psychotic** (amber) — perception, cognition, psychosis. CG-driven.
+2. **Mood/Trauma** (gold) — emotion, consent, autonomy. CV-driven.
+3. **Motor/Neurocognitive** (red) — movement, tissue, structural. BI-driven.
+4. **Persistent/Personality** (purple) — lasting change, personality. NP/RV-driven.
+5. **Non-Diagnostic** (gray) — silicon-only, no neural pathway.
+
+Distribution across 99 techniques: cognitive_psychotic: 16, mood_trauma: 21, motor_neurocognitive: 16, persistent_personality: 7, non_diagnostic: 39.
+
+### Architecture Decision: Modality Projection
+
+This mapping prompted a projection restructure. The original 4 tabs (Security, Clinical, Governance, Engineering) became:
+
+- **Modality** = merged Security + Engineering, with a "Color by: [Impact] | [Mechanism]" sub-view toggle
+- **Clinical** = unchanged (therapeutic analogs, dual-use, FDA status)
+- **Diagnostic** = new (DSM-5-TR clusters, ICD-10-CM codes, NIC pathways)
+- **Governance** = unchanged (consent tiers, regulations)
+
+Rationale: Security (impact) and Engineering (mechanism) describe the same technical dimension from different angles. Merging them frees a tab for the genuinely new diagnostic dimension. Four tabs aligns with Miller's Law and encourages tab-switching.
+
+### RDoC Positioning
+
+This framework is aligned with NIMH's Research Domain Criteria (RDoC) approach — a bottom-up neurobiological taxonomy rather than top-down symptom clustering. We start from neural mechanisms (bands, structures, functions) and derive diagnostic categories, rather than starting from DSM categories and looking for neural correlates. The difference: traditional psychiatry asks "which brain regions are involved in depression?"; we ask "if you disrupt the amygdala, which diagnoses emerge?"
+
+### Why This Matters
+
+1. **First known formal BCI threat-to-psychiatric-diagnosis taxonomy.** No prior work systematically maps BCI attack techniques to DSM-5-TR diagnoses via neural mechanism chains.
+2. **NISS becomes clinically interpretable.** The NISS-DSM Bridge gives clinicians a way to translate security scores into diagnostic risk profiles.
+3. **Regulators get ICD-10-CM codes.** Every mapped technique now carries standard diagnostic codes, making it directly useful for regulatory submissions, insurance, and clinical documentation.
+4. **The hourglass model proves its value again.** The 11-band architecture predicted this mapping — each band naturally corresponds to specific brain structures, which naturally correspond to specific diagnoses. The model works as a genuine Rosetta Stone.
+
+### Status
+- **Implemented:** All 99 techniques populated with `tara.dsm5` field. Python population script with band-to-DSM lookup table, NISS-DSM cluster scoring, and statistics.
+- **TypeScript types:** `Dsm5Diagnosis`, `Dsm5DiagProfile`, `DiagnosticCluster` added to `threat-data.ts`.
+- **UI:** New Diagnostic projection tab with cluster-colored cells, ICD-10-CM codes in drawer, primary/secondary diagnoses with confidence badges.
+- **Glossary:** 5 new terms: Neural Impact Chain, DSM-5-TR Diagnostic Mapping, NISS-DSM Bridge, Diagnostic Cluster, Risk Class.
+
+### Dependencies
+- Entry 50 (TARA) — the registry architecture this builds on
+- Entry 46 (Baseline-Free Security) — the mechanism-first approach
+- NISS v1.0 — the scoring system this bridges to clinical diagnosis
+
+### Open Questions
+1. Should the cluster assignment algorithm weight recent literature more heavily? (Currently uses static band weights + NISS bonuses.)
+2. Can the NIC model be extended to predict treatment response? (If NISS → DSM, can DSM → treatment → expected NISS improvement?)
+3. How does this interact with HiTOP (Hierarchical Taxonomy of Psychopathology)? RDoC alignment is clear; HiTOP alignment needs investigation.
+
+---
+
 *Created: 2026-02-02*
-*Last entry: #52 (2026-02-13)*
+*Last entry: #53 (2026-02-13)*
 *Maintainer: Kevin Qi*
-*Location: qinnovates/mindloft/drafts/ai-working/QIF-DERIVATION-LOG.md*
+*Location: qinnovates/qinnovate/qif-framework/QIF-DERIVATION-LOG.md*

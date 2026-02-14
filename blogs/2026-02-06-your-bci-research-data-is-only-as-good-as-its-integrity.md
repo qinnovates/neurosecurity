@@ -203,7 +203,7 @@ This post is part of Qinnovate's ongoing series on BCI security best practices, 
 
 The QIF framework, the NSP protocol, and everything we publish here exists for one reason: to make sure that when BCI technology is ready to help people, the security is already there waiting for it.
 
-More from this series coming soon. If you're doing BCI research and want to talk security, [find us on GitHub](https://github.com/qinnovates/mindloft/).
+More from this series coming soon. If you're doing BCI research and want to talk security, [find us on GitHub](https://github.com/qinnovates/qinnovate).
 
 · · ·
 
@@ -211,4 +211,4 @@ More from this series coming soon. If you're doing BCI research and want to talk
 
 ---
 
-*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/mindloft/).*
+*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*

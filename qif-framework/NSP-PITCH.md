@@ -386,7 +386,7 @@ Every brain-computer interface shipping today transmits the most intimate data a
 ---
 
 *Document: NSP-PITCH.md v2.1*
-*Location: qinnovates/mindloft/drafts/ai-working/*
+*Location: qinnovates/qinnovate/qif-framework/*
 *Status: Working draft — not for external distribution yet*
 *Peer reviewed: Gemini (independent AI review, 2026-02-06) — all critical feedback incorporated*
 *Related: QIF-DERIVATION-LOG.md (Entries 26-35), NSP-USE-CASE.md, NSP-VISUAL-PROTOCOL-RESEARCH.md*

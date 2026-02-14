@@ -129,7 +129,7 @@ The two-sphere visualization makes this obvious in a way that words didn't.
 
 ### 003 — 2026-02-05
 
-**State:** Deep in development mode — building Qinnovate and Mindloft simultaneously. Wiki automation, CIV lifecycle design, archive notices, documentation everywhere. Then in the middle of all the technical work, the question hit: *Who are the governing and policy makers if it's our own brain data?*
+**State:** Deep in development mode — building Qinnovate. Wiki automation, CIV lifecycle design, archive notices, documentation everywhere. Then in the middle of all the technical work, the question hit: *Who are the governing and policy makers if it's our own brain data?*
 
 **Observation:** All this infrastructure we're building — the standards body, the product company, the continuous validation framework — it's sophisticated. But the foundational question remains unanswered. If the data comes from *your* brain, do *you* get final authority? Or does society need oversight even when you consent?
 
@@ -146,8 +146,8 @@ The lifecycle is my answer to the governance vacuum. Not a complete answer — I
 **Connected to:**
 - Question 12 added to QIF-NEUROETHICS.md — the formal write-up of this governance question
 - Entry 001 — "the pieces stopped being separate tasks and became one thing." This is another unification moment. The technical (CIV lifecycle) and the philosophical (who governs?) aren't separate problems. The lifecycle is the philosophical question made operational.
-- Entry 002 — Classical-Quantum convergence. The same pattern: two perspectives that need each other. Here: innovation (Mindloft) and standards (Qinnovate). Neither complete without the other. CIV is the bridge.
-- Building at scale — Qinnovate (partner with Apple, Neuralink, NIST, IEEE to pioneer standards). Mindloft (hire passionate people, build the research playground). Vision crystallizing: creativity entangled with ethics and security.
+- Entry 002 — Classical-Quantum convergence. The same pattern: two perspectives that need each other. Innovation and standards. Neither complete without the other. CIV is the bridge.
+- Building at scale — Qinnovate (partner with Apple, Neuralink, NIST, IEEE to pioneer standards; hire passionate people, build the research playground). Vision crystallizing: creativity entangled with ethics and security.
 - Unsolved equations from last night — still need formalization. Can't tell if they help yet. Need more time.
 
 **Mood:** Urgency. Clarity. The future is arriving faster than the answers.

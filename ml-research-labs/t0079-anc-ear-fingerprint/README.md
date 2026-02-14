@@ -190,12 +190,12 @@ An attacker could embed an inaudible probe in any audio content (music, podcast,
 
 ## Reproduction
 
-The PoC code is in the [Mindloft tools repo](https://github.com/qinnovates/mindloft/tree/main/tools/ml-research-labs/t0079-anc-fingerprint).
+The PoC code is available in the research tools repository.
 
 ```bash
 # Clone and install
-git clone https://github.com/qinnovates/mindloft.git
-cd mindloft/tools/ml-research-labs/t0079-anc-fingerprint
+git clone https://github.com/qinnovates/qinnovate.git
+cd qinnovate/ml-research-labs/t0079-anc-fingerprint
 pip install -r requirements.txt
 
 # Run demo with synthetic data (no hardware needed)

@@ -36,7 +36,7 @@ The right to maintain one's personal identity — memory, personality, sense of 
 
 The right to know which thoughts are genuinely one's own. Our coherence metrics exist to protect this right. In community, it means proper attribution, honest disclosure of AI assistance, and never claiming another's work or ideas as your own.
 
-These five principles are recognized in international neuroethics scholarship (Ienca & Andorno, 2017; Yuste et al., 2017) and codified in the [UNESCO Recommendation on the Ethics of Neurotechnology (2025)](https://github.com/qinnovates/mindloft/blob/main/MAIN/governance/UNESCO_ALIGNMENT.md). They are not aspirational for this project. They are operational.
+These five principles are recognized in international neuroethics scholarship (Ienca & Andorno, 2017; Yuste et al., 2017) and codified in the [UNESCO Recommendation on the Ethics of Neurotechnology (2025)](governance/UNESCO_ALIGNMENT.md). They are not aspirational for this project. They are operational.
 
 ## Conduct
 
@@ -75,14 +75,14 @@ This project uses artificial intelligence in research and development. The same 
 
 - Disclose AI involvement using `Co-Authored-By` tags in commits
 - Never present AI-generated content as independently verified without human validation
-- Document the human-AI decision boundary in significant contributions via the project's [Transparency](https://github.com/qinnovates/mindloft/blob/main/MAIN/governance/TRANSPARENCY.md) audit trail
+- Document the human-AI decision boundary in significant contributions via the project's [Transparency](governance/TRANSPARENCY.md) audit trail
 - Apply the same verification rigor to AI-generated claims as to any other source
 
 ## Enforcement
 
 Report violations to the maintainer via [GitHub Security Advisories](https://github.com/qinnovates/qinnovate/security/advisories/new) or the contact methods in [ABOUT.md](ABOUT.md). All reports will be investigated promptly, fairly, and confidentially.
 
-Maintainers may remove, edit, or reject contributions that violate this Code, and may temporarily or permanently restrict participation by individuals who engage in harmful conduct. For contributions touching neuroethics-sensitive areas, maintainers will consult the project's [governance documents](https://github.com/qinnovates/mindloft/tree/main/MAIN/governance) before making decisions.
+Maintainers may remove, edit, or reject contributions that violate this Code, and may temporarily or permanently restrict participation by individuals who engage in harmful conduct. For contributions touching neuroethics-sensitive areas, maintainers will consult the project's [governance documents](governance/) before making decisions.
 
 ## Scope
 
