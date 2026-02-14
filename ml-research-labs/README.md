@@ -1,6 +1,6 @@
 # ML Research Labs
 
-Reproducible ML and security research from the TARA threat registry. Each lab is a self-contained proof-of-concept demonstrating a real vulnerability in neural interface or consumer sensor technology.
+Reproducible ML and security research from the TARA atlas. Each lab is a self-contained proof-of-concept demonstrating a real vulnerability in neural interface or consumer sensor technology.
 
 These labs exist to:
 1. Prove that theoretical TARA threats are exploitable in practice
@@ -13,7 +13,6 @@ These labs exist to:
 | ID | Name | Target | Status | Key Result |
 |----|------|--------|--------|------------|
 | [T0079](t0079-anc-ear-fingerprint/) | ANC Ear Canal Fingerprinting | Consumer ANC earbuds (any Bluetooth) | Hardware Validated | >99% intra-subject, covert masking at -47 dB PMR |
-| [LSL-CVE](../poc/lsl-cve/) | Lab Streaming Layer Exfiltration | liblsl (all versions) | CVE Filed | Zero-auth neural data access |
 
 ## How to Use
 
