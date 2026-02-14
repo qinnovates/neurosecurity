@@ -1,6 +1,6 @@
 # Quantum Model for Neurosecurity
 
-> **QIF** — Quantum Indeterministic Framework for Neural Security (pronounced **"CHIEF"**)
+> **QIF** — Quantified Interconnection Framework for Neural Security (pronounced **"CHIEF"**)
 
 ### Securing Tomorrow's Neural Frontier
 

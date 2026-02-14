@@ -47,7 +47,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 | **BCI** | Brain-Computer Interface. A device that records or stimulates neural activity. |
 | **NSP** | Neural Sensory Protocol. The protocol defined by this specification. |
 | **QI** | Quantum Indeterminacy score. A composite signal integrity metric ranging from 0 (maximally anomalous) to 1 (perfectly normal). |
-| **QIF** | Quantum Indeterministic Framework for Neural Security. The security framework from which NSP derives its signal integrity model. |
+| **QIF** | Quantified Interconnection Framework for Neural Security. The security framework from which NSP derives its signal integrity model. |
 | **Band** | One of eleven QIF v4.0 Hourglass bands: N7, N6, N5, N4, N3, N2, N1, I0, S1, S2, S3. |
 | **Frame** | The fundamental unit of NSP-protected data transmission. |
 | **Frame group** | A sequence of frames sharing a single Merkle root signature. Group size is negotiated during handshake (range: 1 to 256, default: 100). |

@@ -10,7 +10,7 @@ is defined HERE. Nothing is hardcoded in documents.
 # ──────────────────────────────────────────────
 
 FRAMEWORK = {
-    "name": "QIF — Quantum Indeterministic Framework for Neural Security",
+    "name": "QIF — Quantified Interconnection Framework for Neural Security",
     "pronunciation": "CHIEF",
     "predecessor": "ONI (Organic Neural Interface)",
     "layer_model_version": "v3.1 (Hourglass, 7-band)",
