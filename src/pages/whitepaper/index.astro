@@ -70,11 +70,13 @@ const latestChange = getLatestChangelog();
       <!-- ═══ Header ═══ -->
       <section class="mb-16">
         <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
-          An Open Security Standard for Brain-Computer Interfaces
+          Every technique that can harm a brain can also heal one.
         </h1>
-        <p class="text-lg text-[var(--color-text-muted)] mb-6">
-          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics.<br />
-          One framework to map, measure, and mitigate threats to the human brain.
+        <p class="text-lg text-[var(--color-text-muted)] mb-3">
+          QIF is the first open standard that maps BCI techniques to their security risks, clinical applications, and psychiatric outcomes in a single framework.
+        </p>
+        <p class="text-base text-[var(--color-text-muted)] mb-6">
+          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors.
         </p>
         <div class="flex flex-wrap items-center gap-3 mb-4">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
@@ -91,7 +93,7 @@ const latestChange = getLatestChangelog();
       </section>
 
       <!-- ═══ Stats Callout ═══ -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-20">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-20">
         <div class="glass rounded-xl p-4 text-center">
           <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]">{stats.totalTechniques}</p>
           <p class="text-xs text-[var(--color-text-faint)]">techniques catalogued</p>
@@ -103,6 +105,14 @@ const latestChange = getLatestChangelog();
         <div class="glass rounded-xl p-4 text-center">
           <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]">{stats.irreversibleCount}</p>
           <p class="text-xs text-[var(--color-text-faint)]">irreversible</p>
+        </div>
+        <div class="glass rounded-xl p-4 text-center">
+          <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[#10b981]">{stats.tara.dualUse.confirmed}</p>
+          <p class="text-xs text-[var(--color-text-faint)]">with therapeutic use</p>
+        </div>
+        <div class="glass rounded-xl p-4 text-center">
+          <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{stats.dsm5.withDsm5}</p>
+          <p class="text-xs text-[var(--color-text-faint)]">DSM-5-TR mapped</p>
         </div>
         <div class="glass rounded-xl p-4 text-center">
           <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">11</p>
@@ -118,7 +128,10 @@ const latestChange = getLatestChangelog();
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">1. The Problem</h2>
         <div class="prose">
           <p>
-            Brain-computer interfaces are no longer theoretical. Neuralink has implanted its N1 chip in human patients. Synchron's Stentrode is in FDA-approved clinical trials. Blackrock Neurotech has shipped Utah arrays for over a decade. Commercial EEG headsets from Emotiv, Muse, and OpenBCI sit on consumer shelves. As the neural device industry transitions from laboratory to market, a critical gap in security standardization has emerged.
+            There are chips in human brains right now with no security standard protecting them.
+          </p>
+          <p>
+            Neuralink has implanted its N1 chip in human patients. Synchron's Stentrode is in FDA-approved clinical trials. Blackrock Neurotech has shipped Utah arrays for over a decade. Commercial EEG headsets from Emotiv, Muse, and OpenBCI sit on consumer shelves. These devices are tested for safety and efficacy. They are not tested against adversarial threats. No standardized framework exists to classify, score, or mitigate attacks on the human brain.
           </p>
           <p>
             Existing vulnerability scoring systems were designed for software. CVSS v4.0 measures three properties: confidentiality, integrity, and availability. These are sufficient for databases and web servers. These metrics are insufficient for devices that directly interface with the human brain. CVSS cannot express biological tissue damage. It cannot quantify the loss of cognitive integrity. It lacks metrics for consent violation, irreversibility, and neuroplastic change.
@@ -148,10 +161,16 @@ const latestChange = getLatestChangelog();
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">2. Our Approach</h2>
         <div class="prose mb-8">
           <p>
-            Qinnovate is an open standards body. All publications &mdash; the framework, the protocol, the taxonomy &mdash; are released under the Apache 2.0 license. Our commitment to open development stems from the conviction that neural security is too critical to be constrained by proprietary control. Centralized control over security standards for devices interfacing with human cognition risks concentrating the definition of harm within a single entity.
+            The same physics that makes a BCI technique dangerous also makes it therapeutic. Transcranial magnetic stimulation treats depression and induces seizures. Deep brain stimulation manages Parkinson's and causes involuntary movement. The mechanism is identical. The difference is intent, dosage, and governance.
           </p>
           <p>
-            The problem has three layers, and we address each with a dedicated pillar. These pillars form an integrated stack: the threat model informs the protocol's protective scope, and the compiler enables practical implementation on constrained hardware.
+            This is the central insight behind QIF: security and clinical safety are not separate problems. They are two views of the same system. A framework that only catalogs threats misses half the picture. A framework that only tracks therapies misses the risks. QIF maps both, for every technique, in a single standard.
+          </p>
+          <p>
+            All publications are released under the Apache 2.0 license. Neural security standards are too critical to be proprietary. The people whose brains will be connected deserve to understand exactly how they are protected.
+          </p>
+          <p>
+            We address this with three interlocking pillars:
           </p>
         </div>
 
@@ -241,6 +260,21 @@ const latestChange = getLatestChangelog();
 
         <HourglassChart />
 
+        <div class="glass rounded-xl p-5 mt-6 mb-8" style="border-left: 3px solid var(--color-accent-tertiary);">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-3 text-sm">How to read the hourglass</h4>
+          <div class="space-y-2 text-sm text-[var(--color-text-muted)]">
+            <p>
+              <strong class="text-[var(--color-text-primary)]">Y-axis (vertical):</strong> Bands ordered by anatomical hierarchy, from neocortex (N7) at the top through the electrode-tissue interface (I0) at the waist to radio/wireless (S3) at the bottom.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">X-axis (bar width):</strong> Number of catalogued techniques targeting that band. Wider bars mean a larger attack surface. I0 is the widest because every technique that crosses the bio-digital boundary converges at this single point.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">The shape:</strong> The hourglass narrows at I0 not because it has fewer threats, but because it is a physical bottleneck. All neural data must pass through this point. The concentration of techniques at the waist is what makes it the highest-leverage target for both attack and defense.
+            </p>
+          </div>
+        </div>
+
         <div class="prose mt-8">
           <p>
             Each band has a distinct threat profile. Neural bands (N7&ndash;N1) are susceptible to attacks that induce biological damage, cognitive disruption, and potentially irreversible neuroplastic change. Synthetic bands (S1&ndash;S3) confront classical cybersecurity threats such as eavesdropping, data manipulation, and denial of service. The interface band (I0) is uniquely vulnerable to both, serving as the nexus where synthetic attacks can translate into neural damage.
@@ -285,12 +319,15 @@ const latestChange = getLatestChangelog();
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="tara" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">4. TARA Atlas</h2>
+        <p class="text-lg font-medium text-[var(--color-text-muted)] mb-6 italic">
+          One standard for both sides of the brain.
+        </p>
         <div class="prose mb-8">
           <p>
-            TARA, the Therapeutic Applications &amp; Risk Assessment, is a dual-use atlas of {stats.totalTechniques} BCI techniques. Each entry functions simultaneously as a risk vector, an ethical concern, and a potential therapeutic application. Transcranial magnetic stimulation can treat depression but also induce seizures; deep brain stimulation can manage Parkinson's yet cause involuntary movement. The same mechanisms capable of healing can also inflict harm.
+            TARA (Therapeutic Applications &amp; Risk Assessment) is a dual-use atlas of {stats.totalTechniques} BCI techniques. Every entry is three things at once: a security threat, an ethical concern, and a potential therapy. Of these, {stats.tara.dualUse.confirmed} have confirmed therapeutic applications with published clinical evidence. {stats.dsm5.withDsm5} are mapped to DSM-5-TR psychiatric diagnoses. This is not a threat registry with clinical notes appended. It is a single atlas built from the ground up to serve security engineers, clinicians, researchers, and regulators from the same source of truth.
           </p>
           <p>
-            This inherent duality is the central insight of TARA. Security and clinical safety are not distinct challenges but rather two perspectives on the same fundamental problem. TARA elucidates this through four explicit projections:
+            TARA exposes each technique through four explicit projections:
           </p>
           <ul>
             <li><strong>Modality</strong> &mdash; Attack severity, status, and physical coupling mechanism</li>
@@ -474,12 +511,23 @@ const latestChange = getLatestChangelog();
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="neural-impact" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6. The Neural Impact Chain</h2>
+
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-secondary);">
+          <p class="text-sm font-semibold text-[var(--color-accent-secondary)] mb-2">Why this matters</p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            When a BCI attack disrupts your amygdala, what happens to your mental health? Not in the abstract. In DSM-5-TR diagnostic terms. The Neural Impact Chain answers this question for every technique in the atlas.
+          </p>
+        </div>
+
         <div class="prose mb-8">
           <p>
-            The Neural Impact Chain (NIC) outlines a six-stage mapping that links techniques to potential psychiatric diagnoses. For each technique within the TARA atlas, the chain traces the targeted hourglass band, the affected neural structure, the disrupted cognitive or motor function, the resulting NISS score, and the corresponding DSM-5-TR diagnostic category.
+            The Neural Impact Chain (NIC) is a six-stage mapping that traces every technique from its physical mechanism to its psychiatric outcome. For each entry in TARA, the chain identifies the targeted hourglass band, the affected neural structure, the disrupted cognitive or motor function, the resulting NISS severity score, and the corresponding DSM-5-TR diagnostic category.
           </p>
           <p>
-            To our knowledge, this represents the <strong>first systematic mapping from cybersecurity severity to psychiatric diagnosis</strong>. It establishes a verifiable claim: specific techniques, applied to specific neural bands, produce predictable functional impacts that correspond to recognized diagnostic categories.
+            To our knowledge, this represents the <strong>first systematic mapping from cybersecurity severity to psychiatric diagnosis</strong>. It makes a verifiable claim: specific techniques, applied to specific neural bands, produce predictable functional impacts that correspond to recognized clinical conditions. A security engineer can now see that a technique targeting the limbic system (N6) with high cognitive integrity impact maps to mood and trauma-related disorders. A clinician can see that the same attack vector shares its mechanism with an FDA-approved therapy.
+          </p>
+          <p>
+            This is the bridge between cybersecurity and clinical neuroscience that did not previously exist.
           </p>
         </div>
 

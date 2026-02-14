@@ -61,8 +61,13 @@ const tacticColors: Record<string, string> = {
             The Quantum Indeterministic Framework (QIF) is an open security standard for brain-computer interfaces. It defines the threat model, security architecture, and coherence metrics for protecting neural data at every layer — from hardware to human identity.
           </p>
           <p>
-            QIF answers a question no existing framework addresses: <em>how do you secure a system where one endpoint is a brain?</em> Existing cybersecurity models (OSI, Zero Trust) handle synthetic systems. Existing neuroethics frameworks handle consent and privacy. QIF bridges both with an engineering specification for the interface between them, including two original systems developed by Qinnovate: the <strong>QIF TARA Taxonomy</strong> for threat classification and <strong>NISS</strong> (Neural Impact Scoring System) for vulnerability scoring.
+            QIF answers a question no existing framework addresses: <em>how do you secure a system where one endpoint is a brain?</em> Existing cybersecurity models (OSI, Zero Trust) handle synthetic systems. Existing neuroethics frameworks handle consent and privacy. QIF bridges both with an engineering specification for the interface between them, including three original systems developed by Qinnovate:
           </p>
+          <ul>
+            <li><strong>TARA Atlas</strong> (Therapeutic Applications &amp; Risk Assessment) &mdash; a dual-use atlas that classifies each BCI technique as both a security threat and a potential therapeutic application, maps techniques to DSM-5-TR psychiatric diagnoses through the Neural Impact Chain, and traces clinical outcomes from physical mechanism to cognitive function</li>
+            <li><strong>NISS</strong> (Neural Impact Scoring System) &mdash; a purpose-built vulnerability scoring system that extends CVSS with five neural-specific metrics: biological impact, cognitive integrity, consent violation, reversibility, and neuroplasticity</li>
+            <li><strong>NSP</strong> (Neural Sensory Protocol) &mdash; a five-layer, post-quantum wire protocol for securing BCI data links at 3.25% power overhead on implanted devices</li>
+          </ul>
         </div>
       </section>
 
@@ -265,11 +270,14 @@ const tacticColors: Record<string, string> = {
           </p>
         </div>
 
-        <h3 id="taxonomy" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">QIF TARA Taxonomy</h3>
-        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">Original classification by Qinnovate</p>
+        <h3 id="taxonomy" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">TARA Atlas</h3>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">Therapeutic Applications &amp; Risk Assessment &ensp;|&ensp; by Qinnovate</p>
         <div class="prose mb-6">
           <p>
-            QIF classifies attacks using the <strong>TARA Taxonomy</strong>, developed by Qinnovate as the first threat classification system purpose-built for neural interfaces. Organized by the anatomical or functional <em>locus</em> where the attack operates, {totalDomains} domains map to {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
+            TARA is a dual-use atlas where every entry is simultaneously a security threat, a clinical risk, and a potential therapeutic application. Developed by Qinnovate as the first classification system purpose-built for neural interfaces, TARA organizes {totalTechniques} techniques by the anatomical or functional <em>locus</em> where they operate, across {totalDomains} domains and {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
+          </p>
+          <p>
+            Beyond threat classification, TARA maps each technique through four projections: modality (attack severity and coupling mechanism), clinical (therapeutic analog, FDA status, treated conditions), diagnostic (DSM-5-TR psychiatric mapping via the <a href="/whitepaper/#neural-impact">Neural Impact Chain</a>), and governance (consent tier and regulatory requirements). The result is a single atlas that security engineers, clinicians, and regulators can each read from their own perspective.
           </p>
         </div>
 
