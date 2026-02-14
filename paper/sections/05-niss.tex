@@ -5,8 +5,8 @@
 \section{NISS: Neural Impact Scoring System}
 \label{sec:niss}
 
-The Neural Impact Scoring System (NISS) is a CVSS v4.0 extension following
-FIRST.org's official extension mechanism (User Guide
+The Neural Impact Scoring System (NISS) is a proposed CVSS v4.0 extension
+designed to conform with FIRST.org's official extension mechanism (User Guide
 \S3.11)~\cite{first2023cvss4userguide}. NISS adds five metrics that capture
 dimensions CVSS was never designed to express: biological tissue damage, cognitive
 integrity violations, consent boundary violations, damage reversibility, and
@@ -144,7 +144,7 @@ to rewire itself. This has no digital equivalent.
 \textbf{Value} & \textbf{Label} & \textbf{Score} & \textbf{Description} \\
 \midrule
 N & None       & 0.0  & No neuroplastic effect \\
-T & Temporary  & 5.0  & Short-term synaptic changes that decay within hours to days \\
+T & Temporary  & 5.0  & Short-term synaptic changes that decay within hours--days \\
 S & Structural & 10.0 & Long-term or permanent neural pathway changes \\
 \bottomrule
 \end{tabular}
@@ -152,7 +152,7 @@ S & Structural & 10.0 & Long-term or permanent neural pathway changes \\
 
 \subsection{PINS Flag}
 
-NISS introduces the Persistent Involuntary Neural Stimulation (PINS) flag---a
+NISS introduces the Potential Impact to Neural Safety (PINS) flag---a
 binary indicator triggered when:
 
 \begin{equation}

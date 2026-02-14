@@ -17,8 +17,11 @@
   --color-status-safe: #10b981;
   --color-status-warn: #f59e0b;
   --color-status-danger: #ef4444;
-  --color-glass-bg: rgba(255, 255, 255, 0.8);
-  --color-glass-border: rgba(0, 0, 0, 0.06);
+  --color-glass-bg: rgba(255, 255, 255, 0.7);
+  --color-glass-border: rgba(0, 0, 0, 0.08);
+  --color-glow-primary: rgba(37, 99, 235, 0.4);
+  --color-glow-secondary: rgba(8, 145, 178, 0.3);
+  --color-glow-tertiary: rgba(124, 58, 237, 0.3);
 
   /* Typography */
   --font-heading: "Inter", system-ui, sans-serif;
@@ -118,9 +121,9 @@ code, pre {
 }
 
 .card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  border-color: var(--color-border-hover);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 20px var(--color-glow-primary);
+  border-color: var(--color-accent-primary);
 }
 
 /* ═══ Scrollbar ═══ */

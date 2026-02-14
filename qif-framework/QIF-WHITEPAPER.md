@@ -537,7 +537,7 @@ The five core dimensions constitute the NISS score. Each is scored on a 0.0--10.
 
 Note: "Therapeutic" is a *use case*, not a severity level. A therapeutic intervention that causes structural neuroplasticity scores NP=S regardless of clinical intent --- the NISS score measures impact magnitude, not purpose.
 
-#### PINS Trigger (Priority Incident Notification)
+#### PINS Trigger (Potential Impact to Neural Safety)
 
 An attack triggers PINS --- immediate escalation to clinical and security teams --- when:
 

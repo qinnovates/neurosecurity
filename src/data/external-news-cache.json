@@ -28,15 +28,6 @@
   },
   {
     "type": "external",
-    "title": "Elon Musk has already tapped into the brains of 21 people, thousands more to follow in 2026 with mass production of Neuralink chip - 3DVF",
-    "date": "2026-02-07",
-    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNMW9tbVlIMktqZTJLaWJtbFRERXRUc3VCYlVRUjVkYXB0NVZERlRuSFVKcWhoejlTYzdxUkI3QVdYSkZkeTZrVVNuX2hieWRhMUotdGZfd1pFVHgtV0ZFNjIyb1h0Q2ROLXBtQjhPRm5TYWNNbUJWaHF3d3dHX2xoRGZmdllFbGNJU292WnhoaEdVRHBvbHpkNGhQcXRJbXVEcy1PLWVTMy1JeUxHVWdwUVZUUE1uZjFDQlFnUmlB?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk has already tapped into the brains of 21 people, thousands more to follow in 2026 with mass production of Neuralink chip&nbsp;&nbsp;3DVF",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "At-Home Brain Stimulation for Depression Is Just the Start",
     "date": "2026-02-05",
     "url": "https://spectrum.ieee.org/flow-neuroscience-tdcs-depression-fda",
@@ -67,7 +58,7 @@
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
-    "source": "Google News — Neuralink",
+    "source": "Google News — BCI",
     "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
     "category": "neurotechnology"
   },
@@ -91,20 +82,29 @@
   },
   {
     "type": "external",
-    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
-    "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
-    "source": "Google News — BCI",
-    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Investing in Merge Labs - OpenAI",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
     "source": "Google News — BCI",
     "summary": "Investing in Merge Labs&nbsp;&nbsp;OpenAI",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
   },
   {

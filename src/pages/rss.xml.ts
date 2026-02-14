@@ -39,7 +39,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: 'Qinnovate Intel',
-    description: 'BCI security intelligence — neurotechnology, quantum computing, neuroethics, and adversarial research from the Quantum Indeterministic Framework.',
+    description: 'BCI security intelligence — neurotechnology, quantum computing, neuroethics, and adversarial research from the Quantified Interconnection Framework.',
     site: context.site!,
     items,
     customData: '<language>en-us</language>',

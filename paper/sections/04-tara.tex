@@ -6,10 +6,27 @@
 \label{sec:tara}
 
 The Therapeutic Applications \& Risk Assessment (TARA) registry catalogs BCI
-attack techniques with the granularity of MITRE ATT\&CK~\cite{mitre2024attack}
-but extended to cover neural, cognitive, and physical safety domains. Each
+attack techniques with a structure inspired by MITRE
+ATT\&CK~\cite{mitre2024attack}, independently developed to cover neural,
+cognitive, and physical safety domains. Each
 technique is simultaneously an attack vector, an ethical risk, and---where
 applicable---a therapeutic application.
+
+\paragraph{Why not ATT\&CK directly?}
+MITRE ATT\&CK is designed for enterprise IT and mobile environments where
+adversary objectives center on data exfiltration, lateral movement, and
+persistence. BCI threats differ in three fundamental ways that make direct
+adoption inadequate: (1)~the target is biological tissue, not an information
+system---attacks can cause seizures, tissue necrosis, or cognitive coercion,
+none of which map to ATT\&CK's impact categories; (2)~the same technique is
+often simultaneously an attack and a therapy (e.g., deep brain stimulation is
+both a Parkinson's treatment and a neural injection vector), requiring a
+dual-use classification that ATT\&CK has no mechanism to express; and (3)~the
+attack lifecycle must span from radio-frequency transmission through silicon
+processing to neural tissue, crossing the bio-digital boundary that ATT\&CK's
+purely digital model does not address. TARA adopts ATT\&CK's proven structural
+methodology---techniques organized into tactics and domains---while building an
+independent taxonomy purpose-built for the BCI threat landscape.
 
 \subsection{Taxonomy Structure}
 
@@ -33,7 +50,7 @@ The eight domains span the full attack lifecycle:
 \end{enumerate}
 
 \paragraph{Tactics.}
-The 15 tactics map to ATT\&CK lifecycle stages adapted for BCI operations:
+The 15 tactics follow a lifecycle structure analogous to ATT\&CK, adapted for BCI operations:
 Neural Scan, BCI Intrusion, Neural Injection, Cognitive Imprinting, BCI Evasion,
 Data Harvesting, Neural Manipulation, Evasion/Rootkit Deployment, Monitoring/Surveillance,
 Protocol Disruption, Cognitive Exploitation, Signal Replay, Signal Harvesting,

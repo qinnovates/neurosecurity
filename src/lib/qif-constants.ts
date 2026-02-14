@@ -75,7 +75,7 @@ export const PILLARS = [
     fullName: 'Quantified Interconnection Framework',
     tagline: 'The governance architecture',
     description: 'The OSI of Mind. An 11-band hourglass model mapping every surface — from neural tissue to synthetic systems — where security threats and ethical risks converge. One auditable framework for both.',
-    href: '/framework/',
+    href: '/whitepaper/',
     icon: '&#9670;',
     color: 'var(--color-accent-primary)',
     version: QIF_VERSION,

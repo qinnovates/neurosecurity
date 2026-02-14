@@ -122,7 +122,7 @@ const tacticColors: Record<string, string> = {
 
         <!-- Interactive 3D hourglass (React island) -->
         <div class="my-12" id="hourglass-interactive">
-          <Hourglass3D client:visible />
+          <Hourglass3D client:only="react" />
           <noscript>
             <div class="max-w-lg mx-auto space-y-3">
               {HOURGLASS_BANDS.map((band, i) => {

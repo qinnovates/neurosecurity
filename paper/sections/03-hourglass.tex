@@ -25,6 +25,47 @@ interface, attack surfaces expand through the complexity of neural tissue. Below
 it, they expand through electronic and wireless systems. The resulting shape is
 an asymmetric hourglass with the narrowest point at the interface.
 
+\subsection{Neural Band Derivation}
+
+The seven neural bands (N1--N7) are not arbitrary divisions. They correspond
+directly to the canonical central nervous system hierarchy established in
+foundational neuroscience texts~\cite{kandel2021neuroscience}: spinal cord,
+brainstem, cerebellum, diencephalon, basal ganglia, limbic system, and
+neocortex. This mapping was chosen for three reasons:
+
+\begin{enumerate}
+  \item \textbf{Functional differentiation}: Each CNS division performs
+        computationally distinct roles. The spinal cord (N1) mediates reflexes;
+        the brainstem (N2) controls vital autonomic functions; the neocortex (N7)
+        performs executive cognition and language. Attacks targeting different
+        divisions produce qualitatively different harms---from respiratory arrest
+        (N2) to identity manipulation (N7).
+
+  \item \textbf{Determinacy gradient}: Ascending the neural hierarchy, system
+        behavior becomes progressively less deterministic. Spinal reflexes (N1)
+        are largely predictable; basal ganglia dynamics (N5) exhibit chaotic
+        sensitivity; prefrontal deliberation (N7) involves the highest degree of
+        unpredictability. This gradient has direct security implications: attacks
+        at lower bands produce more predictable (and often more immediately
+        dangerous) effects, while attacks at higher bands produce less
+        predictable but potentially more insidious cognitive consequences.
+
+  \item \textbf{Device deployment mapping}: Existing BCI devices map cleanly
+        onto specific bands. Sacral nerve stimulators and spinal cord stimulators
+        operate at N1, deep brain stimulation systems (e.g., Medtronic Percept)
+        target the subthalamic nucleus at N5, and cortical implants (e.g.,
+        Neuralink N1 chip, Blackrock Utah array) interface at N7. The band
+        structure ensures that every deployed device class has a defined security
+        context.
+\end{enumerate}
+
+Each band also exhibits characteristic neural oscillation frequency ranges
+(delta through gamma), though the bands are defined by neuroanatomy rather than
+frequency. The oscillation profile of each band informs signal-plausibility
+checks: a stimulation signal injected at N4 (thalamus) can be validated against
+the expected spectral envelope for thalamocortical rhythms, providing a
+physics-based anomaly detection mechanism.
+
 \subsection{Band Definitions}
 
 Table~\ref{tab:bands} defines all 11 bands. The model uses a 7-1-3 asymmetric

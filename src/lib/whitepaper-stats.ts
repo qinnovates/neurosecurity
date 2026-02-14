@@ -12,7 +12,7 @@ export function getWhitepaperStats() {
   const tara = getTaraStats();
   const dsm5 = getDsm5Stats();
 
-  // Techniques flagged PINS (Persistent Involuntary Neural Stimulation)
+  // Techniques flagged PINS (Potential Impact to Neural Safety)
   const pinsCount = THREAT_VECTORS.filter(t => t.niss?.pins === true).length;
 
   // Techniques with irreversible or partially reversible outcomes (RV:I or RV:P)

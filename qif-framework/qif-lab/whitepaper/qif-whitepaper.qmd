@@ -723,6 +723,38 @@ predictions = [
 pd.DataFrame(predictions, columns=["#", "Prediction", "How to Test", "Expected Outcome"])
 ```
 
+# Computational Access: The `qtara` SDK
+
+To enable industry adoption and reproducible academic research, the QIF/TARA registry is accessible via the official `qtara` Python SDK. This package provides programmatic interfaces for threat modeling, NISS scoring, and STIX 2.1 interoperability.
+
+## Installation
+
+The SDK is available on PyPI:
+
+```bash
+pip install qtara
+```
+
+## Key Capabilities
+
+1.  **NISS Calculation**: Programmatic access to the Neural Impact Scoring System equations.
+2.  **STIX 2.1 Export**: Native support for exporting TARA techniques to Structured Threat Information Expression (STIX) bundles for SIEM/SOAR ingestion.
+3.  **Registry Query**: Fast, typed access to the verified BCI threat database.
+
+## Academic Citation
+
+If you use TARA data or the `qtara` SDK in your research, please use the following BibTeX entry:
+
+```bibtex
+@software{qtara2026,
+  author = {Qi, Kevin and Claude (Anthropic)},
+  title = {qtara: Threat Analysis & Risk Assessment for Neural Security},
+  year = {2026},
+  url = {https://github.com/qinnovates/qinnovate},
+  version = {0.1.2}
+}
+```
+
 ---
 
 # Conclusion

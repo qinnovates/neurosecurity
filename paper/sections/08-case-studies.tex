@@ -5,9 +5,16 @@
 \section{Case Studies}
 \label{sec:case-studies}
 
-To demonstrate the practical difference between CVSS-only and CVSS+NISS scoring,
-we present five representative techniques scored with both systems. Each case
-illustrates specific dimensions that CVSS cannot capture.
+To demonstrate the practical difference between CVSS-only and CVSS+NISS
+scoring, we present five representative techniques scored with both systems.
+Each case illustrates dimensions that CVSS cannot capture.
+
+\textbf{Important caveat:} Cases 1--4 are \emph{threat model scenarios} derived
+from the TARA taxonomy. They represent plausible attack vectors based on known
+neuroscience and engineering principles, but have not been empirically executed
+against real BCI hardware. Case~5 is the only empirically confirmed
+vulnerability. This distinction is discussed further in
+Section~\ref{sec:limitations}.
 
 \subsection{Scoring Comparison}
 
@@ -118,15 +125,15 @@ distinguish this from ordinary data exfiltration.
 
 The \qif framework has been applied to real vulnerability research. During
 systematic analysis of the BCI software ecosystem, we identified a multi-phase
-exploit chain in a widely deployed open-source BCI data streaming library.
-The vulnerability involved three CWEs: CWE-787 (out-of-bounds write), CWE-190
-(integer overflow), and CWE-125 (out-of-bounds read).
+exploit chain in an open-source library used in clinical and research BCI
+pipelines.
 
 The exploit chain demonstrates escalation from synthetic-zone vulnerabilities
-(S2/S3 bands: software bugs in the streaming library) to potential neural-zone
-impact (N-band: corrupted data reaching clinical decision-making). CVSS scores
-the software vulnerabilities accurately; NISS captures the downstream risk to
-patients whose clinical care depends on the integrity of the data stream.
+(S2/S3 bands) to potential neural-zone impact (N-band: corrupted data reaching
+clinical decision-making). CVSS scores the software vulnerabilities accurately;
+NISS captures the downstream risk to patients whose clinical care depends on
+the integrity of the data stream.
 
-Responsible disclosure was initiated in February 2026 and is currently in
-progress. Exploit details are withheld per responsible disclosure protocol.
+Responsible disclosure is in progress. Specific vulnerability details, including
+affected software and CWE identifiers, will be published after coordinated
+disclosure concludes.

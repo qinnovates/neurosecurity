@@ -159,7 +159,7 @@ const posts = (await getCollection('blog'))
  
     <!-- Interactive 3D hourglass (React island) -->
     <div class="h-[400px] mb-8 reveal">
-      <Hourglass3D client:visible />
+      <Hourglass3D client:only="react" />
     </div>
  
     <div class="text-center mt-8">
@@ -217,7 +217,7 @@ const posts = (await getCollection('blog'))
           <p class="mb-2 text-white">feed = TARA_Feed(<span class="text-green-400">"https://qinnovate.com/api/stix.json"</span>)</p>
           <p class="text-gray-500 mb-2"># Analyze Neural Impact</p>
           <p><span class="text-purple-400">for</span> threat <span class="text-purple-400">in</span> feed.get_critical():</p>
-          <p class="pl-4">print(<span class="text-green-400">f"NISS Score: {threat.niss}"</span>)</p>
+          <p class="pl-4">print(<span class="text-green-400">f"NISS Score: &#123;threat.niss&#125;"</span>)</p>
           <p class="text-gray-400 mt-4 animate-pulse">_</p>
         </div>
       </div>
