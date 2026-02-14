@@ -24,7 +24,8 @@ TRANS_COUNT=$(grep -cE '^\| 2026-' "$TRANSPARENCY" 2>/dev/null || echo 0)
 echo "=== Transparency Sync Check ==="
 echo "TRANSPARENCY.md validation entries: $TRANS_COUNT"
 
-if [ -f "$DERIV_LOG" ]; then
+if [ -n "$DERIV_LOG" ] && [ -f "$DERIV_LOG" ]; then
+    echo "Derivation Log found: $DERIV_LOG"
     # Count entries in Derivation Log that involve cross-AI validation
     DERIV_COUNT=$(grep -ciE '(gemini|multi-model|independent review|cross-ai|deepseek|grok|qwq|peer review)' "$DERIV_LOG" 2>/dev/null || echo 0)
     echo "Derivation Log validation-related lines: $DERIV_COUNT"

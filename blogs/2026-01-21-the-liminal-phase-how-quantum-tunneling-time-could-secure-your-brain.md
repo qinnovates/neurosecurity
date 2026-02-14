@@ -168,7 +168,7 @@ I'm publishing anyway because we need shared vocabulary. Quantum physicists, neu
 
 ## Part of Something Larger: The QIF Framework
 
-This research extends the QIF (Quantum Indeterministic Framework for Neural Security) into quantum territory.
+This research extends the QIF (Quantified Interconnection Framework for Neural Security) into quantum territory.
 
 Previous work established:
 - **Coherence Breach**: The moment when neural signal integrity is compromised
@@ -200,7 +200,7 @@ If you're at a **funding agency**: The gap between quantum physics and BCI secur
 
 · · ·
 
-*This article is part of the QIF (Quantum Indeterministic Framework for Neural Security) research.*
+*This article is part of the QIF (Quantified Interconnection Framework for Neural Security) research.*
 
 **Sub-Tags:** #QuantumTunneling #BCI #Neuralink #NeuralSecurity #QuantumComputing #QIF #LiminalPhase #QPUF #Coherence #Cybersecurity #Neuroscience
 
