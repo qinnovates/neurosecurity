@@ -43,7 +43,7 @@ const breadcrumbs = [
       )}
     </header>
 
-    {doc.id === 'transparency' && <TransparencyAudit className="mb-12" />}
+    {doc.id === 'transparency' && <TransparencyAudit className="mb-12" audit={doc.data.audit} />}
 
     <div class="prose">
       <Content />

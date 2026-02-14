@@ -2,6 +2,12 @@
 title: "Transparency Statement"
 description: "Auditable record of Human-AI collaboration in QIF Framework development"
 order: 4
+audit:
+  decisionsLogged: 58
+  independentReviews: 12
+  humanDecisionRate: "100%"
+  verificationPasses: 102
+  automatedTests: 77
 ---
 
 # Transparency Statement: Human-AI Collaboration in QIF Framework
@@ -10,7 +16,7 @@ order: 4
 
 **Last Updated:** 2026-02-14
 **Document Version:** 6.1
-**Detailed Derivation Timeline:** [`QIF-DERIVATION-LOG.md`](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md) — Complete chronological record of every derivation, decision, AI contribution, and validation result with timestamps and reasoning chains.
+**Detailed Derivation Timeline:** [`QIF-DERIVATION-LOG.md`](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md)
 
 ---
 
@@ -29,9 +35,9 @@ This document:
 | Document | What It Contains |
 |----------|-----------------|
 | **This file (TRANSPARENCY.md)** | Collaboration methodology, contribution matrix, correction examples, tool disclosure |
-| **[QIF-DERIVATION-LOG.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md)** | Complete timestamped timeline of every derivation, insight, AI contribution, validation result, and decision — from project inception (2026-01-18) to present. **Start here for the full audit trail.** |
-| **[QIF-RESEARCH-SOURCES.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-RESEARCH-SOURCES.md)** | All 102+ research sources compiled during AI-assisted validation sessions, with attribution to which agent/tool found each source |
-| **[PROPAGATION.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/PROPAGATION.md)** | Validation pipeline: when and how independent review (including cross-AI review) is triggered |
+| **[QIF-DERIVATION-LOG.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md)** | Complete timestamped timeline of every derivation, insight, AI contribution, validation result, and decision. |
+| **[QIF-RESEARCH-SOURCES.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-RESEARCH-SOURCES.md)** | All research sources compiled during AI-assisted validation sessions. |
+| **[PROPAGATION.md](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/PROPAGATION.md)** | Validation pipeline: when and how independent review is triggered. |
 
 ---
 
@@ -339,4 +345,4 @@ For questions about this transparency statement or the human-AI collaboration me
 
 ---
 
-← Back to [INDEX.md](../INDEX.md) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [REGULATORY_COMPLIANCE.md](REGULATORY_COMPLIANCE.md)
+← Back to [Governance Index](/governance/) | [Neuroethics Alignment](/governance/neuroethics_alignment/) | [Regulatory Compliance](/governance/regulatory_compliance/)

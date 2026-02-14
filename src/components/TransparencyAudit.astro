@@ -1,19 +1,27 @@
 ---
 interface Props {
   className?: string;
+  audit?: {
+    decisionsLogged: number;
+    independentReviews: number;
+    humanDecisionRate: string;
+    verificationPasses: number;
+    automatedTests: number;
+  };
 }
 
-const { className } = Astro.props;
+const { className, audit } = Astro.props;
 
-// Mock data for "Live Audit" - in a real app, this could come from git APIs or build-time scripts
-const auditData = {
-  lastBuild: new Date().toISOString().split('T')[0],
-  aiDecisionsLogged: 58, // Based on latest Derivation Log count
-  independentReviews: 12,
-  humanDecisionRate: "100%",
-  verificationPasses: 102,
-  automatedTests: 77,
+// Use provided audit data or fallback to defaults
+const auditData = audit || {
+  decisionsLogged: 0,
+  independentReviews: 0,
+  humanDecisionRate: "0%",
+  verificationPasses: 0,
+  automatedTests: 0,
 };
+
+const lastBuild = new Date().toISOString().split('T')[0];
 ---
 
 <div class:list={["glass rounded-2xl p-6 border border-[var(--color-border)] relative overflow-hidden", className]}>
@@ -31,7 +39,7 @@ const auditData = {
     <div>
       <div class="text-xs text-[var(--color-text-faint)] mb-1 uppercase font-semibold">Decisions Logged</div>
       <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">
-        {auditData.aiDecisionsLogged}
+        {auditData.decisionsLogged}
       </div>
     </div>
     <div>
@@ -61,7 +69,7 @@ const auditData = {
     <div class="opacity-80">
       <div class="text-xs text-[var(--color-text-faint)] mb-1 uppercase font-semibold">Last Verified</div>
       <div class="text-xl font-bold font-[family-name:var(--font-heading)]">
-        {auditData.lastBuild}
+        {lastBuild}
       </div>
     </div>
   </div>

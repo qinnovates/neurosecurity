@@ -20,6 +20,13 @@ const governance = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     order: z.number().default(99),
+    audit: z.object({
+      decisionsLogged: z.number(),
+      independentReviews: z.number(),
+      humanDecisionRate: z.string(),
+      verificationPasses: z.number(),
+      automatedTests: z.number(),
+    }).optional(),
   }),
 });
 
