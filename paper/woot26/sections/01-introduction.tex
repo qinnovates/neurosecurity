@@ -1,0 +1,65 @@
+\section{Introduction}
+\label{sec:intro}
+
+Brain-computer interfaces (BCIs) are no longer confined to research laboratories.
+Neuralink has implanted its N1 device in human patients~\cite{musk2019neuralink},
+Synchron's Stentrode has demonstrated motor neuroprosthesis via neurointerventional
+surgery~\cite{oxley2021stentrode}, and Blackrock Neurotech's Utah array has enabled
+high-performance speech neuroprostheses~\cite{willett2023speech}. Investment in
+neurotechnology grew 700\% between 2014 and 2021, with the global market projected
+to reach \$25 billion by 2030~\cite{unesco2025recommendation}.
+
+These devices read and write neural signals. An attacker who compromises a BCI
+does not merely exfiltrate data or disrupt a service---they can induce seizures,
+decode private thoughts, corrupt memory consolidation, or cause irreversible
+brain damage. Yet no security framework exists that accounts for these risks.
+
+\subsection{The Scoring Gap}
+
+The Common Vulnerability Scoring System (CVSS v4.0)~\cite{first2023cvss4} is the
+industry standard for vulnerability assessment. CVSS captures exploitability
+characteristics and information system impact, but was designed for IT assets.
+It cannot express:
+
+\begin{itemize}[nosep]
+  \item \textbf{Biological tissue damage}---seizure induction, neural necrosis,
+        involuntary motor activation
+  \item \textbf{Cognitive integrity}---thought privacy, perception manipulation,
+        identity modification
+  \item \textbf{Consent boundaries}---covert neural manipulation vs.\ consented
+        therapeutic stimulation
+  \item \textbf{Damage reversibility}---IT assets restore from backup; neural
+        tissue cannot be rebooted
+  \item \textbf{Neuroplastic consequences}---prolonged adversarial stimulation
+        causes lasting structural brain changes
+\end{itemize}
+
+Our analysis of 102 BCI attack techniques shows that 94.4\% require scoring
+dimensions that CVSS cannot express. When a vulnerability can induce a
+psychiatric diagnosis, a base score alone is insufficient.
+
+\subsection{Contributions}
+
+We present an integrated framework with four contributions:
+
+\begin{enumerate}[nosep]
+  \item \textbf{An 11-band hourglass architecture} (Section~\ref{sec:architecture})
+        mapping attack surfaces across neural, interface, and synthetic zones, with a
+        natural security chokepoint at the electrode-tissue boundary.
+
+  \item \textbf{A threat taxonomy} (Section~\ref{sec:taxonomy}) of 102 techniques
+        across 15 tactics and 8 domains, inspired by the structural methodology of
+        MITRE ATT\&CK\textsuperscript{\textregistered} and tailored to the BCI domain.
+
+  \item \textbf{A neural impact scoring extension} (Section~\ref{sec:scoring}) for
+        CVSS v4.0, adding five neural-specific metrics and designed to conform with
+        FIRST.org's official extension mechanism~\cite{first2023cvss4userguide}.
+
+  \item \textbf{A vulnerability-to-diagnosis pipeline} (Section~\ref{sec:impact-chain})
+        mapping security vulnerabilities to DSM-5-TR psychiatric
+        diagnoses~\cite{apa2022dsm5tr} through a six-stage chain.
+\end{enumerate}
+
+We validate the framework through two vulnerability disclosures against real
+BCI-adjacent systems (Section~\ref{sec:cases}). The complete framework is
+released as open source.

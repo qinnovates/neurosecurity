@@ -1,0 +1,46 @@
+\section{Related Work}
+\label{sec:related}
+
+Research at the intersection of cybersecurity and neurotechnology has progressed
+through foundational framing, empirical demonstration, and emerging policy response.
+
+\paragraph{Foundational Neurosecurity.}
+Denning, Kohno, and Chizeck~\cite{denning2009neurostimulators,kohno2009neurosecurity}
+coined ``neurosecurity'' by analyzing attack surfaces in implantable
+neurostimulators, identifying wireless reprogramming, battery depletion, and signal
+injection as threat categories. Bonaci et al.~\cite{bonaci2015appstores} extended
+this with ``App Stores for the Brain,'' examining privacy threats from third-party
+BCI applications.
+
+\paragraph{Empirical Attacks.}
+Martinovic et al.~\cite{martinovic2012feasibility} demonstrated at USENIX Security
+2012 that consumer EEG headsets could be exploited via P300 event-related potentials
+to extract PINs and personal information through subliminal visual stimuli. This
+remains the most influential empirical BCI side-channel attack.
+Wu et al.~\cite{wu2024adversarial} surveyed adversarial attacks on EEG-based BCIs,
+documenting adversarial perturbation, backdoor attacks on classifiers, and
+calibration-phase data poisoning. Halperin et al.~\cite{halperin2008pacemakers}
+established that implanted medical device attacks are practical by demonstrating
+wireless attacks against pacemakers.
+
+\paragraph{Recent Frameworks.}
+Schroder et al.~\cite{schroder2025cyberrisks} published the most recent analysis
+(2025), identifying cyber risks across BCI hardware, software, and communication
+layers. Ienca and Haselager~\cite{ienca2016hacking} analyzed BCI security through
+informational and physical integrity, proposing that BCIs require both cybersecurity
+and neuroethical safeguards. Camara et al.~\cite{camara2015security} and Rushanan
+et al.~\cite{rushanan2014sok} surveyed security in implantable medical devices
+broadly, covering pacemakers and neurostimulators.
+
+\paragraph{Neuroethics and Policy.}
+Ienca and Andorno~\cite{ienca2017neurorights} proposed four neurorights (cognitive
+liberty, mental privacy, mental integrity, psychological continuity). UNESCO's
+2025 Recommendation~\cite{unesco2025recommendation}, adopted by 194 Member States,
+is the first global normative framework for neurotechnology governance.
+
+\paragraph{Gap.}
+Prior work addresses BCI security, neuroethics, and vulnerability scoring
+separately. No existing framework integrates architecture, technique-level
+taxonomy, CVSS-compatible scoring, and clinical impact mapping into a single
+system. The vulnerability-to-diagnosis pipeline has no precedent in either
+cybersecurity or neuroethics literature.

@@ -1,0 +1,75 @@
+\section{Neural Impact Scoring}
+\label{sec:scoring}
+
+We propose a CVSS v4.0 extension designed to conform with FIRST.org's official
+extension mechanism (User Guide
+\S3.11)~\cite{first2023cvss4userguide}. The extension adds five metrics
+capturing dimensions CVSS cannot express.
+
+\subsection{Gap Analysis}
+
+Mapping all 102 techniques to CVSS v4.0 base vectors reveals three gap groups:
+
+\begin{table}[h]
+\centering
+\caption{CVSS v4.0 gap analysis.}
+\label{tab:gap}
+\small
+\begin{tabular}{@{}clr@{}}
+\toprule
+\textbf{Group} & \textbf{Gap Description} & \textbf{Count} \\
+\midrule
+1 & CVSS captures most impact; extension adds nuance & 12 \\
+2 & CVSS captures exploitability but misses half & 28 \\
+3 & CVSS fundamentally cannot express primary impact & 58 \\
+\midrule
+  & \textbf{Techniques needing extension} & \textbf{98 (96.1\%)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Extension Metrics}
+
+Five metrics, each orthogonal to CVSS base metrics:
+
+\paragraph{Biological Impact (BI).} Direct harm to neural tissue or
+physiological function. Values: None~(0.0), Low~(3.3, temporary discomfort),
+High~(6.7, seizure induction, involuntary motor activation), Critical~(10.0,
+life-threatening or permanently disabling).
+
+\paragraph{Cognitive Integrity (CG).} Impact on thought processes, perception,
+memory, or identity. Values: None~(0.0), Low~(3.3, partial intent exposure),
+High~(6.7, full thought decoding or perception manipulation), Critical~(10.0,
+cognitive coercion or identity modification).
+
+\paragraph{Consent Violation (CV).} Degree of informed consent violation.
+Values: None~(0.0), Partial~(3.3, scope exceeded but subject aware),
+Explicit~(6.7, direct violation, detectable), Implicit~(10.0, covert
+manipulation the patient cannot detect).
+
+\paragraph{Reversibility (RV).} Whether damage can be undone. Values:
+Full~(0.0, effects cease with attack), Temporary~(3.3, hours to days),
+Partial~(6.7, some permanent), Irreversible~(10.0, permanent neural
+destruction).
+
+\paragraph{Neuroplasticity (NP).} Whether the attack exploits or induces
+neuroplastic changes. Values: None~(0.0), Temporary~(5.0, short-term synaptic),
+Structural~(10.0, long-term pathway changes).
+
+\subsection{PINS Flag}
+
+The Potential Impact to Neural Safety (PINS) flag triggers when
+$\text{BI} \geq \text{High}$ or $\text{RV} = \text{Irreversible}$, mandating
+immediate safety review. 31 of 102 techniques (30.4\%) are PINS-flagged.
+
+\subsection{Dual-Vector Architecture}
+
+The extension vector rides alongside CVSS:
+
+{\small\texttt{CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N}}
+
+{\small\texttt{NISS:1.0/BI:H/CG:C/CV:I/RV:P/NP:S}}
+
+Security teams triage using familiar CVSS scores while BCI-specific teams see
+the neural dimensions that determine whether a vulnerability is a software bug
+or a patient safety emergency.

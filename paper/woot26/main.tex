@@ -1,0 +1,76 @@
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix2019_v3}
+
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+%-------------------------------------------------------------------------------
+
+\date{}
+
+\title{\Large \bf From Attack Surface to Psychiatric Diagnosis:\\
+  A Security Framework for Brain-Computer Interfaces}
+
+% DOUBLE-BLIND: Authors removed for review
+\author{
+{\rm Anonymous}
+}
+
+\maketitle
+
+%-------------------------------------------------------------------------------
+\begin{abstract}
+%-------------------------------------------------------------------------------
+Brain-computer interfaces (BCIs) are transitioning from experimental tools to
+commercially deployed medical devices. Yet no security framework accounts for
+the unique risks of devices that read and write neural signals. The Common
+Vulnerability Scoring System (CVSS v4.0) cannot express biological tissue
+damage, cognitive integrity violations, or consent boundaries---dimensions
+critical to neural device security.
+
+We present an integrated framework with four contributions:
+(1)~an 11-band hourglass architecture mapping attack surfaces from neocortex
+to wireless radio;
+(2)~a threat taxonomy of 102 techniques across 15 tactics and 8 domains;
+(3)~a CVSS v4.0 extension adding five neural-specific metrics; and
+(4)~a methodology mapping security vulnerabilities to DSM-5-TR psychiatric
+diagnoses.
+
+Analysis reveals that 94.4\% of catalogued techniques require neural-specific
+metrics that CVSS cannot express, and 51 techniques pose direct psychiatric
+diagnostic risk. We validate the framework through two vulnerability
+disclosures against real BCI-adjacent systems. The complete framework is
+released as open source.
+\end{abstract}
+
+\input{sections/01-introduction}
+\input{sections/02-related-work}
+\input{sections/03-architecture}
+\input{sections/04-taxonomy}
+\input{sections/05-scoring}
+\input{sections/06-impact-chain}
+\input{sections/07-case-studies}
+\input{sections/08-ethics}
+\input{sections/09-limitations}
+\input{sections/10-conclusion}
+
+%-------------------------------------------------------------------------------
+\section*{Availability}
+%-------------------------------------------------------------------------------
+
+The complete framework, threat registry, and scoring system are released
+as open source under the Apache 2.0 license.%
+\footnote{Repository URL withheld for double-blind review.}
+An interactive threat registry browser and scoring calculator are available
+at the project website.
+
+%-------------------------------------------------------------------------------
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

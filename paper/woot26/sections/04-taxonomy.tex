@@ -1,0 +1,76 @@
+\section{Threat Taxonomy}
+\label{sec:taxonomy}
+
+We catalog 102 BCI attack techniques with a structure inspired by MITRE
+ATT\&CK~\cite{mitre2024attack}, independently developed to cover neural,
+cognitive, and physical safety domains. Each technique is simultaneously an
+attack vector, an ethical risk, and---where applicable---a therapeutic application.
+
+\paragraph{Why not ATT\&CK directly?}
+MITRE ATT\&CK is designed for enterprise IT. BCI threats differ fundamentally:
+(1)~the target is biological tissue, not an information system---attacks can
+cause seizures or cognitive coercion; (2)~the same technique is often
+simultaneously an attack and a therapy (e.g., deep brain stimulation); and
+(3)~the attack lifecycle crosses the bio-digital boundary that ATT\&CK's
+purely digital model does not address.
+
+\subsection{Structure}
+
+The taxonomy organizes 102 techniques into 15 tactics across 8 domains spanning
+the full attack lifecycle: Neural~(N), BCI System~(B), Protocol~(P), Data~(D),
+Cognitive~(C), Countermeasure~(M), Evasion~(E), and Sensor~(S).
+
+\subsection{Evidence and Severity}
+
+Each technique carries an evidence status: Confirmed~(19), Demonstrated~(33),
+Emerging~(22), Theoretical~(26), Plausible~(1), Speculative~(1). CVSS v4.0 base
+severity is heavily weighted toward high and critical: 29 critical (28.4\%), 54
+high (52.9\%), 16 medium (15.7\%), 3 low (2.9\%).
+
+\subsection{Dual-Use Mapping}
+
+A distinctive feature is systematic dual-use mapping: every technique is assessed
+for therapeutic analogs. The same mechanisms that enable attacks---electromagnetic
+stimulation, signal decoding, neuromodulation---underlie established therapies
+(DBS~\cite{lozano2019dbs}, TMS~\cite{krauss2021tms}, neurofeedback).
+
+\begin{table}[h]
+\centering
+\caption{Dual-use classification of 102 techniques.}
+\label{tab:dualuse}
+\small
+\begin{tabular}{@{}llrr@{}}
+\toprule
+\textbf{Class} & \textbf{Definition} & \textbf{Count} & \textbf{\%} \\
+\midrule
+Confirmed    & Published clinical use        & 52 & 51.0\% \\
+Probable     & Under clinical investigation  & 16 & 15.7\% \\
+Possible     & Theoretical therapeutic map   &  9 &  8.8\% \\
+Silicon Only & No tissue analog              & 25 & 24.5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Of the 102 techniques, 77 (75.5\%) have confirmed or probable therapeutic analogs.
+The boundary between attack and therapy is not mechanism---it is consent, dosage,
+and oversight.
+
+\subsection{Representative Techniques}
+
+\begin{table}[h]
+\centering
+\caption{Five representative techniques.}
+\label{tab:representative}
+\small
+\begin{tabular}{@{}lllp{4.5cm}@{}}
+\toprule
+\textbf{Sev.} & \textbf{Status} & \textbf{Dual-Use} & \textbf{Description} \\
+\midrule
+Critical & Confirmed & Confirmed & Cortical signal injection via rogue electrode stimulation \\
+High & Demonstrated & Confirmed & P300 side-channel extraction of private information~\cite{martinovic2012feasibility} \\
+High & Emerging & Probable & Calibration data poisoning during BCI training sessions \\
+Medium & Confirmed & Confirmed & Ultrasonic side-channel via bone conduction \\
+High & Demonstrated & Confirmed & WiFi CSI passive body sensing for respiratory inference \\
+\bottomrule
+\end{tabular}
+\end{table}

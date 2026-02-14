@@ -1,0 +1,59 @@
+\section{Case Studies}
+\label{sec:cases}
+
+We validate the framework through two channels: scoring comparisons that
+demonstrate the gap between CVSS-only and extended scoring, and real
+vulnerability disclosures against BCI-adjacent systems.
+
+\textbf{Caveat:} Cases 1--4 are threat model scenarios derived from the taxonomy.
+They represent plausible attacks based on known neuroscience and engineering but
+have not been executed against real BCI hardware. Case~5 involves an empirically
+confirmed vulnerability.
+
+\subsection{Scoring Comparison}
+
+\begin{table}[h]
+\centering
+\caption{CVSS v4.0 vs.\ neural-extended scoring.}
+\label{tab:cases}
+\small
+\begin{tabular}{@{}p{3.8cm}cc@{}}
+\toprule
+\textbf{Technique} & \textbf{CVSS} & \textbf{Extension} \\
+\midrule
+Cortical signal injection  & 9.3 (Crit) & 8.7 (High) \\
+P300 side-channel~\cite{martinovic2012feasibility} & 7.7 (High) & 4.7 (Med) \\
+Calibration poisoning      & 8.2 (High) & 5.3 (Med) \\
+Covert neural surveillance & 7.1 (High) & 6.0 (Med) \\
+Ultrasonic bone-conduction & 5.3 (Med)  & 2.7 (Low) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The key observation: CVSS and the extension do not always agree on severity
+ranking. Cortical signal injection scores high on both because it is both
+exploitable \emph{and} biologically devastating. P300 side-channel scores high
+on CVSS (confidentiality breach) but medium on the extension (no physical
+harm---the attack is passive). This distinction matters for clinical triage.
+
+\subsection{Case 5: BCI Streaming Library Vulnerability}
+
+During systematic analysis of the BCI software ecosystem, we identified a
+multi-phase exploit chain in a widely-used open-source library for neural data
+streaming. The library is deployed in clinical and research BCI pipelines
+across multiple institutions.
+
+The exploit chain demonstrates escalation from synthetic-zone vulnerabilities
+(S2/S3 bands) to potential neural-zone impact: corrupted data reaching clinical
+decision-making systems. CVSS scores the software vulnerabilities accurately;
+the neural extension captures downstream risk to patients whose care depends on
+data stream integrity.
+
+Responsible disclosure was initiated prior to this submission. The vulnerability
+was reported to maintainers on February 11, 2026. Specific details---including
+affected software, CWE identifiers, and proof-of-concept---will be published
+after coordinated disclosure concludes.
+
+A second vulnerability---a 9-year-old flaw in a widely-deployed audio codec used
+in neural signal processing pipelines---was filed through a national CERT
+coordination center. CVE assignment is pending.
