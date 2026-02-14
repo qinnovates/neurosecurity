@@ -46,11 +46,15 @@ function HourglassBand({
 
   const color = useMemo(() => new THREE.Color(band.color), [band.color]);
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!meshRef.current) return;
     const scale = isHovered ? 1.05 : 1.0;
-    meshRef.current.scale.x = THREE.MathUtils.lerp(meshRef.current.scale.x, scale, 0.1);
-    meshRef.current.scale.z = THREE.MathUtils.lerp(meshRef.current.scale.z, scale, 0.1);
+
+    // Only update if value hasn't converged (performance)
+    if (Math.abs(meshRef.current.scale.x - scale) > 0.001) {
+      meshRef.current.scale.x = THREE.MathUtils.lerp(meshRef.current.scale.x, scale, 0.1);
+      meshRef.current.scale.z = THREE.MathUtils.lerp(meshRef.current.scale.z, scale, 0.1);
+    }
   });
 
   return (
@@ -61,7 +65,7 @@ function HourglassBand({
         onPointerLeave={(e) => { e.stopPropagation(); onHover(null); }}
         onClick={(e) => { e.stopPropagation(); onClick(); }}
       >
-        <cylinderGeometry args={[radius, radius, BAND_HEIGHT, 32]} />
+        <cylinderGeometry args={[radius, radius, BAND_HEIGHT, 16]} />
         <meshStandardMaterial
           color={color}
           transparent
@@ -73,7 +77,7 @@ function HourglassBand({
       </mesh>
       {/* Edge glow ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, BAND_HEIGHT / 2, 0]}>
-        <ringGeometry args={[radius - 0.02, radius, 64]} />
+        <ringGeometry args={[radius - 0.02, radius, 32]} />
         <meshBasicMaterial
           color={color}
           transparent
