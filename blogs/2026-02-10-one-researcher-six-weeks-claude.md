@@ -12,7 +12,7 @@ Ninety active clinical trials. Devices implanted in human brains, operating in p
 
 HTTPS had to exist before e-commerce. TLS had to exist before online banking. The neural equivalent does not exist yet. Someone needed to build it.
 
-I am a cybersecurity professional. Fifteen years building defensive infrastructure across financial services, media, and technology. At Tinder I was Engineering Manager of Security MITR (Monitoring, Investigations, Threat Hunting and Response), architecting Splunk environments processing petabytes of logs for 75 million users. Before that, Blackstone, HarperCollins, Freedom Mortgage. I know how systems break. I spent my career finding the cracks and closing them.
+I am a cybersecurity professional. Fifteen years building defensive infrastructure across financial services, media, and technology. I have led security engineering and threat hunting teams, architecting SIEM environments processing petabytes of logs for tens of millions of users. I know how systems break. I spent my career finding the cracks and closing them.
 
 I am neurodivergent. I have ADHD. I once asked for an autism evaluation during a hospital visit. I was depressed and overwhelmed. They told me I was manic. I think I was having a meltdown. Many autistic people in my life have recognized the pattern in me since. I have not pursued a formal diagnosis, but I stopped treating the observation as coincidence a long time ago. The way my brain works, I see connections between things that other people file into separate departments. Cybersecurity and neuroscience. Quantum physics and protocol design. Threat hunting and therapeutic medicine. To me, these are not different fields. They are the same system viewed from different angles.
 
