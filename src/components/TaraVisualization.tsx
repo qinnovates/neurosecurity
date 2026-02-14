@@ -92,7 +92,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
             <div className="flex flex-col items-center py-24">
                 <div className="text-center mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                     <h2 className="text-6xl font-semibold font-[family-name:var(--font-heading)] tracking-tighter mb-6 text-slate-900 leading-none">
-                        Interface Genesis
+                        Access Points
                     </h2>
                     <p className="text-sm font-medium text-slate-400 max-w-lg mx-auto leading-relaxed">
                         The QIF TARA Registry is a dual-use directory of BCI techniques mapped across the bio-digital boundary.
@@ -100,21 +100,21 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-7xl px-4">
                     {[
-                        { id: 'neural', name: 'Neural', desc: 'Biological Mind (N7-N1)', color: '#10b981' },
-                        { id: 'interface', name: 'Interface', desc: 'Boundary Transduction (I0)', color: '#f59e0b' },
-                        { id: 'synthetic', name: 'Synthetic', desc: 'Computation & Tel (S1-S3)', color: '#3b82f6' }
+                        { id: 'neural', name: 'Neural', desc: 'Biological Mind (N7-N1)', color: '#10b981', hoverBg: 'hover:bg-emerald-500/5', pillBg: 'bg-emerald-500/10 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white', borderAccent: 'group-hover:border-l-emerald-500' },
+                        { id: 'interface', name: 'Interface', desc: 'Boundary Transduction (I0)', color: '#f59e0b', hoverBg: 'hover:bg-amber-500/5', pillBg: 'bg-amber-500/10 text-amber-600 group-hover:bg-amber-500 group-hover:text-white', borderAccent: 'group-hover:border-l-amber-500' },
+                        { id: 'synthetic', name: 'Synthetic', desc: 'Computation & Tel (S1-S3)', color: '#3b82f6', hoverBg: 'hover:bg-blue-500/5', pillBg: 'bg-blue-500/10 text-blue-600 group-hover:bg-blue-500 group-hover:text-white', borderAccent: 'group-hover:border-l-blue-500' }
                     ].map(d => (
                         <button
                             key={d.id}
                             onClick={() => setSelectedDomain(d.id as Domain)}
-                            className="group flex flex-col items-center p-12 rounded-[3rem] bg-white border border-slate-100 hover:border-slate-200 transition-all duration-700 hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] relative overflow-hidden"
+                            className={`group flex flex-col items-center p-12 rounded-[3rem] bg-white border border-slate-100 border-l-4 border-l-transparent ${d.borderAccent} ${d.hoverBg} cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 relative overflow-hidden`}
                         >
-                            <div className="mb-8 w-1 h-12 rounded-full transition-transform duration-700 group-hover:scale-y-125" style={{ backgroundColor: d.color }} />
+                            <div className="mb-8 w-1 h-12 rounded-full transition-transform duration-500 group-hover:scale-y-150" style={{ backgroundColor: d.color }} />
                             <h3 className="text-2xl font-semibold tracking-tighter mb-3 text-slate-800">{d.name}</h3>
                             <p className="text-sm font-medium text-slate-400 leading-relaxed mb-6">{d.desc}</p>
-                            <div className="text-sm font-semibold text-slate-400 group-hover:text-slate-900 transition-colors">
-                                Access Zone →
-                            </div>
+                            <span className={`text-xs font-semibold px-4 py-2 rounded-full transition-all duration-500 ${d.pillBg}`}>
+                                Access Zone <span className="inline-block transition-transform duration-500 group-hover:translate-x-1">→</span>
+                            </span>
                         </button>
                     ))}
                 </div>
