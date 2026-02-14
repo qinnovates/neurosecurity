@@ -94,54 +94,6 @@ const dashboardItems = [
         Building the foundation for neural security, one breakthrough at a time. The following timeline tracks the derivation of the framework from zero to standard.
       </p>
       
-      <!-- Chart Placeholder/Visualization -->
-      <div class="glass rounded-2xl p-6 mb-8 border border-[var(--color-border)] relative overflow-hidden group">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-sm font-bold uppercase tracking-widest text-[var(--color-text-faint)]">Project Trajectory</h2>
-          <div class="flex gap-4">
-            <div class="flex items-center gap-1.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent-primary)]"></div>
-              <span class="text-[10px] uppercase font-semibold text-[var(--color-text-faint)]">Techniques</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent-secondary)]"></div>
-              <span class="text-[10px] uppercase font-semibold text-[var(--color-text-faint)]">Specifications</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="relative h-48 w-full flex items-end gap-[2%] px-2">
-          {[...milestones].reverse().map((m, i) => {
-            // Mock growth visual
-            const height = Math.min(100, 20 + (i * (80 / milestones.length)));
-            const isSpec = m.category === 'protocol' || m.category === 'standards';
-            return (
-              <div class="flex-1 flex flex-col items-center justify-end group/bar">
-                <div 
-                  class="w-full rounded-t-sm transition-all duration-500 group-hover/bar:brightness-125" 
-                  style={`height: ${height}%; background: ${isSpec ? 'var(--color-accent-secondary)' : 'var(--color-accent-primary)'}; opacity: ${0.3 + (i / [...milestones].length) * 0.7}`}
-                ></div>
-                <div class="absolute -bottom-6 opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap text-[9px] font-mono text-[var(--color-text-faint)] rotate-45 origin-left">
-                  {m.date.split('-').slice(1).join('/')}
-                </div>
-              </div>
-            )
-          })}
-          <!-- Grid lines -->
-          <div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-5 py-1">
-            <div class="border-t border-white w-full"></div>
-            <div class="border-t border-white w-full"></div>
-            <div class="border-t border-white w-full"></div>
-            <div class="border-t border-white w-full"></div>
-          </div>
-        </div>
-        
-        <div class="mt-8 flex items-center justify-between text-[var(--color-text-faint)]">
-          <span class="text-[10px] font-mono uppercase tracking-tighter">Day 1</span>
-          <span class="text-[10px] font-mono uppercase tracking-tighter">Day {daySpan}</span>
-        </div>
-      </div>
-
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border)]">
         <span class="text-sm font-medium text-[var(--color-text-primary)]">
           {milestones.length} milestones in {daySpan} days
