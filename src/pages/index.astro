@@ -6,7 +6,7 @@ import TrustBar from '../components/TrustBar.astro';
 import PublicationCard from '../components/PublicationCard.astro';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '../lib/utils';
-import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS } from '../lib/qif-constants';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS, LATEST_WHITEPAPER_HREF } from '../lib/qif-constants';
 import HeroParticles from '../components/HeroParticles';
 import Hourglass3D from '../components/Hourglass3D';
 import '../styles/global.css';
@@ -70,7 +70,7 @@ const posts = (await getCollection('blog'))
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
         <a
-          href="/whitepaper/"
+          href={LATEST_WHITEPAPER_HREF}
           class="px-6 py-3 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           Read the Whitepaper

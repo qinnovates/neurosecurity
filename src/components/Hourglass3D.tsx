@@ -88,7 +88,6 @@ function HourglassBand({
         color={isHovered ? '#1f2937' : '#6b7280'}
         anchorX="left"
         anchorY="middle"
-        font="/fonts/Inter-Variable.woff2"
       >
         {band.id} — {band.name}
       </Text>
