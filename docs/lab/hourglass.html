@@ -75,40 +75,174 @@ header h1 span.version {
 
 .toolbar {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.toolbar-btn {
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   background: var(--bg-surface);
   border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+}
+
+.toolbar-group-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-right: 0.25rem;
+  white-space: nowrap;
+}
+
+.toolbar-btn {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
   color: var(--text);
-  padding: 0.4rem 0.75rem;
+  padding: 0.45rem 0.85rem;
   border-radius: 6px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.toolbar-btn:hover { border-color: var(--text-dim); background: var(--bg-overlay); }
+.toolbar-btn .btn-icon { font-size: 1rem; }
+.toolbar-btn:hover { border-color: var(--text-dim); background: rgba(255,255,255,0.06); }
 .toolbar-btn.active { border-color: var(--blue); color: var(--blue); background: rgba(88,166,255,0.1); }
 
 .toolbar-select {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--bg-overlay);
+  border: 1px solid var(--blue);
   color: var(--text);
-  padding: 0.4rem 0.5rem;
+  padding: 0.45rem 0.6rem;
   border-radius: 6px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   cursor: pointer;
-  max-width: 200px;
+  min-width: 220px;
+  box-shadow: 0 0 0 1px rgba(88,166,255,0.15);
 }
 
+.toolbar-select:focus { box-shadow: 0 0 0 2px rgba(88,166,255,0.3); outline: none; }
 .toolbar-select option { background: var(--bg-surface); }
+
+/* ── Walkthrough ── */
+.walkthrough-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.walkthrough-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  max-width: 520px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.walkthrough-card h2 {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  color: var(--text-bright);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.walkthrough-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.walkthrough-step {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.walkthrough-step-num {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: rgba(88,166,255,0.15);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.walkthrough-step-text {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.5;
+  font-family: var(--font-sans);
+}
+
+.walkthrough-step-text strong { color: var(--text-bright); }
+.walkthrough-step-text .key {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+}
+
+.walkthrough-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.walkthrough-dismiss {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.walkthrough-dismiss:hover { filter: brightness(1.15); }
+
+.walkthrough-skip {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.walkthrough-skip:hover { color: var(--text); }
 
 /* ── Main Content Area ── */
 main {
@@ -320,6 +454,171 @@ main {
 .severity-badge.severe { background: rgba(227,179,65,0.15); color: var(--severity-severe); border: 1px solid rgba(227,179,65,0.3); }
 .severity-badge.synthetic { background: rgba(88,166,255,0.1); color: var(--severity-synthetic); border: 1px solid rgba(88,166,255,0.2); }
 .severity-badge.interface { background: rgba(188,140,255,0.1); color: #bc8cff; border: 1px solid rgba(188,140,255,0.2); }
+
+/* ── Detail Tabs ── */
+.detail-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  margin: 0 auto;
+  padding: 0.75rem 2rem 0;
+  max-width: 1000px;
+}
+
+.detail-tab {
+  padding: 0.75rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-bottom: 3px solid transparent;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.detail-tab:hover { color: var(--text); background: var(--bg-overlay); border-color: var(--text-dim); border-bottom-color: transparent; }
+.detail-tab.active { color: var(--text-bright); background: var(--bg-overlay); border-bottom-color: var(--blue); border-color: var(--blue); }
+.detail-tab.active-green { color: var(--green); background: rgba(63,185,80,0.08); border-bottom-color: var(--green); border-color: var(--green); }
+.detail-tab.active-amber { color: var(--orange); background: rgba(210,153,34,0.08); border-bottom-color: var(--orange); border-color: var(--orange); }
+
+.detail-tab .tab-count {
+  font-size: 0.75rem;
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.55rem;
+  border-radius: 99px;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.detail-tab-panel { display: none; }
+.detail-tab-panel.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ── Therapeutic Section (green accent) ── */
+.detail-therapeutic h3 { color: var(--green); border-bottom-color: rgba(63,185,80,0.3); }
+
+.therapeutic-tag {
+  display: inline-block;
+  background: rgba(63,185,80,0.1);
+  border: 1px solid rgba(63,185,80,0.25);
+  color: var(--green);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  margin: 0.15rem;
+}
+
+.therapeutic-tag.fda-approved { background: rgba(63,185,80,0.2); border-color: rgba(63,185,80,0.4); font-weight: 600; }
+.therapeutic-tag.fda-cleared { background: rgba(88,166,255,0.15); border-color: rgba(88,166,255,0.3); color: var(--blue); }
+.therapeutic-tag.fda-investigational { background: rgba(210,153,34,0.12); border-color: rgba(210,153,34,0.25); color: var(--orange); }
+.therapeutic-tag.fda-none { background: var(--bg-overlay); border-color: var(--border); color: var(--text-dim); }
+
+.therapeutic-tag.evidence { font-style: italic; background: var(--bg-overlay); border-color: var(--border); color: var(--text-dim); }
+
+.therapeutic-card {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+  background: var(--bg-overlay);
+}
+
+.therapeutic-card .tc-name { font-weight: 600; color: var(--text-bright); font-size: 0.85rem; margin-bottom: 0.4rem; }
+.therapeutic-card .tc-attack { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.3rem; }
+.therapeutic-card .tc-params { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; font-style: italic; }
+
+/* ── DSM-5 Section (amber accent) ── */
+.detail-dsm5 h3 { color: var(--orange); border-bottom-color: rgba(210,153,34,0.3); }
+
+.dsm-code-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 0.15rem;
+  background: rgba(210,153,34,0.12);
+  border: 1px solid rgba(210,153,34,0.3);
+  color: var(--orange);
+}
+
+.dsm-code-badge.secondary {
+  background: var(--bg-overlay);
+  border-color: var(--border);
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.dsm-cluster-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 0.15rem;
+}
+
+.dsm-pathway {
+  font-size: 0.75rem;
+  color: var(--text);
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.dsm-pathway .arrow { color: var(--text-dim); }
+
+.niss-bridge-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.niss-bridge-table th {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.niss-bridge-table td {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid rgba(48,54,61,0.5);
+  color: var(--text);
+}
+
+.niss-bridge-table tr:last-child td { border-bottom: none; }
+
+.dsm-technique-row {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+}
+
+.dsm-technique-row:last-child { border-bottom: none; }
+.dsm-technique-row .dt-name { font-weight: 600; color: var(--text-bright); font-size: 0.8rem; }
+.dsm-technique-row .dt-meta { color: var(--text-dim); font-size: 0.7rem; margin-top: 0.2rem; }
 
 /* ── Band Detail View (Full Screen Overlay) ── */
 #band-detail {
@@ -533,12 +832,20 @@ main {
   text-align: center;
   color: var(--text-dim);
   font-size: 0.85rem;
-  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  padding: 0.6rem 1rem;
   border-bottom: 1px solid var(--border);
-  background: var(--bg-surface);
-  transition: opacity 0.3s;
+  background: linear-gradient(to right, var(--bg-surface), rgba(88,166,255,0.04), var(--bg-surface));
+  transition: opacity 0.3s, max-height 0.3s;
+  max-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
 }
-.instruction-hint.hidden { opacity: 0; pointer-events: none; height: 0; padding: 0; overflow: hidden; }
+.instruction-hint .hint-item { display: flex; align-items: center; gap: 0.35rem; }
+.instruction-hint .hint-icon { font-size: 1rem; }
+.instruction-hint.hidden { opacity: 0; pointer-events: none; max-height: 0; padding: 0; overflow: hidden; }
 
 .quantum-callout {
   display: none;
@@ -621,11 +928,13 @@ main {
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .detail-body { grid-template-columns: 1fr; }
+  .detail-tab-panel.active { grid-template-columns: 1fr; }
   .band-name { width: 6rem; }
   header { padding: 0.75rem 1rem; }
   #hourglass-container { padding: 1rem; }
   #freq-panel.open { width: 220px; }
   .attack-list { width: 260px; }
+  .detail-tabs { margin: 0 1rem; overflow-x: auto; }
 }
 </style>
 </head>
@@ -638,7 +947,9 @@ main {
   </header>
 
   <div class="instruction-hint" id="instruction-hint">
-    Click any band to explore details, or <strong>Select BCI Device</strong> from the toolbar to see which bands it touches.
+    <span class="hint-item"><span class="hint-icon">👆</span> Click any band to explore</span>
+    <span class="hint-item"><span class="hint-icon">📡</span> Select a BCI device to see its attack surface</span>
+    <span class="hint-item"><span class="hint-icon">⚔️</span> Simulate attacks across bands</span>
   </div>
 
   <div class="quantum-callout" id="quantum-callout">
@@ -657,6 +968,34 @@ main {
 
 <div id="band-detail"></div>
 <div class="tooltip" id="tooltip"></div>
+
+<div class="walkthrough-overlay" id="walkthrough" style="display:none">
+  <div class="walkthrough-card">
+    <h2>QIF Interactive Hourglass</h2>
+    <div class="walkthrough-steps">
+      <div class="walkthrough-step">
+        <div class="walkthrough-step-num">1</div>
+        <div class="walkthrough-step-text"><strong>Click any band</strong> to see its threat profile, brain regions, attack techniques, and severity rating.</div>
+      </div>
+      <div class="walkthrough-step">
+        <div class="walkthrough-step-num">2</div>
+        <div class="walkthrough-step-text"><strong>Select a BCI device</strong> from the dropdown to highlight which bands it touches — revealing its unique attack surface.</div>
+      </div>
+      <div class="walkthrough-step">
+        <div class="walkthrough-step-num">3</div>
+        <div class="walkthrough-step-text"><strong>Attack Simulator</strong> — pick a known attack to see which bands it crosses and its coupling mechanism.</div>
+      </div>
+      <div class="walkthrough-step">
+        <div class="walkthrough-step-num">4</div>
+        <div class="walkthrough-step-text"><strong>Frequency Spectrum</strong> — view neural and synthetic operating frequencies, including restricted/military bands.</div>
+      </div>
+    </div>
+    <div class="walkthrough-actions">
+      <button class="walkthrough-skip" id="walkthrough-skip">Don't show again</button>
+      <button class="walkthrough-dismiss" id="walkthrough-dismiss">Got it, let's explore</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // ════════════════════════════════════════════════════════════════
@@ -990,6 +1329,7 @@ class BandDetailView {
     this.el = containerEl;
     this.data = data;
     this.quantumProven = false;
+    this.registrar = null;
   }
 
   show(band) {
@@ -1000,6 +1340,24 @@ class BandDetailView {
 
     const attacks = this.data.threat_model.filter(a => a.band_ids.includes(band.id));
     const devices = this.data.bci_devices.filter(d => d.bands.includes(band.id));
+
+    // Registrar-sourced data
+    const techniques = this.registrar?.techniques?.filter(t => t.band_ids?.includes(band.id)) || [];
+    const therapeutics = techniques.filter(t => t.tara?.clinical?.therapeutic_analog);
+    const dsmTechniques = techniques.filter(t => t.tara?.dsm5?.primary?.length > 0);
+    const bandProfile = this.registrar?.dsm5_spec?.band_profiles?.[band.id];
+    const clusters = this.registrar?.dsm5_spec?.diagnostic_clusters || {};
+    const bridge = this.registrar?.dsm5_spec?.niss_dsm_bridge || {};
+
+    // Count unique DSM codes across all techniques for this band
+    const allDsmCodes = new Set();
+    techniques.forEach(t => {
+      (t.tara?.dsm5?.primary || []).forEach(c => allDsmCodes.add(c.code));
+      (t.tara?.dsm5?.secondary || []).forEach(c => allDsmCodes.add(c.code));
+    });
+
+    const hasTherapeutic = therapeutics.length > 0;
+    const hasDsm = allDsmCodes.size > 0 || bandProfile;
 
     this.el.innerHTML = `
       <div class="detail-header">
@@ -1014,7 +1372,12 @@ class BandDetailView {
           <div class="detail-subtitle">${band.description}</div>
         </div>
       </div>
-      <div class="detail-body">
+      <div class="detail-tabs">
+        <button class="detail-tab active" data-tab="security">Security <span class="tab-count">${attacks.length}</span></button>
+        ${hasTherapeutic ? `<button class="detail-tab" data-tab="therapeutic">Therapeutic <span class="tab-count">${therapeutics.length}</span></button>` : ''}
+        ${hasDsm ? `<button class="detail-tab" data-tab="dsm5">DSM-5 <span class="tab-count">${allDsmCodes.size}</span></button>` : ''}
+      </div>
+      <div class="detail-tab-panel active" data-panel="security">
         <div class="detail-section">
           <h3>Physics</h3>
           <dl class="detail-kv">
@@ -1065,12 +1428,132 @@ class BandDetailView {
           <div style="font-size:0.85rem;color:var(--text);">${band.severity_description}</div>
         </div>
       </div>
+      ${hasTherapeutic ? `
+      <div class="detail-tab-panel" data-panel="therapeutic">
+        <div class="detail-section detail-therapeutic full-width">
+          <h3>Therapeutic Analogs (${therapeutics.length})</h3>
+          ${therapeutics.map(t => {
+            const c = t.tara.clinical;
+            const fdaClass = c.fda_status ? 'fda-' + c.fda_status : 'fda-none';
+            return `
+            <div class="therapeutic-card">
+              <div class="tc-name">${c.therapeutic_analog}</div>
+              <div class="tc-attack">${t.id}: ${t.attack}</div>
+              <div>
+                <span class="therapeutic-tag ${fdaClass}">FDA: ${c.fda_status || 'none'}</span>
+                <span class="therapeutic-tag evidence">Evidence: ${c.evidence_level || 'N/A'}</span>
+              </div>
+              <div style="margin-top:0.35rem;">
+                ${(c.conditions || []).map(cond => `<span class="therapeutic-tag">${cond}</span>`).join('')}
+              </div>
+              ${c.safe_parameters ? `<div class="tc-params">${c.safe_parameters}</div>` : ''}
+              ${c.sources?.length ? `<div style="margin-top:0.3rem;font-size:0.65rem;color:var(--text-dim);">Sources: ${c.sources.join('; ')}</div>` : ''}
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+      ` : ''}
+      ${hasDsm ? `
+      <div class="detail-tab-panel" data-panel="dsm5">
+        ${bandProfile ? `
+        <div class="detail-section detail-dsm5">
+          <h3>Band Profile \u2014 ${band.id}</h3>
+          <div class="dsm-pathway">
+            <span>${(bandProfile.structures || []).join(', ')}</span>
+            <span class="arrow">\u2192</span>
+            <span>${(bandProfile.functions || []).join(', ')}</span>
+          </div>
+          <div style="margin-top:0.5rem;">
+            <div style="font-size:0.7rem;color:var(--text-dim);margin-bottom:0.3rem;">PRIMARY CODES</div>
+            ${(bandProfile.primary_codes || []).map(c => `<span class="dsm-code-badge">${c}</span>`).join('')}
+          </div>
+          ${bandProfile.secondary_codes?.length ? `
+          <div style="margin-top:0.4rem;">
+            <div style="font-size:0.7rem;color:var(--text-dim);margin-bottom:0.3rem;">SECONDARY CODES</div>
+            ${bandProfile.secondary_codes.map(c => `<span class="dsm-code-badge secondary">${c}</span>`).join('')}
+          </div>` : ''}
+        </div>
+        ` : `
+        <div class="detail-section detail-dsm5">
+          <h3>Band Profile \u2014 ${band.id}</h3>
+          <div style="color:var(--text-dim);font-size:0.8rem;">No DSM-5 band profile for ${band.zone} zone bands</div>
+        </div>
+        `}
+        <div class="detail-section detail-dsm5">
+          <h3>Diagnostic Clusters</h3>
+          ${Object.entries(clusters).map(([key, cl]) => {
+            const bandHasCluster = dsmTechniques.some(t => t.tara?.dsm5?.cluster === key);
+            if (!bandHasCluster && !bandProfile) return '';
+            return `<span class="dsm-cluster-badge" style="background:${cl.color}22;color:${cl.color};border:1px solid ${cl.color}44;">${cl.label}</span>`;
+          }).join('')}
+          ${!dsmTechniques.length && !bandProfile ? '<div style="color:var(--text-dim);font-size:0.8rem;">No cluster assignments</div>' : ''}
+        </div>
+        ${dsmTechniques.length > 0 ? `
+        <div class="detail-section detail-dsm5 full-width">
+          <h3>Technique DSM-5 Mappings (${dsmTechniques.length})</h3>
+          ${dsmTechniques.map(t => {
+            const d5 = t.tara.dsm5;
+            const cl = clusters[d5.cluster];
+            return `
+            <div class="dsm-technique-row">
+              <div class="dt-name">${t.id}: ${t.attack}</div>
+              <div class="dt-meta">
+                Risk: <strong>${d5.risk_class || 'N/A'}</strong>
+                ${cl ? ` \u00b7 Cluster: <span style="color:${cl.color}">${cl.label}</span>` : ''}
+                ${d5.niss_correlation ? ` \u00b7 NISS: ${d5.niss_correlation}` : ''}
+              </div>
+              <div style="margin-top:0.25rem;">
+                ${(d5.primary || []).map(c => `<span class="dsm-code-badge" title="${c.name}">${c.code}</span>`).join('')}
+                ${(d5.secondary || []).map(c => `<span class="dsm-code-badge secondary" title="${c.name}">${c.code}</span>`).join('')}
+              </div>
+              ${d5.pathway ? `<div class="dt-meta" style="margin-top:0.2rem;">${d5.pathway}</div>` : ''}
+            </div>`;
+          }).join('')}
+        </div>
+        ` : ''}
+        <div class="detail-section detail-dsm5 full-width">
+          <h3>NISS \u2194 DSM-5 Bridge</h3>
+          <table class="niss-bridge-table">
+            <thead><tr><th>NISS Metric</th><th>Risk Domain</th><th>Primary Clusters</th><th>DSM Chapters</th></tr></thead>
+            <tbody>
+              ${Object.entries(bridge).map(([metric, b]) => `
+                <tr>
+                  <td><strong>${metric}</strong></td>
+                  <td>${b.risk_domain}</td>
+                  <td>${(b.primary_clusters || []).map(c => {
+                    const cl = clusters[c];
+                    return cl ? `<span style="color:${cl.color}">${cl.label}</span>` : c;
+                  }).join(', ')}</td>
+                  <td style="font-size:0.7rem;">${(b.dsm_chapters || []).join(', ')}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      ` : ''}
     `;
 
     this.el.classList.add('visible');
     document.getElementById('detail-back').addEventListener('click', () => this.hide());
     document.addEventListener('keydown', this._escHandler = (e) => {
       if (e.key === 'Escape') this.hide();
+    });
+
+    // Tab switching
+    this.el.querySelectorAll('.detail-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetPanel = tab.dataset.tab;
+        this.el.querySelectorAll('.detail-tab').forEach(t => {
+          t.classList.remove('active', 'active-green', 'active-amber');
+        });
+        this.el.querySelectorAll('.detail-tab-panel').forEach(p => p.classList.remove('active'));
+        if (targetPanel === 'therapeutic') tab.classList.add('active-green');
+        else if (targetPanel === 'dsm5') tab.classList.add('active-amber');
+        else tab.classList.add('active');
+        const panel = this.el.querySelector(`[data-panel="${targetPanel}"]`);
+        if (panel) panel.classList.add('active');
+      });
     });
   }
 
@@ -1340,10 +1823,28 @@ class Tooltip {
     this.el = document.getElementById('tooltip');
   }
 
-  show(band, event) {
+  show(band, event, registrar) {
     const det = band.determinacy;
     const freq = band.dominant_freq_hz;
     const L = formatL(band.L_m);
+
+    // Count therapeutic analogs and DSM codes from registrar
+    let taraHint = '';
+    if (registrar) {
+      const techs = registrar.techniques?.filter(t => t.band_ids?.includes(band.id)) || [];
+      const therapeuticCount = techs.filter(t => t.tara?.clinical?.therapeutic_analog).length;
+      const dsmCodes = new Set();
+      techs.forEach(t => {
+        (t.tara?.dsm5?.primary || []).forEach(c => dsmCodes.add(c.code));
+        (t.tara?.dsm5?.secondary || []).forEach(c => dsmCodes.add(c.code));
+      });
+      if (therapeuticCount > 0 || dsmCodes.size > 0) {
+        const parts = [];
+        if (therapeuticCount > 0) parts.push(therapeuticCount + ' therapeutic analog' + (therapeuticCount !== 1 ? 's' : ''));
+        if (dsmCodes.size > 0) parts.push(dsmCodes.size + ' DSM-5 code' + (dsmCodes.size !== 1 ? 's' : ''));
+        taraHint = `<div class="tt-row"><span class="tt-label">TARA</span><span class="tt-value">${parts.join(' | ')}</span></div>`;
+      }
+    }
 
     this.el.innerHTML = `
       <div class="tt-header">${band.id} \u2014 ${band.name}</div>
@@ -1351,6 +1852,7 @@ class Tooltip {
       <div class="tt-row"><span class="tt-label">L</span><span class="tt-value">${L}</span></div>
       <div class="tt-row"><span class="tt-label">Severity</span><span class="tt-value">${band.severity}</span></div>
       <div class="tt-row"><span class="tt-label">Determinacy</span><span class="tt-value">${det}</span></div>
+      ${taraHint}
       <div class="tt-hint">\u25b8 Click for full detail</div>
     `;
 
@@ -1377,6 +1879,13 @@ class Tooltip {
   const freqPanelInner = document.getElementById('freq-panel-inner');
   const calloutEl = document.getElementById('quantum-callout');
 
+  // Fetch TARA registrar for therapeutic/DSM-5 data
+  let registrarData = null;
+  fetch('/data/qtara-registrar.json')
+    .then(r => r.json())
+    .then(d => { registrarData = d; })
+    .catch(() => {}); // Graceful fallback — security view still works
+
   // Instantiate components
   const hourglass = new HourglassView(container, QIF_DATA);
   const detail = new BandDetailView(detailEl, QIF_DATA);
@@ -1392,9 +1901,21 @@ class Tooltip {
   freqSpectrum.render();
 
   // ── Toolbar ──
+
+  // ── Device group (most prominent) ──
+  const deviceGroup = document.createElement('div');
+  deviceGroup.className = 'toolbar-group';
+  const deviceLabel = document.createElement('span');
+  deviceLabel.className = 'toolbar-group-label';
+  deviceLabel.textContent = 'Device';
+  const deviceSelect = deviceOverlay.createSelect();
+  deviceGroup.appendChild(deviceLabel);
+  deviceGroup.appendChild(deviceSelect);
+
+  // ── Tools group ──
   const attackBtn = document.createElement('button');
   attackBtn.className = 'toolbar-btn';
-  attackBtn.textContent = 'Attack Simulator';
+  attackBtn.innerHTML = '<span class="btn-icon">⚔️</span> Attacks';
   attackBtn.title = 'Simulate attack paths across QIF bands';
   attackBtn.addEventListener('click', () => {
     attackSim.toggle();
@@ -1402,11 +1923,9 @@ class Tooltip {
     if (!attackSim.isOpen) hourglass.clearHighlights();
   });
 
-  const deviceSelect = deviceOverlay.createSelect();
-
   const freqBtn = document.createElement('button');
   freqBtn.className = 'toolbar-btn';
-  freqBtn.textContent = 'Frequency Spectrum';
+  freqBtn.innerHTML = '<span class="btn-icon">📊</span> Spectrum';
   freqBtn.title = 'View operating frequencies for each QIF band';
   freqBtn.addEventListener('click', () => {
     freqSpectrum.toggle();
@@ -1415,10 +1934,19 @@ class Tooltip {
 
   const qToggleEl = quantumToggle.createEl();
 
+  // ── Help button ──
+  const helpBtn = document.createElement('button');
+  helpBtn.className = 'toolbar-btn';
+  helpBtn.innerHTML = '<span class="btn-icon">?</span>';
+  helpBtn.title = 'Show walkthrough';
+  helpBtn.style.padding = '0.45rem 0.6rem';
+  helpBtn.addEventListener('click', () => showWalkthrough());
+
+  toolbar.appendChild(deviceGroup);
   toolbar.appendChild(attackBtn);
-  toolbar.appendChild(deviceSelect);
   toolbar.appendChild(freqBtn);
   toolbar.appendChild(qToggleEl);
+  toolbar.appendChild(helpBtn);
 
   // ── Event wiring ──
 
@@ -1431,13 +1959,14 @@ class Tooltip {
   hourglass.onBandClick = (band) => {
     hint?.classList.add('hidden');
     detail.quantumProven = quantumToggle.isProven;
+    detail.registrar = registrarData;
     detail.show(band);
     tooltip.hide();
   };
 
   // Band hover → tooltip
   hourglass.onBandHover = (band, e) => {
-    tooltip.show(band, e);
+    tooltip.show(band, e, registrarData);
   };
 
   hourglass.onBandLeave = () => {
@@ -1477,6 +2006,31 @@ class Tooltip {
     calloutEl.classList.toggle('visible', isProven);
     detail.quantumProven = isProven;
   };
+
+  // ── Walkthrough ──
+  function showWalkthrough() {
+    document.getElementById('walkthrough').style.display = 'flex';
+  }
+
+  function hideWalkthrough(remember) {
+    document.getElementById('walkthrough').style.display = 'none';
+    if (remember) {
+      try { localStorage.setItem('qif-walkthrough-dismissed', '1'); } catch(e) {}
+    }
+  }
+
+  document.getElementById('walkthrough-dismiss').addEventListener('click', () => hideWalkthrough(false));
+  document.getElementById('walkthrough-skip').addEventListener('click', () => hideWalkthrough(true));
+  document.getElementById('walkthrough').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) hideWalkthrough(false);
+  });
+
+  // Show walkthrough on first visit
+  try {
+    if (!localStorage.getItem('qif-walkthrough-dismissed')) {
+      showWalkthrough();
+    }
+  } catch(e) { showWalkthrough(); }
 })();
 </script>
 </body>
