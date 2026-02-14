@@ -6,14 +6,11 @@ on:
     paths:
       - 'shared/qtara-registrar.json'
       - 'packaging/qtara/**'
-
-permissions:
-  contents: write
-  packages: write
+  workflow_dispatch:
 
 jobs:
-  build-n-publish:
-    name: Build and publish qtara
+  build:
+    name: Build qtara
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -31,24 +28,54 @@ jobs:
     - name: Sync TARA data
       run: python scripts/sync-package-data.py
 
-    - name: Extract version
-      id: version
-      run: |
-        VERSION=$(python -c "import tomllib; print(tomllib.load(open('packaging/qtara/pyproject.toml','rb'))['project']['version'])")
-        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-        echo "tag=qtara-v$VERSION" >> "$GITHUB_OUTPUT"
-
     - name: Build binary wheel and source tarball
       run: |
         cd packaging/qtara
         python -m build
 
-    - name: Publish to PyPI
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+    - name: Check package
       run: |
-        twine upload --skip-existing packaging/qtara/dist/*
+        cd packaging/qtara
+        twine check dist/*
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist-qtara
+        path: packaging/qtara/dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/qtara
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: dist-qtara
+        path: dist/
+
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        packages-dir: dist/
+        skip-existing: true
+
+    - name: Extract version
+      id: version
+      run: |
+        pip install tomllib 2>/dev/null || true
+        VERSION=$(python3 -c "import tomllib; print(tomllib.load(open('packaging/qtara/pyproject.toml','rb'))['project']['version'])")
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+        echo "tag=qtara-v$VERSION" >> "$GITHUB_OUTPUT"
 
     - name: Create GitHub Release
       env:
@@ -57,7 +84,6 @@ jobs:
         TAG="${{ steps.version.outputs.tag }}"
         VERSION="${{ steps.version.outputs.version }}"
 
-        # Check if release already exists
         if gh release view "$TAG" > /dev/null 2>&1; then
           echo "Release $TAG already exists, skipping"
           exit 0
@@ -76,11 +102,5 @@ jobs:
 
         ### PyPI
         https://pypi.org/project/qtara/${VERSION}/
-
-        ### What's included
-        - Full TARA threat registry (71 techniques)
-        - NISS neural impact scoring
-        - STIX 2.1 export
-        - CLI tools
         " \
-          packaging/qtara/dist/*
+          dist/*
