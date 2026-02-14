@@ -3,20 +3,20 @@ import { QIF_VERSION, QIF_BANDS, STATS } from '../lib/qif-constants';
 ---
 
 <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-[var(--color-text-muted)]">
-  <span class="flex items-center gap-2">
+  <a href="/whitepaper/" class="flex items-center gap-2 hover:text-[var(--color-accent-primary)] transition-colors">
     <span class="w-2 h-2 rounded-full bg-[var(--color-accent-primary)]"></span>
     v{QIF_VERSION} Framework
-  </span>
-  <span class="flex items-center gap-2">
+  </a>
+  <a href="/news/" class="flex items-center gap-2 hover:text-[var(--color-accent-secondary)] transition-colors">
     <span class="w-2 h-2 rounded-full bg-[var(--color-accent-secondary)]"></span>
     {STATS.publications} Publications
-  </span>
-  <span class="flex items-center gap-2">
+  </a>
+  <a href="/framework/" class="flex items-center gap-2 hover:text-[var(--color-accent-tertiary)] transition-colors">
     <span class="w-2 h-2 rounded-full bg-[var(--color-accent-tertiary)]"></span>
     {QIF_BANDS} Security Bands
-  </span>
-  <span class="flex items-center gap-2">
+  </a>
+  <a href="/licensing/" class="flex items-center gap-2 hover:text-[var(--color-status-safe)] transition-colors">
     <span class="w-2 h-2 rounded-full bg-[var(--color-status-safe)]"></span>
     Open License
-  </span>
+  </a>
 </div>

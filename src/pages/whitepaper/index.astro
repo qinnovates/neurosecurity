@@ -19,7 +19,7 @@ const stats = getWhitepaperStats();
 
 <PageLayout
   title="QIF Whitepaper v6.0"
-  description="The Quantum Indeterministic Framework — an open security standard for brain-computer interfaces. 99 techniques, 11 bands, 5 neural-specific scoring metrics."
+  description="The Quantum Indeterministic Framework — an open security standard for brain-computer interfaces. 103 techniques, 11 bands, 5 neural-specific scoring metrics."
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
 >
@@ -56,7 +56,7 @@ const stats = getWhitepaperStats();
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "QIF Whitepaper v6.0: An Open Security Standard for Brain-Computer Interfaces",
-        "description": "The Quantum Indeterministic Framework — 99 techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.",
+        "description": "The Quantum Indeterministic Framework — 103 techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.",
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-13",
@@ -71,7 +71,7 @@ const stats = getWhitepaperStats();
           An Open Security Standard for Brain-Computer Interfaces
         </h1>
         <p class="text-lg text-[var(--color-text-muted)] mb-6">
-          99 catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics.<br />
+          103 catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics.<br />
           One framework to map, measure, and mitigate threats to the human brain.
         </p>
         <div class="flex flex-wrap items-center gap-3 mb-4">
@@ -233,7 +233,7 @@ const stats = getWhitepaperStats();
             Seven bands are <strong>neural</strong> (N7 Neocortex through N1 Spinal Cord), representing biological tissue with distinct functional properties and vulnerability profiles. One band is the <strong>interface</strong> (I0), the electrode-tissue boundary where biological signals are converted to digital data &mdash; and where the highest concentration of techniques converges. Three bands are <strong>synthetic</strong> (S1 Analog through S3 Radio/Wireless), covering the electronic processing and communication chain.
           </p>
           <p>
-            The hourglass shape is deliberate. I0, the neural interface band, constitutes the architectural chokepoint. All signals must traverse this point. With 52 of the 99 catalogued techniques targeting this band, it represents over half of the total threat surface. Securing I0 is the single highest-leverage investment in BCI safety.
+            The hourglass shape is deliberate. I0, the neural interface band, constitutes the architectural chokepoint. All signals must traverse this point. With 53 of the 103 catalogued techniques targeting this band, it represents over half of the total threat surface. Securing I0 is the single highest-leverage investment in BCI safety.
           </p>
         </div>
 
@@ -533,6 +533,8 @@ const stats = getWhitepaperStats();
           <ul>
             <li><strong>FDA 21 CFR Part 820 / 524B</strong> &mdash; Quality system requirements and cybersecurity expectations for medical devices</li>
             <li><strong>EU Medical Device Regulation (MDR) 2017/745</strong> &mdash; Post-market surveillance and clinical evaluation requirements</li>
+            <li><strong>HIPAA</strong> &mdash; Neural signals constitute Protected Health Information (PHI) when linked to an individual. Raw EEG, decoded intentions, and cognitive state inferences all fall under the Security Rule and Breach Notification Rule. See the full <a href="/governance/REGULATORY_COMPLIANCE/">Regulatory Compliance Guide</a> for neural data classification</li>
+            <li><strong>GDPR Article 9</strong> &mdash; Neural data is special category data (health data) under EU regulation, requiring explicit consent for processing. The right to erasure poses unique challenges for neural recordings</li>
             <li><strong>ISO 14971</strong> &mdash; Risk management for medical devices, mapped to NISS severity levels</li>
             <li><strong>IEC 62304</strong> &mdash; Software lifecycle for medical devices, with Runemate targeting Class C certification</li>
           </ul>

@@ -15112,6 +15112,394 @@
         ],
         "note": "Capstone technique: S-domain reconnaissance feeds all core BCI attack tactics with personalized, pre-calibrated attack parameters"
       }
+    },
+    {
+      "id": "QIF-T0100",
+      "attack": "Neural steganographic encoding (inaudible audio watermarking for covert neural command/biofingerprint channel)",
+      "tactic": "QIF-S.CH",
+      "bands": "S3→S1→I0→N1→N4→N7",
+      "band_ids": ["S3", "S1", "I0", "N1", "N4", "N7"],
+      "coupling": "ACOUSTIC",
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No",
+      "sources": [
+        "Deshotels 2014 (Inaudible sound as a covert channel)",
+        "Carrara 2015 (Ultrasonic data transmission)",
+        "Fletcher 1940 (Psychoacoustic masking curves)",
+        "Galambos 1981 (40 Hz auditory steady-state response)",
+        "Persinger 2003 (Infrasonic effects on vestibular system)",
+        "Chaieb et al. 2015 (Neuropsychologia, binaural beat effects)"
+      ],
+      "status": "PLAUSIBLE",
+      "severity": "low",
+      "ui_category": "CI",
+      "notes": "Embedding data in audio signals below the human hearing threshold (>18 kHz ultrasonic or <20 Hz infrasonic) or within psychoacoustic masking bands of audible content. The encoded signal is imperceptible to the listener but decodable by a receiver with knowledge of the encoding scheme. In the adversarial case, the hidden channel carries covert commands, tracking identifiers, or subliminal cues targeting auditory processing pathways (e.g., triggering pre-conditioned responses or influencing decision-making). In the protective case, the same physics enables steganographic embedding of neural biofingerprints for authentication — the signal evokes a measurable auditory evoked potential (AEP) unique to the individual's cochlear geometry and auditory cortex response, functioning as a biometric watermark. Initial enrollment/profiling phase required to capture individual's unique AEP response. Practical constraints include target device's ability to accurately reproduce encoded frequencies and effective transmission range (1-10m). Psychoacoustic masking threshold follows: T_mask(f) = L_masker - (sf × |f - f_masker|) where sf is the spreading factor (~25 dB/Bark on upper slope, ~10 dB/Bark on lower slope). Auditory steady-state response (ASSR) at 40 Hz provides the mechanism for neural biofingerprint verification. Proves TARA's cross-domain dual-use thesis: same physics operates as attack vector, defense mechanism, and therapeutic tool.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2100",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:L/CV:P/RV:F/NP:N",
+        "score": 2.6,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": ["QIF-T0072", "QIF-T0073", "QIF-T0074", "QIF-T0079"],
+        "secondary_tactics": ["QIF-S.CH", "QIF-S.FP", "QIF-N.SC"]
+      },
+      "tara": {
+        "mechanism": "Inaudible audio carriers (ultrasonic 18-22 kHz or infrasonic <20 Hz) or psychoacoustically masked signals embedded within audible content, propagating through consumer audio hardware to auditory nerve and cortex",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Auditory brainstem response (ABR) audiometry, ASSR-based hearing threshold estimation, tinnitus masking therapy",
+          "conditions": [
+            "ABR audiometry in infants and non-verbal patients",
+            "ASSR hearing threshold estimation",
+            "tinnitus masking therapy (sound-based tinnitus reduction)",
+            "binaural beat therapy for anxiety and sleep disorders (Chaieb et al. 2015)",
+            "cochlear implant fitting and calibration",
+            "neural authentication for locked-in syndrome patients (AEP-based identity verification)"
+          ],
+          "fda_status": "cleared",
+          "evidence_level": "RCT",
+          "safe_parameters": "Therapeutic audio at safe SPL (<85 dB); ultrasonic carriers within OSHA limits; informed consent for all stimulation protocols",
+          "sources": [
+            "Galambos 1981 (40 Hz ASSR)",
+            "Chaieb et al. 2015 (Neuropsychologia, binaural beats)",
+            "Kaveh et al. 2020 (IEEE Trans Biomed Eng, in-ear EEG)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": ["ultrasonic_emission_detection", "psychoacoustic_analysis", "AEP_enrollment_audit", "data_encryption_status"],
+          "regulations": ["HIPAA (if health/biometric data derived)", "GDPR Art. 9 (biometric data)", "FCC Part 15 (ultrasonic emissions)"],
+          "data_classification": "sensitive_biometric",
+          "safety_ceiling": "Audio emissions within consumer SPL limits; informed consent for any biometric enrollment; AEP data encrypted at rest and in transit"
+        },
+        "engineering": {
+          "coupling": ["acoustic"],
+          "parameters": {
+            "carrier_frequency_kHz": "18-22 (ultrasonic) or 0.002-0.020 (infrasonic)",
+            "data_rate_bps": "50-200 (ultrasonic), up to 1000 (spread-spectrum)",
+            "detection_range_m": "1-10",
+            "SNR_requirement_dB": ">10",
+            "encoding_schemes": "FSK, OFDM, spread-spectrum"
+          },
+          "hardware": ["consumer_speaker", "consumer_microphone", "DSP_processor"],
+          "detection": "Spectral analysis of audio output for ultrasonic/infrasonic components, psychoacoustic masking anomaly detection, AEP baseline comparison"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S→I0→N pathway exists but covert channel alone does not induce diagnostic-level effects",
+          "niss_correlation": "CG:L — subliminal processing; no tissue damage or neuroplastic change"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:P/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+        "supplemental": "S:N/AU:N/R:A/V:D",
+        "gap_group": 1,
+        "gap_summary": "Covert channel partially captured by CVSS confidentiality; neural biofingerprint and subliminal cognitive dimensions not expressible"
+      },
+      "feeds_into": {
+        "targets": ["QIF-S.CH", "QIF-S.FP", "QIF-N.SC"],
+        "note": "Enables covert command channels and biometric authentication; chains with T0072-T0074 audio techniques"
+      }
+    },
+    {
+      "id": "QIF-T0101",
+      "attack": "Multi-modal keystroke inference via acoustic-optical-RF fusion (password/input recovery without mic/camera permissions)",
+      "tactic": "QIF-S.SC",
+      "bands": "S3→S2→S1",
+      "band_ids": ["S3", "S2", "S1"],
+      "coupling": "ACOUSTIC+ELECTROMAGNETIC+OPTICAL",
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No",
+      "sources": [
+        "Compagno et al. 2017 (Don't Skype & Type: Acoustic Eavesdropping in VoIP)",
+        "Ali et al. 2015 (WiKey: Keystroke Recognition Using WiFi, MobiCom)",
+        "Spreitzer et al. 2018 (Systematic classification of side-channel attacks on mobile devices, ACM Computing Surveys)",
+        "Zhou et al. 2018 (WiFi CSI human activity recognition survey)",
+        "Giancardo et al. 2016 (Keystroke dynamics for Parkinson's, Scientific Reports)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "medium",
+      "ui_category": "EX",
+      "notes": "Fusion of three independent side channels from a single mobile device to reconstruct user input without requiring microphone, camera, or accessibility permissions. (1) Keystroke acoustic emanations: each key press produces a distinct acoustic signature (1-20 kHz broadband impulse, classifiable via MFCC + CNN at ~95% accuracy on laptops, lower but still viable on touchscreens). (2) Screen optical emission: display luminance changes of ~0.1-1% per character insertion detectable by ambient light sensor at <0.01 lux sensitivity. (3) WiFi CSI: finger movements modulate OFDM subcarrier phase — σ²_phase > threshold indicates keystroke events. Individual channel accuracy: 60-70% acoustic, 40-50% optical, 55-65% WiFi CSI. Fused via CRF/LSTM with temporal cross-correlation alignment: >95% accuracy with 30+ training samples per key. Critical insight: apps requesting speaker + WiFi permissions (trivially granted) achieve side-channel equivalent to camera + microphone (heavily restricted). Permission model does not reflect actual threat.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2101",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:L/CV:P/RV:F/NP:N",
+        "score": 2.6,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": ["QIF-T0080", "QIF-T0085", "QIF-T0096", "QIF-T0103"],
+        "secondary_tactics": ["QIF-S.SC", "QIF-S.RP", "QIF-C.EX"]
+      },
+      "tara": {
+        "mechanism": "Temporal fusion of acoustic keystroke emanations, screen optical luminance changes, and WiFi CSI phase variance to reconstruct typed input including passwords",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Sensor fusion for motor disorder assessment and digital biomarker collection",
+          "conditions": [
+            "early Parkinson's detection via keystroke rhythm changes (Giancardo et al. 2016)",
+            "tremor characterization via mobile phone sensor fusion",
+            "cognitive decline monitoring via screen interaction patterns (Vaportzis et al. 2017)",
+            "depression screening via touchscreen pressure/timing analysis (Zulueta et al. 2018)",
+            "WiFi CSI contactless fall detection in elder care (Wang et al. 2017)"
+          ],
+          "fda_status": "investigational",
+          "evidence_level": "cohort",
+          "safe_parameters": "Passive sensor monitoring only; no stimulation; informed consent for behavioral data collection; data anonymized at aggregation",
+          "sources": [
+            "Giancardo et al. 2016 (Scientific Reports, keystroke Parkinson's)",
+            "Zulueta et al. 2018 (J Med Internet Res, depression digital biomarkers)",
+            "Wang et al. 2017 (WiGest, WiFi-based gesture recognition)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": ["side_channel_emission_audit", "permission_scope_review", "multi_sensor_correlation_detection"],
+          "regulations": ["HIPAA (if health data inferred)", "GDPR Art. 9 (behavioral biometrics)", "FTC (deceptive data practices)"],
+          "data_classification": "PII",
+          "safety_ceiling": "Side-channel monitoring requires explicit informed consent; fused biometric/behavioral data subject to data minimization requirements"
+        },
+        "engineering": {
+          "coupling": ["acoustic", "electromagnetic", "optical"],
+          "parameters": {
+            "acoustic_bandwidth_Hz": "1-20000",
+            "optical_sensitivity_lux": "<0.01",
+            "wifi_csi_subcarriers": "52-256",
+            "wifi_csi_rate_Hz": "100-1000",
+            "fusion_accuracy_percent": ">95 (with 30+ training samples/key)",
+            "individual_channel_accuracy": "60-70% acoustic, 40-50% optical, 55-65% CSI"
+          },
+          "hardware": ["device_microphone_or_nearby_mic", "ambient_light_sensor", "wifi_chipset_with_CSI"],
+          "detection": "Anomalous correlation between acoustic/optical/RF sensors, unexpected ambient light sensor polling frequency, WiFi CSI extraction outside normal network operations"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:L/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "Multi-modal side-channel partially captured by CVSS confidentiality; behavioral biometric inference and permission model gap not expressible"
+      },
+      "feeds_into": {
+        "targets": ["QIF-C.EX", "QIF-S.RP"],
+        "note": "Password recovery enables downstream account compromise; behavioral data feeds cognitive profiling"
+      }
+    },
+    {
+      "id": "QIF-T0102",
+      "attack": "Passive facial geometry estimation via display-as-illuminator inverse photometry (presence/orientation detection without camera)",
+      "tactic": "QIF-S.SC",
+      "bands": "S3→S2",
+      "band_ids": ["S3", "S2"],
+      "coupling": "OPTICAL",
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No",
+      "sources": [
+        "Yang et al. 2016 (Screen light PPG for heart rate)",
+        "Davis et al. 2014 (Visual Microphone, SIGGRAPH)",
+        "de Haan & Jeanne 2013 (Robust pulse rate from chrominance-based rPPG)",
+        "Spreitzer et al. 2018 (Ambient light sensor side channels, ACM Computing Surveys)"
+      ],
+      "status": "SPECULATIVE",
+      "severity": "low",
+      "ui_category": "CI",
+      "notes": "The device display functions as a structured light source — each frame emits a known photon distribution. Reflected light from the user's face is captured by the ambient light sensor (ALS). The known spectral emission S(x,y,λ) and measured reflected irradiance E_sensor = ∫∫ ρ(x,y)cos(θ)S(x,y,λ)/r² dA constrain an inverse photometry problem. CRITICAL FEASIBILITY CAVEAT: A single ALS integrates the entire reflected light field into one scalar value, making 3D geometric reconstruction an ill-posed inverse problem. With current single-sensor hardware, achievable resolution is limited to basic presence detection, head orientation, and coarse proximity estimation — NOT high-fidelity facial geometry. Identity matching might be feasible only against a small template library with strong a priori constraints. Future multi-pixel ALS or multi-sensor arrays could significantly improve reconstruction fidelity. Despite geometric limitations, the same ALS reliably detects physiological signals: pulse-modulated skin reflectance for PPG heart rate (demonstrated in Samsung Galaxy phones) and skin color variations for SpO2 estimation.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2102",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:P/RV:F/NP:N",
+        "score": 1.4,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": ["QIF-T0101", "QIF-T0096"],
+        "secondary_tactics": ["QIF-S.SC", "QIF-S.FP"]
+      },
+      "tara": {
+        "mechanism": "Display photon emission reflects off user's face; ambient light sensor captures aggregate reflected irradiance; inverse photometry estimates facial presence, orientation, and physiological signals",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Photoplethysmography (PPG) via screen light for contactless vital sign monitoring",
+          "conditions": [
+            "contactless heart rate monitoring via screen-based PPG (Samsung Galaxy, demonstrated)",
+            "remote SpO2 estimation via skin color variation (de Haan & Jeanne 2013)",
+            "neonatal jaundice screening via skin color analysis from reflected screen light",
+            "facial affect recognition for depression monitoring without camera",
+            "dermatological screening via structured light skin assessment"
+          ],
+          "fda_status": "cleared",
+          "evidence_level": "RCT",
+          "safe_parameters": "Display at normal brightness; passive optical sensing only; no UV/IR emission beyond standard display spectrum",
+          "sources": [
+            "Yang et al. 2016 (screen-based PPG)",
+            "de Haan & Jeanne 2013 (chrominance rPPG)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "informed",
+          "monitoring": ["ambient_light_sensor_polling_rate_audit", "screen_content_correlation_detection"],
+          "regulations": ["GDPR Art. 9 (biometric/health data)", "HIPAA (if health data derived)", "FTC (deceptive sensor practices)"],
+          "data_classification": "PII",
+          "safety_ceiling": "Normal display operation; passive sensing; informed consent for any biometric or health data derivation"
+        },
+        "engineering": {
+          "coupling": ["optical"],
+          "parameters": {
+            "display_luminance_nits": "500-1000",
+            "spectral_range_nm": "430-660 (RGB primaries)",
+            "facial_reflectance_albedo": "0.1-0.4",
+            "sensor_face_distance_cm": "20-50",
+            "ALS_sensitivity_lux": "0.001",
+            "ALS_sampling_rate_Hz": "10-200",
+            "achievable_resolution": "presence/orientation/proximity (single ALS); ~10-20 landmarks (multi-sensor, speculative)"
+          },
+          "hardware": ["device_display", "ambient_light_sensor"],
+          "detection": "Anomalous ALS polling frequency, screen content modulation patterns inconsistent with UI rendering, correlation between display changes and ALS readings"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:L/AC:H/AT:P/PR:L/UI:P/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+        "supplemental": "S:N/AU:N/R:A/V:D",
+        "gap_group": 1,
+        "gap_summary": "Ambient light sensor side channel partially captured by CVSS; physiological data extraction dimension not expressible"
+      },
+      "feeds_into": {
+        "targets": ["QIF-S.FP", "QIF-S.RP"],
+        "note": "Presence and physiological data feed identity profiling and behavioral reconnaissance"
+      }
+    },
+    {
+      "id": "QIF-T0103",
+      "attack": "WiFi CSI respiratory and biometric inference (physiological surveillance via Channel State Information without dedicated sensors)",
+      "tactic": "QIF-S.HV",
+      "bands": "S3→S2",
+      "band_ids": ["S3", "S2"],
+      "coupling": "ELECTROMAGNETIC",
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No",
+      "sources": [
+        "Liu et al. 2015 (WiFi respiration monitoring)",
+        "Ali et al. 2015 (WiKey: keystroke recognition from WiFi CSI, MobiCom)",
+        "Wang et al. 2016 (WiFi-based gait recognition)",
+        "Zeng et al. 2020 (WiFi CSI activity recognition survey, IEEE Comms Surveys & Tutorials)",
+        "Ma et al. 2019 (WiFi sensing with CSI: a survey, ACM Computing Surveys)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "medium",
+      "ui_category": "EX",
+      "notes": "WiFi Channel State Information (CSI) encodes the multipath propagation environment including reflections from the human body. Human respiration modulates body radar cross-section at 0.1-0.5 Hz, creating periodic CSI fluctuations. Gait produces characteristic Doppler shifts (f_d = 2v×cos(θ)/λ ≈ 40 Hz at 5 GHz for walking speed ~1.2 m/s). Body composition affects overall multipath profile. An adversary with WiFi CSI access — obtainable via standard chipset APIs (Intel 5300, Atheros, ESP32) — can extract respiratory rate (±1 bpm at 3m), gait identity (93% single-person), and presence detection without any sensors beyond the WiFi radio. Respiratory rate = PHI under HIPAA (45 CFR 160.103) when linked to individual. Gait biometric = special category data under GDPR Art. 9. CRITICAL REGULATORY GAP: No consent mechanism exists for incidental WiFi CSI health data collection. A router collecting CSI for 'network optimization' simultaneously collects respiratory data from everyone in range. Phase shift from respiration: Δφ = 4π×Δd/λ ≈ 0.4-1.2 radians at 5 GHz (chest displacement 4-12mm, 8-24mm round trip). CSI matrix: H(f,t) ∈ C^(N_tx × N_rx × N_sub). Emotional state inference via breathing pattern irregularity is an active but less robust research area compared to basic respiratory/gait sensing.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2103",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:N/CG:N/CV:P/RV:F/NP:N",
+        "score": 1.4,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": ["QIF-T0080", "QIF-T0081", "QIF-T0088", "QIF-T0093", "QIF-T0101"],
+        "secondary_tactics": ["QIF-S.HV", "QIF-S.RP", "QIF-S.FP"]
+      },
+      "tara": {
+        "mechanism": "WiFi OFDM subcarrier amplitude and phase modulation by human body movement, respiration, and gait; CSI extraction from standard WiFi chipsets enables contactless physiological surveillance",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Contactless vital sign monitoring for sleep studies, elder care, and post-surgical recovery",
+          "conditions": [
+            "contactless sleep apnea detection (Liu et al. 2015, demonstrated)",
+            "elder care fall detection and activity monitoring (Wang et al. 2017)",
+            "post-surgical respiration monitoring without chest bands (burn patients)",
+            "PTSD and anxiety monitoring via nocturnal breathing pattern analysis",
+            "COPD exacerbation early warning via respiratory pattern changes",
+            "Parkinson's gait analysis for medication timing optimization"
+          ],
+          "fda_status": "investigational",
+          "evidence_level": "cohort",
+          "safe_parameters": "Standard WiFi power levels (100 mW EIRP); passive sensing only; no additional RF emission; within FCC Part 15 limits",
+          "sources": [
+            "Liu et al. 2015 (WiFi respiration, demonstrated ±1 bpm)",
+            "Wang et al. 2017 (WiFi fall detection)",
+            "Zeng et al. 2020 (IEEE survey)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": ["CSI_extraction_audit", "respiratory_data_access_log", "multi_person_anonymization_check"],
+          "regulations": ["HIPAA (respiratory rate = PHI when linked to individual)", "GDPR Art. 9 (health data, behavioral biometrics)", "FCC Part 15 (WiFi emissions)", "proposed neurorights legislation (cognitive state inference)"],
+          "data_classification": "PHI",
+          "safety_ceiling": "Standard WiFi operation; informed consent for health data derivation; data retention limits; anonymization for incidental collection; no CSI health data without explicit opt-in"
+        },
+        "engineering": {
+          "coupling": ["electromagnetic"],
+          "parameters": {
+            "wifi_frequency_GHz": "2.4 or 5",
+            "wavelength_cm": "12.5 (2.4 GHz) or 6 (5 GHz)",
+            "respiratory_phase_shift_rad": "0.4-1.2 (at 5 GHz)",
+            "gait_doppler_Hz": "~40 (at 5 GHz, walking)",
+            "respiration_accuracy_bpm": "±1 at 3m",
+            "gait_id_accuracy_percent": "93 (single-person), 78 (multi-person)",
+            "CSI_subcarriers": "52 (802.11n) to 256 (802.11ac)",
+            "CSI_sampling_rate_Hz": "100-1000",
+            "detection_range_m": "1-8 (respiration), 1-5 (gait)"
+          },
+          "hardware": ["standard_wifi_chipset", "Intel_5300_NIC_or_ESP32_or_Nexmon"],
+          "detection": "CSI extraction outside normal network operations, unexpected CSI logging, respiratory-band filtering (0.1-0.5 Hz) in WiFi processing pipeline"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — respiratory/gait data does not traverse neural pathway. Chains to N-domain if respiratory patterns used for cognitive state inference (stress detection).",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping. CV:P reflects health data collection without consent."
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
+        "supplemental": "S:N/AU:Y/R:A/V:D",
+        "gap_group": 2,
+        "gap_summary": "WiFi CSI physiological surveillance partially captured by CVSS confidentiality; health privacy (HIPAA PHI), behavioral biometric, and regulatory consent gap dimensions not expressible in CVSS"
+      },
+      "feeds_into": {
+        "targets": ["QIF-S.HV", "QIF-S.RP", "QIF-S.FP", "QIF-D.HV"],
+        "note": "Respiratory and gait data feed health surveillance, behavioral profiling, and identity fingerprinting; chains to cognitive state inference via breathing pattern analysis"
+      }
     }
   ],
   "deprecated": [

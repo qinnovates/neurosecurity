@@ -6,7 +6,7 @@ import TrustBar from '../components/TrustBar.astro';
 import PublicationCard from '../components/PublicationCard.astro';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '../lib/utils';
-import { HOURGLASS_BANDS, STATS, PILLARS } from '../lib/qif-constants';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS } from '../lib/qif-constants';
 import HeroParticles from '../components/HeroParticles';
 import '../styles/global.css';
 
@@ -30,7 +30,7 @@ const posts = (await getCollection('blog'))
     <HeroParticles client:idle />
 
     <div class="relative z-10 text-center max-w-5xl mx-auto pt-24">
-      <p class="text-sm font-bold tracking-[0.2em] uppercase text-[#d4a017] mb-6">
+      <p class="text-sm font-bold tracking-[0.2em] uppercase mb-6 bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
         Open Standards for the Governance of Neurotechnology
       </p>
 
@@ -159,8 +159,7 @@ const posts = (await getCollection('blog'))
     <!-- Static hourglass visualization (Three.js island will enhance) -->
     <div class="max-w-md mx-auto space-y-2 reveal reveal-stagger" id="hourglass-preview">
       {HOURGLASS_BANDS.map((band, i) => {
-        const widths = [90, 82, 72, 62, 55, 45, 38, 30, 45, 58, 75];
-        const width = widths[i];
+        const width = HOURGLASS_WIDTHS[i];
         return (
           <div class="flex items-center gap-3 group cursor-pointer" title={band.description}>
             <span class="text-xs text-[var(--color-text-faint)] w-8 text-right font-mono">{band.id}</span>

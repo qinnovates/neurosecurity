@@ -1,175 +1,163 @@
-import { useRef, useMemo, useCallback } from 'react';
+import { useRef, useMemo, useCallback, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const PARTICLE_COUNT = 120;
-const FIELD_SIZE = 12;
-const CONNECTION_DISTANCE = 2.5;
+const SEPARATION = 100;
+const AMOUNTX = 50;
+const AMOUNTY = 50;
 
-/** Single particle with drift behavior */
-function Particles() {
-  const meshRef = useRef<THREE.InstancedMesh>(null);
+function WavePoints() {
+  const pointsRef = useRef<THREE.Points>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const { viewport } = useThree();
+  const countRef = useRef(0);
+  const { camera } = useThree();
+  const numParticles = AMOUNTX * AMOUNTY;
 
-  // Generate initial positions and velocities
-  const { positions, velocities, colors } = useMemo(() => {
-    const pos = new Float32Array(PARTICLE_COUNT * 3);
-    const vel = new Float32Array(PARTICLE_COUNT * 3);
-    const col = new Float32Array(PARTICLE_COUNT * 3);
+  const { positions, scales, colors } = useMemo(() => {
+    const pos = new Float32Array(numParticles * 3);
+    const sc = new Float32Array(numParticles);
+    const col = new Float32Array(numParticles * 3);
 
-    const palette = [
-      new THREE.Color('#3b82f6'), // blue
-      new THREE.Color('#06b6d4'), // teal
-      new THREE.Color('#8b5cf6'), // violet
-      new THREE.Color('#10b981'), // green
-    ];
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3;
-      pos[i3] = (Math.random() - 0.5) * FIELD_SIZE;
-      pos[i3 + 1] = (Math.random() - 0.5) * FIELD_SIZE;
-      pos[i3 + 2] = (Math.random() - 0.5) * 4;
-
-      vel[i3] = (Math.random() - 0.5) * 0.003;
-      vel[i3 + 1] = (Math.random() - 0.5) * 0.003;
-      vel[i3 + 2] = (Math.random() - 0.5) * 0.001;
-
-      const c = palette[Math.floor(Math.random() * palette.length)];
-      col[i3] = c.r;
-      col[i3 + 1] = c.g;
-      col[i3 + 2] = c.b;
-    }
-
-    return { positions: pos, velocities: vel, colors: col };
-  }, []);
-
-  // Lines for connections
-  const lineGeo = useRef<THREE.BufferGeometry>(null);
-  const linePositions = useMemo(() => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 6), []);
-  const lineColors = useMemo(() => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 6), []);
-
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-
-  // Track mouse for parallax
-  const onPointerMove = useCallback((e: MouseEvent) => {
-    mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseRef.current.y = -(e.clientY / window.innerHeight - 0.5) * 2;
-  }, []);
-
-  useMemo(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('pointermove', onPointerMove, { passive: true });
-    }
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('pointermove', onPointerMove);
+    let i = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        pos[i * 3] = ix * SEPARATION - (AMOUNTX * SEPARATION) / 2;
+        pos[i * 3 + 1] = 0;
+        pos[i * 3 + 2] = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
+        sc[i] = 1;
+        col[i * 3] = 0.23;
+        col[i * 3 + 1] = 0.51;
+        col[i * 3 + 2] = 0.96;
+        i++;
       }
-    };
+    }
+
+    return { positions: pos, scales: sc, colors: col };
+  }, [numParticles]);
+
+  // Color stops for Y-based gradient
+  const colorLow = useMemo(() => new THREE.Color('#0f172a'), []);   // deep navy (troughs)
+  const colorMid = useMemo(() => new THREE.Color('#2563eb'), []);   // blue (neutral)
+  const colorHigh = useMemo(() => new THREE.Color('#7dd3fc'), []);  // sky blue (peaks)
+  const tmpColor = useMemo(() => new THREE.Color(), []);
+
+  const onPointerMove = useCallback((e: PointerEvent) => {
+    mouseRef.current.x = e.clientX - window.innerWidth / 2;
+    mouseRef.current.y = e.clientY - window.innerHeight / 2;
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    return () => window.removeEventListener('pointermove', onPointerMove);
   }, [onPointerMove]);
 
-  useFrame((_, delta) => {
-    if (!meshRef.current || !lineGeo.current) return;
-    const dt = Math.min(delta, 0.05);
+  useFrame(() => {
+    if (!pointsRef.current) return;
 
-    let lineIdx = 0;
+    camera.position.x += (mouseRef.current.x * 0.5 - camera.position.x) * 0.05;
+    camera.position.y += (-mouseRef.current.y * 0.5 + 350 - camera.position.y) * 0.05;
+    camera.lookAt(0, 0, 0);
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3;
+    const geo = pointsRef.current.geometry;
+    const posAttr = geo.attributes.position;
+    const scaleAttr = geo.attributes.scale;
+    const colAttr = geo.attributes.color;
+    const count = countRef.current;
 
-      // Update position
-      positions[i3] += velocities[i3] * 60 * dt;
-      positions[i3 + 1] += velocities[i3 + 1] * 60 * dt;
-      positions[i3 + 2] += velocities[i3 + 2] * 60 * dt;
+    let i = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        const y =
+          Math.sin((ix + count) * 0.3) * 50 +
+          Math.sin((iy + count) * 0.5) * 50;
 
-      // Wrap around field
-      const half = FIELD_SIZE / 2;
-      if (positions[i3] > half) positions[i3] = -half;
-      if (positions[i3] < -half) positions[i3] = half;
-      if (positions[i3 + 1] > half) positions[i3 + 1] = -half;
-      if (positions[i3 + 1] < -half) positions[i3 + 1] = half;
-      if (positions[i3 + 2] > 2) positions[i3 + 2] = -2;
-      if (positions[i3 + 2] < -2) positions[i3 + 2] = 2;
+        posAttr.array[i * 3 + 1] = y;
 
-      // Mouse parallax
-      const mx = mouseRef.current.x * 0.3;
-      const my = mouseRef.current.y * 0.3;
+        scaleAttr.array[i] =
+          (Math.sin((ix + count) * 0.3) + 1) * 20 +
+          (Math.sin((iy + count) * 0.5) + 1) * 20;
 
-      dummy.position.set(
-        positions[i3] + mx,
-        positions[i3 + 1] + my,
-        positions[i3 + 2]
-      );
-      const scale = 0.02 + Math.random() * 0.005;
-      dummy.scale.setScalar(scale);
-      dummy.updateMatrix();
-      meshRef.current.setMatrixAt(i, dummy.matrix);
+        // Map Y position (-100 to 100) to color
+        const t = (y + 100) / 200;
+        const clamped = Math.max(0, Math.min(1, t));
 
-      // Connection lines
-      for (let j = i + 1; j < PARTICLE_COUNT; j++) {
-        const j3 = j * 3;
-        const dx = positions[i3] - positions[j3];
-        const dy = positions[i3 + 1] - positions[j3 + 1];
-        const dz = positions[i3 + 2] - positions[j3 + 2];
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-        if (dist < CONNECTION_DISTANCE) {
-          const alpha = 1 - dist / CONNECTION_DISTANCE;
-          const li = lineIdx * 6;
-          linePositions[li] = positions[i3] + mx;
-          linePositions[li + 1] = positions[i3 + 1] + my;
-          linePositions[li + 2] = positions[i3 + 2];
-          linePositions[li + 3] = positions[j3] + mx;
-          linePositions[li + 4] = positions[j3 + 1] + my;
-          linePositions[li + 5] = positions[j3 + 2];
-
-          // Blend colors
-          const a = alpha * 0.15;
-          lineColors[li] = colors[i3] * a;
-          lineColors[li + 1] = colors[i3 + 1] * a;
-          lineColors[li + 2] = colors[i3 + 2] * a;
-          lineColors[li + 3] = colors[j3] * a;
-          lineColors[li + 4] = colors[j3 + 1] * a;
-          lineColors[li + 5] = colors[j3 + 2] * a;
-
-          lineIdx++;
+        if (clamped < 0.5) {
+          tmpColor.lerpColors(colorLow, colorMid, clamped * 2);
+        } else {
+          tmpColor.lerpColors(colorMid, colorHigh, (clamped - 0.5) * 2);
         }
+
+        colAttr.array[i * 3] = tmpColor.r;
+        colAttr.array[i * 3 + 1] = tmpColor.g;
+        colAttr.array[i * 3 + 2] = tmpColor.b;
+
+        i++;
       }
     }
 
-    meshRef.current.instanceMatrix.needsUpdate = true;
+    posAttr.needsUpdate = true;
+    scaleAttr.needsUpdate = true;
+    colAttr.needsUpdate = true;
 
-    // Update line geometry
-    lineGeo.current.setDrawRange(0, lineIdx * 2);
-    lineGeo.current.attributes.position.needsUpdate = true;
-    lineGeo.current.attributes.color.needsUpdate = true;
+    // Slower speed
+    countRef.current += 0.04;
   });
 
-  return (
-    <>
-      <instancedMesh ref={meshRef} args={[undefined, undefined, PARTICLE_COUNT]}>
-        <sphereGeometry args={[1, 6, 6]} />
-        <meshBasicMaterial color="#3b82f6" transparent opacity={0.6} />
-      </instancedMesh>
+  const vertexShader = `
+    attribute float scale;
+    attribute vec3 color;
+    varying vec3 vColor;
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = scale * (300.0 / -mvPosition.z);
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  `;
 
-      <lineSegments>
-        <bufferGeometry ref={lineGeo}>
-          <bufferAttribute
-            attach="attributes-position"
-            count={linePositions.length / 3}
-            array={linePositions}
-            itemSize={3}
-          />
-          <bufferAttribute
-            attach="attributes-color"
-            count={lineColors.length / 3}
-            array={lineColors}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial vertexColors transparent opacity={0.5} />
-      </lineSegments>
-    </>
+  const fragmentShader = `
+    varying vec3 vColor;
+    void main() {
+      float dist = length(gl_PointCoord - vec2(0.5));
+      if (dist > 0.475) discard;
+      // Glass effect: brighter edge ring, softer center
+      float ring = smoothstep(0.35, 0.475, dist) * 0.6;
+      float fill = smoothstep(0.475, 0.0, dist) * 0.45;
+      float alpha = fill + ring;
+      vec3 col = vColor + ring * 0.4;
+      gl_FragColor = vec4(col, alpha);
+    }
+  `;
+
+  return (
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={numParticles}
+          array={positions}
+          itemSize={3}
+        />
+        <bufferAttribute
+          attach="attributes-scale"
+          count={numParticles}
+          array={scales}
+          itemSize={1}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          count={numParticles}
+          array={colors}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <shaderMaterial
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        transparent
+        depthWrite={false}
+      />
+    </points>
   );
 }
 
@@ -177,12 +165,12 @@ export default function HeroParticles() {
   return (
     <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 60 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: false, alpha: true }}
+        camera={{ position: [0, 350, 1000], fov: 75, near: 5, far: 10000 }}
+        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
-        <Particles />
+        <WavePoints />
       </Canvas>
     </div>
   );

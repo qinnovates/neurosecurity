@@ -3,7 +3,7 @@
  * Single source of truth for all QIF values used on the site.
  */
 
-export const QIF_VERSION = '5.2';
+export const QIF_VERSION = '6.0';
 export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;
 export const QIF_ESTABLISHED = 2026;
@@ -22,6 +22,12 @@ export const HOURGLASS_BANDS = [
   { id: 'S2', name: 'Digital / Telemetry', zone: 'synthetic', color: '#60a5fa', description: 'Decoding, BLE/WiFi, telemetry (10 kHz - 1 GHz)' },
   { id: 'S3', name: 'Radio / Wireless / DE', zone: 'synthetic', color: '#3b82f6', description: 'RF, directed energy, application layer (1 GHz+)' },
 ] as const;
+
+/** Hourglass band radii for 3D visualization (maps 1:1 to HOURGLASS_BANDS) */
+export const HOURGLASS_RADII = [1.4, 1.3, 1.15, 1.0, 0.85, 0.7, 0.55, 0.45, 0.7, 0.9, 1.2] as const;
+
+/** Hourglass band widths for 2D visualization (percentage, maps 1:1 to HOURGLASS_BANDS) */
+export const HOURGLASS_WIDTHS = [90, 82, 72, 62, 55, 45, 38, 30, 45, 58, 75] as const;
 
 /** Coherence metric thresholds */
 export const COHERENCE = {
@@ -61,10 +67,10 @@ export const QI_CANDIDATES = {
 export const PILLARS = [
   {
     id: 'qif',
-    name: 'QIF',
+    name: 'QIF Model',
     fullName: 'Quantum Indeterministic Framework',
     tagline: 'The governance architecture',
-    description: 'An 11-band hourglass model mapping every surface — from neural tissue to synthetic systems — where security threats and ethical risks converge. One auditable framework for both.',
+    description: 'The OSI of Mind. An 11-band hourglass model mapping every surface — from neural tissue to synthetic systems — where security threats and ethical risks converge. One auditable framework for both.',
     href: '/framework/',
     icon: '&#9670;',
     color: 'var(--color-accent-primary)',
@@ -85,10 +91,10 @@ export const PILLARS = [
   },
   {
     id: 'tara',
-    name: 'TARA',
+    name: 'TARA Registrar',
     fullName: 'Therapeutic Atlas of Risks & Applications',
-    tagline: 'The risk taxonomy',
-    description: 'A dual-use registry of 99 BCI techniques — each entry an attack vector, an ethical risk, and a therapeutic application. Every technique that can harm a brain can also heal one. TARA is the proof.',
+    tagline: 'Therapeutic Atlas of Risks',
+    description: 'A dual-use registry of 103 BCI techniques — each entry an attack vector, an ethical risk, and a therapeutic application. Every technique that can harm a brain can also heal one. TARA is the proof.',
     href: '/TARA/',
     icon: '&#8853;',
     color: 'var(--color-accent-tertiary)',
@@ -97,9 +103,9 @@ export const PILLARS = [
   },
 ] as const;
 
-/** Publication stats */
+/** Publication stats — publications count is updated at build time via prebuild script */
 export const STATS = {
-  publications: 16,
+  publications: 18,
   frameworkVersion: `v${QIF_VERSION}`,
   architecture: `${QIF_BANDS}-Band ${QIF_ARCHITECTURE}`,
   established: QIF_ESTABLISHED,

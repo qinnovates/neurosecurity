@@ -2,30 +2,24 @@ import { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Text } from '@react-three/drei';
 import * as THREE from 'three';
+import { HOURGLASS_BANDS, HOURGLASS_RADII } from '../lib/qif-constants';
 
-interface BandData {
-  id: string;
-  name: string;
-  domain: string;
-  color: string;
-  description: string;
-}
+/** Map zone names to domain labels for the info panel */
+const ZONE_LABELS: Record<string, string> = {
+  neural: 'Neural',
+  interface: 'Interface',
+  synthetic: 'Synthetic',
+};
 
-const BANDS: BandData[] = [
-  { id: 'N7', name: 'Neocortex', domain: 'Neural', color: '#22c55e', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
-  { id: 'N6', name: 'Limbic System', domain: 'Neural', color: '#4ade80', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
-  { id: 'N5', name: 'Basal Ganglia', domain: 'Neural', color: '#86efac', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
-  { id: 'N4', name: 'Diencephalon', domain: 'Neural', color: '#a3e635', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
-  { id: 'N3', name: 'Cerebellum', domain: 'Neural', color: '#bef264', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
-  { id: 'N2', name: 'Brainstem', domain: 'Neural', color: '#d9f99d', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
-  { id: 'N1', name: 'Spinal Cord', domain: 'Neural', color: '#ecfccb', description: 'Cervical through sacral — reflexes, peripheral relay' },
-  { id: 'I0', name: 'Neural Interface', domain: 'Interface', color: '#f59e0b', description: 'Electrode-tissue boundary — measurement/collapse, quasi-quantum zone' },
-  { id: 'S1', name: 'Analog / Near-Field', domain: 'Synthetic', color: '#93c5fd', description: 'Amplification, ADC, near-field EM (0-10 kHz)' },
-  { id: 'S2', name: 'Digital / Telemetry', domain: 'Synthetic', color: '#60a5fa', description: 'Decoding, BLE/WiFi, telemetry (10 kHz - 1 GHz)' },
-  { id: 'S3', name: 'Radio / Wireless / DE', domain: 'Synthetic', color: '#3b82f6', description: 'RF, directed energy, application layer (1 GHz+)' },
-];
+const BANDS = HOURGLASS_BANDS.map((b) => ({
+  id: b.id,
+  name: b.name,
+  domain: ZONE_LABELS[b.zone] ?? b.zone,
+  color: b.color,
+  description: b.description,
+}));
 
-const BAND_RADII = [1.4, 1.3, 1.15, 1.0, 0.85, 0.7, 0.55, 0.45, 0.7, 0.9, 1.2];
+const BAND_RADII = [...HOURGLASS_RADII];
 const BAND_HEIGHT = 0.35;
 const GAP = 0.08;
 

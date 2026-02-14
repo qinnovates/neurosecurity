@@ -1,15 +1,6 @@
 [
   {
     "type": "external",
-    "title": "Kandu trial highlights positive outcomes with IpsiHand BCI system - massdevice.com",
-    "date": "2026-02-13",
-    "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOLUpzQzU3WExXdVBQUTB5ckRhQjg0anRyNW1iMFQxYy1JQlEycWM1X1ZxcHlLVndoRkJaRU1yTFQ5U1d5VHZYTU14dWpHRjNpTmdSZm5hLUdDTnpIVmFfWi1RRmpHQmwtazNiZllhVGxyU1ZnbmdQWUxRTEJLa3lKWHFxSQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Kandu trial highlights positive outcomes with IpsiHand BCI system&nbsp;&nbsp;massdevice.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "CL API: Real-Time Closed-Loop Interactions with Biological Neural Networks",
     "date": "2026-02-13",
     "url": "https://arxiv.org/abs/2602.11632",
@@ -37,11 +28,11 @@
   },
   {
     "type": "external",
-    "title": "Don’t Let Elon Musk Implant a Device in Your Skull - Home ❧ Current Affairs",
-    "date": "2026-02-09",
-    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNN2w5d3lkSWN1aFRBeGQ2SGNwb19GaUwyWVJTVmJzeFotNjRDNDhPQlo1SHNoYVFuS19jM1ZFX3lNWVVLNGR5V3R6em14NEI1SlpnSnhzWVVoVlFpY0NjR3ZSWHNYTHJlVUI4NnVDLWdsQ0ZQUm5PUl83WWxwNzNhakdTLS12QVJMYlhoU0NlbWYyeUlrdVFZ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Don’t Let Elon Musk Implant a Device in Your Skull&nbsp;&nbsp;Home ❧ Current Affairs",
+    "title": "This Chinese Computer Can Read Your Mind—No Implant Required - AOL.com",
+    "date": "2026-02-12",
+    "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAtMVkzM1NiV3BiWFJLUHkzcWtjSTFreld0TGM2S01KQVVYelhoTDdlTkl5cHVXc3ZTLTFkdEY4eVY2Z3ZNU3JDeE9DQXkwSzQxVmIwc09CVkYyWW9uMWVrRmxKaDM5d21KdFVDRzRwNXBqamxBY2FsNC1kZElPdw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "This Chinese Computer Can Read Your Mind—No Implant Required&nbsp;&nbsp;AOL.com",
     "category": "neurotechnology"
   },
   {
@@ -85,7 +76,7 @@
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
-    "source": "Google News — BCI",
+    "source": "Google News — Neuralink",
     "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
     "category": "neurotechnology"
   },
@@ -109,6 +100,15 @@
   },
   {
     "type": "external",
+    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
+    "source": "Google News — BCI",
+    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Investing in Merge Labs - OpenAI",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
@@ -118,11 +118,20 @@
   },
   {
     "type": "external",
-    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
+    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
     "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
+    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
   },
   {

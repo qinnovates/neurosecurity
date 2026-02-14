@@ -1,9 +1,9 @@
 ---
-const total = 99;
+const total = 103;
 const circumference = 2 * Math.PI * 70; // ≈ 439.82
 
 const segments = [
-  { label: 'Confirmed', count: 49, color: '#10b981' },
+  { label: 'Confirmed', count: 53, color: '#10b981' },
   { label: 'Probable', count: 16, color: '#06b6d4' },
   { label: 'Possible', count: 9, color: '#8b5cf6' },
   { label: 'Silicon Only', count: 25, color: '#94a3b8' },
@@ -18,7 +18,7 @@ const arcs = segments.map((seg) => {
   return { ...seg, length, offset };
 });
 
-const therapeuticCount = 49 + 16 + 9; // confirmed + probable + possible = 74
+const therapeuticCount = 53 + 16 + 9; // confirmed + probable + possible = 78
 ---
 
 <div class="glass rounded-xl p-6">
@@ -31,7 +31,7 @@ const therapeuticCount = 49 + 16 + 9; // confirmed + probable + possible = 74
 
   {/* Donut chart */}
   <div class="flex justify-center">
-    <svg viewBox="0 0 200 200" class="w-48 h-48" role="img" aria-label="Dual-use donut chart showing 74 of 99 techniques have therapeutic potential">
+    <svg viewBox="0 0 200 200" class="w-48 h-48" role="img" aria-label="Dual-use donut chart showing 78 of 103 techniques have therapeutic potential">
       {/* Background track */}
       <circle
         cx="100" cy="100" r="70"
@@ -103,6 +103,6 @@ const therapeuticCount = 49 + 16 + 9; // confirmed + probable + possible = 74
   </div>
 
   <p class="mt-4 pt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)] text-center leading-relaxed">
-    <span class="font-semibold text-[var(--color-text-primary)]">74.7%</span> of catalogued techniques have confirmed or probable therapeutic applications
+    <span class="font-semibold text-[var(--color-text-primary)]">75.7%</span> of catalogued techniques have confirmed or probable therapeutic applications
   </p>
 </div>
