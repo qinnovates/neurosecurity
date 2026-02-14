@@ -15,8 +15,10 @@ export default defineConfig({
     '/threats/': '/TARA/',
     '/niss': '/scoring/',
     '/niss/': '/scoring/',
-    '/consulting/': '/advisory/',
-    '/consulting': '/advisory/',
+    '/consulting/': '/alliance/',
+    '/consulting': '/alliance/',
+    '/advisory/': '/alliance/',
+    '/advisory': '/alliance/',
   },
   integrations: [
     react(),
