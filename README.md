@@ -169,9 +169,6 @@ qinnovates/qinnovate/
 ├── crates/                     # Rust implementations
 │   └── nsp/                    # Neural Security Protocol (Rust)
 │
-├── ml-research-labs/           # Validated research & case studies
-│   └── t0079-anc-ear-fingerprint/  # ANC biometric fingerprinting
-│
 ├── blogs/                      # 18 blog posts (Astro content collection)
 ├── scripts/                    # RSS fetcher, TARA tools, utilities
 │   └── forms/                  # Consulting form & Apps Script handler
