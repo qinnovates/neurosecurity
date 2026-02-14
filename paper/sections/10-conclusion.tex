@@ -1,0 +1,38 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 10: Conclusion
+% ═══════════════════════════════════════════════════════════════
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Brain-computer interfaces are transitioning from laboratory prototypes to
+commercial medical devices. The security frameworks designed for information
+technology---while necessary---are insufficient for devices that read and write
+neural signals. A vulnerability in a BCI is not merely a software bug; it is a
+potential path to seizures, cognitive manipulation, privacy violation at the level
+of thought, and irreversible neural harm.
+
+This paper presented the \qif framework: an integrated system comprising an
+11-band hourglass architecture, a 102-technique threat taxonomy (TARA), a
+CVSS v4.0 extension for neural-specific scoring (NISS), and the Neural Impact
+Chain---a first-of-its-kind methodology for mapping security vulnerabilities to
+DSM-5-TR psychiatric diagnoses. Analysis of all 102 techniques reveals that
+94.4\% require scoring dimensions CVSS cannot express, 75.5\% have therapeutic
+dual-use analogs, and 58.8\% pose direct or indirect psychiatric diagnostic risk.
+
+The framework has significant limitations---no empirical validation on BCI
+hardware, no clinical validation of DSM-5-TR mappings, and single-author
+scoring---which we have documented transparently. These are not reasons to delay
+publication; they are invitations to collaborate. The BCI industry is moving
+faster than security standards. Neuralink, Synchron, and Blackrock Neurotech are
+implanting devices in patients today. The gap between what these devices can do
+and what security frameworks can assess grows wider each month.
+
+The complete framework, threat registry, NISS specification, and scoring data are
+released as open source under the Apache 2.0 license. We invite collaboration
+from the neuroscience, neuroethics, cybersecurity, and clinical psychiatry
+communities. NISS has been submitted to FIRST.org's CVSS Special Interest Group
+for formal registration as a domain-specific extension.
+
+The question is no longer whether BCI security frameworks are needed.
+The question is whether they will be ready before the first patient is harmed.

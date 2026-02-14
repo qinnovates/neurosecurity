@@ -1,0 +1,147 @@
+You are reviewing the top-level messaging for qinnovate.com, a standards body for the governance of neurotechnology. The founder (Kevin Qi) needs this messaging to serve TWO audiences simultaneously:
+
+1. **Graduate school admissions** (Stanford HCP, Yale) — the site must read as neuroethics scholarship, not just cybersecurity tooling
+2. **Standards bodies** (MITRE, NIST, FIRST) — the site must read as technically rigorous enough for framework dissemination and collaboration
+
+The central thesis being introduced: **TARA (Therapeutic Atlas of Risks & Applications) proves that every BCI technique that can harm a patient can also heal one. This dual-use finding is the bridge between security engineering and neuroethics.**
+
+Below are the four files that were updated. Review them for:
+- **Messaging clarity**: Does the site now clearly communicate governance of neurotechnology (not just cybersecurity)?
+- **Audience fit**: Would a Stanford/Yale neuroethics admissions committee see this as serious scholarship? Would MITRE/NIST see it as technically credible?
+- **TARA framing**: Is the dual-use thesis (attacks + ethical risks + therapeutic applications) coming through strongly enough?
+- **Consistency**: Do all four files tell the same story?
+- **Tone**: Is it academic enough without being dry? Technical enough without being jargon-heavy?
+- **What's missing**: Any messaging gaps? Anything that still reads as "just cybersecurity"?
+
+Score each file 1-10 and provide specific line-level suggestions for improvement.
+
+---
+
+## FILE 1: src/lib/qif-constants.ts (Three Pillars definitions)
+
+```typescript
+/** Three pillars of Qinnovate */
+export const PILLARS = [
+  {
+    id: 'qif',
+    name: 'QIF',
+    fullName: 'Quantum Indeterministic Framework',
+    tagline: 'The governance architecture',
+    description: 'An 11-band hourglass model mapping every surface — from neural tissue to synthetic systems — where security threats and ethical risks converge. One auditable framework for both.',
+    href: '/framework/',
+    icon: '&#9670;',
+    color: 'var(--color-accent-primary)',
+    version: '5.2',
+    status: 'Published',
+  },
+  {
+    id: 'nsp',
+    name: 'NSP',
+    fullName: 'Neural Sensory Protocol',
+    tagline: 'The wire protocol',
+    description: 'An RFC-style post-quantum protocol that secures BCI data links with five defense layers at 3.25% power overhead.',
+    href: '/nsp/',
+    icon: '&#9632;',
+    color: 'var(--color-accent-secondary)',
+    version: '0.3',
+    status: 'Draft RFC',
+  },
+  {
+    id: 'tara',
+    name: 'TARA',
+    fullName: 'Therapeutic Atlas of Risks & Applications',
+    tagline: 'The risk taxonomy',
+    description: 'A dual-use registry of 99 BCI techniques — each entry an attack vector, an ethical risk, and a therapeutic application. Every technique that can harm a brain can also heal one. TARA is the proof.',
+    href: '/TARA/',
+    icon: '&#8853;',
+    color: 'var(--color-accent-tertiary)',
+    version: '1.0',
+    status: 'Live Registry',
+  },
+] as const;
+```
+
+---
+
+## FILE 2: src/pages/index.astro (Homepage hero and full page)
+
+```html
+<BaseLayout title="Qinnovate — Open Standards for the Governance of Neurotechnology" description="Qinnovate develops open standards for the governance of neurotechnology — bridging security engineering and neuroethics. Home of QIF, NSP, and TARA.">
+
+  <!-- HERO -->
+  <p class="text-sm font-medium tracking-[0.2em] uppercase">
+    Open Standards for the Governance of Neurotechnology
+  </p>
+
+  <h1>
+    <span>Every technique that can harm a brain</span>
+    <span>can also heal one</span>
+  </h1>
+
+  <p>
+    BCIs are in human brains. No governance standard addresses both the security risks and the therapeutic potential. Qinnovate builds the open frameworks to close that gap — before the first exploit ships.
+  </p>
+
+  <!-- CTAs -->
+  <a href="/whitepaper/">Read the Whitepaper</a>
+  <a href="/framework/">Explore the Framework</a>
+
+  <!-- Three Pillars rendered from PILLARS constant above -->
+
+  <!-- THE ROAD AHEAD section -->
+  <h2>Project Runemate</h2>
+  <p>The open standards and frameworks that built today's internet — HTTP, TCP/IP, HTML, OSI — need new equivalents for the neural frontier. Runemate is a concrete demonstration of where those standards lead: an HTML-to-Staves bytecode compiler that compresses BCI content 65-90%, making post-quantum encryption viable on implants. Written in Rust. 200 KB on-chip. Web 5.0 starts here.</p>
+
+  <!-- HOURGLASS PREVIEW -->
+  <h2>The Hourglass</h2>
+  <p>11 bands in a 7-1-3 architecture. Physical interface at the waist.</p>
+
+  <!-- LATEST NEWS -->
+  <h2>Latest News</h2>
+</BaseLayout>
+```
+
+---
+
+## FILE 3: src/components/Nav.astro (Navigation descriptions)
+
+```typescript
+const techLinks = [
+  { href: '/framework/', label: 'QIF Framework', desc: 'The 11-band hourglass governance architecture' },
+  { href: '/nsp/', label: 'NSP Protocol', desc: 'Post-quantum wire protocol for BCI data links' },
+  { href: '/runemate/', label: 'Runemate', desc: 'HTML-to-Staves bytecode compiler for BCI firmware' },
+  { href: '/TARA/', label: 'TARA', desc: 'Risk taxonomy — attacks, ethical risks, and therapeutic applications' },
+  { href: '/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification document' },
+];
+
+const resourceLinks = [
+  { href: '/news/', label: 'News', desc: 'Latest publications and updates' },
+  { href: '/explore/', label: 'Explore', desc: 'Interactive visualizations and tools' },
+  { href: '/glossary/', label: 'Glossary', desc: 'QIF terminology reference' },
+];
+
+// Top-level nav items: Technology | Resources | About | Milestones | Adopt | Governance
+```
+
+---
+
+## FILE 4: src/components/Footer.astro (Brand description)
+
+```html
+<a href="/">Qinnovate</a>
+<p>Open standards for the governance of neurotechnology — bridging security engineering and neuroethics.</p>
+<p>QIF v5.2 Hourglass · Open Framework</p>
+
+<!-- Footer sections: Technology | Resources | Connect -->
+<!-- Connect links: GitHub, Medium, About, Adopt QIF, Licensing -->
+<p>&copy; 2026 Qinnovate. QIF is an open research framework.</p>
+```
+
+---
+
+Please provide:
+1. A score (1-10) for each file's messaging effectiveness
+2. An overall score for the site's dual-audience positioning
+3. Specific suggestions for any score below 9
+4. Any messaging that still reads as "just cybersecurity" instead of "governance of neurotechnology"
+5. Whether the TARA dual-use thesis is prominent enough to serve as an admissions essay anchor

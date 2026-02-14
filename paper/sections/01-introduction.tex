@@ -1,0 +1,87 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 1: Introduction
+% ═══════════════════════════════════════════════════════════════
+
+\section{Introduction}
+\label{sec:introduction}
+
+Brain-computer interfaces (BCIs) are no longer confined to research laboratories.
+Neuralink has implanted its N1 device in human patients~\cite{musk2019neuralink},
+Synchron's Stentrode has demonstrated motor neuroprosthesis via neurointerventional
+surgery~\cite{oxley2021stentrode}, and Blackrock Neurotech's Utah array has enabled
+high-performance speech neuroprostheses~\cite{willett2023speech}. Paradromics is
+advancing toward high-bandwidth cortical interfaces for paralyzed patients.
+Investment in neurotechnology grew 700\% between 2014 and 2021, with the global
+market projected to reach \$25 billion by 2030~\cite{unesco2025recommendation}.
+
+Despite this rapid commercialization, no security standard exists specifically for
+neural devices. The FDA's 2023 cybersecurity guidance for medical
+devices~\cite{fda2023cybersecurity} and Section 524B of the FD\&C
+Act~\cite{fda524b} address connected medical devices generally, but contain no
+provisions for the unique risks of devices that read and write neural signals.
+The EU Medical Device Regulation~\cite{eumdr2017} similarly lacks neural-specific
+security requirements.
+
+\subsection{The Scoring Gap}
+
+The Common Vulnerability Scoring System (CVSS v4.0)~\cite{first2023cvss4} is the
+industry standard for assessing vulnerability severity. CVSS excels at capturing
+exploitability characteristics---attack vector, complexity, privileges required,
+user interaction---and information system impact across confidentiality, integrity,
+and availability. However, CVSS was designed for information technology assets.
+It has no concept of:
+
+\begin{itemize}
+  \item \textbf{Biological tissue damage}---seizure induction, neural tissue
+        necrosis, involuntary motor activation
+  \item \textbf{Cognitive integrity}---thought privacy, perception manipulation,
+        identity modification
+  \item \textbf{Consent boundaries}---the distinction between operating within
+        consented parameters and covert neural manipulation
+  \item \textbf{Damage reversibility}---IT assets can be restored from backup;
+        neural tissue cannot be rebooted
+  \item \textbf{Neuroplastic consequences}---prolonged adversarial stimulation can
+        cause lasting structural changes to the brain
+\end{itemize}
+
+When a vulnerability in a BCI device can induce seizures, decode private thoughts,
+or cause irreversible brain damage, a CVSS base score alone is insufficient.
+The gap is not theoretical: our analysis of 102 BCI attack techniques shows that
+94.4\% require scoring dimensions that CVSS cannot express.
+
+\subsection{Contributions}
+
+This paper presents an integrated security framework with four contributions:
+
+\begin{enumerate}
+  \item \textbf{The Hourglass Architecture} (Section~\ref{sec:hourglass}): An
+        11-band model mapping attack surfaces across three zones---neural (7~bands,
+        from neocortex to spinal cord), interface (1~band, the electrode-tissue
+        boundary), and synthetic (3~bands, from analog electronics to wireless
+        radio). The hourglass shape reflects a natural security chokepoint at the
+        neural interface.
+
+  \item \textbf{TARA Threat Taxonomy} (Section~\ref{sec:tara}): A registry of
+        102~techniques across 15~tactics and 8~domains, each classified by
+        evidence status, severity, and dual-use therapeutic potential. TARA extends
+        the MITRE ATT\&CK\textsuperscript{\textregistered} methodology to the BCI
+        domain.
+
+  \item \textbf{NISS Scoring System} (Section~\ref{sec:niss}): The Neural Impact
+        Scoring System---a CVSS v4.0 extension following FIRST.org's official
+        extension mechanism (User Guide \S3.11)~\cite{first2023cvss4userguide}
+        that adds five neural-specific metrics. NISS has been submitted to the
+        FIRST.org CVSS Special Interest Group for formal registration.
+
+  \item \textbf{The Neural Impact Chain} (Section~\ref{sec:nic}): A methodology
+        mapping security vulnerabilities to psychiatric diagnoses through a
+        six-stage pipeline: technique $\to$ hourglass band $\to$ neural
+        structure $\to$ cognitive function $\to$ NISS score $\to$ DSM-5-TR
+        diagnostic code~\cite{apa2022dsm5tr}.
+\end{enumerate}
+
+Sections~\ref{sec:governance}--\ref{sec:case-studies} address governance alignment
+with international neuroethics frameworks and present comparative case studies.
+Section~\ref{sec:limitations} discusses limitations and validation gaps honestly.
+The complete framework, threat registry, and scoring system are released as open
+source under the Apache 2.0 license.

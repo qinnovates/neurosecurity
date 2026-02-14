@@ -1,0 +1,91 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 9: Limitations and Future Work
+% ═══════════════════════════════════════════════════════════════
+
+\section{Limitations and Future Work}
+\label{sec:limitations}
+
+We present these limitations transparently to guide future validation efforts and
+to prevent overstatement of the framework's current maturity.
+
+\subsection{No Empirical Validation on Real BCI Devices}
+
+The \qif framework has not been validated against operational BCI hardware.
+The TARA taxonomy was developed through literature review, threat modeling, and
+systematic analysis rather than penetration testing of actual neural devices.
+While the framework has been applied to one real software vulnerability
+(Section~\ref{sec:case-studies}), this covers only the synthetic zone. Validation
+against neural-zone and interface-zone threats requires access to implanted BCI
+patients and clinical environments---resources unavailable to independent
+researchers.
+
+\subsection{DSM-5-TR Mapping Not Clinically Validated}
+
+The Neural Impact Chain maps security techniques to psychiatric diagnoses based
+on known neuroanatomical pathways and functional neuroscience. However, these
+mappings have not been reviewed or validated by psychiatrists or clinical
+neuroscientists. The mappings represent our best assessment of which diagnostic
+codes correspond to disruption of specific neural functions, but clinical
+validation is essential before these mappings can inform clinical decision-making.
+
+\subsection{NISS Weights Not Calibrated}
+
+The NISS scoring formula (Equation~\ref{eq:niss}) uses equal weights (1.0) for
+all five metrics in the default profile. The four context profiles (Clinical,
+Research, Consumer, Military) propose differential weights, but these have not
+been calibrated against empirical data, expert elicitation, or clinical outcomes.
+Weight calibration requires:
+
+\begin{itemize}
+  \item Expert panel scoring of representative scenarios
+  \item Sensitivity analysis across weight configurations
+  \item Correlation with observed clinical outcomes (when available)
+\end{itemize}
+
+\subsection{No Interrater Reliability Study}
+
+NISS scores in the TARA registry were assigned by a single analyst (the author).
+No interrater reliability study has been conducted to assess whether independent
+scorers would assign the same metric values. CVSS interrater reliability is a
+known challenge~\cite{first2023cvss4}; NISS, with its novel neural-specific
+metrics, likely faces greater variability. A formal interrater reliability study
+with domain experts from both cybersecurity and neuroscience is needed.
+
+\subsection{Taxonomy Completeness}
+
+The TARA registry contains 102 techniques as of version 1.4. The BCI threat
+landscape is evolving rapidly, and additional techniques will emerge as:
+(a)~new BCI devices reach market, (b)~consumer neurotechnology proliferates,
+and (c)~adversarial AI techniques advance. The current registry should be treated
+as a foundation, not a complete enumeration.
+
+Of the 102 techniques, 26 are classified as Theoretical and 1 as Speculative---these
+have not been empirically demonstrated. While they are grounded in known physics
+and engineering principles, their practical feasibility remains unvalidated.
+
+\subsection{Single-Author Bias}
+
+The framework was developed by a single independent researcher. While
+multi-model AI verification was used throughout development (Claude, Gemini,
+ChatGPT), the architectural decisions, scoring assignments, and clinical
+mappings reflect a single perspective. Peer review and multi-disciplinary
+collaboration are essential for maturation.
+
+\subsection{Future Work}
+
+\begin{enumerate}
+  \item \textbf{Reference implementation}: A software tool that automates NISS
+        scoring and NIC mapping for new techniques
+  \item \textbf{Clinical validation}: Collaboration with psychiatrists to
+        validate DSM-5-TR mappings
+  \item \textbf{Interrater reliability}: Formal study with cybersecurity and
+        neuroscience domain experts
+  \item \textbf{FIRST.org registration}: Formal registration of NISS as a
+        CVSS v4.0 extension (submission pending)
+  \item \textbf{Empirical testing}: Penetration testing against BCI hardware in
+        controlled environments
+  \item \textbf{Weight calibration}: Expert elicitation and sensitivity analysis
+        for NISS context profile weights
+  \item \textbf{Conference paper}: Condensed version for submission to Graz BCI
+        Conference 2026 and USENIX WOOT '26
+\end{enumerate}

@@ -1,0 +1,120 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 7: Governance & Neuroethics
+% ═══════════════════════════════════════════════════════════════
+
+\section{Governance and Neuroethics}
+\label{sec:governance}
+
+The \qif framework integrates neuroethics as a foundational design constraint
+rather than an afterthought. This section describes the consent tier system,
+alignment with international policy instruments, and regulatory mapping.
+
+\subsection{Consent Tiers}
+
+Each TARA technique is classified into one of four consent tiers based on the
+level of regulatory oversight required:
+
+\begin{table}[H]
+\centering
+\caption{Consent tier classification across 102 techniques.}
+\label{tab:consent}
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\textbf{Tier} & \textbf{Description} & \textbf{Requirement} \\
+\midrule
+Standard   & Normal informed consent sufficient & Standard clinical consent \\
+Enhanced   & Additional safeguards required     & Extended disclosure, monitoring \\
+IRB        & Institutional review board approval & Full IRB/ethics committee review \\
+Prohibited & Not permissible under any consent  & Technique must not be deployed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The distribution across tiers reflects the spectrum of BCI operations from routine
+monitoring (standard consent) to techniques that inherently violate cognitive
+autonomy (prohibited).
+
+\subsection{UNESCO Alignment}
+
+UNESCO's 2025 Recommendation on the Ethics of
+Neurotechnology~\cite{unesco2025recommendation}---adopted by 194 Member States---is
+the first global normative framework for neurotechnology governance. It establishes
+three pillars: core values, ethical principles, and policy action areas.
+
+The \qif framework addresses 15 of 17 UNESCO elements through technical
+implementation:
+
+\begin{table}[H]
+\centering
+\caption{QIF alignment with UNESCO Recommendation elements.}
+\label{tab:unesco}
+\small
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+\textbf{UNESCO Element} & \textbf{Type} & \textbf{Status} & \textbf{QIF Component} \\
+\midrule
+Human rights \& dignity        & Value     & Implemented & Neurorights framework, consent tiers \\
+Health \& well-being           & Value     & Implemented & PINS flag, biological impact scoring \\
+Diversity                      & Value     & Implemented & Open-source, multi-stakeholder model \\
+Sustainability                 & Value     & Implemented & Apache 2.0 license, post-trial access \\
+Professional integrity         & Value     & Implemented & Transparency audit trail \\
+Proportionality                & Principle & Implemented & Graduated severity scoring \\
+Freedom of thought             & Principle & Implemented & Cognitive liberty, consent states \\
+Privacy                        & Principle & Implemented & Cognitive integrity metric (CG) \\
+Protection of children         & Principle & Implemented & Age-tiered consent framework \\
+Consumer protection            & Policy    & Implemented & Default-deny architecture \\
+Enhancement regulation         & Policy    & Partial     & Technical infrastructure only \\
+Workplace protections          & Policy    & Implemented & Mental privacy scoring \\
+Behavioral influence           & Policy    & Implemented & Consent violation metric (CV) \\
+Health and well-being          & Policy    & Implemented & NISS scoring, PINS flag \\
+Oversight \& governance        & Policy    & Implemented & Full regulatory mapping \\
+Access \& equity               & Policy    & Implemented & Open-source release \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The two partially implemented elements---enhancement regulation and detailed
+implementation guidance for Member States---are explicitly outside the scope of a
+technical security framework and require policy collaboration.
+
+\subsection{Neurorights Framework Integration}
+
+The \qif framework implements the four neurorights proposed by Ienca and
+Andorno~\cite{ienca2017neurorights}:
+
+\begin{enumerate}
+  \item \textbf{Cognitive Liberty}: Captured by the consent violation metric (CV).
+        Any technique that operates without informed consent scores CV $\geq$
+        Partial.
+  \item \textbf{Mental Privacy}: Captured by the cognitive integrity metric (CG).
+        Techniques that decode intent, extract memories, or infer identity score
+        CG $\geq$ Low.
+  \item \textbf{Mental Integrity}: Captured by the biological impact metric (BI)
+        and neuroplasticity metric (NP). Physical harm to neural tissue or
+        induced structural changes violate mental integrity.
+  \item \textbf{Psychological Continuity}: Captured by the reversibility metric
+        (RV). Irreversible changes to neural function threaten the continuity of
+        personal identity.
+\end{enumerate}
+
+\subsection{Regulatory Mapping}
+
+The framework maps to existing and emerging regulatory instruments:
+
+\begin{itemize}
+  \item \textbf{FDA Section 524B}~\cite{fda524b}: Cybersecurity requirements for
+        connected medical devices; NISS extends CVSS scoring as required by FDA
+        premarket submissions
+  \item \textbf{EU MDR 2017/745}~\cite{eumdr2017}: Medical device risk management;
+        TARA provides the threat taxonomy required for conformity assessment
+  \item \textbf{ISO 14971}~\cite{iso14971}: Risk management for medical devices;
+        the NIC pipeline formalizes the harm pathway from technical failure to
+        patient injury
+  \item \textbf{HIPAA}~\cite{hipaa1996}: Health data privacy; neural data
+        classification extends protected health information categories
+  \item \textbf{GDPR}~\cite{gdpr2016}: Data protection; neural data as sensitive
+        personal data under Article 9
+  \item \textbf{Colorado Privacy Act}~\cite{colorado2024neuraldata}: First US state
+        to classify neural data as sensitive personal data (2024)
+\end{itemize}

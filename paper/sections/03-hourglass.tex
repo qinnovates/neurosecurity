@@ -1,0 +1,119 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 3: The Hourglass Architecture
+% ═══════════════════════════════════════════════════════════════
+
+\section{The Hourglass Architecture}
+\label{sec:hourglass}
+
+The \qif architecture maps the full BCI attack surface using an 11-band hourglass
+model organized into three zones. The model is derived from two independent
+design traditions: the OSI networking reference model~\cite{zimmermann1980osi},
+which stratifies communication systems into functional layers, and functional
+neuroanatomy, which organizes the nervous system by anatomical structure and
+physiological role. The hourglass shape borrows from the Internet protocol
+architecture~\cite{deering1998hourglass}, where IP serves as a narrow waist
+through which all traffic must pass.
+
+\subsection{Design Rationale}
+
+A BCI system spans from high-level cortical computation to low-level radio
+transmission. Any security framework must account for threats at every point
+along this path. We observe that the neural interface---the electrode-tissue
+boundary---forms a natural chokepoint analogous to IP in the Internet hourglass:
+all signals, whether neural or synthetic, must cross this boundary. Above the
+interface, attack surfaces expand through the complexity of neural tissue. Below
+it, they expand through electronic and wireless systems. The resulting shape is
+an asymmetric hourglass with the narrowest point at the interface.
+
+\subsection{Band Definitions}
+
+Table~\ref{tab:bands} defines all 11 bands. The model uses a 7-1-3 asymmetric
+structure: seven neural bands (N7--N1), one interface band (I0), and three
+synthetic bands (S1--S3).
+
+\begin{table}[H]
+\centering
+\caption{QIF Hourglass: 11 bands across three zones.}
+\label{tab:bands}
+\small
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+\textbf{Band} & \textbf{Name} & \textbf{Zone} & \textbf{Attack Surface} \\
+\midrule
+N7 & Neocortex         & Neural     & PFC, M1, V1, Broca, Wernicke---executive function, language, movement, perception \\
+N6 & Limbic System     & Neural     & Hippocampus, amygdala, insula---emotion, memory, interoception \\
+N5 & Basal Ganglia     & Neural     & Striatum, STN, substantia nigra---motor selection, reward, habit \\
+N4 & Diencephalon      & Neural     & Thalamus, hypothalamus---sensory gating, consciousness relay \\
+N3 & Cerebellum        & Neural     & Cerebellar cortex, deep nuclei---motor coordination, timing \\
+N2 & Brainstem         & Neural     & Medulla, pons, midbrain---vital functions, arousal, reflexes \\
+N1 & Spinal Cord       & Neural     & Cervical through sacral---reflexes, peripheral relay \\
+\midrule
+I0 & Neural Interface  & Interface  & Electrode-tissue boundary---the hourglass waist; all signals must cross \\
+\midrule
+S1 & Analog / Near-Field & Synthetic & Amplification, ADC, near-field EM (0--10\,kHz) \\
+S2 & Digital / Telemetry & Synthetic & Decoding, BLE/WiFi, telemetry (10\,kHz--1\,GHz) \\
+S3 & Radio / Wireless    & Synthetic & RF, directed energy, application layer (1\,GHz+) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Zone Structure}
+
+\paragraph{Neural Zone (N7--N1).}
+The neural zone encompasses all biological structures from the neocortex to the
+spinal cord. Attack surfaces in this zone involve direct interaction with neural
+tissue: signal injection, neural manipulation, cognitive exploitation, and
+physical safety threats. The ordering follows neuroanatomical hierarchy---higher
+bands represent more complex cognitive functions, while lower bands represent
+more fundamental physiological processes. Attacks at lower neural bands (N1--N2)
+threaten vital functions; attacks at higher bands (N6--N7) threaten cognition,
+identity, and autonomy.
+
+\paragraph{Interface Zone (I0).}
+Band I0 is the singular chokepoint where biological and synthetic signals
+convert. For invasive BCIs, this is the electrode-tissue boundary where
+electrical signals are transduced from ionic currents in neural tissue to
+electronic currents in silicon. For non-invasive devices, it is the sensor
+surface (e.g., scalp electrodes for EEG). The interface band is the narrowest
+point in the hourglass and the most critical for security: every neural signal
+that reaches the synthetic system, and every stimulation signal that reaches
+neural tissue, must pass through I0.
+
+\paragraph{Synthetic Zone (S1--S3).}
+The synthetic zone covers electronic and wireless systems from the analog
+front-end through digital processing to radio transmission. S1 handles analog
+signal conditioning and near-field electromagnetic effects. S2 encompasses
+digital processing, Bluetooth Low Energy, WiFi, and telemetry protocols.
+S3 covers radio frequency transmission, directed energy, and application-layer
+communication. Threats in this zone are closest to traditional IT security
+and are most amenable to conventional countermeasures.
+
+\subsection{Security Properties}
+
+The hourglass architecture provides three properties relevant to security analysis:
+
+\begin{enumerate}
+  \item \textbf{Completeness}: Every component of a BCI system maps to exactly
+        one band. There is no attack surface that falls outside the model.
+
+  \item \textbf{Chokepoint identification}: Band I0 identifies the natural
+        monitoring point where all signals can be inspected during transit between
+        neural and synthetic zones.
+
+  \item \textbf{Threat locality}: Each technique in the TARA taxonomy
+        (Section~\ref{sec:tara}) is annotated with the bands it affects, enabling
+        defenders to understand the spatial extent of an attack across the
+        architecture.
+\end{enumerate}
+
+Figure~\ref{fig:hourglass} illustrates the 11-band model with relative band
+widths reflecting attack surface breadth at each layer.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figures/hourglass.pdf}
+  \caption{The QIF Hourglass Architecture. Band widths reflect relative attack
+  surface breadth. The neural interface (I0) forms the narrow waist---the
+  security chokepoint through which all signals must pass.}
+  \label{fig:hourglass}
+\end{figure}

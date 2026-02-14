@@ -1,0 +1,165 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 6: Neural Impact Chain
+% ═══════════════════════════════════════════════════════════════
+
+\section{Neural Impact Chain}
+\label{sec:nic}
+
+The Neural Impact Chain (NIC) is a six-stage methodology for mapping security
+vulnerabilities to clinical psychiatric diagnoses. To our knowledge, this is the
+first systematic pipeline connecting cybersecurity severity scoring to DSM-5-TR
+diagnostic codes~\cite{apa2022dsm5tr}. The NIC answers a question no prior
+framework has addressed: \emph{if this attack succeeds, what psychiatric condition
+could it cause or worsen?}
+
+\subsection{Pipeline Architecture}
+
+The NIC traces each technique through six stages:
+
+\begin{enumerate}
+  \item \textbf{Technique}: The TARA attack technique (e.g., cortical signal
+        injection)
+  \item \textbf{Hourglass Band}: Which band(s) the technique affects (e.g., N7
+        Neocortex, N6 Limbic)
+  \item \textbf{Neural Structure}: The anatomical structure at risk (e.g.,
+        hippocampus, prefrontal cortex, amygdala)
+  \item \textbf{Cognitive Function}: The function that structure supports (e.g.,
+        memory consolidation, executive control, emotional regulation)
+  \item \textbf{NISS Score}: The neural impact score, particularly the BI, CG,
+        and NP metrics that correlate with clinical outcomes
+  \item \textbf{DSM-5-TR Code}: The ICD-10-CM diagnostic code(s) for the
+        psychiatric condition most closely associated with disruption of that
+        function
+\end{enumerate}
+
+Figure~\ref{fig:nic} illustrates this pipeline.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/neural-impact-chain.pdf}
+  \caption{The Neural Impact Chain: six-stage pipeline from security technique
+  to psychiatric diagnosis. Each arrow represents a mapping grounded in
+  neuroanatomy, functional neuroscience, or clinical psychiatry.}
+  \label{fig:nic}
+\end{figure}
+
+\subsection{NISS-to-DSM Bridge}
+
+The bridge between NISS metrics and DSM-5-TR diagnostic clusters is driven by
+which NISS metric dominates the technique's profile:
+
+\begin{itemize}
+  \item \textbf{BI-driven} $\to$ Motor/Neurocognitive cluster: Biological
+        impact implies tissue damage, leading to movement disorders or
+        neurocognitive deficits
+  \item \textbf{CG-driven} $\to$ Cognitive/Psychotic cluster: Cognitive
+        integrity violations imply perceptual or thought-process disruption,
+        leading to psychotic or dissociative symptoms
+  \item \textbf{CV-driven} $\to$ Mood/Trauma cluster: Consent violations
+        imply autonomy loss, mapping to trauma- and stressor-related disorders
+  \item \textbf{NP/RV-driven} $\to$ Persistent/Personality cluster:
+        Neuroplasticity exploitation or irreversible damage implies lasting
+        personality or behavioral changes
+  \item \textbf{No neural impact} $\to$ Non-diagnostic: Silicon-only
+        techniques with no direct psychiatric mapping
+\end{itemize}
+
+\subsection{Coverage Statistics}
+
+All 102 TARA techniques have been mapped through the NIC pipeline:
+
+\begin{table}[H]
+\centering
+\caption{Neural Impact Chain mapping results across 102 techniques.}
+\label{tab:nic-stats}
+\small
+\begin{tabular}{@{}l r@{}}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Techniques mapped                 & 102 / 102 (100\%) \\
+Unique DSM-5-TR codes             & 15 \\
+Diagnostic clusters               & 5 \\
+Direct diagnostic risk             & 51 (50.0\%) \\
+Indirect diagnostic risk           & 9 (8.8\%) \\
+No diagnostic risk (silicon-only)  & 42 (41.2\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Diagnostic Cluster Distribution}
+
+The five diagnostic clusters and their technique counts:
+
+\begin{table}[H]
+\centering
+\caption{DSM-5-TR diagnostic cluster distribution.}
+\label{tab:clusters}
+\small
+\begin{tabular}{@{}l r l@{}}
+\toprule
+\textbf{Cluster} & \textbf{Count} & \textbf{Representative DSM-5-TR Codes} \\
+\midrule
+Non-diagnostic          & 42 & --- (silicon-only techniques) \\
+Mood/Trauma             & 21 & F43.10 (PTSD), F32.9 (MDD), F44.9 (dissociative) \\
+Cognitive/Psychotic     & 16 & F06.0 (psychosis due to medical condition), R41.3 (cognitive decline) \\
+Motor/Neurocognitive    & 16 & G25.9 (movement disorder), G31.84 (neurocognitive) \\
+Persistent/Personality  &  7 & F07.0 (personality change due to medical condition) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Mood/Trauma cluster is the largest diagnostic cluster (21 techniques),
+reflecting the prevalence of consent-violation and autonomy-disruption attacks
+in the BCI threat landscape. Techniques that covertly manipulate neural signals
+without the subject's knowledge or consent map naturally to trauma- and
+stressor-related disorders.
+
+\subsection{Risk Classification}
+
+Each technique is classified by diagnostic risk:
+
+\begin{itemize}
+  \item \textbf{Direct} (51 techniques, 50.0\%): The attack mechanism can
+        directly trigger or worsen the mapped psychiatric condition. Example:
+        forced cortical stimulation causing seizures maps to epilepsy-related
+        diagnostic codes.
+  \item \textbf{Indirect} (9 techniques, 8.8\%): The attack creates downstream
+        conditions that may lead to the diagnosis. Example: sustained data
+        exfiltration of private thoughts causing anxiety does not directly
+        produce the anxiety disorder but creates the conditions for it.
+  \item \textbf{None} (42 techniques, 41.2\%): Silicon-only techniques with no
+        direct neural interaction and thus no psychiatric diagnostic mapping.
+\end{itemize}
+
+\subsection{Example Walkthrough}
+
+Consider technique \textbf{QIF-T0001: Cortical Signal Injection}---direct
+injection of adversarial signals via rogue electrode stimulation.
+
+\begin{enumerate}
+  \item \textbf{Technique}: QIF-T0001 (cortical signal injection)
+  \item \textbf{Band}: N7 (Neocortex), N6 (Limbic System)
+  \item \textbf{Structure}: Primary motor cortex (M1), prefrontal cortex (PFC),
+        hippocampus
+  \item \textbf{Function}: Motor control, executive function, memory
+        consolidation
+  \item \textbf{NISS}: BI:C / CG:H / CV:I / RV:P / NP:S $\to$ Score: 8.7
+        (High), PINS flagged
+  \item \textbf{DSM-5-TR}: G25.9 (movement disorder NOS), F06.0 (psychotic
+        disorder due to another medical condition), F07.0 (personality change
+        due to another medical condition)
+  \item \textbf{Risk class}: Direct---the stimulation itself can trigger
+        seizures, involuntary movement, and perception distortion
+\end{enumerate}
+
+Figure~\ref{fig:dsm5-clusters} shows the distribution of techniques across
+diagnostic clusters.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{figures/dsm5-clusters.pdf}
+  \caption{DSM-5-TR cluster distribution across 102 TARA techniques. 60
+  techniques (58.8\%) have direct or indirect diagnostic risk.}
+  \label{fig:dsm5-clusters}
+\end{figure}

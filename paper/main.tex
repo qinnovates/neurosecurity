@@ -1,0 +1,68 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{arxiv}
+
+\title{Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces}
+
+\author{
+  Kevin Qi\\
+  Qinnovate\\
+  \texttt{kevin@qinnovate.org}
+}
+
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Brain-computer interfaces (BCIs) are transitioning from experimental neuroscience tools to
+commercially deployed medical devices, with companies including Neuralink, Synchron,
+Blackrock Neurotech, and Paradromics advancing toward regulatory approval. Yet no security
+framework exists that accounts for the unique risks of devices that read and write neural
+signals. The Common Vulnerability Scoring System (CVSS v4.0), the industry standard for
+vulnerability assessment, cannot express biological tissue damage, cognitive integrity
+violations, consent boundaries, damage reversibility, or neuroplastic consequences---dimensions
+critical to neural device security.
+
+We present an integrated security framework comprising four contributions:
+(1)~an \textbf{11-band hourglass architecture} mapping attack surfaces from neocortex to
+wireless radio across neural, interface, and synthetic zones;
+(2)~\textbf{TARA}, a threat taxonomy of 102 techniques across 15 tactics and 8 domains, each
+classified by status, severity, and dual-use therapeutic potential;
+(3)~\textbf{NISS}, the Neural Impact Scoring System---a CVSS v4.0 extension adding five
+neural-specific metrics (Biological Impact, Cognitive Integrity, Consent Violation,
+Reversibility, Neuroplasticity) submitted to FIRST.org for formal registration; and
+(4)~the \textbf{Neural Impact Chain}, a methodology mapping security vulnerabilities to
+DSM-5-TR psychiatric diagnoses through a six-stage pipeline.
+
+Analysis of all 102 techniques reveals that 94.4\% require NISS extension metrics that CVSS
+cannot express. The Neural Impact Chain maps all techniques to 15 unique DSM-5-TR diagnostic
+codes across 5 psychiatric clusters, with 51 techniques posing direct diagnostic risk. The
+framework identifies 77 techniques (75.5\%) with confirmed or probable therapeutic analogs,
+establishing a dual-use atlas where every attack mechanism that can harm neural tissue has a
+corresponding clinical application. The complete framework, threat registry, and scoring
+system are released as open source under the Apache 2.0 license.
+\end{abstract}
+
+\noindent\textbf{Keywords:} brain-computer interface, neurosecurity, CVSS, threat taxonomy,
+neural scoring, neuroethics, DSM-5-TR, dual-use
+
+\tableofcontents
+\newpage
+
+\input{sections/01-introduction}
+\input{sections/02-related-work}
+\input{sections/03-hourglass}
+\input{sections/04-tara}
+\input{sections/05-niss}
+\input{sections/06-neural-impact-chain}
+\input{sections/07-governance}
+\input{sections/08-case-studies}
+\input{sections/09-limitations}
+\input{sections/10-conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

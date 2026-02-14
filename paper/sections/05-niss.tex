@@ -1,0 +1,236 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 5: NISS — Neural Impact Scoring System
+% ═══════════════════════════════════════════════════════════════
+
+\section{NISS: Neural Impact Scoring System}
+\label{sec:niss}
+
+The Neural Impact Scoring System (NISS) is a CVSS v4.0 extension following
+FIRST.org's official extension mechanism (User Guide
+\S3.11)~\cite{first2023cvss4userguide}. NISS adds five metrics that capture
+dimensions CVSS was never designed to express: biological tissue damage, cognitive
+integrity violations, consent boundary violations, damage reversibility, and
+neuroplastic consequences.
+
+\subsection{Gap Analysis: Why CVSS Alone Is Insufficient}
+
+We mapped all 102 TARA techniques to CVSS v4.0 base vectors and classified the
+results into three gap groups based on how much information CVSS alone fails to
+capture:
+
+\begin{table}[H]
+\centering
+\caption{CVSS v4.0 gap analysis across 102 TARA techniques.}
+\label{tab:gap}
+\small
+\begin{tabular}{@{}c l r l@{}}
+\toprule
+\textbf{Group} & \textbf{Gap Description} & \textbf{Count} & \textbf{Example} \\
+\midrule
+1 & CVSS captures most impact; NISS adds nuance &
+    12 & Pure digital attacks with minor neural context \\
+2 & CVSS captures exploitability but misses half the impact &
+    28 & Attacks with both system and biological consequences \\
+3 & CVSS fundamentally cannot express the primary impact &
+    58 & Cognitive, consent, or tissue-damage--dominant attacks \\
+\midrule
+  & \textbf{Techniques needing NISS extension} & \textbf{98} & \textbf{96.1\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Group~3---where CVSS fundamentally cannot express the primary impact---contains
+the majority of techniques (56.9\%). These are attacks where the most severe
+consequence is biological tissue damage, cognitive coercion, or irreversible
+neural harm---dimensions for which CVSS has no metric.
+
+\subsection{Extension Metrics}
+
+NISS defines five extension metrics, each with a graduated value set. The
+metrics are designed to be orthogonal to CVSS base metrics: they capture impact
+dimensions that exist only because the target system interfaces with biological
+neural tissue.
+
+\subsubsection{BI: Biological Impact}
+
+Direct harm to neural tissue, organs, or physiological function. This dimension
+has no equivalent in CVSS.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}l l l p{7cm}@{}}
+\toprule
+\textbf{Value} & \textbf{Label} & \textbf{Score} & \textbf{Description} \\
+\midrule
+N & None     & 0.0  & No tissue interaction or physical harm \\
+L & Low      & 3.3  & Temporary discomfort, minor sensory disruption, reversible tissue stress \\
+H & High     & 6.7  & Significant tissue damage, seizure induction, involuntary motor activation \\
+C & Critical & 10.0 & Life-threatening or permanently disabling neural harm \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{CG: Cognitive Integrity}
+
+Impact on thought processes, perception, memory, identity, or decision-making.
+CVSS has no concept of thought privacy or cognitive autonomy.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}l l l p{7cm}@{}}
+\toprule
+\textbf{Value} & \textbf{Label} & \textbf{Score} & \textbf{Description} \\
+\midrule
+N & None     & 0.0  & No cognitive impact \\
+L & Low      & 3.3  & Decoded intent partially exposed, minor perceptual distortion \\
+H & High     & 6.7  & Full thought decoding, identity inference, or perception manipulation \\
+C & Critical & 10.0 & Cognitive coercion, identity modification, or complete loss of cognitive autonomy \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{CV: Consent Violation}
+
+Degree of violation of informed consent or cognitive autonomy. Ordered by
+severity: covert (implicit) violations are worse than detectable (explicit) ones.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}l l l p{7cm}@{}}
+\toprule
+\textbf{Value} & \textbf{Label} & \textbf{Score} & \textbf{Description} \\
+\midrule
+N & None              & 0.0  & Operating within explicitly consented boundaries \\
+P & Partial           & 3.3  & Action exceeds scope but subject retains some awareness \\
+E & Explicit          & 6.7  & Direct violation of consent boundaries, but detectable \\
+I & Implicit (covert) & 10.0 & Covert manipulation the patient cannot detect or refuse \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{RV: Reversibility}
+
+Whether the damage can be undone. IT assets can be restored from backup. Neural
+tissue cannot be rebooted.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}l l l p{7cm}@{}}
+\toprule
+\textbf{Value} & \textbf{Label} & \textbf{Score} & \textbf{Description} \\
+\midrule
+F & Full        & 0.0  & Effects fully reverse when attack stops \\
+T & Temporary   & 3.3  & Effects reverse over hours to days \\
+P & Partial     & 6.7  & Some effects permanent, some reversible \\
+I & Irreversible & 10.0 & Permanent neural tissue destruction or cognitive change \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{NP: Neuroplasticity}
+
+Whether the attack exploits or induces neuroplastic changes---the brain's ability
+to rewire itself. This has no digital equivalent.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}l l l p{7cm}@{}}
+\toprule
+\textbf{Value} & \textbf{Label} & \textbf{Score} & \textbf{Description} \\
+\midrule
+N & None       & 0.0  & No neuroplastic effect \\
+T & Temporary  & 5.0  & Short-term synaptic changes that decay within hours to days \\
+S & Structural & 10.0 & Long-term or permanent neural pathway changes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{PINS Flag}
+
+NISS introduces the Persistent Involuntary Neural Stimulation (PINS) flag---a
+binary indicator triggered when:
+
+\begin{equation}
+\text{PINS} = \begin{cases}
+  \texttt{true} & \text{if } \text{BI} \geq \text{High} \;\lor\; \text{RV} = \text{Irreversible} \\
+  \texttt{false} & \text{otherwise}
+\end{cases}
+\end{equation}
+
+A PINS flag mandates immediate safety review regardless of overall score.
+Across all 102 techniques, 31 are PINS-flagged (30.4\%).
+
+\subsection{Scoring Formula}
+
+The NISS score is computed as the weighted mean of the five metric scores:
+
+\begin{equation}
+\text{NISS} = \frac{w_{\text{BI}} \cdot \text{BI} + w_{\text{CG}} \cdot \text{CG} + w_{\text{CV}} \cdot \text{CV} + w_{\text{RV}} \cdot \text{RV} + w_{\text{NP}} \cdot \text{NP}}
+              {w_{\text{BI}} + w_{\text{CG}} + w_{\text{CV}} + w_{\text{RV}} + w_{\text{NP}}}
+\label{eq:niss}
+\end{equation}
+
+In the default profile, all weights are~1.0, yielding a simple arithmetic mean.
+NISS supports four context profiles with differential weights:
+
+\begin{itemize}
+  \item \textbf{Clinical}: Emphasizes BI, RV, and NP (patient safety focus)
+  \item \textbf{Research}: Emphasizes CG and CV (consent and cognition focus)
+  \item \textbf{Consumer}: Balanced weights (general-purpose)
+  \item \textbf{Military}: Emphasizes BI and CG (dual-use concern)
+\end{itemize}
+
+\subsection{Vector Format}
+
+The NISS vector rides alongside the CVSS v4.0 base vector:
+
+\begin{lstlisting}
+CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N
+NISS:1.0/BI:H/CG:C/CV:I/RV:P/NP:S
+\end{lstlisting}
+
+This dual-vector architecture means security teams can triage using familiar CVSS
+scores while BCI-specific teams see the neural dimensions that determine whether a
+vulnerability is a software bug or a patient safety emergency.
+
+\subsection{NISS Severity Distribution}
+
+Across all 102 techniques, the NISS severity distribution differs markedly from
+CVSS severity:
+
+\begin{table}[H]
+\centering
+\caption{NISS severity distribution (all 102 techniques).}
+\label{tab:niss-severity}
+\small
+\begin{tabular}{@{}l r r@{}}
+\toprule
+\textbf{NISS Severity} & \textbf{Count} & \textbf{\%} \\
+\midrule
+High     & 21 & 20.6\% \\
+Medium   & 29 & 28.4\% \\
+Low      & 51 & 50.0\% \\
+None     &  1 &  1.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The NISS distribution is more uniform than CVSS because NISS captures impact
+dimensions that CVSS flattens into high/critical. Techniques rated ``high'' by
+CVSS may distribute across low, medium, and high NISS scores depending on whether
+they involve biological tissue damage or are purely digital.
+
+Figure~\ref{fig:niss-gap} visualizes the gap between CVSS and NISS scoring.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/niss-gap.pdf}
+  \caption{CVSS v4.0 vs.\ NISS gap analysis: 96.1\% of techniques require
+  extension metrics CVSS cannot express.}
+  \label{fig:niss-gap}
+\end{figure}

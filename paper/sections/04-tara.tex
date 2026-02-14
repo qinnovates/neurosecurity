@@ -1,0 +1,191 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 4: TARA Threat Taxonomy
+% ═══════════════════════════════════════════════════════════════
+
+\section{TARA: Threat Taxonomy}
+\label{sec:tara}
+
+The Therapeutic Applications \& Risk Assessment (TARA) registry catalogs BCI
+attack techniques with the granularity of MITRE ATT\&CK~\cite{mitre2024attack}
+but extended to cover neural, cognitive, and physical safety domains. Each
+technique is simultaneously an attack vector, an ethical risk, and---where
+applicable---a therapeutic application.
+
+\subsection{Taxonomy Structure}
+
+The TARA registry organizes 102 techniques into 15 tactics across 8 operational
+domains. Technique identifiers follow the format \texttt{QIF-TXXX}, where the
+numeric suffix provides sequential ordering.
+
+\paragraph{Domains.}
+The eight domains span the full attack lifecycle:
+
+\begin{enumerate}
+  \item \textbf{Neural (N)} --- Direct interaction with neural tissue
+        (scan, injection, manipulation)
+  \item \textbf{BCI System (B)} --- System-level intrusion and evasion
+  \item \textbf{Protocol (P)} --- Protocol disruption and communication attacks
+  \item \textbf{Data (D)} --- Data harvesting and exfiltration
+  \item \textbf{Cognitive (C)} --- Cognitive exploitation and imprinting
+  \item \textbf{Countermeasure (M)} --- Surveillance and monitoring
+  \item \textbf{Evasion (E)} --- Defense evasion and anti-detection
+  \item \textbf{Sensor (S)} --- Consumer device side-channel attacks
+\end{enumerate}
+
+\paragraph{Tactics.}
+The 15 tactics map to ATT\&CK lifecycle stages adapted for BCI operations:
+Neural Scan, BCI Intrusion, Neural Injection, Cognitive Imprinting, BCI Evasion,
+Data Harvesting, Neural Manipulation, Evasion/Rootkit Deployment, Monitoring/Surveillance,
+Protocol Disruption, Cognitive Exploitation, Signal Replay, Signal Harvesting,
+Signal Fingerprinting, and Signal Chaining.
+
+\subsection{Evidence Classification}
+
+Each technique carries an evidence status reflecting the maturity of its
+documentation:
+
+\begin{table}[H]
+\centering
+\caption{TARA evidence status classification with technique counts.}
+\label{tab:status}
+\small
+\begin{tabular}{@{}l l r@{}}
+\toprule
+\textbf{Status} & \textbf{Definition} & \textbf{Count} \\
+\midrule
+Confirmed    & Documented in real-world use or peer-reviewed literature & 19 \\
+Demonstrated & Proven in laboratory or controlled conditions            & 33 \\
+Emerging     & Newly identified; limited but growing evidence           & 22 \\
+Theoretical  & Plausible based on known physics and engineering          & 26 \\
+Plausible    & Possible but with significant uncertainty                & 1 \\
+Speculative  & Hypothetical; requires unproven capabilities             & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Severity Distribution}
+
+CVSS v4.0 base severity ratings for all 102 techniques show a distribution
+heavily weighted toward high and critical:
+
+\begin{table}[H]
+\centering
+\caption{TARA severity distribution (CVSS v4.0 base ratings).}
+\label{tab:severity}
+\small
+\begin{tabular}{@{}l r r@{}}
+\toprule
+\textbf{Severity} & \textbf{Count} & \textbf{Percentage} \\
+\midrule
+Critical & 29 & 28.4\% \\
+High     & 54 & 52.9\% \\
+Medium   & 16 & 15.7\% \\
+Low      &  3 &  2.9\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The dominance of high and critical ratings reflects the inherent severity of
+attacks against devices that interface directly with the nervous system. Even
+techniques with low exploitability can have severe consequences when the target
+is neural tissue.
+
+\subsection{Category Breakdown}
+
+The 102 techniques distribute across eight operational categories:
+
+\begin{table}[H]
+\centering
+\caption{TARA techniques by operational category.}
+\label{tab:categories}
+\small
+\begin{tabular}{@{}l l r@{}}
+\toprule
+\textbf{ID} & \textbf{Category} & \textbf{Count} \\
+\midrule
+SE & Signal Eavesdropping    & 20 \\
+CI & Cognitive Integrity     & 18 \\
+EX & Data Exfiltration       & 17 \\
+DM & Data Manipulation       & 15 \\
+SI & Signal Injection        & 10 \\
+PE & Privilege Escalation    &  8 \\
+DS & Denial of Service       &  7 \\
+PS & Physical Safety         &  7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Dual-Use Mapping}
+
+A distinctive feature of TARA is the systematic dual-use mapping: every attack
+technique is assessed for therapeutic analogs. The same physical mechanisms that
+enable attacks---electromagnetic stimulation, signal decoding, neuromodulation---are
+the mechanisms underlying established therapies such as deep brain stimulation
+(DBS)~\cite{lozano2019dbs}, transcranial magnetic stimulation
+(TMS)~\cite{krauss2021tms}, and neurofeedback.
+
+\begin{table}[H]
+\centering
+\caption{Dual-use classification of 102 TARA techniques.}
+\label{tab:dualuse}
+\small
+\begin{tabular}{@{}l l r r@{}}
+\toprule
+\textbf{Classification} & \textbf{Definition} & \textbf{Count} & \textbf{\%} \\
+\midrule
+Confirmed    & Published clinical use exists      & 52 & 51.0\% \\
+Probable     & Under active clinical investigation & 16 & 15.7\% \\
+Possible     & Theoretical therapeutic mapping     &  9 &  8.8\% \\
+Silicon Only & No tissue analog; purely digital    & 25 & 24.5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Of the 102 techniques, 77 (75.5\%) have confirmed or probable therapeutic analogs.
+This finding underscores a fundamental challenge for BCI security: the same
+capabilities that must be defended against are often the capabilities that make
+BCIs therapeutically valuable.
+
+\subsection{Representative Techniques}
+
+Table~\ref{tab:representative} shows five representative techniques spanning
+different categories, severities, and dual-use classifications.
+
+\begin{table}[H]
+\centering
+\caption{Five representative TARA techniques.}
+\label{tab:representative}
+\small
+\begin{tabularx}{\textwidth}{@{}l l l l X@{}}
+\toprule
+\textbf{ID} & \textbf{Sev.} & \textbf{Status} & \textbf{Dual-Use} & \textbf{Description} \\
+\midrule
+T0001 & Critical & Confirmed & Confirmed & Cortical signal injection via rogue electrode stimulation; therapeutic analog: deep brain stimulation \\
+T0015 & High & Demonstrated & Confirmed & P300 side-channel extraction of private information; therapeutic analog: P300-based spelling interfaces \\
+T0034 & High & Emerging & Probable & Calibration data poisoning during BCI training sessions; therapeutic analog: adaptive neurofeedback \\
+T0072 & Medium & Confirmed & Confirmed & Ultrasonic side-channel via bone conduction microphone; therapeutic analog: ABR audiometry \\
+T0090 & High & Demonstrated & Confirmed & WiFi CSI body sensing for respiratory and gait inference; therapeutic analog: sleep apnea detection \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Figure~\ref{fig:severity-dist} shows the severity distribution across all
+techniques, and Figure~\ref{fig:dual-use-breakdown} illustrates the dual-use
+breakdown.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/severity-dist.pdf}
+    \caption{TARA severity distribution across 102 techniques.}
+    \label{fig:severity-dist}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/dual-use-breakdown.pdf}
+    \caption{Dual-use classification: 75.5\% of techniques have therapeutic analogs.}
+    \label{fig:dual-use-breakdown}
+  \end{minipage}
+\end{figure}

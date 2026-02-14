@@ -1,0 +1,132 @@
+% ═══════════════════════════════════════════════════════════════
+% Section 8: Case Studies
+% ═══════════════════════════════════════════════════════════════
+
+\section{Case Studies}
+\label{sec:case-studies}
+
+To demonstrate the practical difference between CVSS-only and CVSS+NISS scoring,
+we present five representative techniques scored with both systems. Each case
+illustrates specific dimensions that CVSS cannot capture.
+
+\subsection{Scoring Comparison}
+
+Table~\ref{tab:case-studies} presents five techniques spanning different
+categories, severity levels, and gap groups.
+
+\begin{table}[H]
+\centering
+\caption{CVSS v4.0 vs.\ NISS scoring for five representative techniques.}
+\label{tab:case-studies}
+\small
+\begin{tabularx}{\textwidth}{@{}l X c c@{}}
+\toprule
+\textbf{Technique} & \textbf{Description} & \textbf{CVSS} & \textbf{NISS} \\
+\midrule
+QIF-T0001 & Cortical signal injection via rogue electrode & 9.3 (Crit) & 8.7 (High) \\
+QIF-T0015 & P300 side-channel private data extraction     & 7.7 (High) & 4.7 (Med) \\
+QIF-T0034 & BCI calibration data poisoning                & 8.2 (High) & 5.3 (Med) \\
+QIF-T0050 & Covert neural signal decoding for surveillance & 7.1 (High) & 6.0 (Med) \\
+QIF-T0072 & Ultrasonic bone-conduction side-channel        & 5.3 (Med)  & 2.7 (Low) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Case 1: Cortical Signal Injection (QIF-T0001)}
+
+\paragraph{CVSS v4.0 assessment.}
+CVSS rates this technique as Critical (9.3) based on network attack vector,
+low complexity, no privileges required, and high impact on confidentiality,
+integrity, and availability. This accurately captures the exploitability and
+system impact.
+
+\paragraph{What CVSS misses.}
+The primary consequence of cortical signal injection is not system
+compromise---it is seizure induction, involuntary motor activation, and potential
+permanent tissue damage. The patient experiences a medical emergency, not a data
+breach. CVSS has no metric for biological harm, consent violation (the stimulation
+occurs without the patient's knowledge), or irreversibility (neural tissue damage
+may be permanent).
+
+\paragraph{NISS extension.}
+\texttt{NISS:1.0/BI:C/CG:H/CV:I/RV:P/NP:S} --- Score: 8.7 (High), PINS
+flagged. The NISS vector captures that this technique causes critical biological
+impact (BI:C), high cognitive integrity violation (CG:H), covert consent
+violation (CV:I), partially irreversible damage (RV:P), and structural
+neuroplastic changes (NP:S). The PINS flag triggers mandatory safety review.
+
+\paragraph{NIC diagnostic mapping.}
+Via the Neural Impact Chain: N7/N6 bands $\to$ motor cortex, hippocampus $\to$
+motor control, memory $\to$ G25.9 (movement disorder), F06.0 (psychosis due to
+medical condition). Risk class: direct.
+
+\subsection{Case 2: P300 Side-Channel (QIF-T0015)}
+
+\paragraph{CVSS assessment.}
+Rated High (7.7) for passive eavesdropping with high confidentiality impact.
+
+\paragraph{What CVSS misses.}
+The extracted data is not files or credentials---it is private cognitive
+responses. The P300 ERP component reveals whether the subject recognizes a
+stimulus, enabling extraction of PINs, personal preferences, and identity
+information~\cite{martinovic2012feasibility}. CVSS treats this as a
+confidentiality breach; the actual impact is a cognitive integrity violation.
+
+\paragraph{NISS extension.}
+\texttt{NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N} --- Score: 4.7 (Medium). No
+biological impact, but high cognitive integrity violation and explicit consent
+violation. Fully reversible (passive attack). The NISS score is lower than CVSS
+because no physical harm occurs---but the CG:H flag alerts BCI-specific teams
+that private cognitive data is at risk.
+
+\subsection{Case 3: Calibration Poisoning (QIF-T0034)}
+
+\paragraph{CVSS assessment.}
+Rated High (8.2) for integrity impact during the BCI training phase.
+
+\paragraph{What CVSS misses.}
+Poisoned calibration data causes the BCI to learn incorrect mappings between
+neural signals and intended actions. The patient's device responds to wrong
+signals or fails to respond to correct ones. Over time, neuroplasticity causes
+the brain to adapt to the corrupted interface, creating lasting neural pathway
+changes even after the poisoning is discovered and corrected.
+
+\paragraph{NISS extension.}
+\texttt{NISS:1.0/BI:L/CG:H/CV:I/RV:T/NP:T} --- Score: 5.3 (Medium). Low
+biological impact but high cognitive integrity violation (the device
+misinterprets intent), covert consent violation (the patient doesn't know
+calibration was corrupted), and temporary neuroplastic changes.
+
+\subsection{Case 4: Covert Neural Surveillance (QIF-T0050)}
+
+\paragraph{CVSS assessment.}
+Rated High (7.1) for sustained confidentiality impact.
+
+\paragraph{What CVSS misses.}
+Continuous covert decoding of neural signals constitutes ongoing mental privacy
+violation. Unlike data exfiltration from a server, the ``data'' being stolen is
+the patient's thoughts, emotional states, and cognitive patterns. The consent
+violation is maximal: the patient cannot detect or refuse the surveillance.
+
+\paragraph{NISS extension.}
+\texttt{NISS:1.0/BI:N/CG:C/CV:I/RV:F/NP:N} --- Score: 6.0 (Medium). No
+biological impact, but critical cognitive integrity violation (CG:C, full
+thought decoding) and covert consent violation (CV:I). The high CG and CV scores
+distinguish this from ordinary data exfiltration.
+
+\subsection{Case 5: Real-World Vulnerability Disclosure}
+
+The \qif framework has been applied to real vulnerability research. During
+systematic analysis of the BCI software ecosystem, we identified a multi-phase
+exploit chain in a widely deployed open-source BCI data streaming library.
+The vulnerability involved three CWEs: CWE-787 (out-of-bounds write), CWE-190
+(integer overflow), and CWE-125 (out-of-bounds read).
+
+The exploit chain demonstrates escalation from synthetic-zone vulnerabilities
+(S2/S3 bands: software bugs in the streaming library) to potential neural-zone
+impact (N-band: corrupted data reaching clinical decision-making). CVSS scores
+the software vulnerabilities accurately; NISS captures the downstream risk to
+patients whose clinical care depends on the integrity of the data stream.
+
+Responsible disclosure was initiated in February 2026 and is currently in
+progress. Exploit details are withheld per responsible disclosure protocol.

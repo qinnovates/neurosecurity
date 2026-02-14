@@ -1,21 +1,12 @@
 [
   {
     "type": "external",
-    "title": "CL API: Real-Time Closed-Loop Interactions with Biological Neural Networks",
+    "title": "Kim Kardashian brain scan sparks internet theories - Mashable",
     "date": "2026-02-13",
-    "url": "https://arxiv.org/abs/2602.11632",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.11632v1 Announce Type: new \nAbstract: Biological neural networks (BNNs) are increasingly explored for their rich dynamics, parallelism, and adaptive behavior. Beyond understanding their fun",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "TAVAE: A VAE with Adaptable Priors Explains Contextual Modulation in the Visual Cortex",
-    "date": "2026-02-13",
-    "url": "https://arxiv.org/abs/2602.11956",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.11956v1 Announce Type: new \nAbstract: The brain interprets visual information through learned regularities, a computation formalized as probabilistic inference under a prior. The visual cor",
-    "category": "research"
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBDRzhnWkRzMWpVY3Nia0pOaE5hRnMwZUtpY0Q2cE8ycFRJQmhDWXdMRUcwQVViU2ZDRS1DOWRQTVljR1dWb1ZBQUxjRFdBNG1HZkJoYlAwc3dWOTV4d2liU3ctVFVOQ3FUaDFaMGs5SmU?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Kim Kardashian brain scan sparks internet theories&nbsp;&nbsp;Mashable",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -76,7 +67,7 @@
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
-    "source": "Google News — Neuralink",
+    "source": "Google News — BCI",
     "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
     "category": "neurotechnology"
   },
@@ -100,15 +91,6 @@
   },
   {
     "type": "external",
-    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
-    "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
-    "source": "Google News — BCI",
-    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Investing in Merge Labs - OpenAI",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
@@ -118,20 +100,11 @@
   },
   {
     "type": "external",
-    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
+    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
     "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
+    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
-    "date": "2026-01-05",
-    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
