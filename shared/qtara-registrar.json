@@ -64,7 +64,7 @@
       }
     },
     "tara": {
-      "version": "1.5",
+      "version": "1.6",
       "enriched_techniques": 102,
       "dual_use_breakdown": {
         "confirmed": 52,
@@ -124,9 +124,60 @@
         "min": 0.1,
         "techniques_above_2": 11
       }
+    },
+    "regulatory": {
+      "version": "1.0",
+      "framework": "FDORA Section 3305 / Section 524B",
+      "cyber_device_techniques": 67,
+      "non_cyber_device_techniques": 35,
+      "prong_failure_reasons": {
+        "software": 29,
+        "network_connectable": 10
+      },
+      "techniques_per_requirement": {
+        "TM": 102,
+        "VA": 101,
+        "SA": 76,
+        "SBOM": 61,
+        "PM": 98
+      },
+      "coverage_stats": {
+        "mean": 0.48,
+        "min": 0.1,
+        "max": 0.8,
+        "below_0.5": 41
+      },
+      "top_gaps": {
+        "CVSS cannot express neural-specific impacts": 58,
+        "No FDA pathway for consumer sensor exploitation": 42,
+        "CVSS partially captures risk; neural dimensions missing": 30,
+        "Threat not yet in regulatory threat catalogs": 28,
+        "High neural impact": 20,
+        "Software-only attack without software lifecycle standard": 13,
+        "Consent complexity under-matches neural impact": 11
+      }
     }
   },
   "changelog": [
+    {
+      "version": "1.6",
+      "date": "2026-02-16",
+      "title": "FDORA \u00a73305 Regulatory Compliance Mapping",
+      "summary": "Added per-technique FDORA Section 524B cyber device classification, applicable submission requirements, regulatory coverage scoring, and gap analysis. 67 of 102 techniques target cyber devices. Mean regulatory coverage: 0.48.",
+      "added": [],
+      "enrichments": [
+        "regulatory.fdora_524b.cyber_device \u2014 3-prong cyber device test result",
+        "regulatory.fdora_524b.applicable_requirements \u2014 TM/VA/SBOM/SA/PM applicability",
+        "regulatory.fdora_524b.coverage_score \u2014 0.0\u20131.0 existing regulatory coverage",
+        "regulatory.fdora_524b.gaps \u2014 specific regulatory gaps identified"
+      ],
+      "therapeutic_highlights": [
+        "Regulatory gap analysis enables targeted FDORA compliance for BCI manufacturers",
+        "Coverage scoring identifies techniques where existing standards are insufficient",
+        "41 techniques have coverage below 0.5 (major gaps)",
+        "Per-technique gap lists provide actionable compliance checklists"
+      ]
+    },
     {
       "version": "1.5",
       "date": "2026-02-16",
@@ -522,6 +573,26 @@
           "DI"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -735,6 +806,27 @@
           "DI"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -875,6 +967,28 @@
           "DI"
         ],
         "cci": 0.72
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -995,6 +1109,27 @@
           "DI"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -1120,6 +1255,27 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -1245,6 +1401,27 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -1352,6 +1529,27 @@
           "CA"
         ],
         "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.8,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -1565,6 +1763,28 @@
           "DI"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -1792,6 +2012,28 @@
           "DI"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -2015,6 +2257,27 @@
           "DI"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -2221,6 +2484,28 @@
           "DI"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -2405,6 +2690,27 @@
           "DI"
         ],
         "cci": 1.92
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -2611,6 +2917,27 @@
           "DI"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -2857,6 +3184,27 @@
           "DI"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -2974,6 +3322,27 @@
           "DI"
         ],
         "cci": 1.35
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -3064,6 +3433,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -3154,6 +3545,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -3247,6 +3660,27 @@
           "CA"
         ],
         "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -3341,6 +3775,27 @@
           "CA"
         ],
         "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -3446,6 +3901,26 @@
           "MP"
         ],
         "cci": 0.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -3550,6 +4025,26 @@
           "MP"
         ],
         "cci": 0.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -3726,6 +4221,27 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -3947,6 +4463,28 @@
           "DI"
         ],
         "cci": 2.7
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -4040,6 +4578,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -4283,6 +4843,25 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -4511,6 +5090,28 @@
           "DI"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -4734,6 +5335,27 @@
           "PC"
         ],
         "cci": 0.6
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -4851,6 +5473,29 @@
           "DI"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -5081,6 +5726,25 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -5306,6 +5970,29 @@
           "DI"
         ],
         "cci": 1.5
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -5394,6 +6081,26 @@
           "MP"
         ],
         "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -5604,6 +6311,27 @@
           "CA"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -5802,6 +6530,28 @@
           "DI"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -6000,6 +6750,27 @@
           "DI"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -6171,6 +6942,25 @@
           "DI"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -6343,6 +7133,26 @@
           "DI"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -6551,6 +7361,29 @@
           "DI"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -6751,6 +7584,25 @@
           "CA"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -6948,6 +7800,28 @@
           "CA"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -7116,6 +7990,26 @@
           "DI"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -7318,6 +8212,27 @@
           "DI"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -7416,6 +8331,26 @@
           "MP"
         ],
         "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -7509,6 +8444,26 @@
           "CA"
         ],
         "cci": 0.24
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -7598,6 +8553,28 @@
           "MP"
         ],
         "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -7686,6 +8663,28 @@
           "MP"
         ],
         "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -7782,6 +8781,27 @@
           "DI"
         ],
         "cci": 0.6
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -7877,6 +8897,27 @@
           "DI"
         ],
         "cci": 1.5
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -7980,6 +9021,26 @@
           "DI"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -8073,6 +9134,24 @@
           "CA"
         ],
         "cci": 0.24
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.8,
+          "gaps": []
+        }
       }
     },
     {
@@ -8170,6 +9249,26 @@
           "CA"
         ],
         "cci": 0.36
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -8294,6 +9393,28 @@
           "MI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -8497,6 +9618,25 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -8700,6 +9840,25 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -8899,6 +10058,26 @@
           "CA"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9100,6 +10279,30 @@
           "CA"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.1,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -9299,6 +10502,27 @@
           "CA"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -9405,6 +10629,24 @@
           "MP"
         ],
         "cci": 0.16
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -9516,6 +10758,27 @@
           "DI"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.8,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -9683,6 +10946,29 @@
           "CA"
         ],
         "cci": 0.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9880,6 +11166,28 @@
           "CA"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9994,6 +11302,26 @@
           "MI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -10162,6 +11490,28 @@
           "DI"
         ],
         "cci": 1.0
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -10277,6 +11627,27 @@
           "MI"
         ],
         "cci": 0.4
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -10443,6 +11814,27 @@
           "DI"
         ],
         "cci": 1.0
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -10653,6 +12045,29 @@
           "CA"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -10907,6 +12322,28 @@
           "DI"
         ],
         "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -11148,6 +12585,26 @@
           "DI"
         ],
         "cci": 1.5
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -11368,6 +12825,28 @@
           "DI"
         ],
         "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -11609,6 +13088,28 @@
           "CA"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -11814,6 +13315,29 @@
           "DI"
         ],
         "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -11936,6 +13460,28 @@
           "CA"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -12047,6 +13593,28 @@
           "MP"
         ],
         "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -12260,6 +13828,28 @@
           "DI"
         ],
         "cci": 0.9
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -12521,6 +14111,27 @@
           "DI"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -12652,6 +14263,27 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -12779,6 +14411,27 @@
           "MP"
         ],
         "cci": 0.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -12915,6 +14568,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13047,6 +14722,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -13184,6 +14881,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13292,6 +15011,28 @@
           "MP"
         ],
         "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -13401,6 +15142,28 @@
           "MP"
         ],
         "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -13511,6 +15274,28 @@
           "MP"
         ],
         "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -13619,6 +15404,28 @@
           "MP"
         ],
         "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -13747,6 +15554,27 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13957,6 +15785,27 @@
           "DI"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14062,6 +15911,28 @@
           "MP"
         ],
         "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -14173,6 +16044,28 @@
           "MP"
         ],
         "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -14301,6 +16194,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14506,6 +16421,27 @@
           "DI"
         ],
         "cci": 1.35
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14666,6 +16602,28 @@
           "DI"
         ],
         "cci": 0.6
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14777,6 +16735,29 @@
           "MP"
         ],
         "cci": 0.24
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -14963,6 +16944,27 @@
           "DI"
         ],
         "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -15092,6 +17094,28 @@
           "DI"
         ],
         "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -15200,6 +17224,28 @@
           "MP"
         ],
         "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -15418,6 +17464,27 @@
           "DI"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -15546,6 +17613,28 @@
           "IDA"
         ],
         "cci": 1.35
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -15737,6 +17826,28 @@
           "IDA"
         ],
         "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -15865,6 +17976,28 @@
           "DI"
         ],
         "cci": 0.9
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -16097,6 +18230,28 @@
           "IDA"
         ],
         "cci": 2.7
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -16236,6 +18391,28 @@
           "MI"
         ],
         "cci": 0.32
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -16371,6 +18548,28 @@
           "IDA"
         ],
         "cci": 0.4
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -16497,6 +18696,27 @@
           "IDA"
         ],
         "cci": 0.16
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     }
   ],
