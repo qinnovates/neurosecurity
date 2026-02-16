@@ -3,8 +3,9 @@ BIB      = bibtex
 MAIN     = main
 FIGDIR   = figures
 SCRIPTDIR= scripts
+DEPLOY   = ../docs/papers/qif-bci-security-2026.pdf
 
-.PHONY: pdf clean figures
+.PHONY: pdf clean figures deploy
 
 pdf: figures $(MAIN).pdf
 
@@ -13,6 +14,11 @@ $(MAIN).pdf: $(MAIN).tex $(wildcard sections/*.tex) references.bib
 	$(BIB) $(MAIN)
 	$(TEX) $(MAIN)
 	$(TEX) $(MAIN)
+
+deploy: pdf
+	@mkdir -p ../docs/papers
+	cp $(MAIN).pdf $(DEPLOY)
+	@echo "Deployed to $(DEPLOY)"
 
 figures:
 	@mkdir -p $(FIGDIR)
