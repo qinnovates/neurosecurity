@@ -39,6 +39,7 @@ const latestChange = getLatestChangelog();
             { href: '#tara', label: 'TARA Atlas' },
             { href: '#niss', label: 'NISS Scoring' },
             { href: '#neural-impact', label: 'Neural Impact Chain' },
+            { href: '#neurorights', label: 'Neurorights Mapping' },
             { href: '#governance', label: 'Governance' },
             { href: '#nsp', label: 'NSP Protocol' },
             { href: '#adopt', label: 'How to Adopt' },
@@ -675,6 +676,69 @@ const latestChange = getLatestChangelog();
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- 6.5 NEURORIGHTS MAPPING                                   -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section id="neurorights" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.5 Neurorights Mapping</h2>
+
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-tertiary);">
+          <p class="text-sm font-semibold text-[var(--color-accent-tertiary)] mb-2">From diagnosis to rights</p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            The Neural Impact Chain tells us what psychiatric harm a technique can cause. The neurorights mapping asks the next question: <strong>which fundamental rights does it violate?</strong>
+          </p>
+        </div>
+
+        <div class="prose mb-8">
+          <p>
+            Ienca &amp; Andorno (2017) proposed four neurorights: Mental Privacy, Cognitive Liberty, Mental Integrity, and Psychological Continuity. Chile enshrined them in law. The OECD endorsed them. But nobody had tested them against an actual threat taxonomy.
+          </p>
+          <p>
+            Every technique in the TARA atlas is now mapped to the affected neurorights through a systematic, multi-layer process: UI category provides the primary signal, DSM-5-TR cluster adds overlays, and NISS vector components refine the result. This mapping is deterministic and reproducible &mdash; the same technique always maps to the same rights.
+          </p>
+          <p>
+            Running {stats.totalTechniques} techniques through this process revealed that four rights are insufficient. Two additional rights were required to cover attack classes that the original taxonomy misses:
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          {stats.neurorights.rights.map((r) => (
+            <div class="glass-subtle rounded-lg p-4">
+              <div class="flex items-center gap-2 mb-1">
+                <span class={`inline-block px-2 py-0.5 rounded text-xs font-mono font-bold ${
+                  r.id === 'DI' || r.id === 'IDA' ? 'bg-[var(--color-accent-tertiary)]/20 text-[var(--color-accent-tertiary)]' : 'bg-[var(--color-accent-primary)]/20 text-[var(--color-accent-primary)]'
+                }`}>{r.id}</span>
+                <span class="text-sm font-semibold text-[var(--color-text-primary)]">{r.name}</span>
+                {(r.id === 'DI' || r.id === 'IDA') && <span class="text-[10px] uppercase tracking-wider text-[var(--color-accent-tertiary)] font-semibold">NEW</span>}
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">{r.count} of {stats.totalTechniques} techniques</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="prose mb-8">
+          <p>
+            <strong>Right to Dynamical Integrity (DI)</strong> &mdash; Some attacks don't break neural function; they <em>retune</em> it. Gradual drift, neurofeedback falsification, and baseline adaptation poisoning reshape the brain's homeostatic equilibrium without triggering Mental Integrity violations in the traditional sense. {stats.neurorights.rights.find(r => r.id === 'DI')?.count} techniques affect this right &mdash; making it the third most commonly violated.
+          </p>
+          <p>
+            <strong>Right to Informational Disassociation (IDA)</strong> &mdash; Multi-modal biometric fusion attacks correlate neural data with gait, voice, typing rhythm, and physiological signals. Each stream alone is a privacy concern; fused, they create an identity signature that cannot be anonymized. IDA protects the right to consent to each data modality independently.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid #f59e0b;">
+          <p class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2">Consent Complexity Index (CCI)</p>
+          <div class="prose text-sm">
+            <p>
+              CCI = (consent_weight &times; rights_count &times; severity_factor) / 10. It quantifies whether a technique's consent process is adequate for the rights it violates. Mean CCI across {stats.totalTechniques} techniques: <strong>{stats.neurorights.cci.mean}</strong>. {stats.neurorights.cci.above2} techniques exceed 2.0 (high complexity).
+            </p>
+            <p class="text-[var(--color-text-muted)] text-xs mt-2">
+              A low CCI with a high NISS score signals a consent blind spot &mdash; the consent infrastructure under-protects the neural impact. Four silicon-only attacks have CCI below 0.6 but NISS above 6.4.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- 7. GOVERNANCE                                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="governance" class="mb-20">
@@ -701,6 +765,90 @@ const latestChange = getLatestChangelog();
           </ul>
           <p>
             These alignments are not merely aspirational. Each consent tier directly corresponds to specific regulatory obligations. An IRB-tier technique, for instance, mandates review processes equivalent to those governing invasive research protocols. A prohibited-tier technique is not merely categorized as "high risk" &mdash; it is explicitly ineligible for any clinical or research protocol under existing frameworks.
+          </p>
+        </div>
+
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">7.2 FDORA &sect;3305 Compliance Mapping</h3>
+
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-secondary);">
+          <p class="text-sm font-semibold text-[var(--color-accent-secondary)] mb-2">Why this matters for manufacturers</p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            Since October 2023, the FDA enforces a Refuse-to-Accept policy under FDORA Section 524B: premarket submissions for "cyber devices" lacking cybersecurity documentation are rejected before review begins. Every BCI is a cyber device. TARA provides the threat catalog these submissions require.
+          </p>
+        </div>
+
+        <div class="prose mb-8">
+          <p>
+            Section 3305 of the Food and Drug Omnibus Reform Act (FDORA, 2022) defines a "cyber device" as one that (1) contains software, (2) can connect to the internet, and (3) could be vulnerable to cybersecurity threats. Every technique in TARA is classified against this three-prong test.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4 mb-8">
+          <div class="glass-subtle rounded-lg p-4 text-center">
+            <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{stats.regulatory.cyberDevices}</p>
+            <p class="text-xs text-[var(--color-text-muted)]">Target cyber devices</p>
+          </div>
+          <div class="glass-subtle rounded-lg p-4 text-center">
+            <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[#f59e0b]">{stats.regulatory.coverage.mean}</p>
+            <p class="text-xs text-[var(--color-text-muted)]">Mean regulatory coverage (0&ndash;1)</p>
+          </div>
+          <div class="glass-subtle rounded-lg p-4 text-center">
+            <p class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[#ef4444]">{stats.regulatory.coverage.belowHalf}</p>
+            <p class="text-xs text-[var(--color-text-muted)]">Techniques with major gaps (&lt;0.5)</p>
+          </div>
+        </div>
+
+        <div class="prose mb-8">
+          <p>
+            Section 524B requires five categories of cybersecurity documentation. Each technique is mapped to the requirements it is relevant to:
+          </p>
+        </div>
+
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">Requirement</th>
+                <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">Section 524B Mandate</th>
+                <th class="text-right py-2 text-[var(--color-text-faint)] font-medium text-xs uppercase">Techniques</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-2 pr-4 font-mono text-xs font-semibold text-[var(--color-accent-primary)]">TM</td>
+                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Threat modeling &mdash; identification of cybersecurity risks</td>
+                <td class="py-2 text-right font-mono text-sm text-[var(--color-text-primary)]">{stats.regulatory.requirements.TM}</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-2 pr-4 font-mono text-xs font-semibold text-[var(--color-accent-primary)]">VA</td>
+                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Vulnerability assessment &mdash; severity ratings for known vulnerabilities</td>
+                <td class="py-2 text-right font-mono text-sm text-[var(--color-text-primary)]">{stats.regulatory.requirements.VA}</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-2 pr-4 font-mono text-xs font-semibold text-[var(--color-accent-primary)]">SBOM</td>
+                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Software Bill of Materials &mdash; component transparency</td>
+                <td class="py-2 text-right font-mono text-sm text-[var(--color-text-primary)]">{stats.regulatory.requirements.SBOM}</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-2 pr-4 font-mono text-xs font-semibold text-[var(--color-accent-primary)]">SA</td>
+                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Security architecture &mdash; design controls for cybersecurity</td>
+                <td class="py-2 text-right font-mono text-sm text-[var(--color-text-primary)]">{stats.regulatory.requirements.SA}</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-2 pr-4 font-mono text-xs font-semibold text-[var(--color-accent-primary)]">PM</td>
+                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Post-market monitoring &mdash; ongoing vulnerability surveillance</td>
+                <td class="py-2 text-right font-mono text-sm text-[var(--color-text-primary)]">{stats.regulatory.requirements.PM}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose mb-8">
+          <p>
+            The regulatory coverage score (0.0&ndash;1.0) measures how well <em>existing</em> standards cover each technique. A score of 0.8 means current FDA pathways, IEC standards, and privacy regulations adequately address the risk. A score below 0.5 indicates a <strong>major regulatory gap</strong> &mdash; the technique represents a neural-specific threat that pre-FDORA frameworks were not designed to handle. {stats.regulatory.coverage.belowHalf} of {stats.totalTechniques} techniques fall below this threshold.
+          </p>
+          <p>
+            The top gaps are structural, not incidental: <strong>CVSS cannot express neural-specific impacts</strong> for the majority of techniques, and <strong>no FDA pathway exists</strong> for consumer sensor exploitation in the S-domain. These are precisely the gaps that TARA and NISS were built to fill &mdash; providing the neural threat catalog and impact scoring that Section 524B mandates but existing standards do not supply.
           </p>
         </div>
       </section>

@@ -171,6 +171,8 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
   tara: t.tara ?? null,
+  neurorights: t.neurorights ?? null,
+  regulatory: t.regulatory ?? null,
 }));
 
 /** Severity color map */
@@ -470,5 +472,82 @@ export function getTaraStats() {
     fdaStatus,
     consentTier,
     topConditions: [...conditions.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20),
+  };
+}
+
+/** Neurorights statistics */
+export function getNeurorightStats() {
+  const RIGHTS = ['MP', 'CL', 'MI', 'PC', 'CA', 'DI', 'IDA'] as const;
+  const NAMES: Record<string, string> = {
+    MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity',
+    PC: 'Psychological Continuity', CA: 'Cognitive Authenticity',
+    DI: 'Dynamical Integrity', IDA: 'Informational Disassociation',
+  };
+  const counts: Record<string, number> = {};
+  for (const r of RIGHTS) counts[r] = 0;
+
+  const cciValues: number[] = [];
+  let withNeurorights = 0;
+
+  for (const t of THREAT_VECTORS) {
+    const nr = (t as any).neurorights;
+    if (!nr) continue;
+    withNeurorights++;
+    for (const r of nr.affected ?? []) {
+      counts[r] = (counts[r] ?? 0) + 1;
+    }
+    cciValues.push(nr.cci ?? 0);
+  }
+
+  return {
+    total: THREAT_VECTORS.length,
+    withNeurorights,
+    rights: RIGHTS.map(r => ({ id: r, name: NAMES[r], count: counts[r] })),
+    cci: {
+      mean: cciValues.length > 0 ? Math.round(cciValues.reduce((a, b) => a + b, 0) / cciValues.length * 100) / 100 : 0,
+      max: cciValues.length > 0 ? Math.max(...cciValues) : 0,
+      above2: cciValues.filter(c => c > 2.0).length,
+    },
+  };
+}
+
+/** FDORA §3305 regulatory statistics */
+export function getRegulatoryStats() {
+  let cyberDevices = 0;
+  const coverageScores: number[] = [];
+  const reqCounts: Record<string, number> = { TM: 0, VA: 0, SBOM: 0, SA: 0, PM: 0 };
+  const gapCounts: Record<string, number> = {};
+  let belowHalf = 0;
+
+  for (const t of THREAT_VECTORS) {
+    const reg = (t as any).regulatory?.fdora_524b;
+    if (!reg) continue;
+    if (reg.cyber_device) cyberDevices++;
+    coverageScores.push(reg.coverage_score ?? 0);
+    if ((reg.coverage_score ?? 0) < 0.5) belowHalf++;
+    for (const r of reg.applicable_requirements ?? []) {
+      reqCounts[r] = (reqCounts[r] ?? 0) + 1;
+    }
+    for (const g of reg.gaps ?? []) {
+      const key = g.split('(')[0].trim();
+      gapCounts[key] = (gapCounts[key] ?? 0) + 1;
+    }
+  }
+
+  const topGaps = Object.entries(gapCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([gap, count]) => ({ gap, count }));
+
+  return {
+    total: THREAT_VECTORS.length,
+    cyberDevices,
+    nonCyberDevices: THREAT_VECTORS.length - cyberDevices,
+    coverage: {
+      mean: coverageScores.length > 0 ? Math.round(coverageScores.reduce((a, b) => a + b, 0) / coverageScores.length * 100) / 100 : 0,
+      belowHalf,
+    },
+    requirements: reqCounts,
+    topGaps,
   };
 }

@@ -4,13 +4,15 @@
  * Single import for any whitepaper page/component.
  */
 
-import { THREAT_VECTORS, getThreatStats, getTaraStats, getDsm5Stats, THREAT_CATEGORIES } from './threat-data';
+import { THREAT_VECTORS, getThreatStats, getTaraStats, getDsm5Stats, getNeurorightStats, getRegulatoryStats, THREAT_CATEGORIES } from './threat-data';
 import { HOURGLASS_BANDS, QIF_VERSION, PILLARS } from './qif-constants';
 
 export function getWhitepaperStats() {
   const threat = getThreatStats();
   const tara = getTaraStats();
   const dsm5 = getDsm5Stats();
+  const neurorights = getNeurorightStats();
+  const regulatory = getRegulatoryStats();
 
   // Techniques flagged PINS (Potential Impact to Neural Safety)
   const pinsCount = THREAT_VECTORS.filter(t => t.niss?.pins === true).length;
@@ -55,5 +57,7 @@ export function getWhitepaperStats() {
     nissGapPercentage: Math.round(gapCount / THREAT_VECTORS.length * 1000) / 10,
     /** Number of techniques with both CVSS and NISS scores for gap analysis */
     gapCount,
+    neurorights,
+    regulatory,
   };
 }
