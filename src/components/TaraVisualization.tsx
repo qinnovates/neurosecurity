@@ -75,11 +75,11 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
 
     const getModeColor = (mode: ViewMode) => {
         switch (mode) {
-            case 'modality': return { text: 'text-slate-900', bg: 'bg-slate-900', border: 'border-slate-900' };
-            case 'clinical': return { text: 'text-emerald-600', bg: 'bg-emerald-600', border: 'border-emerald-600' };
-            case 'diagnostic': return { text: 'text-amber-600', bg: 'bg-amber-600', border: 'border-amber-600' };
-            case 'governance': return { text: 'text-blue-600', bg: 'bg-blue-600', border: 'border-blue-600' };
-            default: return { text: 'text-slate-600', bg: 'bg-slate-900', border: 'border-slate-900' };
+            case 'modality': return { text: 'text-slate-900', bg: 'bg-slate-900', shadow: 'shadow-slate-900/20', dot: 'bg-slate-400' };
+            case 'clinical': return { text: 'text-emerald-600', bg: 'bg-emerald-600', shadow: 'shadow-emerald-600/20', dot: 'bg-emerald-400' };
+            case 'diagnostic': return { text: 'text-amber-600', bg: 'bg-amber-600', shadow: 'shadow-amber-600/20', dot: 'bg-amber-400' };
+            case 'governance': return { text: 'text-blue-600', bg: 'bg-blue-600', shadow: 'shadow-blue-600/20', dot: 'bg-blue-400' };
+            default: return { text: 'text-slate-900', bg: 'bg-slate-900', shadow: 'shadow-slate-900/20', dot: 'bg-slate-400' };
         }
     };
 
@@ -160,11 +160,12 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                             <button
                                 key={mode}
                                 onClick={() => setViewMode(mode)}
-                                className={`px-8 py-3 rounded-xl text-xs font-bold transition-all duration-300 ${isActive
-                                    ? `${colors.bg} text-white shadow-lg shadow-${colors.text.split('-')[1]}-500/20`
+                                className={`px-8 py-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-2 ${isActive
+                                    ? `${colors.bg} text-white shadow-lg ${colors.shadow}`
                                     : 'text-slate-400 hover:text-slate-600 hover:bg-white/50'
                                     }`}
                             >
+                                {isActive && <span className={`w-1.5 h-1.5 rounded-full ${colors.dot} animate-pulse`} />}
                                 {mode.charAt(0).toUpperCase() + mode.slice(1)}
                             </button>
                         );
