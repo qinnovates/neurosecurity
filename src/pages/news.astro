@@ -54,25 +54,17 @@ const ownContent: FeedItem[] = [...publicationItems, ...briefItems]
 const extContent: FeedItem[] = [...externalItems]
   .sort((a, b) => b.date.localeCompare(a.date));
 
-// Interleave: 2 own items, then 1 external, repeat — shows our work first
-// while demonstrating the broader market momentum
-const allItems: FeedItem[] = [];
-let ownIdx = 0;
-let extIdx = 0;
-while (ownIdx < ownContent.length || extIdx < extContent.length) {
-  // Add up to 2 own items
-  for (let i = 0; i < 2 && ownIdx < ownContent.length; i++) {
-    allItems.push(ownContent[ownIdx++]);
-  }
-  // Add 1 external item
-  if (extIdx < extContent.length) {
-    allItems.push(extContent[extIdx++]);
-  }
-}
-// Append any remaining external items at the end
-while (extIdx < extContent.length) {
-  allItems.push(extContent[extIdx++]);
-}
+// Layout: top 6 blog posts first, then industry news below
+const blogPosts = ownContent.filter((item): item is PublicationItem => item.type === 'publication');
+const intelBriefs = ownContent.filter((item): item is BriefItem => item.type === 'brief');
+const featuredBlogs = blogPosts.slice(0, 6);
+const remainingOwn = [...blogPosts.slice(6), ...intelBriefs]
+  .sort((a, b) => b.date.localeCompare(a.date));
+const allItems: FeedItem[] = [
+  ...featuredBlogs,
+  ...extContent,
+  ...remainingOwn,
+];
 
 // Category mapping for blog tags
 function inferCategory(tags: string[]): string {
@@ -139,9 +131,23 @@ function inferCategory(tags: string[]): string {
     ))}
   </div>
 
-  <!-- Unified feed grid -->
+  <!-- Featured blog posts -->
+  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">From Qinnovate</h2>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-12" id="feed-featured">
+    {featuredBlogs.map((item) => {
+      const dataCategory = inferCategory(item.tags);
+      return (
+        <div data-type="publication" data-category={dataCategory}>
+          <FeedCard item={item} />
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Industry news + remaining content -->
+  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">Industry &amp; Research</h2>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-grid">
-    {allItems.map((item) => {
+    {[...extContent, ...remainingOwn].map((item) => {
       const dataType = item.type;
       const dataCategory =
         item.type === 'publication'
@@ -237,7 +243,12 @@ function inferCategory(tags: string[]): string {
 
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>('.feed-btn');
-  const cards = document.querySelectorAll<HTMLElement>('#feed-grid > div');
+  const featuredCards = document.querySelectorAll<HTMLElement>('#feed-featured > div');
+  const gridCards = document.querySelectorAll<HTMLElement>('#feed-grid > div');
+  const allCards = [...featuredCards, ...gridCards];
+  const featuredSection = document.getElementById('feed-featured');
+  const gridSection = document.getElementById('feed-grid');
+  const sectionHeadings = document.querySelectorAll<HTMLElement>('h2.font-\\[family-name\\:var\\(--font-heading\\)\\]');
 
   const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
   const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
@@ -252,16 +263,18 @@ function inferCategory(tags: string[]): string {
       });
       btn.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
 
-      // Filter cards
-      cards.forEach((card) => {
+      // Show/hide section headings based on filter
+      const showSections = filter === 'all';
+      sectionHeadings.forEach((h) => h.style.display = showSections ? '' : 'none');
+
+      // Filter cards across both grids
+      allCards.forEach((card) => {
         if (filter === 'all') {
           card.style.display = '';
         } else if (filter.startsWith('cat-')) {
-          // Category filter
           const catId = filter.slice(4);
           card.style.display = card.dataset.category === catId ? '' : 'none';
         } else {
-          // Type filter (publication, brief, external)
           card.style.display = card.dataset.type === filter ? '' : 'none';
         }
       });
