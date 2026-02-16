@@ -1,0 +1,263 @@
+\begin{thebibliography}{36}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{American Psychiatric Association}(2022)]{apa2022dsm5tr}
+{American Psychiatric Association}.
+\newblock \emph{Diagnostic and Statistical Manual of Mental Disorders, Fifth
+  Edition, Text Revision ({DSM-5-TR})}.
+\newblock American Psychiatric Association Publishing, 2022.
+\newblock \doi{10.1176/appi.books.9780890425787}.
+
+\bibitem[Bellan(2026)]{mergelabs2026}
+Rebecca Bellan.
+\newblock {OpenAI} invests in {Sam Altman's} brain computer interface startup
+  {Merge Labs}.
+\newblock TechCrunch, January 2026.
+\newblock \$252M seed round at \$850M valuation; co-founded by Sam Altman, Alex
+  Blania, and Caltech researchers.
+
+\bibitem[Bonaci et~al.(2015)Bonaci, Calo, and Chizeck]{bonaci2015appstores}
+Tamara Bonaci, Ryan Calo, and Howard~J. Chizeck.
+\newblock App stores for the brain: Privacy \& security in brain-computer
+  interfaces.
+\newblock \emph{IEEE Technology and Society Magazine}, 34\penalty0
+  (2):\penalty0 32--39, 2015.
+\newblock \doi{10.1109/MTS.2015.2425551}.
+
+\bibitem[Camara et~al.(2015)Camara, Peris-Lopez, and
+  Tapiador]{camara2015security}
+Carmen Camara, Pedro Peris-Lopez, and Juan~E. Tapiador.
+\newblock Security and privacy issues in implantable medical devices: A
+  comprehensive survey.
+\newblock \emph{Journal of Biomedical Informatics}, 55:\penalty0 272--289,
+  2015.
+\newblock \doi{10.1016/j.jbi.2015.04.007}.
+
+\bibitem[Deering(2001)]{deering1998hourglass}
+Stephen Deering.
+\newblock Watching the waist of the protocol hourglass.
+\newblock Keynote, IETF 51 Plenary, 2001.
+\newblock Originally presented at ICNP '98. Foundational description of the
+  Internet hourglass architecture.
+
+\bibitem[Denning et~al.(2009)Denning, Matsuoka, and
+  Kohno]{kohno2009neurosecurity}
+Tamara Denning, Yoky Matsuoka, and Tadayoshi Kohno.
+\newblock Neurosecurity: Security and privacy for neural devices.
+\newblock \emph{Neurosurgical Focus}, 27\penalty0 (1):\penalty0 E7, 2009.
+\newblock First use of the term ``neurosecurity'' in academic literature.
+
+\bibitem[{European Parliament and Council}(2016)]{gdpr2016}
+{European Parliament and Council}.
+\newblock General data protection regulation ({GDPR}) --- regulation ({EU})
+  2016/679, 2016.
+\newblock URL \url{https://gdpr-info.eu/}.
+
+\bibitem[{European Parliament and Council}(2017)]{eumdr2017}
+{European Parliament and Council}.
+\newblock Regulation ({EU}) 2017/745 on medical devices ({MDR}), 2017.
+\newblock URL
+  \url{https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745}.
+
+\bibitem[{FIRST.org}(2023{\natexlab{a}})]{first2023cvss4}
+{FIRST.org}.
+\newblock Common vulnerability scoring system v4.0 specification,
+  2023{\natexlab{a}}.
+\newblock URL \url{https://www.first.org/cvss/v4-0/cvss-v40-specification.pdf}.
+
+\bibitem[{FIRST.org}(2023{\natexlab{b}})]{first2023cvss4userguide}
+{FIRST.org}.
+\newblock {CVSS} v4.0 user guide, 2023{\natexlab{b}}.
+\newblock URL \url{https://www.first.org/cvss/v4.0/user-guide}.
+\newblock Section 3.11: Extension Framework.
+
+\bibitem[Halperin et~al.(2008)Halperin, Heydt-Benjamin, Ransford,
+  et~al.]{halperin2008pacemakers}
+Daniel Halperin, Thomas~S. Heydt-Benjamin, Benjamin Ransford, et~al.
+\newblock Pacemakers and implantable cardiac defibrillators: Software radio
+  attacks and zero-power defenses.
+\newblock In \emph{Proceedings of the 2008 IEEE Symposium on Security and
+  Privacy}, pages 129--142, 2008.
+\newblock \doi{10.1109/SP.2008.31}.
+
+\bibitem[Ienca and Andorno(2017)]{ienca2017neurorights}
+Marcello Ienca and Roberto Andorno.
+\newblock Towards new human rights in the age of neuroscience and
+  neurotechnology.
+\newblock \emph{Life Sciences, Society and Policy}, 13\penalty0 (1):\penalty0
+  5, 2017.
+\newblock \doi{10.1186/s40504-017-0050-1}.
+
+\bibitem[Ienca and Haselager(2016)]{ienca2016hacking}
+Marcello Ienca and Pim Haselager.
+\newblock Hacking the brain: Brain-computer interfacing technology and the
+  ethics of neurosecurity.
+\newblock \emph{Ethics and Information Technology}, 18\penalty0 (2):\penalty0
+  117--129, 2016.
+\newblock \doi{10.1007/s10676-016-9398-9}.
+
+\bibitem[{International Organization for Standardization}(2019)]{iso14971}
+{International Organization for Standardization}.
+\newblock {ISO} 14971:2019 --- medical devices --- application of risk
+  management to medical devices, 2019.
+
+\bibitem[Kandel et~al.(2021)Kandel, Koester, Mack, and
+  Siegelbaum]{kandel2021neuroscience}
+Eric~R. Kandel, John~D. Koester, Sarah~H. Mack, and Steven~A. Siegelbaum.
+\newblock \emph{Principles of Neural Science}.
+\newblock McGraw-Hill, 6th edition, 2021.
+
+\bibitem[Krauss et~al.(2021)Krauss, Lipsman, Aziz, et~al.]{krauss2021tms}
+Joachim~K. Krauss, Nir Lipsman, Tipu Aziz, et~al.
+\newblock Technology of deep brain stimulation: Current status and future
+  directions.
+\newblock \emph{Nature Reviews Neurology}, 17:\penalty0 75--87, 2021.
+\newblock \doi{10.1038/s41582-020-00426-z}.
+
+\bibitem[Lozano et~al.(2019)Lozano, Lipsman, Bergman, et~al.]{lozano2019dbs}
+Andres~M. Lozano, Nir Lipsman, Hagai Bergman, et~al.
+\newblock Deep brain stimulation: Current challenges and future directions.
+\newblock \emph{Nature Reviews Neurology}, 15:\penalty0 148--160, 2019.
+\newblock \doi{10.1038/s41582-018-0128-2}.
+
+\bibitem[Lázaro-Muñoz et~al.(2022)Lázaro-Muñoz, Pham, Muñoz,
+  et~al.]{lazaro2022posttrial}
+Gabriel Lázaro-Muñoz, Michelle~T. Pham, Katrina~A. Muñoz, et~al.
+\newblock Post-trial access in implanted neural device research.
+\newblock \emph{Brain Stimulation}, 15\penalty0 (5):\penalty0 1029--1036, 2022.
+\newblock \doi{10.1016/j.brs.2022.07.051}.
+
+\bibitem[Martinovic et~al.(2012)Martinovic, Davies, Frank, Perito, Ros, and
+  Song]{martinovic2012feasibility}
+Ivan Martinovic, Doug Davies, Mario Frank, Daniele Perito, Tomas Ros, and Dawn
+  Song.
+\newblock On the feasibility of side-channel attacks with brain-computer
+  interfaces.
+\newblock In \emph{Proceedings of the 21st USENIX Security Symposium}, pages
+  143--158. USENIX Association, 2012.
+
+\bibitem[Meng et~al.(2023)Meng, Jiang, and Wu]{meng2023adversarial}
+Lubin Meng, Xue Jiang, and Dongrui Wu.
+\newblock Adversarial robustness benchmark for {EEG}-based brain-computer
+  interfaces.
+\newblock \emph{Future Generation Computer Systems}, 2023.
+\newblock \doi{10.1016/j.future.2023.01.028}.
+
+\bibitem[{MITRE Corporation}(2024)]{mitre2024attack}
+{MITRE Corporation}.
+\newblock {ATT\&CK}\textregistered\ framework, 2024.
+\newblock URL \url{https://attack.mitre.org/}.
+
+\bibitem[Musk and Neuralink(2019)]{musk2019neuralink}
+Elon Musk and Neuralink.
+\newblock An integrated brain-machine interface platform with thousands of
+  channels.
+\newblock \emph{Journal of Medical Internet Research}, 21\penalty0
+  (10):\penalty0 e16194, 2019.
+\newblock \doi{10.2196/16194}.
+
+\bibitem[Muñoz et~al.(2020)Muñoz, Kostick, Sanchez, Kalwani, Torgerson, Hsu,
+  Sierra-Mercado, Robinson, Outram, Koenig, Pereira, McGuire, Zuk, and
+  Lázaro-Muñoz]{lazaro2020researcher}
+Katrina~A. Muñoz, Kristin Kostick, Clarissa Sanchez, Lavina Kalwani, Laura
+  Torgerson, Rebecca Hsu, Demetrio Sierra-Mercado, Jill~O. Robinson, Simon
+  Outram, Barbara~A. Koenig, Stacey Pereira, Amy McGuire, Peter Zuk, and
+  Gabriel Lázaro-Muñoz.
+\newblock Researcher perspectives on ethical considerations in adaptive deep
+  brain stimulation trials.
+\newblock \emph{Frontiers in Human Neuroscience}, 14:\penalty0 578695, 2020.
+\newblock \doi{10.3389/fnhum.2020.578695}.
+
+\bibitem[{OECD}(2019)]{oecd2019neurotechnology}
+{OECD}.
+\newblock Recommendation on responsible innovation in neurotechnology, 2019.
+\newblock URL
+  \url{https://legalinstruments.oecd.org/api/print?ids=658&Lang=en}.
+
+\bibitem[Oxley et~al.(2021)Oxley, Yoo, Rind, et~al.]{oxley2021stentrode}
+Thomas~J. Oxley, Peter~E. Yoo, Gill~S. Rind, et~al.
+\newblock Motor neuroprosthesis implanted with neurointerventional surgery
+  improves capacity for activities of daily living tasks in severe paralysis.
+\newblock \emph{Journal of NeuroInterventional Surgery}, 13:\penalty0 102--108,
+  2021.
+\newblock \doi{10.1136/neurintsurg-2020-016862}.
+
+\bibitem[{Republic of Chile}(2021)]{chile2021neurorights}
+{Republic of Chile}.
+\newblock Constitutional amendment on neurorights (article 19, no. 1), 2021.
+\newblock First country to constitutionally protect neurorights.
+
+\bibitem[Rushanan et~al.(2014)Rushanan, Rubin, Kune, and
+  Swanson]{rushanan2014sok}
+Michael Rushanan, Aviel~D. Rubin, Denis~Foo Kune, and Colleen~M. Swanson.
+\newblock {SoK}: Security and privacy in implantable medical devices and body
+  area networks.
+\newblock In \emph{Proceedings of the 2014 IEEE Symposium on Security and
+  Privacy}, pages 524--539, 2014.
+\newblock \doi{10.1109/SP.2014.40}.
+
+\bibitem[Schroder et~al.(2025)Schroder, Sirbu, Park, Morley, Street, and
+  Floridi]{schroder2025cyberrisks}
+Tyler Schroder, Renee Sirbu, Sohee Park, Jessica Morley, Sam Street, and
+  Luciano Floridi.
+\newblock Cyber risks to next-gen brain-computer interfaces: Analysis and
+  recommendations.
+\newblock \emph{arXiv preprint arXiv:2508.12571}, 2025.
+
+\bibitem[{State of Colorado}(2024)]{colorado2024neuraldata}
+{State of Colorado}.
+\newblock Colorado privacy act --- amendment on biological and neural data,
+  2024.
+\newblock First US state to classify neural data as sensitive personal data.
+
+\bibitem[{UNESCO}(2025)]{unesco2025recommendation}
+{UNESCO}.
+\newblock Recommendation on the ethics of neurotechnology.
+\newblock Adopted at the 43rd session of the General Conference, Samarkand,
+  2025.
+\newblock URL \url{https://www.unesco.org/en/ethics-neurotech/recommendation}.
+
+\bibitem[{U.S. Congress}(1996)]{hipaa1996}
+{U.S. Congress}.
+\newblock Health insurance portability and accountability act ({HIPAA}), 1996.
+
+\bibitem[{U.S. Food and Drug
+  Administration}(2023{\natexlab{a}})]{fda2023cybersecurity}
+{U.S. Food and Drug Administration}.
+\newblock Cybersecurity in medical devices: Quality system considerations and
+  content of premarket submissions, 2023{\natexlab{a}}.
+\newblock URL
+  \url{https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket}.
+\newblock Superseded Feb 2026 by updated guidance.
+
+\bibitem[{U.S. Food and Drug Administration}(2023{\natexlab{b}})]{fda524b}
+{U.S. Food and Drug Administration}.
+\newblock Section 524{B} of the {FD\&C} act --- ensuring cybersecurity of
+  medical devices, 2023{\natexlab{b}}.
+\newblock Enacted via the Consolidated Appropriations Act, 2023.
+
+\bibitem[Willett et~al.(2023)Willett, Kunz, Fan, et~al.]{willett2023speech}
+Francis~R. Willett, Erin~M. Kunz, Chaofei Fan, et~al.
+\newblock A high-performance speech neuroprosthesis.
+\newblock \emph{Nature}, 620:\penalty0 1031--1036, 2023.
+\newblock \doi{10.1038/s41586-023-06377-x}.
+
+\bibitem[Yuste et~al.(2017)Yuste, Goering, Arcas, et~al.]{yuste2017four}
+Rafael Yuste, Sara Goering, Blaise Agüera~y Arcas, et~al.
+\newblock Four ethical priorities for neurotechnologies and {AI}.
+\newblock \emph{Nature}, 551\penalty0 (7679):\penalty0 159--163, 2017.
+\newblock \doi{10.1038/551159a}.
+
+\bibitem[Zimmermann(1980)]{zimmermann1980osi}
+Hubert Zimmermann.
+\newblock {OSI} reference model --- the {ISO} model of architecture for open
+  systems interconnection.
+\newblock \emph{IEEE Transactions on Communications}, 28\penalty0 (4):\penalty0
+  425--432, 1980.
+\newblock \doi{10.1109/TCOM.1980.1094702}.
+
+\end{thebibliography}

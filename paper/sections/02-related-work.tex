@@ -11,7 +11,7 @@ policy response. \qif builds on each while addressing gaps left by prior work.
 
 \subsection{Foundational Neurosecurity}
 
-Denning, Kohno, and Chizeck~\cite{denning2009neurostimulators,kohno2009neurosecurity}
+Denning, Matsuoka, and Kohno~\cite{kohno2009neurosecurity}
 coined the term ``neurosecurity'' and established the field by analyzing attack
 surfaces in implantable neurostimulators. Their work identified wireless
 reprogramming, battery depletion, and signal injection as threat categories, but
@@ -39,19 +39,20 @@ integrity. They proposed that BCI security requires both traditional cybersecuri
 measures and novel neuroethical safeguards---a dual requirement that \qif
 implements through the parallel CVSS/NISS scoring architecture.
 
-Wu et al.~\cite{wu2024adversarial} surveyed adversarial attacks on EEG-based BCIs,
-documenting techniques including adversarial perturbation of EEG signals, backdoor
-attacks on BCI classifiers, and data poisoning during calibration. Their taxonomy
-focuses on machine learning attacks; \tara extends coverage to physical-layer,
+Meng et al.~\cite{meng2023adversarial} established an adversarial robustness
+benchmark for EEG-based BCIs, evaluating multiple adversarial defense approaches
+across neural network architectures and EEG datasets. Their work focuses on
+machine learning adversarial robustness; \tara extends coverage to physical-layer,
 protocol-layer, and cognitive-layer threats.
 
 \subsection{Emerging Frameworks}
 
-Schroder, Bhatt, and Bhatt~\cite{schroder2025cyberrisks} from Yale University
-published the most recent analysis (2025), identifying cyber risks to
-next-generation BCIs across hardware, software, and communication layers. Their
-work provides threat categorization but does not propose a scoring system, formal
-threat taxonomy with technique-level granularity, or clinical impact mapping.
+Schroder et al.~\cite{schroder2025cyberrisks} published the most recent analysis
+(2025), developing a threat model for network-based attacks on next-generation BCIs
+and identifying associated regulatory changes needed to address them. Their work
+contributes threat categorization across network pathways but does not propose a
+scoring system, formal threat taxonomy with technique-level granularity, or clinical
+impact mapping.
 
 Camara et al.~\cite{camara2015security} and Rushanan et al.~\cite{rushanan2014sok}
 surveyed security and privacy in implantable medical devices more broadly, covering
@@ -69,7 +70,7 @@ Yuste et al.~\cite{yuste2017four} added equal access and protection from
 algorithmic bias. These philosophical frameworks establish \emph{what} must be
 protected; \qif provides the technical architecture for \emph{how}.
 
-Lázaro-Muñoz et al.~\cite{lazaro2020researcher,lazaro2022posttrial} contributed
+Muñoz et al.~\cite{lazaro2020researcher} and Lázaro-Muñoz et al.~\cite{lazaro2022posttrial} contributed
 empirical grounding through researcher interviews, documenting clinician concerns
 about adaptive DBS ethics (72\% cited uncertainty about risks) and post-trial
 access obligations for implanted neural devices.
