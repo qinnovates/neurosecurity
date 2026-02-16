@@ -14,19 +14,19 @@ I was trying to protect brains from hackers.
 For the past six weeks, I've been building QIF — the Quantum-Informed Framework for brain-computer interface security. The core of QIF is an 11-band hourglass model that maps every layer of neural processing an attacker could target, from the neocortex down to the spinal cord, through the electrode-tissue interface, and into the silicon stack below.
 
 ```
-N7  Neocortex           ─┐
-N6  Limbic System         │  Neural Domain
-N5  Basal Ganglia         │  (expensive → cheap)
-N4  Thalamus              │
+N7  Neocortex           ─┐  indeterministic, expensive
+N6  Limbic System         │
+N5  Basal Ganglia         │  Neural Domain
+N4  Thalamus              │  (routes what needs cortex)
 N3  Brainstem             │
 N2  Cranial Nerves        │
-N1  Spinal Cord          ─┘
+N1  Spinal Cord          ─┘  deterministic, cheap
 ─────────────────────────────
 I0  Neural Interface      ←  THE WAIST
 ─────────────────────────────
 S1  Analog Frontend      ─┐
 S2  Digital Processing    │  Silicon Domain
-S3  Radio/Wireless       ─┘
+S3  Radio/Wireless       ─┘  deterministic, cheapest
 ```
 
 The shape comes from Steve Deering's internet hourglass principle (IETF, 1998): the internet works because everything passes through one narrow waist — IP. I applied the same idea to BCIs: everything passes through I0, the physical boundary where biology meets silicon. That bottleneck is where security controls live.
@@ -41,9 +41,11 @@ At the top, the neocortex handles complex reasoning — novel problems, abstract
 
 In the middle, the thalamus acts as a router. It decides what signals deserve expensive cortical attention and what can be handled by cheaper circuits below. It gates sensory input based on attention and behavioral state (Sherman & Guillery, 2006). Not everything gets promoted to the cortex. Most of it gets filtered.
 
-At the bottom, the spinal cord handles reflexes — touch a hot stove, and your hand pulls back before you consciously register pain. No cortical involvement needed. The problem was already solved millions of years ago. The solution is hardwired.
+At the bottom, the spinal cord handles reflexes — touch a hot stove, and your hand pulls back in ~30ms before you consciously register pain. No cortical involvement needed. The problem was already solved millions of years ago. The solution is hardwired.
 
-The pattern: **expensive, sparse, flexible processing at the top for novel problems. Cheap, fast, automatic processing at the bottom for solved problems. A routing layer in the middle deciding which is which.**
+This is the key insight: **the spinal cord is more deterministic than the cortex.** The same input produces the same output every time. A reflex arc is a biological lookup table — there's no deliberation, no probabilistic weighing of options, no state-dependent variation. The neocortex is the opposite: the same input can produce wildly different outputs depending on mood, attention, context, and memory. That indeterminacy is what makes the cortex powerful, but it's also what makes it expensive. Deterministic processing is cheap because there's nothing to resolve.
+
+The pattern: **expensive, indeterministic, flexible processing at the top for novel problems. Cheap, deterministic, automatic processing at the bottom for solved problems. A routing layer in the middle deciding which is which.**
 
 Sound familiar?
 
@@ -65,7 +67,7 @@ This led me to a hypothesis I wasn't expecting to form.
 
 The hourglass isn't just a useful shape for network protocols and brain security models. It may be a missing structural principle in AI architecture.
 
-Current transformer designs are flat rectangles — uniform width, uniform compute per layer. Every token gets the same computational budget regardless of complexity. But the brain doesn't work this way. Neither does the internet. Both route traffic through a narrow waist that separates expensive processing from cheap retrieval.
+Current transformer designs are flat rectangles — uniform width, uniform compute per layer. Every token gets the same computational budget regardless of complexity. But the brain doesn't work this way. Neither does the internet. Both route traffic through a narrow waist that separates expensive processing from cheap retrieval. And both exploit the same gradient: deterministic operations are cheap, indeterministic operations are expensive. The spinal cord proves it — a reflex costs almost nothing because there's nothing to decide. The cortex is expensive precisely because it has to decide.
 
 What if a transformer was designed with an explicit hourglass shape?
 
