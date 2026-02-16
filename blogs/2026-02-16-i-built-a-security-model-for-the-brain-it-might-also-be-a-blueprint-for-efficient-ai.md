@@ -5,7 +5,7 @@ author: "Kevin L. Qi"
 tags: ["qif", "bci", "ai", "hourglass", "security"]
 ---
 
-> **Status:** DRAFT — For qinnovate.com blog
+> **Originally published on [Medium](https://medium.com/@qikevinl/i-built-a-security-model-for-the-brain-it-might-also-be-a-blueprint-for-efficient-ai-767401ed0004)**
 
 **TL;DR:** Your brain runs two very different systems. The cortex thinks — it's slow, expensive, and flexible. The spinal cord reacts — it's fast, cheap, and hardwired. A routing layer in the middle decides which one handles each job. This saves energy: the brain spends 20% of your body's fuel on 2% of your mass, and it would be worse without the shortcut. But the cheap system has a catch — it's also cheap to break. A vitamin deficiency, a dental anesthetic, or a bad diet can silently degrade your spinal cord while your cortex never notices. The same trade-off is showing up in AI. Models like DeepSeek use lookup tables for known answers (fast, cheap, brittle) and deep reasoning for hard questions (slow, expensive, resilient). Data poisoning breaks the lookup table the same way B12 deficiency breaks a reflex arc. And when AI gets a body — robots, surgical systems, self-driving cars — it will need the full architecture, fragility tax included. This post describes how a security model for brain-computer interfaces accidentally revealed that pattern.
 
