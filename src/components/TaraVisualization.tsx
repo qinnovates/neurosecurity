@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 
 // --- Types ---
@@ -74,6 +73,16 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
         }
     };
 
+    const getModeColor = (mode: ViewMode) => {
+        switch (mode) {
+            case 'modality': return { text: 'text-slate-900', bg: 'bg-slate-900', border: 'border-slate-900' };
+            case 'clinical': return { text: 'text-emerald-600', bg: 'bg-emerald-600', border: 'border-emerald-600' };
+            case 'diagnostic': return { text: 'text-amber-600', bg: 'bg-amber-600', border: 'border-amber-600' };
+            case 'governance': return { text: 'text-blue-600', bg: 'bg-blue-600', border: 'border-blue-600' };
+            default: return { text: 'text-slate-600', bg: 'bg-slate-900', border: 'border-slate-900' };
+        }
+    };
+
     // Sub-component: Insight Badge Strip
     const InsightStrip = ({ t }: { t: ThreatVector }) => (
         <div className="flex gap-1.5 mt-3 pt-3 border-t border-slate-50">
@@ -144,18 +153,22 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                 </div>
 
                 <div className="flex p-1.5 bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
-                    {(['modality', 'clinical', 'diagnostic', 'governance'] as ViewMode[]).map(mode => (
-                        <button
-                            key={mode}
-                            onClick={() => setViewMode(mode)}
-                            className={`px-8 py-3 rounded-xl text-xs font-semibold transition-all ${viewMode === mode
-                                    ? 'bg-white text-slate-900 shadow-sm border border-slate-100'
-                                    : 'text-slate-400 hover:text-slate-600'
-                                }`}
-                        >
-                            {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                        </button>
-                    ))}
+                    {(['modality', 'clinical', 'diagnostic', 'governance'] as ViewMode[]).map(mode => {
+                        const colors = getModeColor(mode);
+                        const isActive = viewMode === mode;
+                        return (
+                            <button
+                                key={mode}
+                                onClick={() => setViewMode(mode)}
+                                className={`px-8 py-3 rounded-xl text-xs font-bold transition-all duration-300 ${isActive
+                                    ? `${colors.bg} text-white shadow-lg shadow-${colors.text.split('-')[1]}-500/20`
+                                    : 'text-slate-400 hover:text-slate-600 hover:bg-white/50'
+                                    }`}
+                            >
+                                {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 
@@ -173,8 +186,8 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                 key={band.id}
                                 onClick={() => { setSelectedBand(band.id); setActiveTechnique(null); }}
                                 className={`group p-6 rounded-[2rem] border text-left transition-all duration-500 ${selectedBand === band.id
-                                        ? 'bg-slate-900 border-slate-900 text-white shadow-xl scale-[1.02] z-10'
-                                        : 'bg-white border-slate-100 hover:border-slate-200'
+                                    ? 'bg-slate-900 border-slate-900 text-white shadow-xl scale-[1.02] z-10'
+                                    : 'bg-white border-slate-100 hover:border-slate-200'
                                     }`}
                             >
                                 <div className="flex items-center justify-between pointer-events-none mb-1">
@@ -215,8 +228,8 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                         key={t.id}
                                         onClick={() => setActiveTechnique(t)}
                                         className={`group relative text-left p-8 rounded-[2.5rem] border transition-all duration-500 flex flex-col justify-between ${isActive
-                                                ? 'bg-white border-slate-900 shadow-2xl scale-[1.01] z-20'
-                                                : 'bg-white border-slate-100 hover:border-slate-200'
+                                            ? 'bg-white border-slate-900 shadow-2xl scale-[1.01] z-20'
+                                            : 'bg-white border-slate-100 hover:border-slate-200'
                                             }`}
                                     >
                                         <div>
@@ -296,6 +309,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                                         </div>
                                                         <a
                                                             href={`/TARA/${t.id}`}
+                                                            onClick={(e) => e.stopPropagation()}
                                                             className="flex-1 text-center py-4 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-semibold hover:border-slate-900 transition-all"
                                                         >
                                                             Technical Protocol Access

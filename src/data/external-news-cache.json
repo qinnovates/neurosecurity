@@ -1,12 +1,21 @@
 [
   {
     "type": "external",
-    "title": "India has 100M weekly active ChatGPT users, Sam Altman says",
-    "date": "2026-02-15",
-    "url": "https://techcrunch.com/2026/02/15/india-has-100m-weekly-active-chatgpt-users-sam-altman-says/",
-    "source": "TechCrunch",
-    "summary": "OpenAI CEO Sam Altman says India has the largest number of student users of ChatGPT worldwide.",
-    "category": "neurotechnology"
+    "title": "Conference Proceedings of the Inaugural Conference of the International Society for Tractography (IST 2025 Bordeaux)",
+    "date": "2026-02-16",
+    "url": "https://arxiv.org/abs/2602.12410",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.12410v1 Announce Type: cross \nAbstract: This collection comprises the abstracts presented during poster, power pitch and oral sessions at the Inaugural Conference of the International Socie",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Dynamical Mechanisms for Coordinating Long-term Working Memory Based on the Precision of Spike-timing in Cortical Neurons",
+    "date": "2026-02-16",
+    "url": "https://arxiv.org/abs/2512.15891",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2512.15891v4 Announce Type: replace \nAbstract: In the last century, most sensorimotor studies of cortical neurons relied on average firing rates. Rate coding is efficient for fast sensorimotor p",
+    "category": "research"
   },
   {
     "type": "external",
@@ -73,20 +82,20 @@
   },
   {
     "type": "external",
-    "title": "Two Years of Telepathy - Neuralink",
-    "date": "2026-01-28",
-    "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Elon Musk's Neuralink says it has 21 participants enrolled in trials - Reuters",
     "date": "2026-01-28",
     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQRFFGTTJhUVdWRXlRa3VsaTFvSVpQZktNRkNUSGNKcWl1Ql9JZ2YzODNJNXlvZ19rVnpKa2VqQ0Zyb3BiNWxEbzhrd1gxdi1CZmRxVzhMOHVaT2NTd2toOWIwSlp0cTIwUjVkY280OVRGT1BPdTMyOU9RSkFRcEJxQlEtYjF3ZXJsQ1d0dm5xcjlFWTdMeVUwSkFFVExIa0RVQXFkOXBDU185bmVTLTdiZDFJZkRqQWNf?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Elon Musk's Neuralink says it has 21 participants enrolled in trials&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Two Years of Telepathy - Neuralink",
+    "date": "2026-01-28",
+    "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
     "category": "neurotechnology"
   },
   {
@@ -100,29 +109,11 @@
   },
   {
     "type": "external",
-    "title": "How can we achieve the responsible development of brain-computer interfaces - The World Economic Forum",
-    "date": "2026-01-18",
-    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOWEFjZnJ3M2c4aVE2OUYzRmNEbkpRUDJ3SjNZMHFqNjVYVWEwZXFEX2p1UVNfRjFXUkg0eTFnRkl1TzJHc0NibmNxckNmOXRhVWNFWmRHTk82aFBqWURBTk4tbmVRZlZCRC01cVAyY3VUUm95MXRGQ1UzQmVVNW1XMVJIOXdYak9fMkhKa05CSTMxZm9QcEM5dThxNFQ1RWVyV1NXNjExNEplWE16czRXWEhRWk1LSlE?oc=5",
-    "source": "Google News — BCI",
-    "summary": "How can we achieve the responsible development of brain-computer interfaces&nbsp;&nbsp;The World Economic Forum",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
-    "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -175,7 +166,7 @@
     "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
     "date": "2025-10-05",
     "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
-    "source": "Google News — Neural Startups",
+    "source": "Google News — BCI",
     "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
     "category": "neurotechnology"
   },

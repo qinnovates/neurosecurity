@@ -3,8 +3,8 @@
  * Single source of truth for all QIF values used on the site.
  */
 
-export const QIF_VERSION = '6.1';
-export const LATEST_WHITEPAPER_VERSION = '6.1';
+export const QIF_VERSION = '6.2.1';
+export const LATEST_WHITEPAPER_VERSION = '6.2.1';
 export const LATEST_WHITEPAPER_HREF = '/whitepaper/';
 export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;

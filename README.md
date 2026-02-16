@@ -18,8 +18,8 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
-| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.1, published |
-| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.2, published |
+| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.2.1, published |
+| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.3, published |
 | **[TARA](https://qinnovate.com/TARA/)** | 102 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
 | **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
@@ -72,7 +72,7 @@ Qinnovate exists because these organizations proved that open standards make ent
 
 The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spinal Cord), a physical interface boundary (I0, the electrode-tissue interface), and 3 silicon bands (S1 Analog up to S3 Radio/Wireless).
 
-- **Whitepaper:** [qinnovate.com/whitepaper](https://qinnovate.com/whitepaper/) (v6.1)
+- **Whitepaper:** [qinnovate.com/whitepaper](https://qinnovate.com/whitepaper/) (v6.2.1)
 - **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) (27 pages, CC-BY 4.0, always latest version)
 - **Specification:** [qif-framework/](qif-framework/)
 - **Interactive explorer:** [qinnovate.com/lab/hourglass.html](https://qinnovate.com/lab/hourglass.html)
@@ -148,7 +148,7 @@ qinnovates/qinnovate/
 │   ├── framework/              # 10 architectural documents
 │   ├── tara-threat/            # TARA threat registry source
 │   ├── qif-lab/                # Equation testing
-│   ├── QIF-WHITEPAPER.md       # v6.1 whitepaper
+│   ├── QIF-WHITEPAPER.md       # v6.2.1 whitepaper
 │   ├── QIF-TRUTH.md            # Canonical source of truth
 │   └── RUNEMATE.md             # Runemate v0.4 spec
 │
@@ -199,6 +199,16 @@ Qinnovate seeks partnerships with researchers, standards bodies, BCI manufacture
 
 ---
 
+## Academic Rigor & Transparency
+
+Qinnovate follows a strict **Dual-Agent Collaboration Protocol** to ensure that all AI-assisted development is auditable and transparent. 
+
+- **Traceable Decisions**: Every AI session is logged in `_memory/collab/`.
+- **HITL Verification**: All logs are cryptographically hashed and verified by a human maintainer.
+- **Audit Statement**: See our **[Transparency Statement](governance/TRANSPARENCY.md)** for a full record of contributions, cognitive boundaries, and tool disclosures.
+
+---
+
 <div align="center">
 
 **Defining open standards for the neural frontier**
@@ -209,4 +219,4 @@ Qinnovate seeks partnerships with researchers, standards bodies, BCI manufacture
 
 ---
 
-*Founded 2026 · Updated 2026-02-14*
+*Founded 2026 · Updated 2026-02-16*

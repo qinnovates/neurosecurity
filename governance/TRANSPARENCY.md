@@ -139,12 +139,33 @@ The 40% modification/rejection rate demonstrates active critical engagement, not
 | Claude Research Agents | Specialized (quantum physics, neuroscience, cybersecurity) | Validation of architecture against 102+ external sources | Validation |
 | Gemini (Google) | 2.5 Pro / CLI | Independent peer review — full whitepaper critique, framework stress-testing, TARA/NISS validation | Validation (Primary) |
 | Gemini (Google) | 1.5 / 2.0 / Flash | Research verification, cross-model validation, alternative perspectives | Validation (Secondary) |
-| Antigravity (Google) | Gemini 2.0 Pro (Exp) | TARA Atlas Enhancement — 3D visualization, dual-mode toggle | Implementation |
+| Antigravity (Google) | Gemini 2.0 Pro (Exp) | TARA Atlas Enhancement — Dual-agent protocol testing, governance cleanup, accessibility verification | Implementation |
 | LMArena (LMSYS) | Blind comparison | Unbiased cross-model validation | Exploratory |
 
 **Multi-Model Approach**: Using multiple AI models serves as epistemic hygiene — cross-referencing outputs helps identify model-specific biases or hallucinations. When models disagree, human judgment adjudicates by consulting primary sources.
 
-**Cross-AI Validation**: Significant framework changes trigger an independent review by a different AI system. The reviewing AI receives the full whitepaper with no prior context and is instructed to provide unsoftened criticism. This is formalized in the [Validation Pipeline](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/PROPAGATION.md).
+**Dual-Agent Collaboration Protocol**: As of Feb 2026, development involves a tandem of Claude (Anthropic) and Antigravity (Gemini/Google). Both agents write to a shared monthly session log (`_memory/collab/YYYY-MM.md`) to ensure cross-agent transparency and an auditable trail for academic review. This prevents "model drift" and ensures that decisions made with one agent are visible and verifiable by the other.
+
+---
+
+## Academic Audit Trail: How to Verify
+
+Researchers and reviewers can verify the integrity of the framework's development using the following steps:
+
+1.  **Access Logs**: Every significant development session is logged in `_memory/collab/`.
+2.  **Verify MD5/SHA Trace**: Look for the `### YYYY-MM-DD` entries.
+3.  **Human-in-the-Loop (HITL) Verification**:
+    - At the end of each month, the maintainer calculates a checksum of the log.
+    - The maintainer signs this checksum using their local GPG/SSH key.
+    - **Verification Command**:
+      ```bash
+      # To verify a signed log:
+      gpg --verify _memory/collab/2026-02.md.asc
+      ```
+    - This ensures that the record is immutable and non-repudiable.
+
+> [!NOTE]
+> The private keys used for signing are never stored in this repository and are never accessible to the AI agents. This preserves the cognitive boundary and legal accountability of the human maintainer.
 
 ### Cross-AI Validation Sessions
 

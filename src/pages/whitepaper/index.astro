@@ -20,7 +20,7 @@ const latestChange = getLatestChangelog();
 ---
 
 <PageLayout
-  title="QIF Whitepaper v6.1"
+  title="QIF Whitepaper v6.2.1"
   description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
@@ -29,7 +29,7 @@ const latestChange = getLatestChangelog();
     <!-- Sidebar -->
     <aside class="hidden lg:block">
       <div class="sticky top-24">
-        <WhitepaperVersionSelector currentVersion="v6.1" />
+        <WhitepaperVersionSelector currentVersion="v6.2.1" />
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
           {[
@@ -57,14 +57,14 @@ const latestChange = getLatestChangelog();
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "QIF Whitepaper v6.1: An Open Security Standard for Brain-Computer Interfaces",
+        "headline": "QIF Whitepaper v6.2.1: An Open Security Standard for Brain-Computer Interfaces",
         "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-13",
-        "dateModified": "2026-02-13",
+        "dateModified": "2026-02-16",
         "mainEntityOfPage": "https://qinnovate.com/whitepaper/",
-        "version": "6.0",
+        "version": "6.2.1",
       })} />
 
       <!-- ═══ Header ═══ -->
@@ -80,9 +80,9 @@ const latestChange = getLatestChangelog();
         </p>
         <div class="flex flex-wrap items-center gap-3 mb-4">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
-            v6.1
+            v6.2.1
           </span>
-          <span class="text-xs text-[var(--color-text-faint)]">2026-02-13</span>
+          <span class="text-xs text-[var(--color-text-faint)]">2026-02-16</span>
           <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
         </div>
         <p class="text-sm text-[var(--color-text-muted)]">
@@ -784,7 +784,7 @@ const latestChange = getLatestChangelog();
               <li>Use the <a href="/TARA/">TARA atlas</a> to identify risk profiles for BCI techniques in your studies</li>
               <li>Apply <a href="/scoring/">NISS scoring</a> to quantify neural impact in vulnerability reports</li>
               <li>Reference the <a href="#neural-impact">Neural Impact Chain</a> for technique-to-diagnosis mapping</li>
-              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.1. Qinnovate. Available at qinnovate.com</code></li>
+              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.2.1. Qinnovate. Available at qinnovate.com</code></li>
             </ul>
           </div>
 
@@ -884,7 +884,7 @@ const latestChange = getLatestChangelog();
       <footer class="border-t border-[var(--color-border)] pt-8 pb-20">
         <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--color-text-faint)]">
           <div>
-            <strong>QIF Whitepaper v6.1</strong> &middot; {new Date().toISOString().split('T')[0]} &middot; Apache 2.0
+            <strong>QIF Whitepaper v6.2.1</strong> &middot; {new Date().toISOString().split('T')[0]} &middot; Apache 2.0
           </div>
           <div class="flex gap-4">
             <a href="/whitepaper/v6/">v6.0</a>

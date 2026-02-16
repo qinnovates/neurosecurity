@@ -1,4 +1,4 @@
-\begin{thebibliography}{36}
+\begin{thebibliography}{35}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -202,11 +202,14 @@ Michael Rushanan, Aviel~D. Rubin, Denis~Foo Kune, and Colleen~M. Swanson.
 
 \bibitem[Schroder et~al.(2025)Schroder, Sirbu, Park, Morley, Street, and
   Floridi]{schroder2025cyberrisks}
-Tyler Schroder, Renee Sirbu, Sohee Park, Jessica Morley, Sam Street, and
+Tyler Schroder, Ren\'{e}e Sirbu, Sohee Park, Jessica Morley, Sam Street, and
   Luciano Floridi.
 \newblock Cyber risks to next-gen brain-computer interfaces: Analysis and
   recommendations.
 \newblock \emph{arXiv preprint arXiv:2508.12571}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2508.12571}.
+\newblock Also published in Neuroethics 18 (2025). Verified 2026-02-16 via
+  arxiv.org and Springer.
 
 \bibitem[{State of Colorado}(2024)]{colorado2024neuraldata}
 {State of Colorado}.
@@ -225,20 +228,13 @@ Tyler Schroder, Renee Sirbu, Sohee Park, Jessica Morley, Sam Street, and
 {U.S. Congress}.
 \newblock Health insurance portability and accountability act ({HIPAA}), 1996.
 
-\bibitem[{U.S. Food and Drug
-  Administration}(2023{\natexlab{a}})]{fda2023cybersecurity}
-{U.S. Food and Drug Administration}.
-\newblock Cybersecurity in medical devices: Quality system considerations and
-  content of premarket submissions, 2023{\natexlab{a}}.
-\newblock URL
-  \url{https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket}.
-\newblock Superseded Feb 2026 by updated guidance.
-
-\bibitem[{U.S. Food and Drug Administration}(2023{\natexlab{b}})]{fda524b}
-{U.S. Food and Drug Administration}.
+\bibitem[{U.S. Congress}(2022)]{fda524b}
+{U.S. Congress}.
 \newblock Section 524{B} of the {FD\&C} act --- ensuring cybersecurity of
-  medical devices, 2023{\natexlab{b}}.
-\newblock Enacted via the Consolidated Appropriations Act, 2023.
+  devices, 2022.
+\newblock Added by Section 3305 of FDORA, Division FF of the Consolidated
+  Appropriations Act, 2023 (Pub.~L. 117-328). Effective March 29, 2023; RTA
+  enforcement from October 1, 2023. Verified 2026-02-16 via Federal Register.
 
 \bibitem[Willett et~al.(2023)Willett, Kunz, Fan, et~al.]{willett2023speech}
 Francis~R. Willett, Erin~M. Kunz, Chaofei Fan, et~al.

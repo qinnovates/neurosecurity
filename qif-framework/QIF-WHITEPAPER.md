@@ -1,4 +1,4 @@
-# QIF Whitepaper v5.2
+# QIF Whitepaper v6.2.1
 
 ## QIF: Quantified Interconnection Framework for Neural Security
 
@@ -9,10 +9,10 @@
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
 > — Kevin Qi
 
-**Version:** 6.1 (Working Draft)
-**Date:** 2026-02-14
+**Version:** 6.2.1 (Working Draft)
+**Date:** 2026-02-16
 **Author:** Kevin Qi
-**Predecessor:** QIF Whitepaper v6.0
+**Predecessor:** QIF Whitepaper v6.1
 **Status:** DRAFT
 **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
 

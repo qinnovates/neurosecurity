@@ -1,0 +1,82 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The Scoring Gap}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Contributions}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Related Work}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Foundational Neurosecurity}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Empirical Attack Demonstrations}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Emerging Frameworks}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Neuroethics and Policy}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}How QIF Differs}{6}{subsection.2.5}%
+\contentsline {section}{\numberline {3}The Hourglass Architecture}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Design Rationale}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Neural Band Derivation}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Band Definitions}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Zone Structure}{8}{subsection.3.4}%
+\contentsline {paragraph}{Neural Zone (N7--N1).}{8}{subsection.3.4}%
+\contentsline {paragraph}{Interface Zone (I0).}{8}{subsection.3.4}%
+\contentsline {paragraph}{Synthetic Zone (S1--S3).}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Security Properties}{8}{subsection.3.5}%
+\contentsline {section}{\numberline {4}TARA: Threat Taxonomy}{9}{section.4}%
+\contentsline {paragraph}{Why not ATT\&CK directly?}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Taxonomy Structure}{10}{subsection.4.1}%
+\contentsline {paragraph}{Domains.}{10}{subsection.4.1}%
+\contentsline {paragraph}{Tactics.}{10}{Item.22}%
+\contentsline {subsection}{\numberline {4.2}Evidence Classification}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Severity Distribution}{10}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Category Breakdown}{11}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Dual-Use Mapping}{11}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Representative Techniques}{11}{subsection.4.6}%
+\contentsline {section}{\numberline {5}NISS: Neural Impact Scoring System}{12}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Gap Analysis: Why CVSS Alone Is Insufficient}{12}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Extension Metrics}{13}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}BI: Biological Impact}{13}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}CG: Cognitive Integrity}{13}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}CV: Consent Violation}{13}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}RV: Reversibility}{14}{subsubsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.5}NP: Neuroplasticity}{14}{subsubsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.3}PINS Flag}{14}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Scoring Formula}{14}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Vector Format}{15}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}NISS Severity Distribution}{15}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Neural Impact Chain}{16}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Pipeline Architecture}{16}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}NISS-to-DSM Bridge}{17}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Coverage Statistics}{17}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Diagnostic Cluster Distribution}{17}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Risk Classification}{18}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Example Walkthrough}{18}{subsection.6.6}%
+\contentsline {section}{\numberline {7}Governance and Neuroethics}{19}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Consent Tiers}{19}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}UNESCO Alignment}{19}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Neurorights Framework Integration}{20}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Regulatory Mapping}{20}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Case Studies}{21}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Scoring Comparison}{21}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Case 1: Cortical Signal Injection (QIF-T0001)}{21}{subsection.8.2}%
+\contentsline {paragraph}{CVSS v4.0 assessment.}{21}{subsection.8.2}%
+\contentsline {paragraph}{What CVSS misses.}{21}{subsection.8.2}%
+\contentsline {paragraph}{NISS extension.}{21}{subsection.8.2}%
+\contentsline {paragraph}{NIC diagnostic mapping.}{21}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Case 2: P300 Side-Channel (QIF-T0015)}{21}{subsection.8.3}%
+\contentsline {paragraph}{CVSS assessment.}{21}{subsection.8.3}%
+\contentsline {paragraph}{What CVSS misses.}{22}{subsection.8.3}%
+\contentsline {paragraph}{NISS extension.}{22}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Case 3: Calibration Poisoning (QIF-T0034)}{22}{subsection.8.4}%
+\contentsline {paragraph}{CVSS assessment.}{22}{subsection.8.4}%
+\contentsline {paragraph}{What CVSS misses.}{22}{subsection.8.4}%
+\contentsline {paragraph}{NISS extension.}{22}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Case 4: Covert Neural Surveillance (QIF-T0050)}{22}{subsection.8.5}%
+\contentsline {paragraph}{CVSS assessment.}{22}{subsection.8.5}%
+\contentsline {paragraph}{What CVSS misses.}{22}{subsection.8.5}%
+\contentsline {paragraph}{NISS extension.}{22}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Case 5: Real-World Vulnerability Disclosure}{22}{subsection.8.6}%
+\contentsline {section}{\numberline {9}Limitations and Future Work}{23}{section.9}%
+\contentsline {subsection}{\numberline {9.1}No Empirical Validation on Real BCI Devices}{23}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}DSM-5-TR Mapping Not Clinically Validated}{23}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}NISS Weights Not Calibrated}{23}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}No Interrater Reliability Study}{23}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Taxonomy Completeness}{23}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Single-Author Bias}{23}{subsection.9.6}%
+\contentsline {subsection}{\numberline {9.7}AI Tool Disclosure}{24}{subsection.9.7}%
+\contentsline {subsection}{\numberline {9.8}Future Work}{24}{subsection.9.8}%
+\contentsline {section}{\numberline {10}Conclusion}{24}{section.10}%
