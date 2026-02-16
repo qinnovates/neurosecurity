@@ -77,7 +77,7 @@
     {
       "date": "2026-01-15",
       "title": "QIF Framework v1.0 Published",
-      "description": "71 attack techniques across 11 tactics and 7 domains. Full threat registry with TARA technique IDs.",
+      "description": "71 attack techniques across 11 tactics and 7 domains. Full TARA Atlas with technique IDs.",
       "category": "framework",
       "icon": "shield",
       "href": "/framework/"
@@ -109,7 +109,7 @@
     {
       "date": "2026-02-10",
       "title": "71 CVSS v4.0 Base Vector Mappings Complete",
-      "description": "Every technique in the QIF threat registry mapped to a CVSS v4.0 base vector with companion NISS extension vector.",
+      "description": "Every technique in the TARA Atlas mapped to a CVSS v4.0 base vector with companion NISS extension vector.",
       "category": "scoring",
       "icon": "map",
       "href": "/scoring/"

@@ -104,7 +104,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                         Access Points
                     </h2>
                     <p className="text-sm font-medium text-slate-400 max-w-lg mx-auto leading-relaxed">
-                        The QIF TARA Registry is a dual-use directory of BCI techniques mapped across the bio-digital boundary.
+                        The QIF TARA Atlas is a dual-use directory of BCI techniques mapped across the bio-digital boundary.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-7xl px-4">
