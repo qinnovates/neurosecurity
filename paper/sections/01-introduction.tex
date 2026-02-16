@@ -15,9 +15,14 @@ Investment in neurotechnology grew 700\% between 2014 and 2021, with the global
 market projected to reach \$25 billion by 2030~\cite{unesco2025recommendation}.
 
 Despite this rapid commercialization, no security standard exists specifically for
-neural devices. The FDA's 2023 cybersecurity guidance for medical
-devices~\cite{fda2023cybersecurity} and Section 524B of the FD\&C
-Act~\cite{fda524b} address connected medical devices generally, but contain no
+neural devices. Section 3305 of the Food and Drug Omnibus Reform Act of 2022
+(FDORA, Pub.~L. 117-328) added Section 524B to the FD\&C Act~\cite{fda524b},
+mandating cybersecurity documentation---including threat modeling, software bills
+of materials, and vulnerability disclosure---in all premarket submissions for
+connected medical devices. Since October 2023, the FDA enforces a
+Refuse-to-Accept policy for non-compliant submissions. However, Section 524B
+does not specify which threat taxonomy or scoring system to use, and the
+referenced standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) contain no
 provisions for the unique risks of devices that read and write neural signals.
 The EU Medical Device Regulation~\cite{eumdr2017} similarly lacks neural-specific
 security requirements.
