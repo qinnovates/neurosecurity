@@ -69,37 +69,47 @@ This redefines what "cheap" means in the hourglass. It's not just about compute 
 
 Sound familiar?
 
-## AI Is Reinventing This Architecture
+## AI Is Reinventing This Architecture (Unevenly)
 
-In January 2026, DeepSeek released a model with 671 billion parameters — but only 37 billion activate per token. That's 5.51%. The rest sit dormant, waiting for queries complex enough to need them.
+In January 2026, DeepSeek released a model with 671 billion parameters — but only 37 billion activate per token. That's 5.51%. The rest sit dormant, waiting for queries complex enough to need them. This is the cortex principle: don't fire everything for every problem.
 
-Their Engram module stores static knowledge in O(1) lookup tables that bypass the transformer backbone entirely. If the model already knows the answer, it doesn't re-derive it through 100+ layers of attention. It looks it up. This is functionally identical to how the spinal cord handles reflexes: known patterns don't need re-reasoning.
+Their Engram module stores static knowledge in O(1) lookup tables that bypass the transformer backbone entirely. If the model already knows the answer, it doesn't re-derive it through 100+ layers of attention. It looks it up. This is the spinal cord principle: known patterns don't need re-reasoning. A lookup table is a reflex arc.
 
-Their sparse attention mechanism selects only relevant tokens instead of attending to everything. This is thalamic gating — deciding what deserves expensive processing.
+Their sparse attention mechanism selects only relevant tokens instead of attending to everything. This is the thalamus principle: decide what deserves expensive processing and gate the rest.
 
-Here's what's interesting: DeepSeek's papers don't frame any of this in neuroscience terms. They present it as pure engineering optimization. The "brain-inspired AI" framing comes from media, not from DeepSeek. Other companies are more explicit — Google's Pathways architecture explicitly cites neuroscience, and Numenta's HTM is built directly on cortical column theory.
+Three brain principles. Three engineering solutions. But DeepSeek didn't frame it this way — their papers present pure optimization. The "brain-inspired AI" framing comes from media, not from their research. Other companies are more explicit — Google's Pathways architecture explicitly cites neuroscience, and Numenta's HTM is built directly on cortical column theory.
 
-But the convergence is real whether it's deliberate or not. These companies are independently arriving at the same principles the brain evolved over hundreds of millions of years: **don't waste expensive computation on problems that don't need it.**
+The convergence is real whether it's deliberate or not. These companies are independently arriving at the same principles the brain evolved over hundreds of millions of years: **don't waste expensive computation on problems that don't need it.**
+
+But they're arriving at it unevenly. And the gap is telling.
+
+DeepSeek built the cortex (sparse reasoning) and the thalamus (attention gating). Their Engram is a first attempt at the spinal cord (cached retrieval). But Engram isn't a true spinal cord — it's a memory layer within a language model. It doesn't have a body. It doesn't need reflexes. It never has to pull a hand off a hot stove in 30ms or it loses the hand.
+
+That's because current AI doesn't have a body. LLMs are pure cognition — disembodied cortex. They don't need a spinal cord because they don't interact with the physical world in real time. There's no latency constraint that would kill them if they deliberated too long.
+
+Robotics changes this. A self-driving car that runs every sensor input through a 671-billion-parameter reasoning model will kill someone while it's still thinking. A surgical robot that routes motor commands through transformer attention layers will tremor. A humanoid robot reaching for a falling object needs the same thing the human nervous system built: a fast, deterministic, hardwired reflex layer that acts before the reasoning layers finish processing.
+
+The spinal cord isn't missing from AI because it's unnecessary. It's missing because AI hasn't needed a body yet. The moment AI becomes embodied — the moment latency kills — the spinal cord becomes the most important layer in the stack. And the fragility tax comes with it. Those hardwired reflexes will be fast and cheap and brittle, just like ours. A poisoned reflex table in a surgical robot is B12 deficiency with a scalpel.
 
 ## The Hourglass Compute Hypothesis
 
 This led me to a hypothesis I wasn't expecting to form.
 
-The hourglass isn't just a useful shape for network protocols and brain security models. It may be a missing structural principle in AI architecture.
+The hourglass isn't just a useful shape for network protocols and brain security models. It may be a missing structural principle in AI architecture — one that becomes mandatory when AI gets a body.
 
 Current transformer designs are flat rectangles — uniform width, uniform compute per layer. Every token gets the same computational budget regardless of complexity. But the brain doesn't work this way. Neither does the internet. Both route traffic through a narrow waist that separates complex processing from simple retrieval.
 
 And both face the same trade-off the spinal cord reveals: simple systems are fast but fragile. AI's version of B12 deficiency is data poisoning — corrupt the lookup table, corrupt every answer that depends on it, and the system has no reasoning layer to catch the error. An LLM that memorizes a wrong fact will confidently repeat it forever. An LLM that reasons through the problem from principles might catch the contradiction. Memorization is the spinal cord. Reasoning is the cortex. You need both, but you need to know which one breaks how.
 
-What if a transformer was designed with an explicit hourglass shape?
+What if a neural network was designed with an explicit hourglass shape?
 
-- **Above the waist:** Expensive reasoning layers — sparse activation, deep attention, for novel and complex queries
-- **At the waist:** A compressed universal interface — the point where reasoning and retrieval meet
-- **Below the waist:** Cheap retrieval layers — O(1) lookups, cached patterns, for known information
+- **Above the waist (cortex):** Expensive reasoning layers — sparse activation, deep attention, for novel and complex queries. Indeterministic. Slow. Resilient.
+- **At the waist (thalamus/I0):** A compressed universal interface — the routing layer where reasoning and retrieval meet. The inspection point. The bottleneck that makes the system auditable.
+- **Below the waist (spinal cord):** Cheap retrieval layers — O(1) lookups, cached patterns, hardwired responses. Deterministic. Fast. Fragile.
 
-The Perceiver architecture (Jaegle et al., 2021) comes closest to this — it uses a compressed latent bottleneck. Hourglass transformers exist in NLP (Nawrot et al., 2022) and vision (U-Net). But these architectures use the hourglass shape for computational compression — fewer tokens in the middle layers — or for feature extraction and reconstruction. None of them formalize the functional separation proposed here: reasoning above, retrieval below, routing at the waist.
+The Perceiver architecture (Jaegle et al., 2021) comes closest to this — it uses a compressed latent bottleneck. Hourglass transformers exist in NLP (Nawrot et al., 2022) and vision (U-Net). But these architectures use the hourglass shape for computational compression — fewer tokens in the middle layers — or for feature extraction and reconstruction. None of them formalize the functional separation proposed here: reasoning above, retrieval below, routing at the waist. And none of them account for the fragility gradient — the fact that the cheap layers are the ones that break first and break worst.
 
-That separation is what the brain does. It's what the internet does. And it's what AI companies are converging on piecemeal — MoE for sparse activation, memory modules for cheap retrieval, attention mechanisms for routing. The hourglass would unify these under one structural principle.
+That separation is what the brain does. It's what the internet does. And it's what AI companies are converging on piecemeal — MoE for sparse activation, memory modules for cheap retrieval, attention mechanisms for routing. The hourglass would unify these under one structural principle, with an additional insight the engineering-only approach misses: **the architecture that makes a system fast is the same architecture that makes it fragile, and the bottleneck in the middle is where you detect both.**
 
 ## What I'm Claiming (and What I'm Not)
 
@@ -109,6 +119,7 @@ I want to be precise about this.
 - That I've built an AI architecture
 - That QIF was designed for compute efficiency — it was designed for BCI security, and that remains its purpose
 - That DeepSeek copied the brain (their papers present engineering, not biomimicry)
+- That current LLMs need a spinal cord — they don't have bodies. The claim is that embodied AI will.
 - That the compute analogy is proven — it's an observation that emerged from security research and needs independent experimental validation by ML researchers before it means anything actionable
 
 **I am claiming:**
@@ -133,4 +144,10 @@ QIF is a neurotech framework born from security — it maps the brain's architec
 
 *The Hourglass Compute Hypothesis is derived from the QIF neurosecurity framework (DOI: [10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)). The full hypothesis document, including literature validation and specific predictions, is available on request.*
 
-*This is a position statement, not a proof. The hypothesis proposes testable predictions. Here's one: take a standard transformer, add a compressed bottleneck layer and a large-scale key-value memory beneath it. Train the model to route queries — force simple, fact-based questions through the memory (retrieval) and complex, inferential questions through the transformer layers (reasoning). The prediction is that this architecture achieves comparable accuracy at a fraction of the inference cost. If you have the ML engineering chops to run that experiment, I'd love to hear from you.*
+*This is a position statement, not a proof. The hypothesis proposes testable predictions. Here are two:*
+
+*First: take a standard transformer, add a compressed bottleneck layer and a large-scale key-value memory beneath it. Train the model to route queries — force simple, fact-based questions through the memory (retrieval) and complex, inferential questions through the transformer layers (reasoning). The prediction is that this architecture achieves comparable accuracy at a fraction of the inference cost.*
+
+*Second: poison the retrieval layer. Corrupt 1% of the lookup entries and measure how error propagates. Then damage 1% of the reasoning layers and measure the same thing. The prediction — from the fragility gradient — is that retrieval corruption produces confident, undetectable errors (the B12 pattern), while reasoning corruption produces detectable degradation (the hemispherectomy pattern). If that holds, it tells you exactly where to put your monitoring: at the waist, where retrieval meets reasoning.*
+
+*If you have the ML engineering chops to run either experiment, I'd love to hear from you.*
