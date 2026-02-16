@@ -742,9 +742,15 @@ This architecture draws structural inspiration from biological databases: the [K
 
 ### 6.7.4 Regulatory Context
 
-In June 2025, the FDA finalized [Section 524B of the FD&C Act](https://www.federalregister.gov/documents/2025/06/27/2025-11669/cybersecurity-in-medical-devices-quality-system-considerations-and-content-of-premarket-submissions) [87], which legally requires cybersecurity for any "cyber device": medical devices with software that can connect to the internet. Every wireless BCI on the market or in clinical trials falls under this mandate. Manufacturers must submit cybersecurity plans, software bills of materials (SBOMs), and vulnerability management processes. Non-compliance means denied market authorization.
+Section 3305 of the Food and Drug Omnibus Reform Act of 2022 (FDORA), enacted via Division FF of the Consolidated Appropriations Act, 2023 (Pub. L. 117-328), amended the Federal Food, Drug, and Cosmetic Act by adding Section 524B --- "Ensuring Cybersecurity of Devices" [87]. Section 524B requires that premarket submissions for any "cyber device" --- defined as a device containing software with the ability to connect to the internet and characteristics that could be vulnerable to cybersecurity threats --- include: (1) a plan to monitor, identify, and address postmarket cybersecurity vulnerabilities; (2) design controls demonstrating reasonable assurance of cybersecurity; (3) a Software Bill of Materials (SBOM); and (4) evidence of coordinated vulnerability disclosure processes. The requirement took effect March 29, 2023, with the FDA's Refuse-to-Accept (RTA) policy enforced from October 1, 2023 --- submissions lacking cybersecurity documentation are rejected before substantive review begins.
 
-Section 524B is a mandate, not a map. It tells manufacturers they need cybersecurity but does not specify BCI-specific threats, how neural signals differ from network packets, or what happens when the same physical mechanism constitutes both an attack and a therapy. QIF provides the framework. NSP provides the protocol. NISS provides the scoring. TARA provides the atlas that maps every mechanism across all four dimensions simultaneously, giving manufacturers, clinicians, regulators, and engineers a shared language for securing neural devices.
+Every wireless BCI on the market or in clinical trials is a cyber device under this definition. Neuralink's N1, Synchron's Stentrode, Blackrock's Utah Array, and Paradromics' Connexus all transmit neural data wirelessly and fall squarely within Section 524B's scope.
+
+Section 524B is a mandate, not a map. It requires threat modeling but does not specify which threat taxonomy to use. FDA guidance recommends the Common Vulnerability Scoring System (CVSS) for severity assessment, but CVSS cannot express cognitive impact, neural reversibility, or biological scope --- dimensions that determine whether a vulnerability threatens a patient's motor function or cognitive autonomy. The referenced standards (IEC 62443, AAMI TIR57, ISO 14971) provide risk management processes for general medical devices; none catalog neural-specific attack techniques. A majority of cybersecurity-related FDA deficiency letters cite inadequate threat modeling --- a problem that stems not from manufacturer negligence but from the absence of a neural threat registry to model against.
+
+Schroder et al. (2025) highlight this gap in their analysis of BCI cybersecurity risks, identifying threat categories including compromised neural data, unintended BCI-mediated movement, and unauthorized cognitive state inference, while recommending that manufacturers implement encryption, authentication, and network minimization [92]. Their work proposes a hypothetical threat model and critical technical controls, but stops short of an enumerated, actionable threat taxonomy or a specialized scoring rubric for neural-biological harm --- reinforcing that the tooling gap between regulatory mandate and operational compliance remains open.
+
+QIF, TARA, and NISS fill this gap. TARA provides the neural threat registry that Section 524B assumes exists but no referenced standard delivers. NISS extends CVSS with neural-specific severity dimensions. QIF provides the architectural framework that maps these threats to specific layers of the neural-synthetic boundary. Together, they give manufacturers a concrete, open, and reusable toolkit for satisfying FDORA's cybersecurity requirements for neural device submissions.
 
 ## 7. Neural Sensory Protocol (NSP)
 
@@ -1122,7 +1128,7 @@ Time is the variable that constrains all of this. The devices are shipping. The 
 
 [86] Lozano, A. M. et al. (2019). Deep brain stimulation: current challenges and future directions. *Nature Reviews Neurology*, 15(3), 148--160. DOI: 10.1038/s41582-018-0128-2
 
-[87] U.S. Food and Drug Administration. (2023). Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions. Section 524B of the FD&C Act (as amended by the Consolidated Appropriations Act, 2023).
+[87] U.S. Food and Drug Administration. (2023). Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions. Section 524B of the FD&C Act, added by Section 3305 of FDORA (Consolidated Appropriations Act, 2023; Pub. L. 117-328).
 
 **Algorithmic Psychosis Case Study**
 
@@ -1133,6 +1139,10 @@ Time is the variable that constrains all of this. The devices are shipping. The 
 [90] Kelleher, I., Connor, D., Clarke, M. C., Devlin, N., Harley, M., & Cannon, M. (2012). Prevalence of psychotic symptoms in childhood and adolescence: a systematic review and meta-analysis. *Psychological Medicine*, 42(9), 1857--1863. DOI: 10.1017/S0033291711002960
 
 [91] Howes, O. D., & Kapur, S. (2009). The dopamine hypothesis of schizophrenia: version III --- the final common pathway. *Schizophrenia Bulletin*, 35(3), 549--562. DOI: 10.1093/schbul/sbp006
+
+**Regulatory Context**
+
+[92] Schroder, T., Sirbu, R., Park, S., Morley, J., Street, S., & Floridi, L. (2025). Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations. arXiv:2508.12571. https://arxiv.org/abs/2508.12571
 
 ---
 

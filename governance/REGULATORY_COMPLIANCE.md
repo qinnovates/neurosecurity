@@ -8,8 +8,8 @@ order: 5
 
 > Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment.
 
-**Last Updated:** 2026-02-10
-**Version:** 2.0
+**Last Updated:** 2026-02-15
+**Version:** 2.1
 **Status:** Living Document — US & International Coverage
 
 ---
@@ -103,9 +103,23 @@ Several BCI companies have received Breakthrough Device Designation:
 
 > **QIF Recommendation:** Breakthrough designation should require demonstrated cybersecurity architecture. Current designation focuses on therapeutic benefit without mandating security standards.
 
-#### FDA Cybersecurity Requirements
+#### FDORA & PATCH Act (2022): Mandatory Cybersecurity Submissions
 
-The FDA's 2023 guidance on cybersecurity for medical devices establishes:
+The **Food and Drug Omnibus Reform Act of 2022 (FDORA)** and **Protecting and Transforming Cyber Health Care Act of 2022 (PATCH Act)** amended the Federal Food, Drug, and Cosmetic Act by adding **Section 524B**, which requires cybersecurity information to be submitted alongside premarket applications for all cyber devices. As of October 2023, FDA enforces a **Refuse-to-Accept (RTA) policy** — submissions lacking cybersecurity documentation are rejected before review begins.
+
+| FDORA/PATCH Requirement | What Manufacturers Must Submit | QIF Tool |
+|------------------------|-------------------------------|----------|
+| **Threat modeling** | Identification of cybersecurity risks and attack vectors | TARA — 71 neural-specific attack techniques across 7 domains |
+| **Vulnerability assessment** | Known vulnerabilities and severity ratings | NISS — extends CVSS v4.0 with 5 neural-specific metrics |
+| **Software Bill of Materials (SBOM)** | Component transparency | QIF component registry |
+| **Security architecture** | Design controls for cybersecurity | 11-band hourglass security model |
+| **Post-market plan** | Ongoing vulnerability monitoring and patching | NSAM continuous monitoring |
+
+> **The structural gap:** Section 524B mandates *that* manufacturers perform threat modeling but does not specify *which* threat taxonomy or scoring system to use for neural devices. The referenced standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) provide processes and scoring for general medical devices — none catalog neural-specific attack techniques. TARA and NISS fill this gap, providing the neural threat registry and impact scoring that manufacturers need to satisfy FDORA requirements for BCI submissions.
+
+#### FDA Cybersecurity Guidance (2023)
+
+The FDA's 2023 final guidance on cybersecurity for medical devices (FDA-2023-D-0100), implementing Section 524B, establishes:
 
 | Requirement | FDA Expectation | QIF Implementation |
 |-------------|-----------------|-------------------|
@@ -442,59 +456,65 @@ Latin America leads globally in constitutional and legislative neurorights prote
 
 1. Food and Drug Administration. (2023). *Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions*. FDA-2023-D-0100.
 
-2. U.S. Department of Health and Human Services. (2013). *HIPAA Security Rule*. 45 CFR Part 160 and Part 164.
+2. U.S. Congress. (2022). *Food and Drug Omnibus Reform Act of 2022 (FDORA)*. Division FF of the Consolidated Appropriations Act, 2023 (Pub. L. 117-328). Added Section 524B to the FD&C Act.
 
-3. Federal Communications Commission. (2023). *Title 47 Code of Federal Regulations*.
+3. U.S. Congress. (2022). *Protecting and Transforming Cyber Health Care Act of 2022 (PATCH Act)*. Incorporated into FDORA. Mandates cybersecurity documentation in premarket device submissions.
 
-4. National Institute of Standards and Technology. (2024). *Cybersecurity Framework 2.0*. NIST CSF 2.0.
+4. U.S. Department of Health and Human Services. (2013). *HIPAA Security Rule*. 45 CFR Part 160 and Part 164.
 
-5. National Institute of Standards and Technology. (2020). *Security and Privacy Controls for Information Systems and Organizations*. NIST SP 800-53 Rev. 5.
+5. Federal Communications Commission. (2023). *Title 47 Code of Federal Regulations*.
+
+6. National Institute of Standards and Technology. (2024). *Cybersecurity Framework 2.0*. NIST CSF 2.0.
+
+7. National Institute of Standards and Technology. (2020). *Security and Privacy Controls for Information Systems and Organizations*. NIST SP 800-53 Rev. 5.
 
 ### US State & Federal Neurotechnology Legislation
 
-6. Colorado General Assembly. (2024). *H.B. 24-1058: Concerning Protections for Biological and Neural Data*. Signed into law August 2024.
+8. Colorado General Assembly. (2024). *H.B. 24-1058: Concerning Protections for Biological and Neural Data*. Signed into law August 2024.
 
-7. California Legislature. (2024). *SB 1223: California Consumer Privacy Act — Neurorights*. Effective January 1, 2025. Amends CCPA to classify neural data as sensitive personal information.
+9. California Legislature. (2024). *SB 1223: California Consumer Privacy Act — Neurorights*. Effective January 1, 2025. Amends CCPA to classify neural data as sensitive personal information.
 
-8. Montana Legislature. (2025). *SB 163: Neural Data Privacy Act*. Effective October 2025.
+10. Montana Legislature. (2025). *SB 163: Neural Data Privacy Act*. Effective October 2025.
 
-9. Connecticut General Assembly. (2026). *SB 1295: An Act Concerning Neurotechnology Consumer Protection*. Effective July 2026.
+11. Connecticut General Assembly. (2026). *SB 1295: An Act Concerning Neurotechnology Consumer Protection*. Effective July 2026.
 
-10. U.S. Senate. (2025). *S. 2925: Mental-health Innovation and Neurotechnology Development (MIND) Act*. Introduced September 2025.
+12. U.S. Senate. (2025). *S. 2925: Mental-health Innovation and Neurotechnology Development (MIND) Act*. Introduced September 2025.
 
 ### International Frameworks & Legislation
 
-11. UNESCO. (2025). *Recommendation on the Ethics of Neurotechnology*. Adopted at the 43rd session of the General Conference, November 12, 2025. https://www.unesco.org/en/ethics-neurotech/recommendation
+13. UNESCO. (2025). *Recommendation on the Ethics of Neurotechnology*. Adopted at the 43rd session of the General Conference, November 12, 2025. https://www.unesco.org/en/ethics-neurotech/recommendation
 
-12. UNESCO. (2021). *Ethical Issues of Neurotechnology*. International Bioethics Committee (IBC). https://unesdoc.unesco.org/ark:/48223/pf0000378724
+14. UNESCO. (2021). *Ethical Issues of Neurotechnology*. International Bioethics Committee (IBC). https://unesdoc.unesco.org/ark:/48223/pf0000378724
 
-13. OECD. (2019). *Recommendation on Responsible Innovation in Neurotechnology*. https://legalinstruments.oecd.org/api/print?ids=658&Lang=en
+15. OECD. (2019). *Recommendation on Responsible Innovation in Neurotechnology*. https://legalinstruments.oecd.org/api/print?ids=658&Lang=en
 
-14. Council of Europe. (2025). *Strategic Action Plan on Neurotechnology*. Adopted January 2025.
+16. Council of Europe. (2025). *Strategic Action Plan on Neurotechnology*. Adopted January 2025.
 
-15. Republic of Chile. (2021). *Constitutional Amendment on Neurorights* (Art. 19 §1) and *Neuroprotection Law* (Law 21.383). October 2021.
+17. Republic of Chile. (2021). *Constitutional Amendment on Neurorights* (Art. 19 §1) and *Neuroprotection Law* (Law 21.383). October 2021.
 
-16. Spain. (2021). *Digital Rights Charter*. Includes neurorights provisions.
+18. Spain. (2021). *Digital Rights Charter*. Includes neurorights provisions.
 
 ### Academic Sources
 
-17. Kohno, T., & Narayanan, A. (2009). Security and Privacy of Medical Devices. *Proceedings of IEEE S&P*.
+19. Kohno, T., & Narayanan, A. (2009). Security and Privacy of Medical Devices. *Proceedings of IEEE S&P*.
 
-18. Bonaci, T., Calo, R., & Chizeck, H. J. (2015). App Stores for the Brain: Privacy & Security in Brain-Computer Interfaces. *IEEE Ethics*.
+20. Bonaci, T., Calo, R., & Chizeck, H. J. (2015). App Stores for the Brain: Privacy & Security in Brain-Computer Interfaces. *IEEE Ethics*.
 
-19. Yuste, R., et al. (2017). Four ethical priorities for neurotechnologies and AI. *Nature*, 551, 159-163.
+21. Yuste, R., et al. (2017). Four ethical priorities for neurotechnologies and AI. *Nature*, 551, 159-163.
 
-20. Ienca, M., & Andorno, R. (2017). Towards new human rights in the age of neuroscience and neurotechnology. *Life Sciences, Society and Policy*, 13(1), 5.
+22. Ienca, M., & Andorno, R. (2017). Towards new human rights in the age of neuroscience and neurotechnology. *Life Sciences, Society and Policy*, 13(1), 5.
+
+23. Schroder, T., Sirbu, R., Park, S., Morley, J., Street, S., & Floridi, L. (2025). Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations. arXiv:2508.12571. https://arxiv.org/abs/2508.12571
 
 ### Industry Standards
 
-21. International Medical Device Regulators Forum. (2017). *Software as a Medical Device: Possible Framework for Risk Categorization and Corresponding Considerations*.
+24. International Medical Device Regulators Forum. (2017). *Software as a Medical Device: Possible Framework for Risk Categorization and Corresponding Considerations*.
 
-22. Association for the Advancement of Medical Instrumentation. (2022). *AAMI TIR57: Principles for Medical Device Security—Risk Management*.
+25. Association for the Advancement of Medical Instrumentation. (2022). *AAMI TIR57: Principles for Medical Device Security—Risk Management*.
 
-23. IEEE Standards Association. (in development). *P2794: Standard for Reporting in Neural Interface Research*. Active working group.
+26. IEEE Standards Association. (in development). *P2794: Standard for Reporting in Neural Interface Research*. Active working group.
 
-24. IEEE Standards Association. (in development). *P2731: Standard for Brain-Computer Interface Terminology*. Active working group.
+27. IEEE Standards Association. (in development). *P2731: Standard for Brain-Computer Interface Terminology*. Active working group.
 
 ---
 
@@ -504,6 +524,7 @@ Latin America leads globally in constitutional and legislative neurorights prote
 |---------|------|---------|
 | 1.0 | 2026-01-25 | Initial release — US regulatory focus |
 | 2.0 | 2026-02-10 | Major expansion: added enacted US state legislation (Colorado H.B. 24-1058, California SB 1223, Montana SB 163, Connecticut SB 1295), US MIND Act (S. 2925), international regulatory landscape (UNESCO 2025, Council of Europe, Latin American neurorights, Spain, EU developments), IEEE standards (P2794, P2731), and Neurorights Foundation |
+| 2.1 | 2026-02-15 | Added FDORA/PATCH Act (2022) Section 524B with QIF compliance mapping, RTA enforcement policy, Schroder et al. (2025) citation |
 
 ---
 
