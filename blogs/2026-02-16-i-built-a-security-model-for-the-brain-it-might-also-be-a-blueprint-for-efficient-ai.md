@@ -7,6 +7,10 @@ tags: ["qif", "bci", "ai", "hourglass", "security"]
 
 > **Status:** DRAFT — For qinnovate.com blog
 
+**TL;DR:** Your brain runs two very different systems. The cortex thinks — it's slow, expensive, and flexible. The spinal cord reacts — it's fast, cheap, and hardwired. A routing layer in the middle decides which one handles each job. This saves energy: the brain spends 20% of your body's fuel on 2% of your mass, and it would be worse without the shortcut. But the cheap system has a catch — it's also cheap to break. A vitamin deficiency, a dental anesthetic, or a bad diet can silently degrade your spinal cord while your cortex never notices. The same trade-off is showing up in AI. Models like DeepSeek use lookup tables for known answers (fast, cheap, brittle) and deep reasoning for hard questions (slow, expensive, resilient). Data poisoning breaks the lookup table the same way B12 deficiency breaks a reflex arc. And when AI gets a body — robots, surgical systems, self-driving cars — it will need the full architecture, fragility tax included. This post describes how a security model for brain-computer interfaces accidentally revealed that pattern.
+
+---
+
 I wasn't looking for this.
 
 I was trying to protect brains from hackers.
@@ -44,6 +48,8 @@ In the middle, the thalamus acts as a router. It decides what signals deserve ex
 At the bottom, the spinal cord handles reflexes — touch a hot stove, and your hand pulls back in ~30ms before you consciously register pain. No cortical involvement needed. The problem was already solved millions of years ago. The solution is hardwired.
 
 This is the key insight: **the spinal cord is more deterministic than the cortex.** The same input produces the same output every time. A reflex arc is a biological lookup table — there's no deliberation, no probabilistic weighing of options, no state-dependent variation. The neocortex is the opposite: the same input can produce wildly different outputs depending on mood, attention, context, and memory. That indeterminacy is what makes the cortex powerful, but it's also what makes it expensive. Deterministic processing is cheap because there's nothing to resolve.
+
+The neuroscience backs this up from multiple angles. Laughlin et al. (1998) showed that transmitting one bit of information at a chemical synapse costs roughly 10,000 ATP molecules — and that cost scales with the complexity of the signal. Levy & Calvert (2021) found that in the cortex, *communication* between neurons consumes 35 times more energy than *computation* at the synapse itself. The cortex is expensive primarily because it connects distant, diverse neurons for flexible reasoning. The spinal cord's reflex arcs are short, local, and hardwired — minimal communication overhead, minimal energy. Friston's free-energy principle (2010) formalizes this from the other direction: deterministic, predictable processes have low free energy and cost less to maintain. Novel, uncertain processing requires active inference, which is metabolically expensive. Three independent frameworks, same conclusion: **the more deterministic the system, the cheaper it is to run.**
 
 The pattern: **complex, indeterministic, flexible processing at the top for novel problems. Simple, deterministic, automatic processing at the bottom for solved problems. A routing layer in the middle deciding which is which.**
 
@@ -151,3 +157,14 @@ QIF is a neurotech framework born from security — it maps the brain's architec
 *Second: poison the retrieval layer. Corrupt 1% of the lookup entries and measure how error propagates. Then damage 1% of the reasoning layers and measure the same thing. The prediction — from the fragility gradient — is that retrieval corruption produces confident, undetectable errors (the B12 pattern), while reasoning corruption produces detectable degradation (the hemispherectomy pattern). If that holds, it tells you exactly where to put your monitoring: at the waist, where retrieval meets reasoning.*
 
 *If you have the ML engineering chops to run either experiment, I'd love to hear from you.*
+
+---
+
+### References
+
+- Attwell, D., & Laughlin, S. B. (2001). An energy budget for signaling in the grey matter of the brain. *Journal of Cerebral Blood Flow & Metabolism*, 21(10), 1133-1145.
+- Friston, K. (2010). The free-energy principle: a unified brain theory? *Nature Reviews Neuroscience*, 11(2), 127-138. [doi:10.1038/nrn2787](https://doi.org/10.1038/nrn2787)
+- Laughlin, S. B., de Ruyter van Steveninck, R. R., & Anderson, J. C. (1998). The metabolic cost of neural information. *Nature Neuroscience*, 1(1), 36-41. [doi:10.1038/236](https://doi.org/10.1038/236)
+- Lennie, P. (2003). The cost of cortical computation. *Current Biology*, 13(6), 493-497.
+- Levy, W. B., & Calvert, V. G. (2021). Communication consumes 35 times more energy than computation in the human cortex, but both costs are needed to predict synapse number. *PNAS*, 118(18). [doi:10.1073/pnas.2008173118](https://doi.org/10.1073/pnas.2008173118)
+- Sherman, S. M., & Guillery, R. W. (2006). *Exploring the Thalamus and Its Role in Cortical Function*. MIT Press.
