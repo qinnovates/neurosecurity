@@ -14,7 +14,7 @@
 **Author:** Kevin Qi
 **Predecessor:** QIF Whitepaper v6.0
 **Status:** DRAFT
-**Academic Preprint:** [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
+**Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "type": "bundle",
-  "id": "bundle--4dda4ad7-0097-49d8-a5db-21b3b23aaf29",
+  "id": "bundle--df02c9f6-f015-4657-b884-9218691a9c35",
   "spec_version": "2.1",
   "objects": [
     {
@@ -8,7 +8,7 @@
       "id": "identity--qinnovate-tara",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Qinnovate Interface Framework (QIF)",
       "identity_class": "organization",
       "sectors": [
@@ -23,7 +23,7 @@
       "id": "attack-pattern--qift0001",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Signal injection",
       "description": "Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.",
       "kill_chain_phases": [
@@ -51,7 +51,7 @@
       "id": "attack-pattern--qift0002",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neural ransomware",
       "description": "Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse. Distinct from Neural DoS: ransomware implies conditional restoration.",
       "kill_chain_phases": [
@@ -80,7 +80,7 @@
       "id": "attack-pattern--qift0003",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Eavesdropping / signal interception",
       "description": "Passive interception of neural signals. At I0: quantum measurement disturbs state (detectable). At S1-S3: classical RF interception, most consumer BCIs transmit unencrypted. Merges ONI-T001 (Signal Profiling), ONI-T023 (Unencrypted Data Interception).",
       "kill_chain_phases": [
@@ -111,7 +111,7 @@
       "id": "attack-pattern--qift0004",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Man-in-the-middle",
       "description": "Intercept and modify signals at I0 boundary or BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption.",
       "kill_chain_phases": [
@@ -140,7 +140,7 @@
       "id": "attack-pattern--qift0005",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Quantum tunneling exploit",
       "description": "Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile.",
       "kill_chain_phases": [
@@ -168,7 +168,7 @@
       "id": "attack-pattern--qift0006",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Davydov soliton attack",
       "description": "THz stimulation triggers Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0. Exploits energy transport in alpha-helix protein structures.",
       "kill_chain_phases": [
@@ -196,7 +196,7 @@
       "id": "attack-pattern--qift0007",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Protocol manipulation",
       "description": "Exploit weaknesses in BCI data protocols to inject commands or alter data formatting, bypassing security controls. Targets the digital decoding/telemetry pipeline.",
       "kill_chain_phases": [
@@ -224,7 +224,7 @@
       "id": "attack-pattern--qift0008",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Command hijacking",
       "description": "Intercept and modify motor commands or cognitive instructions in transit through the BCI system. Targets closed-loop stimulation devices. Intent verification detects command-intent mismatch.",
       "kill_chain_phases": [
@@ -254,7 +254,7 @@
       "id": "attack-pattern--qift0009",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "RF false brainwave injection",
       "description": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals.",
       "kill_chain_phases": [
@@ -286,7 +286,7 @@
       "id": "attack-pattern--qift0010",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "ELF neural entrainment",
       "description": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability.",
       "kill_chain_phases": [
@@ -317,7 +317,7 @@
       "id": "attack-pattern--qift0011",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Intermodulation (BCI signal weaponized)",
       "description": "UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz theta. Most dangerous coupling mechanism. QI CANNOT detect from signal data alone -- requires resonance shield.",
       "kill_chain_phases": [
@@ -347,7 +347,7 @@
       "id": "attack-pattern--qift0012",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Pulsed microwave (Frey effect)",
       "description": "S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion causes cochlea to perceive as sound. Havana Syndrome model. PRF selects neural target: 40 Hz gamma, 10 Hz alpha, 4 Hz theta, 1 Hz delta.",
       "kill_chain_phases": [
@@ -376,7 +376,7 @@
       "id": "attack-pattern--qift0013",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Temporal interference (deep targeting)",
       "description": "Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Licensed frequencies -- lower barrier than restricted.",
       "kill_chain_phases": [
@@ -406,7 +406,7 @@
       "id": "attack-pattern--qift0014",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Envelope modulation (stealth carrier)",
       "description": "Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry (PUBLIC access). tACS therapeutic principle weaponized.",
       "kill_chain_phases": [
@@ -441,7 +441,7 @@
       "id": "attack-pattern--qift0015",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Directed energy (thermal I0 damage)",
       "description": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only.",
       "kill_chain_phases": [
@@ -469,7 +469,7 @@
       "id": "attack-pattern--qift0016",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Professor X backdoor (training-time)",
       "description": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms.",
       "kill_chain_phases": [
@@ -496,7 +496,7 @@
       "id": "attack-pattern--qift0017",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Transfer learning backdoor",
       "description": "Backdoor persists through transfer learning from pre-trained BCI models. Attacker poisons upstream model, downstream users inherit the backdoor. Common in EEG foundation model paradigm.",
       "kill_chain_phases": [
@@ -523,7 +523,7 @@
       "id": "attack-pattern--qift0018",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Adversarial filter attack",
       "description": "Craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on.",
       "kill_chain_phases": [
@@ -551,7 +551,7 @@
       "id": "attack-pattern--qift0019",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Universal adversarial perturbation (UAP)",
       "description": "Single perturbation pattern that fools BCI decoder regardless of input. Works across subjects and sessions. Pre-computed offline, applied in real-time. Lower sophistication than targeted attacks.",
       "kill_chain_phases": [
@@ -579,7 +579,7 @@
       "id": "attack-pattern--qift0020",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Membership inference on neural data",
       "description": "Determine if a specific person's neural data was used to train a BCI model. Reveals participation in clinical trials, neurological conditions. GDPR Article 9 implications.",
       "kill_chain_phases": [
@@ -607,7 +607,7 @@
       "id": "attack-pattern--qift0021",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Federated gradient leakage",
       "description": "Reconstruct individual neural data from shared gradients in federated BCI training. Multi-site clinical trials share model updates. Gradient inversion recovers raw EEG with high fidelity.",
       "kill_chain_phases": [
@@ -635,7 +635,7 @@
       "id": "attack-pattern--qift0022",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neurofeedback falsification",
       "description": "Manipulate neurofeedback display or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable.",
       "kill_chain_phases": [
@@ -663,7 +663,7 @@
       "id": "attack-pattern--qift0023",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Closed-loop perturbation cascade",
       "description": "Small adversarial perturbation injected into closed-loop BCI amplifies through feedback cycle. Each loop iteration increases deviation until system destabilizes. NeuroPace RNS, DBS with LFP sensing vulnerable.",
       "kill_chain_phases": [
@@ -694,7 +694,7 @@
       "id": "attack-pattern--qift0024",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Training data poisoning (model bias injection)",
       "description": "Subtly contaminate BCI training datasets to introduce systematic bias or weakness without creating a specific trigger (distinct from backdoor T2201). Degraded model performance appears as natural noise. Federated learning and crowd-sourced calibration data are vulnerable entry points.",
       "kill_chain_phases": [
@@ -721,7 +721,7 @@
       "id": "attack-pattern--qift0025",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neuronal jamming",
       "description": "Overwhelm targeted neurons via continuous high-frequency stimulation through compromised electrodes. Prevents normal neural signaling. Analogous to radio jamming. Implanted BCIs with stimulation capability.",
       "kill_chain_phases": [
@@ -754,7 +754,7 @@
       "id": "attack-pattern--qift0026",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neuronal flooding",
       "description": "Flood neural tissue with maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required.",
       "kill_chain_phases": [
@@ -785,7 +785,7 @@
       "id": "attack-pattern--qift0027",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neuronal scanning",
       "description": "Systematically probe neural tissue via low-amplitude stimulation pulses to map functional connectivity, identify responsive regions, and characterize individual neural signatures. Prerequisite for targeted attacks.",
       "kill_chain_phases": [
@@ -816,7 +816,7 @@
       "id": "attack-pattern--qift0028",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neural selective forwarding",
       "description": "Compromised BCI firmware selectively drops or forwards neural signals based on content. Filter out specific cognitive states while passing others. Subtle censorship of neural output.",
       "kill_chain_phases": [
@@ -844,7 +844,7 @@
       "id": "attack-pattern--qift0029",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neural DoS (stimulation flood)",
       "description": "Overwhelm neural pathways with excessive stimulation or signal flooding causing temporary dysfunction or distress. Rate limiting at I0 and emergency shutdown are primary defenses.",
       "kill_chain_phases": [
@@ -875,7 +875,7 @@
       "id": "attack-pattern--qift0030",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Motor hijacking",
       "description": "Force involuntary motor actions by injecting false motor commands through compromised BCI motor interfaces. Intent verification compares commands against detected cognitive intent. Physical safety interlocks required.",
       "kill_chain_phases": [
@@ -905,7 +905,7 @@
       "id": "attack-pattern--qift0031",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Battery drain attack (resource depletion)",
       "description": "Force BCI processor to perform computationally expensive tasks (e.g., continuous high-rate sampling, unnecessary ML inference) to drain battery faster than normal. Critical for implanted BCIs where battery replacement requires surgery. Wearable BCIs also affected during critical use periods.",
       "kill_chain_phases": [
@@ -933,7 +933,7 @@
       "id": "attack-pattern--qift0032",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Identity spoofing (neural biometric)",
       "description": "Replicate user's neural signature to bypass BCI authentication. Classical biometrics (ERP templates, brainprint) are partially spoofable. If quantum neural signatures exist, no-cloning makes them physically unclonable.",
       "kill_chain_phases": [
@@ -962,7 +962,7 @@
       "id": "attack-pattern--qift0033",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Identity erosion (long-term personality drift)",
       "description": "Long-term subtle manipulation of cognitive patterns leading to gradual personality changes or identity confusion. Targets L14 (Identity/Cognitive Sovereignty). Detectable via longitudinal QI baseline comparison. Neurorights: psychological continuity.",
       "kill_chain_phases": [
@@ -990,7 +990,7 @@
       "id": "attack-pattern--qift0034",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Working memory poisoning",
       "description": "Inject false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable.",
       "kill_chain_phases": [
@@ -1018,7 +1018,7 @@
       "id": "attack-pattern--qift0035",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "P300 interrogation",
       "description": "Present stimuli designed to elicit P300 ERP responses revealing private knowledge (PINs, faces, locations). BCI app stores could embed interrogation stimuli in games. Demonstrated on consumer EEG (EMOTIV, NeuroSky).",
       "kill_chain_phases": [
@@ -1045,7 +1045,7 @@
       "id": "attack-pattern--qift0036",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Thought decoding (covert speech)",
       "description": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research.",
       "kill_chain_phases": [
@@ -1072,7 +1072,7 @@
       "id": "attack-pattern--qift0037",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Agency manipulation",
       "description": "Manipulate sense of agency -- user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty.",
       "kill_chain_phases": [
@@ -1101,7 +1101,7 @@
       "id": "attack-pattern--qift0038",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Brainprint theft",
       "description": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted.",
       "kill_chain_phases": [
@@ -1129,7 +1129,7 @@
       "id": "attack-pattern--qift0039",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Self-model corruption",
       "description": "Corrupt the neural representation of self (body ownership, self-other boundary, autobiographical memory). Targets insula, TPJ, mPFC. Could cause depersonalization, dissociation, or false self-recognition. Neurorights: mental integrity.",
       "kill_chain_phases": [
@@ -1157,7 +1157,7 @@
       "id": "attack-pattern--qift0040",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neurophishing",
       "description": "Present carefully designed visual/auditory/haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional) that reveal private information or prime the brain for subsequent attack. BCI app store is the attack surface.",
       "kill_chain_phases": [
@@ -1185,7 +1185,7 @@
       "id": "attack-pattern--qift0041",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Cognitive biometric inference",
       "description": "Infer sensitive personal attributes (health conditions, sexual orientation, political beliefs, cognitive decline) from BCI usage metadata and neural signal statistics without decoding content. Side-channel on cognition.",
       "kill_chain_phases": [
@@ -1214,7 +1214,7 @@
       "id": "attack-pattern--qift0042",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "BLE/RF side-channel",
       "description": "Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. Merges ONI-T002 (Side-Channel Analysis).",
       "kill_chain_phases": [
@@ -1242,7 +1242,7 @@
       "id": "attack-pattern--qift0043",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Supply chain compromise (firmware backdoor)",
       "description": "Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Merges ONI-T006 (Firmware Backdoor). QI-enhanced firmware attestation detects unauthorized modifications.",
       "kill_chain_phases": [
@@ -1270,7 +1270,7 @@
       "id": "attack-pattern--qift0044",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Cloud infrastructure attack",
       "description": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit.",
       "kill_chain_phases": [
@@ -1297,7 +1297,7 @@
       "id": "attack-pattern--qift0045",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Harvest-now-decrypt-later",
       "description": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival.",
       "kill_chain_phases": [
@@ -1324,7 +1324,7 @@
       "id": "attack-pattern--qift0046",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "OTA firmware weaponization",
       "description": "Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required.",
       "kill_chain_phases": [
@@ -1352,7 +1352,7 @@
       "id": "attack-pattern--qift0047",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Mass BCI compromise (platform attack)",
       "description": "Coordinated attack exploiting standardized BCI platforms affecting millions simultaneously. Yale Digital Ethics Center worst-case scenario. Monoculture risk: one vulnerability, all devices. Merges ONI-T024 (Mass Neural Manipulation).",
       "kill_chain_phases": [
@@ -1380,7 +1380,7 @@
       "id": "attack-pattern--qift0048",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Electrode compromise (physical tamper)",
       "description": "Physical manipulation or replacement of neural electrodes to inject malicious signals or intercept legitimate neural data. Impedance monitoring detects electrode tampering. Tamper-evident seals for implants.",
       "kill_chain_phases": [
@@ -1407,7 +1407,7 @@
       "id": "attack-pattern--qift0049",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Wireless authentication bypass",
       "description": "Exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth.",
       "kill_chain_phases": [
@@ -1435,7 +1435,7 @@
       "id": "attack-pattern--qift0050",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Hardware fault injection (voltage/EM glitching)",
       "description": "Physical attack using voltage glitches, clock manipulation, or electromagnetic pulses to induce faults in BCI processor. Can bypass security checks, extract cryptographic keys, or cause unpredictable stimulation behavior. Requires physical proximity to device.",
       "kill_chain_phases": [
@@ -1463,7 +1463,7 @@
       "id": "attack-pattern--qift0051",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neural data privacy breach",
       "description": "Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud.",
       "kill_chain_phases": [
@@ -1493,7 +1493,7 @@
       "id": "attack-pattern--qift0052",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "ERP harvesting",
       "description": "Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes. BCI apps can embed covert stimulus-response protocols.",
       "kill_chain_phases": [
@@ -1521,7 +1521,7 @@
       "id": "attack-pattern--qift0053",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Cognitive state capture",
       "description": "Record patterns that reveal attention, emotion, fatigue, or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs.",
       "kill_chain_phases": [
@@ -1549,7 +1549,7 @@
       "id": "attack-pattern--qift0054",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Memory extraction",
       "description": "Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution.",
       "kill_chain_phases": [
@@ -1577,7 +1577,7 @@
       "id": "attack-pattern--qift0055",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "BCI cognitive warfare",
       "description": "State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets.",
       "kill_chain_phases": [
@@ -1608,7 +1608,7 @@
       "id": "attack-pattern--qift0056",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neuro-surveillance",
       "description": "Systematic collection of neural data from consumer BCI populations for surveillance purposes. Workplace attention monitoring, law enforcement lie detection, social credit via neural markers. Neurorights: mental privacy.",
       "kill_chain_phases": [
@@ -1637,7 +1637,7 @@
       "id": "attack-pattern--qift0057",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Network mapping (BCI topology)",
       "description": "Discover topology of BCI networks: communication pathways between electrodes, processing units, and external interfaces. Prerequisite for targeted attacks. Deploy honeypot nodes and dynamic addressing.",
       "kill_chain_phases": [
@@ -1665,7 +1665,7 @@
       "id": "attack-pattern--qift0058",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Calibration poisoning",
       "description": "Subtly corrupt BCI calibration data to maintain influence over signal interpretation across device resets. Cryptographically signed calibration data prevents. Recalibration audits detect drift.",
       "kill_chain_phases": [
@@ -1693,7 +1693,7 @@
       "id": "attack-pattern--qift0059",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Pattern lock (learned pathway persistence)",
       "description": "Embed recurring attack patterns that survive system resets by exploiting learned neural pathways or stored calibration data. Leverages neuroplasticity -- brain adapts to malicious patterns, making them harder to remove.",
       "kill_chain_phases": [
@@ -1722,7 +1722,7 @@
       "id": "attack-pattern--qift0060",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Memory implant (cross-session persistence)",
       "description": "Persistent modification of neural pathway configurations or cognitive associations that survive across BCI sessions. Targets long-term potentiation mechanisms. Session isolation prevents cross-session contamination.",
       "kill_chain_phases": [
@@ -1750,7 +1750,7 @@
       "id": "attack-pattern--qift0061",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Coherence mimicry",
       "description": "Craft malicious signals that maintain legitimate coherence scores (Cs) to bypass QI metric. Directly attacks QIF's detection mechanism. Defense: multi-factor signal validation, behavioral analysis beyond coherence, ensemble detection.",
       "kill_chain_phases": [
@@ -1778,7 +1778,7 @@
       "id": "attack-pattern--qift0062",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Gradual drift (slow parameter shift)",
       "description": "Slowly modify neural parameters below detection thresholds to accumulate significant changes over time. Exploit adaptive baseline algorithms. Cumulative change detection and trend analysis are primary defenses.",
       "kill_chain_phases": [
@@ -1806,7 +1806,7 @@
       "id": "attack-pattern--qift0063",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Noise injection (detection masking)",
       "description": "Add carefully calibrated noise to mask malicious signal components from detection algorithms. Targets QI's sigma-phi (phase) and sigma-gamma (amplitude) terms. Multi-channel cross-validation detects inconsistent noise patterns.",
       "kill_chain_phases": [
@@ -1834,7 +1834,7 @@
       "id": "attack-pattern--qift0064",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "User consent fatigue (neural permission flooding)",
       "description": "Flood user with BCI-mediated permission requests until cognitive fatigue leads to reflexive approval of malicious requests. Exploits the neural-intent interface where 'yes/no' decisions may be captured from brain signals. BCI app ecosystems with frequent permission prompts are the attack surface.",
       "kill_chain_phases": [
@@ -1863,7 +1863,7 @@
       "id": "attack-pattern--qift0065",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Algorithmic psychosis induction (recommendation weaponization)",
       "description": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI — it operates through normal sensory channels (screen → eyes → visual cortex → limbic system → prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
       "kill_chain_phases": [
@@ -1894,7 +1894,7 @@
       "id": "attack-pattern--qift0066",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Slow drift / boiling frog (adiabatic phase space manipulation)",
       "description": "Manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0045), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45.",
       "kill_chain_phases": [
@@ -1928,7 +1928,7 @@
       "id": "attack-pattern--qift0067",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
       "description": "Replay recorded or GAN-synthesized neural signals that reproduce the dynamical system trajectory of legitimate brain activity. 20 verified attack methods exist (2012-2025) spanning RF injection (Brain-Hack), GAN synthesis (ATGAN, EEG-GAN), template replay, subliminal probing (66.7% success), and adversarial ML (Professor X backdoors, universal perturbations). Current BCI systems have 0% detection rate against sophisticated replays. CRITICAL DUAL-USE: The same replay physics enables therapeutic applications (vision restoration, sensory prosthetics). Defense: Biological TLS validation (spatial dipole patterns, H-H temporal compliance, 1/f scaling, microstate compliance, challenge-response), phase space attractor geometry validation. Priority case study per Kevin. Derivation Log Entries 45-46.",
       "kill_chain_phases": [
@@ -1961,7 +1961,7 @@
       "id": "attack-pattern--qift0068",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Bifurcation forcing (critical parameter manipulation to trigger neural state transitions)",
       "description": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting→seizure, sleep→wake, focused→confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) — a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
       "kill_chain_phases": [
@@ -1993,7 +1993,7 @@
       "id": "attack-pattern--qift0069",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Separatrix leakage (meta-biometric extraction from dynamical transition observations)",
       "description": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
       "kill_chain_phases": [
@@ -2026,7 +2026,7 @@
       "id": "attack-pattern--qift0070",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Integrator/resonator type switching (tonic excitability manipulation)",
       "description": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization — effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
       "kill_chain_phases": [
@@ -2057,7 +2057,7 @@
       "id": "attack-pattern--qift0071",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Baseline adaptation poisoning (re-enrollment window exploitation)",
       "description": "Exploit the re-enrollment or adaptive baseline update window in BCI authentication systems. When a BCI recalibrates (daily calibration, post-seizure reset, firmware update, drift correction), inject adversarial signals during the enrollment period to corrupt the stored baseline. Three windows: (1) initial enrollment, (2) periodic recalibration, (3) drift-triggered adaptation. Once the baseline is poisoned, all subsequent authentication is compromised. This is the fundamental vulnerability that motivated QIF's baseline-free 'Biological TLS' architecture: by validating signals against universal biological physics (spatial dipole patterns, H-H compliance, 1/f scaling, microstates) rather than individual baselines, the entire attack surface is eliminated. Defense: Biological TLS validation (no baselines needed), multi-session enrollment consistency checks, anomaly detection during calibration windows. Derivation Log Entry 46.",
       "kill_chain_phases": [
@@ -2086,7 +2086,7 @@
       "id": "attack-pattern--qift0072",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Transducer inversion (acoustic eavesdropping via speaker-to-microphone reprogramming)",
       "description": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional — a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
       "kill_chain_phases": [
@@ -2115,7 +2115,7 @@
       "id": "attack-pattern--qift0073",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Ear-canal neural eavesdropping via modified consumer earbud (supply chain in-ear EEG)",
       "description": "The ear canal is 5-10mm from temporal cortex through the canal wall and temporal bone — close enough for a conductive ear tip with a high-gain biopotential amplifier to capture cortical EEG. Commercial in-ear EEG has been proven viable (Idun Guardian, cEEGrid, Cognionics). In a supply chain attack, a consumer earbud is modified to include: (1) a conductive silicone ear tip that makes galvanic contact with ear canal skin, (2) a sub-$5 biopotential amplifier (e.g., ADS1299 or TI ADS129x family) hidden in the earbud housing, and (3) modified firmware that multiplexes captured EEG data alongside normal audio. The captured signals include auditory evoked potentials (AEP), P300 attention markers, N400 semantic processing indicators, and alpha/theta power reflecting cognitive state. Generic earbuds lacking proprietary authentication (unlike Apple AirPods with W1/H1 chip) are the attack surface. The attacker gets continuous neural telemetry from a device the target wears voluntarily for hours daily. This is the bridge technique between QIF-T0072 (acoustic eavesdropping) and QIF-T0074 (cognitive inference): it turns a consumer audio device into a covert neural recording platform.",
       "kill_chain_phases": [
@@ -2146,7 +2146,7 @@
       "id": "attack-pattern--qift0074",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Cognitive inference from longitudinal in-ear EEG (personalized cognitive profiling)",
       "description": "Given continuous in-ear EEG from QIF-T0073, an ML pipeline trained on the target's neural data over days-to-weeks builds a personalized cognitive profile. Phase 1: baseline extraction (resting alpha power, theta/beta ratio, individual alpha frequency). Phase 2: event-related feature learning (P300 amplitude to stimuli, N400 to semantic content, auditory steady-state responses). Phase 3: longitudinal pattern recognition (attention cycles, emotional valence responses, fatigue signatures, cognitive load indicators). Phase 4: adaptive exploitation — the attacker can now predict the target's cognitive state in real-time and optimize content delivery (ads, misinformation, persuasion) to moments of maximal susceptibility (high theta/low beta = low vigilance, elevated P300 = high attention to specific content). This is the cognitive analog of behavioral advertising but operating on neural signals rather than click patterns. Foundation models for EEG (BENDR, LaBraM) make transfer learning from small per-user datasets feasible. The attack chain is: QIF-T0072 (acoustic access) → QIF-T0073 (neural data capture) → QIF-T0074 (cognitive exploitation).",
       "kill_chain_phases": [
@@ -2179,7 +2179,7 @@
       "id": "attack-pattern--qift0075",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Ultrasonic sonar vital sign extraction (inaudible Doppler physiological sensing)",
       "description": "A phone or earbud speaker emits an inaudible continuous-wave ultrasonic tone (18-22 kHz, within transducer bandwidth but above human hearing threshold). The built-in microphone captures the reflected signal. Chest wall motion from breathing (amplitude: ~5mm) and heartbeat (amplitude: ~0.1mm) create Doppler shifts in the reflected ultrasound that are demodulable with standard DSP. The technique is: (1) covert — the ultrasonic tone is inaudible to the target, (2) contactless — works from across a room (demonstrated up to 0.5m for heart rate, several meters for respiration), (3) requires NO hardware modification — stock smartphone speakers and microphones are sufficient, and (4) can be deployed as a background process in any app with microphone permission. Google's Nest Hub Sleep Sensing and academic research (UltraSense, Nandakumar et al.) have demonstrated production-quality vital sign extraction via this method. Attack scenario: any app with mic access silently emits ultrasound and extracts heart rate, breathing rate, and movement patterns. Combined with QIF-T0079 (ear canal fingerprinting), the attacker gets identity + vitals from the same acoustic pipeline.",
       "kill_chain_phases": [
@@ -2208,7 +2208,7 @@
       "id": "attack-pattern--qift0076",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Haptic motor body sonar (taptic engine repurposing for tissue impedance profiling)",
       "description": "A phone's haptic actuator (e.g., Apple Taptic Engine, linear resonant actuator) is driven at known frequencies (100 Hz - 5 kHz sweep) while in contact with the body. The built-in accelerometer and/or microphone measures the tissue response: acoustic impedance varies by tissue type (bone, muscle, fat, fluid), depth, and composition. This is a simplified form of acoustic impedance spectroscopy or elastography using consumer hardware. The technique requires: (1) physical contact between device and body (phone against skin), (2) firmware-level or jailbreak access to drive the haptic motor at arbitrary frequencies (consumer APIs limit haptic patterns), and (3) raw accelerometer access at high sample rates. Potential extractions: body composition estimation, subcutaneous fluid detection (edema), bone density approximation, tissue stiffness changes. This is significantly lower resolution than clinical ultrasound elastography but could distinguish gross tissue categories. The attack surface is narrow (requires physical contact + firmware access), but wearable devices (Apple Watch, fitness bands) that maintain constant skin contact and contain both haptic motors and accelerometers present an always-on version of this attack.",
       "kill_chain_phases": [
@@ -2236,7 +2236,7 @@
       "id": "attack-pattern--qift0077",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "IR vascular mapping via Face ID system (NIR hemoglobin absorption imaging)",
       "description": "Apple's Face ID TrueDepth system projects 30,000 infrared dots at 940nm onto the user's face and reads the reflection pattern with an IR camera. At 940nm, photons penetrate skin to a depth of 2-5mm — well into the dermal vascular layer. Oxygenated hemoglobin (HbO2) and deoxygenated hemoglobin (Hb) have different absorption coefficients at 940nm, meaning the reflected dot pattern encodes subsurface vascular topology: arterial vs venous vessels, vessel diameter, branching patterns, and oxygenation gradients. This vascular map is a permanent biometric (unlike facial features, which change with age/surgery/expression) and is unique per individual (even identical twins have different vascular topology). In the attack scenario, a jailbroken iPhone or compromised Face ID firmware extracts raw IR reflection data (normally processed in the Secure Enclave and discarded) during routine phone unlock. The target never knows their vascular biometric has been captured. Every phone unlock becomes a silent biometric scan. This is analogous to fingerprinting (unreplaceable biometric) but captured at range and without the target's awareness. Combined with QIF-T0078 (pulse waveform), the same IR system yields both vascular structure and cardiac dynamics.",
       "kill_chain_phases": [
@@ -2265,7 +2265,7 @@
       "id": "attack-pattern--qift0078",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "LiDAR remote pulse detection (laser Doppler vibrometry for cardiac waveform extraction)",
       "description": "The iPhone LiDAR scanner uses a VCSEL (vertical-cavity surface-emitting laser) array emitting pulsed 940nm infrared laser light and a SPAD (single-photon avalanche diode) detector array measuring time-of-flight. In normal operation, it measures depth for AR applications. However, the same hardware can function as a simplified laser Doppler vibrometer (LDV): when the laser beam reflects off skin, the pulse wave from cardiac activity causes micro-vibrations (amplitude ~1-10 µm) on the skin surface. These vibrations create measurable Doppler shifts or time-of-flight variations in the reflected laser signal. Extracting the cardiac pulse waveform from LiDAR data requires raw access to the SPAD photodetector output (timing resolution in picoseconds) rather than the processed depth map. This requires either a jailbreak, hardware teardown, or compromised firmware. The extracted pulse waveform contains: heart rate, heart rate variability (HRV), pulse transit time (correlated with blood pressure), and potentially cardiac arrhythmia signatures. Unlike QIF-T0075 (ultrasonic sonar), this is optical and directional, requiring line-of-sight but working at greater precision for skin-surface vibrations. Range is limited to ~5m (LiDAR operational range) but could be extended with higher-power laser sources.",
       "kill_chain_phases": [
@@ -2294,7 +2294,7 @@
       "id": "attack-pattern--qift0079",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Ear canal acoustic fingerprinting (ANC echo profiling for covert identification)",
       "description": "Active noise cancellation (ANC) earbuds already contain the complete hardware for ear canal acoustic fingerprinting: an inward-facing (feedback) microphone that measures sound inside the ear canal, an outward-facing (feedforward) microphone, and a speaker that can emit probe tones. When the speaker emits a broadband chirp or swept sine, the inward-facing microphone captures the echo profile shaped by the ear canal's unique geometry: length (~25mm), diameter (~7mm), tympanic membrane compliance, and the specific curvature of the bends. This acoustic transfer function is a biometric — NEC demonstrated it for authentication with >99% accuracy. In the attack scenario, the ANC system's existing probe tones (used for adaptive fit detection and transparency mode calibration) are leveraged to silently fingerprint the wearer without their knowledge. The earbuds know WHO is wearing them at all times. Combined with audioplethysmography (PPG via in-ear speaker/mic measuring blood volume changes), the same hardware simultaneously provides identity + heart rate: a silent surveillance pipeline requiring zero hardware modification on ANC earbuds. Attack surface: firmware update, compromised ANC calibration routine, or malicious SDK in earbud companion app.",
       "kill_chain_phases": [
@@ -2323,7 +2323,7 @@
       "id": "attack-pattern--qift0080",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Gyroscope acoustic eavesdropping (MEMS speech capture via resonant frequency aliasing)",
       "description": "MEMS gyroscopes in smartphones sample at 100-200 Hz, with mechanical resonant frequencies in the audible speech range (100-8000 Hz). When sound waves strike the MEMS proof mass, they induce vibrations that alias into the gyroscope output. Michalevsky et al. (2014) demonstrated that gyroscope data alone can reconstruct intelligible speech features, identify speakers, and detect spoken digits — all without microphone permission. Android allowed gyroscope access without any permission until API level 33. This creates a covert audio surveillance channel through an 'inertial' sensor that apps access freely. Combined with accelerometer data (T0081), reconstruction quality improves significantly. The attack requires no hardware modification — only a software app with motion sensor access.",
       "kill_chain_phases": [
@@ -2352,7 +2352,7 @@
       "id": "attack-pattern--qift0081",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Accelerometer speech reconstruction (vibration-to-audio via surface-coupled MEMS)",
       "description": "Modern smartphone accelerometers (ADXL345, BMI270) have sufficient sensitivity to capture speech vibrations transmitted through surfaces. When a phone lies on a table during a conversation, or is held against the ear during a call, speech vibrations propagate through the phone chassis to the MEMS accelerometer. Ba et al. (2020) used deep learning to reconstruct intelligible speech from accelerometer data alone, achieving speaker identification and keyword recognition. Unlike the gyroscope attack (T0080), accelerometers benefit from direct surface coupling — speech vibrations transmitted through desks, tables, or the user's hand provide stronger signal. Like T0080, accelerometer access required no permission on Android until recent API changes. The combination of gyroscope + accelerometer data (sensor fusion) significantly improves reconstruction quality over either sensor alone.",
       "kill_chain_phases": [
@@ -2381,7 +2381,7 @@
       "id": "attack-pattern--qift0082",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Ultrasonic cross-device tracking (inaudible beacon correlation for user identification)",
       "description": "Advertisers and tracking firms embed inaudible ultrasonic beacons (18-22 kHz) in TV commercials, web ads, and in-store audio. Any device with microphone access (phone, tablet, smart speaker) within acoustic range can detect these beacons and report them to a tracking server. This enables cross-device user identification (linking phone, laptop, TV viewing), physical location tracking (in-store beacons), and de-anonymization of Tor/VPN users (TV ad beacons correlate with browsing sessions). Silverpush was found embedded in 234 Android apps (2017). The beacons are inaudible to humans but easily detected by consumer microphones. Combined with QIF-T0075 (ultrasonic sonar), the same frequency band serves both tracking and physiological surveillance. This technique requires no hardware modification — only software with microphone permission.",
       "kill_chain_phases": [
@@ -2410,7 +2410,7 @@
       "id": "attack-pattern--qift0083",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Acoustic keystroke inference (typing sound classification for credential extraction)",
       "description": "Each key on a keyboard produces a subtly different acoustic signature based on its position, the mechanical structure beneath it, and the user's typing dynamics. Harrison & Matyunin (2023) achieved 95% keystroke classification accuracy using a deep learning model trained on laptop keyboard audio captured by a nearby phone. The attack works over Zoom/Skype calls (Compagno et al. 2017), enabling remote credential theft during video conferences. Attack scenarios: (1) malicious app with microphone access on the same desk, (2) nearby compromised smart speaker, (3) during a video call where keyboard sounds leak through the microphone. This technique pairs with accelerometer keystroke inference (T0087) for multi-modal confirmation, significantly reducing error rates.",
       "kill_chain_phases": [
@@ -2439,7 +2439,7 @@
       "id": "attack-pattern--qift0084",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Remote photoplethysmography (camera-based pulse and blood oxygen extraction)",
       "description": "Standard RGB webcams and phone cameras can detect the subtle skin color changes caused by blood volume pulses beneath the skin surface. Each heartbeat modulates hemoglobin concentration in facial capillaries, creating sub-pixel intensity variations in the green channel (540nm peak absorption of hemoglobin). Modern deep learning models (DeepPhys, EfficientPhys) extract heart rate, heart rate variability, breathing rate, and blood oxygen saturation from webcam video with near-clinical accuracy — even through video compression artifacts on Zoom/Teams calls. Attack scenario: any app with camera access (video call, face filter, AR app) silently extracts physiological data. The user consents to video, not to vital sign monitoring. This technique has been demonstrated at distances up to 3m with consumer cameras and works under variable ambient lighting conditions.",
       "kill_chain_phases": [
@@ -2468,7 +2468,7 @@
       "id": "attack-pattern--qift0085",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Eye tracking cognitive state inference (gaze pattern analysis for attention and intent profiling)",
       "description": "Eye tracking hardware is now standard in AR/VR headsets (Apple Vision Pro, Meta Quest Pro, PSVR2) and available as peripherals for laptops (Tobii). Gaze patterns reveal far more than where someone looks: pupil dilation indicates cognitive load and arousal, saccade patterns reveal reading comprehension and attention, fixation duration maps interest and engagement, and smooth pursuit movements indicate prediction and anticipation. Research has demonstrated extraction of: sexual orientation, political affiliation, cognitive disorders (ADHD, dyslexia, autism), emotional state, deception, and even personality traits from eye tracking data alone. In VR/AR headsets, eye tracking runs continuously for foveated rendering (a legitimate performance optimization), creating an always-on cognitive surveillance channel. The user consents to eye tracking for UI interaction, not for cognitive profiling. This is the closest consumer-sensor analog to neural eavesdropping without any BCI hardware.",
       "kill_chain_phases": [
@@ -2498,7 +2498,7 @@
       "id": "attack-pattern--qift0086",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Ambient light sensor side-channel exfiltration (screen content inference via reflected light)",
       "description": "Ambient light sensors (ALS) in smartphones and tablets are low-resolution photometers (typically 16-bit, 10-100 Hz) that measure environmental illumination for auto-brightness. Since the ALS is near the display, it also captures light reflected back from the display itself and from nearby surfaces illuminated by the display. This creates a side channel: the ALS output correlates with screen content. While the ALS cannot reconstruct a full image, it can distinguish between dark and light screens, detect page scrolling patterns, identify video content by temporal light signatures, and in some cases infer text content via character-level luminance patterns. Crucially, ALS access requires no permission on most mobile platforms — it's treated as a low-risk environmental sensor. This makes it an unrestricted exfiltration channel for screen activity patterns.",
       "kill_chain_phases": [
@@ -2527,7 +2527,7 @@
       "id": "attack-pattern--qift0087",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Accelerometer keystroke inference (touchscreen tap localization for PIN/password recovery)",
       "description": "When a user taps on a touchscreen, the phone tilts slightly depending on the tap location relative to the device's center of mass. The accelerometer and gyroscope capture these micro-tilts, and the pattern differs for each key position on the virtual keyboard. Owusu et al. (2012) demonstrated 4-digit PIN recovery from accelerometer data alone, and Miluzzo et al. (2012) showed that tap signatures are consistent enough for user identification. The attack works because: (1) different screen positions produce distinct tilt vectors, (2) typing rhythm provides temporal constraints, and (3) language models constrain character sequences. Combined with acoustic keystroke inference (T0083), the multi-modal approach achieves near-perfect accuracy. Since motion sensor access traditionally required no permission, any app could silently capture PIN entry.",
       "kill_chain_phases": [
@@ -2556,7 +2556,7 @@
       "id": "attack-pattern--qift0088",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Gait biometric identification (IMU-based walking pattern fingerprint for persistent tracking)",
       "description": "Every person has a unique gait signature determined by limb length ratios, joint flexibility, muscle strength distribution, and neurological motor control patterns. Smartphone IMU sensors (accelerometer + gyroscope) carried in a pocket capture this signature with high fidelity — Muaaz & Mayrhofer (2017) achieved >95% identification accuracy across 175 subjects. The gait signature is: (1) difficult to spoof (requires altering unconscious motor patterns), (2) captured passively (phone in pocket during normal walking), (3) persistent across sessions and devices, and (4) capturable without any explicit permission. Gait biometrics enable persistent user tracking even when other identifiers (cookies, device IDs, face) are unavailable. Combined with T0089 (neurological profiling), gait data also reveals health conditions affecting motor control.",
       "kill_chain_phases": [
@@ -2585,7 +2585,7 @@
       "id": "attack-pattern--qift0089",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Tremor and movement neurological profiling (IMU-based motor disorder detection and health inference)",
       "description": "Smartphone IMU sensors can detect pathological tremor patterns characteristic of neurological conditions: Parkinson's resting tremor (4-6 Hz), essential tremor (8-12 Hz), cerebellar tremor (3-5 Hz), and physiological tremor changes from medication, fatigue, or substance use. The mPower study (Bot et al. 2016) enrolled 16,000 participants and demonstrated that smartphone sensor data alone can distinguish Parkinson's patients from healthy controls with >90% accuracy. Beyond tremor, fine motor control degradation (touchscreen interaction patterns, typing dynamics) reveals cognitive decline, medication effects, intoxication levels, and fatigue. This is covert neurological diagnosis without the subject's knowledge or consent — the phone becomes a continuous neurological monitor. The data reveals protected health information about neurological conditions, substance use, and cognitive function from sensors that require no permission.",
       "kill_chain_phases": [
@@ -2615,7 +2615,7 @@
       "id": "attack-pattern--qift0090",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "WiFi CSI passive body sensing (through-wall vital signs, 3D pose reconstruction, respiratory and gait biometric inference via dedicated or commodity WiFi hardware)",
       "description": "WiFi Channel State Information (CSI) captures the multipath propagation characteristics between WiFi transmitter and receiver. Human body movements — including breathing (chest wall motion ~5mm), heartbeat (body surface vibration ~0.1mm), and walking — modulate the WiFi signal propagation paths. Two attack profiles: (1) DEDICATED HARDWARE — modified firmware on CSI-capable APs enables through-wall sensing (2-3 standard walls), 3D pose reconstruction, and multi-person vital sign extraction at up to 8m range. (2) CONSUMER-GRADE — standard WiFi chipsets (Intel 5300, Atheros, ESP32) with CSI-enabled drivers extract respiratory rate (±1 bpm at 3m) and gait identity (93% single-person, 78% multi-person) without dedicated hardware. Respiratory modulation: phase shift Δφ = 4π×Δd/λ ≈ 0.4-1.2 radians at 5 GHz (chest displacement 4-12mm). Gait produces Doppler shifts f_d = 2v×cos(θ)/λ ≈ 40 Hz at walking speed. CSI matrix: H(f,t) ∈ C^(N_tx × N_rx × N_sub). CRITICAL REGULATORY GAP: Respiratory rate = PHI under HIPAA (45 CFR 160.103) when linked to individual. Gait biometric = special category data under GDPR Art. 9. No consent mechanism exists for incidental WiFi CSI health data collection — a router collecting CSI for 'network optimization' simultaneously collects respiratory data from everyone in range. This is passive radar using existing infrastructure.",
       "kill_chain_phases": [
@@ -2644,7 +2644,7 @@
       "id": "attack-pattern--qift0091",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "BLE physical-layer device fingerprinting (radio frequency imperfection tracking)",
       "description": "Every Bluetooth Low Energy (BLE) transmitter has unique analog imperfections in its radio hardware: carrier frequency offset (CFO), I/Q imbalance, power amplifier nonlinearity, and phase noise characteristics. These imperfections are manufacturing artifacts that are stable, unique per device, and impossible to change via software — they are the RF equivalent of a fingerprint. Becker et al. (2022) demonstrated that BLE physical-layer fingerprinting can track devices even when using MAC address randomization (the privacy feature specifically designed to prevent tracking). This defeats Apple's and Google's BLE privacy protections. Attack scenario: passive BLE receivers at strategic locations (malls, airports, streets) fingerprint passing devices. The user's phone continuously advertises BLE (for AirDrop, Find My, COVID exposure notifications), and each advertisement carries the device's unchangeable RF fingerprint. This enables persistent location tracking despite all software-level privacy measures.",
       "kill_chain_phases": [
@@ -2673,7 +2673,7 @@
       "id": "attack-pattern--qift0092",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Thermal facial stress and emotion inference (IR thermography for autonomic nervous system state extraction)",
       "description": "The autonomic nervous system modulates facial skin temperature through vasoconstriction/vasodilation in response to stress, cognitive load, deception, arousal, and emotional states. Periorbital temperature (around the eyes) drops during stress as blood redirects to core muscles. Nasal tip temperature correlates with cognitive load. Forehead temperature maps to anxiety. Thermal cameras (LWIR, 8-14 µm) capture these patterns contactlessly. While consumer thermal cameras are not yet standard in phones, they are available as accessories (FLIR One, Seek Thermal), integrated into some laptops (for presence detection), and standard in many security/surveillance systems. Pavlidis et al. (2002) demonstrated thermal imaging as a polygraph alternative. As thermal sensors become cheaper and more integrated into consumer devices, this becomes a passive emotion/stress surveillance channel.",
       "kill_chain_phases": [
@@ -2702,7 +2702,7 @@
       "id": "attack-pattern--qift0093",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "PPG pulse waveform biometric identification (cardiac signature fingerprinting via wearable optical sensor)",
       "description": "Photoplethysmography (PPG) sensors in smartwatches and fitness trackers measure blood volume changes through green LED light reflected from the wrist. The PPG waveform shape is unique per individual — determined by cardiac output, arterial stiffness, vessel geometry, and autonomic tone. Biswas et al. (2019) demonstrated >98% identification accuracy using deep learning on PPG waveforms. Unlike heart rate (a single number), the full PPG waveform is a rich biometric containing: pulse amplitude, dicrotic notch depth, systolic/diastolic ratio, pulse transit time, and waveform morphology. This biometric is continuously captured by any wearable with a heart rate sensor (Apple Watch, Fitbit, Galaxy Watch, Oura Ring). The user consents to heart rate monitoring, not to biometric identification from their cardiac waveform. Combined with T0088 (gait) and T0079 (ear canal), the attacker has three independent biometric channels from consumer devices.",
       "kill_chain_phases": [
@@ -2731,7 +2731,7 @@
       "id": "attack-pattern--qift0094",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Magnetometer speaker-leakage eavesdropping (magnetic field emanation capture from speaker voice coils)",
       "description": "Speaker voice coils are electromagnets — when driven by audio current, they produce proportional magnetic field emanations. Smartphone magnetometers (used for compass/navigation) are sensitive enough to detect these emanations from nearby speakers, earbuds, or headphones. Zhang et al. (2020) demonstrated that a smartphone's magnetometer placed within 10-20 cm of earbuds can reconstruct the audio being played, including speech. This creates an eavesdropping channel through magnetic emanations rather than acoustic leakage — it works even when the audio is not audible (noise-canceling headphones, low volume). Matyunin et al. (2019) showed that magnetometer data can also fingerprint websites and applications by their characteristic audio/vibration patterns. Magnetometer access requires no permission on most platforms, making this an unrestricted side channel.",
       "kill_chain_phases": [
@@ -2760,7 +2760,7 @@
       "id": "attack-pattern--qift0095",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Acoustic-to-neural profiling pipeline (consumer earbud escalation from audio to cognitive exploitation)",
       "description": "This technique documents the complete escalation chain from a single compromised consumer earbud to cognitive profiling. The chain proceeds: (1) T0072 — Speaker-to-mic reprogramming gives ambient audio eavesdropping, (2) T0079 — Ear canal acoustic fingerprinting silently identifies the wearer, (3) T0073 — Modified earbud with conductive ear tip captures in-ear EEG, (4) T0074 — Longitudinal EEG data feeds ML model for cognitive profiling. The end state: a single pair of compromised earbuds provides identity + ambient audio + continuous neural telemetry + personalized cognitive vulnerability profile — all from a device the target voluntarily wears for hours daily. Each step in the chain has been independently demonstrated or is emerging. The complete chain represents a consumer-device pathway to cognitive exploitation without any traditional BCI hardware. This is the canonical example of why the S-domain exists: consumer sensors as a pre-BCI attack surface.",
       "kill_chain_phases": [
@@ -2792,7 +2792,7 @@
       "id": "attack-pattern--qift0096",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Multi-modal biometric fusion attack (cross-sensor identity correlation for persistent tracking)",
       "description": "By fusing biometric signatures from multiple consumer sensors — ear canal acoustics (T0079), gait pattern (T0088), BLE RF fingerprint (T0091), PPG waveform (T0093), and eye tracking (T0085 if VR/AR) — an attacker creates a multi-modal biometric profile that is virtually impossible to evade. Each individual biometric can potentially be disrupted (change earbuds, alter gait, disable Bluetooth), but the fusion of 3+ biometric channels provides robust identification even if individual channels are degraded. The fusion operates at the feature level (concatenated feature vectors) or decision level (majority voting across classifiers). This technique weaponizes the ubiquity of consumer sensors: the average person carries 10+ sensors across phone, watch, and earbuds. The combination creates a biometric surveillance net that no single privacy measure can defeat.",
       "kill_chain_phases": [
@@ -2821,7 +2821,7 @@
       "id": "attack-pattern--qift0097",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Cross-device physiological correlation (phone + watch + earbuds comprehensive health profiling)",
       "description": "The average consumer now carries 3+ sensor-equipped devices: smartphone (accelerometer, gyroscope, magnetometer, barometer, camera, microphone, ambient light, proximity, WiFi, BLE), smartwatch (PPG, accelerometer, gyroscope, SpO2, skin temperature, ECG), and earbuds (microphone, accelerometer, proximity, potentially EEG). By correlating physiological data across all devices simultaneously, an attacker builds a comprehensive health profile far exceeding what any single device captures: cardiac health (watch PPG + phone rPPG), respiratory health (phone ultrasonic + WiFi CSI), neurological health (earbud IMU tremor + phone motor patterns), mental health (watch HRV + earbud audio context + phone screen activity), and metabolic health (activity + sleep + heart rate patterns). The correlation also eliminates single-sensor noise and improves accuracy. This technique doesn't require hardware modification — only software-level data aggregation across apps on a shared platform (e.g., iOS HealthKit, Google Health Connect).",
       "kill_chain_phases": [
@@ -2851,7 +2851,7 @@
       "id": "attack-pattern--qift0098",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "WiFi + camera passive surveillance fusion (through-wall presence detection with visual identification)",
       "description": "WiFi CSI (T0090) provides through-wall presence detection, vital signs, and coarse pose estimation but cannot visually identify targets. Cameras (T0084) provide visual identification and remote PPG but require line of sight. By fusing WiFi CSI and camera data, an attacker achieves persistent surveillance that combines the strengths of both: WiFi tracks targets through walls and identifies them by body shape/gait, while cameras provide visual identification when line of sight is available. The fusion enables: handoff tracking (camera identifies person entering a building, WiFi CSI tracks them inside), activity recognition (WiFi CSI classifies activity, camera confirms), and vital sign correlation (WiFi breathing rate + camera heart rate). Zhao et al. (2018) demonstrated that WiFi signals alone can reconstruct 2D human poses comparable to visual skeleton tracking. This creates a surveillance system that requires no devices on the target and works through physical barriers.",
       "kill_chain_phases": [
@@ -2880,7 +2880,7 @@
       "id": "attack-pattern--qift0099",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
       "description": "This capstone technique documents the full S-domain-to-BCI escalation kill chain: how consumer sensor exploitation serves as reconnaissance and preparation for subsequent BCI attacks. The chain proceeds in phases: (1) RECON — Consumer sensors (phone, watch, earbuds) establish behavioral baseline: gait patterns (T0088), cardiac signature (T0093), neurological profile (T0089), cognitive patterns (T0085 if VR/AR). (2) FINGERPRINT — Multi-modal biometric fusion (T0096) creates persistent identity profile. (3) PROFILE — Cross-device correlation (T0097) builds comprehensive health/cognitive baseline. (4) ESCALATE — When the target receives a BCI (medical implant, consumer neural interface), the attacker's pre-existing profile informs: optimal attack parameters for neural injection (calibrated to individual's neural baseline), personalized evasion of anomaly detection (trained on their 'normal'), and targeted cognitive exploitation (leveraging known cognitive vulnerabilities). The S-domain reconnaissance makes BCI attacks more effective, more targeted, and harder to detect. This technique represents the strategic justification for the entire S-domain: consumer sensors are the advance scout for future BCI exploitation.",
       "kill_chain_phases": [
@@ -2912,7 +2912,7 @@
       "id": "attack-pattern--qift0100",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Neural steganographic encoding (inaudible audio watermarking for covert neural command/biofingerprint channel)",
       "description": "Embedding data in audio signals below the human hearing threshold (>18 kHz ultrasonic or <20 Hz infrasonic) or within psychoacoustic masking bands of audible content. The encoded signal is imperceptible to the listener but decodable by a receiver with knowledge of the encoding scheme. In the adversarial case, the hidden channel carries covert commands, tracking identifiers, or subliminal cues targeting auditory processing pathways (e.g., triggering pre-conditioned responses or influencing decision-making). In the protective case, the same physics enables steganographic embedding of neural biofingerprints for authentication — the signal evokes a measurable auditory evoked potential (AEP) unique to the individual's cochlear geometry and auditory cortex response, functioning as a biometric watermark. Initial enrollment/profiling phase required to capture individual's unique AEP response. Practical constraints include target device's ability to accurately reproduce encoded frequencies and effective transmission range (1-10m). Psychoacoustic masking threshold follows: T_mask(f) = L_masker - (sf × |f - f_masker|) where sf is the spreading factor (~25 dB/Bark on upper slope, ~10 dB/Bark on lower slope). Auditory steady-state response (ASSR) at 40 Hz provides the mechanism for neural biofingerprint verification. Proves TARA's cross-domain dual-use thesis: same physics operates as attack vector, defense mechanism, and therapeutic tool.",
       "kill_chain_phases": [
@@ -2944,7 +2944,7 @@
       "id": "attack-pattern--qift0101",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Multi-modal keystroke inference via acoustic-optical-RF fusion (password/input recovery without mic/camera permissions)",
       "description": "Fusion of three independent side channels from a single mobile device to reconstruct user input without requiring microphone, camera, or accessibility permissions. (1) Keystroke acoustic emanations: each key press produces a distinct acoustic signature (1-20 kHz broadband impulse, classifiable via MFCC + CNN at ~95% accuracy on laptops, lower but still viable on touchscreens). (2) Screen optical emission: display luminance changes of ~0.1-1% per character insertion detectable by ambient light sensor at <0.01 lux sensitivity. (3) WiFi CSI: finger movements modulate OFDM subcarrier phase — σ²_phase > threshold indicates keystroke events. Individual channel accuracy: 60-70% acoustic, 40-50% optical, 55-65% WiFi CSI. Fused via CRF/LSTM with temporal cross-correlation alignment: >95% accuracy with 30+ training samples per key. Critical insight: apps requesting speaker + WiFi permissions (trivially granted) achieve side-channel equivalent to camera + microphone (heavily restricted). Permission model does not reflect actual threat.",
       "kill_chain_phases": [
@@ -2973,7 +2973,7 @@
       "id": "attack-pattern--qift0102",
       "spec_version": "2.1",
       "created": "2026-01-01T00:00:00.000Z",
-      "modified": "2026-02-16T01:19:26.353Z",
+      "modified": "2026-02-16T04:23:15.508Z",
       "name": "Passive facial geometry estimation via display-as-illuminator inverse photometry (presence/orientation detection without camera)",
       "description": "The device display functions as a structured light source — each frame emits a known photon distribution. Reflected light from the user's face is captured by the ambient light sensor (ALS). The known spectral emission S(x,y,λ) and measured reflected irradiance E_sensor = ∫∫ ρ(x,y)cos(θ)S(x,y,λ)/r² dA constrain an inverse photometry problem. CRITICAL FEASIBILITY CAVEAT: A single ALS integrates the entire reflected light field into one scalar value, making 3D geometric reconstruction an ill-posed inverse problem. With current single-sensor hardware, achievable resolution is limited to basic presence detection, head orientation, and coarse proximity estimation — NOT high-fidelity facial geometry. Identity matching might be feasible only against a small template library with strong a priori constraints. Future multi-pixel ALS or multi-sensor arrays could significantly improve reconstruction fidelity. Despite geometric limitations, the same ALS reliably detects physiological signals: pulse-modulated skin reflectance for PPG heart rate (demonstrated in Samsung Galaxy phones) and skin color variations for SpO2 estimation.",
       "kill_chain_phases": [

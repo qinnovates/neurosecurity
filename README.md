@@ -19,7 +19,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.1, published |
-| **[Preprint](https://doi.org/10.5281/zenodo.18640106)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) | v1.0, published |
+| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.2, published |
 | **[TARA](https://qinnovate.com/TARA/)** | 102 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
 | **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
@@ -73,7 +73,7 @@ Qinnovate exists because these organizations proved that open standards make ent
 The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spinal Cord), a physical interface boundary (I0, the electrode-tissue interface), and 3 silicon bands (S1 Analog up to S3 Radio/Wireless).
 
 - **Whitepaper:** [qinnovate.com/whitepaper](https://qinnovate.com/whitepaper/) (v6.1)
-- **Academic Preprint:** [DOI: 10.5281/zenodo.18640106](https://doi.org/10.5281/zenodo.18640106) (25 pages, CC-BY 4.0)
+- **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) (25 pages, CC-BY 4.0, always latest version)
 - **Specification:** [qif-framework/](qif-framework/)
 - **Interactive explorer:** [qinnovate.com/lab/hourglass.html](https://qinnovate.com/lab/hourglass.html)
 
@@ -160,7 +160,7 @@ qinnovates/qinnovate/
 │   └── processes/              # Standards development lifecycle
 │
 ├── paper/                      # Academic publications
-│   ├── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640106)
+│   ├── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640105)
 │   └── woot26/                 # WOOT '26 submission (deadline Mar 3)
 │
 ├── packaging/                  # Published packages
