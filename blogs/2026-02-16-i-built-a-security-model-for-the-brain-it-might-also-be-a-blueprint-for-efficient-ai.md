@@ -14,19 +14,19 @@ I was trying to protect brains from hackers.
 For the past six weeks, I've been building QIF — the Quantum-Informed Framework for brain-computer interface security. The core of QIF is an 11-band hourglass model that maps every layer of neural processing an attacker could target, from the neocortex down to the spinal cord, through the electrode-tissue interface, and into the silicon stack below.
 
 ```
-N7  Neocortex           ─┐  indeterministic, expensive
+N7  Neocortex           ─┐  complex · costly · resilient
 N6  Limbic System         │
 N5  Basal Ganglia         │  Neural Domain
 N4  Thalamus              │  (routes what needs cortex)
 N3  Brainstem             │
 N2  Cranial Nerves        │
-N1  Spinal Cord          ─┘  deterministic, cheap
+N1  Spinal Cord          ─┘  simple · fast · fragile
 ─────────────────────────────
 I0  Neural Interface      ←  THE WAIST
 ─────────────────────────────
 S1  Analog Frontend      ─┐
 S2  Digital Processing    │  Silicon Domain
-S3  Radio/Wireless       ─┘  deterministic, cheapest
+S3  Radio/Wireless       ─┘  simplest · fastest · most exposed
 ```
 
 The shape comes from Steve Deering's internet hourglass principle (IETF, 1998): the internet works because everything passes through one narrow waist — IP. I applied the same idea to BCIs: everything passes through I0, the physical boundary where biology meets silicon. That bottleneck is where security controls live.
@@ -35,7 +35,7 @@ While mapping 102 attack techniques across this hierarchy, I noticed something t
 
 ## The Brain Doesn't Send Everything to the Cortex
 
-The neural bands aren't just attack surfaces. They encode a gradient of computational cost.
+The neural bands aren't just attack surfaces. They encode a gradient of complexity — and complexity determines everything: how much a system costs to run, how hard it is to break, and whether it can recover when something goes wrong.
 
 At the top, the neocortex handles complex reasoning — novel problems, abstract thought, creative solutions. It's powerful, but expensive. Only 1-5% of cortical neurons fire at any given time (Lennie, 2003). The cortex consumes roughly 20% of the body's total energy despite being about 2% of its mass (Attwell & Laughlin, 2001). The brain rations cortical processing like a company rations GPU time.
 
@@ -45,7 +45,25 @@ At the bottom, the spinal cord handles reflexes — touch a hot stove, and your 
 
 This is the key insight: **the spinal cord is more deterministic than the cortex.** The same input produces the same output every time. A reflex arc is a biological lookup table — there's no deliberation, no probabilistic weighing of options, no state-dependent variation. The neocortex is the opposite: the same input can produce wildly different outputs depending on mood, attention, context, and memory. That indeterminacy is what makes the cortex powerful, but it's also what makes it expensive. Deterministic processing is cheap because there's nothing to resolve.
 
-The pattern: **expensive, indeterministic, flexible processing at the top for novel problems. Cheap, deterministic, automatic processing at the bottom for solved problems. A routing layer in the middle deciding which is which.**
+The pattern: **complex, indeterministic, flexible processing at the top for novel problems. Simple, deterministic, automatic processing at the bottom for solved problems. A routing layer in the middle deciding which is which.**
+
+## The Fragility Tax
+
+But here's what I didn't see coming. The same property that makes the spinal cord cheap to run makes it cheap to break.
+
+Consider B12 deficiency. Inadequate nutrition — or pernicious anemia, or a vegan diet without supplementation — depletes vitamin B12. The result is subacute combined degeneration of the spinal cord: the myelin sheaths that insulate those fast, deterministic reflex pathways literally dissolve. The hardware degrades. Reflexes fail. Sensation disappears. If caught late, the damage is permanent.
+
+Nitrous oxide does the same thing faster. N2O oxidizes the cobalt atom in cobalamin, inactivating B12 in a single chemical step. A dentist visit with too much gas, or recreational use, can trigger the same spinal cord degeneration. One cheap molecule disabling an entire processing layer.
+
+The list goes on. Copper deficiency causes a myelopathy that mimics B12 deficiency — often misdiagnosed for months. Diabetes, the most common cause of peripheral neuropathy worldwide, degrades the deterministic nerve pathways first. Lead paint in an old house. Mercury in contaminated fish. Organophosphates in pesticides disrupting the neuromuscular junction. A herniated disc from years of bad posture compressing the cord mechanically. Polio targeting spinal motor neurons specifically. Tetanus toxin blocking inhibitory neurotransmitters in the spinal cord.
+
+Every one of these is cheap, widely available, and devastating. You don't need a nation-state budget or a sophisticated exploit chain. Bad diet. A dental procedure. An old house. Sitting wrong for a decade.
+
+Now compare that to the cortex. Children survive hemispherectomies — surgeons remove an entire hemisphere, and the remaining half rewires itself to recover language, motor control, even personality. Stroke patients regain function through neuroplasticity as the cortex routes around damaged tissue. The cortex is expensive to run, but it's also expensive to kill. Its complexity gives it redundancy. Its indeterminacy gives it the flexibility to adapt when things break.
+
+The spinal cord can't do any of that. Damage the pathway and it's gone. There's no rerouting. There's no "thinking around" the problem. Deterministic systems don't adapt because adaptation requires the very indeterminacy they traded away for speed.
+
+This redefines what "cheap" means in the hourglass. It's not just about compute cost. **Simplicity is cheap in every direction — cheap to run, cheap to attack, and cheap to lose.** Complexity is expensive in every direction — expensive to run, expensive to attack, and expensive to replace, but possible to recover. The hourglass isn't a cost gradient. It's a **complexity gradient**, and efficiency, fragility, and resilience all fall out of the same variable.
 
 Sound familiar?
 
@@ -67,7 +85,9 @@ This led me to a hypothesis I wasn't expecting to form.
 
 The hourglass isn't just a useful shape for network protocols and brain security models. It may be a missing structural principle in AI architecture.
 
-Current transformer designs are flat rectangles — uniform width, uniform compute per layer. Every token gets the same computational budget regardless of complexity. But the brain doesn't work this way. Neither does the internet. Both route traffic through a narrow waist that separates expensive processing from cheap retrieval. And both exploit the same gradient: deterministic operations are cheap, indeterministic operations are expensive. The spinal cord proves it — a reflex costs almost nothing because there's nothing to decide. The cortex is expensive precisely because it has to decide.
+Current transformer designs are flat rectangles — uniform width, uniform compute per layer. Every token gets the same computational budget regardless of complexity. But the brain doesn't work this way. Neither does the internet. Both route traffic through a narrow waist that separates complex processing from simple retrieval.
+
+And both face the same trade-off the spinal cord reveals: simple systems are fast but fragile. AI's version of B12 deficiency is data poisoning — corrupt the lookup table, corrupt every answer that depends on it, and the system has no reasoning layer to catch the error. An LLM that memorizes a wrong fact will confidently repeat it forever. An LLM that reasons through the problem from principles might catch the contradiction. Memorization is the spinal cord. Reasoning is the cortex. You need both, but you need to know which one breaks how.
 
 What if a transformer was designed with an explicit hourglass shape?
 
@@ -92,6 +112,7 @@ I want to be precise about this.
 **I am claiming:**
 - The pattern connecting Deering's networking hourglass, the brain's processing hierarchy, and emerging AI efficiency techniques is non-obvious and worth formalizing
 - No existing work connects the neuroanatomical processing hierarchy (cortex → thalamus → brainstem → spinal cord) to AI architecture design as a formal principle — I checked
+- The hourglass encodes a complexity gradient where efficiency, fragility, and resilience are not independent variables — they're the same variable. Simple systems are cheap to run and cheap to break. Complex systems are expensive to run and expensive to break. This trade-off is visible in neurology (B12 myelopathy vs cortical neuroplasticity), in AI (memorization brittleness vs reasoning robustness), and in network engineering (edge devices vs core routers)
 - The same architecture that makes a system efficient (sparse activation, hierarchical routing, bottleneck compression) also makes it more securable and interpretable, because the bottleneck provides a natural inspection point
 
 That last point is the one I care about most, and it's the one that came from security research, not AI research. The bottleneck isn't just efficient. It's auditable. You can inspect what crosses the waist. In the brain, that means monitoring the electrode-tissue interface for malicious signals. In AI, it could mean monitoring the reasoning/retrieval boundary for hallucination, bias, or adversarial inputs. The architecture that makes a system fast is the same architecture that makes it trustworthy. That's not a coincidence. That's a design principle.
