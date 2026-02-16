@@ -39,14 +39,14 @@ const versions = [
             ]}
           />
           <span class="font-medium">{v.label}</span>
-          {!isActive && (
-            <span class="ml-auto text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-faint)] border border-[var(--color-border)] rounded px-1 py-0.5 leading-none">
-              Archive
-            </span>
-          )}
-          {isActive && (
+          {v.current && (
             <span class="ml-auto text-[10px] font-medium uppercase tracking-wide text-[var(--color-accent-primary)]">
               Current
+            </span>
+          )}
+          {!v.current && (
+            <span class="ml-auto text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-faint)] border border-[var(--color-border)] rounded px-1 py-0.5 leading-none">
+              Archive
             </span>
           )}
         </a>
