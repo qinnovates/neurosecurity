@@ -13,7 +13,7 @@ import '../styles/global.css';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => new Date(getPostDate(b.data)).getTime() - new Date(getPostDate(a.data)).getTime())
-  .slice(0, 4);
+  .slice(0, 6);
 
 ---
 
@@ -314,13 +314,13 @@ const posts = (await getCollection('blog'))
   <!-- ═══ LATEST PUBLICATIONS ═══ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
     <div class="flex items-center justify-between mb-8 reveal">
-      <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)]">Latest News</h2>
+      <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)]">Latest Blogs</h2>
       <a href="/news/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
         View all &rarr;
       </a>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal reveal-stagger">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 reveal reveal-stagger">
       {posts.map((post) => (
         <PublicationCard
           title={post.data.title}
@@ -328,6 +328,7 @@ const posts = (await getCollection('blog'))
           tags={post.data.tags}
           slug={post.id}
           body={post.body || ''}
+          compact
         />
       ))}
     </div>
