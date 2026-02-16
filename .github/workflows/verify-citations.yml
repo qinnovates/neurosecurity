@@ -1,0 +1,30 @@
+name: Verify Citations & Facts
+
+on:
+  pull_request:
+    paths:
+      - 'paper/**'
+      - 'blogs/**'
+      - 'shared/qtara-registrar.json'
+      - 'src/lib/whitepaper-stats.ts'
+      - 'qif-framework/**'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run verification pipeline
+        run: python3 scripts/verify/run_all.py --ci
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-report
+          path: verify-report.json

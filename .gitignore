@@ -16,5 +16,9 @@ __pycache__/
 # Build artifacts
 docs/data/
 
+# Verification cache
+scripts/verify/.cache/
+verify-report.json
+
 # Local
 _memory/

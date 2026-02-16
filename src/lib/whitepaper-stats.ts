@@ -51,8 +51,8 @@ export function getWhitepaperStats() {
     pinsCount,
     irreversibleCount,
     totalTechniques: THREAT_VECTORS.length,
-    /** Pre-computed: 94.4% of techniques have metrics CVSS cannot express */
-    nissGapPercentage: 94.4,
+    /** Percentage of techniques with metrics CVSS cannot express (gap_group >= 2) */
+    nissGapPercentage: Math.round(gapCount / THREAT_VECTORS.length * 1000) / 10,
     /** Number of techniques with both CVSS and NISS scores for gap analysis */
     gapCount,
   };

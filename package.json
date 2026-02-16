@@ -10,7 +10,12 @@
     "astro": "astro",
     "fetch-news": "node scripts/fetch-news.mjs",
     "type-check": "tsc --noEmit",
-    "sync": "node scripts/sync-agents.mjs"
+    "sync": "node scripts/sync-agents.mjs",
+    "verify": "python3 scripts/verify/run_all.py",
+    "verify:citations": "python3 scripts/verify/verify_citations.py",
+    "verify:facts": "python3 scripts/verify/verify_facts.py",
+    "verify:blogs": "python3 scripts/verify/audit_blog_claims.py",
+    "verify:crossrefs": "python3 scripts/verify/verify_crossrefs.py"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",
