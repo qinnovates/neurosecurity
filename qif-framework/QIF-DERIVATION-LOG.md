@@ -5747,7 +5747,7 @@ This bridge is what makes NISS scores **clinically interpretable**. A technique 
 
 ### The Band-to-DSM Lookup Table
 
-The mapping was validated against neuroscience literature and reviewed by Gemini 2.5 Pro (which called it "exceptionally well-structured"):
+The mapping was validated against neuroscience literature and peer-reviewed sources, with AI assistance from Claude (Anthropic) and Gemini (Google) for cross-referencing:
 
 | Band | Brain Structures | Primary DSM Chapters |
 |------|-----------------|---------------------|

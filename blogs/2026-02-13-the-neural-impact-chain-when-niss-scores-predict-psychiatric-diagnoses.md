@@ -95,6 +95,6 @@ Every technique that can harm a patient can also heal one. Now we know *which* p
 
 ---
 
-*The Neural Impact Chain is documented in [QIF Derivation Log, Entry 53](https://qinnovate.com/framework/). The NISS-DSM Bridge and diagnostic cluster methodology are detailed in the [TARA specification](https://qinnovate.com/TARA). All AI contributions are disclosed in the [AI Transparency Statement](https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md).*
+*The Neural Impact Chain is documented in [QIF Derivation Log, Entry 53](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md). The NISS-DSM Bridge and diagnostic cluster methodology are detailed in the [TARA specification](https://github.com/qinnovates/qinnovate/blob/main/shared/qtara-registrar.json). All AI contributions are disclosed in the [AI Transparency Log](https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md).*
 
 > **AI Transparency Statement:** This work was authored by Kevin L. Qi with AI assistance from Claude (Anthropic) and Gemini (Google). The Neural Impact Chain concept, clinical mappings, and NISS-DSM bridge were developed by the author. AI tools assisted with literature review, code generation, and cross-referencing large datasets. All clinical outputs were verified against the DSM-5-TR and peer-reviewed neuroscience literature. A full audit log is available [here](https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md).

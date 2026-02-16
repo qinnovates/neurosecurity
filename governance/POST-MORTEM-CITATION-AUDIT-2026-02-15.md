@@ -1,3 +1,7 @@
+---
+title: "Post-Mortem: Citation Integrity Audit"
+---
+
 # Post-Mortem: Citation Integrity Audit
 
 **Date:** 2026-02-15

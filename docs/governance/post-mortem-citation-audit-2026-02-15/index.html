@@ -1,0 +1,510 @@
+<!DOCTYPE html><html lang="en-US" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Post-Mortem: Citation Integrity Audit — Qinnovate Governance"><link rel="canonical" href="https://qinnovate.com/governance/post-mortem-citation-audit-2026-02-15/"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui' fill='%2306b6d4'%3EQ%3C/text%3E%3C/svg%3E"><!-- Open Graph --><meta property="og:title" content="Post-Mortem: Citation Integrity Audit"><meta property="og:description" content="Post-Mortem: Citation Integrity Audit — Qinnovate Governance"><meta property="og:url" content="https://qinnovate.com/governance/post-mortem-citation-audit-2026-02-15/"><meta property="og:site_name" content="Qinnovate"><meta property="og:type" content="website"><meta property="og:image" content="https://qinnovate.com/images/og-default.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Post-Mortem: Citation Integrity Audit"><meta name="twitter:description" content="Post-Mortem: Citation Integrity Audit — Qinnovate Governance"><meta name="twitter:image" content="https://qinnovate.com/images/og-default.png"><meta name="twitter:creator" content="@qikevinl"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Qinnovate","url":"https://qinnovate.com","description":"Open standards and frameworks for brain-computer interface security.","foundingDate":"2026","sameAs":["https://github.com/qinnovates"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://qinnovate.com/"},{"@type":"ListItem","position":2,"name":"Governance","item":"https://qinnovate.com/governance/"},{"@type":"ListItem","position":3,"name":"Post-Mortem: Citation Integrity Audit"}]}</script><!-- RSS autodiscovery --><link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml"><title>Post-Mortem: Citation Integrity Audit | Qinnovate</title><!-- View Transitions --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Google Analytics 4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKB9RWW0C2');
+  </script><!-- Theme initialization (prevent flash) --><script>
+    (function(){ document.documentElement.setAttribute('data-theme', 'light'); })();
+  </script><link rel="stylesheet" href="/_astro/TARA.DxLl3B3k.css"></head> <body class="min-h-screen">  <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" data-astro-transition-persist="astro-zscz5gm2-1"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity"> <span class="text-2xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">Q</span> <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline text-[var(--color-text-primary)]">innovate</span> </a> <!-- Desktop links --> <div class="hidden md:flex items-center gap-1"> <!-- About Dropdown --> <div class="relative" data-dropdown="about"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden"> <div class="p-2"> <a href="/about/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">The Mission</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Why we build Qinnovate</span> </a> <a href="/about/milestones/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Milestones</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">The derivation timeline</span> </a> </div> </div> </div> </div> <!-- Technology dropdown --> <div class="relative" data-dropdown="tech"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/framework/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">QIF Framework</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">The 11-band hourglass governance architecture</span> </a><a href="/nsp/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">NSP Protocol</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Secure communication protocol for patient safety and privacy</span> </a><a href="/runemate/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Runemate</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Compiler enabling on-device security for neural implants</span> </a><a href="/TARA/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">TARA</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Risk taxonomy — attacks, ethical risks, and therapeutic applications</span> </a><a href="/whitepaper/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Whitepaper</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Full QIF specification document</span> </a> </div> </div> </div> </div> <!-- Resources dropdown --> <div class="relative" data-dropdown="resources"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden"> <div class="p-2"> <a href="/news/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">News</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Latest publications and updates</span> </a><a href="/explore/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Explore</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Interactive visualizations and tools</span> </a><a href="/glossary/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Glossary</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">QIF terminology reference</span> </a> </div> </div> </div> </div> <!-- Engage dropdown --> <div class="relative" data-dropdown="engage"> <button class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/adopt/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Adopt the Standard</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Integrate QIF into your organization or research</span> </a><a href="/alliance/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Neural Atlas</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Professional standards body and auditing</span> </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Get Involved</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Contribute on GitHub — issues, PRs, discussions</span> </a> </div> </div> </div> </div> <!-- Governance dropdown --> <div class="relative" data-dropdown="gov"> <a href="/governance/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute right-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/governance/#core" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Core Standards</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Code of Conduct, Transparency, Data Policy, Accessibility</span> </a><a href="/governance/#ethics" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Ethics &amp; Rights</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Neuroethics, Informed Consent, Pediatric, Post-Deployment</span> </a><a href="/governance/#compliance" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Compliance</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Regulatory, UNESCO Alignment, QIF Neuroethics</span> </a> </div> </div> </div> </div> </div> <!-- Right side --> <div class="flex items-center gap-3"> <!-- GitHub link --> <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="GitHub"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path> </svg> </a> <!-- Search button --> <button id="search-btn" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Search"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path> </svg> </button> <!-- Mobile menu button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Open menu" aria-expanded="false"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]"> <div class="px-4 py-3 space-y-1"> <!-- About (flat) --> <a href="/about/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+About
+</a> <!-- Mobile Technology section --> <div> <button data-mobile-toggle="tech" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Technology
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="tech" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="tech" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/framework/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> QIF Framework </a><a href="/nsp/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> NSP Protocol </a><a href="/runemate/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Runemate </a><a href="/TARA/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> TARA </a><a href="/whitepaper/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Whitepaper </a> </div> </div> <!-- Mobile Resources section --> <div> <button data-mobile-toggle="resources" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Resources
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="resources" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="resources" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/news/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> News </a><a href="/explore/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Explore </a><a href="/glossary/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Glossary </a> </div> </div> <!-- Mobile Engage section --> <div> <button data-mobile-toggle="engage" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Engage
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="engage" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="engage" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/adopt/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Adopt the Standard </a><a href="/alliance/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Neural Atlas </a><a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Get Involved </a> </div> </div> <!-- Mobile Governance section --> <div class="pt-2 border-t border-[var(--color-border)] mt-2"> <button data-mobile-toggle="gov" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Governance
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="gov" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="gov" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/governance/#core" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Core Standards </a><a href="/governance/#ethics" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Ethics &amp; Rights </a><a href="/governance/#compliance" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Compliance </a> </div> </div> </div> </div> </nav> <!-- Search modal --> <div id="search-modal" class="fixed inset-0 z-[100] hidden"> <div id="search-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div> <div class="relative max-w-2xl mx-auto mt-20 px-4"> <div class="glass rounded-xl p-4 shadow-2xl" id="search-container"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;showSubResults&#34;:true}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.tZYucdM2.js"></script> </div> </div> </div> <script type="module">function u(){const n=document.getElementById("mobile-menu-btn"),i=document.getElementById("mobile-menu");n?.addEventListener("click",()=>{const e=n.getAttribute("aria-expanded")==="true";n.setAttribute("aria-expanded",String(!e)),i?.classList.toggle("hidden")}),document.addEventListener("astro:before-swap",()=>{i?.classList.add("hidden"),n?.setAttribute("aria-expanded","false")}),document.querySelectorAll("[data-dropdown]").forEach(e=>{const t=e.querySelector(".dropdown-menu");let a;function c(){document.querySelectorAll(".dropdown-menu").forEach(o=>{o!==t&&o.classList.add("hidden")}),clearTimeout(a),t?.classList.remove("hidden")}function l(){a=setTimeout(()=>{t?.classList.add("hidden")},150)}e.addEventListener("mouseenter",c),e.addEventListener("mouseleave",l),e.addEventListener("focusin",c),e.addEventListener("focusout",o=>{e.contains(o.relatedTarget)||l()})}),document.querySelectorAll("[data-mobile-toggle]").forEach(e=>{const t=e.getAttribute("data-mobile-toggle"),a=document.querySelector(`[data-mobile-list="${t}"]`),c=document.querySelector(`[data-chevron="${t}"]`);e.addEventListener("click",()=>{a?.classList.toggle("hidden"),c?.classList.toggle("rotate-180")})});const m=document.getElementById("search-btn"),d=document.getElementById("search-modal"),h=document.getElementById("search-backdrop");function r(){d?.classList.remove("hidden"),setTimeout(()=>{d?.querySelector(".pagefind-ui__search-input")?.focus()},50)}function s(){d?.classList.add("hidden")}m?.addEventListener("click",r),h?.addEventListener("click",s),document.addEventListener("keydown",e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),d?.classList.contains("hidden")?r():s()),e.key==="Escape"&&s()}),document.addEventListener("astro:before-swap",s)}u();document.addEventListener("astro:after-swap",u);</script> <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"> <nav aria-label="Breadcrumb" class="text-sm text-[var(--color-text-faint)] mb-6"> <ol class="flex items-center gap-2 flex-wrap"> <li> <a href="/" class="hover:text-[var(--color-accent-primary)] transition-colors">Home</a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <a href="/governance/" class="hover:text-[var(--color-accent-primary)] transition-colors"> Governance </a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <span class="text-[var(--color-text-muted)]">Post-Mortem: Citation Integrity Audit</span> </li>  </ol> </nav> <header class="mb-12"> <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] leading-tight mb-4"> Post-Mortem: Citation Integrity Audit </h1>  </header>  <div class="prose"> <h1 id="post-mortem-citation-integrity-audit">Post-Mortem: Citation Integrity Audit</h1>
+<p><strong>Date:</strong> 2026-02-15
+<strong>Severity:</strong> High
+<strong>Status:</strong> Corrected (Zenodo v1.1 pending publish)
+<strong>Author:</strong> Kevin L. Qi</p>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>The Zenodo preprint (DOI: 10.5281/zenodo.18640106, published 2026-02-14) contained multiple citation errors in its bibliography, including <strong>three completely fabricated entries</strong>. These errors were introduced during AI-assisted bibliography construction and were not caught before publication. The errors were identified through a combination of external researcher feedback and two systematic internal audit passes using parallel verification agents.</p>
+<hr>
+<h2 id="timeline">Timeline</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Date</th><th>Event</th></tr></thead><tbody><tr><td>2026-02-14</td><td>Preprint published on Zenodo (v1.0)</td></tr><tr><td>2026-02-15</td><td>Dr. Tyler Schroder responds to arXiv endorsement request, identifying: wrong arxiv ID for his paper (2501.09566 vs correct 2508.12571), wrong author list (3 vs correct 6), broken transparency link on blog post</td></tr><tr><td>2026-02-15</td><td>Full citation audit initiated — 3 parallel verification agents deployed</td></tr><tr><td>2026-02-15</td><td>Pass 1 audit reveals 11 errors across 37 bibliography entries</td></tr><tr><td>2026-02-15</td><td>Pass 1 corrections applied to paper source, PDF recompiled</td></tr><tr><td>2026-02-15</td><td>Cross-AI verification (Claude + Gemini) performed</td></tr><tr><td>2026-02-15</td><td>Gemini incorrectly changes Meng DOI to wrong value; caught and reverted</td></tr><tr><td>2026-02-15</td><td>Zenodo v1.1 draft saved with corrected files and metadata</td></tr><tr><td>2026-02-15</td><td>Pass 2 audit — 3 new parallel agents verify all 37 entries (21 DOIs, 10 URLs, 10 non-DOI refs)</td></tr><tr><td>2026-02-15</td><td>Pass 2 reveals 3 additional errors: 2 more fabricated entries + 1 wrong author</td></tr><tr><td>2026-02-15</td><td>All Pass 2 corrections applied, PDF recompiled (now 35 bib entries, 36 rendered)</td></tr></tbody></table>
+<hr>
+<h2 id="findings">Findings</h2>
+<h3 id="critical-fabricated-entries">Critical (Fabricated Entries)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>BibKey</th><th>Issue</th><th>Resolution</th><th>Pass</th></tr></thead><tbody><tr><td>1</td><td><code>wu2024adversarial</code></td><td><strong>Entirely AI-hallucinated.</strong> DOI 10.1109/TNSRE.2024.3377344 returns 404. Title, authors (Wu, Yao, Zhang, Li), and journal do not exist.</td><td>Replaced with verified Meng, Jiang &#x26; Wu (2023). DOI: 10.1016/j.future.2023.01.028. Confirmed via ScienceDirect.</td><td>1</td></tr><tr><td>12</td><td><code>denning2009neurostimulators</code></td><td><strong>AI-hallucinated.</strong> Paper does not appear on Tamara Denning’s own publication page. The cited venue (USENIX Workshop on Health Security and Privacy, 2009) did not exist until 2010. The content attributed to this entry is covered by <code>kohno2009neurosecurity</code>.</td><td>Removed entry. Citation changed from <code>\cite{denning2009neurostimulators,kohno2009neurosecurity}</code> to <code>\cite{kohno2009neurosecurity}</code> in both tex files.</td><td>2</td></tr><tr><td>13</td><td><code>landau2020neurorights</code></td><td><strong>AI-hallucinated.</strong> No paper by Landau, Limón, and van Est with this title exists in Google Scholar, PubMed, Springer, Semantic Scholar, or any other database. While Rinie van Est is a real researcher, this specific collaboration and paper do not exist.</td><td>Removed entry. Was uncited in the paper (dead weight in bib file).</td><td>2</td></tr></tbody></table>
+<h3 id="high-wrong-authorsidentifiers">High (Wrong Authors/Identifiers)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>BibKey</th><th>Issue</th><th>Resolution</th><th>Pass</th></tr></thead><tbody><tr><td>2</td><td><code>schroder2025cyberrisks</code></td><td>Wrong arxiv ID (2501.09566 → 2508.12571). Only 3 authors listed; actual paper has 6 (Schroder, Sirbu, Park, Morley, Street, Floridi).</td><td>Corrected arxiv ID and full author list. Verified via arxiv.org.</td><td>1</td></tr><tr><td>3</td><td><code>kohno2009neurosecurity</code></td><td>Wrong authors: listed as Kohno, Denning, Chizeck. Actual authors: <strong>Denning, Matsuoka, Kohno</strong>. Chizeck is not an author on this paper. Also was <code>@inproceedings</code> but Neurosurgical Focus is a journal.</td><td>Corrected to Denning, Matsuoka, Kohno. Changed to <code>@article</code>. Added volume/number/pages (27(1), E7). Verified via PubMed (PMID: 19569895).</td><td>1</td></tr><tr><td>4</td><td><code>lazaro2020researcher</code></td><td>Wrong first author: listed Lazaro-Munoz as 1st author, but actual 1st author is Katrina Munoz (14 co-authors).</td><td>Corrected author list. In-text citation changed to “Munoz et al.” Verified via DOI.</td><td>1</td></tr><tr><td>5</td><td><code>goering2021recommendations</code></td><td>3rd/4th authors (Dougherty, Widge) from a different paper. Correct: Specker Sullivan, Wexler.</td><td>Corrected author list. (WOOT26 bib only.)</td><td>1</td></tr></tbody></table>
+<h3 id="medium-metadata-errors">Medium (Metadata Errors)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>BibKey</th><th>Issue</th><th>Resolution</th><th>Pass</th></tr></thead><tbody><tr><td>6</td><td><code>deering1998hourglass</code></td><td>Wrong entry type (<code>@article</code> → <code>@misc</code>). Year inconsistency (1998 vs 2001).</td><td>Changed to <code>@misc</code>. Year set to 2001 (IETF 51). Note clarifies 1998 origin.</td><td>1</td></tr><tr><td>7</td><td><code>fda2023cybersecurity</code></td><td>Generic URL, not direct link to guidance document.</td><td>Updated to specific FDA guidance URL.</td><td>1</td></tr><tr><td>8</td><td><code>mergelabs2026</code></td><td>Wrong author list. Pass 1 added Bellan as co-author alongside Conger. Pass 2 found Conger is <strong>not</strong> a co-author — Bellan is the sole byline.</td><td>Corrected to Bellan only. Verified via TechCrunch article page.</td><td>1+2</td></tr><tr><td>9</td><td><code>lazaro2022posttrial</code></td><td>Wrong first names: Mai → Michelle (Pham), Kristin → Katrina (Munoz).</td><td>Corrected first names.</td><td>1</td></tr><tr><td>10</td><td><code>li2015braincomputer</code></td><td>Wrong first name: Qiongqiong → QianQian.</td><td>Corrected. (WOOT26 bib only.)</td><td>1</td></tr><tr><td>11</td><td><code>nist800160</code></td><td>URL pointed to withdrawn document version.</td><td>Updated to Rev. 1 URL. (WOOT26 bib only.)</td><td>1</td></tr></tbody></table>
+<h3 id="low-entry-type-errors">Low (Entry Type Errors)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>BibKey</th><th>Issue</th><th>Resolution</th><th>Pass</th></tr></thead><tbody><tr><td>14</td><td><code>rushanan2014sok</code></td><td>Listed as <code>@article</code> but has <code>booktitle</code> — IEEE S&#x26;P is a conference. BibTeX warning: “empty journal.”</td><td>Changed to <code>@inproceedings</code>.</td><td>2</td></tr></tbody></table>
+<h3 id="cross-ai-introduced-error-caught-in-pass-2">Cross-AI Introduced Error (Caught in Pass 2)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>BibKey</th><th>Issue</th><th>Resolution</th><th>Pass</th></tr></thead><tbody><tr><td>15</td><td><code>meng2023adversarial</code></td><td>Gemini (Antigravity) changed DOI from correct <code>10.1016/j.future.2023.01.028</code> to wrong <code>10.1016/j.future.2023.03.010</code> during cross-AI validation. The wrong DOI resolves to an unrelated federated learning paper. This error was baked into the compiled PDF and Zenodo v1.1 draft.</td><td>Reverted to correct DOI. Verified via Crossref: <code>.01.028</code> = Meng adversarial benchmark (correct); <code>.03.010</code> = federated learning paper (wrong).</td><td>2</td></tr></tbody></table>
+<hr>
+<h2 id="root-cause-analysis">Root Cause Analysis</h2>
+<p><strong>Primary cause:</strong> AI-assisted bibliography construction without independent verification.</p>
+<p>During the paper development process, large language models (Claude, Gemini, ChatGPT) were used to assist with bibliography generation. The AI tools:</p>
+<ol>
+<li><strong>Fabricated complete citations</strong> — three entries (<code>wu2024adversarial</code>, <code>denning2009neurostimulators</code>, <code>landau2020neurorights</code>) were entirely or partially hallucinated. DOIs, authors, titles, and venues were invented. This is a known failure mode of LLMs (bibliographic hallucination). Notably, <code>denning2009neurostimulators</code> cited a real research group but fabricated a paper and venue that didn’t exist; <code>landau2020neurorights</code> used a real researcher’s name (van Est) but fabricated a collaboration.</li>
+<li><strong>Conflated authors across related papers</strong> — e.g., listing Chizeck as a co-author on the Kohno 2009 paper because he co-authored related work with the same research group.</li>
+<li><strong>Generated plausible-but-wrong metadata</strong> — first names, arxiv IDs, and author orderings that were close to correct but wrong in detail.</li>
+<li><strong>Cross-AI validation introduced a new error</strong> — Gemini changed the Meng DOI to a wrong value during the verification pass, demonstrating that AI-based verification can introduce errors as well as find them.</li>
+</ol>
+<p><strong>Contributing factors:</strong></p>
+<ul>
+<li>Single-author paper with no co-author cross-check</li>
+<li>Time pressure to publish (preprint uploaded same day as final compilation)</li>
+<li>Over-reliance on AI outputs for factual data (citations) vs. conceptual work (where AI was used appropriately)</li>
+<li>No systematic DOI/URL verification step in the publication workflow</li>
+</ul>
+<hr>
+<h2 id="cross-ai-verification-results">Cross-AI Verification Results</h2>
+<p>Two independent verification systems were used:</p>
+<h3 id="pass-1-claude-3-parallel-agents">Pass 1: Claude (3 parallel agents)</h3>
+<ul>
+<li>Verified all 37 bib entries via DOI resolution, Crossref API, PubMed, and arxiv</li>
+<li>Found 11 errors (including the fabricated Wu entry and Kohno author error)</li>
+<li><strong>Correctly identified</strong> Meng DOI as 10.1016/j.future.2023.01.028</li>
+<li><strong>Missed</strong> 2 fabricated entries (<code>denning2009neurostimulators</code>, <code>landau2020neurorights</code>) and 1 wrong author (<code>mergelabs2026</code>)</li>
+</ul>
+<h3 id="pass-1-gemini-antigravity">Pass 1: Gemini (Antigravity)</h3>
+<ul>
+<li>Independent review of corrected bibliography</li>
+<li>Confirmed Schroder correction</li>
+<li><strong>Incorrectly suggested</strong> changing Meng DOI to 10.1016/j.future.2023.03.010 (this resolves to a completely different paper about federated learning)</li>
+<li>Added Transparency Statement to blog post</li>
+</ul>
+<h3 id="disagreement-resolution">Disagreement Resolution</h3>
+<p>The Meng DOI conflict was resolved by fetching both DOIs:</p>
+<ul>
+<li><code>10.1016/j.future.2023.01.028</code> → “Adversarial robustness benchmark for EEG-based brain-computer interfaces” (CORRECT)</li>
+<li><code>10.1016/j.future.2023.03.010</code> → “Ubiquitous intelligent federated learning privacy-preserving scheme under edge computing” (WRONG PAPER)</li>
+</ul>
+<h3 id="pass-2-claude-3-parallel-agents-full-re-verification">Pass 2: Claude (3 parallel agents, full re-verification)</h3>
+<ul>
+<li>Re-verified all entries after Pass 1 corrections</li>
+<li><strong>21 DOIs verified</strong> via Crossref API — 21/21 PASS</li>
+<li><strong>10 URLs verified</strong> via HTTP fetch — 10/10 PASS (all alive and correct)</li>
+<li><strong>10 non-DOI entries verified</strong> via web search, author publication pages, PubMed, arxiv — 7/10 PASS</li>
+<li>Found 3 new errors missed in Pass 1:
+<ul>
+<li><code>denning2009neurostimulators</code>: fabricated (not on Tamara Denning’s pub page; venue didn’t exist in 2009)</li>
+<li><code>landau2020neurorights</code>: fabricated (no trace in any database)</li>
+<li><code>mergelabs2026</code>: Kate Conger is not a co-author (Bellan sole byline confirmed via TechCrunch)</li>
+</ul>
+</li>
+<li>Also caught Gemini’s incorrect Meng DOI change that had been applied to the bib file</li>
+</ul>
+<p><strong>Lesson:</strong> A single verification pass is insufficient. Even the first AI-assisted audit missed fabricated entries that a second pass caught. Cross-AI validation catches different errors but can also introduce new ones. Human verification of disagreements is essential. Multiple independent passes are necessary for high-confidence bibliography integrity.</p>
+<hr>
+<h2 id="corrections-applied">Corrections Applied</h2>
+<h3 id="files-modified">Files Modified</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>File</th><th>Changes</th></tr></thead><tbody><tr><td><code>paper/references.bib</code></td><td>15 corrections across 2 passes: 11 (Pass 1) + 4 (Pass 2). Removed 2 fabricated entries, fixed 1 wrong DOI, fixed 1 wrong author, fixed 1 entry type. Final: 35 entries.</td></tr><tr><td><code>paper/woot26/references.bib</code></td><td>Same corrections applied</td></tr><tr><td><code>paper/sections/02-related-work.tex</code></td><td>”Denning, Kohno, and Chizeck” → “Denning, Matsuoka, and Kohno”; “Wu et al.” → “Meng et al.”; removed <code>denning2009neurostimulators</code> from citation; Schroder description updated; Lazaro-Munoz citation split</td></tr><tr><td><code>paper/woot26/sections/02-related-work.tex</code></td><td>Same text corrections</td></tr><tr><td><code>paper/sections/09-limitations.tex</code></td><td>Added AI Tool Disclosure subsection (Section 9.8); transparency URL changed to GitHub</td></tr><tr><td><code>blogs/2026-02-13-...</code></td><td>AI Transparency Statement updated: credits Kevin L. Qi as author with Claude and Gemini as AI assistants; link → GitHub</td></tr><tr><td><code>src/pages/governance/[...slug].astro</code></td><td>Added “View source on GitHub” link to all governance pages</td></tr><tr><td><code>src/pages/governance/index.astro</code></td><td>Added “View source on GitHub” link</td></tr><tr><td><code>src/components/Footer.astro</code></td><td>Added “Governance (GitHub)” link</td></tr></tbody></table>
+<h3 id="zenodo-v11-draft">Zenodo v1.1 Draft</h3>
+<ul>
+<li>Corrected 3 reference strings (Denning/Matsuoka/Kohno, Meng, Schroder)</li>
+<li>Uploaded recompiled main.pdf and latex-source.zip</li>
+<li>Version set to 1.1</li>
+<li>Publication date: 2026-02-15</li>
+<li><strong>Status: Saved as draft, needs re-upload with Pass 2 corrections before publishing</strong></li>
+</ul>
+<hr>
+<h2 id="process-improvements-implemented">Process Improvements Implemented</h2>
+<h3 id="new-hard-rules-added-to-memorymd">New Hard Rules (added to MEMORY.md)</h3>
+<ol>
+<li>
+<p><strong>Citation Verification (MANDATORY):</strong> Never trust AI-generated citations. Every DOI must be resolved, every author list verified against the actual publication, every arxiv ID confirmed. Use Crossref API or PubMed for verification. This applies to ALL future papers.</p>
+</li>
+<li>
+<p><strong>QIF Hourglass-First Layout (MANDATORY):</strong> Unrelated to citations but added during this session.</p>
+</li>
+</ol>
+<h3 id="workflow-changes">Workflow Changes</h3>
+<ol>
+<li>
+<p><strong>Pre-publication checklist:</strong> Before any future Zenodo/arXiv upload, run a systematic verification of all bibliography entries using at least two independent methods (DOI resolution + source database lookup).</p>
+</li>
+<li>
+<p><strong>Multi-pass verification:</strong> A single verification pass is insufficient. The first pass missed 2 fabricated entries that a second pass caught. Run at minimum 2 independent verification passes before publishing.</p>
+</li>
+<li>
+<p><strong>Cross-AI validation protocol:</strong> When using multiple AI systems for verification, treat disagreements as requiring human resolution — do not automatically accept either system’s output. Gemini introduced a new error (wrong Meng DOI) during the verification process itself.</p>
+</li>
+<li>
+<p><strong>Author publication page check:</strong> For any paper without a DOI, verify the paper exists on at least one author’s own publication page. This would have immediately caught <code>denning2009neurostimulators</code> (not on Tamara Denning’s page).</p>
+</li>
+<li>
+<p><strong>AI Disclosure:</strong> All future papers will include an AI Tool Disclosure section per arXiv policy, explicitly noting that AI was used and describing the human verification process.</p>
+</li>
+</ol>
+<hr>
+<h2 id="follow-up-actions">Follow-Up Actions</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Status</th><th>Owner</th></tr></thead><tbody><tr><td>Pass 1: Fix 11 citation errors in paper source</td><td>Done</td><td>Kevin</td></tr><tr><td>Pass 2: Fix 4 additional errors (2 fabricated, 1 DOI revert, 1 author, 1 entry type)</td><td>Done</td><td>Kevin</td></tr><tr><td>Recompile PDF (final: 35 bib entries, 36 rendered, 0 BibTeX warnings)</td><td>Done</td><td>Kevin</td></tr><tr><td>Update Zenodo references metadata</td><td>Done</td><td>Kevin</td></tr><tr><td>Re-upload corrected PDF + zip to Zenodo v1.1 draft</td><td>Pending</td><td>Kevin</td></tr><tr><td>Publish Zenodo v1.1</td><td>Pending</td><td>Kevin</td></tr><tr><td>Reply to Dr. Schroder acknowledging errors and corrections</td><td>Pending</td><td>Kevin</td></tr><tr><td>Email Prof. Kohno apologizing for author misattribution</td><td>Pending</td><td>Kevin</td></tr><tr><td>Commit and push all local changes</td><td>Pending</td><td>Kevin</td></tr><tr><td>Log cross-AI validation to governance/TRANSPARENCY.md</td><td>Pending</td><td>Kevin</td></tr><tr><td>Add AI Disclosure section to paper</td><td>Done</td><td>Kevin</td></tr><tr><td>Fix governance links to point to GitHub</td><td>Done</td><td>Kevin</td></tr><tr><td>Update blog AI Transparency Statement</td><td>Done</td><td>Kevin</td></tr><tr><td>Rebuild and deploy website</td><td>Pending</td><td>Kevin</td></tr></tbody></table>
+<hr>
+<h2 id="disclosure">Disclosure</h2>
+<p>This post-mortem itself was written with AI assistance (Claude). The factual content (error descriptions, DOI verification results, timeline) was human-verified. The document structure and prose were AI-assisted.</p> </div> <footer class="mt-16 pt-8 border-t border-[var(--color-border)] flex items-center justify-between"> <a href="/governance/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+&larr; All governance documents
+</a> <a href="https://github.com/qinnovates/qinnovate/blob/main/governance/POST-MORTEM-CITATION-AUDIT-2026-02-15.md" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors flex items-center gap-1.5"> <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+View source on GitHub
+</a> </footer> </article> <footer class="border-t border-[var(--color-border)] mt-24 relative overflow-hidden" data-astro-cid-sz7xmlte> <!-- Background brand mark --> <div class="footer-brand-bg select-none pointer-events-none" aria-hidden="true" data-astro-cid-sz7xmlte> <span class="footer-brand font-bold font-[family-name:var(--font-heading)] leading-none bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent" data-astro-cid-sz7xmlte>
+ATLAS
+</span> </div> <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" data-astro-cid-sz7xmlte> <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-astro-cid-sz7xmlte> <!-- Brand column --> <div class="col-span-2 md:col-span-1" data-astro-cid-sz7xmlte> <a href="/" class="text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]" data-astro-cid-sz7xmlte>
+Qinnovate Neural Atlas
+</a> <p class="mt-3 text-sm text-[var(--color-text-muted)] leading-relaxed" data-astro-cid-sz7xmlte>
+The professional standards body for the neural frontier.
+</p> <p class="mt-4 text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+QIF v6.1 Hourglass &middot; Open Framework
+</p> </div> <div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Technology </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/framework/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Framework </a> </li><li data-astro-cid-sz7xmlte> <a href="/nsp/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NSP Protocol </a> </li><li data-astro-cid-sz7xmlte> <a href="/runemate/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Project Runemate </a> </li><li data-astro-cid-sz7xmlte> <a href="/TARA/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> TARA Atlas </a> </li><li data-astro-cid-sz7xmlte> <a href="/scoring/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NISS Scoring </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Resources </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/whitepaper/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Latest Whitepaper (v6.1) </a> </li><li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates/qinnovate/blob/main/docs/docs/api.md" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> API Documentation </a> </li><li data-astro-cid-sz7xmlte> <a href="/news/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> News </a> </li><li data-astro-cid-sz7xmlte> <a href="/lab/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Lab </a> </li><li data-astro-cid-sz7xmlte> <a href="/rss.xml" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> RSS Feed </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Connect </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/whitepaper/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Whitepaper </a> </li><li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> GitHub </a> </li><li data-astro-cid-sz7xmlte> <a href="/about/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> About </a> </li><li data-astro-cid-sz7xmlte> <a href="/licensing/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Licensing </a> </li><li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates/qinnovate/tree/main/governance" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> Governance (GitHub) </a> </li> </ul> </div> </div> <div class="mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" data-astro-cid-sz7xmlte> <p class="text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+&copy; 2026 Qinnovate Neural Atlas. QIF is an open research framework.
+</p> </div> </div> </footer>   <!-- Scroll-driven reveal observer --> <script type="module">function o(){const t=new IntersectionObserver(e=>{e.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),t.unobserve(r.target))})},{threshold:.1,rootMargin:"0px 0px -40px 0px"});document.querySelectorAll(".reveal").forEach(e=>t.observe(e))}o();document.addEventListener("astro:after-swap",o);</script> </body> </html>
