@@ -54,6 +54,71 @@ append a row to `governance/TRANSPARENCY.md` > Cross-AI Validation Sessions tabl
 the session. Format: `| Date | Topic | AI Systems | Human Decision | Derivation Log Ref |`
 This applies to all agents (Claude, Antigravity, etc.) working in this repo.
 
+## Auto-Track Protocol (Academic Transparency)
+
+When ANY of these occur during a session, you MUST:
+1. Append an entry to `qif-framework/QIF-DERIVATION-LOG.md` (if it's a framework insight)
+2. Append an entry to `qif-framework/QIF-FIELD-JOURNAL.md` (if it's a personal/experiential observation)
+3. Note it in the daily memory log with tag [DECISION] or [DERIVATION]
+
+**Triggers:**
+- New hypothesis formulated or existing one revised
+- Cross-AI validation performed (Gemini, GPT, etc.)
+- Literature gap identified or confirmed
+- A claim is corrected (especially AI hallucination caught)
+- Framework architecture changes (bands, scoring, protocols)
+- A "Not Claimed" or "Established vs Hypothesis" boundary shifts
+- User says "remember this," "this is important," "lightbulb," or equivalent
+- New attack technique or therapeutic mapping discovered
+
+**Entry must include:**
+- Date and approximate time
+- Which AI system(s) were involved and their role
+- What the human decided (the human decision is ALWAYS documented)
+- What was accepted vs rejected from AI suggestions
+- Classification: VERIFIED / INFERRED / HYPOTHESIS
+
+**Research Commit Messages:**
+For research-significant commits (derivation log entries, hypothesis docs, papers, blog posts), use this extended format:
+```
+[Action] [Scope]: Brief description
+
+AI-Collaboration:
+  Model: [model name]
+  Role: [co-derivation | literature search | writing assist | code generation | peer review]
+  Cross-AI: [other model — role] (if applicable)
+  Human-Decided: [list key human decisions]
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+```
+This is NOT required for routine code changes — only for research-significant commits.
+
+## Citation & Preprint Integrity Protocol (MANDATORY)
+
+This protocol exists because the Zenodo preprint v1.0 shipped with 3 fabricated citations and 3 wrong author lists — all AI-hallucinated. Dr. Schroder caught one publicly. We cannot afford a repeat.
+
+### Citation Rules
+1. **NEVER trust AI-generated citations.** Every DOI, arxiv ID, author list, and title MUST be verified by resolving the link before any publication.
+2. **Verify method:** Run Crossref API (`https://api.crossref.org/works/DOI`), fetch the arxiv abstract page, or visit the publisher page. If the DOI doesn't resolve, the citation is fabricated.
+3. **Cross-AI validation does NOT substitute for verification.** Gemini, GPT, etc. can also hallucinate citations. Only a resolved URL counts as verified.
+4. **When adding a new reference to the LaTeX paper (`paper/references.bib`):**
+   - Resolve the DOI or URL and confirm: title, all authors (first and last), year, journal/venue
+   - Add a `note = {Verified YYYY-MM-DD via [source]}` field to the BibTeX entry
+   - If the reference came from AI suggestion, add `note = {AI-suggested, verified YYYY-MM-DD via [source]}`
+
+### Preprint Version Sync Protocol
+When a new version of the preprint is compiled and ready for release:
+1. **Compile:** `cd paper && make deploy` (builds PDF + copies to `docs/papers/`)
+2. **Update LaTeX version note** in `paper/sections/09-limitations.tex` (revision description)
+3. **Upload to Zenodo** as a new version (use all-versions DOI 10.5281/zenodo.18640105)
+4. **Build site:** `npm run build` (prebuild auto-copies latest PDF)
+5. **Commit and push** — GitHub Pages deploys automatically
+6. **Verify the live PDF** at `https://qinnovate.com/papers/qif-bci-security-2026.pdf` contains the changes
+
+### DOI Convention
+- **Always use the all-versions DOI** (`10.5281/zenodo.18640105`) in public references — it automatically resolves to the latest version.
+- **Never hardcode version-specific DOIs** in public-facing pages (site, README, whitepaper). Version-specific DOIs are only for historical records (post-mortems, sent emails).
+
 ## Standards & Governance (Scale)
 - **QIF (Security)**: All architectural changes must align with the 11-band hourglass model.
 - **TARA (Threats)**: New techniques must be scored with NISS (Neural Impact Scoring System).
