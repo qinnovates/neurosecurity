@@ -11,6 +11,27 @@ export function getStaticPaths() {
 
 const { threat } = Astro.props;
 const severityColor = SEVERITY_COLORS[threat.severity] || SEVERITY_COLORS.low;
+
+const NEURORIGHT_LABELS: Record<string, string> = {
+  MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity',
+  PC: 'Psychological Continuity', CA: 'Cognitive Authenticity',
+  DI: 'Dynamical Integrity', IDA: 'Informational Disassociation',
+};
+
+const REQ_LABELS: Record<string, string> = {
+  TM: 'Threat Modeling', VA: 'Vulnerability Assessment',
+  SBOM: 'Software BOM', SA: 'Security Architecture', PM: 'Post-Market Monitoring',
+};
+
+const nr = threat.neurorights as { affected: string[]; cci: number } | null;
+const reg = (threat.regulatory as any)?.fdora_524b as {
+  cyber_device: boolean;
+  prongs: { software: boolean; network_connectable: boolean; vulnerable: boolean };
+  applicable_requirements: string[];
+  coverage_score: number;
+  gaps: string[];
+} | null;
+const hasGovernance = nr || reg;
 ---
 
 <PageLayout
@@ -97,6 +118,121 @@ const severityColor = SEVERITY_COLORS[threat.severity] || SEVERITY_COLORS.low;
             </div>
           </div>
         )}
+      </div>
+    )}
+
+    <!-- Governance Section -->
+    {hasGovernance && (
+      <div class="glass rounded-xl p-6 border-l-4 border-purple-500 mb-8">
+        <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(168,85,247)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Governance
+        </h3>
+
+        <div class="space-y-5">
+          {/* --- Neurorights --- */}
+          {nr && nr.affected.length > 0 && (
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">Neurorights Impact</h4>
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                {nr.affected.map((code: string) => (
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                    <span class="font-bold">{code}</span>
+                    <span class="text-purple-400/70">{NEURORIGHT_LABELS[code] ?? code}</span>
+                  </span>
+                ))}
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <span class="text-[var(--color-text-muted)]">Consent Complexity</span>
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex-1 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden max-w-[120px]">
+                    <div
+                      class="h-full rounded-full"
+                      style={`width: ${Math.min(nr.cci / 4 * 100, 100)}%; background: ${nr.cci >= 2.0 ? 'rgb(239,68,68)' : nr.cci >= 1.0 ? 'rgb(234,179,8)' : 'rgb(34,197,94)'}`}
+                    />
+                  </div>
+                  <span class={`font-mono font-bold text-xs ${nr.cci >= 2.0 ? 'text-red-400' : nr.cci >= 1.0 ? 'text-yellow-400' : 'text-green-400'}`}>
+                    {nr.cci.toFixed(2)}
+                  </span>
+                  <span class="text-[var(--color-text-faint)] text-xs">/ 4.0</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* --- Divider between sub-sections --- */}
+          {nr && nr.affected.length > 0 && reg && (
+            <hr class="border-[var(--color-border)] opacity-50" />
+          )}
+
+          {/* --- FDORA §3305 Regulatory --- */}
+          {reg && (
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">FDORA §3305 Compliance</h4>
+
+              {/* Cyber Device Status */}
+              <div class="flex items-center gap-2 mb-3">
+                <span class={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold ${reg.cyber_device ? 'bg-blue-500/15 text-blue-400 border border-blue-500/25' : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-transparent'}`}>
+                  {reg.cyber_device ? 'Cyber Device' : 'Non-Cyber Device'}
+                </span>
+                {!reg.cyber_device && (
+                  <span class="text-xs text-[var(--color-text-faint)]">
+                    (missing: {[
+                      !reg.prongs.software && 'software',
+                      !reg.prongs.network_connectable && 'network',
+                    ].filter(Boolean).join(', ')})
+                  </span>
+                )}
+              </div>
+
+              {/* Coverage Score */}
+              <div class="flex items-center gap-3 text-sm mb-3">
+                <span class="text-[var(--color-text-muted)]">Regulatory Coverage</span>
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex-1 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden max-w-[120px]">
+                    <div
+                      class="h-full rounded-full"
+                      style={`width: ${reg.coverage_score * 100}%; background: ${reg.coverage_score >= 0.7 ? 'rgb(34,197,94)' : reg.coverage_score >= 0.4 ? 'rgb(234,179,8)' : 'rgb(239,68,68)'}`}
+                    />
+                  </div>
+                  <span class={`font-mono font-bold text-xs ${reg.coverage_score >= 0.7 ? 'text-green-400' : reg.coverage_score >= 0.4 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    {reg.coverage_score.toFixed(1)}
+                  </span>
+                  <span class="text-[var(--color-text-faint)] text-xs">/ 1.0</span>
+                </div>
+              </div>
+
+              {/* 524B Requirements */}
+              {reg.applicable_requirements.length > 0 && (
+                <div class="mb-3">
+                  <span class="text-xs text-[var(--color-text-muted)] block mb-1">524B Requirements</span>
+                  <div class="flex flex-wrap gap-1.5">
+                    {reg.applicable_requirements.map((r: string) => (
+                      <span class="px-1.5 py-0.5 rounded text-xs font-mono bg-[var(--color-border)] text-[var(--color-text-muted)]" title={REQ_LABELS[r] ?? r}>
+                        {r}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Gaps */}
+              {reg.gaps.length > 0 && (
+                <div>
+                  <span class="text-xs text-[var(--color-text-muted)] block mb-1">Regulatory Gaps</span>
+                  <ul class="space-y-1">
+                    {reg.gaps.map((gap: string) => (
+                      <li class="text-xs text-[var(--color-text-faint)] flex items-start gap-1.5">
+                        <span class="text-yellow-500 mt-0.5 shrink-0">!</span>
+                        <span>{gap}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     )}
 
