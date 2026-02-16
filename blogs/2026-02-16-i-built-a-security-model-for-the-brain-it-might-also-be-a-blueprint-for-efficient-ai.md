@@ -7,7 +7,7 @@ tags: ["qif", "bci", "ai", "hourglass", "security"]
 
 > **Originally published on [Medium](https://medium.com/@qikevinl/i-built-a-security-model-for-the-brain-it-might-also-be-a-blueprint-for-efficient-ai-767401ed0004)**
 
-**TL;DR:** Your brain runs two very different systems. The cortex thinks — it's slow, expensive, and flexible. The spinal cord reacts — it's fast, cheap, and hardwired. A routing layer in the middle decides which one handles each job. This saves energy: the brain spends 20% of your body's fuel on 2% of your mass, and it would be worse without the shortcut. But the cheap system has a catch — it's also cheap to break. A vitamin deficiency, a dental anesthetic, or a bad diet can silently degrade your spinal cord while your cortex never notices. The same trade-off is showing up in AI. Models like DeepSeek use lookup tables for known answers (fast, cheap, brittle) and deep reasoning for hard questions (slow, expensive, resilient). Data poisoning breaks the lookup table the same way B12 deficiency breaks a reflex arc. And when AI gets a body — robots, surgical systems, self-driving cars — it will need the full architecture, fragility tax included. This post describes how a security model for brain-computer interfaces accidentally revealed that pattern.
+**TL;DR:** Your brain runs two very different systems. The cortex thinks — it's slow, expensive, and flexible. The spinal cord reacts — it's fast, cheap, and hardwired. A routing layer in the middle decides which one handles each job. This saves energy: the brain spends 20% of your body's fuel on 2% of your mass, and it would be worse without the shortcut. But the cheap system has a catch — it's also cheap to break. A vitamin deficiency, a dental anesthetic, or a bad diet can silently degrade your spinal cord while your cortex never notices. When we mapped 103 BCI attack techniques across this hierarchy and scored them for security impact, the scores automatically predicted DSM-5-TR psychiatric diagnoses — the security model had encoded the clinical outcomes without being told to. The same trade-off is showing up in AI. Models like DeepSeek use lookup tables for known answers (fast, cheap, brittle) and deep reasoning for hard questions (slow, expensive, resilient). Data poisoning breaks the lookup table the same way B12 deficiency breaks a reflex arc. And when AI gets a body — robots, surgical systems, self-driving cars — it will need the full architecture, fragility tax included. This post describes how a security model for brain-computer interfaces accidentally revealed that pattern.
 
 ---
 
@@ -74,6 +74,30 @@ The spinal cord can't do any of that. Damage the pathway and it's gone. There's 
 This redefines what "cheap" means in the hourglass. It's not just about compute cost. **Simplicity is cheap in every direction — cheap to run, cheap to attack, and cheap to lose.** Complexity is expensive in every direction — expensive to run, expensive to attack, and expensive to replace, but possible to recover. The hourglass isn't a cost gradient. It's a **complexity gradient**, and efficiency, fragility, and resilience all fall out of the same variable.
 
 Sound familiar?
+
+## The Part We Didn't Expect: Security Scores Already Predicted Clinical Diagnoses
+
+Here's where the hourglass surprised us again.
+
+While building the security model, we scored every technique using NISS — the Neural Impact Scoring System. NISS has five metrics: Biological Impact (BI), Cognitive Integrity (CG), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). These were designed purely for security: how bad is this attack, and can the target recover?
+
+Then we cross-referenced the hourglass bands with neuroanatomy — which brain structures live at each band, what cognitive functions those structures support, and what happens clinically when those functions are disrupted. We weren't trying to build a diagnostic tool. We were trying to understand attack impact.
+
+But when we laid the NISS scores against DSM-5-TR diagnostic categories, the mapping was already there. We didn't have to force it.
+
+| NISS Metric | Security Meaning | Clinical Prediction |
+|---|---|---|
+| BI (High/Critical) | Tissue damage | Motor/Neurocognitive disorders |
+| CG (High/Critical) | Cognitive disruption | Cognitive/Psychotic disorders |
+| CV (Elevated/Involuntary) | Consent violation | Mood/Trauma disorders |
+| NP (Structural) | Lasting neural change | Persistent/Personality disorders |
+| RV (Partial/Irreversible) | Poor recovery | Chronicity modifier |
+
+A technique with high Consent Violation and high Cognitive Integrity scores doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — PTSD, depression, and psychotic features. The security metrics were already encoding the clinical outcomes without being told to.
+
+The [TARA registry](https://qinnovate.com/TARA) now carries this mapping for all 103 techniques. Each one has ICD-10-CM codes, DSM-5-TR diagnoses, confidence levels, a diagnostic cluster, and the Neural Impact Chain that explains *why* — the full path from technique to band to brain structure to cognitive function to clinical outcome. The Fragility Tax makes this concrete: techniques targeting the lower, deterministic bands (N1-N2) map to motor and neurocognitive disorders with high confidence, because those pathways are simple enough that disruption produces predictable, well-characterized clinical presentations. Techniques targeting the upper, indeterministic bands (N5-N7) map to broader diagnostic clusters with more uncertainty, because the cortex's complexity makes outcomes harder to predict.
+
+We didn't set out to build a bridge between cybersecurity and psychiatry. We built a security model, populated it honestly, and the bridge was already in the data. The hourglass didn't just organize attack surfaces — it organized clinical outcomes too, because both are governed by the same complexity gradient. The same variable that determines how cheap a system is to run, how cheap it is to break, and how cheap it is to lose *also* determines what the clinical picture looks like when it breaks.
 
 ## AI Is Reinventing This Architecture (Unevenly)
 
