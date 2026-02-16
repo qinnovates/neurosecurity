@@ -176,6 +176,7 @@ Key phases include:
 - **Phase 2** (Feb 6): Neural security hypotheses and NSP protocol validation
 - **Phase 3** (Feb 7–8): Multi-model validation pipeline (Gemini, DeepSeek-R1, QwQ-32B, Grok-3, Claude)
 - **Phase 4** (Feb 8–9): Deep derivation, TARA registry architecture, dual-use gap analysis
+- **Phase 5** (Feb 16): TARA neuroethics gap analysis — Claude sequential thinking identified 7 gaps, Gemini 2.5 Pro validated all 7 + found 3 additional correlations (PINS inversion, persistent_personality under-consenting, indirect risk misnomer) and proposed 2 new neurorights (Dynamical Integrity, Informational Disassociation). Human decided: implement all, add CCI metric.
 
 ### Non-AI Tools
 - Rust (NSP/Runemate implementation)

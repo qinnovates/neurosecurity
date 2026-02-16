@@ -5928,3 +5928,64 @@ Verification was achieved through a dedicated  binary that simulates a full end-
 
 This confirms that the "Harvest Now, Decrypt Later" threat is mitigated for Runemate-delivered BCI content.
 
+
+## Entry 57: Neurorights Mapping & Consent Complexity Index {#entry-57-neurorights-mapping-consent-complexity-index}
+
+**Date:** 2026-02-16 ~07:00
+**Context:** Systematic mapping of all 102 TARA techniques to neurorights, cross-AI validated.
+**Builds on:** Entry 53 (DSM-5-TR mapping), Entry 50 (TARA)
+**Status:** IMPLEMENTED
+**Classification:** VERIFIED (data-driven mapping) + HYPOTHESIS (DI and IDA rights)
+
+### The Gap
+
+Ienca & Andorno (2017) proposed 4 neurorights. QIF proposed a 5th (Cognitive Authenticity). But nobody had tested these against an actual threat taxonomy. With 102 techniques, we can.
+
+### The Derivation
+
+Sequential thinking analysis (Claude Opus 4.6, 8 steps) identified 7 gaps in TARA's neuroethics coverage:
+
+1. **Neurorights vectors** — no technique-to-right mapping existed
+2. **DSM-5 blind spot** — diagnostic mappings have legal implications not captured by consent tiers
+3. **Temporal neurorights** — long-term vs acute effects not distinguished
+4. **Consent Complexity Index** — no quantified metric for consent adequacy
+5. **Collective Impact Multiplier** — population-level effects unmeasured
+6. **Regulatory coverage scoring** — no per-technique regulatory gap metric
+7. **Neurorights Hourglass** — the hourglass architecture should express neurorights inversions
+
+### Cross-AI Validation
+
+Gemini 2.5 Pro validated all 7 gaps and contributed:
+- 3 additional correlations: PINS inversion, persistent_personality under-consenting, indirect risk misnomer
+- 2 new neurorights proposals: **Dynamical Integrity** (DI) and **Informational Disassociation** (IDA)
+- Recommendation: "Neurorights Hourglass" is the strongest paper thesis
+
+**Human decided:** Implement all 7. Accept DI and IDA. Build CCI metric. Write blog post.
+
+### Implementation
+
+- Added `neurorights.affected` (list of 7 rights) to all 102 techniques
+- Added `neurorights.cci` (Consent Complexity Index) to all 102 techniques
+- Added `statistics.neurorights` aggregate to registrar
+- Mapping rules: UI category (primary) + DSM-5 cluster (overlay) + NISS vectors (refinement) + special lists (fusion → IDA, homeodynamic → DI)
+
+### Key Findings
+
+| Right | Techniques | Description |
+|-------|-----------|-------------|
+| MI | 71 | Mental Integrity — most commonly violated |
+| MP | 64 | Mental Privacy |
+| DI | 61 | Dynamical Integrity (NEW) |
+| CA | 61 | Cognitive Authenticity |
+| CL | 60 | Cognitive Liberty |
+| PC | 28 | Psychological Continuity |
+| IDA | 5 | Informational Disassociation (NEW) |
+
+CCI mean: 1.01 | max: 2.7 | 11 techniques above 2.0
+
+### Anomalies (Gemini-validated)
+
+- **PINS inversion:** T0016, T0017, T0024, T0046 — silicon_only + standard consent + NISS 6.4–7.1
+- **Under-consented persistent_personality:** T0022, T0059, T0062, T0071 — enhanced consent + NISS 7.4–8.1
+- **Indirect risk misnomer:** T0055, T0065 — risk_class=indirect + NISS 8.1
+
