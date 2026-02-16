@@ -1,10 +1,11 @@
-# I Built a Security Model for the Brain. It Might Also Be a Blueprint for Efficient AI.
-
-> **Author:** Kevin L. Qi
-> **Date:** 2026-02-16
-> **Status:** DRAFT — For qinnovate.com blog
-
 ---
+title: "I Built a Security Model for the Brain. It Might Also Be a Blueprint for Efficient AI."
+date: "2026-02-16"
+author: "Kevin L. Qi"
+tags: ["qif", "bci", "ai", "hourglass", "security"]
+---
+
+> **Status:** DRAFT — For qinnovate.com blog
 
 I wasn't looking for this.
 
