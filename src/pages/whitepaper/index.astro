@@ -1149,8 +1149,116 @@ const latestChange = getLatestChangelog();
           </div>
         </div>
 
+        <!-- Key Design Decisions -->
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.2 Key Design Decisions</h3>
+
+        <div class="prose mb-6">
+          <p>
+            Every architectural choice in QIF is documented in a <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">57-entry derivation log</a> written like a lab notebook. Below are the pivotal decisions that shaped the framework &mdash; each one traceable to a specific entry with full reasoning chains.
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          <div class="glass rounded-xl p-5 flex gap-4">
+            <div class="w-1 rounded-full shrink-0" style="background: var(--color-accent-primary);"></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">&ldquo;OSI layers are meaningless for BCI.&rdquo;</h4>
+                <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-1-osi-layers-are-meaningless-for-bci" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 1</a>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                The original 14-layer model stacked neural layers on top of the OSI networking model. I realized this was actively misleading &mdash; there is no MAC addressing in the cortex, no IP routing in neural tissue. The entire OSI heritage was stripped and replaced with a model derived from neuroscience and physics, not 1984 telecom.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5 flex gap-4">
+            <div class="w-1 rounded-full shrink-0" style="background: var(--color-accent-secondary);"></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">The hourglass: &ldquo;like a black hole &mdash; everything funnels through one point.&rdquo;</h4>
+                <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-7-the-hourglass-model" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 7</a>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                After noticing that the electrode and the trust boundary are literally the same physical location (Entry 2), the circular topology evolved into an hourglass. Width represents state space: quantum possibility above, classical pathways below, with the measurement bottleneck (I0) at the narrowest point. Every BCI signal &mdash; therapeutic or adversarial &mdash; must pass through this single point.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5 flex gap-4">
+            <div class="w-1 rounded-full shrink-0" style="background: var(--color-accent-tertiary);"></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Post-quantum because implants outlive algorithms.</h4>
+                <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-31-nsp-goes-post-quantum--the-implant-lifetime-argument" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 31</a>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                A brain implant cannot be firmware-updated like a phone. If it ships with RSA-2048 and quantum computers break RSA in 2035, every patient with that implant is permanently exposed. NIST mandates legacy encryption deprecated by 2030 and disallowed by 2035. NSP was designed PQC-first (ML-KEM, ML-DSA) because neural data has a lifetime shelf life &mdash; adversaries are already harvesting encrypted traffic to crack later.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5 flex gap-4">
+            <div class="w-1 rounded-full shrink-0" style="background: #f59e0b;"></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">TARA: the attack registry IS the therapy registry.</h4>
+                <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-50-tara--therapeutic-atlas-of-risks-and-applications" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 50</a>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                While cataloguing attack techniques, I kept finding the same mechanisms on the therapeutic side. Signal injection is an attack vector &mdash; and the basis of DBS for Parkinson&rsquo;s. The distinction isn&rsquo;t mechanism; it&rsquo;s consent, dosage, and oversight. This insight reframed the entire threat registry from a pure attack catalog into a dual-use mechanism atlas. The name TARA (Sanskrit: &ldquo;star,&rdquo; bodhisattva of compassion) was chosen deliberately.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5 flex gap-4">
+            <div class="w-1 rounded-full shrink-0" style="background: #ef4444;"></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">NISS scores predict psychiatric diagnoses &mdash; unintentionally.</h4>
+                <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 53</a>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                NISS was designed as a security scoring system. When I mapped the five metrics against DSM-5-TR chapters, the correspondence was immediate: high Biological Impact predicts motor/neurocognitive disorders; high Cognitive Integrity predicts psychotic features; elevated Consent Violation predicts mood/trauma disorders. The security metrics doubled as psychiatric risk predictors without being designed to. This required clinical validation (which we are actively seeking).
+              </p>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5 flex gap-4">
+            <div class="w-1 rounded-full shrink-0" style="background: #10b981;"></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">&ldquo;Don&rsquo;t add components &mdash; deepen existing ones.&rdquo;</h4>
+                <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-47-dsm-dissolved-into-nsp--no-separate-component" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 47</a>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                When dynamical systems monitoring (phase dynamics, bifurcation detection, Lyapunov tracking) needed a home, the instinct was to create a new named component. Instead, these capabilities folded naturally into NSP&rsquo;s existing Biological TLS validation layers. No new acronym. No parallel system. This reflects a core QIF philosophy: if a capability belongs inside an existing component, it isn&rsquo;t a new component &mdash; it&rsquo;s a sharper tool for the one you already have.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5 flex gap-4">
+            <div class="w-1 rounded-full shrink-0" style="background: #8b5cf6;"></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">NSP is not the brake &mdash; it&rsquo;s the safety certification that enables medicine.</h4>
+                <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-48-nsp-reframed--the-trust-layer-that-enables-medicine" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 48</a>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                NSP was initially framed as a defense protocol. The reframe: no audiologist prescribes a stimulation implant if the patterns can be replayed or corrupted. No clinician trusts a vision prosthesis if the signal can be intercepted. NSP + Runemate are the secure infrastructure that makes clinical BCI applications possible. Security enables medicine; it doesn&rsquo;t constrain it.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-5 text-center mb-8" style="border-left: 3px solid var(--color-accent-tertiary);">
+          <p class="text-xs text-[var(--color-text-muted)]">
+            The complete derivation log contains 57 entries spanning 17 days of development, from the first &ldquo;OSI is wrong&rdquo; insight through the final neurorights restructuring. Every entry documents the human decision, which AI systems were involved, and what was accepted versus rejected. Read the full log at <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">QIF-DERIVATION-LOG.md</a>.
+          </p>
+        </div>
+
         <!-- AI Methodology -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.2 AI Methodology</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.3 AI Methodology</h3>
 
         <div class="prose mb-6">
           <p>
@@ -1193,7 +1301,7 @@ const latestChange = getLatestChangelog();
         </div>
 
         <!-- Audit Trail -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.3 Audit Trail</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.4 Audit Trail</h3>
 
         <div class="prose mb-6">
           <p>
