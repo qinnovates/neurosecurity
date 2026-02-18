@@ -12,7 +12,7 @@ order: 0
 
 ## Intent
 
-This document exists to protect normal people. Neurosecurity research is new, the tools are powerful, and the consequences of mistakes are not like crashing a server. Someone exploring BCI security for the first time could accidentally probe the wrong system, collect neural data they should not have, or publish a technique without realizing the dual-use implications. This code sets guidelines and guardrails to the best of our current understanding so that well-meaning researchers do not cause harm by accident. It is not a legal document. It is a starting point, written by one person, that needs many more people helping to get it right.
+This document exists to protect researchers and the people whose cognitive sovereignty they are working to defend. Neurosecurity research is new, the tools are powerful, and the consequences of mistakes are not like crashing a server. Someone exploring BCI security for the first time could accidentally probe the wrong system, collect neural data they should not have, or publish a technique without realizing the dual-use implications. This code sets guidelines and guardrails to the best of our current understanding so that well-meaning researchers do not cause harm by accident. It is not a legal document. It is a starting point, written by one person, that needs many more people helping to get it right.
 
 ---
 
