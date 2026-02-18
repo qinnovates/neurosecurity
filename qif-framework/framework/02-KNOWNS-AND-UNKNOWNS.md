@@ -72,7 +72,7 @@ REFLEX ARCS         ████████████████████
 Spinal, brainstem. Complete pathway, no unknowns.
 
 FEAR FAST-TRACK     ████████████████████████████████████████░░░░░░░░░░  🔶 MOSTLY KNOWN
-Thalamus→Amygdala (12ms). Known. Integration with cortex = gaps.
+Thalamus→Amygdala (~74ms, Mendez-Bertolo et al. 2016). Known. Integration with cortex = gaps.
 
 THALAMOCORTICAL     ██████████████████████████████░░░░░░░░░░░░░░░░░░░  ⚠️ PARTIAL
 Relay + gating known. Feedback from cortex→thalamus = poorly understood.

@@ -1,0 +1,1691 @@
+{
+  "_metadata": {
+    "title": "Comprehensive BCI Hardware Specifications Inventory",
+    "version": "1.0.0",
+    "created": "2026-02-18",
+    "description": "Exhaustive hardware specifications for known clinical and consumer BCI devices, compiled from public sources including FDA filings, manufacturer datasheets, peer-reviewed papers, and patents.",
+    "notes": [
+      "Confidence levels: HIGH = manufacturer spec sheet or FDA filing; MEDIUM = peer-reviewed paper or credible technical analysis; LOW = inferred, estimated, or single secondary source.",
+      "null values indicate data not publicly available or not found.",
+      "All thermal safety context: FDA/IEEE limit is 1 degree C max tissue temperature rise; IEEE C95.1-2019 SAR limit 1.6 W/kg (10g averaged, 6 min); BCI power budgets typically capped at 15-40 mW depending on implant depth."
+    ]
+  },
+  "devices": [
+    {
+      "id": "neuralink-n1",
+      "manufacturer": "Neuralink Corp.",
+      "device_name": "N1 Implant (Link)",
+      "device_type": "invasive_implantable",
+      "fda_status": "De novo classification granted Jan 2025; IDE clinical trial (PRIME) ongoing",
+      "target_indication": "Quadriplegia, ALS",
+      "core_specs": {
+        "channel_count": {
+          "value": 1024,
+          "unit": "channels",
+          "notes": "32 electrodes per thread x 64 threads. ASIC supports 3072 channels (12 x 256-ch chips) but current implant uses 1024.",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper (JMIR 2019;10:e16194); Neuralink website"
+        },
+        "power_consumption_total": {
+          "value": 6,
+          "unit": "mW",
+          "notes": "Approximately 6 mW total ASIC power including clock drivers.",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper (JMIR 2019;10:e16194)"
+        },
+        "power_per_channel": {
+          "value": 5.2,
+          "unit": "uW",
+          "notes": "Per analog pixel consumption.",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper"
+        },
+        "die_chip_size": {
+          "value": "4 x 5",
+          "unit": "mm",
+          "notes": "Hermetically sealed SoC package dimensions.",
+          "confidence": "MEDIUM",
+          "source": "Technical analyses of Neuralink white paper"
+        },
+        "process_node": {
+          "value": 65,
+          "unit": "nm",
+          "notes": "CMOS process. Likely TSMC but foundry not confirmed.",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper (JMIR 2019;10:e16194)"
+        },
+        "implant_dimensions": {
+          "value": "23 mm diameter, ~8 mm thick",
+          "unit": "mm",
+          "notes": "Circular coin-shaped device implanted flush with skull.",
+          "confidence": "HIGH",
+          "source": "Neuralink website; FDA filings"
+        },
+        "weight": {
+          "value": null,
+          "unit": "g",
+          "notes": "Not publicly disclosed.",
+          "confidence": null,
+          "source": null
+        },
+        "battery_life": {
+          "value": "Several hours per charge (estimated)",
+          "unit": null,
+          "notes": "Wirelessly rechargeable via inductive charger. Exact battery capacity not disclosed.",
+          "confidence": "LOW",
+          "source": "Neuralink website; press materials"
+        },
+        "charging_method": "Wireless inductive charging (custom compact charger with NFC)",
+        "directionality": "read-only (recording)",
+        "implant_location": "cortical (motor cortex, flush with skull)"
+      },
+      "physics_constraints": {
+        "thermal_dissipation": {
+          "value": "< 40 mW system budget (FDA guideline for cortical implants)",
+          "notes": "Thermal sensors monitor temperature during charging; auto-adjusts power transfer.",
+          "confidence": "MEDIUM",
+          "source": "FDA BCI guidance 2021; Neuralink press materials"
+        },
+        "operating_frequency_neural": {
+          "value": "0.3 Hz - 10 kHz",
+          "unit": "Hz",
+          "notes": "Neural signal bandwidth captured.",
+          "confidence": "MEDIUM",
+          "source": "Neuralink 2019 white paper"
+        },
+        "wireless_protocol": {
+          "value": "Bluetooth Low Energy (BLE)",
+          "notes": "Custom BLE implementation for data streaming.",
+          "confidence": "HIGH",
+          "source": "Neuralink website; press materials"
+        },
+        "data_rate": {
+          "value": 200,
+          "unit": "Mbps (raw neural data)",
+          "notes": "1024 channels x 20 kHz x 10 bits = ~200 Mbps raw. On-chip compression reduces transmitted data.",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper"
+        },
+        "electrode_material": {
+          "value": "Gold traces on polyimide threads; electrode tips treated with iridium oxide (IrOx) or PEDOT:PSS",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper"
+        },
+        "electrode_impedance": {
+          "value": "36.97-56.46",
+          "unit": "kOhm",
+          "notes": "IrOx: 56.46 +/- 7.10 kOhm; PEDOT:PSS: 36.97 +/- 4.68 kOhm",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper"
+        },
+        "signal_to_noise_ratio": {
+          "value": null,
+          "unit": "dB",
+          "notes": "Not explicitly published. 0.83 dB SNR loss at 100 kOhm impedance with 1 MOhm input impedance reported.",
+          "confidence": "LOW",
+          "source": "Technical analysis"
+        },
+        "sampling_rate": {
+          "value": 19.3,
+          "unit": "kHz",
+          "notes": "On-chip ADC at 19.3 kSPS per channel, 10-bit resolution.",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper"
+        },
+        "adc_resolution": {
+          "value": 10,
+          "unit": "bits",
+          "confidence": "HIGH",
+          "source": "Neuralink 2019 white paper"
+        }
+      }
+    },
+    {
+      "id": "neuralink-n2",
+      "manufacturer": "Neuralink Corp.",
+      "device_name": "N2 Implant (next-generation)",
+      "device_type": "invasive_implantable",
+      "fda_status": "Not yet submitted; in development",
+      "target_indication": "Expanded indications including vision restoration",
+      "core_specs": {
+        "channel_count": {
+          "value": null,
+          "notes": "Expected to increase beyond 1024. Neuralink working on more electrodes and longer battery life. Blind insertion through dura planned.",
+          "confidence": "LOW",
+          "source": "Neuralink updates blog; press reports 2025-2026"
+        },
+        "power_consumption_total": {
+          "value": null,
+          "notes": "Not disclosed. Improvements over N1 expected.",
+          "confidence": null,
+          "source": null
+        },
+        "implant_dimensions": {
+          "value": null,
+          "notes": "Similar form factor to N1 expected. Mass production planned for 2026.",
+          "confidence": "LOW",
+          "source": "Press reports"
+        },
+        "directionality": "read-only initially; bidirectional (stimulation) planned for vision restoration",
+        "implant_location": "cortical (motor cortex and visual cortex planned)"
+      },
+      "physics_constraints": {
+        "notes": "Specifications not yet publicly available. R1 surgical robot improvements: 1.5 second thread insertion, blind dura penetration, obstacle avoidance."
+      }
+    },
+    {
+      "id": "blackrock-utah-array",
+      "manufacturer": "Blackrock Neurotech",
+      "device_name": "Utah Array / NeuroPort Electrode Array",
+      "device_type": "invasive_implantable",
+      "fda_status": "510(k) cleared (K110010); IDE for various BCI trials",
+      "target_indication": "Research; BCI clinical trials (BrainGate, etc.)",
+      "core_specs": {
+        "channel_count": {
+          "value": "96-128 per array; up to 1024 with multiple arrays",
+          "unit": "channels",
+          "notes": "Standard configuration is 96 electrodes (10x10 grid minus corners). NeuroPort-96 is the FDA-cleared human version.",
+          "confidence": "HIGH",
+          "source": "Blackrock Neurotech product page; FDA 510(k) K110010"
+        },
+        "power_consumption_total": {
+          "value": null,
+          "unit": "mW",
+          "notes": "The Utah Array itself is passive (no active electronics on the array). Power is consumed by the external NeuroPort data acquisition system.",
+          "confidence": "HIGH",
+          "source": "Blackrock product documentation"
+        },
+        "die_chip_size": {
+          "value": "4 x 4",
+          "unit": "mm",
+          "notes": "Silicon substrate dimensions for 100-electrode array.",
+          "confidence": "HIGH",
+          "source": "Blackrock product page; NIH BRAIN Initiative device info"
+        },
+        "electrode_length": {
+          "value": "1.0-1.5",
+          "unit": "mm",
+          "notes": "Penetrating electrodes that insert into cortex gray matter.",
+          "confidence": "HIGH",
+          "source": "Blackrock product page"
+        },
+        "implant_dimensions": {
+          "value": "4 x 4 mm array + percutaneous pedestal connector",
+          "unit": "mm",
+          "notes": "Pedestal is skull-mounted; external wired connection to NeuroPort system.",
+          "confidence": "HIGH",
+          "source": "Blackrock product documentation"
+        },
+        "weight": {
+          "value": null,
+          "notes": "Array itself is very light (<1g); pedestal adds weight.",
+          "confidence": "LOW",
+          "source": "Estimated"
+        },
+        "battery_life": {
+          "value": "N/A (wired, externally powered)",
+          "unit": null,
+          "confidence": "HIGH",
+          "source": "Blackrock product documentation"
+        },
+        "directionality": "bidirectional (recording and stimulation with SIROF electrodes)",
+        "implant_location": "cortical (motor cortex, somatosensory cortex)"
+      },
+      "physics_constraints": {
+        "operating_frequency_neural": {
+          "value": "0.3 Hz - 7.5 kHz",
+          "unit": "Hz",
+          "notes": "Analog front-end bandwidth of NeuroPort system.",
+          "confidence": "HIGH",
+          "source": "NeuroPort IFU (LB-0323)"
+        },
+        "wireless_protocol": {
+          "value": "Wired (percutaneous pedestal)",
+          "notes": "External NeuroPort system connects via cable. Wireless versions (BrainGate) use custom 48 Mbps wireless transmitter.",
+          "confidence": "HIGH",
+          "source": "Blackrock product documentation; BrainGate publications"
+        },
+        "data_rate": {
+          "value": "48 Mbps (wireless BrainGate variant); wired system supports 30 kSPS x 96 ch",
+          "unit": "Mbps",
+          "confidence": "HIGH",
+          "source": "BrainGate wireless BCI publication (Nature Biomedical Engineering)"
+        },
+        "electrode_material": {
+          "value": "Silicon shank with platinum or iridium oxide (IrOx) tips; SIROF (sputtered iridium oxide film) variant for stimulation",
+          "confidence": "HIGH",
+          "source": "Blackrock product page"
+        },
+        "electrode_impedance": {
+          "value": "100-800",
+          "unit": "kOhm",
+          "notes": "Typical range at 1 kHz. High impedance electrodes for single-unit recording.",
+          "confidence": "MEDIUM",
+          "source": "Published research using Utah Arrays"
+        },
+        "signal_to_noise_ratio": {
+          "value": null,
+          "unit": "dB",
+          "notes": "Described as 'superior SNR' by manufacturer. Typical values in literature: 5-15 dB for single units.",
+          "confidence": "LOW",
+          "source": "Blackrock marketing; research publications"
+        },
+        "sampling_rate": {
+          "value": 30,
+          "unit": "kHz",
+          "notes": "NeuroPort system: 30 kSPS per channel, 16-bit resolution, 250 nV resolution. Configurable: 2/10/30 kSPS.",
+          "confidence": "HIGH",
+          "source": "NeuroPort system manual; Scitech distributor spec sheet"
+        },
+        "adc_resolution": {
+          "value": 16,
+          "unit": "bits",
+          "confidence": "HIGH",
+          "source": "NeuroPort system manual"
+        },
+        "proven_longevity": {
+          "value": ">8 years",
+          "notes": "Demonstrated chronic recording and stimulation for over 8 years in a single patient.",
+          "confidence": "HIGH",
+          "source": "Blackrock product page"
+        }
+      }
+    },
+    {
+      "id": "braingate",
+      "manufacturer": "BrainGate Consortium (originally Cyberkinetics; arrays by Blackrock Neurotech)",
+      "device_name": "BrainGate Neural Interface System",
+      "device_type": "invasive_implantable",
+      "fda_status": "IDE clinical trials (ongoing since 2004)",
+      "target_indication": "Paralysis, ALS, locked-in syndrome",
+      "core_specs": {
+        "channel_count": {
+          "value": "96-200",
+          "unit": "channels",
+          "notes": "Uses Blackrock Utah Arrays. Original: single 96-ch array. Recent: two arrays (192-200 ch) with wireless transmitters.",
+          "confidence": "HIGH",
+          "source": "BrainGate publications; Wikipedia"
+        },
+        "implant_dimensions": {
+          "value": "4 x 4 mm per array + pedestal",
+          "unit": "mm",
+          "notes": "Same as Utah Array. Wireless variant adds small transmitter modules.",
+          "confidence": "HIGH",
+          "source": "BrainGate publications"
+        },
+        "battery_life": {
+          "value": 36,
+          "unit": "hours (wireless variant)",
+          "notes": "Two wireless devices recorded at 48 Mbps from 200 electrodes with >36 hour battery life.",
+          "confidence": "HIGH",
+          "source": "BrainGate wireless BCI publication (ScienceDaily 2021)"
+        },
+        "directionality": "read-only (recording)",
+        "implant_location": "cortical (motor cortex)"
+      },
+      "physics_constraints": {
+        "wireless_protocol": {
+          "value": "Custom 48 Mbps wireless (for wireless variant); wired pedestal (original)",
+          "confidence": "HIGH",
+          "source": "BrainGate publications"
+        },
+        "data_rate": {
+          "value": 48,
+          "unit": "Mbps",
+          "confidence": "HIGH",
+          "source": "BrainGate wireless publication"
+        },
+        "sampling_rate": {
+          "value": 30,
+          "unit": "kHz",
+          "notes": "Uses Blackrock NeuroPort acquisition.",
+          "confidence": "HIGH",
+          "source": "BrainGate / Blackrock documentation"
+        },
+        "electrode_material": "Silicon with platinum tips (Utah Array)",
+        "electrode_impedance": {
+          "value": "100-800",
+          "unit": "kOhm",
+          "confidence": "MEDIUM",
+          "source": "Published BrainGate studies"
+        }
+      }
+    },
+    {
+      "id": "neuropace-rns",
+      "manufacturer": "NeuroPace Inc.",
+      "device_name": "RNS System (Responsive Neurostimulator)",
+      "device_type": "invasive_implantable",
+      "fda_status": "PMA approved (P100026, 2013); next-gen launched",
+      "target_indication": "Drug-resistant focal epilepsy",
+      "core_specs": {
+        "channel_count": {
+          "value": 4,
+          "unit": "amplifier channels",
+          "notes": "Senses from up to 4 channels. Each lead has 4 electrode contacts. Two leads supported (8 contacts total, mapped to 4 amp channels).",
+          "confidence": "HIGH",
+          "source": "NeuroPace RNS System manual; FDA PMA P100026"
+        },
+        "implant_dimensions": {
+          "value": "60 x 27.5 x 7.5",
+          "unit": "mm",
+          "notes": "Neurostimulator body. Implanted in cranial bone (craniectomy pocket).",
+          "confidence": "HIGH",
+          "source": "NIH BRAIN Initiative device info sheet"
+        },
+        "weight": {
+          "value": null,
+          "unit": "g",
+          "notes": "Not found in public sources.",
+          "confidence": null,
+          "source": null
+        },
+        "battery_life": {
+          "value": "8-10.8",
+          "unit": "years",
+          "notes": "Next-gen: 8 years. Original model: up to 10.8 years at medium settings. Non-rechargeable.",
+          "confidence": "HIGH",
+          "source": "NeuroPace press release; FDA labeling"
+        },
+        "charging_method": "Non-rechargeable (primary cell); device replacement at end-of-life",
+        "directionality": "bidirectional (sensing + responsive stimulation)",
+        "implant_location": "cranial (neurostimulator in skull bone); leads at seizure foci (cortical or depth)"
+      },
+      "physics_constraints": {
+        "operating_frequency_neural": {
+          "value": "ECoG bandwidth",
+          "notes": "Records electrocorticographic (ECoG) patterns. Specific filter range not publicly detailed.",
+          "confidence": "MEDIUM",
+          "source": "NeuroPace documentation"
+        },
+        "wireless_protocol": {
+          "value": "Proprietary near-field telemetry (wand-based)",
+          "notes": "Uses a programming wand held near the device for data download and programming. Not continuous wireless streaming.",
+          "confidence": "HIGH",
+          "source": "NeuroPace RNS System manual"
+        },
+        "electrode_material": {
+          "value": "Platinum-iridium",
+          "notes": "4 contacts per lead, configurable as anode/cathode. Case can serve as cathode.",
+          "confidence": "HIGH",
+          "source": "NeuroPace documentation; PMC review (PMC4598207)"
+        },
+        "electrode_impedance": {
+          "value": null,
+          "notes": "Impedance stabilizes after ~1 year. Constant-current design compensates for impedance changes.",
+          "confidence": "LOW",
+          "source": "PMC4598207"
+        },
+        "sampling_rate": {
+          "value": null,
+          "unit": "Hz",
+          "notes": "Internal sampling rate not publicly detailed in available sources.",
+          "confidence": null,
+          "source": null
+        },
+        "stimulation_parameters": {
+          "current": "Up to 12 mA",
+          "frequency": "1-333 Hz",
+          "pulse_width": "40-1000 us",
+          "notes": "Responsive stimulation triggered by detected abnormal ECoG patterns.",
+          "confidence": "MEDIUM",
+          "source": "NeuroPace programming manual; PMC4598207"
+        }
+      }
+    },
+    {
+      "id": "medtronic-percept-pc",
+      "manufacturer": "Medtronic plc",
+      "device_name": "Percept PC Neurostimulator",
+      "device_type": "invasive_implantable",
+      "fda_status": "PMA approved (2020)",
+      "target_indication": "Parkinson's disease, essential tremor, dystonia, epilepsy, OCD",
+      "core_specs": {
+        "channel_count": {
+          "value": "2 (dual-channel IPG)",
+          "unit": "stimulation channels",
+          "notes": "Supports 1-2 DBS leads. BrainSense technology enables simultaneous sensing and stimulation.",
+          "confidence": "HIGH",
+          "source": "Medtronic product page; Expert Rev Med Devices 2021"
+        },
+        "implant_dimensions": {
+          "value": "68 x 55 x 11",
+          "unit": "mm",
+          "notes": "20% smaller and thinner than predecessor Activa PC.",
+          "confidence": "HIGH",
+          "source": "ResearchGate figure; Medtronic documentation"
+        },
+        "weight": {
+          "value": 61,
+          "unit": "g",
+          "confidence": "HIGH",
+          "source": "ResearchGate publication (volume 33 cm3, mass 61 g)"
+        },
+        "volume": {
+          "value": 33,
+          "unit": "cm3",
+          "confidence": "HIGH",
+          "source": "Device profile publication (Expert Rev Med Devices 2021)"
+        },
+        "battery_life": {
+          "value": "~5 years estimated (non-rechargeable)",
+          "unit": "years",
+          "notes": "Silver vanadium oxide primary cell. BrainSense sensing shortens battery life. Percept RC variant: rechargeable, 15+ year service life.",
+          "confidence": "MEDIUM",
+          "source": "Medtronic documentation; expert review"
+        },
+        "charging_method": "Non-rechargeable (Percept PC); Wireless inductive recharging (Percept RC)",
+        "directionality": "bidirectional (stimulation + BrainSense LFP recording)",
+        "implant_location": "subcutaneous chest pocket (IPG); leads in subthalamic nucleus, globus pallidus, or thalamus"
+      },
+      "physics_constraints": {
+        "operating_frequency_neural": {
+          "value": "LFP range, typically 1-100 Hz",
+          "notes": "BrainSense records local field potentials, not single units.",
+          "confidence": "MEDIUM",
+          "source": "PMC11299490; Medtronic documentation"
+        },
+        "wireless_protocol": {
+          "value": "Proprietary short-range telemetry (Bluetooth-based clinician programmer)",
+          "confidence": "MEDIUM",
+          "source": "Medtronic documentation"
+        },
+        "electrode_material": {
+          "value": "Platinum-iridium",
+          "confidence": "HIGH",
+          "source": "Medtronic DBS lead specifications"
+        },
+        "stimulation_parameters": {
+          "frequency": "2-250 Hz",
+          "pulse_width": "20-450 us",
+          "amplitude": "Up to 25.5 mA (constant current)",
+          "confidence": "HIGH",
+          "source": "Medtronic Percept PC clinician manual"
+        },
+        "mri_compatibility": "3T full-body MRI conditional"
+      }
+    },
+    {
+      "id": "medtronic-percept-rc",
+      "manufacturer": "Medtronic plc",
+      "device_name": "Percept RC Neurostimulator",
+      "device_type": "invasive_implantable",
+      "fda_status": "PMA approved (Jan 2024)",
+      "target_indication": "Same as Percept PC (Parkinson's, tremor, dystonia, epilepsy, OCD)",
+      "core_specs": {
+        "channel_count": {
+          "value": "2 (dual-channel IPG)",
+          "unit": "stimulation channels",
+          "confidence": "HIGH",
+          "source": "Medtronic press release Jan 2024"
+        },
+        "battery_life": {
+          "value": ">15",
+          "unit": "years service life",
+          "notes": "Rechargeable variant with consistent fast recharge.",
+          "confidence": "HIGH",
+          "source": "Medtronic press release Jan 2024"
+        },
+        "charging_method": "Wireless inductive recharging",
+        "directionality": "bidirectional (stimulation + BrainSense LFP recording)",
+        "implant_location": "subcutaneous chest pocket; DBS leads in brain"
+      }
+    },
+    {
+      "id": "synchron-stentrode",
+      "manufacturer": "Synchron Inc.",
+      "device_name": "Stentrode (with BrainPort transmitter)",
+      "device_type": "invasive_endovascular",
+      "fda_status": "IDE approved; COMMAND trial ongoing (US)",
+      "target_indication": "ALS, severe paralysis",
+      "core_specs": {
+        "channel_count": {
+          "value": 16,
+          "unit": "electrodes",
+          "notes": "16-electrode sensing array on self-expanding nitinol stent.",
+          "confidence": "HIGH",
+          "source": "Synchron technology page; JAMA Neurology publication (PMC9857731)"
+        },
+        "power_consumption_total": {
+          "value": "<10",
+          "unit": "mW",
+          "notes": "Total power budget constrained to less than 10 mW. Power gating reduces idle consumption.",
+          "confidence": "HIGH",
+          "source": "Auctores technical review of Stentrode system"
+        },
+        "implant_dimensions": {
+          "value": "Stent diameter matches vessel: 4-7 mm at superior sagittal sinus",
+          "unit": "mm",
+          "notes": "Stent-electrode array deployed endovascularly. BrainPort receiver implanted in chest.",
+          "confidence": "HIGH",
+          "source": "JAMA Neurology publication; Synchron documentation"
+        },
+        "weight": {
+          "value": null,
+          "notes": "Not publicly available.",
+          "confidence": null,
+          "source": null
+        },
+        "battery_life": {
+          "value": 10,
+          "unit": "years (design target)",
+          "notes": "Wireless power via near-field RF to chest-mounted BrainPort unit. Avoids invasive battery replacements.",
+          "confidence": "MEDIUM",
+          "source": "Auctores technical review"
+        },
+        "charging_method": "Wireless near-field RF inductive power (~30 mm depth, ~2% efficiency)",
+        "directionality": "read-only (recording)",
+        "implant_location": "endovascular (superior sagittal sinus, adjacent to motor cortex); BrainPort receiver in chest"
+      },
+      "physics_constraints": {
+        "operating_frequency_neural": {
+          "value": "1-300 Hz",
+          "unit": "Hz",
+          "notes": "Low-noise amplifier optimized for this range.",
+          "confidence": "HIGH",
+          "source": "Auctores technical review"
+        },
+        "wireless_protocol": {
+          "value": "Bluetooth Low Energy (BLE)",
+          "notes": "BrainPort chest unit transmits via BLE to external devices. Practical limit ~1 Mbps.",
+          "confidence": "HIGH",
+          "source": "Auctores technical review; Being Patient article"
+        },
+        "data_rate": {
+          "value": "<1",
+          "unit": "Mbps",
+          "notes": "BLE practical upper limit in implantable configuration.",
+          "confidence": "MEDIUM",
+          "source": "Auctores technical review"
+        },
+        "electrode_material": {
+          "value": "Platinum electrodes on nitinol (nickel-titanium) self-expanding stent",
+          "confidence": "HIGH",
+          "source": "JAMA Neurology publication; Wikipedia"
+        },
+        "electrode_impedance": {
+          "value": 37,
+          "unit": "kOhm",
+          "notes": "Mean impedance 37 +/- 11 kOhm between recording and reference electrodes.",
+          "confidence": "HIGH",
+          "source": "JAMA Neurology publication (PMC9857731)"
+        },
+        "electrode_surface_area": {
+          "value": 0.3,
+          "unit": "mm2",
+          "notes": "Per electrode; intercontact spacing 3 mm.",
+          "confidence": "HIGH",
+          "source": "JAMA Neurology publication"
+        },
+        "input_noise": {
+          "value": "<2.5",
+          "unit": "uVrms",
+          "notes": "Input-referred noise floor of low-noise amplifier.",
+          "confidence": "HIGH",
+          "source": "Auctores technical review"
+        },
+        "sampling_rate": {
+          "value": null,
+          "unit": "kHz",
+          "notes": "Not publicly specified. Power gating can reduce sampling rates during idle.",
+          "confidence": null,
+          "source": null
+        }
+      }
+    },
+    {
+      "id": "cochlear-nucleus-profile-plus",
+      "manufacturer": "Cochlear Ltd",
+      "device_name": "Nucleus Profile Plus (CI632) with Contour Advance Electrode",
+      "device_type": "invasive_implantable",
+      "fda_status": "PMA approved",
+      "target_indication": "Severe to profound sensorineural hearing loss",
+      "core_specs": {
+        "channel_count": {
+          "value": 22,
+          "unit": "electrodes (stimulation channels)",
+          "notes": "22 half-banded platinum electrodes. Most active sequential contacts in the cochlear implant industry.",
+          "confidence": "HIGH",
+          "source": "Cochlear product page; cochlearimplanthelp.com spec sheet"
+        },
+        "power_consumption_total": {
+          "value": null,
+          "unit": "mW",
+          "notes": "Internal receiver/stimulator has no battery; derives all power from external sound processor via RF link.",
+          "confidence": "HIGH",
+          "source": "General cochlear implant architecture; PMC2782849"
+        },
+        "implant_dimensions": {
+          "value": null,
+          "notes": "Profile Plus is the thinnest Cochlear implant. Specific dimensions not found in public sources.",
+          "confidence": null,
+          "source": null
+        },
+        "weight": {
+          "value": 9.2,
+          "unit": "g",
+          "notes": "Without sheath, including electrode array.",
+          "confidence": "HIGH",
+          "source": "cochlearimplanthelp.com CI632 spec sheet"
+        },
+        "battery_life": {
+          "value": "N/A (externally powered via RF from sound processor)",
+          "unit": null,
+          "notes": "Sound processor battery: rechargeable, ~16-30 hours per charge depending on processor model.",
+          "confidence": "HIGH",
+          "source": "Cochlear product documentation"
+        },
+        "directionality": "write-only (stimulation)",
+        "implant_location": "temporal bone (receiver/stimulator); electrode array in cochlea"
+      },
+      "physics_constraints": {
+        "stimulation_rate": {
+          "value": "250-4800",
+          "unit": "pps per channel",
+          "notes": "Depends on processing strategy. ACE strategy: up to 2500 Hz. Max rates 1245-4800 pps depending on configuration.",
+          "confidence": "HIGH",
+          "source": "PMC4111375; PMC10468116"
+        },
+        "wireless_protocol": {
+          "value": "Proprietary RF inductive link (transcutaneous)",
+          "notes": "Coil-to-coil between external processor and internal receiver.",
+          "confidence": "HIGH",
+          "source": "General cochlear implant architecture"
+        },
+        "electrode_material": {
+          "value": "Platinum (half-banded electrodes)",
+          "confidence": "HIGH",
+          "source": "Cochlear product page"
+        },
+        "electrode_spacing": {
+          "value": "0.4-0.8",
+          "unit": "mm",
+          "notes": "Non-uniform spacing over 14.25 mm active electrode length.",
+          "confidence": "HIGH",
+          "source": "Cochlear Contour Advance product page"
+        },
+        "compatible_processors": [
+          "Nucleus 7 (CP1000)",
+          "Nucleus 8 (CP1100)",
+          "Kanso 2 (CP1150)"
+        ]
+      }
+    },
+    {
+      "id": "medel-cochlear",
+      "manufacturer": "MED-EL GmbH",
+      "device_name": "MED-EL Cochlear Implant (FLEX Series)",
+      "device_type": "invasive_implantable",
+      "fda_status": "PMA approved",
+      "target_indication": "Sensorineural hearing loss",
+      "core_specs": {
+        "channel_count": {
+          "value": 12,
+          "unit": "stimulation channels",
+          "notes": "12 channels with 24 current sources (12 pairs). 19 physical active platinum electrode contacts.",
+          "confidence": "HIGH",
+          "source": "MED-EL product page; cochlearimplanthelp.com"
+        },
+        "electrode_array_lengths": {
+          "value": "20-34",
+          "unit": "mm",
+          "notes": "FLEX series: FLEX 20 (20mm), FLEX 24, FLEX 26, FLEX28, FLEXSOFT (31.5mm), FLEX 34 (34mm). Longest arrays in the industry for complete cochlear coverage.",
+          "confidence": "HIGH",
+          "source": "MED-EL product page; PMC4111377"
+        },
+        "weight": {
+          "value": null,
+          "notes": "Not found in public sources.",
+          "confidence": null,
+          "source": null
+        },
+        "directionality": "write-only (stimulation)",
+        "implant_location": "temporal bone; electrode array in cochlea"
+      },
+      "physics_constraints": {
+        "electrode_material": {
+          "value": "Platinum contacts with wave-shaped wires on lateral-wall design",
+          "confidence": "HIGH",
+          "source": "MED-EL product page"
+        },
+        "wireless_protocol": {
+          "value": "Proprietary RF inductive link",
+          "confidence": "HIGH",
+          "source": "MED-EL product documentation"
+        }
+      }
+    },
+    {
+      "id": "boston-scientific-vercise",
+      "manufacturer": "Boston Scientific Corp.",
+      "device_name": "Vercise Genus DBS System",
+      "device_type": "invasive_implantable",
+      "fda_status": "PMA approved",
+      "target_indication": "Parkinson's disease, essential tremor, dystonia",
+      "core_specs": {
+        "channel_count": {
+          "value": "8-16 electrode contacts per lead; 32-channel IPG",
+          "unit": "contacts",
+          "notes": "Standard leads: 8 contacts. Cartesia X / Cartesia HX directional leads: 16 contacts (first and only FDA-approved 16-contact DBS lead).",
+          "confidence": "HIGH",
+          "source": "Boston Scientific product page"
+        },
+        "implant_dimensions": {
+          "value": "Smallest footprint: 20 cm2 (IPG surface area)",
+          "unit": "cm2",
+          "notes": "Gentle contoured oval shape.",
+          "confidence": "HIGH",
+          "source": "Boston Scientific product page"
+        },
+        "battery_life": {
+          "value": "25 years (rechargeable); non-rechargeable option also available",
+          "unit": "years",
+          "notes": "Zero Volt battery technology prevents failure even if completely discharged. Rechargeable: 30 days between recharge cycles.",
+          "confidence": "HIGH",
+          "source": "Boston Scientific product page"
+        },
+        "charging_method": "Wireless inductive recharging (rechargeable variant)",
+        "directionality": "stimulation only (no sensing)",
+        "implant_location": "subcutaneous chest pocket (IPG); leads in subthalamic nucleus, GPi, or VIM thalamus"
+      },
+      "physics_constraints": {
+        "wireless_protocol": {
+          "value": "Proprietary telemetry for programming",
+          "confidence": "MEDIUM",
+          "source": "Boston Scientific documentation"
+        },
+        "electrode_material": {
+          "value": "Platinum-iridium",
+          "confidence": "HIGH",
+          "source": "Boston Scientific lead specifications"
+        },
+        "mri_compatibility": "1.5T and 3T MRI conditional"
+      }
+    },
+    {
+      "id": "abbott-infinity-dbs",
+      "manufacturer": "Abbott (St. Jude Medical)",
+      "device_name": "St. Jude Medical Infinity DBS System",
+      "device_type": "invasive_implantable",
+      "fda_status": "PMA approved (P140009)",
+      "target_indication": "Parkinson's disease, essential tremor, dystonia",
+      "core_specs": {
+        "channel_count": {
+          "value": 8,
+          "unit": "electrode contacts per lead",
+          "notes": "8-contact directional lead (1.27 mm diameter). Two center electrodes segmented into 3 segments each for directional stimulation. Supports single-lead (Infinity 5) or bilateral (Infinity 7).",
+          "confidence": "HIGH",
+          "source": "Abbott product page; FDA P140009"
+        },
+        "implant_dimensions": {
+          "value": null,
+          "notes": "Infinity 5 IPG: 30.4 cm3 volume. Infinity 7 IPG: 38.6 cm3 volume. Smallest non-rechargeable DBS device on market. Lead diameter: 1.27 mm.",
+          "confidence": "HIGH",
+          "source": "PMC7502302; Abbott documentation"
+        },
+        "weight": {
+          "value": null,
+          "notes": "25% smaller than competition at time of launch. Exact weight not found in public sources.",
+          "confidence": null,
+          "source": null
+        },
+        "battery_life": {
+          "value": 5,
+          "unit": "years (Infinity 7 predicted)",
+          "notes": "Non-rechargeable constant-current device.",
+          "confidence": "MEDIUM",
+          "source": "PMC7502302"
+        },
+        "charging_method": "Non-rechargeable",
+        "directionality": "stimulation only",
+        "implant_location": "subcutaneous pocket (IPG); leads in brain targets"
+      },
+      "physics_constraints": {
+        "stimulation_parameters": {
+          "frequency": "2-240 Hz",
+          "pulse_width": "20-500 us",
+          "confidence": "HIGH",
+          "source": "PMC7502302; Abbott documentation"
+        },
+        "electrode_material": {
+          "value": "Platinum-iridium",
+          "confidence": "HIGH",
+          "source": "Abbott lead specifications"
+        },
+        "lead_diameter": {
+          "value": 1.27,
+          "unit": "mm",
+          "confidence": "HIGH",
+          "source": "Abbott/Medical Design and Outsourcing article"
+        }
+      }
+    },
+    {
+      "id": "emotiv-epoc-x",
+      "manufacturer": "EMOTIV Inc.",
+      "device_name": "EPOC X",
+      "device_type": "non_invasive_eeg",
+      "fda_status": "Not a medical device (research/consumer)",
+      "target_indication": "Research EEG, BCI development, neurofeedback",
+      "core_specs": {
+        "channel_count": {
+          "value": 14,
+          "unit": "EEG channels",
+          "notes": "Plus CMS/DRL references at P3/P4. Positions: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4.",
+          "confidence": "HIGH",
+          "source": "EMOTIV EPOC X User Manual (Gitbook)"
+        },
+        "implant_dimensions": {
+          "value": "N/A (headset)",
+          "notes": "Wearable headset, not implanted.",
+          "confidence": "HIGH",
+          "source": "EMOTIV product page"
+        },
+        "weight": {
+          "value": null,
+          "notes": "Lightweight wireless headset. Exact weight not found.",
+          "confidence": null,
+          "source": null
+        },
+        "battery_life": {
+          "value": "Up to 9 hours",
+          "unit": "hours",
+          "notes": "Internal rechargeable Li-Po battery.",
+          "confidence": "HIGH",
+          "source": "EMOTIV product page"
+        },
+        "charging_method": "USB charging",
+        "directionality": "read-only (recording)",
+        "implant_location": "scalp (non-invasive headset)"
+      },
+      "physics_constraints": {
+        "operating_frequency_neural": {
+          "value": "0.2-45 Hz",
+          "unit": "Hz",
+          "notes": "Bandwidth with digital notch filters at 50 Hz and 60 Hz.",
+          "confidence": "HIGH",
+          "source": "EMOTIV EPOC X User Manual"
+        },
+        "wireless_protocol": {
+          "value": "Proprietary 2.4 GHz wireless (USB dongle) + Bluetooth Low Energy",
+          "confidence": "HIGH",
+          "source": "EMOTIV product page"
+        },
+        "electrode_material": {
+          "value": "Saline-based felt sensors (rehydratable)",
+          "confidence": "HIGH",
+          "source": "EMOTIV product page"
+        },
+        "sampling_rate": {
+          "value": "128/256",
+          "unit": "SPS",
+          "notes": "Internal ADC runs at 2048 Hz; downsampled to 128 or 256 SPS output.",
+          "confidence": "HIGH",
+          "source": "EMOTIV EPOC X User Manual"
+        },
+        "adc_resolution": {
+          "value": "14 (effective); 16-bit ADC",
+          "unit": "bits",
+          "notes": "1 LSB = 0.51 uV at 14-bit. 2 bits discarded as instrumental noise floor. Can be set to 16-bit mode.",
+          "confidence": "HIGH",
+          "source": "EMOTIV EPOC X User Manual"
+        },
+        "dynamic_range": {
+          "value": 8400,
+          "unit": "uVpp",
+          "notes": "Input referred, AC coupled.",
+          "confidence": "HIGH",
+          "source": "EMOTIV EPOC X User Manual"
+        },
+        "filter": "Built-in digital 5th order Sinc filter"
+      }
+    },
+    {
+      "id": "emotiv-insight",
+      "manufacturer": "EMOTIV Inc.",
+      "device_name": "Insight",
+      "device_type": "non_invasive_eeg",
+      "fda_status": "Not a medical device (consumer)",
+      "target_indication": "Consumer neurofeedback, BCI development",
+      "core_specs": {
+        "channel_count": {
+          "value": 5,
+          "unit": "EEG channels",
+          "notes": "Positions: AF3, AF4, T7, T8, Pz. Plus CMS/DRL references on left mastoid.",
+          "confidence": "HIGH",
+          "source": "EMOTIV Insight product page"
+        },
+        "battery_life": {
+          "value": "Up to 8 hours",
+          "unit": "hours",
+          "confidence": "HIGH",
+          "source": "EMOTIV product page"
+        },
+        "directionality": "read-only",
+        "implant_location": "scalp (non-invasive headset)"
+      },
+      "physics_constraints": {
+        "sampling_rate": {
+          "value": 128,
+          "unit": "SPS",
+          "confidence": "HIGH",
+          "source": "EMOTIV Insight product page"
+        },
+        "adc_resolution": {
+          "value": 16,
+          "unit": "bits",
+          "notes": "1 LSB = 0.1275 uV.",
+          "confidence": "HIGH",
+          "source": "EMOTIV Insight product page"
+        },
+        "operating_frequency_neural": {
+          "value": "0.5-43 Hz",
+          "unit": "Hz",
+          "confidence": "HIGH",
+          "source": "EMOTIV Insight product page"
+        },
+        "wireless_protocol": {
+          "value": "Bluetooth Low Energy (Bluetooth 5)",
+          "confidence": "HIGH",
+          "source": "EMOTIV Insight product page"
+        },
+        "electrode_material": {
+          "value": "Hydrophilic semi-dry polymer sensors",
+          "confidence": "HIGH",
+          "source": "EMOTIV Insight product page"
+        },
+        "dynamic_range": {
+          "value": 8400,
+          "unit": "uVpp",
+          "confidence": "HIGH",
+          "source": "EMOTIV Insight product page"
+        }
+      }
+    },
+    {
+      "id": "openbci-cyton",
+      "manufacturer": "OpenBCI Inc.",
+      "device_name": "Cyton Biosensing Board",
+      "device_type": "non_invasive_eeg_board",
+      "fda_status": "Not a medical device (research/DIY)",
+      "target_indication": "Open-source EEG/EMG/ECG research and BCI development",
+      "core_specs": {
+        "channel_count": {
+          "value": 8,
+          "unit": "differential channels",
+          "notes": "Expandable to 16 channels with Daisy module (at 125 SPS). High gain, low noise inputs.",
+          "confidence": "HIGH",
+          "source": "OpenBCI Shop product page"
+        },
+        "power_consumption_total": {
+          "value": null,
+          "notes": "Operating voltage: 3.3V digital, +/-2.5V analog. Input voltage 3.3-12V.",
+          "confidence": "MEDIUM",
+          "source": "OpenBCI documentation"
+        },
+        "implant_dimensions": {
+          "value": "N/A (PCB board)",
+          "notes": "Open-source PCB; pairs with various electrode caps.",
+          "confidence": "HIGH",
+          "source": "OpenBCI product page"
+        },
+        "battery_life": {
+          "value": null,
+          "notes": "Powered by external battery or USB. Not integrated battery.",
+          "confidence": "HIGH",
+          "source": "OpenBCI documentation"
+        },
+        "directionality": "read-only (recording)",
+        "implant_location": "scalp (non-invasive, with electrode cap)"
+      },
+      "physics_constraints": {
+        "sampling_rate": {
+          "value": 250,
+          "unit": "SPS",
+          "notes": "250 SPS for 8 channels. 125 SPS with 16-channel Daisy configuration.",
+          "confidence": "HIGH",
+          "source": "OpenBCI product page"
+        },
+        "adc_resolution": {
+          "value": 24,
+          "unit": "bits",
+          "notes": "Texas Instruments ADS1299 ADC. Ganglion transmits 18-bit (compressed from 24-bit).",
+          "confidence": "HIGH",
+          "source": "OpenBCI documentation"
+        },
+        "adc_chip": "Texas Instruments ADS1299",
+        "input_noise": {
+          "value": "0.09-0.14",
+          "unit": "uVrms",
+          "notes": "Measured with inputs shorted to internal GND.",
+          "confidence": "HIGH",
+          "source": "OpenBCI forum; documentation"
+        },
+        "wireless_protocol": {
+          "value": "RFDuino (custom Bluetooth via USB dongle); WiFi shield available",
+          "confidence": "HIGH",
+          "source": "OpenBCI documentation"
+        },
+        "programmable_gain": {
+          "value": [1, 2, 4, 6, 8, 12, 24],
+          "notes": "ADS1299 programmable gain amplifier.",
+          "confidence": "HIGH",
+          "source": "OpenBCI documentation"
+        },
+        "electrode_material": {
+          "value": "Compatible with passive and active electrodes (gold cup, Ag/AgCl, dry, etc.)",
+          "confidence": "HIGH",
+          "source": "OpenBCI documentation"
+        }
+      }
+    },
+    {
+      "id": "openbci-ganglion",
+      "manufacturer": "OpenBCI Inc.",
+      "device_name": "Ganglion Board",
+      "device_type": "non_invasive_eeg_board",
+      "fda_status": "Not a medical device (research/DIY)",
+      "target_indication": "Entry-level open-source EEG/EMG/ECG",
+      "core_specs": {
+        "channel_count": {
+          "value": 4,
+          "unit": "channels",
+          "confidence": "HIGH",
+          "source": "OpenBCI Shop product page"
+        },
+        "directionality": "read-only",
+        "implant_location": "scalp (non-invasive)"
+      },
+      "physics_constraints": {
+        "sampling_rate": {
+          "value": 200,
+          "unit": "SPS",
+          "confidence": "HIGH",
+          "source": "OpenBCI product page"
+        },
+        "adc_resolution": {
+          "value": "24-bit sampled, 18-bit transmitted",
+          "unit": "bits",
+          "notes": "Compresses 24-bit to 18-bit for BLE transmission. Worst case resolution loss: ~0.12 uV.",
+          "confidence": "HIGH",
+          "source": "OpenBCI Ganglion documentation"
+        },
+        "wireless_protocol": {
+          "value": "Bluetooth Low Energy (BLE)",
+          "confidence": "HIGH",
+          "source": "OpenBCI product page"
+        }
+      }
+    },
+    {
+      "id": "muse-2",
+      "manufacturer": "InteraXon Inc.",
+      "device_name": "Muse 2",
+      "device_type": "non_invasive_eeg",
+      "fda_status": "Not a medical device (consumer wellness)",
+      "target_indication": "Meditation, sleep, neurofeedback",
+      "core_specs": {
+        "channel_count": {
+          "value": 4,
+          "unit": "EEG channels",
+          "notes": "Electrode positions: TP9, AF7, AF8, TP10. Reference at FPz (CMS/DRL).",
+          "confidence": "HIGH",
+          "source": "Muse 2 specification sheet (ITESM)"
+        },
+        "battery_life": {
+          "value": "5 hours",
+          "unit": "hours",
+          "confidence": "HIGH",
+          "source": "Muse product page"
+        },
+        "charging_method": "USB charging",
+        "directionality": "read-only",
+        "implant_location": "scalp (non-invasive headband)"
+      },
+      "physics_constraints": {
+        "sampling_rate": {
+          "value": 256,
+          "unit": "Hz",
+          "confidence": "HIGH",
+          "source": "Muse 2 specification sheet"
+        },
+        "adc_resolution": {
+          "value": 12,
+          "unit": "bits",
+          "confidence": "HIGH",
+          "source": "Muse 2 specification sheet"
+        },
+        "wireless_protocol": {
+          "value": "Bluetooth Low Energy",
+          "confidence": "HIGH",
+          "source": "Muse product page"
+        },
+        "electrode_material": {
+          "value": "Dry conductive rubber (forehead) and conductive silicone (behind ear)",
+          "confidence": "HIGH",
+          "source": "Muse documentation"
+        }
+      }
+    },
+    {
+      "id": "muse-s",
+      "manufacturer": "InteraXon Inc.",
+      "device_name": "Muse S (Gen 2) / Muse S Athena",
+      "device_type": "non_invasive_eeg",
+      "fda_status": "Not a medical device (consumer wellness)",
+      "target_indication": "Sleep tracking, meditation, neurofeedback",
+      "core_specs": {
+        "channel_count": {
+          "value": "4 EEG + 2 auxiliary",
+          "unit": "channels",
+          "notes": "Same EEG positions as Muse 2 (TP9, AF7, AF8, TP10) plus 2 amplified aux channels.",
+          "confidence": "HIGH",
+          "source": "Muse comparison page"
+        },
+        "battery_life": {
+          "value": "10 hours",
+          "unit": "hours",
+          "confidence": "HIGH",
+          "source": "Muse product page"
+        },
+        "directionality": "read-only",
+        "implant_location": "scalp (non-invasive soft headband)"
+      },
+      "physics_constraints": {
+        "sampling_rate": {
+          "value": 256,
+          "unit": "Hz",
+          "confidence": "HIGH",
+          "source": "Muse comparison page"
+        },
+        "adc_resolution": {
+          "value": 12,
+          "unit": "bits",
+          "confidence": "HIGH",
+          "source": "Muse S specifications"
+        },
+        "wireless_protocol": {
+          "value": "Bluetooth Low Energy",
+          "confidence": "HIGH",
+          "source": "Muse product page"
+        }
+      }
+    },
+    {
+      "id": "corticom",
+      "manufacturer": "Johns Hopkins University (research consortium)",
+      "device_name": "CortiCom (Cortical Communication) System",
+      "device_type": "invasive_implantable_temporary",
+      "fda_status": "IDE clinical trial (NCT03567213)",
+      "target_indication": "Speech restoration for ALS and locked-in syndrome",
+      "core_specs": {
+        "channel_count": {
+          "value": 128,
+          "unit": "channels",
+          "notes": "Up to 4 high-density ECoG grids totaling 128 channels. Grid: 8x16 electrodes, 2 mm diameter, 5 mm spacing.",
+          "confidence": "HIGH",
+          "source": "ClinicalTrials.gov NCT03567213; PMC6361062"
+        },
+        "implant_duration": {
+          "value": 6,
+          "unit": "months",
+          "notes": "Temporary implantation period per protocol.",
+          "confidence": "HIGH",
+          "source": "ClinicalTrials.gov"
+        },
+        "directionality": "read-only (ECoG recording)",
+        "implant_location": "cortical surface (subdural ECoG over speech and hand motor areas)"
+      },
+      "physics_constraints": {
+        "operating_frequency_neural": {
+          "value": "Broadband including high-gamma (60-200 Hz)",
+          "notes": "Decodes broadband high-gamma cortical representations for speech and upper limb movements.",
+          "confidence": "HIGH",
+          "source": "PMC6361062"
+        },
+        "electrode_material": {
+          "value": "Platinum subdural cortical electrode grids (PMT, 510(k)-cleared)",
+          "confidence": "HIGH",
+          "source": "ClinicalTrials.gov; NIH grant info"
+        },
+        "data_acquisition": {
+          "value": "Blackrock Microsystems NeuroPort Neural Signal Processor (external)",
+          "confidence": "HIGH",
+          "source": "ClinicalTrials.gov"
+        },
+        "sampling_rate": {
+          "value": 30,
+          "unit": "kHz",
+          "notes": "Via Blackrock NeuroPort system.",
+          "confidence": "HIGH",
+          "source": "Blackrock NeuroPort specifications"
+        }
+      }
+    },
+    {
+      "id": "paradromics-connexus",
+      "manufacturer": "Paradromics Inc.",
+      "device_name": "Connexus Direct Data Interface",
+      "device_type": "invasive_implantable",
+      "fda_status": "IDE approved (Nov 2025); Connect-One clinical study",
+      "target_indication": "Speech restoration for ALS and paralysis",
+      "core_specs": {
+        "channel_count": {
+          "value": "421 per module; up to 1681 with 4 modules",
+          "unit": "intracortical channels",
+          "notes": "Each implant smaller than a dime with 421 microelectrodes. Up to 4 implants linked for 1681 channels total.",
+          "confidence": "HIGH",
+          "source": "Paradromics product page; Wikipedia"
+        },
+        "implant_dimensions": {
+          "value": "7.5 mm wide electrode array; <19 mm module diameter (smaller than a dime)",
+          "unit": "mm",
+          "notes": "Electrode array inserted 1.5 mm into brain. Individual electrodes <40 microns (thinner than a hair).",
+          "confidence": "HIGH",
+          "source": "Paradromics product page"
+        },
+        "battery_life": {
+          "value": null,
+          "notes": "Powered via inductive charging (like smartphone wireless charging). Second transceiver provides power.",
+          "confidence": "MEDIUM",
+          "source": "Paradromics product page"
+        },
+        "charging_method": "Wireless inductive power coupling + near-infrared optical data link",
+        "directionality": "read-only (recording)",
+        "implant_location": "cortical (intracortical, 1.5 mm depth)"
+      },
+      "physics_constraints": {
+        "data_rate": {
+          "value": ">200",
+          "unit": "bps (information transfer rate)",
+          "notes": "Pre-clinical: >200 bits per second ITR with 56 ms system latency. Raw neural data rate would be much higher.",
+          "confidence": "HIGH",
+          "source": "Paradromics product page; IEEE Pulse article"
+        },
+        "wireless_protocol": {
+          "value": "Near-infrared optical data link (secure) + inductive power coupling",
+          "notes": "Patented optical data link rather than RF.",
+          "confidence": "HIGH",
+          "source": "Paradromics product page; Parola Analytics patent analysis"
+        },
+        "electrode_material": {
+          "value": "Microwire electrodes (<40 microns diameter)",
+          "notes": "Material not publicly specified. Likely platinum or platinum-iridium.",
+          "confidence": "LOW",
+          "source": "Paradromics product page"
+        },
+        "electrode_penetration_depth": {
+          "value": 1.5,
+          "unit": "mm",
+          "confidence": "HIGH",
+          "source": "Paradromics product page"
+        }
+      }
+    },
+    {
+      "id": "precision-layer7",
+      "manufacturer": "Precision Neuroscience Corp.",
+      "device_name": "Layer 7 Cortical Interface",
+      "device_type": "invasive_minimally_invasive",
+      "fda_status": "510(k) cleared (K242618, 2025); for up to 30-day use",
+      "target_indication": "Intraoperative cortical mapping; future: chronic BCI",
+      "core_specs": {
+        "channel_count": {
+          "value": 1024,
+          "unit": "electrodes per array module",
+          "notes": "Modular design: multiple arrays can be tiled for 2000+ channels. 600x greater electrode density than standard cortical arrays.",
+          "confidence": "HIGH",
+          "source": "Precision Neuroscience product page; bioRxiv preprint 2022.01.02.474656"
+        },
+        "implant_dimensions": {
+          "value": "~postage stamp sized array; 5 um thick polyimide substrate",
+          "unit": "um thickness",
+          "notes": "1/5th the thickness of a human hair. Inserted subdurally through <1 mm incision.",
+          "confidence": "HIGH",
+          "source": "Precision Neuroscience product page; Auctores review"
+        },
+        "weight": {
+          "value": null,
+          "notes": "Extremely thin film; negligible weight.",
+          "confidence": "LOW",
+          "source": "Inferred from substrate thickness"
+        },
+        "directionality": "bidirectional (recording and stimulation)",
+        "implant_location": "cortical surface (subdural, Layer 7 of cortex)"
+      },
+      "physics_constraints": {
+        "sampling_rate": {
+          "value": "20-30",
+          "unit": "kHz",
+          "notes": "20,000-30,000 samples per second per channel.",
+          "confidence": "HIGH",
+          "source": "Auctores review; Precision Neuroscience product page"
+        },
+        "adc_resolution": {
+          "value": 16,
+          "unit": "bits",
+          "confidence": "HIGH",
+          "source": "Auctores review"
+        },
+        "input_noise": {
+          "value": "<3.2",
+          "unit": "uVrms",
+          "notes": "Low-noise analog front-end, input-referred noise.",
+          "confidence": "HIGH",
+          "source": "Auctores review"
+        },
+        "electrode_material": {
+          "value": "Platinum electrodes on 5 um polyimide substrate",
+          "confidence": "HIGH",
+          "source": "bioRxiv preprint; Auctores review"
+        },
+        "electrode_diameter": {
+          "value": "50-380",
+          "unit": "um",
+          "notes": "Range of electrode diameters across array.",
+          "confidence": "HIGH",
+          "source": "bioRxiv preprint"
+        },
+        "wireless_protocol": {
+          "value": "Currently wired (external); wireless planned for future chronic version",
+          "confidence": "MEDIUM",
+          "source": "Precision Neuroscience product page"
+        }
+      }
+    },
+    {
+      "id": "darpa-n3",
+      "manufacturer": "DARPA (multiple contractor teams)",
+      "device_name": "N3 (Next-Generation Nonsurgical Neurotechnology) Program Devices",
+      "device_type": "non_invasive_or_minutely_invasive",
+      "fda_status": "Research program (not a specific device for clinical use)",
+      "target_indication": "Military: able-bodied warfighter neural control of systems",
+      "core_specs": {
+        "channel_count": {
+          "value": 16,
+          "unit": "independent channels (target)",
+          "notes": "Target: read from and write to 16 independent channels within a 16 mm3 volume within 50 ms.",
+          "confidence": "HIGH",
+          "source": "DARPA N3 program page"
+        },
+        "spatial_resolution": {
+          "value": "<1",
+          "unit": "mm3",
+          "notes": "Target neural ensemble resolution for noninvasive interfaces.",
+          "confidence": "HIGH",
+          "source": "DARPA N3 program page"
+        },
+        "latency_target": {
+          "value": 50,
+          "unit": "ms",
+          "confidence": "HIGH",
+          "source": "DARPA N3 program page"
+        },
+        "directionality": "bidirectional (read and write)",
+        "implant_location": "non-invasive (external) or minutely invasive (nanotransducers)"
+      },
+      "physics_constraints": {
+        "approaches": [
+          {
+            "team": "Carnegie Mellon University",
+            "method": "Acousto-optical recording + interfering electrical fields for stimulation",
+            "notes": "Ultrasound waves guide light into/out of brain to detect neural activity."
+          },
+          {
+            "team": "Johns Hopkins APL",
+            "method": "Coherent optical system measuring optical path-length changes",
+            "notes": "Completely noninvasive."
+          },
+          {
+            "team": "Battelle",
+            "method": "Nanotransducer-based (minutely invasive)",
+            "notes": "Advanced to Phase II. Uses nanotransducers delivered nonsurgically."
+          },
+          {
+            "team": "Teledyne",
+            "method": "Micro optically pumped magnetometers + focused ultrasound",
+            "notes": "Magnetometers detect neural magnetic fields; ultrasound writes to neurons."
+          },
+          {
+            "team": "Rice University",
+            "method": "Magnetoelectric nanotransducers",
+            "notes": "Nonsurgical delivery of nanotransducers."
+          }
+        ],
+        "notes": "N3 is a program with multiple approaches, not a single device. Performance targets are aspirational."
+      }
+    },
+    {
+      "id": "gtec-unicorn",
+      "manufacturer": "g.tec medical engineering GmbH",
+      "device_name": "Unicorn Hybrid Black",
+      "device_type": "non_invasive_eeg",
+      "fda_status": "CE marked; research device",
+      "target_indication": "EEG research, BCI development, neurofeedback",
+      "core_specs": {
+        "channel_count": {
+          "value": 8,
+          "unit": "EEG channels",
+          "confidence": "HIGH",
+          "source": "g.tec product page"
+        },
+        "battery_life": {
+          "value": null,
+          "notes": "Rechargeable; exact hours not found.",
+          "confidence": null,
+          "source": null
+        },
+        "directionality": "read-only",
+        "implant_location": "scalp (non-invasive headset)"
+      },
+      "physics_constraints": {
+        "sampling_rate": {
+          "value": 250,
+          "unit": "Hz",
+          "confidence": "HIGH",
+          "source": "g.tec product page; validation paper (Psychophysiology 2023)"
+        },
+        "adc_resolution": {
+          "value": 24,
+          "unit": "bits",
+          "confidence": "HIGH",
+          "source": "g.tec product page"
+        },
+        "operating_range": {
+          "value": "+/-750 mV",
+          "confidence": "HIGH",
+          "source": "g.tec product page"
+        },
+        "wireless_protocol": {
+          "value": "Bluetooth (2.4 GHz band)",
+          "confidence": "HIGH",
+          "source": "g.tec product page"
+        },
+        "electrode_material": {
+          "value": "Hybrid conductive material (supports dry or gel recording)",
+          "confidence": "HIGH",
+          "source": "g.tec product page"
+        }
+      }
+    },
+    {
+      "id": "kernel-flow",
+      "manufacturer": "Kernel (neurotechnology company)",
+      "device_name": "Kernel Flow (TD-fNIRS)",
+      "device_type": "non_invasive_fnirs",
+      "fda_status": "Research device (not FDA cleared for clinical use)",
+      "target_indication": "Functional neuroimaging research; brain health assessment",
+      "core_specs": {
+        "channel_count": {
+          "value": "2000+",
+          "unit": "optical channels",
+          "notes": "52 modules, each with 1 dual-wavelength laser source + 6 detectors = 312 source-detector pairs minimum. Cross-module channels add more.",
+          "confidence": "HIGH",
+          "source": "PMC8765296 (J Biomed Opt 2022)"
+        },
+        "weight": {
+          "value": 2.05,
+          "unit": "kg",
+          "confidence": "HIGH",
+          "source": "PMC8765296"
+        },
+        "directionality": "read-only (hemodynamic imaging)",
+        "implant_location": "scalp (wearable helmet)"
+      },
+      "physics_constraints": {
+        "operating_wavelengths": {
+          "value": [690, 850],
+          "unit": "nm",
+          "notes": "Dual wavelength time-domain fNIRS. Laser pulses <150 ps wide.",
+          "confidence": "HIGH",
+          "source": "PMC8765296"
+        },
+        "sampling_rate": {
+          "value": 200,
+          "unit": "Hz per detector",
+          "confidence": "HIGH",
+          "source": "PMC8765296"
+        },
+        "source_detector_separation": {
+          "value": 10,
+          "unit": "mm",
+          "notes": "Within-module SDS. Cross-module channels also available.",
+          "confidence": "HIGH",
+          "source": "PMC8765296"
+        },
+        "module_count": {
+          "value": 52,
+          "notes": "Arranged in 4 plates per hemisphere covering frontal, parietal, temporal, and occipital cortices.",
+          "confidence": "HIGH",
+          "source": "PMC8765296"
+        },
+        "wireless_protocol": {
+          "value": null,
+          "notes": "Wired (tethered to processing unit). Wearable but not wireless.",
+          "confidence": "MEDIUM",
+          "source": "PMC8765296; SPIE article"
+        }
+      }
+    }
+  ],
+  "thermal_safety_reference": {
+    "fda_max_tissue_temp_rise": {
+      "value": 1.0,
+      "unit": "degrees C",
+      "notes": "Maximum allowable temperature increase in brain tissue before cellular damage risk. Most stringent FDA guideline.",
+      "source": "FDA BCI guidance (2021); NCBI Bookshelf NBK3932"
+    },
+    "ieee_sar_limit": {
+      "value": 1.6,
+      "unit": "W/kg (10g averaged, 6 min)",
+      "source": "IEEE C95.1-2019"
+    },
+    "typical_bci_power_budget": {
+      "value": "15-40",
+      "unit": "mW",
+      "notes": "Exact limit varies by implant depth. Single-chip cortical config: max ~2.92 mW before 1 C rise. Eight-chip config: ~1.25 mW per chip.",
+      "source": "Ann Biomed Eng 2024 (Springer); NCBI Bookshelf NBK3932"
+    }
+  },
+  "source_bibliography": [
+    {
+      "key": "neuralink_2019",
+      "citation": "Musk E, Neuralink. An integrated brain-machine interface platform with thousands of channels. J Med Internet Res. 2019;21(10):e16194.",
+      "doi": "10.2196/16194",
+      "type": "white_paper"
+    },
+    {
+      "key": "blackrock_fda_510k",
+      "citation": "Blackrock Microsystems. NeuroPort Cortical Microelectrode Array System. FDA 510(k) K110010.",
+      "url": "https://510k.innolitics.com/device/K110010",
+      "type": "fda_filing"
+    },
+    {
+      "key": "neuropace_pma",
+      "citation": "NeuroPace RNS System. FDA PMA P100026.",
+      "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=p100026",
+      "type": "fda_filing"
+    },
+    {
+      "key": "synchron_jama",
+      "citation": "Mitchell P, et al. Assessment of Safety of a Fully Implanted Endovascular Brain-Computer Interface for Severe Paralysis in 4 Patients. JAMA Neurol. 2023.",
+      "pmcid": "PMC9857731",
+      "type": "peer_reviewed"
+    },
+    {
+      "key": "percept_pc_profile",
+      "citation": "Gilron R, et al. Device profile of the Percept PC deep brain stimulation system. Expert Rev Med Devices. 2021;18(4):319-332.",
+      "doi": "10.1080/17434440.2021.1909471",
+      "type": "peer_reviewed"
+    },
+    {
+      "key": "kernel_flow",
+      "citation": "Ban HY, et al. Kernel Flow: a high channel count scalable time-domain functional near-infrared spectroscopy system. J Biomed Opt. 2022;27(7):074710.",
+      "pmcid": "PMC8765296",
+      "type": "peer_reviewed"
+    },
+    {
+      "key": "precision_biorxiv",
+      "citation": "Insanally M, et al. The Layer 7 Cortical Interface: A Scalable and Minimally Invasive Brain-Computer Interface Platform. bioRxiv. 2022.",
+      "doi": "10.1101/2022.01.02.474656",
+      "type": "preprint"
+    },
+    {
+      "key": "thermal_bci",
+      "citation": "Kim S, et al. Thermal Considerations for the Design of an Implanted Cortical Brain-Machine Interface. In: Indwelling Neural Implants. NCBI Bookshelf NBK3932.",
+      "type": "book_chapter"
+    },
+    {
+      "key": "fda_bci_guidance",
+      "citation": "FDA. Implanted Brain-Computer Interface (BCI) Devices for Patients with Paralysis or Amputation. 2021.",
+      "url": "https://www.fda.gov/media/120362/download",
+      "type": "regulatory_guidance"
+    },
+    {
+      "key": "emotiv_epocx_manual",
+      "citation": "EMOTIV. EPOC X User Manual - Technical Specifications.",
+      "url": "https://emotiv.gitbook.io/epoc-x-user-manual/introduction/technical-specifications",
+      "type": "manufacturer_spec"
+    },
+    {
+      "key": "openbci_docs",
+      "citation": "OpenBCI. Hardware & Software Documentation.",
+      "url": "https://docs.openbci.com/",
+      "type": "manufacturer_spec"
+    },
+    {
+      "key": "neuroport_ifu",
+      "citation": "Blackrock Neurotech. NeuroPort Biopotential Signal Processing System IFU. LB-0323 Rev 8.00.",
+      "url": "https://blackrockneurotech.com/wp-content/uploads/LB-0323-8.00-NeuroPort-Biopotential-Signal-Processing-System-IFU-9.pdf",
+      "type": "manufacturer_spec"
+    },
+    {
+      "key": "dbs_comparison",
+      "citation": "Krauss JK, et al. Update on Current Technologies for Deep Brain Stimulation. PMC7502302.",
+      "type": "peer_reviewed"
+    },
+    {
+      "key": "darpa_n3",
+      "citation": "DARPA. N3: Next-Generation Nonsurgical Neurotechnology.",
+      "url": "https://www.darpa.mil/research/programs/next-generation-nonsurgical-neurotechnology",
+      "type": "government_program"
+    },
+    {
+      "key": "cochlear_ci632",
+      "citation": "Cochlear Ltd. Technical Specifications Cochlear Nucleus Profile Plus CI632.",
+      "url": "https://cochlearimplanthelp.com/wp-content/uploads/2019/07/cochlear-ci632-spec-sheet.pdf",
+      "type": "manufacturer_spec"
+    },
+    {
+      "key": "medel_pmc",
+      "citation": "Zierhofer C, et al. MED-EL Cochlear Implants: State of the Art and a Glimpse Into the Future. PMC4111377.",
+      "type": "peer_reviewed"
+    },
+    {
+      "key": "stentrode_architecture",
+      "citation": "The Stentrode System by Synchron: Architectural Design and Clinical Translation. Auctores Online.",
+      "url": "https://auctoresonline.com/article/the-stentrode-system-by-synchron-architectural-design-and-clinical-translation-of-a-minimally-invasive-braincomputer-interface",
+      "type": "review_article"
+    }
+  ]
+}

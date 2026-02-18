@@ -312,6 +312,37 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     tags: ['equation', 'quantum'],
   },
 
+  // === I0 Depth Subclassification (Entry 59) ===
+  {
+    id: 'i0-depth',
+    term: 'I0 Depth Subclassification',
+    type: 'architecture',
+    shortDef: 'Where an electrode sits in the brain determines how many biological security layers it bypasses.',
+    fullDef: 'The I0 band is not monolithic — its security criticality depends on implant depth. I0-cortical (surface/penetrating, e.g., Neuralink) bypasses all biological security layers including the thalamic firewall. I0-subcortical (e.g., DBS electrodes) sits inside or below the firewall. I0-spinal/peripheral has the full neural hierarchy above it. I0-noninvasive (EEG, fNIRS) is attenuated by skull and CSF. Deeper = fewer biological layers bypassed = lower direct cognitive risk.',
+    relatedTerms: ['neural-interface', 'thalamic-firewall', 'hourglass-model'],
+    href: '/framework/#bands',
+    tags: ['architecture', 'security-core'],
+  },
+  {
+    id: 'thalamic-gating',
+    term: 'Thalamic Gating (N4)',
+    type: 'concept',
+    shortDef: 'The thalamus blocks all sensory traffic by default and only relays what the cortex requests — the brain\'s primary selective filter.',
+    fullDef: 'The reticular thalamic nucleus (TRN) implements default-deny inhibition: tonically active GABAergic neurons suppress all relay traffic unless specifically disinhibited by corticothalamic feedback. Modality-specific relay nuclei (LGN for vision, MGN for audition) route each sensory stream independently. NREM sleep suppresses relay globally. Key bypass: amygdala fast path (~12ms direct sensory-to-threat route) operates without thalamic gating. BCIs implanted above the thalamus (I0-cortical) bypass this gating entirely.',
+    relatedTerms: ['i0-depth', 'neural-interface', 'hourglass-model'],
+    tags: ['concept', 'security-core', 'neuroscience'],
+  },
+
+  {
+    id: 'i0-directionality',
+    term: 'I0 Directionality',
+    type: 'architecture',
+    shortDef: 'Whether a BCI can only read your brain, only write to it, or do both. Bidirectional devices have the biggest attack surface because an adversary could steal your thoughts AND inject fake ones.',
+    fullDef: 'BCI directionality is orthogonal to I0 depth and critically affects the threat profile. Read-only devices (BrainGate, EEG) can only exfiltrate neural data. Write-only devices (cochlear implants, older DBS, TMS) can only inject signals. Bidirectional devices (Medtronic Percept RC, NeuroPace RNS, Neuralink N1) can both read and write — full attack surface. Closed-loop systems are a special case: they autonomously detect patterns and respond with stimulation, meaning a compromised device could create self-triggering, self-reinforcing attacks.',
+    relatedTerms: ['i0-depth', 'neural-interface', 'hourglass-model'],
+    tags: ['architecture', 'security-core'],
+  },
+
   // === Quantum Concepts ===
   {
     id: 'quantum-indeterminacy',

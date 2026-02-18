@@ -79,6 +79,9 @@ When ANY of these occur during a session, you MUST:
 - What was accepted vs rejected from AI suggestions
 - Classification: VERIFIED / INFERRED / HYPOTHESIS
 
+**RAW Conversational Mode (Entry 61+, MANDATORY):**
+Derivation log entries that capture live sessions use Kevin's words **exactly as typed**. The tone is casual and raw. Typos are expected and intentional — they show the train of thought. Missing apostrophes, misspellings, uncorrected grammar — that's the point. Do NOT fix, clean up, rephrase, or "polish" anything the human says when writing it into the derivation log. The unedited text IS the record. AI commentary or structural framing around Kevin's words is fine, but his words stay untouched. Each message (human and AI) must include a datetime stamp in `[YYYY-MM-DD HH:MM]` format matching terminal time.
+
 **Research Commit Messages:**
 For research-significant commits (derivation log entries, hypothesis docs, papers, blog posts), use this extended format:
 ```
