@@ -235,6 +235,326 @@ const brainViews = getBrainViewData();
     </div>
   </section>
 
+  <!-- Ethical Neurosecurity Code of Ethics -->
+  <section class="mb-16" id="ethics">
+    <h2 class="text-2xl font-semibold font-[family-name:var(--font-heading)] mb-2">Ethical Neurosecurity Code of Ethics</h2>
+    <p class="text-[var(--color-text-muted)] mb-4 max-w-3xl">
+      This code adapts the structure and principles of the <a href="https://cert.eccouncil.org/code-of-ethics.html" class="text-[var(--color-accent-secondary)] hover:underline">EC-Council Certified Ethical Hacker (CEH) Code of Ethics</a> and the <a href="https://www.isc2.org/ethics" class="text-[var(--color-accent-secondary)] hover:underline">(ISC)&sup2; Code of Ethics</a> for the neurosecurity domain. Ethical hacking already solved many governance problems for traditional systems. We are taking those lessons and applying them where the stakes are highest: the human brain.
+    </p>
+    <p class="text-[var(--color-text-muted)] mb-8 max-w-3xl">
+      Each principle below is cross-referenced to the international frameworks that inform it: the <a href="https://www.oecd.org/science/recommendation-on-responsible-innovation-in-neurotechnology.htm" class="text-[var(--color-accent-secondary)] hover:underline">OECD Recommendation on Neurotechnology</a> (2019), <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" class="text-[var(--color-accent-secondary)] hover:underline">UNESCO Recommendation on the Ethics of AI</a> (2021), the <a href="https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/read-the-belmont-report/index.html" class="text-[var(--color-accent-secondary)] hover:underline">Belmont Report</a> (1979), the <a href="https://www.wma.net/policies-post/wma-declaration-of-helsinki/" class="text-[var(--color-accent-secondary)] hover:underline">Declaration of Helsinki</a>, the <a href="https://courier.unesco.org/en/articles/chile-pioneering-protection-neurorights" class="text-[var(--color-accent-secondary)] hover:underline">Chilean Neurorights Law</a> (2021), <a href="https://gdpr-info.eu/art-9-gdpr/" class="text-[var(--color-accent-secondary)] hover:underline">GDPR Article 9</a>, the <a href="https://brain.ieee.org/publications/ieee-neuroethics-framework/" class="text-[var(--color-accent-secondary)] hover:underline">IEEE Neuroethics Framework</a>, <a href="https://rm.coe.int/1680081561" class="text-[var(--color-accent-secondary)] hover:underline">Budapest Convention on Cybercrime</a>, and the five neurorights proposed by <a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2021.701258/full" class="text-[var(--color-accent-secondary)] hover:underline">Yuste et al.</a> and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11542783/" class="text-[var(--color-accent-secondary)] hover:underline">Ienca &amp; Andorno</a>.
+    </p>
+
+    <!-- Preamble -->
+    <div class="glass rounded-xl p-8 mb-8 max-w-4xl">
+      <h3 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-3">Preamble</h3>
+      <p class="text-[var(--color-text-muted)] mb-3">
+        Neurotechnology is advancing faster than the rules protecting the people who use it. Brain-computer interfaces are entering clinical trials, consumer EEG devices are shipping to millions, and silent speech decoding is accurate enough to worry about. The security community that protects these systems needs its own ethical foundation.
+      </p>
+      <p class="text-[var(--color-text-muted)] mb-3">
+        Ethical hackers protect servers, networks, and applications. Ethical neurosecurity researchers protect brains. The principles are the same: get authorization before you test, report what you find, do not cause harm, protect what you access. But the consequences are different. A compromised server can be reimaged. A compromised brain may not recover. That difference demands a code of ethics written specifically for this work.
+      </p>
+      <p class="text-[var(--color-text-muted)]">
+        This code is open. It builds on decades of work in cybersecurity ethics, bioethics, neurorights, and human rights law. Anyone working in neurosecurity, whether in research, clinical settings, industry, or government, is invited to adopt, critique, and improve it.
+      </p>
+    </div>
+
+    <!-- The Four Canons (adapted from ISC²) -->
+    <div class="mb-8 max-w-4xl">
+      <h3 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-4">The Four Canons</h3>
+      <p class="text-sm text-[var(--color-text-faint)] mb-4">Adapted from (ISC)&sup2; Code of Ethics. These are the highest-level obligations.</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="glass rounded-xl p-6 border-l-4" style="border-color: #3b82f6;">
+          <h4 class="font-semibold mb-2">I. Protect cognitive sovereignty</h4>
+          <p class="text-sm text-[var(--color-text-muted)]">Protect the individual's right to mental privacy, psychological continuity, and freedom of thought. Neural data belongs to the person it came from. Not the device manufacturer. Not the researcher. Not the state.</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">Sources: Chile Neurorights Law, Yuste's 5 Neurorights, Ienca &amp; Andorno (Right to Cognitive Liberty), OECD Principle 9, UNESCO UDBHR Art. 5</p>
+        </div>
+        <div class="glass rounded-xl p-6 border-l-4" style="border-color: #10b981;">
+          <h4 class="font-semibold mb-2">II. Act with integrity and transparency</h4>
+          <p class="text-sm text-[var(--color-text-muted)]">Be honest about your methods, your findings, and your limitations. Disclose conflicts of interest. Disclose dual-use potential of any technique you publish. Never misrepresent your qualifications or the scope of your testing.</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">Sources: (ISC)&sup2; Canon 2, CEH Clauses 7/10, CREST Code of Ethics (Integrity/Objectivity), Belmont Report (Respect for Persons), Helsinki Art. 23</p>
+        </div>
+        <div class="glass rounded-xl p-6 border-l-4" style="border-color: #f59e0b;">
+          <h4 class="font-semibold mb-2">III. Provide competent and careful service</h4>
+          <p class="text-sm text-[var(--color-text-muted)]">Only perform neurosecurity work within your competence. Neural systems are not servers. Understand the biology before you test the security. When you are out of your depth, say so and bring in the right expertise.</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">Sources: (ISC)&sup2; Canon 3, CEH Clause 3, Nuremberg Code Point 8, CREST (Competence), PTES Pre-Engagement</p>
+        </div>
+        <div class="glass rounded-xl p-6 border-l-4" style="border-color: #8b5cf6;">
+          <h4 class="font-semibold mb-2">IV. Advance and protect the field</h4>
+          <p class="text-sm text-[var(--color-text-muted)]">Contribute to the neurosecurity community through responsible research, open collaboration, and knowledge sharing. Mentor newcomers. Hold each other accountable. The field is too young and too important to get wrong.</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">Sources: (ISC)&sup2; Canon 4, CEH Clause 9, OECD Principles 4/5, Asilomar Principles 3/4, IEEE Neuroethics (Agency &amp; Identity)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Principles (adapted from CEH + frameworks) -->
+    <div class="max-w-4xl">
+      <h3 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-4">The Principles</h3>
+      <p class="text-sm text-[var(--color-text-faint)] mb-6">Adapted from the EC-Council CEH Code of Ethics and mapped across neurorights, bioethics, digital ethics, and international law.</p>
+
+      <div class="space-y-4">
+        <!-- Authorization & Consent -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">1</span>
+            <div>
+              <h4 class="font-semibold mb-1">Obtain informed neural consent before any testing</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Never access, probe, or test a neural interface without explicit written authorization from the device user and the system owner. For BCIs, the device user IS the person whose brain is connected. Informed consent must include what neural data will be collected, how it will be used, and when it will be deleted. The person must understand what you might learn about their cognitive state in the process.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">CEH Clause 14 (authorized testing) + Nuremberg Code Point 1 (voluntary consent) + Belmont Report (informed consent) + Helsinki Art. 25-32 + Colorado HB24-1058 (affirmative opt-in) + California SB 1223 + OECD Principle 7</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Do No Neural Harm -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">2</span>
+            <div>
+              <h4 class="font-semibold mb-1">Do no neural harm</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Never perform any test that risks irreversible damage to neural tissue or cognitive function. A penetration test on a server can be rolled back. A penetration test that causes seizures, memory loss, or personality changes cannot. If there is any doubt about whether a technique could cause lasting harm, do not use it. This is the irreversibility threshold, and there is no equivalent in traditional security.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">CEH Clause 13 (don't compromise systems) + Nuremberg Code Points 4-5 (avoid suffering, no a priori reason for harm) + Belmont Report (beneficence) + Helsinki Art. 16-18 + Ienca &amp; Andorno (Right to Mental Integrity) + OECD Principle 2 (safety)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Neural Data Confidentiality -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">3</span>
+            <div>
+              <h4 class="font-semibold mb-1">Protect neural data as the most sensitive category of personal information</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Neural data can reveal thoughts, emotions, intentions, psychiatric conditions, and cognitive patterns that the person may not even be aware of themselves. Treat it with more care than you would treat medical records, biometric data, or financial information. Encrypt it in transit and at rest. Minimize what you collect. Delete it when the engagement ends. Never share it without explicit consent. A <a href="https://perseus-strategies.com/wp-content/uploads/2024/04/FINAL_Consumer_Neurotechnology_Report_Neurorights_Foundation_April-1.pdf" class="text-[var(--color-accent-secondary)] hover:underline">Neurorights Foundation audit</a> in 2024 found that 96.7% of consumer neurotech companies reserve the right to transfer brain data to third parties. Do not be one of them.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">CEH Clause 1 (confidentiality) + GDPR Article 9 (special categories) + Colorado HB24-1058 + California SB 1223 + Chile Neurorights (neurodata as organ) + OECD Principle 7 + CoE Convention 108+ (neural data as special category) + Helsinki Art. 24</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Association with Malicious Actors -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">4</span>
+            <div>
+              <h4 class="font-semibold mb-1">Never engage in or support malicious neural activities</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Do not develop, distribute, or use tools designed to attack neural interfaces without authorization. Do not collaborate with actors seeking to weaponize neurotechnology for surveillance, coercion, or cognitive manipulation. Do not build neuroweapons. Do not assist in the extraction of thoughts, emotions, or memories without consent. Mexico's GLNN bill (introduced 2024, published in <a href="https://www.thelancet.com/journals/lanpsy/article/PIIS2215-0366(24)00286-4/abstract" class="text-[var(--color-accent-secondary)] hover:underline">The Lancet Psychiatry</a>) proposes criminal penalties of 3-12 years for mental manipulation and unauthorized probing of neuronal activity. The severity is appropriate.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">CEH Clause 12 (no malicious hackers) + Budapest Convention Art. 2-6 (illegal access, interception, data interference) + Mexico GLNN (criminal penalties) + EU AI Act Art. 5(1)(a) (subliminal manipulation prohibition) + IEEE Neuroethics (Authority/Power)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Stop -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">5</span>
+            <div>
+              <h4 class="font-semibold mb-1">Maintain a neural safety cutoff at all times</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Any neurosecurity test involving active neural interfaces must have an immediate stop mechanism. If the subject reports discomfort, cognitive changes, or unusual sensations, halt all testing immediately. The subject's right to terminate participation is absolute and cannot be overridden by research goals, contractual obligations, or project timelines. This applies during testing and for a monitoring period after.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">Nuremberg Code Point 9 (subject's right to terminate) + Point 10 (scientist's duty to terminate) + Helsinki Art. 18 (stop when risks outweigh benefits) + PTES Rules of Engagement (emergency stop) + EU Trustworthy AI Requirement 1 (human oversight)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Involuntary Cognitive Disclosure -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">6</span>
+            <div>
+              <h4 class="font-semibold mb-1">Handle involuntary cognitive disclosures with care</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">During neurosecurity work, you may inadvertently learn things about a person's cognitive state, emotional patterns, psychiatric conditions, or inner thoughts that they did not consent to reveal. This is different from finding a password in a pentest. If you discover cognitive or health information incidentally, treat it as privileged. Do not record it. Do not report it unless the person gives explicit consent or there is an immediate safety risk. The person's right to mental privacy does not disappear because you found a vulnerability.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">Yuste Neurorights (mental privacy) + Ienca &amp; Andorno (Right to Mental Privacy) + Chile Neurorights + GDPR Art. 9 (health data) + Helsinki Art. 24 (privacy/confidentiality) + Montreal Declaration Principle 3 (privacy and intimacy)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Responsible Disclosure -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">7</span>
+            <div>
+              <h4 class="font-semibold mb-1">Report all vulnerabilities through responsible disclosure</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Report every neural security vulnerability you discover to the device manufacturer or responsible party through coordinated disclosure. Give them reasonable time to patch before any public disclosure. When you do publish, always include defensive countermeasures alongside the attack vector. Never publish a neural exploit without a corresponding defense. The dual-use potential of every technique in the <a href="/TARA/" class="text-[var(--color-accent-secondary)] hover:underline">TARA registry</a> is exactly why this matters.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">CEH Clause 2 (disclose dangers) + CREST Code of Conduct (responsible disclosure) + OECD Principle 9 (anticipate misuse) + Asilomar Principle 5 (race avoidance) + PTES Phase 7 (reporting)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Equitable Access -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">8</span>
+            <div>
+              <h4 class="font-semibold mb-1">Advocate for equitable access and protection from bias</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Neurosecurity protections should not be a luxury. If a neural interface is secure for one population but vulnerable for another due to algorithmic bias, training data gaps, or economic barriers, that is a security failure. Work to ensure that the people who need neural interfaces the most, typically patients with severe disabilities, are not the ones left with the weakest protections. Test across diverse populations. Flag biased models. Push for open security standards that anyone can audit.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">Yuste Neurorights (equal access + protection from bias) + Belmont Report (justice) + Helsinki Art. 13 + UNESCO UDBHR Art. 10-11 + OECD Principle 3 (inclusivity) + Chile Neurorights + EU Trustworthy AI Requirement 5</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scope and Legal Compliance -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">9</span>
+            <div>
+              <h4 class="font-semibold mb-1">Stay within scope, stay within the law</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">All neurosecurity testing must operate within clearly defined scope boundaries documented in writing before work begins. Define exactly which devices, interfaces, and neural data streams are in-scope. Everything else is off-limits. Comply with all applicable laws, including neural data privacy statutes (Colorado HB24-1058, California SB 1223, the MIND Act when enacted), medical device regulations, and international cybercrime law (Budapest Convention). Unauthorized access to a neural interface is not a grey area. It is a crime against a person's brain.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">CEH Clauses 14/19 (authorized testing, legal compliance) + PTES Pre-Engagement (scope/rules of engagement) + Budapest Convention Art. 2-5 + Tallinn Manual Rules 1-4 (sovereignty) + Colorado/California neural data laws + Mexico GLNN</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Psychological Continuity -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">10</span>
+            <div>
+              <h4 class="font-semibold mb-1">Preserve personal identity and psychological continuity</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Never perform any action that alters a person's sense of self, personality, memories, or cognitive patterns without their explicit, informed consent. This includes neuromodulation, stimulation parameter changes, or any technique that could affect psychological continuity. The right to personal identity means that who you are before a neurosecurity assessment is who you should be after it. If a vulnerability you discover could be exploited to alter someone's identity, report it with the highest severity.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">Ienca &amp; Andorno (Right to Psychological Continuity) + Yuste Neurorights (personal identity) + Chile Neurorights + IEEE Neuroethics (Agency &amp; Identity) + CoE DH-BIO (mental integrity) + UNESCO UDBHR Art. 3 (human dignity)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continuous Learning -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">11</span>
+            <div>
+              <h4 class="font-semibold mb-1">Maintain competence across both security and neuroscience</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">Neurosecurity sits at the intersection of cybersecurity, neuroscience, bioethics, and clinical medicine. Stay current in all of them. Understand the biology of what you are testing. Know the difference between cortical oscillation bands. Understand how neural signals propagate. Know what a seizure looks like. If you only know the security side, partner with someone who knows the neuroscience. If you only know the neuroscience, partner with someone who knows the security. Neither half is optional.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">CEH Clauses 3/9/25 (competence, continuous learning) + (ISC)&sup2; Canon 3 + CREST (Competence) + OECD Principle 4 (scientific collaboration) + Nuremberg Code Point 8 (qualified persons)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accountability -->
+        <div class="glass rounded-lg p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-lg font-bold text-[var(--color-accent-secondary)] shrink-0">12</span>
+            <div>
+              <h4 class="font-semibold mb-1">Accept accountability for your work</h4>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">You are responsible for the consequences of your neurosecurity work. Document everything. Maintain audit trails. If something goes wrong during testing, report it immediately. If your published research is used to cause harm, engage with the response. Accountability is not optional in a field where the target is a human brain. The ISC&sup2; requires members to report ethics breaches by other members. We adopt the same standard here. If you see someone violating this code, say something.</p>
+              <p class="text-xs text-[var(--color-text-faint)]">(ISC)&sup2; (obligation to report violations) + EU Trustworthy AI Requirement 7 (accountability) + UNESCO AI Principle 8 + Asilomar Principle 9 (responsibility) + Helsinki Art. 23 (ethics committee oversight) + NIST CSF Govern function</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cross-Reference Table -->
+    <div class="mt-8 max-w-4xl">
+      <h3 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-4">Framework Cross-Reference</h3>
+      <p class="text-sm text-[var(--color-text-faint)] mb-4">How each principle maps to existing ethics frameworks. This code does not exist in a vacuum. It stands on the shoulders of decades of work in cybersecurity ethics, bioethics, neurorights, and international law.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs border-collapse">
+          <thead>
+            <tr class="text-left border-b border-[var(--color-border)]">
+              <th class="p-2 text-[var(--color-text-faint)]">Principle</th>
+              <th class="p-2 text-[var(--color-text-faint)]">CEH / (ISC)&sup2;</th>
+              <th class="p-2 text-[var(--color-text-faint)]">Bioethics</th>
+              <th class="p-2 text-[var(--color-text-faint)]">Neurorights</th>
+              <th class="p-2 text-[var(--color-text-faint)]">Digital / Intl Law</th>
+            </tr>
+          </thead>
+          <tbody class="text-[var(--color-text-muted)]">
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">1. Neural Consent</td>
+              <td class="p-2">CEH #14</td>
+              <td class="p-2">Nuremberg 1, Belmont, Helsinki 25-32</td>
+              <td class="p-2">Chile, Colorado, California, OECD 7</td>
+              <td class="p-2">GDPR Art. 9, PTES</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">2. No Neural Harm</td>
+              <td class="p-2">CEH #13</td>
+              <td class="p-2">Nuremberg 4-5, Belmont, Helsinki 16-18</td>
+              <td class="p-2">Ienca (Mental Integrity), OECD 2</td>
+              <td class="p-2">EU AI Act Art. 5</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">3. Data Protection</td>
+              <td class="p-2">CEH #1</td>
+              <td class="p-2">Helsinki 24</td>
+              <td class="p-2">Chile (neurodata = organ), OECD 7</td>
+              <td class="p-2">GDPR Art. 9, CoE 108+</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">4. No Malicious Activity</td>
+              <td class="p-2">CEH #12</td>
+              <td class="p-2">Nuremberg 4</td>
+              <td class="p-2">Mexico GLNN, IEEE (Authority)</td>
+              <td class="p-2">Budapest Conv. Art. 2-6</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">5. Safety Cutoff</td>
+              <td class="p-2">&mdash;</td>
+              <td class="p-2">Nuremberg 9-10, Helsinki 18</td>
+              <td class="p-2">&mdash;</td>
+              <td class="p-2">PTES ROE, EU Trust. AI 1</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">6. Cognitive Disclosure</td>
+              <td class="p-2">CEH #1</td>
+              <td class="p-2">Helsinki 24</td>
+              <td class="p-2">Yuste (mental privacy), Ienca</td>
+              <td class="p-2">Montreal Decl. 3</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">7. Responsible Disclosure</td>
+              <td class="p-2">CEH #2</td>
+              <td class="p-2">&mdash;</td>
+              <td class="p-2">OECD 9 (anticipate misuse)</td>
+              <td class="p-2">CREST, Asilomar 5</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">8. Equitable Access</td>
+              <td class="p-2">&mdash;</td>
+              <td class="p-2">Belmont (justice), Helsinki 13</td>
+              <td class="p-2">Yuste (equal access, bias), Chile, OECD 3</td>
+              <td class="p-2">EU Trust. AI 5, UNESCO 10-11</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">9. Scope &amp; Legal</td>
+              <td class="p-2">CEH #14, #19</td>
+              <td class="p-2">&mdash;</td>
+              <td class="p-2">Colorado, California, Mexico GLNN</td>
+              <td class="p-2">Budapest Conv., Tallinn, PTES</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">10. Identity Preservation</td>
+              <td class="p-2">&mdash;</td>
+              <td class="p-2">UNESCO UDBHR Art. 3</td>
+              <td class="p-2">Ienca (Psych. Continuity), Yuste, Chile</td>
+              <td class="p-2">IEEE (Agency/Identity)</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="p-2 font-medium">11. Cross-Domain Competence</td>
+              <td class="p-2">CEH #3, #9, #25</td>
+              <td class="p-2">Nuremberg 8</td>
+              <td class="p-2">OECD 4</td>
+              <td class="p-2">CREST (Competence)</td>
+            </tr>
+            <tr>
+              <td class="p-2 font-medium">12. Accountability</td>
+              <td class="p-2">(ISC)&sup2; (report)</td>
+              <td class="p-2">Helsinki 23</td>
+              <td class="p-2">UNESCO AI 8</td>
+              <td class="p-2">EU Trust. AI 7, NIST Govern, Asilomar 9</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Version & License -->
+    <div class="mt-8 glass rounded-lg p-6 max-w-4xl">
+      <p class="text-sm text-[var(--color-text-muted)]">
+        <strong class="text-[var(--color-text)]">Version 1.0</strong> &middot; February 2026 &middot; Written by Kevin L. Qi &middot; <a href="https://creativecommons.org/licenses/by/4.0/" class="text-[var(--color-accent-secondary)] hover:underline">CC-BY 4.0</a>
+      </p>
+      <p class="text-xs text-[var(--color-text-faint)] mt-2">
+        This code is a living document. If you work in neurosecurity and see something missing, open an issue or submit a pull request on <a href="https://github.com/qinnovates/qinnovate" class="text-[var(--color-accent-secondary)] hover:underline">GitHub</a>. The point is to get this right, not to get it first.
+      </p>
+    </div>
+  </section>
+
   <!-- Security Architecture Links -->
   <section>
     <h2 class="text-2xl font-semibold font-[family-name:var(--font-heading)] mb-6">Explore Further</h2>
