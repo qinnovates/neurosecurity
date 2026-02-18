@@ -7,7 +7,7 @@ import {
   RUNEMATE_TOOL_NAME,
   RUNEMATE_OUTPUT_FORMAT,
   COMPRESSION_THEORETICAL,
-  COMPRESSION_POC,
+  COMPRESSION_V1_BENCHMARK,
   BREAKEVEN_KB,
   PQ_HANDSHAKE_OVERHEAD,
   SESSION_AMORTIZATION,
@@ -15,6 +15,9 @@ import {
   COMPRESSION_TECHNIQUES,
   ONCHIP_REQUIREMENTS,
   LANGUAGE_COMPARISON,
+  MULTIMODAL_MODALITIES,
+  NEUROSCIENCE_FOUNDATIONS,
+  BCI_STATE_OF_ART,
 } from '../lib/runemate-constants';
 
 const MAX_KB = 509.3; // largest classical total, used to scale chart bars
@@ -22,7 +25,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
 
 <PageLayout
   title="Project Runemate"
-  description="Runemate — a post-quantum compression layer for BCI interfaces. HTML-to-Staves bytecode compiler that makes PQ crypto viable on implants."
+  description="Runemate — a native multimodal DSL compiler for BCI interfaces. Compiles visual, auditory, and haptic constructs into compact Staves bytecode with post-quantum security."
   breadcrumbs={[{ label: 'Runemate' }]}
   maxWidth="wide"
 >
@@ -33,11 +36,14 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
         <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
         {[
           { href: '#overview', label: 'Overview' },
+          { href: '#today', label: 'BCIs Today' },
           { href: '#problem', label: 'The Problem' },
           { href: '#insight', label: 'The Insight' },
           { href: '#chart', label: 'The Chart' },
-          { href: '#poc', label: 'PoC Benchmarks' },
+          { href: '#poc', label: 'v1.0 Benchmarks' },
           { href: '#rust', label: 'Why Rust' },
+          { href: '#neuroscience', label: 'Neuroscience' },
+          { href: '#multimodal', label: 'Multimodal' },
           { href: '#onchip', label: 'On-Chip Requirements' },
           { href: '#vision', label: 'Vision' },
         ].map((item) => (
@@ -61,13 +67,88 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
         </h1>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            Post-quantum cryptography keys are 18&ndash;46&times; larger than classical ones. That is a problem when your endpoint is a 40 mW brain implant with 256 KB of SRAM. {RUNEMATE_PROJECT_NAME} solves this by compressing HTML interfaces into <strong>{RUNEMATE_OUTPUT_FORMAT}</strong> bytecode &mdash; a compact binary representation that achieves 65&ndash;90% size reduction.
+            A native declarative DSL for multimodal BCI rendering. Compiles visual layouts, auditory tones, and haptic pulses into compact <strong>{RUNEMATE_OUTPUT_FORMAT}</strong> bytecode &mdash; achieving 65&ndash;90% size reduction over equivalent web content.
           </p>
           <p>
-            The result: above ~{BREAKEVEN_KB} KB of source HTML, a PQ-secured {RUNEMATE_OUTPUT_FORMAT} payload is <em>smaller</em> than the same page sent over classical TLS with raw HTML. Post-quantum security becomes not just viable on implants &mdash; it becomes more efficient than what we have today.
+            Not a translation of web technology. A purpose-built language for neural interfaces. The {RUNEMATE_OUTPUT_FORMAT} DSL has a closed vocabulary: if it compiles, it is safe. No sanitization needed because there is nothing to sanitize.
           </p>
           <p>
-            <strong>{RUNEMATE_TOOL_NAME}</strong> is the HTML-to-{RUNEMATE_OUTPUT_FORMAT} compiler. It tokenizes the DOM, deduplicates styles, strips JavaScript, and packs layout semantics into a dense opcode stream that a minimal on-chip interpreter can render directly.
+            Above ~{BREAKEVEN_KB} KB of equivalent content, a PQ-secured {RUNEMATE_OUTPUT_FORMAT} payload is <em>smaller</em> than the same interface sent over classical TLS with raw HTML. Post-quantum security becomes not just viable on implants &mdash; it becomes more efficient than what we have today.
+          </p>
+          <p>
+            <strong>{RUNEMATE_TOOL_NAME}</strong> is the native DSL compiler. It parses {RUNEMATE_OUTPUT_FORMAT} source through a hand-rolled lexer and recursive descent parser, validates TARA safety bounds at compile time, and emits a dense bytecode stream that a minimal on-chip interpreter can render directly.
+          </p>
+        </div>
+      </section>
+
+      <!-- How BCIs Work Today -->
+      <section id="today" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">How BCIs Work Today</h2>
+        <div class="prose mb-8">
+          <p>
+            No commercial BCI ships inward rendering today. Every current-generation implant &mdash; Neuralink N1, BrainGate, Blackrock Neurotech &mdash; is <strong>outward-only</strong>: the chip records neural signals and streams them to an external device. All decoding, all UI rendering, all user interaction happens on a phone or tablet app.
+          </p>
+          <p>
+            {RUNEMATE_PROJECT_NAME} is designing for the next generation: implants that receive content <em>inward</em> and render it directly to cortical tissue. That chip must decode, safety-check, and render a payload on bare metal with no phone in the loop.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <!-- Today's BCIs -->
+          <div class="glass rounded-xl p-6">
+            <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">{BCI_STATE_OF_ART.today.label}</p>
+            <div class="space-y-4">
+              <div>
+                <span class="text-xs text-[var(--color-text-muted)]">Direction</span>
+                <span class="block text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{BCI_STATE_OF_ART.today.direction}</span>
+              </div>
+              <div>
+                <span class="text-xs text-[var(--color-text-muted)]">Implant role</span>
+                <span class="block text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{BCI_STATE_OF_ART.today.implantRole}</span>
+              </div>
+              <div>
+                <span class="text-xs text-[var(--color-text-muted)]">UI rendering</span>
+                <span class="block text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{BCI_STATE_OF_ART.today.rendering}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Future BCIs (Runemate target) -->
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid var(--color-accent-primary);">
+            <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">{BCI_STATE_OF_ART.future.label}</p>
+            <div class="space-y-4">
+              <div>
+                <span class="text-xs text-[var(--color-text-muted)]">Direction</span>
+                <span class="block text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{BCI_STATE_OF_ART.future.direction}</span>
+              </div>
+              <div>
+                <span class="text-xs text-[var(--color-text-muted)]">Implant role</span>
+                <span class="block text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{BCI_STATE_OF_ART.future.implantRole}</span>
+              </div>
+              <div>
+                <span class="text-xs text-[var(--color-text-muted)]">On-chip processing</span>
+                <span class="block text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{BCI_STATE_OF_ART.future.processing}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research prior art -->
+        <div class="glass rounded-xl p-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Research Prior Art</p>
+          <div class="space-y-4">
+            {BCI_STATE_OF_ART.priorArt.map((item) => (
+              <div class="flex items-start gap-4">
+                <span class="shrink-0 text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)] mt-0.5 w-24 text-right">{item.modality}</span>
+                <div>
+                  <p class="text-sm font-semibold text-[var(--color-text-primary)]">{item.study}</p>
+                  <p class="text-xs text-[var(--color-text-muted)]">{item.finding}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-4 pt-3 border-t border-[var(--color-border)]">
+            {BCI_STATE_OF_ART.citationNote}
           </p>
         </div>
       </section>
@@ -84,6 +165,13 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
           </p>
           <p>
             For a server farm, this is a rounding error. For a brain-computer interface running on harvested body heat and a coin-cell battery, it is a dealbreaker &mdash; unless you compensate elsewhere.
+          </p>
+        </div>
+
+        <div class="prose mb-8">
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Why not HTML?</h3>
+          <p>
+            HTML is Turing-complete &mdash; its scripting surface (JavaScript, event handlers, <code>data:</code> URIs) creates an unbounded XSS attack surface. It carries a massive parser dependency graph: a compliant HTML5 parser alone is ~100K lines of code. HTML was designed for screens, not brains. Its complexity is the antithesis of what a safety-critical implant needs.
           </p>
         </div>
 
@@ -131,16 +219,16 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Insight</h2>
         <div class="prose mb-8">
           <p>
-            The handshake is a fixed cost &mdash; paid once per session, amortized across every subsequent page load. The real bandwidth is in the <em>payload</em>. And HTML is spectacularly wasteful.
+            The handshake is a fixed cost &mdash; paid once per session, amortized across every subsequent payload. The real bandwidth is in the <em>content</em>. And HTML is the wrong starting point entirely.
           </p>
           <p>
-            A typical BCI dashboard page is 50&ndash;200 KB of HTML, CSS, and boilerplate. Most of it is structural repetition: <code>&lt;div class="..."&gt;</code> tags, repeated style declarations, whitespace, comments, JavaScript that a neural implant cannot execute anyway.
+            Rather than compressing HTML, {RUNEMATE_PROJECT_NAME} eliminates it. The {RUNEMATE_OUTPUT_FORMAT} DSL is a closed vocabulary: every valid keyword, element type, and attribute is known at compile time. If the source compiles, it is safe. There is no JavaScript to strip, no URLs to sanitize, no unbounded complexity to contain.
           </p>
           <p>
-            {RUNEMATE_OUTPUT_FORMAT} bytecode eliminates all of it. The DOM becomes a tokenized opcode stream. Style sets are deduplicated into a single table. Layout semantics are packed into bit-fields. The result is <strong>65&ndash;90% smaller</strong> than the source HTML.
+            The compiler rejects unknown constructs at build time &mdash; not at runtime inside a patient's skull. This is safety by construction, not safety by sanitization.
           </p>
           <p>
-            The crossover is at roughly <strong>~{BREAKEVEN_KB} KB</strong> of source HTML. Above that threshold, PQ handshake + {RUNEMATE_OUTPUT_FORMAT} payload is smaller than classical handshake + raw HTML. Quantum-resistant security is free &mdash; and then it starts <em>saving</em> bandwidth.
+            The crossover is at roughly <strong>~{BREAKEVEN_KB} KB</strong> of equivalent content. Above that threshold, PQ handshake + {RUNEMATE_OUTPUT_FORMAT} payload is smaller than classical handshake + raw HTML. Quantum-resistant security is free &mdash; and then it starts <em>saving</em> bandwidth.
           </p>
         </div>
 
@@ -164,14 +252,14 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
       <!-- THE CHART -->
       <section id="chart" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">The Chart</h2>
-        <p class="text-sm text-[var(--color-text-muted)] mb-8">Classical + raw HTML vs. Post-Quantum + {RUNEMATE_OUTPUT_FORMAT} &mdash; total bytes on the wire per page load.</p>
+        <p class="text-sm text-[var(--color-text-muted)] mb-8">Classical + equivalent web content vs. Post-Quantum + {RUNEMATE_OUTPUT_FORMAT} &mdash; total bytes on the wire per page load.</p>
 
         <div class="glass rounded-xl p-6 sm:p-8">
           <!-- Legend -->
           <div class="flex flex-wrap items-center gap-6 mb-8 text-xs">
             <div class="flex items-center gap-2">
               <span class="inline-block w-4 h-3 rounded-sm" style="background: var(--color-text-muted); opacity: 0.6;"></span>
-              <span class="text-[var(--color-text-muted)]">Classical TLS + raw HTML</span>
+              <span class="text-[var(--color-text-muted)]">Classical TLS + equivalent web content</span>
             </div>
             <div class="flex items-center gap-2">
               <span class="inline-block w-4 h-3 rounded-sm" style="background: var(--color-accent-primary);"></span>
@@ -187,7 +275,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
           <div class="relative mb-6">
             <div class="absolute left-0 right-0 border-t border-dashed border-[var(--color-accent-tertiary)]" style={`left: ${(BREAKEVEN_KB / MAX_KB) * 100}%;`}></div>
             <p class="text-xs text-[var(--color-accent-tertiary)] font-[family-name:var(--font-mono)] text-center">
-              Crossover at ~{BREAKEVEN_KB} KB source HTML &mdash; PQ wins beyond this point
+              Crossover at ~{BREAKEVEN_KB} KB equivalent content &mdash; PQ wins beyond this point
             </p>
           </div>
 
@@ -271,52 +359,73 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
         </div>
       </section>
 
-      <!-- PoC Benchmarks -->
+      <!-- v1.0 Benchmarks -->
       <section id="poc" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">PoC Benchmarks</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">v1.0 Benchmarks</h2>
         <div class="prose mb-8">
           <p>
-            Real measurements from the {RUNEMATE_TOOL_NAME} proof-of-concept. Three BCI interface pages compiled to {RUNEMATE_OUTPUT_FORMAT} and measured against classical TLS + raw HTML baselines.
+            Real measurements from the {RUNEMATE_TOOL_NAME} v1.0 native DSL compiler. The demo compiles a multimodal {RUNEMATE_OUTPUT_FORMAT} source file through the full pipeline: parse, compile, encrypt, decrypt.
           </p>
         </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-[var(--color-border)]">
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">File</th>
-                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">Original</th>
-                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">{RUNEMATE_OUTPUT_FORMAT}</th>
-                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">Reduction</th>
-                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">Classical Total</th>
-                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">PQ+{RUNEMATE_OUTPUT_FORMAT}</th>
-                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">Sessions to Break Even</th>
-              </tr>
-            </thead>
-            <tbody>
-              {COMPRESSION_POC.map((row) => (
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] text-xs">{row.file}</td>
-                  <td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{row.originalBytes.toLocaleString()} B</td>
-                  <td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{row.stavesBytes.toLocaleString()} B</td>
-                  <td class="py-3 px-4 text-right font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{row.compressionPercent}%</td>
-                  <td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{row.classicalTotal.toLocaleString()} B</td>
-                  <td class="py-3 px-4 text-right font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{row.pqPlusStavesTotal.toLocaleString()} B</td>
-                  <td class="py-3 px-4 text-right font-bold font-[family-name:var(--font-mono)]">
-                    {row.sessionsToOffset <= 2 ? (
-                      <span style="color: var(--color-status-safe);">{row.sessionsToOffset}</span>
-                    ) : (
-                      <span class="text-[var(--color-text-primary)]">{row.sessionsToOffset}</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <!-- v1.0 benchmark card -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-6">v1.0 Native DSL Compiler</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div>
+              <span class="text-xs text-[var(--color-text-muted)]">Source ({RUNEMATE_OUTPUT_FORMAT} DSL)</span>
+              <span class="block text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{COMPRESSION_V1_BENCHMARK.sourceBytes} B</span>
+            </div>
+            <div>
+              <span class="text-xs text-[var(--color-text-muted)]">Bytecode output</span>
+              <span class="block text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{COMPRESSION_V1_BENCHMARK.bytecodeBytes} B</span>
+            </div>
+            <div>
+              <span class="text-xs text-[var(--color-text-muted)]">Compression</span>
+              <span class="block text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{COMPRESSION_V1_BENCHMARK.compressionPercent}%</span>
+            </div>
+            <div>
+              <span class="text-xs text-[var(--color-text-muted)]">Compile + encrypt</span>
+              <span class="block text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{COMPRESSION_V1_BENCHMARK.compileEncryptMicros}&micro;s</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--color-border)]">
+            <p class="text-xs text-[var(--color-text-muted)]">
+              <strong class="text-[var(--color-accent-secondary)]">Encryption overhead:</strong> +{COMPRESSION_V1_BENCHMARK.encryptionOverheadBytes} B AES-GCM. {COMPRESSION_V1_BENCHMARK.pipeline}.
+            </p>
+          </div>
         </div>
-        <p class="text-xs text-[var(--color-text-faint)] mt-3">
-          "Sessions to break even" = number of page-load sessions before PQ + {RUNEMATE_OUTPUT_FORMAT} cumulative bytes drop below classical cumulative bytes. The dashboard page breaks even in <strong>2 sessions</strong>.
-        </p>
+
+        <!-- Visual compression bar -->
+        <div class="glass rounded-xl p-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Compression visualization</p>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="shrink-0 w-24 text-right text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">Source</span>
+              <div class="flex-1 h-8 rounded-sm overflow-hidden" style="background: rgba(128,128,128,0.1);">
+                <div class="h-full rounded-sm flex items-center justify-end pr-3" style="width: 100%; background: var(--color-text-muted); opacity: 0.45;">
+                  <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-white">{COMPRESSION_V1_BENCHMARK.sourceBytes} B</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="shrink-0 w-24 text-right text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">Bytecode</span>
+              <div class="flex-1 h-8 rounded-sm overflow-hidden" style="background: rgba(128,128,128,0.1);">
+                <div class="h-full rounded-sm flex items-center justify-end pr-3" style={`width: ${(COMPRESSION_V1_BENCHMARK.bytecodeBytes / COMPRESSION_V1_BENCHMARK.sourceBytes) * 100}%; background: var(--color-accent-primary);`}>
+                  <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-white">{COMPRESSION_V1_BENCHMARK.bytecodeBytes} B</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="shrink-0 w-24 text-right text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">+ Encrypted</span>
+              <div class="flex-1 h-8 rounded-sm overflow-hidden" style="background: rgba(128,128,128,0.1);">
+                <div class="h-full rounded-sm flex items-center justify-end pr-3" style={`width: ${((COMPRESSION_V1_BENCHMARK.bytecodeBytes + COMPRESSION_V1_BENCHMARK.encryptionOverheadBytes) / COMPRESSION_V1_BENCHMARK.sourceBytes) * 100}%; background: var(--color-accent-secondary);`}>
+                  <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-white">{COMPRESSION_V1_BENCHMARK.bytecodeBytes + COMPRESSION_V1_BENCHMARK.encryptionOverheadBytes} B</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- Why Rust -->
@@ -352,6 +461,90 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- Neuroscience Foundations -->
+      <section id="neuroscience" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Why This Design Works</h2>
+        <p class="text-lg text-[var(--color-text-muted)] mb-8">Topographic Cortical Maps</p>
+        <div class="prose mb-8">
+          <p>
+            The multimodal architecture of {RUNEMATE_OUTPUT_FORMAT} is not arbitrary. Each modality maps directly to how the brain organizes sensory information through <strong>topographic cortical maps</strong> &mdash; systematic spatial arrangements where neighboring neurons respond to neighboring stimuli.
+          </p>
+          <p>
+            Cortical magnification is DPI scaling for the brain: the fovea (central vision) gets disproportionately more cortical area, just as a high-DPI display allocates more pixels to critical UI elements. {RUNEMATE_OUTPUT_FORMAT} layouts can exploit this directly.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Modality</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Cortical Map</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">{RUNEMATE_OUTPUT_FORMAT} Construct</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Key Research</th>
+              </tr>
+            </thead>
+            <tbody>
+              {NEUROSCIENCE_FOUNDATIONS.map((row) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-semibold text-[var(--color-text-primary)]">{row.modality}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-primary)]">{row.corticalMap}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-secondary)]">{row.staveConstruct}</td>
+                  <td class="py-3 px-4 text-xs text-[var(--color-text-muted)]">{row.keyResearch}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Prior art callout -->
+        <div class="glass rounded-xl p-6 mb-4">
+          <div class="flex items-start gap-4">
+            <span class="shrink-0 text-lg">~</span>
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Prior art: direct cortical letter perception</p>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                Beauchamp et al. (2020, <em>Cell</em>) drew letter shapes on V1 via microstimulation and subjects could identify them. This demonstrates that spatial information encoded in Staves layouts can, in principle, be mapped to retinotopic cortical coordinates for direct perception.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-4">
+          <p class="text-xs text-[var(--color-text-faint)]">
+            All citations listed above require manual DOI verification per our Citation Verification Protocol before use in any publication.
+          </p>
+        </div>
+      </section>
+
+      <!-- Multimodal Architecture -->
+      <section id="multimodal" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Multimodal Architecture</h2>
+        <div class="prose mb-8">
+          <p>
+            {RUNEMATE_OUTPUT_FORMAT} v1.0 supports three modalities natively. Each compiles to compact bytecode entries and maps to a specific cortical target for neural rendering.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4">
+          {MULTIMODAL_MODALITIES.map((mod) => (
+            <div class="glass rounded-xl p-6" style="border-top: 3px solid var(--color-accent-primary);">
+              <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-accent-primary)] mb-3">{mod.modality}</p>
+              <p class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-primary)] mb-2">{mod.staveConstruct}</p>
+              <p class="text-xs text-[var(--color-text-muted)] mb-3">{mod.description}</p>
+              <div class="pt-3 border-t border-[var(--color-border)]">
+                <p class="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">
+                  <strong>Parameters:</strong> {mod.parameters}
+                </p>
+                <p class="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)] mt-1">
+                  <strong>Target:</strong> {mod.corticalTarget}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -401,12 +594,12 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
             <div class="flex items-center gap-3 mb-3">
               <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">PHASE 1</span>
               <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">The Forge (Rust Compiler)</h3>
-              <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] ml-auto">
-                In Development
+              <span class="text-xs px-2 py-0.5 rounded-full ml-auto font-semibold" style="color: var(--color-status-safe); background: rgba(34,197,94,0.1);">
+                Complete
               </span>
             </div>
             <p class="text-sm text-[var(--color-text-muted)]">
-              Implementation of the <code>runemate-forge</code> crate. Compiles standard HTML/CSS into {RUNEMATE_OUTPUT_FORMAT} v1.0 bytecode. Includes CSS style resolution, TARA safety bounds validation, and dictionary-based compression.
+              Native {RUNEMATE_OUTPUT_FORMAT} DSL compiler with hand-rolled lexer and recursive descent parser. Multimodal support (visual, auditory, haptic). TARA safety bounds enforced at compile time. Bytecode disassembler for debugging. NSP encryption pipeline with AES-GCM. 24 tests passing.
             </p>
           </div>
 
@@ -418,7 +611,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
               <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)] ml-auto">Next</span>
             </div>
             <p class="text-sm text-[var(--color-text-muted)]">
-              A <code>no_std</code> Rust runtime for BCI chips. Decodes Staves bytecode and drives cortical stimulation patterns directly. Formally verified for memory safety to meet FDA Class III requirements.
+              A <code>no_std</code> Rust runtime for BCI chips. Decodes {RUNEMATE_OUTPUT_FORMAT} bytecode and drives cortical stimulation patterns directly. Retinotopic, tonotopic, and somatotopic coordinate transforms map bytecode constructs to cortical electrode positions. Formally verified for memory safety to meet FDA Class III requirements.
             </p>
           </div>
 
@@ -429,7 +622,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
               <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Universal Neural Markup</h3>
             </div>
             <p class="text-sm text-[var(--color-text-muted)]">
-              Expansion beyond visual translation into direct semantic encoding. Layouts are replaced by <em>perceptual intents</em>, making {RUNEMATE_OUTPUT_FORMAT} the first native language for high-bandwidth neural interfaces.
+              Expansion beyond explicit constructs into direct semantic encoding. Layouts are replaced by <em>perceptual intents</em> mapped through topographic cortical coordinates, making {RUNEMATE_OUTPUT_FORMAT} the first native language for high-bandwidth neural interfaces.
             </p>
           </div>
         </div>

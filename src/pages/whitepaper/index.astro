@@ -20,7 +20,7 @@ const latestChange = getLatestChangelog();
 ---
 
 <PageLayout
-  title="QIF Whitepaper v6.2.3"
+  title="QIF Whitepaper v6.3.0"
   description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
@@ -29,7 +29,7 @@ const latestChange = getLatestChangelog();
     <!-- Sidebar -->
     <aside class="hidden lg:block">
       <div class="sticky top-24">
-        <WhitepaperVersionSelector currentVersion="v6.2.3" />
+        <WhitepaperVersionSelector currentVersion="v6.3.0" />
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
           {[
@@ -58,14 +58,14 @@ const latestChange = getLatestChangelog();
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "QIF Whitepaper v6.2.3: An Open Security Standard for Brain-Computer Interfaces",
+        "headline": "QIF Whitepaper v6.3.0: An Open Security Standard for Brain-Computer Interfaces",
         "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
-        "datePublished": "2026-02-13",
-        "dateModified": "2026-02-17",
+        "datePublished": "2026-02-18",
+        "dateModified": "2026-02-18",
         "mainEntityOfPage": "https://qinnovate.com/whitepaper/",
-        "version": "6.2.3",
+        "version": "6.3.0",
       })} />
 
       <!-- ═══ Header ═══ -->
@@ -81,7 +81,7 @@ const latestChange = getLatestChangelog();
         </p>
         <div class="flex flex-wrap items-center gap-3 mb-4">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
-            v6.2.3
+            v6.3.0
           </span>
           <span class="text-xs text-[var(--color-text-faint)]">2026-02-16</span>
           <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
@@ -297,7 +297,7 @@ const latestChange = getLatestChangelog();
               <strong class="text-[var(--color-text-primary)]">NSP without QIF</strong> encrypts data but cannot detect manipulation at the electrode-tissue boundary. A protocol without an underlying threat model provides protection without informed strategy.
             </p>
             <p>
-              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> encounter a significant bandwidth challenge. Post-quantum cryptographic keys &mdash; the mathematical structures that protect data from future quantum computers &mdash; are 18&ndash;46&times; larger than their classical equivalents. This overhead strains adoption on implants operating within a 40 mW power budget over Bluetooth Low Energy (BLE). Runemate compresses these payloads by 65&ndash;90%, making post-quantum security practical on today&rsquo;s constrained hardware.
+              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> encounter a significant bandwidth challenge. Post-quantum cryptographic keys &mdash; the mathematical structures that protect data from future quantum computers &mdash; are 18&ndash;46&times; larger than their classical equivalents. This overhead strains adoption on implants operating within a 40 mW power budget over Bluetooth Low Energy (BLE). Runemate&rsquo;s native Staves DSL compiler (v1.0) compresses multimodal BCI content by 65&ndash;90%, making post-quantum security practical on today&rsquo;s constrained hardware. Unlike today&rsquo;s outward-only BCIs (Neuralink N1, BrainGate) where all rendering happens on a phone, Runemate targets next-generation implants that render content inward &mdash; directly to cortical tissue &mdash; requiring on-chip decode, safety-check, and render with no external device in the loop.
             </p>
           </div>
         </div>
@@ -955,7 +955,7 @@ const latestChange = getLatestChangelog();
             The protocol is specified across three device tiers: implanted (most constrained, &le;40 mW), wearable (moderate power budget), and external (unconstrained). Not all tiers require all layers &mdash; consumer wearables implement Layers 1&ndash;3, while implanted devices implement all five. Each tier uses the same cryptographic primitives but with different parameter sets and duty cycles.
           </p>
           <p>
-            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). Runemate&rsquo;s compression layer mitigates this overhead, achieving net bandwidth savings over classical transport for typical BCI interface content exceeding 23 KB.
+            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). Runemate&rsquo;s native Staves DSL compiler (v1.0) mitigates this overhead through a purpose-built language with a closed vocabulary &mdash; no HTML parsing, no JavaScript sanitization. The compiler achieves 67.8% compression on multimodal content (visual, auditory, haptic) and net bandwidth savings over classical transport for typical BCI interface content exceeding 23 KB.
           </p>
         </div>
 
@@ -1017,7 +1017,7 @@ const latestChange = getLatestChangelog();
               <li>Use the <a href="/TARA/">TARA atlas</a> to identify risk profiles for BCI techniques in your studies</li>
               <li>Apply <a href="/scoring/">NISS scoring</a> to quantify neural impact in vulnerability reports</li>
               <li>Reference the <a href="#neural-impact">Neural Impact Chain</a> for technique-to-diagnosis mapping</li>
-              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.2.3. Qinnovate. Available at qinnovate.com</code></li>
+              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.3.0. Qinnovate. Available at qinnovate.com</code></li>
             </ul>
           </div>
 
@@ -1081,8 +1081,8 @@ const latestChange = getLatestChangelog();
           <div class="glass rounded-xl p-5 flex gap-4">
             <div class="w-1 rounded-full bg-[var(--color-accent-tertiary)] shrink-0"></div>
             <div>
-              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-1">Runemate Forge</h4>
-              <p class="text-xs text-[var(--color-text-muted)]">The Staves bytecode compiler. Currently in Rust implementation targeting IEC 62304 Class C certification path. 200 KB on-chip footprint.</p>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-1">Runemate Forge v1.0</h4>
+              <p class="text-xs text-[var(--color-text-muted)]">Native Staves DSL compiler with multimodal support (visual, auditory, haptic). Hand-rolled lexer, recursive descent parser, TARA safety bounds at compile time. 67.8% compression, 430&micro;s compile+encrypt. Targeting IEC 62304 Class C. Today&rsquo;s BCIs are outward-only (Neuralink, BrainGate); Runemate targets the next generation of inward-rendering implants.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -1114,7 +1114,7 @@ const latestChange = getLatestChangelog();
       <footer class="border-t border-[var(--color-border)] pt-8 pb-20">
         <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--color-text-faint)]">
           <div>
-            <strong>QIF Whitepaper v6.2.3</strong> &middot; {new Date().toISOString().split('T')[0]} &middot; Apache 2.0
+            <strong>QIF Whitepaper v6.3.0</strong> &middot; {new Date().toISOString().split('T')[0]} &middot; Apache 2.0
           </div>
           <div class="flex gap-4">
             <a href="/whitepaper/v6/">v6.0</a>

@@ -1,10 +1,9 @@
-# Runemate Forge: Neural Markup Translation for Post-Quantum BCI
+# Runemate Forge: Neural Rendering Compiler for Post-Quantum BCI
 
-> A lightweight translation service that compiles web languages (HTML/CSS/JS) into "Staves" —
-> a sanitized, compact bytecode designed for neural rendering on BCI chips.
+> Compiles the Staves declarative DSL into multimodal bytecode (visual, auditory, haptic) for neural rendering on BCI chips.
 >
-> **Project Status:** Requirements / Architecture Phase
-> **Version:** 0.3 (2026-02-10)
+> **Project Status:** v1.0 — Native DSL Compiler + TARA Safety
+> **Version:** 1.0 (2026-02-18)
 > **Author:** Kevin Qi
 > **Parent Framework:** QIF (Quantified Interconnection Framework)
 > **Delivery Protocol:** NSP (Neural Security Protocol)
@@ -15,17 +14,20 @@
 
 Post-quantum cryptography is non-negotiable for BCIs — neural data cannot be reset like a password, and harvest-now-decrypt-later attacks make classical crypto a ticking time bomb for implants with 10-20 year lifetimes. But PQ algorithms come with 25x larger handshakes and 35x larger certificates.
 
-**Runemate Forge** solves this by compressing web content 65-90% through a purpose-built bytecode called **Staves**. The net result: PQ-secured BCI communication is *more* bandwidth-efficient than classical crypto with raw HTML. The PQ tax pays for itself on the first dashboard load.
+**Runemate Forge** solves this with a native declarative DSL that compiles multimodal BCI content — visual layouts, auditory tones, and haptic pulses — into compact **Staves** bytecode, achieving 65-90% size reduction. The DSL has a closed vocabulary: if the source compiles, it is safe. No HTML parsing, no JavaScript sanitization, no unbounded complexity. Safety by construction, not by sanitization.
 
-But the deeper innovation is this: Staves is not just compressed HTML. It is the first markup language designed for brains, not screens. When visual cortex BCIs mature, Staves becomes the rendering language for neural perception — enabling blind users to "see" web content without a display. The same physics that lets an adversary map your house through WiFi lets a clinician calibrate a visual prosthesis through electrodes. The difference is NSP.
+The net result: PQ-secured BCI communication is *more* bandwidth-efficient than classical crypto with equivalent web content. The PQ tax pays for itself on the first dashboard load.
+
+But the deeper innovation is this: Staves is not compressed HTML — it is the first markup language designed for brains, not screens. Its three modalities map directly to topographic cortical maps (retinotopic, tonotopic, somatotopic). When visual cortex BCIs mature, Staves becomes the rendering language for neural perception — enabling blind users to "see" content without a display.
 
 **Key results:**
-- **65-90% compression** of BCI web content (PoC-validated on 3 realistic pages)
+- **67.8% compression** on v1.0 demo (1059 B source → 341 B bytecode, native DSL compiler)
+- **Multimodal support** — visual, auditory (tone), and haptic (pulse) constructs in a single bytecode stream
 - **Full PQ offset** in 2-14 page loads (amortized over a session, Staves + PQ beats classical + HTML)
 - **200 KB on-chip footprint** for the Scribe interpreter (fits any implant-grade MCU)
 - **+0.3 mW power overhead** (0.75% of 40 mW implant thermal budget)
 - **Three independent safety gates** for neural rendering: TARA (compile-time), NSP (transport), QI (runtime)
-- **111+ conformance test vectors** with reference bytecode outputs
+- **24 tests passing** with hand-rolled lexer + recursive descent parser
 - **8 post-quantum compliance gaps** identified with concrete solution paths
 
 **Technology:** Entire critical path in Rust. Zero C/C++. Memory-safe from transport to rendering.
@@ -35,16 +37,54 @@ But the deeper innovation is this: Staves is not just compressed HTML. It is the
 | Component | Status | TRL | Evidence |
 |-----------|--------|-----|----------|
 | **Staves v1 bytecode format** | Specified | 4 — Validated in lab | PoC compiler produces valid binaries; 3 pages tested (Section 15) |
-| **Forge compiler (HTML→Staves)** | Core Implemented (Alpha) | 4 — Validated in lab | Rust implementation achieves 65-90% compression; secure pipeline verified (Section 15) |
+| **Staves DSL (native markup)** | Implemented | 5 — Component validated | Hand-rolled lexer + recursive descent parser, 24 tests passing, multimodal support |
+| **Forge compiler (DSL→Staves bytecode)** | Implemented (v1.0) | 5 — Component validated | Native DSL compiler achieves 67.8% compression; compile+encrypt pipeline verified (430µs) |
 | **Scribe interpreter** | Architecture phase | 3 — Proof of concept | Binary size and memory budgets validated (Section 10) |
 | **NSP transport integration** | Architecture phase | 3 — Proof of concept | Frame format specified (Section 6); NSP v0.3 exists independently |
-| **TARA safety bounds** | Specified | 3 — Proof of concept | 71 attack-therapy pairs catalogued; compiler constraints designed (Section 11) |
+| **TARA safety bounds** | Implemented | 4 — Validated in lab | Shannon criterion, charge density, element/depth limits enforced at compile time |
 | **Staves v2 (neural opcodes)** | Design phase | 2 — Technology formulated | Opcode table defined (Section 16.2); requires electrode hardware for validation |
 | **Bevy-to-Staves bridge** | Design phase | 2 — Technology formulated | Pipeline architecture defined (Section 16.6); requires Bevy integration |
 | **Neural calibration protocol** | Research concept | 1-2 — Basic principles | RF-to-neural mapping isomorphism identified (R-007); requires clinical validation |
 | **Visual cortex rendering** | Research concept | 1 — Basic principles | Synesthesia + congenital blindness research paths identified; requires IRB, cohort, years of research |
 
-> **Reading guide:** Sections 1-15 describe **production-ready engineering** (TRL 3-4). Sections 16-17 describe **research-stage architecture** (TRL 1-2) that depends on fundamental neuroscience breakthroughs. Sections 18-19 cover developer experience and regulatory strategy. Both research and regulatory content are included because the Phase 1 architecture was designed to support the Phase 2/3 research path — the decisions are entangled.
+> **Reading guide:** Sections 1-15 describe **production-ready engineering** (TRL 3-5). Sections 16-17 describe **research-stage architecture** (TRL 1-2) that depends on fundamental neuroscience breakthroughs. Sections 18-19 cover developer experience and regulatory strategy. Both research and regulatory content are included because the Phase 1 architecture was designed to support the Phase 2/3 research path — the decisions are entangled.
+
+### State of the Art: How BCIs Work Today
+
+No commercial BCI ships inward rendering today. Every current-generation implant — Neuralink N1, BrainGate, Blackrock Neurotech — is **outward-only**: the chip records neural signals and streams them to an external device (phone, tablet, PC). All decoding, UI rendering, and user interaction happens off-chip in a standard app (Swift/UIKit, Android).
+
+| Aspect | Today's BCIs | Runemate Target |
+|--------|-------------|-----------------|
+| **Direction** | Outward only (signals out) | Inward (content delivered to cortex) |
+| **Implant role** | Sensor — records and transmits | Renderer — decodes bytecode, produces cortical percepts |
+| **UI rendering** | Phone/tablet app (standard frameworks) | On-chip Staves interpreter drives electrode stimulation |
+| **Processing** | All off-chip | Decode, safety-check, render on bare metal |
+
+Runemate is designing for the next generation: implants that receive structured payloads inward and render them directly to cortical tissue. The prior art for inward rendering is purely research:
+
+- **Beauchamp et al. 2020 (*Cell*)** — Drew letter shapes on V1 via microstimulation; subjects identified them (visual)
+- **Flesher et al. 2021 (*Science*)** — Produced tactile percepts via intracortical microstimulation in human S1 (somatosensory)
+- **BrainGate (ongoing)** — Demonstrated cursor control and typing via motor cortex recordings (motor, outward)
+
+These are lab experiments with hardcoded stimulation patterns, not a general-purpose rendering pipeline. Runemate is infrastructure for when inward rendering becomes viable at consumer scale.
+
+> **Note:** All citations require manual DOI verification per our Citation Verification Protocol.
+
+### Neuroscience Foundations
+
+The multimodal architecture of Staves maps directly to **topographic cortical maps** — systematic spatial arrangements in the brain where neighboring neurons respond to neighboring stimuli:
+
+| Modality | Cortical Map | Staves Construct | Key Research |
+|----------|-------------|-----------------|--------------|
+| Visual | Retinotopic (V1-V3) | `stave` / `layout` | Tootell et al. 1998 |
+| Auditory | Tonotopic (A1) | `tone` | Formisano et al. 2003 |
+| Somatosensory | Somatotopic (S1) | `pulse` | Penfield 1937, Flesher et al. 2021 |
+
+**Cortical magnification** = DPI scaling for the brain: the fovea gets disproportionately more cortical area, just as a high-DPI display allocates more pixels to critical UI elements.
+
+**Prior art:** Beauchamp et al. (2020, *Cell*) drew letter shapes on V1 via microstimulation and subjects could identify them — demonstrating that spatial information can be directly perceived through retinotopic cortical coordinates.
+
+> **Note:** All citations listed above require manual DOI verification per our Citation Verification Protocol before use in any publication.
 
 ---
 

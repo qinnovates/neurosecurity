@@ -3,13 +3,39 @@
  * Single source of truth for all Runemate values used on the site.
  */
 
-export const RUNEMATE_VERSION = '0.4';
-export const RUNEMATE_STATUS = 'Compiler Foundation & Secure Pipe Verified';
+export const RUNEMATE_VERSION = '1.0';
+export const RUNEMATE_STATUS = 'v1.0 — Native DSL Compiler + TARA Safety';
 export const RUNEMATE_PROJECT_NAME = 'Project Runemate';
 export const RUNEMATE_TOOL_NAME = 'Runemate Forge';
 export const RUNEMATE_OUTPUT_FORMAT = 'Staves';
 
-/** Theoretical compression data (from RUNEMATE.md Section 4) */
+/** How BCIs work today vs. what Runemate is designing for */
+export const BCI_STATE_OF_ART = {
+  today: {
+    label: 'Today\'s BCIs (Neuralink N1, BrainGate, etc.)',
+    direction: 'Outward only',
+    description: 'Record neural signals, stream them out wirelessly to an external device',
+    rendering: 'Standard phone/tablet app (Swift/UIKit, Android)',
+    implantRole: 'Sensor — records and transmits, renders nothing',
+    processing: 'All decoding and UI rendering happens off-chip (iPhone, tablet, PC)',
+  },
+  future: {
+    label: 'Inward-rendering BCIs (what Runemate targets)',
+    direction: 'Inward — content delivered to cortex',
+    description: 'Receive structured payloads and render information directly to cortical tissue',
+    rendering: 'On-chip Staves interpreter drives electrode stimulation patterns',
+    implantRole: 'Renderer — decodes bytecode, produces cortical percepts',
+    processing: 'Decode, safety-check, and render must happen on bare metal, on-chip, with no phone in the loop',
+  },
+  priorArt: [
+    { study: 'Beauchamp et al. 2020 (Cell)', finding: 'Drew letter shapes on V1 via microstimulation — subjects identified them', modality: 'Visual' },
+    { study: 'Flesher et al. 2021 (Science)', finding: 'Produced tactile percepts via intracortical microstimulation in human S1', modality: 'Somatosensory' },
+    { study: 'BrainGate (ongoing)', finding: 'Demonstrated cursor control and typing via motor cortex recordings', modality: 'Motor (outward)' },
+  ],
+  caveat: 'No commercial BCI ships inward rendering today. Runemate is infrastructure for the next generation.',
+  citationNote: 'All citations require manual DOI verification per our Citation Verification Protocol.',
+} as const;
+
 /** Theoretical compression data — PQ overhead derived from NSP-PROTOCOL-SPEC.md Section 4.8 message structs */
 export const COMPRESSION_THEORETICAL = [
   { label: 'Minimal alert', rawSize_KB: 5, stavesSize_KB: 0.5, pqHandshake_KB: 20.6, pqStavesTotal_KB: 21.1, classicalTotal_KB: 5.8, netVsClassical_KB: 15.3, netSavings: false },
@@ -19,7 +45,17 @@ export const COMPRESSION_THEORETICAL = [
   { label: 'Complex interface', rawSize_KB: 500, stavesSize_KB: 50, pqHandshake_KB: 20.6, pqStavesTotal_KB: 70.6, classicalTotal_KB: 500.8, netVsClassical_KB: -430.2, netSavings: true },
 ] as const;
 
-/** PoC benchmark data (from benchmark-results.json — v0.2, NSP-derived PQ overhead) */
+/** v1.0 benchmark data (from cargo run --bin demo) */
+export const COMPRESSION_V1_BENCHMARK = {
+  sourceBytes: 1059,
+  bytecodeBytes: 341,
+  compressionPercent: 67.8,
+  encryptionOverheadBytes: 16,
+  compileEncryptMicros: 430,
+  pipeline: 'PQ handshake + compile + encrypt + decrypt verified end-to-end',
+} as const;
+
+/** Legacy PoC benchmark data (from benchmark-results.json — v0.2, NSP-derived PQ overhead) */
 export const COMPRESSION_POC = [
   {
     file: 'bci-alert.html',
@@ -83,14 +119,14 @@ export const STREAMING_OVERHEAD = {
   note: 'AES-256 is already quantum-resistant. PQ algorithms only used during handshake.',
 } as const;
 
-/** Compression techniques */
+/** Compression techniques — v1.0 native DSL compiler */
 export const COMPRESSION_TECHNIQUES = [
-  { name: 'Tokenized DOM', mechanism: '<div class="container"> (25 B) becomes opcode + index (2 B)', savings: '85-95%' },
-  { name: 'Style table dedup', mechanism: 'CSS property sets defined once, referenced by 1-byte index', savings: '85-90%' },
-  { name: 'Semantic packing', mechanism: 'display (20 values = 5 bits), position (5 values = 3 bits)', savings: '70-80%' },
-  { name: 'Delta encoding', mechanism: 'Repeated elements encoded as diffs from template', savings: '60-80%' },
-  { name: 'JS elimination', mechanism: 'JavaScript stripped entirely (not supported on-chip)', savings: '100%' },
-  { name: 'Dictionary coding', mechanism: 'Common HTML patterns become single opcodes', savings: '80-90%' },
+  { name: 'Native DSL opcodes', mechanism: 'Purpose-built language compiles directly to bytecode — no HTML parsing overhead', savings: '65-90%' },
+  { name: 'String table dedup', mechanism: 'Shared string pool with 2-byte indices; identical strings stored once', savings: '80-90%' },
+  { name: 'Style table dedup', mechanism: 'Identical style sets collapsed into a single table entry, referenced by index', savings: '85-90%' },
+  { name: 'Multimodal encoding', mechanism: 'Tone and pulse entries packed into 8-byte compact representations', savings: '70-80%' },
+  { name: 'Closed vocabulary', mechanism: 'Compile-time rejection of unknown elements — no runtime validation needed', savings: '100%' },
+  { name: 'Safety by construction', mechanism: 'No JS, no URLs, no executable code — nothing to sanitize or strip', savings: '100%' },
 ] as const;
 
 /** On-chip requirements */
@@ -114,4 +150,54 @@ export const LANGUAGE_COMPARISON = [
   { criterion: 'Bare metal BCI chip', c: 'Yes', go: 'No (needs OS)', rust: 'Yes (no_std)' },
   { criterion: 'PQ crypto libraries', c: 'Good', go: 'Good', rust: 'pqcrypto-rs (safe wrapper)' },
   { criterion: 'Browser engine parts', c: 'NetSurf (old)', go: 'None', rust: 'Servo (modular crates)' },
+] as const;
+
+/** Multimodal modalities supported in v1.0 */
+export const MULTIMODAL_MODALITIES = [
+  {
+    modality: 'Visual',
+    staveConstruct: 'stave / layout',
+    parameters: 'Position, size, color, text, borders',
+    corticalTarget: 'V1-V3 (retinotopic)',
+    description: 'Spatial layouts rendered as visual percepts via retinotopic electrode arrays',
+  },
+  {
+    modality: 'Auditory',
+    staveConstruct: 'tone',
+    parameters: 'Frequency (Hz), duration (ms), amplitude',
+    corticalTarget: 'A1 (tonotopic)',
+    description: 'Frequency-mapped alerts and feedback via tonotopic cortical stimulation',
+  },
+  {
+    modality: 'Haptic',
+    staveConstruct: 'pulse',
+    parameters: 'Intensity, duration (ms), location',
+    corticalTarget: 'S1 (somatotopic)',
+    description: 'Tactile feedback mapped to body regions via somatotopic cortical stimulation',
+  },
+] as const;
+
+/** Neuroscience foundations — topographic cortical maps that justify the multimodal architecture */
+export const NEUROSCIENCE_FOUNDATIONS = [
+  {
+    modality: 'Visual',
+    corticalMap: 'Retinotopic (V1-V3)',
+    staveConstruct: 'stave / layout',
+    keyResearch: 'Tootell et al. 1998',
+    description: 'Primary visual cortex preserves spatial relationships from the retina. Neighboring points in visual space activate neighboring neurons in V1. Cortical magnification = DPI scaling for the brain.',
+  },
+  {
+    modality: 'Auditory',
+    corticalMap: 'Tonotopic (A1)',
+    staveConstruct: 'tone',
+    keyResearch: 'Formisano et al. 2003',
+    description: 'Primary auditory cortex organizes neurons by preferred frequency. Low frequencies at one end, high at the other. The Staves tone construct maps directly to this frequency gradient.',
+  },
+  {
+    modality: 'Somatosensory',
+    corticalMap: 'Somatotopic (S1)',
+    staveConstruct: 'pulse',
+    keyResearch: 'Penfield 1937, Flesher et al. 2021',
+    description: 'Primary somatosensory cortex maps body surface regions to cortical locations (the homunculus). Flesher et al. demonstrated tactile percepts via intracortical microstimulation in human S1.',
+  },
 ] as const;
