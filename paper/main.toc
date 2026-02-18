@@ -76,7 +76,7 @@
 \contentsline {subsection}{\numberline {9.3}NISS Weights Not Calibrated}{23}{subsection.9.3}%
 \contentsline {subsection}{\numberline {9.4}No Interrater Reliability Study}{23}{subsection.9.4}%
 \contentsline {subsection}{\numberline {9.5}Taxonomy Completeness}{23}{subsection.9.5}%
-\contentsline {subsection}{\numberline {9.6}Single-Author Bias}{23}{subsection.9.6}%
+\contentsline {subsection}{\numberline {9.6}Single-Author Bias}{24}{subsection.9.6}%
 \contentsline {subsection}{\numberline {9.7}AI Tool Disclosure}{24}{subsection.9.7}%
-\contentsline {subsection}{\numberline {9.8}Future Work}{24}{subsection.9.8}%
-\contentsline {section}{\numberline {10}Conclusion}{24}{section.10}%
+\contentsline {subsection}{\numberline {9.8}Future Work}{25}{subsection.9.8}%
+\contentsline {section}{\numberline {10}Conclusion}{25}{section.10}%

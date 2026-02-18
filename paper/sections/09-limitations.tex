@@ -73,17 +73,38 @@ collaboration are essential for maturation.
 
 \subsection{AI Tool Disclosure}
 
-In accordance with arXiv policy on AI-assisted research, we disclose the
-following. Large language models (Claude, Gemini, ChatGPT) were used during
-the development of this framework for: literature review assistance, code
-generation for data analysis and visualization tools, editorial review, and
-cross-validation of technical claims. All framework architecture, threat
-taxonomy design, scoring methodology, clinical mapping decisions, and
-research conclusions were human-directed and human-verified. AI-generated
-outputs were treated as drafts subject to manual review. The author takes
-full responsibility for all content in this paper, irrespective of how it
-was generated. A complete, auditable transparency log documenting every AI
-contribution, human decision, and verification step is maintained at
+In accordance with arXiv, ACM, and IEEE policies on AI-assisted research, we
+disclose the following. Large language models (Claude~4, Gemini~2.0, ChatGPT~4o)
+were used during the development of this framework. Their roles, by section:
+
+\begin{itemize}
+  \item \textbf{Literature review} (Sections~2, 3, 7): AI assisted in identifying
+        relevant publications and summarizing prior work. All citations were
+        independently verified by the author via DOI resolution and publisher page
+        confirmation (see version history below).
+  \item \textbf{Code generation} (Figures~1--6, TARA data pipeline): AI generated
+        Python scripts for data analysis, visualization, and figure generation. All
+        code was reviewed and modified by the author.
+  \item \textbf{Writing assistance} (all sections): AI provided draft text that was
+        substantially rewritten, restructured, and verified by the author. The
+        proportion of AI-generated text retained verbatim is estimated at less
+        than 15\%; the remainder was rewritten or originated by the author.
+  \item \textbf{Cross-validation}: AI models were used to cross-check factual claims
+        across multiple systems (Claude, Gemini, ChatGPT) to reduce single-model
+        bias. Disagreements between models were resolved by the author through
+        primary source verification.
+\end{itemize}
+
+\noindent\textbf{Human-originated contributions:} The 11-band hourglass architecture,
+TARA threat taxonomy structure, NISS scoring methodology, Neural Impact Chain
+pipeline, all DSM-5-TR mappings, all NISS metric assignments, and all research
+conclusions were conceived, designed, and decided by the author. AI did not
+originate any architectural or methodological contribution.
+
+\noindent The author takes full responsibility for all content in this paper,
+irrespective of how it was generated. A complete, auditable transparency log
+documenting every AI contribution, human decision, and verification step is
+maintained at
 \url{https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md}.
 
 An earlier version of this preprint (v1.0) contained citation errors
@@ -93,9 +114,15 @@ independent verification audit. All references have been verified against
 their source publications via DOI resolution, author publication pages,
 and database lookup. Version 1.2 corrected an internal percentage
 inconsistency and added the author responsibility statement above.
-This revision (v1.3) expands the regulatory context (Section~2.2) with
-FDORA/PATCH Act Section~524B analysis and adds Schroder et al.~(2025)
-to the related work.
+Version~1.3 expanded the regulatory context (Section~2.2) with
+FDORA/PATCH Act Section~524B analysis and added Schroder et al.~(2025)
+to the related work. This revision (v1.4) adds the missing Sherman \&
+Guillery~(2006) citation for thalamocortical relay logic in the hourglass
+derivation (Section~\ref{sec:hourglass}), replaces a mislabeled DBS citation
+with Hallett~(2007) for TMS, corrects NISS case study scores to match the
+arithmetic mean formula (Equation~\ref{eq:niss}), fixes the dual-use
+classification label (75.5\% includes confirmed, probable, and possible
+analogs), and completes a full citation and claims verification pass.
 
 \subsection{Future Work}
 
@@ -113,5 +140,5 @@ to the related work.
   \item \textbf{Weight calibration}: Expert elicitation and sensitivity analysis
         for NISS context profile weights
   \item \textbf{Conference paper}: Condensed version for submission to Graz BCI
-        Conference 2026 and USENIX WOOT '26
+        Conference 2026
 \end{enumerate}

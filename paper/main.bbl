@@ -86,6 +86,13 @@ Tamara Denning, Yoky Matsuoka, and Tadayoshi Kohno.
 \newblock URL \url{https://www.first.org/cvss/v4.0/user-guide}.
 \newblock Section 3.11: Extension Framework. Verified 2026-02-16 via URL check.
 
+\bibitem[Hallett(2007)]{hallett2007tms}
+Mark Hallett.
+\newblock Transcranial magnetic stimulation: A primer.
+\newblock \emph{Neuron}, 55\penalty0 (2):\penalty0 187--199, 2007.
+\newblock \doi{10.1016/j.neuron.2007.06.026}.
+\newblock Verified 2026-02-18 via PubMed PMID:17640522.
+
 \bibitem[Halperin et~al.(2008)Halperin, Heydt-Benjamin, Ransford,
   et~al.]{halperin2008pacemakers}
 Daniel Halperin, Thomas~S. Heydt-Benjamin, Benjamin Ransford, et~al.
@@ -130,14 +137,6 @@ Eric~R. Kandel, John~D. Koester, Sarah~H. Mack, and Steven~A. Siegelbaum.
 \newblock URL \url{https://neurology.mhmedical.com/book.aspx?bookid=3024}.
 \newblock Verified 2026-02-16 via McGraw-Hill Medical.
 
-\bibitem[Krauss et~al.(2021)Krauss, Lipsman, Aziz, et~al.]{krauss2021tms}
-Joachim~K. Krauss, Nir Lipsman, Tipu Aziz, et~al.
-\newblock Technology of deep brain stimulation: Current status and future
-  directions.
-\newblock \emph{Nature Reviews Neurology}, 17:\penalty0 75--87, 2021.
-\newblock \doi{10.1038/s41582-020-00426-z}.
-\newblock Verified 2026-02-16 via Crossref API.
-
 \bibitem[Lozano et~al.(2019)Lozano, Lipsman, Bergman, et~al.]{lozano2019dbs}
 Andres~M. Lozano, Nir Lipsman, Hagai Bergman, et~al.
 \newblock Deep brain stimulation: Current challenges and future directions.
@@ -148,7 +147,8 @@ Andres~M. Lozano, Nir Lipsman, Hagai Bergman, et~al.
 \bibitem[Lázaro-Muñoz et~al.(2022)Lázaro-Muñoz, Pham, Muñoz,
   et~al.]{lazaro2022posttrial}
 Gabriel Lázaro-Muñoz, Michelle~T. Pham, Katrina~A. Muñoz, et~al.
-\newblock Post-trial access in implanted neural device research.
+\newblock Post-trial access in implanted neural device research: {Device}
+  maintenance, abandonment, and cost.
 \newblock \emph{Brain Stimulation}, 15\penalty0 (5):\penalty0 1029--1036, 2022.
 \newblock \doi{10.1016/j.brs.2022.07.051}.
 \newblock Verified 2026-02-16 via Crossref API.
@@ -169,9 +169,10 @@ Ivan Martinovic, Doug Davies, Mario Frank, Daniele Perito, Tomas Ros, and Dawn
 Lubin Meng, Xue Jiang, and Dongrui Wu.
 \newblock Adversarial robustness benchmark for {EEG}-based brain-computer
   interfaces.
-\newblock \emph{Future Generation Computer Systems}, 2023.
+\newblock \emph{Future Generation Computer Systems}, 143:\penalty0 231--247,
+  2023.
 \newblock \doi{10.1016/j.future.2023.01.028}.
-\newblock Verified 2026-02-16 via Crossref API.
+\newblock Verified 2026-02-18 via Crossref API; volume/pages added.
 
 \bibitem[{MITRE Corporation}(2024)]{mitre2024attack}
 {MITRE Corporation}.

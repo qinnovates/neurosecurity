@@ -31,9 +31,9 @@ categories, severity levels, and gap groups.
 \textbf{Technique} & \textbf{Description} & \textbf{CVSS} & \textbf{NISS} \\
 \midrule
 QIF-T0001 & Cortical signal injection via rogue electrode & 9.3 (Crit) & 8.7 (High) \\
-QIF-T0015 & P300 side-channel private data extraction     & 7.7 (High) & 4.7 (Med) \\
-QIF-T0034 & BCI calibration data poisoning                & 8.2 (High) & 5.3 (Med) \\
-QIF-T0050 & Covert neural signal decoding for surveillance & 7.1 (High) & 6.0 (Med) \\
+QIF-T0015 & P300 side-channel private data extraction     & 7.7 (High) & 2.7 (Low) \\
+QIF-T0034 & BCI calibration data poisoning                & 8.2 (High) & 5.7 (Med) \\
+QIF-T0050 & Covert neural signal decoding for surveillance & 7.1 (High) & 4.0 (Med) \\
 QIF-T0072 & Ultrasonic bone-conduction side-channel        & 5.3 (Med)  & 2.7 (Low) \\
 \bottomrule
 \end{tabularx}
@@ -80,11 +80,13 @@ information~\cite{martinovic2012feasibility}. CVSS treats this as a
 confidentiality breach; the actual impact is a cognitive integrity violation.
 
 \paragraph{NISS extension.}
-\texttt{NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N} --- Score: 4.7 (Medium). No
-biological impact, but high cognitive integrity violation and explicit consent
-violation. Fully reversible (passive attack). The NISS score is lower than CVSS
-because no physical harm occurs---but the CG:H flag alerts BCI-specific teams
-that private cognitive data is at risk.
+\texttt{NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N} --- Score: 2.7 (Low). No
+biological impact (BI:N = 0), high cognitive integrity violation (CG:H = 6.7),
+explicit consent violation (CV:E = 6.7), fully reversible (RV:F = 0), no
+neuroplastic effect (NP:N = 0). The arithmetic mean is
+$(0 + 6.7 + 6.7 + 0 + 0)/5 = 2.7$. The NISS score is significantly lower than
+CVSS because no physical harm occurs and the attack is fully reversible---but
+the CG:H flag alerts BCI-specific teams that private cognitive data is at risk.
 
 \subsection{Case 3: Calibration Poisoning (QIF-T0034)}
 
@@ -99,10 +101,12 @@ the brain to adapt to the corrupted interface, creating lasting neural pathway
 changes even after the poisoning is discovered and corrected.
 
 \paragraph{NISS extension.}
-\texttt{NISS:1.0/BI:L/CG:H/CV:I/RV:T/NP:T} --- Score: 5.3 (Medium). Low
-biological impact but high cognitive integrity violation (the device
-misinterprets intent), covert consent violation (the patient doesn't know
-calibration was corrupted), and temporary neuroplastic changes.
+\texttt{NISS:1.0/BI:L/CG:H/CV:I/RV:T/NP:T} --- Score: 5.7 (Medium). Low
+biological impact (BI:L = 3.3), high cognitive integrity violation (CG:H = 6.7,
+the device misinterprets intent), covert consent violation (CV:I = 10.0, the
+patient doesn't know calibration was corrupted), temporary reversibility
+(RV:T = 3.3), and temporary neuroplastic changes (NP:T = 5.0). The arithmetic
+mean is $(3.3 + 6.7 + 10.0 + 3.3 + 5.0)/5 = 5.7$.
 
 \subsection{Case 4: Covert Neural Surveillance (QIF-T0050)}
 
@@ -116,10 +120,13 @@ the patient's thoughts, emotional states, and cognitive patterns. The consent
 violation is maximal: the patient cannot detect or refuse the surveillance.
 
 \paragraph{NISS extension.}
-\texttt{NISS:1.0/BI:N/CG:C/CV:I/RV:F/NP:N} --- Score: 6.0 (Medium). No
-biological impact, but critical cognitive integrity violation (CG:C, full
-thought decoding) and covert consent violation (CV:I). The high CG and CV scores
-distinguish this from ordinary data exfiltration.
+\texttt{NISS:1.0/BI:N/CG:C/CV:I/RV:F/NP:N} --- Score: 4.0 (Medium). No
+biological impact (BI:N = 0), critical cognitive integrity violation (CG:C =
+10.0, full thought decoding), covert consent violation (CV:I = 10.0), fully
+reversible (RV:F = 0), no neuroplastic effect (NP:N = 0). The arithmetic mean
+is $(0 + 10.0 + 10.0 + 0 + 0)/5 = 4.0$. Despite the low aggregate score, the
+CG:C and CV:I flags distinguish this from ordinary data exfiltration---these
+maximum-severity cognitive and consent violations demand BCI-specific review.
 
 \subsection{Case 5: Real-World Vulnerability Disclosure}
 

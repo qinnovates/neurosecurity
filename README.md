@@ -160,8 +160,7 @@ qinnovates/qinnovate/
 │   └── processes/              # Standards development lifecycle
 │
 ├── paper/                      # Academic publications
-│   ├── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640105)
-│   └── woot26/                 # WOOT '26 submission (deadline Mar 3)
+│   └── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640105)
 │
 ├── packaging/                  # Published packages
 │   └── qtara/                  # Python SDK (pip install qtara)
