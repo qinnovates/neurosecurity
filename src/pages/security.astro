@@ -1,6 +1,10 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
+import BrainVisualization from '../components/brain/BrainVisualization';
+import { getBrainViewData } from '../lib/brain-view-data';
+
+const brainViews = getBrainViewData();
 ---
 
 <PageLayout
@@ -14,6 +18,11 @@ import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
       QIF's security architecture protects neural interfaces across three domains: real-time signal authentication, layered frequency-band defense, and threat-mapped scoring. These are the mechanisms that determine whether a neural signal is legitimate or tampered with.
     </p>
   </div>
+
+  <!-- Brain Visualization -->
+  <section class="mb-16">
+    <BrainVisualization client:only="react" views={brainViews} defaultView="security" />
+  </section>
 
   <!-- Signal Authentication -->
   <section class="mb-16">
