@@ -15,47 +15,43 @@ interface Props {
  * Brain model is scaled 18x. Positions tuned to sit ON the brain surface.
  * Coordinates are in the rotating group's local space (they rotate with the brain).
  */
+/**
+ * 3D hotspot positions mapped to QIF neural bands (N7–N1).
+ * Positioned anatomically on the brain.glb model (scale 18).
+ */
 const REGION_HOTSPOTS: Record<string, [number, number, number]> = {
-  prefrontal: [0, 4, 14],        // front-top of frontal lobe
-  frontal:    [0, 8, 8],         // top-front, motor strip area
-  temporal:   [-12, -2, 5],      // side of brain, above ear
-  limbic:     [0, -1, 3],        // deep center, hippocampus/amygdala
-  motor:      [0, 10, 2],        // top of brain, central sulcus
-  occipital:  [0, 2, -12],       // back of brain
-  cerebellum: [0, -7, -10],      // lower back
-  brainstem:  [0, -10, -3],      // bottom center
+  N7: [0, 8, 10],         // Neocortex — top/front of brain
+  N6: [0, 0, 3],          // Limbic System — deep center
+  N5: [-6, 1, 6],         // Basal Ganglia — inner mid-brain, slightly lateral
+  N4: [0, 1, 0],          // Diencephalon — center (thalamus)
+  N3: [0, -6, -10],       // Cerebellum — lower back
+  N2: [0, -9, -3],        // Brainstem — bottom center
+  N1: [0, -13, 0],        // Spinal Cord — below brainstem
 };
 
 const HOTSPOT_SIZES: Record<string, number> = {
-  prefrontal: 2.5,
-  frontal: 2.5,
-  temporal: 2.5,
-  limbic: 1.8,
-  motor: 2.2,
-  occipital: 2.2,
-  cerebellum: 2.2,
-  brainstem: 1.5,
+  N7: 3.0,
+  N6: 2.2,
+  N5: 1.8,
+  N4: 1.8,
+  N3: 2.2,
+  N2: 1.8,
+  N1: 1.5,
 };
 
-function BrainModel() {
+/** Primary wireframe brain — the main visible layer */
+function BrainWireframe() {
   const { scene } = useGLTF('/models/brain.glb');
-  const clonedScene = useRef<THREE.Group | null>(null);
 
   useEffect(() => {
-    // Override all materials to create a digital/holographic look
     scene.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
-        mesh.material = new THREE.MeshPhongMaterial({
-          color: new THREE.Color('#2563eb'),
-          emissive: new THREE.Color('#3b82f6'),
-          emissiveIntensity: 0.08,
+        mesh.material = new THREE.MeshBasicMaterial({
+          color: new THREE.Color('#3b82f6'),
+          wireframe: true,
           transparent: true,
-          opacity: 0.55,
-          wireframe: false,
-          shininess: 100,
-          specular: new THREE.Color('#93c5fd'),
-          side: THREE.DoubleSide,
+          opacity: 0.35,
         });
       }
     });
@@ -64,10 +60,10 @@ function BrainModel() {
   return <primitive object={scene} scale={18} />;
 }
 
-/** Wireframe overlay for digital aesthetic */
-function BrainWireframe() {
+/** Faint solid fill underneath wireframe for depth */
+function BrainGhost() {
   const { scene } = useGLTF('/models/brain.glb');
-  const wireframeScene = useRef<THREE.Group | null>(null);
+  const ghostScene = useRef<THREE.Group | null>(null);
 
   useEffect(() => {
     const cloned = scene.clone(true);
@@ -75,18 +71,18 @@ function BrainWireframe() {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         mesh.material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color('#3b82f6'),
-          wireframe: true,
+          color: new THREE.Color('#dbeafe'),
           transparent: true,
-          opacity: 0.15,
+          opacity: 0.12,
+          side: THREE.DoubleSide,
         });
       }
     });
-    wireframeScene.current = cloned;
+    ghostScene.current = cloned;
   }, [scene]);
 
-  if (!wireframeScene.current) return null;
-  return <primitive object={wireframeScene.current} scale={18} />;
+  if (!ghostScene.current) return null;
+  return <primitive object={ghostScene.current} scale={18} />;
 }
 
 interface HotspotProps {
@@ -103,54 +99,86 @@ function Hotspot({ region, neurorights: rights, isActive, onHover, onClick }: Ho
   if (!position) return null;
 
   const regionRights = rights.filter(nr => region.neurorights.includes(nr.id));
-  const primaryColor = regionRights.length > 0 ? regionRights[0].color : '#94a3b8';
+
+  // Color by severity: purple = highest, orange = medium, yellow = low
+  const threats = region.threatCount;
+  const primaryColor =
+    threats >= 60 ? '#7c3aed'   // purple — highest severity
+    : threats >= 40 ? '#a855f7' // violet — high severity
+    : threats >= 20 ? '#f97316' // orange — medium severity
+    : '#eab308';                // yellow — low severity
 
   const ref = useRef<THREE.Mesh>(null);
   const ringRef = useRef<THREE.Mesh>(null);
 
-  // Pulse animation for active hotspot
+  const glowRef = useRef<THREE.Mesh>(null);
+
+  // Continuous pulse animation so hotspots always glow
   useFrame((state) => {
+    const t = state.clock.elapsedTime;
     if (ref.current) {
       const scale = isActive
-        ? 1.0 + Math.sin(state.clock.elapsedTime * 3) * 0.2
-        : 1.0 + Math.sin(state.clock.elapsedTime * 1.5) * 0.05;
+        ? 1.0 + Math.sin(t * 3) * 0.25
+        : 1.0 + Math.sin(t * 2 + position[0]) * 0.1;
       ref.current.scale.setScalar(scale);
     }
+    if (glowRef.current) {
+      const glowScale = isActive
+        ? 1.3 + Math.sin(t * 2.5) * 0.15
+        : 1.0 + Math.sin(t * 1.5 + position[1]) * 0.08;
+      glowRef.current.scale.setScalar(glowScale);
+      (glowRef.current.material as THREE.MeshBasicMaterial).opacity =
+        isActive ? 0.25 + Math.sin(t * 3) * 0.1 : 0.12 + Math.sin(t * 2 + position[0]) * 0.05;
+    }
     if (ringRef.current) {
-      ringRef.current.rotation.z = state.clock.elapsedTime * 0.5;
+      ringRef.current.rotation.z = t * 0.8;
       const ringScale = isActive
-        ? 1.2 + Math.sin(state.clock.elapsedTime * 2) * 0.1
-        : 1.0;
+        ? 1.3 + Math.sin(t * 2) * 0.15
+        : 1.0 + Math.sin(t * 1.5 + position[2]) * 0.06;
       ringRef.current.scale.setScalar(ringScale);
     }
   });
 
   return (
-    <group position={position}>
-      {/* Core sphere */}
+    <group position={position} renderOrder={10}>
+      {/* Outer glow sphere — always visible on top */}
+      <mesh ref={glowRef} renderOrder={10}>
+        <sphereGeometry args={[size * 1.0, 16, 16]} />
+        <meshBasicMaterial
+          color={primaryColor}
+          transparent
+          opacity={0.12}
+          depthWrite={false}
+          depthTest={false}
+        />
+      </mesh>
+      {/* Core sphere — clickable, always on top */}
       <mesh
         ref={ref}
+        renderOrder={11}
         onPointerOver={(e) => { e.stopPropagation(); onHover(region.id); }}
         onPointerOut={() => onHover(null)}
         onClick={(e) => { e.stopPropagation(); onClick(region.id); }}
       >
         <sphereGeometry args={[size * 0.5, 16, 16]} />
-        <meshStandardMaterial
-          color={primaryColor}
-          transparent
-          opacity={isActive ? 0.6 : 0.3}
-          emissive={primaryColor}
-          emissiveIntensity={isActive ? 0.6 : 0.2}
-        />
-      </mesh>
-      {/* Outer ring */}
-      <mesh ref={ringRef}>
-        <ringGeometry args={[size * 0.6, size * 0.7, 32]} />
         <meshBasicMaterial
           color={primaryColor}
           transparent
-          opacity={isActive ? 0.4 : 0.1}
+          opacity={isActive ? 0.85 : 0.55}
+          depthWrite={false}
+          depthTest={false}
+        />
+      </mesh>
+      {/* Spinning ring — always on top */}
+      <mesh ref={ringRef} renderOrder={10}>
+        <ringGeometry args={[size * 0.65, size * 0.75, 32]} />
+        <meshBasicMaterial
+          color={primaryColor}
+          transparent
+          opacity={isActive ? 0.5 : 0.2}
           side={THREE.DoubleSide}
+          depthWrite={false}
+          depthTest={false}
         />
       </mesh>
     </group>
@@ -175,7 +203,7 @@ function BrainScene({ brainRegions, neurorights, activeRegion, onHover, onClick 
       <directionalLight position={[-5, -5, 10]} intensity={0.4} color="#93c5fd" />
       <Suspense fallback={null}>
         <group ref={groupRef}>
-          <BrainModel />
+          <BrainGhost />
           <BrainWireframe />
           {brainRegions.map(region => (
             <Hotspot

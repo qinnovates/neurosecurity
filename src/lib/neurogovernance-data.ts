@@ -89,27 +89,26 @@ const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 
   },
 };
 
-/** Map neurorights to the brain regions they primarily protect */
+/** Map neurorights to QIF bands they primarily protect */
 const NEURORIGHT_BRAIN_MAP: Record<string, string[]> = {
-  MP: ['temporal', 'frontal'],
-  CL: ['prefrontal', 'frontal', 'limbic'],
-  MI: ['frontal', 'motor', 'limbic', 'temporal'],
-  PC: ['limbic', 'prefrontal'],
-  CA: ['prefrontal', 'frontal', 'temporal'],
-  DI: ['motor', 'cerebellum', 'brainstem'],
-  IDA: ['temporal', 'occipital'],
+  MP: ['N7', 'N6'],           // thoughts live in neocortex + limbic
+  CL: ['N7', 'N6', 'N4'],    // cognition spans cortex, limbic, thalamic gating
+  MI: ['N7', 'N6', 'N5', 'N2'], // integrity across all processing layers
+  PC: ['N6', 'N7'],           // identity rooted in limbic + cortex
+  CA: ['N7', 'N4'],           // authenticity requires cortex + sensory gating
+  DI: ['N5', 'N3', 'N2', 'N1'], // dynamics = motor, timing, reflexes
+  IDA: ['N7', 'N1'],          // data linkage from cortex to peripheral relay
 };
 
-/** Simplified brain regions for the visualization */
+/** QIF neural bands as brain regions — 1:1 with the hourglass model */
 const BRAIN_REGIONS: { id: string; name: string; description: string; bandIds: string[] }[] = [
-  { id: 'prefrontal', name: 'Prefrontal Cortex', description: 'Planning, impulse control, self-awareness, social behavior', bandIds: ['N7'] },
-  { id: 'frontal', name: 'Frontal Cortex', description: 'Executive function, decision-making, personality', bandIds: ['N7'] },
-  { id: 'temporal', name: 'Temporal Lobe', description: 'Language, memory, auditory processing', bandIds: ['N7', 'N6'] },
-  { id: 'limbic', name: 'Limbic System', description: 'Emotion, memory formation, motivation', bandIds: ['N6'] },
-  { id: 'motor', name: 'Motor Cortex', description: 'Voluntary movement, coordination', bandIds: ['N7', 'N5'] },
-  { id: 'occipital', name: 'Occipital Lobe', description: 'Visual processing, perception', bandIds: ['N7'] },
-  { id: 'cerebellum', name: 'Cerebellum', description: 'Balance, motor learning, timing', bandIds: ['N3'] },
-  { id: 'brainstem', name: 'Brainstem', description: 'Vital functions, arousal, reflexes', bandIds: ['N2'] },
+  { id: 'N7', name: 'Neocortex', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception', bandIds: ['N7'] },
+  { id: 'N6', name: 'Limbic System', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception', bandIds: ['N6'] },
+  { id: 'N5', name: 'Basal Ganglia', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit', bandIds: ['N5'] },
+  { id: 'N4', name: 'Diencephalon', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay', bandIds: ['N4'] },
+  { id: 'N3', name: 'Cerebellum', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing', bandIds: ['N3'] },
+  { id: 'N2', name: 'Brainstem', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes', bandIds: ['N2'] },
+  { id: 'N1', name: 'Spinal Cord', description: 'Cervical through sacral — reflexes, peripheral relay', bandIds: ['N1'] },
 ];
 
 /** Compute all neurogovernance data from the registrar */
