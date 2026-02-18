@@ -156,12 +156,12 @@ function buildClinicalView(): BrainView {
       }
     }
 
-    // Green tones by therapy count
+    // Red-orange-yellow by therapy count
     const color =
-      count >= 50 ? '#059669'
-      : count >= 30 ? '#10b981'
-      : count >= 15 ? '#34d399'
-      : '#6ee7b7';
+      count >= 50 ? '#ef4444'
+      : count >= 30 ? '#f97316'
+      : count >= 15 ? '#eab308'
+      : '#eab308';
 
     // Badges = domains present
     const badges = Array.from(domainCounts.entries())
