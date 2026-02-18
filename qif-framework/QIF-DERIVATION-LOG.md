@@ -23,6 +23,9 @@
 
 | Date | Event | Link |
 |------|-------|------|
+| 2026-02-18 | **Physics Feasibility Tiering of TARA Techniques.** All 102 techniques classified by physics hardware gate: 61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only. Highest-impact future attacks identified. | [Entry 65](#entry-65-physics-feasibility-tiering) |
+| 2026-02-18 | **BCI Limits Equation Blog Post Published.** Blog post at `/publications/2026-02-18-the-physics-equation-that-limits-every-brain-computer-interface`. Priority timestamp established. | [Entry 64](#entry-64-bci-limits-blog-published) |
+| 2026-02-18 | **BCI Limits Equation — Strategic Assessment.** Kevin asks whether the BCI limits equation (Entry 60) is worth pursuing. Analysis: yes, but as standalone paper, not folded into QIF preprint. Genuinely novel, physics-grounded, testable. | [Entry 63](#entry-63-bci-limits-strategic-assessment) |
 | 2026-02-18 | **Track Everything + Unified Dashboard Vision.** All exchanges logged to derivation log by default. Single-stream record, open source. Exceptions: PII or explicit "incognito." | [Entry 62](#entry-62-track-everything-unified-dashboard) |
 | 2026-02-18 | **Format Change — Raw Conversational Mode.** Standing policy: Kevin's words stay completely unedited in all derivation log entries. Typos, grammar, structure preserved exactly as stated. | [Entry 61](#entry-61-format-change-raw-conversational) |
 | 2026-02-18 | **BCI Limits Equation Synthesis — Live Session.** Verbatim back-and-forth deriving the unified physics-constraint system for BCI hardware limits. Couples thermodynamics + EM + Moore's Law + Shannon safety + Boltzmann factor + QIF coherence metric. Gap confirmed: no published unified framework exists. Extends Marblestone et al. (2013). | [Entry 60](#entry-60-bci-limits-equation-synthesis) |
@@ -185,6 +188,155 @@ Each entry follows this structure:
 | 3 | 2026-02-02 ~afternoon | Layer Consolidation: 14 Is Too Many | Validated — redesign in progress |
 | 2 | 2026-02-02 ~afternoon | Circular Topology: L8 Touches L1 | Validated — superseded by hourglass (Entry 7) |
 | 1 | 2026-02-02 ~afternoon | OSI Layers Are Meaningless for BCI | Validated — drives framework redesign |
+---
+
+## Entry 65: Physics Feasibility Tiering of TARA Techniques {#entry-65-physics-feasibility-tiering}
+
+**Date:** 2026-02-18, ~16:30
+**Classification:** ANALYSIS (grounded in existing data) + HYPOTHESIS (tier assignments)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 60 (BCI Limits Equation), Entry 64 (Blog Post)
+
+### [2026-02-18 16:21] Kevin:
+
+Now how do we make the physics constraint actionable. I think there's a way for us to distinguish future attack vectors but that may be getting too theoretical and requires more validation on existing data points and more data sets first. Thoughts?
+
+### [2026-02-18 16:22] Claude:
+
+Two paths: (1) Map existing 102 TARA techniques against hardware capability thresholds using the constraint system. Grounded, actionable now. (2) Predict novel attack vectors that don't exist in TARA yet. Needs validation first. Recommended: do (1) first, it produces the validation data for (2).
+
+### [2026-02-18 16:23] Kevin:
+
+lets do what we can thats grounded and actionable
+
+### [2026-02-18 16:24] Kevin:
+
+Dont use the API, it needs updating. We can do it next week.
+
+### [2026-02-18 16:30] Claude:
+
+Completed physics feasibility tiering of all 102 TARA techniques. Analysis only, no JSON changes. Each technique classified by what physics advancement is needed for the attack to become executable:
+
+**Results:**
+
+| Tier | Timeline | Count | Description |
+|------|----------|-------|-------------|
+| T0 | Now | 61 | Hardware exists today (consumer EEG, tDCS, existing implants, consumer sensors) |
+| T1 | 2026-2031 | 11 | Components exist but integration is new (multifocal stim, sleep-locked stim, real-time CSD) |
+| T2 | 2031-2038 | 10 | Needs 28nm-7nm BCI chips, 10k+ channels, high-density bidirectional implants |
+| T3 | 2038+ | 2 | Needs nanoscale electrodes or quantum-regime hardware |
+| TX | No physics gate | 18 | Software/platform/network attacks, physics doesn't constrain |
+
+**Key findings:**
+
+1. **60% of TARA is already feasible.** 61 of 102 techniques need no hardware that doesn't exist today. The threat surface is present-tense, not future.
+
+2. **The highest-impact attacks are in Tiers 1-2.** 13 of 21 future-tier techniques score NISS High (7.0+). Neural ransomware (T0002), identity erosion (T0033), agency manipulation (T0037), cognitive warfare (T0055) all sit in Tier 2 waiting for hardware to catch up.
+
+3. **Tier 1 is the danger window.** 11 techniques become feasible within 5 years. 7 of them are NISS High. Bifurcation forcing (T0068, NISS 8.1), self-model corruption (T0039, NISS 8.0), and memory implant (T0060, NISS 7.4) are the top three.
+
+4. **Software attacks bypass physics entirely.** 18 techniques (Tier X) are constrained only by software access, not physics. These include the highest-NISS software attack: algorithmic psychosis induction (T0065, NISS 8.1, CONFIRMED status).
+
+5. **The thermal constraint is the primary gate for Tier 2.** All 10 Tier 2 techniques require bidirectional implants with high channel counts. The thermal budget (15-40 mW) directly caps channel count, which directly caps the precision needed for targeted neural manipulation.
+
+**What this does NOT do yet:**
+- Does not predict novel attack vectors outside the existing 102
+- Does not validate the constraint system against real BCI performance data
+- Does not update the registrar JSON (deferred to next week per Kevin)
+
+- **Human decided:** Do grounded analysis only, defer JSON/API updates to next week
+
+---
+
+## Entry 64: BCI Limits Equation Blog Post — Published {#entry-64-bci-limits-blog-published}
+
+**Date:** 2026-02-18, ~16:20
+**Classification:** PUBLICATION
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 60 (BCI Limits Equation Synthesis), Entry 63 (Strategic Assessment)
+
+### [2026-02-18 16:15] Kevin:
+
+Implement the following plan: BCI Limits Equation Blog Post
+
+### [2026-02-18 16:20] Claude:
+
+Blog post published at `blogs/2026-02-18-the-physics-equation-that-limits-every-brain-computer-interface.md`. Build passes clean (169 pages). Post covers: the constraint system from Entry 60, all 6 constraint categories with real numbers, Moore's Law validation data (Intel/Nvidia/Apple), prior art gap vs Marblestone (2013) and Stevenson's Law (2011), the coherence metric as QIF's novel security dimension, and links to the Zenodo preprint and derivation log. Status: HYPOTHESIS clearly labeled. Next: formal validation against real BCI performance data.
+
+### [2026-02-18 16:21] Kevin:
+
+Now how do we make the physics constraint actionable. I think there's a way for us to distinguish future attack vectors but that may be getting too theoretical and requires more validation on existing data points and more data sets first. Thoughts?
+
+- **Human decided:** Publish blog post to establish priority and timestamp
+
+---
+
+## Entry 63: BCI Limits Equation — Strategic Assessment {#entry-63-bci-limits-strategic-assessment}
+
+**Date:** 2026-02-18, ~23:30
+**Classification:** STRATEGIC ASSESSMENT
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 60 (BCI Limits Equation Synthesis)
+
+### [2026-02-18 23:30] Kevin:
+
+Lets pick up on the equation for BCI limits. Is this beneficial for us? See derivation log
+
+### [2026-02-18 23:30] Claude:
+
+Read Entry 60 in full. Here's the strategic assessment:
+
+**Short answer: Yes, it's beneficial. But it should be a standalone paper, not folded into the existing QIF preprint.**
+
+Why it matters for QIF:
+
+1. **Grounds QIF in physics.** Right now QIF is a taxonomy + scoring system. The BCI limits equation gives it predictive power: "given these physics constraints, when does attack X become feasible?" That transforms QIF from classification into forecasting.
+
+2. **No prior art exists.** Marblestone et al. (2013) is the closest, and it doesn't couple Moore's Law scaling, Shannon electrode safety, or security metrics. The gap is confirmed. This is publishable.
+
+3. **School applications.** Original physics-grounded research that synthesizes across disciplines (thermodynamics, EM, neuroscience, infosec, information theory) is strong signal. It shows you can think across boundaries, not just within one field.
+
+4. **Makes claims falsifiable.** The constraint system produces testable predictions. Academic reviewers love falsifiability.
+
+### [2026-02-18 23:33] Kevin:
+
+I just find it could be helpful to verbalize and show the work we're doing as there's no known unified constraint system in known literature.
+
+### [2026-02-18 23:33] Claude:
+
+That's the right instinct. The derivation log already captures the work, but it's buried in a 60+ entry lab notebook that nobody outside this project will read. The gap between "we derived it" and "we showed it" is where publication lives.
+
+What you're really saying: the novelty is confirmed, the work is done, and leaving it undocumented in a format others can engage with is a missed opportunity. The constraint system exists in Entry 60 as a raw derivation. Turning it into something citable (even a short paper, a blog post on qinnovate.com, or a section in a conference talk) means other researchers can build on it, challenge it, or reference it.
+
+The question isn't whether to verbalize it. It's what format and when:
+
+1. **Blog post on qinnovate.com** (lowest effort, fastest). Write up the constraint system with the equations, the gap analysis vs Marblestone, and the QIF security dimension. Citable, public, timestamped. Could do this week.
+
+2. **Short paper / extended abstract** (medium effort). 4-6 pages. The constraint system, the prior art gap, preliminary validation against known BCI specs. This could be the Graz submission if the format fits.
+
+3. **Full paper** (highest effort). Formal validation against multiple BCI platforms, time-horizon projections, TARA integration. This is the eventual goal but doesn't need to happen first.
+
+Option 1 doesn't block option 2 or 3. A blog post establishes priority and timestamp while the formal paper develops.
+
+### [2026-02-18 23:36] Kevin:
+
+1.
+
+### [2026-02-18 23:36] Claude:
+
+Blog post it is. Planning the writeup now.
+
+Why it should stay separate from the QIF preprint:
+
+- The QIF preprint (v1.4, 28 pages) has a clear scope: framework + TARA + NISS. Adding a physics constraint system changes the paper's identity.
+- The BCI limits equation is a different kind of contribution (physics modeling vs security taxonomy). Different reviewers, different venues.
+- It can cite the QIF preprint as the security dimension it plugs into. Two papers that reference each other > one paper that tries to do everything.
+
+Risks to manage:
+
+- It's classified HYPOTHESIS. Individual physics values are verified, but the coupled system hasn't been validated against real BCI performance data (e.g., does the thermal constraint actually predict Neuralink N1's channel count?). That validation step is needed before submission.
+- Bandwidth: Graz BCI deadline is March 2. Is this the Graz submission, or is the QIF preprint the Graz submission?
+
 ---
 
 ## Entry 62: Track Everything + Unified Dashboard Vision {#entry-62-track-everything-unified-dashboard}
