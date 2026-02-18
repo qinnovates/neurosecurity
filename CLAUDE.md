@@ -60,6 +60,7 @@ When ANY of these occur during a session, you MUST:
 1. Append an entry to `qif-framework/QIF-DERIVATION-LOG.md` (if it's a framework insight)
 2. Append an entry to `qif-framework/QIF-FIELD-JOURNAL.md` (if it's a personal/experiential observation)
 3. Note it in the daily memory log with tag [DECISION] or [DERIVATION]
+4. **Update `qif-framework/QIF-RESEARCH-SOURCES.md`** if any new research paper, citation, RFC, standard, or external source was referenced or incorporated (see Research Sources Sync below)
 
 **Triggers:**
 - New hypothesis formulated or existing one revised
@@ -92,6 +93,30 @@ AI-Collaboration:
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 ```
 This is NOT required for routine code changes — only for research-significant commits.
+
+## Research Sources Sync Protocol (MANDATORY)
+
+**File:** `qif-framework/QIF-RESEARCH-SOURCES.md`
+
+This is the living bibliography of ALL research sources used across the project. It MUST be kept in sync whenever new sources are incorporated.
+
+**When to update:**
+- A new citation is added to `paper/references.bib`
+- A blog post references external research (papers, standards, CVEs)
+- The NSP spec cites a new RFC, NIST standard, or cryptographic paper
+- A new TARA technique references published research
+- Website pages cite research (security page, whitepaper, etc.)
+- A validation or research session discovers new sources
+- Any DOI, arXiv ID, RFC number, or NIST publication is referenced for the first time
+
+**How to update:**
+1. Add the source to the appropriate domain section (or create a new section)
+2. Include: full citation, URL, source context (which file/page), QIF relevance
+3. Update the "Last updated" date in the header
+4. Update the Appendix source statistics table
+5. Use the established table format: `| ID | Citation | URL | Source | QIF Relevance |`
+
+**Domain sections:** Quantum Physics, Neuroscience, BCI Technology, Cybersecurity, Electrode Technology, Signal Coherence, Cryptographic Standards, Consumer Sensor Exploitation, Neuroscience Foundations
 
 ## Citation & Preprint Integrity Protocol (MANDATORY)
 

@@ -5,9 +5,9 @@
 > validation agents (quantum physics, neuroscience, cybersecurity) during the
 > framework review conducted on 2026-02-02.
 >
-> **Last updated:** 2026-02-06
+> **Last updated:** 2026-02-18
 > **Sources extracted from:** Three parallel validation agent sessions
-> **Total unique sources:** 100+
+> **Total unique sources:** 150+
 
 ---
 
@@ -300,6 +300,91 @@ Sources are organized by domain and sorted newest-first within each domain.
 
 ---
 
+## 6. Signal Coherence & Neural Oscillations
+
+> Sources added 2026-02-18 from security page, NSP spec, and preprint references.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| S1 | Fries P. (2005). "A mechanism for cognitive dynamics: neuronal communication through neuronal coherence." Trends in Cognitive Sciences 9(10):474-480. | https://pubmed.ncbi.nlm.nih.gov/16150631/ | Security page / Preprint | Foundation for QIF's coherence metric Cs. Phase coherence determines which neural populations communicate. Directly underpins signal authentication. |
+| S2 | Fries P. (2015). "Rhythms for Cognition: Communication through Coherence." Neuron 88(1):220-235. | https://pubmed.ncbi.nlm.nih.gov/26447583/ | Security page / Preprint | Updated CTC framework. Gamma-band synchronization as selective communication mechanism. Validates Cs as biologically grounded. |
+| S3 | Markram H, Lubke J, Frotscher M, Sakmann B. (1997). "Regulation of synaptic efficacy by coincidence of postsynaptic APs and EPSPs." Science 275(5297):213-215. | https://pubmed.ncbi.nlm.nih.gov/8985014/ | Security page | STDP discovery. Timing windows of +/-10-20 ms provide the temporal constraint for QIF's exponential coherence form. |
+| S4 | Bi GQ, Poo MM. (1998). "Synaptic modifications in cultured hippocampal neurons: dependence on spike timing, synaptic strength, and postsynaptic cell type." Journal of Neuroscience 18(24):10464-10472. | https://pubmed.ncbi.nlm.nih.gov/9852584/ | Security page | Confirmed STDP in hippocampal neurons. Asymmetric timing window. Validates Boltzmann-factor form of Cs equation. |
+| S5 | Buzsaki G. (2012). "Rhythms of the Brain." Oxford University Press. | N/A | Preprint | Foundational text on neural oscillations across frequency bands. Supports QIF's scale-frequency defense mapping (v = f x lambda). |
+
+---
+
+## 7. Cryptographic Standards & Protocols (NSP Spec)
+
+> Sources added 2026-02-18 from NSP-PROTOCOL-SPEC.md v0.5 hardening session.
+
+### NIST Post-Quantum Standards
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| P1 | NIST (2024). FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM). | https://csrc.nist.gov/pubs/fips/203/final | NSP Spec | Primary KEM for NSP hybrid key exchange. ML-KEM-768 for T1/T2, ML-KEM-1024 for T3. |
+| P2 | NIST (2024). FIPS 204: Module-Lattice-Based Digital Signature Standard (ML-DSA). | https://csrc.nist.gov/pubs/fips/204/final | NSP Spec | Primary signature scheme for NSP device authentication. ML-DSA-65 for T1/T2, ML-DSA-87 for T3. |
+| P3 | NIST (2024). FIPS 205: Stateless Hash-Based Digital Signature Standard (SLH-DSA/SPHINCS+). | https://csrc.nist.gov/pubs/fips/205/final | NSP Spec | Hash-based firmware verification. SPHINCS+-SHA2-192s for T2/T3 (NIST Level 3). |
+| P4 | NIST (2024). IR 8547 (IPD): Transition to Post-Quantum Cryptography Standards. | https://csrc.nist.gov/pubs/ir/8547/ipd | NSP Spec | Migration timeline. Non-quantum-resistant crypto deprecated by 2030, disallowed by 2035. |
+| P5 | NIST (2025). "NIST Selects HQC as Fifth Algorithm for Post-Quantum Encryption." | https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption | NSP Spec | HQC as backup KEM. Code-based (vs lattice-based ML-KEM). Standard expected 2027. |
+
+### RFCs & Cryptographic Primitives
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| P6 | Krawczyk H, Eronen P. (2010). RFC 5869: HMAC-based Extract-and-Expand Key Derivation Function (HKDF). | https://www.rfc-editor.org/rfc/rfc5869 | NSP Spec | Key derivation for NSP session keys. HKDF-SHA-256 for T1, HKDF-SHA-384 for T2/T3. |
+| P7 | Gueron S, Lindell Y. (2019). RFC 8452: AES-GCM-SIV: Nonce Misuse-Resistant Authenticated Encryption. | https://www.rfc-editor.org/rfc/rfc8452 | NSP Spec | NSP v0.5 upgrade from AES-256-GCM to AES-256-GCM-SIV for nonce-misuse resistance. Critical for implanted devices where nonce reuse risks are higher. |
+| P8 | Bellare M, Hoang VT. (2022). "Efficient Schemes for Committing Authenticated Encryption." ePrint 2022/268. | https://eprint.iacr.org/2022/268 | NSP Spec | Key-commitment transform added to NSP v0.5. AES-GCM-SIV is NOT inherently key-committing; Bellare-Hoang transform needed separately. |
+
+### Quantum Cryptanalysis
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| P9 | Gidney C, Ekera M. (2021). "How to Factor 2048 Bit RSA Integers in 8 Hours Using 20 Million Noisy Qubits." Quantum 5:433. arXiv:1905.09749. | https://arxiv.org/abs/1905.09749 | NSP Spec | Quantifies the quantum threat timeline. Motivates NSP's PQC-first design. |
+| P10 | Gidney C. (2025). "Fewer Than 1 Million Qubits to Factor 2048-bit RSA." arXiv:2505.15917. | https://arxiv.org/abs/2505.15917 | NSP Spec | Updated estimate: <1M qubits. Accelerates quantum threat timeline significantly. |
+
+### BLE Vulnerability Research
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| P11 | Antonioli D, Tippenhauer NO, Rasmussen K. (2019). "The KNOB is Broken: Exploiting Low Entropy in the Encryption Key Negotiation of Bluetooth BR/EDR." USENIX Security 2019. | https://www.usenix.org/conference/usenixsecurity19/presentation/antonioli | NSP Spec | KNOB attack forces 1-byte entropy in Bluetooth key negotiation. NSP v0.5 adds BLE channel binding in transcript hash to mitigate. |
+| P12 | Antonioli D, Tippenhauer NO, Rasmussen K. (2023). "BLUFFS: Bluetooth Forward and Future Secrecy Attacks and Defenses." ACM CCS 2023. | https://dl.acm.org/doi/10.1145/3576915.3623066 | NSP Spec | Six novel attacks on Bluetooth forward/future secrecy. Motivates NSP's channel binding and independent PQC layer above BLE. |
+
+---
+
+## 8. Consumer Sensor Exploitation & Biometric Inference
+
+> Sources added 2026-02-18 from blog posts and TARA technique research (Feb 2026).
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| X1 | Guri M, Solewicz Y, Zadov B, Elovici Y. (2017). "SPEAKE(a)R: Turn Speakers to Microphones for Fun and Profit." USENIX WOOT 2017. | https://www.usenix.org/conference/woot17/workshop-program/presentation/guri | Blog / CVE | Audio jack retasking attack. 9 years unfiled. Led to TARA's first CVE disclosure (Feb 2026). Maps to T0001 signal injection. |
+| X2 | Michalevsky Y, Boneh D, Nakibly G. (2014). "Gyrophone: Recognizing Speech from Gyroscope Signals." USENIX Security 2014. | https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/michalevsky | Blog | Gyroscope as covert microphone. No permission required on mobile. Consumer sensor exploitation technique. |
+| X3 | Kaveh A et al. (2020). "Wireless User Authentication Based on EEG Signals from Conductive Ear Tips." PubMed 31425018. | https://pubmed.ncbi.nlm.nih.gov/31425018/ | Blog | Consumer earbuds with conductive tips can record EEG. Bridges consumer audio and neural data. |
+| X4 | Chen W, McDuff D. (2018). "DeepPhys: Video-Based Physiological Measurement Using Convolutional Attention Networks." arXiv:1805.07888. | https://arxiv.org/abs/1805.07888 | Blog | Webcam-based heart rate extraction. Remote physiological measurement without contact sensors. |
+| X5 | Becker JK, Li D, Starobinski D. (2019). "Tracking Anonymized Bluetooth Devices." Proceedings on Privacy Enhancing Technologies (PoPETS) 2019(3):50-65. | https://doi.org/10.2478/popets-2019-0036 | Blog | Bluetooth radio imperfections create unique device fingerprints even with MAC randomization. |
+| X6 | Katsini C et al. (2020). "The Role of Eye Gaze in Security and Privacy Applications." ACM Computing Surveys 53(1):1-36. | https://dl.acm.org/doi/10.1145/3379156 | Blog | Eye tracking can infer emotional state, sexual orientation, cognitive load. High-value biometric for BCI threat modeling. |
+| X7 | Landau O, Puzis R, Nissim N. (2020). "Mind Your Mind: EEG-Based Brain-Computer Interfaces and Their Security in Cyber Space." ACM Computing Surveys 53(1):1-38. | https://dl.acm.org/doi/10.1145/3372043 | Blog / Preprint | Comprehensive BCI security survey. Maps attack surfaces for EEG-based BCIs. Key related work for TARA. |
+| X8 | Bernal SL, Celdrán AH, Perez GM et al. (2021). "Security in Brain-Computer Interfaces: State-of-the-Art, Opportunities, and Future Challenges." ACM Computing Surveys 54(1):1-35. | https://dl.acm.org/doi/10.1145/3427376 | Blog / Preprint | BCI security taxonomy. Classifies threats by attack vector, target, and impact. Foundational for TARA categorization. |
+| X9 | Bot BM et al. (2016). "The mPower Study, Parkinson Disease Mobile Data Collected Using ResearchKit." Scientific Data 3:160011. | https://www.nature.com/articles/sdata201611 | Blog | Motion sensor data reveals Parkinson's disease biomarkers. Demonstrates consumer sensors as medical-grade inference tools. |
+
+---
+
+## 9. Neuroscience Foundations (Preprint References)
+
+> Sources added 2026-02-18 from paper/references.bib verification audit.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| F1 | Hallett M. (2007). "Transcranial Magnetic Stimulation: A Primer." Neuron 55(2):187-199. | https://pubmed.ncbi.nlm.nih.gov/17640522/ | Preprint v1.4 | TMS mechanism and clinical applications. Added v1.4 to replace mislabeled DBS citation. Key therapeutic technique in TARA. |
+| F2 | Sherman SM, Guillery RW. (2006). "Exploring the Thalamus and Its Role in Cortical Function." 2nd ed. MIT Press. | https://mitpress.mit.edu/9780123054609/ | Preprint v1.4 | Thalamocortical relay architecture. Added v1.4 for N4 (Diencephalon) band description. Thalamus as sensory gating mechanism. |
+| F3 | Kandel ER, Koester JD, Mack SH, Siegelbaum SA. (2021). "Principles of Neural Science." 6th ed. McGraw Hill. | N/A | Preprint | Foundational neuroscience textbook. Anatomical basis for QIF's 7-band neural hierarchy. |
+| F4 | Lozano AM, Lipsman N, Bergman H et al. (2019). "Deep Brain Stimulation: Current Challenges and Future Directions." Nature Reviews Neurology 15(3):148-160. | https://pubmed.ncbi.nlm.nih.gov/30683913/ | Preprint | DBS clinical review. 160,000+ patients implanted globally. Key therapeutic modality mapped in TARA. |
+| F5 | Schroder T, Sirbu R, Park S, Morley J et al. (2025). "Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations." Neuroethics 18. arXiv:2508.12571. | https://link.springer.com/article/10.1007/s12152-025-09607-3 | Preprint | Most comprehensive BCI security paper (Yale). Dual publication verified 2026-02-16. Key related work. |
+| F6 | Meng L, Lin CT, Jung TP, Wu D. (2023). "Adversarial Robustness Benchmark for EEG-Based Brain-Computer Interfaces." Future Generation Computer Systems 143:231-247. | https://doi.org/10.1016/j.future.2023.01.017 | Preprint v1.4 | EEG adversarial attack benchmark. Volume/pages corrected v1.4. |
+
+---
+
 ## Appendix: Source Statistics
 
 | Domain | Count | Newest | Oldest |
@@ -309,14 +394,19 @@ Sources are organized by domain and sorted newest-first within each domain.
 | BCI Technology | 7 | 2025 | 2025 |
 | Cybersecurity & BCI Security | 37 | 2026 | 2020 |
 | Electrode Technology | 7 | 2025 | 2018 |
-| **Total** | **119** | | |
+| Signal Coherence & Oscillations | 5 | 2015 | 1997 |
+| Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
+| Consumer Sensor Exploitation | 9 | 2021 | 2014 |
+| Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
+| **Total** | **151** | | |
 
-| Validation Agent | Sources Found |
-|-----------------|---------------|
-| Quantum Physics | ~40 |
-| Neuroscience | ~35 |
-| Cybersecurity | ~40 |
+| Source | Sources Found |
+|--------|---------------|
+| Validation Agents (Feb 2) | ~119 |
+| NSP Spec v0.5 Hardening (Feb 17) | ~12 |
+| Blog Posts & TARA (Feb 9-13) | ~9 |
+| Preprint Audit (Feb 15-18) | ~11 |
 
 ---
 
-*This document is auto-generated from validation agent output files and should be updated after each validation session.*
+*This document should be updated whenever new research sources are incorporated into the project. See CLAUDE.md for the sync protocol.*
