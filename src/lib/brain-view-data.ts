@@ -156,18 +156,12 @@ function buildClinicalView(): BrainView {
       }
     }
 
-    // Dominant domain color, or blend
-    let color = '#10b981'; // default green
-    let maxCount = 0;
-    let dominantDomain = '';
-    for (const [domainId, c] of domainCounts.entries()) {
-      if (c > maxCount) {
-        maxCount = c;
-        dominantDomain = domainId;
-        const domDef = CLINICAL_DOMAINS.find(d => d.id === domainId);
-        if (domDef) color = domDef.color;
-      }
-    }
+    // Green tones by therapy count
+    const color =
+      count >= 50 ? '#059669'
+      : count >= 30 ? '#10b981'
+      : count >= 15 ? '#34d399'
+      : '#6ee7b7';
 
     // Badges = domains present
     const badges = Array.from(domainCounts.entries())
