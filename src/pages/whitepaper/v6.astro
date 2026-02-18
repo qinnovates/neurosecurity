@@ -615,7 +615,7 @@ const latestChange = getLatestChangelog();
             Every technique in the TARA atlas is now mapped to the affected neurorights through a systematic, multi-layer process: UI category provides the primary signal, DSM-5-TR cluster adds overlays, and NISS vector components refine the result. This mapping is deterministic and reproducible &mdash; the same technique always maps to the same rights.
           </p>
           <p>
-            Running {stats.totalTechniques} techniques through this process revealed that four rights are insufficient. Two additional rights were required to cover attack classes that the original taxonomy misses:
+            Running {stats.totalTechniques} techniques through this process revealed that four rights are insufficient. Two additional rights were required to cover attack classes that the original taxonomy misses. These terms &mdash; Dynamical Integrity and Informational Disassociation &mdash; have been cross-validated against six established neurorights frameworks (Ienca &amp; Andorno 2017, Yuste/NeuroRights Foundation 2017, Chile Law 21.383, UNESCO 2025 Recommendation, Farahany 2023, Bublitz 2022) and confirmed absent from published neuroethics literature. They were discovered bottom-up through systematic threat analysis, not derived from philosophical reasoning:
           </p>
         </div>
 
@@ -653,6 +653,13 @@ const latestChange = getLatestChangelog();
               A low CCI with a high NISS score signals a consent blind spot &mdash; the consent infrastructure under-protects the neural impact. Four silicon-only attacks have CCI below 0.6 but NISS above 6.4.
             </p>
           </div>
+        </div>
+
+        <div class="prose mb-8">
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Policy-Layer Rights</h3>
+          <p>
+            Three additional neurorights proposed by Yuste and the NeuroRights Foundation (2017) and reinforced by UNESCO's 2025 Recommendation &mdash; <strong>equitable access to mental augmentation</strong>, <strong>protection from algorithmic bias</strong>, and <strong>free will</strong> &mdash; are not mapped in the threat taxonomy. These are distributive justice and governance concerns: no attack technique directly violates &ldquo;fair access,&rdquo; and algorithmic bias arises from systems processing neural data, not from attacks on the interface itself. Free will substantially overlaps with Cognitive Liberty in the context of threat-to-harm mappings. These rights are addressed at QIF's governance layer rather than the security layer. See <a href="/governance/">Governance &rarr; Neuroethics Alignment</a> for the full mapping.
+          </p>
         </div>
       </section>
 
