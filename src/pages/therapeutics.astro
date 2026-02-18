@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import BrainVisualization from '../components/brain/BrainVisualization';
 import {
   getClinicalTechniques,
   getTechniquesByFdaStatus,
@@ -8,11 +9,13 @@ import {
   DUAL_USE_COLORS,
 } from '../lib/threat-data';
 import type { ThreatVector, FdaStatus, DualUse, EvidenceLevel } from '../lib/threat-data';
+import { getBrainViewData } from '../lib/brain-view-data';
 import ClinicalDomainCards from '../components/therapeutics/ClinicalDomainCards';
 import type { ClinicalDomainInfo, DomainTechnique } from '../components/therapeutics/ClinicalDomainCards';
 
 const clinical = getClinicalTechniques();
 const totalTechniques = THREAT_VECTORS.length;
+const brainViews = getBrainViewData();
 
 // FDA status breakdown
 const fdaGroups: { status: FdaStatus; label: string; count: number }[] = [
@@ -286,6 +289,15 @@ const breadcrumbs = [
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">confirmed<br/>dual-use</p>
       </div>
+    </div>
+
+    <!-- Brain visualization -->
+    <div class="glass rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto reveal">
+      <BrainVisualization
+        client:only="react"
+        views={brainViews}
+        defaultView="clinical"
+      />
     </div>
   </section>
 

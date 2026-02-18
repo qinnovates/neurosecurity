@@ -2,44 +2,31 @@ import { Suspense, useState, useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
-import type { NeurorightInfo, BrainRegion } from '../../lib/neurogovernance-data';
+import type { BrainView, BrainViewRegion } from '../../lib/brain-view-data';
 
 interface Props {
-  neurorights: NeurorightInfo[];
-  brainRegions: BrainRegion[];
-  totalThreats: number;
+  views: BrainView[];
+  defaultView?: string;
 }
 
 /**
- * 3D hotspot positions mapped to the brain.glb model coordinate space.
- * Brain model is scaled 18x. Positions tuned to sit ON the brain surface.
- * Coordinates are in the rotating group's local space (they rotate with the brain).
- */
-/**
- * 3D hotspot positions mapped to QIF neural bands (N7–N1).
+ * 3D hotspot positions mapped to QIF neural bands (N7-N1).
  * Positioned anatomically on the brain.glb model (scale 18).
  */
 const REGION_HOTSPOTS: Record<string, [number, number, number]> = {
-  N7: [0, 8, 10],         // Neocortex — top/front (PFC, motor cortex)
-  N6: [0, 2, 5],          // Limbic System — deep center, slightly anterior (hippocampus, amygdala)
-  N5: [0, 3, 8],          // Basal Ganglia — deep center, anterior to thalamus (bilateral, midline)
-  N4: [0, 0, 0],          // Diencephalon — geometric center (thalamus, hypothalamus)
-  N3: [0, -5, -10],       // Cerebellum — lower posterior
-  N2: [0, -8, -4],        // Brainstem — below cerebellum, slightly anterior
-  N1: [0, -13, 0],        // Spinal Cord — lowest, below brainstem
+  N7: [0, 8, 10],
+  N6: [0, 2, 5],
+  N5: [0, 3, 8],
+  N4: [0, 0, 0],
+  N3: [0, -5, -10],
+  N2: [0, -8, -4],
+  N1: [0, -13, 0],
 };
 
 const HOTSPOT_SIZES: Record<string, number> = {
-  N7: 3.0,
-  N6: 2.2,
-  N5: 1.8,
-  N4: 1.8,
-  N3: 2.2,
-  N2: 1.8,
-  N1: 1.5,
+  N7: 3.0, N6: 2.2, N5: 1.8, N4: 1.8, N3: 2.2, N2: 1.8, N1: 1.5,
 };
 
-/** Primary wireframe brain — the main visible layer */
 function BrainWireframe() {
   const { scene } = useGLTF('/models/brain.glb');
 
@@ -60,7 +47,6 @@ function BrainWireframe() {
   return <primitive object={scene} scale={18} />;
 }
 
-/** Faint solid fill underneath wireframe for depth */
 function BrainGhost() {
   const { scene } = useGLTF('/models/brain.glb');
   const ghostScene = useRef<THREE.Group | null>(null);
@@ -86,34 +72,23 @@ function BrainGhost() {
 }
 
 interface HotspotProps {
-  region: BrainRegion;
-  neurorights: NeurorightInfo[];
+  region: BrainViewRegion;
   isActive: boolean;
   onHover: (id: string | null) => void;
   onClick: (id: string) => void;
 }
 
-function Hotspot({ region, neurorights: rights, isActive, onHover, onClick }: HotspotProps) {
+function Hotspot({ region, isActive, onHover, onClick }: HotspotProps) {
   const position = REGION_HOTSPOTS[region.id];
   const size = HOTSPOT_SIZES[region.id] ?? 2.0;
   if (!position) return null;
 
-  const regionRights = rights.filter(nr => region.neurorights.includes(nr.id));
-
-  // Color by severity: purple = highest, orange = medium, yellow = low
-  const threats = region.threatCount;
-  const primaryColor =
-    threats >= 60 ? '#7c3aed'   // purple — highest severity
-    : threats >= 40 ? '#a855f7' // violet — high severity
-    : threats >= 20 ? '#f97316' // orange — medium severity
-    : '#eab308';                // yellow — low severity
+  const primaryColor = region.color;
 
   const ref = useRef<THREE.Mesh>(null);
   const ringRef = useRef<THREE.Mesh>(null);
-
   const glowRef = useRef<THREE.Mesh>(null);
 
-  // Continuous pulse animation so hotspots always glow
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     if (ref.current) {
@@ -141,7 +116,6 @@ function Hotspot({ region, neurorights: rights, isActive, onHover, onClick }: Ho
 
   return (
     <group position={position} renderOrder={10}>
-      {/* Outer glow sphere — always visible on top */}
       <mesh ref={glowRef} renderOrder={10}>
         <sphereGeometry args={[size * 1.0, 16, 16]} />
         <meshBasicMaterial
@@ -152,7 +126,6 @@ function Hotspot({ region, neurorights: rights, isActive, onHover, onClick }: Ho
           depthTest={false}
         />
       </mesh>
-      {/* Core sphere — clickable, always on top */}
       <mesh
         ref={ref}
         renderOrder={11}
@@ -169,7 +142,6 @@ function Hotspot({ region, neurorights: rights, isActive, onHover, onClick }: Ho
           depthTest={false}
         />
       </mesh>
-      {/* Spinning ring — always on top */}
       <mesh ref={ringRef} renderOrder={10}>
         <ringGeometry args={[size * 0.65, size * 0.75, 32]} />
         <meshBasicMaterial
@@ -185,16 +157,13 @@ function Hotspot({ region, neurorights: rights, isActive, onHover, onClick }: Ho
   );
 }
 
-function BrainScene({ brainRegions, neurorights, activeRegion, onHover, onClick }: {
-  brainRegions: BrainRegion[];
-  neurorights: NeurorightInfo[];
+function BrainScene({ regions, activeRegion, onHover, onClick }: {
+  regions: BrainViewRegion[];
   activeRegion: string | null;
   onHover: (id: string | null) => void;
   onClick: (id: string) => void;
 }) {
   const groupRef = useRef<THREE.Group>(null);
-
-  // No auto-rotation — user drags to rotate via OrbitControls
 
   return (
     <>
@@ -205,11 +174,10 @@ function BrainScene({ brainRegions, neurorights, activeRegion, onHover, onClick 
         <group ref={groupRef}>
           <BrainGhost />
           <BrainWireframe />
-          {brainRegions.map(region => (
+          {regions.map(region => (
             <Hotspot
               key={region.id}
               region={region}
-              neurorights={neurorights}
               isActive={activeRegion === region.id}
               onHover={onHover}
               onClick={onClick}
@@ -238,18 +206,44 @@ function useSafariDetect() {
   return isSafari;
 }
 
-export default function BrainRightsHero({ neurorights, brainRegions, totalThreats }: Props) {
+const VIEW_ICONS: Record<string, JSX.Element> = {
+  shield: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+    </svg>
+  ),
+  heart: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+    </svg>
+  ),
+  scale: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+    </svg>
+  ),
+};
+
+export default function BrainVisualization({ views, defaultView }: Props) {
+  const [activeViewId, setActiveViewId] = useState(defaultView ?? views[0]?.id ?? 'security');
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
   const isSafari = useSafariDetect();
   const [dismissed, setDismissed] = useState(false);
 
-  const activeRegionData = activeRegion ? brainRegions.find(r => r.id === activeRegion) : null;
-  const activeRights = activeRegionData
-    ? neurorights.filter(nr => activeRegionData.neurorights.includes(nr.id))
-    : [];
+  const activeView = views.find(v => v.id === activeViewId) ?? views[0];
+  const activeRegionData = activeRegion
+    ? activeView.regions.find(r => r.id === activeRegion)
+    : null;
+
+  // Reset selected region when switching views
+  const handleViewChange = (viewId: string) => {
+    setActiveViewId(viewId);
+    setActiveRegion(null);
+  };
 
   return (
     <div className="relative">
+      {/* Safari warning */}
       {isSafari && !dismissed && (
         <div
           className="flex items-center justify-between gap-3 px-4 py-2.5 mb-4 rounded-lg text-xs"
@@ -269,6 +263,35 @@ export default function BrainRightsHero({ neurorights, brainRegions, totalThreat
           </button>
         </div>
       )}
+
+      {/* View toggle */}
+      <div className="flex items-center justify-center gap-1 mb-5">
+        {views.map(view => {
+          const isActive = view.id === activeViewId;
+          return (
+            <button
+              key={view.id}
+              onClick={() => handleViewChange(view.id)}
+              className="relative flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium transition-all"
+              style={{
+                background: isActive ? `${view.accentColor}15` : 'transparent',
+                color: isActive ? view.accentColor : 'var(--color-text-faint)',
+                border: `1px solid ${isActive ? `${view.accentColor}30` : 'transparent'}`,
+              }}
+            >
+              {VIEW_ICONS[view.icon]}
+              {view.label}
+              {isActive && (
+                <span
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full"
+                  style={{ background: view.accentColor }}
+                />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
         {/* 3D Brain Canvas */}
         <div
@@ -280,8 +303,7 @@ export default function BrainRightsHero({ neurorights, brainRegions, totalThreat
             gl={{ alpha: true, antialias: true }}
           >
             <BrainScene
-              brainRegions={brainRegions}
-              neurorights={neurorights}
+              regions={activeView.regions}
               activeRegion={activeRegion}
               onHover={setActiveRegion}
               onClick={(id) => setActiveRegion(prev => prev === id ? null : id)}
@@ -311,31 +333,66 @@ export default function BrainRightsHero({ neurorights, brainRegions, totalThreat
               >
                 {activeRegionData.name}
               </h3>
-              <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-sm mb-3" style={{ color: 'var(--color-text-muted)' }}>
                 {activeRegionData.description}
               </p>
+
+              {/* Primary stat */}
               <p className="text-xs mb-3" style={{ color: 'var(--color-text-faint)' }}>
-                {activeRegionData.threatCount} techniques target this region
+                <span
+                  className="text-base font-bold mr-1"
+                  style={{ color: activeView.accentColor, fontFamily: 'var(--font-heading)' }}
+                >
+                  {activeRegionData.stat.value}
+                </span>
+                {activeRegionData.stat.label}
               </p>
-              <div className="flex flex-wrap gap-2">
-                {activeRights.map(nr => (
-                  <span
-                    key={nr.id}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      background: `${nr.color}15`,
-                      color: nr.color,
-                      border: `1px solid ${nr.color}30`,
-                    }}
-                  >
+
+              {/* Badges */}
+              {activeRegionData.badges.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {activeRegionData.badges.map((badge, i) => (
                     <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ background: nr.color }}
-                    />
-                    {nr.name}
-                  </span>
-                ))}
-              </div>
+                      key={i}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
+                      style={{
+                        background: `${badge.color}15`,
+                        color: badge.color,
+                        border: `1px solid ${badge.color}30`,
+                      }}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ background: badge.color }}
+                      />
+                      {badge.label}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Details list */}
+              {activeRegionData.details.length > 0 && (
+                <div className="space-y-1">
+                  {activeRegionData.details.map(detail => (
+                    <a
+                      key={detail.id}
+                      href={detail.href}
+                      className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 transition-colors text-xs"
+                      style={{ color: 'var(--color-text-muted)' }}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ background: detail.color }}
+                      />
+                      <span className="truncate">{detail.label}</span>
+                      <span className="text-[10px] font-mono shrink-0" style={{ color: 'var(--color-text-faint)' }}>
+                        {detail.id}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <div>
@@ -343,7 +400,9 @@ export default function BrainRightsHero({ neurorights, brainRegions, totalThreat
                 className="text-sm leading-relaxed"
                 style={{ color: 'var(--color-text-faint)' }}
               >
-                Click or hover over a glowing region on the brain to see which neurorights protect it and how many attack techniques target it.
+                {activeViewId === 'security' && 'Click or hover over a glowing region to see the attack techniques targeting it and their severity.'}
+                {activeViewId === 'clinical' && 'Click or hover over a glowing region to see the therapeutic techniques that interact with it.'}
+                {activeViewId === 'governance' && 'Click or hover over a glowing region to see which neurorights protect it and how many attack techniques target it.'}
               </p>
             </div>
           )}

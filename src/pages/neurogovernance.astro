@@ -1,11 +1,13 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import BrainRightsHero from '../components/neurogovernance/BrainRightsHero';
+import BrainVisualization from '../components/brain/BrainVisualization';
 import NeurorightCards from '../components/neurogovernance/NeurorightCards';
 import { getNeurogovernanceData } from '../lib/neurogovernance-data';
+import { getBrainViewData } from '../lib/brain-view-data';
 import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../lib/qif-constants';
 
 const data = getNeurogovernanceData();
+const brainViews = getBrainViewData();
 
 const breadcrumbs = [
   { label: 'Neurogovernance' },
@@ -68,11 +70,10 @@ const breadcrumbs = [
 
     <!-- Brain SVG -->
     <div class="glass rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto reveal">
-      <BrainRightsHero
+      <BrainVisualization
         client:only="react"
-        neurorights={data.neurorights}
-        brainRegions={data.brainRegions}
-        totalThreats={data.stats.totalThreats}
+        views={brainViews}
+        defaultView="governance"
       />
     </div>
   </section>
