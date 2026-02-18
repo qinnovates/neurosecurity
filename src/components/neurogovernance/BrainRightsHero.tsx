@@ -20,13 +20,13 @@ interface Props {
  * Positioned anatomically on the brain.glb model (scale 18).
  */
 const REGION_HOTSPOTS: Record<string, [number, number, number]> = {
-  N7: [0, 8, 10],         // Neocortex — top/front of brain
-  N6: [0, 0, 3],          // Limbic System — deep center
-  N5: [-6, 1, 6],         // Basal Ganglia — inner mid-brain, slightly lateral
-  N4: [0, 1, 0],          // Diencephalon — center (thalamus)
-  N3: [0, -6, -10],       // Cerebellum — lower back
-  N2: [0, -9, -3],        // Brainstem — bottom center
-  N1: [0, -13, 0],        // Spinal Cord — below brainstem
+  N7: [0, 8, 10],         // Neocortex — top/front (PFC, motor cortex)
+  N6: [0, 2, 5],          // Limbic System — deep center, slightly anterior (hippocampus, amygdala)
+  N5: [0, 3, 8],          // Basal Ganglia — deep center, anterior to thalamus (bilateral, midline)
+  N4: [0, 0, 0],          // Diencephalon — geometric center (thalamus, hypothalamus)
+  N3: [0, -5, -10],       // Cerebellum — lower posterior
+  N2: [0, -8, -4],        // Brainstem — below cerebellum, slightly anterior
+  N1: [0, -13, 0],        // Spinal Cord — lowest, below brainstem
 };
 
 const HOTSPOT_SIZES: Record<string, number> = {
