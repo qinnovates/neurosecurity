@@ -261,6 +261,18 @@ For populations requiring additional protections, see:
 
 ## Gaps and Future Work
 
+### Policy-Layer Neurorights (Outside Security Scope)
+
+Three neurorights proposed by Yuste and the NeuroRights Foundation (2017) and reinforced by UNESCO's 2025 Recommendation are intentionally not mapped in QIF's threat taxonomy. These are distributive justice and governance concerns — no attack technique directly violates them, and they cannot be operationalized through a security framework alone:
+
+| Right | Source | Why Outside QIF Scope |
+|-------|--------|----------------------|
+| **Equitable Access to Mental Augmentation** | Yuste et al. (2017); UNESCO (2025) | Structural inequality, not an attack vector. No technique in TARA violates "fair access." |
+| **Protection from Algorithmic Bias** | Yuste et al. (2017) | Downstream consequence of data misuse, partially addressed by Mental Privacy (MP). Bias arises from systems processing neural data, not from attacks on the interface itself. |
+| **Free Will / Autonomous Decision-Making** | Yuste et al. (2017) | Substantially overlaps with Cognitive Liberty (CL), which covers freedom from external interference with mental processes. The philosophical distinction between CL and free will is important for neuroethics but does not produce distinct attack-technique-to-harm mappings. |
+
+These rights are addressed at QIF's governance layer (this document, regulatory compliance guidance, and open publication) rather than the security layer (TARA, NISS, hourglass model). Their full operationalization is an active area of research.
+
 ### Currently Unaddressed
 
 | Ethical Concern | Status | Notes |

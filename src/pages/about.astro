@@ -21,7 +21,10 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
 
       <h2>What I Found</h2>
       <p>
-        I catalogued every known BCI attack technique I could find — 102 so far — and traced each one through the neural pathways it disrupts, the cognitive functions it impairs, and the psychiatric outcomes it can produce. I scored them using a system I designed specifically for neural harm (NISS), because the industry standard (CVSS) was built for servers, not skulls. It cannot express whether damage is reversible to neural tissue or whether the patient can even detect the violation.
+        I started by cataloguing every known BCI attack technique I could find — 60 at first, merged and deduplicated from existing research. Then I asked a different question: <em>what do computers and neurons actually have in common?</em> The answer was physics — signal frequencies. Signals operating at different scales, from raw electromagnetic fields up through cortical oscillations. That insight became QIF's layered architecture, and when I mapped those 60 techniques across the frequency bands, gaps appeared everywhere. Entire attack surfaces that existing taxonomies had missed. The catalogue grew to 102.
+      </p>
+      <p>
+        I traced each technique through the neural pathways it disrupts, the cognitive functions it impairs, and the psychiatric outcomes it can produce. I scored them using a system I designed specifically for neural harm (NISS), because the industry standard (CVSS) was built for servers, not skulls. It cannot express whether damage is reversible to neural tissue or whether the patient can even detect the violation.
       </p>
       <p>
         What I discovered surprised me: <strong>77 of those 102 attack techniques have direct therapeutic counterparts.</strong> The same neural mechanism that can disrupt cognition can also treat a neurological condition. The same stimulation pattern that causes involuntary motor activation in an attack is used therapeutically for Parkinson's disease. This dual-use reality means BCI security cannot be separated from clinical ethics — they are the same problem viewed from different angles.
@@ -45,10 +48,18 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
 
       <h2>Situating the Work</h2>
       <p>
-        This project builds on and extends existing scholarship in neuroethics and neurorights. Marcello Ienca and Roberto Andorno's foundational proposal for four neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) provides the philosophical basis. Rafael Yuste and the NeuroRights Foundation's advocacy — including their work with Chile's constitutional neurorights amendment in 2021 — demonstrates the urgency of operationalizing these rights. UNESCO's 2023 recommendation on the ethics of neurotechnology establishes the international governance context.
+        This project builds on and extends existing scholarship in neuroethics and neurorights. Marcello Ienca and Roberto Andorno's foundational proposal for four neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) provides the philosophical basis. Rafael Yuste and the NeuroRights Foundation's advocacy — including their work with Chile's constitutional neurorights amendment in 2021 — demonstrates the urgency of operationalizing these rights. UNESCO's 2025 Recommendation on the Ethics of Neurotechnology — adopted at the 43rd session of the General Conference — establishes the international governance context.
       </p>
       <p>
         What has been missing is the technical bridge: a systematic methodology for tracing how <em>specific</em> security vulnerabilities violate <em>specific</em> neurorights through <em>documented</em> neural pathways. QIF attempts to provide that bridge — translating abstract rights into auditable technical requirements. This work is one contribution to a growing field, not a final answer. It is published openly for exactly that reason: to be evaluated, critiqued, and improved by the community.
+      </p>
+
+      <h2>What the Framework Cannot Answer</h2>
+      <p>
+        The Neural Atlas operationalizes seven neurorights — four established by Ienca and Andorno (cognitive liberty, mental privacy, mental integrity, psychological continuity) and three discovered through TARA's threat analysis (cognitive authenticity, dynamical integrity, informational disassociation). But three important rights proposed by Yuste and the NeuroRights Foundation — <strong>equitable access to mental augmentation</strong>, <strong>protection from algorithmic bias</strong>, and <strong>free will</strong> — are not directly addressable through a security framework. No attack technique violates "fair access." No threat vector produces "algorithmic bias." These are questions of justice, policy, and philosophy that a technical threat taxonomy cannot resolve on its own.
+      </p>
+      <p>
+        I believe those answers will build themselves over time — precisely <em>because</em> this work is open source. When the framework, the threat data, and the scoring methodology are freely available, the community that forms around them will ask the questions I haven't thought of yet. As I pursue a master's in Neuroethics and Bioethics, I expect many more of these questions to surface — questions that will help me properly implement the foundations I've been building. The framework is a starting point, not a finish line. The rights it cannot yet operationalize are the ones I most need to study.
       </p>
 
       <h2>Approach</h2>
