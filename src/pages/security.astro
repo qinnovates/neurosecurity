@@ -174,21 +174,94 @@ const brainViews = getBrainViewData();
     </div>
   </section>
 
+  <!-- How It All Fits Together -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold font-[family-name:var(--font-heading)] mb-2">How It All Fits Together</h2>
+    <p class="text-[var(--color-text-muted)] mb-8 max-w-3xl">
+      QIF's security isn't a single tool — it's a pipeline. Each layer feeds the next, from threat discovery through scoring, wire-level protection, and secure content delivery.
+    </p>
+
+    <!-- Pipeline visualization -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="glass rounded-xl p-6 border-t-4" style="border-color: #ef4444;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-2xl">1</span>
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Map</h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] mb-3">
+          <a href="/TARA/" class="text-[var(--color-accent-secondary)] hover:underline font-medium">TARA Atlas</a> catalogs 103+ attack techniques across 8 categories — signal injection, eavesdropping, cognitive manipulation, and more. Every technique is mapped to the brain regions it targets.
+        </p>
+        <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">What can go wrong?</span>
+      </div>
+
+      <div class="glass rounded-xl p-6 border-t-4" style="border-color: #f97316;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-2xl">2</span>
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Score</h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] mb-3">
+          <a href="/scoring/" class="text-[var(--color-accent-secondary)] hover:underline font-medium">NISS</a> scores each technique on 5 neural-specific dimensions — brain impact, cognitive gravity, controllability, reversibility, and neural propagation. Not CVSS for servers — NISS for brains.
+        </p>
+        <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">How bad is it?</span>
+      </div>
+
+      <div class="glass rounded-xl p-6 border-t-4" style="border-color: #eab308;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-2xl">3</span>
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Protect</h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] mb-3">
+          <a href="/nsp/" class="text-[var(--color-accent-secondary)] hover:underline font-medium">NSP</a> secures the wire. Post-quantum cryptography at the I0 interface — the single point every neural signal must cross. Hybrid key exchange, coherence-gated authentication, and tiered defense by device class.
+        </p>
+        <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">How do we stop it?</span>
+      </div>
+
+      <div class="glass rounded-xl p-6 border-t-4" style="border-color: #3b82f6;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-2xl">4</span>
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Deliver</h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] mb-3">
+          <a href="/runemate/" class="text-[var(--color-accent-secondary)] hover:underline font-medium">Project Runemate</a> compiles multimodal content (images, sound, touch) into Staves bytecode — 65-90% smaller than classical web formats. PQ-encrypted end-to-end through NSP. Small enough for implanted chips, secure enough for brain signals.
+        </p>
+        <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">How do we deliver safely?</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-lg p-6 max-w-3xl">
+      <p class="text-sm text-[var(--color-text-muted)]">
+        <strong class="text-[var(--color-text)]">The pipeline in one sentence:</strong> TARA maps every known attack on the brain, NISS scores how dangerous each one is, NSP locks down the wire with post-quantum cryptography, and Runemate delivers content through that secure channel small enough to run on implanted hardware. Each layer is independent but designed to work together — the coherence metric (<span class="font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">C<sub>s</sub></span>) above is the same signal that NSP uses to gate authentication in real time.
+      </p>
+    </div>
+  </section>
+
   <!-- Security Architecture Links -->
   <section>
-    <h2 class="text-2xl font-semibold font-[family-name:var(--font-heading)] mb-6">Security Architecture</h2>
+    <h2 class="text-2xl font-semibold font-[family-name:var(--font-heading)] mb-6">Explore Further</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="/TARA/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">TARA Atlas</h3>
+        <p class="text-sm text-[var(--color-text-muted)]">Browse all 103+ attack techniques mapped across the hourglass model, filterable by category, severity, and brain region.</p>
+      </a>
       <a href="/framework/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Framework</h3>
         <p class="text-sm text-[var(--color-text-muted)]">The 11-band hourglass architecture — layered defense from electromagnetic fields to cognitive state.</p>
       </a>
       <a href="/nsp/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">NSP Protocol</h3>
-        <p class="text-sm text-[var(--color-text-muted)]">Secure communication protocol for neural implants, built on coherence-based signal authentication.</p>
+        <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire security for neural interfaces — 5-layer defense stack with coherence-gated authentication.</p>
       </a>
       <a href="/scoring/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">NISS Scoring</h3>
-        <p class="text-sm text-[var(--color-text-muted)]">Neural Impact Scoring System — vulnerability severity for brains, not servers.</p>
+        <p class="text-sm text-[var(--color-text-muted)]">Neural Impact Scoring System — vulnerability severity designed for brains, not servers.</p>
+      </a>
+      <a href="/runemate/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Project Runemate</h3>
+        <p class="text-sm text-[var(--color-text-muted)]">Native multimodal DSL compiler — PQ-encrypted content delivery small enough for implanted chips.</p>
+      </a>
+      <a href="/neurogovernance/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Neurogovernance</h3>
+        <p class="text-sm text-[var(--color-text-muted)]">How neurorights and policy frameworks protect the people behind the interfaces.</p>
       </a>
     </div>
   </section>
