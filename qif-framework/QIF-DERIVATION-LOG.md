@@ -23,6 +23,7 @@
 
 | Date | Event | Link |
 |------|-------|------|
+| 2026-02-18 | **T0103 Detection Methods + Ethical Neurosecurity Governance Gaps.** Added detection section to T0103 blog: PC detection (SIEM, spectral analysis, GPU forensics) and BCI detection (stimulus-response correlation, alpha/beta monitoring, cross-frequency coupling, temporal coherence, spatial validation). Key insight: no BCI-SIEM, no neural IDS, no standard for compromised EEG baseline. Added Intent statement to Code of Ethics: "protect researchers and the people whose cognitive sovereignty they are working to defend." Identified 10 governance gaps (bug bounty, safe harbor, responsible disclosure pipeline, researcher onboarding, CVE lifecycle, dual-use review, pentesting ROE, IRB template, certification, contribution guide). SAIL Lab full intel consolidated: 2 BCI papers, VSF-Med as most instrumentalizable framework, venue discrepancy caught (SMC 2023 not NER '23). | [Entry 67](#entry-67-detection-methods-governance-gaps) |
 | 2026-02-18 | **SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation.** Subliminal visual attacks on BCIs: monitors flickering above CFF (~60Hz) evoke SSVEP responses invisible to users. Ming et al. 2023 proved 60Hz imperceptible flickers produce classifiable brain responses (52.8 bits/min). TARA coverage confirmed solid (T0040, T0010, T0009 already mapped). New technique QIF-T0103 added for dedicated SSVEP frequency hijack. BCI limits equation cross-validated by Gemini (12 constraints confirmed). Guardrails doc corrected: physics = boundary not control. Governance risk tagged for hardware vs software charge protection. | [Entry 66](#entry-66-ssvep-frequency-hijack-discovery) |
 | 2026-02-18 | **Physics Feasibility Tiering of TARA Techniques.** All 102 techniques classified by physics hardware gate: 61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only. Highest-impact future attacks identified. | [Entry 65](#entry-65-physics-feasibility-tiering) |
 | 2026-02-18 | **BCI Limits Equation Blog Post Published.** Blog post at `/publications/2026-02-18-the-physics-equation-that-limits-every-brain-computer-interface`. Priority timestamp established. | [Entry 64](#entry-64-bci-limits-blog-published) |
@@ -189,6 +190,83 @@ Each entry follows this structure:
 | 3 | 2026-02-02 ~afternoon | Layer Consolidation: 14 Is Too Many | Validated — redesign in progress |
 | 2 | 2026-02-02 ~afternoon | Circular Topology: L8 Touches L1 | Validated — superseded by hourglass (Entry 7) |
 | 1 | 2026-02-02 ~afternoon | OSI Layers Are Meaningless for BCI | Validated — drives framework redesign |
+---
+
+## Entry 67: T0103 Detection Methods + Ethical Neurosecurity Governance Gaps {#entry-67-detection-methods-governance-gaps}
+
+**Date:** 2026-02-18, ~17:30
+**Classification:** ANALYSIS (detection methods) + GOVERNANCE (ethics code + gaps) + INTELLIGENCE (SAIL Lab consolidation)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 66 (SSVEP Discovery), Entry 59 (Guardrails Mapping)
+
+### Detection Methods Added to T0103 Blog
+
+Kevin asked: how do you detect this attack? For PCs versus BCIs?
+
+**Traditional IT detection (familiar tools, new target):**
+- SIEM/log analysis for unexpected display driver behavior
+- High-speed photodiode spectral analysis of display output (detect sub-frame luminance modulation)
+- Browser-level frame rate monitoring (extension that flags sub-perceptual flicker via requestAnimationFrame)
+- Network traffic analysis (frequency-modulated content has different statistical profile)
+- GPU framebuffer forensics (hidden modulation layers)
+
+**BCI detection (harder, starting from zero):**
+- Stimulus-response correlation (G3): BCI checks if detected SSVEP frequencies match what it presented. Most important single defense.
+- Alpha/beta baseline monitoring (G5): Unexpected power suppression without task change = flag.
+- Cross-frequency coupling analysis: Injected flicker produces different phase-amplitude coupling than genuine attention-driven SSVEP.
+- Temporal coherence: Genuine intention ramps over hundreds of ms; injected stimulus has abrupt onset.
+- Multi-electrode spatial validation: External flicker hitting whole visual field produces uniform spatial pattern vs lateralized genuine SSVEP.
+
+**The gap Kevin identified:** There is no BCI-SIEM. No neural IDS. No standard for what constitutes a clean EEG baseline versus a compromised one. QIF Security Guardrails and TARA are designed to fill this, but the actual detection tools do not exist yet.
+
+Kevin's words: "If you thought Mr. Robot was gnarly. That's just the surface of what really goes on. Real heebie jeebies. This is why I stay on the blue side and the ethical side."
+
+### Ethical Neurosecurity Code of Ethics: Intent Statement
+
+Kevin requested an Intent section at the top of the ethics code. His direction: "The intent is to help protect normal people who are doing this from accidentally probing the wrong system by setting guidelines, and guardrails to the best of our extent." Also noted: "That ethics document needs a lot more people helping me write it in the future."
+
+Revised wording (Kevin requested "normal people" be reframed with neuroethics alignment): "This document exists to protect researchers and the people whose cognitive sovereignty they are working to defend."
+
+Added to both `code-of-ethics.ts` (canonical source) and `governance/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md`. Renders on `/security` page with accent-bordered card above Preamble.
+
+### Governance Gaps Identified (10 items)
+
+Analysis of the existing ethics code found: principles are world-class (12 principles, cross-referenced to 15+ international frameworks), but operational programs to enforce them are missing. Tagged in TRACKING.md:
+
+1. Bug bounty program for neurotech (High)
+2. Safe harbor language for researchers (High)
+3. Responsible disclosure pipeline, BCI-specific (High, partially exists via LSL CVE case study)
+4. Security researcher onboarding guide (Medium)
+5. CVE lifecycle for neural vulnerabilities (Medium)
+6. Dual-use publication review process (Medium)
+7. Neurorights-aware pentesting rules of engagement (Medium)
+8. IRB/ethics board template for neurosecurity research (Low)
+9. Cognitive sovereignty protection certification (Low)
+10. Community contribution guide (Low)
+
+### SAIL Lab Intelligence Consolidated
+
+Full intel from three background agents confirmed:
+- **2 BCI papers** (not 1): SMC 2023 "Adversarial Stimuli" + EAI 2025 "Breaking the Loop" (extends to command injection)
+- **Venue discrepancy caught**: SAIL Lab blog says NER '23, DOI confirms SMC 2023
+- **VSF-Med** (MIT license): 8-dimension vulnerability scoring for medical AI, directly adaptable to "VSF-BCI"
+- **Working Memory Attack**: ICLR 2025 Workshop, up to 99.99% ASR, co-authored with Yale
+- **CleverHans co-author** (2016) with Goodfellow and Papernot
+- **No public BCI code** from SAIL Lab (gap)
+- Competing groups mapped: Dongrui Wu (China, signal-level), Ben-Gurion (survey), Spain (2025, neural cyberattacks)
+
+### Human Decisions
+
+- Kevin decided to reframe "normal people" as cognitive sovereignty alignment language
+- Kevin decided the ethics code needs community contributors, not just solo authorship
+- Kevin decided to wrap session and document everything before stepping away
+- Kevin confirmed blog should include detection methods and personal voice
+
+### AI Collaboration
+
+- **Claude Opus 4.6:** Detection method analysis, governance gap identification, ethics code drafting, SAIL Lab intel consolidation from three prior agent reports
+- **Human decided:** Ethics intent framing, "cognitive sovereignty" language, session wrap-up timing, blog editorial direction
+
 ---
 
 ## Entry 66: SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation {#entry-66-ssvep-frequency-hijack-discovery}
