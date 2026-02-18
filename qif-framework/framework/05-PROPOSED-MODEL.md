@@ -118,7 +118,7 @@ Some signals never reach the center of the funnel. They short-circuit:
 
                     Fear bypass:
                     Sensor → Thalamus → Amygdala → Response
-                             (12ms, before cortex even knows)
+                             (~74ms, before cortex even knows; Mendez-Bertolo et al. 2016)
 ```
 
 ### 📋 Known Bypasses
@@ -131,7 +131,7 @@ Some signals never reach the center of the funnel. They short-circuit:
 │ Muscle overstretch     │ Monosynaptic spinal  │ ~25ms     │ ⚠️ After the fact│
 │ Sharp pain             │ Spinal withdrawal    │ ~50ms     │ ⚠️ After the fact│
 │ Loud bang              │ Brainstem startle    │ ~10ms     │ ⚠️ After the fact│
-│ Threat shape           │ Thalamus→amygdala    │ ~12ms     │ 🔶 Possibly      │
+│ Threat shape           │ Thalamus→amygdala    │ ~74ms     │ 🔶 Possibly      │
 │ Corneal touch          │ Brainstem→facial     │ ~30ms     │ ⚠️ After the fact│
 │ Blood pressure drop    │ Baroreceptor→NTS     │ ~200ms    │ ❌ Below BCI     │
 │ CO2 buildup            │ Medulla respiratory  │ continuous│ ❌ Below BCI     │

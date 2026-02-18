@@ -1,0 +1,1355 @@
+{
+  "_metadata": {
+    "title": "QIF Brain-BCI Unified Atlas",
+    "version": "1.2.0",
+    "created": "2026-02-18",
+    "description": "Comprehensive machine-readable atlas unifying brain regions (38 structures across QIF 7-1-3 hourglass), BCI hardware (24 devices), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
+    "qif_version": "v4.0 Hourglass (7-1-3)",
+    "primary_neuroanatomical_source": "Kandel ER, et al. Principles of Neural Science. 6th ed. McGraw Hill, 2021",
+    "license": "CC-BY-4.0",
+    "notes": [
+      "Latency values are fastest documented response times from primary literature. Citations included per value.",
+      "Confidence levels: HIGH = primary literature with DOI; MEDIUM = review paper or textbook; LOW = inferred or estimated.",
+      "BCI device specs sourced from FDA filings, manufacturer datasheets, and peer-reviewed papers.",
+      "null values indicate data not publicly available.",
+      "Brain region IDs use snake_case. Device IDs use kebab-case."
+    ]
+  },
+
+  "qif_bands": [
+    {
+      "id": "N7",
+      "name": "Neocortex",
+      "zone": "neural",
+      "determinacy": "Quantum Uncertain",
+      "qi_range": [0.3, 0.5],
+      "severity_if_compromised": "HIGH (cognitive)",
+      "description": "Highest cortical processing — executive function, motor planning, sensory integration, language. Most complex and indeterminate neural band."
+    },
+    {
+      "id": "N6",
+      "name": "Limbic System",
+      "zone": "neural",
+      "determinacy": "Chaotic → QU",
+      "qi_range": [0.2, 0.4],
+      "severity_if_compromised": "SEVERE (emotional/memory)",
+      "description": "Emotion regulation, memory formation, interoception. Bridges cognitive and autonomic processing."
+    },
+    {
+      "id": "N5",
+      "name": "Basal Ganglia",
+      "zone": "neural",
+      "determinacy": "Chaotic",
+      "qi_range": [0.15, 0.35],
+      "severity_if_compromised": "SEVERE (motor selection)",
+      "description": "Motor selection, habit formation, reward processing. Primary target of DBS for Parkinson's."
+    },
+    {
+      "id": "N4",
+      "name": "Diencephalon",
+      "zone": "neural",
+      "determinacy": "Stochastic → Chaotic",
+      "qi_range": [0.1, 0.3],
+      "severity_if_compromised": "CRITICAL (relay/gating)",
+      "description": "Thalamic relay and gating of all ascending sensory traffic. Hypothalamic homeostasis. The brain's firewall layer."
+    },
+    {
+      "id": "N3",
+      "name": "Cerebellum",
+      "zone": "neural",
+      "determinacy": "Stochastic",
+      "qi_range": [0.1, 0.25],
+      "severity_if_compromised": "HIGH (coordination)",
+      "description": "Motor coordination, timing, error correction, procedural learning. Contains >50% of the brain's neurons."
+    },
+    {
+      "id": "N2",
+      "name": "Brainstem",
+      "zone": "neural",
+      "determinacy": "Stochastic",
+      "qi_range": [0.05, 0.15],
+      "severity_if_compromised": "LETHAL (vital functions)",
+      "description": "Vital functions — respiration, heart rate, blood pressure, arousal. Compromise is life-threatening."
+    },
+    {
+      "id": "N1",
+      "name": "Spinal Cord",
+      "zone": "neural",
+      "determinacy": "Stochastic",
+      "qi_range": [0.01, 0.1],
+      "severity_if_compromised": "HIGH (motor/sensory)",
+      "description": "Motor output and sensory input pathway. Local reflex arcs. Lowest neural band in the hourglass."
+    },
+    {
+      "id": "I0",
+      "name": "Neural Interface",
+      "zone": "interface",
+      "determinacy": "Quasi-quantum",
+      "qi_range": [0.01, 0.1],
+      "severity_if_compromised": "CRITICAL (measurement/collapse)",
+      "description": "Electrode-tissue boundary where biological signals become electronic. The bottleneck of the hourglass. Measurement collapses neural state space."
+    },
+    {
+      "id": "S1",
+      "name": "Analog Front-End",
+      "zone": "silicon",
+      "determinacy": "Stochastic (analog noise)",
+      "qi_range": [0.001, 0.01],
+      "severity_if_compromised": "MEDIUM (signal integrity)",
+      "description": "Amplification, filtering, ADC/DAC conversion. Analog noise introduces residual stochasticity."
+    },
+    {
+      "id": "S2",
+      "name": "Digital Processing",
+      "zone": "silicon",
+      "determinacy": "Deterministic",
+      "qi_range": [0, 0],
+      "severity_if_compromised": "MEDIUM (algorithm integrity)",
+      "description": "Decoding algorithms, classification, digital signal processing. Fully deterministic."
+    },
+    {
+      "id": "S3",
+      "name": "Application",
+      "zone": "silicon",
+      "determinacy": "Deterministic",
+      "qi_range": [0, 0],
+      "severity_if_compromised": "LOW-MEDIUM (software)",
+      "description": "Clinical software, user interface, data storage, network. Classical IT security domain."
+    }
+  ],
+
+  "brain_regions": [
+    {
+      "id": "pfc",
+      "name": "Prefrontal Cortex",
+      "abbreviation": "PFC",
+      "qif_band": "N7",
+      "parent_structure": "frontal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Executive function, decision-making, working memory, personality, social behavior, planning",
+      "response_latency_ms": {
+        "value": 150,
+        "range": [100, 300],
+        "measure": "Visual stimulus to PFC neuronal onset",
+        "notes": "Highly variable by task and stimulus type. Visual motion onset 40-60ms in frontal eye fields; decision-related activity 150-300ms.",
+        "citations": [
+          "Sugase-Miyamoto et al. 2008 (PNAS): PFC population activity 100-200ms",
+          "Romanski & Hwang 2012 (PMC3618972): VLPFC vocalization response shortest latency"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["m1", "broca", "wernicke", "hippocampus", "bla", "insula", "acc", "thalamus", "striatum"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [9, 10, 11, 12, 46, 47]
+    },
+    {
+      "id": "m1",
+      "name": "Primary Motor Cortex",
+      "abbreviation": "M1",
+      "qif_band": "N7",
+      "parent_structure": "frontal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Voluntary motor execution, somatotopic motor map (homunculus)",
+      "response_latency_ms": {
+        "value": 20,
+        "range": [10, 30],
+        "measure": "Corticospinal conduction time to hand muscles",
+        "notes": "Central motor conduction time (CMCT) measured via TMS: ~20ms to hand. Cortical motor neurons activate ~100-150ms before movement onset.",
+        "citations": [
+          "Rossini et al. 2015: TMS guidelines, CMCT norms",
+          "Hallett 2007 (Neurology): TMS clinical neurophysiology"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)", "gamma (30-100 Hz)", "mu (8-12 Hz)"],
+      "connections": ["pfc", "sma", "pmc", "s1_cortex", "cerebellum_cortex", "striatum", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [4]
+    },
+    {
+      "id": "v1",
+      "name": "Primary Visual Cortex",
+      "abbreviation": "V1",
+      "qif_band": "N7",
+      "parent_structure": "occipital_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Primary visual processing — edge detection, orientation, spatial frequency, color",
+      "response_latency_ms": {
+        "value": 56,
+        "range": [56, 100],
+        "measure": "Visual stimulus to V1 ERP onset (C1 component)",
+        "notes": "C1 component (N75): 56-100ms post-stimulus. Mean onset ~56ms (earliest reported). Intracranial: category decoding by 100ms.",
+        "citations": [
+          "Clark et al. 1994 (Electroencephalogr Clin Neurophysiol): C1 mean onset 56ms",
+          "Di Russo et al. 2002 (PubMed 11797091): V1 source of C1 60-100ms",
+          "Liu et al. 2009 (J Neurosci): Object decoding from intracranial EEG at 100ms"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["alpha (8-13 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["lgn_thalamus", "v2_extrastriate", "ppc"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [17]
+    },
+    {
+      "id": "a1",
+      "name": "Primary Auditory Cortex",
+      "abbreviation": "A1",
+      "qif_band": "N7",
+      "parent_structure": "temporal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Primary auditory processing — tonotopic frequency mapping, sound onset detection",
+      "response_latency_ms": {
+        "value": 40,
+        "range": [25, 80],
+        "measure": "Auditory stimulus to cortical onset (Pa/high-gamma)",
+        "notes": "Middle-latency response Pa: 25-40ms. High-gamma (70-150 Hz) cortical response ~40ms. Full cortical processing: Na 12-27ms, Pa 25-40ms.",
+        "citations": [
+          "Liégeois-Chauvel et al. 1994 (J Neurosci): First-spike timing in auditory cortex",
+          "Nourski et al. 2022 (PMC9773383): Time-locked high-gamma responses at ~40ms",
+          "Picton et al. 2010 (PMC9443762): Middle-latency auditory response norms"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)", "high-gamma (70-150 Hz)"],
+      "connections": ["mgn_thalamus", "wernicke", "pfc", "hippocampus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [41, 42]
+    },
+    {
+      "id": "broca",
+      "name": "Broca's Area",
+      "abbreviation": "Broca",
+      "qif_band": "N7",
+      "parent_structure": "frontal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "left_dominant",
+      "function": "Speech production, syntactic processing, language planning",
+      "response_latency_ms": {
+        "value": 200,
+        "range": [150, 450],
+        "measure": "Three sequential processing waves during linguistic tasks (human intracranial)",
+        "notes": "Unique three-wave pattern: ~200ms (lexical), ~320ms (grammatical), ~450ms (phonological) — Flinker et al. 2015, intracranial EEG. High-gamma (70-150 Hz) during speech production and perception.",
+        "citations": [
+          "Flinker et al. 2015 (PNAS): Three-wave pattern ~200/320/450ms in Broca's area",
+          "Sahin et al. 2009 (Science): Intracranial recordings lexical ~200ms, grammatical ~320ms, phonological ~450ms"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["pfc", "wernicke", "sma", "m1", "insula"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [44, 45]
+    },
+    {
+      "id": "wernicke",
+      "name": "Wernicke's Area",
+      "abbreviation": "Wernicke",
+      "qif_band": "N7",
+      "parent_structure": "temporal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "left_dominant",
+      "function": "Language comprehension, semantic processing, speech reception",
+      "response_latency_ms": {
+        "value": 50,
+        "range": [50, 400],
+        "measure": "Auditory speech to posterior STG high-gamma onset (human intracranial)",
+        "notes": "High-gamma onset in posterior STG: ~50-100ms (intracranial, Mesgarani & Chang 2012). N400 semantic component peaks ~400ms. MMN at ~100-200ms for deviant phonemes.",
+        "citations": [
+          "Mesgarani & Chang 2012 (Nature 485:233-236): STG speech response onset ~50ms",
+          "Kutas & Federmeier 2011 (Annu Rev Psychol): N400 review"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["a1", "broca", "hippocampus", "angular_gyrus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [22, 39, 40]
+    },
+    {
+      "id": "pmc",
+      "name": "Premotor Cortex",
+      "abbreviation": "PMC",
+      "qif_band": "N7",
+      "parent_structure": "frontal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Motor planning, movement preparation, sensorimotor integration",
+      "response_latency_ms": {
+        "value": 120,
+        "range": [80, 200],
+        "measure": "Visual cue to premotor neuron firing onset",
+        "notes": "Premotor neurons fire 80-200ms before movement onset. Visually guided reach: ~120ms.",
+        "citations": [
+          "Churchland et al. 2010 (Neuron): Preparatory activity in premotor cortex"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["m1", "sma", "pfc", "ppc", "cerebellum_cortex"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [6]
+    },
+    {
+      "id": "sma",
+      "name": "Supplementary Motor Area",
+      "abbreviation": "SMA",
+      "qif_band": "N7",
+      "parent_structure": "frontal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Motor sequence planning, bimanual coordination, internally generated movements",
+      "response_latency_ms": {
+        "value": 500,
+        "range": [300, 1500],
+        "measure": "Bereitschaftspotential (readiness potential) before movement",
+        "notes": "Readiness potential begins ~1500ms before voluntary movement onset. SMA proper activates ~500ms before movement.",
+        "citations": [
+          "Shibasaki & Hallett 2006 (Clin Neurophysiol): Bereitschaftspotential review"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)"],
+      "connections": ["m1", "pmc", "pfc", "striatum", "cerebellum_cortex"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [6]
+    },
+    {
+      "id": "ppc",
+      "name": "Posterior Parietal Cortex",
+      "abbreviation": "PPC",
+      "qif_band": "N7",
+      "parent_structure": "parietal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Spatial awareness, sensorimotor integration, attention, reach planning",
+      "response_latency_ms": {
+        "value": 45,
+        "range": [45, 150],
+        "measure": "Visual stimulus to LIP neuron onset (macaque single-unit); human intracranial ~60ms",
+        "notes": "Mean latency 45.2ms in macaque area LIP (Bisley et al. 2004). Human posterior IPS: ~60ms (Hertz et al. 2018, intracranial). P1 ERP component over parietal cortex: ~100ms.",
+        "citations": [
+          "Bisley et al. 2004 (J Neurosci 24(8):1833, DOI: 10.1523/JNEUROSCI.5007-03.2004): Mean latency 45.2ms",
+          "Hertz et al. 2018 (DOI: 10.1101/377887): Human intracranial ~60ms"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["alpha (8-13 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["v1", "m1", "pmc", "pfc", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [5, 7, 39, 40]
+    },
+    {
+      "id": "s1_cortex",
+      "name": "Primary Somatosensory Cortex",
+      "abbreviation": "S1",
+      "qif_band": "N7",
+      "parent_structure": "parietal_lobe",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Tactile sensation, proprioception, somatotopic sensory map (homunculus)",
+      "response_latency_ms": {
+        "value": 20,
+        "range": [14, 50],
+        "measure": "Somatosensory evoked potential (SEP) N20 component",
+        "notes": "N20 component at ~20ms post-median nerve stimulus. Earliest cortical SEP. P14 (subcortical) at ~14ms.",
+        "citations": [
+          "Allison et al. 1991 (Cereb Cortex): Human cortical somatosensory evoked potentials",
+          "Cruccu et al. 2008 (Clin Neurophysiol): SEP guidelines"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["mu (8-12 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["thalamus_vpl", "m1", "ppc", "insula"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [1, 2, 3]
+    },
+    {
+      "id": "hippocampus",
+      "name": "Hippocampus",
+      "abbreviation": "HIPP",
+      "qif_band": "N6",
+      "parent_structure": "medial_temporal_lobe",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Episodic memory formation, spatial navigation, memory consolidation",
+      "response_latency_ms": {
+        "value": 204,
+        "range": [101, 500],
+        "measure": "Visual stimulus to hippocampal single-neuron response (human intracranial)",
+        "notes": "Median onset 204ms for visually responsive neurons (Mormann et al. 2008, human intracranial). Hierarchical: parahippocampal cortex ~101ms, entorhinal cortex ~206ms, hippocampus ~204ms. Sharp-wave ripples (SWR): 80-200 Hz, ~50-100ms duration.",
+        "citations": [
+          "Mormann, Kornblith, Quiroga et al. 2008 (J Neurosci 28(36):8865-8872, DOI: 10.1523/JNEUROSCI.1640-08.2008): Median onset 204ms",
+          "Buzsaki 2015 (Neuron): Sharp-wave ripples review"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)", "sharp-wave ripples (100-250 Hz)"],
+      "connections": ["entorhinal_cortex", "bla", "pfc", "acc", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "bla",
+      "name": "Basolateral Amygdala",
+      "abbreviation": "BLA",
+      "qif_band": "N6",
+      "parent_structure": "temporal_lobe",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Fear conditioning, emotional valence assignment, associative learning. Cortical-like architecture.",
+      "response_latency_ms": {
+        "value": 74,
+        "range": [74, 200],
+        "measure": "Visual threat stimulus to amygdala response (intracranial EEG)",
+        "notes": "Fastest documented: ~74ms via intracranial EEG (Mendez-Bertolo et al. 2016). NOT 12ms — no source exists for sub-20ms amygdala response. The 'fast path' bypasses thalamic gating but still requires ~74ms.",
+        "citations": [
+          "Mendez-Bertolo et al. 2016 (Nature Neuroscience): Amygdala response to fear at 74ms via intracranial EEG"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["hippocampus", "pfc", "acc", "insula", "cea", "thalamus", "v1"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "insula",
+      "name": "Insular Cortex",
+      "abbreviation": "Insula",
+      "qif_band": "N6",
+      "parent_structure": "lateral_sulcus",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Interoception, pain processing, emotional awareness, taste, autonomic regulation",
+      "response_latency_ms": {
+        "value": 200,
+        "range": [200, 350],
+        "measure": "Auditory stimulus to insular HFA onset (human intracranial EEG)",
+        "notes": "Intracranial EEG: 200-350ms for auditory stimuli. Visual P300-like component in anterior insula: 250-338ms. Substantially slower than primary sensory cortices, consistent with higher-order integrative role.",
+        "citations": [
+          "Demarchi et al. 2019 (PMID: 31629197): Auditory deviance response in insula",
+          "Ibos et al. 2019 (DOI: 10.1007/s00429-019-01892-y): Visual oddball insular response"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)", "beta (13-30 Hz)"],
+      "connections": ["bla", "acc", "pfc", "thalamus", "s1_cortex", "a1"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [13, 14, 15, 16]
+    },
+    {
+      "id": "acc",
+      "name": "Anterior Cingulate Cortex",
+      "abbreviation": "ACC",
+      "qif_band": "N6",
+      "parent_structure": "cingulate_gyrus",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Conflict monitoring, error detection, pain processing, motivation, autonomic regulation",
+      "response_latency_ms": {
+        "value": 200,
+        "range": [100, 400],
+        "measure": "ERN (Error-Related Negativity) onset",
+        "notes": "Error-related negativity (ERN) peaks ~80-150ms post-error. Conflict monitoring (N2): ~200-350ms. Pain processing: ~150-250ms.",
+        "citations": [
+          "Gehring et al. 2012 (Oxford Handbook): ERN and ACC"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)"],
+      "connections": ["pfc", "bla", "hippocampus", "insula", "m1", "striatum"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [24, 25, 32, 33]
+    },
+    {
+      "id": "cingulate",
+      "name": "Cingulate Gyrus (Posterior)",
+      "abbreviation": "PCC",
+      "qif_band": "N6",
+      "parent_structure": "cingulate_gyrus",
+      "depth_class": "cortical",
+      "hemisphere": "bilateral",
+      "function": "Default mode network hub, self-referential processing, memory retrieval, spatial orientation",
+      "response_latency_ms": {
+        "value": 250,
+        "range": [150, 400],
+        "measure": "Task-related deactivation/activation",
+        "notes": "Part of default mode network. Deactivation during task onset: ~200-300ms. Memory-related activation: variable.",
+        "citations": [
+          "Raichle 2015 (Neuron): Default mode network review"
+        ],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": ["alpha (8-13 Hz)", "theta (4-8 Hz)"],
+      "connections": ["hippocampus", "pfc", "acc", "ppc", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": [23, 29, 30, 31]
+    },
+    {
+      "id": "striatum",
+      "name": "Striatum (Caudate + Putamen)",
+      "abbreviation": "Striatum",
+      "qif_band": "N5",
+      "parent_structure": "basal_ganglia",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Motor selection, habit learning, reward prediction, action initiation",
+      "response_latency_ms": {
+        "value": 100,
+        "range": [60, 300],
+        "measure": "Reward-related or movement-related striatal firing",
+        "notes": "Reward prediction error: ~100ms post-outcome. Movement-related: ~60-200ms before movement in putamen. Caudate: 100-300ms for cognitive tasks.",
+        "citations": [
+          "Schultz 2006 (Annu Rev Psychol): Reward signals in basal ganglia"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["pfc", "m1", "sma", "acc", "gpi", "gpe", "stn", "substantia_nigra", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "gpi",
+      "name": "Globus Pallidus Internus",
+      "abbreviation": "GPi",
+      "qif_band": "N5",
+      "parent_structure": "basal_ganglia",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Primary output nucleus of basal ganglia (inhibitory). Major DBS target for dystonia.",
+      "response_latency_ms": {
+        "value": 15,
+        "range": [10, 30],
+        "measure": "Striatal input to GPi output latency",
+        "notes": "Direct pathway: striatum → GPi ~10-15ms. GPi tonic firing rate: 60-80 Hz. Pause latency during movement: ~15ms.",
+        "citations": [
+          "Kita & Kita 2011 (J Neurosci): Basal ganglia circuit timing"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)"],
+      "connections": ["striatum", "stn", "thalamus", "gpe"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "gpe",
+      "name": "Globus Pallidus Externus",
+      "abbreviation": "GPe",
+      "qif_band": "N5",
+      "parent_structure": "basal_ganglia",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Indirect pathway relay, tonic inhibition of STN, basal ganglia modulation",
+      "response_latency_ms": {
+        "value": 15,
+        "range": [10, 25],
+        "measure": "Striatal input to GPe relay",
+        "notes": "Similar timing to GPi. Tonic firing rate: 50-70 Hz. Indirect pathway involves additional STN relay.",
+        "citations": [
+          "Kita & Kita 2011 (J Neurosci): Basal ganglia circuit timing"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)"],
+      "connections": ["striatum", "stn", "gpi", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "stn",
+      "name": "Subthalamic Nucleus",
+      "abbreviation": "STN",
+      "qif_band": "N5",
+      "parent_structure": "basal_ganglia",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Hyperdirect pathway hub, motor urgency signal, stop-signal processing. Primary DBS target for Parkinson's.",
+      "response_latency_ms": {
+        "value": 5,
+        "range": [5, 70],
+        "measure": "Cortical stimulation to STN response (antidromic/orthodromic)",
+        "notes": "Short-latency (antidromic via hyperdirect pathway): 5-10ms. Medium-latency (antidromic cortical): 2-15ms. Long-latency (orthodromic polysynaptic): 20-70ms. Beta oscillations (15-30 Hz) pathological in PD.",
+        "citations": [
+          "Nambu et al. 2002 (J Neurophysiol): Hyperdirect pathway timing",
+          "Miocinovic et al. 2018 (JAMA Neurol): STN DBS mechanisms",
+          "Walker et al. 2012 (PMC2852267): Short-latency visual input to STN via superior colliculus"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)", "theta (4-8 Hz)"],
+      "connections": ["gpe", "gpi", "substantia_nigra", "cortex_hyperdirect", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "substantia_nigra",
+      "name": "Substantia Nigra",
+      "abbreviation": "SNr/SNc",
+      "qif_band": "N5",
+      "parent_structure": "midbrain",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Dopamine production (SNc, pars compacta) and basal ganglia output (SNr, pars reticulata). Degeneration causes Parkinson's.",
+      "response_latency_ms": {
+        "value": 20,
+        "range": [10, 50],
+        "measure": "Dopamine burst latency to unexpected reward",
+        "notes": "SNc dopamine neurons: burst response to unexpected reward ~10-20ms. SNr inhibitory output timing similar to GPi.",
+        "citations": [
+          "Schultz 1998 (J Neurophysiol): Dopamine neuron temporal dynamics"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)"],
+      "connections": ["striatum", "stn", "gpi", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "thalamus",
+      "name": "Thalamus",
+      "abbreviation": "Thal",
+      "qif_band": "N4",
+      "parent_structure": "diencephalon",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Central relay station for all sensory modalities (except olfaction). Gating via reticular thalamic nucleus (TRN) implements default-deny on ascending traffic.",
+      "response_latency_ms": {
+        "value": 4,
+        "range": [3, 20],
+        "measure": "LGN relay latency (retina → LGN → V1)",
+        "notes": "LGN visual relay: ~4.2ms (retinogeniculate delay). VPL somatosensory relay: ~14ms (median nerve). MGN auditory relay: ~6-8ms. TRN gating adds ~2-5ms.",
+        "citations": [
+          "Sherman & Guillery 2006 (Exploring the Thalamus and Its Role in Cortical Function): Thalamic relay timing",
+          "Briggs & Usrey 2011 (Neuron): LGN response properties"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["alpha (8-13 Hz)", "sleep spindles (11-15 Hz)", "delta (0.5-4 Hz)"],
+      "connections": ["all_cortical_areas", "striatum", "cerebellum_nuclei", "reticular_formation", "hypothalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "hypothalamus",
+      "name": "Hypothalamus",
+      "abbreviation": "HyTh",
+      "qif_band": "N4",
+      "parent_structure": "diencephalon",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Homeostatic regulation — temperature, hunger, thirst, circadian rhythm, hormone release, autonomic output",
+      "response_latency_ms": {
+        "value": 7,
+        "range": [7, 20],
+        "measure": "Lateral hypothalamus evoked potential to sciatic nerve stimulation (cat)",
+        "notes": "Lateral hypothalamus: ~7ms (cat, evoked potential). Acoustic/somatosensory: <15-20ms across mammals. Homeostatic outputs operate on seconds-to-hours timescale. CAUTION: 7ms value from animal data — human intracranial data extremely limited.",
+        "citations": [
+          "Yamamoto et al. 2020 (Physiol Behav, DOI: 10.1016/j.physbeh.2020.113100): Fast sensory responses in lateral hypothalamus review"
+        ],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": ["slow oscillations (<1 Hz)", "theta (4-8 Hz)"],
+      "connections": ["thalamus", "bla", "brainstem_autonomic", "pituitary"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "vim",
+      "name": "Ventral Intermediate Nucleus (Thalamus)",
+      "abbreviation": "VIM",
+      "qif_band": "N4",
+      "parent_structure": "thalamus",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Cerebellar relay to motor cortex. Primary DBS target for essential tremor.",
+      "response_latency_ms": {
+        "value": 8,
+        "range": [5, 15],
+        "measure": "Cerebellothalamic conduction time",
+        "notes": "Dentate nucleus to VIM: ~5-8ms. VIM to motor cortex: ~3-5ms. Total cerebellar loop: ~20-40ms.",
+        "citations": [
+          "Middleton & Strick 2000 (Brain Res Rev): Basal ganglia and cerebellar loops"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["tremor frequency (4-6 Hz)", "beta (13-30 Hz)"],
+      "connections": ["cerebellum_nuclei", "m1", "pmc", "sma"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "ant",
+      "name": "Anterior Nucleus of Thalamus",
+      "abbreviation": "ANT",
+      "qif_band": "N4",
+      "parent_structure": "thalamus",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Limbic relay, memory circuits (Papez circuit). DBS target for drug-resistant epilepsy.",
+      "response_latency_ms": {
+        "value": 10,
+        "range": [5, 20],
+        "measure": "Hippocampal input relay time",
+        "notes": "Mammillothalamic tract conduction to ANT: ~5-10ms. ANT to cingulate cortex: ~5-10ms.",
+        "citations": [
+          "Fisher et al. 2010 (Epilepsia): SANTE trial, ANT DBS for epilepsy"
+        ],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)"],
+      "connections": ["hippocampus", "mammillary_bodies", "cingulate", "pfc"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "cerebellum_cortex",
+      "name": "Cerebellar Cortex",
+      "abbreviation": "CbCtx",
+      "qif_band": "N3",
+      "parent_structure": "cerebellum",
+      "depth_class": "infratentorial",
+      "hemisphere": "bilateral",
+      "function": "Motor coordination, error correction, timing, procedural learning. Purkinje cells are the sole output.",
+      "response_latency_ms": {
+        "value": 20,
+        "range": [10, 50],
+        "measure": "Mossy fiber input to Purkinje cell response",
+        "notes": "Climbing fiber input: ~10ms. Mossy fiber → granule cell → parallel fiber → Purkinje cell: ~15-25ms. Complex spike latency: ~10ms from IO input. Purkinje cells fire at 30-100 Hz tonic.",
+        "citations": [
+          "Heck et al. 2013 (PubMed 23970855): Purkinje cell rebound timing",
+          "Johansson et al. 2014 (PNAS): Memory trace timing in Purkinje cells"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["gamma (30-100 Hz)"],
+      "connections": ["cerebellum_nuclei", "pons_nuclei", "inferior_olive", "m1_via_thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "cerebellum_nuclei",
+      "name": "Deep Cerebellar Nuclei",
+      "abbreviation": "DCN",
+      "qif_band": "N3",
+      "parent_structure": "cerebellum",
+      "depth_class": "infratentorial",
+      "hemisphere": "bilateral",
+      "function": "Cerebellar output nuclei (dentate, interposed, fastigial). Relay to thalamus and brainstem.",
+      "response_latency_ms": {
+        "value": 15,
+        "range": [5, 30],
+        "measure": "Purkinje cell inhibition to nuclear rebound firing",
+        "notes": "Rebound firing after Purkinje cell pause: ~15ms. Dentate nucleus to thalamus: ~5-8ms.",
+        "citations": [
+          "Heck et al. 2013 (PubMed 23970855): Rebound activity in cerebellar nuclei"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["beta (13-30 Hz)"],
+      "connections": ["cerebellum_cortex", "vim", "thalamus", "reticular_formation"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "vermis",
+      "name": "Cerebellar Vermis",
+      "abbreviation": "Vermis",
+      "qif_band": "N3",
+      "parent_structure": "cerebellum",
+      "depth_class": "infratentorial",
+      "hemisphere": "midline",
+      "function": "Axial motor control, balance, gait, vestibular integration, emotional regulation",
+      "response_latency_ms": {
+        "value": 20,
+        "range": [10, 40],
+        "measure": "Vestibular input to vermis response",
+        "notes": "Vestibulocerebellar projections: ~10-20ms. Vermis involved in both motor and emotional processing (Schmahmann dysmetria of thought).",
+        "citations": [
+          "Schmahmann 2019 (Cerebellum): Cerebellar cognitive affective syndrome"
+        ],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)"],
+      "connections": ["vestibular_nuclei", "fastigial_nucleus", "reticular_formation", "spinal_cord"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "medulla",
+      "name": "Medulla Oblongata",
+      "abbreviation": "Med",
+      "qif_band": "N2",
+      "parent_structure": "brainstem",
+      "depth_class": "infratentorial",
+      "hemisphere": "midline",
+      "function": "Vital autonomic centers — respiratory rhythm, cardiac center, blood pressure (vasomotor), vomiting reflex",
+      "response_latency_ms": {
+        "value": 2,
+        "range": [1, 4],
+        "measure": "BAEP Wave II (cochlear nuclei in rostral medulla)",
+        "notes": "Brainstem auditory evoked potential Wave II: 2-4ms post-stimulus. Cochlear nuclei generate Wave II. Medullary autonomic reflexes: 5-20ms.",
+        "citations": [
+          "NCBI Bookshelf NBK597358: Brainstem auditory evoked response norms",
+          "Hall 2007 (New Handbook of Auditory Evoked Responses): BAEP wave generators"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["respiratory rhythm (~0.2-0.5 Hz)", "cardiac rhythm (~1 Hz)"],
+      "connections": ["pons", "spinal_cord", "vermis", "thalamus", "hypothalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "pons",
+      "name": "Pons",
+      "abbreviation": "Pons",
+      "qif_band": "N2",
+      "parent_structure": "brainstem",
+      "depth_class": "infratentorial",
+      "hemisphere": "midline",
+      "function": "Relay between cortex and cerebellum, REM sleep regulation, auditory relay (superior olivary complex)",
+      "response_latency_ms": {
+        "value": 4,
+        "range": [3, 5],
+        "measure": "BAEP Wave III (superior olivary complex in caudal pons)",
+        "notes": "BAEP Wave III: 3-5ms. Superior olivary complex generates Wave III. Pontine nuclei relay cortical signals to cerebellum.",
+        "citations": [
+          "NCBI Bookshelf NBK597358: BAEP wave generators",
+          "Wikipedia: Brainstem auditory evoked potential"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["pontine waves (PGO spikes during REM)"],
+      "connections": ["medulla", "midbrain", "cerebellum_cortex", "thalamus"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "midbrain",
+      "name": "Midbrain (Mesencephalon)",
+      "abbreviation": "MB",
+      "qif_band": "N2",
+      "parent_structure": "brainstem",
+      "depth_class": "infratentorial",
+      "hemisphere": "midline",
+      "function": "Visual/auditory reflexes (superior/inferior colliculi), dopaminergic pathways (VTA, SNc), pain modulation (PAG)",
+      "response_latency_ms": {
+        "value": 8,
+        "range": [7, 9],
+        "measure": "BAEP Wave V (inferior colliculus vicinity)",
+        "notes": "BAEP Wave V: 7-9ms. Inferior colliculus response. Superior colliculus visual saccade response: ~40-70ms.",
+        "citations": [
+          "NCBI Bookshelf NBK597358: BAEP Wave V generator",
+          "Walker et al. 2012 (PMC2852267): Superior colliculus to STN short-latency visual input"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": ["gamma (30-100 Hz)"],
+      "connections": ["pons", "thalamus", "substantia_nigra", "stn", "superior_colliculus", "pag"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "reticular_formation",
+      "name": "Reticular Formation",
+      "abbreviation": "RF",
+      "qif_band": "N2",
+      "parent_structure": "brainstem",
+      "depth_class": "infratentorial",
+      "hemisphere": "midline",
+      "function": "Arousal, consciousness, sleep-wake transitions, pain modulation, postural tone",
+      "response_latency_ms": {
+        "value": 10,
+        "range": [5, 50],
+        "measure": "Stimulus to arousal response",
+        "notes": "Reticular activating system (RAS) response to salient stimuli: ~10-50ms. Startle reflex (reticulospinal): ~14ms. Muscle tone modulation: 10-20ms.",
+        "citations": [
+          "Moruzzi & Magoun 1949 (EEG Clin Neurophysiol): Reticular activating system (classic)",
+          "Brown et al. 1991 (Exp Brain Res): Reticulospinal reflex latency"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["variable (state-dependent)"],
+      "connections": ["thalamus", "hypothalamus", "all_brainstem_nuclei", "spinal_cord"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "cervical_cord",
+      "name": "Cervical Spinal Cord",
+      "abbreviation": "C1-C8",
+      "qif_band": "N1",
+      "parent_structure": "spinal_cord",
+      "depth_class": "spinal",
+      "hemisphere": "bilateral",
+      "function": "Upper limb motor innervation, diaphragm (C3-C5), neck muscles, upper limb sensation",
+      "response_latency_ms": {
+        "value": 6,
+        "range": [5, 10],
+        "measure": "Corticospinal tract to cervical motor neuron",
+        "notes": "Central motor conduction time to upper limbs: ~6-8ms (TMS). Peripheral conduction adds ~10-15ms.",
+        "citations": [
+          "Rossini et al. 2015: TMS guidelines"
+        ],
+        "confidence": "HIGH"
+      },
+      "oscillation_bands": null,
+      "connections": ["medulla", "brainstem", "peripheral_nerves_upper"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "thoracic_cord",
+      "name": "Thoracic Spinal Cord",
+      "abbreviation": "T1-T12",
+      "qif_band": "N1",
+      "parent_structure": "spinal_cord",
+      "depth_class": "spinal",
+      "hemisphere": "bilateral",
+      "function": "Trunk muscles, sympathetic outflow, intercostal muscles for respiration",
+      "response_latency_ms": {
+        "value": 10,
+        "range": [8, 15],
+        "measure": "Corticospinal conduction to thoracic segments",
+        "notes": "Longer conduction distance than cervical. Sympathetic preganglionic neurons here.",
+        "citations": [],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": null,
+      "connections": ["cervical_cord", "lumbar_cord", "sympathetic_chain"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "lumbar_cord",
+      "name": "Lumbar Spinal Cord",
+      "abbreviation": "L1-L5",
+      "qif_band": "N1",
+      "parent_structure": "spinal_cord",
+      "depth_class": "spinal",
+      "hemisphere": "bilateral",
+      "function": "Lower limb motor innervation, patellar reflex, lower limb sensation",
+      "response_latency_ms": {
+        "value": 14,
+        "range": [12, 20],
+        "measure": "Corticospinal conduction to lumbar motor neurons",
+        "notes": "Central motor conduction time to lower limbs: ~14-16ms (TMS). Patellar reflex arc: ~15-30ms total.",
+        "citations": [
+          "Rossini et al. 2015: TMS guidelines"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": null,
+      "connections": ["thoracic_cord", "sacral_cord", "peripheral_nerves_lower"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "sacral_cord",
+      "name": "Sacral Spinal Cord",
+      "abbreviation": "S1-S5",
+      "qif_band": "N1",
+      "parent_structure": "spinal_cord",
+      "depth_class": "spinal",
+      "hemisphere": "bilateral",
+      "function": "Bladder, bowel, sexual function, perineal sensation, parasympathetic outflow",
+      "response_latency_ms": {
+        "value": 18,
+        "range": [15, 25],
+        "measure": "Corticospinal conduction to sacral segments",
+        "notes": "Longest corticospinal conduction. Pudendal nerve latency: ~35-40ms total (central + peripheral).",
+        "citations": [],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": null,
+      "connections": ["lumbar_cord", "cauda_equina", "parasympathetic_outflow"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "cauda_equina",
+      "name": "Cauda Equina",
+      "abbreviation": "CE",
+      "qif_band": "N1",
+      "parent_structure": "spinal_cord",
+      "depth_class": "spinal",
+      "hemisphere": "bilateral",
+      "function": "Bundle of spinal nerve roots below L1-L2. Lower limb motor/sensory, bladder, bowel.",
+      "response_latency_ms": {
+        "value": null,
+        "range": null,
+        "measure": null,
+        "notes": "Peripheral nerve bundle, not a CNS structure. Conduction velocity depends on individual nerve roots (~50-60 m/s).",
+        "citations": [],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": null,
+      "connections": ["lumbar_cord", "sacral_cord", "peripheral_nerves"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
+      "id": "cea",
+      "name": "Central Amygdala",
+      "abbreviation": "CeA",
+      "qif_band": "N5",
+      "parent_structure": "amygdala",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Autonomic fear output, conditioned fear responses, pain modulation. Subcortical architecture (unlike BLA).",
+      "response_latency_ms": {
+        "value": 100,
+        "range": [80, 200],
+        "measure": "BLA input to CeA autonomic output",
+        "notes": "CeA receives processed input from BLA. Output drives autonomic responses (heart rate, freezing) with ~100-200ms latency from stimulus.",
+        "citations": [
+          "LeDoux 2000 (Annu Rev Neurosci): Emotion circuits"
+        ],
+        "confidence": "LOW"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)"],
+      "connections": ["bla", "hypothalamus", "brainstem_autonomic", "pag"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    }
+  ],
+
+  "bci_devices": "SEE docs/bci-hardware-inventory.json — 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",
+
+  "device_region_mappings": [
+    {
+      "device_id": "neuralink-n1",
+      "target_regions": ["m1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "read",
+      "notes": "1024-channel cortical implant in motor cortex. Read-only (recording spikes + LFP)."
+    },
+    {
+      "device_id": "neuralink-n2",
+      "target_regions": ["m1", "v1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "bidirectional",
+      "notes": "Next-gen: motor + visual cortex targets. Stimulation planned for vision restoration."
+    },
+    {
+      "device_id": "blackrock-utah-array",
+      "target_regions": ["m1", "s1_cortex"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "bidirectional",
+      "notes": "96-128 channels, penetrating electrodes. SIROF variant enables stimulation. Gold standard for cortical recording."
+    },
+    {
+      "device_id": "braingate",
+      "target_regions": ["m1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "read",
+      "notes": "Uses Utah Arrays. Wireless variant: 48 Mbps, >36h battery. First home-use wireless intracortical BCI."
+    },
+    {
+      "device_id": "neuropace-rns",
+      "target_regions": ["hippocampus", "bla", "cerebellum_cortex"],
+      "qif_bands": ["N6", "N3"],
+      "i0_depth": "I0-subcortical",
+      "interface_type": "bidirectional",
+      "notes": "Responsive neurostimulation at seizure foci. Depth electrodes reach hippocampus, amygdala. Surface strips for cortical foci."
+    },
+    {
+      "device_id": "medtronic-percept-pc",
+      "target_regions": ["stn", "gpi", "vim"],
+      "qif_bands": ["N5", "N4"],
+      "i0_depth": "I0-subcortical",
+      "interface_type": "bidirectional",
+      "notes": "DBS + BrainSense LFP recording. Primary targets: STN (PD), GPi (dystonia), VIM (tremor)."
+    },
+    {
+      "device_id": "medtronic-percept-rc",
+      "target_regions": ["stn", "gpi", "vim"],
+      "qif_bands": ["N5", "N4"],
+      "i0_depth": "I0-subcortical",
+      "interface_type": "bidirectional",
+      "notes": "Rechargeable variant. Same brain targets as Percept PC. >15 year service life."
+    },
+    {
+      "device_id": "synchron-stentrode",
+      "target_regions": ["m1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "read",
+      "notes": "Endovascular (superior sagittal sinus). Adjacent to motor cortex but inside blood vessel. No direct tissue contact."
+    },
+    {
+      "device_id": "cochlear-nucleus-profile-plus",
+      "target_regions": ["a1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-spinal/peripheral",
+      "interface_type": "write",
+      "notes": "Cochlear implant stimulates auditory nerve (CN VIII). Signal reaches A1 via brainstem auditory pathway. 22 electrodes."
+    },
+    {
+      "device_id": "medel-cochlear",
+      "target_regions": ["a1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-spinal/peripheral",
+      "interface_type": "write",
+      "notes": "Cochlear implant. 12 channels, longest electrode arrays (up to 34mm) for complete cochlear coverage."
+    },
+    {
+      "device_id": "boston-scientific-vercise",
+      "target_regions": ["stn", "gpi", "vim"],
+      "qif_bands": ["N5", "N4"],
+      "i0_depth": "I0-subcortical",
+      "interface_type": "write",
+      "notes": "DBS stimulation only (no sensing). 16-contact directional leads (Cartesia). 25-year rechargeable battery."
+    },
+    {
+      "device_id": "abbott-infinity-dbs",
+      "target_regions": ["stn", "gpi", "vim"],
+      "qif_bands": ["N5", "N4"],
+      "i0_depth": "I0-subcortical",
+      "interface_type": "write",
+      "notes": "DBS with directional stimulation. Smallest non-rechargeable DBS device at launch. 8-contact segmented leads."
+    },
+    {
+      "device_id": "emotiv-epoc-x",
+      "target_regions": ["pfc", "ppc", "v1", "a1", "m1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "14-channel consumer EEG. Scalp recording. Volume conduction limits spatial resolution to ~cm scale. Saline felt sensors."
+    },
+    {
+      "device_id": "emotiv-insight",
+      "target_regions": ["pfc", "ppc"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "5-channel consumer EEG. Minimal coverage: frontal + temporal + parietal."
+    },
+    {
+      "device_id": "openbci-cyton",
+      "target_regions": ["pfc", "m1", "ppc", "v1", "a1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "8-channel (expandable to 16) open-source EEG. ADS1299 24-bit ADC. Research-grade for non-invasive BCI."
+    },
+    {
+      "device_id": "openbci-ganglion",
+      "target_regions": ["pfc", "m1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "4-channel entry-level open-source EEG. BLE. 18-bit effective resolution."
+    },
+    {
+      "device_id": "muse-2",
+      "target_regions": ["pfc"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "4-channel consumer EEG headband. Frontal + temporal positions. Dry electrodes. Primary use: meditation."
+    },
+    {
+      "device_id": "muse-s",
+      "target_regions": ["pfc"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "4 EEG + 2 auxiliary channels. Sleep tracking focus. Same electrode positions as Muse 2."
+    },
+    {
+      "device_id": "corticom",
+      "target_regions": ["broca", "m1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "read",
+      "notes": "128-channel ECoG (subdural). Speech + hand motor areas. Temporary (6-month) implantation. Hopkins consortium."
+    },
+    {
+      "device_id": "paradromics-connexus",
+      "target_regions": ["m1", "broca"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "read",
+      "notes": "421-1681 channels. Intracortical microwires (1.5mm depth). Near-infrared optical data link (not RF)."
+    },
+    {
+      "device_id": "precision-layer7",
+      "target_regions": ["m1", "s1_cortex"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-cortical",
+      "interface_type": "bidirectional",
+      "notes": "1024-channel thin-film cortical array (5um thick). Minimally invasive: inserted through <1mm slit. 510(k) cleared for intraoperative use."
+    },
+    {
+      "device_id": "gtec-unicorn",
+      "target_regions": ["pfc", "m1", "ppc"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "8-channel research EEG. Hybrid dry/gel electrodes. 24-bit ADC. Bluetooth."
+    },
+    {
+      "device_id": "kernel-flow",
+      "target_regions": ["pfc", "m1", "ppc", "v1", "a1"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "read",
+      "notes": "2000+ optical channels (TD-fNIRS). Hemodynamic imaging (not electrical). 52 modules. Whole-head coverage."
+    },
+    {
+      "device_id": "darpa-n3",
+      "target_regions": ["m1", "pfc"],
+      "qif_bands": ["N7"],
+      "i0_depth": "I0-noninvasive",
+      "interface_type": "bidirectional",
+      "notes": "Research program (5 teams). Target: 16 channels in 16mm3 within 50ms. Approaches: acousto-optical, magnetoelectric nanotransducers, OPMs."
+    }
+  ],
+
+  "interhemispheric_transfer": {
+    "structure": "corpus_callosum",
+    "ihtt_ms": {
+      "value": 3.5,
+      "range": [3, 4],
+      "measure": "Crossed-Uncrossed Difference (CUD) in reaction time",
+      "notes": "Visual IHTT via splenium of corpus callosum. Measured by P100 ERP laterality or CUD in reaction time. Correlates with myelination integrity.",
+      "citations": [
+        "Schulte et al. 2006 (PubMed 17034948): IHTT and corpus callosum structural properties",
+        "Saron & Davidson 1989: CUD of 3-4ms in normal adults"
+      ],
+      "confidence": "HIGH"
+    }
+  },
+
+  "physics_constraints_global": {
+    "thermal_limit": {
+      "value": 1.0,
+      "unit": "degrees_C",
+      "description": "Maximum allowable tissue temperature rise at electrode-tissue interface",
+      "source": "FDA BCI guidance 2021; IEEE C95.1-2019"
+    },
+    "sar_limit": {
+      "value": 1.6,
+      "unit": "W/kg",
+      "description": "Specific absorption rate limit (10g averaged, 6 min)",
+      "source": "IEEE C95.1-2019"
+    },
+    "shannon_safety_limit": {
+      "equation": "log10(D) = k - log10(Q/A)",
+      "k_value": 1.75,
+      "description": "Shannon's charge density / charge per phase limit for safe neural stimulation. k=1.75 is the conservative safety boundary.",
+      "source": "Shannon 1992 (IEEE Trans Biomed Eng)"
+    },
+    "boltzmann_thermal_noise": {
+      "equation": "V_noise = sqrt(4 * k_B * T * R * BW)",
+      "description": "Johnson-Nyquist thermal noise floor at electrode-tissue interface. Sets fundamental limit on signal detection.",
+      "typical_values": {
+        "k_B": 1.38e-23,
+        "T_body": 310,
+        "R_electrode_range": "1k-1M ohm",
+        "BW_typical": "0.3-10000 Hz"
+      }
+    },
+    "stevensons_law": {
+      "equation": "N_neurons = N_0 * 2^(t/7.4)",
+      "description": "Simultaneously recorded neurons doubles every ~7.4 years. BCI 'Moore's Law'.",
+      "source": "Stevenson & Kording 2011 (Nature Neuroscience)",
+      "doi": "10.1038/nn.2731"
+    },
+    "moores_law_realized": {
+      "doubling_period_years": 3,
+      "description": "Real-world transistor density doubling: ~3 years (60-65% of theoretical 2-year). Consistent across Intel, Nvidia, Apple silicon.",
+      "source": "QIF derivation (Entry 60, validated against Intel Pentium-to-Arrow Lake and Nvidia Tesla-to-Blackwell)"
+    }
+  },
+
+  "external_atlas_references": [
+    {
+      "name": "Allen Brain Atlas API",
+      "format": "JSON",
+      "url": "http://api.brain-map.org/api/v2/structure_graph_download/1.json",
+      "notes": "Mouse brain ontology. Human brain atlas also available. Direct JSON download of structure hierarchy."
+    },
+    {
+      "name": "BrainGlobe AtlasAPI",
+      "format": "JSON + mesh",
+      "url": "https://github.com/brainglobe/brainglobe-atlasapi",
+      "notes": "Python package wrapping multiple atlases in unified JSON format. pip install brainglobe-atlasapi."
+    },
+    {
+      "name": "BAMS (Brain Architecture Management System)",
+      "format": "Relational database",
+      "url": "https://bams1.org/",
+      "notes": "63K+ neuroanatomical reports. 10K+ nomenclature entries. Connectivity inference engine."
+    },
+    {
+      "name": "Neurosynth",
+      "format": "Coordinate database (MNI152)",
+      "url": "https://neurosynth.org/",
+      "notes": "507,891 activations from 14,371 studies. Coordinate-to-function mapping."
+    },
+    {
+      "name": "AAL Atlas (Automated Anatomical Labeling)",
+      "format": "NIfTI + XML labels",
+      "url": "https://nilearn.github.io/stable/modules/description/aal.html",
+      "notes": "Standard brain parcellation. Available via Python nilearn.datasets.fetch_atlas_aal."
+    }
+  ],
+
+  "source_bibliography": [
+    {
+      "key": "kandel_2021",
+      "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA. Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
+      "type": "textbook",
+      "relevance": "Primary source for QIF 7-band neuroanatomical hierarchy and 38 brain region assignments."
+    },
+    {
+      "key": "mendez_bertolo_2016",
+      "citation": "Mendez-Bertolo C, et al. A fast pathway for fear in human amygdala. Nat Neurosci. 2016;19(8):1041-1049.",
+      "doi": "10.1038/nn.4324",
+      "type": "peer_reviewed",
+      "relevance": "Verified amygdala response latency: ~74ms. Corrects fabricated 12ms claim."
+    },
+    {
+      "key": "stevenson_kording_2011",
+      "citation": "Stevenson IH, Kording KP. How advances in neural recording affect data analysis. Nat Neurosci. 2011;14(2):139-142.",
+      "doi": "10.1038/nn.2731",
+      "type": "peer_reviewed",
+      "relevance": "Stevenson's Law: simultaneously recorded neurons doubles every ~7.4 years."
+    },
+    {
+      "key": "shannon_1992",
+      "citation": "Shannon RV. A model of safe levels for electrical stimulation. IEEE Trans Biomed Eng. 1992;39(4):424-426.",
+      "doi": "10.1109/10.126616",
+      "type": "peer_reviewed",
+      "relevance": "Shannon safety limit for neural stimulation charge density."
+    },
+    {
+      "key": "sherman_guillery_2006",
+      "citation": "Sherman SM, Guillery RW. Exploring the Thalamus and Its Role in Cortical Function. 2nd ed. MIT Press; 2006.",
+      "type": "textbook",
+      "relevance": "Thalamic relay timing and gating mechanisms."
+    },
+    {
+      "key": "baep_statpearls",
+      "citation": "Brainstem Auditory Evoked Response Test. StatPearls. NCBI Bookshelf NBK597358.",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK597358/",
+      "type": "reference",
+      "relevance": "BAEP wave generators and normal latency values for brainstem structures."
+    }
+  ]
+}

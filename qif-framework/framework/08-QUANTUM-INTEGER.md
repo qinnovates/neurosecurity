@@ -179,7 +179,7 @@ Where:
 │                        │       │                                      │
 ├────────────────────────┼───────┼──────────────────────────────────────┤
 │                        │       │                                      │
-│ Ring 3: Subcortical    │ Q = ? │ Fear fast-track (12ms) suggests      │
+│ Ring 3: Subcortical    │ Q = ? │ Fear fast-track (~74ms) suggests      │
 │                        │       │ near-zero processing time for        │
 │                        │       │ complex decisions (threat/no-threat).│
 │                        │       │ Is the speed purely classical        │

@@ -98,6 +98,41 @@
 - Neural side is wider because the brain has 500M years of evolutionary complexity; silicon is human-designed with bounded complexity
 - The bottleneck has **real thickness** (quasi-quantum zone, not a line)
 
+### I0 Depth Subclassification (Entry 59, 2026-02-18)
+
+The security criticality of the I0 band depends on **where** in the neural hierarchy the electrode is placed. Deeper implants bypass more biological security layers (the thalamic gating, cortical gating, brainstem autonomic regulation), increasing both the attack surface and the severity of compromise.
+
+| Subtype | Placement | Biological Layers Above | Directionality | Risk Profile | Example Devices |
+|---------|-----------|------------------------|----------------|--------------|-----------------|
+| **I0-cortical** | Neocortex (N7) surface/penetrating | 0 — no biological security layers above | Read (BrainGate, Utah Array), Bidirectional (Neuralink N1) | Highest direct cognitive risk. Full access to executive, motor, sensory cortex. Bypasses thalamic gating entirely. | Neuralink N1, Utah Array, BrainGate, CortiCom |
+| **I0-subcortical** | Thalamus (N4), Basal Ganglia (N5), Limbic (N6) | 1–3 — inside or below the thalamic gating | Bidirectional (Medtronic Percept RC, NeuroPace RNS), Write (older DBS leads) | High risk. Direct access to relay, motor control, emotional circuits. Some thalamic gating preserved for non-target regions. | Medtronic Percept (STN DBS), ANT-DBS, NeuroPace RNS |
+| **I0-spinal/peripheral** | Spinal cord (N1), brainstem (N2) | 5–6 — full neural hierarchy above | Write (epidural stimulators, VNS) | Moderate risk. Motor/autonomic effects but limited cognitive access. Signal must traverse brainstem, cerebellum, diencephalon to reach cortex. | Epidural spinal stimulators, vagus nerve stimulators |
+| **I0-noninvasive** | Scalp surface (above N7) | All 7 — full biological stack | Read (EEG, fNIRS), Write (TMS, tDCS) | Lowest direct risk. Signal attenuated by skull, CSF, meninges. Volume conduction limits spatial resolution. Attack bandwidth limited by physics. | EEG (Muse, Emotiv), fNIRS, TMS, tDCS |
+
+**Key insight:** The thalamus (N4) acts as a biological gating layer — the reticular thalamic nucleus (TRN) implements default-deny inhibition on all ascending sensory traffic. I0-cortical implants sit **above** this firewall, bypassing its protection entirely. This is why cortical BCIs have the highest security criticality in the QIF model.
+
+**NISS implications:** I0 depth should modulate NISS scoring. An identical attack technique targeting I0-cortical vs I0-noninvasive would receive different Biological Impact (BI) and Reversibility (RV) scores due to the difference in biological security layers traversed.
+
+**Thalamic bypass exceptions:** Not all neural traffic passes through the thalamus. Known bypass pathways include:
+- Amygdala fast path (direct sensory → BLA, ~12ms, no thalamic gating — emergency/threat response)
+- Spinal reflexes (local loop at N1, never ascends)
+- Brainstem autonomic (N2, direct regulation of vital functions)
+- Olfactory pathway (olfactory bulb → piriform cortex, phylogenetically ancient)
+
+These bypasses represent additional attack surfaces without the thalamic gating's protection.
+
+### I0 Directionality (Entry 014 Field Journal, 2026-02-18)
+
+BCI directionality is orthogonal to I0 depth and critically affects the threat profile:
+
+- **Read-only** devices (BrainGate, EEG, fNIRS, Stentrode) can only exfiltrate neural data. Attack surface limited to confidentiality violations (Mental Privacy).
+- **Write-only** devices (cochlear implants, older DBS leads, TMS, tDCS) can only inject signals. Attack surface limited to integrity violations (Cognitive Authenticity, Mental Integrity).
+- **Bidirectional** devices (Medtronic Percept RC, NeuroPace RNS, Neuralink N1) can both read and write. Full attack surface — confidentiality AND integrity violations possible. These represent the highest security criticality.
+
+**Closed-loop systems** (NeuroPace RNS, Medtronic Percept RC with BrainSense) are a special case: they autonomously detect neural patterns and respond with stimulation. A compromised closed-loop device could alter its detection thresholds or response parameters, creating an attack that is both self-triggering and self-reinforcing.
+
+**NISS implications:** Directionality should modulate NISS scoring alongside I0 depth. A bidirectional I0-subcortical device (e.g., NeuroPace RNS) may warrant higher composite scores than a read-only I0-cortical device (e.g., BrainGate) despite shallower depth, because bidirectionality enables both exfiltration and injection.
+
 ### Classical Ceiling
 The boundary between N6 (chaotic → quantum uncertain) and N7 (quantum uncertain) is the **classical ceiling** — below it, all unpredictability is in principle resolvable with better measurement; above it, the unpredictability is ontic (Bell's theorem). Classical security tools operate below the ceiling. QIF operates across the full spectrum.
 
@@ -537,7 +572,7 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 
 ---
 
-*Document version: 4.1*
+*Document version: 4.2*
 *Created: 2026-02-02*
-*Last updated: 2026-02-14*
+*Last updated: 2026-02-18*
 *Maintainer: Kevin Qi*

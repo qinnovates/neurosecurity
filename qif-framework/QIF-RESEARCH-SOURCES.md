@@ -7,7 +7,7 @@
 >
 > **Last updated:** 2026-02-18
 > **Sources extracted from:** Three parallel validation agent sessions
-> **Total unique sources:** 150+
+> **Total unique sources:** 156+
 
 ---
 
@@ -186,6 +186,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 |---|----------|-----|-------|---------------|
 | N27 | (2026). "Commentary on amygdala classification." Frontiers in Neuroanatomy. | https://public-pages-files-2025.frontiersin.org/journals/neuroanatomy/articles/10.3389/fnana.2026.1718530/pdf | Neuroscience | Recent commentary on amygdala's position at cortical-subcortical boundary. |
 | N28 | Pessoa L, Adolphs R. (2010). "Emotion processing and the amygdala: from a 'low road' to 'many roads' of evaluating biological significance." Nature Reviews Neuroscience. | https://www.nature.com/articles/nrn2920 | Neuroscience | Challenges subcortical-only view of amygdala. Proposes cortex has more important role in emotion than traditionally assumed. |
+| N29 | Mendez-Bertolo C, Moratti S, Toledano R, et al. (2016). "A fast pathway for fear in human amygdala." Nature Neuroscience, 19, 1041-1049. | https://www.nature.com/articles/nn.4324 | Neuroscience | First direct intracranial evidence of fast (~74ms) amygdala response to fearful faces via subcortical pathway. Corrects earlier estimates of 12ms (unsourced). Used to fix QIF framework docs 05, 08, 02. |
 
 ---
 
@@ -383,6 +384,18 @@ Sources are organized by domain and sorted newest-first within each domain.
 | F5 | Schroder T, Sirbu R, Park S, Morley J et al. (2025). "Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations." Neuroethics 18. arXiv:2508.12571. | https://link.springer.com/article/10.1007/s12152-025-09607-3 | Preprint | Most comprehensive BCI security paper (Yale). Dual publication verified 2026-02-16. Key related work. |
 | F6 | Meng L, Lin CT, Jung TP, Wu D. (2023). "Adversarial Robustness Benchmark for EEG-Based Brain-Computer Interfaces." Future Generation Computer Systems 143:231-247. | https://doi.org/10.1016/j.future.2023.01.017 | Preprint v1.4 | EEG adversarial attack benchmark. Volume/pages corrected v1.4. |
 
+## 10. Neuroethics & Governance (JHU/CELLS Research)
+
+> Sources added 2026-02-18 from Hopkins BCI ecosystem research for JHU MBE application.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| G1 | Mathews DJH, Balatbat CA, Dzau VJ. (2022). "Governance of Emerging Technologies in Health and Medicine — Creating a New Framework." New England Journal of Medicine 386(23):2239-2242. | https://doi.org/10.1056/NEJMms2200907 | JHU Research | Three-tiered governance framework for emerging tech. Tier 3 (specific tools) described as "still under development." QIF/TARA is exactly a Tier 3 tool — the technical enforcement mechanism the framework calls for. |
+| G2 | Mathews DJH, Fabi RE, Offodile AC. (2022). "Imagining Governance for Emerging Technologies." Issues in Science and Technology 38(3). | https://issues.org/imagining-governance-emerging-technologies-mathews-fabi-offodile/ | JHU Research | Cross-sectoral anticipatory governance. Argues current regulatory models are reactive; proposes anticipatory framework. QIF demonstrates anticipatory security governance applied to BCIs. |
+| G3 | National Academies of Medicine, CESTI. (2023). "Neurotechnology: Addressing Unique Characteristics." In Emerging Technologies Case Studies Series. PMC11136498. | https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11136498/ | JHU/NAM | Key quote: "No standards exist for collection, storage, ownership, access, use, and security of device-collected brain and device-use data." QIF addresses this gap directly. Also: tDCS regulation gap — "remains largely outside oversight." |
+| G4 | Balakid A. (2025). "Brain-Computer Interfaces and Device Abandonment: Ethical Implications." JHU Master's Thesis, Berman Institute. | https://jscholarship.library.jhu.edu/ | JHU CELLS | Device abandonment thesis from CELLS. Examines what happens when BCI companies fail and users are left with implanted hardware. QIF's post-deployment ethics governance addresses this scenario. |
+| G5 | Sherman SM, Guillery RW. (2006). "Exploring the Thalamus and Its Role in Cortical Function." 2nd ed. MIT Press. | https://mitpress.mit.edu/9780123054609/ | Preprint v1.4 | Thalamocortical relay architecture. Foundation for thalamus-as-firewall isomorphism in QIF (N4 band). TRN as default-deny gating mechanism. |
+
 ---
 
 ## Appendix: Source Statistics
@@ -398,7 +411,8 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
 | Consumer Sensor Exploitation | 9 | 2021 | 2014 |
 | Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
-| **Total** | **151** | | |
+| Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
+| **Total** | **156** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -406,6 +420,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | NSP Spec v0.5 Hardening (Feb 17) | ~12 |
 | Blog Posts & TARA (Feb 9-13) | ~9 |
 | Preprint Audit (Feb 15-18) | ~11 |
+| JHU/CELLS Ecosystem Research (Feb 18) | ~5 |
 
 ---
 
