@@ -249,6 +249,63 @@ Where v = axonal conduction velocity (NOT a universal constant k).
 | Scrambling bound | t* ~ (β/2π)·ln(S) | Established (Sekino-Susskind 2008) |
 | Landauer's Principle | E_min = kT·ln(2) per bit erasure | Established |
 
+### 3.5 BCI Physics Constraint System (Entry 60, validated Entry 66)
+
+**Status:** HYPOTHESIS (coupled system) / VALIDATED against Neuralink N1 (2026-02-18)
+
+A unified system of coupled inequalities defining the feasibility region for BCI hardware. Given brain region R, implant depth d, target function F, and time horizon t:
+
+```
+Subject to:
+  P_total(n_ch, node_nm) <= P_thermal(R, n_chips)        [thermodynamics]
+  f_clock <= f_max(tissue_attenuation, d)                  [electromagnetism]
+  n_ch(t) = n_ch(0) * 2^(t/T_double)                      [Moore's Law, T_double ~ 5-6 yr for BCI]
+  k = log(D) + log(Q) < 1.75                              [Shannon electrode safety]
+  E_spike / (kT) >> 1                                     [Boltzmann detectability]
+  Cs(t) >= Cs_min(F)                                      [QIF coherence threshold]
+  dT_total(P, geometry, perfusion) <= 1.0 C               [thermal ceiling, IEC 60601-1]
+  E_brain / E_silicon < epsilon_safe                       [mechanical mismatch]
+  Z_electrode(t) <= Z_max(signal_type)                     [biocompatibility timeline]
+  V_implant(n_ch, packaging) <= V_max(R)                   [geometric fit]
+  I_Shannon = B * log2(1 + SNR) >= I_min(F)               [information theory]
+
+Maximize: n_ch (channel count) OR I_total (information bandwidth) OR Cs (coherence)
+```
+
+**Key physical constants used:**
+
+| Parameter | Value | Source | Confidence |
+|-----------|-------|--------|------------|
+| Max safe temp rise | 1.0 C | IEC 60601-1 | HIGH |
+| Max intracortical power | 15-40 mW | FDA guidance, literature | HIGH |
+| Neural spike bandwidth | 300-10,000 Hz | Electrophysiology | HIGH |
+| Shannon electrode safety limit | k = 1.75 | Shannon 1992 | HIGH |
+| Body temperature | 310 K (37 C) | Physiology | HIGH |
+| kT at 310K | 4.28 x 10^-21 J | Boltzmann constant | HIGH |
+| Brain tissue Young's modulus | 0.5-10 kPa | Literature | HIGH |
+| Silicon Young's modulus | 170 GPa | Materials science | HIGH |
+| BCI Moore's Law doubling | ~5-6 years | Derived from Intel/Nvidia CAGR with 1.5-2x biocompat penalty | MEDIUM |
+
+**Neuralink N1 validation (2026-02-18):**
+
+| Constraint | N1 Value | Limit | Result |
+|-----------|----------|-------|--------|
+| Thermal | 6 mW | 15-40 mW | PASS (13% of budget) |
+| EM/Signal | 19.5 kHz sampling | 20 kHz Nyquist | PASS (sufficient for spike sorting) |
+| Boltzmann | E_spike/kT ~ 2,300 | >> 1 | PASS |
+| Geometric | 23mm disk | Motor cortex | PASS |
+| Info theory | 24.8 Mbit/s | Motor decode ~1-2 bit/s/neuron | PASS |
+| Shannon safety | N/A | N/A | Recording-only (no stimulation) |
+| Coherence (Cs) | No data | Cs_min(F) | NOT YET TESTABLE |
+
+**Thermal ceiling prediction:** At N1's 5.2 uW/channel, the thermal budget allows 2,884-7,692 channels max. N1 uses 1,024 (13%). To reach 10k channels: need <= 1.5-4.0 uW/ch. To reach 100k: need <= 0.15-0.40 uW/ch.
+
+**Prior art gap:** No unified constraint system exists in published literature. Marblestone et al. 2013 (DOI: 10.3389/fncom.2013.00137) is closest but lacks Moore's Law projections, Shannon safety, timeline, and security dimension. Stevenson & Kording 2011 (DOI: 10.1038/nn.2731) observed 7.4-year empirical doubling but no physics derivation.
+
+**Novel QIF contribution:** The coherence metric Cs as a security constraint alongside physics constraints. No other framework includes a signal integrity/security dimension in BCI hardware limits.
+
+**Derivation:** Entry 60 (synthesis), Entry 65 (feasibility tiering), Entry 66 (N1 validation)
+
 ---
 
 ## 4. The Unified QI Equation
