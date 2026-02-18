@@ -30,4 +30,13 @@ const governance = defineCollection({
   }),
 });
 
-export const collections = { blog, governance };
+const research = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './qif-framework/research' }),
+  schema: z.object({
+    title: z.string(),
+    status: z.string().default('draft'),
+    updated: z.coerce.string().optional(),
+  }),
+});
+
+export const collections = { blog, governance, research };

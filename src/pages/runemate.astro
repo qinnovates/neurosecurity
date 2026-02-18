@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { getEntry, render } from 'astro:content';
 import {
   RUNEMATE_VERSION,
   RUNEMATE_STATUS,
@@ -22,6 +23,10 @@ import {
 } from '../lib/runemate-constants';
 
 const MAX_KB = 509.3; // largest classical total, used to scale chart bars
+
+// Dynamic research docs - rendered from markdown in qif-framework/research/
+const ferroceneEntry = await getEntry('research', 'ferrocene-exploration');
+const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
 ---
 
 <PageLayout
@@ -44,6 +49,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
           { href: '#poc', label: 'v1.0 Benchmarks' },
           { href: '#status', label: 'Status' },
           { href: '#rust', label: 'Why Rust' },
+          { href: '#ferrocene', label: 'Ferrocene' },
           { href: '#neuroscience', label: 'Neuroscience' },
           { href: '#multimodal', label: 'Multimodal' },
           { href: '#onchip', label: 'On-Chip Requirements' },
@@ -552,6 +558,23 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- Compiler Qualification: Ferrocene (dynamically rendered from qif-framework/research/ferrocene-exploration.md) -->
+      <section id="ferrocene" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Compiler Qualification: Ferrocene</h2>
+        {ferroceneContent ? (
+          <div class="prose prose-sm prose-invert max-w-none [&_table]:w-full [&_table]:text-sm [&_th]:text-left [&_th]:p-2 [&_td]:p-2 [&_table]:border-collapse [&_th]:border-b [&_th]:border-[var(--color-border)] [&_td]:border-b [&_td]:border-[var(--color-border)] [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_strong]:text-[var(--color-text-primary)] [&_code]:text-[var(--color-accent-secondary)] [&_code]:text-xs [&_a]:text-[var(--color-accent-primary)] [&_a:hover]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mb-1">
+            <ferroceneContent.Content />
+          </div>
+        ) : (
+          <p class="text-sm text-[var(--color-text-muted)]">Ferrocene research document not found. See <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/research/ferrocene-exploration.md" class="text-[var(--color-accent-primary)] hover:underline">the source document on GitHub</a>.</p>
+        )}
+        <div class="mt-4 pt-3 border-t border-[var(--color-border)]">
+          <p class="text-xs text-[var(--color-text-faint)]">
+            This section is rendered from <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/research/ferrocene-exploration.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">qif-framework/research/ferrocene-exploration.md</a>. Update the source document and rebuild to see changes here.
+          </p>
         </div>
       </section>
 

@@ -41,6 +41,7 @@ const tacticColors: Record<string, string> = {
           { href: '#niss', label: 'NISS Scoring' },
           { href: '#coherence', label: 'Coherence Metric' },
           { href: '#scale-frequency', label: 'Scale-Frequency' },
+          { href: '#documents', label: 'Documents' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -341,6 +342,29 @@ const tacticColors: Record<string, string> = {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- Supporting Documents -->
+      <section id="documents" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Supporting Documents</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="/whitepaper/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Whitepaper</h3>
+            <p class="text-sm text-[var(--color-text-muted)]">Full derivation, taxonomy, and scoring methodology for the framework.</p>
+          </a>
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Security Guardrails</h3>
+            <p class="text-sm text-[var(--color-text-muted)]">Physics-derived defense architecture for BCI systems, mapping coherence thresholds to per-band protection rules.</p>
+          </a>
+          <a href="/TARA/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">TARA Atlas</h3>
+            <p class="text-sm text-[var(--color-text-muted)]">Browse all 103+ techniques across the hourglass, filterable by category and severity.</p>
+          </a>
+          <a href="/nsp/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">NSP Protocol</h3>
+            <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire security for neural interfaces with coherence-gated authentication.</p>
+          </a>
         </div>
       </section>
     </div>

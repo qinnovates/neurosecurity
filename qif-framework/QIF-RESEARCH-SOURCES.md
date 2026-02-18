@@ -7,7 +7,7 @@
 >
 > **Last updated:** 2026-02-18
 > **Sources extracted from:** Three parallel validation agent sessions
-> **Total unique sources:** 156+
+> **Total unique sources:** 165+
 
 ---
 
@@ -273,6 +273,25 @@ Sources are organized by domain and sorted newest-first within each domain.
 | C34 | U.S. GAO (2025). "Science & Tech Spotlight: Quantum Sensors." GAO-25-107876. | https://www.gao.gov/products/gao-25-107876 | Cybersecurity | Government assessment of quantum sensor maturity. Most mature quantum technology but needs cost/reliability improvements. |
 | C35 | (2025). "Exploring the interface between quantum biology, microwave technology, and neuroscience." Drug Discovery Today / ScienceDirect. | https://www.sciencedirect.com/science/article/pii/S1359644625001217 | Cybersecurity | Microwave radiometry detects endogenous microwave emissions from biological tissues. Variations may reflect quantum-level biological processes. |
 
+### Adversarial BCI Attacks & SSVEP Exploitation
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| C38 | Upadhayay B, Behzadan V. (2023). "On Adversarial Attacks on BCI Systems via Sensory Channel Manipulation." IEEE SMC 2023. | https://doi.org/10.1109/SMC53992.2023.10394505 | Guardrails / TARA | SAIL Lab, University of New Haven. Demonstrated sensory-channel attacks on motor imagery BCIs via visual perturbation. Novel: attacks human sensory pathway, not digital signal path. |
+| C39 | Ming D et al. (2023). "A high-performance SSVEP-based BCI using imperceptible flickers." J Neural Engineering 20(1):016043. | https://doi.org/10.1088/1741-2552/acb51e | Guardrails / TARA | Proved 60Hz imperceptible flickers produce classifiable brain responses (52.8 bits/min ITR). Key evidence that subliminal visual stimuli can drive BCI commands. |
+| C40 | Bian R, Meng LB, Wu DR. (2022). "SSVEP-based brain-computer interfaces are vulnerable to square wave attacks." Science China Information Sciences 65:140406. | https://doi.org/10.1007/s11432-022-3440-5 | Guardrails / TARA | Square wave signals trivially force EEG classification into attacker-chosen target class. Demonstrated on two SSVEP datasets against CCA classifiers. |
+| C41 | Meng L, Jiang X, Chen X, Liu W, Luo H, Wu D. (2024). "Adversarial filtering based evasion and backdoor attacks to EEG-based brain-computer interfaces." Information Fusion 107:102316. | https://doi.org/10.1016/j.inffus.2024.102316 | Guardrails / TARA | First study on adversarial filtering for EEG BCIs. Demonstrates evasion and backdoor attacks across three BCI paradigms. |
+| C42 | Zhang X, Wu D, Ding L, Luo H, Lin CT, Jung TP, Chavarriaga R. (2021). "Tiny noise, big mistakes: adversarial perturbations induce errors in brain-computer interface spellers." National Science Review 8(4):nwaa233. | https://doi.org/10.1093/nsr/nwaa233 | Guardrails / TARA | Adversarial EEG perturbation templates mislead P300 and SSVEP spellers to output any attacker-chosen character. |
+| C43 | Khorshidpour Z, Vandersmissen B, Caluwaerts A. (2020). "Security Considerations for Brain-Computer Interface Systems." Sensors 20(15):4137. | https://doi.org/10.3390/s20154137 | Guardrails | BCI security survey covering authentication, encryption, and adversarial attacks on neural interfaces. |
+
+### BCI Hardware Safety & Charge Protection
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| C44 | Pycroft L et al. (2016). "Brainjacking: Implant Security Issues in Invasive Neuromodulation." World Neurosurgery 92:454-462. | https://doi.org/10.1016/j.wneu.2016.05.010 | Guardrails | Original "brainjacking" paper. Identifies firmware attack vectors on implanted neurostimulators. Relevant to charge protection governance risk. |
+| C45 | ISO 14708-3:2017. "Implants for surgery - Active implantable medical devices - Part 3: Implantable neurostimulators." | https://www.iso.org/standard/67699.html | Guardrails | Performance-based standard for implanted neurostimulators. Does NOT mandate hardware charge protection (capacitors). Allows software-only implementations, creating governance risk. |
+| C46 | Kim S et al. (2009). "Thermal Impact of an Active 3-D Microelectrode Array Implanted in the Brain." IEEE Trans Neural Syst Rehab Eng 15(4):493-501. | https://doi.org/10.1109/TNSRE.2007.903985 | Guardrails | Thermal analysis of intracortical microelectrode arrays. Power budget 4.8-8.4mW for single 2x2mm chip. Key constraint for BCI limits equation. |
+
 ### Threat Taxonomy & Frameworks
 
 | # | Citation | URL | Agent | QIF Relevance |
@@ -405,14 +424,14 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Quantum Physics & Biology | 40 | 2026 | 1993 |
 | Neuroscience | 28 | 2026 | 2010 |
 | BCI Technology | 7 | 2025 | 2025 |
-| Cybersecurity & BCI Security | 37 | 2026 | 2020 |
+| Cybersecurity & BCI Security | 46 | 2026 | 2016 |
 | Electrode Technology | 7 | 2025 | 2018 |
 | Signal Coherence & Oscillations | 5 | 2015 | 1997 |
 | Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
 | Consumer Sensor Exploitation | 9 | 2021 | 2014 |
 | Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
 | Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
-| **Total** | **156** | | |
+| **Total** | **165** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -421,6 +440,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Blog Posts & TARA (Feb 9-13) | ~9 |
 | Preprint Audit (Feb 15-18) | ~11 |
 | JHU/CELLS Ecosystem Research (Feb 18) | ~5 |
+| SSVEP/Guardrails Session (Feb 18) | ~9 |
 
 ---
 
