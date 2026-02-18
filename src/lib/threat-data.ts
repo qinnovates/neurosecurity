@@ -45,6 +45,18 @@ export type ConsentTier = 'standard' | 'enhanced' | 'IRB' | 'prohibited';
 export type FdaStatus = 'cleared' | 'approved' | 'breakthrough' | 'investigational' | 'none' | 'N/A';
 export type EvidenceLevel = 'meta_analysis' | 'RCT' | 'cohort' | 'case_series' | 'preclinical' | 'theoretical' | 'N/A';
 export type DiagnosticCluster = 'cognitive_psychotic' | 'mood_trauma' | 'motor_neurocognitive' | 'persistent_personality' | 'non_diagnostic';
+export type PhysicsTier = 0 | 1 | 2 | 3 | 'X';
+export type PhysicsTierLabel = 'feasible_now' | 'near_term' | 'mid_term' | 'far_term' | 'no_physics_gate';
+
+export interface PhysicsFeasibility {
+  tier: PhysicsTier;
+  tier_label: PhysicsTierLabel;
+  timeline: string;
+  gate_reason: string;
+  constraint_system_ref: string;
+  analysis_date: string;
+}
+
 export type Dsm5Confidence = 'established' | 'probable' | 'theoretical';
 export type Dsm5RiskClass = 'direct' | 'indirect' | 'none';
 
@@ -149,6 +161,8 @@ export interface ThreatVector {
   sources: string[];
   /** TARA projection data (clinical, governance, engineering overlays) */
   tara: TaraProjection | null;
+  /** Physics feasibility tier (constraint system analysis) */
+  physicsFeasibility: PhysicsFeasibility | null;
 }
 
 /** Transform registry techniques → ThreatVector[] */
@@ -171,6 +185,7 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
   tara: t.tara ?? null,
+  physicsFeasibility: t.physics_feasibility ?? null,
   neurorights: t.neurorights ?? null,
   regulatory: t.regulatory ?? null,
 }));
@@ -329,6 +344,40 @@ export const COUPLING_COLORS = {
   optical: { bg: 'rgba(168, 85, 247, 0.15)', border: 'rgba(168, 85, 247, 0.3)', text: '#a855f7' },
   none: { bg: 'rgba(148, 163, 184, 0.15)', border: 'rgba(148, 163, 184, 0.3)', text: '#94a3b8' },
 } as const;
+
+/** Physics feasibility tier colors */
+export const PHYSICS_TIER_COLORS = {
+  0: { bg: 'rgba(239, 68, 68, 0.15)', border: 'rgba(239, 68, 68, 0.3)', text: '#ef4444', label: 'Feasible Now' },
+  1: { bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.3)', text: '#f59e0b', label: '2026-2031' },
+  2: { bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.3)', text: '#eab308', label: '2031-2038' },
+  3: { bg: 'rgba(59, 130, 246, 0.15)', border: 'rgba(59, 130, 246, 0.3)', text: '#3b82f6', label: '2038+' },
+  X: { bg: 'rgba(148, 163, 184, 0.15)', border: 'rgba(148, 163, 184, 0.3)', text: '#94a3b8', label: 'No Physics Gate' },
+} as const;
+
+/** Filter: techniques by physics feasibility tier */
+export function getTechniquesByPhysicsTier(tier: PhysicsTier): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.physicsFeasibility?.tier === tier);
+}
+
+/** Physics feasibility statistics */
+export function getPhysicsFeasibilityStats() {
+  const tiers: Record<string, number> = { 0: 0, 1: 0, 2: 0, 3: 0, X: 0 };
+  const nissByTier: Record<string, { high: number; medium: number; low: number }> = {};
+  for (const key of ['0', '1', '2', '3', 'X']) {
+    nissByTier[key] = { high: 0, medium: 0, low: 0 };
+  }
+
+  for (const t of THREAT_VECTORS) {
+    const tier = String(t.physicsFeasibility?.tier ?? 0);
+    tiers[tier] = (tiers[tier] ?? 0) + 1;
+    const sev = t.niss.severity;
+    if (sev === 'critical' || sev === 'high') nissByTier[tier].high++;
+    else if (sev === 'medium') nissByTier[tier].medium++;
+    else nissByTier[tier].low++;
+  }
+
+  return { tiers, nissByTier };
+}
 
 /** Filter: techniques with clinical therapeutic analogs */
 export function getClinicalTechniques(): ThreatVector[] {
