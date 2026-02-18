@@ -7,11 +7,39 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
   title="About — Qinnovate"
   description="I'm Kevin Qi, an independent security researcher building the first open framework for auditing what brain-computer interfaces can do to a mind."
   breadcrumbs={[{ label: 'About' }]}
+  wide
 >
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-8">About</h1>
 
+    <div class="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8">
+      <!-- Sticky TOC sidebar -->
+      <nav class="hidden lg:block" aria-label="Table of contents">
+        <div class="sticky top-24 max-h-[80vh] overflow-y-auto">
+          <ul class="space-y-1 text-sm" id="toc-list">
+            <li><a href="#about-me" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">About Me</a></li>
+            <li><a href="#why-this-is-my-purpose" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Why This Is My Purpose</a></li>
+            <li><a href="#the-path-here" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">The Path Here</a></li>
+            <li><a href="#why-neuroethics" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Why Neuroethics</a></li>
+            <li><a href="#why-the-hourglass" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Why the Hourglass</a></li>
+            <li><a href="#what-i-found" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">What I Found</a></li>
+            <li><a href="#the-framework" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">The Framework</a></li>
+            <li><a href="#situating-the-work" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Situating the Work</a></li>
+            <li><a href="#what-the-framework-cannot-answer" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">What It Cannot Answer</a></li>
+            <li><a href="#approach" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Approach</a></li>
+            <li><a href="#vision" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Vision</a></li>
+            <li><a href="#how-ai-was-used" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">How AI Was Used</a></li>
+            <li><a href="#the-questions-ahead" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">The Questions Ahead</a></li>
+            <li><a href="#milestones" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Milestones</a></li>
+            <li><a href="#publications" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Publications</a></li>
+            <li><a href="#open-research" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Open Research</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <div>
     <div class="prose">
-      <h2>About Me</h2>
+      <h2 id="about-me">About Me</h2>
       <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-8">
         I'm <strong>Kevin Qi</strong>, an independent security researcher. I started this project with a question that wouldn't leave me alone: <em>what happens to a patient when their brain-computer interface gets hacked?</em>
       </p>
@@ -22,7 +50,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         That question didn't come from a textbook. It came from my own brain feeling hijacked. A B12 deficiency damaged my nervous system. I couldn't walk for weeks. My hands were uncontrollable. I didn't feel like myself. When your own neurology betrays you — when the signals your body sends stop being yours — you understand, viscerally, what's at stake when we start connecting machines to that system.
       </p>
 
-      <h2>Why This Is My Purpose</h2>
+      <h2 id="why-this-is-my-purpose">Why This Is My Purpose</h2>
       <p>
         This is my sole purpose. I spent the past three years thinking about this. I had amazing offers at amazing companies spanning tech and AI, yet I subconsciously couldn't allow myself to go through with them fully. I spent three years digging into my core identity, trying to understand what moves the compass that builds my sense of self. I went through exploring and re-learning all the disciplines I enjoyed through my entire life and more.
       </p>
@@ -33,7 +61,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         As Neil deGrasse Tyson said, the most dangerous thing is not knowing you're wrong because you simply don't know enough. Insight is the teacher of wonder, not experience. I cannot get insight simply by learning; it is by doing. Putting action to experience, and then learning from it. I eventually laid everything out, I mapped how to get there, and this is my first leap.
       </p>
 
-      <h2>The Path Here</h2>
+      <h2 id="the-path-here">The Path Here</h2>
       <p>
         <strong>Science</strong> started with my first book. I asked my parents to buy it in 1999 or 2000. I saw the ad for it in a magazine. It was $19.99*. And then in small text at the bottom of the page, in yellow or beige, it said "20 monthly payments." Not even joking. Horrible. That's what we now call a <a href="https://en.wikipedia.org/wiki/Dark_pattern" target="_blank" rel="noopener">dark pattern</a>, a term that wouldn't be coined until 2010 by Harry Brignull. My family experienced it a decade before anyone had a word for it. I didn't know what payments were. We only found out months later when my parents saw the charges. My parents couldn't read English; they just thought, "Oh, this kid likes planets and space — $19.99, why not?" I remember my dad asking my mom if it was fine. She's the bookkeeper in the family.
       </p>
@@ -68,12 +96,12 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         I remember making a bunch of tutorials for Photoshop, one specifically being featured on Top100PhotoshopTutorials.com (for those who know about it, this precedes DeviantArt). I was astounded that my 13-year-old self was able to get a feature simply for trying to find an easier way to create a moon without using so many layers and brushstrokes that other tutorials asked for. Ironically, I eventually went on to making digital abstract art for wallpapers, backgrounds, and forum members who requested them from me from AGFX and the Zybez community <em>(wow, I just remembered I was a moderator... isn't that child labor, hah!)</em>, all for fun, using nothing but layers, brushes, and vectors. Oh, and a lot of blending options. People seemed to like my design.
       </p>
 
-      <h2>Why Neuroethics</h2>
+      <h2 id="why-neuroethics">Why Neuroethics</h2>
       <p>
         Neuroethics and cybersecurity go hand-in-hand. Cybersecurity is about understanding human psychology and behavior, and creating guardrails and defense mechanisms to prevent sensitive information from leaking, preventing the preventable by understanding behaviors from both the offensive and defensive sides. All to ensure confidentiality, integrity, and availability. This is the core of security, what the industry calls the CIA triad. <em>(Sounds so weird being Chinese American and saying "CIA triad," by the way.)</em> Ethics is ingrained at its core. Neuroethics is about understanding what keeps us all unique — what makes us, us. There's a lot more overlap than most people suspect. When you extend that trifecta to the brain, to a system where "availability" means a patient's ability to think, "integrity" means the authenticity of their own thoughts, and "confidentiality" means the privacy of their inner experience — you're doing neuroethics whether you call it that or not.
       </p>
 
-      <h2>Why the Hourglass Looks the Way It Does</h2>
+      <h2 id="why-the-hourglass">Why the Hourglass Looks the Way It Does</h2>
       <p>
         I am aware that the QIF layers will evolve and change over time. This is only my iteration based on what I know, and I don't know nearly enough. But what I do know is that I was inspired by a book I picked up while browsing an old bookstore in Istanbul: <em>The Development of the Periodic Law</em> by <a href="https://en.wikipedia.org/wiki/Francis_Preston_Venable" target="_blank" rel="noopener">Francis Preston Venable</a>, a chemist and president of the University of North Carolina at Chapel Hill, published in 1896. Ironically, a book from the States found halfway around the world. (Hey UNC — if you're reading and interested in the copy, I'd be more than happy to donate it for record keeping if you don't have one. It's not in the best condition, but a book from 1896 is a fascinating part of history that deserves to be preserved.)
       </p>
@@ -81,7 +109,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         What I took away from that book is that it took many, many iterations to get to the periodic table we know today, one that middle schoolers can read. Dozens of scientists proposed competing arrangements before Mendeleev's version stuck, and even his went through revisions. That's what inspired me to start by finding the smallest layers to map out technology and the mind: the least common denominators, a Venn diagram bridging the two worlds, what I call "The OSI of Mind." The fewest yet most effective layers, grounded on the principles of science, something Isaac Newton understood long before I can imagine. I always forget how much of a genius that man was for inventing my biggest kryptonite: calculus. I didn't see any need for it before, but now it's all making sense: why it's important for waves and electromagnetism. Actually, I think that was Maxwell who built on Newton's work. The point is: the foundations compound. Each layer of understanding enables the next, and the hourglass is designed with that same philosophy.
       </p>
 
-      <h2>What I Found</h2>
+      <h2 id="what-i-found">What I Found</h2>
       <p>
         I started by cataloguing every known BCI attack technique I could find: 60 at first, merged and deduplicated from three separate inventories: QIF's 18 attacks, ONI's 24 legacy techniques (ONI was my original design with 14 layers before landing on QIF, you can find it if you browse through GitHub), and 20+ new attack types from 2024–2026 research. Then I asked a different question: <em>what do computers and neurons actually have in common?</em> The answer was physics: signal frequencies. Signals operating at different scales, from raw electromagnetic fields up through cortical oscillations. That insight became QIF's (pronounced "Chief") layered architecture, and when I mapped those 60 techniques across the frequency bands, gaps appeared everywhere. Entire attack surfaces that existing taxonomies had missed. The catalogue grew to 102.
       </p>
@@ -101,7 +129,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         The mapping process itself keeps uncovering gaps, not just in attacks, but in the ethical frameworks meant to protect against them. When I scored all 102 techniques against the four established neurorights proposed by Ienca and Andorno, one genuine gap emerged: no framework distinguishes <em>reading</em> neural data from <em>writing</em> into neural signals. Mental Privacy covers confidentiality: don't read my brain without consent. But what about injecting false signals? That's a different class of violation, and it needed its own right: <strong>Cognitive Authenticity</strong>. QIF also extends Mental Integrity with engineering-level signal dynamics protections and Mental Privacy with data-lifecycle protections. The framework doesn't just catalogue what's known; it exposes what's missing.
       </p>
 
-      <h2>The Framework</h2>
+      <h2 id="the-framework">The Framework</h2>
       <p>
         Qinnovate's Neural Atlas bridges three domains, two that share deep roots, and a third that has rarely been at the table:
       </p>
@@ -114,7 +142,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         The result is the <strong>Hourglass Model</strong>: an 11-band, 3-zone architecture with the Neural Interface (I0 — the physical BCI device) at its waist. Biology above. Silicon below. The <a href="/TARA/">TARA Atlas</a> maps 102 techniques across this hierarchy, each scored with NISS and traced to clinical outcomes through the Neural Impact Chain.
       </p>
 
-      <h2>Situating the Work</h2>
+      <h2 id="situating-the-work">Situating the Work</h2>
       <p>
         I'll be honest: I'm new to neurorights. I discovered the field while researching with Claude, trying to answer my own questions about cognitive authenticity and cognitive sovereignty. What I kept running into were names like Marcello Ienca and Roberto Andorno, who proposed four foundational neurorights: cognitive liberty, mental privacy, mental integrity, and psychological continuity. Then Rafael Yuste and the NeuroRights Foundation, who helped Chile amend their constitution to protect neurorights in 2021. Then UNESCO's 2025 Recommendation on the Ethics of Neurotechnology.
       </p>
@@ -122,19 +150,19 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         Reading their work felt like finding the philosophical language for what I'd been trying to build from the engineering side. I don't know enough yet. I need more formal education on it, and a lot more thinking. But I know this much: my privacy is my mind. And I need the frameworks of neuroethics and neurorights to understand how QIF can be implemented ethically, to ensure that BCIs, when they move past clinical use, are safe, accessible, and here for the betterment of people. Not for some <em>Altered Carbon</em> scenario. That's scary, especially as a Buddhist. Imagine that. I'd rather reincarnate as a dog if that's the case, or an alien... I don't get to pick though, that's not how this works.
       </p>
 
-      <h2>What the Framework Cannot Answer</h2>
+      <h2 id="what-the-framework-cannot-answer">What the Framework Cannot Answer</h2>
       <p>
         Every framework has limits. I'm trying to find where they reside. I'm apparently good at testing limits. QIF can trace how a specific vulnerability violates a specific neuroright through a documented neural pathway. But there are harder questions it can't touch: questions about justice, access, bias, free will. Those aren't engineering problems. Those are philosophy problems, policy problems, human problems. And I need to study them properly.
       </p>
       <p>
         That's why this work is open source. When the framework, the threat data, and the scoring are freely available, the community that forms around them will ask the questions I haven't thought of yet. As I pursue a master's in Neuroethics and Bioethics, I expect many of those questions to surface, questions that will help me build on the foundations I've been laying. The framework is a starting point, not a finish line.</p>
 
-      <h2>Approach</h2>
+      <h2 id="approach">Approach</h2>
       <p>
         Everything is open: open publication, transparent methodology, publicly available framework documents, equations, and reference implementations. Neural security research must be developed in the open, not behind closed doors. The people whose brains will be connected deserve to understand exactly how they're protected.
       </p>
 
-      <h2>Vision</h2>
+      <h2 id="vision">Vision</h2>
       <p>
         Normal users of the internet shouldn't have to worry about visiting a website and accidentally having a man-in-the-middle deliver ransomware to their computer. That should be left to the professionals, and yet the tools we built to create what we call the modern internet are still relics of an era that didn't anticipate the threats we face today. The future state has so much room for improvement.
       </p>
@@ -145,7 +173,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         I'm glad the days of browser pop-ups are no longer a major concern. But the next frontier is adversaries looking to fingerprint our actual thoughts. The future I envision is one that is achievable, and this is the work that gets us there, collectively.
       </p>
 
-      <h2>How AI Was Used</h2>
+      <h2 id="how-ai-was-used">How AI Was Used</h2>
       <p>
         My goal with AI (predominantly Claude, alongside Gemini and ChatGPT) was to help lay my ideas out as they evolved. I could dissect the sections that needed further development while AI agents helped validate the research and tie together the pieces I mapped out. The architecture, the scoring, the clinical mappings, the cross-domain connections: those are mine. AI helped me get the work out of my head and into a form that others can evaluate.
       </p>
@@ -156,7 +184,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         There is still so much for me to answer. I hope to share my learnings with the world as I continue working on this project through school, and I believe we'll be hearing from more and more humans in the loop (HITL).
       </p>
 
-      <h2>The Questions Ahead</h2>
+      <h2 id="the-questions-ahead">The Questions Ahead</h2>
       <p>
         I do not want to answer what consciousness is. I'm not sure anyone can, and I think that's the point. What I do know is that we are already brain-computer interfaces in a meaningful sense. The average person checks their phone over 100 times a day. We offload memory to search engines, navigation to GPS, social reasoning to feeds curated by algorithms we don't control. The boundary between mind and machine blurred long before anyone implanted an electrode.
       </p>
@@ -173,15 +201,15 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         The goal of Qinnovate is not to provide final answers. It's to start the right questions — and hopefully inspire another generation of thinkers to help answer the ones that will emerge as we learn more about the mysteries of the mind. The key is doing this thoughtfully: advancing without recklessness, questioning without paralysis. Being aware of the <a href="https://en.wikipedia.org/wiki/Ironic_process_theory">Wegner-Schneider effect</a> — the psychological finding that trying to suppress a thought only makes it more persistent — reminds me that ignoring these risks doesn't make them disappear. The only path forward is through: studying them openly, building safeguards deliberately, and trusting that transparency invites better thinking than secrecy ever could.
       </p>
 
-      <h2>Milestones</h2>
+      <h2 id="milestones">Milestones</h2>
       <p>
-        QIF was derived from first principles in 7 days of formal derivation: 50 log entries, 4 framework versions, from zero techniques to a complete stack. Every breakthrough, every dead end, every pivot is documented.
+        QIF was derived from first principles in 7 days of formal derivation: 50 log entries, 4 framework versions, from zero techniques to a complete stack. Every breakthrough, every dead end, every pivot is documented. The thought behind it all, it took me a lifetime up until today, and most likely the remainder of my life and more hopefully.
       </p>
       <p>
         <a href="/about/milestones/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">View the full derivation timeline &rarr;</a>
       </p>
 
-      <h2>Publications</h2>
+      <h2 id="publications">Publications</h2>
     </div>
 
     <div class="glass rounded-xl p-5 sm:p-6 my-6 not-prose" style="border-left: 4px solid var(--color-accent-tertiary);">
@@ -207,7 +235,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
     </div>
 
     <div class="prose">
-      <h2>Open Research</h2>
+      <h2 id="open-research">Open Research</h2>
       <p>
         QIF is not a proprietary product. It's an open research framework, freely available for researchers, clinicians, device manufacturers, and policymakers to evaluate, extend, and critique.
       </p>
@@ -234,5 +262,26 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
       </div>
 
     </div>
-  </div>
+      </div><!-- end main content column -->
+    </div><!-- end grid -->
+
+    <script>
+      const sections = document.querySelectorAll('h2[id]');
+      const tocLinks = document.querySelectorAll('.toc-link');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach((link) => {
+              const isActive = link.getAttribute('href') === `#${entry.target.id}`;
+              link.classList.toggle('!border-[var(--color-accent-primary)]', isActive);
+              link.classList.toggle('!text-[var(--color-text-primary)]', isActive);
+              link.classList.toggle('font-medium', isActive);
+            });
+          }
+        });
+      }, { rootMargin: '-80px 0px -70% 0px' });
+
+      sections.forEach((section) => observer.observe(section));
+    </script>
 </PageLayout>
