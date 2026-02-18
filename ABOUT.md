@@ -10,7 +10,7 @@
 
 # About — Kevin Qi
 
-I'm **Kevin Qi**, a security engineer and an aspiring neurosecurity researcher. I started this project with a question that keeps me up at night: *what happens to a patient when their brain-computer interface gets hacked?*
+I'm **Kevin Qi**, a security engineer and an ethical neurosecurity researcher. I started this project with a question that keeps me up at night: *what happens to a patient when their brain-computer interface gets hacked?*
 
 Not what happens to the data. Not what happens to the device. What happens to the *mind*. I couldn't find a framework that answered that question, so I built one. This is the OSI of Mind.
 
@@ -18,7 +18,7 @@ That question didn't come from a textbook. It came from my own brain feeling hij
 
 ## Why Neuroethics
 
-Neuroethics and cybersecurity go hand-in-hand. Cybersecurity is about understanding human psychology and behavior, and creating guardrails and defense mechanisms to prevent sensitive information from leaking, preventing the preventable by understanding behaviors from both the offensive and defensive sides. All to ensure confidentiality, integrity, and availability. This is the core of security, what the industry calls the CIA triad. *(Sounds so weird being Chinese American and saying "CIA triad," by the way.)* Ethics is engrained with these principles at its heart. Neuroethics is about understanding what keeps us all unique — what makes us, us. There's a lot more overlap than most people suspect. When you extend that trifecta to the brain, to a system where "availability" means a patient's ability to think, "integrity" means the authenticity of their own thoughts, and "confidentiality" means the privacy of their inner experience — you're doing neuroethics whether you call it that or not.
+Neuroethics and cybersecurity go hand-in-hand. Cybersecurity is about understanding human psychology and behavior, and creating guardrails and defense mechanisms to prevent sensitive information from leaking, preventing the preventable by understanding behaviors from both the offensive and defensive sides. All to ensure confidentiality, integrity, and availability. This is the core of security, what the industry calls the CIA triad. *(Sounds so weird being Chinese American and saying "CIA triad," by the way.)* Ethics is engrained with these principles at its heart. Neuroethics is about understanding what keeps us all unique — what makes us, us. There's a lot more overlap than most people suspect. When you extend that trifecta to the brain, to a system where "availability" means a patient's ability to think, "integrity" means the authenticity of their own thoughts, and "confidentiality" means the privacy of their inner experience — you're doing neuroethics whether you call it that or not. Like how in security today, we look for ethical hackers to protect the environment. I am a firm believer that the future of BCIs needs more ethical neurosecurity hackers to proactively find vulnerabilities before attackers do.
 
 ## The Framework
 
