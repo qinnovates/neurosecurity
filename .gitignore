@@ -16,6 +16,9 @@ __pycache__/
 # Build artifacts
 docs/data/
 
+# Rust
+**/target/
+
 # Verification cache
 scripts/verify/.cache/
 verify-report.json

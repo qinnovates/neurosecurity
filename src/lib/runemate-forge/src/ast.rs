@@ -1,214 +1,123 @@
-use serde::{Serialize, Deserialize};
-use std::collections::HashMap;
+use std::collections::BTreeMap;
+use crate::error::Span;
 
-/// The Runemate AST optimized for neural rendering
-#[derive(Debug, Serialize, Deserialize)]
-pub struct RunemateAst {
-    pub root: Node,
-    pub styles: StyleTable,
+/// Root of a parsed Staves document
+#[derive(Debug)]
+pub struct StavesDocument {
+    pub staves: Vec<StaveDef>,
+    pub styles: Vec<StyleDef>,
+    pub tones: Vec<ToneDef>,
+    pub pulses: Vec<PulseDef>,
+    pub safety: Option<SafetyDef>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub enum Node {
-    Element(ElementNode),
-    Text(String),
-    Fragment(Vec<Node>),
+/// A named visual layout tree
+#[derive(Debug)]
+pub struct StaveDef {
+    pub name: String,
+    pub body: Vec<Element>,
+    pub span: Span,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ElementNode {
-    pub tag: Tag,
-    pub attributes: HashMap<String, String>,
-    pub children: Vec<Node>,
-    pub style_index: Option<u32>,
-    pub raw_style: Option<String>,
-    pub span: Option<Span>,
+/// Visual element in the layout tree
+#[derive(Debug)]
+pub enum Element {
+    Container {
+        kind: ContainerKind,
+        attrs: Attrs,
+        children: Vec<Element>,
+        span: Span,
+    },
+    Leaf {
+        kind: LeafKind,
+        attrs: Attrs,
+        span: Span,
+    },
+    ToneRef {
+        name: String,
+        span: Span,
+    },
+    PulseRef {
+        name: String,
+        span: Span,
+    },
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
-pub struct Span {
-    pub line: u32,
-    pub col: u32,
-}
-
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Tag {
-    Div,
-    Span,
-    P,
-    H1,
-    H2,
-    H3,
-    H4,
-    H5,
-    H6,
-    Button,
-    Input,
-    Img,
-    Br,
-    A,
-    Ul,
-    Ol,
-    Li,
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum ContainerKind {
+    Column,
+    Row,
     Section,
-    Header,
-    Footer,
-    Nav,
-    Main,
-    Form,
-    Label,
-    Select,
-    Option,
-    Textarea,
-    Custom(String),
+    List,
+    Grid,
 }
 
-impl Tag {
+impl ContainerKind {
     pub fn tag_byte(&self) -> u8 {
         match self {
-            Tag::Div => 0x01,
-            Tag::Span => 0x02,
-            Tag::P => 0x03,
-            Tag::H1 => 0x04,
-            Tag::H2 => 0x05,
-            Tag::H3 => 0x06,
-            Tag::H4 => 0x07,
-            Tag::H5 => 0x08,
-            Tag::H6 => 0x09,
-            Tag::Button => 0x0A,
-            Tag::Input => 0x0B,
-            Tag::Img => 0x0C,
-            Tag::Br => 0x0D,
-            Tag::A => 0x0E,
-            Tag::Ul => 0x0F,
-            Tag::Ol => 0x10,
-            Tag::Li => 0x11,
-            Tag::Section => 0x12,
-            Tag::Header => 0x13,
-            Tag::Footer => 0x14,
-            Tag::Nav => 0x15,
-            Tag::Main => 0x16,
-            Tag::Form => 0x17,
-            Tag::Label => 0x18,
-            Tag::Select => 0x19,
-            Tag::Option => 0x1A,
-            Tag::Textarea => 0x1B,
-            Tag::Custom(_) => 0xFF,
+            ContainerKind::Column => 0x01,
+            ContainerKind::Row => 0x02,
+            ContainerKind::Section => 0x03,
+            ContainerKind::List => 0x04,
+            ContainerKind::Grid => 0x05,
         }
     }
+}
 
-    pub fn from_byte(byte: u8) -> Option<Tag> {
-        match byte {
-            0x01 => Some(Tag::Div),
-            0x02 => Some(Tag::Span),
-            0x03 => Some(Tag::P),
-            0x04 => Some(Tag::H1),
-            0x05 => Some(Tag::H2),
-            0x06 => Some(Tag::H3),
-            0x07 => Some(Tag::H4),
-            0x08 => Some(Tag::H5),
-            0x09 => Some(Tag::H6),
-            0x0A => Some(Tag::Button),
-            0x0B => Some(Tag::Input),
-            0x0C => Some(Tag::Img),
-            0x0D => Some(Tag::Br),
-            0x0E => Some(Tag::A),
-            0x0F => Some(Tag::Ul),
-            0x10 => Some(Tag::Ol),
-            0x11 => Some(Tag::Li),
-            0x12 => Some(Tag::Section),
-            0x13 => Some(Tag::Header),
-            0x14 => Some(Tag::Footer),
-            0x15 => Some(Tag::Nav),
-            0x16 => Some(Tag::Main),
-            0x17 => Some(Tag::Form),
-            0x18 => Some(Tag::Label),
-            0x19 => Some(Tag::Select),
-            0x1A => Some(Tag::Option),
-            0x1B => Some(Tag::Textarea),
-            _ => None,
-        }
-    }
+#[derive(Debug)]
+pub enum LeafKind {
+    Heading(u8, String),
+    Text(String),
+    Button { action: String, label: String },
+    Input { field: String, input_type: Option<String>, placeholder: Option<String> },
+    Image { src: String, alt: String },
+    Link { href: String, label: String },
+    Spacer(Value),
+    Item(String),
+    Metric { label: String, value: String },
+    Separator,
+}
 
-    pub fn from_str(s: &str) -> Tag {
-        match s {
-            "div" => Tag::Div,
-            "span" => Tag::Span,
-            "p" => Tag::P,
-            "h1" => Tag::H1,
-            "h2" => Tag::H2,
-            "h3" => Tag::H3,
-            "h4" => Tag::H4,
-            "h5" => Tag::H5,
-            "h6" => Tag::H6,
-            "button" => Tag::Button,
-            "input" => Tag::Input,
-            "img" => Tag::Img,
-            "br" => Tag::Br,
-            "a" => Tag::A,
-            "ul" => Tag::Ul,
-            "ol" => Tag::Ol,
-            "li" => Tag::Li,
-            "section" => Tag::Section,
-            "header" => Tag::Header,
-            "footer" => Tag::Footer,
-            "nav" => Tag::Nav,
-            "main" => Tag::Main,
-            "form" => Tag::Form,
-            "label" => Tag::Label,
-            "select" => Tag::Select,
-            "option" => Tag::Option,
-            "textarea" => Tag::Textarea,
-            other => Tag::Custom(other.to_string()),
-        }
-    }
-
-    pub fn name(&self) -> &str {
+impl LeafKind {
+    pub fn tag_byte(&self) -> u8 {
         match self {
-            Tag::Div => "div",
-            Tag::Span => "span",
-            Tag::P => "p",
-            Tag::H1 => "h1",
-            Tag::H2 => "h2",
-            Tag::H3 => "h3",
-            Tag::H4 => "h4",
-            Tag::H5 => "h5",
-            Tag::H6 => "h6",
-            Tag::Button => "button",
-            Tag::Input => "input",
-            Tag::Img => "img",
-            Tag::Br => "br",
-            Tag::A => "a",
-            Tag::Ul => "ul",
-            Tag::Ol => "ol",
-            Tag::Li => "li",
-            Tag::Section => "section",
-            Tag::Header => "header",
-            Tag::Footer => "footer",
-            Tag::Nav => "nav",
-            Tag::Main => "main",
-            Tag::Form => "form",
-            Tag::Label => "label",
-            Tag::Select => "select",
-            Tag::Option => "option",
-            Tag::Textarea => "textarea",
-            Tag::Custom(s) => s.as_str(),
+            LeafKind::Heading(1, _) => 0x10,
+            LeafKind::Heading(2, _) => 0x11,
+            LeafKind::Heading(3, _) => 0x12,
+            LeafKind::Heading(4, _) => 0x13,
+            LeafKind::Heading(5, _) => 0x14,
+            LeafKind::Heading(_, _) => 0x15,
+            LeafKind::Text(_) => 0x08,
+            LeafKind::Button { .. } => 0x09,
+            LeafKind::Input { .. } => 0x0A,
+            LeafKind::Image { .. } => 0x0B,
+            LeafKind::Link { .. } => 0x0C,
+            LeafKind::Spacer(_) => 0x1A,
+            LeafKind::Item(_) => 0x1B,
+            LeafKind::Metric { .. } => 0x18,
+            LeafKind::Separator => 0x19,
         }
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, Default)]
-pub struct StyleTable {
-    pub entries: Vec<StyleSet>,
+/// Element attributes (deterministic ordering via BTreeMap)
+#[derive(Debug, Default)]
+pub struct Attrs {
+    pub style: Option<String>,
+    pub id: Option<String>,
+    pub extra: BTreeMap<String, String>,
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub struct StyleSet {
-    pub properties: Vec<Property>,
+/// Named style definition
+#[derive(Debug)]
+pub struct StyleDef {
+    pub name: String,
+    pub properties: Vec<StyleProperty>,
+    pub span: Span,
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Property {
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum StyleProperty {
     Width(Value),
     Height(Value),
     MarginTop(Value),
@@ -220,11 +129,11 @@ pub enum Property {
     PaddingBottom(Value),
     PaddingLeft(Value),
     Background(Color),
-    Color(Color),
+    TextColor(Color),
     FontSize(u8),
-    FlexDirection(FlexDirection),
-    JustifyContent(Justify),
-    AlignItems(Align),
+    Direction(Direction),
+    Justify(Justify),
+    Align(Align),
     Display(Display),
     Position(Position),
     Top(Value),
@@ -240,9 +149,9 @@ pub enum Property {
     FontWeight(u16),
     FontFamily(String),
     Gap(Value),
-    FlexWrap(FlexWrap),
-    FlexGrow(u8),
-    FlexShrink(u8),
+    Wrap(Wrap),
+    Grow(u8),
+    Shrink(u8),
     ZIndex(i16),
     Visibility(Visibility),
     MaxWidth(Value),
@@ -251,54 +160,54 @@ pub enum Property {
     MinHeight(Value),
 }
 
-impl Property {
+impl StyleProperty {
     pub fn id(&self) -> u8 {
         match self {
-            Property::Width(_) => 0x01,
-            Property::Height(_) => 0x02,
-            Property::MarginTop(_) => 0x03,
-            Property::MarginRight(_) => 0x04,
-            Property::MarginBottom(_) => 0x05,
-            Property::MarginLeft(_) => 0x06,
-            Property::PaddingTop(_) => 0x07,
-            Property::PaddingRight(_) => 0x08,
-            Property::PaddingBottom(_) => 0x09,
-            Property::PaddingLeft(_) => 0x0A,
-            Property::Background(_) => 0x0B,
-            Property::Color(_) => 0x0C,
-            Property::FontSize(_) => 0x0D,
-            Property::FlexDirection(_) => 0x0E,
-            Property::JustifyContent(_) => 0x0F,
-            Property::AlignItems(_) => 0x10,
-            Property::Display(_) => 0x11,
-            Property::Position(_) => 0x12,
-            Property::Top(_) => 0x13,
-            Property::Right(_) => 0x14,
-            Property::Bottom(_) => 0x15,
-            Property::Left(_) => 0x16,
-            Property::BorderWidth(_) => 0x17,
-            Property::BorderColor(_) => 0x18,
-            Property::BorderRadius(_) => 0x19,
-            Property::Opacity(_) => 0x1A,
-            Property::Overflow(_) => 0x1B,
-            Property::TextAlign(_) => 0x1C,
-            Property::FontWeight(_) => 0x1D,
-            Property::FontFamily(_) => 0x1E,
-            Property::Gap(_) => 0x1F,
-            Property::FlexWrap(_) => 0x20,
-            Property::FlexGrow(_) => 0x21,
-            Property::FlexShrink(_) => 0x22,
-            Property::ZIndex(_) => 0x23,
-            Property::Visibility(_) => 0x24,
-            Property::MaxWidth(_) => 0x25,
-            Property::MinWidth(_) => 0x26,
-            Property::MaxHeight(_) => 0x27,
-            Property::MinHeight(_) => 0x28,
+            StyleProperty::Width(_) => 0x01,
+            StyleProperty::Height(_) => 0x02,
+            StyleProperty::MarginTop(_) => 0x03,
+            StyleProperty::MarginRight(_) => 0x04,
+            StyleProperty::MarginBottom(_) => 0x05,
+            StyleProperty::MarginLeft(_) => 0x06,
+            StyleProperty::PaddingTop(_) => 0x07,
+            StyleProperty::PaddingRight(_) => 0x08,
+            StyleProperty::PaddingBottom(_) => 0x09,
+            StyleProperty::PaddingLeft(_) => 0x0A,
+            StyleProperty::Background(_) => 0x0B,
+            StyleProperty::TextColor(_) => 0x0C,
+            StyleProperty::FontSize(_) => 0x0D,
+            StyleProperty::Direction(_) => 0x0E,
+            StyleProperty::Justify(_) => 0x0F,
+            StyleProperty::Align(_) => 0x10,
+            StyleProperty::Display(_) => 0x11,
+            StyleProperty::Position(_) => 0x12,
+            StyleProperty::Top(_) => 0x13,
+            StyleProperty::Right(_) => 0x14,
+            StyleProperty::Bottom(_) => 0x15,
+            StyleProperty::Left(_) => 0x16,
+            StyleProperty::BorderWidth(_) => 0x17,
+            StyleProperty::BorderColor(_) => 0x18,
+            StyleProperty::BorderRadius(_) => 0x19,
+            StyleProperty::Opacity(_) => 0x1A,
+            StyleProperty::Overflow(_) => 0x1B,
+            StyleProperty::TextAlign(_) => 0x1C,
+            StyleProperty::FontWeight(_) => 0x1D,
+            StyleProperty::FontFamily(_) => 0x1E,
+            StyleProperty::Gap(_) => 0x1F,
+            StyleProperty::Wrap(_) => 0x20,
+            StyleProperty::Grow(_) => 0x21,
+            StyleProperty::Shrink(_) => 0x22,
+            StyleProperty::ZIndex(_) => 0x23,
+            StyleProperty::Visibility(_) => 0x24,
+            StyleProperty::MaxWidth(_) => 0x25,
+            StyleProperty::MinWidth(_) => 0x26,
+            StyleProperty::MaxHeight(_) => 0x27,
+            StyleProperty::MinHeight(_) => 0x28,
         }
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Value {
     Auto,
     Px(i32),
@@ -308,28 +217,20 @@ pub enum Value {
 }
 
 impl Value {
-    pub fn unit_byte(&self) -> u8 {
-        match self {
-            Value::Auto => 0x00,
-            Value::Px(_) => 0x01,
-            Value::Percent(_) => 0x02,
-            Value::Vh(_) => 0x03,
-            Value::Vw(_) => 0x04,
-        }
-    }
-
-    pub fn raw_value(&self) -> i32 {
-        match self {
-            Value::Auto => 0,
-            Value::Px(v) => *v,
-            Value::Percent(v) => *v as i32,
-            Value::Vh(v) => *v as i32,
-            Value::Vw(v) => *v as i32,
-        }
+    pub fn encode(&self) -> [u8; 4] {
+        let (unit, raw) = match self {
+            Value::Auto => (0x00u8, 0i32),
+            Value::Px(v) => (0x01, v.clamp(&-32767, &32767).to_owned()),
+            Value::Percent(v) => (0x02, v.min(&10000).to_owned() as i32),
+            Value::Vh(v) => (0x03, v.min(&10000).to_owned() as i32),
+            Value::Vw(v) => (0x04, v.min(&10000).to_owned() as i32),
+        };
+        let val_bytes = (raw as u32).to_le_bytes();
+        [unit, val_bytes[0], val_bytes[1], val_bytes[2]]
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Color {
     pub r: u8,
     pub g: u8,
@@ -337,75 +238,108 @@ pub struct Color {
     pub a: u8,
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum FlexDirection {
-    Row,
-    Column,
+impl Color {
+    pub fn encode(&self) -> [u8; 4] {
+        [self.r, self.g, self.b, self.a]
+    }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Justify {
-    FlexStart,
-    Center,
-    FlexEnd,
-    SpaceBetween,
-    SpaceAround,
-    SpaceEvenly,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Direction { Row, Column }
+impl Direction { pub fn encode(&self) -> u8 { match self { Direction::Row => 0, Direction::Column => 1 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Justify { Start, Center, End, Between, Around, Evenly }
+impl Justify { pub fn encode(&self) -> u8 { match self { Justify::Start=>0, Justify::Center=>1, Justify::End=>2, Justify::Between=>3, Justify::Around=>4, Justify::Evenly=>5 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Align { Start, Center, End, Stretch }
+impl Align { pub fn encode(&self) -> u8 { match self { Align::Start=>0, Align::Center=>1, Align::End=>2, Align::Stretch=>3 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Display { Block, Flex, Grid, Inline, None }
+impl Display { pub fn encode(&self) -> u8 { match self { Display::Block=>0, Display::Flex=>1, Display::Grid=>2, Display::Inline=>3, Display::None=>4 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Position { Static, Relative, Absolute, Fixed }
+impl Position { pub fn encode(&self) -> u8 { match self { Position::Static=>0, Position::Relative=>1, Position::Absolute=>2, Position::Fixed=>3 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Overflow { Visible, Hidden, Scroll, Auto }
+impl Overflow { pub fn encode(&self) -> u8 { match self { Overflow::Visible=>0, Overflow::Hidden=>1, Overflow::Scroll=>2, Overflow::Auto=>3 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum TextAlign { Left, Center, Right, Justify }
+impl TextAlign { pub fn encode(&self) -> u8 { match self { TextAlign::Left=>0, TextAlign::Center=>1, TextAlign::Right=>2, TextAlign::Justify=>3 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Wrap { Nowrap, Wrap }
+impl Wrap { pub fn encode(&self) -> u8 { match self { Wrap::Nowrap=>0, Wrap::Wrap=>1 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Visibility { Visible, Hidden }
+impl Visibility { pub fn encode(&self) -> u8 { match self { Visibility::Visible=>0, Visibility::Hidden=>1 } } }
+
+/// Named tone definition (auditory modality)
+#[derive(Debug)]
+pub struct ToneDef {
+    pub name: String,
+    pub frequency: u16,
+    pub duration_ms: u16,
+    pub amplitude: u8,
+    pub waveform: Waveform,
+    pub channel: u8,
+    pub span: Span,
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Align {
-    FlexStart,
-    Center,
-    FlexEnd,
-    Stretch,
+/// Named pulse definition (haptic modality)
+#[derive(Debug)]
+pub struct PulseDef {
+    pub name: String,
+    pub region: String,
+    pub duration_ms: u16,
+    pub intensity: u8,
+    pub waveform: PulseWaveform,
+    pub charge: u8,
+    pub span: Span,
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Display {
-    Block,
-    Flex,
-    Grid,
-    Inline,
-    InlineBlock,
-    InlineFlex,
-    None,
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Waveform { Biphasic, Sine, Square }
+impl Waveform { pub fn encode(&self) -> u8 { match self { Waveform::Biphasic=>0, Waveform::Sine=>1, Waveform::Square=>2 } } }
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum PulseWaveform { Biphasic, Monophasic, Ramp }
+impl PulseWaveform { pub fn encode(&self) -> u8 { match self { PulseWaveform::Biphasic=>0, PulseWaveform::Monophasic=>1, PulseWaveform::Ramp=>2 } } }
+
+/// TARA safety profile
+#[derive(Debug, Clone)]
+pub struct SafetyDef {
+    pub name: String,
+    pub max_elements: u16,
+    pub max_depth: u16,
+    pub max_bytecode: u32,
+    pub max_charge_density: f32,
+    pub max_charge_per_phase: f32,
+    pub max_frequency: u16,
+    pub max_amplitude: f32,
+    pub shannon_k: f32,
+    pub span: Span,
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Position {
-    Static,
-    Relative,
-    Absolute,
-    Fixed,
-    Sticky,
-}
-
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Overflow {
-    Visible,
-    Hidden,
-    Scroll,
-    Auto,
-}
-
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum TextAlign {
-    Left,
-    Center,
-    Right,
-    Justify,
-}
-
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum FlexWrap {
-    Nowrap,
-    Wrap,
-    WrapReverse,
-}
-
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone)]
-pub enum Visibility {
-    Visible,
-    Hidden,
+impl Default for SafetyDef {
+    fn default() -> Self {
+        SafetyDef {
+            name: "bci_default".to_string(),
+            max_elements: 256,
+            max_depth: 16,
+            max_bytecode: 65536,
+            max_charge_density: 30.0,
+            max_charge_per_phase: 4.0,
+            max_frequency: 2500,
+            max_amplitude: 1.0,
+            shannon_k: 1.75,
+            span: Span { line: 0, col: 0 },
+        }
+    }
 }
