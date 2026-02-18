@@ -93,32 +93,6 @@ const latestChange = getLatestChangelog();
         </p>
       </section>
 
-      <!-- ═══ Preprint ═══ -->
-      <div class="glass rounded-xl p-5 sm:p-6 mb-12" style="border-left: 4px solid var(--color-accent-tertiary);">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-          <div class="flex-1">
-            <p class="text-xs font-semibold tracking-[0.12em] uppercase text-[var(--color-accent-tertiary)] mb-1.5">Academic Preprint</p>
-            <p class="text-sm font-semibold text-[var(--color-text-primary)] leading-snug mb-1">
-              Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces
-            </p>
-            <p class="text-xs text-[var(--color-text-faint)]">
-              Kevin Qi &middot; Qinnovate &middot; Feb 2026 &middot; 27 pages, 6 figures &middot; CC-BY 4.0
-            </p>
-            <p class="text-xs text-[var(--color-text-faint)] mt-1">
-              DOI: <a href="https://doi.org/10.5281/zenodo.18640105" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener">10.5281/zenodo.18640105</a>
-            </p>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-2 shrink-0">
-            <a href="/papers/qif-bci-security-2026.pdf" class="px-4 py-2 rounded-lg bg-[var(--color-accent-tertiary)] text-white font-medium text-sm hover:opacity-90 transition-opacity text-center" target="_blank">
-              Download PDF
-            </a>
-            <a href="https://zenodo.org/records/18640105" class="px-4 py-2 rounded-lg glass text-[var(--color-text-primary)] font-medium text-sm hover:bg-black/5 transition-colors text-center" target="_blank" rel="noopener">
-              View on Zenodo
-            </a>
-          </div>
-        </div>
-      </div>
-
       <!-- ═══ Hourglass Preview ═══ -->
       <div class="mb-12">
         <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-4 text-center">QIF Hourglass Model</h2>
@@ -185,6 +159,35 @@ const latestChange = getLatestChangelog();
           <a href="/lab/hourglass.html" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
             Explore the full interactive model &rarr;
           </a>
+        </div>
+      </div>
+
+      <!-- ═══ Preprint ═══ -->
+      <div class="glass rounded-xl p-5 sm:p-6 mb-12" style="border-left: 4px solid var(--color-accent-tertiary);">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex-1">
+            <p class="text-xs font-semibold tracking-[0.12em] uppercase text-[var(--color-accent-tertiary)] mb-1.5">Academic Preprint</p>
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] leading-snug mb-1">
+              Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)]">
+              Kevin Qi &middot; Qinnovate &middot; Feb 2026 &middot; 28 pages, 6 figures &middot; CC-BY 4.0
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-1">
+              DOI: <a href="https://doi.org/10.5281/zenodo.18640105" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener">10.5281/zenodo.18640105</a>
+            </p>
+            <p class="text-xs text-[var(--color-text-muted)] mt-2">
+              This preprint contains the full mathematical derivations, QI equation, and falsifiability conditions. The whitepaper below is the accessible companion.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2 shrink-0">
+            <a href="/papers/qif-bci-security-2026.pdf" class="px-4 py-2 rounded-lg bg-[var(--color-accent-tertiary)] text-white font-medium text-sm hover:opacity-90 transition-opacity text-center" target="_blank">
+              Download PDF
+            </a>
+            <a href="https://zenodo.org/records/18640105" class="px-4 py-2 rounded-lg glass text-[var(--color-text-primary)] font-medium text-sm hover:bg-black/5 transition-colors text-center" target="_blank" rel="noopener">
+              View on Zenodo
+            </a>
+          </div>
         </div>
       </div>
 
@@ -317,9 +320,9 @@ const latestChange = getLatestChangelog();
             The 11-band model was not designed from first principles. It was derived by converging three established layered architectures:
           </p>
           <ol>
-            <li><strong>The OSI model</strong> (ISO/IEC 7498) &mdash; 7 layers that decompose a network into physical, data link, network, transport, session, presentation, and application. Every security framework for digital systems uses some variant of this decomposition. But the OSI model stops at the wire. It has no concept of the biological system connected to the other end.</li>
-            <li><strong>Neural systems anatomy</strong> (Kandel et al., <em>Principles of Neural Science</em>, 6th ed.) &mdash; The brain is not a single structure. It is a hierarchy of functionally distinct regions: spinal cord, brainstem, cerebellum, diencephalon (thalamus/hypothalamus), basal ganglia, limbic system, and neocortex. Each has different cellular architecture, different oscillatory regimes, and different clinical consequences if compromised. The 7 neural bands (N7&ndash;N1) map directly to this established neuroanatomical hierarchy, with thalamic gating (Sherman &amp; Guillery, 2006) providing the routing logic between cortical and subcortical layers. An architecture that treats "the brain" as one layer misses this entirely.</li>
-            <li><strong>The bio-digital boundary</strong> (Deering, 1998; the Internet hourglass principle) &mdash; Where electrodes touch tissue, signals transition from ionic to electronic. This is not a clean handoff. It is a physical interface with its own impedance characteristics, its own failure modes, and its own threat profile. The I0 band applies Deering's hourglass insight &mdash; that all traffic must pass through a narrow waist &mdash; to the electrode-tissue boundary, where every neural signal crosses from biology to silicon. Neither the OSI model nor neuroanatomy alone accounts for this zone.</li>
+            <li><strong>The OSI model</strong> (<a href="https://www.iso.org/standard/20269.html" class="text-[var(--color-accent-primary)]">ISO/IEC 7498</a>) &mdash; 7 layers that decompose a network into physical, data link, network, transport, session, presentation, and application. Every security framework for digital systems uses some variant of this decomposition. But the OSI model stops at the wire. It has no concept of the biological system connected to the other end.</li>
+            <li><strong>Neural systems anatomy</strong> (<a href="https://neurology.mhmedical.com/book.aspx?bookid=3024" class="text-[var(--color-accent-primary)]">Kandel et al., <em>Principles of Neural Science</em>, 6th ed., 2021</a>) &mdash; The brain is not a single structure. It is a hierarchy of functionally distinct regions: spinal cord, brainstem, cerebellum, diencephalon (thalamus/hypothalamus), basal ganglia, limbic system, and neocortex. Each has different cellular architecture, different oscillatory regimes, and different clinical consequences if compromised. The 7 neural bands (N7&ndash;N1) map directly to this established neuroanatomical hierarchy, with thalamic relay logic (<a href="https://mitpress.mit.edu/9780262513449/exploring-the-thalamus-and-its-role-in-cortical-function/" class="text-[var(--color-accent-primary)]">Sherman &amp; Guillery, 2006</a>) providing the gating mechanism between cortical and subcortical layers. An architecture that treats &ldquo;the brain&rdquo; as one layer misses this entirely.</li>
+            <li><strong>The bio-digital boundary</strong> (<a href="https://www.ietf.org/proceedings/51/slides/plenary-1/" class="text-[var(--color-accent-primary)]">Deering, 2001</a>; the Internet hourglass principle) &mdash; Where electrodes touch tissue, signals transition from ionic to electronic. This is not a clean handoff. It is a physical interface with its own impedance characteristics, its own failure modes, and its own threat profile. The I0 band applies Deering&rsquo;s hourglass insight &mdash; that all traffic must pass through a narrow waist &mdash; to the electrode-tissue boundary, where every neural signal crosses from biology to silicon. Neither the OSI model nor neuroanatomy alone accounts for this zone.</li>
           </ol>
           <p>
             QIF maps all three onto a single stack. The 7 neural bands (N7&ndash;N1) come from neuroanatomy, ordered by clinical severity. The 3 synthetic bands (S1&ndash;S3) come from the electronic processing chain, analogous to OSI's lower layers. The interface band (I0) is the bridge &mdash; the electrode-tissue boundary where biology becomes data. The result is an 11-band, <strong>7-1-3 asymmetric hourglass</strong>: wide at the top (neural complexity), narrow at the center (physical bottleneck), and wider at the bottom (synthetic processing).
@@ -679,7 +682,7 @@ const latestChange = getLatestChangelog();
       <!-- 6.5 NEURORIGHTS MAPPING                                   -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="neurorights" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.5 Neurorights Mapping</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">7. Neurorights Mapping</h2>
 
         <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-tertiary);">
           <p class="text-sm font-semibold text-[var(--color-accent-tertiary)] mb-2">From diagnosis to rights</p>
@@ -749,7 +752,7 @@ const latestChange = getLatestChangelog();
       <!-- 7. GOVERNANCE                                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="governance" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">7. Governance</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. Governance</h2>
         <div class="prose mb-8">
           <p>
             Each technique within the TARA atlas is assigned a consent tier reflecting the minimum regulatory oversight necessary for its deployment. These tiers are derived directly from NISS scores: higher biological impact, lower reversibility, and greater consent violation necessitate stricter governance.
@@ -865,7 +868,7 @@ const latestChange = getLatestChangelog();
       <!-- 8. NSP PROTOCOL                                           -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="nsp" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. NSP Protocol</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">9. NSP Protocol</h2>
 
         <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-primary);">
           <p class="text-sm font-semibold text-[var(--color-accent-primary)] mb-2">Why post-quantum cryptography is non-negotiable for neural devices</p>
@@ -936,7 +939,7 @@ const latestChange = getLatestChangelog();
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Adaptive TTT</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Per-user anomaly detection using Test-Time Training &mdash; a machine learning technique that continuously adapts to each patient&rsquo;s unique neural baseline. Detects slow-drift attacks and gradual signal poisoning that would pass static threshold checks. What looks normal for one brain may be anomalous for another.
+              Per-user anomaly detection using Test-Time Training &mdash; a machine learning technique that continuously adapts to each patient&rsquo;s unique neural baseline. Detects slow-drift attacks and gradual signal poisoning that would pass static threshold checks. What looks normal for one brain may be anomalous for another. Detection thresholds are tuned conservatively to prioritize patient safety; clinical deployment protocols must define acceptable false positive rates for each device class.
             </p>
           </div>
           <div class="glass rounded-xl p-5">
@@ -955,7 +958,10 @@ const latestChange = getLatestChangelog();
             The protocol is specified across three device tiers: implanted (most constrained, &le;40 mW), wearable (moderate power budget), and external (unconstrained). Not all tiers require all layers &mdash; consumer wearables implement Layers 1&ndash;3, while implanted devices implement all five. Each tier uses the same cryptographic primitives but with different parameter sets and duty cycles.
           </p>
           <p>
-            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). Runemate&rsquo;s native Staves DSL compiler (v1.0) mitigates this overhead through a purpose-built language with a closed vocabulary &mdash; no HTML parsing, no JavaScript sanitization. The compiler achieves 67.8% compression on multimodal content (visual, auditory, haptic) and net bandwidth savings over classical transport for typical BCI interface content exceeding 23 KB.
+            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). <a href="/runemate/" class="text-[var(--color-accent-primary)]">Runemate</a> &mdash; a purpose-built compression layer for BCI payloads &mdash; mitigates this by encoding neural interface content (visual, auditory, haptic) through a closed-vocabulary DSL, achieving 65&ndash;90% compression and net bandwidth savings over classical transport for typical BCI content exceeding 23&nbsp;KB.
+          </p>
+          <p>
+            <strong>Scope:</strong> NSP secures the I0 data link &mdash; the wireless boundary between implant and external device. It does not address physical-layer failures such as electrode migration, chronic immune response, or biocompatibility degradation. These are clinical monitoring concerns outside the protocol&rsquo;s threat model.
           </p>
         </div>
 
@@ -971,7 +977,7 @@ const latestChange = getLatestChangelog();
       <!-- 9. HOW TO HELP                                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="adopt" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">9. How to Help</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">10. How to Help</h2>
         <div class="prose mb-8">
           <p>
             QIF is open research, not a finished product. It was built by one independent researcher with AI collaboration &mdash; no lab, no faculty advisor, no institutional review board. The framework, the threat taxonomy, the scoring system, and the neurorights mappings all need stress testing by domain experts. Nothing here has been peer-reviewed yet. Here's where your expertise fits.
@@ -1056,7 +1062,7 @@ const latestChange = getLatestChangelog();
       <!-- 10. WHAT'S NEXT                                           -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="roadmap" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">10. What's Next</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. What&rsquo;s Next</h2>
         <div class="prose mb-8">
           <p>
             QIF is designed as a living framework. As neural device technology matures, the evolving threat landscape necessitates a corresponding evolution of the framework. Our immediate priorities:
