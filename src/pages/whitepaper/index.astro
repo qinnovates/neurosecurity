@@ -44,6 +44,7 @@ const latestChange = getLatestChangelog();
             { href: '#nsp', label: 'NSP Protocol' },
             { href: '#adopt', label: 'How to Help' },
             { href: '#roadmap', label: "What's Next" },
+            { href: '#limitations', label: 'Limitations & Transparency' },
           ].map((item) => (
             <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
               {item.label}
@@ -1106,6 +1107,123 @@ const latestChange = getLatestChangelog();
               Adoption Guide &rarr;
             </a>
           </div>
+        </div>
+      </section>
+
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- 12. LIMITATIONS & TRANSPARENCY                             -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section id="limitations" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. Limitations, AI Methodology &amp; Transparency</h2>
+
+        <div class="prose mb-8">
+          <p>
+            QIF was developed by a single independent researcher. The framework, threat taxonomy, scoring system, clinical mappings, and architectural decisions reflect one perspective. Multi-disciplinary peer review is essential before any component informs clinical or regulatory practice.
+          </p>
+        </div>
+
+        <!-- Limitations -->
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-8 mb-4">12.1 Known Limitations</h3>
+
+        <div class="space-y-3 mb-8">
+          <div class="glass-subtle rounded-lg p-4">
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">No empirical validation on real BCI devices</p>
+            <p class="text-xs text-[var(--color-text-muted)]">TARA was developed through literature review, threat modeling, and systematic analysis &mdash; not penetration testing of neural hardware. One real-world software vulnerability has been validated (see case studies); neural-zone validation requires clinical access unavailable to independent researchers.</p>
+          </div>
+          <div class="glass-subtle rounded-lg p-4">
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">DSM-5-TR mappings not clinically validated</p>
+            <p class="text-xs text-[var(--color-text-muted)]">The Neural Impact Chain maps attack techniques to psychiatric diagnoses based on known neuroanatomical pathways and functional neuroscience. These mappings have not been reviewed by psychiatrists or clinical neuroscientists. Clinical validation is required before they can inform practice.</p>
+          </div>
+          <div class="glass-subtle rounded-lg p-4">
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS weights not calibrated</p>
+            <p class="text-xs text-[var(--color-text-muted)]">All five NISS metrics use equal weights (1.0) in the default profile. Context profiles (Clinical, Research, Consumer, Military) propose differential weights, but these have not been calibrated against empirical data or expert elicitation.</p>
+          </div>
+          <div class="glass-subtle rounded-lg p-4">
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">No interrater reliability study</p>
+            <p class="text-xs text-[var(--color-text-muted)]">NISS scores were assigned by a single analyst. No interrater reliability study has assessed whether independent scorers would assign the same metric values. CVSS interrater reliability is a known challenge; NISS likely faces greater variability.</p>
+          </div>
+          <div class="glass-subtle rounded-lg p-4">
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Taxonomy completeness</p>
+            <p class="text-xs text-[var(--color-text-muted)]">{stats.totalTechniques} techniques as of v1.4. The BCI threat landscape is evolving rapidly. 26 techniques are classified as Theoretical and 1 as Speculative &mdash; grounded in known physics but not empirically demonstrated. This registry is a foundation, not a complete enumeration.</p>
+          </div>
+        </div>
+
+        <!-- AI Methodology -->
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.2 AI Methodology</h3>
+
+        <div class="prose mb-6">
+          <p>
+            Given the multi-disciplinary scale of this project &mdash; spanning {stats.totalTechniques} attack techniques across clinical, neural, and digital domains &mdash; Large Language Models (Claude, Gemini, ChatGPT) were used as computational research assistants to help synthesize regulatory datasets, cross-reference neuroscience literature, and generate code for data pipelines and visualizations.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+          <div class="glass-subtle rounded-lg p-4">
+            <p class="text-xs font-semibold text-[var(--color-accent-primary)] uppercase tracking-wider mb-2">AI-Assisted</p>
+            <ul class="space-y-1.5 text-xs text-[var(--color-text-muted)]">
+              <li>Literature synthesis and cross-domain mapping across FDA, ISO, GDPR regulatory frameworks</li>
+              <li>Code generation for data pipelines, visualization components, and analysis scripts</li>
+              <li>Draft text generation (estimated &lt;15% retained verbatim; remainder rewritten by author)</li>
+              <li>Cross-validation of factual claims across multiple AI systems to reduce single-model bias</li>
+            </ul>
+          </div>
+          <div class="glass-subtle rounded-lg p-4">
+            <p class="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-2">Human-Originated</p>
+            <ul class="space-y-1.5 text-xs text-[var(--color-text-muted)]">
+              <li>The 11-band hourglass architecture and its mathematical derivation</li>
+              <li>TARA threat taxonomy structure and all 102 technique classifications</li>
+              <li>NISS scoring methodology, all metric assignments, and all NISS scores</li>
+              <li>Neural Impact Chain pipeline and all DSM-5-TR diagnostic mappings</li>
+              <li>All architectural decisions, research conclusions, and governance design</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-5 mb-8" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Citation integrity note:</strong> The preprint v1.0 shipped with 3 fabricated citations introduced during AI-assisted bibliography construction. These were caught and corrected in v1.1 through a two-pass independent verification audit. All references in the current version have been verified against their source publications via DOI resolution and publisher page confirmation. This experience led to a mandatory <a href="https://github.com/qinnovates/qinnovate/blob/main/scripts/verify/verify_citations.py" class="text-[var(--color-accent-primary)]">automated citation verification pipeline</a>.
+          </p>
+        </div>
+
+        <div class="prose mb-8">
+          <p>
+            The author takes full responsibility for all content in this whitepaper, irrespective of how it was generated. AI tools cannot be listed as authors per arXiv, ACM, and IEEE policy. No AI system originated any architectural or methodological contribution.
+          </p>
+        </div>
+
+        <!-- Audit Trail -->
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.3 Audit Trail</h3>
+
+        <div class="prose mb-6">
+          <p>
+            Every decision, derivation, and AI interaction is logged in a cryptographically verifiable audit trail. Monthly checksums of collaboration logs are GPG-signed by the maintainer. The full chain of evidence:
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3 mb-8">
+          <a href="https://doi.org/10.5281/zenodo.18640105" target="_blank" rel="noopener noreferrer" class="glass rounded-lg p-4 hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all group">
+            <p class="text-xs font-semibold text-[var(--color-accent-primary)] mb-1 group-hover:underline">Peer-Citable Preprint</p>
+            <p class="text-[11px] text-[var(--color-text-muted)]">DOI: 10.5281/zenodo.18640105 &mdash; Full paper with Section 9: Limitations &amp; AI Disclosure. CC-BY 4.0.</p>
+          </a>
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md" target="_blank" rel="noopener noreferrer" class="glass rounded-lg p-4 hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all group">
+            <p class="text-xs font-semibold text-[var(--color-accent-primary)] mb-1 group-hover:underline">Transparency Statement</p>
+            <p class="text-[11px] text-[var(--color-text-muted)]">Full AI collaboration disclosure, HITL methodology, GPG-signed monthly checksums, cross-AI validation sessions.</p>
+          </a>
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md" target="_blank" rel="noopener noreferrer" class="glass rounded-lg p-4 hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all group">
+            <p class="text-xs font-semibold text-[var(--color-accent-primary)] mb-1 group-hover:underline">Derivation Log</p>
+            <p class="text-[11px] text-[var(--color-text-muted)]">57 timestamped entries documenting every architectural decision, hypothesis, and reasoning chain. Lab-notebook format.</p>
+          </a>
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener noreferrer" class="glass rounded-lg p-4 hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all group">
+            <p class="text-xs font-semibold text-[var(--color-accent-primary)] mb-1 group-hover:underline">Field Journal</p>
+            <p class="text-[11px] text-[var(--color-text-muted)]">Personal research observations, experiential notes, and cross-disciplinary insights recorded during development.</p>
+          </a>
+        </div>
+
+        <div class="glass rounded-xl p-5" style="border-left: 3px solid #10b981;">
+          <p class="text-xs text-[var(--color-text-muted)]">
+            <strong class="text-[#10b981]">Verification:</strong> Every development session is logged. Monthly checksums are GPG-signed (<code class="text-[10px]">gpg --verify _memory/collab/YYYY-MM.md.asc</code>). Cross-AI validation sessions are recorded in the Transparency Statement with date, topic, AI systems involved, and the human decision for each disagreement. The full commit history is public at <a href="https://github.com/qinnovates/qinnovate" class="text-[var(--color-accent-primary)]">github.com/qinnovates/qinnovate</a>.
+          </p>
         </div>
       </section>
 
