@@ -64,6 +64,22 @@ These five principles are recognized in international neuroethics scholarship (I
 - Weaponization of framework knowledge — using QIF threat models, attack surface documentation, or security research to target real BCI users or systems
 - Misrepresentation of research — presenting hypotheses as validated findings, fabricating results, or omitting uncertainty from claims
 
+### Medical and Accessibility Considerations
+
+> **This section is a draft and needs broader community input.** The author has personal experience with how biological conditions (B12 deficiency leading to neurological symptoms) can affect cognition and behavior in ways that may resemble code of conduct violations. This lived experience informs but should not solely define the policy. If you have perspective on this, please [open a discussion](https://github.com/qinnovates/qinnovate/discussions).
+
+We are building a framework to protect brains. Some of the people in this community have brains that work differently, whether from neurological conditions, psychiatric diagnoses, neurodivergence, medication effects, nutritional deficiencies, or the very BCI devices we study. A code of conduct for a neurosecurity project that does not account for this would be hypocritical.
+
+**How we handle potential violations when medical context may be a factor:**
+
+1. **Private outreach first. Always.** If a community member's behavior appears to violate this code, moderators will reach out privately before any public action. The question is "are you okay?" before "you broke a rule."
+2. **Disclosure is never required.** No one is obligated to share a diagnosis, condition, or medical history. If someone chooses to share context, it is treated as confidential.
+3. **Good faith is the standard, not credentials.** We do not require proof of a condition, ethics coursework, or institutional affiliation. The question is whether the person is willing to engage constructively and work toward preventing recurrence.
+4. **Accommodations over exclusion.** Where possible, we will work with the individual to find ways to participate that work for them and the community. Different communication channels, a check-in system, adjusted expectations for response tone, whatever helps.
+5. **Safety remains non-negotiable.** Accommodations do not extend to actions that endanger the safety of others, involve weaponization of security research, or cause ongoing harm that the person is unwilling to address. Medical context is a mitigating factor in how we respond, not a blanket exception.
+
+This is one of the hardest problems in community governance and we do not pretend to have it figured out. The intersection of neurotechnology, disability, and ethics enforcement is genuinely new territory. We would rather get it right slowly than get it wrong fast.
+
 ## Dual-Use Responsibility
 
 This framework documents how brain-computer interfaces can be attacked. That knowledge exists so they can be defended. Every contributor shares responsibility for maintaining this boundary.
