@@ -1,6 +1,6 @@
 ---
 title: "The Neural Impact Chain: When Security Scores Predict Psychiatric Diagnoses"
-subtitle: "How we mapped 99 BCI attack techniques to DSM-5-TR diagnoses — and discovered that NISS scores already predicted the answer"
+subtitle: "How we mapped 99 BCI attack techniques to DSM-5-TR diagnoses — and found that NISS scores correlate with the clinical categories"
 date_posted: "2026-02-13"
 source: "https://qinnovate.com"
 tags: ["#TARA", "#DSM5TR", "#NeuralImpactChain", "#NISS", "#BCI", "#Psychiatry", "#Neuroethics", "#QIF", "#RDoC"]
@@ -79,6 +79,8 @@ This is the value of a well-designed taxonomy. It reveals relationships you did 
 **For security researchers:** NISS scores are now clinically interpretable. The abstract severity numbers map to specific psychiatric risks. This gives security findings clinical weight.
 
 **For the field:** This is, to our knowledge, the first formal mapping between BCI attack techniques and psychiatric diagnoses via neural mechanism chains. We welcome challenges.
+
+> **Research Limitation:** These technique-to-diagnosis mappings are based on known neuroanatomy and mechanism-first reasoning, developed by a single security researcher. They have **not been reviewed or validated by psychiatrists or clinical neuroscientists** and should not inform clinical decision-making without independent peer review and clinical validation. See [Section 9 of the preprint](https://doi.org/10.5281/zenodo.18640105) for the full limitations disclosure.
 
 ## Try It
 

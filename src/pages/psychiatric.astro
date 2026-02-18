@@ -95,7 +95,7 @@ const breadcrumbs = [
 
 <PageLayout
   title="Psychiatric Impact Map — When BCI Attacks Become Diagnoses"
-  description={`${stats.withDsm5} of ${totalTechniques} BCI attack techniques map to specific DSM-5-TR diagnoses through documented neural pathways. This page maps every known psychiatric outcome of brain-computer interface exploitation.`}
+  description={`${stats.withDsm5} of ${totalTechniques} BCI attack techniques map to DSM-5-TR diagnostic criteria based on known neuroanatomy. Research mappings awaiting clinical validation by psychiatrists and neuroscientists.`}
   breadcrumbs={breadcrumbs}
   wide
 >
@@ -114,9 +114,9 @@ const breadcrumbs = [
         </span>
       </h1>
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
-        {stats.withDsm5} of {totalTechniques} catalogued BCI attack techniques can produce symptoms
-        meeting DSM-5-TR diagnostic criteria — through documented neural pathways, not speculation.
-        This is the clinical map of what brain-computer interface exploitation looks like in a psychiatric setting.
+        {stats.withDsm5} of {totalTechniques} catalogued BCI attack techniques map to symptoms
+        matching DSM-5-TR diagnostic criteria — based on known neuroanatomical pathways and functional neuroscience.
+        These mappings require clinical validation by psychiatrists and neuroscientists before informing clinical practice.
       </p>
     </div>
 
@@ -148,6 +148,29 @@ const breadcrumbs = [
       </div>
     </div>
   </section>
+
+  <!-- ═══ VALIDATION STATUS ═══ -->
+  <div class="max-w-3xl mx-auto mb-8">
+    <div class="rounded-xl p-4 sm:p-5 border border-amber-500/20" style="background: rgba(245, 158, 11, 0.06);">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+        </svg>
+        <div>
+          <p class="text-sm font-semibold text-amber-500 mb-1">Research Status: Awaiting Clinical Validation</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+            These DSM-5-TR mappings are based on known neuroanatomy and published neuroscience, but they have
+            <strong class="text-[var(--color-text-primary)]">not been reviewed or validated by psychiatrists or clinical neuroscientists.</strong>
+            The mappings were developed by a single security researcher through literature review and threat modeling.
+            Clinical validation, interrater reliability studies, and expert panel review are needed before these
+            mappings can inform clinical decision-making. See
+            <a href="https://doi.org/10.5281/zenodo.18640105" class="text-amber-500 hover:underline">Section 9 of the preprint</a>
+            for the full limitations disclosure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══ FOR CLINICIANS ═══ -->
   <section class="py-12 md:py-16" id="clinicians">
@@ -603,12 +626,17 @@ const breadcrumbs = [
   <section class="py-12 md:py-20" id="cta">
     <div class="glass rounded-2xl p-8 sm:p-12 max-w-3xl mx-auto text-center reveal">
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">
-        The patients are already here. The framework shouldn't wait.
+        This work needs your expertise.
       </h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-lg mx-auto leading-relaxed">
+        These mappings were built by a security researcher, not a clinician. They need validation
+        by psychiatrists, clinical neuroscientists, and neuroethicists before they can responsibly
+        inform clinical practice.
+      </p>
       <p class="text-sm text-[var(--color-text-muted)] mb-8 max-w-lg mx-auto leading-relaxed">
-        BCI-augmented patients will present to psychiatrists before any clinical guidelines exist
-        for device-mediated psychiatric harm. This map is a starting point — built for peer review,
-        not prescription.
+        If you are a clinician or researcher working in neuroscience, psychiatry, or BCI safety — we
+        welcome peer review, corrections, and collaboration. This map is a starting point built for
+        scrutiny, not prescription.
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-3">

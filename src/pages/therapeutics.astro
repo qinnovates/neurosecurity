@@ -52,6 +52,98 @@ const conditionEntries = [...conditionMap.entries()]
   .sort((a, b) => b[1].length - a[1].length);
 const uniqueConditions = conditionEntries.length;
 
+// ═══ CLINICAL MATRIX: MITRE-style grid ═══
+
+// Rows = Clinical Domain (matched on conditions[])
+const MATRIX_ROWS = [
+  { id: 'movement',  label: 'Movement & Motor',            keywords: ['parkinson', 'tremor', 'dystonia', 'motor', 'paralysis', 'spinal cord', 'stroke', 'gait', 'spasticity', 'tetraplegia', 'limb prosth', 'multiple sclerosis motor', 'balance', 'movement disorder', 'FES'] },
+  { id: 'seizure',   label: 'Seizure & Epilepsy',          keywords: ['epilepsy', 'seizure', 'excitab', 'status epilepticus'] },
+  { id: 'mood',      label: 'Mood & Affective',            keywords: ['depress', 'anxiety', 'PTSD', 'OCD', 'bipolar', 'substance', 'mood', 'suicidal', 'addiction', 'stress', 'dissociative', 'depersonalization', 'body dysmorphia', 'catatonia', 'psychedelic'] },
+  { id: 'cognitive', label: 'Cognitive & Neurodevelopmental', keywords: ['ADHD', 'attention', 'dementia', 'alzheimer', 'autism', 'cognitive', 'memory', 'learning', 'schizophren', 'concussion', 'traumatic brain', 'working memory', 'MCI', 'meditation', 'fatigue', 'brain tumor', 'connectome', 'presurgical', 'intraoperative', 'anesthesia'] },
+  { id: 'pain',      label: 'Pain & Somatosensory',        keywords: ['pain', 'phantom', 'tinnitus', 'neuropath', 'somatosens', 'migraine'] },
+  { id: 'sleep',     label: 'Sleep & Circadian',           keywords: ['sleep', 'insomnia', 'narcolepsy', 'circadian'] },
+  { id: 'comms',     label: 'Communication & Rehab',       keywords: ['locked-in', 'aphasia', 'dysarthria', 'communication', 'ALS', 'speech', 'laryngectomy'] },
+] as const;
+
+// Columns = Therapeutic Modality (matched on therapeutic_analog)
+const MATRIX_COLS = [
+  { id: 'elec',      label: 'Electrical Stim.',   keywords: ['DBS', 'tDCS', 'tACS', 'FES', 'stimulat', 'ablation', 'ECT', 'electroconvulsive', 'microwave', 'titration', 'modulation', 'impedance spectroscopy'] },
+  { id: 'mag',       label: 'Magnetic Stim.',     keywords: ['TMS', 'rTMS', 'magnetic', 'quantum sensing'] },
+  { id: 'feedback',  label: 'Neurofeedback',      keywords: ['neurofeedback', 'closed-loop', 'adaptive', 'biofeedback', 'coherence-based', 'entrainment', 'stochastic resonance', 'brain-state dependent', 'motor learning', 'memory retrieval', 'memory consolidation', 'excitability modulation'] },
+  { id: 'dx',        label: 'Signal Dx & Recording', keywords: ['EEG', 'ECoG', 'ERP', 'diagnostic', 'recording', 'sensing', 'monitor', 'brain mapping', 'brain network', 'fNIRS', 'NIRS', 'spectroscopy', 'imaging', 'PPG', 'laser doppler', 'thermal', 'gait analysis', 'eye tracking', 'impedance', 'vital sign', 'audiometry', 'ABR', 'ASSR', 'otoacoustic', 'photoplethysmography', 'sensor fusion', 'fingerprint', 'assessment', 'priming'] },
+  { id: 'prosth',    label: 'Sensory Prosthetics', keywords: ['cochlear', 'retinal', 'haptic', 'prosth', 'sensory'] },
+  { id: 'bci',       label: 'BCI & Interfaces',   keywords: ['BCI', 'brain-computer', 'P300', 'neural interface', 'command', 'speech neuroprosth', 'neuroprosth'] },
+] as const;
+
+// Match a technique to a single column (first match wins)
+function matchCol(analog: string): string | null {
+  const lc = analog.toLowerCase();
+  for (const col of MATRIX_COLS) {
+    if (col.keywords.some(kw => lc.includes(kw.toLowerCase()))) return col.id;
+  }
+  return null;
+}
+
+// Match a technique to rows (can appear in multiple rows)
+function matchRows(conditions: string[]): string[] {
+  const joined = conditions.join(' ').toLowerCase();
+  const matched: string[] = [];
+  for (const row of MATRIX_ROWS) {
+    if (row.keywords.some(kw => joined.includes(kw.toLowerCase()))) {
+      matched.push(row.id);
+    }
+  }
+  return matched;
+}
+
+// Evidence tier for dot color
+function evidenceTier(t: ThreatVector): 1 | 2 | 3 {
+  const fda = t.tara?.clinical?.fda_status;
+  const ev = t.tara?.clinical?.evidence_level;
+  const fdaApproved = fda === 'approved' || fda === 'cleared';
+  const highEvidence = ev === 'meta_analysis' || ev === 'RCT';
+  if (fdaApproved && highEvidence) return 1;
+  const midFda = fda === 'breakthrough' || fda === 'investigational';
+  const midEvidence = ev === 'cohort' || ev === 'case_series';
+  if (midFda || midEvidence || (fdaApproved && !highEvidence) || (!fdaApproved && highEvidence)) return 2;
+  return 3;
+}
+
+// Build matrix: matrix[rowId][colId] = ThreatVector[]
+type MatrixData = Record<string, Record<string, ThreatVector[]>>;
+const matrix: MatrixData = {};
+const uncategorized: ThreatVector[] = [];
+
+for (const row of MATRIX_ROWS) {
+  matrix[row.id] = {};
+  for (const col of MATRIX_COLS) {
+    matrix[row.id][col.id] = [];
+  }
+}
+
+for (const t of clinical) {
+  const col = matchCol(t.tara!.clinical!.therapeutic_analog);
+  const rows = matchRows(t.tara!.clinical!.conditions);
+
+  if (!col || rows.length === 0) {
+    uncategorized.push(t);
+    continue;
+  }
+
+  for (const rowId of rows) {
+    if (!matrix[rowId][col].some(existing => existing.id === t.id)) {
+      matrix[rowId][col].push(t);
+    }
+  }
+}
+
+// Tier dot colors
+const tierColors = {
+  1: { dot: '#22c55e', label: 'Tier 1 — FDA + RCT/meta' },
+  2: { dot: '#f59e0b', label: 'Tier 2 — Investigational + cohort' },
+  3: { dot: '#94a3b8', label: 'Tier 3 — Preclinical/theoretical' },
+} as const;
+
 // FDA color helper
 const fdaColor = (status: string) => {
   const c = FDA_STATUS_COLORS[status as FdaStatus];
@@ -78,7 +170,7 @@ const breadcrumbs = [
 
 <PageLayout
   title="Therapeutic Dual-Use Atlas — Same Mechanism, Two Outcomes"
-  description={`${clinical.length} of ${totalTechniques} BCI techniques have therapeutic analogs. The same mechanisms that can attack a brain can also heal it. This is the dual-use map.`}
+  description={`${clinical.length} of ${totalTechniques} BCI techniques have therapeutic analogs. Research mappings of dual-use pathways based on known neuroscience, awaiting clinical validation.`}
   breadcrumbs={breadcrumbs}
   wide
 >
@@ -131,6 +223,29 @@ const breadcrumbs = [
       </div>
     </div>
   </section>
+
+  <!-- ═══ VALIDATION STATUS ═══ -->
+  <div class="max-w-3xl mx-auto mb-8">
+    <div class="rounded-xl p-4 sm:p-5 border border-amber-500/20" style="background: rgba(245, 158, 11, 0.06);">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+        </svg>
+        <div>
+          <p class="text-sm font-semibold text-amber-500 mb-1">Research Status: Dual-Use Mappings Awaiting Peer Review</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+            The therapeutic analogs listed here reference FDA-recognized applications, but the
+            <strong class="text-[var(--color-text-primary)]">dual-use attack-to-therapy mappings have not been validated by clinical neuroscientists.</strong>
+            These mappings were developed by a security researcher through literature review and mechanism-first
+            reasoning. Clinical validation is needed before these correspondences can inform safety assessments
+            or regulatory decisions. See
+            <a href="https://doi.org/10.5281/zenodo.18640105" class="text-amber-500 hover:underline">Section 9 of the preprint</a>
+            for the full limitations disclosure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══ THE DUAL-USE ARGUMENT ═══ -->
   <section class="py-12 md:py-16" id="dual-use">
@@ -249,130 +364,135 @@ const breadcrumbs = [
     </p>
   </section>
 
-  <!-- ═══ CONDITION EXPLORER ═══ -->
-  <section class="py-12 md:py-16" id="conditions">
+  <!-- ═══ CLINICAL MATRIX ═══ -->
+  <section class="py-12 md:py-16" id="matrix">
     <div class="flex items-center gap-4 mb-8">
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
       <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
-        Conditions Treated
+        Clinical Technique Matrix
       </h2>
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
     </div>
 
-    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
-      {uniqueConditions} treatable conditions mapped across {clinical.length} techniques.
-      Each condition links to the TARA technique that treats it — and can be weaponized against it.
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-4">
+      {clinical.length} therapeutic analogs organized by clinical domain and modality.
+      Click any cell to expand the techniques within it.
     </p>
 
-    <div class="max-w-4xl mx-auto space-y-2">
-      {conditionEntries.map(([condition, techniques]) => (
+    <!-- Legend -->
+    <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-6">
+      {([1, 2, 3] as const).map(tier => (
+        <span class="flex items-center gap-1.5 text-[11px] text-[var(--color-text-faint)]">
+          <span class="w-2.5 h-2.5 rounded-full" style={`background: ${tierColors[tier].dot};`}></span>
+          {tierColors[tier].label}
+        </span>
+      ))}
+    </div>
+
+    <!-- Matrix table with horizontal scroll on mobile -->
+    <div class="matrix-scroll max-w-6xl mx-auto">
+      <table class="matrix-table w-full border-collapse text-xs">
+        <thead>
+          <tr>
+            <th class="matrix-corner sticky left-0 z-20 px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)]">
+              Domain
+            </th>
+            {MATRIX_COLS.map(col => (
+              <th class="px-2 py-2.5 text-center text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)] min-w-[120px]">
+                {col.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {MATRIX_ROWS.map(row => (
+            <tr class="matrix-row">
+              <td class="matrix-rowlabel sticky left-0 z-10 px-3 py-2 text-sm font-medium text-[var(--color-text-primary)] whitespace-nowrap">
+                {row.label}
+              </td>
+              {MATRIX_COLS.map(col => {
+                const cellTechniques = matrix[row.id][col.id];
+                const count = cellTechniques.length;
+                if (count === 0) {
+                  return (
+                    <td class="matrix-cell px-2 py-2 text-center">
+                      <span class="text-[var(--color-text-faint)] opacity-30">&mdash;</span>
+                    </td>
+                  );
+                }
+                // Count by tier
+                const t1 = cellTechniques.filter(t => evidenceTier(t) === 1).length;
+                const t2 = cellTechniques.filter(t => evidenceTier(t) === 2).length;
+                const t3 = cellTechniques.filter(t => evidenceTier(t) === 3).length;
+                return (
+                  <td class="matrix-cell px-1 py-1.5">
+                    <details class="group">
+                      <summary class="matrix-cell-summary flex items-center justify-center gap-1 px-2 py-1.5 rounded-md cursor-pointer transition-colors">
+                        <span class="flex items-center gap-0.5">
+                          {t1 > 0 && <span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded-full inline-block" style="background: #22c55e;"></span><span class="text-[10px] text-[var(--color-text-muted)]">{t1}</span></span>}
+                          {t2 > 0 && <span class="flex items-center gap-0.5 ml-1"><span class="w-2 h-2 rounded-full inline-block" style="background: #f59e0b;"></span><span class="text-[10px] text-[var(--color-text-muted)]">{t2}</span></span>}
+                          {t3 > 0 && <span class="flex items-center gap-0.5 ml-1"><span class="w-2 h-2 rounded-full inline-block" style="background: #94a3b8;"></span><span class="text-[10px] text-[var(--color-text-muted)]">{t3}</span></span>}
+                        </span>
+                        <svg class="w-3 h-3 text-[var(--color-text-faint)] opacity-0 group-hover:opacity-100 group-open:rotate-180 transition-all shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </summary>
+                      <div class="mt-1.5 space-y-1">
+                        {cellTechniques.sort((a, b) => evidenceTier(a) - evidenceTier(b)).map(t => {
+                          const c = t.tara?.clinical!;
+                          const tier = evidenceTier(t);
+                          return (
+                            <a
+                              href={`/TARA/${t.id}/`}
+                              class="flex items-start gap-2 px-2 py-1.5 rounded hover:bg-white/5 transition-colors border border-transparent hover:border-[var(--color-border)]"
+                            >
+                              <span class="w-2 h-2 rounded-full mt-1 shrink-0" style={`background: ${tierColors[tier].dot};`}></span>
+                              <span class="min-w-0">
+                                <span class="text-[11px] font-medium text-[var(--color-text-primary)] leading-tight block truncate">{c.therapeutic_analog}</span>
+                                <span class="text-[9px] text-[var(--color-text-faint)] font-mono">{t.id}</span>
+                              </span>
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </details>
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    {uncategorized.length > 0 && (
+      <div class="max-w-4xl mx-auto mt-6">
         <details class="glass rounded-lg group">
           <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-white/5 transition-colors rounded-lg">
-            <span class="text-sm font-medium text-[var(--color-text-primary)]">{condition}</span>
-            <span class="flex items-center gap-2">
-              <span class="text-xs text-[var(--color-text-faint)]">
-                {techniques.length} technique{techniques.length !== 1 ? 's' : ''}
-              </span>
-              <svg class="w-3.5 h-3.5 text-[var(--color-text-faint)] group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+            <span class="text-xs font-medium text-[var(--color-text-faint)]">
+              {uncategorized.length} technique{uncategorized.length !== 1 ? 's' : ''} not categorized in the matrix
             </span>
+            <svg class="w-3.5 h-3.5 text-[var(--color-text-faint)] group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
           </summary>
-          <div class="px-4 pb-4 space-y-2">
-            {techniques.map(t => {
+          <div class="px-4 pb-4 space-y-1.5 mt-2">
+            {uncategorized.map(t => {
               const c = t.tara?.clinical!;
-              const fda = fdaColor(c.fda_status);
-              const ev = evidenceColor(c.evidence_level);
               return (
                 <a
                   href={`/TARA/${t.id}/`}
-                  class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 rounded-md hover:bg-white/5 transition-colors border border-transparent hover:border-[var(--color-border)]"
+                  class="flex items-center gap-3 p-2 rounded hover:bg-white/5 transition-colors"
                 >
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
-                    <p class="text-sm font-medium text-[var(--color-text-primary)] truncate">{c.therapeutic_analog}</p>
-                  </div>
-                  <div class="flex flex-wrap gap-1.5 shrink-0">
-                    <span
-                      class="px-2 py-0.5 rounded-full text-[10px] font-medium"
-                      style={`background: ${fda.bg}; color: ${fda.text};`}
-                    >
-                      {c.fda_status}
-                    </span>
-                    <span
-                      class="px-2 py-0.5 rounded-full text-[10px] font-medium"
-                      style={`background: ${ev.bg}; color: ${ev.text};`}
-                    >
-                      {c.evidence_level.replace('_', '-')}
-                    </span>
-                  </div>
+                  <span class="text-xs font-mono text-[var(--color-text-faint)] shrink-0">{t.id}</span>
+                  <span class="text-xs text-[var(--color-text-primary)] truncate">{c.therapeutic_analog}</span>
                 </a>
               );
             })}
           </div>
         </details>
-      ))}
-    </div>
-  </section>
-
-  <!-- ═══ FULL TECHNIQUE LIST ═══ -->
-  <section class="py-12 md:py-16" id="techniques">
-    <div class="flex items-center gap-4 mb-8">
-      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
-      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
-        All {clinical.length} Therapeutic Analogs
-      </h2>
-      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
-    </div>
-
-    <div class="max-w-4xl mx-auto grid gap-3 sm:grid-cols-2">
-      {clinical.sort((a, b) => a.id.localeCompare(b.id)).map(t => {
-        const c = t.tara?.clinical!;
-        const du = t.tara?.dual_use ?? 'silicon_only';
-        const duC = DUAL_USE_COLORS[du as DualUse];
-        const fda = fdaColor(c.fda_status);
-        return (
-          <a
-            href={`/TARA/${t.id}/`}
-            class="glass rounded-lg p-4 hover:ring-1 hover:ring-emerald-500/20 transition-all group"
-          >
-            <div class="flex items-start justify-between gap-2 mb-2">
-              <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
-              <span
-                class="px-2 py-0.5 rounded-full text-[9px] font-semibold uppercase shrink-0"
-                style={`background: ${duC.bg}; color: ${duC.text}; border: 1px solid ${duC.border};`}
-              >
-                {du.replace('_', ' ')}
-              </span>
-            </div>
-            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-emerald-500 transition-colors">
-              {c.therapeutic_analog}
-            </p>
-            <p class="text-xs text-[var(--color-text-faint)] mb-3 line-clamp-1">
-              Attack: {t.name}
-            </p>
-            <div class="flex flex-wrap gap-1.5 mb-2">
-              <span
-                class="px-2 py-0.5 rounded-full text-[10px] font-medium"
-                style={`background: ${fda.bg}; color: ${fda.text};`}
-              >
-                {c.fda_status}
-              </span>
-              {c.conditions.slice(0, 3).map(cond => (
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--color-bg-muted)] text-[var(--color-text-faint)]">
-                  {cond}
-                </span>
-              ))}
-              {c.conditions.length > 3 && (
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--color-bg-muted)] text-[var(--color-text-faint)]">
-                  +{c.conditions.length - 3} more
-                </span>
-              )}
-            </div>
-          </a>
-        );
-      })}
-    </div>
+      </div>
+    )}
   </section>
 
   <!-- ═══ PIVOT TO TARA ═══ -->
@@ -462,5 +582,49 @@ const breadcrumbs = [
   details[open] > summary {
     border-bottom: 1px solid var(--color-border);
     border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  /* Matrix styles */
+  .matrix-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .matrix-table {
+    border-spacing: 0;
+  }
+
+  .matrix-table th,
+  .matrix-table td {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .matrix-table thead th {
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .matrix-corner,
+  .matrix-rowlabel {
+    background: var(--color-bg-primary, #0a0a0f);
+  }
+
+  .matrix-cell-summary:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .matrix-cell details[open] > .matrix-cell-summary {
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: none;
+    border-radius: 0.375rem 0.375rem 0 0;
+  }
+
+  .matrix-cell details[open] {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .matrix-row:last-child td {
+    border-bottom: none;
   }
 </style>
