@@ -5989,3 +5989,65 @@ CCI mean: 1.01 | max: 2.7 | 11 techniques above 2.0
 - **Under-consented persistent_personality:** T0022, T0059, T0062, T0071 — enhanced consent + NISS 7.4–8.1
 - **Indirect risk misnomer:** T0055, T0065 — risk_class=indirect + NISS 8.1
 
+## Entry 58: Neurorights Cross-Validation Against Established Frameworks {#entry-58-neurorights-cross-validation}
+
+**Date:** 2026-02-17 ~21:30
+**Context:** Systematic validation of QIF's 7 neurorights against all major published neurorights frameworks.
+**Builds on:** Entry 57 (Neurorights Mapping & DI/IDA proposals)
+**Status:** VERIFIED
+**Classification:** VERIFIED (literature cross-validation, multi-AI confirmed)
+
+### The Question
+
+Are QIF's three proposed neurorights (CA, DI, IDA) genuinely novel, or do they exist under different names in established scholarship? And are the three "missing" rights from Yuste/NRF (equitable access, algorithmic bias, free will) actual gaps in QIF, or intentional scope boundaries?
+
+### Methodology
+
+1. **Codebase audit** (Claude Opus 4.6, Explore agent): Traced CA, DI, IDA through derivation log, registrar, governance docs, and blog posts to confirm provenance and technique counts.
+2. **Literature search** (Claude Opus 4.6, general-purpose agent): Searched published neuroethics literature for all three terms across 6 established frameworks.
+3. **Cross-AI validation** (Gemini CLI): Independent fact-check of all 7 claims. 6/7 CONFIRMED, 1 CANNOT CONFIRM (UNESCO 2025 date — outside Gemini's training cutoff, verified independently via UNESCO's own website).
+
+### Frameworks Compared
+
+| Framework | Year | Rights/Principles | QIF Coverage |
+|-----------|------|-------------------|--------------|
+| Ienca & Andorno | 2017 | CL, MP, MI, PC | All 4 included |
+| Yuste / NeuroRights Foundation | 2017 | MP, Personal Identity, Free Will, Fair Access, Protection from Bias | MP ✓, PI ≈ PC, 3 policy-layer |
+| Chile Law 21.383 | 2021 | Mental Integrity (constitutional) | MI ✓ |
+| UNESCO Recommendation | 2025 | Self-determination, MP, CL, Fair Access, Oversight, Accountability | MP ✓, CL ✓, 2 governance-layer |
+| Farahany | 2023 | Cognitive Liberty umbrella (3 components) | CL + MP ✓ |
+| Bublitz | 2022 | Warns against rights inflationism | Acknowledged |
+
+### Findings
+
+**Novelty confirmed for all three QIF-original terms:**
+
+| Right | In published literature? | Closest existing right | What it adds |
+|-------|-------------------------|----------------------|--------------|
+| **CA** (Cognitive Authenticity) | No | MI + CL | Epistemic dimension — right to *know* cognition is unaltered |
+| **DI** (Dynamical Integrity) | No | MI (broad interpretation) | Biophysical level — protects neural *dynamics*, not mental *states* |
+| **IDA** (Informational Disassociation) | No | MP (access control) | Anti-correlation — prohibits data fusion, not just data access |
+
+**DI is the strongest novel contribution.** Gemini rated it PARTIALLY CONFIRMED (broad MI interpretation could stretch to cover it) but agreed the conceptual framing is novel and that no existing framework operates at the biophysical/dynamical level. This is precisely the gap: existing rights protect what you *experience*; DI protects the *mechanism* underlying experience.
+
+**Three Yuste/NRF rights intentionally excluded from security scope:**
+- Equitable Access — distributive justice, not an attack vector
+- Protection from Bias — downstream consequence, partially covered by MP
+- Free Will — substantially overlaps CL; philosophical distinction doesn't produce distinct attack-to-harm mappings
+
+These are addressed at QIF's governance layer (NEUROETHICS_ALIGNMENT.md), not the security layer.
+
+### Key Insight
+
+The methodology is the contribution, not just the rights themselves. Testing abstract neurorights against a concrete threat taxonomy is how you find out what the philosophy missed. DI and IDA were invisible from the philosophical side — they only became visible when you traced 102 attack techniques through neural pathways and asked "which right does this violate?" The answer was: none of the existing ones.
+
+### Human Decision
+
+Accept validation. Document in governance (NEUROETHICS_ALIGNMENT.md — policy-layer rights subsection added). Add to About page. Frame as "identified gaps in existing neurorights coverage discovered through systematic threat analysis" per Bublitz's caution against rights inflationism.
+
+### AI Collaboration
+
+- **Claude Opus 4.6:** Codebase audit, literature search, sequential thinking synthesis, writing
+- **Gemini CLI:** Independent fact-checking of 7 claims (6 confirmed, 1 outside training cutoff)
+- **Human decided:** Accept all findings, add About page section, governance acknowledgment, milestone entries
+

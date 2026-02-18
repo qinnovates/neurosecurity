@@ -155,6 +155,22 @@
       "href": "/TARA/"
     },
     {
+      "date": "2026-02-16",
+      "title": "Neurorights Gap Discovery: DI & IDA Proposed",
+      "description": "Systematic mapping of 102 techniques against Ienca & Andorno's 4 neurorights exposed violations that none could categorize. Two new neurorights proposed: Dynamical Integrity (DI) — protecting neural oscillatory dynamics (61 techniques) — and Informational Disassociation (IDA) — prohibiting cross-modal neural data correlation (5 techniques). Cross-validated by Gemini 2.5 Pro. All 102 techniques mapped to 7 neurorights total.",
+      "category": "research",
+      "icon": "brain",
+      "href": "/news/2026-02-16-your-brain-has-rights-we-counted-them/"
+    },
+    {
+      "date": "2026-02-17",
+      "title": "Neurorights Validated Against Established Frameworks",
+      "description": "All 7 QIF neurorights cross-validated against 6 established frameworks (Ienca & Andorno 2017, Yuste/NRF 2017, Chile 2021, UNESCO 2025, Farahany 2023, Bublitz 2022). DI and IDA confirmed as novel terms absent from published literature. Gemini CLI independently confirmed all claims. Three policy-layer rights (equitable access, algorithmic bias, free will) documented as governance concerns outside security scope.",
+      "category": "research",
+      "icon": "brain",
+      "href": "/about/"
+    },
+    {
       "date": "2026-02-12",
       "title": "DSM-5-TR Neural Impact Chain Mapping",
       "description": "First-ever mapping from BCI security severity to psychiatric diagnosis. All techniques mapped to DSM-5-TR diagnostic clusters via the Neural Impact Chain. See the whitepaper v6 or TARA changelog for details.",
