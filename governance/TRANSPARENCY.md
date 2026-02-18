@@ -177,6 +177,7 @@ Key phases include:
 - **Phase 3** (Feb 7–8): Multi-model validation pipeline (Gemini, DeepSeek-R1, QwQ-32B, Grok-3, Claude)
 - **Phase 4** (Feb 8–9): Deep derivation, TARA registry architecture, dual-use gap analysis
 - **Phase 5** (Feb 16): TARA neuroethics gap analysis — Claude sequential thinking identified 7 gaps, Gemini 2.5 Pro validated all 7 + found 3 additional correlations (PINS inversion, persistent_personality under-consenting, indirect risk misnomer) and proposed 2 new neurorights (Dynamical Integrity, Informational Disassociation). Human decided: implement all, add CCI metric.
+- **Phase 6** (Feb 18): NSP cryptographic security audit — Claude Opus 4.6 performed full cryptographic review of NSP-PROTOCOL-SPEC.md, then cross-validated all 7 recommendation categories against published research (Bellare-Hoang EUROCRYPT 2022, BLUFFS ACM CCS 2023, WPES 2022, RFC 8452, NIST IR 8547). Cross-validation corrected 5 initial findings (GCM-SIV not inherently key-committing, padding alone insufficient, OCSP deprecated, 128s→192s not 128f). Human decided: accept all 8 hardening changes, apply to spec as v0.5.
 
 ### Non-AI Tools
 - Rust (NSP/Runemate implementation)
