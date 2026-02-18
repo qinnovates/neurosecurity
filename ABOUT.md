@@ -4,7 +4,7 @@
 
 <div align="center">
 
-*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
+*Connect: <a href="https://github.com/qikevinl" target="_blank">GitHub</a> | <a href="https://medium.com/@qikevinl" target="_blank">Medium</a> | <a href="https://soundcloud.com/keviano/kulhi-loach#t=0:10" target="_blank">Vibe Check</a>*
 
 </div>
 
@@ -149,6 +149,6 @@ If you work with electrodes, patient data, BCI signal processing, neuroethics, o
 
 ---
 
-*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
+*Connect: <a href="https://github.com/qikevinl" target="_blank">GitHub</a> | <a href="https://medium.com/@qikevinl" target="_blank">Medium</a> | <a href="https://soundcloud.com/keviano/kulhi-loach#t=0:10" target="_blank">Vibe Check</a>*
 
 
