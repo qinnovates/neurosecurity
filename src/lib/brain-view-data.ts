@@ -97,8 +97,8 @@ function buildSecurityView(): BrainView {
 
     // Color by severity — red / orange / yellow (consistent across all views)
     const color =
-      count >= 60 ? '#ef4444'
-      : count >= 30 ? '#f97316'
+      count >= 40 ? '#ef4444'
+      : count >= 25 ? '#f97316'
       : '#eab308';
 
     // Collect unique attack categories
@@ -157,7 +157,7 @@ function buildClinicalView(): BrainView {
 
     // Color by therapy count — red / orange / yellow (consistent across all views)
     const color =
-      count >= 50 ? '#ef4444'
+      count >= 40 ? '#ef4444'
       : count >= 25 ? '#f97316'
       : '#eab308';
 
@@ -218,8 +218,8 @@ function buildGovernanceView(): BrainView {
 
     // Color by threat count — red / orange / yellow (consistent across all views)
     const color =
-      count >= 60 ? '#ef4444'
-      : count >= 30 ? '#f97316'
+      count >= 40 ? '#ef4444'
+      : count >= 25 ? '#f97316'
       : '#eab308';
 
     // Badges = neurorights protecting this region
