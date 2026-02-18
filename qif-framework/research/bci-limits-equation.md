@@ -1,8 +1,10 @@
 ---
 title: "The Physics Equation That Limits Every Brain-Computer Interface"
-status: "documented"
+status: "needs-verification"
 updated: "2026-02-18"
 ---
+
+**Status: Needs independent verification.** The equations and constraints below have been cross-validated by Gemini (Entry 66) but have not been peer-reviewed or empirically tested. Treat all claims as hypotheses until verified by domain experts in biomedical engineering, thermodynamics, and electrode physics.
 
 Nobody has published the equation that tells you what a brain-computer interface physically cannot do.
 
