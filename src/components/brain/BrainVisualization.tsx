@@ -235,10 +235,9 @@ export default function BrainVisualization({ views, defaultView }: Props) {
     ? activeView.regions.find(r => r.id === activeRegion)
     : null;
 
-  // Reset selected region when switching views
+  // Keep selected region when switching views so the panel updates in-place
   const handleViewChange = (viewId: string) => {
     setActiveViewId(viewId);
-    setActiveRegion(null);
   };
 
   return (
