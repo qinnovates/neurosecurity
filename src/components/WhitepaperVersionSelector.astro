@@ -9,8 +9,7 @@ const versions = [
   { label: 'v6.2.2', href: '/whitepaper/', current: true, date: '2026-02-17', note: 'Neurorights cross-validation' },
   { label: 'v6.0', href: '/whitepaper/v6/', current: false, date: '2026-02-16', note: 'Neurorights mapping, CCI, governance' },
   { label: 'v5.2', href: '/whitepaper/v5/', current: false, date: '2026-02-10', note: 'NISS scoring, NSP protocol, DSM-5' },
-  { label: 'v3.1', href: '/whitepaper/v3/', current: false, date: '2026-02-05', note: 'Three-pillar architecture, hourglass' },
-  { label: 'v2.0', href: '/whitepaper/v2/', current: false, date: '2026-01-20', note: 'Foundational hourglass model' },
+  { label: 'All older', href: 'https://github.com/qinnovates/qinnovate/tree/main/src/pages/whitepaper', current: false, date: '', note: 'v3.1, v2.0, and earlier', external: true },
 ];
 ---
 
@@ -19,6 +18,7 @@ const versions = [
   <div class="space-y-1">
     {versions.map((v) => {
       const isActive = v.label === currentVersion;
+      const isExternal = (v as any).external;
       return (
         <a
           href={v.href}
@@ -29,6 +29,7 @@ const versions = [
               : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-surface)]',
           ]}
           aria-current={isActive ? 'page' : undefined}
+          {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         >
           <div class="flex items-center gap-2">
             <span
@@ -45,13 +46,18 @@ const versions = [
                 Current
               </span>
             )}
-            {!v.current && (
+            {!v.current && !isExternal && (
               <span class="ml-auto text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-faint)] border border-[var(--color-border)] rounded px-1 py-0.5 leading-none">
                 Archive
               </span>
             )}
+            {isExternal && (
+              <svg class="ml-auto w-3 h-3 text-[var(--color-text-faint)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            )}
           </div>
-          <span class="text-[10px] text-[var(--color-text-faint)] ml-3.5 mt-0.5 leading-tight">{v.date} &mdash; {v.note}</span>
+          <span class="text-[10px] text-[var(--color-text-faint)] ml-3.5 mt-0.5 leading-tight">{v.date ? `${v.date} — ` : ''}{v.note}</span>
         </a>
       );
     })}

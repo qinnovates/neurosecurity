@@ -6,6 +6,7 @@ const currentPath = Astro.url.pathname;
 const researchLinks = [
   { href: '/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification and research paper' },
   { href: '/TARA/', label: 'TARA Atlas', desc: '102 BCI attack techniques, scored and mapped' },
+  { href: '/neurogovernance/', label: 'Neurogovernance', desc: 'Neurorights mapped to brain regions and threats' },
   { href: '/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring System' },
   { href: '/case-studies/t0079-anc-fingerprint/', label: 'Case Studies', desc: 'Real-world hardware security validation' },
   { href: '/glossary/', label: 'Glossary', desc: 'QIF terminology reference' },
@@ -24,7 +25,7 @@ const aboutLinks = [
   { href: '/roadmap/', label: 'Roadmap', desc: 'Framework version history' },
 ];
 
-const isResearchActive = ['/whitepaper/', '/TARA/', '/scoring/', '/case-studies/', '/glossary/'].some(p => currentPath.startsWith(p));
+const isResearchActive = ['/whitepaper/', '/TARA/', '/scoring/', '/case-studies/', '/glossary/', '/neurogovernance/'].some(p => currentPath.startsWith(p));
 const isFrameworkActive = ['/framework/', '/nsp/', '/runemate/', '/explore/', '/explorer/'].some(p => currentPath.startsWith(p));
 const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith('/publications/');
 const isAboutActive = currentPath.startsWith('/about/') || currentPath.startsWith('/roadmap/');
