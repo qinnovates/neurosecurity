@@ -18,7 +18,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 >
 > This project is early-stage research by a solo researcher. The frameworks, threat models, and scoring systems published here are derived from existing peer-reviewed neuroscience, physics, and cybersecurity literature, combined with the author's professional security experience. They have not been independently peer-reviewed or empirically validated as a whole.
 >
-> **What has been tested:** A small number of TARA techniques have been validated through direct experimentation (e.g., LSL protocol vulnerability, CVE disclosed). The individual research papers cited throughout are peer-reviewed and verified.
+> **What has been tested:** A small number of TARA techniques have been validated through direct experimentation, including protocol-level vulnerability research with coordinated disclosure. The individual research papers cited throughout are peer-reviewed and verified.
 >
 > **What has not been tested:** The majority of the 103 TARA techniques are theoretical threat models constructed from published research. The attack chains, NISS scores, Neural Impact Chains, DSM-5-TR diagnostic mappings, and depth-of-penetration models are analytical derivations, not empirical results. The BCI limits equation is a hypothesis awaiting validation. The NSP protocol has been implemented but not deployed on real BCI hardware.
 >
