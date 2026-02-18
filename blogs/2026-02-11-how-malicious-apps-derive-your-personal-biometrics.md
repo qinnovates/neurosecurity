@@ -6,6 +6,8 @@ source: "https://qinnovate.com"
 tags: ["#TARA", "#NeurosecurityEngineering", "#QIF", "#BCI", "#ConsumerSensors", "#SDomain", "#Biometrics", "#Privacy", "#SensorExploitation"]
 ---
 
+> **Research validation:** The claims in this post are backed by a hardware-validated case study. We tested ANC ear canal fingerprinting on real devices — 2 subjects, 2 devices, 6 sessions, >99% identification accuracy. The probe signal is inaudible at 47 dB below music. [Read the full T0079 case study with methodology and results →](/case-studies/t0079-anc-fingerprint/)
+
 ## Your $20 Headphones Are a Medical Device
 
 You do not need AirPods Pro with a health sensor. You do not need a Pixel Watch with PPG. A pair of ten-year-old wired headphones plugged into a laptop can measure your heart rate.
