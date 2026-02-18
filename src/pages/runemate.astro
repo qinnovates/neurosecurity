@@ -771,15 +771,30 @@ cargo test</code></pre>
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Where help is needed</p>
           <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
             <p><strong class="text-[var(--color-text-primary)]">Rust / Systems.</strong> The <code>no_std</code> runtime (Phase 2) needs a bare-metal bytecode interpreter. If you've worked on embedded Rust, firmware, or RTOS, this is the critical path.</p>
-            <p><strong class="text-[var(--color-text-primary)]">Cryptography.</strong> The NSP encryption pipeline uses AES-256-GCM today. Integrating ML-KEM (FIPS 203) for the full post-quantum handshake is next.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Cryptography.</strong> The NSP encryption pipeline uses AES-256-GCM-SIV with the Bellare-Hoang key-commitment transform. Formal security proof of the handshake protocol is the next milestone.</p>
             <p><strong class="text-[var(--color-text-primary)]">Neuroscience.</strong> Validating the retinotopic / tonotopic / somatotopic coordinate transforms against published cortical mapping data.</p>
             <p><strong class="text-[var(--color-text-primary)]">Security review.</strong> Formal analysis of the Staves bytecode format for safety-completeness: can every valid bytecode produce only safe stimulation patterns?</p>
           </div>
         </div>
 
-        <div class="mt-6 text-sm text-[var(--color-text-muted)]">
-          <p>
-            Open an issue or submit a PR on <a href="https://github.com/qinnovates/qinnovate/issues" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub</a>. For questions or discussion, use <a href="https://github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub Discussions</a>.
+        <div class="glass rounded-xl p-6 sm:p-8 mt-6" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Academic collaboration:</strong> This is active research. As this work enters the academic landscape, formal collaboration will further solidify the compiler, safety proofs, and neuroscience foundations. If you're interested in contributing now &mdash; or exploring collaboration once institutional frameworks are in place &mdash; reach out via <a href="https://github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub Discussions</a> or open an issue on <a href="https://github.com/qinnovates/qinnovate/issues" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub</a>.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mt-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">How Runemate Fits</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            Runemate is the application layer of a three-part stack:
+          </p>
+          <div class="space-y-2 text-sm text-[var(--color-text-muted)]">
+            <p><strong class="text-[var(--color-accent-primary)]">QIF</strong> (Framework) defines what to protect and where the attack surfaces are.</p>
+            <p><strong class="text-[var(--color-accent-secondary)]">NSP</strong> (Protocol) implements the cryptographic wire protocol. The handshake is a fixed one-time cost; every subsequent operation reuses the session.</p>
+            <p><strong class="text-[var(--color-accent-tertiary)]">Runemate</strong> (Application) compiles and encrypts neural UIs using the established NSP session &mdash; the post-quantum overhead is amortized to zero.</p>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">
+            See the full architecture at <a href="/nsp/#how-it-fits" class="text-[var(--color-accent-primary)] hover:underline">NSP &rarr; How It Fits</a>.
           </p>
         </div>
       </section>

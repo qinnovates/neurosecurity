@@ -31,7 +31,9 @@ import {
           { href: '#power', label: 'Power Budget' },
           { href: '#pqc', label: 'PQC Key Sizes' },
           { href: '#pipeline', label: 'Pipeline' },
+          { href: '#how-it-fits', label: 'How It Fits' },
           { href: '#spec', label: 'Specification' },
+          { href: '#collaborate', label: 'Collaborate' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -404,7 +406,7 @@ import {
         </div>
 
         <div class="glass rounded-xl p-6 mb-8">
-          <div class="grid sm:grid-cols-2 gap-4">
+          <div class="grid sm:grid-cols-3 gap-4">
             <div>
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Device Lifetime</p>
               <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.deviceLifetime_years} years</p>
@@ -414,12 +416,20 @@ import {
               <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.sessionKeyRotation_seconds}s</p>
             </div>
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">DRK Rotation (Max)</p>
-              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.drkRotation_days} days</p>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Key Rotation (T3 / T1-T2)</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.drkRotation_days_T3}d / {NSP_KEY_LIFECYCLE.drkRotation_days_T1_T2}d</p>
             </div>
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">DRK Rotation (Recommended)</p>
-              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.drkRotation_recommended_days} days</p>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Session Ticket (T3)</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.sessionTicket_hours_T3}h</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Session Ticket (T2)</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.sessionTicket_hours_T2}h</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Session Ticket (T1)</p>
+              <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{NSP_KEY_LIFECYCLE.sessionTicket_hours_T1}h</p>
             </div>
           </div>
         </div>
@@ -427,6 +437,79 @@ import {
         <div class="prose">
           <p>
             The specification is maintained alongside the QIF framework. For the complete document, see the <a href="/whitepaper/">QIF Whitepaper</a> which includes the NSP specification as a companion protocol.
+          </p>
+        </div>
+      </section>
+
+      <!-- How It Fits -->
+      <section id="how-it-fits" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">How It All Fits Together</h2>
+        <div class="prose mb-8">
+          <p>
+            NSP doesn't exist in isolation. It's the wire-level implementation of the <a href="/whitepaper/" class="text-[var(--color-accent-primary)] hover:underline">QIF security framework</a>, and it's already integrated into <a href="/runemate/" class="text-[var(--color-accent-primary)] hover:underline">Runemate</a> as the encryption layer for neural UI delivery.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-16 text-center">
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">QIF</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-[var(--color-text-primary)]">Framework</p>
+                <p class="text-sm text-[var(--color-text-muted)]">Defines the 11-band hourglass model, threat taxonomy, and NISS scoring. QIF says <em>what</em> to protect and <em>where</em> the attack surfaces are.</p>
+              </div>
+            </div>
+            <div class="border-l-2 border-dashed border-[var(--color-border)] ml-8 h-4"></div>
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-16 text-center">
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)]">NSP</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-[var(--color-text-primary)]">Protocol</p>
+                <p class="text-sm text-[var(--color-text-muted)]">Implements QIF's security requirements as a wire protocol. Handles the handshake, encryption, signing, and key lifecycle. The handshake is a fixed one-time cost (~10-12 KB); after that, the session is established and every subsequent operation is microseconds of AES-256-GCM-SIV.</p>
+              </div>
+            </div>
+            <div class="border-l-2 border-dashed border-[var(--color-border)] ml-8 h-4"></div>
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-16 text-center">
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)]">Runemate</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-[var(--color-text-primary)]">Application</p>
+                <p class="text-sm text-[var(--color-text-muted)]">The first application built on NSP. Compiles neural UI definitions (Staves DSL) into compact bytecode and encrypts them using the established NSP session. Every stave compile-and-deliver cycle reuses the session key &mdash; the post-quantum handshake cost is paid once, amortized to zero.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Collaborate -->
+      <section id="collaborate" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Collaborate</h2>
+        <div class="prose mb-8">
+          <p>
+            NSP is active research. The protocol specification, reference implementation, and cryptographic analysis are being developed openly. As this work enters the academic landscape, formal collaboration with neuroscientists, cryptographers, and BCI engineers will further solidify the protocol.
+          </p>
+          <p>
+            If you're working in post-quantum cryptography, BCI security, neural signal processing, or embedded systems and are interested in contributing, we want to hear from you.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Areas for Collaboration</p>
+          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+            <p><strong class="text-[var(--color-text-primary)]">Formal Security Proof.</strong> Security reduction of the NSP handshake in the Bellare-Rogaway model. Mechanized verification (Tamarin/ProVerif) is the gold standard.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Hardware Validation.</strong> Power budget benchmarking on real BCI hardware. The spec's 3.25% overhead estimate needs hardware confirmation.</p>
+            <p><strong class="text-[var(--color-text-primary)]">QI Scoring Validation.</strong> Testing QI anomaly detection against real neural datasets and adversarial signal injection.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Traffic Analysis Research.</strong> Evaluating constant-rate transmission effectiveness against ML-based classifiers on BCI traffic patterns.</p>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Get in touch:</strong> Open an issue or start a discussion on <a href="https://github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub Discussions</a>. The full specification is at <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/NSP-PROTOCOL-SPEC.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline font-[family-name:var(--font-mono)] text-xs">NSP-PROTOCOL-SPEC.md</a>.
           </p>
         </div>
       </section>

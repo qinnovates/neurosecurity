@@ -1,9 +1,9 @@
 # Neural Sensory Protocol (NSP) — Protocol Specification
 
 ```
-Title:          Neural Sensory Protocol (NSP) v0.4
-Version:        0.4
-Date:           2026-02-14
+Title:          Neural Sensory Protocol (NSP) v0.5
+Version:        0.5
+Date:           2026-02-18
 Status:         Implemented (Alpha)
 Author:         Kevin Qi (Qinnovate)
 Framework:      QIF v4.0 Hourglass Model (11-band, 7-1-3)
@@ -88,7 +88,7 @@ NSP defines five defense layers. Each layer operates independently. Failure of o
 |  [All device classes]                                          |
 +================================================================+
 |  LAYER 2: Hybrid Post-Quantum Key Exchange                     |
-|  ECDH + ML-KEM, ML-DSA signatures, AES-256-GCM encryption     |
+|  ECDH + ML-KEM, ML-DSA signatures, AES-256-GCM-SIV encryption |
 |  [All device classes]                                          |
 +================================================================+
 |  LAYER 1: Hardware Root of Trust                               |
@@ -116,7 +116,7 @@ Raw Neural Data
   [3] BUILD NSP FRAME (header + compressed payload + Merkle link)
        |
        v
-  [4] ENCRYPT (AES-256-GCM, authenticated)
+  [4] ENCRYPT (AES-256-GCM-SIV, nonce-misuse-resistant + key-committing)
        |
        v
   [5] SIGN (ML-DSA per frame group, SPHINCS+ for key rotation)
@@ -139,9 +139,9 @@ NSP defines three device classes. Each class activates a subset of the five laye
 
 | Tier | Device Class | Examples | Active Layers | Mandatory |
 |------|-------------|----------|---------------|-----------|
-| **T1** | Consumer | Muse, NeuroSky, OpenBCI | 2, 3 | YES |
-| **T2** | Clinical | Synchron Stentrode, research EEG | 1, 2, 3, 4 | YES |
-| **T3** | Implanted | Neuralink N1, deep brain stimulators | 1, 2, 3, 4, 5 | YES (L5 when available) |
+| **T1** | Consumer | Consumer EEG headbands, hobby-grade BCIs | 2, 3 | YES |
+| **T2** | Clinical | Endovascular stent-electrodes, research EEG | 1, 2, 3, 4 | YES |
+| **T3** | Implanted | Cortical implants, deep brain stimulators | 1, 2, 3, 4, 5 | YES (L5 when available) |
 
 A device claiming NSP compliance at tier T(n) MUST implement all layers designated as active for that tier. A device MAY implement layers from a higher tier. A consumer device implementing Layer 1 MAY claim T2 compliance if it satisfies all T2 requirements.
 
@@ -177,15 +177,15 @@ However, IETF drafts for PQC in TLS (draft-ietf-tls-hybrid-design-16, draft-ietf
 
 #### 2.5.3 No BCI Manufacturer Has Published a Security Specification
 
-| Device | Encryption | Key Exchange | Security Audit |
-|--------|-----------|-------------|----------------|
-| Neuralink N1 | Claims AES-256 | Claims proprietary OOB pairing | **None published** |
-| Synchron Stentrode | Unknown | Unknown | **None published** |
-| Blackrock NeuroPort | Unknown (wired 510(k)) | N/A (wired) | **None published** |
-| Emotiv EPOC | AES-128-ECB (broken 2010) | Key derived from serial number | **Cracked publicly** |
-| OpenBCI Cyton/Ganglion | **None documented** | **None** | **None published** |
+| Device Class | Encryption | Key Exchange | Security Audit |
+|--------------|-----------|-------------|----------------|
+| Leading cortical implant | Claims AES-256 | Claims proprietary OOB pairing | **None published** |
+| Endovascular stent-electrode | Unknown | Unknown | **None published** |
+| Wired intracortical array (510(k)) | Unknown (wired) | N/A (wired) | **None published** |
+| Consumer EEG headset (example) | AES-128-ECB (broken 2010) | Key derived from serial number | **Cracked publicly** |
+| Open-source EEG boards | **None documented** | **None** | **None published** |
 
-Sources: [CryptoFails (Emotiv)](https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode); [OpenBCI SDK Docs](https://docs.openbci.com/Cyton/CytonSDK/); [Bernal et al., ACM Computing Surveys 54(1), 2021](https://dl.acm.org/doi/10.1145/3427376)
+Sources: [CryptoFails (consumer EEG)](https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode); [Bernal et al., ACM Computing Surveys 54(1), 2021](https://dl.acm.org/doi/10.1145/3427376)
 
 The ACM Computing Surveys review by Bernal et al. (2021) concludes: "From the security perspective, BCIs are in an early and immature stage."
 
@@ -252,9 +252,10 @@ Every NSP frame begins with a fixed 24-byte header, followed by a variable-lengt
 | Reserved | 20 | 4 bytes | Reserved for future use. Senders MUST set to zero. Receivers MUST ignore. |
 | Payload | 24 | variable | Compressed and encrypted neural data. |
 | Merkle Hash Link | 24+len | 32 bytes | SHA-256 hash linking this frame to its Merkle tree. See Section 3.6. |
-| Auth Tag | 56+len | 16 bytes | AES-256-GCM authentication tag covering header + payload + Merkle link. |
+| Auth Tag | 56+len | 16 bytes | AES-256-GCM-SIV authentication tag covering header + payload + Merkle link. |
+| Commitment Tag | 72+len | 32 bytes | HMAC-SHA-256 key-commitment tag (Section 5.4.1). |
 
-Total frame overhead (excluding payload): 24 (header) + 32 (Merkle) + 16 (auth tag) = **72 bytes**.
+Total frame overhead (excluding payload): 24 (header) + 32 (Merkle) + 16 (auth tag) + 32 (commitment) = **104 bytes**.
 
 ### 3.3 Flags Field
 
@@ -332,7 +333,7 @@ The `0x00`/`0x01` domain separation prefix prevents second preimage attacks on t
 ```
 Merkle Root = BinaryMerkleTree(H0, H1, ..., H_{G-1})
 
-Group Signature = ML-DSA-65(Merkle Root) || SPHINCS+-SHA2-128s(Merkle Root)
+Group Signature = ML-DSA-65(Merkle Root) || SPHINCS+-SHA2-192s(Merkle Root)
 ```
 
 For a `frame_group_size` of 1, the Merkle tree construction is bypassed. The group signature consists only of the ML-DSA-65 signature computed over the SHA-256 hash of the single encrypted frame. The SPHINCS+ signature is omitted in this minimum-latency configuration; SPHINCS+ signing is deferred to key rotation events (Section 7.3) where its stronger security assumptions justify the cost.
@@ -348,7 +349,7 @@ For group sizes greater than 1, the last frame in a group (GROUP_FINAL flag set)
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                                                               |
-|     SPHINCS+-SHA2-128s Signature (7,856 bytes)                |
+|     SPHINCS+-SHA2-192s Signature (16,224 bytes)               |
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
@@ -456,7 +457,7 @@ Implementations MUST support group sizes of 1, 10, and 100 at minimum. Other siz
      |  shared_secret = KDF(ecdh_secret || mlkem_secret)     |
      |  session_key = HKDF-SHA-384(shared_secret,            |
      |                salt=random_D||random_R,               |
-     |                info="NSP-v0.1-session-key")           |
+     |                info="NSP-v0.5-session-key")           |
      |                                                       |
      |  [KEY_EXCHANGE -> AUTHENTICATE]                       |
      |                                                       |
@@ -503,26 +504,49 @@ The `HelloRetryRequest` does not count toward the 5-second handshake timeout. Th
 
 ### 4.4 Transcript Hash
 
-The transcript hash is computed incrementally over all handshake messages sent and received, in order. It provides binding between the key exchange, cookie verification, and authentication phases.
+The transcript hash is computed incrementally over all handshake messages sent and received, in order. It provides binding between the key exchange, cookie verification, authentication phases, and the underlying BLE link layer.
 
 If no `HelloRetryRequest` was sent:
 
 ```
-transcript_hash = SHA-384(ClientHello || ServerHello || ClientKeyExchange || ServerKeyExchange)
+transcript_hash = SHA-384(
+    ble_channel_binding || ClientHello || ServerHello || ClientKeyExchange || ServerKeyExchange
+)
 ```
 
 If a `HelloRetryRequest` was sent (Section 4.3.1):
 
 ```
 transcript_hash = SHA-384(
+    ble_channel_binding ||
     ClientHello_initial || HelloRetryRequest || ClientHello_retry ||
     ServerHello || ClientKeyExchange || ServerKeyExchange
 )
 ```
 
+#### 4.4.1 BLE Channel Binding
+
+The `ble_channel_binding` value cryptographically binds the NSP session to the underlying BLE link-layer connection. Without this binding, an attacker who can MITM the BLE layer (via KNOB [CVE-2019-9506], BLESA, or BLUFFS [CVE-2023-24023] attacks) can relay NSP handshakes between devices undetected.
+
+The channel binding value is computed as:
+
+```
+ble_channel_binding = SHA-256(
+    "NSP-v0.5-ble-binding" ||
+    ble_ltk_rand (8 bytes) ||
+    ble_ediv (2 bytes) ||
+    ble_pairing_public_key_local (optional, 32 bytes) ||
+    ble_pairing_public_key_remote (optional, 32 bytes)
+)
+```
+
+Where `ble_ltk_rand` and `ble_ediv` are the BLE Long Term Key random value and Encrypted Diversifier from the BLE pairing process. If BLE Secure Connections (LE Secure Connections) are used, the pairing public keys SHOULD also be included.
+
+If the transport is not BLE (e.g., wired USB, Wi-Fi), `ble_channel_binding` is set to 32 bytes of zeros. This maintains protocol compatibility while signaling that no link-layer binding is present.
+
 Including the `HelloRetryRequest` and both ClientHello messages in the transcript binds the cookie exchange to the authenticated session. Without this, an attacker could inject a spurious retry request and desynchronize the transcript view between endpoints.
 
-Both sides MUST compute the transcript hash identically. The ML-DSA signature in the AUTHENTICATE phase covers this hash. Any modification to any handshake message causes authentication failure.
+Both sides MUST compute the transcript hash identically. The ML-DSA signature in the AUTHENTICATE phase covers this hash. Any modification to any handshake message — or any mismatch in BLE link-layer state — causes authentication failure.
 
 ### 4.5 Cipher Suite Negotiation
 
@@ -530,11 +554,16 @@ The ClientHello message contains an ordered list of supported cipher suites. The
 
 | Suite ID | KEM | Signature | Encryption | KDF | Status |
 |----------|-----|-----------|------------|-----|--------|
-| 0x0001 | ECDH-P256 + ML-KEM-768 | ML-DSA-65 + SPHINCS+-SHA2-128s | AES-256-GCM | HKDF-SHA-384 | MANDATORY |
-| 0x0002 | ECDH-P384 + ML-KEM-1024 | ML-DSA-87 + SPHINCS+-SHA2-256s | AES-256-GCM | HKDF-SHA-384 | OPTIONAL |
-| 0x0003 | ML-KEM-768 (PQC-only) | ML-DSA-65 + SPHINCS+-SHA2-128s | AES-256-GCM | HKDF-SHA-384 | OPTIONAL |
+| 0x0001 | ECDH-P256 + ML-KEM-768 | ML-DSA-65 + SPHINCS+-SHA2-128s | AES-256-GCM-SIV | HKDF-SHA-384 | MANDATORY (T1) |
+| 0x0002 | ECDH-P384 + ML-KEM-1024 | ML-DSA-87 + SPHINCS+-SHA2-256s | AES-256-GCM-SIV | HKDF-SHA-384 | OPTIONAL |
+| 0x0003 | ML-KEM-768 (PQC-only) | ML-DSA-65 + SPHINCS+-SHA2-128s | AES-256-GCM-SIV | HKDF-SHA-384 | OPTIONAL |
+| 0x0004 | ECDH-P256 + ML-KEM-768 | ML-DSA-65 + SPHINCS+-SHA2-192s | AES-256-GCM-SIV | HKDF-SHA-384 | MANDATORY (T2, T3) |
 
-Suite 0x0001 is MANDATORY. All NSP implementations MUST support it. Suite 0x0003 removes the classical ECDH component for environments that require pure post-quantum operation.
+Suite 0x0001 is MANDATORY for T1 (consumer) devices. Suite 0x0004 is MANDATORY for T2 and T3 devices — it upgrades SPHINCS+ from NIST Level 1 (128s) to Level 3 (192s), providing stronger post-quantum signature security for clinical and implanted devices with 10+ year operational lifetimes. Suite 0x0003 removes the classical ECDH component for environments that require pure post-quantum operation.
+
+All suites use AES-256-GCM-SIV (RFC 8452) instead of AES-256-GCM. GCM-SIV provides nonce-misuse resistance: if a nonce is accidentally reused (e.g., after unexpected device reboot), the only information leaked is whether the same plaintext was encrypted twice. Standard GCM catastrophically leaks the authentication key on nonce reuse. For implanted devices that may lose power unexpectedly, this property is critical. See Section 5.4 for details.
+
+All suites additionally apply the Bellare-Hoang key-commitment transform (Section 5.4.1) to provide key-committing AEAD. See Section 10.7 for the threat model.
 
 ### 4.6 Handshake Timing
 
@@ -553,10 +582,16 @@ NSP supports session resumption using a pre-shared key (PSK) derived from a prev
 
 1. The ClientHello includes a `session_ticket` extension.
 2. If the server recognizes the ticket and the ticket has not expired, the KEY_EXCHANGE phase MAY be skipped.
-3. A new session key is derived: `HKDF-SHA-384(resumption_secret, salt=random_D||random_R, info="NSP-v0.1-resumption")`.
+3. A new session key is derived: `HKDF-SHA-384(resumption_secret, salt=random_D||random_R, info="NSP-v0.5-resumption")`.
 4. Both sides proceed directly to AUTHENTICATE.
 
-Session tickets MUST expire after 24 hours. Session tickets MUST be stored in the secure enclave.
+Session ticket lifetimes are tier-dependent:
+
+- **T1 (Consumer):** Session tickets MUST expire after 24 hours.
+- **T2 (Clinical):** Session tickets MUST expire after 8 hours.
+- **T3 (Implanted):** Session tickets MUST expire after 1 hour. Each resumed session MUST issue a new ticket, invalidating the old one. At most 2 valid tickets (current + previous) MAY exist simultaneously to handle race conditions.
+
+Session tickets MUST be stored in the secure enclave. A stolen session ticket allows impersonation for its remaining lifetime. For implanted devices that cannot be physically re-keyed, minimizing this window is critical.
 
 ### 4.8 Handshake Message Definitions
 
@@ -751,7 +786,7 @@ struct {
     uint16          signature_length;
     opaque          mldsa_signature<0..4627>;   // ML-DSA signature over rotation transcript
     uint16          sphincsplus_signature_length;
-    opaque          sphincsplus_signature<0..7856>; // SPHINCS+ signature (initiate and confirm only)
+    opaque          sphincsplus_signature<0..16224>; // SPHINCS+ signature (initiate and confirm only; 192s for T2/T3)
 } KeyRotationPayload;
 ```
 
@@ -792,23 +827,27 @@ ML-DSA-65 provides post-quantum digital signatures based on the Module Learning 
 
 ML-DSA-65 is used for real-time operations where signature generation and verification must complete within frame timing constraints.
 
-### 5.3 SPHINCS+-SHA2-128s (FIPS 205)
+### 5.3 SLH-DSA / SPHINCS+ (FIPS 205)
 
 SLH-DSA (SPHINCS+) provides post-quantum digital signatures based exclusively on hash functions. Security assumptions are more conservative than lattice-based schemes.
 
-| Parameter | Value |
-|-----------|-------|
-| Security level | NIST Level 1 (128-bit) |
-| Public key size | 32 bytes |
-| Signature size | 7,856 bytes |
-| Signing speed | Slow (relative to ML-DSA) |
-| Usage | Firmware signing, key rotation signing, Merkle group signatures |
+NSP uses two SPHINCS+ parameter sets, tiered by device class:
+
+| Parameter | SPHINCS+-SHA2-128s (T1) | SPHINCS+-SHA2-192s (T2, T3) |
+|-----------|------------------------|----------------------------|
+| Security level | NIST Level 1 (128-bit) | NIST Level 3 (192-bit) |
+| Public key size | 32 bytes | 48 bytes |
+| Signature size | 7,856 bytes | 16,224 bytes |
+| Signing speed | Slow (relative to ML-DSA) | Slower |
+| Usage | Consumer Merkle group sigs | Clinical/implant Merkle group sigs, key rotation, firmware |
+
+**Rationale for Level 3 on T2/T3:** For devices with 10+ year operational lifetimes (implants, clinical systems), NIST Level 1 provides only ~64-bit quantum security — thin margin against advances in quantum computing over the device's lifespan. Level 3 (192-bit classical / ~96-bit quantum) provides substantial margin. While SPHINCS+ signatures protect integrity (not confidentiality) — there is no "harvest now, forge later" threat — the conservatism is justified by the irreversibility of implant deployment. The signature size increase (7,856 → 16,224 bytes) is absorbed by Merkle amortization across frame groups.
 
 SPHINCS+ is used for infrequent, high-security operations where larger signature sizes and slower computation are acceptable. Its hash-based security assumptions have been studied for decades and carry less cryptanalytic risk than lattice problems.
 
-### 5.4 AES-256-GCM (FIPS 197 + SP 800-38D)
+### 5.4 AES-256-GCM-SIV (RFC 8452)
 
-AES-256-GCM provides authenticated encryption with associated data (AEAD).
+AES-256-GCM-SIV provides nonce-misuse-resistant authenticated encryption with associated data (AEAD).
 
 | Parameter | Value |
 |-----------|-------|
@@ -816,7 +855,10 @@ AES-256-GCM provides authenticated encryption with associated data (AEAD).
 | Nonce size | 96 bits (12 bytes) |
 | Auth tag size | 128 bits (16 bytes) |
 | Quantum resistance | Grover reduces effective security to 128 bits. Sufficient per NIST guidance. |
+| Nonce misuse resistance | YES — if a nonce is reused, only reveals whether the same plaintext was encrypted. No authentication key leak. |
 | Usage | Per-frame payload encryption and integrity |
+
+**Why GCM-SIV instead of GCM:** Standard AES-GCM catastrophically fails on nonce reuse — it leaks the GHASH authentication key, enabling arbitrary forgeries on all past and future messages under the same key. For implanted BCI devices that may reboot unexpectedly (power loss, seizure-induced reset, firmware crash), counter state can be lost, risking nonce reuse. AES-GCM-SIV degrades gracefully: the only information leaked on nonce reuse is whether the same (nonce, plaintext, associated-data) triple was encrypted twice. No authentication keys are exposed and no forgeries become possible. The performance overhead is minimal — decryption is within ~5% of GCM speed; encryption requires two passes but this is negligible for small neural data packets (typically < 2 KB).
 
 The nonce MUST be constructed as:
 
@@ -830,13 +872,32 @@ The `session_nonce_prefix` is derived during key establishment:
 session_nonce_prefix = HKDF-SHA-384(
     IKM  = session_key_material,
     salt = random_D || random_R,
-    info = "NSP-v0.1-nonce-prefix"
+    info = "NSP-v0.5-nonce-prefix"
 )[0:8]
 ```
 
 The `sequence_number` is the 4-byte frame sequence number from the NSP frame header (Section 3.2). Each frame produces exactly one nonce. There is no sub-counter or fragmentation within a single frame.
 
-Nonce reuse under the same key is catastrophic: it allows an attacker to recover the GCM authentication key and forge arbitrary messages. Implementations MUST NOT reuse a (key, nonce) pair. Since the sequence number is monotonically increasing and unique per frame, nonce uniqueness is guaranteed as long as the sequence number does not wrap within a single session key lifetime (see Section 10.5).
+Even with GCM-SIV's nonce-misuse resistance, implementations SHOULD NOT reuse nonces. The nonce-misuse resistance is a safety net, not a license for careless nonce management. Since the sequence number is monotonically increasing and unique per frame, nonce uniqueness is guaranteed as long as the sequence number does not wrap within a single session key lifetime (see Section 10.5).
+
+#### 5.4.1 Key-Commitment Transform
+
+Neither AES-GCM nor AES-GCM-SIV is inherently key-committing. A ciphertext can decrypt validly under multiple keys. In multi-device BCI scenarios (hub receiving from multiple implants), this enables an attacker who compromises one device's key to craft ciphertexts that decrypt "validly" under a different device's key, injecting crafted neural data.
+
+NSP applies the Bellare-Hoang key-commitment transform [BH2022] to AES-256-GCM-SIV. After standard encryption, an additional commitment tag is computed:
+
+```
+commitment_tag = HMAC-SHA-256(
+    key = session_key,
+    message = nonce || ciphertext || auth_tag
+)[0:32]
+```
+
+The commitment tag (32 bytes) is appended after the GCM-SIV authentication tag. Total per-frame authentication overhead: 16 (GCM-SIV tag) + 32 (commitment) = **48 bytes**.
+
+Receivers MUST verify the commitment tag BEFORE attempting decryption. If the commitment tag does not match, the frame MUST be rejected without decryption. This provides a fast-reject path that avoids the cost of AES-GCM-SIV decryption on forged frames.
+
+**Reference:** Bellare, M. and Hoang, V. T. "Efficient Schemes for Committing Authenticated Encryption." EUROCRYPT 2022. ePrint 2022/268.
 
 ### 5.5 HKDF-SHA-384 (RFC 5869)
 
@@ -860,7 +921,7 @@ combined_secret = ECDH_shared_secret (32 bytes) || ML-KEM_shared_secret (32 byte
 session_key_material = HKDF-SHA-384(
     IKM  = combined_secret,
     salt = random_D || random_R,
-    info = "NSP-v0.1-session-key"
+    info = "NSP-v0.5-session-key"
 )
 ```
 
@@ -885,6 +946,25 @@ Specifically:
 - ML-DSA signing MUST implement rejection sampling in constant time.
 
 Implementations SHOULD be hardened against power analysis and electromagnetic emission side channels. For Tier T2 and T3 devices, SCA hardening beyond timing is REQUIRED.
+
+### 5.8 Ephemeral Key Zeroization
+
+All ephemeral key material MUST be securely erased immediately after use. This requirement applies to:
+
+1. **Ephemeral ECDH private keys** — zeroized after shared secret computation.
+2. **ML-KEM decapsulation intermediates** — zeroized after shared secret extraction.
+3. **Pre-combined secret** (`ecdh_secret || mlkem_secret`) — zeroized after HKDF derivation.
+4. **HKDF extract output** — zeroized after expand step produces final key material.
+5. **Old session keys during rotation** — zeroized after the 10-second transition window (Section 7.3).
+
+Zeroization procedure:
+1. Overwrite the memory region with zeros.
+2. Issue a compiler barrier or volatile write to prevent the compiler from optimizing away the overwrite.
+3. If hardware zeroization is available (e.g., ARM `__builtin_clear_cache` or dedicated secure memory wipe), use it.
+
+Implementations in Rust SHOULD use the `zeroize` crate. Implementations in C MUST use `explicit_bzero()` or `SecureZeroMemory()`. The C `memset()` function MUST NOT be used for zeroization as compilers may optimize it away.
+
+Reference: NIST SP 800-88 Rev. 1, "Guidelines for Media Sanitization."
 
 ---
 
@@ -1030,7 +1110,7 @@ Session keys MUST be rotated at intervals not exceeding 90 days. Implementations
 
 During rekeying, both old and new keys are valid simultaneously. The transition window MUST NOT exceed 10 seconds. After the transition window, frames encrypted under the old key MUST be rejected.
 
-Key rotation frames MUST be signed with SPHINCS+-SHA2-128s (in addition to ML-DSA) due to the criticality of this operation.
+Key rotation frames MUST be signed with SPHINCS+-SHA2-192s (in addition to ML-DSA) due to the criticality of this operation.
 
 ### 7.4 Emergency Revocation
 
@@ -1044,6 +1124,26 @@ If device compromise is detected:
    c. Enter a locked state requiring physical intervention to restore.
 
 For implanted devices, "physical intervention" means a clinical procedure. Revocation of an implanted device is a last resort.
+
+### 7.4.1 Gateway-Delegated Revocation
+
+For constrained implanted devices, performing full PKI revocation checks (CRL download, OCSP queries) directly on the device is impractical. Post-quantum signatures are 8-16 KB each; CRLs containing multiple revoked certificates would consume significant bandwidth and battery. Furthermore, OCSP is being deprecated industry-wide (Let's Encrypt ended OCSP support in 2025).
+
+NSP defines a gateway-delegated revocation model for T3 devices:
+
+```
+Implant <──(short-lived session credential)──> Gateway/Phone <──(full PKI/CRL)──> Cloud CA
+```
+
+1. The implant holds its long-lived Device Root Key (ML-DSA or SLH-DSA) for identity.
+2. The gateway (typically a smartphone or bedside base station) performs full PKI revocation checking against the manufacturer's cloud CA infrastructure.
+3. If the gateway's own certificate is valid and the device's certificate has not been revoked, the gateway issues a short-lived session credential to the implant.
+4. The implant only needs to verify one signature (the gateway's) per session establishment — not check revocation lists.
+5. Short-lived credentials expire in 1 hour (T3) or 8 hours (T2), naturally limiting the window of exposure if a compromise occurs between revocation check intervals.
+
+The gateway MUST verify revocation status at least once per session credential issuance. The gateway SHOULD cache revocation data for no more than 15 minutes. If the gateway cannot reach the CA (offline scenario), it MUST NOT issue new credentials and MUST notify the user.
+
+This model follows the same trust architecture as TLS certificate stapling: the relying party (implant) delegates certificate validation to a better-equipped intermediary (gateway) while retaining the ability to verify the intermediary's own credentials.
 
 ### 7.5 Crypto Agility
 
@@ -1103,7 +1203,7 @@ Secure destruction at end of life MUST include:
 | Active layers | 2 (PQC), 3 (QI) |
 | Key exchange | Hybrid ECDH-P256 + ML-KEM-768 |
 | Frame signing | ML-DSA-65 per frame group (100 frames) |
-| Encryption | AES-256-GCM |
+| Encryption | AES-256-GCM-SIV with key-commitment transform (Section 5.4.1) |
 | QI computation | Consumer QI (3 classical terms, no D_sf) |
 | Secure enclave | RECOMMENDED but not required |
 | Firmware attestation | NOT required |
@@ -1117,8 +1217,8 @@ Secure destruction at end of life MUST include:
 |-------------|---------------|
 | Active layers | 1 (Hardware Root of Trust), 2 (PQC), 3 (QI), 4 (TTT) |
 | Key exchange | Hybrid ECDH-P256 + ML-KEM-768 (minimum) |
-| Frame signing | ML-DSA-65 + SPHINCS+-SHA2-128s (Merkle-amortized) |
-| Encryption | AES-256-GCM with hardware acceleration REQUIRED |
+| Frame signing | ML-DSA-65 + SPHINCS+-SHA2-192s (Merkle-amortized) |
+| Encryption | AES-256-GCM-SIV with key-commitment transform (Section 5.4.1). Hardware AES acceleration REQUIRED. |
 | QI computation | Full QI (4 classical terms including D_sf) |
 | Secure enclave | REQUIRED |
 | Firmware attestation | REQUIRED (SPHINCS+-signed boot chain) |
@@ -1134,17 +1234,20 @@ Secure destruction at end of life MUST include:
 |-------------|---------------|
 | Active layers | All five (Layer 5 when available) |
 | Key exchange | Hybrid ECDH-P384 + ML-KEM-1024 RECOMMENDED |
-| Frame signing | ML-DSA-65 + SPHINCS+-SHA2-128s (Merkle-amortized) |
-| Encryption | AES-256-GCM with hardware acceleration REQUIRED |
+| Frame signing | ML-DSA-65 + SPHINCS+-SHA2-192s (Merkle-amortized) |
+| Encryption | AES-256-GCM-SIV with key-commitment transform (Section 5.4.1). Hardware AES acceleration REQUIRED. |
 | QI computation | Full QI (4 classical terms + quantum terms where applicable) |
 | Secure enclave | REQUIRED (dedicated security co-processor RECOMMENDED) |
 | Firmware attestation | REQUIRED (full SPHINCS+-256s boot chain) |
 | TTT baseline | REQUIRED (continuous adaptation) |
 | EM monitoring | REQUIRED when Layer 5 hardware is available |
-| Key rotation | Maximum 90 days. 30 days RECOMMENDED. |
+| Key rotation | Maximum 30 days. |
+| Session tickets | Maximum 1 hour. Ticket rotation REQUIRED (Section 4.7). |
 | SCA hardening | REQUIRED (full side-channel suite: timing, power, EM) |
 | TRNG | REQUIRED |
-| Emergency revocation | REQUIRED (dual-signature revocation) |
+| Emergency revocation | REQUIRED (gateway-delegated, Section 7.4.1) |
+| Traffic analysis protection | REQUIRED (constant-rate transmission, Section 10.8) |
+| Ephemeral key zeroization | REQUIRED (Section 5.8) |
 | End-of-life zeroization | REQUIRED (hardware zeroization RECOMMENDED) |
 | Algorithm agility | REQUIRED (OTA firmware update capability) |
 | 20-year lifecycle support | REQUIRED |
@@ -1155,7 +1258,7 @@ Secure destruction at end of life MUST include:
 
 ### 9.1 Reference Platform
 
-The following power estimates use the Neuralink N1 as a reference platform (24.7 mW nominal, 40 mW budget). Actual power consumption varies by hardware. Implementors MUST benchmark on their target platform.
+The following power estimates use a representative cortical implant as a reference platform (24.7 mW nominal, 40 mW budget). Actual power consumption varies by hardware. Implementors MUST benchmark on their target platform.
 
 ### 9.2 Steady-State Power Breakdown
 
@@ -1165,7 +1268,7 @@ The following power estimates use the Neuralink N1 as a reference platform (24.7
 | QI score computation | ~0.5 mW | Per time window (~4 ms) | 1.25% |
 | AES-256-GCM (hardware accel.) | ~0.1 mW | Per frame | 0.25% |
 | ML-DSA-65 sign (amortized) | ~0.5 mW | Per frame group | 1.25% |
-| SPHINCS+-SHA2-128s (amortized via Merkle) | Negligible | Per frame group (portion) | <0.01% |
+| SPHINCS+-SHA2-192s (amortized via Merkle) | Negligible | Per frame group (portion) | <0.01% |
 | **Total steady-state** | **~1.3 mW** | | **~3.25%** |
 
 ### 9.3 Intermittent Operations
@@ -1173,7 +1276,7 @@ The following power estimates use the Neuralink N1 as a reference platform (24.7
 | Operation | Estimated Power | Frequency | Impact |
 |-----------|----------------|-----------|--------|
 | Hybrid ECDH + ML-KEM handshake | ~2 mW burst | Session start only | Negligible (amortized) |
-| SPHINCS+-SHA2-128s (full signature) | ~10 mW burst | Key rotation (every 90 days) | Negligible |
+| SPHINCS+-SHA2-192s (full signature) | ~10 mW burst | Key rotation (every 90 days) | Negligible |
 | TTT model update | ~1-3 mW burst | Per user session | Negligible (amortized) |
 
 ### 9.4 Pipeline Order and Power
@@ -1214,6 +1317,10 @@ NSP is designed to resist the following adversary capabilities:
 | Handshake DoS (battery drain) | Layer 2 (stateless cookie mechanism, Section 4.3.1) |
 | Firmware rollback | Layer 1 (monotonic version counter, Section 7.6) |
 | Slow drift / gradual poisoning | Layer 4 (TTT adaptive baseline) |
+| BLE link-layer MITM (KNOB, BLUFFS) | Layer 2 (BLE channel binding, Section 4.4.1) |
+| Multi-key ciphertext forgery | Layer 2 (key-commitment transform, Section 5.4.1) |
+| Nonce reuse after unexpected reboot | Layer 2 (AES-256-GCM-SIV nonce-misuse resistance) |
+| Traffic analysis / neural state inference | Section 10.8 (constant-rate transmission for T3) |
 | EM interference / intermodulation | Layer 5 (spectral scanning, resonance shield) |
 
 ### 10.2 What NSP Protects
@@ -1250,7 +1357,7 @@ Residual risk: If both ECDH and ML-KEM are broken simultaneously (requires break
 
 ### 10.5 Nonce Management
 
-AES-256-GCM security depends entirely on nonce uniqueness per (key, nonce) pair. Nonce reuse allows an attacker to recover the authentication key and forge messages.
+AES-256-GCM-SIV provides nonce-misuse resistance (Section 5.4), but correct nonce management remains important for optimal security. With standard GCM, nonce reuse catastrophically leaks the authentication key; with GCM-SIV, nonce reuse only reveals whether the same plaintext was encrypted — a significant improvement but still an information leak.
 
 NSP constructs nonces deterministically: `nonce = session_nonce_prefix (8 bytes) || sequence_number (4 bytes)` (Section 5.4). The prefix is derived from handshake randomness via HKDF and is unique per session. The sequence number is monotonically increasing per frame. This two-part construction prevents nonce reuse as long as:
 
@@ -1261,7 +1368,58 @@ At 250 frames per second (typical high-density BCI), a 32-bit sequence number wr
 
 There is no sub-counter or frame fragmentation mechanism. Each frame maps to exactly one (key, nonce) pair. This eliminates an entire class of nonce management errors.
 
-To guarantee nonce uniqueness independent of time-based rotation, implementations MUST initiate a key rotation procedure (Section 7.3) when the sequence number exceeds `2^31 - 1` (2,147,483,647). This provides a hard, sequence-based trigger in addition to the 90-day time-based maximum. If rekeying does not complete before the sequence number reaches `2^32 - 1`, the implementation MUST send a `sequence_number_overflow` fatal alert (0x0B) and terminate the session.
+To guarantee nonce uniqueness independent of time-based rotation, implementations MUST initiate a key rotation procedure (Section 7.3) when the sequence number exceeds `2^31 - 1` (2,147,483,647). This provides a hard, sequence-based trigger in addition to the time-based maximum (30 days for T3, 90 days for T1/T2). If rekeying does not complete before the sequence number reaches `2^32 - 1`, the implementation MUST send a `sequence_number_overflow` fatal alert (0x0B) and terminate the session.
+
+### 10.6 BLE Link-Layer Binding
+
+BLE (through specification 5.4) has known architectural vulnerabilities at the link layer:
+
+| Attack | Year | CVE | Impact |
+|--------|------|-----|--------|
+| KNOB | 2019 | CVE-2019-9506 | Forces entropy reduction of session keys to 1 byte |
+| BLESA | 2020 | — | Spoofed reconnections bypass authentication |
+| BLUFFS | 2023 | CVE-2023-24023 | Forces short session keys, breaks forward/future secrecy |
+
+Without channel binding (Section 4.4.1), an attacker who exploits any of these BLE vulnerabilities can relay NSP handshakes between endpoints without detection. The BLE channel binding value included in the NSP transcript hash ensures that a MITM at the BLE layer is detected during NSP authentication — even if the BLE layer itself is compromised.
+
+### 10.7 Key-Commitment Security
+
+Standard AEAD schemes (AES-GCM, AES-GCM-SIV, ChaCha20-Poly1305) are not key-committing: a single ciphertext can decrypt validly under multiple keys. This property is exploitable in multi-device BCI scenarios:
+
+**Threat scenario:** A BCI hub (smartphone, clinical workstation) receives encrypted frames from multiple devices. An attacker who compromises Device A's session key can craft a ciphertext that also decrypts validly under Device B's key, injecting crafted neural data that appears to originate from Device B.
+
+NSP mitigates this with the Bellare-Hoang key-commitment transform (Section 5.4.1). The HMAC-SHA-256 commitment tag cryptographically binds each ciphertext to exactly one key. A ciphertext produced under Key A will fail commitment verification under Key B with overwhelming probability (2^{-256}).
+
+**Reference:** Bellare, M. and Hoang, V. T. "Efficient Schemes for Committing Authenticated Encryption." EUROCRYPT 2022. ePrint 2022/268.
+
+### 10.8 Traffic Analysis Protection
+
+Even with strong encryption, neural data traffic patterns leak information. Published research demonstrates that ML classifiers can infer device activity, brain states, and medical conditions from encrypted traffic metadata alone — even when padding and traffic shaping are applied [WPES 2022].
+
+**What leaks without protection:**
+- **Packet sizes** reveal signal density (variable-length compressed data correlates with brain activity).
+- **Timing patterns** reveal neural event timing (seizure onset, motor intent, emotional state changes).
+- **Traffic volume** reveals device states (recording vs. idle vs. stimulation).
+
+For a BCI implant, this constitutes a privacy catastrophe: an eavesdropper who cannot decrypt any data can still determine when the user is speaking, moving, sleeping, or having a seizure.
+
+**Tier-specific requirements:**
+
+| Tier | Requirement | Rationale |
+|------|-------------|-----------|
+| **T1** | Padding RECOMMENDED. Pad frames to one of 4 fixed sizes. | Power-constrained. Partial protection acceptable. |
+| **T2** | Padding REQUIRED. Pad all frames to the maximum expected size for the negotiated channel count and sample rate. | Clinical data sensitivity justifies bandwidth cost. |
+| **T3** | Constant-rate transmission REQUIRED. Fixed-size frames at fixed intervals regardless of neural activity. Dummy frames MUST be cryptographically indistinguishable from real data. | Medical privacy is paramount. Padding alone is insufficient [WPES 2022]. |
+
+**Constant-rate transmission (T3):** The device transmits frames at a fixed rate (e.g., 250 fps) and fixed size (padded to the maximum payload size) at all times, including when idle. During low-activity periods, frames contain padded dummy data encrypted with the same key and nonce construction as real data. Receivers distinguish real from dummy frames via a flag in the encrypted payload (not the header, which is visible to eavesdroppers).
+
+**Power impact:** Constant-rate transmission increases average power consumption by approximately 15-30% compared to variable-rate transmission. This is the most significant power cost of any NSP security feature. For T3 devices, the medical privacy benefit justifies this cost.
+
+**Reference:** "Classification of Encrypted IoT Traffic Despite Padding and Shaping." Workshop on Privacy in the Electronic Society (WPES), 2022.
+
+### 10.9 QI Evasion Rate-Limiting
+
+Section 6.5 acknowledges that sophisticated adversaries can craft signals that pass QI scoring. As an additional mitigation, implementations SHOULD monitor QI score stability: legitimate neural signals have bounded rates of change. A signal that maintains artificially high QI scores (>0.95) across more than 100 consecutive frames is statistically implausible for real neural data and SHOULD be flagged for Layer 4 (TTT) review.
 
 ---
 
@@ -1311,6 +1469,7 @@ An implementation claiming NSP compliance MUST pass all mandatory test vectors f
 | [SP 800-38D] | NIST. "Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC." Special Publication 800-38D, November 2007. |
 | [RFC 2119] | Bradner, S. "Key words for use in RFCs to Indicate Requirement Levels." BCP 14, RFC 2119, March 1997. |
 | [RFC 5869] | Krawczyk, H. and P. Eronen. "HMAC-based Extract-and-Expand Key Derivation Function (HKDF)." RFC 5869, May 2010. |
+| [RFC 8452] | Gueron, S. and Lindell, Y. "AES-GCM-SIV: Nonce Misuse-Resistant Authenticated Encryption." RFC 8452, April 2019. |
 | [RFC 9180] | Barnes, R., Bhargavan, K., Lipp, B., and C. Wood. "Hybrid Public Key Encryption." RFC 9180, February 2022. |
 
 ### 12.2 Informative References
@@ -1324,6 +1483,10 @@ An implementation claiming NSP compliance MUST pass all mandatory test vectors f
 | [Sekino2008] | Sekino, Y. and L. Susskind. "Fast scramblers." JHEP 10:065, 2008. |
 | [Dvali2018] | Dvali, G. "Black holes as brains: neural networks with area law entropy." Fortschritte der Physik 66(4), 2018. |
 | [NSA-Hybrid] | NSA. "Announcing the Commercial National Security Algorithm Suite 2.0." 2022. Recommends hybrid key exchange for quantum transition. |
+| [BH2022] | Bellare, M. and Hoang, V. T. "Efficient Schemes for Committing Authenticated Encryption." EUROCRYPT 2022. ePrint 2022/268. |
+| [BLUFFS] | Antonioli, D. "BLUFFS: Bluetooth Forward and Future Secrecy Attacks and Defenses." ACM CCS 2023. CVE-2023-24023. |
+| [WPES2022] | "Classification of Encrypted IoT Traffic Despite Padding and Shaping." Workshop on Privacy in the Electronic Society (WPES), 2022. |
+| [NISTIR8547] | NIST. "Transition to Post-Quantum Cryptography Standards." NIST IR 8547 (IPD), November 2024. |
 
 ---
 
@@ -1334,11 +1497,11 @@ An implementation claiming NSP compliance MUST pass all mandatory test vectors f
 ```
 Raw sample window (1 second):    4 * 250 * 2 = 2,000 bytes
 After delta + LZ4 (3x):          ~667 bytes
-NSP frame overhead:               72 bytes (header + Merkle + auth tag)
+NSP frame overhead:               104 bytes (header + Merkle + auth tag + commitment)
 Per-group signature (amortized):  ~112 bytes/frame
-Total per frame:                  ~851 bytes
-Overhead percentage:              ~28% over compressed payload
-Overhead over raw:                ~851/2000 = 42.5% (but compression saved 57%)
+Total per frame:                  ~883 bytes
+Overhead percentage:              ~32% over compressed payload
+Overhead over raw:                ~883/2000 = 44.2% (but compression saved 57%)
 Net: smaller than raw.
 ```
 
@@ -1347,9 +1510,9 @@ Net: smaller than raw.
 ```
 Raw sample window (4 ms):        128 * 4 * 2 = 1,024 bytes
 After delta + LZ4 (3x):          ~341 bytes
-NSP frame overhead:               72 bytes
+NSP frame overhead:               104 bytes
 Per-group signature (amortized):  ~112 bytes/frame
-Total per frame:                  ~525 bytes
+Total per frame:                  ~557 bytes
 Frames per second:                250
 Throughput:                       ~131 KB/s (1.05 Mbps)
 ```
@@ -1359,7 +1522,7 @@ Throughput:                       ~131 KB/s (1.05 Mbps)
 ```
 Raw data rate:                    1024 * 20000 * 1.25 bytes = 25.6 MB/s (204.8 Mbps)
 After delta + LZ4 (3x):          ~8.53 MB/s (68.3 Mbps)
-NSP overhead (8.7%):              ~0.74 MB/s (5.9 Mbps)
+NSP overhead (~9.5%):             ~0.81 MB/s (6.5 Mbps)
 Total:                            ~9.27 MB/s (74.2 Mbps)
 ```
 
@@ -1385,6 +1548,12 @@ Total:                            ~9.27 MB/s (74.2 Mbps)
 | Side-channel (power/EM/timing) | X | | | | |
 | Handshake DoS (battery drain) | | X | | | |
 | Firmware rollback | X | | | | |
+| BLE link-layer MITM | | X | | | |
+| Multi-key ciphertext forgery | | X | | | |
+| Nonce reuse (device reboot) | | X | | | |
+| Traffic analysis (neural state) | | | | | X* |
+
+*Traffic analysis protection (Section 10.8) operates at the transport layer, not within the 5-layer stack. T3 devices use constant-rate transmission; T1/T2 use padding.
 
 No single layer covers all attack vectors. The composition provides coverage across all identified threat classes.
 
@@ -1415,13 +1584,14 @@ No single layer covers all attack vectors. The composition provides coverage acr
 
 ```
 Document:       NSP-PROTOCOL-SPEC.md
-Version:        0.2
+Version:        0.5
 Status:         Draft
-Date:           2026-02-06
+Date:           2026-02-18
 Author:         Kevin Qi (Qinnovate)
 Location:       qinnovates/qinnovate/qif-framework/
 Related:        NSP-PITCH.md, NSP-USE-CASE.md, QIF-TRUTH.md
-Reviewed by:    Gemini (Google, independent peer review)
+Reviewed by:    Gemini (Google, independent peer review rounds 1-2),
+                Claude Opus 4.6 (Anthropic, cryptographic security audit, round 3)
 Changes in 0.2: Fixed 5 weaknesses from Gemini review round 1:
                  (1) Negotiable frame group size (latency fix)
                  (2) Formal message struct definitions for all handshake types
@@ -1436,5 +1606,17 @@ Changes in 0.3: Applied 5 hardening fixes from Gemini review round 2:
                  (3) Hard sequence number rekey trigger at 2^31 (nonce safety)
                  (4) Flat trust model explicitly stated (no intermediate CAs)
                  (5) Formalized group_size=1 signature rule (SPHINCS+ omission)
-Next revision:  Test vectors, reference implementation alignment, formal security analysis
+Changes in 0.4: Gap analysis section added (Section 2.5). Version string updates.
+Changes in 0.5: Cryptographic security hardening from Claude audit (8 changes):
+                 (1) AES-256-GCM → AES-256-GCM-SIV (nonce-misuse resistance, RFC 8452)
+                 (2) Bellare-Hoang key-commitment transform added (Section 5.4.1, ePrint 2022/268)
+                 (3) BLE channel binding in transcript hash (Section 4.4.1, mitigates KNOB/BLUFFS)
+                 (4) SPHINCS+-SHA2-128s → 192s for T2/T3 (NIST Level 1 → Level 3)
+                 (5) Gateway-delegated revocation model for T3 (Section 7.4.1)
+                 (6) Traffic analysis protection: constant-rate for T3, padding for T1/T2 (Section 10.8)
+                 (7) Ephemeral key zeroization requirements (Section 5.8)
+                 (8) Session ticket lifetime reduction: 1h T3, 8h T2, 24h T1 (Section 4.7)
+                 Also: Company names genericized, version strings aligned to v0.5,
+                 QI evasion rate-limiting (Section 10.9), new references added.
+Next revision:  Test vectors, reference implementation alignment, formal security proof
 ```
