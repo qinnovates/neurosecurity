@@ -1,3 +1,7 @@
+<div align="center">
+<img src="docs/images/heart-portrait.png" alt="Heart Portrait" width="500" />
+</div>
+
 # About — Kevin Qi
 
 I'm **Kevin Qi**, a security engineer and neurosecurity researcher. I started this project with a question that keeps me up at night: *what happens to a patient when their brain-computer interface gets hacked?*
