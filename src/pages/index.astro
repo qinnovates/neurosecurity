@@ -21,7 +21,9 @@ const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
 const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
-const neurorightsCount = techniques.filter((t: any) => t?.neurorights?.affected?.length > 0).length;
+const neurorightsSet = new Set<string>();
+techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
+const neurorightsCount = neurorightsSet.size;
 
 ---
 
@@ -67,7 +69,7 @@ const neurorightsCount = techniques.filter((t: any) => t?.neurorights?.affected?
         </div>
         <div class="glass rounded-lg p-3 text-center">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">{neurorightsCount}</p>
-          <p class="text-[10px] sm:text-xs text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Neurorights Mapped</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Neurorights Defined</p>
         </div>
       </div>
 

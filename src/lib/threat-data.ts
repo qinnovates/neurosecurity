@@ -398,11 +398,13 @@ export function getDsm5Stats() {
   for (const t of THREAT_VECTORS) {
     const dsm = t.tara?.dsm5;
     if (!dsm) continue;
-    withDsm5++;
     clusters[dsm.cluster]++;
     riskClass[dsm.risk_class]++;
-    for (const d of dsm.primary) {
-      codes.set(d.code, (codes.get(d.code) ?? 0) + 1);
+    if (dsm.primary && dsm.primary.length > 0) {
+      withDsm5++;
+      for (const d of dsm.primary) {
+        codes.set(d.code, (codes.get(d.code) ?? 0) + 1);
+      }
     }
   }
 
