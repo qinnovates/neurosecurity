@@ -364,19 +364,145 @@ const breadcrumbs = [
     </p>
   </section>
 
+  <!-- ═══ CONDITION EXPLORER ═══ -->
+  <section class="py-12 md:py-16" id="conditions">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Conditions Treated
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
+      {uniqueConditions} treatable conditions mapped across {clinical.length} techniques.
+      Each condition links to the TARA technique that treats it — and can be weaponized against it.
+    </p>
+
+    <div class="max-w-4xl mx-auto space-y-2">
+      {conditionEntries.map(([condition, techniques]) => (
+        <details class="glass rounded-lg group">
+          <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-white/5 transition-colors rounded-lg">
+            <span class="text-sm font-medium text-[var(--color-text-primary)]">{condition}</span>
+            <span class="flex items-center gap-2">
+              <span class="text-xs text-[var(--color-text-faint)]">
+                {techniques.length} technique{techniques.length !== 1 ? 's' : ''}
+              </span>
+              <svg class="w-3.5 h-3.5 text-[var(--color-text-faint)] group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 space-y-2">
+            {techniques.map(t => {
+              const c = t.tara?.clinical!;
+              const fda = fdaColor(c.fda_status);
+              const ev = evidenceColor(c.evidence_level);
+              return (
+                <a
+                  href={`/TARA/${t.id}/`}
+                  class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 rounded-md hover:bg-white/5 transition-colors border border-transparent hover:border-[var(--color-border)]"
+                >
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
+                    <p class="text-sm font-medium text-[var(--color-text-primary)] truncate">{c.therapeutic_analog}</p>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5 shrink-0">
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                      style={`background: ${fda.bg}; color: ${fda.text};`}
+                    >
+                      {c.fda_status}
+                    </span>
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                      style={`background: ${ev.bg}; color: ${ev.text};`}
+                    >
+                      {c.evidence_level.replace('_', '-')}
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ FULL TECHNIQUE LIST ═══ -->
+  <section class="py-12 md:py-16" id="techniques">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        All {clinical.length} Therapeutic Analogs
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto grid gap-3 sm:grid-cols-2">
+      {clinical.sort((a, b) => a.id.localeCompare(b.id)).map(t => {
+        const c = t.tara?.clinical!;
+        const du = t.tara?.dual_use ?? 'silicon_only';
+        const duC = DUAL_USE_COLORS[du as DualUse];
+        const fda = fdaColor(c.fda_status);
+        return (
+          <a
+            href={`/TARA/${t.id}/`}
+            class="glass rounded-lg p-4 hover:ring-1 hover:ring-emerald-500/20 transition-all group"
+          >
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
+              <span
+                class="px-2 py-0.5 rounded-full text-[9px] font-semibold uppercase shrink-0"
+                style={`background: ${duC.bg}; color: ${duC.text}; border: 1px solid ${duC.border};`}
+              >
+                {du.replace('_', ' ')}
+              </span>
+            </div>
+            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-emerald-500 transition-colors">
+              {c.therapeutic_analog}
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3 line-clamp-1">
+              Attack: {t.name}
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-2">
+              <span
+                class="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                style={`background: ${fda.bg}; color: ${fda.text};`}
+              >
+                {c.fda_status}
+              </span>
+              {c.conditions.slice(0, 3).map(cond => (
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--color-bg-muted)] text-[var(--color-text-faint)]">
+                  {cond}
+                </span>
+              ))}
+              {c.conditions.length > 3 && (
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--color-bg-muted)] text-[var(--color-text-faint)]">
+                  +{c.conditions.length - 3} more
+                </span>
+              )}
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
   <!-- ═══ CLINICAL MATRIX ═══ -->
   <section class="py-12 md:py-16" id="matrix">
     <div class="flex items-center gap-4 mb-8">
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
       <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
-        Clinical Technique Matrix
+        Explore by Domain &times; Modality
       </h2>
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
     </div>
 
     <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-4">
-      {clinical.length} therapeutic analogs organized by clinical domain and modality.
-      Click any cell to expand the techniques within it.
+      The same {clinical.length} techniques organized as an interactive matrix.
+      Click any cell to see what treats that condition with that modality.
     </p>
 
     <!-- Legend -->
