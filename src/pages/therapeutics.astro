@@ -1,0 +1,427 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import {
+  getClinicalTechniques,
+  getTechniquesByFdaStatus,
+  THREAT_VECTORS,
+  FDA_STATUS_COLORS,
+  DUAL_USE_COLORS,
+} from '../lib/threat-data';
+import type { ThreatVector, FdaStatus, DualUse, EvidenceLevel } from '../lib/threat-data';
+
+const clinical = getClinicalTechniques();
+const totalTechniques = THREAT_VECTORS.length;
+
+// FDA status breakdown
+const fdaGroups: { status: FdaStatus; label: string; count: number }[] = [
+  { status: 'approved', label: 'FDA Approved', count: getTechniquesByFdaStatus('approved').length },
+  { status: 'cleared', label: 'FDA Cleared', count: getTechniquesByFdaStatus('cleared').length },
+  { status: 'breakthrough', label: 'Breakthrough', count: getTechniquesByFdaStatus('breakthrough').length },
+  { status: 'investigational', label: 'Investigational', count: getTechniquesByFdaStatus('investigational').length },
+  { status: 'none', label: 'No FDA Status', count: getTechniquesByFdaStatus('none').length },
+];
+
+// Evidence level breakdown
+const evidenceLevels: { level: EvidenceLevel; label: string; count: number }[] = [
+  { level: 'meta_analysis', label: 'Meta-analysis', count: clinical.filter(t => t.tara?.clinical?.evidence_level === 'meta_analysis').length },
+  { level: 'RCT', label: 'Randomized Controlled Trial', count: clinical.filter(t => t.tara?.clinical?.evidence_level === 'RCT').length },
+  { level: 'cohort', label: 'Cohort Study', count: clinical.filter(t => t.tara?.clinical?.evidence_level === 'cohort').length },
+  { level: 'case_series', label: 'Case Series', count: clinical.filter(t => t.tara?.clinical?.evidence_level === 'case_series').length },
+  { level: 'preclinical', label: 'Preclinical', count: clinical.filter(t => t.tara?.clinical?.evidence_level === 'preclinical').length },
+  { level: 'theoretical', label: 'Theoretical', count: clinical.filter(t => t.tara?.clinical?.evidence_level === 'theoretical').length },
+];
+
+// Dual-use breakdown
+const dualUseGroups: { key: DualUse; label: string; count: number }[] = [
+  { key: 'confirmed', label: 'Confirmed Dual-Use', count: THREAT_VECTORS.filter(t => t.tara?.dual_use === 'confirmed').length },
+  { key: 'probable', label: 'Probable Dual-Use', count: THREAT_VECTORS.filter(t => t.tara?.dual_use === 'probable').length },
+  { key: 'possible', label: 'Possible Dual-Use', count: THREAT_VECTORS.filter(t => t.tara?.dual_use === 'possible').length },
+  { key: 'silicon_only', label: 'Silicon Only', count: THREAT_VECTORS.filter(t => t.tara?.dual_use === 'silicon_only').length },
+];
+
+// Collect all unique conditions and count techniques per condition
+const conditionMap = new Map<string, ThreatVector[]>();
+for (const t of clinical) {
+  for (const c of t.tara?.clinical?.conditions ?? []) {
+    const existing = conditionMap.get(c) ?? [];
+    existing.push(t);
+    conditionMap.set(c, existing);
+  }
+}
+const conditionEntries = [...conditionMap.entries()]
+  .sort((a, b) => b[1].length - a[1].length);
+const uniqueConditions = conditionEntries.length;
+
+// FDA color helper
+const fdaColor = (status: string) => {
+  const c = FDA_STATUS_COLORS[status as FdaStatus];
+  return c ?? FDA_STATUS_COLORS.none;
+};
+
+// Evidence level color helper
+const evidenceColor = (level: string) => {
+  switch (level) {
+    case 'meta_analysis': return { bg: 'rgba(16, 185, 129, 0.12)', text: '#10b981' };
+    case 'RCT': return { bg: 'rgba(34, 197, 94, 0.12)', text: '#22c55e' };
+    case 'cohort': return { bg: 'rgba(6, 182, 212, 0.12)', text: '#06b6d4' };
+    case 'case_series': return { bg: 'rgba(245, 158, 11, 0.12)', text: '#f59e0b' };
+    case 'preclinical': return { bg: 'rgba(168, 85, 247, 0.12)', text: '#a855f7' };
+    case 'theoretical': return { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' };
+    default: return { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' };
+  }
+};
+
+const breadcrumbs = [
+  { label: 'Therapeutics' },
+];
+---
+
+<PageLayout
+  title="Therapeutic Dual-Use Atlas — Same Mechanism, Two Outcomes"
+  description={`${clinical.length} of ${totalTechniques} BCI techniques have therapeutic analogs. The same mechanisms that can attack a brain can also heal it. This is the dual-use map.`}
+  breadcrumbs={breadcrumbs}
+  wide
+>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="py-12 md:py-20">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="text-xs font-medium tracking-[0.2em] uppercase mb-4 text-[var(--color-text-faint)]">
+        Therapeutic Dual-Use Atlas
+      </p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
+        <span class="text-[var(--color-text-primary)]">Same Mechanism.</span>
+        <br />
+        <span class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
+          Two Outcomes.
+        </span>
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
+        {clinical.length} of {totalTechniques} BCI attack techniques share their core mechanism with an FDA-recognized
+        therapeutic application. The same signal that treats depression can, in adversarial hands, induce it.
+        This atlas maps every dual-use pathway we've found.
+      </p>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-12">
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-500">
+          {clinical.length}
+        </p>
+        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic<br/>analogs mapped</p>
+      </div>
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-cyan-500">
+          {uniqueConditions}
+        </p>
+        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">treatable<br/>conditions</p>
+      </div>
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-green-500">
+          {fdaGroups[0].count + fdaGroups[1].count}
+        </p>
+        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">FDA approved<br/>or cleared</p>
+      </div>
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-amber-500">
+          {dualUseGroups[0].count}
+        </p>
+        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">confirmed<br/>dual-use</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE DUAL-USE ARGUMENT ═══ -->
+  <section class="py-12 md:py-16" id="dual-use">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Why This Matters
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="glass rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto reveal">
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+        Deep brain stimulation treats Parkinson's. The same electrode, misconfigured, can induce involuntary movement.
+        Transcranial direct current stimulation alleviates depression. The same current, weaponized, can suppress cognition.
+        EEG monitoring diagnoses epilepsy. The same signals, intercepted, reveal your emotional state to an attacker.
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+        This is the dual-use problem in neurotechnology: <strong class="text-[var(--color-text-primary)]">the therapeutic mechanism IS the attack vector.</strong>
+        You cannot ban the technology without banning the cure. The only answer is governance — knowing which mechanisms
+        exist, what they can do, and building the safety rails before deployment.
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        The TARA registry classifies every technique by its dual-use status, FDA clearance, evidence level, and
+        the conditions it can treat. This page presents the therapeutic side of that ledger.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ FDA STATUS BREAKDOWN ═══ -->
+  <section class="py-12 md:py-16" id="fda">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        FDA Status Breakdown
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-4xl mx-auto mb-8">
+      {fdaGroups.filter(g => g.count > 0).map(g => (
+        <div class="glass rounded-lg p-4 text-center">
+          <p
+            class="text-2xl font-bold font-[family-name:var(--font-heading)]"
+            style={`color: ${fdaColor(g.status).text};`}
+          >
+            {g.count}
+          </p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">{g.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Evidence level bar -->
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-medium text-[var(--color-text-faint)] mb-3 text-center">Evidence Quality</p>
+      <div class="flex gap-1 h-6 rounded-full overflow-hidden">
+        {evidenceLevels.filter(e => e.count > 0).map(e => (
+          <div
+            class="flex items-center justify-center text-[9px] font-medium transition-all"
+            style={`flex: ${e.count}; background: ${evidenceColor(e.level).bg}; color: ${evidenceColor(e.level).text};`}
+            title={`${e.label}: ${e.count} techniques`}
+          >
+            {e.count > 3 && e.label.split(' ')[0]}
+          </div>
+        ))}
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-3">
+        {evidenceLevels.filter(e => e.count > 0).map(e => (
+          <span class="flex items-center gap-1.5 text-[10px] text-[var(--color-text-faint)]">
+            <span
+              class="w-2 h-2 rounded-sm"
+              style={`background: ${evidenceColor(e.level).text};`}
+            ></span>
+            {e.label} ({e.count})
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DUAL-USE CLASSIFICATION ═══ -->
+  <section class="py-12 md:py-16" id="classification">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Dual-Use Classification
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-6">
+      {dualUseGroups.map(g => (
+        <div
+          class="rounded-lg p-4 text-center"
+          style={`background: ${DUAL_USE_COLORS[g.key].bg}; border: 1px solid ${DUAL_USE_COLORS[g.key].border};`}
+        >
+          <p
+            class="text-2xl font-bold font-[family-name:var(--font-heading)]"
+            style={`color: ${DUAL_USE_COLORS[g.key].text};`}
+          >
+            {g.count}
+          </p>
+          <p class="text-[10px] sm:text-xs mt-1 leading-tight" style={`color: ${DUAL_USE_COLORS[g.key].text}; opacity: 0.8;`}>
+            {g.label}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-xs text-[var(--color-text-faint)] text-center max-w-lg mx-auto">
+      <strong>Confirmed:</strong> Published therapeutic use with FDA recognition.
+      <strong>Probable:</strong> Strong clinical evidence, not yet FDA-cleared for this pathway.
+      <strong>Possible:</strong> Preclinical or theoretical therapeutic potential.
+      <strong>Silicon Only:</strong> No known therapeutic analog.
+    </p>
+  </section>
+
+  <!-- ═══ CONDITION EXPLORER ═══ -->
+  <section class="py-12 md:py-16" id="conditions">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Conditions Treated
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
+      {uniqueConditions} treatable conditions mapped across {clinical.length} techniques.
+      Each condition links to the TARA technique that treats it — and can be weaponized against it.
+    </p>
+
+    <div class="max-w-4xl mx-auto space-y-2">
+      {conditionEntries.map(([condition, techniques]) => (
+        <details class="glass rounded-lg group">
+          <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-white/5 transition-colors rounded-lg">
+            <span class="text-sm font-medium text-[var(--color-text-primary)]">{condition}</span>
+            <span class="flex items-center gap-2">
+              <span class="text-xs text-[var(--color-text-faint)]">
+                {techniques.length} technique{techniques.length !== 1 ? 's' : ''}
+              </span>
+              <svg class="w-3.5 h-3.5 text-[var(--color-text-faint)] group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 space-y-2">
+            {techniques.map(t => {
+              const c = t.tara?.clinical!;
+              const fda = fdaColor(c.fda_status);
+              const ev = evidenceColor(c.evidence_level);
+              return (
+                <a
+                  href={`/TARA/${t.id}/`}
+                  class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 rounded-md hover:bg-white/5 transition-colors border border-transparent hover:border-[var(--color-border)]"
+                >
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
+                    <p class="text-sm font-medium text-[var(--color-text-primary)] truncate">{c.therapeutic_analog}</p>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5 shrink-0">
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                      style={`background: ${fda.bg}; color: ${fda.text};`}
+                    >
+                      {c.fda_status}
+                    </span>
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                      style={`background: ${ev.bg}; color: ${ev.text};`}
+                    >
+                      {c.evidence_level.replace('_', '-')}
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ FULL TECHNIQUE LIST ═══ -->
+  <section class="py-12 md:py-16" id="techniques">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        All {clinical.length} Therapeutic Analogs
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto grid gap-3 sm:grid-cols-2">
+      {clinical.sort((a, b) => a.id.localeCompare(b.id)).map(t => {
+        const c = t.tara?.clinical!;
+        const du = t.tara?.dual_use ?? 'silicon_only';
+        const duC = DUAL_USE_COLORS[du as DualUse];
+        const fda = fdaColor(c.fda_status);
+        return (
+          <a
+            href={`/TARA/${t.id}/`}
+            class="glass rounded-lg p-4 hover:ring-1 hover:ring-emerald-500/20 transition-all group"
+          >
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
+              <span
+                class="px-2 py-0.5 rounded-full text-[9px] font-semibold uppercase shrink-0"
+                style={`background: ${duC.bg}; color: ${duC.text}; border: 1px solid ${duC.border};`}
+              >
+                {du.replace('_', ' ')}
+              </span>
+            </div>
+            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-emerald-500 transition-colors">
+              {c.therapeutic_analog}
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mb-3 line-clamp-1">
+              Attack: {t.name}
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-2">
+              <span
+                class="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                style={`background: ${fda.bg}; color: ${fda.text};`}
+              >
+                {c.fda_status}
+              </span>
+              {c.conditions.slice(0, 3).map(cond => (
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--color-bg-muted)] text-[var(--color-text-faint)]">
+                  {cond}
+                </span>
+              ))}
+              {c.conditions.length > 3 && (
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--color-bg-muted)] text-[var(--color-text-faint)]">
+                  +{c.conditions.length - 3} more
+                </span>
+              )}
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- ═══ CALL TO ACTION ═══ -->
+  <section class="py-12 md:py-20" id="cta">
+    <div class="glass rounded-2xl p-8 sm:p-12 max-w-3xl mx-auto text-center reveal">
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">
+        The same tools that heal can harm.
+      </h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-8 max-w-lg mx-auto leading-relaxed">
+        This is why neurogovernance exists. Every therapeutic mechanism in this atlas has a corresponding
+        attack pathway in the TARA registry. Explore both sides.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="/TARA/"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white transition-colors"
+          style="background: var(--color-accent-primary);"
+        >
+          TARA Registry
+        </a>
+        <a
+          href="/neurogovernance/"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+          style="background: rgba(0,0,0,0.05); color: var(--color-text-primary);"
+        >
+          Neurogovernance
+        </a>
+        <a
+          href="/whitepaper/"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+          style="background: rgba(0,0,0,0.05); color: var(--color-text-primary);"
+        >
+          Read the Whitepaper
+        </a>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  details[open] > summary {
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+</style>
