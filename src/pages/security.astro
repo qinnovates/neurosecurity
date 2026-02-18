@@ -5,7 +5,7 @@ import BrainVisualization from '../components/brain/BrainVisualization';
 import { getBrainViewData } from '../lib/brain-view-data';
 import {
   ETHICS_VERSION, ETHICS_STATUS, ETHICS_DATE, ETHICS_AUTHOR, ETHICS_LICENSE, ETHICS_LICENSE_URL,
-  PREAMBLE, CANONS, PRINCIPLES, CROSS_REFERENCES,
+  INTENT, PREAMBLE, CANONS, PRINCIPLES, CROSS_REFERENCES,
   INTRO_TEXT, FRAMEWORKS_TEXT, FRAMEWORK_LINKS,
 } from '../data/code-of-ethics';
 
@@ -252,6 +252,12 @@ const brainViews = getBrainViewData();
     <p class="text-[var(--color-text-muted)] mb-8 max-w-3xl">
       Each principle below is cross-referenced to the international frameworks that inform it: the <a href={FRAMEWORK_LINKS.oecd} class="text-[var(--color-accent-secondary)] hover:underline">OECD Recommendation on Neurotechnology</a> (2019), <a href={FRAMEWORK_LINKS.unescoAi} class="text-[var(--color-accent-secondary)] hover:underline">UNESCO Recommendation on the Ethics of AI</a> (2021), the <a href={FRAMEWORK_LINKS.belmont} class="text-[var(--color-accent-secondary)] hover:underline">Belmont Report</a> (1979), the <a href={FRAMEWORK_LINKS.helsinki} class="text-[var(--color-accent-secondary)] hover:underline">Declaration of Helsinki</a>, the <a href={FRAMEWORK_LINKS.chileNeurorights} class="text-[var(--color-accent-secondary)] hover:underline">Chilean Neurorights Law</a> (2021), <a href={FRAMEWORK_LINKS.gdpr9} class="text-[var(--color-accent-secondary)] hover:underline">GDPR Article 9</a>, the <a href={FRAMEWORK_LINKS.ieeeNeuroethics} class="text-[var(--color-accent-secondary)] hover:underline">IEEE Neuroethics Framework</a>, <a href={FRAMEWORK_LINKS.budapest} class="text-[var(--color-accent-secondary)] hover:underline">Budapest Convention on Cybercrime</a>, and the five neurorights proposed by <a href={FRAMEWORK_LINKS.yuste} class="text-[var(--color-accent-secondary)] hover:underline">Yuste et al.</a> and <a href={FRAMEWORK_LINKS.ienca} class="text-[var(--color-accent-secondary)] hover:underline">Ienca &amp; Andorno</a>.
     </p>
+
+    <!-- Intent -->
+    <div class="glass rounded-xl p-8 mb-8 max-w-4xl border-l-4 border-[var(--color-accent-secondary)]">
+      <h3 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-3">Intent</h3>
+      <p class="text-[var(--color-text-muted)]">{INTENT}</p>
+    </div>
 
     <!-- Preamble -->
     <div class="glass rounded-xl p-8 mb-8 max-w-4xl">

@@ -39,6 +39,8 @@ export interface CrossRef {
   digitalIntlLaw: string;
 }
 
+export const INTENT = 'This document exists to protect normal people. Neurosecurity research is new, the tools are powerful, and the consequences of mistakes are not like crashing a server. Someone exploring BCI security for the first time could accidentally probe the wrong system, collect neural data they should not have, or publish a technique without realizing the dual-use implications. This code sets guidelines and guardrails to the best of our current understanding so that well-meaning researchers do not cause harm by accident. It is not a legal document. It is a starting point, written by one person, that needs many more people helping to get it right.';
+
 export const PREAMBLE = [
   'Neurotechnology is advancing faster than the rules protecting the people who use it. Brain-computer interfaces are entering clinical trials, consumer EEG devices are shipping to millions, and silent speech decoding is accurate enough to worry about. The security community that protects these systems needs its own ethical foundation.',
   'Ethical hackers protect servers, networks, and applications. Ethical neurosecurity researchers protect brains. The principles are the same: get authorization before you test, report what you find, do not cause harm, protect what you access. But the consequences are different. A compromised server can be reimaged. A compromised brain may not recover. That difference demands a code of ethics written specifically for this work.',

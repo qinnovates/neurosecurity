@@ -10,6 +10,12 @@ order: 0
 
 > **Canonical source:** [`src/data/code-of-ethics.ts`](../src/data/code-of-ethics.ts) — edit that file to update both this document and the [website](https://qinnovate.com/security/#ethics).
 
+## Intent
+
+This document exists to protect normal people. Neurosecurity research is new, the tools are powerful, and the consequences of mistakes are not like crashing a server. Someone exploring BCI security for the first time could accidentally probe the wrong system, collect neural data they should not have, or publish a technique without realizing the dual-use implications. This code sets guidelines and guardrails to the best of our current understanding so that well-meaning researchers do not cause harm by accident. It is not a legal document. It is a starting point, written by one person, that needs many more people helping to get it right.
+
+---
+
 This code adapts the structure and principles of the EC-Council Certified Ethical Hacker (CEH) Code of Ethics and the (ISC)² Code of Ethics for the neurosecurity domain. Ethical hacking already solved many governance problems for traditional systems. We are taking those lessons and applying them where the stakes are highest: the human brain.
 
 ## Preamble
