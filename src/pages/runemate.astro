@@ -48,6 +48,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
           { href: '#multimodal', label: 'Multimodal' },
           { href: '#onchip', label: 'On-Chip Requirements' },
           { href: '#vision', label: 'Vision' },
+          { href: '#contribute', label: 'Contribute' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -106,7 +107,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">How BCIs Work Today</h2>
         <div class="prose mb-8">
           <p>
-            No commercial BCI ships inward rendering today. Every current-generation implant &mdash; Neuralink N1, BrainGate, Blackrock Neurotech &mdash; is <strong>outward-only</strong>: the chip records neural signals and streams them to an external device. All decoding, all UI rendering, all user interaction happens on a phone or tablet app.
+            No commercial BCI ships inward rendering today. Every current-generation implant is <strong>outward-only</strong>: the chip records neural signals and streams them to an external device. All decoding, all UI rendering, all user interaction happens on a phone or tablet app.
           </p>
           <p>
             {RUNEMATE_PROJECT_NAME} is designing for the next generation: implants that receive content <em>inward</em> and render it directly to cortical tissue. That chip must decode, safety-check, and render a payload on bare metal with no phone in the loop.
@@ -715,6 +716,71 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
               Expansion beyond explicit constructs into direct semantic encoding. Layouts are replaced by <em>perceptual intents</em> mapped through topographic cortical coordinates, making {RUNEMATE_OUTPUT_FORMAT} the first native language for high-bandwidth neural interfaces.
             </p>
           </div>
+        </div>
+      </section>
+
+      <!-- Contribute -->
+      <section id="contribute" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Contribute</h2>
+        <div class="prose mb-8">
+          <p>
+            {RUNEMATE_PROJECT_NAME} is open source under <a href="/licensing/" class="text-[var(--color-accent-primary)] hover:underline">Apache 2.0</a>. The Forge compiler, Staves DSL spec, and all documentation live in the QIF repository.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Repository</p>
+          <a href="https://github.com/qinnovates/qinnovate/tree/main/src/lib/runemate-forge" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[var(--color-accent-primary)] hover:underline font-[family-name:var(--font-mono)] text-sm mb-4">
+            github.com/qinnovates/qinnovate &rarr; src/lib/runemate-forge
+          </a>
+          <div class="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
+            <p><strong class="text-[var(--color-text-primary)]">Key files:</strong></p>
+            <ul class="space-y-1 font-[family-name:var(--font-mono)] text-xs">
+              <li><code>src/</code> &mdash; Rust compiler source (lexer, parser, codegen, crypto)</li>
+              <li><code>STAVES-DSL-SPEC.md</code> &mdash; Language specification</li>
+              <li><code>STAVES-SPEC.md</code> &mdash; Bytecode format specification</li>
+              <li><code>THREAT-MODEL.md</code> &mdash; Security threat model</li>
+              <li><code>STATUS.md</code> &mdash; Engineering status and known gaps</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Getting Started</p>
+          <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
+            <div>
+              <p class="font-semibold text-[var(--color-text-primary)] mb-1">1. Clone and build</p>
+              <pre class="bg-[var(--color-bg-secondary)] rounded-lg p-3 text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>git clone https://github.com/qinnovates/qinnovate.git
+cd qinnovate/src/lib/runemate-forge
+cargo build
+cargo test</code></pre>
+            </div>
+            <div>
+              <p class="font-semibold text-[var(--color-text-primary)] mb-1">2. Run the demo</p>
+              <pre class="bg-[var(--color-bg-secondary)] rounded-lg p-3 text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>cargo run --bin demo</code></pre>
+              <p class="text-xs mt-1">Compiles a sample Staves file through the full pipeline: parse &rarr; compile &rarr; encrypt &rarr; decrypt &rarr; disassemble.</p>
+            </div>
+            <div>
+              <p class="font-semibold text-[var(--color-text-primary)] mb-1">3. Read the specs</p>
+              <p class="text-xs">Start with <code>STAVES-DSL-SPEC.md</code> for the language grammar, then <code>STAVES-SPEC.md</code> for the bytecode format. The threat model explains the security constraints driving every design decision.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Where help is needed</p>
+          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+            <p><strong class="text-[var(--color-text-primary)]">Rust / Systems.</strong> The <code>no_std</code> runtime (Phase 2) needs a bare-metal bytecode interpreter. If you've worked on embedded Rust, firmware, or RTOS, this is the critical path.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Cryptography.</strong> The NSP encryption pipeline uses AES-256-GCM today. Integrating ML-KEM (FIPS 203) for the full post-quantum handshake is next.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Neuroscience.</strong> Validating the retinotopic / tonotopic / somatotopic coordinate transforms against published cortical mapping data.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Security review.</strong> Formal analysis of the Staves bytecode format for safety-completeness: can every valid bytecode produce only safe stimulation patterns?</p>
+          </div>
+        </div>
+
+        <div class="mt-6 text-sm text-[var(--color-text-muted)]">
+          <p>
+            Open an issue or submit a PR on <a href="https://github.com/qinnovates/qinnovate/issues" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub</a>. For questions or discussion, use <a href="https://github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub Discussions</a>.
+          </p>
         </div>
       </section>
 
