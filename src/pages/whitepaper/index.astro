@@ -20,7 +20,7 @@ const latestChange = getLatestChangelog();
 ---
 
 <PageLayout
-  title="QIF Whitepaper v6.2.2"
+  title="QIF Whitepaper v6.2.3"
   description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
@@ -29,7 +29,7 @@ const latestChange = getLatestChangelog();
     <!-- Sidebar -->
     <aside class="hidden lg:block">
       <div class="sticky top-24">
-        <WhitepaperVersionSelector currentVersion="v6.2.2" />
+        <WhitepaperVersionSelector currentVersion="v6.2.3" />
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
           {[
@@ -58,14 +58,14 @@ const latestChange = getLatestChangelog();
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "QIF Whitepaper v6.2.2: An Open Security Standard for Brain-Computer Interfaces",
+        "headline": "QIF Whitepaper v6.2.3: An Open Security Standard for Brain-Computer Interfaces",
         "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-13",
-        "dateModified": "2026-02-16",
+        "dateModified": "2026-02-17",
         "mainEntityOfPage": "https://qinnovate.com/whitepaper/",
-        "version": "6.2.2",
+        "version": "6.2.3",
       })} />
 
       <!-- ═══ Header ═══ -->
@@ -81,7 +81,7 @@ const latestChange = getLatestChangelog();
         </p>
         <div class="flex flex-wrap items-center gap-3 mb-4">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
-            v6.2.2
+            v6.2.3
           </span>
           <span class="text-xs text-[var(--color-text-faint)]">2026-02-16</span>
           <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
@@ -297,7 +297,7 @@ const latestChange = getLatestChangelog();
               <strong class="text-[var(--color-text-primary)]">NSP without QIF</strong> encrypts data but cannot detect manipulation at the electrode-tissue boundary. A protocol without an underlying threat model provides protection without informed strategy.
             </p>
             <p>
-              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> encounter a significant bandwidth challenge. Post-quantum key sizes are 18&ndash;46&times; larger than classical keys, presenting overhead that hinders adoption on 40 mW implants over BLE. Runemate's 65&ndash;90% compression mitigates this, making PQC practical for current applications.
+              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> encounter a significant bandwidth challenge. Post-quantum cryptographic keys &mdash; the mathematical structures that protect data from future quantum computers &mdash; are 18&ndash;46&times; larger than their classical equivalents. This overhead strains adoption on implants operating within a 40 mW power budget over Bluetooth Low Energy (BLE). Runemate compresses these payloads by 65&ndash;90%, making post-quantum security practical on today&rsquo;s constrained hardware.
             </p>
           </div>
         </div>
@@ -333,7 +333,7 @@ const latestChange = getLatestChangelog();
             Each band corresponds to a distinct <strong>scale-frequency regime</strong>. Cortical oscillations at N7 operate in the 1&ndash;100 Hz range across centimeter-scale structures. Spinal reflexes at N1 propagate at 80&ndash;120 m/s through meter-scale pathways. The analog front-end (S1) processes signals in the kHz&ndash;MHz range. Radio telemetry (S3) operates at 2.4 GHz.
           </p>
           <p class="text-sm text-[var(--color-text-muted)] mb-3">
-            The physics that governs each regime is fundamentally different, and so are the threats. An anomalous 40 Hz gamma injection at N7 is detected differently than a firmware exploit at S2. The band boundaries are not arbitrary &mdash; they follow the relationship <span class="font-[family-name:var(--font-mono)]">L = v/f</span>, where the physical scale of each structure matches its characteristic frequency. When a measured signal violates this constraint, it indicates injection from outside the expected regime.
+            The physics that governs each regime is fundamentally different, and so are the threats. An anomalous 40 Hz gamma injection at N7 is detected differently than a firmware exploit at S2. The band boundaries are not arbitrary &mdash; they follow the relationship <span class="font-[family-name:var(--font-mono)]">L = v/f</span> (wavelength equals propagation velocity divided by frequency), where the physical scale of each structure matches its characteristic frequency. When a measured signal violates this constraint, it indicates injection from outside the expected regime.
           </p>
           <p class="text-xs text-[var(--color-text-faint)]">
             The full scale-frequency derivation, spectral decomposition pipeline, and QI equation are specified in <a href="/whitepaper/v5/" class="text-[var(--color-accent-primary)]">Whitepaper v5.2, Sections 5.3&ndash;5.6</a>.
@@ -866,18 +866,96 @@ const latestChange = getLatestChangelog();
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="nsp" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. NSP Protocol</h2>
+
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-primary);">
+          <p class="text-sm font-semibold text-[var(--color-accent-primary)] mb-2">Why post-quantum cryptography is non-negotiable for neural devices</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            Neural data cannot be reset like a password. A brainwave recording taken today will identify you in twenty years. Adversaries know this &mdash; a strategy called <strong>Harvest Now, Decrypt Later</strong> (HNDL) involves recording encrypted traffic today and waiting for quantum computers to break the encryption retroactively. For an implant with a 10&ndash;20 year operational lifetime, data encrypted with today&rsquo;s standard algorithms may be decryptable well within the device&rsquo;s service life.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            This is not theoretical. NIST has <a href="https://csrc.nist.gov/pubs/ir/8547/ipd" class="text-[var(--color-accent-primary)]">mandated</a> that all legacy encryption algorithms (RSA, ECDSA, Diffie-Hellman) be deprecated by 2030 and fully disallowed by 2035. NSP is designed from the ground up with their quantum-resistant replacements &mdash; so neural data encrypted today remains protected for the lifetime of the patient, not just the lifetime of the algorithm.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-8 bg-[var(--color-bg-elevated)]">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">The gap NSP fills</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            Post-quantum cryptography is production-ready for web traffic &mdash; OpenSSL&nbsp;3.5, BoringSSL, and wolfSSL all ship ML-KEM today, and roughly 43% of connections through Cloudflare already use hybrid post-quantum key agreement. But <strong>none of this reaches the BCI data link.</strong> Bluetooth Low Energy, the only practical wireless transport for implanted devices, uses ECDH on the P-256 curve for key exchange &mdash; an algorithm that Shor&rsquo;s algorithm breaks outright. The Bluetooth specification (through&nbsp;5.4) offers <strong>no post-quantum upgrade path</strong>.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            The device landscape confirms the urgency. No BCI manufacturer &mdash; Neuralink, Synchron, Blackrock Neurotech, OpenBCI, or Emotiv &mdash; has published an independent security audit or a full wireless security specification. Emotiv&rsquo;s AES-128-ECB encryption was <a href="https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode" class="text-[var(--color-accent-primary)]">publicly broken in 2010</a>. OpenBCI&rsquo;s protocol documentation contains zero mentions of encryption. A 2021 ACM&nbsp;Computing&nbsp;Surveys review concluded that &ldquo;from the security perspective, BCIs are in an early and immature stage&rdquo; (<a href="https://dl.acm.org/doi/10.1145/3427376" class="text-[var(--color-accent-primary)]">Bernal&nbsp;et&nbsp;al.</a>).
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            Meanwhile, NIST&rsquo;s IR&nbsp;8547 transition timeline mandates deprecation by 2030 and disallowance by 2035 &mdash; but provides <strong>no device-specific migration guidance</strong> for BLE, IoT, or medical devices. No existing standard tells a BCI manufacturer how to migrate from ECDH to ML-KEM on a 40&nbsp;mW power budget.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            Beyond cryptography, no existing protocol performs <strong>physics-based signal validation</strong> (verifying neural signals match expected brain activity patterns) or <strong>per-user adaptive anomaly detection</strong> (learning each patient&rsquo;s unique neural baseline to catch slow-drift attacks). Both remain research-stage concepts with no deployed implementations. NSP addresses all three gaps &mdash; PQC at I0, signal integrity, and adaptive detection &mdash; as a single protocol designed for constrained neural hardware.
+          </p>
+        </div>
+
         <div class="prose mb-8">
           <p>
-            The Neural Sensory Protocol (NSP) is a five-layer, post-quantum communication protocol specifically designed for BCI data links. It encapsulates every neural data frame using ML-KEM key exchange, ML-DSA digital signatures, and AES-256-GCM authenticated encryption, achieving this with only <strong>3.25% power overhead</strong> on constrained implanted devices.
+            The Neural Sensory Protocol (NSP) is a post-quantum security protocol specifically designed for BCI data links. It protects every neural data frame using ML-KEM key exchange (NIST&rsquo;s quantum-resistant replacement for classical key exchange, standardized as FIPS 203), ML-DSA digital signatures (the quantum-resistant replacement for RSA and ECDSA signing, FIPS 204), and AES-256-GCM authenticated encryption (which both encrypts data and cryptographically verifies it has not been tampered with in transit). Power modeling against the Neuralink N1 reference platform estimates an overhead of <strong>approximately 3.25%</strong> of a 40 mW implant budget.
           </p>
           <p>
-            NSP comprises five layers: (1) Physical (electrode interface and signal conditioning); (2) Integrity (QI-based signal validation via STFT spectral analysis); (3) Encryption (post-quantum key exchange and authenticated encryption); (4) Transport (framing, sequencing, and flow control); and (5) Application (BCI command interpretation and consent enforcement).
+            NSP defines five independent defense layers. Each layer operates independently &mdash; failure of one does not compromise the others:
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-mono font-bold text-[var(--color-accent-primary)]">L1</span>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Hardware Root of Trust</h4>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              Firmware integrity and secure boot chain. Ensures the device is running authentic, untampered software from the moment it powers on. Uses SPHINCS+ hash-based signatures (FIPS 205) for firmware attestation &mdash; chosen because hash-based cryptography has no known quantum attack vector.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-mono font-bold text-[var(--color-accent-primary)]">L2</span>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">PQC Key Exchange</h4>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              Hybrid post-quantum key exchange, frame encryption, and mutual authentication. Combines classical ECDH with ML-KEM so that even if one algorithm is broken, the other still protects the session. All frame data is encrypted with AES-256-GCM. This is the layer that defeats Harvest Now, Decrypt Later.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-mono font-bold text-[var(--color-accent-primary)]">L3</span>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">QI Signal Integrity</h4>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              Physics-based signal validation at the electrode-tissue boundary. Uses STFT (Short-Time Fourier Transform) spectral analysis to decompose neural signals into their frequency components over time. Injected signals that violate the expected scale-frequency relationship (<span class="font-[family-name:var(--font-mono)]">L&nbsp;=&nbsp;v/f</span>) are flagged &mdash; catching attacks that cryptography alone cannot detect.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-mono font-bold text-[var(--color-accent-primary)]">L4</span>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Adaptive TTT</h4>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              Per-user anomaly detection using Test-Time Training &mdash; a machine learning technique that continuously adapts to each patient&rsquo;s unique neural baseline. Detects slow-drift attacks and gradual signal poisoning that would pass static threshold checks. What looks normal for one brain may be anomalous for another.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-mono font-bold text-[var(--color-accent-primary)]">L5</span>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">EM Environment</h4>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              Electromagnetic interference detection and spectral scanning. Monitors the RF environment around the device for anomalous emissions that could indicate active signal injection or intermodulation attacks &mdash; where external electromagnetic fields interact with the implant&rsquo;s own circuitry to produce unintended signals.
+            </p>
+          </div>
+        </div>
+
+        <div class="prose mb-8">
+          <p>
+            The protocol is specified across three device tiers: implanted (most constrained, &le;40 mW), wearable (moderate power budget), and external (unconstrained). Not all tiers require all layers &mdash; consumer wearables implement Layers 1&ndash;3, while implanted devices implement all five. Each tier uses the same cryptographic primitives but with different parameter sets and duty cycles.
           </p>
           <p>
-            The protocol is specified across three device tiers: implanted (most constrained, &le;40 mW), wearable (moderate power budget), and external (unconstrained). Each tier uses the same cryptographic primitives but with different parameter sets and duty cycles.
-          </p>
-          <p>
-            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than X25519 keys. Project Runemate's Staves bytecode compression mitigates this overhead, achieving net bandwidth savings over classical transport for typical BCI interface content exceeding 23 KB.
+            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). Runemate&rsquo;s compression layer mitigates this overhead, achieving net bandwidth savings over classical transport for typical BCI interface content exceeding 23 KB.
           </p>
         </div>
 
@@ -939,7 +1017,7 @@ const latestChange = getLatestChangelog();
               <li>Use the <a href="/TARA/">TARA atlas</a> to identify risk profiles for BCI techniques in your studies</li>
               <li>Apply <a href="/scoring/">NISS scoring</a> to quantify neural impact in vulnerability reports</li>
               <li>Reference the <a href="#neural-impact">Neural Impact Chain</a> for technique-to-diagnosis mapping</li>
-              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.2.2. Qinnovate. Available at qinnovate.com</code></li>
+              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.2.3. Qinnovate. Available at qinnovate.com</code></li>
             </ul>
           </div>
 
@@ -1036,7 +1114,7 @@ const latestChange = getLatestChangelog();
       <footer class="border-t border-[var(--color-border)] pt-8 pb-20">
         <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--color-text-faint)]">
           <div>
-            <strong>QIF Whitepaper v6.2.2</strong> &middot; {new Date().toISOString().split('T')[0]} &middot; Apache 2.0
+            <strong>QIF Whitepaper v6.2.3</strong> &middot; {new Date().toISOString().split('T')[0]} &middot; Apache 2.0
           </div>
           <div class="flex gap-4">
             <a href="/whitepaper/v6/">v6.0</a>

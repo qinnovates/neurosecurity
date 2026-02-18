@@ -65,7 +65,7 @@ const latestChange = getLatestChangelog();
         </div>
         <p class="text-sm text-amber-700">
           You are viewing <strong>v6.0</strong> of the QIF Whitepaper. This version is preserved for reference.
-          <a href="/whitepaper/" class="underline font-medium">Read the current version (v6.2.1) →</a>
+          <a href="/whitepaper/" class="underline font-medium">Read the current version (v6.2.3) →</a>
         </p>
       </div>
 
@@ -862,14 +862,14 @@ const latestChange = getLatestChangelog();
             </ul>
           </div>
 
-          <!-- Engineers & Cryptographers -->
+          <!-- Engineers & Implementers -->
           <div class="glass rounded-xl p-6">
             <div class="flex items-center gap-2 mb-3">
               <span class="text-lg">&#x2699;</span>
-              <h3 class="font-semibold font-[family-name:var(--font-heading)]">Engineers &amp; Cryptographers</h3>
+              <h3 class="font-semibold font-[family-name:var(--font-heading)]">Engineers &amp; Implementers</h3>
             </div>
             <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
-              <li><strong>NSP needs cryptographers.</strong> The <a href="/nsp/">Neural Security Protocol</a> was designed by a security researcher, not a cryptographer &mdash; it needs formal review, hardening, and implementation by people who break ciphers for a living</li>
+              <li><strong>Post-quantum native.</strong> <a href="/nsp/">NSP</a> and Runemate are designed PQC-first &mdash; no legacy cipher inheritance. NIST <a href="https://csrc.nist.gov/pubs/ir/8547/ipd">mandates</a> all legacy encryption deprecated by 2030 and disallowed by 2035 &mdash; and adversaries are already harvesting encrypted data today to crack later. Neural data has a lifetime shelf life; we&rsquo;re not shipping it with an expiration date.</li>
               <li>Employ the <a href="#hourglass">hourglass model</a> to structure threat assessments by architectural band</li>
               <li>Map your device's threat surface to <a href="/TARA/">TARA categories</a></li>
               <li>All specifications are Apache 2.0 &mdash; fork, implement, contribute</li>

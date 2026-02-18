@@ -157,6 +157,50 @@ NSP layers map to QIF bands as follows:
 | Layer 4 (Adaptive TTT) | N1, N2 | Per-user statistical baseline |
 | Layer 5 (EM Environment) | I0 (physical boundary) | Electromagnetic interference detection |
 
+### 2.5 Gap Analysis: Why NSP Is Necessary
+
+NSP exists because no existing protocol or standard addresses the intersection of post-quantum cryptography, neural signal integrity, and constrained BCI hardware. This section documents the verified gaps as of February 2026.
+
+#### 2.5.1 BLE Has No Post-Quantum Upgrade Path
+
+Bluetooth Low Energy (through specification 5.4) uses ECDH on the P-256 curve for key exchange. This algorithm is broken by Shor's algorithm on a cryptographically relevant quantum computer. The symmetric layer (AES-128-CCM) is not directly vulnerable but provides only ~64-bit post-quantum security via Grover's algorithm — below NIST's minimum threshold. **The Bluetooth SIG has published no post-quantum migration plan.** [Argenox 2025 Guide](https://argenox.com/blog/bluetooth-low-energy-ble-security-privacy-a-2025-guide); [ScienceDirect BLE Security Survey](https://www.sciencedirect.com/science/article/pii/S1389128621005697)
+
+#### 2.5.2 PQC Exists for TLS/DTLS but Not for BCI Data Links
+
+Post-quantum key exchange (hybrid ML-KEM + ECDHE) is production-ready in TLS 1.3:
+- **OpenSSL 3.5.0** (April 2025): ML-KEM, ML-DSA, SLH-DSA; X25519MLKEM768 as default keyshare.
+- **BoringSSL**: ML-KEM/ML-DSA in production; powers Chrome and Google services.
+- **wolfSSL 5.8.4**: ML-KEM (FIPS 203), ML-DSA (FIPS 204) with DTLS 1.3 support.
+- **~43% of human-generated connections through Cloudflare** use hybrid PQ key agreement as of September 2025.
+
+However, IETF drafts for PQC in TLS (draft-ietf-tls-hybrid-design-16, draft-ietf-tls-ecdhe-mlkem-04) have NOT been published as RFCs. More critically, **no specification exists for deploying PQC key exchange over BLE on constrained neural hardware** — the key sizes (ML-KEM-768 public keys are 1,184 bytes, 18× larger than X25519) require compression (see Runemate) and duty-cycle management that TLS/DTLS do not address.
+
+#### 2.5.3 No BCI Manufacturer Has Published a Security Specification
+
+| Device | Encryption | Key Exchange | Security Audit |
+|--------|-----------|-------------|----------------|
+| Neuralink N1 | Claims AES-256 | Claims proprietary OOB pairing | **None published** |
+| Synchron Stentrode | Unknown | Unknown | **None published** |
+| Blackrock NeuroPort | Unknown (wired 510(k)) | N/A (wired) | **None published** |
+| Emotiv EPOC | AES-128-ECB (broken 2010) | Key derived from serial number | **Cracked publicly** |
+| OpenBCI Cyton/Ganglion | **None documented** | **None** | **None published** |
+
+Sources: [CryptoFails (Emotiv)](https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode); [OpenBCI SDK Docs](https://docs.openbci.com/Cyton/CytonSDK/); [Bernal et al., ACM Computing Surveys 54(1), 2021](https://dl.acm.org/doi/10.1145/3427376)
+
+The ACM Computing Surveys review by Bernal et al. (2021) concludes: "From the security perspective, BCIs are in an early and immature stage."
+
+#### 2.5.4 No Physics-Based Signal Validation Protocol Exists
+
+No existing protocol validates whether neural signal content is physiologically plausible as a security measure. The closest work — a 2025 Nature Communications paper on space-time-coding metasurfaces for BCI wireless security ([Xiao et al., Nat. Commun. 16, 7914](https://www.nature.com/articles/s41467-025-63326-0)) — secures the RF channel at the physical layer, not the signal content. NSP Layer 3 (QI Signal Integrity) is novel: it uses STFT spectral analysis and the L=v/f scale-frequency relationship to validate that received signals conform to expected brain activity patterns.
+
+#### 2.5.5 No Per-User Adaptive Anomaly Detection Protocol Exists
+
+Per-user anomaly detection for BCI signals exists only as academic concepts. Bernal et al. (2021) proposed a "brain hacking recognizer" architecture but did not implement it. GAN-based adversarial defenses and statistical process control methods have been evaluated in lab settings but are not deployed on any BCI device. NSP Layer 4 (Adaptive TTT) fills this gap with Test-Time Training that continuously adapts to each patient's unique neural baseline.
+
+#### 2.5.6 NIST Provides No Device-Specific PQC Migration Guidance
+
+NIST IR 8547 (IPD, November 2024) sets the 2030 deprecation / 2035 disallowance timeline for quantum-vulnerable algorithms but contains **no specific guidance** for BLE, Bluetooth, IoT devices, medical devices, constrained devices, or wearables. Separate NIST publications address IoT baseline security (IR 8259, IR 8425) but do not address PQC migration. **NSP is the first specification to define a PQC migration path for constrained neural hardware.**
+
 ---
 
 ## 3. Frame Format

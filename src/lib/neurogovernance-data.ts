@@ -92,16 +92,17 @@ const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 
 /** Map neurorights to the brain regions they primarily protect */
 const NEURORIGHT_BRAIN_MAP: Record<string, string[]> = {
   MP: ['temporal', 'frontal'],
-  CL: ['frontal', 'limbic'],
+  CL: ['prefrontal', 'frontal', 'limbic'],
   MI: ['frontal', 'motor', 'limbic', 'temporal'],
-  PC: ['limbic', 'frontal'],
-  CA: ['frontal', 'temporal'],
+  PC: ['limbic', 'prefrontal'],
+  CA: ['prefrontal', 'frontal', 'temporal'],
   DI: ['motor', 'cerebellum', 'brainstem'],
   IDA: ['temporal', 'occipital'],
 };
 
 /** Simplified brain regions for the visualization */
 const BRAIN_REGIONS: { id: string; name: string; description: string; bandIds: string[] }[] = [
+  { id: 'prefrontal', name: 'Prefrontal Cortex', description: 'Planning, impulse control, self-awareness, social behavior', bandIds: ['N7'] },
   { id: 'frontal', name: 'Frontal Cortex', description: 'Executive function, decision-making, personality', bandIds: ['N7'] },
   { id: 'temporal', name: 'Temporal Lobe', description: 'Language, memory, auditory processing', bandIds: ['N7', 'N6'] },
   { id: 'limbic', name: 'Limbic System', description: 'Emotion, memory formation, motivation', bandIds: ['N6'] },
