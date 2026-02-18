@@ -3,7 +3,7 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
-    "total_techniques": 102,
+    "total_techniques": 103,
     "total_tactics": 15,
     "total_domains": 8,
     "by_tactic": {
@@ -19491,6 +19491,123 @@
         "timeline": "now",
         "gate_reason": "Display and ambient light sensor in all devices",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-02-18"
+      }
+    },
+    {
+      "id": "QIF-T0103",
+      "attack": "SSVEP Frequency Hijack via Imperceptible Display Flicker",
+      "tactic": "QIF-C.EX",
+      "bands": "S3\u2192N7",
+      "band_ids": ["S3", "I0", "N7"],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes (stimulus presentation is classical)",
+      "quantum": "Enhanced (SSVEP coherence exploitable via QI)",
+      "sources": [
+        "Ming et al. 2023 (J Neural Engineering, 60Hz imperceptible SSVEP, 52.8 bits/min)",
+        "Bian et al. 2022 (J Neural Engineering, SSVEP square wave attacks)",
+        "Upadhayay & Behzadan 2023 (IEEE SMC, sensory-channel BCI attacks)",
+        "Meng et al. 2024 (Future Gen Comp Sys, adversarial EEG filtering)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "PE",
+      "notes": "Exploit the SSVEP pathway by injecting imperceptible display flicker (above critical flicker fusion threshold, ~60Hz) that drives visual cortex responses without user awareness. Proven: Ming et al. 2023 demonstrated 60Hz flickers invisible to users produce classifiable SSVEP responses at 52.8 bits/min. Attack scenarios: (1) inject false BCI commands by matching SSVEP control frequencies, (2) jam BCI operation with broadband visual noise, (3) exfiltrate neural state via stimulus-response probing, (4) trigger photosensitive seizures at epileptogenic frequencies. Unlike T0040 (neurophishing via app-layer stimuli), this attack operates at the display hardware level and requires no BCI application cooperation. The display itself becomes the attack vector.",
+      "legacy_ids": [],
+      "legacy_technique_id": "T2103",
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
+        "score": 6.1,
+        "severity": "high",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": ["QIF-T0040", "QIF-T0010", "QIF-T0009"],
+        "secondary_tactics": ["QIF-N.IJ", "QIF-B.IN"]
+      },
+      "tara": {
+        "mechanism": "Display renders imperceptible flicker patterns at frequencies matching SSVEP response bands. Visual cortex phase-locks to stimulus below conscious awareness. BCI decoder interprets evoked response as user command or is jammed by broadband interference.",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "High-frequency SSVEP-based BCI for locked-in patients",
+          "conditions": [
+            "ALS/locked-in syndrome communication (SSVEP-BCI, FDA investigational)",
+            "attention assessment via covert SSVEP monitoring",
+            "visual pathway integrity testing"
+          ],
+          "fda_status": "investigational",
+          "evidence_level": "RCT",
+          "safe_parameters": "Disclosed frequencies only; avoid epileptogenic bands (15-25 Hz); monitor for photosensitive responses; session duration limits",
+          "sources": [
+            "Ming et al. 2023 (J Neural Eng)",
+            "Bian et al. 2022 (J Neural Eng)"
+          ]
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": ["display_flicker_audit", "SSVEP_response_monitoring", "seizure_risk_screening"],
+          "regulations": ["HIPAA", "GDPR Art. 9", "IEC 62304 (display firmware)", "proposed neurorights legislation"],
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "No covert visual stimulation; photosensitive epilepsy screening mandatory; display firmware integrity verification"
+        },
+        "engineering": {
+          "coupling": ["electromagnetic"],
+          "parameters": {
+            "frequency_hz": "60+ (above CFF, imperceptible)",
+            "modality": "visual (display backlight or pixel modulation)",
+            "information_rate_bpm": "52.8 (demonstrated)",
+            "attack_range": "line of sight to display"
+          },
+          "hardware": ["display_panel", "backlight_controller", "BCI_headset"],
+          "detection": "Display frame-rate analysis, sub-frame luminance monitoring, SSVEP response correlation with non-user-initiated stimuli, firmware integrity checking on display controllers"
+        },
+        "dsm5": {
+          "primary": [
+            {"code": "G40.4", "name": "Photosensitive Epilepsy", "confidence": "established"},
+            {"code": "F44", "name": "Conversion Disorder (functional neurological)", "confidence": "probable"}
+          ],
+          "secondary": [
+            {"code": "F41", "name": "Anxiety Disorders", "confidence": "probable"},
+            {"code": "F43.1", "name": "PTSD", "confidence": "theoretical"}
+          ],
+          "risk_class": "direct",
+          "cluster": "cognitive_psychotic",
+          "pathway": "S3 (display) \u2192 I0 (retina/optic nerve) \u2192 N7 (visual cortex V1) \u2192 BCI decoder",
+          "niss_correlation": "BI:L (seizure risk), CG:H (false command injection), CV:I (no consent)"
+        }
+      },
+      "cvss": {
+        "version": "4.0",
+        "base_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:H/VI:H/VA:L/SC:H/SI:L/SA:N",
+        "supplemental": "S:P/AU:N/R:U/V:C",
+        "gap_group": 3,
+        "gap_summary": "CVSS cannot express neural command injection via visual pathway; seizure induction risk has no CVSS dimension"
+      },
+      "neurorights": {
+        "affected": ["CA", "MI", "MP"],
+        "cci": 1.4
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": ["TM", "VA", "SBOM", "PM"],
+          "coverage_score": 0.3,
+          "gaps": ["Display firmware not typically in SBOM scope", "No FDA pathway for display-as-attack-vector", "Photosensitive seizure risk not in cybersecurity threat models"]
+        }
+      },
+      "physics_feasibility": {
+        "tier": 0,
+        "tier_label": "feasible_now",
+        "timeline": "now",
+        "gate_reason": "Standard displays capable of 60Hz+ modulation; SSVEP response demonstrated in literature",
+        "constraint_system_ref": "QIF Derivation Log Entry 66",
         "analysis_date": "2026-02-18"
       }
     }

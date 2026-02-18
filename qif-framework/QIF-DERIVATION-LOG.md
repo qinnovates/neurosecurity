@@ -23,6 +23,7 @@
 
 | Date | Event | Link |
 |------|-------|------|
+| 2026-02-18 | **SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation.** Subliminal visual attacks on BCIs: monitors flickering above CFF (~60Hz) evoke SSVEP responses invisible to users. Ming et al. 2023 proved 60Hz imperceptible flickers produce classifiable brain responses (52.8 bits/min). TARA coverage confirmed solid (T0040, T0010, T0009 already mapped). New technique QIF-T0103 added for dedicated SSVEP frequency hijack. BCI limits equation cross-validated by Gemini (12 constraints confirmed). Guardrails doc corrected: physics = boundary not control. Governance risk tagged for hardware vs software charge protection. | [Entry 66](#entry-66-ssvep-frequency-hijack-discovery) |
 | 2026-02-18 | **Physics Feasibility Tiering of TARA Techniques.** All 102 techniques classified by physics hardware gate: 61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only. Highest-impact future attacks identified. | [Entry 65](#entry-65-physics-feasibility-tiering) |
 | 2026-02-18 | **BCI Limits Equation Blog Post Published.** Blog post at `/publications/2026-02-18-the-physics-equation-that-limits-every-brain-computer-interface`. Priority timestamp established. | [Entry 64](#entry-64-bci-limits-blog-published) |
 | 2026-02-18 | **BCI Limits Equation — Strategic Assessment.** Kevin asks whether the BCI limits equation (Entry 60) is worth pursuing. Analysis: yes, but as standalone paper, not folded into QIF preprint. Genuinely novel, physics-grounded, testable. | [Entry 63](#entry-63-bci-limits-strategic-assessment) |
@@ -188,6 +189,84 @@ Each entry follows this structure:
 | 3 | 2026-02-02 ~afternoon | Layer Consolidation: 14 Is Too Many | Validated — redesign in progress |
 | 2 | 2026-02-02 ~afternoon | Circular Topology: L8 Touches L1 | Validated — superseded by hourglass (Entry 7) |
 | 1 | 2026-02-02 ~afternoon | OSI Layers Are Meaningless for BCI | Validated — drives framework redesign |
+---
+
+## Entry 66: SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation {#entry-66-ssvep-frequency-hijack-discovery}
+
+**Date:** 2026-02-18, ~17:00
+**Classification:** VERIFIED (SSVEP vulnerability) + ANALYSIS (equation validation) + GOVERNANCE (charge protection gap)
+**AI Systems:** Claude Opus 4.6, Gemini CLI (cross-validation)
+**Connected entries:** Entry 60 (BCI Limits Equation), Entry 65 (Physics Feasibility Tiering), Entry 59 (Guardrails Mapping)
+
+### Discovery: Subliminal Visual Attacks on BCIs
+
+Kevin raised a critical question: can a monitor flicker so fast that you don't consciously notice it, but your visual cortex still responds? The answer is yes, and it has direct BCI security implications.
+
+**The mechanism:** Steady-State Visual Evoked Potentials (SSVEP) are a well-documented brain response where visual cortex locks onto rhythmic visual stimuli. BCIs exploit this for control (user looks at a flickering target, brain produces matching frequency, BCI decodes intent). The vulnerability: this works *below conscious perception*.
+
+**Key research findings:**
+- **Ming et al. 2023** (J Neural Engineering): Proved 60Hz imperceptible flickers produce classifiable brain responses. 52.8 bits/min information transfer rate. Users cannot see the flicker, but their visual cortex responds reliably.
+- **Bian et al. 2022** (J Neural Engineering): Demonstrated SSVEP BCIs are vulnerable to square wave attacks.
+- **Meng et al. 2024** (Future Generation Computer Systems): Adversarial filtering attacks on EEG-based BCIs.
+- **SAIL Lab (Upadhayay & Behzadan, IEEE SMC 2023)**: Demonstrated sensory-channel attacks on motor imagery BCIs. Novel contribution: attacks the human sensory pathway, not the digital signal path.
+
+**Attack vectors identified:**
+1. **False command injection:** Inject SSVEP stimulus matching BCI control frequencies to issue unauthorized commands
+2. **BCI jamming:** Flood visual cortex with broadband flicker to overwhelm BCI signal decoding
+3. **Neural side-channel exfiltration:** Present stimuli and read SSVEP responses to extract information about user's visual processing state
+4. **Photosensitive seizure triggering:** Malicious flicker patterns at epileptogenic frequencies (especially concerning for users with photosensitive epilepsy)
+
+**TARA coverage assessment:** QIF's TARA registry already partially covers this space:
+- QIF-T0040 (Neurophishing): Subliminal visual stimuli for P300/SSVEP information extraction
+- QIF-T0010 (ELF Neural Entrainment): Low-frequency entrainment via electromagnetic fields
+- QIF-T0009 (RF False Brainwave Injection): RF injection of false brainwave patterns
+
+**Gap identified:** No dedicated technique for *imperceptible display-based SSVEP frequency hijack* specifically targeting BCI command channels. Added as QIF-T0103.
+
+Kevin's reaction: "TARA FTW. I don't think we've come across an uncovered one yet after the first week of mapping. That means QIF is pretty solid."
+
+### BCI Limits Equation Cross-Validation
+
+Passed the corrected 12-constraint BCI limits equation (from Entry 60) to Gemini CLI for independent validation.
+
+**Gemini confirmed:**
+- All 12 constraints' physics are sound
+- Constraint coupling (P_total ↔ thermal ceiling) correctly identified
+- Shannon electrode safety limit correctly formulated
+
+**Gemini flagged:**
+- T.H. Shannon (electrode safety) vs Claude Shannon (information theory) disambiguation needed
+- Suggested explicit stimulation safety constraint
+- Suggested flipping constraint 8 ratio
+- Recommended quantifying SNR_min (3-5)
+
+### Guardrails Document Corrections
+
+Applied corrections to `qif-sec-guardrails.md`:
+- Reframed Layer 0 as "Physics Boundary (The Operating Envelope)" not a security control. Kevin's insight: physics defines boundaries/minimums; controls are things you implement (Layers 1-3).
+- Corrected: micromotion (1-4um cardiac, not 10-30um), doubling time (7.4yr per Stevenson & Kording), thermal attribution (AAMI not IEC 60601-1), power (4.8-8.4mW single chip per Kim et al.)
+- Split f_clock from f_carrier (on-chip power vs wireless link)
+- Reformulated Boltzmann as voltage-domain SNR (Johnson-Nyquist noise)
+- Added wireless bandwidth constraint (13th constraint)
+- Tagged governance risk: `[GOVERNANCE-RISK: CHARGE-PROTECTION-GAP]` for hardware vs software charge balancing
+
+### Governance Risk: Hardware vs Software Charge Protection
+
+Kevin asked: "Do all chips have capacitors?" Investigation found:
+- MED-EL uses per-channel DC-blocking capacitors (~50% board space)
+- Some manufacturers use software-only charge balancing
+- Some use electrode shorting between stimulation pulses
+- **ISO 14708-3 is performance-based, not prescriptive** (does not mandate hardware capacitors)
+- Software-only protection is firmware-attackable; hardware capacitors are not
+
+This is a genuine cybersecurity gap: a firmware attack could disable software charge protection, potentially allowing tissue damage through unbalanced charge delivery. Hardware capacitors provide physics-layer defense that cannot be bypassed by software.
+
+### AI Collaboration
+
+- **Claude Opus 4.6:** Research synthesis (SAIL Lab, Ming et al., Bian et al., voltage protection), equation validation, guardrails document corrections, TARA gap analysis
+- **Gemini CLI:** Independent cross-validation of BCI limits equation (confirmed physics sound, flagged 4 refinements)
+- **Human decided:** Physics = boundary not control (reframing), governance risk tagging, SSVEP attack significance assessment, blog post direction
+
 ---
 
 ## Entry 65: Physics Feasibility Tiering of TARA Techniques {#entry-65-physics-feasibility-tiering}
