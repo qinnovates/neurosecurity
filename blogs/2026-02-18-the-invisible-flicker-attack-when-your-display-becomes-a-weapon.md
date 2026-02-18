@@ -303,6 +303,50 @@ The gap was that T0040 assumes the attack comes through a BCI application. T0103
 
 After months of systematic threat mapping across 103 techniques, 11 hourglass bands, and 15 tactics, we have not found a major attack class that TARA completely missed. The coverage held. That is what a well-designed threat taxonomy is supposed to do.
 
+## Detection: How Do You Know It's Happening?
+
+If you thought Mr. Robot was gnarly, that's just the surface of what really goes on. The real question is not whether these attacks are possible. The research says they are. The question is whether you can catch one in progress.
+
+### Traditional Systems (PCs, Displays)
+
+For conventional computers, detection uses familiar tools:
+
+- **SIEM/Log Analysis.** Monitor display driver logs for unexpected framebuffer writes, GPU shader injections, or backlight PWM changes outside application control. A compromised display driver will leave traces in kernel logs.
+- **Spectral Analysis of Display Output.** A high-speed photodiode (>1kHz sampling) pointed at the screen can detect sub-frame luminance modulation that does not match the rendered content. If you see 60 Hz energy in the luminance signal but the application is rendering static content, something is modulating the display.
+- **Browser-Level Frame Rate Monitoring.** A browser extension can monitor `requestAnimationFrame` timing and flag pages that inject sub-perceptual flicker through CSS animations, WebGL shaders, or canvas manipulation. This is Guardrail G2 in software form.
+- **Network Traffic Analysis.** If the flicker pattern is being delivered remotely (compromised ad network, malicious video stream), traffic analysis can detect the anomalous payload. Frequency-modulated content has a different statistical profile than normal video.
+- **GPU Memory Inspection.** Forensic analysis of GPU framebuffer contents can reveal hidden modulation layers that are not visible in the application's rendered output.
+
+These are extensions of what security teams already do. The tools exist. They just have not been pointed at this attack surface.
+
+### BCI Systems
+
+This is where it gets difficult. For brain-computer interfaces, detection is fundamentally harder because the attack operates below the user's awareness and the BCI itself may not distinguish a real intention from an injected one.
+
+- **Stimulus-Response Correlation (G3).** The BCI knows what frequencies it presented. If it detects SSVEP responses at frequencies it did not present, those responses are externally induced. This is the single most important defense. Every SSVEP BCI should implement this check before executing any command.
+- **Alpha/Beta Power Baseline Monitoring (G5).** The SAIL Lab demonstrated that adversarial sensory stimuli suppress alpha (8-13 Hz) and beta (13-30 Hz) power. If the BCI monitors its own signal quality and detects unexpected alpha/beta suppression without a corresponding change in task state, it should flag a potential attack and halt command execution.
+- **Cross-Frequency Coupling Analysis.** Normal SSVEP responses show specific phase-amplitude coupling patterns between the stimulus frequency and endogenous oscillations. Externally injected flicker may produce coupling patterns that differ from genuine attention-driven SSVEP. This is a research direction, not a deployed defense.
+- **Temporal Coherence Checking.** Genuine user intention develops over hundreds of milliseconds with characteristic ramping patterns. An injected stimulus produces a more abrupt onset in the SSVEP response. A BCI that checks the temporal envelope of the response, not just its frequency, can detect injection.
+- **Multi-Electrode Spatial Validation.** A genuine SSVEP from user attention has a specific spatial distribution across the occipital cortex. An external flicker hitting the entire visual field produces a different spatial pattern (more uniform, less lateralized). Comparing the spatial signature against known-good patterns adds another detection layer.
+
+The hard truth: most consumer BCIs (Muse, Emotiv, OpenBCI) implement none of these checks. They read whatever the visual cortex produces and trust it. Clinical-grade systems are not much better. The assumption has been that the visual environment is benign. That assumption no longer holds.
+
+### The Gap
+
+For traditional IT security, we have decades of tooling, threat models, and incident response playbooks. For BCI security, we are starting from zero. There is no BCI-SIEM. There is no neural IDS. There is no standard for what constitutes a "clean" EEG baseline versus a compromised one.
+
+This is exactly the gap that [QIF's Security Guardrails](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md) and the [TARA registry](https://qinnovate.com/TARA) are designed to fill. But the tools to implement them do not exist yet. Building them is the work ahead.
+
+## A Note on Why This Is Published
+
+This is why I stay on the blue side and the ethical side. Publishing attack research with full defensive analysis is how the security community has always worked. The attacks described here are constructed from published, peer-reviewed papers that anyone can read. What was missing was the unified threat model connecting them, and the defenses.
+
+Responsible disclosure means documenting the threat completely enough that defenders can act on it. Hiding the threat model protects no one. The people who would exploit these pathways do not need a blog post to figure it out. The people who would defend against them do.
+
+Every technique in this post maps to documented security guardrails. Every clinical risk maps to a DSM-5-TR diagnostic code. Every detection method maps to a specific layer of the [QIF hourglass model](https://qinnovate.com/lab/hourglass.html). The goal is defense, not offense.
+
+If you work in BCI security, neurotechnology, or neuroethics: Qinnovate's [Ethical Neurosecurity Code of Ethics](https://qinnovate.com/security/#ethics) establishes the principles for responsible research in this space. Bug bounty programs, safe harbor protections for researchers, and responsible disclosure pipelines are the infrastructure that cognitive sovereignty depends on. We are building that infrastructure.
+
 ## What Comes Next
 
 1. **Empirical validation.** The attack chain (sensory degradation → command injection → stress feedback loop) needs to be tested in a controlled lab setting with an actual SSVEP BCI. The individual components are proven. The chain is predicted.
@@ -312,6 +356,8 @@ After months of systematic threat mapping across 103 techniques, 11 hourglass ba
 3. **Guardrail G3 implementation.** Stimulus-response correlation checking is the most immediately deployable defense. If the BCI only accepts commands that match stimuli it intentionally presented, external frequency injection fails. This should be standard practice.
 
 4. **Integration with [QIF Security Guardrails](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md).** The five guardrails above need to be formalized in the guardrails document and mapped to specific hourglass bands and physics constraints.
+
+5. **Ethical neurosecurity governance.** Bug bounty programs, safe harbor language for researchers, responsible disclosure pipelines, and dual-use publication review processes. The [Code of Ethics](https://qinnovate.com/security/#ethics) sets the principles. The operational programs need to follow.
 
 ---
 

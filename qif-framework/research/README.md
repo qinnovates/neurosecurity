@@ -1,3 +1,8 @@
+---
+title: "QIF Research Documents"
+status: "active"
+---
+
 # QIF Research Documents
 
 Living research documents that feed into the QIF framework, website, and publications. These files are rendered dynamically on the website at build time via Astro content collections.
