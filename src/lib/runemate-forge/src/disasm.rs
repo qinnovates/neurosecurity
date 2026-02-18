@@ -246,10 +246,12 @@ fn tag_name(tag: u8) -> &'static str {
 }
 
 fn read_u16_le(data: &[u8], offset: usize) -> u16 {
+    if offset + 2 > data.len() { return 0; }
     u16::from_le_bytes([data[offset], data[offset + 1]])
 }
 
 fn read_u32_le(data: &[u8], offset: usize) -> u32 {
+    if offset + 4 > data.len() { return 0; }
     u32::from_le_bytes([data[offset], data[offset + 1], data[offset + 2], data[offset + 3]])
 }
 

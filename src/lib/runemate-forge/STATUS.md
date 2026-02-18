@@ -1,7 +1,7 @@
 # Runemate Forge — Engineering Status
 
 > Canonical truth document. No hiding gaps, no overselling.
-> Last verified: 2026-02-18 | `cargo test` → 24 passed, 0 failed
+> Last verified: 2026-02-18 | `cargo test` → 25 passed, 0 failed
 
 ---
 
@@ -9,16 +9,16 @@
 
 | Module | Lines | Tests | What's Validated |
 |--------|-------|-------|-----------------|
-| `lib.rs` | 169 | 5 | Full compile pipeline, error handling, multimodal compilation |
+| `lib.rs` | 189 | 6 | Full compile pipeline, error handling, multimodal, input size limit |
 | `lexer.rs` | 286 | 4 | Tokenization, colors, units, comments |
-| `parser.rs` | 660 | 4 | Staves, styles, tones, full documents |
+| `parser.rs` | 670 | 4 | Staves, styles, tones, full documents, depth guard |
 | `tara.rs` | 261 | 4 | Element limits, frequency bounds, charge density, bytecode size |
-| `codegen.rs` | 557 | 5 | Magic bytes, string dedup, size consistency, empty docs |
-| `disasm.rs` | 285 | 1 | Compile-disassemble roundtrip |
+| `codegen.rs` | 571 | 5 | Magic bytes, string dedup, size consistency, string/style/tone limits |
+| `disasm.rs` | 287 | 1 | Compile-disassemble roundtrip, bounds-checked reads |
 | `secure.rs` | 61 | 1 | Compile-encrypt-decrypt roundtrip |
 | `ast.rs` | 345 | 0 | Data structures only (no logic to test) |
 | `error.rs` | 70 | 0 | Error type definitions (no logic to test) |
-| **Total** | **2,694** | **24** | |
+| **Total** | **2,740** | **25** | |
 
 Full pipeline: lex → parse → TARA validate → codegen → encrypt → decrypt
 
@@ -34,6 +34,7 @@ Full pipeline: lex → parse → TARA validate → codegen → encrypt → decry
 | `test_compile_with_tone` | Auditory modality compilation | Pass |
 | `test_compile_full_dashboard` | Full multimodal document | Pass |
 | `test_compile_error_unterminated_string` | Error path: bad input rejected | Pass |
+| `test_compile_rejects_oversized_input` | Input >1 MB rejected (THREAT-MODEL M1) | Pass |
 | **Not tested** | Pulse (haptic) compilation standalone, multiple error types, empty input | — |
 
 ### lexer.rs (4 tests)
@@ -92,7 +93,7 @@ Full pipeline: lex → parse → TARA validate → codegen → encrypt → decry
 Honest list of what's missing or untested:
 
 1. **No element open/close balance check in codegen** — implicit via parser nesting (works, but a parser bug could produce unbalanced bytecode)
-2. **No input size limit enforcement** — THREAT-MODEL M1 says 1 MB max, lexer accepts any size
+2. ~~**No input size limit enforcement**~~ — **FIXED**: 1 MB max enforced in `lib.rs` (THREAT-MODEL M1)
 3. **No Unicode control character stripping** — THREAT-MODEL M8
 4. **No standalone CLI tool** — only lib API + demo binary
 5. **No benchmarks** — criterion in Cargo.toml dev-deps but no bench files written
@@ -102,6 +103,19 @@ Honest list of what's missing or untested:
 9. **Secure module has only 1 test** — no error path coverage for encryption failures
 10. **No pulse (haptic) standalone test** — only tested as part of full documents
 
+### Security Hardening (added 2026-02-18)
+
+The following were identified and fixed during a security audit:
+
+| Fix | Module | Description |
+|-----|--------|-------------|
+| Input size limit | `lib.rs` | Rejects input >1 MB before lexing (THREAT-MODEL M1) |
+| Parser depth guard | `parser.rs` | `MAX_PARSE_DEPTH = 256` prevents stack overflow via deeply nested elements |
+| Disasm bounds checks | `disasm.rs` | `read_u16_le`/`read_u32_le` return 0 on out-of-bounds instead of panicking |
+| String table budget | `codegen.rs` | `MAX_STRING_TABLE_BYTES = 1 MB` prevents unbounded string table growth |
+| Style def limit | `codegen.rs` | `MAX_STYLE_DEFS = 1024` caps style table entries |
+| Tone/pulse limit | `codegen.rs` | `MAX_TONE_PULSE_DEFS = 256` caps tone/pulse table entries |
+
 ---
 
 ## What We're Targeting (Near-Term)
@@ -109,7 +123,7 @@ Honest list of what's missing or untested:
 - [ ] CLI tool for standalone compilation
 - [ ] Fuzz testing on lexer and parser (cargo-fuzz)
 - [ ] Benchmark suite (criterion)
-- [ ] Enforce input size limits (1 MB max per THREAT-MODEL M1)
+- [x] Enforce input size limits (1 MB max per THREAT-MODEL M1) ✓ 2026-02-18
 - [ ] Unicode normalization in lexer
 - [ ] Element balance assertion in codegen
 - [ ] Error path tests for secure module (wrong key, corrupted data)
@@ -133,7 +147,7 @@ Goals will evolve. The multimodal architecture is grounded in neuroscience resea
 ## How to Run Tests
 
 ```bash
-# Run all tests (expected: 24 passed, 0 failed)
+# Run all tests (expected: 25 passed, 0 failed)
 cargo test
 
 # Run tests with output visible

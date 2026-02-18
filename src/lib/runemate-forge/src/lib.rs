@@ -9,10 +9,21 @@ pub mod secure;
 
 pub use error::{ForgeError, CompileResult};
 
+/// Maximum input size: 1 MB (per THREAT-MODEL M1)
+const MAX_INPUT_BYTES: usize = 1_048_576;
+
 /// Compile Staves DSL source into Staves v1.0 bytecode.
 ///
-/// Pipeline: lex → parse → TARA validate → codegen
+/// Pipeline: size check → lex → parse → TARA validate → codegen
 pub fn compile(source: &str) -> Result<CompileResult, ForgeError> {
+    // 0. Input size limit (THREAT-MODEL M1)
+    if source.len() > MAX_INPUT_BYTES {
+        return Err(ForgeError::ParseSimple(format!(
+            "input too large: {} bytes (max {})",
+            source.len(), MAX_INPUT_BYTES
+        )));
+    }
+
     // 1. Lex
     let tokens = lexer::lex(source)?;
 
@@ -156,6 +167,15 @@ mod tests {
         let text = disasm.unwrap();
         assert!(text.contains("Neural Status"));
         assert!(text.contains("STAVE \"dashboard\""));
+    }
+
+    #[test]
+    fn test_compile_rejects_oversized_input() {
+        let big = "a".repeat(MAX_INPUT_BYTES + 1);
+        let result = compile(&big);
+        assert!(result.is_err());
+        let msg = format!("{}", result.unwrap_err());
+        assert!(msg.contains("input too large"));
     }
 
     #[test]

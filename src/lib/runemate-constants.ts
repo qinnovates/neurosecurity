@@ -179,22 +179,21 @@ export const MULTIMODAL_MODALITIES = [
 
 /** v1.0 test status — granular engineering truth */
 export const FORGE_TEST_STATUS = {
-  totalTests: 24,
+  totalTests: 25,
   totalModules: 7,
-  totalLines: 2694,
+  totalLines: 2740,
   modules: [
-    { name: 'lib.rs', tests: 5, lines: 169, covers: 'Full compile pipeline, error handling, multimodal' },
+    { name: 'lib.rs', tests: 6, lines: 189, covers: 'Full compile pipeline, error handling, multimodal, input size limit' },
     { name: 'lexer.rs', tests: 4, lines: 286, covers: 'Tokenization, colors, units, comments' },
-    { name: 'parser.rs', tests: 4, lines: 660, covers: 'Staves, styles, tones, full documents' },
+    { name: 'parser.rs', tests: 4, lines: 670, covers: 'Staves, styles, tones, full documents, depth guard' },
     { name: 'tara.rs', tests: 4, lines: 261, covers: 'Element limits, frequency, charge, bytecode size' },
-    { name: 'codegen.rs', tests: 5, lines: 557, covers: 'Magic bytes, string dedup, size consistency' },
-    { name: 'disasm.rs', tests: 1, lines: 285, covers: 'Compile-disassemble roundtrip' },
+    { name: 'codegen.rs', tests: 5, lines: 571, covers: 'Magic bytes, string dedup, size consistency, string/style/tone limits' },
+    { name: 'disasm.rs', tests: 1, lines: 287, covers: 'Compile-disassemble roundtrip, bounds-checked reads' },
     { name: 'secure.rs', tests: 1, lines: 61, covers: 'Compile-encrypt-decrypt roundtrip' },
   ],
   knownGaps: [
     'No fuzz testing on lexer/parser',
     'No element balance assertion in codegen',
-    'No input size limit enforcement (THREAT-MODEL M1)',
     'No Unicode control char stripping (THREAT-MODEL M8)',
     'No standalone CLI tool',
     'No benchmarks (criterion available but unused)',

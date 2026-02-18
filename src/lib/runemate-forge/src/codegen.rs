@@ -21,15 +21,23 @@ const OP_SEPARATOR: u8 = 0x09;
 const OP_TONE_REF: u8 = 0x20;
 const OP_PULSE_REF: u8 = 0x30;
 
+/// Maximum total bytes in the string table (1 MB budget)
+const MAX_STRING_TABLE_BYTES: usize = 1_048_576;
+/// Maximum unique style definitions
+const MAX_STYLE_DEFS: usize = 1024;
+/// Maximum unique tone/pulse definitions
+const MAX_TONE_PULSE_DEFS: usize = 256;
+
 /// Intern strings, returning a 2-byte index.
 struct StringTable {
     strings: Vec<String>,
     index: HashMap<String, u16>,
+    total_bytes: usize,
 }
 
 impl StringTable {
     fn new() -> Self {
-        StringTable { strings: Vec::new(), index: HashMap::new() }
+        StringTable { strings: Vec::new(), index: HashMap::new(), total_bytes: 0 }
     }
 
     fn intern(&mut self, s: &str) -> Result<u16, ForgeError> {
@@ -37,12 +45,18 @@ impl StringTable {
             return Ok(idx);
         }
         if self.strings.len() >= 65535 {
-            return Err(ForgeError::Codegen("string table overflow (max 65535)".to_string()));
+            return Err(ForgeError::Codegen("string table overflow (max 65535 entries)".to_string()));
         }
         if s.len() > 65535 {
             return Err(ForgeError::Codegen(format!("string too long: {} bytes (max 65535)", s.len())));
         }
+        if self.total_bytes + s.len() > MAX_STRING_TABLE_BYTES {
+            return Err(ForgeError::Codegen(format!(
+                "string table byte budget exceeded (max {} bytes)", MAX_STRING_TABLE_BYTES
+            )));
+        }
         let idx = self.strings.len() as u16;
+        self.total_bytes += s.len();
         self.strings.push(s.to_string());
         self.index.insert(s.to_string(), idx);
         Ok(idx)
@@ -76,8 +90,8 @@ impl StyleTableEncoder {
         if let Some(&idx) = self.dedup.get(&encoded) {
             return Ok(idx);
         }
-        if self.entries.len() >= 65535 {
-            return Err(ForgeError::Codegen("style table overflow".to_string()));
+        if self.entries.len() >= MAX_STYLE_DEFS {
+            return Err(ForgeError::Codegen(format!("style table overflow (max {} definitions)", MAX_STYLE_DEFS)));
         }
         let idx = self.entries.len() as u16;
         self.dedup.insert(encoded.clone(), idx);
@@ -152,8 +166,8 @@ fn encode_style_set(props: &[StyleProperty], strings: &mut StringTable) -> Resul
 /// Encode tone/pulse table entries.
 fn encode_tone_pulse_table(doc: &StavesDocument, strings: &mut StringTable, tone_names: &HashMap<String, u16>, pulse_names: &HashMap<String, u16>) -> Result<Vec<u8>, ForgeError> {
     let total = doc.tones.len() + doc.pulses.len();
-    if total > 256 {
-        return Err(ForgeError::Codegen("tone/pulse table overflow (max 256)".to_string()));
+    if total > MAX_TONE_PULSE_DEFS {
+        return Err(ForgeError::Codegen(format!("tone/pulse table overflow (max {})", MAX_TONE_PULSE_DEFS)));
     }
     let mut out = Vec::new();
     out.extend_from_slice(&(total as u16).to_le_bytes());

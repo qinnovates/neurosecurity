@@ -2,14 +2,19 @@ use crate::ast::*;
 use crate::error::{ForgeError, Span};
 use crate::lexer::{Token, SpannedToken};
 
+/// Maximum nesting depth to prevent stack overflow on adversarial input.
+/// TARA default is 256, but we enforce a hard cap at parse time before TARA runs.
+const MAX_PARSE_DEPTH: usize = 256;
+
 pub struct Parser {
     tokens: Vec<SpannedToken>,
     pos: usize,
+    depth: usize,
 }
 
 impl Parser {
     pub fn new(tokens: Vec<SpannedToken>) -> Self {
-        Parser { tokens, pos: 0 }
+        Parser { tokens, pos: 0, depth: 0 }
     }
 
     pub fn parse(&mut self) -> Result<StavesDocument, ForgeError> {
@@ -86,6 +91,10 @@ impl Parser {
     }
 
     fn parse_container(&mut self) -> Result<Element, ForgeError> {
+        self.depth += 1;
+        if self.depth > MAX_PARSE_DEPTH {
+            return Err(self.error(&format!("nesting depth exceeds maximum ({})", MAX_PARSE_DEPTH)));
+        }
         let span = self.span();
         let kind = match &self.peek().token {
             Token::Row => { self.advance(); ContainerKind::Row }
@@ -99,6 +108,7 @@ impl Parser {
         self.expect_token(&Token::LBrace)?;
         let children = self.parse_elements()?;
         self.expect_token(&Token::RBrace)?;
+        self.depth -= 1;
         Ok(Element::Container { kind, attrs, children, span })
     }
 
