@@ -559,6 +559,46 @@ const breadcrumbs = [
     </div>
   </section>
 
+  <!-- ═══ PIVOT TO TARA ═══ -->
+  <section class="py-12 md:py-16" id="tara-pivot">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        See the Full Picture
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="glass rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto reveal">
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+        This page shows the psychiatric outcomes. To trace how each diagnosis arises — from the attack mechanism,
+        through the affected neural band, to the NISS severity score that predicts it — open the full technique
+        entry in the TARA Atlas.
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6">
+        Every technique listed above links directly to its TARA page, where you can see all four projections:
+        the security assessment, therapeutic analog, diagnostic mapping, and governance requirements.
+        The TARA Atlas is the single source of truth — this page is one lens into it.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/TARA/"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white transition-colors"
+          style="background: var(--color-accent-primary);"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+          Open TARA Atlas
+        </a>
+        <span class="text-xs text-[var(--color-text-faint)]">
+          View all {totalTechniques} techniques with full scoring and projections
+        </span>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ CALL TO ACTION ═══ -->
   <section class="py-12 md:py-20" id="cta">
     <div class="glass rounded-2xl p-8 sm:p-12 max-w-3xl mx-auto text-center reveal">
