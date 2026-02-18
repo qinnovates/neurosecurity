@@ -487,6 +487,36 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     relatedTerms: ['dsm5-diagnostic-mapping', 'diagnostic-cluster'],
     tags: ['concept', 'clinical', 'tara'],
   },
+  // === BCI Physics (Entry 60) ===
+  {
+    id: 'bci-physics-constraint-system',
+    term: 'BCI Physics Constraint System',
+    type: 'equation',
+    shortDef: 'The 11 physics rules every brain implant must obey at the same time, like a checklist from nature.',
+    fullDef: 'A system of 11 coupled inequalities that define the feasibility region for any brain-computer interface design. Constraints span thermodynamics, electromagnetism, Moore\'s Law scaling, Shannon electrode safety, Boltzmann detectability, QIF coherence threshold, thermal ceiling, mechanical mismatch, biocompatibility, geometric fit, and Shannon information capacity. A BCI is physically realizable only if it satisfies all constraints simultaneously. Derived in Entry 60, validated against Neuralink N1 in Entry 66.',
+    formula: 'P_total <= P_thermal AND f_clock <= f_max AND n_ch(t) = n_ch(0)*2^(t/T) AND k < 1.75 AND E_spike/(kT) >> 1 AND Cs >= Cs_min AND dT <= 1C AND ...',
+    relatedTerms: ['coherence-metric', 'niss', 'physics-feasibility-tier'],
+    href: '/whitepaper#bci-physics',
+    tags: ['equation', 'bci', 'physics', 'validated'],
+  },
+  {
+    id: 'physics-feasibility-tier',
+    term: 'Physics Feasibility Tier',
+    type: 'metric',
+    shortDef: 'A rating (T0 to T3 or TX) that says when an attack becomes physically possible based on hardware limits.',
+    fullDef: 'Classification of TARA techniques by when they become physically feasible given BCI hardware constraints. T0: feasible now with current hardware. T1: near-term (2026-2031) as process nodes shrink. T2: mid-term (2031-2038) requiring 7nm+ and 10k+ channels. T3: far-term (2038+) requiring million-channel BCIs. TX: no physics gate (software-only). Based on the BCI Physics Constraint System.',
+    relatedTerms: ['bci-physics-constraint-system', 'niss'],
+    tags: ['metric', 'tara', 'physics'],
+  },
+  {
+    id: 'thermal-ceiling',
+    term: 'Thermal Ceiling',
+    type: 'concept',
+    shortDef: 'Brain tissue dies above 42C, so implants can only add about 1 degree of heat. That caps everything else.',
+    fullDef: 'The fundamental thermodynamic limit on intracortical BCI power dissipation. Brain tissue starts dying at ~42C; normal body temperature is 37C. IEC 60601-1 limits allowable temperature rise to ~1C, capping total intracortical power to 15-40 mW. This is the hardest constraint in the BCI Physics Constraint System because every other parameter (channels, clock speed, die area) ultimately converts to heat.',
+    relatedTerms: ['bci-physics-constraint-system'],
+    tags: ['concept', 'physics', 'bci'],
+  },
 ] as const;
 
 /** Get terms sorted alphabetically */
