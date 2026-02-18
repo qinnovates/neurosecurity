@@ -229,8 +229,19 @@ function BrainScene({ brainRegions, neurorights, activeRegion, onHover, onClick 
   );
 }
 
+function useSafariDetect() {
+  const [isSafari, setIsSafari] = useState(false);
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    setIsSafari(/Safari/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua));
+  }, []);
+  return isSafari;
+}
+
 export default function BrainRightsHero({ neurorights, brainRegions, totalThreats }: Props) {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const isSafari = useSafariDetect();
+  const [dismissed, setDismissed] = useState(false);
 
   const activeRegionData = activeRegion ? brainRegions.find(r => r.id === activeRegion) : null;
   const activeRights = activeRegionData
@@ -239,6 +250,25 @@ export default function BrainRightsHero({ neurorights, brainRegions, totalThreat
 
   return (
     <div className="relative">
+      {isSafari && !dismissed && (
+        <div
+          className="flex items-center justify-between gap-3 px-4 py-2.5 mb-4 rounded-lg text-xs"
+          style={{ background: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.25)', color: 'var(--color-text-muted)' }}
+        >
+          <span>
+            This 3D visualization works best in <strong style={{ color: 'var(--color-text-primary)' }}>Chrome</strong> or <strong style={{ color: 'var(--color-text-primary)' }}>Firefox</strong>. Safari may have limited WebGL support.
+          </span>
+          <button
+            onClick={() => setDismissed(true)}
+            className="shrink-0 p-1 rounded hover:bg-black/10 transition-colors"
+            aria-label="Dismiss"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
         {/* 3D Brain Canvas */}
         <div
