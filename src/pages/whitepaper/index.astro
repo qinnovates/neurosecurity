@@ -31,7 +31,7 @@ const latestChange = getLatestChangelog();
       <div class="sticky top-24">
         <WhitepaperVersionSelector currentVersion="v6.3.0" />
         <nav class="space-y-1" aria-label="Table of contents">
-          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Table of Contents</p>
           {[
             { href: '#problem', label: 'The Problem' },
             { href: '#approach', label: 'Our Approach' },
@@ -78,18 +78,6 @@ const latestChange = getLatestChangelog();
         </p>
         <p class="text-base text-[var(--color-text-muted)] mb-6">
           {stats.totalTechniques} catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based and await validation by psychiatrists and neuroscientists.</em>
-        </p>
-        <div class="flex flex-wrap items-center gap-3 mb-4">
-          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
-            v6.3.0
-          </span>
-          <span class="text-xs text-[var(--color-text-faint)]">2026-02-16</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
-        </div>
-        <p class="text-sm text-[var(--color-text-muted)]">
-          <strong>Author:</strong> Kevin Qi &middot;
-          <strong>Organization:</strong> <a href="/">Qinnovate</a> &middot;
-          <strong>Prior version:</strong> <a href="/whitepaper/v6/">v6.0</a>
         </p>
       </section>
 
@@ -1124,10 +1112,18 @@ const latestChange = getLatestChangelog();
 
       <!-- ═══ Footer ═══ -->
       <footer class="border-t border-[var(--color-border)] pt-8 pb-20">
-        <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--color-text-faint)]">
-          <div>
-            <strong>QIF Whitepaper v6.3.0</strong> &middot; {new Date().toISOString().split('T')[0]} &middot; Apache 2.0
+        <div class="flex flex-col gap-4 text-xs text-[var(--color-text-faint)]">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
+              v6.3.0
+            </span>
+            <span class="text-xs text-[var(--color-text-faint)]">2026-02-16</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
           </div>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong>Author:</strong> Kevin Qi &middot;
+            <strong>Organization:</strong> <a href="/">Qinnovate</a>
+          </p>
           <div class="flex gap-4">
             <a href="/whitepaper/v6/">v6.0</a>
             <a href="/whitepaper/v5/">v5.2 (math-heavy)</a>
