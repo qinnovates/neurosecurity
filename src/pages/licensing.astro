@@ -10,26 +10,49 @@ import PageLayout from '../layouts/PageLayout.astro';
   <div class="max-w-3xl">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Licensing</h1>
     <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-12">
-      Everything Qinnovate publishes is licensed under <strong class="text-[var(--color-text-primary)]">Apache 2.0</strong>. Use it, build on it, ship it.
+      Two licenses, one principle: <strong class="text-[var(--color-text-primary)]">neural security standards should be adopted, not gatekept.</strong>
     </p>
 
-    <div class="glass rounded-xl p-8 mb-8">
+    <!-- Apache 2.0 -->
+    <div class="glass rounded-xl p-8 mb-6">
       <div class="flex items-start gap-4">
         <div class="text-3xl">&#x1f4dc;</div>
         <div>
           <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">Apache License, Version 2.0</h2>
+          <p class="text-xs font-medium text-[var(--color-accent-primary)] mb-3">Framework, data, specifications, and code</p>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-            The QIF framework, NSP protocol, TARA Atlas, whitepaper, blog posts, and all source code are available under the
+            The QIF framework, TARA Atlas, NISS scoring system, NSP protocol, and all source code are available under the
             <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">Apache License 2.0</a>.
+            This is the same license MITRE uses for ATT&amp;CK.
           </p>
           <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
             <p><strong class="text-[var(--color-text-primary)]">Use freely.</strong> Implement QIF, NSP, or TARA in your own systems, products, and research.</p>
             <p><strong class="text-[var(--color-text-primary)]">Modify freely.</strong> Adapt, extend, and build derivative works.</p>
-            <p><strong class="text-[var(--color-text-primary)]">Use commercially.</strong> No restrictions on commercial use. BCI security standards should be adopted, not gatekept.</p>
-            <p><strong class="text-[var(--color-text-primary)]">Patent grant included.</strong> Contributors grant a royalty-free patent license for their contributions.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Use commercially.</strong> No restrictions on commercial use.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Patent grant included.</strong> Contributors grant a royalty-free patent license for their contributions. No patent ambiguity.</p>
           </div>
           <div class="mt-4 text-xs text-[var(--color-text-faint)]">
             Only requirement: include the license and attribution in redistributions.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CC-BY 4.0 -->
+    <div class="glass rounded-xl p-8 mb-8">
+      <div class="flex items-start gap-4">
+        <div class="text-3xl">&#x1f4d6;</div>
+        <div>
+          <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">Creative Commons Attribution 4.0</h2>
+          <p class="text-xs font-medium text-emerald-500 mb-3">Research papers and academic publications</p>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+            The Zenodo preprint and formal academic publications are released under
+            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">CC-BY 4.0</a>,
+            the standard license for open-access research. This is the norm for Zenodo, arXiv, and academic repositories.
+          </p>
+          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+            <p><strong class="text-[var(--color-text-primary)]">Cite and share.</strong> Reproduce, redistribute, and build on the research with attribution.</p>
+            <p><strong class="text-[var(--color-text-primary)]">No restrictions.</strong> Commercial and non-commercial use permitted.</p>
           </div>
         </div>
       </div>
@@ -43,6 +66,7 @@ import PageLayout from '../layouts/PageLayout.astro';
           <thead>
             <tr class="border-b border-[var(--color-border)]">
               <th class="text-left py-3 pr-4 text-[var(--color-text-muted)] font-medium">Asset</th>
+              <th class="text-left py-3 pr-4 text-[var(--color-text-muted)] font-medium">License</th>
               <th class="text-center py-3 pr-4 text-[var(--color-text-muted)] font-medium">Share</th>
               <th class="text-center py-3 pr-4 text-[var(--color-text-muted)] font-medium">Modify</th>
               <th class="text-center py-3 text-[var(--color-text-muted)] font-medium">Commercial</th>
@@ -51,36 +75,56 @@ import PageLayout from '../layouts/PageLayout.astro';
           <tbody class="text-[var(--color-text-muted)]">
             <tr class="border-b border-[var(--color-border)]/50">
               <td class="py-3 pr-4">QIF framework</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium">Apache 2.0</span></td>
+              <td class="py-3 pr-4 text-center">Yes</td>
+              <td class="py-3 pr-4 text-center">Yes</td>
+              <td class="py-3 text-center">Yes</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-3 pr-4">TARA Atlas / registrar data</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium">Apache 2.0</span></td>
+              <td class="py-3 pr-4 text-center">Yes</td>
+              <td class="py-3 pr-4 text-center">Yes</td>
+              <td class="py-3 text-center">Yes</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-3 pr-4">NISS scoring system</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium">Apache 2.0</span></td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 text-center">Yes</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/50">
               <td class="py-3 pr-4">NSP protocol</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium">Apache 2.0</span></td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 text-center">Yes</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/50">
-              <td class="py-3 pr-4">TARA Atlas</td>
-              <td class="py-3 pr-4 text-center">Yes</td>
-              <td class="py-3 pr-4 text-center">Yes</td>
-              <td class="py-3 text-center">Yes</td>
-            </tr>
-            <tr class="border-b border-[var(--color-border)]/50">
-              <td class="py-3 pr-4">QIF whitepaper</td>
+              <td class="py-3 pr-4">Website code</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium">Apache 2.0</span></td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 text-center">Yes</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/50">
               <td class="py-3 pr-4">Blog posts</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium">Apache 2.0</span></td>
+              <td class="py-3 pr-4 text-center">Yes</td>
+              <td class="py-3 pr-4 text-center">Yes</td>
+              <td class="py-3 text-center">Yes</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-3 pr-4">Zenodo preprint</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-medium">CC-BY 4.0</span></td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 text-center">Yes</td>
             </tr>
             <tr>
-              <td class="py-3 pr-4">Website code</td>
+              <td class="py-3 pr-4">Academic papers</td>
+              <td class="py-3 pr-4"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-medium">CC-BY 4.0</span></td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 pr-4 text-center">Yes</td>
               <td class="py-3 text-center">Yes</td>
@@ -90,8 +134,18 @@ import PageLayout from '../layouts/PageLayout.astro';
       </div>
     </div>
 
+    <div class="glass rounded-lg p-4 mt-8">
+      <p class="text-xs text-[var(--color-text-faint)] leading-relaxed">
+        <strong class="text-[var(--color-text-muted)]">Why two licenses?</strong>
+        Apache 2.0 includes a patent grant that CC-BY lacks — critical for anyone integrating TARA into
+        compliance tooling or medical device software. CC-BY 4.0 is the academic standard for open-access
+        research and what repositories like Zenodo and arXiv expect. Both require only attribution. Neither
+        restricts commercial use.
+      </p>
+    </div>
+
     <p class="mt-12 text-xs text-[var(--color-text-faint)]">
-      Copyright 2024-2026 Kevin Qi / Qinnovate. For questions, contact kevin@qinnovate.com.
+      Copyright 2024-2026 Kevin Qi / Qinnovate.
     </p>
   </div>
 </PageLayout>
