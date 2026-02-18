@@ -15,7 +15,8 @@
     "verify:citations": "python3 scripts/verify/verify_citations.py",
     "verify:facts": "python3 scripts/verify/verify_facts.py",
     "verify:blogs": "python3 scripts/verify/audit_blog_claims.py",
-    "verify:crossrefs": "python3 scripts/verify/verify_crossrefs.py"
+    "verify:crossrefs": "python3 scripts/verify/verify_crossrefs.py",
+    "generate:ethics": "npx tsx scripts/generate-ethics-md.ts"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",
