@@ -67,6 +67,24 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
             {RUNEMATE_STATUS}
           </span>
         </h1>
+
+        <!-- Plain-English summary -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-10" style="border-left: 3px solid var(--color-accent-primary);">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">In plain English</p>
+          <p class="text-base text-[var(--color-text-primary)] mb-3">
+            Future brain implants will need to send information <em>into</em> the brain &mdash; not just read signals out. That means the chip inside someone's skull needs to receive content and turn it into something the brain can perceive: images, sounds, or touch sensations.
+          </p>
+          <p class="text-base text-[var(--color-text-primary)] mb-3">
+            The problem is that this content needs to be <strong>tiny</strong> (brain chips run on almost no power), <strong>safe</strong> (you can't reboot a brain), and <strong>secure against future threats</strong> (quantum computers will eventually break today's encryption &mdash; NIST finalized post-quantum standards in August 2024 &mdash; and you can't change your neural data like a password).
+          </p>
+          <p class="text-base text-[var(--color-text-primary)] mb-3">
+            {RUNEMATE_PROJECT_NAME} is a special-purpose language and compiler designed for exactly this. It takes descriptions of what a person should see, hear, or feel, and compresses them into a format small enough and safe enough to run on an implanted chip &mdash; while using encryption that even quantum computers can't crack.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            There is no open standard for this today. HTTPS, TCP/IP, and TLS all started as open research before they became the foundation of secure web browsing. {RUNEMATE_PROJECT_NAME} is that kind of early groundwork &mdash; an open-source foundation for a technology that doesn't have one yet. The technical details follow below.
+          </p>
+        </div>
+
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
             A native declarative DSL for multimodal BCI rendering. Compiles visual layouts, auditory tones, and haptic pulses into compact <strong>{RUNEMATE_OUTPUT_FORMAT}</strong> bytecode &mdash; achieving 65&ndash;90% size reduction over equivalent web content.
