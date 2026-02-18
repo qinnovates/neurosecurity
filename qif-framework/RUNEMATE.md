@@ -49,6 +49,35 @@ But the deeper innovation is this: Staves is not compressed HTML — it is the f
 
 > **Reading guide:** Sections 1-15 describe **production-ready engineering** (TRL 3-5). Sections 16-17 describe **research-stage architecture** (TRL 1-2) that depends on fundamental neuroscience breakthroughs. Sections 18-19 cover developer experience and regulatory strategy. Both research and regulatory content are included because the Phase 1 architecture was designed to support the Phase 2/3 research path — the decisions are entangled.
 
+### Testing & Validation
+
+24 tests across 7 modules, all passing. Full pipeline: lex → parse → TARA validate → codegen → encrypt → decrypt.
+
+| Module | Lines | Tests | Coverage |
+|--------|-------|-------|----------|
+| `lib.rs` | 169 | 5 | Full compile pipeline, error handling, multimodal |
+| `lexer.rs` | 286 | 4 | Tokenization, colors, units, comments |
+| `parser.rs` | 660 | 4 | Staves, styles, tones, full documents |
+| `tara.rs` | 261 | 4 | Element limits, frequency, charge, bytecode size |
+| `codegen.rs` | 557 | 5 | Magic bytes, string dedup, size consistency |
+| `disasm.rs` | 285 | 1 | Compile-disassemble roundtrip |
+| `secure.rs` | 61 | 1 | Compile-encrypt-decrypt roundtrip |
+| **Total** | **2,694** | **24** | |
+
+**Known gaps:**
+- No fuzz testing on lexer/parser
+- No element balance assertion in codegen
+- No input size limit enforcement (THREAT-MODEL M1)
+- No Unicode control char stripping (THREAT-MODEL M8)
+- No standalone CLI tool
+- No benchmarks (criterion available but unused)
+- Disassembler: no adversarial input tests
+- Secure module: no error path coverage
+
+**Goals may change.** The multimodal architecture is grounded in neuroscience research (topographic cortical maps), but cortical rendering is unvalidated at consumer scale. No commercial BCI does inward rendering today. As hardware matures and clinical data emerges, the bytecode format, safety bounds, and modality support may change significantly. We document what we know, flag what we don't, and update when we learn.
+
+> See `src/lib/runemate-forge/STATUS.md` for the canonical engineering status document.
+
 ### State of the Art: How BCIs Work Today
 
 No commercial BCI ships inward rendering today. Every current-generation implant — Neuralink N1, BrainGate, Blackrock Neurotech — is **outward-only**: the chip records neural signals and streams them to an external device (phone, tablet, PC). All decoding, UI rendering, and user interaction happens off-chip in a standard app (Swift/UIKit, Android).

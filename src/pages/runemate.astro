@@ -18,6 +18,7 @@ import {
   MULTIMODAL_MODALITIES,
   NEUROSCIENCE_FOUNDATIONS,
   BCI_STATE_OF_ART,
+  FORGE_TEST_STATUS,
 } from '../lib/runemate-constants';
 
 const MAX_KB = 509.3; // largest classical total, used to scale chart bars
@@ -41,6 +42,7 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
           { href: '#insight', label: 'The Insight' },
           { href: '#chart', label: 'The Chart' },
           { href: '#poc', label: 'v1.0 Benchmarks' },
+          { href: '#status', label: 'Status' },
           { href: '#rust', label: 'Why Rust' },
           { href: '#neuroscience', label: 'Neuroscience' },
           { href: '#multimodal', label: 'Multimodal' },
@@ -423,6 +425,76 @@ const MAX_KB = 509.3; // largest classical total, used to scale chart bars
                   <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-white">{COMPRESSION_V1_BENCHMARK.bytecodeBytes + COMPRESSION_V1_BENCHMARK.encryptionOverheadBytes} B</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engineering Status -->
+      <section id="status" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Engineering Status</h2>
+        <div class="prose mb-8">
+          <p>
+            Transparent accounting of what's tested, what's missing, and what may change. See <code>STATUS.md</code> in the Forge source for the full canonical document.
+          </p>
+        </div>
+
+        <!-- Status headline card -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-8">
+          <div class="grid sm:grid-cols-3 gap-6 text-center">
+            <div>
+              <span class="block text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{FORGE_TEST_STATUS.totalTests}</span>
+              <span class="text-xs text-[var(--color-text-muted)]">tests passing</span>
+            </div>
+            <div>
+              <span class="block text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{FORGE_TEST_STATUS.totalModules}</span>
+              <span class="text-xs text-[var(--color-text-muted)]">modules</span>
+            </div>
+            <div>
+              <span class="block text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{FORGE_TEST_STATUS.totalLines.toLocaleString()}</span>
+              <span class="text-xs text-[var(--color-text-muted)]">lines of Rust</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {FORGE_TEST_STATUS.modules.map((mod) => (
+            <div class="glass rounded-xl p-5">
+              <div class="flex items-baseline justify-between mb-2">
+                <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-text-primary)]">{mod.name}</span>
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{mod.tests} tests</span>
+              </div>
+              <p class="text-xs text-[var(--color-text-muted)] mb-2">{mod.covers}</p>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">{mod.lines} lines</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Known Gaps callout -->
+        <div class="glass rounded-xl p-6 sm:p-8" style="border-left: 3px solid var(--color-status-warn, #f59e0b);">
+          <p class="text-xs font-semibold tracking-wider uppercase mb-4" style="color: var(--color-status-warn, #f59e0b);">Known Gaps</p>
+          <ul class="space-y-2">
+            {FORGE_TEST_STATUS.knownGaps.map((gap) => (
+              <li class="flex items-start gap-2">
+                <span class="shrink-0 mt-1 w-1.5 h-1.5 rounded-full" style="background: var(--color-status-warn, #f59e0b);"></span>
+                <span class="text-sm text-[var(--color-text-muted)]">{gap}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- What May Change -->
+        <div class="glass rounded-xl p-6 mt-4">
+          <div class="flex items-start gap-4">
+            <span class="shrink-0 text-lg">~</span>
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Goals will evolve</p>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                The multimodal architecture is grounded in neuroscience research (topographic cortical maps), but cortical rendering is unvalidated at consumer scale. No commercial BCI does inward rendering today. As hardware matures and clinical data emerges, the bytecode format, safety bounds, and modality support may change significantly. We document what we know, flag what we don't, and update when we learn.
+              </p>
             </div>
           </div>
         </div>

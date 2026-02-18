@@ -177,6 +177,32 @@ export const MULTIMODAL_MODALITIES = [
   },
 ] as const;
 
+/** v1.0 test status — granular engineering truth */
+export const FORGE_TEST_STATUS = {
+  totalTests: 24,
+  totalModules: 7,
+  totalLines: 2694,
+  modules: [
+    { name: 'lib.rs', tests: 5, lines: 169, covers: 'Full compile pipeline, error handling, multimodal' },
+    { name: 'lexer.rs', tests: 4, lines: 286, covers: 'Tokenization, colors, units, comments' },
+    { name: 'parser.rs', tests: 4, lines: 660, covers: 'Staves, styles, tones, full documents' },
+    { name: 'tara.rs', tests: 4, lines: 261, covers: 'Element limits, frequency, charge, bytecode size' },
+    { name: 'codegen.rs', tests: 5, lines: 557, covers: 'Magic bytes, string dedup, size consistency' },
+    { name: 'disasm.rs', tests: 1, lines: 285, covers: 'Compile-disassemble roundtrip' },
+    { name: 'secure.rs', tests: 1, lines: 61, covers: 'Compile-encrypt-decrypt roundtrip' },
+  ],
+  knownGaps: [
+    'No fuzz testing on lexer/parser',
+    'No element balance assertion in codegen',
+    'No input size limit enforcement (THREAT-MODEL M1)',
+    'No Unicode control char stripping (THREAT-MODEL M8)',
+    'No standalone CLI tool',
+    'No benchmarks (criterion available but unused)',
+    'Disassembler: no adversarial input tests',
+    'Secure module: no error path coverage',
+  ],
+} as const;
+
 /** Neuroscience foundations — topographic cortical maps that justify the multimodal architecture */
 export const NEUROSCIENCE_FOUNDATIONS = [
   {
