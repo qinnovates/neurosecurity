@@ -14,13 +14,27 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 ---
 
+> **Research Disclaimer**
+>
+> This project is early-stage research by a solo researcher. The frameworks, threat models, and scoring systems published here are derived from existing peer-reviewed neuroscience, physics, and cybersecurity literature, combined with the author's professional security experience. They have not been independently peer-reviewed or empirically validated as a whole.
+>
+> **What has been tested:** A small number of TARA techniques have been validated through direct experimentation (e.g., LSL protocol vulnerability, CVE disclosed). The individual research papers cited throughout are peer-reviewed and verified.
+>
+> **What has not been tested:** The majority of the 103 TARA techniques are theoretical threat models constructed from published research. The attack chains, NISS scores, Neural Impact Chains, DSM-5-TR diagnostic mappings, and depth-of-penetration models are analytical derivations, not empirical results. The BCI limits equation is a hypothesis awaiting validation. The NSP protocol has been implemented but not deployed on real BCI hardware.
+>
+> **What this means:** Empirical validation of this work requires a multidisciplinary research group with access to BCI hardware, IRB-approved human subjects protocols, clinical neuroscience expertise, and controlled lab environments. That is beyond what one person can do. The frameworks are published openly so that research groups with those resources can test, validate, refute, or extend them.
+>
+> **If you are a researcher, lab, or institution interested in empirical validation, [please reach out](mailto:kevin@qinnovate.com).** This work needs collaborators.
+
+---
+
 ## What We Build
 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.2.1, published |
 | **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.4, published |
-| **[TARA](https://qinnovate.com/TARA/)** | 102 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
+| **[TARA](https://qinnovate.com/TARA/)** | 103 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
 | **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
@@ -86,7 +100,7 @@ The wire protocol. Post-quantum encryption (ML-KEM, ML-DSA, AES-256-GCM) at the 
 
 ### TARA (Therapeutic Atlas of Risks and Applications)
 
-The threat-therapy registry. 102 techniques across 8 domains (Access, Collection, Execution, Impact, Persistence, Reconnaissance, Exfiltration, Evasion) and 15 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs (QIF-T0001 through QIF-T0102).
+The threat-therapy registry. 103 techniques across 8 domains (Access, Collection, Execution, Impact, Persistence, Reconnaissance, Exfiltration, Evasion) and 15 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs (QIF-T0001 through QIF-T0102).
 
 - **Registry:** [qinnovate.com/TARA](https://qinnovate.com/TARA/)
 - **API:** [qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json) (STIX 2.1 Feed)
@@ -153,7 +167,7 @@ qinnovates/qinnovate/
 │   └── RUNEMATE.md             # Runemate v0.4 spec
 │
 ├── shared/                     # Cross-cutting data
-│   ├── qtara-registrar.json    # 102 TARA techniques (CVSS + NISS)
+│   ├── qtara-registrar.json    # 103 TARA techniques (CVSS + NISS)
 │   └── archive/                # Deprecated/merged data files
 │
 ├── governance/                 # 11 neuroethics documents
@@ -218,4 +232,4 @@ Qinnovate follows a strict **Dual-Agent Collaboration Protocol** to ensure that 
 
 ---
 
-*Founded 2026 · Updated 2026-02-16*
+*Founded 2026 · Updated 2026-02-18*
