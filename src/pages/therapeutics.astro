@@ -8,6 +8,8 @@ import {
   DUAL_USE_COLORS,
 } from '../lib/threat-data';
 import type { ThreatVector, FdaStatus, DualUse, EvidenceLevel } from '../lib/threat-data';
+import ClinicalDomainCards from '../components/therapeutics/ClinicalDomainCards';
+import type { ClinicalDomainInfo, DomainTechnique } from '../components/therapeutics/ClinicalDomainCards';
 
 const clinical = getClinicalTechniques();
 const totalTechniques = THREAT_VECTORS.length;
@@ -162,6 +164,69 @@ const evidenceColor = (level: string) => {
     default: return { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' };
   }
 };
+
+// ═══ CLINICAL DOMAIN CARDS DATA ═══
+const DOMAIN_META: Record<string, { color: string; description: string }> = {
+  movement:  { color: '#22c55e', description: "Parkinson's, tremor, stroke, paralysis, gait disorders" },
+  seizure:   { color: '#ef4444', description: 'Epilepsy, seizure management, status epilepticus' },
+  mood:      { color: '#f59e0b', description: 'Depression, anxiety, PTSD, OCD, addiction' },
+  cognitive: { color: '#8b5cf6', description: 'ADHD, dementia, autism, schizophrenia, TBI' },
+  pain:      { color: '#06b6d4', description: 'Chronic pain, phantom limb, tinnitus, migraine' },
+  sleep:     { color: '#3b82f6', description: 'Insomnia, sleep apnea, narcolepsy' },
+  comms:     { color: '#10b981', description: 'Locked-in syndrome, aphasia, ALS, speech' },
+};
+
+const COL_SHORT_LABELS: Record<string, string> = {
+  elec: 'Elec.', mag: 'Mag.', feedback: 'Feedback', dx: 'Dx', prosth: 'Prosth.', bci: 'BCI',
+};
+
+const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
+  // Collect all unique techniques in this domain across all modalities
+  const allTechniques = new Map<string, ThreatVector>();
+  const modalitySet = new Set<string>();
+
+  for (const col of MATRIX_COLS) {
+    const cell = matrix[row.id][col.id];
+    if (cell.length > 0) {
+      modalitySet.add(COL_SHORT_LABELS[col.id] ?? col.label);
+      for (const t of cell) {
+        allTechniques.set(t.id, t);
+      }
+    }
+  }
+
+  const techniques = Array.from(allTechniques.values());
+  const fdaApprovedCount = techniques.filter(t => {
+    const fda = t.tara?.clinical?.fda_status;
+    return fda === 'approved' || fda === 'cleared';
+  }).length;
+
+  // Top techniques sorted by evidence tier (best first), take top 5
+  const topTechniques: DomainTechnique[] = techniques
+    .sort((a, b) => evidenceTier(a) - evidenceTier(b))
+    .slice(0, 5)
+    .map(t => ({
+      id: t.id,
+      name: t.name,
+      therapeuticAnalog: t.tara!.clinical!.therapeutic_analog,
+      tier: evidenceTier(t),
+      fdaStatus: t.tara!.clinical!.fda_status,
+      evidenceLevel: t.tara!.clinical!.evidence_level,
+    }));
+
+  const meta = DOMAIN_META[row.id] ?? { color: '#94a3b8', description: '' };
+
+  return {
+    id: row.id,
+    label: row.label,
+    color: meta.color,
+    description: meta.description,
+    techniqueCount: techniques.length,
+    fdaApprovedCount,
+    modalities: Array.from(modalitySet),
+    topTechniques,
+  };
+});
 
 const breadcrumbs = [
   { label: 'Therapeutics' },
@@ -362,6 +427,26 @@ const breadcrumbs = [
       <strong>Possible:</strong> Preclinical or theoretical therapeutic potential.
       <strong>Silicon Only:</strong> No known therapeutic analog.
     </p>
+  </section>
+
+  <!-- ═══ CLINICAL DOMAIN CARDS ═══ -->
+  <section class="py-12 md:py-16" id="domains">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Clinical Domains
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
+      {clinical.length} therapeutic techniques organized across 7 clinical specialties.
+      Click any domain to see its top techniques ranked by evidence quality.
+    </p>
+
+    <div class="max-w-6xl mx-auto">
+      <ClinicalDomainCards client:visible domains={domainCards} />
+    </div>
   </section>
 
   <!-- ═══ CONDITION EXPLORER ═══ -->
