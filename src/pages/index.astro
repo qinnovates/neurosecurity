@@ -17,7 +17,7 @@ const posts = (await getCollection('blog'))
 
 ---
 
-<BaseLayout title="Qinnovate — Neurostandards" description="Qinnovate develops open neurostandards — bridging security engineering and neuroethics at the bio-digital boundary. Home of QIF, TARA Atlas, NISS, and NSP.">
+<BaseLayout title="Qinnovate — Neural Security Atlas" description="I built a security atlas for the brain and discovered that most ways to attack it are also ways to treat it. 102 threats. 77 therapeutic analogs. 60 DSM-5 mappings. All open.">
   <Nav />
 
   <!-- ═══ HERO + THREE PILLARS ═══ -->
@@ -32,20 +32,35 @@ const posts = (await getCollection('blog'))
 
     <div class="relative z-10 text-center max-w-5xl mx-auto pt-24">
       <p class="text-sm font-bold tracking-[0.2em] uppercase mb-6 bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-        Neurostandards from security and ethics at heart
+        Kevin Qi
       </p>
 
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.1]">
-        <span class="text-[var(--color-text-primary)]">Quantifying the Interface</span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
+        <span class="text-[var(--color-text-primary)]">I built a security atlas for the brain</span>
         <br />
         <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-          Where Mind Meets Silicon
+          and discovered that most ways to attack it are also ways to treat it.
         </span>
       </h1>
 
-      <p class="text-lg sm:text-xl text-[var(--color-text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed">
-        Open security standards and threat models for the brain-computer interface industry.
+      <p class="text-lg sm:text-xl text-[var(--color-text-muted)] mb-8 max-w-2xl mx-auto leading-relaxed">
+        102 threats. 77 therapeutic analogs. 60 DSM-5 mappings. All open.
       </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+        <a
+          href="/TARA/"
+          class="px-6 py-3 rounded-lg bg-[var(--color-accent-secondary)] text-white font-medium hover:bg-[var(--color-accent-secondary)]/90 transition-colors"
+        >
+          See the Research
+        </a>
+        <a
+          href="/scoring/"
+          class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
+        >
+          NISS Scoring
+        </a>
+      </div>
 
       <!-- Three Pillars — integrated into hero -->
       <div class="grid md:grid-cols-3 gap-4 mb-10 text-left max-w-4xl mx-auto">
