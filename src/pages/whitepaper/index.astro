@@ -2,7 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import WhitepaperVersionSelector from '../../components/WhitepaperVersionSelector.astro';
 import { getWhitepaperStats } from '../../lib/whitepaper-stats';
-import { getLatestChangelog } from '../../lib/threat-data';
+import { getLatestChangelog, getTacticsWithCounts, THREAT_DOMAINS } from '../../lib/threat-data';
 import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../../lib/qif-constants';
 
 // Visualization components
@@ -17,6 +17,20 @@ import NeuralImpactChain from '../../components/whitepaper/NeuralImpactChain.ast
 
 const stats = getWhitepaperStats();
 const latestChange = getLatestChangelog();
+const tacticsWithCounts = getTacticsWithCounts();
+const totalTactics = tacticsWithCounts.length;
+const totalDomains = (THREAT_DOMAINS as any[]).length;
+
+const tacticColors: Record<string, string> = {
+  'N': '#06b6d4',   // Neural
+  'C': '#f59e0b',   // Cognitive
+  'P': '#ef4444',   // Physiological
+  'D': '#06b6d4',   // Data
+  'B': '#8b5cf6',   // BCI System
+  'M': '#10b981',   // Model
+  'E': '#f97316',   // Energy
+  'S': '#3b82f6',   // Sensor
+};
 ---
 
 <PageLayout
@@ -426,6 +440,25 @@ const latestChange = getLatestChangelog();
           <p>
             Each technique can be analyzed through any of these projections. Interactive exploration of the TARA grid reveals all four perspectives for a given technique: its neural effects, potential therapeutic applications, diagnostic mappings, and applicable regulations.
           </p>
+          <p>
+            TARA organizes {stats.totalTechniques} techniques across {totalDomains} operational domains and {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format:
+          </p>
+        </div>
+
+        <!-- TARA Tactics Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+          {tacticsWithCounts.map((t) => {
+            const color = tacticColors[t.domain_code] ?? '#94a3b8';
+            return (
+              <div class="glass rounded-lg p-3" style={`border-left: 3px solid ${color};`}>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold font-[family-name:var(--font-mono)]" style={`color: ${color};`}>{t.id}</span>
+                  <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">{t.count}</span>
+                </div>
+                <div class="text-sm font-medium mt-1">{t.name}</div>
+              </div>
+            );
+          })}
         </div>
 
         <div class="grid sm:grid-cols-2 gap-6 mb-8">
@@ -569,6 +602,35 @@ const latestChange = getLatestChangelog();
               Potential Impact to Neural Safety. Triggered when Biological Impact (BI) is assessed as High/Critical or Reversibility (RV) is Irreversible.
               <strong>{stats.pinsCount} of {stats.totalTechniques} techniques</strong> carry this flag, indicating their potential to induce persistent, non-consensual alterations to neural function.
             </p>
+          </div>
+        </div>
+
+        <!-- NISS Formula -->
+        <div class="glass rounded-xl p-6 mb-8">
+          <p class="text-center font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4 text-lg">
+            NISS = (BI + CG + CV + RV + NP) / 5
+          </p>
+          <div class="grid grid-cols-5 gap-3 text-center text-xs">
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">BI</div>
+              <div class="text-[var(--color-text-faint)]">Biological Impact</div>
+            </div>
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CG</div>
+              <div class="text-[var(--color-text-faint)]">Cognitive Integrity</div>
+            </div>
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CV</div>
+              <div class="text-[var(--color-text-faint)]">Consent Violation</div>
+            </div>
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">RV</div>
+              <div class="text-[var(--color-text-faint)]">Reversibility</div>
+            </div>
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">NP</div>
+              <div class="text-[var(--color-text-faint)]">Neuroplasticity</div>
+            </div>
           </div>
         </div>
 
