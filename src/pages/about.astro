@@ -5,68 +5,55 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
 
 <PageLayout
   title="About — Qinnovate"
-  description="Qinnovate is Kevin Qi's research initiative mapping the security threats facing brain-computer interfaces, scoring their neural impact, and publishing everything openly."
+  description="I'm Kevin Qi, an independent security researcher building the first open framework for auditing what brain-computer interfaces can do to a mind."
   breadcrumbs={[{ label: 'About' }]}
 >
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-8">About</h1>
 
     <div class="prose">
+      <h2>About Me</h2>
       <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-8">
-        Qinnovate is my research initiative. I map the security threats facing brain-computer interfaces, score their neural impact, and publish everything openly. The work sits at the intersection of cybersecurity, neuroscience, and ethics.
-      </p>
-
-      <h2>What I Build</h2>
-      <p>
-        Three interlocking frameworks that together map how neurotechnology can be secured, validated, and governed:
-      </p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 my-8 not-prose">
-      {PILLARS.map((pillar) => (
-        <a href={pillar.href} class="glass rounded-xl p-5 card-hover group">
-          <div class="text-xl mb-2" style={`color: ${pillar.color}`} set:html={pillar.icon} />
-          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
-            {pillar.name}
-          </h3>
-          <p class="text-xs text-[var(--color-text-faint)] mb-2">{pillar.tagline}</p>
-          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{pillar.description}</p>
-        </a>
-      ))}
-    </div>
-
-    <div class="prose">
-      <h2>Mission</h2>
-      <p>
-        Brain-computer interfaces are advancing faster than the security standards to protect them. Neuralink has implanted its N1 chip in human patients. Synchron's Stentrode is in FDA-approved clinical trials. Blackrock Neurotech has shipped Utah arrays for over a decade. Commercial EEG headsets from Emotiv, Muse, and OpenBCI sit on consumer shelves. These devices are tested for safety and efficacy. There is no standardized public framework to validate their resistance to adversarial threats. No standardized framework exists to classify, score, or mitigate attacks on the human brain.
+        I'm <strong>Kevin Qi</strong>, an independent security researcher. I started this project with a question that wouldn't leave me alone: <em>what happens to a patient when their brain-computer interface gets hacked?</em>
       </p>
       <p>
-        That's the gap I'm closing — developing the security specifications, threat models, and scoring metrics that the BCI industry needs before these devices reach mass adoption.
+        Not what happens to the data. Not what happens to the device. What happens to the <em>mind</em>. I couldn't find a framework that answered that question — so I built one.
+      </p>
+
+      <h2>What I Found</h2>
+      <p>
+        I catalogued every known BCI attack technique I could find — 102 so far — and traced each one through the neural pathways it disrupts, the cognitive functions it impairs, and the psychiatric outcomes it can produce. I scored them using a system I designed specifically for neural harm (NISS), because the industry standard (CVSS) was built for servers, not skulls. It cannot express whether damage is reversible to neural tissue or whether the patient can even detect the violation.
+      </p>
+      <p>
+        What I discovered surprised me: <strong>77 of those 102 attack techniques have direct therapeutic counterparts.</strong> The same neural mechanism that can disrupt cognition can also treat a neurological condition. The same stimulation pattern that causes involuntary motor activation in an attack is used therapeutically for Parkinson's disease. This dual-use reality means BCI security cannot be separated from clinical ethics — they are the same problem viewed from different angles.
+      </p>
+      <p>
+        60 techniques map to specific DSM-5-TR psychiatric diagnoses through documented neural pathways. Every single technique implicates at least one proposed neuroright — cognitive liberty, mental privacy, psychological continuity, mental integrity, cognitive authenticity, dynamical integrity, or informational disassociation.
       </p>
 
       <h2>The Framework</h2>
       <p>
-        QIF is an open, peer-reviewable security framework for brain-computer interfaces. It bridges two domains that don't normally talk to each other:
+        QIF (Quantified Interconnection Framework) bridges three domains that rarely talk to each other:
       </p>
       <ul>
-        <li><strong>Cybersecurity</strong> — Layered defense models, threat taxonomies, attack surface analysis, and scoring systems (CVSS, STRIDE)</li>
+        <li><strong>Cybersecurity</strong> — Layered defense models, threat taxonomies, attack surface analysis, and vulnerability scoring</li>
         <li><strong>Neuroscience</strong> — Neuroanatomy, neural signaling pathways, clinical outcomes, and the DSM-5-TR diagnostic framework</li>
-        <li><strong>Clinical medicine</strong> — Therapeutic applications, FDA regulatory mapping (FDORA Section 3305), DSM-5-TR diagnostic outcomes, and ICD-10-CM coding for neural impact</li>
+        <li><strong>Neuroethics</strong> — Neurorights frameworks, informed consent in neural contexts, cognitive liberty, and the governance of technologies that interface with the mind</li>
       </ul>
       <p>
-        The result is the <strong>Hourglass Model</strong>: an 11-band, 3-zone architecture with the Neural Interface (I0 — the physical BCI device) at its waist. Biology above. Silicon below. The <a href="/TARA/">TARA Atlas</a> maps 102 techniques across this hierarchy, each scored with NISS (Neural Impact Scoring System) and mapped to DSM-5-TR diagnoses through the Neural Impact Chain.
+        The result is the <strong>Hourglass Model</strong>: an 11-band, 3-zone architecture with the Neural Interface (I0 — the physical BCI device) at its waist. Biology above. Silicon below. The <a href="/TARA/">TARA Atlas</a> maps 102 techniques across this hierarchy, each scored with NISS and traced to clinical outcomes through the Neural Impact Chain.
+      </p>
+
+      <h2>Situating the Work</h2>
+      <p>
+        This project builds on and extends existing scholarship in neuroethics and neurorights. Marcello Ienca and Roberto Andorno's foundational proposal for four neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) provides the philosophical basis. Rafael Yuste and the NeuroRights Foundation's advocacy — including their work with Chile's constitutional neurorights amendment in 2021 — demonstrates the urgency of operationalizing these rights. UNESCO's 2023 recommendation on the ethics of neurotechnology establishes the international governance context.
+      </p>
+      <p>
+        What has been missing is the technical bridge: a systematic methodology for tracing how <em>specific</em> security vulnerabilities violate <em>specific</em> neurorights through <em>documented</em> neural pathways. QIF attempts to provide that bridge — translating abstract rights into auditable technical requirements. This work is one contribution to a growing field, not a final answer. It is published openly for exactly that reason: to be evaluated, critiqued, and improved by the community.
       </p>
 
       <h2>Approach</h2>
       <p>
         Everything is open: open publication, transparent methodology, publicly available framework documents, equations, and reference implementations. Neural security research must be developed in the open — not behind closed doors. The people whose brains will be connected deserve to understand exactly how they're protected.
-      </p>
-      <p>
-        These governance documents represent the values I believe any future BCI security standard should uphold.
-      </p>
-
-      <h2>About Me</h2>
-      <p>
-        I'm <strong>Kevin Qi</strong>, an independent security researcher. I developed QIF from first principles, beginning with a simple question: <em>what does the OSI model look like when one endpoint is a brain?</em>
       </p>
 
       <h2>Milestones</h2>
@@ -103,9 +90,9 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
     </div>
 
     <div class="prose">
-      <h2>Open Standard</h2>
+      <h2>Open Research</h2>
       <p>
-        QIF is not a proprietary product. It's an open framework, freely available for researchers, device manufacturers, regulators, and security professionals to adopt, extend, and critique.
+        QIF is not a proprietary product. It's an open research framework, freely available for researchers, clinicians, device manufacturers, and policymakers to evaluate, extend, and critique.
       </p>
 
       <div class="glass rounded-xl p-6 my-8 not-prose">

@@ -122,10 +122,10 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            NISS is the first CVSS v4.0 extension designed for brain-computer interface security. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS adds five neural-specific metrics that ride <strong>alongside</strong> CVSS v4.0 base vectors — not replace them.
+            CVSS — the industry standard for scoring software vulnerabilities — was designed for servers, not skulls. It cannot express whether an attack is reversible to neural tissue, whether it crosses the consent boundary, or whether the cognitive damage is temporary or permanent. NISS adds the five dimensions that CVSS structurally cannot: Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, and Neuroplastic Potential.
           </p>
           <p>
-            Every technique in the <a href="/TARA/">TARA atlas</a> carries both a CVSS v4.0 base vector (exploitability and system impact) and a NISS extension vector (biological, cognitive, and consent impact). The two together give the complete picture: how the attack works <em>and</em> what it does to the patient.
+            When a vulnerability affects a brain, the severity score should reflect what happens to the patient — not just what happens to the device. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS rides <strong>alongside</strong> CVSS v4.0 base vectors. Every technique in the <a href="/TARA/">TARA atlas</a> carries both: how the attack works <em>and</em> what it does to the mind.
           </p>
         </div>
 
