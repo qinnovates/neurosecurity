@@ -143,5 +143,5 @@ If you work with electrodes, patient data, BCI signal processing, neuroethics, o
 
 ---
 
-*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Mood](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
+*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
 
