@@ -8,7 +8,7 @@ I'm **Kevin Qi**, a security engineer and neurosecurity researcher. I started th
 
 Not what happens to the data. Not what happens to the device. What happens to the *mind*. I couldn't find a framework that answered that question, so I built one. This is the OSI of Mind.
 
-That question didn't come from a textbook. It came from my own brain feeling hijacked. A B12 deficiency damaged my nervous system. I couldn't walk for weeks. My hands were uncontrollable. I didn't feel like myself. Once you've felt your own nervous system seize up on you, the idea of plugging a machine into that system hits different.
+That question didn't come from a textbook. It came from my own brain feeling hijacked. A B12 deficiency damaged my nervous system. I couldn't walk for months. My hands were uncontrollable. I didn't feel like myself. Once you've felt your own nervous system seize up on you, the idea of plugging a machine into that system hits different.
 
 ## Why Neuroethics
 
@@ -30,9 +30,9 @@ A mentor once taught me: we don't give answers to other people's ponders. We giv
 
 That is the goal of Qinnovate.
 
-## Why This Is My Purpose
+## My Life Compass
 
-This is my sole purpose. I spent the past three years thinking about this. I had amazing offers at amazing companies spanning tech and AI, yet I subconsciously couldn't allow myself to go through with them fully. I spent three years digging into my core identity, trying to understand what moves the compass that builds my sense of self. I went through exploring and re-learning all the disciplines I enjoyed through my entire life and more.
+This is my sole purpose. I spent the past three years thinking about this. I had amazing offers at large companies spanning tech and AI, yet I subconsciously couldn't allow myself to go through with them fully. I spent three years digging into my core identity, trying to understand what moves the compass that builds my sense of self. I went through exploring and re-learning all the disciplines I enjoyed through my entire life and more.
 
 I've only wanted one thing in life, and that's to help save lives. I am not built for a doctor. I can't even watch myself give blood without feeling like passing out. When I generated the brain model rendering on the [neurogovernance page](https://qinnovate.com/neurogovernance/), I couldn't stand the realistic-looking human brain I initially had on there. It gave me the heebie-jeebies. What I do know is that science, psychology, and technology have always been my interests, and this work sits at the intersection of it all.
 
