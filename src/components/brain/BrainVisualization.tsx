@@ -35,7 +35,7 @@ function BrainWireframe() {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         mesh.material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color('#3b82f6'),
+          color: new THREE.Color('#8b5cf6'),
           wireframe: true,
           transparent: true,
           opacity: 0.35,
@@ -57,7 +57,7 @@ function BrainGhost() {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         mesh.material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color('#dbeafe'),
+          color: new THREE.Color('#ede9fe'),
           transparent: true,
           opacity: 0.12,
           side: THREE.DoubleSide,
@@ -169,7 +169,7 @@ function BrainScene({ regions, activeRegion, onHover, onClick }: {
     <>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
-      <directionalLight position={[-5, -5, 10]} intensity={0.4} color="#93c5fd" />
+      <directionalLight position={[-5, -5, 10]} intensity={0.4} color="#c4b5fd" />
       <Suspense fallback={null}>
         <group ref={groupRef}>
           <BrainGhost />
