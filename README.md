@@ -1,11 +1,6 @@
 <div align="center">
 
-<pre>
-┏━┓┏━┓┏━╸┏┓╻   ┏┓╻┏━╸╻ ╻┏━┓┏━┓╻     ┏━┓╺┳╸╻  ┏━┓┏━┓
-┃ ┃┣━┛┣╸ ┃┗┫   ┃┗┫┣╸ ┃ ┃┣┳┛┣━┫┃     ┣━┫ ┃ ┃  ┣━┫┗━┓
-┗━┛╹  ┗━╸╹ ╹   ╹ ╹┗━╸┗━┛╹┗╸╹ ╹┗━╸   ╹ ╹ ╹ ┗━╸╹ ╹┗━┛
-       By Qinnovate (Kevin L. Qi)
-</pre>
+![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/docs/images/divider-qinnovate.svg)
 
 </div>
 
