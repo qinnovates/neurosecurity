@@ -27,7 +27,13 @@ const HOTSPOT_SIZES: Record<string, number> = {
   N7: 3.0, N6: 2.2, N5: 1.8, N4: 1.8, N3: 2.2, N2: 1.8, N1: 1.5,
 };
 
-function BrainWireframe() {
+const VIEW_BRAIN_COLORS: Record<string, { wire: string; ghost: string; light: string }> = {
+  security:   { wire: '#3b82f6', ghost: '#dbeafe', light: '#93c5fd' },
+  clinical:   { wire: '#10b981', ghost: '#d1fae5', light: '#6ee7b7' },
+  governance: { wire: '#8b5cf6', ghost: '#ede9fe', light: '#c4b5fd' },
+};
+
+function BrainWireframe({ color }: { color: string }) {
   const { scene } = useGLTF('/models/brain.glb');
 
   useEffect(() => {
@@ -35,19 +41,19 @@ function BrainWireframe() {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         mesh.material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color('#8b5cf6'),
+          color: new THREE.Color(color),
           wireframe: true,
           transparent: true,
           opacity: 0.35,
         });
       }
     });
-  }, [scene]);
+  }, [scene, color]);
 
   return <primitive object={scene} scale={18} />;
 }
 
-function BrainGhost() {
+function BrainGhost({ color }: { color: string }) {
   const { scene } = useGLTF('/models/brain.glb');
   const ghostScene = useRef<THREE.Group | null>(null);
 
@@ -57,7 +63,7 @@ function BrainGhost() {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         mesh.material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color('#ede9fe'),
+          color: new THREE.Color(color),
           transparent: true,
           opacity: 0.12,
           side: THREE.DoubleSide,
@@ -65,7 +71,7 @@ function BrainGhost() {
       }
     });
     ghostScene.current = cloned;
-  }, [scene]);
+  }, [scene, color]);
 
   if (!ghostScene.current) return null;
   return <primitive object={ghostScene.current} scale={18} />;
@@ -157,23 +163,25 @@ function Hotspot({ region, isActive, onHover, onClick }: HotspotProps) {
   );
 }
 
-function BrainScene({ regions, activeRegion, onHover, onClick }: {
+function BrainScene({ regions, activeRegion, viewId, onHover, onClick }: {
   regions: BrainViewRegion[];
   activeRegion: string | null;
+  viewId: string;
   onHover: (id: string | null) => void;
   onClick: (id: string) => void;
 }) {
   const groupRef = useRef<THREE.Group>(null);
+  const colors = VIEW_BRAIN_COLORS[viewId] ?? VIEW_BRAIN_COLORS.governance;
 
   return (
     <>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
-      <directionalLight position={[-5, -5, 10]} intensity={0.4} color="#c4b5fd" />
+      <directionalLight position={[-5, -5, 10]} intensity={0.4} color={colors.light} />
       <Suspense fallback={null}>
         <group ref={groupRef}>
-          <BrainGhost />
-          <BrainWireframe />
+          <BrainGhost color={colors.ghost} />
+          <BrainWireframe color={colors.wire} />
           {regions.map(region => (
             <Hotspot
               key={region.id}
@@ -304,6 +312,7 @@ export default function BrainVisualization({ views, defaultView }: Props) {
             <BrainScene
               regions={activeView.regions}
               activeRegion={activeRegion}
+              viewId={activeView.id}
               onHover={setActiveRegion}
               onClick={(id) => setActiveRegion(prev => prev === id ? null : id)}
             />
