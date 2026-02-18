@@ -2,6 +2,8 @@
 <img src="docs/images/heart-portrait.png" alt="Heart Portrait" width="500" />
 </div>
 
+*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
+
 # About — Kevin Qi
 
 I'm **Kevin Qi**, a security engineer and neurosecurity researcher. I started this project with a question that keeps me up at night: *what happens to a patient when their brain-computer interface gets hacked?*
@@ -141,7 +143,4 @@ This is a conversation I cannot have alone. I'm looking for academics, researche
 
 If you work with electrodes, patient data, BCI signal processing, neuroethics, or security architecture, I'd like to hear from you.
 
----
-
-*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
 
