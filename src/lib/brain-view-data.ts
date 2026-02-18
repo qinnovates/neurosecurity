@@ -97,10 +97,10 @@ function buildSecurityView(): BrainView {
 
     // Color by severity
     const color =
-      count >= 60 ? '#7c3aed'
-      : count >= 40 ? '#a855f7'
-      : count >= 20 ? '#f97316'
-      : '#eab308';
+      count >= 60 ? '#ef4444'
+      : count >= 40 ? '#f97316'
+      : count >= 20 ? '#eab308'
+      : '#94a3b8';
 
     // Collect unique attack categories
     const catSet = new Set<string>();
@@ -226,10 +226,10 @@ function buildGovernanceView(): BrainView {
 
     // Color by threat count (same logic as original BrainRightsHero)
     const color =
-      count >= 60 ? '#7c3aed'
-      : count >= 40 ? '#a855f7'
-      : count >= 20 ? '#f97316'
-      : '#eab308';
+      count >= 60 ? '#ef4444'
+      : count >= 40 ? '#f97316'
+      : count >= 20 ? '#eab308'
+      : '#94a3b8';
 
     // Badges = neurorights protecting this region
     const badges = region.neurorights.map(nrId => ({
