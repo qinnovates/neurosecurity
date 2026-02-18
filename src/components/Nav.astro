@@ -19,13 +19,12 @@ const resourceLinks = [
 
 const engageLinks = [
   { href: '/adopt/', label: 'Adopt the Standard', desc: 'Integrate QIF into your organization or research' },
-  { href: '/alliance/', label: 'Neural Atlas', desc: 'Neurostandards body and auditing' },
   { href: 'https://github.com/qinnovates/qinnovate', label: 'Get Involved', desc: 'Contribute on GitHub — issues, PRs, discussions', external: true },
 ];
 
 const isTechActive = ['/framework/', '/nsp/', '/runemate/', '/TARA/', '/whitepaper/'].some(p => currentPath.startsWith(p));
 const isResourceActive = ['/news/', '/explore/', '/glossary/', '/publications/'].some(p => currentPath.startsWith(p));
-const isEngageActive = ['/adopt/', '/alliance/'].some(p => currentPath.startsWith(p));
+const isEngageActive = ['/adopt/'].some(p => currentPath.startsWith(p));
 
 const govLinks = [
   { href: '/governance/#core', label: 'Core Standards', desc: 'Code of Conduct, Transparency, Data Policy, Accessibility' },
