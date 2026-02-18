@@ -10,7 +10,7 @@ tags: ["#TARA", "#NeurosecurityEngineering", "#QIF", "#BCI", "#ConsumerSensors",
 
 ## Your $20 Headphones Are a Medical Device
 
-You do not need AirPods Pro with a health sensor. You do not need a Pixel Watch with PPG. A pair of ten-year-old wired headphones plugged into a laptop can measure your heart rate.
+You do not need premium earbuds with a health sensor. You do not need a smartwatch with PPG. A pair of ten-year-old wired headphones plugged into a laptop can measure your heart rate.
 
 The speaker driver in any headphone is a diaphragm attached to a coil. That is the same physical mechanism as a microphone, just running in reverse. RealTek HD Audio codecs — present in the majority of PCs and laptops shipped in the last fifteen years — allow any software process to silently reprogram an output jack as an input jack. No permission dialog. No notification. No elevated privileges. The headphone you are wearing right now becomes a microphone pointed at your ear canal. From there, your pulse is an acoustic signal.
 
@@ -97,7 +97,7 @@ Evidence levels for the 28 S-domain techniques:
 | Emerging | 5 | Active research, partial demonstrations |
 | Theoretical | 2 | Plausible from known physics, not yet demonstrated |
 
-Twenty-one of the 28 techniques have been demonstrated or confirmed. These are not speculative attacks. They are published, peer-reviewed, and in some cases commercially deployed (Google's Nest Hub uses ultrasonic vital sign sensing; Apple's Watch uses PPG for atrial fibrillation detection; Silverpush deployed ultrasonic cross-device tracking in 234 Android apps).
+Twenty-one of the 28 techniques have been demonstrated or confirmed. These are not speculative attacks. They are published, peer-reviewed, and in some cases commercially deployed (smart displays use ultrasonic vital sign sensing; major smartwatches use PPG for atrial fibrillation detection; one company deployed ultrasonic cross-device tracking in 234 Android apps).
 
 Every technique in the registry carries both a [CVSS v4.0](https://www.first.org/cvss/) base vector and a [NISS v1.0](https://qinnovate.com/scoring) neural impact extension vector. An observation from the scoring: NISS scores remain low for most S-domain techniques (1.4 to 5.0 out of 10.0), because NISS measures neural safety impact and most consumer sensor attacks do not directly damage neural tissue. CVSS scores are high (confidentiality violation, data theft). The gap between the two scores is largest in the S-domain, which validates the dual-scoring approach. CVSS alone would miss the BCI-specific risks. NISS alone would miss the consumer privacy risks. You need both.
 

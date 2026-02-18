@@ -8,7 +8,7 @@ tags: ["#BCI", "#Claude", "#Anthropic", "#AI", "#Neurosecurity", "#QIF", "#NSP",
 
 ## The Gap Nobody Was Filling
 
-Ninety active clinical trials. Devices implanted in human brains, operating in patients' homes. Neuralink, Synchron, Blackrock Neurotech. And no cybersecurity standard designed specifically for brain-computer interfaces. Not from FDA. Not from NIST. Not from ISO. Not from IEEE.
+Ninety active clinical trials. Devices implanted in human brains, operating in patients' homes. Multiple companies with devices in human patients. And no cybersecurity standard designed specifically for brain-computer interfaces. Not from FDA. Not from NIST. Not from ISO. Not from IEEE.
 
 HTTPS had to exist before e-commerce. TLS had to exist before online banking. The neural equivalent does not exist yet. Someone needed to build it.
 

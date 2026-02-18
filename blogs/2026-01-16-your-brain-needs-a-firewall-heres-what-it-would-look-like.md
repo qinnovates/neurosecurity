@@ -2,14 +2,14 @@
 title: "Your Brain Needs a Firewall — Here’s What It Would Look Like"
 date: 2026-01-16
 source: https://medium.com/@qikevinl/your-brain-needs-a-firewall-heres-what-it-would-look-like-87b46d292219?source=rss-a9bec2f50cd4------2
-tags: [ai, firewall, security, neuroscience, neuralink]
+tags: [ai, firewall, security, neuroscience, bci]
 ---
 
 ### Your Brain Needs a Firewall — Here’s What It Would Look Like
 
 #### *The same security principles that protect your computer will soon need to protect your mind.*
 
-In 2024, a man with a Neuralink implant controlled a computer cursor with his thoughts. By 2025, patients were typing, browsing, and playing games — all without moving a muscle.
+In 2024, a man with a neural implant controlled a computer cursor with his thoughts. By 2025, patients were typing, browsing, and playing games — all without moving a muscle.
 
 This is incredible. It’s also terrifying.
 
@@ -17,7 +17,7 @@ Because if a device can *read* your brain, it can probably *write* to it too. An
 
 ### The Attack Surface Inside Your Skull
 
-Neuralink’s N1 chip has 1,024 electrodes. It reads 20,000 brain samples per second. It communicates via Bluetooth.
+A leading neural implant chip has 1,024 electrodes. It reads 20,000 brain samples per second. It communicates via Bluetooth.
 
 Bluetooth. The same protocol that’s been exploited by attacks like BlueBorne, Bluebugging, and Bluesnarfing.
 
@@ -70,7 +70,7 @@ If any check fails: **reject, log, alert.**
 
 ### The Hard Part: It Has to Fit on a Chip
 
-Neuralink’s implant runs on 25 milliwatts. That’s *nothing*.
+The implant runs on 25 milliwatts. That’s *nothing*.
 
 The firewall has to:
 

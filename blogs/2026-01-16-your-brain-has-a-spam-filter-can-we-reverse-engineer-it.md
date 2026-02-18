@@ -7,7 +7,7 @@ tags: [firewall, neuroscience, ai, reverse-engineering, cybersecurity]
 
 ***Inside the math that could protect your mind from neural hackers.***
 
-**Here’s something that should keep you up at night:**When Neuralink sends a signal to your brain, your neurons can’t tell the difference between that signal and one they generated themselves.  
+**Here’s something that should keep you up at night:**When a neural implant sends a signal to your brain, your neurons can’t tell the difference between that signal and one they generated themselves.  
    
 If the timing is right, the amplitude is right, and the frequency is right — your brain just… accepts it. No verification. No authentication. No “are you sure you want to allow this app to control your motor cortex?”  
    
@@ -246,7 +246,7 @@ If any check fails: **reject, log, alert.**
    
 For outgoing signals, it asks: Is this normal neural activity or something anomalous? Should we strip sensitive information before transmission? Is everything encrypted before it hits Bluetooth?
 
-The hard part: this firewall has to run on a chip that draws less power than a hearing aid. Neuralink’s implant runs on 25 milliwatts — that’s nothing. The security layer gets maybe 3–5 milliwatts to work with.  
+The hard part: this firewall has to run on a chip that draws less power than a hearing aid. A leading neural implant runs on 25 milliwatts — that’s nothing. The security layer gets maybe 3–5 milliwatts to work with.  
    
 But here’s the thing — the coherence calculation is surprisingly efficient. You’re not analyzing raw signals; you’re tracking statistics. Means and variances. A few hundred microseconds of latency. It’s doable.
 

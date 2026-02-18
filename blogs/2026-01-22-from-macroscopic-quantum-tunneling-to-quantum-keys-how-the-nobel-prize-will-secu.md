@@ -35,7 +35,7 @@ Akin to firewalls, the universe also has its set of rules. Those rules operate a
 
 In this piece, I’ll break down what *Martinis*, *Clarke, and Devoret* actually discovered and why it matters. Then I’ll trace the line from ***quantum tunneling*** to ***network security*** to ***brain-computer interfaces (BCIs)*** — and ask the question no one’s answering yet: what would a probabilistic, qubit-based secure channel look like, and how would we implement it at the neural boundary?
 
-***Quantum security*** at the BCI boundary remains largely unexplored territory — *a new frontier*. By applying probabilistic frameworks now, we can begin to map what cybersecurity will need to look like as neural interfaces like Neuralink move from lab to clinic.
+***Quantum security*** at the BCI boundary remains largely unexplored territory — *a new frontier*. By applying probabilistic frameworks now, we can begin to map what cybersecurity will need to look like as neural interfaces move from lab to clinic.
 
 ### Why I’m Writing This: Knowing What We Don’t Know
 

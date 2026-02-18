@@ -4,7 +4,7 @@ subtitle: "How a $38 muscle sensor turns consumer smart glasses into a subvocal 
 date_posted: "2026-02-17"
 author: "Kevin L. Qi"
 source: "https://qinnovate.com"
-tags: ["#TARA", "#NeurosecurityEngineering", "#QIF", "#BCI", "#Subvocalization", "#SmartGlasses", "#MetaRayBan", "#SilentSpeech", "#ConsumerSensors", "#SDomain"]
+tags: ["#TARA", "#NeurosecurityEngineering", "#QIF", "#BCI", "#Subvocalization", "#SmartGlasses", "#SmartGlasses", "#SilentSpeech", "#ConsumerSensors", "#SDomain"]
 ---
 
 ## From Headphones to Smart Glasses
@@ -38,7 +38,7 @@ AlterEgo was presented as assistive technology. Nobody framed it as a threat.
 
 ## Google Confirmed the Glasses Form Factor
 
-In August 2023, Google published a [defensive technical disclosure](https://www.tdcommons.org/dpubs_series/6205/) titled "Multimodal Sensing for Subvocal Speech Recognition for Silent Speech Interfaces in Future AR Glasses."
+In August 2023, A major tech company published a [defensive technical disclosure](https://www.tdcommons.org/dpubs_series/6205/) titled "Multimodal Sensing for Subvocal Speech Recognition for Silent Speech Interfaces in Future AR Glasses."
 
 The disclosure describes exactly what it sounds like: using sensors distributed across AR glasses and earbuds to detect and decode subvocal speech. The architecture combines three signal types:
 
@@ -46,13 +46,13 @@ The disclosure describes exactly what it sounds like: using sensors distributed 
 - **EEG** from in-ear electrodes in the hearables
 - **Microphone** audio as a third fusion channel
 
-The signals are fused using ML/DL models to reproduce speech from subvocal input. Google describes three configurations: glasses alone, hearables alone, or both combined for maximum accuracy.
+The signals are fused using ML/DL models to reproduce speech from subvocal input. The disclosure describes three configurations: glasses alone, hearables alone, or both combined for maximum accuracy.
 
 This is a *defensive publication* — Google published it to prevent others from patenting the concept, while preserving their own right to build it. They are telling the industry: subvocal detection through smart glasses is coming.
 
-Meanwhile, Meta acquired CTRL-labs in 2019 for somewhere between $500 million and $1 billion. CTRL-labs built an EMG wristband that reads motor intent at single-motor-unit resolution. Meta shipped it as the [Neural Band](https://www.meta.com/quest/accessories/neural-band/) in 2025, paired with the Ray-Ban Meta Display glasses. Their published research in *Nature* (July 2025) demonstrated single-finger decoding from wrist EMG.
+Meanwhile, a major tech company acquired an EMG wristband startup in 2019 for approximately $500 million to $1 billion. The startup built an EMG wristband that reads motor intent at single-motor-unit resolution. The acquirer shipped it as a commercial neural wristband in 2025, paired with their consumer smart glasses. Published research in *Nature* (July 2025) demonstrated single-finger decoding from wrist EMG.
 
-Meta chose the wrist. Google's disclosure points to the face. Both confirm: consumer companies are building subvocal detection into wearables. The question is not *if* but *when*.
+Meta chose the wrist. the published disclosure points to the face. Both confirm: consumer companies are building subvocal detection into wearables. The question is not *if* but *when*.
 
 ## Three Research Threads That Have Never Been Connected
 
@@ -60,7 +60,7 @@ We found three independent lines of published research that, together, define a 
 
 **Thread 1 — Subvocal Detection.** AlterEgo (Kapur et al., 2018), SilentSpeller (Kimura et al., 2019), and multiple 2024–2025 papers demonstrate that EMG electrodes on the face and jaw can decode silently articulated words with high accuracy. The field is mature. The sensors are small. The ML pipelines work.
 
-**Thread 2 — Headphone and Earbud Side-Channels.** EarSpy (Gao et al., 2023) showed that smartphone accelerometers can reconstruct speech from earbud vibrations during calls. WhisperPair demonstrated bilateral earbud acoustic analysis. Our own S-domain registry (T0072–T0096) documents 28 consumer sensor exploitation techniques, including repurposing speakers as microphones and ear-canal acoustic fingerprinting. Multiple CVEs in Airoha Bluetooth chipsets (used in major earbud brands) were disclosed in 2024–2025.
+**Thread 2 — Headphone and Earbud Side-Channels.** EarSpy (Gao et al., 2023) showed that smartphone accelerometers can reconstruct speech from earbud vibrations during calls. WhisperPair demonstrated bilateral earbud acoustic analysis. Our own S-domain registry (T0072–T0096) documents 28 consumer sensor exploitation techniques, including repurposing speakers as microphones and ear-canal acoustic fingerprinting. Multiple CVEs in Bluetooth chipsets used in major earbud brands were disclosed in 2024–2025.
 
 **Thread 3 — BCI Security and Neural Privacy.** The QIF framework maps 103 attack techniques across 11 neural-to-silicon bands. TARA scores each for both traditional severity (CVSS) and neural impact (NISS). Neurorights frameworks (Yuste et al., 2017) define mental privacy, cognitive liberty, and psychological continuity as rights. But none of these frameworks model the threat of subvocal extraction through consumer wearables.
 
@@ -70,9 +70,9 @@ That is the question TARA is designed to answer.
 
 ## The Delta
 
-Here is what Google's disclosure says you need versus what consumer smart glasses ship today:
+Here is what the published disclosure says you need versus what consumer smart glasses ship today:
 
-| Channel | Google's Architecture | Ray-Ban Meta ($299) | Gap |
+| Channel | Published Architecture | Consumer Smart Glasses (~$300) | Gap |
 |---------|----------------------|--------------------|----|
 | Acoustic (mics) | Yes, fused | 5 microphones | Covered |
 | EMG (muscle) | Temple + jaw electrodes | None | **Missing** |
@@ -80,15 +80,15 @@ Here is what Google's disclosure says you need versus what consumer smart glasse
 | IMU (motion) | Accelerometer/gyro | Wear-detection sensor | Partial |
 | Bone conduction output | Yes | No (open-ear speakers) | **Missing** |
 
-Ray-Ban Meta has one of the three sensing modalities Google describes. The microphones are air-coupled, optimized for voice commands — not the micro-vibrations of subvocalization. The glasses have no skin-contact electrodes, no EMG, no EEG.
+Current consumer smart glasses have one of the three sensing modalities Google describes. The microphones are air-coupled, optimized for voice commands — not the micro-vibrations of subvocalization. The glasses have no skin-contact electrodes, no EMG, no EEG.
 
-With stock hardware, the probability of detecting subvocalization from Ray-Ban Meta's microphones alone is low. The signals are likely too quiet for air-coupled MEMS mics to capture without direct tissue contact.
+With stock hardware, the probability of detecting subvocalization from the stock smart glasses microphones alone is low. The signals are likely too quiet for air-coupled MEMS mics to capture without direct tissue contact.
 
 But here is the problem: the delta is cheap.
 
 ## The Attacker's Augmentation Kit
 
-An attacker who wants to replicate Google's full multimodal architecture can do it with consumer parts:
+An attacker who wants to replicate the full multimodal architecture described in the disclosure can do it with consumer parts:
 
 ### Tier 1 — $15 (Jaw EMG Only)
 
@@ -108,11 +108,11 @@ The phone app records the EMG stream synchronized with glasses audio. The attack
 
 ### Tier 3 — $350+ (Full Google Stack)
 
-- Ray-Ban Meta smart glasses ($299) — acoustic + IMU
+- consumer smart glasses (~$300) — acoustic + IMU
 - MyoWare 2.0 wireless ($130) — jaw EMG
 - [IDUN Guardian earbuds](https://iduntechnologies.com/idun-guardian) (~$250) — in-ear EEG with jaw clench detection
 
-All three stream to a phone simultaneously. This replicates every channel in Google's disclosure using hardware available today from consumer retailers. No custom fabrication. No lab equipment. No soldering.
+All three stream to a phone simultaneously. This replicates every channel in the published disclosure using hardware available today from consumer retailers. No custom fabrication. No lab equipment. No soldering.
 
 Total cost to replicate a patented subvocal detection architecture: under $700.
 
@@ -153,11 +153,11 @@ The threat window is not "when the glasses ship with EMG sensors." The threat wi
 
 ## What a Negative Result Proves
 
-We are testing this. The initial experiment is straightforward: record subvocalization attempts using Ray-Ban Meta's stock microphones plus supplemental EMG electrodes, and evaluate detection accuracy across configurations.
+We are testing this. The initial experiment is straightforward: record subvocalization attempts using the stock smart glasses microphones plus supplemental EMG electrodes, and evaluate detection accuracy across configurations.
 
 If the stock microphones detect subvocalization: that is a finding with immediate implications for every consumer smart glasses product on the market. The threat is not one sensor away — it is already here.
 
-If the stock microphones fail but the EMG electrodes succeed: that confirms Google's disclosure — multimodal sensing is required, and the current generation is one hardware revision away. It also demonstrates the attacker augmentation scenario: $15 bridges the gap.
+If the stock microphones fail but the EMG electrodes succeed: that confirms the published disclosure — multimodal sensing is required, and the current generation is one hardware revision away. It also demonstrates the attacker augmentation scenario: $15 bridges the gap.
 
 If both fail with consumer hardware: that is still a publishable result. It establishes a baseline, identifies the signal-to-noise threshold for consumer sensors, and produces a predictive threat model — "at what sensor resolution does this threat class activate?" — which is exactly what TARA is designed to answer.
 
@@ -181,7 +181,7 @@ TARA maps the full chain. QIF provides the coordinate system. NISS scores the im
 
 We are ordering the hardware. The experimental protocol:
 
-1. Record subvocalization of standardized word sets (digits, alphabet, common phrases) using Ray-Ban Meta stock microphones
+1. Record subvocalization of standardized word sets (digits, alphabet, common phrases) using consumer smart glasses stock microphones
 2. Record the same sets with supplemental jaw EMG electrodes (MyoWare 2.0 or DIY AD8226 circuit)
 3. Record with both channels simultaneously
 4. Apply bandpass filtering, feature extraction, and classification (CNN or transformer architecture)

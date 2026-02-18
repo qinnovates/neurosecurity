@@ -17,7 +17,7 @@ If you’ve worked in IT, you know the OSI model — seven layers that stand
 
 Layered abstractions have proven effective across domains. When two systems interface, the model must span both. OSI was built for silicon. Silicon is now in the brain.
 
-This isn’t hypothetical. Neuralink has implanted its first human patients. Synchron is in FDA trials. Blackrock Neurotech has been in human brains since 2004.
+This isn’t hypothetical. Multiple BCI companies have implanted their first human patients. Several are in FDA trials. Neural implants have been in human brains since 2004.
 
 These devices are tested for safety and efficacy. They are not tested against adversarial threats.
 

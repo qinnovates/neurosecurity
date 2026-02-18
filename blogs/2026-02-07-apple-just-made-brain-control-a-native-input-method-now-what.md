@@ -36,7 +36,7 @@ Synchron was founded in 2016 by Tom Oxley, an Australian neurologist and neurosc
 
 The company has since raised $345 million. A $110 million Series C was led by ARCH Venture Partners, with the personal venture funds of Jeff Bezos (Bezos Expeditions) and Bill Gates (Gates Frontier) participating. A $200 million Series D followed in November 2025, backed by Khosla Ventures, the Qatar Investment Authority, and In-Q-Tel, the CIA's venture capital arm. When intelligence agencies invest in brain-computer interfaces, that tells you something about the strategic stakes. In 2022, Synchron became the first BCI company to receive an FDA Investigational Device Exemption for a permanently implanted BCI, and the first to begin U.S. clinical trials.
 
-The Stentrode itself is the key differentiator. It is a self-expanding nitinol stent embedded with 16 platinum electrodes, about 5 centimeters long. Unlike Neuralink's N1, which requires a craniotomy (cutting through the skull to place electrodes directly on brain tissue), the Stentrode is implanted endovascularly. A catheter goes through the jugular vein and parks the device inside a blood vessel on the surface of the motor cortex. A lead connects it to a receiver-transmitter unit in the chest, similar to a pacemaker. The procedure takes about two hours. Patients are typically home within 48 hours.
+The Stentrode itself is the key differentiator. It is a self-expanding nitinol stent embedded with 16 platinum electrodes, about 5 centimeters long. Unlike high-density electrode arrays, which require a craniotomy (cutting through the skull to place electrodes directly on brain tissue), the Stentrode is implanted endovascularly. A catheter goes through the jugular vein and parks the device inside a blood vessel on the surface of the motor cortex. A lead connects it to a receiver-transmitter unit in the chest, similar to a pacemaker. The procedure takes about two hours. Patients are typically home within 48 hours.
 
 Safety data from the SWITCH study, published in JAMA Neurology in January 2023, showed four patients followed for 12 months with no serious adverse events related to the device. No clots. No migration. Signal quality remained stable throughout.
 
@@ -48,7 +48,7 @@ In March 2025, at NVIDIA's GTC conference, Synchron unveiled Chiral, which they 
 
 Synchron is not alone. The competitive field has accelerated faster in the last 18 months than in the previous decade.
 
-**Neuralink** raised $650 million in a 2025 Series E and received FDA Breakthrough Device Designation for both speech and vision applications. Their N1 chip is in clinical trials, with a commercial target of 2027 under a Humanitarian Device Exemption (4,000 patients per year).
+**Other implant companies** have raised hundreds of millions in recent funding rounds and received FDA Breakthrough Device Designation for speech and vision applications. High-density electrode arrays are in clinical trials, with commercial targets as early as 2027 under Humanitarian Device Exemptions.
 
 **Paradromics** received FDA Breakthrough Device Designation and had their clinical trial approved in November 2025. Their Connexus system takes a different approach: high-density cortical surface electrodes with thousands of channels.
 
@@ -80,7 +80,7 @@ The pattern is clear. Apple is building an ecosystem where neural signals are a 
 
 Here is what the press coverage misses.
 
-Every article about Mark controlling his iPad by thought focuses on the marvel of the technology. And it is a marvel. But the Stentrode communicates with the iPad over Bluetooth Low Energy. The same protocol your wireless headphones use. The same protocol that a security analysis found 300+ vulnerabilities across in consumer BCI devices. The same protocol where researchers have demonstrated interception and replay of unencrypted neural data streams on devices from Muse, OpenBCI, and Neuroelectrics.
+Every article about Mark controlling his iPad by thought focuses on the marvel of the technology. And it is a marvel. But the Stentrode communicates with the iPad over Bluetooth Low Energy. The same protocol your wireless headphones use. The same protocol that a security analysis found 300+ vulnerabilities across in consumer BCI devices. The same protocol where researchers have demonstrated interception and replay of unencrypted neural data streams on multiple consumer BCI devices.
 
 Twenty-nine out of thirty consumer BCI companies surveyed provide no meaningful limitations on access to users' neural data.
 
@@ -90,7 +90,7 @@ Three problems remain, regardless of how good Apple's security is:
 
 **The post-quantum problem.** NIST's own post-quantum cryptography program exists because classical encryption has an expiration date. Quantum computers capable of breaking today's cryptography are estimated to arrive between 2030 and 2035. A Stentrode implanted today will still be transmitting neural data when that happens. If the key exchange uses classical ECDH (as most Bluetooth protocols do), every neural stream transmitted between now and then can be stored and decrypted retroactively. NIST calls this "harvest now, decrypt later." You can reissue a compromised credit card. You cannot reissue your brain.
 
-**The fragmentation problem.** If every BCI manufacturer builds their own proprietary security, the field gets what early networking had before TCP/IP: incompatible protocols, inconsistent security, and an attack surface that depends on which vendor you chose. A patient with a Synchron implant cannot switch to a Neuralink decoder. A researcher cannot build cross-platform tools. And security depends on the weakest implementation in the ecosystem. One vendor's mistake exposes their entire patient base.
+**The fragmentation problem.** If every BCI manufacturer builds their own proprietary security, the field gets what early networking had before TCP/IP: incompatible protocols, inconsistent security, and an attack surface that depends on which vendor you chose. A patient with one vendor’s implant cannot switch to another vendor’s decoder. A researcher cannot build cross-platform tools. And security depends on the weakest implementation in the ecosystem. One vendor's mistake exposes their entire patient base.
 
 **The regulatory vacuum.** No existing standard addresses post-quantum cryptography for implanted neural devices. The FDA's cybersecurity guidance for medical devices is evolving but does not mandate PQ crypto. Four states (Colorado, California, Montana, Connecticut) have passed neural data privacy laws. Senators Cantwell, Schumer, and Markey proposed the MIND Act in 2025 to protect neural data at the federal level. But legislation without a technical standard is a mandate without a method. The MIND Act says "protect neural data." It does not say how. And the 46 states that have not passed neurorights laws have no framework at all.
 
@@ -108,13 +108,13 @@ This is what we are building with the Neural Security Protocol (NSP) under the Q
 
 **Every cryptographic primitive is NIST-standardized.** ML-KEM (FIPS 203) for key encapsulation. ML-DSA (FIPS 204) for real-time signatures. SLH-DSA/SPHINCS+ (FIPS 205) for firmware authentication. AES-256-GCM for payload encryption. No novel cryptography. No academic experiments. Algorithms that have survived years of public cryptanalysis.
 
-**Three device class tiers that map directly to regulatory needs.** T1 (consumer headbands like Muse or NeuroSky) requires post-quantum encryption and signal integrity. T2 (clinical devices like the Synchron Stentrode) adds hardware root of trust and adaptive detection. T3 (surgical implants like the Neuralink N1) requires all five layers including EM monitoring. This tiering gives regulators a concrete compliance framework: tell manufacturers which tier their device falls into, and the security requirements follow.
+**Three device class tiers that map directly to regulatory needs.** T1 (consumer EEG headbands) requires post-quantum encryption and signal integrity. T2 (clinical-grade implanted devices) adds hardware root of trust and adaptive detection. T3 (high-density surgical implants) requires all five layers including EM monitoring. This tiering gives regulators a concrete compliance framework: tell manufacturers which tier their device falls into, and the security requirements follow.
 
 **Designed for implant-lifetime operation.** The key lifecycle spans 20 years. Session keys rotate every 90 days. Algorithm agility means new cryptographic primitives can be swapped in via authenticated firmware updates without redesigning the protocol. A device implanted in 2026 can migrate to whatever NIST standardizes in 2035.
 
 **3.25% power overhead at 40 milliwatts.** Practical for implanted hardware. The protocol compresses neural data first (delta encoding + LZ4, recovering 3-5x bandwidth), then encrypts, then signs. The compression step is not new overhead. BCI manufacturers already compress to fit wireless bandwidth. NSP mandates the correct order so encryption and signing ride on top of work the device already does.
 
-Companies like Apple, Synchron, and Neuralink would still compete on hardware, neural decoding algorithms, AI models, and user experience. Apple's proprietary security layer could wrap NSP and extend it. Neuralink could add layers specific to their N1 architecture. The protocol handles transport security so they do not have to reinvent it. But the foundation is shared, audited, and designed for the lifetime of a brain implant.
+BCI companies would still compete on hardware, neural decoding algorithms, AI models, and user experience. Any vendor’s proprietary security layer could wrap NSP and extend it. Implant manufacturers could add layers specific to their device architectures. The protocol handles transport security so they do not have to reinvent it. But the foundation is shared, audited, and designed for the lifetime of a brain implant.
 
 · · ·
 
@@ -134,7 +134,7 @@ For the 46 states without neurorights laws: the argument just got simpler. An op
 
 The federal path matters too. If the MIND Act passes with NSP as the referenced technical standard, it creates a single national baseline. Manufacturers build to one spec instead of 50 state variants. Patients get the same protection regardless of where they live. And the U.S. sets the global standard, the way NIST's cryptography standards have shaped international practice for decades.
 
-The window is narrow. Synchron is in pivotal trials. Neuralink targets commercial availability in 2027. Merge Labs is building non-invasive interfaces. Every month of neural data transmitted without post-quantum protection is a permanent liability. A standard adopted after the first neural data breach is a standard adopted too late.
+The window is narrow. BCI companies are in pivotal trials, targeting commercial availability by 2027. Non-invasive neural interface companies are building alternatives. Every month of neural data transmitted without post-quantum protection is a permanent liability. A standard adopted after the first neural data breach is a standard adopted too late.
 
 · · ·
 
@@ -147,13 +147,13 @@ The window is narrow. Synchron is in pivotal trials. Neuralink targets commercia
 2023: SWITCH study published in JAMA Neurology (12-month safety confirmed)
 2024: Synchron demonstrates BCI + Apple Vision Pro (Mark plays Solitaire by thought)
 2025: Apple announces BCI-HID protocol; Mark controls iPad entirely by thought (Aug 4)
-2025: Neuralink, Paradromics receive FDA Breakthrough Device Designation
+2025: Multiple BCI companies receive FDA Breakthrough Device Designation
 2025: Synchron raises $200M Series D (In-Q-Tel, Qatar Investment Authority, Khosla)
 2025: Senators propose MIND Act for federal neural data protection
 2026: Merge Labs raises $250M from OpenAI for non-invasive neural interfaces (Jan)
 2026: Apple ecosystem integration scales (BCI + Vision Pro + AirPods research)
 2026: Synchron pivotal trials planned (pathway to first FDA premarket BCI approval)
-2027: First limited commercial BCI availability (Neuralink HDE target)
+2027: First limited commercial BCI availability (HDE targets)
 2028+: Consumer BCI adoption accelerates
 2030-2035: Cryptographically relevant quantum computers arrive
 ```

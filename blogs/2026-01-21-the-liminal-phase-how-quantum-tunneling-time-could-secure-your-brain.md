@@ -12,7 +12,7 @@ tags: ["#QuantumComputing", "#Cybersecurity", "#Neuroscience", "#BrainComputerIn
 
 · · ·
 
-*Picture this* — It's 2035. Your neural implant receives a software update. But it wasn't from Neuralink.
+*Picture this* — It's 2035. Your neural implant receives a software update. But it wasn't from the manufacturer.
 
 Someone just pushed code directly into your brain. And by the time you realize something's wrong, the attack has already modified how you perceive your own thoughts.
 
@@ -44,7 +44,7 @@ And transitions, it turns out, can be monitored.
 
 The 2025 Nobel Prize in Physics recognized John Martinis, John Clarke, and Michel Devoret for proving that quantum tunneling happens at macroscopic scales — systems large enough to hold in your hand. We're not talking about abstract subatomic effects. We're talking about engineering-relevant phenomena.
 
-Meanwhile, brain-computer interfaces are shrinking. Neuralink threads are 5 micrometers wide. Neurotassel probes have cross-sections of 3 × 1.5 micrometers. And the nanostructured coatings on modern electrodes? Those operate at 2-10 nanometers — scales where quantum tunneling isn't just possible, it's *dominant*.
+Meanwhile, brain-computer interfaces are shrinking. Neural implant threads are as thin as 5 micrometers. Neurotassel probes have cross-sections of 3 × 1.5 micrometers. And the nanostructured coatings on modern electrodes? Those operate at 2-10 nanometers — scales where quantum tunneling isn't just possible, it's *dominant*.
 
 **The collision course is happening now.**
 
@@ -202,7 +202,7 @@ If you're at a **funding agency**: The gap between quantum physics and BCI secur
 
 *This article is part of the QIF (Quantified Interconnection Framework for Neural Security) research.*
 
-**Sub-Tags:** #QuantumTunneling #BCI #Neuralink #NeuralSecurity #QuantumComputing #QIF #LiminalPhase #QPUF #Coherence #Cybersecurity #Neuroscience
+**Sub-Tags:** #QuantumTunneling #BCI #NeuralImplants #NeuralSecurity #QuantumComputing #QIF #LiminalPhase #QPUF #Coherence #Cybersecurity #Neuroscience
 
 ---
 

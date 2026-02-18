@@ -13,7 +13,7 @@ tags: ["qif", "bci", "neural-prosthetics", "fragility-tax", "spinal-cord", "secu
 
 In 2023, a team led by Grégoire Courtine at EPFL implanted a brain-spine interface (BSI) in a paralyzed man and restored his ability to walk. The system reads motor intent from the brain, translates it into electrical stimulation patterns, and delivers those patterns to the spinal cord below the injury. The damaged biological pathway is bypassed entirely. A digital bridge replaces what the body lost.
 
-This is not a lab demo. The patient walked outside, on uneven terrain, with the system running. BrainGate has been implanting cortical BCIs for over a decade. Functional electrical stimulation (FES) systems are FDA-cleared and in clinical use. Neuralink's long-term roadmap includes spinal cord bypass. The question is not whether neural prosthetics will replace damaged reflex pathways. The question is what happens when they do.
+This is not a lab demo. The patient walked outside, on uneven terrain, with the system running. BrainGate has been implanting cortical BCIs for over a decade. Functional electrical stimulation (FES) systems are FDA-cleared and in clinical use. Some companies’ long-term roadmaps include spinal cord bypass. The question is not whether neural prosthetics will replace damaged reflex pathways. The question is what happens when they do.
 
 ## The Replacement Inherits the Architecture
 
