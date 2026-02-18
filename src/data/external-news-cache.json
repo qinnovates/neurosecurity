@@ -10,29 +10,11 @@
   },
   {
     "type": "external",
-    "title": "Jack Altman joins Benchmark as GP",
-    "date": "2026-02-17",
-    "url": "https://techcrunch.com/2026/02/17/jack-altman-joins-benchmark-as-gp/",
-    "source": "TechCrunch",
-    "summary": "Jack Altman and Benchmark announced today that he would be joining the firm as a general partner.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "What Will It Take to Design a Brain Implant That Lasts a Lifetime? - the-scientist.com",
     "date": "2026-02-17",
     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPMVhHZlBJVkpYakNwTEZfRlBTcVRhMjM0OHZWc3F1MUNPREhVYThDYVhqcVBMNG12bENkb01ObVE1RDlNVHdpZDh0RXA0Y054b0tCaDFnQXJFZUF0dlQyc241VmJmM2RLZDFOcmliWGxvWkhYWUFRYXBUTUtZdWN5Ym9CX0JFNE5PTjJMazJwS2xtU3hpeHRIXzZWbExfZ0YtUDM4?oc=5",
     "source": "Google News — BCI",
     "summary": "What Will It Take to Design a Brain Implant That Lasts a Lifetime?&nbsp;&nbsp;the-scientist.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink Reaches 21 Patients as Elon Musk Continues Push for High-Volume Brain Chip Production - The Debrief",
-    "date": "2026-02-16",
-    "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNUU9uMll1ajV5cXFkUEFsVnFheW0wN0VwLUhzRGgwUGx0RE5jSUU4VXBLM1AxemZielZPT0NlcTBfZkVVSFYxbmMyU0ctblNsaUdwdi1QeDRfQ1RRU0kzQnJ4bDhsWU9mckF0NjZCUGJXejRIMk9FY00xNlotaHZkeGYwSXhzcVY4d2pqVWpyUHhSQmtRWXNLLUpIUHRCWXRrVkJwNHBYeXlFdFZSUkdJRkhkSkswY1JVTGlN?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Reaches 21 Patients as Elon Musk Continues Push for High-Volume Brain Chip Production&nbsp;&nbsp;The Debrief",
     "category": "neurotechnology"
   },
   {
@@ -64,6 +46,15 @@
   },
   {
     "type": "external",
+    "title": "Chinese Startup Gestala Launches Ultrasound Brain Interface - The Tech Buzz",
+    "date": "2026-01-29",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNQ3dXWHNraTlZZWVtOU1hY05yTV9LbUZSZlBPWVVNWHd3ZHJxRDNlcUNBNXEwMzJqNFlPOXFLWjJuaFlqc0RwaGNsWi1NMFR4dS1kSDJvdUQ3SEhYRkZ1eUdtd0ZWLTE5eU16TkhZNkFOcTVkbFdJYWtQQXVLcW9yN2dHb2ppVGkwUEZzMVVHSk5FSzFnV1cw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Chinese Startup Gestala Launches Ultrasound Brain Interface&nbsp;&nbsp;The Tech Buzz",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
@@ -82,38 +73,20 @@
   },
   {
     "type": "external",
-    "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
-    "date": "2026-01-28",
-    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Investing in Merge Labs - OpenAI",
-    "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Investing in Merge Labs&nbsp;&nbsp;OpenAI",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
-    "source": "Google News — Neural Startups",
+    "source": "Google News — BCI",
     "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
-    "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
   },
   {
@@ -133,6 +106,15 @@
     "source": "Google News — Neural Startups",
     "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
+    "date": "2025-11-18",
+    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
+    "category": "neuroethics"
   },
   {
     "type": "external",
