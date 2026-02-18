@@ -82,6 +82,14 @@ When ANY of these occur during a session, you MUST:
 **RAW Conversational Mode (Entry 61+, MANDATORY):**
 Derivation log entries that capture live sessions use Kevin's words **exactly as typed**. The tone is casual and raw. Typos are expected and intentional — they show the train of thought. Missing apostrophes, misspellings, uncorrected grammar — that's the point. Do NOT fix, clean up, rephrase, or "polish" anything the human says when writing it into the derivation log. The unedited text IS the record. AI commentary or structural framing around Kevin's words is fine, but his words stay untouched. Each message (human and AI) must include a datetime stamp in `[YYYY-MM-DD HH:MM]` format matching terminal time.
 
+**Derivation Journal Mode (claudeq sessions only):**
+RAW conversational tracking to the derivation log ONLY activates when Kevin explicitly starts a derivation journal session (e.g., via `claudeq`). When claudeq mode is detected (via appended system prompt or Kevin saying "claudeq"/"start journaling"), you MUST:
+1. **Announce immediately:** Say "Derivation journal active. Tracking all exchanges to QIF-DERIVATION-LOG.md." so Kevin knows logging has started.
+2. **Determine the next entry number** by checking the latest entry in the derivation log.
+3. **Create the entry header** at the TOP of the entries section (reverse-chronological order).
+4. **Log all exchanges** with `[YYYY-MM-DD HH:MM]` timestamps, Kevin's words verbatim (no cleanup), and Claude's responses.
+Exceptions: sensitive/PII content, or Kevin says "incognito." Normal sessions (clauded) do NOT auto-track to the derivation log. Standard Auto-Track Protocol triggers (hypotheses, decisions, architecture changes, etc.) still apply as before in all sessions.
+
 **Research Commit Messages:**
 For research-significant commits (derivation log entries, hypothesis docs, papers, blog posts), use this extended format:
 ```
@@ -203,6 +211,67 @@ Before ANY paper submission, preprint upload, or public post, verify:
 ### Blog Posts & Public Content
 
 For blog posts on qinnovate.com, include a footer: "Written with AI assistance (Claude). All claims verified by the author." This is lighter than paper-level disclosure but maintains transparency.
+
+## claudeq Mode — Live Derivation Journaling (MANDATORY when active)
+
+When a session is started with the `claudeq` configuration, you are in **live derivation journaling mode**. This means every exchange gets logged raw to `qif-framework/QIF-DERIVATION-LOG.md` in real-time.
+
+### Activation
+The user launches Claude Code with the `claudeq` config (separate from the default `clauded` config). When active, the session will include a system indicator. If the user says "claudeq" or "start journaling" mid-session, begin logging immediately.
+
+### What to do when claudeq is active
+
+1. **Determine the next entry number.** Check the latest entry in `qif-framework/QIF-DERIVATION-LOG.md` and increment by 1.
+
+2. **Create the entry header immediately** at the TOP of the entries section (entries are in descending/reverse-chronological order):
+   ```markdown
+   ## Entry [N]: [Topic TBD] {#entry-[n]-[slug]}
+
+   **Date:** [YYYY-MM-DD], ~[HH:MM]
+   **Classification:** [TBD — fill as session progresses]
+   **AI Systems:** Claude Opus 4.6
+   **Connected entries:** [fill as connections emerge]
+   ```
+
+3. **Log every exchange as it happens.** Use this format:
+   ```markdown
+   ### [YYYY-MM-DD HH:MM] Kevin:
+
+   [Kevin's exact words, completely unedited. Keep typos, grammar, everything.]
+
+   ### [YYYY-MM-DD HH:MM] Claude:
+
+   [Your response, summarized or full as appropriate.]
+   ```
+
+4. **Kevin's words are COMPLETELY RAW.** No corrections. No polish. No grammar fixes. No missing-apostrophe fixes. The raw text IS the record.
+
+5. **Log everything** unless Kevin says "incognito" for a specific exchange, or it contains PII/credentials.
+
+6. **Update the entry title** as the topic becomes clear. The initial `[Topic TBD]` should be replaced once you understand what the session is about.
+
+7. **At session end,** add the AI Collaboration section:
+   ```markdown
+   ### AI Collaboration
+
+   - **Claude Opus 4.6:** [roles performed]
+   - **Human decided:** [list of decisions Kevin made]
+   ```
+
+8. **Update the Entry Index table** at the top of the derivation log with the new entry.
+
+9. **Update the Project Timeline table** if the entry is significant enough.
+
+### What NOT to do in claudeq mode
+- Do NOT skip logging because an exchange seems trivial
+- Do NOT edit Kevin's words for clarity, grammar, or style
+- Do NOT wait until the end to write the entry (write as you go)
+- Do NOT create a separate file (everything goes in QIF-DERIVATION-LOG.md)
+
+### Relationship to other protocols
+- claudeq entries still trigger the Auto-Track Protocol (glossary sync, research sources sync, etc.)
+- Cross-AI validation rows still go to TRANSPARENCY.md
+- Daily memory logs still get written normally
 
 ## Standards & Governance (Scale)
 - **QIF (Security)**: All architectural changes must align with the 11-band hourglass model.
