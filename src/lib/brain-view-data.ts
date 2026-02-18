@@ -95,12 +95,11 @@ function buildSecurityView(): BrainView {
     const threats = getThreatsForRegion(region.id);
     const count = threats.length;
 
-    // Color by severity
+    // Color by severity — red / orange / yellow (consistent across all views)
     const color =
       count >= 60 ? '#ef4444'
-      : count >= 40 ? '#f97316'
-      : count >= 20 ? '#eab308'
-      : '#94a3b8';
+      : count >= 30 ? '#f97316'
+      : '#eab308';
 
     // Collect unique attack categories
     const catSet = new Set<string>();
@@ -156,11 +155,10 @@ function buildClinicalView(): BrainView {
       }
     }
 
-    // Red-orange-yellow by therapy count
+    // Color by therapy count — red / orange / yellow (consistent across all views)
     const color =
       count >= 50 ? '#ef4444'
-      : count >= 30 ? '#f97316'
-      : count >= 15 ? '#eab308'
+      : count >= 25 ? '#f97316'
       : '#eab308';
 
     // Badges = domains present
@@ -218,12 +216,11 @@ function buildGovernanceView(): BrainView {
   const regions: BrainViewRegion[] = govData.brainRegions.map(region => {
     const count = region.threatCount;
 
-    // Color by threat count (same logic as original BrainRightsHero)
+    // Color by threat count — red / orange / yellow (consistent across all views)
     const color =
       count >= 60 ? '#ef4444'
-      : count >= 40 ? '#f97316'
-      : count >= 20 ? '#eab308'
-      : '#94a3b8';
+      : count >= 30 ? '#f97316'
+      : '#eab308';
 
     // Badges = neurorights protecting this region
     const badges = region.neurorights.map(nrId => ({
