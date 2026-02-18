@@ -10,10 +10,18 @@ import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS, LATEST_WHITEPAPER_HR
 import HeroParticles from '../components/HeroParticles';
 // Hourglass3D removed — replaced with flat CSS preview linking to /lab/hourglass.html
 import '../styles/global.css';
+import registry from '@shared/qtara-registrar.json';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => new Date(getPostDate(b.data)).getTime() - new Date(getPostDate(a.data)).getTime())
   .slice(0, 6);
+
+// Compute hero metrics from registrar (build-time)
+const techniques = (registry as any).techniques ?? [];
+const totalThreats = techniques.length;
+const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
+const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
+const neurorightsCount = techniques.filter((t: any) => t?.neurorights?.affected?.length > 0).length;
 
 ---
 
@@ -43,9 +51,25 @@ const posts = (await getCollection('blog'))
         </span>
       </h1>
 
-      <p class="text-lg sm:text-xl text-[var(--color-text-muted)] mb-8 max-w-2xl mx-auto leading-relaxed">
-        102 threats. 77 therapeutic analogs. 60 DSM-5 mappings. All open.
-      </p>
+      <!-- Dynamic metrics from registrar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl mx-auto mb-8">
+        <div class="glass rounded-lg p-3 text-center">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalThreats}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Threats Mapped</p>
+        </div>
+        <div class="glass rounded-lg p-3 text-center">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{therapeuticCount}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Therapeutic Analogs</p>
+        </div>
+        <div class="glass rounded-lg p-3 text-center">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">{dsm5Count}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-faint)] uppercase tracking-wider mt-1">DSM-5 Diagnoses</p>
+        </div>
+        <div class="glass rounded-lg p-3 text-center">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">{neurorightsCount}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Neurorights Mapped</p>
+        </div>
+      </div>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
         <a
