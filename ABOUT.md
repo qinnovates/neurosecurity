@@ -2,7 +2,11 @@
 <img src="docs/images/heart-portrait.png" alt="Heart Portrait" width="500" />
 </div>
 
+<div align="center">
+
 *Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
+
+</div>
 
 # About — Kevin Qi
 
@@ -142,5 +146,9 @@ I'm glad the days of browser pop-ups are no longer a major concern. But the next
 This is a conversation I cannot have alone. I'm looking for academics, researchers, and neuroscientists to refine QIF and establish ethical guidelines for where technology should and shouldn't intervene, for medical and safety reasons. There are unknowns in neuroscience today, and that frontier is being challenged every day. The gaps are the research agenda.
 
 If you work with electrodes, patient data, BCI signal processing, neuroethics, or security architecture, I'd like to hear from you.
+
+---
+
+*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:10)*
 
 
