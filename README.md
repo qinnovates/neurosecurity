@@ -19,7 +19,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.2.1, published |
-| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.3, published |
+| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.4, published |
 | **[TARA](https://qinnovate.com/TARA/)** | 102 attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
 | **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
