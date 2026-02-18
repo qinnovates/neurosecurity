@@ -10,7 +10,7 @@
 
 # About — Kevin Qi
 
-I'm **Kevin Qi**, a security engineer and neurosecurity researcher. I started this project with a question that keeps me up at night: *what happens to a patient when their brain-computer interface gets hacked?*
+I'm **Kevin Qi**, a security engineer and an aspirational neurosecurity researcher. I started this project with a question that keeps me up at night: *what happens to a patient when their brain-computer interface gets hacked?*
 
 Not what happens to the data. Not what happens to the device. What happens to the *mind*. I couldn't find a framework that answered that question, so I built one. This is the OSI of Mind.
 
