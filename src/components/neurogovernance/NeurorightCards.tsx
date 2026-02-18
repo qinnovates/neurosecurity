@@ -61,6 +61,18 @@ export default function NeurorightCards({ neurorights }: Props) {
                   QIF Original
                 </span>
               )}
+              {nr.source === 'qif-extended' && (
+                <span
+                  className="text-[10px] font-medium px-1.5 py-0.5 rounded"
+                  style={{
+                    background: 'var(--color-accent-secondary)',
+                    color: 'white',
+                    opacity: 0.9,
+                  }}
+                >
+                  QIF Extended
+                </span>
+              )}
             </div>
 
             {/* Name */}

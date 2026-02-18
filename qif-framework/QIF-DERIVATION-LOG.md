@@ -23,6 +23,7 @@
 
 | Date | Event | Link |
 |------|-------|------|
+| 2026-02-18 | Neurorights Restructured 7→5: DI folded into MI, IDA folded into MP, CA kept as genuinely novel. Literature review against 6 frameworks confirmed I&A's 4 rights are well-chosen. QIF contribution: 1 original right + engineering depth on 2 existing. | [Entry 57](#entry-57-neurorights-restructuring-7-to-5) |
 | 2026-02-14 | Runemate Forge & NSP Integration: End-to-end secure neural pipeline verified. HTML-to-Staves compilation + Post-Quantum encryption (ML-KEM/ML-DSA) + real-time decryption demo. | [Entry 56](#entry-56-runemate-forge--nsp-integration) |
 | 2026-02-14 | NSP Core & Handshake Implementation: Rust implementation of ML-KEM-768 and ML-DSA-65. 4-step secure handshake protocol establishing 256-bit AES-GCM session. | [Entry 55](#entry-55-nsp-core--handshake-implementation) |
 | 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle: Interactive 3D Hourglass as "Connected System". "Attacker vs. Doctor" perspective toggle. TARA reframed as mechanism registry with dual-use states. | [Entry 54](#entry-54-tara-interactive-visualization--dual-use-toggle) |
@@ -5900,6 +5901,55 @@ Key features implemented:
 ### Why This Matters for QIF
 
 This is the transition from "specification" to "protocol." Having a functional, testable NSP implementation means the S1 (Protocol Security) band of the QIF hourglass is no longer a theoretical construct. It is a verifiable software component that can be audited.
+
+---
+
+## Entry 57: Neurorights Restructuring 7 to 5
+
+**Date:** 2026-02-18
+**AI Systems:** Claude Opus 4.6 (implementation), Gemini 2.5 Pro (prior validation)
+**Human Decision:** Kevin Qi decided to restructure from 7 → 5 neurorights after cross-referencing QIF's 3 proposed rights (CA, DI, IDA) against 6 established frameworks.
+**Classification:** VERIFIED (based on literature review)
+
+### Context
+
+After the initial neurorights mapping (Entry ~Feb 16) produced 7 rights, a systematic cross-validation against established literature was conducted:
+- Ienca & Andorno 2017 (original 4 neurorights)
+- Yuste / Neurorights Foundation 2017
+- Chile neurorights law 2021
+- UNESCO Recommendation on Ethics of Neurotechnology 2025
+- Farahany 2023
+- Bublitz 2022
+
+### Findings
+
+1. **Cognitive Authenticity (CA) — KEPT.** Fills a genuine gap. No prior framework distinguishes read-attacks (exfiltration/surveillance → Mental Privacy) from write-attacks (injection/implantation → Cognitive Authenticity). Maps to CIA triad: MP = Confidentiality, CA = Integrity/Authenticity. The LSL CVE demonstrates both in a single exploit chain.
+
+2. **Dynamical Integrity (DI) — FOLDED INTO MI.** DI is an engineering-level specification of what Mental Integrity protects: oscillatory rhythms, timing, homeostatic equilibria. Ienca & Andorno's MI already covers "unauthorized alteration of neural function" — DI provides the measurable engineering criteria. MI technique count: 71 → 81.
+
+3. **Informational Disassociation (IDA) — FOLDED INTO MP.** IDA is the data-lifecycle extension of Mental Privacy: cross-modal re-identification, anonymization failure, biometric fusion. These are privacy violations. MP already covers "unauthorized access to neural data" — IDA extends it to cover the full data lifecycle. MP technique count: 64 (unchanged, IDA techniques were already subsets).
+
+### Result: 5 Neurorights
+
+| ID | Name | Source | Status |
+|----|------|--------|--------|
+| MP | Mental Privacy | Ienca & Andorno | **QIF Extended** — absorbs IDA (data lifecycle) |
+| CL | Cognitive Liberty | Ienca & Andorno | Unchanged |
+| MI | Mental Integrity | Ienca & Andorno | **QIF Extended** — absorbs DI (signal dynamics) |
+| PC | Psychological Continuity | Ienca & Andorno | Unchanged |
+| CA | Cognitive Authenticity | **QIF Original** | Genuine gap in literature |
+
+### Rationale
+
+This restructuring is academically honest. Ienca & Andorno thought through the top-level rights carefully. Claiming 7 rights when 2 of them are engineering specifications of existing rights overstates QIF's contribution and risks credibility in peer review. QIF's actual contribution is: (1) one genuinely new right (CA), (2) engineering-level depth on MI and MP, and (3) the first quantitative mapping of 102 attack techniques to neurorights.
+
+### Implementation
+
+- Registrar: DI→MI, IDA→MP remapped in all 102 technique `neurorights.affected` arrays
+- Taxonomy: 7 → 5 rights
+- NeurorightCards: "QIF Extended" badge on MI and MP, "QIF Original" on CA
+- Blog post restructured to reflect 5-right framework
+- Neurogovernance page updated with CA vs MP distinction explanation
 
 ---
 

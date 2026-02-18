@@ -14,7 +14,7 @@ const breadcrumbs = [
 
 <PageLayout
   title="Neurogovernance — Your Brain Has Rights"
-  description="An interactive map of 7 neurorights, 102 BCI attack techniques, and the brain regions they protect. The first framework to quantify what neural security means for patients."
+  description="An interactive map of 5 neurorights, 102 BCI attack techniques, and the brain regions they protect. The first framework to quantify what neural security means for patients."
   breadcrumbs={breadcrumbs}
   wide
 >
@@ -82,16 +82,36 @@ const breadcrumbs = [
     <div class="flex items-center gap-4 mb-8">
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
       <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
-        The 7 Neurorights
+        The 5 Neurorights
       </h2>
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
     </div>
 
-    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
-      Four rights from Ienca &amp; Andorno (2017). Three proposed by the QIF framework based on
-      systematic gap analysis of {data.stats.totalThreats} attack techniques.
-      Click any card to see the highest-impact threats.
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-6">
+      Four rights from Ienca &amp; Andorno (2017). One proposed by QIF to fill a genuine gap in the literature.
+      Two existing rights extended with engineering-level depth from {data.stats.totalThreats} attack techniques.
     </p>
+
+    <div class="glass rounded-xl p-5 max-w-2xl mx-auto mb-8 text-xs text-[var(--color-text-muted)] leading-relaxed space-y-3">
+      <p>
+        <strong class="text-[var(--color-text-primary)]">Mental Privacy (MP)</strong> protects against <em>reading</em> your neural data &mdash;
+        exfiltration, surveillance, and re-identification across datasets. QIF extends MP with data-lifecycle protections:
+        cross-modal re-linking, anonymization failure, and informational disassociation.
+      </p>
+      <p>
+        <strong class="text-[var(--color-text-primary)]">Cognitive Authenticity (CA)</strong> protects against <em>writing</em> into your neural signals &mdash;
+        injection, implanted thoughts, and confusion of agency. This is QIF's original contribution: no prior framework
+        distinguished read-attacks (MP) from write-attacks (CA). The LSL CVE demonstrates both: Phase 2 (exfiltrate) = MP violation, Phase 3 (inject) = CA violation.
+      </p>
+      <p>
+        <strong class="text-[var(--color-text-primary)]">Mental Integrity (MI)</strong> now includes signal dynamics &mdash;
+        protecting brain rhythms, oscillatory timing, and homeostatic equilibria from covert disruption. QIF extends MI
+        with engineering-level specifications for detecting dynamical retuning attacks.
+      </p>
+      <p class="text-[10px] text-[var(--color-text-faint)]">
+        Click any card below to see the highest-impact threats for each right.
+      </p>
+    </div>
 
     <div class="reveal">
       <NeurorightCards client:visible neurorights={data.neurorights} />

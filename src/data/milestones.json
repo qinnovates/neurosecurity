@@ -156,16 +156,16 @@
     },
     {
       "date": "2026-02-16",
-      "title": "Neurorights Gap Discovery: DI & IDA Proposed",
-      "description": "Systematic mapping of 102 techniques against Ienca & Andorno's 4 neurorights exposed violations that none could categorize. Two new neurorights proposed: Dynamical Integrity (DI) — protecting neural oscillatory dynamics (61 techniques) — and Informational Disassociation (IDA) — prohibiting cross-modal neural data correlation (5 techniques). Cross-validated by Gemini 2.5 Pro. All 102 techniques mapped to 7 neurorights total.",
+      "title": "Neurorights Mapping: 5 Rights (4 I&A + 1 QIF Original)",
+      "description": "Systematic mapping of 102 techniques against neurorights. Four rights from Ienca & Andorno (2017): MP, CL, MI, PC. One QIF original: Cognitive Authenticity (CA) — the right to signal authenticity, filling a genuine gap (read vs write attacks). MI extended with dynamical integrity concepts (81 techniques). MP extended with data-lifecycle protections. Cross-validated by Gemini 2.5 Pro. All 102 techniques mapped to 5 neurorights.",
       "category": "research",
       "icon": "brain",
       "href": "/news/2026-02-16-your-brain-has-rights-we-counted-them/"
     },
     {
       "date": "2026-02-17",
-      "title": "Neurorights Validated Against Established Frameworks",
-      "description": "All 7 QIF neurorights cross-validated against 6 established frameworks (Ienca & Andorno 2017, Yuste/NRF 2017, Chile 2021, UNESCO 2025, Farahany 2023, Bublitz 2022). DI and IDA confirmed as novel terms absent from published literature. Gemini CLI independently confirmed all claims. Three policy-layer rights (equitable access, algorithmic bias, free will) documented as governance concerns outside security scope.",
+      "title": "Neurorights Restructured: 7 → 5 After Literature Review",
+      "description": "Cross-validated against 6 established frameworks (Ienca & Andorno 2017, Yuste/NRF 2017, Chile 2021, UNESCO 2025, Farahany 2023, Bublitz 2022). DI folded into MI (engineering specification of mental integrity). IDA folded into MP (data-lifecycle extension of mental privacy). CA confirmed as genuinely novel — no prior framework distinguishes read-attacks from write-attacks. Academically honest restructuring: 4 I&A rights + 1 QIF original.",
       "category": "research",
       "icon": "brain",
       "href": "/about/"

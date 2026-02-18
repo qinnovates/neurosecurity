@@ -1,14 +1,14 @@
 ---
 title: "Your Brain Has Rights. We Counted Them."
-subtitle: "How mapping 102 attack techniques to neurorights revealed that consent forms are lying and 'indirect risk' is a dangerous fiction"
+subtitle: "How mapping 102 attack techniques to neurorights confirmed four established rights, extended two, and revealed one genuine gap"
 date_posted: "2026-02-16"
 source: "https://qinnovate.com"
-tags: ["#Neurorights", "#TARA", "#QIF", "#BCI", "#Neuroethics", "#ConsentComplexity", "#IencaAndorno", "#DynamicalIntegrity"]
+tags: ["#Neurorights", "#TARA", "#QIF", "#BCI", "#Neuroethics", "#ConsentComplexity", "#IencaAndorno", "#CognitiveAuthenticity"]
 ---
 
 ## TL;DR
 
-We mapped all 102 TARA techniques to 7 neurorights and built a Consent Complexity Index. Three findings you should care about: (1) Four "silicon-only" attacks that supposedly don't touch biology have NISS scores above 6.0 but require only standard consent — the consent form is lying. (2) Techniques that cause permanent personality changes are classified as "enhanced" consent, not IRB — the system under-protects the most vulnerable outcomes. (3) Two techniques labeled "indirect risk" have NISS scores of 8.1 — the word "indirect" is doing the opposite of what regulators think it's doing.
+We mapped all 102 TARA techniques to 5 neurorights and built a Consent Complexity Index. Four rights come from Ienca & Andorno (2017) — two of which QIF extends with engineering-level depth. One right is QIF's original contribution: Cognitive Authenticity, which fills a genuine gap no prior framework addresses. Three findings you should care about: (1) Four "silicon-only" attacks that supposedly don't touch biology have NISS scores above 6.0 but require only standard consent — the consent form is lying. (2) Techniques that cause permanent personality changes are classified as "enhanced" consent, not IRB — the system under-protects the most vulnerable outcomes. (3) Two techniques labeled "indirect risk" have NISS scores of 8.1 — the word "indirect" is doing the opposite of what regulators think it's doing.
 
 ---
 
@@ -27,30 +27,41 @@ Every technique in the [TARA registry](https://qinnovate.com/TARA) now has a `ne
 1. **UI category** provides the primary signal — signal injection violates Mental Integrity + Cognitive Liberty; exfiltration violates Mental Privacy; persona attacks violate Cognitive Authenticity.
 2. **DSM-5-TR cluster** adds overlays — persistent_personality techniques always get Psychological Continuity; cognitive/psychotic clusters add Mental Integrity.
 3. **NISS vector components** refine the mapping — high brain impact (BI:H) maps to Mental Integrity; high cognitive impact (CG:H) maps to Cognitive Liberty + Authenticity.
-4. **Cross-modal data fusion** triggers a new right we're proposing: Informational Disassociation.
-5. **Dual-use therapeutics** with high severity trigger another: Dynamical Integrity.
+4. **Cross-modal data fusion** triggers data-lifecycle protections under Mental Privacy (extended).
+5. **Signal dynamics disruption** triggers dynamical integrity protections under Mental Integrity (extended).
 
-## Seven Rights, Not Four
+## Five Rights, Not Four — and Not Seven
 
-The Ienca-Andorno framework gives us four neurorights. QIF already proposed a fifth — **Cognitive Authenticity** (CA), the right to know your thoughts are your own. Running 102 techniques through the mapping forced us to propose two more:
+The Ienca-Andorno framework gives us four neurorights. After mapping 102 attack techniques, we initially proposed three additional rights (CA, DI, IDA). After cross-validating against six established frameworks (Ienca & Andorno 2017, Yuste/NRF 2017, Chile 2021, UNESCO 2025, Farahany 2023, Bublitz 2022), we restructured:
 
-### Right to Dynamical Integrity (DI)
+- **Dynamical Integrity (DI)** is an engineering specification of **Mental Integrity** — folded in.
+- **Informational Disassociation (IDA)** is the data-lifecycle extension of **Mental Privacy** — folded in.
+- **Cognitive Authenticity (CA)** fills a genuine gap — kept as QIF's original contribution.
+
+This is the academically honest conclusion. Ienca & Andorno thought through the top-level rights carefully. QIF's contribution is one genuinely new right plus engineering-level depth on two existing ones.
+
+### The Read/Write Distinction: MP vs CA
+
+The critical distinction that no prior framework captures:
+
+- **Mental Privacy (MP)** = don't **read** my neural data without consent (confidentiality, exfiltration, re-identification)
+- **Cognitive Authenticity (CA)** = don't **write** into my neural signals without consent (authenticity, injection, agency confusion)
+
+This maps directly to the CIA triad: MP = Confidentiality, CA = Integrity/Authenticity. The LSL CVE demonstrates both in a single exploit chain: Phase 2 (exfiltrate neural data) = MP violation, Phase 3 (inject false signals) = CA violation.
+
+### What QIF Adds to Mental Integrity
 
 Some attacks don't break your brain. They *retune* it.
 
 Gradual drift (T0062) shifts neural parameters slowly enough that your brain's homeostatic mechanisms adapt to the new baseline. Neurofeedback falsification (T0022) trains your brain to reinforce pathological patterns it thinks are healthy. Baseline adaptation poisoning (T0071) exploits re-enrollment windows to shift what "normal" looks like.
 
-None of these violate Mental Integrity in the traditional sense — nothing is damaged. But the dynamical equilibrium of your neural system is altered. The free energy landscape your brain navigates has been reshaped without your knowledge.
+These are violations of Mental Integrity, but the original formulation doesn't capture the engineering specifics. QIF extends MI with signal dynamics protections: detecting oscillatory disruption, timing attacks, and homeostatic retuning. 81 of 102 techniques now map to MI (up from 71 when we tracked dynamics separately).
 
-61 of 102 techniques affect Dynamical Integrity. It's the most common neuroright violation after Mental Integrity (71).
-
-### Right to Informational Disassociation (IDA)
+### What QIF Adds to Mental Privacy
 
 T0096 is a multi-modal biometric fusion attack. It correlates your neural data with your gait, your voice, your face, your typing rhythm. Each stream alone is a privacy concern. Fused, they create an identity signature that can't be anonymized.
 
-The right to Informational Disassociation says: you can consent to sharing your EEG without consenting to having it correlated with your keystroke dynamics. Data fusion without explicit per-modality consent violates IDA.
-
-Only 5 techniques currently trigger IDA — T0096, T0097, T0099, T0101, T0102 — but they represent the fastest-growing attack category in TARA (all added in v1.3/v1.4).
+QIF extends MP with data-lifecycle protections: you can consent to sharing your EEG without consenting to having it correlated with your keystroke dynamics. Cross-modal re-linking without explicit per-modality consent is a privacy violation — and falls naturally under Mental Privacy's scope.
 
 ## The Consent Complexity Index
 
@@ -94,9 +105,9 @@ Four techniques in the persistent_personality DSM-5 cluster — T0022 (neurofeed
 - **Consent tier:** enhanced (second tier, not IRB)
 - **NISS score:** 7.4–8.1 (high neural impact)
 - **DSM-5 cluster:** persistent_personality
-- **Affected neurorights:** 5–6 per technique
+- **Affected neurorights:** 4–5 per technique
 
-These techniques can cause **permanent personality changes**. T0022, neurofeedback falsification, has a NISS of 8.1 and maps to 6 neurorights — yet it requires only "enhanced" consent, not IRB review.
+These techniques can cause **permanent personality changes**. T0022, neurofeedback falsification, has a NISS of 8.1 and maps to 5 neurorights — yet it requires only "enhanced" consent, not IRB review.
 
 Enhanced consent means a more detailed form and a verbal explanation. IRB consent means an ethics board reviews the risk to human subjects. The difference between them is the difference between a warning label and a review board. For techniques that can permanently alter personality, the gap is indefensible.
 
@@ -114,21 +125,21 @@ This is not a classification bug — it's a category error. Risk classification 
 
 Mapping all 102 techniques produces a striking pattern when visualized against the QIF hourglass:
 
-| Band | Mental Privacy | Cognitive Liberty | Mental Integrity | Psychological Continuity | Cognitive Authenticity | Dynamical Integrity | Info. Disassociation |
-|------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| S3 (ambient) | ++ | | | | | | + |
-| S2 (wearable) | ++ | | + | | + | | + |
-| S1 (proximity) | ++ | | + | | + | + | + |
-| I0 (interface) | + | + | ++ | | + | ++ | |
-| N1 (spinal) | | + | ++ | | | ++ | |
-| N2 (brainstem) | | + | ++ | + | | ++ | |
-| N3 (cerebellum) | | + | ++ | + | | ++ | |
-| N4 (thalamus) | | ++ | ++ | + | + | ++ | |
-| N5 (basal ganglia) | | ++ | ++ | ++ | + | ++ | |
-| N6 (limbic) | | ++ | + | ++ | ++ | + | |
-| N7 (neocortex) | | ++ | + | ++ | ++ | + | |
+| Band | Mental Privacy | Cognitive Liberty | Mental Integrity | Psychological Continuity | Cognitive Authenticity |
+|------|:---:|:---:|:---:|:---:|:---:|
+| S3 (ambient) | ++ | | | | |
+| S2 (wearable) | ++ | | + | | + |
+| S1 (proximity) | ++ | | + | | + |
+| I0 (interface) | + | + | ++ | | + |
+| N1 (spinal) | | + | ++ | | |
+| N2 (brainstem) | | + | ++ | + | |
+| N3 (cerebellum) | | + | ++ | + | |
+| N4 (thalamus) | | ++ | ++ | + | + |
+| N5 (basal ganglia) | | ++ | ++ | ++ | + |
+| N6 (limbic) | | ++ | + | ++ | ++ |
+| N7 (neocortex) | | ++ | + | ++ | ++ |
 
-The pattern inverts. **Mental Privacy dominates the outer bands (S-domain). Mental Integrity dominates the middle (I0, N1–N4). Psychological Continuity and Cognitive Authenticity dominate the inner bands (N5–N7).** Dynamical Integrity spans the entire neural column.
+The pattern inverts. **Mental Privacy dominates the outer bands (S-domain). Mental Integrity dominates the middle (I0, N1–N4). Psychological Continuity and Cognitive Authenticity dominate the inner bands (N5–N7).** MI now spans the entire neural column (absorbing the dynamics previously tracked as DI).
 
 This isn't a coincidence — it's the hourglass architecture expressing itself through neurorights. The outer bands are about data (privacy). The inner bands are about identity (continuity, authenticity). The interface is about boundaries (integrity). Each region of the hourglass has its own neuroethical character.
 
@@ -138,7 +149,7 @@ Three implications:
 
 **For regulators:** Consent tier classifications need a mechanism-vs-impact audit. The CCI can flag mismatches automatically. Every technique where CCI < 1.0 but NISS > 6.0 deserves a second look.
 
-**For the neurorights literature:** Four rights aren't enough. Dynamical Integrity covers a class of attacks (homeostatic retuning) that Mental Integrity misses. Informational Disassociation covers a class of harms (cross-modal data fusion) that Mental Privacy misses. Both are empirically grounded — the data forced us to propose them.
+**For the neurorights literature:** Ienca & Andorno's four rights are well-chosen but need engineering-level depth. MI must account for dynamical retuning. MP must account for data-lifecycle threats. And there is one genuine gap: Cognitive Authenticity — the distinction between reading and writing neural signals — which no prior framework addresses.
 
 **For BCI developers:** Your consent forms are calibrated to mechanism, not impact. The PINS inversion shows that "silicon-only" is not a proxy for "low risk." If your firmware update pipeline can deliver NISS 7.1 impacts, your consent process should reflect that — regardless of whether the attack vector is biological or digital.
 
@@ -146,9 +157,9 @@ Three implications:
 
 ## Data & Methods
 
-All 102 technique mappings are in the [TARA registry](https://qinnovate.com/TARA) with full neurorights and CCI data. The enrichment script is at `scripts/enrich-neurorights.py`. The mapping was cross-validated with Gemini 2.5 Pro, which independently confirmed all 7 gaps and identified the 3 anomalies described above. The full validation session is logged in `governance/TRANSPARENCY.md`.
+All 102 technique mappings are in the [TARA registry](https://qinnovate.com/TARA) with full neurorights and CCI data. The enrichment script is at `scripts/enrich-neurorights.py`. The mapping was cross-validated with Gemini 2.5 Pro, which independently confirmed the gap analysis. The full validation session is logged in `governance/TRANSPARENCY.md`.
 
-**Neurorights taxonomy:** Ienca & Andorno (2017) — MP, CL, MI, PC. QIF Framework — CA. This work — DI, IDA.
+**Neurorights taxonomy:** Ienca & Andorno (2017) — MP, CL, MI, PC. QIF Framework — CA (original), MI (extended with dynamics), MP (extended with data lifecycle).
 
 **NISS:** Neural Impact Scoring System v1.0. Vector format: `NISS:1.0/BI:_/CG:_/CV:_/RV:_/NP:_`. See the [whitepaper](https://doi.org/10.5281/zenodo.18640105) for methodology.
 

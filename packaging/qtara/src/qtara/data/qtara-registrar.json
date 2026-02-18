@@ -58,13 +58,13 @@
     "niss_cvss_mapping": {
       "pins_flagged": 31,
       "by_gap_group": {
-        "3": 58,
+        "1": 12,
         "2": 28,
-        "1": 12
+        "3": 58
       }
     },
     "tara": {
-      "version": "1.0",
+      "version": "1.6",
       "enriched_techniques": 102,
       "dual_use_breakdown": {
         "confirmed": 52,
@@ -90,10 +90,113 @@
           "indirect": 9,
           "none": 42
         }
+      },
+      "neurorights_mapped": 102
+    },
+    "neurorights": {
+      "version": "1.0",
+      "taxonomy": {
+        "MP": "Mental Privacy",
+        "CL": "Cognitive Liberty",
+        "MI": "Mental Integrity",
+        "PC": "Psychological Continuity",
+        "CA": "Cognitive Authenticity"
+      },
+      "sources": [
+        "Ienca & Andorno 2017 (original 4)",
+        "QIF Framework (Cognitive Authenticity)",
+        "QIF-TARA Neuroethics Analysis 2026 (engineering-level extensions to MI, MP)"
+      ],
+      "techniques_by_right": {
+        "CL": 60,
+        "MI": 81,
+        "CA": 61,
+        "MP": 64,
+        "PC": 28
+      },
+      "cci_stats": {
+        "mean": 1.01,
+        "max": 2.7,
+        "min": 0.1,
+        "techniques_above_2": 11
+      }
+    },
+    "regulatory": {
+      "version": "1.0",
+      "framework": "FDORA Section 3305 / Section 524B",
+      "cyber_device_techniques": 67,
+      "non_cyber_device_techniques": 35,
+      "prong_failure_reasons": {
+        "software": 29,
+        "network_connectable": 10
+      },
+      "techniques_per_requirement": {
+        "TM": 102,
+        "VA": 101,
+        "SA": 76,
+        "SBOM": 61,
+        "PM": 98
+      },
+      "coverage_stats": {
+        "mean": 0.48,
+        "min": 0.1,
+        "max": 0.8,
+        "below_0.5": 41
+      },
+      "top_gaps": {
+        "CVSS cannot express neural-specific impacts": 58,
+        "No FDA pathway for consumer sensor exploitation": 42,
+        "CVSS partially captures risk; neural dimensions missing": 30,
+        "Threat not yet in regulatory threat catalogs": 28,
+        "High neural impact": 20,
+        "Software-only attack without software lifecycle standard": 13,
+        "Consent complexity under-matches neural impact": 11
       }
     }
   },
   "changelog": [
+    {
+      "version": "1.6",
+      "date": "2026-02-16",
+      "title": "FDORA §3305 Regulatory Compliance Mapping",
+      "summary": "Added per-technique FDORA Section 524B cyber device classification, applicable submission requirements, regulatory coverage scoring, and gap analysis. 67 of 102 techniques target cyber devices. Mean regulatory coverage: 0.48.",
+      "added": [],
+      "enrichments": [
+        "regulatory.fdora_524b.cyber_device — 3-prong cyber device test result",
+        "regulatory.fdora_524b.applicable_requirements — TM/VA/SBOM/SA/PM applicability",
+        "regulatory.fdora_524b.coverage_score — 0.0–1.0 existing regulatory coverage",
+        "regulatory.fdora_524b.gaps — specific regulatory gaps identified"
+      ],
+      "therapeutic_highlights": [
+        "Regulatory gap analysis enables targeted FDORA compliance for BCI manufacturers",
+        "Coverage scoring identifies techniques where existing standards are insufficient",
+        "41 techniques have coverage below 0.5 (major gaps)",
+        "Per-technique gap lists provide actionable compliance checklists"
+      ]
+    },
+    {
+      "version": "1.5",
+      "date": "2026-02-16",
+      "title": "Neurorights Mapping & Consent Complexity Index",
+      "summary": "Added neurorights field to all 102 techniques mapping each to 7 neurorights (5 Ienca-Andorno + 2 QIF-proposed). Computed Consent Complexity Index (CCI) per technique. Cross-AI validated with Gemini. Identified 10 anomalies: 4 PINS inversions (silicon_only attacks under-consented relative to NISS), 4 under-consented persistent_personality techniques, 2 indirect risk misnomers.",
+      "enrichments": [
+        "neurorights.affected — list of affected neurorights per technique",
+        "neurorights.cci — Consent Complexity Index (0.1–4.0)",
+        "statistics.neurorights — aggregate stats and taxonomy"
+      ],
+      "new_neurorights": [
+        "DI (Dynamical Integrity) — protection of neural homeodynamics",
+        "IDA (Informational Disassociation) — right not to have neural data fused across modalities"
+      ],
+      "cross_ai_validation": "Gemini 2.5 Pro (2026-02-16) — validated all 7 gaps, confirmed 3 additional correlations, proposed DI and IDA rights",
+      "added": [],
+      "therapeutic_highlights": [
+        "Neurorights mapping enables rights-aware consent for all dual-use techniques",
+        "Consent Complexity Index (CCI) identifies under-consented high-NISS techniques",
+        "Dynamical Integrity right protects neural homeodynamics in feedback therapies",
+        "Informational Disassociation right guards against cross-modal data fusion"
+      ]
+    },
     {
       "version": "1.4",
       "date": "2026-02-13",
@@ -457,6 +560,34 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Tissue harm from signal injection and cognitive alteration not expressible in CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -660,6 +791,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Neural function locking and conditional restoration have no CVSS equivalent"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -792,6 +953,35 @@
         "supplemental": "S:N/AU:Y/R:A/V:C",
         "gap_group": 3,
         "gap_summary": "Passive neural thought interception — mental privacy not covered by CVSS confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.72
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -903,6 +1093,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Neural signal modification in transit affects cognition beyond data integrity"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -1019,6 +1238,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Ion-channel quantum manipulation has no CVSS physical impact analog"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -1135,6 +1383,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Protein-level soliton manipulation is below CVSS's abstraction layer"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -1234,6 +1511,35 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Classical pipeline corruption with downstream neural impact partially captured by Safety"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.8,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -1438,6 +1744,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Involuntary motor control hijacking has no CVSS availability/integrity mapping"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -1656,6 +1992,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Brainwave entrainment causing lasting neural pattern changes not expressible in CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -1870,6 +2236,35 @@
         "supplemental": "S:P/AU:Y/R:U/V:D",
         "gap_group": 3,
         "gap_summary": "Seizure risk from ELF exposure not captured by CVSS availability"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -2066,6 +2461,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "BCI signal weaponization via intermodulation creates novel tissue/cognitive harm"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -2241,6 +2667,35 @@
         "supplemental": "S:P/AU:Y/R:U/V:D",
         "gap_group": 3,
         "gap_summary": "Microwave auditory effect and tissue heating go beyond CVSS availability"
+      },
+      "neurorights": {
+        "affected": [
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.92
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -2437,6 +2892,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Non-invasive deep brain stimulation impact not in CVSS scope"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -2673,6 +3158,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Covert cognitive manipulation via envelope modulation has no CVSS equivalent"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -2782,6 +3297,34 @@
         "supplemental": "S:P/AU:Y/R:I/V:C",
         "gap_group": 3,
         "gap_summary": "Irreversible tissue destruction — CVSS availability cannot express permanence"
+      },
+      "neurorights": {
+        "affected": [
+          "MI",
+          "CA"
+        ],
+        "cci": 1.35
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -2863,6 +3406,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 2,
         "gap_summary": "ML misclassification causing wrong BCI output partially captured by Safety metric"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -2944,6 +3517,36 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Backdoor in transfer learning model partially captured by Safety metric"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -3029,6 +3632,35 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Adversarial filter manipulation partially captured by Safety metric"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -3115,6 +3747,35 @@
         "supplemental": "S:P/AU:Y/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Cross-subject perturbation partially captured by Safety metric"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -3214,6 +3875,32 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Mental state inference from membership attacks partially captured by data privacy"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -3312,6 +3999,32 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Neural data gradient leakage partially captured by confidentiality metrics"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -3477,6 +4190,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Wrong neurofeedback therapy causing neural harm not expressible in CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -3687,6 +4431,38 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Cascading closed-loop stimulation with runaway neural effects not in CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 2.7
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -3771,6 +4547,36 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Training data bias causing systematic BCI misclassification partially captured"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -4003,6 +4809,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Neural signal blocking causing cognitive disruption beyond CVSS availability"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -4221,6 +5056,37 @@
         "supplemental": "S:P/AU:Y/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Seizure induction via neuronal flooding not expressible as CVSS impact"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -4436,6 +5302,35 @@
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Active neural probing reveals cognitive state — partially captured by confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI",
+          "PC"
+        ],
+        "cci": 0.6
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -4544,6 +5439,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Selective neural signal dropping/modification affects cognition beyond data integrity"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -4763,6 +5689,35 @@
         "supplemental": "S:P/AU:Y/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Stimulation flood causing tissue harm and cognitive disruption beyond CVSS DoS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -4978,6 +5933,38 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Involuntary motor control with cognitive integrity violation has no CVSS mapping"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.5
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -5060,6 +6047,32 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
         "gap_summary": "Pure resource depletion — standard CVSS availability sufficient"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -5261,6 +6274,36 @@
         "supplemental": "S:N/AU:N/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Neural biometric bypass partially captured by CVSS authentication metrics"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -5290,7 +6333,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:I/NP:S",
-        "score": 8.0,
+        "score": 8,
         "severity": "high",
         "pins": true
       },
@@ -5449,6 +6492,37 @@
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
         "gap_summary": "Irreversible personality alteration — CVSS cannot express identity/selfhood damage"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -5637,6 +6711,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Working memory corruption affects cognitive function beyond data integrity"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -5798,6 +6902,34 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Brain response extraction for interrogation — mental privacy not in CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -5961,6 +7093,34 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Inner speech decoding violates cognitive sovereignty — no CVSS equivalent"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -6160,6 +7320,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Free will violation and agency manipulation have no CVSS mapping"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -6350,6 +7541,35 @@
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
         "gap_summary": "Unreplaceable neural biometric theft — CVSS cannot express non-resettable credential loss"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -6377,7 +7597,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:L/CG:C/CV:E/RV:I/NP:S",
-        "score": 8.0,
+        "score": 8,
         "severity": "high",
         "pins": true
       },
@@ -6538,6 +7758,37 @@
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
         "gap_summary": "Permanent self-perception alteration — CVSS has no identity/selfhood dimension"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -6696,6 +7947,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Neural social engineering exploiting BCI trust signals beyond CVSS scope"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -6889,6 +8169,35 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Cognitive biometric inference partially captured by CVSS confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI",
+          "PC"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -6981,6 +8290,32 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Passive RF collection of neural data partially captured by confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -7067,6 +8402,33 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Supply chain firmware backdoor with neural impact partially captured by Safety"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CA"
+        ],
+        "cci": 0.24
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -7150,6 +8512,34 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Cloud attack on neural data partially captured by standard CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -7232,6 +8622,34 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Future quantum decryption of neural data partially captured by confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.3
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -7318,6 +8736,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "OTA firmware weaponization causing tissue/cognitive harm beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.6
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -7403,6 +8851,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Mass BCI compromise with neural impact at scale not expressible in CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.5
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -7496,6 +8974,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Physical electrode tamper causing tissue harm beyond CVSS physical access"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -7582,6 +9089,31 @@
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
         "gap_summary": "Standard wireless authentication bypass — CVSS sufficient"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CA"
+        ],
+        "cci": 0.24
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.8,
+          "gaps": []
+        }
       }
     },
     {
@@ -7671,6 +9203,34 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 3,
         "gap_summary": "Hardware fault injection causing neural pathway disruption beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.36
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -7701,7 +9261,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:E/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -7788,6 +9348,35 @@
         "supplemental": "S:P/AU:Y/R:A/V:C",
         "gap_group": 3,
         "gap_summary": "Neural data breach violating mental privacy beyond standard confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -7980,6 +9569,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "ERP harvesting reveals cognitive state — mental privacy not in CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -8172,6 +9790,35 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Cognitive state capture of emotions/attention beyond CVSS confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -8361,6 +10008,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Deep memory retrieval violates cognitive sovereignty — no CVSS equivalent"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -8554,6 +10231,38 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Military BCI cognitive warfare with tissue and cognitive harm beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.1,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -8743,6 +10452,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Ongoing neural monitoring violates cognitive privacy beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -8772,7 +10512,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:N/RV:F/NP:N",
-        "score": 0.0,
+        "score": 0,
         "severity": "none",
         "pins": false
       },
@@ -8843,6 +10583,30 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
         "gap_summary": "BCI topology recon — standard CVSS reconnaissance sufficient"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.16
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -8945,6 +10709,35 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 2,
         "gap_summary": "Calibration poisoning causing model drift partially captured by Safety"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.8,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -9103,6 +10896,38 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Learned neural pathway persistence causing lasting cognitive change"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 0.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9291,6 +11116,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Cross-session memory implant affecting identity beyond CVSS scope"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9398,6 +11254,33 @@
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
         "gap_summary": "Detection evasion technique — standard CVSS sufficient"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9556,6 +11439,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Slow parameter drift causing cumulative cognitive harm beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9664,6 +11578,34 @@
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 2,
         "gap_summary": "Noise injection for detection masking partially captured by integrity"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI"
+        ],
+        "cci": 0.4
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -9692,7 +11634,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:I/RV:P/NP:T",
-        "score": 5.0,
+        "score": 5,
         "severity": "medium",
         "pins": false
       },
@@ -9820,6 +11762,36 @@
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 3,
         "gap_summary": "Consent fatigue exploiting neural trust patterns beyond CVSS social engineering"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -10021,6 +11993,38 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Psychosis induction causing severe cognitive and biological harm beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -10265,6 +12269,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Imperceptible cognitive drift with cumulative harm beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -10496,6 +12531,35 @@
         "supplemental": "S:P/AU:N/R:U/V:D",
         "gap_group": 3,
         "gap_summary": "Phase dynamics replay affecting neural synchronization beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 1.5
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts"
+          ]
+        }
       }
     },
     {
@@ -10707,6 +12771,36 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Seizure induction via neural bifurcation forcing — no CVSS equivalent for tissue harm"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.8
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": true,
+            "network_connectable": false,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage"
+          ]
+        }
       }
     },
     {
@@ -10939,6 +13033,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Meta-biometric extraction from separatrix dynamics beyond CVSS confidentiality"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -11135,6 +13260,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Tonic/phasic neural mode switching causing tissue and cognitive harm beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 1.44
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -11248,6 +13404,37 @@
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
         "gap_summary": "Baseline adaptation poisoning causing persistent cognitive drift beyond CVSS"
+      },
+      "neurorights": {
+        "affected": [
+          "CL",
+          "MI",
+          "PC",
+          "CA"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.6,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "High neural impact (NISS >= 7.0) without IEC 62443 coverage",
+            "Consent complexity under-matches neural impact (CCI/NISS mismatch)"
+          ]
+        }
       }
     },
     {
@@ -11278,7 +13465,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -11353,6 +13540,34 @@
           "QIF-D.HV"
         ],
         "note": "Speaker→mic repurposing enables BCI intrusion pathway and data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -11558,6 +13773,35 @@
           "QIF-D.HV"
         ],
         "note": "Earbud→EEG repurposing feeds neural scanning and data harvest; relates to T0003 (signal injection)"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.9
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -11809,6 +14053,36 @@
           "QIF-M.SV"
         ],
         "note": "Cognitive profiling via consumer sensors feeds cognitive exploitation and model subversion"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.3,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -11933,6 +14207,34 @@
           "QIF-P.DS"
         ],
         "note": "Ultrasonic vital sign extraction feeds physiological data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing"
+          ]
+        }
       }
     },
     {
@@ -12054,6 +14356,33 @@
           "QIF-D.HV"
         ],
         "note": "Haptic body sonar feeds physiological data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.2
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.7,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -12086,7 +14415,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -12183,6 +14512,35 @@
           "QIF-B.IN"
         ],
         "note": "IR vascular mapping feeds biometric identity + data harvest + intrusion targeting"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -12308,6 +14666,35 @@
           "QIF-D.HV"
         ],
         "note": "LiDAR pulse detection feeds physiological data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -12340,7 +14727,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -12438,6 +14825,35 @@
           "QIF-B.IN"
         ],
         "note": "Ear canal fingerprinting feeds biometric identity + targeted BCI intrusion"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -12540,6 +14956,34 @@
           "QIF-D.HV"
         ],
         "note": "Gyroscope audio capture feeds ambient data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -12643,6 +15087,34 @@
           "QIF-D.HV"
         ],
         "note": "Accelerometer speech capture feeds ambient data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -12673,7 +15145,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -12747,6 +15219,34 @@
           "QIF-N.SC"
         ],
         "note": "Ultrasonic tracking feeds identity correlation and reconnaissance"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -12777,7 +15277,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -12849,6 +15349,34 @@
           "QIF-B.IN"
         ],
         "note": "Keystroke inference feeds credential harvest and potential system intrusion"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -12970,6 +15498,34 @@
           "QIF-N.SC"
         ],
         "note": "Camera-based PPG feeds physiological data harvest and identity profiling"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13170,6 +15726,36 @@
           "QIF-M.SV"
         ],
         "note": "Eye tracking cognitive profiling feeds cognitive exploitation and model training"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13269,6 +15855,34 @@
           "QIF-D.HV"
         ],
         "note": "ALS side channel feeds screen activity data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.1
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -13299,7 +15913,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -13374,6 +15988,34 @@
           "QIF-B.IN"
         ],
         "note": "Tap localization feeds credential harvest and system intrusion"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -13404,7 +16046,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -13495,6 +16137,35 @@
           "QIF-N.SC"
         ],
         "note": "Gait fingerprinting feeds persistent identity tracking and reconnaissance"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13692,6 +16363,34 @@
           "QIF-C.EX"
         ],
         "note": "Neurological profiling feeds health data harvest and cognitive exploitation"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 1.35
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13727,7 +16426,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -13845,6 +16544,35 @@
           "QIF-S.FP"
         ],
         "note": "WiFi CSI sensing feeds physiological data harvest, presence detection, behavioral profiling, and identity fingerprinting; chains to cognitive state inference via breathing pattern analysis"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.6
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -13875,7 +16603,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -13950,6 +16678,35 @@
           "QIF-N.SC"
         ],
         "note": "BLE fingerprinting feeds persistent location tracking and device identification"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.24
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -13980,7 +16737,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:L/CV:E/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -14127,6 +16884,35 @@
           "QIF-C.EX"
         ],
         "note": "Thermal emotion inference feeds psychological data harvest and cognitive exploitation"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI"
+        ],
+        "cci": 0.96
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14157,7 +16943,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -14249,6 +17035,35 @@
           "QIF-N.SC"
         ],
         "note": "PPG biometric fingerprinting feeds persistent cardiac identity tracking"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.48
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14351,6 +17166,34 @@
           "QIF-D.HV"
         ],
         "note": "Magnetometer eavesdropping feeds ambient audio data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.12
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Software-only attack without software lifecycle standard (IEC 62304)"
+          ]
+        }
       }
     },
     {
@@ -14559,6 +17402,36 @@
           "QIF-D.HV"
         ],
         "note": "Complete earbud escalation chain feeds cognitive exploitation, model subversion, and comprehensive data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14589,7 +17462,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -14679,6 +17552,35 @@
           "QIF-N.SC"
         ],
         "note": "Multi-modal biometric fusion feeds persistent identity tracking at near-perfect accuracy"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 1.35
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -14860,6 +17762,36 @@
           "QIF-S.HV"
         ],
         "note": "Cross-device health profiling feeds comprehensive physiological data harvest"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI"
+        ],
+        "cci": 2.25
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -14890,7 +17822,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:N/CV:I/RV:F/NP:N",
-        "score": 2.0,
+        "score": 2,
         "severity": "low",
         "pins": false
       },
@@ -14981,6 +17913,35 @@
           "QIF-N.SC"
         ],
         "note": "WiFi + camera fusion feeds comprehensive surveillance and persistent identity tracking"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.9
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -15015,7 +17976,7 @@
       "niss": {
         "version": "1.0",
         "vector": "NISS:1.0/BI:N/CG:H/CV:I/RV:T/NP:T",
-        "score": 5.0,
+        "score": 5,
         "severity": "medium",
         "pins": false
       },
@@ -15202,6 +18163,37 @@
           "QIF-M.SV"
         ],
         "note": "Capstone technique: S-domain reconnaissance feeds all core BCI attack tactics with personalized, pre-calibrated attack parameters"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "CL",
+          "MI",
+          "CA"
+        ],
+        "cci": 2.7
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": false,
+          "prongs": {
+            "software": false,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.2,
+          "gaps": [
+            "CVSS cannot express neural-specific impacts",
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -15334,6 +18326,35 @@
           "QIF-N.SC"
         ],
         "note": "Enables covert command channels and biometric authentication; chains with T0072-T0074 audio techniques"
+      },
+      "neurorights": {
+        "affected": [
+          "MP",
+          "MI"
+        ],
+        "cci": 0.32
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     },
     {
@@ -15462,6 +18483,34 @@
           "QIF-S.RP"
         ],
         "note": "Password recovery enables downstream account compromise; behavioral data feeds cognitive profiling"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.4
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "SA",
+            "PM"
+          ],
+          "coverage_score": 0.5,
+          "gaps": [
+            "CVSS partially captures risk; neural dimensions missing",
+            "No FDA pathway for consumer sensor exploitation"
+          ]
+        }
       }
     },
     {
@@ -15581,6 +18630,33 @@
           "QIF-S.RP"
         ],
         "note": "Presence and physiological data feed identity profiling and behavioral reconnaissance"
+      },
+      "neurorights": {
+        "affected": [
+          "MP"
+        ],
+        "cci": 0.16
+      },
+      "regulatory": {
+        "fdora_524b": {
+          "cyber_device": true,
+          "prongs": {
+            "software": true,
+            "network_connectable": true,
+            "vulnerable": true
+          },
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
+          "coverage_score": 0.4,
+          "gaps": [
+            "No FDA pathway for consumer sensor exploitation",
+            "Threat not yet in regulatory threat catalogs"
+          ]
+        }
       }
     }
   ],
@@ -15647,49 +18723,49 @@
       "BI": {
         "name": "Biological Impact",
         "values": {
-          "N": 0.0,
+          "N": 0,
           "L": 3.3,
           "H": 6.7,
-          "C": 10.0
+          "C": 10
         },
         "description": "Severity of tissue damage from neural interface attacks"
       },
       "CG": {
         "name": "Cognitive Integrity",
         "values": {
-          "N": 0.0,
+          "N": 0,
           "L": 3.3,
           "H": 6.7,
-          "C": 10.0
+          "C": 10
         },
         "description": "Degree of cognitive function alteration or disruption"
       },
       "CV": {
         "name": "Consent Violation",
         "values": {
-          "N": 0.0,
+          "N": 0,
           "P": 3.3,
           "E": 6.7,
-          "I": 10.0
+          "I": 10
         },
         "description": "Whether the attack violates neural data consent"
       },
       "RV": {
         "name": "Reversibility",
         "values": {
-          "F": 0.0,
+          "F": 0,
           "T": 3.3,
           "P": 6.7,
-          "I": 10.0
+          "I": 10
         },
         "description": "Whether neural or biological damage can be reversed"
       },
       "NP": {
         "name": "Neuroplasticity",
         "values": {
-          "N": 0.0,
-          "T": 5.0,
-          "S": 10.0
+          "N": 0,
+          "T": 5,
+          "S": 10
         },
         "description": "Whether the attack causes lasting neural pathway changes"
       }
@@ -15697,38 +18773,38 @@
     "formula": "NISS = (BI + CG + CV + RV + NP) / 5",
     "weights": {
       "default": {
-        "BI": 1.0,
-        "CG": 1.0,
-        "CV": 1.0,
-        "RV": 1.0,
-        "NP": 1.0
+        "BI": 1,
+        "CG": 1,
+        "CV": 1,
+        "RV": 1,
+        "NP": 1
       }
     },
     "context_profiles": {
       "clinical": {
-        "BI": 2.0,
+        "BI": 2,
         "CG": 1.5,
-        "CV": 1.0,
-        "RV": 2.0,
-        "NP": 1.0
+        "CV": 1,
+        "RV": 2,
+        "NP": 1
       },
       "research": {
-        "BI": 1.0,
-        "CG": 2.0,
-        "CV": 2.0,
-        "RV": 1.0,
+        "BI": 1,
+        "CG": 2,
+        "CV": 2,
+        "RV": 1,
         "NP": 1.5
       },
       "consumer": {
-        "BI": 1.0,
+        "BI": 1,
         "CG": 1.5,
-        "CV": 2.0,
-        "RV": 1.0,
-        "NP": 1.0
+        "CV": 2,
+        "RV": 1,
+        "NP": 1
       },
       "military": {
-        "BI": 2.0,
-        "CG": 2.0,
+        "BI": 2,
+        "CG": 2,
         "CV": 0.5,
         "RV": 1.5,
         "NP": 1.5

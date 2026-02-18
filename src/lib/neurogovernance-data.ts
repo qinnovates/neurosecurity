@@ -13,7 +13,7 @@ export interface NeurorightInfo {
   id: string;
   name: string;
   shortDef: string;
-  source: 'ienca-andorno' | 'qif-original';
+  source: 'ienca-andorno' | 'qif-original' | 'qif-extended';
   color: string;
   brainRegions: string[];
   threatCount: number;
@@ -44,11 +44,11 @@ export interface NeurogovernanceData {
   };
 }
 
-const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 'ienca-andorno' | 'qif-original'; color: string }> = {
+const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 'ienca-andorno' | 'qif-original' | 'qif-extended'; color: string }> = {
   MP: {
     name: 'Mental Privacy',
-    shortDef: 'Your thoughts are yours. No one should read them without permission.',
-    source: 'ienca-andorno',
+    shortDef: 'Your thoughts are yours. No one should read, store, or re-link them without permission.',
+    source: 'qif-extended',
     color: '#3b82f6',
   },
   CL: {
@@ -59,8 +59,8 @@ const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 
   },
   MI: {
     name: 'Mental Integrity',
-    shortDef: 'Your brain should not be harmed or altered without consent.',
-    source: 'ienca-andorno',
+    shortDef: 'Your brain should not be harmed, altered, or have its natural rhythms disrupted without consent.',
+    source: 'qif-extended',
     color: '#ef4444',
   },
   PC: {
@@ -75,29 +75,15 @@ const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 
     source: 'qif-original',
     color: '#10b981',
   },
-  DI: {
-    name: 'Dynamical Integrity',
-    shortDef: 'Your brain\'s natural rhythms and timing should not be disrupted.',
-    source: 'qif-original',
-    color: '#06b6d4',
-  },
-  IDA: {
-    name: 'Informational Disassociation',
-    shortDef: 'Your neural data should not be linked back to you without consent.',
-    source: 'qif-original',
-    color: '#a855f7',
-  },
 };
 
 /** Map neurorights to QIF bands they primarily protect */
 const NEURORIGHT_BRAIN_MAP: Record<string, string[]> = {
-  MP: ['N7', 'N6'],           // thoughts live in neocortex + limbic
-  CL: ['N7', 'N6', 'N4'],    // cognition spans cortex, limbic, thalamic gating
-  MI: ['N7', 'N6', 'N5', 'N2'], // integrity across all processing layers
-  PC: ['N6', 'N7'],           // identity rooted in limbic + cortex
-  CA: ['N7', 'N4'],           // authenticity requires cortex + sensory gating
-  DI: ['N5', 'N3', 'N2', 'N1'], // dynamics = motor, timing, reflexes
-  IDA: ['N7', 'N1'],          // data linkage from cortex to peripheral relay
+  MP: ['N7', 'N6', 'N1'],           // thoughts + data linkage (absorbs IDA)
+  CL: ['N7', 'N6', 'N4'],           // cognition spans cortex, limbic, thalamic gating
+  MI: ['N7', 'N6', 'N5', 'N3', 'N2', 'N1'], // integrity + dynamics across all layers (absorbs DI)
+  PC: ['N6', 'N7'],                  // identity rooted in limbic + cortex
+  CA: ['N7', 'N4'],                  // authenticity requires cortex + sensory gating
 };
 
 /** QIF neural bands as brain regions — 1:1 with the hourglass model */
@@ -113,7 +99,7 @@ const BRAIN_REGIONS: { id: string; name: string; description: string; bandIds: s
 
 /** Compute all neurogovernance data from the registrar */
 export function getNeurogovernanceData(): NeurogovernanceData {
-  const RIGHTS = ['MP', 'CL', 'MI', 'PC', 'CA', 'DI', 'IDA'] as const;
+  const RIGHTS = ['MP', 'CL', 'MI', 'PC', 'CA'] as const;
 
   // Collect per-right technique data
   const rightTechniques: Record<string, any[]> = {};
