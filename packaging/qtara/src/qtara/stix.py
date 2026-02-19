@@ -6,7 +6,7 @@ class StixExporter:
     @staticmethod
     def to_bundle(techniques: List[ThreatTechnique]) -> dict:
         stix_objects = []
-        
+
         # 1. Identity Object (Qinnovate)
         identity_id = "identity--qinnovate-tara"
         stix_objects.append({
@@ -14,7 +14,7 @@ class StixExporter:
             "id": identity_id,
             "spec_version": "2.1",
             "created": "2026-01-01T00:00:00.000Z",
-            "modified": "2026-02-14T00:00:00.000Z",
+            "modified": "2026-02-18T00:00:00.000Z",
             "name": "Qinnovate Interface Framework (QIF)",
             "identity_class": "organization",
             "sectors": ["technology", "healthcare", "research"],
@@ -25,13 +25,13 @@ class StixExporter:
             # 2. Attack Pattern Object
             # Deterministic UUID for demo stability
             attack_id = f"attack-pattern--{uuid.uuid5(uuid.NAMESPACE_DNS, f'qif.tara.{t.id}')}"
-            
+
             stix_attack = {
                 "type": "attack-pattern",
                 "id": attack_id,
                 "spec_version": "2.1",
                 "created": "2026-01-01T00:00:00.000Z",
-                "modified": "2026-02-14T00:00:00.000Z",
+                "modified": "2026-02-18T00:00:00.000Z",
                 "name": t.attack,
                 "description": t.notes or t.attack,
                 "kill_chain_phases": [
@@ -51,6 +51,15 @@ class StixExporter:
                 "x_qif_bands": t.bands,
                 "x_qif_dual_use": t.tara.dual_use if t.tara else "unknown"
             }
+
+            if t.physics_feasibility:
+                stix_attack["x_qif_physics_tier"] = t.physics_feasibility.tier
+                stix_attack["x_qif_physics_timeline"] = t.physics_feasibility.timeline
+
+            if t.niss:
+                stix_attack["x_qif_niss_score"] = t.niss.score
+                stix_attack["x_qif_niss_vector"] = t.niss.vector
+
             stix_objects.append(stix_attack)
 
         return {

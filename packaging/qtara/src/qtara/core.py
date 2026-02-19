@@ -1,13 +1,13 @@
 import json
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Dict, Any, Union
 from .models import ThreatTechnique, TaraRegistry
 
 class TaraLoader:
     def __init__(self, data_path: Optional[Path] = None):
         if data_path is None:
             data_path = Path(__file__).parent / "data" / "qtara-registrar.json"
-        
+
         self.data_path = data_path
         self._registry: Optional[TaraRegistry] = None
 
@@ -20,10 +20,10 @@ class TaraLoader:
     def load(self) -> TaraRegistry:
         if not self.data_path.exists():
             raise FileNotFoundError(f"TARA registry file not found at {self.data_path}")
-        
+
         with open(self.data_path, 'r') as f:
             data = json.load(f)
-            
+
         self._registry = TaraRegistry(
             version=data.get("version", "unknown"),
             framework=data.get("framework", "unknown"),
@@ -45,6 +45,51 @@ class TaraLoader:
         if band:
             return [t for t in self._registry.techniques if band in t.band_ids]
         return self._registry.techniques
+
+    def list_by_physics_tier(self, tier: Union[int, str]) -> List[ThreatTechnique]:
+        if not self._registry:
+            self.load()
+        return [
+            t for t in self._registry.techniques
+            if t.physics_feasibility and t.physics_feasibility.tier == tier
+        ]
+
+    def list_by_severity(self, severity: str) -> List[ThreatTechnique]:
+        if not self._registry:
+            self.load()
+        return [
+            t for t in self._registry.techniques
+            if t.severity.lower() == severity.lower()
+        ]
+
+    def get_statistics(self) -> Dict[str, Any]:
+        if not self._registry:
+            self.load()
+        techniques = self._registry.techniques
+
+        by_tier: Dict[str, int] = {}
+        for t in techniques:
+            if t.physics_feasibility:
+                label = t.physics_feasibility.tier_label
+            else:
+                label = "unclassified"
+            by_tier[label] = by_tier.get(label, 0) + 1
+
+        by_severity: Dict[str, int] = {}
+        for t in techniques:
+            by_severity[t.severity] = by_severity.get(t.severity, 0) + 1
+
+        by_status: Dict[str, int] = {}
+        for t in techniques:
+            by_status[t.status] = by_status.get(t.status, 0) + 1
+
+        return {
+            "total": len(techniques),
+            "by_tier": by_tier,
+            "by_severity": by_severity,
+            "by_status": by_status,
+        }
+
 
 class NissCalculator:
     """Utility to parse and evaluate NISS vectors."""
