@@ -59,27 +59,6 @@ This means the same framework that scores whether an attack is dangerous can als
 
 ---
 
-## Standards We're Inspired By
-
-Qinnovate exists because these organizations proved that open standards make entire industries possible. We hope to collaborate with them as BCI security matures.
-
-| Organization | What They Standardized | What We Learn From Them |
-|-------------|----------------------|------------------------|
-| **[FIRST.org](https://first.org)** | CVSS (vulnerability scoring), CSIRT coordination | NISS extends their CVSS v4.0 framework for neural impact |
-| **[MITRE](https://mitre.org)** | ATT&CK (adversary tactics and techniques framework) | TARA uses ATT&CK-style technique IDs (QIF-T0001+) across 8 domains |
-| **[CVE Program](https://cve.org)** | Vulnerability identifiers (CVE-XXXX-XXXXX), operated by MITRE since 1999, transitioning to [CVE Foundation](https://www.thecvefoundation.org/) | TARA technique IDs complement CVE by covering BCI-specific threats that don't map to traditional software vulns |
-| **[NIST](https://nist.gov)** | Cybersecurity Framework, NVD (enriches CVEs with CVSS scores), post-quantum crypto (FIPS 203/204) | QIF aligns with NIST CSF; NSP implements ML-KEM/ML-DSA |
-| **[IEEE](https://ieee.org)** | Electrical/electronics/computing standards | QIF's 11-band model follows IEEE standards methodology |
-| **[W3C](https://w3.org)** | HTML, CSS, WebAssembly, accessibility (WCAG) | Runemate compiles W3C standards (HTML/CSS) to neural bytecode |
-| **[IETF](https://ietf.org)** | TCP/IP, TLS, HTTP, DNS (via RFCs) | NSP is designed as an RFC-style protocol specification |
-| **[ICANN](https://icann.org)** | Domain names, IP address allocation | Governance model for neutral, global coordination |
-| **[ISO](https://iso.org)** | Quality, safety, medical device standards (14971, 62304) | Runemate's regulatory strategy maps to IEC 62304 |
-| **[OWASP](https://owasp.org)** | Web application security (Top 10, testing guides) | TARA threat categories parallel OWASP's structured approach |
-| **[FDA](https://fda.gov)** | Medical device approval (510(k), De Novo, PMA) | Runemate's Scribe targets FDA Class II/III software classification |
-| **[ISACA](https://isaca.org)** | IT governance, risk management, and audit frameworks (COBIT) | Qinnovate Neural Alliance follows their model for neutral, professional governance and specialized auditing |
-
----
-
 ## Architecture
 
 ### QIF (Quantified Interconnection Framework)
