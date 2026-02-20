@@ -1,6 +1,42 @@
 [
   {
     "type": "external",
+    "title": "Elon Musk’s Neuralink sparks BCI race in China - Teslarati",
+    "date": "2026-02-20",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9DREhGWUZDblhocDE2N0s5Z0lKSmw4cEI5bHVpR210OTBra2NCTEJhSXNINEJrNzRudkJxRzFETlpzNjd3NmhNZmdYcFU3QVo1Vkd3RkhMUVF5YWc1VFYtVQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk’s Neuralink sparks BCI race in China&nbsp;&nbsp;Teslarati",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer. - CBS News",
+    "date": "2026-02-20",
+    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRDVMbXFjMmZmdGJyZXI1QVVxUFhPMlU0QTduS3gwMm84S1FhOEFRc0RRa281SklXOVlmTVo3Sm5VVW4taUZWUXhhM3RNT0E5VFpRdWx1UG9Nc05MZTdrbzlHb2kxR1JVakFnaTduWVV2amU2QmVwU09OSG4ycUZsTFNBWllRSFQ0SFNCd2wxZw?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer.&nbsp;&nbsp;CBS News",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Probability-Invariant Random Walk Learning on Gyral Folding-Based Cortical Similarity Networks for Alzheimer's and Lewy Body Dementia Diagnosis",
+    "date": "2026-02-20",
+    "url": "https://arxiv.org/abs/2602.17557",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.17557v1 Announce Type: new \nAbstract: Alzheimer's disease (AD) and Lewy body dementia (LBD) present overlapping clinical features yet require distinct diagnostic strategies. While neuroimag",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Omni-iEEG: A Large-Scale, Comprehensive iEEG Dataset and Benchmark for Epilepsy Research",
+    "date": "2026-02-20",
+    "url": "https://arxiv.org/abs/2602.16072",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.16072v2 Announce Type: replace-cross \nAbstract: Epilepsy affects over 50 million people worldwide, and one-third of patients suffer drug-resistant seizures where surgery offers the best cha",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "China brain computer interface outfit accelerates to human trials in quest to outpace Neuralink — mix of government backing and investor enthusiasm speeds time to market for NeuroXess - Tom's Hardware",
     "date": "2026-02-19",
     "url": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxPaTQtSUhwd28tY1dJNlJ2d1ItaC1NTTRyNmpMM1BNYm9PZ0h5TDZUeFJGNlQ5NERoU0dhRktobWZZYjRzblBVSThsUUNoYkpqOHNVOXZKbnRFd2NSZ1BDOElPY2ZOZ2QzN0tzRHd1TC1QOENpcDI0Z1N2Tmlya2dNa3RjOUFuYnpaR2hsVi1FdUtONEJkejdYTEpoUm1SUDhlTU1sYnIzWngwSEs0ckFpWmkyQ2ZxM1RiQjdCMnRuMXp1UExKZWZSbjlWbGlXd1oxenBDWlJvUnF3MjN4YmdNZ0FjekZVWElBZGpLWFg3WUlZZjNRdHJpSUNRRE5SMWFVQ0NUUkpZd0tkOUxicmlITFFYdmg4QXQ0STVLZDhBbjY3MUc3TDdmLU9vbEtGcmxvVUNBdkNvcC1BNmxwQUc3Mmk3eDVZT3BhNzV1RThQaVQ3OXpOV2Fn?oc=5",
@@ -16,33 +52,6 @@
     "source": "Google News — Neural Startups",
     "summary": "OpenAI and Sam Altman Back Merge Labs: A Non-Invasive BCI Startup Challenging Neuralink&nbsp;&nbsp;QUASA Connect",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Omni-iEEG: A Large-Scale, Comprehensive iEEG Dataset and Benchmark for Epilepsy Research",
-    "date": "2026-02-19",
-    "url": "https://arxiv.org/abs/2602.16072",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.16072v1 Announce Type: cross \nAbstract: Epilepsy affects over 50 million people worldwide, and one-third of patients suffer drug-resistant seizures where surgery offers the best chance of s",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "A Systematic Evaluation of Sample-Level Tokenization Strategies for MEG Foundation Models",
-    "date": "2026-02-19",
-    "url": "https://arxiv.org/abs/2602.16626",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.16626v1 Announce Type: cross \nAbstract: Recent success in natural language processing has motivated growing interest in large-scale foundation models for neuroimaging data. Such models ofte",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Weight transport through spike timing for robust local gradients",
-    "date": "2026-02-19",
-    "url": "https://arxiv.org/abs/2503.02642",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2503.02642v2 Announce Type: replace \nAbstract: In both machine learning and in computational neuroscience, plasticity in functional neural networks is frequently expressed as gradient descent on",
-    "category": "research"
   },
   {
     "type": "external",
@@ -115,15 +124,6 @@
     "source": "Google News — Neuralink",
     "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
-    "date": "2025-11-18",
-    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
-    "category": "neuroethics"
   },
   {
     "type": "external",
