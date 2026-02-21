@@ -21,6 +21,38 @@ The protocol targets less than 5% power overhead on implantable hardware (estima
 
 ---
 
+## Why PQC on BCI Is Hard
+
+Post-quantum cryptography was not designed for devices with 40 mW power budgets, no internet connectivity, and 20-year operational lifetimes. Making it work on a brain-computer interface requires solving six distinct engineering problems. Compression alone does not get you there.
+
+### 1. Signature Size
+
+SPHINCS+ signatures are 7,856 to 16,224 bytes each (Section 5.3). Signing every frame would be prohibitive over BLE. NSP amortizes this cost using Merkle trees: 100 frames are bundled into a binary tree, and only the root is signed. Per-frame cost drops to a single SHA-256 hash (Section 3.6). This is an architectural solution, not a compression trick.
+
+### 2. Power Budget
+
+The hybrid key exchange (ECDH + ML-KEM) costs ~2 mW, but only fires at session start. Full SPHINCS+ signing costs ~10 mW but only fires at key rotation (every 30-90 days depending on tier). Steady-state crypto is AES-256-GCM-SIV on already-compressed payloads: ~0.1 mW with hardware acceleration. The pipeline order matters: compress first (3-5x reduction), then encrypt the smaller payload, then sign (Section 9.4). Total steady-state overhead: 3.25% of a 40 mW budget (Section 9.2).
+
+### 3. Nonce Reuse After Power Loss
+
+Implanted devices can lose power unexpectedly. Standard AES-GCM catastrophically leaks the authentication key if a nonce is reused. NSP uses AES-256-GCM-SIV (RFC 8452), which provides nonce-misuse resistance: the only information leaked on nonce reuse is whether the same plaintext was encrypted twice (Section 5.4). For a device implanted in brain tissue that cannot be physically reset, this property is critical.
+
+### 4. PKI on an Offline Device
+
+An implanted BCI cannot download certificate revocation lists or query OCSP servers. Post-quantum signatures are 8-16 KB each; CRLs would consume significant bandwidth and battery. NSP delegates revocation checking to a gateway (smartphone or base station) that issues short-lived session credentials. The implant only verifies one signature per session establishment (Section 7.4.1).
+
+### 5. 20-Year Key Lifecycle
+
+The device root key is provisioned at implant surgery and cannot be replaced without a clinical procedure. NSP provides crypto agility (algorithm substitution without re-keying, Section 7.5) and monotonic firmware version counters to prevent rollback attacks (Section 7.6). Key rotation happens on a 30-day maximum cycle for T3 implants and 90-day for T1/T2 (Section 7). If a key is compromised, forward secrecy from ephemeral session keys ensures past sessions remain protected.
+
+### 6. Traffic Analysis
+
+Even with perfect encryption, BLE packet timing reveals when a user is speaking, moving, sleeping, or having a seizure. This is a privacy catastrophe for neural data. NSP requires T3 (implanted) devices to transmit at a constant rate, padding idle periods with dummy frames, so packet timing carries no information about neural state (Section 10.8).
+
+**Bottom line:** Compression (Delta+LZ4) is step 1 of the pipeline. The real engineering is signature amortization via Merkle trees, pipeline ordering for power optimization, nonce-misuse resistant encryption, delegated PKI for offline devices, 20-year key lifecycle management, and constant-rate padding against traffic analysis.
+
+---
+
 ## Table of Contents
 
 1. [Terminology](#1-terminology)
