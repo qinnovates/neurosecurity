@@ -1,0 +1,22 @@
+{
+  "name": "oni-demo-motion",
+  "version": "1.0.0",
+  "description": "ONI Framework Demo Video - Motion Canvas",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@motion-canvas/2d": "^3.17.2",
+    "@motion-canvas/core": "^3.17.2",
+    "@motion-canvas/player": "^3.17.2",
+    "@motion-canvas/ui": "^3.17.2",
+    "@motion-canvas/vite-plugin": "^3.17.2",
+    "vite": "^5.0.0"
+  },
+  "overrides": {
+    "esbuild": "^0.25.0"
+  }
+}

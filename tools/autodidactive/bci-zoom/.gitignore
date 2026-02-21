@@ -1,0 +1,18 @@
+# Large 3D assets - download separately
+assets/brain/Brain/
+assets/neurons/*.swc
+assets/ion-channels/*.pdb
+assets/molecules/*.sdf
+
+# Blender backups
+*.blend1
+*.blend2
+
+# Renders (large files)
+renders/*.mp4
+renders/*.mov
+renders/*.png
+renders/final/
+
+# OS files
+.DS_Store
