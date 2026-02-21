@@ -51,18 +51,55 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 <!-- VERSION-TABLE-START — Update versions here when releasing. Canonical sources noted in comments. -->
 ## What We Build
 
-| Standard | What It Does | Status |
-|----------|-------------|--------|
-| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.2.1, published |
-| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.4, published |
-| **[TARA](https://qinnovate.com/TARA/)** | 103 BCI attack-therapy technique pairs across 15 tactics and 8 domains. STIX 2.1 compliant registry. | v1.6, 103 techniques |
-| **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.2.0, released |
-| **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.5, Secure Core Complete |
-| **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
-| **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: native DSL compiler, 67.8% compression, code-to-visual-cortex long-term goal. | v1.0, Native DSL Compiler |
-| **[Neurowall](./tools/neurowall/)** | Neural firewall neckband. 3-layer pipeline: coherence detection, differential privacy, NISS policy engine. OpenBCI + NSP + PQC. | v0.5, 5/9 attacks detected |
-| **[Governance](https://qinnovate.com/governance/)** | Neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
-| **[Tools](./tools/)** | [macshield](./tools/macshield) (macOS hardening), [neurowall](./tools/neurowall) (neural firewall), [autodidactive](./tools/autodidactive) (adaptive learning). | Active |
+> `🟢 Shipped` `🟡 In Progress` `🔵 Planned` `🔴 Blocked`
+
+### Frameworks & Specifications
+
+| Component | Description | Status |
+|-----------|-------------|--------|
+| **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs | 🟢 v6.2.1 |
+| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.4 |
+| **[TARA](https://qinnovate.com/TARA/)** | 103 BCI attack-therapy technique pairs, STIX 2.1 registry | 🟢 v1.6 |
+| **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | 🟢 v0.2.0 |
+| **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links | 🟡 v0.5, Secure Core done |
+| **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces (5 neural metrics) | 🟢 v1.0 |
+| **[Runemate](https://qinnovate.com/runemate/)** | Native DSL compiler (67.8% compression), code-to-visual-cortex goal | 🟢 v1.0 Compiler |
+| Cortical Renderer | Runemate Phase 2/3: electrode stimulation pattern generation | 🔵 Planned |
+| BCI Limits Equation | Information-theoretic bounds on BCI channel capacity | 🟡 Hypothesis |
+
+### Tools & Hardware
+
+| Component | Description | Status |
+|-----------|-------------|--------|
+| **[Neurowall](./tools/neurowall/)** | Neural firewall neckband (coherence + differential privacy + NISS) | 🟡 v0.5 |
+| Neckband hardware | Physical behind-the-neck wearable for Neurowall | 🔵 Planned |
+| **[macshield](./tools/macshield/)** | macOS workstation hardening for public WiFi | 🟢 Active |
+| neurosim | Simulated BCI attack/defense environment | 🟡 In Progress |
+
+### Governance
+
+| Component | Description | Status |
+|-----------|-------------|--------|
+| **[Doc suite](https://qinnovate.com/governance/)** | Neuroethics, consent, regulatory compliance, accessibility | 🟢 Published |
+| **[Neurorights mapping](governance/NEUROETHICS_ALIGNMENT.md)** | 5 neurorights mapped to enforcement mechanisms | 🟢 Published |
+| **[UNESCO alignment](governance/UNESCO_ALIGNMENT.md)** | 15 of 17 UNESCO Recommendation elements implemented | 🟢 Published |
+| Regulatory-as-Code | Machine-verifiable compliance via NIST/ISO control codes | 🔵 Planned |
+
+### Academic
+
+| Component | Description | Status |
+|-----------|-------------|--------|
+| **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Preprint published, CC-BY 4.0, LaTeX source included | 🟢 Published |
+| arXiv | Cross-post of preprint | 🔴 Needs endorsement |
+| Graz BCI Conference | Submission for March 2026 deadline | 🟡 In Progress |
+| LSL CVE | Coordinated vulnerability disclosure (liblsl) | 🟡 Awaiting response |
+| Peer review / empirical validation | Requires collaborators, IRB, BCI hardware | 🔴 Blocked |
+
+### Website
+
+| Component | Description | Status |
+|-----------|-------------|--------|
+| **[qinnovate.com](https://qinnovate.com)** | All pages: whitepaper, TARA, scoring, NSP, runemate, governance, lab | 🟢 Live |
 <!-- VERSION-TABLE-END -->
 
 ---
@@ -92,8 +129,8 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 | **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CG metric (scores cognitive compromise severity) |
 | **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 103 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
 | **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
-| **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/PEDIATRIC_CONSIDERATIONS.md) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
-| **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](tools/macshield/) (free workstation hardening), [autodidactive](tools/autodidactive/) (free neurosecurity curriculum) |
+| **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
+| **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](tools/macshield/) (free workstation hardening) |
 
 Sources: [Neuroethics Alignment](governance/NEUROETHICS_ALIGNMENT.md) | [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | [Code of Ethics](governance/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md)
 
@@ -171,13 +208,11 @@ Published documents covering the full neuroethics landscape:
 | [Accessibility](governance/ACCESSIBILITY.md) | Inclusive BCI design requirements |
 | [Code of Conduct](governance/CODE_OF_CONDUCT.md) | Community standards and contribution guidelines |
 | [Data Policy](governance/DATA_POLICY_FAQ.md) | Neural data handling, retention, deletion |
-| [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent protocols |
+| [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent + pediatric & incapacity protocols |
 | [Neuroethics Alignment](governance/NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
-| [Pediatric Considerations](governance/PEDIATRIC_CONSIDERATIONS.md) | Protections for minors |
 | [Post-Deployment Ethics](governance/POST_DEPLOYMENT_ETHICS.md) | Ongoing monitoring obligations |
 | [QIF Neuroethics](governance/QIF-NEUROETHICS.md) | 11 open questions on quantum biometric governance |
-| [Regulatory Compliance](governance/REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk |
-| [Regulatory Gaps](governance/REGULATORY_GAPS.md) | Structural challenges in BCI law |
+| [Regulatory Compliance](governance/REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk, regulatory gaps, NIST/ISO goals |
 | [Transparency](governance/TRANSPARENCY.md) | Human-AI collaboration audit trails |
 | [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | International neuroethics principles |
 
@@ -217,8 +252,7 @@ qinnovates/qinnovate/
 │
 ├── tools/                      # Practical security tools
 │   ├── macshield/              # macOS workstation hardening
-│   ├── neurowall/              # Neural firewall neckband
-│   └── autodidactive/          # Adaptive learning platform
+│   └── neurowall/              # Neural firewall neckband
 │
 ├── blogs/                      # Blog posts + field journal entries
 ├── scripts/                    # Site scripts + CI utilities
@@ -239,9 +273,9 @@ qinnovates/qinnovate/
 
 ## Other Qinnovates Projects
 
-| Repo | Description |
-|------|-------------|
-| [**firefly**](https://github.com/qinnovates/firefly) | Privacy-first journaling app for kids. Local-first architecture, COPPA/GDPR compliant. |
+| Project | Description |
+|---------|-------------|
+| **Project Firefly** | Privacy-first journaling app for kids. Local-first architecture, COPPA/GDPR compliant. (Private, in development) |
 
 ---
 
