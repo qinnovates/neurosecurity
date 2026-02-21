@@ -22,6 +22,7 @@ Dependencies:
 """
 
 import argparse
+import os
 import time
 import random
 import numpy as np
@@ -39,10 +40,9 @@ DP_SENSITIVITY = 1.0       # L-infinity sensitivity of one sample
 IMP_THRESHOLD  = 2.5       # Volts, impedance spike detection threshold
 LOCKOUT_SAMPLES = 13       # 50ms lockout at 250Hz = 12.5 samples
 
-# Phase 0: Pre-shared test key (32 bytes = AES-256)
-NSP_KEY = bytes.fromhex(
-    "a3b1c4d5e6f708192a3b4c5d6e7f80910a1b2c3d4e5f60718293a4b5c6d7e8f9"
-)
+# Phase 0: Random test key generated at startup (32 bytes = AES-256)
+# NOT a real secret. Simulation only. Phase 1 replaces with ML-KEM-768.
+NSP_KEY = os.urandom(32)
 
 # SSVEP adversarial targets (Hz)
 SSVEP_TARGETS = [8.57, 10.9, 15.0, 20.0]
@@ -149,7 +149,7 @@ def nsp_delta_encode(samples: List[float]) -> bytes:
 
 def nsp_encrypt(plaintext: bytes) -> bytes:
     """AES-256-GCM encrypt with random nonce."""
-    nonce = bytes(random.getrandbits(8) for _ in range(12))
+    nonce = os.urandom(12)
     aesgcm = AESGCM(NSP_KEY)
     ciphertext = aesgcm.encrypt(nonce, plaintext, None)
     return nonce + ciphertext

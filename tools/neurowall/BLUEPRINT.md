@@ -182,7 +182,7 @@ def lap_noise(sensitivity=1.0, epsilon=DP_EPSILON):
 
 def nsp_encrypt(plaintext: bytes) -> bytes:
     """NSP frame: AES-256-GCM-SIV stub (using GCM for Phase 0)"""
-    nonce = bytes(random.getrandbits(8) for _ in range(12))
+    nonce = os.urandom(12)
     aesgcm = AESGCM(NSP_KEY)
     ct = aesgcm.encrypt(nonce, plaintext, None)
     return nonce + ct  # prepend nonce
