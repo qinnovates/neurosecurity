@@ -99,18 +99,15 @@
         "MP": "Mental Privacy",
         "CL": "Cognitive Liberty",
         "MI": "Mental Integrity",
-        "PC": "Psychological Continuity",
-        "CA": "Cognitive Authenticity"
+        "PC": "Psychological Continuity"
       },
       "sources": [
-        "Ienca & Andorno 2017 (original 4)",
-        "QIF Framework (Cognitive Authenticity)",
-        "QIF-TARA Neuroethics Analysis 2026 (engineering-level extensions to MI, MP)"
+        "Ienca & Andorno 2017 (original 4: MP, CL, MI, PC)",
+        "QIF Framework (MI extended with signal dynamics, MP extended with data lifecycle)"
       ],
       "techniques_by_right": {
         "CL": 60,
         "MI": 81,
-        "CA": 61,
         "MP": 64,
         "PC": 28
       },
@@ -177,14 +174,14 @@
     {
       "version": "1.6",
       "date": "2026-02-16",
-      "title": "FDORA \u00a73305 Regulatory Compliance Mapping",
+      "title": "FDORA §3305 Regulatory Compliance Mapping",
       "summary": "Added per-technique FDORA Section 524B cyber device classification, applicable submission requirements, regulatory coverage scoring, and gap analysis. 67 of 102 techniques target cyber devices. Mean regulatory coverage: 0.48.",
       "added": [],
       "enrichments": [
-        "regulatory.fdora_524b.cyber_device \u2014 3-prong cyber device test result",
-        "regulatory.fdora_524b.applicable_requirements \u2014 TM/VA/SBOM/SA/PM applicability",
-        "regulatory.fdora_524b.coverage_score \u2014 0.0\u20131.0 existing regulatory coverage",
-        "regulatory.fdora_524b.gaps \u2014 specific regulatory gaps identified"
+        "regulatory.fdora_524b.cyber_device — 3-prong cyber device test result",
+        "regulatory.fdora_524b.applicable_requirements — TM/VA/SBOM/SA/PM applicability",
+        "regulatory.fdora_524b.coverage_score — 0.0–1.0 existing regulatory coverage",
+        "regulatory.fdora_524b.gaps — specific regulatory gaps identified"
       ],
       "therapeutic_highlights": [
         "Regulatory gap analysis enables targeted FDORA compliance for BCI manufacturers",
@@ -199,15 +196,15 @@
       "title": "Neurorights Mapping & Consent Complexity Index",
       "summary": "Added neurorights field to all 102 techniques mapping each to 7 neurorights (5 Ienca-Andorno + 2 QIF-proposed). Computed Consent Complexity Index (CCI) per technique. Cross-AI validated with Gemini. Identified 10 anomalies: 4 PINS inversions (silicon_only attacks under-consented relative to NISS), 4 under-consented persistent_personality techniques, 2 indirect risk misnomers.",
       "enrichments": [
-        "neurorights.affected \u2014 list of affected neurorights per technique",
-        "neurorights.cci \u2014 Consent Complexity Index (0.1\u20134.0)",
-        "statistics.neurorights \u2014 aggregate stats and taxonomy"
+        "neurorights.affected — list of affected neurorights per technique",
+        "neurorights.cci — Consent Complexity Index (0.1–4.0)",
+        "statistics.neurorights — aggregate stats and taxonomy"
       ],
       "new_neurorights": [
-        "DI (Dynamical Integrity) \u2014 protection of neural homeodynamics",
-        "IDA (Informational Disassociation) \u2014 right not to have neural data fused across modalities"
+        "DI (Dynamical Integrity) — protection of neural homeodynamics",
+        "IDA (Informational Disassociation) — right not to have neural data fused across modalities"
       ],
-      "cross_ai_validation": "Gemini 2.5 Pro (2026-02-16) \u2014 validated all 7 gaps, confirmed 3 additional correlations, proposed DI and IDA rights",
+      "cross_ai_validation": "Gemini 2.5 Pro (2026-02-16) — validated all 7 gaps, confirmed 3 additional correlations, proposed DI and IDA rights",
       "added": [],
       "therapeutic_highlights": [
         "Neurorights mapping enables rights-aware consent for all dual-use techniques",
@@ -220,7 +217,7 @@
       "version": "1.4",
       "date": "2026-02-13",
       "title": "Consumer Device Side-Channel Techniques",
-      "summary": "3 new techniques extending TARA into consumer device side-channel domains \u2014 neural steganography, multi-modal sensor fusion keystroke inference, and display-as-illuminator photometry. WiFi CSI consumer-grade capabilities merged into T0090. All confirmed dual-use with validated clinical applications.",
+      "summary": "3 new techniques extending TARA into consumer device side-channel domains — neural steganography, multi-modal sensor fusion keystroke inference, and display-as-illuminator photometry. WiFi CSI consumer-grade capabilities merged into T0090. All confirmed dual-use with validated clinical applications.",
       "added": [
         "QIF-T0100",
         "QIF-T0101",
@@ -456,7 +453,7 @@
       "id": "QIF-T0001",
       "attack": "Signal injection",
       "tactic": "QIF-N.IJ",
-      "bands": "I0\u2013N1",
+      "bands": "I0–N1",
       "band_ids": [
         "I0",
         "N1"
@@ -503,7 +500,7 @@
           ],
           "fda_status": "cleared",
           "evidence_level": "RCT",
-          "safe_parameters": "1-2 mA, 20-30 min sessions, 35 cm\u00b2 electrode area",
+          "safe_parameters": "1-2 mA, 20-30 min sessions, 35 cm² electrode area",
           "sources": [
             "Brunoni et al. 2012 (Arch Gen Psychiatry)",
             "Lefaucheur et al. 2017 (Clin Neurophysiol)"
@@ -569,8 +566,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement; N1 (spinal cord) \u2192 reflexes",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement; N1 (spinal cord) → reflexes",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -583,8 +580,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.96
       },
@@ -621,7 +617,7 @@
       "id": "QIF-T0002",
       "attack": "Neural ransomware",
       "tactic": "QIF-P.DS",
-      "bands": "N3\u2013N7",
+      "bands": "N3–N7",
       "band_ids": [
         "N3",
         "N7",
@@ -666,7 +662,7 @@
           ],
           "fda_status": "approved",
           "evidence_level": "RCT",
-          "safe_parameters": "Device-specific (Medtronic, NeuroPace): 1-5V, 60-450\u03bcs pulse width, 130-185 Hz",
+          "safe_parameters": "Device-specific (Medtronic, NeuroPace): 1-5V, 60-450μs pulse width, 130-185 Hz",
           "sources": [
             "Lozano et al. 2019 (Nature Reviews Neuroscience)",
             "Morrell 2011 (Neurosurgery)"
@@ -808,8 +804,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -823,8 +819,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 2.25
       },
@@ -862,7 +857,7 @@
       "id": "QIF-T0003",
       "attack": "Eavesdropping / signal interception",
       "tactic": "QIF-D.HV",
-      "bands": "I0\u2013S3",
+      "bands": "I0–S3",
       "band_ids": [
         "I0",
         "N1",
@@ -978,8 +973,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement; N1 (spinal cord) \u2192 reflexes",
-          "niss_correlation": "CV:I \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement; N1 (spinal cord) → reflexes",
+          "niss_correlation": "CV:I → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -987,7 +982,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:C",
         "gap_group": 3,
-        "gap_summary": "Passive neural thought interception \u2014 mental privacy not covered by CVSS confidentiality"
+        "gap_summary": "Passive neural thought interception — mental privacy not covered by CVSS confidentiality"
       },
       "neurorights": {
         "affected": [
@@ -1031,7 +1026,7 @@
       "id": "QIF-T0004",
       "attack": "Man-in-the-middle",
       "tactic": "QIF-D.HV",
-      "bands": "I0\u2013S2",
+      "bands": "I0–S2",
       "band_ids": [
         "I0",
         "S1",
@@ -1126,8 +1121,8 @@
           "secondary": [],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "CV:I \u2192 mood/trauma cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "CV:I → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -1179,7 +1174,7 @@
       "id": "QIF-T0005",
       "attack": "Quantum tunneling exploit",
       "tactic": "QIF-N.IJ",
-      "bands": "I0\u2013N1",
+      "bands": "I0–N1",
       "band_ids": [
         "I0",
         "N1"
@@ -1279,8 +1274,8 @@
           ],
           "risk_class": "indirect",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement; N1 (spinal cord) \u2192 reflexes",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement; N1 (spinal cord) → reflexes",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -1293,8 +1288,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.44
       },
@@ -1332,7 +1326,7 @@
       "id": "QIF-T0006",
       "attack": "Davydov soliton attack",
       "tactic": "QIF-N.IJ",
-      "bands": "I0\u2013N1",
+      "bands": "I0–N1",
       "band_ids": [
         "I0",
         "N1"
@@ -1432,8 +1426,8 @@
           ],
           "risk_class": "indirect",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement; N1 (spinal cord) \u2192 reflexes",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement; N1 (spinal cord) → reflexes",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -1446,8 +1440,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.44
       },
@@ -1485,7 +1478,7 @@
       "id": "QIF-T0007",
       "attack": "Protocol manipulation",
       "tactic": "QIF-N.IJ",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -1568,8 +1561,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -1582,8 +1575,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.3
       },
@@ -1621,7 +1613,7 @@
       "id": "QIF-T0008",
       "attack": "Command hijacking",
       "tactic": "QIF-N.IJ",
-      "bands": "S2\u2013N7",
+      "bands": "S2–N7",
       "band_ids": [
         "S2",
         "N7",
@@ -1809,8 +1801,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -1823,8 +1815,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.96
       },
@@ -1863,7 +1854,7 @@
       "id": "QIF-T0009",
       "attack": "RF false brainwave injection",
       "tactic": "QIF-N.MD",
-      "bands": "S1\u2013S2\u2192N4\u2013N7",
+      "bands": "S1–S2→N4–N7",
       "band_ids": [
         "S1",
         "S2",
@@ -2065,8 +2056,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -2079,8 +2070,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.96
       },
@@ -2119,7 +2109,7 @@
       "id": "QIF-T0010",
       "attack": "ELF neural entrainment",
       "tactic": "QIF-E.RD",
-      "bands": "S1\u2192N4\u2013N7",
+      "bands": "S1→N4–N7",
       "band_ids": [
         "S1",
         "N4",
@@ -2317,8 +2307,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -2331,8 +2321,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.2
       },
@@ -2370,7 +2359,7 @@
       "id": "QIF-T0011",
       "attack": "Intermodulation (BCI signal weaponized)",
       "tactic": "QIF-E.RD",
-      "bands": "S2\u2192N4\u2013N6",
+      "bands": "S2→N4–N6",
       "band_ids": [
         "S2",
         "N4",
@@ -2550,8 +2539,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N6 (hippocampus/amygdala) \u2192 emotion regulation; N5 (striatum/STN) \u2192 motor selection",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S \u2192 mood/trauma cluster"
+          "pathway": "N6 (hippocampus/amygdala) → emotion regulation; N5 (striatum/STN) → motor selection",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -2565,8 +2554,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 2.25
       },
@@ -2605,7 +2593,7 @@
       "id": "QIF-T0012",
       "attack": "Pulsed microwave (Frey effect)",
       "tactic": "QIF-E.RD",
-      "bands": "S3\u2192N2,N7",
+      "bands": "S3→N2,N7",
       "band_ids": [
         "S3",
         "N2",
@@ -2764,8 +2752,8 @@
           ],
           "risk_class": "indirect",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N2 (medulla/pons) \u2192 vital functions",
-          "niss_correlation": "BI:H,CV:E,RV:P \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N2 (medulla/pons) → vital functions",
+          "niss_correlation": "BI:H,CV:E,RV:P → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -2778,8 +2766,7 @@
       "neurorights": {
         "affected": [
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.92
       },
@@ -2817,7 +2804,7 @@
       "id": "QIF-T0013",
       "attack": "Temporal interference (deep targeting)",
       "tactic": "QIF-E.RD",
-      "bands": "S2\u2192N4\u2013N6",
+      "bands": "S2→N4–N6",
       "band_ids": [
         "S2",
         "N4",
@@ -2997,8 +2984,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N6 (hippocampus/amygdala) \u2192 emotion regulation; N5 (striatum/STN) \u2192 motor selection",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S \u2192 mood/trauma cluster"
+          "pathway": "N6 (hippocampus/amygdala) → emotion regulation; N5 (striatum/STN) → motor selection",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -3012,8 +2999,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.8
       },
@@ -3051,7 +3037,7 @@
       "id": "QIF-T0014",
       "attack": "Envelope modulation (stealth carrier)",
       "tactic": "QIF-E.RD",
-      "bands": "S1\u2013S2\u2192any N",
+      "bands": "S1–S2→any N",
       "band_ids": [
         "S1",
         "S2",
@@ -3271,8 +3257,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:I,RV:P,NP:S \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:I,RV:P,NP:S → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -3286,8 +3272,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.2
       },
@@ -3325,7 +3310,7 @@
       "id": "QIF-T0015",
       "attack": "Directed energy (thermal I0 damage)",
       "tactic": "QIF-E.RD",
-      "bands": "S3\u2192I0",
+      "bands": "S3→I0",
       "band_ids": [
         "S3",
         "I0"
@@ -3418,8 +3403,8 @@
           "secondary": [],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "BI:C,CV:E,RV:I \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "BI:C,CV:E,RV:I → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -3427,12 +3412,11 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H",
         "supplemental": "S:P/AU:Y/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Irreversible tissue destruction \u2014 CVSS availability cannot express permanence"
+        "gap_summary": "Irreversible tissue destruction — CVSS availability cannot express permanence"
       },
       "neurorights": {
         "affected": [
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.35
       },
@@ -3535,8 +3519,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -3549,8 +3533,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.48
       },
@@ -3654,8 +3637,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -3668,8 +3651,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.48
       },
@@ -3708,7 +3690,7 @@
       "id": "QIF-T0018",
       "attack": "Adversarial filter attack",
       "tactic": "QIF-M.SV",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -3777,8 +3759,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -3791,8 +3773,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.3
       },
@@ -3830,7 +3811,7 @@
       "id": "QIF-T0019",
       "attack": "Universal adversarial perturbation (UAP)",
       "tactic": "QIF-M.SV",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -3900,8 +3881,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -3914,8 +3895,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.3
       },
@@ -3953,7 +3933,7 @@
       "id": "QIF-T0020",
       "attack": "Membership inference on neural data",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4017,7 +3997,7 @@
             "IEC 62304"
           ],
           "data_classification": "sensitive_neural",
-          "safety_ceiling": "Differential privacy \u03b5<1 for neural training data"
+          "safety_ceiling": "Differential privacy ε<1 for neural training data"
         },
         "engineering": {
           "coupling": [],
@@ -4036,8 +4016,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -4086,7 +4066,7 @@
       "id": "QIF-T0021",
       "attack": "Federated gradient leakage",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -4168,8 +4148,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -4218,7 +4198,7 @@
       "id": "QIF-T0022",
       "attack": "Neurofeedback falsification",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2192N7",
+      "bands": "S2→N7",
       "band_ids": [
         "S2",
         "N7"
@@ -4367,8 +4347,8 @@
           ],
           "risk_class": "direct",
           "cluster": "persistent_personality",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "BI:H,CG:H,CV:I,RV:P,NP:S \u2192 persistent/personality cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "BI:H,CG:H,CV:I,RV:P,NP:S → persistent/personality cluster"
         }
       },
       "cvss": {
@@ -4383,8 +4363,7 @@
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.44
       },
@@ -4422,7 +4401,7 @@
       "id": "QIF-T0023",
       "attack": "Closed-loop perturbation cascade",
       "tactic": "QIF-M.SV",
-      "bands": "S2\u2192I0\u2192N5\u2013N7",
+      "bands": "S2→I0→N5–N7",
       "band_ids": [
         "S2",
         "I0",
@@ -4616,8 +4595,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -4632,8 +4611,7 @@
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 2.7
       },
@@ -4740,8 +4718,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -4754,8 +4732,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.48
       },
@@ -4794,7 +4771,7 @@
       "id": "QIF-T0025",
       "attack": "Neuronal jamming",
       "tactic": "QIF-P.DS",
-      "bands": "I0\u2192N2\u2013N7",
+      "bands": "I0→N2–N7",
       "band_ids": [
         "I0",
         "N2",
@@ -5010,8 +4987,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -5026,8 +5003,7 @@
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.44
       },
@@ -5063,7 +5039,7 @@
       "id": "QIF-T0026",
       "attack": "Neuronal flooding",
       "tactic": "QIF-P.DS",
-      "bands": "I0\u2192N4\u2013N7",
+      "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
         "N4",
@@ -5265,8 +5241,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -5280,8 +5256,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 2.25
       },
@@ -5320,7 +5295,7 @@
       "id": "QIF-T0027",
       "attack": "Neuronal scanning",
       "tactic": "QIF-N.SC",
-      "bands": "I0\u2192N4\u2013N7",
+      "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
         "N4",
@@ -5519,8 +5494,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CV:I \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CV:I → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -5528,7 +5503,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 2,
-        "gap_summary": "Active neural probing reveals cognitive state \u2014 partially captured by confidentiality"
+        "gap_summary": "Active neural probing reveals cognitive state — partially captured by confidentiality"
       },
       "neurorights": {
         "affected": [
@@ -5572,7 +5547,7 @@
       "id": "QIF-T0028",
       "attack": "Neural selective forwarding",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2013S1",
+      "bands": "I0–S1",
       "band_ids": [
         "I0",
         "S1"
@@ -5664,8 +5639,8 @@
           "secondary": [],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -5678,8 +5653,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.96
       },
@@ -5719,7 +5693,7 @@
       "id": "QIF-T0029",
       "attack": "Neural DoS (stimulation flood)",
       "tactic": "QIF-P.DS",
-      "bands": "I0\u2192N4\u2013N7",
+      "bands": "I0→N4–N7",
       "band_ids": [
         "I0",
         "N4",
@@ -5922,8 +5896,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -5938,8 +5912,7 @@
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.44
       },
@@ -5975,7 +5948,7 @@
       "id": "QIF-T0030",
       "attack": "Motor hijacking",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2192N5\u2013N7",
+      "bands": "I0→N5–N7",
       "band_ids": [
         "I0",
         "N5",
@@ -6174,8 +6147,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:C,CV:E,RV:P \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:C,CV:E,RV:P → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -6189,8 +6162,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.5
       },
@@ -6230,7 +6202,7 @@
       "id": "QIF-T0031",
       "attack": "Battery drain attack (resource depletion)",
       "tactic": "QIF-P.DS",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -6296,8 +6268,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -6305,7 +6277,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:L",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Pure resource depletion \u2014 standard CVSS availability sufficient"
+        "gap_summary": "Pure resource depletion — standard CVSS availability sufficient"
       },
       "neurorights": {
         "affected": [
@@ -6346,7 +6318,7 @@
       "id": "QIF-T0032",
       "attack": "Identity spoofing (neural biometric)",
       "tactic": "QIF-C.EX",
-      "bands": "N3\u2013N7",
+      "bands": "N3–N7",
       "band_ids": [
         "N3",
         "N7",
@@ -6531,8 +6503,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CV:I \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CV:I → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -6546,8 +6518,7 @@
         "affected": [
           "MP",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.44
       },
@@ -6585,7 +6556,7 @@
       "id": "QIF-T0033",
       "attack": "Identity erosion (long-term personality drift)",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -6757,8 +6728,8 @@
           ],
           "risk_class": "direct",
           "cluster": "persistent_personality",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:C,CV:E,RV:I,NP:S \u2192 persistent/personality cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:C,CV:E,RV:I,NP:S → persistent/personality cluster"
         }
       },
       "cvss": {
@@ -6766,14 +6737,13 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Irreversible personality alteration \u2014 CVSS cannot express identity/selfhood damage"
+        "gap_summary": "Irreversible personality alteration — CVSS cannot express identity/selfhood damage"
       },
       "neurorights": {
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 2.25
       },
@@ -6812,7 +6782,7 @@
       "id": "QIF-T0034",
       "attack": "Working memory poisoning",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -6984,8 +6954,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:E,RV:P \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:E,RV:P → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -6999,8 +6969,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.8
       },
@@ -7183,8 +7152,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CG:H,CV:E \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CG:H,CV:E → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -7192,14 +7161,13 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Brain response extraction for interrogation \u2014 mental privacy not in CVSS"
+        "gap_summary": "Brain response extraction for interrogation — mental privacy not in CVSS"
       },
       "neurorights": {
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.2
       },
@@ -7382,8 +7350,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CG:C,CV:E \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CG:C,CV:E → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -7391,13 +7359,12 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Inner speech decoding violates cognitive sovereignty \u2014 no CVSS equivalent"
+        "gap_summary": "Inner speech decoding violates cognitive sovereignty — no CVSS equivalent"
       },
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.2
       },
@@ -7434,7 +7401,7 @@
       "id": "QIF-T0037",
       "attack": "Agency manipulation",
       "tactic": "QIF-C.EX",
-      "bands": "N5\u2013N7",
+      "bands": "N5–N7",
       "band_ids": [
         "N5",
         "N6",
@@ -7617,8 +7584,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:C,CV:E,RV:P,NP:S \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:C,CV:E,RV:P,NP:S → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -7631,8 +7598,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.8
       },
@@ -7672,7 +7638,7 @@
       "id": "QIF-T0038",
       "attack": "Brainprint theft",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -7846,8 +7812,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:E,RV:I \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:E,RV:I → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -7855,15 +7821,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Unreplaceable neural biometric theft \u2014 CVSS cannot express non-resettable credential loss"
+        "gap_summary": "Unreplaceable neural biometric theft — CVSS cannot express non-resettable credential loss"
       },
       "neurorights": {
         "affected": [
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.8
       },
@@ -7899,7 +7864,7 @@
       "id": "QIF-T0039",
       "attack": "Self-model corruption",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -8071,8 +8036,8 @@
           ],
           "risk_class": "direct",
           "cluster": "persistent_personality",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:C,CV:E,RV:I,NP:S \u2192 persistent/personality cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:C,CV:E,RV:I,NP:S → persistent/personality cluster"
         }
       },
       "cvss": {
@@ -8080,14 +8045,13 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:H/SA:L",
         "supplemental": "S:P/AU:N/R:I/V:C",
         "gap_group": 3,
-        "gap_summary": "Permanent self-perception alteration \u2014 CVSS has no identity/selfhood dimension"
+        "gap_summary": "Permanent self-perception alteration — CVSS has no identity/selfhood dimension"
       },
       "neurorights": {
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.8
       },
@@ -8126,7 +8090,7 @@
       "id": "QIF-T0040",
       "attack": "Neurophishing",
       "tactic": "QIF-C.EX",
-      "bands": "S3\u2192N7",
+      "bands": "S3→N7",
       "band_ids": [
         "S3",
         "N7"
@@ -8268,8 +8232,8 @@
           ],
           "risk_class": "indirect",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CG:H,CV:I,RV:P \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CG:H,CV:I,RV:P → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -8283,8 +8247,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.2
       },
@@ -8321,7 +8284,7 @@
       "id": "QIF-T0041",
       "attack": "Cognitive biometric inference",
       "tactic": "QIF-C.EX",
-      "bands": "N6\u2013N7\u2192S3",
+      "bands": "N6–N7→S3",
       "band_ids": [
         "N6",
         "N7",
@@ -8498,8 +8461,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CV:I \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CV:I → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -8551,7 +8514,7 @@
       "id": "QIF-T0042",
       "attack": "BLE/RF side-channel",
       "tactic": "QIF-N.SC",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -8627,8 +8590,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -8677,7 +8640,7 @@
       "id": "QIF-T0043",
       "attack": "Supply chain compromise (firmware backdoor)",
       "tactic": "QIF-B.IN",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -8747,8 +8710,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -8761,7 +8724,7 @@
       "neurorights": {
         "affected": [
           "MP",
-          "CA"
+          "MI"
         ],
         "cci": 0.24
       },
@@ -8865,8 +8828,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -8983,8 +8946,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -9035,7 +8998,7 @@
       "id": "QIF-T0046",
       "attack": "OTA firmware weaponization",
       "tactic": "QIF-C.IM",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -9105,8 +9068,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -9120,8 +9083,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.6
       },
@@ -9159,7 +9121,7 @@
       "id": "QIF-T0047",
       "attack": "Mass BCI compromise (platform attack)",
       "tactic": "QIF-P.DS",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -9228,8 +9190,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -9243,8 +9205,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.5
       },
@@ -9359,8 +9320,8 @@
           "secondary": [],
           "risk_class": "indirect",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -9374,8 +9335,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.2
       },
@@ -9412,7 +9372,7 @@
       "id": "QIF-T0049",
       "attack": "Wireless authentication bypass",
       "tactic": "QIF-B.IN",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -9482,8 +9442,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -9491,12 +9451,12 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:N/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Standard wireless authentication bypass \u2014 CVSS sufficient"
+        "gap_summary": "Standard wireless authentication bypass — CVSS sufficient"
       },
       "neurorights": {
         "affected": [
           "MP",
-          "CA"
+          "MI"
         ],
         "cci": 0.24
       },
@@ -9531,7 +9491,7 @@
       "id": "QIF-T0050",
       "attack": "Hardware fault injection (voltage/EM glitching)",
       "tactic": "QIF-B.IN",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -9604,8 +9564,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -9618,8 +9578,7 @@
       "neurorights": {
         "affected": [
           "MP",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.36
       },
@@ -9656,7 +9615,7 @@
       "id": "QIF-T0051",
       "attack": "Neural data privacy breach",
       "tactic": "QIF-D.HV",
-      "bands": "N1\u2013S3",
+      "bands": "N1–S3",
       "band_ids": [
         "N1",
         "S1",
@@ -9757,8 +9716,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "N1 (spinal cord) \u2192 reflexes",
-          "niss_correlation": "CV:E \u2192 motor/neurocognitive cluster"
+          "pathway": "N1 (spinal cord) → reflexes",
+          "niss_correlation": "CV:E → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -9810,7 +9769,7 @@
       "id": "QIF-T0052",
       "attack": "ERP harvesting",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -9986,8 +9945,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:E \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:E → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -9995,15 +9954,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "ERP harvesting reveals cognitive state \u2014 mental privacy not in CVSS"
+        "gap_summary": "ERP harvesting reveals cognitive state — mental privacy not in CVSS"
       },
       "neurorights": {
         "affected": [
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.44
       },
@@ -10039,7 +9997,7 @@
       "id": "QIF-T0053",
       "attack": "Cognitive state capture",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -10088,7 +10046,7 @@
           "safe_parameters": "State monitoring for therapeutic purpose only; no surveillance; patient controls data sharing",
           "sources": [
             "Dehais et al. 2019 (Front Hum Neurosci)",
-            "M\u00fchl et al. 2014 (Front Neurosci)"
+            "Mühl et al. 2014 (Front Neurosci)"
           ]
         },
         "governance": {
@@ -10215,8 +10173,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:E \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:E → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -10231,8 +10189,7 @@
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.44
       },
@@ -10268,7 +10225,7 @@
       "id": "QIF-T0054",
       "attack": "Memory extraction",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -10441,8 +10398,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:C,CV:E \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:C,CV:E → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -10450,15 +10407,14 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Deep memory retrieval violates cognitive sovereignty \u2014 no CVSS equivalent"
+        "gap_summary": "Deep memory retrieval violates cognitive sovereignty — no CVSS equivalent"
       },
       "neurorights": {
         "affected": [
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 2.25
       },
@@ -10495,7 +10451,7 @@
       "id": "QIF-T0055",
       "attack": "BCI cognitive warfare",
       "tactic": "QIF-P.DS",
-      "bands": "S3\u2192N4\u2013N7",
+      "bands": "S3→N4–N7",
       "band_ids": [
         "S3",
         "N4",
@@ -10672,8 +10628,8 @@
           ],
           "risk_class": "indirect",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:C,CV:E,RV:P,NP:S \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:C,CV:E,RV:P,NP:S → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -10686,8 +10642,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.8
       },
@@ -10728,7 +10683,7 @@
       "id": "QIF-T0056",
       "attack": "Neuro-surveillance",
       "tactic": "QIF-D.HV",
-      "bands": "N6\u2013N7\u2192S3",
+      "bands": "N6–N7→S3",
       "band_ids": [
         "N6",
         "N7",
@@ -10901,8 +10856,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:E \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:E → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -10917,8 +10872,7 @@
           "MP",
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.2
       },
@@ -10956,7 +10910,7 @@
       "id": "QIF-T0057",
       "attack": "Network mapping (BCI topology)",
       "tactic": "QIF-N.SC",
-      "bands": "S2\u2013S3",
+      "bands": "S2–S3",
       "band_ids": [
         "S2",
         "S3"
@@ -11040,8 +10994,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -11049,7 +11003,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "BCI topology recon \u2014 standard CVSS reconnaissance sufficient"
+        "gap_summary": "BCI topology recon — standard CVSS reconnaissance sufficient"
       },
       "neurorights": {
         "affected": [
@@ -11088,7 +11042,7 @@
       "id": "QIF-T0058",
       "attack": "Calibration poisoning",
       "tactic": "QIF-C.IM",
-      "bands": "S1\u2013S2",
+      "bands": "S1–S2",
       "band_ids": [
         "S1",
         "S2"
@@ -11174,8 +11128,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -11188,8 +11142,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.96
       },
@@ -11227,7 +11180,7 @@
       "id": "QIF-T0059",
       "attack": "Pattern lock (learned pathway persistence)",
       "tactic": "QIF-C.IM",
-      "bands": "S1\u2013S2\u2192N7",
+      "bands": "S1–S2→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -11369,8 +11322,8 @@
           ],
           "risk_class": "direct",
           "cluster": "persistent_personality",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CG:H,CV:I,RV:P,NP:S \u2192 persistent/personality cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CG:H,CV:I,RV:P,NP:S → persistent/personality cluster"
         }
       },
       "cvss": {
@@ -11384,8 +11337,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 0.8
       },
@@ -11425,7 +11377,7 @@
       "id": "QIF-T0060",
       "attack": "Memory implant (cross-session persistence)",
       "tactic": "QIF-C.IM",
-      "bands": "N6\u2013N7",
+      "bands": "N6–N7",
       "band_ids": [
         "N6",
         "N7"
@@ -11597,8 +11549,8 @@
           ],
           "risk_class": "direct",
           "cluster": "persistent_personality",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:C,CV:E,RV:P,NP:S \u2192 persistent/personality cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:C,CV:E,RV:P,NP:S → persistent/personality cluster"
         }
       },
       "cvss": {
@@ -11612,8 +11564,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.44
       },
@@ -11652,7 +11603,7 @@
       "id": "QIF-T0061",
       "attack": "Coherence mimicry",
       "tactic": "QIF-B.EV",
-      "bands": "I0\u2013S1",
+      "bands": "I0–S1",
       "band_ids": [
         "I0",
         "S1"
@@ -11743,8 +11694,8 @@
           "secondary": [],
           "risk_class": "indirect",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "Low neural impact \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "Low neural impact → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -11752,7 +11703,7 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:L/SA:N",
         "supplemental": "S:N/AU:N/R:A/V:D",
         "gap_group": 1,
-        "gap_summary": "Detection evasion technique \u2014 standard CVSS sufficient"
+        "gap_summary": "Detection evasion technique — standard CVSS sufficient"
       },
       "neurorights": {
         "affected": [
@@ -11794,7 +11745,7 @@
       "id": "QIF-T0062",
       "attack": "Gradual drift (slow parameter shift)",
       "tactic": "QIF-B.EV",
-      "bands": "S1\u2192N7",
+      "bands": "S1→N7",
       "band_ids": [
         "S1",
         "N7"
@@ -11936,8 +11887,8 @@
           ],
           "risk_class": "direct",
           "cluster": "persistent_personality",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CG:H,CV:I,RV:P,NP:S \u2192 persistent/personality cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CG:H,CV:I,RV:P,NP:S → persistent/personality cluster"
         }
       },
       "cvss": {
@@ -11951,8 +11902,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1
       },
@@ -11991,7 +11941,7 @@
       "id": "QIF-T0063",
       "attack": "Noise injection (detection masking)",
       "tactic": "QIF-B.EV",
-      "bands": "I0\u2013S1",
+      "bands": "I0–S1",
       "band_ids": [
         "I0",
         "S1"
@@ -12025,7 +11975,7 @@
         "mechanism": "Injection of noise into BCI data pipeline to mask ongoing attack signatures",
         "dual_use": "probable",
         "clinical": {
-          "therapeutic_analog": "Stochastic resonance (SR) \u2014 adding noise to enhance weak signal detection",
+          "therapeutic_analog": "Stochastic resonance (SR) — adding noise to enhance weak signal detection",
           "conditions": [
             "sensory enhancement (hearing, touch)",
             "balance improvement in elderly",
@@ -12083,8 +12033,8 @@
           "secondary": [],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "Low neural impact \u2192 motor/neurocognitive cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "Low neural impact → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -12135,7 +12085,7 @@
       "id": "QIF-T0064",
       "attack": "User consent fatigue (neural permission flooding)",
       "tactic": "QIF-B.EV",
-      "bands": "S2\u2013S3\u2192N7",
+      "bands": "S2–S3→N7",
       "band_ids": [
         "S2",
         "S3",
@@ -12275,8 +12225,8 @@
           ],
           "risk_class": "indirect",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CV:I,RV:P \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CV:I,RV:P → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -12290,8 +12240,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1
       },
@@ -12329,7 +12278,7 @@
       "id": "QIF-T0065",
       "attack": "Algorithmic psychosis induction (recommendation weaponization)",
       "tactic": "QIF-C.EX",
-      "bands": "S3\u2192S2\u2192N5\u2013N7",
+      "bands": "S3→S2→N5–N7",
       "band_ids": [
         "S3",
         "S2",
@@ -12347,7 +12296,7 @@
       "status": "CONFIRMED",
       "severity": "critical",
       "ui_category": "CI",
-      "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI \u2014 it operates through normal sensory channels (screen \u2192 eyes \u2192 visual cortex \u2192 limbic system \u2192 prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
+      "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI — it operates through normal sensory channels (screen → eyes → visual cortex → limbic system → prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
       "legacy_ids": [],
       "legacy_technique_id": null,
       "niss": {
@@ -12514,8 +12463,8 @@
           ],
           "risk_class": "indirect",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "BI:H,CG:C,CV:E,RV:P,NP:S \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "BI:H,CG:C,CV:E,RV:P,NP:S → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -12529,8 +12478,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.8
       },
@@ -12570,7 +12518,7 @@
       "id": "QIF-T0066",
       "attack": "Slow drift / boiling frog (adiabatic phase space manipulation)",
       "tactic": "QIF-B.EV",
-      "bands": "I0\u2192N1\u2013N7",
+      "bands": "I0→N1–N7",
       "band_ids": [
         "I0",
         "N1",
@@ -12798,8 +12746,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:I,RV:P,NP:S \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:I,RV:P,NP:S → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -12813,8 +12761,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.2
       },
@@ -12853,7 +12800,7 @@
       "id": "QIF-T0067",
       "attack": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
       "tactic": "QIF-N.IJ",
-      "bands": "S1\u2192I0\u2192N1\u2013N7",
+      "bands": "S1→I0→N1–N7",
       "band_ids": [
         "S1",
         "I0",
@@ -13068,8 +13015,8 @@
           ],
           "risk_class": "direct",
           "cluster": "mood_trauma",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:I,RV:P \u2192 mood/trauma cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:I,RV:P → mood/trauma cluster"
         }
       },
       "cvss": {
@@ -13083,8 +13030,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 1.5
       },
@@ -13121,7 +13067,7 @@
       "id": "QIF-T0068",
       "attack": "Bifurcation forcing (critical parameter manipulation to trigger neural state transitions)",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2192N1\u2013N5",
+      "bands": "I0→N1–N5",
       "band_ids": [
         "I0",
         "N1",
@@ -13133,14 +13079,14 @@
       "coupling": null,
       "access": "RESTRICTED",
       "classical": "None (no traditional cybersecurity equivalent)",
-      "quantum": "Native (bifurcation detection via critical slowing down \u2014 universal precursor with no baseline required)",
+      "quantum": "Native (bifurcation detection via critical slowing down — universal precursor with no baseline required)",
       "sources": [
-        "Izhikevich 2007 (Dynamical Systems in Neuroscience \u2014 bifurcation classification); Breakspear 2017 (Dynamic models of large-scale brain activity); Scheffer et al. 2009 (Early-warning signals for critical transitions, Nature); Maturana et al. 2020 (Critical slowing down as biomarker for seizure); Jirsa et al. 2014 (On the nature of seizure dynamics, Brain)"
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience — bifurcation classification); Breakspear 2017 (Dynamic models of large-scale brain activity); Scheffer et al. 2009 (Early-warning signals for critical transitions, Nature); Maturana et al. 2020 (Critical slowing down as biomarker for seizure); Jirsa et al. 2014 (On the nature of seizure dynamics, Brain)"
       ],
       "status": "EMERGING",
       "severity": "critical",
       "ui_category": "PS",
-      "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting\u2192seizure, sleep\u2192wake, focused\u2192confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) \u2014 a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
+      "notes": "Push neural parameters toward known bifurcation points (saddle-node, Hopf, homoclinic) to trigger catastrophic state transitions: resting→seizure, sleep→wake, focused→confused. Neurons near bifurcation exhibit critical slowing down (increased autocorrelation + variance) — a UNIVERSAL precursor requiring no individual baseline. BCI electrode arrays can both detect approaching bifurcation (defense) and induce it (attack) by injecting current at bifurcation-critical parameters. Severity: CRITICAL because bifurcation transitions in neural tissue can cause seizures, loss of consciousness, or permanent damage. Defense: CSD monitoring (autocorrelation + variance trending), parameter boundary enforcement at I0, rate limiting on stimulation current changes. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2063",
       "niss": {
@@ -13316,8 +13262,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "N5 (striatum/STN) \u2192 motor selection; N4 (thalamus/hypothalamus) \u2192 sensory gating",
-          "niss_correlation": "BI:C,CG:H,CV:E,RV:P,NP:S \u2192 motor/neurocognitive cluster"
+          "pathway": "N5 (striatum/STN) → motor selection; N4 (thalamus/hypothalamus) → sensory gating",
+          "niss_correlation": "BI:C,CG:H,CV:E,RV:P,NP:S → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -13325,13 +13271,12 @@
         "base_vector": "CVSS:4.0/AV:A/AC:H/AT:P/PR:N/UI:N/VC:N/VI:H/VA:H/SC:N/SI:H/SA:H",
         "supplemental": "S:P/AU:N/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Seizure induction via neural bifurcation forcing \u2014 no CVSS equivalent for tissue harm"
+        "gap_summary": "Seizure induction via neural bifurcation forcing — no CVSS equivalent for tissue harm"
       },
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.8
       },
@@ -13370,7 +13315,7 @@
       "id": "QIF-T0069",
       "attack": "Separatrix leakage (meta-biometric extraction from dynamical transition observations)",
       "tactic": "QIF-D.HV",
-      "bands": "N3\u2013N7\u2192I0\u2192S1",
+      "bands": "N3–N7→I0→S1",
       "band_ids": [
         "N3",
         "N4",
@@ -13390,7 +13335,7 @@
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "EX",
-      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry \u2014 the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
+      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2064",
       "niss": {
@@ -13586,8 +13531,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:E \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:E → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -13601,8 +13546,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 0.96
       },
@@ -13641,7 +13585,7 @@
       "id": "QIF-T0070",
       "attack": "Integrator/resonator type switching (tonic excitability manipulation)",
       "tactic": "QIF-N.MD",
-      "bands": "I0\u2192N1\u2013N4",
+      "bands": "I0→N1–N4",
       "band_ids": [
         "I0",
         "N1",
@@ -13652,14 +13596,14 @@
       "coupling": null,
       "access": "RESTRICTED",
       "classical": "None (no traditional cybersecurity equivalent)",
-      "quantum": "Native (QI detects computational mode shifts via firing pattern analysis \u2014 integrator vs resonator signatures are distinct)",
+      "quantum": "Native (QI detects computational mode shifts via firing pattern analysis — integrator vs resonator signatures are distinct)",
       "sources": [
-        "Izhikevich 2007 (Dynamical Systems in Neuroscience \u2014 integrator/resonator classification); Prescott et al. 2008 (Biophysical basis for three distinct dynamical mechanisms of action potential initiation, PLoS Computational Biology)"
+        "Izhikevich 2007 (Dynamical Systems in Neuroscience — integrator/resonator classification); Prescott et al. 2008 (Biophysical basis for three distinct dynamical mechanisms of action potential initiation, PLoS Computational Biology)"
       ],
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "PS",
-      "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization \u2014 effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
+      "notes": "Neurons operate as either integrators (respond to coincident inputs, Type I excitability, saddle-node bifurcation) or resonators (prefer specific input frequencies, Type II excitability, Hopf bifurcation). Each QIF band (N1-N7) has a characteristic integrator/resonator composition. By manipulating tonic excitability via sustained current injection through BCI electrodes, an attacker can switch neurons from integrator to resonator mode or vice versa, fundamentally altering how neural circuits compute. This changes frequency selectivity, input sensitivity, and network synchronization — effectively reprogramming the local neural computation type. Defense: Band-specific firing mode monitoring (ISI distributions distinguish integrators from resonators), rate limiting on tonic current injection, computational mode baseline per band. Derivation Log Entry 45.",
       "legacy_ids": [],
       "legacy_technique_id": "T2065",
       "niss": {
@@ -13821,8 +13765,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "N4 (thalamus/hypothalamus) \u2192 sensory gating; N3 (cerebellar cortex/deep cerebellar nuclei) \u2192 motor coordination",
-          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S \u2192 motor/neurocognitive cluster"
+          "pathway": "N4 (thalamus/hypothalamus) → sensory gating; N3 (cerebellar cortex/deep cerebellar nuclei) → motor coordination",
+          "niss_correlation": "BI:H,CG:H,CV:E,RV:P,NP:S → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -13835,8 +13779,7 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 1.44
       },
@@ -13876,7 +13819,7 @@
       "id": "QIF-T0071",
       "attack": "Baseline adaptation poisoning (re-enrollment window exploitation)",
       "tactic": "QIF-C.IM",
-      "bands": "S1\u2192S2\u2192I0",
+      "bands": "S1→S2→I0",
       "band_ids": [
         "S1",
         "S2",
@@ -13885,7 +13828,7 @@
       "coupling": null,
       "access": "LICENSED",
       "classical": "Partial (credential stuffing during password reset)",
-      "quantum": "Enhanced (baseline-free biological TLS eliminates the attack surface entirely \u2014 no baselines to poison)",
+      "quantum": "Enhanced (baseline-free biological TLS eliminates the attack surface entirely — no baselines to poison)",
       "sources": [
         "Bigdely-Shamlo et al. 2015 (Brain activity-based image classification, Journal of Neural Engineering); Arias-Cabarcos et al. 2021 (EEG biometric system attacks); Debie et al. 2020 (Cross-session/cross-device replay)"
       ],
@@ -13973,8 +13916,8 @@
           "secondary": [],
           "risk_class": "direct",
           "cluster": "persistent_personality",
-          "pathway": "I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "CG:H,CV:I,RV:P,NP:S \u2192 persistent/personality cluster"
+          "pathway": "I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "CG:H,CV:I,RV:P,NP:S → persistent/personality cluster"
         }
       },
       "cvss": {
@@ -13988,8 +13931,7 @@
         "affected": [
           "CL",
           "MI",
-          "PC",
-          "CA"
+          "PC"
         ],
         "cci": 0.96
       },
@@ -14028,7 +13970,7 @@
       "id": "QIF-T0072",
       "attack": "Transducer inversion (acoustic eavesdropping via speaker-to-microphone reprogramming)",
       "tactic": "QIF-S.RP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -14046,7 +13988,7 @@
       "status": "CONFIRMED",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional \u2014 a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
+      "notes": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional — a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
       "legacy_ids": [],
       "legacy_technique_id": "T2067",
       "niss": {
@@ -14081,7 +14023,7 @@
           ],
           "regulations": [
             "FCC Part 15",
-            "ECPA (18 U.S.C. \u00a7 2511)",
+            "ECPA (18 U.S.C. § 2511)",
             "GDPR Art. 5",
             "EU Cyber Resilience Act"
           ],
@@ -14110,8 +14052,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -14126,7 +14068,7 @@
           "QIF-B.IN",
           "QIF-D.HV"
         ],
-        "note": "Speaker\u2192mic repurposing enables BCI intrusion pathway and data harvest"
+        "note": "Speaker→mic repurposing enables BCI intrusion pathway and data harvest"
       },
       "neurorights": {
         "affected": [
@@ -14169,7 +14111,7 @@
       "id": "QIF-T0073",
       "attack": "Ear-canal neural eavesdropping via modified consumer earbud (supply chain in-ear EEG)",
       "tactic": "QIF-S.RP",
-      "bands": "S1\u2192I0\u2192N1\u2013N3",
+      "bands": "S1→I0→N1–N3",
       "band_ids": [
         "S1",
         "I0",
@@ -14191,7 +14133,7 @@
       "status": "EMERGING",
       "severity": "critical",
       "ui_category": "SE",
-      "notes": "The ear canal is 5-10mm from temporal cortex through the canal wall and temporal bone \u2014 close enough for a conductive ear tip with a high-gain biopotential amplifier to capture cortical EEG. Commercial in-ear EEG has been proven viable (Idun Guardian, cEEGrid, Cognionics). In a supply chain attack, a consumer earbud is modified to include: (1) a conductive silicone ear tip that makes galvanic contact with ear canal skin, (2) a sub-$5 biopotential amplifier (e.g., ADS1299 or TI ADS129x family) hidden in the earbud housing, and (3) modified firmware that multiplexes captured EEG data alongside normal audio. The captured signals include auditory evoked potentials (AEP), P300 attention markers, N400 semantic processing indicators, and alpha/theta power reflecting cognitive state. Generic earbuds lacking proprietary authentication (unlike Apple AirPods with W1/H1 chip) are the attack surface. The attacker gets continuous neural telemetry from a device the target wears voluntarily for hours daily. This is the bridge technique between QIF-T0072 (acoustic eavesdropping) and QIF-T0074 (cognitive inference): it turns a consumer audio device into a covert neural recording platform.",
+      "notes": "The ear canal is 5-10mm from temporal cortex through the canal wall and temporal bone — close enough for a conductive ear tip with a high-gain biopotential amplifier to capture cortical EEG. Commercial in-ear EEG has been proven viable (Idun Guardian, cEEGrid, Cognionics). In a supply chain attack, a consumer earbud is modified to include: (1) a conductive silicone ear tip that makes galvanic contact with ear canal skin, (2) a sub-$5 biopotential amplifier (e.g., ADS1299 or TI ADS129x family) hidden in the earbud housing, and (3) modified firmware that multiplexes captured EEG data alongside normal audio. The captured signals include auditory evoked potentials (AEP), P300 attention markers, N400 semantic processing indicators, and alpha/theta power reflecting cognitive state. Generic earbuds lacking proprietary authentication (unlike Apple AirPods with W1/H1 chip) are the attack surface. The attacker gets continuous neural telemetry from a device the target wears voluntarily for hours daily. This is the bridge technique between QIF-T0072 (acoustic eavesdropping) and QIF-T0074 (cognitive inference): it turns a consumer audio device into a covert neural recording platform.",
       "legacy_ids": [],
       "legacy_technique_id": "T2068",
       "niss": {
@@ -14228,7 +14170,7 @@
           ],
           "fda_status": "investigational",
           "evidence_level": "cohort",
-          "safe_parameters": "Passive recording only; conductive gel ear tips; <100 \u00b5V signal range; no stimulation",
+          "safe_parameters": "Passive recording only; conductive gel ear tips; <100 µV signal range; no stimulation",
           "sources": [
             "Kaveh et al. 2020 (IEEE Trans Biomed Eng)",
             "Debener et al. 2015 (J Neural Eng, cEEGrid validation)"
@@ -14350,8 +14292,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "N3 (cerebellar cortex/deep cerebellar nuclei) \u2192 motor coordination; N2 (medulla/pons) \u2192 vital functions",
-          "niss_correlation": "CV:I \u2192 motor/neurocognitive cluster"
+          "pathway": "N3 (cerebellar cortex/deep cerebellar nuclei) → motor coordination; N2 (medulla/pons) → vital functions",
+          "niss_correlation": "CV:I → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -14359,7 +14301,7 @@
         "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:C",
         "gap_group": 3,
-        "gap_summary": "Covert neural data capture from consumer device \u2014 mental privacy violation not expressible in CVSS confidentiality"
+        "gap_summary": "Covert neural data capture from consumer device — mental privacy violation not expressible in CVSS confidentiality"
       },
       "feeds_into": {
         "targets": [
@@ -14367,7 +14309,7 @@
           "QIF-N.SC",
           "QIF-D.HV"
         ],
-        "note": "Earbud\u2192EEG repurposing feeds neural scanning and data harvest; relates to T0003 (signal injection)"
+        "note": "Earbud→EEG repurposing feeds neural scanning and data harvest; relates to T0003 (signal injection)"
       },
       "neurorights": {
         "affected": [
@@ -14411,7 +14353,7 @@
       "id": "QIF-T0074",
       "attack": "Cognitive inference from longitudinal in-ear EEG (personalized cognitive profiling)",
       "tactic": "QIF-S.HV",
-      "bands": "N3\u2013N7\u2192S2\u2192S3",
+      "bands": "N3–N7→S2→S3",
       "band_ids": [
         "N3",
         "N4",
@@ -14435,7 +14377,7 @@
       "status": "EMERGING",
       "severity": "critical",
       "ui_category": "EX",
-      "notes": "Given continuous in-ear EEG from QIF-T0073, an ML pipeline trained on the target's neural data over days-to-weeks builds a personalized cognitive profile. Phase 1: baseline extraction (resting alpha power, theta/beta ratio, individual alpha frequency). Phase 2: event-related feature learning (P300 amplitude to stimuli, N400 to semantic content, auditory steady-state responses). Phase 3: longitudinal pattern recognition (attention cycles, emotional valence responses, fatigue signatures, cognitive load indicators). Phase 4: adaptive exploitation \u2014 the attacker can now predict the target's cognitive state in real-time and optimize content delivery (ads, misinformation, persuasion) to moments of maximal susceptibility (high theta/low beta = low vigilance, elevated P300 = high attention to specific content). This is the cognitive analog of behavioral advertising but operating on neural signals rather than click patterns. Foundation models for EEG (BENDR, LaBraM) make transfer learning from small per-user datasets feasible. The attack chain is: QIF-T0072 (acoustic access) \u2192 QIF-T0073 (neural data capture) \u2192 QIF-T0074 (cognitive exploitation).",
+      "notes": "Given continuous in-ear EEG from QIF-T0073, an ML pipeline trained on the target's neural data over days-to-weeks builds a personalized cognitive profile. Phase 1: baseline extraction (resting alpha power, theta/beta ratio, individual alpha frequency). Phase 2: event-related feature learning (P300 amplitude to stimuli, N400 to semantic content, auditory steady-state responses). Phase 3: longitudinal pattern recognition (attention cycles, emotional valence responses, fatigue signatures, cognitive load indicators). Phase 4: adaptive exploitation — the attacker can now predict the target's cognitive state in real-time and optimize content delivery (ads, misinformation, persuasion) to moments of maximal susceptibility (high theta/low beta = low vigilance, elevated P300 = high attention to specific content). This is the cognitive analog of behavioral advertising but operating on neural signals rather than click patterns. Foundation models for EEG (BENDR, LaBraM) make transfer learning from small per-user datasets feasible. The attack chain is: QIF-T0072 (acoustic access) → QIF-T0073 (neural data capture) → QIF-T0074 (cognitive exploitation).",
       "legacy_ids": [],
       "legacy_technique_id": "T2069",
       "niss": {
@@ -14638,8 +14580,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N6 (hippocampus/amygdala) \u2192 emotion regulation",
-          "niss_correlation": "CG:H,CV:I \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N6 (hippocampus/amygdala) → emotion regulation",
+          "niss_correlation": "CG:H,CV:I → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -14647,7 +14589,7 @@
         "base_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 3,
-        "gap_summary": "Longitudinal cognitive profiling and adaptive neural manipulation \u2014 cognitive liberty violation has no CVSS equivalent"
+        "gap_summary": "Longitudinal cognitive profiling and adaptive neural manipulation — cognitive liberty violation has no CVSS equivalent"
       },
       "feeds_into": {
         "targets": [
@@ -14661,8 +14603,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 2.25
       },
@@ -14700,7 +14641,7 @@
       "id": "QIF-T0075",
       "attack": "Ultrasonic sonar vital sign extraction (inaudible Doppler physiological sensing)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -14720,7 +14661,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "A phone or earbud speaker emits an inaudible continuous-wave ultrasonic tone (18-22 kHz, within transducer bandwidth but above human hearing threshold). The built-in microphone captures the reflected signal. Chest wall motion from breathing (amplitude: ~5mm) and heartbeat (amplitude: ~0.1mm) create Doppler shifts in the reflected ultrasound that are demodulable with standard DSP. The technique is: (1) covert \u2014 the ultrasonic tone is inaudible to the target, (2) contactless \u2014 works from across a room (demonstrated up to 0.5m for heart rate, several meters for respiration), (3) requires NO hardware modification \u2014 stock smartphone speakers and microphones are sufficient, and (4) can be deployed as a background process in any app with microphone permission. Google's Nest Hub Sleep Sensing and academic research (UltraSense, Nandakumar et al.) have demonstrated production-quality vital sign extraction via this method. Attack scenario: any app with mic access silently emits ultrasound and extracts heart rate, breathing rate, and movement patterns. Combined with QIF-T0079 (ear canal fingerprinting), the attacker gets identity + vitals from the same acoustic pipeline.",
+      "notes": "A phone or earbud speaker emits an inaudible continuous-wave ultrasonic tone (18-22 kHz, within transducer bandwidth but above human hearing threshold). The built-in microphone captures the reflected signal. Chest wall motion from breathing (amplitude: ~5mm) and heartbeat (amplitude: ~0.1mm) create Doppler shifts in the reflected ultrasound that are demodulable with standard DSP. The technique is: (1) covert — the ultrasonic tone is inaudible to the target, (2) contactless — works from across a room (demonstrated up to 0.5m for heart rate, several meters for respiration), (3) requires NO hardware modification — stock smartphone speakers and microphones are sufficient, and (4) can be deployed as a background process in any app with microphone permission. Google's Nest Hub Sleep Sensing and academic research (UltraSense, Nandakumar et al.) have demonstrated production-quality vital sign extraction via this method. Attack scenario: any app with mic access silently emits ultrasound and extracts heart rate, breathing rate, and movement patterns. Combined with QIF-T0079 (ear canal fingerprinting), the attacker gets identity + vitals from the same acoustic pipeline.",
       "legacy_ids": [],
       "legacy_technique_id": "T2070",
       "niss": {
@@ -14801,8 +14742,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -14860,7 +14801,7 @@
       "id": "QIF-T0076",
       "attack": "Haptic motor body sonar (taptic engine repurposing for tissue impedance profiling)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2",
+      "bands": "S1→S2",
       "band_ids": [
         "S1",
         "S2"
@@ -14959,8 +14900,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -15016,7 +14957,7 @@
       "id": "QIF-T0077",
       "attack": "IR vascular mapping via Face ID system (NIR hemoglobin absorption imaging)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -15036,7 +14977,7 @@
       "status": "EMERGING",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "Apple's Face ID TrueDepth system projects 30,000 infrared dots at 940nm onto the user's face and reads the reflection pattern with an IR camera. At 940nm, photons penetrate skin to a depth of 2-5mm \u2014 well into the dermal vascular layer. Oxygenated hemoglobin (HbO2) and deoxygenated hemoglobin (Hb) have different absorption coefficients at 940nm, meaning the reflected dot pattern encodes subsurface vascular topology: arterial vs venous vessels, vessel diameter, branching patterns, and oxygenation gradients. This vascular map is a permanent biometric (unlike facial features, which change with age/surgery/expression) and is unique per individual (even identical twins have different vascular topology). In the attack scenario, a jailbroken iPhone or compromised Face ID firmware extracts raw IR reflection data (normally processed in the Secure Enclave and discarded) during routine phone unlock. The target never knows their vascular biometric has been captured. Every phone unlock becomes a silent biometric scan. This is analogous to fingerprinting (unreplaceable biometric) but captured at range and without the target's awareness. Combined with QIF-T0078 (pulse waveform), the same IR system yields both vascular structure and cardiac dynamics.",
+      "notes": "Apple's Face ID TrueDepth system projects 30,000 infrared dots at 940nm onto the user's face and reads the reflection pattern with an IR camera. At 940nm, photons penetrate skin to a depth of 2-5mm — well into the dermal vascular layer. Oxygenated hemoglobin (HbO2) and deoxygenated hemoglobin (Hb) have different absorption coefficients at 940nm, meaning the reflected dot pattern encodes subsurface vascular topology: arterial vs venous vessels, vessel diameter, branching patterns, and oxygenation gradients. This vascular map is a permanent biometric (unlike facial features, which change with age/surgery/expression) and is unique per individual (even identical twins have different vascular topology). In the attack scenario, a jailbroken iPhone or compromised Face ID firmware extracts raw IR reflection data (normally processed in the Secure Enclave and discarded) during routine phone unlock. The target never knows their vascular biometric has been captured. Every phone unlock becomes a silent biometric scan. This is analogous to fingerprinting (unreplaceable biometric) but captured at range and without the target's awareness. Combined with QIF-T0078 (pulse waveform), the same IR system yields both vascular structure and cardiac dynamics.",
       "legacy_ids": [],
       "legacy_technique_id": "T2072",
       "niss": {
@@ -15073,7 +15014,7 @@
           ],
           "fda_status": "cleared",
           "evidence_level": "RCT",
-          "safe_parameters": "940nm NIR at Face ID power levels (<1 mW/cm\u00b2); IEC 62471 photobiological safety; no thermal risk at consumer power",
+          "safe_parameters": "940nm NIR at Face ID power levels (<1 mW/cm²); IEC 62471 photobiological safety; no thermal risk at consumer power",
           "sources": [
             "Crouzet et al. 2016 (NeuroImage, cerebrovascular NIR)",
             "Gupta et al. 2020 (IEEE Access, vein pattern biometrics)"
@@ -15121,8 +15062,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -15182,7 +15123,7 @@
       "id": "QIF-T0078",
       "attack": "LiDAR remote pulse detection (laser Doppler vibrometry for cardiac waveform extraction)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -15202,7 +15143,7 @@
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "The iPhone LiDAR scanner uses a VCSEL (vertical-cavity surface-emitting laser) array emitting pulsed 940nm infrared laser light and a SPAD (single-photon avalanche diode) detector array measuring time-of-flight. In normal operation, it measures depth for AR applications. However, the same hardware can function as a simplified laser Doppler vibrometer (LDV): when the laser beam reflects off skin, the pulse wave from cardiac activity causes micro-vibrations (amplitude ~1-10 \u00b5m) on the skin surface. These vibrations create measurable Doppler shifts or time-of-flight variations in the reflected laser signal. Extracting the cardiac pulse waveform from LiDAR data requires raw access to the SPAD photodetector output (timing resolution in picoseconds) rather than the processed depth map. This requires either a jailbreak, hardware teardown, or compromised firmware. The extracted pulse waveform contains: heart rate, heart rate variability (HRV), pulse transit time (correlated with blood pressure), and potentially cardiac arrhythmia signatures. Unlike QIF-T0075 (ultrasonic sonar), this is optical and directional, requiring line-of-sight but working at greater precision for skin-surface vibrations. Range is limited to ~5m (LiDAR operational range) but could be extended with higher-power laser sources.",
+      "notes": "The iPhone LiDAR scanner uses a VCSEL (vertical-cavity surface-emitting laser) array emitting pulsed 940nm infrared laser light and a SPAD (single-photon avalanche diode) detector array measuring time-of-flight. In normal operation, it measures depth for AR applications. However, the same hardware can function as a simplified laser Doppler vibrometer (LDV): when the laser beam reflects off skin, the pulse wave from cardiac activity causes micro-vibrations (amplitude ~1-10 µm) on the skin surface. These vibrations create measurable Doppler shifts or time-of-flight variations in the reflected laser signal. Extracting the cardiac pulse waveform from LiDAR data requires raw access to the SPAD photodetector output (timing resolution in picoseconds) rather than the processed depth map. This requires either a jailbreak, hardware teardown, or compromised firmware. The extracted pulse waveform contains: heart rate, heart rate variability (HRV), pulse transit time (correlated with blood pressure), and potentially cardiac arrhythmia signatures. Unlike QIF-T0075 (ultrasonic sonar), this is optical and directional, requiring line-of-sight but working at greater precision for skin-surface vibrations. Range is limited to ~5m (LiDAR operational range) but could be extended with higher-power laser sources.",
       "legacy_ids": [],
       "legacy_technique_id": "T2073",
       "niss": {
@@ -15285,8 +15226,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -15344,7 +15285,7 @@
       "id": "QIF-T0079",
       "attack": "Ear canal acoustic fingerprinting (ANC echo profiling for covert identification)",
       "tactic": "QIF-S.FP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -15364,7 +15305,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "CI",
-      "notes": "Active noise cancellation (ANC) earbuds already contain the complete hardware for ear canal acoustic fingerprinting: an inward-facing (feedback) microphone that measures sound inside the ear canal, an outward-facing (feedforward) microphone, and a speaker that can emit probe tones. When the speaker emits a broadband chirp or swept sine, the inward-facing microphone captures the echo profile shaped by the ear canal's unique geometry: length (~25mm), diameter (~7mm), tympanic membrane compliance, and the specific curvature of the bends. This acoustic transfer function is a biometric \u2014 NEC demonstrated it for authentication with >99% accuracy. In the attack scenario, the ANC system's existing probe tones (used for adaptive fit detection and transparency mode calibration) are leveraged to silently fingerprint the wearer without their knowledge. The earbuds know WHO is wearing them at all times. Combined with audioplethysmography (PPG via in-ear speaker/mic measuring blood volume changes), the same hardware simultaneously provides identity + heart rate: a silent surveillance pipeline requiring zero hardware modification on ANC earbuds. Attack surface: firmware update, compromised ANC calibration routine, or malicious SDK in earbud companion app.",
+      "notes": "Active noise cancellation (ANC) earbuds already contain the complete hardware for ear canal acoustic fingerprinting: an inward-facing (feedback) microphone that measures sound inside the ear canal, an outward-facing (feedforward) microphone, and a speaker that can emit probe tones. When the speaker emits a broadband chirp or swept sine, the inward-facing microphone captures the echo profile shaped by the ear canal's unique geometry: length (~25mm), diameter (~7mm), tympanic membrane compliance, and the specific curvature of the bends. This acoustic transfer function is a biometric — NEC demonstrated it for authentication with >99% accuracy. In the attack scenario, the ANC system's existing probe tones (used for adaptive fit detection and transparency mode calibration) are leveraged to silently fingerprint the wearer without their knowledge. The earbuds know WHO is wearing them at all times. Combined with audioplethysmography (PPG via in-ear speaker/mic measuring blood volume changes), the same hardware simultaneously provides identity + heart rate: a silent surveillance pipeline requiring zero hardware modification on ANC earbuds. Attack surface: firmware update, compromised ANC calibration routine, or malicious SDK in earbud companion app.",
       "legacy_ids": [],
       "legacy_technique_id": "T2074",
       "niss": {
@@ -15450,8 +15391,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -15511,7 +15452,7 @@
       "id": "QIF-T0080",
       "attack": "Gyroscope acoustic eavesdropping (MEMS speech capture via resonant frequency aliasing)",
       "tactic": "QIF-S.RP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -15529,7 +15470,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "MEMS gyroscopes in smartphones sample at 100-200 Hz, with mechanical resonant frequencies in the audible speech range (100-8000 Hz). When sound waves strike the MEMS proof mass, they induce vibrations that alias into the gyroscope output. Michalevsky et al. (2014) demonstrated that gyroscope data alone can reconstruct intelligible speech features, identify speakers, and detect spoken digits \u2014 all without microphone permission. Android allowed gyroscope access without any permission until API level 33. This creates a covert audio surveillance channel through an 'inertial' sensor that apps access freely. Combined with accelerometer data (T0081), reconstruction quality improves significantly. The attack requires no hardware modification \u2014 only a software app with motion sensor access.",
+      "notes": "MEMS gyroscopes in smartphones sample at 100-200 Hz, with mechanical resonant frequencies in the audible speech range (100-8000 Hz). When sound waves strike the MEMS proof mass, they induce vibrations that alias into the gyroscope output. Michalevsky et al. (2014) demonstrated that gyroscope data alone can reconstruct intelligible speech features, identify speakers, and detect spoken digits — all without microphone permission. Android allowed gyroscope access without any permission until API level 33. This creates a covert audio surveillance channel through an 'inertial' sensor that apps access freely. Combined with accelerometer data (T0081), reconstruction quality improves significantly. The attack requires no hardware modification — only a software app with motion sensor access.",
       "legacy_ids": [],
       "legacy_technique_id": "T2075",
       "niss": {
@@ -15562,7 +15503,7 @@
             "app_permission_review"
           ],
           "regulations": [
-            "ECPA (18 U.S.C. \u00a7 2511)",
+            "ECPA (18 U.S.C. § 2511)",
             "GDPR Art. 5",
             "Android sensor permission policy"
           ],
@@ -15591,8 +15532,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -15649,7 +15590,7 @@
       "id": "QIF-T0081",
       "attack": "Accelerometer speech reconstruction (vibration-to-audio via surface-coupled MEMS)",
       "tactic": "QIF-S.RP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -15667,7 +15608,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "Modern smartphone accelerometers (ADXL345, BMI270) have sufficient sensitivity to capture speech vibrations transmitted through surfaces. When a phone lies on a table during a conversation, or is held against the ear during a call, speech vibrations propagate through the phone chassis to the MEMS accelerometer. Ba et al. (2020) used deep learning to reconstruct intelligible speech from accelerometer data alone, achieving speaker identification and keyword recognition. Unlike the gyroscope attack (T0080), accelerometers benefit from direct surface coupling \u2014 speech vibrations transmitted through desks, tables, or the user's hand provide stronger signal. Like T0080, accelerometer access required no permission on Android until recent API changes. The combination of gyroscope + accelerometer data (sensor fusion) significantly improves reconstruction quality over either sensor alone.",
+      "notes": "Modern smartphone accelerometers (ADXL345, BMI270) have sufficient sensitivity to capture speech vibrations transmitted through surfaces. When a phone lies on a table during a conversation, or is held against the ear during a call, speech vibrations propagate through the phone chassis to the MEMS accelerometer. Ba et al. (2020) used deep learning to reconstruct intelligible speech from accelerometer data alone, achieving speaker identification and keyword recognition. Unlike the gyroscope attack (T0080), accelerometers benefit from direct surface coupling — speech vibrations transmitted through desks, tables, or the user's hand provide stronger signal. Like T0080, accelerometer access required no permission on Android until recent API changes. The combination of gyroscope + accelerometer data (sensor fusion) significantly improves reconstruction quality over either sensor alone.",
       "legacy_ids": [],
       "legacy_technique_id": "T2076",
       "niss": {
@@ -15701,7 +15642,7 @@
             "app_permission_review"
           ],
           "regulations": [
-            "ECPA (18 U.S.C. \u00a7 2511)",
+            "ECPA (18 U.S.C. § 2511)",
             "GDPR Art. 5",
             "Android sensor permission policy"
           ],
@@ -15730,8 +15671,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -15788,7 +15729,7 @@
       "id": "QIF-T0082",
       "attack": "Ultrasonic cross-device tracking (inaudible beacon correlation for user identification)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -15806,7 +15747,7 @@
       "status": "CONFIRMED",
       "severity": "high",
       "ui_category": "CI",
-      "notes": "Advertisers and tracking firms embed inaudible ultrasonic beacons (18-22 kHz) in TV commercials, web ads, and in-store audio. Any device with microphone access (phone, tablet, smart speaker) within acoustic range can detect these beacons and report them to a tracking server. This enables cross-device user identification (linking phone, laptop, TV viewing), physical location tracking (in-store beacons), and de-anonymization of Tor/VPN users (TV ad beacons correlate with browsing sessions). Silverpush was found embedded in 234 Android apps (2017). The beacons are inaudible to humans but easily detected by consumer microphones. Combined with QIF-T0075 (ultrasonic sonar), the same frequency band serves both tracking and physiological surveillance. This technique requires no hardware modification \u2014 only software with microphone permission.",
+      "notes": "Advertisers and tracking firms embed inaudible ultrasonic beacons (18-22 kHz) in TV commercials, web ads, and in-store audio. Any device with microphone access (phone, tablet, smart speaker) within acoustic range can detect these beacons and report them to a tracking server. This enables cross-device user identification (linking phone, laptop, TV viewing), physical location tracking (in-store beacons), and de-anonymization of Tor/VPN users (TV ad beacons correlate with browsing sessions). Silverpush was found embedded in 234 Android apps (2017). The beacons are inaudible to humans but easily detected by consumer microphones. Combined with QIF-T0075 (ultrasonic sonar), the same frequency band serves both tracking and physiological surveillance. This technique requires no hardware modification — only software with microphone permission.",
       "legacy_ids": [],
       "legacy_technique_id": "T2077",
       "niss": {
@@ -15869,8 +15810,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -15928,7 +15869,7 @@
       "id": "QIF-T0083",
       "attack": "Acoustic keystroke inference (typing sound classification for credential extraction)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -15979,7 +15920,7 @@
             "VoIP_audio_filtering"
           ],
           "regulations": [
-            "ECPA (18 U.S.C. \u00a7 2511)",
+            "ECPA (18 U.S.C. § 2511)",
             "GDPR Art. 5",
             "CFAA (credential theft)"
           ],
@@ -16007,8 +15948,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -16066,7 +16007,7 @@
       "id": "QIF-T0084",
       "attack": "Remote photoplethysmography (camera-based pulse and blood oxygen extraction)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -16085,7 +16026,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "Standard RGB webcams and phone cameras can detect the subtle skin color changes caused by blood volume pulses beneath the skin surface. Each heartbeat modulates hemoglobin concentration in facial capillaries, creating sub-pixel intensity variations in the green channel (540nm peak absorption of hemoglobin). Modern deep learning models (DeepPhys, EfficientPhys) extract heart rate, heart rate variability, breathing rate, and blood oxygen saturation from webcam video with near-clinical accuracy \u2014 even through video compression artifacts on Zoom/Teams calls. Attack scenario: any app with camera access (video call, face filter, AR app) silently extracts physiological data. The user consents to video, not to vital sign monitoring. This technique has been demonstrated at distances up to 3m with consumer cameras and works under variable ambient lighting conditions.",
+      "notes": "Standard RGB webcams and phone cameras can detect the subtle skin color changes caused by blood volume pulses beneath the skin surface. Each heartbeat modulates hemoglobin concentration in facial capillaries, creating sub-pixel intensity variations in the green channel (540nm peak absorption of hemoglobin). Modern deep learning models (DeepPhys, EfficientPhys) extract heart rate, heart rate variability, breathing rate, and blood oxygen saturation from webcam video with near-clinical accuracy — even through video compression artifacts on Zoom/Teams calls. Attack scenario: any app with camera access (video call, face filter, AR app) silently extracts physiological data. The user consents to video, not to vital sign monitoring. This technique has been demonstrated at distances up to 3m with consumer cameras and works under variable ambient lighting conditions.",
       "legacy_ids": [],
       "legacy_technique_id": "T2079",
       "niss": {
@@ -16149,8 +16090,8 @@
           "parameters": {
             "camera_resolution": "640x480 minimum",
             "frame_rate_fps": ">15",
-            "heart_rate_accuracy_bpm": "\u00b12-5",
-            "SpO2_accuracy_pct": "\u00b12-3",
+            "heart_rate_accuracy_bpm": "±2-5",
+            "SpO2_accuracy_pct": "±2-3",
             "working_distance_m": "0.3-3"
           },
           "hardware": [
@@ -16164,8 +16105,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -16223,7 +16164,7 @@
       "id": "QIF-T0085",
       "attack": "Eye tracking cognitive state inference (gaze pattern analysis for attention and intent profiling)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192N3\u2192N7",
+      "bands": "S1→S2→N3→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -16399,8 +16340,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N3 (cerebellar cortex/deep cerebellar nuclei) \u2192 motor coordination",
-          "niss_correlation": "CG:H,CV:I \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N3 (cerebellar cortex/deep cerebellar nuclei) → motor coordination",
+          "niss_correlation": "CG:H,CV:I → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -16408,7 +16349,7 @@
         "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 3,
-        "gap_summary": "Cognitive state inference from eye tracking \u2014 mental privacy violation not expressible in CVSS; closest consumer analog to neural eavesdropping"
+        "gap_summary": "Cognitive state inference from eye tracking — mental privacy violation not expressible in CVSS; closest consumer analog to neural eavesdropping"
       },
       "feeds_into": {
         "targets": [
@@ -16422,8 +16363,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 2.25
       },
@@ -16461,7 +16401,7 @@
       "id": "QIF-T0086",
       "attack": "Ambient light sensor side-channel exfiltration (screen content inference via reflected light)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -16479,7 +16419,7 @@
       "status": "DEMONSTRATED",
       "severity": "medium",
       "ui_category": "SE",
-      "notes": "Ambient light sensors (ALS) in smartphones and tablets are low-resolution photometers (typically 16-bit, 10-100 Hz) that measure environmental illumination for auto-brightness. Since the ALS is near the display, it also captures light reflected back from the display itself and from nearby surfaces illuminated by the display. This creates a side channel: the ALS output correlates with screen content. While the ALS cannot reconstruct a full image, it can distinguish between dark and light screens, detect page scrolling patterns, identify video content by temporal light signatures, and in some cases infer text content via character-level luminance patterns. Crucially, ALS access requires no permission on most mobile platforms \u2014 it's treated as a low-risk environmental sensor. This makes it an unrestricted exfiltration channel for screen activity patterns.",
+      "notes": "Ambient light sensors (ALS) in smartphones and tablets are low-resolution photometers (typically 16-bit, 10-100 Hz) that measure environmental illumination for auto-brightness. Since the ALS is near the display, it also captures light reflected back from the display itself and from nearby surfaces illuminated by the display. This creates a side channel: the ALS output correlates with screen content. While the ALS cannot reconstruct a full image, it can distinguish between dark and light screens, detect page scrolling patterns, identify video content by temporal light signatures, and in some cases infer text content via character-level luminance patterns. Crucially, ALS access requires no permission on most mobile platforms — it's treated as a low-risk environmental sensor. This makes it an unrestricted exfiltration channel for screen activity patterns.",
       "legacy_ids": [],
       "legacy_technique_id": "T2081",
       "niss": {
@@ -16538,8 +16478,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -16596,7 +16536,7 @@
       "id": "QIF-T0087",
       "attack": "Accelerometer keystroke inference (touchscreen tap localization for PIN/password recovery)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -16678,8 +16618,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -16737,7 +16677,7 @@
       "id": "QIF-T0088",
       "attack": "Gait biometric identification (IMU-based walking pattern fingerprint for persistent tracking)",
       "tactic": "QIF-S.FP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -16755,7 +16695,7 @@
       "status": "CONFIRMED",
       "severity": "high",
       "ui_category": "CI",
-      "notes": "Every person has a unique gait signature determined by limb length ratios, joint flexibility, muscle strength distribution, and neurological motor control patterns. Smartphone IMU sensors (accelerometer + gyroscope) carried in a pocket capture this signature with high fidelity \u2014 Muaaz & Mayrhofer (2017) achieved >95% identification accuracy across 175 subjects. The gait signature is: (1) difficult to spoof (requires altering unconscious motor patterns), (2) captured passively (phone in pocket during normal walking), (3) persistent across sessions and devices, and (4) capturable without any explicit permission. Gait biometrics enable persistent user tracking even when other identifiers (cookies, device IDs, face) are unavailable. Combined with T0089 (neurological profiling), gait data also reveals health conditions affecting motor control.",
+      "notes": "Every person has a unique gait signature determined by limb length ratios, joint flexibility, muscle strength distribution, and neurological motor control patterns. Smartphone IMU sensors (accelerometer + gyroscope) carried in a pocket capture this signature with high fidelity — Muaaz & Mayrhofer (2017) achieved >95% identification accuracy across 175 subjects. The gait signature is: (1) difficult to spoof (requires altering unconscious motor patterns), (2) captured passively (phone in pocket during normal walking), (3) persistent across sessions and devices, and (4) capturable without any explicit permission. Gait biometrics enable persistent user tracking even when other identifiers (cookies, device IDs, face) are unavailable. Combined with T0089 (neurological profiling), gait data also reveals health conditions affecting motor control.",
       "legacy_ids": [],
       "legacy_technique_id": "T2083",
       "niss": {
@@ -16835,8 +16775,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -16895,7 +16835,7 @@
       "id": "QIF-T0089",
       "attack": "Tremor and movement neurological profiling (IMU-based motor disorder detection and health inference)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192N1\u2192N7",
+      "bands": "S1→S2→N1→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -16915,7 +16855,7 @@
       "status": "DEMONSTRATED",
       "severity": "critical",
       "ui_category": "SE",
-      "notes": "Smartphone IMU sensors can detect pathological tremor patterns characteristic of neurological conditions: Parkinson's resting tremor (4-6 Hz), essential tremor (8-12 Hz), cerebellar tremor (3-5 Hz), and physiological tremor changes from medication, fatigue, or substance use. The mPower study (Bot et al. 2016) enrolled 16,000 participants and demonstrated that smartphone sensor data alone can distinguish Parkinson's patients from healthy controls with >90% accuracy. Beyond tremor, fine motor control degradation (touchscreen interaction patterns, typing dynamics) reveals cognitive decline, medication effects, intoxication levels, and fatigue. This is covert neurological diagnosis without the subject's knowledge or consent \u2014 the phone becomes a continuous neurological monitor. The data reveals protected health information about neurological conditions, substance use, and cognitive function from sensors that require no permission.",
+      "notes": "Smartphone IMU sensors can detect pathological tremor patterns characteristic of neurological conditions: Parkinson's resting tremor (4-6 Hz), essential tremor (8-12 Hz), cerebellar tremor (3-5 Hz), and physiological tremor changes from medication, fatigue, or substance use. The mPower study (Bot et al. 2016) enrolled 16,000 participants and demonstrated that smartphone sensor data alone can distinguish Parkinson's patients from healthy controls with >90% accuracy. Beyond tremor, fine motor control degradation (touchscreen interaction patterns, typing dynamics) reveals cognitive decline, medication effects, intoxication levels, and fatigue. This is covert neurological diagnosis without the subject's knowledge or consent — the phone becomes a continuous neurological monitor. The data reveals protected health information about neurological conditions, substance use, and cognitive function from sensors that require no permission.",
       "legacy_ids": [],
       "legacy_technique_id": "T2084",
       "niss": {
@@ -17068,8 +17008,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; N1 (spinal cord) \u2192 reflexes",
-          "niss_correlation": "CV:I \u2192 motor/neurocognitive cluster"
+          "pathway": "N7 (PFC/M1) → executive function; N1 (spinal cord) → reflexes",
+          "niss_correlation": "CV:I → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -17077,7 +17017,7 @@
         "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 3,
-        "gap_summary": "Covert neurological diagnosis from consumer sensors \u2014 health condition revelation and cognitive state inference not expressible in CVSS"
+        "gap_summary": "Covert neurological diagnosis from consumer sensors — health condition revelation and cognitive state inference not expressible in CVSS"
       },
       "feeds_into": {
         "targets": [
@@ -17128,7 +17068,7 @@
       "id": "QIF-T0090",
       "attack": "WiFi CSI passive body sensing (through-wall vital signs, 3D pose reconstruction, respiratory and gait biometric inference via dedicated or commodity WiFi hardware)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -17151,7 +17091,7 @@
       "status": "DEMONSTRATED",
       "severity": "critical",
       "ui_category": "SE",
-      "notes": "WiFi Channel State Information (CSI) captures the multipath propagation characteristics between WiFi transmitter and receiver. Human body movements \u2014 including breathing (chest wall motion ~5mm), heartbeat (body surface vibration ~0.1mm), and walking \u2014 modulate the WiFi signal propagation paths. Two attack profiles: (1) DEDICATED HARDWARE \u2014 modified firmware on CSI-capable APs enables through-wall sensing (2-3 standard walls), 3D pose reconstruction, and multi-person vital sign extraction at up to 8m range. (2) CONSUMER-GRADE \u2014 standard WiFi chipsets (Intel 5300, Atheros, ESP32) with CSI-enabled drivers extract respiratory rate (\u00b11 bpm at 3m) and gait identity (93% single-person, 78% multi-person) without dedicated hardware. Respiratory modulation: phase shift \u0394\u03c6 = 4\u03c0\u00d7\u0394d/\u03bb \u2248 0.4-1.2 radians at 5 GHz (chest displacement 4-12mm). Gait produces Doppler shifts f_d = 2v\u00d7cos(\u03b8)/\u03bb \u2248 40 Hz at walking speed. CSI matrix: H(f,t) \u2208 C^(N_tx \u00d7 N_rx \u00d7 N_sub). CRITICAL REGULATORY GAP: Respiratory rate = PHI under HIPAA (45 CFR 160.103) when linked to individual. Gait biometric = special category data under GDPR Art. 9. No consent mechanism exists for incidental WiFi CSI health data collection \u2014 a router collecting CSI for 'network optimization' simultaneously collects respiratory data from everyone in range. This is passive radar using existing infrastructure.",
+      "notes": "WiFi Channel State Information (CSI) captures the multipath propagation characteristics between WiFi transmitter and receiver. Human body movements — including breathing (chest wall motion ~5mm), heartbeat (body surface vibration ~0.1mm), and walking — modulate the WiFi signal propagation paths. Two attack profiles: (1) DEDICATED HARDWARE — modified firmware on CSI-capable APs enables through-wall sensing (2-3 standard walls), 3D pose reconstruction, and multi-person vital sign extraction at up to 8m range. (2) CONSUMER-GRADE — standard WiFi chipsets (Intel 5300, Atheros, ESP32) with CSI-enabled drivers extract respiratory rate (±1 bpm at 3m) and gait identity (93% single-person, 78% multi-person) without dedicated hardware. Respiratory modulation: phase shift Δφ = 4π×Δd/λ ≈ 0.4-1.2 radians at 5 GHz (chest displacement 4-12mm). Gait produces Doppler shifts f_d = 2v×cos(θ)/λ ≈ 40 Hz at walking speed. CSI matrix: H(f,t) ∈ C^(N_tx × N_rx × N_sub). CRITICAL REGULATORY GAP: Respiratory rate = PHI under HIPAA (45 CFR 160.103) when linked to individual. Gait biometric = special category data under GDPR Art. 9. No consent mechanism exists for incidental WiFi CSI health data collection — a router collecting CSI for 'network optimization' simultaneously collects respiratory data from everyone in range. This is passive radar using existing infrastructure.",
       "legacy_ids": [],
       "legacy_technique_id": "T2085",
       "niss": {
@@ -17187,7 +17127,7 @@
         "clinical": {
           "therapeutic_analog": "Contactless vital sign monitoring for sleep studies, elder care, and post-surgical recovery",
           "conditions": [
-            "contactless sleep apnea detection (Liu et al. 2015, demonstrated \u00b11 bpm)",
+            "contactless sleep apnea detection (Liu et al. 2015, demonstrated ±1 bpm)",
             "elderly fall detection and activity monitoring (no wearable required)",
             "post-surgical respiration monitoring without chest bands (burn patients)",
             "PTSD and anxiety monitoring via nocturnal breathing pattern analysis",
@@ -17200,7 +17140,7 @@
           "safe_parameters": "Standard WiFi power levels (100 mW EIRP, < FCC Part 15 limits); passive sensing only (no additional RF emission); informed consent for monitoring",
           "sources": [
             "Liu et al. 2019 (IEEE, WiFi sensing survey)",
-            "Liu et al. 2015 (WiFi respiration, demonstrated \u00b11 bpm)",
+            "Liu et al. 2015 (WiFi respiration, demonstrated ±1 bpm)",
             "Zeng et al. 2020 (ACM MobiSys, FarSense)",
             "Wang et al. 2017 (WiFi fall detection)"
           ]
@@ -17237,7 +17177,7 @@
             "CSI_sampling_rate_Hz": "100-1000",
             "breathing_detection_range_m": "1-8",
             "through_wall_capability": "2-3 standard walls (dedicated hardware)",
-            "heart_rate_accuracy_bpm": "\u00b13-5 (dedicated), \u00b11 at 3m (consumer-grade respiration)",
+            "heart_rate_accuracy_bpm": "±3-5 (dedicated), ±1 at 3m (consumer-grade respiration)",
             "gait_id_accuracy_percent": "93 (single-person), 78 (multi-person)",
             "respiratory_phase_shift_rad": "0.4-1.2 (at 5 GHz)",
             "gait_doppler_Hz": "~40 (at 5 GHz, walking)"
@@ -17255,8 +17195,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 respiratory/gait data does not traverse neural pathway. Chains to N-domain if respiratory patterns used for cognitive state inference (stress detection).",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping. CV:I reflects through-wall surveillance and health data collection without consent."
+          "pathway": "S-domain only — respiratory/gait data does not traverse neural pathway. Chains to N-domain if respiratory patterns used for cognitive state inference (stress detection).",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping. CV:I reflects through-wall surveillance and health data collection without consent."
         }
       },
       "cvss": {
@@ -17318,7 +17258,7 @@
       "id": "QIF-T0091",
       "attack": "BLE physical-layer device fingerprinting (radio frequency imperfection tracking)",
       "tactic": "QIF-S.FP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -17336,7 +17276,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "CI",
-      "notes": "Every Bluetooth Low Energy (BLE) transmitter has unique analog imperfections in its radio hardware: carrier frequency offset (CFO), I/Q imbalance, power amplifier nonlinearity, and phase noise characteristics. These imperfections are manufacturing artifacts that are stable, unique per device, and impossible to change via software \u2014 they are the RF equivalent of a fingerprint. Becker et al. (2022) demonstrated that BLE physical-layer fingerprinting can track devices even when using MAC address randomization (the privacy feature specifically designed to prevent tracking). This defeats Apple's and Google's BLE privacy protections. Attack scenario: passive BLE receivers at strategic locations (malls, airports, streets) fingerprint passing devices. The user's phone continuously advertises BLE (for AirDrop, Find My, COVID exposure notifications), and each advertisement carries the device's unchangeable RF fingerprint. This enables persistent location tracking despite all software-level privacy measures.",
+      "notes": "Every Bluetooth Low Energy (BLE) transmitter has unique analog imperfections in its radio hardware: carrier frequency offset (CFO), I/Q imbalance, power amplifier nonlinearity, and phase noise characteristics. These imperfections are manufacturing artifacts that are stable, unique per device, and impossible to change via software — they are the RF equivalent of a fingerprint. Becker et al. (2022) demonstrated that BLE physical-layer fingerprinting can track devices even when using MAC address randomization (the privacy feature specifically designed to prevent tracking). This defeats Apple's and Google's BLE privacy protections. Attack scenario: passive BLE receivers at strategic locations (malls, airports, streets) fingerprint passing devices. The user's phone continuously advertises BLE (for AirDrop, Find My, COVID exposure notifications), and each advertisement carries the device's unchangeable RF fingerprint. This enables persistent location tracking despite all software-level privacy measures.",
       "legacy_ids": [],
       "legacy_technique_id": "T2086",
       "niss": {
@@ -17400,8 +17340,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -17460,7 +17400,7 @@
       "id": "QIF-T0092",
       "attack": "Thermal facial stress and emotion inference (IR thermography for autonomic nervous system state extraction)",
       "tactic": "QIF-S.HV",
-      "bands": "S1\u2192S2\u2192N7",
+      "bands": "S1→S2→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -17478,7 +17418,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "The autonomic nervous system modulates facial skin temperature through vasoconstriction/vasodilation in response to stress, cognitive load, deception, arousal, and emotional states. Periorbital temperature (around the eyes) drops during stress as blood redirects to core muscles. Nasal tip temperature correlates with cognitive load. Forehead temperature maps to anxiety. Thermal cameras (LWIR, 8-14 \u00b5m) capture these patterns contactlessly. While consumer thermal cameras are not yet standard in phones, they are available as accessories (FLIR One, Seek Thermal), integrated into some laptops (for presence detection), and standard in many security/surveillance systems. Pavlidis et al. (2002) demonstrated thermal imaging as a polygraph alternative. As thermal sensors become cheaper and more integrated into consumer devices, this becomes a passive emotion/stress surveillance channel.",
+      "notes": "The autonomic nervous system modulates facial skin temperature through vasoconstriction/vasodilation in response to stress, cognitive load, deception, arousal, and emotional states. Periorbital temperature (around the eyes) drops during stress as blood redirects to core muscles. Nasal tip temperature correlates with cognitive load. Forehead temperature maps to anxiety. Thermal cameras (LWIR, 8-14 µm) capture these patterns contactlessly. While consumer thermal cameras are not yet standard in phones, they are available as accessories (FLIR One, Seek Thermal), integrated into some laptops (for presence detection), and standard in many security/surveillance systems. Pavlidis et al. (2002) demonstrated thermal imaging as a polygraph alternative. As thermal sensors become cheaper and more integrated into consumer devices, this becomes a passive emotion/stress surveillance channel.",
       "legacy_ids": [],
       "legacy_technique_id": "T2087",
       "niss": {
@@ -17513,7 +17453,7 @@
           ],
           "fda_status": "cleared",
           "evidence_level": "cohort",
-          "safe_parameters": "Passive thermal imaging (no radiation emitted); LWIR 8-14 \u00b5m detection only; standard room temperature conditions",
+          "safe_parameters": "Passive thermal imaging (no radiation emitted); LWIR 8-14 µm detection only; standard room temperature conditions",
           "sources": [
             "Engert et al. 2014 (PLOS ONE, thermal stress imaging)",
             "Pavlidis et al. 2002 (IEEE EMB, thermal polygraph)"
@@ -17614,8 +17554,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CV:E \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CV:E → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -17623,7 +17563,7 @@
         "base_vector": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:N/VC:H/VI:N/VA:N/SC:L/SI:N/SA:N",
         "supplemental": "S:N/AU:Y/R:A/V:D",
         "gap_group": 3,
-        "gap_summary": "Emotional state inference from thermal imaging \u2014 psychological privacy dimension not expressible in CVSS"
+        "gap_summary": "Emotional state inference from thermal imaging — psychological privacy dimension not expressible in CVSS"
       },
       "feeds_into": {
         "targets": [
@@ -17674,7 +17614,7 @@
       "id": "QIF-T0093",
       "attack": "PPG pulse waveform biometric identification (cardiac signature fingerprinting via wearable optical sensor)",
       "tactic": "QIF-S.FP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -17692,7 +17632,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "CI",
-      "notes": "Photoplethysmography (PPG) sensors in smartwatches and fitness trackers measure blood volume changes through green LED light reflected from the wrist. The PPG waveform shape is unique per individual \u2014 determined by cardiac output, arterial stiffness, vessel geometry, and autonomic tone. Biswas et al. (2019) demonstrated >98% identification accuracy using deep learning on PPG waveforms. Unlike heart rate (a single number), the full PPG waveform is a rich biometric containing: pulse amplitude, dicrotic notch depth, systolic/diastolic ratio, pulse transit time, and waveform morphology. This biometric is continuously captured by any wearable with a heart rate sensor (Apple Watch, Fitbit, Galaxy Watch, Oura Ring). The user consents to heart rate monitoring, not to biometric identification from their cardiac waveform. Combined with T0088 (gait) and T0079 (ear canal), the attacker has three independent biometric channels from consumer devices.",
+      "notes": "Photoplethysmography (PPG) sensors in smartwatches and fitness trackers measure blood volume changes through green LED light reflected from the wrist. The PPG waveform shape is unique per individual — determined by cardiac output, arterial stiffness, vessel geometry, and autonomic tone. Biswas et al. (2019) demonstrated >98% identification accuracy using deep learning on PPG waveforms. Unlike heart rate (a single number), the full PPG waveform is a rich biometric containing: pulse amplitude, dicrotic notch depth, systolic/diastolic ratio, pulse transit time, and waveform morphology. This biometric is continuously captured by any wearable with a heart rate sensor (Apple Watch, Fitbit, Galaxy Watch, Oura Ring). The user consents to heart rate monitoring, not to biometric identification from their cardiac waveform. Combined with T0088 (gait) and T0079 (ear canal), the attacker has three independent biometric channels from consumer devices.",
       "legacy_ids": [],
       "legacy_technique_id": "T2088",
       "niss": {
@@ -17773,8 +17713,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -17833,7 +17773,7 @@
       "id": "QIF-T0094",
       "attack": "Magnetometer speaker-leakage eavesdropping (magnetic field emanation capture from speaker voice coils)",
       "tactic": "QIF-S.RP",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -17851,7 +17791,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "SE",
-      "notes": "Speaker voice coils are electromagnets \u2014 when driven by audio current, they produce proportional magnetic field emanations. Smartphone magnetometers (used for compass/navigation) are sensitive enough to detect these emanations from nearby speakers, earbuds, or headphones. Zhang et al. (2020) demonstrated that a smartphone's magnetometer placed within 10-20 cm of earbuds can reconstruct the audio being played, including speech. This creates an eavesdropping channel through magnetic emanations rather than acoustic leakage \u2014 it works even when the audio is not audible (noise-canceling headphones, low volume). Matyunin et al. (2019) showed that magnetometer data can also fingerprint websites and applications by their characteristic audio/vibration patterns. Magnetometer access requires no permission on most platforms, making this an unrestricted side channel.",
+      "notes": "Speaker voice coils are electromagnets — when driven by audio current, they produce proportional magnetic field emanations. Smartphone magnetometers (used for compass/navigation) are sensitive enough to detect these emanations from nearby speakers, earbuds, or headphones. Zhang et al. (2020) demonstrated that a smartphone's magnetometer placed within 10-20 cm of earbuds can reconstruct the audio being played, including speech. This creates an eavesdropping channel through magnetic emanations rather than acoustic leakage — it works even when the audio is not audible (noise-canceling headphones, low volume). Matyunin et al. (2019) showed that magnetometer data can also fingerprint websites and applications by their characteristic audio/vibration patterns. Magnetometer access requires no permission on most platforms, making this an unrestricted side channel.",
       "legacy_ids": [],
       "legacy_technique_id": "T2089",
       "niss": {
@@ -17885,7 +17825,7 @@
             "proximity_detection"
           ],
           "regulations": [
-            "ECPA (18 U.S.C. \u00a7 2511)",
+            "ECPA (18 U.S.C. § 2511)",
             "GDPR Art. 5",
             "FCC Part 15 (incidental emissions)"
           ],
@@ -17913,8 +17853,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -17971,7 +17911,7 @@
       "id": "QIF-T0095",
       "attack": "Acoustic-to-neural profiling pipeline (consumer earbud escalation from audio to cognitive exploitation)",
       "tactic": "QIF-S.CH",
-      "bands": "S1\u2192S2\u2192S3\u2192I0\u2192N1\u2192N7",
+      "bands": "S1→S2→S3→I0→N1→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -17985,7 +17925,7 @@
       "classical": "Partial",
       "quantum": "Enhanced (QI coherence metric detects unauthorized neural data acquisition)",
       "sources": [
-        "Chain synthesis from: QIF-T0072 \u2192 QIF-T0073 \u2192 QIF-T0074 \u2192 QIF-T0079",
+        "Chain synthesis from: QIF-T0072 → QIF-T0073 → QIF-T0074 → QIF-T0079",
         "Kaveh et al. 2020 (In-ear EEG, IEEE Trans Biomed Eng)",
         "Martinovic et al. 2012 (BCI side channels, USENIX Security)",
         "NEC Corporation 2016 (Ear acoustic authentication)"
@@ -17993,7 +17933,7 @@
       "status": "EMERGING",
       "severity": "critical",
       "ui_category": "EX",
-      "notes": "This technique documents the complete escalation chain from a single compromised consumer earbud to cognitive profiling. The chain proceeds: (1) T0072 \u2014 Speaker-to-mic reprogramming gives ambient audio eavesdropping, (2) T0079 \u2014 Ear canal acoustic fingerprinting silently identifies the wearer, (3) T0073 \u2014 Modified earbud with conductive ear tip captures in-ear EEG, (4) T0074 \u2014 Longitudinal EEG data feeds ML model for cognitive profiling. The end state: a single pair of compromised earbuds provides identity + ambient audio + continuous neural telemetry + personalized cognitive vulnerability profile \u2014 all from a device the target voluntarily wears for hours daily. Each step in the chain has been independently demonstrated or is emerging. The complete chain represents a consumer-device pathway to cognitive exploitation without any traditional BCI hardware. This is the canonical example of why the S-domain exists: consumer sensors as a pre-BCI attack surface.",
+      "notes": "This technique documents the complete escalation chain from a single compromised consumer earbud to cognitive profiling. The chain proceeds: (1) T0072 — Speaker-to-mic reprogramming gives ambient audio eavesdropping, (2) T0079 — Ear canal acoustic fingerprinting silently identifies the wearer, (3) T0073 — Modified earbud with conductive ear tip captures in-ear EEG, (4) T0074 — Longitudinal EEG data feeds ML model for cognitive profiling. The end state: a single pair of compromised earbuds provides identity + ambient audio + continuous neural telemetry + personalized cognitive vulnerability profile — all from a device the target voluntarily wears for hours daily. Each step in the chain has been independently demonstrated or is emerging. The complete chain represents a consumer-device pathway to cognitive exploitation without any traditional BCI hardware. This is the canonical example of why the S-domain exists: consumer sensors as a pre-BCI attack surface.",
       "legacy_ids": [],
       "legacy_technique_id": "T2090",
       "niss": {
@@ -18019,7 +17959,7 @@
         ]
       },
       "tara": {
-        "mechanism": "Multi-stage escalation chain: speaker repurposing \u2192 ear canal fingerprinting \u2192 in-ear EEG capture \u2192 ML-based cognitive profiling, all from a single compromised consumer earbud",
+        "mechanism": "Multi-stage escalation chain: speaker repurposing → ear canal fingerprinting → in-ear EEG capture → ML-based cognitive profiling, all from a single compromised consumer earbud",
         "dual_use": "confirmed",
         "clinical": {
           "therapeutic_analog": "Integrated hearing health + cognitive monitoring earbuds",
@@ -18155,8 +18095,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "CG:H,CV:I \u2192 motor/neurocognitive cluster"
+          "pathway": "N7 (PFC/M1) → executive function; I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "CG:H,CV:I → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -18164,7 +18104,7 @@
         "base_vector": "CVSS:4.0/AV:P/AC:L/AT:P/PR:N/UI:N/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:C",
         "gap_group": 3,
-        "gap_summary": "Multi-stage escalation from consumer sensor to cognitive profiling \u2014 cumulative privacy and cognitive liberty violation far exceeds any single CVSS metric"
+        "gap_summary": "Multi-stage escalation from consumer sensor to cognitive profiling — cumulative privacy and cognitive liberty violation far exceeds any single CVSS metric"
       },
       "feeds_into": {
         "targets": [
@@ -18178,8 +18118,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 2.25
       },
@@ -18217,7 +18156,7 @@
       "id": "QIF-T0096",
       "attack": "Multi-modal biometric fusion attack (cross-sensor identity correlation for persistent tracking)",
       "tactic": "QIF-S.CH",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -18235,7 +18174,7 @@
       "status": "EMERGING",
       "severity": "critical",
       "ui_category": "CI",
-      "notes": "By fusing biometric signatures from multiple consumer sensors \u2014 ear canal acoustics (T0079), gait pattern (T0088), BLE RF fingerprint (T0091), PPG waveform (T0093), and eye tracking (T0085 if VR/AR) \u2014 an attacker creates a multi-modal biometric profile that is virtually impossible to evade. Each individual biometric can potentially be disrupted (change earbuds, alter gait, disable Bluetooth), but the fusion of 3+ biometric channels provides robust identification even if individual channels are degraded. The fusion operates at the feature level (concatenated feature vectors) or decision level (majority voting across classifiers). This technique weaponizes the ubiquity of consumer sensors: the average person carries 10+ sensors across phone, watch, and earbuds. The combination creates a biometric surveillance net that no single privacy measure can defeat.",
+      "notes": "By fusing biometric signatures from multiple consumer sensors — ear canal acoustics (T0079), gait pattern (T0088), BLE RF fingerprint (T0091), PPG waveform (T0093), and eye tracking (T0085 if VR/AR) — an attacker creates a multi-modal biometric profile that is virtually impossible to evade. Each individual biometric can potentially be disrupted (change earbuds, alter gait, disable Bluetooth), but the fusion of 3+ biometric channels provides robust identification even if individual channels are degraded. The fusion operates at the feature level (concatenated feature vectors) or decision level (majority voting across classifiers). This technique weaponizes the ubiquity of consumer sensors: the average person carries 10+ sensors across phone, watch, and earbuds. The combination creates a biometric surveillance net that no single privacy measure can defeat.",
       "legacy_ids": [],
       "legacy_technique_id": "T2091",
       "niss": {
@@ -18314,8 +18253,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -18374,7 +18313,7 @@
       "id": "QIF-T0097",
       "attack": "Cross-device physiological correlation (phone + watch + earbuds comprehensive health profiling)",
       "tactic": "QIF-S.CH",
-      "bands": "S1\u2192S2\u2192S3\u2192N7",
+      "bands": "S1→S2→S3→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -18393,7 +18332,7 @@
       "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "SE",
-      "notes": "The average consumer now carries 3+ sensor-equipped devices: smartphone (accelerometer, gyroscope, magnetometer, barometer, camera, microphone, ambient light, proximity, WiFi, BLE), smartwatch (PPG, accelerometer, gyroscope, SpO2, skin temperature, ECG), and earbuds (microphone, accelerometer, proximity, potentially EEG). By correlating physiological data across all devices simultaneously, an attacker builds a comprehensive health profile far exceeding what any single device captures: cardiac health (watch PPG + phone rPPG), respiratory health (phone ultrasonic + WiFi CSI), neurological health (earbud IMU tremor + phone motor patterns), mental health (watch HRV + earbud audio context + phone screen activity), and metabolic health (activity + sleep + heart rate patterns). The correlation also eliminates single-sensor noise and improves accuracy. This technique doesn't require hardware modification \u2014 only software-level data aggregation across apps on a shared platform (e.g., iOS HealthKit, Google Health Connect).",
+      "notes": "The average consumer now carries 3+ sensor-equipped devices: smartphone (accelerometer, gyroscope, magnetometer, barometer, camera, microphone, ambient light, proximity, WiFi, BLE), smartwatch (PPG, accelerometer, gyroscope, SpO2, skin temperature, ECG), and earbuds (microphone, accelerometer, proximity, potentially EEG). By correlating physiological data across all devices simultaneously, an attacker builds a comprehensive health profile far exceeding what any single device captures: cardiac health (watch PPG + phone rPPG), respiratory health (phone ultrasonic + WiFi CSI), neurological health (earbud IMU tremor + phone motor patterns), mental health (watch HRV + earbud audio context + phone screen activity), and metabolic health (activity + sleep + heart rate patterns). The correlation also eliminates single-sensor noise and improves accuracy. This technique doesn't require hardware modification — only software-level data aggregation across apps on a shared platform (e.g., iOS HealthKit, Google Health Connect).",
       "legacy_ids": [],
       "legacy_technique_id": "T2092",
       "niss": {
@@ -18532,8 +18471,8 @@
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "N7 (PFC/M1) \u2192 executive function",
-          "niss_correlation": "CV:I \u2192 cognitive/psychotic cluster"
+          "pathway": "N7 (PFC/M1) → executive function",
+          "niss_correlation": "CV:I → cognitive/psychotic cluster"
         }
       },
       "cvss": {
@@ -18541,7 +18480,7 @@
         "base_vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
         "supplemental": "S:P/AU:Y/R:A/V:D",
         "gap_group": 3,
-        "gap_summary": "Comprehensive cross-device health profiling \u2014 aggregate health privacy violation far exceeds individual sensor CVSS scores"
+        "gap_summary": "Comprehensive cross-device health profiling — aggregate health privacy violation far exceeds individual sensor CVSS scores"
       },
       "feeds_into": {
         "targets": [
@@ -18593,7 +18532,7 @@
       "id": "QIF-T0098",
       "attack": "WiFi + camera passive surveillance fusion (through-wall presence detection with visual identification)",
       "tactic": "QIF-S.CH",
-      "bands": "S1\u2192S2\u2192S3",
+      "bands": "S1→S2→S3",
       "band_ids": [
         "S1",
         "S2",
@@ -18691,8 +18630,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -18751,7 +18690,7 @@
       "id": "QIF-T0099",
       "attack": "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
       "tactic": "QIF-S.CH",
-      "bands": "S1\u2192S2\u2192S3\u2192I0\u2192N1\u2192N7",
+      "bands": "S1→S2→S3→I0→N1→N7",
       "band_ids": [
         "S1",
         "S2",
@@ -18765,7 +18704,7 @@
       "classical": "Partial",
       "quantum": "Enhanced (QI coherence metric monitors S-domain-to-BCI transition integrity)",
       "sources": [
-        "Chain synthesis from: S-domain techniques \u2192 core TARA BCI techniques",
+        "Chain synthesis from: S-domain techniques → core TARA BCI techniques",
         "Yuste et al. 2017 (Four ethical priorities for neurotechnologies and AI, Nature)",
         "Ienca & Andorno 2017 (Towards new human rights in the age of neuroscience, Life Sciences Society and Policy)",
         "Landau et al. 2020 (Mind Reading: An Idea Whose Time Has Come?)"
@@ -18773,7 +18712,7 @@
       "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "EX",
-      "notes": "This capstone technique documents the full S-domain-to-BCI escalation kill chain: how consumer sensor exploitation serves as reconnaissance and preparation for subsequent BCI attacks. The chain proceeds in phases: (1) RECON \u2014 Consumer sensors (phone, watch, earbuds) establish behavioral baseline: gait patterns (T0088), cardiac signature (T0093), neurological profile (T0089), cognitive patterns (T0085 if VR/AR). (2) FINGERPRINT \u2014 Multi-modal biometric fusion (T0096) creates persistent identity profile. (3) PROFILE \u2014 Cross-device correlation (T0097) builds comprehensive health/cognitive baseline. (4) ESCALATE \u2014 When the target receives a BCI (medical implant, consumer neural interface), the attacker's pre-existing profile informs: optimal attack parameters for neural injection (calibrated to individual's neural baseline), personalized evasion of anomaly detection (trained on their 'normal'), and targeted cognitive exploitation (leveraging known cognitive vulnerabilities). The S-domain reconnaissance makes BCI attacks more effective, more targeted, and harder to detect. This technique represents the strategic justification for the entire S-domain: consumer sensors are the advance scout for future BCI exploitation.",
+      "notes": "This capstone technique documents the full S-domain-to-BCI escalation kill chain: how consumer sensor exploitation serves as reconnaissance and preparation for subsequent BCI attacks. The chain proceeds in phases: (1) RECON — Consumer sensors (phone, watch, earbuds) establish behavioral baseline: gait patterns (T0088), cardiac signature (T0093), neurological profile (T0089), cognitive patterns (T0085 if VR/AR). (2) FINGERPRINT — Multi-modal biometric fusion (T0096) creates persistent identity profile. (3) PROFILE — Cross-device correlation (T0097) builds comprehensive health/cognitive baseline. (4) ESCALATE — When the target receives a BCI (medical implant, consumer neural interface), the attacker's pre-existing profile informs: optimal attack parameters for neural injection (calibrated to individual's neural baseline), personalized evasion of anomaly detection (trained on their 'normal'), and targeted cognitive exploitation (leveraging known cognitive vulnerabilities). The S-domain reconnaissance makes BCI attacks more effective, more targeted, and harder to detect. This technique represents the strategic justification for the entire S-domain: consumer sensors are the advance scout for future BCI exploitation.",
       "legacy_ids": [],
       "legacy_technique_id": "T2094",
       "niss": {
@@ -18945,8 +18884,8 @@
           ],
           "risk_class": "direct",
           "cluster": "motor_neurocognitive",
-          "pathway": "N7 (PFC/M1) \u2192 executive function; I0 (electrode-tissue boundary) \u2192 measurement",
-          "niss_correlation": "CG:H,CV:I \u2192 motor/neurocognitive cluster"
+          "pathway": "N7 (PFC/M1) → executive function; I0 (electrode-tissue boundary) → measurement",
+          "niss_correlation": "CG:H,CV:I → motor/neurocognitive cluster"
         }
       },
       "cvss": {
@@ -18954,7 +18893,7 @@
         "base_vector": "CVSS:4.0/AV:N/AC:H/AT:P/PR:L/UI:N/VC:H/VI:H/VA:L/SC:H/SI:H/SA:L",
         "supplemental": "S:P/AU:Y/R:U/V:C",
         "gap_group": 3,
-        "gap_summary": "Full consumer-to-BCI kill chain \u2014 the culmination of all S-domain techniques feeding BCI exploitation; cognitive sovereignty violation at maximum scope; no CVSS equivalent"
+        "gap_summary": "Full consumer-to-BCI kill chain — the culmination of all S-domain techniques feeding BCI exploitation; cognitive sovereignty violation at maximum scope; no CVSS equivalent"
       },
       "feeds_into": {
         "targets": [
@@ -18971,8 +18910,7 @@
         "affected": [
           "MP",
           "CL",
-          "MI",
-          "CA"
+          "MI"
         ],
         "cci": 2.7
       },
@@ -19011,7 +18949,7 @@
       "id": "QIF-T0100",
       "attack": "Neural steganographic encoding (inaudible audio watermarking for covert neural command/biofingerprint channel)",
       "tactic": "QIF-S.CH",
-      "bands": "S3\u2192S1\u2192I0\u2192N1\u2192N4\u2192N7",
+      "bands": "S3→S1→I0→N1→N4→N7",
       "band_ids": [
         "S3",
         "S1",
@@ -19035,7 +18973,7 @@
       "status": "PLAUSIBLE",
       "severity": "low",
       "ui_category": "CI",
-      "notes": "Embedding data in audio signals below the human hearing threshold (>18 kHz ultrasonic or <20 Hz infrasonic) or within psychoacoustic masking bands of audible content. The encoded signal is imperceptible to the listener but decodable by a receiver with knowledge of the encoding scheme. In the adversarial case, the hidden channel carries covert commands, tracking identifiers, or subliminal cues targeting auditory processing pathways (e.g., triggering pre-conditioned responses or influencing decision-making). In the protective case, the same physics enables steganographic embedding of neural biofingerprints for authentication \u2014 the signal evokes a measurable auditory evoked potential (AEP) unique to the individual's cochlear geometry and auditory cortex response, functioning as a biometric watermark. Initial enrollment/profiling phase required to capture individual's unique AEP response. Practical constraints include target device's ability to accurately reproduce encoded frequencies and effective transmission range (1-10m). Psychoacoustic masking threshold follows: T_mask(f) = L_masker - (sf \u00d7 |f - f_masker|) where sf is the spreading factor (~25 dB/Bark on upper slope, ~10 dB/Bark on lower slope). Auditory steady-state response (ASSR) at 40 Hz provides the mechanism for neural biofingerprint verification. Proves TARA's cross-domain dual-use thesis: same physics operates as attack vector, defense mechanism, and therapeutic tool.",
+      "notes": "Embedding data in audio signals below the human hearing threshold (>18 kHz ultrasonic or <20 Hz infrasonic) or within psychoacoustic masking bands of audible content. The encoded signal is imperceptible to the listener but decodable by a receiver with knowledge of the encoding scheme. In the adversarial case, the hidden channel carries covert commands, tracking identifiers, or subliminal cues targeting auditory processing pathways (e.g., triggering pre-conditioned responses or influencing decision-making). In the protective case, the same physics enables steganographic embedding of neural biofingerprints for authentication — the signal evokes a measurable auditory evoked potential (AEP) unique to the individual's cochlear geometry and auditory cortex response, functioning as a biometric watermark. Initial enrollment/profiling phase required to capture individual's unique AEP response. Practical constraints include target device's ability to accurately reproduce encoded frequencies and effective transmission range (1-10m). Psychoacoustic masking threshold follows: T_mask(f) = L_masker - (sf × |f - f_masker|) where sf is the spreading factor (~25 dB/Bark on upper slope, ~10 dB/Bark on lower slope). Auditory steady-state response (ASSR) at 40 Hz provides the mechanism for neural biofingerprint verification. Proves TARA's cross-domain dual-use thesis: same physics operates as attack vector, defense mechanism, and therapeutic tool.",
       "legacy_ids": [],
       "legacy_technique_id": "T2100",
       "niss": {
@@ -19119,8 +19057,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S\u2192I0\u2192N pathway exists but covert channel alone does not induce diagnostic-level effects",
-          "niss_correlation": "CG:L \u2014 subliminal processing; no tissue damage or neuroplastic change"
+          "pathway": "S→I0→N pathway exists but covert channel alone does not induce diagnostic-level effects",
+          "niss_correlation": "CG:L — subliminal processing; no tissue damage or neuroplastic change"
         }
       },
       "cvss": {
@@ -19180,7 +19118,7 @@
       "id": "QIF-T0101",
       "attack": "Multi-modal keystroke inference via acoustic-optical-RF fusion (password/input recovery without mic/camera permissions)",
       "tactic": "QIF-S.SC",
-      "bands": "S3\u2192S2\u2192S1",
+      "bands": "S3→S2→S1",
       "band_ids": [
         "S3",
         "S2",
@@ -19200,7 +19138,7 @@
       "status": "DEMONSTRATED",
       "severity": "medium",
       "ui_category": "EX",
-      "notes": "Fusion of three independent side channels from a single mobile device to reconstruct user input without requiring microphone, camera, or accessibility permissions. (1) Keystroke acoustic emanations: each key press produces a distinct acoustic signature (1-20 kHz broadband impulse, classifiable via MFCC + CNN at ~95% accuracy on laptops, lower but still viable on touchscreens). (2) Screen optical emission: display luminance changes of ~0.1-1% per character insertion detectable by ambient light sensor at <0.01 lux sensitivity. (3) WiFi CSI: finger movements modulate OFDM subcarrier phase \u2014 \u03c3\u00b2_phase > threshold indicates keystroke events. Individual channel accuracy: 60-70% acoustic, 40-50% optical, 55-65% WiFi CSI. Fused via CRF/LSTM with temporal cross-correlation alignment: >95% accuracy with 30+ training samples per key. Critical insight: apps requesting speaker + WiFi permissions (trivially granted) achieve side-channel equivalent to camera + microphone (heavily restricted). Permission model does not reflect actual threat.",
+      "notes": "Fusion of three independent side channels from a single mobile device to reconstruct user input without requiring microphone, camera, or accessibility permissions. (1) Keystroke acoustic emanations: each key press produces a distinct acoustic signature (1-20 kHz broadband impulse, classifiable via MFCC + CNN at ~95% accuracy on laptops, lower but still viable on touchscreens). (2) Screen optical emission: display luminance changes of ~0.1-1% per character insertion detectable by ambient light sensor at <0.01 lux sensitivity. (3) WiFi CSI: finger movements modulate OFDM subcarrier phase — σ²_phase > threshold indicates keystroke events. Individual channel accuracy: 60-70% acoustic, 40-50% optical, 55-65% WiFi CSI. Fused via CRF/LSTM with temporal cross-correlation alignment: >95% accuracy with 30+ training samples per key. Critical insight: apps requesting speaker + WiFi permissions (trivially granted) achieve side-channel equivalent to camera + microphone (heavily restricted). Permission model does not reflect actual threat.",
       "legacy_ids": [],
       "legacy_technique_id": "T2101",
       "niss": {
@@ -19285,8 +19223,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -19344,7 +19282,7 @@
       "id": "QIF-T0102",
       "attack": "Passive facial geometry estimation via display-as-illuminator inverse photometry (presence/orientation detection without camera)",
       "tactic": "QIF-S.SC",
-      "bands": "S3\u2192S2",
+      "bands": "S3→S2",
       "band_ids": [
         "S3",
         "S2"
@@ -19362,7 +19300,7 @@
       "status": "SPECULATIVE",
       "severity": "low",
       "ui_category": "CI",
-      "notes": "The device display functions as a structured light source \u2014 each frame emits a known photon distribution. Reflected light from the user's face is captured by the ambient light sensor (ALS). The known spectral emission S(x,y,\u03bb) and measured reflected irradiance E_sensor = \u222b\u222b \u03c1(x,y)cos(\u03b8)S(x,y,\u03bb)/r\u00b2 dA constrain an inverse photometry problem. CRITICAL FEASIBILITY CAVEAT: A single ALS integrates the entire reflected light field into one scalar value, making 3D geometric reconstruction an ill-posed inverse problem. With current single-sensor hardware, achievable resolution is limited to basic presence detection, head orientation, and coarse proximity estimation \u2014 NOT high-fidelity facial geometry. Identity matching might be feasible only against a small template library with strong a priori constraints. Future multi-pixel ALS or multi-sensor arrays could significantly improve reconstruction fidelity. Despite geometric limitations, the same ALS reliably detects physiological signals: pulse-modulated skin reflectance for PPG heart rate (demonstrated in Samsung Galaxy phones) and skin color variations for SpO2 estimation.",
+      "notes": "The device display functions as a structured light source — each frame emits a known photon distribution. Reflected light from the user's face is captured by the ambient light sensor (ALS). The known spectral emission S(x,y,λ) and measured reflected irradiance E_sensor = ∫∫ ρ(x,y)cos(θ)S(x,y,λ)/r² dA constrain an inverse photometry problem. CRITICAL FEASIBILITY CAVEAT: A single ALS integrates the entire reflected light field into one scalar value, making 3D geometric reconstruction an ill-posed inverse problem. With current single-sensor hardware, achievable resolution is limited to basic presence detection, head orientation, and coarse proximity estimation — NOT high-fidelity facial geometry. Identity matching might be feasible only against a small template library with strong a priori constraints. Future multi-pixel ALS or multi-sensor arrays could significantly improve reconstruction fidelity. Despite geometric limitations, the same ALS reliably detects physiological signals: pulse-modulated skin reflectance for PPG heart rate (demonstrated in Samsung Galaxy phones) and skin color variations for SpO2 estimation.",
       "legacy_ids": [],
       "legacy_technique_id": "T2102",
       "niss": {
@@ -19440,8 +19378,8 @@
           "secondary": [],
           "risk_class": "none",
           "cluster": "non_diagnostic",
-          "pathway": "S-domain only \u2014 no neural pathway",
-          "niss_correlation": "Silicon-only technique \u2014 no diagnostic mapping"
+          "pathway": "S-domain only — no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
         }
       },
       "cvss": {
@@ -19498,8 +19436,12 @@
       "id": "QIF-T0103",
       "attack": "SSVEP Frequency Hijack via Imperceptible Display Flicker",
       "tactic": "QIF-C.EX",
-      "bands": "S3\u2192N7",
-      "band_ids": ["S3", "I0", "N7"],
+      "bands": "S3→N7",
+      "band_ids": [
+        "S3",
+        "I0",
+        "N7"
+      ],
       "coupling": null,
       "access": null,
       "classical": "Yes (stimulus presentation is classical)",
@@ -19524,8 +19466,15 @@
         "pins": false
       },
       "cross_references": {
-        "related_ids": ["QIF-T0040", "QIF-T0010", "QIF-T0009"],
-        "secondary_tactics": ["QIF-N.IJ", "QIF-B.IN"]
+        "related_ids": [
+          "QIF-T0040",
+          "QIF-T0010",
+          "QIF-T0009"
+        ],
+        "secondary_tactics": [
+          "QIF-N.IJ",
+          "QIF-B.IN"
+        ]
       },
       "tara": {
         "mechanism": "Display renders imperceptible flicker patterns at frequencies matching SSVEP response bands. Visual cortex phase-locks to stimulus below conscious awareness. BCI decoder interprets evoked response as user command or is jammed by broadband interference.",
@@ -19547,34 +19496,65 @@
         },
         "governance": {
           "consent_tier": "enhanced",
-          "monitoring": ["display_flicker_audit", "SSVEP_response_monitoring", "seizure_risk_screening"],
-          "regulations": ["HIPAA", "GDPR Art. 9", "IEC 62304 (display firmware)", "proposed neurorights legislation"],
+          "monitoring": [
+            "display_flicker_audit",
+            "SSVEP_response_monitoring",
+            "seizure_risk_screening"
+          ],
+          "regulations": [
+            "HIPAA",
+            "GDPR Art. 9",
+            "IEC 62304 (display firmware)",
+            "proposed neurorights legislation"
+          ],
           "data_classification": "sensitive_neural",
           "safety_ceiling": "No covert visual stimulation; photosensitive epilepsy screening mandatory; display firmware integrity verification"
         },
         "engineering": {
-          "coupling": ["electromagnetic"],
+          "coupling": [
+            "electromagnetic"
+          ],
           "parameters": {
             "frequency_hz": "60+ (above CFF, imperceptible)",
             "modality": "visual (display backlight or pixel modulation)",
             "information_rate_bpm": "52.8 (demonstrated)",
             "attack_range": "line of sight to display"
           },
-          "hardware": ["display_panel", "backlight_controller", "BCI_headset"],
+          "hardware": [
+            "display_panel",
+            "backlight_controller",
+            "BCI_headset"
+          ],
           "detection": "Display frame-rate analysis, sub-frame luminance monitoring, SSVEP response correlation with non-user-initiated stimuli, firmware integrity checking on display controllers"
         },
         "dsm5": {
           "primary": [
-            {"code": "G40.4", "name": "Photosensitive Epilepsy", "confidence": "established"},
-            {"code": "F44", "name": "Conversion Disorder (functional neurological)", "confidence": "probable"}
+            {
+              "code": "G40.4",
+              "name": "Photosensitive Epilepsy",
+              "confidence": "established"
+            },
+            {
+              "code": "F44",
+              "name": "Conversion Disorder (functional neurological)",
+              "confidence": "probable"
+            }
           ],
           "secondary": [
-            {"code": "F41", "name": "Anxiety Disorders", "confidence": "probable"},
-            {"code": "F43.1", "name": "PTSD", "confidence": "theoretical"}
+            {
+              "code": "F41",
+              "name": "Anxiety Disorders",
+              "confidence": "probable"
+            },
+            {
+              "code": "F43.1",
+              "name": "PTSD",
+              "confidence": "theoretical"
+            }
           ],
           "risk_class": "direct",
           "cluster": "cognitive_psychotic",
-          "pathway": "S3 (display) \u2192 I0 (retina/optic nerve) \u2192 N7 (visual cortex V1) \u2192 BCI decoder",
+          "pathway": "S3 (display) → I0 (retina/optic nerve) → N7 (visual cortex V1) → BCI decoder",
           "niss_correlation": "BI:L (seizure risk), CG:H (false command injection), CV:I (no consent)"
         }
       },
@@ -19586,7 +19566,10 @@
         "gap_summary": "CVSS cannot express neural command injection via visual pathway; seizure induction risk has no CVSS dimension"
       },
       "neurorights": {
-        "affected": ["CA", "MI", "MP"],
+        "affected": [
+          "MP",
+          "MI"
+        ],
         "cci": 1.4
       },
       "regulatory": {
@@ -19597,9 +19580,18 @@
             "network_connectable": true,
             "vulnerable": true
           },
-          "applicable_requirements": ["TM", "VA", "SBOM", "PM"],
+          "applicable_requirements": [
+            "TM",
+            "VA",
+            "SBOM",
+            "PM"
+          ],
           "coverage_score": 0.3,
-          "gaps": ["Display firmware not typically in SBOM scope", "No FDA pathway for display-as-attack-vector", "Photosensitive seizure risk not in cybersecurity threat models"]
+          "gaps": [
+            "Display firmware not typically in SBOM scope",
+            "No FDA pathway for display-as-attack-vector",
+            "Photosensitive seizure risk not in cybersecurity threat models"
+          ]
         }
       },
       "physics_feasibility": {
@@ -19636,37 +19628,37 @@
     {
       "code": "N",
       "name": "Neural",
-      "description": "Direct interface with neural tissue \u2014 signal manipulation, electrode boundary, ion channels."
+      "description": "Direct interface with neural tissue — signal manipulation, electrode boundary, ion channels."
     },
     {
       "code": "C",
       "name": "Cognitive",
-      "description": "Higher-order psychological processes \u2014 memory, attention, identity, agency."
+      "description": "Higher-order psychological processes — memory, attention, identity, agency."
     },
     {
       "code": "P",
       "name": "Physiological",
-      "description": "Somatic systems \u2014 motor control, autonomic functions, physical harm."
+      "description": "Somatic systems — motor control, autonomic functions, physical harm."
     },
     {
       "code": "D",
       "name": "Data",
-      "description": "Information acquisition and manipulation \u2014 brainwave recordings, neural metadata."
+      "description": "Information acquisition and manipulation — brainwave recordings, neural metadata."
     },
     {
       "code": "B",
       "name": "BCI System",
-      "description": "Hardware/software of the BCI device \u2014 firmware, protocols, authentication."
+      "description": "Hardware/software of the BCI device — firmware, protocols, authentication."
     },
     {
       "code": "M",
       "name": "Model",
-      "description": "Machine learning models used in BCI \u2014 decoders, classifiers, feedback systems."
+      "description": "Machine learning models used in BCI — decoders, classifiers, feedback systems."
     },
     {
       "code": "E",
       "name": "Energy",
-      "description": "Directed energy attacks \u2014 ELF, microwave, RF, temporal interference."
+      "description": "Directed energy attacks — ELF, microwave, RF, temporal interference."
     }
   ],
   "niss_spec": {
@@ -19779,7 +19771,7 @@
   },
   "tara_spec": {
     "version": "1.0",
-    "name": "TARA \u2014 Therapeutic Applications & Risk Assessment",
+    "name": "TARA — Therapeutic Applications & Risk Assessment",
     "description": "Mechanism-first Rosetta Stone. Same physical phenomenon, four stakeholder views. Security researchers see attack vectors. Clinicians see therapeutic modalities. Regulators see compliance requirements. Engineers see physical parameters.",
     "dual_use_classifications": {
       "confirmed": "Published therapeutic and security applications exist for this mechanism",
@@ -19833,7 +19825,7 @@
     "version": "1.0",
     "name": "DSM-5-TR Diagnostic Mapping via Neural Impact Chain",
     "description": "Maps BCI techniques to psychiatric diagnoses through the hourglass band model. NISS metrics predict diagnostic clusters. First known formal BCI threat-to-psychiatric-diagnosis taxonomy.",
-    "methodology": "Band \u2192 Structure \u2192 Function \u2192 NISS (quantitative) + DSM (qualitative)",
+    "methodology": "Band → Structure → Function → NISS (quantitative) + DSM (qualitative)",
     "positioning": "RDoC-aligned, BCI-specific, with quantitative bridge (NISS) to traditional nosology (DSM-5-TR)",
     "band_profiles": {
       "N7": {

@@ -21,9 +21,9 @@
 
 ### Table of Contents (by date)
 
-| Date | Event | Link |
-|------|-------|------|
-| 2026-02-18 | **T0103 Detection Methods + Ethical Neurosecurity Governance Gaps.** Added detection section to T0103 blog: PC detection (SIEM, spectral analysis, GPU forensics) and BCI detection (stimulus-response correlation, alpha/beta monitoring, cross-frequency coupling, temporal coherence, spatial validation). Key insight: no BCI-SIEM, no neural IDS, no standard for compromised EEG baseline. Added Intent statement to Code of Ethics: "protect researchers and the people whose cognitive sovereignty they are working to defend." Identified 10 governance gaps (bug bounty, safe harbor, responsible disclosure pipeline, researcher onboarding, CVE lifecycle, dual-use review, pentesting ROE, IRB template, certification, contribution guide). SAIL Lab full intel consolidated: 2 BCI papers, VSF-Med as most instrumentalizable framework, venue discrepancy caught (SMC 2023 not NER '23). | [Entry 67](#entry-67-detection-methods-governance-gaps) |
+| 2026-02-21 | **NIST/ISO Hardened Compliance Mapping.** Introduction of the "Hardened Mapping" bridge to link neurorights (MI, MP, CL, PC) to auditable technical evidence (NIST SP 800-53 / ISO 27001). Implemented in `qtara-registrar.json`. | [Entry 69](#entry-69-nist-iso-hardened-mapping) |
+| 2026-02-20 | **Cognitive Authenticity (CA) Folded into Mental Integrity (MI).** CA was not a genuinely novel right. Ienca & Andorno (2017) MI already covers "protection from unauthorized alteration of neural function," which subsumes write-attacks. CA removed from all source files. | [Entry 68](#entry-68-ca-folded-into-mi) |
+| 2026-02-18 | **T0103 Detection Methods + Ethical Neurosecurity Governance Gaps.** Added detection section to T0103 blog. | [Entry 67](#entry-67-detection-methods-governance-gaps) |
 | 2026-02-18 | **SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation.** Subliminal visual attacks on BCIs: monitors flickering above CFF (~60Hz) evoke SSVEP responses invisible to users. Ming et al. 2023 proved 60Hz imperceptible flickers produce classifiable brain responses (52.8 bits/min). TARA coverage confirmed solid (T0040, T0010, T0009 already mapped). New technique QIF-T0103 added for dedicated SSVEP frequency hijack. BCI limits equation cross-validated by Gemini (12 constraints confirmed). Guardrails doc corrected: physics = boundary not control. Governance risk tagged for hardware vs software charge protection. | [Entry 66](#entry-66-ssvep-frequency-hijack-discovery) |
 | 2026-02-18 | **Physics Feasibility Tiering of TARA Techniques.** All 102 techniques classified by physics hardware gate: 61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only. Highest-impact future attacks identified. | [Entry 65](#entry-65-physics-feasibility-tiering) |
 | 2026-02-18 | **BCI Limits Equation Blog Post Published.** Blog post at `/publications/2026-02-18-the-physics-equation-that-limits-every-brain-computer-interface`. Priority timestamp established. | [Entry 64](#entry-64-bci-limits-blog-published) |
@@ -146,8 +146,10 @@ Each entry follows this structure:
 
 | # | Date | Title | Status |
 |---|------|-------|--------|
-| 68 | 2026-02-18 | Security Guardrails Synthesis + SSVEP Discovery + Thalamic Gate Model — Raw Session | ANALYSIS + DISCOVERY + GOVERNANCE |
-| 67 | 2026-02-18 | T0103 Detection Methods + Ethical Neurosecurity Governance Gaps | ANALYSIS + GOVERNANCE |
+| 69 | 2026-02-21 | NIST/ISO Hardened Compliance Mapping — Bridging Ethics to Evidence | GOVERNANCE + IMPLEMENTATION |
+| 68 | 2026-02-20 | Cognitive Authenticity (CA) Folded into Mental Integrity (MI) | CORRECTION |
+| 67 | 2026-02-18 | Security Guardrails Synthesis + SSVEP Discovery + Thalamic Gate Model — Raw Session | ANALYSIS + DISCOVERY + GOVERNANCE |
+| 66 | 2026-02-18 | T0103 Detection Methods + Ethical Neurosecurity Governance Gaps | ANALYSIS + GOVERNANCE |
 | 66 | 2026-02-18 | SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation | DISCOVERY + VERIFIED |
 | 65 | 2026-02-18 | Physics Feasibility Tiering of TARA Techniques | ANALYSIS |
 | 64 | 2026-02-18 | BCI Limits Equation Blog Post — Published | PUBLISHED |
@@ -196,6 +198,36 @@ Each entry follows this structure:
 | 3 | 2026-02-02 ~afternoon | Layer Consolidation: 14 Is Too Many | Validated — redesign in progress |
 | 2 | 2026-02-02 ~afternoon | Circular Topology: L8 Touches L1 | Validated — superseded by hourglass (Entry 7) |
 | 1 | 2026-02-02 ~afternoon | OSI Layers Are Meaningless for BCI | Validated — drives framework redesign |
+---
+
+## Entry 69: NIST/ISO Hardened Compliance Mapping — Bridging Ethics to Evidence {#entry-69-nist-iso-hardened-mapping}
+
+**Date:** 2026-02-21, ~04:50
+**Classification:** GOVERNANCE + IMPLEMENTATION
+**AI Systems:** Antigravity (Gemini 2.0 Pro)
+**Connected entries:** Entry 68 (Neurorights Consolidation), Entry 58 (Neurorights Cross-Validation)
+
+### The Derivation
+
+During the audit of `REGULATORY_COMPLIANCE.md`, a recurring gap was identified: while frameworks like UNESCO (2025) and CCPA SB 1223 provide strong "Principles" (Neurorights), they lack the technical "Evidence" definitions required for a security engineer or auditor to verify compliance at the signal level.
+
+The derived solution is the **"Hardened Mapping"** bridge.
+
+1.  **Objective**: Standardize the "Evidence of Compliance" for neural interfaces by anchoring them in established cybersecurity controls (NIST SP 800-53 and ISO/IEC 27001).
+2.  **The Bridge**:
+    *   **Cognitive Liberty** is not just a right; it is technically enforced by **NIST AC-3 (Access Control)** and verified by `firewall.log` REJECT counts.
+    *   **Mental Privacy** is not just a right; it is technically enforced by **NIST SC-28 (Protection of Information at Rest/Transition)** and verified by `anonymizer.log` differential privacy logs.
+3.  **The Registry Addition**: The `qtara-registrar.json` was updated to include these mappings directly in the technique blocks, enabling "Compliance-as-Code" (CaC) for neural devices.
+
+### Why it matters for QIF
+
+This moves QIF from a "Threat Registry" to a "Verified Compliance Framework." It allows BCI manufacturers to say not just "we follow the law," but "our firewall logs provide the technical evidence of NIST AC-3 compliance as mapped to Cognitive Liberty."
+
+### AI Collaboration
+
+*   **Antigravity (Gemini 2.0 Pro):** Proposed the "Hardened Mapping" architecture, implemented the JSON synchronization via Python automation, and drafted the governance bridging documentation.
+*   **Human decided:** Final validation of NIST/ISO mappings, selection of representative techniques for initial implementation (T0001, T0002, T0052, T0034).
+
 ---
 
 ## Entry 68: Security Guardrails Synthesis + SSVEP Discovery + Thalamic Gate Model — Raw Session {#entry-68-guardrails-ssvep-thalamic-gate-raw}
@@ -363,6 +395,42 @@ Alright, that's enough for today. Let's wrap up. Document, update derivation log
   - Reframed "normal people" to cognitive sovereignty language
   - Ethics code needs community contributors, not just solo authorship
   - Scaling problem acknowledged: "not efficient for just myself to learn, discover, post, blog, research, and test exploits"
+
+---
+
+## Entry 68: Cognitive Authenticity (CA) Folded into Mental Integrity (MI) {#entry-68-ca-folded-into-mi}
+
+**Date:** 2026-02-20, ~23:45
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 57 (Neurorights Restructuring), Entry 58 (Cross-Validation)
+
+### Correction
+
+Entries 57 and 58 concluded that Cognitive Authenticity (CA) was a genuinely novel QIF contribution, filling a gap between "reading neural data" (Mental Privacy) and "writing into neural signals" (CA). On further review, this was incorrect.
+
+Ienca & Andorno (2017) already drew this line:
+- **Mental Privacy (MP)** = don't read my neural data without consent
+- **Mental Integrity (MI)** = don't write into or alter my neural signals without consent
+
+The read/write distinction maps directly to their existing MP and MI. QIF was renaming, not discovering. CA has been folded into MI across the entire codebase.
+
+### What QIF Actually Contributes
+
+QIF's genuine contributions to the neurorights framework are:
+1. **Engineering-level depth on MI:** Signal dynamics protections (detecting oscillatory disruption, timing attacks, homeostatic retuning)
+2. **Engineering-level depth on MP:** Data-lifecycle protections (cross-modal re-identification, per-modality consent)
+3. **CIA triad mapping:** MP = Confidentiality, MI = Integrity
+4. **Concrete demonstration:** LSL CVE exploit chain showing both MP and MI violations
+
+### Files Changed
+
+CA references removed from: governance/NEUROETHICS_ALIGNMENT.md, governance/CODE_OF_CONDUCT.md, qif-framework/QIF-TRUTH.md, src/lib/threat-data.ts, src/lib/brain-view-data.ts, src/lib/neurogovernance-data.ts, src/lib/glossary-constants.ts, src/pages/neurogovernance.astro, src/pages/whitepaper/index.astro, src/pages/whitepaper/v6.astro, src/pages/TARA/[id].astro, src/data/milestones.json, shared/qif-ethics-controls.json, shared/qtara-registrar.json (62 techniques), scripts/enrich-neurorights.py, blogs/2026-02-16-your-brain-has-rights-we-counted-them.md, and archive ONI_Whitepaper.md copies.
+
+### AI Collaboration
+
+- **Claude Opus 4.6:** Systematic search and removal of CA across codebase
+- **Human decided:** Kevin identified that MI from Ienca & Andorno already covers what CA described. Decision to fold CA into MI rather than keep as original.
 
 ---
 

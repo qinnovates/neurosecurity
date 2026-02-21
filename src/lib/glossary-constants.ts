@@ -229,16 +229,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     type: 'principle',
     shortDef: 'Right to maintain personal identity, memory, and sense of self.',
     fullDef: 'Protection against identity manipulation, memory tampering, and personality modification. Particularly critical for developing brains (pediatric considerations) and long-term BCI users whose neural patterns may adapt to device interaction.',
-    relatedTerms: ['cognitive-liberty', 'cognitive-authenticity'],
-    tags: ['principle', 'neuroethics'],
-  },
-  {
-    id: 'cognitive-authenticity',
-    term: 'Cognitive Authenticity',
-    type: 'principle',
-    shortDef: 'Right to know which thoughts are genuinely one\'s own — protection from write-attacks on neural signals.',
-    fullDef: 'Protection from implanted thoughts, covert influence, and confusion of agency. QIF\'s original contribution to the neurorights literature: no prior framework distinguished read-attacks (Mental Privacy) from write-attacks (Cognitive Authenticity). Maps to the integrity/authenticity dimension of the CIA triad. The coherence metric provides a quantitative basis for authenticity assessment: signals that do not match expected biological patterns may not be authentic to the user.',
-    relatedTerms: ['coherence-metric', 'cognitive-liberty', 'mental-privacy'],
+    relatedTerms: ['cognitive-liberty', 'mental-privacy'],
     tags: ['principle', 'neuroethics'],
   },
 

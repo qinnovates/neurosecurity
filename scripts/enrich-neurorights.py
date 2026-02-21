@@ -10,13 +10,12 @@ Maps each of the 102 TARA techniques to affected neurorights based on:
 - Dual-use classification
 
 Neurorights taxonomy (Ienca-Andorno 2017 + QIF extensions):
-  MP  = Mental Privacy
+  MP  = Mental Privacy (QIF extends with data-lifecycle protections, maps to CIA Confidentiality)
   CL  = Cognitive Liberty
-  MI  = Mental Integrity
+  MI  = Mental Integrity (QIF extends with signal dynamics, maps to CIA Integrity)
   PC  = Psychological Continuity
-  CA  = Cognitive Authenticity (QIF-proposed)
-  DI  = Dynamical Integrity (QIF-proposed, Gemini-validated)
-  IDA = Informational Disassociation (QIF-proposed, Gemini-validated)
+  DI  = Dynamical Integrity (QIF-proposed, folded into MI)
+  IDA = Informational Disassociation (QIF-proposed, folded into MP)
 """
 
 import json
@@ -33,9 +32,9 @@ UI_CATEGORY_MAP = {
     "DS": ["MP"],              # Data Surveillance: violates mental privacy
     "SE": ["MP"],              # Side-channel Exploitation: extracts neural data
     "DM": ["MI", "CL"],       # Direct Manipulation: manipulates neural activity
-    "PS": ["MI", "CA"],        # Protocol Subversion: compromises integrity + authenticity
+    "PS": ["MI"],              # Protocol Subversion: compromises integrity
     "EX": ["MP"],              # Exfiltration: steals neural data
-    "PE": ["CA", "MP"],        # Persona/Biometric: identity + privacy
+    "PE": ["MI", "MP"],        # Persona/Biometric: integrity + privacy
     "CI": [],                  # Chain/Indirect: determined per-technique below
 }
 
@@ -60,7 +59,7 @@ def niss_overlays(niss_vector: str) -> list:
             rights.append("MI")  # High/Critical brain impact → mental integrity
         if p.startswith("CG:") and p.split(":")[1] in ("H", "C"):
             rights.append("CL")  # High/Critical cognitive → cognitive liberty
-            rights.append("CA")  # Also authenticity
+            rights.append("MI")  # Also mental integrity
         if p.startswith("NP:") and p.split(":")[1] == "T":
             rights.append("DI")  # Therapeutic potential → dynamical integrity (dual-use)
     return rights
@@ -141,7 +140,7 @@ def compute_neurorights(tech: dict) -> list:
         rights.add("MI")
 
     # Sort for consistency
-    order = ["MP", "CL", "MI", "PC", "CA", "DI", "IDA"]
+    order = ["MP", "CL", "MI", "PC", "DI", "IDA"]
     return [r for r in order if r in rights]
 
 
@@ -199,14 +198,12 @@ def main():
             "CL": "Cognitive Liberty",
             "MI": "Mental Integrity",
             "PC": "Psychological Continuity",
-            "CA": "Cognitive Authenticity",
-            "DI": "Dynamical Integrity",
-            "IDA": "Informational Disassociation",
+            "DI": "Dynamical Integrity (folded into MI)",
+            "IDA": "Informational Disassociation (folded into MP)",
         },
         "sources": [
-            "Ienca & Andorno 2017 (original 4)",
-            "QIF Framework (Cognitive Authenticity)",
-            "QIF-TARA Neuroethics Analysis 2026 (DI, IDA)",
+            "Ienca & Andorno 2017 (original 4: MP, CL, MI, PC)",
+            "QIF Framework (MI extended with signal dynamics, MP extended with data lifecycle)",
         ],
         "techniques_by_right": rights_counts,
         "cci_stats": {
@@ -225,12 +222,11 @@ def main():
     print("=== Neurorights Enrichment Complete ===")
     print(f"Techniques enriched: {len(techniques)}")
     print(f"\nTechniques by right:")
-    order = ["MP", "CL", "MI", "PC", "CA", "DI", "IDA"]
+    order = ["MP", "CL", "MI", "PC", "DI", "IDA"]
     names = {
         "MP": "Mental Privacy", "CL": "Cognitive Liberty",
         "MI": "Mental Integrity", "PC": "Psychological Continuity",
-        "CA": "Cognitive Authenticity", "DI": "Dynamical Integrity",
-        "IDA": "Informational Disassociation",
+        "DI": "Dynamical Integrity", "IDA": "Informational Disassociation",
     }
     for r in order:
         count = rights_counts.get(r, 0)

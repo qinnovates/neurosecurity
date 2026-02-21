@@ -287,7 +287,42 @@ Key provisions:
 
 ---
 
+---
+
+## Hardened Neurorights-to-Regulatory Crosswalk
+
+To ensure auditability, this table provides the **Technical Evidence** required to prove compliance with each neuroright, mapped to the industry-standard **NIST SP 800-53** and **ISO/IEC 27001** controls, and the specific **TARA Attack Vectors**.
+
+| Neuroright | Regulation | Framework Codes | TARA Attack Vector | Technical Evidence | QIF Enforcement |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Cognitive Liberty** | **CCPA (SB 1223)** | NIST AC-3 / ISO A.9 | [Signal Injection (T0001)](file:///Users/mac/Documents/PROJECTS/qinnovates/qinnovate/shared/qtara-registrar.json#L456) | `firewall.log`: REJECT counts. | L8 Neural Firewall |
+| **Mental Privacy** | **GDPR / HIPAA** | NIST SC-28 / ISO A.18 | [ERP Decoding (T0012)](file:///Users/mac/Documents/PROJECTS/qinnovates/qinnovate/shared/qtara-registrar.json) | `anonymizer.log`: Filter counts. | BCI Anonymizer |
+| **Mental Integrity** | **CCPA (SB 1223) / FDORA** | NIST SI-4 / ISO A.12 | [Neural Ransomware (T0002)](file:///Users/mac/Documents/PROJECTS/qinnovates/qinnovate/shared/qtara-registrar.json#L621) | `niss_report.json`: Impact score. | NISS v1.0 Scoring |
+| **Psychological Continuity** | **CCPA (SB 1223)** | NIST PL-4 / ISO A.5 | [Calibration Poisoning (T0034)](file:///Users/mac/Documents/PROJECTS/qinnovates/qinnovate/shared/qtara-registrar.json) | `identity_guard.log`: Alerts. | Scale-Frequency Invariants |
+
+---
+
+## Hardened Compliance Validation Checklist
+
+Manufacturers and researchers can use this checklist to verify their "Hardened" compliance stance:
+
+- [ ] **Default-Deny Enforced**: Verify L8 Firewall rejects all signals without valid cryptographic signatures.
+- [ ] **Quantifiable Anonymization**: Verify the BCI Anonymizer maintains a differential privacy budget (ε) below 2.0.
+- [ ] **Impact Accountability**: Verify every BCI feature is mapped to a NISS score (Biological/Cognitive/Plasticity).
+- [ ] **Tamper-Evident Auditing**: Verify all neural security logs are cryptographically hashed and stored in a secure enclave.
+
+---
+
+## Regulatory & Structural Gaps
+
+While QIF is a leader in this area, current legal frameworks were not designed for high-velocity neural data. For a detailed analysis of where HIPAA, GDPR, and CCPA fall short, see:
+
+- [**REGULATORY_GAPS.md**](REGULATORY_GAPS.md) — Structural challenges in BCI governance.
+
+---
+
 ## QIF Compliance Matrix
+
 
 This matrix maps QIF Framework components to regulatory requirements.
 
