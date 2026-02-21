@@ -7,6 +7,7 @@
 > **Author:** Kevin Qi
 > **Parent Framework:** QIF (Quantified Interconnection Framework)
 > **Delivery Protocol:** NSP (Neural Security Protocol)
+> **Integration Roadmap:** [INTEGRATION-ROADMAP.md](../INTEGRATION-ROADMAP.md)
 
 ---
 

@@ -1,0 +1,514 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import BciLandscape from '../../components/bci/BciLandscape';
+import BciKql from '../../components/bci/BciKql';
+
+// Load BCI landscape data
+import landscapeRaw from '../../../shared/bci-landscape.json';
+import atlasRaw from '../../../shared/qif-brain-bci-atlas.json';
+import registrarRaw from '../../../shared/qtara-registrar.json';
+import dsmRaw from '../../../shared/qif-dsm-mappings.json';
+import ethicsRaw from '../../../shared/qif-ethics-controls.json';
+import cveRaw from '../../../shared/cve-technique-mapping.json';
+import timelineRaw from '../../data/qif-timeline.json';
+import newsRaw from '../../data/external-news-cache.json';
+import controlsRaw from '../../../shared/qif-security-controls.json';
+import validationRaw from '../../../shared/validation-registry.json';
+import automationRaw from '../../data/automation-registry.json';
+import hardwareRaw from '../../../docs/bci-hardware-inventory.json';
+
+const landscape = landscapeRaw as any;
+const atlas = atlasRaw as any;
+const registrar = registrarRaw as any;
+const dsm = dsmRaw as any;
+const ethics = ethicsRaw as any;
+const cve = cveRaw as any;
+const timeline = timelineRaw as any;
+const news = newsRaw as any;
+const controls = controlsRaw as any;
+const validation = validationRaw as any;
+const automation = automationRaw as any;
+const hardware = hardwareRaw as any;
+
+// Extract data for the visualization component
+const publicationTrends = landscape.publication_trends?.map((t: any) => ({
+  year: t.year,
+  pubmed_bci: t.pubmed_bci,
+  security_bci: t.security_bci,
+})) || [];
+
+const companies = landscape.companies?.map((c: any) => ({
+  name: c.name,
+  type: c.type,
+  status: c.status,
+  security_posture: c.security_posture,
+  devices: (c.devices || []).map((d: any) => ({
+    name: d.name,
+    type: d.type,
+    channels: d.channels,
+    units_deployed: d.units_deployed,
+    first_human: d.first_human,
+  })),
+})) || [];
+
+const fundingRounds = landscape.market_data?.major_funding_rounds?.map((r: any) => ({
+  company: r.company,
+  amount_usd: r.amount_usd,
+  date: r.date,
+  series: r.series,
+})) || [];
+
+const policyTimeline = landscape.policy_timeline?.map((p: any) => ({
+  date: p.date,
+  event: p.event,
+  type: p.type,
+  jurisdiction: p.jurisdiction,
+})) || [];
+
+const marketSize = landscape.market_data?.market_size_estimates?.map((m: any) => ({
+  year: m.year,
+  value_billion_usd: m.value_billion_usd,
+})) || [];
+
+// Compute summary stats
+const totalCompanies = companies.length;
+const totalDevices = companies.reduce((s: number, c: any) => s + c.devices.length, 0);
+const invasiveCount = companies.filter((c: any) => c.type === 'invasive').length;
+const nonInvasiveCount = companies.filter((c: any) => c.type === 'non_invasive').length;
+const noSecCount = companies.filter((c: any) => c.security_posture === 'none_published').length;
+const policyCount = policyTimeline.length;
+
+// --- KLQ Tables: Flatten all data sources into queryable arrays ---
+
+const klqCompanies = landscape.companies?.map((c: any) => ({
+  name: c.name,
+  type: c.type,
+  founded: c.founded,
+  status: c.status,
+  security_posture: c.security_posture,
+  funding_total_usd: c.funding_total_usd || 0,
+  employees_approx: c.employees_approx || 0,
+  device_count: (c.devices || []).length,
+  attack_surface_count: (c.tara_attack_surface || []).length,
+})) || [];
+
+const klqDevices = (landscape.companies || []).flatMap((c: any) =>
+  (c.devices || []).map((d: any) => ({
+    device: d.name,
+    company: c.name,
+    type: d.type,
+    channels: d.channels || 0,
+    electrode_type: d.electrode_type || '',
+    fda_status: d.fda_status || 'none',
+    units_deployed: d.units_deployed || '',
+    first_human: d.first_human || '',
+    target_use: d.target_use || '',
+    cve_count: (d.cves_known || []).length,
+    price_usd: d.price_usd || 0,
+  }))
+);
+
+const klqTechniques = (registrar.techniques || []).map((t: any) => ({
+  id: t.id,
+  name: t.attack || t.name,
+  tactic: t.tactic,
+  severity: t.severity,
+  status: t.status,
+  niss_score: t.niss?.score || 0,
+  bands: t.bands || '',
+  ui_category: t.ui_category || '',
+  physics_tier: t.physics_tier || '',
+}));
+
+const klqBrainRegions = (atlas.brain_regions || []).map((r: any) => ({
+  name: r.name,
+  abbreviation: r.id || '',
+  qif_band: r.qif_band || '',
+  zone: r.zone || '',
+  function: r.function || r.primary_function || '',
+  response_latency_ms: r.response_latency_ms?.value ?? r.response_latency_ms ?? '',
+}));
+
+const klqCves = (cve.mappings || []).map((m: any) => ({
+  cve_id: m.cve_id,
+  product: m.product,
+  cvss: m.cvss?.score || 0,
+  category: m.category || '',
+  technique_ids: (m.tara_techniques || []).join(', '),
+  cwe: (m.cwe || []).join(', '),
+}));
+
+const klqFunding = (landscape.market_data?.major_funding_rounds || []).map((r: any) => ({
+  company: r.company,
+  amount_usd: r.amount_usd,
+  date: r.date,
+  series: r.series || '',
+}));
+
+const klqPolicy = (landscape.policy_timeline || []).map((p: any) => ({
+  date: p.date,
+  event: p.event,
+  type: p.type,
+  jurisdiction: p.jurisdiction,
+}));
+
+const klqPublications = (landscape.publication_trends || []).map((t: any) => ({
+  year: t.year,
+  pubmed_bci: t.pubmed_bci,
+  security_bci: t.security_bci,
+  security_pct: t.pubmed_bci > 0 ? Number(((t.security_bci / t.pubmed_bci) * 100).toFixed(2)) : 0,
+}));
+
+// Flatten DSM-5 conditions from clusters
+const klqDsm5 = Object.entries(dsm.diagnostic_clusters || {}).flatMap(([clusterId, cluster]: [string, any]) =>
+  (cluster.conditions || []).map((c: any) => ({
+    code: c.code,
+    diagnosis: c.name,
+    cluster: cluster.label,
+    qif_bands: (c.bands || []).join(', '),
+  }))
+);
+
+// Flatten neurorights
+const klqNeurorights = Object.entries(ethics.neurorights || {}).map(([id, r]: [string, any]) => ({
+  id,
+  name: r.name,
+  shortDef: r.shortDef,
+  bands: (r.bands || []).join(', '),
+  frameworks: (r.frameworks || []).join(', '),
+}));
+
+const klqMilestones = (timeline.milestones || []).map((m: any) => ({
+  date: m.date,
+  title: m.title,
+  type: m.type,
+  description: m.description || '',
+}));
+
+const klqNews = (Array.isArray(news) ? news : []).map((n: any) => ({
+  title: n.title,
+  date: n.date,
+  source: n.source,
+  category: n.category,
+  url: n.url,
+}));
+
+// Tactics from registrar
+const klqTactics = (registrar.tactics || []).map((t: any) => ({
+  id: t.id,
+  name: t.name,
+  domain: t.domain,
+  domain_code: t.domain_code,
+  action_code: t.action_code,
+  description: t.description || '',
+  legacy_name: t.legacy_name || '',
+}));
+
+// Hourglass bands from atlas
+const klqBands = (atlas.qif_bands || []).map((b: any) => ({
+  id: b.id,
+  name: b.name,
+  zone: b.zone,
+  determinacy: b.determinacy || '',
+  qi_range: (b.qi_range || []).join('-'),
+  severity_if_compromised: b.severity_if_compromised || '',
+}));
+
+// Government grants
+const klqGrants = (landscape.market_data?.government_grants || []).map((g: any) => ({
+  program: g.program,
+  total_usd: g.total_usd,
+  period: g.period,
+}));
+
+// Acquisitions
+const klqAcquisitions = (landscape.market_data?.acquisition_history || []).map((a: any) => ({
+  target: a.target,
+  acquirer: a.acquirer,
+  date: a.date,
+  price_usd_estimate: a.price_usd_estimate || 0,
+}));
+
+// Hardware specs from inventory
+const klqHardware = (hardware.devices || []).map((d: any) => ({
+  id: d.id,
+  manufacturer: d.manufacturer,
+  device_name: d.device_name,
+  device_type: d.device_type || '',
+  fda_status: (d.fda_status || '').slice(0, 40),
+  channels: d.core_specs?.channel_count?.value ?? '',
+  power_mw: d.core_specs?.power_consumption_total?.value ?? '',
+  power_per_ch_uw: d.core_specs?.power_per_channel?.value ?? '',
+  battery_life: d.core_specs?.battery_life?.value ?? '',
+  charging: d.core_specs?.charging_method?.value ?? '',
+  directionality: d.core_specs?.directionality?.value ?? '',
+}));
+
+// Governance frameworks
+const klqFrameworks = (ethics.governance_frameworks || []).map((f: any) => ({
+  id: f.id,
+  name: f.name,
+  year: f.year,
+  status: f.status,
+  scope: f.scope || '',
+}));
+
+// Consent tiers (object, not array)
+const klqConsent = Object.entries(ethics.consent_tiers || {}).map(([id, t]: [string, any]) => ({
+  id,
+  label: t.label,
+  description: t.description || '',
+  bands: (t.bands || []).join(', '),
+}));
+
+// Security controls flattened by band + type
+const klqControls = Object.entries(controls.controls_by_band || {}).flatMap(([band, types]: [string, any]) =>
+  ['detection', 'prevention', 'response'].flatMap(type =>
+    (types[type] || []).map((control: string) => ({
+      band,
+      type,
+      control,
+    }))
+  )
+);
+
+// NSP layers
+const klqNsp = (controls.nsp_layers || []).map((l: any) => ({
+  layer: l.layer,
+  name: l.name,
+  bands: (l.bands || []).join(', '),
+  overhead_pct: l.overhead || '',
+}));
+
+// Validation entries
+const klqValidations = (validation.entries || []).map((v: any) => ({
+  id: v.id,
+  component: v.component,
+  category: v.category,
+  tiers: (v.tiers || []).join(', '),
+  status: v.status,
+  summary: v.summary || '',
+  date: v.date || '',
+}));
+
+// Automations
+const klqAutomations = (automation.entries || []).map((a: any) => ({
+  id: a.id,
+  name: a.name,
+  trigger: a.trigger || '',
+  type: a.type || '',
+  status: a.status,
+  last_status: a.last_status || '',
+  category: a.category || '',
+}));
+
+// Comms / Wireless / Attack Surface — extracted from hardware inventory + landscape security notes
+const klqComms = (hardware.devices || []).map((d: any) => {
+  const pc = d.physics_constraints || {};
+  const wp = pc.wireless_protocol || {};
+  const wpVal = typeof wp === 'string' ? wp : (wp.value || '');
+  const dr = pc.data_rate || {};
+  const drVal = dr.value != null ? `${dr.value} ${dr.unit || ''}`.trim() : '';
+  const sr = pc.sampling_rate || {};
+  const srVal = sr.value != null ? `${sr.value} ${sr.unit || 'Hz'}`.trim() : '';
+  const adc = pc.adc_resolution || {};
+  const adcVal = adc.value != null ? `${adc.value}-bit` : '';
+
+  // Determine RF band from protocol
+  let rf_band = '';
+  const wpLower = wpVal.toLowerCase();
+  if (wpLower.includes('ble') || wpLower.includes('bluetooth')) rf_band = '2.4 GHz ISM';
+  else if (wpLower.includes('wifi') || wpLower.includes('wi-fi')) rf_band = '2.4/5 GHz';
+  else if (wpLower.includes('2.4 ghz')) rf_band = '2.4 GHz ISM';
+  else if (wpLower.includes('near-field') || wpLower.includes('nfc') || wpLower.includes('inductive')) rf_band = 'Near-field (inductive)';
+  else if (wpLower.includes('rf inductive') || wpLower.includes('proprietary rf')) rf_band = 'Proprietary RF';
+  else if (wpLower.includes('near-infrared') || wpLower.includes('optical')) rf_band = 'NIR optical';
+  else if (wpLower.includes('wired') || wpLower.includes('percutaneous')) rf_band = 'N/A (wired)';
+
+  // Encryption — from landscape security notes and known specs
+  const encryptionMap: Record<string, string> = {
+    'emotiv-epoc-x': 'AES-128 (claimed)',
+    'emotiv-insight': 'AES-128 (claimed)',
+    'muse-2': 'BLE pairing (standard)',
+    'muse-s': 'BLE pairing (standard)',
+    'neuralink-n1': 'Unknown (proprietary BLE)',
+    'neuralink-n2': 'Unknown',
+    'synchron-stentrode': 'Unknown (proprietary BLE)',
+    'openbci-cyton': 'None (open-source, unencrypted)',
+    'openbci-ganglion': 'None (BLE standard pairing)',
+    'gtec-unicorn': 'BLE pairing (standard)',
+    'kernel-flow': 'N/A (wired)',
+    'blackrock-utah-array': 'N/A (wired pedestal)',
+    'braingate': 'Unknown (custom wireless)',
+    'neuropace-rns': 'Proprietary (wand-based NFC)',
+    'medtronic-percept-pc': 'Proprietary (clinical programmer)',
+    'medtronic-percept-rc': 'Proprietary (clinical programmer)',
+    'cochlear-nucleus-profile-plus': 'Proprietary RF link',
+    'medel-cochlear': 'Proprietary RF link',
+    'boston-scientific-vercise': 'Proprietary telemetry',
+    'abbott-infinity-dbs': 'Proprietary telemetry',
+    'paradromics-connexus': 'NIR optical (inherently directional)',
+    'precision-layer7': 'N/A (currently wired)',
+    'darpa-n3': 'Research (varies by team)',
+    'corticom': 'N/A (external acquisition)',
+  };
+
+  // Firmware / software platform — publicly known information
+  const firmwareMap: Record<string, string> = {
+    'neuralink-n1': 'Custom ASIC (65nm CMOS), embedded C/C++',
+    'neuralink-n2': 'Custom ASIC, embedded (details unknown)',
+    'synchron-stentrode': 'Custom SoC, embedded firmware',
+    'blackrock-utah-array': 'NeuroPort NSP (Windows/LabVIEW), passive array',
+    'braingate': 'NeuroPort NSP (Windows), custom BCI software (Python/MATLAB)',
+    'neuropace-rns': 'Proprietary embedded RTOS',
+    'medtronic-percept-pc': 'Proprietary embedded RTOS, Medtronic clinician programmer',
+    'medtronic-percept-rc': 'Proprietary embedded RTOS, Medtronic clinician programmer',
+    'cochlear-nucleus-profile-plus': 'Custom DSP, proprietary sound processor firmware',
+    'medel-cochlear': 'Custom DSP, proprietary firmware',
+    'boston-scientific-vercise': 'Proprietary embedded, Boston Scientific programmer',
+    'abbott-infinity-dbs': 'Proprietary embedded, Abbott programmer (iPad-based)',
+    'emotiv-epoc-x': 'ARM Cortex-M, proprietary firmware, Cortex SDK (JS/Python)',
+    'emotiv-insight': 'ARM Cortex-M, proprietary firmware, Cortex SDK (JS/Python)',
+    'openbci-cyton': 'PIC32MX (Arduino-compatible), open-source firmware (C++)',
+    'openbci-ganglion': 'Simblee BLE SoC, open-source firmware (C++)',
+    'muse-2': 'Proprietary embedded, Muse SDK (iOS/Android)',
+    'muse-s': 'Proprietary embedded, Muse SDK (iOS/Android)',
+    'gtec-unicorn': 'Proprietary firmware, Unicorn Suite SDK (C#/Python/MATLAB)',
+    'kernel-flow': 'Custom FPGA + SPAD detectors, proprietary (Python API)',
+    'paradromics-connexus': 'Custom ASIC, NIR data link, embedded firmware',
+    'precision-layer7': 'External Intan RHD + custom DAQ, research software',
+    'darpa-n3': 'Multiple approaches (varies by contractor team)',
+    'corticom': 'Blackrock NeuroPort NSP (external)',
+  };
+
+  return {
+    device: d.device_name,
+    manufacturer: d.manufacturer,
+    device_type: d.device_type || '',
+    wireless_protocol: wpVal || 'Unknown',
+    rf_band: rf_band || 'Unknown',
+    encryption: encryptionMap[d.id] || 'Unknown',
+    firmware_platform: firmwareMap[d.id] || 'Unknown',
+    data_rate: drVal || 'Unknown',
+    sampling_rate: srVal,
+    adc_bits: adcVal || '',
+    data_link_risk: wpLower.includes('ble') || wpLower.includes('bluetooth') ? 'HIGH (BLE sniffable)'
+      : wpLower.includes('wifi') ? 'HIGH (WiFi interceptable)'
+      : wpLower.includes('wired') || wpLower.includes('percutaneous') ? 'LOW (physical access required)'
+      : wpLower.includes('near-infrared') || wpLower.includes('optical') ? 'LOW (line-of-sight optical)'
+      : wpLower.includes('near-field') || wpLower.includes('nfc') || wpLower.includes('inductive') ? 'MEDIUM (proximity required)'
+      : wpLower.includes('proprietary') ? 'MEDIUM (security through obscurity)'
+      : 'UNKNOWN',
+  };
+});
+
+const klqTables = {
+  companies: klqCompanies,
+  devices: klqDevices,
+  techniques: klqTechniques,
+  tactics: klqTactics,
+  brain_regions: klqBrainRegions,
+  hourglass_bands: klqBands,
+  cves: klqCves,
+  funding: klqFunding,
+  grants: klqGrants,
+  acquisitions: klqAcquisitions,
+  policy: klqPolicy,
+  publications: klqPublications,
+  dsm5: klqDsm5,
+  neurorights: klqNeurorights,
+  frameworks: klqFrameworks,
+  consent_tiers: klqConsent,
+  controls: klqControls,
+  nsp_layers: klqNsp,
+  hardware_specs: klqHardware,
+  comms: klqComms,
+  validations: klqValidations,
+  automations: klqAutomations,
+  milestones: klqMilestones,
+  news: klqNews,
+};
+---
+
+<PageLayout
+  title="BCI Landscape"
+  description="Comprehensive visualization of the brain-computer interface industry: companies, devices, funding, publications, security posture, and regulatory timeline. Data-driven analysis showing why BCI security research matters now."
+  breadcrumbs={[{ label: 'BCI Dashboard', href: '/bci/' }, { label: 'Industry Landscape' }]}
+  wide={true}
+>
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">BCI Industry Landscape</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-3xl">
+      {totalCompanies} companies, {totalDevices} devices, {policyCount} regulatory milestones. The BCI industry is growing fast. Security research is not keeping up. This visualization shows why QIF exists: to build the security track in parallel with innovation, not against it.
+    </p>
+  </div>
+
+  <!-- Summary stat bar -->
+  <section class="glass rounded-xl p-6 sm:p-8 mb-10">
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-6 text-center">
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{totalCompanies}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Companies</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{totalDevices}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Devices</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">{invasiveCount}/{nonInvasiveCount}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Invasive / Non-Inv</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-danger)]">{noSecCount}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">No Published Security</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-safe)]">{policyCount}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Policy Milestones</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Visualization -->
+  <BciLandscape
+    client:only="react"
+    publicationTrends={publicationTrends}
+    companies={companies}
+    fundingRounds={fundingRounds}
+    policyTimeline={policyTimeline}
+    marketSize={marketSize}
+  />
+
+  <!-- KLQ: Query Engine -->
+  <section class="mt-12 glass rounded-xl p-6 sm:p-8">
+    <BciKql client:only="react" tables={klqTables} />
+  </section>
+
+  <!-- Data Sources -->
+  <section class="mt-12 max-w-3xl mx-auto">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-4">Data Sources</h2>
+    <div class="prose text-sm text-[var(--color-text-muted)]">
+      <ul>
+        <li>Company data: official websites, press releases, SEC filings, Crunchbase</li>
+        <li>FDA device status: 510(k), PMA, Breakthrough Device, IDE databases</li>
+        <li>Publication counts: PubMed search ("brain-computer interface"), approximate</li>
+        <li>CVE data: NIST National Vulnerability Database, ICS-CERT advisories</li>
+        <li>Market projections: Grand View Research, Fortune Business Insights</li>
+        <li>Policy/regulatory: Government gazette publications, legislative tracking services</li>
+      </ul>
+      <p class="mt-3">
+        Security posture assessments are based on publicly available documentation only. Companies may have unpublished security measures. Publication counts are order-of-magnitude estimates. Funding amounts are approximate.
+      </p>
+    </div>
+  </section>
+
+  <!-- Methodology note -->
+  <section class="mt-8 max-w-3xl mx-auto mb-12">
+    <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-primary)]">
+      <h3 class="font-semibold mb-2">About This Analysis</h3>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        This landscape tracker is part of the QIF project's mission to map the BCI security gap. We track companies, devices, and regulatory activity to understand where security research is needed most. This is not a criticism of any company's practices. BCI manufacturers are racing to bring life-changing technology to patients. Our goal is to provide the security framework they'll need as the field scales.
+      </p>
+    </div>
+  </section>
+</PageLayout>

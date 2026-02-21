@@ -1,0 +1,801 @@
+{
+  "version": "1.0",
+  "generated": "2026-02-21",
+  "description": "Comprehensive BCI industry landscape tracker. Tracks companies, devices, security posture, funding, regulatory milestones, and publication trends. Part of the QIF project's mission to map the BCI security gap.",
+  "companies": [
+    {
+      "name": "Neuralink",
+      "type": "invasive",
+      "founded": "2016",
+      "headquarters": "Fremont, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 680000000,
+      "employees_approx": 400,
+      "security_posture": "none_published",
+      "security_notes": "No public security documentation. Implantable N1 chip with 1024 electrodes and wireless BLE telemetry. FDA IDE approved May 2023. First human implant Jan 2024. ~3 patients enrolled in PRIME study.",
+      "tara_attack_surface": ["T0001","T0003","T0005","T0008","T0010","T0015","T0021","T0023","T0025","T0030","T0041","T0043","T0045","T0048","T0061","T0063","T0065","T0081","T0085","T0090","T0095","T0100"],
+      "devices": [
+        {
+          "name": "N1 Chip",
+          "type": "invasive",
+          "channels": 1024,
+          "electrode_type": "penetrating",
+          "fda_status": "IDE",
+          "units_deployed": "~3 implanted (PRIME study)",
+          "first_human": "2024-01",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        },
+        {
+          "name": "Blindsight",
+          "type": "invasive",
+          "channels": 1024,
+          "electrode_type": "penetrating",
+          "fda_status": "breakthrough",
+          "units_deployed": "0 (pre-clinical)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Synchron",
+      "type": "semi_invasive",
+      "founded": "2016",
+      "headquarters": "Brooklyn, New York, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 145000000,
+      "employees_approx": 120,
+      "security_posture": "none_published",
+      "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. ~10 patients.",
+      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0061","T0063","T0081","T0085"],
+      "devices": [
+        {
+          "name": "Stentrode",
+          "type": "semi_invasive",
+          "channels": 16,
+          "electrode_type": "endovascular",
+          "fda_status": "IDE",
+          "units_deployed": "~10 implanted",
+          "first_human": "2022-07",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Blackrock Neurotech",
+      "type": "invasive",
+      "founded": "2008",
+      "headquarters": "Salt Lake City, Utah, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 10000000,
+      "employees_approx": 60,
+      "security_posture": "none_published",
+      "security_notes": "No public security documentation. Utah Array is the most implanted cortical electrode in history (35+ patients since 2004). Used in BrainGate clinical trials.",
+      "tara_attack_surface": ["T0001","T0003","T0005","T0008","T0010","T0021","T0023","T0041","T0043","T0045","T0061","T0063","T0081"],
+      "devices": [
+        {
+          "name": "NeuroPort / Utah Array",
+          "type": "invasive",
+          "channels": 96,
+          "electrode_type": "penetrating",
+          "fda_status": "IDE",
+          "units_deployed": "35+ implanted since 2004",
+          "first_human": "2004-06",
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        },
+        {
+          "name": "MoveAgain BCI",
+          "type": "invasive",
+          "channels": 96,
+          "electrode_type": "penetrating",
+          "fda_status": "IDE",
+          "units_deployed": "<10",
+          "first_human": "2023-01",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Precision Neuroscience",
+      "type": "invasive",
+      "founded": "2021",
+      "headquarters": "New York, New York, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 102000000,
+      "employees_approx": 80,
+      "security_posture": "none_published",
+      "security_notes": "No public security documentation. Layer 7 thin-film electrode array with 1024 channels. Minimally invasive placement (sits on cortical surface).",
+      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0023","T0041","T0043","T0061","T0081"],
+      "devices": [
+        {
+          "name": "Layer 7 Cortical Interface",
+          "type": "invasive",
+          "channels": 1024,
+          "electrode_type": "surface",
+          "fda_status": "IDE",
+          "units_deployed": "<5 temporary placements",
+          "first_human": "2023-01",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Paradromics",
+      "type": "invasive",
+      "founded": "2015",
+      "headquarters": "Austin, Texas, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 33000000,
+      "employees_approx": 40,
+      "security_posture": "none_published",
+      "security_notes": "No public security documentation. Connexus DDI targets 65,000 electrode channels. Pre-clinical.",
+      "tara_attack_surface": ["T0001","T0003","T0005","T0008","T0021","T0023","T0041","T0043","T0061","T0081"],
+      "devices": [
+        {
+          "name": "Connexus Direct Data Interface",
+          "type": "invasive",
+          "channels": 65000,
+          "electrode_type": "penetrating",
+          "fda_status": "none",
+          "units_deployed": "0 (pre-clinical)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "BrainGate",
+      "type": "invasive",
+      "founded": "2000",
+      "headquarters": "Providence, Rhode Island, USA",
+      "status": "research_only",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Research consortium (Brown, Stanford, MGH, Case Western). Uses Blackrock Utah Array. Academic research, not commercial. 15+ patients since 2004.",
+      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0023","T0041","T0061","T0081"],
+      "devices": [
+        {
+          "name": "BrainGate System (Utah Array)",
+          "type": "invasive",
+          "channels": 96,
+          "electrode_type": "penetrating",
+          "fda_status": "IDE",
+          "units_deployed": "15+ research participants",
+          "first_human": "2004-06",
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Emotiv",
+      "type": "non_invasive",
+      "founded": "2011",
+      "headquarters": "San Francisco, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 15000000,
+      "employees_approx": 80,
+      "security_posture": "basic_encryption",
+      "security_notes": "Consumer EEG. Claims AES-128 encryption for data transfer. Cloud platform for data storage. No formal security audit published. Chile Supreme Court ruled against Emotiv in 2023 neurodata privacy case.",
+      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0027","T0030","T0041","T0043","T0081","T0085","T0095"],
+      "devices": [
+        {
+          "name": "EPOC X",
+          "type": "non_invasive",
+          "channels": 14,
+          "electrode_type": "wet",
+          "fda_status": "exempt",
+          "units_deployed": "50,000+ estimated",
+          "first_human": "2009-01",
+          "price_usd": 849,
+          "target_use": "research",
+          "cves_known": []
+        },
+        {
+          "name": "Insight",
+          "type": "non_invasive",
+          "channels": 5,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "50,000+ estimated",
+          "first_human": "2015-01",
+          "price_usd": 499,
+          "target_use": "consumer",
+          "cves_known": []
+        },
+        {
+          "name": "MN8",
+          "type": "non_invasive",
+          "channels": 2,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "5,000+ estimated",
+          "first_human": "2022-01",
+          "price_usd": 299,
+          "target_use": "enterprise",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "NeuroSky",
+      "type": "non_invasive",
+      "founded": "2004",
+      "headquarters": "San Jose, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 15000000,
+      "employees_approx": 30,
+      "security_posture": "minimal_claims",
+      "security_notes": "Consumer EEG with millions of units sold. MindWave single-channel headset. Minimal security documentation. Bluetooth LE.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081","T0085"],
+      "devices": [
+        {
+          "name": "MindWave Mobile 2",
+          "type": "non_invasive",
+          "channels": 1,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "2,000,000+ estimated",
+          "first_human": "2011-01",
+          "price_usd": 100,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "InteraXon (Muse)",
+      "type": "non_invasive",
+      "founded": "2007",
+      "headquarters": "Toronto, Ontario, Canada",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 60000000,
+      "employees_approx": 50,
+      "security_posture": "basic_encryption",
+      "security_notes": "Consumer meditation/sleep EEG. Claims Bluetooth encryption. Cloud platform with user accounts. No formal security audit published.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0081","T0085"],
+      "devices": [
+        {
+          "name": "Muse 2",
+          "type": "non_invasive",
+          "channels": 4,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "300,000+ estimated",
+          "first_human": "2018-01",
+          "price_usd": 250,
+          "target_use": "consumer",
+          "cves_known": []
+        },
+        {
+          "name": "Muse S",
+          "type": "non_invasive",
+          "channels": 4,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "200,000+ estimated",
+          "first_human": "2020-01",
+          "price_usd": 400,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "OpenBCI",
+      "type": "non_invasive",
+      "founded": "2014",
+      "headquarters": "Brooklyn, New York, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 6000000,
+      "employees_approx": 20,
+      "security_posture": "open_source",
+      "security_notes": "Open-source hardware and software. Community-auditable. No formal security certifications. Transparent by design.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0043","T0048","T0081","T0085"],
+      "devices": [
+        {
+          "name": "Cyton",
+          "type": "non_invasive",
+          "channels": 8,
+          "electrode_type": "wet",
+          "fda_status": "exempt",
+          "units_deployed": "15,000+ estimated",
+          "first_human": "2015-01",
+          "price_usd": 999,
+          "target_use": "research",
+          "cves_known": []
+        },
+        {
+          "name": "Ganglion",
+          "type": "non_invasive",
+          "channels": 4,
+          "electrode_type": "wet",
+          "fda_status": "exempt",
+          "units_deployed": "10,000+ estimated",
+          "first_human": "2016-01",
+          "price_usd": 200,
+          "target_use": "research",
+          "cves_known": []
+        },
+        {
+          "name": "Galea",
+          "type": "non_invasive",
+          "channels": 16,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "<500",
+          "first_human": "2023-01",
+          "price_usd": 2500,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "NextMind",
+      "type": "non_invasive",
+      "founded": "2017",
+      "headquarters": "Paris, France",
+      "status": "acquired",
+      "acquired_by": "Snap Inc.",
+      "funding_total_usd": 5000000,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Visual cortex BCI headband. Acquired by Snap 2022. Product discontinued. No security documentation was ever published.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081"],
+      "devices": [
+        {
+          "name": "NextMind Dev Kit",
+          "type": "non_invasive",
+          "channels": 8,
+          "electrode_type": "dry",
+          "fda_status": "not_applicable",
+          "units_deployed": "5,000+ dev kits sold",
+          "first_human": "2020-01",
+          "price_usd": 399,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Kernel",
+      "type": "non_invasive",
+      "founded": "2016",
+      "headquarters": "Culver City, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 53000000,
+      "employees_approx": 50,
+      "security_posture": "none_published",
+      "security_notes": "Research-grade TD-fNIRS helmet. No published security documentation. Bryan Johnson invested $100M+ personally.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0043","T0081"],
+      "devices": [
+        {
+          "name": "Flow",
+          "type": "non_invasive",
+          "channels": 52,
+          "electrode_type": "fNIRS",
+          "fda_status": "exempt",
+          "units_deployed": "<100 (research partnerships)",
+          "first_human": "2021-01",
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "CTRL-Labs",
+      "type": "non_invasive",
+      "founded": "2015",
+      "headquarters": "New York, New York, USA",
+      "status": "acquired",
+      "acquired_by": "Meta Platforms",
+      "funding_total_usd": 67000000,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "EMG wristband reading motor neuron signals. Acquired by Meta 2019 for ~$500M-$1B. Now Meta's neural interface team. No public BCI security docs.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081","T0085"],
+      "devices": [
+        {
+          "name": "EMG Wristband (Meta Neural Interface)",
+          "type": "non_invasive",
+          "channels": 16,
+          "electrode_type": "EMG",
+          "fda_status": "not_applicable",
+          "units_deployed": "internal prototypes only",
+          "first_human": "2018-01",
+          "price_usd": null,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Merge Labs",
+      "type": "non_invasive",
+      "founded": "2023",
+      "headquarters": "San Francisco, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "employees_approx": 10,
+      "security_posture": "none_published",
+      "security_notes": "Early-stage. BCI headphones concept. No security information available.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081"],
+      "devices": [
+        {
+          "name": "Merge BCI Headphones",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "dry",
+          "fda_status": "none",
+          "units_deployed": "0 (concept/prototype)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "AlterEgo (MIT Media Lab)",
+      "type": "non_invasive",
+      "founded": "2018",
+      "headquarters": "Cambridge, Massachusetts, USA",
+      "status": "research_only",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Academic research prototype. Subvocalization via jaw/face EMG. 92% word accuracy. No security analysis published.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081","T0085"],
+      "devices": [
+        {
+          "name": "AlterEgo Subvocalization Interface",
+          "type": "non_invasive",
+          "channels": 7,
+          "electrode_type": "EMG",
+          "fda_status": "not_applicable",
+          "units_deployed": "<10 research prototypes",
+          "first_human": "2018-01",
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Neurosity",
+      "type": "non_invasive",
+      "founded": "2018",
+      "headquarters": "New York, New York, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 4000000,
+      "employees_approx": 15,
+      "security_posture": "basic_encryption",
+      "security_notes": "Claims on-device processing and encryption. SDK published. BLE communication. No formal security audit.",
+      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0041","T0043","T0081","T0085"],
+      "devices": [
+        {
+          "name": "Crown",
+          "type": "non_invasive",
+          "channels": 8,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "2,000+ estimated",
+          "first_human": "2021-01",
+          "price_usd": 999,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "BrainCo",
+      "type": "non_invasive",
+      "founded": "2015",
+      "headquarters": "Somerville, Massachusetts, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 25000000,
+      "employees_approx": 100,
+      "security_posture": "minimal_claims",
+      "security_notes": "Deployed EEG headbands in Chinese classrooms for attention monitoring. Major privacy concerns. Cloud data processing. Minimal security documentation.",
+      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0030","T0041","T0043","T0081","T0085","T0095"],
+      "devices": [
+        {
+          "name": "Focus 1",
+          "type": "non_invasive",
+          "channels": 3,
+          "electrode_type": "dry",
+          "fda_status": "not_applicable",
+          "units_deployed": "10,000+ in Chinese schools",
+          "first_human": "2018-01",
+          "price_usd": 300,
+          "target_use": "enterprise",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Nihon Kohden",
+      "type": "non_invasive",
+      "founded": "1951",
+      "headquarters": "Tokyo, Japan",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "employees_approx": 5800,
+      "security_posture": "regulatory_compliance",
+      "security_notes": "Major medical device manufacturer. Subject to FDA cybersecurity requirements, IEC 62443, HIPAA. Limited public BCI-specific security documentation.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0045","T0061","T0063","T0081"],
+      "devices": [
+        {
+          "name": "EEG-1200 (Neurofax)",
+          "type": "non_invasive",
+          "channels": 128,
+          "electrode_type": "wet",
+          "fda_status": "cleared",
+          "units_deployed": "tens of thousands globally",
+          "first_human": null,
+          "price_usd": 50000,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Natus Medical (Integra LifeSciences)",
+      "type": "non_invasive",
+      "founded": "1989",
+      "headquarters": "Middleton, Wisconsin, USA",
+      "status": "acquired",
+      "acquired_by": "Integra LifeSciences",
+      "funding_total_usd": null,
+      "employees_approx": null,
+      "security_posture": "regulatory_compliance",
+      "security_notes": "CRITICAL: Xltek EEG has KNOWN CVEs (CVE-2017-2853, 2867, 2868, 2869). One of the ONLY neurotech companies with publicly disclosed vulnerabilities. ICS-CERT advisories published.",
+      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0030","T0041","T0043","T0045","T0061","T0063","T0081","T0085"],
+      "devices": [
+        {
+          "name": "Xltek EEG System",
+          "type": "non_invasive",
+          "channels": 128,
+          "electrode_type": "wet",
+          "fda_status": "cleared",
+          "units_deployed": "thousands globally (clinical)",
+          "first_human": null,
+          "price_usd": 60000,
+          "target_use": "medical",
+          "cves_known": ["CVE-2017-2853","CVE-2017-2867","CVE-2017-2868","CVE-2017-2869"]
+        }
+      ]
+    },
+    {
+      "name": "g.tec medical engineering",
+      "type": "non_invasive",
+      "founded": "1999",
+      "headquarters": "Schiedlberg, Austria",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "employees_approx": 100,
+      "security_posture": "none_published",
+      "security_notes": "Research-grade EEG/BCI systems used in academic research globally. No published security documentation.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0045","T0061","T0081"],
+      "devices": [
+        {
+          "name": "g.USBamp",
+          "type": "non_invasive",
+          "channels": 16,
+          "electrode_type": "wet",
+          "fda_status": "cleared",
+          "units_deployed": "5,000+ (research labs)",
+          "first_human": null,
+          "price_usd": 15000,
+          "target_use": "research",
+          "cves_known": []
+        },
+        {
+          "name": "g.Nautilus",
+          "type": "non_invasive",
+          "channels": 64,
+          "electrode_type": "dry",
+          "fda_status": "cleared",
+          "units_deployed": "2,000+ estimated",
+          "first_human": null,
+          "price_usd": 25000,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Apple",
+      "type": "non_invasive",
+      "founded": "1976",
+      "headquarters": "Cupertino, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "employees_approx": 164000,
+      "security_posture": "mature",
+      "security_notes": "AirPods Pro are neural-adjacent (NOT direct BCI). FDA-cleared hearing test, health sensors. Industry-leading security (Secure Enclave, E2E encryption). Included for sensor convergence trend. Multiple BCI patents filed.",
+      "tara_attack_surface": ["T0021","T0023","T0041","T0081"],
+      "devices": [
+        {
+          "name": "AirPods Pro (2nd gen)",
+          "type": "non_invasive",
+          "channels": 0,
+          "electrode_type": "dry",
+          "fda_status": "cleared",
+          "units_deployed": "billions (all AirPods models)",
+          "first_human": "2022-09",
+          "price_usd": 249,
+          "target_use": "consumer",
+          "cves_known": [],
+          "note": "NOT a BCI. Neural-adjacent: hearing test, head tracking, health sensors."
+        }
+      ]
+    },
+    {
+      "name": "Cognixion",
+      "type": "non_invasive",
+      "founded": "2017",
+      "headquarters": "Santa Barbara, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 12000000,
+      "employees_approx": 25,
+      "security_posture": "none_published",
+      "security_notes": "EEG+AR headset for ALS/cerebral palsy. No public security documentation.",
+      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0043","T0081"],
+      "devices": [
+        {
+          "name": "ONE Headset",
+          "type": "non_invasive",
+          "channels": 6,
+          "electrode_type": "dry",
+          "fda_status": "none",
+          "units_deployed": "<100",
+          "first_human": "2021-01",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ]
+    },
+    {
+      "name": "Cortera Neurotechnologies",
+      "type": "invasive",
+      "founded": "2016",
+      "headquarters": "Berkeley, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "employees_approx": 15,
+      "security_posture": "none_published",
+      "security_notes": "Surface cortical electrodes. Pre-clinical. No public security documentation.",
+      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0041","T0061","T0081"],
+      "devices": [
+        {
+          "name": "Cortera Surface Array",
+          "type": "invasive",
+          "channels": 256,
+          "electrode_type": "surface",
+          "fda_status": "none",
+          "units_deployed": "0 (pre-clinical)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ]
+    }
+  ],
+  "market_data": {
+    "market_size_estimates": [
+      {"year": 2024, "value_billion_usd": 2.1, "source": "Grand View Research"},
+      {"year": 2030, "value_billion_usd": 6.2, "source": "Grand View Research (projected)", "cagr_percent": 17.1},
+      {"year": 2032, "value_billion_usd": 8.4, "source": "Fortune Business Insights (projected)", "cagr_percent": 18.2}
+    ],
+    "total_funding_tracked_usd": 1800000000,
+    "major_funding_rounds": [
+      {"company": "Neuralink", "amount_usd": 680000000, "date": "2023-08", "series": "D"},
+      {"company": "Synchron", "amount_usd": 145000000, "date": "2024-01", "series": "C"},
+      {"company": "Precision Neuroscience", "amount_usd": 102000000, "date": "2024-01", "series": "C"},
+      {"company": "CTRL-Labs", "amount_usd": 67000000, "date": "2019-03", "series": "B", "note": "Acquired by Meta for ~$500M-1B"},
+      {"company": "Kernel", "amount_usd": 53000000, "date": "2020-06", "series": "C"},
+      {"company": "Paradromics", "amount_usd": 33000000, "date": "2023-06", "series": "B"},
+      {"company": "InteraXon (Muse)", "amount_usd": 28000000, "date": "2018-01", "series": "B"},
+      {"company": "BrainCo", "amount_usd": 25000000, "date": "2018-01", "series": "B"}
+    ],
+    "government_grants": [
+      {"program": "BRAIN Initiative (NIH)", "total_usd": 3000000000, "period": "2014-2025"},
+      {"program": "DARPA N3", "total_usd": 104000000, "period": "2018-2022"},
+      {"program": "ARPA-H BEACONS", "total_usd": 45000000, "period": "2024-2028"},
+      {"program": "EU Human Brain Project", "total_usd": 600000000, "period": "2013-2023"}
+    ],
+    "acquisition_history": [
+      {"target": "CTRL-Labs", "acquirer": "Meta Platforms", "date": "2019-09", "price_usd_estimate": 750000000},
+      {"target": "NextMind", "acquirer": "Snap Inc.", "date": "2022-03", "price_usd_estimate": null},
+      {"target": "Natus Medical", "acquirer": "Integra LifeSciences", "date": "2023-05", "price_usd_estimate": 3100000000}
+    ]
+  },
+  "policy_timeline": [
+    {"date": "2021-10", "event": "Chile constitutional neurorights amendment", "type": "law", "jurisdiction": "Chile"},
+    {"date": "2023-03", "event": "FDORA Section 524B: mandatory device cybersecurity", "type": "law", "jurisdiction": "USA (federal)"},
+    {"date": "2023-09", "event": "FDA updated premarket cybersecurity guidance", "type": "guidance", "jurisdiction": "USA (federal)"},
+    {"date": "2023-11", "event": "OECD neurotechnology recommendation", "type": "standard", "jurisdiction": "International"},
+    {"date": "2024-04", "event": "Colorado neural data privacy law", "type": "law", "jurisdiction": "USA (Colorado)"},
+    {"date": "2024-09", "event": "California SB 1223 neural data under CCPA", "type": "law", "jurisdiction": "USA (California)"},
+    {"date": "2025-02", "event": "EU AI Act prohibited practices take effect", "type": "law", "jurisdiction": "EU"},
+    {"date": "2025-05", "event": "Montana neural data privacy law", "type": "law", "jurisdiction": "USA (Montana)"},
+    {"date": "2025-06", "event": "Connecticut neural data privacy law", "type": "law", "jurisdiction": "USA (Connecticut)"},
+    {"date": "2025-06", "event": "FDA updated postmarket cybersecurity guidance", "type": "guidance", "jurisdiction": "USA (federal)"},
+    {"date": "2025-08", "event": "EU AI Act high-risk requirements take effect", "type": "law", "jurisdiction": "EU"},
+    {"date": "2025-11", "event": "UNESCO neurotechnology ethics recommendation", "type": "standard", "jurisdiction": "International"},
+    {"date": "2026-01", "event": "California SB 1223 neural data protections effective", "type": "law", "jurisdiction": "USA (California)"}
+  ],
+  "publication_trends": [
+    {"year": 2010, "pubmed_bci": 450, "security_bci": 2},
+    {"year": 2012, "pubmed_bci": 720, "security_bci": 4},
+    {"year": 2015, "pubmed_bci": 1200, "security_bci": 8},
+    {"year": 2018, "pubmed_bci": 2100, "security_bci": 15},
+    {"year": 2020, "pubmed_bci": 3200, "security_bci": 25},
+    {"year": 2022, "pubmed_bci": 4500, "security_bci": 35},
+    {"year": 2023, "pubmed_bci": 5800, "security_bci": 45},
+    {"year": 2024, "pubmed_bci": 7200, "security_bci": 55},
+    {"year": 2025, "pubmed_bci": 8500, "security_bci": 70}
+  ],
+  "metadata": {
+    "data_sources": [
+      "Company websites and press releases",
+      "SEC filings and Crunchbase",
+      "FDA device databases (510(k), PMA, Breakthrough, IDE)",
+      "PubMed (approximate BCI search term counts)",
+      "NIST NVD for CVE data",
+      "ICS-CERT advisories",
+      "Grand View Research, Fortune Business Insights",
+      "State legislature websites"
+    ],
+    "limitations": [
+      "Funding amounts are approximate. Many companies do not disclose exact figures.",
+      "Units deployed are estimates. Most BCI companies do not publish sales data.",
+      "PubMed publication counts are approximate order-of-magnitude estimates.",
+      "TARA technique IDs mapped by category, not individually validated per company.",
+      "Security posture based on public information only. Companies may have unpublished measures.",
+      "Market size estimates vary between research firms."
+    ],
+    "update_frequency": "Quarterly recommended"
+  }
+}

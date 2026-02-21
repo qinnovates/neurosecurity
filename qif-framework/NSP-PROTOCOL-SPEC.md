@@ -7,6 +7,7 @@ Date:           2026-02-18
 Status:         Implemented (Alpha)
 Author:         Kevin Qi (Qinnovate)
 Framework:      QIF v4.0 Hourglass Model (11-band, 7-1-3)
+Integration:    INTEGRATION-ROADMAP.md (unified NSP + Runemate + Neurowall roadmap)
 ```
 
 ---

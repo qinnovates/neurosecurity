@@ -5,6 +5,7 @@
 > **Date:** 2026-02-21
 > **Authors:** Kevin Qi, Antigravity (Gemini)
 > **Parent Framework:** [QIF v4.0 Hourglass](../qif-framework/README.md) / [NSP v0.5](../qif-framework/NSP-PROTOCOL-SPEC.md) / [Runemate](../qif-framework/RUNEMATE.md)
+> **Integration Roadmap:** [INTEGRATION-ROADMAP.md](../../INTEGRATION-ROADMAP.md)
 
 ---
 

@@ -278,6 +278,7 @@ qinnovates/qinnovate/
 ├── governance/                 # Neuroethics documents
 │   └── processes/              # Standards development lifecycle
 │
+├── INTEGRATION-ROADMAP.md      # Unified NSP + Runemate + Neurowall roadmap
 ├── tools/                      # Practical security tools
 │   ├── macshield/              # macOS workstation hardening
 │   └── neurowall/              # Neural firewall neckband
