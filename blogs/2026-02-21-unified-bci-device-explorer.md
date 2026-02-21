@@ -252,7 +252,7 @@ One month and 630+ commits later:
 - A coherence monitor (Neurowall v0.7) with 14 attack generators, 9/9 detection at 30s, 5/5 on real EEG hardware (OpenBCI Cyton via BrainFlow, 0% false positive rate), ROC-optimized to 5% FPR at 100% TPR
 - A domain-specific neural rendering language (Runemate)
 - FDORA Section 3305 regulatory compliance mapped across all techniques
-- 9 cross-AI validation sessions across 5 independent models (Gemini, Grok-3, DeepSeek-R1, QwQ-32B, WhiteRabbitNeo)
+- 9 cross-AI validation sessions across Claude, Gemini, and OpenAI
 - A peer-reviewed preprint on Zenodo (v1.4, DOI: [10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105))
 - 165 research sources, 70 derivation log entries, 20 field journal entries, 50 blog posts
 - A unified open API serving all of it at a single endpoint
