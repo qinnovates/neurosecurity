@@ -235,25 +235,39 @@ Use it. Build on it. If you find an error, [open an issue](https://github.com/qi
 
 ## A Personal Note
 
-I'm tired but wired right now. I can't fully process what I've been able to build in the span of one month.
+I'm tired but wired. I can't fully process what I've built in one month.
 
-First week of January, I made a commitment to myself: get sober, get serious, make my dreams come true. The first thing I did was draw a mind map. I mapped out my future, what I care about, what gets me excited. Ironically, what I landed on was mapping the mind. By mid-January I had my first commit, the ONI framework that would become QIF.
+First week of January, I made a commitment to myself: get sober, get serious, make my dreams come true. I drew a mind map. Mapped out my future, what I care about, what gets me excited. Ironically, what I landed on was mapping the mind. By mid-January I had my first commit, the ONI framework that would become QIF.
 
-I started with 60 attack techniques collectively known across BCI research publications. Those were the baseline, what the field had already identified in scattered papers and conference proceedings. The 43 techniques I added after that came from applying the QIF framework I devised, grounding new attack vectors in physics constraints and neuroanatomy rather than cataloguing what others had already published. All the while learning about neuroscience and neurorights from scratch. One month later: 103 threat techniques mapped to 68 DSM-5 psychiatric diagnoses. 4 neurorights mapped across every technique. 24 BCI devices catalogued from FDA filings and manufacturer datasheets. 38 brain regions cross-referenced to devices and threats. 13 physics constraints unified into a single limits equation. An 11-band hourglass security model derived from scratch. A post-quantum neural security protocol (NSP) implemented in Rust. A coherence monitor (Neurowall) that detects 9 out of 9 attacks at 30 seconds and validated on real EEG hardware. A domain-specific rendering language (Runemate). A peer-reviewed preprint on Zenodo. 9 cross-AI validation sessions. 165 research sources. 70 derivation log entries. 50 blog posts. And now a unified API serving all of it at a single endpoint.
+I started with 60 attack techniques collectively known across BCI research publications, the baseline of what the field had already identified in scattered papers and conference proceedings. The 43 techniques I added after that came from applying the QIF framework I devised, grounding new attack vectors in physics and neuroanatomy rather than cataloguing what others had already published. All the while learning neuroscience and neurorights from scratch.
+
+One month and 630+ commits later:
+
+- 103 threat techniques mapped to 68 DSM-5 psychiatric diagnoses and 4 neurorights
+- 24 BCI devices catalogued from FDA filings and manufacturer datasheets
+- 38 brain regions cross-referenced to devices, threats, and physics constraints
+- 13 physics constraints unified into a single BCI limits equation, cross-validated by Gemini 2.5 Pro
+- An 11-band hourglass security model derived from scratch
+- A post-quantum neural security protocol (NSP v0.5) implemented in Rust
+- A coherence monitor (Neurowall v0.7) with 14 attack generators, 9/9 detection at 30s, 5/5 on real EEG hardware (OpenBCI Cyton via BrainFlow, 0% false positive rate), ROC-optimized to 5% FPR at 100% TPR
+- A domain-specific neural rendering language (Runemate)
+- FDORA Section 3305 regulatory compliance mapped across all techniques
+- 9 cross-AI validation sessions across 5 independent models (Gemini, Grok-3, DeepSeek-R1, QwQ-32B, WhiteRabbitNeo)
+- A peer-reviewed preprint on Zenodo (v1.4, DOI: [10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105))
+- 165 research sources, 70 derivation log entries, 20 field journal entries, 50 blog posts
+- A unified open API serving all of it at a single endpoint
 
 I thought this had taken six weeks. I checked the git log. First commit: February 1. Three weeks. I was wrong by double.
 
-I'm not trying to bloat this. I just want to put light on what naturally motivates me. This is my natural dopamine. The act of finally executing and accomplishing what my life experiences have built up to this very moment is the energy and the excitement that keeps me awake. I know this isn't sustainable. Once I get into my target school, I'm drawing hard boundaries. I have a few side hobbies and projects I'm picking up.
+This is my natural dopamine. The act of finally executing what my life experiences have built up to is the energy that keeps me awake. I know it's not sustainable. Once I get into my target school, I'm drawing hard boundaries. But right now, momentum is momentum. It's physics. It snowballs. Eventually it continues with or without my help, and that's the best part. Something in this month will stick. If not, there's more to come. Probability at its finest.
 
-I don't use LinkedIn, unfortunately, but I hope someone finds this work one day as I apply and verbalize it throughout the community and begin getting help. Regardless, that isn't going to slow me down, because that's not how momentum works. It's physics happening and snowballing. Eventually it will continue going with or without my help. That's the best part. I know at least something in this one month will stick, and if not, there's more to come and eventually something will hit that bullseye. Probability at its finest.
+I haven't kicked off the security vulnerability scanning yet. That's a whole new category: responsible disclosures, compiled reports, coordinated follow-ups. I can automate parts of it, but that defeats the fun of learning the process.
 
-Mind you, I haven't officially kicked off the security vulnerability scanning yet. That's going to introduce a whole new category of work: responsible disclosures, compiled reports, coordinated follow-ups. I can automate parts of it, but that defeats the fun of actually learning the process.
+This isn't a solo mission forever. I want to build a real team around neurosecurity, but through academia, with proper footing and a real foundation to grow from. That's my goal by end of year: get into a program and start these conversations in a formal setting. It's fun and casual now, but I know I need to put my serious face on while keeping the same demeanor, real soon.
 
-This isn't a solo mission forever. I want to build a real team around neurosecurity. But I want to do it the right way, through academia, with proper footing and a real foundation to grow from. That comes first. Once I'm in that environment, the collaboration scales naturally.
+If any of this resonates, reach out at research@qinnovate.com. I can't promise pay or fast replies, my bandwidth is razor thin, so please don't take silence personally. What I can promise is you'd be working at the very front of a field that barely exists yet. I started this project with ethics, not exploits. That's what led to everything you see here.
 
-In the meantime, if any of this resonates with you, reach out at research@qinnovate.com. I'd genuinely love to show someone the ropes. I can't promise pay or fast replies, my bandwidth is razor thin right now, so please don't take silence personally. What I can promise is that you'd be working on something that matters, at the very front of a field that barely exists yet. That's the whole point. I started this project with ethics, not exploits. That's what led to everything you see here.
-
-And don't forget, all of this is open for a reason. Don't wait to start, because I didn't. Just do it responsibly, securely, and ethically. Do your homework, make mistakes, but know how to steer yourself back on track. Version control is beautiful for that reason. But production environments in a lab, that's different. That requires partnerships, institutional backing, and real accountability. That's my goal by end of year: get into a program and start these conversations in a formal setting. It's fun and casual now, but I know I need to put my serious face on while keeping the same demeanor, real soon.
+All of this is open for a reason. Don't wait to start, because I didn't. Just do it responsibly, securely, and ethically. Make mistakes, but know how to steer yourself back. Version control is beautiful for that reason. Production environments in a lab, that's different. That requires partnerships, institutional backing, and real accountability.
 
 What a time to be alive. It started with a mind map. I hope it helps science, research, and a whole lot more.
 
