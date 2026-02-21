@@ -60,6 +60,7 @@ Every contribution is categorized by its cognitive origin. AI assistance is trea
 | **Code Implementation** | Algorithm design, API decisions, security-critical logic | Syntax generation, boilerplate, docstrings | Human reviewed all generated code for security implications |
 | **Research Synthesis** | Source selection, relevance judgment, argument construction, conclusions | Initial literature summaries, independent validation and critique | All AI summaries verified against primary sources; multiple AI models used to counter single-model bias |
 | **Technical Writing** | All original analysis, ethical arguments, novel hypotheses | Structural suggestions, grammar, APA formatting | Human wrote arguments; AI assisted with presentation |
+| **Governance & Compliance** | Final validation of NIST/ISO mappings, neurorights taxonomy consolidation decision | Proposal and implementation of "Hardened Mapping" bridge, technical evidence mapping to NIST/ISO controls | Human streamlined taxonomy to 4 original rights; AI provided the auditable evidence mapping |
 
 ---
 
@@ -181,6 +182,7 @@ Key phases include:
 - **Phase 7** (Feb 18): I0 Depth & Thalamus-Firewall Research Session — Claude Opus 4.6 orchestrated 4 parallel research agents (Hopkins BCI ecosystem, CELLS publications, cybersecurity guardrails mapping, QIF bands/TARA registry). Key findings: (1) Thalamic gating as security analog (TRN = default-deny, from Kevin's MIT OpenCourseware self-study), (2) I0 depth subclassification (4 subtypes by implant location), (3) 27 cybersecurity controls mapped to QIF bands with biological analogs, (4) CELLS/NAM/NEJM citations explicitly calling for tools QIF provides. Mathews et al. NEJM 2022 Tier 3 = "still under development"; NAM CESTI 2023 = "no standards exist." Human decided: add I0 depth to QIF-TRUTH.md, add Entry 59 to derivation log, add 5 new citations to research sources.
 
 - **Phase 7** (Feb 18): BCI Limits Equation cross-validation. Gemini CLI independently validated 12-constraint physics system. Confirmed all physics sound, flagged T.H. Shannon vs Claude Shannon disambiguation, suggested stimulation safety constraint, SNR_min quantification. Human decided: apply refinements, reframe physics as boundary not control.
+- **Phase 8** (Feb 21): NIST/ISO Hardened Compliance Mapping & Neurorights Consolidation — Antigravity (Gemini 2.0 Pro) proposed the "Hardened Mapping" bridge to link ethical neurorights to auditable technical evidence (NIST SP 800-53/ISO 27001). Implemented mapping across `qtara-registrar.json` for sample techniques. Cross-validated neurorights taxonomy; human decided to consolidate back to the "original 4" rights (removing Cognitive Authenticity) and simplified source documentation.
 
 ### Non-AI Tools
 - Rust (NSP/Runemate implementation)
@@ -252,3 +254,4 @@ The [Derivation Log](https://github.com/qinnovates/qinnovate/blob/main/qif-frame
 
 [All governance documents](/governance/)
 Log entry: Sun Feb 15 23:58:52 UTC 2026 - Cross-AI Validation Session (Gemini 2.0 Pro) - Verified citations (Meng, Schroder, Munoz) and updated transparency footer.
+Log entry: Fri Feb 21 04:56:51 UTC 2026 - Hardened Compliance & Taxonomy Consolidation (Antigravity) - Implemented NIST/ISO mappings and documented neurorights consolidation.

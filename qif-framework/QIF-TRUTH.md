@@ -126,7 +126,7 @@ These bypasses represent additional attack surfaces without the thalamic gating'
 BCI directionality is orthogonal to I0 depth and critically affects the threat profile:
 
 - **Read-only** devices (BrainGate, EEG, fNIRS, Stentrode) can only exfiltrate neural data. Attack surface limited to confidentiality violations (Mental Privacy).
-- **Write-only** devices (cochlear implants, older DBS leads, TMS, tDCS) can only inject signals. Attack surface limited to integrity violations (Cognitive Authenticity, Mental Integrity).
+- **Write-only** devices (cochlear implants, older DBS leads, TMS, tDCS) can only inject signals. Attack surface limited to integrity violations (Mental Integrity).
 - **Bidirectional** devices (Medtronic Percept RC, NeuroPace RNS, Neuralink N1) can both read and write. Full attack surface — confidentiality AND integrity violations possible. These represent the highest security criticality.
 
 **Closed-loop systems** (NeuroPace RNS, Medtronic Percept RC with BrainSense) are a special case: they autonomously detect neural patterns and respond with stimulation. A compromised closed-loop device could alter its detection thresholds or response parameters, creating an attack that is both self-triggering and self-reinforcing.

@@ -39,7 +39,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
 | **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.4, Secure Pipe Verified |
-| **[Governance](https://qinnovate.com/governance/)** | 11 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
+| **[Governance](https://qinnovate.com/governance/)** | 12 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
 | **[Tools](./tools/)** | Accessible security tools (e.g., macshield) to secure the workstation layer. | NEW (Alpha) |
 
 ---
@@ -116,7 +116,7 @@ Runemate paves the road for BCI content delivery the way W3C paved the road for 
 
 ### Governance
 
-11 published documents covering the full neuroethics landscape:
+12 published documents covering the full neuroethics landscape:
 
 | Document | Scope |
 |----------|-------|
@@ -128,7 +128,8 @@ Runemate paves the road for BCI content delivery the way W3C paved the road for 
 | [Pediatric Considerations](governance/PEDIATRIC_CONSIDERATIONS.md) | Protections for minors |
 | [Post-Deployment Ethics](governance/POST_DEPLOYMENT_ETHICS.md) | Ongoing monitoring obligations |
 | [QIF Neuroethics](governance/QIF-NEUROETHICS.md) | 11 open questions on quantum biometric governance |
-| [Regulatory Compliance](governance/REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights mapping |
+| [Regulatory Compliance](governance/REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk |
+| [Regulatory Gaps](governance/REGULATORY_GAPS.md) | Structural challenges in BCI law |
 | [Transparency](governance/TRANSPARENCY.md) | Human-AI collaboration audit trails |
 | [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | International neuroethics principles |
 

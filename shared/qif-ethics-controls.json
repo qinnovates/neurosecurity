@@ -37,14 +37,6 @@
       "color": "#f59e0b",
       "bands": ["N6", "N7"],
       "frameworks": ["Ienca & Andorno 2017", "UNESCO Draft Recommendation on Neurotechnology 2024"]
-    },
-    "CA": {
-      "name": "Cognitive Authenticity",
-      "shortDef": "Your thoughts should be genuinely yours, not implanted or manufactured.",
-      "source": "qif-original",
-      "color": "#10b981",
-      "bands": ["N7", "N4"],
-      "frameworks": ["QIF Original (2026)", "Proposed extension to Chile framework"]
     }
   },
   "consent_tiers": {

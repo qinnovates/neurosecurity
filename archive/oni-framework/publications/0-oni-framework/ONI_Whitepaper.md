@@ -624,7 +624,7 @@ The ONI Framework was designed with neuroethical principles as foundational cons
 | **Mental Privacy** | Transport variance (σ²τ) detects unauthorized pathway access; BCI Anonymizer filters cognitive data |
 | **Mental Integrity** | Amplitude bounds and rate limiting prevent physical harm from overstimulation |
 | **Psychological Continuity** | L14 Identity Layer protection; longitudinal monitoring (planned) |
-| **Cognitive Authenticity** | Coherence Metric (Cₛ) quantifies whether signals are genuinely from the user's brain |
+| **Mental Integrity (extended)** | Coherence Metric (Cₛ) quantifies whether signals are genuinely from the user's brain |
 
 > **Deep dive:** See the full ethics mapping in [NEUROETHICS_ALIGNMENT.md](../../governance/NEUROETHICS_ALIGNMENT.md) and the informed consent architecture in [INFORMED_CONSENT_FRAMEWORK.md](../../governance/INFORMED_CONSENT_FRAMEWORK.md).
 

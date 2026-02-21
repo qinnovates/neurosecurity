@@ -750,7 +750,7 @@ const tacticColors: Record<string, string> = {
             Every technique in the TARA atlas is now mapped to the affected neurorights through a systematic, multi-layer process: UI category provides the primary signal, DSM-5-TR cluster adds overlays, and NISS vector components refine the result. This mapping is deterministic and reproducible &mdash; the same technique always maps to the same rights.
           </p>
           <p>
-            Running {stats.totalTechniques} techniques through this process confirmed four established rights and revealed one genuine gap. QIF extends Mental Integrity with engineering-level signal dynamics protections and Mental Privacy with data-lifecycle protections. One new right &mdash; Cognitive Authenticity &mdash; fills a gap no prior framework addresses: the distinction between reading neural data (MP) and writing into neural signals (CA). Cross-validated against six established frameworks (Ienca &amp; Andorno 2017, Yuste/NeuroRights Foundation 2017, Chile Law 21.383, UNESCO 2025 Recommendation, Farahany 2023, Bublitz 2022):
+            Running {stats.totalTechniques} techniques through this process confirmed all four established rights from Ienca &amp; Andorno (2017). QIF extends Mental Integrity with engineering-level signal dynamics protections and Mental Privacy with data-lifecycle protections. QIF also maps these neurorights onto the CIA triad (MP = Confidentiality, MI = Integrity) and provides the first concrete exploit chain (LSL CVE) demonstrating both violations. Cross-validated against six established frameworks (Ienca &amp; Andorno 2017, Yuste/NeuroRights Foundation 2017, Chile Law 21.383, UNESCO 2025 Recommendation, Farahany 2023, Bublitz 2022):
           </p>
         </div>
 
@@ -759,12 +759,10 @@ const tacticColors: Record<string, string> = {
             <div class="glass-subtle rounded-lg p-4">
               <div class="flex items-center gap-2 mb-1">
                 <span class={`inline-block px-2 py-0.5 rounded text-xs font-mono font-bold ${
-                  r.id === 'CA' ? 'bg-[var(--color-accent-tertiary)]/20 text-[var(--color-accent-tertiary)]' :
                   r.id === 'MI' || r.id === 'MP' ? 'bg-[var(--color-accent-secondary)]/20 text-[var(--color-accent-secondary)]' :
                   'bg-[var(--color-accent-primary)]/20 text-[var(--color-accent-primary)]'
                 }`}>{r.id}</span>
                 <span class="text-sm font-semibold text-[var(--color-text-primary)]">{r.name}</span>
-                {r.id === 'CA' && <span class="text-[10px] uppercase tracking-wider text-[var(--color-accent-tertiary)] font-semibold">QIF Original</span>}
                 {(r.id === 'MI' || r.id === 'MP') && <span class="text-[10px] uppercase tracking-wider text-[var(--color-accent-secondary)] font-semibold">QIF Extended</span>}
               </div>
               <p class="text-xs text-[var(--color-text-muted)]">{r.count} of {stats.totalTechniques} techniques</p>
@@ -774,7 +772,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            <strong>Cognitive Authenticity (CA) &mdash; QIF Original:</strong> No prior framework distinguishes <em>reading</em> neural data (Mental Privacy) from <em>writing</em> into neural signals (Cognitive Authenticity). This maps to the CIA triad: MP = Confidentiality, CA = Integrity/Authenticity. The LSL CVE demonstrates both in a single exploit chain.
+            <strong>CIA Triad Mapping:</strong> QIF maps Ienca &amp; Andorno's neurorights onto the CIA triad: Mental Privacy = Confidentiality (don't <em>read</em> my neural data), Mental Integrity = Integrity (don't <em>write</em> into my neural signals). The LSL CVE demonstrates both violations in a single exploit chain: Phase 2 (exfiltrate neural data) = MP violation, Phase 3 (inject false signals) = MI violation.
           </p>
           <p>
             <strong>Mental Integrity (MI) &mdash; QIF Extended:</strong> Now includes signal dynamics protections. Some attacks don't break neural function; they <em>retune</em> it. Gradual drift, neurofeedback falsification, and baseline adaptation poisoning reshape the brain's homeostatic equilibrium. QIF extends MI with engineering-level specifications for detecting these dynamical retuning attacks. {stats.neurorights.rights.find(r => r.id === 'MI')?.count} techniques map to MI.

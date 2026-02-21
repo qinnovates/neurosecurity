@@ -19,7 +19,7 @@ order: 2
 - [Privacy & Ethics Statement](#privacy--ethics-statement)
 - [Core Neuroethics Principles](#core-neuroethics-principles)
 - [Framework-to-Ethics Mapping](#framework-to-ethics-mapping)
-  - [Coherence Metric (Cₛ) → Cognitive Authenticity](#1-coherence-metric-cₛ--cognitive-authenticity)
+  - [Coherence Metric (Cₛ) → Mental Integrity](#1-coherence-metric-cₛ--mental-integrity)
   - [Neural Firewall (L8) → Cognitive Liberty & Mental Integrity](#2-neural-firewall-l8--cognitive-liberty--mental-integrity)
   - [14-Layer Model → Comprehensive Threat Mapping](#3-14-layer-model--comprehensive-threat-mapping)
   - [Scale-Frequency Invariant → Anomaly Detection](#4-scale-frequency-invariant--anomaly-detection-for-mental-integrity)
@@ -68,25 +68,24 @@ The following principles are widely recognized in neuroethics literature (Ienca 
 | **Mental Privacy** | Right to keep neural data and mental states confidential | Unauthorized brain reading, thought surveillance |
 | **Mental Integrity** | Right to protection from unauthorized alteration of neural function | Neural hacking, cognitive manipulation, "brain malware" |
 | **Psychological Continuity** | Right to maintain personal identity and sense of self | Identity manipulation, memory tampering, personality modification |
-| **Cognitive Authenticity** | Right to know which thoughts/intentions are genuinely one's own | Implanted thoughts, covert influence, confusion of agency |
 
 ---
 
 ## Framework-to-Ethics Mapping
 
-### 1. Coherence Metric (Cₛ) → Cognitive Authenticity
+### 1. Coherence Metric (Cₛ) → Mental Integrity
 
 **The Problem**: How does a person (or their BCI) know if a neural signal is genuinely from their own brain versus injected by an attacker?
 
 **QIF Solution**: The coherence metric quantifies signal trustworthiness across three dimensions:
 
-| Component | What It Measures | Authenticity Protection |
-|-----------|------------------|------------------------|
+| Component | What It Measures | Integrity Protection |
+|-----------|------------------|----------------------|
 | Phase variance (σ²φ) | Timing consistency | Detects out-of-sync injections that don't match brain rhythms |
 | Transport variance (σ²τ) | Pathway integrity | Flags signals bypassing biological routes |
 | Gain variance (σ²γ) | Amplitude stability | Catches artificially over/under-powered signals |
 
-**Ethical Reasoning**: A signal that doesn't match expected biological patterns may not be authentic to the user. By scoring coherence, the system provides a *quantitative basis* for authenticity assessment.
+**Ethical Reasoning**: A signal that doesn't match expected biological patterns may indicate unauthorized alteration of neural function. By scoring coherence, the system provides a *quantitative basis* for mental integrity assessment (Ienca & Andorno, 2017).
 
 **Design Decision**: The formula `Cₛ = e^(−(σ²φ + σ²τ + σ²γ))` was chosen because:
 - Exponential decay ensures high sensitivity to small variances

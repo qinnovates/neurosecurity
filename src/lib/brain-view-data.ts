@@ -206,11 +206,11 @@ function buildGovernanceView(): BrainView {
   const govData = getNeurogovernanceData();
 
   const NEURORIGHT_COLORS: Record<string, string> = {
-    MP: '#3b82f6', CL: '#8b5cf6', MI: '#ef4444', PC: '#f59e0b', CA: '#10b981',
+    MP: '#3b82f6', CL: '#8b5cf6', MI: '#ef4444', PC: '#f59e0b',
   };
   const NEURORIGHT_NAMES: Record<string, string> = {
     MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity',
-    PC: 'Psychological Continuity', CA: 'Cognitive Authenticity',
+    PC: 'Psychological Continuity',
   };
 
   const regions: BrainViewRegion[] = govData.brainRegions.map(region => {

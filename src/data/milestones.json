@@ -156,16 +156,16 @@
     },
     {
       "date": "2026-02-16",
-      "title": "Neurorights Mapping: 5 Rights (4 I&A + 1 QIF Original)",
-      "description": "Systematic mapping of 102 techniques against neurorights. Four rights from Ienca & Andorno (2017): MP, CL, MI, PC. One QIF original: Cognitive Authenticity (CA) — the right to signal authenticity, filling a genuine gap (read vs write attacks). MI extended with dynamical integrity concepts (81 techniques). MP extended with data-lifecycle protections. Cross-validated by Gemini 2.5 Pro. All 102 techniques mapped to 5 neurorights.",
+      "title": "Neurorights Mapping: 4 Rights + QIF Extensions",
+      "description": "Systematic mapping of 102 techniques against four neurorights from Ienca & Andorno (2017): MP, CL, MI, PC. QIF extends MI with signal dynamics protections and CIA triad mapping (MP = Confidentiality, MI = Integrity). MP extended with data-lifecycle protections. Cross-validated by Gemini 2.5 Pro. All 102 techniques mapped to 4 neurorights.",
       "category": "research",
       "icon": "brain",
       "href": "/news/2026-02-16-your-brain-has-rights-we-counted-them/"
     },
     {
       "date": "2026-02-17",
-      "title": "Neurorights Restructured: 7 → 5 After Literature Review",
-      "description": "Cross-validated against 6 established frameworks (Ienca & Andorno 2017, Yuste/NRF 2017, Chile 2021, UNESCO 2025, Farahany 2023, Bublitz 2022). DI folded into MI (engineering specification of mental integrity). IDA folded into MP (data-lifecycle extension of mental privacy). CA confirmed as genuinely novel — no prior framework distinguishes read-attacks from write-attacks. Academically honest restructuring: 4 I&A rights + 1 QIF original.",
+      "title": "Neurorights Restructured: 7 → 4 After Literature Review",
+      "description": "Cross-validated against 6 established frameworks (Ienca & Andorno 2017, Yuste/NRF 2017, Chile 2021, UNESCO 2025, Farahany 2023, Bublitz 2022). DI folded into MI (engineering specification of mental integrity). IDA folded into MP (data-lifecycle extension of mental privacy). CA folded into MI (Ienca & Andorno's MI already covers write-attacks). QIF contribution: engineering depth on MI and MP, CIA triad mapping.",
       "category": "research",
       "icon": "brain",
       "href": "/about/"
