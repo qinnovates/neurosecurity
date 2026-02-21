@@ -261,6 +261,8 @@ I thought this had taken six weeks. I checked the git log. First commit: Februar
 
 This is my natural dopamine. The act of finally executing what my life experiences have built up to is the energy that keeps me awake. I know it's not sustainable. Once I get into my target school, I'm drawing hard boundaries. But right now, momentum is momentum. It's physics. It snowballs. Eventually it continues with or without my help, and that's the best part. Something in this month will stick. If not, there's more to come. Probability at its finest.
 
+There's also a lot of policy gaps that still need addressing. Policies define the scope and the work for security. Neuroethics will write those policies, and neurosecurity will test and secure against them. The two aren't separate disciplines, they're two halves of the same problem. Without ethics defining what's protected, security has no boundaries. Without security testing those boundaries, ethics stays theoretical.
+
 I haven't kicked off the security vulnerability scanning yet. That's a whole new category: responsible disclosures, compiled reports, coordinated follow-ups. I can automate parts of it, but that defeats the fun of learning the process.
 
 This isn't a solo mission forever. I want to build a real team around neurosecurity, but through academia, with proper footing and a real foundation to grow from. That's my goal by end of year: get into a program and start these conversations in a formal setting. It's fun and casual now, but I know I need to put my serious face on while keeping the same demeanor, real soon.
