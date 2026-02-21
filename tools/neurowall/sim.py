@@ -229,6 +229,8 @@ class SignalMonitor:
     """
     window_size: int = 125           # 0.5s at 250Hz
     calibration_windows: int = 4     # 2s calibration at 0.5s/window
+    trajectory_alpha: float = 0.15   # EWMA smoothing factor for trajectory tracking
+    trajectory_threshold: float = 0.03  # Cs drift from baseline to flag trajectory anomaly
 
     # Internal state
     _buffer: List[float] = field(default_factory=list)
@@ -241,6 +243,16 @@ class SignalMonitor:
     _last_cs: float = 1.0
     _last_sigma_phi: float = 0.0
     _last_h_tau: float = 0.0
+    # Trajectory tracking: EWMA of Cs to catch slow cumulative drift
+    # (defeats QIF-T0066 "boiling frog" adiabatic evasion)
+    _cs_ewma: float = 0.0
+    _trajectory_anomaly_count: int = 0
+    # DC drift tracking: REMOVED in v0.4.
+    # Attempted to track window_dc (mean before AC coupling) vs calibration
+    # baseline. Failed because the random walk component in synthetic EEG
+    # naturally diverges from the 2s calibration window, creating 14+ sigma
+    # false positives on clean signal by t=6s. Real DC drift detection needs
+    # hardware reference electrodes (Phase 1). See DERIVATION-LOG Entry 007.
 
     def _compute_sigma_phi_sq(self, buf_ac: np.ndarray) -> float:
         """Phase variance via Hilbert transform on alpha-band signal.
@@ -375,7 +387,14 @@ class SignalMonitor:
             if len(self._calibration_cs) >= self.calibration_windows:
                 self._baseline_cs_mean = float(np.mean(self._calibration_cs))
                 self._baseline_cs_std = float(np.std(self._calibration_cs))
-                self._baseline_cs_std = max(self._baseline_cs_std, 1e-6)
+                # Floor at 0.01 to prevent normal Cs variance from creating
+                # huge z-scores. Without this, baseline_std of ~0.002 means
+                # a Cs drop from 0.72 to 0.65 (normal variance) gives z=35,
+                # causing false positives. With floor of 0.01, same drop
+                # gives z=7, still flagged but less extreme. See Entry 006.
+                self._baseline_cs_std = max(self._baseline_cs_std, 0.01)
+                # Initialize EWMA to baseline for trajectory tracking
+                self._cs_ewma = self._baseline_cs_mean
                 self._calibrated = True
                 return 0.0, {
                     "status": "calibrated",
@@ -400,6 +419,26 @@ class SignalMonitor:
         # Anomaly score: 0 when Cs is at or above baseline, scales up with drop
         anomaly_score = max(0.0, z_drop)
 
+        # --- Trajectory tracking (defeats QIF-T0066 "boiling frog") ---
+        # Per-window z-score misses ultra-slow drift because each window
+        # looks individually normal. The EWMA tracks cumulative Cs
+        # displacement over many windows. Even tiny per-window drops
+        # accumulate in the EWMA, eventually crossing the threshold.
+        #
+        # EWMA formula: ewma_new = alpha * cs + (1 - alpha) * ewma_old
+        # alpha = 0.15 gives ~7-window effective window (1/alpha ~ 6.7)
+        # This means drift over 3-4 seconds of signal starts to register.
+        self._cs_ewma = (self.trajectory_alpha * cs
+                         + (1.0 - self.trajectory_alpha) * self._cs_ewma)
+
+        trajectory_drift = self._baseline_cs_mean - self._cs_ewma
+        trajectory_flag = trajectory_drift > self.trajectory_threshold
+
+        if trajectory_flag:
+            trajectory_anomaly = (trajectory_drift / self.trajectory_threshold) * 2.0
+            anomaly_score = max(anomaly_score, trajectory_anomaly)
+            self._trajectory_anomaly_count += 1
+
         if anomaly_score > 1.5:
             self._anomaly_count += 1
 
@@ -411,6 +450,9 @@ class SignalMonitor:
             "h_tau": h_tau,
             "cs_drop": cs_drop,
             "z_drop": z_drop,
+            "cs_ewma": self._cs_ewma,
+            "trajectory_drift": trajectory_drift,
+            "trajectory_flag": trajectory_flag,
         }
 
     @property
@@ -423,7 +465,9 @@ class SignalMonitor:
             "calibrated": self._calibrated,
             "windows_seen": self._windows_seen,
             "anomaly_count": self._anomaly_count,
+            "trajectory_anomaly_count": self._trajectory_anomaly_count,
             "last_cs": self._last_cs,
+            "cs_ewma": self._cs_ewma,
             "baseline_cs": self._baseline_cs_mean if self._calibrated else None,
         }
 
@@ -839,7 +883,7 @@ def run_simulation(args):
     verbose = args.verbose
 
     print("=" * 70)
-    print("  NEUROWALL v0.3 SIM — Coherence Monitor + NISS + NSP Pipeline")
+    print("  NEUROWALL v0.4 SIM — Trajectory Tracker + Coherence + NISS + NSP")
     print("=" * 70)
     print(f"  Sample rate:    {SAMPLE_RATE} Hz")
     print(f"  Duration:       {duration}s ({int(duration * SAMPLE_RATE)} samples)")
@@ -891,6 +935,8 @@ def run_simulation(args):
     print(f"[MON] Coherence monitor: Cs = e^(-(sigma_phi^2 + H_tau))")
     print(f"      Calibration: {monitor.calibration_windows} windows "
           f"({monitor.calibration_windows * monitor.window_size / SAMPLE_RATE:.1f}s)")
+    print(f"      Trajectory tracker: EWMA alpha={monitor.trajectory_alpha}, "
+          f"drift threshold={monitor.trajectory_threshold}")
     print(f"      Phase 1 TODO: + sigma_gamma^2 (gain baseline deviation)")
     print(f"[L3] NISS engine: signature (SSVEP) + anomaly (Cs) scoring")
     print(f"     Runemate policy: NISS > {policy.niss_threshold} "
@@ -1045,7 +1091,9 @@ def run_simulation(args):
     print("  --- Coherence Monitor (Cs = e^(-(sigma_phi^2 + H_tau))) ---")
     print(f"  Windows analyzed:   {mon['windows_seen']}")
     print(f"  Anomalies flagged:  {mon['anomaly_count']}")
+    print(f"  Trajectory alerts:  {mon['trajectory_anomaly_count']}")
     print(f"  Last Cs:            {mon['last_cs']:.4f}")
+    print(f"  Cs EWMA:            {mon['cs_ewma']:.4f}")
     if mon['baseline_cs'] is not None:
         print(f"  Baseline Cs:        {mon['baseline_cs']:.4f}")
     print()

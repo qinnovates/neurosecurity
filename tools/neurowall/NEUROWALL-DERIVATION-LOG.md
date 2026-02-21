@@ -130,6 +130,177 @@ Both cause Cs to crash from ~0.72 to ~0.06 (Critical threshold in QIF decision t
 
 ---
 
+## Entry 007 — v0.4: DC Drift Detection Attempt, FPR-Adjusted Monitor, Honest Detection Boundaries (2026-02-21)
+
+**AI Systems:** Claude Opus 4.6
+**Classification:** VERIFIED (empirical test results)
+**Connected entries:** 006, 002, 003
+
+### Timeline
+
+**[2026-02-21 03:30] Trajectory Tracker Implementation**
+
+Added EWMA (Exponentially Weighted Moving Average) of Cs to `SignalMonitor` to defeat the boiling frog evasion (QIF-T0066). Parameters: `trajectory_alpha=0.15` (effective window ~7 evaluations), `trajectory_threshold=0.03` (Cs drift from baseline to flag). The idea: each per-window Cs drop is small, but the EWMA accumulates the displacement. Over 3-4 seconds of continuous drift, the EWMA diverges from baseline.
+
+**Result:** Trajectory tracker does NOT catch the boiling frog. Reason: Cs operates on AC-coupled signal (`buf - mean(buf)`). The boiling frog drifts only the DC level. After AC coupling, the signal is identical to baseline. sigma_phi and H_tau both see the same spectral shape. The EWMA of Cs stays at baseline because Cs itself never changes.
+
+**[2026-02-21 03:45] DC Drift Detection Implementation**
+
+Since Cs is blind to DC drift (by design, AC coupling removes DC), implemented a separate DC drift tracker:
+- During calibration: record window DC mean and std
+- Post-calibration: compare each window's DC mean to calibration baseline
+- Flag if DC deviates > 3 sigma from calibration DC mean
+- DC std floor at 0.005V to avoid over-sensitivity
+
+**[2026-02-21 04:00] DC Drift Detection FAILS: Random Walk False Positives**
+
+First test with DC drift detection: **14 out of 16 clean signal windows flagged as anomalous.** Max anomaly score: 17.86.
+
+Root cause analysis: The synthetic EEG signal includes a random walk component (`np.cumsum(white) * 0.001`) that simulates 1/f pink noise. A random walk naturally diverges from any fixed reference point over time. The calibration window (4 windows, ~2 seconds) establishes a DC baseline, but by t=6s the random walk has drifted ~0.07V from the calibration mean. With a calibration DC std of ~0.017V, this is a 4+ sigma deviation, and by t=10s it reaches 14+ sigma.
+
+This is not a bug in the detector. It's a fundamental property of random walks: expected displacement grows as sqrt(t). A fixed-reference DC tracker will always produce false positives over long observation periods when the underlying signal has a random walk component.
+
+**Attempted fixes considered:**
+1. EWMA for DC baseline (sliding reference) -- rejected: the boiling frog would also be tracked and evade
+2. Large DC std floor (0.1V+) -- rejected: loses all sensitivity to real DC drift
+3. DC velocity tracking (rate of change) -- rejected: too complex for Phase 0, and random walk velocity is white noise (same statistics as boiling frog acceleration)
+4. sqrt(t) scaling of threshold -- rejected: the boiling frog drift is linear, so sqrt(t) threshold would eventually catch it, but the math is subtle and easy to get wrong
+
+**[2026-02-21 04:15] Decision: Remove DC Drift Detection**
+
+Removed DC drift detection entirely from sim.py v0.4. The honest conclusion:
+
+> The boiling frog (QIF-T0066) exploits the AC coupling in Cs computation. DC drift is invisible to sigma_phi and H_tau by mathematical necessity. Detecting DC drift requires either:
+> (a) Hardware-level reference electrodes that provide a ground truth DC reference (Phase 1 with OpenBCI)
+> (b) Multi-channel comparison where one channel's DC drift deviates from its neighbors (Phase 1)
+> (c) Detrended fluctuation analysis (DFA) that distinguishes deterministic drift from stochastic random walk (complex, Phase 2)
+
+The DC drift comment in sim.py now reads:
+```python
+# DC drift tracking: REMOVED in v0.4.
+# Attempted to track window_dc (mean before AC coupling) vs calibration
+# baseline. Failed because the random walk component in synthetic EEG
+# naturally diverges from the 2s calibration window, creating 14+ sigma
+# false positives on clean signal by t=6s. Real DC drift detection needs
+# hardware reference electrodes (Phase 1). See DERIVATION-LOG Entry 007.
+```
+
+**[2026-02-21 04:20] FPR-Adjusted Monitor Detection**
+
+After removing DC drift detection, clean signal still shows 6 anomalies from normal Cs variance. Investigation of the anomaly scores:
+
+```
+Clean signal z-scores across 16 monitoring windows:
+W5: 0.65  W6: 0.00  W7: 2.08  W8: 3.60  W9: 2.34
+W10: 0.00 W11: 0.00 W12: 9.35 W13: 0.41 W14: 4.46
+W15: 1.47 W16: 0.00 W17: 0.00 W18: 0.00 W19: 2.29 W20: 0.00
+```
+
+6 windows exceed the anomaly threshold of 1.5 (38% FPR). Window 12 hits 9.35 (Cs drops to 0.617, well below baseline 0.717). This is genuine noise from the synthetic EEG, not a detector bug. The signal has very small alpha amplitude (0.05V) relative to pink noise, making H_tau highly variable.
+
+**Critical insight:** The boiling frog also produces exactly 6 anomalies with max score 6.00. **Indistinguishable from clean signal.** Previous test results claiming "boiling frog detected" were wrong: the detection was the same false positive pattern, not a real detection.
+
+**Fix:** Changed test_nic_chains.py to use **FPR-adjusted detection**:
+1. Run clean signal first to establish false positive baseline
+2. An attack is "detected by monitor" only if `anomaly_count > max(2 * clean_count, clean_count + 3)`
+3. With clean baseline of 6, threshold becomes > 12
+
+This means the monitor needs 13+ anomalies (vs baseline 6) to flag a real detection. Raw anomaly counts in the monitor column still shown for transparency.
+
+**[2026-02-21 04:35] Final Deterministic Test Results (v0.4)**
+
+Fixed random seeds per scenario (`np.random.seed(42 + scenario.id)`) for reproducibility. All results verified deterministic across multiple runs.
+
+```
+DETECTION MATRIX
+ #   Scenario                              L1  SSVEP  Monitor  Result
+ 0   Clean Signal (Control)               ---    ---      ---  BASELINE (6 FP)
+ 1   SSVEP 15Hz (Known Target)            ---    YES  YES(16)  DETECTED
+ 2   SSVEP 13Hz (Novel Frequency)         ---    ---  YES(16)  DETECTED
+ 3   Impedance Spike                      YES    YES      ---  DETECTED
+ 4   Slow DC Drift                        ---    ---  YES(16)  DETECTED
+ 5   Neuronal Flooding (QIF-T0026)        YES    ---      ---  DETECTED
+ 6   Boiling Frog (QIF-T0066)             ---    ---      ---  ** EVADED **
+ 7   Envelope Modulation (QIF-T0014)      ---    ---  YES(16)  DETECTED
+ 8   Phase Dynamics Replay (QIF-T0067)    ---    ---      ---  ** EVADED **
+ 9   Closed-Loop Cascade (QIF-T0023)      ---    ---      ---  ** EVADED **
+```
+
+**Attacks detected: 6/9 | Attacks evaded: 3/9**
+
+### Corrections to Entry 006
+
+Entry 006 reported 8/9 detected, 1/9 evaded. This was inaccurate due to inflated false positive rates creating phantom detections. The v0.4 FPR-adjusted results correct the record:
+
+| Scenario | Entry 006 | Entry 007 (Corrected) | Why Changed |
+|----------|-----------|----------------------|-------------|
+| Phase Replay (QIF-T0067) | DETECTED* (1 anomaly) | **EVADED** | 1 anomaly < threshold 12 |
+| Closed-Loop Cascade (QIF-T0023) | DETECTED (6 anomalies) | **EVADED** | 9 anomalies < threshold 12 |
+| Clean Signal | FALSE POS (1 anomaly) | BASELINE (6 FP) | Now properly used as FPR reference |
+
+### Evasion Analysis
+
+**QIF-T0066 (Boiling Frog) - EVADED**
+- Anomalies: 6 (same as clean signal baseline)
+- Max anomaly: 6.00 (below clean signal's max of 9.35)
+- Why: AC coupling in Cs removes DC. Boiling frog only changes DC. Invisible by mathematical design.
+- Phase 1 fix: Hardware reference electrode, multi-channel DC comparison, or DFA
+
+**QIF-T0067 (Phase Replay) - EVADED**
+- Anomalies: 1 (below threshold 12)
+- Max anomaly: 2.04
+- Why: Replay has same statistical properties as original. Different noise seed creates slight difference, but insufficient for detection.
+- Phase 2 fix: Biological TLS (challenge-response authentication with neural signatures)
+
+**QIF-T0023 (Closed-Loop Cascade) - EVADED at 10s**
+- Anomalies: 9 (below threshold 12)
+- Max anomaly: 10.70
+- Why: Exponential growth starts at 0.001V, only reaches detectable levels in later windows. At 10s observation, the cascade hasn't grown enough to dominate the FPR.
+- Note: At 15-20s observation, this WOULD be detected. The cascade doubles every 1.5s, so by t=15s the perturbation is 32x larger than at t=5s.
+- Phase 1 fix: Exponential growth detector (track rate of anomaly score increase, not just absolute level)
+
+### Honest Detection Boundary Map
+
+```
+Strong Detection (16/16 windows, unambiguous):
+  SSVEP at known frequency     -> sigma_phi + H_tau both degrade
+  SSVEP at novel frequency     -> H_tau catches spectral peak
+  Slow DC drift (sim version)  -> H_tau catches spectral distortion
+  Envelope modulation          -> H_tau catches carrier peak
+
+Moderate Detection (via L1, not monitor):
+  Impedance spike              -> L1 voltage guard (hardware layer)
+  Neuronal flooding            -> L1 catches voltage saturation
+
+Evasion (indistinguishable from clean):
+  Boiling frog (QIF-T0066)     -> DC-only, AC coupling removes it
+  Phase replay (QIF-T0067)     -> Statistically identical to real signal
+  Closed-loop cascade at 10s   -> Too slow to accumulate above FPR
+```
+
+### Changes to sim.py in v0.4
+
+1. **Added trajectory tracker (EWMA):** `_cs_ewma` field, `trajectory_alpha=0.15`, `trajectory_threshold=0.03`. Tracks cumulative Cs displacement. Currently doesn't help against boiling frog (Cs doesn't change), but infrastructure is in place for Phase 1 when multi-channel PLV may be more sensitive.
+
+2. **Added then removed DC drift detection:** `_baseline_dc_mean`, `_baseline_dc_std`, `_calibration_dc`, `_dc_drift_count` fields added then removed. Comment documenting the failure and rationale preserved.
+
+3. **Raised baseline_cs_std floor from 1e-6 to 0.01:** Reduces but doesn't eliminate false positives. Without this, normal Cs variance of 0.002V creates z-scores of 35+.
+
+4. **Version string:** `NEUROWALL v0.4 SIM`
+
+### Changes to test_nic_chains.py
+
+1. **Fixed random seeds:** `np.random.seed(42 + scenario.id)` for deterministic results
+2. **FPR-adjusted monitor detection:** Uses clean signal anomaly count as baseline. Threshold: `max(2 * clean_count, clean_count + 3)`
+3. **Updated expected outcomes:** Closed-loop cascade marked as expected evasion at 10s
+4. **Clean signal labeled BASELINE** instead of FALSE POS
+
+### Key Takeaway
+
+The Neurowall v0.4 coherence monitor reliably detects attacks that alter spectral shape (H_tau) or phase coherence (sigma_phi). It is **mathematically blind** to attacks that operate exclusively in the DC domain (boiling frog) or that perfectly replicate the statistical properties of legitimate signal (phase replay). These are genuine detection boundaries, not implementation bugs. Closing these gaps requires fundamentally different detection mechanisms (hardware reference, challenge-response authentication, multi-channel comparison) that are Phase 1-2 requirements.
+
+---
+
 ## Entry 006 — NIC Chain Attack Simulation Test Suite (2026-02-21)
 
 **Context:** After implementing the coherence monitor (Entries 002-004), we needed a systematic test harness that runs multiple attack techniques from the TARA registry against the full Neurowall pipeline and reports per-layer detection results. The goal is to map detection boundaries, not prove perfection.
