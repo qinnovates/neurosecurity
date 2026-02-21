@@ -16,7 +16,7 @@ const categories = [
   {
     label: 'Core Standards',
     color: 'var(--color-accent-primary)',
-    ids: ['ethical-neurosecurity-code-of-ethics', 'code_of_conduct', 'transparency', 'data_policy_faq', 'accessibility'],
+    ids: ['code_of_conduct', 'transparency', 'data_policy_faq', 'accessibility'],
   },
   {
     label: 'Ethics & Rights',
@@ -27,6 +27,12 @@ const categories = [
     label: 'Compliance & Alignment',
     color: 'var(--color-accent-secondary)',
     ids: ['regulatory_compliance', 'unesco_alignment', 'qif-neuroethics'],
+  },
+  {
+    label: 'Future Work',
+    color: 'var(--color-text-faint)',
+    ids: ['ethical-neurosecurity-code-of-ethics'],
+    note: 'Neurogovernance must map to existing GRC frameworks (NIST, ISO, FDA) before defining its own code of ethics. We learned from IT security: GRC was retrofitted decades late. Get the compliance mappings right first, then codify the ethics on top.',
   },
 ];
 
@@ -134,9 +140,12 @@ for (const doc of sorted) {
     <div class="min-w-0">
       {categories.map((cat) => (
         <div class="mb-12">
-          <h2 class="text-sm font-semibold uppercase tracking-wider mb-6" style={`color: ${cat.color}`}>
+          <h2 class="text-sm font-semibold uppercase tracking-wider mb-3" style={`color: ${cat.color}`}>
             {cat.label}
           </h2>
+          {cat.note && (
+            <p class="text-xs text-[var(--color-text-faint)] mb-6 max-w-2xl italic">{cat.note}</p>
+          )}
 
           {cat.ids.map((id) => {
             const doc = byId[id];
