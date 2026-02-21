@@ -17,6 +17,7 @@ Engineering decisions, test results, and design rationale for the Neurowall simu
 | [007](#entry-007) | v0.4: DC Drift Detection Attempt, FPR-Adjusted Monitor | 2026-02-21 03:30-04:45 | v0.4 |
 | [008](#entry-008) | v0.5: Multi-Band EEG, Auto-Calibrating w2, Growth Detector | 2026-02-21 05:00-06:45 | v0.5 |
 | [009](#entry-009) | v0.6: Spectral Peak Detection, CUSUM, ROC, Visualizations | 2026-02-21 06:50-07:50 | v0.6 |
+| [010](#entry-010) | v0.7: Adaptive Thresholding, Neurosim Tool, Adversarial Attacks | 2026-02-21 07:25-08:30 | v0.7 |
 
 ---
 
@@ -922,3 +923,79 @@ Created `visualize.py` with 6 chart types saved to `charts/` directory:
 |--------|--------------|-----|-------|
 | Boiling Frog | AC coupling removes DC info. Cs operates on phase/spectral entropy, both AC measures. | Hardware reference electrode + DC-coupled ADC | Phase 1 |
 | Phase Replay | Perfect statistical clone of real signal. No anomaly detector can distinguish identical distributions. | Biological TLS: embed unpredictable challenge in signal, verify response matches. | Phase 2 |
+
+
+## Entry 010 — v0.7: Adaptive Thresholding, Neurosim Tool, Adversarial Attacks (2026-02-21 07:25-08:30) {#entry-010}
+
+**AI Systems:** Claude Opus 4.6
+**Classification:** VERIFIED (single-run + 50-run statistical validation on 15 scenarios)
+**Connected entries:** 009, 008, 006
+
+### Changes
+
+#### 1. Adaptive Thresholding (LOO Cross-Validation)
+
+Implemented leave-one-out cross-validation on calibration windows to set the anomaly counting threshold from clean data only.
+
+**Algorithm:** During calibration completion, for each of the N calibration Cs values, compute the z-score as if the other N-1 values formed the baseline. The (1-FPR) percentile of these LOO z-scores sets the threshold.
+
+**Result:** With only 8 calibration windows, LOO produces a noisy estimate (~1.12) that is lower than the fixed default (1.5). This actually increases clean signal anomalies from 6 to 8, raising the FPR-adjusted detection bar from 12 to 16, and causing regressions (DC Drift 100%->94%, Cascade 98%->86%).
+
+**Decision:** Disabled by default (`adaptive_threshold=False`). Infrastructure preserved for future use with real EEG sessions that have longer calibration periods (>20 windows). Floor raised from 1.0 to 1.5 so adaptive can only make detection stricter, never looser.
+
+**Lesson:** The fixed threshold (1.5) was already well-tuned. Adaptive thresholding needs enough calibration data to reliably estimate the anomaly score distribution. 8 samples is not enough for a stable 95th percentile estimate.
+
+#### 2. Neurosim Tool (tools/neurosim/qif-attack-simulator/)
+
+Created a standalone attack generation toolkit organized by QIF-T technique ID:
+
+```
+tools/neurosim/qif-attack-simulator/
+    simulate.py          # CLI: --list, --attack QIF-T0023, --all, --analyze
+    registry.py          # Central registry: QIF-T -> (generator_fn, metadata)
+    attacks/
+        base.py          # Clean EEG generator + AttackMetadata dataclass
+        signal_injection.py  # SSVEP, impedance, flooding, replay
+        evasion.py       # DC drift, boiling frog, envelope modulation
+        feedback.py      # Closed-loop cascade
+        adversarial.py   # Notch-aware, freq-hop, threshold-aware, CUSUM-aware, spectral mimicry
+```
+
+**Organization:** QIF-T as primary key (unique per technique), NIC chain as metadata/grouping. Each generator produces a 1D numpy array of voltage samples in [0, 5.0]V range.
+
+**CLI modes:**
+- `--list` / `--list --group-by nic` / `--list --group-by severity`
+- `--attack QIF-T0023 --analyze` (generate + spectral analysis)
+- `--all` (run all attacks, show deviation summary)
+- `--output signal.csv` (export raw signal)
+
+#### 3. Adversarial-Aware Attack Scenarios
+
+5 new attacks designed by an attacker who knows the defense architecture:
+
+| # | Attack | Strategy | Result |
+|---|--------|----------|--------|
+| 10 | Notch-Aware SSVEP 12Hz | Target frequency gap between notch filters (10.9 and 15 Hz) | **DETECTED** by spectral peak detector |
+| 11 | Frequency-Hopping SSVEP | Hop frequency every 0.5s to evade sustained peak detection (3/4 windows) | **DETECTED** by coherence monitor |
+| 12 | Threshold-Aware Ramp | Calibrate perturbation to z-score ~1.2 (below 1.5 threshold) | **EVADED** at 15s |
+| 13 | CUSUM-Aware Intermittent | 0.4s bursts with 1.0s clean gaps to drain CUSUM state | **DETECTED** by monitor |
+| 14 | Spectral Mimicry | Broadband noise matching spectral profile (no novel peaks) | **DETECTED** by phase variance shift |
+
+**Key finding:** 4/5 adversarial attacks detected. Only the threshold-aware ramp evades at 15s. Frequency hopping does NOT evade because spectral distortion affects phase variance and entropy even when the frequency changes per window. Spectral mimicry is detectable because increasing total power (even with matching shape) shifts the phase variance distribution.
+
+### Updated Results (v0.7, 15 scenarios)
+
+| Duration | Detected | Evaded | Notes |
+|----------|----------|--------|-------|
+| 10s | 9/14 | 5/14 | Boiling frog, phase replay, thresh-aware, CUSUM-aware, cascade evade |
+| 15s | 11/14 | 3/14 | Boiling frog, phase replay, threshold-aware evade |
+| 20s | 13/14 | 1/14 | Only threshold-aware evades |
+| 30s | 14/14 | 0/14 | All attacks caught |
+
+### Remaining Evasion Boundaries (Updated)
+
+| Attack | Why It Evades | Fix | Phase |
+|--------|--------------|-----|-------|
+| Boiling Frog | AC coupling removes DC info | Hardware reference electrode | Phase 1 |
+| Phase Replay | Perfect statistical clone | Biological TLS (challenge-response) | Phase 2 |
+| Threshold-Aware Ramp | Per-window z-score designed to stay below 1.5 | Lower CUSUM drift parameter or longer observation | Tuning |

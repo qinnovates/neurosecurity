@@ -32,8 +32,8 @@ It provides three concentric defense layers:
 
 | File | Description |
 | :--- | :--- |
-| [sim.py](./sim.py) | Full 3-layer pipeline simulation (v0.6). Multi-band EEG generator, auto-calibrating coherence weights, adaptive spectral peak detection, CUSUM detector, exponential growth detector, L1 notch filters + impedance guard, L2 differential privacy, L3 NISS policy engine, and NSP transport (delta + LZ4 + AES-256-GCM). No hardware required. |
-| [test_nic_chains.py](./test_nic_chains.py) | NIC (Neural Impact Chain) attack simulation test suite. Runs 10 TARA-mapped attack scenarios against the full pipeline. Supports single-run, duration sweep, multi-run statistical analysis, and ROC analysis with FPR-adjusted scoring. |
+| [sim.py](./sim.py) | Full 3-layer pipeline simulation (v0.7). Multi-band EEG generator, auto-calibrating coherence weights, adaptive spectral peak detection, CUSUM detector, exponential growth detector, adaptive thresholding (LOO, opt-in), L1 notch filters + impedance guard, L2 differential privacy, L3 NISS policy engine, and NSP transport (delta + LZ4 + AES-256-GCM). No hardware required. |
+| [test_nic_chains.py](./test_nic_chains.py) | NIC (Neural Impact Chain) attack simulation test suite. Runs 15 TARA-mapped attack scenarios (10 standard + 5 adversarial-aware) against the full pipeline. Supports single-run, duration sweep, multi-run statistical analysis, and ROC analysis with FPR-adjusted scoring. |
 | [visualize.py](./visualize.py) | Visualization suite. Generates 6 chart types: detection summary, ROC curves, detection heatmap, Cs trajectories, spectral comparison, anomaly distributions. Outputs to `charts/`. |
 
 ### Running the Tests
@@ -67,9 +67,9 @@ python visualize.py
 pip install numpy scipy lz4 cryptography matplotlib
 ```
 
-### Current Detection Results (v0.6)
+### Current Detection Results (v0.7)
 
-**Single run (15s observation):**
+**Single run (15s observation, 15 scenarios):**
 
 | # | Attack | Detected By | Result |
 |---|--------|------------|--------|
@@ -83,8 +83,13 @@ pip install numpy scipy lz4 cryptography matplotlib
 | 7 | Envelope Modulation (QIF-T0014) | Monitor | DETECTED |
 | 8 | Phase Replay (QIF-T0067) | -- | **EVADED** |
 | 9 | Closed-Loop Cascade (QIF-T0023) | Monitor (growth + CUSUM) | DETECTED |
+| 10 | Notch-Aware SSVEP 12Hz | Spectral Peak | DETECTED |
+| 11 | Freq-Hopping SSVEP | Monitor | DETECTED |
+| 12 | Threshold-Aware Ramp | -- | **EVADED** |
+| 13 | CUSUM-Aware Intermittent | Monitor | DETECTED |
+| 14 | Spectral Mimicry | Monitor | DETECTED |
 
-**7/9 attacks detected at 15s, 2/9 evaded.** Up from 5/9 in v0.5 due to adaptive spectral peak detection and growth detector hardening.
+**11/14 attacks detected at 15s, 3/14 evaded.** v0.7 adds 5 adversarial-aware attack scenarios that test detection against attackers who understand the defense architecture. 4/5 adversarial attacks are detected.
 
 **Statistical analysis (50 runs, 15s, detection probability):**
 

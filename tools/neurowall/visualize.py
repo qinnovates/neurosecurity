@@ -37,6 +37,11 @@ from test_nic_chains import (
     generate_boiling_frog, generate_envelope_modulation,
     generate_phase_replay, generate_closed_loop_cascade,
 )
+from test_nic_chains import (
+    generate_notch_aware_ssvep, generate_freq_hopping_ssvep,
+    generate_threshold_aware_ramp, generate_cusum_aware_intermittent,
+    generate_spectral_mimicry,
+)
 
 CHARTS_DIR = Path("charts")
 COLORS = {
@@ -57,12 +62,19 @@ SCENARIO_COLORS = [
     "#FF5722",  # 7: envelope mod (deep orange)
     "#795548",  # 8: phase replay (brown)
     "#607D8B",  # 9: cascade (blue grey)
+    "#00BCD4",  # 10: notch-aware (cyan)
+    "#8BC34A",  # 11: freq-hop (light green)
+    "#FFC107",  # 12: threshold-aware (amber)
+    "#673AB7",  # 13: cusum-aware (deep purple)
+    "#009688",  # 14: spectral mimicry (teal)
 ]
 
 SHORT_NAMES = [
     "Clean", "SSVEP 15Hz", "SSVEP 13Hz", "Impedance",
     "DC Drift", "Flood", "Boiling Frog", "Envelope Mod",
     "Phase Replay", "Cascade",
+    "Notch-Aware 12Hz", "Freq-Hop", "Thresh-Aware",
+    "CUSUM-Aware", "Spectral Mimicry",
 ]
 
 
@@ -200,9 +212,17 @@ def plot_cs_trajectories():
         6: generate_boiling_frog,
         7: generate_envelope_modulation,
         9: generate_closed_loop_cascade,
+        10: generate_notch_aware_ssvep,
+        11: generate_freq_hopping_ssvep,
+        12: generate_threshold_aware_ramp,
+        13: generate_cusum_aware_intermittent,
+        14: generate_spectral_mimicry,
     }
 
-    fig, axes = plt.subplots(2, 4, figsize=(16, 8), sharey=True)
+    n_plots = len(generators)
+    n_cols = 4
+    n_rows = (n_plots + n_cols - 1) // n_cols
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(16, 4 * n_rows), sharey=True)
     axes = axes.flatten()
 
     for ax_idx, (s_id, gen_fn) in enumerate(generators.items()):
@@ -249,10 +269,14 @@ def plot_cs_trajectories():
         ax.set_xlim(3, duration)
         ax.set_ylim(0, 1.0)
         ax.grid(True, alpha=0.2)
-        if ax_idx >= 4:
+        if ax_idx >= (n_rows - 1) * n_cols:
             ax.set_xlabel("Time (s)", fontsize=9)
-        if ax_idx % 4 == 0:
+        if ax_idx % n_cols == 0:
             ax.set_ylabel("Cs", fontsize=9)
+
+    # Hide unused axes
+    for ax_idx in range(n_plots, len(axes)):
+        axes[ax_idx].set_visible(False)
 
     fig.suptitle("Coherence Score (Cs) Trajectories Under Attack",
                  fontsize=14, fontweight='bold')
@@ -369,10 +393,10 @@ def plot_detection_summary():
     """Summary bar chart: detection rates across versions."""
     fig, ax = plt.subplots(figsize=(10, 5))
 
-    versions = ["v0.4\n(Entry 007)", "v0.5\n(Entry 008)", "v0.6\n(Current)"]
+    versions = ["v0.4\n(9 attacks)", "v0.5\n(9 attacks)", "v0.6\n(9 attacks)", "v0.7\n(14 attacks)"]
     # Detection counts at default duration
-    detected = [6, 5, 7]
-    evaded = [3, 4, 2]
+    detected = [6, 5, 7, 11]
+    evaded = [3, 4, 2, 3]
 
     x = np.arange(len(versions))
     width = 0.35
@@ -393,17 +417,17 @@ def plot_detection_summary():
                 fontweight='bold')
 
     ax.set_ylabel("Number of Attacks", fontsize=11)
-    ax.set_title("Detection Progress Across Neurowall Versions (9 attacks, default duration)",
+    ax.set_title("Detection Progress Across Neurowall Versions",
                  fontsize=12, fontweight='bold')
     ax.set_xticks(x)
     ax.set_xticklabels(versions)
     ax.legend(fontsize=10)
-    ax.set_ylim(0, 10)
+    ax.set_ylim(0, 16)
     ax.grid(True, axis='y', alpha=0.3)
 
     # Annotations
-    ax.annotate("+ spectral peak\n+ CUSUM\n+ growth hardening",
-                xy=(2, 7), xytext=(2.4, 8.5),
+    ax.annotate("+ 5 adversarial\nattack scenarios",
+                xy=(3, 11), xytext=(3.4, 13.5),
                 arrowprops=dict(arrowstyle='->', color='gray'),
                 fontsize=8, color='gray', ha='center')
 
