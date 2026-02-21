@@ -28,6 +28,25 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 ---
 
+## Table of Contents
+
+- [What We Build](#what-we-build)
+- [The TARA Insight](#the-tara-insight)
+- [Architecture](#architecture)
+  - [QIF](#qif-quantified-interconnection-framework)
+  - [NSP](#nsp-neural-security-protocol)
+  - [TARA](#tara-therapeutic-atlas-of-risks-and-applications)
+  - [Open API](#open-api)
+  - [NISS](#niss-neural-impact-scoring-system)
+  - [Runemate](#runemate)
+  - [Governance](#governance)
+- [Repository Structure](#repository-structure)
+- [Other Qinnovates Projects](#other-qinnovates-projects)
+- [Collaboration](#collaboration)
+- [Academic Rigor & Transparency](#academic-rigor--transparency)
+
+---
+
 <!-- VERSION-TABLE-START — Update versions here when releasing. Canonical sources noted in comments. -->
 ## What We Build
 

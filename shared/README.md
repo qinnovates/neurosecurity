@@ -2,12 +2,30 @@
 
 This folder contains the unified BCI/neural security threat taxonomy using MITRE ATT&CK-compatible identifiers.
 
+## Table of Contents
+
+- [Files](#files)
+- [qtara-registrar.json](#qtara-registrarjson-current)
+  - [ID Scheme](#id-scheme)
+  - [Tactics](#tactics)
+  - [MITRE Compatibility](#mitre-compatibility)
+  - [Usage](#usage)
+  - [Status Levels](#status-levels)
+- [threat-matrix.json (Deprecated)](#threat-matrixjson-deprecated)
+- [Source of Truth](#source-of-truth)
+
 ## Files
 
 ```
 shared/
-├── qtara-registrar.json         # 102 techniques, 11 tactics, MITRE-compatible (CURRENT)
+├── qtara-registrar.json         # 103 techniques, 11 tactics, MITRE-compatible (CURRENT)
+├── qif-brain-bci-atlas.json     # Brain-BCI region mappings
+├── qif-dsm-mappings.json        # DSM-5-TR diagnostic mappings
+├── qif-ethics-controls.json     # Ethics control mappings
+├── qif-security-controls.json   # Security control mappings
 ├── derivation-timeline.json     # QIF derivation history
+├── qtara/                       # Python SDK (pip install qtara)
+├── scripts/                     # Data pipeline scripts (TARA, NISS, DSM-5)
 ├── validation/                  # Validation tools
 │   ├── bridge.py                # ONI<>QIF validator
 │   ├── validate_metadata.py     # Metadata validation
@@ -21,7 +39,7 @@ shared/
 
 ## qtara-registrar.json (Current)
 
-**60 techniques** across **11 MITRE-compatible tactics**, generated from `config.py` (as-code).
+**103 techniques** across **11 MITRE-compatible tactics**, generated from `config.py` (as-code).
 
 ### ID Scheme
 
