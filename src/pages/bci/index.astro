@@ -1,58 +1,70 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { getBciStats } from '../../lib/bci-data';
+import BciDashboard from '../../components/dashboard/BciDashboard';
+import { getBciDevices, getBciStats } from '../../lib/bci-data';
 import { BCI_CONSTRAINTS, BCI_VALIDATION } from '../../lib/bci-limits-constants';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../../lib/qif-constants';
+import { getBrainViewData } from '../../lib/brain-view-data';
 
 const stats = getBciStats();
+const devices = getBciDevices();
+const bands = HOURGLASS_BANDS.map((b, i) => ({ ...b, width: HOURGLASS_WIDTHS[i] }));
+const brainViews = getBrainViewData();
 ---
 
 <PageLayout
-  title="BCI Research"
-  description="Brain-computer interface research hub: 24-device hardware inventory, 13 physics constraints, security guardrails, and open API. From FDA filings, peer-reviewed papers, and original derivation."
-  breadcrumbs={[{ label: 'Research', href: '/whitepaper/' }, { label: 'BCI Research' }]}
-  maxWidth="wide"
+  title="BCI Dashboard"
+  description="Brain-computer interface dashboard: device profiles, hardware inventory, physics constraints, security guardrails, and open API. From FDA filings, peer-reviewed papers, and original derivation."
+  breadcrumbs={[{ label: 'Research', href: '/whitepaper/' }, { label: 'BCI Dashboard' }]}
+  wide={true}
 >
-  <div class="max-w-4xl mx-auto">
-    <!-- Header -->
-    <section class="mb-16">
-      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
-        BCI Research
-      </h1>
-      <p class="text-lg text-[var(--color-text-muted)] max-w-2xl">
-        Everything QIF has produced on brain-computer interface hardware, physics, and security. Open data, open API, open research.
-      </p>
-    </section>
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">BCI Dashboard</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-2xl">
+      Everything QIF has produced on brain-computer interface hardware, physics, and security. Select any device to see its full profile, or dive into the research tools below.
+    </p>
+  </div>
 
-    <!-- Stats bar -->
-    <section class="glass rounded-xl p-6 sm:p-8 mb-16">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-        <div>
-          <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{stats.totalDevices}</p>
-          <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Devices Catalogued</p>
-        </div>
-        <div>
-          <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{BCI_CONSTRAINTS.length}</p>
-          <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Physics Constraints</p>
-        </div>
-        <div>
-          <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">{stats.manufacturers}</p>
-          <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Manufacturers</p>
-        </div>
-        <div>
-          <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-safe)]">{BCI_VALIDATION.constraintsVerified}/{BCI_VALIDATION.constraintsTotal}</p>
-          <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Cross-Validated</p>
-        </div>
+  <!-- Stats bar -->
+  <section class="glass rounded-xl p-6 sm:p-8 mb-10">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{stats.totalDevices}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Devices Catalogued</p>
       </div>
-    </section>
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{BCI_CONSTRAINTS.length}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Physics Constraints</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">{stats.manufacturers}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Manufacturers</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-safe)]">{BCI_VALIDATION.constraintsVerified}/{BCI_VALIDATION.constraintsTotal}</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Cross-Validated</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Main sections grid -->
-    <section class="grid sm:grid-cols-2 gap-6 mb-16">
+  <!-- Device Dashboard -->
+  <BciDashboard
+    client:only="react"
+    devices={devices}
+    bands={bands}
+    brainViews={brainViews}
+  />
+
+  <!-- Deep Dives -->
+  <section class="mt-16 max-w-4xl mx-auto">
+    <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-6">Deep Dives</h2>
+    <div class="grid sm:grid-cols-2 gap-6 mb-16">
       <!-- Hardware Explorer -->
       <a href="/bci/explorer/" class="glass rounded-xl p-6 sm:p-8 transition-all hover:border-[var(--color-accent-primary)] border border-transparent group">
         <div class="flex items-center gap-3 mb-4">
           <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">INVENTORY</span>
         </div>
-        <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">Hardware Explorer</h2>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">Hardware Explorer</h3>
         <p class="text-sm text-[var(--color-text-muted)] mb-4">
           {stats.totalDevices} BCI devices from FDA filings, manufacturer datasheets, and peer-reviewed papers. Filter by type, QIF band, or interface direction. Full specs, brain targeting, and threat mapping per device.
         </p>
@@ -70,7 +82,7 @@ const stats = getBciStats();
         <div class="flex items-center gap-3 mb-4">
           <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)]">PHYSICS</span>
         </div>
-        <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">BCI Limits Equation</h2>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">BCI Limits Equation</h3>
         <p class="text-sm text-[var(--color-text-muted)] mb-4">
           13 physics constraints defining the fundamental design envelope. Thermodynamics, electromagnetism, Moore's Law scaling, Shannon electrode safety, SNR, coherence, and more.
         </p>
@@ -86,7 +98,7 @@ const stats = getBciStats();
         <div class="flex items-center gap-3 mb-4">
           <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)]">SECURITY</span>
         </div>
-        <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-tertiary)] transition-colors">Security Guardrails</h2>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-tertiary)] transition-colors">Security Guardrails</h3>
         <p class="text-sm text-[var(--color-text-muted)] mb-4">
           Physics-derived defense architecture for BCIs. Four guardrail layers from signal integrity monitoring (feasible today) to post-quantum cryptographic defense (future hardware).
         </p>
@@ -104,7 +116,7 @@ const stats = getBciStats();
         <div class="flex items-center gap-3 mb-4">
           <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">API</span>
         </div>
-        <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-status-safe)] transition-colors">BCI Data API</h2>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-status-safe)] transition-colors">BCI Data API</h3>
         <p class="text-sm text-[var(--color-text-muted)] mb-4">
           Open JSON API serving the full merged dataset: device specs, brain region mappings, threat vectors, and physics constraints. CORS-enabled, cacheable, free to use.
         </p>
@@ -114,7 +126,7 @@ const stats = getBciStats();
           </span>
         </div>
       </a>
-    </section>
+    </div>
 
     <!-- Related tools -->
     <section class="mb-16">
@@ -157,5 +169,5 @@ const stats = getBciStats();
         </p>
       </div>
     </section>
-  </div>
+  </section>
 </PageLayout>
