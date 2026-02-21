@@ -183,11 +183,11 @@ The UNESCO Recommendation establishes five high-level values. Below, each is map
 
 | UNESCO Requirement | QIF Implementation | Location |
 |--------------------|--------------------|----------|
-| Pediatric protections | Full Pediatric Considerations framework based on Lázaro-Muñoz et al. (NIH-funded research) | `PEDIATRIC_CONSIDERATIONS.md` |
-| Age-appropriate consent | Age-tiered assent framework: 0–6 (no formal assent), 7–11 (simple verbal), 12–14 (written), 15–17 (near-adult strong weight) | `PEDIATRIC_CONSIDERATIONS.md` §Age Framework |
-| Tri-level authorization | Level 1: Parental consent, Level 2: Minor's assent, Level 3: Clinician certification — all three required | `PEDIATRIC_CONSIDERATIONS.md` §Tri-Level |
-| Identity development | Special protections for developing brains and identity formation | `PEDIATRIC_CONSIDERATIONS.md` §Incapacity |
-| Clinician-identified concerns | Documented concerns from pediatric DBS clinicians: uncertainty about risks (72%), decision-making roles (52%), information scarcity (52%), adolescent assent capacity (80%) | `PEDIATRIC_CONSIDERATIONS.md` §Clinician Concerns |
+| Pediatric protections | Full Pediatric Considerations framework based on Lázaro-Muñoz et al. (NIH-funded research) | `INFORMED_CONSENT_FRAMEWORK.md` (Pediatric section) |
+| Age-appropriate consent | Age-tiered assent framework: 0–6 (no formal assent), 7–11 (simple verbal), 12–14 (written), 15–17 (near-adult strong weight) | `INFORMED_CONSENT_FRAMEWORK.md` (Pediatric section) §Age Framework |
+| Tri-level authorization | Level 1: Parental consent, Level 2: Minor's assent, Level 3: Clinician certification — all three required | `INFORMED_CONSENT_FRAMEWORK.md` (Pediatric section) §Tri-Level |
+| Identity development | Special protections for developing brains and identity formation | `INFORMED_CONSENT_FRAMEWORK.md` (Pediatric section) §Incapacity |
+| Clinician-identified concerns | Documented concerns from pediatric DBS clinicians: uncertainty about risks (72%), decision-making roles (52%), information scarcity (52%), adolescent assent capacity (80%) | `INFORMED_CONSENT_FRAMEWORK.md` (Pediatric section) §Clinician Concerns |
 
 ---
 
@@ -223,7 +223,7 @@ The UNESCO Recommendation contains at least 11 policy areas. Below are the key a
 
 | UNESCO Recommendation | QIF Response | Location |
 |-----------------------|-------------|----------|
-| Ban non-therapeutic use for children | Full pediatric framework with age-tiered protections grounded in NIH-funded research | `PEDIATRIC_CONSIDERATIONS.md` |
+| Ban non-therapeutic use for children | Full pediatric framework with age-tiered protections grounded in NIH-funded research | `INFORMED_CONSENT_FRAMEWORK.md` (Pediatric section) |
 
 ### Behavioral Influence and Addiction
 
@@ -253,7 +253,7 @@ The UNESCO Recommendation contains at least 11 policy areas. Below are the key a
 | UNESCO Recommendation | QIF Response | Location |
 |-----------------------|-------------|----------|
 | Keep neurotechnology inclusive and affordable | Open-source (Apache 2.0); published to PyPI for free access; educational modules (Autodidactive) | `LICENSE`, PyPI packages |
-| Protect vulnerable groups | Pediatric considerations, incapacity protections, variable capacity model, advance directives for neural devices | `PEDIATRIC_CONSIDERATIONS.md` |
+| Protect vulnerable groups | Pediatric considerations, incapacity protections, variable capacity model, advance directives for neural devices | `INFORMED_CONSENT_FRAMEWORK.md` (Pediatric section) |
 
 ---
 

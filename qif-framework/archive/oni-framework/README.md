@@ -21,7 +21,7 @@
 
 ## Securing Today's Neural Frontier
 
-The Classical Model extends the OSI networking stack into the biological domain, providing the first comprehensive reference architecture for brain-computer interface security. This is the established foundation that the [Quantum Model (QIF)](../qif-framework/) builds upon.
+The Classical Model extends the OSI networking stack into the biological domain, providing the first comprehensive reference architecture for brain-computer interface security. This is the established foundation that the [Quantum Model (QIF)](../qif/) builds upon.
 
 ---
 

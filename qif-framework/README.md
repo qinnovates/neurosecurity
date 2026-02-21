@@ -57,9 +57,8 @@ The original ONI Framework put the Neural Gateway at Layer 8 (middle of a 14-lay
 | [NEUROETHICS_ALIGNMENT](../governance/NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
 | [UNESCO_ALIGNMENT](../governance/UNESCO_ALIGNMENT.md) | 15/17 UNESCO Recommendation elements implemented |
 | [REGULATORY_COMPLIANCE](../governance/REGULATORY_COMPLIANCE.md) | FDA, state laws, MIND Act, EU alignment |
-| [INFORMED_CONSENT](../governance/INFORMED_CONSENT_FRAMEWORK.md) | Consent requirements (Lazaro-Munoz framework) |
+| [INFORMED_CONSENT](../governance/INFORMED_CONSENT_FRAMEWORK.md) | Consent requirements + pediatric & incapacity (Lazaro-Munoz framework) |
 | [POST_DEPLOYMENT](../governance/POST_DEPLOYMENT_ETHICS.md) | Device lifecycle and abandonment prevention |
-| [PEDIATRIC](../governance/PEDIATRIC_CONSIDERATIONS.md) | Minors and limited capacity guidelines |
 | [DATA_POLICY](../governance/DATA_POLICY_FAQ.md) | Privacy FAQ and user rights |
 | [ACCESSIBILITY](../governance/ACCESSIBILITY.md) | Accessibility standards and compliance |
 

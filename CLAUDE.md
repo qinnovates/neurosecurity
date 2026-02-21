@@ -41,7 +41,7 @@
 - `paper/`: Academic publications (preprint)
 - `scripts/`: Site scripts + CI utilities
   - `verify/`: Citation & fact verification pipeline
-- `tools/`: Security tools (macshield, neurowall, autodidactive)
+- `tools/`: Security tools (macshield, neurowall)
 - `docs/`: Built site / GitHub Pages output
 
 ## Tech Stack
