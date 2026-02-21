@@ -1,87 +1,93 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import SwimlaneTImeline from '../components/roadmap/SwimlaneTImeline';
 import { QIF_VERSION } from '../lib/qif-constants';
-import { THREAT_VECTORS } from '../lib/threat-data';
-const totalTechniques = THREAT_VECTORS.length;
+import { getRegistryStats, getTaraStats, getDsm5Stats } from '../lib/threat-data';
+import timelineData from '../data/qif-timeline.json';
+import milestonesData from '../data/milestones.json';
 
-// Roadmap data (will be loaded from prd.json when available)
+// Dynamic data from registries
+const reg = getRegistryStats();
+const tara = getTaraStats();
+const dsm5 = getDsm5Stats();
+const stats = timelineData.current_stats;
+const allMilestones = timelineData.milestones;
+
+// From milestones.json
+const disclosures = milestonesData.disclosures ?? [];
+const standards = milestonesData.standards ?? [];
+const specifications = milestonesData.specifications ?? [];
+
+// Timeline date range
+const dates = allMilestones.map(m => new Date(m.date + 'T00:00:00').getTime());
+const firstDate = new Date(Math.min(...dates));
+const lastDate = new Date(Math.max(...dates));
+const daySpan = Math.max(1, Math.round((lastDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)));
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// Stats dashboard items
+const statCards = [
+  { label: 'Threat Techniques', value: reg.totalTechniques, color: '#ef4444', href: '/TARA/' },
+  { label: 'BCI Devices', value: stats.bci_devices, color: '#2563eb', href: '/bci/' },
+  { label: 'Brain Regions', value: stats.brain_regions, color: '#d97706', href: '/bci/' },
+  { label: 'Physics Constraints', value: stats.physics_constraints, color: '#0891b2', href: '/bci/limits/' },
+  { label: 'Research Sources', value: stats.research_sources, color: '#7c3aed', href: '/about/' },
+  { label: 'Therapeutic Mappings', value: tara.clinicalCount, color: '#10b981', href: '/therapeutics/' },
+  { label: 'DSM-5 Mapped', value: dsm5.withDsm5, color: '#ec4899', href: '/whitepaper/#neural-impact' },
+  { label: 'Cross-AI Validations', value: stats.cross_ai_validations, color: '#f97316', href: '/about/' },
+  { label: 'Derivation Entries', value: stats.derivation_log_entries, color: '#6366f1', href: '/lab/derivation-log/' },
+];
+
+const versionCards = [
+  { version: 'Preprint', value: stats.preprint_version, color: '#2563eb', href: '/whitepaper/' },
+  { version: 'TARA', value: stats.tara_version, color: '#ef4444', href: '/TARA/' },
+  { version: 'NSP', value: stats.nsp_version, color: '#7c3aed', href: '/nsp/' },
+  { version: 'Neurowall', value: stats.neurowall_version, color: '#10b981', href: '/explore/' },
+  { version: 'QIF', value: `v${QIF_VERSION}`, color: '#d97706', href: '/framework/' },
+  { version: 'Atlas', value: stats.atlas_version, color: '#0891b2', href: '/bci/' },
+];
+
+// Version phases derived from timeline milestones
 const phases = [
   {
     version: 'v1.0',
     title: 'Foundation',
+    dateRange: ['2026-01-15', '2026-01-31'],
     status: 'completed' as const,
-    items: [
-      { label: 'OSI-inspired neural security model (14-layer)', done: true },
-      { label: 'Coherence metric definition', done: true },
-      { label: 'Scale-frequency invariant validation', done: true },
-      { label: 'Initial threat taxonomy', done: true },
-      { label: 'First 10 publications', done: true },
-    ],
   },
   {
-    version: 'v2.0',
-    title: '14-Layer Architecture',
+    version: 'v2.0-v3.1',
+    title: '14-Layer to Hourglass',
+    dateRange: ['2026-02-01', '2026-02-05'],
     status: 'completed' as const,
-    items: [
-      { label: '14-layer detailed specification', done: true },
-      { label: 'Layer-by-layer attack surface analysis', done: true },
-      { label: 'QI equation candidates (additive + tensor)', done: true },
-      { label: 'QIF Lab reference implementation', done: true },
-    ],
-  },
-  {
-    version: 'v3.1',
-    title: 'Hourglass (7-band)',
-    status: 'completed' as const,
-    items: [
-      { label: '7-band hourglass architecture (3-1-3)', done: true },
-      { label: 'Neural Gateway (I0) as physical waist', done: true },
-      { label: 'Whitepaper first draft', done: true },
-      { label: 'Neuroethics framework integration', done: true },
-      { label: 'Peer review cycle', done: true },
-    ],
   },
   {
     version: 'v4.0',
-    title: 'Hourglass v4.0',
+    title: '11-Band + NSP + NISS',
+    dateRange: ['2026-02-06', '2026-02-09'],
     status: 'completed' as const,
-    items: [
-      { label: '11-band hourglass architecture (7-1-3)', done: true },
-      { label: 'QIF framework Python package', done: true },
-      { label: 'NSP v0.3 protocol specification', done: true },
-      { label: 'Break-it test suite (10 attack types)', done: true },
-      { label: 'Academic whitepaper v5', done: true },
-    ],
   },
   {
     version: `v${QIF_VERSION}`,
-    title: `Hourglass v${QIF_VERSION} (Current)`,
+    title: 'Full Stack (Current)',
+    dateRange: ['2026-02-10', '2026-12-31'],
     status: 'active' as const,
-    items: [
-      { label: 'TARA: Therapeutic Applications & Risk Assessment', done: true },
-      { label: 'NISS v1.0 neural impact scoring', done: true },
-      { label: 'Phase dynamics integration into NSP', done: true },
-      { label: `Dual-use gap analysis (${totalTechniques} techniques, 8 domains)`, done: true },
-      { label: 'TARA → CVSS v4.0 complete mapping (94.4% require NISS extension)', done: true },
-      { label: 'TARA technique ID taxonomy (first BCI-specific taxonomy)', done: true },
-      { label: 'NISS positioned as first CVSS v4.0 extension for neural security', done: true },
-      { label: 'Synthetic BCI data validation', done: false },
-      { label: 'Coherence metric empirical testing', done: false },
-    ],
   },
   {
-    version: 'v6.2',
-    title: 'Validation & Standards Submission (Next)',
+    version: 'v6.x',
+    title: 'Validation & Standards',
+    dateRange: null,
     status: 'planned' as const,
-    items: [
-      { label: 'NISS v1.0 submitted to FIRST.org as official CVSS v4.0 extension', done: false },
-      { label: 'TARA atlas expanded to 100+ validated threats with clinical evidence', done: false },
-      { label: 'NSP protocol specification submitted to IETF or IEEE working group', done: false },
-      { label: 'Open-source reference implementation (Python + Rust)', done: false },
-      { label: 'Peer-reviewed paper #1 submitted (IEEE S&P / USENIX Security)', done: false },
-      { label: 'Peer-reviewed paper #2 submitted', done: false },
-      { label: 'Regulatory gap analysis: FDA + EU MDR + neurorights legislation', done: false },
-      { label: 'QIF v6.2 whitepaper with formal verification results', done: false },
+    planned: [
+      'Peer-reviewed paper submission',
+      'NSP submitted to IETF/IEEE',
+      'NISS accepted as CVSS v4.0 extension',
+      'Open-source reference implementation',
+      'Formal verification results',
     ],
   },
 ];
@@ -101,72 +107,276 @@ function statusLabel(status: string) {
     default: return 'Planned';
   }
 }
+
+// Status badge styling
+const statusColors: Record<string, { bg: string; text: string }> = {
+  filed:     { bg: 'rgba(234, 179, 8, 0.15)',   text: '#eab308' },
+  disclosed: { bg: 'rgba(249, 115, 22, 0.15)',  text: '#f97316' },
+  submitted: { bg: 'rgba(234, 179, 8, 0.15)',   text: '#eab308' },
+  accepted:  { bg: 'rgba(34, 197, 94, 0.15)',    text: '#22c55e' },
+  published: { bg: 'rgba(34, 197, 94, 0.15)',    text: '#22c55e' },
+};
+
+// Get milestones per phase
+function phaseMilestones(dateRange: string[] | null) {
+  if (!dateRange) return [];
+  const [start, end] = dateRange;
+  return allMilestones.filter(m => m.date >= start && m.date <= end);
+}
 ---
 
 <PageLayout
   title="Roadmap"
-  description="QIF Framework development roadmap — versioned milestones from foundation to validation."
+  description="QIF Framework roadmap — milestones, timeline, and version history from foundation to standards submission."
   breadcrumbs={[{ label: 'Roadmap' }]}
 >
-  <div class="max-w-3xl">
-    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Framework Roadmap</h1>
-    <p class="text-lg text-[var(--color-text-muted)] mb-12">
-      QIF development follows a versioned release cycle. Current version: <strong class="text-[var(--color-accent-primary)]">v{QIF_VERSION}</strong> (Hourglass Architecture).
-    </p>
-
-    <div class="space-y-8">
-      {phases.map((phase, i) => {
-        const completedCount = phase.items.filter((item) => item.done).length;
-        const progress = Math.round((completedCount / phase.items.length) * 100);
-        const color = statusColor(phase.status);
-
-        return (
-          <div class="glass rounded-xl p-6 sm:p-8">
-            <div class="flex items-start justify-between mb-4">
-              <div>
-                <div class="flex items-center gap-3 mb-1">
-                  <span class="text-sm font-bold font-[family-name:var(--font-mono)]" style={`color: ${color};`}>
-                    {phase.version}
-                  </span>
-                  <span class="text-xs px-2 py-0.5 rounded-full border" style={`color: ${color}; border-color: ${color}40;`}>
-                    {statusLabel(phase.status)}
-                  </span>
-                </div>
-                <h3 class="text-xl font-semibold font-[family-name:var(--font-heading)]">{phase.title}</h3>
-              </div>
-              <span class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">
-                {completedCount}/{phase.items.length}
-              </span>
-            </div>
-
-            <!-- Progress bar -->
-            <div class="w-full h-1.5 rounded-full bg-[var(--color-bg-deep)] mb-5">
-              <div
-                class="h-full rounded-full transition-all duration-500"
-                style={`width: ${progress}%; background-color: ${color};`}
-              />
-            </div>
-
-            <!-- Items -->
-            <ul class="space-y-2.5">
-              {phase.items.map((item) => (
-                <li class="flex items-start gap-3 text-sm">
-                  {item.done ? (
-                    <svg class="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-status-safe)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  ) : (
-                    <div class="w-4 h-4 mt-0.5 shrink-0 rounded-full border border-[var(--color-border)]" />
-                  )}
-                  <span class:list={[item.done ? "text-[var(--color-text-muted)]" : "text-[var(--color-text-primary)]"]}>
-                    {item.label}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
+  <div class="max-w-5xl">
+    <!-- Hero -->
+    <div class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4 uppercase tracking-tight">Project Roadmap</h1>
+      <p class="text-lg text-[var(--color-text-muted)] mb-6 max-w-2xl">
+        From zero to open standard in {daySpan} days. {allMilestones.length} milestones tracked, every number pulled from live data.
+      </p>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border)]">
+        <span class="text-sm font-medium text-[var(--color-text-primary)]">
+          {allMilestones.length} milestones
+        </span>
+        <span class="text-xs text-[var(--color-text-faint)]">
+          {formatDate(firstDate.toISOString().slice(0, 10))} &mdash; {formatDate(lastDate.toISOString().slice(0, 10))}
+        </span>
+      </div>
     </div>
+
+    <!-- Stats Dashboard -->
+    <section class="mb-12">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">By the Numbers</h2>
+      <div class="stats-grid">
+        {statCards.map((item) => (
+          <a href={item.href} class="stat-card glass-subtle rounded-xl p-4">
+            <div class="stat-value" style={`color: ${item.color};`}>{item.value}</div>
+            <div class="stat-label">{item.label}</div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Version pills -->
+      <div class="flex flex-wrap gap-2 mt-4">
+        {versionCards.map((v) => (
+          <a href={v.href} class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent-primary)] transition-colors">
+            <span class="text-xs font-medium text-[var(--color-text-faint)]">{v.version}</span>
+            <span class="text-sm font-bold font-[family-name:var(--font-mono)]" style={`color: ${v.color};`}>{v.value}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Swimlane Timeline -->
+    <section class="mb-12">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">Timeline</h2>
+      <SwimlaneTImeline
+        client:only="react"
+        milestones={allMilestones}
+      />
+    </section>
+
+    <!-- Version Phases -->
+    <section class="mb-12">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">Version History</h2>
+      <div class="phase-grid">
+        {phases.map((phase) => {
+          const items = phaseMilestones(phase.dateRange);
+          const color = statusColor(phase.status);
+          return (
+            <div class="glass-subtle rounded-xl p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-sm font-bold font-[family-name:var(--font-mono)]" style={`color: ${color};`}>
+                  {phase.version}
+                </span>
+                <span class="text-xs px-2 py-0.5 rounded-full border" style={`color: ${color}; border-color: ${color}40;`}>
+                  {statusLabel(phase.status)}
+                </span>
+              </div>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-3">{phase.title}</h3>
+              {items.length > 0 && (
+                <ul class="space-y-1.5">
+                  {items.slice(0, 5).map((m) => (
+                    <li class="flex items-start gap-2 text-xs">
+                      <svg class="w-3.5 h-3.5 mt-0.5 shrink-0 text-[var(--color-status-safe)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span class="text-[var(--color-text-muted)]">{m.title}</span>
+                    </li>
+                  ))}
+                  {items.length > 5 && (
+                    <li class="text-xs text-[var(--color-text-faint)] ml-5.5">
+                      +{items.length - 5} more
+                    </li>
+                  )}
+                </ul>
+              )}
+              {phase.planned && (
+                <ul class="space-y-1.5">
+                  {phase.planned.map((item) => (
+                    <li class="flex items-start gap-2 text-xs">
+                      <div class="w-3.5 h-3.5 mt-0.5 shrink-0 rounded-full border border-[var(--color-border)]" />
+                      <span class="text-[var(--color-text-primary)]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Specifications -->
+    <section id="specifications" class="mb-12">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">Published Specifications</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {specifications.map((spec) => (
+          <a href={spec.href} class="glass-subtle rounded-xl p-4 block hover:border-[var(--color-accent-primary)] transition-colors group text-center">
+            <div class="text-xs font-semibold text-[var(--color-accent-primary)] mb-1">v{spec.version}</div>
+            <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+              {spec.title}
+            </h3>
+            <p class="text-xs text-[var(--color-text-faint)] leading-relaxed">
+              {spec.summary}
+            </p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Security Disclosures -->
+    <section id="disclosures" class="mb-12">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">Security Disclosures</h2>
+      <div class="space-y-3">
+        {disclosures.map((d) => {
+          const sc = statusColors[d.status] || statusColors.disclosed;
+          return (
+            <div class="glass-subtle rounded-xl p-4 sm:p-5">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-semibold px-2 py-0.5 rounded-full capitalize"
+                  style={`color: ${sc.text}; background-color: ${sc.bg};`}
+                >
+                  {d.status}
+                </span>
+                <time class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]" datetime={d.date}>
+                  {formatDate(d.date)}
+                </time>
+              </div>
+              <h3 class="text-sm sm:text-base font-semibold text-[var(--color-text-primary)] mb-1">
+                {d.href ? (
+                  <a href={d.href} class="hover:text-[var(--color-accent-primary)] transition-colors">{d.title}</a>
+                ) : d.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{d.summary}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {d.cwes.map((cwe: string) => (
+                  <span class="text-xs font-[family-name:var(--font-mono)] px-1.5 py-0.5 rounded bg-[var(--color-bg-deep)] text-[var(--color-text-faint)] border border-[var(--color-border)]">
+                    {cwe}
+                  </span>
+                ))}
+                {d.disclosed_to.map((org: string) => (
+                  <span class="text-xs px-1.5 py-0.5 rounded bg-[var(--color-bg-surface)] text-[var(--color-text-faint)]">
+                    {org}
+                  </span>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Standards Submissions -->
+    <section id="standards" class="mb-12">
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-primary)]">Standards Submissions</h2>
+      <div class="space-y-3">
+        {standards.map((s) => {
+          const sc = statusColors[s.status] || statusColors.submitted;
+          return (
+            <a href={s.href} class="glass-subtle rounded-xl p-4 sm:p-5 block group hover:border-[var(--color-accent-primary)] transition-colors">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-semibold px-2 py-0.5 rounded-full capitalize"
+                  style={`color: ${sc.text}; background-color: ${sc.bg};`}
+                >
+                  {s.status}
+                </span>
+                <time class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]" datetime={s.date}>
+                  {formatDate(s.date)}
+                </time>
+              </div>
+              <h3 class="text-sm sm:text-base font-semibold text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+                {s.title} &rarr; {s.body}
+              </h3>
+              <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">{s.summary}</p>
+            </a>
+          );
+        })}
+      </div>
+    </section>
   </div>
 </PageLayout>
+
+<style>
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 639px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .stat-value {
+      font-size: 1.35rem;
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+    }
+
+    .phase-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
