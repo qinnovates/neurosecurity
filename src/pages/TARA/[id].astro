@@ -1,6 +1,8 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import { THREAT_VECTORS, SEVERITY_COLORS } from '../../lib/threat-data';
+import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, VALIDATION_TIERS } from '../../lib/validation-data';
+import type { ValidationTierId } from '../../lib/validation-data';
 
 export function getStaticPaths() {
   return THREAT_VECTORS.map((threat) => ({
@@ -11,6 +13,7 @@ export function getStaticPaths() {
 
 const { threat } = Astro.props;
 const severityColor = SEVERITY_COLORS[threat.severity] || SEVERITY_COLORS.low;
+const validation = getValidationForTechnique(threat.id);
 
 const NEURORIGHT_LABELS: Record<string, string> = {
   MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity',
@@ -234,6 +237,47 @@ const hasGovernance = nr || reg;
         </div>
       </div>
     )}
+
+    <!-- Validation Status -->
+    <div class="glass rounded-xl p-6 border-l-4 mb-8" style={validation ? 'border-left-color: #10b981;' : 'border-left-color: #94a3b8;'}>
+      <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-3 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={validation ? '#10b981' : '#94a3b8'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        Validation Status
+      </h3>
+      {validation ? (
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span
+              class="text-xs font-semibold px-2 py-0.5 rounded-full"
+              style={`background: ${STATUS_COLORS[validation.status as keyof typeof STATUS_COLORS].bg}; color: ${STATUS_COLORS[validation.status as keyof typeof STATUS_COLORS].text};`}
+            >
+              {STATUS_LABELS[validation.status as keyof typeof STATUS_LABELS]}
+            </span>
+            {validation.tiers.map((tierId: string) => {
+              const colors = TIER_COLORS[tierId as ValidationTierId];
+              const tier = VALIDATION_TIERS.find(t => t.id === tierId);
+              return (
+                <span
+                  class="text-xs font-medium px-2 py-0.5 rounded-full border"
+                  style={`background: ${colors.bg}; color: ${colors.text}; border-color: ${colors.border};`}
+                >
+                  {tier?.label ?? tierId}
+                </span>
+              );
+            })}
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-2">{validation.summary}</p>
+          <a href={`/validation/#${validation.id.toLowerCase()}`} class="text-xs text-[var(--color-accent-primary)] hover:underline">
+            View full validation details
+          </a>
+        </div>
+      ) : (
+        <p class="text-sm text-[var(--color-text-faint)]">
+          Theoretical / Not yet validated. This technique has not been independently tested.
+          See the <a href="/validation/" class="text-[var(--color-accent-primary)] hover:underline">validation dashboard</a> for what has been tested.
+        </p>
+      )}
+    </div>
 
     <!-- GitHub Edit Link -->
     <div class="mt-12 pt-6 border-t border-[var(--color-border)] flex justify-between items-center text-sm">

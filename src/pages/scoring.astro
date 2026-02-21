@@ -93,6 +93,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
           { href: '#severity', label: 'Severity Levels' },
           { href: '#vector', label: 'Vector Format' },
           { href: '#examples', label: 'Examples' },
+          { href: '#validation', label: 'Validation' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -425,6 +426,19 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
           <p>
             All {totalTechniques} techniques are scored and browsable in the <a href="/TARA/">TARA Atlas</a>. The scoring methodology is documented in the <a href="/whitepaper/#niss">QIF Whitepaper §6.5</a>.
           </p>
+        </div>
+      </section>
+
+      <!-- Validation Note -->
+      <section id="validation" class="mb-20">
+        <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)]">
+          <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Validation Note</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            NISS scoring behavior has been validated in simulation (<a href="/validation/#val-004" class="text-[var(--color-accent-primary)] hover:underline">VAL-004</a>): all 103 techniques scored correctly, PINS flags trigger as specified, and context profiles shift weights as designed. However, the clinical appropriateness of NISS score magnitudes has <strong>not</strong> been validated by clinicians or tested against real BCI incident data. The scoring engine works as specified; whether the specification itself produces clinically meaningful severity levels is an open question requiring empirical validation.
+          </p>
+          <a href="/validation/" class="text-xs text-[var(--color-accent-primary)] hover:underline mt-2 inline-block">
+            View full validation status
+          </a>
         </div>
       </section>
 

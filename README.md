@@ -14,22 +14,28 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 ---
 
-> **Research Disclaimer**
->
-> This project is early-stage research by a solo researcher. The frameworks, threat models, and scoring systems published here are derived from existing peer-reviewed neuroscience, physics, and cybersecurity literature, combined with the author's professional security experience. They have not been independently peer-reviewed or empirically validated as a whole.
->
-> **What has been tested:** A small number of TARA techniques have been validated through direct experimentation, including protocol-level vulnerability research with coordinated disclosure. The individual research papers cited throughout are peer-reviewed and verified.
->
-> **What has not been tested:** The majority of TARA techniques are theoretical threat models constructed from published research. The attack chains, NISS scores, Neural Impact Chains, DSM-5-TR diagnostic mappings, and depth-of-penetration models are analytical derivations, not empirical results. The BCI limits equation is a hypothesis awaiting validation. The NSP protocol has been implemented but not deployed on real BCI hardware.
->
-> **What this means:** Empirical validation of this work requires a multidisciplinary research group with access to BCI hardware, IRB-approved human subjects protocols, clinical neuroscience expertise, and controlled lab environments. That is beyond what one person can do. The frameworks are published openly so that research groups with those resources can test, validate, refute, or extend them.
->
-> **If you are a researcher, lab, or institution interested in empirical validation, [please reach out](mailto:kevin@qinnovate.com).** This work needs collaborators.
+### Validation Summary
+
+Solo research, tested honestly. Full methodology and limitations at **[VALIDATION.md](VALIDATION.md)** | **[Live dashboard](https://qinnovate.com/validation/)**
+
+| What | Result | Tier |
+|------|--------|------|
+| [Neurowall coherence monitor](VALIDATION.md#val-001) | 11/14 at 15s, 9/9 at 20s, 50-run stats, 0% FPR | Simulation + Independent |
+| [BrainFlow validation](VALIDATION.md#val-002) | 16-channel, 100% detection, 0% FPR | Independent |
+| [Physics security guardrails](VALIDATION.md#val-007) | 12/13 constraints verified, 4-layer architecture | Analytical + Cross-AI |
+| [Protocol vulnerability](VALIDATION.md#val-006) | Real vuln in BCI streaming protocol, disclosure in progress | Disclosed |
+| [NSP transport](VALIDATION.md#val-003) | Round-trip sim PASS, 65-90% compression | Simulation |
+| [NISS scoring engine](VALIDATION.md#val-004) | 103/103 techniques scored, PINS flags correct | Simulation |
+| [Citation verification](VALIDATION.md#val-009) | 3 fabricated citations caught and removed | Simulation |
+| **Not yet tested** | NISS clinical, DSM-5-TR mappings, BCI Limits Eq, real EEG, real hardware, real attacks | |
+
+This is early-stage research by a solo researcher. Empirical validation requires BCI hardware, IRB approval, and clinical expertise. The frameworks are published openly so research groups with those resources can test, validate, refute, or extend them. **[Reach out](mailto:kevin@qinnovate.com) if you're interested in collaborating.**
 
 ---
 
 ## Table of Contents
 
+- [Validation Summary](#validation-summary)
 - [What We Build](#what-we-build)
 - [The TARA Insight](#the-tara-insight)
 - [Neurorights Map](#neurorights-map)
@@ -66,6 +72,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | **[Runemate](https://qinnovate.com/runemate/)** | Native DSL compiler (67.8% compression), code-to-visual-cortex goal | 🟢 v1.0 Compiler |
 | Cortical Renderer | Runemate Phase 2/3: electrode stimulation pattern generation | 🔵 Planned |
 | BCI Limits Equation | Information-theoretic bounds on BCI channel capacity | 🟡 Hypothesis |
+| **[Security Guardrails](qif-framework/qif-sec-guardrails.md)** | Physics-derived 4-layer defense architecture for BCIs | 🔵 Concept Design |
 
 ### Tools & Hardware
 
