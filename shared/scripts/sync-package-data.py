@@ -3,7 +3,7 @@ from pathlib import Path
 
 def sync_data():
     source = Path("shared/qtara-registrar.json")
-    target_dir = Path("packaging/qtara/src/qtara/data")
+    target_dir = Path("shared/qtara/src/qtara/data")
     target = target_dir / "qtara-registrar.json"
 
     if not source.exists():

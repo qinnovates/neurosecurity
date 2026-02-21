@@ -27,14 +27,21 @@
   - `components/`: React/Astro components
   - `layouts/`: Page layouts
   - `lib/`: Utility functions and constants
-- `qif-framework/`: QIF security specification docs
+- `qif-framework/`: QIF specification + implementations
+  - `nsp/`: Neural Security Protocol (Rust + spec)
+    - `nsp-core/`: PQ-secure Rust implementation
+  - `runemate/forge/`: Runemate DSL compiler (Rust)
+  - `archive/oni-framework/`: Legacy ONI 14-layer model
 - `governance/`: Policy, ethics, and process documents
   - `processes/`: Standards development lifecycle
-- `shared/`: Shared data (Source of Truth)
+- `shared/`: Cross-cutting data + tools (Source of Truth)
+  - `qtara/`: Python SDK (pip install qtara)
+  - `scripts/`: Data pipeline scripts (TARA, NISS, DSM-5)
   - `archive/`: Deprecated/merged data files
-- `scripts/`: RSS fetcher, TARA tools, utilities
-  - `forms/`: Consulting form & Apps Script handler
-- `archive/`: Legacy projects (e.g. oni-framework)
+- `paper/`: Academic publications (preprint)
+- `scripts/`: Site scripts + CI utilities
+  - `verify/`: Citation & fact verification pipeline
+- `tools/`: Security tools (macshield, neurowall, autodidactive)
 - `docs/`: Built site / GitHub Pages output
 
 ## Tech Stack

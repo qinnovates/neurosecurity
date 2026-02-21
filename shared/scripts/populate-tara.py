@@ -9,7 +9,7 @@ Projections:
   3. Governance — consent, safety ceilings, monitoring, regulations
   4. Engineering — coupling, parameters, hardware, detection
 
-Run: python3 scripts/populate-tara.py
+Run: python3 shared/scripts/populate-tara.py
 Output: updates shared/qtara-registrar.json in-place
 
 Named after Tara, the Buddhist bodhisattva of compassion and protection.

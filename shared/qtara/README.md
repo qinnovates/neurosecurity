@@ -91,7 +91,7 @@ Each technique is classified by its physics feasibility:
 
 ```bash
 git clone https://github.com/qinnovates/qinnovate
-cd packaging/qtara
+cd shared/qtara
 pip install -e .
 ```
 

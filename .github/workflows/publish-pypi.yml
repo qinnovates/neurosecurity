@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'shared/qtara-registrar.json'
-      - 'packaging/qtara/**'
+      - 'shared/qtara/**'
   workflow_dispatch:
 
 jobs:
@@ -26,23 +26,23 @@ jobs:
         pip install build twine
 
     - name: Sync TARA data
-      run: python scripts/sync-package-data.py
+      run: python shared/scripts/sync-package-data.py
 
     - name: Build binary wheel and source tarball
       run: |
-        cd packaging/qtara
+        cd shared/qtara
         python -m build
 
     - name: Check package
       run: |
-        cd packaging/qtara
+        cd shared/qtara
         twine check dist/*
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: dist-qtara
-        path: packaging/qtara/dist/
+        path: shared/qtara/dist/
 
   publish:
     needs: build
@@ -73,7 +73,7 @@ jobs:
       id: version
       run: |
         pip install tomllib 2>/dev/null || true
-        VERSION=$(python3 -c "import tomllib; print(tomllib.load(open('packaging/qtara/pyproject.toml','rb'))['project']['version'])")
+        VERSION=$(python3 -c "import tomllib; print(tomllib.load(open('shared/qtara/pyproject.toml','rb'))['project']['version'])")
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         echo "tag=qtara-v$VERSION" >> "$GITHUB_OUTPUT"
 

@@ -6,8 +6,8 @@ Neural Impact Chain (NIC): Technique → Band → Structure → Function → NIS
 NISS-DSM Bridge: NISS metrics predict diagnostic clusters.
 
 Usage:
-    python3 scripts/populate-dsm5.py
-    python3 scripts/populate-dsm5.py --dry-run
+    python3 shared/scripts/populate-dsm5.py
+    python3 shared/scripts/populate-dsm5.py --dry-run
 """
 
 import json
