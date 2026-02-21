@@ -112,7 +112,7 @@
       "trigger": "push to main (README paths), workflow_dispatch",
       "type": "github_action",
       "source_file": ".github/workflows/wiki-sync.yml",
-      "status": "active",
+      "status": "disabled",
       "last_triggered": "2026-02-21T12:36:24Z",
       "last_status": "failure",
       "dependencies": [
