@@ -235,13 +235,9 @@ Use it. Build on it. If you find an error, [open an issue](https://github.com/qi
 
 ## A Personal Note
 
-I'm tired but wired. I can't fully process what I've built in one month.
+Earlier this year, I made a commitment to myself: get sober, get serious, make my dreams come true. I drew a mind map. Mapped out my future, what I care about, what gets me excited. Ironically, what I landed on was mapping the mind.
 
-First week of January, I made a commitment to myself: get sober, get serious, make my dreams come true. I drew a mind map. Mapped out my future, what I care about, what gets me excited. Ironically, what I landed on was mapping the mind. By mid-January I had my first commit, the ONI framework that would become QIF.
-
-I started with 60 attack techniques collectively known across BCI research publications, the baseline of what the field had already identified in scattered papers and conference proceedings. The 43 techniques I added after that came from applying the QIF framework I devised, grounding new attack vectors in physics and neuroanatomy rather than cataloguing what others had already published. All the while learning neuroscience and neurorights from scratch.
-
-One month and 630+ commits later:
+I started with 60 attack techniques collectively known across BCI research publications, the baseline of what the field had already identified in scattered papers and conference proceedings. The techniques I added after that came from applying the QIF framework I devised, grounding new attack vectors in physics and neuroanatomy rather than cataloguing what others had already published. All the while learning neuroscience and neurorights from scratch. Here's where things stand:
 
 - 103 threat techniques mapped to 68 DSM-5 psychiatric diagnoses and 4 neurorights
 - 24 BCI devices catalogued from FDA filings and manufacturer datasheets
@@ -257,21 +253,15 @@ One month and 630+ commits later:
 - 165 research sources, 70 derivation log entries, 20 field journal entries, 50 blog posts
 - A unified open API serving all of it at a single endpoint
 
-I thought this had taken six weeks. I checked the git log. First commit: January 18 on a private repo (the ONI framework). Five weeks. The qinnovate website came two weeks later on February 1. I was still wrong, just not by as much as I thought.
+People might ask why I laid all of this groundwork before getting into the actual BCI security work. David Marr answered that in 1982: *"Trying to understand perception by studying only neurons is like trying to understand bird flight by studying only feathers; it just cannot be done."* (via MIT OCW 9.13, Nancy Kanwisher). That is the reason all of this exists. You cannot secure a brain-computer interface by looking at the interface alone. You need the psychiatry to understand what damage looks like. You need the physics to understand what's possible. You need the ethics to understand what's worth protecting. And you need security to stress test and map it all. There's more that I'm missing, and I'll need to disseminate it clearly as I work to improve and enhance these datasets, make them more effective and testable, solidified with research and science. But the foundation had to come first.
 
-People might ask why I laid all of this groundwork before getting into the actual BCI security work. David Marr answered that in 1982: *"Trying to understand perception by studying only neurons is like trying to understand bird flight by studying only feathers; it just cannot be done."* (via MIT OCW 9.13, Nancy Kanwisher). That is the reason all of this exists. The DSM mappings, the TTPs, the BCI limits equation, the physics constraints, the neuroscience, the neurorights. You cannot secure a brain-computer interface by looking at the interface alone. You need the psychiatry to understand what damage looks like. You need the physics to understand what's possible. You need the ethics to understand what's worth protecting. And you need security to stress test and map it all. There's probably more that I'm missing, and I'll need to disseminate it all clearly as I work to improve and enhance these datasets, make them more effective and testable, built and solidified with research and science. But the foundation had to come first.
-
-This is my natural dopamine. The act of finally executing what my life experiences have built up to is the energy that keeps me awake. I know it's not sustainable. Once I get into my target school, I'm drawing hard boundaries. But right now, momentum is momentum. It's physics. It snowballs. Eventually it continues with or without my help, and that's the best part. Something in this month will stick. If not, there's more to come. Probability at its finest.
-
-There's also a lot of policy gaps that still need addressing. Policies define the scope and the work for security. Neuroethics will write those policies, and neurosecurity will test and secure against them. The two aren't separate disciplines, they're two halves of the same problem. Without ethics defining what's protected, security has no boundaries. Without security testing those boundaries, ethics stays theoretical.
+There's a lot of policy gaps that still need addressing. Policies define the scope and the work for security. Neuroethics will write those policies, and neurosecurity will test and secure against them. The two aren't separate disciplines, they're two halves of the same problem. Without ethics defining what's protected, security has no boundaries. Without security testing those boundaries, ethics stays theoretical.
 
 I haven't kicked off the security vulnerability scanning yet. That's a whole new category: responsible disclosures, compiled reports, coordinated follow-ups. I can automate parts of it, but that defeats the fun of learning the process.
 
-This isn't a solo mission forever. I want to build a real team around neurosecurity, but through academia, with proper footing and a real foundation to grow from. That's my goal by end of year: get into a program and start these conversations in a formal setting. It's fun and casual now, but I know I need to put my serious face on while keeping the same demeanor, real soon.
+This isn't a solo mission forever. I want to build a real team around neurosecurity, but through academia, with proper footing and a real foundation to grow from. That's my goal by end of year: get into a program and start these conversations in a formal setting.
 
-I started this project with ethics, not exploits. That's what led to everything you see here.
-
-All of this is open for a reason. Don't wait to start, because I didn't. Just do it responsibly, securely, and ethically. Make mistakes, but know how to steer yourself back. Version control is beautiful for that reason. Production environments in a lab, that's different. That requires partnerships, institutional backing, and real accountability.
+I started this project with ethics, not exploits. That's what led to everything you see here. All of this is open for a reason. Don't wait to start, because I didn't. Just do it responsibly, securely, and ethically. Make mistakes, but know how to steer yourself back. Version control is beautiful for that reason. Production environments in a lab, that's different. That requires partnerships, institutional backing, and real accountability.
 
 What a time to be alive. It started with a mind map. I hope it helps science, research, and a whole lot more.
 
