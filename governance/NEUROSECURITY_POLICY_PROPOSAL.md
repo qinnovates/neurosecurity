@@ -8,7 +8,7 @@ order: 8
 
 > Policy recommendations for brain-computer interface security governance. Identifies seven security properties that no existing framework addresses, proposes concrete next steps for standards bodies, regulators, and industry, and offers open-source reference implementations as starting points for discussion.
 
-**Version:** 1.1
+**Version:** 1.2
 **Date:** 2026-02-21
 **Status:** Active Development
 **Author:** Kevin Qi (Qinnovate)
@@ -106,13 +106,15 @@ These are early-stage proofs of concept, not production-ready systems. They have
 BCI security sits at the intersection of three regulatory domains that developed independently and have no formal coordination mechanism:
 
 **Domain A: Medical Device Regulations** (FDA, FDORA Section 3305, EU MDR 2017/745)
-Controls device safety, manufacturing quality, and (since 2023) cybersecurity. Treats BCIs as generic medical devices. Does not recognize neural data as a special category requiring unique protections.
+Controls device safety, manufacturing quality, and (since 2023) cybersecurity. Treats BCIs as generic medical devices. Does not recognize neural data as a special category requiring unique protections. Note: FDA's 2023 cybersecurity guidance is non-binding advisory guidance, not legally enforceable regulation. FDORA Section 524B is the statutory mandate, but it specifies process requirements (threat modeling, SBOMs), not neural-specific controls.
 
 **Domain B: Privacy and Neurorights** (HIPAA, GDPR Art. 9, Colorado HB 24-1058, California SB 1223, Chile Law 21.383, UNESCO 2025)
-Controls consent, data handling, and (aspirationally) cognitive liberty. Defines rights and privacy obligations. Does not specify technical security controls.
+Controls consent, data handling, and (aspirationally) cognitive liberty. Defines rights and privacy obligations. Does not specify technical security controls. Important scope limitations: HIPAA applies only to covered entities and business associates, not consumer BCI devices sold direct-to-consumer. GDPR Art. 9's application to neural data has not been litigated or definitively settled by any DPA. State neurorights laws (Colorado, California) define privacy protections but do not prescribe technical security controls (encryption, incident response, monitoring).
 
 **Domain C: IT Security Frameworks** (NIST SP 800-53, NIST CSF 2.0, ISO 27001, IEC 62443, SOC 2, PCI DSS)
 Provides comprehensive control catalogs for information systems. Does not address biological endpoints, neural data properties, or cognitive impact.
+
+**Adjacent but not addressed here:** Clinical research governance (45 CFR 46 Common Rule, ICH GCP E6(R2), IRB review) governs human subjects research with BCIs and provides substantial participant protections. These frameworks address informed consent, risk-benefit assessment, and adverse event reporting, but they do not specify cybersecurity controls for the devices used in research. Section 8.3 addresses the intersection of research ethics and cybersecurity.
 
 ### 25 Organizations Mapped
 
@@ -143,6 +145,8 @@ The full regulatory coverage matrix is documented in [NEUROSECURITY_GOVERNANCE.m
 | Reversibility assessment | | | | | | | | | | | | | **X** |
 
 A BCI manufacturer achieving full compliance across all three domains (FDA-cleared + HIPAA-compliant + ISO 27001-certified) still has zero coverage for these seven properties. This is the gap.
+
+**An important caveat:** This does not mean existing frameworks are useless for BCI security. NIST CSF 2.0, IEC 62443, and ISO 27001 provide substantial infrastructure that could be extended to address neural-specific properties. The gap is in the neural-specific extensions, not in the foundations. Several of the recommendations in Part II propose exactly this: extending existing frameworks rather than replacing them.
 
 ---
 
@@ -228,7 +232,7 @@ Beyond the seven unaddressed properties, five structural gaps in existing regula
 
 ### 3.1 HIPAA: Real-Time Stream Auditing
 
-**Legal context:** HIPAA requires 6-year retention of access logs for Protected Health Information (PHI). 45 CFR Part 164 specifies administrative, physical, and technical safeguards.
+**Legal context:** HIPAA requires 6-year retention of access logs for Protected Health Information (PHI). 45 CFR Part 164 specifies administrative, physical, and technical safeguards. HIPAA applies to covered entities (providers, plans, clearinghouses) and their business associates. Consumer BCI devices sold direct-to-consumer outside the clinical setting may not fall under HIPAA's scope, creating a coverage gap for the fastest-growing BCI market segment.
 
 **Failure mode:** BCIs generate continuous neural streams at 500Hz to 2,000Hz. Logging every individual packet or "read" event for a continuous neural stream creates a data footprint larger than the neural data itself. Current HIPAA auditing assumes discrete access events (a doctor opens a patient record), not continuous streams (a BCI transmitting 2,000 data points per second, 24 hours a day).
 
@@ -240,7 +244,7 @@ Beyond the seven unaddressed properties, five structural gaps in existing regula
 
 ### 3.2 GDPR: The Neural Fingerprinting Paradox
 
-**Legal context:** GDPR requires "true anonymization" where data can no longer be linked to an individual. Art. 9 classifies biometric data as a special category.
+**Legal context:** GDPR requires "true anonymization" where data can no longer be linked to an individual. Art. 9 classifies biometric data as a special category. Whether neural data constitutes "biometric data" under Art. 9 has not been definitively settled by any Data Protection Authority or court. The classification is plausible but not established law.
 
 **Failure mode:** Neural time-series data is inherently unique. A person's coherence signature, spectral power distribution, and ERP timing can be used to re-identify them across sessions, much like a fingerprint. Stripping the data of all identifiable patterns often destroys the security signature needed to detect unauthorized neural injection. The same features that enable re-identification are the features that enable threat detection.
 
@@ -962,6 +966,7 @@ UNESCO. (2025). Recommendation on the Ethics of Neurotechnology. 43rd General Co
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.2 | 2026-02-21 | ChatGPT cross-AI review: legal accuracy caveats (FDA non-binding, HIPAA scope, GDPR unlitigated, state laws privacy-not-security), clinical research governance noted, existing standards adaptability acknowledged |
 | 1.1 | 2026-02-21 | Gemini cross-AI review: conflict of interest disclosure, qualified validation claims, stretched timelines, audience routing expanded, tone recalibrated, limitations section added |
 | 1.0 | 2026-02-21 | Initial publication |
 
