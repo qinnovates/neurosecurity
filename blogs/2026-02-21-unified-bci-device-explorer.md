@@ -253,6 +253,8 @@ This isn't a solo mission forever. I want to build a real team around neurosecur
 
 In the meantime, if any of this resonates with you, reach out at research@qinnovate.com. I'd genuinely love to show someone the ropes. I can't promise pay or fast replies, my bandwidth is razor thin right now, so please don't take silence personally. What I can promise is that you'd be working on something that matters, at the very front of a field that barely exists yet. That's the whole point. I started this project with ethics, not exploits. That's what led to everything you see here.
 
+And don't forget, all of this is open for a reason. Don't wait to start, because I didn't. Just do it responsibly, securely, and ethically. Do your homework, make mistakes, but know how to steer yourself back on track. Version control is beautiful for that reason. At least, until we hit production environments in lab settings. That's when there's very little room for error.
+
 What a time to be alive. It started with a mind map. I hope it helps science, research, and a whole lot more.
 
 ---
