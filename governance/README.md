@@ -22,6 +22,7 @@ Neuroethics, regulatory compliance, and process documents for the QIF framework.
 | Document | Scope |
 |----------|-------|
 | [Neurosecurity Governance](NEUROSECURITY_GOVERNANCE.md) | Unified: why neurosecurity, GRC gaps, framework analysis, neuroethics alignment, UNESCO alignment, regulatory compliance, convergence strategy |
+| [Closing the Neurosecurity Gap](NEUROSECURITY_POLICY_PROPOSAL.md) | Policy recommendations: six asks for six organizations, phased timeline, QIF as reference implementation |
 
 Previous standalone documents (NEUROSECURITY.md, NEUROSECURITY-GRC.md, NEUROSECURITY_GRC_CONVERGENCE.md, NEUROETHICS_ALIGNMENT.md, UNESCO_ALIGNMENT.md, REGULATORY_COMPLIANCE.md, ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md) have been consolidated into the unified document above. Originals are preserved in `archive/`.
 
