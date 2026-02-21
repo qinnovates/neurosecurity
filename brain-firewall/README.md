@@ -21,8 +21,8 @@ It provides three concentric defense layers:
 
 | Document | Description |
 | :--- | :--- |
-| [BRAIN_FIREWALL_ARCHITECTURE.md](../governance/BRAIN_FIREWALL_ARCHITECTURE.md) | High-level system design, threat model, and 3-layer defense strategy. |
-| [BRAIN_FIREWALL_ENGINEERING.md](../governance/BRAIN_FIREWALL_ENGINEERING.md) | Signal chain schematics, compression spec, Merkle amortization, and Rust pseudocode. |
+| [BRAIN_FIREWALL_ARCHITECTURE.md](./BRAIN_FIREWALL_ARCHITECTURE.md) | High-level system design, threat model, and 3-layer defense strategy. |
+| [BRAIN_FIREWALL_ENGINEERING.md](./BRAIN_FIREWALL_ENGINEERING.md) | Signal chain schematics, compression spec, Merkle amortization, and Rust pseudocode. |
 
 ## Key Technical Properties
 
