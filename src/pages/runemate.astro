@@ -53,6 +53,7 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
           { href: '#neuroscience', label: 'Neuroscience' },
           { href: '#multimodal', label: 'Multimodal' },
           { href: '#onchip', label: 'On-Chip Requirements' },
+          { href: '#architecture', label: 'Defense Stack' },
           { href: '#vision', label: 'Vision' },
           { href: '#contribute', label: 'Contribute' },
         ].map((item) => (
@@ -691,6 +692,27 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
             </tbody>
           </table>
         </div>
+      </section>
+
+      <!-- Defense Stack Architecture -->
+      <section id="architecture" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">QIF Neural Defense Stack</h2>
+        <p class="text-[var(--color-text-muted)] mb-6">
+          Runemate and <a href="/tools/neurowall/" class="text-[var(--color-accent-primary)] hover:underline">Neurowall</a> are sibling defense components within the QIF framework. Neurowall protects inbound signals (the moat), Runemate protects outbound content rendering (the castle), and NSP secures the wire between them. Both operate at the I0 neural interface bottleneck.
+        </p>
+        <div class="rounded-xl overflow-hidden border border-[var(--color-border)]">
+          <img
+            src="/images/neurowall/qif-defense-stack.png"
+            alt="QIF Neural Defense Stack architecture diagram showing Neurowall (3-layer inbound signal defense) and Runemate (content rendering defense) as sibling components connected by the RunematePolicy DSL, both feeding into NSP post-quantum transport"
+            width="2400"
+            height="1650"
+            loading="lazy"
+            class="w-full h-auto"
+          />
+        </div>
+        <p class="text-xs text-[var(--color-text-faint)] mt-3">
+          L3 Policy Agent uses the RunematePolicy engine (5-rule priority stack) to dynamically adjust differential privacy epsilon, suppress stimulation, and escalate alerts based on NISS scores and coherence monitor output.
+        </p>
       </section>
 
       <!-- Vision -->
