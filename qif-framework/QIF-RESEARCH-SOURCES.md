@@ -341,6 +341,14 @@ Sources are organized by domain and sorted newest-first within each domain.
 |---|----------|-----|-------|---------------|
 | C36 | (2025). "Standardized Threat Taxonomy for AI Security, Governance, and Regulatory Compliance." arXiv:2511.21901. | https://arxiv.org/html/2511.21901v1 | Cybersecurity | Validated against 133 AI incidents. Aligned with ISO/IEC 42001 and NIST AI RMF. Model for QIF threat taxonomy. |
 | C37 | (2024). "An End-to-End Framework for Cybersecurity Taxonomy and Ontology Generation and Updating." IEEE. | https://ieeexplore.ieee.org/iel8/10679369/10679342/10679346.pdf | Cybersecurity | Methodology for taxonomy construction, ontology, and updates. Applicable to QIF's evolving threat model. |
+| C66 | MITRE/MDIC (2021). "Playbook for Threat Modeling Medical Devices." | https://www.mitre.org/news-insights/publication/playbook-threat-modeling-medical-devices | Entry 71 | Medical device threat modeling methodology (STRIDE, attack trees, ATT&CK). Funded by FDA. Not prescriptive, not BCI-specific. No neural-interface techniques. Confirms gap in BCI-specific taxonomy. |
+| C67 | MITRE CTID. "Mapping ATT&CK to CVE for Impact." | https://ctid.mitre.org/projects/mapping-attck-to-cve-for-impact/ | Entry 71 | ATT&CK-to-CVE mapping methodology for general IT/ICS. No neurotechnology extension. Confirms no BCI entries in ATT&CK. |
+| C68 | GAO (2024). "Brain-Computer Interfaces: Applications, Challenges, and Policy Options." GAO-25-106952. | https://www.gao.gov/products/gao-25-106952 | Entry 71 | US Government Accountability Office policy assessment (Dec 2024). Identifies regulatory gaps for nonmedical BCIs outside FDA scope. Calls for unified privacy framework. Not a technical threat taxonomy. |
+| C69 | CISA (2023). "Secure Tomorrow Series: Alternative Futures — Brain-Computer Interfaces." | https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces | Entry 71 | Strategic foresight matrix game for critical infrastructure planning. Not a technical threat assessment. Contains game board, players' guide, controller guide. |
+| C70 | IEEE Brain Initiative. "Overview of the IEEE Standards Roadmap on Neurotechnologies for Brain-Machine Interfacing." | https://brain.ieee.org/newsletter/2020-issue-1/overview-of-the-ieee-standards-roadmap-on-neurotechnologies-for-brain-machine-interfacing/ | Entry 71 | IEEE's own review of BMI standards landscape. Explicitly identifies cybersecurity as a top priority gap. States the field is "borrowing" from existing standards. Calls for BMI-specific security standards. Confirms open standardization gap. |
+| C71 | Ienca M, Haselager P. (2021). "Security in Brain-Computer Interfaces: State-of-the-Art, Opportunities, and Future Challenges." ACM Computing Surveys. | https://dl.acm.org/doi/10.1145/3427376 | Entry 71 | Qualitative BCI security survey by lifecycle phase. No CVE mapping. Referenced in coverage gap analysis (no prior work bridges neuro-layer taxonomy to CVE ecosystem). |
+| C72 | ISO 14708-3:2017 (confirmed 2023). "Active implantable medical devices — Implantable neurostimulators." | https://www.iso.org/standard/60539.html | Entry 71 | Neurostimulator standard covering electrical safety and biocompatibility. No cybersecurity content. No attack taxonomy. |
+| C73 | ISO/IEEE 11073-40102:2022. "Health informatics — Personal health device communication — Cybersecurity — Capabilities for mitigation." | https://www.iso.org/standard/83503.html | Entry 71 | Generic personal health device cybersecurity standard. Extended CIA triad, aligned with NIST/ENISA. Not BCI-specific. No attack taxonomy. |
 
 ---
 
@@ -480,7 +488,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Quantum Physics & Biology | 40 | 2026 | 1993 |
 | Neuroscience | 29 | 2026 | 2010 |
 | BCI Technology | 11 | 2026 | 1992 |
-| Cybersecurity & BCI Security | 65 | 2025 | 2012 |
+| Cybersecurity & BCI Security | 73 | 2026 | 2012 |
 | Electrode Technology | 7 | 2025 | 2018 |
 | Signal Coherence & Oscillations | 5 | 2015 | 1997 |
 | Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
@@ -488,7 +496,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Wireless Sensing Security | 4 | 2025 | 2024 |
 | Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
 | Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
-| **Total** | **193** | | |
+| **Total** | **201** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -499,6 +507,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | JHU/CELLS Ecosystem Research (Feb 18) | ~5 |
 | SSVEP/Guardrails Session (Feb 18) | ~9 |
 | BCI Security & Wireless Sensing Expansion (Feb 21) | ~24 |
+| CVE-to-TARA Mapping & Coverage Gap (Feb 21) | ~8 |
 
 ---
 

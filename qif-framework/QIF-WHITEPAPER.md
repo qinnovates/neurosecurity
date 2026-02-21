@@ -54,7 +54,9 @@ Brain-computer interfaces are advancing from experimental medical devices toward
 
 We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. A CVE coverage analysis maps 55 NVD-verified CVEs to 21 of 109 TARA techniques, revealing an 81.25% clinical blind spot: attacks that are physically feasible and clinically harmful but have zero CVE tracking. Physics feasibility tiering classifies all 109 techniques by hardware gate, enabling timeline projections for when specific attacks become feasible.
 
-We present Neurowall, a three-layer wearable neural firewall reference implementation validated at 100% true positive rate and 0% false positive rate across 50 simulation runs. We additionally present Project Runemate, a content compression pipeline offsetting PQC bandwidth overhead by 65--90%. A neurosecurity policy framework maps the regulatory gap across 25 organizations and proposes specific asks for six standards bodies (NIST, MITRE, FIRST, IEEE, FDA, UNESCO). A governance, risk, and compliance (GRC) alignment analysis maps abstract neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) to auditable technical controls.
+A DSM-5 diagnostic mapping links 102 of 109 techniques to psychiatric diagnoses via the Neural Impact Chain, organized into five diagnostic clusters. Per-technique FDORA/524B regulatory scoring identifies coverage gaps across all five FDORA cybersecurity requirements. Origin attribution classifies the provenance of all 109 techniques, distinguishing literature-derived attacks from novel QIF contributions.
+
+We present Neurowall, a three-layer wearable neural firewall reference implementation validated at 100% true positive rate and 0% false positive rate across 50 simulation runs. We additionally present Project Runemate, a content compression pipeline offsetting PQC bandwidth overhead by 65--90%. A neurosecurity policy framework maps the regulatory gap across 25 organizations and proposes specific asks for six standards bodies (NIST, MITRE, FIRST, IEEE, FDA, UNESCO). A governance, risk, and compliance (GRC) alignment analysis maps abstract neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) to auditable technical controls, including a per-technique Consent Complexity Index (CCI) measuring the gap between legal and meaningful consent. A unified data platform consolidates 24 BCI companies, 67 devices, 193 research sources, and all framework outputs into an open JSON API with KQL-style search, enabling manufacturers and regulators to query the BCI security landscape without building their own data infrastructure.
 
 ---
 
@@ -111,20 +113,24 @@ Previous BCI security work has either proposed attack taxonomies without defense
 
 ### 2.5 What This Paper Delivers
 
-This paper presents twelve contributions:
+This paper presents sixteen contributions:
 
 1. An **11-band hourglass architecture** (v4.0) spanning the neural-synthetic boundary with 7-1-3 asymmetry, derived from neuroanatomy rather than networking analogy.
 2. A **coherence metric** (Cs) for real-time signal integrity monitoring, grounded in spectral decomposition via the STFT, combining phase coherence, transport entropy, amplitude stability, and scale-frequency validation.
 3. Identification of **five cross-domain attack coupling mechanisms** and honest assessment of which attacks the coherence metric can and cannot detect.
-4. **TARA** (Therapeutic Atlas of Risks and Applications), a 109-technique dual-use registry with four-dimensional projections across security, clinical, diagnostic, and governance domains.
+4. **TARA** (Therapeutic Atlas of Risks and Applications), a 109-technique dual-use registry with 22+ fields per technique spanning security, clinical, diagnostic, governance, and provenance dimensions.
 5. **NISS** (Neural Impact Scoring System), a BCI-native severity scoring system replacing CVSS with five neural impact dimensions.
 6. A **CVE coverage analysis** mapping 55 NVD-verified CVEs to TARA techniques, quantifying an 81.25% clinical blind spot.
 7. **Physics feasibility tiering** classifying all 109 techniques by hardware gate (61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only).
-8. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol for BCI data.
-9. **Project Runemate**, a content compression pipeline that offsets PQC bandwidth overhead by 65--90%.
-10. **Neurowall**, a three-layer wearable neural firewall reference implementation validated at 100% TPR / 0% FPR.
-11. A **neurosecurity policy framework** with regulatory coverage mapping across 25 organizations and specific asks for six standards bodies.
-12. A **GRC alignment analysis** mapping neurorights to auditable technical controls and tracking enacted legislation across 7 jurisdictions.
+8. A **DSM-5 diagnostic mapping** linking 102 techniques to psychiatric diagnoses via the Neural Impact Chain, organized into five diagnostic clusters.
+9. **Per-technique FDORA/524B regulatory scoring** with coverage gaps identified for each of five FDORA requirements.
+10. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol for BCI data.
+11. **Project Runemate**, a content compression pipeline that offsets PQC bandwidth overhead by 65--90%.
+12. **Neurowall**, a three-layer wearable neural firewall reference implementation validated at 100% TPR / 0% FPR.
+13. A **neurosecurity policy framework** with regulatory coverage mapping across 25 organizations and specific asks for six standards bodies.
+14. A **GRC alignment analysis** mapping neurorights to auditable technical controls, including a per-technique Consent Complexity Index (CCI), and tracking enacted legislation across 7 jurisdictions.
+15. **Origin attribution** classifying the provenance of all 109 techniques (49 literature, 46 recontextualized, 6 QIF-original, 5 chain synthesis, 3 neuroethics formalized).
+16. A **unified data platform** with open JSON API, KQL-style search, 24-company BCI landscape database, and 193 compiled research sources (Section 7.8).
 
 ---
 
@@ -212,6 +218,8 @@ Three principles govern the design. **Width represents state space**: how many p
 | S1 | Analog Front-End | Amplification, filtering, ADC/DAC | Stochastic (analog noise) | 0.001--0.01 |
 | S2 | Digital Processing | Decoding, algorithms, classification | Deterministic | ~0 |
 | S3 | Application | Clinical software, UI, data storage | Deterministic | 0 |
+
+The N4 band (Diencephalon) warrants special attention. The thalamic reticular nucleus (TRN) implements a biological analog of default-deny gating: all sensory input except olfaction must pass through the thalamus before reaching cortex, and the TRN actively suppresses relay neurons unless specific excitation criteria are met. This is not an analogy imposed from IT; it is a 500-million-year-old containment architecture that QIF's design mirrors at the I0 boundary. The thalamic gate is the brain's own firewall, and its failure modes (thalamic stroke causing sensory flooding, absence seizures caused by thalamocortical loop oscillation) map directly to denial-of-service attack patterns in the TARA registry.
 
 ### 4.3 I0: The Bottleneck
 
@@ -374,7 +382,7 @@ A signal injected in the synthetic domain does not need to match the neural targ
 
 $f_{\text{attack}} = f_{\text{neural}}$
 
-Strongest coupling. The attack signal passes through I0 with minimal attenuation. Example: a 40 Hz injection directly entrains gamma oscillations.
+Strongest coupling. The attack signal passes through I0 with minimal attenuation. Example: a 40 Hz injection directly entrains gamma oscillations. A particularly insidious variant is **SSVEP frequency hijack** (QIF-T0103): a display flickering above the critical flicker fusion threshold (~60 Hz) evokes steady-state visually evoked potentials that are invisible to the user but classifiable by BCI decoders. Ming et al. (2023) demonstrated that imperceptible 60 Hz flickers produce classifiable brain responses at 52.8 bits/min information transfer rate, enabling false command injection, BCI jamming, and neural side-channel exfiltration through a standard monitor.
 
 #### Mechanism B: Harmonic Coupling
 
@@ -430,7 +438,7 @@ QIF maintains a registry of **109 attack techniques** organized into **11 tactic
 
 Existing threat taxonomies (MITRE ATT&CK, CAPEC, CWE) were designed for traditional IT systems. They classify attacks by what happens to *software and networks*. Brain-computer interfaces require a taxonomy that classifies attacks by what happens to *neural tissue, cognition, and human identity*. This is a fundamentally different attack surface.
 
-The QIF Locus Taxonomy, developed by Qinnovate, addresses this gap. "Locus" refers to the anatomical or functional *location* where the attack operates --- neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all 71 known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is the first threat classification system purpose-built for neural interfaces.
+The QIF Locus Taxonomy, developed by Qinnovate, addresses this gap. "Locus" refers to the anatomical or functional *location* where the attack operates --- neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is the first threat classification system purpose-built for neural interfaces.
 
 ### 6.4.2 Nomenclature
 
@@ -448,7 +456,7 @@ Each tactic and technique follows a structured naming convention:
 
 Technique IDs use flat sequential numbering:
 
-`QIF-T0001 ... QIF-T0071`
+`QIF-T0001 ... QIF-T0109`
 
 No hierarchy encoded in IDs. New techniques append to the end.
 
@@ -490,16 +498,26 @@ Each domain contains one or more tactics, each describing an adversary's operati
 
 ### 6.4.5 Registry Structure
 
-Each of the 109 techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability, evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a NISS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
+Each of the 109 techniques is a structured record with 22+ fields spanning security, clinical, diagnostic, governance, and provenance dimensions. The core security fields include: Locus tactic, hourglass bands targeted, physical coupling mechanism, detection capability, evidence sources, evidence status, NISS severity score, and legacy cross-references. Beyond these, each technique carries:
+
+- **DSM-5 diagnostic mapping** (Section 6.10): Primary and secondary psychiatric diagnoses reachable through the technique's Neural Impact Chain, with confidence level and diagnostic cluster assignment.
+- **Neurorights impact**: Which of the four Ienca-Andorno neurorights (CL, MI, MP, PC) the technique threatens, plus a Consent Complexity Index (CCI) score (Section 11.1).
+- **FDORA/524B regulatory classification**: Whether the technique targets a "cyber device" under Section 524B, which of the five FDORA requirements apply (threat modeling, vulnerability assessment, security architecture, SBOM, patch management), a coverage score (0.0-1.0), and identified regulatory gaps.
+- **Physics feasibility tier**: Hardware gate classification (Tier 0-3 or software-only) with timeline projection and constraint system reference (Section 6.9).
+- **Origin attribution**: Provenance classification (literature, QIF-recontextualized, QIF-chain-synthesis, QIF-theoretical, neuroethics-formalized), original authors where applicable, and what QIF contributed (framework mapping, threat recontextualization, chain synthesis, original derivation, or formalization).
+- **CVSS gap analysis**: A CVSS 4.0 base vector alongside a gap group (1-3) and narrative explaining what CVSS cannot express for this technique.
+- **NIST/ISO hardened mapping**: Specific NIST SP 800-53 and ISO 27001 control codes with technical evidence descriptions.
+
+The full registry is machine-readable JSON (`shared/qtara-registrar.json`), updated as new techniques are identified. Origin attribution shows that 49 techniques derive directly from published literature, 46 are phenomena from other domains recontextualized as BCI threats, 5 are novel composite attack chains, 6 are pure QIF derivations, and 3 are neuroethics concerns formalized as techniques.
 
 Evidence status breakdown:
 
 | Status | Count | Description |
 |--------|-------|-------------|
-| Confirmed | 14 | Real-world incidents |
-| Demonstrated | 19 | Lab-proven attacks |
-| Theoretical | 22 | Plausible from principles |
-| Emerging | 16 | Newly identified |
+| Confirmed | 19 | Real-world incidents |
+| Demonstrated | 35 | Lab-proven attacks |
+| Theoretical | 31 | Plausible from principles |
+| Emerging | 22 | Newly identified |
 
 ## 6.5 NISS v1.0 --- Neural Impact Scoring System
 
@@ -717,7 +735,7 @@ This analysis demonstrates that QIF's taxonomy and scoring systems are not specu
 
 ### 6.7.1 The Dual-Use Observation
 
-A systematic audit of the 71-technique registry revealed an unexpected pattern: the physical mechanisms underlying many attack techniques are identical to the mechanisms underlying established medical therapies. Signal injection (QIF-T0001) uses the same electrode current delivery as deep brain stimulation (DBS), which treats Parkinson's disease, essential tremor, dystonia, OCD, and epilepsy in over 160,000 patients worldwide [86]. Neural entrainment manipulation uses the same frequency-locking physics as therapeutic transcranial alternating current stimulation (tACS). Bifurcation forcing operates in the same dynamical parameter space as controlled DBS that shifts neural dynamics toward a healthy attractor state.
+A systematic audit of the technique registry revealed an unexpected pattern: the physical mechanisms underlying many attack techniques are identical to the mechanisms underlying established medical therapies. Signal injection (QIF-T0001) uses the same electrode current delivery as deep brain stimulation (DBS), which treats Parkinson's disease, essential tremor, dystonia, OCD, and epilepsy in over 160,000 patients worldwide [86]. Neural entrainment manipulation uses the same frequency-locking physics as therapeutic transcranial alternating current stimulation (tACS). Bifurcation forcing operates in the same dynamical parameter space as controlled DBS that shifts neural dynamics toward a healthy attractor state.
 
 The preliminary breakdown: **35 to 40 techniques** where the attack mechanism has a published therapeutic counterpart (electrode stimulation, entrainment, neuromodulation), roughly **10 ambiguous cases** where the attack vector is digital but the payload affects tissue, and **18 to 20 pure-silicon techniques** (firmware, supply chain, ML model attacks) with no therapeutic analog. Same electrode. Same current. Same physics. Different intent, consent, and oversight.
 
@@ -761,6 +779,8 @@ Schroder et al. (2025) highlight this gap in their analysis of BCI cybersecurity
 
 QIF, TARA, and NISS fill this gap. TARA provides the neural threat registry that Section 524B assumes exists but no referenced standard delivers. NISS extends CVSS with neural-specific severity dimensions. QIF provides the architectural framework that maps these threats to specific layers of the neural-synthetic boundary. Together, they give manufacturers a concrete, open, and reusable toolkit for satisfying FDORA's cybersecurity requirements for neural device submissions.
 
+**Per-Technique FDORA Scoring:** Each TARA technique carries a structured FDORA/524B assessment: whether the technique targets a "cyber device" (67 of 109 do), which of the five FDORA requirements apply (threat modeling: 102, vulnerability assessment: 101, security architecture: 76, SBOM: 61, patch management: 98), a coverage score (0.0-1.0, mean 0.48), and identified gaps. The most common gap (58 techniques): "CVSS cannot express neural-specific impacts." The second most common (42 techniques): "No FDA pathway for consumer sensor exploitation." 41 techniques score below 0.5 coverage, meaning existing FDORA compliance processes address less than half of the technique's risk surface. This per-technique regulatory scoring enables manufacturers to generate Section 524B documentation directly from the TARA registry, mapping each identified threat to the specific FDORA requirements it triggers.
+
 ## 6.8 CVE Coverage Analysis
 
 To quantify how much of the BCI attack surface has real-world vulnerability evidence, we mapped all publicly disclosed CVEs from the National Vulnerability Database (NVD) against TARA's 109 techniques. The mapping was validated across four rounds of cross-checking (self-verification, Gemini cross-check, re-verification, Gemini re-check), during which 10 hallucinated CVE-to-product mappings were identified and excluded (1 fabricated CVE ID, 9 incorrect product attributions).
@@ -800,6 +820,40 @@ Not all 109 TARA techniques are equally feasible. Some require hardware that exi
 This tiering enables two practical applications. First, **prioritized defense**: Tier 0 and software-only attacks (79 of 109) are the immediate threat surface and should drive current security investment. Second, **timeline projections**: as specific hardware capabilities mature (e.g., high-density noninvasive neural interfaces, consumer-grade TMS), techniques shift from higher tiers to Tier 0, providing advance warning of emerging attack feasibility.
 
 The 7 Tier 0 techniques that also score NISS >= 7.0 (High) represent the highest-priority defense targets: attacks that are both executable today and carry significant clinical harm potential.
+
+## 6.10 DSM-5 Diagnostic Mapping
+
+TARA's clinical dimension includes a systematic mapping of attack techniques to DSM-5-TR psychiatric diagnoses via the **Neural Impact Chain (NIC)**. The NIC traces the path from attack mechanism through targeted neural structures to observable clinical outcomes, using the hourglass band topology to determine which brain regions are affected and the NISS dimensions to predict which diagnostic clusters emerge.
+
+**The NISS-DSM Bridge:**
+
+Each NISS impact dimension predicts a diagnostic cluster:
+
+| NISS Dimension | What It Measures | Predicted DSM Cluster |
+|---------------|------------------|-----------------------|
+| BI (Biological Impact) | Tissue/structural damage | Motor/Neurocognitive |
+| CG (Cognitive Integrity) | Cognitive function disruption | Cognitive/Psychotic |
+| CV (Consent Violation) | Autonomy violation | Mood/Trauma |
+| RV (Reversibility) | Recovery potential | Chronicity modifier |
+| NP (Neuroplasticity) | Lasting neural change | Persistent/Personality |
+
+**Five Diagnostic Clusters:**
+
+| Cluster | DSM Categories | NISS Driver | Technique Count |
+|---------|---------------|-------------|----------------|
+| Motor/Neurocognitive | Movement disorders (F82), neurocognitive disorders, conversion (F44.4) | BI | 16 |
+| Cognitive/Psychotic | Schizophrenia spectrum (F20), perceptual disorders | CG | 16 |
+| Mood/Trauma | MDD (F32), PTSD (F43.10), adjustment (F43.2), anxiety (F41) | CV | 21 |
+| Persistent/Personality | Personality changes, lasting pathway reorganization | NP/RV | 7 |
+| Non-Diagnostic | Silicon-only techniques with no neural pathway | N/A | 42 |
+
+**Band-to-Diagnosis Mapping:**
+
+The hourglass bands determine which diagnoses are reachable. An attack targeting N7 (neocortex) threatens schizophrenia-spectrum and executive function disorders. An attack targeting N6 (limbic) threatens mood and trauma disorders. An attack targeting N5 (basal ganglia) threatens movement and substance use disorders. Attacks confined to S1-S3 (synthetic bands) carry no direct diagnostic mapping because they do not reach neural tissue.
+
+Of 109 techniques, 102 carry DSM-5 mappings (7 are software-only with no neural pathway). 51 carry a "direct" risk class (the attack mechanism directly produces the diagnostic outcome), 9 carry "indirect" (the attack enables conditions for the outcome), and 42 carry "none" (silicon-only). 15 unique DSM-5 codes are represented across the registry.
+
+This mapping is, to our knowledge, the first systematic taxonomy linking BCI attack techniques to psychiatric diagnoses. It enables a new form of risk assessment: rather than asking "what system is compromised?" (the CVSS question), clinicians and regulators can ask "what diagnosis could result?" (the NISS question). The diagnostic mapping is not speculative; it follows from established neuroscience linking brain region disruption to clinical outcomes. What is new is formalizing these pathways in a machine-readable, per-technique registry.
 
 ## 7. Neural Sensory Protocol (NSP)
 
@@ -914,6 +968,22 @@ Attack types validated: SSVEP (15Hz, 13Hz novel, notch-aware, frequency-hopping)
 
 **Hardware Roadmap:** Simulation complete (Phase 0). BrainFlow hardware validation complete (Phase 1). Next phases: recorded EEG dataset validation (PhysioNet, MNE-Python), Cortex-M4F reference platform deployment, biological TLS challenge-response for phase replay defense, and hardware reference electrode for boiling frog detection.
 
+### 7.8 Unified Data Platform and Open API
+
+A security framework is only useful if practitioners can access its data. QIF consolidates all framework outputs into a unified data platform spanning research, threat intelligence, device landscape, and governance:
+
+**BCI Landscape Database.** 24 BCI companies catalogued with funding ($1.3B+ total across top 10), employee counts, device specifications, channel counts, FDA status, patient deployment numbers, and security posture assessment. 67 devices tracked across invasive (14), non-invasive (38), and semi-invasive (2) categories. Every entry includes the company's published security documentation status (currently: 0 of 24 have published any).
+
+**Research Source Compilation.** 193 peer-reviewed sources compiled across 9 domains (quantum physics, neuroscience, BCI technology, cybersecurity, electrode technology, signal coherence, cryptographic standards, consumer sensor exploitation, neuroscience foundations). Each source is linked to the specific QIF component it supports.
+
+**BCI Search with KQL-Style Query Language.** An interactive search interface (`/bci-explorer/`) supports structured queries across the device database, TARA registry, and brain atlas. Researchers can filter by device type, channel count, FDA status, company, brain region, attack technique, NISS severity, physics tier, DSM-5 mapping, and neurorights impact. The query syntax supports boolean operators, range filters, and cross-entity joins (e.g., "show all Tier 0 techniques targeting N7 with NISS >= 7.0 that affect devices with > 100 channels").
+
+**Open JSON API.** All data is accessible via a unified REST endpoint at `/api/qif.json` (~580 KB, CORS-enabled, no authentication required). The API returns: all 109 TARA techniques with full NISS scoring and 22+ fields, 24 BCI devices with specifications, 38 brain regions with QIF band mapping, 13 physics constraints, 11 hourglass bands, 193 research sources, 43 timeline milestones, and validation results. This enables third-party researchers, manufacturers, and regulators to programmatically query the framework without building their own data infrastructure. The `qtara` Python package (Section 7.5) provides a CLI wrapper for common queries.
+
+**Interactive Dashboards.** Eight live interactive tools are deployed: a brain-device atlas with 3D hourglass visualization, a TARA threat matrix explorer with four-view mode (security, clinical, diagnostic, governance), a BCI device landscape browser, a physics constraint equation visualizer, a validation results dashboard, a derivation log browser, and a framework metrics dashboard with real-time statistics.
+
+The data platform exists because the alternative is untenable. A BCI manufacturer attempting to comply with FDORA Section 524B today would need to manually compile threat intelligence from ~85 scattered academic papers, cross-reference device specifications from individual company disclosures, and build their own scoring framework from scratch. QIF aggregates this into a single queryable source. The goal is utility: do the compilation work once so that every manufacturer, researcher, and regulator does not have to do it independently.
+
 ## 8. Falsifiability
 
 A framework that cannot be disproven is not science. QIF is designed to be empirically testable. The following conditions specify what findings would weaken or invalidate specific components.
@@ -944,20 +1014,24 @@ If terahertz radiation cannot generate Davydov solitons in SNARE protein complex
 
 ### 9.1 What QIF Is
 
-This paper delivered the twelve contributions outlined in Section 2.5:
+This paper delivered the sixteen contributions outlined in Section 2.5:
 
 1. An **11-band hourglass architecture** (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy (Section 4).
 2. A **coherence metric** ($C_s$) for real-time signal integrity monitoring, grounded in spectral decomposition via the STFT (Section 5).
 3. Identification of **five cross-domain attack coupling mechanisms** with honest detection boundaries (Section 6.1-6.2).
-4. The **QIF Locus Taxonomy** (7 domains, 11 tactics, 109 techniques) and **NISS v1.0** neural impact scoring (Sections 6.3-6.5).
-5. **TARA** (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry with four-dimensional projections (Section 6.7).
+4. The **QIF Locus Taxonomy** and **NISS v1.0** neural impact scoring (Sections 6.3-6.5).
+5. **TARA** (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry with 22+ fields per technique (Section 6.7).
 6. **CVE coverage analysis** quantifying an 81.25% clinical blind spot in vulnerability tracking (Section 6.8).
 7. **Physics feasibility tiering** classifying all 109 techniques by hardware gate (Section 6.9).
-8. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol (Section 7.1-7.5).
-9. **Project Runemate**, a content compression pipeline offsetting PQC bandwidth overhead by 65--90% (Section 7.6).
-10. **Neurowall**, a wearable neural firewall reference implementation validated at 100% TPR / 0% FPR (Section 7.7).
-11. A **neurosecurity policy framework** with regulatory gap analysis and six organizational asks (Section 10).
-12. A **GRC alignment analysis** mapping neurorights to auditable technical controls (Section 11).
+8. **DSM-5 diagnostic mapping** linking 102 techniques to psychiatric diagnoses via the Neural Impact Chain (Section 6.10).
+9. **Per-technique FDORA/524B regulatory scoring** with coverage gaps across five FDORA requirements (Section 6.7.4).
+10. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol (Section 7.1-7.5).
+11. **Project Runemate**, a content compression pipeline offsetting PQC bandwidth overhead by 65--90% (Section 7.6).
+12. **Neurowall**, a wearable neural firewall reference implementation validated at 100% TPR / 0% FPR (Section 7.7).
+13. A **neurosecurity policy framework** with regulatory gap analysis and six organizational asks (Section 10).
+14. A **GRC alignment analysis** mapping neurorights to auditable technical controls, including Consent Complexity Index (Section 11).
+15. **Origin attribution** classifying the provenance of all 109 techniques (Section 6.4.5).
+16. A **unified data platform** with open API, BCI landscape database, and research source compilation (Section 7.8).
 
 ### 9.2 What QIF Is Not
 
@@ -1049,6 +1123,10 @@ The four foundational neurorights proposed by Ienca and Andorno (2017) [50] are 
 | **Mental Integrity** | Integrity | Coherence metric ($C_s$) detects signal tampering; NISS Cognitive Integrity dimension scores impact |
 | **Psychological Continuity** | Availability + State Preservation | NSP graceful degradation tiers; NISS Neuroplasticity dimension tracks long-term pathway changes |
 
+**Consent Complexity Index (CCI):**
+
+Each technique carries a CCI score measuring the ratio of neurorights affected to the complexity of obtaining meaningful informed consent. CCI is computed as the weighted sum of affected neurorights divided by the technique's consent tractability. Across the 109-technique registry, mean CCI is 1.01, maximum is 2.7, and 11 techniques score above 2.0, indicating attacks where informed consent is structurally difficult to obtain because the harm mechanism is invisible, delayed, or irreversible. CCI operationalizes the gap between "consent was obtained" (a legal checkbox) and "consent was meaningful" (an ethical requirement).
+
 This mapping transforms abstract philosophical rights into auditable, testable technical controls. A device can be assessed against these four neurorights by measuring whether its security architecture implements the corresponding QIF controls.
 
 ### 11.2 UNESCO Alignment
@@ -1095,7 +1173,26 @@ QIF provides the technical infrastructure that these laws assume but do not spec
 10. **BCI Trend Database.** A structured database tracking BCI device capabilities, market trajectory, and security posture over time. Currently in development.
 11. **Conference and Peer Review.** Target academic venues (Graz BCI, IEEE, USENIX) for independent evaluation of the framework.
 
-### 12.3 Long-Term Goals
+### 12.3 BCI Limits Equation
+
+A unified physics-constraint system coupling thermodynamics, electromagnetism, information theory, biocompatibility, and QIF coherence has been derived but is not yet published in peer-reviewed form. The system specifies 12 simultaneous constraints that every BCI implant must satisfy:
+
+1. Total power must stay below the thermal ceiling for the target brain region
+2. Clock frequency is bounded by tissue attenuation at implant depth
+3. Channel count follows an empirical doubling time (~7.4 years per Stevenson and Kording 2011)
+4. Electrode charge density must remain within the Shannon safety limit (k < 1.75)
+5. Spike energy must exceed the Boltzmann thermal noise floor for detection
+6. Coherence metric must remain above the minimum threshold for the target function
+7. Temperature rise must not exceed 1.0 C (IEC 60601-1)
+8. Brain-silicon mechanical mismatch (5-7 orders of magnitude) constrains electrode longevity
+9. Electrode impedance must remain below signal-type-dependent maxima over the implant lifetime
+10. Implant volume must fit within the geometric constraints of the target region
+11. Shannon channel capacity must exceed the minimum information rate for the target function
+12. Wireless bandwidth must support the required data rate at acceptable power
+
+The constraint system extends Marblestone et al. (2013), which addressed thermal and EM constraints for scalable neural recording but did not include Shannon electrode safety, CMOS scaling projections, or QIF coherence as a security constraint. The key novel contribution is coupling the coherence metric (Constraint 6) with physics constraints: as thermal budgets enable higher channel counts, specific TARA techniques become feasible, and the coherence metric must scale accordingly. This constraint system is a candidate for standalone publication.
+
+### 12.4 Long-Term Goals
 
 12. **Unified QI Equation.** The current coherence metric ($C_s = e^{-S_c}$) captures classical signal integrity. A theoretical extension incorporating quantum terms (ion channel tunneling, entanglement gated by decoherence, indeterminacy) remains a research direction: $QI(b,t) = e^{-(S_c + S_q)}$. This extension requires experimental measurement of the decoherence time $\tau_D$ at the electrode-tissue boundary, which is currently an unresolved question in quantum biology (estimates range from $10^{-13}$ seconds [15] to $10^{-3}$ seconds [55]). If $\tau_D$ proves to be very short, the quantum terms are negligible and $C_s$ is the complete metric. If longer coherence times are confirmed, the quantum terms provide additional attack detection capabilities. The framework is designed so this question is empirically resolvable rather than assumed.
 13. **Quantum State Tomography at the BCI Interface.** Measure the actual $\tau_D$ at a BCI electrode-tissue junction.
@@ -1350,6 +1447,16 @@ Time is the variable that constrains all of this. The devices are shipping. The 
 [98] European Union. (2024). Regulation (EU) 2024/1689 (AI Act). BCIs designated high-risk AI systems; phased implementation 2025-2027.
 
 [99] GAO. (2025). Neurotechnology: Emerging Technologies and Policy Considerations. Report to Congressional Committees.
+
+**SSVEP and BCI Attacks**
+
+[100] Ming, Z. et al. (2023). SSVEP-based brain-computer interface with 60 Hz imperceptible visual stimuli. *Journal of Neural Engineering*, 20(2). DOI: 10.1088/1741-2552/acb5f4
+
+[101] Bian, N. et al. (2022). Security of SSVEP-based brain-computer interfaces against adversarial attacks. *Journal of Neural Engineering*, 19(6). DOI: 10.1088/1741-2552/aca6ca
+
+[102] Marblestone, A. H., Zamft, B. M., Maguire, Y. G., Shapiro, M. G., Cybulski, T. R., Glaser, J. I., ... & Bhatt, D. L. (2013). Physical principles for scalable neural recording. *Frontiers in Computational Neuroscience*, 7, 137. DOI: 10.3389/fncom.2013.00137
+
+[103] Stevenson, I. H., & Kording, K. P. (2011). How advances in neural recording affect data analysis. *Nature Neuroscience*, 14(2), 139--142. DOI: 10.1038/nn.2731
 
 ---
 
