@@ -1,9 +1,9 @@
-// brain-firewall-arduino/src/main.cpp
+// neurowall-arduino/src/main.cpp
 // Layer 1: Signal Boundary — SSVEP Notch Array + Impedance Guard
 // Target: Arduino Nano (ATmega328P) @ 16MHz
 // Sample rate: 250Hz | Output: UART 115200 baud to Raspberry Pi
 //
-// See: brain-firewall/BLUEPRINT.md for full wiring and setup guide.
+// See: neurowall/BLUEPRINT.md for full wiring and setup guide.
 
 #include <Arduino.h>
 

@@ -1,4 +1,4 @@
-# Brain Firewall — Arduino + Raspberry Pi Blueprint
+# Neurowall — Arduino + Raspberry Pi Blueprint
 
 > **Platform Level:** Accessible lab prototype using off-the-shelf hardware.
 > **Goal:** Demonstrate the full 3-layer Neural Firewall concept without custom BCI chips.
@@ -92,7 +92,7 @@ RPi WiFi/BLE     → Gateway PC or mobile NSP receiver
 Runs the **Layer 1: Signal Boundary** in real-time.
 
 ```cpp
-// brain-firewall-arduino/src/main.cpp
+// neurowall-arduino/src/main.cpp
 
 #include <Arduino.h>
 
@@ -159,7 +159,7 @@ void loop() {
 Handles **Layer 2 (Privacy) + Layer 3 (Policy) + NSP Transport**.
 
 ```python
-# brain-firewall-rpi/firewall.py
+# neurowall-rpi/firewall.py
 
 import serial, time, json, math, random
 import numpy as np
@@ -211,7 +211,7 @@ def runemate_policy(niss_bio: int, dp_func) -> bool:
 # --- Main Loop ---
 window = []
 ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
-print("Brain Firewall running. Ctrl-C to stop.")
+print("Neurowall running. Ctrl-C to stop.")
 
 try:
     while True:
@@ -249,7 +249,7 @@ except KeyboardInterrupt:
 
 ```bash
 # 1. Upload Arduino firmware
-cd brain-firewall-arduino
+cd neurowall-arduino
 arduino-cli compile --fqbn arduino:avr:nano .
 arduino-cli upload --fqbn arduino:avr:nano --port /dev/ttyUSB0 .
 
@@ -261,7 +261,7 @@ sudo raspi-config   # Interface Options → Serial → No login shell → Yes ha
 # Then reboot
 
 # 4. Run the firewall
-cd brain-firewall-rpi
+cd neurowall-rpi
 python firewall.py
 ```
 
@@ -283,16 +283,16 @@ python firewall.py
 ## Folder Structure
 
 ```
-brain-firewall/
+neurowall/
 ├── README.md
-├── BRAIN_FIREWALL_ARCHITECTURE.md
-├── BRAIN_FIREWALL_ENGINEERING.md
+├── ARCHITECTURE.md
+├── ENGINEERING.md
 ├── MVP_PROTOTYPE.md
 ├── TESTING.md
 ├── BLUEPRINT.md                     ← this file
-├── brain-firewall-arduino/
+├── neurowall-arduino/
 │   └── src/main.cpp                 ← Arduino L1 firmware
-└── brain-firewall-rpi/
+└── neurowall-rpi/
     └── firewall.py                  ← RPi L2/L3 + NSP Python prototype
 ```
 

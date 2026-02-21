@@ -1,19 +1,19 @@
-# Neural Firewall Neckband — Hardware Blueprint
+# Neurowall Neckband — Hardware Blueprint
 
 > **Status:** Concept / Early Research
 > **Date:** 2026-02-21
 > **Origin:** [Field Journal Entry 018](../qif-framework/QIF-FIELD-JOURNAL.md#entry-018) — "Building the Moat Around the Castle"
-> **Related:** [BCI Limits Equation](../qif-framework/research/bci-limits-equation.md) | [Architecture](./BRAIN_FIREWALL_ARCHITECTURE.md) | [MVP Prototype](./MVP_PROTOTYPE.md)
+> **Related:** [BCI Limits Equation](../qif-framework/research/bci-limits-equation.md) | [Architecture](./ARCHITECTURE.md) | [MVP Prototype](./MVP_PROTOTYPE.md)
 
 ---
 
 ## The Idea
 
-A neckband-style wearable that wraps around the back of the neck, like the old behind-the-neck headphones (Sony, LG Tone, etc.). It serves as the Neural Firewall's physical host, sitting between an EEG headset (like OpenBCI Cyton) and the outside world.
+A neckband-style wearable that wraps around the back of the neck, like the old behind-the-neck headphones (Sony, LG Tone, etc.). It serves as the Neurowall's physical host, sitting between an EEG headset (like OpenBCI Cyton) and the outside world.
 
 The neckband does two things:
 1. **Ground reference** for the EEG chips (replacing the traditional ear-clip ground electrode)
-2. **Security processor** running the full Neural Firewall stack (NSP + Runemate + DP noise injection)
+2. **Security processor** running the full Neurowall stack (NSP + Runemate + DP noise injection)
 
 The EEG headset captures signals. The neckband secures them before they leave the body.
 
@@ -293,7 +293,7 @@ The neckband sits comfortably within all physical constraints. Unlike invasive B
 
 ### Phase 0 — Bench Prototype (no neckband hardware)
 - OpenBCI Cyton + standard ear-clip ground
-- Firewall runs on host PC (Python/Rust), intercepts BLE stream
+- Neurowall runs on host PC (Python/Rust), intercepts BLE stream
 - Validates L1/L2/L3 pipeline logic
 
 ### Phase 1 — Neckband v0.1 (dev board in enclosure)

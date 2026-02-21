@@ -1,6 +1,6 @@
-# Architectural Spec: Wearable Neural Firewall (Phase 1)
+# Architectural Spec: Neurowall (Phase 1)
 
-This document outlines the first-generation **Neural Firewall** architecture for non-intrusive BCI wearables (e.g., Smart Glasses, Subvocal EMG interfaces).
+This document outlines the first-generation **Neurowall** architecture for non-intrusive BCI wearables (e.g., Smart Glasses, Subvocal EMG interfaces).
 
 ## Target Form Factors
 1.  **Neural-Embedded Eyeglasses**: Integration of dry EEG (temporal), EOG (eye tracking), and EMG (facial) sensors.

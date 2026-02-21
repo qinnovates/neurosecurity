@@ -1,4 +1,4 @@
-# Brain Firewall — Test Plan
+# Neurowall — Test Plan
 
 > **Multi-AI Review:** Validation steps confirmed by Gemini 2.5 via Gemini CLI (2026-02-21).
 > **Status:** Phase 0 MVP — no human subjects required.

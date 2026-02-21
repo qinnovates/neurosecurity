@@ -505,7 +505,7 @@ For N channels at temperature T. This determines where Σc dominates (classical)
 | Quantum Hackers | S3.4, S5 | 2026-02-02 | `SYNCED` — corrected: RSA estimates, AES-256 claim |
 | Heart Attack | S5 | 2026-02-02 | `SYNCED` — corrected: mortality rates, chest pain stats |
 | Spam Filter (Coherence) | S3.1 | 2026-02-02 | `REVIEW` — needs review: synaptic Pr range |
-| Brain Firewall | S2 | 2026-02-02 | `SYNCED` — no changes needed |
+| Neurowall (fka Brain Firewall) | S2 | 2026-02-02 | `SYNCED` — renamed to Neurowall 2026-02-21 |
 | OSI of Mind | S1, S2 | 2026-02-02 | `REVIEW` — references deprecated ONI naming |
 | Liminal Phase (Tunneling) | S3.4 | 2026-02-02 | `SYNCED` — published to qinnovates.github.io |
 | Nobel Prize (Quantum Keys) | S3.4 | 2026-02-02 | `SYNCED` |
