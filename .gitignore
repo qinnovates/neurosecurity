@@ -27,3 +27,4 @@ verify-report.json
 _memory/
 tools/macshield
 fact-check-report.json
+.vercel
