@@ -764,18 +764,271 @@ class NissEngine:
 
 
 @dataclass
-class RunematePolicy:
-    """Runemate Scribe policy engine with NISS-based trigger."""
-    niss_threshold: int = 5
-    tight_epsilon: float = 0.1
-    events: int = 0
+class PolicyRule:
+    """A single policy rule: condition -> actions."""
+    name: str
+    # Condition: all specified conditions must be true (AND logic)
+    min_niss: int = 0                         # NISS biological impact >= this
+    min_anomaly: float = 0.0                  # Anomaly score >= this
+    min_sustained_windows: int = 1            # Condition must hold for N consecutive windows
+    attack_type: Optional[str] = None         # Specific detector trigger (spectral_peak, cusum, growth, trajectory)
+    # Actions
+    epsilon: Optional[float] = None           # Override DP epsilon
+    suppress_stimulation: bool = False        # Block outbound stimulation on affected bands
+    alert_level: str = "none"                 # none, advisory, warning, critical
+    log_message: str = ""                     # Human-readable log when triggered
 
-    def evaluate(self, niss_bio: int, current_epsilon: float) -> float:
-        if niss_bio > self.niss_threshold:
-            if current_epsilon != self.tight_epsilon:
-                self.events += 1
-            return self.tight_epsilon
-        return DP_EPSILON
+    def __post_init__(self):
+        self._consecutive_windows = 0
+        self._active = False
+
+
+class RunematePolicy:
+    """Runemate policy engine. Evaluates a rule stack against live signal state.
+
+    Rules are evaluated top-to-bottom (highest priority first). The first
+    matching rule's actions take effect. If no rule matches, defaults apply.
+
+    Policy configs can be loaded from a dict (future: compiled from .staves
+    policy files via Runemate Forge). The engine does not import or depend
+    on Runemate internals. It consumes a plain data structure.
+    """
+
+    def __init__(
+        self,
+        rules: Optional[List[PolicyRule]] = None,
+        default_epsilon: float = DP_EPSILON,
+        cooldown_windows: int = 4,
+    ):
+        if rules is None:
+            # Default rule stack: matches the original stub behavior
+            rules = [
+                PolicyRule(
+                    name="critical_niss",
+                    min_niss=8,
+                    min_anomaly=3.0,
+                    min_sustained_windows=2,
+                    epsilon=0.05,
+                    suppress_stimulation=True,
+                    alert_level="critical",
+                    log_message="NISS critical + sustained anomaly: maximum privacy, stimulation suppressed",
+                ),
+                PolicyRule(
+                    name="high_niss",
+                    min_niss=7,
+                    epsilon=0.1,
+                    alert_level="warning",
+                    log_message="NISS elevated: DP tightened",
+                ),
+                PolicyRule(
+                    name="sustained_anomaly",
+                    min_anomaly=2.0,
+                    min_sustained_windows=3,
+                    epsilon=0.2,
+                    alert_level="advisory",
+                    log_message="Sustained anomaly (3+ windows): DP moderately tightened",
+                ),
+                PolicyRule(
+                    name="growth_detected",
+                    attack_type="growth",
+                    epsilon=0.1,
+                    suppress_stimulation=True,
+                    alert_level="warning",
+                    log_message="Exponential growth detected: DP tightened, stimulation suppressed",
+                ),
+                PolicyRule(
+                    name="spectral_peak",
+                    attack_type="spectral_peak",
+                    epsilon=0.2,
+                    alert_level="advisory",
+                    log_message="Novel spectral peak: DP moderately tightened",
+                ),
+            ]
+
+        self.rules = rules
+        self.default_epsilon = default_epsilon
+        self.cooldown_windows = cooldown_windows
+
+        # State
+        self._active_rule: Optional[str] = None
+        self._cooldown_remaining = 0
+        self._events: List[dict] = []
+        self._total_triggers = 0
+
+    def evaluate(
+        self,
+        niss_bio: int,
+        current_epsilon: float,
+        anomaly_score: float = 0.0,
+        monitor_detail: Optional[dict] = None,
+    ) -> dict:
+        """Evaluate the rule stack against current signal state.
+
+        Args:
+            niss_bio: Current NISS biological impact score (0-10)
+            current_epsilon: Current DP epsilon
+            anomaly_score: Current anomaly score from coherence monitor
+            monitor_detail: Detail dict from SignalMonitor.evaluate()
+
+        Returns:
+            dict with keys:
+                epsilon: float - DP epsilon to use
+                suppress_stimulation: bool - whether to block outbound stim
+                alert_level: str - none/advisory/warning/critical
+                rule: str or None - name of matched rule
+                message: str - log message
+        """
+        # Extract detector flags from monitor detail
+        detectors_active = set()
+        if monitor_detail and monitor_detail.get("status") == "monitoring":
+            if monitor_detail.get("spectral_peak_detected"):
+                detectors_active.add("spectral_peak")
+            if monitor_detail.get("growth_detected"):
+                detectors_active.add("growth")
+            if monitor_detail.get("cusum_triggered"):
+                detectors_active.add("cusum")
+            if monitor_detail.get("trajectory_anomaly"):
+                detectors_active.add("trajectory")
+
+        # Evaluate rules top-to-bottom
+        matched_rule = None
+        for rule in self.rules:
+            # Check NISS threshold
+            if niss_bio < rule.min_niss:
+                rule._consecutive_windows = 0
+                continue
+
+            # Check anomaly threshold
+            if anomaly_score < rule.min_anomaly:
+                rule._consecutive_windows = 0
+                continue
+
+            # Check specific attack type
+            if rule.attack_type and rule.attack_type not in detectors_active:
+                rule._consecutive_windows = 0
+                continue
+
+            # All conditions met for this window
+            rule._consecutive_windows += 1
+
+            # Check sustained window requirement
+            if rule._consecutive_windows < rule.min_sustained_windows:
+                continue
+
+            # Rule matches
+            matched_rule = rule
+            break
+
+        # Reset consecutive counts for rules below the match (they lost continuity)
+        if matched_rule:
+            found = False
+            for rule in self.rules:
+                if rule is matched_rule:
+                    found = True
+                    continue
+                if found:
+                    rule._consecutive_windows = 0
+
+        # Build result
+        if matched_rule:
+            self._cooldown_remaining = self.cooldown_windows
+            epsilon = matched_rule.epsilon if matched_rule.epsilon is not None else current_epsilon
+
+            # Log transition
+            if self._active_rule != matched_rule.name:
+                self._total_triggers += 1
+                self._events.append({
+                    "rule": matched_rule.name,
+                    "niss": niss_bio,
+                    "anomaly": anomaly_score,
+                    "alert": matched_rule.alert_level,
+                    "detectors": list(detectors_active),
+                })
+                self._active_rule = matched_rule.name
+
+            return {
+                "epsilon": epsilon,
+                "suppress_stimulation": matched_rule.suppress_stimulation,
+                "alert_level": matched_rule.alert_level,
+                "rule": matched_rule.name,
+                "message": matched_rule.log_message,
+            }
+
+        # No rule matched. Apply cooldown before relaxing back to default.
+        if self._cooldown_remaining > 0:
+            self._cooldown_remaining -= 1
+            return {
+                "epsilon": current_epsilon,
+                "suppress_stimulation": False,
+                "alert_level": "none",
+                "rule": f"cooldown ({self._cooldown_remaining})",
+                "message": "",
+            }
+
+        # Fully relaxed
+        if self._active_rule is not None:
+            self._active_rule = None
+        return {
+            "epsilon": self.default_epsilon,
+            "suppress_stimulation": False,
+            "alert_level": "none",
+            "rule": None,
+            "message": "",
+        }
+
+    @classmethod
+    def from_config(cls, config: dict) -> "RunematePolicy":
+        """Load policy from a config dict. Future: compiled from .staves policy files.
+
+        Config format:
+            {
+                "default_epsilon": 0.5,
+                "cooldown_windows": 4,
+                "rules": [
+                    {
+                        "name": "rule_name",
+                        "min_niss": 5,
+                        "min_anomaly": 0.0,
+                        "min_sustained_windows": 1,
+                        "attack_type": null,
+                        "epsilon": 0.1,
+                        "suppress_stimulation": false,
+                        "alert_level": "warning",
+                        "log_message": "description"
+                    }
+                ]
+            }
+        """
+        rules = []
+        for r in config.get("rules", []):
+            rules.append(PolicyRule(
+                name=r["name"],
+                min_niss=r.get("min_niss", 0),
+                min_anomaly=r.get("min_anomaly", 0.0),
+                min_sustained_windows=r.get("min_sustained_windows", 1),
+                attack_type=r.get("attack_type"),
+                epsilon=r.get("epsilon"),
+                suppress_stimulation=r.get("suppress_stimulation", False),
+                alert_level=r.get("alert_level", "none"),
+                log_message=r.get("log_message", ""),
+            ))
+        return cls(
+            rules=rules if rules else None,
+            default_epsilon=config.get("default_epsilon", DP_EPSILON),
+            cooldown_windows=config.get("cooldown_windows", 4),
+        )
+
+    @property
+    def events(self) -> List[dict]:
+        return self._events
+
+    @property
+    def total_triggers(self) -> int:
+        return self._total_triggers
+
+    @property
+    def active_rule(self) -> Optional[str]:
+        return self._active_rule
 
 
 # ─── NSP Transport with AAD, Counter Nonces, and Session Rekeying ─────────────
@@ -1175,7 +1428,7 @@ def run_simulation(args):
     l1 = SignalBoundary()
     monitor = SignalMonitor(calibration_windows=4)
     niss = NissEngine()
-    policy = RunematePolicy(niss_threshold=5, tight_epsilon=0.1)
+    policy = RunematePolicy()
     budget = PrivacyBudget()
     nsp = NspSession()
     receiver = NspReceiver(nsp)
@@ -1197,8 +1450,9 @@ def run_simulation(args):
           f"drift threshold={monitor.trajectory_threshold}")
     print(f"      Phase 1 TODO: + sigma_gamma^2 (gain baseline deviation)")
     print(f"[L3] NISS engine: signature (SSVEP) + anomaly (Cs) scoring")
-    print(f"     Runemate policy: NISS > {policy.niss_threshold} "
-          f"tightens to epsilon={policy.tight_epsilon}")
+    print(f"     Runemate policy: {len(policy.rules)} rules, "
+          f"default epsilon={policy.default_epsilon}, "
+          f"cooldown={policy.cooldown_windows} windows")
     print(f"[NSP] AES-256-GCM + AAD headers + counter nonces")
     print(f"      Rekey interval: every {REKEY_INTERVAL:,} frames")
     print(f"[RX]  Receiver: decrypt + AAD verify + delta reconstruct")
@@ -1210,10 +1464,10 @@ def run_simulation(args):
     raw_bytes = 0
     total_raw = 0
     total_encrypted = 0
-    policy_tighten_count = 0
     prev_epsilon = DP_EPSILON
     tamper_test_done = False
     monitor_window_counter = 0
+    detail = None  # Last monitor evaluation detail (passed to policy engine)
 
     t_start = time.time()
 
@@ -1269,17 +1523,27 @@ def run_simulation(args):
                       f"{flag}")
 
         # ── L3: NISS scoring (signature + anomaly) + policy ──────────────
+        # NISS scores every sample, but the policy engine evaluates once
+        # per monitor window (every window_size samples). This is critical:
+        # _consecutive_windows counts must increment per window, not per
+        # sample, or sustained-window rules fire prematurely (Gemini v1 review).
         niss_bio = niss.score(anomaly_score=anomaly_score)
-        current_epsilon = policy.evaluate(niss_bio, current_epsilon)
+        if monitor_window_counter == 0 and detail is not None:
+            policy_result = policy.evaluate(
+                niss_bio, current_epsilon, anomaly_score, detail,
+            )
+            current_epsilon = policy_result["epsilon"]
 
-        if current_epsilon != prev_epsilon:
-            direction = "TIGHTENED" if current_epsilon < prev_epsilon else "RELAXED"
-            print(f"  [{t_sec:6.3f}s] [L3-POLICY] {direction}: "
-                  f"epsilon {prev_epsilon:.2f} -> {current_epsilon:.2f} "
-                  f"(NISS={niss_bio}, anomaly={anomaly_score:.2f})")
-            if current_epsilon < prev_epsilon:
-                policy_tighten_count += 1
-            prev_epsilon = current_epsilon
+            if current_epsilon != prev_epsilon:
+                direction = "TIGHTENED" if current_epsilon < prev_epsilon else "RELAXED"
+                rule_info = f" [{policy_result['rule']}]" if policy_result["rule"] else ""
+                alert = policy_result["alert_level"]
+                suppress = " STIM-SUPPRESSED" if policy_result["suppress_stimulation"] else ""
+                print(f"  [{t_sec:6.3f}s] [L3-POLICY] {direction}{rule_info}: "
+                      f"epsilon {prev_epsilon:.2f} -> {current_epsilon:.2f} "
+                      f"(NISS={niss_bio}, anomaly={anomaly_score:.2f}, "
+                      f"alert={alert}{suppress})")
+                prev_epsilon = current_epsilon
 
         # ── L2: Differential Privacy with budget tracking ────────────────
         noisy_sample = apply_local_dp(filtered, current_epsilon, budget)
@@ -1384,7 +1648,15 @@ def run_simulation(args):
     print(f"  Integrity check:    {integrity}")
     print()
 
-    print(f"  L3 policy tightens: {policy_tighten_count}")
+    print("  --- Runemate Policy Engine ---")
+    print(f"  Total rule triggers:{policy._total_triggers}")
+    if policy._events:
+        for evt in policy._events:
+            print(f"    [{evt['rule']}] NISS={evt['niss']} anomaly={evt['anomaly']:.2f} "
+                  f"alert={evt['alert']} detectors={evt['detectors']}")
+    else:
+        print(f"    No rules triggered (signal within normal bounds)")
+    print()
     print(f"  Wall clock time:    {elapsed:.3f}s "
           f"({len(signal)/elapsed:.0f} samples/sec)")
     print("=" * 70)
@@ -1394,7 +1666,7 @@ def run_simulation(args):
         print(f"\n  SSVEP ATTACK ANALYSIS ({attack_freq} Hz)")
         print(f"  The notch filter at {attack_freq}Hz attenuates the injected signal.")
         print(f"  NISS detected via SSVEP signature AND coherence monitor (Cs drop).")
-        print(f"  Policy tightenings: {policy_tighten_count}")
+        print(f"  Policy triggers:    {policy._total_triggers}")
         print(f"  Total privacy cost: epsilon={budget.effective_epsilon:.4f} "
               f"(zCDP, delta={budget.delta})")
 
