@@ -233,6 +233,18 @@ Use it. Build on it. If you find an error, [open an issue](https://github.com/qi
 - Community contributions via pull request
 - Interactive cross-reference explorer (click a device, see its threats, brain regions, and physics constraints in one view)
 
+## A Personal Note
+
+I'm tired but wired right now. I can't fully process what I've been able to build in the span of one month.
+
+Mid-January, I made a commitment to myself: get sober, get serious, make my dreams come true. The first thing I did was draw a mind map. I mapped out my future, what I care about, what gets me excited. Ironically, what I landed on was mapping the mind.
+
+I started with 60 attack techniques in a spreadsheet. One month later: 103 threat techniques mapped to 68 DSM-5 psychiatric diagnoses. 4 neurorights mapped across every technique. 24 BCI devices catalogued from FDA filings and manufacturer datasheets. 38 brain regions cross-referenced to devices and threats. 13 physics constraints unified into a single limits equation. An 11-band hourglass security model derived from scratch. A post-quantum neural security protocol (NSP) implemented in Rust. A coherence monitor (Neurowall) that detects 9 out of 9 attacks at 30 seconds and validated on real EEG hardware. A domain-specific rendering language (Runemate). A peer-reviewed preprint on Zenodo. 9 cross-AI validation sessions. 165 research sources. 70 derivation log entries. 50 blog posts. And now a unified API serving all of it at a single endpoint.
+
+I thought this had taken six weeks. I checked the git log. First commit: February 1. Three weeks. I was wrong by double.
+
+It started with a mind map. I hope it helps science, research, and a whole lot more.
+
 ---
 
 *Written with AI assistance (Claude). All claims verified by the author.*
