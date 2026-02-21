@@ -15,7 +15,7 @@
 It provides three concentric defense layers:
 1. **Signal Boundary (L1)** — Prevents hardware-level signal injection and SSVEP-based adversarial attacks.
 2. **Inference Guard (L2)** — Prevents neural fingerprinting and intent exfiltration via on-device Differential Privacy.
-3. **Policy Agent (L3)** — Enforces the NIST/ISO Hardened Policy Matrix as a TARA-validated Runemate Stave.
+3. **Policy Agent (L3)** — RunematePolicy engine: a prioritized rule-stack that evaluates NISS scores, anomaly levels, and detector flags to dynamically adjust DP epsilon, suppress stimulation, and escalate alerts.
 
 ## Documents
 
@@ -32,7 +32,7 @@ It provides three concentric defense layers:
 
 | File | Description |
 | :--- | :--- |
-| [sim.py](./sim.py) | Full 3-layer pipeline simulation (v0.7). Multi-band EEG generator, auto-calibrating coherence weights, adaptive spectral peak detection, CUSUM detector, exponential growth detector, adaptive thresholding (LOO, opt-in), L1 notch filters + impedance guard, L2 differential privacy, L3 NISS policy engine, and NSP transport (delta + LZ4 + AES-256-GCM). No hardware required. |
+| [sim.py](./sim.py) | Full 3-layer pipeline simulation (v0.8). Multi-band EEG generator, auto-calibrating coherence weights, adaptive spectral peak detection, CUSUM detector, exponential growth detector, adaptive thresholding (LOO, opt-in), L1 notch filters + impedance guard, L2 differential privacy, L3 RunematePolicy engine (5-rule priority stack with cooldown and sustained window tracking), and NSP transport (delta + LZ4 + AES-256-GCM). No hardware required. |
 | [test_nic_chains.py](./test_nic_chains.py) | NIC (Neural Impact Chain) attack simulation test suite. Runs 15 TARA-mapped attack scenarios (10 standard + 5 adversarial-aware) against the full pipeline. Supports single-run, duration sweep, multi-run statistical analysis, and ROC analysis with FPR-adjusted scoring. |
 | [test_brainflow.py](./test_brainflow.py) | BrainFlow EEG validation. Tests the coherence monitor against BrainFlow's synthetic board (16-channel, 250Hz, independent EEG source). 5/5 attacks detected, 0% FPR, auto-calibration confirmed across 16 channels. Supports `--runs N`, `--channels`, `--verbose`. |
 | [visualize.py](./visualize.py) | Visualization suite. Generates 6 chart types: detection summary, ROC curves, detection heatmap, Cs trajectories, spectral comparison, anomaly distributions. Outputs to `charts/`. |
@@ -76,6 +76,22 @@ python visualize.py
 # Dependencies
 pip install numpy scipy lz4 cryptography matplotlib brainflow
 ```
+
+### Policy Engine (v0.8)
+
+The L3 policy agent uses a `RunematePolicy` engine that evaluates a prioritized rule stack against live signal state. Each `PolicyRule` specifies conditions (NISS threshold, anomaly score, sustained window count, detector type) and actions (epsilon override, stimulation suppression, alert level).
+
+**Default rule stack (5 rules, highest priority first):**
+
+| # | Rule | Condition | Epsilon | Alert |
+|---|------|-----------|---------|-------|
+| 1 | `critical_niss` | NISS >= 8 AND anomaly >= 3.0 for 2+ windows | 0.05 | critical |
+| 2 | `high_niss` | NISS >= 7 | 0.10 | warning |
+| 3 | `sustained_anomaly` | anomaly >= 2.0 for 3+ windows | 0.20 | advisory |
+| 4 | `growth_detected` | growth detector triggered | 0.10 | warning |
+| 5 | `spectral_peak` | spectral peak detector triggered | 0.20 | advisory |
+
+Rules 1 and 4 also suppress outbound stimulation. A 4-window cooldown prevents rapid oscillation between rules. Custom rule stacks can be provided via `RunematePolicy(rules=[...])` or loaded from config dicts (future: compiled from `.staves` policy files via Runemate Forge).
 
 ### Current Detection Results (v0.7)
 
