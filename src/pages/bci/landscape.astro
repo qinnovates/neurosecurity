@@ -16,6 +16,8 @@ import controlsRaw from '../../../shared/qif-security-controls.json';
 import validationRaw from '../../../shared/validation-registry.json';
 import automationRaw from '../../data/automation-registry.json';
 import hardwareRaw from '../../../docs/bci-hardware-inventory.json';
+import intelFeedRaw from '../../data/bci-intel-feed.json';
+import intelSourcesRaw from '../../data/intel-sources.json';
 
 const landscape = landscapeRaw as any;
 const atlas = atlasRaw as any;
@@ -83,10 +85,12 @@ const policyCount = policyTimeline.length;
 const klqCompanies = landscape.companies?.map((c: any) => ({
   name: c.name,
   type: c.type,
+  category: c.company_category || '',
   founded: c.founded,
   status: c.status,
   security_posture: c.security_posture,
   funding_total_usd: c.funding_total_usd || 0,
+  valuation_usd: c.valuation_usd || 0,
   employees_approx: c.employees_approx || 0,
   device_count: (c.devices || []).length,
   attack_surface_count: (c.tara_attack_surface || []).length,
@@ -143,6 +147,76 @@ const klqFunding = (landscape.market_data?.major_funding_rounds || []).map((r: a
   amount_usd: r.amount_usd,
   date: r.date,
   series: r.series || '',
+  lead_investors: (r.lead_investors || []).join(', ') || r.investors || '',
+  all_investors: (r.all_investors || []).join(', ') || '',
+  valuation: r.post_money_valuation_usd || 0,
+  source: r.source_url || '',
+}));
+
+// Investor intelligence tables
+const investorIntel = landscape.market_data?.investor_intelligence || {};
+
+// Cross-portfolio VCs (firms with multiple BCI bets)
+const klqCrossPortfolio = (investorIntel.cross_portfolio_vcs || []).map((v: any) => ({
+  firm: v.firm,
+  type: v.type || 'VC',
+  aum_B: v.aum_billions || '',
+  bci_companies: (v.bci_investments || []).map((i: any) => i.company).join(', '),
+  bci_bet_count: (v.bci_investments || []).length,
+  total_bci_exposure: v.total_bci_exposure_estimate || '',
+  signal: v.signal || '',
+}));
+
+// Sovereign wealth funds in BCI
+const klqSovereign = (investorIntel.sovereign_wealth_funds || []).map((s: any) => ({
+  fund: s.fund,
+  country: s.country || '',
+  aum_B: s.aum_billions || '',
+  bci_investments: (s.bci_investments || []).map((i: any) => `${i.company} (${i.round})`).join(', '),
+  signal: s.signal || '',
+}));
+
+// Big Tech corporate venture in BCI
+const klqBigTech = (investorIntel.big_tech_corporate_venture || []).map((t: any) => ({
+  company: t.company,
+  type: t.type || '',
+  bci_investment: t.bci_investment || '',
+  amount: t.amount || '',
+  strategy: t.strategy || '',
+}));
+
+// PE firms in BCI
+const klqPeFirms = (investorIntel.pe_firms || []).map((p: any) => ({
+  firm: p.firm,
+  type: p.type || 'PE',
+  bci_investment: p.bci_investment || '',
+  amount: p.amount || '',
+  signal: p.signal || '',
+}));
+
+// Intelligence/defense investors
+const klqIntelDefense = (investorIntel.intelligence_agencies_defense || []).map((i: any) => ({
+  entity: i.entity,
+  type: i.type || '',
+  bci_investment: i.bci_investment || '',
+  round: i.round || '',
+  signal: i.signal || '',
+}));
+
+// Notable individual investors
+const klqNotableInvestors = (investorIntel.notable_individual_investors || []).map((n: any) => ({
+  name: n.name,
+  role: n.role || '',
+  bci_investments: (n.bci_investments || []).join(', '),
+  signal: n.signal || '',
+}));
+
+// Key investment patterns
+const klqInvestmentPatterns = (investorIntel.key_patterns || []).map((p: any, i: number) => ({
+  id: i + 1,
+  pattern: p.pattern || '',
+  evidence: p.evidence || '',
+  implication: p.implication || '',
 }));
 
 const klqPolicy = (landscape.policy_timeline || []).map((p: any) => ({
@@ -219,6 +293,7 @@ const klqGrants = (landscape.market_data?.government_grants || []).map((g: any) 
   program: g.program,
   total_usd: g.total_usd,
   period: g.period,
+  note: g.note || '',
 }));
 
 // Acquisitions
@@ -227,6 +302,7 @@ const klqAcquisitions = (landscape.market_data?.acquisition_history || []).map((
   acquirer: a.acquirer,
   date: a.date,
   price_usd_estimate: a.price_usd_estimate || 0,
+  note: a.note || '',
 }));
 
 // Hardware specs from inventory
@@ -301,6 +377,207 @@ const klqAutomations = (automation.entries || []).map((a: any) => ({
   last_status: a.last_status || '',
   category: a.category || '',
 }));
+
+// Market forecasts — all analyst estimates
+const klqMarketForecasts = (landscape.market_data?.market_size_estimates || []).map((m: any) => ({
+  year: m.year,
+  value_billion_usd: m.value_billion_usd,
+  source: m.source || '',
+  cagr_percent: m.cagr_percent || '',
+}));
+
+// Adjacent markets (neurotechnology, EEG, implants)
+const klqAdjacentMarkets = [
+  ...(landscape.market_data?.broader_neurotech_market || []).map((m: any) => ({
+    market: 'Neurotechnology (all)',
+    year: m.year,
+    value_billion_usd: m.value_billion_usd,
+    cagr_percent: m.cagr_percent || '',
+    source: m.source || '',
+  })),
+  ...(landscape.market_data?.eeg_devices_market || []).map((m: any) => ({
+    market: 'EEG Devices',
+    year: m.year,
+    value_billion_usd: m.value_billion_usd,
+    cagr_percent: m.cagr_percent || '',
+    source: m.source || '',
+  })),
+  ...(landscape.market_data?.bci_implant_market || []).map((m: any) => ({
+    market: 'BCI Implants (invasive only)',
+    year: m.year,
+    value_billion_usd: m.value_billion_usd,
+    cagr_percent: m.cagr_percent || '',
+    source: m.source || '',
+  })),
+];
+
+// VC deal flow by year
+const klqVcDeals = (landscape.market_data?.vc_aggregate_by_year || []).map((v: any) => ({
+  year: v.year,
+  deals: v.deals,
+  total_usd: v.total_usd,
+  source: v.source || '',
+  note: v.note || '',
+}));
+
+// Security gap comparison markets
+const klqSecurityGap = (landscape.market_data?.security_gap?.comparison_markets || []).map((c: any) => ({
+  market: c.market,
+  size_2025_usd: c.size_2025_usd,
+  cagr_percent: c.cagr_percent,
+  source: c.source || '',
+}));
+
+// All cited sources (from security_gap.key_sources + market estimates)
+const klqSources: any[] = [
+  ...(landscape.market_data?.security_gap?.key_sources || []).map((s: any) => ({
+    title: s.title,
+    url: s.url || '',
+    date: s.date || '',
+    category: 'security_gap',
+  })),
+  ...(landscape.market_data?.market_size_estimates || [])
+    .filter((m: any) => m.source_url)
+    .map((m: any) => ({
+      title: m.source,
+      url: m.source_url,
+      date: String(m.year),
+      category: 'market_forecast',
+    })),
+  ...(landscape.market_data?.major_funding_rounds || [])
+    .filter((r: any) => r.source_url)
+    .map((r: any) => ({
+      title: `${r.company} ${r.series}`,
+      url: r.source_url,
+      date: r.date,
+      category: 'funding_round',
+    })),
+  ...(landscape.market_data?.government_grants || [])
+    .filter((g: any) => g.source_url)
+    .map((g: any) => ({
+      title: g.program,
+      url: g.source_url,
+      date: '',
+      category: 'government_grant',
+    })),
+];
+
+// --- BA Analysis: Computed Tables ---
+
+// TAM/SAM/SOM — BCI Security Market Sizing
+// TAM: Total BCI market * healthcare security spend rate (6.5%)
+// SAM: Companies with devices that could adopt security frameworks (~70% of market)
+// SOM: First-mover capture potential (10-25% of SAM in years 1-5)
+const healthcareSecPct = 0.065; // 6.5% midpoint of 6-7% range
+const samPct = 0.70; // ~70% of BCI cos have devices needing security
+const klqTamSamSom = (() => {
+  // Get median 2024 base and build forward using median CAGR
+  const base2024 = (landscape.market_data?.market_size_estimates || [])
+    .filter((m: any) => m.year === 2024)
+    .map((m: any) => m.value_billion_usd)
+    .sort((a: number, b: number) => a - b);
+  const median2024 = base2024.length > 0 ? base2024[Math.floor(base2024.length / 2)] : 2.3;
+
+  // Collect CAGRs from forecasts
+  const cagrs = (landscape.market_data?.market_size_estimates || [])
+    .filter((m: any) => m.cagr_percent)
+    .map((m: any) => m.cagr_percent)
+    .sort((a: number, b: number) => a - b);
+  const medianCagr = cagrs.length > 0 ? cagrs[Math.floor(cagrs.length / 2)] : 15.0;
+
+  const rows = [];
+  for (let yr = 2024; yr <= 2035; yr++) {
+    const yearsOut = yr - 2024;
+    const bciMarket = median2024 * Math.pow(1 + medianCagr / 100, yearsOut);
+    const tam = bciMarket * healthcareSecPct;
+    const sam = tam * samPct;
+    // SOM ramps: 0% in 2024, 5% in 2025, scaling to 25% by 2030+
+    const somPct = yr <= 2024 ? 0 : Math.min(0.25, 0.05 + (yr - 2025) * 0.04);
+    const som = sam * somPct;
+    rows.push({
+      year: yr,
+      bci_market_B: Number(bciMarket.toFixed(2)),
+      sec_spend_rate: '6.5%',
+      tam_M: Math.round(tam * 1000),
+      sam_M: Math.round(sam * 1000),
+      som_pct: `${(somPct * 100).toFixed(0)}%`,
+      som_M: Math.round(som * 1000),
+      median_cagr: `${medianCagr}%`,
+    });
+  }
+  return rows;
+})();
+
+// Security Convergence Timeline — automotive parallel
+// Automotive cyber: ~$1.7B (2019) -> $4.7B (2025) after UN R155 (June 2020)
+// BCI is pre-regulation. Maps BCI timeline to automotive's pre/post regulation arc.
+const klqConvergence = [
+  { year: 2019, market: 'Automotive Cyber', event: 'Pre-regulation baseline', value_B: 1.7, security_spend_B: 1.7, regulation: 'None binding' },
+  { year: 2020, market: 'Automotive Cyber', event: 'UN R155 adopted (June 2020)', value_B: 2.0, security_spend_B: 2.0, regulation: 'UN R155 adopted' },
+  { year: 2021, market: 'Automotive Cyber', event: 'OEMs scramble to comply', value_B: 2.5, security_spend_B: 2.5, regulation: 'UN R155 enforcement begins' },
+  { year: 2022, market: 'Automotive Cyber', event: 'Mandatory for new types', value_B: 3.0, security_spend_B: 3.0, regulation: 'R155 mandatory new vehicle types' },
+  { year: 2024, market: 'Automotive Cyber', event: 'All new vehicles', value_B: 4.1, security_spend_B: 4.1, regulation: 'R155 mandatory all new vehicles' },
+  { year: 2025, market: 'Automotive Cyber', event: 'Mature market', value_B: 4.7, security_spend_B: 4.7, regulation: 'Full compliance required' },
+  { year: 2023, market: 'BCI (actual)', event: 'FDORA Section 524B (Oct 2023)', value_B: 1.8, security_spend_B: 0, regulation: 'FDORA 524B (cyber for all medical devices)' },
+  { year: 2024, market: 'BCI (actual)', event: 'FDA deficiency letters +700%', value_B: 2.3, security_spend_B: 0, regulation: 'FDA enforcement ramp-up' },
+  { year: 2025, market: 'BCI (actual)', event: 'GAO report: no BCI privacy law', value_B: 2.8, security_spend_B: 0, regulation: 'Colorado AI Act, GAO report' },
+  { year: 2026, market: 'BCI (projected)', event: 'Pre-regulation (now)', value_B: 3.3, security_spend_B: 0, regulation: 'No BCI-specific regulation' },
+  { year: 2027, market: 'BCI (projected)', event: 'Expected: first BCI security incident', value_B: 3.8, security_spend_B: 0.01, regulation: 'Incident-driven awareness' },
+  { year: 2028, market: 'BCI (projected)', event: 'Expected: BCI-specific FDA guidance', value_B: 4.4, security_spend_B: 0.05, regulation: 'FDA BCI-specific guidance' },
+  { year: 2029, market: 'BCI (projected)', event: 'Compliance scramble begins', value_B: 5.1, security_spend_B: 0.15, regulation: 'Enforcement begins' },
+  { year: 2030, market: 'BCI (projected)', event: 'Security spend emerges', value_B: 5.8, security_spend_B: 0.38, regulation: 'Mandatory for new BCI devices' },
+];
+
+// Investment Momentum — year-over-year growth + cumulative
+const klqMomentum = (() => {
+  const vc = landscape.market_data?.vc_aggregate_by_year || [];
+  const funding = landscape.market_data?.major_funding_rounds || [];
+
+  // Count rounds per year from individual rounds
+  const roundsByYear = new Map<number, number>();
+  for (const r of funding) {
+    const yr = parseInt(String(r.date).slice(0, 4), 10);
+    if (!isNaN(yr)) roundsByYear.set(yr, (roundsByYear.get(yr) || 0) + 1);
+  }
+
+  let cumulative = 0;
+  return vc.map((v: any, i: number) => {
+    cumulative += v.total_usd;
+    const prevTotal = i > 0 ? vc[i - 1].total_usd : null;
+    const yoyGrowth = prevTotal ? ((v.total_usd - prevTotal) / prevTotal * 100).toFixed(0) + '%' : 'N/A';
+    return {
+      year: v.year,
+      total_invested_M: Math.round(v.total_usd / 1_000_000),
+      deals: v.deals,
+      tracked_rounds: roundsByYear.get(v.year) || 0,
+      yoy_growth: yoyGrowth,
+      cumulative_invested_M: Math.round(cumulative / 1_000_000),
+      security_spend_M: 0,
+      gap_M: Math.round(cumulative / 1_000_000),
+    };
+  });
+})();
+
+// Risk Quantification — per-company security exposure
+const klqRiskProfile = klqCompanies.map((c: any) => {
+  const fundingB = (c.funding_total_usd || 0) / 1_000_000_000;
+  const secScore = c.security_posture === 'none_published' ? 0
+    : c.security_posture === 'minimal' ? 1
+    : c.security_posture === 'basic' ? 2
+    : c.security_posture === 'moderate' ? 3 : 4;
+  // Risk = funding * device count * inverse security
+  const riskIndex = Number((fundingB * Math.max(c.device_count, 1) * (5 - secScore)).toFixed(2));
+  return {
+    company: c.name,
+    type: c.type,
+    funding_B: Number(fundingB.toFixed(2)),
+    devices: c.device_count,
+    security_posture: c.security_posture,
+    security_score: `${secScore}/4`,
+    attack_surfaces: c.attack_surface_count,
+    risk_index: riskIndex,
+  };
+}).sort((a: any, b: any) => b.risk_index - a.risk_index);
 
 // Comms / Wireless / Attack Surface — extracted from hardware inventory + landscape security notes
 const klqComms = (hardware.devices || []).map((d: any) => {
@@ -402,6 +679,28 @@ const klqComms = (hardware.devices || []).map((d: any) => {
   };
 });
 
+// --- Intel Feed & Sources ---
+
+const klqIntelFeed = (intelFeedRaw as any[]).map((item: any) => ({
+  id: item.id,
+  title: item.title,
+  date: item.date,
+  source: item.source,
+  source_category: item.source_category,
+  tags: (item.tags || []).join(', '),
+  companies: (item.companies || []).join(', '),
+  url: item.url,
+}));
+
+const klqIntelSources = (intelSourcesRaw as any[]).map((s: any) => ({
+  name: s.name,
+  category: s.category,
+  tier: s.tier,
+  url: s.url,
+  has_rss: !!s.rss_url,
+  has_api: !!s.has_api,
+}));
+
 const klqTables = {
   companies: klqCompanies,
   devices: klqDevices,
@@ -423,10 +722,28 @@ const klqTables = {
   nsp_layers: klqNsp,
   hardware_specs: klqHardware,
   comms: klqComms,
+  market_forecasts: klqMarketForecasts,
+  vc_deals: klqVcDeals,
+  security_gap: klqSecurityGap,
+  adjacent_markets: klqAdjacentMarkets,
+  sources: klqSources,
+  tam_sam_som: klqTamSamSom,
+  convergence: klqConvergence,
+  momentum: klqMomentum,
+  risk_profile: klqRiskProfile,
+  cross_portfolio: klqCrossPortfolio,
+  sovereign_funds: klqSovereign,
+  big_tech_bci: klqBigTech,
+  pe_firms: klqPeFirms,
+  intel_defense: klqIntelDefense,
+  notable_investors: klqNotableInvestors,
+  investment_patterns: klqInvestmentPatterns,
   validations: klqValidations,
   automations: klqAutomations,
   milestones: klqMilestones,
   news: klqNews,
+  intel_feed: klqIntelFeed,
+  intel_sources: klqIntelSources,
 };
 ---
 

@@ -590,6 +590,44 @@
         "Updated src/data/automation-registry.json"
       ],
       "category": "monitoring"
+    },
+    {
+      "id": "gh-update-intel",
+      "name": "Update BCI Intel Feed",
+      "description": "Weekly BCI business intelligence aggregation from 50+ RSS feeds. Fetches, filters for BCI relevance, auto-tags, extracts company mentions, deduplicates, and appends to accumulating feed store.",
+      "trigger": "schedule (cron: 0 17 * * 0 — Sunday noon EST), workflow_dispatch",
+      "type": "github_action",
+      "source_file": ".github/workflows/update-intel.yml",
+      "status": "active",
+      "last_triggered": null,
+      "last_status": "unknown",
+      "dependencies": [
+        "scripts/fetch-intel.mjs",
+        "shared/bci-landscape.json"
+      ],
+      "outputs": [
+        "src/data/bci-intel-feed.json"
+      ],
+      "category": "data"
+    },
+    {
+      "id": "script-fetch-intel",
+      "name": "Fetch BCI Intel Feeds",
+      "description": "Fetches 50+ RSS feeds for BCI business intelligence, filters, tags, extracts companies, deduplicates (URL + fuzzy title), and appends to accumulating store. Called by update-intel workflow.",
+      "trigger": "manual (node scripts/fetch-intel.mjs), called by update-intel workflow",
+      "type": "script",
+      "source_file": "scripts/fetch-intel.mjs",
+      "status": "active",
+      "last_triggered": null,
+      "last_status": "unknown",
+      "dependencies": [
+        "RSS feed URLs (configured in script)",
+        "shared/bci-landscape.json"
+      ],
+      "outputs": [
+        "src/data/bci-intel-feed.json"
+      ],
+      "category": "data"
     }
   ]
 }
