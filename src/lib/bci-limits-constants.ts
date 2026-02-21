@@ -130,6 +130,136 @@ export const BCI_PHYSICS_CONSTANTS = [
   { parameter: 'DC leakage tissue damage threshold', value: '0.4 \u00B5A', source: 'Preclinical studies (PMC6049833)', status: 'Added' },
 ] as const;
 
+/**
+ * Known gaps in the constraint system. These are real phenomena with published
+ * literature, but cannot be formalized as universal constraints yet because
+ * the available data is device-specific, material-specific, or application-specific.
+ * Documenting them here keeps them tracked without introducing false precision.
+ */
+export interface ConstraintGap {
+  id: string;
+  name: string;
+  relatedConstraints: number[];
+  category: Constraint['category'];
+  reason: string;
+  bestAvailableData: string;
+  literature: string[];
+  status: 'documented' | 'partially-addressed' | 'no-data';
+}
+
+export const BCI_CONSTRAINT_GAPS: ConstraintGap[] = [
+  {
+    id: 'GAP-1',
+    name: 'Inter-Channel Crosstalk',
+    relatedConstraints: [6, 13],
+    category: 'signal-detection',
+    reason: 'Crosstalk at high electrode density is measured per-device (Utah array, Neuropixels), not governed by a universal equation. Values depend on electrode geometry, spacing, and shielding.',
+    bestAvailableData: 'Neuropixels 2.0: <1% crosstalk at 20 um pitch. Utah arrays: measurable above 400 um spacing. No general parametric model exists.',
+    literature: [
+      'Jun et al. 2017 (Neuropixels)',
+      'Steinmetz et al. 2021 (Neuropixels 2.0)',
+      'Maynard et al. 1997 (Utah array crosstalk)',
+    ],
+    status: 'documented',
+  },
+  {
+    id: 'GAP-2',
+    name: 'Foreign Body / Immune Response Model',
+    relatedConstraints: [10],
+    category: 'safety-bio',
+    reason: 'Gliosis timelines vary by material, implant size, species, and brain region. Constraint 10 (impedance timeline) captures one symptom but not the full immune cascade. No universal equation covers chronic failure.',
+    bestAvailableData: 'Glial encapsulation begins within days, stabilizes at 6-12 weeks. Signal degradation timelines: weeks to years depending on device. Animal models do not reliably predict human response.',
+    literature: [
+      'Polikov et al. 2005 (foreign body response review)',
+      'Barrese et al. 2013 (failure mode analysis, Utah arrays)',
+      'Salatino et al. 2017 (glial response mechanisms)',
+    ],
+    status: 'documented',
+  },
+  {
+    id: 'GAP-3',
+    name: 'Power Harvesting / Delivery Tradeoff',
+    relatedConstraints: [1, 3, 8],
+    category: 'thermo-power',
+    reason: 'Inductive, RF, ultrasonic, and battery power sources have different efficiency curves, but these are engineering design choices, not physics constraints. The thermal ceiling (constraint 1) already caps the result regardless of power source.',
+    bestAvailableData: 'Inductive: 10-40 mW deliverable. RF harvesting: uW range. Ultrasonic: emerging, ~1 mW at depth. Battery (Neuralink N1): 110 mAh Li-ion, ~7 hr runtime.',
+    literature: [
+      'Agarwal et al. 2017 (wireless power for implants)',
+      'Piech et al. 2020 (ultrasonic neural dust)',
+      'Musk & Neuralink 2019 (battery specs)',
+    ],
+    status: 'partially-addressed',
+  },
+  {
+    id: 'GAP-4',
+    name: 'Electrode Material Degradation',
+    relatedConstraints: [10, 9],
+    category: 'safety-bio',
+    reason: 'Corrosion and dissolution rates are material-specific, not generalizable. Tungsten dissolves at 100-500 nm/day in saline. Platinum is far slower. PEDOT coatings delaminate rather than corrode. No single degradation equation covers all electrode types.',
+    bestAvailableData: 'Tungsten: 100-500 nm/day dissolution (Patrick et al. 2011). Platinum: minimal dissolution but surface roughening over months. Iridium oxide: charge injection capacity degrades ~20% over 1 year in vivo.',
+    literature: [
+      'Patrick et al. 2011 (tungsten dissolution)',
+      'Cogan 2008 (electrode materials review)',
+      'Venkatraman et al. 2011 (chronic electrode stability)',
+    ],
+    status: 'documented',
+  },
+  {
+    id: 'GAP-5',
+    name: 'Stimulation Artifact (Bidirectional)',
+    relatedConstraints: [5, 6],
+    category: 'signal-detection',
+    reason: 'Bidirectional BCIs that both read and write to the brain produce stimulation artifacts that contaminate recording channels. Almost no published data exists for next-gen cortical bidirectional interfaces. Cochlear implant artifact data does not transfer to cortical interfaces.',
+    bestAvailableData: 'NeuroPace RNS and Medtronic Percept provide limited bidirectional data. Artifact blanking windows of 1-5 ms are standard. No constraint equation governs the read/write timing tradeoff.',
+    literature: [
+      'Stanslaski et al. 2018 (Medtronic Percept)',
+      'Sun & Bhagat 2018 (artifact rejection methods)',
+    ],
+    status: 'no-data',
+  },
+  {
+    id: 'GAP-6',
+    name: 'On-Chip Processing vs Telemetry Power',
+    relatedConstraints: [3, 13],
+    category: 'thermo-power',
+    reason: 'Constraint 13 (telemetry bandwidth) governs raw streaming. Edge processing reduces bandwidth needs but increases on-chip power (constraint 3). The tradeoff is architecture-specific, not a universal bound.',
+    bestAvailableData: 'Neuralink N1: on-chip spike sorting reduces data rate ~100x. Neuropixels: raw streaming at 30 kHz. The optimal split depends on channel count, available power, and application.',
+    literature: [
+      'Musk & Neuralink 2019',
+      'Marblestone et al. 2013 (physical limits of neural engineering)',
+    ],
+    status: 'partially-addressed',
+  },
+  {
+    id: 'GAP-7',
+    name: 'Stimulation Safety (Bidirectional)',
+    relatedConstraints: [5],
+    category: 'safety-bio',
+    reason: 'Shannon limit (constraint 5) covers charge density per phase. But bidirectional BCIs add parameters: pulse width, frequency, duty cycle, and simultaneous read/write timing. DBS literature provides some bounds, but cortical microstimulation parameters differ significantly.',
+    bestAvailableData: 'DBS: 60-450 us pulse width, 130-185 Hz, 1-5 V. Cortical microstimulation: 100-400 us, lower amplitudes. No unified safety model spans both recording and stimulation parameter spaces.',
+    literature: [
+      'Shannon 1992 (electrode safety limits)',
+      'McCreery et al. 2010 (stimulation damage thresholds)',
+      'Cogan et al. 2016 (charge injection limits review)',
+    ],
+    status: 'documented',
+  },
+  {
+    id: 'GAP-8',
+    name: 'SNR Minimum Quantification',
+    relatedConstraints: [6, 12],
+    category: 'signal-detection',
+    reason: 'Constraint 6 says SNR >> 1 but does not specify a minimum. The threshold depends on the application: motor decoding tolerates lower SNR than speech or sensory feedback. No universal SNR_min exists across all BCI functions.',
+    bestAvailableData: 'Motor BCI: SNR > 3-5 dB sufficient for cursor control (Hochberg et al. 2012). Speech BCI: requires higher SNR for phoneme discrimination. Sensory feedback: application-dependent.',
+    literature: [
+      'Hochberg et al. 2012 (BrainGate motor BCI)',
+      'Willett et al. 2023 (speech BCI, Stanford)',
+      'Nuyujukian et al. 2018 (SNR and decode performance)',
+    ],
+    status: 'documented',
+  },
+];
+
 export const BCI_VALIDATION = {
   validator: 'Gemini 2.5 Pro',
   phase: 9,
