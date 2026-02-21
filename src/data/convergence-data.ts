@@ -2,7 +2,7 @@
  * Neurosecurity GRC Convergence Data
  *
  * Structured data powering the convergence gap analysis on /neurogovernance/
- * and the companion governance doc NEUROSECURITY_GRC_CONVERGENCE.md.
+ * and the unified governance doc NEUROSECURITY_GOVERNANCE.md.
  *
  * Source of truth for: governing bodies, convergence gaps, framework lessons,
  * and predecessor research in BCI security.

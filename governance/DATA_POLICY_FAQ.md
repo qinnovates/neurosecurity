@@ -362,4 +362,4 @@ Settings → Privacy → Opt Out Options:
 
 ---
 
-← Back to [Governance](/governance/) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [REGULATORY_COMPLIANCE.md](REGULATORY_COMPLIANCE.md)
+← Back to [Governance](/governance/) | [Neurosecurity Governance](NEUROSECURITY_GOVERNANCE.md)

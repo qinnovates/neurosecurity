@@ -116,7 +116,7 @@ elif consent_state == ConsentState.EXPIRED:
 
 ### Consent as Authentication Requirement
 
-Per the existing NEUROETHICS_ALIGNMENT.md principle:
+Per the existing Neurosecurity Governance neuroethics principle:
 
 > "Authentication required even for high-coherence signals — Consent is non-negotiable; quality doesn't imply permission."
 
@@ -442,4 +442,4 @@ Muñoz, K. A., & Lázaro-Muñoz, G. (2021). Pressing ethical issues in consideri
 
 ---
 
-← Back to [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [Governance](/governance/)
+← Back to [Neurosecurity Governance](NEUROSECURITY_GOVERNANCE.md) | [Governance](/governance/)

@@ -1886,7 +1886,7 @@ OVERALL TREND:
 ║     There is no universal "correct" QI integer for thought.          ║
 ║     Enforcing one is not security — it's control.                    ║
 ║                                                                      ║
-║     See: MAIN/governance/NEUROETHICS_ALIGNMENT.md                    ║
+║     See: MAIN/governance/NEUROSECURITY_GOVERNANCE.md                 ║
 ║     See: MAIN/governance/POST_DEPLOYMENT_ETHICS.md                   ║
 ║                                                                      ║
 ╠════════════════════════════════════════════════════════════════════════╣
@@ -1926,7 +1926,7 @@ OVERALL TREND:
 ║       is it identity theft or medical data breach — or both?         ║
 ║     • Can your Mirrored Side output be subpoenaed?                   ║
 ║                                                                      ║
-║     See: MAIN/governance/REGULATORY_COMPLIANCE.md                    ║
+║     See: MAIN/governance/NEUROSECURITY_GOVERNANCE.md                 ║
 ║     See: MAIN/governance/DATA_POLICY_FAQ.md                          ║
 ║                                                                      ║
 ╚════════════════════════════════════════════════════════════════════════╝

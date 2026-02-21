@@ -524,7 +524,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     shortDef: 'The plan to connect security standards orgs (NIST, MITRE) with neuroethics orgs (UNESCO, Neurorights Foundation) because nobody does both.',
     fullDef: 'No single organization bridges cybersecurity GRC and neuroethics for BCIs. Security frameworks lack neural endpoints; neuroethics frameworks lack technical controls. The convergence strategy maps approximately 25 governing bodies across both domains, identifies their engagement gaps, and defines specific asks (e.g., MITRE ATT&CK sub-matrix for neural devices, CVSS neural impact metrics) to connect the two sides. Modeled after PCI DSS, MITRE ATT&CK, and NIST CSF adoption patterns.',
     relatedTerms: ['niss', 'tara', 'hourglass-model'],
-    href: '/governance/#neurosecurity_grc_convergence',
+    href: '/governance/#neurosecurity_governance',
     tags: ['concept', 'governance', 'grc'],
   },
 ] as const;
