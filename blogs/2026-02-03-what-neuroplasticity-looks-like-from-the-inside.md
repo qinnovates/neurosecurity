@@ -1,9 +1,20 @@
 ---
+
 title: "What Neuroplasticity Looks Like From the Inside"
 subtitle: "A field journal from the intersection of synesthesia, code, and computational neuroscience"
 date_posted: "2026-02-03"
 source: "https://medium.com/@qikevinl"
 tags: ["#Neuroscience", "#Synesthesia", "#Neuroplasticity", "#BrainComputerInterface", "#QIF", "#FieldJournal"]
+fact_checked: true
+fact_check_date: "2026-02-21"
+fact_check_notes:
+  - "[advisory] Unsourced numerical claim: \"...I cried for the first time in a long time last...\""
+  - "[advisory] Unsourced numerical claim: \"...of it — and for the first time, every piece connec...\""
+  - "[advisory] Unsourced numerical claim: \"...m working on.  This only happens during deep focus a...\""
+  - "[advisory] Unsourced numerical claim: \"...The fact that this only happens during deep focus +...\""
+  - "[advisory] Unsourced numerical claim: \"...\"I noticed X but almost ignored it. Writing it down...\""
+  - "[advisory] Unsourced numerical claim: \"...tions are often the most valuable entries months late...\""
+  - "[advisory] Unsourced numerical claim: \"...— a living, append-only research journal maintained...\""
 ---
 
 I cried for the first time in a long time last night. Not from sadness — from clarity.

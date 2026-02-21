@@ -11,6 +11,9 @@ const blog = defineCollection({
     source: z.string().optional(),
     tags: z.array(z.string()).default([]),
     author: z.string().default('Qinnovate'),
+    fact_checked: z.boolean().optional().default(false),
+    fact_check_date: z.string().optional(),
+    fact_check_notes: z.array(z.string()).optional().default([]),
   }),
 });
 
