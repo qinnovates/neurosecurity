@@ -1,0 +1,1838 @@
+[
+  {
+    "name": "Crunchbase",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.crunchbase.com",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "REST API requires Enterprise plan. Free tier: 5 profile views/day."
+  },
+  {
+    "name": "PitchBook",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://pitchbook.com",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "Institutional-grade VC/PE data. API access on enterprise contracts."
+  },
+  {
+    "name": "CB Insights",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.cbinsights.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Market intelligence platform. Free newsletter available."
+  },
+  {
+    "name": "Tracxn",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://tracxn.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Startup tracking across 900+ sectors. Free tier very limited."
+  },
+  {
+    "name": "Dealroom.co",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://dealroom.co",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "European-focused startup intelligence. API on paid plans."
+  },
+  {
+    "name": "Owler",
+    "category": "venture_intelligence",
+    "tier": "freemium",
+    "url": "https://www.owler.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Community-driven competitive intelligence. Free tier: basic company profiles."
+  },
+  {
+    "name": "AngelList / Wellfound",
+    "category": "venture_intelligence",
+    "tier": "free_web",
+    "url": "https://wellfound.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Startup jobs and fundraising. Formerly AngelList Talent."
+  },
+  {
+    "name": "Mattermark (FullContact)",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.fullcontact.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Mattermark acquired by FullContact. Data enrichment focus now."
+  },
+  {
+    "name": "PrivCo",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.privco.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Private company financials. Academic and enterprise licenses."
+  },
+  {
+    "name": "Startup Genome",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://startupgenome.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Global Startup Ecosystem Report. Policy and ecosystem benchmarking."
+  },
+  {
+    "name": "F6S",
+    "category": "venture_intelligence",
+    "tier": "free_web",
+    "url": "https://www.f6s.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Startup deals, grants, accelerator listings."
+  },
+  {
+    "name": "Beauhurst",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.beauhurst.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "UK high-growth company data. Academic licenses available."
+  },
+  {
+    "name": "Statista Startups",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.statista.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Statistics portal with startup/VC datasets. Basic access free."
+  },
+  {
+    "name": "Craft.co",
+    "category": "venture_intelligence",
+    "tier": "freemium",
+    "url": "https://craft.co",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Company profiles with supplier/financial data. Free tier limited."
+  },
+  {
+    "name": "The Information",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.theinformation.com",
+    "rss_url": "https://www.theinformation.com/feed",
+    "has_api": false,
+    "notes": "Premium tech journalism. Subscriber-only deep dives."
+  },
+  {
+    "name": "Sifted",
+    "category": "venture_intelligence",
+    "tier": "free_rss",
+    "url": "https://sifted.eu",
+    "rss_url": "https://sifted.eu/feed",
+    "has_api": false,
+    "notes": "European startup news backed by Financial Times."
+  },
+  {
+    "name": "BetaKit",
+    "category": "venture_intelligence",
+    "tier": "free_rss",
+    "url": "https://betakit.com",
+    "rss_url": "https://betakit.com/feed/",
+    "has_api": false,
+    "notes": "Canadian startup and tech ecosystem news."
+  },
+  {
+    "name": "TechCrunch (Startups)",
+    "category": "venture_intelligence",
+    "tier": "free_rss",
+    "url": "https://techcrunch.com/category/startups/",
+    "rss_url": "https://techcrunch.com/category/startups/feed/",
+    "has_api": false,
+    "notes": "Startup-specific TechCrunch vertical."
+  },
+  {
+    "name": "VentureBeat (Business)",
+    "category": "venture_intelligence",
+    "tier": "free_rss",
+    "url": "https://venturebeat.com",
+    "rss_url": "https://venturebeat.com/feed/",
+    "has_api": false,
+    "notes": "AI and enterprise tech news."
+  },
+  {
+    "name": "Silicon Republic",
+    "category": "venture_intelligence",
+    "tier": "free_rss",
+    "url": "https://www.siliconrepublic.com",
+    "rss_url": "https://www.siliconrepublic.com/feed",
+    "has_api": false,
+    "notes": "Irish/European tech and startup news."
+  },
+  {
+    "name": "StartupBlink",
+    "category": "venture_intelligence",
+    "tier": "freemium",
+    "url": "https://www.startupblink.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Global startup ecosystem map and ranking."
+  },
+  {
+    "name": "GetLatka",
+    "category": "venture_intelligence",
+    "tier": "freemium",
+    "url": "https://getlatka.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "SaaS company revenue and growth data. Free tier limited."
+  },
+  {
+    "name": "SimilarWeb",
+    "category": "venture_intelligence",
+    "tier": "freemium",
+    "url": "https://www.similarweb.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Website traffic and digital market intelligence. Free: 5 results/metric."
+  },
+  {
+    "name": "ZoomInfo",
+    "category": "venture_intelligence",
+    "tier": "paid",
+    "url": "https://www.zoominfo.com",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "B2B contact and company intelligence. API on enterprise plans."
+  },
+  {
+    "name": "Crunchbase News",
+    "category": "deal_tracking",
+    "tier": "free_rss",
+    "url": "https://news.crunchbase.com",
+    "rss_url": "https://news.crunchbase.com/feed/",
+    "has_api": false,
+    "notes": "Funding news and startup analysis. Free to read."
+  },
+  {
+    "name": "PitchBook Blog",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://pitchbook.com/blog",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Free market analysis and VC trend reports."
+  },
+  {
+    "name": "SEC EDGAR",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://www.sec.gov/cgi-bin/browse-edgar",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "US public company filings. Full-text search available. EDGAR full-text search at efts.sec.gov."
+  },
+  {
+    "name": "SBIR.gov",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://www.sbir.gov",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Small Business Innovation Research awards. Search by topic/keyword."
+  },
+  {
+    "name": "NIH RePORTER",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://reporter.nih.gov",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "NIH-funded research grants database. REST API available."
+  },
+  {
+    "name": "NSF Awards Search",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://www.nsf.gov/awardsearch/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "National Science Foundation funded project search."
+  },
+  {
+    "name": "DARPA",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://www.darpa.mil",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Defense research programs. Check N3, BTO programs for BCI."
+  },
+  {
+    "name": "EU Horizon Europe / CORDIS",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://cordis.europa.eu",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "EU-funded research project database. Successor to Horizon 2020."
+  },
+  {
+    "name": "Global Corporate Venturing",
+    "category": "deal_tracking",
+    "tier": "freemium",
+    "url": "https://globalcorporateventuring.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Corporate VC deal tracking and analysis."
+  },
+  {
+    "name": "Venture Pulse (KPMG)",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://kpmg.com/xx/en/our-insights/venture-pulse.html",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Quarterly global VC analysis. Summary reports sometimes free."
+  },
+  {
+    "name": "Preqin",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.preqin.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Alternative assets data (PE, VC, hedge funds, real estate)."
+  },
+  {
+    "name": "Refinitiv (LSEG)",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.lseg.com/en/data-analytics",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Formerly Thomson Reuters Financial. Now part of LSEG."
+  },
+  {
+    "name": "S&P Capital IQ",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.capitaliq.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Financial data and analytics platform. Institutional pricing."
+  },
+  {
+    "name": "Bloomberg Terminal",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.bloomberg.com/professional/solution/bloomberg-terminal/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Industry-standard financial terminal. ~$24k/year per seat."
+  },
+  {
+    "name": "FactSet",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.factset.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Financial data and software. Institutional pricing."
+  },
+  {
+    "name": "Mergermarket",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.mergermarket.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "M&A intelligence and deal flow. Part of ION Analytics."
+  },
+  {
+    "name": "Dealogic",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.dealogic.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Investment banking deal analytics."
+  },
+  {
+    "name": "Invest Europe",
+    "category": "deal_tracking",
+    "tier": "freemium",
+    "url": "https://www.investeurope.eu",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "European PE/VC industry data and research. Some reports free."
+  },
+  {
+    "name": "NVCA (National Venture Capital Association)",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://nvca.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "US VC industry reports and yearbook. Many resources free."
+  },
+  {
+    "name": "ACE (Association for Corporate Growth)",
+    "category": "deal_tracking",
+    "tier": "paid",
+    "url": "https://www.acg.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Middle-market M&A and corporate growth community."
+  },
+  {
+    "name": "Grand View Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.grandviewresearch.com",
+    "rss_url": "https://www.grandviewresearch.com/feeds/all-press-releases",
+    "has_api": false,
+    "notes": "Market reports with free summaries and TOC. Full reports paid."
+  },
+  {
+    "name": "Fortune Business Insights",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.fortunebusinessinsights.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Industry reports. Free sample PDFs available."
+  },
+  {
+    "name": "MarketsandMarkets",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.marketsandmarkets.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Revenue impact and growth opportunity reports. Free summaries."
+  },
+  {
+    "name": "Mordor Intelligence",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.mordorintelligence.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Market research reports with free summary sections."
+  },
+  {
+    "name": "Allied Market Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.alliedmarketresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Industry reports. Free summary and infographics."
+  },
+  {
+    "name": "Research and Markets",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.researchandmarkets.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Largest market research store. Aggregates reports from many publishers."
+  },
+  {
+    "name": "Gartner",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.gartner.com",
+    "rss_url": "https://www.gartner.com/en/newsroom/rss",
+    "has_api": false,
+    "notes": "Magic Quadrant, Hype Cycle reports. Newsroom RSS free."
+  },
+  {
+    "name": "Forrester",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.forrester.com",
+    "rss_url": "https://www.forrester.com/blogs/feed/",
+    "has_api": false,
+    "notes": "Forrester Wave reports. Blog RSS free."
+  },
+  {
+    "name": "IDC",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.idc.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "IT market data, forecasts, and advisory. Press releases free."
+  },
+  {
+    "name": "Frost & Sullivan",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.frost.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Growth consulting and market analysis across industries."
+  },
+  {
+    "name": "McKinsey Insights",
+    "category": "market_research",
+    "tier": "free_rss",
+    "url": "https://www.mckinsey.com/insights",
+    "rss_url": "https://www.mckinsey.com/insights/rss",
+    "has_api": false,
+    "notes": "Free research articles and industry perspectives."
+  },
+  {
+    "name": "Deloitte Insights",
+    "category": "market_research",
+    "tier": "free_web",
+    "url": "https://www2.deloitte.com/insights",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Free research on tech, business, and industry trends."
+  },
+  {
+    "name": "BCG Henderson Institute",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.bcg.com/henderson-institute",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Future of business and technology research."
+  },
+  {
+    "name": "Accenture Research",
+    "category": "market_research",
+    "tier": "free_web",
+    "url": "https://www.accenture.com/us-en/about/accenture-research-index",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Tech and industry research. Reports downloadable free."
+  },
+  {
+    "name": "EY Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.ey.com/en_us/insights",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Business and technology insights. Most articles free."
+  },
+  {
+    "name": "PwC Strategy&",
+    "category": "market_research",
+    "tier": "free_web",
+    "url": "https://www.strategyand.pwc.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Strategy consulting research. Reports downloadable."
+  },
+  {
+    "name": "ARK Invest",
+    "category": "market_research",
+    "tier": "free_web",
+    "url": "https://ark-invest.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Big Ideas report. Daily trade emails. Open-source research models."
+  },
+  {
+    "name": "Lux Research",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.luxresearchinc.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Emerging tech market research. Deep tech focus."
+  },
+  {
+    "name": "IDTechEx",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.idtechex.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Emerging technology market research. Wearables, bioelectronics, BCI reports."
+  },
+  {
+    "name": "Neurotech Reports",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.neurotechreports.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Dedicated neurotech industry analysis. Market forecasts."
+  },
+  {
+    "name": "BIS Research",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://bisresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Deep tech market intelligence. BCI/neurotech reports available."
+  },
+  {
+    "name": "Transparency Market Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.transparencymarketresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Industry reports with free summaries and press releases."
+  },
+  {
+    "name": "Precedence Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.precedenceresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Market research reports. Free infographics and summaries."
+  },
+  {
+    "name": "IMARC Group",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.imarcgroup.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Global market research with free report summaries."
+  },
+  {
+    "name": "Emergen Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.emergenresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Technology and healthcare market reports. Free summaries."
+  },
+  {
+    "name": "a16z Blog",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://a16z.com/blog/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Andreessen Horowitz. Bio/health and crypto funds relevant to BCI."
+  },
+  {
+    "name": "Sequoia Capital",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.sequoiacap.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Portfolio page for tracking BCI-adjacent investments."
+  },
+  {
+    "name": "Khosla Ventures",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.khoslaventures.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Active in health/biotech. Neuralink investor."
+  },
+  {
+    "name": "ARCH Venture Partners",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.archventure.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Deep science VC. Major biotech and neurotech investments."
+  },
+  {
+    "name": "General Catalyst",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.generalcatalyst.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Health assurance and deep tech investments."
+  },
+  {
+    "name": "Lux Capital",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.luxcapital.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Deep tech and sci-fi tech VC. Active in neurotech space."
+  },
+  {
+    "name": "RA Capital Management",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.racap.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Healthcare-focused crossover fund."
+  },
+  {
+    "name": "Founders Fund",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://foundersfund.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Thiel's fund. Neuralink backer."
+  },
+  {
+    "name": "GV (Google Ventures)",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.gv.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Alphabet's venture arm. Life sciences and health investments."
+  },
+  {
+    "name": "Johnson & Johnson Innovation",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.jnjinnovation.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "J&J's CVC arm. MedTech and neuroscience focus areas."
+  },
+  {
+    "name": "Medtronic Ventures",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.medtronic.com/covidien/en-us/about/medtronic-ventures.html",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Strategic CVC. Neuromodulation is core Medtronic business."
+  },
+  {
+    "name": "Mayo Clinic Ventures",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://ventures.mayoclinic.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Mayo Clinic's venture and commercialization arm."
+  },
+  {
+    "name": "UPMC Enterprises",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://enterprises.upmc.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "UPMC health system innovation and commercialization arm."
+  },
+  {
+    "name": "Deerfield Management",
+    "category": "vc_investment",
+    "tier": "paid",
+    "url": "https://www.deerfield.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Healthcare-focused investment fund. Portfolio tracking."
+  },
+  {
+    "name": "OrbiMed",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.orbimed.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Largest healthcare-dedicated investment firm globally."
+  },
+  {
+    "name": "Sofinnova Partners",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.sofinnova.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "European life sciences VC. Industrial biotech and health."
+  },
+  {
+    "name": "LSP (Life Sciences Partners)",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.lsp.eu",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "European life sciences VC. Health tech portfolio."
+  },
+  {
+    "name": "Correlation Ventures",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://correlationvc.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Data-driven co-investment fund."
+  },
+  {
+    "name": "BioVenture Holdings",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.bioventureholdings.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Biotech venture investments."
+  },
+  {
+    "name": "NEA (New Enterprise Associates)",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.nea.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "One of the largest VC firms. Healthcare and technology verticals."
+  },
+  {
+    "name": "TechCrunch",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://techcrunch.com",
+    "rss_url": "https://techcrunch.com/feed/",
+    "has_api": false,
+    "notes": "Leading tech news. Full-text RSS."
+  },
+  {
+    "name": "VentureBeat",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://venturebeat.com",
+    "rss_url": "https://venturebeat.com/feed/",
+    "has_api": false,
+    "notes": "AI, gaming, and enterprise tech news."
+  },
+  {
+    "name": "The Verge",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.theverge.com",
+    "rss_url": "https://www.theverge.com/rss/index.xml",
+    "has_api": false,
+    "notes": "Consumer tech and science coverage."
+  },
+  {
+    "name": "Wired",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.wired.com",
+    "rss_url": "https://www.wired.com/feed/rss",
+    "has_api": false,
+    "notes": "Long-form tech and science journalism."
+  },
+  {
+    "name": "MIT Technology Review",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.technologyreview.com",
+    "rss_url": "https://www.technologyreview.com/feed/",
+    "has_api": false,
+    "notes": "Emerging tech coverage. Some articles paywalled."
+  },
+  {
+    "name": "Ars Technica",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://arstechnica.com",
+    "rss_url": "https://feeds.arstechnica.com/arstechnica/index",
+    "has_api": false,
+    "notes": "In-depth science and tech reporting."
+  },
+  {
+    "name": "Fast Company",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.fastcompany.com",
+    "rss_url": "https://www.fastcompany.com/latest/rss",
+    "has_api": false,
+    "notes": "Business innovation and technology."
+  },
+  {
+    "name": "Reuters Technology",
+    "category": "news",
+    "tier": "paid",
+    "url": "https://www.reuters.com/technology/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Wire service tech coverage. Reliable, fast reporting."
+  },
+  {
+    "name": "Bloomberg",
+    "category": "news",
+    "tier": "paid",
+    "url": "https://www.bloomberg.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Premium financial and tech news. Hard paywall."
+  },
+  {
+    "name": "CNBC",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.cnbc.com",
+    "rss_url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",
+    "has_api": false,
+    "notes": "Business and tech news. CNBC Technology RSS feed."
+  },
+  {
+    "name": "Financial Times",
+    "category": "news",
+    "tier": "paid",
+    "url": "https://www.ft.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Premium financial journalism. Metered paywall."
+  },
+  {
+    "name": "Wall Street Journal",
+    "category": "news",
+    "tier": "paid",
+    "url": "https://www.wsj.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Premium business and financial news."
+  },
+  {
+    "name": "STAT News",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.statnews.com",
+    "rss_url": "https://www.statnews.com/feed/",
+    "has_api": false,
+    "notes": "Health, medicine, and life sciences reporting. Some STAT+ paywalled."
+  },
+  {
+    "name": "Fierce Biotech",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.fiercebiotech.com",
+    "rss_url": "https://www.fiercebiotech.com/rss/xml",
+    "has_api": false,
+    "notes": "Biotech industry news and analysis."
+  },
+  {
+    "name": "MedTech Dive",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.medtechdive.com",
+    "rss_url": "https://www.medtechdive.com/feeds/news/",
+    "has_api": false,
+    "notes": "Medical device industry news. Part of Industry Dive."
+  },
+  {
+    "name": "Medical Device Network",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.medicaldevice-network.com",
+    "rss_url": "https://www.medicaldevice-network.com/feed/",
+    "has_api": false,
+    "notes": "Medical device news and analysis."
+  },
+  {
+    "name": "Endpoints News",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://endpts.com",
+    "rss_url": "https://endpts.com/feed/",
+    "has_api": false,
+    "notes": "Biopharma and clinical trial news."
+  },
+  {
+    "name": "BioPharma Dive",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.biopharmadive.com",
+    "rss_url": "https://www.biopharmadive.com/feeds/news/",
+    "has_api": false,
+    "notes": "Pharmaceutical industry news. Part of Industry Dive."
+  },
+  {
+    "name": "Neuroscience News",
+    "category": "news",
+    "tier": "free_web",
+    "url": "https://neurosciencenews.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Neuroscience research news aggregator."
+  },
+  {
+    "name": "IEEE Spectrum",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://spectrum.ieee.org",
+    "rss_url": "https://spectrum.ieee.org/feeds/feed.rss",
+    "has_api": false,
+    "notes": "Engineering and technology magazine. BCI and biomedical coverage."
+  },
+  {
+    "name": "Nature Neuroscience",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.nature.com/neuro/",
+    "rss_url": "https://www.nature.com/neuro.rss",
+    "has_api": false,
+    "notes": "Top neuroscience journal. RSS shows latest articles, full text paywalled."
+  },
+  {
+    "name": "bioRxiv Neuroscience",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.biorxiv.org/collection/neuroscience",
+    "rss_url": "https://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
+    "has_api": false,
+    "notes": "Neuroscience preprints. Full open access."
+  },
+  {
+    "name": "medRxiv",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.medrxiv.org",
+    "rss_url": "https://connect.medrxiv.org/medrxiv_xml.php?subject=Health_Informatics",
+    "has_api": false,
+    "notes": "Medical preprints. Neurology collection for BCI clinical research."
+  },
+  {
+    "name": "arXiv q-bio.NC (Neurons and Cognition)",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://arxiv.org/list/q-bio.NC/recent",
+    "rss_url": "https://rss.arxiv.org/rss/q-bio.NC",
+    "has_api": false,
+    "notes": "Computational neuroscience preprints."
+  },
+  {
+    "name": "NIST Cybersecurity Blog",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.nist.gov/blogs/cybersecurity-insights",
+    "rss_url": "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml",
+    "has_api": false,
+    "notes": "NIST cybersecurity standards and framework updates."
+  },
+  {
+    "name": "FDA Press Releases",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.fda.gov/medical-devices",
+    "rss_url": "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml",
+    "has_api": false,
+    "notes": "General press releases including device approvals; no device-specific RSS feed exists"
+  },
+  {
+    "name": "NeurotechX News",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://neurotechx.com",
+    "rss_url": "https://neurotechx.com/feed/",
+    "has_api": false,
+    "notes": "Open neurotech community. Events and project news."
+  },
+  {
+    "name": "Axios",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.axios.com/newsletters/axios-pro-rata",
+    "rss_url": "https://api.axios.com/feed/",
+    "has_api": false,
+    "notes": "VC and deals newsletter by Dan Primack."
+  },
+  {
+    "name": "Science",
+    "category": "news",
+    "tier": "paid",
+    "url": "https://www.science.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "AAAS flagship journal. Most content paywalled. News section partially free."
+  },
+  {
+    "name": "The Lancet Digital Health",
+    "category": "news",
+    "tier": "paid",
+    "url": "https://www.thelancet.com/journals/landig/home",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Digital health research journal. Gold OA articles free."
+  },
+  {
+    "name": "Not Boring by Packy McCormick",
+    "category": "newsletter",
+    "tier": "free_rss",
+    "url": "https://www.notboring.co",
+    "rss_url": "https://www.notboring.co/feed",
+    "has_api": false,
+    "notes": "Strategy and tech business deep dives. Substack."
+  },
+  {
+    "name": "Stratechery by Ben Thompson",
+    "category": "newsletter",
+    "tier": "free_rss",
+    "url": "https://stratechery.com",
+    "rss_url": "https://stratechery.com/feed/",
+    "has_api": false,
+    "notes": "Tech strategy analysis. Free weekly articles, paid daily updates."
+  },
+  {
+    "name": "Exponential View by Azeem Azhar",
+    "category": "newsletter",
+    "tier": "free_rss",
+    "url": "https://www.exponentialview.co",
+    "rss_url": "https://www.exponentialview.co/feed",
+    "has_api": false,
+    "notes": "AI, biotech, and exponential technology trends."
+  },
+  {
+    "name": "The Neuron (Newsletter)",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.theneurondaily.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Daily AI newsletter with BCI/neurotech crossover."
+  },
+  {
+    "name": "CB Insights Newsletter",
+    "category": "newsletter",
+    "tier": "freemium",
+    "url": "https://www.cbinsights.com/newsletter",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Free weekly newsletter. Tech and venture trends."
+  },
+  {
+    "name": "a16z Newsletter",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://a16z.com/newsletters/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Andreessen Horowitz newsletters on tech, bio, crypto."
+  },
+  {
+    "name": "StrictlyVC",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.strictlyvc.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Daily VC deals newsletter by Connie Loizos."
+  },
+  {
+    "name": "Meritech Capital Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.meritechcapital.com/blog",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Growth-stage tech investment insights."
+  },
+  {
+    "name": "Bessemer Venture Partners Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.bvp.com/atlas",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "BVP Atlas and roadmap content. Cloud and health verticals."
+  },
+  {
+    "name": "Battery Ventures Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.battery.com/blog/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Technology-focused VC blog."
+  },
+  {
+    "name": "Index Ventures Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.indexventures.com/perspectives/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "European and US tech VC perspectives."
+  },
+  {
+    "name": "Balderton Capital Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.balderton.com/build",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "European VC. Build series and research."
+  },
+  {
+    "name": "First Round Review",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://review.firstround.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "In-depth startup advice and founder interviews."
+  },
+  {
+    "name": "NFX Essays",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.nfx.com/post",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Network effects, marketplace, and biotech essays."
+  },
+  {
+    "name": "Paul Graham Essays",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://paulgraham.com/articles.html",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "YC co-founder. Foundational startup philosophy."
+  },
+  {
+    "name": "Benedict Evans Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.ben-evans.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Tech industry macro analysis and annual presentations."
+  },
+  {
+    "name": "Elad Gil Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://blog.eladgil.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Scaling startups and tech strategy."
+  },
+  {
+    "name": "The Generalist",
+    "category": "newsletter",
+    "tier": "freemium",
+    "url": "https://www.generalist.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Deep dives on companies and industries. Free and paid tiers."
+  },
+  {
+    "name": "Newcomer by Eric Newcomer",
+    "category": "newsletter",
+    "tier": "paid",
+    "url": "https://www.newcomer.co",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "VC and Silicon Valley insider reporting."
+  },
+  {
+    "name": "The Term Sheet (Fortune)",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://fortune.com/newsletter/termsheet",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Daily VC and dealmaking newsletter."
+  },
+  {
+    "name": "StrictlyVC Newsletter",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.strictlyvc.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Daily VC deal flow digest."
+  },
+  {
+    "name": "Neuroscience Podcast",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://brainsciencepodcast.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Brain Science Podcast by Ginger Campbell, MD."
+  },
+  {
+    "name": "BrainFacts.org",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://www.brainfacts.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "SfN public neuroscience education resource."
+  },
+  {
+    "name": "Dana Foundation",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://dana.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Brain research philanthropy. Cerebrum journal and blog."
+  },
+  {
+    "name": "Allen Institute Blog",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://alleninstitute.org/news/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Allen Institute for Brain Science. Open datasets and tools."
+  },
+  {
+    "name": "Google Patents",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://patents.google.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Full-text patent search across global patent offices."
+  },
+  {
+    "name": "Lens.org",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://www.lens.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Open patent and scholarly search. Links patents to papers."
+  },
+  {
+    "name": "USPTO PAIR",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://portal.uspto.gov/pair/PublicPair",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "US Patent Application Information Retrieval. File history access."
+  },
+  {
+    "name": "Espacenet",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://worldwide.espacenet.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "European Patent Office. 140M+ patent documents worldwide."
+  },
+  {
+    "name": "PatSnap",
+    "category": "patent_ip",
+    "tier": "paid",
+    "url": "https://www.patsnap.com",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "AI-powered patent analytics. API on enterprise plans."
+  },
+  {
+    "name": "Clarivate (Web of Science / Derwent)",
+    "category": "patent_ip",
+    "tier": "paid",
+    "url": "https://clarivate.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "IP analytics, Web of Science citation data."
+  },
+  {
+    "name": "Innography (now CPA Global/Clarivate)",
+    "category": "patent_ip",
+    "tier": "paid",
+    "url": "https://clarivate.com/products/ip-intelligence/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Patent analytics platform. Merged into Clarivate IP suite."
+  },
+  {
+    "name": "The Lens (Patent Lens)",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://www.lens.org/lens/patents",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Open patent search and analysis. Biological patents focus."
+  },
+  {
+    "name": "FreePatentsOnline",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://www.freepatentsonline.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Free US patent and patent application search."
+  },
+  {
+    "name": "WIPO IP Portal",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://www.wipo.int/portal/en/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "World IP Organization. Global patent databases and PCT filings."
+  },
+  {
+    "name": "IFI CLAIMS Patent Services",
+    "category": "patent_ip",
+    "tier": "paid",
+    "url": "https://www.ificlaims.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Standardized global patent data. Used by Google Patents backend."
+  },
+  {
+    "name": "SureChEMBL",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://www.surechembl.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Chemical patent data extraction. EMBL-EBI resource."
+  },
+  {
+    "name": "WIPO Patentscope",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://patentscope.wipo.int",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "PCT international patent application search. 100M+ documents."
+  },
+  {
+    "name": "TotalPatent One (LexisNexis)",
+    "category": "patent_ip",
+    "tier": "paid",
+    "url": "https://www.lexisnexisip.com/products/totalpatent-one/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Full-text patent search across 100+ authorities."
+  },
+  {
+    "name": "Derwent Innovation (Clarivate)",
+    "category": "patent_ip",
+    "tier": "paid",
+    "url": "https://clarivate.com/products/ip-intelligence/patent-intelligence/derwent-innovation/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Patent research and analytics. Derwent World Patents Index."
+  },
+  {
+    "name": "Graz BCI Conference",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.bci-conference.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Biennial BCI conference in Graz, Austria. Next: 2026."
+  },
+  {
+    "name": "IEEE EMBC",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://embc.embs.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "IEEE Engineering in Medicine and Biology Conference. Annual."
+  },
+  {
+    "name": "Society for Neuroscience (SfN)",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.sfn.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Largest neuroscience conference. Annual meeting ~30k attendees."
+  },
+  {
+    "name": "NeurotechX Community",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://neurotechx.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Open neurotech community. Local chapters, hackathons, events."
+  },
+  {
+    "name": "BRAIN Initiative Conference",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://braininitiative.nih.gov",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "NIH BRAIN Initiative annual meeting."
+  },
+  {
+    "name": "CES",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.ces.tech",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Consumer Electronics Show. Health tech and BCI demos."
+  },
+  {
+    "name": "SXSW Interactive",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.sxsw.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "South by Southwest. Emerging tech and health tracks."
+  },
+  {
+    "name": "Web Summit",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://websummit.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Major European tech conference. Health and deep tech stages."
+  },
+  {
+    "name": "JP Morgan Healthcare Conference",
+    "category": "conference",
+    "tier": "paid",
+    "url": "https://www.jpmorgan.com/solutions/cib/insights/health-care-conference",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Invite-only healthcare investment conference. January annually."
+  },
+  {
+    "name": "Biotech Showcase",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.biotechshowcase.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Investor conference running alongside JPM Healthcare week."
+  },
+  {
+    "name": "Brain Mapping Foundation",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.brainmapping.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "World Brain Mapping Foundation. Conferences and awards."
+  },
+  {
+    "name": "International BCI Meeting",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://bcimeeting.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Triennial BCI-focused research meeting."
+  },
+  {
+    "name": "OHBM (Organization for Human Brain Mapping)",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.humanbrainmapping.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Annual meeting on brain mapping and neuroimaging."
+  },
+  {
+    "name": "NANS (Neuromodulation Society)",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.neuromodulation.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "North American Neuromodulation Society. DBS, VNS, SCS focus."
+  },
+  {
+    "name": "American Epilepsy Society (AES)",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.aesnet.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Annual meeting. BCI/neurostimulation epilepsy applications."
+  },
+  {
+    "name": "MedTech Conference (AdvaMed)",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://themedtechconference.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "AdvaMed's annual medical technology conference."
+  },
+  {
+    "name": "RESI (Redefining Early Stage Investments)",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.lifesciencenation.com/resi/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Early-stage life science partnering events."
+  },
+  {
+    "name": "BIO International Convention",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.bio.org/events/bio-international-convention",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Largest biotech partnering event. BIO One-on-One meetings."
+  },
+  {
+    "name": "HLTH",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.hlth.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Health innovation conference. Digital health and medtech."
+  },
+  {
+    "name": "MedCity INVEST",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://medcitynews.com/events/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Health innovation investment conference series."
+  },
+  {
+    "name": "ClinicalTrials.gov",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://clinicaltrials.gov",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "US clinical trials registry. REST API available. Search BCI/neurostimulation trials."
+  },
+  {
+    "name": "IEEE Brain Initiative",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://brain.ieee.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "IEEE's brain science initiative. Workshops and webinars."
+  },
+  {
+    "name": "Neuroscience Gateway",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.nsgportal.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "NSF-funded computational neuroscience resource portal."
+  },
+  {
+    "name": "AAAS Annual Meeting",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://meetings.aaas.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "American Association for the Advancement of Science. Multi-discipline."
+  },
+  {
+    "name": "NAE Frontiers of Engineering",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.naefrontiers.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "National Academy of Engineering. Early-career researcher symposia."
+  },
+  {
+    "name": "Crunchbase Pro",
+    "category": "venture_intelligence",
+    "tier": "freemium",
+    "url": "https://www.crunchbase.com/discover",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Crunchbase free discover feature. Pro tier for advanced filters and exports."
+  },
+  {
+    "name": "Golden",
+    "category": "venture_intelligence",
+    "tier": "freemium",
+    "url": "https://golden.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "AI-powered company and technology knowledge graph."
+  },
+  {
+    "name": "Gust",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://gust.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Angel investment platform. Startup funding applications."
+  },
+  {
+    "name": "EuropeanStartups.co",
+    "category": "deal_tracking",
+    "tier": "free_web",
+    "url": "https://europeanstartups.co",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "European startup and funding database."
+  },
+  {
+    "name": "BCC Research",
+    "category": "market_research",
+    "tier": "paid",
+    "url": "https://www.bccresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Market research in advanced materials, healthcare, biotech."
+  },
+  {
+    "name": "Verified Market Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.verifiedmarketresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Market size and forecast reports. Free summaries available."
+  },
+  {
+    "name": "Polaris Market Research",
+    "category": "market_research",
+    "tier": "freemium",
+    "url": "https://www.polarismarketresearch.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Technology and healthcare market research reports."
+  },
+  {
+    "name": "Third Bridge",
+    "category": "vc_investment",
+    "tier": "paid",
+    "url": "https://www.thirdbridge.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Expert network for investment research. Interview transcripts."
+  },
+  {
+    "name": "SOSV",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://sosv.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "VC with IndieBio (life sciences) and HAX (hardware) accelerators."
+  },
+  {
+    "name": "Y Combinator (Startup Directory)",
+    "category": "vc_investment",
+    "tier": "free_web",
+    "url": "https://www.ycombinator.com/companies",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "YC company directory. Filter by health/biotech sector."
+  },
+  {
+    "name": "Hacker News",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://news.ycombinator.com",
+    "rss_url": "https://hnrss.org/newest?q=BCI+OR+brain-computer+OR+neurotech",
+    "has_api": true,
+    "notes": "YC tech news aggregator. Firebase API available. Custom RSS via hnrss.org."
+  },
+  {
+    "name": "ScienceDaily Neuroscience",
+    "category": "news",
+    "tier": "free_rss",
+    "url": "https://www.sciencedaily.com/news/mind_brain/",
+    "rss_url": "https://www.sciencedaily.com/rss/mind_brain.xml",
+    "has_api": false,
+    "notes": "Neuroscience research news digest. University press releases."
+  },
+  {
+    "name": "PubMed (NCBI)",
+    "category": "news",
+    "tier": "free_web",
+    "url": "https://pubmed.ncbi.nlm.nih.gov",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "Biomedical literature database. E-utilities API. Search BCI, neural interface, neurostimulation."
+  },
+  {
+    "name": "Google Scholar",
+    "category": "news",
+    "tier": "free_web",
+    "url": "https://scholar.google.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Academic search engine. Set alerts for BCI and neurotech terms."
+  },
+  {
+    "name": "Neurotechnology Industry Organization (NIO)",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://neurotechnologyindustry.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Industry advocacy group. Policy updates and member company directory."
+  },
+  {
+    "name": "Brain-Computer Interface Society",
+    "category": "newsletter",
+    "tier": "free_web",
+    "url": "https://bcisociety.org",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Professional society for BCI research. Newsletter and resources."
+  },
+  {
+    "name": "Semantic Scholar",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://www.semanticscholar.org",
+    "rss_url": null,
+    "has_api": true,
+    "notes": "AI-powered academic search by Allen Institute. Open API. Good for citation graphs."
+  },
+  {
+    "name": "Connected Papers",
+    "category": "patent_ip",
+    "tier": "free_web",
+    "url": "https://www.connectedpapers.com",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "Visual graph of related papers. Free for 5 graphs/month."
+  },
+  {
+    "name": "IEEE Brain Discovery Challenge",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://brain.ieee.org/publications-media/",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "IEEE Brain publications and challenge events."
+  },
+  {
+    "name": "Neuroscience 2026 (SfN Annual Meeting)",
+    "category": "conference",
+    "tier": "free_web",
+    "url": "https://www.sfn.org/meetings/neuroscience-2026",
+    "rss_url": null,
+    "has_api": false,
+    "notes": "SfN annual meeting. Abstract submission and registration info."
+  }
+]
