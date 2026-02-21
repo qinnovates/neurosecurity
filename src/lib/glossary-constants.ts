@@ -232,6 +232,15 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     relatedTerms: ['cognitive-liberty', 'mental-privacy'],
     tags: ['principle', 'neuroethics'],
   },
+  {
+    id: 'equal-access',
+    term: 'Equal Access',
+    type: 'principle',
+    shortDef: 'BCI security should not be limited to those who can pay.',
+    fullDef: 'The right to equitable access to neurotechnology and its security protections. Qinnovate enforces this through open-source specifications (Apache 2.0), free APIs, and open data. Derived from Yuste et al. (2017) fair access neuroright and the Belmont Report principle of justice.',
+    relatedTerms: ['cognitive-liberty', 'mental-privacy', 'mental-integrity', 'psychological-continuity'],
+    tags: ['principle', 'neuroethics'],
+  },
 
   // === Energy-Time Security Bounds (Entry 52) ===
   {
