@@ -183,6 +183,7 @@ Key phases include:
 
 - **Phase 7** (Feb 18): BCI Limits Equation cross-validation. Gemini CLI independently validated 12-constraint physics system. Confirmed all physics sound, flagged T.H. Shannon vs Claude Shannon disambiguation, suggested stimulation safety constraint, SNR_min quantification. Human decided: apply refinements, reframe physics as boundary not control.
 - **Phase 8** (Feb 21): NIST/ISO Hardened Compliance Mapping & Neurorights Consolidation — Antigravity (Gemini 2.0 Pro) proposed the "Hardened Mapping" bridge to link ethical neurorights to auditable technical evidence (NIST SP 800-53/ISO 27001). Implemented mapping across `qtara-registrar.json` for sample techniques. Cross-validated neurorights taxonomy; human decided to consolidate back to the "original 4" rights (removing Cognitive Authenticity) and simplified source documentation.
+- **Phase 9** (Feb 21): BCI Limits Equation re-validation (13-constraint system). Gemini 2.5 Pro reviewed all 13 constraints for mathematical/physical correctness. 12/13 verified correct. Findings: (1) Constraint 9 mechanical mismatch ratio was inverted (E_brain/E_silicon always ~0; corrected to E_implant/E_brain), (2) Johnson noise temperature corrected from 300K to 310K body temp (~13.1 uV), (3) suggested on-chip processing vs telemetry power trade-off constraint (added to missing terms). Human decided: apply all corrections.
 
 ### Non-AI Tools
 - Rust (NSP/Runemate implementation)

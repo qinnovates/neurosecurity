@@ -1,0 +1,249 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getBciStats } from '../../lib/bci-data';
+import { BCI_CONSTRAINTS } from '../../lib/bci-limits-constants';
+import { THREAT_VECTORS } from '../../lib/threat-data';
+
+const stats = getBciStats();
+---
+
+<PageLayout
+  title="BCI Data API"
+  description="Open JSON API for QIF brain-computer interface data: device specs, threat techniques, brain atlas, and physics constraints. CORS-enabled, free to use."
+  breadcrumbs={[{ label: 'BCI Research', href: '/bci/' }, { label: 'API Documentation' }]}
+  maxWidth="wide"
+>
+  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+    <!-- Sidebar TOC -->
+    <aside class="hidden lg:block">
+      <nav class="sticky top-24 space-y-1" aria-label="Table of contents">
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
+        {[
+          { href: '#overview', label: 'Overview' },
+          { href: '#unified', label: 'Unified Endpoint' },
+          { href: '#structure', label: 'Response Structure' },
+          { href: '#examples', label: 'Examples' },
+          { href: '#legacy', label: 'Legacy Endpoints' },
+        ].map((item) => (
+          <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="max-w-3xl">
+      <!-- Overview -->
+      <section id="overview" class="mb-20">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          BCI Data API
+        </h1>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-status-safe)] text-[var(--color-status-safe)]">
+            Open Access
+          </span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
+            CORS Enabled
+          </span>
+        </div>
+        <div class="prose">
+          <p class="text-lg text-[var(--color-text-muted)]">
+            One endpoint, everything QIF has produced. {THREAT_VECTORS.length} threat techniques, {stats.totalDevices} BCI devices, 38 brain regions, {BCI_CONSTRAINTS.length} physics constraints, and scoring systems. All cross-referenced by QIF hourglass band IDs.
+          </p>
+          <p>
+            Static JSON, generated at build time. No authentication required. Cache-friendly (1 hour TTL). Free to use in your own research, tools, or applications.
+          </p>
+        </div>
+      </section>
+
+      <!-- Unified Endpoint -->
+      <section id="unified" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Unified Endpoint</h2>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
+            <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">/api/qif.json</code>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">Returns the complete QIF dataset as a single JSON object.</p>
+          <div class="glass rounded-lg p-4 overflow-x-auto">
+            <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]"><code>curl https://qinnovate.com/api/qif.json</code></pre>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="glass rounded-xl p-5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">Content-Type</p>
+            <p class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">application/json</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">Cache</p>
+            <p class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">public, max-age=3600</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">CORS</p>
+            <p class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">Access-Control-Allow-Origin: *</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">Auth</p>
+            <p class="text-sm text-[var(--color-text-muted)]">None required</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Response Structure -->
+      <section id="structure" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Response Structure</h2>
+        <div class="glass rounded-xl p-6 sm:p-8 overflow-x-auto">
+          <pre class="text-xs sm:text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`{
+  "version": "1.0",
+  "generated": "2026-02-21T...",
+  "hourglass_bands": [...],        // 11 QIF bands (shared key)
+
+  "threats": {
+    "techniques": [...],           // ${THREAT_VECTORS.length} TARA attack techniques
+    "categories": [...],           // 8 attack categories
+    "tactics": [...],              // TARA tactics
+    "stats": {...},                // Severity, status, NISS breakdowns
+    "tara_stats": {...},           // Dual-use, FDA, consent tier stats
+    "dsm5_stats": {...},           // Diagnostic cluster stats
+    "physics_feasibility": {...},  // Physics tier distributions
+    "neurorights": {...},          // Cognitive liberty impact stats
+    "regulatory": {...}            // FDORA coverage stats
+  },
+
+  "devices": {
+    "inventory": [...],            // ${stats.totalDevices} BCI devices (merged specs)
+    "stats": {...}                 // Device counts, channel ranges
+  },
+
+  "brain_atlas": {
+    "regions": [...],              // 38 brain structures
+    "device_mappings": [...],      // Device-to-region links
+    "neural_latency": [...],       // Response time windows
+    "physics_constraints": [...]   // Per-band thermal/EM limits
+  },
+
+  "physics": {
+    "constraints": [...],          // ${BCI_CONSTRAINTS.length} BCI Limits Equation constraints
+    "categories": [...],           // 5 constraint categories
+    "constants": [...],            // 14 physical constants
+    "validation": {...}            // Cross-validation results
+  },
+
+  "specs": {
+    "niss": {...},                 // NISS scoring specification
+    "tara": {...},                 // TARA specification
+    "dsm5": {...}                  // DSM-5 bridge specification
+  }
+}`}</code></pre>
+        </div>
+
+        <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-primary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Cross-referencing:</strong> Everything links through QIF hourglass band IDs. A threat technique targets bands, bands map to brain regions, brain regions map to devices, devices have physics constraints. One graph.
+          </p>
+        </div>
+      </section>
+
+      <!-- Examples -->
+      <section id="examples" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Usage Examples</h2>
+
+        <div class="space-y-6">
+          <!-- JS fetch -->
+          <div class="glass rounded-xl p-6">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">JavaScript / TypeScript</h3>
+            <div class="glass rounded-lg p-4 overflow-x-auto">
+              <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`const res = await fetch('https://qinnovate.com/api/qif.json');
+const qif = await res.json();
+
+// Get all critical threats targeting cortical implants
+const corticalDevices = qif.devices.inventory
+  .filter(d => d.deviceType === 'Cortical BCI');
+
+const corticalBands = [...new Set(
+  corticalDevices.flatMap(d => d.qifBands)
+)];
+
+const criticalThreats = qif.threats.techniques
+  .filter(t => t.severity === 'critical')
+  .filter(t => t.bands.some(b => corticalBands.includes(b)));
+
+console.log(criticalThreats.length, 'critical threats');`}</code></pre>
+            </div>
+          </div>
+
+          <!-- Python -->
+          <div class="glass rounded-xl p-6">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Python</h3>
+            <div class="glass rounded-lg p-4 overflow-x-auto">
+              <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`import requests
+
+qif = requests.get('https://qinnovate.com/api/qif.json').json()
+
+# Find devices that target the hippocampus
+hippo_devices = [
+    m['device_id']
+    for m in qif['brain_atlas']['device_mappings']
+    if 'hippocampus' in m.get('target_regions', [])
+]
+
+# Get physics constraints for those devices
+for dev in qif['devices']['inventory']:
+    if dev['id'] in hippo_devices:
+        print(f"{dev['name']}: {dev['thermalBudget']}")`}</code></pre>
+            </div>
+          </div>
+
+          <!-- curl + jq -->
+          <div class="glass rounded-xl p-6">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">curl + jq</h3>
+            <div class="glass rounded-lg p-4 overflow-x-auto">
+              <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`# Count threats by severity
+curl -s https://qinnovate.com/api/qif.json \\
+  | jq '.threats.stats.severity'
+
+# List all device names
+curl -s https://qinnovate.com/api/qif.json \\
+  | jq '[.devices.inventory[].name]'
+
+# Get physics constants
+curl -s https://qinnovate.com/api/qif.json \\
+  | jq '.physics.constants'`}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legacy Endpoints -->
+      <section id="legacy" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Legacy Endpoints</h2>
+        <div class="prose mb-6">
+          <p>
+            The original single-purpose endpoints remain available for backwards compatibility. The unified endpoint is recommended for new integrations.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
+              <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">/api/tara.json</code>
+            </div>
+            <p class="text-xs text-[var(--color-text-faint)]">TARA threat techniques only. Same data as <code>qif.json</code> &gt; <code>threats</code> section.</p>
+          </div>
+
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
+              <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">/api/stix.json</code>
+            </div>
+            <p class="text-xs text-[var(--color-text-faint)]">STIX 2.1 bundle format of TARA techniques. For integration with threat intelligence platforms.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>

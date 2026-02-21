@@ -1,0 +1,68 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import BciExplorer from '../../components/bci/BciExplorer';
+import { getBciDevices, getBciStats } from '../../lib/bci-data';
+
+const devices = getBciDevices();
+const stats = getBciStats();
+---
+
+<PageLayout
+  title="BCI Hardware Explorer"
+  description="24 BCI devices with hardware specs, brain region mappings, threat vectors, and physics constraints. Filterable research tool from FDA filings, datasheets, and peer-reviewed papers."
+  breadcrumbs={[{ label: 'BCI Research', href: '/bci/' }, { label: 'Hardware Explorer' }]}
+  wide={true}
+>
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">BCI Hardware Explorer</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-2xl">
+      24 BCI devices from FDA filings, manufacturer datasheets, and peer-reviewed papers. Filter by type, QIF band, or interface direction. Click any device for full specs, physics constraints, brain targeting, and threat mapping.
+    </p>
+  </div>
+
+  <BciExplorer
+    client:only="react"
+    devices={devices}
+    stats={stats}
+  />
+
+  <!-- Related -->
+  <div class="mt-16 mb-8">
+    <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Explore the Full Picture</h2>
+    <p class="text-sm mb-8" style="color: var(--color-text-muted);">
+      This hardware registry is one piece of the QIF ecosystem. Use these tools together to trace the path from device specs to brain regions to security risks.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <a href="/atlas/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">Unified Atlas</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          Select a device from the dropdown to see which brain regions it targets, mapped onto a 3D brain model. Each region links to its QIF band and associated security controls.
+        </p>
+      </a>
+      <a href="/explorer/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">Threat Explorer</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          Force-directed graph of 103 threat techniques. Search by device or technique name, see kill chain relationships, and visualize which hourglass bands are at risk.
+        </p>
+      </a>
+      <a href="/bci/limits/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">BCI Limits Equation</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          13 physics constraints that define the fundamental design envelope for every BCI. Cross-validated against independent AI review.
+        </p>
+      </a>
+      <a href="/bci/guardrails/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">Security Guardrails</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          Four-layer defense architecture derived from the physics constraints. From signal integrity monitoring to post-quantum cryptography.
+        </p>
+      </a>
+    </div>
+
+    <p class="text-xs text-center mt-8" style="color: var(--color-text-faint);">
+      Data sourced from public FDA filings, manufacturer datasheets, and peer-reviewed papers. Confidence levels (HIGH/MEDIUM/LOW) per field.
+      <a href="/bci/api/" class="underline ml-1">Use the API</a>
+    </p>
+  </div>
+</PageLayout>

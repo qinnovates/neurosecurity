@@ -1,0 +1,289 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {
+  BCI_CONSTRAINTS,
+  BCI_CONSTRAINT_CATEGORIES,
+  BCI_PHYSICS_CONSTANTS,
+  BCI_VALIDATION,
+} from '../../lib/bci-limits-constants';
+
+const categoryMap = new Map(BCI_CONSTRAINT_CATEGORIES.map(c => [c.id, c]));
+
+function getConstraintsByCategory(catId: string) {
+  return BCI_CONSTRAINTS.filter(c => c.category === catId);
+}
+---
+
+<PageLayout
+  title="BCI Limits Equation"
+  description="13 physics constraints that define the fundamental boundaries of brain-computer interface design. Thermodynamics, electromagnetism, scaling, safety, and signal detection."
+  breadcrumbs={[{ label: 'BCI Research', href: '/bci/' }, { label: 'BCI Limits Equation' }]}
+  maxWidth="wide"
+>
+  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+    <!-- Sidebar (sticky TOC) -->
+    <aside class="hidden lg:block">
+      <nav class="sticky top-24 space-y-1" aria-label="Table of contents">
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
+        {[
+          { href: '#overview', label: 'Overview' },
+          { href: '#constraints', label: 'The 13 Constraints' },
+          { href: '#constants', label: 'Physics Constants' },
+          { href: '#validation', label: 'Cross-Validation' },
+          { href: '#qif-connection', label: 'Connection to QIF' },
+          { href: '#source', label: 'Source' },
+        ].map((item) => (
+          <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="max-w-3xl">
+      <!-- Overview -->
+      <section id="overview" class="mb-20">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          BCI Limits Equation
+        </h1>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
+            13 Constraints
+          </span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-status-safe)] text-[var(--color-status-safe)]">
+            Cross-Validated
+          </span>
+        </div>
+        <div class="prose">
+          <p class="text-lg text-[var(--color-text-muted)]">
+            Before you can secure a brain-computer interface, you must understand what physics allows. These 13 constraints define the design envelope: the hard boundaries that every BCI must operate within, regardless of manufacturer, brain region, or intended function.
+          </p>
+          <p>
+            The same equations that limit BCI hardware also limit attackers. A signal that violates these bounds is either a malfunction or an attack. The physics tells you the expected operating envelope. Deviations from that envelope are detectable.
+          </p>
+        </div>
+
+        <!-- The unified system -->
+        <div class="glass rounded-xl p-6 sm:p-8 mt-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Unified Constraint System</p>
+          <pre class="text-xs sm:text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed overflow-x-auto whitespace-pre-wrap"><code>Given: brain region R, implant depth d, target function F, time t
+
+Subject to:
+  P_total(n_ch, node_nm) &lt;= P_thermal(R, n_chips, geometry, perfusion)
+  f_carrier &lt;= f_max(tissue_attenuation, d)
+  f_clock &lt;= f_max_clk(P_budget, C_load, V_dd)
+  n_ch(t) = n_ch(0) * 2^(t / T_double),  T_double ~ 7.4 yr
+  k = log(D) + log(Q) &lt; 1.75
+  V_spike / V_noise_rms &gt;&gt; 1
+  Cs(t) &gt;= Cs_min(F)
+  DeltaT_total &lt;= 1.0&deg;C
+  E_implant / E_brain &lt; epsilon_safe
+  Z_electrode(t) &lt;= Z_max(signal_type)
+  V_implant(n_ch, packaging) &lt;= V_max(R)
+  I_Shannon = B * log2(1 + SNR) &gt;= I_min(F)
+  BW_telemetry &gt;= n_ch * f_sample * bit_depth
+
+Maximize: n_ch (channels) OR I_total (bandwidth) OR Cs (coherence)</code></pre>
+        </div>
+      </section>
+
+      <!-- The 13 Constraints -->
+      <section id="constraints" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The 13 Constraints</h2>
+        <div class="prose mb-8">
+          <p>
+            Each constraint is derived from fundamental physics. Together they form a coupled system: violating one often cascades into others. Constraints 1 and 8, for example, are linked through the Pennes bioheat equation.
+          </p>
+        </div>
+
+        {BCI_CONSTRAINT_CATEGORIES.map((cat) => {
+          const constraints = getConstraintsByCategory(cat.id);
+          return (
+            <div class="mb-12">
+              <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full shrink-0" style={`background: ${cat.color};`}></span>
+                {cat.label}
+              </h3>
+              <div class="space-y-4">
+                {constraints.map((c) => (
+                  <div class="glass rounded-xl p-6" style={`border-left: 3px solid ${cat.color};`}>
+                    <div class="flex items-center gap-3 mb-3">
+                      <span class="text-sm font-bold font-[family-name:var(--font-mono)]" style={`color: ${cat.color};`}>
+                        C{c.id}
+                      </span>
+                      <h4 class="text-base font-semibold font-[family-name:var(--font-heading)]">{c.name}</h4>
+                    </div>
+                    <div class="glass rounded-lg px-4 py-2 mb-3 overflow-x-auto">
+                      <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] whitespace-nowrap">{c.equation}</code>
+                    </div>
+                    <p class="text-sm text-[var(--color-text-muted)]">{c.explanation}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
+      <!-- Physics Constants Table -->
+      <section id="constants" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Physics Constants</h2>
+        <div class="prose mb-8">
+          <p>
+            The constraint system is grounded in measured physical constants. These values come from neurophysiology, biomechanics, and electrode characterization literature. Several were corrected during cross-validation (marked below).
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Parameter</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Value</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium hidden sm:table-cell">Source</th>
+                <th class="text-right py-3 px-4 text-[var(--color-text-faint)] font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {BCI_PHYSICS_CONSTANTS.map((row) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-medium text-[var(--color-text-primary)]">{row.parameter}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{row.value}</td>
+                  <td class="py-3 px-4 text-[var(--color-text-muted)] hidden sm:table-cell">{row.source}</td>
+                  <td class="py-3 px-4 text-right">
+                    <span class:list={[
+                      "text-xs font-semibold px-2 py-0.5 rounded-full",
+                      row.status === 'Verified' ? 'text-[var(--color-status-safe)] border border-[var(--color-status-safe)]/30' :
+                      row.status === 'Added' ? 'text-[var(--color-accent-secondary)] border border-[var(--color-accent-secondary)]/30' :
+                      'text-[var(--color-status-warning)] border border-[var(--color-status-warning)]/30'
+                    ]}>
+                      {row.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Cross-Validation -->
+      <section id="validation" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Cross-Validation</h2>
+        <div class="glass rounded-xl p-8 mb-6">
+          <div class="grid sm:grid-cols-3 gap-8 text-center">
+            <div>
+              <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-safe)]">
+                {BCI_VALIDATION.constraintsVerified}/{BCI_VALIDATION.constraintsTotal}
+              </p>
+              <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Constraints Verified</p>
+            </div>
+            <div>
+              <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">
+                {BCI_VALIDATION.corrections.length}
+              </p>
+              <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Corrections Applied</p>
+            </div>
+            <div>
+              <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
+                Phase {BCI_VALIDATION.phase}
+              </p>
+              <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Validation Phase</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose mb-6">
+          <p>
+            The full 13-constraint system was independently reviewed by {BCI_VALIDATION.validator} for mathematical and physical correctness. {BCI_VALIDATION.constraintsVerified} of {BCI_VALIDATION.constraintsTotal} constraints were verified correct. Two corrections were applied:
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          {BCI_VALIDATION.corrections.map((correction) => (
+            <div class="glass rounded-xl p-4" style="border-left: 3px solid var(--color-status-warning);">
+              <p class="text-sm text-[var(--color-text-muted)]">{correction}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-xs text-[var(--color-text-faint)] mt-4">
+          Full validation record: <a href="/governance/" class="text-[var(--color-accent-primary)] hover:underline">governance/TRANSPARENCY.md</a>
+        </p>
+      </section>
+
+      <!-- Connection to QIF -->
+      <section id="qif-connection" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Connection to QIF</h2>
+        <div class="prose mb-8">
+          <p>
+            The BCI Limits Equation is Layer 0 of the <a href="/whitepaper/" class="text-[var(--color-accent-primary)] hover:underline">QIF security framework</a>. It defines the physics boundary that security controls (Layers 1-3) use to detect and respond to violations.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-10 text-center">
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-safe)]">C7</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-[var(--color-text-primary)]">Coherence Threshold (Cs)</p>
+                <p class="text-sm text-[var(--color-text-muted)]">
+                  Constraint 7 is the QIF coherence metric. When Cs drops below Cs_min for a given brain function, the guardrail triggers. This is the bridge between physics and security: the coherence metric's four factors (phase variance, temporal entropy, gain fluctuation, spectral drift) map directly to on-chip signal features that NeuroPace has already proven viable.
+                </p>
+              </div>
+            </div>
+            <div class="border-l-2 border-dashed border-[var(--color-border)] ml-5 h-4"></div>
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-10 text-center">
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">C8</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-[var(--color-text-primary)]">Thermal Budget (Neurowall)</p>
+                <p class="text-sm text-[var(--color-text-muted)]">
+                  Constraint 8 sets the thermal ceiling that any on-device security monitor must operate within. The 1.0C limit (AAMI guideline) means that cryptographic operations, signal integrity checks, and anomaly detection must all share the same power envelope. This is why the <a href="/nsp/" class="text-[var(--color-accent-primary)] hover:underline">NSP protocol</a> uses pipeline ordering (compress first, then encrypt smaller payloads) to minimize power draw.
+                </p>
+              </div>
+            </div>
+            <div class="border-l-2 border-dashed border-[var(--color-border)] ml-5 h-4"></div>
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-10 text-center">
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">All</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-[var(--color-text-primary)]">TARA Feasibility Predictions</p>
+                <p class="text-sm text-[var(--color-text-muted)]">
+                  The constraint system can predict when specific <a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">TARA attack techniques</a> become feasible based on projected BCI hardware capabilities. As channel counts double every ~7.4 years (constraint 4), the attack surface expands.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Source -->
+      <section id="source" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Source</h2>
+        <div class="prose mb-6">
+          <p>
+            The BCI Limits Equation was synthesized across multiple derivation sessions and is documented in full in the QIF security guardrails specification. No published paper unifies all 13 constraints. The closest prior work is Marblestone et al. (2013), which covers thermal and EM constraints for mouse brain only.
+          </p>
+        </div>
+        <div class="glass rounded-xl p-6 sm:p-8" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Full derivation:</strong>
+            <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline font-[family-name:var(--font-mono)] text-xs ml-1">qif-sec-guardrails.md</a>
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-2">
+            <strong class="text-[var(--color-text-primary)]">Origin:</strong> Derivation Log Entry 60 + Entry 59
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-2">
+            <strong class="text-[var(--color-text-primary)]">Key references:</strong> Marblestone et al. 2013, Stevenson & Kording 2011, Shannon 1992, Kim et al.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>

@@ -1,0 +1,226 @@
+{
+  "_metadata": {
+    "title": "QIF Project Timeline",
+    "version": "1.0.0",
+    "created": "2026-02-21",
+    "description": "Chronological record of QIF milestones, discoveries, dataset growth, and major updates. Updated when significant changes occur.",
+    "maintainer": "Kevin Qi"
+  },
+
+  "current_stats": {
+    "as_of": "2026-02-21",
+    "threat_techniques": 103,
+    "bci_devices": 24,
+    "brain_regions": 38,
+    "physics_constraints": 13,
+    "hourglass_bands": 11,
+    "tara_tactics": 13,
+    "neurorights_mapped": 4,
+    "dsm5_diagnoses_mapped": 68,
+    "physics_constants_verified": 14,
+    "preprint_version": "v1.4",
+    "nsp_version": "v0.5",
+    "tara_version": "v1.6",
+    "atlas_version": "v1.2.0"
+  },
+
+  "milestones": [
+    {
+      "date": "2026-01-15",
+      "type": "release",
+      "title": "TARA v1.0: Initial Atlas Published",
+      "description": "First public release of the Therapeutic Applications & Risk Assessment atlas.",
+      "stats_snapshot": { "threat_techniques": 60 }
+    },
+    {
+      "date": "2026-01-18",
+      "type": "milestone",
+      "title": "ONI Framework Repository Created",
+      "description": "First commit of the original ONI (Open Neural Interface) framework. Predecessor to QIF."
+    },
+    {
+      "date": "2026-01-29",
+      "type": "release",
+      "title": "ONI Demo Video v1.0 Complete",
+      "description": "3:56 animated explainer (Remotion + ElevenLabs). L1-L14 visualization, coherence gauge. First public-facing media."
+    },
+    {
+      "date": "2026-02-02",
+      "type": "discovery",
+      "title": "QIF Born: 14-Layer Model Deprecated, Hourglass Adopted",
+      "description": "Single session produced 13 derivation insights. CNF renamed to QIF. 14-layer OSI model (v2.0) deprecated in favor of the 7-band symmetric (3-1-3) hourglass. QIF-TRUTH.md created as canonical source of truth.",
+      "stats_snapshot": { "hourglass_bands": 7 }
+    },
+    {
+      "date": "2026-02-02",
+      "type": "validation",
+      "title": "First Cross-AI Validation (Gemini 2.5)",
+      "description": "Independent AI peer review by Gemini 2.5 of the hourglass model. Validation pipeline established."
+    },
+    {
+      "date": "2026-02-06",
+      "type": "discovery",
+      "title": "L=v/f Unification and 11-Band Model",
+      "description": "Wavelength equation applied to neural security. Government-restricted spectrum attack mapping added. QIF v4.0: 11 bands implemented (N7-N1, I0, S1-S3).",
+      "stats_snapshot": { "hourglass_bands": 11 }
+    },
+    {
+      "date": "2026-02-06",
+      "type": "milestone",
+      "title": "NSP Goes Post-Quantum",
+      "description": "Neural Sensory Protocol redesigned with ML-KEM/ML-DSA. Harvest-Now-Decrypt-Later threat model adopted. 5 defense layers, Merkle-amortized SPHINCS+ signatures."
+    },
+    {
+      "date": "2026-02-06",
+      "type": "discovery",
+      "title": "Black Hole Security Principle",
+      "description": "Hawking/Susskind/Maldacena information principles applied to BCI security boundaries. Novel theoretical contribution."
+    },
+    {
+      "date": "2026-02-06",
+      "type": "release",
+      "title": "Unified Neural Security Taxonomy",
+      "description": "60 attack techniques across 11 MITRE-compatible tactics. First structured BCI threat taxonomy.",
+      "stats_snapshot": { "threat_techniques": 60 }
+    },
+    {
+      "date": "2026-02-07",
+      "type": "validation",
+      "title": "First Multi-Model Validation Cycle",
+      "description": "QwQ-32B, Grok-3, and Gemini independently reviewed QIF framework. Consensus reached on hourglass model validity."
+    },
+    {
+      "date": "2026-02-09",
+      "type": "discovery",
+      "title": "TARA Reframe: Threat Catalog Becomes Therapeutic Atlas",
+      "description": "Attack techniques reframed as dual-use: every neural attack has a therapeutic analog. Registry transformed from threat catalog to risk-benefit atlas. 18 techniques identified as silicon-only (no therapeutic analog)."
+    },
+    {
+      "date": "2026-02-09",
+      "type": "discovery",
+      "title": "Dynamical Systems Security: 6 New Attack Classes",
+      "description": "Bifurcation manipulation, basin erosion, strange attractor injection, Lyapunov destabilization, phase space compression, and resonance entrainment identified as novel BCI attack vectors."
+    },
+    {
+      "date": "2026-02-11",
+      "type": "release",
+      "title": "TARA v1.3: S-Domain Consumer Sensor Expansion",
+      "description": "Consumer device attack surface expanded. Synthetic band techniques for off-the-shelf sensors."
+    },
+    {
+      "date": "2026-02-13",
+      "type": "release",
+      "title": "TARA v1.4: Consumer Side-Channel Techniques",
+      "description": "3 new techniques (T0100-T0102). Total: 102 techniques.",
+      "stats_snapshot": { "threat_techniques": 102 }
+    },
+    {
+      "date": "2026-02-13",
+      "type": "discovery",
+      "title": "TARA-to-DSM-5-TR Diagnostic Mapping",
+      "description": "Neural Impact Chain bridges attack techniques to DSM-5-TR diagnostic codes. Every TARA technique now maps to potential psychiatric outcomes."
+    },
+    {
+      "date": "2026-02-13",
+      "type": "discovery",
+      "title": "Three Floors of Physics Integration",
+      "description": "Landauer limit, Margolus-Levitin bound, and Heisenberg uncertainty integrated into QIF constraint system. P=E/t computational scaling equation derived."
+    },
+    {
+      "date": "2026-02-14",
+      "type": "milestone",
+      "title": "NSP Core Implementation: Rust ML-KEM + ML-DSA",
+      "description": "Post-quantum handshake implemented in Rust. ML-KEM-768 key exchange and ML-DSA-65 signatures working end-to-end."
+    },
+    {
+      "date": "2026-02-14",
+      "type": "milestone",
+      "title": "Runemate Forge + NSP Integration Verified",
+      "description": "End-to-end secure neural pipeline: Staves DSL compiles to bytecode, encrypted via NSP session, delivered to target."
+    },
+    {
+      "date": "2026-02-14",
+      "type": "release",
+      "title": "Zenodo Preprint v1.0 Published",
+      "description": "First public preprint: 28 pages, 6 figures, CC-BY-4.0. DOI: 10.5281/zenodo.18640106"
+    },
+    {
+      "date": "2026-02-16",
+      "type": "release",
+      "title": "TARA v1.5: Neurorights Mapping",
+      "description": "4 neurorights (Mental Privacy, Cognitive Liberty, Mental Integrity, Psychological Continuity) mapped to all 102 techniques. Consent Complexity Index (CCI) introduced.",
+      "stats_snapshot": { "neurorights_mapped": 4 }
+    },
+    {
+      "date": "2026-02-16",
+      "type": "release",
+      "title": "TARA v1.6: FDORA Regulatory Compliance",
+      "description": "FDORA Section 3305 (Patch Act) coverage mapped to all techniques. Regulatory gap analysis complete."
+    },
+    {
+      "date": "2026-02-18",
+      "type": "release",
+      "title": "BCI Hardware Inventory Published",
+      "description": "24 BCI devices catalogued from FDA filings, manufacturer datasheets, and peer-reviewed papers. Full specs with confidence levels.",
+      "stats_snapshot": { "bci_devices": 24 }
+    },
+    {
+      "date": "2026-02-18",
+      "type": "release",
+      "title": "Brain-BCI Atlas v1.2.0",
+      "description": "38 brain structures mapped to BCI devices, QIF bands, neural latency metrics, and physics constraints.",
+      "stats_snapshot": { "brain_regions": 38 }
+    },
+    {
+      "date": "2026-02-18",
+      "type": "discovery",
+      "title": "BCI Limits Equation Synthesized",
+      "description": "13 physics constraints unified into a single system coupling thermodynamics, EM, Moore's Law, Shannon safety, Boltzmann detectability, and QIF coherence. No published paper unifies all 13.",
+      "stats_snapshot": { "physics_constraints": 13 }
+    },
+    {
+      "date": "2026-02-18",
+      "type": "milestone",
+      "title": "Physics Feasibility Tiering Complete",
+      "description": "All 102 TARA techniques classified by physics feasibility tier (0=now, 1=near-term, 2=mid-term, 3=far-term, X=no physics gate)."
+    },
+    {
+      "date": "2026-02-18",
+      "type": "discovery",
+      "title": "SSVEP Frequency Hijack (T0103)",
+      "description": "Novel attack technique: hijacking steady-state visually evoked potentials via screen flicker. 103rd technique added.",
+      "stats_snapshot": { "threat_techniques": 103 }
+    },
+    {
+      "date": "2026-02-18",
+      "type": "release",
+      "title": "Zenodo Preprint v1.4 Published",
+      "description": "NISS score corrections (arithmetic mean), TMS citation fix, dual-use label fix, Sherman & Guillery citation added."
+    },
+    {
+      "date": "2026-02-18",
+      "type": "milestone",
+      "title": "NSP Protocol Spec v0.5 Finalized",
+      "description": "Protocol core and handshake complete. 5-layer defense stack, 3 device tiers, power budget validated at 3.25% of 40 mW."
+    },
+    {
+      "date": "2026-02-21",
+      "type": "validation",
+      "title": "BCI Limits Equation Cross-Validated (Gemini 2.5 Pro)",
+      "description": "12/13 constraints verified correct. 2 corrections applied: mechanical mismatch ratio inverted, Johnson noise temperature corrected to 310K.",
+      "stats_snapshot": { "physics_constants_verified": 14 }
+    },
+    {
+      "date": "2026-02-21",
+      "type": "release",
+      "title": "Unified QIF API (/api/qif.json)",
+      "description": "Single endpoint serving all QIF data: 103 threats, 24 devices, 38 brain regions, 13 physics constraints, scoring specs. CORS-enabled, open access."
+    },
+    {
+      "date": "2026-02-21",
+      "type": "milestone",
+      "title": "BCI Research Hub Launched",
+      "description": "Dedicated /bci/ section consolidating hardware explorer, limits equation, security guardrails, and API documentation under one roof."
+    }
+  ]
+}

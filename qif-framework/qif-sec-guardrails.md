@@ -46,7 +46,7 @@ Subject to:
   V_spike / V_noise_rms >> 1, where V_noise = sqrt(4kT*Re(Z)*df)        [detectability (SNR)]
   Cs(t) >= Cs_min(F)                                                     [QIF coherence threshold]
   DeltaT_total = f(P_total, geometry, perfusion) <= 1.0C                 [thermal ceiling, coupled to P_total]
-  E_brain / E_silicon < epsilon_safe                                      [mechanical mismatch]
+  E_implant / E_brain < epsilon_safe                                       [mechanical mismatch]
   Z_electrode(t) <= Z_max(signal_type)                                    [biocompatibility timeline]
   V_implant(n_ch, packaging) <= V_max(R)                                  [geometric fit]
   I_Shannon = B * log2(1 + SNR) >= I_min(F)                              [information theory]
@@ -64,12 +64,20 @@ Maximize: n_ch (channels) OR I_total (bandwidth) OR Cs (coherence)
 
 **Why this matters for security:** Each inequality defines a boundary. A BCI operating within bounds is normal. A signal that violates these bounds is either a malfunction or an attack. The physics tells you the expected operating envelope. Deviations from that envelope are detectable.
 
+**Cross-AI Validation (2026-02-21):**
+Constraint system reviewed by Gemini 2.5 Pro for mathematical and physical correctness. Findings:
+- 12/13 constraints verified correct. Constraint 9 (mechanical mismatch) had an inverted ratio (E_brain/E_silicon is always ~0; corrected to E_implant/E_brain < epsilon_safe).
+- Johnson noise corrected from 300K to 310K (body temperature): ~13.1 uV rms.
+- All other physical constants and equations confirmed accurate.
+- Suggested addition: on-chip processing vs telemetry power trade-off constraint (added to missing terms below).
+
 **Missing terms (acknowledged, future work):**
 - Inter-channel crosstalk at high electrode density
 - Foreign body / immune response model (dominant chronic failure mode, not just impedance)
 - Power harvesting/delivery constraint (inductive, RF, battery each have depth/efficiency tradeoffs)
 - Electrode material degradation model (separate from impedance rise due to encapsulation)
 - Stimulation artifact constraint for bidirectional interfaces
+- On-chip processing vs telemetry trade-off: P_processing + P_telemetry <= P_budget, linking compression ratio to power allocation (Gemini suggestion)
 
 ### Key Physical Constants (Verified)
 
@@ -82,7 +90,7 @@ Maximize: n_ch (channels) OR I_total (bandwidth) OR Cs (coherence)
 | Spike amplitude | 40-500 uV | Neurophysiology | Verified |
 | Spike detection range | 50-140 um from electrode | Electrode characterization | Verified |
 | Thermal noise floor (kT at 310K) | 4.28 x 10^-21 J | Boltzmann constant | Verified |
-| Johnson noise (1 MOhm, 10 kHz BW) | ~12.8 uV rms | sqrt(4kT*Re(Z)*df) | Added |
+| Johnson noise (1 MOhm, 10 kHz BW, 310K) | ~13.1 uV rms | sqrt(4kT*Re(Z)*df), T=310K body temp | Corrected (was 12.8 at 300K) |
 | Shannon safety limit (k) | 1.75-1.85 | Shannon 1992, AAMI, DBS literature | Verified |
 | Neuronal kill zone | 40-150 um around electrode | Implant pathology | Upper bound corrected |
 | Brain micromotion (cardiac) | 1-4 um | Biomechanics | Corrected from "10-30 um" |

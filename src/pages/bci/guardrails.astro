@@ -1,0 +1,312 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+// Read guardrails markdown from the repo at build time (single source of truth)
+const guardrailsPath = resolve(process.cwd(), 'qif-framework/qif-sec-guardrails.md');
+const rawMd = readFileSync(guardrailsPath, 'utf-8');
+
+// Extract sections we want to render
+function extractSection(md: string, heading: string): string {
+  const headingPattern = new RegExp(`^## ${heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'm');
+  const match = md.match(headingPattern);
+  if (!match || match.index === undefined) return '';
+  const start = match.index + match[0].length;
+  const nextHeading = md.indexOf('\n## ', start);
+  return md.slice(start, nextHeading === -1 ? undefined : nextHeading).trim();
+}
+
+// Extract metadata
+const statusMatch = rawMd.match(/\*\*Status:\*\*\s*(.+)/);
+const dateMatch = rawMd.match(/\*\*Date:\*\*\s*(.+)/);
+const status = statusMatch?.[1] ?? 'Working Draft';
+const date = dateMatch?.[1] ?? '';
+
+// Layer descriptions for cards
+const layers = [
+  {
+    id: 0,
+    name: 'Physics Boundary',
+    tag: 'EXISTS',
+    tagColor: 'var(--color-status-safe)',
+    description: 'The constraint system from the BCI Limits Equation. Defines the operating envelope: what is physically normal vs. abnormal for a given implant.',
+    details: 'Every BCI has a physically defined operating envelope based on implant location, electrode count, power budget, and tissue properties. Anything outside this envelope is abnormal by definition.',
+    link: '/bci/limits/',
+  },
+  {
+    id: 1,
+    name: 'Signal Integrity Monitor',
+    tag: 'FEASIBLE TODAY',
+    tagColor: 'var(--color-accent-primary)',
+    description: 'Lightweight, always-on signal integrity check running on the implant. Proven on NeuroPace RNS hardware (FDA-approved, 12+ year battery life).',
+    details: 'Uses line length, signal energy, kurtosis, 1/f spectral exponent, and Higuchi fractal dimension. All O(n) or better. Maps directly to QIF coherence metric (Cs). When Cs drops below Cs_min, the guardrail triggers.',
+    link: null,
+  },
+  {
+    id: 2,
+    name: 'Adaptive Anomaly Detection',
+    tag: 'NEAR-TERM',
+    tagColor: 'var(--color-accent-secondary)',
+    description: 'Per-patient baseline model that learns normal neural signatures and flags deviations. Catches subtle, targeted attacks that Layer 1 misses.',
+    details: 'Detects slow-drift attacks, targeted perturbations tuned to patient signal characteristics, and replay attacks. Requires on-chip ML (~10-50 KB model). Update mechanism via Runemate Staves bytecode (sandboxed, no firmware reflash needed).',
+    link: null,
+  },
+  {
+    id: 3,
+    name: 'Cryptographic Defense',
+    tag: 'FUTURE',
+    tagColor: 'var(--color-text-faint)',
+    description: 'Full NSP protocol on the implant: post-quantum key exchange, authenticated encryption, device authentication, and rollback-protected firmware updates.',
+    details: 'AES-256-GCM-SIV symmetric encryption is viable on current hardware. The expensive part is the PQ handshake (ML-KEM + SPHINCS+), which only happens once per session. T1/T2 devices can run full NSP today. T3 implants need next-gen chips.',
+    link: '/nsp/',
+  },
+];
+
+// Signal integrity metrics
+const metrics = [
+  { name: 'Line length', measures: 'Sum of absolute differences between consecutive samples', cost: 'O(n), trivial', precedent: 'NeuroPace RNS (FDA-approved)' },
+  { name: 'Signal energy', measures: 'Integral of absolute amplitude', cost: 'O(n), trivial', precedent: 'NeuroPace RNS' },
+  { name: '1/f spectral exponent', measures: 'Slope of log-log power spectrum (scale-invariant)', cost: 'Short FFT, moderate', precedent: 'FOOOF (validated in neuroscience)' },
+  { name: 'Higuchi fractal dimension', measures: 'Signal complexity measure', cost: 'O(n * k_max), lightweight', precedent: 'Validated for ECoG spike detection' },
+  { name: 'Statistical moments', measures: 'Variance, kurtosis of amplitude distribution', cost: 'O(n), trivial', precedent: 'Standard DSP' },
+];
+
+// What exists vs what's new
+const contributions = [
+  { capability: 'On-chip impedance monitoring', stateOfArt: 'Neuralink, Medtronic, cochlear implants', qif: 'Reframe as security control (Layer 0)' },
+  { capability: 'On-chip signal feature extraction', stateOfArt: 'NeuroPace RNS (line length, area, half-wave)', qif: 'Repurpose for adversarial detection (Layer 1)' },
+  { capability: 'Scale-invariant signal metrics', stateOfArt: '1/f exponent, fractal dimension (neuroscience)', qif: 'Integrate into coherence metric Cs (Layer 1)' },
+  { capability: 'BCI physics constraint system', stateOfArt: 'Marblestone et al. 2013 (thermal+EM, mouse brain)', qif: 'Unified human-scale system with security dimension' },
+  { capability: 'Post-quantum BCI encryption', stateOfArt: 'Nobody (no published work)', qif: 'NSP protocol spec (Layer 3)' },
+  { capability: 'Updateable on-chip security rules', stateOfArt: 'Nobody', qif: 'Staves bytecode as sandboxed update mechanism' },
+  { capability: 'Medical-grade Rust compiler', stateOfArt: 'Ferrocene IEC 62304 Class C (Jan 2025)', qif: 'Enables certified Rust for implant firmware' },
+];
+---
+
+<PageLayout
+  title="BCI Security Guardrails"
+  description="Physics-derived defense architecture for brain-computer interfaces. Four guardrail layers from signal integrity monitoring to post-quantum cryptographic defense."
+  breadcrumbs={[{ label: 'BCI Research', href: '/bci/' }, { label: 'Security Guardrails' }]}
+  maxWidth="wide"
+>
+  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+    <!-- Sidebar TOC -->
+    <aside class="hidden lg:block">
+      <nav class="sticky top-24 space-y-1" aria-label="Table of contents">
+        <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
+        {[
+          { href: '#overview', label: 'Overview' },
+          { href: '#layers', label: 'Four Guardrail Layers' },
+          { href: '#metrics', label: 'Signal Integrity Metrics' },
+          { href: '#contributions', label: 'What\'s New' },
+          { href: '#roadmap', label: 'Roadmap' },
+          { href: '#source', label: 'Source' },
+        ].map((item) => (
+          <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="max-w-3xl">
+      <!-- Overview -->
+      <section id="overview" class="mb-20">
+        <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          BCI Security Guardrails
+        </h1>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
+            {status}
+          </span>
+          {date && (
+            <span class="text-xs text-[var(--color-text-faint)]">{date}</span>
+          )}
+        </div>
+        <div class="prose">
+          <p class="text-lg text-[var(--color-text-muted)]">
+            BCI security guardrails are not arbitrary policy decisions. They are derivable from physics. The equations governing electromagnetism, thermodynamics, and information theory already define what a BCI can and cannot do. Those same equations define what an attacker can and cannot do.
+          </p>
+          <p>
+            This document synthesizes a layered guardrail architecture starting from what physics gives us for free (signal integrity monitoring) and building toward what technology will eventually enable (on-chip encryption, anomaly detection, post-quantum protocols).
+          </p>
+        </div>
+
+        <!-- Layer summary -->
+        <div class="glass rounded-xl p-6 sm:p-8 mt-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Architecture</p>
+          <pre class="text-xs sm:text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>Layer 0: Physics Boundary       [EXISTS]
+Layer 1: Signal Integrity       [FEASIBLE TODAY]
+Layer 2: Anomaly Detection      [NEAR-TERM]
+Layer 3: Cryptographic Defense   [FUTURE]</code></pre>
+        </div>
+      </section>
+
+      <!-- Four Guardrail Layers -->
+      <section id="layers" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Four Guardrail Layers</h2>
+        <div class="prose mb-8">
+          <p>
+            Each layer builds on the previous one. Layer 0 defines the boundary. Layers 1-3 are the actual security controls that use that boundary information to detect and respond to violations.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          {layers.map((layer) => (
+            <div class="glass rounded-xl p-6 sm:p-8" style={`border-left: 3px solid ${layer.tagColor};`}>
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${layer.tagColor};`}>
+                  L{layer.id}
+                </span>
+                <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">{layer.name}</h3>
+                <span class="text-xs font-semibold px-2 py-0.5 rounded-full ml-auto whitespace-nowrap" style={`color: ${layer.tagColor}; border: 1px solid ${layer.tagColor}40;`}>
+                  {layer.tag}
+                </span>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)] mb-3">{layer.description}</p>
+              <p class="text-xs text-[var(--color-text-faint)]">{layer.details}</p>
+              {layer.link && (
+                <a href={layer.link} class="text-xs text-[var(--color-accent-primary)] hover:underline mt-3 inline-block">
+                  View specification &rarr;
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Signal Integrity Metrics -->
+      <section id="metrics" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Signal Integrity Metrics</h2>
+        <div class="prose mb-8">
+          <p>
+            Layer 1 uses universal statistical properties of neural signals. These metrics work regardless of brain region because all cortical areas exhibit the same fundamental signal structure.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Metric</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">What It Measures</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium hidden sm:table-cell">Compute Cost</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium hidden md:table-cell">On-Chip Precedent</th>
+              </tr>
+            </thead>
+            <tbody>
+              {metrics.map((m) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-semibold text-[var(--color-text-primary)]">{m.name}</td>
+                  <td class="py-3 px-4 text-[var(--color-text-muted)]">{m.measures}</td>
+                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-faint)] hidden sm:table-cell">{m.cost}</td>
+                  <td class="py-3 px-4 text-[var(--color-text-faint)] hidden md:table-cell">{m.precedent}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-primary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Connection to Cs:</strong> The coherence metric's four factors (phase variance, temporal entropy, gain fluctuation, spectral drift) map directly to these signal features. Cs_min becomes the threshold. When the composite score drops below Cs_min for a given brain function, the guardrail triggers.
+          </p>
+        </div>
+
+        <!-- Resource estimate -->
+        <div class="glass rounded-xl p-6 mt-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Layer 1 Resource Estimate</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+            <div>
+              <p class="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">2-4 KB</p>
+              <p class="text-xs text-[var(--color-text-faint)]">RAM</p>
+            </div>
+            <div>
+              <p class="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">8-16 KB</p>
+              <p class="text-xs text-[var(--color-text-faint)]">Flash</p>
+            </div>
+            <div>
+              <p class="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">&lt;0.5 mW</p>
+              <p class="text-xs text-[var(--color-text-faint)]">Power</p>
+            </div>
+            <div>
+              <p class="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-status-safe)]">&lt;1 ms</p>
+              <p class="text-xs text-[var(--color-text-faint)]">Latency</p>
+            </div>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] text-center mt-3">Fits within every clinical-grade BCI currently in existence</p>
+        </div>
+      </section>
+
+      <!-- What's New -->
+      <section id="contributions" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">What Exists vs. What's New</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Capability</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">State of the Art</th>
+                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">QIF Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contributions.map((c) => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-3 px-4 font-medium text-[var(--color-text-primary)]">{c.capability}</td>
+                  <td class="py-3 px-4 text-[var(--color-text-muted)]">{c.stateOfArt}</td>
+                  <td class="py-3 px-4 text-[var(--color-accent-primary)]">{c.qif}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Roadmap -->
+      <section id="roadmap" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Roadmap</h2>
+        <div class="space-y-4">
+          {[
+            { phase: 0, layer: 'Layer 0', task: 'Document physics envelope per band', time: 'Now', status: 'done' },
+            { phase: 1, layer: 'Layer 1', task: 'Signal integrity monitor (Rust, Cortex-M)', time: '6-12 months', status: 'next' },
+            { phase: 2, layer: 'Layer 1', task: 'Validate against known attack patterns', time: '12-18 months', status: 'planned' },
+            { phase: 3, layer: 'Layer 2', task: 'Adaptive anomaly detection prototype', time: '2-3 years', status: 'planned' },
+            { phase: 4, layer: 'Layer 3', task: 'NSP symmetric crypto on T3 hardware', time: '3-5 years', status: 'planned' },
+            { phase: 5, layer: 'Layer 3', task: 'Full PQ stack on implant', time: '5-8 years', status: 'planned' },
+          ].map((item) => (
+            <div class="glass rounded-xl p-5 flex items-center gap-4" style={`border-left: 3px solid ${item.status === 'done' ? 'var(--color-status-safe)' : item.status === 'next' ? 'var(--color-accent-primary)' : 'var(--color-text-faint)'};`}>
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] w-6 text-center" style={`color: ${item.status === 'done' ? 'var(--color-status-safe)' : item.status === 'next' ? 'var(--color-accent-primary)' : 'var(--color-text-faint)'};`}>
+                {item.phase}
+              </span>
+              <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-text-faint)] whitespace-nowrap">
+                {item.layer}
+              </span>
+              <span class="text-sm font-medium text-[var(--color-text-primary)] flex-1">{item.task}</span>
+              <span class="text-xs text-[var(--color-text-faint)] whitespace-nowrap">{item.time}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Source -->
+      <section id="source" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Source</h2>
+        <div class="glass rounded-xl p-6 sm:p-8" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Full document:</strong>
+            <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline font-[family-name:var(--font-mono)] text-xs ml-1">qif-sec-guardrails.md</a>
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-2">
+            <strong class="text-[var(--color-text-primary)]">Origin:</strong> Derivation Log Entry 60 (BCI Limits Equation Synthesis) + Entry 59 (Thalamic Gating + Guardrails Mapping)
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-2">
+            <strong class="text-[var(--color-text-primary)]">This page is rendered from the source document at build time.</strong> The GitHub file is the single source of truth.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>
