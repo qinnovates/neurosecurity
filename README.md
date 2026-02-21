@@ -79,7 +79,7 @@ The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocor
 The wire protocol (v0.5). Post-quantum encryption (ML-KEM-768, ML-DSA, AES-256-GCM-SIV) at the frame level. Designed for implant-class hardware: sub-4ms latency, under 4% power overhead on ARM Cortex-M4.
 
 - **Spec:** [qinnovate.com/nsp](https://qinnovate.com/nsp/)
-- **Implementation:** [src/lib/nsp-core/](src/lib/nsp-core/) (Rust, PQ-secure)
+- **Implementation:** [qif-framework/nsp/nsp-core/](qif-framework/nsp/nsp-core/) (Rust, PQ-secure)
 
 ### TARA (Therapeutic Atlas of Risks and Applications)
 
@@ -123,7 +123,7 @@ The rendering pipeline. v1.0 introduces a native DSL compiler achieving 67.8% co
 The Forge (gateway compiler, Rust std) compiles content. The Scribe (implant interpreter, Rust no_std, ~200KB) renders it. TARA validates every output pattern before delivery, bounding both attack severity and therapeutic safety.
 
 - **Spec:** [qinnovate.com/runemate](https://qinnovate.com/runemate/) (v1.0, 19 sections, ~2900 lines)
-- **Compiler:** [src/lib/runemate-forge/](src/lib/runemate-forge/) (native DSL-to-Staves, encrypted)
+- **Compiler:** [qif-framework/runemate/forge/](qif-framework/runemate/forge/) (native DSL-to-Staves, encrypted)
 - **Full specification:** [qif-framework/RUNEMATE.md](qif-framework/RUNEMATE.md)
 
 ### Governance
@@ -151,54 +151,52 @@ Published documents covering the full neuroethics landscape:
 
 ```
 qinnovates/qinnovate/
-├── qif-framework/              # QIF specification
+├── qif-framework/              # QIF specification + implementations
 │   ├── framework/              # Architectural documents
 │   ├── tara-threat/            # TARA threat registry source
 │   ├── qif-lab/                # Equation testing
-│   ├── QIF-WHITEPAPER.md       # v6.2.1 whitepaper
-│   ├── QIF-TRUTH.md            # Canonical source of truth
-│   ├── QIF-FIELD-JOURNAL.md    # Append-only research field journal
-│   ├── QIF-DERIVATION-LOG.md   # Raw derivation sessions
-│   └── RUNEMATE.md             # Runemate v1.0 spec
+│   ├── nsp/                    # Neural Security Protocol (Rust + spec)
+│   │   └── nsp-core/           # Rust PQ-secure implementation
+│   ├── runemate/               # Runemate rendering pipeline
+│   │   └── forge/              # DSL compiler (Rust)
+│   ├── archive/                # Legacy models
+│   │   └── oni-framework/      # ONI 14-layer model
+│   ├── QIF-WHITEPAPER.md
+│   ├── QIF-TRUTH.md
+│   ├── QIF-FIELD-JOURNAL.md
+│   ├── QIF-DERIVATION-LOG.md
+│   └── RUNEMATE.md
 │
-├── shared/                     # Cross-cutting data
+├── shared/                     # Cross-cutting data + tools
 │   ├── qtara-registrar.json    # TARA techniques (CVSS + NISS)
-│   └── archive/                # Deprecated/merged data files
+│   ├── qtara/                  # Python SDK (pip install qtara)
+│   ├── scripts/                # Data pipeline scripts
+│   └── archive/                # Deprecated data files
+│
+├── paper/                      # Academic publications
+│   └── preprint/               # Zenodo preprint
 │
 ├── governance/                 # Neuroethics documents
 │   └── processes/              # Standards development lifecycle
 │
-├── paper/                      # Academic publications
-│   └── preprint/               # Zenodo preprint (DOI: 10.5281/zenodo.18640105)
-│
-├── packaging/                  # Published packages
-│   └── qtara/                  # Python SDK (pip install qtara)
-│
-├── crates/                     # Rust implementations
-│   └── nsp/                    # Neural Security Protocol (Rust)
-│
-├── blogs/                      # Blog posts + field journal entries (fact-checked)
-├── scripts/                    # RSS fetcher, TARA tools, utilities
-│   ├── verify/                 # Citation & fact verification pipeline
-│   └── forms/                  # Consulting form & Apps Script handler
-│
-├── src/                        # Astro 5 website (qinnovate.com)
-│   ├── pages/                  # Page routes
-│   ├── components/             # Nav, Footer, Hourglass3D, etc.
-│   ├── layouts/                # BaseLayout, PageLayout
-│   ├── lib/                    # qif-constants.ts, threat-data.ts
-│   └── styles/                 # global.css (Tailwind 4)
-│
 ├── tools/                      # Practical security tools
 │   ├── macshield/              # macOS workstation hardening
-│   ├── neurowall/              # Neural firewall neckband (v0.5, OpenBCI + NSP + PQC)
+│   ├── neurowall/              # Neural firewall neckband
 │   └── autodidactive/          # Adaptive learning platform
 │
-├── archive/                    # Legacy projects (preserved)
-│   └── oni-framework/          # ONI 14-layer model
+├── blogs/                      # Blog posts + field journal entries
+├── scripts/                    # Site scripts + CI utilities
+│   └── verify/                 # Citation & fact verification pipeline
+│
+├── src/                        # Astro 5 website (qinnovate.com)
+│   ├── pages/
+│   ├── components/
+│   ├── layouts/
+│   ├── lib/                    # TS constants + utilities
+│   └── styles/
 │
 ├── docs/                       # Built site / GitHub Pages output
-└── .github/workflows/          # CI/CD (deploy, verify, field-journal-to-blog)
+└── .github/workflows/          # CI/CD
 ```
 
 ---

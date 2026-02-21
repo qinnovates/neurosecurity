@@ -6,7 +6,7 @@ description = "Staves bytecode compiler for BCI neural rendering"
 
 [dependencies]
 thiserror = "2.0"
-nsp-core = { path = "../nsp-core" }
+nsp-core = { path = "../../nsp/nsp-core" }
 
 [dev-dependencies]
 criterion = "0.5"
