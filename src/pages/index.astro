@@ -20,7 +20,7 @@ const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
 const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
-const neurorightsSet = new Set<string>();
+const neurorightsSet = new Set<string>(['EA']); // Equal Access is structural, not threat-mapped
 techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
 const neurorightsCount = neurorightsSet.size;
 
