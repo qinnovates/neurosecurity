@@ -45,7 +45,7 @@ Neurosecurity takes phenomena described by neuroscientists and concerns raised b
 | "People have a right to mental privacy" | NSP encrypts all neural data in transit with post-quantum cryptography |
 | "Cognitive liberty must be protected" | QIF coherence metric detects injected signals; Neurowall blocks unauthorized stimulation |
 | "Neural data is sensitive" | TARA catalogues 103 exfiltration vectors; NISS scores their severity |
-| "Consent must be informed" | Consent Complexity Index (CCI) quantifies how many neurorights each technique affects |
+| "Consent must be informed" | Informed consent framework with pediatric and incapacity protocols, regulatory crosswalk |
 
 ### From Neuroscience: Mechanisms Become Threat Models
 
@@ -64,6 +64,22 @@ Neurosecurity takes phenomena described by neuroscientists and concerns raised b
 | CVSS scoring | NISS: 5 neural-specific metrics that CVSS cannot express (biological impact, cognitive integrity, consent violation, reversibility, neuroplasticity) |
 | Zero-trust architecture | QIF: every signal validated at every band crossing; no implicit trust |
 | Threat detection and response | Neurowall: real-time coherence monitoring, spectral anomaly detection, CUSUM change-point analysis |
+
+---
+
+## Neurogovernance: GRC for the Brain
+
+Traditional IT security learned a painful lesson: Governance, Risk, and Compliance (GRC) was bolted on decades after systems shipped. Auditors checked boxes while attackers exploited gaps the compliance frameworks hadn't caught up to yet. That lag cost billions.
+
+Neurogovernance applies the three GRC pillars to BCIs from the start, not as an afterthought:
+
+| Pillar | What It Covers | Qinnovate Implementation |
+|--------|---------------|-------------------------|
+| **Governance** | Policies, rights, consent, ethics | [Neurorights mapping](NEUROETHICS_ALIGNMENT.md) (5 rights), [Informed Consent Framework](INFORMED_CONSENT_FRAMEWORK.md) (pediatric + incapacity), [Code of Ethics](ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md), [UNESCO alignment](UNESCO_ALIGNMENT.md) |
+| **Risk** | Threat assessment, severity scoring, attack modeling | [TARA](https://qinnovate.com/TARA/) (109 techniques), [NISS](https://qinnovate.com/scoring/) (neural severity scoring), [BCI Limits Equation](../qif-framework/qif-sec-guardrails.md) (physics constraints), DSM-5-TR diagnostic mappings |
+| **Compliance** | Regulatory adherence, audit trails, verification | [FDORA/FDA crosswalk](REGULATORY_COMPLIANCE.md), NIST SP 800-53 control mapping, ISO 27001 alignment, [Transparency audit trail](TRANSPARENCY.md), [citation verification pipeline](../scripts/verify/) |
+
+The difference from IT: we are building these before the first mass-market BCI ships, not after the first breach. The governance documents, risk assessments, and compliance mappings exist alongside the security tools, not in a separate department.
 
 ---
 
