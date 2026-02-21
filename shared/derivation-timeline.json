@@ -3,10 +3,10 @@
     "name": "QIF Derivation Timeline",
     "description": "Curated milestones from the QIF Derivation Log. Powers the dynamic timeline on qinnovate.com. Add new entries as breakthroughs occur — the timeline renders automatically.",
     "source": "QIF-DERIVATION-LOG.md",
-    "version": "1.0",
-    "last_updated": "2026-02-09",
-    "total_log_entries": 50,
-    "total_milestones": 18
+    "version": "1.1",
+    "last_updated": "2026-02-21",
+    "total_log_entries": 70,
+    "total_milestones": 30
   },
   "milestones": [
     {
@@ -292,6 +292,197 @@
         "framework_versions": 4,
         "components": ["QIF", "NSP", "NISS", "TARA"]
       }
+    },
+    {
+      "id": "M-019",
+      "entry": 51,
+      "date": "2026-02-13",
+      "title": "Classical-Quantum Transition",
+      "short": "Power-computation-uncertainty unified",
+      "description": "Derived the classical-quantum transition equation linking power dissipation to computation timing and quantum uncertainty relations. Extends Marblestone et al. (2013) into BCI security domain.",
+      "category": "framework",
+      "type": "aha",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 51
+      }
+    },
+    {
+      "id": "M-020",
+      "entry": 52,
+      "date": "2026-02-13",
+      "title": "Energy-Time Bounds",
+      "short": "Landauer + Margolus-Levitin applied",
+      "description": "Three fundamental physics bounds (Landauer, Margolus-Levitin, energy-time uncertainty) applied to the QI equation. Framework and whitepaper now grounded in thermodynamic limits.",
+      "category": "framework",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 52,
+        "physics_bounds": 3
+      }
+    },
+    {
+      "id": "M-021",
+      "entry": 53,
+      "date": "2026-02-13",
+      "title": "NISS-DSM Bridge",
+      "short": "Threats mapped to psychiatric diagnoses",
+      "description": "First formal BCI threat-to-psychiatric-diagnosis taxonomy. Neural Impact Chain links attack mechanisms through NISS metrics to DSM-5-TR diagnostic codes. Five diagnostic clusters identified.",
+      "category": "taxonomy",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 53,
+        "diagnostic_clusters": 5
+      }
+    },
+    {
+      "id": "M-022",
+      "entry": 54,
+      "date": "2026-02-14",
+      "title": "TARA Dual-Use Toggle",
+      "short": "Attacker vs. Doctor perspective",
+      "description": "Interactive 3D hourglass visualization with dual-use toggle. TARA reframed from threat catalog to mechanism registry where the same technique is an attack or a therapy depending on consent and dosage.",
+      "category": "atlas",
+      "type": "aha",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 54
+      }
+    },
+    {
+      "id": "M-023",
+      "entry": 55,
+      "date": "2026-02-14",
+      "title": "NSP Core Implemented",
+      "short": "Post-quantum crypto in Rust",
+      "description": "Rust implementation of NSP secure core: ML-KEM-768 key exchange, ML-DSA-65 signatures, 4-step handshake establishing AES-256-GCM session keys. The cryptographic layer is real code, not just a spec.",
+      "category": "protocol",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 55,
+        "crypto_primitives": ["ML-KEM-768", "ML-DSA-65", "AES-256-GCM"]
+      }
+    },
+    {
+      "id": "M-024",
+      "entry": 56,
+      "date": "2026-02-14",
+      "title": "Secure Pipeline Verified",
+      "short": "Runemate + NSP end-to-end",
+      "description": "End-to-end secure neural rendering pipeline working: HTML content compiled to Runemate Staves, encrypted via NSP post-quantum handshake, decrypted and rendered on the other end. The full stack connects.",
+      "category": "protocol",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 71,
+        "framework_version": "v4.0",
+        "log_entries": 56
+      }
+    },
+    {
+      "id": "M-025",
+      "entry": 60,
+      "date": "2026-02-18",
+      "title": "BCI Limits Equation",
+      "short": "Unified physics constraints for BCIs",
+      "description": "Live derivation of a unified constraint system coupling thermodynamics, electromagnetism, Moore's Law scaling, Shannon safety, Boltzmann detectability, and QIF coherence. No published paper unifies all these constraints. Novel contribution.",
+      "category": "framework",
+      "type": "aha",
+      "metrics": {
+        "techniques": 102,
+        "framework_version": "v6.2.1",
+        "log_entries": 60,
+        "constraint_equations": 10
+      }
+    },
+    {
+      "id": "M-026",
+      "entry": 65,
+      "date": "2026-02-18",
+      "title": "Physics Feasibility Tiers",
+      "short": "102 techniques classified by hardware gate",
+      "description": "All 102 TARA techniques classified by physics feasibility: 61 feasible now (Tier 0), 11 near-term 2026-2031 (Tier 1), 10 mid-term (Tier 2), 2 far-term (Tier 3), 18 no physics gate. Maps the future attack surface.",
+      "category": "registry",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 102,
+        "framework_version": "v6.2.1",
+        "log_entries": 65,
+        "tier_0": 61,
+        "tier_1": 11,
+        "tier_2": 10,
+        "tier_3": 2,
+        "tier_X": 18
+      }
+    },
+    {
+      "id": "M-027",
+      "entry": 66,
+      "date": "2026-02-18",
+      "title": "SSVEP Attack Discovered",
+      "short": "Subliminal visual frequency hijack",
+      "description": "Discovery of subliminal SSVEP frequency hijack attack. Flickering at 60 Hz is imperceptible to users but entrains visual cortex. Validated by Ming et al. (2023). New technique QIF-T0103 added, pushing TARA to 103 techniques.",
+      "category": "registry",
+      "type": "aha",
+      "metrics": {
+        "techniques": 103,
+        "framework_version": "v6.2.1",
+        "log_entries": 66
+      }
+    },
+    {
+      "id": "M-028",
+      "entry": 69,
+      "date": "2026-02-21",
+      "title": "NIST/ISO Compliance Bridge",
+      "short": "Neurorights to auditable controls",
+      "description": "Hardened mapping linking neurorights (Mental Integrity, Mental Privacy, Cognitive Liberty, Psychological Continuity) to auditable NIST SP 800-53 and ISO 27001 controls. Enables compliance-as-code verification for BCI manufacturers.",
+      "category": "governance",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 103,
+        "framework_version": "v6.2.1",
+        "log_entries": 69
+      }
+    },
+    {
+      "id": "M-029",
+      "entry": 70,
+      "date": "2026-02-21",
+      "title": "Wearable Architecture",
+      "short": "Neural firewall for smart glasses",
+      "description": "First concrete wearable neural firewall architecture for non-intrusive BCIs (smart glasses). Integrates NSP v0.5, Runemate Staves v2, Delta+LZ4 compression, and amortized post-quantum signatures via Merkle tree aggregation within 40mW thermal budget.",
+      "category": "hardware",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 103,
+        "framework_version": "v6.2.1",
+        "log_entries": 70,
+        "thermal_budget_mw": 40
+      }
+    },
+    {
+      "id": "M-030",
+      "entry": null,
+      "date": "2026-02-18",
+      "title": "Preprint v1.4 Published",
+      "short": "28-page paper on Zenodo",
+      "description": "Zenodo preprint v1.4 published. 28 pages, 6 figures, CC-BY 4.0, LaTeX source included. DOI: 10.5281/zenodo.18640105. Covers QIF, NISS, TARA, and NSP. First citable academic publication of the full framework.",
+      "category": "publication",
+      "type": "milestone",
+      "metrics": {
+        "techniques": 103,
+        "framework_version": "v6.2.1",
+        "pages": 28,
+        "figures": 6
+      }
     }
   ],
   "categories": {
@@ -301,7 +492,12 @@
     "scoring": { "label": "NISS Scoring", "color": "#f59e0b" },
     "registry": { "label": "Threat Atlas", "color": "#ef4444" },
     "atlas": { "label": "TARA Atlas", "color": "#10b981" },
-    "milestone": { "label": "Major Milestone", "color": "#ffffff" }
+    "milestone": { "label": "Major Milestone", "color": "#ffffff" },
+    "taxonomy": { "label": "Taxonomy", "color": "#f97316" },
+    "governance": { "label": "Governance", "color": "#a855f7" },
+    "hardware": { "label": "Hardware", "color": "#ec4899" },
+    "publication": { "label": "Publication", "color": "#22c55e" },
+    "validation": { "label": "Validation", "color": "#14b8a6" }
   },
   "types": {
     "milestone": { "label": "Milestone", "icon": "◆", "description": "Major deliverable or version release" },

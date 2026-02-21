@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.0.0",
   "scripts": {
-    "prebuild": "mkdir -p docs/data docs/papers && cp shared/qtara-registrar.json docs/data/qtara-registrar.json && cp shared/derivation-timeline.json docs/data/derivation-timeline.json && [ -f paper/main.pdf ] && cp paper/main.pdf docs/papers/qif-bci-security-2026.pdf || true",
+    "prebuild": "mkdir -p docs/data docs/papers && cp shared/qtara-registrar.json docs/data/qtara-registrar.json && cp shared/derivation-timeline.json docs/data/derivation-timeline.json && cp shared/validation-registry.json docs/data/validation-registry.json && [ -f paper/main.pdf ] && cp paper/main.pdf docs/papers/qif-bci-security-2026.pdf || true",
     "dev": "npm run prebuild && astro dev",
     "build": "npm run prebuild && astro build",
     "preview": "astro preview",
