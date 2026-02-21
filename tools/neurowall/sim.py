@@ -230,9 +230,19 @@ class SignalMonitor:
     window_size: int = 125           # 0.5s at 250Hz
     calibration_windows: int = 4     # 2s calibration at 0.5s/window
     trajectory_alpha: float = 0.15   # EWMA smoothing factor for trajectory tracking
-    trajectory_threshold: float = 0.03  # Cs drift from baseline to flag trajectory anomaly
+    trajectory_threshold: float = 0.06  # Cs drift from baseline to flag trajectory anomaly
     target_baseline_cs: float = 0.7  # Target Cs for clean signal after calibration
     auto_calibrate_w2: bool = True   # Auto-adjust w2 during calibration
+
+    # Adaptive spectral peak detection: learns spectral profile during
+    # calibration and flags novel peaks post-calibration. Catches any SSVEP
+    # at frequencies not in the hardcoded notch bank (e.g., 13Hz).
+    spectral_peak_sigma: float = 5.0  # sigma threshold for novel peak detection
+    _spectral_peak_detected: bool = False
+    _spectral_peak_count: int = 0
+    _calibration_spectra: List[np.ndarray] = field(default_factory=list)
+    _baseline_spectrum_mean: Optional[np.ndarray] = None
+    _baseline_spectrum_std: Optional[np.ndarray] = None
 
     # Internal state
     _buffer: List[float] = field(default_factory=list)
@@ -257,11 +267,20 @@ class SignalMonitor:
     # closed-loop cascade). If anomaly scores are growing exponentially,
     # the log-transformed scores will show a strong positive linear trend.
     _growth_history: List[float] = field(default_factory=list)
-    _growth_window: int = 6          # number of recent scores to track
-    _growth_slope_threshold: float = 0.3  # minimum log-linear slope
-    _growth_r2_threshold: float = 0.7    # minimum R^2 for trend confidence
+    _growth_window: int = 8          # number of recent scores to track (was 6)
+    _growth_slope_threshold: float = 0.2  # minimum log-linear slope (was 0.3)
+    _growth_r2_threshold: float = 0.5    # minimum R^2 for trend confidence (was 0.7)
     _growth_detected: bool = False
     _growth_detection_count: int = 0
+    # CUSUM (Cumulative Sum) detector: catches sustained upward drift in
+    # anomaly scores that log-linear regression might miss due to noise.
+    # CUSUM accumulates positive deviations from baseline. When the
+    # cumulative sum exceeds a threshold, it flags a persistent shift.
+    _cusum_value: float = 0.0
+    _cusum_threshold: float = 15.0   # cumulative sum threshold to flag
+    _cusum_drift: float = 2.0        # allowable drift (only accumulate above this)
+    _cusum_detected: bool = False
+    _cusum_detection_count: int = 0
 
     def _compute_sigma_phi_sq(self, buf_ac: np.ndarray) -> float:
         """Phase variance via Hilbert transform on alpha-band signal.
@@ -394,6 +413,12 @@ class SignalMonitor:
             self._calibration_cs.append(cs)
             self._calibration_h_tau.append(h_tau)
             self._calibration_sigma_phi.append(sigma_phi)
+            # Record log-power spectrum for adaptive spectral peak detection.
+            # Log-transform stabilizes variance of spectral power (chi-squared
+            # with 2 DOF has std=mean; after log, std is approximately constant).
+            fft_cal = np.fft.rfft(buf_ac)
+            power_cal = np.abs(fft_cal[1:]) ** 2 + 1e-10  # skip DC, floor
+            self._calibration_spectra.append(np.log(power_cal))
             if len(self._calibration_cs) >= self.calibration_windows:
                 # Auto-calibrate w2 to target Cs ~ target_baseline_cs
                 # Given Cs = exp(-(w1*sigma_phi + w2*H_tau)), solve for w2:
@@ -419,6 +444,19 @@ class SignalMonitor:
                 self._baseline_cs_std = max(self._baseline_cs_std, 0.01)
                 # Initialize EWMA to baseline for trajectory tracking
                 self._cs_ewma = self._baseline_cs_mean
+
+                # Compute spectral baseline for adaptive peak detection
+                if self._calibration_spectra:
+                    spectra_arr = np.array(self._calibration_spectra)
+                    self._baseline_spectrum_mean = np.mean(spectra_arr, axis=0)
+                    self._baseline_spectrum_std = np.std(spectra_arr, axis=0)
+                    # Floor std to avoid division by zero on stable bins.
+                    # For log-power, std is approximately constant across bins
+                    # (~0.5-1.5 for chi-squared(2) after log), so a fixed floor works.
+                    self._baseline_spectrum_std = np.maximum(
+                        self._baseline_spectrum_std, 0.3
+                    )
+
                 self._calibrated = True
                 return 0.0, {
                     "status": "calibrated",
@@ -464,6 +502,43 @@ class SignalMonitor:
             anomaly_score = max(anomaly_score, trajectory_anomaly)
             self._trajectory_anomaly_count += 1
 
+        # --- Adaptive spectral peak detection (defeats novel-freq SSVEP) ---
+        # Compare current power spectrum to calibration baseline. A SUSTAINED
+        # spectral peak (present in 3+ consecutive windows at the same bin)
+        # that exceeds baseline by spectral_peak_sigma standard deviations
+        # is flagged as a novel attack frequency. Single-window spikes from
+        # eye blinks or transients are ignored.
+        spectral_flag = False
+        if self._baseline_spectrum_mean is not None:
+            fft_cur = np.fft.rfft(buf_ac)
+            power_cur = np.log(np.abs(fft_cur[1:]) ** 2 + 1e-10)
+            n_bins = min(len(power_cur), len(self._baseline_spectrum_mean))
+            spectral_z = ((power_cur[:n_bins] - self._baseline_spectrum_mean[:n_bins])
+                          / self._baseline_spectrum_std[:n_bins])
+            # Find bins with peaks (skip DC and very low freq bins 0-3)
+            peak_bins = set(int(b) for b in np.where(spectral_z[4:] > self.spectral_peak_sigma)[0] + 4)
+            # Track sustained peaks: a bin must exceed threshold in 3+ of last 4 windows
+            if not hasattr(self, '_spectral_peak_history'):
+                self._spectral_peak_history = []
+            self._spectral_peak_history.append(peak_bins)
+            if len(self._spectral_peak_history) > 4:
+                self._spectral_peak_history.pop(0)
+            # Check for bins that appear in 3+ of the last 4 windows
+            if len(self._spectral_peak_history) >= 3:
+                all_bins = set()
+                for ph in self._spectral_peak_history:
+                    all_bins.update(ph)
+                for b in all_bins:
+                    count = sum(1 for ph in self._spectral_peak_history if b in ph)
+                    if count >= 3:
+                        spectral_flag = True
+                        self._spectral_peak_detected = True
+                        self._spectral_peak_count += 1
+                        max_z = float(spectral_z[b]) if b < len(spectral_z) else 0.0
+                        spectral_anomaly = max(max_z * 0.3, 3.0)
+                        anomaly_score = max(anomaly_score, spectral_anomaly)
+                        break  # one sustained peak is enough
+
         # --- Exponential growth detector (defeats QIF-T0023 cascade) ---
         # Tracks last N anomaly scores. If log-transformed scores show a
         # strong positive linear trend (high slope + high R^2), the signal
@@ -499,6 +574,22 @@ class SignalMonitor:
                     growth_anomaly = slope * 5.0  # scale slope to anomaly score
                     anomaly_score = max(anomaly_score, growth_anomaly)
 
+        # --- CUSUM detector (catches persistent anomaly drift) ---
+        # Accumulates positive deviations of the BASE z-score above the
+        # drift allowance. Only fires the anomaly boost after the threshold
+        # is crossed, then resets. This avoids runaway accumulation on clean signal.
+        cusum_flag = False
+        base_score = max(0.0, z_drop)
+        deviation = base_score - self._cusum_drift
+        self._cusum_value = max(0.0, self._cusum_value + deviation)
+        if self._cusum_value > self._cusum_threshold:
+            cusum_flag = True
+            self._cusum_detected = True
+            self._cusum_detection_count += 1
+            cusum_anomaly = 3.0  # fixed boost when CUSUM triggers
+            anomaly_score = max(anomaly_score, cusum_anomaly)
+            self._cusum_value = 0.0  # reset after trigger
+
         if anomaly_score > 1.5:
             self._anomaly_count += 1
 
@@ -513,7 +604,10 @@ class SignalMonitor:
             "cs_ewma": self._cs_ewma,
             "trajectory_drift": trajectory_drift,
             "trajectory_flag": trajectory_flag,
+            "spectral_flag": spectral_flag,
             "growth_flag": growth_flag,
+            "cusum_flag": cusum_flag,
+            "cusum_value": self._cusum_value,
         }
 
     @property
@@ -527,8 +621,12 @@ class SignalMonitor:
             "windows_seen": self._windows_seen,
             "anomaly_count": self._anomaly_count,
             "trajectory_anomaly_count": self._trajectory_anomaly_count,
+            "spectral_peak_detected": self._spectral_peak_detected,
+            "spectral_peak_count": self._spectral_peak_count,
             "growth_detected": self._growth_detected,
             "growth_detection_count": self._growth_detection_count,
+            "cusum_detected": self._cusum_detected,
+            "cusum_detection_count": self._cusum_detection_count,
             "last_cs": self._last_cs,
             "cs_ewma": self._cs_ewma,
             "baseline_cs": self._baseline_cs_mean if self._calibrated else None,
@@ -1001,7 +1099,7 @@ def run_simulation(args):
     verbose = args.verbose
 
     print("=" * 70)
-    print("  NEUROWALL v0.5 SIM — Multi-band EEG + Growth Detector + Coherence + NISS + NSP")
+    print("  NEUROWALL v0.6 SIM — Spectral Peak + CUSUM + Growth + Coherence + NISS + NSP")
     print("=" * 70)
     print(f"  Sample rate:    {SAMPLE_RATE} Hz")
     print(f"  Duration:       {duration}s ({int(duration * SAMPLE_RATE)} samples)")

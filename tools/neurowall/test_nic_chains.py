@@ -77,7 +77,7 @@ def generate_clean(duration_s: float, fs: int) -> np.ndarray:
 
 def generate_ssvep_15hz(duration_s: float, fs: int) -> np.ndarray:
     """Known SSVEP attack at 15Hz. Both detectors should catch this."""
-    return generate_eeg(duration_s, fs, attack_freq=15.0, attack_start=2.0)
+    return generate_eeg(duration_s, fs, attack_freq=15.0, attack_start=5.0)
 
 
 def generate_ssvep_novel(duration_s: float, fs: int) -> np.ndarray:
@@ -88,7 +88,7 @@ def generate_ssvep_novel(duration_s: float, fs: int) -> np.ndarray:
     detector won't flag it (no bin match). Only the coherence monitor
     can catch the spectral distortion.
     """
-    return generate_eeg(duration_s, fs, attack_freq=13.0, attack_start=2.0)
+    return generate_eeg(duration_s, fs, attack_freq=13.0, attack_start=5.0)
 
 
 def generate_impedance_spike(duration_s: float, fs: int) -> np.ndarray:
@@ -100,12 +100,12 @@ def generate_drift(duration_s: float, fs: int) -> np.ndarray:
     """Slow DC drift (simplified QIF-T0066).
     SSVEP detector blind. Monitor catches via spectral entropy shift.
     """
-    return generate_eeg(duration_s, fs, drift=True, attack_start=2.0)
+    return generate_eeg(duration_s, fs, drift=True, attack_start=5.0)
 
 
 def generate_flood(duration_s: float, fs: int) -> np.ndarray:
     """QIF-T0026 neuronal flooding. Broadband saturation."""
-    return generate_eeg(duration_s, fs, flood=True, attack_start=2.0)
+    return generate_eeg(duration_s, fs, flood=True, attack_start=5.0)
 
 
 def generate_boiling_frog(duration_s: float, fs: int) -> np.ndarray:
@@ -148,7 +148,7 @@ def generate_boiling_frog(duration_s: float, fs: int) -> np.ndarray:
     # Each 0.5s window sees only ~0.0005V change, well within noise floor.
     # But after 60+ seconds, displacement would reach 0.06V (meaningful).
     # This tests whether the monitor catches sub-threshold accumulation.
-    attack_start = 2.0
+    attack_start = 5.0
     drift_mask = t >= attack_start
     drift_region = t[drift_mask] - attack_start
     # Ultra-slow: 0.001V/s (vs 1.5V over 3s for the simple drift)
@@ -194,8 +194,8 @@ def generate_envelope_modulation(duration_s: float, fs: int) -> np.ndarray:
     signal += pink
     signal += 0.01 * np.sin(2 * np.pi * 60 * t)
 
-    # Envelope modulation attack starting at t=2s
-    attack_start = 2.0
+    # Envelope modulation attack starting at t=5s (after calibration)
+    attack_start = 5.0
     attack_mask = t >= attack_start
 
     # Carrier at 80 Hz (highest we can do at 250Hz sample rate, Nyquist=125Hz)
@@ -254,9 +254,9 @@ def generate_phase_replay(duration_s: float, fs: int) -> np.ndarray:
     signal += pink
     signal += 0.01 * np.sin(2 * np.pi * 60 * t)
 
-    # At t=2s, swap to a DIFFERENT clean EEG (replay).
+    # At t=5s, swap to a DIFFERENT clean EEG (replay).
     # This has the same statistical properties but different noise seed.
-    attack_start = 2.0
+    attack_start = 5.0
     attack_mask = t >= attack_start
 
     # Generate replay signal with different random seed
@@ -314,8 +314,8 @@ def generate_closed_loop_cascade(duration_s: float, fs: int) -> np.ndarray:
     signal += pink
     signal += 0.01 * np.sin(2 * np.pi * 60 * t)
 
-    # Closed-loop cascade: exponential growth starting at t=2s
-    attack_start = 2.0
+    # Closed-loop cascade: exponential growth starting at t=5s
+    attack_start = 5.0
     attack_mask = t >= attack_start
     attack_t = t[attack_mask] - attack_start
 
@@ -596,9 +596,9 @@ def run_scenario(
     ssvep_triggered = False
     ssvep_max_ratio = 0.0
 
-    # Separate SSVEP detection buffer (post-attack only, from t=2s onward)
+    # Separate SSVEP detection buffer (post-attack only, from t=5s onward)
     ssvep_check_buffer: List[float] = []
-    attack_start_sample = int(2.0 * SAMPLE_RATE)
+    attack_start_sample = int(5.0 * SAMPLE_RATE)
 
     if verbose:
         print(f"\n  --- Per-window diagnostics for: {scenario.name} ---")
@@ -865,18 +865,24 @@ Scenarios include both "detectable" attacks (baseline validation) and
     )
     parser.add_argument("--scenario", type=int, default=None,
                         help="Run only this scenario number (0-9)")
-    parser.add_argument("--duration", type=float, default=10.0,
-                        help="Simulation duration in seconds (default: 10)")
+    parser.add_argument("--duration", type=float, default=15.0,
+                        help="Simulation duration in seconds (default: 15)")
     parser.add_argument("--verbose", action="store_true",
                         help="Show per-window coherence diagnostics")
     parser.add_argument("--sweep", action="store_true",
                         help="Duration sweep: run at 10, 20, 30, 60s")
     parser.add_argument("--runs", type=int, default=1,
                         help="Statistical runs per scenario (default: 1)")
+    parser.add_argument("--roc", action="store_true",
+                        help="ROC analysis: sweep thresholds x durations")
+    parser.add_argument("--roc-runs", type=int, default=30,
+                        help="Runs per threshold-duration combo (default: 30)")
 
     args = parser.parse_args()
 
-    if args.sweep:
+    if args.roc:
+        run_roc_analysis(args)
+    elif args.sweep:
         run_duration_sweep(args)
     elif args.runs > 1:
         run_statistical(args)
@@ -1054,6 +1060,127 @@ def run_statistical(args):
 
     print("  " + "-" * 80)
     print(f"\n  Detection threshold: anomaly_count > 8 (simplified for stats mode)")
+    print()
+
+
+def run_roc_analysis(args):
+    """ROC curve analysis: sweep thresholds x durations to find optimal operating point.
+
+    For each (threshold, duration) pair, runs N scenarios and computes:
+    - FPR: fraction of clean signal runs that exceed the threshold
+    - TPR per attack: fraction of attack runs that exceed the threshold
+
+    Outputs a JSON file (roc_data.json) for the visualization script.
+    """
+    import json
+
+    thresholds = [2, 4, 6, 8, 10, 12, 15, 20]
+    durations = [10, 15, 20, 30]
+    n_runs = args.roc_runs
+    scenarios = list(SCENARIOS)
+
+    print("=" * 90)
+    print("  NEUROWALL ROC ANALYSIS")
+    print(f"  Thresholds: {thresholds}")
+    print(f"  Durations: {durations}s")
+    print(f"  Runs per combo: {n_runs}")
+    print("=" * 90)
+    print()
+
+    roc_data = {
+        "thresholds": thresholds,
+        "durations": durations,
+        "n_runs": n_runs,
+        "scenarios": {},
+    }
+
+    for scenario in scenarios:
+        print(f"  Scenario {scenario.id}: {scenario.name[:40]}...")
+        scenario_data = {}
+
+        for dur in durations:
+            dur_data = {"anomaly_counts": [], "max_scores": [],
+                        "l1_detections": 0, "ssvep_detections": 0}
+
+            for run_idx in range(n_runs):
+                s_copy = AttackScenario(
+                    id=scenario.id, name=scenario.name, tara_id=scenario.tara_id,
+                    tactic=scenario.tactic, nic_chain=scenario.nic_chain,
+                    niss_vector=scenario.niss_vector, severity=scenario.severity,
+                    description=scenario.description,
+                    detection_expected=scenario.detection_expected,
+                    generate_fn=scenario.generate_fn,
+                )
+                run_seed = 42 + scenario.id + 1000 * run_idx
+                result = run_scenario(s_copy, duration=float(dur), seed=run_seed)
+                dur_data["anomaly_counts"].append(result.monitor_anomaly_count)
+                dur_data["max_scores"].append(float(result.max_anomaly_score))
+                if result.l1_blocked > 0:
+                    dur_data["l1_detections"] += 1
+                if result.ssvep_detected:
+                    dur_data["ssvep_detections"] += 1
+
+            scenario_data[str(dur)] = dur_data
+
+        roc_data["scenarios"][str(scenario.id)] = {
+            "name": scenario.name,
+            "data": scenario_data,
+        }
+
+    # Compute ROC points
+    print("\n  ROC OPERATING POINTS")
+    print("  " + "-" * 90)
+    print(f"  {'Duration':>8} {'Thresh':>6} {'FPR':>6} ", end="")
+    for s in scenarios:
+        if s.id > 0:
+            print(f" {'S'+str(s.id):>4}", end="")
+    print()
+    print("  " + "-" * 90)
+
+    roc_points = []
+    for dur in durations:
+        clean_counts = roc_data["scenarios"]["0"]["data"][str(dur)]["anomaly_counts"]
+        for thresh in thresholds:
+            fpr = sum(1 for c in clean_counts if c > thresh) / len(clean_counts)
+            row = {"duration": dur, "threshold": thresh, "fpr": fpr, "tpr": {}}
+            print(f"  {dur:>6}s {thresh:>6} {fpr:>5.0%} ", end="")
+
+            for s in scenarios:
+                if s.id == 0:
+                    continue
+                s_data = roc_data["scenarios"][str(s.id)]["data"][str(dur)]
+                # Detection = L1 OR SSVEP OR anomaly_count > threshold
+                tpr = sum(1 for i, c in enumerate(s_data["anomaly_counts"])
+                          if c > thresh or s_data["l1_detections"] > 0
+                          or s_data["ssvep_detections"] > 0) / n_runs
+                row["tpr"][str(s.id)] = tpr
+                print(f" {tpr:>4.0%}", end="")
+            print()
+            roc_points.append(row)
+
+    print("  " + "-" * 90)
+
+    # Find optimal operating point: FPR < 10%, max average TPR
+    print("\n  OPTIMAL OPERATING POINTS (FPR < 10%):")
+    best = None
+    for rp in roc_points:
+        if rp["fpr"] <= 0.10:
+            avg_tpr = np.mean(list(rp["tpr"].values()))
+            if best is None or avg_tpr > best[1]:
+                best = (rp, avg_tpr)
+    if best:
+        rp = best[0]
+        print(f"    Duration={rp['duration']}s, Threshold={rp['threshold']}, "
+              f"FPR={rp['fpr']:.0%}, Avg TPR={best[1]:.0%}")
+    else:
+        print("    No operating point achieves FPR < 10%")
+
+    # Save ROC data for visualization
+    roc_data["roc_points"] = roc_points
+    roc_file = "roc_data.json"
+    with open(roc_file, "w") as f:
+        json.dump(roc_data, f, indent=2)
+    print(f"\n  ROC data saved to {roc_file}")
     print()
 
 
