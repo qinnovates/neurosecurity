@@ -528,10 +528,10 @@ export function getTaraStats() {
 
 /** Neurorights statistics */
 export function getNeurorightStats() {
-  const RIGHTS = ['MP', 'CL', 'MI', 'PC'] as const;
+  const RIGHTS = ['MP', 'CL', 'MI', 'PC', 'EA'] as const;
   const NAMES: Record<string, string> = {
     MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity',
-    PC: 'Psychological Continuity',
+    PC: 'Psychological Continuity', EA: 'Equal Access',
   };
   const counts: Record<string, number> = {};
   for (const r of RIGHTS) counts[r] = 0;
