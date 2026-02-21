@@ -18,7 +18,17 @@ macshield automatically hardens your Mac when you connect to untrusted WiFi and 
 
 VPNs encrypt traffic at Layer 3+, but the attacks above happen at Layer 2 (the local network), below the VPN tunnel. A VPN cannot block ARP spoofing, hostname discovery, or NetBIOS enumeration. In the [QIF security model](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-TRUTH.md), VPNs operate at the **S3 band** (Application); macshield defends at **S1** (Analog Front-End).
 
-Reputable VPNs cost $50-100/year. Free VPNs are often worse than nothing (84% leak traffic, 38% contain malware per UC Berkeley/CSIRO). macshield gives meaningful Layer 2 protection at zero cost. This aligns with the neuroright of **Fair Access to Mental Augmentation**: security tools for neurotechnology users should not be gated behind ability to pay. If BCI devices are going to read and write neural data, the tools that protect those signals must be accessible to everyone, not just funded labs and corporate teams.
+Reputable VPNs cost $50-100/year. Free VPNs are often worse than nothing (84% leak traffic, 38% contain malware per UC Berkeley/CSIRO). macshield gives meaningful Layer 2 protection at zero cost.
+
+### Neurorights Alignment
+
+macshield exists because of what the [NeuroRights Foundation](https://neurorightsfoundation.org) and researchers like Yuste, Ienca, and Andorno have been arguing for years: neurotechnology needs rights-aware infrastructure, not just ethics papers. Five neurorights are directly relevant:
+
+- **Fair Access to Mental Augmentation** — Security tools should not be gated behind ability to pay. If BCI devices are going to read and write neural data, the tools that protect those signals must be accessible to everyone, not just funded labs and corporate teams.
+- **Mental Privacy** — Your neural data is yours. macshield prevents hostname leaks and network reconnaissance that could identify a BCI user on a public network, the first step in any targeted attack chain.
+- **Personal Identity** — Hostname randomization prevents your real name from being broadcast to every device on the local network. Your identity on public WiFi should be your choice.
+- **Cognitive Liberty** — You should be free to use neurotechnology without surveillance. Zero telemetry means macshield itself never watches you. No analytics, no network calls, no data collection.
+- **Protection from Algorithmic Bias** — macshield is open-source, auditable bash and Rust. No black-box binaries, no opaque ML models deciding what's "safe." You can read every line of code that runs on your machine.
 
 ## Key Features
 
