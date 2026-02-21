@@ -231,12 +231,17 @@ class SignalMonitor:
     calibration_windows: int = 4     # 2s calibration at 0.5s/window
     trajectory_alpha: float = 0.15   # EWMA smoothing factor for trajectory tracking
     trajectory_threshold: float = 0.03  # Cs drift from baseline to flag trajectory anomaly
+    target_baseline_cs: float = 0.7  # Target Cs for clean signal after calibration
+    auto_calibrate_w2: bool = True   # Auto-adjust w2 during calibration
 
     # Internal state
     _buffer: List[float] = field(default_factory=list)
     _baseline_cs_mean: float = 0.0
     _baseline_cs_std: float = 0.0
     _calibration_cs: List[float] = field(default_factory=list)
+    _calibration_h_tau: List[float] = field(default_factory=list)
+    _calibration_sigma_phi: List[float] = field(default_factory=list)
+    _w2: float = 3.0  # will be auto-calibrated if auto_calibrate_w2=True
     _calibrated: bool = False
     _anomaly_count: int = 0
     _windows_seen: int = 0
@@ -247,12 +252,16 @@ class SignalMonitor:
     # (defeats QIF-T0066 "boiling frog" adiabatic evasion)
     _cs_ewma: float = 0.0
     _trajectory_anomaly_count: int = 0
-    # DC drift tracking: REMOVED in v0.4.
-    # Attempted to track window_dc (mean before AC coupling) vs calibration
-    # baseline. Failed because the random walk component in synthetic EEG
-    # naturally diverges from the 2s calibration window, creating 14+ sigma
-    # false positives on clean signal by t=6s. Real DC drift detection needs
-    # hardware reference electrodes (Phase 1). See DERIVATION-LOG Entry 007.
+    # Exponential growth detector: tracks recent anomaly scores and fits
+    # log-linear regression to detect accelerating attacks (QIF-T0023
+    # closed-loop cascade). If anomaly scores are growing exponentially,
+    # the log-transformed scores will show a strong positive linear trend.
+    _growth_history: List[float] = field(default_factory=list)
+    _growth_window: int = 6          # number of recent scores to track
+    _growth_slope_threshold: float = 0.3  # minimum log-linear slope
+    _growth_r2_threshold: float = 0.7    # minimum R^2 for trend confidence
+    _growth_detected: bool = False
+    _growth_detection_count: int = 0
 
     def _compute_sigma_phi_sq(self, buf_ac: np.ndarray) -> float:
         """Phase variance via Hilbert transform on alpha-band signal.
@@ -342,14 +351,13 @@ class SignalMonitor:
         h_tau = self._compute_h_tau(buf_ac)
 
         # Calibration weights (see QIF-TRUTH.md §4.2)
-        # These are the "open calibration question" mentioned there.
-        # For single-channel Phase 0, empirically tuned:
-        #   Clean signal: w1*8.0 + w2*0.06 ~ 0.34 -> Cs ~ 0.71 (High)
-        #   Flood attack: w1*9.5 + w2*0.9  ~ 2.89 -> Cs ~ 0.06 (Critical)
-        w1 = 0.02  # Phase weight (low: single-channel phase is noisy)
-        w2 = 3.0   # Transport weight (high: spectral shape is informative)
+        # w1: Phase weight (low: single-channel phase is inherently noisy)
+        # w2: Transport weight (auto-calibrated during calibration to target
+        #     baseline Cs ~ 0.7). For legacy single-band EEG: w2 ~ 3.0.
+        #     For multi-band EEG: w2 ~ 0.85 (higher H_tau baseline).
+        w1 = 0.02
 
-        exponent = w1 * sigma_phi_sq + w2 * h_tau
+        exponent = w1 * sigma_phi_sq + self._w2 * h_tau
         cs = np.exp(-exponent)
 
         return float(cs), sigma_phi_sq, h_tau
@@ -384,14 +392,30 @@ class SignalMonitor:
         # Calibration phase: learn what Cs looks like for clean signal
         if not self._calibrated:
             self._calibration_cs.append(cs)
+            self._calibration_h_tau.append(h_tau)
+            self._calibration_sigma_phi.append(sigma_phi)
             if len(self._calibration_cs) >= self.calibration_windows:
-                self._baseline_cs_mean = float(np.mean(self._calibration_cs))
-                self._baseline_cs_std = float(np.std(self._calibration_cs))
-                # Floor at 0.01 to prevent normal Cs variance from creating
-                # huge z-scores. Without this, baseline_std of ~0.002 means
-                # a Cs drop from 0.72 to 0.65 (normal variance) gives z=35,
-                # causing false positives. With floor of 0.01, same drop
-                # gives z=7, still flagged but less extreme. See Entry 006.
+                # Auto-calibrate w2 to target Cs ~ target_baseline_cs
+                # Given Cs = exp(-(w1*sigma_phi + w2*H_tau)), solve for w2:
+                #   -ln(target) = w1*mean_phi + w2*mean_h
+                #   w2 = (-ln(target) - w1*mean_phi) / mean_h
+                if self.auto_calibrate_w2:
+                    mean_h = float(np.mean(self._calibration_h_tau))
+                    mean_phi = float(np.mean(self._calibration_sigma_phi))
+                    if mean_h > 0.001:
+                        target_exp = -np.log(self.target_baseline_cs)
+                        w2_new = (target_exp - 0.02 * mean_phi) / mean_h
+                        self._w2 = max(0.1, min(w2_new, 10.0))  # clamp to sane range
+
+                # Recompute Cs with calibrated w2
+                recalibrated_cs = []
+                for i in range(len(self._calibration_cs)):
+                    exp_val = (0.02 * self._calibration_sigma_phi[i]
+                               + self._w2 * self._calibration_h_tau[i])
+                    recalibrated_cs.append(float(np.exp(-exp_val)))
+
+                self._baseline_cs_mean = float(np.mean(recalibrated_cs))
+                self._baseline_cs_std = float(np.std(recalibrated_cs))
                 self._baseline_cs_std = max(self._baseline_cs_std, 0.01)
                 # Initialize EWMA to baseline for trajectory tracking
                 self._cs_ewma = self._baseline_cs_mean
@@ -399,6 +423,7 @@ class SignalMonitor:
                 return 0.0, {
                     "status": "calibrated",
                     "baseline_cs": self._baseline_cs_mean,
+                    "w2": self._w2,
                     "sigma_phi": sigma_phi,
                     "h_tau": h_tau,
                 }
@@ -439,6 +464,41 @@ class SignalMonitor:
             anomaly_score = max(anomaly_score, trajectory_anomaly)
             self._trajectory_anomaly_count += 1
 
+        # --- Exponential growth detector (defeats QIF-T0023 cascade) ---
+        # Tracks last N anomaly scores. If log-transformed scores show a
+        # strong positive linear trend (high slope + high R^2), the signal
+        # has exponentially growing anomalies. This catches closed-loop
+        # cascade attacks that start invisible but accelerate over time.
+        #
+        # Why log-linear? An exponential y = a*e^(kt) becomes log(y) = log(a) + kt,
+        # which is linear. So a high R^2 on log-transformed data specifically
+        # identifies exponential growth, not just increasing scores.
+        growth_flag = False
+        self._growth_history.append(max(anomaly_score, 0.01))  # floor to avoid log(0)
+        if len(self._growth_history) > self._growth_window:
+            self._growth_history.pop(0)
+
+        if len(self._growth_history) >= self._growth_window:
+            log_scores = np.log(np.array(self._growth_history))
+            x = np.arange(len(log_scores), dtype=float)
+            # Simple linear regression: slope and R^2
+            x_mean = np.mean(x)
+            y_mean = np.mean(log_scores)
+            ss_xy = np.sum((x - x_mean) * (log_scores - y_mean))
+            ss_xx = np.sum((x - x_mean) ** 2)
+            ss_yy = np.sum((log_scores - y_mean) ** 2)
+            if ss_xx > 0 and ss_yy > 0:
+                slope = ss_xy / ss_xx
+                r_squared = (ss_xy ** 2) / (ss_xx * ss_yy)
+                if (slope > self._growth_slope_threshold and
+                        r_squared > self._growth_r2_threshold and
+                        self._growth_history[-1] > 1.0):  # recent score must be non-trivial
+                    growth_flag = True
+                    self._growth_detected = True
+                    self._growth_detection_count += 1
+                    growth_anomaly = slope * 5.0  # scale slope to anomaly score
+                    anomaly_score = max(anomaly_score, growth_anomaly)
+
         if anomaly_score > 1.5:
             self._anomaly_count += 1
 
@@ -453,6 +513,7 @@ class SignalMonitor:
             "cs_ewma": self._cs_ewma,
             "trajectory_drift": trajectory_drift,
             "trajectory_flag": trajectory_flag,
+            "growth_flag": growth_flag,
         }
 
     @property
@@ -466,6 +527,8 @@ class SignalMonitor:
             "windows_seen": self._windows_seen,
             "anomaly_count": self._anomaly_count,
             "trajectory_anomaly_count": self._trajectory_anomaly_count,
+            "growth_detected": self._growth_detected,
+            "growth_detection_count": self._growth_detection_count,
             "last_cs": self._last_cs,
             "cs_ewma": self._cs_ewma,
             "baseline_cs": self._baseline_cs_mean if self._calibrated else None,
@@ -779,38 +842,93 @@ def generate_eeg(
     spike_time: float = None,
     drift: bool = False,
     flood: bool = False,
+    multiband: bool = True,
 ) -> np.ndarray:
     """Generate synthetic EEG with optional attacks.
 
-    Base signal: alpha rhythm (10Hz, 20uV) + background pink noise.
+    Base signal modes:
+      multiband=True (v0.5 default): Band-limited noise for each EEG band
+        (delta, theta, alpha, beta, gamma) with physiological power ratios.
+        Produces a realistic 1/f-like spectrum with stable H_tau.
+      multiband=False (v0.1-v0.4 legacy): Single 10Hz sinusoid + random walk.
 
     Attack modes:
       --attack: Injects a strong sinusoid at a target SSVEP frequency.
-                Detectable by both SSVEP signature detector AND coherence monitor.
       --spike:  Sudden >2.5V jump to trigger impedance guard.
       --drift:  Slow DC drift that changes the signal baseline over time.
-                INVISIBLE to SSVEP detector. Only coherence monitor catches it
-                (via gain variance / spectral entropy shift).
-      --flood:  Neuronal flooding (QIF-T0026): broadband saturation that
-                overwhelms normal firing patterns. Exceeds BCI thermal/power
-                limits. INVISIBLE to SSVEP detector (no single target freq).
-                Coherence monitor catches it via spectral entropy collapse
-                and phase disruption.
+      --flood:  Neuronal flooding (QIF-T0026): broadband saturation.
     """
     n_samples = int(duration_s * fs)
     t = np.arange(n_samples) / fs
 
-    # Base alpha rhythm (10Hz, ~20uV peak, scaled to 0-5V ADC range)
-    signal = 2.5 + 0.05 * np.sin(2 * np.pi * 10 * t)
+    if multiband:
+        # Multi-band EEG generator (v0.5)
+        # Generates band-limited noise for each canonical EEG frequency band,
+        # weighted by physiological power ratios. This produces a more realistic
+        # 1/f-like spectrum than a simple random walk, giving more stable H_tau
+        # and reducing false positive rates.
+        #
+        # Power ratios approximate resting eyes-open EEG:
+        #   Delta (0.5-4Hz):  high power, slow waves
+        #   Theta (4-8Hz):    moderate power
+        #   Alpha (8-13Hz):   dominant rhythm (eyes-closed would be higher)
+        #   Beta (13-30Hz):   low power, cortical activation
+        #   Gamma (30-100Hz): very low power
+        signal = np.full(n_samples, 2.5)  # DC offset (ADC centered at 2.5V)
 
-    # Background noise (pink-ish, 1/f approximation)
-    white = np.random.randn(n_samples)
-    pink = np.cumsum(white) * 0.001
-    pink -= np.mean(pink)
-    signal += pink
+        white = np.random.randn(n_samples)
 
-    # Small 60Hz powerline artifact
-    signal += 0.01 * np.sin(2 * np.pi * 60 * t)
+        # Delta band (0.5-4 Hz): highest EEG power
+        sos_d = butter(3, [0.5, 4.0], btype='bandpass', fs=fs, output='sos')
+        signal += sosfilt(sos_d, white) * 0.08
+
+        # Theta band (4-8 Hz): moderate power
+        sos_t = butter(3, [4.0, 8.0], btype='bandpass', fs=fs, output='sos')
+        signal += sosfilt(sos_t, white) * 0.04
+
+        # Alpha band (8-13 Hz): dominant structured oscillation
+        # Use a dedicated sinusoid + bandpass noise for realistic alpha
+        alpha_sin = 0.05 * np.sin(2 * np.pi * 10 * t)
+        sos_a = butter(3, [8.0, 13.0], btype='bandpass', fs=fs, output='sos')
+        alpha_noise = sosfilt(sos_a, white) * 0.03
+        signal += alpha_sin + alpha_noise
+
+        # Beta band (13-30 Hz): low power
+        sos_b = butter(3, [13.0, 30.0], btype='bandpass', fs=fs, output='sos')
+        signal += sosfilt(sos_b, white) * 0.015
+
+        # Gamma band (30-100 Hz, capped at Nyquist-1)
+        gamma_hi = min(100.0, fs / 2.0 - 1.0)
+        if gamma_hi > 31.0:
+            sos_g = butter(3, [30.0, gamma_hi], btype='bandpass', fs=fs, output='sos')
+            signal += sosfilt(sos_g, white) * 0.008
+
+        # 60Hz powerline artifact
+        signal += 0.01 * np.sin(2 * np.pi * 60 * t)
+
+        # Optional eye blink artifacts (large biphasic transients)
+        # ~1-2 blinks per 10 seconds, each ~200ms duration
+        # Start after 5s to avoid contaminating calibration period
+        n_blinks = max(1, int(duration_s / 7))
+        for _ in range(n_blinks):
+            blink_center = np.random.uniform(5.0, duration_s - 1.0)
+            blink_idx = int(blink_center * fs)
+            blink_width = int(0.1 * fs)  # 100ms half-width
+            blink_range = np.arange(max(0, blink_idx - blink_width),
+                                    min(n_samples, blink_idx + blink_width))
+            if len(blink_range) > 0:
+                blink_t = (blink_range - blink_idx) / fs
+                # Biphasic shape: positive then negative
+                blink_shape = 0.3 * np.exp(-0.5 * (blink_t / 0.05) ** 2) * np.cos(2 * np.pi * 3 * blink_t)
+                signal[blink_range] += blink_shape
+    else:
+        # Legacy v0.1-v0.4 generator
+        signal = 2.5 + 0.05 * np.sin(2 * np.pi * 10 * t)
+        white = np.random.randn(n_samples)
+        pink = np.cumsum(white) * 0.001
+        pink -= np.mean(pink)
+        signal += pink
+        signal += 0.01 * np.sin(2 * np.pi * 60 * t)
 
     # SSVEP attack injection
     if attack_freq is not None:
@@ -883,7 +1001,7 @@ def run_simulation(args):
     verbose = args.verbose
 
     print("=" * 70)
-    print("  NEUROWALL v0.4 SIM — Trajectory Tracker + Coherence + NISS + NSP")
+    print("  NEUROWALL v0.5 SIM — Multi-band EEG + Growth Detector + Coherence + NISS + NSP")
     print("=" * 70)
     print(f"  Sample rate:    {SAMPLE_RATE} Hz")
     print(f"  Duration:       {duration}s ({int(duration * SAMPLE_RATE)} samples)")
