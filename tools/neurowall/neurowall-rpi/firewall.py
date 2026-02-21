@@ -18,6 +18,7 @@ Dependencies:
 See: neurowall/BLUEPRINT.md for full setup and wiring guide.
 """
 
+import os
 import serial
 import time
 import random
@@ -83,7 +84,7 @@ def nsp_delta_encode(samples: List[float]) -> bytes:
 
 def nsp_encrypt(plaintext: bytes) -> bytes:
     """Step 3: AES-256-GCM encrypt (Phase 0 — no ML-KEM yet)."""
-    nonce = bytes(random.getrandbits(8) for _ in range(12))
+    nonce = os.urandom(12)
     aesgcm = AESGCM(NSP_KEY)
     ciphertext = aesgcm.encrypt(nonce, plaintext, None)
     return nonce + ciphertext  # nonce prepended for receiver
