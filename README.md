@@ -32,6 +32,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 - [What We Build](#what-we-build)
 - [The TARA Insight](#the-tara-insight)
+- [Neurorights Map](#neurorights-map)
 - [Architecture](#architecture)
   - [QIF](#qif-quantified-interconnection-framework)
   - [NSP](#nsp-neural-security-protocol)
@@ -79,6 +80,22 @@ This means the same framework that scores whether an attack is dangerous can als
 **If injection attacks are real, then the inverse is also real: controlled injection can treat. The security model IS the safety model.**
 
 [Read the full TARA atlas](https://qinnovate.com/TARA/) | [TARA blog post](https://qinnovate.com/publications/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/)
+
+---
+
+## Neurorights Map
+
+Everything Qinnovate builds traces back to five neurorights defined by Ienca & Andorno (2017) and Yuste et al. (2017). This table maps each right to the specific framework, tool, or document that enforces it.
+
+| Neuroright | What It Protects | Enforced By |
+|------------|-----------------|-------------|
+| **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CG metric (scores cognitive compromise severity) |
+| **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 103 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
+| **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
+| **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/PEDIATRIC_CONSIDERATIONS.md) (developing brains get extra protections) |
+| **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](tools/macshield/) (free workstation hardening), [autodidactive](tools/autodidactive/) (free neurosecurity curriculum) |
+
+Sources: [Neuroethics Alignment](governance/NEUROETHICS_ALIGNMENT.md) | [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | [Code of Ethics](governance/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md)
 
 ---
 
