@@ -40,6 +40,7 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
 | **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.4, Secure Pipe Verified |
 | **[Governance](https://qinnovate.com/governance/)** | 11 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
+| **[Tools](./tools/)** | Accessible security tools (e.g., macshield) to secure the workstation layer. | NEW (Alpha) |
 
 ---
 

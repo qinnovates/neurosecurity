@@ -1,0 +1,77 @@
+{
+  "_metadata": {
+    "title": "QIF DSM-5-TR Diagnostic Mappings",
+    "version": "1.0.0",
+    "description": "Psychiatric conditions mapped to QIF hourglass bands and brain regions, with diagnostic clusters from the TARA DSM-5-TR overlay.",
+    "license": "CC-BY-4.0"
+  },
+  "diagnostic_clusters": {
+    "cognitive_psychotic": {
+      "label": "Cognitive/Psychotic",
+      "color": "#f59e0b",
+      "bands": ["N7", "N6", "N4"],
+      "description": "Disorders involving cognitive distortion, perceptual anomalies, or psychotic features.",
+      "conditions": [
+        { "code": "F20.x", "name": "Schizophrenia spectrum", "bands": ["N7", "N6", "N4"] },
+        { "code": "F06.2", "name": "Psychotic disorder due to another medical condition", "bands": ["N7", "N4"] },
+        { "code": "F05", "name": "Delirium", "bands": ["N7", "N4", "N2"] }
+      ]
+    },
+    "mood_trauma": {
+      "label": "Mood/Trauma",
+      "color": "#eab308",
+      "bands": ["N7", "N6", "N5"],
+      "description": "Mood disorders, PTSD, anxiety, and stress-related conditions.",
+      "conditions": [
+        { "code": "F32.x", "name": "Major depressive disorder", "bands": ["N7", "N6", "N5"] },
+        { "code": "F31.x", "name": "Bipolar disorder", "bands": ["N7", "N6"] },
+        { "code": "F43.10", "name": "PTSD", "bands": ["N6", "N7"] },
+        { "code": "F41.1", "name": "Generalized anxiety disorder", "bands": ["N7", "N6"] },
+        { "code": "F42.x", "name": "OCD", "bands": ["N7", "N5", "N6"] }
+      ]
+    },
+    "motor_neurocognitive": {
+      "label": "Motor/Neurocognitive",
+      "color": "#ef4444",
+      "bands": ["N5", "N3", "N2", "N1"],
+      "description": "Movement disorders and neurocognitive decline.",
+      "conditions": [
+        { "code": "G20", "name": "Parkinson's disease", "bands": ["N5", "N3"] },
+        { "code": "G35", "name": "Multiple sclerosis", "bands": ["N7", "N3", "N1"] },
+        { "code": "G40.x", "name": "Epilepsy", "bands": ["N7", "N6", "N4"] },
+        { "code": "G30.x", "name": "Alzheimer's disease", "bands": ["N7", "N6"] },
+        { "code": "G12.21", "name": "ALS", "bands": ["N7", "N2", "N1"] }
+      ]
+    },
+    "persistent_personality": {
+      "label": "Persistent/Personality",
+      "color": "#a855f7",
+      "bands": ["N7", "N6"],
+      "description": "Personality disorders and persistent behavioral patterns.",
+      "conditions": [
+        { "code": "F60.x", "name": "Personality disorders", "bands": ["N7", "N6"] },
+        { "code": "F48.1", "name": "Depersonalization/derealization", "bands": ["N7", "N6", "N4"] }
+      ]
+    },
+    "non_diagnostic": {
+      "label": "Non-Diagnostic",
+      "color": "#94a3b8",
+      "bands": ["S1", "S2", "S3"],
+      "description": "Silicon-layer attacks with no direct DSM-5 diagnostic mapping.",
+      "conditions": []
+    }
+  },
+  "band_conditions": {
+    "N7": ["F20.x", "F32.x", "F31.x", "F43.10", "F41.1", "F42.x", "G35", "G40.x", "G30.x", "G12.21", "F60.x", "F48.1"],
+    "N6": ["F20.x", "F32.x", "F31.x", "F43.10", "F41.1", "F42.x", "G40.x", "G30.x", "F60.x", "F48.1"],
+    "N5": ["G20", "F32.x", "F42.x"],
+    "N4": ["F20.x", "F05", "F06.2", "G40.x", "F48.1"],
+    "N3": ["G20", "G35"],
+    "N2": ["G12.21", "F05"],
+    "N1": ["G35", "G12.21"],
+    "I0": [],
+    "S1": [],
+    "S2": [],
+    "S3": []
+  }
+}

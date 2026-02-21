@@ -10,7 +10,7 @@ const totalTactics = THREAT_TACTICS.length;
   title="Explore QIF"
   description="Interactive visualizations and tools for exploring the Quantified Interconnection Framework — layer explorer, equation simulator, threat map, and more."
   breadcrumbs={[{ label: 'Explore' }]}
-  maxWidth="wide"
+  wide={true}
 >
   <div class="mb-12">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Explore QIF</h1>
@@ -21,6 +21,17 @@ const totalTactics = THREAT_TACTICS.length;
 
   <!-- Primary Visualizations -->
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+    <a href="/atlas/" class="explore-card glass rounded-xl p-6 block group relative overflow-hidden">
+      <div class="absolute top-3 right-3">
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] font-semibold uppercase tracking-wider">New</span>
+      </div>
+      <div class="text-3xl mb-4 text-[var(--color-accent-primary)]">&#9830;</div>
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Unified Atlas</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        Hourglass and 3D brain side-by-side with linked interaction. Click any band or region to explore devices, neurorights, DSM-5, and security controls.
+      </p>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; Atlas Dashboard</span>
+    </a>
     <a href="/lab/hourglass.html" class="explore-card glass rounded-xl p-6 block group relative overflow-hidden">
       <div class="absolute top-3 right-3">
         <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] font-semibold uppercase tracking-wider">Featured</span>

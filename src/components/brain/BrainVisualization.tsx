@@ -7,6 +7,12 @@ import type { BrainView, BrainViewRegion } from '../../lib/brain-view-data';
 interface Props {
   views: BrainView[];
   defaultView?: string;
+  // Optional external state props for Atlas dashboard integration
+  externalActiveRegion?: string | null;
+  onRegionSelect?: (id: string | null) => void;
+  externalViewId?: string;
+  onViewChange?: (viewId: string) => void;
+  hideViewToggle?: boolean;
 }
 
 /**
@@ -232,20 +238,47 @@ const VIEW_ICONS: Record<string, JSX.Element> = {
   ),
 };
 
-export default function BrainVisualization({ views, defaultView }: Props) {
-  const [activeViewId, setActiveViewId] = useState(defaultView ?? views[0]?.id ?? 'security');
-  const [activeRegion, setActiveRegion] = useState<string | null>(null);
+export default function BrainVisualization({
+  views,
+  defaultView,
+  externalActiveRegion,
+  onRegionSelect,
+  externalViewId,
+  onViewChange,
+  hideViewToggle,
+}: Props) {
+  const [internalViewId, setInternalViewId] = useState(defaultView ?? views[0]?.id ?? 'security');
+  const [internalRegion, setInternalRegion] = useState<string | null>(null);
+  const [lockedRegion, setLockedRegion] = useState<string | null>(null);
   const isSafari = useSafariDetect();
   const [dismissed, setDismissed] = useState(false);
+
+  // Use external state when provided, fall back to internal state
+  const activeViewId = externalViewId ?? internalViewId;
+  const activeRegion = externalActiveRegion !== undefined ? externalActiveRegion : internalRegion;
 
   const activeView = views.find(v => v.id === activeViewId) ?? views[0];
   const activeRegionData = activeRegion
     ? activeView.regions.find(r => r.id === activeRegion)
     : null;
 
-  // Keep selected region when switching views so the panel updates in-place
   const handleViewChange = (viewId: string) => {
-    setActiveViewId(viewId);
+    if (onViewChange) onViewChange(viewId);
+    else setInternalViewId(viewId);
+  };
+
+  const handleRegionHover = (id: string | null) => {
+    // Don't clear on hover-out if a region is locked (clicked)
+    if (id === null && lockedRegion) return;
+    if (onRegionSelect) onRegionSelect(id);
+    else setInternalRegion(id);
+  };
+
+  const handleRegionClick = (id: string) => {
+    const newId = lockedRegion === id ? null : id;
+    setLockedRegion(newId);
+    if (onRegionSelect) onRegionSelect(newId);
+    else setInternalRegion(newId);
   };
 
   return (
@@ -272,7 +305,7 @@ export default function BrainVisualization({ views, defaultView }: Props) {
       )}
 
       {/* View toggle */}
-      <div className="flex items-center justify-center gap-1 mb-5">
+      {!hideViewToggle && <div className="flex items-center justify-center gap-1 mb-5">
         {views.map(view => {
           const isActive = view.id === activeViewId;
           return (
@@ -297,7 +330,7 @@ export default function BrainVisualization({ views, defaultView }: Props) {
             </button>
           );
         })}
-      </div>
+      </div>}
 
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
         {/* 3D Brain Canvas */}
@@ -313,8 +346,8 @@ export default function BrainVisualization({ views, defaultView }: Props) {
               regions={activeView.regions}
               activeRegion={activeRegion}
               viewId={activeView.id}
-              onHover={setActiveRegion}
-              onClick={(id) => setActiveRegion(prev => prev === id ? null : id)}
+              onHover={handleRegionHover}
+              onClick={handleRegionClick}
             />
           </Canvas>
           <p

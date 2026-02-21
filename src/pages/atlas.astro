@@ -1,0 +1,44 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import AtlasDashboard from '../components/atlas/AtlasDashboard';
+import { getAtlasData, getThreatsForBandDetail } from '../lib/atlas-data';
+import { getBrainViewData } from '../lib/brain-view-data';
+import { HOURGLASS_BANDS } from '../lib/qif-constants';
+
+// Build-time data computation
+const atlasData = getAtlasData();
+const brainViews = getBrainViewData();
+
+// Pre-compute threat details per band
+const threatDetails: Record<string, any> = {};
+for (const band of HOURGLASS_BANDS) {
+  threatDetails[band.id] = getThreatsForBandDetail(band.id);
+}
+---
+
+<PageLayout
+  title="QIF Atlas"
+  description="Unified Atlas Dashboard — hourglass architecture and 3D brain visualization side-by-side with linked interaction. Explore 11 bands, brain regions, BCI devices, neurorights, and threat vectors."
+  breadcrumbs={[{ label: 'Explore', href: '/explore/' }, { label: 'Atlas' }]}
+  wide={true}
+>
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">QIF Atlas</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-2xl">
+      Unified dashboard linking the hourglass architecture to the 3D brain. Click any band or region to explore devices, neurorights, diagnostics, and security controls.
+    </p>
+  </div>
+
+  <AtlasDashboard
+    client:only="react"
+    atlasData={atlasData}
+    brainViews={brainViews}
+    threatDetails={threatDetails}
+  />
+
+  <div class="mt-12 mb-8">
+    <p class="text-xs text-center" style="color: var(--color-text-faint);">
+      Data driven from JSON — atlas, ethics, DSM-5, security controls. <a href="/lab/hourglass.html" class="underline">Standalone hourglass</a> &middot; <a href="/TARA/" class="underline">TARA Atlas</a>
+    </p>
+  </div>
+</PageLayout>
