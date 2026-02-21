@@ -1,0 +1,260 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-02-21",
+  "description": "Validation registry for QIF project components. Single source of truth for all tested and untested work.",
+
+  "tiers": [
+    { "id": "simulation", "label": "Simulation", "color": "#3b82f6", "description": "Tested against synthetic data or simulated environments" },
+    { "id": "independent", "label": "Independent Validation", "color": "#10b981", "description": "Verified by independent code, separate implementation, or third-party tool" },
+    { "id": "disclosed", "label": "Coordinated Disclosure", "color": "#8b5cf6", "description": "Vulnerability confirmed through responsible disclosure process" },
+    { "id": "analytical", "label": "Analytical Review", "color": "#f59e0b", "description": "Systematic review of constraints, equations, or logic by structured analysis" },
+    { "id": "cross_ai", "label": "Cross-AI Verification", "color": "#06b6d4", "description": "Independently verified by multiple AI systems (Claude, Gemini, GPT)" },
+    { "id": "clinical", "label": "Clinical / IRB", "color": "#ef4444", "description": "Tested on real human subjects with IRB approval" },
+    { "id": "hardware", "label": "Real Hardware", "color": "#ec4899", "description": "Tested on physical BCI hardware or real EEG equipment" }
+  ],
+
+  "entries": [
+    {
+      "id": "VAL-001",
+      "component": "Neurowall Coherence Monitor",
+      "category": "tools",
+      "tiers": ["simulation", "independent"],
+      "status": "pass",
+      "summary": "11/14 attacks detected at 15s window, 9/9 at 20s. 50-run statistical validation.",
+      "methodology": "Simulated 14 distinct attack patterns against the coherence monitoring pipeline. Each attack tested with 50 independent runs to establish statistical significance. Detection thresholds calibrated against synthetic EEG baselines.",
+      "results": [
+        "15-second window: 11/14 attack types detected (78.6%)",
+        "20-second window: 9/9 tested attack types detected (100%)",
+        "50-run stats: mean detection latency, false positive rate, confidence intervals computed",
+        "Zero false positives across all 50-run batches at 20s window"
+      ],
+      "limitations": [
+        "All tests used synthetic EEG data, not real brain signals",
+        "Attack patterns are theoretical, not from actual adversaries",
+        "Detection window trade-off: faster detection = lower accuracy"
+      ],
+      "source_docs": ["tools/neurowall/"],
+      "related_tara_ids": [],
+      "date": "2026-02-15"
+    },
+    {
+      "id": "VAL-002",
+      "component": "BrainFlow Independent Validation",
+      "category": "tools",
+      "tiers": ["independent", "simulation"],
+      "status": "pass",
+      "summary": "100% detection rate, 0% false positive rate across 16 simulated channels.",
+      "methodology": "Independent validation using BrainFlow SDK to generate synthetic multi-channel EEG. Coherence analysis pipeline tested against known-good and known-bad signal patterns across 16 channels simultaneously.",
+      "results": [
+        "16-channel simultaneous monitoring: all channels processed correctly",
+        "100% detection rate for injected anomalies",
+        "0% false positive rate on clean synthetic signals",
+        "BrainFlow SDK confirmed as viable real-hardware integration path"
+      ],
+      "limitations": [
+        "BrainFlow synthetic board, not real EEG hardware",
+        "Single session duration, not long-term stability tested",
+        "16 channels is below clinical-grade density (64-256 channels)"
+      ],
+      "source_docs": ["tools/neurowall/"],
+      "related_tara_ids": [],
+      "date": "2026-02-15"
+    },
+    {
+      "id": "VAL-003",
+      "component": "NSP Transport Pipeline",
+      "category": "protocol",
+      "tiers": ["simulation"],
+      "status": "pass",
+      "summary": "Round-trip encryption/decryption PASS. 65-90% payload compression ratio.",
+      "methodology": "End-to-end simulation of the Neural Security Protocol transport layer. Test vectors include ML-KEM-768 key exchange, AES-256-GCM-SIV encryption, frame serialization, and payload compression benchmarks.",
+      "results": [
+        "Round-trip encrypt/decrypt: PASS (all test vectors)",
+        "65-90% compression ratio depending on signal type",
+        "Frame format serialization/deserialization: PASS",
+        "Post-quantum key exchange simulation: PASS"
+      ],
+      "limitations": [
+        "Software simulation only, not tested on implant-class hardware (ARM Cortex-M4)",
+        "Latency benchmarks are desktop-class, not embedded",
+        "No real BCI data streams tested"
+      ],
+      "source_docs": ["qif-framework/nsp/nsp-core/"],
+      "related_tara_ids": [],
+      "date": "2026-02-10"
+    },
+    {
+      "id": "VAL-004",
+      "component": "NISS Scoring Engine",
+      "category": "scoring",
+      "tiers": ["simulation"],
+      "status": "pass",
+      "summary": "Escalation behavior correct across all 103 techniques. PINS flag triggers verified.",
+      "methodology": "All 103 TARA techniques scored through the NISS engine. Verified that severity levels escalate correctly, PINS flag triggers when BI >= High or RV = Irreversible, and context profiles shift scores as specified.",
+      "results": [
+        "103/103 techniques scored without errors",
+        "PINS flag correctly triggered for all qualifying techniques",
+        "Severity thresholds (Critical/High/Medium/Low/None) verified",
+        "Context profiles (Clinical, Research, Consumer, Military) shift weights correctly"
+      ],
+      "limitations": [
+        "Scoring correctness is self-referential (no external NISS implementation to compare against)",
+        "Clinical appropriateness of score magnitudes not validated by clinicians",
+        "Equal-weight default assumption untested against real BCI incident data"
+      ],
+      "source_docs": ["qif-framework/NISS-v1.0-SPEC.md", "shared/qtara-registrar.json"],
+      "related_tara_ids": [],
+      "date": "2026-02-08"
+    },
+    {
+      "id": "VAL-005",
+      "component": "L1 Signal Boundary (Analog Front-End)",
+      "category": "framework",
+      "tiers": ["simulation"],
+      "status": "pass",
+      "summary": "Notch filters + impedance guard verified in simulation. Signal integrity PASS.",
+      "methodology": "Simulated the S1 (Analog) band boundary conditions: 50/60 Hz notch filtering, electrode impedance monitoring, and signal amplitude guards. Verified that out-of-band signals are rejected and impedance drift triggers alerts.",
+      "results": [
+        "Notch filters: 50/60 Hz rejection verified at -40dB",
+        "Impedance guard: drift detection triggers at configured threshold",
+        "Signal amplitude clipping: out-of-range values rejected",
+        "Baseline coherence maintained through filtering pipeline"
+      ],
+      "limitations": [
+        "Simulated signals, not real electrode recordings",
+        "No tissue-electrode interface modeling",
+        "Single-channel validation only"
+      ],
+      "source_docs": ["qif-framework/"],
+      "related_tara_ids": ["QIF-T0001", "QIF-T0003", "QIF-T0005"],
+      "date": "2026-02-12"
+    },
+    {
+      "id": "VAL-006",
+      "component": "BCI Streaming Protocol Vulnerability",
+      "category": "vulnerability",
+      "tiers": ["disclosed"],
+      "status": "confirmed",
+      "summary": "Real vulnerability found in a widely-used BCI data streaming protocol. Coordinated disclosure in progress.",
+      "methodology": "Protocol analysis of a widely-used open-source BCI streaming library revealed missing authentication, encryption, and integrity verification. Proof-of-concept developed and tested.",
+      "results": [
+        "Vulnerability confirmed in protocol design",
+        "PoC demonstrates unauthenticated stream injection",
+        "Coordinated disclosure initiated with maintainers",
+        "Details withheld pending vendor response"
+      ],
+      "limitations": [
+        "PoC tested against software implementation, not clinical deployment",
+        "Impact assessment is theoretical for clinical BCI contexts",
+        "Awaiting vendor response for severity classification"
+      ],
+      "source_docs": [],
+      "related_tara_ids": ["QIF-T0001"],
+      "date": "2026-02-11"
+    },
+    {
+      "id": "VAL-007",
+      "component": "Physics Security Guardrails",
+      "category": "framework",
+      "tiers": ["analytical", "cross_ai"],
+      "status": "pass",
+      "summary": "12/13 physics constraints verified. 4-layer guardrail architecture derived from first principles.",
+      "methodology": "Systematic derivation of security guardrails from physics equations (thermodynamics, electromagnetism, information theory). Each constraint cross-verified by multiple AI systems (Claude, Gemini). Architecture reviewed for internal consistency and completeness.",
+      "results": [
+        "12/13 constraint equations verified as physically sound",
+        "4-layer architecture: Physics Boundary, Signal Integrity, Anomaly Detection, Protocol Enforcement",
+        "1 constraint (mechanical mismatch epsilon_safe) flagged as requiring empirical calibration",
+        "Cross-AI verification: Claude and Gemini independently confirmed constraint derivations",
+        "No published equivalent found (gap confirmed in literature)"
+      ],
+      "limitations": [
+        "Analytical derivation, not empirical validation",
+        "Constraint parameters need calibration against real BCI hardware",
+        "Architecture is concept design, not implemented",
+        "Cross-AI verification does not substitute for peer review"
+      ],
+      "source_docs": ["qif-framework/qif-sec-guardrails.md"],
+      "related_tara_ids": [],
+      "date": "2026-02-18"
+    },
+    {
+      "id": "VAL-008",
+      "component": "Fact-Checking Pipeline",
+      "category": "tooling",
+      "tiers": ["simulation"],
+      "status": "pass_with_issues",
+      "summary": "19/20 field journal posts passed automated fact-check. 1 dead URL found.",
+      "methodology": "Automated pipeline resolves DOIs, arXiv references, and hyperlinks. Searches Crossref for named citations. Flags unsourced numerical claims. Run against all 20 field journal blog posts.",
+      "results": [
+        "19/20 posts passed (fact_checked: true)",
+        "1 failure: Entry 011 dead URL (qinnovate.com/blog/hourglass-compute-hypothesis)",
+        "59 warnings: unsourced numerical claims (expected for personal journal entries)",
+        "All DOIs and arXiv references resolved successfully"
+      ],
+      "limitations": [
+        "Cannot verify claims that lack citations (by design, journals are personal)",
+        "Crossref search is fuzzy matching, may miss edge cases",
+        "Pipeline does not verify claim accuracy, only link/reference liveness"
+      ],
+      "source_docs": ["scripts/verify/fact_check_field_journal.py"],
+      "related_tara_ids": [],
+      "date": "2026-02-21"
+    },
+    {
+      "id": "VAL-009",
+      "component": "Citation Verification",
+      "category": "tooling",
+      "tiers": ["simulation"],
+      "status": "pass",
+      "summary": "3 fabricated AI-hallucinated citations caught and removed from preprint.",
+      "methodology": "Manual and automated verification of all citations in the Zenodo preprint. Every DOI resolved via Crossref API. Author lists checked against publisher pages. Process triggered after Dr. Schroder flagged a fabricated citation publicly.",
+      "results": [
+        "3 fabricated citations identified and removed",
+        "3 wrong author lists corrected",
+        "All remaining citations verified via DOI resolution",
+        "Verification protocol now mandatory for all future publications"
+      ],
+      "limitations": [
+        "Caught after publication (v1.0), not before",
+        "Manual process, not fully automated",
+        "Only covers DOI-resolvable references"
+      ],
+      "source_docs": ["scripts/verify/verify_citations.py", "paper/references.bib"],
+      "related_tara_ids": [],
+      "date": "2026-02-12"
+    }
+  ],
+
+  "not_tested": [
+    {
+      "component": "NISS Clinical Validation",
+      "reason": "Requires clinician review of score magnitudes against real BCI incident data. No IRB access.",
+      "required": ["Clinical BCI experts", "BCI incident database", "IRB approval"]
+    },
+    {
+      "component": "DSM-5-TR Diagnostic Mappings",
+      "reason": "103 technique-to-diagnosis mappings need clinical psychiatrist review. Analytical derivation only.",
+      "required": ["Clinical psychiatrist with BCI experience", "Case study data"]
+    },
+    {
+      "component": "BCI Limits Equation",
+      "reason": "Unified constraint system is a hypothesis. Individual equations are established physics, but the integration is novel and unvalidated.",
+      "required": ["BCI hardware lab", "Multi-site measurements", "Peer review"]
+    },
+    {
+      "component": "NSP on Real Hardware",
+      "reason": "Protocol tested in software simulation only. Not deployed on ARM Cortex-M4 or any implant-class hardware.",
+      "required": ["ARM Cortex-M4 dev board", "Real-time latency measurement", "Power profiling"]
+    },
+    {
+      "component": "Real EEG Validation",
+      "reason": "All coherence monitoring tested against synthetic signals. No real EEG data from human subjects.",
+      "required": ["EEG equipment (clinical or consumer grade)", "IRB approval for human subjects", "Baseline recording protocol"]
+    },
+    {
+      "component": "Real BCI Attack Testing",
+      "reason": "All attack patterns are theoretical models. No adversarial testing against physical BCI devices.",
+      "required": ["BCI hardware (invasive or non-invasive)", "Controlled lab environment", "IRB + security ethics approval"]
+    }
+  ]
+}
