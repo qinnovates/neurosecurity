@@ -9,7 +9,6 @@ import type { FeedItem, PublicationItem, BriefItem } from '../lib/feed-types';
 
 // --- Build all streams ---
 
-// 1. Blog posts → PublicationItem[] (split field journals from regular posts)
 const allPosts = await getCollection('blog');
 
 function isFieldJournal(post: typeof allPosts[0]): boolean {
@@ -20,21 +19,25 @@ function isFieldJournal(post: typeof allPosts[0]): boolean {
 const regularPosts = allPosts.filter((p) => !isFieldJournal(p));
 const fieldJournalPosts = allPosts.filter((p) => isFieldJournal(p));
 
-const publicationItems: PublicationItem[] = regularPosts.map((post) => {
-  const body = post.body || '';
-  const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
-  return {
-    type: 'publication' as const,
-    title: post.data.title,
-    date: getPostDate(post.data),
-    slug: post.id,
-    excerpt,
-    tags: post.data.tags.map(cleanTag),
-    readTime: readingTime(body),
-  };
-});
+// 1. Qinnovate blog posts (newest first)
+const blogItems: PublicationItem[] = regularPosts
+  .map((post) => {
+    const body = post.body || '';
+    const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
+    return {
+      type: 'publication' as const,
+      title: post.data.title,
+      date: getPostDate(post.data),
+      slug: post.id,
+      excerpt,
+      tags: post.data.tags.map(cleanTag),
+      readTime: readingTime(body),
+    };
+  })
+  .sort((a, b) => b.date.localeCompare(a.date));
 
-const fieldJournalItems: PublicationItem[] = fieldJournalPosts
+// 2. Field journal entries (chronological, oldest first)
+const fieldJournalItems = fieldJournalPosts
   .map((post) => {
     const body = post.body || '';
     const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
@@ -51,10 +54,9 @@ const fieldJournalItems: PublicationItem[] = fieldJournalPosts
   })
   .sort((a, b) => a.date.localeCompare(b.date));
 
-// 2. Intelligence briefs → BriefItem[]
+// 3. Intelligence briefs
 const briefItems: BriefItem[] = briefs.map((brief) => {
   const cat = categories.find((c) => c.id === brief.category);
-  // Normalize YYYY-MM to YYYY-MM-15 for sorting
   const date = brief.date.length === 7 ? `${brief.date}-15` : brief.date;
   return {
     type: 'brief' as const,
@@ -69,29 +71,14 @@ const briefItems: BriefItem[] = briefs.map((brief) => {
   };
 });
 
-// 3. External news → ExternalItem[]
+// 4. External news
 const externalItems = await fetchExternalNews();
 
-// Merge with weighted interleave: Qinnovate + Intel first, external woven in
-// Strategy: sort each stream by date, then interleave so original content leads
-// while external items provide market context between every few Qinnovate items
-const ownContent: FeedItem[] = [...publicationItems, ...briefItems]
-  .sort((a, b) => b.date.localeCompare(a.date));
-const extContent: FeedItem[] = [...externalItems]
+// Industry stream: briefs + external, newest first
+const industryItems: FeedItem[] = [...briefItems, ...externalItems]
   .sort((a, b) => b.date.localeCompare(a.date));
 
-// Layout: top 6 blog posts first, then industry news below
-const blogPosts = ownContent.filter((item): item is PublicationItem => item.type === 'publication');
-const intelBriefs = ownContent.filter((item): item is BriefItem => item.type === 'brief');
-const featuredBlogs = blogPosts.slice(0, 6);
-const remainingOwn = [...blogPosts.slice(6), ...intelBriefs]
-  .sort((a, b) => b.date.localeCompare(a.date));
-const allItems: FeedItem[] = [
-  ...featuredBlogs,
-  ...extContent,
-  ...remainingOwn,
-];
-const totalCount = allItems.length + fieldJournalItems.length;
+const totalCount = blogItems.length + fieldJournalItems.length + industryItems.length;
 
 // Category mapping for blog tags
 function inferCategory(tags: string[]): string {
@@ -113,7 +100,7 @@ function inferCategory(tags: string[]): string {
   <div class="mb-12 reveal">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">News</h1>
     <p class="text-lg text-[var(--color-text-muted)] max-w-3xl">
-      Neural security research, industry intelligence, and the emerging BCI market — from Qinnovate and across the field.
+      Neural security research, industry intelligence, and the emerging BCI market.
     </p>
   </div>
 
@@ -129,7 +116,7 @@ function inferCategory(tags: string[]): string {
       data-filter="publication"
       class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
     >
-      Qinnovate ({publicationItems.length})
+      Qinnovate ({blogItems.length})
     </button>
     <button
       data-filter="field-journal"
@@ -138,19 +125,11 @@ function inferCategory(tags: string[]): string {
       Field Journals ({fieldJournalItems.length})
     </button>
     <button
-      data-filter="brief"
+      data-filter="industry"
       class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
     >
-      Intel Briefs ({briefItems.length})
+      Industry ({industryItems.length})
     </button>
-    {externalItems.length > 0 && (
-      <button
-        data-filter="external"
-        class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
-      >
-        External ({externalItems.length})
-      </button>
-    )}
 
     {/* Category filters */}
     <span class="w-px h-6 bg-[var(--color-border)] mx-1 self-center"></span>
@@ -164,45 +143,28 @@ function inferCategory(tags: string[]): string {
     ))}
   </div>
 
-  <!-- Featured blog posts -->
-  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">From Qinnovate</h2>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-12" id="feed-featured">
-    {featuredBlogs.map((item) => {
-      const dataCategory = inferCategory(item.tags);
-      return (
-        <div data-type="publication" data-category={dataCategory}>
-          <FeedCard item={item} />
-        </div>
-      );
-    })}
+  <!-- ═══ SECTION 1: Qinnovate Blog Posts ═══ -->
+  <div id="section-blogs">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">From Qinnovate</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-16" id="feed-blogs">
+      {blogItems.map((item) => {
+        const dataCategory = inferCategory(item.tags);
+        return (
+          <div data-type="publication" data-category={dataCategory}>
+            <FeedCard item={item} />
+          </div>
+        );
+      })}
+    </div>
   </div>
 
-  <!-- Industry news + remaining content -->
-  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">Industry &amp; Research</h2>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-grid">
-    {[...extContent, ...remainingOwn].map((item) => {
-      const dataType = item.type;
-      const dataCategory =
-        item.type === 'publication'
-          ? inferCategory(item.tags)
-          : item.type === 'brief'
-            ? item.category
-            : item.category;
-      return (
-        <div data-type={dataType} data-category={dataCategory}>
-          <FeedCard item={item} />
-        </div>
-      );
-    })}
-  </div>
-
-  <!-- Field Journals -->
-  <div id="feed-journal-section">
-    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2 mt-12 reveal section-heading">Field Journals</h2>
-    <p class="text-sm text-[var(--color-text-muted)] mb-6 reveal">
+  <!-- ═══ SECTION 2: Field Journals ═══ -->
+  <div id="section-journals">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2 reveal section-heading">Field Journals</h2>
+    <p class="text-sm text-[var(--color-text-muted)] mb-6 reveal journal-desc">
       First-person research observations from the <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">QIF Field Journal</a>. These entries were originally written on the dates shown and retroactively published as blog posts.
     </p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-journals">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-16" id="feed-journals">
       {fieldJournalItems.map((item) => {
         const source = (item as any).source;
         const dateObj = new Date(item.date);
@@ -252,6 +214,22 @@ function inferCategory(tags: string[]): string {
                 </div>
               </article>
             </a>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 3: Industry & Intel ═══ -->
+  <div id="section-industry">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">Industry &amp; Intel</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-industry">
+      {industryItems.map((item) => {
+        const dataType = item.type;
+        const dataCategory = item.type === 'brief' ? item.category : item.category;
+        return (
+          <div data-type={dataType} data-category={dataCategory}>
+            <FeedCard item={item} />
           </div>
         );
       })}
@@ -338,14 +316,15 @@ function inferCategory(tags: string[]): string {
 
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>('.feed-btn');
-  const featuredCards = document.querySelectorAll<HTMLElement>('#feed-featured > div');
-  const gridCards = document.querySelectorAll<HTMLElement>('#feed-grid > div');
+  const sections = {
+    blogs: document.getElementById('section-blogs'),
+    journals: document.getElementById('section-journals'),
+    industry: document.getElementById('section-industry'),
+  };
+  const blogCards = document.querySelectorAll<HTMLElement>('#feed-blogs > div');
   const journalCards = document.querySelectorAll<HTMLElement>('#feed-journals > div');
-  const allCards = [...featuredCards, ...gridCards, ...journalCards];
-  const featuredSection = document.getElementById('feed-featured');
-  const gridSection = document.getElementById('feed-grid');
-  const journalSection = document.getElementById('feed-journal-section');
-  const sectionHeadings = document.querySelectorAll<HTMLElement>('.section-heading');
+  const industryCards = document.querySelectorAll<HTMLElement>('#feed-industry > div');
+  const allCards = [...blogCards, ...journalCards, ...industryCards];
 
   const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
   const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
@@ -360,50 +339,37 @@ function inferCategory(tags: string[]): string {
       });
       btn.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
 
-      // Show/hide sections based on filter
-      const showAll = filter === 'all';
-      sectionHeadings.forEach((h) => h.style.display = showAll ? '' : 'none');
+      // Section visibility map
+      const sectionMap: Record<string, string[]> = {
+        'all': ['blogs', 'journals', 'industry'],
+        'publication': ['blogs'],
+        'field-journal': ['journals'],
+        'industry': ['industry'],
+      };
 
-      // Journal section: visible on 'all' and 'field-journal'
-      if (journalSection) {
-        const journalDesc = journalSection.querySelector('p');
-        if (filter === 'all' || filter === 'field-journal') {
-          journalSection.style.display = '';
-          if (journalDesc) journalDesc.style.display = '';
-          // Show heading for field-journal filter too
-          const journalHeading = journalSection.querySelector('.section-heading') as HTMLElement;
-          if (journalHeading) journalHeading.style.display = '';
-        } else {
-          journalSection.style.display = 'none';
-        }
+      // For category filters, show all sections but filter cards
+      const isCategory = filter.startsWith('cat-');
+      const visibleSections = isCategory ? ['blogs', 'journals', 'industry'] : (sectionMap[filter] || ['blogs', 'journals', 'industry']);
+
+      // Show/hide sections
+      for (const [key, el] of Object.entries(sections)) {
+        if (el) el.style.display = visibleSections.includes(key) ? '' : 'none';
       }
 
-      // Featured + grid sections: hide when field-journal is selected
-      if (featuredSection) {
-        featuredSection.style.display = filter === 'field-journal' ? 'none' : '';
+      // Filter cards within visible sections
+      if (filter === 'all') {
+        allCards.forEach((c) => c.style.display = '');
+      } else if (isCategory) {
+        const catId = filter.slice(4);
+        allCards.forEach((c) => {
+          c.style.display = c.dataset.category === catId ? '' : 'none';
+        });
+      } else {
+        // Section-level filtering already handles visibility
+        blogCards.forEach((c) => c.style.display = '');
+        journalCards.forEach((c) => c.style.display = '');
+        industryCards.forEach((c) => c.style.display = '');
       }
-      if (gridSection) {
-        gridSection.style.display = filter === 'field-journal' ? 'none' : '';
-      }
-
-      // Filter cards in featured + grid
-      [...featuredCards, ...gridCards].forEach((card) => {
-        if (filter === 'all') {
-          card.style.display = '';
-        } else if (filter === 'field-journal') {
-          card.style.display = 'none';
-        } else if (filter.startsWith('cat-')) {
-          const catId = filter.slice(4);
-          card.style.display = card.dataset.category === catId ? '' : 'none';
-        } else {
-          card.style.display = card.dataset.type === filter ? '' : 'none';
-        }
-      });
-
-      // Journal cards: show on 'all' and 'field-journal', hide otherwise
-      journalCards.forEach((card) => {
-        card.style.display = (filter === 'all' || filter === 'field-journal') ? '' : 'none';
-      });
     });
   });
 </script>
