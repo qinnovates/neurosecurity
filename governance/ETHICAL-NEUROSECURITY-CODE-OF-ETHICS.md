@@ -1,12 +1,14 @@
 ---
 title: "Ethical Neurosecurity Code of Ethics"
-description: "Adapted from EC-Council CEH and (ISC)² codes of ethics for neurosecurity. v0.0.1 (Draft)."
-order: 0
+description: "Long-term vision: adapted from EC-Council CEH and (ISC)² codes of ethics for neurosecurity. v0.0.1 (Draft). Priority: converge existing GRC frameworks first."
+order: 99
 ---
 
 # Ethical Neurosecurity Code of Ethics
 
 > **Version 0.0.1** (Draft) | February 2026 | Kevin L. Qi | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+> **Status: Long-term vision.** This document is aspirational. The immediate priority is converging existing GRC frameworks (NIST SP 800-53, ISO 27001, FDA/FDORA) into neurosecurity GRC. A neurosecurity-specific professional code of ethics builds on top of that compliance foundation, not before it. See [Regulatory Compliance](REGULATORY_COMPLIANCE.md) for current GRC mapping work.
 
 > **Canonical source:** [`src/data/code-of-ethics.ts`](../src/data/code-of-ethics.ts) — edit that file to update both this document and the [website](https://qinnovate.com/security/#ethics).
 
