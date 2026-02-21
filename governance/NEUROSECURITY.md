@@ -67,19 +67,86 @@ Neurosecurity takes phenomena described by neuroscientists and concerns raised b
 
 ---
 
-## Neurogovernance: GRC for the Brain
+## How Security GRC Actually Works
 
-Traditional IT security learned a painful lesson: Governance, Risk, and Compliance (GRC) was bolted on decades after systems shipped. Auditors checked boxes while attackers exploited gaps the compliance frameworks hadn't caught up to yet. That lag cost billions.
+In IT security, Governance, Risk, and Compliance (GRC) follows a well-established cycle. Understanding this cycle is essential because neurosecurity needs to build the same discipline, not reinvent it.
 
-Neurogovernance applies the three GRC pillars to BCIs from the start, not as an afterthought:
+### The GRC Flow (IT Security)
 
-| Pillar | What It Covers | Qinnovate Implementation |
-|--------|---------------|-------------------------|
-| **Governance** | Policies, rights, consent, ethics | [Neurorights mapping](NEUROETHICS_ALIGNMENT.md) (5 rights), [Informed Consent Framework](INFORMED_CONSENT_FRAMEWORK.md) (pediatric + incapacity), [Code of Ethics](ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md), [UNESCO alignment](UNESCO_ALIGNMENT.md) |
-| **Risk** | Threat assessment, severity scoring, attack modeling | [TARA](https://qinnovate.com/TARA/) (109 techniques), [NISS](https://qinnovate.com/scoring/) (neural severity scoring), [BCI Limits Equation](../qif-framework/qif-sec-guardrails.md) (physics constraints), DSM-5-TR diagnostic mappings |
-| **Compliance** | Regulatory adherence, audit trails, verification | [FDORA/FDA crosswalk](REGULATORY_COMPLIANCE.md), NIST SP 800-53 control mapping, ISO 27001 alignment, [Transparency audit trail](TRANSPARENCY.md), [citation verification pipeline](../scripts/verify/) |
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│  ┌──────────────────────┐                                           │
+│  │  1. EXTERNAL FORCES  │  Regulations: HIPAA, PCI-DSS, SOX, GDPR  │
+│  │     SET REQUIREMENTS │  Standards: NIST CSF, ISO 27001, CIS      │
+│  │                      │  Contracts: SOC 2, customer questionnaires │
+│  └──────────┬───────────┘                                           │
+│             │                                                       │
+│             ▼                                                       │
+│  ┌──────────────────────┐                                           │
+│  │  2. GRC TRANSLATES   │  Maps requirements to controls            │
+│  │     INTO POLICY      │  Writes internal security policies        │
+│  │                      │  Maintains the risk register              │
+│  └──────────┬───────────┘                                           │
+│             │                                                       │
+│             ▼                                                       │
+│  ┌──────────────────────┐                                           │
+│  │  3. SECURITY ENG     │  Firewalls, encryption, access mgmt       │
+│  │     IMPLEMENTS       │  Monitoring, detection, response          │
+│  │                      │  Architecture, code, infrastructure       │
+│  └──────────┬───────────┘                                           │
+│             │                                                       │
+│             ▼                                                       │
+│  ┌──────────────────────┐                                           │
+│  │  4. GRC AUDITS       │  Evidence collection, gap analysis        │
+│  │     ADHERENCE        │  Audit prep, remediation tracking         │
+│  │                      │  Continuous monitoring, reporting         │
+│  └──────────┬───────────┘                                           │
+│             │                                                       │
+│             └───────────────────── loops back to 1 ─────────────────┘
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
-The difference from IT: we are building these before the first mass-market BCI ships, not after the first breach. The governance documents, risk assessments, and compliance mappings exist alongside the security tools, not in a separate department.
+This cycle works because every step has mature infrastructure behind it. HIPAA tells you what to protect. NIST tells you how. Your security team builds the controls. Your GRC team audits the evidence.
+
+### The Neurosecurity GRC Gap
+
+For BCIs, this cycle is broken at step 1. The external forces barely exist:
+
+| GRC Step | IT Security (Mature) | BCI Security (Today) | Delta |
+|----------|---------------------|---------------------|-------|
+| **1. External Requirements** | HIPAA, PCI-DSS, SOX, GDPR, FedRAMP, CMMC | FDA 510(k) covers safety but not neural-specific cybersecurity. FDORA Section 3305 (Patch Act) is the closest. No "HIPAA for neural data." No "PCI-DSS for BCIs." | **Critical gap**: no neural-specific regulations to comply with |
+| **2. GRC Policy Translation** | Established frameworks (NIST CSF, ISO 27001, CIS Controls) map to organizational controls | No neural-specific framework existed before QIF. NIST/ISO controls are generic, not neural-aware. | **Structural gap**: existing frameworks lack neural metrics (tissue damage, cognitive integrity, consent violation) |
+| **3. Security Implementation** | Firewalls, IDS/IPS, SIEM, encryption, IAM | No commercial BCI security tools. No neural firewalls. No BCI-specific encryption protocols. | **Tooling gap**: everything must be built from scratch |
+| **4. Compliance Auditing** | SOC 2 auditors, PCI QSAs, HIPAA assessors, automated scanning | No BCI security auditors exist. No compliance certifications. No audit criteria. | **Ecosystem gap**: no one to audit, nothing to audit against |
+
+### What Exists Today (and Where Qinnovate Maps)
+
+The approach is not to build neurosecurity GRC from nothing. Existing frameworks cover significant ground. The work is finding what maps, what partially maps, and what is missing entirely.
+
+| Existing Framework | What It Covers for BCIs | What It Misses |
+|-------------------|------------------------|----------------|
+| **NIST SP 800-53** | Access control (AC), system monitoring (SI-4), encryption (SC-28), logging (AU) | No controls for neural signal integrity, cognitive impact assessment, or consent violation severity |
+| **ISO 27001** | Information security management, risk assessment methodology, audit trails | No asset classification for neural data, no control objectives for biological impact |
+| **FDA 21 CFR 820** | Quality system regulation for medical devices, design controls | No cybersecurity threat modeling requirement, no neural-specific validation |
+| **FDORA Sec. 3305** | Cyber device patching, vulnerability management, SBOM | Closest existing requirement. Still lacks neural-specific threat categories |
+| **HIPAA** | PHI protection, breach notification, access controls | Neural data is PHI but HIPAA has no provisions for real-time neural monitoring or cognitive state inference |
+| **IEC 62443** | Industrial control system security (OT security) | Closest architectural parallel to BCI security. Lacks biological endpoint considerations |
+| **GDPR Art. 9** | Special category data (biometric, health) | Neural data arguably qualifies but no explicit mention. No provisions for thought data vs. signal data |
+
+### Qinnovate's GRC Convergence
+
+Rather than inventing everything new, Qinnovate maps existing frameworks to neurosecurity and fills the gaps:
+
+| GRC Step | Existing Foundation | Qinnovate Extension |
+|----------|-------------------|---------------------|
+| **1. Requirements** | FDA, FDORA, HIPAA, GDPR Art. 9 | [Regulatory Compliance Guide](REGULATORY_COMPLIANCE.md) maps all existing requirements. Identifies 5 structural gaps where no regulation exists. |
+| **2. Policy** | NIST SP 800-53, ISO 27001 | [NIST/ISO Hardened Mapping](REGULATORY_COMPLIANCE.md#nistiso-hardened-goals) anchors NISS scores to NIST/ISO control IDs. [Neurorights mapping](NEUROETHICS_ALIGNMENT.md) adds the policy layer that no existing framework covers. |
+| **3. Implementation** | IEC 62443 (OT security patterns) | [QIF](https://qinnovate.com/whitepaper/) (security architecture), [NSP](https://qinnovate.com/nsp/) (wire protocol), [Neurowall](../tools/neurowall/) (detection), [TARA](https://qinnovate.com/TARA/) (threat registry), [NISS](https://qinnovate.com/scoring/) (scoring) |
+| **4. Audit** | SOC 2 methodology, ISO 27001 certification process | [Transparency audit trail](TRANSPARENCY.md), [citation verification](../scripts/verify/), Regulatory-as-Code (planned: machine-verifiable compliance) |
+
+The long-term vision is a neurosecurity-specific professional code of ethics adapted from ISC2 and CEH models. But that comes after the compliance foundation is solid. You do not write a code of ethics for a profession that does not yet have compliance standards to enforce.
 
 ---
 
