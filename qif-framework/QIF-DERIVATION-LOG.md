@@ -143,14 +143,128 @@ Each entry follows this structure:
 
 ---
 
+## Quick Jump — Milestone Entries
+
+| Milestone | Entry | Topic |
+|-----------|-------|-------|
+| **Hourglass Origin** | [Entry 7](#entry-7-the-hourglass-model) | Where the 3-1-3 architecture was first conceived |
+| **Black Hole Principle** | [Entry 35](#entry-35-the-black-hole-security-principle--hawkingsusskindmaldacena-applied-to-bci) | Hawking/Susskind/Maldacena applied to BCI |
+| **TARA Reframing** | [Entry 50](#entry-50-tara--therapeutic-atlas-of-risks-and-applications) | Threat catalog reframed as dual-use mechanism atlas |
+| **BCI Limits Equation** | [Entry 60](#entry-60-bci-limits-equation-synthesis) | Unified physics-constraint system for BCI hardware |
+| **Neurorights Validation** | [Entry 58](#entry-58-neurorights-cross-validation) | Cross-validation against 6 established frameworks |
+| **Wearable Firewall** | [Entry 70](#entry-70-wearable-neural-firewall) | Secure edge architecture for non-intrusive BCI |
+| **Neurowall Simulation** | [Neurowall Log](../tools/neurowall/NEUROWALL-DERIVATION-LOG.md) | 10 entries: coherence metric to ROC analysis |
+
+---
+
 ## Entry Index
+
+### By Category
+
+**Architecture & Core Model**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [70](#entry-70-wearable-neural-firewall) | 2026-02-21 | Wearable Neural Firewall — Secure Edge Architecture | IMPLEMENTATION |
+| [33](#entry-33) | 2026-02-06 | QIF v4.0 — 7-1-3 Hourglass Architecture (Final Decision) | Decision |
+| [25](#entry-25) | 2026-02-06 | 3-1-3 vs Tactical 7-1-3 — Architecture Stress Test | Validated |
+| [24](#entry-24) | 2026-02-06 | 7-Layer Neural Expansion, Neural Sensory Protocol | Implemented |
+| [22](#entry-22) | 2026-02-03 | Classical-Hourglass Reconciliation, Cognitive Sovereignty | Validated |
+| [15](#entry-15) | 2026-02-02 | QIF v3.1 — 7-Band Symmetric Model | Implemented |
+| [14](#entry-14) | 2026-02-02 | QIF v3.0 Hourglass Layer Model — Finalized | Implemented |
+| [7](#entry-7-the-hourglass-model) | 2026-02-02 | The Hourglass Model | Hypothesis |
+
+**Equations & Physics**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [60](#entry-60-bci-limits-equation-synthesis) | 2026-02-18 | BCI Limits Equation Synthesis — Live Session | VERIFIED |
+| [52](#entry-52-three-floors--energy-time-security-bounds-applied-to-qif) | 2026-02-13 | Three Floors + Energy-Time Security Bounds | Implemented |
+| [51](#entry-51) | 2026-02-13 | P=E/t, ΔEΔt, Classical-Quantum Transition Equation | Derived |
+| [35](#entry-35-the-black-hole-security-principle--hawkingsusskindmaldacena-applied-to-bci) | 2026-02-06 | The Black Hole Security Principle | Derived |
+| [28](#entry-28) | 2026-02-06 | L=v/f Unification, Resonance Shield | Implemented |
+| [27](#entry-27) | 2026-02-06 | No-Cloning Theorem at I0 | Validated |
+| [26](#entry-26) | 2026-02-06 | Unified QI Equation with Dsf | Implemented |
+| [18](#entry-18) | 2026-02-03 | The Hamiltonian Is the Missing Root Node | Validated |
+
+**Neurorights & Governance**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [69](#entry-69-nist-iso-hardened-mapping) | 2026-02-21 | NIST/ISO Hardened Compliance Mapping | GOVERNANCE |
+| [68](#entry-68-ca-folded-into-mi) | 2026-02-20 | CA Folded into Mental Integrity (MI) | CORRECTION |
+| [58](#entry-58-neurorights-cross-validation) | 2026-02-18 | Neurorights Cross-Validation Against 6 Frameworks | VERIFIED |
+| [57](#entry-57) | 2026-02-18 | Neurorights Mapping & Consent Complexity Index | VERIFIED |
+
+**TARA & Threat Registry**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [67](#entry-67) | 2026-02-18 | Security Guardrails + SSVEP Discovery + Thalamic Gate | ANALYSIS |
+| [66](#entry-66-ssvep-frequency-hijack-discovery) | 2026-02-18 | SSVEP Frequency Hijack + BCI Limits Validation | DISCOVERY |
+| [65](#entry-65) | 2026-02-18 | Physics Feasibility Tiering of TARA Techniques | ANALYSIS |
+| [54](#entry-54) | 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
+| [53](#entry-53) | 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping | Implemented |
+| [50](#entry-50-tara--therapeutic-atlas-of-risks-and-applications) | 2026-02-09 | TARA — Therapeutic Atlas of Risks and Applications | Implemented |
+| [49](#entry-49) | 2026-02-09 | Dual-Use Gap Analysis — What Does Not Map | ANALYSIS |
+| [45](#entry-45) | 2026-02-09 | Dynamical Systems Security — Separatrix, Bifurcation | HYPOTHESIS |
+| [44](#entry-44) | 2026-02-08 | Spectral Decomposition as Security Primitive | Validated |
+| [43](#entry-43) | 2026-02-08 | QIF Locus Taxonomy + NISS: Original IP Rationale | Decision |
+| [38](#entry-38) | 2026-02-06 | MITRE ATT&CK Gap Analysis — Cross-Reference | Implemented |
+| [37](#entry-37) | 2026-02-06 | Unified Neural Security Taxonomy | Implemented |
+
+**Tools & Implementation**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [56](#entry-56) | 2026-02-14 | Runemate Forge & NSP Integration | Implemented |
+| [55](#entry-55) | 2026-02-14 | NSP Core & Handshake Implementation (Rust) | Implemented |
+| [48](#entry-48) | 2026-02-09 | NSP Reframed — Trust Layer That Enables Medicine | Active |
+| [47](#entry-47) | 2026-02-09 | DSM Dissolved into NSP — No Separate Component | Active |
+| [46](#entry-46) | 2026-02-09 | Baseline-Free Security at I0 + Defensive Medical Apps | Active |
+| [42](#entry-42) | 2026-02-08 | Synthetic Band Rationale, RF Fingerprinting Parallel | Validated |
+| [34](#entry-34) | 2026-02-06 | v4.0 IMPLEMENTED — Quantum Proof, Hourglass Diagram | Implemented |
+| [32](#entry-32) | 2026-02-06 | BCI Device Taxonomy (92 Devices), Frequency Registry | Implemented |
+| [31](#entry-31) | 2026-02-06 | NSP Goes Post-Quantum — Implant Lifetime Argument | Active |
+| [17](#entry-17) | 2026-02-02 | Immersive Whitepaper UX — Audio, Scroll, Field Notes | Implemented |
+
+**Cross-AI Validation**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [59](#entry-59-hallucination-audit) | 2026-02-18 | Hallucination Audit and Biology-First Reframing | VERIFIED |
+| [41](#entry-41) | 2026-02-07 | First Multi-Model Validation Cycle (QwQ, Grok, Gemini) | VERIFIED |
+| [40](#entry-40) | 2026-02-07 | Unrestricted AI Validation Team Protocol | Active |
+| [39](#entry-39) | 2026-02-07 | Project Runemate — Three-Pass Gemini Review | Active |
+| [16](#entry-16) | 2026-02-02 | Independent AI Peer Review (Gemini 2.5) | Active |
+
+**Live Sessions & Process**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [64](#entry-64) | 2026-02-18 | BCI Limits Equation Blog Post — Published | PUBLISHED |
+| [63](#entry-63) | 2026-02-18 | BCI Limits Equation — Strategic Assessment | ANALYSIS |
+| [62](#entry-62) | 2026-02-18 | Track Everything + Unified Dashboard Vision | PROCESS |
+| [61](#entry-61) | 2026-02-18 | Format Change — Raw Conversational Mode | PROCESS |
+
+**Foundational Derivations (Feb 2)**
+| # | Date | Title | Status |
+|---|------|-------|--------|
+| [19](#entry-19) | 2026-02-03 | Research Assessment — Who Is Working on H_total | Active |
+| [13](#entry-13) | 2026-02-02 | Dependency and the Determinacy Spectrum as 2D Framework | In development |
+| [12](#entry-12) | 2026-02-02 | The BCI Creates Classical Time | Hypothesis |
+| [11](#entry-11) | 2026-02-02 | Brain Regions Define Dependencies, Not Linear Chains | Validated |
+| [10](#entry-10) | 2026-02-02 | Classical Security Is a Subset, Not the Full Picture | Validated |
+| [9](#entry-9) | 2026-02-02 | The Quasi-Quantum Regime: QIF's Home Territory | Validated |
+| [8](#entry-8) | 2026-02-02 | Time Is Not Fundamental in the Quantum Domain | Validated |
+| [6](#entry-6) | 2026-02-02 | The Determinacy Spectrum: Chaos Is Classical | Validated |
+| [5](#entry-5) | 2026-02-02 | The QI Gradient: Abstraction Predicts Indeterminacy | Hypothesis |
+| [4](#entry-4) | 2026-02-02 | 6 Cortical Layers Don't Generalize | Validated |
+| [3](#entry-3) | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
+| [2](#entry-2) | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded |
+| [1](#entry-1-osi-layers-are-meaningless-for-bci) | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+### Full Chronological Index
 
 | # | Date | Title | Status |
 |---|------|-------|--------|
+| 70 | 2026-02-21 | Wearable Neural Firewall — Secure Edge Architecture | IMPLEMENTATION |
 | 69 | 2026-02-21 | NIST/ISO Hardened Compliance Mapping — Bridging Ethics to Evidence | GOVERNANCE + IMPLEMENTATION |
 | 68 | 2026-02-20 | Cognitive Authenticity (CA) Folded into Mental Integrity (MI) | CORRECTION |
 | 67 | 2026-02-18 | Security Guardrails Synthesis + SSVEP Discovery + Thalamic Gate Model — Raw Session | ANALYSIS + DISCOVERY + GOVERNANCE |
-| 66 | 2026-02-18 | T0103 Detection Methods + Ethical Neurosecurity Governance Gaps | ANALYSIS + GOVERNANCE |
 | 66 | 2026-02-18 | SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation | DISCOVERY + VERIFIED |
 | 65 | 2026-02-18 | Physics Feasibility Tiering of TARA Techniques | ANALYSIS |
 | 64 | 2026-02-18 | BCI Limits Equation Blog Post — Published | PUBLISHED |
@@ -161,44 +275,60 @@ Each entry follows this structure:
 | 59 | 2026-02-18 | Hallucination Audit and Biology-First Reframing | VERIFIED + HYPOTHESIS |
 | 58 | 2026-02-18 | Neurorights Cross-Validation Against Established Frameworks | VERIFIED |
 | 57 | 2026-02-18 | Neurorights Mapping & Consent Complexity Index | VERIFIED + HYPOTHESIS |
-| 56 | 2026-02-14 ~afternoon | Runemate Forge & NSP Integration | Implemented — Secure Pipe Verified |
-| 55 | 2026-02-14 ~morning | NSP Core & Handshake Implementation | Implemented — Rust, PQ-secure |
-| 43 | 2026-02-08 ~04:30 AM | QIF Locus Taxonomy + NISS: Why Original IP Over CVSS/MITRE Adoption | Decision — strategic and legal rationale documented |
-| 38 | 2026-02-06 | MITRE ATT&CK Gap Analysis — Cross-Reference Population | Implemented — coverage 28.3% → 80.0%, 28 unique MITRE IDs, 12 genuinely novel |
-| 37 | 2026-02-06 ~late night | Unified Neural Security Taxonomy: MITRE ATT&CK-Compatible BCI Threat Registry | Implemented — 60 techniques, 11 tactics, config.py updated |
+| 56 | 2026-02-14 | Runemate Forge & NSP Integration | Implemented — Secure Pipe Verified |
+| 55 | 2026-02-14 | NSP Core & Handshake Implementation | Implemented — Rust, PQ-secure |
+| 54 | 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
+| 53 | 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping via Neural Impact Chain | Implemented |
+| 52 | 2026-02-13 | Three Floors + Energy-Time Security Bounds Applied to QIF | Implemented |
+| 51 | 2026-02-13 | P=E/t → ΔEΔt → Computational Scaling: Classical-Quantum Transition | Derived |
+| 50 | 2026-02-09 | TARA — Therapeutic Atlas of Risks and Applications | Implemented |
+| 49 | 2026-02-09 | Dual-Use Gap Analysis — What Does Not Map and What Might | ANALYSIS |
+| 48 | 2026-02-09 | NSP Reframed — The Trust Layer That Enables Medicine | Active |
+| 47 | 2026-02-09 | DSM Dissolved into NSP — No Separate Component | Active |
+| 46 | 2026-02-09 | Baseline-Free Security at I0 + Defensive Medical Applications | Active |
+| 45 | 2026-02-09 | Dynamical Systems Security — Separatrix, Hysteresis, Bifurcation | HYPOTHESIS |
+| 44 | 2026-02-08 | Spectral Decomposition as Security Primitive | Validated |
+| 43 | 2026-02-08 | QIF Locus Taxonomy + NISS: Why Original IP Over CVSS/MITRE | Decision |
+| 42 | 2026-02-08 | Synthetic Band Rationale — Frequency-Regime Security | Validated |
+| 41 | 2026-02-07 | First Multi-Model Validation Cycle — Equation Fixes | VERIFIED |
+| 40 | 2026-02-07 | Unrestricted AI Validation Team — Multi-Model Protocol | Active |
+| 39 | 2026-02-07 | Project Runemate — Three-Pass Independent Review | Active |
+| 38 | 2026-02-06 | MITRE ATT&CK Gap Analysis — Cross-Reference Population | Implemented |
+| 37 | 2026-02-06 | Unified Neural Security Taxonomy: MITRE-Compatible BCI Threat Registry | Implemented |
 | 36 | 2026-02-06 | Synthetic Domain Rename, I0 as Domain-Indeterminate Superposition | Validated |
-| 35 | 2026-02-06 ~08:15 AM | The Black Hole Security Principle — Hawking/Susskind/Maldacena Applied to BCI | Derived |
-| 34 | 2026-02-06 ~09:00 AM | v4.0 IMPLEMENTED — Quantum Proof Scenario, Hourglass Diagram, Name Validation | Implemented |
-| 33 | 2026-02-06 ~08:00 AM | QIF v4.0 — 7-1-3 Hourglass Architecture (Final Decision) | Decision — awaiting implementation |
-| 32 | 2026-02-06 ~07:30 AM | BCI Device Taxonomy (92 Devices), Frequency Registry, MITRE Framing | Implemented |
-| 31 | 2026-02-06 ~07:45 AM | NSP Goes Post-Quantum — The Implant Lifetime Argument | Active |
-| 30 | 2026-02-06 ~07:30 AM | Cross-Session Synthesis — Detection-Prediction Architecture | Active |
+| 35 | 2026-02-06 | The Black Hole Security Principle — Hawking/Susskind/Maldacena | Derived |
+| 34 | 2026-02-06 | v4.0 IMPLEMENTED — Quantum Proof Scenario, Hourglass Diagram | Implemented |
+| 33 | 2026-02-06 | QIF v4.0 — 7-1-3 Hourglass Architecture (Final Decision) | Decision |
+| 32 | 2026-02-06 | BCI Device Taxonomy (92 Devices), Frequency Registry, MITRE | Implemented |
+| 31 | 2026-02-06 | NSP Goes Post-Quantum — The Implant Lifetime Argument | Active |
+| 30 | 2026-02-06 | Cross-Session Synthesis — Detection-Prediction Architecture | Active |
 | 29 | 2026-02-06 | Break-It Test Plan and Honest Framing | Active |
-| 28 | 2026-02-06 ~06:30 AM | L=v/f Unification, Government-Restricted Spectrum, Resonance Shield | Implemented |
+| 28 | 2026-02-06 | L=v/f Unification, Government-Restricted Spectrum, Resonance Shield | Implemented |
 | 27 | 2026-02-06 | No-Cloning Theorem at I0 | Validated |
 | 26 | 2026-02-06 | Unified QI Equation with Dsf | Implemented |
-| 25 | 2026-02-06 ~06:00 AM | 3-1-3 vs Tactical 7-1-3 — Architecture Stress Test and the Spinal Gap | Validated |
-| 24 | 2026-02-06 ~02:30 AM | 7-Layer Neural Expansion, Neural Sensory Protocol, Multi-AI Validation | Implemented |
-| 22 | 2026-02-03 ~night | Classical-Hourglass Reconciliation and Cognitive Sovereignty Rename | Validated |
-| 19 | 2026-02-03 ~night | Research Assessment — Who Is Working on H_total | Active |
-| 18 | 2026-02-03 ~night | The Hamiltonian Is the Missing Root Node of the QI Equation | Validated — unifying insight |
-| 17 | 2026-02-02 ~late night | Immersive Whitepaper UX — Audio, Hourglass Scroll, Field Notes | Implemented |
-| 16 | 2026-02-02 ~late night | Independent AI Peer Review (Gemini 2.5) — Critical Assessment | Active — actionable feedback received, improvements queued |
-| 15 | 2026-02-02 ~night | QIF v3.1 — 7-Band Symmetric Model (Validated by External Research) | Implemented — 3 agents validated, 6 decisions confirmed |
-| 14 | 2026-02-02 ~evening | QIF v3.0 Hourglass Layer Model — Finalized and Implemented | Implemented — 8-band model across all files |
-| 13 | 2026-02-02 ~afternoon | Dependency and the Determinacy Spectrum as 2D Framework | In development — axes and hourglass geometry |
-| 12 | 2026-02-02 ~afternoon | The BCI Creates Classical Time | Hypothesis — novel, derived from QM time-parameter status |
-| 11 | 2026-02-02 ~afternoon | Brain Regions Define Dependencies, Not Linear Chains | Validated — neuroanatomical basis |
-| 10 | 2026-02-02 ~afternoon | Classical Security Is a Subset, Not the Full Picture | Validated — reframes entire field |
-| 9 | 2026-02-02 ~afternoon | The Quasi-Quantum Regime: QIF's Home Territory | Validated — mesoscopic physics, novel framing for BCI |
-| 8 | 2026-02-02 ~afternoon | Time Is Not Fundamental in the Quantum Domain | Validated — standard QM, novel application to BCI |
-| 7 | 2026-02-02 ~afternoon | The Hourglass Model | Hypothesis — geometrically and physically motivated |
-| 6 | 2026-02-02 ~afternoon | The Determinacy Spectrum: Chaos Is Classical | Validated — grounded in Bell's theorem |
-| 5 | 2026-02-02 ~afternoon | The QI Gradient: Abstraction Predicts Indeterminacy | Hypothesis — strong theoretical basis |
-| 4 | 2026-02-02 ~afternoon | 6 Cortical Layers Don't Generalize | Validated — eliminates cortical model as basis |
-| 3 | 2026-02-02 ~afternoon | Layer Consolidation: 14 Is Too Many | Validated — redesign in progress |
-| 2 | 2026-02-02 ~afternoon | Circular Topology: L8 Touches L1 | Validated — superseded by hourglass (Entry 7) |
-| 1 | 2026-02-02 ~afternoon | OSI Layers Are Meaningless for BCI | Validated — drives framework redesign |
+| 25 | 2026-02-06 | 3-1-3 vs Tactical 7-1-3 — Architecture Stress Test and the Spinal Gap | Validated |
+| 24 | 2026-02-06 | 7-Layer Neural Expansion, Neural Sensory Protocol, Multi-AI Validation | Implemented |
+| 22 | 2026-02-03 | Classical-Hourglass Reconciliation and Cognitive Sovereignty Rename | Validated |
+| 19 | 2026-02-03 | Research Assessment — Who Is Working on H_total | Active |
+| 18 | 2026-02-03 | The Hamiltonian Is the Missing Root Node of the QI Equation | Validated |
+| 17 | 2026-02-02 | Immersive Whitepaper UX — Audio, Hourglass Scroll, Field Notes | Implemented |
+| 16 | 2026-02-02 | Independent AI Peer Review (Gemini 2.5) — Critical Assessment | Active |
+| 15 | 2026-02-02 | QIF v3.1 — 7-Band Symmetric Model (Validated by External Research) | Implemented |
+| 14 | 2026-02-02 | QIF v3.0 Hourglass Layer Model — Finalized and Implemented | Implemented |
+| 13 | 2026-02-02 | Dependency and the Determinacy Spectrum as 2D Framework | In development |
+| 12 | 2026-02-02 | The BCI Creates Classical Time | Hypothesis |
+| 11 | 2026-02-02 | Brain Regions Define Dependencies, Not Linear Chains | Validated |
+| 10 | 2026-02-02 | Classical Security Is a Subset, Not the Full Picture | Validated |
+| 9 | 2026-02-02 | The Quasi-Quantum Regime: QIF's Home Territory | Validated |
+| 8 | 2026-02-02 | Time Is Not Fundamental in the Quantum Domain | Validated |
+| 7 | 2026-02-02 | The Hourglass Model | Hypothesis |
+| 6 | 2026-02-02 | The Determinacy Spectrum: Chaos Is Classical | Validated |
+| 5 | 2026-02-02 | The QI Gradient: Abstraction Predicts Indeterminacy | Hypothesis |
+| 4 | 2026-02-02 | 6 Cortical Layers Don't Generalize | Validated |
+| 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
+| 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
+| 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
 ---
 
 ## Entry 70: Wearable Neural Firewall — Secure Edge Architecture for Non-Intrusive BCI {#entry-70-wearable-neural-firewall}

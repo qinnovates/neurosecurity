@@ -432,6 +432,7 @@ function PhysicsPanel({ device }: { device: BciDevice }) {
 
 function BrainRenderPanel({ device, brainViews }: { device: BciDevice; brainViews: BrainView[] }) {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const [interacted, setInteracted] = useState(false);
 
   // Filter brain views to only show regions this device targets
   const deviceBands = new Set(device.qifBands);
@@ -441,6 +442,17 @@ function BrainRenderPanel({ device, brainViews }: { device: BciDevice; brainView
       regions: view.regions.filter(r => deviceBands.has(r.id)),
     }));
   }, [brainViews, device.id]);
+
+  // Reset interaction state when device changes
+  useEffect(() => {
+    setInteracted(false);
+    setActiveRegion(null);
+  }, [device.id]);
+
+  const handleRegionSelect = (id: string | null) => {
+    setActiveRegion(id);
+    if (!interacted) setInteracted(true);
+  };
 
   if (device.qifBands.length === 0) {
     return (
@@ -452,20 +464,57 @@ function BrainRenderPanel({ device, brainViews }: { device: BciDevice; brainView
 
   return (
     <PanelShell title="3D Brain View" deepLink="/atlas/" deepLinkLabel="Full Atlas">
-      <div style={{ height: '380px' }}>
-        <Suspense fallback={
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-faint)' }}>Loading 3D brain...</span>
+      <div
+        style={{ height: '320px', position: 'relative' }}
+        onClick={() => { if (!interacted) setInteracted(true); }}
+      >
+        {/* Hide the info panel, let canvas fill the space */}
+        <style>{`
+          .brain-compact .flex-1.min-w-0 { display: none !important; }
+          .brain-compact .lg\\:w-\\[55\\%\\] { width: 100% !important; }
+          .brain-compact .lg\\:flex-row { flex-direction: column !important; }
+        `}</style>
+        <div className="brain-compact" style={{ height: '100%' }}>
+          <Suspense fallback={
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-faint)' }}>Loading 3D brain...</span>
+            </div>
+          }>
+            <BrainVisualization
+              views={filteredViews}
+              defaultView="security"
+              externalActiveRegion={activeRegion}
+              onRegionSelect={handleRegionSelect}
+              hideViewToggle
+            />
+          </Suspense>
+        </div>
+        {/* Overlay prompt that fades on interaction */}
+        {!interacted && (
+          <div style={{
+            position: 'absolute',
+            bottom: '28px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(4px)',
+            color: 'rgba(255, 255, 255, 0.85)',
+            fontSize: '0.6875rem',
+            padding: '6px 14px',
+            borderRadius: '6px',
+            pointerEvents: 'none',
+            whiteSpace: 'nowrap',
+            animation: 'brainPromptFade 0.3s ease',
+          }}>
+            Click a region to explore
           </div>
-        }>
-          <BrainVisualization
-            views={filteredViews}
-            defaultView="security"
-            externalActiveRegion={activeRegion}
-            onRegionSelect={setActiveRegion}
-            hideViewToggle
-          />
-        </Suspense>
+        )}
+        <style>{`
+          @keyframes brainPromptFade {
+            from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+          }
+        `}</style>
       </div>
     </PanelShell>
   );
@@ -718,17 +767,13 @@ export default function BciDashboard({ devices, bands, brainViews }: Props) {
             )}
           </div>
 
-          {/* Brain render - full width, first */}
-          <div style={{ marginBottom: '16px' }}>
-            <BrainRenderPanel device={selectedDevice} brainViews={brainViews} />
-          </div>
-
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
             gap: '16px',
             marginBottom: '40px',
           }}>
+            <BrainRenderPanel device={selectedDevice} brainViews={brainViews} />
             <DeviceSpecsPanel device={selectedDevice} />
             <BrainMappingPanel device={selectedDevice} />
             <HourglassPositionPanel device={selectedDevice} bands={bands} />

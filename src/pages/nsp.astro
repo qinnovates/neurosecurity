@@ -29,6 +29,7 @@ import {
           { href: '#layers', label: '5-Layer Stack' },
           { href: '#tiers', label: 'Device Tiers' },
           { href: '#power', label: 'Power Budget' },
+          { href: '#why-hard', label: 'Why PQC on BCI Is Hard' },
           { href: '#pqc', label: 'PQC Key Sizes' },
           { href: '#pipeline', label: 'Pipeline' },
           { href: '#how-it-fits', label: 'How It Fits' },
@@ -198,6 +199,90 @@ import {
           </table>
         </div>
         <p class="text-xs text-[var(--color-text-faint)] mt-4" set:html={`Maximum allowed: ${NSP_POWER.maxAllowedPercent}% &mdash; current overhead is well within budget.`} />
+      </section>
+
+      <!-- Why PQC on BCI Is Hard -->
+      <section id="why-hard" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Why PQC on BCI Is Hard</h2>
+        <div class="prose mb-8">
+          <p>
+            Post-quantum cryptography was not designed for devices with 40 mW power budgets, no internet connectivity, and 20-year operational lifetimes. Making it work on a brain-computer interface requires solving six distinct engineering problems. Compression alone does not get you there.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="glass rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">01</span>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">Signature Size</h3>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              SPHINCS+ signatures are 7,856 to 16,224 bytes each. Signing every frame would be prohibitive over BLE. NSP amortizes this cost using Merkle trees: 100 frames are bundled into a binary tree, and only the root is signed. Per-frame cost drops to a single SHA-256 hash. This is an architectural solution, not a compression trick.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2 font-[family-name:var(--font-mono)]">Spec: Section 3.6 (Merkle Hash Chain), Section 5.3 (SPHINCS+)</p>
+          </div>
+
+          <div class="glass rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">02</span>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">Power Budget</h3>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              The hybrid key exchange (ECDH + ML-KEM) costs ~2 mW, but only fires at session start. Full SPHINCS+ signing costs ~10 mW but only fires at key rotation (every 30-90 days depending on tier). Steady-state crypto is AES-256-GCM-SIV on already-compressed payloads: ~0.1 mW with hardware acceleration. The pipeline order matters: compress first (3-5x reduction), then encrypt the smaller payload, then sign. Total steady-state overhead: 3.25% of a 40 mW budget.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2 font-[family-name:var(--font-mono)]">Spec: Section 9 (Power Budget), Section 9.4 (Pipeline Order)</p>
+          </div>
+
+          <div class="glass rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">03</span>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">Nonce Reuse After Power Loss</h3>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              Implanted devices can lose power unexpectedly. Standard AES-GCM catastrophically leaks the authentication key if a nonce is reused. NSP uses AES-256-GCM-SIV (RFC 8452), which provides nonce-misuse resistance: the only information leaked on nonce reuse is whether the same plaintext was encrypted twice. For a device implanted in brain tissue that cannot be physically reset, this property is critical.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2 font-[family-name:var(--font-mono)]">Spec: Section 5.4 (AES-256-GCM-SIV)</p>
+          </div>
+
+          <div class="glass rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">04</span>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">PKI on an Offline Device</h3>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              An implanted BCI cannot download certificate revocation lists or query OCSP servers. Post-quantum signatures are 8-16 KB each; CRLs would consume significant bandwidth and battery. NSP delegates revocation checking to a gateway (smartphone or base station) that issues short-lived session credentials. The implant only verifies one signature per session establishment.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2 font-[family-name:var(--font-mono)]">Spec: Section 7.4.1 (Gateway-Delegated Revocation)</p>
+          </div>
+
+          <div class="glass rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">05</span>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">20-Year Key Lifecycle</h3>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              The device root key is provisioned at implant surgery and cannot be replaced without a clinical procedure. NSP provides crypto agility (algorithm substitution without re-keying) and monotonic firmware version counters to prevent rollback attacks. Key rotation happens on a 30-day maximum cycle for T3 implants and 90-day for T1/T2. If a key is compromised, forward secrecy from ephemeral session keys ensures past sessions remain protected.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2 font-[family-name:var(--font-mono)]">Spec: Section 7 (Key Lifecycle), Section 7.5 (Crypto Agility), Section 7.6 (Rollback Protection)</p>
+          </div>
+
+          <div class="glass rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">06</span>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">Traffic Analysis</h3>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              Even with perfect encryption, BLE packet timing reveals when a user is speaking, moving, sleeping, or having a seizure. This is a privacy catastrophe for neural data. NSP requires T3 (implanted) devices to transmit at a constant rate, padding idle periods with dummy frames, so packet timing carries no information about neural state.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)] mt-2 font-[family-name:var(--font-mono)]">Spec: Section 10.8 (Traffic Analysis)</p>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Bottom line:</strong> Compression (Delta+LZ4) is step 1 of the pipeline. The real engineering is signature amortization via Merkle trees, pipeline ordering for power optimization, nonce-misuse resistant encryption, delegated PKI for offline devices, 20-year key lifecycle management, and constant-rate padding against traffic analysis.
+          </p>
+        </div>
       </section>
 
       <!-- PQC Key Sizes -->
