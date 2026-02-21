@@ -195,6 +195,10 @@ hostname_get() {
     cat "$CONFIG_DIR/personal_hostname" 2>/dev/null || echo ""
 }
 
+read_state() {
+    cat "$STATE_FILE" 2>/dev/null || echo "unknown"
+}
+
 write_state() {
     mkdir -p "$CONFIG_DIR"
     echo "$1" > "$STATE_FILE"

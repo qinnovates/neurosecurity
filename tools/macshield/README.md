@@ -301,12 +301,72 @@ macshield provides **basic security hardening**. It is effective against casual 
 
 ## Security Model
 
-- **Pure bash.** Every line is auditable. No compiled binaries, no helper tools.
+- **Pure bash + Rust.** The main script is auditable bash. The only compiled component is `pq-signer`, a small Rust binary for post-quantum signatures (source included, auditable).
 - **No network calls.** macshield never phones home, checks for updates, or sends telemetry.
-- **No config files.** Trusted networks stored as HMAC hashes in macOS Keychain only.
-- **Keychain encryption.** Protected by Secure Enclave (Apple Silicon) or FileVault (Intel).
+- **No config files.** Trusted networks stored as signed hashes in a root-only directory.
+- **Keychain encryption.** Personal hostname protected by Secure Enclave (Apple Silicon) or FileVault (Intel).
 - **Ephemeral logs.** Stdout logs go to `/tmp/` (cleared on reboot). Logs never contain SSIDs.
 - **Minimal sudo.** Only 8 specific commands, validated by `visudo -c`.
+- **Post-quantum signatures.** Trust store integrity verified with ML-DSA (see below).
+
+## Post-Quantum Cryptography
+
+macshield uses **NIST-standardized post-quantum cryptography** to protect its trust store from tampering.
+
+### Why Post-Quantum?
+
+When you mark a network as trusted, macshield stores a fingerprint (HMAC-SHA256 of the SSID + BSSID). If an attacker or malicious app modifies that trust store, macshield could be tricked into relaxing protections on an untrusted network. Standard HMAC alone can't detect this kind of tampering.
+
+macshield signs every trust store entry with **ML-DSA (CRYSTALS-Dilithium)**, a lattice-based digital signature algorithm standardized by NIST in FIPS 204 (August 2024). ML-DSA is resistant to attacks from both classical and quantum computers.
+
+### How It Works
+
+```
+macshield trust
+      |
+      v
+Compute HMAC-SHA256(SSID + BSSID)
+      |
+      v
+Sign the hash with ML-DSA private key (pq-signer)
+      |
+      v
+Store: { hash, signature } in /Library/Application Support/macshield/trust.db
+      |
+      v
+On network change: verify signature before trusting
+```
+
+1. **Key generation:** On first run, `pq-signer keygen` creates an ML-DSA-65 (Dilithium3) keypair. The private key is stored in a root-only directory (`/Library/Application Support/macshield/keys/`).
+2. **Signing:** When you run `macshield trust`, the network fingerprint is signed with your private key. The signature is stored alongside the hash.
+3. **Verification:** On every network change, macshield verifies the signature before trusting a network. If the signature is invalid (trust store was tampered with), the network is treated as untrusted.
+
+### The pq-signer Binary
+
+`pq-signer` is a small Rust CLI tool located in `pq-signer/`. It wraps the `pqcrypto-dilithium` crate (CRYSTALS-Dilithium reference implementation).
+
+```
+pq-signer keygen                          # Generate ML-DSA keypair
+pq-signer sign --key <SK> --data <DATA>   # Sign data
+pq-signer verify --key <PK> --data <DATA> --sig <SIG>  # Verify signature
+```
+
+To build from source:
+```bash
+cd pq-signer
+cargo build --release
+# Binary at target/release/pq-signer
+```
+
+### Why This Matters
+
+Most local security tools use HMAC or SHA-256 hashes for integrity. These are sufficient against classical attacks but provide no protection against:
+- A compromised process with write access to the trust store
+- Future quantum computers that could forge HMAC keys
+
+ML-DSA signatures ensure that only the holder of the private key (root on your machine) can add or modify trusted networks. Even if the trust database file is readable, it cannot be forged without the private key.
+
+**macshield is one of the first consumer security tools to use NIST post-quantum cryptography for local trust verification.**
 
 ## Comparison
 
@@ -317,6 +377,7 @@ macshield provides **basic security hardening**. It is effective against casual 
 | Hostname randomization | Yes | No | No | No | Some |
 | Stealth mode toggle | Yes | Yes | Yes | No | Yes |
 | NetBIOS control | Yes | No | No | No | No |
+| Post-quantum trust signatures | Yes (ML-DSA) | No | No | No | No |
 | Zero config files on disk | Yes | No | No | No | No |
 | Price | Free | $49 | $50/yr | Free | Free |
 | Pure bash / auditable | Yes | No | No | No | Partial |
