@@ -17,9 +17,11 @@ The goal is NOT to prove the firewall is perfect. It's to map exactly
 where the detection boundaries are, so we know what Phase 1 needs to fix.
 
 Usage:
-    python test_nic_chains.py              # Run all scenarios
+    python test_nic_chains.py              # Run all scenarios (single run)
     python test_nic_chains.py --scenario 3 # Run scenario 3 only
-    python test_nic_chains.py --verbose     # Show per-window diagnostics
+    python test_nic_chains.py --verbose     # Show per-window coherence diagnostics
+    python test_nic_chains.py --sweep       # Duration sweep (10, 20, 30, 60s)
+    python test_nic_chains.py --runs 50     # Statistical analysis (50 runs per scenario)
 
 Dependencies:
     pip install numpy lz4 cryptography scipy
@@ -547,6 +549,7 @@ def run_scenario(
     scenario: AttackScenario,
     duration: float = 10.0,
     verbose: bool = False,
+    seed: int = None,
 ) -> AttackScenario:
     """Run a single attack scenario through the full Neurowall pipeline.
 
@@ -568,7 +571,11 @@ def run_scenario(
 
     # Fixed seed per scenario for reproducible results.
     # Each scenario gets a unique seed so they have independent noise.
-    np.random.seed(42 + scenario.id)
+    # Optional seed override for statistical analysis (different seed per run).
+    if seed is not None:
+        np.random.seed(seed)
+    else:
+        np.random.seed(42 + scenario.id)
 
     gen_fn = generators[scenario.generate_fn]
     signal = gen_fn(duration, SAMPLE_RATE)
@@ -578,7 +585,7 @@ def run_scenario(
     # Fix L1 startup artifact: initialize prev_sample to first signal value
     # so the first sample doesn't trigger impedance guard due to 0->2.5V jump.
     l1.prev_sample = signal[0]
-    monitor = SignalMonitor(calibration_windows=4)
+    monitor = SignalMonitor(calibration_windows=8)
     niss = NissEngine()
     policy = RunematePolicy(niss_threshold=5, tight_epsilon=0.1)
     budget = PrivacyBudget()
@@ -636,11 +643,14 @@ def run_scenario(
                 traj = ""
                 if detail.get("trajectory_flag"):
                     traj = f" [TRAJ drift={detail.get('trajectory_drift', 0):.4f}]"
+                growth = ""
+                if detail.get("growth_flag"):
+                    growth = " [GROWTH DETECTED]"
                 print(f"    [{t_sec:6.3f}s] Cs={cs:.4f} "
                       f"ewma={detail.get('cs_ewma', 0):.4f} "
                       f"anomaly={anomaly_score:.2f} "
                       f"H_tau={detail.get('h_tau', 0):.4f}"
-                      f"{flag}{traj}")
+                      f"{flag}{traj}{growth}")
 
             if anomaly_score > scenario.max_anomaly_score:
                 scenario.max_anomaly_score = anomaly_score
@@ -859,16 +869,47 @@ Scenarios include both "detectable" attacks (baseline validation) and
                         help="Simulation duration in seconds (default: 10)")
     parser.add_argument("--verbose", action="store_true",
                         help="Show per-window coherence diagnostics")
+    parser.add_argument("--sweep", action="store_true",
+                        help="Duration sweep: run at 10, 20, 30, 60s")
+    parser.add_argument("--runs", type=int, default=1,
+                        help="Statistical runs per scenario (default: 1)")
 
     args = parser.parse_args()
 
+    if args.sweep:
+        run_duration_sweep(args)
+    elif args.runs > 1:
+        run_statistical(args)
+    else:
+        run_single(args)
+
+
+def apply_fpr_adjustment(results):
+    """Set monitor_detected relative to clean signal FPR baseline."""
+    clean_result = next((r for r in results if r.id == 0), None)
+    clean_anomalies = clean_result.monitor_anomaly_count if clean_result else 0
+
+    for r in results:
+        if r.id == 0:
+            r.monitor_detected = False
+        else:
+            threshold = max(clean_anomalies * 2, clean_anomalies + 3)
+            r.monitor_detected = r.monitor_anomaly_count > threshold
+
+    return clean_anomalies
+
+
+def run_single(args):
+    """Standard single run of all scenarios."""
     print("=" * 90)
     print("  NEUROWALL NIC CHAIN ATTACK SIMULATION TEST SUITE")
-    print("  Testing Neurowall v0.3 pipeline against TARA threat techniques")
+    print("  Testing Neurowall v0.5 pipeline against TARA threat techniques")
     print("=" * 90)
     print(f"  Duration per scenario: {args.duration}s")
     print(f"  Sample rate: {SAMPLE_RATE} Hz")
     print(f"  Scenarios: {len(SCENARIOS)}")
+    print(f"  EEG generator: multi-band (v0.5)")
+    print(f"  Calibration windows: 8 (4.0s)")
     print()
 
     if args.scenario is not None:
@@ -877,16 +918,14 @@ Scenarios include both "detectable" attacks (baseline validation) and
             print(f"  ERROR: No scenario with id={args.scenario}")
             sys.exit(1)
     else:
-        scenarios = SCENARIOS
+        scenarios = list(SCENARIOS)
 
-    # Run all scenarios
     results = []
     for scenario in scenarios:
         print(f"  [{scenario.id}] Running: {scenario.name}...", end="", flush=True)
         result = run_scenario(scenario, duration=args.duration, verbose=args.verbose)
         results.append(result)
 
-        # Preliminary status (monitor_detected not set yet)
         detected = result.l1_blocked > 0 or result.ssvep_detected
         if scenario.id == 0:
             status = f"FPR baseline ({result.monitor_anomaly_count} anomalies)"
@@ -896,30 +935,126 @@ Scenarios include both "detectable" attacks (baseline validation) and
             status = f"({result.monitor_anomaly_count} anomalies, pending baseline)"
         print(f" {status}")
 
-    # Determine monitor detection relative to clean signal baseline.
-    # The clean signal (scenario 0) establishes the false positive rate.
-    # An attack is "detected by monitor" only if its anomaly count
-    # significantly exceeds the clean baseline. We require > 2x the
-    # clean count AND at least 3 more anomalies than clean.
-    clean_result = next((r for r in results if r.id == 0), None)
-    clean_anomalies = clean_result.monitor_anomaly_count if clean_result else 0
+    clean_anomalies = apply_fpr_adjustment(results)
+    n_monitor_windows = int(args.duration * SAMPLE_RATE / 125) - 8  # subtract calibration
     print(f"\n  Monitor baseline: clean signal produces {clean_anomalies} "
-          f"false positives out of 16 windows")
-    print(f"  Detection threshold: anomaly_count > max({clean_anomalies * 2}, "
-          f"{clean_anomalies + 3})")
+          f"false positives out of {n_monitor_windows} windows")
+    threshold = max(clean_anomalies * 2, clean_anomalies + 3)
+    print(f"  Detection threshold: anomaly_count > {threshold}")
     print()
 
-    for r in results:
-        if r.id == 0:
-            # Clean signal: monitor_detected stays False (it IS the baseline)
-            r.monitor_detected = False
-        else:
-            # Attack: must significantly exceed clean FPR
-            threshold = max(clean_anomalies * 2, clean_anomalies + 3)
-            r.monitor_detected = r.monitor_anomaly_count > threshold
-
-    # Print results matrix
     print_results(results)
+
+
+def run_duration_sweep(args):
+    """Run all scenarios at multiple durations to map detection latency."""
+    durations = [10, 20, 30, 60]
+    print("=" * 90)
+    print("  NEUROWALL DURATION SWEEP")
+    print("  Testing detection vs observation time")
+    print("=" * 90)
+    print(f"  Durations: {durations}s")
+    print(f"  EEG generator: multi-band (v0.5)")
+    print()
+
+    # Header
+    dur_header = "  " + f"{'#':<3} {'Scenario':<30}"
+    for d in durations:
+        dur_header += f" {d:>4}s"
+    print(dur_header)
+    print("  " + "-" * (35 + 6 * len(durations)))
+
+    scenarios = list(SCENARIOS)
+
+    for scenario in scenarios:
+        row = f"  {scenario.id:<3} {scenario.name[:28]:<30}"
+        for d in durations:
+            # Fresh copy of scenario for each duration
+            s_copy = AttackScenario(
+                id=scenario.id, name=scenario.name, tara_id=scenario.tara_id,
+                tactic=scenario.tactic, nic_chain=scenario.nic_chain,
+                niss_vector=scenario.niss_vector, severity=scenario.severity,
+                description=scenario.description,
+                detection_expected=scenario.detection_expected,
+                generate_fn=scenario.generate_fn,
+            )
+            result = run_scenario(s_copy, duration=float(d), verbose=False)
+
+            # Simple detection check (L1 or SSVEP or significant anomalies)
+            if scenario.id == 0:
+                row += f" {result.monitor_anomaly_count:>3}FP"
+            else:
+                detected = (result.l1_blocked > 0 or result.ssvep_detected or
+                            result.monitor_anomaly_count > 8)
+                if detected:
+                    row += f"  YES"
+                else:
+                    row += f"   --"
+
+        print(row)
+
+    print("  " + "-" * (35 + 6 * len(durations)))
+    print()
+    print("  YES = detected, -- = evaded, NNfp = false positives (clean signal)")
+    print()
+
+
+def run_statistical(args):
+    """Run each scenario N times with different seeds for statistical analysis."""
+    n_runs = args.runs
+    print("=" * 90)
+    print("  NEUROWALL STATISTICAL ANALYSIS")
+    print(f"  {n_runs} runs per scenario, duration={args.duration}s")
+    print("=" * 90)
+    print()
+
+    scenarios = list(SCENARIOS)
+    if args.scenario is not None:
+        scenarios = [s for s in scenarios if s.id == args.scenario]
+
+    print(f"  {'#':<3} {'Scenario':<30} {'Det%':>5} {'Mean Anom':>10} "
+          f"{'Std':>6} {'Max Score':>10} {'Mean Score':>11}")
+    print("  " + "-" * 80)
+
+    for scenario in scenarios:
+        anomaly_counts = []
+        max_scores = []
+        detections = 0
+
+        for run_idx in range(n_runs):
+            s_copy = AttackScenario(
+                id=scenario.id, name=scenario.name, tara_id=scenario.tara_id,
+                tactic=scenario.tactic, nic_chain=scenario.nic_chain,
+                niss_vector=scenario.niss_vector, severity=scenario.severity,
+                description=scenario.description,
+                detection_expected=scenario.detection_expected,
+                generate_fn=scenario.generate_fn,
+            )
+            # Pass unique seed per run for statistical variation
+            run_seed = 42 + scenario.id + 1000 * run_idx
+            result = run_scenario(s_copy, duration=args.duration, verbose=False,
+                                  seed=run_seed)
+
+            anomaly_counts.append(result.monitor_anomaly_count)
+            max_scores.append(result.max_anomaly_score)
+            detected = (result.l1_blocked > 0 or result.ssvep_detected or
+                        result.monitor_anomaly_count > 8)
+            if detected:
+                detections += 1
+
+        det_pct = detections / n_runs * 100
+        mean_anom = np.mean(anomaly_counts)
+        std_anom = np.std(anomaly_counts)
+        mean_score = np.mean(max_scores)
+        max_score = np.max(max_scores)
+
+        print(f"  {scenario.id:<3} {scenario.name[:28]:<30} {det_pct:>4.0f}% "
+              f"{mean_anom:>9.1f} {std_anom:>6.1f} {max_score:>9.2f} "
+              f"{mean_score:>10.2f}")
+
+    print("  " + "-" * 80)
+    print(f"\n  Detection threshold: anomaly_count > 8 (simplified for stats mode)")
+    print()
 
 
 if __name__ == "__main__":
