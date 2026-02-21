@@ -28,6 +28,49 @@ It provides three concentric defense layers:
 | [TESTING.md](./TESTING.md) | Test strategy and validation plan. |
 | [NEUROWALL-DERIVATION-LOG.md](./NEUROWALL-DERIVATION-LOG.md) | Engineering decisions, coherence monitor design, and attack simulation results. |
 
+## Simulation & Testing
+
+| File | Description |
+| :--- | :--- |
+| [sim.py](./sim.py) | Full 3-layer pipeline simulation (v0.4). Generates synthetic EEG, runs L1 notch filters + impedance guard, L2 differential privacy, coherence-based anomaly detection (Cs metric), L3 NISS policy engine, and NSP transport (delta + LZ4 + AES-256-GCM). No hardware required. |
+| [test_nic_chains.py](./test_nic_chains.py) | NIC (Neural Impact Chain) attack simulation test suite. Runs 10 TARA-mapped attack scenarios against the full pipeline and reports per-layer detection results with FPR-adjusted scoring. |
+
+### Running the Tests
+
+```bash
+# Full pipeline simulation (clean EEG, no attack)
+python sim.py
+
+# Inject SSVEP attack
+python sim.py --attack --freq 15.0
+
+# Run all 10 NIC chain attack scenarios
+python test_nic_chains.py
+
+# Run a single scenario with verbose per-window diagnostics
+python test_nic_chains.py --scenario 5 --verbose
+
+# Dependencies
+pip install numpy scipy lz4 cryptography
+```
+
+### Current Detection Results (v0.4)
+
+| # | Attack | Detected By | Result |
+|---|--------|------------|--------|
+| 0 | Clean Signal (Control) | -- | BASELINE (6 FP / 16 windows) |
+| 1 | SSVEP 15Hz | SSVEP + Monitor | DETECTED |
+| 2 | SSVEP 13Hz (novel freq) | Monitor | DETECTED |
+| 3 | Impedance Spike | L1 | DETECTED |
+| 4 | Slow DC Drift | Monitor | DETECTED |
+| 5 | Neuronal Flooding (QIF-T0026) | L1 | DETECTED |
+| 6 | Boiling Frog (QIF-T0066) | -- | **EVADED** |
+| 7 | Envelope Modulation (QIF-T0014) | Monitor | DETECTED |
+| 8 | Phase Replay (QIF-T0067) | -- | **EVADED** |
+| 9 | Closed-Loop Cascade (QIF-T0023) | -- | **EVADED** |
+
+**6/9 attacks detected, 3/9 evaded.** See [NEUROWALL-DERIVATION-LOG.md Entry 007](./NEUROWALL-DERIVATION-LOG.md) for full analysis of detection boundaries, evasion mechanisms, and Phase 1 requirements.
+
 ## Key Technical Properties
 
 | Property | Value |
@@ -49,7 +92,9 @@ It provides three concentric defense layers:
 
 **Neurowall-specific engineering log** (in [NEUROWALL-DERIVATION-LOG.md](./NEUROWALL-DERIVATION-LOG.md)):
 
-Coherence monitor design, QIF Cs metric adaptation for single-channel EEG, attack simulation results, and detection gap analysis. Covers SSVEP detection, QIF-T0026 neuronal flooding, QIF-T0066 boiling frog evasion, phase replay, envelope modulation, and the software capacitor concept.
+- **Entry 001-004:** Coherence monitor design, Cs metric adaptation for single-channel EEG, software capacitor concept, QIF-T0026 flooding detection.
+- **Entry 006:** NIC chain attack simulation test suite (10 scenarios, 3 bugs found/fixed).
+- **Entry 007:** v0.4 trajectory tracker, DC drift detection failure analysis, FPR-adjusted detection methodology, and honest evasion boundary mapping (3/9 evade).
 
 ## Next Steps
 
