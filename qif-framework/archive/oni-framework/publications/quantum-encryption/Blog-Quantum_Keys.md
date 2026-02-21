@@ -56,7 +56,7 @@ That quote is why this article exists.
 
 Listening to Neil interview John Martinis on StarTalk, I found myself identifying dots between quantum tunneling and network security — between Josephson junctions and VPN protocols — between macroscopic quantum effects and the neural security frameworks I've been developing. The connections felt compelling. Maybe too compelling.
 
-I've spent considerable time developing the [ONI (Open Neurosecurity Interoperability) framework](https://github.com/qinnovates/qinnovate) for neural security — exploring coherence breaches, the Scale-Frequency Invariant, and threats to brain-computer interfaces. I know enough about quantum mechanics to see tantalizing connections. But do I know enough to know where I'm wrong?
+I've spent considerable time developing the [ONI (Open Neurosecurity Interoperability) framework](https://github.com/qinnovates/mindloft) for neural security — exploring coherence breaches, the Scale-Frequency Invariant, and threats to brain-computer interfaces. I know enough about quantum mechanics to see tantalizing connections. But do I know enough to know where I'm wrong?
 
 This is my attempt to find out. To map the boundaries of what quantum tunneling can and cannot do for network security. To identify where the physics supports my intuitions — and where it doesn't. To strategize future directions for the ONI project by understanding, honestly, what we're working with.
 
@@ -90,7 +90,7 @@ The answer is no. And the physics of why is crucial.
 
 There's a traversal. There's a duration. There's something happening inside the barrier.
 
-In the [ONI framework](oni-framework/publications/0-oni-framework/Blog-ONI_Framework.md), we call this the **liminal phase** — the state between states, where the system is neither here nor there. And it's governed by physics I'll return to shortly.
+In the [ONI framework](https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/0-oni-framework/Blog-ONI_Framework.md), we call this the **liminal phase** — the state between states, where the system is neither here nor there. And it's governed by physics I'll return to shortly.
 
 · · ·
 
@@ -448,6 +448,6 @@ Neil was right: the challenge is knowing enough to think you're right, but not e
 
 ---
 
-*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*
+*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/mindloft/).*
 
 ← Back to [Index](INDEX.md)

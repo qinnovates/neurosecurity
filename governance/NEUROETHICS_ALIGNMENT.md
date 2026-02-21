@@ -252,8 +252,8 @@ For populations requiring additional protections, see:
 
 | Population | Reference Document |
 |------------|-------------------|
-| Children and adolescents | [PEDIATRIC_CONSIDERATIONS.md](PEDIATRIC_CONSIDERATIONS.md) |
-| Adults with cognitive impairment | [PEDIATRIC_CONSIDERATIONS.md](PEDIATRIC_CONSIDERATIONS.md) (incapacity section) |
+| Children and adolescents | [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) |
+| Adults with cognitive impairment | [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md#incapacity-considerations) |
 | Post-trial participants | [POST_DEPLOYMENT_ETHICS.md](POST_DEPLOYMENT_ETHICS.md) |
 
 ---

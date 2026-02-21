@@ -8,8 +8,8 @@ order: 5
 
 > Mapping QIF-compliant BCIs to regulatory requirements for safe, legal deployment.
 
-**Last Updated:** 2026-02-15
-**Version:** 2.1
+**Last Updated:** 2026-02-21
+**Version:** 2.2
 **Status:** Living Document — US & International Coverage
 
 ---
@@ -26,6 +26,8 @@ order: 5
   - [National Institute of Standards and Technology (NIST)](#national-institute-of-standards-and-technology-nist)
   - [State-Level Regulations](#state-level-regulations)
 - [US Federal Legislation](#us-federal-legislation)
+- [Regulatory & Structural Gaps](#regulatory--structural-gaps)
+- [NIST/ISO Hardened Goals](#nistiso-hardened-goals)
 - [QIF Compliance Matrix](#qif-compliance-matrix)
 - [QIF-Compliant BCI Requirements](#qif-compliant-bci-requirements)
 - [Certification Pathway](#certification-pathway)
@@ -315,9 +317,109 @@ Manufacturers and researchers can use this checklist to verify their "Hardened" 
 
 ## Regulatory & Structural Gaps
 
-While QIF is a leader in this area, current legal frameworks were not designed for high-velocity neural data. For a detailed analysis of where HIPAA, GDPR, and CCPA fall short, see:
+While QIF implements the strongest possible technical safeguards, it operates within a legal landscape designed for static medical records or general consumer data. BCIs introduce variables these laws did not anticipate.
 
-- [**REGULATORY_GAPS.md**](REGULATORY_GAPS.md) — Structural challenges in BCI governance.
+### 1. HIPAA: The Real-Time Stream Auditing Gap
+
+**Legal Context:** HIPAA requires 6-year retention of access logs for Protected Health Information (PHI).
+
+- **The Gap:** BCIs generate high-velocity neural streams (often 500Hz to 2,000Hz).
+- **The Challenge:** Logging every individual packet or "read" event for a continuous neural stream would create a data footprint larger than the neural data itself.
+- **QIF Implementation:** We use **Temporal Aggregation Logs** (auditing sessions and changes in coherence rather than individual spikes) to satisfy the *intent* of HIPAA without shattering the storage overhead.
+- **Policy Need:** Regulatory clarification on "Streaming Sovereignty" and how real-time biometric auditing should be handled.
+
+### 2. GDPR: The Neural Fingerprinting Gap
+
+**Legal Context:** GDPR requires "true anonymization" where data can no longer be linked to an individual.
+
+- **The Gap:** Neural time-series data is fundamentally unique. Much like a fingerprint or a heartbeat, a person's "Coherence Signature" can often be used to re-identify them across sessions.
+- **The Challenge:** Stripping the data of all identifiable patterns often destroys the "Security Signature" needed to detect unauthorized neural injection or malicious interference.
+- **QIF Implementation:** We implement **Differential Privacy** (calibrated noise) and **Bucketed Transmission** to minimize re-identification risk while maintaining security utility.
+- **Policy Need:** Recognition of "Neural Uniqueness" as a special category where anonymization and utility must be balanced via technical thresholds.
+
+### 3. CCPA / SB 1223: The Precedent Gap
+
+**Legal Context:** California SB 1223 protects "Mental Integrity," "Cognitive Liberty," and "Psychological Continuity."
+
+- **The Gap:** These are abstract philosophical concepts that have now become binding law, but there is **zero case law** defining their technical boundaries.
+- **The Challenge:** At what point does a targeted advertisement become a "violation of cognitive liberty"? When does a neural firewall's "benevolent paternalism" violate a user's autonomy?
+- **QIF Implementation:** We map these rights directly to the **NISS (Neural Impact Scoring System)** to provide a technical baseline for when a violation has occurred.
+- **Policy Need:** Test cases and technical legal standards to define the "Threshold of Violation" for neurorights.
+
+### 4. FDORA / PATCH Act: The Scoring Standard Gap
+
+**Legal Context:** Section 524B of the FD&C Act (via FDORA) requires medical device makers to provide a "Software Bill of Materials" and perform "Threat Modeling."
+
+- **The Gap:** There is no officially sanctioned "CVSS for Brains." Standard cybersecurity scores (CVSS 4.0) cannot express biological damage, cognitive integrity, or neuroplasticity.
+- **The Challenge:** Device makers may satisfy the law with standard IT security scores while missing catastrophic neural-specific risks.
+- **QIF Implementation:** We utilize the **NISS v1.0** framework to map neural-specific impacts (Biological, Cognitive, Plasticity).
+- **Policy Need:** Global adoption of a neural-specific impact scoring extension for CVSS to provide a "Common Language" for risk.
+
+### 5. International: The "Soft Law" Enforcement Gap
+
+**Legal Context:** UNESCO Recommendation (2025) and OECD Principles (2019).
+
+- **The Gap:** Most international frameworks are "Soft Law" that carry moral weight but no binding legal penalties.
+- **The Challenge:** Companies can claim "UNESCO Alignment" in their marketing while ignoring the technical enforcement mechanisms that actually protect the user.
+- **QIF Implementation:** QIF is built to be a **Technical Policy Enforcement Point (PEP)**. We don't just state values; we code them into the Neural Firewall.
+- **Policy Need:** Development of binding international treaties for Neurotechnology that mandate technical enforcement mechanisms, not just ethical statements.
+
+### Regulatory Gaps: Action Items
+
+1. **Standardization**: Establish NISS as the industry standard for BCI threat modeling.
+2. **Clarification**: Request "Streaming Auditing" exemptions or standards under health privacy laws.
+3. **Litigation Readiness**: Maintain high-integrity telemetry to support future neurorights litigation cases.
+4. **Open Research**: Continually test the bounds of neural de-anonymization (fingerprinting) to stay ahead of re-identification attacks.
+
+---
+
+## NIST/ISO Hardened Goals
+
+### Objective
+
+Provide a standardized, machine-verifiable bridge between high-level ethical frameworks (like UNESCO Neurorights or the CCPA Neurorights Act) and low-level technical evidence (like firewall logs and encryption headers).
+
+### Why "Hardened"?
+
+The term **"Hardened Mapping"** distinguishes typical documentation-only compliance from **Evidence-Based Compliance**.
+
+1. **Auditable Evidence**: Instead of simply claiming "we protect mental privacy," the hardened mapping specifies exactly which log file (`anonymizer.log`) and which filter count confirms the privacy enforcement.
+2. **Machine-Readable Registry**: By embedding NIST/ISO codes directly into the `qtara-registrar.json`, the QIF framework enables automated compliance auditing tools to "crawl" the neuro-attack surface and verify control coverage.
+3. **Cross-Jurisdictional Stability**: Framework codes from NIST and ISO provide a stable taxonomy that remains relevant regardless of whether the governing law is CCPA, GDPR, or a future federal MIND Act.
+
+### Key Goals
+
+**1. Standardizing Technical Evidence**
+
+Assign specific, traceable log signatures to every neuroright. For example:
+- **Cognitive Liberty** → Verified by **Temporal Aggregation Logs (TALs)** logging reject counts for unauthenticated neural signals (NIST AC-3).
+- **Mental Privacy** → Verified by **TALs** recording differential privacy metrics (NIST SC-28).
+
+**2. Bridging the "Scoring Standard Gap"**
+
+NIST/ISO controls provide the infrastructure for risk management, while TARA provides the specific threat taxonomy. The goal is to make TARA the "CVSS for Brains" that regulators can trust by anchoring it in established NIST/ISO methodologies.
+
+**3. Automated Regulatory-as-Code (RaC)**
+
+In future phases, the hardened mapping will allow BCI devices to self-report compliance status to a secure enclave, using the NIST/ISO codes as the "reporting dialect."
+
+### Hardened Policy Matrix (NISS-to-NIST/ISO Mapping)
+
+| NISS Metric/Threshold | Mandatory Hardened Control | Technical Evidence (Example) | Requirement Level |
+| :--- | :--- | :--- | :--- |
+| **PINS Flag = True** | **NIST SI-4 (Information System Monitoring)** | Real-time neural telemetry stream via **TAL**. | **CRITICAL** |
+| **Biological Impact (BI) >= H** | **NIST AC-3 (Access Control)** | **TAL - Neural Firewall**: Deny/Permit by band. | **MANDATORY** |
+| **Mental Privacy (MP) >= H** | **NIST SC-28 (Protection of Info at Rest)** | **TAL - Anonymizer**: Differential privacy logs. | **MANDATORY** |
+| **Cognitive Integrity (CG) >= H** | **NIST SI-7 (Software/Firmware Integrity)** | Cryptographically signed neural stimulation staves. | **MANDATORY** |
+| **Consent Violation (CV) = Implicit**| **ISO/IEC 27001 A.18.1.1 (Compliance)** | Formal audit log of real-time consent handshake. | **MANDATORY** |
+| **NISS Score >= 7.0 (High)** | **ISO/IEC 27001 A.12.4.1 (Logging)** | Comprehensive system/neural audit log (TAL) retention. | **MANDATORY** |
+
+### Neural Regulatory-as-Code (RaC) Integration
+
+By anchoring NISS scores in NIST/ISO controls, QIF moves from an assessment tool to an **Enforcement Platform**.
+
+- **Detection-to-Evidence**: When the **Neural Firewall** detects an attack (e.g., T0001: Signal Jamming), it does not just block it; it tags the event with the corresponding NIST AC-3 control ID for the compliance report in the **TAL**.
+- **Automated Auditing**: Regulators can query the framework for "Evidence of NIST SC-28 compliance" and receive a pre-filtered log of all differentially private neural transfers via the **Temporal Aggregation Log**.
 
 ---
 
@@ -560,6 +662,7 @@ Latin America leads globally in constitutional and legislative neurorights prote
 | 1.0 | 2026-01-25 | Initial release — US regulatory focus |
 | 2.0 | 2026-02-10 | Major expansion: added enacted US state legislation (Colorado H.B. 24-1058, California SB 1223, Montana SB 163, Connecticut SB 1295), US MIND Act (S. 2925), international regulatory landscape (UNESCO 2025, Council of Europe, Latin American neurorights, Spain, EU developments), IEEE standards (P2794, P2731), and Neurorights Foundation |
 | 2.1 | 2026-02-15 | Added FDORA/PATCH Act (2022) Section 524B with QIF compliance mapping, RTA enforcement policy, Schroder et al. (2025) citation |
+| 2.2 | 2026-02-21 | Consolidated REGULATORY_GAPS.md (5 gap analyses) and NIST_ISO_HARDENED_GOALS.md (hardened policy matrix, RaC integration) into this document |
 
 ---
 
@@ -567,9 +670,8 @@ Latin America leads globally in constitutional and legislative neurorights prote
 
 - [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) — Ethical principles mapping
 - [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) — Comprehensive UNESCO Recommendation mapping
-- [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md) — Consent requirements
+- [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md) — Consent requirements (includes pediatric & incapacity considerations)
 - [POST_DEPLOYMENT_ETHICS.md](POST_DEPLOYMENT_ETHICS.md) — Lifecycle obligations
-- [PEDIATRIC_CONSIDERATIONS.md](PEDIATRIC_CONSIDERATIONS.md) — Minors and incapacity
 - [TRANSPARENCY.md](TRANSPARENCY.md) — Human-AI collaboration audit
 
 ---

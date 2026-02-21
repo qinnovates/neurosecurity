@@ -279,7 +279,7 @@ See [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md).
 - **Incapacitated adults:** Supported decision-making model
 - **Transitional (age 16-17):** Increasing autonomy with guardian oversight
 
-See [PEDIATRIC_CONSIDERATIONS.md](PEDIATRIC_CONSIDERATIONS.md).
+See [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations).
 
 #### Q: How do I report security vulnerabilities?
 **A:** Please report security issues responsibly:

@@ -17,7 +17,8 @@ This directory contains accessible, open-source security tools designed to prote
 |------|----------|--------|-------------|
 | [neurowall](./neurowall) | Python | v0.5 | Neural firewall neckband with NSP + PQC |
 | [macshield](./macshield) | Bash | Active | macOS workstation hardening for public WiFi |
-| [autodidactive](./autodidactive) | Python | Active | Adaptive learning platform with neurosecurity curriculum |
+
+> **autodidactive** (adaptive learning platform) has moved to the private [mindloft](https://github.com/qinnovates/mindloft) repository under `education/`.
 
 > [!WARNING]
 > **For enterprise/corporate researchers:** If you are working with PII, sensitive data, or neural recordings in a professional capacity, use your organization's corporate VPN, managed devices, and enterprise security policies. These tools are not a substitute for enterprise security infrastructure. macshield is designed for individuals, students, and independent researchers who lack access to corporate resources. **Qinnovates is not liable for any security compromises resulting from the use of these tools in lieu of proper enterprise security controls.**
@@ -40,7 +41,6 @@ Our approach is **Transparency over Obscurity**. We don't promise total invisibi
 ## Tools
 - **[neurowall](./neurowall)**: Neural firewall neckband. Behind-the-neck wearable that grounds OpenBCI electrodes while running the full NSP + Runemate + PQC security stack on-device.
 - **[macshield](./macshield)**: Network-aware macOS hardening to protect identity on public WiFi.
-- **[autodidactive](./autodidactive)**: Self-directed learning system with adaptive visualizations, AI-driven content generation, and interactive neurosecurity curriculum.
 
 ---
 *Democratizing security. Protecting identity. Defending cognitive liberty.*

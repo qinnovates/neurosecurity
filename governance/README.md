@@ -16,16 +16,14 @@ Neuroethics, regulatory compliance, and process documents for the QIF framework.
 | [Neuroethics Alignment](NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
 | [QIF Neuroethics](QIF-NEUROETHICS.md) | 11 open questions on quantum biometric governance |
 | [Ethical Neurosecurity Code of Ethics](ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md) | Professional ethics for neurosecurity practitioners |
-| [Informed Consent Framework](INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent protocols |
-| [Pediatric Considerations](PEDIATRIC_CONSIDERATIONS.md) | Protections for minors in BCI research |
+| [Informed Consent Framework](INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent protocols + pediatric & incapacity considerations |
 | [Post-Deployment Ethics](POST_DEPLOYMENT_ETHICS.md) | Ongoing monitoring obligations after deployment |
 
 ## Regulatory
 
 | Document | Scope |
 |----------|-------|
-| [Regulatory Compliance](REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk |
-| [Regulatory Gaps](REGULATORY_GAPS.md) | Structural challenges in BCI law |
+| [Regulatory Compliance](REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk, regulatory gaps, NIST/ISO hardened goals |
 | [UNESCO Alignment](UNESCO_ALIGNMENT.md) | International neuroethics principles |
 | [Data Policy FAQ](DATA_POLICY_FAQ.md) | Neural data handling, retention, deletion |
 
@@ -34,7 +32,7 @@ Neuroethics, regulatory compliance, and process documents for the QIF framework.
 | Document | Scope |
 |----------|-------|
 | [Transparency](TRANSPARENCY.md) | Human-AI collaboration audit trails |
-| [NIST/ISO Hardened Goals](NIST_ISO_HARDENED_GOALS.md) | Security control alignment targets |
+| [NIST/ISO Hardened Goals](REGULATORY_COMPLIANCE.md#nistiso-hardened-goals) | Security control alignment targets (in Regulatory Compliance) |
 | [Accessibility](ACCESSIBILITY.md) | Inclusive BCI design requirements |
 
 ### Processes
