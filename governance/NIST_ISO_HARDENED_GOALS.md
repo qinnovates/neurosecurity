@@ -1,3 +1,9 @@
+---
+title: "NIST/ISO Hardened Goals for Neural Security"
+description: "Strategic goals for integrating NIST SP 800-53 and ISO/IEC 27001 controls into QIF"
+order: 12
+---
+
 # NIST/ISO Hardened Goals for Neural Security
 
 This document outlines the strategic goals for integrating NIST SP 800-53 and ISO/IEC 27001 controls into the Quantified Interconnection Framework (QIF) as a "hardened" validation layer.
