@@ -26,3 +26,4 @@ verify-report.json
 # Local
 _memory/
 tools/macshield
+fact-check-report.json

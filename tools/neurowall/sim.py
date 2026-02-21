@@ -281,6 +281,17 @@ class SignalMonitor:
     _cusum_drift: float = 2.0        # allowable drift (only accumulate above this)
     _cusum_detected: bool = False
     _cusum_detection_count: int = 0
+    # Adaptive thresholding: instead of a fixed anomaly_score > 1.5 threshold
+    # for counting anomalies, compute the threshold from CALIBRATION data.
+    # Uses leave-one-out cross-validation on calibration windows: for each
+    # calibration window, compute the z-score as if the other windows were
+    # the baseline. The (1-FPR) percentile of these scores sets the threshold.
+    # This ensures the threshold is set from clean data only, never from
+    # post-calibration windows that might contain attacks.
+    adaptive_threshold: bool = False         # LOO adaptive threshold (needs >20 cal windows)
+    adaptive_target_fpr: float = 0.05        # target false positive rate (5%)
+    _adaptive_threshold_value: float = 1.5   # default until computed from calibration
+    _adaptive_calibrated: bool = False        # True once LOO threshold is computed
 
     def _compute_sigma_phi_sq(self, buf_ac: np.ndarray) -> float:
         """Phase variance via Hilbert transform on alpha-band signal.
@@ -457,11 +468,33 @@ class SignalMonitor:
                         self._baseline_spectrum_std, 0.3
                     )
 
+                # Adaptive threshold: leave-one-out cross-validation on
+                # calibration windows. For each window, compute the z-score
+                # as if the others formed the baseline. The (1-FPR) percentile
+                # of these z-scores sets the anomaly counting threshold.
+                if self.adaptive_threshold and len(recalibrated_cs) >= 4:
+                    loo_scores = []
+                    for i in range(len(recalibrated_cs)):
+                        others = recalibrated_cs[:i] + recalibrated_cs[i+1:]
+                        loo_mean = float(np.mean(others))
+                        loo_std = max(float(np.std(others)), 0.01)
+                        loo_z = max(0.0, (loo_mean - recalibrated_cs[i]) / loo_std)
+                        loo_scores.append(loo_z)
+                    percentile = (1.0 - self.adaptive_target_fpr) * 100
+                    self._adaptive_threshold_value = float(
+                        np.percentile(loo_scores, percentile)
+                    )
+                    # Floor at 1.5 (the fixed default) so adaptive can only
+                    # make detection stricter, never looser than baseline
+                    self._adaptive_threshold_value = max(1.5, self._adaptive_threshold_value)
+                    self._adaptive_calibrated = True
+
                 self._calibrated = True
                 return 0.0, {
                     "status": "calibrated",
                     "baseline_cs": self._baseline_cs_mean,
                     "w2": self._w2,
+                    "adaptive_threshold": self._adaptive_threshold_value,
                     "sigma_phi": sigma_phi,
                     "h_tau": h_tau,
                 }
@@ -590,7 +623,12 @@ class SignalMonitor:
             anomaly_score = max(anomaly_score, cusum_anomaly)
             self._cusum_value = 0.0  # reset after trigger
 
-        if anomaly_score > 1.5:
+        # --- Adaptive thresholding ---
+        # Threshold was computed during calibration via leave-one-out
+        # cross-validation. This ensures clean-data-only threshold
+        # estimation, immune to attack contamination.
+        threshold = self._adaptive_threshold_value if self.adaptive_threshold else 1.5
+        if anomaly_score > threshold:
             self._anomaly_count += 1
 
         return anomaly_score, {
@@ -608,6 +646,8 @@ class SignalMonitor:
             "growth_flag": growth_flag,
             "cusum_flag": cusum_flag,
             "cusum_value": self._cusum_value,
+            "adaptive_threshold": self._adaptive_threshold_value,
+            "adaptive_calibrated": self._adaptive_calibrated,
         }
 
     @property
@@ -627,6 +667,8 @@ class SignalMonitor:
             "growth_detection_count": self._growth_detection_count,
             "cusum_detected": self._cusum_detected,
             "cusum_detection_count": self._cusum_detection_count,
+            "adaptive_threshold": self._adaptive_threshold_value,
+            "adaptive_calibrated": self._adaptive_calibrated,
             "last_cs": self._last_cs,
             "cs_ewma": self._cs_ewma,
             "baseline_cs": self._baseline_cs_mean if self._calibrated else None,
@@ -1099,7 +1141,7 @@ def run_simulation(args):
     verbose = args.verbose
 
     print("=" * 70)
-    print("  NEUROWALL v0.6 SIM — Spectral Peak + CUSUM + Growth + Coherence + NISS + NSP")
+    print("  NEUROWALL v0.7 SIM — Adaptive Threshold + Spectral Peak + CUSUM + Growth + Coherence + NISS + NSP")
     print("=" * 70)
     print(f"  Sample rate:    {SAMPLE_RATE} Hz")
     print(f"  Duration:       {duration}s ({int(duration * SAMPLE_RATE)} samples)")

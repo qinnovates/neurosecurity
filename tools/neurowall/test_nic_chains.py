@@ -339,6 +339,116 @@ def generate_closed_loop_cascade(duration_s: float, fs: int) -> np.ndarray:
     return np.clip(signal, 0.0, 5.0)
 
 
+# ─── Adversarial-Aware Attack Generators ─────────────────────────────────────
+
+
+def generate_notch_aware_ssvep(duration_s: float, fs: int) -> np.ndarray:
+    """SSVEP at 12Hz, precisely between notch filters (10.9 and 15 Hz).
+    Tests adaptive spectral peak detection.
+    """
+    return generate_eeg(duration_s, fs, attack_freq=12.0, attack_start=5.0)
+
+
+def generate_freq_hopping_ssvep(duration_s: float, fs: int) -> np.ndarray:
+    """SSVEP that hops frequency every 0.5s to evade sustained peak detection.
+    Peak detector requires 3/4 consecutive windows at same freq bin.
+    """
+    n_samples = int(duration_s * fs)
+    t = np.arange(n_samples) / fs
+    signal = generate_eeg(duration_s, fs)
+
+    # Hop between frequencies that avoid the notch bank
+    hop_freqs = [6.0, 12.0, 13.0, 17.0, 22.0, 25.0, 7.0, 14.0]
+    attack_start = 5.0
+    hop_interval = 0.5  # one window
+
+    for i in range(n_samples):
+        if t[i] < attack_start:
+            continue
+        elapsed = t[i] - attack_start
+        freq_idx = int(elapsed / hop_interval) % len(hop_freqs)
+        signal[i] += 0.4 * np.sin(2 * np.pi * hop_freqs[freq_idx] * t[i])
+
+    return np.clip(signal, 0.0, 5.0)
+
+
+def generate_threshold_aware_ramp(duration_s: float, fs: int) -> np.ndarray:
+    """Perturbation calibrated to stay just below per-window z-score threshold.
+    Injects steady 0.025V at 11Hz (near alpha, max interference).
+    """
+    n_samples = int(duration_s * fs)
+    t = np.arange(n_samples) / fs
+    signal = generate_eeg(duration_s, fs)
+
+    attack_start = 5.0
+    mask = t >= attack_start
+    signal[mask] += 0.025 * np.sin(2 * np.pi * 11.0 * t[mask])
+    return np.clip(signal, 0.0, 5.0)
+
+
+def generate_cusum_aware_intermittent(duration_s: float, fs: int) -> np.ndarray:
+    """Intermittent SSVEP bursts with clean gaps to let CUSUM drain.
+    0.4s bursts at 13Hz with 1.0s clean gaps.
+    """
+    n_samples = int(duration_s * fs)
+    t = np.arange(n_samples) / fs
+    signal = generate_eeg(duration_s, fs)
+
+    attack_start = 5.0
+    burst_dur = 0.4
+    gap_dur = 1.0
+    cycle = burst_dur + gap_dur
+
+    for i in range(n_samples):
+        if t[i] < attack_start:
+            continue
+        phase = (t[i] - attack_start) % cycle
+        if phase < burst_dur:
+            signal[i] += 0.5 * np.sin(2 * np.pi * 13.0 * t[i])
+
+    return np.clip(signal, 0.0, 5.0)
+
+
+def generate_spectral_mimicry(duration_s: float, fs: int) -> np.ndarray:
+    """Broadband noise shaped to match baseline spectral profile.
+    Increases total power 1.5x but preserves spectral shape.
+    """
+    from scipy.signal import butter, sosfilt
+
+    n_samples = int(duration_s * fs)
+    t = np.arange(n_samples) / fs
+    signal = generate_eeg(duration_s, fs)
+
+    attack_start = 5.0
+    mask = t >= attack_start
+    nyq = fs / 2.0
+
+    rng = np.random.RandomState(77)
+    white = rng.randn(n_samples + 500)
+    extra = np.zeros(n_samples)
+
+    bands = [
+        (0.5,  4.0, 0.030),
+        (4.0,  8.0, 0.020),
+        (8.0, 13.0, 0.050),
+        (13.0, 30.0, 0.010),
+        (30.0, 50.0, 0.005),
+    ]
+    for lo, hi, amp in bands:
+        lo_n = max(lo / nyq, 0.01)
+        hi_n = min(hi / nyq, 0.99)
+        if lo_n >= hi_n:
+            continue
+        sos = butter(4, [lo_n, hi_n], btype="band", output="sos")
+        filtered = sosfilt(sos, white)[500:]
+        filtered = filtered / (np.std(filtered) + 1e-10) * amp
+        extra += filtered[:n_samples]
+
+    scale = np.sqrt(1.5) - 1.0
+    signal[mask] += scale * extra[mask]
+    return np.clip(signal, 0.0, 5.0)
+
+
 # ─── Scenario Registry ───────────────────────────────────────────────────────
 
 SCENARIOS: List[AttackScenario] = [
@@ -495,6 +605,77 @@ SCENARIOS: List[AttackScenario] = [
         detection_expected={"l1": False, "ssvep": False, "monitor": False},
         generate_fn="generate_closed_loop_cascade",
     ),
+    # ─── Adversarial-Aware Scenarios ─────────────────────────────────────────
+    AttackScenario(
+        id=10,
+        name="Notch-Aware SSVEP 12Hz",
+        tara_id="N/A (adversarial-aware)",
+        tactic="QIF-N.IJ",
+        nic_chain="S1 -> I0 -> N1 (interstitial frequency)",
+        niss_vector="BI:M / CG:M / CV:I / RV:P / NP:S",
+        severity="MEDIUM",
+        description="SSVEP at 12Hz, precisely between notch filters (10.9 and "
+                    "15 Hz). Attacker knows the notch bank. Tests adaptive "
+                    "spectral peak detection.",
+        detection_expected={"l1": False, "ssvep": False, "monitor": True},
+        generate_fn="generate_notch_aware_ssvep",
+    ),
+    AttackScenario(
+        id=11,
+        name="Freq-Hopping SSVEP",
+        tara_id="N/A (adversarial-aware)",
+        tactic="QIF-N.IJ",
+        nic_chain="S1 -> I0 -> N1 (frequency-agile)",
+        niss_vector="BI:M / CG:M / CV:I / RV:P / NP:S",
+        severity="MEDIUM",
+        description="SSVEP that hops frequency every 0.5s. Designed to evade "
+                    "sustained spectral peak detector (3/4 consecutive windows). "
+                    "Each window has a peak but never at the same bin.",
+        detection_expected={"l1": False, "ssvep": False, "monitor": True},
+        generate_fn="generate_freq_hopping_ssvep",
+    ),
+    AttackScenario(
+        id=12,
+        name="Threshold-Aware Ramp",
+        tara_id="N/A (adversarial-aware)",
+        tactic="QIF-B.EV",
+        nic_chain="I0 -> N1-N4 (sub-threshold accumulation)",
+        niss_vector="BI:L / CG:H / CV:I / RV:P / NP:S",
+        severity="HIGH",
+        description="Perturbation calibrated to produce z-score ~1.2 per window "
+                    "(below 1.5 threshold). Tests CUSUM and growth detectors.",
+        detection_expected={"l1": False, "ssvep": False, "monitor": False},
+        generate_fn="generate_threshold_aware_ramp",
+    ),
+    AttackScenario(
+        id=13,
+        name="CUSUM-Aware Intermittent",
+        tara_id="N/A (adversarial-aware)",
+        tactic="QIF-N.IJ",
+        nic_chain="S1 -> I0 -> N1-N4 (burst-gap pattern)",
+        niss_vector="BI:M / CG:H / CV:I / RV:P / NP:S",
+        severity="HIGH",
+        description="Intermittent 0.4s SSVEP bursts at 13Hz with 1.0s clean gaps. "
+                    "Designed to prevent CUSUM accumulation. Tests stateful "
+                    "detection resilience.",
+        detection_expected={"l1": False, "ssvep": False, "monitor": True},
+        generate_fn="generate_cusum_aware_intermittent",
+    ),
+    AttackScenario(
+        id=14,
+        name="Spectral Mimicry",
+        tara_id="N/A (adversarial-aware)",
+        tactic="QIF-N.IJ",
+        nic_chain="S1 -> I0 -> N1-N7 (broadband stealth)",
+        niss_vector="BI:M / CG:H / CV:I / RV:P / NP:T",
+        severity="HIGH",
+        description="Broadband noise shaped to match baseline spectral profile. "
+                    "No novel peaks. Spectral entropy stays flat. Only total "
+                    "power increases 1.5x. Tests whether coherence monitor "
+                    "catches power increase without spectral shape change.",
+        detection_expected={"l1": False, "ssvep": False, "monitor": False},
+        generate_fn="generate_spectral_mimicry",
+    ),
 ]
 
 
@@ -567,6 +748,11 @@ def run_scenario(
         "generate_envelope_modulation": generate_envelope_modulation,
         "generate_phase_replay": generate_phase_replay,
         "generate_closed_loop_cascade": generate_closed_loop_cascade,
+        "generate_notch_aware_ssvep": generate_notch_aware_ssvep,
+        "generate_freq_hopping_ssvep": generate_freq_hopping_ssvep,
+        "generate_threshold_aware_ramp": generate_threshold_aware_ramp,
+        "generate_cusum_aware_intermittent": generate_cusum_aware_intermittent,
+        "generate_spectral_mimicry": generate_spectral_mimicry,
     }
 
     # Fixed seed per scenario for reproducible results.
@@ -909,12 +1095,12 @@ def run_single(args):
     """Standard single run of all scenarios."""
     print("=" * 90)
     print("  NEUROWALL NIC CHAIN ATTACK SIMULATION TEST SUITE")
-    print("  Testing Neurowall v0.5 pipeline against TARA threat techniques")
+    print("  Testing Neurowall v0.7 pipeline against TARA threat techniques")
     print("=" * 90)
     print(f"  Duration per scenario: {args.duration}s")
     print(f"  Sample rate: {SAMPLE_RATE} Hz")
     print(f"  Scenarios: {len(SCENARIOS)}")
-    print(f"  EEG generator: multi-band (v0.5)")
+    print(f"  EEG generator: multi-band (v0.7)")
     print(f"  Calibration windows: 8 (4.0s)")
     print()
 
@@ -960,7 +1146,7 @@ def run_duration_sweep(args):
     print("  Testing detection vs observation time")
     print("=" * 90)
     print(f"  Durations: {durations}s")
-    print(f"  EEG generator: multi-band (v0.5)")
+    print(f"  EEG generator: multi-band (v0.7)")
     print()
 
     # Header
