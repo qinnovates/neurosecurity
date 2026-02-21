@@ -1,0 +1,177 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Derivation Logs"
+  description="Living research journals documenting how the QIF framework, field observations, and tool engineering decisions were derived."
+  breadcrumbs={[{ label: 'Lab', href: '/lab/' }, { label: 'Derivation Logs' }]}
+  maxWidth="wide"
+>
+  <div class="mb-12">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Derivation Logs</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-2xl">
+      Every claim in QIF is traceable to a specific derivation step. These logs document the reasoning chains,
+      decision points, and discoveries as they happened, in real time, append-only, and never edited after the fact.
+    </p>
+  </div>
+
+  <!-- Log Directory -->
+  <div class="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md" target="_blank" rel="noopener" class="log-card glass rounded-xl p-6 block group">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="text-2xl text-[var(--color-accent-primary)]">&#128218;</div>
+        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-accent-primary)]/30 text-[var(--color-accent-primary)]">70+ entries</span>
+      </div>
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Derivation Log</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        Framework reasoning, hypothesis derivation, equation proofs, and architectural decisions.
+        The complete intellectual timeline from OSI rejection through hourglass validation, BCI limits equation, and neurorights mapping.
+      </p>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; View on GitHub</span>
+    </a>
+
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener" class="log-card glass rounded-xl p-6 block group">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="text-2xl text-[var(--color-status-warn)]">&#128221;</div>
+        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-status-warn)]/30 text-[var(--color-status-warn)]">19 entries</span>
+      </div>
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Field Journal</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        First-person research observations at the intersection of neurodivergence, synesthesia, and computational neuroscience.
+        Raw voice, unpolished, documenting the experience of thinking rather than the thoughts themselves.
+      </p>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; View on GitHub</span>
+    </a>
+
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/tools/neurowall/NEUROWALL-DERIVATION-LOG.md" target="_blank" rel="noopener" class="log-card glass rounded-xl p-6 block group">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="text-2xl text-[var(--color-status-danger)]">&#128737;</div>
+        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-status-danger)]/30 text-[var(--color-status-danger)]">10 entries</span>
+      </div>
+      <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Neurowall Derivation Log</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        Signal pipeline engineering decisions for the neural firewall simulation.
+        Covers coherence metric design, multi-band EEG generation, attack simulation, and ROC analysis.
+      </p>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; View on GitHub</span>
+    </a>
+  </div>
+
+  <!-- How to Read -->
+  <div class="flex items-center gap-4 mb-10">
+    <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+    <span class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider">How to Read These Logs</span>
+    <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-8 mb-16">
+    <!-- Classification System -->
+    <div class="glass rounded-xl p-8">
+      <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-4">Entry Classifications</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        Every derivation log entry is tagged with its epistemic status. This tells you how much weight to put on the claim.
+      </p>
+      <div class="space-y-4">
+        <div class="flex gap-3">
+          <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[#10b981]/10 text-[#10b981] whitespace-nowrap h-fit">VERIFIED</span>
+          <p class="text-sm text-[var(--color-text-muted)]">Grounded in established physics, peer-reviewed literature, or empirical data. The reasoning chain is complete and checkable.</p>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[#f59e0b]/10 text-[#f59e0b] whitespace-nowrap h-fit">INFERRED</span>
+          <p class="text-sm text-[var(--color-text-muted)]">Logical extension from verified premises. The inference is sound but the conclusion has not been independently confirmed.</p>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[#8b5cf6]/10 text-[#8b5cf6] whitespace-nowrap h-fit">HYPOTHESIS</span>
+          <p class="text-sm text-[var(--color-text-muted)]">Novel conjecture with theoretical motivation. May be wrong. Explicitly labeled so readers know this is speculation, not established fact.</p>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[#3b82f6]/10 text-[#3b82f6] whitespace-nowrap h-fit">IMPLEMENTED</span>
+          <p class="text-sm text-[var(--color-text-muted)]">The insight has been translated into code, configuration, or documentation. The implementation can be inspected directly.</p>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[#ef4444]/10 text-[#ef4444] whitespace-nowrap h-fit">CORRECTION</span>
+          <p class="text-sm text-[var(--color-text-muted)]">A previous entry was found to be wrong. The correction entry explains what changed and why. Original entries are never modified.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Append-Only Policy -->
+    <div class="glass rounded-xl p-8">
+      <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-4">The Append-Only Policy</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        These logs follow strict rules designed for academic transparency and intellectual reproducibility.
+      </p>
+      <div class="space-y-4">
+        <div class="glass-subtle rounded-lg p-4">
+          <h3 class="text-sm font-semibold mb-1">Never edited after the fact</h3>
+          <p class="text-xs text-[var(--color-text-muted)]">If an entry is later found to be wrong, a new CORRECTION entry documents what changed and references the original. The original entry stays untouched.</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <h3 class="text-sm font-semibold mb-1">Never deleted</h3>
+          <p class="text-xs text-[var(--color-text-muted)]">Wrong ideas are part of the intellectual record. Seeing how thinking evolved is as valuable as the final conclusions.</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <h3 class="text-sm font-semibold mb-1">Timestamped in real time</h3>
+          <p class="text-xs text-[var(--color-text-muted)]">Entries are written as insights occur, not retroactively. This preserves the actual discovery timeline and prevents hindsight bias.</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <h3 class="text-sm font-semibold mb-1">AI collaboration is transparent</h3>
+          <p class="text-xs text-[var(--color-text-muted)]">Every entry documents which AI systems were involved and what the human decided. AI cannot author entries; all final decisions are human.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestone Entries -->
+  <div class="flex items-center gap-4 mb-10">
+    <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+    <span class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider">Milestone Entries</span>
+    <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-7-the-hourglass-model" target="_blank" rel="noopener" class="glass-subtle rounded-lg p-4 block hover:border-[var(--color-border-hover)] transition-colors">
+      <p class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mb-1">Entry 7</p>
+      <p class="text-sm font-medium">The Hourglass Model</p>
+      <p class="text-xs text-[var(--color-text-muted)] mt-1">Where the 3-1-3 architecture was first conceived</p>
+    </a>
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-35-the-black-hole-security-principle--hawkingsusskindmaldacena-applied-to-bci" target="_blank" rel="noopener" class="glass-subtle rounded-lg p-4 block hover:border-[var(--color-border-hover)] transition-colors">
+      <p class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mb-1">Entry 35</p>
+      <p class="text-sm font-medium">The Black Hole Security Principle</p>
+      <p class="text-xs text-[var(--color-text-muted)] mt-1">Hawking/Susskind/Maldacena applied to BCI security</p>
+    </a>
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-50-tara--therapeutic-atlas-of-risks-and-applications" target="_blank" rel="noopener" class="glass-subtle rounded-lg p-4 block hover:border-[var(--color-border-hover)] transition-colors">
+      <p class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mb-1">Entry 50</p>
+      <p class="text-sm font-medium">TARA: Therapeutic Atlas</p>
+      <p class="text-xs text-[var(--color-text-muted)] mt-1">Registry reframed from threat catalog to dual-use mechanism atlas</p>
+    </a>
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis" target="_blank" rel="noopener" class="glass-subtle rounded-lg p-4 block hover:border-[var(--color-border-hover)] transition-colors">
+      <p class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mb-1">Entry 60</p>
+      <p class="text-sm font-medium">BCI Limits Equation</p>
+      <p class="text-xs text-[var(--color-text-muted)] mt-1">Unified physics-constraint system for BCI hardware limits</p>
+    </a>
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-70-wearable-neural-firewall" target="_blank" rel="noopener" class="glass-subtle rounded-lg p-4 block hover:border-[var(--color-border-hover)] transition-colors">
+      <p class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mb-1">Entry 70</p>
+      <p class="text-sm font-medium">Wearable Neural Firewall</p>
+      <p class="text-xs text-[var(--color-text-muted)] mt-1">Secure edge architecture for non-intrusive BCI</p>
+    </a>
+    <a href="https://github.com/qinnovates/qinnovate/blob/main/tools/neurowall/NEUROWALL-DERIVATION-LOG.md" target="_blank" rel="noopener" class="glass-subtle rounded-lg p-4 block hover:border-[var(--color-border-hover)] transition-colors">
+      <p class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mb-1">Neurowall 001-010</p>
+      <p class="text-sm font-medium">Coherence Metric to ROC Analysis</p>
+      <p class="text-xs text-[var(--color-text-muted)] mt-1">10 entries building a neural firewall simulation from scratch</p>
+    </a>
+  </div>
+
+</PageLayout>
+
+<style>
+  .log-card {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    text-decoration: none;
+  }
+  .log-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-border-hover);
+  }
+</style>
