@@ -26,7 +26,7 @@ const categories = [
   {
     label: 'Compliance & Alignment',
     color: 'var(--color-accent-secondary)',
-    ids: ['regulatory_compliance', 'neurosecurity-grc', 'unesco_alignment', 'qif-neuroethics'],
+    ids: ['regulatory_compliance', 'neurosecurity-grc', 'neurosecurity_grc_convergence', 'unesco_alignment', 'qif-neuroethics'],
   },
   {
     label: 'Future Work',
@@ -50,6 +50,7 @@ for (const doc of sorted) {
 idToFilename['ethical-neurosecurity-code-of-ethics'] = 'ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md';
 idToFilename['neurosecurity-grc'] = 'NEUROSECURITY-GRC.md';
 idToFilename['qif-neuroethics'] = 'QIF-NEUROETHICS.md';
+idToFilename['neurosecurity_grc_convergence'] = 'NEUROSECURITY_GRC_CONVERGENCE.md';
 
 // Pre-render all docs
 const rendered: Record<string, Awaited<ReturnType<typeof render>>> = {};

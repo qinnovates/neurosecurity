@@ -5,6 +5,8 @@ import NeurorightCards from '../components/neurogovernance/NeurorightCards';
 import { getNeurogovernanceData } from '../lib/neurogovernance-data';
 import { getBrainViewData } from '../lib/brain-view-data';
 import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../lib/qif-constants';
+import { GOVERNING_BODIES, FRAMEWORK_LESSONS, ENGAGEMENT_COLORS, ENGAGEMENT_LABELS } from '../data/convergence-data';
+import type { Domain } from '../data/convergence-data';
 
 const data = getNeurogovernanceData();
 const brainViews = getBrainViewData();
@@ -232,6 +234,130 @@ const breadcrumbs = [
         against adversarial neurostimulation, neural signal tampering, or cognitive state inference.
         That center gap is what neurosecurity GRC fills.
       </p>
+    </div>
+
+    <!-- ═══ CONVERGENCE GAP ═══ -->
+    <div class="glass rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto mb-12 reveal" id="convergence">
+      <h3 class="text-base font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2 text-center">
+        The Convergence Gap
+      </h3>
+      <p class="text-xs text-[var(--color-text-muted)] text-center mb-6 max-w-xl mx-auto">
+        25 organizations mapped across security and neuroethics. Color-coded by how much
+        each engages with the other domain. The pattern: deep expertise on one side, blind spots on the other.
+      </p>
+
+      <!-- "No Single Entity" callout -->
+      <div class="flex items-center gap-3 rounded-lg p-4 mb-6 border border-[var(--color-status-warn)]/30" style="background: rgba(245,158,11,0.06);">
+        <svg class="w-8 h-8 shrink-0 text-[var(--color-status-warn)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+        </svg>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          <strong class="text-[var(--color-text-primary)]">No single organization</strong> currently bridges
+          neurotechnology security and neuroethics governance. Security frameworks lack neural endpoints.
+          Neuroethics frameworks lack technical controls. QIF provides the first integrated framework.
+        </p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap gap-1.5 mb-4 justify-center" id="convergence-filters">
+        <button data-filter="all" class="convergence-filter-btn px-3 py-1 rounded-full text-[10px] font-medium border transition-colors active" style="border-color: var(--color-accent-primary); color: var(--color-accent-primary);">All</button>
+        <button data-filter="security" class="convergence-filter-btn px-3 py-1 rounded-full text-[10px] font-medium border transition-colors" style="border-color: var(--color-border); color: var(--color-text-muted);">Security</button>
+        <button data-filter="neuroethics" class="convergence-filter-btn px-3 py-1 rounded-full text-[10px] font-medium border transition-colors" style="border-color: var(--color-border); color: var(--color-text-muted);">Neuroethics</button>
+        <button data-filter="medical" class="convergence-filter-btn px-3 py-1 rounded-full text-[10px] font-medium border transition-colors" style="border-color: var(--color-border); color: var(--color-text-muted);">Medical</button>
+        <button data-filter="policy" class="convergence-filter-btn px-3 py-1 rounded-full text-[10px] font-medium border transition-colors" style="border-color: var(--color-border); color: var(--color-text-muted);">Policy</button>
+      </div>
+
+      <!-- Convergence table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs" id="convergence-table">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]">
+              <th class="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium">Organization</th>
+              <th class="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium">Domain</th>
+              <th class="text-center py-2 px-2 text-[var(--color-text-muted)] font-medium">Neurotech</th>
+              <th class="text-center py-2 px-2 text-[var(--color-text-muted)] font-medium">Security</th>
+              <th class="text-center py-2 px-2 text-[var(--color-text-muted)] font-medium">Bridge</th>
+            </tr>
+          </thead>
+          <tbody class="text-[var(--color-text-muted)]">
+            {GOVERNING_BODIES.map((body) => (
+              <tr class="border-b border-[var(--color-border)]/20 convergence-row hover:bg-[var(--color-bg-secondary)]/30 transition-colors" data-domain={body.domain}>
+                <td class="py-2 px-2">
+                  <span class="font-medium text-[var(--color-text-primary)]">{body.name}</span>
+                </td>
+                <td class="py-2 px-2">
+                  <span class="inline-block px-1.5 py-0.5 rounded text-[9px] font-medium capitalize" style={`background: ${body.domain === 'security' ? 'rgba(59,130,246,0.1)' : body.domain === 'neuroethics' ? 'rgba(139,92,246,0.1)' : body.domain === 'medical' ? 'rgba(34,197,94,0.1)' : 'rgba(245,158,11,0.1)'}; color: ${body.domain === 'security' ? '#3b82f6' : body.domain === 'neuroethics' ? '#8b5cf6' : body.domain === 'medical' ? '#22c55e' : '#f59e0b'};`}>
+                    {body.domain}
+                  </span>
+                </td>
+                <td class="py-2 px-2 text-center">
+                  <span class="inline-block w-2 h-2 rounded-full" style={`background: ${ENGAGEMENT_COLORS[body.neurotechEngagement]};`} title={ENGAGEMENT_LABELS[body.neurotechEngagement]}></span>
+                  <span class="ml-1 text-[9px]">{ENGAGEMENT_LABELS[body.neurotechEngagement]}</span>
+                </td>
+                <td class="py-2 px-2 text-center">
+                  <span class="inline-block w-2 h-2 rounded-full" style={`background: ${ENGAGEMENT_COLORS[body.securityEngagement]};`} title={ENGAGEMENT_LABELS[body.securityEngagement]}></span>
+                  <span class="ml-1 text-[9px]">{ENGAGEMENT_LABELS[body.securityEngagement]}</span>
+                </td>
+                <td class="py-2 px-2 text-center">
+                  <span class={`inline-block px-1.5 py-0.5 rounded text-[9px] font-medium ${body.bridgePotential === 'high' ? 'text-green-400' : body.bridgePotential === 'medium' ? 'text-yellow-400' : 'text-[var(--color-text-faint)]'}`} style={`background: ${body.bridgePotential === 'high' ? 'rgba(34,197,94,0.1)' : body.bridgePotential === 'medium' ? 'rgba(234,179,8,0.1)' : 'rgba(100,100,100,0.1)'};`}>
+                    {body.bridgePotential}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Engagement legend -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-4 text-[9px] text-[var(--color-text-faint)]">
+        {Object.entries(ENGAGEMENT_COLORS).map(([level, color]) => (
+          <span class="flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full" style={`background: ${color};`}></span>
+            {ENGAGEMENT_LABELS[level as keyof typeof ENGAGEMENT_LABELS]}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- ═══ LESSONS LEARNED ═══ -->
+    <div class="max-w-4xl mx-auto mb-12 reveal">
+      <h3 class="text-base font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2 text-center">
+        Lessons from IT Security Adoption
+      </h3>
+      <p class="text-xs text-[var(--color-text-muted)] text-center mb-6 max-w-xl mx-auto">
+        Four frameworks that achieved industry-wide adoption. Each offers a pattern neurosecurity can follow.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {FRAMEWORK_LESSONS.map((lesson) => (
+          <div class="glass rounded-xl p-5">
+            <h4 class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2">
+              {lesson.framework}
+            </h4>
+            <p class="text-[11px] text-[var(--color-text-muted)] leading-relaxed mb-3">
+              {lesson.lesson}
+            </p>
+            <div class="border-t border-[var(--color-border)]/30 pt-2">
+              <p class="text-[10px] text-[var(--color-accent-primary)] leading-relaxed">
+                <strong>BCI parallel:</strong> {lesson.applicability}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-5">
+        <a
+          href="/governance/#neurosecurity_grc_convergence"
+          class="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--color-accent-primary)] hover:underline"
+        >
+          Full convergence strategy with 25 organizations and specific asks
+          <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
     </div>
 
     <!-- ═══ GAP METHODOLOGY: Existing → Gap → Proposal ═══ -->
@@ -578,6 +704,41 @@ const breadcrumbs = [
   </section>
 
 </PageLayout>
+
+<script>
+  function initConvergenceFilters() {
+    const btns = document.querySelectorAll('.convergence-filter-btn');
+    const rows = document.querySelectorAll('.convergence-row');
+    if (!btns.length || !rows.length) return;
+
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = (btn as HTMLElement).dataset.filter;
+        btns.forEach((b) => {
+          const el = b as HTMLElement;
+          if (b === btn) {
+            el.style.borderColor = 'var(--color-accent-primary)';
+            el.style.color = 'var(--color-accent-primary)';
+          } else {
+            el.style.borderColor = 'var(--color-border)';
+            el.style.color = 'var(--color-text-muted)';
+          }
+        });
+        rows.forEach((row) => {
+          const el = row as HTMLElement;
+          if (filter === 'all' || el.dataset.domain === filter) {
+            el.style.display = '';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initConvergenceFilters);
+  initConvergenceFilters();
+</script>
 
 <style>
   @keyframes fadeIn {
