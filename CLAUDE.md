@@ -6,6 +6,17 @@
 - **Updates**: `npm run fetch-news`
 - **Type Check**: `npm run type-check`
 - **Sync Context**: `npm run sync` (Refreshes this file)
+- **Changelog**: `npm run changelog` (Generate changelog from git log; `--dry-run` to preview)
+
+## Commit Prefix Convention
+- `[Add]` -- New feature, page, or component (tier 2: changelog + blog draft)
+- `[Update]` -- Significant enhancement (tier 2: changelog + blog draft)
+- `[Research]` -- Research milestone, paper, validation (tier 3: changelog + blog + release)
+- `[Release]` -- Version bump (tier 3: changelog + blog + release)
+- `[Fix]` / `fix:` -- Bug fix (tier 1: changelog only)
+- `docs:` -- Documentation (tier 1: changelog only)
+- `chore:` -- Maintenance (tier 1: changelog only)
+- `auto:` -- Automated (tier 0: skipped entirely)
 
 ## Multi-Agent Protocol (Shared Memory)
 - **Source of Truth:** The `_memory/` directory is the SHARED synchronization point for all agents (Claude, Antigravity, etc.).

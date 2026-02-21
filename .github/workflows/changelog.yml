@@ -1,0 +1,76 @@
+name: Update Changelog
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: changelog
+  cancel-in-progress: false
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    # Skip auto: and chore: commits to avoid infinite loops
+    if: >-
+      !startsWith(github.event.head_commit.message, 'auto:') &&
+      !startsWith(github.event.head_commit.message, 'chore:')
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate changelog
+        id: generate
+        run: |
+          OUTPUT=$(node scripts/changelog-update.mjs 2>&1) || {
+            exit_code=$?
+            if [ "$exit_code" -eq 2 ]; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              echo "No changelog updates needed"
+              exit 0
+            else
+              echo "$OUTPUT"
+              exit $exit_code
+            fi
+          }
+          echo "$OUTPUT"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+          # Extract max tier from script output
+          MAX_TIER=$(echo "$OUTPUT" | grep "^max_tier=" | cut -d= -f2)
+          echo "max_tier=${MAX_TIER:-0}" >> "$GITHUB_OUTPUT"
+
+          # Check for blog drafts
+          BLOG_DRAFTS=$(echo "$OUTPUT" | grep "^blog_drafts=" | cut -d= -f2)
+          echo "blog_drafts=${BLOG_DRAFTS:-0}" >> "$GITHUB_OUTPUT"
+
+      - name: Commit changelog
+        if: steps.generate.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          if [ -n "$(git status --porcelain blogs/)" ]; then
+            git add blogs/
+          fi
+          git diff --cached --quiet && exit 0
+          git commit -m "auto: update changelog"
+          git push
+
+      - name: Create GitHub Release
+        if: steps.generate.outputs.max_tier == '3' && steps.generate.outputs.changed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          body_path: dist/release-notes.md
+          generate_release_notes: true

@@ -584,6 +584,7 @@ function DeviceSelector({ devices, selectedId, onSelect }: {
           placeholder={selectedDevice ? selectedDevice.name : 'Search devices...'}
           value={search}
           onChange={e => { setSearch(e.target.value); setOpen(true); }}
+          onClick={e => { e.stopPropagation(); setOpen(true); }}
           onFocus={() => setOpen(true)}
           style={{
             flex: 1,
