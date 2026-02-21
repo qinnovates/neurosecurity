@@ -18,7 +18,7 @@ This document synthesizes a layered guardrail architecture starting from what ph
 
 ### How We Got Here
 
-During research into how Johns Hopkins CELLS was calling for BCI security guardrails (Mathews, Balatbat, Dzau, 2022, NEJM), three threads converged:
+Johns Hopkins CELLS (Center for Emerging and Innovative Life Sciences and Standards) identified that no security guardrails currently exist for BCI systems (Mathews, Balatbat, Dzau, 2022, NEJM). They called for their creation. This document is a step toward answering that call. During our research into what those guardrails should look like, three threads converged:
 
 1. **The BCI Limits Equation** (Derivation Log Entry 60): A unified constraint system coupling thermodynamics, electromagnetism, Moore's Law scaling, Shannon safety, Boltzmann detectability, and QIF's coherence metric. No published paper unifies these constraints. Closest: Marblestone et al. (2013), which covers thermal + EM for mouse brain only.
 
