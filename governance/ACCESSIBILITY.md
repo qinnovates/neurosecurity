@@ -803,4 +803,4 @@ For urgent accessibility requests, include "ACCESSIBILITY" in the issue title.
 
 ---
 
-← Back to [Governance](/governance/) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [TRANSPARENCY.md](TRANSPARENCY.md)
+← Back to [Governance](/governance/) | [Neurosecurity Governance](NEUROSECURITY_GOVERNANCE.md) | [TRANSPARENCY.md](TRANSPARENCY.md)

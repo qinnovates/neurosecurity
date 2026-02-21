@@ -56,7 +56,7 @@ The Ethical Neurosecurity Code of Ethics establishes principles but the operatio
 | Cognitive sovereignty protection certification | Low | Not started | Akin to SOC2 but for neural data. Long-term. |
 | Community contribution guide | Low | Not started | How others can help write the ethics code, propose guardrails, report gaps. |
 
-**File:** `governance/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md`
+**File:** `governance/archive/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md` (archived)
 **Intent added:** Top of document now states the code exists to protect normal people from accidentally causing harm.
 
 ## Scaling Concerns (Kevin's Note, 2026-02-18)

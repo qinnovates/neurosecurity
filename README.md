@@ -89,8 +89,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[Doc suite](https://qinnovate.com/governance/)** | Neuroethics, consent, regulatory compliance, accessibility | 🟢 Published |
-| **[Neurorights mapping](governance/NEUROETHICS_ALIGNMENT.md)** | 5 neurorights mapped to enforcement mechanisms | 🟢 Published |
-| **[UNESCO alignment](governance/UNESCO_ALIGNMENT.md)** | 15 of 17 UNESCO Recommendation elements implemented | 🟢 Published |
+| **[Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)** | Unified: neurorights mapping, UNESCO alignment, GRC gaps, convergence strategy | 🟢 Published |
 | Regulatory-as-Code | Machine-verifiable compliance via NIST/ISO control codes | 🔵 Planned |
 
 ### Academic
@@ -140,7 +139,7 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 | **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
 | **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](tools/macshield/) (free workstation hardening) |
 
-Sources: [Neuroethics Alignment](governance/NEUROETHICS_ALIGNMENT.md) | [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | [Code of Ethics](governance/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md)
+Sources: [Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)
 
 ---
 
@@ -240,13 +239,10 @@ Published documents covering the full neuroethics landscape:
 | [Code of Conduct](governance/CODE_OF_CONDUCT.md) | Community standards and contribution guidelines |
 | [Data Policy](governance/DATA_POLICY_FAQ.md) | Neural data handling, retention, deletion |
 | [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent + pediatric & incapacity protocols |
-| [Neuroethics Alignment](governance/NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
+| [Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md) | Unified: why neurosecurity, GRC gaps, neuroethics alignment, UNESCO alignment, regulatory compliance, convergence strategy |
 | [Post-Deployment Ethics](governance/POST_DEPLOYMENT_ETHICS.md) | Ongoing monitoring obligations |
 | [QIF Neuroethics](governance/QIF-NEUROETHICS.md) | 11 open questions on quantum biometric governance |
-| [Regulatory Compliance](governance/REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk, regulatory gaps, NIST/ISO goals |
 | [Transparency](governance/TRANSPARENCY.md) | Human-AI collaboration audit trails |
-| [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | International neuroethics principles |
-| [Why Neurosecurity](governance/NEUROSECURITY.md) | The gap between neuroethics, neuroscience, and cybersecurity |
 
 ---
 

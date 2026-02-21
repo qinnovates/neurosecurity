@@ -5,7 +5,7 @@ Neuroethics, regulatory compliance, and process documents for the QIF framework.
 ## Table of Contents
 
 - [Ethics](#ethics)
-- [Regulatory](#regulatory)
+- [Neurosecurity Governance](#neurosecurity-governance)
 - [Process & Standards](#process--standards)
 - [Community](#community)
 
@@ -13,26 +13,24 @@ Neuroethics, regulatory compliance, and process documents for the QIF framework.
 
 | Document | Scope |
 |----------|-------|
-| [Neuroethics Alignment](NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
-| [QIF Neuroethics](QIF-NEUROETHICS.md) | 11 open questions on quantum biometric governance |
-| [Ethical Neurosecurity Code of Ethics](ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md) | Professional ethics for neurosecurity practitioners |
 | [Informed Consent Framework](INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent protocols + pediatric & incapacity considerations |
 | [Post-Deployment Ethics](POST_DEPLOYMENT_ETHICS.md) | Ongoing monitoring obligations after deployment |
+| [QIF Neuroethics](QIF-NEUROETHICS.md) | 11 open questions on quantum biometric governance |
 
-## Regulatory
+## Neurosecurity Governance
 
 | Document | Scope |
 |----------|-------|
-| [Regulatory Compliance](REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk, regulatory gaps, NIST/ISO hardened goals |
-| [UNESCO Alignment](UNESCO_ALIGNMENT.md) | International neuroethics principles |
-| [Data Policy FAQ](DATA_POLICY_FAQ.md) | Neural data handling, retention, deletion |
+| [Neurosecurity Governance](NEUROSECURITY_GOVERNANCE.md) | Unified: why neurosecurity, GRC gaps, framework analysis, neuroethics alignment, UNESCO alignment, regulatory compliance, convergence strategy |
+
+Previous standalone documents (NEUROSECURITY.md, NEUROSECURITY-GRC.md, NEUROSECURITY_GRC_CONVERGENCE.md, NEUROETHICS_ALIGNMENT.md, UNESCO_ALIGNMENT.md, REGULATORY_COMPLIANCE.md, ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md) have been consolidated into the unified document above. Originals are preserved in `archive/`.
 
 ## Process & Standards
 
 | Document | Scope |
 |----------|-------|
 | [Transparency](TRANSPARENCY.md) | Human-AI collaboration audit trails |
-| [NIST/ISO Hardened Goals](REGULATORY_COMPLIANCE.md#nistiso-hardened-goals) | Security control alignment targets (in Regulatory Compliance) |
+| [Data Policy FAQ](DATA_POLICY_FAQ.md) | Neural data handling, retention, deletion |
 | [Accessibility](ACCESSIBILITY.md) | Inclusive BCI design requirements |
 
 ### Processes
