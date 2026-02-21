@@ -23,6 +23,9 @@ It provides three concentric defense layers:
 | :--- | :--- |
 | [BRAIN_FIREWALL_ARCHITECTURE.md](./BRAIN_FIREWALL_ARCHITECTURE.md) | High-level system design, threat model, and 3-layer defense strategy. |
 | [BRAIN_FIREWALL_ENGINEERING.md](./BRAIN_FIREWALL_ENGINEERING.md) | Signal chain schematics, compression spec, Merkle amortization, and Rust pseudocode. |
+| [NECKBAND_BLUEPRINT.md](./NECKBAND_BLUEPRINT.md) | Behind-the-neck wearable form factor: ground electrode + security processor + OpenBCI integration. |
+| [MVP_PROTOTYPE.md](./MVP_PROTOTYPE.md) | Phase 0/1 prototype plan, BOM, and critical gaps from Gemini review. |
+| [TESTING.md](./TESTING.md) | Test strategy and validation plan. |
 
 ## Key Technical Properties
 
