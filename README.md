@@ -6,9 +6,9 @@
 
 # Qinnovate
 
-**Open Standards for Brain-Computer Interface Security**
+**From brain-dumps to frameworks and tangible results.*
 
-Qinnovate develops open frameworks, protocols, and governance standards for securing brain-computer interfaces. Vendor-agnostic. Community-driven. Apache 2.0.
+Qinnovate develops open frameworks, protocols, and governance alignment with tools for securing brain-computer interfaces. Vendor-agnostic. Community-driven. Apache 2.0.
 
 The standards bodies that shaped the internet didn't build browsers. They built the rules that made browsers possible. Qinnovate does the same for neural interfaces.
 
