@@ -40,7 +40,8 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
 | **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.4, Secure Pipe Verified |
 | **[Governance](https://qinnovate.com/governance/)** | 12 neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
-| **[Tools](./tools/)** | Accessible security tools (e.g., macshield) to secure the workstation layer. | NEW (Alpha) |
+| **[Tools](./tools/)** | Security tools: [macshield](./tools/macshield) (macOS hardening), [autodidactive](./tools/autodidactive) (adaptive learning platform). | Alpha |
+| **[Brain-Firewall](./brain-firewall/)** | Neural interface security layer. Architecture, engineering specs, MVP prototype. | Spec Complete |
 
 ---
 
@@ -174,12 +175,30 @@ qinnovates/qinnovate/
 │   ├── lib/                    # qif-constants.ts, threat-data.ts
 │   └── styles/                 # global.css (Tailwind 4)
 │
+├── brain-firewall/             # Neural interface security layer
+│   ├── BRAIN_FIREWALL_ARCHITECTURE.md
+│   ├── BRAIN_FIREWALL_ENGINEERING.md
+│   ├── MVP_PROTOTYPE.md
+│   └── TESTING.md
+│
+├── tools/                      # Practical security tools
+│   ├── macshield/              # macOS workstation hardening
+│   └── autodidactive/          # Adaptive learning platform
+│
 ├── archive/                    # Legacy projects (preserved)
 │   └── oni-framework/          # ONI 14-layer model
 │
 ├── docs/                       # Built site / GitHub Pages output
 └── .github/workflows/          # CI/CD (deploy, news, wiki sync)
 ```
+
+---
+
+## Other Qinnovates Projects
+
+| Repo | Description |
+|------|-------------|
+| [**firefly**](https://github.com/qinnovates/firefly) | Privacy-first journaling app for kids. Local-first architecture, COPPA/GDPR compliant. |
 
 ---
 

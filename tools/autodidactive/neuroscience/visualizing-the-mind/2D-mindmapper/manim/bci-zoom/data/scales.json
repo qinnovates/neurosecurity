@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "title": "BCI Zoom: Timescale and Spatial Scale Data",
+    "source": "ONI Framework - ONI_LAYERS.md v3.0",
+    "description": "Scientific data for animating brain scales from macro to molecular",
+    "last_updated": "2026-01-26"
+  },
+  "zoom_levels": [
+    {
+      "id": 1,
+      "name": "BCI Implant",
+      "spatial_scale": "cm",
+      "spatial_value": 1e-2,
+      "timescale": "seconds",
+      "timescale_value": 1,
+      "oni_layer": "L8-L14",
+      "structures": ["Neuralink threads", "Utah array", "ECoG grid"],
+      "activity": "Whole-brain rhythms, cognitive state",
+      "bci_access": "Direct READ/WRITE",
+      "color": "#4A90D9"
+    },
+    {
+      "id": 2,
+      "name": "Cortical Surface",
+      "spatial_scale": "mm",
+      "spatial_value": 1e-3,
+      "timescale": "hundreds of ms",
+      "timescale_value": 0.1,
+      "oni_layer": "L9-L10",
+      "structures": ["Cortical layers", "Gyri/sulci", "Electrode contacts"],
+      "activity": "Local field potentials (LFPs), sensory processing",
+      "bci_access": "Direct READ",
+      "color": "#5BA3EC"
+    },
+    {
+      "id": 3,
+      "name": "Neural Circuits",
+      "spatial_scale": "100 um",
+      "spatial_value": 1e-4,
+      "timescale": "tens of ms",
+      "timescale_value": 0.01,
+      "oni_layer": "L9",
+      "structures": ["Cortical columns", "Microcircuits", "Interneuron networks"],
+      "activity": "Population dynamics, spike synchrony",
+      "bci_access": "Direct READ",
+      "color": "#6CB6FF"
+    },
+    {
+      "id": 4,
+      "name": "Single Neurons",
+      "spatial_scale": "10 um",
+      "spatial_value": 1e-5,
+      "timescale": "milliseconds",
+      "timescale_value": 0.001,
+      "oni_layer": "L8-L9",
+      "structures": ["Cell bodies (soma)", "Dendrites", "Axon hillock"],
+      "activity": "Action potentials, spike trains",
+      "bci_access": "Direct READ (Neuropixels)",
+      "color": "#FF9500"
+    },
+    {
+      "id": 5,
+      "name": "Synapses",
+      "spatial_scale": "um",
+      "spatial_value": 1e-6,
+      "timescale": "microseconds",
+      "timescale_value": 1e-6,
+      "oni_layer": "L8 boundary",
+      "structures": ["Presynaptic terminal", "Synaptic cleft", "Postsynaptic density"],
+      "activity": "Vesicle fusion, neurotransmitter release",
+      "bci_access": "Indirect (via AP triggering)",
+      "color": "#FF6B35"
+    },
+    {
+      "id": 6,
+      "name": "Neurotransmitter Release",
+      "spatial_scale": "100 nm",
+      "spatial_value": 1e-7,
+      "timescale": "nanoseconds",
+      "timescale_value": 1e-9,
+      "oni_layer": "Within L8",
+      "structures": ["Vesicles", "SNARE proteins", "Ca2+ channels"],
+      "activity": "Ca2+ influx, vesicle docking, exocytosis",
+      "bci_access": "None direct",
+      "color": "#E63946"
+    },
+    {
+      "id": 7,
+      "name": "Receptor Binding",
+      "spatial_scale": "10 nm",
+      "spatial_value": 1e-8,
+      "timescale": "nanoseconds",
+      "timescale_value": 1e-9,
+      "oni_layer": "Within L8",
+      "structures": ["Dopamine (D1/D2)", "Glutamate (NMDA/AMPA)", "GABA receptors"],
+      "activity": "Ligand-receptor binding, conformational change",
+      "bci_access": "None - requires pharmacology",
+      "color": "#9D4EDD"
+    },
+    {
+      "id": 8,
+      "name": "Ion Channels",
+      "spatial_scale": "nm",
+      "spatial_value": 1e-9,
+      "timescale": "picoseconds",
+      "timescale_value": 1e-12,
+      "oni_layer": "Within L8",
+      "structures": ["Na+ channels", "K+ channels", "Ca2+ channels"],
+      "activity": "Channel gating, ion flux",
+      "bci_access": "None - molecular scale",
+      "color": "#7B2CBF"
+    },
+    {
+      "id": 9,
+      "name": "Molecular Dynamics",
+      "spatial_scale": "Angstrom",
+      "spatial_value": 1e-10,
+      "timescale": "femtoseconds",
+      "timescale_value": 1e-15,
+      "oni_layer": "Within L8 (molecular substrate)",
+      "structures": ["Enzyme active sites", "Cofactors (Fe2+, BH4)", "Electron transfer"],
+      "activity": "Electron transfer, bond formation, enzyme catalysis",
+      "bci_access": "None - quantum scale",
+      "color": "#240046"
+    }
+  ],
+  "neurotransmitter_systems": {
+    "dopamine": {
+      "origin": ["Substantia Nigra (SNc)", "Ventral Tegmental Area (VTA)"],
+      "targets": ["Striatum", "Nucleus Accumbens", "Prefrontal Cortex"],
+      "cofactors": ["Fe2+", "BH4", "O2"],
+      "timescale_synthesis": "minutes",
+      "timescale_release": "microseconds",
+      "color": "#FF6B35"
+    },
+    "glutamate": {
+      "origin": ["Cortex", "Hippocampus"],
+      "targets": ["Widespread"],
+      "receptor_types": ["AMPA", "NMDA", "mGluR"],
+      "timescale_fast": "milliseconds (AMPA)",
+      "timescale_slow": "hundreds of ms (NMDA)",
+      "color": "#06D6A0"
+    },
+    "gaba": {
+      "origin": ["Interneurons"],
+      "targets": ["Local circuits"],
+      "function": "Inhibition",
+      "timescale": "milliseconds",
+      "color": "#118AB2"
+    }
+  },
+  "bci_capabilities_by_scale": {
+    "cm_mm": {
+      "current_tech": ["EEG", "ECoG", "Neuralink"],
+      "capability": "READ population activity, WRITE stimulation",
+      "limitation": "Cannot resolve single neurons"
+    },
+    "um": {
+      "current_tech": ["Utah Array", "Neuropixels"],
+      "capability": "READ single neurons, spike sorting",
+      "limitation": "Cannot access synaptic detail"
+    },
+    "nm": {
+      "current_tech": "None",
+      "future_tech": ["Molecular nanoprobes", "Optogenetics++"],
+      "capability": "Theoretical only",
+      "limitation": "Requires molecular interfaces"
+    }
+  },
+  "scale_frequency_invariant": {
+    "formula": "f x S ≈ k",
+    "constant_k": 20,
+    "note": "Smaller scales have faster dynamics"
+  }
+}

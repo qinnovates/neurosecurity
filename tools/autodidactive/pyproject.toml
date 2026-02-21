@@ -1,0 +1,104 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "oni-academy"
+version = "0.2.0"
+description = "ONI Academy - Educational platform with AI-powered visualizations for neurosecurity and BCI concepts"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Kevin L. Qi"}
+]
+keywords = [
+    "neurosecurity",
+    "education",
+    "brain-computer-interface",
+    "BCI",
+    "neural-security",
+    "learning",
+    "visualization",
+    "manim",
+    "animation",
+    "interactive",
+    "cybersecurity",
+    "neuroethics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Multimedia :: Video",
+    "Topic :: Security",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+# Core visualization (LearnViz)
+viz = [
+    "manim>=0.18.0",
+]
+# Voice narration
+tts = [
+    "edge-tts>=6.1.0",
+]
+# Web UI
+ui = [
+    "streamlit>=1.30.0",
+]
+# Full installation with all features
+full = [
+    "oni-academy[viz,tts,ui]",
+]
+# Development
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "build>=1.0.0",
+    "twine>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://qinnovates.github.io/ONI/"
+Documentation = "https://github.com/qinnovates/mindloft/tree/main/autodidact"
+Repository = "https://github.com/qinnovates/mindloft"
+Issues = "https://github.com/qinnovates/mindloft/issues"
+
+[project.scripts]
+oni-academy = "oni_academy.cli:main"
+learnviz = "learnviz.learnviz:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["oni-academy/oni_academy", "learnviz"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "oni-academy/oni_academy",
+    "learnviz",
+    "/README.md",
+]
+exclude = [
+    "learnviz/output",
+    "learnviz/media",
+    "**/__pycache__",
+    "**/.DS_Store",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"

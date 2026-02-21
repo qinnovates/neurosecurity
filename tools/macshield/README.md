@@ -35,6 +35,16 @@ More importantly, **even a good VPN does not protect against the attacks macshie
 
 A VPN encrypts your traffic after it leaves your machine. macshield hardens the machine itself. They solve different problems.
 
+### Who macshield Is For
+
+macshield is for **individuals, students, and independent researchers** who are curious about BCI research and want baseline device hardening but may not have the financial means for a reputable paid VPN. It covers the Layer 2 protections that even a VPN cannot provide.
+
+### Who macshield Is NOT For
+
+If you are a **researcher, clinician, or engineer working with PII, neural recordings, or sensitive data** in an enterprise or institutional setting, you must use your organization’s corporate VPN, managed devices, and enterprise security policies. macshield is not a substitute for enterprise security infrastructure. Adhere to your corporate device and security policies at all times.
+
+**Qinnovates is not liable for any security compromises resulting from the use of macshield in lieu of proper enterprise or institutional security controls.**
+
 ### What macshield Is NOT
 
 - **Not a VPN replacement.** macshield does not encrypt your internet traffic. For full traffic encryption, use a reputable paid VPN (Mullvad, ProtonVPN, etc.).

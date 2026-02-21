@@ -1,0 +1,16 @@
+# LearnViz Requirements
+# Install with: pip install -r requirements.txt
+
+# Core - Required
+manim>=0.18.0
+
+# Web UI - Required for `learnviz --ui`
+streamlit>=1.30.0
+
+# Text-to-Speech - Optional (choose one)
+edge-tts>=6.1.0      # Best quality, requires internet
+# gtts>=2.5.0        # Google TTS, requires internet
+# pyttsx3>=2.90      # Offline, uses system voices
+
+# Note: ffmpeg is also required for video+audio combining
+# Install via: brew install ffmpeg (macOS) or apt install ffmpeg (Linux)
