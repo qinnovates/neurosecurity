@@ -1,0 +1,72 @@
+{
+  "_metadata": {
+    "title": "QIF Security Controls",
+    "version": "1.0.0",
+    "description": "Security controls and detection methods mapped to QIF hourglass bands. Grows over time as controls are developed.",
+    "license": "CC-BY-4.0"
+  },
+  "controls_by_band": {
+    "N7": {
+      "detection": ["EEG anomaly detection", "Coherence metric (Cs) monitoring", "Gamma/beta band power analysis"],
+      "prevention": ["Closed-loop stimulation bounds", "Neural signature authentication", "Behavioral baseline monitoring"],
+      "response": ["Stimulation shutdown", "Alert to clinical team", "Session logging"]
+    },
+    "N6": {
+      "detection": ["Theta/alpha power deviation", "Amygdala response latency tracking", "Emotional baseline drift"],
+      "prevention": ["Limbic stimulation parameter limits", "Memory encoding protection", "Emotional state bounds"],
+      "response": ["Stimulation parameter reset", "Clinical escalation", "Patient notification"]
+    },
+    "N5": {
+      "detection": ["Beta oscillation pathology detection", "Reward circuit anomaly", "Motor output monitoring"],
+      "prevention": ["DBS parameter bounds (voltage, frequency, pulse width)", "Dopamine pathway protection"],
+      "response": ["DBS emergency shutoff", "Movement arrest protocol"]
+    },
+    "N4": {
+      "detection": ["Thalamic relay integrity check", "Sleep spindle monitoring", "Sensory gating coherence"],
+      "prevention": ["Consciousness state protection", "Thalamic stimulation limits", "Autonomic safeguards"],
+      "response": ["Emergency consciousness preservation", "Vital function monitoring escalation"]
+    },
+    "N3": {
+      "detection": ["Cerebellar timing analysis", "Motor coordination metrics", "Purkinje cell firing pattern"],
+      "prevention": ["Cerebellar stimulation bounds", "Motor learning protection"],
+      "response": ["Coordination safety protocol", "Motor output inhibition"]
+    },
+    "N2": {
+      "detection": ["Vital function monitoring (HR, RR, BP)", "Cranial nerve response", "Arousal state tracking"],
+      "prevention": ["Absolute stimulation limits", "Vital function interlocks", "Life-critical safeguards"],
+      "response": ["Life-safety shutdown", "Emergency medical alert", "Cardiac/respiratory backup"]
+    },
+    "N1": {
+      "detection": ["Spinal reflex monitoring", "Motor/sensory conduction velocity", "Autonomic response tracking"],
+      "prevention": ["Spinal stimulation current limits", "Reflex arc protection"],
+      "response": ["Stimulation shutoff", "Motor safety protocol"]
+    },
+    "I0": {
+      "detection": ["Impedance monitoring", "Tissue temperature sensing", "Signal-to-noise ratio tracking"],
+      "prevention": ["Charge density limits (30 uC/cm2)", "Thermal safeguards (<2C rise)", "Biocompatibility monitoring"],
+      "response": ["Interface shutdown", "Electrode deactivation", "Surgical team alert"]
+    },
+    "S1": {
+      "detection": ["ADC saturation detection", "Analog noise floor monitoring", "Impedance artifact flagging"],
+      "prevention": ["Input validation", "Anti-aliasing filters", "Shielding requirements"],
+      "response": ["Signal chain reset", "Calibration cycle"]
+    },
+    "S2": {
+      "detection": ["BLE/WiFi anomaly detection", "Firmware integrity check", "Protocol compliance monitoring"],
+      "prevention": ["End-to-end encryption (NSP)", "Firmware signing", "Secure boot"],
+      "response": ["Connection termination", "Firmware rollback", "Telemetry lockdown"]
+    },
+    "S3": {
+      "detection": ["RF spectrum monitoring", "Network intrusion detection", "Cloud API audit logging"],
+      "prevention": ["PQC/QKD for data in transit", "Application firewall", "Zero-trust architecture"],
+      "response": ["Network isolation", "API key rotation", "Incident response activation"]
+    }
+  },
+  "nsp_layers": [
+    { "layer": 1, "name": "Quantum Key Distribution", "bands": ["S2", "S3"], "overhead": "0.8%" },
+    { "layer": 2, "name": "Post-Quantum Encryption", "bands": ["S1", "S2", "S3"], "overhead": "1.2%" },
+    { "layer": 3, "name": "Neural Signature Authentication", "bands": ["I0", "S1"], "overhead": "0.5%" },
+    { "layer": 4, "name": "Coherence Integrity Monitoring", "bands": ["N1", "N2", "N3", "N4", "N5", "N6", "N7"], "overhead": "0.45%" },
+    { "layer": 5, "name": "Temporal Binding Verification", "bands": ["N4", "N5", "N6", "N7"], "overhead": "0.3%" }
+  ]
+}

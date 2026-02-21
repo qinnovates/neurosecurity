@@ -1,65 +1,20 @@
 [
   {
     "type": "external",
-    "title": "Elon Musk’s Neuralink sparks BCI race in China - Teslarati",
-    "date": "2026-02-20",
-    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9DREhGWUZDblhocDE2N0s5Z0lKSmw4cEI5bHVpR210OTBra2NCTEJhSXNINEJrNzRudkJxRzFETlpzNjd3NmhNZmdYcFU3QVo1Vkd3RkhMUVF5YWc1VFYtVQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk’s Neuralink sparks BCI race in China&nbsp;&nbsp;Teslarati",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer. - CBS News",
-    "date": "2026-02-20",
-    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRDVMbXFjMmZmdGJyZXI1QVVxUFhPMlU0QTduS3gwMm84S1FhOEFRc0RRa281SklXOVlmTVo3Sm5VVW4taUZWUXhhM3RNT0E5VFpRdWx1UG9Nc05MZTdrbzlHb2kxR1JVakFnaTduWVV2amU2QmVwU09OSG4ycUZsTFNBWllRSFQ0SFNCd2wxZw?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer.&nbsp;&nbsp;CBS News",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Probability-Invariant Random Walk Learning on Gyral Folding-Based Cortical Similarity Networks for Alzheimer's and Lewy Body Dementia Diagnosis",
-    "date": "2026-02-20",
-    "url": "https://arxiv.org/abs/2602.17557",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.17557v1 Announce Type: new \nAbstract: Alzheimer's disease (AD) and Lewy body dementia (LBD) present overlapping clinical features yet require distinct diagnostic strategies. While neuroimag",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Omni-iEEG: A Large-Scale, Comprehensive iEEG Dataset and Benchmark for Epilepsy Research",
-    "date": "2026-02-20",
-    "url": "https://arxiv.org/abs/2602.16072",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.16072v2 Announce Type: replace-cross \nAbstract: Epilepsy affects over 50 million people worldwide, and one-third of patients suffer drug-resistant seizures where surgery offers the best cha",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "China brain computer interface outfit accelerates to human trials in quest to outpace Neuralink — mix of government backing and investor enthusiasm speeds time to market for NeuroXess - Tom's Hardware",
-    "date": "2026-02-19",
-    "url": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxPaTQtSUhwd28tY1dJNlJ2d1ItaC1NTTRyNmpMM1BNYm9PZ0h5TDZUeFJGNlQ5NERoU0dhRktobWZZYjRzblBVSThsUUNoYkpqOHNVOXZKbnRFd2NSZ1BDOElPY2ZOZ2QzN0tzRHd1TC1QOENpcDI0Z1N2Tmlya2dNa3RjOUFuYnpaR2hsVi1FdUtONEJkejdYTEpoUm1SUDhlTU1sYnIzWngwSEs0ckFpWmkyQ2ZxM1RiQjdCMnRuMXp1UExKZWZSbjlWbGlXd1oxenBDWlJvUnF3MjN4YmdNZ0FjekZVWElBZGpLWFg3WUlZZjNRdHJpSUNRRE5SMWFVQ0NUUkpZd0tkOUxicmlITFFYdmg4QXQ0STVLZDhBbjY3MUc3TDdmLU9vbEtGcmxvVUNBdkNvcC1BNmxwQUc3Mmk3eDVZT3BhNzV1RThQaVQ3OXpOV2Fn?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China brain computer interface outfit accelerates to human trials in quest to outpace Neuralink — mix of government backing and investor enthusiasm speeds time to market for NeuroXess&nbsp;&nbsp;Tom's",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "OpenAI and Sam Altman Back Merge Labs: A Non-Invasive BCI Startup Challenging Neuralink - QUASA Connect",
-    "date": "2026-02-19",
-    "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPQnVNa2xhRllpZ1JEdTd6bDVFVzRJUHlPaW84aldNSTFUX3BqcUI4V0lmYnQ2QThEODA2bkJyUGdHS2w5aFQ2WE9WQUJCQTZXRzhPWDNWTm9pTW5sRllSVjBQOHFNNE02RTNaME5sbEtJUWdQb1d2S0RZTThscFZ3ZlBCQ01BeXN5ZERMXy1XOTg5b2F1c3RQQmluR2otR3pqUGV0Qk5mdjhZazZzTXc?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "OpenAI and Sam Altman Back Merge Labs: A Non-Invasive BCI Startup Challenging Neuralink&nbsp;&nbsp;QUASA Connect",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Beijing backs brain implant push to rival Elon Musk’s Neuralink - Financial Times",
     "date": "2026-02-18",
     "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5HVjB3TndyUWNKZUw4OHZpYzRBd1RmVlNwX2hFTW40UFNGUnExT1MtUWE0VnZqTzVNbGd0SmdYLWRzNkx4ZWdMZHJpVlo0MkE0NzBMbWwxbTRPbldOVE8zNWlINGJKc0plUEN6UWtOQ0Q?oc=5",
     "source": "Google News — BCI",
     "summary": "Beijing backs brain implant push to rival Elon Musk’s Neuralink&nbsp;&nbsp;Financial Times",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "What Will It Take to Design a Brain Implant That Lasts a Lifetime? - the-scientist.com",
+    "date": "2026-02-17",
+    "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPMVhHZlBJVkpYakNwTEZfRlBTcVRhMjM0OHZWc3F1MUNPREhVYThDYVhqcVBMNG12bENkb01ObVE1RDlNVHdpZDh0RXA0Y054b0tCaDFnQXJFZUF0dlQyc241VmJmM2RLZDFOcmliWGxvWkhYWUFRYXBUTUtZdWN5Ym9CX0JFNE5PTjJMazJwS2xtU3hpeHRIXzZWbExfZ0YtUDM4?oc=5",
+    "source": "Google News — BCI",
+    "summary": "What Will It Take to Design a Brain Implant That Lasts a Lifetime?&nbsp;&nbsp;the-scientist.com",
     "category": "neurotechnology"
   },
   {
@@ -85,7 +40,7 @@
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
-    "source": "Google News — Neuralink",
+    "source": "Google News — BCI",
     "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
     "category": "neurotechnology"
   },
@@ -100,20 +55,29 @@
   },
   {
     "type": "external",
-    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
-    "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
-    "source": "Google News — BCI",
-    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Investing in Merge Labs - OpenAI",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
     "source": "Google News — BCI",
     "summary": "Investing in Merge Labs&nbsp;&nbsp;OpenAI",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -124,6 +88,33 @@
     "source": "Google News — Neuralink",
     "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says - Fierce Biotech",
+    "date": "2026-01-02",
+    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQYXdTY3MxMnRVV1QtMjBFZFUtNFpHRWV4OHItaFFPRWFwQWl0b2dVNGJjbjVQZDFXYnNWekZjcVU4Sm5YeWFBSjF2dzBoRUpwQVVZckhXZDdRV29vYV9POFFsNjJIQnVQcGVrTkJfTGlPbkJucEpSckwtcElpaEJZZnYzVUE0cndZQ2VwVjluTnRwa0hiXzJBU0F0NlhPUXUzWkNuWG40MnBoUmRkM3JRUVBQSExvcGFvVDlkYXZ2X013dw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says&nbsp;&nbsp;Fierce Biotech",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
+    "date": "2025-12-11",
+    "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
+    "date": "2025-11-18",
+    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
+    "category": "neuroethics"
   },
   {
     "type": "external",

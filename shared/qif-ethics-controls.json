@@ -1,0 +1,85 @@
+{
+  "_metadata": {
+    "title": "QIF Ethics & Governance Controls",
+    "version": "1.0.0",
+    "description": "Neurorights definitions, governance frameworks, and consent tiers mapped to QIF hourglass bands.",
+    "license": "CC-BY-4.0"
+  },
+  "neurorights": {
+    "MP": {
+      "name": "Mental Privacy",
+      "shortDef": "Your thoughts are yours. No one should read, store, or re-link them without permission.",
+      "source": "qif-extended",
+      "color": "#3b82f6",
+      "bands": ["N7", "N6", "N1"],
+      "frameworks": ["GDPR Art. 9", "Chile Neurorights Act 2021", "OECD Neurotechnology Principles 2024"]
+    },
+    "CL": {
+      "name": "Cognitive Liberty",
+      "shortDef": "You decide what enters your mind. No forced stimulation or suppression.",
+      "source": "ienca-andorno",
+      "color": "#8b5cf6",
+      "bands": ["N7", "N6", "N4"],
+      "frameworks": ["Ienca & Andorno 2017", "Spain Organic Law 2023 (proposed)", "OECD 2024"]
+    },
+    "MI": {
+      "name": "Mental Integrity",
+      "shortDef": "Your brain should not be harmed, altered, or have its natural rhythms disrupted without consent.",
+      "source": "qif-extended",
+      "color": "#ef4444",
+      "bands": ["N7", "N6", "N5", "N3", "N2", "N1"],
+      "frameworks": ["EU Charter Art. 3", "Chile Neurorights Act 2021", "Ienca & Andorno 2017"]
+    },
+    "PC": {
+      "name": "Psychological Continuity",
+      "shortDef": "Your sense of self should remain stable. No covert personality changes.",
+      "source": "ienca-andorno",
+      "color": "#f59e0b",
+      "bands": ["N6", "N7"],
+      "frameworks": ["Ienca & Andorno 2017", "UNESCO Draft Recommendation on Neurotechnology 2024"]
+    },
+    "CA": {
+      "name": "Cognitive Authenticity",
+      "shortDef": "Your thoughts should be genuinely yours, not implanted or manufactured.",
+      "source": "qif-original",
+      "color": "#10b981",
+      "bands": ["N7", "N4"],
+      "frameworks": ["QIF Original (2026)", "Proposed extension to Chile framework"]
+    }
+  },
+  "consent_tiers": {
+    "standard": {
+      "label": "Standard Consent",
+      "color": "#22c55e",
+      "description": "Standard informed consent sufficient. Low-risk, reversible interventions.",
+      "bands": ["S1", "S2", "S3"]
+    },
+    "enhanced": {
+      "label": "Enhanced Consent",
+      "color": "#f59e0b",
+      "description": "Extended disclosure required. Moderate risk, partially reversible.",
+      "bands": ["N7", "N6", "N5", "N3", "I0"]
+    },
+    "IRB": {
+      "label": "IRB/Ethics Board Required",
+      "color": "#ef4444",
+      "description": "Institutional review required. High risk, potentially irreversible.",
+      "bands": ["N4", "N2"]
+    },
+    "prohibited": {
+      "label": "Prohibited",
+      "color": "#7f1d1d",
+      "description": "No ethical justification exists. Lethal or permanently disabling.",
+      "bands": ["N2"]
+    }
+  },
+  "governance_frameworks": [
+    { "id": "chile", "name": "Chile Neurorights Act", "year": 2021, "status": "enacted", "scope": "constitutional" },
+    { "id": "eu_charter", "name": "EU Charter of Fundamental Rights Art. 3", "year": 2000, "status": "enacted", "scope": "treaty" },
+    { "id": "gdpr", "name": "GDPR Article 9 (Special Category Data)", "year": 2018, "status": "enacted", "scope": "regulation" },
+    { "id": "ienca_andorno", "name": "Ienca & Andorno Framework", "year": 2017, "status": "academic", "scope": "proposal" },
+    { "id": "oecd", "name": "OECD Recommendation on Neurotechnology", "year": 2024, "status": "adopted", "scope": "recommendation" },
+    { "id": "unesco", "name": "UNESCO Draft on Neurotechnology Ethics", "year": 2024, "status": "draft", "scope": "recommendation" },
+    { "id": "fdora", "name": "FDORA Section 3305 (Cyber Devices)", "year": 2023, "status": "enacted", "scope": "regulation" }
+  ]
+}
