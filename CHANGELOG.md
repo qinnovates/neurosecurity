@@ -4,7 +4,7 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 76554ec6c6123af4e24f9395ccc39e89b734b636 -->
+<!-- changelog-marker: a0c2879f926a4142b13ff4427b5f4243f2239aff -->
 
 ## 2026-02-21
 
