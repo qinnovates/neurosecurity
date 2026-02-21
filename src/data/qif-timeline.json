@@ -8,7 +8,7 @@
   },
   "current_stats": {
     "as_of": "2026-02-21",
-    "threat_techniques": 103,
+    "threat_techniques": 109,
     "bci_devices": 24,
     "brain_regions": 37,
     "physics_constraints": 13,
@@ -19,14 +19,14 @@
     "physics_constants_verified": 14,
     "preprint_version": "v1.4",
     "nsp_version": "v0.5",
-    "tara_version": "v1.6",
+    "tara_version": "v1.7",
     "atlas_version": "v1.2.0",
     "derivation_log_entries": 70,
     "field_journal_entries": 20,
     "neurowall_version": "v0.7",
     "blog_posts": 50,
     "cross_ai_validations": 9,
-    "research_sources": 165
+    "research_sources": 193
   },
   "milestones": [
     {
@@ -339,6 +339,17 @@
       "type": "milestone",
       "title": "Automation Registry + Timeline Tracking",
       "description": "30 automations catalogued (10 active workflows, 8 disabled, 6 scripts, 4 planned). Timeline staleness detection automated. Self-updating registry via daily GitHub Action."
+    },
+    {
+      "date": "2026-02-21",
+      "type": "release",
+      "title": "TARA v1.7: Origin Classification + 6 New Techniques",
+      "description": "All 109 techniques tagged with origin provenance (literature, qif_recontextualized, qif_chain_synthesis, qif_theoretical, neuroethics_formalized). Original authors credited. 6 new techniques added (T0104-T0109): 4 from Murcia/Lopez Bernal taxonomy gap, 1 neuromorphic mimicry, 1 data alignment exploitation. 24 new research sources added (165 to 193).",
+      "stats_snapshot": {
+        "threat_techniques": 109,
+        "research_sources": 193,
+        "tara_version": "v1.7"
+      }
     }
   ]
 }

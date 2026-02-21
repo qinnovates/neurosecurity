@@ -245,7 +245,7 @@ I started with 60 attack techniques collectively known across BCI research publi
 - 13 physics constraints unified into a single BCI limits equation, cross-validated by Gemini 2.5 Pro
 - An 11-band hourglass security model derived from scratch
 - A post-quantum neural security protocol (NSP v0.5) with ML-KEM-768 handshake and ML-DSA-65 signatures implemented in Rust (cryptographic core complete, frame pipeline in progress)
-- A coherence monitor (Neurowall v0.7) with 14 attack generators, 9/9 detection at 30s, 5/5 on real EEG hardware (OpenBCI Cyton via BrainFlow, 0% false positive rate), ROC-optimized to 5% FPR at 100% TPR
+- A coherence monitor (Neurowall v0.7) with 14 attack generators, 9/9 detection at 30s, validated via BrainFlow synthetic board (16-channel, 0% false positive rate), ROC-optimized to 5% FPR at 100% TPR
 - A domain-specific neural rendering language (Runemate)
 - FDORA Section 3305 regulatory compliance mapped across all techniques
 - 9 cross-AI validation sessions across Claude, Gemini, and OpenAI

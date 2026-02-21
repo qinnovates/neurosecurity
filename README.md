@@ -39,6 +39,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 - [What We Build](#what-we-build)
 - [The TARA Insight](#the-tara-insight)
 - [Neurorights Map](#neurorights-map)
+- [Why Neurosecurity?](#why-neurosecurity)
 - [Architecture](#architecture)
   - [QIF](#qif-quantified-interconnection-framework)
   - [NSP](#nsp-neural-security-protocol)
@@ -65,7 +66,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs | 🟢 v6.2.1 |
 | **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.4 |
-| **[TARA](https://qinnovate.com/TARA/)** | 103 BCI attack-therapy technique pairs, STIX 2.1 registry | 🟢 v1.6 |
+| **[TARA](https://qinnovate.com/TARA/)** | 109 BCI attack-therapy technique pairs, STIX 2.1 registry | 🟢 v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | 🟢 v0.2.0 |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links | 🟡 v0.5, Secure Core done |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces (5 neural metrics) | 🟢 v1.0 |
@@ -113,7 +114,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 ## The TARA Insight
 
-TARA started as an attack matrix. I catalogued 103 BCI attack techniques from a pure security mindset, and something unexpected happened: the same mechanisms kept showing up on the therapeutic side.
+TARA started as an attack matrix. I catalogued 109 BCI attack techniques from a pure security mindset, and something unexpected happened: the same mechanisms kept showing up on the therapeutic side.
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. Replay attacks are a threat. Repetitive stimulation protocols are a treatment. The RF mapping techniques an adversary uses to map a building through WiFi walls are the same physics a clinician would use to calibrate a visual prosthesis through electrodes.
 
@@ -134,12 +135,35 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 | Neuroright | What It Protects | Enforced By |
 |------------|-----------------|-------------|
 | **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CG metric (scores cognitive compromise severity) |
-| **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 103 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
+| **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 109 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
 | **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
 | **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
 | **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](tools/macshield/) (free workstation hardening) |
 
 Sources: [Neuroethics Alignment](governance/NEUROETHICS_ALIGNMENT.md) | [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | [Code of Ethics](governance/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md)
+
+---
+
+## Why Neurosecurity?
+
+Three fields converge on BCIs. None of them covers the full problem alone.
+
+**Neuroethics** writes the policies. What should and shouldn't be done with BCIs, what constitutes consent, what rights people have over their neural data. The 3 TARA techniques tagged "neuroethics_formalized" (identity erosion, agency manipulation, self-model corruption) came from neuroethics because those researchers were the first to articulate these as harms.
+
+**Neuroscience** provides the mechanism understanding. How neural signals work, what's physically possible, what the attack surface looks like. The 46 "qif_recontextualized" techniques came from neuroscience, physics, and sensor research. You cannot build a defense if you don't understand the biology.
+
+**Cybersecurity** operationalizes it. The gap is that neither neuroethics nor neuroscience has the operational security toolkit to detect, prevent, and respond to these threats. That's the QIF contribution: taking phenomena described by neuroscientists and concerns raised by neuroethicists and putting them into a formal, testable, scoreable security framework with NISS scores, attack chains, and detection mechanisms.
+
+**The lesson from IT:** GRC (Governance, Risk, and Compliance) was retrofitted onto existing security infrastructure decades after the internet shipped. The result: compliance frameworks that lag years behind threats, checkbox security that satisfies auditors but not attackers. We need to learn from history and not repeat that, especially for the brain.
+
+| Field | Contributes | Cannot Do Alone |
+|-------|------------|----------------|
+| Neuroethics | Policies, rights frameworks, consent models | Detect a P300 interrogation attack in real time |
+| Neuroscience | Mechanism knowledge, attack surface understanding | Score severity, map attack chains, build detection systems |
+| Cybersecurity | TTPs, scoring, detection, incident response | Understand neural biology or define neurorights |
+| **Neurosecurity** | **All of the above, integrated** | **The bridge discipline** |
+
+[Read the full neurosecurity case](governance/NEUROSECURITY.md) | [Origin classification of all 109 techniques](shared/qtara-registrar.json)
 
 ---
 
@@ -163,7 +187,7 @@ The wire protocol (v0.5). Post-quantum encryption (ML-KEM-768, ML-DSA, AES-256-G
 
 ### TARA (Therapeutic Atlas of Risks and Applications)
 
-The threat-therapy registry. 103 techniques spanning 8 domains and 15 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs.
+The threat-therapy registry. 109 techniques spanning 8 domains and 15 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs.
 
 - **Registry:** [qinnovate.com/TARA](https://qinnovate.com/TARA/)
 - **API:** [qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json) (STIX 2.1 Feed)
@@ -222,6 +246,7 @@ Published documents covering the full neuroethics landscape:
 | [Regulatory Compliance](governance/REGULATORY_COMPLIANCE.md) | FDA, EU MDR, neurorights crosswalk, regulatory gaps, NIST/ISO goals |
 | [Transparency](governance/TRANSPARENCY.md) | Human-AI collaboration audit trails |
 | [UNESCO Alignment](governance/UNESCO_ALIGNMENT.md) | International neuroethics principles |
+| [Why Neurosecurity](governance/NEUROSECURITY.md) | The gap between neuroethics, neuroscience, and cybersecurity |
 
 ---
 
