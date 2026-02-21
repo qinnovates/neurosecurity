@@ -28,29 +28,32 @@ The standards bodies that shaped the internet didn't build browsers. They built 
 
 ---
 
+<!-- VERSION-TABLE-START — Update versions here when releasing. Canonical sources noted in comments. -->
 ## What We Build
 
 | Standard | What It Does | Status |
 |----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs. Mirroring the OSI model for the mind. | v6.2.1, published |
 | **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper: architecture, TARA, NISS, and Neural Impact Chain. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) | v1.4, published |
-| **[TARA](https://qinnovate.com/TARA/)** | BCI attack-therapy technique pairs. STIX 2.1 compliant registry. | v1.0, published |
-| **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.1.2, released |
-| **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.4, Secure Core Complete |
+| **[TARA](https://qinnovate.com/TARA/)** | 103 BCI attack-therapy technique pairs across 15 tactics and 8 domains. STIX 2.1 compliant registry. | v1.6, 103 techniques |
+| **[qtara](https://pypi.org/project/qtara/)** | Official Python SDK for TARA registry management and STIX export. | v0.2.0, released |
+| **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links. Under 4% implant power overhead. | v0.5, Secure Core Complete |
 | **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces. 5 metrics CVSS cannot express. | v1.0, published |
-| **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: HTML-to-bytecode today, code-to-visual-cortex tomorrow. Vision restoration is the goal. | v0.4, Secure Pipe Verified |
+| **[Runemate](https://qinnovate.com/runemate/)** | Rendering pipeline: native DSL compiler, 67.8% compression, code-to-visual-cortex long-term goal. | v1.0, Native DSL Compiler |
+| **[Neurowall](./tools/neurowall/)** | Neural firewall neckband. 3-layer pipeline: coherence detection, differential privacy, NISS policy engine. OpenBCI + NSP + PQC. | v0.5, 5/9 attacks detected |
 | **[Governance](https://qinnovate.com/governance/)** | Neuroethics and regulatory compliance documents. UNESCO-aligned. | Published |
-| **[Tools](./tools/)** | Security tools: [macshield](./tools/macshield) (macOS hardening), [neurowall](./tools/neurowall) (neural firewall neckband), [autodidactive](./tools/autodidactive) (adaptive learning platform). | Alpha |
+| **[Tools](./tools/)** | [macshield](./tools/macshield) (macOS hardening), [neurowall](./tools/neurowall) (neural firewall), [autodidactive](./tools/autodidactive) (adaptive learning). | Active |
+<!-- VERSION-TABLE-END -->
 
 ---
 
 ## The TARA Insight
 
-TARA started as an attack matrix. I catalogued 102 BCI attack techniques from a pure security mindset, and something unexpected happened: the same mechanisms kept showing up on the therapeutic side.
+TARA started as an attack matrix. I catalogued 103 BCI attack techniques from a pure security mindset, and something unexpected happened: the same mechanisms kept showing up on the therapeutic side.
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. Replay attacks are a threat. Repetitive stimulation protocols are a treatment. The RF mapping techniques an adversary uses to map a building through WiFi walls are the same physics a clinician would use to calibrate a visual prosthesis through electrodes.
 
-About 75% of the 102 techniques map to a therapeutic counterpart today. The boundary between attack and therapy is not mechanism. It is consent, dosage, and oversight.
+About 75% of the 103 techniques map to a therapeutic counterpart today. The boundary between attack and therapy is not mechanism. It is consent, dosage, and oversight.
 
 This means the same framework that scores whether an attack is dangerous can also bound whether a therapy is safe. TARA is both a threat registry and a safety specification. The dual-use mapping is the point.
 
@@ -73,14 +76,14 @@ The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocor
 
 ### NSP (Neural Security Protocol)
 
-The wire protocol. Post-quantum encryption (ML-KEM, ML-DSA, AES-256-GCM) at the frame level. Designed for implant-class hardware: sub-4ms latency, under 4% power overhead on ARM Cortex-M4.
+The wire protocol (v0.5). Post-quantum encryption (ML-KEM-768, ML-DSA, AES-256-GCM-SIV) at the frame level. Designed for implant-class hardware: sub-4ms latency, under 4% power overhead on ARM Cortex-M4.
 
 - **Spec:** [qinnovate.com/nsp](https://qinnovate.com/nsp/)
 - **Implementation:** [src/lib/nsp-core/](src/lib/nsp-core/) (Rust, PQ-secure)
 
 ### TARA (Therapeutic Atlas of Risks and Applications)
 
-The threat-therapy registry. Techniques spanning multiple domains (Access, Collection, Execution, Impact, Persistence, Reconnaissance, Exfiltration, Evasion) and tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs.
+The threat-therapy registry. 103 techniques spanning 8 domains and 15 tactics. Each technique scored with CVSS v4.0 base vectors + NISS extension metrics. MITRE-compatible IDs.
 
 - **Registry:** [qinnovate.com/TARA](https://qinnovate.com/TARA/)
 - **API:** [qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json) (STIX 2.1 Feed)
@@ -115,14 +118,12 @@ The scoring extension. First CVSS v4.0 extension designed for neural interfaces.
 
 ### Runemate
 
-The rendering pipeline. Phase 1 compiles HTML/CSS into Staves bytecode for bandwidth-constrained BCIs (62-77% compression, screens and headsets). Phase 2/3 compiles semantic content into electrode stimulation patterns for direct cortical rendering. The long-term goal is vision restoration: translating visual information into signals a blind patient's visual cortex can interpret.
+The rendering pipeline. v1.0 introduces a native DSL compiler achieving 67.8% compression (1059 B source to 341 B bytecode). Phase 2/3 compiles semantic content into electrode stimulation patterns for direct cortical rendering. The long-term goal is vision restoration: translating visual information into signals a blind patient's visual cortex can interpret.
 
 The Forge (gateway compiler, Rust std) compiles content. The Scribe (implant interpreter, Rust no_std, ~200KB) renders it. TARA validates every output pattern before delivery, bounding both attack severity and therapeutic safety.
 
-Runemate paves the road for BCI content delivery the way W3C paved the road for web content. The bytecode format, the safety bounds, the rendering model: these become the shared infrastructure that BCI manufacturers build on.
-
-- **Spec:** [qinnovate.com/runemate](https://qinnovate.com/runemate/) (v0.4, 19 sections, ~2900 lines)
-- **Compiler:** [src/lib/runemate-forge/](src/lib/runemate-forge/) (HTML-to-Staves, encrypted)
+- **Spec:** [qinnovate.com/runemate](https://qinnovate.com/runemate/) (v1.0, 19 sections, ~2900 lines)
+- **Compiler:** [src/lib/runemate-forge/](src/lib/runemate-forge/) (native DSL-to-Staves, encrypted)
 - **Full specification:** [qif-framework/RUNEMATE.md](qif-framework/RUNEMATE.md)
 
 ### Governance
@@ -156,7 +157,9 @@ qinnovates/qinnovate/
 │   ├── qif-lab/                # Equation testing
 │   ├── QIF-WHITEPAPER.md       # v6.2.1 whitepaper
 │   ├── QIF-TRUTH.md            # Canonical source of truth
-│   └── RUNEMATE.md             # Runemate v0.4 spec
+│   ├── QIF-FIELD-JOURNAL.md    # Append-only research field journal
+│   ├── QIF-DERIVATION-LOG.md   # Raw derivation sessions
+│   └── RUNEMATE.md             # Runemate v1.0 spec
 │
 ├── shared/                     # Cross-cutting data
 │   ├── qtara-registrar.json    # TARA techniques (CVSS + NISS)
@@ -174,8 +177,9 @@ qinnovates/qinnovate/
 ├── crates/                     # Rust implementations
 │   └── nsp/                    # Neural Security Protocol (Rust)
 │
-├── blogs/                      # Blog posts (Astro content collection)
+├── blogs/                      # Blog posts + field journal entries (fact-checked)
 ├── scripts/                    # RSS fetcher, TARA tools, utilities
+│   ├── verify/                 # Citation & fact verification pipeline
 │   └── forms/                  # Consulting form & Apps Script handler
 │
 ├── src/                        # Astro 5 website (qinnovate.com)
@@ -187,14 +191,14 @@ qinnovates/qinnovate/
 │
 ├── tools/                      # Practical security tools
 │   ├── macshield/              # macOS workstation hardening
-│   ├── neurowall/              # Neural firewall neckband (OpenBCI + NSP + PQC)
+│   ├── neurowall/              # Neural firewall neckband (v0.5, OpenBCI + NSP + PQC)
 │   └── autodidactive/          # Adaptive learning platform
 │
 ├── archive/                    # Legacy projects (preserved)
 │   └── oni-framework/          # ONI 14-layer model
 │
 ├── docs/                       # Built site / GitHub Pages output
-└── .github/workflows/          # CI/CD (deploy, news, wiki sync)
+└── .github/workflows/          # CI/CD (deploy, verify, field-journal-to-blog)
 ```
 
 ---
@@ -221,7 +225,7 @@ Qinnovate seeks partnerships with researchers, standards bodies, BCI manufacture
 
 Qinnovate follows a strict **Dual-Agent Collaboration Protocol** to ensure that all AI-assisted development is auditable and transparent. 
 
-- **Traceable Decisions**: Every AI session is logged in `_memory/collab/`.
+- **Traceable Decisions**: Every AI session is logged in `_memory/`.
 - **HITL Verification**: All logs are cryptographically hashed and verified by a human maintainer.
 - **Audit Statement**: See our **[Transparency Statement](governance/TRANSPARENCY.md)** for a full record of contributions, cognitive boundaries, and tool disclosures.
 
