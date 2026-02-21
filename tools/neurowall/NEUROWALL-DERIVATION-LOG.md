@@ -4,7 +4,23 @@ Engineering decisions, test results, and design rationale for the Neurowall simu
 
 ---
 
-## Entry 001 — NISS v1: Signature-Based Detection (2026-02-21)
+## Table of Contents
+
+| Entry | Title | Date | Version |
+|-------|-------|------|---------|
+| [001](#entry-001) | NISS v1: Signature-Based Detection | 2026-02-21 ~03:00 | v0.1 |
+| [002](#entry-002) | Coherence-Based Anomaly Detection | 2026-02-21 ~03:15 | v0.2-v0.3 |
+| [003](#entry-003) | Software Capacitor Concept | 2026-02-21 ~03:30 | v0.3 |
+| [004](#entry-004) | QIF-T0026 Neuronal Flooding Detection | 2026-02-21 ~03:40 | v0.3 |
+| [005](#entry-005) | Phase 1 Roadmap | 2026-02-21 ~04:00 | -- |
+| [006](#entry-006) | NIC Chain Attack Simulation Test Suite | 2026-02-21 ~04:10 | v0.3 |
+| [007](#entry-007) | v0.4: DC Drift Detection Attempt, FPR-Adjusted Monitor | 2026-02-21 03:30-04:45 | v0.4 |
+| [008](#entry-008) | v0.5: Multi-Band EEG, Auto-Calibrating w2, Growth Detector | 2026-02-21 05:00-06:45 | v0.5 |
+| [009](#entry-009) | v0.6: Spectral Peak Detection, CUSUM, ROC, Visualizations | 2026-02-21 06:50-07:50 | v0.6 |
+
+---
+
+## Entry 001 — NISS v1: Signature-Based Detection (2026-02-21 ~03:00) {#entry-001}
 
 **Context:** Initial sim.py (v0.1-v0.2) used a purely signature-based NISS engine that looked for spectral power at known SSVEP target frequencies (8.57, 10.9, 15.0, 20.0 Hz). This worked for known attacks but had a fundamental blind spot: any attack using an unlisted frequency, a slow drift, or broadband saturation would be completely invisible.
 
@@ -19,7 +35,7 @@ Engineering decisions, test results, and design rationale for the Neurowall simu
 
 ---
 
-## Entry 002 — Coherence-Based Anomaly Detection (2026-02-21)
+## Entry 002 — Coherence-Based Anomaly Detection (2026-02-21 ~03:15) {#entry-002}
 
 **Design:** Incorporated the QIF Coherence Metric Cs from QIF-TRUTH.md §3.1 as the anomaly scoring backbone:
 
@@ -77,7 +93,7 @@ The drift and flood attacks are invisible to the SSVEP signature detector. Only 
 
 ---
 
-## Entry 003 — Software Capacitor Concept (2026-02-21)
+## Entry 003 — Software Capacitor Concept (2026-02-21 ~03:30) {#entry-003}
 
 **Concept:** The anomaly score from the coherence monitor acts as a "software capacitor." Like a physical capacitor absorbs transient voltage spikes without passing them through, the monitor absorbs small, normal signal variations (anomaly score < 1.0) without triggering NISS escalation. But when sustained anomalies exceed the capacitor's capacity (anomaly > 1.0), the overflow feeds directly into NISS scoring, triggering policy tightening.
 
@@ -97,7 +113,7 @@ if anomaly_score > 1.0:
 
 ---
 
-## Entry 004 — QIF-T0026 Neuronal Flooding Detection (2026-02-21)
+## Entry 004 — QIF-T0026 Neuronal Flooding Detection (2026-02-21 ~03:40) {#entry-004}
 
 **TARA Reference:**
 - Technique: QIF-T0026 "Neuronal flooding"
@@ -130,7 +146,7 @@ Both cause Cs to crash from ~0.72 to ~0.06 (Critical threshold in QIF decision t
 
 ---
 
-## Entry 007 — v0.4: DC Drift Detection Attempt, FPR-Adjusted Monitor, Honest Detection Boundaries (2026-02-21)
+## Entry 007 — v0.4: DC Drift Detection Attempt, FPR-Adjusted Monitor, Honest Detection Boundaries (2026-02-21 03:30-04:45) {#entry-007}
 
 **AI Systems:** Claude Opus 4.6
 **Classification:** VERIFIED (empirical test results)
@@ -301,7 +317,7 @@ The Neurowall v0.4 coherence monitor reliably detects attacks that alter spectra
 
 ---
 
-## Entry 006 — NIC Chain Attack Simulation Test Suite (2026-02-21)
+## Entry 006 — NIC Chain Attack Simulation Test Suite (2026-02-21 ~04:10) {#entry-006}
 
 **Context:** After implementing the coherence monitor (Entries 002-004), we needed a systematic test harness that runs multiple attack techniques from the TARA registry against the full Neurowall pipeline and reports per-layer detection results. The goal is to map detection boundaries, not prove perfection.
 
@@ -390,7 +406,7 @@ The exponential growth (doubling every 1.5s) was invisible for the first 6 secon
 
 ---
 
-## Entry 005 — Phase 1 Roadmap (2026-02-21)
+## Entry 005 — Phase 1 Roadmap (2026-02-21 ~04:00) {#entry-005}
 
 **What's implemented (Phase 0, single-channel):**
 - sigma_phi^2 via Hilbert transform on alpha-band-filtered signal
@@ -415,7 +431,7 @@ The exponential growth (doubling every 1.5s) was invisible for the first 6 secon
 
 ---
 
-## Entry 008 — v0.5: Multi-Band EEG, Auto-Calibrating w2, Growth Detector, Statistical Rigor (2026-02-21)
+## Entry 008 — v0.5: Multi-Band EEG, Auto-Calibrating w2, Growth Detector, Statistical Rigor (2026-02-21 05:00-06:45) {#entry-008}
 
 **AI Systems:** Claude Opus 4.6, Gemini CLI (consulted for simulation methodology)
 **Classification:** VERIFIED (empirical test results across 50 runs per scenario)
@@ -672,7 +688,7 @@ From Entry 008 (new):
 
 ---
 
-## Entry 009 — v0.6: Adaptive Spectral Peak Detection, CUSUM, ROC Analysis, Visualizations (2026-02-21)
+## Entry 009 — v0.6: Adaptive Spectral Peak Detection, CUSUM, ROC Analysis, Visualizations (2026-02-21 06:50-07:50) {#entry-009}
 
 **AI Systems:** Claude Opus 4.6
 **Classification:** VERIFIED (ROC analysis across 20 runs x 8 thresholds x 4 durations, 50-run statistical validation)
