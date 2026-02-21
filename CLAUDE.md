@@ -147,6 +147,53 @@ This is the living bibliography of ALL research sources used across the project.
 
 **Domain sections:** Quantum Physics, Neuroscience, BCI Technology, Cybersecurity, Electrode Technology, Signal Coherence, Cryptographic Standards, Consumer Sensor Exploitation, Neuroscience Foundations
 
+## Automation Registry Sync Protocol (MANDATORY)
+
+**File:** `src/data/automation-registry.json`
+**Update script:** `scripts/update-automation-registry.mjs`
+**CI workflow:** `.github/workflows/update-registry.yml` (daily, auto-updates last_triggered/last_status)
+
+This is the central registry of ALL automations, workflows, scripts, hooks, and triggers in the project (30 entries). It MUST be kept in sync when automations are added, removed, or changed.
+
+**When to update:**
+- A new GitHub Actions workflow is created or deleted
+- A workflow is enabled or disabled
+- A new script is added to `scripts/`
+- A hook is added or modified in `.claude/hooks/`
+- A planned automation is implemented or abandoned
+- A workflow's trigger, schedule, or behavior changes
+
+**How to update:**
+1. Add or modify the entry in `src/data/automation-registry.json`
+2. Include: id, name, description, trigger, type, source_file, status, dependencies, outputs, category
+3. The daily CI workflow auto-updates `last_triggered` and `last_status` via GitHub API
+4. For manual updates: `node scripts/update-automation-registry.mjs`
+
+**Entry statuses:** `active`, `disabled`, `local_only`, `planned`
+
+## Timeline Sync Protocol (MANDATORY)
+
+**File:** `src/data/qif-timeline.json`
+**Staleness check:** `scripts/timeline-check.mjs`
+**CI workflow:** `.github/workflows/timeline-check.yml` (runs on push to main)
+
+This is the chronological record of ALL project milestones (43 entries) and current stats. It feeds into the unified API at `/api/qif.json`. It MUST be updated when significant milestones occur.
+
+**When to update milestones:**
+- A new framework version is released (QIF, TARA, NSP, NISS, Neurowall)
+- A new discovery or derivation changes the framework
+- A cross-AI validation session produces results
+- A preprint version is published
+- A new tool, page, or major feature ships
+- Hardware validation results are obtained
+- A significant dataset expansion occurs (new techniques, devices, brain regions)
+
+**When to update current_stats:**
+- Any count changes: threat_techniques, bci_devices, brain_regions, physics_constraints, hourglass_bands, tara_tactics, neurorights_mapped, dsm5_diagnoses_mapped, physics_constants_verified, derivation_log_entries, field_journal_entries, blog_posts, cross_ai_validations, research_sources
+- Any version bumps: preprint_version, nsp_version, tara_version, atlas_version, neurowall_version
+
+**Staleness detection:** `node scripts/timeline-check.mjs` compares timeline stats against actual source files. Run `--fix` to auto-update stats, `--dry-run` to preview. The CI workflow warns on push if stats are stale.
+
 ## Citation & Preprint Integrity Protocol (MANDATORY)
 
 This protocol exists because the Zenodo preprint v1.0 shipped with 3 fabricated citations and 3 wrong author lists — all AI-hallucinated. Dr. Schroder caught one publicly. We cannot afford a repeat.
