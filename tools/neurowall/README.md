@@ -32,8 +32,9 @@ It provides three concentric defense layers:
 
 | File | Description |
 | :--- | :--- |
-| [sim.py](./sim.py) | Full 3-layer pipeline simulation (v0.5). Multi-band EEG generator with physiological spectral bands, auto-calibrating coherence weights, exponential growth detector, L1 notch filters + impedance guard, L2 differential privacy, L3 NISS policy engine, and NSP transport (delta + LZ4 + AES-256-GCM). No hardware required. |
-| [test_nic_chains.py](./test_nic_chains.py) | NIC (Neural Impact Chain) attack simulation test suite. Runs 10 TARA-mapped attack scenarios against the full pipeline. Supports single-run, duration sweep, and multi-run statistical analysis with FPR-adjusted scoring. |
+| [sim.py](./sim.py) | Full 3-layer pipeline simulation (v0.6). Multi-band EEG generator, auto-calibrating coherence weights, adaptive spectral peak detection, CUSUM detector, exponential growth detector, L1 notch filters + impedance guard, L2 differential privacy, L3 NISS policy engine, and NSP transport (delta + LZ4 + AES-256-GCM). No hardware required. |
+| [test_nic_chains.py](./test_nic_chains.py) | NIC (Neural Impact Chain) attack simulation test suite. Runs 10 TARA-mapped attack scenarios against the full pipeline. Supports single-run, duration sweep, multi-run statistical analysis, and ROC analysis with FPR-adjusted scoring. |
+| [visualize.py](./visualize.py) | Visualization suite. Generates 6 chart types: detection summary, ROC curves, detection heatmap, Cs trajectories, spectral comparison, anomaly distributions. Outputs to `charts/`. |
 
 ### Running the Tests
 
@@ -44,7 +45,7 @@ python sim.py
 # Inject SSVEP attack
 python sim.py --attack --freq 15.0
 
-# Run all 10 NIC chain attack scenarios (single run)
+# Run all 10 NIC chain attack scenarios (single run, 15s)
 python test_nic_chains.py
 
 # Run a single scenario with verbose per-window diagnostics
@@ -56,53 +57,76 @@ python test_nic_chains.py --sweep
 # Statistical analysis: 50 runs per scenario with different seeds
 python test_nic_chains.py --runs 50
 
+# ROC analysis: sweep thresholds x durations to find optimal operating point
+python test_nic_chains.py --roc --roc-runs 20
+
+# Generate all visualization charts
+python visualize.py
+
 # Dependencies
-pip install numpy scipy lz4 cryptography
+pip install numpy scipy lz4 cryptography matplotlib
 ```
 
-### Current Detection Results (v0.5)
+### Current Detection Results (v0.6)
 
-**Single run (10s observation):**
+**Single run (15s observation):**
 
 | # | Attack | Detected By | Result |
 |---|--------|------------|--------|
-| 0 | Clean Signal (Control) | -- | BASELINE (2 FP / 12 windows) |
+| 0 | Clean Signal (Control) | -- | BASELINE |
 | 1 | SSVEP 15Hz | SSVEP | DETECTED |
-| 2 | SSVEP 13Hz (novel freq) | -- | **EVADED** |
+| 2 | SSVEP 13Hz (novel freq) | Spectral Peak | DETECTED |
 | 3 | Impedance Spike | L1 | DETECTED |
-| 4 | Slow DC Drift | -- | **EVADED** |
+| 4 | Slow DC Drift | Spectral Peak | DETECTED |
 | 5 | Neuronal Flooding (QIF-T0026) | L1 + SSVEP | DETECTED |
 | 6 | Boiling Frog (QIF-T0066) | -- | **EVADED** |
 | 7 | Envelope Modulation (QIF-T0014) | Monitor | DETECTED |
 | 8 | Phase Replay (QIF-T0067) | -- | **EVADED** |
-| 9 | Closed-Loop Cascade (QIF-T0023) | Monitor (growth) | DETECTED |
+| 9 | Closed-Loop Cascade (QIF-T0023) | Monitor (growth + CUSUM) | DETECTED |
 
-**5/9 attacks detected at 10s, 4/9 evaded.** More realistic multi-band EEG provides harder test than v0.4's single-sinusoid generator.
+**7/9 attacks detected at 15s, 2/9 evaded.** Up from 5/9 in v0.5 due to adaptive spectral peak detection and growth detector hardening.
 
-**Duration sweep (all 9 attacks detected at 30s):**
+**Statistical analysis (50 runs, 15s, detection probability):**
+
+| # | Attack | v0.5 | v0.6 | Change |
+|---|--------|------|------|--------|
+| 1 | SSVEP 15Hz | 100% | 100% | -- |
+| 2 | SSVEP 13Hz (novel) | 0% | 100% | +100% |
+| 3 | Impedance Spike | 98% | 100% | +2% |
+| 4 | Slow DC Drift | 14% | 100% | +86% |
+| 5 | Neuronal Flooding | 100% | 100% | -- |
+| 7 | Envelope Modulation | 100% | 100% | -- |
+| 9 | Closed-Loop Cascade | 32% | 98% | +66% |
+| 6 | Boiling Frog | 20% | 32% | noise |
+| 8 | Phase Replay | 0% | 10% | noise |
+
+**ROC analysis optimal operating point: Threshold=12, Duration=20s, FPR=5%, TPR=100%.**
+
+All 9 attacks detected with only 5% false positive rate at 20s observation. See `charts/roc_curves.png` for full ROC curves.
+
+**Duration sweep:**
 
 | Duration | Detected | Evaded | Notes |
 |----------|----------|--------|-------|
-| 10s | 5/9 | 4/9 | Novel SSVEP, DC drift, boiling frog, phase replay evade |
-| 20s | 8/9 | 1/9 | Only boiling frog evades |
+| 10s | 6/9 | 3/9 | Cascade, boiling frog, phase replay evade |
+| 15s | 8/9 | 1/9 | Only boiling frog evades |
+| 20s | 9/9 | 0/9 | All attacks caught |
 | 30s | 9/9 | 0/9 | All attacks caught |
-| 60s | 9/9 | 0/9 | All attacks caught |
 
-**Statistical analysis (50 runs, 10s, detection probability):**
+See [NEUROWALL-DERIVATION-LOG.md Entry 009](./NEUROWALL-DERIVATION-LOG.md) for full analysis including spectral peak detection design, CUSUM implementation, ROC methodology, and visualization suite.
 
-| # | Attack | Detection Rate | Notes |
-|---|--------|---------------|-------|
-| 1 | SSVEP 15Hz | 100% | Reliable |
-| 5 | Neuronal Flooding | 100% | Reliable |
-| 7 | Envelope Modulation | 100% | Reliable |
-| 3 | Impedance Spike | 98% | Reliable |
-| 9 | Closed-Loop Cascade | 32% | Growth detector noise-sensitive |
-| 4 | Slow DC Drift | 14% | Needs longer observation |
-| 2 | SSVEP 13Hz (novel) | 0% | Undetectable at 10s |
-| 8 | Phase Replay | 0% | Statistically identical to real |
-| 0 | Clean Signal (FPR) | 42% | Threshold tuning needed |
+### Visualization Charts
 
-See [NEUROWALL-DERIVATION-LOG.md Entry 008](./NEUROWALL-DERIVATION-LOG.md) for full analysis including multi-band generator design, auto-calibrating w2, growth detector implementation, and statistical methodology.
+All charts are generated by `python visualize.py` and saved to `charts/`:
+
+| Chart | Description |
+|-------|-------------|
+| `detection_summary.png` | Detection progress across v0.4/v0.5/v0.6 |
+| `roc_curves.png` | FPR vs TPR curves by observation duration |
+| `detection_heatmap.png` | Attack x duration detection matrix |
+| `cs_trajectories.png` | Coherence score time series under each attack |
+| `spectral_comparison.png` | Power spectra of clean vs attack signals |
+| `anomaly_distributions.png` | Box plots of anomaly counts (30 runs) |
 
 ## Key Technical Properties
 
@@ -129,13 +153,16 @@ See [NEUROWALL-DERIVATION-LOG.md Entry 008](./NEUROWALL-DERIVATION-LOG.md) for f
 - **Entry 006:** NIC chain attack simulation test suite (10 scenarios, 3 bugs found/fixed).
 - **Entry 007:** v0.4 trajectory tracker, DC drift detection failure analysis, FPR-adjusted detection methodology, and honest evasion boundary mapping (3/9 evade).
 - **Entry 008:** v0.5 multi-band EEG generator, auto-calibrating w2, exponential growth detector, duration sweep results (all attacks caught at 30s), statistical analysis (50 runs per scenario).
+- **Entry 009:** v0.6 adaptive spectral peak detection (novel SSVEP 0%→100%), CUSUM detector, growth detector hardening (cascade 32%→98%), ROC analysis (optimal: threshold=12, 20s, FPR=5%, TPR=100%), visualization suite (6 chart types).
 
 ## Next Steps
 
-- [ ] ROC curve analysis: sweep thresholds x durations to find optimal operating point for FPR < 5%
+- [x] ~~ROC curve analysis: sweep thresholds x durations to find optimal operating point for FPR < 5%~~ (Done: Entry 009, optimal at threshold=12, 20s)
+- [x] ~~Improve growth detector reliability (32% cascade detection is too low)~~ (Done: Entry 009, now 98%)
 - [ ] Validate multi-band generator against real EEG datasets (PhysioNet, MNE-Python)
-- [ ] Improve growth detector reliability (32% cascade detection is too low)
 - [ ] Implement Delta+LZ4 compression in Rust (target: `nsp` crate)
 - [ ] Simulate adversarial SSVEP notch filter on mock EMG stream
 - [ ] Connect firewall event logs to TAL (Temporal Aggregation Log)
 - [ ] Validate Runemate Scribe footprint on Cortex-M4F reference platform
+- [ ] Hardware reference electrode for boiling frog detection (Phase 1)
+- [ ] Biological TLS challenge-response for phase replay defense (Phase 2)
