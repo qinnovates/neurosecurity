@@ -26,7 +26,7 @@ const categories = [
   {
     label: 'Neurosecurity Governance',
     color: 'var(--color-accent-secondary)',
-    ids: ['neurosecurity_governance', 'qif-neuroethics'],
+    ids: ['neurosecurity_governance', 'neurosecurity_policy_proposal', 'qif-neuroethics'],
   },
 ];
 
@@ -43,6 +43,7 @@ for (const doc of sorted) {
 // Fix special cases where auto-mapping doesn't work
 idToFilename['qif-neuroethics'] = 'QIF-NEUROETHICS.md';
 idToFilename['neurosecurity_governance'] = 'NEUROSECURITY_GOVERNANCE.md';
+idToFilename['neurosecurity_policy_proposal'] = 'NEUROSECURITY_POLICY_PROPOSAL.md';
 
 // Pre-render all docs
 const rendered: Record<string, Awaited<ReturnType<typeof render>>> = {};

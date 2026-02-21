@@ -55,6 +55,7 @@ The original ONI Framework put the Neural Gateway at Layer 8 (middle of a 14-lay
 |----------|-------|
 | [TRANSPARENCY](../governance/TRANSPARENCY.md) | Human-AI collaboration audit trail |
 | [NEUROSECURITY_GOVERNANCE](../governance/NEUROSECURITY_GOVERNANCE.md) | Unified: neuroethics alignment, UNESCO alignment, regulatory compliance, GRC gaps, convergence strategy |
+| [POLICY_PROPOSAL](../governance/NEUROSECURITY_POLICY_PROPOSAL.md) | Policy recommendations: six asks for six organizations, phased timeline, QIF as reference implementation |
 | [INFORMED_CONSENT](../governance/INFORMED_CONSENT_FRAMEWORK.md) | Consent requirements + pediatric & incapacity (Lazaro-Munoz framework) |
 | [POST_DEPLOYMENT](../governance/POST_DEPLOYMENT_ETHICS.md) | Device lifecycle and abandonment prevention |
 | [DATA_POLICY](../governance/DATA_POLICY_FAQ.md) | Privacy FAQ and user rights |
