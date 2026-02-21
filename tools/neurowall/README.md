@@ -26,6 +26,7 @@ It provides three concentric defense layers:
 | [NECKBAND_BLUEPRINT.md](./NECKBAND_BLUEPRINT.md) | Behind-the-neck wearable form factor: ground electrode + security processor + OpenBCI integration. |
 | [MVP_PROTOTYPE.md](./MVP_PROTOTYPE.md) | Phase 0/1 prototype plan, BOM, and critical gaps from Gemini review. |
 | [TESTING.md](./TESTING.md) | Test strategy and validation plan. |
+| [DERIVATION-LOG.md](./DERIVATION-LOG.md) | Engineering decisions, coherence monitor design, and attack simulation results. |
 
 ## Key Technical Properties
 
@@ -40,9 +41,15 @@ It provides three concentric defense layers:
 
 ## Derivation History
 
-- **Entry 68** (QIF-DERIVATION-LOG): Guardrails Synthesis — physics layer as boundary, not control.
-- **Entry 69**: NIST/ISO Hardened Compliance Mapping tied to neurorights.
-- **[Entry 70](../qif-framework/QIF-DERIVATION-LOG.md#entry-70-wearable-neural-firewall)**: Neurowall — full derivation chain.
+**QIF-level derivations** (in [QIF-DERIVATION-LOG.md](../../qif-framework/QIF-DERIVATION-LOG.md)):
+
+- **[Entry 68](../../qif-framework/QIF-DERIVATION-LOG.md#entry-68-guardrails-ssvep-thalamic-gate-raw):** Security Guardrails Synthesis + SSVEP Discovery + Thalamic Gate Model. Physics layer as boundary, not control.
+- **[Entry 69](../../qif-framework/QIF-DERIVATION-LOG.md#entry-69-nist-iso-hardened-mapping):** NIST/ISO Hardened Compliance Mapping. Bridges neurorights to auditable technical evidence (NIST SP 800-53 / ISO 27001).
+- **[Entry 70](../../qif-framework/QIF-DERIVATION-LOG.md#entry-70-wearable-neural-firewall):** Wearable Neural Firewall. Full architectural derivation: NSP v0.5 integration, Merkle amortization, Delta+LZ4 compression, Runemate Scribe execution.
+
+**Neurowall-specific engineering log** (in [DERIVATION-LOG.md](./DERIVATION-LOG.md)):
+
+Coherence monitor design, QIF Cs metric adaptation for single-channel EEG, attack simulation results, and detection gap analysis. Covers SSVEP detection, QIF-T0026 neuronal flooding, QIF-T0066 boiling frog evasion, phase replay, envelope modulation, and the software capacitor concept.
 
 ## Next Steps
 
