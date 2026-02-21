@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-02-21T00:00:00Z",
+  "last_updated": "2026-02-21T16:18:01.947Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -11,10 +11,16 @@
       "type": "github_action",
       "source_file": ".github/workflows/deploy.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["src/", "package.json", "scripts/fetch-news.mjs"],
-      "outputs": ["GitHub Pages deployment (dist/)"],
+      "last_triggered": "2026-02-21T16:15:46Z",
+      "last_status": "success",
+      "dependencies": [
+        "src/",
+        "package.json",
+        "scripts/fetch-news.mjs"
+      ],
+      "outputs": [
+        "GitHub Pages deployment (dist/)"
+      ],
       "category": "deployment"
     },
     {
@@ -25,10 +31,17 @@
       "type": "github_action",
       "source_file": ".github/workflows/changelog.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["scripts/changelog-update.mjs", "git log"],
-      "outputs": ["CHANGELOG.md", "blogs/ (drafts)", "GitHub Release (tier 3)"],
+      "last_triggered": "2026-02-21T16:15:16Z",
+      "last_status": "success",
+      "dependencies": [
+        "scripts/changelog-update.mjs",
+        "git log"
+      ],
+      "outputs": [
+        "CHANGELOG.md",
+        "blogs/ (drafts)",
+        "GitHub Release (tier 3)"
+      ],
       "category": "content"
     },
     {
@@ -39,10 +52,17 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": [".github/security-audit/scripts/audit.py", ".github/security-audit/patterns/secrets.json"],
-      "outputs": ["audit-results.txt", "security-results.sarif", "PR comments"],
+      "last_triggered": "2026-02-21T13:58:10Z",
+      "last_status": "failure",
+      "dependencies": [
+        ".github/security-audit/scripts/audit.py",
+        ".github/security-audit/patterns/secrets.json"
+      ],
+      "outputs": [
+        "audit-results.txt",
+        "security-results.sarif",
+        "PR comments"
+      ],
       "category": "security"
     },
     {
@@ -53,10 +73,14 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["scripts/fetch-news.mjs"],
-      "outputs": ["src/data/external-news-cache.json"],
+      "last_triggered": "2026-02-20T17:28:47Z",
+      "last_status": "success",
+      "dependencies": [
+        "scripts/fetch-news.mjs"
+      ],
+      "outputs": [
+        "src/data/external-news-cache.json"
+      ],
       "category": "content"
     },
     {
@@ -67,10 +91,18 @@
       "type": "github_action",
       "source_file": ".github/workflows/verify-citations.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["scripts/verify/run_all.py", "paper/", "blogs/", "shared/qtara-registrar.json", "qif-framework/"],
-      "outputs": ["verify-report.json"],
+      "last_triggered": "2026-02-21T16:15:06Z",
+      "last_status": "failure",
+      "dependencies": [
+        "scripts/verify/run_all.py",
+        "paper/",
+        "blogs/",
+        "shared/qtara-registrar.json",
+        "qif-framework/"
+      ],
+      "outputs": [
+        "verify-report.json"
+      ],
       "category": "validation"
     },
     {
@@ -81,10 +113,18 @@
       "type": "github_action",
       "source_file": ".github/workflows/wiki-sync.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["README.md", "qif-framework/README.md", "oni-framework/README.md", "governance/README.md", "shared/README.md"],
-      "outputs": ["GitHub Wiki pages (Home, QIF-Framework, ONI-Framework, Governance, Classical-Quantum-Bridge)"],
+      "last_triggered": "2026-02-21T12:36:24Z",
+      "last_status": "failure",
+      "dependencies": [
+        "README.md",
+        "qif-framework/README.md",
+        "oni-framework/README.md",
+        "governance/README.md",
+        "shared/README.md"
+      ],
+      "outputs": [
+        "GitHub Wiki pages (Home, QIF-Framework, ONI-Framework, Governance, Classical-Quantum-Bridge)"
+      ],
       "category": "content"
     },
     {
@@ -95,10 +135,15 @@
       "type": "github_action",
       "source_file": ".github/workflows/timeline-check.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["scripts/timeline-check.mjs", "src/data/qif-timeline.json"],
-      "outputs": ["GitHub Actions warning annotation (if stale)"],
+      "last_triggered": "2026-02-21T16:14:54Z",
+      "last_status": "success",
+      "dependencies": [
+        "scripts/timeline-check.mjs",
+        "src/data/qif-timeline.json"
+      ],
+      "outputs": [
+        "GitHub Actions warning annotation (if stale)"
+      ],
       "category": "validation"
     },
     {
@@ -109,10 +154,14 @@
       "type": "github_action",
       "source_file": ".github/workflows/dependabot-auto-merge.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["Dependabot PRs"],
-      "outputs": ["Auto-merged PRs, PR comments on major updates"],
+      "last_triggered": "2026-02-21T07:09:23Z",
+      "last_status": "success",
+      "dependencies": [
+        "Dependabot PRs"
+      ],
+      "outputs": [
+        "Auto-merged PRs, PR comments on major updates"
+      ],
       "category": "security"
     },
     {
@@ -123,10 +172,16 @@
       "type": "github_action",
       "source_file": ".github/workflows/field-journal-blog.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["scripts/field-journal-to-blog.mjs", "scripts/verify/fact_check_field_journal.py", "qif-framework/QIF-FIELD-JOURNAL.md"],
-      "outputs": ["blogs/ (new blog posts, fact-checked)"],
+      "last_triggered": "2026-02-21T16:13:22Z",
+      "last_status": "success",
+      "dependencies": [
+        "scripts/field-journal-to-blog.mjs",
+        "scripts/verify/fact_check_field_journal.py",
+        "qif-framework/QIF-FIELD-JOURNAL.md"
+      ],
+      "outputs": [
+        "blogs/ (new blog posts, fact-checked)"
+      ],
       "category": "content"
     },
     {
@@ -137,10 +192,17 @@
       "type": "github_action",
       "source_file": ".github/workflows/publish-pypi.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
-      "dependencies": ["shared/qtara/", "shared/qtara-registrar.json", "shared/scripts/sync-package-data.py"],
-      "outputs": ["PyPI package (qtara)", "GitHub Release (qtara-vX.Y.Z)"],
+      "last_triggered": "2026-02-21T13:44:12Z",
+      "last_status": "success",
+      "dependencies": [
+        "shared/qtara/",
+        "shared/qtara-registrar.json",
+        "shared/scripts/sync-package-data.py"
+      ],
+      "outputs": [
+        "PyPI package (qtara)",
+        "GitHub Release (qtara-vX.Y.Z)"
+      ],
       "category": "deployment"
     },
     {
@@ -153,8 +215,12 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["MAIN/governance/scripts/check_accessibility.py"],
-      "outputs": ["Accessibility badge (Gist), accessibility report artifact"],
+      "dependencies": [
+        "MAIN/governance/scripts/check_accessibility.py"
+      ],
+      "outputs": [
+        "Accessibility badge (Gist), accessibility report artifact"
+      ],
       "category": "validation"
     },
     {
@@ -167,8 +233,12 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["Repository file tree"],
-      "outputs": ["GLOSSARY.md (via PR)"],
+      "dependencies": [
+        "Repository file tree"
+      ],
+      "outputs": [
+        "GLOSSARY.md (via PR)"
+      ],
       "category": "content"
     },
     {
@@ -181,8 +251,13 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["project/prd.json", "project/generate_roadmap.py"],
-      "outputs": ["project/ROADMAP.md"],
+      "dependencies": [
+        "project/prd.json",
+        "project/generate_roadmap.py"
+      ],
+      "outputs": [
+        "project/ROADMAP.md"
+      ],
       "category": "content"
     },
     {
@@ -195,8 +270,14 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["MAIN/legacy-core/oni-framework/", "MAIN/legacy-core/tara-nsec-platform/", "autodidactive/"],
-      "outputs": ["PyPI packages (oni-framework, oni-tara, oni-academy)"],
+      "dependencies": [
+        "MAIN/legacy-core/oni-framework/",
+        "MAIN/legacy-core/tara-nsec-platform/",
+        "autodidactive/"
+      ],
+      "outputs": [
+        "PyPI packages (oni-framework, oni-tara, oni-academy)"
+      ],
       "category": "deployment"
     },
     {
@@ -209,8 +290,14 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["MAIN/legacy-core/", "docs/", "repo-metadata.json"],
-      "outputs": ["GitHub step summaries for each QA job"],
+      "dependencies": [
+        "MAIN/legacy-core/",
+        "docs/",
+        "repo-metadata.json"
+      ],
+      "outputs": [
+        "GitHub step summaries for each QA job"
+      ],
       "category": "validation"
     },
     {
@@ -223,8 +310,14 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["MAIN/legacy-core/", "docs/", "video/"],
-      "outputs": ["Bandit JSON reports, Safety reports, CodeQL SARIF"],
+      "dependencies": [
+        "MAIN/legacy-core/",
+        "docs/",
+        "video/"
+      ],
+      "outputs": [
+        "Bandit JSON reports, Safety reports, CodeQL SARIF"
+      ],
       "category": "security"
     },
     {
@@ -237,8 +330,13 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["MAIN/legacy-core/resources/brand/brand.json", "scripts/sync_brand.py"],
-      "outputs": ["Updated README files"],
+      "dependencies": [
+        "MAIN/legacy-core/resources/brand/brand.json",
+        "scripts/sync_brand.py"
+      ],
+      "outputs": [
+        "Updated README files"
+      ],
       "category": "content"
     },
     {
@@ -251,8 +349,14 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["MAIN/legacy-core/oni-framework/", "MAIN/legacy-core/tara-nsec-platform/", "autodidactive/oni-academy/"],
-      "outputs": ["Test results, Codecov coverage reports"],
+      "dependencies": [
+        "MAIN/legacy-core/oni-framework/",
+        "MAIN/legacy-core/tara-nsec-platform/",
+        "autodidactive/oni-academy/"
+      ],
+      "outputs": [
+        "Test results, Codecov coverage reports"
+      ],
       "category": "validation"
     },
     {
@@ -265,8 +369,13 @@
       "status": "disabled",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["docs/content-manifest.json", ".github/scripts/validate-manifest.py"],
-      "outputs": ["Validation pass/fail"],
+      "dependencies": [
+        "docs/content-manifest.json",
+        ".github/scripts/validate-manifest.py"
+      ],
+      "outputs": [
+        "Validation pass/fail"
+      ],
       "category": "validation"
     },
     {
@@ -279,8 +388,13 @@
       "status": "active",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["src/data/qif-timeline.json", "git log"],
-      "outputs": ["Updated src/data/qif-timeline.json (with --fix)"],
+      "dependencies": [
+        "src/data/qif-timeline.json",
+        "git log"
+      ],
+      "outputs": [
+        "Updated src/data/qif-timeline.json (with --fix)"
+      ],
       "category": "validation"
     },
     {
@@ -293,8 +407,12 @@
       "status": "active",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["RSS feed URLs (configured in script)"],
-      "outputs": ["src/data/external-news-cache.json"],
+      "dependencies": [
+        "RSS feed URLs (configured in script)"
+      ],
+      "outputs": [
+        "src/data/external-news-cache.json"
+      ],
       "category": "content"
     },
     {
@@ -307,8 +425,13 @@
       "status": "active",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["git log"],
-      "outputs": ["CHANGELOG.md", "blogs/ (tier 2+ blog drafts)"],
+      "dependencies": [
+        "git log"
+      ],
+      "outputs": [
+        "CHANGELOG.md",
+        "blogs/ (tier 2+ blog drafts)"
+      ],
       "category": "content"
     },
     {
@@ -321,8 +444,12 @@
       "status": "active",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["qif-framework/QIF-FIELD-JOURNAL.md"],
-      "outputs": ["blogs/ (new blog post files)"],
+      "dependencies": [
+        "qif-framework/QIF-FIELD-JOURNAL.md"
+      ],
+      "outputs": [
+        "blogs/ (new blog post files)"
+      ],
       "category": "content"
     },
     {
@@ -335,8 +462,13 @@
       "status": "active",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["governance/TRANSPARENCY.md", "qif-framework/QIF-DERIVATION-LOG.md"],
-      "outputs": ["Console report of sync status"],
+      "dependencies": [
+        "governance/TRANSPARENCY.md",
+        "qif-framework/QIF-DERIVATION-LOG.md"
+      ],
+      "outputs": [
+        "Console report of sync status"
+      ],
       "category": "validation"
     },
     {
@@ -349,8 +481,14 @@
       "status": "active",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["package.json", "tsconfig.json", "src/"],
-      "outputs": ["CLAUDE.md"],
+      "dependencies": [
+        "package.json",
+        "tsconfig.json",
+        "src/"
+      ],
+      "outputs": [
+        "CLAUDE.md"
+      ],
       "category": "data"
     },
     {
@@ -363,8 +501,14 @@
       "status": "planned",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["FDA 510(k) database", "arXiv API", "PubMed API"],
-      "outputs": ["BCI device feed (JSON or markdown)"],
+      "dependencies": [
+        "FDA 510(k) database",
+        "arXiv API",
+        "PubMed API"
+      ],
+      "outputs": [
+        "BCI device feed (JSON or markdown)"
+      ],
       "category": "data"
     },
     {
@@ -377,8 +521,15 @@
       "status": "planned",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["src/data/qif-timeline.json", "shared/qtara-registrar.json", "src/data/milestones.json", "src/lib/glossary-constants.ts"],
-      "outputs": ["Validation report (pass/fail with specifics)"],
+      "dependencies": [
+        "src/data/qif-timeline.json",
+        "shared/qtara-registrar.json",
+        "src/data/milestones.json",
+        "src/lib/glossary-constants.ts"
+      ],
+      "outputs": [
+        "Validation report (pass/fail with specifics)"
+      ],
       "category": "validation"
     },
     {
@@ -391,8 +542,15 @@
       "status": "planned",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["qif-framework/QIF-RESEARCH-SOURCES.md", "paper/references.bib", "blogs/", "qif-framework/nsp/"],
-      "outputs": ["List of missing source entries"],
+      "dependencies": [
+        "qif-framework/QIF-RESEARCH-SOURCES.md",
+        "paper/references.bib",
+        "blogs/",
+        "qif-framework/nsp/"
+      ],
+      "outputs": [
+        "List of missing source entries"
+      ],
       "category": "validation"
     },
     {
@@ -405,8 +563,13 @@
       "status": "planned",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["scripts/timeline-check.mjs", "src/data/qif-timeline.json"],
-      "outputs": ["Updated src/data/qif-timeline.json (committed)"],
+      "dependencies": [
+        "scripts/timeline-check.mjs",
+        "src/data/qif-timeline.json"
+      ],
+      "outputs": [
+        "Updated src/data/qif-timeline.json (committed)"
+      ],
       "category": "data"
     },
     {
@@ -419,8 +582,13 @@
       "status": "active",
       "last_triggered": null,
       "last_status": "unknown",
-      "dependencies": ["scripts/update-automation-registry.mjs", "src/data/automation-registry.json"],
-      "outputs": ["Updated src/data/automation-registry.json"],
+      "dependencies": [
+        "scripts/update-automation-registry.mjs",
+        "src/data/automation-registry.json"
+      ],
+      "outputs": [
+        "Updated src/data/automation-registry.json"
+      ],
       "category": "monitoring"
     }
   ]
