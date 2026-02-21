@@ -595,7 +595,7 @@
         "cci": 0.96,
         "hardened_mapping": {
           "framework_codes": "NIST AC-3 / ISO A.9",
-          "technical_evidence": "firewall.log: REJECT counts for unauthenticated neural signals."
+          "technical_evidence": "Temporal Aggregation Log (TAL) - Neural Firewall: REJECT counts for unauthenticated neural signals."
         }
       },
       "regulatory": {
@@ -9988,7 +9988,7 @@
         "cci": 1.44,
         "hardened_mapping": {
           "framework_codes": "NIST SC-28 / ISO A.18",
-          "technical_evidence": "anonymizer.log: Filter counts of sensitive ERPs (P300/N400)."
+          "technical_evidence": "Temporal Aggregation Log (TAL) - Anonymizer: Filter counts of sensitive ERPs (P300/N400)."
         }
       },
       "regulatory": {

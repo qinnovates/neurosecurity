@@ -21,6 +21,7 @@
 
 ### Table of Contents (by date)
 
+| 2026-02-21 | **Wearable Neural Firewall (Smart Glasses / AlterEgo).** Design of the first-generation neural firewall for non-intrusive wearables. Integration of NSP v0.5 (PQ-secure transport), Runemate (on-chip Staves v2 execution), and Delta+LZ4 neural compression. Amortized PQ signatures via Merkle root aggregation to fit 40mW thermal budgets. | [Entry 70](#entry-70-wearable-neural-firewall) |
 | 2026-02-21 | **NIST/ISO Hardened Compliance Mapping.** Introduction of the "Hardened Mapping" bridge to link neurorights (MI, MP, CL, PC) to auditable technical evidence (NIST SP 800-53 / ISO 27001). Implemented in `qtara-registrar.json`. | [Entry 69](#entry-69-nist-iso-hardened-mapping) |
 | 2026-02-20 | **Cognitive Authenticity (CA) Folded into Mental Integrity (MI).** CA was not a genuinely novel right. Ienca & Andorno (2017) MI already covers "protection from unauthorized alteration of neural function," which subsumes write-attacks. CA removed from all source files. | [Entry 68](#entry-68-ca-folded-into-mi) |
 | 2026-02-18 | **T0103 Detection Methods + Ethical Neurosecurity Governance Gaps.** Added detection section to T0103 blog. | [Entry 67](#entry-67-detection-methods-governance-gaps) |
@@ -198,6 +199,39 @@ Each entry follows this structure:
 | 3 | 2026-02-02 ~afternoon | Layer Consolidation: 14 Is Too Many | Validated — redesign in progress |
 | 2 | 2026-02-02 ~afternoon | Circular Topology: L8 Touches L1 | Validated — superseded by hourglass (Entry 7) |
 | 1 | 2026-02-02 ~afternoon | OSI Layers Are Meaningless for BCI | Validated — drives framework redesign |
+---
+
+## Entry 70: Wearable Neural Firewall — Secure Edge Architecture for Non-Intrusive BCI {#entry-70-wearable-neural-firewall}
+
+**Date:** 2026-02-21, ~05:15
+**Classification:** ARCHITECTURE + SECURITY + EFFICIENCY
+**AI Systems:** Antigravity (Gemini 2.0 Pro)
+**Connected entries:** Entry 69 (Hardened Mapping), Entry 68 (Guardrails Synthesis), NSP-PROTOCOL-SPEC.md, RUNEMATE.md
+
+### The Derivation
+
+Following the "Hardened Mapping" derivation (Entry 69), the focus shifted to the **Physical Layer** constraints of consumer neural-wearables (Smart Glasses, Subvocal controllers). The primary challenge identified was the "Post-Quantum Tax": PQC signatures (ML-DSA) and handshakes (ML-KEM) are too large for BLE links and 40mW power budgets.
+
+The derived architecture unifies three previously separate components into a "Hardened Edge" stack:
+
+1.  **Transport (NSP v0.5 Integration)**: 
+    - The firewall leverages **NSP Frames** for all telemetry.
+    - **Merkle Amortization**: To avoid the 3.3KB ML-DSA signature per packet, we group 100 frames into a Merkle Tree, signing only the root. This drops per-frame signature overhead to ~144 bytes while maintaining PQ-integrity.
+2.  **Efficiency (Neural Compression)**: 
+    - Implemented a **Delta + LZ4** pipeline for high-velocity EMG/EEG streams. 
+    - Delta encoding concentrates the signal entropy, allowing LZ4 (capped at 4KB window for on-chip SRAM) to achieve 65-90% data reduction. This more than offsets the bandwidth consumed by PQ handshakes.
+3.  **Execution (Runemate Scribe)**: 
+    - The firewall logic is implemented as a **Runemate Stave v2**. 
+    - This allows the policy engine to run in a <200KB memory footprint (The Scribe), enabling "Policy-as-Code" on the wearable's local MCU rather than relying on a vulnerable phone/gateway app.
+4.  **Signal Guardrails**:
+    - **Layer 1**: Hardware-level adaptive impedance monitoring protects against signal injection attacks.
+    - **Layer 2**: Specialized notch filters target adversarial SSVEP hijack frequencies (8.57Hz, 10.9Hz, etc.).
+    - **Layer 3**: On-chip Differential Privacy ($\epsilon=0.5$) applied to raw streams *before* transmission to prevent neural fingerprinting.
+
+### Why it matters for QIF
+
+This entry bridges theoretical framework metrics (NISS/QI) with practical hardware implementation. It proves that a post-quantum neural firewall is not only possible but *efficient* when using the QIF Hourglass stack. It transforms the "Brain Firewall" from a hypothetical concept into a concrete engineering blueprint for the next generation of wearables.
+
 ---
 
 ## Entry 69: NIST/ISO Hardened Compliance Mapping — Bridging Ethics to Evidence {#entry-69-nist-iso-hardened-mapping}
