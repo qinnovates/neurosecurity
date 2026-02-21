@@ -38,6 +38,8 @@
 - 50-run stats: mean detection latency, false positive rate, confidence intervals computed
 - Zero false positives across all 50-run batches at 20s window
 
+**Phase 11 (v0.8):** L3 policy agent replaced with RunematePolicy engine (5-rule priority stack). Gemini-validated: clean signal produces no policy triggers, attack scenarios escalate through advisory/warning/critical as expected. Sustained window tracking and cooldown behavior verified.
+
 **Limitations:**
 - All tests used synthetic EEG data, not real brain signals
 - Attack patterns are theoretical, not from actual adversaries

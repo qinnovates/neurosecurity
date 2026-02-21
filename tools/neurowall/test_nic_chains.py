@@ -773,11 +773,12 @@ def run_scenario(
     l1.prev_sample = signal[0]
     monitor = SignalMonitor(calibration_windows=8)
     niss = NissEngine()
-    policy = RunematePolicy(niss_threshold=5, tight_epsilon=0.1)
+    policy = RunematePolicy()
     budget = PrivacyBudget()
 
     current_epsilon = DP_EPSILON
     monitor_counter = 0
+    detail = None
     max_niss = 0
     ssvep_triggered = False
     ssvep_max_ratio = 0.0
@@ -846,11 +847,14 @@ def run_scenario(
         if niss_bio > max_niss:
             max_niss = niss_bio
 
-        # Policy
-        new_epsilon = policy.evaluate(niss_bio, current_epsilon)
-        if new_epsilon < current_epsilon:
-            scenario.policy_tightened = True
-        current_epsilon = new_epsilon
+        # Policy (evaluate once per monitor window, not per sample)
+        if monitor_counter == 0 and detail is not None:
+            policy_result = policy.evaluate(
+                niss_bio, current_epsilon, anomaly_score, detail,
+            )
+            if policy_result["epsilon"] < current_epsilon:
+                scenario.policy_tightened = True
+            current_epsilon = policy_result["epsilon"]
 
     # Fill results
     # L1: only count impedance events AFTER startup (first sample excluded
@@ -1095,12 +1099,12 @@ def run_single(args):
     """Standard single run of all scenarios."""
     print("=" * 90)
     print("  NEUROWALL NIC CHAIN ATTACK SIMULATION TEST SUITE")
-    print("  Testing Neurowall v0.7 pipeline against TARA threat techniques")
+    print("  Testing Neurowall v0.8 pipeline against TARA threat techniques")
     print("=" * 90)
     print(f"  Duration per scenario: {args.duration}s")
     print(f"  Sample rate: {SAMPLE_RATE} Hz")
     print(f"  Scenarios: {len(SCENARIOS)}")
-    print(f"  EEG generator: multi-band (v0.7)")
+    print(f"  EEG generator: multi-band (v0.8)")
     print(f"  Calibration windows: 8 (4.0s)")
     print()
 
@@ -1146,7 +1150,7 @@ def run_duration_sweep(args):
     print("  Testing detection vs observation time")
     print("=" * 90)
     print(f"  Durations: {durations}s")
-    print(f"  EEG generator: multi-band (v0.7)")
+    print(f"  EEG generator: multi-band (v0.8)")
     print()
 
     # Header

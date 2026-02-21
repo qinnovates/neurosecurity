@@ -412,7 +412,7 @@ def main():
     args = parser.parse_args()
 
     print("=" * 60)
-    print("NEUROWALL v0.7 — BrainFlow Validation")
+    print("NEUROWALL v0.8 — BrainFlow Validation")
     print("=" * 60)
     print(f"Source: BrainFlow synthetic board (16ch, 250Hz)")
     print(f"Duration: {args.duration}s per acquisition")

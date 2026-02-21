@@ -1394,7 +1394,7 @@ def run_simulation(args):
     verbose = args.verbose
 
     print("=" * 70)
-    print("  NEUROWALL v0.7 SIM — Adaptive Threshold + Spectral Peak + CUSUM + Growth + Coherence + NISS + NSP")
+    print("  NEUROWALL v0.8 SIM — Policy Engine + Adaptive Threshold + Spectral Peak + CUSUM + Growth + Coherence + NISS + NSP")
     print("=" * 70)
     print(f"  Sample rate:    {SAMPLE_RATE} Hz")
     print(f"  Duration:       {duration}s ({int(duration * SAMPLE_RATE)} samples)")

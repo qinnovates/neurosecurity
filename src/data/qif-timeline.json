@@ -23,7 +23,7 @@
     "atlas_version": "v1.2.0",
     "derivation_log_entries": 70,
     "field_journal_entries": 20,
-    "neurowall_version": "v0.7",
+    "neurowall_version": "v0.8",
     "blog_posts": 50,
     "cross_ai_validations": 9,
     "research_sources": 193
@@ -289,7 +289,7 @@
       "title": "Neurowall v0.7: Signal Integrity Monitor",
       "description": "3-layer coherence monitor built from v0.1 to v0.7 in a single day. Multi-band EEG, spectral peak detection, CUSUM change detection, ROC analysis. 7/9 attacks detected at 15s, 9/9 at 30s. 14 attack generators in neurosim toolkit.",
       "stats_snapshot": {
-        "neurowall_version": "v0.7"
+        "neurowall_version": "v0.8"
       }
     },
     {
@@ -298,7 +298,7 @@
       "title": "BrainFlow Real Hardware Validation",
       "description": "First test of Neurowall on actual EEG hardware (OpenBCI Cyton via BrainFlow). 5/5 attacks detected, 0% false positive rate. Coherence monitor works on real signals, not just synthetic.",
       "stats_snapshot": {
-        "neurowall_version": "v0.7"
+        "neurowall_version": "v0.8"
       }
     },
     {
@@ -349,6 +349,15 @@
         "threat_techniques": 109,
         "research_sources": 193,
         "tara_version": "v1.7"
+      }
+    },
+    {
+      "date": "2026-02-21",
+      "type": "release",
+      "title": "Neurowall v0.8: RunematePolicy Engine",
+      "description": "L3 policy agent replaced 14-line if/else stub with a full rule-stack engine. 5 prioritized rules (critical_niss, high_niss, sustained_anomaly, growth_detected, spectral_peak) with cooldown, sustained window tracking, stimulation suppression, and configurable policy stacks. Gemini-validated (Phase 11).",
+      "stats_snapshot": {
+        "neurowall_version": "v0.8"
       }
     }
   ]

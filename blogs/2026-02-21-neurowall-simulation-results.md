@@ -194,6 +194,20 @@ The lesson: **separation of detection mechanisms prevents gaming any single dete
 
 **Growth detector hardening.** Initial parameters (window=6, slope=0.3, R^2=0.7) only caught the closed-loop cascade 32% of the time. Relaxing to window=8, slope=0.2, R^2=0.5 pushed detection to 98%. The trade-off (more noise sensitivity) is handled by the multi-detector architecture.
 
+## Policy Engine Upgrade (v0.8)
+
+The L3 policy agent underwent a major refactor in v0.8. The original 14-line if/else stub that compared NISS against a threshold and returned a tightened epsilon was replaced with a full rule-stack engine.
+
+The new `RunematePolicy` evaluates 5 prioritized rules top-to-bottom. Each rule specifies conditions (NISS threshold, anomaly score floor, sustained window count, specific detector triggers) and actions (epsilon override, stimulation suppression, alert level). The first matching rule wins.
+
+Key behaviors:
+- **Sustained window tracking:** Rules like `critical_niss` require the condition to hold for 2+ consecutive monitor windows before triggering. This prevents single-spike false alarms.
+- **Cooldown:** After a rule fires, a 4-window cooldown prevents rapid oscillation between rules.
+- **Stimulation suppression:** Critical rules and growth detection suppress outbound stimulation entirely, a safety measure for closed-loop BCIs.
+- **Escalation:** Clean signals produce zero policy triggers. Under attack, the engine escalates from advisory (spectral peak) through warning (high NISS) to critical (sustained high NISS + anomaly), matching the threat severity.
+
+The engine was Gemini-validated (Phase 11): clean vs attack behavior confirmed, rule priority ordering verified, cooldown mechanics checked. Custom rule stacks are supported via `RunematePolicy(rules=[...])` for different deployment contexts (research lab vs clinical vs consumer).
+
 ## Next Steps
 
 - Validate the multi-band generator against real EEG datasets (PhysioNet, MNE-Python)
