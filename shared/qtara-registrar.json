@@ -3,23 +3,23 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
-    "total_techniques": 103,
+    "total_techniques": 109,
     "total_tactics": 15,
     "total_domains": 8,
     "by_tactic": {
-      "QIF-N.IJ": 6,
-      "QIF-P.DS": 7,
+      "QIF-N.IJ": 8,
+      "QIF-P.DS": 8,
       "QIF-D.HV": 9,
-      "QIF-N.MD": 5,
+      "QIF-N.MD": 6,
       "QIF-E.RD": 6,
       "QIF-M.SV": 9,
       "QIF-N.SC": 3,
-      "QIF-C.EX": 11,
-      "QIF-B.IN": 5,
+      "QIF-C.EX": 12,
+      "QIF-B.IN": 6,
       "QIF-C.IM": 5,
-      "QIF-B.EV": 5,
+      "QIF-B.EV": 6,
       "QIF-S.RP": 5,
-      "QIF-S.HV": 15,
+      "QIF-S.HV": 14,
       "QIF-S.FP": 4,
       "QIF-S.CH": 6,
       "QIF-S.SC": 2
@@ -27,32 +27,31 @@
     "by_status": {
       "CONFIRMED": 19,
       "EMERGING": 22,
-      "DEMONSTRATED": 34,
-      "THEORETICAL": 26,
+      "DEMONSTRATED": 35,
+      "THEORETICAL": 31,
       "PLAUSIBLE": 1,
       "SPECULATIVE": 1
     },
     "by_severity": {
-      "high": 55,
+      "high": 60,
       "critical": 29,
-      "medium": 16,
+      "medium": 17,
       "low": 3
     },
     "by_ui_category": {
-      "SI": 10,
-      "DS": 7,
+      "SI": 13,
+      "DS": 8,
       "SE": 20,
       "DM": 15,
       "PS": 7,
-      "EX": 17,
-      "PE": 8,
+      "EX": 19,
+      "PE": 9,
       "CI": 18
     },
     "by_niss_severity": {
-      "critical": 0,
-      "high": 21,
-      "medium": 29,
-      "low": 51,
+      "medium": 34,
+      "low": 52,
+      "high": 22,
       "none": 1
     },
     "niss_cvss_mapping": {
@@ -64,8 +63,8 @@
       }
     },
     "tara": {
-      "version": "1.6",
-      "enriched_techniques": 102,
+      "version": "1.7",
+      "enriched_techniques": 103,
       "dual_use_breakdown": {
         "confirmed": 52,
         "probable": 16,
@@ -168,9 +167,41 @@
         "Tier 3 (far_term, 2038+): Needs nanoscale electrodes or quantum-regime hardware",
         "Tier X (no_physics_gate): Software/platform/network attack, physics does not constrain"
       ]
+    },
+    "by_origin": {
+      "literature": 49,
+      "qif_recontextualized": 46,
+      "neuroethics_formalized": 3,
+      "qif_theoretical": 6,
+      "qif_chain_synthesis": 5
     }
   },
   "changelog": [
+    {
+      "version": "1.7",
+      "date": "2026-02-21",
+      "title": "Origin Classification + 6 New Techniques from Literature Gap Analysis",
+      "summary": "Added origin field to all 109 techniques classifying provenance: literature (directly from BCI security papers), qif_recontextualized (phenomenon from other domain mapped as BCI threat), qif_chain_synthesis (novel composite attack chains), qif_theoretical (pure QIF derivation), neuroethics_formalized (ethics concern formalized as technique). Added 6 new techniques from literature gap analysis: 4 Murcia taxonomy attacks (Neural Spoofing, Sybil, Sinkhole, Nonce), neuromorphic mimicry attack, and data alignment exploitation.",
+      "added": [
+        "QIF-T0104 Neural spoofing",
+        "QIF-T0105 Neural sybil",
+        "QIF-T0106 Neural sinkhole",
+        "QIF-T0107 Neural nonce replay",
+        "QIF-T0108 Neuromorphic mimicry attack",
+        "QIF-T0109 Data alignment exploitation"
+      ],
+      "enrichments": [
+        "origin.category — provenance classification (literature|qif_recontextualized|qif_chain_synthesis|qif_theoretical|neuroethics_formalized)",
+        "origin.original_authors — credited authors/sources for non-QIF-derived techniques",
+        "origin.qif_contribution — what QIF added (framework_mapping|threat_recontextualization|chain_synthesis|original_derivation|formalization)",
+        "statistics.by_origin — aggregate counts by origin category"
+      ],
+      "therapeutic_highlights": [
+        "Origin tracking enables proper academic credit attribution",
+        "6 new techniques complete the Murcia taxonomy coverage (8/8) and add neuromorphic/alignment threats",
+        "QIF contribution clearly distinguished from existing literature"
+      ]
+    },
     {
       "version": "1.6",
       "date": "2026-02-16",
@@ -625,6 +656,14 @@
         "gate_reason": "Noninvasive stimulation (tDCS/tACS) exists today",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Kohno et al. 2009",
+          "Bonaci et al. 2015"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -869,6 +908,13 @@
         "gate_reason": "Selective neural ransomware needs bidirectional 10k+ channel implant; thermal budget gates channel count at current process nodes",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Pycroft et al. 2016"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -1038,6 +1084,15 @@
         "gate_reason": "EEG recording hardware widely available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Kohno et al. 2009",
+          "Landau et al. 2020",
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -1186,6 +1241,13 @@
         "gate_reason": "Signal interception at I0 with existing equipment",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Martinovic et al. 2012"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -1338,6 +1400,14 @@
         "gate_reason": "Quantum tunneling exploit needs ~10nm electrodes (3 orders of magnitude below current ~10um); quantum-regime BCI",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Summhammer et al. 2012",
+          "Salari et al. 2015"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -1490,6 +1560,14 @@
         "gate_reason": "Davydov soliton attack needs molecular-scale probes for protein lattice interaction",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Davydov 1973",
+          "Scott 1992"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -1625,6 +1703,13 @@
         "gate_reason": "BCI protocol analysis with existing tools",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -1866,6 +1951,13 @@
         "gate_reason": "Command hijacking needs high-fidelity bidirectional decode+inject exceeding current channel density",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Kohno et al. 2009"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -2121,6 +2213,13 @@
         "gate_reason": "RF emitters and TMS coils commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Zhang et al. 2024"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -2371,6 +2470,14 @@
         "gate_reason": "ELF emitters commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "NTIA",
+          "US Navy ELF program"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -2605,6 +2712,13 @@
         "gate_reason": "Intermodulation weaponization needs precise multichannel stimulation beyond current DBS (4-8 contacts)",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "ITU Radio Regulations"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -2816,6 +2930,14 @@
         "gate_reason": "Pulsed microwave sources exist (military/commercial)",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Frey 1962",
+          "Lin 1978"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -3049,6 +3171,13 @@
         "gate_reason": "Temporal interference demonstrated (Grossman et al. 2017)",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Grossman et al. 2017"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -3322,6 +3451,13 @@
         "gate_reason": "AM signal generators and stimulation electrodes available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Datta et al. 2009"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -3466,6 +3602,13 @@
         "gate_reason": "Directed energy systems exist (military/commercial)",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "US DoD Active Denial System"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -3584,6 +3727,13 @@
         "gate_reason": "ML training pipeline attack; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Zhang et al. 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -3702,6 +3852,13 @@
         "gate_reason": "ML model supply chain; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Meng et al. 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -3823,6 +3980,13 @@
         "gate_reason": "Signal processing software attack",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Liu et al. 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -3945,6 +4109,14 @@
         "gate_reason": "ML adversarial perturbation; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Liu et al. 2024",
+          "Moosavi-Dezfooli et al. 2017"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -4078,6 +4250,13 @@
         "gate_reason": "ML inference on neural data API; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Shokri et al. 2017"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -4210,6 +4389,13 @@
         "gate_reason": "Federated learning gradient attack; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Zhu et al. 2019"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -4413,6 +4599,13 @@
         "gate_reason": "Consumer EEG + real-time processing available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Meng et al. 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -4662,6 +4855,13 @@
         "gate_reason": "Closed-loop perturbation cascade needs fast bidirectional processing across many channels; thermal constraint limits on-chip compute",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Meng et al. 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -4783,6 +4983,14 @@
         "gate_reason": "ML training data poisoning; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Biggio et al. 2012",
+          "Goldblum et al. 2022"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -5051,6 +5259,13 @@
         "gate_reason": "Broadband EM emitters commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2024 (Murcia taxonomy)"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -5307,6 +5522,13 @@
         "gate_reason": "ECT devices exist in clinical settings",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2024 (Murcia taxonomy)"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -5559,6 +5781,13 @@
         "gate_reason": "Needs multichannel mapping beyond current clinical ECoG density",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2024 (Murcia taxonomy)"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -5705,6 +5934,13 @@
         "gate_reason": "Multichannel processing at I0 with existing hardware",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2024 (Murcia taxonomy)"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -5960,6 +6196,13 @@
         "gate_reason": "Stimulation flood possible with existing DBS/tDCS",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Kohno et al. 2009"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -6214,6 +6457,14 @@
         "gate_reason": "Needs reliable motor decode + effector integration (Neuralink N2 targets this)",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Kohno et al. 2009",
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -6330,6 +6581,13 @@
         "gate_reason": "Targets existing implanted pulse generators",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Martin et al. 2004"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -6568,6 +6826,13 @@
         "gate_reason": "EEG biometric spoofing demonstrated with consumer hardware",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Maiorana et al. 2016"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -6794,6 +7059,13 @@
         "gate_reason": "Long-term identity erosion needs chronic high-density bidirectional implant with stable biocompatibility",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "neuroethics_formalized",
+        "original_authors": [
+          "Yuste et al. 2017"
+        ],
+        "qif_contribution": "formalization"
       }
     },
     {
@@ -7023,6 +7295,13 @@
         "gate_reason": "Precision working memory poisoning needs targeted stimulation to specific prefrontal circuits",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Bonaci et al. 2015"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -7219,6 +7498,14 @@
         "gate_reason": "P300 speller BCI widely available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Bonaci et al. 2015",
+          "Martinovic et al. 2012"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -7417,6 +7704,14 @@
         "gate_reason": "Covert thought decoding needs higher electrode density than current ECoG",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Willett et al. 2023",
+          "Meta FAIR 2023"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -7654,6 +7949,14 @@
         "gate_reason": "Agency manipulation needs simultaneous read of intention + write to motor/decision circuits",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "neuroethics_formalized",
+        "original_authors": [
+          "Yuste et al. 2017",
+          "Goering et al. 2021"
+        ],
+        "qif_contribution": "formalization"
       }
     },
     {
@@ -7880,6 +8183,13 @@
         "gate_reason": "EEG acquisition and feature extraction available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Maiorana et al. 2016"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -8106,6 +8416,13 @@
         "gate_reason": "Multifocal stimulation + VR integration (components exist, integration does not)",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "neuroethics_formalized",
+        "original_authors": [
+          "Yuste et al. 2017"
+        ],
+        "qif_contribution": "formalization"
       }
     },
     {
@@ -8300,6 +8617,13 @@
         "gate_reason": "BCI stimulus presentation systems exist",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Frank et al. 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -8530,6 +8854,13 @@
         "gate_reason": "Consumer EEG + ML classifiers available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Landau et al. 2020"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -8656,6 +8987,14 @@
         "gate_reason": "BLE/RF side-channel with existing SDR; no physics advancement needed",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Bonaci et al. 2015",
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -8777,6 +9116,13 @@
         "gate_reason": "Manufacturing supply chain; no physics constraint",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -8896,6 +9242,13 @@
         "gate_reason": "Cloud infrastructure; no physics constraint",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -9014,6 +9367,13 @@
         "gate_reason": "Cryptographic attack; no physics constraint",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Gidney 2025"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -9137,6 +9497,13 @@
         "gate_reason": "OTA firmware attack; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -9259,6 +9626,13 @@
         "gate_reason": "Platform software attack; no physics constraint",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025 (Yale)"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -9388,6 +9762,13 @@
         "gate_reason": "Physical access to implanted electrode arrays",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Kohno et al. 2009"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -9507,6 +9888,13 @@
         "gate_reason": "Wireless protocol attack; no physics constraint",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025 (Yale)"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -9631,6 +10019,13 @@
         "gate_reason": "Fault injection equipment commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Bar-El et al. 2006"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -9785,6 +10180,13 @@
         "gate_reason": "Data storage/network breach; no physics constraint",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Landau et al. 2020"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -10017,6 +10419,14 @@
         "gate_reason": "ERP recording with consumer/research EEG",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Bonaci et al. 2015",
+          "Martinovic et al. 2012"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -10245,6 +10655,13 @@
         "gate_reason": "Real-time EEG state classification demonstrated",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Landau et al. 2020"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -10471,6 +10888,13 @@
         "gate_reason": "Needs high-density depth electrodes beyond current clinical arrays",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Bonaci et al. 2015"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -10703,6 +11127,13 @@
         "gate_reason": "Cognitive warfare needs compromised high-channel implant platform deployed at scale",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "NATO STO 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -10930,6 +11361,13 @@
         "gate_reason": "Ambulatory EEG with cloud transmission exists",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Ienca & Andorno 2017"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -11062,6 +11500,13 @@
         "gate_reason": "Network scanning; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -11200,6 +11645,13 @@
         "gate_reason": "Access to BCI calibration pipeline",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Schroder et al. 2025"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -11397,6 +11849,11 @@
         "gate_reason": "Pattern lock persistence needs long-term high-density recording + stimulation",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_theoretical",
+        "original_authors": null,
+        "qif_contribution": "original_derivation"
       }
     },
     {
@@ -11623,6 +12080,11 @@
         "gate_reason": "Sleep-stage-locked stimulation needs closed-loop DBS maturation",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_theoretical",
+        "original_authors": null,
+        "qif_contribution": "original_derivation"
       }
     },
     {
@@ -11765,6 +12227,11 @@
         "gate_reason": "Coherence mimicry needs real-time phase-locked signal generation matching neural dynamics",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_theoretical",
+        "original_authors": null,
+        "qif_contribution": "original_derivation"
       }
     },
     {
@@ -11961,6 +12428,11 @@
         "gate_reason": "Parameter monitoring with existing BCI systems",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_theoretical",
+        "original_authors": null,
+        "qif_contribution": "original_derivation"
       }
     },
     {
@@ -12105,6 +12577,11 @@
         "gate_reason": "Noise generators at I0 with existing hardware",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_theoretical",
+        "original_authors": null,
+        "qif_contribution": "original_derivation"
       }
     },
     {
@@ -12298,6 +12775,14 @@
         "gate_reason": "UX/permission design attack; no physics constraint",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Felt et al. 2012",
+          "Bonaci et al. 2015"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -12538,6 +13023,15 @@
         "gate_reason": "Recommendation algorithm attack; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Haidt & Twenge 2023",
+          "Bail et al. 2018",
+          "Hao 2021"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -12820,6 +13314,15 @@
         "gate_reason": "Real-time phase-space tracking at I0 needs research-grade hardware miniaturization",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Izhikevich 2007",
+          "Strogatz 2015",
+          "Breakspear 2017"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -13087,6 +13590,15 @@
         "gate_reason": "GAN-synthesized neural patterns need advanced stimulation arrays + decoder",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Martinovic et al. 2012",
+          "Marcel & Millan 2007",
+          "Zhang et al. 2024"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -13335,6 +13847,15 @@
         "gate_reason": "Real-time CSD monitoring currently research-grade only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Izhikevich 2007",
+          "Breakspear 2017",
+          "Scheffer et al. 2009"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -13605,6 +14126,15 @@
         "gate_reason": "Multichannel recording and phase-space reconstruction available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Finn et al. 2015",
+          "Martinovic et al. 2012",
+          "Izhikevich 2007"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -13839,6 +14369,14 @@
         "gate_reason": "Precise current control for firing mode switching at I0",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Izhikevich 2007",
+          "Prescott et al. 2008"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -13990,6 +14528,14 @@
         "gate_reason": "Needs access to adaptive baseline re-enrollment pipeline",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Bigdely-Shamlo et al. 2015",
+          "Arias-Cabarcos et al. 2021"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -14131,6 +14677,14 @@
         "gate_reason": "Audio codec retasking demonstrated (Realtek CVE)",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Guri et al. 2017",
+          "Deshotels 2014"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -14373,6 +14927,14 @@
         "gate_reason": "Modified consumer earbuds with biopotential amp demonstrated",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Kaveh et al. 2020",
+          "Debener et al. 2015"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -14661,6 +15223,14 @@
         "gate_reason": "Longitudinal in-ear EEG with ML inference demonstrated",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Martinovic et al. 2012",
+          "Landau et al. 2020"
+        ],
+        "qif_contribution": "framework_mapping"
       }
     },
     {
@@ -14821,6 +15391,14 @@
         "gate_reason": "Consumer speakers and microphones sufficient",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Wang et al. 2019",
+          "Nandakumar et al. 2015"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -14977,6 +15555,14 @@
         "gate_reason": "Taptic engine and MEMS sensors in current devices",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Ding et al. 2020",
+          "Chen et al. 2021"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -15143,6 +15729,14 @@
         "gate_reason": "Face ID NIR hardware in current iPhones",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Crouzet et al. 2016",
+          "Gupta et al. 2020"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -15305,6 +15899,14 @@
         "gate_reason": "LiDAR in current iPhones and iPads",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Bernal et al. 2018",
+          "Antognoli et al. 2020"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -15472,6 +16074,14 @@
         "gate_reason": "ANC earbuds with feedback microphones widely deployed",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "NEC 2016",
+          "Gao et al. 2019"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -15610,6 +16220,13 @@
         "gate_reason": "MEMS gyroscopes in all smartphones",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Michalevsky et al. 2014"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -15749,6 +16366,14 @@
         "gate_reason": "MEMS accelerometers in all smartphones",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Zhang et al. 2019",
+          "Ba et al. 2020"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -15889,6 +16514,14 @@
         "gate_reason": "Consumer speakers and microphones sufficient",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Mavroudis et al. 2017",
+          "Arp et al. 2017"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -16027,6 +16660,14 @@
         "gate_reason": "Consumer microphones sufficient",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Harrison & Matyunin 2023",
+          "Zhuang et al. 2009"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -16184,6 +16825,14 @@
         "gate_reason": "RGB cameras in all smartphones",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Verkruysse et al. 2008",
+          "Poh et al. 2011"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -16421,6 +17070,14 @@
         "gate_reason": "Eye tracking in Vision Pro, Quest, consumer webcams",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Katsini et al. 2020",
+          "Sluganovic et al. 2018"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -16556,6 +17213,14 @@
         "gate_reason": "Ambient light sensors in all smartphones",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Zhang & Lian 2024",
+          "Spreitzer et al. 2018"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -16697,6 +17362,14 @@
         "gate_reason": "MEMS accelerometers in all smartphones",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Owusu et al. 2012",
+          "Cai & Chen 2011"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -16855,6 +17528,14 @@
         "gate_reason": "IMU sensors in all smartphones and wearables",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Muaaz & Mayrhofer 2017",
+          "Ngo et al. 2014"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -17088,6 +17769,14 @@
         "gate_reason": "IMU sensors in all smartphones and wearables",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Arora et al. 2015",
+          "Bot et al. 2016"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -17278,6 +17967,14 @@
         "gate_reason": "WiFi CSI supported by Intel 5300, ESP32, Nexmon",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Liu et al. 2019",
+          "Wang et al. 2017"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -17420,6 +18117,14 @@
         "gate_reason": "SDR receivers commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Becker et al. 2022",
+          "Das et al. 2018"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -17634,6 +18339,14 @@
         "gate_reason": "LWIR thermal cameras commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Engert et al. 2014",
+          "Abdelrahman et al. 2017"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -17793,6 +18506,14 @@
         "gate_reason": "PPG sensors in all smartwatches",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Biswas et al. 2019",
+          "Yadav et al. 2018"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -17931,6 +18652,14 @@
         "gate_reason": "MEMS magnetometers in smartphones",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Matyunin et al. 2019",
+          "Guri et al. 2020"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -18176,6 +18905,11 @@
         "gate_reason": "Consumer earbud pipeline components all available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_chain_synthesis",
+        "original_authors": null,
+        "qif_contribution": "chain_synthesis"
       }
     },
     {
@@ -18333,6 +19067,11 @@
         "gate_reason": "Multi-sensor consumer devices widely deployed",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_chain_synthesis",
+        "original_authors": null,
+        "qif_contribution": "chain_synthesis"
       }
     },
     {
@@ -18552,6 +19291,11 @@
         "gate_reason": "Cross-device correlation via consumer devices",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_chain_synthesis",
+        "original_authors": null,
+        "qif_contribution": "chain_synthesis"
       }
     },
     {
@@ -18710,6 +19454,11 @@
         "gate_reason": "WiFi CSI + RGB cameras both available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_chain_synthesis",
+        "original_authors": null,
+        "qif_contribution": "chain_synthesis"
       }
     },
     {
@@ -18969,6 +19718,11 @@
         "gate_reason": "Consumer sensor kill chain components all exist today",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_chain_synthesis",
+        "original_authors": null,
+        "qif_contribution": "chain_synthesis"
       }
     },
     {
@@ -19138,6 +19892,15 @@
         "gate_reason": "Consumer speakers and DSP sufficient",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Deshotels 2014",
+          "Carrara 2015",
+          "Fletcher 1940"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -19302,6 +20065,14 @@
         "gate_reason": "Consumer microphone + ALS + WiFi all in current devices",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Compagno et al. 2017",
+          "Ali et al. 2015"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -19456,6 +20227,14 @@
         "gate_reason": "Display and ambient light sensor in all devices",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "Yang et al. 2016",
+          "Davis et al. 2014"
+        ],
+        "qif_contribution": "threat_recontextualization"
       }
     },
     {
@@ -19627,7 +20406,268 @@
         "gate_reason": "Standard displays capable of 60Hz+ modulation; SSVEP response demonstrated in literature",
         "constraint_system_ref": "QIF Derivation Log Entry 66",
         "analysis_date": "2026-02-18"
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Ming et al. 2023",
+          "Bian et al. 2022",
+          "Upadhayay & Behzadan 2023"
+        ],
+        "qif_contribution": "framework_mapping"
       }
+    },
+    {
+      "id": "QIF-T0104",
+      "attack": "Neural spoofing",
+      "tactic": "QIF-N.IJ",
+      "bands": "I0-N1",
+      "band_ids": [
+        "I0",
+        "N1"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Enhanced (coherence metric)",
+      "sources": [
+        "Lopez Bernal et al. 2023 (CACM, Eight Reasons to Prioritize BCI Cybersecurity)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "SI",
+      "notes": "Forge neural identity to impersonate a legitimate BCI node or user. Analogous to IP/ARP spoofing. From Murcia neural cyberattack taxonomy (8 attacks: flooding, jamming, scanning, selective forwarding, spoofing, sybil, sinkhole, nonce). QIF-T0025-T0028 cover 4; this and T0105-T0107 cover the remaining 4.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:M/CG:H/CV:E/RV:P/NP:N",
+        "score": 5.0,
+        "severity": "medium",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1656"
+        ]
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2023 (Murcia taxonomy, CACM)"
+        ],
+        "qif_contribution": "framework_mapping"
+      },
+      "tara_enrichment_pending": true
+    },
+    {
+      "id": "QIF-T0105",
+      "attack": "Neural sybil",
+      "tactic": "QIF-N.IJ",
+      "bands": "I0-N1",
+      "band_ids": [
+        "I0",
+        "N1"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Enhanced (coherence metric)",
+      "sources": [
+        "Lopez Bernal et al. 2023 (CACM, Eight Reasons to Prioritize BCI Cybersecurity)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "SI",
+      "notes": "Create multiple fake neural node identities to overwhelm consensus or trust mechanisms in multi-electrode/multi-node BCI networks. Analogous to Sybil attacks in distributed systems. From Murcia neural cyberattack taxonomy.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:M/CG:H/CV:E/RV:P/NP:N",
+        "score": 5.0,
+        "severity": "medium",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": []
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2023 (Murcia taxonomy, CACM)"
+        ],
+        "qif_contribution": "framework_mapping"
+      },
+      "tara_enrichment_pending": true
+    },
+    {
+      "id": "QIF-T0106",
+      "attack": "Neural sinkhole",
+      "tactic": "QIF-P.DS",
+      "bands": "I0-N2",
+      "band_ids": [
+        "I0",
+        "N2"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Enhanced (coherence metric)",
+      "sources": [
+        "Lopez Bernal et al. 2023 (CACM, Eight Reasons to Prioritize BCI Cybersecurity)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "DS",
+      "notes": "Attract and drop neural signals by advertising a compromised node as optimal routing point. Neural signals are diverted and silently discarded. Analogous to sinkhole attacks in sensor networks. From Murcia neural cyberattack taxonomy.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:N",
+        "score": 5.4,
+        "severity": "medium",
+        "pins": true
+      },
+      "cross_references": {
+        "related_ids": []
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2023 (Murcia taxonomy, CACM)"
+        ],
+        "qif_contribution": "framework_mapping"
+      },
+      "tara_enrichment_pending": true
+    },
+    {
+      "id": "QIF-T0107",
+      "attack": "Neural nonce replay",
+      "tactic": "QIF-N.MD",
+      "bands": "I0-N1",
+      "band_ids": [
+        "I0",
+        "N1"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Enhanced (coherence metric)",
+      "sources": [
+        "Lopez Bernal et al. 2023 (CACM, Eight Reasons to Prioritize BCI Cybersecurity)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "SI",
+      "notes": "Replay previously valid neural signal nonces to bypass freshness/replay protections. Exploits lack of temporal validation in neural signal authentication. Analogous to nonce replay in cryptographic protocols. From Murcia neural cyberattack taxonomy.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:M/CG:H/CV:E/RV:P/NP:T",
+        "score": 5.4,
+        "severity": "medium",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "T1134"
+        ]
+      },
+      "origin": {
+        "category": "literature",
+        "original_authors": [
+          "Lopez Bernal et al. 2023 (Murcia taxonomy, CACM)"
+        ],
+        "qif_contribution": "framework_mapping"
+      },
+      "tara_enrichment_pending": true
+    },
+    {
+      "id": "QIF-T0108",
+      "attack": "Neuromorphic mimicry attack (synaptic weight tampering)",
+      "tactic": "QIF-B.IN",
+      "bands": "N3-N5",
+      "band_ids": [
+        "N3",
+        "N4",
+        "N5"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No",
+      "sources": [
+        "arXiv:2505.17094 (2025, Neuromorphic Mimicry Attacks)",
+        "arXiv:2601.16589 (2026, Emerging Threats in Neuromorphic Systems)"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "EX",
+      "notes": "Tamper with synaptic weights or inject poisoned sensory input into neuromorphic/SNN hardware (next-gen BCI processors). Evades traditional IDS by mimicking legitimate neural activity patterns. Input poisoning ~90% success, weight tampering ~83%. Traditional IDS detects only 12-15%.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:H/CG:H/CV:D/RV:P/NP:N",
+        "score": 5.8,
+        "severity": "medium",
+        "pins": true
+      },
+      "cross_references": {
+        "related_ids": []
+      },
+      "origin": {
+        "category": "qif_recontextualized",
+        "original_authors": [
+          "arXiv:2505.17094 (2025)",
+          "arXiv:2601.16589 (2026)"
+        ],
+        "qif_contribution": "threat_recontextualization"
+      },
+      "tara_enrichment_pending": true
+    },
+    {
+      "id": "QIF-T0109",
+      "attack": "Data alignment exploitation",
+      "tactic": "QIF-B.EV",
+      "bands": "N3-N5",
+      "band_ids": [
+        "N3",
+        "N4",
+        "N5"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "No",
+      "sources": [
+        "Derived from ABAT (Wu et al. 2024, IEEE TNSRE) and A3E (arXiv:2412.11390, 2024) defense papers"
+      ],
+      "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "EX",
+      "notes": "Target the data alignment step used by adversarial defenses (ABAT, A3E). If defenders use Euclidean alignment or reference matrices for cross-session EEG normalization, an attacker who can influence alignment reference data can bias the alignment transform, causing downstream misclassification. QIF-derived: inferred from defense architecture analysis.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.0",
+        "vector": "NISS:1.0/BI:M/CG:M/CV:D/RV:P/NP:N",
+        "score": 4.0,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": []
+      },
+      "origin": {
+        "category": "qif_theoretical",
+        "original_authors": null,
+        "qif_contribution": "original_derivation"
+      },
+      "tara_enrichment_pending": true
     }
   ],
   "deprecated": [

@@ -5,9 +5,9 @@
 > validation agents (quantum physics, neuroscience, cybersecurity) during the
 > framework review conducted on 2026-02-02.
 >
-> **Last updated:** 2026-02-18
+> **Last updated:** 2026-02-21
 > **Sources extracted from:** Three parallel validation agent sessions
-> **Total unique sources:** 165+
+> **Total unique sources:** 193+
 
 ---
 
@@ -199,13 +199,19 @@ Sources are organized by domain and sorted newest-first within each domain.
 | B1 | (2025). "Inner speech in motor cortex and implications for speech neuroprostheses." Cell. | https://www.cell.com/cell/fulltext/S0092-8674(25)00681-6 | Neuroscience | BrainGate inner speech BCI: 125,000 word vocabulary decoded from motor cortex. Shows motor cortex encodes more than movement. |
 | B2 | (2025). "Long-term performance of intracortical microelectrode arrays in 14 BrainGate clinical trial participants." medRxiv. | https://www.medrxiv.org/content/10.1101/2025.07.02.25330310v1 | Neuroscience | 20 years of BrainGate data: 2,319 sessions, 20 arrays. ~36% electrode yield, only 7% decline. Key longevity data. |
 | B3 | (2025). "Neuralink's brain-computer interfaces: medical innovations and ethical challenges." Frontiers in Human Dynamics. | https://www.frontiersin.org/journals/human-dynamics/articles/10.3389/fhumd.2025.1553905/full | Neuroscience | Comprehensive review of Neuralink's clinical progress and ethical implications. |
-| B4 | Chen et al. (2025). "Brain-computer interfaces in 2023-2024." Brain-X / Wiley. | https://onlinelibrary.wiley.com/doi/full/10.1002/brx2.70024 | Neuroscience | State-of-the-art BCI review. Speech BCIs at 99% accuracy and <0.25 second latency. |
+| B4 | Chen X et al. (2025). "Brain-Computer Interfaces in 2023-2024." Brain-X / Wiley. DOI:10.1002/brx2.70024. | https://doi.org/10.1002/brx2.70024 | Neuroscience | Comprehensive BCI review. Speech BCIs at 99% accuracy and <0.25 second latency. Covers motor decoding and emerging paradigms. Key reference for current BCI capabilities relevant to TARA threat surface assessment. |
 | B5 | (2025). "BCIs in 2025: Trials, Progress, and Challenges." Andersen Lab. | https://andersenlab.com/blueprint/bci-challenges-and-opportunities | Neuroscience | BCI market overview. Grand View Research: $160.44 billion invasive BCI market in 2024. |
 | B6 | (2025). "Non-Invasive Brain-Computer Interfaces: Converging Frontiers." Nano-Micro Letters / Springer. | https://link.springer.com/article/10.1007/s40820-025-02042-2 | Neuroscience | Neural signal decoding advances with deep learning and flexible bioelectronics. |
 | B7 | (2025). "Neural electrodes for brain-computer interface system: From rigid to soft." BMEMat / Wiley. | https://onlinelibrary.wiley.com/doi/full/10.1002/bmm2.12130 | Quantum | Flexible electrode design for better neural tissue adaptation and signal stability. |
 | B8 | Marblestone AH, Zamft BM, Maguire YG et al. (2013). "Physical Principles for Scalable Neural Recording." *Frontiers in Computational Neuroscience*, 7, 137. DOI: 10.3389/fncom.2013.00137. | https://doi.org/10.3389/fncom.2013.00137 | BCI Limits | Closest prior art to unified BCI physics constraint system. Covers thermal, EM, info theory for mouse-scale. Missing Moore's Law, Shannon safety, timeline, security, human-scale. Verified 2026-02-18 via Crossref. |
 | B9 | Stevenson IH & Kording KP. (2011). "How advances in neural recording affect data analysis." *Nature Neuroscience*, 14(2), 139-142. DOI: 10.1038/nn.2731. | https://doi.org/10.1038/nn.2731 | BCI Limits | Empirical observation: simultaneously recorded neurons double every 7.4 years (Stevenson's Law). QIF constraint system may formally derive this rate from physics. Verified 2026-02-18 via Crossref. |
 | B10 | Shannon RV. (1992). "A model of safe levels for electrical stimulation." *IEEE Transactions on Biomedical Engineering*, 39(4), 424-426. | https://pubmed.ncbi.nlm.nih.gov/1592409/ | BCI Limits | Electrode safety limit k = log(D) + log(Q) < 1.75. Constraint in the BCI Physics Constraint System for bidirectional stimulation safety. |
+
+### BCI Reviews & Surveys
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| B11 | (2026). "Emerging Threats in Neuromorphic Systems: A Comprehensive Survey." arXiv:2601.16589. | https://arxiv.org/abs/2601.16589 | BCI Review | Survey of security threats specific to neuromorphic computing systems. Covers adversarial attacks on spiking neural networks, hardware trojans, and side-channel vulnerabilities in neuromorphic chips. Maps to TARA neuromorphic system threat techniques. |
 
 ---
 
@@ -223,7 +229,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | C6 | (2025). "Neuralink Hacking Protection: How Your Brain Stays Secure." NeuraPod. | https://www.neurapod.com/blog/neuralink-brain-hacking-protection | Cybersecurity | Details Neuralink's security architecture: secure pairing, AES-256, tamper-proof hardware, 50+ patents. |
 | C7 | "Can Neuralink Be Hacked? Cybersecurity Experts Weigh-In." Compass ITC. | https://www.compassitc.com/blog/can-neuralink-be-hacked-cybersecurity-experts-discuss-potential-risks | Cybersecurity | Expert perspectives on Neuralink security risks. Roger Grimes and Billy Rios quoted. |
 | C8 | "What are the security implications of Elon Musk's Neuralink?" CSO Online. | https://www.csoonline.com/article/567573/what-are-the-security-implications-of-elon-musks-neuralink.html | Cybersecurity | Security analysis of Neuralink's design choices and potential vulnerabilities. |
-| C9 | (2025). "Cybersecurity Issues in Brain-Computer Interfaces." DTRA Journal. | https://ojs.ukscip.com/index.php/dtra/article/download/286/241/6697 | Cybersecurity | Academic analysis of BCI cybersecurity challenges. |
+| C9 | (2024). "Cybersecurity Issues in Brain-Computer Interfaces." DTRA Journal. | https://ojs.ukscip.com/index.php/dtra/article/download/286/241/6697 | Cybersecurity | Academic analysis of BCI cybersecurity challenges with Bluetooth-specific attack surface focus. Covers Bluebugging, MITM, and protocol-level vulnerabilities. Maps to TARA wireless exploitation techniques. |
 | C10 | (2025). "Analyzing Vulnerabilities and Exploitation in Bluetooth Security of Wireless Communication: A Security Framework." ResearchGate. | https://www.researchgate.net/publication/395951848_Analyzing_Vulnerabilities_and_Exploitation_in_Bluetooth_Security_of_Wireless_Communication_A_Security_Framework | Cybersecurity | BLE vulnerability analysis: Bluebugging, Bluesnarfing, KNOB, BLESA. Directly relevant to BCI wireless security. |
 
 ### FDA & Regulatory Guidance
@@ -254,8 +260,11 @@ Sources are organized by domain and sorted newest-first within each domain.
 | C22 | (2025). "Neural Data Privacy Regulation: What Laws Exist and What Is Anticipated?" Arnold & Porter. | https://www.arnoldporter.com/en/perspectives/advisories/2025/07/neural-data-privacy-regulation | Cybersecurity | Comprehensive legal landscape overview of neural data privacy regulation. |
 | C23 | (2025). "Mental privacy: navigating risks, rights and regulation." PMC. | https://pmc.ncbi.nlm.nih.gov/articles/PMC12287510/ | Cybersecurity | Neuroscience advances challenge legal frameworks for mental privacy. |
 | C24 | U.S. Senate (2025). "The MIND Act of 2025." Sens. Cantwell, Schumer, Markey. | https://www.commerce.senate.gov/2025/9/sens-cantwell-schumer-markey-introduce-legislation-to-shield-americans-brain-data-from-exploitation | Cybersecurity | Federal legislation directing FTC study on neural data governance. First major U.S. federal neurodata bill. |
-| C25 | (2025). "Regulating neural data processing in the age of BCIs: Ethical concerns and legal approaches." PMC. | https://pmc.ncbi.nlm.nih.gov/articles/PMC11951885/ | Cybersecurity | Ethical and legal analysis of neural data processing regulation. |
+| C25 | (2025). "Regulating neural data processing in the age of BCIs: Ethical concerns and legal approaches." PMC. | https://pmc.ncbi.nlm.nih.gov/articles/PMC11951885/ | Cybersecurity | Ethical and legal analysis of neural data processing regulation. Examines gaps between existing data protection law and neural data characteristics. Maps to TARA governance and regulatory compliance. |
 | C26 | (2025). "The Rise of Neurotech and the Risks for Our Brain Data." New America. | https://d1y8sb8igg2f8e.cloudfront.net/documents/The_Rise_of_Neurotech_and_the_Risks_for_Our_Brain_Data_2025-03-26_180306.pdf | Cybersecurity | Policy report: consumer neurotechnology falls outside HIPAA. 29 of 30 companies retain unfettered access to neural data. |
+| C63 | Xia Y et al. (2024). "Privacy-Preserving Brain-Computer Interfaces: A Systematic Review." arXiv:2412.11394. | https://arxiv.org/abs/2412.11394 | Privacy | Systematic review of privacy-preserving techniques for BCIs. Covers differential privacy, federated learning, and encryption methods for neural data. Maps to TARA privacy defense countermeasures. |
+| C64 | European Data Protection Supervisor. (2024). "TechDispatch #1/2024: Neurodata." EDPS. | https://www.edps.europa.eu/ | Privacy | EU regulatory perspective on neurodata classification and protection. Analyzes whether neural data qualifies as special category data under GDPR. Relevant to TARA regulatory compliance mapping. |
+| C65 | Neurorights Foundation. (2024). "Safeguarding Brain Data." | https://neurorightsfoundation.org/ | Neurorights | Policy framework for brain data protection. Proposes five neurorights: mental privacy, identity, agency, fair augmentation, protection from bias. Foundational for TARA neurorights mapping. |
 
 ### Risk Scoring Frameworks
 
@@ -286,6 +295,37 @@ Sources are organized by domain and sorted newest-first within each domain.
 | C41 | Meng L, Jiang X, Chen X, Liu W, Luo H, Wu D. (2024). "Adversarial filtering based evasion and backdoor attacks to EEG-based brain-computer interfaces." Information Fusion 107:102316. | https://doi.org/10.1016/j.inffus.2024.102316 | Guardrails / TARA | First study on adversarial filtering for EEG BCIs. Demonstrates evasion and backdoor attacks across three BCI paradigms. |
 | C42 | Zhang X, Wu D, Ding L, Luo H, Lin CT, Jung TP, Chavarriaga R. (2021). "Tiny noise, big mistakes: adversarial perturbations induce errors in brain-computer interface spellers." National Science Review 8(4):nwaa233. | https://doi.org/10.1093/nsr/nwaa233 | Guardrails / TARA | Adversarial EEG perturbation templates mislead P300 and SSVEP spellers to output any attacker-chosen character. |
 | C43 | Khorshidpour Z, Vandersmissen B, Caluwaerts A. (2020). "Security Considerations for Brain-Computer Interface Systems." Sensors 20(15):4137. | https://doi.org/10.3390/s20154137 | Guardrails | BCI security survey covering authentication, encryption, and adversarial attacks on neural interfaces. |
+
+### Cyberneurosecurity & Neural Cyberattacks
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| C47 | Lopez Bernal S, Celdrán AH, Pérez GM, Barros MT, Balasubramaniam S. (2023). "Eight Reasons to Prioritize Brain-Computer Interface Cybersecurity." Communications of the ACM 66(4):68-71. DOI:10.1145/3535509. | https://doi.org/10.1145/3535509 | BCI Security | High-visibility CACM piece arguing BCI cybersecurity is underresearched. Eight concrete reasons including neural data sensitivity, real-time requirements, and implant longevity. Validates TARA's threat categorization scope. |
+| C48 | Lopez Bernal S, Celdrán AH, Pérez GM, Barros MT, Balasubramaniam S. (2023). "Cybersecurity in Brain-Computer Interfaces: State-of-the-art, Opportunities, and Future Challenges." Computers in Biology and Medicine 167:107604. DOI:10.1016/j.compbiomed.2023.107604. | https://doi.org/10.1016/j.compbiomed.2023.107604 | BCI Security | Comprehensive survey of BCI cybersecurity. Taxonomy of attacks and defenses across BCI pipeline. Overlaps significantly with TARA threat categories (signal injection, data poisoning, adversarial ML). |
+| C49 | Lopez Bernal S et al. (2025). "Neural Cyberattacks Applied to Vision Under Realistic Visual Stimuli." arXiv:2503.08284. | https://arxiv.org/abs/2503.08284 | BCI Security | Extends neural cyberattacks to realistic visual stimuli. Demonstrates adversarial perturbation of visual processing pathways. Maps to TARA T0001 (signal injection) and sensory-channel attack vectors. |
+| C50 | Lopez Bernal S et al. (2023). "Impact of Neural Cyberattacks on a Realistic Neuronal Topology." Wireless Networks. DOI:10.1007/s11276-023-03649-2. | https://doi.org/10.1007/s11276-023-03649-2 | BCI Security | Models neural cyberattack impact on biologically realistic neuronal topologies. Quantifies disruption to neural firing patterns. Relevant to TARA neural disruption techniques and NISS severity scoring. |
+| C51 | (2025). "Breaking the Loop: Adversarial Attacks on Cognitive-AI Feedback." EAI Transactions on Security and Safety, Sept 2025. | N/A | BCI Security | Adversarial attacks targeting cognitive-AI feedback loops in closed-loop BCI systems. Maps to TARA feedback manipulation and closed-loop exploitation techniques. |
+| C52 | (2025). "Attention-Guided Universal Adversarial Perturbation for EEG-Based Brain-Computer Interfaces." Expert Systems with Applications 268:125599. DOI:10.1016/j.eswa.2024.125599. | https://doi.org/10.1016/j.eswa.2024.125599 | BCI Security | Attention-guided universal adversarial perturbation (UAP) method for EEG BCIs. Demonstrates transferable adversarial attacks across subjects. Maps to TARA adversarial ML techniques. |
+| C53 | (2025). "Neuromorphic Mimicry Attacks." arXiv:2505.17094. | https://arxiv.org/abs/2505.17094 | BCI Security | Novel attack vector: adversarial inputs crafted to mimic neuromorphic signal patterns. Relevant to TARA spoofing techniques and neuromorphic system threat modeling. |
+| C54 | (2025). "Securing EEG-Based Brain-Computer Interfaces from Data Poisoning." Journal of Information Security and Intelligence. | N/A | BCI Security | Defense-focused analysis of data poisoning attacks on EEG BCIs. Training data manipulation to degrade classifier accuracy. Maps to TARA data poisoning techniques. |
+| C55 | (2023). "Cyberneurosecurity." In: Springer Handbook, DOI:10.1007/978-3-031-26801-4_13. | https://doi.org/10.1007/978-3-031-26801-4_13 | BCI Security | Book chapter defining the cyberneurosecurity discipline. Establishes terminology and threat model for neural interface security. Foundational reference for TARA's theoretical grounding. |
+
+### BCI Defense & Adversarial Robustness
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| C56 | Zhang Y et al. (2025). "Bayesian Neural Networks for Brain-Computer Interface Defense." SSRN. | https://papers.ssrn.com/ | BCI Defense | Bayesian uncertainty quantification for detecting adversarial EEG inputs. Probabilistic defense mechanism for BCI classifiers. Maps to TARA defense countermeasures for adversarial ML attacks. |
+| C57 | Wu D et al. (2024). "Adversarial Bayesian Augmented Training for BCI Robustness." IEEE Transactions on Neural Systems and Rehabilitation Engineering. DOI:10.1109/TNSRE.2024.3392037. | https://doi.org/10.1109/TNSRE.2024.3392037 | BCI Defense | ABAT method combining adversarial training with Bayesian augmentation for robust EEG decoding. Demonstrates improved resilience against perturbation attacks. Maps to TARA adversarial defense countermeasures. |
+| C58 | Wu D et al. (2024). "A3E: Privacy-Preserving EEG Decoding." arXiv:2412.11390. | https://arxiv.org/abs/2412.11390 | BCI Defense | Privacy-preserving approach to EEG decoding using adversarial anonymization. Balances decoding accuracy with neural data privacy. Relevant to TARA privacy protection techniques and neurorights. |
+| C59 | (2025). "Hierarchical Convolutional Neural Network for Adversarial Robust Brain-Computer Interfaces." Scientific Reports. | N/A | BCI Defense | Hierarchical CNN architecture designed for adversarial robustness in BCI classification. Structural defense approach rather than training-time defense. Maps to TARA robust architecture countermeasures. |
+
+### Neurophishing & Neural Side-Channel Attacks
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| C60 | ISACA (2025). "From Phishing to Neuro-Phishing." ISACA Journal. | https://www.isaca.org/ | Neurophishing | Defines neuro-phishing: social engineering attacks enhanced by neural data inference. Extends traditional phishing taxonomy to BCI context. Maps to TARA social engineering techniques targeting neural data. |
+| C61 | Thomopoulos SCA et al. (2024). "Phishing Detection Using EEG and Eye-Tracking Biometrics." Personal and Ubiquitous Computing. DOI:10.1007/s00779-024-01794-9. | https://doi.org/10.1007/s00779-024-01794-9 | Neurophishing | Uses EEG and eye-tracking to detect phishing susceptibility. Dual-use: same neural signals used for defense can be exploited for attack. Maps to TARA biometric inference and side-channel techniques. |
+| C62 | Martinovic I, Davies D, Frank M, Perito D, Ros T, Song D. (2012). "On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces." (FC 2017 / PEEP). | N/A | Side-Channel | "Passively Eavesdropping Private Input via Brainwaves." Demonstrates P300 subliminal probing to extract PINs, bank info, and personal knowledge from EEG. Foundational BCI side-channel attack. Maps to TARA neural eavesdropping and subliminal probing techniques. |
 
 ### BCI Hardware Safety & Charge Protection
 
@@ -393,7 +433,20 @@ Sources are organized by domain and sorted newest-first within each domain.
 
 ---
 
-## 9. Neuroscience Foundations (Preprint References)
+## 9. Wireless Sensing Security
+
+> Sources added 2026-02-21 from wireless sensing and RF security research.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| W1 | (2025). "RF Sensing Security: A Comprehensive Survey." arXiv:2504.10969. | https://arxiv.org/abs/2504.10969 | Wireless Security | Survey of security threats to RF sensing systems including WiFi, radar, and mmWave. Attack taxonomy covers jamming, spoofing, and inference attacks. Relevant to TARA wireless exploitation and sensor manipulation techniques. |
+| W2 | (2025). "WiFi Sensing Attacks and Defenses: A Comprehensive Survey." MDPI Sensors. | N/A | Wireless Security | Survey of attack and defense mechanisms for WiFi-based sensing. Covers activity recognition eavesdropping, location tracking, and countermeasures. Maps to TARA wireless side-channel and environmental sensing exploitation. |
+| W3 | (2024). "Wireless Sensing Security: A Role-Based View." arXiv:2412.03064. | https://arxiv.org/abs/2412.03064 | Wireless Security | Role-based threat model for wireless sensing: attacker as sensor operator, target, or environment manipulator. Framework applicable to BCI wireless link threat modeling. Maps to TARA threat actor categorization. |
+| W4 | (2024). "SoK: Secure Human-Centered Wireless Sensing." Proceedings on Privacy Enhancing Technologies (PoPETS). | N/A | Wireless Security | Systematization of knowledge on privacy and security of human-centered wireless sensing. Covers physiological inference, behavioral tracking, and consent challenges. Directly relevant to TARA environmental sensing and biometric inference techniques. |
+
+---
+
+## 10. Neuroscience Foundations (Preprint References)
 
 > Sources added 2026-02-18 from paper/references.bib verification audit.
 
@@ -406,7 +459,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | F5 | Schroder T, Sirbu R, Park S, Morley J et al. (2025). "Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations." Neuroethics 18. arXiv:2508.12571. | https://link.springer.com/article/10.1007/s12152-025-09607-3 | Preprint | Most comprehensive BCI security paper (Yale). Dual publication verified 2026-02-16. Key related work. |
 | F6 | Meng L, Lin CT, Jung TP, Wu D. (2023). "Adversarial Robustness Benchmark for EEG-Based Brain-Computer Interfaces." Future Generation Computer Systems 143:231-247. | https://doi.org/10.1016/j.future.2023.01.017 | Preprint v1.4 | EEG adversarial attack benchmark. Volume/pages corrected v1.4. |
 
-## 10. Neuroethics & Governance (JHU/CELLS Research)
+## 11. Neuroethics & Governance (JHU/CELLS Research)
 
 > Sources added 2026-02-18 from Hopkins BCI ecosystem research for JHU MBE application.
 
@@ -425,16 +478,17 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Domain | Count | Newest | Oldest |
 |--------|-------|--------|--------|
 | Quantum Physics & Biology | 40 | 2026 | 1993 |
-| Neuroscience | 28 | 2026 | 2010 |
-| BCI Technology | 7 | 2025 | 2025 |
-| Cybersecurity & BCI Security | 46 | 2026 | 2016 |
+| Neuroscience | 29 | 2026 | 2010 |
+| BCI Technology | 11 | 2026 | 1992 |
+| Cybersecurity & BCI Security | 65 | 2025 | 2012 |
 | Electrode Technology | 7 | 2025 | 2018 |
 | Signal Coherence & Oscillations | 5 | 2015 | 1997 |
 | Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
 | Consumer Sensor Exploitation | 9 | 2021 | 2014 |
+| Wireless Sensing Security | 4 | 2025 | 2024 |
 | Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
 | Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
-| **Total** | **165** | | |
+| **Total** | **193** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -444,6 +498,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Preprint Audit (Feb 15-18) | ~11 |
 | JHU/CELLS Ecosystem Research (Feb 18) | ~5 |
 | SSVEP/Guardrails Session (Feb 18) | ~9 |
+| BCI Security & Wireless Sensing Expansion (Feb 21) | ~24 |
 
 ---
 
