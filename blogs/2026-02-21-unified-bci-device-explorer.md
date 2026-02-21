@@ -247,9 +247,11 @@ I'm not trying to bloat this. I just want to put light on what naturally motivat
 
 I don't use LinkedIn, unfortunately, but I hope someone finds this work one day as I apply and verbalize it throughout the community and begin getting help. Regardless, that isn't going to slow me down, because that's not how momentum works. It's physics happening and snowballing. Eventually it will continue going with or without my help. That's the best part. I know at least something in this one month will stick, and if not, there's more to come and eventually something will hit that bullseye. Probability at its finest.
 
-Mind you, I haven't officially kicked off the security vulnerability scanning yet. That's going to introduce a lot more work following up with responsible disclosures and compiling reports. I can automate it, but that defeats the fun of the learning process.
+Mind you, I haven't officially kicked off the security vulnerability scanning yet. That's going to introduce a whole new category of work: responsible disclosures, compiled reports, coordinated follow-ups. I can automate parts of it, but that defeats the fun of actually learning the process.
 
-I want to build a real team around this work. The right way to do that is through academia first, getting proper footing, building a foundation, and growing from there. If this resonates with you, feel free to reach out at research@qinnovate.com. I'd be more than happy to show the ropes and teach what I know. I can't guarantee monetary incentivization or a quick response, as my time is genuinely limited right now, so please don't take that the hard way. But I can guarantee that you'd be working at the forefront of neurosecurity. At least that's the intent. That's what I'm building this all for, starting with ethics. That's what led to all of this.
+This isn't a solo mission forever. I want to build a real team around neurosecurity. But I want to do it the right way, through academia, with proper footing and a real foundation to grow from. That comes first. Once I'm in that environment, the collaboration scales naturally.
+
+In the meantime, if any of this resonates with you, reach out at research@qinnovate.com. I'd genuinely love to show someone the ropes. I can't promise pay or fast replies, my bandwidth is razor thin right now, so please don't take silence personally. What I can promise is that you'd be working on something that matters, at the very front of a field that barely exists yet. That's the whole point. I started this project with ethics, not exploits. That's what led to everything you see here.
 
 What a time to be alive. It started with a mind map. I hope it helps science, research, and a whole lot more.
 
