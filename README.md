@@ -79,7 +79,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 | Component | Description | Status |
 |-----------|-------------|--------|
-| **[Neurowall](./tools/neurowall/)** | Neural firewall neckband (coherence + differential privacy + NISS) | 🟡 v0.5 |
+| **[Neurowall](./tools/neurowall/)** | Neural firewall neckband (coherence + differential privacy + NISS + policy engine) | 🟡 v0.8 |
 | Neckband hardware | Physical behind-the-neck wearable for Neurowall | 🔵 Planned |
 | **[macshield](./tools/macshield/)** | macOS workstation hardening for public WiFi | 🟢 Active |
 | neurosim | Simulated BCI attack/defense environment | 🟡 In Progress |

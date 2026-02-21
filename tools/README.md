@@ -15,7 +15,7 @@ This directory contains accessible, open-source security tools designed to prote
 
 | Tool | Language | Status | Description |
 |------|----------|--------|-------------|
-| [neurowall](./neurowall) | Python | v0.5 | Neural firewall neckband with NSP + PQC |
+| [neurowall](./neurowall) | Python | v0.8 | Neural firewall neckband with NSP + PQC + policy engine |
 | [macshield](./macshield) | Bash | Active | macOS workstation hardening for public WiFi |
 
 > **autodidactive** (adaptive learning platform) has moved to the private [mindloft](https://github.com/qinnovates/mindloft) repository under `education/`.
