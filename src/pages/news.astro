@@ -36,7 +36,7 @@ const blogItems: PublicationItem[] = regularPosts
   })
   .sort((a, b) => b.date.localeCompare(a.date));
 
-// 2. Field journal entries (chronological, oldest first)
+// 2. Field journal entries (newest first)
 const fieldJournalItems = fieldJournalPosts
   .map((post) => {
     const body = post.body || '';
@@ -52,7 +52,7 @@ const fieldJournalItems = fieldJournalPosts
       source: post.data.source,
     };
   })
-  .sort((a, b) => a.date.localeCompare(b.date));
+  .sort((a, b) => b.date.localeCompare(a.date));
 
 // 3. Intelligence briefs
 const briefItems: BriefItem[] = briefs.map((brief) => {
