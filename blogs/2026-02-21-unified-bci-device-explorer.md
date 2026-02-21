@@ -257,7 +257,7 @@ One month and 630+ commits later:
 - 165 research sources, 70 derivation log entries, 20 field journal entries, 50 blog posts
 - A unified open API serving all of it at a single endpoint
 
-I thought this had taken six weeks. I checked the git log. First commit: February 1. Three weeks. I was wrong by double.
+I thought this had taken six weeks. I checked the git log. First commit: January 18 on a private repo (the ONI framework). Five weeks. The qinnovate website came two weeks later on February 1. I was still wrong, just not by as much as I thought.
 
 People might ask why I laid all of this groundwork before getting into the actual BCI security work. David Marr answered that in 1982: *"Trying to understand perception by studying only neurons is like trying to understand bird flight by studying only feathers; it just cannot be done."* (via MIT OCW 9.13, Nancy Kanwisher). That is the reason all of this exists. The DSM mappings, the TTPs, the BCI limits equation, the physics constraints, the neuroscience, the neurorights. You cannot secure a brain-computer interface by looking at the interface alone. You need the psychiatry to understand what damage looks like. You need the physics to understand what's possible. You need the ethics to understand what's worth protecting. And you need security to stress test and map it all. There's probably more that I'm missing, and I'll need to disseminate it all clearly as I work to improve and enhance these datasets, make them more effective and testable, built and solidified with research and science. But the foundation had to come first.
 
