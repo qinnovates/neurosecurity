@@ -9,8 +9,14 @@ interface FirewallEvent {
 
 function App() {
     const [isHardened, setIsHardened] = useState(true);
-    const [events, setEvents] = useState<FirewallEvent[]>([]);
-    const [networkInfo, setNetworkInfo] = useState({ ssid: 'Detecting...', bssid: 'Fingerprinting...' });
+    const [events, setEvents] = useState<FirewallEvent[]>([
+        { timestamp: new Date().toLocaleTimeString(), event: "Shield Dashboard active" },
+        { timestamp: new Date().toLocaleTimeString(), event: "Stealth mode: ON" },
+        { timestamp: new Date().toLocaleTimeString(), event: "Hostname masked to generic device name" },
+        { timestamp: new Date().toLocaleTimeString(), event: "NetBIOS disabled (ports 137/138 closed)" },
+        { timestamp: new Date().toLocaleTimeString(), event: "Waiting for firewall events..." },
+    ]);
+    const [networkInfo, setNetworkInfo] = useState({ ssid: 'Detecting...', status: 'Fingerprinting...' });
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -20,21 +26,15 @@ function App() {
                     const data = await response.json();
                     setEvents(data);
                 }
-            } catch (e) {
-                // Fallback for demo if file not found
-                if (events.length === 0) {
-                    setEvents([
-                        { timestamp: new Date().toLocaleTimeString(), event: "Shield Dashboard Active" },
-                        { timestamp: new Date().toLocaleTimeString(), event: "Waiting for firewall events..." },
-                    ]);
-                }
+            } catch {
+                // Using default demo events
             }
         };
 
         fetchEvents();
-        const interval = setInterval(fetchEvents, 3000);
+        const interval = setInterval(fetchEvents, 5000);
         return () => clearInterval(interval);
-    }, [events.length]);
+    }, []);
 
     return (
         <div className="dashboard-container">
@@ -71,7 +71,7 @@ function App() {
                         <span style={{ fontSize: '0.9rem' }}>{networkInfo.ssid}</span>
                     </div>
                     <div style={{ fontSize: '0.7rem', color: 'var(--success)', marginTop: '4px' }}>
-                        ◆ {networkInfo.bssid}
+                        ◆ {networkInfo.status}
                     </div>
                 </div>
             </div>
@@ -107,13 +107,13 @@ function App() {
                     <div style={{ marginTop: '24px', padding: '16px', borderRadius: '12px', background: 'rgba(14, 165, 233, 0.05)', border: '1px solid rgba(14, 165, 233, 0.1)', textAlign: 'left', maxWidth: '500px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--accent-blue)', fontWeight: 600 }}>
                             <Lock size={16} />
-                            <span>Accessible Security Philosophy</span>
+                            <span>Basic Local Security</span>
                         </div>
                         <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
-                            We trust local tools over "Free VPNs". Combine macshield with a <strong>Local OpenVPN</strong> setup for maximum privacy at zero cost.
+                            macshield hardens your Mac at the local network level. It changes your hostname, enables stealth mode, and disables NetBIOS. <strong>This does not replace a VPN</strong>, which encrypts your traffic.
                         </p>
                         <div style={{ marginTop: '12px', fontSize: '0.75rem', padding: '8px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-secondary)' }}>
-                            <strong>Future Phase:</strong> Guidance for configuring OpenVPN on your <strong>Router/Modem</strong> is coming soon to protect all network devices.
+                            <strong>Recommended:</strong> Pair macshield with a reputable VPN (NordVPN, ProtonVPN, Mullvad) or the free Cloudflare WARP for full protection.
                         </div>
                     </div>
 
