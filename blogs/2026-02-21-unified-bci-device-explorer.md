@@ -248,7 +248,7 @@ One month and 630+ commits later:
 - 38 brain regions cross-referenced to devices, threats, and physics constraints
 - 13 physics constraints unified into a single BCI limits equation, cross-validated by Gemini 2.5 Pro
 - An 11-band hourglass security model derived from scratch
-- A post-quantum neural security protocol (NSP v0.5) implemented in Rust
+- A post-quantum neural security protocol (NSP v0.5) with ML-KEM-768 handshake and ML-DSA-65 signatures implemented in Rust (cryptographic core complete, frame pipeline in progress)
 - A coherence monitor (Neurowall v0.7) with 14 attack generators, 9/9 detection at 30s, 5/5 on real EEG hardware (OpenBCI Cyton via BrainFlow, 0% false positive rate), ROC-optimized to 5% FPR at 100% TPR
 - A domain-specific neural rendering language (Runemate)
 - FDORA Section 3305 regulatory compliance mapped across all techniques
@@ -259,7 +259,7 @@ One month and 630+ commits later:
 
 I thought this had taken six weeks. I checked the git log. First commit: February 1. Three weeks. I was wrong by double.
 
-People might ask why I laid all of this groundwork before getting into the actual BCI security work. David Marr answered that in 1982: *"Trying to understand perception by studying only neurons is like trying to understand bird flight by studying only feathers; it just cannot be done."* (via MIT OCW 9.13, Nancy Kanwisher). That is the reason all of this exists. The DSM mappings, the TTPs, the BCI limits equation, the physics constraints, the neuroscience, the neurorights. You cannot secure a brain-computer interface by looking at the interface alone. You need the psychiatry to understand what damage looks like. You need the physics to understand what's possible. You need the ethics to understand what's worth protecting. There's probably more that I'm missing, and I'll need to disseminate it all clearly as I work to improve and enhance these datasets, make them more effective and testable, built and solidified with research and science. But the foundation had to come first.
+People might ask why I laid all of this groundwork before getting into the actual BCI security work. David Marr answered that in 1982: *"Trying to understand perception by studying only neurons is like trying to understand bird flight by studying only feathers; it just cannot be done."* (via MIT OCW 9.13, Nancy Kanwisher). That is the reason all of this exists. The DSM mappings, the TTPs, the BCI limits equation, the physics constraints, the neuroscience, the neurorights. You cannot secure a brain-computer interface by looking at the interface alone. You need the psychiatry to understand what damage looks like. You need the physics to understand what's possible. You need the ethics to understand what's worth protecting. And you need security to stress test and map it all. There's probably more that I'm missing, and I'll need to disseminate it all clearly as I work to improve and enhance these datasets, make them more effective and testable, built and solidified with research and science. But the foundation had to come first.
 
 This is my natural dopamine. The act of finally executing what my life experiences have built up to is the energy that keeps me awake. I know it's not sustainable. Once I get into my target school, I'm drawing hard boundaries. But right now, momentum is momentum. It's physics. It snowballs. Eventually it continues with or without my help, and that's the best part. Something in this month will stick. If not, there's more to come. Probability at its finest.
 
