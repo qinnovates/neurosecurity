@@ -7,6 +7,18 @@
 
 This directory contains accessible, open-source security tools designed to protect digital identity and cognitive liberty.
 
+## Table of Contents
+
+- [Mission: The Neuroethics of Identity](#mission-the-neuroethics-of-identity)
+- [A Note on Security Fallacies](#a-note-on-security-fallacies-the-wegner-schneier-fallacy--schneiers-law)
+- [Tools](#tools)
+
+| Tool | Language | Status | Description |
+|------|----------|--------|-------------|
+| [neurowall](./neurowall) | Python | v0.5 | Neural firewall neckband with NSP + PQC |
+| [macshield](./macshield) | Bash | Active | macOS workstation hardening for public WiFi |
+| [autodidactive](./autodidactive) | Python | Active | Adaptive learning platform with neurosecurity curriculum |
+
 > [!WARNING]
 > **For enterprise/corporate researchers:** If you are working with PII, sensitive data, or neural recordings in a professional capacity, use your organization's corporate VPN, managed devices, and enterprise security policies. These tools are not a substitute for enterprise security infrastructure. macshield is designed for individuals, students, and independent researchers who lack access to corporate resources. **Qinnovates is not liable for any security compromises resulting from the use of these tools in lieu of proper enterprise security controls.**
 
