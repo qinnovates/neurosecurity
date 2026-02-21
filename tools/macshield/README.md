@@ -1,7 +1,48 @@
 # macshield
 
+## Table of Contents
+
+- [Who macshield Is For](#who-macshield-is-for)
+- [What macshield Is NOT](#what-macshield-is-not)
+- [What macshield Is](#what-macshield-is)
+- [Why This Exists](#why-this-exists)
+  - [Zero Telemetry](#zero-telemetry)
+  - [Jurisdictional Privacy (14-Eyes)](#a-note-on-jurisdictional-privacy-14-eyes)
+- [What Changes on Your Machine](#what-changes-on-your-machine)
+- [Quick Start](#quick-start)
+- [How It Works](#how-it-works)
+- [Commands](#commands)
+- [macshield Does Not Replace a VPN](#macshield-does-not-replace-a-vpn)
+  - [Choosing a VPN Provider](#choosing-a-vpn-provider)
+  - [Setting Up a VPN on macOS](#setting-up-a-vpn-on-macos)
+  - [Recommended Stack for Public WiFi](#recommended-stack-for-public-wifi)
+  - [Build Your Own VPN (Students / Researchers)](#build-your-own-vpn-students--researchers)
+- [Threat Model](#threat-model)
+- [Security Model](#security-model)
+- [Post-Quantum Cryptography](#post-quantum-cryptography)
+- [Comparison](#comparison)
+- [Uninstall](#uninstall)
+
+---
+
 > [!CAUTION]
 > **ALPHA RELEASE**: This project is in its early stages. **Run at your own risk.** It modifies system-level network and firewall settings. Always ensure you have a backup of your data.
+
+> [!IMPORTANT]
+> **If you work in an enterprise, institution, or clinical setting**, you MUST use your organization's corporate VPN, managed devices, and enterprise security policies. macshield is not a substitute for enterprise security infrastructure. If your organization handles PII, neural recordings, HIPAA-covered data, or any sensitive research data, adhere to your corporate device and security policies at all times. **Qinnovates is not liable for any security compromises resulting from the use of macshield in lieu of proper enterprise or institutional security controls.**
+
+## Who macshield Is For
+
+macshield is for **students, independent researchers, and individuals** who want baseline device hardening on public WiFi but may not have access to corporate VPNs or enterprise security tools. It covers the Layer 2 protections that even a paid VPN cannot provide.
+
+If you are a student or researcher on a budget, macshield gives you meaningful protection at zero cost. For full traffic encryption, see [Build your own VPN](#build-your-own-vpn-students--researchers) below.
+
+## What macshield Is NOT
+
+- **Not a VPN replacement.** macshield does not encrypt your internet traffic. For full traffic encryption, use a reputable paid VPN (Mullvad, ProtonVPN, etc.) or build your own (see below).
+- **Not advanced security.** This is baseline hardening. It stops passive reconnaissance and casual snooping, not targeted attacks or nation-state adversaries.
+- **Not a silver bullet.** It's one layer in a defense-in-depth approach. Combine it with macOS Private WiFi Address (MAC randomization), HTTPS, and a VPN if your threat model requires it.
+- **Not for enterprise use.** If your organization has security policies, follow those. macshield is for personal devices on personal networks.
 
 ## What macshield Is
 
@@ -35,21 +76,7 @@ More importantly, **even a good VPN does not protect against the attacks macshie
 
 A VPN encrypts your traffic after it leaves your machine. macshield hardens the machine itself. They solve different problems.
 
-### Who macshield Is For
-
-macshield is for **individuals, students, and independent researchers** who are curious about BCI research and want baseline device hardening but may not have the financial means for a reputable paid VPN. It covers the Layer 2 protections that even a VPN cannot provide.
-
-### Who macshield Is NOT For
-
-If you are a **researcher, clinician, or engineer working with PII, neural recordings, or sensitive data** in an enterprise or institutional setting, you must use your organization’s corporate VPN, managed devices, and enterprise security policies. macshield is not a substitute for enterprise security infrastructure. Adhere to your corporate device and security policies at all times.
-
-**Qinnovates is not liable for any security compromises resulting from the use of macshield in lieu of proper enterprise or institutional security controls.**
-
-### What macshield Is NOT
-
-- **Not a VPN replacement.** macshield does not encrypt your internet traffic. For full traffic encryption, use a reputable paid VPN (Mullvad, ProtonVPN, etc.).
-- **Not advanced security.** This is baseline hardening. It stops passive reconnaissance and casual snooping, not targeted attacks or nation-state adversaries.
-- **Not a silver bullet.** It’s one layer in a defense-in-depth approach. Combine it with macOS Private WiFi Address (MAC randomization), HTTPS, and a VPN if your threat model requires it.
+In OSI terms, VPNs operate at Layer 3+ (Network and above). In the [QIF security model](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-TRUTH.md), VPNs operate at the **S3 band** (Application). The attacks macshield blocks happen at the **S1 band** (Analog Front-End), below the VPN tunnel. In BCI systems, compromising S1 can propagate upward through S2, S3, through I0 (the neural interface), and into the neural domain. macshield defends the silicon domain floor.
 
 ### Zero Telemetry
 
@@ -255,6 +282,82 @@ For the strongest free setup on public WiFi, combine:
 3. **Cloudflare WARP** or **ProtonVPN free tier** (traffic encryption, free)
 
 This covers hostname hiding, stealth mode, MAC randomization, and encrypted traffic at zero cost.
+
+### Build Your Own VPN (Students / Researchers)
+
+If you cannot afford a commercial VPN subscription, you can build your own for under $5/month (or free if you already have a server or Raspberry Pi at home). This gives you full control over your traffic with no third-party provider, no jurisdiction concerns, and no logging policies to worry about.
+
+**Option 1: Raspberry Pi at home (one-time cost, ~$35-75)**
+
+Run a VPN server on a Raspberry Pi connected to your home network. When you connect from a cafe or campus, your traffic tunnels through your home internet. No subscription, no provider.
+
+1. Install [PiVPN](https://pivpn.io) on any Raspberry Pi (Zero 2 W or newer recommended):
+   ```bash
+   curl -L https://install.pivpn.io | bash
+   ```
+2. PiVPN walks you through setup. Choose **WireGuard** (faster, modern) or **OpenVPN** (wider compatibility).
+3. Generate a client profile: `pivpn add`
+4. Transfer the config to your Mac and import it into the WireGuard or Tunnelblick app.
+5. Set up port forwarding on your home router (PiVPN tells you which port).
+6. Optional: use a free dynamic DNS service (DuckDNS, No-IP) if your ISP changes your IP.
+
+Full guide: [PiVPN documentation](https://docs.pivpn.io)
+
+**Option 2: Cloud VPS ($3-5/month)**
+
+Rent a cheap VPS (DigitalOcean, Vultr, Linode, Oracle Cloud free tier) and install WireGuard or OpenVPN:
+
+```bash
+# On Ubuntu/Debian VPS:
+curl -O https://raw.githubusercontent.com/angristan/wireguard-install/master/wireguard-install.sh
+chmod +x wireguard-install.sh
+sudo ./wireguard-install.sh
+```
+
+This creates a WireGuard server and generates a client config file. Transfer it to your Mac.
+
+**Option 3: SSH SOCKS tunnel (free if you have any SSH server)**
+
+The simplest option. No VPN software needed. If you have SSH access to any server (university, home, cloud):
+
+```bash
+# Open a SOCKS tunnel
+ssh -D 1080 -N -f user@your-server.com
+
+# Configure macOS to use it (macshield installer can do this)
+networksetup -setsocksfirewallproxy Wi-Fi localhost 1080
+networksetup -setsocksfirewallproxystate Wi-Fi on
+```
+
+This routes your traffic through the SSH server. Not as comprehensive as a full VPN (only covers apps that respect the SOCKS proxy), but it's free and takes 30 seconds to set up.
+
+**Option 4: Configure OpenVPN on your home router**
+
+Many consumer routers (Asus, Netgear, TP-Link with OpenWrt) support running an OpenVPN or WireGuard server directly. Check your router's admin panel under "VPN Server." This requires no additional hardware.
+
+Guides by router brand:
+- Asus: Built-in OpenVPN server in the router firmware
+- OpenWrt: [WireGuard on OpenWrt](https://openwrt.org/docs/guide-user/services/vpn/wireguard/server)
+- DD-WRT/Tomato: OpenVPN server built-in
+
+**Connecting from macOS:**
+
+For WireGuard configs:
+```bash
+brew install --cask wireguard-tools
+# Import the .conf file in the WireGuard app
+```
+
+For OpenVPN configs:
+```bash
+brew install --cask tunnelblick
+# Double-click the .ovpn file to import
+```
+
+**Verify your VPN is working:**
+```bash
+curl -s ifconfig.me    # Should show VPN server IP, not your real IP
+```
 
 ## Sudoers Fragment
 
