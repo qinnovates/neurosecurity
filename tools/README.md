@@ -26,6 +26,7 @@ Proposing a fix, like local hardening, carries the inherent risk of the **Peltzm
 Our approach is **Transparency over Obscurity**. We don't promise total invisibility; we promise a reduced attack surface and the education necessary to understand the tools you are running.
 
 ## Tools
+- **[neurowall](./neurowall)**: Neural firewall neckband. Behind-the-neck wearable that grounds OpenBCI electrodes while running the full NSP + Runemate + PQC security stack on-device.
 - **[macshield](./macshield)**: Network-aware macOS hardening to protect identity on public WiFi.
 - **[autodidactive](./autodidactive)**: Self-directed learning system with adaptive visualizations, AI-driven content generation, and interactive neurosecurity curriculum.
 
