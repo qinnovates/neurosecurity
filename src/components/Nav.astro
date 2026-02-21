@@ -19,8 +19,11 @@ const frameworkLinks = [
 
 const researchLinks = [
   { href: '/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification and research paper' },
+  { href: '/bci/', label: 'BCI Research', desc: 'Hardware inventory, physics limits, guardrails, and API' },
   { href: '/case-studies/t0079-anc-fingerprint/', label: 'Case Studies', desc: 'Real-world hardware security validation' },
   { href: '/glossary/', label: 'Glossary', desc: 'QIF terminology reference' },
+  { href: '/lab/derivation-log/', label: 'Derivation Log', desc: 'Live research journal and hypothesis tracking' },
+  { href: '/dashboard/', label: 'Device Dashboard', desc: 'Single-pane view of any BCI device' },
 ];
 
 const toolsLinks = [
@@ -31,7 +34,7 @@ const toolsLinks = [
 
 const isAboutActive = currentPath.startsWith('/about/') || currentPath.startsWith('/roadmap/');
 const isFrameworkActive = ['/whitepaper/', '/TARA/', '/scoring/', '/neurogovernance/', '/therapeutics/', '/security/'].some(p => currentPath.startsWith(p)) || currentPath.startsWith('/framework/');
-const isResearchActive = ['/case-studies/', '/glossary/'].some(p => currentPath.startsWith(p));
+const isResearchActive = ['/case-studies/', '/glossary/', '/lab/', '/bci/', '/bci-explorer/', '/bci-limits/', '/dashboard/'].some(p => currentPath.startsWith(p));
 const isToolsActive = ['/nsp/', '/runemate/', '/explore/', '/explorer/'].some(p => currentPath.startsWith(p));
 const isGovActive = currentPath.startsWith('/governance/');
 const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith('/publications/');
