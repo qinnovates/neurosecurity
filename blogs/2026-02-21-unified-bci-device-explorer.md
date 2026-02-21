@@ -267,7 +267,7 @@ I haven't kicked off the security vulnerability scanning yet. That's a whole new
 
 This isn't a solo mission forever. I want to build a real team around neurosecurity, but through academia, with proper footing and a real foundation to grow from. That's my goal by end of year: get into a program and start these conversations in a formal setting. It's fun and casual now, but I know I need to put my serious face on while keeping the same demeanor, real soon.
 
-If any of this resonates, reach out at research@qinnovate.com. I can't promise pay or fast replies, my bandwidth is razor thin, so please don't take silence personally. What I can promise is you'd be working at the very front of a field that barely exists yet. I started this project with ethics, not exploits. That's what led to everything you see here.
+I started this project with ethics, not exploits. That's what led to everything you see here.
 
 All of this is open for a reason. Don't wait to start, because I didn't. Just do it responsibly, securely, and ethically. Make mistakes, but know how to steer yourself back. Version control is beautiful for that reason. Production environments in a lab, that's different. That requires partnerships, institutional backing, and real accountability.
 
