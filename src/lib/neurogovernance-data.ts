@@ -13,7 +13,7 @@ export interface NeurorightInfo {
   id: string;
   name: string;
   shortDef: string;
-  source: 'ienca-andorno' | 'qif-extended';
+  source: 'ienca-andorno' | 'qif-extended' | 'yuste';
   color: string;
   brainRegions: string[];
   threatCount: number;
@@ -44,7 +44,7 @@ export interface NeurogovernanceData {
   };
 }
 
-const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 'ienca-andorno' | 'qif-extended'; color: string }> = {
+const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 'ienca-andorno' | 'qif-extended' | 'yuste'; color: string }> = {
   MP: {
     name: 'Mental Privacy',
     shortDef: 'Your thoughts are yours. No one should read, store, or re-link them without permission.',
@@ -69,6 +69,12 @@ const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 
     source: 'ienca-andorno',
     color: '#f59e0b',
   },
+  EA: {
+    name: 'Equal Access',
+    shortDef: 'BCI security is not limited to those who can pay. Open specs, open tools, open data.',
+    source: 'yuste',
+    color: '#10b981',
+  },
 };
 
 /** Map neurorights to QIF bands they primarily protect */
@@ -77,6 +83,7 @@ const NEURORIGHT_BRAIN_MAP: Record<string, string[]> = {
   CL: ['N7', 'N6', 'N4'],           // cognition spans cortex, limbic, thalamic gating
   MI: ['N7', 'N6', 'N5', 'N4', 'N3', 'N2', 'N1'], // integrity + dynamics + authenticity across all layers
   PC: ['N6', 'N7'],                  // identity rooted in limbic + cortex
+  EA: [],                             // structural/governance right, not brain-region-specific
 };
 
 /** QIF neural bands as brain regions — 1:1 with the hourglass model */
@@ -92,7 +99,7 @@ const BRAIN_REGIONS: { id: string; name: string; description: string; bandIds: s
 
 /** Compute all neurogovernance data from the registrar */
 export function getNeurogovernanceData(): NeurogovernanceData {
-  const RIGHTS = ['MP', 'CL', 'MI', 'PC'] as const;
+  const RIGHTS = ['MP', 'CL', 'MI', 'PC', 'EA'] as const;
 
   // Collect per-right technique data
   const rightTechniques: Record<string, any[]> = {};
