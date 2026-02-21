@@ -6,12 +6,11 @@
     "description": "Chronological record of QIF milestones, discoveries, dataset growth, and major updates. Updated when significant changes occur. Automation: scripts/timeline-check.mjs detects staleness.",
     "maintainer": "Kevin Qi"
   },
-
   "current_stats": {
     "as_of": "2026-02-21",
     "threat_techniques": 103,
     "bci_devices": 24,
-    "brain_regions": 38,
+    "brain_regions": 37,
     "physics_constraints": 13,
     "hourglass_bands": 11,
     "tara_tactics": 13,
@@ -29,14 +28,15 @@
     "cross_ai_validations": 9,
     "research_sources": 165
   },
-
   "milestones": [
     {
       "date": "2026-01-15",
       "type": "release",
       "title": "TARA v1.0: Initial Atlas Published",
       "description": "First public release of the Therapeutic Applications & Risk Assessment atlas. 60 attack techniques. The starting point.",
-      "stats_snapshot": { "threat_techniques": 60 }
+      "stats_snapshot": {
+        "threat_techniques": 60
+      }
     },
     {
       "date": "2026-01-18",
@@ -61,7 +61,10 @@
       "type": "discovery",
       "title": "QIF Born: 14-Layer Model Deprecated, Hourglass Adopted",
       "description": "Single session produced 13 derivation insights. CNF renamed to QIF. 14-layer OSI model (v2.0) deprecated in favor of the 7-band symmetric (3-1-3) hourglass. QIF-TRUTH.md created as canonical source of truth.",
-      "stats_snapshot": { "hourglass_bands": 7, "derivation_log_entries": 13 }
+      "stats_snapshot": {
+        "hourglass_bands": 7,
+        "derivation_log_entries": 13
+      }
     },
     {
       "date": "2026-02-02",
@@ -80,7 +83,9 @@
       "type": "discovery",
       "title": "L=v/f Unification and 11-Band Model",
       "description": "Wavelength equation applied to neural security. Government-restricted spectrum attack mapping added. QIF v4.0: 11 bands implemented (N7-N1, I0, S1-S3). Five coupling mechanisms identified.",
-      "stats_snapshot": { "hourglass_bands": 11 }
+      "stats_snapshot": {
+        "hourglass_bands": 11
+      }
     },
     {
       "date": "2026-02-06",
@@ -105,7 +110,9 @@
       "type": "release",
       "title": "Unified Neural Security Taxonomy",
       "description": "60 attack techniques across 11 MITRE-compatible tactics spanning 7 domains. First structured BCI threat taxonomy.",
-      "stats_snapshot": { "threat_techniques": 60 }
+      "stats_snapshot": {
+        "threat_techniques": 60
+      }
     },
     {
       "date": "2026-02-07",
@@ -130,14 +137,18 @@
       "type": "milestone",
       "title": "NISS v1.0 Finalized",
       "description": "Spectral decomposition bridge connects raw neural signals to per-band QI scoring. Every technique scored for neural impact. Replaces CVSS for BCI context.",
-      "stats_snapshot": { "threat_techniques": 65 }
+      "stats_snapshot": {
+        "threat_techniques": 65
+      }
     },
     {
       "date": "2026-02-09",
       "type": "discovery",
       "title": "Dynamical Systems Security: 6 New Attack Classes",
       "description": "Bifurcation manipulation, basin erosion, strange attractor injection, Lyapunov destabilization, phase space compression, and resonance entrainment. Novel BCI attack vectors from dynamical systems theory.",
-      "stats_snapshot": { "threat_techniques": 71 }
+      "stats_snapshot": {
+        "threat_techniques": 71
+      }
     },
     {
       "date": "2026-02-09",
@@ -150,7 +161,10 @@
       "type": "milestone",
       "title": "Framework Complete (v1): QIF + NSP + NISS + TARA",
       "description": "First complete version of the full stack. 50 derivation log entries. 7 days of formal derivation. 4 framework versions. Ready for independent peer review.",
-      "stats_snapshot": { "derivation_log_entries": 50, "threat_techniques": 71 }
+      "stats_snapshot": {
+        "derivation_log_entries": 50,
+        "threat_techniques": 71
+      }
     },
     {
       "date": "2026-02-11",
@@ -163,14 +177,18 @@
       "type": "release",
       "title": "TARA v1.4: Consumer Side-Channel Techniques",
       "description": "3 new techniques (T0100-T0102). Total: 102 techniques.",
-      "stats_snapshot": { "threat_techniques": 102 }
+      "stats_snapshot": {
+        "threat_techniques": 102
+      }
     },
     {
       "date": "2026-02-13",
       "type": "discovery",
       "title": "TARA-to-DSM-5-TR Diagnostic Mapping",
       "description": "Neural Impact Chain bridges attack techniques to DSM-5-TR diagnostic codes. 5 diagnostic clusters, 68 DSM codes mapped. Every TARA technique now maps to potential psychiatric outcomes.",
-      "stats_snapshot": { "dsm5_diagnoses_mapped": 68 }
+      "stats_snapshot": {
+        "dsm5_diagnoses_mapped": 68
+      }
     },
     {
       "date": "2026-02-13",
@@ -201,7 +219,9 @@
       "type": "release",
       "title": "TARA v1.5: Neurorights Mapping",
       "description": "4 neurorights (Mental Privacy, Cognitive Liberty, Mental Integrity, Psychological Continuity) mapped to all 102 techniques. Consent Complexity Index (CCI) introduced.",
-      "stats_snapshot": { "neurorights_mapped": 4 }
+      "stats_snapshot": {
+        "neurorights_mapped": 4
+      }
     },
     {
       "date": "2026-02-16",
@@ -214,21 +234,27 @@
       "type": "release",
       "title": "BCI Hardware Inventory Published",
       "description": "24 BCI devices catalogued from FDA filings, manufacturer datasheets, and peer-reviewed papers. Full specs with confidence levels.",
-      "stats_snapshot": { "bci_devices": 24 }
+      "stats_snapshot": {
+        "bci_devices": 24
+      }
     },
     {
       "date": "2026-02-18",
       "type": "release",
       "title": "Brain-BCI Atlas v1.2.0",
       "description": "38 brain structures mapped to BCI devices, QIF bands, neural latency metrics, and physics constraints.",
-      "stats_snapshot": { "brain_regions": 38 }
+      "stats_snapshot": {
+        "brain_regions": 38
+      }
     },
     {
       "date": "2026-02-18",
       "type": "discovery",
       "title": "BCI Limits Equation Synthesized",
       "description": "13 physics constraints unified into a single system coupling thermodynamics, EM, Moore's Law, Shannon safety, Boltzmann detectability, and QIF coherence. No published paper unifies all 13.",
-      "stats_snapshot": { "physics_constraints": 13 }
+      "stats_snapshot": {
+        "physics_constraints": 13
+      }
     },
     {
       "date": "2026-02-18",
@@ -241,7 +267,9 @@
       "type": "discovery",
       "title": "SSVEP Frequency Hijack (T0103)",
       "description": "Novel attack technique: hijacking steady-state visually evoked potentials via imperceptible screen flicker. Validated by Ming et al. (2023). 103rd technique added.",
-      "stats_snapshot": { "threat_techniques": 103 }
+      "stats_snapshot": {
+        "threat_techniques": 103
+      }
     },
     {
       "date": "2026-02-18",
@@ -260,21 +288,27 @@
       "type": "milestone",
       "title": "Neurowall v0.7: Signal Integrity Monitor",
       "description": "3-layer coherence monitor built from v0.1 to v0.7 in a single day. Multi-band EEG, spectral peak detection, CUSUM change detection, ROC analysis. 7/9 attacks detected at 15s, 9/9 at 30s. 14 attack generators in neurosim toolkit.",
-      "stats_snapshot": { "neurowall_version": "v0.7" }
+      "stats_snapshot": {
+        "neurowall_version": "v0.7"
+      }
     },
     {
       "date": "2026-02-21",
       "type": "validation",
       "title": "BrainFlow Real Hardware Validation",
       "description": "First test of Neurowall on actual EEG hardware (OpenBCI Cyton via BrainFlow). 5/5 attacks detected, 0% false positive rate. Coherence monitor works on real signals, not just synthetic.",
-      "stats_snapshot": { "neurowall_version": "v0.7" }
+      "stats_snapshot": {
+        "neurowall_version": "v0.7"
+      }
     },
     {
       "date": "2026-02-21",
       "type": "validation",
       "title": "BCI Limits Equation Cross-Validated (Gemini 2.5 Pro)",
       "description": "12/13 constraints verified correct. 2 corrections applied: mechanical mismatch ratio inverted, Johnson noise temperature corrected to 310K.",
-      "stats_snapshot": { "physics_constants_verified": 14 }
+      "stats_snapshot": {
+        "physics_constants_verified": 14
+      }
     },
     {
       "date": "2026-02-21",
