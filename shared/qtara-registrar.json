@@ -27,13 +27,13 @@
     "by_status": {
       "CONFIRMED": 19,
       "EMERGING": 22,
-      "DEMONSTRATED": 33,
+      "DEMONSTRATED": 34,
       "THEORETICAL": 26,
       "PLAUSIBLE": 1,
       "SPECULATIVE": 1
     },
     "by_severity": {
-      "high": 54,
+      "high": 55,
       "critical": 29,
       "medium": 16,
       "low": 3
