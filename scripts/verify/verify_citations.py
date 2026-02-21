@@ -77,7 +77,12 @@ def verify_entry(entry: dict) -> list[dict]:
     url = entry.get('url', '')
     if url and not doi:
         result = check_url(url)
-        if result.get('status') == 'error':
+        if result.get('status') == 'bot_blocked':
+            details.append({
+                'level': 'warning',
+                'message': f'[{key}] URL bot-blocked (403): {url} — verify manually',
+            })
+        elif result.get('status') == 'error':
             details.append({
                 'level': 'error',
                 'message': f'[{key}] URL unreachable: {url} ({result.get("error", "")})',
