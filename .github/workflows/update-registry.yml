@@ -1,0 +1,51 @@
+name: Update Automation Registry
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-registry
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Update registry from GitHub Actions API
+        id: update
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/update-automation-registry.mjs && echo "changed=true" >> "$GITHUB_OUTPUT" || {
+            exit_code=$?
+            if [ "$exit_code" -eq 2 ]; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              echo "No registry updates needed"
+              exit 0
+            else
+              exit $exit_code
+            fi
+          }
+
+      - name: Commit updated registry
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/automation-registry.json
+          git diff --cached --quiet && exit 0
+          git commit -m "auto: update automation registry"
+          git push

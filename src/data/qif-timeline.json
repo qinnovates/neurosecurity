@@ -1,9 +1,9 @@
 {
   "_metadata": {
     "title": "QIF Project Timeline",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "created": "2026-02-21",
-    "description": "Chronological record of QIF milestones, discoveries, dataset growth, and major updates. Updated when significant changes occur.",
+    "description": "Chronological record of QIF milestones, discoveries, dataset growth, and major updates. Updated when significant changes occur. Automation: scripts/timeline-check.mjs detects staleness.",
     "maintainer": "Kevin Qi"
   },
 
@@ -21,7 +21,13 @@
     "preprint_version": "v1.4",
     "nsp_version": "v0.5",
     "tara_version": "v1.6",
-    "atlas_version": "v1.2.0"
+    "atlas_version": "v1.2.0",
+    "derivation_log_entries": 70,
+    "field_journal_entries": 20,
+    "neurowall_version": "v0.7",
+    "blog_posts": 50,
+    "cross_ai_validations": 9,
+    "research_sources": 165
   },
 
   "milestones": [
@@ -29,14 +35,14 @@
       "date": "2026-01-15",
       "type": "release",
       "title": "TARA v1.0: Initial Atlas Published",
-      "description": "First public release of the Therapeutic Applications & Risk Assessment atlas.",
+      "description": "First public release of the Therapeutic Applications & Risk Assessment atlas. 60 attack techniques. The starting point.",
       "stats_snapshot": { "threat_techniques": 60 }
     },
     {
       "date": "2026-01-18",
       "type": "milestone",
       "title": "ONI Framework Repository Created",
-      "description": "First commit of the original ONI (Open Neural Interface) framework. Predecessor to QIF."
+      "description": "First commit of the original ONI (Open Neural Interface) framework. Predecessor to QIF. 14-layer OSI model. Zero framework, zero scoring, just a question: what does security look like when the endpoint is a human brain?"
     },
     {
       "date": "2026-01-29",
@@ -45,11 +51,17 @@
       "description": "3:56 animated explainer (Remotion + ElevenLabs). L1-L14 visualization, coherence gauge. First public-facing media."
     },
     {
+      "date": "2026-02-01",
+      "type": "milestone",
+      "title": "Qinnovate Website Repository Created",
+      "description": "First commit to the qinnovate.com website. Astro 5.x + React 19 + TailwindCSS 4. The public face of the project."
+    },
+    {
       "date": "2026-02-02",
       "type": "discovery",
       "title": "QIF Born: 14-Layer Model Deprecated, Hourglass Adopted",
       "description": "Single session produced 13 derivation insights. CNF renamed to QIF. 14-layer OSI model (v2.0) deprecated in favor of the 7-band symmetric (3-1-3) hourglass. QIF-TRUTH.md created as canonical source of truth.",
-      "stats_snapshot": { "hourglass_bands": 7 }
+      "stats_snapshot": { "hourglass_bands": 7, "derivation_log_entries": 13 }
     },
     {
       "date": "2026-02-02",
@@ -58,17 +70,29 @@
       "description": "Independent AI peer review by Gemini 2.5 of the hourglass model. Validation pipeline established."
     },
     {
+      "date": "2026-02-03",
+      "type": "discovery",
+      "title": "Hamiltonian Root: QI Grounded in Physics Formalism",
+      "description": "The QI equation grounded in Hamiltonian formalism. Not a heuristic score but a quantity derived from the system's energy landscape. The unifying mathematical root."
+    },
+    {
       "date": "2026-02-06",
       "type": "discovery",
       "title": "L=v/f Unification and 11-Band Model",
-      "description": "Wavelength equation applied to neural security. Government-restricted spectrum attack mapping added. QIF v4.0: 11 bands implemented (N7-N1, I0, S1-S3).",
+      "description": "Wavelength equation applied to neural security. Government-restricted spectrum attack mapping added. QIF v4.0: 11 bands implemented (N7-N1, I0, S1-S3). Five coupling mechanisms identified.",
       "stats_snapshot": { "hourglass_bands": 11 }
     },
     {
       "date": "2026-02-06",
       "type": "milestone",
+      "title": "NSP Formalized: 6-Layer Validation Stack",
+      "description": "Neural Sensory Protocol designed as a 6-layer validation stack. Physics-based authentication using spectral invariants, microstate compliance, and challenge-response. Biological TLS."
+    },
+    {
+      "date": "2026-02-06",
+      "type": "milestone",
       "title": "NSP Goes Post-Quantum",
-      "description": "Neural Sensory Protocol redesigned with ML-KEM/ML-DSA. Harvest-Now-Decrypt-Later threat model adopted. 5 defense layers, Merkle-amortized SPHINCS+ signatures."
+      "description": "Neural data has a decades-long sensitivity window. Harvest-Now-Decrypt-Later threat model adopted. ML-KEM/ML-DSA integrated. 5 defense layers, Merkle-amortized SPHINCS+ signatures."
     },
     {
       "date": "2026-02-06",
@@ -80,26 +104,53 @@
       "date": "2026-02-06",
       "type": "release",
       "title": "Unified Neural Security Taxonomy",
-      "description": "60 attack techniques across 11 MITRE-compatible tactics. First structured BCI threat taxonomy.",
+      "description": "60 attack techniques across 11 MITRE-compatible tactics spanning 7 domains. First structured BCI threat taxonomy.",
       "stats_snapshot": { "threat_techniques": 60 }
+    },
+    {
+      "date": "2026-02-07",
+      "type": "milestone",
+      "title": "NISS Created: BCI-Specific Severity Scoring",
+      "description": "NISS (Neural Impact Scoring System) created because CVSS cannot account for biological reversibility, cognitive integrity impact, or neural tissue interaction. A severity metric built for brains, not servers."
     },
     {
       "date": "2026-02-07",
       "type": "validation",
       "title": "First Multi-Model Validation Cycle",
-      "description": "QwQ-32B, Grok-3, and Gemini independently reviewed QIF framework. Consensus reached on hourglass model validity."
+      "description": "QwQ-32B, Grok-3, DeepSeek-R1, WhiteRabbitNeo, and Gemini independently reviewed QIF framework. Consensus reached on hourglass model validity. 5 errors corrected."
     },
     {
-      "date": "2026-02-09",
-      "type": "discovery",
-      "title": "TARA Reframe: Threat Catalog Becomes Therapeutic Atlas",
-      "description": "Attack techniques reframed as dual-use: every neural attack has a therapeutic analog. Registry transformed from threat catalog to risk-benefit atlas. 18 techniques identified as silicon-only (no therapeutic analog)."
+      "date": "2026-02-07",
+      "type": "milestone",
+      "title": "Project Runemate Conceived",
+      "description": "Runemate DSL conceived: a domain-specific language for neural rendering. 3-pass Gemini review. NSP unification confirmed."
+    },
+    {
+      "date": "2026-02-08",
+      "type": "milestone",
+      "title": "NISS v1.0 Finalized",
+      "description": "Spectral decomposition bridge connects raw neural signals to per-band QI scoring. Every technique scored for neural impact. Replaces CVSS for BCI context.",
+      "stats_snapshot": { "threat_techniques": 65 }
     },
     {
       "date": "2026-02-09",
       "type": "discovery",
       "title": "Dynamical Systems Security: 6 New Attack Classes",
-      "description": "Bifurcation manipulation, basin erosion, strange attractor injection, Lyapunov destabilization, phase space compression, and resonance entrainment identified as novel BCI attack vectors."
+      "description": "Bifurcation manipulation, basin erosion, strange attractor injection, Lyapunov destabilization, phase space compression, and resonance entrainment. Novel BCI attack vectors from dynamical systems theory.",
+      "stats_snapshot": { "threat_techniques": 71 }
+    },
+    {
+      "date": "2026-02-09",
+      "type": "discovery",
+      "title": "TARA Reframe: Threat Catalog Becomes Therapeutic Atlas",
+      "description": "Attack techniques reframed as dual-use: every neural attack has a therapeutic analog. 35-40 therapeutic counterparts, 10 ambiguous, 18 silicon-only. Registry transformed from threat catalog to risk-benefit atlas."
+    },
+    {
+      "date": "2026-02-09",
+      "type": "milestone",
+      "title": "Framework Complete (v1): QIF + NSP + NISS + TARA",
+      "description": "First complete version of the full stack. 50 derivation log entries. 7 days of formal derivation. 4 framework versions. Ready for independent peer review.",
+      "stats_snapshot": { "derivation_log_entries": 50, "threat_techniques": 71 }
     },
     {
       "date": "2026-02-11",
@@ -118,7 +169,8 @@
       "date": "2026-02-13",
       "type": "discovery",
       "title": "TARA-to-DSM-5-TR Diagnostic Mapping",
-      "description": "Neural Impact Chain bridges attack techniques to DSM-5-TR diagnostic codes. Every TARA technique now maps to potential psychiatric outcomes."
+      "description": "Neural Impact Chain bridges attack techniques to DSM-5-TR diagnostic codes. 5 diagnostic clusters, 68 DSM codes mapped. Every TARA technique now maps to potential psychiatric outcomes.",
+      "stats_snapshot": { "dsm5_diagnoses_mapped": 68 }
     },
     {
       "date": "2026-02-13",
@@ -130,19 +182,19 @@
       "date": "2026-02-14",
       "type": "milestone",
       "title": "NSP Core Implementation: Rust ML-KEM + ML-DSA",
-      "description": "Post-quantum handshake implemented in Rust. ML-KEM-768 key exchange and ML-DSA-65 signatures working end-to-end."
+      "description": "Post-quantum handshake implemented in Rust. ML-KEM-768 key exchange and ML-DSA-65 signatures working end-to-end. The cryptographic layer is real code, not just a spec."
     },
     {
       "date": "2026-02-14",
       "type": "milestone",
       "title": "Runemate Forge + NSP Integration Verified",
-      "description": "End-to-end secure neural pipeline: Staves DSL compiles to bytecode, encrypted via NSP session, delivered to target."
+      "description": "End-to-end secure neural pipeline: HTML content compiled to Runemate Staves bytecode, encrypted via NSP post-quantum handshake, decrypted and rendered on target."
     },
     {
       "date": "2026-02-14",
       "type": "release",
       "title": "Zenodo Preprint v1.0 Published",
-      "description": "First public preprint: 28 pages, 6 figures, CC-BY-4.0. DOI: 10.5281/zenodo.18640106"
+      "description": "First public preprint: 28 pages, 6 figures, CC-BY-4.0. DOI: 10.5281/zenodo.18640106. 3 fabricated citations discovered and disclosed."
     },
     {
       "date": "2026-02-16",
@@ -182,26 +234,40 @@
       "date": "2026-02-18",
       "type": "milestone",
       "title": "Physics Feasibility Tiering Complete",
-      "description": "All 102 TARA techniques classified by physics feasibility tier (0=now, 1=near-term, 2=mid-term, 3=far-term, X=no physics gate)."
+      "description": "All 102 TARA techniques classified by physics feasibility tier. 61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 no physics gate."
     },
     {
       "date": "2026-02-18",
       "type": "discovery",
       "title": "SSVEP Frequency Hijack (T0103)",
-      "description": "Novel attack technique: hijacking steady-state visually evoked potentials via screen flicker. 103rd technique added.",
+      "description": "Novel attack technique: hijacking steady-state visually evoked potentials via imperceptible screen flicker. Validated by Ming et al. (2023). 103rd technique added.",
       "stats_snapshot": { "threat_techniques": 103 }
     },
     {
       "date": "2026-02-18",
       "type": "release",
       "title": "Zenodo Preprint v1.4 Published",
-      "description": "NISS score corrections (arithmetic mean), TMS citation fix, dual-use label fix, Sherman & Guillery citation added."
+      "description": "NISS score corrections (arithmetic mean), TMS citation fix, dual-use label fix, Sherman & Guillery citation added. DOI: 10.5281/zenodo.18677997"
     },
     {
       "date": "2026-02-18",
       "type": "milestone",
       "title": "NSP Protocol Spec v0.5 Finalized",
       "description": "Protocol core and handshake complete. 5-layer defense stack, 3 device tiers, power budget validated at 3.25% of 40 mW."
+    },
+    {
+      "date": "2026-02-21",
+      "type": "milestone",
+      "title": "Neurowall v0.7: Signal Integrity Monitor",
+      "description": "3-layer coherence monitor built from v0.1 to v0.7 in a single day. Multi-band EEG, spectral peak detection, CUSUM change detection, ROC analysis. 7/9 attacks detected at 15s, 9/9 at 30s. 14 attack generators in neurosim toolkit.",
+      "stats_snapshot": { "neurowall_version": "v0.7" }
+    },
+    {
+      "date": "2026-02-21",
+      "type": "validation",
+      "title": "BrainFlow Real Hardware Validation",
+      "description": "First test of Neurowall on actual EEG hardware (OpenBCI Cyton via BrainFlow). 5/5 attacks detected, 0% false positive rate. Coherence monitor works on real signals, not just synthetic.",
+      "stats_snapshot": { "neurowall_version": "v0.7" }
     },
     {
       "date": "2026-02-21",
@@ -212,15 +278,33 @@
     },
     {
       "date": "2026-02-21",
+      "type": "milestone",
+      "title": "Validation Dashboard + TARA Badges",
+      "description": "Living validation system tracking cross-AI validation sessions, citation checks, and fact verification. Status badges added to every TARA technique page."
+    },
+    {
+      "date": "2026-02-21",
+      "type": "milestone",
+      "title": "Repository Consolidation: 17 Directories to 8",
+      "description": "Major repo restructure. Autodidactive removed, governance merged, archives cleaned. 11 READMEs and tables of contents written. Neurorights map added to root README."
+    },
+    {
+      "date": "2026-02-21",
       "type": "release",
       "title": "Unified QIF API (/api/qif.json)",
-      "description": "Single endpoint serving all QIF data: 103 threats, 24 devices, 38 brain regions, 13 physics constraints, scoring specs. CORS-enabled, open access."
+      "description": "Single endpoint serving all QIF data: 103 threats, 24 devices, 38 brain regions, 13 physics constraints, scoring specs, timeline. CORS-enabled, open access. ~580 KB."
     },
     {
       "date": "2026-02-21",
       "type": "milestone",
       "title": "BCI Research Hub Launched",
       "description": "Dedicated /bci/ section consolidating hardware explorer, limits equation, security guardrails, and API documentation under one roof."
+    },
+    {
+      "date": "2026-02-21",
+      "type": "milestone",
+      "title": "Automation Registry + Timeline Tracking",
+      "description": "30 automations catalogued (10 active workflows, 8 disabled, 6 scripts, 4 planned). Timeline staleness detection automated. Self-updating registry via daily GitHub Action."
     }
   ]
 }
