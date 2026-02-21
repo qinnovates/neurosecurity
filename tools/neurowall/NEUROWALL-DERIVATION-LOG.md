@@ -1011,6 +1011,8 @@ tools/neurosim/qif-attack-simulator/
 
 ### Motivation
 
+The original goal (see [Field Journal #018](../../blogs/2026-02-21-field-journal-018-building-the-moat-around-the-castle.md)) was to build a security guardrail that can be baked directly into BCIs themselves, not as an external node or add-on. The simulation work is the feasibility test: proving that the coherence monitor approach works before tackling the harder problem of shrinking it down to fit within the thermal, power, and surface area constraints of real BCI hardware (see BCI Limits Equation, Entry 016/017).
+
 All previous testing used our own synthetic EEG generator (`generate_eeg()` in sim.py). This raises a circular validation concern: if the generator and the detector were designed together, they may share blind spots. We needed an independent EEG source to validate that the coherence monitor generalizes.
 
 ### BrainFlow Synthetic Board

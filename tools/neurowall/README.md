@@ -132,7 +132,7 @@ See [NEUROWALL-DERIVATION-LOG.md Entry 009](./NEUROWALL-DERIVATION-LOG.md) for f
 
 ### BrainFlow Independent Validation
 
-Validated against BrainFlow's synthetic board (16-channel, 250Hz) as an independent EEG source not designed with our detector. This confirms the coherence monitor generalizes beyond our own synthetic generator.
+The end goal is a security guardrail baked directly into BCIs, not a separate node (see [Field Journal #018](../../blogs/2026-02-21-field-journal-018-building-the-moat-around-the-castle.md)). This simulation work validates that the approach is feasible before tackling hardware constraints (thermal budget, chip surface area, power). Validated against BrainFlow's synthetic board (16-channel, 250Hz) as an independent EEG source not designed with our detector. This confirms the coherence monitor generalizes beyond our own synthetic generator.
 
 | Metric | Result |
 |--------|--------|
