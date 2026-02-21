@@ -165,7 +165,9 @@ def check_blog(path: Path) -> dict:
             continue
 
         result = check_url(url)
-        if result.get('status') != 'ok':
+        if result.get('status') == 'bot_blocked':
+            warnings.append(f'URL bot-blocked (403): {url} — verify manually')
+        elif result.get('status') != 'ok':
             code = result.get('code', '')
             errors.append(f'Dead URL ({code}): {url}')
 

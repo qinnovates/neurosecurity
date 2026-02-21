@@ -23,6 +23,15 @@ RATE_LIMIT_SECONDS = 0.5
 
 USER_AGENT = 'QInnovate-VerifyBot/1.0 (citation verification; mailto:noreply@qinnovate.com)'
 
+# Domains that block automated requests (403). Treat as warnings, not errors.
+BOT_BLOCKED_DOMAINS = {
+    'congress.gov',
+    'iso.org',
+    'mitpress.mit.edu',
+    'neurology.mhmedical.com',
+    'mhmedical.com',
+}
+
 
 def _rate_limit():
     """Enforce minimum delay between HTTP requests."""
@@ -147,6 +156,16 @@ def resolve_arxiv(eprint: str) -> Optional[dict]:
         return result
 
 
+def _is_bot_blocked(url: str) -> bool:
+    """Check if URL belongs to a domain known to block bots."""
+    try:
+        from urllib.parse import urlparse
+        host = urlparse(url).hostname or ''
+        return any(host == d or host.endswith('.' + d) for d in BOT_BLOCKED_DOMAINS)
+    except Exception:
+        return False
+
+
 def check_url(url: str) -> dict:
     """Check if URL is reachable. HEAD then GET fallback."""
     cached = cache_get(f'url:{url}')
@@ -163,7 +182,10 @@ def check_url(url: str) -> dict:
                 return result
         except urllib.error.HTTPError as e:
             if method == 'GET':
-                result = {'status': 'error', 'code': e.code, 'error': str(e)}
+                if e.code == 403 and _is_bot_blocked(url):
+                    result = {'status': 'bot_blocked', 'code': 403, 'error': f'Bot-blocked (known domain)'}
+                else:
+                    result = {'status': 'error', 'code': e.code, 'error': str(e)}
                 cache_set(f'url:{url}', result)
                 return result
         except (urllib.error.URLError, Exception) as e:
