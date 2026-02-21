@@ -1,6 +1,6 @@
-# Engineering Blueprint: Wearable Neural Firewall L1/L2
+# Engineering Blueprint: Neurowall L1/L2
 
-This document details the signal processing chain for the **QIF Neural Firewall** on non-intrusive wearables.
+This document details the signal processing chain for **Neurowall** on non-intrusive wearables.
 
 ## 1. Signal Acquisition Pipeline (L1)
 

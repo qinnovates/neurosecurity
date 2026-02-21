@@ -1,6 +1,6 @@
-# Wearable Neural Firewall
+# Neurowall
 
-> **QIF Module — Brain Firewall**
+> **QIF Module — Neurowall**
 > **Status:** Phase 1 Architecture (Design-Complete)
 > **Date:** 2026-02-21
 > **Authors:** Kevin Qi, Antigravity (Gemini)
@@ -10,7 +10,7 @@
 
 ## What is this?
 
-The **Wearable Neural Firewall** is a hardware-level security architecture for non-intrusive BCI wearables — specifically smart glasses (temporal dry EEG/EOG) and subvocal collars (jawline EMG, e.g. MIT AlterEgo).
+**Neurowall** is a hardware-level security architecture for non-intrusive BCI wearables — specifically smart glasses (temporal dry EEG/EOG) and subvocal collars (jawline EMG, e.g. MIT AlterEgo).
 
 It provides three concentric defense layers:
 1. **Signal Boundary (L1)** — Prevents hardware-level signal injection and SSVEP-based adversarial attacks.
@@ -21,8 +21,8 @@ It provides three concentric defense layers:
 
 | Document | Description |
 | :--- | :--- |
-| [BRAIN_FIREWALL_ARCHITECTURE.md](./BRAIN_FIREWALL_ARCHITECTURE.md) | High-level system design, threat model, and 3-layer defense strategy. |
-| [BRAIN_FIREWALL_ENGINEERING.md](./BRAIN_FIREWALL_ENGINEERING.md) | Signal chain schematics, compression spec, Merkle amortization, and Rust pseudocode. |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | High-level system design, threat model, and 3-layer defense strategy. |
+| [ENGINEERING.md](./ENGINEERING.md) | Signal chain schematics, compression spec, Merkle amortization, and Rust pseudocode. |
 | [NECKBAND_BLUEPRINT.md](./NECKBAND_BLUEPRINT.md) | Behind-the-neck wearable form factor: ground electrode + security processor + OpenBCI integration. |
 | [MVP_PROTOTYPE.md](./MVP_PROTOTYPE.md) | Phase 0/1 prototype plan, BOM, and critical gaps from Gemini review. |
 | [TESTING.md](./TESTING.md) | Test strategy and validation plan. |
@@ -42,7 +42,7 @@ It provides three concentric defense layers:
 
 - **Entry 68** (QIF-DERIVATION-LOG): Guardrails Synthesis — physics layer as boundary, not control.
 - **Entry 69**: NIST/ISO Hardened Compliance Mapping tied to neurorights.
-- **[Entry 70](../qif-framework/QIF-DERIVATION-LOG.md#entry-70-wearable-neural-firewall)**: Wearable Neural Firewall — full derivation chain.
+- **[Entry 70](../qif-framework/QIF-DERIVATION-LOG.md#entry-70-wearable-neural-firewall)**: Neurowall — full derivation chain.
 
 ## Next Steps
 

@@ -1,8 +1,8 @@
-# Brain Firewall — MVP Prototype Plan
+# Neurowall — MVP Prototype Plan
 
 > **Multi-AI Review:** Architecture validated by Gemini 2.5 (2026-02-21) via Gemini CLI.
 > **Status:** Lab Prototype — no human subjects required for MVP.
-> **Related docs:** [ARCHITECTURE.md](./BRAIN_FIREWALL_ARCHITECTURE.md) | [ENGINEERING.md](./BRAIN_FIREWALL_ENGINEERING.md) | [TESTING.md](./TESTING.md)
+> **Related docs:** [ARCHITECTURE.md](./ARCHITECTURE.md) | [ENGINEERING.md](./ENGINEERING.md) | [TESTING.md](./TESTING.md)
 
 ---
 

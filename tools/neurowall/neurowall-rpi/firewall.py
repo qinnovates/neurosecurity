@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-brain-firewall-rpi/firewall.py
+neurowall-rpi/firewall.py
 Raspberry Pi 4B — Layer 2 (Privacy) + Layer 3 (Policy) + NSP Transport
 
 Reads filtered EMG/EEG samples from Arduino Nano over UART.
@@ -15,7 +15,7 @@ Phase 1: Replace NSP_KEY derivation with liboqs ML-KEM-768.
 Dependencies:
     pip install pyserial cryptography lz4 numpy
 
-See: brain-firewall/BLUEPRINT.md for full setup and wiring guide.
+See: neurowall/BLUEPRINT.md for full setup and wiring guide.
 """
 
 import serial
@@ -100,7 +100,7 @@ def main():
     window: List[float] = []
     current_epsilon = DP_EPSILON
 
-    print("=== Brain Firewall v0.1 — Phase 0 (RPi + Arduino) ===")
+    print("=== Neurowall v0.1 — Phase 0 (RPi + Arduino) ===")
     print(f"UART: {SERIAL_PORT} @ {BAUD_RATE} baud")
     print(f"Default ε={DP_EPSILON} | Policy threshold: NISS_BIO > {policy.niss_threshold}")
     print("Waiting for signal...\n")
