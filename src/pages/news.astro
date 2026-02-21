@@ -7,11 +7,20 @@ import { getPostDate, readingTime, cleanTag } from '../lib/utils';
 import { fetchExternalNews } from '../lib/fetch-feeds';
 import type { FeedItem, PublicationItem, BriefItem } from '../lib/feed-types';
 
-// --- Build all three streams ---
+// --- Build all streams ---
 
-// 1. Blog posts → PublicationItem[]
+// 1. Blog posts → PublicationItem[] (split field journals from regular posts)
 const allPosts = await getCollection('blog');
-const publicationItems: PublicationItem[] = allPosts.map((post) => {
+
+function isFieldJournal(post: typeof allPosts[0]): boolean {
+  return post.data.tags.some((t: string) => t.toLowerCase().replace('#', '') === 'fieldjournal')
+    || post.id.includes('field-journal');
+}
+
+const regularPosts = allPosts.filter((p) => !isFieldJournal(p));
+const fieldJournalPosts = allPosts.filter((p) => isFieldJournal(p));
+
+const publicationItems: PublicationItem[] = regularPosts.map((post) => {
   const body = post.body || '';
   const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
   return {
@@ -24,6 +33,23 @@ const publicationItems: PublicationItem[] = allPosts.map((post) => {
     readTime: readingTime(body),
   };
 });
+
+const fieldJournalItems: PublicationItem[] = fieldJournalPosts
+  .map((post) => {
+    const body = post.body || '';
+    const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
+    return {
+      type: 'publication' as const,
+      title: post.data.title,
+      date: getPostDate(post.data),
+      slug: post.id,
+      excerpt,
+      tags: post.data.tags.map(cleanTag),
+      readTime: readingTime(body),
+      source: post.data.source,
+    };
+  })
+  .sort((a, b) => a.date.localeCompare(b.date));
 
 // 2. Intelligence briefs → BriefItem[]
 const briefItems: BriefItem[] = briefs.map((brief) => {
@@ -65,6 +91,7 @@ const allItems: FeedItem[] = [
   ...extContent,
   ...remainingOwn,
 ];
+const totalCount = allItems.length + fieldJournalItems.length;
 
 // Category mapping for blog tags
 function inferCategory(tags: string[]): string {
@@ -96,13 +123,19 @@ function inferCategory(tags: string[]): string {
       data-filter="all"
       class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30"
     >
-      All ({allItems.length})
+      All ({totalCount})
     </button>
     <button
       data-filter="publication"
       class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
     >
       Qinnovate ({publicationItems.length})
+    </button>
+    <button
+      data-filter="field-journal"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+    >
+      Field Journals ({fieldJournalItems.length})
     </button>
     <button
       data-filter="brief"
@@ -132,7 +165,7 @@ function inferCategory(tags: string[]): string {
   </div>
 
   <!-- Featured blog posts -->
-  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">From Qinnovate</h2>
+  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">From Qinnovate</h2>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-12" id="feed-featured">
     {featuredBlogs.map((item) => {
       const dataCategory = inferCategory(item.tags);
@@ -145,7 +178,7 @@ function inferCategory(tags: string[]): string {
   </div>
 
   <!-- Industry news + remaining content -->
-  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal">Industry &amp; Research</h2>
+  <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">Industry &amp; Research</h2>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-grid">
     {[...extContent, ...remainingOwn].map((item) => {
       const dataType = item.type;
@@ -161,6 +194,68 @@ function inferCategory(tags: string[]): string {
         </div>
       );
     })}
+  </div>
+
+  <!-- Field Journals -->
+  <div id="feed-journal-section">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2 mt-12 reveal section-heading">Field Journals</h2>
+    <p class="text-sm text-[var(--color-text-muted)] mb-6 reveal">
+      First-person research observations from the <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">QIF Field Journal</a>. These entries were originally written on the dates shown and retroactively published as blog posts.
+    </p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-journals">
+      {fieldJournalItems.map((item) => {
+        const source = (item as any).source;
+        const dateObj = new Date(item.date);
+        const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        return (
+          <div data-type="field-journal" data-category="research">
+            <a href={`/publications/${item.slug}/`} class="block group">
+              <article class="glass rounded-xl p-6 card-hover h-full flex flex-col" style="border-left: 3px solid var(--color-accent-secondary);">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="text-[10px] font-semibold px-2 py-0.5 rounded-full border"
+                      style="color: var(--color-accent-secondary); border-color: var(--color-accent-secondary); background: color-mix(in srgb, var(--color-accent-secondary) 8%, transparent);"
+                    >
+                      Field Journal
+                    </span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
+                      Retroactively published
+                    </span>
+                  </div>
+                  <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] shrink-0">
+                    {formattedDate}
+                  </span>
+                </div>
+                <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
+                  {item.title}
+                </h3>
+                <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 line-clamp-2 flex-1">
+                  {item.excerpt}
+                </p>
+                <div class="flex items-center gap-3 text-xs text-[var(--color-text-faint)] mt-auto pt-3 border-t border-[var(--color-border)]">
+                  <span>{item.readTime}</span>
+                  {source && (
+                    <a
+                      href={source}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="ml-auto text-[var(--color-accent-primary)] hover:underline flex items-center gap-1"
+                      onclick="event.stopPropagation();"
+                    >
+                      Original source
+                      <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </article>
+            </a>
+          </div>
+        );
+      })}
+    </div>
   </div>
 
   <!-- Intelligence Sources (collapsed) -->
@@ -245,10 +340,12 @@ function inferCategory(tags: string[]): string {
   const buttons = document.querySelectorAll<HTMLButtonElement>('.feed-btn');
   const featuredCards = document.querySelectorAll<HTMLElement>('#feed-featured > div');
   const gridCards = document.querySelectorAll<HTMLElement>('#feed-grid > div');
-  const allCards = [...featuredCards, ...gridCards];
+  const journalCards = document.querySelectorAll<HTMLElement>('#feed-journals > div');
+  const allCards = [...featuredCards, ...gridCards, ...journalCards];
   const featuredSection = document.getElementById('feed-featured');
   const gridSection = document.getElementById('feed-grid');
-  const sectionHeadings = document.querySelectorAll<HTMLElement>('h2.font-\\[family-name\\:var\\(--font-heading\\)\\]');
+  const journalSection = document.getElementById('feed-journal-section');
+  const sectionHeadings = document.querySelectorAll<HTMLElement>('.section-heading');
 
   const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
   const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
@@ -263,20 +360,49 @@ function inferCategory(tags: string[]): string {
       });
       btn.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
 
-      // Show/hide section headings based on filter
-      const showSections = filter === 'all';
-      sectionHeadings.forEach((h) => h.style.display = showSections ? '' : 'none');
+      // Show/hide sections based on filter
+      const showAll = filter === 'all';
+      sectionHeadings.forEach((h) => h.style.display = showAll ? '' : 'none');
 
-      // Filter cards across both grids
-      allCards.forEach((card) => {
+      // Journal section: visible on 'all' and 'field-journal'
+      if (journalSection) {
+        const journalDesc = journalSection.querySelector('p');
+        if (filter === 'all' || filter === 'field-journal') {
+          journalSection.style.display = '';
+          if (journalDesc) journalDesc.style.display = '';
+          // Show heading for field-journal filter too
+          const journalHeading = journalSection.querySelector('.section-heading') as HTMLElement;
+          if (journalHeading) journalHeading.style.display = '';
+        } else {
+          journalSection.style.display = 'none';
+        }
+      }
+
+      // Featured + grid sections: hide when field-journal is selected
+      if (featuredSection) {
+        featuredSection.style.display = filter === 'field-journal' ? 'none' : '';
+      }
+      if (gridSection) {
+        gridSection.style.display = filter === 'field-journal' ? 'none' : '';
+      }
+
+      // Filter cards in featured + grid
+      [...featuredCards, ...gridCards].forEach((card) => {
         if (filter === 'all') {
           card.style.display = '';
+        } else if (filter === 'field-journal') {
+          card.style.display = 'none';
         } else if (filter.startsWith('cat-')) {
           const catId = filter.slice(4);
           card.style.display = card.dataset.category === catId ? '' : 'none';
         } else {
           card.style.display = card.dataset.type === filter ? '' : 'none';
         }
+      });
+
+      // Journal cards: show on 'all' and 'field-journal', hide otherwise
+      journalCards.forEach((card) => {
+        card.style.display = (filter === 'all' || filter === 'field-journal') ? '' : 'none';
       });
     });
   });
