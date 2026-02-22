@@ -314,6 +314,12 @@ qinnovates/qinnovate/
 |---------|-------------|
 | **Project Firefly** | Privacy-first journaling app for kids. Local-first architecture, COPPA/GDPR compliant. (Private, in development) |
 
+### Learning Resources
+
+**[Autodidactive](docs/learn/autodidactive/)** — A standalone, mobile-first daily learning app covering 45 historical figures across 7 disciplines: Polymaths, Philosophy, Neuroethics, Neuroscience, Quantum Mechanics, Cybersecurity, and Calculus (3 interactive labs). Features daily discovery (seeded PRNG), spaced repetition (SM-2), a free-placement post-it note wall, and bookmarking. Pure HTML/CSS/JS with zero dependencies — open [index.html](docs/learn/autodidactive/index.html) or view the [README](docs/learn/autodidactive/README.html). PWA-ready.
+
+**[Minds That Made History](https://qinnovate.com/learning/)** — The original single-page interactive reference covering polymaths, philosophers, and neuroethics pioneers across 2,500 years. Autodidactive expands on this with new disciplines, daily learning features, and a mobile-first design.
+
 ---
 
 ## Collaboration
