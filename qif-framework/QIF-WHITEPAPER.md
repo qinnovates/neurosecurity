@@ -1,5 +1,9 @@
 # QIF Whitepaper v6.3.0
 
+What security risks actually do is create a two-tier market. Companies that move fast and ignore security capture market share. Companies that take security seriously move slower and lose market share. The incentive structure rewards recklessness until a disaster forces regulation, and by then the reckless architecture is entrenched and the retrofit costs 10x what building it right would have cost.
+
+That's exactly what happened with the internet. Move fast, break things, deal with security later. We're still paying for that decision 30 years later.
+
 ## QIF: Quantified Interconnection Framework for Neural Security
 
 ### A Unified Physics-Based Security Architecture for Brain-Computer Interfaces
