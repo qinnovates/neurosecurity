@@ -1,8 +1,8 @@
 # QIF Whitepaper v6.3.0
 
-What security risks actually do is create a two-tier market. Companies that move fast and ignore security capture market share. Companies that take security seriously move slower and lose market share. The incentive structure rewards recklessness until a disaster forces regulation, and by then the reckless architecture is entrenched and the retrofit costs 10x what building it right would have cost.
+The internet was built without security. That wasn't a mistake. It was necessary. The priority was connectivity, and it worked. But retrofitting security after the architecture was entrenched has cost trillions of dollars and decades of effort, and we're still not done.
 
-That's exactly what happened with the internet. Move fast, break things, deal with security later. We're still paying for that decision 30 years later.
+BCI technology is early enough that we don't have to repeat that. If we could rebuild the internet knowing what we know now, we'd harden it from the start. The brain deserves at least that much forethought. QIF exists so that security is part of the foundation, not an afterthought bolted on after the first breach.
 
 ## QIF: Quantified Interconnection Framework for Neural Security
 
