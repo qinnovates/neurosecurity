@@ -4,7 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 6dde426b1cbe06859dce84715043fe70d02a5377 -->
+<!-- changelog-marker: d6e2ba43e7a0391954735e6a9279fc06d1bf2814 -->
+
+## 2026-02-22
+
+### Docs
+- update README tables with current versions and new components ([d6e2ba4](https://github.com/qinnovates/qinnovate/commit/d6e2ba4))
+
 
 ## 2026-02-21
 
