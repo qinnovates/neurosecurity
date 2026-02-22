@@ -81,7 +81,8 @@ This is early-stage research by a solo researcher. Empirical validation requires
 |-----------|-------------|--------|
 | **[Neurowall](./tools/neurowall/)** | Neural firewall neckband (coherence + differential privacy + NISS + policy engine) | 🟡 v0.8 |
 | Neckband hardware | Physical behind-the-neck wearable for Neurowall | 🔵 Planned |
-| **[macshield](./tools/macshield/)** | macOS workstation hardening for public WiFi | 🟢 Active |
+| **[macshield](./tools/macshield/)** | macOS workstation hardening for public WiFi (self-integrity check, port scanner, audit) | 🟢 v0.4.1 |
+| **[KQL Database](https://qinnovate.com/bci/landscape/)** | BCI industry landscape, device specs, investment intel (23 companies, 31 devices) | 🟢 Live |
 | neurosim | Simulated BCI attack/defense environment | 🟡 In Progress |
 
 ### Governance
@@ -90,6 +91,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 |-----------|-------------|--------|
 | **[Doc suite](https://qinnovate.com/governance/)** | Neuroethics, consent, regulatory compliance, accessibility | 🟢 Published |
 | **[Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)** | Unified: neurorights mapping, UNESCO alignment, GRC gaps, convergence strategy | 🟢 Published |
+| **[Policy Proposal](governance/NEUROSECURITY_POLICY_PROPOSAL.md)** | "Closing the Neurosecurity Gap": 6 recommendations for NIST, MITRE, FIRST, IEEE, FDA, UNESCO | 🟢 v1.2 |
 | Regulatory-as-Code | Machine-verifiable compliance via NIST/ISO control codes | 🔵 Planned |
 
 ### Academic
@@ -97,6 +99,8 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Preprint published, CC-BY 4.0, LaTeX source included | 🟢 Published |
+| **[Research Sources](qif-framework/QIF-RESEARCH-SOURCES.md)** | Living bibliography: 193 verified sources across 9 domains | 🟢 Active |
+| **[CVE-TARA Mapping](shared/cve-technique-mapping.json)** | 55 NVD-verified CVEs mapped to 21 TARA techniques | 🟢 Published |
 | arXiv | Cross-post of preprint | 🔴 Needs endorsement |
 | Graz BCI Conference | Submission for March 2026 deadline | 🟡 In Progress |
 | LSL CVE | Coordinated vulnerability disclosure (liblsl) | 🟡 Awaiting response |
@@ -269,13 +273,17 @@ qinnovates/qinnovate/
 ├── shared/                     # Cross-cutting data + tools
 │   ├── qtara-registrar.json    # TARA techniques (CVSS + NISS)
 │   ├── qtara/                  # Python SDK (pip install qtara)
+│   ├── bci-landscape.json      # KQL database (23 companies, 31 devices)
+│   ├── cve-technique-mapping.json # 55 CVEs mapped to TARA techniques
 │   ├── scripts/                # Data pipeline scripts
 │   └── archive/                # Deprecated data files
 │
 ├── paper/                      # Academic publications
 │   └── preprint/               # Zenodo preprint
 │
-├── governance/                 # Neuroethics documents
+├── governance/                 # Neuroethics + policy documents
+│   ├── NEUROSECURITY_GOVERNANCE.md
+│   ├── NEUROSECURITY_POLICY_PROPOSAL.md
 │   └── processes/              # Standards development lifecycle
 │
 ├── INTEGRATION-ROADMAP.md      # Unified NSP + Runemate + Neurowall roadmap
