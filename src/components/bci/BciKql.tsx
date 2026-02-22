@@ -354,7 +354,7 @@ function executeQuery(query: string, tables: TableData): QueryResult {
 const S = {
   container: {
     fontFamily: 'var(--font-sans, system-ui, sans-serif)',
-    color: 'var(--color-text, #e2e8f0)',
+    color: 'var(--color-text-primary, #1f2937)',
   } as React.CSSProperties,
   header: {
     display: 'flex',
@@ -374,7 +374,7 @@ const S = {
     gap: '0.75rem',
     marginBottom: '1rem',
     fontSize: '0.75rem',
-    color: 'var(--color-text-muted, #94a3b8)',
+    color: 'var(--color-text-muted, #4b5563)',
   } as React.CSSProperties,
   statItem: {
     display: 'flex',
@@ -396,8 +396,8 @@ const S = {
     padding: '0.625rem 0.875rem',
     fontSize: '0.875rem',
     fontFamily: 'var(--font-mono, monospace)',
-    background: 'rgba(255,255,255,0.05)',
-    border: '1px solid rgba(255,255,255,0.15)',
+    background: 'rgba(0,0,0,0.03)',
+    border: '1px solid rgba(0,0,0,0.12)',
     borderRadius: '0.5rem',
     color: 'inherit',
     outline: 'none',
@@ -426,17 +426,17 @@ const S = {
   chip: {
     padding: '0.25rem 0.625rem',
     fontSize: '0.75rem',
-    background: 'rgba(255,255,255,0.08)',
-    border: '1px solid rgba(255,255,255,0.12)',
+    background: 'rgba(0,0,0,0.05)',
+    border: '1px solid rgba(0,0,0,0.1)',
     borderRadius: '9999px',
     cursor: 'pointer',
-    color: 'var(--color-text-muted, #94a3b8)',
+    color: 'var(--color-text-muted, #4b5563)',
     transition: 'background 0.15s, border-color 0.15s',
   } as React.CSSProperties,
   chipActive: {
     background: 'rgba(59,130,246,0.2)',
     borderColor: 'rgba(59,130,246,0.4)',
-    color: 'var(--color-text, #e2e8f0)',
+    color: 'var(--color-text-primary, #1f2937)',
   } as React.CSSProperties,
   resultBar: {
     display: 'flex',
@@ -444,8 +444,8 @@ const S = {
     alignItems: 'center',
     padding: '0.5rem 0.75rem',
     fontSize: '0.8125rem',
-    color: 'var(--color-text-muted, #94a3b8)',
-    borderBottom: '1px solid rgba(255,255,255,0.1)',
+    color: 'var(--color-text-muted, #4b5563)',
+    borderBottom: '1px solid rgba(0,0,0,0.08)',
   } as React.CSSProperties,
   error: {
     padding: '1rem',
@@ -457,9 +457,9 @@ const S = {
   } as React.CSSProperties,
   tableWrap: {
     overflowX: 'auto' as const,
-    border: '1px solid rgba(255,255,255,0.1)',
+    border: '1px solid rgba(0,0,0,0.08)',
     borderRadius: '0.75rem',
-    background: 'rgba(255,255,255,0.03)',
+    background: 'rgba(0,0,0,0.02)',
   } as React.CSSProperties,
   table: {
     width: '100%',
@@ -475,7 +475,7 @@ const S = {
     textTransform: 'uppercase' as const,
     letterSpacing: '0.05em',
     color: 'var(--color-accent-primary, #60a5fa)',
-    background: 'rgba(255,255,255,0.06)',
+    background: 'rgba(0,0,0,0.04)',
     borderBottom: '2px solid rgba(59,130,246,0.3)',
     cursor: 'pointer',
     userSelect: 'none' as const,
@@ -483,7 +483,8 @@ const S = {
   } as React.CSSProperties,
   td: {
     padding: '0.375rem 0.75rem',
-    borderBottom: '1px solid rgba(255,255,255,0.05)',
+    borderBottom: '1px solid rgba(0,0,0,0.06)',
+    color: 'var(--color-text-primary, #1f2937)',
     maxWidth: '20rem',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -500,13 +501,13 @@ const S = {
   empty: {
     padding: '2rem',
     textAlign: 'center' as const,
-    color: 'var(--color-text-muted, #94a3b8)',
+    color: 'var(--color-text-muted, #4b5563)',
     fontSize: '0.875rem',
   } as React.CSSProperties,
   syntaxPre: {
     fontFamily: 'var(--font-mono, monospace)',
     fontSize: '0.75rem',
-    background: 'rgba(255,255,255,0.05)',
+    background: 'rgba(0,0,0,0.03)',
     padding: '0.75rem',
     borderRadius: '0.5rem',
     overflowX: 'auto' as const,
@@ -636,7 +637,7 @@ export default function BciKql({ tables }: BciKqlProps) {
             <span style={S.statNum}>{t.count}</span> {t.name}
           </span>
         ))}
-        <span style={{ ...S.statItem, borderLeft: '1px solid rgba(255,255,255,0.15)', paddingLeft: '0.75rem' }}>
+        <span style={{ ...S.statItem, borderLeft: '1px solid rgba(0,0,0,0.12)', paddingLeft: '0.75rem' }}>
           <span style={S.statNum}>{totalRecords}</span> total records
         </span>
       </div>
@@ -697,7 +698,7 @@ export default function BciKql({ tables }: BciKqlProps) {
             </thead>
             <tbody>
               {displayRows.map((row, i) => (
-                <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
+                <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(0,0,0,0.03)' }}>
                   {columns.map(col => (
                     <td key={col} style={S.td}>{formatValue(row[col], col)}</td>
                   ))}
@@ -720,7 +721,7 @@ export default function BciKql({ tables }: BciKqlProps) {
         <summary style={{ cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-text-muted, #94a3b8)' }}>
           Query syntax reference
         </summary>
-        <div style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--color-text-muted, #94a3b8)', lineHeight: 1.6 }}>
+        <div style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--color-text-muted, #4b5563)', lineHeight: 1.6 }}>
           <pre style={S.syntaxPre}>{`table | operator [args] | operator [args] | ...
 
 TABLES:
