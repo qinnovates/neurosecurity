@@ -103,7 +103,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | **[CVE-TARA Mapping](shared/cve-technique-mapping.json)** | 55 NVD-verified CVEs mapped to 21 TARA techniques | 🟢 Published |
 | arXiv | Cross-post of preprint | 🔴 Needs endorsement |
 | Graz BCI Conference | Submission for March 2026 deadline | 🟡 In Progress |
-| LSL CVE | Coordinated vulnerability disclosure (liblsl) | 🟡 Awaiting response |
+| CVE Disclosure | Coordinated vulnerability disclosure (BCI-adjacent library) | 🟡 Awaiting response |
 | Peer review / empirical validation | Requires collaborators, IRB, BCI hardware | 🔴 Blocked |
 
 ### Website

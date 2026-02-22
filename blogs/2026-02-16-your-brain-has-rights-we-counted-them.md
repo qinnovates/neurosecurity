@@ -8,7 +8,7 @@ tags: ["#Neurorights", "#TARA", "#QIF", "#BCI", "#Neuroethics", "#ConsentComplex
 
 ## TL;DR
 
-We mapped all 102 TARA techniques to 4 neurorights from Ienca & Andorno (2017) and built a Consent Complexity Index. QIF extends two of those rights with engineering-level depth: Mental Integrity (with signal dynamics protections) and Mental Privacy (with data-lifecycle protections). QIF also maps these neurorights onto the CIA triad (MP = Confidentiality, MI = Integrity) and provides the first concrete exploit chain (LSL CVE) demonstrating both violations. Three findings you should care about: (1) Four "silicon-only" attacks that supposedly don't touch biology have NISS scores above 6.0 but require only standard consent. (2) Techniques that cause permanent personality changes are classified as "enhanced" consent, not IRB. (3) Two techniques labeled "indirect risk" have NISS scores of 8.1.
+We mapped all 102 TARA techniques to 4 neurorights from Ienca & Andorno (2017) and built a Consent Complexity Index. QIF extends two of those rights with engineering-level depth: Mental Integrity (with signal dynamics protections) and Mental Privacy (with data-lifecycle protections). QIF also maps these neurorights onto the CIA triad (MP = Confidentiality, MI = Integrity) and provides the first concrete exploit chain demonstrating both violations via a disclosed vulnerability in a BCI-adjacent streaming library. Three findings you should care about: (1) Four "silicon-only" attacks that supposedly don't touch biology have NISS scores above 6.0 but require only standard consent. (2) Techniques that cause permanent personality changes are classified as "enhanced" consent, not IRB. (3) Two techniques labeled "indirect risk" have NISS scores of 8.1.
 
 ---
 
@@ -38,7 +38,7 @@ The Ienca-Andorno framework gives us four neurorights: Mental Privacy, Cognitive
 - **Informational Disassociation (IDA)** is the data-lifecycle extension of **Mental Privacy** — folded in.
 - **Cognitive Authenticity (CA)** was initially kept as a QIF original, but on further review, Ienca & Andorno's **Mental Integrity** already covers protection from unauthorized modification of neural function. The read/write distinction we described (MP = reading, CA = writing) maps directly to their existing MP and MI. We were renaming, not discovering. CA is now folded into MI.
 
-This is the academically honest conclusion. Ienca & Andorno got the top-level rights right. QIF's contribution is engineering-level depth on two existing rights, the CIA-triad mapping, and concrete demonstration via the LSL CVE.
+This is the academically honest conclusion. Ienca & Andorno got the top-level rights right. QIF's contribution is engineering-level depth on two existing rights, the CIA-triad mapping, and concrete demonstration via a disclosed vulnerability in a BCI-adjacent streaming library.
 
 ### The Read/Write Distinction: MP vs MI
 
@@ -47,7 +47,7 @@ Ienca & Andorno (2017) already drew this line:
 - **Mental Privacy (MP)** = don't **read** my neural data without consent (confidentiality, exfiltration, re-identification)
 - **Mental Integrity (MI)** = don't **write** into or alter my neural signals without consent (integrity, injection, agency confusion)
 
-QIF's contribution is mapping this to the CIA triad: MP = Confidentiality, MI = Integrity. The LSL CVE demonstrates both in a single exploit chain: Phase 2 (exfiltrate neural data) = MP violation, Phase 3 (inject false signals) = MI violation.
+QIF's contribution is mapping this to the CIA triad: MP = Confidentiality, MI = Integrity. A disclosed vulnerability in a BCI-adjacent streaming library demonstrates both in a single exploit chain: Phase 2 (exfiltrate neural data) = MP violation, Phase 3 (inject false signals) = MI violation.
 
 ### What QIF Adds to Mental Integrity
 
@@ -149,7 +149,7 @@ Three implications:
 
 **For regulators:** Consent tier classifications need a mechanism-vs-impact audit. The CCI can flag mismatches automatically. Every technique where CCI < 1.0 but NISS > 6.0 deserves a second look.
 
-**For the neurorights literature:** Ienca & Andorno's four rights are well-chosen but need engineering-level depth. MI must account for dynamical retuning and signal injection (the "write" side of the CIA triad). MP must account for data-lifecycle threats. QIF provides that engineering depth and maps the neurorights onto the CIA triad, with concrete demonstration via the LSL CVE.
+**For the neurorights literature:** Ienca & Andorno's four rights are well-chosen but need engineering-level depth. MI must account for dynamical retuning and signal injection (the "write" side of the CIA triad). MP must account for data-lifecycle threats. QIF provides that engineering depth and maps the neurorights onto the CIA triad, with concrete demonstration via a disclosed vulnerability in a BCI-adjacent streaming library.
 
 **For BCI developers:** Your consent forms are calibrated to mechanism, not impact. The PINS inversion shows that "silicon-only" is not a proxy for "low risk." If your firmware update pipeline can deliver NISS 7.1 impacts, your consent process should reflect that — regardless of whether the attack vector is biological or digital.
 

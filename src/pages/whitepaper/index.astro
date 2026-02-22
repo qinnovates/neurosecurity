@@ -771,7 +771,7 @@ const tacticColors: Record<string, string> = {
             Every technique in the TARA atlas is now mapped to the affected neurorights through a systematic, multi-layer process: UI category provides the primary signal, DSM-5-TR cluster adds overlays, and NISS vector components refine the result. This mapping is deterministic and reproducible &mdash; the same technique always maps to the same rights.
           </p>
           <p>
-            Running {stats.totalTechniques} techniques through this process confirmed all four established rights from Ienca &amp; Andorno (2017). QIF extends Mental Integrity with engineering-level signal dynamics protections and Mental Privacy with data-lifecycle protections. QIF also maps these neurorights onto the CIA triad (MP = Confidentiality, MI = Integrity) and provides the first concrete exploit chain (LSL CVE) demonstrating both violations. Cross-validated against six established frameworks (Ienca &amp; Andorno 2017, Yuste/NeuroRights Foundation 2017, Chile Law 21.383, UNESCO 2025 Recommendation, Farahany 2023, Bublitz 2022):
+            Running {stats.totalTechniques} techniques through this process confirmed all four established rights from Ienca &amp; Andorno (2017). QIF extends Mental Integrity with engineering-level signal dynamics protections and Mental Privacy with data-lifecycle protections. QIF also maps these neurorights onto the CIA triad (MP = Confidentiality, MI = Integrity) and provides the first concrete exploit chain demonstrating both violations via a disclosed vulnerability in a BCI-adjacent streaming library. Cross-validated against six established frameworks (Ienca &amp; Andorno 2017, Yuste/NeuroRights Foundation 2017, Chile Law 21.383, UNESCO 2025 Recommendation, Farahany 2023, Bublitz 2022):
           </p>
         </div>
 
@@ -793,7 +793,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            <strong>CIA Triad Mapping:</strong> QIF maps Ienca &amp; Andorno's neurorights onto the CIA triad: Mental Privacy = Confidentiality (don't <em>read</em> my neural data), Mental Integrity = Integrity (don't <em>write</em> into my neural signals). The LSL CVE demonstrates both violations in a single exploit chain: Phase 2 (exfiltrate neural data) = MP violation, Phase 3 (inject false signals) = MI violation.
+            <strong>CIA Triad Mapping:</strong> QIF maps Ienca &amp; Andorno's neurorights onto the CIA triad: Mental Privacy = Confidentiality (don't <em>read</em> my neural data), Mental Integrity = Integrity (don't <em>write</em> into my neural signals). A disclosed vulnerability in a BCI-adjacent streaming library demonstrates both violations in a single exploit chain: Phase 2 (exfiltrate neural data) = MP violation, Phase 3 (inject false signals) = MI violation.
           </p>
           <p>
             <strong>Mental Integrity (MI) &mdash; QIF Extended:</strong> Now includes signal dynamics protections. Some attacks don't break neural function; they <em>retune</em> it. Gradual drift, neurofeedback falsification, and baseline adaptation poisoning reshape the brain's homeostatic equilibrium. QIF extends MI with engineering-level specifications for detecting these dynamical retuning attacks. {stats.neurorights.rights.find(r => r.id === 'MI')?.count} techniques map to MI.

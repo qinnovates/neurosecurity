@@ -119,7 +119,7 @@ export const GOVERNING_BODIES: GoverningBody[] = [
     neurotechEngagement: 'none',
     securityEngagement: 'comprehensive',
     bridgePotential: 'high',
-    gap: 'No ATT&CK sub-matrix for neural devices. No BCI-specific CVEs (except LSL, disclosed Feb 2026).',
+    gap: 'No ATT&CK sub-matrix for neural devices. No BCI-specific CVEs (one BCI-adjacent vulnerability disclosed Feb 2026).',
     convergenceAsk: 'Create an ATT&CK sub-matrix for neural devices using TARA as seed taxonomy.',
   },
   {
