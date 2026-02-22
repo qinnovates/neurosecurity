@@ -1,12 +1,12 @@
 ---
-title: Whitepaper Working Draft
+title: QIF Scientific Hypotheses
 date: 2026-02-21
-type: draft
+type: research
 ---
 
-# Whitepaper Working Draft: Kevin's Raw Notes
+# QIF Scientific Hypotheses
 
-> **Purpose:** Raw notes, thesis ideas, and unpolished writing from Kevin's Feb 21 derivation session (Entries 74-78). Material for whitepaper intro, blogs, masters application essays, and future publications. NOT for direct inclusion in the whitepaper without editing.
+> **Purpose:** Novel hypotheses derived during the Feb 21 derivation session (Entries 74-78). Foundation for a future standalone paper on the determinism gradient and neurorights-as-dynamical-operations. Raw notes preserved as the derivation record.
 >
 > **Date:** 2026-02-21
 > **Source:** Live derivation session, Kevin's verbatim words
