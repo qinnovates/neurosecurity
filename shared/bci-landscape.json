@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "generated": "2026-02-21",
   "description": "Comprehensive BCI industry landscape tracker. Tracks companies, devices, security posture, funding, regulatory milestones, and publication trends. Part of the QIF project's mission to map the BCI security gap.",
   "companies": [
@@ -10,11 +10,35 @@
       "headquarters": "Fremont, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 680000000,
+      "funding_total_usd": 1290000000,
+      "valuation_usd": 9000000000,
       "employees_approx": 400,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Implantable N1 chip with 1024 electrodes and wireless BLE telemetry. FDA IDE approved May 2023. First human implant Jan 2024. ~3 patients enrolled in PRIME study.",
-      "tara_attack_surface": ["T0001","T0003","T0005","T0008","T0010","T0015","T0021","T0023","T0025","T0030","T0041","T0043","T0045","T0048","T0061","T0063","T0065","T0081","T0085","T0090","T0095","T0100"],
+      "tara_attack_surface": [
+        "T0001",
+        "T0003",
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0015",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0030",
+        "T0041",
+        "T0043",
+        "T0045",
+        "T0048",
+        "T0061",
+        "T0063",
+        "T0065",
+        "T0081",
+        "T0085",
+        "T0090",
+        "T0095",
+        "T0100"
+      ],
       "devices": [
         {
           "name": "N1 Chip",
@@ -40,7 +64,8 @@
           "target_use": "medical",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "growth_stage"
     },
     {
       "name": "Synchron",
@@ -49,11 +74,24 @@
       "headquarters": "Brooklyn, New York, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 145000000,
+      "funding_total_usd": 345000000,
       "employees_approx": 120,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. ~10 patients.",
-      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0061","T0063","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0001",
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0041",
+        "T0043",
+        "T0061",
+        "T0063",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "Stentrode",
@@ -67,7 +105,8 @@
           "target_use": "medical",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "growth_stage"
     },
     {
       "name": "Blackrock Neurotech",
@@ -76,11 +115,26 @@
       "headquarters": "Salt Lake City, Utah, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 10000000,
+      "funding_total_usd": 210000000,
+      "valuation_usd": 350000000,
       "employees_approx": 60,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Utah Array is the most implanted cortical electrode in history (35+ patients since 2004). Used in BrainGate clinical trials.",
-      "tara_attack_surface": ["T0001","T0003","T0005","T0008","T0010","T0021","T0023","T0041","T0043","T0045","T0061","T0063","T0081"],
+      "tara_attack_surface": [
+        "T0001",
+        "T0003",
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0045",
+        "T0061",
+        "T0063",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "NeuroPort / Utah Array",
@@ -106,7 +160,8 @@
           "target_use": "medical",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "growth_stage"
     },
     {
       "name": "Precision Neuroscience",
@@ -115,11 +170,22 @@
       "headquarters": "New York, New York, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 102000000,
+      "funding_total_usd": 183000000,
+      "valuation_usd": 500000000,
       "employees_approx": 80,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Layer 7 thin-film electrode array with 1024 channels. Minimally invasive placement (sits on cortical surface).",
-      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0023","T0041","T0043","T0061","T0081"],
+      "tara_attack_surface": [
+        "T0001",
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0061",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "Layer 7 Cortical Interface",
@@ -133,7 +199,8 @@
           "target_use": "medical",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "growth_stage"
     },
     {
       "name": "Paradromics",
@@ -142,11 +209,22 @@
       "headquarters": "Austin, Texas, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 33000000,
+      "funding_total_usd": 127000000,
       "employees_approx": 40,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Connexus DDI targets 65,000 electrode channels. Pre-clinical.",
-      "tara_attack_surface": ["T0001","T0003","T0005","T0008","T0021","T0023","T0041","T0043","T0061","T0081"],
+      "tara_attack_surface": [
+        "T0001",
+        "T0003",
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0061",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "Connexus Direct Data Interface",
@@ -160,7 +238,8 @@
           "target_use": "medical",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "growth_stage"
     },
     {
       "name": "BrainGate",
@@ -173,7 +252,16 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Research consortium (Brown, Stanford, MGH, Case Western). Uses Blackrock Utah Array. Academic research, not commercial. 15+ patients since 2004.",
-      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0023","T0041","T0061","T0081"],
+      "tara_attack_surface": [
+        "T0001",
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0061",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "BrainGate System (Utah Array)",
@@ -187,7 +275,8 @@
           "target_use": "research",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "research_consortium"
     },
     {
       "name": "Emotiv",
@@ -196,11 +285,25 @@
       "headquarters": "San Francisco, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 15000000,
+      "funding_total_usd": 12000000,
       "employees_approx": 80,
       "security_posture": "basic_encryption",
       "security_notes": "Consumer EEG. Claims AES-128 encryption for data transfer. Cloud platform for data storage. No formal security audit published. Chile Supreme Court ruled against Emotiv in 2023 neurodata privacy case.",
-      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0027","T0030","T0041","T0043","T0081","T0085","T0095"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0027",
+        "T0030",
+        "T0041",
+        "T0043",
+        "T0081",
+        "T0085",
+        "T0095"
+      ],
       "devices": [
         {
           "name": "EPOC X",
@@ -238,7 +341,8 @@
           "target_use": "enterprise",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "established"
     },
     {
       "name": "NeuroSky",
@@ -251,7 +355,15 @@
       "employees_approx": 30,
       "security_posture": "minimal_claims",
       "security_notes": "Consumer EEG with millions of units sold. MindWave single-channel headset. Minimal security documentation. Bluetooth LE.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "MindWave Mobile 2",
@@ -265,7 +377,8 @@
           "target_use": "consumer",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "established"
     },
     {
       "name": "InteraXon (Muse)",
@@ -278,7 +391,17 @@
       "employees_approx": 50,
       "security_posture": "basic_encryption",
       "security_notes": "Consumer meditation/sleep EEG. Claims Bluetooth encryption. Cloud platform with user accounts. No formal security audit published.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0041",
+        "T0043",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "Muse 2",
@@ -304,7 +427,8 @@
           "target_use": "consumer",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "established"
     },
     {
       "name": "OpenBCI",
@@ -313,11 +437,21 @@
       "headquarters": "Brooklyn, New York, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 6000000,
+      "funding_total_usd": 2060000,
       "employees_approx": 20,
       "security_posture": "open_source",
       "security_notes": "Open-source hardware and software. Community-auditable. No formal security certifications. Transparent by design.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0043","T0048","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0048",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "Cyton",
@@ -355,7 +489,8 @@
           "target_use": "research",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "startup"
     },
     {
       "name": "NextMind",
@@ -368,7 +503,14 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Visual cortex BCI headband. Acquired by Snap 2022. Product discontinued. No security documentation was ever published.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "NextMind Dev Kit",
@@ -382,7 +524,8 @@
           "target_use": "consumer",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "acquired"
     },
     {
       "name": "Kernel",
@@ -391,11 +534,19 @@
       "headquarters": "Culver City, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 53000000,
+      "funding_total_usd": 158000000,
       "employees_approx": 50,
       "security_posture": "none_published",
       "security_notes": "Research-grade TD-fNIRS helmet. No published security documentation. Bryan Johnson invested $100M+ personally.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0043","T0081"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "Flow",
@@ -409,11 +560,13 @@
           "target_use": "research",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "growth_stage"
     },
     {
       "name": "CTRL-Labs",
       "type": "non_invasive",
+      "modality": "peripheral_emg",
       "founded": "2015",
       "headquarters": "New York, New York, USA",
       "status": "acquired",
@@ -422,7 +575,15 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "EMG wristband reading motor neuron signals. Acquired by Meta 2019 for ~$500M-$1B. Now Meta's neural interface team. No public BCI security docs.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "EMG Wristband (Meta Neural Interface)",
@@ -436,7 +597,8 @@
           "target_use": "consumer",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "acquired"
     },
     {
       "name": "Merge Labs",
@@ -445,11 +607,19 @@
       "headquarters": "San Francisco, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": null,
+      "funding_total_usd": 252000000,
+      "valuation_usd": 850000000,
       "employees_approx": 10,
       "security_posture": "none_published",
       "security_notes": "Early-stage. BCI headphones concept. No security information available.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "Merge BCI Headphones",
@@ -463,7 +633,8 @@
           "target_use": "consumer",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "startup"
     },
     {
       "name": "AlterEgo (MIT Media Lab)",
@@ -476,7 +647,15 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Academic research prototype. Subvocalization via jaw/face EMG. 92% word accuracy. No security analysis published.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "AlterEgo Subvocalization Interface",
@@ -490,7 +669,8 @@
           "target_use": "research",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "research_lab"
     },
     {
       "name": "Neurosity",
@@ -503,7 +683,18 @@
       "employees_approx": 15,
       "security_posture": "basic_encryption",
       "security_notes": "Claims on-device processing and encryption. SDK published. BLE communication. No formal security audit.",
-      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0041","T0043","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0041",
+        "T0043",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "Crown",
@@ -517,7 +708,8 @@
           "target_use": "consumer",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "startup"
     },
     {
       "name": "BrainCo",
@@ -526,11 +718,25 @@
       "headquarters": "Somerville, Massachusetts, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 25000000,
+      "funding_total_usd": 370000000,
+      "valuation_usd": 1300000000,
       "employees_approx": 100,
       "security_posture": "minimal_claims",
       "security_notes": "Deployed EEG headbands in Chinese classrooms for attention monitoring. Major privacy concerns. Cloud data processing. Minimal security documentation.",
-      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0030","T0041","T0043","T0081","T0085","T0095"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0030",
+        "T0041",
+        "T0043",
+        "T0081",
+        "T0085",
+        "T0095"
+      ],
       "devices": [
         {
           "name": "Focus 1",
@@ -544,7 +750,8 @@
           "target_use": "enterprise",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "growth_stage"
     },
     {
       "name": "Nihon Kohden",
@@ -557,7 +764,19 @@
       "employees_approx": 5800,
       "security_posture": "regulatory_compliance",
       "security_notes": "Major medical device manufacturer. Subject to FDA cybersecurity requirements, IEC 62443, HIPAA. Limited public BCI-specific security documentation.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0045","T0061","T0063","T0081"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0041",
+        "T0043",
+        "T0045",
+        "T0061",
+        "T0063",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "EEG-1200 (Neurofax)",
@@ -571,7 +790,8 @@
           "target_use": "medical",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "public"
     },
     {
       "name": "Natus Medical (Integra LifeSciences)",
@@ -584,7 +804,22 @@
       "employees_approx": null,
       "security_posture": "regulatory_compliance",
       "security_notes": "CRITICAL: Xltek EEG has KNOWN CVEs (CVE-2017-2853, 2867, 2868, 2869). One of the ONLY neurotech companies with publicly disclosed vulnerabilities. ICS-CERT advisories published.",
-      "tara_attack_surface": ["T0005","T0008","T0010","T0021","T0023","T0025","T0030","T0041","T0043","T0045","T0061","T0063","T0081","T0085"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0030",
+        "T0041",
+        "T0043",
+        "T0045",
+        "T0061",
+        "T0063",
+        "T0081",
+        "T0085"
+      ],
       "devices": [
         {
           "name": "Xltek EEG System",
@@ -596,9 +831,15 @@
           "first_human": null,
           "price_usd": 60000,
           "target_use": "medical",
-          "cves_known": ["CVE-2017-2853","CVE-2017-2867","CVE-2017-2868","CVE-2017-2869"]
+          "cves_known": [
+            "CVE-2017-2853",
+            "CVE-2017-2867",
+            "CVE-2017-2868",
+            "CVE-2017-2869"
+          ]
         }
-      ]
+      ],
+      "company_category": "public"
     },
     {
       "name": "g.tec medical engineering",
@@ -611,7 +852,18 @@
       "employees_approx": 100,
       "security_posture": "none_published",
       "security_notes": "Research-grade EEG/BCI systems used in academic research globally. No published security documentation.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0025","T0041","T0043","T0045","T0061","T0081"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0041",
+        "T0043",
+        "T0045",
+        "T0061",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "g.USBamp",
@@ -637,35 +889,8 @@
           "target_use": "research",
           "cves_known": []
         }
-      ]
-    },
-    {
-      "name": "Apple",
-      "type": "non_invasive",
-      "founded": "1976",
-      "headquarters": "Cupertino, California, USA",
-      "status": "active",
-      "acquired_by": null,
-      "funding_total_usd": null,
-      "employees_approx": 164000,
-      "security_posture": "mature",
-      "security_notes": "AirPods Pro are neural-adjacent (NOT direct BCI). FDA-cleared hearing test, health sensors. Industry-leading security (Secure Enclave, E2E encryption). Included for sensor convergence trend. Multiple BCI patents filed.",
-      "tara_attack_surface": ["T0021","T0023","T0041","T0081"],
-      "devices": [
-        {
-          "name": "AirPods Pro (2nd gen)",
-          "type": "non_invasive",
-          "channels": 0,
-          "electrode_type": "dry",
-          "fda_status": "cleared",
-          "units_deployed": "billions (all AirPods models)",
-          "first_human": "2022-09",
-          "price_usd": 249,
-          "target_use": "consumer",
-          "cves_known": [],
-          "note": "NOT a BCI. Neural-adjacent: hearing test, head tracking, health sensors."
-        }
-      ]
+      ],
+      "company_category": "established"
     },
     {
       "name": "Cognixion",
@@ -674,11 +899,19 @@
       "headquarters": "Santa Barbara, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 12000000,
+      "funding_total_usd": 29000000,
       "employees_approx": 25,
       "security_posture": "none_published",
       "security_notes": "EEG+AR headset for ALS/cerebral palsy. No public security documentation.",
-      "tara_attack_surface": ["T0005","T0008","T0021","T0023","T0041","T0043","T0081"],
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "ONE Headset",
@@ -692,7 +925,8 @@
           "target_use": "medical",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "startup"
     },
     {
       "name": "Cortera Neurotechnologies",
@@ -705,7 +939,15 @@
       "employees_approx": 15,
       "security_posture": "none_published",
       "security_notes": "Surface cortical electrodes. Pre-clinical. No public security documentation.",
-      "tara_attack_surface": ["T0001","T0005","T0008","T0021","T0041","T0061","T0081"],
+      "tara_attack_surface": [
+        "T0001",
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0041",
+        "T0061",
+        "T0081"
+      ],
       "devices": [
         {
           "name": "Cortera Surface Array",
@@ -719,63 +961,1868 @@
           "target_use": "research",
           "cves_known": []
         }
-      ]
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "MindMaze",
+      "type": "non_invasive",
+      "founded": "2012",
+      "headquarters": "Lausanne, Switzerland",
+      "status": "public",
+      "ticker": "MMTX",
+      "acquired_by": null,
+      "funding_total_usd": 330000000,
+      "employees_approx": 200,
+      "security_posture": "none_published",
+      "security_notes": "VR/AR neural rehabilitation platform. Motion capture + EEG. No public security documentation.",
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0081"
+      ],
+      "devices": [
+        {
+          "name": "MindMotion Go",
+          "type": "non_invasive",
+          "channels": 8,
+          "electrode_type": "dry",
+          "fda_status": "cleared",
+          "units_deployed": "clinical",
+          "first_human": "2016-01",
+          "price_usd": null,
+          "target_use": "rehabilitation",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "INBRAIN Neuroelectronics",
+      "type": "invasive",
+      "founded": "2019",
+      "headquarters": "Barcelona, Spain",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 82800000,
+      "employees_approx": 50,
+      "security_posture": "none_published",
+      "security_notes": "Graphene-based invasive BCI. Smallest neural implant. EU government-backed. No public security documentation.",
+      "tara_attack_surface": [
+        "T0001",
+        "T0003",
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0015",
+        "T0021",
+        "T0023",
+        "T0025"
+      ],
+      "devices": [
+        {
+          "name": "Graphene Neural Probe",
+          "type": "invasive",
+          "channels": 64,
+          "electrode_type": "graphene",
+          "fda_status": "pre-clinical",
+          "units_deployed": "research",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "therapeutic",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Neurable",
+      "type": "non_invasive",
+      "founded": "2015",
+      "headquarters": "Boston, Massachusetts, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 65000000,
+      "employees_approx": 30,
+      "security_posture": "none_published",
+      "security_notes": "EEG-enabled headphones for focus tracking. Consumer BCI in headphone form factor. No public security documentation.",
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0081"
+      ],
+      "devices": [
+        {
+          "name": "MW75 Neuro (with Master & Dynamic)",
+          "type": "non_invasive",
+          "channels": 6,
+          "electrode_type": "dry",
+          "fda_status": "exempt",
+          "units_deployed": "consumer",
+          "first_human": "2024-01",
+          "price_usd": 699,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "Arctop",
+      "type": "non_invasive",
+      "founded": "2016",
+      "headquarters": "Los Angeles, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 16300000,
+      "employees_approx": 20,
+      "security_posture": "none_published",
+      "security_notes": "Software platform for decoding brain signals from consumer EEG. Cloud-based neural analytics. No public security documentation.",
+      "tara_attack_surface": [
+        "T0005",
+        "T0008",
+        "T0021",
+        "T0023",
+        "T0041",
+        "T0043",
+        "T0081"
+      ],
+      "devices": [
+        {
+          "name": "Arctop Neural Decode SDK",
+          "type": "non_invasive",
+          "channels": 0,
+          "electrode_type": "software",
+          "fda_status": "none",
+          "units_deployed": "SDK",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "developer",
+          "cves_known": [],
+          "note": "Software platform, works with third-party EEG hardware"
+        }
+      ],
+      "company_category": "startup"
+    }
+  ],
+  "adjacent_tech": [
+    {
+      "name": "Apple",
+      "product": "AirPods Pro (2nd gen)",
+      "note": "NOT a BCI. Neural-adjacent: FDA-cleared hearing test, head tracking, health sensors. Included for sensor convergence trend. Multiple BCI patents filed. Industry-leading security (Secure Enclave, E2E encryption).",
+      "channels": 0,
+      "relevance": "Sensor convergence: consumer earbuds adding biosensing capabilities that may eventually include EEG. Apple has filed BCI-related patents."
     }
   ],
   "market_data": {
     "market_size_estimates": [
-      {"year": 2024, "value_billion_usd": 2.1, "source": "Grand View Research"},
-      {"year": 2030, "value_billion_usd": 6.2, "source": "Grand View Research (projected)", "cagr_percent": 17.1},
-      {"year": 2032, "value_billion_usd": 8.4, "source": "Fortune Business Insights (projected)", "cagr_percent": 18.2}
+      {
+        "year": 2024,
+        "value_billion_usd": 2.09,
+        "source": "Straits Research",
+        "source_url": "https://straitsresearch.com/report/brain-computer-interfaces-market"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 2.27,
+        "source": "Precedence Research",
+        "source_url": "https://www.precedenceresearch.com/brain-computer-interface-market"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 2.87,
+        "source": "Expert Market Research",
+        "source_url": "https://www.expertmarketresearch.com/reports/brain-computer-interface-market"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 1.6,
+        "source": "Market Research Intellect",
+        "source_url": "https://www.prnewswire.com/news-releases/brain-computer-interface-market-to-soar-from-usd-1-6-billion-in-2024-to-usd-6-3-billion-by-2033--at-20-5-cagr---market-research-intellect-302524372.html"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 2.44,
+        "source": "Grand View Research",
+        "source_url": "https://www.grandviewresearch.com/industry-analysis/brain-computer-interfaces-market"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 2.84,
+        "source": "Astute Analytica",
+        "source_url": "https://www.astuteanalytica.com/industry-report/brain-computer-interface-market"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 2.3,
+        "source": "BCC Research",
+        "source_url": "https://www.bccresearch.com/market-research/instrumentation-and-sensors/brain-computer-interface-market.html"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 2.05,
+        "source": "Research and Markets",
+        "source_url": "https://www.researchandmarkets.com/reports/5751976/brain-computer-interface-market-report"
+      },
+      {
+        "year": 2024,
+        "value_billion_usd": 4.02,
+        "source": "Verified Market Research",
+        "source_url": "https://www.verifiedmarketresearch.com/product/brain-computer-interface-bci-market/"
+      },
+      {
+        "year": 2029,
+        "value_billion_usd": 0.506,
+        "source": "MarketsandMarkets (narrow definition)",
+        "cagr_percent": 14.1,
+        "source_url": "https://www.marketsandmarkets.com/Market-Reports/brain-computer-interface-market-64821525.html"
+      },
+      {
+        "year": 2029,
+        "value_billion_usd": 4.5,
+        "source": "BCC Research",
+        "cagr_percent": 14.2,
+        "source_url": "https://www.bccresearch.com/market-research/instrumentation-and-sensors/brain-computer-interface-market.html"
+      },
+      {
+        "year": 2029,
+        "value_billion_usd": 4.13,
+        "source": "Research and Markets",
+        "cagr_percent": 14.9,
+        "source_url": "https://www.researchandmarkets.com/reports/5751976/brain-computer-interface-market-report"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd": 6.52,
+        "source": "Grand View Research",
+        "cagr_percent": 18.15,
+        "source_url": "https://www.grandviewresearch.com/industry-analysis/brain-computer-interfaces-market"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd": 2.11,
+        "source": "Mordor Intelligence",
+        "cagr_percent": 10.29,
+        "source_url": "https://www.mordorintelligence.com/industry-reports/brain-computer-interface-market"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd": 5.46,
+        "source": "Allied Market Research",
+        "cagr_percent": 13.9,
+        "source_url": "https://www.alliedmarketresearch.com/brain-computer-interfaces-market"
+      },
+      {
+        "year": 2032,
+        "value_billion_usd": 6.16,
+        "source": "Coherent Market Insights",
+        "source_url": "https://www.coherentmarketinsights.com/market-insight/brain-computer-interface-market-4467"
+      },
+      {
+        "year": 2032,
+        "value_billion_usd": 8.36,
+        "source": "SNS Insider",
+        "cagr_percent": 15.81,
+        "source_url": "https://www.globenewswire.com/news-release/2024/09/30/2955301/0/en/Brain-Computer-Interface-Market-Size-to-Reach-8-36-billion-by-2032-with-15-81-CAGR-SNS-Insider.html"
+      },
+      {
+        "year": 2032,
+        "value_billion_usd": 10.86,
+        "source": "Verified Market Research",
+        "cagr_percent": 14.61,
+        "source_url": "https://www.verifiedmarketresearch.com/product/brain-computer-interface-bci-market/"
+      },
+      {
+        "year": 2033,
+        "value_billion_usd": 8.73,
+        "source": "Straits Research",
+        "cagr_percent": 15.13,
+        "source_url": "https://straitsresearch.com/report/brain-computer-interfaces-market"
+      },
+      {
+        "year": 2033,
+        "value_billion_usd": 6.3,
+        "source": "Market Research Intellect",
+        "cagr_percent": 20.5
+      },
+      {
+        "year": 2033,
+        "value_billion_usd": 11.2,
+        "source": "Astute Analytica",
+        "source_url": "https://www.globenewswire.com/news-release/2026/01/22/3224194/0/en/11-20-Bn-Brain-Computer-Interface-Global-Market-Opportunities-and-Strategies-to-2033-Astute-Analytica.html"
+      },
+      {
+        "year": 2034,
+        "value_billion_usd": 12.4,
+        "source": "Precedence Research",
+        "cagr_percent": 16.77,
+        "source_url": "https://www.precedenceresearch.com/brain-computer-interface-market"
+      },
+      {
+        "year": 2035,
+        "value_billion_usd": 13.86,
+        "source": "Precedence Research",
+        "cagr_percent": 16.77
+      },
+      {
+        "year": 2035,
+        "value_billion_usd": 15.14,
+        "source": "Expert Market Research",
+        "cagr_percent": 16.32
+      },
+      {
+        "year": 2035,
+        "value_billion_usd": 18.85,
+        "source": "MetaTech Insights",
+        "cagr_percent": 19.2,
+        "source_url": "https://www.metatechinsights.com/industry-insights/brain-computer-interface-market-1331"
+      }
     ],
-    "total_funding_tracked_usd": 1800000000,
+    "broader_neurotech_market": [
+      {
+        "year": 2025,
+        "value_billion_usd": 15.77,
+        "source": "Mordor Intelligence",
+        "source_url": "https://www.mordorintelligence.com/industry-reports/neurotechnology-market"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd": 29.74,
+        "source": "Mordor Intelligence",
+        "cagr_percent": 13.53,
+        "source_url": "https://www.mordorintelligence.com/industry-reports/neurotechnology-market"
+      },
+      {
+        "year": 2034,
+        "value_billion_usd": 52.86,
+        "source": "Precedence Research",
+        "cagr_percent": 13.19,
+        "source_url": "https://www.precedenceresearch.com/neurotechnology-market"
+      }
+    ],
+    "eeg_devices_market": [
+      {
+        "year": 2023,
+        "value_billion_usd": 1.2,
+        "source": "Grand View Research",
+        "source_url": "https://www.grandviewresearch.com/industry-analysis/electroencephalography-eeg-systems-devices-market"
+      },
+      {
+        "year": 2025,
+        "value_billion_usd": 1.76,
+        "source": "Mordor Intelligence",
+        "source_url": "https://www.mordorintelligence.com/industry-reports/electroencephalography-systems-devices-market"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd": 2.82,
+        "source": "Mordor Intelligence",
+        "cagr_percent": 9.92
+      },
+      {
+        "year": 2034,
+        "value_billion_usd": 3.65,
+        "source": "Precedence Research",
+        "cagr_percent": 10.24,
+        "source_url": "https://www.precedenceresearch.com/electroencephalography-devices-market"
+      }
+    ],
+    "bci_implant_market": [
+      {
+        "year": 2025,
+        "value_billion_usd": 0.351,
+        "source": "Future Market Insights",
+        "source_url": "https://www.futuremarketinsights.com/reports/brain-computer-interface-implant-market"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd": 0.684,
+        "source": "Future Market Insights",
+        "cagr_percent": 12.9
+      }
+    ],
+    "vc_aggregate_by_year": [
+      {
+        "year": 2022,
+        "deals": 127,
+        "total_usd": 662600000,
+        "source": "PitchBook"
+      },
+      {
+        "year": 2023,
+        "deals": 115,
+        "total_usd": 1400000000,
+        "source": "PitchBook"
+      },
+      {
+        "year": 2024,
+        "deals": 129,
+        "total_usd": 2300000000,
+        "source": "Neurotechnology Substack / PitchBook",
+        "source_url": "https://neurotechnology.substack.com/p/2024-funding-snapshot"
+      },
+      {
+        "year": 2025,
+        "deals": 140,
+        "total_usd": 4800000000,
+        "source": "Neurotechnology Substack (partial year)",
+        "source_url": "https://neurotechnology.substack.com/p/2025-snapshot",
+        "note": "cumulative, partial year"
+      }
+    ],
+    "total_funding_tracked_usd": 4800000000,
     "major_funding_rounds": [
-      {"company": "Neuralink", "amount_usd": 680000000, "date": "2023-08", "series": "D"},
-      {"company": "Synchron", "amount_usd": 145000000, "date": "2024-01", "series": "C"},
-      {"company": "Precision Neuroscience", "amount_usd": 102000000, "date": "2024-01", "series": "C"},
-      {"company": "CTRL-Labs", "amount_usd": 67000000, "date": "2019-03", "series": "B", "note": "Acquired by Meta for ~$500M-1B"},
-      {"company": "Kernel", "amount_usd": 53000000, "date": "2020-06", "series": "C"},
-      {"company": "Paradromics", "amount_usd": 33000000, "date": "2023-06", "series": "B"},
-      {"company": "InteraXon (Muse)", "amount_usd": 28000000, "date": "2018-01", "series": "B"},
-      {"company": "BrainCo", "amount_usd": 25000000, "date": "2018-01", "series": "B"}
+      {
+        "company": "Neuralink",
+        "amount_usd": 1620000,
+        "date": "2016-10",
+        "series": "Seed",
+        "lead_investors": [],
+        "all_investors": [
+          "Elon Musk (personal)"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://sacra.com/c/neuralink/"
+      },
+      {
+        "company": "Neuralink",
+        "amount_usd": 27000000,
+        "date": "2017-08",
+        "series": "B",
+        "lead_investors": [],
+        "all_investors": [
+          "Elon Musk (personal)",
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://sacra.com/c/neuralink/"
+      },
+      {
+        "company": "Neuralink",
+        "amount_usd": 39300000,
+        "date": "2019-04",
+        "series": "C",
+        "lead_investors": [],
+        "all_investors": [
+          "Google Ventures",
+          "Sam Altman",
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://sacra.com/c/neuralink/"
+      },
+      {
+        "company": "Neuralink",
+        "amount_usd": 205000000,
+        "date": "2021-07",
+        "series": "C extension",
+        "lead_investors": [
+          "Vy Capital"
+        ],
+        "all_investors": [
+          "Vy Capital",
+          "Google Ventures",
+          "DFJ Growth",
+          "Valor Equity Partners",
+          "Craft Ventures",
+          "Gigafund",
+          "Founders Fund"
+        ],
+        "post_money_valuation_usd": 2000000000,
+        "source_url": "https://sacra.com/c/neuralink/"
+      },
+      {
+        "company": "Neuralink",
+        "amount_usd": 280000000,
+        "date": "2023-08",
+        "series": "D",
+        "lead_investors": [
+          "Founders Fund"
+        ],
+        "all_investors": [
+          "Founders Fund",
+          "Vy Capital",
+          "DFJ Growth",
+          "Valor Equity Partners",
+          "Google Ventures"
+        ],
+        "post_money_valuation_usd": 5000000000,
+        "source_url": "https://www.cnn.com/2023/08/08/tech/neuralink-brain-musk-fundraising-founders-fund/index.html",
+        "note": "Additional $43M D extension closed Nov 2023"
+      },
+      {
+        "company": "Neuralink",
+        "amount_usd": 43000000,
+        "date": "2023-11",
+        "series": "D extension",
+        "lead_investors": [],
+        "all_investors": [
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://sacra.com/c/neuralink/"
+      },
+      {
+        "company": "Neuralink",
+        "amount_usd": 650000000,
+        "date": "2025-06",
+        "series": "E",
+        "lead_investors": [
+          "ARK Invest",
+          "Sequoia Capital",
+          "Founders Fund"
+        ],
+        "all_investors": [
+          "ARK Invest",
+          "Sequoia Capital",
+          "Founders Fund",
+          "DFJ Growth",
+          "G42",
+          "Human Capital",
+          "Lightspeed Venture Partners",
+          "QIA (Qatar Investment Authority)",
+          "Thrive Capital",
+          "Valor Equity Partners",
+          "Vy Capital"
+        ],
+        "post_money_valuation_usd": 9000000000,
+        "source_url": "https://neuralink.com/updates/neuralink-raises-650m-series-e/"
+      },
+      {
+        "company": "Synchron",
+        "amount_usd": 10000000,
+        "date": "2017-04",
+        "series": "A",
+        "lead_investors": [],
+        "all_investors": [
+          "Defense.gov (US DoD)",
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/synchron"
+      },
+      {
+        "company": "Synchron",
+        "amount_usd": 40000000,
+        "date": "2021-06",
+        "series": "B",
+        "lead_investors": [
+          "Khosla Ventures"
+        ],
+        "all_investors": [
+          "Khosla Ventures",
+          "NeuroTechnology Investors",
+          "METIS",
+          "Forepont Capital Partners",
+          "ID8 Investments",
+          "Shanda Group",
+          "University of Melbourne"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/synchron"
+      },
+      {
+        "company": "Synchron",
+        "amount_usd": 75000000,
+        "date": "2022-12",
+        "series": "C",
+        "lead_investors": [
+          "ARCH Venture Partners"
+        ],
+        "all_investors": [
+          "ARCH Venture Partners",
+          "Gates Frontier (Bill Gates)",
+          "Bezos Expeditions (Jeff Bezos)",
+          "Reliance Digital Health",
+          "Greenoaks",
+          "Alumni Ventures",
+          "Moore Strategic Ventures",
+          "Project X",
+          "Khosla Ventures",
+          "NeuroTechnology Investors",
+          "METIS",
+          "Forepont Capital Partners",
+          "ID8 Investments",
+          "Shanda Group",
+          "University of Melbourne"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.businesswire.com/news/home/20221213006045/en/Synchron-Raises-75M-Series-C-Led-by-ARCH-Venture-Partners-to-Advance-Endovascular-Brain-Computer-Interface"
+      },
+      {
+        "company": "Synchron",
+        "amount_usd": 200000000,
+        "date": "2025-11",
+        "series": "D",
+        "lead_investors": [
+          "Double Point Ventures"
+        ],
+        "all_investors": [
+          "Double Point Ventures",
+          "ARCH Venture Partners",
+          "Khosla Ventures",
+          "Bezos Expeditions",
+          "NTI",
+          "METIS",
+          "Australian National Reconstruction Fund (NRF)",
+          "T.Rx Capital",
+          "QIA (Qatar Investment Authority)",
+          "K5 Global",
+          "Protocol Labs",
+          "IQT (In-Q-Tel)"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.businesswire.com/news/home/20251106150841/en/Synchron-Raises-$200-Million-Series-D-to-Advance-Brain-Computer-Interface-Technology"
+      },
+      {
+        "company": "Blackrock Neurotech",
+        "amount_usd": 10000000,
+        "date": "2021-01",
+        "series": "Venture",
+        "lead_investors": [],
+        "all_investors": [
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/blackrock-neurotech"
+      },
+      {
+        "company": "Blackrock Neurotech",
+        "amount_usd": 200000000,
+        "date": "2024-04",
+        "series": "Strategic",
+        "lead_investors": [
+          "Tether (via Tether Evo)"
+        ],
+        "all_investors": [
+          "Tether (via Tether Evo)"
+        ],
+        "post_money_valuation_usd": 350000000,
+        "source_url": "https://www.theblock.co/post/291414/tether-invests-200-million-blackrock-neurotech",
+        "note": "Tether became majority stakeholder. Crypto-to-BCI investment."
+      },
+      {
+        "company": "Precision Neuroscience",
+        "amount_usd": 12000000,
+        "date": "2021-04",
+        "series": "A",
+        "lead_investors": [
+          "B Capital Group"
+        ],
+        "all_investors": [
+          "B Capital Group",
+          "Steadview Capital"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/precision-neuroscience"
+      },
+      {
+        "company": "Precision Neuroscience",
+        "amount_usd": 41000000,
+        "date": "2023-01",
+        "series": "B",
+        "lead_investors": [
+          "Forepont Capital Partners"
+        ],
+        "all_investors": [
+          "Forepont Capital Partners",
+          "Mubadala Capital",
+          "Draper Associates",
+          "Alumni Ventures",
+          "re.Mind Capital",
+          "Steadview Capital",
+          "B Capital Group"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.globenewswire.com/news-release/2023/01/25/2595114/0/en/Precision-Neuroscience-Raises-41-Million-to-Build-and-Scale-the-Next-Generation-of-Treatments-for-Neurological-Illnesses.html"
+      },
+      {
+        "company": "Precision Neuroscience",
+        "amount_usd": 102000000,
+        "date": "2024-10",
+        "series": "C",
+        "lead_investors": [
+          "General Equity Holdings"
+        ],
+        "all_investors": [
+          "General Equity Holdings",
+          "B Capital Group",
+          "Duquesne Family Office (Stanley Druckenmiller)",
+          "Steadview Capital"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.globenewswire.com/news-release/2024/12/16/2997364/0/en/Precision-Neuroscience-Raises-102-Million-to-Advance-AI-Powered-Brain-Implant.html"
+      },
+      {
+        "company": "Precision Neuroscience",
+        "amount_usd": null,
+        "date": "2025-11",
+        "series": "C extension",
+        "lead_investors": [
+          "SCI Ventures"
+        ],
+        "all_investors": [
+          "SCI Ventures",
+          "Jdpglobal"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/precision-neuroscience",
+        "note": "Amount undisclosed"
+      },
+      {
+        "company": "Merge Labs",
+        "amount_usd": 252000000,
+        "date": "2026-01",
+        "series": "Seed",
+        "lead_investors": [
+          "OpenAI"
+        ],
+        "all_investors": [
+          "OpenAI",
+          "Bain Capital",
+          "Interface Fund",
+          "Fifty Years",
+          "Gabe Newell (co-founder of Valve)"
+        ],
+        "post_money_valuation_usd": 850000000,
+        "source_url": "https://techcrunch.com/2026/01/15/openai-invests-in-sam-altmans-brain-computer-interface-startup-merge-labs/",
+        "note": "Largest seed round in BCI history. Co-founded by Sam Altman. $252M = ~3% of OpenAI's estimated ~$8.5B annual burn rate."
+      },
+      {
+        "company": "BrainCo",
+        "amount_usd": 5500000,
+        "date": "2016-12",
+        "series": "Seed",
+        "lead_investors": [
+          "Hantan Capital"
+        ],
+        "all_investors": [
+          "Hantan Capital",
+          "Boston Angel Club"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/brainco"
+      },
+      {
+        "company": "BrainCo",
+        "amount_usd": 15000000,
+        "date": "2017-01",
+        "series": "A",
+        "lead_investors": [
+          "Decent Capital (Tencent co-founder Jason Zeng)"
+        ],
+        "all_investors": [
+          "Decent Capital",
+          "China Electronics Corporation (CEC)"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.neurofounders.co/articles/who-is-brainco-inside-chinas-280m-bci-raise"
+      },
+      {
+        "company": "BrainCo",
+        "amount_usd": 286000000,
+        "date": "2026-01",
+        "series": "Late (CNY 2B)",
+        "lead_investors": [
+          "IDG Capital",
+          "Walden International"
+        ],
+        "all_investors": [
+          "IDG Capital",
+          "Walden International",
+          "Lens Technology",
+          "OmniVision Integrated Circuits Group",
+          "37 Interactive Entertainment",
+          "Hangzhou Capital",
+          "Will Semiconductor"
+        ],
+        "post_money_valuation_usd": 1300000000,
+        "source_url": "https://www.yicaiglobal.com/news/chinas-brainco-raises-usd2863-million-in-largest-bci-funding-outside-the-us",
+        "note": "Largest BCI raise outside USA. HK IPO filed Jan 2026. Total funding: $370M."
+      },
+      {
+        "company": "BrainCo",
+        "amount_usd": 20000000,
+        "date": "2025-10",
+        "series": "A-II",
+        "lead_investors": [],
+        "all_investors": [
+          "Hangzhou Science and Technology Innovation Fund",
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/brainco"
+      },
+      {
+        "company": "Kernel",
+        "amount_usd": 100000000,
+        "date": "2016-10",
+        "series": "Founder",
+        "lead_investors": [
+          "Bryan Johnson (personal)"
+        ],
+        "all_investors": [
+          "Bryan Johnson (personal, $54M initial + additional)"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://techcrunch.com/2016/10/20/bryan-johnson-invests-100-million-in-kernel-to-unlock-the-power-of-the-human-brain/",
+        "note": "Bryan Johnson invested $54M initially, eventually committing $100M+ personally."
+      },
+      {
+        "company": "Kernel",
+        "amount_usd": 53000000,
+        "date": "2020-07",
+        "series": "C",
+        "lead_investors": [
+          "General Catalyst"
+        ],
+        "all_investors": [
+          "General Catalyst",
+          "Khosla Ventures",
+          "Eldridge",
+          "Manta Ray Ventures",
+          "Tiny Blue Dot"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://techcrunch.com/2020/07/09/kernel-raises-53-million-for-its-non-invasive-neuroscience-as-a-service-technology/"
+      },
+      {
+        "company": "Paradromics",
+        "amount_usd": 20000000,
+        "date": "2021-06",
+        "series": "Seed",
+        "lead_investors": [
+          "Prime Movers Lab"
+        ],
+        "all_investors": [
+          "Prime Movers Lab",
+          "Westcott Investment Group",
+          "Dolby Family Ventures",
+          "Synergy Ventures",
+          "Pureland Global Venture",
+          "IT-Farm",
+          "Alpha Edison"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.paradromics.com/news/paradromics-raises-20mm-in-seed-funding-led-by-prime-movers-lab-to-advance-brain-computer-interfaces"
+      },
+      {
+        "company": "Paradromics",
+        "amount_usd": 50100000,
+        "date": "2023-03",
+        "series": "A",
+        "lead_investors": [
+          "Prime Movers Lab"
+        ],
+        "all_investors": [
+          "Prime Movers Lab",
+          "Westcott Investment Group",
+          "Dolby Family Ventures",
+          "Green Sands Equity"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.paradromics.com/news/paradromics-raises-33-million-in-funding-achieves-breakthrough-medical-device-designation-from-fda"
+      },
+      {
+        "company": "Paradromics",
+        "amount_usd": null,
+        "date": "2025-02",
+        "series": "B",
+        "lead_investors": [
+          "NEOM Investment Fund"
+        ],
+        "all_investors": [
+          "NEOM Investment Fund (Saudi Arabia)"
+        ],
+        "post_money_valuation_usd": 8500000000,
+        "source_url": "https://www.paradromics.com/news/neom-investment-fund-partners-with-paradromics-to-drive-innovation-in-neurotechnology-healthcare",
+        "note": "Amount undisclosed. NEOM = Saudi sovereign wealth fund subsidiary. Total funding ~$127M across 49 investors."
+      },
+      {
+        "company": "INBRAIN Neuroelectronics",
+        "amount_usd": 18000000,
+        "date": "2021-01",
+        "series": "A",
+        "lead_investors": [
+          "Asabys Partners"
+        ],
+        "all_investors": [
+          "Asabys Partners",
+          "Alta Life Sciences",
+          "European Investment Bank",
+          "European Union (EIC)",
+          "Aliath Bioventures"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/inbrain-neuroelectronics"
+      },
+      {
+        "company": "INBRAIN Neuroelectronics",
+        "amount_usd": 50000000,
+        "date": "2024-10",
+        "series": "B",
+        "lead_investors": [
+          "imec.xpand"
+        ],
+        "all_investors": [
+          "imec.xpand",
+          "EIC Fund",
+          "Fond ICO Next Tech",
+          "CDTI-Innvierte",
+          "Avancsa",
+          "Asabys Partners",
+          "Aliath Bioventures",
+          "Vsquared"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.businesswire.com/news/home/20241029660063/en/INBRAIN-Neuroelectronics-Raises-%2450M-Series-B-to-Advance-Graphene-Based-Brain-Computer-Interface-Technology",
+        "note": "Total funding: $82.8M from 16 investors. Predominantly European institutional capital."
+      },
+      {
+        "company": "MindMaze",
+        "amount_usd": 10000000,
+        "date": "2016-02",
+        "series": "Seed",
+        "lead_investors": [
+          "Hinduja Group"
+        ],
+        "all_investors": [
+          "Hinduja Group"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/mindmaze"
+      },
+      {
+        "company": "MindMaze",
+        "amount_usd": 100000000,
+        "date": "2016-02",
+        "series": "A",
+        "lead_investors": [
+          "Hinduja Group"
+        ],
+        "all_investors": [
+          "Hinduja Group",
+          "Leonardo DiCaprio",
+          "undisclosed family offices"
+        ],
+        "post_money_valuation_usd": 1000000000,
+        "source_url": "https://techcrunch.com/2016/02/17/mindmaze-maker-of-a-neural-virtual-reality-platform-raises-100m-at-a-1b-valuation/",
+        "note": "First BCI unicorn. DiCaprio also became board advisor."
+      },
+      {
+        "company": "MindMaze",
+        "amount_usd": 125000000,
+        "date": "2021-10",
+        "series": "Debt",
+        "lead_investors": [
+          "AlbaCore Capital Group"
+        ],
+        "all_investors": [
+          "AlbaCore Capital Group"
+        ],
+        "post_money_valuation_usd": 1500000000,
+        "source_url": "https://tracxn.com/d/companies/mindmaze"
+      },
+      {
+        "company": "MindMaze",
+        "amount_usd": 105000000,
+        "date": "2022-02",
+        "series": "B",
+        "lead_investors": [
+          "Concord Health Partners"
+        ],
+        "all_investors": [
+          "Concord Health Partners",
+          "Salica Investments",
+          "Innosuisse",
+          "FIT",
+          "Corewell Health Ventures"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.business-standard.com/article/companies/hindujas-backed-mindmaze-secures-105-mn-funding-led-by-concord-health-122021701140_1.html"
+      },
+      {
+        "company": "Neurable",
+        "amount_usd": 13000000,
+        "date": "2024-05",
+        "series": "Bridge",
+        "lead_investors": [
+          "Ultratech Capital"
+        ],
+        "all_investors": [
+          "Ultratech Capital",
+          "Pace Ventures"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.businesswire.com/news/home/20240507057095/en/Neurable-Inc.-Raises-$13M-Paving-the-Way-for-Brain-Computer-Interface-Technology-in-Everyday-Products"
+      },
+      {
+        "company": "Neurable",
+        "amount_usd": 35000000,
+        "date": "2025-12",
+        "series": "A",
+        "lead_investors": [
+          "Spectrum Moonshot Fund"
+        ],
+        "all_investors": [
+          "Spectrum Moonshot Fund",
+          "Pace Ventures"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.businesswire.com/news/home/20251219993709/en/Neurable-Raises-$35-Million-Series-A-to-Accelerate-Deployment-of-Everyday-Brain-Computer-Interface-Technology",
+        "note": "Total funding: $65M"
+      },
+      {
+        "company": "CTRL-Labs",
+        "amount_usd": 67000000,
+        "date": "2019-03",
+        "series": "B",
+        "lead_investors": [],
+        "all_investors": [
+          "GV (Google Ventures)",
+          "Lux Capital",
+          "Founders Fund",
+          "Spark Capital",
+          "Matrix Partners",
+          "Amazon Alexa Fund"
+        ],
+        "post_money_valuation_usd": null,
+        "note": "Acquired by Meta Sep 2019 for $500M-$1B"
+      },
+      {
+        "company": "InteraXon (Muse)",
+        "amount_usd": 6000000,
+        "date": "2013-01",
+        "series": "A",
+        "lead_investors": [],
+        "all_investors": [
+          "Horizons Ventures (Li Ka-shing)",
+          "OMERS Ventures",
+          "A-Grade Investments (Ashton Kutcher)",
+          "ff Venture Capital",
+          "Felicis Ventures",
+          "Bridge Builders Collaborative"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.vcnewsdaily.com/interaxon/venture-capital-funding/ppmxrkfcpp"
+      },
+      {
+        "company": "InteraXon (Muse)",
+        "amount_usd": 10000000,
+        "date": "2015-01",
+        "series": "B",
+        "lead_investors": [],
+        "all_investors": [
+          "OMERS Ventures",
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://wellfound.com/company/interaxon-muse/funding"
+      },
+      {
+        "company": "InteraXon (Muse)",
+        "amount_usd": 14800000,
+        "date": "2018-01",
+        "series": "B-1",
+        "lead_investors": [
+          "Trend Forward Capital"
+        ],
+        "all_investors": [
+          "Trend Forward Capital",
+          "Export Development Canada",
+          "OMERS Ventures",
+          "Epic Capital Management",
+          "Bridge Builders Collaborative"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.venturecapitaljournal.com/3480588-2/"
+      },
+      {
+        "company": "InteraXon (Muse)",
+        "amount_usd": 9500000,
+        "date": "2022-08",
+        "series": "C",
+        "lead_investors": [
+          "BDC Capital"
+        ],
+        "all_investors": [
+          "BDC Capital",
+          "Alabaster (Sunny Vu family office)",
+          "Export Development Canada",
+          "Phyto Partners",
+          "Iter Investments",
+          "Intretech (HK) Co",
+          "The Clavis Foundation"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.businesswire.com/news/home/20220811005493/en/Interaxon-Inc.-Muse-Announces-$9.5M-Series-C-Funding-Round-To-Expand-Brain-Health-and-Wellness-Offerings"
+      },
+      {
+        "company": "Cognixion",
+        "amount_usd": 12000000,
+        "date": "2021-11",
+        "series": "Seed / early rounds",
+        "lead_investors": [],
+        "all_investors": [
+          "Amazon Alexa Fund",
+          "Verizon Forward for Good",
+          "CABHI",
+          "Memorial Hermann Foundation",
+          "Northwell Holdings",
+          "Sequel Venture Partners",
+          "Volta Circle",
+          "CABHI MC2"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://tracxn.com/d/companies/cognixion",
+        "note": "Total funding: $29M across 13 investors. Mix of corporate venture + health systems."
+      },
+      {
+        "company": "Cognixion",
+        "amount_usd": 12000000,
+        "date": "2024-12",
+        "series": "A",
+        "lead_investors": [],
+        "all_investors": [
+          "undisclosed"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.trysignalbase.com/news/funding/cognixion-secures-12-million-in-series-a-funding-for-revolutionary-assisted-reality-and-bci-technology"
+      },
+      {
+        "company": "Arctop",
+        "amount_usd": null,
+        "date": "2021-01",
+        "series": "Seed",
+        "lead_investors": [],
+        "all_investors": [
+          "Metropolis VC",
+          "The MBA Fund",
+          "15Angels III"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://www.crunchbase.com/organization/arctop"
+      },
+      {
+        "company": "Arctop",
+        "amount_usd": 10000000,
+        "date": "2023-10",
+        "series": "A",
+        "lead_investors": [
+          "Fifth Growth Fund",
+          "Supermoon Capital"
+        ],
+        "all_investors": [
+          "Fifth Growth Fund",
+          "Supermoon Capital",
+          "Metropolis VC",
+          "The MBA Fund",
+          "15Angels III"
+        ],
+        "post_money_valuation_usd": null,
+        "source_url": "https://pitchbook.com/profiles/company/231323-23",
+        "note": "Total funding: $16.3M"
+      }
     ],
+    "investor_intelligence": {
+      "generated": "2026-02-21",
+      "cross_portfolio_vcs": [
+        {
+          "investor": "Founders Fund",
+          "type": "VC",
+          "bci_companies": [
+            "Neuralink",
+            "CTRL-Labs"
+          ],
+          "total_bci_exposure_note": "Lead in Neuralink D + co-lead E ($930M+ rounds). Early CTRL-Labs before Meta acquisition.",
+          "approach": "invasive_and_peripheral"
+        },
+        {
+          "investor": "Khosla Ventures",
+          "type": "VC",
+          "bci_companies": [
+            "Synchron",
+            "Kernel"
+          ],
+          "total_bci_exposure_note": "Lead in Synchron B. Participated in Kernel C. Multi-modality bet: endovascular + fNIRS.",
+          "approach": "semi_invasive_and_non_invasive"
+        },
+        {
+          "investor": "ARCH Venture Partners",
+          "type": "VC",
+          "bci_companies": [
+            "Synchron"
+          ],
+          "total_bci_exposure_note": "Lead in Synchron C ($75M). Also lead in Science Corporation ($160M, visual cortex BCI, not in this tracker). Deep biotech specialist.",
+          "approach": "semi_invasive"
+        },
+        {
+          "investor": "Prime Movers Lab",
+          "type": "VC",
+          "bci_companies": [
+            "Paradromics",
+            "Cognixion"
+          ],
+          "total_bci_exposure_note": "Lead in Paradromics Seed + A ($70M). Early Cognixion. Deep tech focus.",
+          "approach": "invasive_and_non_invasive"
+        },
+        {
+          "investor": "Google Ventures (GV)",
+          "type": "Corporate VC (Alphabet)",
+          "bci_companies": [
+            "Neuralink",
+            "CTRL-Labs"
+          ],
+          "total_bci_exposure_note": "Early Neuralink C + C extension. CTRL-Labs B (pre-Meta acquisition). Both portfolio companies were early-stage bets.",
+          "approach": "invasive_and_peripheral"
+        },
+        {
+          "investor": "B Capital Group",
+          "type": "VC",
+          "bci_companies": [
+            "Precision Neuroscience"
+          ],
+          "total_bci_exposure_note": "Series A through Series C. Repeat investor across 3 rounds.",
+          "approach": "invasive"
+        },
+        {
+          "investor": "Steadview Capital",
+          "type": "Crossover fund",
+          "bci_companies": [
+            "Precision Neuroscience"
+          ],
+          "total_bci_exposure_note": "Series A through Series C. Repeat investor across 3 rounds.",
+          "approach": "invasive"
+        },
+        {
+          "investor": "DFJ Growth",
+          "type": "VC",
+          "bci_companies": [
+            "Neuralink"
+          ],
+          "total_bci_exposure_note": "Neuralink C extension through Series E. Multi-round repeat investor.",
+          "approach": "invasive"
+        },
+        {
+          "investor": "Vy Capital",
+          "type": "VC",
+          "bci_companies": [
+            "Neuralink"
+          ],
+          "total_bci_exposure_note": "Lead in Neuralink C extension ($205M). Repeat through D and E. One of Neuralink's most consistent backers.",
+          "approach": "invasive"
+        },
+        {
+          "investor": "Valor Equity Partners",
+          "type": "VC/PE",
+          "bci_companies": [
+            "Neuralink"
+          ],
+          "total_bci_exposure_note": "Neuralink C extension through Series E. Multi-round. Known Musk ecosystem investor (also in Tesla, SpaceX).",
+          "approach": "invasive"
+        },
+        {
+          "investor": "Amazon Alexa Fund",
+          "type": "Corporate VC (Amazon)",
+          "bci_companies": [
+            "Cognixion",
+            "CTRL-Labs"
+          ],
+          "total_bci_exposure_note": "Invested in Cognixion (accessibility BCI) and CTRL-Labs (pre-Meta acquisition).",
+          "approach": "non_invasive_and_peripheral"
+        },
+        {
+          "investor": "Bezos Expeditions",
+          "type": "Family office (Jeff Bezos)",
+          "bci_companies": [
+            "Synchron"
+          ],
+          "total_bci_exposure_note": "Synchron C and D. Repeat investor.",
+          "approach": "semi_invasive"
+        },
+        {
+          "investor": "OMERS Ventures",
+          "type": "Pension fund VC",
+          "bci_companies": [
+            "InteraXon (Muse)"
+          ],
+          "total_bci_exposure_note": "Series A through B-1. Canadian pension fund with 3-round repeat commitment.",
+          "approach": "non_invasive"
+        }
+      ],
+      "sovereign_wealth_funds": [
+        {
+          "investor": "QIA (Qatar Investment Authority)",
+          "type": "Sovereign wealth fund",
+          "bci_companies": [
+            "Neuralink",
+            "Synchron"
+          ],
+          "rounds": [
+            "Neuralink Series E",
+            "Synchron Series D"
+          ],
+          "note": "QIA invested in both the #1 and #2 invasive/semi-invasive BCI companies in the same year (2025). Dual-bet hedging strategy."
+        },
+        {
+          "investor": "NEOM Investment Fund (Saudi Arabia)",
+          "type": "Sovereign wealth fund subsidiary (PIF)",
+          "bci_companies": [
+            "Paradromics"
+          ],
+          "rounds": [
+            "Paradromics Series B"
+          ],
+          "note": "Saudi sovereign fund. Linked to NEOM smart city project. Strategic interest in neurotechnology for future city infrastructure."
+        },
+        {
+          "investor": "Mubadala Capital (Abu Dhabi)",
+          "type": "Sovereign wealth fund",
+          "bci_companies": [
+            "Precision Neuroscience"
+          ],
+          "rounds": [
+            "Precision Neuroscience Series B"
+          ],
+          "note": "UAE sovereign wealth fund. First BCI investment identified in 2023."
+        },
+        {
+          "investor": "Australian National Reconstruction Fund",
+          "type": "Government fund",
+          "bci_companies": [
+            "Synchron"
+          ],
+          "rounds": [
+            "Synchron Series D"
+          ],
+          "note": "Australian government backing for Australian-founded BCI company (Synchron was founded in Melbourne)."
+        }
+      ],
+      "big_tech_corporate_venture": [
+        {
+          "investor": "OpenAI",
+          "type": "AI company (corporate investment)",
+          "bci_companies": [
+            "Merge Labs"
+          ],
+          "total_invested_usd_approx": 252000000,
+          "note": "Led largest BCI seed round ever. Sam Altman co-founded Merge Labs. Conflict of interest questions raised (TechCrunch). Also: Sam Altman personally invested in Neuralink Series C."
+        },
+        {
+          "investor": "Google Ventures (GV / Alphabet)",
+          "type": "Corporate VC",
+          "bci_companies": [
+            "Neuralink",
+            "CTRL-Labs"
+          ],
+          "note": "Invested in Neuralink C/C-extension and CTRL-Labs B. Alphabet also has internal neural interface research."
+        },
+        {
+          "investor": "Meta Platforms",
+          "type": "Big Tech (acquirer)",
+          "bci_companies": [
+            "CTRL-Labs"
+          ],
+          "note": "Acquired CTRL-Labs for $500M-$1B (2019). Now internal Meta neural interface team. Not a VC investor, but largest BCI acquisition to date."
+        },
+        {
+          "investor": "Snap Inc.",
+          "type": "Big Tech (acquirer)",
+          "bci_companies": [
+            "NextMind"
+          ],
+          "note": "Acquired NextMind for ~$13M (2022). Product discontinued post-acquisition. Talent acquisition."
+        },
+        {
+          "investor": "Amazon Alexa Fund",
+          "type": "Corporate VC (Amazon)",
+          "bci_companies": [
+            "Cognixion",
+            "CTRL-Labs"
+          ],
+          "note": "Invested in accessibility-focused BCI (Cognixion) and peripheral EMG (CTRL-Labs pre-Meta)."
+        },
+        {
+          "investor": "Verizon Forward for Good",
+          "type": "Corporate VC (Verizon)",
+          "bci_companies": [
+            "Cognixion"
+          ],
+          "note": "Impact investing arm. Accessibility-focused BCI bet."
+        }
+      ],
+      "pe_firms": [
+        {
+          "investor": "Bain Capital",
+          "type": "PE / Growth equity",
+          "bci_companies": [
+            "Merge Labs"
+          ],
+          "note": "Participated in Merge Labs $252M seed. Bain Capital is one of the largest PE firms globally."
+        },
+        {
+          "investor": "IDG Capital",
+          "type": "PE / VC (China)",
+          "bci_companies": [
+            "BrainCo"
+          ],
+          "note": "Co-led BrainCo's CNY 2B ($286M) round. One of China's largest PE/VC firms."
+        },
+        {
+          "investor": "Duquesne Family Office",
+          "type": "Family office / PE (Stanley Druckenmiller)",
+          "bci_companies": [
+            "Precision Neuroscience"
+          ],
+          "note": "Billionaire hedge fund manager's family office. Precision Series C."
+        },
+        {
+          "investor": "General Equity Holdings",
+          "type": "PE / Growth equity",
+          "bci_companies": [
+            "Precision Neuroscience"
+          ],
+          "note": "Led Precision's $102M Series C."
+        },
+        {
+          "investor": "Tether (via Tether Evo)",
+          "type": "Crypto / Strategic PE",
+          "bci_companies": [
+            "Blackrock Neurotech"
+          ],
+          "note": "Stablecoin issuer invested $200M to become majority stakeholder. Unprecedented crypto-to-BCI crossover."
+        },
+        {
+          "investor": "Hinduja Group",
+          "type": "Conglomerate / PE (India)",
+          "bci_companies": [
+            "MindMaze"
+          ],
+          "note": "Led MindMaze's $110M Seed+A at $1B valuation. Indian industrial conglomerate."
+        }
+      ],
+      "intelligence_agencies_defense": [
+        {
+          "investor": "IQT (In-Q-Tel)",
+          "type": "CIA venture arm",
+          "bci_companies": [
+            "Synchron"
+          ],
+          "rounds": [
+            "Synchron Series D"
+          ],
+          "note": "US intelligence community's venture capital arm invested in Synchron's $200M Series D (2025)."
+        },
+        {
+          "investor": "Defense.gov (US DoD)",
+          "type": "US government",
+          "bci_companies": [
+            "Synchron"
+          ],
+          "rounds": [
+            "Synchron Series A"
+          ],
+          "note": "US Department of Defense participated in Synchron's earliest funding round (2017)."
+        },
+        {
+          "investor": "DARPA",
+          "type": "US government (grants, not equity)",
+          "bci_companies": [
+            "Paradromics"
+          ],
+          "rounds": [
+            "NESD program grants"
+          ],
+          "note": "Not equity investment. DARPA NESD grants ($65M program) funded Paradromics, Brown, Columbia, Berkeley."
+        }
+      ],
+      "notable_individual_investors": [
+        {
+          "name": "Sam Altman",
+          "companies": [
+            "Neuralink (early)",
+            "Merge Labs (co-founder)"
+          ],
+          "note": "Invested personally in Neuralink C. Then co-founded Merge Labs and had OpenAI lead the $252M seed. Deepest personal BCI commitment of any tech CEO."
+        },
+        {
+          "name": "Jeff Bezos",
+          "companies": [
+            "Synchron"
+          ],
+          "note": "Via Bezos Expeditions. Series C + D repeat investor."
+        },
+        {
+          "name": "Bill Gates",
+          "companies": [
+            "Synchron"
+          ],
+          "note": "Via Gates Frontier. Series C investor."
+        },
+        {
+          "name": "Elon Musk",
+          "companies": [
+            "Neuralink"
+          ],
+          "note": "Founder. Personal capital in Seed + early rounds."
+        },
+        {
+          "name": "Bryan Johnson",
+          "companies": [
+            "Kernel"
+          ],
+          "note": "Invested $100M+ personally. Founder."
+        },
+        {
+          "name": "Peter Thiel",
+          "companies": [
+            "Neuralink"
+          ],
+          "note": "Via Founders Fund (co-founder). Led Series D."
+        },
+        {
+          "name": "Leonardo DiCaprio",
+          "companies": [
+            "MindMaze"
+          ],
+          "note": "Investor + board advisor. Series A era."
+        },
+        {
+          "name": "Gabe Newell",
+          "companies": [
+            "Merge Labs"
+          ],
+          "note": "Valve co-founder. Participated in Merge Labs seed. Valve has been researching BCI for gaming since 2021."
+        },
+        {
+          "name": "Ashton Kutcher",
+          "companies": [
+            "InteraXon (Muse)"
+          ],
+          "note": "Via A-Grade Investments. Series A."
+        },
+        {
+          "name": "Stanley Druckenmiller",
+          "companies": [
+            "Precision Neuroscience"
+          ],
+          "note": "Via Duquesne Family Office. Series C."
+        }
+      ],
+      "key_patterns": [
+        "Qatar Investment Authority (QIA) is the ONLY investor confirmed in both Neuralink AND Synchron, hedging across the two leading implantable BCI approaches.",
+        "3 sovereign wealth funds active in BCI: QIA (Qatar), NEOM/PIF (Saudi Arabia), Mubadala (UAE). All Gulf states. No European or Asian sovereign funds identified.",
+        "Big Tech involvement is primarily through acquisitions (Meta $500M-$1B, Snap $13M) rather than venture rounds. Exception: OpenAI's $252M into Merge Labs.",
+        "US intelligence community (IQT/In-Q-Tel) invested in Synchron Series D (2025). Combined with DoD in Series A (2017), Synchron has the deepest government/defense funding ties of any BCI startup.",
+        "Sam Altman has the most complex BCI entanglement: personal Neuralink investor, Merge Labs co-founder, OpenAI leading the investment. Raises governance questions.",
+        "Tether ($200M into Blackrock Neurotech) represents the first major crypto-to-BCI crossover investment.",
+        "No traditional institutional investors (Vanguard, BlackRock Asset Management, Fidelity) identified in BCI venture rounds. BCI remains too early-stage for institutional capital.",
+        "Chinese BCI funding ($370M BrainCo) flows through different channels: government innovation funds (Hangzhou Capital), industrial conglomerates (Lens Technology), gaming companies (37 Interactive), and China-focused PE (IDG Capital).",
+        "European BCI funding (INBRAIN $82.8M) relies heavily on EU institutional mechanisms: European Investment Bank, EIC Fund, government programs (CDTI, Fond ICO Next Tech). Less private VC.",
+        "Merge Labs' $252M seed at $850M valuation is the largest seed round in BCI history and represents ~3% of OpenAI's estimated annual operating costs.",
+        "PE firms are entering BCI: Bain Capital (Merge Labs), IDG Capital (BrainCo), General Equity Holdings (Precision). The asset class is graduating from pure VC.",
+        "OMERS Ventures (Canadian pension fund) is the only pension fund identified investing directly in BCI companies (InteraXon/Muse)."
+      ]
+    },
     "government_grants": [
-      {"program": "BRAIN Initiative (NIH)", "total_usd": 3000000000, "period": "2014-2025"},
-      {"program": "DARPA N3", "total_usd": 104000000, "period": "2018-2022"},
-      {"program": "ARPA-H BEACONS", "total_usd": 45000000, "period": "2024-2028"},
-      {"program": "EU Human Brain Project", "total_usd": 600000000, "period": "2013-2023"}
+      {
+        "program": "BRAIN Initiative (NIH)",
+        "total_usd": 3000000000,
+        "period": "2014-2025",
+        "note": "$278M cut in 2025-2026 under restructuring. Future uncertain.",
+        "source_url": "https://braininitiative.nih.gov/funding/understanding-brain-initiative-budget"
+      },
+      {
+        "program": "BRAIN Initiative FY2023 peak",
+        "total_usd": 680000000,
+        "period": "FY2023",
+        "note": "Includes 21st Century Cures Act $450M"
+      },
+      {
+        "program": "DARPA NESD",
+        "total_usd": 65000000,
+        "period": "2017-2021",
+        "note": "High-res implantable BCI. Funded Paradromics, Brown, Columbia, Berkeley.",
+        "source_url": "https://techcrunch.com/2017/07/10/darpa-nesd-grants-paradromics/"
+      },
+      {
+        "program": "DARPA N3",
+        "total_usd": 125000000,
+        "period": "2018-2022",
+        "note": "Next-gen non-surgical neurotechnology",
+        "source_url": "https://www.darpa.mil/research/programs/next-generation-nonsurgical-neurotechnology"
+      },
+      {
+        "program": "ARPA-H BEACONS",
+        "total_usd": 45000000,
+        "period": "2024-2028"
+      },
+      {
+        "program": "EU Human Brain Project",
+        "total_usd": 670000000,
+        "period": "2013-2023",
+        "note": "3000+ publications, 160+ digital tools, EBRAINS platform",
+        "source_url": "https://www.humanbrainproject.eu/en/follow-hbp/news/2023/09/28/human-brain-project-ends-what-has-been-achieved/"
+      },
+      {
+        "program": "Spain PERTE Chip (INBRAIN)",
+        "total_usd": 4400000,
+        "period": "2025",
+        "note": "EUR 4M grant for graphene BCI advancement"
+      }
     ],
     "acquisition_history": [
-      {"target": "CTRL-Labs", "acquirer": "Meta Platforms", "date": "2019-09", "price_usd_estimate": 750000000},
-      {"target": "NextMind", "acquirer": "Snap Inc.", "date": "2022-03", "price_usd_estimate": null},
-      {"target": "Natus Medical", "acquirer": "Integra LifeSciences", "date": "2023-05", "price_usd_estimate": 3100000000}
-    ]
+      {
+        "target": "CTRL-Labs",
+        "acquirer": "Meta Platforms",
+        "date": "2019-09",
+        "price_usd_estimate": 750000000,
+        "source_url": "https://www.cnbc.com/2019/09/23/facebook-announces-acquisition-of-brain-computing-start-up-ctrl-labs.html"
+      },
+      {
+        "target": "NextMind",
+        "acquirer": "Snap Inc.",
+        "date": "2022-03",
+        "price_usd_estimate": 13000000,
+        "note": "Product discontinued post-acquisition"
+      },
+      {
+        "target": "Natus Medical",
+        "acquirer": "Integra LifeSciences",
+        "date": "2023-05",
+        "price_usd_estimate": 3100000000
+      },
+      {
+        "target": "MindX",
+        "acquirer": "Blackrock Neurotech",
+        "date": "2022-05",
+        "price_usd_estimate": null,
+        "note": "Spatial computing software"
+      },
+      {
+        "target": "IRRAS",
+        "acquirer": "ClearPoint Neuro",
+        "date": "2025-01",
+        "price_usd_estimate": null
+      }
+    ],
+    "security_gap": {
+      "bci_security_spending_documented_usd": 0,
+      "note": "No BCI company has published a security audit, bug bounty program, or dedicated CISO hire as of Feb 2026",
+      "comparison_markets": [
+        {
+          "market": "Medical device cybersecurity",
+          "size_2025_usd": 9870000000,
+          "cagr_percent": 9.03,
+          "source": "Precedence Research",
+          "source_url": "https://www.precedenceresearch.com/medical-device-security-market"
+        },
+        {
+          "market": "Healthcare cybersecurity",
+          "size_2025_usd": 35780000000,
+          "cagr_percent": 18.5,
+          "source": "Precedence Research",
+          "source_url": "https://www.precedenceresearch.com/healthcare-cybersecurity-market"
+        },
+        {
+          "market": "Automotive cybersecurity",
+          "size_2025_usd": 4700000000,
+          "cagr_percent": 16.0,
+          "source": "Grand View Research",
+          "source_url": "https://www.grandviewresearch.com/industry-analysis/automotive-cyber-security-market"
+        },
+        {
+          "market": "Global information security",
+          "size_2025_usd": 213000000000,
+          "cagr_percent": 15.1,
+          "source": "Gartner",
+          "source_url": "https://www.gartner.com/en/newsroom/press-releases/2025-07-29-gartner-forecasts-worldwide-end-user-spending-on-information-security-to-total-213-billion-us-dollars-in-2025"
+        }
+      ],
+      "industry_benchmarks": {
+        "it_budget_pct_on_security_average": "6-14%",
+        "healthcare_pct": "6-7%",
+        "financial_services_pct": "9.6-15%",
+        "bmw_infotainment_security_usd": 180000000,
+        "healthcare_breach_avg_cost_usd": 9770000,
+        "change_healthcare_breach_cost_usd": 2870000000,
+        "source": "IBM Cost of a Data Breach 2024, Gartner, IANS Research"
+      },
+      "key_findings": [
+        "700% increase in FDA cybersecurity deficiency letters since Oct 2023 (MedCrypt)",
+        "Yale 2025 study: BCI security practices 'remain uneven and continue to evolve'",
+        "GAO-25-106952: consumer BCIs face essentially no federal privacy or security laws",
+        "No BCI company lists dedicated cybersecurity roles publicly",
+        "Neuralink filed 1 security patent (out-of-band pairing). One patent is not a security program."
+      ],
+      "key_sources": [
+        {
+          "title": "Yale BCI Security Study",
+          "url": "https://news.yale.edu/2025/07/23/study-offers-measures-safeguarding-brain-implants",
+          "date": "2025-07"
+        },
+        {
+          "title": "GAO Brain Signal Device Privacy Report",
+          "url": "https://www.gao.gov/assets/gao-25-106952.pdf",
+          "date": "2025"
+        },
+        {
+          "title": "MedCrypt PATCH Act Impact Analysis",
+          "url": "https://www.medcrypt.com/blog/one-year-later-the-impact-of-the-patch-act-and-final-premarket-guidance-on-medical-device-cybersecurity",
+          "date": "2024"
+        },
+        {
+          "title": "Schroder et al. Cyber Risks to Next-Gen BCIs",
+          "url": "https://arxiv.org/abs/2508.12571",
+          "date": "2025"
+        },
+        {
+          "title": "Bernal et al. Eight Reasons to Prioritize BCI Cybersecurity (ACM)",
+          "url": "https://cacm.acm.org/research/eight-reasons-to-prioritize-brain-computer-interface-cybersecurity/",
+          "date": "2023"
+        },
+        {
+          "title": "IBM Cost of a Data Breach 2024 (Healthcare)",
+          "url": "https://www.ibm.com/think/insights/cost-of-a-data-breach-healthcare-industry",
+          "date": "2024"
+        }
+      ]
+    }
   },
   "policy_timeline": [
-    {"date": "2021-10", "event": "Chile constitutional neurorights amendment", "type": "law", "jurisdiction": "Chile"},
-    {"date": "2023-03", "event": "FDORA Section 524B: mandatory device cybersecurity", "type": "law", "jurisdiction": "USA (federal)"},
-    {"date": "2023-09", "event": "FDA updated premarket cybersecurity guidance", "type": "guidance", "jurisdiction": "USA (federal)"},
-    {"date": "2023-11", "event": "OECD neurotechnology recommendation", "type": "standard", "jurisdiction": "International"},
-    {"date": "2024-04", "event": "Colorado neural data privacy law", "type": "law", "jurisdiction": "USA (Colorado)"},
-    {"date": "2024-09", "event": "California SB 1223 neural data under CCPA", "type": "law", "jurisdiction": "USA (California)"},
-    {"date": "2025-02", "event": "EU AI Act prohibited practices take effect", "type": "law", "jurisdiction": "EU"},
-    {"date": "2025-05", "event": "Montana neural data privacy law", "type": "law", "jurisdiction": "USA (Montana)"},
-    {"date": "2025-06", "event": "Connecticut neural data privacy law", "type": "law", "jurisdiction": "USA (Connecticut)"},
-    {"date": "2025-06", "event": "FDA updated postmarket cybersecurity guidance", "type": "guidance", "jurisdiction": "USA (federal)"},
-    {"date": "2025-08", "event": "EU AI Act high-risk requirements take effect", "type": "law", "jurisdiction": "EU"},
-    {"date": "2025-11", "event": "UNESCO neurotechnology ethics recommendation", "type": "standard", "jurisdiction": "International"},
-    {"date": "2026-01", "event": "California SB 1223 neural data protections effective", "type": "law", "jurisdiction": "USA (California)"}
+    {
+      "date": "2021-10",
+      "event": "Chile constitutional neurorights amendment",
+      "type": "law",
+      "jurisdiction": "Chile"
+    },
+    {
+      "date": "2023-03",
+      "event": "FDORA Section 524B: mandatory device cybersecurity",
+      "type": "law",
+      "jurisdiction": "USA (federal)"
+    },
+    {
+      "date": "2023-09",
+      "event": "FDA updated premarket cybersecurity guidance",
+      "type": "guidance",
+      "jurisdiction": "USA (federal)"
+    },
+    {
+      "date": "2023-11",
+      "event": "OECD neurotechnology recommendation",
+      "type": "standard",
+      "jurisdiction": "International"
+    },
+    {
+      "date": "2024-04",
+      "event": "Colorado neural data privacy law",
+      "type": "law",
+      "jurisdiction": "USA (Colorado)"
+    },
+    {
+      "date": "2024-09",
+      "event": "California SB 1223 neural data under CCPA",
+      "type": "law",
+      "jurisdiction": "USA (California)"
+    },
+    {
+      "date": "2025-02",
+      "event": "EU AI Act prohibited practices take effect",
+      "type": "law",
+      "jurisdiction": "EU"
+    },
+    {
+      "date": "2025-05",
+      "event": "Montana neural data privacy law",
+      "type": "law",
+      "jurisdiction": "USA (Montana)"
+    },
+    {
+      "date": "2025-06",
+      "event": "Connecticut neural data privacy law",
+      "type": "law",
+      "jurisdiction": "USA (Connecticut)"
+    },
+    {
+      "date": "2025-06",
+      "event": "FDA updated postmarket cybersecurity guidance",
+      "type": "guidance",
+      "jurisdiction": "USA (federal)"
+    },
+    {
+      "date": "2025-08",
+      "event": "EU AI Act high-risk requirements take effect",
+      "type": "law",
+      "jurisdiction": "EU"
+    },
+    {
+      "date": "2025-11",
+      "event": "UNESCO neurotechnology ethics recommendation",
+      "type": "standard",
+      "jurisdiction": "International"
+    },
+    {
+      "date": "2026-01",
+      "event": "California SB 1223 neural data protections effective",
+      "type": "law",
+      "jurisdiction": "USA (California)"
+    }
   ],
   "publication_trends": [
-    {"year": 2010, "pubmed_bci": 450, "security_bci": 2},
-    {"year": 2012, "pubmed_bci": 720, "security_bci": 4},
-    {"year": 2015, "pubmed_bci": 1200, "security_bci": 8},
-    {"year": 2018, "pubmed_bci": 2100, "security_bci": 15},
-    {"year": 2020, "pubmed_bci": 3200, "security_bci": 25},
-    {"year": 2022, "pubmed_bci": 4500, "security_bci": 35},
-    {"year": 2023, "pubmed_bci": 5800, "security_bci": 45},
-    {"year": 2024, "pubmed_bci": 7200, "security_bci": 55},
-    {"year": 2025, "pubmed_bci": 8500, "security_bci": 70}
+    {
+      "year": 2010,
+      "pubmed_bci": 450,
+      "security_bci": 2
+    },
+    {
+      "year": 2012,
+      "pubmed_bci": 720,
+      "security_bci": 4
+    },
+    {
+      "year": 2015,
+      "pubmed_bci": 1200,
+      "security_bci": 8
+    },
+    {
+      "year": 2018,
+      "pubmed_bci": 2100,
+      "security_bci": 15
+    },
+    {
+      "year": 2020,
+      "pubmed_bci": 3200,
+      "security_bci": 25
+    },
+    {
+      "year": 2022,
+      "pubmed_bci": 4500,
+      "security_bci": 35
+    },
+    {
+      "year": 2023,
+      "pubmed_bci": 5800,
+      "security_bci": 45
+    },
+    {
+      "year": 2024,
+      "pubmed_bci": 7200,
+      "security_bci": 55
+    },
+    {
+      "year": 2025,
+      "pubmed_bci": 8500,
+      "security_bci": 70
+    }
   ],
   "metadata": {
     "data_sources": [

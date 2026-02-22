@@ -7,7 +7,7 @@
 >
 > **Last updated:** 2026-02-21
 > **Sources extracted from:** Three parallel validation agent sessions
-> **Total unique sources:** 193+
+> **Total unique sources:** 226+
 
 ---
 
@@ -481,6 +481,60 @@ Sources are organized by domain and sorted newest-first within each domain.
 
 ---
 
+## 12. Market & Investment Data
+
+> Sources added 2026-02-21 from 6 parallel crawl agents for whitepaper v7.0 market trajectory analysis.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| M1 | Grand View Research. (2024). "Brain-Computer Interface Market Size Report, 2030." | https://www.grandviewresearch.com/industry-analysis/brain-computer-interfaces-market | Crawl: BCI Market | BCI market $2.4B (2024), CAGR 17.5%, $6.5B by 2030. Feeds Section 12.6 TAM triangulation. |
+| M2 | Precedence Research. (2024). "Brain-Computer Interface Market Size, 2024 to 2034." | https://www.precedenceresearch.com/brain-computer-interface-market | Crawl: BCI Market | BCI market $2.37B (2024), CAGR 15.1%. Independent estimate converging with Grand View. |
+| M3 | Mordor Intelligence. (2024). "Brain-Computer Interface Market Size & Share Analysis." | https://www.mordorintelligence.com/industry-reports/brain-computer-interface-market | Crawl: BCI Market | Narrow-definition BCI market, $2.1B by 2030. Conservative baseline for TAM range. |
+| M4 | BCC Research. (2024). "Brain-Computer Interfaces: Global Markets." | https://www.bccresearch.com/market-research/healthcare/brain-computer-interfaces-market | Crawl: BCI Market | Healthcare-focused BCI segmentation. Feeds Section 12.3 security spending lag model. |
+| M5 | Allied Market Research. (2024). "Brain-Computer Interface Market, 2024-2033." | https://www.alliedmarketresearch.com/brain-computer-interface-market | Crawl: BCI Market | Segmentation by component, application, end user. $4.9B by 2033 estimate. |
+| M6 | SNS Insider. (2024). "Brain Computer Interface Market Size." | https://www.snsinsider.com/reports/brain-computer-interface-market-2164 | Crawl: BCI Market | Additional market sizing data point for cross-validation of median estimates. |
+| M7 | Astute Analytica. (2024). "Brain-Computer Interface Market." | https://www.astuteanalytica.com/industry-analysis/brain-computer-interface-market | Crawl: BCI Market | High-end estimate. Part of 9-firm convergence analysis showing median CAGR 15.1-16.8%. |
+| M8 | Verified Market Research. (2024). "Brain-Computer Interface Market Size." | https://www.verifiedmarketresearch.com/product/brain-computer-interface-market/ | Crawl: BCI Market | Independent verification of market size range. Feeds Section 12.6 consensus table. |
+| M9 | PitchBook-NVCA. (2025). "Venture Monitor Q4 2025." | https://pitchbook.com/news/reports/q4-2025-pitchbook-nvca-venture-monitor | Crawl: Institutional Indexes | $339B total VC deal value. Institutional capital allocation benchmark for BCI context. |
+| M10 | Cambridge Associates. (2024). "U.S. Venture Capital Index." | https://www.cambridgeassociates.com/benchmarks/ | Crawl: Institutional Indexes | VC index +6.2% in 2024. Institutional performance benchmark. |
+| M11 | Preqin. (2025). "Global Private Capital Index." | https://www.preqin.com/ | Crawl: Institutional Indexes | $3.1T AUM in private capital. Context for BCI as fraction of alternative asset allocation. |
+| M12 | IBM Security. (2024). "Cost of a Data Breach Report 2024." | https://www.ibm.com/security/data-breach | Crawl: BCI Market | Healthcare breach cost $9.77M average. Benchmark for BCI security spending gap ($0 vs. $9.77M per breach). |
+| M13 | MedCrypt. (2024). "State of Medical Device Cybersecurity." | https://www.medcrypt.com/ | Crawl: FDA/Regulatory | FDA cybersecurity deficiency letters increased 700% post-FDORA. Regulatory catalyst evidence for Section 12.3. |
+| M14 | Precedence Research. (2025). "Medical Device Cybersecurity Market." | https://www.precedenceresearch.com/medical-device-cybersecurity-market | Crawl: BCI Market | Medical device cybersecurity already $9.87B. Comparison market for BCI security TAM. |
+| M15 | Neurotechnology Substack. (2024). "2024 BCI Funding Snapshot." | https://neurotechnology.substack.com/ | Crawl: BCI Market | $2.3B across 129 deals in 2024. Independent funding tracker confirming PitchBook data. |
+
+## 13. Clinical Trials & Adverse Events
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| CT1 | ClinicalTrials.gov. (2025). "Brain-Computer Interface Trials Registry." | https://clinicaltrials.gov/search?term=brain-computer+interface | Crawl: ClinicalTrials.gov | 309 BCI clinical trials (81 recruiting). Scale of human BCI exposure for risk modeling. |
+| CT2 | FDA MAUDE Database. (2018). "Deep Brain Stimulation Adverse Events, 2009-2018." | https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfmaude/search.cfm | Crawl: FDA/Regulatory | 4,189 DBS adverse events over 9 years. Empirical data for DSM-5 diagnostic mapping validation and neural damage thresholds. |
+
+## 14. Vulnerability & CVE Data
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| V1 | ICS-CERT / CISA. (2023). "Medical Device Vulnerability Advisories." | https://www.cisa.gov/news-events/ics-medical-advisories | Crawl: NVD/CISA | 993 medical device vulnerabilities in 2023, 386% advisory increase since 2016. Zero BCI-specific advisories. Feeds Section 6.8 CVE coverage analysis. |
+
+## 15. Neurorights Legislation
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| NL1 | Republic of Chile. (2021). "Constitutional Amendment Art. 19 + Law 21.383 on Neuroprotection." | https://www.bcn.cl/leychile/navegar?idNorma=1172840 | Crawl: Neurorights | First country to constitutionally protect neurorights. Neural data classified as organ tissue. Feeds Section 11.3. |
+| NL2 | California State Legislature. (2024). "SB 1223: California Consumer Privacy Act - Neural Data." | https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB1223 | Crawl: Neurorights | Adds "neural data" as CCPA sensitive personal information. Effective Jan 2025. Feeds Section 11.3. |
+| NL3 | US Senate. (2024). "MIND Act (S. 2925)." | https://www.congress.gov/bill/118th-congress/senate-bill/2925 | Crawl: Neurorights | Federal neural data standards proposal. Neurotechnology Advisory Committee. Cybersecurity requirements for neural devices. |
+| NL4 | Council of Europe. (2025). "Strategic Action Plan on Neurotechnology." | https://www.coe.int/en/web/bioethics/neurotechnology | Crawl: Neurorights | Human rights-based framework for 46 member states. Feeds international governance analysis in Section 10. |
+
+## 16. BCI Companies & Devices
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| BD1 | BISC Platform, Columbia/Stanford. (2025). "65,536-Electrode Brain Recording System." | https://www.sciencedaily.com/releases/2025/12/251209234139.htm | Crawl: BCI Market | 65,536 electrodes, 100 Mbps wireless, 50um thin conformal. Hardware frontier for physics feasibility tiering. |
+| BD2 | Merge Labs. (2025). Founded by Caltech researchers. $252M seed at $850M valuation (OpenAI lead). | https://mergelabs.io | Crawl: BCI Market | Ultrasound-based non-invasive high-bandwidth BCI. Section 12.2 investor class diversification. |
+| BD3 | FDA. (2025). "Breakthrough Device Designations: Neuralink Speech Restoration (May 2025), Blindsight (Sep 2024)." | https://www.fda.gov/medical-devices/breakthrough-devices-program | Crawl: FDA/Regulatory | Regulatory pathway acceleration signals. Feeds Section 2.3.1 investment analysis. |
+
+---
+
 ## Appendix: Source Statistics
 
 | Domain | Count | Newest | Oldest |
@@ -496,7 +550,12 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Wireless Sensing Security | 4 | 2025 | 2024 |
 | Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
 | Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
-| **Total** | **201** | | |
+| Market & Investment Data | 15 | 2025 | 2024 |
+| Clinical Trials & Adverse Events | 2 | 2025 | 2018 |
+| Vulnerability & CVE Data | 1 | 2023 | 2023 |
+| Neurorights Legislation | 4 | 2025 | 2021 |
+| BCI Companies & Devices | 3 | 2025 | 2025 |
+| **Total** | **226** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -508,6 +567,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | SSVEP/Guardrails Session (Feb 18) | ~9 |
 | BCI Security & Wireless Sensing Expansion (Feb 21) | ~24 |
 | CVE-to-TARA Mapping & Coverage Gap (Feb 21) | ~8 |
+| Market Trajectory Crawl Agents (Feb 21) | ~25 |
 
 ---
 
