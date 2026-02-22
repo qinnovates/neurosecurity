@@ -34,7 +34,7 @@ const tacticColors: Record<string, string> = {
 ---
 
 <PageLayout
-  title="QIF Whitepaper v6.3.0"
+  title="QIF Whitepaper v6.3.5"
   description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
@@ -43,7 +43,7 @@ const tacticColors: Record<string, string> = {
     <!-- Sidebar -->
     <aside class="hidden lg:block">
       <div class="sticky top-24">
-        <WhitepaperVersionSelector currentVersion="v6.3.0" />
+        <WhitepaperVersionSelector currentVersion="v6.3.5" />
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Table of Contents</p>
           {[
@@ -57,6 +57,7 @@ const tacticColors: Record<string, string> = {
             { href: '#governance', label: 'Governance' },
             { href: '#nsp', label: 'NSP Protocol' },
             { href: '#adopt', label: 'How to Help' },
+            { href: '#funding', label: 'Industry Funding' },
             { href: '#roadmap', label: "What's Next" },
             { href: '#limitations', label: 'Limitations & Transparency' },
           ].map((item) => (
@@ -73,14 +74,14 @@ const tacticColors: Record<string, string> = {
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "QIF Whitepaper v6.3.0: An Open Security Standard for Brain-Computer Interfaces",
+        "headline": "QIF Whitepaper v6.3.5: An Open Security Standard for Brain-Computer Interfaces",
         "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-18",
-        "dateModified": "2026-02-18",
+        "dateModified": "2026-02-21",
         "mainEntityOfPage": "https://qinnovate.com/whitepaper/",
-        "version": "6.3.0",
+        "version": "6.3.5",
       })} />
 
       <!-- ═══ Header ═══ -->
@@ -1078,7 +1079,7 @@ const tacticColors: Record<string, string> = {
               <li>Use the <a href="/TARA/">TARA atlas</a> to identify risk profiles for BCI techniques in your studies</li>
               <li>Apply <a href="/scoring/">NISS scoring</a> to quantify neural impact in vulnerability reports</li>
               <li>Reference the <a href="#neural-impact">Neural Impact Chain</a> for technique-to-diagnosis mapping</li>
-              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.3.0. Qinnovate. Available at qinnovate.com</code></li>
+              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v6.3.5. Qinnovate. Available at qinnovate.com</code></li>
             </ul>
           </div>
 
@@ -1114,10 +1115,36 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 10. WHAT'S NEXT                                           -->
+      <!-- 11. INDUSTRY FUNDING                                       -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section id="funding" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. BCI Industry Funding</h2>
+        <div class="prose mb-6">
+          <p>
+            Over $5 billion has been deployed into BCI companies. None of these companies have published security documentation. The interactive chart below tracks cumulative funding across the top BCI companies, with an exponential trend projection through 2028. Click any company to see individual funding rounds, lead investors, and notes.
+          </p>
+        </div>
+        <div class="glass rounded-xl overflow-hidden mb-6" style="height: 620px;">
+          <iframe
+            src="/charts/funding-timeline-interactive.html"
+            width="100%"
+            height="100%"
+            style="border: none; background: #0f172a;"
+            title="BCI Industry Cumulative Funding Timeline"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <p class="text-xs text-[var(--color-text-faint)] text-center">
+          Source: QIF BCI Landscape Database v2.0. Hover to inspect, click to expand funding rounds and investors.
+        </p>
+      </section>
+
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- 12. WHAT'S NEXT                                           -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="roadmap" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. What&rsquo;s Next</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. What&rsquo;s Next</h2>
         <div class="prose mb-8">
           <p>
             QIF is designed as a living framework. As neural device technology matures, the evolving threat landscape necessitates a corresponding evolution of the framework. Our immediate priorities:
@@ -1172,10 +1199,10 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 12. LIMITATIONS & TRANSPARENCY                             -->
+      <!-- 13. LIMITATIONS & TRANSPARENCY                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="limitations" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. Limitations, AI Methodology &amp; Transparency</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">13. Limitations, AI Methodology &amp; Transparency</h2>
 
         <div class="prose mb-8">
           <p>
@@ -1184,7 +1211,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <!-- Limitations -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-8 mb-4">12.1 Known Limitations</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-8 mb-4">13.1 Known Limitations</h3>
 
         <div class="space-y-3 mb-8">
           <div class="glass-subtle rounded-lg p-4">
@@ -1210,7 +1237,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <!-- Key Design Decisions -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.2 Key Design Decisions</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">13.2 Key Design Decisions</h3>
 
         <div class="prose mb-6">
           <p>
@@ -1318,7 +1345,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <!-- AI Methodology -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.3 AI Methodology</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">13.3 AI Methodology</h3>
 
         <div class="prose mb-6">
           <p>
@@ -1361,7 +1388,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <!-- Audit Trail -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.4 Audit Trail</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">13.4 Audit Trail</h3>
 
         <div class="prose mb-6">
           <p>
@@ -1401,9 +1428,9 @@ const tacticColors: Record<string, string> = {
         <div class="flex flex-col gap-4 text-xs text-[var(--color-text-faint)]">
           <div class="flex flex-wrap items-center gap-3">
             <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
-              v6.3.0
+              v6.3.5
             </span>
-            <span class="text-xs text-[var(--color-text-faint)]">2026-02-16</span>
+            <span class="text-xs text-[var(--color-text-faint)]">2026-02-21</span>
             <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
           </div>
           <p class="text-sm text-[var(--color-text-muted)]">
