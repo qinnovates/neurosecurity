@@ -36,7 +36,7 @@ Open items, outreach, and follow-ups. Check this file when resuming work.
 | Target | Basis | Status | Blocked Until |
 |--------|-------|--------|---------------|
 | SAIL Lab (Behzadan) | BCI paper, TARA citation | Draft needed | Kevin decides timing |
-| Yingying Chen | LSL CVE related | Draft ready | LSL Stage 3 (report delivered) |
+| Yingying Chen | BCI vulnerability disclosure related | Draft ready | Disclosure Stage 3 (report delivered) |
 | Anna Wexler (UPenn) | Berman Institute seminar 2026-03-23 | Not started | ~2026-03-16 (registration check) |
 
 ## Governance Gaps (Identified 2026-02-18)
@@ -47,7 +47,7 @@ The Ethical Neurosecurity Code of Ethics establishes principles but the operatio
 |-----|----------|--------|-------|
 | Bug bounty program for neurotech | High | Not started | No neurotech company or research group has one. First-mover opportunity. |
 | Safe harbor language for researchers | High | Not started | Researchers testing BCI security need legal protection. Model after HackerOne/Bugcrowd safe harbor. |
-| Responsible disclosure pipeline (BCI-specific) | High | Partially exists | We have the LSL CVE as a case study. Need to formalize the process with BCI-specific considerations (e.g., what if the vulnerability is in the neural signal processing, not the software?). |
+| Responsible disclosure pipeline (BCI-specific) | High | Partially exists | We have a disclosed BCI-adjacent vulnerability as a case study. Need to formalize the process with BCI-specific considerations (e.g., what if the vulnerability is in the neural signal processing, not the software?). |
 | Security researcher onboarding guide | Medium | Not started | "How to do neurosecurity research without hurting anyone." Step-by-step for newcomers. |
 | CVE lifecycle for neural vulnerabilities | Medium | Not started | Standard CVE process does not account for neural harm. Need severity modifier for neuroplastic impact. |
 | Dual-use publication review process | Medium | Not started | When to publish, when to hold, how to include defenses. Blog post T0103 is a case study. |

@@ -33,7 +33,7 @@ Five validated reasons explain why security GRC and neuroethics have not converg
 
 **Tiny community.** Approximately 50 researchers worldwide work on BCI security. The entire field produces roughly 85 papers total. There is not enough critical mass to form joint working groups.
 
-**No breach has occurred.** IT security standards emerged after breaches created urgency (TJX, Heartland, Target for PCI DSS; OPM for federal cybersecurity). BCI security has no equivalent forcing function yet. The LSL vulnerability (disclosed Feb 2026) is the closest, but it affects a research tool, not a clinical implant.
+**No breach has occurred.** IT security standards emerged after breaches created urgency (TJX, Heartland, Target for PCI DSS; OPM for federal cybersecurity). BCI security has no equivalent forcing function yet. A vulnerability disclosed in a widely used BCI-adjacent streaming library (Feb 2026) is the closest, but it affects a research tool, not a clinical implant.
 
 **Market just started.** The first commercial BCIs cleared FDA in 2025. Standardization requires a market to standardize. PCI DSS took 5 years after payment cards went mainstream. The BCI security standards window is opening now.
 

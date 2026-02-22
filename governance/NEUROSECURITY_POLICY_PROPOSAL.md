@@ -341,9 +341,9 @@ Two scenarios illustrate the cost of waiting for the first breach:
 
 **Cognitive state inference at scale:** A consumer BCI platform collects EEG data for "wellness" purposes. A data breach exposes neural recordings. The recordings reveal psychiatric conditions, emotional states, and cognitive decline patterns for millions of users. There is no notification framework for "your brain data was compromised." There is no remediation possible because the users cannot change their neural signatures.
 
-### The Canary: LSL Vulnerability (February 2026)
+### The Canary: A BCI-Infrastructure Vulnerability (February 2026)
 
-In February 2026, QIF disclosed the first BCI-infrastructure vulnerability in the Lab Streaming Layer (LSL), the most widely used real-time data transport in BCI research. LSL is used in hundreds of research labs worldwide and carries live neural data.
+In February 2026, QIF disclosed the first BCI-infrastructure vulnerability in a widely used real-time data transport library for BCI research. The library is used in hundreds of research labs worldwide and carries live neural data.
 
 The vulnerability is real but affects a research tool, not a clinical implant. It is the canary. The next one may not be in a research library. It may be in a device implanted in a human brain. The time to build the frameworks, taxonomies, scoring systems, and incident response procedures is before that happens, not after.
 
@@ -631,7 +631,7 @@ The insurance industry drove adoption of PCI DSS for payment card security, NIST
 | MITRE evaluates BCI-specific techniques through community contribution process | MITRE + BCI security researchers | Initial assessment report |
 | BCI manufacturers begin voluntary neural-specific threat modeling | Industry | At least 2 manufacturers pilot BCI-specific threat assessments |
 | FDA acknowledges neural devices as a distinct cybersecurity category | FDA/CDRH | Guidance clarification or public communication |
-| LSL vulnerability remediated and disclosure process documented | SCCN/Community | CVE assigned, patch available |
+| BCI-adjacent streaming library vulnerability remediated and disclosure process documented | Maintainers/Community | CVE assigned, patch available |
 
 ### Phase 2: Standardization (2028-2031)
 
