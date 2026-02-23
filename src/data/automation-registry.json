@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-02-22T01:45:13.839Z",
+  "last_updated": "2026-02-23T01:46:23.267Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -11,7 +11,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/deploy.yml",
       "status": "active",
-      "last_triggered": "2026-02-22T01:39:13Z",
+      "last_triggered": "2026-02-22T14:52:43Z",
       "last_status": "success",
       "dependencies": [
         "src/",
@@ -31,7 +31,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/changelog.yml",
       "status": "active",
-      "last_triggered": "2026-02-22T01:38:34Z",
+      "last_triggered": "2026-02-22T14:52:01Z",
       "last_status": "success",
       "dependencies": [
         "scripts/changelog-update.mjs",
@@ -52,7 +52,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": "2026-02-21T13:58:10Z",
+      "last_triggered": "2026-02-22T05:09:56Z",
       "last_status": "failure",
       "dependencies": [
         ".github/security-audit/scripts/audit.py",
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-02-21T17:16:33Z",
+      "last_triggered": "2026-02-22T17:16:43Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -91,7 +91,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/verify-citations.yml",
       "status": "active",
-      "last_triggered": "2026-02-22T01:39:04Z",
+      "last_triggered": "2026-02-22T14:52:30Z",
       "last_status": "success",
       "dependencies": [
         "scripts/verify/run_all.py",
@@ -135,7 +135,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/timeline-check.yml",
       "status": "active",
-      "last_triggered": "2026-02-22T01:38:30Z",
+      "last_triggered": "2026-02-22T14:52:00Z",
       "last_status": "success",
       "dependencies": [
         "scripts/timeline-check.mjs",
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-02-22T01:44:49Z",
+      "last_triggered": "2026-02-23T01:45:58Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
@@ -599,8 +599,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-intel.yml",
       "status": "active",
-      "last_triggered": null,
-      "last_status": "unknown",
+      "last_triggered": "2026-02-22T17:23:32Z",
+      "last_status": "success",
       "dependencies": [
         "scripts/fetch-intel.mjs",
         "shared/bci-landscape.json"
