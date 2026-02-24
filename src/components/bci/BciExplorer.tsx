@@ -27,6 +27,21 @@ const SEVERITY_COLORS: Record<string, string> = {
   low: '#94a3b8',
 };
 
+const NS_SEVERITY_COLORS: Record<string, string> = {
+  Critical: '#ef4444',
+  High: '#f97316',
+  Medium: '#f59e0b',
+  Low: '#10b981',
+};
+
+const NEURORIGHT_LABELS: Record<string, string> = {
+  CL: 'Cognitive Liberty',
+  MI: 'Mental Integrity',
+  MP: 'Mental Privacy',
+  PC: 'Psychological Continuity',
+  EA: 'Equitable Access',
+};
+
 const CONFIDENCE_COLORS: Record<string, string> = {
   HIGH: '#22c55e',
   MEDIUM: '#f59e0b',
@@ -253,21 +268,44 @@ function DeviceCard({ device, isSelected, onClick }: { device: BciDevice; isSele
         </div>
       )}
 
-      {/* Threat summary */}
-      {totalThreats > 0 && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.6875rem', color: 'var(--color-text-faint)' }}>
-          <span
-            style={{
-              width: '6px', height: '6px', borderRadius: '50%',
-              background: SEVERITY_COLORS[maxSeverity],
-            }}
-          />
-          {totalThreats} threats
-          {device.threatsBySeverity.critical > 0 && (
-            <span style={{ color: '#ef4444' }}>{device.threatsBySeverity.critical} critical</span>
-          )}
-        </div>
-      )}
+      {/* Threat + Neurosecurity summary row */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+        {totalThreats > 0 && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.6875rem', color: 'var(--color-text-faint)' }}>
+            <span
+              style={{
+                width: '6px', height: '6px', borderRadius: '50%',
+                background: SEVERITY_COLORS[maxSeverity],
+              }}
+            />
+            {totalThreats} threats
+            {device.threatsBySeverity.critical > 0 && (
+              <span style={{ color: '#ef4444' }}>{device.threatsBySeverity.critical} critical</span>
+            )}
+          </div>
+        )}
+        {device.neurosecurityScore && (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '3px 8px',
+            borderRadius: '6px',
+            background: `${NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8'}11`,
+            border: `1px solid ${NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8'}33`,
+          }}>
+            <span style={{ fontSize: '0.625rem', fontWeight: 500, color: 'var(--color-text-faint)' }}>NS</span>
+            <span style={{
+              fontSize: '0.8125rem',
+              fontWeight: 700,
+              color: NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8',
+              fontVariantNumeric: 'tabular-nums',
+            }}>
+              {device.neurosecurityScore.overallScore.toFixed(2)}
+            </span>
+          </div>
+        )}
+      </div>
     </button>
   );
 }
@@ -609,6 +647,89 @@ function SecurityTab({ device }: { device: BciDevice }) {
           <div style={{ fontSize: '0.625rem', fontWeight: 500, color: 'var(--color-text-faint)', textTransform: 'uppercase' }}>Total</div>
         </div>
       </div>
+
+      {/* Neurosecurity Score (NSv2.1b) */}
+      {device.neurosecurityScore && (
+        <div style={{ marginBottom: '20px' }}>
+          <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: 'var(--color-text-faint)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Neurosecurity Score (NSv2.1b)
+          </div>
+          <div style={{
+            padding: '12px 16px',
+            borderRadius: '10px',
+            border: `1px solid ${NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8'}33`,
+            background: `${NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8'}08`,
+            marginBottom: '12px',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '4px' }}>
+              <span style={{
+                fontSize: '1.5rem',
+                fontWeight: 700,
+                color: NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8',
+                fontVariantNumeric: 'tabular-nums',
+              }}>
+                {device.neurosecurityScore.overallScore.toFixed(2)}
+              </span>
+              <span style={{
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                color: NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8',
+                textTransform: 'uppercase',
+              }}>
+                {device.neurosecurityScore.severity}
+              </span>
+            </div>
+            <div style={{ fontSize: '0.6875rem', color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>
+              {device.neurosecurityScore.vector}
+            </div>
+          </div>
+
+          {/* Per-right subscores */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {(['MI', 'CL', 'MP', 'PC', 'EA'] as const).map(right => {
+              const score = device.neurosecurityScore!.subscores[right];
+              const maxScore = 10;
+              const pct = (score / maxScore) * 100;
+              const barColor = score >= 7 ? '#f97316' : score >= 4 ? '#f59e0b' : '#10b981';
+              return (
+                <div key={right} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '0.6875rem', fontWeight: 600, color: 'var(--color-text-faint)', width: '20px', flexShrink: 0 }}>
+                    {right}
+                  </span>
+                  <div style={{
+                    flex: 1,
+                    height: '6px',
+                    borderRadius: '3px',
+                    background: 'var(--color-border)',
+                    overflow: 'hidden',
+                  }}>
+                    <div style={{
+                      width: `${pct}%`,
+                      height: '100%',
+                      borderRadius: '3px',
+                      background: barColor,
+                      transition: 'width 0.3s ease',
+                    }} />
+                  </div>
+                  <span style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    color: barColor,
+                    width: '32px',
+                    textAlign: 'right',
+                    fontVariantNumeric: 'tabular-nums',
+                  }}>
+                    {score.toFixed(1)}
+                  </span>
+                  <span style={{ fontSize: '0.625rem', color: 'var(--color-text-faint)', width: '130px', flexShrink: 0 }}>
+                    {NEURORIGHT_LABELS[right]}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Top threats */}
       <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: 'var(--color-text-faint)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
