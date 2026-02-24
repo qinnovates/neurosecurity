@@ -1,4 +1,22 @@
 # Qinnovate Project Guide
+
+<!-- Decision Tree: Daily log = operational. Derivation log = research insight. Field journal = personal voice. Memory.md = lasting facts. -->
+
+## Table of Contents
+- [Commands](#commands)
+- [Commit Prefix Convention](#commit-prefix-convention)
+- [Multi-Agent Protocol](#multi-agent-protocol-shared-memory)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Guidelines](#guidelines)
+- [Cross-AI Validation Protocol](#cross-ai-validation-protocol)
+- [Auto-Track Protocol](#auto-track-protocol-academic-transparency)
+- [Sync Protocols](#sync-protocols)
+- [Citation & Preprint Integrity](#citation--preprint-integrity-protocol)
+- [AI Disclosure & Publication Compliance](#ai-disclosure--publication-compliance)
+- [claudeq Mode](#claudeq-mode--live-derivation-journaling)
+- [Standards & Governance](#standards--governance-scale)
+
 ## Commands
 - **Dev Server**: `npm run dev`
 - **Build**: `npm run build`
@@ -19,16 +37,10 @@
 - `auto:` -- Automated (tier 0: skipped entirely)
 
 ## Multi-Agent Protocol (Shared Memory)
-- **Source of Truth:** The `_memory/` directory is the SHARED synchronization point for all agents (Claude, Antigravity, etc.).
-- **Read/Write:** Agents MUST check `_memory/daily/<date>.md` and `_memory/antigravity_context.md` before starting work.
-- **Protocol:**
-  1. Read latest daily log.
-  2. Read active context files.
-  3. Append updates to daily log.
-  4. Respect file locks if noted.
-- **Location:** If `_memory` is a symlink (e.g., to Google Drive), treat it transparently as the local `_memory/` path.
-- **SECURITY:** NEVER store API keys, credentials, or PII in memory logs. Redact sensitive data before writing.
-
+- **Source of Truth:** The `_memory/` directory is the shared sync point for all agents.
+- **Protocol:** Read latest daily log > Read active context > Append updates > Respect file locks.
+- **Location:** If `_memory` is a symlink (e.g., to cloud storage), treat it transparently as `_memory/`.
+- **Security:** Never store API keys, credentials, or PII in memory logs.
 
 ## Project Structure
 - `src/`: Astro website source
@@ -67,49 +79,25 @@
 - Documentation is a primary product; keep markdown clean and standard.
 
 ## Cross-AI Validation Protocol
-After ANY cross-AI validation session (Gemini review, multi-model cycle, independent peer review),
-append a row to `governance/TRANSPARENCY.md` > Cross-AI Validation Sessions table BEFORE ending
-the session. Format: `| Date | Topic | AI Systems | Human Decision | Derivation Log Ref |`
-This applies to all agents (Claude, Antigravity, etc.) working in this repo.
+After ANY cross-AI validation session, append a row to `governance/TRANSPARENCY.md` > Cross-AI Validation Sessions table BEFORE ending the session. Format: `| Date | Topic | AI Systems | Human Decision | Derivation Log Ref |`
 
 ## Auto-Track Protocol (Academic Transparency)
 
-When ANY of these occur during a session, you MUST:
-1. Append an entry to `qif-framework/QIF-DERIVATION-LOG.md` (if it's a framework insight)
-2. Append an entry to `qif-framework/QIF-FIELD-JOURNAL.md` (if it's a personal/experiential observation)
-3. Note it in the daily memory log with tag [DECISION] or [DERIVATION]
-4. **Update `qif-framework/QIF-RESEARCH-SOURCES.md`** if any new research paper, citation, RFC, standard, or external source was referenced or incorporated (see Research Sources Sync below)
+When ANY of these triggers occur, you MUST update the appropriate log:
 
-**Triggers:**
-- New hypothesis formulated or existing one revised
-- Cross-AI validation performed (Gemini, GPT, etc.)
-- Literature gap identified or confirmed
-- A claim is corrected (especially AI hallucination caught)
-- Framework architecture changes (bands, scoring, protocols)
-- A "Not Claimed" or "Established vs Hypothesis" boundary shifts
-- User says "remember this," "this is important," "lightbulb," or equivalent
-- New attack technique or therapeutic mapping discovered
+**Triggers:** New hypothesis, cross-AI validation, literature gap, corrected claim, framework architecture change, boundary shift (Not Claimed/Established), user says "remember this"/"lightbulb", new attack technique or therapeutic mapping.
 
-**Entry must include:**
-- Date and approximate time
-- Which AI system(s) were involved and their role
-- What the human decided (the human decision is ALWAYS documented)
-- What was accepted vs rejected from AI suggestions
-- Classification: VERIFIED / INFERRED / HYPOTHESIS
+**Destinations:**
+1. `qif-framework/QIF-DERIVATION-LOG.md` for framework insights
+2. `qif-framework/QIF-FIELD-JOURNAL.md` for personal/experiential observations (raw voice only)
+3. Daily memory log with tag `[DECISION]` or `[DERIVATION]`
+4. `qif-framework/QIF-RESEARCH-SOURCES.md` if any new external source was referenced
 
-**RAW Conversational Mode (Entry 61+, MANDATORY):**
-Derivation log entries that capture live sessions use Kevin's words **exactly as typed**. The tone is casual and raw. Typos are expected and intentional — they show the train of thought. Missing apostrophes, misspellings, uncorrected grammar — that's the point. Do NOT fix, clean up, rephrase, or "polish" anything the human says when writing it into the derivation log. The unedited text IS the record. AI commentary or structural framing around Kevin's words is fine, but his words stay untouched. Each message (human and AI) must include a datetime stamp in `[YYYY-MM-DD HH:MM]` format matching terminal time.
+**Entry must include:** Date/time, AI system(s) involved, human decision documented, what was accepted vs rejected, classification (VERIFIED / INFERRED / HYPOTHESIS).
 
-**Derivation Journal Mode (claudeq sessions only):**
-RAW conversational tracking to the derivation log ONLY activates when Kevin explicitly starts a derivation journal session (e.g., via `claudeq`). When claudeq mode is detected (via appended system prompt or Kevin saying "claudeq"/"start journaling"), you MUST:
-1. **Announce immediately:** Say "Derivation journal active. Tracking all exchanges to QIF-DERIVATION-LOG.md." so Kevin knows logging has started.
-2. **Determine the next entry number** by checking the latest entry in the derivation log.
-3. **Create the entry header** at the TOP of the entries section (reverse-chronological order).
-4. **Log all exchanges** with `[YYYY-MM-DD HH:MM]` timestamps, Kevin's words verbatim (no cleanup), and Claude's responses.
-Exceptions: sensitive/PII content, or Kevin says "incognito." Normal sessions (clauded) do NOT auto-track to the derivation log. Standard Auto-Track Protocol triggers (hypotheses, decisions, architecture changes, etc.) still apply as before in all sessions.
+**RAW entry policy:** Derivation log live sessions keep Kevin's words exactly as typed. No corrections, no polish, no grammar fixes. Typos are intentional. See [claudeq Mode](#claudeq-mode--live-derivation-journaling) for full spec.
 
-**Research Commit Messages:**
-For research-significant commits (derivation log entries, hypothesis docs, papers, blog posts), use this extended format:
+**Research Commit Messages** (research-significant commits only):
 ```
 [Action] [Scope]: Brief description
 
@@ -121,226 +109,106 @@ AI-Collaboration:
 
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 ```
-This is NOT required for routine code changes — only for research-significant commits.
 
-## Research Sources Sync Protocol (MANDATORY)
+## Sync Protocols
 
-**File:** `qif-framework/QIF-RESEARCH-SOURCES.md`
+Three project files must stay in sync with changes. All follow the same pattern: **when a relevant change occurs, update the file, update its metadata (date/counts), and verify with the associated script if one exists.**
 
-This is the living bibliography of ALL research sources used across the project. It MUST be kept in sync whenever new sources are incorporated.
+### Research Sources (`qif-framework/QIF-RESEARCH-SOURCES.md`)
+**When:** New citation in `paper/references.bib`, blog references research, NSP cites new RFC/NIST, new TARA technique references research, any new DOI/arXiv/RFC referenced for the first time.
+**How:** Add to correct domain section (Quantum Physics, Neuroscience, BCI Technology, Cybersecurity, etc.) using table format `| ID | Citation | URL | Source | QIF Relevance |`. Update header date and Appendix statistics.
 
-**When to update:**
-- A new citation is added to `paper/references.bib`
-- A blog post references external research (papers, standards, CVEs)
-- The NSP spec cites a new RFC, NIST standard, or cryptographic paper
-- A new TARA technique references published research
-- Website pages cite research (security page, whitepaper, etc.)
-- A validation or research session discovers new sources
-- Any DOI, arXiv ID, RFC number, or NIST publication is referenced for the first time
+### Automation Registry (`src/data/automation-registry.json`)
+**Script:** `scripts/update-automation-registry.mjs` | **CI:** `.github/workflows/update-registry.yml` (daily)
+**When:** Workflow created/deleted/changed, script added to `scripts/`, hook modified in `.claude/hooks/`, automation status changes.
+**How:** Add/modify entry with: id, name, description, trigger, type, source_file, status (`active`/`disabled`/`local_only`/`planned`), dependencies, outputs, category.
 
-**How to update:**
-1. Add the source to the appropriate domain section (or create a new section)
-2. Include: full citation, URL, source context (which file/page), QIF relevance
-3. Update the "Last updated" date in the header
-4. Update the Appendix source statistics table
-5. Use the established table format: `| ID | Citation | URL | Source | QIF Relevance |`
+### Timeline (`src/data/qif-timeline.json`)
+**Script:** `scripts/timeline-check.mjs` (use `--fix` to auto-update, `--dry-run` to preview) | **CI:** `.github/workflows/timeline-check.yml` (on push)
+**When:** New version released, discovery/derivation changes framework, cross-AI validation results, preprint published, new tool/page ships, hardware validation, dataset expansion.
+**Stats to update:** threat_techniques, bci_devices, brain_regions, physics_constraints, hourglass_bands, tara_tactics, neurorights_mapped, dsm5_diagnoses_mapped, research_sources, derivation_log_entries, field_journal_entries, blog_posts, cross_ai_validations, plus version fields.
 
-**Domain sections:** Quantum Physics, Neuroscience, BCI Technology, Cybersecurity, Electrode Technology, Signal Coherence, Cryptographic Standards, Consumer Sensor Exploitation, Neuroscience Foundations
+## Citation & Preprint Integrity Protocol
 
-## Automation Registry Sync Protocol (MANDATORY)
-
-**File:** `src/data/automation-registry.json`
-**Update script:** `scripts/update-automation-registry.mjs`
-**CI workflow:** `.github/workflows/update-registry.yml` (daily, auto-updates last_triggered/last_status)
-
-This is the central registry of ALL automations, workflows, scripts, hooks, and triggers in the project (30 entries). It MUST be kept in sync when automations are added, removed, or changed.
-
-**When to update:**
-- A new GitHub Actions workflow is created or deleted
-- A workflow is enabled or disabled
-- A new script is added to `scripts/`
-- A hook is added or modified in `.claude/hooks/`
-- A planned automation is implemented or abandoned
-- A workflow's trigger, schedule, or behavior changes
-
-**How to update:**
-1. Add or modify the entry in `src/data/automation-registry.json`
-2. Include: id, name, description, trigger, type, source_file, status, dependencies, outputs, category
-3. The daily CI workflow auto-updates `last_triggered` and `last_status` via GitHub API
-4. For manual updates: `node scripts/update-automation-registry.mjs`
-
-**Entry statuses:** `active`, `disabled`, `local_only`, `planned`
-
-## Timeline Sync Protocol (MANDATORY)
-
-**File:** `src/data/qif-timeline.json`
-**Staleness check:** `scripts/timeline-check.mjs`
-**CI workflow:** `.github/workflows/timeline-check.yml` (runs on push to main)
-
-This is the chronological record of ALL project milestones (43 entries) and current stats. It feeds into the unified API at `/api/qif.json`. It MUST be updated when significant milestones occur.
-
-**When to update milestones:**
-- A new framework version is released (QIF, TARA, NSP, NISS, Neurowall)
-- A new discovery or derivation changes the framework
-- A cross-AI validation session produces results
-- A preprint version is published
-- A new tool, page, or major feature ships
-- Hardware validation results are obtained
-- A significant dataset expansion occurs (new techniques, devices, brain regions)
-
-**When to update current_stats:**
-- Any count changes: threat_techniques, bci_devices, brain_regions, physics_constraints, hourglass_bands, tara_tactics, neurorights_mapped, dsm5_diagnoses_mapped, physics_constants_verified, derivation_log_entries, field_journal_entries, blog_posts, cross_ai_validations, research_sources
-- Any version bumps: preprint_version, nsp_version, tara_version, atlas_version, neurowall_version
-
-**Staleness detection:** `node scripts/timeline-check.mjs` compares timeline stats against actual source files. Run `--fix` to auto-update stats, `--dry-run` to preview. The CI workflow warns on push if stats are stale.
-
-## Citation & Preprint Integrity Protocol (MANDATORY)
-
-This protocol exists because the Zenodo preprint v1.0 shipped with 3 fabricated citations and 3 wrong author lists — all AI-hallucinated. Dr. Schroder caught one publicly. We cannot afford a repeat.
+This protocol exists because preprint v1.0 shipped with 3 fabricated citations. Every citation MUST be verified.
 
 ### Citation Rules
-1. **NEVER trust AI-generated citations.** Every DOI, arxiv ID, author list, and title MUST be verified by resolving the link before any publication.
-2. **Verify method:** Run Crossref API (`https://api.crossref.org/works/DOI`), fetch the arxiv abstract page, or visit the publisher page. If the DOI doesn't resolve, the citation is fabricated.
-3. **Cross-AI validation does NOT substitute for verification.** Gemini, GPT, etc. can also hallucinate citations. Only a resolved URL counts as verified.
-4. **When adding a new reference to the LaTeX paper (`paper/references.bib`):**
-   - Resolve the DOI or URL and confirm: title, all authors (first and last), year, journal/venue
-   - Add a `note = {Verified YYYY-MM-DD via [source]}` field to the BibTeX entry
-   - If the reference came from AI suggestion, add `note = {AI-suggested, verified YYYY-MM-DD via [source]}`
+1. **Never trust AI-generated citations.** Verify every DOI, arXiv ID, author list, and title by resolving the link
+2. **Verify method:** Crossref API (`https://api.crossref.org/works/DOI`), arXiv abstract page, or publisher page. Unresolvable DOI = fabricated
+3. **Cross-AI validation does NOT substitute for verification.** Only a resolved URL counts
+4. **BibTeX entries** must include `note = {Verified YYYY-MM-DD via [source]}` (or `AI-suggested, verified...` if from AI)
 
-### Preprint Version Sync Protocol
-When a new version of the preprint is compiled and ready for release:
-1. **Compile:** `cd paper && make deploy` (builds PDF + copies to `docs/papers/`)
-2. **Update LaTeX version note** in `paper/sections/09-limitations.tex` (revision description)
-3. **Upload to Zenodo** as a new version (use all-versions DOI 10.5281/zenodo.18640105)
-4. **Build site:** `npm run build` (prebuild auto-copies latest PDF)
-5. **Commit and push** — GitHub Pages deploys automatically
-6. **Verify the live PDF** at `https://qinnovate.com/papers/qif-bci-security-2026.pdf` contains the changes
+### Preprint Version Sync
+1. Compile: `cd paper && make deploy`
+2. Update version note in `paper/sections/09-limitations.tex`
+3. Upload to Zenodo (all-versions DOI: 10.5281/zenodo.18640105)
+4. Build site: `npm run build`
+5. Commit and push
+6. Verify live PDF at `https://qinnovate.com/papers/qif-bci-security-2026.pdf`
 
 ### DOI Convention
-- **Always use the all-versions DOI** (`10.5281/zenodo.18640105`) in public references — it automatically resolves to the latest version.
-- **Never hardcode version-specific DOIs** in public-facing pages (site, README, whitepaper). Version-specific DOIs are only for historical records (post-mortems, sent emails).
+Always use the all-versions DOI (`10.5281/zenodo.18640105`) in public references. Version-specific DOIs only for historical records.
 
-## AI Disclosure & Publication Compliance (MANDATORY)
+## AI Disclosure & Publication Compliance
 
-This section ensures compliance with AI disclosure policies across all target venues. These rules apply to ALL papers, preprints, blog posts, and public documents.
+AI tools cannot be authors. Every paper, preprint, and public post must include disclosure. Use `/ai-disclosure-compliance` skill for full checklist and venue-specific requirements.
 
-### Publisher Policies (as of Feb 2026)
+**Key venue policies (Feb 2026):**
 
-| Venue | AI Authorship | Disclosure Location | Key Requirement |
-|-------|--------------|---------------------|-----------------|
-| **arXiv** | Prohibited | Field norms (dedicated section recommended) | Author takes full responsibility; name tools and roles. CS review/survey ban (Oct 2025) |
-| **ACM** (WOOT, CCS) | Prohibited | Acknowledgements | "Commensurate with proportion of new text generated"; AI cannot be cited |
-| **IEEE** (Graz BCI, ICBC) | Prohibited | Acknowledgements | Name AI system, identify sections used, describe level of use |
-| **USENIX/WOOT** | Prohibited | Paper body + HotCRP attestation | No fully AI-generated sections; written attestation required |
-| **Springer/Nature** | Prohibited | Methods section | AI images prohibited; copy editing exempt |
-| **Elsevier** | Prohibited | Dedicated section above References | Template statement: "During preparation... used [TOOL] for [REASON]" |
-| **Wiley** | Prohibited | Methods OR Acks OR dedicated | IP ownership check required; no AI photos |
-| **Science/AAAS** | Prohibited | Cover letter + Acks + Methods | NEAR-BAN on AI text; full prompts required |
-| **AAAI** | Prohibited | Paper body | AI text banned unless it's the experiment |
-| **NeurIPS** | Prohibited | Experimental setup | Post-acceptance revocation possible |
-| **ICML** | Prohibited | Paper body | Immediate rejection for undisclosed AI |
-| **ICLR** | Prohibited | Paper body + submission form | Desk rejection; reviewer cross-enforcement |
-| **ICMJE** | Prohibited | Acks (writing) / Methods (data) | Medical journal standard; AI cannot be cited |
-| **COPE** | Prohibited | Transparent (not prescribed) | Evolving enforcement framework |
-| **Zenodo** | N/A (repository) | No specific policy | Apply strictest target venue policy regardless |
+| Venue | Key Requirement |
+|-------|-----------------|
+| arXiv | Name tools, author responsibility statement, CS review/survey ban (Oct 2025) |
+| ACM (WOOT, CCS) | State proportion of AI text, cannot post to ResearchGate/Academia.edu |
+| IEEE (Graz BCI) | Name system, identify sections, describe level |
+| USENIX/WOOT | No fully AI-generated sections, HotCRP written attestation |
+| Science/AAAS | Near-ban on AI text, full prompts required |
+| ICLR/ICML (2026) | Desk rejection for undisclosed AI, reviewer cross-enforcement |
 
-**Full policy details with URLs:** See skill `ai-disclosure-compliance` and its `references/venue-policies.md`.
+**Full policy details:** `~/.claude/skills/ai-disclosure-compliance/references/venue-policies.md`
 
-### Pre-Publication AI Disclosure Checklist
+### Pre-Publication Checklist
+1. AI tools NOT listed as authors
+2. Disclosure section exists (Section 9.7 in preprint)
+3. Tools named with versions
+4. Sections identified, level described, proportion stated
+5. Human-originated contributions explicitly stated
+6. Author responsibility statement included
+7. Transparency log URL provided (`governance/TRANSPARENCY.md`)
+8. Citation fabrication history disclosed (v1.0 had 3 fabricated)
 
-Before ANY paper submission, preprint upload, or public post, verify:
+### Blog Posts
+Footer: "Written with AI assistance (Claude). All claims verified by the author."
 
-1. **AI tools are NOT listed as authors.** Co-Authored-By in git commits is fine; author lists in papers are not.
-2. **Disclosure section exists** in the paper (Section 9.7 "AI Tool Disclosure" in our preprint).
-3. **Tools are named with versions:** e.g., "Claude 4 (Anthropic), Gemini 2.0 (Google), ChatGPT 4o (OpenAI)"
-4. **Sections where AI was used are identified** (IEEE requirement): literature review, code generation, writing assistance, cross-validation — mapped to specific paper sections.
-5. **Level of use is described** (IEEE requirement): e.g., "draft text substantially rewritten by author" vs "code generated and reviewed."
-6. **Proportion is stated** (ACM requirement): e.g., "less than 15% of text retained verbatim from AI output."
-7. **Human-originated contributions are explicitly stated:** architecture, methodology, scoring, clinical mappings, conclusions.
-8. **Author responsibility statement is included:** "The author takes full responsibility for all content in this paper, irrespective of how it was generated."
-9. **Transparency log URL is provided:** Link to `governance/TRANSPARENCY.md`.
-10. **Citation fabrication history is disclosed:** Our v1.0 had 3 fabricated citations; this must be acknowledged in every version.
+## claudeq Mode — Live Derivation Journaling
 
-### Venue-Specific Notes
+When a session uses the `claudeq` config (or Kevin says "claudeq"/"start journaling"), every exchange gets logged raw to `qif-framework/QIF-DERIVATION-LOG.md`.
 
-- **ACM venues (WOOT):** Authors cannot post to ResearchGate, Academia.edu, Mendeley, or Sci-Hub. arXiv and Zenodo are allowed. Post the DOI of the published version alongside the preprint.
-- **IEEE venues:** "The use of AI systems for editing and grammar enhancement is common practice and generally outside the intent of the policy" — but must still be disclosed if substantial.
-- **USENIX/WOOT:** No fully AI-generated sections. Written attestation required in HotCRP. OSDI '26: "submission of work wholly or largely generated by AI constitutes fraud."
-- **arXiv:** Three requirements: (1) AI cannot be author, (2) disclose significant use with tools named, (3) author responsibility statement. Oct 2025: CS review/survey papers now require prior peer-review acceptance.
-- **Science/AAAS:** STRICTEST policy. AI-generated prose in the body is PROHIBITED. Full prompts must be disclosed in Methods. One of only ~4 publishers with an actual ban vs disclosure.
-- **ICLR/ICML (2026):** Desk rejection for undisclosed AI use. ICLR has cross-enforcement: reviewers who fail to disclose risk desk rejection of their own papers.
-- **NeurIPS:** Jan 2026 report found 100+ AI-hallucinated citations in accepted NeurIPS 2025 papers.
-- **Zenodo:** No AI-specific policy, but apply the strictest target venue policy regardless.
-- **No government mandate:** Neither US federal law nor EU regulation currently mandates AI disclosure in academic papers. Publisher policies are the only binding framework.
-
-### Blog Posts & Public Content
-
-For blog posts on qinnovate.com, include a footer: "Written with AI assistance (Claude). All claims verified by the author." This is lighter than paper-level disclosure but maintains transparency.
-
-## claudeq Mode — Live Derivation Journaling (MANDATORY when active)
-
-When a session is started with the `claudeq` configuration, you are in **live derivation journaling mode**. This means every exchange gets logged raw to `qif-framework/QIF-DERIVATION-LOG.md` in real-time.
-
-### Activation
-The user launches Claude Code with the `claudeq` config (separate from the default `clauded` config). When active, the session will include a system indicator. If the user says "claudeq" or "start journaling" mid-session, begin logging immediately.
-
-### What to do when claudeq is active
-
-1. **Determine the next entry number.** Check the latest entry in `qif-framework/QIF-DERIVATION-LOG.md` and increment by 1.
-
-2. **Create the entry header immediately** at the TOP of the entries section (entries are in descending/reverse-chronological order):
+### Activation Steps
+1. Announce: "Derivation journal active. Tracking all exchanges to QIF-DERIVATION-LOG.md."
+2. Determine next entry number from the log
+3. Create entry header at TOP (reverse-chronological):
    ```markdown
    ## Entry [N]: [Topic TBD] {#entry-[n]-[slug]}
-
    **Date:** [YYYY-MM-DD], ~[HH:MM]
-   **Classification:** [TBD — fill as session progresses]
+   **Classification:** [TBD]
    **AI Systems:** Claude Opus 4.6
    **Connected entries:** [fill as connections emerge]
    ```
+4. Log every exchange with `[YYYY-MM-DD HH:MM]` timestamps
+5. Kevin's words are COMPLETELY RAW. No corrections. No polish. No grammar fixes
+6. Update entry title when topic becomes clear
+7. At session end, add AI Collaboration section and update Entry Index table
 
-3. **Log every exchange as it happens.** Use this format:
-   ```markdown
-   ### [YYYY-MM-DD HH:MM] Kevin:
-
-   [Kevin's exact words, completely unedited. Keep typos, grammar, everything.]
-
-   ### [YYYY-MM-DD HH:MM] Claude:
-
-   [Your response, summarized or full as appropriate.]
-   ```
-
-4. **Kevin's words are COMPLETELY RAW.** No corrections. No polish. No grammar fixes. No missing-apostrophe fixes. The raw text IS the record.
-
-5. **Log everything** unless Kevin says "incognito" for a specific exchange, or it contains PII/credentials.
-
-6. **Update the entry title** as the topic becomes clear. The initial `[Topic TBD]` should be replaced once you understand what the session is about.
-
-7. **At session end,** add the AI Collaboration section:
-   ```markdown
-   ### AI Collaboration
-
-   - **Claude Opus 4.6:** [roles performed]
-   - **Human decided:** [list of decisions Kevin made]
-   ```
-
-8. **Update the Entry Index table** at the top of the derivation log with the new entry.
-
-9. **Update the Project Timeline table** if the entry is significant enough.
-
-### What NOT to do in claudeq mode
-- Do NOT skip logging because an exchange seems trivial
-- Do NOT edit Kevin's words for clarity, grammar, or style
-- Do NOT wait until the end to write the entry (write as you go)
-- Do NOT create a separate file (everything goes in QIF-DERIVATION-LOG.md)
-
-### Relationship to other protocols
-- claudeq entries still trigger the Auto-Track Protocol (glossary sync, research sources sync, etc.)
-- Cross-AI validation rows still go to TRANSPARENCY.md
-- Daily memory logs still get written normally
+### Rules
+- Do NOT skip logging trivial exchanges
+- Do NOT edit Kevin's words
+- Do NOT wait until end to write (log as you go)
+- Do NOT create separate files (everything in QIF-DERIVATION-LOG.md)
+- Standard triggers (glossary sync, research sources, etc.) still apply
+- Exception: "incognito" exchanges or PII/credentials
 
 ## Standards & Governance (Scale)
 - **QIF (Security)**: All architectural changes must align with the 11-band hourglass model.
 - **TARA (Threats)**: New techniques must be scored with NISS (Neural Impact Scoring System).
 - **Governance**: Refer to `governance/` for ethics, consent, and regulatory compliance.
 - **Scale**: This is a standards body. Changes affect the industry. Verification is critical.
-

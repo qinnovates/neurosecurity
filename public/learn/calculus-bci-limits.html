@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculus of BCI Limits</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #e0e0e0; font-family: 'Segoe UI', system-ui, sans-serif; overflow-x: hidden; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+  h1 { text-align: center; font-size: 2rem; margin: 20px 0 5px; color: #7faaff; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 30px; font-size: 0.95rem; }
+  .section { margin-bottom: 50px; }
+  .section h2 { color: #7faaff; font-size: 1.3rem; margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+  .section p { color: #bbb; line-height: 1.7; margin-bottom: 10px; font-size: 0.95rem; }
+  .hl-r { color: #ff6b6b; font-weight: 600; }
+  .hl-b { color: #7faaff; font-weight: 600; }
+  .hl-g { color: #4ecdc4; font-weight: 600; }
+  .hl-y { color: #ffd93d; font-weight: 600; }
+  .hl-p { color: #c77dff; font-weight: 600; }
+  canvas { display: block; margin: 0 auto; border-radius: 8px; background: #111118; cursor: crosshair; }
+  .canvas-wrap { position: relative; margin: 15px auto; width: fit-content; }
+  .controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 15px 0; }
+  .controls label { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #999; }
+  .controls input[type="range"] { width: 140px; accent-color: #7faaff; }
+  .info-box { background: #111118; border: 1px solid #222; border-radius: 8px; padding: 15px; margin: 10px 0; font-size: 0.9rem; line-height: 1.7; }
+  .readout { text-align: center; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #666; margin: 5px 0; min-height: 22px; }
+  .eq-block { text-align: center; margin: 18px 0; font-size: 1.1rem; color: #7faaff; }
+  details { background: #0d0d18; border: 1px solid #1a1a2a; border-radius: 8px; margin: 12px 0; overflow: hidden; }
+  details summary { padding: 12px 16px; cursor: pointer; color: #c77dff; font-size: 0.9rem; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 8px; }
+  details summary:hover { background: #111128; }
+  details summary::before { content: '\25B6'; font-size: 0.7rem; transition: transform 0.2s; display: inline-block; }
+  details[open] summary::before { transform: rotate(90deg); }
+  details .deep-content { padding: 0 16px 16px; font-size: 0.88rem; line-height: 1.7; color: #aaa; }
+  details .deep-content p { margin-bottom: 8px; }
+  details .deep-content strong { color: #7faaff; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+  .fact-card { background: #111118; border: 1px solid #222; border-radius: 8px; padding: 12px; font-size: 0.85rem; line-height: 1.5; }
+  .fact-card strong { color: #7faaff; }
+  .warning { border-color: #ff6b6b44; }
+  .safe { border-color: #4ecdc444; }
+  .nav { text-align: center; margin-bottom: 25px; font-size: 0.85rem; }
+  .nav a { color: #7faaff; text-decoration: none; margin: 0 10px; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Calculus of BCI Limits</h1>
+<p class="subtitle">The physics constraints on brain-computer interfaces, visualized as the calculus they are.</p>
+<div class="nav">
+  <a href="calculus-fundamentals.html">&larr; Calculus is Circles</a> |
+  <a href="calculus-signals.html">Neural Signals &rarr;</a>
+</div>
+
+<!-- ========== 1: THERMAL BUDGET ========== -->
+<div class="section">
+  <h2>1. The Thermal Ceiling: Power as a Derivative</h2>
+  <p>An implant dissipates heat. Brain tissue can only absorb <span class="hl-r">1.0 &deg;C</span> of temperature rise before damage begins (IEC 60601-1). Power is a rate: energy per second. Temperature rise is the integral of that power over time, minus what blood flow (perfusion) carries away.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="thermalCanvas" width="900" height="380"></canvas>
+  </div>
+  <div class="readout" id="thermalReadout"></div>
+  <div class="controls">
+    <label>Implant power (mW) <input type="range" id="thermalPower" min="1" max="60" value="15"></label>
+    <label>Blood perfusion <input type="range" id="thermalPerfusion" min="10" max="100" value="50"></label>
+    <label>Channels <input type="range" id="thermalChannels" min="100" max="10000" value="1024" step="100"></label>
+  </div>
+
+  <div class="eq-block">
+    $\Delta T = \frac{P_{\text{total}}}{4\pi k r} \cdot \left(1 - e^{-t/\tau}\right) \leq 1.0°C$
+  </div>
+
+  <div class="info-box">
+    <span class="hl-r">Power ($P$)</span> is a derivative: $P = dE/dt$ (energy change per second).<br>
+    <span class="hl-y">Temperature ($\Delta T$)</span> is the integral: how much heat has accumulated minus what perfusion removes.<br>
+    <span class="hl-g">Perfusion</span> is nature's cooling system. More blood flow = more heat carried away.<br><br>
+    <strong>The constraint:</strong> No matter how many channels you want, total power dissipation must stay under the thermal ceiling.
+    Neuralink N1: 1024 channels at ~23 mW. The limit for cortical surface is ~40 mW. Go over and you cook the tissue.
+  </div>
+
+  <details>
+    <summary>Deep dive: Why power scales with channels</summary>
+    <div class="deep-content">
+      <p>Each recording channel needs an amplifier, ADC, and digital logic. Modern neural amplifiers consume ~1-5 $\mu$W per channel. So 1000 channels = 1-5 mW just for analog front-end. Add digital processing, wireless telemetry, and stimulation, and total power climbs to 15-40 mW.</p>
+      <p>The derivative relationship: $P_{\text{total}} = n_{\text{ch}} \cdot P_{\text{per\_ch}} + P_{\text{digital}} + P_{\text{telemetry}}$</p>
+      <p>As $n_{\text{ch}}$ grows (Moore's Law doubling every ~7.4 years), $P_{\text{per\_ch}}$ must shrink at least as fast, or the thermal ceiling is hit. This is why BCI scaling is fundamentally a power engineering problem.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 2: SIGNAL AND NOISE ========== -->
+<div class="section">
+  <h2>2. Signal vs Noise: The Thermal Floor</h2>
+  <p>Neural spikes are tiny: 40-500 $\mu$V. The electrode and tissue generate thermal noise (Johnson-Nyquist noise) that sets an <span class="hl-r">absolute floor</span> on what you can detect. This floor comes directly from the Boltzmann constant and body temperature.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="snrCanvas" width="900" height="350"></canvas>
+  </div>
+  <div class="readout" id="snrReadout"></div>
+  <div class="controls">
+    <label>Spike amplitude ($\mu$V) <input type="range" id="snrSpike" min="10" max="500" value="100"></label>
+    <label>Electrode impedance (k$\Omega$) <input type="range" id="snrImpedance" min="50" max="5000" value="1000" step="50"></label>
+    <label>Bandwidth (kHz) <input type="range" id="snrBandwidth" min="1" max="30" value="10"></label>
+  </div>
+
+  <div class="eq-block">
+    $V_{\text{noise}} = \sqrt{4 k_B T R \Delta f} \quad \approx 13.1\;\mu V \text{ at } 1\text{M}\Omega, 10\text{kHz}, 310\text{K}$
+  </div>
+
+  <div class="info-box">
+    This is <strong>thermodynamics meeting calculus</strong>. The noise voltage comes from the square root of four quantities multiplied together:<br>
+    $k_B$ = Boltzmann constant (how much energy per degree of temperature)<br>
+    $T$ = body temperature (310 K)<br>
+    $R$ = electrode impedance (resistance)<br>
+    $\Delta f$ = measurement bandwidth<br><br>
+    The <span class="hl-g">signal-to-noise ratio</span> ($\text{SNR} = V_{\text{spike}} / V_{\text{noise}}$) determines if you can even see a neural spike.
+    Below SNR = 3, spikes are buried in noise. This is a physics limit, not an engineering one.
+  </div>
+
+  <details>
+    <summary>Deep dive: Where the noise comes from (circles again)</summary>
+    <div class="deep-content">
+      <p>Johnson-Nyquist noise is caused by <strong>thermal agitation of electrons</strong> in the electrode. At body temperature, electrons have kinetic energy $\frac{1}{2}k_BT$ per degree of freedom. They bounce around randomly, creating tiny random voltages.</p>
+      <p>The Fourier transform of this random signal is <strong>flat across all frequencies</strong> (white noise). Each frequency bin contributes equally. The total noise power is the integral over the measurement bandwidth: $\int_0^{\Delta f} 4k_BTR\,df = 4k_BTR\Delta f$.</p>
+      <p>This is why bandwidth matters: wider bandwidth = integrating more noise frequencies = more total noise. Neural spike detection uses 300-10,000 Hz. If you could narrow that, you'd reduce noise, but you'd also lose the spike waveform (which has frequency content across that whole range).</p>
+      <p><strong>The circle connection:</strong> White noise is ALL circles (all frequencies) at equal amplitude with random phases. A neural spike is a specific pattern of circles. Detection = finding the spike's pattern in a sea of random circles. SNR tells you how loud the spike's circles are relative to the noise circles.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 3: SHANNON CAPACITY ========== -->
+<div class="section">
+  <h2>3. Shannon Capacity: The Information Limit</h2>
+  <p>Claude Shannon proved in 1948 that every noisy channel has a maximum data rate. No matter how clever your encoding, you cannot exceed this limit. For BCI, this sets the theoretical maximum bits per second you can extract from neural tissue.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="shannonCanvas" width="900" height="350"></canvas>
+  </div>
+  <div class="readout" id="shannonReadout"></div>
+  <div class="controls">
+    <label>Bandwidth (kHz) <input type="range" id="shannonBW" min="1" max="30" value="10"></label>
+    <label>SNR (dB) <input type="range" id="shannonSNR" min="0" max="40" value="15"></label>
+  </div>
+
+  <div class="eq-block">
+    $C = B \cdot \log_2(1 + \text{SNR})$
+  </div>
+
+  <div class="info-box">
+    <strong>Bandwidth ($B$)</strong> is a frequency range (the set of circles your channel can carry).<br>
+    <strong>SNR</strong> determines how many distinguishable signal levels fit above the noise floor.<br>
+    <strong>$\log_2$</strong> converts signal levels to bits.<br><br>
+    A 10 kHz bandwidth with SNR of 15 dB gives a capacity of ~40 kbits/sec per channel.
+    With 1024 channels, theoretical max is ~40 Mbits/sec. But wireless telemetry from inside the skull to outside is the bottleneck: current BCI links manage ~1-20 Mbps total.
+  </div>
+
+  <details>
+    <summary>Deep dive: Logarithms are inverse exponentials</summary>
+    <div class="deep-content">
+      <p>$\log_2(x)$ asks: "2 raised to what power gives $x$?" It's the inverse of $2^x$.</p>
+      <p>Shannon used $\log_2$ because information is measured in <strong>bits</strong> (binary digits). Each bit doubles the number of distinguishable messages. 1 bit = 2 messages, 2 bits = 4, 10 bits = 1024. The log tells you how many doublings you have available.</p>
+      <p><strong>Why SNR is inside a log:</strong> Adding more signal power gives diminishing returns. Going from SNR 10 to 20 (doubling power) doesn't double capacity. It adds $\log_2(21) - \log_2(11) \approx 0.93$ bits per Hertz. The log compresses the relationship. This is fundamental: information is logarithmic in signal power.</p>
+      <p><strong>Calculus connection:</strong> The derivative of $\ln(x)$ is $1/x$. Each additional unit of signal power contributes less and less to capacity. This is the mathematical reason that brute-force power increases can't overcome fundamental limits.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 4: MOORE'S LAW SCALING ========== -->
+<div class="section">
+  <h2>4. Channel Scaling: Exponential Growth Meets Physics Walls</h2>
+  <p>BCI channel counts double every ~7.4 years (Stevenson & Kording, 2011). This is exponential growth. The derivative of an exponential is itself: the rate of channel growth is proportional to how many channels you already have. But exponentials always hit walls.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="mooreCanvas" width="900" height="380"></canvas>
+  </div>
+  <div class="readout" id="mooreReadout"></div>
+  <div class="controls">
+    <label>Starting channels <input type="range" id="mooreStart" min="1" max="1024" value="100" step="10"></label>
+    <label>Doubling time (years) <input type="range" id="mooreDouble" min="3" max="15" value="7" step="0.5"></label>
+    <label>Thermal limit (channels) <input type="range" id="mooreLimit" min="1000" max="1000000" value="100000" step="1000"></label>
+  </div>
+
+  <div class="eq-block">
+    $n_{\text{ch}}(t) = n_0 \cdot 2^{t / T_{\text{double}}}$
+  </div>
+
+  <div class="info-box">
+    <span class="hl-r">Red curve</span>: unconstrained exponential growth (what happens if physics doesn't intervene).<br>
+    <span class="hl-y">Yellow ceiling</span>: the thermal limit (max channels before $\Delta T > 1°C$).<br>
+    <span class="hl-g">Green curve</span>: actual trajectory (exponential that saturates at the ceiling).<br><br>
+    <strong>Calculus connection:</strong> The derivative of $n_0 \cdot 2^{t/T}$ is $\frac{n_0 \ln 2}{T} \cdot 2^{t/T}$. The growth rate itself grows exponentially. This is why exponentials feel slow at first, then explode. Neuralink went from 96 to 1024 channels (10x) in 5 years. The next 10x (to 10,000) will run into the thermal ceiling unless power per channel drops proportionally.
+  </div>
+</div>
+
+<!-- ========== 5: COHERENCE (Cs) ========== -->
+<div class="section">
+  <h2>5. Coherence ($C_s$): The Signal Integrity Constraint</h2>
+  <p>Even if you have enough channels, enough bandwidth, and stay under the thermal ceiling, the BCI must not disrupt the brain's own signal coherence. $C_s = e^{-S_c}$ where $S_c$ is spectral entropy. This is the QIF security constraint: the one nobody else measures.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="csCanvas" width="900" height="380"></canvas>
+  </div>
+  <div class="readout" id="csReadout"></div>
+  <div class="controls">
+    <label>Spectral entropy ($S_c$) <input type="range" id="csEntropy" min="0" max="300" value="50"></label>
+    <label>Attack injection <input type="range" id="csAttack" min="0" max="100" value="0"></label>
+  </div>
+
+  <div class="eq-block">
+    $C_s = e^{-S_c} \geq C_{s,\min}(F)$
+  </div>
+
+  <div class="info-box">
+    <span class="hl-b">Blue spectrum</span>: the frequency decomposition of the neural signal (Fourier transform).<br>
+    <span class="hl-g">Green line</span>: $C_s$ value (coherence). High when spectrum is ordered, low when noisy.<br>
+    <span class="hl-r">Red</span>: attack injection adds noise or foreign frequencies, disrupting the spectrum.<br><br>
+    $e^{-S_c}$ is a <strong>decaying exponential</strong>. As entropy ($S_c$) increases, coherence drops toward zero. The derivative of $e^{-x}$ is $-e^{-x}$: the rate of coherence loss is proportional to the current coherence level. Small disruptions to a coherent signal cause small drops. But once coherence is already low, even more disruption barely changes it (the signal is already destroyed).
+  </div>
+
+  <details>
+    <summary>Deep dive: Why $e^{-x}$ and not some other decay</summary>
+    <div class="deep-content">
+      <p>The exponential $e^{-x}$ is the unique function where the <strong>rate of decay equals the current value</strong>. This models systems where degradation is proportional to what remains: radioactive decay, capacitor discharge, and neural signal coherence.</p>
+      <p>Spectral entropy $S_c = -\sum p_i \log p_i$ where $p_i$ is the power fraction at each frequency bin. A perfectly ordered signal (single frequency) has $S_c = 0$, giving $C_s = 1$. A flat (white noise) spectrum maximizes $S_c$, driving $C_s$ toward 0.</p>
+      <p>The $C_s$ threshold depends on what brain function ($F$) you're trying to preserve. Motor control might tolerate $C_s \geq 0.3$. Cognitive tasks need $C_s \geq 0.7$. Consciousness itself may require $C_s \geq 0.5$ (this is speculative, connects to IIT).</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 6: THE UNIFIED PICTURE ========== -->
+<div class="section">
+  <h2>6. The Unified Constraint Space</h2>
+  <p>All 13 constraints are coupled. You can't solve one without affecting others. This visualization shows the feasible region: the set of (channels, power, bandwidth) combinations where ALL constraints are satisfied simultaneously.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="unifiedCanvas" width="900" height="400"></canvas>
+  </div>
+  <div class="readout" id="unifiedReadout">Hover to explore the constraint space</div>
+  <div class="controls">
+    <label>Year <input type="range" id="unifiedYear" min="2020" max="2040" value="2026"></label>
+  </div>
+
+  <div class="grid-2">
+    <div class="fact-card">
+      <strong>Thermal ceiling</strong><br>
+      $P_{\text{total}} \leq 40\text{mW}$ (cortical surface)<br>
+      Sets max channels at current power/channel
+    </div>
+    <div class="fact-card">
+      <strong>Noise floor</strong><br>
+      $V_{\text{noise}} \geq 13.1\;\mu V$ (Johnson-Nyquist at 310K)<br>
+      Sets minimum detectable spike amplitude
+    </div>
+    <div class="fact-card">
+      <strong>Shannon capacity</strong><br>
+      $C = B\log_2(1+\text{SNR})$<br>
+      Sets max information throughput per channel
+    </div>
+    <div class="fact-card">
+      <strong>Coherence threshold</strong><br>
+      $C_s = e^{-S_c} \geq C_{s,\min}$<br>
+      Sets max allowable signal disruption
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>The key insight:</strong> Every constraint is calculus. Thermal limits are integrals (accumulated heat). Noise floors are square roots of integrals (total noise power across bandwidth). Shannon capacity uses logarithms (inverse exponentials). Channel scaling is exponential growth. Coherence is exponential decay. The BCI Limits Equation is a system of coupled differential and integral constraints.<br><br>
+    The feasible design region <strong>shrinks over time</strong> as channel counts grow (exponential pressure against thermal ceiling), but <strong>expands</strong> as power-per-channel drops (engineering progress). The question is which rate wins. So far, engineering is keeping up. But the thermal ceiling is absolute.
+  </div>
+</div>
+
+<div style="text-align:center; color:#444; padding: 40px 0 20px; font-size: 0.8rem;">
+  Part of the QIF Framework. <a href="calculus-fundamentals.html" style="color:#7faaff; text-decoration:none;">&larr; Calculus is Circles</a> |
+  <a href="calculus-signals.html" style="color:#7faaff; text-decoration:none;">Neural Signals &rarr;</a>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ========== 1: THERMAL BUDGET ==========
+(() => {
+  const c = document.getElementById('thermalCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('thermalReadout');
+  const powerSlider = document.getElementById('thermalPower');
+  const perfSlider = document.getElementById('thermalPerfusion');
+  const chanSlider = document.getElementById('thermalChannels');
+  const W = c.width, H = c.height;
+  const pad = { l: 60, r: 30, t: 25, b: 40 };
+  const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const P = parseFloat(powerSlider.value); // mW
+    const perf = parseFloat(perfSlider.value) / 100;
+    const nch = parseInt(chanSlider.value);
+    const tMax = 60; // seconds
+    const Tmax = 2.0; // display range
+    const thermalLimit = 1.0;
+
+    // Thermal model: dT = (P / (4*pi*k*r)) * (1 - e^(-t/tau))
+    // Simplified: steady-state dT proportional to P, reduced by perfusion
+    const k_tissue = 0.6; // W/(m*K)
+    const r_eff = 0.005; // 5mm effective radius
+    const tau = 10 / perf; // time constant, shorter with more perfusion
+    const dT_steady = (P / 1000) / (4 * Math.PI * k_tissue * r_eff) * (1 - perf * 0.5);
+
+    function tToX(t) { return pad.l + (t / tMax) * gW; }
+    function TToY(T) { return pad.t + (1 - T / Tmax) * gH; }
+
+    // Grid
+    ctx.strokeStyle = '#1a1a2a'; ctx.lineWidth = 0.5;
+    for (let T = 0; T <= Tmax; T += 0.5) {
+      ctx.beginPath(); ctx.moveTo(pad.l, TToY(T)); ctx.lineTo(W - pad.r, TToY(T)); ctx.stroke();
+    }
+
+    // Thermal limit line
+    ctx.strokeStyle = '#ff6b6b'; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+    ctx.beginPath(); ctx.moveTo(pad.l, TToY(thermalLimit)); ctx.lineTo(W - pad.r, TToY(thermalLimit)); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ff6b6b'; ctx.font = '11px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('DAMAGE THRESHOLD (1.0\u00B0C)', W - pad.r - 5, TToY(thermalLimit) - 8);
+
+    // Temperature rise curve
+    ctx.beginPath(); ctx.strokeStyle = dT_steady > thermalLimit ? '#ff6b6b' : '#4ecdc4'; ctx.lineWidth = 2.5;
+    let crossTime = null;
+    for (let t = 0; t <= tMax; t += 0.2) {
+      const dT = dT_steady * (1 - Math.exp(-t / tau));
+      const x = tToX(t), y = TToY(dT);
+      t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      if (dT >= thermalLimit && crossTime === null) crossTime = t;
+    }
+    ctx.stroke();
+
+    // Perfusion cooling contribution (shaded area below curve)
+    ctx.beginPath();
+    ctx.moveTo(tToX(0), TToY(0));
+    for (let t = 0; t <= tMax; t += 0.5) {
+      const dT_no_perf = (P / 1000) / (4 * Math.PI * k_tissue * r_eff) * (1 - Math.exp(-t / (10 / 0.1)));
+      ctx.lineTo(tToX(t), TToY(dT_no_perf));
+    }
+    ctx.lineTo(tToX(tMax), TToY(0));
+    ctx.closePath();
+    ctx.fillStyle = '#ff6b6b08';
+    ctx.fill();
+
+    // Fill region under actual curve
+    ctx.beginPath();
+    ctx.moveTo(tToX(0), TToY(0));
+    for (let t = 0; t <= tMax; t += 0.5) {
+      const dT = dT_steady * (1 - Math.exp(-t / tau));
+      ctx.lineTo(tToX(t), TToY(dT));
+    }
+    ctx.lineTo(tToX(tMax), TToY(0));
+    ctx.closePath();
+    ctx.fillStyle = dT_steady > thermalLimit ? '#ff6b6b11' : '#4ecdc411';
+    ctx.fill();
+
+    // Axes labels
+    ctx.fillStyle = '#666'; ctx.font = '10px monospace';
+    ctx.textAlign = 'right';
+    for (let T = 0; T <= Tmax; T += 0.5) ctx.fillText(T.toFixed(1) + '\u00B0C', pad.l - 5, TToY(T) + 4);
+    ctx.textAlign = 'center';
+    for (let t = 0; t <= tMax; t += 10) ctx.fillText(t + 's', tToX(t), H - pad.b + 15);
+
+    // Steady state annotation
+    ctx.fillStyle = '#888'; ctx.font = '10px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('steady: ' + dT_steady.toFixed(2) + '\u00B0C', tToX(tMax * 0.7), TToY(dT_steady) - 10);
+    ctx.fillText('\u03C4 = ' + tau.toFixed(1) + 's', tToX(5), TToY(dT_steady * 0.4));
+
+    const status = dT_steady > thermalLimit ? 'OVER LIMIT' : 'SAFE';
+    const statusColor = dT_steady > thermalLimit ? '#ff6b6b' : '#4ecdc4';
+    readout.innerHTML =
+      `P = <span style="color:#ff6b6b">${P} mW</span> | ` +
+      `Channels = ${nch} | ` +
+      `\u0394T steady = <span style="color:${statusColor}">${dT_steady.toFixed(3)}\u00B0C (${status})</span>` +
+      (crossTime ? ` | crosses limit at ${crossTime.toFixed(1)}s` : '');
+  }
+
+  [powerSlider, perfSlider, chanSlider].forEach(s => s.addEventListener('input', draw));
+  draw();
+})();
+
+// ========== 2: SIGNAL VS NOISE ==========
+(() => {
+  const c = document.getElementById('snrCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('snrReadout');
+  const spikeSlider = document.getElementById('snrSpike');
+  const impedanceSlider = document.getElementById('snrImpedance');
+  const bwSlider = document.getElementById('snrBandwidth');
+  const W = c.width, H = c.height;
+  const pad = { l: 50, r: 20, t: 25, b: 30 };
+  const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const spikeAmp = parseFloat(spikeSlider.value); // uV
+    const impedance = parseFloat(impedanceSlider.value) * 1000; // Ohms
+    const bw = parseFloat(bwSlider.value) * 1000; // Hz
+    const kB = 1.38e-23, T_body = 310;
+    const noiseV = Math.sqrt(4 * kB * T_body * impedance * bw) * 1e6; // uV
+    const snr = spikeAmp / noiseV;
+
+    const midY = pad.t + gH / 2;
+    const tMax = 50; // ms display
+    const dt = 0.05; // ms step
+
+    // Generate noisy signal with spike
+    ctx.beginPath(); ctx.strokeStyle = '#4ecdc4'; ctx.lineWidth = 1;
+    const spikeCenter = 25; // ms
+    for (let ms = 0; ms < tMax; ms += dt) {
+      const x = pad.l + (ms / tMax) * gW;
+      // Noise (random, seeded by frame for consistency)
+      const noise = (Math.sin(ms * 137.5 + t) + Math.sin(ms * 73.1 + t * 1.3) + Math.sin(ms * 211 + t * 0.7)) * noiseV / 3;
+      // Spike (gaussian-shaped action potential)
+      const spike = spikeAmp * Math.exp(-((ms - spikeCenter) ** 2) / 0.5) - spikeAmp * 0.3 * Math.exp(-((ms - spikeCenter - 1.5) ** 2) / 2);
+      const v = noise + spike;
+      const y = midY - (v / (spikeAmp * 1.5)) * (gH * 0.4);
+      ms === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Noise band
+    ctx.fillStyle = '#ff6b6b11';
+    ctx.fillRect(pad.l, midY - (noiseV / (spikeAmp * 1.5)) * (gH * 0.4) * 2, gW, (noiseV / (spikeAmp * 1.5)) * (gH * 0.4) * 4);
+
+    // Noise level lines
+    ctx.setLineDash([4, 4]); ctx.strokeStyle = '#ff6b6b44'; ctx.lineWidth = 1;
+    const noiseY1 = midY - (noiseV / (spikeAmp * 1.5)) * (gH * 0.4) * 2;
+    const noiseY2 = midY + (noiseV / (spikeAmp * 1.5)) * (gH * 0.4) * 2;
+    ctx.beginPath(); ctx.moveTo(pad.l, noiseY1); ctx.lineTo(W - pad.r, noiseY1); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.l, noiseY2); ctx.lineTo(W - pad.r, noiseY2); ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#ff6b6b66'; ctx.font = '10px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('noise: \u00B1' + noiseV.toFixed(1) + '\u03BCV', pad.l + 5, noiseY1 - 5);
+
+    // Spike label
+    ctx.fillStyle = '#4ecdc4'; ctx.font = '10px monospace';
+    ctx.fillText('spike: ' + spikeAmp + '\u03BCV', pad.l + (spikeCenter / tMax) * gW + 15, midY - (gH * 0.35));
+
+    const snrColor = snr >= 3 ? '#4ecdc4' : snr >= 1.5 ? '#ffd93d' : '#ff6b6b';
+    const snrLabel = snr >= 3 ? 'DETECTABLE' : snr >= 1.5 ? 'MARGINAL' : 'BURIED IN NOISE';
+    readout.innerHTML =
+      `Spike = ${spikeAmp}\u03BCV | Noise = <span style="color:#ff6b6b">${noiseV.toFixed(1)}\u03BCV</span> | ` +
+      `SNR = <span style="color:${snrColor}">${snr.toFixed(1)} (${snrLabel})</span>`;
+
+    t += 0.1;
+    requestAnimationFrame(draw);
+  }
+  [spikeSlider, impedanceSlider, bwSlider].forEach(s => s.addEventListener('input', () => {}));
+  draw();
+})();
+
+// ========== 3: SHANNON CAPACITY ==========
+(() => {
+  const c = document.getElementById('shannonCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('shannonReadout');
+  const bwSlider = document.getElementById('shannonBW');
+  const snrSlider = document.getElementById('shannonSNR');
+  const W = c.width, H = c.height;
+  const pad = { l: 60, r: 30, t: 25, b: 40 };
+  const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const bw = parseFloat(bwSlider.value); // kHz
+    const snrDb = parseFloat(snrSlider.value);
+    const snrLin = Math.pow(10, snrDb / 10);
+
+    // Plot capacity vs SNR for current bandwidth
+    const snrMax = 40;
+    const capMax = bw * Math.log2(1 + Math.pow(10, snrMax / 10));
+
+    function snrToX(s) { return pad.l + (s / snrMax) * gW; }
+    function capToY(c) { return pad.t + (1 - c / capMax) * gH; }
+
+    // Grid
+    ctx.strokeStyle = '#1a1a2a'; ctx.lineWidth = 0.5;
+    for (let s = 0; s <= snrMax; s += 10) {
+      ctx.beginPath(); ctx.moveTo(snrToX(s), pad.t); ctx.lineTo(snrToX(s), H - pad.b); ctx.stroke();
+    }
+
+    // Capacity curve
+    ctx.beginPath(); ctx.strokeStyle = '#7faaff'; ctx.lineWidth = 2.5;
+    for (let s = 0; s <= snrMax; s += 0.5) {
+      const cap = bw * Math.log2(1 + Math.pow(10, s / 10));
+      const x = snrToX(s), y = capToY(cap);
+      s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Current point
+    const curCap = bw * Math.log2(1 + snrLin);
+    const cx = snrToX(snrDb), cy = capToY(curCap);
+    ctx.beginPath(); ctx.arc(cx, cy, 7, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffd93d'; ctx.fill();
+
+    // Crosshairs
+    ctx.setLineDash([3, 3]); ctx.strokeStyle = '#ffd93d44'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx, pad.t); ctx.lineTo(cx, H - pad.b); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(W - pad.r, cy); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Labels
+    ctx.fillStyle = '#666'; ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    for (let s = 0; s <= snrMax; s += 10) ctx.fillText(s + ' dB', snrToX(s), H - pad.b + 15);
+    ctx.fillText('SNR', W / 2, H - 5);
+    ctx.textAlign = 'right';
+    ctx.fillText(curCap.toFixed(0) + ' kb/s', pad.l - 5, cy + 4);
+    ctx.fillText(capMax.toFixed(0) + ' kb/s', pad.l - 5, pad.t + 12);
+    ctx.fillText('0', pad.l - 5, H - pad.b + 4);
+
+    // Logarithmic nature annotation
+    ctx.fillStyle = '#7faaff44'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('log\u2082 curve: diminishing returns', W / 2, pad.t + 12);
+
+    readout.innerHTML =
+      `B = ${bw} kHz | SNR = ${snrDb} dB | ` +
+      `Capacity = <span style="color:#7faaff">${curCap.toFixed(1)} kbits/sec per channel</span>`;
+  }
+  [bwSlider, snrSlider].forEach(s => s.addEventListener('input', draw));
+  draw();
+})();
+
+// ========== 4: MOORE'S LAW ==========
+(() => {
+  const c = document.getElementById('mooreCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('mooreReadout');
+  const startSlider = document.getElementById('mooreStart');
+  const doubleSlider = document.getElementById('mooreDouble');
+  const limitSlider = document.getElementById('mooreLimit');
+  const W = c.width, H = c.height;
+  const pad = { l: 70, r: 30, t: 25, b: 40 };
+  const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const n0 = parseInt(startSlider.value);
+    const Td = parseFloat(doubleSlider.value);
+    const nLimit = parseInt(limitSlider.value);
+
+    const yearMin = 2000, yearMax = 2045;
+    const nMax = nLimit * 3;
+
+    function yearToX(y) { return pad.l + ((y - yearMin) / (yearMax - yearMin)) * gW; }
+    function nToY(n) { return pad.t + (1 - Math.log10(Math.max(n, 1)) / Math.log10(nMax)) * gH; }
+
+    // Grid (log scale)
+    ctx.strokeStyle = '#1a1a2a'; ctx.lineWidth = 0.5;
+    for (let p = 1; p <= 7; p++) {
+      const n = Math.pow(10, p);
+      if (n <= nMax) {
+        ctx.beginPath(); ctx.moveTo(pad.l, nToY(n)); ctx.lineTo(W - pad.r, nToY(n)); ctx.stroke();
+        ctx.fillStyle = '#444'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+        ctx.fillText(n >= 1000000 ? (n/1000000)+'M' : n >= 1000 ? (n/1000)+'k' : n, pad.l - 5, nToY(n) + 4);
+      }
+    }
+    for (let y = 2000; y <= yearMax; y += 5) {
+      ctx.beginPath(); ctx.moveTo(yearToX(y), pad.t); ctx.lineTo(yearToX(y), H - pad.b); ctx.stroke();
+      ctx.fillStyle = '#444'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(y, yearToX(y), H - pad.b + 15);
+    }
+
+    // Thermal limit line
+    ctx.strokeStyle = '#ffd93d'; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+    ctx.beginPath(); ctx.moveTo(pad.l, nToY(nLimit)); ctx.lineTo(W - pad.r, nToY(nLimit)); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd93d'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('thermal limit: ' + (nLimit >= 1000 ? (nLimit/1000) + 'k' : nLimit) + ' ch', W - pad.r - 5, nToY(nLimit) - 8);
+
+    // Unconstrained exponential (red)
+    ctx.beginPath(); ctx.strokeStyle = '#ff6b6b44'; ctx.lineWidth = 1.5;
+    for (let y = yearMin; y <= yearMax; y += 0.5) {
+      const t = y - 2020;
+      const n = n0 * Math.pow(2, t / Td);
+      if (n > nMax * 2) break;
+      const x = yearToX(y), yp = nToY(n);
+      y === yearMin ? ctx.moveTo(x, yp) : ctx.lineTo(x, yp);
+    }
+    ctx.stroke();
+
+    // Constrained (saturating) curve (green)
+    ctx.beginPath(); ctx.strokeStyle = '#4ecdc4'; ctx.lineWidth = 2.5;
+    for (let y = yearMin; y <= yearMax; y += 0.5) {
+      const t = y - 2020;
+      const n_exp = n0 * Math.pow(2, t / Td);
+      const n = nLimit * n_exp / (nLimit + n_exp); // logistic saturation
+      const x = yearToX(y), yp = nToY(n);
+      y === yearMin ? ctx.moveTo(x, yp) : ctx.lineTo(x, yp);
+    }
+    ctx.stroke();
+
+    // Data points (real devices)
+    const devices = [
+      { year: 2012, ch: 96, name: 'Utah Array' },
+      { year: 2021, ch: 1024, name: 'Neuralink N1' },
+      { year: 2024, ch: 3072, name: 'Neuralink N2 (projected)' },
+    ];
+    devices.forEach(d => {
+      const x = yearToX(d.year), y = nToY(d.ch);
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff'; ctx.fill();
+      ctx.fillStyle = '#888'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+      ctx.fillText(d.name + ' (' + d.ch + ')', x + 8, y + 3);
+    });
+
+    // Labels
+    ctx.fillStyle = '#ff6b6b44'; ctx.font = '10px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('unconstrained exponential', pad.l + 5, pad.t + 15);
+    ctx.fillStyle = '#4ecdc4'; ctx.fillText('thermally constrained', pad.l + 5, pad.t + 30);
+
+    const cur = n0 * Math.pow(2, 6 / Td);
+    readout.innerHTML =
+      `n\u2080 = ${n0} | T\u2082 = ${Td}yr | ` +
+      `2026: <span style="color:#4ecdc4">${Math.round(cur).toLocaleString()} channels</span> | ` +
+      `limit: <span style="color:#ffd93d">${nLimit.toLocaleString()}</span>`;
+  }
+  [startSlider, doubleSlider, limitSlider].forEach(s => s.addEventListener('input', draw));
+  draw();
+})();
+
+// ========== 5: COHERENCE (Cs) ==========
+(() => {
+  const c = document.getElementById('csCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('csReadout');
+  const entropySlider = document.getElementById('csEntropy');
+  const attackSlider = document.getElementById('csAttack');
+  const W = c.width, H = c.height;
+  const pad = { l: 50, r: 200, t: 25, b: 40 };
+  const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const baseEntropy = parseFloat(entropySlider.value) / 100;
+    const attack = parseFloat(attackSlider.value) / 100;
+    const Sc = baseEntropy + attack * 2;
+    const Cs = Math.exp(-Sc);
+
+    // Left side: frequency spectrum
+    const nBins = 32;
+    const binW = gW / nBins;
+    const freqs = [];
+    for (let i = 0; i < nBins; i++) {
+      // Base spectrum: alpha peak around bin 4, beta around 10
+      let power = 0.1 + 0.8 * Math.exp(-((i - 4) ** 2) / 3) + 0.4 * Math.exp(-((i - 10) ** 2) / 5);
+      // Add entropy (flattens the spectrum)
+      power = power * (1 - baseEntropy * 0.8) + baseEntropy * 0.3;
+      // Add attack (injects power at random frequencies)
+      if (attack > 0) {
+        power += attack * 0.5 * (0.5 + 0.5 * Math.sin(i * 7.3 + frame * 0.05));
+      }
+      freqs.push(power);
+    }
+    const maxP = Math.max(...freqs);
+
+    for (let i = 0; i < nBins; i++) {
+      const barH = (freqs[i] / maxP) * (gH - 20);
+      const x = pad.l + i * binW + 2;
+      const y = H - pad.b - barH;
+      const hue = attack > 0 && Math.sin(i * 7.3 + frame * 0.05) > 0.3 ? '#ff6b6b' : '#7faaff';
+      ctx.fillStyle = hue + '88';
+      ctx.fillRect(x, y, binW - 4, barH);
+      ctx.strokeStyle = hue;
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x, y, binW - 4, barH);
+    }
+
+    // Frequency labels
+    ctx.fillStyle = '#444'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ['delta', 'theta', 'alpha', 'beta', 'gamma'].forEach((band, i) => {
+      ctx.fillText(band, pad.l + [2, 5, 9, 15, 25][i] * binW, H - pad.b + 12);
+    });
+
+    // Right side: Cs gauge
+    const gaugeX = W - pad.r + 30;
+    const gaugeW = 40;
+    const gaugeTop = pad.t + 10;
+    const gaugeH = gH - 20;
+
+    // Background
+    const grad = ctx.createLinearGradient(0, gaugeTop, 0, gaugeTop + gaugeH);
+    grad.addColorStop(0, '#4ecdc4');
+    grad.addColorStop(0.5, '#ffd93d');
+    grad.addColorStop(1, '#ff6b6b');
+    ctx.fillStyle = '#111118';
+    ctx.fillRect(gaugeX, gaugeTop, gaugeW, gaugeH);
+    ctx.fillStyle = grad;
+    ctx.globalAlpha = 0.3;
+    ctx.fillRect(gaugeX, gaugeTop, gaugeW, gaugeH);
+    ctx.globalAlpha = 1;
+
+    // Cs level
+    const csY = gaugeTop + (1 - Cs) * gaugeH;
+    ctx.fillStyle = Cs > 0.7 ? '#4ecdc4' : Cs > 0.3 ? '#ffd93d' : '#ff6b6b';
+    ctx.fillRect(gaugeX, csY, gaugeW, gaugeTop + gaugeH - csY);
+    ctx.globalAlpha = 0.3;
+    ctx.fillRect(gaugeX, csY, gaugeW, gaugeTop + gaugeH - csY);
+    ctx.globalAlpha = 1;
+
+    // Cs marker
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(gaugeX - 5, csY); ctx.lineTo(gaugeX + gaugeW + 5, csY); ctx.stroke();
+
+    // Labels on gauge
+    ctx.fillStyle = '#888'; ctx.font = '10px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('Cs = ' + Cs.toFixed(3), gaugeX + gaugeW + 10, csY + 4);
+    ctx.fillStyle = '#4ecdc4'; ctx.fillText('1.0', gaugeX + gaugeW + 10, gaugeTop + 4);
+    ctx.fillStyle = '#ff6b6b'; ctx.fillText('0.0', gaugeX + gaugeW + 10, gaugeTop + gaugeH + 4);
+
+    // Threshold markers
+    [{ v: 0.7, label: 'cognitive' }, { v: 0.5, label: 'conscious' }, { v: 0.3, label: 'motor' }].forEach(th => {
+      const ty = gaugeTop + (1 - th.v) * gaugeH;
+      ctx.setLineDash([3, 3]); ctx.strokeStyle = '#ffffff22'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(gaugeX, ty); ctx.lineTo(gaugeX + gaugeW, ty); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#555'; ctx.font = '8px monospace'; ctx.textAlign = 'right';
+      ctx.fillText(th.label, gaugeX - 3, ty + 3);
+    });
+
+    // Decay curve (small, top-right)
+    const dcX = W - pad.r + 20, dcY = pad.t, dcW = 120, dcH = 60;
+    ctx.strokeStyle = '#222'; ctx.lineWidth = 0.5;
+    ctx.strokeRect(dcX, dcY, dcW, dcH);
+    ctx.beginPath(); ctx.strokeStyle = '#7faaff'; ctx.lineWidth = 1.5;
+    for (let s = 0; s <= 3; s += 0.05) {
+      const x = dcX + (s / 3) * dcW;
+      const y = dcY + dcH - Math.exp(-s) * dcH;
+      s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    // Current point on decay curve
+    const dpx = dcX + (Sc / 3) * dcW;
+    const dpy = dcY + dcH - Cs * dcH;
+    if (dpx <= dcX + dcW) {
+      ctx.beginPath(); ctx.arc(dpx, dpy, 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffd93d'; ctx.fill();
+    }
+    ctx.fillStyle = '#555'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('e^(-Sc)', dcX + dcW / 2, dcY - 3);
+
+    const status = Cs > 0.7 ? 'HEALTHY' : Cs > 0.5 ? 'DEGRADED' : Cs > 0.3 ? 'IMPAIRED' : 'CRITICAL';
+    readout.innerHTML =
+      `Sc = <span style="color:#7faaff">${Sc.toFixed(2)}</span> | ` +
+      `Cs = e^(-Sc) = <span style="color:${Cs > 0.5 ? '#4ecdc4' : '#ff6b6b'}">${Cs.toFixed(3)} (${status})</span>` +
+      (attack > 0 ? ` | <span style="color:#ff6b6b">ATTACK ACTIVE</span>` : '');
+
+    frame++;
+    requestAnimationFrame(draw);
+  }
+  [entropySlider, attackSlider].forEach(s => s.addEventListener('input', () => {}));
+  draw();
+})();
+
+// ========== 6: UNIFIED CONSTRAINT SPACE ==========
+(() => {
+  const c = document.getElementById('unifiedCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('unifiedReadout');
+  const yearSlider = document.getElementById('unifiedYear');
+  const W = c.width, H = c.height;
+  const pad = { l: 70, r: 30, t: 30, b: 50 };
+  const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const year = parseInt(yearSlider.value);
+    const t = year - 2020;
+
+    // Axes: channels (x, log) vs power/channel (y, log)
+    const chMin = 100, chMax = 1000000;
+    const pwMin = 0.1, pwMax = 100; // uW per channel
+
+    function chToX(ch) { return pad.l + (Math.log10(ch) - Math.log10(chMin)) / (Math.log10(chMax) - Math.log10(chMin)) * gW; }
+    function pwToY(pw) { return pad.t + (1 - (Math.log10(pw) - Math.log10(pwMin)) / (Math.log10(pwMax) - Math.log10(pwMin))) * gH; }
+
+    // Grid
+    ctx.strokeStyle = '#1a1a2a'; ctx.lineWidth = 0.5;
+    [100, 1000, 10000, 100000, 1000000].forEach(ch => {
+      const x = chToX(ch);
+      ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, H - pad.b); ctx.stroke();
+      ctx.fillStyle = '#444'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(ch >= 1000000 ? '1M' : ch >= 1000 ? (ch/1000)+'k' : ch, x, H - pad.b + 15);
+    });
+    [0.1, 1, 10, 100].forEach(pw => {
+      const y = pwToY(pw);
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+      ctx.fillStyle = '#444'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+      ctx.fillText(pw + '\u03BCW', pad.l - 5, y + 4);
+    });
+    ctx.fillStyle = '#555'; ctx.font = '10px monospace';
+    ctx.textAlign = 'center'; ctx.fillText('channels', W / 2, H - 8);
+    ctx.save(); ctx.translate(15, pad.t + gH / 2); ctx.rotate(-Math.PI / 2);
+    ctx.fillText('power per channel (\u03BCW)', 0, 0); ctx.restore();
+
+    // Thermal limit: total power = 40mW, so P/ch = 40000/n_ch uW
+    ctx.beginPath(); ctx.strokeStyle = '#ff6b6b'; ctx.lineWidth = 2;
+    for (let lch = Math.log10(chMin); lch <= Math.log10(chMax); lch += 0.05) {
+      const ch = Math.pow(10, lch);
+      const pw = 40000 / ch; // 40mW total / n_channels = uW per channel
+      if (pw < pwMin || pw > pwMax) continue;
+      const x = chToX(ch), y = pwToY(pw);
+      lch === Math.log10(chMin) ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Fill forbidden region (above thermal curve)
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t);
+    for (let lch = Math.log10(chMin); lch <= Math.log10(chMax); lch += 0.05) {
+      const ch = Math.pow(10, lch);
+      const pw = 40000 / ch;
+      if (pw > pwMax) { ctx.lineTo(chToX(ch), pad.t); continue; }
+      if (pw < pwMin) break;
+      ctx.lineTo(chToX(ch), pwToY(pw));
+    }
+    ctx.lineTo(W - pad.r, pad.t); ctx.closePath();
+    ctx.fillStyle = '#ff6b6b08'; ctx.fill();
+
+    // Noise floor limit: minimum ~1 uW per channel for decent SNR
+    ctx.setLineDash([6, 4]); ctx.strokeStyle = '#ffd93d88'; ctx.lineWidth = 1.5;
+    const noiseFloor = 1.0; // uW minimum per channel for SNR > 3
+    ctx.beginPath(); ctx.moveTo(pad.l, pwToY(noiseFloor)); ctx.lineTo(W - pad.r, pwToY(noiseFloor)); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Fill forbidden region (below noise floor)
+    ctx.fillStyle = '#ffd93d06';
+    ctx.fillRect(pad.l, pwToY(noiseFloor), gW, H - pad.b - pwToY(noiseFloor));
+
+    // Moore's Law trajectory
+    const n0 = 100; // 2020 baseline
+    const Td = 7.4;
+    const nCurrent = n0 * Math.pow(2, t / Td);
+    // Power per channel trend: drops ~15% per year
+    const pw0 = 30; // uW in 2020
+    const pwCurrent = pw0 * Math.pow(0.85, t);
+
+    // Trajectory arrow
+    ctx.beginPath(); ctx.strokeStyle = '#4ecdc4'; ctx.lineWidth = 2;
+    for (let yr = 0; yr <= 20; yr += 0.5) {
+      const n = n0 * Math.pow(2, yr / Td);
+      const pw = pw0 * Math.pow(0.85, yr);
+      if (n > chMax || pw < pwMin) break;
+      const x = chToX(n), y = pwToY(pw);
+      yr === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Current position
+    if (nCurrent <= chMax && pwCurrent >= pwMin) {
+      ctx.beginPath(); ctx.arc(chToX(nCurrent), pwToY(pwCurrent), 8, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff'; ctx.fill();
+      ctx.fillStyle = '#4ecdc4'; ctx.font = '10px monospace'; ctx.textAlign = 'left';
+      ctx.fillText(year + ': ' + Math.round(nCurrent).toLocaleString() + 'ch, ' + pwCurrent.toFixed(1) + '\u03BCW', chToX(nCurrent) + 12, pwToY(pwCurrent) + 4);
+    }
+
+    // Real devices
+    const devices = [
+      { ch: 96, pw: 30, name: 'Utah (2012)' },
+      { ch: 1024, pw: 22, name: 'Neuralink N1' },
+    ];
+    devices.forEach(d => {
+      ctx.beginPath(); ctx.arc(chToX(d.ch), pwToY(d.pw), 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#888'; ctx.fill();
+      ctx.fillStyle = '#666'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+      ctx.fillText(d.name, chToX(d.ch) + 6, pwToY(d.pw) - 6);
+    });
+
+    // Legend
+    ctx.fillStyle = '#ff6b6b'; ctx.font = '10px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('\u2588 thermal ceiling (40mW total)', pad.l + 5, pad.t + 12);
+    ctx.fillStyle = '#ffd93d88'; ctx.fillText('--- noise floor (~1\u03BCW/ch min)', pad.l + 5, pad.t + 26);
+    ctx.fillStyle = '#4ecdc4'; ctx.fillText('\u2014 scaling trajectory', pad.l + 5, pad.t + 40);
+
+    const totalP = nCurrent * pwCurrent / 1000; // mW
+    const safe = totalP < 40;
+    readout.innerHTML =
+      `Year: <span style="color:#7faaff">${year}</span> | ` +
+      `Channels: ${Math.round(nCurrent).toLocaleString()} | ` +
+      `P/ch: ${pwCurrent.toFixed(1)}\u03BCW | ` +
+      `Total: <span style="color:${safe ? '#4ecdc4' : '#ff6b6b'}">${totalP.toFixed(1)} mW (${safe ? 'SAFE' : 'OVER LIMIT'})</span>`;
+  }
+  yearSlider.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>
