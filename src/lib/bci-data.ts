@@ -10,8 +10,60 @@
 
 import hardwareInventory from '../../docs/bci-hardware-inventory.json';
 import atlas from '@shared/qif-brain-bci-atlas.json';
+import neurosecurityScores from '@shared/neurosecurity-scores.json';
 import { THREAT_VECTORS, type ThreatVector, type BandId, SEVERITY_COLORS } from './threat-data';
 import { HOURGLASS_BANDS } from './qif-constants';
+
+// ═══ Neurosecurity Score Mapping ═══
+
+export interface NeurosecurityScore {
+  overallScore: number;
+  severity: string;
+  subscores: {
+    CL: number;
+    MI: number;
+    MP: number;
+    PC: number;
+    EA: number;
+  };
+  vector: string;
+}
+
+/** Map hardware inventory device IDs to neurosecurity-scores.json device names */
+const NS_DEVICE_MAP: Record<string, string> = {
+  'neuralink-n1': 'Neuralink N1',
+  'neuralink-n2': 'Neuralink Blindsight',
+  'blackrock-utah-array': 'Blackrock NeuroPort',
+  'braingate': 'BrainGate System',
+  'synchron-stentrode': 'Synchron Stentrode',
+  'emotiv-epoc-x': 'Emotiv EPOC X',
+  'openbci-cyton': 'OpenBCI Cyton',
+  'muse-2': 'Muse 2',
+  'paradromics-connexus': 'Paradromics Connexus',
+  'precision-layer7': 'Precision Layer 7',
+  'kernel-flow': 'Kernel Flow',
+  'gtec-unicorn': 'g.tec g.Nautilus',
+  'corticom': 'Cortera Surface Array',
+};
+
+function getNeurosecurityScore(deviceId: string): NeurosecurityScore | null {
+  const nsName = NS_DEVICE_MAP[deviceId];
+  if (!nsName) return null;
+  const entry = (neurosecurityScores as any).devices?.find((d: any) => d.device === nsName);
+  if (!entry) return null;
+  return {
+    overallScore: entry.overall_score,
+    severity: entry.severity,
+    subscores: {
+      CL: entry.subscores.CL,
+      MI: entry.subscores.MI,
+      MP: entry.subscores.MP,
+      PC: entry.subscores.PC,
+      EA: entry.subscores.EA,
+    },
+    vector: entry.vector,
+  };
+}
 
 // ═══ Types ═══
 
@@ -81,6 +133,9 @@ export interface BciDevice {
   threatCount: number;
   topThreats: BciDeviceThreat[];
   threatsBySeverity: Record<string, number>;
+
+  // Neurosecurity Score (NSv2.1b — per-right, per-device)
+  neurosecurityScore: NeurosecurityScore | null;
 }
 
 // ═══ Helpers ═══
@@ -239,6 +294,8 @@ export function getBciDevices(): BciDevice[] {
       threatCount: threats.length,
       topThreats,
       threatsBySeverity,
+
+      neurosecurityScore: getNeurosecurityScore(d.id),
     };
   });
 }

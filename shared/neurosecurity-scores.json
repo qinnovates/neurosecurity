@@ -1,0 +1,841 @@
+{
+  "version": "NSv2.1",
+  "devices": [
+    {
+      "device": "Neuralink N1",
+      "type": "invasive",
+      "purpose": "medical",
+      "n_techniques": 22,
+      "overall_score": 6.02,
+      "severity": "High",
+      "subscores": {
+        "CL": 6.31,
+        "MI": 6.32,
+        "MP": 5.88,
+        "PC": 4.59,
+        "EA": 7.37
+      },
+      "details": {
+        "CL": {
+          "score": 6.312802555153805,
+          "n_techniques": 13
+        },
+        "MI": {
+          "score": 6.321029080066465,
+          "n_techniques": 19
+        },
+        "MP": {
+          "score": 5.880433767467816,
+          "n_techniques": 14
+        },
+        "PC": {
+          "score": 4.586162691908235,
+          "n_techniques": 4
+        },
+        "EA": {
+          "score": 7.374999999999999,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:6.02/CL:6.31/MI:6.32/MP:5.88/PC:4.59/EA:7.37"
+    },
+    {
+      "device": "Neuralink Blindsight",
+      "type": "invasive",
+      "purpose": "medical",
+      "n_techniques": 22,
+      "overall_score": 6.02,
+      "severity": "High",
+      "subscores": {
+        "CL": 6.31,
+        "MI": 6.32,
+        "MP": 5.88,
+        "PC": 4.59,
+        "EA": 7.37
+      },
+      "details": {
+        "CL": {
+          "score": 6.312802555153805,
+          "n_techniques": 13
+        },
+        "MI": {
+          "score": 6.321029080066465,
+          "n_techniques": 19
+        },
+        "MP": {
+          "score": 5.880433767467816,
+          "n_techniques": 14
+        },
+        "PC": {
+          "score": 4.586162691908235,
+          "n_techniques": 4
+        },
+        "EA": {
+          "score": 7.374999999999999,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:6.02/CL:6.31/MI:6.32/MP:5.88/PC:4.59/EA:7.37"
+    },
+    {
+      "device": "INBRAIN Graphene Probe",
+      "type": "invasive",
+      "purpose": "medical",
+      "n_techniques": 9,
+      "overall_score": 5.11,
+      "severity": "High",
+      "subscores": {
+        "CL": 5.29,
+        "MI": 5.41,
+        "MP": 3.87,
+        "PC": 4.27,
+        "EA": 7.37
+      },
+      "details": {
+        "CL": {
+          "score": 5.286554255287158,
+          "n_techniques": 6
+        },
+        "MI": {
+          "score": 5.412444947276018,
+          "n_techniques": 8
+        },
+        "MP": {
+          "score": 3.865821838184744,
+          "n_techniques": 4
+        },
+        "PC": {
+          "score": 4.270696608084831,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 7.374999999999999,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:5.11/CL:5.29/MI:5.41/MP:3.87/PC:4.27/EA:7.37"
+    },
+    {
+      "device": "Natus Xltek",
+      "type": "non_invasive",
+      "purpose": "medical",
+      "n_techniques": 14,
+      "overall_score": 4.71,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 5.36,
+        "MI": 5.39,
+        "MP": 4.01,
+        "PC": 4.59,
+        "EA": 4.38
+      },
+      "details": {
+        "CL": {
+          "score": 5.36477617268106,
+          "n_techniques": 9
+        },
+        "MI": {
+          "score": 5.393247824043955,
+          "n_techniques": 11
+        },
+        "MP": {
+          "score": 4.008428462098238,
+          "n_techniques": 8
+        },
+        "PC": {
+          "score": 4.586162691908235,
+          "n_techniques": 4
+        },
+        "EA": {
+          "score": 4.375,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:4.71/CL:5.36/MI:5.39/MP:4.01/PC:4.59/EA:4.38"
+    },
+    {
+      "device": "Synchron Stentrode",
+      "type": "semi_invasive",
+      "purpose": "medical",
+      "n_techniques": 12,
+      "overall_score": 4.6,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 4.35,
+        "MI": 4.41,
+        "MP": 4.01,
+        "PC": 4.03,
+        "EA": 6.63
+      },
+      "details": {
+        "CL": {
+          "score": 4.352284638117,
+          "n_techniques": 8
+        },
+        "MI": {
+          "score": 4.412224955754873,
+          "n_techniques": 10
+        },
+        "MP": {
+          "score": 4.012042477834116,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 4.028198419304882,
+          "n_techniques": 3
+        },
+        "EA": {
+          "score": 6.625000000000001,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:4.60/CL:4.35/MI:4.41/MP:4.01/PC:4.03/EA:6.63"
+    },
+    {
+      "device": "BrainCo Focus 1",
+      "type": "non_invasive",
+      "purpose": "enterprise",
+      "n_techniques": 12,
+      "overall_score": 4.43,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 5.5,
+        "MI": 5.51,
+        "MP": 4.45,
+        "PC": 4.59,
+        "EA": 2.75
+      },
+      "details": {
+        "CL": {
+          "score": 5.50118785618531,
+          "n_techniques": 8
+        },
+        "MI": {
+          "score": 5.507703857768226,
+          "n_techniques": 10
+        },
+        "MP": {
+          "score": 4.454982299310065,
+          "n_techniques": 8
+        },
+        "PC": {
+          "score": 4.586162691908235,
+          "n_techniques": 4
+        },
+        "EA": {
+          "score": 2.75,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:4.43/CL:5.50/MI:5.51/MP:4.45/PC:4.59/EA:2.75"
+    },
+    {
+      "device": "Blackrock MoveAgain",
+      "type": "invasive",
+      "purpose": "medical",
+      "n_techniques": 13,
+      "overall_score": 4.38,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 4.94,
+        "MI": 5.07,
+        "MP": 2.98,
+        "PC": 2.92,
+        "EA": 7.37
+      },
+      "details": {
+        "CL": {
+          "score": 4.940019992413741,
+          "n_techniques": 7
+        },
+        "MI": {
+          "score": 5.065726780067381,
+          "n_techniques": 10
+        },
+        "MP": {
+          "score": 2.979727703756625,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 7.374999999999999,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:4.38/CL:4.94/MI:5.07/MP:2.98/PC:2.92/EA:7.37"
+    },
+    {
+      "device": "Blackrock NeuroPort",
+      "type": "invasive",
+      "purpose": "research",
+      "n_techniques": 13,
+      "overall_score": 4.36,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 4.94,
+        "MI": 5.07,
+        "MP": 2.98,
+        "PC": 2.92,
+        "EA": 7.25
+      },
+      "details": {
+        "CL": {
+          "score": 4.940019992413741,
+          "n_techniques": 7
+        },
+        "MI": {
+          "score": 5.065726780067381,
+          "n_techniques": 10
+        },
+        "MP": {
+          "score": 2.979727703756625,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 7.25,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:4.36/CL:4.94/MI:5.07/MP:2.98/PC:2.92/EA:7.25"
+    },
+    {
+      "device": "Emotiv EPOC X",
+      "type": "non_invasive",
+      "purpose": "consumer",
+      "n_techniques": 13,
+      "overall_score": 4.03,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 5.5,
+        "MI": 5.51,
+        "MP": 4.45,
+        "PC": 4.5,
+        "EA": 1.75
+      },
+      "details": {
+        "CL": {
+          "score": 5.50118785618531,
+          "n_techniques": 8
+        },
+        "MI": {
+          "score": 5.506735682987522,
+          "n_techniques": 11
+        },
+        "MP": {
+          "score": 4.452223676674159,
+          "n_techniques": 9
+        },
+        "PC": {
+          "score": 4.503636326277941,
+          "n_techniques": 5
+        },
+        "EA": {
+          "score": 1.75,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:4.03/CL:5.50/MI:5.51/MP:4.45/PC:4.50/EA:1.75"
+    },
+    {
+      "device": "Nihon Kohden Neurofax",
+      "type": "non_invasive",
+      "purpose": "medical",
+      "n_techniques": 11,
+      "overall_score": 3.96,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 3.64,
+        "MI": 3.89,
+        "MP": 3.91,
+        "PC": 4.03,
+        "EA": 4.38
+      },
+      "details": {
+        "CL": {
+          "score": 3.6418445588969934,
+          "n_techniques": 6
+        },
+        "MI": {
+          "score": 3.8906691282350563,
+          "n_techniques": 8
+        },
+        "MP": {
+          "score": 3.9138701409304337,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 4.028198419304882,
+          "n_techniques": 3
+        },
+        "EA": {
+          "score": 4.375,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.96/CL:3.64/MI:3.89/MP:3.91/PC:4.03/EA:4.38"
+    },
+    {
+      "device": "Paradromics Connexus",
+      "type": "invasive",
+      "purpose": "medical",
+      "n_techniques": 10,
+      "overall_score": 3.89,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 3.59,
+        "MI": 3.88,
+        "MP": 2.98,
+        "PC": 2.92,
+        "EA": 7.37
+      },
+      "details": {
+        "CL": {
+          "score": 3.587271317166913,
+          "n_techniques": 5
+        },
+        "MI": {
+          "score": 3.8773377851913104,
+          "n_techniques": 8
+        },
+        "MP": {
+          "score": 2.9788488088246523,
+          "n_techniques": 6
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 7.374999999999999,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.89/CL:3.59/MI:3.88/MP:2.98/PC:2.92/EA:7.37"
+    },
+    {
+      "device": "Precision Layer 7",
+      "type": "invasive",
+      "purpose": "medical",
+      "n_techniques": 9,
+      "overall_score": 3.88,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 3.59,
+        "MI": 3.85,
+        "MP": 2.95,
+        "PC": 2.92,
+        "EA": 7.37
+      },
+      "details": {
+        "CL": {
+          "score": 3.587271317166913,
+          "n_techniques": 5
+        },
+        "MI": {
+          "score": 3.8543679071179238,
+          "n_techniques": 7
+        },
+        "MP": {
+          "score": 2.951874052375232,
+          "n_techniques": 5
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 7.374999999999999,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.88/CL:3.59/MI:3.85/MP:2.95/PC:2.92/EA:7.37"
+    },
+    {
+      "device": "g.tec g.Nautilus",
+      "type": "non_invasive",
+      "purpose": "research",
+      "n_techniques": 10,
+      "overall_score": 3.78,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 3.62,
+        "MI": 3.89,
+        "MP": 3.91,
+        "PC": 4.03,
+        "EA": 3.5
+      },
+      "details": {
+        "CL": {
+          "score": 3.6199906383810236,
+          "n_techniques": 5
+        },
+        "MI": {
+          "score": 3.88631433098052,
+          "n_techniques": 7
+        },
+        "MP": {
+          "score": 3.9138701409304337,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 4.028198419304882,
+          "n_techniques": 3
+        },
+        "EA": {
+          "score": 3.5,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.78/CL:3.62/MI:3.89/MP:3.91/PC:4.03/EA:3.50"
+    },
+    {
+      "device": "BrainGate System",
+      "type": "invasive",
+      "purpose": "research",
+      "n_techniques": 8,
+      "overall_score": 3.76,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 3.59,
+        "MI": 3.7,
+        "MP": 2.67,
+        "PC": 2.92,
+        "EA": 7.25
+      },
+      "details": {
+        "CL": {
+          "score": 3.587271317166913,
+          "n_techniques": 5
+        },
+        "MI": {
+          "score": 3.7027540438345135,
+          "n_techniques": 6
+        },
+        "MP": {
+          "score": 2.674459932748177,
+          "n_techniques": 4
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 7.25,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.76/CL:3.59/MI:3.70/MP:2.67/PC:2.92/EA:7.25"
+    },
+    {
+      "device": "Neurosity Crown",
+      "type": "non_invasive",
+      "purpose": "consumer",
+      "n_techniques": 10,
+      "overall_score": 3.75,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 5.1,
+        "MI": 5.13,
+        "MP": 4.01,
+        "PC": 4.03,
+        "EA": 1.75
+      },
+      "details": {
+        "CL": {
+          "score": 5.102497210437961,
+          "n_techniques": 6
+        },
+        "MI": {
+          "score": 5.1333283537970384,
+          "n_techniques": 8
+        },
+        "MP": {
+          "score": 4.012042477834116,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 4.028198419304882,
+          "n_techniques": 3
+        },
+        "EA": {
+          "score": 1.75,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.75/CL:5.10/MI:5.13/MP:4.01/PC:4.03/EA:1.75"
+    },
+    {
+      "device": "OpenBCI Cyton",
+      "type": "non_invasive",
+      "purpose": "research",
+      "n_techniques": 9,
+      "overall_score": 3.69,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 4.0,
+        "MI": 4.09,
+        "MP": 4.09,
+        "PC": 2.92,
+        "EA": 3.5
+      },
+      "details": {
+        "CL": {
+          "score": 3.9986202682419307,
+          "n_techniques": 5
+        },
+        "MI": {
+          "score": 4.086601153148647,
+          "n_techniques": 7
+        },
+        "MP": {
+          "score": 4.0903848062927946,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 3.5,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.69/CL:4.00/MI:4.09/MP:4.09/PC:2.92/EA:3.50"
+    },
+    {
+      "device": "Cortera Surface Array",
+      "type": "invasive",
+      "purpose": "research",
+      "n_techniques": 7,
+      "overall_score": 3.4,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 3.21,
+        "MI": 3.45,
+        "MP": 2.19,
+        "PC": 2.57,
+        "EA": 7.25
+      },
+      "details": {
+        "CL": {
+          "score": 3.205679849344768,
+          "n_techniques": 4
+        },
+        "MI": {
+          "score": 3.452679954115121,
+          "n_techniques": 5
+        },
+        "MP": {
+          "score": 2.1941274919450864,
+          "n_techniques": 3
+        },
+        "PC": {
+          "score": 2.573209286625188,
+          "n_techniques": 1
+        },
+        "EA": {
+          "score": 7.25,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.40/CL:3.21/MI:3.45/MP:2.19/PC:2.57/EA:7.25"
+    },
+    {
+      "device": "Muse 2",
+      "type": "non_invasive",
+      "purpose": "consumer",
+      "n_techniques": 9,
+      "overall_score": 3.38,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 3.92,
+        "MI": 4.01,
+        "MP": 4.01,
+        "PC": 4.03,
+        "EA": 1.75
+      },
+      "details": {
+        "CL": {
+          "score": 3.9183825608689298,
+          "n_techniques": 5
+        },
+        "MI": {
+          "score": 4.008258824689968,
+          "n_techniques": 7
+        },
+        "MP": {
+          "score": 4.012042477834116,
+          "n_techniques": 7
+        },
+        "PC": {
+          "score": 4.028198419304882,
+          "n_techniques": 3
+        },
+        "EA": {
+          "score": 1.75,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.38/CL:3.92/MI:4.01/MP:4.01/PC:4.03/EA:1.75"
+    },
+    {
+      "device": "Cognixion ONE",
+      "type": "non_invasive",
+      "purpose": "medical",
+      "n_techniques": 7,
+      "overall_score": 3.06,
+      "severity": "Medium",
+      "subscores": {
+        "CL": 2.42,
+        "MI": 2.94,
+        "MP": 2.95,
+        "PC": 2.92,
+        "EA": 4.38
+      },
+      "details": {
+        "CL": {
+          "score": 2.423504945944524,
+          "n_techniques": 3
+        },
+        "MI": {
+          "score": 2.9363732798169506,
+          "n_techniques": 5
+        },
+        "MP": {
+          "score": 2.951874052375232,
+          "n_techniques": 5
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 4.375,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:3.06/CL:2.42/MI:2.94/MP:2.95/PC:2.92/EA:4.38"
+    },
+    {
+      "device": "Kernel Flow",
+      "type": "non_invasive",
+      "purpose": "research",
+      "n_techniques": 7,
+      "overall_score": 2.93,
+      "severity": "Low",
+      "subscores": {
+        "CL": 2.42,
+        "MI": 2.94,
+        "MP": 2.95,
+        "PC": 2.92,
+        "EA": 3.5
+      },
+      "details": {
+        "CL": {
+          "score": 2.423504945944524,
+          "n_techniques": 3
+        },
+        "MI": {
+          "score": 2.9363732798169506,
+          "n_techniques": 5
+        },
+        "MP": {
+          "score": 2.951874052375232,
+          "n_techniques": 5
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 3.5,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:2.93/CL:2.42/MI:2.94/MP:2.95/PC:2.92/EA:3.50"
+    },
+    {
+      "device": "NeuroSky MindWave",
+      "type": "non_invasive",
+      "purpose": "consumer",
+      "n_techniques": 7,
+      "overall_score": 2.67,
+      "severity": "Low",
+      "subscores": {
+        "CL": 2.92,
+        "MI": 3.01,
+        "MP": 3.02,
+        "PC": 2.92,
+        "EA": 1.75
+      },
+      "details": {
+        "CL": {
+          "score": 2.915409822700527,
+          "n_techniques": 4
+        },
+        "MI": {
+          "score": 3.0054709832164006,
+          "n_techniques": 5
+        },
+        "MP": {
+          "score": 3.020971755774682,
+          "n_techniques": 5
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 1.75,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:2.67/CL:2.92/MI:3.01/MP:3.02/PC:2.92/EA:1.75"
+    },
+    {
+      "device": "Meta Neural Interface",
+      "type": "non_invasive",
+      "purpose": "consumer",
+      "n_techniques": 7,
+      "overall_score": 2.67,
+      "severity": "Low",
+      "subscores": {
+        "CL": 2.92,
+        "MI": 3.01,
+        "MP": 3.02,
+        "PC": 2.92,
+        "EA": 1.75
+      },
+      "details": {
+        "CL": {
+          "score": 2.915409822700527,
+          "n_techniques": 4
+        },
+        "MI": {
+          "score": 3.0054709832164006,
+          "n_techniques": 5
+        },
+        "MP": {
+          "score": 3.020971755774682,
+          "n_techniques": 5
+        },
+        "PC": {
+          "score": 2.9209036411756504,
+          "n_techniques": 2
+        },
+        "EA": {
+          "score": 1.75,
+          "n_techniques": "system-level"
+        }
+      },
+      "vector": "NSv2.1:2.67/CL:2.92/MI:3.01/MP:3.02/PC:2.92/EA:1.75"
+    }
+  ]
+}
