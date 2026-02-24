@@ -3,6 +3,8 @@ import React, { useState, useMemo } from 'react';
 // --- Types ---
 type Domain = 'neural' | 'interface' | 'synthetic' | null;
 type ViewMode = 'modality' | 'clinical' | 'diagnostic' | 'governance';
+type NeurorightCode = 'MP' | 'CL' | 'MI' | 'PC' | 'EA';
+type SortMode = 'default' | 'niss' | 'rights';
 
 interface ThreatVector {
     id: string;
@@ -17,6 +19,10 @@ interface ThreatVector {
         score: number;
         severity: string;
         vector: string;
+    };
+    neurorights?: {
+        affected: string[];
+        cci: number;
     };
     tara?: {
         dual_use: string;
@@ -45,11 +51,51 @@ interface TaraVisualizationProps {
     bands: { id: string; name: string; zone: string; color: string }[];
 }
 
+// --- CRB Population Profiles (from NSv2.1b Entry 14) ---
+const CRB_POPULATIONS = [
+    { id: 'default', label: 'Adult (Default)', crb: 0.0, short: 'Adult' },
+    { id: 'child_adhd', label: 'Child (10yr) + ADHD', crb: 0.5875, short: 'Child+ADHD' },
+    { id: 'adult_als', label: 'Adult with ALS', crb: 0.5375, short: 'ALS' },
+] as const;
+
+const CRB_GAMMA = 0.30;
+
+function crbAdjust(niss: number, crb: number): number {
+    return Math.min(niss * (1 + CRB_GAMMA * crb), 10.0);
+}
+
+function nissSeverityLabel(score: number): string {
+    if (score >= 9.0) return 'critical';
+    if (score >= 7.0) return 'high';
+    if (score >= 4.0) return 'medium';
+    if (score > 0) return 'low';
+    return 'none';
+}
+
+const NEURORIGHT_LABELS: Record<string, string> = {
+    MP: 'Mental Privacy',
+    CL: 'Cognitive Liberty',
+    MI: 'Mental Integrity',
+    PC: 'Psychological Continuity',
+    EA: 'Equal Access',
+};
+
+const NEURORIGHT_COLORS: Record<string, { bg: string; text: string; border: string }> = {
+    MP: { bg: 'bg-violet-500/10', text: 'text-violet-600', border: 'border-violet-500/20' },
+    CL: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/20' },
+    MI: { bg: 'bg-red-500/10', text: 'text-red-600', border: 'border-red-500/20' },
+    PC: { bg: 'bg-amber-500/10', text: 'text-amber-600', border: 'border-amber-500/20' },
+    EA: { bg: 'bg-emerald-500/10', text: 'text-emerald-600', border: 'border-emerald-500/20' },
+};
+
 export default function TaraVisualization({ threats, bands }: TaraVisualizationProps) {
     const [selectedDomain, setSelectedDomain] = useState<Domain>(null);
     const [selectedBand, setSelectedBand] = useState<string | null>(null);
     const [activeTechnique, setActiveTechnique] = useState<ThreatVector | null>(null);
     const [viewMode, setViewMode] = useState<ViewMode>('modality');
+    const [neurorightFilter, setNeurorightFilter] = useState<NeurorightCode | null>(null);
+    const [crbPopulation, setCrbPopulation] = useState(CRB_POPULATIONS[0]);
+    const [sortMode, setSortMode] = useState<SortMode>('default');
 
     // Derived: Group bands by zone
     const domainBands = useMemo(() => {
@@ -57,11 +103,32 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
         return bands.filter(b => b.zone.toLowerCase() === selectedDomain);
     }, [selectedDomain, bands]);
 
-    // Derived: Contextual filtered threats
+    // Derived: Contextual filtered threats (band + neuroright filter)
     const filteredThreats = useMemo(() => {
         if (!selectedBand) return [];
-        return threats.filter(t => t.bands.includes(selectedBand));
-    }, [threats, selectedBand]);
+        let result = threats.filter(t => t.bands.includes(selectedBand));
+
+        // Apply neurorights filter
+        if (neurorightFilter) {
+            result = result.filter(t => {
+                const nr = (t as any).neurorights;
+                return nr?.affected?.includes(neurorightFilter);
+            });
+        }
+
+        // Apply sort
+        if (sortMode === 'niss') {
+            result = [...result].sort((a, b) => (b.niss?.score ?? 0) - (a.niss?.score ?? 0));
+        } else if (sortMode === 'rights') {
+            result = [...result].sort((a, b) => {
+                const aRights = ((a as any).neurorights?.affected?.length ?? 0);
+                const bRights = ((b as any).neurorights?.affected?.length ?? 0);
+                return bRights - aRights;
+            });
+        }
+
+        return result;
+    }, [threats, selectedBand, neurorightFilter, sortMode]);
 
     // Helpers
     const getSeverityStyle = (severity: string) => {
@@ -78,20 +145,52 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
             case 'modality': return { text: 'text-slate-900', bg: 'bg-slate-900', shadow: 'shadow-slate-900/20', dot: 'bg-slate-400' };
             case 'clinical': return { text: 'text-emerald-600', bg: 'bg-emerald-600', shadow: 'shadow-emerald-600/20', dot: 'bg-emerald-400' };
             case 'diagnostic': return { text: 'text-amber-600', bg: 'bg-amber-600', shadow: 'shadow-amber-600/20', dot: 'bg-amber-400' };
-            case 'governance': return { text: 'text-blue-600', bg: 'bg-blue-600', shadow: 'shadow-blue-600/20', dot: 'bg-blue-400' };
+            case 'governance': return { text: 'text-purple-600', bg: 'bg-purple-600', shadow: 'shadow-purple-600/20', dot: 'bg-purple-400' };
             default: return { text: 'text-slate-900', bg: 'bg-slate-900', shadow: 'shadow-slate-900/20', dot: 'bg-slate-400' };
         }
     };
 
-    // Sub-component: Insight Badge Strip
-    const InsightStrip = ({ t }: { t: ThreatVector }) => (
-        <div className="flex gap-1.5 mt-3 pt-3 border-t border-slate-50">
-            <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.niss?.score && t.niss.score > 5 ? 'bg-red-500/10 text-red-600' : 'bg-slate-50 text-slate-400'}`} title="Modality/NISS">Security</span>
-            <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.clinical ? 'bg-emerald-500/10 text-emerald-600' : 'bg-slate-50 text-slate-400'}`} title="Clinical/Therapeutic">Clinical</span>
-            <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.dsm5 ? 'bg-amber-500/10 text-amber-600' : 'bg-slate-50 text-slate-400'}`} title="Diagnostic/Psychiatric">Diagnostic</span>
-            <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.governance ? 'bg-blue-500/10 text-blue-600' : 'bg-slate-50 text-slate-400'}`} title="Governance/Ethical">Governance</span>
+    // Sub-component: Neurorights badges
+    const NeurorightsBadges = ({ codes }: { codes: string[] }) => (
+        <div className="flex flex-wrap gap-1">
+            {codes.map(code => {
+                const colors = NEURORIGHT_COLORS[code] ?? { bg: 'bg-slate-100', text: 'text-slate-500', border: 'border-slate-200' };
+                return (
+                    <span key={code} className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${colors.bg} ${colors.text} border ${colors.border}`} title={NEURORIGHT_LABELS[code]}>
+                        {code}
+                    </span>
+                );
+            })}
         </div>
     );
+
+    // Sub-component: CCI bar
+    const CciBar = ({ cci }: { cci: number }) => {
+        const pct = Math.min(cci / 4 * 100, 100);
+        const color = cci >= 2.0 ? '#ef4444' : cci >= 1.0 ? '#eab308' : '#22c55e';
+        return (
+            <div className="flex items-center gap-2">
+                <span className="text-[10px] font-semibold text-slate-400 shrink-0">CCI</span>
+                <div className="flex-1 h-1.5 rounded-full bg-slate-100 overflow-hidden max-w-[80px]">
+                    <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: color }} />
+                </div>
+                <span className="text-[10px] font-mono font-bold" style={{ color }}>{cci.toFixed(2)}</span>
+            </div>
+        );
+    };
+
+    // Sub-component: Insight Badge Strip
+    const InsightStrip = ({ t }: { t: ThreatVector }) => {
+        const nr = (t as any).neurorights;
+        return (
+            <div className="flex gap-1.5 mt-3 pt-3 border-t border-slate-50">
+                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.niss?.score && t.niss.score > 5 ? 'bg-red-500/10 text-red-600' : 'bg-slate-50 text-slate-400'}`} title="Modality/NISS">Security</span>
+                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.clinical ? 'bg-emerald-500/10 text-emerald-600' : 'bg-slate-50 text-slate-400'}`} title="Clinical/Therapeutic">Clinical</span>
+                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.dsm5 ? 'bg-amber-500/10 text-amber-600' : 'bg-slate-50 text-slate-400'}`} title="Diagnostic/Psychiatric">Diagnostic</span>
+                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${nr?.affected?.length > 0 ? 'bg-purple-500/10 text-purple-600' : 'bg-slate-50 text-slate-400'}`} title="Neurorights">Rights</span>
+            </div>
+        );
+    };
 
     // --- RENDER LOGIC ---
 
@@ -104,7 +203,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                         Access Points
                     </h2>
                     <p className="text-sm font-medium text-slate-400 max-w-lg mx-auto leading-relaxed">
-                        The QIF TARA Atlas is a dual-use directory of BCI techniques mapped across the bio-digital boundary.
+                        The QIF TARA Atlas maps neurotechnology techniques to the neurorights they threaten across the bio-digital boundary.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-7xl px-4">
@@ -138,7 +237,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
                 <div className="flex items-center gap-6">
                     <button
-                        onClick={() => { setSelectedDomain(null); setSelectedBand(null); setActiveTechnique(null); }}
+                        onClick={() => { setSelectedDomain(null); setSelectedBand(null); setActiveTechnique(null); setNeurorightFilter(null); setSortMode('default'); }}
                         className="px-5 py-3 rounded-xl bg-white border border-slate-100 text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-all font-semibold text-sm"
                     >
                         Back to Domains
@@ -166,12 +265,84 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                     }`}
                             >
                                 {isActive && <span className={`w-1.5 h-1.5 rounded-full ${colors.dot} animate-pulse`} />}
-                                {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                                {mode === 'governance' ? 'Neurorights' : mode.charAt(0).toUpperCase() + mode.slice(1)}
                             </button>
                         );
                     })}
                 </div>
             </div>
+
+            {/* Neurorights Filter Bar + CRB Population Selector (visible in governance mode) */}
+            {viewMode === 'governance' && selectedBand && (
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 px-2 pb-4 border-b border-slate-50">
+                    {/* Neurorights filter pills */}
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[11px] font-semibold text-slate-400 mr-1">Filter by right:</span>
+                        <button
+                            onClick={() => setNeurorightFilter(null)}
+                            className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${!neurorightFilter ? 'bg-purple-600 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-600'}`}
+                        >
+                            All
+                        </button>
+                        {(['MP', 'CL', 'MI', 'PC', 'EA'] as NeurorightCode[]).map(code => {
+                            const colors = NEURORIGHT_COLORS[code];
+                            const isActive = neurorightFilter === code;
+                            return (
+                                <button
+                                    key={code}
+                                    onClick={() => setNeurorightFilter(isActive ? null : code)}
+                                    className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${isActive
+                                        ? `${colors.bg} ${colors.text} border ${colors.border}`
+                                        : 'bg-slate-50 text-slate-400 hover:text-slate-600'
+                                    }`}
+                                    title={NEURORIGHT_LABELS[code]}
+                                >
+                                    {code}
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    {/* CRB Population selector */}
+                    <div className="flex items-center gap-2 sm:ml-auto">
+                        <span className="text-[11px] font-semibold text-slate-400 mr-1">Population:</span>
+                        {CRB_POPULATIONS.map(pop => (
+                            <button
+                                key={pop.id}
+                                onClick={() => setCrbPopulation(pop)}
+                                className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${crbPopulation.id === pop.id
+                                    ? 'bg-purple-600 text-white'
+                                    : 'bg-slate-50 text-slate-400 hover:text-slate-600'
+                                }`}
+                                title={pop.label}
+                            >
+                                {pop.short}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Sort selector */}
+                    <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-semibold text-slate-400 mr-1">Sort:</span>
+                        {[
+                            { id: 'default' as SortMode, label: 'Default' },
+                            { id: 'niss' as SortMode, label: 'NISS' },
+                            { id: 'rights' as SortMode, label: 'Rights' },
+                        ].map(s => (
+                            <button
+                                key={s.id}
+                                onClick={() => setSortMode(s.id)}
+                                className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${sortMode === s.id
+                                    ? 'bg-slate-900 text-white'
+                                    : 'bg-slate-50 text-slate-400 hover:text-slate-600'
+                                }`}
+                            >
+                                {s.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 items-start">
 
@@ -209,7 +380,15 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                     <div className="flex items-center justify-between px-2">
                         <h3 className="text-xs font-semibold text-slate-400">
                             {selectedBand ? `${selectedBand} Techniques` : "Awaiting Locus Activation"}
+                            {neurorightFilter && selectedBand && (
+                                <span className="ml-2 text-purple-500">
+                                    ({NEURORIGHT_LABELS[neurorightFilter]})
+                                </span>
+                            )}
                         </h3>
+                        {selectedBand && (
+                            <span className="text-xs font-mono text-slate-300">{filteredThreats.length} results</span>
+                        )}
                     </div>
 
                     {!selectedBand ? (
@@ -223,6 +402,13 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                             {filteredThreats.map(t => {
                                 const style = getSeverityStyle(t.severity);
                                 const isActive = activeTechnique?.id === t.id;
+                                const nr = (t as any).neurorights as { affected: string[]; cci: number } | null;
+                                const nissBase = t.niss?.score ?? 0;
+                                const nissAdj = crbPopulation.crb > 0 ? crbAdjust(nissBase, crbPopulation.crb) : nissBase;
+                                const nissDelta = nissAdj - nissBase;
+                                const adjSeverity = nissSeverityLabel(nissAdj);
+                                const baseSeverity = nissSeverityLabel(nissBase);
+                                const tierChanged = adjSeverity !== baseSeverity && crbPopulation.crb > 0;
 
                                 return (
                                     <button
@@ -282,13 +468,51 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                                 )}
                                                 {viewMode === 'governance' && (
                                                     <div>
-                                                        <span className="text-[11px] font-semibold text-blue-500 mb-1 block">Consent Tier</span>
-                                                        <h4 className="text-xl font-semibold text-slate-900 tracking-tight leading-tight mb-2">
-                                                            {t.tara?.governance?.consent_tier || 'Standard'}
-                                                        </h4>
-                                                        <p className="text-xs font-medium text-slate-400 mt-2 leading-relaxed">
-                                                            {t.tara?.governance?.safety_ceiling || "Standard parameters."}
-                                                        </p>
+                                                        {/* Neurorights badges */}
+                                                        {nr && nr.affected.length > 0 ? (
+                                                            <div>
+                                                                <span className="text-[11px] font-semibold text-purple-500 mb-2 block">
+                                                                    {nr.affected.length} Neuroright{nr.affected.length !== 1 ? 's' : ''} at Risk
+                                                                </span>
+                                                                <NeurorightsBadges codes={nr.affected} />
+
+                                                                {/* CCI bar */}
+                                                                <div className="mt-3">
+                                                                    <CciBar cci={nr.cci} />
+                                                                </div>
+
+                                                                {/* NISS + CRB delta */}
+                                                                <div className="mt-3 flex items-center gap-3">
+                                                                    <div className="flex items-baseline gap-1">
+                                                                        <span className="text-[10px] font-semibold text-slate-400">NISS</span>
+                                                                        <span className="text-lg font-semibold text-slate-900">{nissBase.toFixed(1)}</span>
+                                                                    </div>
+                                                                    {crbPopulation.crb > 0 && nissBase > 0 && (
+                                                                        <div className="flex items-center gap-1.5">
+                                                                            <span className="text-[10px] text-slate-300">→</span>
+                                                                            <span className={`text-lg font-semibold ${tierChanged ? 'text-red-500' : 'text-slate-700'}`}>
+                                                                                {nissAdj.toFixed(1)}
+                                                                            </span>
+                                                                            <span className={`text-[10px] font-bold ${tierChanged ? 'text-red-500' : 'text-orange-400'}`}>
+                                                                                +{nissDelta.toFixed(2)}
+                                                                            </span>
+                                                                            {tierChanged && (
+                                                                                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-500/10 text-red-600 border border-red-500/20">
+                                                                                    TIER CHANGE
+                                                                                </span>
+                                                                            )}
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <div>
+                                                                <span className="text-[11px] font-semibold text-slate-400 mb-1 block">No Neurorights Mapped</span>
+                                                                <h4 className="text-xl font-semibold text-slate-400 tracking-tight leading-tight mb-2">
+                                                                    {t.name}
+                                                                </h4>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 )}
                                             </div>
