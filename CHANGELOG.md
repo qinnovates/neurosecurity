@@ -4,7 +4,14 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 09dca68668668e2f11897cb4627acce391b37bb7 -->
+<!-- changelog-marker: 7c7ebfbd7080ee2bfcd2ea5b6f7f47ff7bbce84a -->
+
+## 2026-02-23
+
+### Other
+- update news feed cache [skip ci-deploy] ([e3103af](https://github.com/qinnovates/qinnovate/commit/e3103af))
+
+
 
 ## 2026-02-22
 
