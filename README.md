@@ -303,6 +303,7 @@ qinnovates/qinnovate/
 │   └── styles/
 │
 ├── docs/                       # Built site / GitHub Pages output
+│   └── learn/autodidactive/    # Daily learning app + auditory learning
 └── .github/workflows/          # CI/CD
 ```
 
@@ -317,6 +318,8 @@ qinnovates/qinnovate/
 ### Learning Resources
 
 **[Autodidactive](docs/learn/autodidactive/)** — A standalone, mobile-first daily learning app covering 45 historical figures across 7 disciplines: Polymaths, Philosophy, Neuroethics, Neuroscience, Quantum Mechanics, Cybersecurity, and Calculus (3 interactive labs). Features daily discovery (seeded PRNG), spaced repetition (SM-2), a free-placement post-it note wall, and bookmarking. Pure HTML/CSS/JS with zero dependencies — open [index.html](docs/learn/autodidactive/index.html) or view the [README](docs/learn/autodidactive/README.html). PWA-ready.
+
+**[Auditory Learning](docs/learn/autodidactive/auditory/)** — Learn while you work. AI-generated songs, guided meditations, and spoken-word content that encode real knowledge into formats you can absorb passively — while coding, commuting, exercising, or falling asleep. Current: "Sawdust" — a country power ballad teaching Stoicism through personal story (Rascal Flatts x Post Malone hybrid production). Planned: guided meditations, sleep hypnosis for spaced repetition, philosophy series, neuroscience fundamentals. Built with Suno, Mureka, and ElevenLabs.
 
 **[Minds That Made History](https://qinnovate.com/learning/)** — The original single-page interactive reference covering polymaths, philosophers, and neuroethics pioneers across 2,500 years. Autodidactive expands on this with new disciplines, daily learning features, and a mobile-first design.
 
