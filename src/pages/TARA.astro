@@ -1,10 +1,11 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { HOURGLASS_BANDS } from '../lib/qif-constants';
-import { THREAT_VECTORS, getStatusStats } from '../lib/threat-data';
+import { THREAT_VECTORS, getStatusStats, getNeurorightStats } from '../lib/threat-data';
 import TaraVisualization from '../components/TaraVisualization';
 
 const statusStats = getStatusStats();
+const nrStats = getNeurorightStats();
 const bands = [...HOURGLASS_BANDS];
 
 // TARA Categories (simplified for display)
@@ -40,7 +41,7 @@ const THREAT_CATEGORIES = [
               The TARA Atlas
             </h1>
             <p class="text-2xl text-slate-500 font-medium leading-relaxed tracking-tight">
-              A dual-use registry of neurotechnology techniques. Explore biological and digital security risks cross-referenced with therapeutic applications.
+              {THREAT_VECTORS.length} neurotechnology techniques mapped to the 5 neurorights they threaten — and the therapeutic applications they enable. Every technique scored for population vulnerability.
             </p>
           </div>
           
@@ -55,6 +56,13 @@ const THREAT_CATEGORIES = [
                   <span class="block text-[11px] text-slate-500 font-semibold mb-1">Critical Paths</span>
                   <div class="flex items-baseline gap-2">
                     <span class="text-3xl font-semibold text-red-500">{statusStats.CONFIRMED + statusStats.DEMONSTRATED}</span>
+                  </div>
+              </div>
+              <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-purple-100 shadow-sm min-w-[200px]">
+                  <span class="block text-[11px] text-purple-500 font-semibold mb-1">Neurorights Mapped</span>
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-3xl font-semibold text-purple-700">{nrStats.withNeurorights}/{THREAT_VECTORS.length}</span>
+                    <span class="text-sm text-purple-400 font-medium">5 rights</span>
                   </div>
               </div>
           </div>

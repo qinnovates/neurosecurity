@@ -425,6 +425,25 @@ export function getTechniquesByDiagCluster(cluster: DiagnosticCluster): ThreatVe
   return THREAT_VECTORS.filter(t => t.tara?.dsm5?.cluster === cluster);
 }
 
+/** Neuroright codes */
+export type NeurorightCode = 'MP' | 'CL' | 'MI' | 'PC' | 'EA';
+
+export const NEURORIGHT_LABELS: Record<NeurorightCode, string> = {
+  MP: 'Mental Privacy',
+  CL: 'Cognitive Liberty',
+  MI: 'Mental Integrity',
+  PC: 'Psychological Continuity',
+  EA: 'Equal Access',
+};
+
+/** Filter: techniques by neuroright code */
+export function getTechniquesByNeuroright(code: NeurorightCode): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => {
+    const nr = (t as any).neurorights;
+    return nr?.affected?.includes(code);
+  });
+}
+
 /** Filter: techniques by DSM-5 code */
 export function getTechniquesByDsm5Code(code: string): ThreatVector[] {
   return THREAT_VECTORS.filter(t => {
