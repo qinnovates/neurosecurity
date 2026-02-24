@@ -1,6 +1,33 @@
 [
   {
     "type": "external",
+    "title": "A Data-Driven Method to Map the Functional Organisation of Human Brain White Matter",
+    "date": "2026-02-24",
+    "url": "https://arxiv.org/abs/2602.18715",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.18715v1 Announce Type: new \nAbstract: The white matter of the brain is organised into axonal bundles that support long-range neural communication. Although diffusion MRI (dMRI) enables deta",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "CRCC: Contrast-Based Robust Cross-Subject and Cross-Site Representation Learning for EEG",
+    "date": "2026-02-24",
+    "url": "https://arxiv.org/abs/2602.19138",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.19138v1 Announce Type: new \nAbstract: EEG-based neural decoding models often fail to generalize across acquisition sites due to structured, site-dependent biases implicitly exploited during",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Brain Computer Interface Market Projected to Reach USD - GlobeNewswire",
+    "date": "2026-02-23",
+    "url": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxOYVYyUEJrMC1CRVRfN01QM1hwMXBFOXFhd05qSC1DSjhDUnFnUXZGX0ZWd1R2dDBZVXBiZTZvWGhmMnpBcmE2XzR4dG1hUEZ3ZlZiQ2pnTDdKTUtPQzNtQkJwZ3NGUW5XY1d5azJRRnREek1TM25UZC1WbXkzc2Z3VUk4UkkxUWRMa3dXWHhSQ2d3ckY3eEs0UG1CVnhGZS1fR0tSbTA2Sm5Ua0J1QnhYWmV6TUdtaUhKNnJfMWNSb1pSVVRlRmF1dE5oWUxEa2J5bktYVGI2ZGZPMWlGVVliS0k3M29idjJOT3dzZndCRmM2TTlnXzFxYmJvc2o5TVBkcGNJZm5rT0NyU0xrSjlyNDJiOWxrUHRVczh6alEtQVFLcUpmamU0Uy1tVEJJRng0V2syR01TdzQzLUZLWkJRTzFkSVpLYjNQc0ZaNXMxaktzQTRiZl9PdkVpeEVUdjVPY1Rr?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain Computer Interface Market Projected to Reach USD&nbsp;&nbsp;GlobeNewswire",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "China’s brain-computer interface industry is racing ahead - TechCrunch",
     "date": "2026-02-22",
     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdzI0cVRmWExrYWVqNFJubVNkZC1xN0x5RnZXcEFIcEt4QTNPZzFjOHYxdHJUekNGM3JxNjdpd1Y2SnVpdko5V19NaHFhOEVKV2tnZ19KeFJFdVJsbDBNdE1SMEY2Z2N5dEVqRHRkQzdVQjF1eDAxczdXLWdYNm43emVYam1OendkQ2QtWEJYaHg4dUJ1ZUE?oc=5",
@@ -13,7 +40,7 @@
     "title": "Elon Musk’s Neuralink sparks BCI race in China - Teslarati",
     "date": "2026-02-20",
     "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9DREhGWUZDblhocDE2N0s5Z0lKSmw4cEI5bHVpR210OTBra2NCTEJhSXNINEJrNzRudkJxRzFETlpzNjd3NmhNZmdYcFU3QVo1Vkd3RkhMUVF5YWc1VFYtVQ?oc=5",
-    "source": "Google News — BCI",
+    "source": "Google News — Neuralink",
     "summary": "Elon Musk’s Neuralink sparks BCI race in China&nbsp;&nbsp;Teslarati",
     "category": "neurotechnology"
   },
@@ -82,6 +109,15 @@
   },
   {
     "type": "external",
+    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
     "date": "2026-01-05",
     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
@@ -96,6 +132,15 @@
     "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
+    "date": "2025-12-11",
+    "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
     "category": "neurotechnology"
   },
   {
@@ -115,15 +160,6 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
-    "date": "2025-10-05",
-    "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
