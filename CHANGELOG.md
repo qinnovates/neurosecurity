@@ -4,7 +4,19 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 7c7ebfbd7080ee2bfcd2ea5b6f7f47ff7bbce84a -->
+<!-- changelog-marker: 17ed23f053d3c7998ea14e049be01d7e4fa43493 -->
+
+## 2026-02-24
+
+### Added
+- Add learning pages, BCI economic analysis, and CLAUDE.md cleanup ([4161a98](https://github.com/qinnovates/qinnovate/commit/4161a98))
+
+### Updated
+- Autodidactive v2.1: web search fallback, Tier 3 LLM providers, settings UI ([17ed23f](https://github.com/qinnovates/qinnovate/commit/17ed23f))
+
+### Other
+- update news feed cache [skip ci-deploy] ([a551ca8](https://github.com/qinnovates/qinnovate/commit/a551ca8))
+
 
 ## 2026-02-23
 
