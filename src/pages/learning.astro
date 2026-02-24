@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Learning Reference — Minds That Made History"
+  description="Visual learning reference: polymaths, philosophers, neuroethics pioneers — their frameworks, struggles, and wisdom. A personal quick-reference for exploring history's greatest minds."
+>
+  <Nav />
+  <main class="learning-page">
+    <div class="learning-header">
+      <div class="learning-header-inner">
+        <p class="learning-label">Personal Learning Reference</p>
+        <h1>Minds That Made History</h1>
+        <p class="learning-desc">
+          A visual quick-reference for exploring history's greatest polymaths, philosophers, and neuroethics pioneers.
+          Their frameworks, struggles, defining moments, and actionable wisdom — all in one place.
+          Built as a personal study tool. Feel free to explore.
+        </p>
+      </div>
+    </div>
+    <iframe
+      id="learningFrame"
+      src="/learn/polymaths-and-philosophers.html"
+      title="Minds That Made History — Interactive Learning Reference"
+      style="width:100%; border:none; min-height:100vh;"
+    ></iframe>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Auto-resize iframe to content height
+  const frame = document.getElementById('learningFrame') as HTMLIFrameElement;
+  if (frame) {
+    const resize = () => {
+      try {
+        const h = frame.contentDocument?.documentElement?.scrollHeight;
+        if (h) frame.style.height = h + 'px';
+      } catch (_) { /* cross-origin fallback */ }
+    };
+    frame.addEventListener('load', () => {
+      resize();
+      // Re-check periodically as user expands sections
+      setInterval(resize, 2000);
+    });
+  }
+</script>
+
+<style>
+  .learning-page {
+    padding-top: 4rem;
+  }
+
+  .learning-header {
+    background: linear-gradient(135deg, #0d0f14 0%, #141720 100%);
+    border-bottom: 1px solid #262a3a;
+    padding: 3rem 1.5rem 2.5rem;
+  }
+
+  .learning-header-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .learning-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #7a7f95;
+    margin-bottom: 0.75rem;
+  }
+
+  .learning-header h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #d4a853;
+    margin-bottom: 0.75rem;
+  }
+
+  .learning-desc {
+    font-size: 0.9rem;
+    color: #7a7f95;
+    line-height: 1.7;
+  }
+</style>

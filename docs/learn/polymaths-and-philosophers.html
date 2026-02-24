@@ -1,0 +1,3106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minds That Made History — Polymaths, Philosophers & Great Teachers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1b1f2b;
+    --border: #262a3a;
+    --accent: #6b9fff;
+    --accent2: #e87fa0;
+    --accent3: #5fcf80;
+    --accent4: #e8a060;
+    --accent5: #9b7fe8;
+    --text: #d8dae0;
+    --text-dim: #7a7f95;
+    --gold: #d4a853;
+    --radius: 10px;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', -apple-system, system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  #constellation {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+  }
+
+  .hero .subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    color: var(--text-dim);
+    font-style: italic;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  .hero .scroll-hint {
+    margin-top: 3rem;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── Navigation ── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.75rem 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    background: none;
+    border: 1px solid transparent;
+    color: var(--text-dim);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--text); border-color: var(--border); }
+  .nav-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(255,215,0,0.08); }
+
+  /* ── Sections ── */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .section-intro {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    max-width: 700px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  /* ── Profile Cards ── */
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+    cursor: pointer;
+  }
+  .profile-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    border: 2px solid var(--border);
+  }
+
+  .card-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+  }
+
+  .card-dates {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .card-tagline {
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-style: italic;
+    margin-top: 0.3rem;
+  }
+
+  .card-fields {
+    padding: 0 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .field-tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .card-quote {
+    padding: 0 1.5rem 1.5rem;
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .expand-hint {
+    text-align: center;
+    padding: 0.6rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: var(--surface2);
+    transition: background 0.2s;
+  }
+  .profile-card:hover .expand-hint { background: rgba(127,170,255,0.08); color: var(--accent); }
+
+  /* ── Modal / Detail View ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+  }
+  .modal-overlay.open { display: flex; justify-content: center; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    position: relative;
+    animation: modalIn 0.3s ease-out;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+
+  .modal-hero {
+    padding: 2.5rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-hero h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .modal-hero .dates {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  .modal-hero .essence {
+    color: var(--accent);
+    font-style: italic;
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .detail-section {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-section:last-child { border-bottom: none; }
+
+  .detail-section h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .detail-section h4 .icon { font-size: 1rem; }
+
+  .label-struggle h4 { color: var(--accent2); }
+  .label-moment h4 { color: var(--gold); }
+  .label-framework h4 { color: var(--accent); }
+  .label-habits h4 { color: var(--accent3); }
+  .label-quotes h4 { color: var(--accent5); }
+  .label-takeaways h4 { color: var(--accent4); }
+
+  .detail-section p,
+  .detail-section li {
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .detail-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .detail-section ul li {
+    padding: 0.4rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .detail-section ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  .quote-block {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent5);
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+  }
+
+  .quote-block .attribution {
+    display: block;
+    text-align: right;
+    font-style: normal;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  .takeaway-item {
+    background: rgba(255,170,127,0.06);
+    border: 1px solid rgba(255,170,127,0.15);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .takeaway-item strong {
+    color: var(--accent4);
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* ── Patterns Section ── */
+  .patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .pattern-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .pattern-card h4 {
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .pattern-card p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .pattern-card .names {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+
+  /* ── Quote Carousel ── */
+  .quote-carousel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin: 3rem 0;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-quote {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 300;
+    max-width: 650px;
+    line-height: 1.8;
+    transition: opacity 0.5s;
+  }
+
+  .carousel-attr {
+    color: var(--gold);
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .carousel-controls {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .carousel-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .carousel-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── Implement Section ── */
+  .implement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .implement-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .implement-card h4 {
+    font-size: 1rem;
+    color: var(--accent3);
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  .implement-card .origin {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .implement-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .implement-card .how {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  /* ── Action Over Words ── */
+  .action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .action-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border-left: 3px solid var(--accent3);
+  }
+
+  .action-card h4 {
+    color: var(--accent3);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  .action-card .who {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .action-card p { font-size: 0.9rem; line-height: 1.7; }
+
+  .action-card .lesson {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .action-manifesto {
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .action-manifesto p {
+    font-size: 1.1rem;
+    color: var(--gold);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* ── Books ── */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .book-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .book-card:hover { border-color: var(--accent5); }
+
+  .book-card .reader {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .book-card h4 {
+    color: var(--accent5);
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 0.15rem;
+  }
+
+  .book-card .author {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .book-card p { font-size: 0.9rem; line-height: 1.7; }
+
+  /* ── Learning Journal ── */
+  .journal-intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .journal-intro p { font-size: 0.9rem; color: var(--text-dim); }
+  .journal-intro a { color: var(--accent); text-decoration: none; }
+  .journal-intro a:hover { text-decoration: underline; }
+
+  .journal-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .journal-entry {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .journal-entry-header {
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .journal-entry-header:hover { background: var(--surface2); }
+
+  .journal-entry-header h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .journal-entry-header .entry-meta {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .journal-entry-header .chevron {
+    color: var(--text-dim);
+    transition: transform 0.3s;
+    font-size: 1.2rem;
+  }
+
+  .journal-entry.open .chevron { transform: rotate(90deg); }
+
+  .journal-entry-body {
+    display: none;
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .journal-entry.open .journal-entry-body { display: block; }
+
+  .journal-entry-body h5 {
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin: 1rem 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .journal-entry-body p,
+  .journal-entry-body li {
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+
+  .journal-entry-body ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .journal-entry-body ul li {
+    padding: 0.3rem 0 0.3rem 1.2rem;
+    position: relative;
+  }
+
+  .journal-entry-body ul li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .journal-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+  .journal-link:hover { background: rgba(127,170,255,0.1); }
+
+  /* ── Neuroethics ── */
+  .neuro-domains {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 700px) { .neuro-domains { grid-template-columns: 1fr; } }
+
+  .domain-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .domain-card h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .domain-card p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .domain-card ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+  }
+
+  .domain-card ul li {
+    font-size: 0.85rem;
+    padding: 0.25rem 0 0.25rem 1rem;
+    position: relative;
+    color: var(--text-dim);
+  }
+
+  .domain-card ul li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+  }
+
+  .domain-ethics { border-top: 3px solid var(--accent2); }
+  .domain-ethics h4 { color: var(--accent2); }
+  .domain-ethics ul li::before { color: var(--accent2); }
+
+  .domain-neuro { border-top: 3px solid var(--accent); }
+  .domain-neuro h4 { color: var(--accent); }
+  .domain-neuro ul li::before { color: var(--accent); }
+
+  .domain-security { border-top: 3px solid var(--accent3); }
+  .domain-security h4 { color: var(--accent3); }
+  .domain-security ul li::before { color: var(--accent3); }
+
+  .neuro-subsection {
+    margin-top: 2.5rem;
+  }
+
+  .neuro-subsection h3 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .neuro-subsection > p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .warning-card {
+    border-left-color: #ff4444 !important;
+  }
+
+  .warning-card h4 { color: #ff4444 !important; }
+  .warning-card .lesson { color: #ff4444 !important; }
+
+  /* ── Search ── */
+  .search-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%237a7f95' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85zm-5.242.156a5 5 0 110-10 5 5 0 010 10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0.75rem center;
+  }
+
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text-dim); }
+
+  /* ── Deep Dive Links in Modal ── */
+  .deep-dive-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .deep-dive-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface2);
+    color: var(--text-dim);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .deep-dive-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(107,159,255,0.06); }
+
+  /* ── Active Recall Prompt ── */
+  .recall-prompt {
+    background: rgba(212,168,83,0.06);
+    border: 1px solid rgba(212,168,83,0.2);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .recall-prompt h5 {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .recall-prompt p {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .recall-reveal {
+    display: none;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed rgba(212,168,83,0.3);
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .recall-btn {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    background: none;
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .recall-btn:hover { background: rgba(212,168,83,0.1); }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    position: relative;
+  }
+
+  .timeline-item:nth-child(odd) { flex-direction: row; }
+  .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+  .timeline-content {
+    width: 45%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .timeline-content:hover { border-color: var(--accent); }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    position: absolute;
+    left: calc(50% - 6px);
+    z-index: 1;
+  }
+
+  .timeline-content h5 {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .timeline-content .era {
+    font-size: 0.75rem;
+    color: var(--gold);
+  }
+
+  /* ── Filter Bar ── */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 0.3rem 0.9rem;
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { color: var(--text); border-color: var(--text-dim); }
+  .filter-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(255,215,0,0.08); }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .profiles-grid { grid-template-columns: 1fr; }
+    .modal { margin: 0.5rem; }
+    .modal-hero { padding: 1.5rem; }
+    .detail-section { padding: 1.25rem 1.5rem; }
+    .timeline::before { left: 20px; }
+    .timeline-item { flex-direction: row !important; }
+    .timeline-content { width: calc(100% - 50px); margin-left: 40px; }
+    .timeline-dot { left: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════ HERO ════════════════════════════════════════════════ -->
+<section class="hero">
+  <canvas id="constellation"></canvas>
+  <div class="hero-content">
+    <h1>Minds That Made History</h1>
+    <p class="subtitle">Polymaths, philosophers, and great teachers across 2,500 years — their frameworks, their struggles, their wisdom. What they did different. What they did the same.</p>
+    <p class="scroll-hint">Scroll to explore &darr;</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ NAV ════════════════════════════════════════════════ -->
+<nav class="nav-bar" id="navBar">
+  <button class="nav-btn active" data-section="polymaths">Polymaths</button>
+  <button class="nav-btn" data-section="philosophers">Philosophers &amp; Teachers</button>
+  <button class="nav-btn" data-section="quotes">Quote Wall</button>
+  <button class="nav-btn" data-section="patterns">Shared Patterns</button>
+  <button class="nav-btn" data-section="timeline">Timeline</button>
+  <button class="nav-btn" data-section="neuroethics">Neuroethics</button>
+  <button class="nav-btn" data-section="action">Action Over Words</button>
+  <button class="nav-btn" data-section="books">The Books That Made Them</button>
+  <button class="nav-btn" data-section="journal">Learning Journal</button>
+  <button class="nav-btn" data-section="implement">Implement Today</button>
+</nav>
+
+<!-- ════════════════════════════════════════════════ SEARCH ════════════════════════════════════════════════ -->
+<div class="search-wrap">
+  <input type="text" class="search-input" id="globalSearch" placeholder="Search people, quotes, concepts, frameworks...">
+</div>
+
+<!-- ════════════════════════════════════════════════ POLYMATHS ════════════════════════════════════════════════ -->
+<section class="section" id="polymaths">
+  <h2 class="section-title">The Polymaths</h2>
+  <p class="section-intro">They refused to specialize. They connected fields no one else thought to connect. And that's exactly what made them dangerous.</p>
+
+  <div class="filter-bar" id="polymathFilters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="science">Science</button>
+    <button class="filter-btn" data-filter="art">Art</button>
+    <button class="filter-btn" data-filter="politics">Politics</button>
+    <button class="filter-btn" data-filter="philosophy">Philosophy</button>
+    <button class="filter-btn" data-filter="invention">Invention</button>
+    <button class="filter-btn" data-filter="mathematics">Mathematics</button>
+  </div>
+
+  <div class="profiles-grid" id="polymathGrid"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ PHILOSOPHERS ════════════════════════════════════════════════ -->
+<section class="section" id="philosophers">
+  <h2 class="section-title">Philosophers &amp; Great Teachers</h2>
+  <p class="section-intro">They didn't build machines or paint ceilings. They rewired how humans think. Their tools were words, questions, and the courage to say what no one wanted to hear.</p>
+
+  <div class="filter-bar" id="philFilters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="stoicism">Stoicism</button>
+    <button class="filter-btn" data-filter="eastern">Eastern</button>
+    <button class="filter-btn" data-filter="classical">Classical</button>
+    <button class="filter-btn" data-filter="modern">Modern</button>
+  </div>
+
+  <div class="profiles-grid" id="philGrid"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ QUOTES ════════════════════════════════════════════════ -->
+<section class="section" id="quotes">
+  <h2 class="section-title">Quote Wall</h2>
+  <p class="section-intro">Centuries apart, but the same fire. Click through the words that survived millennia.</p>
+
+  <div class="quote-carousel" id="quoteCarousel">
+    <p class="carousel-quote" id="carouselText"></p>
+    <p class="carousel-attr" id="carouselAttr"></p>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevQuote">&#8592;</button>
+      <button class="carousel-btn" id="nextQuote">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ PATTERNS ════════════════════════════════════════════════ -->
+<section class="section" id="patterns">
+  <h2 class="section-title">Shared Patterns</h2>
+  <p class="section-intro">Separated by centuries, cultures, and continents — they arrived at the same conclusions.</p>
+
+  <div class="patterns-grid" id="patternsGrid"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ TIMELINE ════════════════════════════════════════════════ -->
+<section class="section" id="timeline">
+  <h2 class="section-title">2,500 Years of Genius</h2>
+  <p class="section-intro">Tap any name to open their profile.</p>
+
+  <div class="timeline" id="timelineView"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ NEUROETHICS ════════════════════════════════════════════════ -->
+<section class="section" id="neuroethics">
+  <h2 class="section-title">Neuroethics</h2>
+  <p class="section-intro">A field so young it barely exists — and so critical it may define the century. The people who asked what we owe the human brain, and the few who asked what happens when we can change it.</p>
+
+  <div class="neuro-domains">
+    <div class="domain-card domain-ethics">
+      <h4>1. Ethics of Neuroscience</h4>
+      <p>What moral limits should govern brain research and brain technology? When we can read, alter, or enhance the mind — who decides what's permissible?</p>
+      <ul>
+        <li>Is it ethical to enhance cognition with implants?</li>
+        <li>Who owns your neural data?</li>
+        <li>When does brain stimulation become coercion?</li>
+        <li>Should we be able to erase traumatic memories?</li>
+        <li>What rights does a brain-computer interface user have?</li>
+      </ul>
+    </div>
+    <div class="domain-card domain-neuro">
+      <h4>2. Neuroscience of Ethics</h4>
+      <p>What does the brain tell us about morality itself? If moral judgments are neural processes, what does that mean for free will, responsibility, and justice?</p>
+      <ul>
+        <li>Is morality hardwired or learned?</li>
+        <li>What brain regions govern moral reasoning?</li>
+        <li>If a tumor causes violent behavior, is the person responsible?</li>
+        <li>Can we predict ethical behavior from brain scans?</li>
+        <li>Does understanding the neuroscience of bias change how we judge people?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="domain-card domain-security" style="margin-bottom: 2rem;">
+    <h4>3. Neurosecurity — The Security of Neural Interfaces</h4>
+    <p>Where neuroethics meets cybersecurity. As brain-computer interfaces move from lab to consumer, who protects the brain from hacking, surveillance, and manipulation? This is the domain QIF operates in — the technical enforcement layer beneath the ethical principles.</p>
+    <ul>
+      <li>Can a BCI be hacked to inject false sensory experiences?</li>
+      <li>Who has access to the neural data stream?</li>
+      <li>What happens when an implant vendor goes bankrupt?</li>
+      <li>How do you patch a device inside someone's skull?</li>
+      <li>What does a "firewall for the brain" actually look like?</li>
+    </ul>
+  </div>
+
+  <div class="neuro-subsection">
+    <h3>Pioneers &amp; Cautionary Tales</h3>
+    <p>The field has very few historical figures — which is itself the problem. Click to explore each.</p>
+    <div class="profiles-grid" id="neuroGrid"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ ACTION OVER WORDS ════════════════════════════════════════════════ -->
+<section class="section" id="action">
+  <h2 class="section-title">Action Over Words</h2>
+  <p class="section-intro">Every influential leader in history shared one trait: they didn't just talk — they built, tested, failed, and iterated. Speech without action is noise. Creation is how you learn what's real.</p>
+
+  <div class="action-manifesto">
+    <p>Nobody who changed the world did it by talking about changing the world. They picked up a tool, made something wrong, studied why it was wrong, and made it again. The prototype is the teacher. The failure is the curriculum.</p>
+  </div>
+
+  <div class="action-grid" id="actionGrid"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ BOOKS ════════════════════════════════════════════════ -->
+<section class="section" id="books">
+  <h2 class="section-title">The Books That Made Them</h2>
+  <p class="section-intro">Behind every great mind was a book that rewired their thinking. The text that cracked them open.</p>
+
+  <div class="books-grid" id="booksGrid"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ LEARNING JOURNAL ════════════════════════════════════════════════ -->
+<section class="section" id="journal">
+  <h2 class="section-title">Learning Journal</h2>
+  <p class="section-intro">Deep dives into specific lessons, methods, and discoveries. Click to expand. Each entry links to a detailed GitHub doc for further reading.</p>
+
+  <div class="journal-intro">
+    <p>This is a living document. Each entry is a focused exploration of a specific lesson from history — something concrete you can study, practice, and apply. Entries link to longer-form writeups where available.</p>
+  </div>
+
+  <div class="journal-entries" id="journalEntries"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ IMPLEMENT ════════════════════════════════════════════════ -->
+<section class="section" id="implement">
+  <h2 class="section-title">Implement Today</h2>
+  <p class="section-intro">History only matters if you use it. Concrete practices you can start this week, stolen from the greatest minds who ever lived.</p>
+
+  <div class="implement-grid" id="implementGrid"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ MODAL ════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const POLYMATHS = [
+  {
+    id: 'davinci',
+    name: 'Leonardo da Vinci',
+    dates: '1452 – 1519',
+    born: 1452,
+    tagline: 'The man who saw everything as connected',
+    emoji: '🎨',
+    fields: ['art', 'science', 'invention', 'anatomy'],
+    tags: ['art', 'science', 'invention'],
+    quote: '"Learning never exhausts the mind."',
+    struggle: `Illegitimate son of a notary — barred from university, barred from his father's profession, barred from the guild system. He had no formal education beyond basic reading and math. The establishment considered him a craftsman, not a scholar. He wrote backwards to keep his ideas private, likely fearing theft or persecution. He left dozens of projects unfinished — not from laziness, but because his mind moved faster than any single lifetime could contain.`,
+    moment: `Dissecting his first human corpse by candlelight in a hospital basement. The church condemned the practice. But when he cut open the human heart and saw that the aortic valve worked exactly like a vortex he'd sketched in water flow studies — two completely separate fields collided in his mind. Anatomy was engineering. Nature was one system. That insight drove every major work that followed.`,
+    framework: [
+      '<strong>Saper vedere</strong> ("knowing how to see") — observation before theory. Draw a thing 50 times before you dare explain it.',
+      '<strong>Analogical thinking</strong> — map patterns between unrelated domains. Bird wings informed flying machines. Water flow informed blood circulation.',
+      '<strong>The notebook method</strong> — carry a book at all times. Capture everything. Questions, sketches, grocery lists, anatomy studies, jokes. 7,200 pages survive.',
+      '<strong>Reverse engineering nature</strong> — don\'t invent from scratch. Nature already solved it. Study the solution, then adapt.'
+    ],
+    habits: [
+      'Woke before dawn. Worked in intense bursts, not steady hours.',
+      'Walked constantly — used walking to think, not just to travel.',
+      'Drew obsessively. Not to make art, but to understand structure.',
+      'Kept a mirror by his workspace to check his work from reversed perspective.',
+      'Vegetarian — unusual for his era. Made ethical choices others found eccentric.'
+    ],
+    quotes: [
+      { text: 'Learning never exhausts the mind.', src: 'Leonardo da Vinci' },
+      { text: 'Simplicity is the ultimate sophistication.', src: 'Leonardo da Vinci' },
+      { text: 'The noblest pleasure is the joy of understanding.', src: 'Leonardo da Vinci' },
+      { text: 'I have been impressed with the urgency of doing. Knowing is not enough; we must apply. Being willing is not enough; we must do.', src: 'Leonardo da Vinci' },
+      { text: 'Study without desire spoils the memory, and it retains nothing that it takes in.', src: 'Leonardo da Vinci' }
+    ],
+    takeaways: [
+      { title: 'Keep a capture notebook', desc: 'Not a planner. A chaos notebook. Every thought, sketch, question, and stray connection. Review weekly.' },
+      { title: 'Cross-pollinate fields', desc: 'When stuck in one domain, go study something completely different. The connection you need is hiding in the wrong discipline.' },
+      { title: 'Draw to understand', desc: 'You don\'t need to be an artist. Sketching forces you to observe structure you\'d otherwise skip over.' }
+    ]
+  },
+  {
+    id: 'franklin',
+    name: 'Benjamin Franklin',
+    dates: '1706 – 1790',
+    born: 1706,
+    tagline: 'The self-made polymath who rewired a nation',
+    emoji: '⚡',
+    fields: ['politics', 'science', 'invention', 'writing'],
+    tags: ['politics', 'science', 'invention'],
+    quote: '"An investment in knowledge pays the best interest."',
+    struggle: `Pulled from school at age 10 because his family couldn't afford it. Apprenticed to his brother's print shop at 12, where he was essentially indentured labor. His brother beat him. He ran away at 17 to Philadelphia with almost nothing. No family connections, no degree, no money. Every accomplishment was built from zero by a man the system wasn't designed to serve.`,
+    moment: `The kite experiment gets all the press, but the real moment was earlier. Sitting in his print shop, he realized that the Junto — his self-organized Friday night discussion club of tradesmen and thinkers — was more educational than any university he'd been denied. He could build his own institution. He went on to found America's first lending library, the first volunteer fire department, the University of Pennsylvania, and the American Philosophical Society. He didn't wait for permission.`,
+    framework: [
+      '<strong>The 13 Virtues</strong> — tracked one virtue per week in a notebook. Not perfection, but systematic self-improvement through measurement.',
+      '<strong>The Junto method</strong> — form a small group of curious people from different fields. Meet weekly. Share problems. Pool knowledge.',
+      '<strong>Usefulness as the metric</strong> — every idea must serve a practical purpose. Theory without application was indulgence.',
+      '<strong>Public identity as a tool</strong> — he carefully crafted his persona (humble printer, wise elder) to maximize his ability to influence.'
+    ],
+    habits: [
+      'Rose at 5 AM. Asked himself every morning: "What good shall I do this day?"',
+      'Structured his day into blocks — work, study, reflection, and review.',
+      'Read voraciously and taught himself 5 languages.',
+      'Every evening reviewed the day and asked: "What good have I done today?"',
+      'Practiced deliberate writing improvement by reverse-engineering essays from The Spectator.'
+    ],
+    quotes: [
+      { text: 'An investment in knowledge pays the best interest.', src: 'Benjamin Franklin' },
+      { text: 'Tell me and I forget, teach me and I may remember, involve me and I learn.', src: 'Benjamin Franklin' },
+      { text: 'By failing to prepare, you are preparing to fail.', src: 'Benjamin Franklin' },
+      { text: 'Either write something worth reading or do something worth writing.', src: 'Benjamin Franklin' },
+      { text: 'Energy and persistence conquer all things.', src: 'Benjamin Franklin' }
+    ],
+    takeaways: [
+      { title: 'The daily question', desc: 'Start each morning with "What good shall I do today?" End each night with "What good have I done today?"' },
+      { title: 'Build a Junto', desc: 'Find 4-6 people from different fields. Meet regularly. Share what you\'re learning. This beats any course.' },
+      { title: 'Track one virtue per week', desc: 'Pick 13 qualities you want to develop. Focus on one per week. Cycle through quarterly.' }
+    ]
+  },
+  {
+    id: 'curie',
+    name: 'Marie Curie',
+    dates: '1867 – 1934',
+    born: 1867,
+    tagline: 'Outworked, outthought, and outlasted every barrier they built',
+    emoji: '☢️',
+    fields: ['science', 'chemistry', 'physics'],
+    tags: ['science'],
+    quote: '"Nothing in life is to be feared, it is only to be understood."',
+    struggle: `Born in Russian-occupied Poland where women were banned from university. Worked as a governess for years to fund her sister's education first — only then did she go to Paris, arriving at the Sorbonne with barely enough money to eat. She sometimes fainted from hunger during lectures. Won two Nobel Prizes and the French Academy of Sciences still refused to admit her because she was a woman. After her husband Pierre died, the French press ran a smear campaign calling her a foreign home-wrecker.`,
+    moment: `Alone in a freezing, leaking shed that served as her "laboratory," she was processing literal tons of pitchblende ore by hand — boiling, filtering, precipitating — for four years. One night she walked into the dark shed and saw her samples glowing blue in the darkness. Radium. She had isolated an entirely new element through sheer endurance. No funding, no proper lab, no institutional support. Just the work.`,
+    framework: [
+      '<strong>Relentless empiricism</strong> — trust the measurement, not the theory. When her numbers didn\'t match known elements, she didn\'t doubt her data. She discovered new ones.',
+      '<strong>Endurance as methodology</strong> — some problems require 10,000 hours of manual labor before the insight reveals itself. She didn\'t shortcut.',
+      '<strong>Collaboration as force multiplier</strong> — worked as a true equal partner with Pierre, then continued solo. Neither ego dominated.',
+      '<strong>Teach to cement knowledge</strong> — she taught physics at the Sorbonne while conducting research, using pedagogy to sharpen her own understanding.'
+    ],
+    habits: [
+      'Worked 14+ hour days in the lab, 7 days a week during peak research.',
+      'Kept meticulous lab notebooks — they\'re still radioactive and stored in lead-lined boxes.',
+      'Lived with extreme frugality to maximize research funding.',
+      'Walked or cycled everywhere — used physical activity as mental reset.',
+      'Taught her daughters and their friends in an experimental cooperative school.'
+    ],
+    quotes: [
+      { text: 'Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.', src: 'Marie Curie' },
+      { text: 'Be less curious about people and more curious about ideas.', src: 'Marie Curie' },
+      { text: 'I was taught that the way of progress is neither swift nor easy.', src: 'Marie Curie' },
+      { text: 'One never notices what has been done; one can only see what remains to be done.', src: 'Marie Curie' },
+      { text: 'Life is not easy for any of us. But what of that? We must have perseverance and above all confidence in ourselves.', src: 'Marie Curie' }
+    ],
+    takeaways: [
+      { title: 'Trust your measurements', desc: 'When your data contradicts the consensus, double-check your method — then trust the data.' },
+      { title: 'Endurance is a valid strategy', desc: 'Some breakthroughs can\'t be hacked. They require years of grinding work. Embrace the grind when the problem demands it.' },
+      { title: 'Teach to learn', desc: 'If you can\'t explain it simply, you don\'t understand it. Teaching forces deep comprehension.' }
+    ]
+  },
+  {
+    id: 'tesla',
+    name: 'Nikola Tesla',
+    dates: '1856 – 1943',
+    born: 1856,
+    tagline: 'The man who imagined the future and then built it',
+    emoji: '💡',
+    fields: ['invention', 'science', 'physics'],
+    tags: ['invention', 'science'],
+    quote: '"The present is theirs; the future, for which I really worked, is mine."',
+    struggle: `Immigrated to America with 4 cents in his pocket and a letter of recommendation. Edison hired him, then allegedly cheated him out of $50,000 in promised bonuses. After leaving Edison, Tesla dug ditches for $2 a day. His lab burned down in 1895, destroying years of research and notes. J.P. Morgan pulled funding from Wardenclyffe Tower. He died alone in a hotel room with pigeons, largely forgotten. The establishment chose Edison's inferior DC system not because it was better, but because Edison was better at business.`,
+    moment: `Walking through a park in Budapest, reciting Goethe's Faust from memory, he suddenly visualized a rotating magnetic field in complete mechanical detail — the entire AC motor, fully formed, rotating in his mind. He grabbed a stick and drew diagrams in the dirt. The idea that would power the modern world came not from a lab, but from poetry and walking.`,
+    framework: [
+      '<strong>Mental visualization</strong> — he designed, tested, and iterated machines entirely in his imagination before building anything physical. Full 3D simulation in his mind.',
+      '<strong>First principles from nature</strong> — studied natural phenomena (lightning, water vortices, resonance) as the blueprint for engineering.',
+      '<strong>Solitary deep work</strong> — isolation was not a bug, it was the method. He needed unbroken concentration to hold complex systems in his head.',
+      '<strong>Patent as proof</strong> — documented everything rigorously. 300 patents across 26 countries.'
+    ],
+    habits: [
+      'Slept only 2-4 hours per night (with occasional recovery naps).',
+      'Walked 8-10 miles daily — his primary thinking method.',
+      'Dined alone at the same restaurant, same table, same time every day.',
+      'Visualized inventions in complete mechanical detail before building.',
+      'Memorized entire books and could recall pages verbatim.'
+    ],
+    quotes: [
+      { text: 'The present is theirs; the future, for which I really worked, is mine.', src: 'Nikola Tesla' },
+      { text: 'If you want to find the secrets of the universe, think in terms of energy, frequency, and vibration.', src: 'Nikola Tesla' },
+      { text: 'I do not think there is any thrill that can go through the human heart like that felt by the inventor as he sees some creation of the brain unfolding to success.', src: 'Nikola Tesla' },
+      { text: 'The scientists of today think deeply instead of clearly. One must be sane to think clearly, but one can think deeply and be quite insane.', src: 'Nikola Tesla' }
+    ],
+    takeaways: [
+      { title: 'Walk to think', desc: 'Tesla, Da Vinci, Beethoven, Nietzsche — the walk is the most underrated thinking tool ever invented.' },
+      { title: 'Visualize before building', desc: 'Before writing code, designing a system, or starting a project — close your eyes and run the whole thing mentally. Find failures before they cost you.' },
+      { title: 'Protect deep work', desc: 'The most important work requires unbroken focus. Guard your concentration like Tesla guarded his solitude.' }
+    ]
+  },
+  {
+    id: 'aristotle',
+    name: 'Aristotle',
+    dates: '384 – 322 BC',
+    born: -384,
+    tagline: 'The man who organized all human knowledge',
+    emoji: '📜',
+    fields: ['philosophy', 'science', 'politics', 'art'],
+    tags: ['philosophy', 'science', 'politics'],
+    quote: '"We are what we repeatedly do. Excellence, then, is not an act, but a habit."',
+    struggle: `Foreign-born in Athens — never a citizen, always an outsider. When his teacher Plato died, Aristotle was passed over as head of the Academy in favor of Plato's nephew. He was exiled from Athens twice. After Alexander the Great (his former student) died, Athens turned on Aristotle for his Macedonian connections. Charged with "impiety" — the same charge that killed Socrates — he fled, saying he would not let Athens "sin twice against philosophy."`,
+    moment: `Leaving Plato's Academy after 20 years and realizing his teacher was wrong about the most fundamental question in philosophy. Plato said the real world was just shadows of perfect Forms. Aristotle looked at an actual frog and thought: no. The real world IS the thing to study. That break — the student surpassing the master by contradicting him — launched empirical science.`,
+    framework: [
+      '<strong>The Peripatetic method</strong> — teach while walking. Movement and thought are linked.',
+      '<strong>Categorization</strong> — before you can understand anything, you must classify it. He created the first systems for categorizing knowledge (biology, physics, logic, ethics, politics).',
+      '<strong>The Golden Mean</strong> — virtue is the balance point between two extremes. Courage is between cowardice and recklessness.',
+      '<strong>Empirical observation first</strong> — collect data before theorizing. The opposite of his teacher Plato.'
+    ],
+    habits: [
+      'Taught while walking in the Lyceum\'s covered walkway (peripatos).',
+      'Collected biological specimens — the first systematic naturalist.',
+      'Wrote in two modes: public lectures (now lost) and working notes (what survives).',
+      'Debated students as equals — expected them to challenge him.',
+      'Organized knowledge into hierarchies — invented the outline as a thinking tool.'
+    ],
+    quotes: [
+      { text: 'We are what we repeatedly do. Excellence, then, is not an act, but a habit.', src: 'Aristotle' },
+      { text: 'Knowing yourself is the beginning of all wisdom.', src: 'Aristotle' },
+      { text: 'It is the mark of an educated mind to be able to entertain a thought without accepting it.', src: 'Aristotle' },
+      { text: 'The more you know, the more you realize you don\'t know.', src: 'Aristotle' },
+      { text: 'Pleasure in the job puts perfection in the work.', src: 'Aristotle' }
+    ],
+    takeaways: [
+      { title: 'Classify before analyzing', desc: 'When facing a complex problem, first break it into categories. You can\'t solve what you can\'t name.' },
+      { title: 'Walk and talk', desc: 'Hold your most important conversations while walking. The body\'s movement unlocks the mind.' },
+      { title: 'Seek the balance point', desc: 'Most virtues live between two extremes. Too much discipline is rigidity. Too little is chaos. Find your mean.' }
+    ]
+  },
+  {
+    id: 'hypatia',
+    name: 'Hypatia of Alexandria',
+    dates: 'c. 360 – 415 AD',
+    born: 360,
+    tagline: 'The last great mind of the ancient world',
+    emoji: '🔭',
+    fields: ['mathematics', 'philosophy', 'science'],
+    tags: ['mathematics', 'philosophy', 'science'],
+    quote: '"Reserve your right to think, for even to think wrongly is better than not to think at all."',
+    struggle: `A woman teaching philosophy and mathematics in a world that was rapidly closing its mind. As Christianity consolidated political power in Alexandria, pagan intellectual traditions were increasingly dangerous. She was caught between political factions — respected by Roman prefect Orestes, but hated by Bishop Cyril's followers. She refused to convert or stop teaching. In 415 AD, a mob of religious zealots dragged her from her chariot, stripped her, and murdered her in a church. Her death marks the symbolic end of classical Alexandria.`,
+    moment: `When her students begged her to convert to Christianity for her own safety, or at least to stop teaching publicly, she refused. She chose intellectual integrity over survival. Her lecture hall remained open until the day they came for her. That choice — to die as a teacher rather than live as a silent convert — preserved the dignity of rational inquiry at its darkest hour.`,
+    framework: [
+      '<strong>Socratic dialogue adapted</strong> — she used interactive questioning with students, not lectures. Understanding was earned, not delivered.',
+      '<strong>Commentary as creation</strong> — she didn\'t just preserve old texts. She wrote commentaries on Diophantus and Apollonius that made difficult mathematics accessible.',
+      '<strong>Practical astronomy</strong> — built astrolabes and hydrometers. Theory had to produce working instruments.',
+      '<strong>Open doors</strong> — taught Christians, pagans, and anyone willing to think. Knowledge had no faction.'
+    ],
+    habits: [
+      'Taught in public — her lectures were open to anyone, not gated by class or religion.',
+      'Built scientific instruments (astrolabes, hydrometers) by hand.',
+      'Maintained correspondence networks with scholars across the Mediterranean.',
+      'Wore the philosopher\'s cloak (tribon) publicly — a deliberate statement of identity.',
+      'Prioritized teaching clarity over academic prestige.'
+    ],
+    quotes: [
+      { text: 'Reserve your right to think, for even to think wrongly is better than not to think at all.', src: 'Hypatia' },
+      { text: 'Fables should be taught as fables, myths as myths, and miracles as poetic fancies.', src: 'Hypatia' },
+      { text: 'To teach superstitions as truth is a most terrible thing.', src: 'Hypatia' }
+    ],
+    takeaways: [
+      { title: 'Protect the right to think', desc: 'The most dangerous environments are the ones where thinking freely becomes risky. That\'s exactly when it matters most.' },
+      { title: 'Make knowledge accessible', desc: 'Commentary, translation, simplification — making hard ideas reachable is as creative as the original discovery.' },
+      { title: 'Build what you theorize', desc: 'If your theory can\'t produce a working instrument, question the theory.' }
+    ]
+  },
+  {
+    id: 'ibn-sina',
+    name: 'Ibn Sina (Avicenna)',
+    dates: '980 – 1037',
+    born: 980,
+    tagline: 'The physician who systematized all of medicine',
+    emoji: '🏥',
+    fields: ['science', 'philosophy', 'medicine'],
+    tags: ['science', 'philosophy'],
+    quote: '"The knowledge of anything, since all things have causes, is not acquired or complete unless it is known by its causes."',
+    struggle: `Political instability was his constant companion. Served as vizier and court physician to multiple rulers, but palace coups meant he was repeatedly imprisoned, exiled, and forced to flee with nothing. He wrote much of the Canon of Medicine while literally on the run. His philosophical works were burned multiple times by religious authorities who considered his rationalism dangerous. He suffered from colic that he tried to treat himself — and likely accidentally poisoned himself with his own medications.`,
+    moment: `At age 16, he cured the Samanid sultan of Bukhara of an illness that had defeated every other physician. As reward, the sultan granted him access to the royal library — one of the greatest collections of knowledge in the medieval world. That single act of access transformed a gifted teenager into the most influential medical thinker for the next 600 years.`,
+    framework: [
+      '<strong>Systematic encyclopedia</strong> — the Canon of Medicine organized ALL medical knowledge into a logical system. Diagnosis, treatment, pharmacology, surgery — cross-referenced and indexed.',
+      '<strong>Evidence-based medicine</strong> — insisted on clinical trials and observation over tradition. He described testing drugs on animals first.',
+      '<strong>Thought experiments</strong> — his "Floating Man" argument (imagine yourself floating in a void with no senses — you\'d still know you exist) predated Descartes\' "I think therefore I am" by 600 years.',
+      '<strong>Integration</strong> — refused to separate philosophy, medicine, and natural science. All were branches of the same tree.'
+    ],
+    habits: [
+      'Wrote at night by candlelight, often after a full day of medical practice and governance.',
+      'Composed while traveling between cities, using the journey as writing time.',
+      'Studied the Quran and Greek philosophy simultaneously — synthesis, not partition.',
+      'Taught students while treating patients — the bedside as classroom.',
+      'Drank wine as a stimulant during intense writing periods (by his own admission).'
+    ],
+    quotes: [
+      { text: 'The knowledge of anything, since all things have causes, is not acquired or complete unless it is known by its causes.', src: 'Ibn Sina' },
+      { text: 'The world is divided into men who have wit and no religion and men who have religion and no wit.', src: 'Ibn Sina' },
+      { text: 'Now it is established in the sciences that no knowledge is acquired save through the study of its causes and beginnings.', src: 'Ibn Sina' }
+    ],
+    takeaways: [
+      { title: 'Systematize what you know', desc: 'Don\'t just collect knowledge — organize it. Build the index. Future you (and future others) will thank you.' },
+      { title: 'Write while you move', desc: 'Travel, commutes, waiting rooms. Dead time is writing time if you\'re prepared.' },
+      { title: 'Access changes everything', desc: 'One library, one mentor, one connection can alter a trajectory permanently. Seek access relentlessly.' }
+    ]
+  },
+  {
+    id: 'galileo',
+    name: 'Galileo Galilei',
+    dates: '1564 – 1642',
+    born: 1564,
+    tagline: 'The man who turned a lens on power and truth',
+    emoji: '🔬',
+    fields: ['science', 'mathematics', 'invention', 'philosophy'],
+    tags: ['science', 'mathematics', 'invention'],
+    quote: '"And yet it moves."',
+    struggle: `His father wanted him to be a doctor. He dropped out of medical school. He couldn't get a professorship for years and survived on tutoring. When his telescopic observations proved Copernicus right — that Earth orbits the Sun — the Catholic Church declared him "vehemently suspect of heresy." He spent the last 9 years of his life under house arrest, going blind, forbidden from publishing. The institution that should have celebrated him instead silenced him.`,
+    moment: `January 1610. He pointed his improved telescope at Jupiter and saw four tiny points of light that moved from night to night. Moons. Orbiting Jupiter, not Earth. In that instant, the 1,500-year-old Ptolemaic model cracked. Not everything orbited us. The universe didn't revolve around humanity. He published the observation in "Sidereus Nuncius" within two months — knowing full well what it would cost him.`,
+    framework: [
+      '<strong>Instrument-first science</strong> — build the tool, then make the observation, then form the theory. He didn\'t just use telescopes — he built better ones.',
+      '<strong>Mathematical language of nature</strong> — "The book of nature is written in mathematics." Quantify everything.',
+      '<strong>Public science</strong> — wrote in Italian, not Latin, so common people could read his work. Democratized knowledge.',
+      '<strong>Controlled experiment</strong> — his inclined plane experiments were among the first true controlled experiments in physics.'
+    ],
+    habits: [
+      'Built and improved his own instruments — never relied on off-the-shelf tools.',
+      'Published quickly after discoveries — speed of communication mattered.',
+      'Wrote in the vernacular to reach the widest audience.',
+      'Used dialogue format in writing — characters debating made complex ideas accessible.',
+      'Sketched observations immediately — his Moon drawings were artistically precise.'
+    ],
+    quotes: [
+      { text: 'And yet it moves.', src: 'Galileo (attributed)' },
+      { text: 'You cannot teach a man anything, you can only help him find it within himself.', src: 'Galileo Galilei' },
+      { text: 'All truths are easy to understand once they are discovered; the point is to discover them.', src: 'Galileo Galilei' },
+      { text: 'In questions of science, the authority of a thousand is not worth the humble reasoning of a single individual.', src: 'Galileo Galilei' }
+    ],
+    takeaways: [
+      { title: 'Build your own tools', desc: 'Don\'t just use existing instruments. Improve them. The person who builds the better tool makes the better discovery.' },
+      { title: 'Publish in plain language', desc: 'Knowledge locked behind jargon is knowledge lost. Write so anyone can understand.' },
+      { title: 'Data beats authority', desc: 'A single measurement can outweigh a thousand expert opinions. Observe, measure, then argue.' }
+    ]
+  },
+  {
+    id: 'newton',
+    name: 'Isaac Newton',
+    dates: '1643 – 1727',
+    born: 1643,
+    tagline: 'The mind that bent the universe into equations',
+    emoji: '🍎',
+    fields: ['science', 'mathematics', 'philosophy', 'invention'],
+    tags: ['science', 'mathematics', 'invention'],
+    quote: '"If I have seen further, it is by standing on the shoulders of giants."',
+    struggle: `Born premature and so small he could "fit in a quart mug." His father died before he was born. His mother remarried and left him with his grandmother at age 3 — an abandonment that scarred him permanently. He was a mediocre student until a school bully kicked him in the stomach; Newton beat him in a fight, then decided to beat him academically too. He was secretive, paranoid, vindictive, and likely died a virgin. He spent more of his life on alchemy and biblical chronology than on physics. His feud with Leibniz over who invented calculus consumed decades of productive time. He was, by nearly every account, impossible to be around — and he changed the world more than almost any human who ever lived.`,
+    moment: `1665. The plague shut Cambridge University. Newton, 23 years old, went home to his mother's farm in Woolsthorpe. In 18 months of solitary work — the "annus mirabilis" — he developed calculus, the theory of optics (splitting white light through a prism), and the law of universal gravitation. Three fields. Eighteen months. Alone in a farmhouse during a pandemic. He didn't publish any of it for 20 years. He just... kept working.`,
+    framework: [
+      '<strong>Hypotheses non fingo</strong> ("I feign no hypotheses") — describe what happens mathematically. Don\'t speculate about why. The equation IS the explanation.',
+      '<strong>Solitary deep immersion</strong> — Newton worked alone for months at a time, barely eating, forgetting meals, sleeping at his desk. Total absorption was his method.',
+      '<strong>Standing on shoulders</strong> — despite his ego, Newton explicitly built on Galileo, Kepler, and Descartes. He synthesized existing work into unified theory rather than starting from zero.',
+      '<strong>Mathematical language</strong> — when existing math couldn\'t describe what he saw, he invented new math (calculus). The tool must match the problem.'
+    ],
+    habits: [
+      'Worked in intense, obsessive bursts — sometimes forgetting to eat for days.',
+      'Kept detailed notebooks of experiments, calculations, and even alchemical recipes.',
+      'Slept very little during productive periods — his servant would find meals uneaten.',
+      'Experimented on himself — stuck a blunt needle behind his own eyeball to study optics.',
+      'Rarely socialized. Used isolation as a productivity tool, not a punishment.',
+      'Held grudges for decades — channeled anger into intellectual dominance.'
+    ],
+    quotes: [
+      { text: 'If I have seen further, it is by standing on the shoulders of giants.', src: 'Isaac Newton' },
+      { text: 'I can calculate the motion of heavenly bodies, but not the madness of people.', src: 'Isaac Newton' },
+      { text: 'What we know is a drop, what we don\'t know is an ocean.', src: 'Isaac Newton' },
+      { text: 'No great discovery was ever made without a bold guess.', src: 'Isaac Newton' },
+      { text: 'Truth is ever to be found in simplicity, and not in the multiplicity and confusion of things.', src: 'Isaac Newton' },
+      { text: 'Tact is the knack of making a point without making an enemy.', src: 'Isaac Newton (ironic, given his feuds)' }
+    ],
+    takeaways: [
+      { title: 'Use forced isolation', desc: 'Newton\'s greatest work came during plague lockdown. When the world shuts down, your mind can open up. Use disruption as a lab, not a sentence.' },
+      { title: 'Invent the tool you need', desc: 'When existing math couldn\'t describe gravity, Newton invented calculus. If your current tools can\'t solve your problem, build better tools.' },
+      { title: 'Synthesize, don\'t start from scratch', desc: 'Newton unified Galileo\'s kinematics and Kepler\'s orbits into one law. The biggest breakthroughs often come from connecting existing work, not creating from nothing.' }
+    ]
+  },
+  {
+    id: 'maxwell',
+    name: 'James Clerk Maxwell',
+    dates: '1831 – 1879',
+    born: 1831,
+    tagline: 'The quiet genius who unified light, electricity, and magnetism',
+    emoji: '🌀',
+    fields: ['science', 'mathematics', 'philosophy'],
+    tags: ['science', 'mathematics'],
+    quote: '"What is done by what is called myself is, I feel, done by something greater than myself in me."',
+    struggle: `Lost his mother to cancer when he was 8. Arrived at Edinburgh Academy with a thick Galloway accent and homemade clothes — his classmates called him "Dafty" and bullied him relentlessly. His genius was invisible to teachers who judged by social polish. Even after he unified electromagnetism — arguably the most important theoretical physics achievement between Newton and Einstein — he remained largely unknown to the public. He died of stomach cancer at 48, the same disease and same age as his mother. Einstein, who kept a photo of Maxwell on his study wall, said Maxwell's work was "the most profound and the most fruitful that physics has experienced since the time of Newton." The world barely noticed Maxwell during his lifetime.`,
+    moment: `In 1864, Maxwell published "A Dynamical Theory of the Electromagnetic Field." In four equations — now known as Maxwell's equations — he proved that electricity, magnetism, and light were all manifestations of the same phenomenon: the electromagnetic field. He predicted electromagnetic waves would travel at the speed of light, and therefore light itself was an electromagnetic wave. This was pure theoretical prediction. Heinrich Hertz confirmed it experimentally in 1887, eight years after Maxwell's death. Maxwell never saw his vindication. He didn't need to.`,
+    framework: [
+      '<strong>Physical analogy</strong> — Maxwell used mechanical models (vortices, idle wheels, elastic bands) to visualize abstract electromagnetic phenomena. He thought in pictures first, then translated to equations.',
+      '<strong>Unification as the goal</strong> — where others saw separate phenomena (static electricity, magnets, light), Maxwell asked: what if they\'re all the same thing? The deepest insights come from reducing many laws to one.',
+      '<strong>Mathematical elegance as a guide</strong> — if the math is ugly, the theory is probably wrong. Maxwell\'s four equations are beautiful because they\'re true.',
+      '<strong>Thought experiments</strong> — "Maxwell\'s demon" (a thought experiment about entropy and information) is still debated 150+ years later. He used imagination as a precision instrument.'
+    ],
+    habits: [
+      'Drew diagrams and physical models obsessively — visualization was his primary thinking tool.',
+      'Wrote poetry — he believed aesthetic sensibility and scientific intuition were linked.',
+      'Rose early and worked at the Cavendish Laboratory he helped establish at Cambridge.',
+      'Maintained extensive correspondence with other scientists — collaboration through letters.',
+      'Studied color theory through spinning tops and color photography — made the first color photograph in 1861.',
+      'Treated his students as intellectual equals despite his towering genius.'
+    ],
+    quotes: [
+      { text: 'What is done by what is called myself is, I feel, done by something greater than myself in me.', src: 'James Clerk Maxwell' },
+      { text: 'Thoroughly conscious ignorance is the prelude to every real advance in science.', src: 'James Clerk Maxwell' },
+      { text: 'The special theory of relativity owes its origins to Maxwell\'s equations of the electromagnetic field.', src: 'Albert Einstein, on Maxwell' },
+      { text: 'From a long view of the history of the world, there can be little doubt that the most significant event of the 19th century will be judged as Maxwell\'s discovery of the laws of electrodynamics.', src: 'Richard Feynman, on Maxwell' },
+      { text: 'In Science, it is when we take some interest in the great discoverers and their lives that it becomes endurable.', src: 'James Clerk Maxwell' }
+    ],
+    takeaways: [
+      { title: 'Think in pictures', desc: 'Before you write an equation, draw a diagram. Before you write code, sketch the system. Maxwell\'s greatest insights came from physical visualization, not abstract manipulation.' },
+      { title: 'Look for the hidden unity', desc: 'When you see three separate problems, ask: are these actually the same problem in different disguises? The deepest solutions are unifications.' },
+      { title: 'You may not see your vindication', desc: 'Maxwell died before his predictions were confirmed. Do the work because it\'s right, not because you\'ll be recognized. Recognition is not the point.' }
+    ]
+  },
+  {
+    id: 'faraday',
+    name: 'Michael Faraday',
+    dates: '1791 – 1867',
+    born: 1791,
+    tagline: 'The blacksmith\'s son who discovered the invisible forces',
+    emoji: '🧲',
+    fields: ['science', 'invention', 'chemistry'],
+    tags: ['science', 'invention'],
+    quote: '"Nothing is too wonderful to be true, if it be consistent with the laws of nature."',
+    struggle: `Born into poverty. His father was a blacksmith who was often too sick to work. Faraday received only basic education — he could barely do algebra his entire life. At 14 he was apprenticed to a bookbinder. No university, no degree, no connections, no mathematics. The scientific establishment of early 19th-century England was a gentleman's club, and Faraday was decidedly not a gentleman. Humphry Davy, his mentor, eventually became jealous and tried to block his career. The Royal Society initially refused his papers. He suffered severe memory loss in his later years, likely from decades of chemical exposure, and spent his final years in a fog of cognitive decline — the mind that discovered electromagnetic induction slowly losing itself.`,
+    moment: `October 1831. Faraday wrapped two coils of wire around an iron ring and discovered that changing the current in one coil induced a current in the other. Electromagnetic induction — the principle behind every electric generator, every transformer, every power plant on Earth. He didn't derive it from equations (he couldn't). He saw it with his hands. He felt the invisible field. When the Prime Minister asked him what use electricity was, Faraday reportedly replied: "One day, sir, you may tax it."`,
+    framework: [
+      '<strong>Physical intuition over mathematics</strong> — Faraday thought in "lines of force" — invisible curves filling space. He couldn\'t write the equations, but he SAW the fields. Maxwell later proved Faraday\'s intuitions were mathematically exact.',
+      '<strong>The experimental method</strong> — try it. Build it. Observe what happens. Faraday ran thousands of experiments, meticulously recorded. Theory followed observation, never the reverse.',
+      '<strong>Simplicity as a weapon</strong> — because he lacked formal math, he was forced to explain everything in plain language and physical models. This "weakness" made his ideas clearer than any equation.',
+      '<strong>Public science</strong> — his Royal Institution Christmas Lectures made science accessible to the public, including children. He believed knowledge belonged to everyone.'
+    ],
+    habits: [
+      'Kept meticulous lab diaries — numbered every experiment sequentially (over 30,000 entries).',
+      'Gave public lectures regularly — used demonstration, not abstraction.',
+      'Lived simply despite fame — turned down a knighthood and the presidency of the Royal Society.',
+      'Read obsessively during his bookbinding apprenticeship — especially the Encyclopaedia Britannica.',
+      'Attended scientific lectures as a young man and took detailed notes — this is how he met Humphry Davy.',
+      'Built his own equipment when he couldn\'t afford proper instruments.'
+    ],
+    quotes: [
+      { text: 'Nothing is too wonderful to be true, if it be consistent with the laws of nature.', src: 'Michael Faraday' },
+      { text: 'The lecturer should give the audience full reason to believe that all his powers have been exerted for their pleasure and instruction.', src: 'Michael Faraday' },
+      { text: 'But still try, for who knows what is possible.', src: 'Michael Faraday' },
+      { text: 'I am no poet, but if you think for yourselves, as I proceed, the facts will form a poem in your minds.', src: 'Michael Faraday' },
+      { text: 'Work. Finish. Publish.', src: 'Michael Faraday' }
+    ],
+    takeaways: [
+      { title: 'Your "weakness" might be your edge', desc: 'Faraday\'s lack of math forced him to think in physical pictures. That limitation produced insights the mathematicians missed. What constraint are you treating as a handicap that\'s actually a lens?' },
+      { title: 'Log everything', desc: 'Faraday numbered over 30,000 experiments. Each one a data point. The habit of recording transforms random tinkering into a searchable body of knowledge.' },
+      { title: 'Learn by apprenticeship', desc: 'Faraday didn\'t go to school. He bound books, read them, attended lectures, and took notes. Access + curiosity + persistence = education without a degree.' }
+    ]
+  },
+  {
+    id: 'cajal',
+    name: 'Santiago Ramón y Cajal',
+    dates: '1852 – 1934',
+    born: 1852,
+    tagline: 'The artist who drew the architecture of the mind',
+    emoji: '🧠',
+    fields: ['science', 'art', 'philosophy'],
+    tags: ['science', 'art'],
+    quote: '"Every man can, if he so desires, become the sculptor of his own brain."',
+    struggle: `As a boy in rural Spain, he was a compulsive troublemaker — expelled from multiple schools, locked in cells as punishment, and once arrested for destroying a neighbor\'s gate with a homemade cannon. His father, a surgeon, considered him a failure and apprenticed him to a shoemaker and then a barber to "teach him discipline." He contracted malaria and tuberculosis during military service in Cuba and nearly died. When he finally became a scientist, the European establishment ignored him — a Spaniard publishing from a provincial lab in Valencia, writing in a language the Germans and French wouldn't read. He bought his own microscope, prepared his own slides, and drew his own illustrations because no one would fund him.`,
+    moment: `1888. Using a staining technique improved from Camillo Golgi\'s method, Cajal looked through his microscope at a slice of bird cerebellum and saw, for the first time, individual nerve cells — complete, separate, not fused into a continuous net. This was the birth of the "neuron doctrine": the brain is made of discrete cells that communicate across gaps (synapses). It overturned the "reticular theory" that said the nervous system was one continuous web. Cajal drew what he saw with the precision of a Renaissance master. His drawings of neurons remain among the most beautiful scientific illustrations ever produced — and they were also correct.`,
+    framework: [
+      '<strong>Drawing as discovery</strong> — Cajal didn\'t draw to illustrate what he already knew. He drew to SEE what was there. The act of rendering a neuron forced him to notice structures that casual observation missed.',
+      '<strong>The contrarian\'s advantage</strong> — when the entire establishment believed the reticular theory, Cajal trusted his eyes over their consensus. The outsider who sees clearly beats the insider who sees conventionally.',
+      '<strong>Persistence over resources</strong> — he published over 100 papers from a underfunded provincial lab. Better equipment helps, but it\'s not what makes discoveries. Attention does.',
+      '<strong>Advice to young scientists</strong> — his book "Advice for a Young Investigator" (1897) remains one of the best guides to scientific thinking ever written. Core message: mediocre intelligence + strong will beats brilliant intelligence + weak will, every time.'
+    ],
+    habits: [
+      'Drew neurons for hours daily — his scientific illustrations were also works of art.',
+      'Photographed his own preparations (early adopter of scientific photography).',
+      'Wrote prolifically — scientific papers, an autobiography, a book of advice for young scientists, even science fiction.',
+      'Exercised regularly — believed physical fitness was essential for mental stamina.',
+      'Maintained intense focus on a single problem for months before moving to the next.',
+      'Taught constantly — used teaching as a method for sharpening his own understanding.'
+    ],
+    quotes: [
+      { text: 'Every man can, if he so desires, become the sculptor of his own brain.', src: 'Santiago Ramón y Cajal' },
+      { text: 'As long as our brain is a mystery, the universe, the reflection of the structure of the brain, will also be a mystery.', src: 'Santiago Ramón y Cajal' },
+      { text: 'Intellectual power and its utilization define the fate of nations. Those that take the lead in science are destined to rule.', src: 'Santiago Ramón y Cajal' },
+      { text: 'It is fair to say that, in general, no problems have been exhausted; instead, men have been exhausted by the problems.', src: 'Santiago Ramón y Cajal' },
+      { text: 'The brain is a world consisting of a number of unexplored continents and great stretches of unknown territory.', src: 'Santiago Ramón y Cajal' }
+    ],
+    takeaways: [
+      { title: 'Draw to discover', desc: 'When studying something complex, draw it. Not a diagram — a real attempt to render it accurately. You\'ll notice things you never would have otherwise.' },
+      { title: 'Strong will beats brilliant mind', desc: 'Cajal\'s most famous advice: average talent + relentless persistence produces more than genius + laziness. Will is trainable. Talent is not.' },
+      { title: 'You are the sculptor of your own brain', desc: 'Neuroplasticity avant la lettre. Cajal understood in 1897 what neuroscience confirmed a century later: your brain changes based on what you do with it. Choose your inputs deliberately.' }
+    ]
+  }
+];
+
+const PHILOSOPHERS = [
+  {
+    id: 'marcus',
+    name: 'Marcus Aurelius',
+    dates: '121 – 180 AD',
+    born: 121,
+    tagline: 'The emperor who ruled himself first',
+    emoji: '👑',
+    fields: ['stoicism', 'politics', 'philosophy'],
+    tags: ['stoicism', 'classical'],
+    quote: '"You have power over your mind — not outside events. Realize this, and you will find strength."',
+    struggle: `The most powerful man in the world, and arguably the most burdened. Constant war on the frontier (Marcomannic Wars lasted most of his reign). Plague (the Antonine Plague killed 5-10 million). Betrayal by his co-emperor Lucius Verus, then by his trusted general Avidius Cassius who declared a coup. His own son Commodus was clearly unfit to rule, and Marcus knew it. He wrote the Meditations not as philosophy for publication — they were private journal entries. A man trying to hold himself together while the world fell apart around him.`,
+    moment: `Alone in his tent on the Germanic frontier, freezing, exhausted from years of war he never wanted, writing by lamplight: "When you arise in the morning, think of what a precious privilege it is to be alive — to breathe, to think, to enjoy, to love." He wasn't writing to inspire anyone. He was talking himself out of despair. The most powerful man alive, privately begging himself to find meaning in suffering.`,
+    framework: [
+      '<strong>Morning preparation</strong> — begin each day expecting difficulty. "Today I shall meet with interference, ingratitude, insolence, disloyalty." Then choose your response in advance.',
+      '<strong>The view from above</strong> — zoom out. See your problems from the scale of the cosmos. Most of what torments you is trivial.',
+      '<strong>Amor fati</strong> — love your fate. Don\'t just endure what happens. Embrace it as necessary material for your growth.',
+      '<strong>The inner citadel</strong> — external events cannot reach your mind unless you allow them. Your judgment is the only thing truly under your control.'
+    ],
+    habits: [
+      'Wrote his private journal (Meditations) consistently, never intending publication.',
+      'Practiced negative visualization — imagining worst-case outcomes to reduce their emotional power.',
+      'Rose before his court to have time for reflection.',
+      'Sought counsel from philosophers, not just generals and politicians.',
+      'Treated slaves and enemies with a dignity unusual for Roman emperors.'
+    ],
+    quotes: [
+      { text: 'You have power over your mind — not outside events. Realize this, and you will find strength.', src: 'Marcus Aurelius, Meditations' },
+      { text: 'The happiness of your life depends upon the quality of your thoughts.', src: 'Marcus Aurelius' },
+      { text: 'Waste no more time arguing about what a good man should be. Be one.', src: 'Marcus Aurelius' },
+      { text: 'The impediment to action advances action. What stands in the way becomes the way.', src: 'Marcus Aurelius' },
+      { text: 'When you arise in the morning, think of what a precious privilege it is to be alive.', src: 'Marcus Aurelius' },
+      { text: 'Very little is needed to make a happy life; it is all within yourself, in your way of thinking.', src: 'Marcus Aurelius' },
+      { text: 'It is not death that a man should fear, but he should fear never beginning to live.', src: 'Marcus Aurelius' }
+    ],
+    takeaways: [
+      { title: 'Morning premeditatio', desc: 'Before checking your phone, spend 2 minutes expecting the day\'s difficulties. You\'ll meet them with calm instead of shock.' },
+      { title: 'Journal for yourself, not an audience', desc: 'Write what you need to hear. The Meditations were never meant to be published. That\'s why they\'re honest.' },
+      { title: 'The obstacle is the way', desc: 'The thing blocking you contains the lesson you need. Stop trying to go around it.' }
+    ]
+  },
+  {
+    id: 'socrates',
+    name: 'Socrates',
+    dates: '470 – 399 BC',
+    born: -470,
+    tagline: 'The man who weaponized questions',
+    emoji: '❓',
+    fields: ['philosophy', 'ethics'],
+    tags: ['classical'],
+    quote: '"The unexamined life is not worth living."',
+    struggle: `Poor his entire life. Walked barefoot. Ate little. His wife Xanthippe was legendarily difficult (or he was legendarily difficult to live with). Athens considered him a nuisance — a man who cornered respected citizens in the marketplace and made them look foolish by exposing the contradictions in their thinking. He was charged with "corrupting the youth" and "impiety" — essentially, asking too many questions. He was sentenced to death by drinking hemlock. He could have escaped (his friends arranged it). He refused, choosing to die for the principle that a citizen must accept the laws of their city, even unjust ones.`,
+    moment: `At his trial, given the chance to propose an alternative punishment (exile, a fine), he suggested the city should reward him with free meals for life — because he was performing a public service by making people think. The jury was not amused. But the point landed across millennia: the person who forces you to question your assumptions is the most valuable person in the room, even when everyone wants to kill them for it.`,
+    framework: [
+      '<strong>The Socratic Method</strong> — never state your position. Ask questions until the other person discovers the truth (or their own ignorance) themselves.',
+      '<strong>Productive ignorance</strong> — "I know that I know nothing." The wisest person is the one who understands the limits of their knowledge.',
+      '<strong>Elenchus (refutation)</strong> — test every belief by looking for internal contradictions. If a belief contradicts itself, it\'s wrong.',
+      '<strong>The examined life</strong> — the purpose of being alive is to question everything you believe and refine it through dialogue.'
+    ],
+    habits: [
+      'Spent most of his day in public conversation — the marketplace, the gymnasium, dinner parties.',
+      'Lived in voluntary poverty — rejected payment for teaching.',
+      'Walked barefoot in all weather, wore the same cloak year-round.',
+      'Practiced physical endurance — stood for hours in thought, served as a soldier with distinction.',
+      'Drank with friends but was never seen drunk — maintained clarity at all times.'
+    ],
+    quotes: [
+      { text: 'The unexamined life is not worth living.', src: 'Socrates (via Plato, Apology)' },
+      { text: 'I know that I know nothing.', src: 'Socrates (via Plato)' },
+      { text: 'Strong minds discuss ideas, average minds discuss events, weak minds discuss people.', src: 'Socrates' },
+      { text: 'Education is the kindling of a flame, not the filling of a vessel.', src: 'Socrates (via Plutarch)' },
+      { text: 'To find yourself, think for yourself.', src: 'Socrates' },
+      { text: 'Wonder is the beginning of wisdom.', src: 'Socrates' }
+    ],
+    takeaways: [
+      { title: 'Ask, don\'t tell', desc: 'When someone has a bad idea, don\'t correct them. Ask questions until they find the flaw themselves. They\'ll actually change.' },
+      { title: 'Embrace not knowing', desc: 'The smartest thing you can say is "I don\'t know." It opens the door to learning. Pretending to know slams it shut.' },
+      { title: 'Test your beliefs', desc: 'Pick your strongest opinion. Now argue against it. If you can\'t, you don\'t understand it well enough.' }
+    ]
+  },
+  {
+    id: 'seneca',
+    name: 'Seneca',
+    dates: '4 BC – 65 AD',
+    born: -4,
+    tagline: 'The philosopher who knew how to live and how to die',
+    emoji: '📝',
+    fields: ['stoicism', 'politics', 'writing'],
+    tags: ['stoicism', 'classical'],
+    quote: '"It is not that we have a short time to live, but that we waste a great deal of it."',
+    struggle: `Exiled to Corsica for 8 years on a trumped-up adultery charge. Recalled only to become tutor (then advisor) to Nero — history's most infamous emperor. He watched his student become a monster. Tried to restrain Nero's worst impulses, partially succeeded for years, then couldn't anymore. When Nero decided Seneca was a threat, he ordered him to commit suicide. Seneca complied with the calm he'd spent a lifetime practicing, dictating philosophy to his scribes as he bled out.`,
+    moment: `In exile on Corsica, stripped of wealth, status, and freedom, he wrote "On the Shortness of Life" — arguably the most practical philosophy text ever written. Sitting in forced poverty, he realized that most people don't have short lives; they waste long ones. Time is the only non-renewable resource, and almost everyone spends it as if they have an infinite supply. The exile that was meant to destroy him produced his clearest thinking.`,
+    framework: [
+      '<strong>Premeditatio malorum</strong> — deliberately imagine the worst. Poverty. Loss. Death. Not to create anxiety, but to inoculate against it.',
+      '<strong>Time as the only resource</strong> — money can be earned back. Status can be rebuilt. Time, once spent, is gone. Guard it ferociously.',
+      '<strong>Practice poverty</strong> — periodically live with less than you need. Sleep on the floor. Eat simple food. Not as punishment, but as training.',
+      '<strong>Letters as philosophy</strong> — wrote his ideas as personal letters to friends. Practical, specific, grounded in real problems.'
+    ],
+    habits: [
+      'Evening review — examined every action of the day, looking for errors in judgment.',
+      'Practiced voluntary discomfort — cold baths, fasting, wearing rough clothing.',
+      'Wrote daily — his letters to Lucilius are a masterclass in applied philosophy.',
+      'Maintained friendships through correspondence even in exile.',
+      'Read widely but selectively — "It is not the man who has too little who is poor, but the one who hankers after more."'
+    ],
+    quotes: [
+      { text: 'It is not that we have a short time to live, but that we waste a great deal of it.', src: 'Seneca, On the Shortness of Life' },
+      { text: 'We suffer more often in imagination than in reality.', src: 'Seneca' },
+      { text: 'Luck is what happens when preparation meets opportunity.', src: 'Seneca' },
+      { text: 'Difficulties strengthen the mind, as labor does the body.', src: 'Seneca' },
+      { text: 'It is not because things are difficult that we do not dare; it is because we do not dare that they are difficult.', src: 'Seneca' },
+      { text: 'He who is brave is free.', src: 'Seneca' }
+    ],
+    takeaways: [
+      { title: 'Audit your time', desc: 'Track one week honestly. Where does your time actually go? You\'ll find hours you didn\'t know you were losing.' },
+      { title: 'Practice voluntary discomfort', desc: 'Once a month, skip a meal. Sleep without a pillow. Walk in the cold. It\'s not suffering — it\'s inoculation against fragility.' },
+      { title: 'Evening review', desc: 'Before sleep, replay the day. Where did you react instead of respond? No judgment — just observation. Then do better tomorrow.' }
+    ]
+  },
+  {
+    id: 'laotzu',
+    name: 'Lao Tzu',
+    dates: 'c. 6th century BC',
+    born: -600,
+    tagline: 'The sage who taught by disappearing',
+    emoji: '☯️',
+    fields: ['philosophy', 'eastern'],
+    tags: ['eastern', 'classical'],
+    quote: '"The journey of a thousand miles begins with a single step."',
+    struggle: `We know almost nothing about him — and that may be the point. Tradition says he was a record-keeper in the Zhou dynasty court who grew disillusioned with civilization's corruption. He may not have been a single person at all but a composite of several thinkers. The uncertainty itself embodies his teaching: the Tao that can be named is not the true Tao. He reportedly left civilization riding an ox, and a gatekeeper asked him to write down his wisdom before vanishing. The result was the Tao Te Ching — 81 short chapters that have influenced every century since.`,
+    moment: `At the gate of the western pass, asked to leave behind his teaching before disappearing forever. The gatekeeper's request was simple: "You're leaving. Write something down." The resulting text — 5,000 Chinese characters — became one of the most translated books in human history. The man who valued silence above speech left words that haven't stopped speaking for 2,500 years.`,
+    framework: [
+      '<strong>Wu wei</strong> — "effortless action." Not passivity, but aligned action. Water doesn\'t force its way through rock. It finds the path of least resistance and carves canyons.',
+      '<strong>The Tao (The Way)</strong> — reality has an underlying pattern that can\'t be captured in words or concepts. You can align with it but never fully describe it.',
+      '<strong>Reversal</strong> — the soft overcomes the hard. The empty vessel is the most useful. Weakness contains strength. Everything contains its opposite.',
+      '<strong>Simplicity</strong> — complexity is a disease. Return to the essential. "Manifest plainness, embrace simplicity, reduce selfishness, have few desires."'
+    ],
+    habits: [
+      'Observed nature as primary teacher — water, wind, seasons, growth.',
+      'Spoke in paradox — to break the listener out of conventional thinking.',
+      'Practiced non-attachment to outcomes.',
+      'Valued solitude and withdrawal from power structures.',
+      'Left rather than fought — when the system was corrupt, he walked away.'
+    ],
+    quotes: [
+      { text: 'The journey of a thousand miles begins with a single step.', src: 'Lao Tzu' },
+      { text: 'When I let go of what I am, I become what I might be.', src: 'Lao Tzu' },
+      { text: 'Nature does not hurry, yet everything is accomplished.', src: 'Lao Tzu' },
+      { text: 'A leader is best when people barely know he exists. When his work is done, his aim fulfilled, they will say: we did it ourselves.', src: 'Lao Tzu' },
+      { text: 'Knowing others is intelligence; knowing yourself is true wisdom.', src: 'Lao Tzu' },
+      { text: 'The truth is not always beautiful, nor beautiful words the truth.', src: 'Lao Tzu' }
+    ],
+    takeaways: [
+      { title: 'Stop forcing it', desc: 'When you\'re stuck, stop pushing harder. Step back. Walk away. The answer comes when you stop strangling it.' },
+      { title: 'Study water', desc: 'Water is soft but carves mountains. Be adaptable, persistent, and willing to take the path that\'s open rather than the path you planned.' },
+      { title: 'Simplify ruthlessly', desc: 'Most of what you own, do, and think about is unnecessary. Cut until only the essential remains.' }
+    ]
+  },
+  {
+    id: 'epictetus',
+    name: 'Epictetus',
+    dates: '50 – 135 AD',
+    born: 50,
+    tagline: 'Born a slave. Died the most free man in Rome.',
+    emoji: '⛓️',
+    fields: ['stoicism', 'philosophy'],
+    tags: ['stoicism', 'classical'],
+    quote: '"It\'s not what happens to you, but how you react to it that matters."',
+    struggle: `Born into slavery. His master Epaphroditus (himself a freedman of Nero) allegedly broke his leg — either deliberately or through neglect. Epictetus walked with a permanent limp for the rest of his life. After gaining his freedom, he was expelled from Rome when Emperor Domitian banished all philosophers. He set up a school in Nicopolis, Greece, and taught in poverty until his death. He never wrote a word — everything we have was transcribed by his student Arrian.`,
+    moment: `The story goes that while still enslaved, his master was twisting his leg. Epictetus said calmly, "You're going to break it." The leg broke. Epictetus said, "I told you so." Whether or not the story is literally true, it captures his entire philosophy: you cannot control what others do to your body. You can control your response. That distinction — between what is "up to us" and what is "not up to us" — became the foundation of Stoic practice.`,
+    framework: [
+      '<strong>The Dichotomy of Control</strong> — separate everything in life into two categories: what you can control (your thoughts, responses, efforts) and what you can\'t (other people, outcomes, the past). Focus exclusively on the first.',
+      '<strong>Prohairesis</strong> — your faculty of choice is the only thing that is truly yours. Everything else can be taken away.',
+      '<strong>Role ethics</strong> — you play many roles (student, parent, citizen, worker). Each role has duties. Fulfilling them well is the path to a good life.',
+      '<strong>Impression management</strong> — between stimulus and response, there is a gap. In that gap you choose whether to assent to an impression or reject it.'
+    ],
+    habits: [
+      'Taught by conversation — his "Discourses" read like recorded classroom discussions.',
+      'Lived in extreme simplicity — a mat, a cot, an earthen lamp.',
+      'Practiced what he preached — never asked students to do what he hadn\'t done.',
+      'Used everyday examples (sports, sailing, illness) to make abstract ideas concrete.',
+      'Adopted and raised an abandoned child in his old age — practiced compassion, not just philosophy.'
+    ],
+    quotes: [
+      { text: 'It\'s not what happens to you, but how you react to it that matters.', src: 'Epictetus' },
+      { text: 'No man is free who is not master of himself.', src: 'Epictetus' },
+      { text: 'First say to yourself what you would be; and then do what you have to do.', src: 'Epictetus' },
+      { text: 'Don\'t explain your philosophy. Embody it.', src: 'Epictetus' },
+      { text: 'Man is not worried by real problems so much as by his imagined anxieties about real problems.', src: 'Epictetus' },
+      { text: 'If you want to improve, be content to be thought foolish and stupid.', src: 'Epictetus' }
+    ],
+    takeaways: [
+      { title: 'The two lists', desc: 'Right now, write two columns: "What I can control" and "What I can\'t." Move 100% of your energy to column one.' },
+      { title: 'Don\'t explain — embody', desc: 'Stop talking about your values. Start living them. People notice actions, not declarations.' },
+      { title: 'Use the gap', desc: 'Something happens. Before you react, pause. One breath. In that breath, choose your response instead of being chosen by your emotion.' }
+    ]
+  },
+  {
+    id: 'musashi',
+    name: 'Miyamoto Musashi',
+    dates: '1584 – 1645',
+    born: 1584,
+    tagline: 'The swordsman who mastered everything by mastering one thing',
+    emoji: '⚔️',
+    fields: ['strategy', 'art', 'philosophy'],
+    tags: ['eastern'],
+    quote: '"Do nothing that is of no use."',
+    struggle: `Killed his first opponent in a duel at age 13. Fought in over 60 duels and never lost. But his life was one of voluntary homelessness — a ronin (masterless samurai) who wandered Japan for decades. He never married, never settled, never served a lord permanently. He was covered in scars, rarely bathed, and was considered socially repulsive. The greatest swordsman in Japanese history couldn't find a place in Japanese society. He only found peace in his final years, retiring to a cave to write the Book of Five Rings before dying.`,
+    moment: `His most famous duel — against Sasaki Kojiro on Ganryu Island — he arrived late (deliberately, to unsettle his opponent) and fought with a wooden sword he'd carved from a boat oar during the crossing. He won. The lesson wasn't about fighting. It was about psychology. The battle was decided before the first strike, by a man who understood that strategy is 90% mental.`,
+    framework: [
+      '<strong>The Way is in training</strong> — mastery comes only from repetition. There are no shortcuts. Practice 1,000 days to forge, 10,000 days to refine.',
+      '<strong>Know many arts</strong> — a warrior must also paint, write, build. Cross-training between disciplines sharpens the primary skill.',
+      '<strong>Do nothing useless</strong> — strip away everything that doesn\'t serve the goal. Efficiency is elegance.',
+      '<strong>See the macro and the micro simultaneously</strong> — perceive both the broad strategy and the immediate detail. Never lose one for the other.'
+    ],
+    habits: [
+      'Practiced sword techniques thousands of times daily.',
+      'Painted ink wash paintings, wrote poetry, crafted metal sculptures — cross-trained his mind.',
+      'Slept sitting up with his sword — maintained constant readiness.',
+      'Bathed rarely, ate simply, owned almost nothing.',
+      'Studied opponents for days before engaging — preparation was the fight.'
+    ],
+    quotes: [
+      { text: 'Do nothing that is of no use.', src: 'Miyamoto Musashi, Book of Five Rings' },
+      { text: 'There is nothing outside of yourself that can ever enable you to get better, stronger, richer, quicker, or smarter. Everything is within.', src: 'Miyamoto Musashi' },
+      { text: 'Think lightly of yourself and deeply of the world.', src: 'Miyamoto Musashi' },
+      { text: 'The purpose of today\'s training is to defeat yesterday\'s understanding.', src: 'Miyamoto Musashi' },
+      { text: 'You must understand that there is more than one path to the top of the mountain.', src: 'Miyamoto Musashi' },
+      { text: 'In strategy, it is important to see distant things as if they were close and to take a distanced view of close things.', src: 'Miyamoto Musashi' }
+    ],
+    takeaways: [
+      { title: 'Cut the useless', desc: 'Review your daily activities. How many actually serve your goals? Eliminate everything else. Ruthlessly.' },
+      { title: 'Cross-train your mind', desc: 'Musashi painted to improve his swordsmanship. What unrelated skill would sharpen your primary one?' },
+      { title: 'Defeat yesterday', desc: 'Don\'t compare yourself to others. Compare yourself to who you were yesterday. Beat that person.' }
+    ]
+  },
+  {
+    id: 'confucius',
+    name: 'Confucius',
+    dates: '551 – 479 BC',
+    born: -551,
+    tagline: 'The teacher who civilized an empire',
+    emoji: '🎓',
+    fields: ['philosophy', 'ethics', 'politics'],
+    tags: ['eastern', 'classical'],
+    quote: '"It does not matter how slowly you go as long as you do not stop."',
+    struggle: `His father died when he was 3. Grew up in poverty. Spent decades trying to get rulers to implement his ideas about ethical governance — and was rejected by every single one. He wandered from state to state for 14 years with a small band of disciples, repeatedly turned away by warlords who found his insistence on virtue impractical. He was mocked as "the one who knows it\'s impossible but keeps trying." He died believing he had failed. His ideas only conquered China after his death.`,
+    moment: `Returning home after 14 years of wandering and rejection, he made a choice that changed the world: if no ruler would listen, he would teach students instead. He opened his school to anyone — rich or poor — which was revolutionary in feudal China. He couldn't change the rulers. So he changed the people who would eventually become them. His 3,000 students carried his ideas forward, and within a few generations, Confucianism became the operating system of Chinese civilization.`,
+    framework: [
+      '<strong>Ren (humaneness)</strong> — the core virtue. Treat others as you wish to be treated. Compassion is the foundation of all other virtues.',
+      '<strong>Li (ritual/propriety)</strong> — civilization runs on shared norms and respectful behavior. Ritual isn\'t empty ceremony — it\'s the technology of social harmony.',
+      '<strong>The Rectification of Names</strong> — if a king doesn\'t act like a king, don\'t call him one. Words must match reality, or communication breaks down.',
+      '<strong>Self-cultivation</strong> — you cannot fix the world until you fix yourself. Start with your own character, then your family, then your community, then the state.'
+    ],
+    habits: [
+      'Taught through dialogue and analogy — never lectured abstractly.',
+      'Tailored his teaching to each student\'s character and weakness.',
+      'Practiced music and archery — believed in educating the whole person.',
+      'Studied ancient texts obsessively, especially the Book of Changes (I Ching).',
+      'Maintained unwavering courtesy even to those who mocked or threatened him.'
+    ],
+    quotes: [
+      { text: 'It does not matter how slowly you go as long as you do not stop.', src: 'Confucius' },
+      { text: 'Real knowledge is to know the extent of one\'s ignorance.', src: 'Confucius' },
+      { text: 'The man who moves a mountain begins by carrying away small stones.', src: 'Confucius' },
+      { text: 'Before you embark on a journey of revenge, dig two graves.', src: 'Confucius' },
+      { text: 'By three methods we may learn wisdom: first, by reflection, which is noblest; second, by imitation, which is easiest; and third, by experience, which is the bitterest.', src: 'Confucius' },
+      { text: 'I hear and I forget. I see and I remember. I do and I understand.', src: 'Confucius' }
+    ],
+    takeaways: [
+      { title: 'If you can\'t change the system, teach', desc: 'You may not be able to fix institutions directly. But you can raise people who will.' },
+      { title: 'Fix yourself first', desc: 'Self → family → community → world. The order matters. You can\'t skip steps.' },
+      { title: 'Never stop', desc: 'Speed is irrelevant. Direction is irrelevant. Not stopping is the only thing that matters.' }
+    ]
+  }
+];
+
+let ALL_PEOPLE = [...POLYMATHS, ...PHILOSOPHERS];
+
+const PATTERNS = [
+  {
+    title: 'They All Walked',
+    desc: 'Da Vinci, Tesla, Aristotle, Seneca, Musashi — walking was the universal thinking tool. Not exercise. Not meditation. Thinking in motion. Every major breakthrough tradition includes peripatetic practice.',
+    names: 'Da Vinci, Tesla, Aristotle, Socrates, Musashi'
+  },
+  {
+    title: 'They All Wrote',
+    desc: 'Marcus Aurelius journaled. Da Vinci kept notebooks. Franklin tracked virtues. Seneca wrote letters. The act of writing forced clarity. None of them just "thought about things." They put ink on paper.',
+    names: 'Marcus Aurelius, Da Vinci, Franklin, Seneca, Epictetus (via Arrian)'
+  },
+  {
+    title: 'They Were All Outsiders',
+    desc: 'Da Vinci: illegitimate. Franklin: dropout. Curie: woman in a man\'s field. Epictetus: slave. Hypatia: woman in a collapsing empire. Tesla: immigrant. The establishment didn\'t make them. They made themselves despite it.',
+    names: 'Da Vinci, Franklin, Curie, Epictetus, Hypatia, Tesla'
+  },
+  {
+    title: 'Cross-Pollination',
+    desc: 'None of them stayed in one field. Da Vinci painted AND dissected corpses. Franklin invented AND governed. Musashi fought AND painted. Watts studied theology AND Zen. The connections between fields produced their best insights.',
+    names: 'Da Vinci, Franklin, Musashi, Aristotle, Ibn Sina, Faraday'
+  },
+  {
+    title: 'Voluntary Discomfort',
+    desc: 'Seneca practiced poverty. Socrates walked barefoot. Musashi owned nothing. Curie lived in austerity. They chose hardship as training, not punishment. Comfort was the enemy of growth.',
+    names: 'Seneca, Socrates, Musashi, Curie, Epictetus'
+  },
+  {
+    title: 'They Taught',
+    desc: 'Every single one of them taught. Not because they had to, but because teaching forces understanding. Socrates in the agora. Hypatia in her lecture hall. Confucius on the road. Teaching was their thinking tool.',
+    names: 'Socrates, Hypatia, Confucius, Aristotle, Curie, Epictetus'
+  },
+  {
+    title: 'The System Punished Them',
+    desc: 'Socrates: executed. Galileo: imprisoned. Hypatia: murdered. Seneca: forced suicide. Curie: smeared. The establishment consistently attacked its most valuable minds. Being right was dangerous.',
+    names: 'Socrates, Galileo, Hypatia, Seneca, Curie, Tesla'
+  },
+  {
+    title: 'They Died Unfinished',
+    desc: 'Da Vinci left dozens of projects incomplete. Confucius died thinking he failed. Tesla died alone and broke. Socrates never wrote a word. They didn\'t finish. They planted seeds that others harvested.',
+    names: 'Da Vinci, Confucius, Tesla, Socrates, Musashi'
+  }
+];
+
+const IMPLEMENT_PRACTICES = [
+  {
+    title: 'The Morning Question',
+    origin: 'Benjamin Franklin',
+    desc: 'Every morning before anything else, ask: "What good shall I do this day?" Write the answer. It takes 30 seconds and reorients your entire day toward purpose.',
+    how: 'Set a phone reminder for when you wake. Write the answer in a notebook or notes app. Review at night.'
+  },
+  {
+    title: 'The Evening Review',
+    origin: 'Seneca + Marcus Aurelius',
+    desc: 'Before sleep, replay the day. Where did you react instead of respond? Where did you waste time? Where did you act well? No self-punishment — just observation.',
+    how: 'Keep a bedside notebook. Three questions: What went well? What went poorly? What will I do differently tomorrow?'
+  },
+  {
+    title: 'The Capture Notebook',
+    origin: 'Leonardo da Vinci',
+    desc: 'Carry a notebook everywhere. Not a planner — a chaos journal. Sketches, questions, half-formed ideas, overheard quotes, connections between random things. Review weekly.',
+    how: 'Physical pocket notebook or a dedicated notes app folder. The key: capture immediately, organize later.'
+  },
+  {
+    title: 'The Socratic Challenge',
+    origin: 'Socrates',
+    desc: 'Once a week, take your strongest belief and argue against it for 10 minutes. Write down every counterargument you can find. If you can\'t argue against your own position, you don\'t understand it.',
+    how: 'Pick a belief every Sunday. Write "I believe X because Y." Then write "But what if..." for 10 minutes. Keep the results.'
+  },
+  {
+    title: 'Voluntary Discomfort',
+    origin: 'Seneca + Epictetus + Musashi',
+    desc: 'Once a month, remove a comfort. Skip a meal. Sleep on the floor. Take a cold shower. Walk in the rain. Not as punishment — as training. You\'re building anti-fragility.',
+    how: 'Start small. One cold shower. One skipped lunch. Notice how quickly your body adapts and your mind calms.'
+  },
+  {
+    title: 'The Junto',
+    origin: 'Benjamin Franklin',
+    desc: 'Form a group of 4-6 people from completely different fields. Meet weekly or biweekly. Each person shares what they\'re learning or struggling with. This beats any course or degree.',
+    how: 'Text 5 interesting people this week. "I\'m starting a small group for curious people. Different fields, one shared goal: learn from each other."'
+  },
+  {
+    title: 'Walk to Think',
+    origin: 'Everyone (literally all of them)',
+    desc: 'When stuck on a problem, don\'t sit and stare harder. Walk for 20 minutes without your phone. The answer will come. This is not woo — it\'s how brains process information.',
+    how: 'Next time you\'re stuck, stand up and walk. No podcasts, no music. Just walk and let your mind drift toward the problem.'
+  },
+  {
+    title: 'Cross-Pollination Hour',
+    origin: 'Da Vinci + Musashi + Aristotle',
+    desc: 'Spend one hour per week studying something completely unrelated to your main work. Art if you\'re technical. Math if you\'re creative. History if you\'re building the future.',
+    how: 'Block one hour. Pick a field you know nothing about. Read, watch, or practice. Don\'t try to connect it — the connections will come on their own.'
+  },
+  {
+    title: 'The Two Lists',
+    origin: 'Epictetus',
+    desc: 'When anxious, draw two columns: "What I Can Control" and "What I Can\'t Control." Move 100% of your energy to column one. Let column two go.',
+    how: 'Keep this as a template in your notes app. Use it every time anxiety spikes. It works every single time.'
+  },
+  {
+    title: 'Teach to Learn',
+    origin: 'Curie + Hypatia + Confucius',
+    desc: 'After learning something new, explain it to someone who doesn\'t know it. If you can\'t make it simple, you don\'t understand it yet. Teaching is the final test of comprehension.',
+    how: 'Start a blog, record a voice note, explain to a friend. The format doesn\'t matter. The act of translating knowledge into simple language does.'
+  }
+];
+
+// Placeholder — rebuilt after neuroethics data is added
+let ALL_QUOTES = [];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// RENDERING
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function renderCard(person) {
+  const card = document.createElement('div');
+  const isWarning = person.id === 'freeman';
+  card.className = 'profile-card' + (isWarning ? ' warning-card' : '');
+  card.dataset.tags = (person.tags || person.fields).join(',');
+  if (isWarning) card.style.borderColor = '#ff4444';
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="avatar" style="background:${hashColor(person.id)}">${person.emoji}</div>
+      <div class="card-info">
+        <h3>${person.name}</h3>
+        <div class="card-dates">${person.dates}</div>
+        <div class="card-tagline">${person.tagline}</div>
+      </div>
+    </div>
+    <div class="card-fields">
+      ${person.fields.map(f => `<span class="field-tag">${f}</span>`).join('')}
+    </div>
+    <div class="card-quote">${person.quote}</div>
+    <div class="expand-hint">Click to explore &rarr;</div>
+  `;
+  card.addEventListener('click', () => openModal(person));
+  return card;
+}
+
+function openModal(person) {
+  const overlay = document.getElementById('modalOverlay');
+  const body = document.getElementById('modalBody');
+
+  body.innerHTML = `
+    <div class="modal-hero">
+      <h2>${person.emoji} ${person.name}</h2>
+      <div class="dates">${person.dates}</div>
+      <div class="essence">${person.tagline}</div>
+    </div>
+
+    <div class="detail-section label-struggle">
+      <h4><span class="icon">🔥</span> THE STRUGGLE</h4>
+      <p>${person.struggle}</p>
+    </div>
+
+    <div class="detail-section label-moment">
+      <h4><span class="icon">⚡</span> THE MOMENT</h4>
+      <p>${person.moment}</p>
+    </div>
+
+    <div class="detail-section label-framework">
+      <h4><span class="icon">🧠</span> THE FRAMEWORK</h4>
+      <ul>${person.framework.map(f => `<li>${f}</li>`).join('')}</ul>
+    </div>
+
+    <div class="detail-section label-habits">
+      <h4><span class="icon">🔄</span> THE HABITS</h4>
+      <ul>${person.habits.map(h => `<li>${h}</li>`).join('')}</ul>
+    </div>
+
+    <div class="detail-section label-quotes">
+      <h4><span class="icon">💬</span> QUOTES</h4>
+      ${person.quotes.map(q => `
+        <div class="quote-block">
+          "${q.text}"
+          <span class="attribution">— ${q.src}</span>
+        </div>
+      `).join('')}
+    </div>
+
+    ${INFLUENTIAL_BOOKS.filter(b => b.reader === person.name).map(b => `
+    <div class="detail-section" style="border-left: 3px solid var(--accent5); margin-left: 0;">
+      <h4 style="color: var(--accent5);"><span class="icon">📖</span> THE BOOK THAT MADE THEM</h4>
+      <p><strong style="color:var(--accent5); font-style:italic;">${b.title}</strong> by ${b.author}</p>
+      <p style="margin-top:0.5rem;">${b.desc}</p>
+    </div>
+    `).join('')}
+
+    <div class="detail-section label-takeaways">
+      <h4><span class="icon">🎯</span> IMPLEMENT THIS</h4>
+      ${person.takeaways.map(t => `
+        <div class="takeaway-item">
+          <strong>${t.title}</strong>
+          ${t.desc}
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="detail-section" style="background: rgba(212,168,83,0.04);">
+      <h4 style="color: var(--gold);"><span class="icon">🧠</span> TEST YOUR RECALL</h4>
+      <div class="recall-prompt">
+        <h5>Active Recall</h5>
+        <p>Without scrolling up — what was ${person.name.split(' ')[0]}'s core framework? What was their defining struggle?</p>
+        <button class="recall-btn" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Reveal Summary</button>
+        <div class="recall-reveal">
+          <p><strong>Framework:</strong> ${person.framework[0].replace(/<[^>]+>/g, '')}</p>
+          <p><strong>Struggle:</strong> ${person.struggle.split('.').slice(0,2).join('.')+'.'}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h4 style="color: var(--accent);"><span class="icon">🔍</span> GO DEEPER</h4>
+      <div class="deep-dive-links">
+        <a class="deep-dive-btn" href="https://en.wikipedia.org/wiki/${encodeURIComponent(person.name)}" target="_blank" rel="noopener noreferrer">Wikipedia</a>
+        <a class="deep-dive-btn" href="https://plato.stanford.edu/search/searcher.py?query=${encodeURIComponent(person.name)}" target="_blank" rel="noopener noreferrer">Stanford Encyclopedia</a>
+        <a class="deep-dive-btn" href="https://scholar.google.com/scholar?q=${encodeURIComponent(person.name)}" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a class="deep-dive-btn" href="https://www.youtube.com/results?search_query=${encodeURIComponent(person.name + ' philosophy documentary')}" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a class="deep-dive-btn" href="https://archive.org/search?query=${encodeURIComponent(person.name)}" target="_blank" rel="noopener noreferrer">Internet Archive</a>
+      </div>
+    </div>
+  `;
+
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function hashColor(id) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) hash = id.charCodeAt(i) + ((hash << 5) - hash);
+  const h = Math.abs(hash) % 360;
+  return `hsl(${h}, 30%, 18%)`;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// GRIDS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function populateGrid(containerId, data) {
+  const grid = document.getElementById(containerId);
+  grid.innerHTML = '';
+  data.forEach(p => grid.appendChild(renderCard(p)));
+}
+
+populateGrid('polymathGrid', POLYMATHS);
+populateGrid('philGrid', PHILOSOPHERS);
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// NEUROETHICS DATA
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const NEUROETHICS_PEOPLE = [
+  {
+    id: 'hippocrates',
+    name: 'Hippocrates',
+    dates: 'c. 460 – 370 BC',
+    born: -460,
+    tagline: 'The first to say: the brain is the seat of the mind',
+    emoji: '⚕️',
+    fields: ['medicine', 'ethics', 'neuroscience'],
+    tags: ['classical'],
+    quote: '"Men ought to know that from the brain, and from the brain only, arise our pleasures, joys, laughter, and tears."',
+    struggle: `Practiced medicine in an era when illness was considered punishment from the gods. His insistence that disease had natural causes — not divine ones — was heresy. He fought against temple healers, superstition, and a medical establishment that prescribed prayer over observation. He was reportedly exiled from Athens, and some ancient sources claim his writings were burned.`,
+    moment: `Writing "On the Sacred Disease" (about epilepsy), he declared that the brain — not the heart, not the gods — is the organ of thought, sensation, and emotion. "Men ought to know that from the brain, and from the brain only, arise our pleasures, joys, laughter, and tears." This was 400 BC. It took Western civilization nearly 2,000 years to fully accept what he said in one paragraph.`,
+    framework: [
+      '<strong>The Hippocratic Oath</strong> — "First, do no harm." The foundation of all medical ethics. Every neuroethics framework traces back to this principle.',
+      '<strong>Natural causation</strong> — diseases have physical causes, not supernatural ones. The brain is an organ, not a mystical vessel.',
+      '<strong>Clinical observation</strong> — watch the patient. Record symptoms. Look for patterns. Don\'t theorize before observing.',
+      '<strong>Physician as servant, not master</strong> — the doctor serves the patient\'s interest, not their own ego or the state\'s agenda.'
+    ],
+    habits: [
+      'Taught medicine through apprenticeship — bedside observation, not abstract lecture.',
+      'Documented case histories — the first clinical records in Western medicine.',
+      'Traveled extensively to study diseases in different climates and populations.',
+      'Refused to treat disease with religious ritual — insisted on rational methods.',
+      'Taught that diet, exercise, and environment were primary treatments before any intervention.'
+    ],
+    quotes: [
+      { text: 'Men ought to know that from the brain, and from the brain only, arise our pleasures, joys, laughter, and tears.', src: 'Hippocrates, On the Sacred Disease' },
+      { text: 'First, do no harm.', src: 'Hippocratic tradition' },
+      { text: 'Healing is a matter of time, but it is sometimes also a matter of opportunity.', src: 'Hippocrates' },
+      { text: 'There are in fact two things, science and opinion; the former begets knowledge, the latter ignorance.', src: 'Hippocrates' },
+      { text: 'The life so short, the craft so long to learn.', src: 'Hippocrates' }
+    ],
+    takeaways: [
+      { title: 'First, do no harm', desc: 'Before any intervention — medical, technological, or policy — ask: what damage could this cause? The constraint is the starting point, not an afterthought.' },
+      { title: 'Name the organ', desc: 'Hippocrates settled the brain-vs-heart debate 2,400 years ago. When building neurotechnology, remember what we\'re touching: the seat of selfhood.' },
+      { title: 'Observe before theorizing', desc: 'The clinical method: watch, record, find patterns. Theory comes after data, not before.' }
+    ]
+  },
+  {
+    id: 'descartes',
+    name: 'René Descartes',
+    dates: '1596 – 1650',
+    born: 1596,
+    tagline: 'The philosopher who split mind from body — and created a problem we still can\'t solve',
+    emoji: '🤔',
+    fields: ['philosophy', 'mathematics', 'science'],
+    tags: ['classical'],
+    quote: '"I think, therefore I am."',
+    struggle: `Lived in an era where challenging Church doctrine could get you killed (Galileo was condemned the year before Descartes published). He self-censored, moved to the Netherlands for intellectual freedom, and still had his books placed on the Catholic Church\'s Index of Forbidden Books. He was invited to teach Queen Christina of Sweden — and the 5 AM lessons in an unheated library during a Swedish winter gave him pneumonia. He died at 53, in exile, likely because a queen wanted a philosophy tutor.`,
+    moment: `Sitting in a heated room (the famous "poêle"), he systematically doubted everything he believed until he found one thing he couldn't doubt: the fact that he was doubting. "Cogito, ergo sum." But the deeper consequence was his conclusion that the mind and body are fundamentally different substances — mind is non-physical, body is mechanical. This "Cartesian dualism" created the mind-body problem that neuroscience, philosophy, and now neuroethics have been wrestling with for 400 years. Every neurorights debate — who owns your thoughts? can a machine read your mind? — traces back to Descartes asking: what IS the mind?`,
+    framework: [
+      '<strong>Cartesian Dualism</strong> — mind and body are separate substances. The mind is non-physical. This framing underpins every neurorights argument about mental privacy.',
+      '<strong>Methodological doubt</strong> — doubt everything until you find something undoubtable. Then build from that foundation.',
+      '<strong>Mechanistic biology</strong> — the body (including the brain) is a machine. Only the mind is special. This created the framework for neuroscience to study the brain as hardware.',
+      '<strong>The pineal gland hypothesis</strong> — Descartes proposed the pineal gland as the "seat of the soul" where mind meets body. He was wrong about the gland, but right about the question: where does subjective experience interface with physical matter?'
+    ],
+    habits: [
+      'Thought in bed — rarely rose before noon. His most productive hours were morning meditation in bed.',
+      'Wrote in solitude — moved frequently to avoid social obligations.',
+      'Used doubt as a systematic tool, not an emotional state.',
+      'Studied anatomy and performed dissections to understand the body as mechanism.',
+      'Corresponded extensively with other thinkers — Princess Elisabeth of Bohemia\'s letters pushed him to address the mind-body problem more rigorously.'
+    ],
+    quotes: [
+      { text: 'I think, therefore I am.', src: 'René Descartes, Discourse on the Method' },
+      { text: 'Doubt is the origin of wisdom.', src: 'René Descartes' },
+      { text: 'The reading of all good books is like a conversation with the finest minds of past centuries.', src: 'René Descartes' },
+      { text: 'Divide each difficulty into as many parts as is feasible and necessary to resolve it.', src: 'René Descartes' },
+      { text: 'It is not enough to have a good mind; the main thing is to use it well.', src: 'René Descartes' }
+    ],
+    takeaways: [
+      { title: 'Ask the foundational question', desc: 'Before regulating neurotechnology, before building BCIs, before scanning brains — answer Descartes\' question first: what IS a mind? Your answer determines everything that follows.' },
+      { title: 'Doubt systematically', desc: 'Don\'t doubt randomly. Doubt methodically. Remove assumptions one by one until you find bedrock. Then build.' },
+      { title: 'The problem you frame is the problem you solve', desc: 'Descartes framed mind and body as separate. 400 years later we\'re still inside his frame. Be careful what you assume at the start — it determines every conclusion.' }
+    ]
+  },
+  {
+    id: 'penfield',
+    name: 'Wilder Penfield',
+    dates: '1891 – 1976',
+    born: 1891,
+    tagline: 'The surgeon who mapped the mind with a wire',
+    emoji: '⚡',
+    fields: ['neuroscience', 'medicine', 'ethics'],
+    tags: ['modern'],
+    quote: '"The brain is the organ of destiny. It holds within its humming mechanism the secrets of human life."',
+    struggle: `Penfield pioneered a technique that required him to operate on the brains of conscious patients — using local anesthesia and electrically stimulating different brain regions while the patient reported what they experienced. This was ethically uncharted territory. Each surgery forced real-time ethical decisions: how far to stimulate, what to do when a patient reported memories or emotions being triggered by the electrode, how to balance surgical need against the patient\'s subjective experience. He was doing brain-computer interaction before the term existed.`,
+    moment: `During epilepsy surgery in the 1930s-50s, Penfield stimulated the temporal cortex of conscious patients and they reported vivid experiential memories — hearing specific songs, reliving moments from childhood, feeling emotions from decades earlier. The brain wasn\'t just processing information. It was storing experiences in a form that could be replayed by an electrode. He had accidentally demonstrated that human experience is physically encoded — and physically accessible. The implications for privacy, identity, and consent were staggering, and Penfield knew it.`,
+    framework: [
+      '<strong>The homunculus</strong> — Penfield\'s cortical maps showed that the brain\'s representation of the body is wildly distorted. Hands and lips are enormous; backs and legs are tiny. The brain doesn\'t mirror the body — it mirrors what matters.',
+      '<strong>Conscious collaboration</strong> — the patient was an active participant in their own brain surgery. They reported their experiences while Penfield mapped. The subject is also the instrument.',
+      '<strong>The double life of the brain</strong> — Penfield concluded the mind might be more than just brain activity. Even after a career of brain stimulation, he suspected consciousness couldn\'t be fully reduced to neural firing.',
+      '<strong>Ethical surgical practice</strong> — developed protocols for informed consent in neurosurgery that became the foundation for modern neuroethics.'
+    ],
+    habits: [
+      'Sketched brain maps during every surgery — creating the famous homunculus diagrams.',
+      'Talked to patients throughout operations — used their reports as real-time data.',
+      'Published his findings in both scientific and public-facing formats.',
+      'Maintained detailed surgical records that became foundational neuroscience datasets.',
+      'Spent his later years writing about the philosophical implications of his work.'
+    ],
+    quotes: [
+      { text: 'The brain is the organ of destiny. It holds within its humming mechanism the secrets of human life.', src: 'Wilder Penfield' },
+      { text: 'The mind seems to act independently of the brain in the same sense that a programmer acts independently of a computer.', src: 'Wilder Penfield, The Mystery of the Mind' },
+      { text: 'I worked as a scientist trying to prove that the brain accounted for the mind. But now, perhaps the mind is distinct.', src: 'Wilder Penfield' }
+    ],
+    takeaways: [
+      { title: 'The subject is also the expert', desc: 'Penfield couldn\'t map the brain without the patient\'s lived experience. In neuroethics, the person whose brain is being studied has irreplaceable knowledge.' },
+      { title: 'Access ≠ understanding', desc: 'Penfield could trigger memories with a wire. But he couldn\'t explain WHY those memories were stored that way. Access to the brain doesn\'t mean comprehension of the mind.' },
+      { title: 'Document everything', desc: 'Penfield\'s surgical sketches are still used today. Meticulous records outlive the recorder.' }
+    ]
+  },
+  {
+    id: 'delgado',
+    name: 'José Delgado',
+    dates: '1915 – 2011',
+    born: 1915,
+    tagline: 'The man who stopped a charging bull with a brain implant',
+    emoji: '📡',
+    fields: ['neuroscience', 'ethics', 'invention'],
+    tags: ['modern'],
+    quote: '"We need a program of psychosurgery for political control of our society."',
+    struggle: `Delgado is the most controversial figure in neuroscience history. A Yale professor, he implanted electrodes (his "stimoceiver") in the brains of animals and humans to control behavior by radio signal. He stopped a charging bull in a bullfighting arena by pressing a button. He altered mood, triggered movements, and suppressed aggression in human patients — sometimes without clear consent by modern standards. His 1969 book "Physical Control of the Mind" argued that brain stimulation could create a "psychocivilized society." The backlash was enormous. He was accused of creating mind control technology for authoritarian states. He left Yale and returned to Spain.`,
+    moment: `1963. A fighting bull with electrodes implanted in its caudate nucleus charged directly at Delgado in a bullring. Delgado pressed a button on his radio transmitter. The bull skidded to a stop inches away, turned, and walked off passively. The photograph became iconic — and terrifying. It proved that behavior could be remotely controlled through direct brain stimulation. The question was no longer "can we control the brain?" but "should we?" — and "who decides?"`,
+    framework: [
+      '<strong>The stimoceiver</strong> — a brain-implanted device that could receive radio signals and deliver electrical stimulation. The first wireless BCI. Primitive by modern standards, revolutionary in concept.',
+      '<strong>Physical control of behavior</strong> — Delgado demonstrated that aggression, pleasure, motor control, and mood could all be modulated by electrode placement. The brain is not just observable — it\'s controllable.',
+      '<strong>Psychocivilization</strong> — his most controversial idea: that society could be improved by controlling the brain\'s "destructive" impulses. The ethical nightmare of his career.',
+      '<strong>The consent problem</strong> — many of his human subjects were institutionalized psychiatric patients. Informed consent standards were primitive or absent. His work is a case study in why neuroethics exists.'
+    ],
+    habits: [
+      'Operated on both animals and humans — pushed boundaries that later generations drew as ethical lines.',
+      'Published prolifically and gave public demonstrations — believed transparency was better than secrecy.',
+      'Collaborated with engineers to miniaturize brain implants.',
+      'Traveled internationally to demonstrate his technology.',
+      'In later years, backed away from invasive techniques and explored non-invasive methods.'
+    ],
+    quotes: [
+      { text: 'We need a program of psychosurgery for political control of our society. The purpose is physical control of the mind.', src: 'José Delgado, Congressional testimony (1974)' },
+      { text: 'The individual may think that the most important reality is his own existence, but this is only his personal point of view.', src: 'José Delgado, Physical Control of the Mind' },
+      { text: 'Can you conceive of a world in which the weights of aggressive behavior could be controlled?', src: 'José Delgado' }
+    ],
+    takeaways: [
+      { title: 'Capability precedes ethics — always', desc: 'Delgado could control a bull\'s brain before anyone had a framework for whether he should. Technology outpaces regulation. This is the permanent condition of neuroscience.' },
+      { title: 'The road to hell is paved with good intentions', desc: 'Delgado genuinely believed brain control could reduce violence and suffering. The intent was humane. The implications were authoritarian. Intent doesn\'t determine outcome.' },
+      { title: 'Consent is not optional', desc: 'Delgado\'s institutional patients could not meaningfully consent. Every modern BCI ethics framework exists because of what went wrong in the 1960s.' }
+    ]
+  },
+  {
+    id: 'freeman',
+    name: 'Walter Freeman',
+    dates: '1895 – 1972',
+    born: 1895,
+    tagline: 'THE CAUTIONARY TALE — what happens when neuroscience has no ethics',
+    emoji: '🚨',
+    fields: ['medicine', 'neuroscience'],
+    tags: ['modern'],
+    quote: '"Lobotomy gets them home."',
+    struggle: `This is not an inspirational story. Freeman performed approximately 3,500 lobotomies — including on children as young as 4. He developed the "ice pick lobotomy" (transorbital lobotomy) that could be done in minutes without a surgeon, without anesthesia, in his office. He drove across the country in a van he called the "lobotomobile," performing the procedure in state hospitals. Many patients were left vegetative, permanently disabled, or dead. Rosemary Kennedy — JFK\'s sister — was lobotomized at age 23 and spent the remaining 63 years of her life institutionalized. Freeman is the reason neuroethics exists.`,
+    moment: `There is no redeeming moment. The closest thing to a turning point: in 1967, Freeman performed his last lobotomy. The patient — Helen Mortensen, whom he had lobotomized twice before — died of a brain hemorrhage on the table. The hospital revoked his surgical privileges. He had been performing the procedure for 31 years. He never expressed remorse. He died believing he had helped his patients.`,
+    framework: [
+      '<strong>There is no framework here — only a warning.</strong> Freeman operated without controlled trials, without peer review of outcomes, without long-term follow-up, and without meaningful patient consent.',
+      '<strong>Institutional complicity</strong> — hospitals, state governments, and families endorsed lobotomy because it "solved" the problem of difficult psychiatric patients. The system incentivized brain destruction.',
+      '<strong>The absence of oversight</strong> — no ethics board reviewed Freeman\'s procedures. No regulatory body stopped him. He was only stopped when a patient died on his table.',
+      '<strong>Irreversibility as the core crime</strong> — you cannot un-lobotomize someone. The procedure destroyed brain tissue permanently. Every neuroethics framework must address irreversibility as a primary concern.'
+    ],
+    habits: [
+      'Drove across the country performing lobotomies in state hospitals.',
+      'Kept detailed records and photographs — which later became evidence against the practice.',
+      'Performed the procedure without surgical training (he was a neurologist, not a surgeon).',
+      'Continued performing lobotomies long after the medical community turned against the practice.',
+      'Sent Christmas cards to his former patients for decades — genuinely believed he had helped them.'
+    ],
+    quotes: [
+      { text: 'Lobotomy gets them home.', src: 'Walter Freeman' },
+      { text: 'If we wait until we understand the brain, we\'ll wait forever.', src: 'Walter Freeman' }
+    ],
+    takeaways: [
+      { title: 'THIS is why neuroethics matters', desc: 'Freeman lobotomized 3,500 people. Many were children. Many could not consent. No ethics board stopped him for 31 years. Every neuroethics rule exists because rules didn\'t exist for him.' },
+      { title: 'Irreversibility demands the highest bar', desc: 'Any procedure that permanently alters brain tissue must meet the highest possible standard of consent, evidence, and oversight. There is no undo.' },
+      { title: 'Good intentions are not enough', desc: 'Freeman believed he was helping. The patients he left vegetative did not agree. Outcomes matter more than intentions. Always.' }
+    ]
+  },
+  {
+    id: 'william-james',
+    name: 'William James',
+    dates: '1842 – 1910',
+    born: 1842,
+    tagline: 'The philosopher-psychologist who made the mind a science',
+    emoji: '🔬',
+    fields: ['philosophy', 'science', 'psychology'],
+    tags: ['modern'],
+    quote: '"The greatest discovery of my generation is that a human being can alter his life by altering his attitudes."',
+    struggle: `Suffered from severe depression, chronic illness, and existential crisis throughout his life. He seriously contemplated suicide in his late twenties. His father was a Swedenborgian mystic; his brother was Henry James the novelist. William felt lost between art, science, and philosophy, unable to commit to any single path — a crisis familiar to every polymath. He trained as a physician but never practiced. He nearly abandoned intellectual life entirely before finding his way to psychology.`,
+    moment: `Reading the philosopher Charles Renouvier, James encountered the argument that free will is real — not because it can be proven, but because believing in it changes how you act. James decided to believe in free will as an experiment. He wrote in his diary: "My first act of free will shall be to believe in free will." It pulled him out of his depression. He went on to write "The Principles of Psychology" (1890) — 1,400 pages that established psychology as a laboratory science and introduced concepts like "stream of consciousness," "habit," and "the self" that neuroscience still uses.`,
+    framework: [
+      '<strong>Pragmatism</strong> — an idea is true if it works. Don\'t ask "is this correct in the abstract?" Ask "what difference does it make in practice?"',
+      '<strong>Stream of consciousness</strong> — the mind is not a series of discrete states but a continuous, flowing process. This framing anticipates modern neural dynamics.',
+      '<strong>Habit as neuroplasticity</strong> — James described habits as physical grooves in the brain decades before the term "neuroplasticity" existed. "The great thing, then, in all education, is to make our nervous system our ally instead of our enemy."',
+      '<strong>Radical empiricism</strong> — experience is primary. Don\'t reduce consciousness to something it\'s not — study it as it actually presents itself.'
+    ],
+    habits: [
+      'Wrote voluminously — letters, books, lectures. His writing is famously readable.',
+      'Experimented with altered states — nitrous oxide, psychic phenomena, religious experiences.',
+      'Taught the first psychology course in America (Harvard, 1875).',
+      'Maintained friendships across disciplines — philosophers, scientists, writers, mystics.',
+      'Practiced what he preached about habit — deliberately built routines to counteract his depressive tendencies.'
+    ],
+    quotes: [
+      { text: 'The greatest discovery of my generation is that a human being can alter his life by altering his attitudes.', src: 'William James' },
+      { text: 'Act as if what you do makes a difference. It does.', src: 'William James' },
+      { text: 'The art of being wise is the art of knowing what to overlook.', src: 'William James' },
+      { text: 'Be not afraid of life. Believe that life is worth living, and your belief will help create the fact.', src: 'William James' },
+      { text: 'We are like islands in the sea, separate on the surface but connected in the deep.', src: 'William James' }
+    ],
+    takeaways: [
+      { title: 'Make your nervous system your ally', desc: 'James said it in 1890: build habits deliberately. Your brain physically rewires based on what you repeat. Choose your repetitions.' },
+      { title: 'Believe in order to act', desc: 'Sometimes you must choose a belief before evidence proves it — not because you\'re irrational, but because the belief enables the action that produces the evidence.' },
+      { title: 'Psychology IS neuroscience', desc: 'James saw no boundary between mind and brain. The ethical questions about neurotechnology are inseparable from the psychological questions about selfhood.' }
+    ]
+  }
+];
+
+// Add neuroethics people to the ALL_PEOPLE array for timeline/quotes
+const ALL_NEURO = NEUROETHICS_PEOPLE;
+ALL_PEOPLE.push(...ALL_NEURO);
+
+populateGrid('neuroGrid', NEUROETHICS_PEOPLE);
+
+// Rebuild quotes now that all people are loaded
+ALL_QUOTES = ALL_PEOPLE.flatMap(p => p.quotes);
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FILTERS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function setupFilters(barId, gridId, data) {
+  const bar = document.getElementById(barId);
+  bar.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    const grid = document.getElementById(gridId);
+    grid.querySelectorAll('.profile-card').forEach(card => {
+      if (filter === 'all' || card.dataset.tags.includes(filter)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+}
+
+setupFilters('polymathFilters', 'polymathGrid', POLYMATHS);
+setupFilters('philFilters', 'philGrid', PHILOSOPHERS);
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// QUOTE CAROUSEL
+// ═══════════════════════════════════════════════════════════════════════════════
+
+let quoteIndex = Math.floor(Math.random() * ALL_QUOTES.length);
+
+function showQuote(idx) {
+  const q = ALL_QUOTES[idx];
+  document.getElementById('carouselText').textContent = `"${q.text}"`;
+  document.getElementById('carouselAttr').textContent = `— ${q.src}`;
+}
+
+showQuote(quoteIndex);
+
+document.getElementById('nextQuote').addEventListener('click', () => {
+  quoteIndex = (quoteIndex + 1) % ALL_QUOTES.length;
+  showQuote(quoteIndex);
+});
+document.getElementById('prevQuote').addEventListener('click', () => {
+  quoteIndex = (quoteIndex - 1 + ALL_QUOTES.length) % ALL_QUOTES.length;
+  showQuote(quoteIndex);
+});
+
+// Auto-advance every 8 seconds
+setInterval(() => {
+  quoteIndex = (quoteIndex + 1) % ALL_QUOTES.length;
+  showQuote(quoteIndex);
+}, 8000);
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PATTERNS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const pGrid = document.getElementById('patternsGrid');
+PATTERNS.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'pattern-card';
+  card.innerHTML = `<h4>${p.title}</h4><p>${p.desc}</p><div class="names">${p.names}</div>`;
+  pGrid.appendChild(card);
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TIMELINE
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const sorted = [...ALL_PEOPLE].sort((a, b) => a.born - b.born);
+const tlView = document.getElementById('timelineView');
+sorted.forEach(p => {
+  const item = document.createElement('div');
+  item.className = 'timeline-item';
+  item.innerHTML = `
+    <div class="timeline-content" data-id="${p.id}">
+      <div class="era">${p.dates}</div>
+      <h5>${p.emoji} ${p.name}</h5>
+    </div>
+    <div class="timeline-dot"></div>
+  `;
+  item.querySelector('.timeline-content').addEventListener('click', () => openModal(p));
+  tlView.appendChild(item);
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// IMPLEMENT
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const iGrid = document.getElementById('implementGrid');
+IMPLEMENT_PRACTICES.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'implement-card';
+  card.innerHTML = `
+    <h4>${p.title}</h4>
+    <div class="origin">From: ${p.origin}</div>
+    <p>${p.desc}</p>
+    <div class="how"><strong>How to start:</strong> ${p.how}</div>
+  `;
+  iGrid.appendChild(card);
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+document.getElementById('navBar').addEventListener('click', e => {
+  const btn = e.target.closest('.nav-btn');
+  if (!btn) return;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const target = document.getElementById(btn.dataset.section);
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+// Modal close
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ACTION OVER WORDS DATA + RENDERING
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const ACTION_EXAMPLES = [
+  {
+    title: 'The Wrong Spec That Built Flight',
+    who: 'Wright Brothers (1903)',
+    desc: 'Orville and Wilbur Wright discovered that Otto Lilienthal\'s lift coefficient tables — the standard aeronautical data everyone relied on — were wrong. Instead of trusting published specs, they built a wind tunnel in their bicycle shop from a starch box and a fan. They tested over 200 wing shapes and generated their own data tables from scratch. Their competitors (including Samuel Langley with $50,000 in government funding) used the "correct" published data and failed. The Wrights used their own empirical data and flew.',
+    lesson: 'Don\'t trust the spec. Test it yourself. The gap between published knowledge and reality is where breakthroughs live.'
+  },
+  {
+    title: 'Da Vinci\'s 30 Corpses',
+    who: 'Leonardo da Vinci (c. 1489–1510)',
+    desc: 'Da Vinci didn\'t read about anatomy. He dissected more than 30 human corpses — illegal, condemned by the Church, performed in secret by candlelight in hospital basements. His anatomical drawings were more accurate than any medical textbook for 300 years. He discovered that the aortic valve worked via vortex flow — a fact not confirmed by modern science until the 20th century. He didn\'t theorize about the body. He opened it up and looked.',
+    lesson: 'Reading about a thing and doing the thing are completely different forms of knowledge. The person who has done it once knows more than the person who has read about it a thousand times.'
+  },
+  {
+    title: 'Franklin\'s Writing Apprenticeship',
+    who: 'Benjamin Franklin (c. 1718)',
+    desc: 'Franklin didn\'t just read The Spectator — he reverse-engineered it. He\'d read an essay, take notes on the structure, wait a few days, then try to reconstruct the essay from his notes. Then he compared his version to the original and studied every difference. He converted prose to poetry and back to prose to expand his vocabulary. He scrambled his notes and reassembled them to practice logical structure. Deliberate, systematic practice — not passive consumption.',
+    lesson: 'Don\'t read passively. Reconstruct. Reverse-engineer. The gap between what you read and what you can recreate IS the gap in your understanding.'
+  },
+  {
+    title: 'Curie\'s Four Years of Boiling',
+    who: 'Marie Curie (1898–1902)',
+    desc: 'To isolate radium, Curie processed eight tons of pitchblende ore by hand — boiling, filtering, precipitating — in a leaking shed with no proper ventilation. It took four years of physical labor that would have broken most researchers. She didn\'t have a better theory. She had better endurance. The element revealed itself to the person willing to do the work no one else would do.',
+    lesson: 'Some problems cannot be solved with cleverness. They can only be solved with labor. Know the difference.'
+  },
+  {
+    title: 'Galileo Built the Telescope',
+    who: 'Galileo Galilei (1609)',
+    desc: 'Galileo didn\'t invent the telescope — he heard about a Dutch invention and immediately built a better one. His first attempt improved the magnification from 3x to 8x. Within months he was at 20x. He didn\'t wait for someone to send him one. He didn\'t write a paper about how telescopes might be useful. He ground the lenses himself and pointed them at Jupiter that same year.',
+    lesson: 'Don\'t wait for the perfect tool. Build a working one. Improve it. The person who ships a rough prototype learns more in a week than the person who plans the perfect version for a year.'
+  },
+  {
+    title: 'Musashi\'s 60 Duels',
+    who: 'Miyamoto Musashi (1596–1612)',
+    desc: 'Musashi didn\'t study swordsmanship in a school. He tested it in 60 real duels starting at age 13. Each fight was a laboratory. He developed his famous two-sword style not from theory but from the pressure of real combat. His Book of Five Rings was written at 60, after a lifetime of empirical testing. Every principle in it was paid for in blood.',
+    lesson: 'Theory without testing is fantasy. Put your ideas in the ring. The feedback from reality is worth more than a thousand books.'
+  },
+  {
+    title: 'Socrates in the Marketplace',
+    who: 'Socrates (c. 430 BC)',
+    desc: 'Socrates didn\'t write philosophy books. He walked into the marketplace and engaged real people in real conversation. Politicians, generals, craftsmen, poets — he tested his ideas against living minds, not paper. When his questions revealed that the "wisest" men in Athens didn\'t actually understand what they claimed to know, that finding came from action, not contemplation.',
+    lesson: 'Your ideas don\'t exist until you test them on other people. A belief that has never been challenged is a belief that has never been verified.'
+  },
+  {
+    title: 'Edison\'s 10,000 Experiments',
+    who: 'Thomas Edison (1878–1879)',
+    desc: 'Edison tested over 3,000 materials for the light bulb filament before finding one that worked. When asked about failure, he said: "I have not failed. I\'ve just found 10,000 ways that won\'t work." Say what you will about Edison\'s ethics — his methodology was pure action. He didn\'t theorize about which material would work. He tested them all.',
+    lesson: 'Eliminate wrong answers faster. Every failed test is data. The person who iterates fastest wins.'
+  }
+];
+
+const aGrid = document.getElementById('actionGrid');
+ACTION_EXAMPLES.forEach(a => {
+  const card = document.createElement('div');
+  card.className = 'action-card';
+  card.innerHTML = `
+    <h4>${a.title}</h4>
+    <div class="who">${a.who}</div>
+    <p>${a.desc}</p>
+    <div class="lesson">${a.lesson}</div>
+  `;
+  aGrid.appendChild(card);
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// BOOKS DATA + RENDERING
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const INFLUENTIAL_BOOKS = [
+  {
+    reader: 'Leonardo da Vinci',
+    title: 'Natural History',
+    author: 'Pliny the Elder',
+    desc: 'Da Vinci owned a copy and referenced it constantly. Pliny\'s encyclopedic approach to cataloguing ALL of nature — animals, minerals, geography, art, medicine — modeled the cross-domain thinking that defined Leonardo\'s career. It showed him that one mind could hold the entire natural world.'
+  },
+  {
+    reader: 'Benjamin Franklin',
+    title: 'An Essay on Projects',
+    author: 'Daniel Defoe (1697)',
+    desc: 'Franklin read this as a young man and it shaped his entire civic philosophy. Defoe argued that private citizens should organize to solve public problems — insurance, roads, education — without waiting for government. Franklin\'s lending library, fire department, university, and hospital all trace directly to Defoe\'s blueprint.'
+  },
+  {
+    reader: 'Marie Curie',
+    title: 'Positivist Philosophy',
+    author: 'Auguste Comte',
+    desc: 'Curie was deeply influenced by Comte\'s positivism — the idea that real knowledge comes only from observable, measurable phenomena, not metaphysics. This grounded her relentless empiricism: if you can\'t measure it, it\'s not science. Her refusal to theorize without data was Comte in practice.'
+  },
+  {
+    reader: 'Nikola Tesla',
+    title: 'Faust',
+    author: 'Johann Wolfgang von Goethe',
+    desc: 'Tesla memorized the entire work. He was literally reciting Faust in a Budapest park when the rotating magnetic field vision struck him. Goethe\'s theme — that the restless pursuit of knowledge is both humanity\'s greatest gift and greatest curse — became Tesla\'s lived experience.'
+  },
+  {
+    reader: 'Marcus Aurelius',
+    title: 'Discourses',
+    author: 'Epictetus (via Arrian)',
+    desc: 'Marcus credits Epictetus throughout the Meditations. The slave\'s philosophy became the emperor\'s operating system. Epictetus\'s Dichotomy of Control — focus only on what you can influence — was the framework Marcus used to govern an empire while maintaining his sanity.'
+  },
+  {
+    reader: 'Socrates',
+    title: 'The Delphic Maxims',
+    author: 'Traditional (Temple of Apollo)',
+    desc: '"Know thyself" — inscribed on the Temple of Apollo at Delphi. Not a book but a text that defined Socrates\' entire mission. He took that two-word inscription and made it the foundation of Western philosophy: self-knowledge as the prerequisite for all other knowledge.'
+  },
+  {
+    reader: 'Seneca',
+    title: 'Republic & Letters',
+    author: 'Epicurus',
+    desc: 'Seneca — a Stoic — quoted Epicurus more than any other philosopher. He freely stole good ideas from rival schools: "I am in the habit of crossing over to the enemy\'s camp — not as a deserter, but as a scout." Epicurus taught him that philosophy must reduce suffering, not just satisfy curiosity.'
+  },
+  {
+    reader: 'Epictetus',
+    title: 'The works of Chrysippus & Zeno',
+    author: 'Stoic founders',
+    desc: 'As a slave, Epictetus was sent to study under the Stoic teacher Musonius Rufus. The writings of the original Stoic founders — Zeno and Chrysippus — gave him the intellectual framework to survive enslavement: your body can be chained, but your mind is always free. He lived this before he taught it.'
+  },
+  {
+    reader: 'Lao Tzu',
+    title: 'The Book of Changes (I Ching)',
+    author: 'Traditional (Zhou Dynasty)',
+    desc: 'The I Ching\'s core insight — that change is the only constant, and wisdom lies in flowing with it rather than resisting — is the foundation of Taoist philosophy. The Tao Te Ching can be read as a poetic distillation of the I Ching\'s worldview.'
+  },
+  {
+    reader: 'Galileo Galilei',
+    title: 'On the Revolutions of the Celestial Spheres',
+    author: 'Nicolaus Copernicus (1543)',
+    desc: 'Copernicus\' heliocentric model was the spark. Galileo read it, recognized it as correct, and then spent his life gathering the observational evidence to prove it. Without Copernicus\' book, Galileo would have had nothing to point his telescope at.'
+  },
+  {
+    reader: 'Aristotle',
+    title: 'Dialogues',
+    author: 'Plato',
+    desc: 'Aristotle spent 20 years studying under Plato. He absorbed the dialogues completely — then rejected their core premise. Plato said truth lives in abstract Forms. Aristotle said truth lives in the observable world. The student\'s greatest book was the teacher\'s, because it gave him something worthy to disagree with.'
+  },
+  {
+    reader: 'Hypatia',
+    title: 'Arithmetica',
+    author: 'Diophantus of Alexandria',
+    desc: 'Hypatia wrote a commentary on Diophantus that made his complex number theory accessible to students. The act of deeply engaging with this text — not just reading but rewriting it for clarity — exemplified her method: understanding is proven by the ability to teach.'
+  },
+  {
+    reader: 'Ibn Sina (Avicenna)',
+    title: 'Metaphysics',
+    author: 'Aristotle',
+    desc: 'Ibn Sina read the Metaphysics 40 times and said he still didn\'t understand it — until he found a commentary by al-Farabi that unlocked it. That experience taught him two things: persistence matters more than brilliance, and the right teacher (even via text) can crack open what seemed impenetrable.'
+  },
+  {
+    reader: 'Isaac Newton',
+    title: 'Principia Philosophiae (Principles of Philosophy)',
+    author: 'Ren\u00e9 Descartes (1644)',
+    desc: 'Newton\'s copy of Descartes was dog-eared and heavily annotated — often with disagreements. Descartes gave Newton the framework of mechanical philosophy (explain nature through matter and motion) and also gave him something to rebel against. Newton\'s Principia was in many ways a point-by-point refutation of Descartes\' physics, while keeping his mathematical ambition. The best teachers sometimes teach by being wrong in interesting ways.'
+  },
+  {
+    reader: 'James Clerk Maxwell',
+    title: 'Experimental Researches in Electricity',
+    author: 'Michael Faraday (1839-1855)',
+    desc: 'Faraday was a self-taught experimentalist with no formal math training. Maxwell was a mathematical prodigy. When Maxwell read Faraday\'s descriptions of "lines of force" — invisible curves filling space around magnets — he saw what no one else did: Faraday was describing a field, and it could be expressed in equations. Maxwell translated Faraday\'s physical intuition into the four equations that unified electromagnetism. He later wrote: "Faraday, in his mind\'s eye, saw lines of force traversing all space where the mathematicians saw centres of force."'
+  },
+  {
+    reader: 'Michael Faraday',
+    title: 'Improvement of the Mind',
+    author: 'Isaac Watts (1741)',
+    desc: 'A customer at the bookbinding shop where young Faraday worked recommended this book on self-education. Faraday followed its advice methodically: attend lectures, take detailed notes, form discussion groups, question everything. The book literally gave an uneducated teenager a system for educating himself. Faraday\'s entire career — from bookbinder to the greatest experimentalist in history — began with a self-help book about how to think.'
+  },
+  {
+    reader: 'Santiago Ramón y Cajal',
+    title: 'The Origin of Species',
+    author: 'Charles Darwin (1859)',
+    desc: 'Darwin\'s evolutionary framework gave Cajal the lens to see neurons not as static anatomy but as products of adaptation. If the brain evolved, then its structure must reflect function. This insight drove his obsession with mapping neural connections — he wasn\'t just cataloguing cells, he was reading the evolutionary history written in the brain\'s architecture.'
+  },
+  {
+    reader: 'Confucius',
+    title: 'Book of Documents (Shujing)',
+    author: 'Traditional (Zhou Dynasty)',
+    desc: 'The historical records of the ancient sage-kings — Yao, Shun, Yu — gave Confucius his model of ethical governance. He didn\'t invent his moral framework from scratch. He studied history and extracted principles from rulers who got it right. History was his laboratory.'
+  },
+  {
+    reader: 'Miyamoto Musashi',
+    title: 'The Art of War',
+    author: 'Sun Tzu',
+    desc: 'While Musashi never directly cites Sun Tzu, the parallels are unmistakable: "All warfare is deception." "Know your enemy and know yourself." "The supreme art of war is to subdue the enemy without fighting." Musashi\'s Book of Five Rings is Sun Tzu refined through 60 real duels.'
+  },
+  {
+    reader: 'Hippocrates',
+    title: 'Oral medical tradition of the Asclepiads',
+    author: 'Asclepiad guild teachings (pre-5th century BC)',
+    desc: 'Hippocrates came from a family guild of healers (Asclepiads) who passed medical knowledge orally. He broke with tradition by writing it down and systematizing it. His "book" was actually the collective knowledge of generations of healers — which he transformed from oral tradition into the first evidence-based medical texts.'
+  },
+  {
+    reader: 'René Descartes',
+    title: 'Confessions',
+    author: 'Augustine of Hippo (c. 400 AD)',
+    desc: 'Augustine\'s radical introspection — turning the mind inward to examine its own processes — prefigured Descartes\' method of systematic doubt by 1,200 years. Augustine asked "what can I know for certain?" and concluded: my own existence as a thinking being. Sound familiar? Descartes secularized Augustine\'s insight and built modern philosophy on it.'
+  },
+  {
+    reader: 'William James',
+    title: 'First Principles',
+    author: 'Herbert Spencer (1862)',
+    desc: 'James initially admired Spencer\'s attempt to unify all knowledge under evolutionary principles, then spent decades demolishing it. Spencer taught James what NOT to do: don\'t build grand theories that explain everything and predict nothing. James\'s pragmatism was born as a direct reaction to Spencer\'s beautiful, useless abstractions.'
+  },
+  {
+    reader: 'Wilder Penfield',
+    title: 'Integrative Action of the Nervous System',
+    author: 'Charles Sherrington (1906)',
+    desc: 'Sherrington\'s work on reflexes, synapses, and neural integration gave Penfield the theoretical foundation for his brain mapping. Sherrington showed that the nervous system is an integrated network of excitation and inhibition. Penfield took that framework and applied it directly — with an electrode — to the living human brain.'
+  },
+  {
+    reader: 'José Delgado',
+    title: 'The Integrative Action of the Nervous System',
+    author: 'Charles Sherrington (1906)',
+    desc: 'Like Penfield, Delgado was deeply influenced by Sherrington. But where Penfield used Sherrington to map, Delgado used him to control. Sherrington showed that behavior emerges from neural circuits. Delgado asked: what if we could intervene in those circuits directly? The same book, read through different ethical lenses, produced a mapper and a controller.'
+  }
+];
+
+const bGrid = document.getElementById('booksGrid');
+INFLUENTIAL_BOOKS.forEach(b => {
+  const card = document.createElement('div');
+  card.className = 'book-card';
+  card.innerHTML = `
+    <div class="reader">${b.reader}</div>
+    <h4>${b.title}</h4>
+    <div class="author">by ${b.author}</div>
+    <p>${b.desc}</p>
+  `;
+  bGrid.appendChild(card);
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// LEARNING JOURNAL DATA + RENDERING
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const JOURNAL_ENTRIES = [
+  {
+    id: 'socratic-method',
+    title: 'Franklin\'s Socratic Method: How Questions Win Arguments',
+    meta: 'From: The Autobiography of Benjamin Franklin',
+    body: `
+      <p>At age 16, Benjamin Franklin read about Socrates' method of questioning and it changed how he interacted with the world for the rest of his life.</p>
+
+      <h5>What Franklin Did</h5>
+      <p>Franklin abandoned direct argumentation entirely. Instead of stating his position and defending it, he adopted Socrates' technique of asking innocent-seeming questions that led the other person to discover contradictions in their own reasoning. He described himself as becoming "very artful and expert in drawing people, even of superior knowledge, into concessions, the consequences of which they did not foresee."</p>
+
+      <h5>The Technique</h5>
+      <ul>
+        <li>Never open with your conclusion. Start with questions about the other person's premises.</li>
+        <li>Use "humble inquiry" — frame questions as genuine curiosity, not traps. "I may be wrong, but wouldn't it follow that...?"</li>
+        <li>Let the other person arrive at the conclusion themselves. A person convinced by their own reasoning doesn't feel defeated — they feel enlightened.</li>
+        <li>Drop all dogmatic language. Replace "certainly" and "undoubtedly" with "it appears to me" and "if I'm not mistaken."</li>
+        <li>Never humiliate. The goal is shared understanding, not victory.</li>
+      </ul>
+
+      <h5>Why It Works</h5>
+      <p>Direct contradiction triggers defensiveness. The moment someone feels attacked, they stop listening and start defending. Socratic questioning bypasses this entirely — the other person is doing the reasoning themselves. They own the conclusion because they built it.</p>
+
+      <h5>The Deeper Lesson</h5>
+      <p>Franklin realized something Socrates knew 2,000 years earlier: <strong>you cannot force understanding into someone. You can only create the conditions for them to find it themselves.</strong> This applies to teaching, persuasion, leadership, parenting, and debate. The person who asks the best questions controls the conversation more powerfully than the person who makes the best arguments.</p>
+
+      <h5>Practice This</h5>
+      <ul>
+        <li>Next disagreement: ask 3 questions before stating your position.</li>
+        <li>Replace "You're wrong because..." with "Help me understand — how does that work when...?"</li>
+        <li>In meetings, practice restating others' positions before responding: "So if I understand correctly, you're saying..."</li>
+        <li>Read Chapter 1 of Franklin's Autobiography. It's 20 pages and will change how you communicate.</li>
+      </ul>
+    `,
+    githubLink: '#socratic-method'
+  },
+  {
+    id: 'davinci-notebooks',
+    title: 'Da Vinci\'s Notebook Method: Capturing Chaos',
+    meta: 'From: The Notebooks of Leonardo da Vinci',
+    body: `
+      <p>Leonardo carried a small notebook attached to his belt at all times. He filled over 7,200 pages in his lifetime — the most extraordinary personal knowledge system ever created.</p>
+
+      <h5>What Made It Different</h5>
+      <p>Da Vinci's notebooks were deliberately unorganized. A single page might contain a sketch of a horse's leg, a recipe for oil paint, a mathematical proof, a grocery list, and a note about how water flows around a stone. He didn't separate subjects. He let connections form naturally by proximity.</p>
+
+      <h5>The Method</h5>
+      <ul>
+        <li>Carry a capture device everywhere. Leonardo used a belt notebook. You have a phone.</li>
+        <li>Write EVERYTHING. Don't filter. The grocery list next to the philosophy note is the point — unexpected connections emerge.</li>
+        <li>Sketch, don't describe. Drawing forces you to observe structure. Words let you skip details.</li>
+        <li>Review periodically. Leonardo would revisit old pages and add new connections across years of entries.</li>
+        <li>Don't organize by subject. Organize by time. Let your future self discover the patterns.</li>
+      </ul>
+
+      <h5>Why Chaos Works</h5>
+      <p>Modern creativity research confirms what Leonardo practiced intuitively: the best ideas come from connecting unrelated domains. A notebook organized by topic keeps ideas in silos. A notebook organized by time lets anatomy sit next to architecture, and that's where the insight lives.</p>
+    `,
+    githubLink: '#davinci-notebooks'
+  },
+  {
+    id: 'stoic-morning',
+    title: 'The Stoic Morning Routine: 2,000 Years of Starting the Day',
+    meta: 'From: Meditations (Marcus Aurelius) + Letters (Seneca)',
+    body: `
+      <p>Three Stoic philosophers — Marcus Aurelius, Seneca, and Epictetus — all described morning routines that share the same core structure. They arrived at it independently, centuries apart. That convergence suggests they found something real.</p>
+
+      <h5>Marcus Aurelius (Emperor, 2nd Century)</h5>
+      <p>"When you arise in the morning, think of what a precious privilege it is to be alive — to breathe, to think, to enjoy, to love." But also: "Today I shall meet with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness." He paired gratitude with realistic expectation. Not optimism. Not pessimism. Preparation.</p>
+
+      <h5>Seneca (Senator/Advisor, 1st Century)</h5>
+      <p>Seneca's morning was about intentionality. He set a specific goal for the day and identified the obstacles he would likely face. He practiced "premeditatio malorum" — deliberately imagining what could go wrong — not to create anxiety, but to defuse it. A feared outcome, once visualized, loses its power to surprise.</p>
+
+      <h5>Epictetus (Former Slave, 2nd Century)</h5>
+      <p>Epictetus taught his students to begin each day by reviewing the Dichotomy of Control: what is up to you today, and what is not? Move 100% of your attention to column one. Column two is noise.</p>
+
+      <h5>The Combined Routine (15 minutes)</h5>
+      <ul>
+        <li><strong>Gratitude (2 min):</strong> Name one thing you're grateful for. Not generic — specific.</li>
+        <li><strong>Premeditatio (3 min):</strong> What's the hardest thing you'll face today? Visualize it. Plan your response.</li>
+        <li><strong>Control audit (5 min):</strong> What can I control today? What can't I control? Write both lists.</li>
+        <li><strong>Intention (5 min):</strong> What is my one most important task today? What does "done well" look like?</li>
+      </ul>
+    `,
+    githubLink: '#stoic-morning'
+  },
+  {
+    id: 'musashi-cross-training',
+    title: 'Musashi\'s Cross-Training: Why the Swordsman Painted',
+    meta: 'From: The Book of Five Rings (Miyamoto Musashi)',
+    body: `
+      <p>Miyamoto Musashi — the greatest swordsman in Japanese history — was also a master calligrapher, ink wash painter, and sculptor. This wasn't a hobby. It was strategy.</p>
+
+      <h5>The Connection</h5>
+      <p>Musashi explicitly taught that mastery of one art requires studying others. In the Book of Five Rings, he wrote: "From one thing, know ten thousand things." His ink paintings required the same hand control as his sword technique. His calligraphy required the same breath control. His sculpture required the same spatial awareness. Each art trained a faculty that the others needed.</p>
+
+      <h5>Modern Parallel</h5>
+      <p>Steve Jobs famously credited a calligraphy class at Reed College with the Mac's typography. Einstein played violin to think through physics problems. Richard Feynman drew, played bongo drums, and cracked safes. The pattern is universal: cross-training in unrelated skills doesn't distract from your primary work — it enriches it.</p>
+
+      <h5>How to Apply This</h5>
+      <ul>
+        <li>Identify what faculty your primary skill requires (precision, creativity, spatial thinking, pattern recognition, etc.)</li>
+        <li>Find an unrelated skill that trains the same faculty through a different medium</li>
+        <li>Practice it regularly — not casually, but with the same seriousness as your primary skill</li>
+        <li>Don't try to force connections. They'll emerge naturally. The unconscious mind does this work for you.</li>
+      </ul>
+    `,
+    githubLink: '#musashi-cross-training'
+  },
+  {
+    id: 'curie-endurance',
+    title: 'Curie\'s Endurance Method: When the Only Path Is Through',
+    meta: 'From: Marie Curie\'s laboratory notebooks',
+    body: `
+      <p>Not every problem has a clever solution. Some problems — the most important ones — can only be solved by sustained, brutal, unglamorous labor. Marie Curie understood this better than anyone.</p>
+
+      <h5>The Numbers</h5>
+      <ul>
+        <li>8 tons of pitchblende ore processed by hand</li>
+        <li>4 years of daily boiling, filtering, precipitating</li>
+        <li>Working in a converted shed with a leaking roof</li>
+        <li>No funding, no assistants, no proper equipment</li>
+        <li>Result: 0.1 grams of radium chloride</li>
+      </ul>
+
+      <h5>The Lesson</h5>
+      <p>Our culture worships the "eureka moment" — the flash of genius. But most breakthroughs are preceded by years of grinding work that nobody photographs. Curie didn't have a better theory than her peers. She had better endurance. She was willing to do the work that no one else would do, for longer than anyone else would do it.</p>
+
+      <h5>When to Apply This</h5>
+      <ul>
+        <li>When you've tried every clever approach and none worked</li>
+        <li>When the problem is clear but the solution requires sheer volume of effort</li>
+        <li>When others have quit — their quitting IS your advantage</li>
+        <li>When the only variable left to optimize is persistence</li>
+      </ul>
+    `,
+    githubLink: '#curie-endurance'
+  }
+];
+
+const jContainer = document.getElementById('journalEntries');
+JOURNAL_ENTRIES.forEach(entry => {
+  const el = document.createElement('div');
+  el.className = 'journal-entry';
+  el.innerHTML = `
+    <div class="journal-entry-header">
+      <div>
+        <h4>${entry.title}</h4>
+        <div class="entry-meta">${entry.meta}</div>
+      </div>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="journal-entry-body">
+      ${entry.body}
+      <a class="journal-link" href="${entry.githubLink}" target="_blank" rel="noopener noreferrer">Read full deep-dive on GitHub &rarr;</a>
+    </div>
+  `;
+  el.querySelector('.journal-entry-header').addEventListener('click', () => {
+    el.classList.toggle('open');
+  });
+  jContainer.appendChild(el);
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CONSTELLATION CANVAS (Hero Background)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+(function() {
+  const canvas = document.getElementById('constellation');
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes = [], mouse = { x: -100, y: -100 };
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function init() {
+    resize();
+    nodes = ALL_PEOPLE.map((p, i) => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: 3 + Math.random() * 3,
+      label: p.name.split(' ').pop(),
+      color: `hsl(${(i * 23) % 360}, 50%, 60%)`
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Connections
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(127,170,255,${0.12 * (1 - dist / 180)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Nodes
+    nodes.forEach(n => {
+      // Mouse attraction
+      const dx = mouse.x - n.x;
+      const dy = mouse.y - n.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 200 && dist > 0) {
+        n.vx += dx / dist * 0.02;
+        n.vy += dy / dist * 0.02;
+      }
+
+      n.x += n.vx;
+      n.y += n.vy;
+      n.vx *= 0.99;
+      n.vy *= 0.99;
+
+      // Bounds
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+      n.x = Math.max(0, Math.min(W, n.x));
+      n.y = Math.max(0, Math.min(H, n.y));
+
+      // Draw
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.fill();
+
+      // Label
+      ctx.font = '10px Georgia';
+      ctx.fillStyle = 'rgba(224,224,232,0.35)';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.x, n.y + n.r + 14);
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  window.addEventListener('resize', resize);
+  init();
+  draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// GLOBAL SEARCH
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const searchInput = document.getElementById('globalSearch');
+let searchTimeout;
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    const q = searchInput.value.toLowerCase().trim();
+    if (!q) {
+      // Show all cards
+      document.querySelectorAll('.profile-card').forEach(c => c.style.display = '');
+      return;
+    }
+
+    // Search across all grids
+    document.querySelectorAll('.profile-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+
+    // Also search action cards, book cards, pattern cards, implement cards
+    document.querySelectorAll('.action-card, .book-card, .pattern-card, .implement-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+
+    // Search journal entries — open matching ones
+    document.querySelectorAll('.journal-entry').forEach(entry => {
+      const text = entry.textContent.toLowerCase();
+      if (text.includes(q)) {
+        entry.style.display = '';
+        entry.classList.add('open');
+      } else {
+        entry.style.display = 'none';
+        entry.classList.remove('open');
+      }
+    });
+  }, 200);
+});
+
+// Keyboard shortcut: / to focus search
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== searchInput) {
+    e.preventDefault();
+    searchInput.focus();
+    searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+</script>
+</body>
+</html>
