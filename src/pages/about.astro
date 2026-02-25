@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 ---
 
 <PageLayout
@@ -130,7 +131,7 @@ import { STATS, PILLARS, QIF_BANDS } from '../lib/qif-constants';
         This is a conversation I cannot have alone. I'm looking for academics, researchers, neuroscientists, and policymakers to refine QIF and establish ethical guidelines for where technology should and shouldn't go. The gaps are the research agenda.
       </p>
       <p>
-        If you work with neural data, BCI design, neuroethics, health policy, or regulatory compliance, <a href="mailto:kevin@qinnovate.com">please reach out</a>.
+        If you work with neural data, BCI design, neuroethics, health policy, or regulatory compliance, <ObfuscatedEmail user="kevin" domain="qinnovate.com" label="please reach out" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors" />.
       </p>
 
       <div class="glass rounded-xl p-6 my-8 not-prose">

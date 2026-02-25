@@ -1,0 +1,638 @@
+{
+  "version": "NSv2.1b-CRB-sensitivity",
+  "tests": {
+    "gamma_sweep": {
+      "gammas": [
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5
+      ],
+      "tier_changes_by_gamma": {
+        "0.1": 4,
+        "0.15": 7,
+        "0.2": 7,
+        "0.25": 7,
+        "0.3": 7,
+        "0.35": 11,
+        "0.4": 14,
+        "0.45": 17,
+        "0.5": 18
+      },
+      "population": "child_adhd_10"
+    },
+    "weight_alternatives": {
+      "schemes": {
+        "equal": {
+          "V_age": 0.25,
+          "V_dx": 0.25,
+          "V_consent": 0.25,
+          "V_depend": 0.25
+        },
+        "consent_heavy": {
+          "V_age": 0.15,
+          "V_dx": 0.2,
+          "V_consent": 0.4,
+          "V_depend": 0.25
+        },
+        "depend_heavy": {
+          "V_age": 0.15,
+          "V_dx": 0.2,
+          "V_consent": 0.25,
+          "V_depend": 0.4
+        },
+        "age_heavy": {
+          "V_age": 0.4,
+          "V_dx": 0.2,
+          "V_consent": 0.25,
+          "V_depend": 0.15
+        }
+      }
+    },
+    "all_devices": [
+      {
+        "device": "Neuralink N1",
+        "type": "invasive",
+        "base": 5.7575,
+        "base_severity": "High",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 5.76,
+            "severity": "High",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 6.77,
+            "severity": "High",
+            "delta": 1.01,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 6.69,
+            "severity": "High",
+            "delta": 0.93,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Neuralink Blindsight",
+        "type": "invasive",
+        "base": 5.7575,
+        "base_severity": "High",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 5.76,
+            "severity": "High",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 6.77,
+            "severity": "High",
+            "delta": 1.01,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 6.69,
+            "severity": "High",
+            "delta": 0.93,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "INBRAIN Graphene Probe",
+        "type": "invasive",
+        "base": 5.4413,
+        "base_severity": "High",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 5.44,
+            "severity": "High",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 6.4,
+            "severity": "High",
+            "delta": 0.96,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 6.32,
+            "severity": "High",
+            "delta": 0.88,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Natus Xltek",
+        "type": "non_invasive",
+        "base": 4.9266,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.93,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 5.79,
+            "severity": "High",
+            "delta": 0.87,
+            "tier_change": true
+          },
+          "adult_als": {
+            "score": 5.72,
+            "severity": "High",
+            "delta": 0.79,
+            "tier_change": true
+          }
+        }
+      },
+      {
+        "device": "Synchron Stentrode",
+        "type": "semi_invasive",
+        "base": 4.8379,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.84,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 5.69,
+            "severity": "High",
+            "delta": 0.85,
+            "tier_change": true
+          },
+          "adult_als": {
+            "score": 5.62,
+            "severity": "High",
+            "delta": 0.78,
+            "tier_change": true
+          }
+        }
+      },
+      {
+        "device": "Blackrock MoveAgain",
+        "type": "invasive",
+        "base": 4.689,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.69,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 5.52,
+            "severity": "High",
+            "delta": 0.83,
+            "tier_change": true
+          },
+          "adult_als": {
+            "score": 5.45,
+            "severity": "High",
+            "delta": 0.76,
+            "tier_change": true
+          }
+        }
+      },
+      {
+        "device": "Blackrock NeuroPort",
+        "type": "invasive",
+        "base": 4.673,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.67,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 5.5,
+            "severity": "High",
+            "delta": 0.82,
+            "tier_change": true
+          },
+          "adult_als": {
+            "score": 5.43,
+            "severity": "High",
+            "delta": 0.75,
+            "tier_change": true
+          }
+        }
+      },
+      {
+        "device": "BrainCo Focus 1",
+        "type": "non_invasive",
+        "base": 4.6316,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.63,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 5.45,
+            "severity": "High",
+            "delta": 0.82,
+            "tier_change": true
+          },
+          "adult_als": {
+            "score": 5.38,
+            "severity": "High",
+            "delta": 0.75,
+            "tier_change": true
+          }
+        }
+      },
+      {
+        "device": "Emotiv EPOC X",
+        "type": "non_invasive",
+        "base": 4.2158,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.22,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.96,
+            "severity": "Medium",
+            "delta": 0.74,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.9,
+            "severity": "Medium",
+            "delta": 0.68,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Paradromics Connexus",
+        "type": "invasive",
+        "base": 4.1932,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.19,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.93,
+            "severity": "Medium",
+            "delta": 0.74,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.87,
+            "severity": "Medium",
+            "delta": 0.68,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Nihon Kohden Neurofax",
+        "type": "non_invasive",
+        "base": 4.1895,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.19,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.93,
+            "severity": "Medium",
+            "delta": 0.74,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.87,
+            "severity": "Medium",
+            "delta": 0.68,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "BrainGate System",
+        "type": "invasive",
+        "base": 4.157,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.16,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.89,
+            "severity": "Medium",
+            "delta": 0.73,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.83,
+            "severity": "Medium",
+            "delta": 0.67,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Precision Layer 7",
+        "type": "invasive",
+        "base": 4.1426,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.14,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.87,
+            "severity": "Medium",
+            "delta": 0.73,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.81,
+            "severity": "Medium",
+            "delta": 0.67,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "g.tec g.Nautilus",
+        "type": "non_invasive",
+        "base": 4.0087,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 4.01,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.72,
+            "severity": "Medium",
+            "delta": 0.71,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.66,
+            "severity": "Medium",
+            "delta": 0.65,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Neurosity Crown",
+        "type": "non_invasive",
+        "base": 3.9687,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 3.97,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.67,
+            "severity": "Medium",
+            "delta": 0.7,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.61,
+            "severity": "Medium",
+            "delta": 0.64,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "OpenBCI Cyton",
+        "type": "non_invasive",
+        "base": 3.9659,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 3.97,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.66,
+            "severity": "Medium",
+            "delta": 0.7,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.61,
+            "severity": "Medium",
+            "delta": 0.64,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Muse 2",
+        "type": "non_invasive",
+        "base": 3.5798,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 3.58,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 4.21,
+            "severity": "Medium",
+            "delta": 0.63,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 4.16,
+            "severity": "Medium",
+            "delta": 0.58,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Cognixion ONE",
+        "type": "non_invasive",
+        "base": 3.3694,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 3.37,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 3.96,
+            "severity": "Medium",
+            "delta": 0.59,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 3.91,
+            "severity": "Medium",
+            "delta": 0.54,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Cortera Surface Array",
+        "type": "invasive",
+        "base": 3.3592,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 3.36,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 3.95,
+            "severity": "Medium",
+            "delta": 0.59,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 3.9,
+            "severity": "Medium",
+            "delta": 0.54,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "Kernel Flow",
+        "type": "non_invasive",
+        "base": 3.2224,
+        "base_severity": "Medium",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 3.22,
+            "severity": "Medium",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 3.79,
+            "severity": "Medium",
+            "delta": 0.57,
+            "tier_change": false
+          },
+          "adult_als": {
+            "score": 3.74,
+            "severity": "Medium",
+            "delta": 0.52,
+            "tier_change": false
+          }
+        }
+      },
+      {
+        "device": "NeuroSky MindWave",
+        "type": "non_invasive",
+        "base": 2.9718,
+        "base_severity": "Low",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 2.97,
+            "severity": "Low",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 3.5,
+            "severity": "Medium",
+            "delta": 0.52,
+            "tier_change": true
+          },
+          "adult_als": {
+            "score": 3.45,
+            "severity": "Medium",
+            "delta": 0.48,
+            "tier_change": true
+          }
+        }
+      },
+      {
+        "device": "Meta Neural Interface",
+        "type": "non_invasive",
+        "base": 2.9718,
+        "base_severity": "Low",
+        "populations": {
+          "neurotypical_adult": {
+            "score": 2.97,
+            "severity": "Low",
+            "delta": 0.0,
+            "tier_change": false
+          },
+          "child_adhd_10": {
+            "score": 3.5,
+            "severity": "Medium",
+            "delta": 0.52,
+            "tier_change": true
+          },
+          "adult_als": {
+            "score": 3.45,
+            "severity": "Medium",
+            "delta": 0.48,
+            "tier_change": true
+          }
+        }
+      }
+    ]
+  },
+  "summary": {
+    "total_pairs": 66,
+    "tier_changes": 14,
+    "tier_change_rate": 0.2121,
+    "critical_breaches": 0
+  }
+}

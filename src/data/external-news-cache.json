@@ -1,12 +1,21 @@
 [
   {
     "type": "external",
-    "title": "China&#8217;s brain-computer interface industry is racing ahead",
-    "date": "2026-02-22",
-    "url": "https://techcrunch.com/2026/02/22/chinas-brain-computer-interface-industry-is-racing-ahead/",
-    "source": "TechCrunch",
-    "summary": "China’s brain-computer interface industry is rapidly scaling from research to commercialization, driven by strong policy support, expanding clinical trials, and growing investor interest.",
+    "title": "Brain-computer interface technology sees broader application, benefiting patients - Dawn",
+    "date": "2026-02-25",
+    "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPUm9VN0xTTTlueDJwanpIem53OTdVUVdmc2lzenkyZW0tUUVTSmNkaG1LWVNzSjczRDZScnJRVXhKWkc4NXNqT29BS3ZpQjQ5aW5vREdDR2YzaHpzOS1MZVNkV2Nib0hfWElyQzhPVUU3bXJqUjlMcHgwclFnRmNSY0dsdkllSmp4VXJaY0ZEWldiY0VwT2FnaGVQdFIwV0tvcnYtSWZtT0xrSldRNVVBZi1GVmPSAU5BVV95cUxNM2hRdW5XbjBCc0VHOUx5MzN3UThrUUE1TjVyalpsamtaVnEwbVJZS2M5eERUckFMMVNaNUpoWWRWQW40ZFRYbWZDbG13R3c?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-computer interface technology sees broader application, benefiting patients&nbsp;&nbsp;Dawn",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Probability-Invariant Random Walk Learning on Gyral Folding-Based Cortical Similarity Networks for Alzheimer's and Lewy Body Dementia Diagnosis",
+    "date": "2026-02-25",
+    "url": "https://arxiv.org/abs/2602.17557",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.17557v2 Announce Type: replace \nAbstract: Alzheimer's disease (AD) and Lewy body dementia (LBD) present overlapping clinical features yet require distinct diagnostic strategies. While neuro",
+    "category": "research"
   },
   {
     "type": "external",
@@ -15,15 +24,6 @@
     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdzI0cVRmWExrYWVqNFJubVNkZC1xN0x5RnZXcEFIcEt4QTNPZzFjOHYxdHJUekNGM3JxNjdpd1Y2SnVpdko5V19NaHFhOEVKV2tnZ19KeFJFdVJsbDBNdE1SMEY2Z2N5dEVqRHRkQzdVQjF1eDAxczdXLWdYNm43emVYam1OendkQ2QtWEJYaHg4dUJ1ZUE?oc=5",
     "source": "Google News — BCI",
     "summary": "China’s brain-computer interface industry is racing ahead&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk’s Neuralink sparks BCI race in China - Teslarati",
-    "date": "2026-02-20",
-    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9DREhGWUZDblhocDE2N0s5Z0lKSmw4cEI5bHVpR210OTBra2NCTEJhSXNINEJrNzRudkJxRzFETlpzNjd3NmhNZmdYcFU3QVo1Vkd3RkhMUVF5YWc1VFYtVQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Elon Musk’s Neuralink sparks BCI race in China&nbsp;&nbsp;Teslarati",
     "category": "neurotechnology"
   },
   {
@@ -82,12 +82,12 @@
   },
   {
     "type": "external",
-    "title": "Elon Musk's Neuralink says it has 21 participants enrolled in trials - Reuters",
+    "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
     "date": "2026-01-28",
-    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQRFFGTTJhUVdWRXlRa3VsaTFvSVpQZktNRkNUSGNKcWl1Ql9JZ2YzODNJNXlvZ19rVnpKa2VqQ0Zyb3BiNWxEbzhrd1gxdi1CZmRxVzhMOHVaT2NTd2toOWIwSlp0cTIwUjVkY280OVRGT1BPdTMyOU9RSkFRcEJxQlEtYjF3ZXJsQ1d0dm5xcjlFWTdMeVUwSkFFVExIa0RVQXFkOXBDU185bmVTLTdiZDFJZkRqQWNf?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk's Neuralink says it has 21 participants enrolled in trials&nbsp;&nbsp;Reuters",
-    "category": "neurotechnology"
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
+    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -100,11 +100,47 @@
   },
   {
     "type": "external",
+    "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
     "date": "2026-01-05",
     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
     "source": "Google News — Neuralink",
     "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says - Fierce Biotech",
+    "date": "2026-01-02",
+    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQYXdTY3MxMnRVV1QtMjBFZFUtNFpHRWV4OHItaFFPRWFwQWl0b2dVNGJjbjVQZDFXYnNWekZjcVU4Sm5YeWFBSjF2dzBoRUpwQVVZckhXZDdRV29vYV9POFFsNjJIQnVQcGVrTkJfTGlPbkJucEpSckwtcElpaEJZZnYzVUE0cndZQ2VwVjluTnRwa0hiXzJBU0F0NlhPUXUzWkNuWG40MnBoUmRkM3JRUVBQSExvcGFvVDlkYXZ2X013dw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says&nbsp;&nbsp;Fierce Biotech",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says - Reuters",
+    "date": "2026-01-01",
+    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
+    "date": "2025-12-11",
+    "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
     "category": "neurotechnology"
   },
   {
@@ -141,15 +177,6 @@
     "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
-    "date": "2025-10-03",
-    "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
     "category": "neuroethics"
   },
   {
