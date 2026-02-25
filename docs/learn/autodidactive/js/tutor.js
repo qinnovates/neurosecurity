@@ -33,7 +33,7 @@ function loadStyle() {
   try {
     const saved = JSON.parse(localStorage.getItem(STYLE_KEY));
     if (saved) Object.assign(styleCounters, saved);
-  } catch {}
+  } catch { }
 }
 
 export function trackStyle(type) {
@@ -161,6 +161,7 @@ async function handleSearch(query) {
         const webResults = await webSearch(query);
         if (webResults) {
           let text = `**From the web** — "${query}":\n\n`;
+          if (prefs.socraticMode) text = `I've looked outside our local records. Before I tell you what I found about "${query}", what does your intuition tell you about it? Here's a glimpse from the web:\n\n`;
           for (const r of webResults.slice(0, 3)) {
             text += `- ${r.text.slice(0, 200)}${r.text.length > 200 ? '...' : ''}`;
             if (r.url) text += ` ([source](${r.url}))`;
@@ -178,6 +179,7 @@ async function handleSearch(query) {
     }
   }
 
+  const prefs = getTutorPrefs();
   const grouped = {};
   for (const r of results) {
     if (!grouped[r.type]) grouped[r.type] = [];
@@ -185,6 +187,11 @@ async function handleSearch(query) {
   }
 
   let text = `Here's what I found for "${query}":\n\n`;
+  if (prefs.socraticMode) {
+    const firstMatch = results[0].source;
+    text = `Interesting that you're asking about "${query}". Based on what I know about ${firstMatch}, what specific aspect are you most curious about? Here are some starting points:\n\n`;
+  }
+
   const actions = [];
 
   for (const [type, items] of Object.entries(grouped)) {
@@ -376,7 +383,7 @@ function handleRecommend(query) {
         if (!viewed.includes(r.id)) related.push(r);
       }
     }
-  } catch {}
+  } catch { }
 
   let text = `**Your learning style:** ${style.style}\n${style.desc}\n\n`;
 
@@ -529,6 +536,7 @@ export function isTier2Available() { return tier2Enabled && webllmEngine !== nul
 const DEFAULT_PREFS = {
   tier2: false,
   tier3: false,
+  socraticMode: false,
   provider: 'ollama',
   ollamaUrl: 'http://localhost:11434',
   ollamaModel: 'llama3.2',
@@ -574,13 +582,18 @@ export async function initTier2() {
 export async function processMessageTier2(query) {
   if (!tier2Enabled || !webllmEngine) return processMessage(query);
 
+  const prefs = getTutorPrefs();
   addMessage('user', query);
 
   // RAG: gather context from search + graph
   const searchResults = search(query, 5);
   const context = searchResults.map(r => `[${r.type}] ${r.source}: ${r.snippet}`).join('\n');
 
-  const systemPrompt = `You are a learning tutor for Autodidactive, an app about historical polymaths, philosophers, and scientists. Answer ONLY from the provided context. If the context doesn't contain the answer, say so. Be concise and conversational. Include the names of figures you reference.`;
+  let systemPrompt = `You are a learning tutor for Autodidactive, an app about historical polymaths, philosophers, and scientists. Answer ONLY from the provided context. If the context doesn't contain the answer, say so. Be concise and conversational. Include the names of figures you reference.`;
+
+  if (prefs.socraticMode) {
+    systemPrompt += ` SOCRATIC MODE ACTIVE: Instead of giving direct answers, ask a thought-provoking question that guides the learner to discover the answer themselves based on the context. If they are completely stuck, provide a small hint.`;
+  }
 
   try {
     const response = await webllmEngine.chat.completions.create({
@@ -604,6 +617,7 @@ export async function processMessageTier2(query) {
     return processMessage(query); // Fallback to Tier 1
   }
 }
+
 
 // ── Tier 3: External LLM (Ollama / OpenAI / Anthropic) ───────────────────────
 
@@ -687,12 +701,17 @@ export async function processMessageTier3(query) {
   const searchResults = search(query, 5);
   const context = searchResults.map(r => `[${r.type}] ${r.source}: ${r.snippet}`).join('\n');
 
-  const systemPrompt = `You are a learning tutor for Autodidactive, an app about historical polymaths, philosophers, and scientists. Answer from the provided context when available. Be concise and conversational. Include the names of figures you reference. If context is empty, answer from your own knowledge but note it's not from the local dataset.`;
+  let systemPrompt = `You are a learning tutor for Autodidactive, an app about historical polymaths, philosophers, and scientists. Answer from the provided context when available. Be concise and conversational. Include the names of figures you reference. If context is empty, answer from your own knowledge but note it's not from the local dataset.`;
+
+  if (prefs.socraticMode) {
+    systemPrompt += ` SOCRATIC MODE ACTIVE: Instead of giving direct answers, ask a thought-provoking question that guides the learner to discover the answer themselves based on the context. If they are completely stuck, provide a small hint. Use the Socratic method to lead them to the truth.`;
+  }
 
   const messages = [
     { role: 'system', content: systemPrompt },
     { role: 'user', content: context ? `Context:\n${context}\n\nQuestion: ${query}` : query }
   ];
+
 
   try {
     const text = await callProvider(messages, prefs);
@@ -735,3 +754,25 @@ export async function testConnection() {
 // ── Init ─────────────────────────────────────────────────────────────────────
 loadChat();
 loadStyle();
+
+export async function processSynthesis(nodeNames) {
+  const prefs = getTutorPrefs();
+  const query = `Find a deep, non-obvious connection or synthesis between these concepts/figures: ${nodeNames}. How do their frameworks overlap or contrast? Be visionary and insightful.`;
+
+  if (prefs.tier2 || (prefs.tier3 && prefs.apiKey)) {
+    const originalSocratic = prefs.socraticMode;
+    prefs.socraticMode = false; // Direct insight for synthesis
+
+    let result;
+    if (prefs.tier2) {
+      result = await processMessageTier2(query);
+    } else {
+      result = await processMessageTier3(query);
+    }
+
+    prefs.socraticMode = originalSocratic;
+    return result;
+  }
+
+  return `**Synthesis Engine (Tier 1)**: Looking at ¹${nodeNames}¹, I see an underlying pattern of intellectual courage. Each of these figures challenged the status quo to reveal deeper truths about existence, logic, or the physical world. Their synthesis lies in the relentless pursuit of first principles.`;
+}

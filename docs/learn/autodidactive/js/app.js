@@ -11,8 +11,8 @@ import { initNoteWall, getNotesForBackground } from './notewall.js';
 import { getRelated, getPathWithEdges, getAllNodes, getAllEdges } from './graph.js';
 import { search, highlightMatch, groupResults } from './search.js';
 import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js';
-import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation } from './canvas.js';
-import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection } from './tutor.js';
+import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext } from './canvas.js';
+import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js';
 
 // ── All People ──────────────────────────────────────────────────────────────
 const ALL_PEOPLE = [
@@ -140,47 +140,39 @@ function getSRData() {
 }
 
 function recordView(personId) {
-  const sr = getSRData();
-  if (!sr[personId]) {
-    sr[personId] = { lastSeen: Date.now(), interval: 1, easeFactor: 2.5, reviews: 0 };
-  } else {
-    sr[personId].lastSeen = Date.now();
-    sr[personId].reviews++;
-  }
-  localStorage.setItem(SR_KEY, JSON.stringify(sr));
+  const views = JSON.parse(localStorage.getItem('autodidactive-views') || '{}');
+  views[personId] = (views[personId] || 0) + 1;
+  localStorage.setItem('autodidactive-views', JSON.stringify(views));
+  recordActivity();
 }
 
-function processRecall(personId, correct) {
+function processRecall(personId, success) {
   const sr = getSRData();
-  const card = sr[personId];
-  if (!card) return;
+  let card = sr[personId] || { interval: 0, reviews: 0, lastReview: 0, nextReview: Date.now() };
 
-  if (correct) {
-    if (card.reviews === 0) card.interval = 1;
-    else if (card.reviews === 1) card.interval = 3;
-    else card.interval = Math.round(card.interval * card.easeFactor);
-    card.easeFactor = Math.max(1.3, card.easeFactor + 0.1);
+  if (success) {
+    card.reviews++;
+    card.interval = Math.max(1, card.interval * 2);
+    if (card.interval === 0) card.interval = 1;
   } else {
     card.interval = 1;
-    card.easeFactor = Math.max(1.3, card.easeFactor - 0.2);
   }
-  card.reviews++;
-  card.lastSeen = Date.now();
-  localStorage.setItem(SR_KEY, JSON.stringify(sr));
+
+  card.lastReview = Date.now();
+  card.nextReview = Date.now() + card.interval * 24 * 60 * 60 * 1000;
+  sr[personId] = card;
+  localStorage.setItem('autodidactive-sr', JSON.stringify(sr));
+  recordActivity();
 }
 
 function getDueRecallCard() {
   const sr = getSRData();
   const now = Date.now();
   const due = Object.entries(sr)
-    .filter(([, card]) => {
-      const dueTime = card.lastSeen + card.interval * 86400000;
-      return now >= dueTime && card.reviews >= 1;
-    })
-    .sort((a, b) => a[1].lastSeen - b[1].lastSeen);
+    .filter(([, data]) => data.nextReview <= now)
+    .sort((a, b) => a[1].nextReview - b[1].nextReview);
 
   if (due.length === 0) return null;
-  const [personId] = due[0];
   return ALL_PEOPLE.find(p => p.id === personId) || null;
 }
 
@@ -197,8 +189,19 @@ function generateRecallQuestion(person) {
   return questions[Math.floor(Math.random() * questions.length)];
 }
 
+// ── Mastery Calculation ─────────────────────────────────────────────────────
+function calculateMastery(personId) {
+  const sr = getSRData();
+  const card = sr[personId];
+  if (!card) return 0;
+  // SM-2 mastery approximation
+  const score = Math.min(100, (card.reviews * 15) + (card.interval * 5));
+  return Math.round(score);
+}
+
 // ── Escape HTML ─────────────────────────────────────────────────────────────
 function esc(str) {
+
   const div = document.createElement('div');
   div.textContent = str || '';
   return div.innerHTML;
@@ -251,7 +254,7 @@ function renderHome() {
             left: ${Math.random() * 80 + 5}%;
             top: ${Math.random() * 70 + 10}%;
             transform: rotate(${(Math.random() * 6 - 3).toFixed(1)}deg);
-            background: ${['#fef3c7','#fce7f3','#d1fae5','#dbeafe','#ede9fe'][n.color || 0]};
+            background: ${['#fef3c7', '#fce7f3', '#d1fae5', '#dbeafe', '#ede9fe'][n.color || 0]};
           ">${esc(n.text).slice(0, 40)}${n.text.length > 40 ? '...' : ''}</div>
         `).join('')}
       </div>
@@ -343,15 +346,38 @@ function renderRecallPrompt() {
   const person = getDueRecallCard();
   if (!person) return '';
   const q = generateRecallQuestion(person);
+  const mastery = calculateMastery(person.id);
+  const isFeynman = localStorage.getItem('autodidactive-feynman') === 'true';
 
   return `
     <div class="recall-card" id="recallCard">
-      <div class="recall-label">Active Recall</div>
+      <div class="recall-header">
+        <div class="recall-label">Active Recall</div>
+        <label class="feynman-toggle" title="Feynman Mode: Write before you reveal">
+          <span>Feynman</span>
+          <input type="checkbox" onchange="localStorage.setItem('autodidactive-feynman', this.checked); window._renderHome()" ${isFeynman ? 'checked' : ''}>
+        </label>
+      </div>
+      <div class="recall-mastery">
+        <div class="mastery-label">Mastery: ${mastery}%</div>
+        <div class="mastery-bar"><div class="mastery-fill" style="width: ${mastery}%"></div></div>
+      </div>
       <p class="recall-question">${esc(q.q)}</p>
+      
+      ${isFeynman ? `
+        <textarea id="feynman-input" class="feynman-input" placeholder="Explain this concept in your own words..."></textarea>
+      ` : ''}
+
       <button class="recall-reveal-btn" onclick="
+        if(${isFeynman} && !document.getElementById('feynman-input').value.trim()) {
+          alert('Try explaining it first!');
+          return;
+        }
         this.style.display='none';
         document.getElementById('recallAnswer').style.display='block';
+        if(document.getElementById('feynman-input')) document.getElementById('feynman-input').disabled = true;
       ">Reveal Answer</button>
+
       <div id="recallAnswer" class="recall-answer" style="display:none;">
         <p>${esc(q.a)}</p>
         <div class="recall-btns">
@@ -363,55 +389,67 @@ function renderRecallPrompt() {
   `;
 }
 
+
 function renderCardGrid() {
   const grid = document.getElementById('cardGrid');
   if (!grid) return;
 
-  const field = FIELDS.find(f => f.id === currentField);
-  if (!field) return;
-
-  if (currentField === 'paths') {
-    grid.innerHTML = currentPath ? renderPathDetail(currentPath) : renderPathList();
+  if (currentField === 'Concepts') {
+    renderConceptIndex(grid);
     return;
   }
 
-  if (currentField === 'calculus') {
-    grid.innerHTML = field.data.map(lab => `
-      <div class="card lab-card" onclick="window._openLab('${lab.id}')">
-        <div class="card-header">
-          <div class="avatar" style="background: ${hashColor(lab.id)}">${lab.emoji}</div>
-          <div class="card-header__info">
-            <h3 class="card-header__name">${esc(lab.name)}</h3>
-            <div class="card-header__tagline">${esc(lab.tagline)}</div>
-          </div>
-        </div>
-        <div class="card-fields">
-          ${lab.topics.map(t => `<span class="field-tag">${esc(t)}</span>`).join('')}
-        </div>
-        <div class="card-difficulty">
-          <span class="difficulty-badge difficulty-${lab.difficulty}">${lab.difficulty}</span>
-        </div>
-      </div>
-    `).join('');
+  if (currentField === 'paths' || currentField === 'Paths') {
+    if (currentPath) {
+      grid.innerHTML = renderPathDetail(currentPath);
+    } else {
+      grid.innerHTML = `<div class="path-list">${renderPathList()}</div>`;
+    }
     return;
   }
 
-  grid.innerHTML = field.data.map(person => `
-    <div class="card" onclick="window._openPerson('${person.id}')" data-person-id="${person.id}">
-      <div class="card-header">
-        <div class="avatar" style="background: ${hashColor(person.id)}">${person.emoji}</div>
-        <div class="card-header__info">
-          <h3 class="card-header__name">${esc(person.name)}</h3>
-          <div class="card-header__dates">${esc(person.years)}</div>
-          <div class="card-header__tagline">${esc(person.tagline)}</div>
+  // Handle standard field filtering OR concept filtering
+  let people = ALL_PEOPLE;
+  if (currentConcept) {
+    const conceptData = getConceptIndex().find(c => c.concept === currentConcept);
+    if (conceptData) {
+      people = ALL_PEOPLE.filter(p => conceptData.ids.includes(p.id));
+    }
+  } else if (currentField !== 'All') {
+    people = ALL_PEOPLE.filter(p =>
+      p.fields.some(f => f.toLowerCase() === currentField.toLowerCase())
+    );
+  }
+
+  const conceptHeader = currentConcept
+    ? `<div class="concept-header"><button class="concept-back-btn" onclick="window._closeConcept()">← Concepts</button> <h2 class="concept-title">${esc(currentConcept)}</h2></div>`
+    : '';
+
+  grid.innerHTML = conceptHeader + people.map(p => renderPersonCard(p)).join('');
+}
+
+function renderConceptIndex(container) {
+  const index = getConceptIndex();
+  container.innerHTML = `
+    <div class="concept-grid">
+      ${index.map(c => `
+        <div class="concept-card" onclick="window._openConcept('${esc(c.concept)}')">
+          <div class="concept-card-title">${esc(c.concept)}</div>
+          <div class="concept-card-count">${c.ids.length} figures</div>
         </div>
-      </div>
-      <div class="card-fields">
-        ${person.fields.map(f => `<span class="field-tag">${esc(f)}</span>`).join('')}
-      </div>
-      ${person.quotes && person.quotes[0] ? `<div class="card-quote">"${esc(person.quotes[0].text).slice(0, 80)}${person.quotes[0].text.length > 80 ? '...' : ''}"</div>` : ''}
+      `).join('')}
     </div>
-  `).join('');
+  `;
+}
+
+function openConcept(concept) {
+  currentConcept = concept;
+  renderCardGrid();
+}
+
+function closeConcept() {
+  currentConcept = null;
+  renderCardGrid();
 }
 
 // ── Person Modal ────────────────────────────────────────────────────────────
@@ -419,17 +457,12 @@ function openPerson(personId) {
   const person = ALL_PEOPLE.find(p => p.id === personId);
   if (!person) return;
 
-  trackView(personId, currentField);
+  trackStyle('cards');
   recordView(personId);
 
   const bookmarked = isBookmarked(personId);
   const overlay = document.getElementById('modal-overlay');
   const body = document.getElementById('modal-body');
-
-  // Find books for this person from INFLUENTIAL_BOOKS
-  const personBooks = person.books && person.books.length > 0
-    ? person.books
-    : INFLUENTIAL_BOOKS.filter(b => b.reader === person.name);
 
   body.innerHTML = `
     <div class="modal-hero">
@@ -442,7 +475,11 @@ function openPerson(personId) {
       <h2 class="modal-name">${esc(person.name)}</h2>
       <div class="modal-years">${esc(person.years)}</div>
       <div class="modal-tagline">${esc(person.tagline)}</div>
+      <div class="modal-mastery">
+        <span class="mastery-icon">🎓</span> Mastery: ${calculateMastery(person.id)}%
+      </div>
     </div>
+
 
     <div class="modal-section section-struggle">
       <h4><span class="section-icon">🔥</span> The Struggle</h4>
@@ -466,18 +503,13 @@ function openPerson(personId) {
 
     <div class="modal-section section-quotes">
       <h4><span class="section-icon">💬</span> Quotes</h4>
-      ${person.quotes.map(q => `
-        <div class="quote-block">
-          <p class="quote-text">"${esc(q.text)}"</p>
-          <span class="quote-attr">- ${esc(q.src)}</span>
-        </div>
-      `).join('')}
+      ${(person.quotes || []).map(q => `<blockquote>${esc(q.text)}</blockquote>`).join('')}
     </div>
 
-    ${personBooks.length > 0 ? `
+    ${person.books && person.books.length > 0 ? `
       <div class="modal-section section-books">
         <h4><span class="section-icon">📖</span> Influential Books</h4>
-        ${personBooks.map(b => `
+        ${person.books.map(b => `
           <div class="book-item">
             <div class="book-title">${esc(b.title)}</div>
             <div class="book-author">by ${esc(b.author)}</div>
@@ -594,6 +626,56 @@ function renderNoteWall() {
 }
 
 // ── AI Settings ──────────────────────────────────────────────────────────────
+function renderLearningDashboard() {
+  const activities = JSON.parse(localStorage.getItem('autodidactive-activity') || '{}');
+  const now = new Date();
+  const days = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().split('T')[0];
+    days.push({ key, count: activities[key] || 0 });
+  }
+
+  const max = Math.max(...days.map(d => d.count), 1);
+  const cellSize = 12;
+  const gap = 3;
+
+  const heatmap = `
+    <svg width="${30 * (cellSize + gap)}" height="${cellSize}" class="heatmap">
+      ${days.map((d, i) => {
+    const opacity = d.count > 0 ? 0.2 + (d.count / max) * 0.8 : 0.05;
+    const color = d.count > 0 ? 'var(--primary)' : 'var(--border-strong)';
+    return `<rect x="${i * (cellSize + gap)}" y="0" width="${cellSize}" height="${cellSize}" rx="2" fill="${color}" fill-opacity="${opacity}" title="${d.key}: ${d.count}"></rect>`;
+  }).join('')}
+    </svg>
+  `;
+
+  const totalActions = Object.values(activities).reduce((a, b) => a + b, 0);
+  const mastered = ALL_PEOPLE.filter(p => calculateMastery(p.id) > 80).length;
+
+  return `
+    <div class="dashboard-card card">
+      <div class="card-header">
+        <h3 class="card-header__name">Learning Ledger</h3>
+      </div>
+      <div class="dashboard-heatmap-container">
+        ${heatmap}
+        <div class="heatmap-legend">Last 30 Days</div>
+      </div>
+      <div class="dashboard-stats">
+        <div class="dashboard-stat">
+          <div class="dashboard-stat-val">${totalActions}</div>
+          <div class="dashboard-stat-label">Total Actions</div>
+        </div>
+        <div class="dashboard-stat">
+          <div class="dashboard-stat-val">${mastered}</div>
+          <div class="dashboard-stat-label">Mastered</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
 function renderAISettings() {
   const prefs = getTutorPrefs();
   const provider = prefs.provider || 'ollama';
@@ -609,6 +691,19 @@ function renderAISettings() {
         </div>
         <label class="toggle">
           <input type="checkbox" id="setting-webSearch" ${prefs.webSearch !== false ? 'checked' : ''}>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="settings-divider"></div>
+
+      <div class="settings-row">
+        <div class="settings-row-info">
+          <div class="settings-row-label">Socratic Mode</div>
+          <div class="settings-row-desc">Tutor will guide you with questions instead of answers</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="setting-socraticMode" ${prefs.socraticMode ? 'checked' : ''}>
           <span class="toggle-slider"></span>
         </label>
       </div>
@@ -672,6 +767,13 @@ function initAISettingsHandlers() {
   if (webSearchEl) {
     webSearchEl.addEventListener('change', () => {
       setTutorPref('webSearch', webSearchEl.checked);
+    });
+  }
+
+  const socraticEl = document.getElementById('setting-socraticMode');
+  if (socraticEl) {
+    socraticEl.addEventListener('change', () => {
+      setTutorPref('socraticMode', socraticEl.checked);
     });
   }
 
@@ -788,9 +890,9 @@ function renderProfile() {
         <h3 class="profile-section-title">Bookmarked</h3>
         <div class="bookmark-list">
           ${stats.bookmarked.map(id => {
-            const p = ALL_PEOPLE.find(pp => pp.id === id);
-            if (!p) return '';
-            return `
+    const p = ALL_PEOPLE.find(pp => pp.id === id);
+    if (!p) return '';
+    return `
               <div class="bookmark-item" onclick="window._openPerson('${p.id}')">
                 <span class="bookmark-emoji">${p.emoji}</span>
                 <div>
@@ -799,7 +901,7 @@ function renderProfile() {
                 </div>
               </div>
             `;
-          }).join('')}
+  }).join('')}
         </div>
       </div>
     ` : ''}
@@ -812,9 +914,9 @@ function renderProfile() {
     <div class="profile-section">
       <h3 class="profile-section-title">Learning Style</h3>
       ${(() => {
-        const style = getLearningStyle();
-        return `<p class="profile-about"><strong>${esc(style.style)}</strong> — ${esc(style.desc)}</p>`;
-      })()}
+      const style = getLearningStyle();
+      return `<p class="profile-about"><strong>${esc(style.style)}</strong> — ${esc(style.desc)}</p>`;
+    })()}
     </div>
 
     <div class="profile-section">
@@ -860,7 +962,7 @@ function handleSearchInput(e) {
       for (const item of items) {
         const onclick = item.type === 'Labs' ? `window._openLab('${item.id}'); window._closeSearch();`
           : item.type === 'People' || item.type === 'Quotes' || item.type === 'Books' ? `window._openPerson('${item.id}'); window._closeSearch();`
-          : `window._closeSearch();`;
+            : `window._closeSearch();`;
         html += `
           <div class="search-result-item" onclick="${onclick}">
             <div class="search-result-source">${esc(item.source)}</div>
@@ -909,9 +1011,11 @@ function openCanvas() {
     initCanvas(document.getElementById('canvas-container'));
     canvasInitialized = true;
   }
+  syncNotes();
   document.getElementById('canvas-tray').innerHTML = renderTray();
   document.getElementById('canvas-controls-container').innerHTML = renderCanvasControls();
 }
+
 
 function closeCanvas() {
   document.getElementById('canvas-view').style.display = 'none';
@@ -983,6 +1087,7 @@ function scrollTutorToBottom() {
 
 // ── Global Handlers ─────────────────────────────────────────────────────────
 window._navigate = navigate;
+window._renderHome = renderHome;
 window._openPerson = (id) => { trackStyle('cards'); openPerson(id); };
 window._openLab = openLab;
 window._toggleBookmark = (id) => {
@@ -1009,9 +1114,14 @@ window._openSearch = openSearch;
 window._closeSearch = closeSearch;
 
 // Paths
-window._openPath = openPath;
-window._showPaths = showPaths;
+window._openPath = (id) => { currentConcept = null; openPath(id); };
+window._showPaths = () => { currentConcept = null; showPaths(); };
 window._markPathStep = (pathId, idx) => { markStepComplete(pathId, idx); trackStyle('paths'); };
+
+// Concepts
+window._openConcept = openConcept;
+window._closeConcept = closeConcept;
+
 
 // Canvas
 window._openCanvas = openCanvas;
@@ -1024,7 +1134,16 @@ window._saveCanvas = () => {
 };
 window._loadCanvas = loadCanvas;
 window._clearCanvas = () => { location.reload(); };
+window._branchOut = (id) => { branchOut(id); if (window._updateCanvasControls) window._updateCanvasControls(); };
+window._updateCanvasControls = () => {
+  const container = document.getElementById('canvas-controls-container');
+  if (container) container.innerHTML = renderCanvasControls();
+};
+window._syncNotesToCanvas = syncNotes;
+window._setLayout = setLayout;
 window._showOnCanvas = showOnCanvas;
+
+
 
 // Tutor
 window._openTutor = openTutor;

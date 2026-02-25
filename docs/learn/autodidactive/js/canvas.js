@@ -1,8 +1,42 @@
-// Concept Canvas — Autodidactive v2
-// Interactive spatial workspace with force-directed layout
-
 import { getAllNodes, getAllEdges, getConnections, getPeopleMap } from './graph.js';
 import { CALCULUS_LABS } from './data/calculus.js';
+import { getNotes } from './notewall.js';
+
+export function syncNotes() {
+  const pinnedNotes = getNotes().filter(n => n.canvasPinned);
+  for (const pn of pinnedNotes) {
+    let node = nodes.find(n => n.id === pn.id);
+    if (!node) {
+      node = {
+        id: pn.id,
+        name: pn.text.slice(0, 15) + (pn.text.length > 15 ? '...' : ''),
+        text: pn.text,
+        emoji: '📝',
+        type: 'note',
+        color: pn.color,
+        x: width / 2 + (Math.random() - 0.5) * 400,
+        y: height / 2 + (Math.random() - 0.5) * 400,
+        vx: 0, vy: 0,
+        active: true
+      };
+      nodes.push(node);
+    } else {
+      node.active = true;
+      node.name = pn.text.slice(0, 15) + (pn.text.length > 15 ? '...' : '');
+      node.text = pn.text;
+    }
+  }
+  // Deactivate notes that are no longer pinned
+  const pinnedIds = new Set(pinnedNotes.map(pn => pn.id));
+  for (const n of nodes) {
+    if (n.type === 'note' && !pinnedIds.has(n.id)) {
+      n.active = false;
+    }
+  }
+  startAnimation();
+}
+
+
 
 const CANVAS_KEY = 'autodidactive-canvases';
 const PEOPLE_MAP = getPeopleMap();
@@ -103,6 +137,27 @@ export function addPathToCanvas(stepIds) {
     }
   }
   startAnimation();
+}
+
+export function branchOut(nodeId) {
+  const related = getRelated(nodeId, 3);
+  for (const r of related) {
+    const node = nodes.find(n => n.id === r.id);
+    if (node && !node.active) {
+      node.active = true;
+      const parent = nodes.find(n => n.id === nodeId);
+      if (parent) {
+        node.x = parent.x + (Math.random() - 0.5) * 100;
+        node.y = parent.y + (Math.random() - 0.5) * 100;
+      }
+    }
+  }
+  startAnimation();
+}
+
+
+export function getActiveContext() {
+  return activeNodes.map(n => n.name).join(', ');
 }
 
 // ── Initialize ───────────────────────────────────────────────────────────────
@@ -257,26 +312,51 @@ function draw() {
   for (const node of activeNodes) {
     const isSelected = selectedNode === node;
 
-    // Circle background
-    ctx.beginPath();
-    ctx.arc(node.x, node.y, NODE_RADIUS, 0, Math.PI * 2);
-    ctx.fillStyle = isSelected ? '#e0f2fe' : '#fff';
-    ctx.fill();
-    ctx.strokeStyle = isSelected ? '#3b82f6' : '#e2e8f0';
-    ctx.lineWidth = isSelected ? 2 : 1;
-    ctx.stroke();
+    if (node.type === 'note') {
+      const colors = ['#fef3c7', '#fce7f3', '#d1fae5', '#dbeafe', '#ede9fe'];
+      const bg = colors[node.color] || colors[0];
 
-    // Emoji
-    ctx.font = `${20}px serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(node.emoji, node.x, node.y - 1);
+      ctx.fillStyle = bg;
+      ctx.shadowColor = 'rgba(0,0,0,0.1)';
+      ctx.shadowBlur = 4;
+      ctx.shadowOffsetY = 2;
+      ctx.fillRect(node.x - 40, node.y - 30, 80, 60);
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
 
-    // Name below
-    ctx.font = `500 ${10}px "Outfit", sans-serif`;
-    ctx.fillStyle = '#0f172a';
-    ctx.textBaseline = 'top';
-    ctx.fillText(node.name.length > 14 ? node.name.slice(0, 12) + '..' : node.name, node.x, node.y + NODE_RADIUS + 4);
+      ctx.strokeStyle = isSelected ? '#3b82f6' : 'rgba(0,0,0,0.1)';
+      ctx.lineWidth = isSelected ? 2 : 1;
+      ctx.strokeRect(node.x - 40, node.y - 30, 80, 60);
+
+      ctx.font = `${9}px "EB Garamond", serif`;
+      ctx.fillStyle = '#1e293b';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const words = node.name.split(' ');
+      ctx.fillText(words.slice(0, 3).join(' '), node.x, node.y - 8);
+      if (words.length > 3) ctx.fillText(words.slice(3, 6).join(' '), node.x, node.y + 8);
+    } else {
+      // Circle background
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, NODE_RADIUS, 0, Math.PI * 2);
+      ctx.fillStyle = isSelected ? '#e0f2fe' : '#fff';
+      ctx.fill();
+      ctx.strokeStyle = isSelected ? '#3b82f6' : '#e2e8f0';
+      ctx.lineWidth = isSelected ? 2 : 1;
+      ctx.stroke();
+
+      // Emoji
+      ctx.font = `${20}px serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(node.emoji, node.x, node.y - 1);
+
+      // Name below
+      ctx.font = `500 ${10}px "Outfit", sans-serif`;
+      ctx.fillStyle = '#0f172a';
+      ctx.textBaseline = 'top';
+      ctx.fillText(node.name.length > 14 ? node.name.slice(0, 12) + '..' : node.name, node.x, node.y + NODE_RADIUS + 4);
+    }
   }
 
   ctx.restore();
@@ -335,8 +415,10 @@ function onMouseDown(e) {
     selectedNode = null;
     lastTouch = { x: e.clientX, y: e.clientY };
   }
+  if (window._updateCanvasControls) window._updateCanvasControls();
   draw();
 }
+
 
 function onMouseMove(e) {
   const rect = canvas.getBoundingClientRect();
@@ -447,39 +529,31 @@ function onDblClick(e) {
 export function setLayout(mode) {
   layoutMode = mode;
   const activeNodes = nodes.filter(n => n.active);
+
   if (mode === 'timeline') {
     // Sort by era year, spread horizontally
-    const sorted = [...activeNodes].sort((a, b) => {
-      const pa = PEOPLE_MAP.get(a.id), pb = PEOPLE_MAP.get(b.id);
-      const ya = pa ? parseYear(pa.years) : 0, yb = pb ? parseYear(pb.years) : 0;
-      return ya - yb;
-    });
-    sorted.forEach((n, i) => {
-      n.x = 80 + (i / Math.max(sorted.length - 1, 1)) * (width - 160);
-      n.y = height / 2 + (Math.random() - 0.5) * 100;
-      n.pinned = true;
-    });
-  } else if (mode === 'cluster') {
-    // Group by primary field
-    const fieldGroups = new Map();
-    for (const n of activeNodes) {
-      const p = PEOPLE_MAP.get(n.id);
-      const field = p && p.fields[0] ? p.fields[0].toLowerCase() : 'other';
-      if (!fieldGroups.has(field)) fieldGroups.set(field, []);
-      fieldGroups.get(field).push(n);
-    }
-    const fields = [...fieldGroups.keys()];
-    fields.forEach((field, fi) => {
-      const angle = (fi / fields.length) * Math.PI * 2;
-      const cx = width / 2 + Math.cos(angle) * width * 0.25;
-      const cy = height / 2 + Math.sin(angle) * height * 0.25;
-      const group = fieldGroups.get(field);
-      group.forEach((n, ni) => {
-        const a2 = (ni / group.length) * Math.PI * 2;
-        n.x = cx + Math.cos(a2) * 60;
-        n.y = cy + Math.sin(a2) * 60;
-        n.pinned = false;
+    const nodesWithYears = activeNodes.map(n => ({
+      node: n,
+      year: parseYear(n.fields.includes('Person') || n.type === 'person' ? PEOPLE_MAP.get(n.id)?.years : '')
+    })).filter(n => n.year !== null);
+
+    if (nodesWithYears.length > 0) {
+      const minYear = Math.min(...nodesWithYears.map(n => n.year));
+      const maxYear = Math.max(...nodesWithYears.map(n => n.year));
+      const span = maxYear - minYear || 100;
+
+      nodesWithYears.forEach(({ node, year }) => {
+        node.x = 80 + ((year - minYear) / span) * (width - 160);
+        node.y = height / 2 + (Math.random() - 0.5) * 100;
+        node.pinned = true; // Pin during timeline mode
       });
+    }
+  } else if (mode === 'circular') {
+    activeNodes.forEach((n, i) => {
+      const angle = (i / activeNodes.length) * Math.PI * 2;
+      n.x = width / 2 + Math.cos(angle) * 200;
+      n.y = height / 2 + Math.sin(angle) * 200;
+      n.pinned = true;
     });
   } else {
     // Freeform — unpin all
@@ -489,12 +563,13 @@ export function setLayout(mode) {
 }
 
 function parseYear(years) {
-  if (!years) return 0;
+  if (!years) return null;
   const bc = years.match(/(\d+)\s*BC/i);
   if (bc) return -parseInt(bc[1], 10);
   const m = years.match(/(\d{3,4})/);
-  return m ? parseInt(m[1], 10) : 0;
+  return m ? parseInt(m[1], 10) : null;
 }
+
 
 // ── Tray render ──────────────────────────────────────────────────────────────
 export function renderTray() {
@@ -512,13 +587,19 @@ export function renderCanvasControls() {
   const saved = Object.keys(getSavedCanvases());
   return `
     <div class="canvas-controls">
-      <div class="canvas-layout-btns">
-        <button class="canvas-layout-btn ${layoutMode === 'freeform' ? 'active' : ''}" onclick="window._setCanvasLayout('freeform')">Free</button>
-        <button class="canvas-layout-btn ${layoutMode === 'timeline' ? 'active' : ''}" onclick="window._setCanvasLayout('timeline')">Timeline</button>
-        <button class="canvas-layout-btn ${layoutMode === 'cluster' ? 'active' : ''}" onclick="window._setCanvasLayout('cluster')">Cluster</button>
+      <div class="canvas-header">
+        <div class="canvas-title">Concept Canvas</div>
+        <div class="canvas-layouts">
+          <button class="layout-btn ${layout === 'free' ? 'active' : ''}" onclick="window._setLayout('free')">Free</button>
+          <button class="layout-btn ${layout === 'circular' ? 'active' : ''}" onclick="window._setLayout('circular')">Circle</button>
+          <button class="layout-btn ${layout === 'timeline' ? 'active' : ''}" onclick="window._setLayout('timeline')">Timeline</button>
+        </div>
       </div>
       <div class="canvas-actions">
+        ${selectedNode ? `<button class="canvas-action-btn btn-branch" onclick="window._branchOut('${selectedNode.id}')">Branch Out</button>` : ''}
+        <button class="canvas-action-btn" onclick="window._synthesize()">Synthesize</button>
         <button class="canvas-action-btn" onclick="window._saveCanvas()">Save</button>
+
         <button class="canvas-action-btn" onclick="window._clearCanvas()">Clear</button>
       </div>
       ${saved.length > 0 ? `
@@ -531,5 +612,6 @@ export function renderCanvasControls() {
     </div>
   `;
 }
+
 
 export { saveCanvas, loadCanvas, deleteCanvas, nodes };
