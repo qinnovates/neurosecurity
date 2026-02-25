@@ -175,7 +175,6 @@ function escHtml(str) {
   return div.innerHTML;
 }
 
-// ── Group results by type ────────────────────────────────────────────────────
 export function groupResults(results) {
   const groups = {};
   for (const r of results) {
@@ -185,6 +184,29 @@ export function groupResults(results) {
   return groups;
 }
 
+export function getConceptIndex() {
+  const index = new Map();
+
+  const add = (concept, personId) => {
+    if (!concept) return;
+    const key = concept.trim();
+    if (!index.has(key)) index.set(key, new Set());
+    index.get(key).add(personId);
+  };
+
+  for (const p of ALL_PEOPLE) {
+    for (const f of p.fields) add(f, p.id);
+    for (const fw of p.frameworks) add(fw, p.id);
+    for (const t of (p.takeaways || [])) add(t.title, p.id);
+  }
+
+  // Convert to sorted array of { concept, peopleIds }
+  return Array.from(index.entries())
+    .map(([concept, ids]) => ({ concept, ids: Array.from(ids) }))
+    .sort((a, b) => b.ids.length - a.ids.length || a.concept.localeCompare(b.concept));
+}
+
 // ── Init ─────────────────────────────────────────────────────────────────────
+
 buildIndex();
 console.log(`[Search] Indexed ${INDEX.length} entries`);
