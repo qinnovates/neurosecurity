@@ -32,7 +32,7 @@ def test_loader_get_technique():
     assert none_t is None
 
 def test_niss_calculator():
-    vector = "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/BI:H/CG:H/CV:V/RV:H/NP:H"
+    vector = "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/BI:H/CR:H/CD:H/CV:V/RV:H/NP:H"
     result = NissCalculator.parse_vector(vector)
     assert result["BI"] == "H"
     assert result["CV"] == "V"

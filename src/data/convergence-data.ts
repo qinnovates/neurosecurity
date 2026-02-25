@@ -131,7 +131,7 @@ export const GOVERNING_BODIES: GoverningBody[] = [
     neurotechEngagement: 'none',
     securityEngagement: 'comprehensive',
     bridgePotential: 'high',
-    gap: 'CVSS has no neural impact metrics. Cannot score biological harm, cognitive integrity loss, or reversibility.',
+    gap: 'CVSS has no neural impact metrics. Cannot score biological harm, cognitive reconnaissance/disruption impact, or reversibility.',
     convergenceAsk: 'Extend CVSS with neural impact metrics using NISS as reference model.',
   },
   {
@@ -389,9 +389,9 @@ export const CONVERGENCE_GAPS: ConvergenceGap[] = [
     id: 'neural-impact-scoring',
     property: 'Neural impact severity scoring',
     existingAnalog: 'CVSS scores vulnerability severity on a 0-10 scale with exploitability and impact metrics.',
-    neuralDifference: 'Cannot express biological harm, cognitive integrity loss, reversibility of neural damage, or neuroplasticity risk. A CVSS 9.8 web exploit and a CVSS 9.8 BCI exploit that causes permanent cognitive deficit are treated identically.',
+    neuralDifference: 'Cannot express biological harm, cognitive reconnaissance (read) or disruption (write) impact, reversibility of neural damage, or neuroplasticity risk. A CVSS 9.8 web exploit and a CVSS 9.8 BCI exploit that causes permanent cognitive deficit are treated identically.',
     coveredBy: ['FIRST/CVSS (partially)'],
-    qifSolution: 'NISS adds 5 neural-specific dimensions: biological impact, cognitive integrity, consent violation, reversibility, and neuroplasticity risk. Every TARA technique is scored on dimensions CVSS cannot express.',
+    qifSolution: 'NISS adds 6 neural-specific dimensions: biological impact, cognitive reconnaissance (read attacks), cognitive disruption (write attacks), consent violation, reversibility, and neuroplasticity risk. Every TARA technique is scored on dimensions CVSS cannot express.',
   },
   {
     id: 'neural-threat-taxonomy',

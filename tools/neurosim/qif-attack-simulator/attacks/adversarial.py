@@ -19,7 +19,7 @@ NOTCH_AWARE_META = AttackMetadata(
     tactic="QIF-N.IJ",
     nic_chain="S1->I0->N1",
     band_ids=["S1", "I0", "N1"],
-    niss_vector="NISS:1.0/BI:M/CG:M/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:M/CR:M/CD:M/CV:I/RV:P/NP:S",
     severity="MEDIUM",
     description="SSVEP at 12Hz, precisely between notch filters (10.9Hz and 15Hz). "
                 "L1 notch bank is blind. Tests adaptive spectral peak detection.",
@@ -51,7 +51,7 @@ THRESHOLD_AWARE_META = AttackMetadata(
     tactic="QIF-B.EV",
     nic_chain="I0->N1->N2->N3->N4",
     band_ids=["I0", "N1", "N2", "N3", "N4"],
-    niss_vector="NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:S",
     severity="HIGH",
     description="Perturbation calibrated to produce z-score of ~1.2 per window "
                 "(below the 1.5 threshold). Each window passes individually but "
@@ -93,7 +93,7 @@ SPECTRAL_MIMICRY_META = AttackMetadata(
     tactic="QIF-N.IJ",
     nic_chain="S1->I0->N1->N4->N7",
     band_ids=["S1", "I0", "N1", "N4", "N7"],
-    niss_vector="NISS:1.0/BI:M/CG:H/CV:I/RV:P/NP:T",
+    niss_vector="NISS:1.1/BI:M/CR:H/CD:H/CV:I/RV:P/NP:T",
     severity="HIGH",
     description="Attack adds broadband noise shaped to match the baseline spectral "
                 "profile. No novel peaks appear. Spectral entropy stays flat. "
@@ -160,7 +160,7 @@ FREQ_HOPPING_META = AttackMetadata(
     tactic="QIF-N.IJ",
     nic_chain="S1->I0->N1",
     band_ids=["S1", "I0", "N1"],
-    niss_vector="NISS:1.0/BI:M/CG:M/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:M/CR:M/CD:M/CV:I/RV:P/NP:S",
     severity="MEDIUM",
     description="SSVEP that switches frequency every 0.5s (one window). "
                 "Designed to evade sustained spectral peak detector (3/4 windows). "
@@ -214,7 +214,7 @@ CUSUM_AWARE_META = AttackMetadata(
     tactic="QIF-N.IJ",
     nic_chain="S1->I0->N1->N4",
     band_ids=["S1", "I0", "N1", "N4"],
-    niss_vector="NISS:1.0/BI:M/CG:H/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:M/CR:H/CD:H/CV:I/RV:P/NP:S",
     severity="HIGH",
     description="Intermittent SSVEP bursts with clean gaps. Each burst is too short "
                 "to trigger sustained peak detection or CUSUM accumulation. "

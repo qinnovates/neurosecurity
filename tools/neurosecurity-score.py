@@ -3,8 +3,17 @@
 Neurosecurity Score v2.1 Calculator
 Computes NSv2.1 for all devices in the QIF BCI landscape.
 
+Relationship to NISS:
+  NISS (Neural Impact Scoring System) is the technique-level CVSS v4.0 extension
+  that scores individual BCI threat techniques across five neural-specific metrics.
+  NSv2.1 is the validated risk framework that consumes NISS scores as input and
+  aggregates them across five neurorights dimensions with feasibility gating and
+  population context adjustment.
+  NISS is the scoring metric. NSv2.1 is the validated risk framework.
+
 Formula: CES geometric BNS → ISO 31000 Risk → OWA per-right → Geometric overall
 Per OECD/JRC Composite Indicator methodology, Yager (1988) OWA, ISO 31000.
+Validated against FDA device classifications (22 BCI systems) with Monte Carlo UQ.
 """
 
 import json

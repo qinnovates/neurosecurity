@@ -95,7 +95,7 @@ class NissCalculator:
     """Utility to parse and evaluate NISS vectors."""
     @staticmethod
     def parse_vector(vector: str) -> dict:
-        # Vector format: NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T
+        # Vector format: NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T
         parts = vector.split('/')
         result = {}
         for part in parts:

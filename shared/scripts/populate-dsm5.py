@@ -168,7 +168,8 @@ BAND_CLUSTER_WEIGHTS = {
 # NISS metric abbreviation values (from niss_spec)
 NISS_HIGH_VALUES = {
     "BI": {"H", "C"},          # High or Critical
-    "CG": {"H", "C"},
+    "CR": {"H", "C"},          # Cognitive Reconnaissance (read attacks)
+    "CD": {"H", "C"},          # Cognitive Disruption (write attacks)
     "CV": {"E", "I"},          # Elevated or Involuntary
     "RV": {"P", "I"},          # Partial or Irreversible (poorly reversible)
     "NP": {"S"},               # Structural (lasting change)
@@ -176,7 +177,7 @@ NISS_HIGH_VALUES = {
 
 
 def parse_niss_vector(vector_str: str) -> dict:
-    """Parse 'NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T' → {'BI': 'H', 'CG': 'H', ...}"""
+    """Parse 'NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T' → {'BI': 'H', 'CR': 'H', ...}"""
     parts = vector_str.split("/")
     result = {}
     for part in parts[1:]:  # skip version prefix
@@ -190,22 +191,26 @@ def compute_niss_cluster_bonus(niss_vector: dict) -> dict:
     """Apply NISS-driven bonuses to cluster scores.
 
     NISS-DSM Bridge:
-      BI (Biological Impact)  → motor_neurocognitive  (tissue/structural damage)
-      CG (Cognitive Integrity) → cognitive_psychotic   (cognitive disruption)
-      CV (Consent Violation)   → mood_trauma           (autonomy violation → trauma/mood)
-      RV (Reversibility)       → persistent_personality (poor reversibility → chronicity)
-      NP (Neuroplasticity)     → persistent_personality (lasting neural change)
+      BI (Biological Impact)       → motor_neurocognitive  (tissue/structural damage)
+      CR (Cognitive Reconnaissance) → cognitive_psychotic   (read-side: unauthorized data extraction)
+      CD (Cognitive Disruption)     → cognitive_psychotic   (write-side: unauthorized state modification)
+      CV (Consent Violation)        → mood_trauma           (autonomy violation → trauma/mood)
+      RV (Reversibility)            → persistent_personality (poor reversibility → chronicity)
+      NP (Neuroplasticity)          → persistent_personality (lasting neural change)
     """
     bonus = defaultdict(int)
     bi = niss_vector.get("BI", "N")
-    cg = niss_vector.get("CG", "N")
+    cr = niss_vector.get("CR", "N")
+    cd = niss_vector.get("CD", "N")
     cv = niss_vector.get("CV", "N")
     rv = niss_vector.get("RV", "F")
     np_ = niss_vector.get("NP", "N")
 
     if bi in NISS_HIGH_VALUES["BI"]:
         bonus["motor_neurocognitive"] += 2
-    if cg in NISS_HIGH_VALUES["CG"]:
+    if cr in NISS_HIGH_VALUES["CR"]:
+        bonus["cognitive_psychotic"] += 2
+    if cd in NISS_HIGH_VALUES["CD"]:
         bonus["cognitive_psychotic"] += 2
     if cv in NISS_HIGH_VALUES["CV"]:
         bonus["mood_trauma"] += 1  # Mild signal (CV is near-universal for attacks)
@@ -271,7 +276,7 @@ def build_niss_correlation(cluster: str, niss: dict) -> str:
         return ""
 
     high_metrics = []
-    for metric in ["BI", "CG", "CV", "RV", "NP"]:
+    for metric in ["BI", "CR", "CD", "CV", "RV", "NP"]:
         val = vector.get(metric, "N")
         high_vals = NISS_HIGH_VALUES.get(metric, set())
         if val in high_vals:
@@ -383,7 +388,8 @@ DSM5_SPEC = {
     },
     "niss_dsm_bridge": {
         "BI": {"risk_domain": "Structural/Tissue damage", "primary_clusters": ["motor_neurocognitive"], "dsm_chapters": ["Motor (F82/F95)", "Neurocognitive (F01-G31)"]},
-        "CG": {"risk_domain": "Cognitive function disruption", "primary_clusters": ["cognitive_psychotic"], "dsm_chapters": ["Neurodevelopmental (F70-F98)", "Schizophrenia Spectrum (F20-F29)"]},
+        "CR": {"risk_domain": "Cognitive reconnaissance (read-side)", "primary_clusters": ["cognitive_psychotic"], "dsm_chapters": ["Neurodevelopmental (F70-F98)", "Schizophrenia Spectrum (F20-F29)"]},
+        "CD": {"risk_domain": "Cognitive disruption (write-side)", "primary_clusters": ["cognitive_psychotic"], "dsm_chapters": ["Neurodevelopmental (F70-F98)", "Schizophrenia Spectrum (F20-F29)"]},
         "CV": {"risk_domain": "Consent/autonomy violation", "primary_clusters": ["mood_trauma"], "dsm_chapters": ["Depressive (F32-F34)", "Anxiety (F40-F41)", "Trauma/PTSD (F43)", "Dissociative (F44)"]},
         "RV": {"risk_domain": "Chronicity modifier", "primary_clusters": ["persistent_personality"], "dsm_chapters": ["Distinguishes acute (F43.2) vs persistent (F34.1) presentations"]},
         "NP": {"risk_domain": "Lasting neural change", "primary_clusters": ["persistent_personality"], "dsm_chapters": ["Personality (F60-F69)", "Neurodegenerative (G30-G31)"]},
@@ -392,13 +398,13 @@ DSM5_SPEC = {
         "cognitive_psychotic": {
             "label": "Cognitive/Psychotic",
             "color": "#f59e0b",
-            "niss_drivers": ["CG", "BI"],
+            "niss_drivers": ["CR", "CD", "BI"],
             "dsm_chapters": ["Schizophrenia Spectrum (F20-F29)", "Neurodevelopmental (F70-F98)", "Neurocognitive (F01-G31)"],
         },
         "mood_trauma": {
             "label": "Mood/Trauma",
             "color": "#eab308",
-            "niss_drivers": ["CV", "CG"],
+            "niss_drivers": ["CV", "CR", "CD"],
             "dsm_chapters": ["Depressive (F32-F34)", "Anxiety (F40-F41)", "Trauma/PTSD (F43)", "Dissociative (F44)", "OCD (F42)"],
         },
         "motor_neurocognitive": {

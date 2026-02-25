@@ -16,7 +16,7 @@ CASCADE_META = AttackMetadata(
     tactic="QIF-M.SV",
     nic_chain="S2->I0->N5->N6->N7",
     band_ids=["S2", "I0", "N5", "N6", "N7"],
-    niss_vector="NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
     severity="CRITICAL",
     description="Exponentially growing perturbation in closed-loop BCI feedback. "
                 "Starts invisible (0.001V), doubles every 1.5s. Early windows look clean. "
