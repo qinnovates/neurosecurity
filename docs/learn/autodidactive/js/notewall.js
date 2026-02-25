@@ -3,9 +3,9 @@
 const STORAGE_KEY = 'autodidactive-notes';
 const NOTE_COLORS = [
   { name: 'yellow', bg: '#fef3c7', border: '#f59e0b' },
-  { name: 'pink',   bg: '#fce7f3', border: '#ec4899' },
-  { name: 'green',  bg: '#d1fae5', border: '#10b981' },
-  { name: 'blue',   bg: '#dbeafe', border: '#3b82f6' },
+  { name: 'pink', bg: '#fce7f3', border: '#ec4899' },
+  { name: 'green', bg: '#d1fae5', border: '#10b981' },
+  { name: 'blue', bg: '#dbeafe', border: '#3b82f6' },
   { name: 'purple', bg: '#ede9fe', border: '#8b5cf6' }
 ];
 
@@ -45,14 +45,15 @@ function createNoteData(x, y, text = '', colorIdx = 0) {
     rotation: randomRotation(),
     author: '',
     timestamp: Date.now(),
-    pinned: false
+    pinned: false,
+    canvasPinned: false
   };
 }
 
 function renderNote(note) {
   const color = NOTE_COLORS[note.color] || NOTE_COLORS[0];
   const el = document.createElement('div');
-  el.className = 'post-it' + (note.pinned ? ' pinned' : '');
+  el.className = 'post-it' + (note.pinned ? ' pinned' : '') + (note.canvasPinned ? ' canvas-pinned' : '');
   el.dataset.noteId = note.id;
   el.style.cssText = `
     left: ${note.x}px;
@@ -72,10 +73,12 @@ function renderNote(note) {
       ${note.author ? `<span class="post-it-author">${escapeHtml(note.author)}</span>` : ''}
     </div>
     <div class="post-it-actions">
+      <button class="post-it-canvas-pin" title="Pin to Canvas">${note.canvasPinned ? '🖼️' : '◻️'}</button>
       <button class="post-it-pin" title="${note.pinned ? 'Unpin' : 'Pin'}">${note.pinned ? '📌' : '📍'}</button>
       <button class="post-it-delete" title="Delete">✕</button>
     </div>
   `;
+
 
   // Drag handling
   const startDrag = (startX, startY) => {
@@ -103,8 +106,21 @@ function renderNote(note) {
     startDrag(touch.clientX, touch.clientY);
   }, { passive: true });
 
+  // Pin to Canvas
+  el.querySelector('.post-it-canvas-pin').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const n = notes.find(n => n.id === note.id);
+    if (n) {
+      n.canvasPinned = !n.canvasPinned;
+      saveNotes();
+      renderWall();
+      if (window._syncNotesToCanvas) window._syncNotesToCanvas();
+    }
+  });
+
   // Pin
   el.querySelector('.post-it-pin').addEventListener('click', (e) => {
+
     e.stopPropagation();
     const n = notes.find(n => n.id === note.id);
     if (n) {

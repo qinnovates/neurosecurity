@@ -26,7 +26,18 @@ function saveProgress(data) {
   localStorage.setItem(PATHS_KEY, JSON.stringify(data));
 }
 
+function getMastery(personId) {
+  try {
+    const raw = localStorage.getItem('autodidactive-sr');
+    const sr = raw ? JSON.parse(raw) : {};
+    const card = sr[personId];
+    if (!card) return 0;
+    return Math.round(Math.min(100, (card.reviews * 15) + (card.interval * 5)));
+  } catch { return 0; }
+}
+
 export function markStepComplete(pathId, stepIndex) {
+
   const progress = getProgress();
   if (!progress[pathId]) progress[pathId] = { completed: [] };
   if (!progress[pathId].completed.includes(stepIndex)) {
@@ -157,9 +168,11 @@ export function renderPathDetail(pathId) {
                 <div class="path-step-name">${esc(entity.name)}</div>
                 ${person ? `<div class="path-step-years">${esc(person.years)}</div>` : ''}
                 ${isLabStep ? '<div class="path-step-badge">Interactive Lab</div>' : ''}
+                ${!isLabStep && isDone ? `<div class="path-step-mastery ${getMastery(step.personId) > 50 ? 'mastery-high' : ''}">🎓 ${getMastery(step.personId)}% Mastery</div>` : ''}
               </div>
             </div>
           </div>
+
           <div class="path-step-connector">${esc(step.connector)}</div>
         </div>
       </div>
