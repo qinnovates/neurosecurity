@@ -214,9 +214,10 @@ Brain Structures: Primary visual cortex (V1), extrastriate cortex (V2-V5),
 Cognitive Functions: Visual processing, attention allocation,
                      object recognition, reading
     ↓
-NISS Vector: BI:L / CG:H / CV:I / RV:P / NP:T
+NISS Vector: BI:L / CR:H / CD:H / CV:I / RV:P / NP:T
   - BI:L → Low biological impact (unless seizure)
-  - CG:H → High cognitive disruption (false commands, attention hijack)
+  - CR:H → High cognitive reconnaissance (thought decoding, neural data inference)
+  - CD:H → High cognitive disruption (false commands, attention hijack)
   - CV:I → Involuntary (user cannot perceive or consent to stimulus)
   - RV:P → Partially reversible (stop stimulus, effect stops; but trust is broken)
   - NP:T → Transient neuroplastic impact (short exposures)
@@ -243,7 +244,7 @@ When both techniques are chained (T0040 sensory priming + T0103 frequency hijack
 Chain Entry: QIF-T0040 (Adversarial sensory stimulus)
   → Suppresses alpha/beta (8-30 Hz) power across motor cortex
   → Motor imagery BCI accuracy drops (demonstrated: p=0.0003)
-  → NISS: CG:H, CV:I → Cognitive/Psychotic cluster
+  → NISS: CR:H/CD:H, CV:I → Cognitive/Psychotic cluster
     ↓
 Chain Amplifier: Stress response from BCI failure
   → Cortisol elevation → further alpha suppression
@@ -253,10 +254,10 @@ Chain Amplifier: Stress response from BCI failure
 Chain Payload: QIF-T0103 (SSVEP frequency hijack)
   → False command injection via imperceptible flicker
   → User experiences involuntary BCI actions
-  → NISS: CG:H, CV:I → Cognitive/Psychotic cluster
+  → NISS: CR:H/CD:H, CV:I → Cognitive/Psychotic cluster
     ↓
 Chain Effect (cumulative):
-  → Combined NISS: BI:L / CG:C / CV:I / RV:P / NP:L
+  → Combined NISS: BI:L / CR:C / CD:C / CV:I / RV:P / NP:L
   → Score escalates from 6.1 to ~7.8 (critical threshold)
   → DSM mapping expands:
     - F44 Conversion Disorder → confidence escalates to "established"

@@ -1169,7 +1169,7 @@ The term "Hardened Mapping" distinguishes typical documentation-only compliance 
 | **PINS Flag = True** | **NIST SI-4 (Information System Monitoring)** | Real-time neural telemetry stream via TAL | **CRITICAL** |
 | **Biological Impact (BI) >= H** | **NIST AC-3 (Access Control)** | TAL, Neural Firewall: Deny/Permit by band | **MANDATORY** |
 | **Mental Privacy (MP) >= H** | **NIST SC-28 (Protection of Info at Rest)** | TAL, Anonymizer: Differential privacy logs | **MANDATORY** |
-| **Cognitive Integrity (CG) >= H** | **NIST SI-7 (Software/Firmware Integrity)** | Cryptographically signed neural stimulation staves | **MANDATORY** |
+| **Cognitive Disruption (CD) >= H** | **NIST SI-7 (Software/Firmware Integrity)** | Cryptographically signed neural stimulation staves | **MANDATORY** |
 | **Consent Violation (CV) = Implicit**| **ISO/IEC 27001 A.18.1.1 (Compliance)** | Formal audit log of real-time consent handshake | **MANDATORY** |
 | **NISS Score >= 7.0 (High)** | **ISO/IEC 27001 A.12.4.1 (Logging)** | Comprehensive system/neural audit log (TAL) retention | **MANDATORY** |
 

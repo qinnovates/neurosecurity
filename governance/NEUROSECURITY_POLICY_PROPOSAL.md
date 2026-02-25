@@ -214,7 +214,7 @@ Each property below is unique to neural interfaces. For each: what it is, why ex
 
 **Feasibility evidence:** Crypto agility (algorithm substitution without re-keying) can allow cryptographic upgrades via software update for many scenarios, reducing the need for surgical intervention for cryptographic maintenance. Forward secrecy and long-lifecycle key management can minimize the window where surgical updates are necessary. Vulnerability severity scoring for implanted devices should incorporate surgical update costs as a distinct factor. These engineering principles are well-established in other embedded systems; their application to neural implants requires collaboration between security engineers and neurosurgeons.
 
-### 2.7 Cognitive Integrity as Measurable Security Property
+### 2.7 Cognitive Security as Measurable Security Property
 
 **What it is:** The ability to define, measure, test, and audit "cognitive integrity" as a formal security property, comparable to how confidentiality, integrity, and availability are measurable in IT security.
 
@@ -407,7 +407,8 @@ CVSS is a consensus-driven standard maintained by hundreds of organizations. Pro
 | NISS Dimension | What It Scores | Why CVSS Cannot Express It |
 |----------------|---------------|---------------------------|
 | Biological Impact (BI) | Physical harm to neural tissue | CVSS has no "tissue damage" metric |
-| Cognitive Integrity (CG) | Alteration of subjective experience | CVSS "Integrity" means data integrity, not cognitive integrity |
+| Cognitive Reconnaissance (CR) | Unauthorized neural data read access (thought decoding, inference) | CVSS "Integrity" means data integrity, not cognitive security |
+| Cognitive Disruption (CD) | Unauthorized neural state modification (perception manipulation) | CVSS has no cognitive write-access metric |
 | Consent Violation (CV) | Whether the attack bypasses user consent | CVSS has no consent dimension |
 | Reversibility (RV) | Whether damage can be undone | CVSS assumes software remediation, not biological recovery |
 | Neuroplasticity (NP) | Long-term neural adaptation risk | No equivalent in any scoring system |

@@ -31,9 +31,9 @@ categories, severity levels, and gap groups.
 \textbf{Technique} & \textbf{Description} & \textbf{CVSS} & \textbf{NISS} \\
 \midrule
 QIF-T0001 & Cortical signal injection via rogue electrode & 9.3 (Crit) & 8.7 (High) \\
-QIF-T0015 & P300 side-channel private data extraction     & 7.7 (High) & 2.7 (Low) \\
-QIF-T0034 & BCI calibration data poisoning                & 8.2 (High) & 5.7 (Med) \\
-QIF-T0050 & Covert neural signal decoding for surveillance & 7.1 (High) & 4.0 (Med) \\
+QIF-T0015 & P300 side-channel private data extraction     & 7.7 (High) & 3.3 (Low) \\
+QIF-T0034 & BCI calibration data poisoning                & 8.2 (High) & 5.8 (Med) \\
+QIF-T0050 & Covert neural signal decoding for surveillance & 7.1 (High) & 5.0 (Med) \\
 QIF-T0072 & Ultrasonic bone-conduction side-channel        & 5.3 (Med)  & 2.7 (Low) \\
 \bottomrule
 \end{tabularx}
@@ -56,11 +56,12 @@ occurs without the patient's knowledge), or irreversibility (neural tissue damag
 may be permanent).
 
 \paragraph{NISS extension.}
-\texttt{NISS:1.0/BI:C/CG:H/CV:I/RV:P/NP:S} --- Score: 8.7 (High), PINS
+\texttt{NISS:1.1/BI:C/CR:H/CD:H/CV:I/RV:P/NP:S} --- Score: 8.7 (High), PINS
 flagged. The NISS vector captures that this technique causes critical biological
-impact (BI:C), high cognitive integrity violation (CG:H), covert consent
-violation (CV:I), partially irreversible damage (RV:P), and structural
-neuroplastic changes (NP:S). The PINS flag triggers mandatory safety review.
+impact (BI:C), high cognitive reconnaissance (CR:H) and high cognitive
+disruption (CD:H), covert consent violation (CV:I), partially irreversible
+damage (RV:P), and structural neuroplastic changes (NP:S). The PINS flag
+triggers mandatory safety review.
 
 \paragraph{NIC diagnostic mapping.}
 Via the Neural Impact Chain: N7/N6 bands $\to$ motor cortex, hippocampus $\to$
@@ -77,16 +78,18 @@ The extracted data is not files or credentials---it is private cognitive
 responses. The P300 ERP component reveals whether the subject recognizes a
 stimulus, enabling extraction of PINs, personal preferences, and identity
 information~\cite{martinovic2012feasibility}. CVSS treats this as a
-confidentiality breach; the actual impact is a cognitive integrity violation.
+confidentiality breach; the actual impact is cognitive reconnaissance---covert
+extraction of private mental content.
 
 \paragraph{NISS extension.}
-\texttt{NISS:1.0/BI:N/CG:H/CV:E/RV:F/NP:N} --- Score: 2.7 (Low). No
-biological impact (BI:N = 0), high cognitive integrity violation (CG:H = 6.7),
-explicit consent violation (CV:E = 6.7), fully reversible (RV:F = 0), no
-neuroplastic effect (NP:N = 0). The arithmetic mean is
-$(0 + 6.7 + 6.7 + 0 + 0)/5 = 2.7$. The NISS score is significantly lower than
-CVSS because no physical harm occurs and the attack is fully reversible---but
-the CG:H flag alerts BCI-specific teams that private cognitive data is at risk.
+\texttt{NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N} --- Score: 3.3 (Low). No
+biological impact (BI:N = 0), high cognitive reconnaissance (CR:H = 6.7) and
+high cognitive disruption (CD:H = 6.7), explicit consent violation
+(CV:E = 6.7), fully reversible (RV:F = 0), no neuroplastic effect (NP:N = 0).
+The arithmetic mean is $(0 + 6.7 + 6.7 + 6.7 + 0 + 0)/6 = 3.3$. The NISS
+score is significantly lower than CVSS because no physical harm occurs and the
+attack is fully reversible---but the CR:H flag alerts BCI-specific teams that
+private cognitive data is at risk.
 
 \subsection{Case 3: Calibration Poisoning (QIF-T0034)}
 
@@ -101,12 +104,13 @@ the brain to adapt to the corrupted interface, creating lasting neural pathway
 changes even after the poisoning is discovered and corrected.
 
 \paragraph{NISS extension.}
-\texttt{NISS:1.0/BI:L/CG:H/CV:I/RV:T/NP:T} --- Score: 5.7 (Medium). Low
-biological impact (BI:L = 3.3), high cognitive integrity violation (CG:H = 6.7,
-the device misinterprets intent), covert consent violation (CV:I = 10.0, the
-patient doesn't know calibration was corrupted), temporary reversibility
-(RV:T = 3.3), and temporary neuroplastic changes (NP:T = 5.0). The arithmetic
-mean is $(3.3 + 6.7 + 10.0 + 3.3 + 5.0)/5 = 5.7$.
+\texttt{NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:T/NP:T} --- Score: 5.8 (Medium). Low
+biological impact (BI:L = 3.3), high cognitive reconnaissance (CR:H = 6.7) and
+high cognitive disruption (CD:H = 6.7, the device misinterprets intent), covert
+consent violation (CV:I = 10.0, the patient doesn't know calibration was
+corrupted), temporary reversibility (RV:T = 3.3), and temporary neuroplastic
+changes (NP:T = 5.0). The arithmetic mean is
+$(3.3 + 6.7 + 6.7 + 10.0 + 3.3 + 5.0)/6 = 5.8$.
 
 \subsection{Case 4: Covert Neural Surveillance (QIF-T0050)}
 
@@ -120,13 +124,15 @@ the patient's thoughts, emotional states, and cognitive patterns. The consent
 violation is maximal: the patient cannot detect or refuse the surveillance.
 
 \paragraph{NISS extension.}
-\texttt{NISS:1.0/BI:N/CG:C/CV:I/RV:F/NP:N} --- Score: 4.0 (Medium). No
-biological impact (BI:N = 0), critical cognitive integrity violation (CG:C =
-10.0, full thought decoding), covert consent violation (CV:I = 10.0), fully
-reversible (RV:F = 0), no neuroplastic effect (NP:N = 0). The arithmetic mean
-is $(0 + 10.0 + 10.0 + 0 + 0)/5 = 4.0$. Despite the low aggregate score, the
-CG:C and CV:I flags distinguish this from ordinary data exfiltration---these
-maximum-severity cognitive and consent violations demand BCI-specific review.
+\texttt{NISS:1.1/BI:N/CR:C/CD:C/CV:I/RV:F/NP:N} --- Score: 5.0 (Medium). No
+biological impact (BI:N = 0), critical cognitive reconnaissance (CR:C = 10.0,
+full thought decoding) and critical cognitive disruption (CD:C = 10.0), covert
+consent violation (CV:I = 10.0), fully reversible (RV:F = 0), no neuroplastic
+effect (NP:N = 0). The arithmetic mean is
+$(0 + 10.0 + 10.0 + 10.0 + 0 + 0)/6 = 5.0$. Despite the moderate aggregate
+score, the CR:C, CD:C, and CV:I flags distinguish this from ordinary data
+exfiltration---these maximum-severity cognitive and consent violations demand
+BCI-specific review.
 
 \subsection{Case 5: Real-World Vulnerability Disclosure}
 

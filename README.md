@@ -137,7 +137,7 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 
 | Neuroright | What It Protects | Enforced By |
 |------------|-----------------|-------------|
-| **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CG metric (scores cognitive compromise severity) |
+| **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CR/CD metrics (score cognitive read/write compromise severity) |
 | **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 109 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
 | **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
 | **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
@@ -215,7 +215,8 @@ The scoring extension. First CVSS v4.0 extension designed for neural interfaces.
 | Metric | Code | What It Measures |
 |--------|------|-----------------|
 | Biological Impact | BI | Tissue damage, neural pathway disruption |
-| Cognitive Integrity | CG | Memory, attention, executive function compromise |
+| Cognitive Reconnaissance | CR | Thought decoding, neural data inference, intent extraction |
+| Cognitive Disruption | CD | Perception manipulation, identity modification, cognitive coercion |
 | Consent Violation | CV | Whether the subject knew and agreed |
 | Reversibility | RV | Can the damage be undone? |
 | Neuroplasticity | NP | Long-term adaptive/maladaptive neural changes |

@@ -133,7 +133,7 @@ I0 (electrode saturation)
   -> N7 (cortical flooding, seizure risk)
 ```
 
-**NISS Vector:** BI:H / CG:H / CV:E / RV:P / NP:T (score 6.4, medium)
+**NISS Vector:** BI:H / CR:H / CD:H / CV:E / RV:P / NP:T (score 6.4, medium)
 
 **Detection mechanism:** The flood attacks across ALL frequencies simultaneously, so no single SSVEP target frequency is elevated. The signature detector is blind. But the coherence monitor detects two things:
 1. **Phase coherence collapse (sigma_phi^2):** The alpha rhythm's instantaneous phase becomes erratic as the broadband noise overwhelms the structured oscillation.

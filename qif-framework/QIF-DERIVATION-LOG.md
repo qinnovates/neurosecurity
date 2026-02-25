@@ -12,9 +12,10 @@
 
 ## Entry Index
 
-### Late February (Entries 66-79) — Neurorights, Physics Boundaries, Market Analysis
+### Late February (Entries 66-80) — Neurorights, Physics Boundaries, Market Analysis
 | Entry | Topic | Link |
 |-------|-------|------|
+| 80 | NISS v1.1: CG split into CR + CD | [Entry 80](#entry-80-niss-v11-cg-split) |
 | 79 | Ferritin magnetoreceptor correction (claim retracted) | [Entry 79](#entry-79-ferritin-correction) |
 | 78 | Determinism gradient and free-will decomposition | [Entry 78](#entry-78-determinism-gradient) |
 | 77 | Thesis statement | [Entry 77](#entry-77-thesis-statement) |
@@ -317,6 +318,48 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 80: NISS v1.1 — CG Split into CR (Cognitive Reconnaissance) + CD (Cognitive Disruption) {#entry-80-niss-v11-cg-split}
+
+**Date:** 2026-02-25, ~14:40
+**Classification:** VERIFIED
+**AI Systems:** Claude Opus 4.6, Gemini (cross-validation)
+**Connected entries:** Entry 5 (original NISS derivation), Entry 6 (NSv2 cross-AI review)
+
+### Decision
+
+Split the single CG (Cognitive Integrity) NISS metric into two distinct metrics:
+
+- **CR (Cognitive Reconnaissance)** — read-side attacks: thought decoding, neural data inference, intent extraction
+- **CD (Cognitive Disruption)** — write-side attacks: perception manipulation, identity modification, cognitive coercion
+
+### Rationale
+
+CG conflated two fundamentally different attack types under one score. A technique that *reads* neural data (eavesdropping, P300 interrogation) and one that *writes* to neural state (perception injection, identity erosion) are categorically different threats with different mitigations, different clinical outcomes, and different neurorights implications. The read/write distinction mirrors the confidentiality/integrity split in traditional security scoring.
+
+### Migration Details
+
+- **Formula:** NISS = (BI + CG + CV + RV + NP) / 5 → NISS = (BI + CR + CD + CV + RV + NP) / 6
+- **Default migration strategy:** CG value assigned to both CR and CD (conservative). Per-technique differentiation deferred to manual review.
+- **109 techniques migrated.** All vectors updated from NISS:1.0 to NISS:1.1 format.
+- **5 legacy codes normalized:** BI:M→L (4 techniques), CV:D→P (2 techniques), CG:M→L (1 technique).
+- **Score changes:** All 109 scores recalculated. 3 tier changes: T0036 (Thought decoding) low→medium, T0054 (Memory extraction) low→medium, T0103 (SSVEP Frequency Hijack) high→medium.
+- **Context profiles updated:** Clinical (CR:1.0, CD:2.0), Research (CR:2.0, CD:1.5), Consumer (CR:2.0, CD:1.0), Military (CR:2.0, CD:2.0).
+- **DSM-5 bridge updated:** CG mapping split — both CR and CD map to cognitive_psychotic cluster.
+- **Files touched:** 40+ files across registrar JSON, TypeScript source, LaTeX paper, governance docs, Python tools, blog posts.
+
+### What This Does NOT Change
+
+- The overall NISS architecture (still a CVSS v4.0 extension)
+- PINS flag logic (still BI >= H OR RV == I)
+- Severity thresholds (still 0-3.9/4.0-6.9/7.0-8.9/9.0-10.0)
+- The 109 technique catalog (no techniques added or removed)
+
+### Human Decision
+
+Kevin confirmed the CR+CD split after Gemini CLI cross-validation. Equal weights maintained (maximum-entropy prior, consistent with NSv2.1b validation from Entry 8).
 
 ---
 
@@ -2324,7 +2367,7 @@ Systematic fact-check of 12 neuroscience claims in `jhu-bci-ecosystem-mapping.md
 
 2. **BBB = DLP (Data Loss Prevention): DIRECTION REVERSED.** The BBB primarily filters ingress (blood-to-brain), not egress. Calling it "DLP" (which prevents data from leaving) reverses the primary function. The BBB is an ingress filter. BCI wireless creates an egress channel the brain never evolved to defend against.
 
-3. **NISS "4 dimensions" with wrong metric names:** Listed "Reversibility, Autonomy Impact, Vital Function Risk, Cognitive Impact" but the canonical NISS has 5 metrics: BI, CG, CV, RV, NP. Corrected to match published definition.
+3. **NISS "4 dimensions" with wrong metric names:** Listed "Reversibility, Autonomy Impact, Vital Function Risk, Cognitive Impact" but the canonical NISS has 6 metrics: BI, CR, CD, CV, RV, NP. Corrected to match published definition.
 
 ### Analogies Flagged as Overstated
 
@@ -2741,12 +2784,13 @@ Each NISS metric predicts a different diagnostic risk domain:
 | NISS Metric | What It Measures | Predicted DSM Cluster |
 |-------------|------------------|-----------------------|
 | BI (Biological Impact) | Tissue/structural damage | Motor/Neurocognitive |
-| CG (Cognitive Integrity) | Cognitive function disruption | Cognitive/Psychotic |
+| CR (Cognitive Reconnaissance) | Thought decoding, neural data inference (read attacks) | Cognitive/Psychotic |
+| CD (Cognitive Disruption) | Perception manipulation, identity modification (write attacks) | Cognitive/Psychotic |
 | CV (Consent Violation) | Autonomy violation | Mood/Trauma |
 | RV (Reversibility) | Recovery potential | Chronicity modifier |
 | NP (Neuroplasticity) | Lasting neural change | Persistent/Personality |
 
-This bridge is what makes NISS scores **clinically interpretable**. A technique with CV:E (Elevated) and CG:H (High) maps to the mood/trauma and cognitive/psychotic clusters — meaning depression, PTSD, and psychotic features are the primary diagnostic risks.
+This bridge is what makes NISS scores **clinically interpretable**. A technique with CV:E (Elevated) and CR:H/CD:H (High) maps to the mood/trauma and cognitive/psychotic clusters — meaning depression, PTSD, and psychotic features are the primary diagnostic risks.
 
 ### The Band-to-DSM Lookup Table
 
@@ -4081,13 +4125,13 @@ CVSS is owned by FIRST.org and licensed under **CC-BY-SA** (Creative Commons Att
 | Dimension | CVSS | NISS |
 |-----------|------|------|
 | **Weighting** | Equal exploit vs impact | 70% human impact, 30% exploitability |
-| **BCI metrics** | None -- no Biological Impact, Cognitive Integrity, Reversibility, Consent, Neuroplasticity | All five built in as first-class Impact metrics |
+| **BCI metrics** | None -- no Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Reversibility, Consent, Neuroplasticity | All six built in as first-class Impact metrics |
 | **Extension constraints** | Cannot modify base metrics/formulas | Full control over all metrics and formulas |
 | **Licensing** | CC-BY-SA (viral -- derivatives must use same license) | QIF's choice of license |
 | **Positioning** | QIF would be "a CVSS extension" -- derivative | QIF is the authority -- original IP |
 | **Prior art** | Acknowledgment sufficient (nominative fair use) | Whitepaper section 6.5.1 "Why Not CVSS" provides comparative analysis |
 
-The fundamental problem with CVSS for BCI: it treats all vulnerabilities through the lens of system availability and data confidentiality. A BCI attack that causes seizures, implants false memories, or violates cognitive sovereignty doesn't map to CVSS Availability/Integrity/Confidentiality. NISS's 70% Impact weighting with BCI-native dimensions (Biological Impact, Cognitive Integrity, Reversibility, Consent Violation, Neuroplasticity) captures what actually matters when the target is a human brain.
+The fundamental problem with CVSS for BCI: it treats all vulnerabilities through the lens of system availability and data confidentiality. A BCI attack that causes seizures, implants false memories, or violates cognitive sovereignty doesn't map to CVSS Availability/Integrity/Confidentiality. NISS's 70% Impact weighting with BCI-native dimensions (Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Reversibility, Consent Violation, Neuroplasticity) captures what actually matters when the target is a human brain.
 
 ### 4. Legal Position
 

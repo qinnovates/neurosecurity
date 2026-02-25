@@ -26,7 +26,7 @@ Every technique in the [TARA registry](https://qinnovate.com/TARA) now has a `ne
 
 1. **UI category** provides the primary signal — signal injection violates Mental Integrity + Cognitive Liberty; exfiltration violates Mental Privacy; persona attacks violate Mental Integrity.
 2. **DSM-5-TR cluster** adds overlays — persistent_personality techniques always get Psychological Continuity; cognitive/psychotic clusters add Mental Integrity.
-3. **NISS vector components** refine the mapping — high brain impact (BI:H) maps to Mental Integrity; high cognitive impact (CG:H) maps to Cognitive Liberty + Mental Integrity.
+3. **NISS vector components** refine the mapping — high brain impact (BI:H) maps to Mental Integrity; high cognitive reconnaissance (CR:H) maps to Mental Privacy + Cognitive Liberty; high cognitive disruption (CD:H) maps to Mental Integrity + Cognitive Liberty.
 4. **Cross-modal data fusion** triggers data-lifecycle protections under Mental Privacy (extended).
 5. **Signal dynamics disruption** triggers dynamical integrity protections under Mental Integrity (extended).
 
@@ -161,6 +161,6 @@ All 102 technique mappings are in the [TARA registry](https://qinnovate.com/TARA
 
 **Neurorights taxonomy:** Ienca & Andorno (2017) — MP, CL, MI, PC. QIF Framework — MI (extended with signal dynamics + write-protection, mapped to CIA Integrity), MP (extended with data lifecycle, mapped to CIA Confidentiality).
 
-**NISS:** Neural Impact Scoring System v1.0. Vector format: `NISS:1.0/BI:_/CG:_/CV:_/RV:_/NP:_`. See the [whitepaper](https://doi.org/10.5281/zenodo.18640105) for methodology.
+**NISS:** Neural Impact Scoring System v1.1. Vector format: `NISS:1.1/BI:_/CR:_/CD:_/CV:_/RV:_/NP:_`. See the [whitepaper](https://doi.org/10.5281/zenodo.18640105) for methodology.
 
 *Cross-AI validated: Claude Opus 4.6 (analysis, implementation) + Gemini 2.5 Pro (validation, additional correlations). Human decision: Kevin Qi.*

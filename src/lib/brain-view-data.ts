@@ -74,14 +74,15 @@ const CATEGORY_LABELS: Record<string, string> = {
   DM: 'Data Manipulation',
   DS: 'Denial of Service',
   PE: 'Privilege Escalation',
-  CI: 'Cognitive Integrity',
+  CR: 'Cognitive Reconnaissance',
+  CD: 'Cognitive Disruption',
   PS: 'Physical Safety',
   EX: 'Data Exfiltration',
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
   SI: '#ef4444', SE: '#f59e0b', DM: '#eab308', DS: '#94a3b8',
-  PE: '#a855f7', CI: '#8b5cf6', PS: '#ec4899', EX: '#06b6d4',
+  PE: '#a855f7', CR: '#8b5cf6', CD: '#a855f7', PS: '#ec4899', EX: '#06b6d4',
 };
 
 // ═══ View builders ═══

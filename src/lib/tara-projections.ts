@@ -637,7 +637,7 @@ const diagnosticProjection: ProjectionConfig = {
     title: 'Diagnostic projection (DSM-5-TR)',
     body: `<div><strong class="text-[var(--color-text-primary)]">Diagnostic cluster colors</strong> \u2014 Which psychiatric domain a technique's neural impact maps to, via the Neural Impact Chain (NIC): Technique \u2192 Band \u2192 Structure \u2192 Function \u2192 NISS + DSM.</div>
 <div style="margin-left:0.5rem;">
-<span style="color:${DIAGNOSTIC_CLUSTER_COLORS.cognitive_psychotic.text};font-weight:600;">Cognitive/Psychotic</span> = affects perception, cognition (CG-driven).<br/>
+<span style="color:${DIAGNOSTIC_CLUSTER_COLORS.cognitive_psychotic.text};font-weight:600;">Cognitive/Psychotic</span> = affects perception, cognition (CR/CD-driven).<br/>
 <span style="color:${DIAGNOSTIC_CLUSTER_COLORS.mood_trauma.text};font-weight:600;">Mood/Trauma</span> = affects emotion, consent, autonomy (CV-driven).<br/>
 <span style="color:${DIAGNOSTIC_CLUSTER_COLORS.motor_neurocognitive.text};font-weight:600;">Motor/Neurocognitive</span> = affects movement, tissue (BI-driven).<br/>
 <span style="color:${DIAGNOSTIC_CLUSTER_COLORS.persistent_personality.text};font-weight:600;">Persistent/Personality</span> = lasting neural change (NP/RV-driven).<br/>
