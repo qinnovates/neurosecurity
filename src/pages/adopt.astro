@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 import { THREAT_VECTORS } from '../lib/threat-data';
 const totalTechniques = THREAT_VECTORS.length;
 import '../styles/global.css';
@@ -448,7 +449,7 @@ const participationTiers = [
           </div>
 
           <p class="text-sm text-[var(--color-text-faint)]">
-            Or email directly: <a href="mailto:advisory@qinnovate.com" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">advisory@qinnovate.com</a>
+            Or email directly: <ObfuscatedEmail user="advisory" domain="qinnovate.com" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors" />
           </p>
         </div>
 
@@ -569,7 +570,8 @@ const participationTiers = [
           const body = encodeURIComponent(
             `Name: ${payload.name}\nEmail: ${payload.email}\nOrganization: ${payload.organization}\nInterest: ${payload.interest}\n\n${payload.message}`
           );
-          window.location.href = `mailto:advisory@qinnovate.com?subject=${subject}&body=${body}`;
+          const _u = 'advisory', _d = 'qinnovate.com';
+          window.location.href = 'mai' + 'lto:' + _u + String.fromCharCode(64) + _d + '?subject=' + subject + '&body=' + body;
           success?.classList.remove('hidden');
           return;
         }

@@ -6,94 +6,70 @@
 > **Started:** 2026-02-02
 > **Purpose:** Document every insight, derivation step, and conceptual breakthrough as it happens — with timestamps, reasoning chains, and context — so that future readers (peer reviewers, collaborators, or Kevin himself) can trace exactly how and why each decision was made.
 >
-> **How to read this document:** Entries are in reverse-chronological order (newest first). Each entry captures a moment of discovery or derivation. The writing is intentionally verbose — this is a thinking document, not a summary. Read it like a lab notebook crossed with a research diary. The goal is reproducibility of thought: anyone reading this should be able to follow the same reasoning chain and arrive at the same conclusions (or challenge them with better reasoning).
->
-> **For academics:** Every claim is traceable to either established physics, empirical data, or clearly labeled novel hypothesis. Where we speculate, we say so. Where we're certain, we cite why.
->
-> **For non-academics:** We explain every concept as we introduce it. If a term appears without explanation, that's a bug — file it.
+> **How to read this document:** Entries are in reverse-chronological order (newest first). Each entry captures a discovery or derivation. Read it like a lab notebook. Every claim is traceable to established physics, empirical data, or clearly labeled hypothesis.
 
 ---
 
-## Project Timeline (Latest → Earliest)
+## Entry Index
 
-> **Complete reverse-chronological history of ONI → QIF.** Updated with every new entry.
-> Jump to any section via the table of contents.
+### Late February (Entries 66-79) — Neurorights, Physics Boundaries, Market Analysis
+| Entry | Topic | Link |
+|-------|-------|------|
+| 79 | Ferritin magnetoreceptor correction (claim retracted) | [Entry 79](#entry-79-ferritin-correction) |
+| 78 | Determinism gradient and free-will decomposition | [Entry 78](#entry-78-determinism-gradient) |
+| 77 | Thesis statement | [Entry 77](#entry-77-thesis-statement) |
+| 76 | Calculus boundary — where continuous math fails | [Entry 76](#entry-76-calculus-boundary) |
+| 75 | Common denominator across disciplines | [Entry 75](#entry-75-common-denominator) |
+| 74 | Attack primitive decomposition from physics | [Entry 74](#entry-74-attack-primitive-decomposition) |
+| 73 | Market trajectory analysis — 5 economic frameworks | [Entry 73](#entry-73-market-trajectory-analysis) |
+| 71 | CVE-to-TARA mapping + hourglass coverage gap | [Entry 71](#entry-71-cve-tara-mapping-hourglass-coverage-gap) |
+| 70 | Wearable neural firewall design | [Entry 70](#entry-70-wearable-neural-firewall) |
+| 69 | NIST/ISO hardened compliance mapping | [Entry 69](#entry-69-nist-iso-hardened-mapping) |
+| 68 | Cognitive Authenticity folded into Mental Integrity | [Entry 68](#entry-68-ca-folded-into-mi) |
+| 67 | T0103 detection methods + governance gaps | [Entry 67](#entry-67-detection-methods-governance-gaps) |
+| 66 | SSVEP frequency hijack discovery | [Entry 66](#entry-66-ssvep-frequency-hijack-discovery) |
 
-### Table of Contents (by date)
+### Mid February (Entries 50-65) — TARA, DSM-5, BCI Limits, NSP Implementation
+| Entry | Topic | Link |
+|-------|-------|------|
+| 65 | Physics feasibility tiering (102 techniques) | [Entry 65](#entry-65-physics-feasibility-tiering) |
+| 64 | BCI limits equation blog published | [Entry 64](#entry-64-bci-limits-blog-published) |
+| 63 | BCI limits equation strategic assessment | [Entry 63](#entry-63-bci-limits-strategic-assessment) |
+| 62 | Track everything + unified dashboard | [Entry 62](#entry-62-track-everything-unified-dashboard) |
+| 61 | Format change — raw conversational mode | [Entry 61](#entry-61-format-change-raw-conversational) |
+| 60 | BCI limits equation synthesis | [Entry 60](#entry-60-bci-limits-equation-synthesis) |
+| 59 | I0 depth subclassification + hallucination audit | [Entry 59](#entry-59-i0-depth-thalamus-firewall-guardrails) |
+| 58 | Neurorights cross-validation | [Entry 58](#entry-58-neurorights-cross-validation) |
+| 57 | Neurorights restructured 7 to 5 | [Entry 57](#entry-57-neurorights-restructuring-7-to-5) |
+| 56 | Runemate Forge + NSP integration | [Entry 56](#entry-56-runemate-forge--nsp-integration) |
+| 55 | NSP core + handshake (Rust, ML-KEM) | [Entry 55](#entry-55-nsp-core--handshake-implementation) |
+| 54 | TARA interactive visualization + dual-use toggle | [Entry 54](#entry-54-tara-interactive-visualization--dual-use-toggle) |
+| 53 | TARA-to-DSM-5-TR diagnostic mapping | [Entry 53](#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain) |
+| 52 | Three floors + QIF integration | [Entry 52](#entry-52-three-floors--energy-time-security-bounds-applied-to-qif) |
+| 51 | Classical-quantum transition equation | [Entry 51](#entry-51-pet-to-deltaedelta-t-computational-scaling-the-classical-quantum-transition-equation) |
+| 50 | TARA reframed as dual-use mechanism atlas | [Entry 50](#entry-50-tara--therapeutic-atlas-of-risks-and-applications) |
 
-| 2026-02-24 | **Neurorights Quantification Reframe.** Kevin identifies that QIF is viewed too much from security perspective. The neurorights/neuroethics perspective should lead. Research confirms: no published framework quantifies the 5 neurorights (Bublitz 2022 criticizes them as too abstract, Neurorights Foundation still "developing metrics"). QIF already has the cross-domain mappings (NISS + CCI + TARA + DSM-5 + physics) that nobody else has assembled. Separate derivation log initiated: `NEURORIGHTS-DERIVATION-LOG.md`. | [Neurorights Log](./NEURORIGHTS-DERIVATION-LOG.md) |
-| 2026-02-21 | **Ferritin Magnetoreceptor Correction.** Kevin fact-checks the ferritin attack vector claim from Entry 78 via ChatGPT. Verdict: endogenous ferritin's superparamagnetic properties are real but magnetic susceptibility is too small for external fields at safe exposure limits to activate neurons. Engineered ferritin constructs (magnetogenetics) are different from endogenous tissue. "Biologically plausible" ≠ "attack surface." Claim retracted. Cross-validated via Gemini CLI. | [Entry 79](#entry-79-ferritin-correction) |
-| 2026-02-21 | **The Determinism Gradient, Free-Will Decomposition, and the 6th Neuroright.** Kevin observes the hourglass IS a determinism gradient (deterministic S-bands -> chaotic N4-N5 -> quantum uncertain N6-N7). Proposes free-will as stochastic decomposition into 4 neurorights (input, state, trajectory, observation of a dynamical system). Senses a 6th neuroright but defers due to cognitive bias risk. Traces molecular chain: ions -> channels -> neurotransmitters -> ferritin -> behavior. Fact-checked: chaos is deterministic-but-unpredictable, quantum is ontic randomness. Von Neumann entropy applies to quantum systems (corrects 3B1B-derived intuition). | [Entry 78](#entry-78-determinism-gradient) |
-| 2026-02-21 | **Thesis Statement.** "Like all things that matter, we are deeply entangled. It is rooted in laws that define the universe we exist. From silicon to synapse, and security to ethics. Life's most important connections deserve the most thought." Full circle from Entry 74 (attack primitives) through Entry 76 (calculus boundary) to this distillation. | [Entry 77](#entry-77-thesis-statement) |
-| 2026-02-21 | **The Calculus Boundary: Why QI Was Always the Right Name.** Kevin traces the root from ethics down to molecules, lands on ions, then calculus. Realizes calculus breaks at ion channel scale (~0.1nm) where quantum mechanics takes over. The "indeterminacy" in QI IS the mathematical phase transition where continuous math fails. Cs works in the calculus regime (primitives 3-6). Quantum terms reach into the sub-calculus regime (primitives 1-2). Kevin: "WOOOOOAHHHH.... MY KRYPTONITE" | [Entry 76](#entry-76-calculus-boundary) |
-| 2026-02-21 | **Common Denominator Across Disciplines.** Kevin asks what the root is across psychology, ethics, science, security, neuroscience, cognitive neuroscience. Answer: information processing in biological substrate. Five disciplines, one system. Validated through TARA 6-primitive mapping. Without neuroethics, security has no mandate. Without security, neuroethics has no mechanism. | [Entry 75](#entry-75-common-denominator) |
-| 2026-02-21 | **Derivation: Attack Primitive Decomposition from Physics First Principles.** Kevin's live derivation asking "what makes an implant an implant?" and decomposing all BCI attacks to their smallest physics primitives. Two candidate attack primitives identified: signals (silicon/synthetic vs organic/neural) and code (application layer, where brain physics breaks down because unlike OSI we don't fully comprehend the neural "application layer"). Connection to QI equation's original purpose (quantum indeterminacy at the boundary). Charts and layer mapping needed. | [Entry 74](#entry-74-attack-primitive-decomposition) |
-| 2026-02-21 | **Market Trajectory Analysis: Five Economic Frameworks for BCI Security.** Applied institutional capital indexes (PitchBook-NVCA, Cambridge Associates, Preqin), cross-sector capital flow analysis, security spending lag model (3-7yr pattern across internet/cloud/IoT/automotive), technology adoption S-curve (Rogers/Moore), and Elliott Wave theory to position BCI in its pre-inflection window. Derived neurosecurity TAM of $150M-1B+ by 2034 via three independent approaches (healthcare IT benchmark, automotive cybersecurity analog, bottom-up segmentation). Distinguished consumer indexes (Billy Bookcase, Big Mac, XLY) from institutional indexes for proper audience framing. | [Entry 73](#entry-73-market-trajectory-analysis) |
-| 2026-02-21 | **CVE-to-TARA Mapping + Hourglass Coverage Gap Metric.** First systematic mapping of 55 NVD-verified CVEs to 21 of 109 TARA technique IDs. Derived the Hourglass Coverage Gap Metric (HCGM) using DSM-5 clinical mappings, physics feasibility tiers, and band topology. Three key findings: 81% Clinical Blind Spot (feasible+dangerous attacks untracked), 20%→0% Band-Depth Gradient (CVEs cover digital stack, nothing neural), 94% Chokepoint Exposure (I0 nearly unvalidated). Literature review confirms no prior work maps BCI attack taxonomies to CVEs. | [Entry 71](#entry-71-cve-tara-mapping-hourglass-coverage-gap) |
-| 2026-02-21 | **Wearable Neural Firewall (Smart Glasses / AlterEgo).** Design of the first-generation neural firewall for non-intrusive wearables. Integration of NSP v0.5 (PQ-secure transport), Runemate (on-chip Staves v2 execution), and Delta+LZ4 neural compression. Amortized PQ signatures via Merkle root aggregation to fit 40mW thermal budgets. | [Entry 70](#entry-70-wearable-neural-firewall) |
-| 2026-02-21 | **NIST/ISO Hardened Compliance Mapping.** Introduction of the "Hardened Mapping" bridge to link neurorights (MI, MP, CL, PC) to auditable technical evidence (NIST SP 800-53 / ISO 27001). Implemented in `qtara-registrar.json`. | [Entry 69](#entry-69-nist-iso-hardened-mapping) |
-| 2026-02-20 | **Cognitive Authenticity (CA) Folded into Mental Integrity (MI).** CA was not a genuinely novel right. Ienca & Andorno (2017) MI already covers "protection from unauthorized alteration of neural function," which subsumes write-attacks. CA removed from all source files. | [Entry 68](#entry-68-ca-folded-into-mi) |
-| 2026-02-18 | **T0103 Detection Methods + Ethical Neurosecurity Governance Gaps.** Added detection section to T0103 blog. | [Entry 67](#entry-67-detection-methods-governance-gaps) |
-| 2026-02-18 | **SSVEP Frequency Hijack Discovery + BCI Limits Equation Validation.** Subliminal visual attacks on BCIs: monitors flickering above CFF (~60Hz) evoke SSVEP responses invisible to users. Ming et al. 2023 proved 60Hz imperceptible flickers produce classifiable brain responses (52.8 bits/min). TARA coverage confirmed solid (T0040, T0010, T0009 already mapped). New technique QIF-T0103 added for dedicated SSVEP frequency hijack. BCI limits equation cross-validated by Gemini (12 constraints confirmed). Guardrails doc corrected: physics = boundary not control. Governance risk tagged for hardware vs software charge protection. | [Entry 66](#entry-66-ssvep-frequency-hijack-discovery) |
-| 2026-02-18 | **Physics Feasibility Tiering of TARA Techniques.** All 102 techniques classified by physics hardware gate: 61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only. Highest-impact future attacks identified. | [Entry 65](#entry-65-physics-feasibility-tiering) |
-| 2026-02-18 | **BCI Limits Equation Blog Post Published.** Blog post at `/publications/2026-02-18-the-physics-equation-that-limits-every-brain-computer-interface`. Priority timestamp established. | [Entry 64](#entry-64-bci-limits-blog-published) |
-| 2026-02-18 | **BCI Limits Equation — Strategic Assessment.** Kevin asks whether the BCI limits equation (Entry 60) is worth pursuing. Analysis: yes, but as standalone paper, not folded into QIF preprint. Genuinely novel, physics-grounded, testable. | [Entry 63](#entry-63-bci-limits-strategic-assessment) |
-| 2026-02-18 | **Track Everything + Unified Dashboard Vision.** All exchanges logged to derivation log by default. Single-stream record, open source. Exceptions: PII or explicit "incognito." | [Entry 62](#entry-62-track-everything-unified-dashboard) |
-| 2026-02-18 | **Format Change — Raw Conversational Mode.** Standing policy: Kevin's words stay completely unedited in all derivation log entries. Typos, grammar, structure preserved exactly as stated. | [Entry 61](#entry-61-format-change-raw-conversational) |
-| 2026-02-18 | **BCI Limits Equation Synthesis — Live Session.** Verbatim back-and-forth deriving the unified physics-constraint system for BCI hardware limits. Couples thermodynamics + EM + Moore's Law + Shannon safety + Boltzmann factor + QIF coherence metric. Gap confirmed: no published unified framework exists. Extends Marblestone et al. (2013). | [Entry 60](#entry-60-bci-limits-equation-synthesis) |
-| 2026-02-18 | I0 Depth Subclassification + Thalamic Gating as Security Analog + 27 Cybersecurity-to-Neural Guardrails Mapped. I0 split into 4 subtypes by implant depth (cortical/subcortical/spinal/noninvasive). Thalamic TRN = default-deny gating. CELLS/NAM explicitly call for tools QIF provides. | [Entry 59](#entry-59-i0-depth-thalamus-firewall-guardrails) |
-| 2026-02-18 | **Hallucination Audit and Biology-First Reframing.** Fact-checked 12 neuroscience claims. 3 errors corrected (amygdala 12ms fabricated, BBB direction reversed, NISS dimensions wrong). Decision: reject IT-first analogy framework, adopt biology-first framing. | [Entry 59](#entry-59-hallucination-audit) |
-| 2026-02-18 | **Neurorights Cross-Validation Against Established Frameworks.** QIF's 5 rights cross-referenced against Yuste, I&A, Chile, Tasioulas, OECD, IEEE. Confirmed CA (Cognitive Authenticity) as genuinely novel QIF contribution. | [Entry 58](#entry-58-neurorights-cross-validation) |
-| 2026-02-18 | Neurorights Restructured 7→5: DI folded into MI, IDA folded into MP, CA kept as genuinely novel. Literature review against 6 frameworks confirmed I&A's 4 rights are well-chosen. QIF contribution: 1 original right + engineering depth on 2 existing. | [Entry 57](#entry-57-neurorights-restructuring-7-to-5) |
-| 2026-02-14 | Runemate Forge & NSP Integration: End-to-end secure neural pipeline verified. HTML-to-Staves compilation + Post-Quantum encryption (ML-KEM/ML-DSA) + real-time decryption demo. | [Entry 56](#entry-56-runemate-forge--nsp-integration) |
-| 2026-02-14 | NSP Core & Handshake Implementation: Rust implementation of ML-KEM-768 and ML-DSA-65. 4-step secure handshake protocol establishing 256-bit AES-GCM session. | [Entry 55](#entry-55-nsp-core--handshake-implementation) |
-| 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle: Interactive 3D Hourglass as "Connected System". "Attacker vs. Doctor" perspective toggle. TARA reframed as mechanism registry with dual-use states. | [Entry 54](#entry-54-tara-interactive-visualization--dual-use-toggle) |
-| 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping via Neural Impact Chain: First formal BCI threat-to-psychiatric-diagnosis taxonomy. NISS-DSM Bridge. 5 diagnostic clusters. Modality projection (merged Security+Engineering). | [Entry 53](#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain) |
-| 2026-02-13 | Three Floors + QIF Integration: Landauer, Margolus-Levitin, ΔEΔt applied to QI equation, whitepaper, and code | [Entry 52](#entry-52-three-floors--energy-time-security-bounds-applied-to-qif) |
-| 2026-02-13 | P=E/t → ΔEΔt → Computational Scaling: Classical-Quantum Transition Equation | [Entry 51](#entry-51-pet-to-deltaedelta-t-computational-scaling-the-classical-quantum-transition-equation) |
-| 2026-02-09 | TARA (Therapeutic Atlas of Risks and Applications): Registry reframed from threat catalog to dual-use mechanism atlas. Mechanism-first Rosetta Stone architecture. Therapeutics leads, risks replaces exploits. Buddhist/Sanskrit resonance (Tara = star, bodhisattva of compassion). Schema v4.0: mechanism + therapeutic + diagnostic + governance projections. Gemini 8/10. | [Entry 50](#entry-50-tara--therapeutic-atlas-of-risks-and-applications) |
-| 2026-02-09 | Dual-Use Gap Analysis: 18 silicon/network-layer techniques have no therapeutic analog today; 10 ambiguous (digital vector, tissue payload); 5 speculative mappings. Framework principle: tissue-touching techniques map now, system-level techniques may map as neuroscience matures. Three bridging hypotheses proposed. | [Entry 49](#entry-49-dual-use-gap-analysis--what-does-not-map-and-what-might) |
-| 2026-02-09 | Baseline-Free Security + Defensive Medical Applications: Adaptive baselines are exploitable, physics-based validation at I0 without enrollment, replay as therapeutic tool (vision restoration), threat registry as capabilities registry | [Entry 46](#entry-46-baseline-free-security-at-i0-and-defensive-medical-applications-of-the-threat-registry) |
-| 2026-02-09 | NSP Reframed as Trust Layer for Therapeutic BCI: NSP + PQCKs are not just defense but the secure infrastructure that enables clinical BCI applications (vision restoration, tinnitus correction, Alzheimer's intervention). No audiologist prescribes a stimulation implant if the patterns can be replayed or corrupted. NSP is the safety certification, not the brake. | [Entry 48](#entry-48-nsp-reframed--the-trust-layer-that-enables-medicine) |
-| 2026-02-09 | DSM dissolved into NSP layers: dynamical systems monitoring is not a separate component but capabilities within NSP L3-L5. No new acronym needed. Phase dynamics, bifurcation detection, CSD, Lyapunov tracking all fold into existing Biological TLS validation stack. | [Entry 47](#entry-47-dsm-dissolved-into-nsp--no-separate-component) |
-| 2026-02-09 | Dynamical Systems Security: Separatrix, hysteresis, bifurcation as attack vectors. 6 new attack classes. Band-specific integrator/resonator mapping. "Neural Dynamical Fingerprinting" as novel QIF contribution. ~~DSM proposed~~ → dissolved into NSP layers (see Entry 47) | [Entry 45](#entry-45-dynamical-systems-security--separatrix-hysteresis-and-phase-dynamics-in-nsp) |
-| 2026-02-08 | Spectral Decomposition as Security Primitive: Fourier/STFT as the bridge from raw signal to per-band QI scoring, spectral fingerprinting, attack detection per coupling mechanism | [Entry 44](#entry-44-spectral-decomposition-as-security-primitive--the-missing-bridge-between-fourier-and-qibt) |
-| 2026-02-08 | Synthetic Band Rationale: frequency-regime security validated by Gemini + literature, RF fingerprinting parallel confirmed, Silicon→Synthetic rename propagated | [Entry 42](#entry-42-synthetic-band-rationale--frequency-regime-security-and-rf-fingerprinting-parallel) |
-| 2026-02-07 | First Multi-Model Validation Cycle: QwQ-32B found 3 equation errors in QIF-TRUTH, Grok-3 found stale NSP terminology, Gemini confirmed 5 fixes + found 2 minor NSP issues, all fixed | [Entry 41](#entry-41-first-multi-model-validation-cycle--equation-fixes-and-cross-document-sync) |
-| 2026-02-07 | Unrestricted AI Validation Team: multi-model adversarial review protocol, v4.0 propagation to all docs, DeepSeek-R1 + QwQ-32B + WhiteRabbitNeo team | [Entry 40](#entry-40-unrestricted-ai-validation-team--multi-model-adversarial-review-protocol) |
-| 2026-02-07 | Project Runemate: 3-pass Gemini review, NSP number unification, cross-document consistency, AI transparency log | [Entry 39](#entry-39-project-runemate--three-pass-independent-review-and-nsp-number-unification) |
-| 2026-02-06 ~late night | Unified Neural Security Taxonomy: 60 techniques across 11 MITRE-compatible tactics, deduplication of 3 attack inventories, T2000+ ID range, extended schema with coupling/detection/status fields | [Entry 37](#entry-37-unified-neural-security-taxonomy-mitre-attck-compatible-bci-threat-registry) |
-| 2026-02-06 ~08:15 AM | Black Hole Security Principle: Hawking/Susskind/Maldacena applied to BCI, 4 derivations, scrambling bound, holographic I0, Page curve = key exchange | [Entry 35](#entry-35-the-black-hole-security-principle--hawkingsusskindmaldacena-applied-to-bci-security) |
-| 2026-02-06 ~09:00 AM | v4.0 IMPLEMENTED: 11 bands in config.py, quantum proof scenario, hourglass diagram as-code, JSON export, framework name validated | [Entry 34](#entry-34-v40-implemented--quantum-proof-scenario--hourglass-diagram--name-validation) |
-| 2026-02-06 ~08:00 AM | NSP v2.0 pitch document updated — 5 defense layers, Merkle-amortized SPHINCS+, compress→encrypt→sign pipeline, 20-year key lifecycle, 3.25% power overhead. See [NSP-PITCH.md](./NSP-PITCH.md) | N/A (captured in NSP-PITCH.md) |
-| 2026-02-06 ~07:45 AM | NSP + Post-Quantum Cryptography: harvest-now-decrypt-later, ML-KEM/ML-DSA, no-cloning as foundation, two-layer defense (physics + PQC) | [Entry 31](#entry-31-nsp-goes-post-quantum--the-implant-lifetime-argument) |
-| 2026-02-06 ~07:30 AM | Cross-session synthesis: Entries 26+28+29 unified, 4 new attack pathways, detection-prediction architecture, consumer intermod gap | [Entry 30](#entry-30-cross-session-synthesis--detection-prediction-architecture-and-the-consumer-intermod-gap) |
-| 2026-02-06 ~06:30 AM | L=v/f unification, government-restricted spectrum attack mapping, 5 coupling mechanisms, resonance shield (defense + MRI compatibility) | [Entry 28](#entry-28-lvf-unification-government-restricted-spectrum-attack-mapping-and-the-resonance-shield) |
-| 2026-02-06 ~06:00 AM | 3-1-3 vs Tactical 7-1-3 stress test, spinal cord gap, cauda equina, motor/sensory pathway audit | [Entry 25](#entry-25-3-1-3-vs-tactical-7-1-3--architecture-stress-test-and-the-spinal-gap) |
-| 2026-02-06 ~02:30 AM | 7-Layer neural expansion, Neural Sensory Protocol, multi-AI hypothesis validation | [Entry 24](#entry-24-7-layer-neural-band-expansion-neural-sensory-protocol-and-multi-ai-hypothesis-validation) |
-| 2026-02-03 ~night | Classical-Hourglass reconciliation, L14→Cognitive Sovereignty, I0 physical defense | [Entry 22](#entry-22-classical-hourglass-reconciliation-and-cognitive-sovereignty-rename) |
-| 2026-02-03 ~night | Research landscape: who's working on H_total, what impacts QI validity | [Entry 19](#entry-19-research-landscape-assessment--who-is-working-on-h_total-and-what-impacts-qi-equation-validity) |
-| 2026-02-03 ~night | Hamiltonian as implicit root of QI equation — unifying insight | [Entry 18](#entry-18-the-hamiltonian-is-the-missing-root-node-of-the-qi-equation) |
-| 2026-02-02 ~late night | Immersive UX: Kokoro TTS, hourglass scroll, Field Notes | [Entry 17](#entry-17-immersive-whitepaper-ux--audio-hourglass-scroll-field-notes) |
-| 2026-02-02 ~late night | Independent AI Peer Review (Gemini 2.5) — cross-AI validation | [Entry 16](#entry-16-independent-ai-peer-review-gemini-25--critical-assessment) |
-| 2026-02-02 ~late night | Validation pipeline formalized (PROPAGATION.md updated) | [Entry 16 action items](#entry-16-independent-ai-peer-review-gemini-25--critical-assessment) |
-| 2026-02-02 ~night | QIF v3.1 — 7-band symmetric (3-1-3), 102 research sources | [Entry 15](#entry-15-qif-v31--7-band-symmetric-model-validated-by-external-research) |
-| 2026-02-02 ~night | 3 research agents launched (quantum, neuro, cyber) | [Entry 15](#entry-15-qif-v31--7-band-symmetric-model-validated-by-external-research) |
-| 2026-02-02 ~evening | QIF v3.0 — 8-band hourglass implemented across all files | [Entry 14](#entry-14-qif-v30-hourglass-layer-model--finalized-and-implemented) |
-| 2026-02-02 ~afternoon | 13 derivation insights in single session (Entries 1–13) | [Entry 1](#entry-1-osi-layers-are-meaningless-for-bci) – [Entry 13](#entry-13-dependency-and-the-determinacy-spectrum-as-2d-framework) |
-| 2026-02-02 ~afternoon | 14-layer OSI model (v2.0) DEPRECATED | [Entry 1](#entry-1-osi-layers-are-meaningless-for-bci) |
-| 2026-02-02 | CNF renamed to QIF ("CHIEF"), mindloft → braindumps | Pre-derivation (see CLAUDE.md learnings) |
-| 2026-02-02 | QIF-TRUTH.md created as canonical source of truth | [QIF-TRUTH.md](./QIF-TRUTH.md) |
-| 2026-02-02 | QI-EQUATION-RESEARCH.md completed (candidates, 28 sources) | [QI-EQUATION-RESEARCH.md](./QI-EQUATION-RESEARCH.md) |
-| 2026-02-02 | Whitepaper Quarto project created (qif-lab/whitepaper/) | [Whitepaper](./qif-lab/whitepaper/) |
-| 2026-02-02 | Drafts repo pushed to GitHub (qinnovates/mindloft, drafts branch) | Git operations |
-| 2026-01-29 | ONI Demo Video v1.0 COMPLETE (3:56, Remotion + ElevenLabs) | [SESSION_NOTES.md](../../main/video/demo/SESSION_NOTES.md) |
-| 2026-01-28 | Video production: coherence threshold viz, scale-frequency bars | [SESSION_NOTES.md](../../main/video/demo/SESSION_NOTES.md) |
-| 2026-01-26 | ONI Demo Video production begins (L1-L14 animation, coherence gauge) | [SESSION_NOTES.md](../../main/video/demo/SESSION_NOTES.md) |
-| 2026-01-22 | Tunneling Traversal Time technical paper added (APA formatting) | Git: `4dc2777` |
-| 2026-01-21 | ONI Visualization Suite (5 interactive web apps), ONI_WIKI.md created | Git: `dfe0d50` |
-| 2026-01-20 | Major repo restructure: docs → publications, APA formatting, Neural Firewall paper | Git: multiple commits |
-| 2026-01-18 | **ONI Framework repository created** — first commit, Apache 2.0 license | Git: `39d7727` |
+### Early February (Entries 24-49) — Architecture, Validation, Taxonomy
+| Entry | Topic | Link |
+|-------|-------|------|
+| 49 | Dual-use gap analysis | [Entry 49](#entry-49-dual-use-gap-analysis--what-does-not-map-and-what-might) |
+| 46-48 | Baseline-free security, DSM dissolved, NSP as trust layer | [Entry 46](#entry-46-baseline-free-security-at-i0-and-defensive-medical-applications-of-the-threat-registry) |
+| 44-45 | Spectral decomposition + dynamical systems security | [Entry 44](#entry-44-spectral-decomposition-as-security-primitive--the-missing-bridge-between-fourier-and-qibt) |
+| 40-42 | Multi-model AI validation cycles | [Entry 40](#entry-40-unrestricted-ai-validation-team--multi-model-adversarial-review-protocol) |
+| 37-39 | Unified neural security taxonomy + Runemate review | [Entry 37](#entry-37-unified-neural-security-taxonomy-mitre-attck-compatible-bci-threat-registry) |
+| 34-35 | v4.0 implementation + black hole security principle | [Entry 34](#entry-34-v40-implemented--quantum-proof-scenario--hourglass-diagram--name-validation) |
+| 28-31 | NSP post-quantum + spectrum attacks + cross-session synthesis | [Entry 28](#entry-28-lvf-unification-government-restricted-spectrum-attack-mapping-and-the-resonance-shield) |
+| 24-25 | 7-layer neural expansion + architecture stress test | [Entry 24](#entry-24-7-layer-neural-band-expansion-neural-sensory-protocol-and-multi-ai-hypothesis-validation) |
+
+### Foundation (Entries 1-23) — ONI to QIF, Hourglass Model, Initial Derivations
+| Entry | Topic | Link |
+|-------|-------|------|
+| 22 | Classical-hourglass reconciliation | [Entry 22](#entry-22-classical-hourglass-reconciliation-and-cognitive-sovereignty-rename) |
+| 18-19 | Hamiltonian as root + research landscape | [Entry 18](#entry-18-the-hamiltonian-is-the-missing-root-node-of-the-qi-equation) |
+| 14-17 | QIF v3.0-3.1, Gemini peer review, immersive UX | [Entry 14](#entry-14-qif-v30-hourglass-layer-model--finalized-and-implemented) |
+| 1-13 | Initial 13 derivations — OSI deprecated, hourglass born | [Entry 1](#entry-1-osi-layers-are-meaningless-for-bci) |
+
+See also: [Neurorights Derivation Log](./NEURORIGHTS-DERIVATION-LOG.md) | [Field Journal](./QIF-FIELD-JOURNAL.md) | [Research Sources](./QIF-RESEARCH-SOURCES.md)
 
 ### Key Transitions
 

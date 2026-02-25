@@ -42,6 +42,27 @@ const NEURORIGHT_LABELS: Record<string, string> = {
   EA: 'Equitable Access',
 };
 
+// CRB Population Profiles (from Entry 14, validated in Entry 15)
+const CRB_POPULATIONS = [
+  { id: 'default', label: 'Default (Adult)', crb: 0.0, short: 'Adult' },
+  { id: 'child_adhd', label: 'Child (10yr) + ADHD', crb: 0.5875, short: 'Child+ADHD' },
+  { id: 'adult_als', label: 'Adult with ALS', crb: 0.5375, short: 'ALS' },
+] as const;
+
+const CRB_GAMMA = 0.30;
+
+function crbAdjust(ns: number, crb: number): number {
+  return Math.min(ns * (1 + CRB_GAMMA * crb), 10.0);
+}
+
+function crbSeverity(score: number): string {
+  if (score < 0.1) return 'None';
+  if (score < 3.0) return 'Low';
+  if (score < 5.0) return 'Medium';
+  if (score < 7.0) return 'High';
+  return 'Critical';
+}
+
 const CONFIDENCE_COLORS: Record<string, string> = {
   HIGH: '#22c55e',
   MEDIUM: '#f59e0b',
@@ -606,6 +627,8 @@ function BrainTab({ device }: { device: BciDevice }) {
 }
 
 function SecurityTab({ device }: { device: BciDevice }) {
+  const [crbPopulation, setCrbPopulation] = useState(CRB_POPULATIONS[0]);
+
   if (device.threatCount === 0) {
     return (
       <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-faint)', padding: '20px 0', textAlign: 'center' }}>
@@ -613,6 +636,12 @@ function SecurityTab({ device }: { device: BciDevice }) {
       </div>
     );
   }
+
+  // Compute CRB-adjusted score
+  const baseNs = device.neurosecurityScore;
+  const adjustedScore = baseNs ? crbAdjust(baseNs.overallScore, crbPopulation.crb) : null;
+  const adjustedSeverity = adjustedScore ? crbSeverity(adjustedScore) : null;
+  const isDelta = crbPopulation.crb > 0 && baseNs;
 
   return (
     <div>
@@ -651,34 +680,77 @@ function SecurityTab({ device }: { device: BciDevice }) {
       {/* Neurosecurity Score (NSv2.1b) */}
       {device.neurosecurityScore && (
         <div style={{ marginBottom: '20px' }}>
-          <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: 'var(--color-text-faint)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Neurosecurity Score (NSv2.1b)
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+            <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: 'var(--color-text-faint)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Neurosecurity Score (NSv2.1b)
+            </div>
           </div>
+
+          {/* Population selector */}
+          <div style={{
+            display: 'flex', gap: '4px', marginBottom: '10px', flexWrap: 'wrap',
+          }}>
+            {CRB_POPULATIONS.map(pop => (
+              <button
+                key={pop.id}
+                onClick={() => setCrbPopulation(pop)}
+                style={{
+                  padding: '3px 10px',
+                  borderRadius: '12px',
+                  border: `1px solid ${crbPopulation.id === pop.id ? 'var(--color-accent-primary)' : 'var(--color-border)'}`,
+                  background: crbPopulation.id === pop.id ? 'var(--color-accent-primary)' : 'transparent',
+                  color: crbPopulation.id === pop.id ? '#fff' : 'var(--color-text-secondary)',
+                  fontSize: '0.6875rem',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {pop.short}
+              </button>
+            ))}
+          </div>
+
           <div style={{
             padding: '12px 16px',
             borderRadius: '10px',
-            border: `1px solid ${NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8'}33`,
-            background: `${NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8'}08`,
+            border: `1px solid ${NS_SEVERITY_COLORS[adjustedSeverity ?? device.neurosecurityScore.severity] ?? '#94a3b8'}33`,
+            background: `${NS_SEVERITY_COLORS[adjustedSeverity ?? device.neurosecurityScore.severity] ?? '#94a3b8'}08`,
             marginBottom: '12px',
           }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '4px' }}>
               <span style={{
                 fontSize: '1.5rem',
                 fontWeight: 700,
-                color: NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8',
+                color: NS_SEVERITY_COLORS[adjustedSeverity ?? device.neurosecurityScore.severity] ?? '#94a3b8',
                 fontVariantNumeric: 'tabular-nums',
               }}>
-                {device.neurosecurityScore.overallScore.toFixed(2)}
+                {(adjustedScore ?? device.neurosecurityScore.overallScore).toFixed(2)}
               </span>
               <span style={{
                 fontSize: '0.75rem',
                 fontWeight: 600,
-                color: NS_SEVERITY_COLORS[device.neurosecurityScore.severity] ?? '#94a3b8',
+                color: NS_SEVERITY_COLORS[adjustedSeverity ?? device.neurosecurityScore.severity] ?? '#94a3b8',
                 textTransform: 'uppercase',
               }}>
-                {device.neurosecurityScore.severity}
+                {adjustedSeverity ?? device.neurosecurityScore.severity}
               </span>
+              {isDelta && (
+                <span style={{
+                  fontSize: '0.6875rem',
+                  fontWeight: 600,
+                  color: '#f97316',
+                  marginLeft: '4px',
+                }}>
+                  +{((adjustedScore ?? 0) - device.neurosecurityScore.overallScore).toFixed(2)} CRB
+                </span>
+              )}
             </div>
+            {isDelta && (
+              <div style={{ fontSize: '0.625rem', color: 'var(--color-text-faint)', marginBottom: '4px' }}>
+                Base: {device.neurosecurityScore.overallScore.toFixed(2)} ({device.neurosecurityScore.severity}) | CRB: {crbPopulation.crb.toFixed(4)} | γ=0.30
+              </div>
+            )}
             <div style={{ fontSize: '0.6875rem', color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>
               {device.neurosecurityScore.vector}
             </div>
