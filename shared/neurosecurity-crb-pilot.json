@@ -1,0 +1,175 @@
+{
+  "version": "NSv2.1b-CRB-pilot",
+  "gamma": 0.3,
+  "populations": {
+    "neurotypical_adult": {
+      "label": "Neurotypical Adult (25-64)",
+      "description": "Healthy adult with full cognitive capacity, no clinical diagnoses",
+      "V_age": 0.0,
+      "V_dx": 0.0,
+      "V_consent": 0.0,
+      "V_depend": 0.0,
+      "CRB": 0.0
+    },
+    "child_adhd_10": {
+      "label": "Child (10yr) with ADHD",
+      "description": "10-year-old with ADHD combined presentation (DSM-5 314.01/F90.2)",
+      "V_age": 0.75,
+      "V_dx": 0.5,
+      "V_consent": 0.8,
+      "V_depend": 0.3,
+      "CRB": 0.5875
+    },
+    "adult_als": {
+      "label": "Adult with ALS",
+      "description": "Adult with amyotrophic lateral sclerosis (ICD-10 G12.21), using BCI for communication",
+      "V_age": 0.0,
+      "V_dx": 0.85,
+      "V_consent": 0.4,
+      "V_depend": 0.9,
+      "CRB": 0.5375
+    }
+  },
+  "results": [
+    {
+      "device": "Neuralink N1",
+      "base": 5.76,
+      "base_severity": "High",
+      "populations": {
+        "neurotypical_adult": {
+          "crb": 0.0,
+          "adjusted_score": 5.76,
+          "severity": "High",
+          "delta": 0.0,
+          "tier_change": false
+        },
+        "child_adhd_10": {
+          "crb": 0.5875,
+          "adjusted_score": 6.78,
+          "severity": "High",
+          "delta": 1.02,
+          "tier_change": false
+        },
+        "adult_als": {
+          "crb": 0.5375,
+          "adjusted_score": 6.69,
+          "severity": "High",
+          "delta": 0.93,
+          "tier_change": false
+        }
+      }
+    },
+    {
+      "device": "BrainCo Focus 1",
+      "base": 4.63,
+      "base_severity": "Medium",
+      "populations": {
+        "neurotypical_adult": {
+          "crb": 0.0,
+          "adjusted_score": 4.63,
+          "severity": "Medium",
+          "delta": 0.0,
+          "tier_change": false
+        },
+        "child_adhd_10": {
+          "crb": 0.5875,
+          "adjusted_score": 5.45,
+          "severity": "High",
+          "delta": 0.82,
+          "tier_change": true
+        },
+        "adult_als": {
+          "crb": 0.5375,
+          "adjusted_score": 5.38,
+          "severity": "High",
+          "delta": 0.75,
+          "tier_change": true
+        }
+      }
+    },
+    {
+      "device": "Emotiv EPOC X",
+      "base": 4.22,
+      "base_severity": "Medium",
+      "populations": {
+        "neurotypical_adult": {
+          "crb": 0.0,
+          "adjusted_score": 4.22,
+          "severity": "Medium",
+          "delta": 0.0,
+          "tier_change": false
+        },
+        "child_adhd_10": {
+          "crb": 0.5875,
+          "adjusted_score": 4.96,
+          "severity": "Medium",
+          "delta": 0.74,
+          "tier_change": false
+        },
+        "adult_als": {
+          "crb": 0.5375,
+          "adjusted_score": 4.9,
+          "severity": "Medium",
+          "delta": 0.68,
+          "tier_change": false
+        }
+      }
+    },
+    {
+      "device": "Muse 2",
+      "base": 3.58,
+      "base_severity": "Medium",
+      "populations": {
+        "neurotypical_adult": {
+          "crb": 0.0,
+          "adjusted_score": 3.58,
+          "severity": "Medium",
+          "delta": 0.0,
+          "tier_change": false
+        },
+        "child_adhd_10": {
+          "crb": 0.5875,
+          "adjusted_score": 4.21,
+          "severity": "Medium",
+          "delta": 0.63,
+          "tier_change": false
+        },
+        "adult_als": {
+          "crb": 0.5375,
+          "adjusted_score": 4.16,
+          "severity": "Medium",
+          "delta": 0.58,
+          "tier_change": false
+        }
+      }
+    },
+    {
+      "device": "Synchron Stentrode",
+      "base": 4.84,
+      "base_severity": "Medium",
+      "populations": {
+        "neurotypical_adult": {
+          "crb": 0.0,
+          "adjusted_score": 4.84,
+          "severity": "Medium",
+          "delta": 0.0,
+          "tier_change": false
+        },
+        "child_adhd_10": {
+          "crb": 0.5875,
+          "adjusted_score": 5.69,
+          "severity": "High",
+          "delta": 0.85,
+          "tier_change": true
+        },
+        "adult_als": {
+          "crb": 0.5375,
+          "adjusted_score": 5.62,
+          "severity": "High",
+          "delta": 0.78,
+          "tier_change": true
+        }
+      }
+    }
+  ]
+}

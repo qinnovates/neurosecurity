@@ -77,6 +77,7 @@
 - Follow Tailwind v4 conventions.
 - Update `shared/` JSON files for data changes, which are copied to `docs/data` during build.
 - Documentation is a primary product; keep markdown clean and standard.
+- **Epistemic Integrity:** See `rules/epistemic-integrity.md`. No hallucination. Confidence proportional to evidence. Theoretical/unvalidated work (e.g. NISS, QIF) must be labeled as such in all outward-facing text.
 
 ## Cross-AI Validation Protocol
 After ANY cross-AI validation session, append a row to `governance/TRANSPARENCY.md` > Cross-AI Validation Sessions table BEFORE ending the session. Format: `| Date | Topic | AI Systems | Human Decision | Derivation Log Ref |`
@@ -95,7 +96,7 @@ When ANY of these triggers occur, you MUST update the appropriate log:
 
 **Entry must include:** Date/time, AI system(s) involved, human decision documented, what was accepted vs rejected, classification (VERIFIED / INFERRED / HYPOTHESIS).
 
-**RAW entry policy:** Derivation log live sessions keep Kevin's words exactly as typed. No corrections, no polish, no grammar fixes. Typos are intentional. See [claudeq Mode](#claudeq-mode--live-derivation-journaling) for full spec.
+**Entry policy:** Derivation log entries preserve meaning, decisions, and insights. Normalize spelling and phrasing before committing. See [claudeq Mode](#claudeq-mode--live-derivation-journaling) for full spec.
 
 **Research Commit Messages** (research-significant commits only):
 ```
@@ -201,7 +202,7 @@ When a session uses the `claudeq` config (or Kevin says "claudeq"/"start journal
 
 ### Rules
 - Do NOT skip logging trivial exchanges
-- Do NOT edit Kevin's words
+- Normalize spelling, grammar, and phrasing before committing — preserve meaning and decisions, not verbatim text
 - Do NOT wait until end to write (log as you go)
 - Do NOT create separate files (everything in QIF-DERIVATION-LOG.md)
 - Standard triggers (glossary sync, research sources, etc.) still apply

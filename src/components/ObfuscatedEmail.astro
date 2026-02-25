@@ -1,0 +1,39 @@
+---
+/**
+ * Renders an email link that bots can't scrape.
+ * Email is split into parts and assembled via JS at runtime.
+ * Noscript fallback shows "[user] at [domain]" text.
+ *
+ * Usage: <ObfuscatedEmail user="kevin" domain="qinnovate.com" label="please reach out" />
+ * Usage: <ObfuscatedEmail user="advisory" domain="qinnovate.com" />
+ */
+interface Props {
+  user: string;
+  domain: string;
+  label?: string;
+  class?: string;
+  subject?: string;
+}
+
+const { user, domain, label, class: className, subject } = Astro.props;
+const id = `oe-${user}-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span id={id} class={className}>
+  <noscript>{user} [at] {domain}</noscript>
+</span>
+
+<script define:vars={{ id, user, domain, label, subject }}>
+  (() => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const addr = [user, '@', domain].join('');
+    const a = document.createElement('a');
+    let href = 'mail' + 'to:' + addr;
+    if (subject) href += '?subject=' + encodeURIComponent(subject);
+    a.href = href;
+    a.textContent = label || addr;
+    a.className = el.className || '';
+    el.replaceWith(a);
+  })();
+</script>
