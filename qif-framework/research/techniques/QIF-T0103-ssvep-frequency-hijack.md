@@ -50,7 +50,7 @@ Risk increases with depth through the neural pathway:
 
 ## NISS Vector
 
-BI:L / CG:H / CV:I / RV:P / NP:T
+BI:L / CR:H / CD:H / CV:I / RV:P / NP:T
 Score: 6.1 (High)
 
 When chained with T0040 (SAIL Lab sensory priming): escalates to ~7.8 (Critical threshold), dual-cluster diagnostic outcome.

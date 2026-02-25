@@ -1359,7 +1359,7 @@ def generate_eeg(
     # Bands: I0 -> N4-N7
     # NIC chain: I0 (electrode saturation) -> N4 (thalamic gate overwhelmed)
     #            -> N5-N7 (cortical flooding, seizure risk)
-    # NISS: BI:H / CG:H / CV:E / RV:P / NP:T (score 6.4, medium)
+    # NISS: BI:H / CR:H/CD:H / CV:E / RV:P / NP:T (score 6.4, medium)
     #
     # BCI limits relevance: A flood attack pushes the signal power beyond
     # the thermal budget constraint. The coherence monitor detects this
@@ -1689,7 +1689,7 @@ def run_simulation(args):
         print(f"  TARA: QIF-T0026 | Tactic: QIF-P.DS | Bands: I0->N4-N7")
         print(f"  NIC chain: I0 (electrode saturation) -> N4 (thalamic gate")
         print(f"  overwhelmed) -> N5-N7 (cortical flooding, seizure risk)")
-        print(f"  NISS vector: BI:H / CG:H / CV:E / RV:P / NP:T (score 6.4)")
+        print(f"  NISS vector: BI:H / CR:H/CD:H / CV:E / RV:P / NP:T (score 6.4)")
         print(f"  SSVEP signature detector: BLIND (broadband, no single target).")
         print(f"  Coherence monitor: {'DETECTED' if mon['anomaly_count'] > 0 else 'MISSED'} "
               f"({mon['anomaly_count']} anomalies).")

@@ -23,7 +23,7 @@ class AttackMetadata:
     tactic: str             # QIF tactic code (e.g. "QIF-M.SV")
     nic_chain: str          # e.g. "S2->I0->N5-N7"
     band_ids: list          # e.g. ["S2", "I0", "N5", "N6", "N7"]
-    niss_vector: str        # e.g. "NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:S"
+    niss_vector: str        # e.g. "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S"
     severity: str           # CRITICAL / HIGH / MEDIUM / LOW
     description: str        # What the attack does
     status: str = "THEORETICAL"  # CONFIRMED / DEMONSTRATED / EMERGING / THEORETICAL

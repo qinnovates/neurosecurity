@@ -116,7 +116,7 @@ The brain is a different attack surface. A compromised server loses data. A comp
 
 This is where neuroethics and neurosecurity converge. They protect the same thing: the integrity of human information processing in biological substrate. Neuroethics defines *what* to protect. Four neurorights, formalized by Ienca and Andorno (2017) [50], establish the boundaries: cognitive liberty (the right to alter or not alter one's own mental states), mental privacy (protection against unauthorized access to neural data), mental integrity (protection against unauthorized modification of neural function), and psychological continuity (preservation of personal identity and cognitive baseline over time). These are not philosophical abstractions. Chile wrote them into its constitution in 2021. California codified neural data as sensitive personal information in SB 1223 (effective January 2025). The MIND Act (S. 2925) proposes federal neural data standards. Seven jurisdictions have enacted or proposed neurorights legislation as of February 2026 (Section 11.3).
 
-Neurosecurity defines *how* to protect them. The coherence metric ($C_s$) measures signal integrity. TARA maps 109 attack techniques. NISS scores neural impact across five dimensions including cognitive integrity and neuroplasticity. NSP encrypts the wire with post-quantum cryptography. Neurowall enforces policy at the electrode boundary. Without neuroethics, security has no mandate: no definition of what constitutes a violation. Without security, neuroethics has no mechanism: no way to detect, prevent, or measure a violation. They are operationally inseparable.
+Neurosecurity defines *how* to protect them. The coherence metric ($C_s$) measures signal integrity. TARA maps 109 attack techniques. NISS scores neural impact across six dimensions including cognitive reconnaissance, cognitive disruption, and neuroplasticity. NSP encrypts the wire with post-quantum cryptography. Neurowall enforces policy at the electrode boundary. Without neuroethics, security has no mandate: no definition of what constitutes a violation. Without security, neuroethics has no mechanism: no way to detect, prevent, or measure a violation. They are operationally inseparable.
 
 The technical landscape confirms this. Decomposing all 109 TARA techniques to their smallest physics unit yields six irreducible attack primitives, ordered by spatial scale:
 
@@ -196,7 +196,7 @@ This paper presents twenty contributions:
 2. A **coherence metric** (Cs) for real-time signal integrity monitoring, grounded in spectral decomposition via the STFT, combining phase coherence, transport entropy, amplitude stability, and scale-frequency validation.
 3. Identification of **five cross-domain attack coupling mechanisms** and honest assessment of which attacks the coherence metric can and cannot detect.
 4. **TARA** (Therapeutic Atlas of Risks and Applications), a 109-technique dual-use registry with 22+ fields per technique spanning security, clinical, diagnostic, governance, and provenance dimensions.
-5. **NISS** (Neural Impact Scoring System), a BCI-native severity scoring system replacing CVSS with five neural impact dimensions.
+5. **NISS** (Neural Impact Scoring System), a BCI-native severity scoring system replacing CVSS with six neural impact dimensions.
 6. A **CVE coverage analysis** mapping 55 NVD-verified CVEs to TARA techniques, quantifying an 81.25% clinical blind spot.
 7. **Physics feasibility tiering** classifying all 109 techniques by hardware gate (61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only).
 8. A **DSM-5 diagnostic mapping** linking 102 techniques to psychiatric diagnoses via the Neural Impact Chain, organized into five diagnostic clusters.
@@ -529,7 +529,7 @@ The coherence metric catches direct attacks (Mechanism A). It partially catches 
 
 ### 6.3 Unified Threat Taxonomy
 
-QIF maintains a registry of **109 attack techniques** organized into **11 tactics** across **7 operational domains** using the **QIF Locus Taxonomy v1.0**, a BCI-native threat classification system. Each technique is scored using **NISS v1.0** (Neural Impact Scoring System), a purpose-built alternative to CVSS that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
+QIF maintains a registry of **109 attack techniques** organized into **11 tactics** across **7 operational domains** using the **QIF Locus Taxonomy v1.0**, a BCI-native threat classification system. Each technique is scored using **NISS v1.1** (Neural Impact Scoring System), a purpose-built alternative to CVSS that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
 
 ## 6.4 QIF Locus Taxonomy
 
@@ -620,7 +620,7 @@ Evidence status breakdown:
 | Theoretical | 31 | Plausible from principles |
 | Emerging | 22 | Newly identified |
 
-## 6.5 NISS v1.0 --- Neural Impact Scoring System
+## 6.5 NISS v1.1 --- Neural Impact Scoring System
 
 *BCI-native vulnerability scoring system*
 
@@ -634,19 +634,19 @@ CVSS (Common Vulnerability Scoring System), maintained by FIRST.org, is the indu
 - **Violation of consent** --- does this attack bypass the subject's informed consent?
 - **Neuroplasticity effects** --- can repeated exposure cause lasting changes to neural pathways?
 
-NISS v1.0, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **five BCI-native impact dimensions**: Biological Impact (BI), Cognitive Integrity (CG), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). The default NISS score is a simple equal-weight average of these five dimensions, ensuring no single dimension dominates without domain-specific justification. Optional **context profiles** (Clinical, Research, Consumer, Military) provide weight overrides for domain-specific scoring.
+NISS v1.1, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **six BCI-native impact dimensions**: Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive Disruption (CD), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). The CG (Cognitive Integrity) metric from NISS v1.0 has been split into CR (read attacks: thought decoding, neural data inference) and CD (write attacks: perception manipulation, identity modification) to distinguish attack directionality. The default NISS score is a simple equal-weight average of these six dimensions, ensuring no single dimension dominates without domain-specific justification. Optional **context profiles** (Clinical, Research, Consumer, Military) provide weight overrides for domain-specific scoring.
 
 ### 6.5.2 Score Formula
 
 **Default profile (equal weights):**
 
-$$\text{NISS} = \frac{BI + CG + CV + RV + NP}{5}$$
+$$\text{NISS} = \frac{BI + CR + CD + CV + RV + NP}{6}$$
 
 Each dimension is scored on a 0.0--10.0 scale. The default equal-weight average ensures no single impact dimension dominates without domain-specific justification. All fractional results are ceiling-rounded to the nearest 0.1.
 
 **Context profile (weighted):**
 
-$$\text{NISS} = \frac{w_{BI} \cdot BI + w_{CG} \cdot CG + w_{CV} \cdot CV + w_{RV} \cdot RV + w_{NP} \cdot NP}{\sum w}$$
+$$\text{NISS} = \frac{w_{BI} \cdot BI + w_{CR} \cdot CR + w_{CD} \cdot CD + w_{CV} \cdot CV + w_{RV} \cdot RV + w_{NP} \cdot NP}{\sum w}$$
 
 Context profiles provide optional weight overrides for domain-specific environments where certain impact dimensions carry disproportionate significance. See Section 6.5.6 for profile definitions.
 
@@ -654,12 +654,13 @@ Context profiles provide optional weight overrides for domain-specific environme
 
 #### Impact Dimensions (NISS Score)
 
-The five core dimensions constitute the NISS score. Each is scored on a 0.0--10.0 scale using discrete severity levels.
+The six core dimensions constitute the NISS score. Each is scored on a 0.0--10.0 scale using discrete severity levels.
 
 | Metric | Code | Levels | Scale | Description |
 |--------|------|--------|-------|-------------|
 | **Biological Impact** | BI | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Physical harm to neural tissue. None = no tissue effect. Low = transient discomfort. High = seizure risk, tissue stress. Critical = tissue damage, life-threatening. |
-| **Cognitive Integrity** | CG | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Alteration of thought, memory, or identity. None = no cognitive effect. Low = minor cognitive interference. High = significant cognitive disruption. Critical = involuntary behavioral change, identity compromise. |
+| **Cognitive Reconnaissance** | CR | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Read attacks: unauthorized thought decoding or neural data inference. None = no neural data exposure. Low = minor signal leakage. High = significant thought decoding risk. Critical = full cognitive state reconstruction. |
+| **Cognitive Disruption** | CD | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Write attacks: perception manipulation or identity modification. None = no cognitive effect. Low = minor cognitive interference. High = significant cognitive disruption. Critical = involuntary behavioral change, identity compromise. |
 | **Consent Violation** | CV | N / P / E / I | 0.0 / 3.3 / 6.7 / 10.0 | Degree to which informed consent is bypassed. None = fully consented. Partial = incomplete disclosure. Explicit = clear neurological autonomy violation. Implicit = covert manipulation without the subject's awareness. |
 | **Reversibility** | RV | F / T / P / I | 0.0 / 3.3 / 6.7 / 10.0 | Whether the damage can be undone. Fully reversible = spontaneous recovery. Temporary = resolves with clinical support. Partial = incomplete recovery even with intervention. Irreversible = permanent neural change. |
 | **Neuroplasticity** | NP | N / T / S | 0.0 / 5.0 / 10.0 | Lasting changes to neural pathways from repeated exposure. None = no pathway modification. Temporary = transient plasticity that reverses when exposure stops. Structural = irreversible pathway reorganization via LTP/LTD. |
@@ -696,19 +697,20 @@ Exploitability metrics characterize the attack vector but do not contribute to t
 
 Example: Signal Injection (QIF-T0001)
 
-`NISS:1.0/AV:P/AC:L/PR:L/UI:N/BI:H/CG:H/CV:E/RV:T/NP:T/S:U/E:A`
+`NISS:1.1/AV:P/AC:L/PR:L/UI:N/BI:H/CR:H/CD:H/CV:E/RV:T/NP:T/S:U/E:A`
 
 **Impact dimensions (NISS score):**
 
 - `BI:H` --- High biological impact (6.7): seizure risk, neural tissue stress
-- `CG:H` --- High cognitive integrity impact (6.7): significant cognitive disruption
+- `CR:H` --- High cognitive reconnaissance impact (6.7): significant thought decoding / neural data inference risk
+- `CD:H` --- High cognitive disruption impact (6.7): significant perception manipulation / identity modification risk
 - `CV:E` --- Explicit consent violation (6.7): clear neurological autonomy violation
 - `RV:T` --- Temporary reversibility (3.3): resolves with clinical support
 - `NP:T` --- Temporary neuroplasticity (5.0): transient pathway effects
 
-$$\text{NISS} = \frac{6.7 + 6.7 + 6.7 + 3.3 + 5.0}{5} = \frac{28.4}{5} = 5.7$$
+$$\text{NISS} = \frac{6.7 + 6.7 + 6.7 + 6.7 + 3.3 + 5.0}{6} = \frac{35.1}{6} = 5.9$$
 
-**Score: 5.7 / 10.0** --- MEDIUM
+**Score: 5.9 / 10.0** --- MEDIUM
 
 **Exploitability qualifiers:**
 
@@ -728,14 +730,14 @@ $$\text{NISS} = \frac{6.7 + 6.7 + 6.7 + 3.3 + 5.0}{5} = \frac{28.4}{5} = 5.7$$
 
 ### 6.5.6 Context Profiles
 
-The default equal-weight formula treats all five impact dimensions as equally important. In practice, different deployment contexts have different risk priorities. NISS v1.0 defines four optional context profiles that override the default weights:
+The default equal-weight formula treats all six impact dimensions as equally important. In practice, different deployment contexts have different risk priorities. NISS v1.1 defines four optional context profiles that override the default weights:
 
-| Profile | $w_{BI}$ | $w_{CG}$ | $w_{CV}$ | $w_{RV}$ | $w_{NP}$ | Rationale |
-|---------|----------|----------|----------|----------|----------|-----------|
-| **Clinical** | 2.0 | 1.5 | 1.0 | 2.0 | 1.0 | Patient safety paramount; biological harm and irreversibility dominate risk calculus. |
-| **Research** | 1.0 | 2.0 | 2.0 | 1.0 | 1.5 | Subject cognitive integrity and informed consent are the primary ethical obligations. |
-| **Consumer** | 1.0 | 1.5 | 2.0 | 1.0 | 1.0 | Consent and cognitive integrity weigh heavily; users cannot be expected to understand technical risk. |
-| **Military** | 2.0 | 2.0 | 0.5 | 1.5 | 1.5 | Biological and cognitive impact are mission-critical; consent weight reduced in operational context. |
+| Profile | $w_{BI}$ | $w_{CR}$ | $w_{CD}$ | $w_{CV}$ | $w_{RV}$ | $w_{NP}$ | Rationale |
+|---------|----------|----------|----------|----------|----------|----------|-----------|
+| **Clinical** | 2.0 | 1.5 | 1.5 | 1.0 | 2.0 | 1.0 | Patient safety paramount; biological harm and irreversibility dominate risk calculus. |
+| **Research** | 1.0 | 2.0 | 2.0 | 2.0 | 1.0 | 1.5 | Subject cognitive reconnaissance/disruption and informed consent are the primary ethical obligations. |
+| **Consumer** | 1.0 | 1.5 | 1.5 | 2.0 | 1.0 | 1.0 | Consent and cognitive impact weigh heavily; users cannot be expected to understand technical risk. |
+| **Military** | 2.0 | 2.0 | 2.0 | 0.5 | 1.5 | 1.5 | Biological and cognitive impact are mission-critical; consent weight reduced in operational context. |
 
 Context profiles are applied using the weighted formula from Section 6.5.2. The profile is recorded in the vector string (e.g., `CP:Clinical`). When no profile is specified, the default equal-weight average applies.
 
@@ -794,7 +796,8 @@ CVSS cannot score this attack. It has no concept of cognitive integrity, neuropl
 |-------------|-------|-------|-----------|
 | **Impact Dimensions** | | | |
 | BI (Biological Impact) | **High** | 6.7 | Psychosis involves measurable neurochemical and structural changes |
-| CG (Cognitive Integrity) | **Critical** | 10.0 | Reality perception fundamentally altered; sense of agency compromised |
+| CR (Cognitive Reconnaissance) | **Critical** | 10.0 | Full cognitive state reconstruction; thought patterns fully exposed |
+| CD (Cognitive Disruption) | **Critical** | 10.0 | Reality perception fundamentally altered; sense of agency compromised |
 | CV (Consent Violation) | **Implicit** | 10.0 | User never consented to psychological targeting; manipulation is covert --- ToS do not constitute informed consent |
 | RV (Reversibility) | **Partial** | 6.7 | Psychotic episodes can cause lasting cognitive changes; recovery not guaranteed |
 | NP (Neuroplasticity) | **Structural** | 10.0 | Repeated exposure reshapes neural pathways via LTP/LTD; adolescent brains especially vulnerable |
@@ -804,9 +807,9 @@ CVSS cannot score this attack. It has no concept of cognitive integrity, neuropl
 | PR (Privileges) | None | --- | Any user who opens the app is a target |
 | UI (User Interaction) | Passive | --- | User opens the app and scrolls; no out-of-the-ordinary action required beyond normal platform use |
 
-$$\text{NISS} = \frac{6.7 + 10.0 + 10.0 + 6.7 + 10.0}{5} = \frac{43.4}{5} = 8.7$$
+$$\text{NISS} = \frac{6.7 + 10.0 + 10.0 + 10.0 + 6.7 + 10.0}{6} = \frac{53.4}{6} = 8.9$$
 
-**Final score: 8.7 / 10.0 (High).** PINS triggered: BI = H. The NISS score captures the severity of human impact across all five dimensions. The exploitability qualifiers (all favorable to the attacker: wireless, low complexity, no privileges, no interaction) make this attack particularly dangerous in practice, though they do not inflate the impact score itself.
+**Final score: 8.9 / 10.0 (High).** PINS triggered: BI = H. The NISS score captures the severity of human impact across all six dimensions. The exploitability qualifiers (all favorable to the attacker: wireless, low complexity, no privileges, no interaction) make this attack particularly dangerous in practice, though they do not inflate the impact score itself.
 
 ### 6.6.4 The BCI Amplifier
 
@@ -933,7 +936,8 @@ Each NISS impact dimension predicts a diagnostic cluster:
 | NISS Dimension | What It Measures | Predicted DSM Cluster |
 |---------------|------------------|-----------------------|
 | BI (Biological Impact) | Tissue/structural damage | Motor/Neurocognitive |
-| CG (Cognitive Integrity) | Cognitive function disruption | Cognitive/Psychotic |
+| CR (Cognitive Reconnaissance) | Thought decoding, neural data inference (read attacks) | Cognitive/Psychotic |
+| CD (Cognitive Disruption) | Perception manipulation, identity modification (write attacks) | Cognitive/Psychotic |
 | CV (Consent Violation) | Autonomy violation | Mood/Trauma |
 | RV (Reversibility) | Recovery potential | Chronicity modifier |
 | NP (Neuroplasticity) | Lasting neural change | Persistent/Personality |
@@ -943,7 +947,7 @@ Each NISS impact dimension predicts a diagnostic cluster:
 | Cluster | DSM Categories | NISS Driver | Technique Count |
 |---------|---------------|-------------|----------------|
 | Motor/Neurocognitive | Movement disorders (F82), neurocognitive disorders, conversion (F44.4) | BI | 16 |
-| Cognitive/Psychotic | Schizophrenia spectrum (F20), perceptual disorders | CG | 16 |
+| Cognitive/Psychotic | Schizophrenia spectrum (F20), perceptual disorders | CR/CD | 16 |
 | Mood/Trauma | MDD (F32), PTSD (F43.10), adjustment (F43.2), anxiety (F41) | CV | 21 |
 | Persistent/Personality | Personality changes, lasting pathway reorganization | NP/RV | 7 |
 | Non-Diagnostic | Silicon-only techniques with no neural pathway | N/A | 42 |
@@ -1099,7 +1103,7 @@ If neural oscillations systematically violate L = v/f across bands (i.e., the sp
 
 ### 8.3 NISS Scores Do Not Correlate with Clinical Outcomes
 
-If clinical experts consistently assess that NISS scores do not reflect the actual severity ordering of BCI-related adverse events, the scoring system's five-dimension model requires recalibration or restructuring. This is testable through expert panel evaluation of scored TARA techniques against documented BCI adverse events.
+If clinical experts consistently assess that NISS scores do not reflect the actual severity ordering of BCI-related adverse events, the scoring system's six-dimension model requires recalibration or restructuring. This is testable through expert panel evaluation of scored TARA techniques against documented BCI adverse events.
 
 ### 8.4 TARA Taxonomy Misses a Major Attack Class
 
@@ -1165,7 +1169,7 @@ This paper delivered the twenty contributions outlined in Section 2.5:
 1. An **11-band hourglass architecture** (v4.0) spanning the neural-synthetic boundary, derived from neuroanatomy (Section 4).
 2. A **coherence metric** ($C_s$) for real-time signal integrity monitoring, grounded in spectral decomposition via the STFT (Section 5).
 3. Identification of **five cross-domain attack coupling mechanisms** with honest detection boundaries (Section 6.1-6.2).
-4. The **QIF Locus Taxonomy** and **NISS v1.0** neural impact scoring (Sections 6.3-6.5).
+4. The **QIF Locus Taxonomy** and **NISS v1.1** neural impact scoring (Sections 6.3-6.5).
 5. **TARA** (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry with 22+ fields per technique (Section 6.7).
 6. **CVE coverage analysis** quantifying an 81.25% clinical blind spot in vulnerability tracking (Section 6.8).
 7. **Physics feasibility tiering** classifying all 109 techniques by hardware gate (Section 6.9).
@@ -1219,9 +1223,9 @@ Existing security frameworks (NIST CSF, ISO 27001, IEC 62443) operate on three p
 | 4 | **Neural Re-identification Risk** | The possibility that "anonymized" neural data can be linked back to an individual via brain signal uniqueness |
 | 5 | **Right to Disconnect** | The right to cease using a neural device without losing critical capabilities |
 | 6 | **Surgical Update Constraint** | Security patches may require surgery, changing the cost and feasibility of vulnerability remediation |
-| 7 | **Cognitive Integrity as Measurable Property** | The ability to define, measure, test, and audit cognitive integrity as a formal security property |
+| 7 | **Cognitive Reconnaissance and Disruption as Measurable Properties** | The ability to define, measure, test, and audit cognitive reconnaissance (read) and cognitive disruption (write) as formal security properties |
 
-QIF addresses each: the coherence metric (Property 1), Neurowall L1 amplitude bounds (Property 2), NISS cognitive integrity dimension (Properties 3, 7), Neurowall L2 differential privacy (Property 4), NSP's graceful degradation tiers (Property 5), and NSP's crypto agility with 20-year key lifecycle (Property 6).
+QIF addresses each: the coherence metric (Property 1), Neurowall L1 amplitude bounds (Property 2), NISS cognitive reconnaissance and disruption dimensions (Properties 3, 7), Neurowall L2 differential privacy (Property 4), NSP's graceful degradation tiers (Property 5), and NSP's crypto agility with 20-year key lifecycle (Property 6).
 
 ### 11.3 Regulatory Coverage Matrix
 
@@ -1270,7 +1274,7 @@ The four foundational neurorights proposed by Ienca and Andorno (2017) [50] are 
 |-----------|------------------|-------------------|
 | **Cognitive Liberty** | Authorization / Consent | Neurowall L3 policy engine validates consent state; RunematePolicy suppresses unauthorized stimulation |
 | **Mental Privacy** | Confidentiality | NSP end-to-end encryption (ML-KEM + AES-256-GCM); Neurowall L2 calibrated differential privacy |
-| **Mental Integrity** | Integrity | Coherence metric ($C_s$) detects signal tampering; NISS Cognitive Integrity dimension scores impact |
+| **Mental Integrity** | Integrity | Coherence metric ($C_s$) detects signal tampering; NISS Cognitive Disruption (CD) dimension scores write-attack impact |
 | **Psychological Continuity** | Availability + State Preservation | NSP graceful degradation tiers; NISS Neuroplasticity dimension tracks long-term pathway changes |
 
 **Consent Complexity Index (CCI):**

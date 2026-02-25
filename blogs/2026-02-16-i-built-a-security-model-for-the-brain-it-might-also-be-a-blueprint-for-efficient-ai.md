@@ -88,12 +88,13 @@ But when we laid the NISS scores against DSM-5-TR diagnostic categories, the map
 | NISS Metric | Security Meaning | Clinical Prediction |
 |---|---|---|
 | BI (High/Critical) | Tissue damage | Motor/Neurocognitive disorders |
-| CG (High/Critical) | Cognitive disruption | Cognitive/Psychotic disorders |
+| CR (High/Critical) | Thought decoding, neural data inference | Cognitive/Psychotic disorders |
+| CD (High/Critical) | Perception manipulation, identity modification | Cognitive/Psychotic disorders |
 | CV (Elevated/Involuntary) | Consent violation | Mood/Trauma disorders |
 | NP (Structural) | Lasting neural change | Persistent/Personality disorders |
 | RV (Partial/Irreversible) | Poor recovery | Chronicity modifier |
 
-A technique with high Consent Violation and high Cognitive Integrity scores doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — PTSD, depression, and psychotic features. The security metrics were already encoding the clinical outcomes without being told to.
+A technique with high Consent Violation and high Cognitive Reconnaissance/Disruption scores doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — PTSD, depression, and psychotic features. The security metrics were already encoding the clinical outcomes without being told to.
 
 The [TARA registry](https://qinnovate.com/TARA) now carries this mapping for all 103 techniques. Each one has ICD-10-CM codes, DSM-5-TR diagnoses, confidence levels, a diagnostic cluster, and the Neural Impact Chain that explains *why* — the full path from technique to band to brain structure to cognitive function to clinical outcome. The Fragility Tax makes this concrete: techniques targeting the lower, deterministic bands (N1-N2) map to motor and neurocognitive disorders with high confidence, because those pathways are simple enough that disruption produces predictable, well-characterized clinical presentations. Techniques targeting the upper, indeterministic bands (N5-N7) map to broader diagnostic clusters with more uncertainty, because the cortex's complexity makes outcomes harder to predict.
 

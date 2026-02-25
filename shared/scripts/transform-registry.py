@@ -326,7 +326,7 @@ def assign_niss(tech, new_tactic):
     elif "dizziness" in notes or "phosphene" in notes or "discomfort" in notes:
         v["BI"] = max_metric(v["BI"], "L")
 
-    # --- Cognitive Integrity upgrades ---
+    # --- Cognitive Security upgrades (legacy CI field → maps to CR+CD in NISS v1.1) ---
     if "identity" in attack or "self-model" in attack or "agency" in attack or "personality" in notes:
         v["CI"] = "C"
     elif "memory" in attack or "thought decoding" in attack or "working memory" in notes:

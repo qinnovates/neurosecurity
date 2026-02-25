@@ -66,7 +66,7 @@ const tacticColors: Record<string, string> = {
           </p>
           <ul>
             <li><strong>TARA Atlas</strong> (Therapeutic Applications &amp; Risk Assessment) &mdash; a dual-use atlas that classifies each BCI technique as both a security threat and a potential therapeutic application, maps techniques to DSM-5-TR psychiatric diagnoses through the Neural Impact Chain, and traces clinical outcomes from physical mechanism to cognitive function</li>
-            <li><strong>NISS</strong> (Neural Impact Scoring System) &mdash; a purpose-built vulnerability scoring system that extends CVSS with five neural-specific metrics: biological impact, cognitive integrity, consent violation, reversibility, and neuroplasticity</li>
+            <li><strong>NISS</strong> (Neural Impact Scoring System) &mdash; a purpose-built vulnerability scoring system that extends CVSS with six neural-specific metrics: biological impact, cognitive reconnaissance, cognitive disruption, consent violation, reversibility, and neuroplasticity</li>
             <li><strong>NSP</strong> (Neural Sensory Protocol) &mdash; a five-layer, post-quantum wire protocol for securing BCI data links at 3.25% power overhead on implanted devices</li>
           </ul>
         </div>
@@ -203,27 +203,32 @@ const tacticColors: Record<string, string> = {
           })}
         </div>
 
-        <h3 id="niss" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">NISS v1.0 Scoring</h3>
+        <h3 id="niss" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">NISS v1.1 Scoring</h3>
         <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">First CVSS v4.0 Extension for Neural Security &ensp;|&ensp; by Qinnovate</p>
         <div class="prose mb-6">
           <p>
-            Each technique is scored using <strong>NISS</strong> (Neural Impact Scoring System), the first CVSS v4.0 extension designed for neural security. Following FIRST.org's extension framework, NISS adds five neural-specific dimensions that CVSS structurally cannot express: Biological Impact, Cognitive Integrity, Reversibility, Violation of Consent, and Neuroplasticity. All TARA techniques have been mapped to both CVSS v4.0 base vectors and MITRE ATT&amp;CK-style technique IDs, empirically proving that 94.4% require NISS extension metrics for full-fidelity scoring.
+            Each technique is scored using <strong>NISS</strong> (Neural Impact Scoring System), the first CVSS v4.0 extension designed for neural security. Following FIRST.org's extension framework, NISS adds six neural-specific dimensions that CVSS structurally cannot express: Biological Impact, Cognitive Reconnaissance (read-side attacks), Cognitive Disruption (write-side attacks), Consent Violation, Reversibility, and Neuroplasticity. All TARA techniques have been mapped to both CVSS v4.0 base vectors and MITRE ATT&amp;CK-style technique IDs, empirically proving that 94.4% require NISS extension metrics for full-fidelity scoring.
           </p>
         </div>
 
         <div class="glass rounded-xl p-6 mb-8">
           <p class="text-center font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            NISS = (BI + CG + CV + RV + NP) / 5
+            NISS = (BI + CR + CD + CV + RV + NP) / 6
           </p>
-          <div class="grid grid-cols-5 gap-3 text-center text-xs">
+          <div class="grid grid-cols-6 gap-3 text-center text-xs">
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">BI</div>
               <div class="text-[var(--color-text-faint)]">Biological Impact</div>
               <div class="text-[var(--color-text-muted)] mt-0.5">Weight 1.0</div>
             </div>
             <div>
-              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CG</div>
-              <div class="text-[var(--color-text-faint)]">Cognitive Integrity</div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CR</div>
+              <div class="text-[var(--color-text-faint)]">Cognitive Reconnaissance</div>
+              <div class="text-[var(--color-text-muted)] mt-0.5">Weight 1.0</div>
+            </div>
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CD</div>
+              <div class="text-[var(--color-text-faint)]">Cognitive Disruption</div>
               <div class="text-[var(--color-text-muted)] mt-0.5">Weight 1.0</div>
             </div>
             <div>
