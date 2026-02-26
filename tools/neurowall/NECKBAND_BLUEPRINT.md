@@ -224,7 +224,7 @@ Everything runs on the neckband's i.MX RT685. The EEG headset is a dumb sensor a
 
 ### L3: Policy Agent
 - Runemate Scribe (Staves v2 bytecode interpreter, < 200KB)
-- NISS trigger evaluation (BI, CG, CV, RV, NP thresholds)
+- NISS trigger evaluation (BI, CR, CD, CV, RV, NP thresholds)
 - Policy hot-swap via signed Stave payloads over NSP
 - NIST AC-3 / SC-28 audit tagging on all outbound frames
 

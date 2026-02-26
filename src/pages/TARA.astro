@@ -15,7 +15,8 @@ const THREAT_CATEGORIES = [
   { id: 'DM', name: 'Data Manipulation', description: 'Altering decoded intent or recordings' },
   { id: 'DS', name: 'Denial of Service', description: 'Disrupting BCI function' },
   { id: 'PE', name: 'Privilege Escalation', description: 'Gaining unauthorized access depth' },
-  { id: 'CI', name: 'Cognitive Integrity', description: 'Thought privacy, perception, identity threats' },
+  { id: 'CR', name: 'Cognitive Reconnaissance', description: 'Thought decoding, neural data inference, intent extraction' },
+  { id: 'CD', name: 'Cognitive Disruption', description: 'Perception manipulation, identity modification, cognitive coercion' },
   { id: 'PS', name: 'Physical Safety', description: 'Tissue damage, seizures, involuntary movement' },
   { id: 'EX', name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
 ];
@@ -120,7 +121,7 @@ print(<span class="text-emerald-400">f"Loaded {'{'}techniques.length{'}'} mappin
                     </ul>
                     <div class="mt-10 p-5 rounded-2xl bg-blue-50 border border-blue-100">
                         <p class="text-[11px] text-blue-700 font-medium leading-relaxed italic">
-                            All TARA techniques are mapped to MITRE-compatible IDs (QIF-T0001+) and include NISS v1.0 impact vectors for neural risk scoring.
+                            All TARA techniques are mapped to MITRE-compatible IDs (QIF-T0001+) and include NISS v1.1 impact vectors for neural risk scoring.
                         </p>
                     </div>
                 </div>

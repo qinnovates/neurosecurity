@@ -21,7 +21,7 @@ const latestChange = getLatestChangelog();
 
 <PageLayout
   title="QIF Whitepaper v6.0"
-  description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
+  description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper', href: '/whitepaper/' }, { label: 'v6.0' }]}
   wide={true}
 >
@@ -73,7 +73,7 @@ const latestChange = getLatestChangelog();
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "QIF Whitepaper v6.0: An Open Security Standard for Brain-Computer Interfaces",
-        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
+        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-13",
@@ -91,7 +91,7 @@ const latestChange = getLatestChangelog();
           QIF is the first open standard that maps BCI techniques to their security risks, clinical applications, and psychiatric outcomes in a single framework.
         </p>
         <p class="text-base text-[var(--color-text-muted)] mb-6">
-          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors.
+          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 6 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors.
         </p>
         <div class="flex flex-wrap items-center gap-3 mb-4">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
@@ -412,7 +412,7 @@ const latestChange = getLatestChangelog();
               </div>
             </div>
             <p>
-              <strong class="text-[var(--color-text-primary)]">Reading a cell:</strong> Click any technique to expand its full detail. The NISS vector (e.g., <span class="font-[family-name:var(--font-mono)] text-xs">BI:H/CG:C/CV:H/RV:P/NP:T</span>) encodes all five scoring dimensions. The DSM-5-TR mapping shows which diagnostic clusters the technique's impacts correspond to. The dual-use flag indicates whether the same mechanism has an established therapeutic application.
+              <strong class="text-[var(--color-text-primary)]">Reading a cell:</strong> Click any technique to expand its full detail. The NISS vector (e.g., <span class="font-[family-name:var(--font-mono)] text-xs">BI:H/CR:H/CD:C/CV:H/RV:P/NP:T</span>) encodes all six scoring dimensions. The DSM-5-TR mapping shows which diagnostic clusters the technique's impacts correspond to. The dual-use flag indicates whether the same mechanism has an established therapeutic application.
             </p>
             <p>
               <strong class="text-[var(--color-text-primary)]">Severity colors:</strong> <span class="text-[#ef4444] font-medium">Red</span> = critical (NISS &ge; 9.0), <span class="text-[#f97316] font-medium">Orange</span> = high (7.0&ndash;8.9), <span class="text-[#eab308] font-medium">Yellow</span> = medium (4.0&ndash;6.9), <span class="text-[#22c55e] font-medium">Green</span> = low (&lt; 4.0). The PINS flag (persistent involuntary neural stimulation) is shown separately &mdash; {stats.pinsCount} techniques carry this flag, indicating potential for ongoing harm after the initial exposure.
@@ -436,7 +436,7 @@ const latestChange = getLatestChangelog();
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">5. NISS Scoring</h2>
         <div class="prose mb-8">
           <p>
-            The Neural Impact Scoring System (NISS) is a purpose-built vulnerability scoring system for neural devices. In contrast to CVSS, which measures confidentiality, integrity, and availability, NISS quantifies five dimensions specifically relevant to brain-computer interfaces:
+            The Neural Impact Scoring System (NISS) is a purpose-built vulnerability scoring system for neural devices. In contrast to CVSS, which measures confidentiality, integrity, and availability, NISS quantifies six dimensions specifically relevant to brain-computer interfaces:
           </p>
         </div>
 
@@ -454,10 +454,19 @@ const latestChange = getLatestChangelog();
           <div class="glass rounded-xl p-5">
             <div class="flex items-center gap-2 mb-2">
               <span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
-              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Integrity (CG)</h4>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Reconnaissance (CR)</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Assesses impact on a victim's thought processes, perception, and decision-making. A phantom sensory injection scores CG:H, while neural data eavesdropping with no cognitive effect scores CG:N. A technique that alters the subject's sense of agency scores CG:C.
+              Captures read-side attacks: neural data inference, thought decoding, and intent extraction. Neural eavesdropping with partial intent decoding scores CR:L, while full thought stream extraction scores CR:C.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Disruption (CD)</h4>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              Captures write-side attacks: perception manipulation, identity modification, and cognitive coercion. A phantom sensory injection scores CD:H, while a technique that alters the subject's sense of agency scores CD:C.
             </p>
           </div>
           <div class="glass rounded-xl p-5">
@@ -558,7 +567,7 @@ const latestChange = getLatestChangelog();
 
         <div class="prose mt-8">
           <p>
-            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Integrity (CG) scores, mapping to disorders such as brief psychotic disorder, delirium, and dissociative conditions.
+            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) scores, mapping to disorders such as brief psychotic disorder, delirium, and dissociative conditions.
           </p>
           <p>
             <strong>Mood/Trauma</strong> ({stats.dsm5.clusters.mood_trauma} techniques) &mdash; Attacks that alter emotional state or violate autonomy. Driven by Consent Violation (CV) metrics, mapping to PTSD, acute stress disorder, and adjustment disorders.
@@ -846,7 +855,7 @@ const latestChange = getLatestChangelog();
             </div>
             <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
               <li>Use the <a href="#neural-impact">DSM-5-TR diagnostic mapping</a> to assess cognitive and psychiatric risks of BCI techniques</li>
-              <li>Evaluate <a href="/scoring/">NISS Cognitive Integrity scores</a> for impact on perception, agency, and decision-making</li>
+              <li>Evaluate <a href="/scoring/">NISS Cognitive Reconnaissance and Disruption scores</a> for impact on perception, agency, and decision-making</li>
               <li>Inform neuropsychological assessment protocols with the <a href="#hourglass">band-to-function mapping</a></li>
               <li>Contribute clinical expertise to the dual-use classification of emerging neurotechnologies</li>
             </ul>

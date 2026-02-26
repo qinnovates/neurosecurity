@@ -26,7 +26,7 @@ Every technique in the [TARA registry](https://qinnovate.com/TARA) now has a `ne
 
 1. **UI category** provides the primary signal — signal injection violates Mental Integrity + Cognitive Liberty; exfiltration violates Mental Privacy; persona attacks violate Mental Integrity.
 2. **DSM-5-TR cluster** adds overlays — persistent_personality techniques always get Psychological Continuity; cognitive/psychotic clusters add Mental Integrity.
-3. **NISS vector components** refine the mapping — high brain impact (BI:H) maps to Mental Integrity; high cognitive impact (CG:H) maps to Cognitive Liberty + Mental Integrity.
+3. **NISS vector components** refine the mapping — high brain impact (BI:H) maps to Mental Integrity; high cognitive reconnaissance (CR:H) maps to Mental Privacy + Cognitive Liberty; high cognitive disruption (CD:H) maps to Mental Integrity + Cognitive Liberty.
 4. **Cross-modal data fusion** triggers data-lifecycle protections under Mental Privacy (extended).
 5. **Signal dynamics disruption** triggers dynamical integrity protections under Mental Integrity (extended).
 
@@ -55,7 +55,7 @@ Some attacks don't break your brain. They *retune* it.
 
 Gradual drift (T0062) shifts neural parameters slowly enough that your brain's homeostatic mechanisms adapt to the new baseline. Neurofeedback falsification (T0022) trains your brain to reinforce pathological patterns it thinks are healthy. Baseline adaptation poisoning (T0071) exploits re-enrollment windows to shift what "normal" looks like.
 
-These are violations of Mental Integrity, but the original formulation doesn't capture the engineering specifics. QIF extends MI with signal dynamics protections: detecting oscillatory disruption, timing attacks, and homeostatic retuning. 81 of 102 techniques now map to MI (up from 71 when we tracked dynamics separately).
+These are violations of Mental Integrity, but the original formulation doesn't capture the engineering specifics. QIF extends MI with signal dynamics protections: detecting oscillatory disruption, timing attacks, and homeostatic retuning. 84 of 109 techniques now map to MI (up from 71 when we tracked dynamics separately).
 
 ### What QIF Adds to Mental Privacy
 
@@ -79,7 +79,7 @@ CCI = (consent_weight x rights_count x severity_factor) / 10
 
 CCI ranges from 0.1 (minimal complexity — low severity, one right, standard consent) to 4.0 (maximum — critical severity, multiple rights, prohibited tier).
 
-Across 102 techniques: **mean CCI = 1.01, 11 techniques exceed 2.0**.
+Across 109 techniques: **mean CCI = 1.02, 11 techniques exceed 2.0**.
 
 But the CCI's real value isn't the number itself. It's what happens when the number doesn't match the consent tier.
 
@@ -123,7 +123,7 @@ This is not a classification bug — it's a category error. Risk classification 
 
 ## The Neurorights Hourglass
 
-Mapping all 102 techniques produces a striking pattern when visualized against the QIF hourglass:
+Mapping all 109 techniques produces a striking pattern when visualized against the QIF hourglass:
 
 | Band | Mental Privacy | Cognitive Liberty | Mental Integrity | Psychological Continuity |
 |------|:---:|:---:|:---:|:---:|
@@ -161,6 +161,6 @@ All 102 technique mappings are in the [TARA registry](https://qinnovate.com/TARA
 
 **Neurorights taxonomy:** Ienca & Andorno (2017) — MP, CL, MI, PC. QIF Framework — MI (extended with signal dynamics + write-protection, mapped to CIA Integrity), MP (extended with data lifecycle, mapped to CIA Confidentiality).
 
-**NISS:** Neural Impact Scoring System v1.0. Vector format: `NISS:1.0/BI:_/CG:_/CV:_/RV:_/NP:_`. See the [whitepaper](https://doi.org/10.5281/zenodo.18640105) for methodology.
+**NISS:** Neural Impact Scoring System v1.1. Vector format: `NISS:1.1/BI:_/CR:_/CD:_/CV:_/RV:_/NP:_`. See the [whitepaper](https://doi.org/10.5281/zenodo.18640105) for methodology.
 
 *Cross-AI validated: Claude Opus 4.6 (analysis, implementation) + Gemini 2.5 Pro (validation, additional correlations). Human decision: Kevin Qi.*

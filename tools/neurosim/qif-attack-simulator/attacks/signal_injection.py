@@ -16,7 +16,7 @@ SSVEP_15HZ_META = AttackMetadata(
     tactic="QIF-N.IJ",
     nic_chain="S1->I0->N1",
     band_ids=["S1", "I0", "N1"],
-    niss_vector="NISS:1.0/BI:M/CG:M/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:M/CR:M/CD:M/CV:I/RV:P/NP:S",
     severity="MEDIUM",
     description="Standard SSVEP attack at a known target frequency (15Hz). "
                 "Both L1 notch filter and SSVEP signature detector catch this.",
@@ -46,7 +46,7 @@ SSVEP_NOVEL_META = AttackMetadata(
     tactic="QIF-N.IJ",
     nic_chain="S1->I0->N1",
     band_ids=["S1", "I0", "N1"],
-    niss_vector="NISS:1.0/BI:M/CG:M/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:M/CR:M/CD:M/CV:I/RV:P/NP:S",
     severity="MEDIUM",
     description="SSVEP at 13Hz, outside the notch filter bank (8.57, 10.9, 15, 20 Hz). "
                 "L1 won't filter it. Only coherence monitor's spectral peak detector catches it.",
@@ -76,7 +76,7 @@ IMPEDANCE_SPIKE_META = AttackMetadata(
     tactic="QIF-P.DS",
     nic_chain="I0",
     band_ids=["I0"],
-    niss_vector="NISS:1.0/BI:L/CG:L/CV:N/RV:P/NP:N",
+    niss_vector="NISS:1.1/BI:L/CR:L/CD:L/CV:N/RV:P/NP:N",
     severity="LOW",
     description="Sudden >2.5V jump triggers L1 impedance guard. Blunt hardware attack.",
     status="CONFIRMED",
@@ -104,7 +104,7 @@ FLOODING_META = AttackMetadata(
     tactic="QIF-P.DS",
     nic_chain="I0->N4->N5->N6->N7",
     band_ids=["I0", "N4", "N5", "N6", "N7"],
-    niss_vector="NISS:1.0/BI:H/CG:H/CV:E/RV:P/NP:T",
+    niss_vector="NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
     severity="CRITICAL",
     description="Broadband saturation across all frequencies. DDoS for neural tissue. "
                 "Overwhelms thalamic gate, causes phase coherence collapse.",
@@ -135,7 +135,7 @@ PHASE_REPLAY_META = AttackMetadata(
     tactic="QIF-N.IJ",
     nic_chain="S1->I0->N1->N3->N5->N6->N7",
     band_ids=["S1", "I0", "N1", "N3", "N5", "N6", "N7"],
-    niss_vector="NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:T",
+    niss_vector="NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:T",
     severity="CRITICAL",
     description="Replays statistically identical neural signal trajectory. "
                 "Same alpha phase, spectral shape, amplitude stats. "

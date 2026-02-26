@@ -3,7 +3,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import WhitepaperVersionSelector from '../../components/WhitepaperVersionSelector.astro';
 import { getWhitepaperStats } from '../../lib/whitepaper-stats';
 import { getLatestChangelog, getTacticsWithCounts, THREAT_DOMAINS } from '../../lib/threat-data';
-import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../../lib/qif-constants';
+import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '../../lib/qif-constants';
 
 // Visualization components
 import HourglassChart from '../../components/whitepaper/HourglassChart.astro';
@@ -35,7 +35,7 @@ const tacticColors: Record<string, string> = {
 
 <PageLayout
   title="QIF Whitepaper v6.3.5"
-  description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
+  description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
 >
@@ -74,7 +74,7 @@ const tacticColors: Record<string, string> = {
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "QIF Whitepaper v6.3.5: An Open Security Standard for Brain-Computer Interfaces",
-        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
+        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-18",
@@ -92,7 +92,7 @@ const tacticColors: Record<string, string> = {
           QIF is the first open standard that maps BCI techniques to their security risks, clinical applications, and potential psychiatric outcomes in a single framework.
         </p>
         <p class="text-base text-[var(--color-text-muted)] mb-6">
-          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based and await validation by psychiatrists and neuroscientists.</em>
+          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 6 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based and await validation by psychiatrists and neuroscientists.</em>
         </p>
       </section>
 
@@ -539,7 +539,7 @@ const tacticColors: Record<string, string> = {
               </div>
             </div>
             <p>
-              <strong class="text-[var(--color-text-primary)]">Reading a cell:</strong> Click any technique to expand its full detail. The NISS vector (e.g., <span class="font-[family-name:var(--font-mono)] text-xs">BI:H/CG:C/CV:H/RV:P/NP:T</span>) encodes all five scoring dimensions. The DSM-5-TR mapping shows which diagnostic clusters the technique's impacts correspond to. The dual-use flag indicates whether the same mechanism has an established therapeutic application.
+              <strong class="text-[var(--color-text-primary)]">Reading a cell:</strong> Click any technique to expand its full detail. The NISS vector (e.g., <span class="font-[family-name:var(--font-mono)] text-xs">BI:H/CR:H/CD:C/CV:H/RV:P/NP:T</span>) encodes all six scoring dimensions. The DSM-5-TR mapping shows which diagnostic clusters the technique's impacts correspond to. The dual-use flag indicates whether the same mechanism has an established therapeutic application.
             </p>
             <p>
               <strong class="text-[var(--color-text-primary)]">Severity colors:</strong> <span class="text-[#ef4444] font-medium">Red</span> = critical (NISS &ge; 9.0), <span class="text-[#f97316] font-medium">Orange</span> = high (7.0&ndash;8.9), <span class="text-[#eab308] font-medium">Yellow</span> = medium (4.0&ndash;6.9), <span class="text-[#22c55e] font-medium">Green</span> = low (&lt; 4.0). The PINS flag (persistent involuntary neural stimulation) is shown separately &mdash; {stats.pinsCount} techniques carry this flag, indicating potential for ongoing harm after the initial exposure.
@@ -563,7 +563,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">5. NISS Scoring</h2>
         <div class="prose mb-8">
           <p>
-            The Neural Impact Scoring System (NISS) is a purpose-built vulnerability scoring system for neural devices. In contrast to CVSS, which measures confidentiality, integrity, and availability, NISS quantifies five dimensions specifically relevant to brain-computer interfaces:
+            The Neural Impact Scoring System (NISS) is a purpose-built vulnerability scoring system for neural devices. In contrast to CVSS, which measures confidentiality, integrity, and availability, NISS quantifies six dimensions specifically relevant to brain-computer interfaces:
           </p>
         </div>
 
@@ -581,10 +581,19 @@ const tacticColors: Record<string, string> = {
           <div class="glass rounded-xl p-5">
             <div class="flex items-center gap-2 mb-2">
               <span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
-              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Integrity (CG)</h4>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Reconnaissance (CR)</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Assesses impact on a victim's thought processes, perception, and decision-making. A phantom sensory injection scores CG:H, while neural data eavesdropping with no cognitive effect scores CG:N. A technique that alters the subject's sense of agency scores CG:C.
+              Captures read-side attacks: neural data inference, thought decoding, and intent extraction. Neural eavesdropping with partial intent decoding scores CR:L, while full thought stream extraction scores CR:C. Techniques with no cognitive read impact score CR:N.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Disruption (CD)</h4>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              Captures write-side attacks: perception manipulation, identity modification, and cognitive coercion. A phantom sensory injection scores CD:H, while a technique that alters the subject's sense of agency scores CD:C. Techniques with no cognitive write impact score CD:N.
             </p>
           </div>
           <div class="glass rounded-xl p-5">
@@ -629,16 +638,20 @@ const tacticColors: Record<string, string> = {
         <!-- NISS Formula -->
         <div class="glass rounded-xl p-6 mb-8">
           <p class="text-center font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4 text-lg">
-            NISS = (BI + CG + CV + RV + NP) / 5
+            NISS = (BI + CR + CD + CV + RV + NP) / 6
           </p>
-          <div class="grid grid-cols-5 gap-3 text-center text-xs">
+          <div class="grid grid-cols-6 gap-3 text-center text-xs">
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">BI</div>
               <div class="text-[var(--color-text-faint)]">Biological Impact</div>
             </div>
             <div>
-              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CG</div>
-              <div class="text-[var(--color-text-faint)]">Cognitive Integrity</div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CR</div>
+              <div class="text-[var(--color-text-faint)]">Cognitive Reconnaissance</div>
+            </div>
+            <div>
+              <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CD</div>
+              <div class="text-[var(--color-text-faint)]">Cognitive Disruption</div>
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CV</div>
@@ -714,7 +727,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mt-8">
           <p>
-            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Integrity (CG) scores, mapping to disorders such as brief psychotic disorder, delirium, and dissociative conditions.
+            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) scores, mapping to disorders such as brief psychotic disorder, delirium, and dissociative conditions.
           </p>
           <p>
             <strong>Mood/Trauma</strong> ({stats.dsm5.clusters.mood_trauma} techniques) &mdash; Attacks that alter emotional state or violate autonomy. Driven by Consent Violation (CV) metrics, mapping to PTSD, acute stress disorder, and adjustment disorders.
@@ -1083,7 +1096,7 @@ const tacticColors: Record<string, string> = {
             </div>
             <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
               <li>Use the <a href="#neural-impact">DSM-5-TR diagnostic mapping</a> to assess cognitive and psychiatric risks of BCI techniques</li>
-              <li>Evaluate <a href="/scoring/">NISS Cognitive Integrity scores</a> for impact on perception, agency, and decision-making</li>
+              <li>Evaluate <a href="/scoring/">NISS Cognitive Reconnaissance and Disruption scores</a> for impact on perception, agency, and decision-making</li>
               <li>Inform neuropsychological assessment protocols with the <a href="#hourglass">band-to-function mapping</a></li>
               <li>Contribute clinical expertise to the dual-use classification of emerging neurotechnologies</li>
             </ul>
@@ -1218,7 +1231,7 @@ const tacticColors: Record<string, string> = {
           </div>
           <div class="glass-subtle rounded-lg p-4">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS weights not calibrated</p>
-            <p class="text-xs text-[var(--color-text-muted)]">All five NISS metrics use equal weights (1.0) in the default profile. Context profiles (Clinical, Research, Consumer, Military) propose differential weights, but these have not been calibrated against empirical data or expert elicitation.</p>
+            <p class="text-xs text-[var(--color-text-muted)]">All six NISS metrics use equal weights (1.0) in the default profile. Context profiles (Clinical, Research, Consumer, Military) propose differential weights, but these have not been calibrated against empirical data or expert elicitation.</p>
           </div>
           <div class="glass-subtle rounded-lg p-4">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">No interrater reliability study</p>
@@ -1300,7 +1313,7 @@ const tacticColors: Record<string, string> = {
                 <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 53</a>
               </div>
               <p class="text-xs text-[var(--color-text-muted)]">
-                NISS was designed as a security scoring system. When I mapped the five metrics against DSM-5-TR chapters, the correspondence was immediate: high Biological Impact predicts motor/neurocognitive disorders; high Cognitive Integrity predicts psychotic features; elevated Consent Violation predicts mood/trauma disorders. The security metrics doubled as psychiatric risk predictors without being designed to. This required clinical validation (which we are actively seeking).
+                NISS was designed as a security scoring system. When I mapped the six metrics against DSM-5-TR chapters, the correspondence was immediate: high Biological Impact predicts motor/neurocognitive disorders; high Cognitive Reconnaissance and Disruption scores predict psychotic features; elevated Consent Violation predicts mood/trauma disorders. The security metrics doubled as psychiatric risk predictors without being designed to. This required clinical validation (which we are actively seeking).
               </p>
             </div>
           </div>
@@ -1361,7 +1374,7 @@ const tacticColors: Record<string, string> = {
             <p class="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-2">Human-Originated</p>
             <ul class="space-y-1.5 text-xs text-[var(--color-text-muted)]">
               <li>The 11-band hourglass architecture and its mathematical derivation</li>
-              <li>TARA threat taxonomy structure and all 102 technique classifications</li>
+              <li>TARA threat taxonomy structure and all {TARA_TECHNIQUES} technique classifications</li>
               <li>NISS scoring methodology, all metric assignments, and all NISS scores</li>
               <li>Neural Impact Chain pipeline and all DSM-5-TR diagnostic mappings</li>
               <li>All architectural decisions, research conclusions, and governance design</li>

@@ -79,7 +79,7 @@ Sound familiar?
 
 Here's where the hourglass surprised us again.
 
-While building the security model, we scored every technique using NISS — the Neural Impact Scoring System. NISS has five metrics: Biological Impact (BI), Cognitive Integrity (CG), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). These were designed purely for security: how bad is this attack, and can the target recover?
+While building the security model, we scored every technique using NISS — the Neural Impact Scoring System. NISS has six metrics: Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive Disruption (CD), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). These were designed purely for security: how bad is this attack, and can the target recover?
 
 Then we cross-referenced the hourglass bands with neuroanatomy — which brain structures live at each band, what cognitive functions those structures support, and what happens clinically when those functions are disrupted. We weren't trying to build a diagnostic tool. We were trying to understand attack impact.
 
@@ -88,14 +88,15 @@ But when we laid the NISS scores against DSM-5-TR diagnostic categories, the map
 | NISS Metric | Security Meaning | Clinical Prediction |
 |---|---|---|
 | BI (High/Critical) | Tissue damage | Motor/Neurocognitive disorders |
-| CG (High/Critical) | Cognitive disruption | Cognitive/Psychotic disorders |
+| CR (High/Critical) | Thought decoding, neural data inference | Cognitive/Psychotic disorders |
+| CD (High/Critical) | Perception manipulation, identity modification | Cognitive/Psychotic disorders |
 | CV (Elevated/Involuntary) | Consent violation | Mood/Trauma disorders |
 | NP (Structural) | Lasting neural change | Persistent/Personality disorders |
 | RV (Partial/Irreversible) | Poor recovery | Chronicity modifier |
 
-A technique with high Consent Violation and high Cognitive Integrity scores doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — PTSD, depression, and psychotic features. The security metrics were already encoding the clinical outcomes without being told to.
+A technique with high Consent Violation and high Cognitive Reconnaissance/Disruption scores doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — PTSD, depression, and psychotic features. The security metrics were already encoding the clinical outcomes without being told to.
 
-The [TARA registry](https://qinnovate.com/TARA) now carries this mapping for all 103 techniques. Each one has ICD-10-CM codes, DSM-5-TR diagnoses, confidence levels, a diagnostic cluster, and the Neural Impact Chain that explains *why* — the full path from technique to band to brain structure to cognitive function to clinical outcome. The Fragility Tax makes this concrete: techniques targeting the lower, deterministic bands (N1-N2) map to motor and neurocognitive disorders with high confidence, because those pathways are simple enough that disruption produces predictable, well-characterized clinical presentations. Techniques targeting the upper, indeterministic bands (N5-N7) map to broader diagnostic clusters with more uncertainty, because the cortex's complexity makes outcomes harder to predict.
+The [TARA registry](https://qinnovate.com/TARA) now carries this mapping for all 109 techniques. Each one has ICD-10-CM codes, DSM-5-TR diagnoses, confidence levels, a diagnostic cluster, and the Neural Impact Chain that explains *why* — the full path from technique to band to brain structure to cognitive function to clinical outcome. The Fragility Tax makes this concrete: techniques targeting the lower, deterministic bands (N1-N2) map to motor and neurocognitive disorders with high confidence, because those pathways are simple enough that disruption produces predictable, well-characterized clinical presentations. Techniques targeting the upper, indeterministic bands (N5-N7) map to broader diagnostic clusters with more uncertainty, because the cortex's complexity makes outcomes harder to predict.
 
 We didn't set out to build a bridge between cybersecurity and psychiatry. We built a security model, populated it honestly, and the bridge was already in the data. The hourglass didn't just organize attack surfaces — it organized clinical outcomes too, because both are governed by the same complexity gradient. The same variable that determines how cheap a system is to run, how cheap it is to break, and how cheap it is to lose *also* determines what the clinical picture looks like when it breaks.
 
@@ -162,7 +163,7 @@ That last point is the one I care about most, and it's the one that came from se
 
 ## How I Got Here
 
-I started by asking how to protect the brain from hackers. I mapped every layer of neural processing to understand where attacks land. I scored each band for vulnerability, reversibility, and clinical impact. I built a registry of 102 techniques spanning neural, interface, and synthetic domains.
+I started by asking how to protect the brain from hackers. I mapped every layer of neural processing to understand where attacks land. I scored each band for vulnerability, reversibility, and clinical impact. I built a registry of 109 techniques spanning neural, interface, and synthetic domains.
 
 Then I noticed the hierarchy that reveals where the brain is vulnerable also reveals how the brain achieves efficiency. The security model became a compute model. I didn't plan for that. Nobody plans for the side effects of staring at a problem long enough.
 

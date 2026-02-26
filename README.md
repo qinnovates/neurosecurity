@@ -65,11 +65,11 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs | 🟢 v6.2.1 |
-| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.4 |
+| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.5 |
 | **[TARA](https://qinnovate.com/TARA/)** | 109 BCI attack-therapy technique pairs, STIX 2.1 registry | 🟢 v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | 🟢 v0.2.0 |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links | 🟡 v0.5, Secure Core done |
-| **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces (5 neural metrics) | 🟢 v1.0 |
+| **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces (6 neural metrics) | 🟢 v1.1 |
 | **[Runemate](https://qinnovate.com/runemate/)** | Native DSL compiler (67.8% compression), code-to-visual-cortex goal | 🟢 v1.0 Compiler |
 | Cortical Renderer | Runemate Phase 2/3: electrode stimulation pattern generation | 🔵 Planned |
 | BCI Limits Equation | Information-theoretic bounds on BCI channel capacity | 🟡 Hypothesis |
@@ -137,7 +137,7 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 
 | Neuroright | What It Protects | Enforced By |
 |------------|-----------------|-------------|
-| **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CG metric (scores cognitive compromise severity) |
+| **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CR/CD metrics (score cognitive read/write compromise severity) |
 | **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 109 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
 | **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
 | **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
@@ -215,7 +215,8 @@ The scoring extension. First CVSS v4.0 extension designed for neural interfaces.
 | Metric | Code | What It Measures |
 |--------|------|-----------------|
 | Biological Impact | BI | Tissue damage, neural pathway disruption |
-| Cognitive Integrity | CG | Memory, attention, executive function compromise |
+| Cognitive Reconnaissance | CR | Thought decoding, neural data inference, intent extraction |
+| Cognitive Disruption | CD | Perception manipulation, identity modification, cognitive coercion |
 | Consent Violation | CV | Whether the subject knew and agreed |
 | Reversibility | RV | Can the damage be undone? |
 | Neuroplasticity | NP | Long-term adaptive/maladaptive neural changes |

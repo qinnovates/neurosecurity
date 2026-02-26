@@ -118,7 +118,7 @@ Research lab for equation validation, visualization, and whitepaper generation.
 - **Quantum Integer (Q)** — Labeled gap for quantum unknowns at each ring (like Mendeleev's empty boxes)
 - **DSKE** — Distributed Symmetric Key Establishment: quantum-safe encryption without quantum hardware at the implant
 - **NISS** — Neural Impact Scoring System: extends CVSS for neural harm (reversibility, patient awareness)
-- **TARA** — [Threat Atlas](../shared/qtara/) mapping 103 techniques across the hourglass
+- **TARA** — [Threat Atlas](../shared/qtara/) mapping 109 techniques across the hourglass
 
 ---
 

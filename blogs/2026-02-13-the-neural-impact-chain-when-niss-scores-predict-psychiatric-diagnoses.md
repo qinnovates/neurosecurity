@@ -34,19 +34,20 @@ Every technique now carries this mapping. Silicon-only techniques (S1-S3 bands, 
 
 Here is what we did not expect: **NISS scores already predicted the diagnostic mapping.**
 
-NISS (Neural Impact Scoring System) has five metrics: BI (Biological Impact), CG (Cognitive Integrity), CV (Consent Violation), RV (Reversibility), and NP (Neuroplasticity). We designed these to quantify security impact. But when we laid them against DSM-5-TR chapters, the correspondence was immediate:
+NISS (Neural Impact Scoring System) has six metrics: BI (Biological Impact), CR (Cognitive Reconnaissance), CD (Cognitive Disruption), CV (Consent Violation), RV (Reversibility), and NP (Neuroplasticity). We designed these to quantify security impact. But when we laid them against DSM-5-TR chapters, the correspondence was immediate:
 
 | NISS Metric | Security Meaning | Diagnostic Prediction |
 |-------------|------------------|----------------------|
 | BI (High/Critical) | Tissue damage | Motor/Neurocognitive disorders |
-| CG (High/Critical) | Cognitive disruption | Cognitive/Psychotic disorders |
+| CR (High/Critical) | Thought decoding, neural data inference | Cognitive/Psychotic disorders |
+| CD (High/Critical) | Perception manipulation, identity modification | Cognitive/Psychotic disorders |
 | CV (Elevated/Involuntary) | Consent violation | Mood/Trauma disorders |
 | NP (Structural) | Lasting neural change | Persistent/Personality disorders |
 | RV (Partial/Irreversible) | Poor recovery | Chronicity modifier |
 
-A technique with CV:E (Elevated) and CG:H (High) doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — meaning PTSD, depression, and psychotic features are the primary clinical concerns.
+A technique with CV:E (Elevated) and CR:H/CD:H (High) doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — meaning PTSD, depression, and psychotic features are the primary clinical concerns.
 
-NISS was designed as a security scoring system. It turns out it is also a psychiatric risk predictor. The same five metrics that tell a security researcher "this attack is dangerous" tell a clinician "this patient needs screening for these specific conditions."
+NISS was designed as a security scoring system. It turns out it is also a psychiatric risk predictor. The same six metrics that tell a security researcher "this attack is dangerous" tell a clinician "this patient needs screening for these specific conditions."
 
 ## Five Clusters, Not Sixteen Chapters
 

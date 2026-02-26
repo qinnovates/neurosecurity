@@ -38,7 +38,7 @@ export function getWhitepaperStats() {
   }));
 
   // NISS gap: how many techniques have both CVSS and NISS scores
-  // All CVSS scores miss neural-specific metrics (BI, CG, CV, RV, NP) by definition
+  // All CVSS scores miss neural-specific metrics (BI, CR, CD, CV, RV, NP) by definition
   const withBothScores = THREAT_VECTORS.filter(t => t.cvss && t.niss.score > 0);
   const gapCount = withBothScores.length;
 

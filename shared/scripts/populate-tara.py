@@ -709,7 +709,7 @@ TARA = {
         }
     },
 
-    # ─── Identity / Cognitive Integrity ───────────────────────────
+    # ─── Identity / Cognitive Security (CR + CD) ───────────────────────────
 
     "QIF-T0032": {
         "mechanism": "Replication or synthesis of individual neural biometric signatures to impersonate BCI users",
