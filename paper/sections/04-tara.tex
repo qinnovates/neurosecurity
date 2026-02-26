@@ -30,7 +30,7 @@ independent taxonomy purpose-built for the BCI threat landscape.
 
 \subsection{Taxonomy Structure}
 
-The TARA registry organizes 102 techniques into 15 tactics across 8 operational
+The TARA registry organizes 109 techniques into 15 tactics across 8 operational
 domains. Technique identifiers follow the format \texttt{QIF-TXXX}, where the
 numeric suffix provides sequential ordering.
 
@@ -71,9 +71,9 @@ documentation:
 \textbf{Status} & \textbf{Definition} & \textbf{Count} \\
 \midrule
 Confirmed    & Documented in real-world use or peer-reviewed literature & 19 \\
-Demonstrated & Proven in laboratory or controlled conditions            & 33 \\
+Demonstrated & Proven in laboratory or controlled conditions            & 35 \\
 Emerging     & Newly identified; limited but growing evidence           & 22 \\
-Theoretical  & Plausible based on known physics and engineering          & 26 \\
+Theoretical  & Plausible based on known physics and engineering          & 31 \\
 Plausible    & Possible but with significant uncertainty                & 1 \\
 Speculative  & Hypothetical; requires unproven capabilities             & 1 \\
 \bottomrule
@@ -82,7 +82,7 @@ Speculative  & Hypothetical; requires unproven capabilities             & 1 \\
 
 \subsection{Severity Distribution}
 
-CVSS v4.0 base severity ratings for all 102 techniques show a distribution
+CVSS v4.0 base severity ratings for all 109 techniques show a distribution
 heavily weighted toward high and critical:
 
 \begin{table}[H]
@@ -94,10 +94,10 @@ heavily weighted toward high and critical:
 \toprule
 \textbf{Severity} & \textbf{Count} & \textbf{Percentage} \\
 \midrule
-Critical & 29 & 28.4\% \\
-High     & 54 & 52.9\% \\
-Medium   & 16 & 15.7\% \\
-Low      &  3 &  2.9\% \\
+Critical & 29 & 26.6\% \\
+High     & 60 & 55.0\% \\
+Medium   & 17 & 15.6\% \\
+Low      &  3 &  2.8\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -109,7 +109,7 @@ is neural tissue.
 
 \subsection{Category Breakdown}
 
-The 102 techniques distribute across eight operational categories:
+The 109 techniques distribute across eight operational categories:
 
 \begin{table}[H]
 \centering
@@ -121,12 +121,12 @@ The 102 techniques distribute across eight operational categories:
 \textbf{ID} & \textbf{Category} & \textbf{Count} \\
 \midrule
 SE & Signal Eavesdropping    & 20 \\
-CR & Cognitive Reconnaissance & 18 \\
-EX & Data Exfiltration       & 17 \\
+CI & Cognitive Interference  & 18 \\
+EX & Data Exfiltration       & 19 \\
 DM & Data Manipulation       & 15 \\
-SI & Signal Injection        & 10 \\
-PE & Privilege Escalation    &  8 \\
-DS & Denial of Service       &  7 \\
+SI & Signal Injection        & 13 \\
+PE & Privilege Escalation    &  9 \\
+DS & Denial of Service       &  8 \\
 PS & Physical Safety         &  7 \\
 \bottomrule
 \end{tabular}
@@ -143,22 +143,23 @@ the mechanisms underlying established therapies such as deep brain stimulation
 
 \begin{table}[H]
 \centering
-\caption{Dual-use classification of 102 TARA techniques.}
+\caption{Dual-use classification of 109 TARA techniques.}
 \label{tab:dualuse}
 \small
 \begin{tabular}{@{}l l r r@{}}
 \toprule
 \textbf{Classification} & \textbf{Definition} & \textbf{Count} & \textbf{\%} \\
 \midrule
-Confirmed    & Published clinical use exists      & 52 & 51.0\% \\
-Probable     & Under active clinical investigation & 16 & 15.7\% \\
-Possible     & Theoretical therapeutic mapping     &  9 &  8.8\% \\
-Silicon Only & No tissue analog; purely digital    & 25 & 24.5\% \\
+Confirmed    & Published clinical use exists      & 53 & 48.6\% \\
+Probable     & Under active clinical investigation & 16 & 14.7\% \\
+Possible     & Theoretical therapeutic mapping     &  9 &  8.3\% \\
+Silicon Only & No tissue analog; purely digital    & 25 & 22.9\% \\
+Not Mapped   & Dual-use assessment pending         &  6 &  5.5\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Of the 102 techniques, 77 (75.5\%) have confirmed, probable, or possible therapeutic analogs.
+Of the 109 techniques, 78 (71.6\%) have confirmed, probable, or possible therapeutic analogs.
 This finding underscores a fundamental challenge for BCI security: the same
 capabilities that must be defended against are often the capabilities that make
 BCIs therapeutically valuable.
@@ -195,14 +196,14 @@ breakdown.
   \begin{minipage}[t]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/severity-dist.pdf}
-    \caption{TARA severity distribution across 102 techniques.}
+    \caption{TARA severity distribution across 109 techniques.}
     \label{fig:severity-dist}
   \end{minipage}
   \hfill
   \begin{minipage}[t]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/dual-use-breakdown.pdf}
-    \caption{Dual-use classification: 75.5\% of techniques have therapeutic analogs.}
+    \caption{Dual-use classification: 71.6\% of techniques have therapeutic analogs.}
     \label{fig:dual-use-breakdown}
   \end{minipage}
 \end{figure}

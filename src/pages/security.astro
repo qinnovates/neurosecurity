@@ -1,6 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import { COHERENCE, SCALE_FREQUENCY } from '../lib/qif-constants';
+import { COHERENCE, SCALE_FREQUENCY, TARA_TECHNIQUES } from '../lib/qif-constants';
 import BrainVisualization from '../components/brain/BrainVisualization';
 import { getBrainViewData } from '../lib/brain-view-data';
 const brainViews = getBrainViewData();
@@ -38,7 +38,7 @@ const brainViews = getBrainViewData();
           <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Map</h3>
         </div>
         <p class="text-sm text-[var(--color-text-muted)] mb-3">
-          <a href="/TARA/" class="text-[var(--color-accent-secondary)] hover:underline font-medium">TARA Atlas</a> catalogs 103+ attack techniques across 8 categories — signal injection, eavesdropping, cognitive manipulation, and more. Every technique is mapped to the brain regions it targets.
+          <a href="/TARA/" class="text-[var(--color-accent-secondary)] hover:underline font-medium">TARA Atlas</a> catalogs {TARA_TECHNIQUES}+ attack techniques across 8 categories — signal injection, eavesdropping, cognitive manipulation, and more. Every technique is mapped to the brain regions it targets.
         </p>
         <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">What can go wrong?</span>
       </div>
@@ -240,7 +240,7 @@ const brainViews = getBrainViewData();
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <a href="/TARA/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">TARA Atlas</h3>
-        <p class="text-sm text-[var(--color-text-muted)]">Browse all 103+ attack techniques mapped across the hourglass model, filterable by category, severity, and brain region.</p>
+        <p class="text-sm text-[var(--color-text-muted)]">Browse all {TARA_TECHNIQUES}+ attack techniques mapped across the hourglass model, filterable by category, severity, and brain region.</p>
       </a>
       <a href="/framework/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Framework</h3>

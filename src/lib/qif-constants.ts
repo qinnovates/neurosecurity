@@ -3,12 +3,17 @@
  * Single source of truth for all QIF values used on the site.
  */
 
+import registrar from '../../shared/qtara-registrar.json';
+
 export const QIF_VERSION = '7.0';
 export const LATEST_WHITEPAPER_VERSION = '7.0';
 export const LATEST_WHITEPAPER_HREF = '/whitepaper/';
 export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;
 export const QIF_ESTABLISHED = 2026;
+
+/** TARA technique count — derived dynamically from qtara-registrar.json */
+export const TARA_TECHNIQUES = (registrar as { techniques: unknown[] }).techniques.length;
 
 /** Hourglass bands (7-1-3 asymmetric) */
 export const HOURGLASS_BANDS = [
@@ -88,7 +93,7 @@ export const PILLARS = [
     name: 'TARA',
     fullName: 'Therapeutic Applications & Risk Assessment',
     tagline: 'The TARA Atlas',
-    description: '102 BCI techniques mapped across four projections — modality, clinical, diagnostic (DSM-5-TR), and governance — each scored with NISS and traced through the Neural Impact Chain from attack to clinical outcome.',
+    description: `${TARA_TECHNIQUES} BCI techniques mapped across four projections — modality, clinical, diagnostic (DSM-5-TR), and governance — each scored with NISS and traced through the Neural Impact Chain from attack to clinical outcome.`,
     href: '/TARA/',
     icon: '&#9650;',
     color: '#f59e0b',
