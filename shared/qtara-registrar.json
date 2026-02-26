@@ -51,8 +51,8 @@
     "by_niss_severity": {
       "critical": 0,
       "high": 21,
-      "medium": 37,
-      "low": 50,
+      "medium": 35,
+      "low": 52,
       "none": 1
     },
     "niss_cvss_mapping": {
@@ -519,7 +519,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -693,7 +693,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -951,7 +951,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -1122,7 +1122,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -1277,7 +1277,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -1437,7 +1437,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -1598,7 +1598,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:N/RV:P/NP:N",
-        "score": 4.5,
+        "score": 4.1,
         "severity": "medium",
         "pins": true
       },
@@ -1742,7 +1742,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -1990,7 +1990,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": true
       },
@@ -2252,7 +2252,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": true
       },
@@ -2508,7 +2508,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": true
       },
@@ -2749,7 +2749,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:L/CD:L/CV:E/RV:P/NP:T",
-        "score": 5.3,
+        "score": 5.7,
         "severity": "medium",
         "pins": true
       },
@@ -2968,7 +2968,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": true
       },
@@ -3213,7 +3213,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:I/RV:P/NP:S",
-        "score": 7.8,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -3486,7 +3486,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:C/CR:N/CD:N/CV:E/RV:I/NP:N",
-        "score": 4.5,
+        "score": 5.4,
         "severity": "medium",
         "pins": true
       },
@@ -3887,7 +3887,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:N",
-        "score": 5.6,
+        "score": 5.4,
         "severity": "medium",
         "pins": false
       },
@@ -4016,7 +4016,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:N",
-        "score": 5.6,
+        "score": 5.4,
         "severity": "medium",
         "pins": false
       },
@@ -4145,7 +4145,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4285,7 +4285,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -4424,7 +4424,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:I/RV:P/NP:S",
-        "score": 7.8,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -4637,7 +4637,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": true
       },
@@ -5024,7 +5024,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:N",
-        "score": 5.6,
+        "score": 5.4,
         "severity": "medium",
         "pins": true
       },
@@ -5297,7 +5297,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -5816,7 +5816,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -5974,7 +5974,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -6236,7 +6236,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:C/CD:C/CV:E/RV:P/NP:T",
-        "score": 7.6,
+        "score": 7.1,
         "severity": "high",
         "pins": true
       },
@@ -6493,7 +6493,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:N/CD:N/CV:N/RV:F/NP:N",
-        "score": 0.6,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -6617,7 +6617,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -6863,7 +6863,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:C/CD:C/CV:E/RV:I/NP:S",
-        "score": 8.4,
+        "score": 8.0,
         "severity": "high",
         "pins": true
       },
@@ -7094,7 +7094,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 5.9,
+        "score": 5.7,
         "severity": "medium",
         "pins": false
       },
@@ -7330,7 +7330,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N",
-        "score": 3.4,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -7534,8 +7534,8 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:C/CD:C/CV:E/RV:F/NP:N",
-        "score": 4.5,
-        "severity": "medium",
+        "score": 3.4,
+        "severity": "low",
         "pins": false
       },
       "cross_references": {
@@ -7742,7 +7742,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:C/CD:C/CV:E/RV:P/NP:S",
-        "score": 7.8,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -7985,7 +7985,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:I/NP:N",
-        "score": 5.1,
+        "score": 4.7,
         "severity": "medium",
         "pins": true
       },
@@ -8218,7 +8218,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:C/CD:C/CV:E/RV:I/NP:S",
-        "score": 8.4,
+        "score": 8.0,
         "severity": "high",
         "pins": true
       },
@@ -8451,7 +8451,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:I/RV:P/NP:T",
-        "score": 5.9,
+        "score": 5.7,
         "severity": "medium",
         "pins": false
       },
@@ -8653,7 +8653,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -8893,7 +8893,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -9025,7 +9025,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:L/CD:L/CV:I/RV:P/NP:N",
-        "score": 4.5,
+        "score": 4.7,
         "severity": "medium",
         "pins": false
       },
@@ -9150,7 +9150,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -9276,7 +9276,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -9402,7 +9402,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:I/RV:P/NP:T",
-        "score": 7.0,
+        "score": 7.1,
         "severity": "high",
         "pins": true
       },
@@ -9534,7 +9534,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -9662,7 +9662,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 6.5,
+        "score": 6.4,
         "severity": "medium",
         "pins": true
       },
@@ -9799,7 +9799,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:N/RV:F/NP:N",
-        "score": 1.1,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -10057,7 +10057,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:E/RV:F/NP:N",
-        "score": 2.3,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -10218,7 +10218,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N",
-        "score": 3.4,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -10457,7 +10457,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N",
-        "score": 3.4,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -10692,8 +10692,8 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:C/CD:C/CV:E/RV:F/NP:N",
-        "score": 4.5,
-        "severity": "medium",
+        "score": 3.4,
+        "severity": "low",
         "pins": false
       },
       "cross_references": {
@@ -10926,7 +10926,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:C/CD:C/CV:E/RV:P/NP:S",
-        "score": 8.4,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -11163,7 +11163,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N",
-        "score": 3.4,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -11681,7 +11681,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -11882,7 +11882,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:C/CD:C/CV:E/RV:P/NP:S",
-        "score": 7.8,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -12113,7 +12113,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:N/RV:F/NP:N",
-        "score": 1.1,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -12260,7 +12260,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -12461,7 +12461,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:L/CD:L/CV:N/RV:F/NP:N",
-        "score": 1.7,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -12611,7 +12611,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:P/NP:T",
-        "score": 4.8,
+        "score": 5.0,
         "severity": "medium",
         "pins": false
       },
@@ -12814,7 +12814,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:C/CD:C/CV:E/RV:P/NP:S",
-        "score": 8.4,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -13066,7 +13066,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -13631,7 +13631,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:C/CR:H/CD:H/CV:E/RV:P/NP:S",
-        "score": 7.8,
+        "score": 8.1,
         "severity": "high",
         "pins": true
       },
@@ -13889,7 +13889,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N",
-        "score": 3.4,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -14166,7 +14166,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": true
       },
@@ -14406,7 +14406,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:S",
-        "score": 7.3,
+        "score": 7.4,
         "severity": "high",
         "pins": false
       },
@@ -14567,7 +14567,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -14720,7 +14720,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -14972,7 +14972,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:I/RV:F/NP:T",
-        "score": 4.8,
+        "score": 4.4,
         "severity": "medium",
         "pins": false
       },
@@ -15264,7 +15264,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:E/RV:F/NP:N",
-        "score": 1.2,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -15430,7 +15430,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:E/RV:F/NP:N",
-        "score": 1.2,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -15596,7 +15596,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -15770,7 +15770,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:E/RV:F/NP:N",
-        "score": 1.2,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -15940,7 +15940,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -16113,7 +16113,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:E/RV:F/NP:N",
-        "score": 1.2,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -16258,7 +16258,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:E/RV:F/NP:N",
-        "score": 1.2,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -16405,7 +16405,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -16553,7 +16553,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -16700,7 +16700,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:E/RV:F/NP:N",
-        "score": 1.2,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -16867,7 +16867,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:I/RV:F/NP:N",
-        "score": 3.9,
+        "score": 3.4,
         "severity": "low",
         "pins": false
       },
@@ -17109,7 +17109,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:P/RV:F/NP:N",
-        "score": 0.6,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -17252,7 +17252,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -17401,7 +17401,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -17569,7 +17569,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -17813,7 +17813,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -18006,7 +18006,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -18156,7 +18156,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:E/RV:F/NP:N",
-        "score": 2.3,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -18378,7 +18378,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -18545,7 +18545,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:E/RV:F/NP:N",
-        "score": 1.2,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -18695,7 +18695,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:I/RV:F/NP:T",
-        "score": 4.8,
+        "score": 4.4,
         "severity": "medium",
         "pins": false
       },
@@ -18941,7 +18941,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -19104,7 +19104,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:I/RV:F/NP:N",
-        "score": 2.8,
+        "score": 2.7,
         "severity": "low",
         "pins": false
       },
@@ -19327,7 +19327,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N",
-        "score": 1.7,
+        "score": 2.0,
         "severity": "low",
         "pins": false
       },
@@ -19494,7 +19494,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:H/CD:H/CV:I/RV:T/NP:T",
-        "score": 5.3,
+        "score": 5.0,
         "severity": "medium",
         "pins": false
       },
@@ -19760,7 +19760,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:P/RV:F/NP:N",
-        "score": 1.7,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -19934,7 +19934,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:L/CD:L/CV:P/RV:F/NP:N",
-        "score": 1.7,
+        "score": 1.4,
         "severity": "low",
         "pins": false
       },
@@ -20104,7 +20104,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:N/CR:N/CD:N/CV:P/RV:F/NP:N",
-        "score": 0.6,
+        "score": 0.7,
         "severity": "low",
         "pins": false
       },
@@ -20443,7 +20443,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:N",
-        "score": 5.1,
+        "score": 4.7,
         "severity": "medium",
         "pins": false
       },
@@ -20486,7 +20486,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:N",
-        "score": 5.1,
+        "score": 4.7,
         "severity": "medium",
         "pins": false
       },
@@ -20527,7 +20527,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:N",
-        "score": 5.6,
+        "score": 5.4,
         "severity": "medium",
         "pins": true
       },
@@ -20568,7 +20568,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 5.9,
+        "score": 5.7,
         "severity": "medium",
         "pins": false
       },
@@ -20613,7 +20613,7 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:P/RV:P/NP:N",
-        "score": 5.1,
+        "score": 4.7,
         "severity": "medium",
         "pins": true
       },
@@ -20791,12 +20791,12 @@
         "description": "Whether the attack causes lasting neural pathway changes"
       }
     },
-    "formula": "NISS = (BI + CR + CD + CV + RV + NP) / 6",
+    "formula": "NISS = sum(w_i * M_i) / sum(w_i), default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0",
     "weights": {
       "default": {
         "BI": 1.0,
-        "CR": 1.0,
-        "CD": 1.0,
+        "CR": 0.5,
+        "CD": 0.5,
         "CV": 1.0,
         "RV": 1.0,
         "NP": 1.0

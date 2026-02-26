@@ -205,13 +205,18 @@ The NISS score is computed as the weighted mean of the six metric scores:
 \label{eq:niss}
 \end{equation}
 
-In the default profile, all weights are~1.0, yielding a simple arithmetic mean
-over six metrics. The split of the former Cognitive Integrity (CG) metric into
-Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) in v1.1 reflects the
-fundamental distinction between read attacks (thought decoding, surveillance) and
-write attacks (perception manipulation, cognitive coercion)---attack vectors with
-different mitigations that map to different neurorights dimensions.
-NISS supports four context profiles with differential weights:
+In the default profile, the weights are $w_{\text{BI}} = w_{\text{CV}} =
+w_{\text{RV}} = w_{\text{NP}} = 1.0$ and $w_{\text{CR}} = w_{\text{CD}} = 0.5$.
+This normalization ensures that the split of the former Cognitive Integrity (CG)
+metric into Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) in v1.1
+does not inflate the cognitive dimension's influence: at $0.5 + 0.5 = 1.0$ out of
+a total weight sum of~5.0, cognition retains its original 20\% share from the
+five-metric v1.0 formula. The CR/CD split reflects the fundamental distinction
+between read attacks (thought decoding, surveillance) and write attacks
+(perception manipulation, cognitive coercion)---attack vectors with different
+mitigations that map to different neurorights dimensions.
+NISS supports four context profiles with differential weights that override
+the default normalization:
 
 \begin{itemize}
   \item \textbf{Clinical}: Emphasizes BI, RV, and NP (patient safety focus)
@@ -249,8 +254,8 @@ CVSS severity:
 \textbf{NISS Severity} & \textbf{Count} & \textbf{\%} \\
 \midrule
 High     & 21 & 19.3\% \\
-Medium   & 37 & 33.9\% \\
-Low      & 50 & 45.9\% \\
+Medium   & 35 & 32.1\% \\
+Low      & 52 & 47.7\% \\
 None     &  1 &  0.9\% \\
 \bottomrule
 \end{tabular}

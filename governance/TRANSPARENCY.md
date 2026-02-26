@@ -4,7 +4,7 @@ description: "Auditable record of Human-AI collaboration in QIF Framework develo
 order: 4
 audit:
   decisionsLogged: 58
-  independentReviews: 13
+  independentReviews: 14
   humanDecisionRate: "100%"
   verificationPasses: 102
   automatedTests: 77
@@ -196,6 +196,8 @@ Key phases include:
 - **Phase 14** (Feb 24): NSv2.1b CRB Vulnerability Layer Cross-AI Review. Claude Opus 4.6 developed CRB layer (Entries 14-16: pilot scoring, sensitivity analysis, Monte Carlo uncertainty, site integration). ChatGPT 5.2 and Gemini 2.5 independently reviewed. Scores: ChatGPT (Math 8.5, Stats 9, Methodology 7.5), Gemini (Math 9, Stats 9, Methodology 8). Mean: 8.50/10. Key feedback: ChatGPT proposed additive alternative formula, both flagged need for empirical calibration and interaction effects. Gemini caught arithmetic discrepancy in review prompt (simplified factor values didn't match their stated CRB mean — actual script values are correct). Human decided: document all feedback, open 6 action items for future work, correct review prompt transcription. Neurorights Derivation Log Entry 17.
 
 - **Phase 15** (Feb 26): Preprint v1.5 Numerical Cross-AI Validation. Claude Opus 4.6 updated all LaTeX sections from 102→109 techniques and NISS v1.0 (5 metrics)→v1.1 (6 metrics, CG split into CR+CD). Every table, percentage, and statistical claim updated against qtara-registrar.json ground truth. Gemini 2.0 CLI reviewed full paper: found 3 errors (stale 96.1% in introduction, dual-use table summing to 103 not 109, stale "five metric scores" in NISS formula section) and 1 false positive (flagged model names as non-existent — stale training data, models exist Feb 2026). ChatGPT 5.2 via Playwright independently verified all claims: every percentage recalculated from ground truth, all table sums checked, zero errors found post-fix. Human decided: apply all 3 Gemini fixes immediately, update model names to "Claude 3.5/4" for accuracy spanning development period. Final state: all sections pass both validators with zero numerical errors.
+
+- **Phase 16** (Feb 26): NISS v1.1 CR/CD Weight Normalization Cross-AI Validation. Kevin identified that splitting CG into CR+CD inflated cognitive dimension from 20% to 33%. Gemini 2.0 CLI recommended CR=0.5, CD=0.5 normalization to restore pre-split balance. Human approved. Claude Opus 4.6 implemented: updated recalculate-niss.py (weighted mean formula with DEFAULT_WEIGHTS), niss-parser.ts (normalized default scoring), ran full recalculation (99 score changes, 2 severity tier shifts: T0036 and T0054 medium→low), updated 05-niss.tex formula section and severity table. Post-implementation cross-AI validation: Gemini CLI confirmed mathematical soundness on all 4 questions (normalization correct, context profiles should NOT be normalized, no better alternatives, 2 tier changes verified). ChatGPT 5.2 confirmed mathematical soundness on all 4 questions, additionally proposed dimensional grouping as cleaner long-term alternative, flagged ceiling rounding bias (intentional conservative safety bias — documented), and noted CR/CD correlation risk as modeling consideration. Human decided: keep current implementation (simpler, defensible), document ceiling rounding rationale, note dimensional grouping as future consideration. Derivation Log Entry 81.
 
 ### Non-AI Tools
 - Rust (NSP/Runemate implementation)
