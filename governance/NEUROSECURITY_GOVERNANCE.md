@@ -1091,7 +1091,7 @@ Key provisions:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Cognitive Liberty** | **CCPA (SB 1223)** | NIST AC-3 / ISO A.9 | Signal Injection (T0001) | `firewall.log`: REJECT counts | L8 Neural Firewall |
 | **Mental Privacy** | **GDPR / HIPAA** | NIST SC-28 / ISO A.18 | ERP Decoding (T0012) | `anonymizer.log`: Filter counts | BCI Anonymizer |
-| **Mental Integrity** | **CCPA (SB 1223) / FDORA** | NIST SI-4 / ISO A.12 | Neural Ransomware (T0002) | `niss_report.json`: Impact score | NISS v1.0 Scoring |
+| **Mental Integrity** | **CCPA (SB 1223) / FDORA** | NIST SI-4 / ISO A.12 | Neural Ransomware (T0002) | `niss_report.json`: Impact score | NISS v1.1 Scoring |
 | **Psychological Continuity** | **CCPA (SB 1223)** | NIST PL-4 / ISO A.5 | Calibration Poisoning (T0034) | `identity_guard.log`: Alerts | Scale-Frequency Invariants |
 
 ### Hardened Compliance Validation Checklist
@@ -1136,7 +1136,7 @@ Key provisions:
 
 - **The Gap:** There is no officially sanctioned "CVSS for Brains." Standard cybersecurity scores (CVSS 4.0) cannot express biological damage, cognitive integrity, or neuroplasticity.
 - **The Challenge:** Device makers may satisfy the law with standard IT security scores while missing catastrophic neural-specific risks.
-- **QIF Implementation:** NISS v1.0 maps neural-specific impacts (Biological, Cognitive, Plasticity).
+- **QIF Implementation:** NISS v1.1 maps neural-specific impacts (Biological, Cognitive Reconnaissance, Cognitive Disruption, Consent, Reversibility, Plasticity).
 - **Policy Need:** Global adoption of a neural-specific impact scoring extension for CVSS to provide a "Common Language" for risk.
 
 #### 5. International: The "Soft Law" Enforcement Gap
