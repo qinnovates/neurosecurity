@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import BciExplorer from '../../components/bci/BciExplorer';
 import { getBciDevices, getBciStats } from '../../lib/bci-data';
+import { TARA_TECHNIQUES } from '../../lib/qif-constants';
 
 const devices = getBciDevices();
 const stats = getBciStats();
@@ -43,7 +44,7 @@ const stats = getBciStats();
       <a href="/explorer/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
         <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">Threat Explorer</div>
         <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
-          Force-directed graph of 103 threat techniques. Search by device or technique name, see kill chain relationships, and visualize which hourglass bands are at risk.
+          Force-directed graph of {TARA_TECHNIQUES} threat techniques. Search by device or technique name, see kill chain relationships, and visualize which hourglass bands are at risk.
         </p>
       </a>
       <a href="/bci/limits/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">

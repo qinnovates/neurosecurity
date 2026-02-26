@@ -7,10 +7,10 @@
 
 The Neural Impact Scoring System (NISS) is a proposed CVSS v4.0 extension
 designed to conform with FIRST.org's official extension mechanism (User Guide
-\S3.11)~\cite{first2023cvss4userguide}. NISS adds five metrics that capture
+\S3.11)~\cite{first2023cvss4userguide}. NISS adds six metrics that capture
 dimensions CVSS was never designed to express: biological tissue damage, cognitive
-integrity violations, consent boundary violations, damage reversibility, and
-neuroplastic consequences.
+reconnaissance, cognitive disruption, consent boundary violations, damage
+reversibility, and neuroplastic consequences.
 
 NISS serves as the technique-level scoring input to the Neurosecurity Score
 (NSv2.1), a multi-layer risk framework that aggregates NISS scores across five
@@ -21,13 +21,13 @@ operational context.
 
 \subsection{Gap Analysis: Why CVSS Alone Is Insufficient}
 
-We mapped all 102 TARA techniques to CVSS v4.0 base vectors and classified the
+We mapped all 109 TARA techniques to CVSS v4.0 base vectors and classified the
 results into three gap groups based on how much information CVSS alone fails to
 capture:
 
 \begin{table}[H]
 \centering
-\caption{CVSS v4.0 gap analysis across 102 TARA techniques.}
+\caption{CVSS v4.0 gap analysis across 109 TARA techniques.}
 \label{tab:gap}
 \small
 \begin{tabularx}{\textwidth}{@{}c X r l@{}}
@@ -35,19 +35,19 @@ capture:
 \textbf{Group} & \textbf{Gap Description} & \textbf{Count} & \textbf{Example} \\
 \midrule
 1 & CVSS captures most impact; NISS adds nuance &
-    12 & Digital-only \\
+    13 & Digital-only \\
 2 & CVSS captures exploitability but misses half &
-    28 & Mixed impact \\
+    31 & Mixed impact \\
 3 & CVSS fundamentally cannot express primary impact &
-    58 & Neural-dominant \\
+    64 & Neural-dominant \\
 \midrule
-  & \textbf{Techniques needing NISS extension} & \textbf{98} & \textbf{96.1\%} \\
+  & \textbf{Techniques needing NISS extension} & \textbf{108} & \textbf{99.1\%} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 Group~3---where CVSS fundamentally cannot express the primary impact---contains
-the majority of techniques (56.9\%). These are attacks where the most severe
+the majority of techniques (58.7\%). These are attacks where the most severe
 consequence is biological tissue damage, cognitive coercion, or irreversible
 neural harm---dimensions for which CVSS has no metric.
 
@@ -193,11 +193,11 @@ binary indicator triggered when:
 \end{equation}
 
 A PINS flag mandates immediate safety review regardless of overall score.
-Across all 102 techniques, 31 are PINS-flagged (30.4\%).
+Across all 109 techniques, 33 are PINS-flagged (30.3\%).
 
 \subsection{Scoring Formula}
 
-The NISS score is computed as the weighted mean of the five metric scores:
+The NISS score is computed as the weighted mean of the six metric scores:
 
 \begin{equation}
 \text{NISS} = \frac{w_{\text{BI}} \cdot \text{BI} + w_{\text{CR}} \cdot \text{CR} + w_{\text{CD}} \cdot \text{CD} + w_{\text{CV}} \cdot \text{CV} + w_{\text{RV}} \cdot \text{RV} + w_{\text{NP}} \cdot \text{NP}}
@@ -236,22 +236,22 @@ vulnerability is a software bug or a patient safety emergency.
 
 \subsection{NISS Severity Distribution}
 
-Across all 102 techniques, the NISS severity distribution differs markedly from
+Across all 109 techniques, the NISS severity distribution differs markedly from
 CVSS severity:
 
 \begin{table}[H]
 \centering
-\caption{NISS severity distribution (all 102 techniques).}
+\caption{NISS severity distribution (all 109 techniques).}
 \label{tab:niss-severity}
 \small
 \begin{tabular}{@{}l r r@{}}
 \toprule
 \textbf{NISS Severity} & \textbf{Count} & \textbf{\%} \\
 \midrule
-High     & 21 & 20.6\% \\
-Medium   & 29 & 28.4\% \\
-Low      & 51 & 50.0\% \\
-None     &  1 &  1.0\% \\
+High     & 21 & 19.3\% \\
+Medium   & 37 & 33.9\% \\
+Low      & 50 & 45.9\% \\
+None     &  1 &  0.9\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -266,7 +266,7 @@ Figure~\ref{fig:niss-gap} visualizes the gap between CVSS and NISS scoring.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{figures/niss-gap.pdf}
-  \caption{CVSS v4.0 vs.\ NISS gap analysis: 96.1\% of techniques require
+  \caption{CVSS v4.0 vs.\ NISS gap analysis: 99.1\% of techniques require
   extension metrics CVSS cannot express.}
   \label{fig:niss-gap}
 \end{figure}

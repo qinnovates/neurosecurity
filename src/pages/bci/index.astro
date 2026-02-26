@@ -3,7 +3,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import BciDashboard from '../../components/dashboard/BciDashboard';
 import { getBciDevices, getBciStats } from '../../lib/bci-data';
 import { BCI_CONSTRAINTS, BCI_VALIDATION } from '../../lib/bci-limits-constants';
-import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../../lib/qif-constants';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '../../lib/qif-constants';
 import { getBrainViewData } from '../../lib/brain-view-data';
 
 const stats = getBciStats();
@@ -138,7 +138,7 @@ const brainViews = getBrainViewData();
         </a>
         <a href="/explorer/" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] border border-transparent transition-all">
           <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Threat Explorer</p>
-          <p class="text-xs text-[var(--color-text-muted)]">Force-directed graph of 103 TARA techniques with kill chain relationships</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Force-directed graph of {TARA_TECHNIQUES} TARA techniques with kill chain relationships</p>
         </a>
         <a href="/nsp/" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] border border-transparent transition-all">
           <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NSP Protocol</p>

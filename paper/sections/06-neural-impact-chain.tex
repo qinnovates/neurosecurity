@@ -65,23 +65,23 @@ which NISS metric dominates the technique's profile:
 
 \subsection{Coverage Statistics}
 
-All 102 TARA techniques have been mapped through the NIC pipeline:
+All 109 TARA techniques have been mapped through the NIC pipeline:
 
 \begin{table}[H]
 \centering
-\caption{Neural Impact Chain mapping results across 102 techniques.}
+\caption{Neural Impact Chain mapping results across 109 techniques.}
 \label{tab:nic-stats}
 \small
 \begin{tabular}{@{}l r@{}}
 \toprule
 \textbf{Metric} & \textbf{Value} \\
 \midrule
-Techniques mapped                 & 102 / 102 (100\%) \\
-Unique DSM-5-TR codes             & 15 \\
+Techniques mapped                 & 103 / 109 (94.5\%) \\
+Unique DSM-5-TR codes             & 29 \\
 Diagnostic clusters               & 5 \\
-Direct diagnostic risk             & 51 (50.0\%) \\
-Indirect diagnostic risk           & 9 (8.8\%) \\
-No diagnostic risk (silicon-only)  & 42 (41.2\%) \\
+Direct diagnostic risk             & 52 (47.7\%) \\
+Indirect diagnostic risk           & 9 (8.3\%) \\
+No diagnostic risk (silicon-only)  & 42 (38.5\%) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -101,7 +101,7 @@ The five diagnostic clusters and their technique counts:
 \midrule
 Non-diagnostic          & 42 & --- (silicon-only techniques) \\
 Mood/Trauma             & 21 & F43.10 (PTSD), F32.9 (MDD), F44.9 \\
-Cognitive/Psychotic     & 16 & F06.0 (psychosis), R41.3 (cognitive decline) \\
+Cognitive/Psychotic     & 17 & F06.0 (psychosis), R41.3 (cognitive decline) \\
 Motor/Neurocognitive    & 16 & G25.9 (movement disorder), G31.84 \\
 Persistent/Personality  &  7 & F07.0 (personality change) \\
 \bottomrule
@@ -119,15 +119,15 @@ stressor-related disorders.
 Each technique is classified by diagnostic risk:
 
 \begin{itemize}
-  \item \textbf{Direct} (51 techniques, 50.0\%): The attack mechanism can
+  \item \textbf{Direct} (52 techniques, 47.7\%): The attack mechanism can
         directly trigger or worsen the mapped psychiatric condition. Example:
         forced cortical stimulation causing seizures maps to epilepsy-related
         diagnostic codes.
-  \item \textbf{Indirect} (9 techniques, 8.8\%): The attack creates downstream
+  \item \textbf{Indirect} (9 techniques, 8.3\%): The attack creates downstream
         conditions that may lead to the diagnosis. Example: sustained data
         exfiltration of private thoughts causing anxiety does not directly
         produce the anxiety disorder but creates the conditions for it.
-  \item \textbf{None} (42 techniques, 41.2\%): Silicon-only techniques with no
+  \item \textbf{None} (42 techniques, 38.5\%): Silicon-only techniques with no
         direct neural interaction and thus no psychiatric diagnostic mapping.
 \end{itemize}
 
@@ -158,7 +158,7 @@ diagnostic clusters.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.65\textwidth]{figures/dsm5-clusters.pdf}
-  \caption{DSM-5-TR cluster distribution across 102 TARA techniques. 60
-  techniques (58.8\%) have direct or indirect diagnostic risk.}
+  \caption{DSM-5-TR cluster distribution across 109 TARA techniques. 61
+  techniques (56.0\%) have direct or indirect diagnostic risk.}
   \label{fig:dsm5-clusters}
 \end{figure}
