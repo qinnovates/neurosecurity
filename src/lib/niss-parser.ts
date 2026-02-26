@@ -8,7 +8,10 @@
  * v1.1 changes: Split CG (Cognitive Integrity) into two metrics:
  *   CR (Cognitive Reconnaissance) — read attacks: thought decoding, neural data inference
  *   CD (Cognitive Disruption) — write attacks: perception manipulation, identity modification
- * Formula: (BI + CR + CD + CV + RV + NP) / 6 (equal weights default)
+ * Formula: weighted mean with normalized cognitive weights
+ * Default: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0
+ * Normalization: CG split into CR+CD inflated cognitive weight from 20% to 33%.
+ * Setting CR=CD=0.5 restores cognitive dimension to 20% (1.0/5.0).
  *
  * Compatible with NissScore from threat-data.ts — can be used to
  * hydrate vectors from the registry or compute scores independently.
@@ -413,9 +416,16 @@ export function scoreNiss(
 
     score = ceilToTenth(weightedSum / weightTotal);
   } else {
-    // Equal-weight: average of assessed (non-X) metrics
-    const sum = assessed.reduce((acc, m) => acc + m.value, 0);
-    score = ceilToTenth(sum / assessed.length);
+    // Normalized default weights: CR and CD at 0.5 each to preserve
+    // cognitive dimension at 20% (matching pre-split CG weight of 1/5)
+    const defaultWeights: ProfileWeights = { bi: 1.0, cr: 0.5, cd: 0.5, cv: 1.0, rv: 1.0, np: 1.0 };
+    let weightedSum = 0;
+    let weightTotal = 0;
+    for (const m of assessed) {
+      weightedSum += defaultWeights[m.key] * m.value;
+      weightTotal += defaultWeights[m.key];
+    }
+    score = ceilToTenth(weightedSum / weightTotal);
   }
 
   // Clamp to [0, 10]

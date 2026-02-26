@@ -5,10 +5,13 @@ Recalculate NISS v1.1 scores for all TARA techniques.
 v1.1 changes: Split CG (Cognitive Integrity) into two metrics:
   CR (Cognitive Reconnaissance) — read attacks: thought decoding, neural data inference
   CD (Cognitive Disruption) — write attacks: perception manipulation, identity modification
-Formula: (BI + CR + CD + CV + RV + NP) / 6 (equal weights default)
+Formula: weighted mean with normalized cognitive weights (CR=0.5, CD=0.5, others=1.0)
 
-Reconciled scoring (spec + Gemini review):
-- Equal weights (all 1.0), context profiles available separately
+Reconciled scoring (spec + Gemini review + weight normalization):
+- Default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0
+- Normalization rationale: CG split into CR+CD inflated cognitive weight from 20% to 33%.
+  Setting CR=CD=0.5 restores cognitive dimension to 20% (1.0/5.0), matching pre-split balance.
+- Context profiles available separately with domain-specific weights
 - CV reordered: N(0) -> P(3.3) -> E(6.7) -> I(10.0)
 - RV expanded: F(0) -> T(3.3) -> P(6.7) -> I(10.0)
 - PINS focused: BI >= H OR RV == I
@@ -73,16 +76,22 @@ def build_vector(metrics: dict[str, str]) -> str:
     return "/".join(parts)
 
 
-def calculate_score(metrics: dict[str, str]) -> float:
-    """Calculate NISS composite score with equal weights and ceiling rounding."""
-    total = 0.0
+# Default weights: CR and CD normalized to 0.5 each so cognitive dimension
+# retains its original 20% share (1.0/5.0) after the CG->CR+CD split.
+DEFAULT_WEIGHTS = {"BI": 1.0, "CR": 0.5, "CD": 0.5, "CV": 1.0, "RV": 1.0, "NP": 1.0}
+
+
+def calculate_score(metrics: dict[str, str], weights: dict[str, float] | None = None) -> float:
+    """Calculate NISS composite score with weighted mean and ceiling rounding."""
+    w = weights or DEFAULT_WEIGHTS
+    weighted_sum = 0.0
+    weight_total = 0.0
     for code in METRIC_ORDER:
         value = metrics[code]
-        if value == "X":
-            total += 10.0
-        else:
-            total += METRIC_VALUES[code][value]
-    raw = total / 6.0  # v1.1: 6 metrics
+        num = 10.0 if value == "X" else METRIC_VALUES[code][value]
+        weighted_sum += w[code] * num
+        weight_total += w[code]
+    raw = weighted_sum / weight_total
     return math.ceil(raw * 10) / 10
 
 
@@ -241,8 +250,8 @@ def main():
                     "description": "Whether the attack causes lasting neural pathway changes",
                 },
             },
-            "formula": "NISS = (BI + CR + CD + CV + RV + NP) / 6",
-            "weights": {"default": {"BI": 1.0, "CR": 1.0, "CD": 1.0, "CV": 1.0, "RV": 1.0, "NP": 1.0}},
+            "formula": "NISS = sum(w_i * M_i) / sum(w_i), default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0",
+            "weights": {"default": {"BI": 1.0, "CR": 0.5, "CD": 0.5, "CV": 1.0, "RV": 1.0, "NP": 1.0}},
             "context_profiles": {
                 "clinical":  {"BI": 2.0, "CR": 1.0, "CD": 2.0, "CV": 1.0, "RV": 2.0, "NP": 1.0},
                 "research":  {"BI": 1.0, "CR": 2.0, "CD": 1.5, "CV": 2.0, "RV": 1.0, "NP": 1.5},

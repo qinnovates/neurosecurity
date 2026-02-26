@@ -15,6 +15,7 @@
 ### Late February (Entries 66-80) — Neurorights, Physics Boundaries, Market Analysis
 | Entry | Topic | Link |
 |-------|-------|------|
+| 81 | NISS v1.1: CR/CD weight normalization + preprint v1.5 | [Entry 81](#entry-81-niss-v11-weight-normalization) |
 | 80 | NISS v1.1: CG split into CR + CD | [Entry 80](#entry-80-niss-v11-cg-split) |
 | 79 | Ferritin magnetoreceptor correction (claim retracted) | [Entry 79](#entry-79-ferritin-correction) |
 | 78 | Determinism gradient and free-will decomposition | [Entry 78](#entry-78-determinism-gradient) |
@@ -321,6 +322,78 @@ Each entry follows this structure:
 
 ---
 
+## Entry 81: NISS v1.1 — CR/CD Weight Normalization + Preprint v1.5 Cross-AI Validation {#entry-81-niss-v11-weight-normalization}
+
+**Date:** 2026-02-26, ~04:00
+**Classification:** VERIFIED (cross-AI validated: Gemini 2.0 CLI + ChatGPT 5.2)
+**AI Systems:** Claude Opus 4.6 (implementation), Gemini 2.0 CLI (weight analysis + paper audit), ChatGPT 5.2 (numerical verification)
+**Connected entries:** Entry 80 (CG→CR/CD split), Entry 5 (original NISS derivation)
+
+### Problem Identified
+
+Kevin flagged that CD (write attacks: coercion, perception manipulation) should intuitively weigh heavier than CR (read attacks: surveillance, thought decoding). Analysis revealed a deeper structural issue: the CG→CR/CD split in Entry 80 inadvertently inflated the cognitive dimension's share of the default NISS score from 20% (1/5 in v1.0) to 33% (2/6 in v1.1).
+
+### Gemini CLI Analysis
+
+Gemini 2.0 CLI was asked to evaluate whether: (a) CD should be weighted higher than CR in the default profile, and (b) whether the cognitive inflation was a problem. Response:
+
+> The default equal weighting of CR and CD relative to each other is appropriate, but their absolute weight is not. I recommend setting the default weights for CR and CD to 0.5 each. The other four metrics should retain their default weight of 1.0. This restores the cognitive dimension to its original 20% share while preserving the valuable read/write distinction. Context profiles should handle the CD > CR asymmetry.
+
+Key precedent cited: CVSS v4.0 treats Confidentiality and Integrity equally in its base formula. Structural metric splits should be influence-neutral unless a deliberate rebalancing decision is made.
+
+### Decision
+
+Default weights normalized: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0. Total weight sum = 5.0. Cognitive share = (0.5+0.5)/5.0 = 20%, matching the pre-split CG at 1/5.
+
+Context profiles unchanged — they already differentiate CD > CR where appropriate (Clinical: CD=2.0, CR=1.0).
+
+### Impact on Scores
+
+99 of 109 techniques changed scores (all shifts 0.1-0.7 points). 2 severity tier changes:
+- T0036 (Thought decoding): medium → low (read-heavy technique correctly downweighted)
+- T0054 (Memory extraction): medium → low (read-heavy technique correctly downweighted)
+
+New severity distribution: High 21, Medium 35, Low 52, None 1. PINS count unchanged (33).
+
+### Preprint v1.5 — Full Update + Cross-AI Validation
+
+This entry also documents the comprehensive preprint update from 102→109 techniques:
+
+**Changes made across all LaTeX sections:**
+1. Technique count: 102 → 109 throughout (abstract, intro, TARA, NISS, NIC, governance, limitations, conclusion)
+2. NISS metrics: "five" → "six" throughout (CG split into CR+CD)
+3. Status table: DEMONSTRATED 33→35, THEORETICAL 26→31
+4. Severity table: High 54→60, Medium 16→17, percentages recalculated
+5. Category table: EX 17→19, SI 10→13, PE 8→9, DS 7→8, CR→CI rename
+6. Dual-use table: Confirmed 52→53, added "Not Mapped" row (6 techniques), 75.5%→71.6%
+7. Gap analysis: 98(96.1%) → 108(99.1%), groups recalculated (13+31+64=108)
+8. PINS: 31(30.4%) → 33(30.3%)
+9. NISS severity table: Medium 29→35, Low 51→52
+10. NIC stats: 102/102→103/109 mapped, 15→29 DSM codes, Cognitive/Psychotic 16→17
+11. NIC risk: Direct 51→52, figure caption 60(58.8%)→61(56.0%)
+12. Version note added to limitations (v1.5 changelog)
+13. Default weight normalization documented in scoring formula section
+
+**Cross-AI Validation (Phase 15 — Paper):**
+- Gemini 2.0 CLI: Audited full paper. Found 3 errors (stale 96.1% in intro, dual-use table missing 6 unmapped, stale "five metric scores"). All fixed before ChatGPT review.
+- ChatGPT 5.2: Independently recalculated every percentage from ground truth. Zero errors found. All table sums verified. All cross-section consistency checks passed.
+
+**Cross-AI Validation (Phase 16 — Weight Normalization):**
+- Gemini 2.0 CLI: All 4 questions PASS. Normalization mathematically sound. Context profiles should NOT be normalized. No better alternatives for this use case. 2 tier changes verified correct.
+- ChatGPT 5.2: All 4 questions PASS with nuanced feedback:
+  1. Normalization mathematically correct — exactly preserves 20% cognitive share
+  2. Context profiles should NOT be normalized — deliberate skew is the point; weighted-mean formula preserves numeric comparability
+  3. Proposed "dimensional grouping" as cleaner long-term alternative (define cognitive as dimension, score = (CR+CD)/2, weight dimension at 1.0). Also recommended formalizing invariant: "metric splits must preserve original dimensional weight"
+  4. Concerns flagged: (a) ceiling rounding bias — upward skew near thresholds, defensible only if intentionally conservative [NOTE: NISS uses ceiling rounding as deliberate conservative safety bias for patient safety — documented], (b) CR/CD correlation risk — if correlated, effective influence can still drift despite weight correction, (c) interpretability drift — semantic meaning shifted even though math is preserved
+
+**Dynamic technique count:** TARA_TECHNIQUES in qif-constants.ts now imports from qtara-registrar.json at build time — count is never hardcoded on the website again.
+
+### Human Decision
+
+Kevin confirmed: (1) normalize CR/CD weights to 0.5 each, (2) accept all Gemini paper audit fixes, (3) accept recalculated scores. Context profiles remain unchanged — domain-specific weighting is their purpose. ChatGPT's dimensional grouping noted as future consideration; current per-metric weighting is simpler and defensible.
+
+---
+
 ## Entry 80: NISS v1.1 — CG Split into CR (Cognitive Reconnaissance) + CD (Cognitive Disruption) {#entry-80-niss-v11-cg-split}
 
 **Date:** 2026-02-25, ~14:40
@@ -359,7 +432,7 @@ CG conflated two fundamentally different attack types under one score. A techniq
 
 ### Human Decision
 
-Kevin confirmed the CR+CD split after Gemini CLI cross-validation. Equal weights maintained (maximum-entropy prior, consistent with NSv2.1b validation from Entry 8).
+Kevin confirmed the CR+CD split after Gemini CLI cross-validation. Equal weights initially maintained (maximum-entropy prior, consistent with NSv2.1b validation from Entry 8). **Corrected in Entry 81:** default weights normalized to CR=0.5, CD=0.5 to prevent cognitive dimension inflation from 20% to 33%.
 
 ---
 
