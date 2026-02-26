@@ -4,7 +4,7 @@ description: "Auditable record of Human-AI collaboration in QIF Framework develo
 order: 4
 audit:
   decisionsLogged: 58
-  independentReviews: 12
+  independentReviews: 13
   humanDecisionRate: "100%"
   verificationPasses: 102
   automatedTests: 77
@@ -194,6 +194,8 @@ Key phases include:
 - **Phase 13** (Feb 21): Policy Proposal Cross-AI Review (3-model cycle). Neurosecurity Policy Proposal ("Closing the Neurosecurity Gap") reviewed by Gemini 2.0 (Phase 12.5, 6-category critique) and ChatGPT (OpenAI, 6-category critique). Gemini flagged: conflict of interest disclosure missing, "100% TPR" overclaiming, unrealistic timelines, self-serving tone, missing stakeholders (patients, clinicians, legal). ChatGPT flagged: "mass adoption is inevitable" unsupported, technical metrics presented without empirical validation, recommendations too vague for standards bodies (need normative language), legal analysis oversimplified (FDA guidance non-binding, HIPAA consumer device scope, GDPR neural data unlitigated), tone still reads as product pitch, missing IRB/Common Rule/GCP discussion, no cost-benefit analysis, no harmonization with ongoing standards efforts. Human decided: apply both rounds of fixes. v1.0 to v1.2. Key changes: conflict of interest disclosure added, all validation claims qualified, timelines stretched 2 years, limitations section added, legal caveats added for FDA/HIPAA/GDPR/state laws, "inevitable" language removed, specific org recommendations strengthened.
 
 - **Phase 14** (Feb 24): NSv2.1b CRB Vulnerability Layer Cross-AI Review. Claude Opus 4.6 developed CRB layer (Entries 14-16: pilot scoring, sensitivity analysis, Monte Carlo uncertainty, site integration). ChatGPT 5.2 and Gemini 2.5 independently reviewed. Scores: ChatGPT (Math 8.5, Stats 9, Methodology 7.5), Gemini (Math 9, Stats 9, Methodology 8). Mean: 8.50/10. Key feedback: ChatGPT proposed additive alternative formula, both flagged need for empirical calibration and interaction effects. Gemini caught arithmetic discrepancy in review prompt (simplified factor values didn't match their stated CRB mean — actual script values are correct). Human decided: document all feedback, open 6 action items for future work, correct review prompt transcription. Neurorights Derivation Log Entry 17.
+
+- **Phase 15** (Feb 26): Preprint v1.5 Numerical Cross-AI Validation. Claude Opus 4.6 updated all LaTeX sections from 102→109 techniques and NISS v1.0 (5 metrics)→v1.1 (6 metrics, CG split into CR+CD). Every table, percentage, and statistical claim updated against qtara-registrar.json ground truth. Gemini 2.0 CLI reviewed full paper: found 3 errors (stale 96.1% in introduction, dual-use table summing to 103 not 109, stale "five metric scores" in NISS formula section) and 1 false positive (flagged model names as non-existent — stale training data, models exist Feb 2026). ChatGPT 5.2 via Playwright independently verified all claims: every percentage recalculated from ground truth, all table sums checked, zero errors found post-fix. Human decided: apply all 3 Gemini fixes immediately, update model names to "Claude 3.5/4" for accuracy spanning development period. Final state: all sections pass both validators with zero numerical errors.
 
 ### Non-AI Tools
 - Rust (NSP/Runemate implementation)

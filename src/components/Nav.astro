@@ -1,5 +1,6 @@
 ---
 import Search from 'astro-pagefind/components/Search';
+import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
 const currentPath = Astro.url.pathname;
 
@@ -9,7 +10,7 @@ const aboutLinks = [
 ];
 
 const frameworkLinks = [
-  { href: '/TARA/', label: 'TARA Atlas', desc: '102 BCI attack techniques, scored and mapped' },
+  { href: '/TARA/', label: 'TARA Atlas', desc: `${TARA_TECHNIQUES} BCI attack techniques, scored and mapped` },
   { href: '/security/', label: 'Security', desc: 'Signal coherence, frequency-band defense, and scoring' },
   { href: '/therapeutics/', label: 'Therapeutics', desc: '77 dual-use therapeutic analogs' },
   { href: '/neurogovernance/', label: 'Neurogovernance', desc: 'Neurorights mapped to brain regions and threats' },

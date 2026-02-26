@@ -4,7 +4,7 @@ import BrainVisualization from '../components/brain/BrainVisualization';
 import NeurorightCards from '../components/neurogovernance/NeurorightCards';
 import { getNeurogovernanceData } from '../lib/neurogovernance-data';
 import { getBrainViewData } from '../lib/brain-view-data';
-import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../lib/qif-constants';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '../lib/qif-constants';
 import { GOVERNING_BODIES, FRAMEWORK_LESSONS, ENGAGEMENT_COLORS, ENGAGEMENT_LABELS } from '../data/convergence-data';
 import type { Domain } from '../data/convergence-data';
 
@@ -18,7 +18,7 @@ const breadcrumbs = [
 
 <PageLayout
   title="Neurogovernance — Your Brain Has Rights"
-  description="An interactive map of 5 neurorights, 102 BCI attack techniques, and the brain regions they protect. The first framework to quantify what neural security means for patients."
+  description={`An interactive map of 5 neurorights, ${TARA_TECHNIQUES} BCI attack techniques, and the brain regions they protect. The first framework to quantify what neural security means for patients.`}
   breadcrumbs={breadcrumbs}
   wide
 >

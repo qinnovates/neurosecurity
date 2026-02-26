@@ -3,7 +3,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import WhitepaperVersionSelector from '../../components/WhitepaperVersionSelector.astro';
 import { getWhitepaperStats } from '../../lib/whitepaper-stats';
 import { getLatestChangelog, getTacticsWithCounts, THREAT_DOMAINS } from '../../lib/threat-data';
-import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../../lib/qif-constants';
+import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '../../lib/qif-constants';
 
 // Visualization components
 import HourglassChart from '../../components/whitepaper/HourglassChart.astro';
@@ -35,7 +35,7 @@ const tacticColors: Record<string, string> = {
 
 <PageLayout
   title="QIF Whitepaper v6.3.5"
-  description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics.`}
+  description={`The Quantified Interconnection Framework — an open security standard for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
 >
@@ -74,7 +74,7 @@ const tacticColors: Record<string, string> = {
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "QIF Whitepaper v6.3.5: An Open Security Standard for Brain-Computer Interfaces",
-        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 5 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
+        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics. The first open security standard purpose-built for neural devices.`,
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-18",
@@ -92,7 +92,7 @@ const tacticColors: Record<string, string> = {
           QIF is the first open standard that maps BCI techniques to their security risks, clinical applications, and potential psychiatric outcomes in a single framework.
         </p>
         <p class="text-base text-[var(--color-text-muted)] mb-6">
-          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 5 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based and await validation by psychiatrists and neuroscientists.</em>
+          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 6 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based and await validation by psychiatrists and neuroscientists.</em>
         </p>
       </section>
 
@@ -1374,7 +1374,7 @@ const tacticColors: Record<string, string> = {
             <p class="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-2">Human-Originated</p>
             <ul class="space-y-1.5 text-xs text-[var(--color-text-muted)]">
               <li>The 11-band hourglass architecture and its mathematical derivation</li>
-              <li>TARA threat taxonomy structure and all 102 technique classifications</li>
+              <li>TARA threat taxonomy structure and all {TARA_TECHNIQUES} technique classifications</li>
               <li>NISS scoring methodology, all metric assignments, and all NISS scores</li>
               <li>Neural Impact Chain pipeline and all DSM-5-TR diagnostic mappings</li>
               <li>All architectural decisions, research conclusions, and governance design</li>
