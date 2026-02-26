@@ -65,11 +65,11 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs | 🟢 v6.2.1 |
-| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.4 |
+| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.5 |
 | **[TARA](https://qinnovate.com/TARA/)** | 109 BCI attack-therapy technique pairs, STIX 2.1 registry | 🟢 v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | 🟢 v0.2.0 |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links | 🟡 v0.5, Secure Core done |
-| **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces (5 neural metrics) | 🟢 v1.0 |
+| **[NISS](https://qinnovate.com/scoring/)** | First CVSS v4.0 extension for neural interfaces (6 neural metrics) | 🟢 v1.1 |
 | **[Runemate](https://qinnovate.com/runemate/)** | Native DSL compiler (67.8% compression), code-to-visual-cortex goal | 🟢 v1.0 Compiler |
 | Cortical Renderer | Runemate Phase 2/3: electrode stimulation pattern generation | 🔵 Planned |
 | BCI Limits Equation | Information-theoretic bounds on BCI channel capacity | 🟡 Hypothesis |

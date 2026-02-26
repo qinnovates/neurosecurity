@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Transform qtara-registrar.json to QIF Locus Taxonomy + NISS v1.0 scoring.
+Transform qtara-registrar.json to QIF Locus Taxonomy + NISS v1.1 scoring.
 
 This script:
 1. Replaces MITRE-derived tactic IDs with QIF Locus Taxonomy IDs
 2. Renumbers all technique IDs from QIF-T2xxx to QIF-T0001+
-3. Adds NISS v1.0 scoring vectors and base scores
+3. Adds NISS v1.1 scoring vectors and base scores
 4. Removes all MITRE references
 5. Updates statistics
 """
@@ -138,7 +138,7 @@ for t in LOCUS_TACTICS:
         TACTIC_MAP[lid] = t["id"]
 
 # ============================================================
-# NISS v1.0 SCORING
+# NISS v1.1 SCORING
 # ============================================================
 
 # Metric weights
@@ -171,7 +171,7 @@ TACTIC_DEFAULTS = {
 }
 
 def compute_niss_score(v):
-    """Compute NISS v1.0 base score from vector dict."""
+    """Compute NISS v1.1 base score from vector dict."""
     av = AV_WEIGHTS[v["AV"]]
     ac = AC_WEIGHTS[v["AC"]]
     pr = PR_WEIGHTS[v["PR"]]
@@ -538,7 +538,7 @@ def main():
     # ============================================================
     reg["version"] = "3.0"
     reg["taxonomy"] = "QIF Locus Taxonomy v1.0"
-    reg["scoring"] = "NISS v1.0 (Neural Impact Scoring System)"
+    reg["scoring"] = "NISS v1.1 (Neural Impact Scoring System)"
     reg["generated"] = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # Remove old MITRE compatibility section

@@ -55,7 +55,7 @@ Some attacks don't break your brain. They *retune* it.
 
 Gradual drift (T0062) shifts neural parameters slowly enough that your brain's homeostatic mechanisms adapt to the new baseline. Neurofeedback falsification (T0022) trains your brain to reinforce pathological patterns it thinks are healthy. Baseline adaptation poisoning (T0071) exploits re-enrollment windows to shift what "normal" looks like.
 
-These are violations of Mental Integrity, but the original formulation doesn't capture the engineering specifics. QIF extends MI with signal dynamics protections: detecting oscillatory disruption, timing attacks, and homeostatic retuning. 81 of 102 techniques now map to MI (up from 71 when we tracked dynamics separately).
+These are violations of Mental Integrity, but the original formulation doesn't capture the engineering specifics. QIF extends MI with signal dynamics protections: detecting oscillatory disruption, timing attacks, and homeostatic retuning. 84 of 109 techniques now map to MI (up from 71 when we tracked dynamics separately).
 
 ### What QIF Adds to Mental Privacy
 
@@ -79,7 +79,7 @@ CCI = (consent_weight x rights_count x severity_factor) / 10
 
 CCI ranges from 0.1 (minimal complexity — low severity, one right, standard consent) to 4.0 (maximum — critical severity, multiple rights, prohibited tier).
 
-Across 102 techniques: **mean CCI = 1.01, 11 techniques exceed 2.0**.
+Across 109 techniques: **mean CCI = 1.02, 11 techniques exceed 2.0**.
 
 But the CCI's real value isn't the number itself. It's what happens when the number doesn't match the consent tier.
 
@@ -123,7 +123,7 @@ This is not a classification bug — it's a category error. Risk classification 
 
 ## The Neurorights Hourglass
 
-Mapping all 102 techniques produces a striking pattern when visualized against the QIF hourglass:
+Mapping all 109 techniques produces a striking pattern when visualized against the QIF hourglass:
 
 | Band | Mental Privacy | Cognitive Liberty | Mental Integrity | Psychological Continuity |
 |------|:---:|:---:|:---:|:---:|
