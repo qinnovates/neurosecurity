@@ -31,7 +31,7 @@ validation is essential before these mappings can inform clinical decision-makin
 \subsection{NISS Weights Not Calibrated}
 
 The NISS scoring formula (Equation~\ref{eq:niss}) uses equal weights (1.0) for
-all five metrics in the default profile. The four context profiles (Clinical,
+all six metrics in the default profile. The four context profiles (Clinical,
 Research, Consumer, Military) propose differential weights, but these have not
 been calibrated against empirical data, expert elicitation, or clinical outcomes.
 Weight calibration requires:
@@ -53,13 +53,13 @@ with domain experts from both cybersecurity and neuroscience is needed.
 
 \subsection{Taxonomy Completeness}
 
-The TARA registry contains 102 techniques as of version 1.4. The BCI threat
+The TARA registry contains 109 techniques as of version 1.5. The BCI threat
 landscape is evolving rapidly, and additional techniques will emerge as:
 (a)~new BCI devices reach market, (b)~consumer neurotechnology proliferates,
 and (c)~adversarial AI techniques advance. The current registry should be treated
 as a foundation, not a complete enumeration.
 
-Of the 102 techniques, 26 are classified as Theoretical and 1 as Speculative---these
+Of the 109 techniques, 31 are classified as Theoretical and 1 as Speculative---these
 have not been empirically demonstrated. While they are grounded in known physics
 and engineering principles, their practical feasibility remains unvalidated.
 
@@ -74,7 +74,7 @@ collaboration are essential for maturation.
 \subsection{AI Tool Disclosure}
 
 In accordance with arXiv, ACM, and IEEE policies on AI-assisted research, we
-disclose the following. Large language models (Claude~4, Gemini~2.0, ChatGPT~4o)
+disclose the following. Large language models (Claude~3.5/4, Gemini~2.0, ChatGPT-4o)
 were used during the development of this framework. Their roles, by section:
 
 \begin{itemize}
@@ -116,13 +116,20 @@ and database lookup. Version 1.2 corrected an internal percentage
 inconsistency and added the author responsibility statement above.
 Version~1.3 expanded the regulatory context (Section~2.2) with
 FDORA/PATCH Act Section~524B analysis and added Schroder et al.~(2025)
-to the related work. This revision (v1.4) adds the missing Sherman \&
+to the related work. Version~1.4 adds the missing Sherman \&
 Guillery~(2006) citation for thalamocortical relay logic in the hourglass
 derivation (Section~\ref{sec:hourglass}), replaces a mislabeled DBS citation
 with Hallett~(2007) for TMS, corrects NISS case study scores to match the
 arithmetic mean formula (Equation~\ref{eq:niss}), fixes the dual-use
-classification label (75.5\% includes confirmed, probable, and possible
-analogs), and completes a full citation and claims verification pass.
+classification label, and completes a full citation and claims verification
+pass. This revision (v1.5) expands the TARA registry from 102 to 109
+techniques, splits the NISS Cognitive Integrity (CG) metric into Cognitive
+Reconnaissance (CR) and Cognitive Disruption (CD) to distinguish read vs.\
+write attacks (NISS~v1.1, six metrics), normalizes default weights
+($w_{\text{CR}} = w_{\text{CD}} = 0.5$, others~$= 1.0$) to preserve the
+cognitive dimension at its pre-split 20\% share, updates all statistics and
+tables to reflect the expanded registry, and adds neurorights dimension
+mapping for 103 of 109 techniques.
 
 \noindent\textbf{Note on AI use and preprint status:} I did not find anything
 in Zenodo's terms of use that prohibits using AI to help write a preprint, so

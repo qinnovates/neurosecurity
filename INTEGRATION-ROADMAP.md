@@ -144,7 +144,7 @@ Real SSVEP attack replication on human subjects. Requires IRB approval and BCI r
               │                │                │
               ▼                ▼                ▼
     ┌─────────────────┐ ┌────────────┐ ┌──────────────┐
-    │   NSP v0.5      │ │ TARA v1.7  │ │  NISS v1.0   │
+    │   NSP v0.5      │ │ TARA v1.7  │ │  NISS v1.1   │
     │ (Crypto +       │ │ (Attack    │ │ (Scoring)    │
     │  Transport +    │ │  Library)  │ │              │
     │  Compression)   │ │            │ │              │

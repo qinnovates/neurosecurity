@@ -256,7 +256,7 @@ def fig_neural_impact_chain():
     # Example below
     examples = [
         'QIF-T0001', 'N7, N6', 'Motor Cortex\nHippocampus',
-        'Motor Control\nMemory', 'BI:C CG:H\n8.7 (High)',
+        'Motor Control\nMemory', 'BI:C CR:H/CD:H\n8.7 (High)',
         'G25.9\nF06.0'
     ]
     for i, ex in enumerate(examples):

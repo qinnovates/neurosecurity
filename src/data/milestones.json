@@ -1,6 +1,6 @@
 {
   "metrics": {
-    "techniques_catalogued": 102,
+    "techniques_catalogued": 109,
     "tactics": 15,
     "domains": 8,
     "days_active": null
@@ -68,8 +68,8 @@
     {
       "id": "niss-scoring",
       "title": "NISS Scoring System",
-      "version": "1.0",
-      "summary": "CVSS v4.0 extension for neural interfaces. Five metrics: Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, Neuroplasticity.",
+      "version": "1.1",
+      "summary": "CVSS v4.0 extension for neural interfaces. Six metrics: Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Consent Violation, Reversibility, Neuroplasticity.",
       "href": "/scoring/"
     }
   ],
@@ -100,8 +100,8 @@
     },
     {
       "date": "2026-02-08",
-      "title": "NISS v1.0 Specification Complete",
-      "description": "First CVSS v4.0 extension for neural interfaces. Five metrics: Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, Neuroplasticity.",
+      "title": "NISS v1.1 Specification Complete",
+      "description": "First CVSS v4.0 extension for neural interfaces. Six metrics: Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Consent Violation, Reversibility, Neuroplasticity.",
       "category": "scoring",
       "icon": "calculator",
       "href": "/scoring/"

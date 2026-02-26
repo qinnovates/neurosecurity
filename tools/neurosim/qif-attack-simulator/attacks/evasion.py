@@ -16,7 +16,7 @@ DC_DRIFT_META = AttackMetadata(
     tactic="QIF-B.EV",
     nic_chain="I0->N1->N2->N3",
     band_ids=["I0", "N1", "N2", "N3"],
-    niss_vector="NISS:1.0/BI:L/CG:M/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:L/CR:M/CD:M/CV:I/RV:P/NP:S",
     severity="MEDIUM",
     description="Slow DC ramp shifts baseline over time. Caught by spectral peak detector.",
     status="CONFIRMED",
@@ -50,7 +50,7 @@ BOILING_FROG_META = AttackMetadata(
     tactic="QIF-B.EV",
     nic_chain="I0->N1->N2->N3->N4->N5->N6->N7",
     band_ids=["I0", "N1", "N2", "N3", "N4", "N5", "N6", "N7"],
-    niss_vector="NISS:1.0/BI:L/CG:H/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:S",
     severity="HIGH",
     description="Ultra-slow adiabatic drift (0.001V/s). Each window looks normal. "
                 "Cumulative displacement is the danger. AC coupling in Cs computation "
@@ -87,7 +87,7 @@ ENVELOPE_MOD_META = AttackMetadata(
     tactic="QIF-E.RD",
     nic_chain="S1->S2->N1->N4->N7",
     band_ids=["S1", "S2", "N1", "N4", "N7"],
-    niss_vector="NISS:1.0/BI:H/CG:H/CV:I/RV:P/NP:S",
+    niss_vector="NISS:1.1/BI:H/CR:H/CD:H/CV:I/RV:P/NP:S",
     severity="HIGH",
     description="High-freq carrier (80Hz) AM-modulated at 10Hz (alpha). "
                 "Carrier looks like noise/powerline. Neural tissue demodulates the envelope. "

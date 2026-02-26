@@ -470,7 +470,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (generic SSVEP)",
         tactic="QIF-N.IJ",
         nic_chain="S1 -> I0 -> N1 (visual cortex entrainment)",
-        niss_vector="BI:M / CG:M / CV:I / RV:P / NP:S",
+        niss_vector="BI:M / CR:M/CD:M / CV:I / RV:P / NP:S",
         severity="MEDIUM",
         description="Standard SSVEP attack at a known target frequency. "
                     "Both the L1 notch filter and SSVEP signature detector "
@@ -485,7 +485,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (novel-frequency SSVEP)",
         tactic="QIF-N.IJ",
         nic_chain="S1 -> I0 -> N1 (visual cortex entrainment)",
-        niss_vector="BI:M / CG:M / CV:I / RV:P / NP:S",
+        niss_vector="BI:M / CR:M/CD:M / CV:I / RV:P / NP:S",
         severity="MEDIUM",
         description="SSVEP attack at 13Hz, which is NOT in the notch filter "
                     "bank (8.57, 10.9, 15, 20 Hz). L1 won't filter it. "
@@ -500,7 +500,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (hardware injection)",
         tactic="QIF-P.DS",
         nic_chain="I0 (electrode manipulation)",
-        niss_vector="BI:L / CG:L / CV:N / RV:P / NP:N",
+        niss_vector="BI:L / CR:L/CD:L / CV:N / RV:P / NP:N",
         severity="LOW",
         description="Sudden >2.5V jump to trigger L1 impedance guard. "
                     "This is a blunt hardware attack, immediately caught.",
@@ -513,7 +513,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="QIF-T0062",
         tactic="QIF-B.EV",
         nic_chain="I0 -> N1-N3 (gradual parameter shift)",
-        niss_vector="BI:L / CG:M / CV:I / RV:P / NP:S",
+        niss_vector="BI:L / CR:M/CD:M / CV:I / RV:P / NP:S",
         severity="MEDIUM",
         description="Slow DC ramp that changes the baseline over time. "
                     "SSVEP detector is blind (no target frequency). "
@@ -529,7 +529,7 @@ SCENARIOS: List[AttackScenario] = [
         tactic="QIF-P.DS",
         nic_chain="I0 -> N4 (thalamic gate overwhelmed) -> N5 (basal ganglia) "
                   "-> N6 (limbic saturation) -> N7 (cortical flooding, seizure risk)",
-        niss_vector="BI:H / CG:H / CV:E / RV:P / NP:T (score 6.4)",
+        niss_vector="BI:H / CR:H/CD:H / CV:E / RV:P / NP:T (score 6.4)",
         severity="CRITICAL",
         description="Broadband saturation across all frequencies. "
                     "DDoS equivalent for neural tissue. SSVEP detector "
@@ -545,7 +545,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="QIF-T0066",
         tactic="QIF-B.EV",
         nic_chain="I0 -> N1-N7 (adiabatic accumulation across all neural layers)",
-        niss_vector="BI:L / CG:H / CV:I / RV:P / NP:S (score 7.4)",
+        niss_vector="BI:L / CR:H/CD:H / CV:I / RV:P / NP:S (score 7.4)",
         severity="HIGH",
         description="Ultra-slow adiabatic drift designed to stay below "
                     "per-window detection thresholds. Each window looks "
@@ -561,7 +561,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="QIF-T0014",
         tactic="QIF-E.RD",
         nic_chain="S1-S2 -> any N (tissue demodulates envelope at neural freq)",
-        niss_vector="BI:H / CG:H / CV:I / RV:P / NP:S (score 8.1)",
+        niss_vector="BI:H / CR:H/CD:H / CV:I / RV:P / NP:S (score 8.1)",
         severity="HIGH",
         description="High-freq carrier (80Hz) amplitude-modulated at 10Hz "
                     "(alpha). Carrier looks like noise/powerline artifact. "
@@ -578,7 +578,7 @@ SCENARIOS: List[AttackScenario] = [
         tactic="QIF-N.IJ",
         nic_chain="S1 -> I0 -> N1, N3, N5-N7 (replayed trajectory hijacks "
                   "motor/cognitive pathways)",
-        niss_vector="BI:L / CG:H / CV:I / RV:P / NP:T (score 6.4)",
+        niss_vector="BI:L / CR:H/CD:H / CV:I / RV:P / NP:T (score 6.4)",
         severity="CRITICAL",
         description="Replays statistically identical neural signal trajectory. "
                     "Same alpha phase, spectral shape, amplitude stats. "
@@ -594,7 +594,7 @@ SCENARIOS: List[AttackScenario] = [
         tactic="QIF-M.SV",
         nic_chain="S2 -> I0 -> N5 (basal ganglia) -> N6 (limbic) -> N7 "
                   "(cortical destabilization)",
-        niss_vector="BI:H / CG:H / CV:E / RV:P / NP:S (score 7.4)",
+        niss_vector="BI:H / CR:H/CD:H / CV:E / RV:P / NP:S (score 7.4)",
         severity="CRITICAL",
         description="Exponentially growing perturbation simulating feedback "
                     "amplification in a closed-loop BCI. Starts invisible "
@@ -612,7 +612,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (adversarial-aware)",
         tactic="QIF-N.IJ",
         nic_chain="S1 -> I0 -> N1 (interstitial frequency)",
-        niss_vector="BI:M / CG:M / CV:I / RV:P / NP:S",
+        niss_vector="BI:M / CR:M/CD:M / CV:I / RV:P / NP:S",
         severity="MEDIUM",
         description="SSVEP at 12Hz, precisely between notch filters (10.9 and "
                     "15 Hz). Attacker knows the notch bank. Tests adaptive "
@@ -626,7 +626,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (adversarial-aware)",
         tactic="QIF-N.IJ",
         nic_chain="S1 -> I0 -> N1 (frequency-agile)",
-        niss_vector="BI:M / CG:M / CV:I / RV:P / NP:S",
+        niss_vector="BI:M / CR:M/CD:M / CV:I / RV:P / NP:S",
         severity="MEDIUM",
         description="SSVEP that hops frequency every 0.5s. Designed to evade "
                     "sustained spectral peak detector (3/4 consecutive windows). "
@@ -640,7 +640,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (adversarial-aware)",
         tactic="QIF-B.EV",
         nic_chain="I0 -> N1-N4 (sub-threshold accumulation)",
-        niss_vector="BI:L / CG:H / CV:I / RV:P / NP:S",
+        niss_vector="BI:L / CR:H/CD:H / CV:I / RV:P / NP:S",
         severity="HIGH",
         description="Perturbation calibrated to produce z-score ~1.2 per window "
                     "(below 1.5 threshold). Tests CUSUM and growth detectors.",
@@ -653,7 +653,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (adversarial-aware)",
         tactic="QIF-N.IJ",
         nic_chain="S1 -> I0 -> N1-N4 (burst-gap pattern)",
-        niss_vector="BI:M / CG:H / CV:I / RV:P / NP:S",
+        niss_vector="BI:M / CR:H/CD:H / CV:I / RV:P / NP:S",
         severity="HIGH",
         description="Intermittent 0.4s SSVEP bursts at 13Hz with 1.0s clean gaps. "
                     "Designed to prevent CUSUM accumulation. Tests stateful "
@@ -667,7 +667,7 @@ SCENARIOS: List[AttackScenario] = [
         tara_id="N/A (adversarial-aware)",
         tactic="QIF-N.IJ",
         nic_chain="S1 -> I0 -> N1-N7 (broadband stealth)",
-        niss_vector="BI:M / CG:H / CV:I / RV:P / NP:T",
+        niss_vector="BI:M / CR:H/CD:H / CV:I / RV:P / NP:T",
         severity="HIGH",
         description="Broadband noise shaped to match baseline spectral profile. "
                     "No novel peaks. Spectral entropy stays flat. Only total "

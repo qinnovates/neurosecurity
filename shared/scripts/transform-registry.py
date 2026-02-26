@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Transform qtara-registrar.json to QIF Locus Taxonomy + NISS v1.0 scoring.
+Transform qtara-registrar.json to QIF Locus Taxonomy + NISS v1.1 scoring.
 
 This script:
 1. Replaces MITRE-derived tactic IDs with QIF Locus Taxonomy IDs
 2. Renumbers all technique IDs from QIF-T2xxx to QIF-T0001+
-3. Adds NISS v1.0 scoring vectors and base scores
+3. Adds NISS v1.1 scoring vectors and base scores
 4. Removes all MITRE references
 5. Updates statistics
 """
@@ -138,7 +138,7 @@ for t in LOCUS_TACTICS:
         TACTIC_MAP[lid] = t["id"]
 
 # ============================================================
-# NISS v1.0 SCORING
+# NISS v1.1 SCORING
 # ============================================================
 
 # Metric weights
@@ -171,7 +171,7 @@ TACTIC_DEFAULTS = {
 }
 
 def compute_niss_score(v):
-    """Compute NISS v1.0 base score from vector dict."""
+    """Compute NISS v1.1 base score from vector dict."""
     av = AV_WEIGHTS[v["AV"]]
     ac = AC_WEIGHTS[v["AC"]]
     pr = PR_WEIGHTS[v["PR"]]
@@ -326,7 +326,7 @@ def assign_niss(tech, new_tactic):
     elif "dizziness" in notes or "phosphene" in notes or "discomfort" in notes:
         v["BI"] = max_metric(v["BI"], "L")
 
-    # --- Cognitive Integrity upgrades ---
+    # --- Cognitive Security upgrades (legacy CI field → maps to CR+CD in NISS v1.1) ---
     if "identity" in attack or "self-model" in attack or "agency" in attack or "personality" in notes:
         v["CI"] = "C"
     elif "memory" in attack or "thought decoding" in attack or "working memory" in notes:
@@ -538,7 +538,7 @@ def main():
     # ============================================================
     reg["version"] = "3.0"
     reg["taxonomy"] = "QIF Locus Taxonomy v1.0"
-    reg["scoring"] = "NISS v1.0 (Neural Impact Scoring System)"
+    reg["scoring"] = "NISS v1.1 (Neural Impact Scoring System)"
     reg["generated"] = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # Remove old MITRE compatibility section

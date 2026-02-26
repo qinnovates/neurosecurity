@@ -6,7 +6,7 @@ const spec = NISS_SPEC as any;
 const nissStats = getNissStats();
 const totalTechniques = THREAT_VECTORS.length;
 
-// NISS v1.0 Extension Metrics (5 metrics that extend CVSS v4.0)
+// NISS v1.1 Extension Metrics (6 metrics that extend CVSS v4.0)
 // Reconciled: equal weights (1.0 all), context profiles available separately
 const extensionMetrics = [
   {
@@ -20,12 +20,22 @@ const extensionMetrics = [
     ],
   },
   {
-    id: 'CG', name: 'Cognitive Integrity', weight: 1.0,
-    description: 'Impact on thought processes, perception, memory, identity, or decision-making. CVSS has no concept of thought privacy or cognitive autonomy. CG captures everything from partial intent decoding to full perception manipulation.',
+    id: 'CR', name: 'Cognitive Reconnaissance', weight: 1.0,
+    description: 'Read-side attacks: impact from neural data inference, thought decoding, and intent extraction. CVSS has no concept of thought privacy. CR captures the passive reading of cognitive state without the subject\'s knowledge.',
     values: [
-      { code: 'N', label: 'None', score: '0.0', description: 'No cognitive impact.' },
-      { code: 'L', label: 'Low', score: '3.3', description: 'Decoded intent partially exposed, minor perceptual distortion.' },
-      { code: 'H', label: 'High', score: '6.7', description: 'Full thought decoding, identity inference, or perception manipulation.' },
+      { code: 'N', label: 'None', score: '0.0', description: 'No cognitive read impact.' },
+      { code: 'L', label: 'Low', score: '3.3', description: 'Partial intent or emotional state inferred from neural signals.' },
+      { code: 'H', label: 'High', score: '6.7', description: 'Full thought decoding, identity inference, or detailed cognitive state extraction.' },
+      { code: 'C', label: 'Critical', score: '10.0', description: 'Complete cognitive surveillance: real-time thought stream, memory extraction, or subconscious state decoding.' },
+    ],
+  },
+  {
+    id: 'CD', name: 'Cognitive Disruption', weight: 1.0,
+    description: 'Write-side attacks: impact on perception, decision-making, identity, and cognitive autonomy. CD captures active manipulation of cognitive function, from minor perceptual distortion to full identity modification.',
+    values: [
+      { code: 'N', label: 'None', score: '0.0', description: 'No cognitive write impact.' },
+      { code: 'L', label: 'Low', score: '3.3', description: 'Minor perceptual distortion, transient confusion, or subtle decision bias.' },
+      { code: 'H', label: 'High', score: '6.7', description: 'Perception manipulation, forced emotional state, or significant impairment of decision-making.' },
       { code: 'C', label: 'Critical', score: '10.0', description: 'Cognitive coercion, identity modification, or complete loss of cognitive autonomy.' },
     ],
   },
@@ -93,6 +103,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
           { href: '#severity', label: 'Severity Levels' },
           { href: '#vector', label: 'Vector Format' },
           { href: '#examples', label: 'Examples' },
+          { href: '#nsv2', label: 'NSv2.1 Framework' },
           { href: '#validation', label: 'Validation' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
@@ -108,7 +119,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
       <!-- Overview -->
       <section id="overview" class="mb-20">
         <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
-          Neural Impact Scoring System <span class="text-[var(--color-accent-primary)]">v1.0</span>
+          Neural Impact Scoring System <span class="text-[var(--color-accent-primary)]">v1.1</span>
         </h1>
         <div class="flex flex-wrap items-center gap-3 mb-6">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
@@ -118,15 +129,18 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
             FIRST.org §3.11
           </span>
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-text-faint)]/30 text-[var(--color-text-faint)]">
-            5 Extension Metrics · {totalTechniques} Techniques Scored
+            6 Extension Metrics · {totalTechniques} Techniques Scored
           </span>
         </div>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            CVSS — the industry standard for scoring software vulnerabilities — was designed for servers, not skulls. It cannot express whether an attack is reversible to neural tissue, whether it crosses the consent boundary, or whether the cognitive damage is temporary or permanent. NISS adds the five dimensions that CVSS structurally cannot: Biological Impact, Cognitive Integrity, Consent Violation, Reversibility, and Neuroplastic Potential.
+            CVSS — the industry standard for scoring software vulnerabilities — was designed for servers, not skulls. It cannot express whether an attack is reversible to neural tissue, whether it crosses the consent boundary, or whether the cognitive damage is temporary or permanent. NISS adds the six dimensions that CVSS structurally cannot: Biological Impact, Cognitive Reconnaissance (read-side attacks), Cognitive Disruption (write-side attacks), Consent Violation, Reversibility, and Neuroplastic Potential.
           </p>
           <p>
             When a vulnerability affects a brain, the severity score should reflect what happens to the patient — not just what happens to the device. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS rides <strong>alongside</strong> CVSS v4.0 base vectors. Every technique in the <a href="/TARA/">TARA atlas</a> carries both: how the attack works <em>and</em> what it does to the mind.
+          </p>
+          <p>
+            NISS serves as the technique-level scoring input to the <a href="#nsv2">Neurosecurity Score (NSv2.1)</a>, a multi-layer risk framework that aggregates NISS scores across five neurorights dimensions with physics-based feasibility gating and population-adjusted context baselines. NISS is the scoring metric; NSv2.1 is the validated risk framework.
           </p>
         </div>
 
@@ -160,7 +174,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Architecture: Extending CVSS, Not Replacing It</h2>
         <div class="prose mb-8">
           <p>
-            CVSS v4.0 provides a robust framework for scoring exploitability and system impact. NISS does not duplicate that work. Instead, it follows FIRST.org's official extension mechanism (§3.11) to add five metrics that capture dimensions CVSS was never designed to express.
+            CVSS v4.0 provides a robust framework for scoring exploitability and system impact. NISS does not duplicate that work. Instead, it follows FIRST.org's official extension mechanism (§3.11) to add six metrics that capture dimensions CVSS was never designed to express.
           </p>
           <p>
             Every scored technique carries <strong>two vectors</strong> side by side:
@@ -174,8 +188,8 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
             <p class="text-xs text-[var(--color-text-faint)] mt-2">How the attack works: vector, complexity, privileges, user interaction, system impact</p>
           </div>
           <div class="glass rounded-xl p-5 border-l-4 border-[var(--color-accent-tertiary)]">
-            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS v1.0 Extension Vector</p>
-            <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-tertiary)] break-all">NISS:1.0/BI:&lt;V&gt;/CG:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;</p>
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS v1.1 Extension Vector</p>
+            <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-tertiary)] break-all">NISS:1.1/BI:&lt;V&gt;/CR:&lt;V&gt;/CD:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;</p>
             <p class="text-xs text-[var(--color-text-faint)] mt-2">What it does to the patient: biological harm, cognitive impact, consent violation, reversibility, neuroplasticity</p>
           </div>
         </div>
@@ -217,7 +231,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <div class="grid gap-4 sm:grid-cols-2">
           {[
             { gap: 'No biological impact metric', detail: 'CVSS cannot distinguish between a server crash and a seizure. NISS adds Biological Impact (BI) with 4 severity levels.' },
-            { gap: 'No cognitive integrity metric', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Integrity (CG) with 4 severity levels.' },
+            { gap: 'No cognitive impact metrics', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Reconnaissance (CR) for read-side attacks and Cognitive Disruption (CD) for write-side attacks, each with 4 severity levels.' },
             { gap: 'No consent model', detail: 'CVSS does not model informed consent or cognitive liberty. NISS adds Consent Violation (CV) — ordered by detectability, with covert violations ranked highest.' },
             { gap: 'No reversibility dimension', detail: 'IT assets restore from backup. Neural tissue cannot. NISS adds Reversibility (RV) with 4 levels from Full to Irreversible.' },
             { gap: 'No neuroplasticity tracking', detail: 'Prolonged adversarial stimulation physically rewires the brain. NISS adds Neuroplasticity (NP) — None, Temporary, or Structural.' },
@@ -234,7 +248,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
       <!-- Extension Metrics -->
       <section id="metrics" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Extension Metrics</h2>
-        <p class="text-sm text-[var(--color-text-faint)] mb-6">5 dimensions &ensp;|&ensp; All unique to NISS &ensp;|&ensp; No CVSS equivalent</p>
+        <p class="text-sm text-[var(--color-text-faint)] mb-6">6 dimensions &ensp;|&ensp; All unique to NISS &ensp;|&ensp; No CVSS equivalent</p>
         {extensionMetrics.map(metric => (
           <div class="mb-10">
             <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1">
@@ -292,7 +306,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scoring Formula</h2>
         <div class="glass rounded-xl p-8 text-center mb-6">
           <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            NISS = (BI + CG + CV + RV + NP) / 5
+            NISS = (BI + CR + CD + CV + RV + NP) / 6
           </p>
           <p class="text-sm text-[var(--color-text-faint)]">
             Score range: 0.0 – 10.0 &ensp;|&ensp; Equal weights (default) &ensp;|&ensp; Context profiles available
@@ -301,14 +315,14 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
 
         <div class="prose mb-6">
           <p>
-            The default formula uses <strong>equal weights</strong> for all five metrics — each dimension contributes equally to the composite score. This follows the same principle as CVSS v4.0 base scoring: no a priori bias toward any impact dimension. Organizations can apply <strong>context profiles</strong> that shift weights based on deployment context (see below).
+            The default formula uses <strong>equal weights</strong> for all six metrics — each dimension contributes equally to the composite score. This follows the same principle as CVSS v4.0 base scoring: no a priori bias toward any impact dimension. Organizations can apply <strong>context profiles</strong> that shift weights based on deployment context (see below).
           </p>
         </div>
 
         <div class="glass rounded-xl p-6 mb-6">
           <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Context Profiles</h3>
           <p class="text-sm text-[var(--color-text-muted)] mb-4">
-            Organizations MAY apply context-specific weight profiles. The general formula is: <code class="text-[var(--color-accent-tertiary)]">NISS = (w_BI×BI + w_CG×CG + w_CV×CV + w_RV×RV + w_NP×NP) / Σw</code>
+            Organizations MAY apply context-specific weight profiles. The general formula is: <code class="text-[var(--color-accent-tertiary)]">NISS = (w_BI×BI + w_CR×CR + w_CD×CD + w_CV×CV + w_RV×RV + w_NP×NP) / Σw</code>
           </p>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -316,7 +330,8 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
                 <tr class="border-b border-[var(--color-border)]">
                   <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Profile</th>
                   <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">BI</th>
-                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">CG</th>
+                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">CR</th>
+                  <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">CD</th>
                   <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">CV</th>
                   <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">RV</th>
                   <th class="py-2 px-3 text-center font-semibold text-xs text-[var(--color-text-faint)]">NP</th>
@@ -325,16 +340,17 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
               </thead>
               <tbody>
                 {[
-                  { name: 'Default', bi: 1.0, cg: 1.0, cv: 1.0, rv: 1.0, np: 1.0, focus: 'Equal — general purpose' },
-                  { name: 'Clinical', bi: 2.0, cg: 1.5, cv: 1.0, rv: 2.0, np: 1.0, focus: 'Patient safety first' },
-                  { name: 'Research', bi: 1.0, cg: 2.0, cv: 2.0, rv: 1.0, np: 1.5, focus: 'Subject rights and data integrity' },
-                  { name: 'Consumer', bi: 1.0, cg: 1.5, cv: 2.0, rv: 1.0, np: 1.0, focus: 'Neural data privacy' },
-                  { name: 'Military', bi: 2.0, cg: 2.0, cv: 0.5, rv: 1.5, np: 1.5, focus: 'Cognitive warfare defense' },
+                  { name: 'Default', bi: 1.0, cr: 1.0, cd: 1.0, cv: 1.0, rv: 1.0, np: 1.0, focus: 'Equal — general purpose' },
+                  { name: 'Clinical', bi: 2.0, cr: 1.0, cd: 1.5, cv: 1.0, rv: 2.0, np: 1.0, focus: 'Patient safety first' },
+                  { name: 'Research', bi: 1.0, cr: 2.0, cd: 1.5, cv: 2.0, rv: 1.0, np: 1.5, focus: 'Subject rights and data integrity' },
+                  { name: 'Consumer', bi: 1.0, cr: 1.5, cd: 1.0, cv: 2.0, rv: 1.0, np: 1.0, focus: 'Neural data privacy' },
+                  { name: 'Military', bi: 2.0, cr: 1.5, cd: 2.0, cv: 0.5, rv: 1.5, np: 1.5, focus: 'Cognitive warfare defense' },
                 ].map(p => (
                   <tr class="border-b border-[var(--color-border)]/50">
                     <td class="py-2 px-3 font-semibold text-[var(--color-text-primary)]">{p.name}</td>
                     <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.bi}</td>
-                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.cg}</td>
+                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.cr}</td>
+                    <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.cd}</td>
                     <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.cv}</td>
                     <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.rv}</td>
                     <td class="py-2 px-3 text-center font-[family-name:var(--font-mono)]">{p.np}</td>
@@ -374,7 +390,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <div class="glass rounded-xl p-6 mb-4">
           <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-2">NISS Extension Vector</p>
           <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all">
-            NISS:1.0/BI:&lt;V&gt;/CG:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;
+            NISS:1.1/BI:&lt;V&gt;/CR:&lt;V&gt;/CD:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;
           </p>
         </div>
         <div class="glass rounded-xl p-6 mb-6">
@@ -385,7 +401,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
         <div class="prose">
           <p>
-            Both vectors are designed to be human-readable, machine-parseable, and diff-friendly. Security teams can compare CVSS vectors with standard tooling. BCI safety teams can filter and sort on NISS dimensions (e.g., "show all techniques with BI:H or BI:C") for targeted safety review.
+            Both vectors are designed to be human-readable, machine-parseable, and diff-friendly. Security teams can compare CVSS vectors with standard tooling. BCI safety teams can filter and sort on NISS dimensions (e.g., "show all techniques with BI:H or CD:C") for targeted safety review.
           </p>
         </div>
       </section>
@@ -429,12 +445,112 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
       </section>
 
+      <!-- NSv2.1 Framework -->
+      <section id="nsv2" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">NSv2.1: Neurosecurity Score Framework</h2>
+        <div class="prose mb-8">
+          <p>
+            NISS scores individual techniques. But a single technique score does not tell you the risk to a patient using a specific device in a specific context. That requires aggregation, feasibility gating, and population adjustment.
+          </p>
+          <p>
+            <strong>NISS is the scoring metric. NSv2.1 is the validated risk framework that demonstrates NISS in operational context.</strong>
+          </p>
+          <p>
+            The Neurosecurity Score v2.1 (NSv2.1) consumes NISS technique scores as input and produces a device-level risk assessment across five neurorights dimensions.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-4">Seven-Layer Pipeline</h3>
+          <div class="space-y-3">
+            {[
+              { layer: '1', name: 'Normalization', detail: 'NISS (0-10), CCI (0-3), and DSM-5 severity (ordinal) normalized to [0, 1]' },
+              { layer: '2', name: 'Base Neurosecurity Score', detail: 'Weighted geometric mean (CES, rho=0): NISS 0.40, DSM 0.40, CCI 0.20' },
+              { layer: '3', name: 'Feasibility Gating', detail: 'ISO 31000 risk: Hazard x P_realize. Physics tiers gate speculative attacks (Tier 3 = 10% probability)' },
+              { layer: '4', name: 'Per-Right Aggregation', detail: 'OWA (Yager 1988) with exponential weighting across techniques per neurorights dimension' },
+              { layer: '5', name: 'Overall Score', detail: 'Geometric mean across 5 neurorights dimensions (CL, MI, MP, PC, EA)' },
+              { layer: '6', name: 'Population Adjustment', detail: 'Contextual Risk Baseline (CRB): multiplicative adjustment for vulnerable populations (children, elderly, ALS, autism)' },
+              { layer: '7', name: 'Equity Assessment', detail: 'System-level accessibility and affordability scoring (EA dimension)' },
+            ].map(l => (
+              <div class="flex gap-4 items-start">
+                <span class="shrink-0 w-7 h-7 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] flex items-center justify-center text-xs font-bold">{l.layer}</span>
+                <div>
+                  <span class="text-sm font-semibold">{l.name}</span>
+                  <p class="text-xs text-[var(--color-text-muted)]">{l.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Five Neurorights Dimensions</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Code</th>
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Right</th>
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">What It Measures</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { code: 'CL', name: 'Cognitive Liberty', desc: 'Freedom from unauthorized cognitive interference or manipulation' },
+                  { code: 'MI', name: 'Mental Integrity', desc: 'Protection against unauthorized alteration of neural states or processes' },
+                  { code: 'MP', name: 'Motoric Privacy', desc: 'Protection of neural data from unauthorized collection or inference' },
+                  { code: 'PC', name: 'Personal Consent', desc: 'Right to informed, meaningful consent over neural device operation' },
+                  { code: 'EA', name: 'Equity & Access', desc: 'System-level fairness in who benefits and who bears risk' },
+                ].map(r => (
+                  <tr class="border-b border-[var(--color-border)]/50">
+                    <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] font-semibold">{r.code}</td>
+                    <td class="py-2 px-3 font-semibold">{r.name}</td>
+                    <td class="py-2 px-3 text-[var(--color-text-muted)]">{r.desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Example: NSv2.1 Vector</h3>
+          <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all mb-3">
+            NSv2.1:6.02/CL:6.31/MI:6.32/MP:5.88/PC:4.59/EA:7.37
+          </p>
+          <p class="text-xs text-[var(--color-text-muted)]">
+            Device-level risk score (0-10) broken down by neurorights dimension. This example scores a high-severity invasive BCI across all five rights.
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3 mb-6">
+          <div class="glass rounded-xl p-5 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">22</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">BCI Devices Scored</div>
+          </div>
+          <div class="glass rounded-xl p-5 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">5</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Population Baselines</div>
+          </div>
+          <div class="glass rounded-xl p-5 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">10K</div>
+            <div class="text-xs text-[var(--color-text-faint)] mt-1">Monte Carlo Samples</div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>
+            NSv2.1 has been validated against FDA device classifications (Class I/II/III) using Spearman rank correlation, with Monte Carlo uncertainty quantification (10,000 samples, 15% perturbation). Full methodology and device scores are available in the <a href="https://github.com/qinnovates/qinnovate/tree/main/tools" class="text-[var(--color-accent-primary)] hover:underline">scoring tools</a> on GitHub.
+          </p>
+        </div>
+      </section>
+
       <!-- Validation Note -->
       <section id="validation" class="mb-20">
         <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)]">
           <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Validation Note</h3>
           <p class="text-sm text-[var(--color-text-muted)]">
-            NISS scoring behavior has been validated in simulation (<a href="/validation/#val-004" class="text-[var(--color-accent-primary)] hover:underline">VAL-004</a>): all 103 techniques scored correctly, PINS flags trigger as specified, and context profiles shift weights as designed. However, the clinical appropriateness of NISS score magnitudes has <strong>not</strong> been validated by clinicians or tested against real BCI incident data. The scoring engine works as specified; whether the specification itself produces clinically meaningful severity levels is an open question requiring empirical validation.
+            NISS scoring behavior has been validated in simulation (<a href="/validation/#val-004" class="text-[var(--color-accent-primary)] hover:underline">VAL-004</a>): all 109 techniques scored correctly, PINS flags trigger as specified, and context profiles shift weights as designed. However, the clinical appropriateness of NISS score magnitudes has <strong>not</strong> been validated by clinicians or tested against real BCI incident data. The scoring engine works as specified; whether the specification itself produces clinically meaningful severity levels is an open question requiring empirical validation.
           </p>
           <a href="/validation/" class="text-xs text-[var(--color-accent-primary)] hover:underline mt-2 inline-block">
             View full validation status

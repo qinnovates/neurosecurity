@@ -57,9 +57,11 @@ def niss_overlays(niss_vector: str) -> list:
     for p in parts:
         if p.startswith("BI:") and p.split(":")[1] in ("H", "C"):
             rights.append("MI")  # High/Critical brain impact → mental integrity
-        if p.startswith("CG:") and p.split(":")[1] in ("H", "C"):
-            rights.append("CL")  # High/Critical cognitive → cognitive liberty
-            rights.append("MI")  # Also mental integrity
+        if p.startswith("CR:") and p.split(":")[1] in ("H", "C"):
+            rights.append("CL")  # High/Critical cognitive recon (read) → cognitive liberty
+            rights.append("MP")  # Also mental privacy (unauthorized data extraction)
+        if p.startswith("CD:") and p.split(":")[1] in ("H", "C"):
+            rights.append("MI")  # High/Critical cognitive disruption (write) → mental integrity
         if p.startswith("NP:") and p.split(":")[1] == "T":
             rights.append("DI")  # Therapeutic potential → dynamical integrity (dual-use)
     return rights

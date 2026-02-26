@@ -653,7 +653,7 @@ graph LR
 
 ## 6.8 NISS: Neural Impact Scoring System
 
-The **NISS v1.0** extends CVSS v4.0 with five dimensions specific to human-digital interconnection.
+The **NISS v1.1** extends CVSS v4.0 with six dimensions specific to human-digital interconnection.
 
 ```{python}
 #| label: fig-niss-radar

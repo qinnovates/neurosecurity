@@ -117,6 +117,7 @@ This work investigates whether the Quantified Interconnection Framework (QIF) an
 
 | Date | Entry | Topic |
 |------|-------|-------|
+| 2026-02-25 | [Entry 18](#entry-18-niss-v11-cr-cd) | NISS v1.1: CG → CR + CD migration |
 | 2026-02-24 | [Entry 17](#entry-17-crb-cross-ai) | CRB Cross-AI Review: ChatGPT + Gemini |
 | 2026-02-24 | [Entry 16](#entry-16-crb-mc-site) | CRB Monte Carlo Uncertainty + Site Integration |
 | 2026-02-24 | [Entry 15](#entry-15-crb-sensitivity) | CRB Sensitivity: γ Sweep, Weight Alternatives, All-Device Scoring |
@@ -134,6 +135,34 @@ This work investigates whether the Quantified Interconnection Framework (QIF) an
 | 2026-02-24 | [Entry 3](#entry-3-neurosecurity-score) | The Neurosecurity Score: Architecture and Naming |
 | 2026-02-24 | [Entry 2](#entry-2-research-foundations) | Research Foundations: What the Field Has and Hasn't Done |
 | 2026-02-24 | [Entry 1](#entry-1-the-reframe) | The Reframe: From Security-First to Rights-First |
+
+---
+
+<a id="entry-18-niss-v11-cr-cd"></a>
+## Entry 18: NISS v1.1 — CG Split into CR + CD {#entry-18-niss-v11-cr-cd}
+
+**Date:** 2026-02-25, ~14:40
+**Classification:** VERIFIED — structural metric change, Gemini cross-validated
+**AI Systems:** Claude Opus 4.6, Gemini CLI (cross-validation)
+**Connected entries:** QIF Derivation Log Entry 80, Neurorights Entry 5 (NSv1 formula), Entry 6 (NSv2 cross-AI)
+
+### Impact on Neurosecurity Score
+
+The NSv2.1b formula (Entries 5-9) uses NISS subscores as inputs. The CG→CR+CD split means:
+
+- **NSv2.1b MI (Mental Integrity) subscore** now draws from CR and CD separately rather than a single CG
+- **Device scores will shift** once per-technique CR vs CD differentiation is complete (currently both inherit CG value)
+- **CRB vulnerability factors unchanged** — they operate on the overall NS, not individual NISS metrics
+
+### Neurorights Mapping Update
+
+| Neuroright | Old NISS Driver | New NISS Drivers |
+|------------|----------------|-----------------|
+| Mental Privacy | CG (partial) | **CR** (primary — read attacks violate privacy) |
+| Mental Integrity | CG (partial) + BI | **CD** (primary — write attacks violate integrity) + BI |
+| Cognitive Liberty | CV + CG (partial) | CV + **CR + CD** (both read and write violate liberty) |
+
+The split makes neurorights-to-metric mappings more precise. CR is the privacy metric; CD is the integrity metric. This resolves a long-standing ambiguity where a single CG score couldn't distinguish surveillance from manipulation.
 
 ---
 
@@ -839,7 +868,7 @@ The UNESCO Recommendation on the Ethics of Neurotechnology (November 2025) is th
 |---|---|
 | Dignity & Human Rights | NSv2.1b per-right scores (CL, MI, MP, PC, EA) — each right scored 0–10 |
 | Autonomy & Consent | CCI (0–1) operationalizes the consent boundary. CCI > 0.5 = consent violation |
-| Privacy & Data Protection | NISS CG+CV dimensions + TARA mental privacy technique set (72 techniques) |
+| Privacy & Data Protection | NISS CR+CV dimensions + TARA mental privacy technique set (72 techniques) |
 | Safety & Risk Management | NISS overall score + PINS flag for irreversible harm. FDA correlation (ρ=0.52) |
 | Equity & Non-Discrimination | EA subscore (system-level). CRB vulnerability adjustment for children/neurodivergent |
 | Transparency | Full derivation log, cross-AI validation, open-source tooling |
@@ -856,7 +885,7 @@ The OECD Recommendation on Responsible Innovation in Neurotechnology (2019, upda
 |---|---|
 | Promote safety and efficacy | NISS severity + PINS flag |
 | Prevent misuse | TARA technique catalog (109 enumerated attack vectors) |
-| Protect personal brain data | MP subscore + NISS CG dimension |
+| Protect personal brain data | MP subscore + NISS CR dimension |
 | Promote inclusive innovation | EA subscore + CRB adjustment |
 | Enable scientific research | Open-source tools, machine-readable data (qtara-registrar.json) |
 | Build public trust | Validation transparency (cross-AI scores, sensitivity analysis, FDA correlation) |
@@ -880,7 +909,7 @@ Chile's constitutional amendment (2021) protects "psychic integrity" and "mental
 Colorado SB 24-058 (2024) classifies neural data as "sensitive data" under existing privacy law (Colorado Privacy Act). This is narrower than Chile — it addresses data classification, not neurorights broadly.
 
 **QIF alignment:**
-- Colorado's scope (neural data as sensitive data) maps to NISS CG dimension + TARA data exfiltration techniques
+- Colorado's scope (neural data as sensitive data) maps to NISS CR dimension + TARA data exfiltration techniques
 - QIF extends beyond Colorado's scope: Colorado protects neural data; QIF also scores cognitive liberty, mental integrity, psychological continuity, and equitable access
 - Colorado provides legal classification; QIF provides technical severity scoring
 
@@ -1053,14 +1082,15 @@ The Cognitive-Consent Impact index (CCI: 0.0–1.0) measures how deeply a techni
 
 ### 2.3 NISS as Neurorights Degradation Scoring
 
-NISS (Neural Impact Scoring System) extends CVSS v4.0 with 5 neural-specific metrics: Biological Impact (BI), Cognitive Integrity (CG), Consent Violation (CV), Reversibility (RV), and Neuroplastic Potential (NP). Each technique carries a NISS vector alongside its CVSS vector.
+NISS (Neural Impact Scoring System) extends CVSS v4.0 with 6 neural-specific metrics: Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive Disruption (CD), Consent Violation (CV), Reversibility (RV), and Neuroplastic Potential (NP). Each technique carries a NISS vector alongside its CVSS vector.
 
-**The reframe from Entry 1:** NISS was designed as a security metric — "how severe is this vulnerability to the device?" The neurorights reframe asks: "how severe is this vulnerability to the person?" The answer is the same number. NISS already measures human impact. The 5 NISS dimensions map directly to neurorights concerns:
+**The reframe from Entry 1:** NISS was designed as a security metric — "how severe is this vulnerability to the device?" The neurorights reframe asks: "how severe is this vulnerability to the person?" The answer is the same number. NISS already measures human impact. The 6 NISS dimensions map directly to neurorights concerns:
 
 | NISS Dimension | Neurorights Implication |
 |---|---|
 | BI (Biological Impact) | Physical harm → MI violation (bodily/mental integrity) |
-| CG (Cognitive Integrity) | Thought decoding/manipulation → CL, MI, MP |
+| CR (Cognitive Reconnaissance) | Thought decoding, neural data inference → MP, CL |
+| CD (Cognitive Disruption) | Perception manipulation, identity modification → MI, CL |
 | CV (Consent Violation) | Consent boundary breach → CL (autonomy over mental states) |
 | RV (Reversibility) | Permanent vs temporary → PC (identity preservation) |
 | NP (Neuroplasticity) | Brain rewiring → PC, MI (structural alteration) |
@@ -2123,9 +2153,10 @@ Also: compare devices side-by-side. "Neuralink N1 (8.65) vs Synchron Stentrode (
 | "Can the effect on cognition be reversed by removing the device?" | RV (Reversibility) | Fully=L, Partially=P, Irreversible=I |
 | "Does the user give informed consent for neural data collection?" | CV (Consent Violation) | Explicit=N, Implicit=E, Bypassed=I |
 | "Does the technology alter brain structure over time?" | NP (Neuroplasticity) | No=F, Functional only=F, Structural=S |
-| "Does the technology affect cognitive processes like attention, memory, or decision-making?" | CG (Cognitive Integrity) | No=L, Mild=M, Significant=H, Dominant=C |
+| "Does the technology read/decode cognitive processes (thought decoding, neural inference)?" | CR (Cognitive Reconnaissance) | No=N, Minor=L, Significant=H, Full reconstruction=C |
+| "Does the technology alter cognitive processes (attention, memory, decision-making)?" | CD (Cognitive Disruption) | No=N, Mild=L, Significant=H, Dominant=C |
 
-5 questions → NISS vector → NISS score. From there, the formula takes over.
+6 questions → NISS vector → NISS score. From there, the formula takes over.
 
 **Python SDK (qtara package):**
 ```python
@@ -2146,7 +2177,7 @@ print(score.adjusted)  # 9.01
 
 # Tier 3: Custom device
 custom = neurosecurity.assess(
-    niss_vector="BI:H/CG:H/CV:E/RV:P/NP:S",
+    niss_vector="BI:H/CR:H/CD:H/CV:E/RV:P/NP:S",
     techniques=["T0001", "T0014", "T0036"],
     neurorights_map={"T0001": ["CL", "MI"], ...}
 )
