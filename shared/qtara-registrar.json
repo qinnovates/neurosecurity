@@ -20684,7 +20684,7 @@
     }
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
-  "scoring": "NISS v1.0 (Neural Impact Scoring System)",
+  "scoring": "NISS v1.1 (Neural Impact Scoring System)",
   "generated": "2026-02-09T04:30:00Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",

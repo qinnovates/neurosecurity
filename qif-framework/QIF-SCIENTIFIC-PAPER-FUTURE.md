@@ -199,7 +199,7 @@ This paper presents twenty contributions:
 5. **NISS** (Neural Impact Scoring System), a BCI-native severity scoring system replacing CVSS with six neural impact dimensions.
 6. A **CVE coverage analysis** mapping 55 NVD-verified CVEs to TARA techniques, quantifying an 81.25% clinical blind spot.
 7. **Physics feasibility tiering** classifying all 109 techniques by hardware gate (61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only).
-8. A **DSM-5 diagnostic mapping** linking 102 techniques to psychiatric diagnoses via the Neural Impact Chain, organized into five diagnostic clusters.
+8. A **DSM-5 diagnostic mapping** linking 109 techniques to psychiatric diagnoses via the Neural Impact Chain, organized into five diagnostic clusters.
 9. **Per-technique FDORA/524B regulatory scoring** with coverage gaps identified for each of five FDORA requirements.
 10. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol for BCI data.
 11. **Project Runemate**, a content compression pipeline that offsets PQC bandwidth overhead by 65--90%.
@@ -1173,7 +1173,7 @@ This paper delivered the twenty contributions outlined in Section 2.5:
 5. **TARA** (Therapeutic Atlas of Risks and Applications), a mechanism-first dual-use registry with 22+ fields per technique (Section 6.7).
 6. **CVE coverage analysis** quantifying an 81.25% clinical blind spot in vulnerability tracking (Section 6.8).
 7. **Physics feasibility tiering** classifying all 109 techniques by hardware gate (Section 6.9).
-8. **DSM-5 diagnostic mapping** linking 102 techniques to psychiatric diagnoses via the Neural Impact Chain (Section 6.10).
+8. **DSM-5 diagnostic mapping** linking 109 techniques to psychiatric diagnoses via the Neural Impact Chain (Section 6.10).
 9. **Per-technique FDORA/524B regulatory scoring** with coverage gaps across five FDORA requirements (Section 6.7.4).
 10. The **Neural Sensory Protocol (NSP)**, a five-layer post-quantum communication protocol (Section 7.1-7.5).
 11. **Project Runemate**, a content compression pipeline offsetting PQC bandwidth overhead by 65--90% (Section 7.6).
