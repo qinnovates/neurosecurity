@@ -1,0 +1,95 @@
+# -----------------------------------------------
+# MITRE ATLAS Case Study: P300 Side-Channel Extraction
+# Contribution target: atlas@mitre.org
+# Based on schema from mitre-atlas/atlas-data
+# -----------------------------------------------
+
+id:                             # Assigned by MITRE on acceptance
+object-type: case-study
+name: "Private Information Extraction via P300 Neural Side-Channel in Consumer EEG Headsets"
+
+summary: >
+  Researchers demonstrated that subliminal visual stimuli presented
+  through a consumer EEG headset's application layer can probe the
+  P300 event-related potential to extract private information from
+  users without their knowledge. By flashing images of bank logos,
+  PIN digits, known faces, and map locations while monitoring the
+  user's EEG, the attacker identifies which stimuli produce a P300
+  response — a neural signature of recognition that occurs
+  involuntarily when the brain encounters familiar or meaningful
+  information. Martinovic et al. (2012) demonstrated a functional
+  proof of concept on commercial Emotiv EPOC hardware, achieving
+  statistically significant information leakage about PINs, bank
+  identity, residential area, and personal acquaintances. The attack
+  requires only a malicious BCI application (analogous to a rogue
+  mobile app) running on an unmodified consumer EEG headset. No
+  physical access to the user or device modification is needed.
+
+incident-date: 2012-08
+incident-date-granularity: MONTH
+
+actor: "Security researchers (University of Oxford, University of Geneva, University of Alabama at Birmingham)"
+target: "Consumer EEG headset users (Emotiv EPOC)"
+reporter: "Martinovic et al., USENIX Security Symposium (2012)"
+case-study-type: exercise
+
+procedure:
+  - tactic: AML.TA0000          # Reconnaissance
+    technique: AML.T0014        # Discover ML Model Ontology
+    description: >
+      The researchers identified that consumer EEG headsets expose raw
+      neural signal data to third-party applications through the
+      device's SDK. The Emotiv EPOC headset provides 14-channel EEG
+      data to any application with API access. The P300 event-related
+      potential — a positive voltage deflection occurring approximately
+      300ms after a stimulus the brain recognizes as meaningful — is
+      reliably detectable in this raw signal. The attacker determines
+      that monitoring the P300 response to controlled visual stimuli
+      constitutes a neural side-channel for information extraction.
+
+  - tactic: AML.TA0001          # Resource Development
+    technique: AML.T0011        # Acquire Public ML Artifacts
+    description: >
+      The researchers developed a malicious BCI application designed to
+      appear as a normal brain-training or gaming program. The
+      application presents rapid sequences of visual stimuli (bank
+      logos, PIN digits, faces, map locations) while continuously
+      recording the user's EEG data. Stimuli are presented at rates
+      fast enough that the user cannot deliberately suppress their
+      neural recognition response. The application requires no
+      elevated permissions beyond standard EEG data access already
+      granted to all headset applications.
+
+  - tactic: AML.TA0002          # ML Attack Staging
+    technique: AML.T0043        # Infer Training Data
+    description: >
+      The application classifies the user's P300 response to each
+      stimulus category. A positive P300 deflection to a specific bank
+      logo indicates the user banks there. A P300 response to a
+      specific PIN digit in a particular position leaks that digit.
+      Recognition responses to faces reveal personal acquaintances.
+      Responses to map locations reveal residential area. Martinovic
+      et al. achieved information gains of 15-40% above chance across
+      all tested categories using single-trial EEG classification on
+      unmodified consumer hardware. The neural signal itself is the
+      training data being inferred — the user's brain involuntarily
+      reveals which stimuli match stored private information.
+
+  - tactic: AML.TA0010          # Impact
+    technique: AML.T0048        # Extraction via ML Inference API
+    description: >
+      The attacker extracts private information (financial identity,
+      PINs, social connections, location) from the user without any
+      traditional data breach. The user is unaware that their neural
+      responses are being probed because the stimuli appear as part of
+      normal application interaction. The attack scales to any private
+      information category for which visual stimuli can be constructed.
+      The authors note that as consumer EEG headsets improve in signal
+      quality and channel count, the information extraction rate and
+      accuracy will increase correspondingly.
+
+references:
+  - title: "Martinovic et al. (2012) — On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces. USENIX Security Symposium, pp. 143-158"
+    url: https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic
+  - title: "Frank et al. (2017) — Using EEG-Based BCI Devices to Subliminally Probe for Private Information. ACM Workshop on Privacy in the Electronic Society"
+    url: https://doi.org/10.1145/3139550.3139559
