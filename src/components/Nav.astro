@@ -27,15 +27,17 @@ const researchLinks = [
 ];
 
 const toolsLinks = [
-  { href: '/nsp/', label: 'NSP Protocol', desc: 'Secure communication for neural implants' },
-  { href: '/runemate/', label: 'Project Runemate', desc: 'On-device security compiler' },
+  { href: '/tools/', label: 'Tools Overview', desc: 'The QIF defense stack and how the tools connect' },
+  { href: '/tools/#neurowall', label: 'Neurowall', desc: 'Hardware-level neural signal firewall' },
+  { href: '/nsp/', label: 'NSP Protocol', desc: 'Post-quantum secure communication for neural implants' },
+  { href: '/runemate/', label: 'Project Runemate', desc: 'On-device security compiler and execution engine' },
   { href: '/explore/', label: 'Interactive Tools', desc: 'Visualizations and explorers' },
 ];
 
 const isAboutActive = currentPath.startsWith('/about/') || currentPath.startsWith('/roadmap/');
 const isFrameworkActive = ['/whitepaper/', '/TARA/', '/scoring/', '/neurogovernance/', '/therapeutics/', '/security/'].some(p => currentPath.startsWith(p)) || currentPath.startsWith('/framework/');
 const isResearchActive = ['/case-studies/', '/glossary/', '/lab/', '/bci/', '/bci-explorer/', '/bci-limits/'].some(p => currentPath.startsWith(p));
-const isToolsActive = ['/nsp/', '/runemate/', '/explore/', '/explorer/'].some(p => currentPath.startsWith(p));
+const isToolsActive = ['/tools/', '/nsp/', '/runemate/', '/explore/', '/explorer/'].some(p => currentPath.startsWith(p));
 const isGovActive = currentPath.startsWith('/governance/');
 const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith('/publications/');
 ---
@@ -169,7 +171,8 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
 
         <!-- Tools dropdown -->
         <div class="relative" data-dropdown="tools">
-          <button
+          <a
+            href="/tools/"
             class:list={[
               "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
               isToolsActive
@@ -181,7 +184,7 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
             <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
-          </button>
+          </a>
           <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
             <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden">
               <div class="p-2">
