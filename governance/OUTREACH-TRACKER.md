@@ -1,3 +1,9 @@
+---
+title: "Research Outreach Tracker"
+description: "Tiered researcher and standards body engagement plan for QIF."
+order: 51
+---
+
 # Research Outreach Tracker
 
 > **Purpose:** Track researcher and standards body engagement for QIF. Outreach happens when we have something concrete to show — not before.
