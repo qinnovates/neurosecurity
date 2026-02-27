@@ -1,0 +1,91 @@
+# -----------------------------------------------
+# MITRE ATLAS Case Study: SSVEP Frequency Hijack
+# Contribution target: atlas@mitre.org
+# Based on schema from mitre-atlas/atlas-data
+# -----------------------------------------------
+
+id:                             # Assigned by MITRE on acceptance
+object-type: case-study
+name: "Adversarial Command Injection via Imperceptible Display Flicker Against EEG-Based BCI"
+
+summary: >
+  Researchers demonstrated that imperceptible display flicker at 60 Hz
+  (above the human critical flicker fusion threshold) can drive
+  steady-state visual evoked potential (SSVEP) responses in the visual
+  cortex without user awareness. These involuntary neural responses are
+  indistinguishable from intentional SSVEP signals used by
+  brain-computer interface (BCI) classifiers to decode user commands.
+  An attacker who controls or modifies a display viewed by a BCI user
+  can inject false commands into the BCI system at a demonstrated
+  information rate of 52.8 bits per minute. The attack requires no
+  access to the BCI software or hardware — the display itself becomes
+  the attack vector. Four independent research groups have validated
+  variants of this attack against EEG-based SSVEP and motor imagery
+  classifiers. Because SSVEP-based BCIs are used in assistive
+  communication systems for patients with locked-in syndrome and ALS,
+  successful exploitation could cause safety-critical miscommands in
+  medical contexts.
+
+incident-date: 2023-01
+incident-date-granularity: MONTH
+
+actor: "Security researchers (multiple independent groups)"
+target: "EEG-based brain-computer interface classifiers (SSVEP and motor imagery decoders)"
+reporter: "Ming et al., Journal of Neural Engineering (2023)"
+case-study-type: exercise
+
+procedure:
+  - tactic: AML.TA0002          # ML Attack Staging
+    technique: AML.T0015        # Evade ML Model
+    description: >
+      Researchers generated imperceptible 60 Hz flicker stimuli on a
+      standard display. The flicker frequency was selected to match
+      SSVEP control frequencies used by the target BCI system while
+      remaining above the critical flicker fusion threshold (~45-60 Hz),
+      making the stimulus invisible to the user. No modification to the
+      BCI hardware or software was required — the attack operates
+      entirely through the visual channel.
+
+  - tactic: AML.TA0002          # ML Attack Staging
+    technique: AML.T0015        # Evade ML Model
+    description: >
+      The imperceptible flicker drove involuntary SSVEP responses in
+      the user's visual cortex. The BCI's EEG classifier interpreted
+      these responses as intentional user commands. Ming et al. (2023)
+      demonstrated a sustained information injection rate of 52.8
+      bits/min using 60 Hz stimuli that subjects could not consciously
+      detect. Bian et al. (2022) independently confirmed that SSVEP-based
+      BCIs are vulnerable to square-wave attack signals. The classifier
+      had no mechanism to distinguish adversarially induced SSVEP from
+      genuine user-initiated SSVEP.
+
+  - tactic: AML.TA0002          # ML Attack Staging
+    technique: AML.T0015        # Evade ML Model
+    description: >
+      Upadhayay and Behzadan (2023) extended the attack to motor
+      imagery BCI classifiers, demonstrating that sensory-channel
+      manipulation via display stimuli significantly degraded
+      classification accuracy (p=0.0003). This confirmed the attack
+      generalizes beyond SSVEP-specific decoders to other EEG-based
+      BCI paradigms that rely on visual stimulus presentation.
+
+  - tactic: AML.TA0010          # Impact
+    technique: AML.T0015        # Evade ML Model
+    description: >
+      The adversary achieves arbitrary command injection into the BCI
+      system. In assistive communication contexts (e.g., locked-in
+      patients using SSVEP spellers), this could produce unintended
+      text output or device commands. In closed-loop therapeutic BCIs,
+      injected commands could alter stimulation parameters. The user
+      remains unaware that their BCI is receiving adversarial input
+      because the display flicker is imperceptible.
+
+references:
+  - title: "Ming et al. (2023) — A high-performance SSVEP-based BCI using imperceptible flickers. Journal of Neural Engineering, 20(1):016043"
+    url: https://doi.org/10.1088/1741-2552/acb51e
+  - title: "Bian, Meng & Wu (2022) — SSVEP-based brain-computer interfaces are vulnerable to square wave attacks. Science China Information Sciences, 65:140406"
+    url: https://doi.org/10.1007/s11432-022-3440-5
+  - title: "Upadhayay & Behzadan (2023) — On Adversarial Attacks on BCI Systems via Sensory Channel Manipulation. IEEE SMC 2023"
+    url: https://doi.org/10.1109/SMC53992.2023.10394505
+  - title: "Zhang et al. (2021) — Tiny noise, big mistakes: adversarial perturbations induce errors in brain-computer interface spellers. National Science Review, 8(4):nwaa233"
+    url: https://doi.org/10.1093/nsr/nwaa233
