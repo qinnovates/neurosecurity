@@ -7,7 +7,7 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-02-21",
+    "as_of": "2026-02-27",
     "threat_techniques": 109,
     "bci_devices": 24,
     "brain_regions": 37,
@@ -17,7 +17,7 @@
     "neurorights_mapped": 5,
     "dsm5_diagnoses_mapped": 68,
     "physics_constants_verified": 14,
-    "preprint_version": "v1.4",
+    "preprint_version": "v1.5",
     "nsp_version": "v0.5",
     "tara_version": "v1.7",
     "atlas_version": "v1.2.0",
@@ -359,6 +359,39 @@
       "stats_snapshot": {
         "neurowall_version": "v0.8"
       }
+    },
+    {
+      "date": "2026-02-25",
+      "type": "milestone",
+      "title": "CVE Disclosure Response Received",
+      "description": "Coordinated vulnerability disclosure for BCI-adjacent streaming library received initial response. Public references genericized to protect disclosure timeline."
+    },
+    {
+      "date": "2026-02-26",
+      "type": "release",
+      "title": "NISS v1.1: Cognitive Read/Write Split",
+      "description": "Single Cognitive Integrity (CG) metric split into Cognitive Reconnaissance (CR, read-side) and Cognitive Disruption (CD, write-side). Weights normalized: CR=0.5, CD=0.5 preserving 20% cognitive share. Cross-AI validated (Gemini 2.5 Pro, Phase 16). 109 techniques rescored.",
+      "stats_snapshot": {
+        "threat_techniques": 109
+      }
+    },
+    {
+      "date": "2026-02-26",
+      "type": "release",
+      "title": "Zenodo Preprint v1.5 Published",
+      "description": "NISS v1.1 CR/CD split, weight normalization, 6 metrics. DOI: 10.5281/zenodo.18784513. All site documentation synced to v1.1."
+    },
+    {
+      "date": "2026-02-27",
+      "type": "milestone",
+      "title": "FIRST.org CVSS SIG: NISS Accepted for Resources Repo",
+      "description": "CVSS SIG Co-Chair Nick Leali confirmed NISS extension discussed by the SIG and offered inclusion in the official CVSS Resources repository (github.com/FIRSTdotorg/cvss-resources). First external standards body recognition of the framework."
+    },
+    {
+      "date": "2026-02-27",
+      "type": "milestone",
+      "title": "Joined FIRST.org CVSS Special Interest Group",
+      "description": "Registered as CVSS SIG member via FIRST portal. Contributing domain expertise on neural interface security scoring. The SIG noted no existing domain experts in BCI security among current members."
     }
   ]
 }
