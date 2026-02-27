@@ -104,6 +104,60 @@ export const NEUROWALL_SPECS = {
   differentialPrivacy: 'Local-DP, Laplace noise (epsilon = 0.5) applied pre-transmission',
 } as const;
 
+/**
+ * Sovereignty Attacks — the hardest class to detect.
+ * These attacks slowly drift cognition without the subject's awareness,
+ * violating Cognitive Liberty (the right to direct one's own thinking).
+ * Named "sovereignty" because they compromise the subject's sovereignty
+ * over their own neural state.
+ */
+export const NEUROWALL_SOVEREIGNTY_ATTACKS = [
+  {
+    id: 'T0066',
+    name: 'Boiling Frog (Adiabatic Slow Drift)',
+    niss: 7.4,
+    severity: 'High',
+    neurorights: ['CL', 'MI', 'PC'],
+    description: 'Manipulates BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant cognitive displacement over time. The attack is invisible to AC-coupled systems because AC coupling mathematically removes the DC component being manipulated.',
+    detectionGap: 'AC-coupled EEG systems filter out DC drift entirely. This is not a detector failure — it is a fundamental thermodynamic trade-off in signal acquisition.',
+    defense: 'Hardware reference electrode (Phase 1), cumulative phase-space displacement tracking',
+    precedent: 'Not new to BCIs. Subliminal advertising via imperceptible screen flicker has been studied since the 1950s. The human critical flicker fusion (CFF) threshold is approximately 60 Hz — displays refreshing above this rate can embed visual stimuli that the conscious mind cannot perceive but the visual cortex still processes and responds to.',
+  },
+  {
+    id: 'T0067',
+    name: 'Phase Dynamics Replay / Mimicry',
+    niss: 6.4,
+    severity: 'Medium',
+    neurorights: ['CL', 'MI', 'PC'],
+    description: 'GAN-synthesized or RF-injected neural trajectories that are statistically indistinguishable from genuine brain activity. No unsupervised detector can distinguish two identical distributions — this is an information-theoretic limit, not a software bug.',
+    detectionGap: 'Information-theoretic: if the injected signal has identical statistics to genuine neural activity, no passive monitor can tell them apart.',
+    defense: 'Biological TLS challenge-response protocol (Phase 2) — requires a model of the specific brain\'s unique response patterns',
+    precedent: 'Analogous to replay attacks in network security, but operating on neural signal dynamics rather than packet contents.',
+  },
+  {
+    id: 'T0103',
+    name: 'SSVEP Frequency Hijack (Neural Steganography)',
+    niss: 6.4,
+    severity: 'Medium',
+    neurorights: ['MP', 'MI'],
+    description: 'Embeds imperceptible flicker in displays above the critical flicker fusion threshold (~60 Hz). The visual cortex phase-locks to the flicker frequency even though the user cannot consciously perceive it, enabling covert command injection, neural side-channel exfiltration, or seizure induction.',
+    detectionGap: 'The flicker operates above conscious perception but below visual cortex response thresholds. Standard display monitoring cannot distinguish attack flicker from normal refresh.',
+    defense: 'SSVEP response correlation checking (Guardrail G3), sub-frame luminance monitoring, display firmware integrity verification',
+    precedent: 'Screen flicker as a subliminal channel predates BCIs entirely. Ming et al. (2023) demonstrated a 60 Hz SSVEP BCI achieving 52.8 bits/min information transfer rate from stimuli users could not consciously see (DOI: 10.1088/1741-2552/acb51e). Bian, Meng & Wu (2022) showed trivial square wave injection forces any target classification (DOI: 10.1007/s11432-022-3440-5).',
+  },
+  {
+    id: 'T0040',
+    name: 'Neurophishing (Subliminal Stimuli)',
+    niss: 5.7,
+    severity: 'Medium',
+    neurorights: ['MP', 'CL', 'MI'],
+    description: 'Presents carefully designed visual, auditory, or haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional markers) that reveal private information or prime the brain for subsequent attack.',
+    detectionGap: 'Dual-use: subliminal priming is a legitimate clinical research tool (e.g., Implicit Association Test). Distinguishing therapeutic from adversarial use requires intent analysis, not signal analysis.',
+    defense: 'TARA-validated content delivery via Runemate, stimulus ceiling enforcement, consent boundary monitoring',
+    precedent: 'Greenwald et al. (2009) Implicit Association Test uses subliminal priming in clinical settings. The technique is identical — only the intent differs.',
+  },
+] as const;
+
 /** Duration sweep results */
 export const NEUROWALL_DURATION_SWEEP = [
   { duration: '10s', detected: '6/9', evaded: '3/9', notes: 'Cascade, boiling frog, phase replay evade' },
