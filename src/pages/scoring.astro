@@ -105,6 +105,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
           { href: '#examples', label: 'Examples' },
           { href: '#nsv2', label: 'NSv2.1 Framework' },
           { href: '#validation', label: 'Validation' },
+          { href: '#source', label: 'Source & Derivation' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -554,6 +555,54 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
           </p>
           <a href="/validation/" class="text-xs text-[var(--color-accent-primary)] hover:underline mt-2 inline-block">
             View full validation status
+          </a>
+        </div>
+      </section>
+
+      <!-- Source & Derivation -->
+      <section id="source" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Source & Derivation</h2>
+        <div class="prose mb-8">
+          <p>
+            NISS and NSv2.1 were derived through an iterative, transparent research process with full derivation logs. All scoring code, data, and derivation history are open-source.
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <a href="https://github.com/qinnovates/qinnovate/tree/main/paper/sections" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">NISS Specification (LaTeX)</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Sections 05-niss.tex through 05-6. Metric definitions, formula, vector format, gap analysis, and context profiles.</p>
+            <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">paper/sections/05-niss.tex</span>
+          </a>
+
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/src/lib/niss-parser.ts" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">NISS Parser & Scoring Engine</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">TypeScript implementation: vector parsing, weighted scoring, PINS flag logic, severity mapping, and context profile application.</p>
+            <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">src/lib/niss-parser.ts</span>
+          </a>
+
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-81-niss-v11-weight-normalization" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">NISS Derivation Log</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Full derivation history: Entry 43 (original NISS rationale), Entry 80 (CR/CD split), Entry 81 (v1.1 weight normalization, cross-AI validated).</p>
+            <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">qif-framework/QIF-DERIVATION-LOG.md</span>
+          </a>
+
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/NEURORIGHTS-DERIVATION-LOG.md" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">NS Derivation Log</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Neurosecurity Score formula derivation: Entries 3-9 covering architecture, formula revision, cross-AI review, FDA correlation, Monte Carlo uncertainty, and Sobol sensitivity analysis.</p>
+            <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">qif-framework/NEURORIGHTS-DERIVATION-LOG.md</span>
+          </a>
+
+          <a href="https://doi.org/10.5281/zenodo.18640105" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">Preprint (Zenodo)</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Sections 5-5.6 cover NISS in detail. v1.5 includes NISS v1.1 CR/CD split and weight normalization.</p>
+            <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">DOI: 10.5281/zenodo.18640105</span>
+          </a>
+
+          <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">Source Repository</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Full open-source repository: framework spec, scoring engine, TARA atlas, governance docs, and all derivation history.</p>
+            <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">github.com/qinnovates/qinnovate</span>
           </a>
         </div>
       </section>
