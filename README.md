@@ -25,7 +25,7 @@ Solo research, tested honestly. Full methodology and limitations at **[VALIDATIO
 | [Physics security guardrails](VALIDATION.md#val-007) | 12/13 constraints verified, 4-layer architecture | Analytical + Cross-AI |
 | [Protocol vulnerability](VALIDATION.md#val-006) | Real vuln in BCI streaming protocol, disclosure in progress | Disclosed |
 | [NSP transport](VALIDATION.md#val-003) | Round-trip sim PASS, 65-90% compression | Simulation |
-| [NISS scoring engine](VALIDATION.md#val-004) | 103/103 techniques scored, PINS flags correct | Simulation |
+| [NISS scoring engine](VALIDATION.md#val-004) | 109/109 techniques scored, PINS flags correct | Simulation |
 | [Citation verification](VALIDATION.md#val-009) | 3 fabricated citations caught and removed | Simulation |
 | **Not yet tested** | NISS clinical, DSM-5-TR mappings, BCI Limits Eq, real EEG, real hardware, real attacks | |
 
@@ -81,7 +81,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 |-----------|-------------|--------|
 | **[Neurowall](./tools/neurowall/)** | Neural firewall neckband (coherence + differential privacy + NISS + policy engine) | 🟡 v0.8 |
 | Neckband hardware | Physical behind-the-neck wearable for Neurowall | 🔵 Planned |
-| **[macshield](./tools/macshield/)** | macOS workstation hardening for public WiFi (self-integrity check, port scanner, audit) | 🟢 v0.4.1 |
+| **[macshield](https://github.com/qinnovates/macshield)** | macOS workstation hardening for public WiFi (self-integrity check, port scanner, audit) | 🟢 v0.4.1 |
 | **[KQL Database](https://qinnovate.com/bci/landscape/)** | BCI industry landscape, device specs, investment intel (23 companies, 31 devices) | 🟢 Live |
 | neurosim | Simulated BCI attack/defense environment | 🟡 In Progress |
 
@@ -101,9 +101,10 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Preprint published, CC-BY 4.0, LaTeX source included | 🟢 Published |
 | **[Research Sources](qif-framework/QIF-RESEARCH-SOURCES.md)** | Living bibliography: 193 verified sources across 9 domains | 🟢 Active |
 | **[CVE-TARA Mapping](shared/cve-technique-mapping.json)** | 55 NVD-verified CVEs mapped to 21 TARA techniques | 🟢 Published |
-| arXiv | Cross-post of preprint | 🔴 Needs endorsement |
-| Graz BCI Conference | Submission for March 2026 deadline | 🟡 In Progress |
-| CVE Disclosure | Coordinated vulnerability disclosure (BCI-adjacent library) | 🟡 Awaiting response |
+| arXiv | Cross-post of preprint | 🔴 Blocked — pending academic partnership |
+| Graz BCI Conference | Submission for March 2026 deadline | 🔴 Blocked — pending academic partnership |
+| CVE Disclosure | Coordinated vulnerability disclosure (BCI-adjacent library) | 🟡 Response received, in progress |
+| FIRST.org CVSS SIG | NISS accepted for CVSS Resources repo; joined SIG as domain expert | 🟢 Active |
 | Peer review / empirical validation | Requires collaborators, IRB, BCI hardware | 🔴 Blocked |
 
 ### Website
@@ -121,7 +122,7 @@ TARA started as an attack matrix. I catalogued 109 BCI attack techniques from a 
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. Replay attacks are a threat. Repetitive stimulation protocols are a treatment. The RF mapping techniques an adversary uses to map a building through WiFi walls are the same physics a clinician would use to calibrate a visual prosthesis through electrodes.
 
-About 75% of the 103 techniques map to a therapeutic counterpart today. The boundary between attack and therapy is not mechanism. It is consent, dosage, and oversight.
+About 75% of the 109 techniques map to a therapeutic counterpart today. The boundary between attack and therapy is not mechanism. It is consent, dosage, and oversight.
 
 This means the same framework that scores whether an attack is dangerous can also bound whether a therapy is safe. TARA is both a threat registry and a safety specification. The dual-use mapping is the point.
 
@@ -141,7 +142,7 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 | **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 109 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
 | **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
 | **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
-| **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](tools/macshield/) (free workstation hardening) |
+| **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](https://github.com/qinnovates/macshield) (free workstation hardening) |
 
 Sources: [Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)
 
@@ -166,7 +167,7 @@ Three fields converge on BCIs. None of them covers the full problem alone.
 | Cybersecurity | TTPs, scoring, detection, incident response | Understand neural biology or define neurorights |
 | **Neurosecurity** | **All of the above, integrated** | **The bridge discipline** |
 
-[Read the full neurosecurity case](governance/NEUROSECURITY.md) | [Origin classification of all 109 techniques](shared/qtara-registrar.json)
+[Read the full neurosecurity case](governance/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 109 techniques](shared/qtara-registrar.json)
 
 ---
 
@@ -210,7 +211,7 @@ Each technique includes: attack mechanism, QIF band mapping, dual-use classifica
 
 ### NISS (Neural Impact Scoring System)
 
-The scoring extension. First CVSS v4.0 extension designed for neural interfaces. Five metrics that CVSS structurally cannot express:
+The scoring extension. First CVSS v4.0 extension designed for neural interfaces. Six metrics that CVSS structurally cannot express:
 
 | Metric | Code | What It Measures |
 |--------|------|-----------------|
@@ -221,8 +222,10 @@ The scoring extension. First CVSS v4.0 extension designed for neural interfaces.
 | Reversibility | RV | Can the damage be undone? |
 | Neuroplasticity | NP | Long-term adaptive/maladaptive neural changes |
 
-- **Scoring:** [qinnovate.com/scoring](https://qinnovate.com/scoring/)
-- **Spec:** [qif-framework/NISS-v1.0-SPEC.md](qif-framework/NISS-v1.0-SPEC.md) (pending publication)
+- **Scoring:** [qinnovate.com/niss](https://qinnovate.com/niss/) (spec reference with metric definitions, formula, worked examples)
+- **Parser:** [src/lib/niss-parser.ts](src/lib/niss-parser.ts) (TypeScript scoring engine)
+- **Derivation:** [QIF-DERIVATION-LOG.md](qif-framework/QIF-DERIVATION-LOG.md#entry-81-niss-v11-weight-normalization) (entries 43, 80, 81)
+- **Accepted for [FIRST.org CVSS Resources](https://github.com/FIRSTdotorg/cvss-resources)** repository
 
 ### Runemate
 
