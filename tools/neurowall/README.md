@@ -208,6 +208,51 @@ The QIF Neural Defense Stack positions Neurowall and Runemate as sibling defense
 - **Entry 010:** v0.7 adaptive thresholding (LOO, disabled by default), neurosim standalone tool (14 generators), 5 adversarial-aware attacks (4/5 detected).
 - **Entry 011:** BrainFlow independent EEG validation. 16-channel synthetic board, 100% detection (5/5 attacks, 20 runs), 0% FPR, auto-calibration confirmed across all channels.
 
+## Sovereignty Attacks — The Hardest Class
+
+The most dangerous BCI attacks are not the loud ones. They are the ones that slowly drift cognition without the subject's awareness — violating **Cognitive Liberty (CL)**, the neurorights that protects the freedom to direct one's own thinking without external manipulation. We call this class **Sovereignty Attacks** because they compromise the subject's sovereignty over their own neural state.
+
+These attacks share a common trait: they operate below detection thresholds by design, accumulating significant cognitive displacement over time while keeping instantaneous change rates imperceptible.
+
+### This Is Not New to BCIs
+
+Subliminal steganography — hiding messages in signals the conscious mind cannot perceive — predates brain-computer interfaces entirely. The human critical flicker fusion (CFF) threshold is approximately 60 Hz. Displays refreshing above this rate can embed visual stimuli that the conscious mind cannot see but the visual cortex still processes and responds to.
+
+**Research establishing this vector:**
+- **Ming et al. (2023):** Built an SSVEP BCI operating entirely at 60 Hz — above conscious perception. Users could not see the flicker. Their visual cortex responded anyway, achieving 52.8 bits/min information transfer rate. ([DOI: 10.1088/1741-2552/acb51e](https://doi.org/10.1088/1741-2552/acb51e))
+- **Bian, Meng & Wu (2022):** Demonstrated that a trivial square wave signal forces BCI classification to any attacker-chosen target class. ([DOI: 10.1007/s11432-022-3440-5](https://doi.org/10.1007/s11432-022-3440-5))
+- **Zhang et al. (2021):** Showed imperceptible adversarial perturbations force EEG-BCI spellers to output any character the attacker wants. ([DOI: 10.1093/nsr/nwaa233](https://doi.org/10.1093/nsr/nwaa233))
+- **Upadhayay & Behzadan (2023), SAIL Lab:** Demonstrated sensory-channel manipulation degrades motor imagery BCI performance across all subjects (p=0.0003). You don't hack the BCI — you attack the human. ([DOI: 10.1109/SMC53992.2023.10394505](https://doi.org/10.1109/SMC53992.2023.10394505))
+
+Screen flicker as a subliminal channel is decades old. BCIs simply give the attacker a feedback loop: embed the stimulus, read the neural response, adapt. The flicker IS the input method.
+
+### Mapped Sovereignty Attacks
+
+| Technique | NISS | Severity | Neurorights | Detection Status |
+|-----------|------|----------|-------------|------------------|
+| [T0066 — Boiling Frog (Adiabatic Slow Drift)](../../qif-framework/research/techniques/) | 7.4 | High | CL, MI, PC | **Evaded** at 15s. Caught at 20s+ with hardware reference electrode. |
+| [T0067 — Phase Dynamics Replay / Mimicry](../../qif-framework/research/techniques/) | 6.4 | Medium | CL, MI, PC | **Evaded** ~90% at 15s. Requires biological TLS challenge-response. |
+| [T0103 — SSVEP Frequency Hijack (Neural Steganography)](../../qif-framework/research/techniques/QIF-T0103-ssvep-frequency-hijack.md) | 6.4 | Medium | MP, MI | Detected by SSVEP correlation + spectral peak. |
+| [T0040 — Neurophishing (Subliminal Stimuli)](../../qif-framework/research/techniques/) | 5.7 | Medium | MP, CL, MI | Dual-use: same technique used therapeutically (Implicit Association Test). |
+
+### Why These Are Hard
+
+**T0066 (Boiling Frog):** AC-coupled EEG systems — the standard in all commercial BCIs — filter out DC drift entirely. This is not a detector failure. It is a fundamental thermodynamic trade-off in signal acquisition: you remove the DC offset to clean the spectrum, but that mathematically removes the slow drift being used as the attack vector. Neurowall's defense requires a hardware reference electrode (Phase 1 roadmap) and cumulative phase-space displacement tracking.
+
+**T0067 (Phase Replay):** If the injected signal has identical statistics to genuine neural activity, no passive monitor can tell them apart. This is an information-theoretic limit, not a software bug. The defense is a biological TLS challenge-response protocol (Phase 2 roadmap) that requires modeling the specific brain's unique response patterns — the neural equivalent of a cryptographic handshake.
+
+**T0103 (SSVEP Hijack):** The flicker operates above conscious perception (~60 Hz) but below the visual cortex response threshold. The six-layer depth model maps the attack path from retina through thalamic gate (weakest during low arousal — exactly when people passively consume screens) to amygdala, hypothalamus, prefrontal cortex, and basal ganglia. Full depth model documented in [the neural steganography blog post](../../blogs/2026-02-18-the-invisible-flicker-attack-when-your-display-becomes-a-weapon.md).
+
+**T0040 (Neurophishing):** The technique is identical to legitimate clinical tools (subliminal priming, Implicit Association Test). Only intent differs. Distinguishing therapeutic from adversarial use requires intent analysis, not signal analysis — making this a governance problem as much as a technical one.
+
+### Cognitive Liberty Connection
+
+All four sovereignty attacks primarily violate **Cognitive Liberty (CL)** — the right to freedom from covert mental manipulation. CL is operationalized in QIF's neurorights framework as: any technique that scores CD (Cognitive Disruption) at High or Critical AND CV (Consent Violation) at Explicit or Implicit (covert) triggers a CL violation flag. The covert nature is what makes sovereignty attacks categorically different from detectable attacks: the subject cannot refuse what they cannot perceive.
+
+Full technique database: [`shared/qtara-registrar.json`](../../shared/qtara-registrar.json) (109 techniques, all NISS-scored with neurorights mappings).
+
+Full blog post: [Neural Steganography Weaponization: How Invisible Display Flicker Controls Your Subconscious](../../blogs/2026-02-18-the-invisible-flicker-attack-when-your-display-becomes-a-weapon.md)
+
 ## Next Steps
 
 - [x] ~~ROC curve analysis: sweep thresholds x durations to find optimal operating point for FPR < 5%~~ (Done: Entry 009, optimal at threshold=12, 20s)

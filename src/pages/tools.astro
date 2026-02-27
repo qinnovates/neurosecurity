@@ -9,6 +9,7 @@ import {
   NEUROWALL_POLICY_RULES,
   NEUROWALL_SPECS,
   NEUROWALL_DURATION_SWEEP,
+  NEUROWALL_SOVEREIGNTY_ATTACKS,
 } from '../lib/neurowall-constants';
 ---
 
@@ -28,6 +29,7 @@ import {
           { href: '#defense-stack', label: 'Defense Stack' },
           { href: '#neurowall', label: 'Neurowall' },
           { href: '#detection', label: 'Detection Results' },
+          { href: '#sovereignty', label: 'Sovereignty Attacks' },
           { href: '#policy-engine', label: 'Policy Engine' },
           { href: '#nsp', label: 'NSP Protocol' },
           { href: '#runemate', label: 'Runemate' },
@@ -265,6 +267,75 @@ import {
               <p class="text-xs text-[var(--color-text-faint)]">Cs Spread (< 0.15 PASS)</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Sovereignty Attacks -->
+      <section id="sovereignty" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Sovereignty Attacks</h2>
+        <div class="prose mb-8">
+          <p>
+            The most dangerous BCI attacks are the ones that slowly drift cognition without the subject's awareness. We call this class <strong>Sovereignty Attacks</strong> because they compromise the subject's sovereignty over their own neural state, violating <strong>Cognitive Liberty (CL)</strong> — the neurorights that protects the freedom to direct one's own thinking without external manipulation.
+          </p>
+          <p>
+            The covert nature is what makes these categorically different: the subject cannot refuse what they cannot perceive.
+          </p>
+        </div>
+
+        <!-- Not new to BCIs -->
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 3px solid var(--color-status-danger);">
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-3">This Is Not New to BCIs</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            Subliminal steganography — hiding messages in signals the conscious mind cannot perceive — predates brain-computer interfaces entirely. The human critical flicker fusion (CFF) threshold is approximately 60 Hz. Displays refreshing above this rate can embed visual stimuli that the conscious mind cannot see but the visual cortex still processes and responds to. BCIs simply give the attacker a feedback loop: embed the stimulus, read the neural response, adapt.
+          </p>
+          <div class="space-y-2 text-xs text-[var(--color-text-faint)]">
+            <p><strong class="text-[var(--color-text-muted)]">Ming et al. (2023):</strong> Built a 60 Hz SSVEP BCI — above conscious perception — achieving 52.8 bits/min from stimuli users could not see.</p>
+            <p><strong class="text-[var(--color-text-muted)]">Bian, Meng & Wu (2022):</strong> Trivial square wave injection forces any target BCI classification.</p>
+            <p><strong class="text-[var(--color-text-muted)]">Zhang et al. (2021):</strong> Imperceptible adversarial perturbations force EEG-BCI spellers to output any character the attacker wants.</p>
+            <p><strong class="text-[var(--color-text-muted)]">SAIL Lab (2023):</strong> Sensory-channel manipulation degrades motor imagery BCI performance across all subjects (p=0.0003). You don't hack the BCI — you attack the human.</p>
+          </div>
+        </div>
+
+        <!-- Attack cards -->
+        <div class="space-y-4 mb-8">
+          {NEUROWALL_SOVEREIGNTY_ATTACKS.map((attack) => (
+            <div class="glass rounded-xl p-6">
+              <div class="flex items-center gap-3 mb-3 flex-wrap">
+                <span class="text-sm font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{attack.id}</span>
+                <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{attack.name}</h3>
+                <div class="flex items-center gap-2 ml-auto">
+                  <span class={`text-xs font-semibold px-2 py-0.5 rounded-full ${attack.severity === 'High' ? 'bg-[var(--color-status-danger)]/10 text-[var(--color-status-danger)]' : 'bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)]'}`}>
+                    NISS {attack.niss}
+                  </span>
+                  <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">
+                    {attack.neurorights.join(' + ')}
+                  </span>
+                </div>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)] mb-3">{attack.description}</p>
+              <div class="space-y-2">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-status-danger)] mb-1">Detection Gap</p>
+                  <p class="text-xs text-[var(--color-text-faint)]">{attack.detectionGap}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-status-safe)] mb-1">Defense</p>
+                  <p class="text-xs text-[var(--color-text-faint)]">{attack.defense}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-secondary)] mb-1">Historical Precedent</p>
+                  <p class="text-xs text-[var(--color-text-faint)]">{attack.precedent}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Cognitive Liberty callout -->
+        <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-tertiary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Cognitive Liberty:</strong> All four sovereignty attacks primarily violate Cognitive Liberty (CL) — any technique scoring Cognitive Disruption at High/Critical AND Consent Violation at Explicit/Implicit triggers a CL violation flag in the <a href="/scoring/" class="text-[var(--color-accent-primary)] hover:underline">NISS scoring system</a>. Full technique database with 109 NISS-scored attacks available in the <a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">TARA Atlas</a>.
+          </p>
         </div>
       </section>
 
