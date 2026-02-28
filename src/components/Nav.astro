@@ -4,26 +4,34 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
 const currentPath = Astro.url.pathname;
 
-const aboutLinks = [
-  { href: '/about/', label: 'About', desc: 'The researcher and the mission' },
+const storyLinks = [
+  { href: '/about/', label: 'About Kevin', desc: 'The researcher and the mission' },
+  { href: '/case-studies/endogenous-attack-chain/', label: 'The Attack Chain', desc: 'When your body is the threat actor' },
   { href: '/roadmap/', label: 'Roadmap', desc: 'Milestones, timeline, and version history' },
 ];
 
 const frameworkLinks = [
   { href: '/TARA/', label: 'TARA Atlas', desc: `${TARA_TECHNIQUES} BCI attack techniques, scored and mapped` },
-  { href: '/security/', label: 'Security', desc: 'Signal coherence, frequency-band defense, and scoring' },
+  { href: '/scoring/', label: 'Neural Impact Scoring', desc: 'NISS — extending CVSS for neural harm' },
+  { href: '/security/', label: 'The Hourglass', desc: 'Signal coherence and 11-band architecture' },
   { href: '/therapeutics/', label: 'Therapeutics', desc: '77 dual-use therapeutic analogs' },
-  { href: '/neurogovernance/', label: 'Neurogovernance', desc: 'Neurorights mapped to brain regions and threats' },
-  { href: '/scoring/', label: 'Neural Impact Scoring', desc: 'Neural Impact Scoring System (NISS)' },
+  { href: '/neurogovernance/', label: 'Neurorights', desc: 'Five neurorights mapped to threats and brain regions' },
+  { href: '/glossary/', label: 'Glossary', desc: 'QIF terminology reference' },
 ];
 
-const researchLinks = [
+const validationLinks = [
   { href: '/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification and research paper' },
   { href: '/bci/', label: 'BCI Dashboard', desc: 'Device profiles, hardware inventory, physics, and API' },
   { href: '/bci/landscape/', label: 'BCI Landscape', desc: '23 companies, 31 devices, security posture, funding, trends' },
   { href: '/case-studies/t0079-anc-fingerprint/', label: 'Case Studies', desc: 'Real-world hardware security validation' },
-  { href: '/glossary/', label: 'Glossary', desc: 'QIF terminology reference' },
+  { href: '/validation/', label: 'Validation', desc: 'Empirical validation and external recognition' },
   { href: '/lab/derivation-log/', label: 'Derivation Log', desc: 'Live research journal and hypothesis tracking' },
+];
+
+const policyLinks = [
+  { href: '/governance/', label: 'Governance', desc: 'Ethics, consent, and regulatory compliance' },
+  { href: '/neurogovernance/', label: 'Neurorights Framework', desc: 'Five neurorights operationalized across threats' },
+  { href: '/psychiatric/', label: 'Psychiatric Mappings', desc: 'DSM-5 diagnostic outcome projections' },
 ];
 
 const toolsLinks = [
@@ -34,11 +42,11 @@ const toolsLinks = [
   { href: '/explore/', label: 'Interactive Tools', desc: 'Visualizations and explorers' },
 ];
 
-const isAboutActive = currentPath.startsWith('/about/') || currentPath.startsWith('/roadmap/');
-const isFrameworkActive = ['/whitepaper/', '/TARA/', '/scoring/', '/neurogovernance/', '/therapeutics/', '/security/'].some(p => currentPath.startsWith(p)) || currentPath.startsWith('/framework/');
-const isResearchActive = ['/case-studies/', '/glossary/', '/lab/', '/bci/', '/bci-explorer/', '/bci-limits/'].some(p => currentPath.startsWith(p));
+const isStoryActive = currentPath.startsWith('/about/') || currentPath.startsWith('/roadmap/') || currentPath === '/case-studies/endogenous-attack-chain/';
+const isFrameworkActive = ['/TARA/', '/scoring/', '/neurogovernance/', '/therapeutics/', '/security/', '/glossary/'].some(p => currentPath.startsWith(p)) || currentPath.startsWith('/framework/');
+const isValidationActive = ['/whitepaper/', '/case-studies/', '/lab/', '/bci/', '/bci-explorer/', '/bci-limits/', '/validation/'].some(p => currentPath.startsWith(p)) && !currentPath.startsWith('/case-studies/endogenous');
+const isPolicyActive = ['/governance/', '/psychiatric/'].some(p => currentPath.startsWith(p));
 const isToolsActive = ['/tools/', '/nsp/', '/runemate/', '/explore/', '/explorer/'].some(p => currentPath.startsWith(p));
-const isGovActive = currentPath.startsWith('/governance/');
 const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith('/publications/');
 ---
 
@@ -55,18 +63,18 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-1">
-        <!-- About (link + dropdown) -->
-        <div class="relative" data-dropdown="about">
+        <!-- Story (link + dropdown) -->
+        <div class="relative" data-dropdown="story">
           <a
             href="/about/"
             class:list={[
               "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isAboutActive
+              isStoryActive
                 ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
             ]}
           >
-            About
+            Story
             <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
@@ -74,7 +82,7 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
           <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
             <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden">
               <div class="p-2">
-                {aboutLinks.map((link) => (
+                {storyLinks.map((link) => (
                   <a
                     href={link.href}
                     class:list={[
@@ -131,18 +139,18 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
           </div>
         </div>
 
-        <!-- Research (link to whitepaper + dropdown) -->
-        <div class="relative" data-dropdown="research">
+        <!-- Validation (link to whitepaper + dropdown) -->
+        <div class="relative" data-dropdown="validation">
           <a
             href="/whitepaper/"
             class:list={[
               "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isResearchActive
+              isValidationActive
                 ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
             ]}
           >
-            Research
+            Validation
             <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
@@ -150,7 +158,45 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
           <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
             <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden">
               <div class="p-2">
-                {researchLinks.map((link) => (
+                {validationLinks.map((link) => (
+                  <a
+                    href={link.href}
+                    class:list={[
+                      "block px-3 py-2.5 rounded-lg transition-colors",
+                      currentPath.startsWith(link.href)
+                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                    ]}
+                  >
+                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
+                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Policy dropdown -->
+        <div class="relative" data-dropdown="policy">
+          <a
+            href="/governance/"
+            class:list={[
+              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              isPolicyActive
+                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+            ]}
+          >
+            Policy
+            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </a>
+          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
+            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden">
+              <div class="p-2">
+                {policyLinks.map((link) => (
                   <a
                     href={link.href}
                     class:list={[
@@ -207,20 +253,7 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
           </div>
         </div>
 
-        <!-- Governance (direct link) -->
-        <a
-          href="/governance/"
-          class:list={[
-            "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isGovActive
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          Governance
-        </a>
-
-        <!-- News (direct link) -->
+        <!-- Writing (direct link) -->
         <a
           href="/news/"
           class:list={[
@@ -230,7 +263,7 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          News
+          Writing
         </a>
 
       </div>
@@ -279,24 +312,24 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
   <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]">
     <div class="px-4 py-3 space-y-1">
-      <!-- Mobile About section -->
+      <!-- Mobile Story section -->
       <div>
         <button
-          data-mobile-toggle="about"
+          data-mobile-toggle="story"
           class:list={[
             "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isAboutActive
+            isStoryActive
               ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          About
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="about" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          Story
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="story" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
-        <div data-mobile-list="about" class="hidden pl-3 space-y-0.5 mt-1">
-          {aboutLinks.map((link) => (
+        <div data-mobile-list="story" class="hidden pl-3 space-y-0.5 mt-1">
+          {storyLinks.map((link) => (
             <a
               href={link.href}
               class:list={[
@@ -345,24 +378,57 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
         </div>
       </div>
 
-      <!-- Mobile Research section -->
+      <!-- Mobile Validation section -->
       <div>
         <button
-          data-mobile-toggle="research"
+          data-mobile-toggle="validation"
           class:list={[
             "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isResearchActive
+            isValidationActive
               ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          Research
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="research" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          Validation
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="validation" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
-        <div data-mobile-list="research" class="hidden pl-3 space-y-0.5 mt-1">
-          {researchLinks.map((link) => (
+        <div data-mobile-list="validation" class="hidden pl-3 space-y-0.5 mt-1">
+          {validationLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
+                currentPath.startsWith(link.href)
+                  ? "text-[var(--color-accent-primary)]"
+                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mobile Policy section -->
+      <div>
+        <button
+          data-mobile-toggle="policy"
+          class:list={[
+            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            isPolicyActive
+              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+          ]}
+        >
+          Policy
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="policy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div data-mobile-list="policy" class="hidden pl-3 space-y-0.5 mt-1">
+          {policyLinks.map((link) => (
             <a
               href={link.href}
               class:list={[
@@ -411,20 +477,7 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
         </div>
       </div>
 
-      <!-- Governance (direct link) -->
-      <a
-        href="/governance/"
-        class:list={[
-          "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-          isGovActive
-            ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-        ]}
-      >
-        Governance
-      </a>
-
-      <!-- News (direct link) -->
+      <!-- Writing (direct link) -->
       <div class="pt-2 border-t border-[var(--color-border)] mt-2">
         <a
           href="/news/"
@@ -435,7 +488,7 @@ const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith(
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          News
+          Writing
         </a>
       </div>
 

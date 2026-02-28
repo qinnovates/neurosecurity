@@ -44,7 +44,7 @@ const essentialPosts = essentialSlugs
 <BaseLayout title="Qinnovate — Neural Security Atlas" description="Brain-computer interfaces can be hacked. No one had mapped what that means for patients. Qinnovate's Neural Atlas is an open research framework mapping BCI attack techniques to potential psychiatric outcomes and neurorights implications.">
   <Nav />
 
-  <!-- ═══ HERO ═══ -->
+  <!-- ═══ BEAT 1: THE INCIDENT — Hybrid Hero ═══ -->
   <section class="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
     <!-- Gradient background -->
     <div class="absolute inset-0 bg-[var(--color-bg-deep)]">
@@ -59,18 +59,20 @@ const essentialPosts = essentialSlugs
       </p>
 
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
-        <span class="text-[var(--color-text-primary)]">Brain-computer interfaces can be hacked.</span>
+        <span class="text-[var(--color-text-primary)]">In 2021, COVID and PTSD rewired my brain</span>
+        <br />
+        <span class="text-[var(--color-text-primary)]">through the same pathways a BCI exploit would use.</span>
         <br />
         <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-          No one had mapped what that means for patients.
+          So I mapped all of them.
         </span>
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
-        Qinnovate's Neural Atlas is an open neuroethics and security framework that maps {totalThreats} BCI attack techniques to the psychiatric diagnoses they may produce and the neurorights they implicate, based on known neuroanatomy and published neuroscience. Built from first principles. Published openly. Ready for peer review.
+        {totalThreats} attack techniques. {dsm5Count} psychiatric outcomes. {neurorightsCount} neurorights at stake. No one had connected these dots. This is the open atlas that does.
       </p>
 
-      <!-- Metrics with ethical framing -->
+      <!-- Metrics -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10">
         <a href="/TARA/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalThreats}</p>
@@ -90,18 +92,19 @@ const essentialPosts = essentialSlugs
         </a>
       </div>
 
+      <!-- Dual-audience CTAs -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a
-          href="/whitepaper/"
+          href="/case-studies/endogenous-attack-chain/"
           class="px-6 py-3 rounded-lg bg-[var(--color-accent-secondary)] text-white font-medium hover:bg-[var(--color-accent-secondary)]/90 transition-colors"
         >
-          Read the Research
+          Read the Full Story
         </a>
         <a
-          href="/about/"
+          href="/TARA/"
           class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
         >
-          About This Project
+          Explore the Threat Atlas
         </a>
       </div>
 
@@ -116,28 +119,30 @@ const essentialPosts = essentialSlugs
     </div>
   </section>
 
-  <!-- ═══ WHY THIS MATTERS ═══ -->
+  <!-- ═══ BEAT 2: THE QUESTION — What if this wasn't random? ═══ -->
   <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="reveal">
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">Why This Matters</h2>
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4 text-center">The Question</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">What if the damage wasn't random?</h2>
       <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          Neuralink has implanted chips in human patients. Synchron's Stentrode is in FDA trials. Consumer EEG headsets sit on store shelves. These devices are tested for safety and efficacy — but <strong class="text-[var(--color-text-primary)]">no public framework exists to audit what they can do to a mind.</strong> Not to the data. To the mind itself.
+          After COVID and PTSD collided, my cognition fragmented in specific, measurable ways: memory consolidation disrupted, threat detection hyperactivated, self-model corrupted. These weren't vague symptoms. They mapped to known neural pathways with precision that looked structural, not accidental.
         </p>
         <p>
-          When I catalogued every known way to attack a brain-computer interface, I discovered something unexpected: <strong class="text-[var(--color-text-primary)]">{therapeuticCount} of {totalThreats} attack techniques have direct therapeutic counterparts.</strong> The same neural mechanism that can disrupt cognition can also treat a neurological condition. The technology that helps a Parkinson's patient can, if misconfigured or exploited, cause psychiatric harm — {dsm5Count} techniques map to symptoms matching DSM-5-TR diagnostic criteria through known neural pathways. <em>These mappings are research-based and require validation by psychiatrists and clinical neuroscientists.</em>
+          As a security engineer, I recognized the pattern. <strong class="text-[var(--color-text-primary)]">These were the same failure modes I'd expect from a targeted attack on a brain-computer interface</strong> — except no device was involved. The "attacker" was endogenous: inflammation from a virus and plasticity changes from trauma, operating on the same neural substrate that BCI devices read and write.
         </p>
         <p>
-          This dual-use reality means BCI security is not an engineering problem. <strong class="text-[var(--color-text-primary)]">It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build the governance to prevent it.
+          That raised a harder question: if biology can produce these failure modes naturally, <strong class="text-[var(--color-text-primary)]">what happens when we connect programmable devices to the same pathways?</strong>
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ═══ THE GAP ═══ -->
+  <!-- ═══ BEAT 3: THE DISCOVERY — I mapped every known attack ═══ -->
   <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="reveal">
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">What Existed Before This</h2>
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">The Discovery</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">No one had catalogued the threats</h2>
       <div class="space-y-4 text-sm text-[var(--color-text-muted)] leading-relaxed">
         <div class="grid sm:grid-cols-2 gap-3">
           <div class="glass rounded-lg p-4">
@@ -150,42 +155,76 @@ const essentialPosts = essentialSlugs
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">CISA</p>
-            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener">tabletop foresight game</a> for BCI futures planning. A board game for brainstorming, not a security framework.</p>
+            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning. A board game for brainstorming, not a security framework.</p>
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">BCI Manufacturers</p>
-            <p>Neuralink, Synchron, Blackrock, Precision Neuroscience: <strong class="text-[var(--color-text-primary)]">zero public security documentation.</strong> No threat models, no vulnerability disclosure policies, no security architecture papers.</p>
+            <p>Neuralink, Synchron, Blackrock, Precision Neuroscience: <strong class="text-[var(--color-text-primary)]">zero public security documentation.</strong> No threat models, no vulnerability disclosure policies.</p>
           </div>
         </div>
         <div class="glass rounded-lg p-4" style="border-left: 3px solid var(--color-accent-primary);">
-          <p class="font-semibold text-[var(--color-text-primary)] mb-1">The gap Qinnovate fills</p>
-          <p>No one had mapped BCI attack techniques to CVE identifiers, scored neural impact quantitatively, traced attacks to psychiatric outcomes, or connected any of it to neurorights governance. <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong></p>
+          <p class="font-semibold text-[var(--color-text-primary)] mb-1">So I built it</p>
+          <p>I catalogued every known way to attack a brain-computer interface, scored each one for neural impact, traced the affected brain regions to psychiatric outcomes, and mapped the neurorights each technique could violate. <strong class="text-[var(--color-text-primary)]">{totalThreats} techniques. {dsm5Count} diagnostic outcomes. {neurorightsCount} neurorights operationalized.</strong></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ THREE PILLARS ═══ -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="text-center mb-10 reveal">
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">The Framework</h2>
-      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Three interlocking systems that together map how neurotechnology can be secured, evaluated, and governed.</p>
+  <!-- ═══ BEAT 4: THE TEST — Can it be falsified? ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4 text-center">The Test</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3 text-center">Does the framework hold up?</h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-8 text-center">
+        A framework that can't be tested is a story. Here's how the atlas validates against real hardware, real physics, and real neuroscience.
+      </p>
     </div>
-    <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal">
-      {PILLARS.map((pillar) => (
-        <a href={pillar.href} class="glass rounded-xl p-5 card-hover group text-left">
-          <div class="flex items-center gap-2 mb-3">
-            <div class="text-xl" style={`color: ${pillar.color}`} set:html={pillar.icon} />
-            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">
-              {pillar.name}
-            </h3>
+
+    <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal reveal-stagger">
+      <!-- Empirical validation -->
+      <a href="/case-studies/t0079-anc-fingerprint/" class="glass rounded-xl p-5 card-hover group text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
           </div>
-          <p class="text-xs text-[var(--color-text-faint)] mb-1.5 font-medium">{pillar.tagline}</p>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-            {pillar.description}
-          </p>
-        </a>
-      ))}
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">
+            Hardware Validation
+          </h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          28 consumer sensor exploitation techniques validated with real devices. ANC earbuds extract ear canal biometrics at &minus;47 dB below music. No firmware exploit. Just physics.
+        </p>
+      </a>
+
+      <!-- Endogenous case study -->
+      <a href="/case-studies/endogenous-attack-chain/" class="glass rounded-xl p-5 card-hover group text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-[var(--color-accent-secondary)]/10 flex items-center justify-center text-[var(--color-accent-secondary)]">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+          </div>
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-secondary)] transition-colors">
+            Endogenous Case Study
+          </h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          The framework's first test case: COVID + PTSD as a dual-vector endogenous attack chain. Same neural pathways, same failure modes, no device required.
+        </p>
+      </a>
+
+      <!-- Dual-use discovery -->
+      <a href="/therapeutics/" class="glass rounded-xl p-5 card-hover group text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-400/10 flex items-center justify-center text-emerald-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+          </div>
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-emerald-400 transition-colors">
+            Dual-Use Discovery
+          </h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          {therapeuticCount} of {totalThreats} attack techniques have direct therapeutic counterparts. The same mechanism that treats Parkinson's can, if misconfigured, cause psychiatric harm.
+        </p>
+      </a>
     </div>
   </section>
 
@@ -220,41 +259,41 @@ const essentialPosts = essentialSlugs
     </div>
   </section>
 
-  <!-- ═══ CASE STUDY CALLOUT ═══ -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div class="glass rounded-xl p-6 sm:p-8 reveal" style="border-left: 4px solid var(--color-accent-primary);">
-      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-        <div class="flex-1">
-          <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-2">Empirical Validation</p>
-          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2">
-            How Consumer Sensors Become Surveillance Tools
-          </h3>
+  <!-- ═══ BEAT 5: THE FRAMEWORK — Three pillars + Hourglass (earned) ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="text-center mb-10 reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4">The Framework</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">Three systems that connect what no one had connected</h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Threats, outcomes, and rights — mapped together for the first time. Each system stands alone. Together they form a complete security posture for neurotechnology.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal">
+      {PILLARS.map((pillar) => (
+        <a href={pillar.href} class="glass rounded-xl p-5 card-hover group text-left">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="text-xl" style={`color: ${pillar.color}`} set:html={pillar.icon} />
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">
+              {pillar.name}
+            </h3>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mb-1.5 font-medium">{pillar.tagline}</p>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-            28 consumer sensor exploitation techniques validated with real hardware. ANC earbuds extract ear canal biometrics at &minus;47 dB below music — completely inaudible. No firmware exploit. No elevated privileges. Just physics.
+            {pillar.description}
           </p>
-        </div>
-        <div class="shrink-0">
-          <a
-            href="/publications/2026-02-11-how-malicious-apps-derive-your-personal-biometrics/"
-            class="px-5 py-2.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium text-sm hover:bg-[var(--color-accent-primary)]/90 transition-colors text-center"
-          >
-            View Case Study
-          </a>
-        </div>
-      </div>
+        </a>
+      ))}
     </div>
   </section>
 
-  <!-- ═══ HOURGLASS PREVIEW ═══ -->
+  <!-- ═══ HOURGLASS ARCHITECTURE (earned after narrative) ═══ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
     <div class="text-center mb-12 reveal">
       <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">The Hourglass Architecture</h2>
       <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        QIF models the full neurotechnology stack as an 11-band hourglass — biology above, silicon below, with the physical neural interface at the critical bottleneck. Every attack technique is mapped to the bands it crosses, making the security implications visible at each layer.
+        Every threat, therapeutic, and neurorights violation maps to specific bands of this 11-layer model. Biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails.
       </p>
     </div>
 
-    <!-- Flat interactive hourglass preview — click any band to explore -->
+    <!-- Flat interactive hourglass preview -->
     <div class="max-w-xl mx-auto reveal" id="hourglass-preview">
       <div class="flex items-stretch gap-4">
         <!-- Y-axis label -->
@@ -322,7 +361,7 @@ const essentialPosts = essentialSlugs
     </div>
   </section>
 
-  <!-- ═══ PROJECT RUNEMATE ═══ -->
+  <!-- ═══ TOOLS — Project Runemate ═══ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <a href="/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
       <div class="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none" style="background: radial-gradient(circle, var(--color-accent-tertiary), transparent 70%);"></div>
@@ -343,6 +382,25 @@ const essentialPosts = essentialSlugs
         </div>
       </div>
     </a>
+  </section>
+
+  <!-- ═══ BEAT 6: THE CALL — Why this matters before mass adoption ═══ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4 text-center">Why Now</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">Before mass adoption, not after</h2>
+      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          Neuralink has implanted chips in human patients. Synchron's Stentrode is in FDA trials. Consumer EEG headsets sit on store shelves. These devices are tested for safety and efficacy — but <strong class="text-[var(--color-text-primary)]">no public framework exists to audit what they can do to a mind.</strong>
+        </p>
+        <p>
+          This dual-use reality means BCI security is not an engineering problem. <strong class="text-[var(--color-text-primary)]">It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build governance before the harm, or after.
+        </p>
+        <p>
+          <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This atlas is the first attempt to fill it. Open source. Open data. Ready for peer review.
+        </p>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ ESSENTIAL READING ═══ -->
@@ -382,16 +440,16 @@ const essentialPosts = essentialSlugs
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href="/TARA/"
+          href="/whitepaper/"
           class="px-8 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
-          Explore the Atlas
+          Read the Whitepaper
         </a>
         <a
           href="/governance/"
           class="px-8 py-3.5 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
         >
-          Read the Governance
+          Explore Governance
         </a>
       </div>
     </div>
