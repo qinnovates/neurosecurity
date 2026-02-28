@@ -170,17 +170,6 @@ everything sung not spoken except intro and outro, epic and raw
 | Drums (final chorus only) | The body. Physical. Earned — first and only time. The impact is massive because everything before it was stripped. |
 | Amber motif returning in outro | Full circle. The pulse that started the song ends it. Life continues. The light goes dark but you know it'll come back. |
 
-### Personal References (for documentation, never in lyrics)
-- **The dark room:** Cruise ship. Kidnapped. Locked in a dark room. Hit a wooden bookshelf first. Scar on head (under hair). Bruise on torso. Grip marks on arm. Fought through furniture to find the door.
-- **The bookshelf:** Wooden. First obstacle in the dark. The same material as sawdust. Knowledge (books) and trauma (the trap) are made of the same wood.
-- **Grandmother's story:** People coming to save her (needs confirmation). Connects to "who stayed when the air ran out" — generational pattern of rescue/survival.
-- **Grandfather's wood factory:** Burned down. Nearly lost everything the family had built. The sawdust in the song IS his factory — literal sawdust from the wood mill. The bookshelf on the cruise is made of the same material his factory produced. The fire in Verse 1 ("watched it close in") is his fire too. Three generations connected by wood: grandfather built with it (the factory), the wood trapped Kevin (the bookshelf on the cruise), and now Kevin builds from what's left of it (the song, the framework, the kingdom). Sawdust is the family inheritance — what's left when wood burns, when factories collapse, when bookshelves break. And every time, they started from the dust again.
-- **Sobriety:** December 25, 2025. "Set the glass down." The world steadied because he steadied.
-- **Marcus Aurelius:** The dead man. *Meditations* referenced by name in lyrics. 7.59 ("dig within") encoded in bridge. The intro and bridge are a direct line.
-- **Neuroethics/QIF:** "No map, no mercy" — the field has no ethical framework yet. Kevin is building one. The song about building kingdoms from sawdust IS the work.
-- **Parents' heartbeat:** The amber motif is the inherited rhythm. Mother's heartbeat in the womb = the first pulse = the staccato piano that runs through the entire song.
-- **Father:** Came from China. Builder. Hands. Sawdust. Still works in a factory today, building things with his hands — including shelves. Full circle: grandfather's wood factory burned down, and his son is still building shelves right now. The line "the dust of something built before us" is his workshop, his labor, his legacy in the grain. "That's what the builders do" is literally what his father does every day. The sawdust never stopped. The family just keeps building.
-
 ## Lyrics
 
 ---

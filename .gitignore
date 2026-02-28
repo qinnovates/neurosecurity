@@ -26,6 +26,8 @@ verify-report.json
 # Personal / sensitive
 drafts/*-statement-of-purpose*.md
 drafts/*-application-notes*.md
+drafts/*-email*.md
+drafts/*-cvss*.md
 
 # Local
 _memory/
