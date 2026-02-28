@@ -1,0 +1,268 @@
+---
+/**
+ * AttackSurfaceDiagram.astro
+ * Animated SVG comparing exogenous (standard QIF) entry vs endogenous (no-device) entry.
+ * Replaces the ASCII <pre> block in the case study page.
+ */
+---
+
+<div class="glass rounded-xl p-6 my-6" data-surface-diagram>
+  <svg
+    viewBox="0 0 620 420"
+    width="100%"
+    height="auto"
+    preserveAspectRatio="xMidYMid meet"
+    role="img"
+    aria-label="Attack surface diagram comparing exogenous BCI entry path with endogenous biological entry"
+    class="overflow-visible"
+  >
+    <defs>
+      <marker id="asd-arrow-gray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#6b7280" />
+      </marker>
+      <marker id="asd-arrow-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#ef4444" />
+      </marker>
+      <marker id="asd-arrow-amber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#f59e0b" />
+      </marker>
+      <marker id="asd-arrow-cyan" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#06b6d4" />
+      </marker>
+    </defs>
+
+    {/* === EXOGENOUS PATH (top) === */}
+    <text class="asd-label-exo" x="10" y="24" fill="#6b7280" font-size="11" font-weight="600">Standard QIF entry (exogenous):</text>
+
+    {/* Chain boxes */}
+    <g class="asd-exo-chain">
+      <rect x="10" y="36" width="80" height="32" rx="4" fill="#4b556320" stroke="#4b5563" stroke-width="1" />
+      <text x="50" y="56" text-anchor="middle" fill="#9ca3af" font-size="10">Adversary</text>
+
+      <line x1="94" y1="52" x2="128" y2="52" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="40" stroke-dashoffset="40" marker-end="url(#asd-arrow-gray)" class="asd-exo-line" style="--seg: 0" />
+
+      <rect x="132" y="36" width="80" height="32" rx="4" fill="#4b556320" stroke="#4b5563" stroke-width="1" />
+      <text x="172" y="56" text-anchor="middle" fill="#9ca3af" font-size="10">S3 Firmware</text>
+
+      <line x1="216" y1="52" x2="248" y2="52" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="40" stroke-dashoffset="40" marker-end="url(#asd-arrow-gray)" class="asd-exo-line" style="--seg: 1" />
+
+      <rect x="252" y="36" width="72" height="32" rx="4" fill="#4b556320" stroke="#4b5563" stroke-width="1" />
+      <text x="288" y="56" text-anchor="middle" fill="#9ca3af" font-size="10">S2 Driver</text>
+
+      <line x1="328" y1="52" x2="358" y2="52" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="40" stroke-dashoffset="40" marker-end="url(#asd-arrow-gray)" class="asd-exo-line" style="--seg: 2" />
+
+      <rect x="362" y="36" width="72" height="32" rx="4" fill="#4b556320" stroke="#4b5563" stroke-width="1" />
+      <text x="398" y="56" text-anchor="middle" fill="#9ca3af" font-size="10">S1 Signal</text>
+
+      <line x1="438" y1="52" x2="468" y2="52" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="40" stroke-dashoffset="40" marker-end="url(#asd-arrow-gray)" class="asd-exo-line" style="--seg: 3" />
+
+      <rect x="472" y="36" width="72" height="32" rx="4" fill="#4b556320" stroke="#4b5563" stroke-width="1" />
+      <text x="508" y="56" text-anchor="middle" fill="#9ca3af" font-size="10">I0 Interface</text>
+
+      <line x1="548" y1="52" x2="578" y2="52" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="40" stroke-dashoffset="40" marker-end="url(#asd-arrow-gray)" class="asd-exo-line" style="--seg: 4" />
+
+      <rect x="582" y="36" width="30" height="32" rx="4" fill="#4b556320" stroke="#4b5563" stroke-width="1" />
+      <text x="597" y="56" text-anchor="middle" fill="#9ca3af" font-size="9">N</text>
+    </g>
+
+    {/* Firewall bracket annotation */}
+    <text class="asd-exo-annotation" x="310" y="90" text-anchor="middle" fill="#6b7280" font-size="9" font-style="italic">
+      Firewall, IDS, authentication, encryption
+    </text>
+
+    {/* === Separator === */}
+    <line x1="10" y1="110" x2="610" y2="110" stroke="#4b556330" stroke-width="1" />
+
+    {/* === ENDOGENOUS PATHS (bottom) === */}
+    <text class="asd-label-endo" x="10" y="140" fill="#ef4444" font-size="11" font-weight="600">Endogenous entry (no device):</text>
+
+    {/* Three direct arrows */}
+    <g class="asd-endo-paths">
+      <text x="10" y="172" fill="#f59e0b" font-size="10" font-weight="500">Biochemistry</text>
+      <line x1="85" y1="168" x2="540" y2="168" stroke="#f59e0b" stroke-width="2" stroke-dasharray="460" stroke-dashoffset="460" marker-end="url(#asd-arrow-amber)" class="asd-endo-line" style="--line: 0" />
+      <text x="552" y="172" fill="#f59e0b" font-size="10" font-weight="600">N1-N7</text>
+
+      <text x="10" y="202" fill="#ef4444" font-size="10" font-weight="500">Inflammation</text>
+      <line x1="85" y1="198" x2="540" y2="198" stroke="#ef4444" stroke-width="2" stroke-dasharray="460" stroke-dashoffset="460" marker-end="url(#asd-arrow-red)" class="asd-endo-line" style="--line: 1" />
+      <text x="552" y="202" fill="#ef4444" font-size="10" font-weight="600">N1-N4</text>
+
+      <text x="10" y="232" fill="#06b6d4" font-size="10" font-weight="500">Trauma</text>
+      <line x1="85" y1="228" x2="540" y2="228" stroke="#06b6d4" stroke-width="2" stroke-dasharray="460" stroke-dashoffset="460" marker-end="url(#asd-arrow-cyan)" class="asd-endo-line" style="--line: 2" />
+      <text x="552" y="232" fill="#06b6d4" font-size="10" font-weight="600">N6-N7</text>
+    </g>
+
+    {/* Annotation lines */}
+    <g class="asd-annotation">
+      <text x="350" y="260" fill="#94a3b8" font-size="10" font-style="italic">No synthetic stack.</text>
+      <text x="350" y="275" fill="#94a3b8" font-size="10" font-style="italic">No firewall to traverse.</text>
+      <text x="350" y="290" fill="#94a3b8" font-size="10" font-weight="600" font-style="italic">The threat IS the substrate.</text>
+    </g>
+
+    {/* === Three vector boxes === */}
+    <g class="asd-vector-boxes">
+      <rect x="10" y="310" width="185" height="100" rx="6" fill="#f59e0b10" stroke="#f59e0b" stroke-width="1" class="asd-vbox" style="--vbox: 0" />
+      <text x="102" y="332" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="600">NUTRITIONAL</text>
+      <text x="102" y="348" text-anchor="middle" fill="#9ca3af" font-size="9">B12 deficiency</text>
+      <text x="102" y="363" text-anchor="middle" fill="#9ca3af" font-size="9">Folate, iron</text>
+      <text x="102" y="378" text-anchor="middle" fill="#9ca3af" font-size="9">Slow drift</text>
+      <text x="102" y="396" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="600">T0066</text>
+
+      <rect x="215" y="310" width="185" height="100" rx="6" fill="#ef444410" stroke="#ef4444" stroke-width="1" class="asd-vbox" style="--vbox: 1" />
+      <text x="307" y="332" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="600">VIRAL / INFLAMMATORY</text>
+      <text x="307" y="348" text-anchor="middle" fill="#9ca3af" font-size="9">COVID-19</text>
+      <text x="307" y="363" text-anchor="middle" fill="#9ca3af" font-size="9">Cytokine storm</text>
+      <text x="307" y="378" text-anchor="middle" fill="#9ca3af" font-size="9">DoS</text>
+      <text x="307" y="396" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="600">T0025 + T0029</text>
+
+      <rect x="420" y="310" width="185" height="100" rx="6" fill="#06b6d410" stroke="#06b6d4" stroke-width="1" class="asd-vbox" style="--vbox: 2" />
+      <text x="512" y="332" text-anchor="middle" fill="#06b6d4" font-size="11" font-weight="600">EXPERIENTIAL</text>
+      <text x="512" y="348" text-anchor="middle" fill="#9ca3af" font-size="9">Trauma (PTSD)</text>
+      <text x="512" y="363" text-anchor="middle" fill="#9ca3af" font-size="9">Chronic stress</text>
+      <text x="512" y="378" text-anchor="middle" fill="#9ca3af" font-size="9">Replay attack</text>
+      <text x="512" y="396" text-anchor="middle" fill="#06b6d4" font-size="9" font-weight="600">T0067</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  /* --- Initial hidden states --- */
+  .asd-label-exo, .asd-exo-chain, .asd-exo-annotation {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .asd-label-endo, .asd-endo-paths {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .asd-annotation text {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .asd-vbox {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  /* --- Revealed states --- */
+
+  /* Exogenous chain draws left-to-right, then dims */
+  [data-surface-diagram].revealed .asd-label-exo {
+    opacity: 1;
+  }
+  [data-surface-diagram].revealed .asd-exo-chain {
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
+  [data-surface-diagram].revealed .asd-exo-line {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.2s ease;
+    transition-delay: calc(var(--seg) * 200ms + 300ms);
+  }
+  [data-surface-diagram].revealed .asd-exo-annotation {
+    opacity: 1;
+    transition-delay: 1.5s;
+  }
+  /* Dim exogenous after endogenous appears */
+  [data-surface-diagram].revealed .asd-exo-chain {
+    animation: dim-exo 0.6s ease forwards;
+    animation-delay: 2s;
+  }
+  @keyframes dim-exo {
+    to { opacity: 0.4; }
+  }
+
+  /* Endogenous paths draw bold simultaneously */
+  [data-surface-diagram].revealed .asd-label-endo {
+    opacity: 1;
+    transition-delay: 1.8s;
+  }
+  [data-surface-diagram].revealed .asd-endo-paths {
+    opacity: 1;
+    transition-delay: 2s;
+  }
+  [data-surface-diagram].revealed .asd-endo-line {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.8s ease;
+    transition-delay: calc(var(--line) * 150ms + 2.2s);
+  }
+
+  /* Annotation lines fade in */
+  [data-surface-diagram].revealed .asd-annotation text:nth-child(1) {
+    opacity: 1;
+    transition-delay: 3.2s;
+  }
+  [data-surface-diagram].revealed .asd-annotation text:nth-child(2) {
+    opacity: 1;
+    transition-delay: 3.5s;
+  }
+  [data-surface-diagram].revealed .asd-annotation text:nth-child(3) {
+    opacity: 1;
+    transition-delay: 3.8s;
+  }
+
+  /* Vector boxes fade up with stagger */
+  [data-surface-diagram].revealed .asd-vbox {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--vbox) * 200ms + 4s);
+  }
+  /* Text inside vector boxes follows parent timing */
+  .asd-vector-boxes text {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  [data-surface-diagram].revealed .asd-vector-boxes text {
+    opacity: 1;
+    transition-delay: 4.3s;
+  }
+
+  /* --- Hover: highlight corresponding arrow --- */
+  .asd-vbox:hover {
+    filter: brightness(1.2);
+  }
+
+  /* --- Reduced motion --- */
+  @media (prefers-reduced-motion: reduce) {
+    .asd-label-exo, .asd-exo-chain, .asd-exo-annotation,
+    .asd-label-endo, .asd-endo-paths,
+    .asd-annotation text,
+    .asd-vbox,
+    .asd-vector-boxes text {
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .asd-exo-line, .asd-endo-line {
+      stroke-dashoffset: 0 !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
+    [data-surface-diagram].revealed .asd-exo-chain {
+      animation: none !important;
+      opacity: 0.4 !important;
+    }
+  }
+</style>
+
+<script>
+  function initSurfaceDiagram() {
+    const containers = document.querySelectorAll('[data-surface-diagram]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+    containers.forEach((el) => observer.observe(el));
+  }
+  initSurfaceDiagram();
+  document.addEventListener('astro:page-load', initSurfaceDiagram);
+</script>
