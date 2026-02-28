@@ -1,7 +1,9 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import AttackChainFlow from '../../components/case-study/AttackChainFlow.astro';
-import DualVectorDiagram from '../../components/case-study/DualVectorDiagram.astro';
+import AttackSurfaceDiagram from '../../components/case-study/AttackSurfaceDiagram.astro';
+import DualVectorDiagramReact from '../../components/case-study/DualVectorDiagram.tsx';
+import ReinforcementLoop from '../../components/case-study/ReinforcementLoop.tsx';
 import PolicyInterventionMap from '../../components/case-study/PolicyInterventionMap.astro';
 
 const phases = [
@@ -116,34 +118,7 @@ const phases = [
         </p>
       </div>
 
-      <div class="glass rounded-xl p-6 my-6 font-[family-name:var(--font-mono)] text-xs leading-relaxed overflow-x-auto">
-        <pre class="text-[var(--color-text-muted)]">
-  Standard QIF entry (exogenous):
-
-  Adversary ──► S3 (Firmware) ──► S2 (Driver) ──► S1 (Signal) ──► I0 (Interface) ──► N-bands
-                ▲                                                    ▲
-                └── Firewall, IDS, authentication, encryption ───────┘
-
-  Endogenous entry (no device):
-
-  Biochemistry ─────────────────────────────────────────────────────► N1-N7 directly
-  Inflammation ─────────────────────────────────────────────────────► N1-N4 directly
-  Trauma ───────────────────────────────────────────────────────────► N6-N7 directly
-                                                                      ▲
-                                                                      │
-                                                               No synthetic stack.
-                                                               No firewall to traverse.
-                                                               The threat IS the substrate.
-
-  Three endogenous vectors:
-  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
-  │  NUTRITIONAL      │  │  VIRAL /          │  │  EXPERIENTIAL    │
-  │  B12 deficiency   │  │  INFLAMMATORY     │  │  Trauma (PTSD)   │
-  │  Folate, iron     │  │  COVID-19         │  │  Chronic stress  │
-  │  Slow drift       │  │  Cytokine storm   │  │  Replay attack   │
-  │  T0066            │  │  T0025 + T0029    │  │  T0067           │
-  └──────────────────┘  └──────────────────┘  └──────────────────┘</pre>
-      </div>
+      <AttackSurfaceDiagram />
 
       <div class="glass rounded-xl p-5 border-l-4 border-[var(--color-accent-primary)]">
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
@@ -173,7 +148,7 @@ const phases = [
         </p>
       </div>
 
-      <DualVectorDiagram />
+      <DualVectorDiagramReact client:only="react" />
     </section>
 
     <!-- Section D: Reinforcement Loop -->
@@ -185,30 +160,7 @@ const phases = [
         </p>
       </div>
 
-      <div class="glass rounded-xl p-6 my-6 font-[family-name:var(--font-mono)] text-xs leading-relaxed overflow-x-auto">
-        <pre class="text-[var(--color-text-muted)]">
-  ┌──────────────────────────────────────────────────────────────┐
-  │                                                              │
-  │   T0066 (Slow Drift)                                         │
-  │       │                                                      │
-  │       ▼                                                      │
-  │   Weakened substrate                                         │
-  │       │                                                      │
-  │       ▼                                                      │
-  │   T0067 (Replay) exploits weakened PFC suppression           │
-  │       │                                                      │
-  │       ▼                                                      │
-  │   T0039 (Self-Model Corruption) emerges from compounding     │
-  │       │                                                      │
-  │       ▼                                                      │
-  │   Reduced detection capacity                                 │
-  │       │                                                      │
-  │       └──────────────────────► T0066 accelerates ────────┐   │
-  │                                                          │   │
-  │   ◄──────────────────────────────────────────────────────┘   │
-  │                                                              │
-  └──────────────────────────────────────────────────────────────┘</pre>
-      </div>
+      <ReinforcementLoop client:only="react" />
     </section>
 
     <!-- Section E: Stochastic Framing -->
