@@ -1,0 +1,249 @@
+{
+  "model_id": "music_v1",
+  "composition_plan": {
+    "positive_global_styles": [
+      "emo rock meets dark cinematic soul",
+      "piano driven alternative rock with orchestral weight",
+      "raw emotion",
+      "D minor",
+      "85 BPM building to 100 BPM",
+      "everything sung melodically with strong melody throughout",
+      "single male vocalist throughout",
+      "very high pitch male voice falsetto range soaring and emotional from the start",
+      "vocal style like emo rock anthems very high pitched passionate and dramatic near falsetto",
+      "voice cracks and soars with raw feeling",
+      "emotionally expressive with grit and passion",
+      "strong vocal melody catchy and memorable on every line",
+      "cinematic builds from intimate to massive",
+      "piano motif climbs up to a higher note then descends back down like an arc",
+      "staccato upper register piano motif throughout like amber pulses of light",
+      "dramatic tension and release",
+      "epic and anthemic",
+      "spiritual weight",
+      "sung with passion and urgency not recited",
+      "tempo increases as song builds energy",
+      "alternative rock energy with gospel and orchestral depth"
+    ],
+    "negative_global_styles": [
+      "pop",
+      "electronic",
+      "bright",
+      "synthetic",
+      "auto-tune",
+      "overproduced",
+      "drum machine",
+      "clean polished vocals",
+      "smooth vocals",
+      "disney",
+      "musical theater",
+      "generic",
+      "happy",
+      "spoken word",
+      "speaking",
+      "talking",
+      "reciting",
+      "narrating",
+      "female vocals",
+      "duet",
+      "harmony vocals",
+      "backup singers",
+      "deep bass voice",
+      "baritone",
+      "low male voice",
+      "mid range voice",
+      "tenor",
+      "broadway",
+      "theatrical",
+      "slow throughout",
+      "country",
+      "jazz",
+      "blues shuffle",
+      "raspy deep voice"
+    ],
+    "sections": [
+      {
+        "section_name": "Instrumental Intro",
+        "positive_local_styles": [
+          "Steinway grand piano with orchestral strings underneath",
+          "low D minor sustained chord on piano",
+          "strings swell slowly dark and cinematic",
+          "staccato upper register piano notes climb up one extra high note then descend back down",
+          "piano motif rises to peak note then falls like an arc of amber light",
+          "orchestral tension building low cellos and violas",
+          "dark atmospheric",
+          "cinematic orchestral intro",
+          "reverb heavy room",
+          "epic film score energy from the first note"
+        ],
+        "negative_local_styles": [
+          "drums",
+          "bass guitar",
+          "organ",
+          "saxophone",
+          "bright",
+          "fast",
+          "female voice",
+          "words",
+          "lyrics"
+        ],
+        "duration_ms": 12000,
+        "lines": []
+      },
+      {
+        "section_name": "Verse Intro",
+        "positive_local_styles": [
+          "sung melodically with haunting melody",
+          "very high pitch male voice near falsetto singing with emotional vulnerability and emo rock intensity",
+          "vocal style like anthemic emo rock high soaring and dramatic",
+          "piano and strings underneath",
+          "reverb heavy",
+          "intimate and haunting but sung not spoken",
+          "slower tempo setting the mood",
+          "opening vocal melody sets the tone"
+        ],
+        "negative_local_styles": [
+          "spoken word",
+          "speaking",
+          "talking",
+          "whispering",
+          "reciting",
+          "drums",
+          "loud",
+          "energetic",
+          "female voice",
+          "high pitch",
+          "fast"
+        ],
+        "duration_ms": 10000,
+        "lines": [
+          "A dead man wrote it down so we'd never forget",
+          "Two thousand years and the dust ain't settled yet"
+        ]
+      },
+      {
+        "section_name": "Verse 1",
+        "positive_local_styles": [
+          "slow gospel blues piano pattern",
+          "finger snaps on 2 and 4",
+          "staccato piano motif climbs up hits one higher note then descends",
+          "very high pitch voice near falsetto emotional and driving",
+          "emo rock vocal delivery passionate and urgent",
+          "voice builds in intensity and speed through the verse",
+          "every line sung with clear melodic shape",
+          "intimate at start building to power and speed",
+          "voice first piano supports never leads",
+          "bluesy soul singing raw and aching becoming urgent"
+        ],
+        "negative_local_styles": [
+          "full arrangement",
+          "drums",
+          "organ",
+          "spoken word",
+          "speaking",
+          "talking",
+          "reciting",
+          "disney vocals",
+          "smooth",
+          "female voice",
+          "harmony",
+          "backup vocals",
+          "theatrical",
+          "same energy throughout"
+        ],
+        "duration_ms": 40000,
+        "lines": [
+          "We built this thing with splinters in our palms",
+          "No map no mercy just sawdust on the farm",
+          "Climbed the shelves to escape the fight",
+          "Watched it close in trapped us in the night",
+          "Found our wisdom in the meditations",
+          "Started from the dust with no foundations",
+          "Blindfolded if we had to still we'd run",
+          "Some don't talk about the fire they just swipe and move on",
+          "But some lessons don't knock baby they break right through the door",
+          "It ain't the fire it's who stayed and what they stayed here for"
+        ]
+      },
+      {
+        "section_name": "Hook",
+        "positive_local_styles": [
+          "high dynamic tenor voice full power and speed",
+          "voice soars with urgency and conviction",
+          "tempo picks up driving forward",
+          "piano more percussive and rhythmic",
+          "staccato motif hits the high peak note and rings",
+          "building momentum toward the sustained note",
+          "last word sustained long and powerful voice holds the note",
+          "orchestra crashes in on the sustained note full strings brass timpani",
+          "epic drums kick in floor tom snare crash cymbals on the held note",
+          "cinematic explosion of sound on the word for",
+          "the moment the whole song has been building to",
+          "voice belts and holds the final note with raw power"
+        ],
+        "negative_local_styles": [
+          "quiet",
+          "sparse",
+          "spoken",
+          "speaking",
+          "restrained",
+          "slow",
+          "female voice",
+          "disney",
+          "theatrical"
+        ],
+        "duration_ms": 16000,
+        "lines": [
+          "No maps no mercy for me",
+          "We fight but we won't fall",
+          "Because in the end it's all worth fighting for",
+          "It's what's worth fighting foooooor"
+        ]
+      },
+      {
+        "section_name": "Chorus 1",
+        "positive_local_styles": [
+          "powerful gospel blues chorus with full orchestra",
+          "organ swells in",
+          "piano pounds deep chords",
+          "full drum kit driving the rhythm",
+          "orchestral strings and brass underneath",
+          "staccato motif moves in harmonic intervals climbing and descending",
+          "single male voice at full power high tenor belting with raspy soul conviction",
+          "voice soars and cracks on the high notes",
+          "strong memorable chorus melody",
+          "faster tempo than verse driving energy",
+          "spiritual and heavy",
+          "congregation energy",
+          "raw powerful and cinematic",
+          "epic chorus that builds to overwhelming",
+          "sung with everything he has"
+        ],
+        "negative_local_styles": [
+          "sparse",
+          "quiet",
+          "spoken",
+          "speaking",
+          "restrained",
+          "disney",
+          "female voice",
+          "harmony vocals",
+          "backup singers",
+          "theatrical",
+          "slow"
+        ],
+        "duration_ms": 22000,
+        "lines": [
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why you gripping walls you never shaped",
+          "Let it go let it fall let it all break",
+          "There's sawdust at your feet",
+          "But God not tonight",
+          "We're gonna build again"
+        ]
+      }
+    ]
+  },
+  "enforce_section_duration": false,
+  "with_timestamps": true
+}

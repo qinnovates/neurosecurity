@@ -23,6 +23,10 @@ docs/data/
 scripts/verify/.cache/
 verify-report.json
 
+# Personal / sensitive
+drafts/*-statement-of-purpose*.md
+drafts/*-application-notes*.md
+
 # Local
 _memory/
 tools/macshield
