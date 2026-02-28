@@ -488,57 +488,6 @@ const hasGovernance = nr || reg;
       </a>
     </div>
 
-    </div><!-- /Left Column -->
-
-    <!-- Right Column: Brain Visualization (sticky sidebar) -->
-    <aside class="hidden lg:block">
-      <div class="sticky top-24">
-        <div class="glass rounded-xl p-4 mb-4">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Neural Impact</h3>
-          <p class="text-xs text-[var(--color-text-muted)] mb-3">
-            {threat.bands.length} of 7 neural bands affected
-          </p>
-          <div class="flex flex-wrap gap-1.5 mb-4">
-            {threat.bands.map((band: string) => (
-              <span
-                class="px-2 py-0.5 rounded-full text-xs font-bold"
-                style={`background: ${accentColor}20; color: ${accentColor}; border: 1px solid ${accentColor}30;`}
-              >
-                {band}
-              </span>
-            ))}
-          </div>
-          <BrainVisualization
-            client:load
-            views={techniqueBrainView}
-            defaultView="security"
-            hideViewToggle={true}
-          />
-        </div>
-
-        <!-- Band Legend -->
-        <div class="glass rounded-xl p-4">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-3">Band Map</h4>
-          <div class="space-y-1.5">
-            {BRAIN_REGIONS.map(region => {
-              const isAffected = affectedBands.has(region.id);
-              return (
-                <div class={`flex items-center gap-2 text-xs ${isAffected ? '' : 'opacity-40'}`}>
-                  <span
-                    class="w-2 h-2 rounded-full shrink-0"
-                    style={`background: ${isAffected ? accentColor : '#334155'};`}
-                  />
-                  <span class={`font-mono font-bold ${isAffected ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-faint)]'}`}>
-                    {region.id}
-                  </span>
-                  <span class="text-[var(--color-text-muted)] truncate">{region.name}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </aside>
-
-  </div><!-- /grid -->
+    </div><!-- /content -->
+  </div><!-- /container -->
 </PageLayout>
