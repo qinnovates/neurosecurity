@@ -40,7 +40,7 @@ Standards bodies and working groups where QIF's contributions (NISS, TARA, neuro
 
 | Contact | Organization | Their Work | QIF Connection | Trigger | Status |
 |---------|--------------|------------|----------------|---------|--------|
-| Nick Leali | FIRST / CVSS SIG | CVSS v4.0 maintenance, vulnerability scoring standards | NISS extends CVSS with 6 neural-specific metrics (BI, CR, CD, CV, RV, NP). TARA maps 109 BCI attack techniques. 71.6% dual-use therapeutic overlap. | CVSS SIG meeting / email response | Draft email ready (`drafts/nick-leali-cvss-sig-email.md`) |
+| Nick Leali | FIRST / CVSS SIG | CVSS v4.0 maintenance, vulnerability scoring standards | NISS extends CVSS with 6 neural-specific metrics (BI, CR, CD, CV, RV, NP). TARA maps 109 BCI attack techniques. 71.6% dual-use therapeutic overlap. | CVSS SIG meeting / email response | Draft email ready (stored locally) |
 | MITRE CWE team | MITRE | Common Weakness Enumeration | CWE gap analysis: no neural-specific weakness types exist. QIF's TARA techniques map to CWE gaps. | After CVSS SIG traction | Not started |
 | IEEE SA | IEEE | Neuroethics standards (P2794, P2731) | QIF's neurorights operationalization (5 rights mapped to NISS metrics and TARA techniques) provides technical grounding for IEEE's ethical framework. | After arXiv + CVSS SIG | Not started |
 
