@@ -1,8 +1,10 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import BrainVisualization from '../../components/brain/BrainVisualization.tsx';
 import { THREAT_VECTORS, SEVERITY_COLORS } from '../../lib/threat-data';
 import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, VALIDATION_TIERS } from '../../lib/validation-data';
 import type { ValidationTierId } from '../../lib/validation-data';
+import type { BrainView, BrainViewRegion } from '../../lib/brain-view-data';
 
 export function getStaticPaths() {
   return THREAT_VECTORS.map((threat) => ({
@@ -14,6 +16,52 @@ export function getStaticPaths() {
 const { threat } = Astro.props;
 const severityColor = SEVERITY_COLORS[threat.severity] || SEVERITY_COLORS.low;
 const validation = getValidationForTechnique(threat.id);
+
+// --- Build technique-specific brain view highlighting affected bands ---
+const BRAIN_REGIONS = [
+  { id: 'N7', name: 'Neocortex', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
+  { id: 'N6', name: 'Limbic System', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
+  { id: 'N5', name: 'Basal Ganglia', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
+  { id: 'N4', name: 'Diencephalon', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
+  { id: 'N3', name: 'Cerebellum', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
+  { id: 'N2', name: 'Brainstem', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
+  { id: 'N1', name: 'Spinal Cord', description: 'Cervical through sacral — reflexes, peripheral relay' },
+] as const;
+
+const SEVERITY_ACCENT: Record<string, string> = {
+  critical: '#ef4444', high: '#f59e0b', medium: '#eab308', low: '#94a3b8',
+};
+const accentColor = SEVERITY_ACCENT[threat.severity] ?? '#94a3b8';
+const affectedBands = new Set(threat.bands);
+
+const techniqueRegions: BrainViewRegion[] = BRAIN_REGIONS.map(region => {
+  const isAffected = affectedBands.has(region.id);
+  return {
+    id: region.id,
+    name: region.name,
+    description: isAffected
+      ? `${region.description} — targeted by ${threat.id}`
+      : region.description,
+    color: isAffected ? accentColor : '#334155',
+    intensity: isAffected ? 0.9 : 0.15,
+    stat: { label: isAffected ? 'affected' : 'not targeted', value: region.id },
+    badges: isAffected ? [{ label: threat.severity, color: accentColor }] : [],
+    details: isAffected ? [{
+      id: threat.id,
+      label: threat.name,
+      href: '#',
+      color: accentColor,
+    }] : [],
+  };
+});
+
+const techniqueBrainView: BrainView[] = [{
+  id: 'security',
+  label: 'Impact',
+  icon: 'shield',
+  accentColor,
+  regions: techniqueRegions,
+}];
 
 const NEURORIGHT_LABELS: Record<string, string> = {
   MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity',
@@ -83,9 +131,11 @@ const hasGovernance = nr || reg;
     { label: 'TARA', href: '/TARA/' },
     { label: threat.id }
   ]}
-  maxWidth="narrow"
+  wide={true}
 >
-  <div class="mb-8">
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8 mb-8">
+    <!-- Left Column: Content -->
+    <div>
     <div class="flex items-center gap-3 mb-2">
       <h1 class="text-3xl font-bold font-mono">{threat.id}</h1>
       <span
@@ -386,5 +436,57 @@ const hasGovernance = nr || reg;
       </a>
     </div>
 
-  </div>
+    </div><!-- /Left Column -->
+
+    <!-- Right Column: Brain Visualization (sticky sidebar) -->
+    <aside class="hidden lg:block">
+      <div class="sticky top-24">
+        <div class="glass rounded-xl p-4 mb-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Neural Impact</h3>
+          <p class="text-xs text-[var(--color-text-muted)] mb-3">
+            {threat.bands.length} of 7 neural bands affected
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            {threat.bands.map((band: string) => (
+              <span
+                class="px-2 py-0.5 rounded-full text-xs font-bold"
+                style={`background: ${accentColor}20; color: ${accentColor}; border: 1px solid ${accentColor}30;`}
+              >
+                {band}
+              </span>
+            ))}
+          </div>
+          <BrainVisualization
+            client:load
+            views={techniqueBrainView}
+            defaultView="security"
+            hideViewToggle={true}
+          />
+        </div>
+
+        <!-- Band Legend -->
+        <div class="glass rounded-xl p-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-3">Band Map</h4>
+          <div class="space-y-1.5">
+            {BRAIN_REGIONS.map(region => {
+              const isAffected = affectedBands.has(region.id);
+              return (
+                <div class={`flex items-center gap-2 text-xs ${isAffected ? '' : 'opacity-40'}`}>
+                  <span
+                    class="w-2 h-2 rounded-full shrink-0"
+                    style={`background: ${isAffected ? accentColor : '#334155'};`}
+                  />
+                  <span class={`font-mono font-bold ${isAffected ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-faint)]'}`}>
+                    {region.id}
+                  </span>
+                  <span class="text-[var(--color-text-muted)] truncate">{region.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /grid -->
 </PageLayout>
