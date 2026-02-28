@@ -1,0 +1,159 @@
+{
+  "model_id": "music_v1",
+  "composition_plan": {
+    "positive_global_styles": [
+      "dark gospel blues",
+      "soulful",
+      "piano-driven",
+      "raw emotion",
+      "D minor",
+      "74 BPM",
+      "voice-first minimal production",
+      "distinct male and female voices that alternate clearly",
+      "spiritual weight",
+      "male voice mid-range tenor raspy with raw soul power and ache",
+      "female voice warm soulful blues alto grounded and powerful",
+      "voices only combine when explicitly harmonizing"
+    ],
+    "negative_global_styles": [
+      "pop",
+      "electronic",
+      "bright",
+      "upbeat",
+      "synthetic",
+      "auto-tune",
+      "overproduced",
+      "busy arrangement",
+      "drum machine",
+      "clean polished vocals",
+      "smooth male vocals",
+      "deep bass male voice",
+      "baritone",
+      "broadway",
+      "theatrical",
+      "disney"
+    ],
+    "sections": [
+      {
+        "section_name": "Female Solo Opening",
+        "positive_local_styles": [
+          "only female voice no male voice at all in this section",
+          "female blues alto solo powerful and soulful",
+          "warm rich female vocal alone with piano",
+          "piano underneath gospel blues chords",
+          "organ warm underneath",
+          "sung with conviction and weight",
+          "completely female solo performance"
+        ],
+        "negative_local_styles": [
+          "male voice",
+          "male vocals",
+          "male singer",
+          "harmony",
+          "duet",
+          "drums",
+          "saxophone",
+          "spoken",
+          "quiet"
+        ],
+        "duration_ms": 22000,
+        "lines": [
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why we holding on to walls we couldn't mould",
+          "Let it go let it fall"
+        ]
+      },
+      {
+        "section_name": "Male and Female Harmony",
+        "positive_local_styles": [
+          "male voice enters speaking yeah tell them then immediately starts singing",
+          "raspy soulful male tenor and female blues alto sing together in harmony",
+          "two distinct voices harmonizing powerfully",
+          "pounding piano",
+          "organ swells",
+          "full drum hits enter",
+          "massive gospel energy",
+          "cathedral energy",
+          "raw and triumphant"
+        ],
+        "negative_local_styles": [
+          "solo voice",
+          "quiet",
+          "sparse",
+          "restrained",
+          "broadway",
+          "theatrical"
+        ],
+        "duration_ms": 22000,
+        "lines": [
+          "Yeah tell them",
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why we holdin to the walls we could write from wrong",
+          "Let it go let it fall"
+        ]
+      },
+      {
+        "section_name": "Female Belt",
+        "positive_local_styles": [
+          "only female voice no male voice",
+          "female voice solo belting with everything she has",
+          "sustained long powerful note on the word tall",
+          "voice holds and soars",
+          "wailing blues saxophone enters",
+          "massive emotional release",
+          "the word tall rings out and sustains"
+        ],
+        "negative_local_styles": [
+          "male voice",
+          "male vocals",
+          "male singer",
+          "quiet",
+          "restrained",
+          "spoken"
+        ],
+        "duration_ms": 8000,
+        "lines": [
+          "We'll rebuild it talllllll"
+        ]
+      },
+      {
+        "section_name": "Male Solo Verse",
+        "positive_local_styles": [
+          "only male voice no female voice at all in this section",
+          "male voice solo raspy soulful tenor singing alone",
+          "intimate and raw",
+          "piano pulls back more intimate",
+          "voice cracks with feeling and grit",
+          "sung with soul power and vulnerability",
+          "completely male solo performance no female",
+          "each line hits with weight"
+        ],
+        "negative_local_styles": [
+          "female voice",
+          "female vocals",
+          "female singer",
+          "harmony",
+          "duet",
+          "loud",
+          "full arrangement",
+          "spoken",
+          "broadway"
+        ],
+        "duration_ms": 30000,
+        "lines": [
+          "What do we do when the fire is doused",
+          "There's sawdust on your arm",
+          "When the flame's been swiped right out your mind",
+          "We rise from the shell the rust from slums",
+          "We can't help others if we don't help ourselves",
+          "Can't feel the ups without the downs",
+          "Can't pretend we know right from wrong through a perfect song"
+        ]
+      }
+    ]
+  },
+  "enforce_section_duration": false,
+  "with_timestamps": true
+}
