@@ -133,8 +133,7 @@ const hasGovernance = nr || reg;
   ]}
   wide={true}
 >
-  <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8 mb-8">
-    <!-- Left Column: Content -->
+  <div class="max-w-5xl mx-auto mb-8">
     <div>
     <div class="flex items-center gap-3 mb-2">
       <h1 class="text-3xl font-bold font-mono">{threat.id}</h1>
@@ -212,121 +211,174 @@ const hasGovernance = nr || reg;
       </div>
     )}
 
-    <!-- Governance Section -->
+    <!-- Governance + Neural Impact (2-column) -->
     {hasGovernance && (
-      <div class="glass rounded-xl p-6 border-l-4 border-purple-500 mb-8">
-        <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(168,85,247)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Governance
-        </h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Left: Governance & FDORA -->
+        <div class="glass rounded-xl p-6 border-l-4 border-purple-500">
+          <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(168,85,247)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Governance
+          </h3>
 
-        <div class="space-y-5">
-          {/* --- Neurorights at Risk --- */}
-          {nr && nr.affected.length > 0 && (
-            <div>
-              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Neurorights at Risk</h4>
-              <p class="text-xs text-[var(--color-text-muted)] mb-3">
-                This technique threatens {nr.affected.length} of the 5 recognized neurorights.
-              </p>
-              <div class="flex flex-wrap gap-1.5 mb-3">
-                {nr.affected.map((code: string) => (
-                  <a href={`/neurogovernance/#${(NEURORIGHT_LABELS[code] ?? code).toLowerCase().replace(/\s+/g, '-')}`} class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20 hover:bg-purple-500/20 transition-colors">
-                    <span class="font-bold">{code}</span>
-                    <span class="text-purple-400/70">{NEURORIGHT_LABELS[code] ?? code}</span>
-                  </a>
-                ))}
-              </div>
-              <div class="flex items-center gap-3 text-sm">
-                <span class="text-[var(--color-text-muted)]">Consent Complexity</span>
-                <div class="flex items-center gap-2 flex-1">
-                  <div class="flex-1 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden max-w-[120px]">
-                    <div
-                      class="h-full rounded-full"
-                      style={`width: ${Math.min(nr.cci / 4 * 100, 100)}%; background: ${nr.cci >= 2.0 ? 'rgb(239,68,68)' : nr.cci >= 1.0 ? 'rgb(234,179,8)' : 'rgb(34,197,94)'}`}
-                    />
+          <div class="space-y-5">
+            {/* --- Neurorights at Risk --- */}
+            {nr && nr.affected.length > 0 && (
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Neurorights at Risk</h4>
+                <p class="text-xs text-[var(--color-text-muted)] mb-3">
+                  This technique threatens {nr.affected.length} of the 5 recognized neurorights.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  {nr.affected.map((code: string) => (
+                    <a href={`/neurogovernance/#${(NEURORIGHT_LABELS[code] ?? code).toLowerCase().replace(/\s+/g, '-')}`} class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20 hover:bg-purple-500/20 transition-colors">
+                      <span class="font-bold">{code}</span>
+                      <span class="text-purple-400/70">{NEURORIGHT_LABELS[code] ?? code}</span>
+                    </a>
+                  ))}
+                </div>
+                <div class="flex items-center gap-3 text-sm">
+                  <span class="text-[var(--color-text-muted)]">Consent Complexity</span>
+                  <div class="flex items-center gap-2 flex-1">
+                    <div class="flex-1 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden max-w-[120px]">
+                      <div
+                        class="h-full rounded-full"
+                        style={`width: ${Math.min(nr.cci / 4 * 100, 100)}%; background: ${nr.cci >= 2.0 ? 'rgb(239,68,68)' : nr.cci >= 1.0 ? 'rgb(234,179,8)' : 'rgb(34,197,94)'}`}
+                      />
+                    </div>
+                    <span class={`font-mono font-bold text-xs ${nr.cci >= 2.0 ? 'text-red-400' : nr.cci >= 1.0 ? 'text-yellow-400' : 'text-green-400'}`}>
+                      {nr.cci.toFixed(2)}
+                    </span>
+                    <span class="text-[var(--color-text-faint)] text-xs">/ 4.0</span>
                   </div>
-                  <span class={`font-mono font-bold text-xs ${nr.cci >= 2.0 ? 'text-red-400' : nr.cci >= 1.0 ? 'text-yellow-400' : 'text-green-400'}`}>
-                    {nr.cci.toFixed(2)}
-                  </span>
-                  <span class="text-[var(--color-text-faint)] text-xs">/ 4.0</span>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* --- Divider between sub-sections --- */}
-          {nr && nr.affected.length > 0 && reg && (
-            <hr class="border-[var(--color-border)] opacity-50" />
-          )}
+            {/* --- Divider between sub-sections --- */}
+            {nr && nr.affected.length > 0 && reg && (
+              <hr class="border-[var(--color-border)] opacity-50" />
+            )}
 
-          {/* --- FDORA §3305 Regulatory --- */}
-          {reg && (
-            <div>
-              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">FDORA §3305 Compliance</h4>
+            {/* --- FDORA §3305 Regulatory --- */}
+            {reg && (
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-2">FDORA §3305 Compliance</h4>
 
-              {/* Cyber Device Status */}
-              <div class="flex items-center gap-2 mb-3">
-                <span class={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold ${reg.cyber_device ? 'bg-blue-500/15 text-blue-400 border border-blue-500/25' : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-transparent'}`}>
-                  {reg.cyber_device ? 'Cyber Device' : 'Non-Cyber Device'}
-                </span>
-                {!reg.cyber_device && (
-                  <span class="text-xs text-[var(--color-text-faint)]">
-                    (missing: {[
-                      !reg.prongs.software && 'software',
-                      !reg.prongs.network_connectable && 'network',
-                    ].filter(Boolean).join(', ')})
+                {/* Cyber Device Status */}
+                <div class="flex items-center gap-2 mb-3">
+                  <span class={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold ${reg.cyber_device ? 'bg-blue-500/15 text-blue-400 border border-blue-500/25' : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-transparent'}`}>
+                    {reg.cyber_device ? 'Cyber Device' : 'Non-Cyber Device'}
                   </span>
+                  {!reg.cyber_device && (
+                    <span class="text-xs text-[var(--color-text-faint)]">
+                      (missing: {[
+                        !reg.prongs.software && 'software',
+                        !reg.prongs.network_connectable && 'network',
+                      ].filter(Boolean).join(', ')})
+                    </span>
+                  )}
+                </div>
+
+                {/* Coverage Score */}
+                <div class="flex items-center gap-3 text-sm mb-3">
+                  <span class="text-[var(--color-text-muted)]">Regulatory Coverage</span>
+                  <div class="flex items-center gap-2 flex-1">
+                    <div class="flex-1 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden max-w-[120px]">
+                      <div
+                        class="h-full rounded-full"
+                        style={`width: ${reg.coverage_score * 100}%; background: ${reg.coverage_score >= 0.7 ? 'rgb(34,197,94)' : reg.coverage_score >= 0.4 ? 'rgb(234,179,8)' : 'rgb(239,68,68)'}`}
+                      />
+                    </div>
+                    <span class={`font-mono font-bold text-xs ${reg.coverage_score >= 0.7 ? 'text-green-400' : reg.coverage_score >= 0.4 ? 'text-yellow-400' : 'text-red-400'}`}>
+                      {reg.coverage_score.toFixed(1)}
+                    </span>
+                    <span class="text-[var(--color-text-faint)] text-xs">/ 1.0</span>
+                  </div>
+                </div>
+
+                {/* 524B Requirements */}
+                {reg.applicable_requirements.length > 0 && (
+                  <div class="mb-3">
+                    <span class="text-xs text-[var(--color-text-muted)] block mb-1">524B Requirements</span>
+                    <div class="flex flex-wrap gap-1.5">
+                      {reg.applicable_requirements.map((r: string) => (
+                        <span class="px-1.5 py-0.5 rounded text-xs font-mono bg-[var(--color-border)] text-[var(--color-text-muted)]" title={REQ_LABELS[r] ?? r}>
+                          {r}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Gaps */}
+                {reg.gaps.length > 0 && (
+                  <div>
+                    <span class="text-xs text-[var(--color-text-muted)] block mb-1">Regulatory Gaps</span>
+                    <ul class="space-y-1">
+                      {reg.gaps.map((gap: string) => (
+                        <li class="text-xs text-[var(--color-text-faint)] flex items-start gap-1.5">
+                          <span class="text-yellow-500 mt-0.5 shrink-0">!</span>
+                          <span>{gap}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
-
-              {/* Coverage Score */}
-              <div class="flex items-center gap-3 text-sm mb-3">
-                <span class="text-[var(--color-text-muted)]">Regulatory Coverage</span>
-                <div class="flex items-center gap-2 flex-1">
-                  <div class="flex-1 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden max-w-[120px]">
-                    <div
-                      class="h-full rounded-full"
-                      style={`width: ${reg.coverage_score * 100}%; background: ${reg.coverage_score >= 0.7 ? 'rgb(34,197,94)' : reg.coverage_score >= 0.4 ? 'rgb(234,179,8)' : 'rgb(239,68,68)'}`}
-                    />
-                  </div>
-                  <span class={`font-mono font-bold text-xs ${reg.coverage_score >= 0.7 ? 'text-green-400' : reg.coverage_score >= 0.4 ? 'text-yellow-400' : 'text-red-400'}`}>
-                    {reg.coverage_score.toFixed(1)}
-                  </span>
-                  <span class="text-[var(--color-text-faint)] text-xs">/ 1.0</span>
-                </div>
-              </div>
-
-              {/* 524B Requirements */}
-              {reg.applicable_requirements.length > 0 && (
-                <div class="mb-3">
-                  <span class="text-xs text-[var(--color-text-muted)] block mb-1">524B Requirements</span>
-                  <div class="flex flex-wrap gap-1.5">
-                    {reg.applicable_requirements.map((r: string) => (
-                      <span class="px-1.5 py-0.5 rounded text-xs font-mono bg-[var(--color-border)] text-[var(--color-text-muted)]" title={REQ_LABELS[r] ?? r}>
-                        {r}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Gaps */}
-              {reg.gaps.length > 0 && (
-                <div>
-                  <span class="text-xs text-[var(--color-text-muted)] block mb-1">Regulatory Gaps</span>
-                  <ul class="space-y-1">
-                    {reg.gaps.map((gap: string) => (
-                      <li class="text-xs text-[var(--color-text-faint)] flex items-start gap-1.5">
-                        <span class="text-yellow-500 mt-0.5 shrink-0">!</span>
-                        <span>{gap}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          )}
+            )}
+          </div>
         </div>
+
+        <!-- Right: Neural Impact -->
+        <div class="glass rounded-xl p-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Neural Impact</h3>
+          <p class="text-xs text-[var(--color-text-muted)] mb-3">
+            {threat.bands.length} of 7 neural bands affected
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            {threat.bands.map((band: string) => (
+              <span
+                class="px-2 py-0.5 rounded-full text-xs font-bold"
+                style={`background: ${accentColor}20; color: ${accentColor}; border: 1px solid ${accentColor}30;`}
+              >
+                {band}
+              </span>
+            ))}
+          </div>
+          <BrainVisualization
+            client:load
+            views={techniqueBrainView}
+            defaultView="security"
+            hideViewToggle={true}
+          />
+        </div>
+      </div>
+    )}
+
+    <!-- Neural Impact standalone (when no governance data) -->
+    {!hasGovernance && (
+      <div class="glass rounded-xl p-4 mb-8 max-w-md">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Neural Impact</h3>
+        <p class="text-xs text-[var(--color-text-muted)] mb-3">
+          {threat.bands.length} of 7 neural bands affected
+        </p>
+        <div class="flex flex-wrap gap-1.5 mb-4">
+          {threat.bands.map((band: string) => (
+            <span
+              class="px-2 py-0.5 rounded-full text-xs font-bold"
+              style={`background: ${accentColor}20; color: ${accentColor}; border: 1px solid ${accentColor}30;`}
+            >
+              {band}
+            </span>
+          ))}
+        </div>
+        <BrainVisualization
+          client:load
+          views={techniqueBrainView}
+          defaultView="security"
+          hideViewToggle={true}
+        />
       </div>
     )}
 
