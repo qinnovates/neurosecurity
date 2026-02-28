@@ -1,0 +1,115 @@
+---
+/**
+ * PolicyInterventionMap.astro
+ * Four intervention windows as glass cards in a horizontal row (desktop)
+ * or vertical stack (mobile), with phase arrows between them.
+ */
+
+const windows = [
+  {
+    label: 'Before Phase 1',
+    actions: [
+      'Exercise access programs',
+      'Nutritional supplementation',
+      'Circadian hygiene protocols',
+      'Social connection infrastructure',
+    ],
+    prevents: 'Slow drift onset',
+    phaseAfter: 'Phase 1',
+  },
+  {
+    label: 'Between Phases 1\u20132',
+    actions: [
+      'Population screening',
+      'CRB-targeted outreach',
+      'Trauma-informed messaging',
+    ],
+    prevents: 'Replay activation',
+    phaseAfter: 'Phase 2',
+  },
+  {
+    label: 'During Phases 2\u20133',
+    actions: [
+      'Scale mental health before demand peaks',
+      'Substance use prevention',
+      'Media literacy campaigns',
+    ],
+    prevents: 'Cascade formation',
+    phaseAfter: 'Phase 3',
+  },
+  {
+    label: 'After Phase 3',
+    actions: [
+      'Neuroplasticity rehabilitation',
+      'Long-term monitoring programs',
+      'Neurorights baseline assessment',
+    ],
+    prevents: 'Identity restructuring',
+    phaseAfter: null,
+  },
+];
+---
+
+<div class="my-8">
+  <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
+    Policy Intervention Map
+  </h3>
+  <p class="text-xs text-[var(--color-text-faint)] mb-5">
+    Four windows of opportunity to interrupt the attack chain
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] gap-4 md:gap-0 items-stretch">
+    {windows.map((win, i) => (
+      <>
+        {/* Intervention Card */}
+        <div
+          class="glass rounded-xl p-5 flex flex-col justify-between"
+          style="border-left: 4px solid #10b981;"
+        >
+          {/* Window Label */}
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+              Window {i + 1}
+            </span>
+            <h4 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mt-1 mb-3">
+              {win.label}
+            </h4>
+
+            {/* Action Bullets */}
+            <ul class="space-y-1.5 mb-4">
+              {win.actions.map((action) => (
+                <li class="text-xs text-[var(--color-text-muted)] leading-relaxed flex items-start gap-1.5">
+                  <span class="text-emerald-400 mt-0.5 shrink-0">&#8226;</span>
+                  {action}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Prevents Label */}
+          <div class="mt-auto pt-3 border-t border-[var(--color-border)]">
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)]">
+              Prevents:
+            </span>
+            <span class="text-xs text-[var(--color-accent-primary)] ml-1 font-semibold">
+              {win.prevents}
+            </span>
+          </div>
+        </div>
+
+        {/* Phase Arrow Between Cards (desktop only, not after last) */}
+        {win.phaseAfter && (
+          <div class="hidden md:flex flex-col items-center justify-center px-2">
+            <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mb-1 whitespace-nowrap">
+              {win.phaseAfter}
+            </span>
+            <svg width="24" height="16" viewBox="0 0 24 16" aria-hidden="true">
+              <line x1="0" y1="8" x2="18" y2="8" stroke="#4b5563" stroke-width="1.5" />
+              <polygon points="16,4 24,8 16,12" fill="#4b5563" />
+            </svg>
+          </div>
+        )}
+      </>
+    ))}
+  </div>
+</div>

@@ -15,6 +15,7 @@
 ### Late February (Entries 66-80) — Neurorights, Physics Boundaries, Market Analysis
 | Entry | Topic | Link |
 |-------|-------|------|
+| 82 | QIF as general neural threat taxonomy — endogenous attack chain validation | [Entry 82](#entry-82-endogenous-attack-chain) |
 | 81 | NISS v1.1: CR/CD weight normalization + preprint v1.5 | [Entry 81](#entry-81-niss-v11-weight-normalization) |
 | 80 | NISS v1.1: CG split into CR + CD | [Entry 80](#entry-80-niss-v11-cg-split) |
 | 79 | Ferritin magnetoreceptor correction (claim retracted) | [Entry 79](#entry-79-ferritin-correction) |
@@ -319,6 +320,223 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 83: Heart as Natural Coherence Monitor — Cardiac Intrinsic Nervous System and QIF {#entry-83-heart-coherence-monitor}
+
+**Date:** 2026-02-28, ~13:30
+**Classification:** HYPOTHESIS (established neuroanatomy + theoretical QIF mapping)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 82 (endogenous attack chain), Entry 78 (determinism gradient), Entry 45 (dynamical systems)
+
+### Origin
+
+While developing the school question on cognitive drift measurement and mental identity baselines, Kevin pivoted to a connection between the cardiac intrinsic nervous system and QIF's coherence metric (Cs). The pivot originated from asking: if the brain is vulnerable to endogenous attack chains (Entry 82), what biological system monitors brain state with enough independence to serve as a coherence check?
+
+### Established Facts (Verified)
+
+- The cardiac intrinsic nervous system contains ~40,000 neurons (Armour 1991, 2007; Shivkumar et al. 2016, JCI)
+- These neurons process sensory information locally, have memory, and operate independently of CNS input
+- The vagus nerve is ~80% afferent (body-to-brain) and ~20% efferent (brain-to-body)
+- Chemical synapses are inherently unidirectional (presynaptic→postsynaptic). Electrical synapses (gap junctions) can be bidirectional
+- Heart-brain signaling is bidirectional but asymmetrically weighted toward afferent (heart→brain has more bandwidth)
+- Cardiac rhythm (~1-2 Hz) has a much higher signal-to-noise ratio than cortical oscillations (1-100+ Hz across multiple bands)
+- Egyptian mummification discarded the brain and preserved the heart as the seat of intelligence and identity (historical fact supporting cultural intuition about cardiac primacy)
+
+### Hypothesis: Heart as Nature's Coherence Metric
+
+The cardiac intrinsic nervous system may function as a lower-bandwidth, higher-reliability monitoring system for the higher-bandwidth, noisier cortical system. In security architecture terms: you don't use the complex system to monitor itself. You use a simpler, more reliable watchdog.
+
+Properties that support this mapping:
+- **Lower frequency** = higher signal-to-noise ratio (cardiac ~1-2 Hz vs cortical 1-100+ Hz)
+- **More regular** = easier to detect anomalies against baseline (heart rate variability is a well-studied biomarker)
+- **Predominantly afferent** = primarily a sensor, not an actuator (80/20 afferent/efferent ratio)
+- **Independent processing** = doesn't depend on the system it monitors (intrinsic cardiac neurons operate autonomously)
+
+This maps to QIF's Cs (coherence metric). The Boltzmann factor gating Kevin was deriving asks: should this signal pass? The heart's afferent stream may be the biological system asking the same question about the brain's internal states.
+
+### Connection to QIF Attack Surface Analysis
+
+Using QIF from an adjacent lens to compare brain vs heart vulnerability:
+- Brain: high-frequency, multi-band (N1-N7), wide attack surface, susceptible to slow drift (T0066), replay (T0067), cascade (T0023)
+- Heart: low-frequency, high-regularity, narrow attack surface, intrinsic nervous system provides local processing
+
+The brain's complexity (which enables cognition) is also what makes it vulnerable. The heart's simplicity (which limits its computational scope) is what makes it reliable as a monitor.
+
+### Cognitive Drift and Identity Baseline — School Question
+
+Kevin's bioethics question for school: How do we measure cognitive drift? Can we set a baseline? Should we?
+
+Three dimensions:
+1. **Feasibility:** Ienca & Andorno (2017) proposed EEG/fMRI for neurorights protection. Current technology CAN measure cognitive baselines. QIF's Cs is one candidate formalization.
+2. **Ethics:** If illness silently shifts cognitive state (measurable but not physically symptomatic), who owns the baseline? Does the pre-illness state define identity? Does the post-illness state? Mental integrity as a neuroright gets concrete here.
+3. **Safety:** Cognitive baseline datasets are more intimate than any other biometric. Neural identity signatures cannot be changed like passwords.
+
+**The paradox:** If a virus can silently shift cognitive state without noticeable physical symptoms, and the shift is measurable, then "mental identity" has a failure mode that "mental integrity" was designed to protect against. Current neurorights frameworks detect intrusion, not drift. QIF's kill chain model (Entry 82) provides a drift detection mechanism.
+
+### Calibrations Required
+
+- "Heart sends more signals to brain than brain to heart" — partially true (vagus is 80% afferent) but the afferents carry ALL visceral signals, not just cardiac. HeartMath Institute popularized this claim with loose framing.
+- "Slower signals = stronger" — directionally correct but the mechanism is regularity and redundancy, not raw speed. Lower frequency correlates with higher SNR in this context.
+- Cardiac neurons implementing Boltzmann gating — this is the hypothesis to test, not an established mechanism.
+
+### Potential Outputs
+
+- **School paper:** "Cognitive drift measurement: feasibility, ethics, and the identity problem" — directly usable for bioethics coursework
+- **QIF extension:** Cardiac coherence as an independent monitoring channel at the biological layer, complementing Cs at the neural layer
+- **Cross-disciplinary bridge:** Cardiac neuroscience + neurorights + QIF = a framework for identity-preserving health monitoring
+- **Book material:** The Egyptian heart-brain observation connects Kevin's philosophical instincts to established neuroscience history
+
+### Research Questions
+
+1. Does the cardiac intrinsic nervous system provide a measurable coherence signal that correlates with cognitive drift?
+2. Could cardiac coherence serve as a lower-cost, less invasive proxy for neural coherence in drift detection?
+3. Is the 80/20 afferent/efferent asymmetry of the vagus nerve functionally equivalent to a monitoring architecture (read-heavy, write-light)?
+
+---
+
+## Entry 82: QIF as General Neural Threat Taxonomy — Endogenous Attack Chain Validation {#entry-82-endogenous-attack-chain}
+
+**Date:** 2026-02-28, ~01:00
+**Classification:** HYPOTHESIS (strong inferential support from framework mapping; not empirically validated)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 45 (dynamical systems), Entry 50 (TARA dual-use), Entry 53 (DSM-5 mapping), Entry 77 (thesis)
+
+### Discovery
+
+While mapping personal health history (B12 deficiency, PTSD, peripheral neuropathy) through QIF's TARA attack chain, Kevin discovered that the framework's threat taxonomy maps endogenous biological failure modes with no BCI hardware involved. The neural bands (N1-N7), attack patterns (slow drift, replay, self-model corruption), and cascading vulnerability chains all applied to pure biology.
+
+### The Endogenous Attack Chain
+
+| Phase | Technique | Biological Analog | Primary Bands | Neurorights Eroded |
+|-------|-----------|-------------------|---------------|-------------------|
+| 1a | T0066 Slow drift (boiling frog) | B12 deficiency causing demyelination — sub-threshold, cumulative nerve sheath degradation | N1-N7 (bottom-up) | MI, PC |
+| 1b | T0025 Neuronal jamming | Erratic peripheral nerve firing from myelin damage — garbled sensory input | N1, N2, N4 | MI |
+| 2 | T0067 Phase dynamics replay | PTSD traumatic memory reconsolidation loop — amygdala-hippocampal autonomous replay | N6, N7 | CL, MI, PC |
+| 3 | T0039 Self-model corruption | Identity shift from compounded neural damage — depersonalization, "who am I now?" | N6, N7 | CL, MI, PC |
+
+**Chain reinforcement loop:** T0066 weakens substrate -> T0067 exploits weakened PFC suppression -> T0039 emerges from compounding -> corrupted self-model reduces capacity to detect T0066 -> cycle accelerates.
+
+### Key Insight: The Framework Generalizes Beyond BCI
+
+QIF was scoped to brain-computer interface security. The hourglass model assumes threats enter through synthetic layers (S3->S2->S1->I0->N-bands). But endogenous threats bypass the synthetic stack entirely:
+
+- **Biochemical entry** (B12 deficiency, neurotransmitter imbalance) — hits N-bands directly
+- **Sensory/experiential entry** (trauma) — enters through normal perception, exploits N6-N7
+- **Autoimmune entry** (demyelination) — the body attacks its own neural infrastructure
+
+None of these touch S1-S3 or I0. They target N-bands directly. Yet the attack patterns (slow drift, replay, jamming, self-model corruption), severity dynamics, and neurorights erosion all mapped accurately.
+
+**Implication:** The neural bands and attack taxonomy capture something fundamental about how the nervous system fails — not just how it can be attacked through a device. BCI threats are a subset of a larger neural threat space. The device adds a port; the attack surface was always there.
+
+### Gap Identified: No Existing Psychology Framework Does This
+
+Existing frameworks compared:
+- **DSM-5:** Classification catalog. Names what is broken, does not chain how one break enables the next
+- **Biopsychosocial model:** Says factors interact, does not specify the chain
+- **ACE scores:** Counts adverse experiences, does not model which vulnerabilities they open
+- **Allostatic load:** Cumulative wear as a single number, not a kill chain
+- **Polyvagal theory:** Models threat response states, not the attack surface
+- **Network psychopathology (Borsboom):** Symptom nodes activating each other — closest analog, but no severity scoring, no bands, no defense model
+
+None enumerate the attack surface, chain exploits, score severity per vector, model detection capability, or propose defense in depth. QIF does all five.
+
+### Human Decision
+
+Kevin: "Shows my mappings work very well outside of the BCI space and is designed at scale as intended."
+
+**Decision:** This is captured as HYPOTHESIS, not VERIFIED. The mapping is inferentially strong but has not been empirically validated by clinical neuroscience. The framework was not designed for this use case — it emerged from personal application. This needs:
+1. Literature review: does computational psychiatry have anything approaching this?
+2. Cross-AI validation: present the chain to Gemini/ChatGPT for adversarial review
+3. Clinical review: would a neurologist or psychiatrist find the chain mechanistically sound?
+
+### Potential Outputs
+
+- **Paper:** "QIF as a general neural threat taxonomy: endogenous attack chain case study"
+- **Blog post:** Personal narrative framing — "I built a framework to secure BCIs, then used it to understand what happened to my own nervous system"
+- **Book chapter:** For "From Kidnapped to Kingdom" — the moment the framework reflected back
+- **Framework scope revision:** Consider whether QIF v8.0 should formally acknowledge endogenous threat vectors (biochemical, experiential, autoimmune) as entry points that bypass the synthetic stack
+
+### Research Question Posed
+
+**Do adversarial threat taxonomies generalize to endogenous neural failure modes?** If yes, security engineering and clinical neuroscience have been studying the same system from opposite ends — and neither field has the other's tools.
+
+### COVID as Second Threat Actor
+
+The original chain mapped B12 deficiency and PTSD. COVID-19 introduces a second simultaneous threat actor through biochemical/inflammatory vectors:
+
+| Vector | Mechanism | Bands |
+|--------|-----------|-------|
+| Neuroinflammation | Cytokine-mediated blood-brain barrier permeability, microglial activation | N1-N4 |
+| Cytokine storm | IL-6, TNF-alpha flooding — signal-to-noise collapse at cellular level | N1-N3 |
+| COVID fog | Executive function degradation — reduced PFC capacity to suppress T0067 replay | N5-N7 |
+
+**Dual-vector convergence:** COVID and PTSD are independent threat actors that converge on the same neural substrate. COVID degrades bottom-up (biochemical entry at N1), PTSD exploits top-down (experiential entry at N6-N7). The weakened substrate from one vector reduces defenses against the other. Quarantine removed competing sensory input, giving the PTSD replay loop an empty room to echo in.
+
+### Stochastic Framing — Not Deterministic
+
+Phase transitions in the endogenous attack chain are probabilities, not certainties. Free will = Cognitive Liberty = the intervention point that modulates transition probability at each phase boundary.
+
+```
+P(Phase N → N+1) = f(substrate_integrity, environmental_stressors,
+                     CRB_vulnerability, cognitive_liberty_remaining,
+                     free_will_intervention)  ← irreducible
+```
+
+Reference Entry 78 determinism gradient: S-bands are deterministic (physics, electronics), N-bands range from stochastic (N1-N3 electrochemistry) through chaotic (N4-N5 network dynamics) to quantum uncertain (N6-N7 consciousness). The further up the hourglass, the less predictable individual outcomes become. Population-level statistics hold; individual paths diverge.
+
+"We can't predict who will break the chain. But we can predict what degrades their probability of breaking it."
+
+### The BCI Bridge — Compounded Attack Surface
+
+If endogenous threats already degrade the neural substrate, BCI-dependent patients face compounded risk:
+
+1. **Biological degradation** (endogenous): T0066/T0067/T0039 chain from illness, trauma, isolation
+2. **Device attack surface** (exogenous): Standard QIF threat model through S3→S2→S1→I0→N-bands
+3. **Compound effect**: A patient whose neural substrate is already weakened by endogenous factors has reduced capacity to detect or resist device-mediated attacks
+
+**Kevin (verbatim):** "The chain of unfortunate events fostered by isolation and quarantine is cataclysmic; it's scary to see what can happen to any normal individual when vulnerable. Now, imagine the patients who rely on BCIs to restore their vision, or motor movements."
+
+**Kevin (verbatim):** "Who or what watches the watcher to ensure trust is verified rather than inherent given the chaotic nature of said environment(s)?"
+
+QIF's zero-trust at I0 is designed to answer that question. The interface band verifies every signal crossing the biology-silicon boundary, regardless of whether the threat originates from the device side or the biological side.
+
+### Policy Application — Population-Scale Neural Threat Modeling
+
+If QIF can model the neural consequences of quarantine/isolation, it can model any population-scale intervention that triggers Phase 1:
+
+| Trigger | Phase 1 Vector | Populations at Elevated Risk |
+|---------|---------------|------------------------------|
+| Quarantine/lockdown | Social isolation → reduced sensory input → replay amplification | Pre-existing PTSD, elderly, children |
+| Drought/famine | Nutritional deficiency → slow drift (B12, folate, iron) | Children, pregnant women, elderly |
+| Forced displacement | Trauma + nutritional + isolation compound | All displaced populations |
+| Healthcare collapse | Moral injury → sustained T0029 + loss of treatment access | Healthcare workers, chronic patients |
+
+**CRB population vulnerability table:**
+
+| Population | CRB | Elevated Risk |
+|------------|-----|---------------|
+| Children (under 12) | 0.55+ | Developmental window: Phase 1 rewires permanently |
+| Pre-existing PTSD | 0.50+ | Phase 2 activates immediately, not at week 2 |
+| Elderly (65+) | 0.45+ | Reduced neuroplasticity = Phase 1 less reversible |
+| Pre-existing MDD | 0.40+ | Phase 3 cascade onset accelerated |
+| Substance use history | 0.50+ | Self-medication accelerates T0066, bypasses defenses |
+| Healthcare workers | 0.35+ | Sustained T0029 from moral injury + exposure |
+| BCI-dependent patients | 0.60+ | Compounded: biological + device attack surface |
+
+**Application:** Can QIF help WHO/governance bodies predict which populations will experience which phases, and when? If so, interventions can be staged rather than reactive.
+
+### QIF Scales Beyond BCI — Further Evidence
+
+This endogenous chain provides further evidence that the original design intent — building on physics measurements rather than IT analogies — enables scaling beyond the initial BCI scope. The hourglass bands capture physical properties of the nervous system. Attack patterns describe how those properties degrade. The framework does not assume a device is present.
+
+**Implication for v8.0:** Consider formally acknowledging three endogenous entry vectors that bypass the synthetic stack:
+1. **Biochemical** (nutritional deficiency, neurotransmitter imbalance, hormonal disruption)
+2. **Inflammatory/viral** (neuroinflammation, cytokine flooding, autoimmune demyelination)
+3. **Experiential** (trauma, chronic stress, sensory deprivation)
+
+These do not replace the S3→S2→S1→I0→N pathway. They add direct N-band entry points that the current hourglass model does not explicitly represent.
 
 ---
 

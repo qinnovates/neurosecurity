@@ -1,0 +1,176 @@
+---
+interface Phase {
+  id: string;
+  techniques: string[];
+  name: string;
+  covidAnalog: string;
+  ptsdAnalog: string;
+  bands: string[];
+  severity: string;
+  color: string;
+  neurorights: string[];
+  population: string;
+}
+
+interface Props {
+  phases: Phase[];
+}
+
+const { phases } = Astro.props;
+const allBands = ['N1', 'N2', 'N3', 'N4', 'N5', 'N6', 'N7'];
+---
+
+<div class="attack-chain-flow flex flex-col items-center w-full">
+  {phases.map((phase, i) => (
+    <>
+      {/* Phase Card */}
+      <div
+        class="glass rounded-xl p-6 w-full relative"
+        style={`border-left: 4px solid ${phase.color};`}
+      >
+        {/* Phase ID Badge */}
+        <span
+          class="absolute top-3 left-3 text-[10px] font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded-full"
+          style={`background: ${phase.color}20; color: ${phase.color};`}
+        >
+          Phase {phase.id}
+        </span>
+
+        {/* Technique Links */}
+        <div class="flex flex-wrap gap-1.5 mt-5 mb-2">
+          {phase.techniques.map((tech) => (
+            <a
+              href={`/TARA/QIF-${tech}/`}
+              class="text-[10px] font-[family-name:var(--font-mono)] px-2 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)] hover:text-white transition-colors"
+            >
+              {tech}
+            </a>
+          ))}
+        </div>
+
+        {/* Phase Name */}
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">
+          {phase.name}
+        </h3>
+
+        {/* Two-Column Analogs */}
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] px-3 py-2.5">
+            <div class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">
+              COVID / Inflammatory
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+              {phase.covidAnalog}
+            </p>
+          </div>
+          <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] px-3 py-2.5">
+            <div class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">
+              PTSD / Experiential
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+              {phase.ptsdAnalog}
+            </p>
+          </div>
+        </div>
+
+        {/* Band Impact */}
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)]">
+            Bands:
+          </span>
+          <div class="flex gap-1.5">
+            {allBands.map((band) => (
+              <div class="flex flex-col items-center gap-0.5">
+                <div
+                  class="w-3 h-3 rounded-full border"
+                  style={
+                    phase.bands.includes(band)
+                      ? `background: ${phase.color}; border-color: ${phase.color};`
+                      : `background: transparent; border-color: #4b5563;`
+                  }
+                />
+                <span class="text-[8px] text-[var(--color-text-faint)]">{band}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Row: Neurorights + Population */}
+        <div class="flex items-center justify-between">
+          <div class="flex flex-wrap gap-1.5">
+            {phase.neurorights.map((nr) => (
+              <span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-semibold">
+                {nr}
+              </span>
+            ))}
+          </div>
+          <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">
+            {phase.population}
+          </span>
+        </div>
+      </div>
+
+      {/* Downward Arrow Between Cards */}
+      {i < phases.length - 1 && (
+        <svg width="24" height="40" viewBox="0 0 24 40" class="my-1 shrink-0" aria-hidden="true">
+          <line
+            x1="12" y1="0" x2="12" y2="32"
+            stroke={phases[i + 1].color}
+            stroke-width="2"
+            stroke-dasharray="4 3"
+          />
+          <polygon
+            points="6,30 12,40 18,30"
+            fill={phases[i + 1].color}
+          />
+        </svg>
+      )}
+    </>
+  ))}
+
+  {/* Feedback / Reinforcement Loop */}
+  {phases.length > 1 && (
+    <div class="relative w-full mt-2">
+      <svg
+        width="100%"
+        height="120"
+        viewBox="0 0 400 120"
+        preserveAspectRatio="xMidYMid meet"
+        class="overflow-visible"
+        aria-hidden="true"
+      >
+        {/* Curved path from bottom-center up the right side and back to top-center */}
+        <path
+          d="M 200,5 C 380,5 380,115 200,115"
+          fill="none"
+          stroke="#ef4444"
+          stroke-width="2"
+          stroke-dasharray="6 4"
+        />
+        {/* Arrowhead at the top end */}
+        <polygon points="200,0 194,10 206,10" fill="#ef4444" />
+        {/* Label */}
+        <text
+          x="340"
+          y="65"
+          fill="#94a3b8"
+          font-size="11"
+          text-anchor="middle"
+          font-family="sans-serif"
+        >
+          Reinforcement
+        </text>
+        <text
+          x="340"
+          y="80"
+          fill="#94a3b8"
+          font-size="11"
+          text-anchor="middle"
+          font-family="sans-serif"
+        >
+          Loop
+        </text>
+      </svg>
+    </div>
+  )}
+</div>

@@ -1,0 +1,116 @@
+---
+/**
+ * DualVectorDiagram.astro
+ * Pure SVG diagram showing how COVID (inflammatory) and PTSD (experiential)
+ * vectors converge on weakened neural substrate and trigger cascade activation.
+ */
+---
+
+<div class="glass rounded-xl p-6 my-8">
+  <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
+    Dual-Vector Convergence Model
+  </h3>
+  <p class="text-xs text-[var(--color-text-faint)] mb-4">
+    Two independent threat vectors converge on the same neural substrate
+  </p>
+
+  <svg
+    viewBox="0 0 500 600"
+    width="100%"
+    height="auto"
+    preserveAspectRatio="xMidYMid meet"
+    role="img"
+    aria-label="Dual vector convergence diagram showing COVID and PTSD pathways merging into cascade activation"
+  >
+    <defs>
+      <marker id="arrow-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#ef4444" />
+      </marker>
+      <marker id="arrow-cyan" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#06b6d4" />
+      </marker>
+      <marker id="arrow-amber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#f59e0b" />
+      </marker>
+      <marker id="arrow-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#a855f7" />
+      </marker>
+      <marker id="arrow-feedback" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#94a3b8" />
+      </marker>
+    </defs>
+
+    {/* === Source Circles === */}
+    <circle cx="150" cy="50" r="35" fill="#ef4444" opacity="0.85" />
+    <text x="150" y="46" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">COVID</text>
+    <text x="150" y="60" text-anchor="middle" fill="#fecaca" font-size="9">Inflammatory</text>
+
+    <circle cx="350" cy="50" r="35" fill="#06b6d4" opacity="0.85" />
+    <text x="350" y="46" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">PTSD</text>
+    <text x="350" y="60" text-anchor="middle" fill="#cffafe" font-size="9">Experiential</text>
+
+    {/* === COVID Branch Arrows === */}
+    <line x1="130" y1="83" x2="90" y2="140" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrow-red)" />
+    <line x1="170" y1="83" x2="210" y2="140" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrow-red)" />
+
+    {/* === COVID Branch Boxes === */}
+    <rect x="30" y="145" width="130" height="36" rx="6" fill="#ef444420" stroke="#ef4444" stroke-width="1" />
+    <text x="95" y="167" text-anchor="middle" fill="#e2e8f0" font-size="11">Neuroinflammation</text>
+
+    <rect x="155" y="145" width="120" height="36" rx="6" fill="#ef444420" stroke="#ef4444" stroke-width="1" />
+    <text x="215" y="167" text-anchor="middle" fill="#e2e8f0" font-size="11">Cytokine Storm</text>
+
+    {/* === PTSD Branch Arrows === */}
+    <line x1="330" y1="83" x2="290" y2="140" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+    <line x1="370" y1="83" x2="410" y2="140" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+
+    {/* === PTSD Branch Boxes === */}
+    <rect x="225" y="145" width="130" height="36" rx="6" fill="#06b6d420" stroke="#06b6d4" stroke-width="1" />
+    <text x="290" y="167" text-anchor="middle" fill="#e2e8f0" font-size="11">Traumatic Replay</text>
+
+    <rect x="345" y="145" width="130" height="36" rx="6" fill="#06b6d420" stroke="#06b6d4" stroke-width="1" />
+    <text x="410" y="167" text-anchor="middle" fill="#e2e8f0" font-size="11">Amygdala Hijack</text>
+
+    {/* === Convergence Arrows to Center Box === */}
+    <line x1="95" y1="181" x2="200" y2="280" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+    <line x1="215" y1="181" x2="230" y2="280" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+    <line x1="290" y1="181" x2="270" y2="280" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+    <line x1="410" y1="181" x2="300" y2="280" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+
+    {/* === Center Convergence Box === */}
+    <rect x="150" y="285" width="200" height="50" rx="8" fill="#f59e0b20" stroke="#f59e0b" stroke-width="1.5" />
+    <text x="250" y="305" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="bold">Weakened Neural</text>
+    <text x="250" y="322" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="bold">Substrate</text>
+
+    {/* === Arrow to Cascade Activation === */}
+    <line x1="250" y1="335" x2="250" y2="385" stroke="#a855f7" stroke-width="1.5" marker-end="url(#arrow-purple)" />
+
+    {/* === Cascade Activation Box === */}
+    <rect x="150" y="390" width="200" height="44" rx="8" fill="#a855f720" stroke="#a855f7" stroke-width="1.5" />
+    <text x="250" y="417" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="bold">Cascade Activation</text>
+
+    {/* === Arrow to Self-Model Corruption === */}
+    <line x1="250" y1="434" x2="250" y2="475" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrow-red)" />
+
+    {/* === Self-Model Corruption Box === */}
+    <rect x="140" y="480" width="220" height="44" rx="8" fill="#ef444420" stroke="#ef4444" stroke-width="1.5" />
+    <text x="250" y="507" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="bold">Self-Model Corruption</text>
+
+    {/* === Feedback Loop === */}
+    <path
+      d="M 360,500 C 470,500 480,60 350,35"
+      fill="none"
+      stroke="#94a3b8"
+      stroke-width="1.5"
+      stroke-dasharray="5 4"
+      marker-end="url(#arrow-feedback)"
+    />
+    {/* Feedback Label */}
+    <text x="475" y="260" fill="#94a3b8" font-size="9" text-anchor="middle" transform="rotate(90, 475, 260)">
+      Reduced Detection
+    </text>
+    <text x="460" y="260" fill="#94a3b8" font-size="9" text-anchor="middle" transform="rotate(90, 460, 260)">
+      Accelerated Degradation
+    </text>
+  </svg>
+</div>

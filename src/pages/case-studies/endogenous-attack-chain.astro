@@ -1,0 +1,468 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import AttackChainFlow from '../../components/case-study/AttackChainFlow.astro';
+import DualVectorDiagram from '../../components/case-study/DualVectorDiagram.astro';
+import PolicyInterventionMap from '../../components/case-study/PolicyInterventionMap.astro';
+
+const phases = [
+  {
+    id: '1a',
+    techniques: ['T0066'],
+    name: 'Slow Drift',
+    covidAnalog: 'COVID neuroinflammation: cytokine-mediated BBB permeability, microglial activation, progressive cognitive fog. Sub-threshold cumulative damage over weeks.',
+    ptsdAnalog: 'B12 demyelination: sub-threshold cumulative nerve sheath degradation. Peripheral neuropathy onset is gradual, invisible on standard blood panels until severe.',
+    bands: ['N1', 'N2', 'N3', 'N4', 'N5', 'N6', 'N7'],
+    severity: 'high',
+    color: '#f59e0b',
+    neurorights: ['MI', 'PC'],
+    population: '~100% exposed',
+  },
+  {
+    id: '1b',
+    techniques: ['T0025', 'T0029'],
+    name: 'Jamming + Denial of Service',
+    covidAnalog: 'Cytokine flooding: IL-6/TNF-alpha saturation collapses signal-to-noise ratio at the cellular level. Neural communication degrades under inflammatory load.',
+    ptsdAnalog: 'Erratic peripheral nerve firing from myelin damage. Garbled sensory input reaches the CNS. The brain receives corrupted data from its own sensors.',
+    bands: ['N1', 'N2', 'N4'],
+    severity: 'critical',
+    color: '#ef4444',
+    neurorights: ['MI'],
+    population: '~60-80% of Phase 1',
+  },
+  {
+    id: '2',
+    techniques: ['T0067'],
+    name: 'Replay Attack',
+    covidAnalog: 'Quarantine removes competing sensory input. The brain\'s signal environment becomes monotonic. Amygdala echoes in an empty room.',
+    ptsdAnalog: 'Traumatic memory reconsolidation loop. Amygdala-hippocampal autonomous replay cycle. Each iteration reinforces the neural pathway. The memory replays itself.',
+    bands: ['N6', 'N7'],
+    severity: 'high',
+    color: '#06b6d4',
+    neurorights: ['CL', 'MI', 'PC'],
+    population: '~30-50% of Phase 1b',
+  },
+  {
+    id: '3',
+    techniques: ['T0023'],
+    name: 'Cascade',
+    covidAnalog: 'Biological loop: inflammation triggers fog, fog triggers anxiety, anxiety triggers cortisol, cortisol triggers inflammation. Self-reinforcing. Substance use as accelerant.',
+    ptsdAnalog: 'Psychological loop: replay triggers insomnia, insomnia triggers cognitive decline, decline triggers vulnerability, vulnerability triggers replay. Each cycle deepens the groove.',
+    bands: ['N1', 'N2', 'N3', 'N4', 'N5', 'N6', 'N7'],
+    severity: 'critical',
+    color: '#a855f7',
+    neurorights: ['CL', 'MI', 'PC'],
+    population: '~15-25% of Phase 2',
+  },
+  {
+    id: '4',
+    techniques: ['T0039', 'T0060'],
+    name: 'Self-Model Corruption + Cross-Session Persistence',
+    covidAnalog: 'Long COVID identity shift. "I used to be sharp." Executive function changes become the new baseline. The pre-illness self is a memory, not a state.',
+    ptsdAnalog: 'Identity restructuring under compounded damage. Depersonalization. "I\'m not who I was." The corrupted self-model becomes the only self-model. Recovery requires rebuilding, not restoring.',
+    bands: ['N5', 'N6', 'N7'],
+    severity: 'critical',
+    color: '#ef4444',
+    neurorights: ['CL', 'MI', 'PC', 'IDA'],
+    population: '~5-15% of Phase 3',
+  },
+];
+---
+
+<PageLayout
+  title="Case Study: Endogenous Neural Attack Chain"
+  description="Mapping an endogenous neural attack chain through QIF's TARA framework — no BCI required. B12 deficiency, COVID neuroinflammation, and PTSD as threat actors targeting the nervous system."
+  breadcrumbs={[
+    { label: 'TARA', href: '/TARA/' },
+    { label: 'Case Studies', href: '/case-studies/' },
+    { label: 'Endogenous Attack Chain' },
+  ]}
+>
+  <article class="max-w-3xl mx-auto pb-24">
+    <!-- Header -->
+    <header class="mb-12 mt-8">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-3">Case Study &middot; Endogenous Threat Vectors</p>
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+        When Your Body Is the Threat Actor
+      </h1>
+      <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-6">
+        Mapping an endogenous neural attack chain through QIF. No BCI required. Three biological threat vectors. Five attack phases. The same framework that secures brain-computer interfaces maps how the nervous system fails from the inside.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">Case Study</span>
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">Endogenous</span>
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">QIF</span>
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">PTSD</span>
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">B12</span>
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">COVID</span>
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">Neurorights</span>
+        <span class="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">Public Health</span>
+      </div>
+    </header>
+
+    <!-- Disclaimer -->
+    <div class="glass rounded-xl p-6 mb-12 border-l-4 border-[#f59e0b]">
+      <p class="text-sm font-semibold text-[#f59e0b] mb-2">Disclaimer</p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        This is not clinical neuroscience. This is a security engineer using a threat modeling framework he built to understand what happened to his own nervous system. If the mapping is wrong, the framework needs to account for that. If it's right, the framework just passed a different kind of validation.
+      </p>
+    </div>
+
+    <!-- Section A: The Attack Surface -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">The Attack Surface: Why This Is Different</h2>
+      <div class="prose mb-6">
+        <p>
+          QIF models threats entering through synthetic layers: firmware, drivers, signal processing, the interface band, then neural tissue. Endogenous threats skip all of that. They start inside.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-6 my-6 font-[family-name:var(--font-mono)] text-xs leading-relaxed overflow-x-auto">
+        <pre class="text-[var(--color-text-muted)]">
+  Standard QIF entry (exogenous):
+
+  Adversary ──► S3 (Firmware) ──► S2 (Driver) ──► S1 (Signal) ──► I0 (Interface) ──► N-bands
+                ▲                                                    ▲
+                └── Firewall, IDS, authentication, encryption ───────┘
+
+  Endogenous entry (no device):
+
+  Biochemistry ─────────────────────────────────────────────────────► N1-N7 directly
+  Inflammation ─────────────────────────────────────────────────────► N1-N4 directly
+  Trauma ───────────────────────────────────────────────────────────► N6-N7 directly
+                                                                      ▲
+                                                                      │
+                                                               No synthetic stack.
+                                                               No firewall to traverse.
+                                                               The threat IS the substrate.
+
+  Three endogenous vectors:
+  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
+  │  NUTRITIONAL      │  │  VIRAL /          │  │  EXPERIENTIAL    │
+  │  B12 deficiency   │  │  INFLAMMATORY     │  │  Trauma (PTSD)   │
+  │  Folate, iron     │  │  COVID-19         │  │  Chronic stress  │
+  │  Slow drift       │  │  Cytokine storm   │  │  Replay attack   │
+  │  T0066            │  │  T0025 + T0029    │  │  T0067           │
+  └──────────────────┘  └──────────────────┘  └──────────────────┘</pre>
+      </div>
+
+      <div class="glass rounded-xl p-5 border-l-4 border-[var(--color-accent-primary)]">
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          <strong class="text-[var(--color-text-primary)]">The brain has always had an attack surface. BCIs just add a new port.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Section B: The Kill Chain -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">The Kill Chain: 5 Phases</h2>
+      <div class="prose mb-6">
+        <p>
+          Each phase maps to one or more TARA techniques. The chain is not linear: Phase 4 feeds back into Phase 1, creating a reinforcement loop that accelerates degradation. Population estimates are from published COVID mental health prevalence data (Brooks et al. 2020, Lancet; WHO MHPSS reports) and are approximations, not QIF-derived calculations.
+        </p>
+      </div>
+
+      <AttackChainFlow phases={phases} />
+    </section>
+
+    <!-- Section C: Dual-Vector Convergence -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Dual-Vector Convergence</h2>
+      <div class="prose mb-6">
+        <p>
+          COVID and PTSD are independent threat actors that converge on the same neural substrate. COVID degrades bottom-up through biochemical entry at N1. PTSD exploits top-down through experiential entry at N6-N7. The weakened substrate from one vector reduces defenses against the other. Quarantine removed competing sensory input, creating the conditions for replay amplification.
+        </p>
+      </div>
+
+      <DualVectorDiagram />
+    </section>
+
+    <!-- Section D: Reinforcement Loop -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">The Reinforcement Loop</h2>
+      <div class="prose mb-4">
+        <p>
+          The chain does not terminate. Phase 4 (self-model corruption) reduces the brain's capacity to detect Phase 1 (slow drift), which accelerates degradation, which deepens the replay loop, which compounds the cascade.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-6 my-6 font-[family-name:var(--font-mono)] text-xs leading-relaxed overflow-x-auto">
+        <pre class="text-[var(--color-text-muted)]">
+  ┌──────────────────────────────────────────────────────────────┐
+  │                                                              │
+  │   T0066 (Slow Drift)                                         │
+  │       │                                                      │
+  │       ▼                                                      │
+  │   Weakened substrate                                         │
+  │       │                                                      │
+  │       ▼                                                      │
+  │   T0067 (Replay) exploits weakened PFC suppression           │
+  │       │                                                      │
+  │       ▼                                                      │
+  │   T0039 (Self-Model Corruption) emerges from compounding     │
+  │       │                                                      │
+  │       ▼                                                      │
+  │   Reduced detection capacity                                 │
+  │       │                                                      │
+  │       └──────────────────────► T0066 accelerates ────────┐   │
+  │                                                          │   │
+  │   ◄──────────────────────────────────────────────────────┘   │
+  │                                                              │
+  └──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+    </section>
+
+    <!-- Section E: Stochastic Framing -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Not Deterministic: The Stochastic Framing</h2>
+      <div class="prose mb-6">
+        <p>
+          Phase transitions are probabilities, not certainties. Not everyone exposed to Phase 1 progresses to Phase 2. Not everyone in Phase 3 reaches Phase 4. The chain describes what becomes possible at each stage, not what will happen.
+        </p>
+        <p>
+          Free will is the intervention point. In QIF terms: Cognitive Liberty (CL) is the neuroright that modulates transition probability at each phase boundary. The more CL is eroded (by isolation, by inflammation, by compounded damage), the higher the transition probability.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-6 mb-6 border-l-4 border-[var(--color-accent-secondary)]">
+        <p class="text-xs font-semibold text-[var(--color-accent-secondary)] uppercase tracking-wider mb-3">Phase Transition Probability</p>
+        <pre class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-text-muted)] leading-relaxed overflow-x-auto">P(Phase N &rarr; N+1) = f(substrate_integrity,
+                       environmental_stressors,
+                       CRB_vulnerability,
+                       cognitive_liberty_remaining,
+                       free_will_intervention)  &larr; irreducible</pre>
+      </div>
+
+      <div class="glass rounded-xl p-5">
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          Entry 78 established the determinism gradient across the hourglass: S-bands are deterministic (physics, electronics). N-bands range from stochastic (N1-N3 electrochemistry) through chaotic (N4-N5 network dynamics) to quantum uncertain (N6-N7 consciousness). The further up the hourglass, the less predictable individual outcomes become. Population-level statistics hold. Individual paths diverge.
+        </p>
+        <p class="text-sm text-[var(--color-text-primary)] font-semibold mt-4">
+          We can't predict who will break the chain. But we can predict what degrades their probability of breaking it.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section F: The BCI Bridge -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">The BCI Bridge: Why This Matters for Patients</h2>
+      <div class="prose mb-6">
+        <p>
+          Now imagine the patients who rely on BCIs to restore their vision, or motor movements.
+        </p>
+        <p>
+          If endogenous threats already degrade the neural substrate, BCI-dependent patients face compounded risk. The biological degradation from Phase 1-4 weakens the same neural tissue that the BCI interfaces with. A patient whose substrate is already compromised has reduced capacity to detect or resist device-mediated attacks.
+        </p>
+        <p>
+          The same framework models both the biological degradation AND the device attack surface. Standard QIF threat modeling covers S3 through I0. This case study demonstrates that the N-band portion of the model also captures endogenous failure modes. Together, they represent the complete threat surface for a BCI-dependent patient living through a pandemic.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-6 border-l-4 border-[#ef4444]">
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed italic">
+          "Who or what watches the watcher to ensure trust is verified rather than inherent, given the chaotic nature of said environment(s)?"
+        </p>
+        <p class="text-sm text-[var(--color-text-muted)] mt-3">
+          QIF's zero-trust at I0 answers this. The interface band verifies every signal crossing the biology-silicon boundary, regardless of whether the threat originates from the device side or the biological side.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section G: CRB Population Vulnerability -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Population Vulnerability</h2>
+      <div class="prose mb-4">
+        <p>
+          CRB (Cognitive Risk Baseline) estimates which populations face elevated risk at each phase. These values are theoretical estimates based on published literature, not empirically derived QIF scores.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-6 border-l-4 border-orange-500">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left text-xs font-bold uppercase text-[var(--color-text-faint)] py-2 pr-4">Population</th>
+                <th class="text-right text-xs font-bold uppercase text-[var(--color-text-faint)] py-2 px-3">CRB</th>
+                <th class="text-left text-xs font-bold uppercase text-[var(--color-text-faint)] py-2 pl-3">Elevated Risk</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)] border-opacity-30">
+                <td class="py-2.5 pr-4 font-medium text-[var(--color-text-primary)]">Children (under 12)</td>
+                <td class="py-2.5 px-3 text-right font-[family-name:var(--font-mono)] text-[#f59e0b]">0.55+</td>
+                <td class="py-2.5 pl-3 text-[var(--color-text-muted)] text-xs">Developmental window: Phase 1 rewires permanently</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)] border-opacity-30">
+                <td class="py-2.5 pr-4 font-medium text-[var(--color-text-primary)]">Pre-existing PTSD</td>
+                <td class="py-2.5 px-3 text-right font-[family-name:var(--font-mono)] text-[#f59e0b]">0.50+</td>
+                <td class="py-2.5 pl-3 text-[var(--color-text-muted)] text-xs">Phase 2 activates immediately, not at week 2</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)] border-opacity-30">
+                <td class="py-2.5 pr-4 font-medium text-[var(--color-text-primary)]">Elderly (65+)</td>
+                <td class="py-2.5 px-3 text-right font-[family-name:var(--font-mono)] text-[#ef4444]">0.45+</td>
+                <td class="py-2.5 pl-3 text-[var(--color-text-muted)] text-xs">Reduced neuroplasticity = Phase 1 less reversible</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)] border-opacity-30">
+                <td class="py-2.5 pr-4 font-medium text-[var(--color-text-primary)]">Pre-existing MDD</td>
+                <td class="py-2.5 px-3 text-right font-[family-name:var(--font-mono)] text-[#f59e0b]">0.40+</td>
+                <td class="py-2.5 pl-3 text-[var(--color-text-muted)] text-xs">Phase 3 cascade onset accelerated</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)] border-opacity-30">
+                <td class="py-2.5 pr-4 font-medium text-[var(--color-text-primary)]">Substance use history</td>
+                <td class="py-2.5 px-3 text-right font-[family-name:var(--font-mono)] text-[#f59e0b]">0.50+</td>
+                <td class="py-2.5 pl-3 text-[var(--color-text-muted)] text-xs">Self-medication accelerates T0066, bypasses defenses</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)] border-opacity-30">
+                <td class="py-2.5 pr-4 font-medium text-[var(--color-text-primary)]">Healthcare workers</td>
+                <td class="py-2.5 px-3 text-right font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">0.35+</td>
+                <td class="py-2.5 pl-3 text-[var(--color-text-muted)] text-xs">Sustained T0029 from moral injury + exposure</td>
+              </tr>
+              <tr class="border-b border-[var(--color-border)] border-opacity-30 bg-red-500/5">
+                <td class="py-2.5 pr-4 font-medium text-[var(--color-text-primary)]">BCI-dependent patients</td>
+                <td class="py-2.5 px-3 text-right font-[family-name:var(--font-mono)] text-[#ef4444] font-bold">0.60+</td>
+                <td class="py-2.5 pl-3 text-[var(--color-text-muted)] text-xs">Compounded: biological + device attack surface</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section H: Policy Intervention Points -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Policy Intervention Points</h2>
+      <div class="prose mb-6">
+        <p>
+          Four windows where targeted intervention can reduce transition probability to the next phase. Each window is cheaper and more effective than the next. Waiting until Phase 4 for population-scale mental health response is the most expensive and least effective strategy.
+        </p>
+      </div>
+
+      <PolicyInterventionMap />
+    </section>
+
+    <!-- Section I: The Gap -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">The Gap: What Doesn't Exist</h2>
+      <div class="prose mb-6">
+        <p>
+          No existing psychology framework chains biological and experiential threats as exploits in a kill chain with severity scoring, detection capability modeling, and defense-in-depth proposals. Here is what each framework does and what it does not do:
+        </p>
+      </div>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]">
+              <th class="text-left py-3 px-3 text-[var(--color-text-faint)] font-medium">Framework</th>
+              <th class="text-left py-3 px-3 text-[var(--color-text-faint)] font-medium">What it does</th>
+              <th class="text-left py-3 px-3 text-[var(--color-text-faint)] font-medium">What it doesn't do</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-2 px-3 font-medium text-[var(--color-text-primary)]">DSM-5</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Classification catalog</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Doesn't chain how one break enables the next</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-2 px-3 font-medium text-[var(--color-text-primary)]">Biopsychosocial</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Says factors interact</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Doesn't specify the chain</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-2 px-3 font-medium text-[var(--color-text-primary)]">ACE scores</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Counts adversity</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">No mechanism, no intervention points</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-2 px-3 font-medium text-[var(--color-text-primary)]">Allostatic load</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Cumulative stress number</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">No kill chain, no per-vector scoring</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-2 px-3 font-medium text-[var(--color-text-primary)]">Polyvagal theory</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Threat response states</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">No attack surface model</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/50">
+              <td class="py-2 px-3 font-medium text-[var(--color-text-primary)]">Network psychopathology</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">Symptom nodes activate each other</td>
+              <td class="py-2 px-3 text-[var(--color-text-muted)]">No severity scoring, no defense model</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-primary)]">
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          <strong class="text-[var(--color-text-primary)]">Psychology asks:</strong> what symptoms do you have?
+          <br />
+          <strong class="text-[var(--color-text-primary)]">Security asks:</strong> what's your attack surface, what's been exploited, what's the kill chain, and where can we insert a control?
+        </p>
+      </div>
+    </section>
+
+    <!-- Section J: Related Links -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Related</h2>
+
+      <div class="prose mb-4">
+        <p class="text-sm text-[var(--color-text-muted)]">
+          <strong class="text-[var(--color-text-primary)]">Research question:</strong> Do adversarial threat taxonomies generalize to endogenous neural failure modes? If yes, security engineering and clinical neuroscience have been studying the same system from opposite ends.
+        </p>
+      </div>
+
+      <h3 class="text-sm font-semibold text-[var(--color-text-faint)] uppercase tracking-wider mb-3">Derivation Log</h3>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-82-endogenous-attack-chain" class="text-xs px-3 py-1.5 rounded-full glass card-hover text-[var(--color-accent-primary)]">Entry 82: Endogenous Chain</a>
+        <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-78" class="text-xs px-3 py-1.5 rounded-full glass card-hover text-[var(--color-accent-primary)]">Entry 78: Determinism Gradient</a>
+        <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-77" class="text-xs px-3 py-1.5 rounded-full glass card-hover text-[var(--color-accent-primary)]">Entry 77: Thesis</a>
+        <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-50" class="text-xs px-3 py-1.5 rounded-full glass card-hover text-[var(--color-accent-primary)]">Entry 50: TARA Dual-Use</a>
+        <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-45" class="text-xs px-3 py-1.5 rounded-full glass card-hover text-[var(--color-accent-primary)]">Entry 45: Dynamical Systems</a>
+      </div>
+
+      <h3 class="text-sm font-semibold text-[var(--color-text-faint)] uppercase tracking-wider mb-3">TARA Atlas</h3>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6">
+        <a href="/TARA/QIF-T0066/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid #f59e0b;">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0066</p>
+          <p class="text-sm font-semibold group-hover:text-[#f59e0b] transition-colors">Slow Drift (Boiling Frog)</p>
+        </a>
+        <a href="/TARA/QIF-T0067/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid #06b6d4;">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0067</p>
+          <p class="text-sm font-semibold group-hover:text-[#06b6d4] transition-colors">Phase Dynamics Replay</p>
+        </a>
+        <a href="/TARA/QIF-T0025/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid #ef4444;">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0025</p>
+          <p class="text-sm font-semibold group-hover:text-[#ef4444] transition-colors">Neuronal Jamming</p>
+        </a>
+        <a href="/TARA/QIF-T0029/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid #ef4444;">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0029</p>
+          <p class="text-sm font-semibold group-hover:text-[#ef4444] transition-colors">Denial of Service</p>
+        </a>
+        <a href="/TARA/QIF-T0023/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid #a855f7;">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0023</p>
+          <p class="text-sm font-semibold group-hover:text-[#a855f7] transition-colors">Cascade Attack</p>
+        </a>
+        <a href="/TARA/QIF-T0039/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid #ef4444;">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0039</p>
+          <p class="text-sm font-semibold group-hover:text-[#ef4444] transition-colors">Self-Model Corruption</p>
+        </a>
+        <a href="/TARA/QIF-T0060/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid #ef4444;">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0060</p>
+          <p class="text-sm font-semibold group-hover:text-[#ef4444] transition-colors">Cross-Session Persistence</p>
+        </a>
+        <a href="/TARA/QIF-T0022/" class="glass rounded-lg p-4 card-hover group" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-xs text-[var(--color-text-faint)] mb-1">T0022</p>
+          <p class="text-sm font-semibold group-hover:text-[var(--color-accent-secondary)] transition-colors">Neural Signal Injection</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Disclosure -->
+    <footer class="glass rounded-xl p-6 text-xs text-[var(--color-text-faint)]">
+      <p class="mb-2"><strong class="text-[var(--color-text-muted)]">Classification:</strong> HYPOTHESIS. This case study presents a theoretical mapping of endogenous biological processes through the QIF threat taxonomy. It has not been empirically validated by clinical neuroscience. The attack chain is inferentially supported but requires peer review.</p>
+      <p class="mb-2"><strong class="text-[var(--color-text-muted)]">Citation:</strong> Qi, K. (2026). Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces. Zenodo. <a href="https://doi.org/10.5281/zenodo.18640105" class="text-[var(--color-accent-primary)]">https://doi.org/10.5281/zenodo.18640105</a></p>
+      <p><strong class="text-[var(--color-text-muted)]">AI Disclosure:</strong> Written with AI assistance (Claude). All claims, mappings, and interpretations originated from and were verified by the author. The framework design, personal health history mapping, and policy implications are entirely human-originated work.</p>
+    </footer>
+  </article>
+</PageLayout>
