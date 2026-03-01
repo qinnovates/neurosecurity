@@ -1,11 +1,20 @@
 [
   {
     "type": "external",
-    "title": "OpenAI’s Sam Altman announces Pentagon deal with ‘technical safeguards’",
-    "date": "2026-02-28",
-    "url": "https://techcrunch.com/2026/02/28/openais-sam-altman-announces-pentagon-deal-with-technical-safeguards/",
+    "title": "OpenAI reveals more details about its agreement with the Pentagon",
+    "date": "2026-03-01",
+    "url": "https://techcrunch.com/2026/03/01/openai-shares-more-details-about-its-agreement-with-the-pentagon/",
     "source": "TechCrunch",
-    "summary": "OpenAI's CEO claims its new defense contract includes protections addressing the same issues that became a flashpoint for Anthropic.",
+    "summary": "By CEO Sam Altman’s own admission, OpenAI’s deal with the Department of Defense was “definitely rushed,” and “the optics don’t look good.”",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink Exclusive: The First Monkey to Benefit from Groundbreaking Neuralink Advances Since 2021 - ipsnews.net",
+    "date": "2026-03-01",
+    "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOOXBCaGVXS0dYVUhkVjlmRGNIazlJSEo0anNtOE1VZ0gxM1I0T1lmUl9NNTJFaVBlVUlzQ0Z4VzNpOXBkTmg3czEtb2g5WE1IU0tmekladXJYQmNDbF81VGpfX1lYVlpBSWlTdUo2TXFpZkh1TkNEUzlVNjY3NGNzc29fTGFXNTN3Y0RodDBSbWRuSkZhdHozdjkwc19YZzktMGVzZFRrLVpzVGQycEJUNmlEc2pwT2tUOHQtVktGQmNKZDBHVHN0QV96Sl9LUnlBSTRUUQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neuralink Exclusive: The First Monkey to Benefit from Groundbreaking Neuralink Advances Since 2021&nbsp;&nbsp;ipsnews.net",
     "category": "neurotechnology"
   },
   {
@@ -28,30 +37,21 @@
   },
   {
     "type": "external",
-    "title": "Neuralink planning to expand operations in Del Valle - KVUE",
-    "date": "2026-02-27",
-    "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQcFVvRUxfTnhxZkNPZlB2Z3lNWHYzenRLa3VkQ2E5RUY3YTNFdGpHYUJ2Q242VUZJREV0UDJEOGxWSlNSWjlrbEJLYW00U3FvRkJNX3o5NlE0aXVleldRMEdKUGtNdV9MNEd5YTNYUUxWbVpHMXBDWVg1QTJJRENzaFhpOGkwNG9wMkhnU1JtbFZIUzZ4N1lJczZHa3R5WU1LVUFYbEhNMFpEQ1Q0VXRWNW93ODAyQnVqR25sUWloejFPRk5lYzBvVjk0Zw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink planning to expand operations in Del Valle&nbsp;&nbsp;KVUE",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Vectorized instructive signals in cortical dendrites - Nature",
-    "date": "2026-02-26",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5mVS1vd3dwOHNhQUJxYXRGcXVSNjgwQ244TGI2NE1kTFJPTHAzczVfQldWMThqbmhrVWFtOTRjVndIcUdMRlNORXd3cEhiVVBSWFVISGNQX1V6Ylo1QmRR?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Vectorized instructive signals in cortical dendrites&nbsp;&nbsp;Nature",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "China’s brain-computer interface industry is racing ahead - TechCrunch",
     "date": "2026-02-22",
     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdzI0cVRmWExrYWVqNFJubVNkZC1xN0x5RnZXcEFIcEt4QTNPZzFjOHYxdHJUekNGM3JxNjdpd1Y2SnVpdko5V19NaHFhOEVKV2tnZ19KeFJFdVJsbDBNdE1SMEY2Z2N5dEVqRHRkQzdVQjF1eDAxczdXLWdYNm43emVYam1OendkQ2QtWEJYaHg4dUJ1ZUE?oc=5",
-    "source": "Google News — Neural Startups",
+    "source": "Google News — BCI",
     "summary": "China’s brain-computer interface industry is racing ahead&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer. - CBS News",
+    "date": "2026-02-20",
+    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRDVMbXFjMmZmdGJyZXI1QVVxUFhPMlU0QTduS3gwMm84S1FhOEFRc0RRa281SklXOVlmTVo3Sm5VVW4taUZWUXhhM3RNT0E5VFpRdWx1UG9Nc05MZTdrbzlHb2kxR1JVakFnaTduWVV2amU2QmVwU09OSG4ycUZsTFNBWllRSFQ0SFNCd2wxZw?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer.&nbsp;&nbsp;CBS News",
+    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -82,29 +82,11 @@
   },
   {
     "type": "external",
-    "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
-    "date": "2026-01-28",
-    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "Investing in Merge Labs - OpenAI",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
     "source": "Google News — BCI",
     "summary": "Investing in Merge Labs&nbsp;&nbsp;OpenAI",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Altman’s Merge Raises $252 Million to Link Brains and Computers - Bloomberg.com",
-    "date": "2026-01-15",
-    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOSzBwQWxoR0xRYlQySWJ2ZWRfblIwMDN3U3poZ1pJU1NTYWFsMXVZZTMwdVBOa0w5YkZYWDZwWmkyNWFiY2lIZHBfLUo5V2d1eE5MZ25pZW9NXy1DWmZPZkxHY3pSbWRfeUZDTkNZOWtvM0Z1eVB6aWg2UWt2YlFDUHlsLTdkcGt5bGo2MFBuRVY1bG9ZNW9yNWhtN1RKYWljSUhQODFWVlRQNHMwMzVFRHBzTQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Altman’s Merge Raises $252 Million to Link Brains and Computers&nbsp;&nbsp;Bloomberg.com",
     "category": "neurotechnology"
   },
   {
@@ -123,6 +105,15 @@
     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
     "source": "Google News — Neuralink",
     "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says - Reuters",
+    "date": "2026-01-01",
+    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
     "category": "neurotechnology"
   },
   {
