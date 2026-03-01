@@ -1,0 +1,1 @@
+import{default as a}from"./BrainVisualization.BgnzE_3V.js";import"./jsx-runtime.D_zvdyIk.js";import"./index.DeO6U63H.js";import"./react-three-fiber.esm.CryOhiEM.js";import"./index.Bb8JjhAW.js";import"./OrbitControls.BjRYFT5a.js";import"./extends.CF3RwP-h.js";export{a as default};

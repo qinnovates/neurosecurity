@@ -1,0 +1,2189 @@
+<!DOCTYPE html><html lang="en-US" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Policy recommendations for brain-computer interface security governance"><link rel="canonical" href="https://qinnovate.com/governance/neurosecurity_policy_proposal/"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui' fill='%2306b6d4'%3EQ%3C/text%3E%3C/svg%3E"><!-- Open Graph --><meta property="og:title" content="Closing the Neurosecurity Gap"><meta property="og:description" content="Policy recommendations for brain-computer interface security governance"><meta property="og:url" content="https://qinnovate.com/governance/neurosecurity_policy_proposal/"><meta property="og:site_name" content="Qinnovate"><meta property="og:type" content="website"><meta property="og:image" content="https://qinnovate.com/images/og-default.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Closing the Neurosecurity Gap"><meta name="twitter:description" content="Policy recommendations for brain-computer interface security governance"><meta name="twitter:image" content="https://qinnovate.com/images/og-default.png"><meta name="twitter:creator" content="@qikevinl"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Qinnovate","url":"https://qinnovate.com","description":"Open standards and frameworks for brain-computer interface security.","foundingDate":"2026","sameAs":["https://github.com/qinnovates"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://qinnovate.com/"},{"@type":"ListItem","position":2,"name":"Governance","item":"https://qinnovate.com/governance/"},{"@type":"ListItem","position":3,"name":"Closing the Neurosecurity Gap"}]}</script><!-- RSS autodiscovery --><link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml"><title>Closing the Neurosecurity Gap | Qinnovate</title><!-- View Transitions --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Google Analytics 4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKB9RWW0C2');
+  </script><!-- Theme initialization (prevent flash) --><script>
+    (function(){ document.documentElement.setAttribute('data-theme', 'light'); })();
+  </script><link rel="stylesheet" href="/_astro/TARA.1w2tk3_i.css">
+<link rel="stylesheet" href="/_astro/TARA.CX3iK7dL.css"></head> <body class="min-h-screen">  <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" data-astro-transition-persist="astro-zscz5gm2-1"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity"> <span class="text-2xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">Q</span> <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline text-[var(--color-text-primary)]">innovate</span> <span class="text-xs text-[var(--color-text-faint)] hidden sm:inline ml-1">|</span> <span class="text-xs font-medium tracking-wide hidden sm:inline text-[var(--color-text-muted)]">Open Neural Atlas</span> </a> <!-- Desktop links --> <div class="hidden md:flex items-center gap-1"> <!-- Story (link + dropdown) --> <div class="relative" data-dropdown="story"> <a href="/about/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Story
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden"> <div class="p-2"> <a href="/about/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">About Kevin</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">The researcher and the mission</span> </a><a href="/case-studies/endogenous-attack-chain/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">The Attack Chain</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">When your body is the threat actor</span> </a><a href="/roadmap/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Roadmap</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Milestones, timeline, and version history</span> </a> </div> </div> </div> </div> <!-- Framework (link to whitepaper + dropdown) --> <div class="relative" data-dropdown="framework"> <a href="/whitepaper/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Framework
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/TARA/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">TARA Atlas</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">109 BCI attack techniques, scored and mapped</span> </a><a href="/scoring/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Neural Impact Scoring</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">NISS — extending CVSS for neural harm</span> </a><a href="/security/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">The Hourglass</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Signal coherence and 11-band architecture</span> </a><a href="/therapeutics/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Therapeutics</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">77 dual-use therapeutic analogs</span> </a><a href="/neurogovernance/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Neurorights</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Five neurorights mapped to threats and brain regions</span> </a><a href="/glossary/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Glossary</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">QIF terminology reference</span> </a> </div> </div> </div> </div> <!-- Validation (link to whitepaper + dropdown) --> <div class="relative" data-dropdown="validation"> <a href="/whitepaper/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Validation
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/whitepaper/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Whitepaper</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Full QIF specification and research paper</span> </a><a href="/bci/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">BCI Dashboard</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Device profiles, hardware inventory, physics, and API</span> </a><a href="/bci/landscape/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">BCI Landscape</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">23 companies, 31 devices, security posture, funding, trends</span> </a><a href="/case-studies/t0079-anc-fingerprint/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Case Studies</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Real-world hardware security validation</span> </a><a href="/validation/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Validation</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Empirical validation and external recognition</span> </a><a href="/lab/derivation-log/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Derivation Log</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Live research journal and hypothesis tracking</span> </a> </div> </div> </div> </div> <!-- Policy dropdown --> <div class="relative" data-dropdown="policy"> <a href="/governance/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Policy
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/governance/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"> <span class="text-sm font-medium block leading-snug">Governance</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Ethics, consent, and regulatory compliance</span> </a><a href="/neurogovernance/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Neurorights Framework</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Five neurorights operationalized across threats</span> </a><a href="/psychiatric/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Psychiatric Mappings</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">DSM-5 diagnostic outcome projections</span> </a> </div> </div> </div> </div> <!-- Tools dropdown --> <div class="relative" data-dropdown="tools"> <a href="/tools/" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Tools
+<svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </a> <div class="dropdown-menu absolute left-0 top-full pt-2 hidden"> <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-72 overflow-hidden"> <div class="p-2"> <a href="/tools/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Tools Overview</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">The QIF defense stack and how the tools connect</span> </a><a href="/tools/#neurowall" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Neurowall</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Hardware-level neural signal firewall</span> </a><a href="/nsp/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">NSP Protocol</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Post-quantum secure communication for neural implants</span> </a><a href="/runemate/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Project Runemate</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">On-device security compiler and execution engine</span> </a><a href="/explore/" class="block px-3 py-2.5 rounded-lg transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"> <span class="text-sm font-medium block leading-snug">Interactive Tools</span> <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">Visualizations and explorers</span> </a> </div> </div> </div> </div> <!-- Writing (direct link) --> <a href="/news/" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Writing
+</a> </div> <!-- Right side --> <div class="flex items-center gap-3"> <!-- GitHub link --> <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="GitHub"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path> </svg> </a> <!-- Search button --> <button id="search-btn" class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Search"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path> </svg> </button> <!-- Mobile menu button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors" aria-label="Open menu" aria-expanded="false"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]"> <div class="px-4 py-3 space-y-1"> <!-- Mobile Story section --> <div> <button data-mobile-toggle="story" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Story
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="story" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="story" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/about/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> About Kevin </a><a href="/case-studies/endogenous-attack-chain/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> The Attack Chain </a><a href="/roadmap/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Roadmap </a> </div> </div> <!-- Mobile Framework section --> <div> <button data-mobile-toggle="framework" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Framework
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="framework" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="framework" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/TARA/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> TARA Atlas </a><a href="/scoring/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Neural Impact Scoring </a><a href="/security/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> The Hourglass </a><a href="/therapeutics/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Therapeutics </a><a href="/neurogovernance/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Neurorights </a><a href="/glossary/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Glossary </a> </div> </div> <!-- Mobile Validation section --> <div> <button data-mobile-toggle="validation" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Validation
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="validation" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="validation" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/whitepaper/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Whitepaper </a><a href="/bci/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> BCI Dashboard </a><a href="/bci/landscape/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> BCI Landscape </a><a href="/case-studies/t0079-anc-fingerprint/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Case Studies </a><a href="/validation/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Validation </a><a href="/lab/derivation-log/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Derivation Log </a> </div> </div> <!-- Mobile Policy section --> <div> <button data-mobile-toggle="policy" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10">
+Policy
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="policy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="policy" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/governance/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-accent-primary)]"> Governance </a><a href="/neurogovernance/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Neurorights Framework </a><a href="/psychiatric/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Psychiatric Mappings </a> </div> </div> <!-- Mobile Tools section --> <div> <button data-mobile-toggle="tools" class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Tools
+<svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="tools" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path> </svg> </button> <div data-mobile-list="tools" class="hidden pl-3 space-y-0.5 mt-1"> <a href="/tools/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Tools Overview </a><a href="/tools/#neurowall" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Neurowall </a><a href="/nsp/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> NSP Protocol </a><a href="/runemate/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Project Runemate </a><a href="/explore/" class="block px-3 py-1.5 rounded-lg text-sm transition-colors text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"> Interactive Tools </a> </div> </div> <!-- Writing (direct link) --> <div class="pt-2 border-t border-[var(--color-border)] mt-2"> <a href="/news/" class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5">
+Writing
+</a> </div> </div> </div> </nav> <!-- Search modal --> <div id="search-modal" class="fixed inset-0 z-[100] hidden"> <div id="search-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div> <div class="relative max-w-2xl mx-auto mt-20 px-4"> <div class="glass rounded-xl p-4 shadow-2xl" id="search-container"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;showSubResults&#34;:true}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.mkdr79ir.js"></script> </div> </div> </div> <script type="module">function u(){const n=document.getElementById("mobile-menu-btn"),i=document.getElementById("mobile-menu");n?.addEventListener("click",()=>{const e=n.getAttribute("aria-expanded")==="true";n.setAttribute("aria-expanded",String(!e)),i?.classList.toggle("hidden")}),document.addEventListener("astro:before-swap",()=>{i?.classList.add("hidden"),n?.setAttribute("aria-expanded","false")}),document.querySelectorAll("[data-dropdown]").forEach(e=>{const t=e.querySelector(".dropdown-menu");let a;function c(){document.querySelectorAll(".dropdown-menu").forEach(o=>{o!==t&&o.classList.add("hidden")}),clearTimeout(a),t?.classList.remove("hidden")}function l(){a=setTimeout(()=>{t?.classList.add("hidden")},150)}e.addEventListener("mouseenter",c),e.addEventListener("mouseleave",l),e.addEventListener("focusin",c),e.addEventListener("focusout",o=>{e.contains(o.relatedTarget)||l()})}),document.querySelectorAll("[data-mobile-toggle]").forEach(e=>{const t=e.getAttribute("data-mobile-toggle"),a=document.querySelector(`[data-mobile-list="${t}"]`),c=document.querySelector(`[data-chevron="${t}"]`);e.addEventListener("click",()=>{a?.classList.toggle("hidden"),c?.classList.toggle("rotate-180")})});const m=document.getElementById("search-btn"),d=document.getElementById("search-modal"),h=document.getElementById("search-backdrop");function r(){d?.classList.remove("hidden"),setTimeout(()=>{d?.querySelector(".pagefind-ui__search-input")?.focus()},50)}function s(){d?.classList.add("hidden")}m?.addEventListener("click",r),h?.addEventListener("click",s),document.addEventListener("keydown",e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),d?.classList.contains("hidden")?r():s()),e.key==="Escape"&&s()}),document.addEventListener("astro:before-swap",s)}u();document.addEventListener("astro:after-swap",u);</script> <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"> <nav aria-label="Breadcrumb" class="text-sm text-[var(--color-text-faint)] mb-6"> <ol class="flex items-center gap-2 flex-wrap"> <li> <a href="/" class="hover:text-[var(--color-accent-primary)] transition-colors">Home</a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <a href="/governance/" class="hover:text-[var(--color-accent-primary)] transition-colors"> Governance </a> </li>  <li aria-hidden="true" class="select-none">/</li> <li> <span class="text-[var(--color-text-muted)]">Closing the Neurosecurity Gap</span> </li>  </ol> </nav> <header class="mb-12"> <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] leading-tight mb-4"> Closing the Neurosecurity Gap </h1> <p class="text-lg text-[var(--color-text-muted)] italic">Policy recommendations for brain-computer interface security governance</p> </header>  <div class="prose"> <h1 id="closing-the-neurosecurity-gap">Closing the Neurosecurity Gap</h1>
+<blockquote>
+<p>Policy recommendations for brain-computer interface security governance. Identifies seven security properties that no existing framework addresses, proposes concrete next steps for standards bodies, regulators, and industry, and offers open-source reference implementations as starting points for discussion.</p>
+</blockquote>
+<p><strong>Version:</strong> 1.2
+<strong>Date:</strong> 2026-02-21
+<strong>Status:</strong> Active Development
+<strong>Author:</strong> Kevin Qi (Qinnovate)</p>
+<p><strong>Disclosure:</strong> The author develops the QIF framework referenced in this document. QIF is presented as one possible approach to the problems described, not as a prescription. The proposals in this document are intended to benefit the BCI security field broadly, regardless of which specific frameworks or tools are ultimately adopted. All QIF components are open-source (Apache 2.0) and freely available for evaluation, adaptation, or replacement.</p>
+<hr>
+<h2 id="audience-routing-guide">Audience Routing Guide</h2>
+<p>Not every section applies to every reader. Use this guide to find what matters to you:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>If you are…</th><th>Start with</th><th>Then read</th><th>Optional</th></tr></thead><tbody><tr><td><strong>A regulator</strong> (FDA, FTC, EU)</td><td>Executive Summary, Part I (Sections 1-4)</td><td>Section 6 (Regulators)</td><td>Appendix B</td></tr><tr><td><strong>A standards body</strong> (NIST, MITRE, IEEE, ISO)</td><td>Executive Summary, Section 2 (Seven Properties)</td><td>Section 5 (Standards Bodies)</td><td>Section 10 (Reference Implementations)</td></tr><tr><td><strong>A BCI manufacturer</strong></td><td>Executive Summary, Section 2</td><td>Section 7 (Industry)</td><td>Section 9 (Timeline), Appendix C</td></tr><tr><td><strong>An academic researcher</strong></td><td>Section 4 (Why Proactive)</td><td>Section 8 (Academia)</td><td>Section 10, Appendix A</td></tr><tr><td><strong>A policy advisor or legislator</strong></td><td>Executive Summary, Section 3 (Structural Gaps)</td><td>Section 6 (Regulators)</td><td>Section 9 (Timeline)</td></tr><tr><td><strong>A neuroethicist</strong></td><td>Sections 2-3</td><td>Section 8 (Academia)</td><td>Section 5 (Standards Bodies)</td></tr><tr><td><strong>A patient or caregiver</strong></td><td>Executive Summary, Sections 2.5 (Right to Disconnect), 2.6 (Surgical Updates)</td><td>Section 7.1 (Manufacturer Baseline)</td><td>Appendix D (Glossary)</td></tr><tr><td><strong>A clinician</strong> (neurologist, neurosurgeon)</td><td>Executive Summary, Sections 2.2, 2.5, 2.6</td><td>Section 6.1 (FDA), Section 7.1 (Manufacturers)</td><td>Section 3 (Structural Gaps)</td></tr><tr><td><strong>A legal professional</strong></td><td>Section 3 (Structural Gaps, especially 3.3 on case law)</td><td>Section 6.4 (Model Legislation)</td><td>Appendix A</td></tr></tbody></table>
+<p><strong>Companion document:</strong> This proposal builds on the analysis in <a href="NEUROSECURITY_GOVERNANCE.md">NEUROSECURITY_GOVERNANCE.md</a>, which provides the detailed regulatory coverage matrix, framework-by-framework analysis, neuroethics alignment, and convergence strategy. This document focuses on recommendations, not re-analysis.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><strong>Part I: The Case for Proactive BCI Security</strong>
+<ul>
+<li><a href="#1-the-regulatory-landscape">1. The Regulatory Landscape</a></li>
+<li><a href="#2-the-seven-unaddressed-properties">2. The Seven Unaddressed Properties</a></li>
+<li><a href="#3-the-five-structural-gaps">3. The Five Structural Gaps</a></li>
+<li><a href="#4-why-proactive-not-reactive">4. Why Proactive, Not Reactive</a></li>
+</ul>
+</li>
+<li><strong>Part II: Recommendations by Audience</strong>
+<ul>
+<li><a href="#5-standards-bodies">5. Standards Bodies</a></li>
+<li><a href="#6-regulators">6. Regulators</a></li>
+<li><a href="#7-industry">7. Industry</a></li>
+<li><a href="#8-academia-and-international-bodies">8. Academia and International Bodies</a></li>
+</ul>
+</li>
+<li><strong>Part III: Implementation Framework</strong>
+<ul>
+<li><a href="#9-phased-timeline">9. Phased Timeline</a></li>
+<li><a href="#10-qif-as-reference-implementation">10. QIF as Reference Implementation</a></li>
+<li><a href="#11-limitations-and-open-questions">11. Limitations and Open Questions</a></li>
+<li><a href="#12-how-to-engage">12. How to Engage</a></li>
+</ul>
+</li>
+<li><a href="#appendix-a-complete-regulatory-coverage-matrix">Appendix A: Complete Regulatory Coverage Matrix</a></li>
+<li><a href="#appendix-b-25-organization-directory">Appendix B: 25-Organization Directory</a></li>
+<li><a href="#appendix-c-qif-technical-summary-card">Appendix C: QIF Technical Summary Card</a></li>
+<li><a href="#appendix-d-glossary">Appendix D: Glossary</a></li>
+<li><a href="#appendix-e-references">Appendix E: References</a></li>
+</ul>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Brain-computer interfaces sit at the intersection of three regulatory domains: medical device regulation, privacy and neurorights law, and IT security frameworks. These three domains do not talk to each other. A BCI manufacturer can be FDA-cleared, HIPAA-compliant, and ISO 27001-certified and still have zero protections against adversarial neurostimulation, neural signal tampering, or cognitive state inference.</p>
+<p>This is not a hypothetical gap. Across 25 mapped organizations and 13 regulatory frameworks, seven security properties unique to neural interfaces remain completely unaddressed by any existing standard, regulation, or guideline. No framework addresses neural signal authenticity. No scoring system expresses biological harm from a cybersecurity incident. No threat taxonomy catalogs BCI-specific attack techniques.</p>
+<p>The gap is fillable. Early research implementations demonstrate that technical approaches to each of these problems are feasible. For example, the open-source QIF project (one of several emerging efforts in this space) has produced:</p>
+<ul>
+<li>A BCI-specific threat taxonomy with 109 techniques across 15 tactics</li>
+<li>A neural impact scoring system with 5 dimensions that CVSS cannot express</li>
+<li>A post-quantum encryption protocol designed for implantable power budgets (estimated 3.25% overhead at 40 mW in simulation)</li>
+<li>A real-time coherence monitoring system tested against 15 simulated attack scenarios</li>
+</ul>
+<p>These are early-stage proofs of concept, not production-ready systems. They have not been independently audited or clinically validated. Their value is in demonstrating that the problem space is tractable: technical approaches exist for problems the regulatory world has not yet named. The specific tools that ultimately fill these gaps should emerge from multi-stakeholder standards processes, not from any single project.</p>
+<h3 id="six-recommendations-for-six-organizations">Six Recommendations for Six Organizations</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Organization</th><th>Recommendation</th><th>Realistic Horizon</th></tr></thead><tbody><tr><td>1</td><td><strong>NIST</strong></td><td>Convene a working group to explore a BCI Security Community Profile for CSF 2.0</td><td>Working group: 2026-2027; profile: 2028-2030</td></tr><tr><td>2</td><td><strong>MITRE</strong></td><td>Evaluate BCI-specific threat techniques for inclusion in ATT&#x26;CK through the existing community contribution process</td><td>Evaluation: 2026-2028; sub-matrix if warranted: 2029+</td></tr><tr><td>3</td><td><strong>FIRST</strong></td><td>Explore a supplemental metric group for neural/biological impact alongside CVSS</td><td>SIG formation: 2027-2028; draft specification: 2030+</td></tr><tr><td>4</td><td><strong>IEEE</strong></td><td>Launch a BCI cybersecurity working group under IEEE Brain Initiative to scope a standard</td><td>Working group: 2027-2028; standard: 2030+</td></tr><tr><td>5</td><td><strong>FDA/CDRH</strong></td><td>Acknowledge neural devices as a distinct cybersecurity category and explore neural-specific threat guidance for Section 524B</td><td>Guidance clarification: 2027-2028; formal update: 2029+</td></tr><tr><td>6</td><td><strong>UNESCO</strong></td><td>Partner with a technical standards body to develop implementation guidance for the 2025 Recommendation’s security-relevant provisions</td><td>Partnership: 2027-2028; technical annex: 2030+</td></tr></tbody></table>
+<h3 id="three-phase-timeline">Three-Phase Timeline</h3>
+<ul>
+<li><strong>Phase 1: Exploration (2026-2028):</strong> Working group formation, vocabulary development, voluntary pilot programs</li>
+<li><strong>Phase 2: Standardization (2028-2031):</strong> Formal standards development, manufacturer pilots, first assessment criteria</li>
+<li><strong>Phase 3: Maturation (2031+):</strong> Binding requirements, qualified assessor ecosystem, routine compliance</li>
+</ul>
+<hr>
+<h1 id="part-i-the-case-for-proactive-bci-security">Part I: The Case for Proactive BCI Security</h1>
+<h2 id="1-the-regulatory-landscape">1. The Regulatory Landscape</h2>
+<h3 id="three-domains-one-gap">Three Domains, One Gap</h3>
+<p>BCI security sits at the intersection of three regulatory domains that developed independently and have no formal coordination mechanism:</p>
+<p><strong>Domain A: Medical Device Regulations</strong> (FDA, FDORA Section 3305, EU MDR 2017/745)
+Controls device safety, manufacturing quality, and (since 2023) cybersecurity. Treats BCIs as generic medical devices. Does not recognize neural data as a special category requiring unique protections. Note: FDA’s 2023 cybersecurity guidance is non-binding advisory guidance, not legally enforceable regulation. FDORA Section 524B is the statutory mandate, but it specifies process requirements (threat modeling, SBOMs), not neural-specific controls.</p>
+<p><strong>Domain B: Privacy and Neurorights</strong> (HIPAA, GDPR Art. 9, Colorado HB 24-1058, California SB 1223, Chile Law 21.383, UNESCO 2025)
+Controls consent, data handling, and (aspirationally) cognitive liberty. Defines rights and privacy obligations. Does not specify technical security controls. Important scope limitations: HIPAA applies only to covered entities and business associates, not consumer BCI devices sold direct-to-consumer. GDPR Art. 9’s application to neural data has not been litigated or definitively settled by any DPA. State neurorights laws (Colorado, California) define privacy protections but do not prescribe technical security controls (encryption, incident response, monitoring).</p>
+<p><strong>Domain C: IT Security Frameworks</strong> (NIST SP 800-53, NIST CSF 2.0, ISO 27001, IEC 62443, SOC 2, PCI DSS)
+Provides comprehensive control catalogs for information systems. Does not address biological endpoints, neural data properties, or cognitive impact.</p>
+<p><strong>Adjacent but not addressed here:</strong> Clinical research governance (45 CFR 46 Common Rule, ICH GCP E6(R2), IRB review) governs human subjects research with BCIs and provides substantial participant protections. These frameworks address informed consent, risk-benefit assessment, and adverse event reporting, but they do not specify cybersecurity controls for the devices used in research. Section 8.3 addresses the intersection of research ethics and cybersecurity.</p>
+<h3 id="25-organizations-mapped">25 Organizations Mapped</h3>
+<p>Across these three domains, 25 organizations produce the standards, regulations, and guidance that govern technology security. The full directory is in <a href="#appendix-b-25-organization-directory">Appendix B</a>, but the coverage picture is stark:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Domain</th><th>Organizations</th><th>Neurotech Engagement</th><th>Security Engagement</th></tr></thead><tbody><tr><td>Security GRC</td><td>NIST, ISO/IEC, IEEE SA, MITRE, FIRST, OWASP, IEC 62443, CISA, ENISA, ISC2, ISACA, PCI SSC</td><td>None to minimal</td><td>Comprehensive</td></tr><tr><td>Neuroethics</td><td>UNESCO, OECD, Neurorights Foundation, INS, BCI Society, Berman Institute (JHU)</td><td>Direct to comprehensive</td><td>None to minimal</td></tr><tr><td>Medical/Regulatory</td><td>FDA/CDRH, EU MDR/EMA</td><td>Direct</td><td>Indirect</td></tr><tr><td>Policy</td><td>Chile, Colorado/California</td><td>Direct</td><td>None</td></tr><tr><td>Bridgers</td><td>IEEE Brain Initiative, DARPA, EFF</td><td>Direct</td><td>Indirect to comprehensive</td></tr></tbody></table>
+<p>The pattern is consistent: security organizations have zero neurotechnology engagement, and neuroethics organizations have zero security engagement. The few “bridgers” (IEEE Brain, DARPA) touch both domains but have no dedicated BCI security program.</p>
+<h3 id="the-coverage-matrix-gap-rows-only">The Coverage Matrix (Gap Rows Only)</h3>
+<p>The full regulatory coverage matrix is documented in <a href="NEUROSECURITY_GOVERNANCE.md#2-the-grc-gap">NEUROSECURITY_GOVERNANCE.md, Section 2</a>. The critical finding: seven security properties are addressed by no existing framework except QIF.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Security Property</th><th>FDA</th><th>FDORA</th><th>HIPAA</th><th>State Laws</th><th>Chile</th><th>EU MDR</th><th>EU AI Act</th><th>NIST 800-53</th><th>ISO 27001</th><th>IEC 62443</th><th>SOC 2</th><th>Neurorights</th><th><strong>QIF</strong></th></tr></thead><tbody><tr><td>Neural signal authenticity</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td>Adversarial stimulation prevention</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td>Cognitive state integrity</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>~</td><td><strong>X</strong></td></tr><tr><td>Neural re-identification</td><td></td><td></td><td></td><td>~</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>~</td><td><strong>X</strong></td></tr><tr><td>Biological impact scoring</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td>Consent violation severity</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td>Reversibility assessment</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr></tbody></table>
+<p>A BCI manufacturer achieving full compliance across all three domains (FDA-cleared + HIPAA-compliant + ISO 27001-certified) still has zero coverage for these seven properties. This is the gap.</p>
+<p><strong>An important caveat:</strong> This does not mean existing frameworks are useless for BCI security. NIST CSF 2.0, IEC 62443, and ISO 27001 provide substantial infrastructure that could be extended to address neural-specific properties. The gap is in the neural-specific extensions, not in the foundations. Several of the recommendations in Part II propose exactly this: extending existing frameworks rather than replacing them.</p>
+<hr>
+<h2 id="2-the-seven-unaddressed-properties">2. The Seven Unaddressed Properties</h2>
+<p>Each property below is unique to neural interfaces. For each: what it is, why existing analogs fail, what the risk looks like, and what QIF proof demonstrates it can be addressed.</p>
+<h3 id="21-neural-signal-authenticity">2.1 Neural Signal Authenticity</h3>
+<p><strong>What it is:</strong> Verification that a neural signal reflects genuine neural activity from the user’s brain, not an injected pattern from an attacker or a replayed recording.</p>
+<p><strong>Why existing analogs fail:</strong> NIST SI (System and Information Integrity) verifies data integrity at the bit level. It confirms that bits were not altered in transit. Neural signal authenticity requires confirming that the signal is biologically genuine, produced by actual neural tissue, not merely that its bytes are intact. A perfectly preserved recording of yesterday’s neural signals passes every data integrity check but is not authentic.</p>
+<p><strong>What the risk looks like:</strong> An attacker replays a previously recorded motor command, causing a paralyzed patient’s BCI-controlled prosthetic to move without their intent. The data is “intact” by every IT standard. The signal is not authentic.</p>
+<p><strong>Feasibility evidence:</strong> Signal authenticity can be approached through coherence scoring (measuring phase, transport, and gain variance against expected biological patterns) and cryptographic signal binding (per-frame hashes with post-quantum signatures). Early simulations show promise, but clinical validation against real-world attack scenarios remains an open research problem. The point is that the problem is technically addressable, not that any current tool has solved it.</p>
+<h3 id="22-adversarial-neurostimulation-prevention">2.2 Adversarial Neurostimulation Prevention</h3>
+<p><strong>What it is:</strong> Protection against unauthorized write operations to the brain through a compromised BCI stimulation channel.</p>
+<p><strong>Why existing analogs fail:</strong> OWASP’s command injection category addresses unauthorized commands to servers. A compromised server crashes or leaks data. A compromised stimulation channel can cause seizures, induce personality changes, impair memory formation, or cause irreversible neurological damage. The severity categories, countermeasures, and incident response requirements are fundamentally different.</p>
+<p><strong>What the risk looks like:</strong> A therapeutic deep brain stimulator for Parkinson’s disease is compromised. The attacker modifies stimulation parameters beyond safe bounds. The patient experiences seizure activity or involuntary motor responses. Current medical device cybersecurity guidance does not categorize this as a distinct threat class separate from generic device compromise.</p>
+<p><strong>Feasibility evidence:</strong> Hardware-level amplitude bounds, rate limiting, and policy-driven stimulation suppression are technically achievable. A systematic taxonomy of stimulation-related attack techniques enables risk assessment that current generic device security frameworks do not provide. These approaches require clinical validation and integration with existing device safety systems.</p>
+<h3 id="23-cognitive-state-integrity">2.3 Cognitive State Integrity</h3>
+<p><strong>What it is:</strong> Assurance that the person’s subjective experience, cognitive function, and decision-making capacity have not been altered by external manipulation through the BCI.</p>
+<p><strong>Why existing analogs fail:</strong> SOC 2’s Processing Integrity criterion checks that system processing is complete, valid, accurate, timely, and authorized. It applies to data transformations, not to the cognitive state of the person whose data is being processed. A BCI could pass every SOC 2 processing integrity check while subtly altering the user’s mood, attention, or decision-making through out-of-spec stimulation.</p>
+<p><strong>What the risk looks like:</strong> A mood-regulation BCI introduces a systematic bias in emotional response, gradually shifting the user’s baseline emotional state. Every data processing check shows the system is operating “correctly.” The user’s personality is changing.</p>
+<p><strong>Feasibility evidence:</strong> Cognitive integrity can be operationalized as a scored metric by evaluating whether a given technique can alter subjective experience. BCI-specific threat taxonomies can identify concrete cognitive integrity threats (identity erosion, agency manipulation, self-model corruption) that generic security frameworks miss entirely. This is an area where neuroethics researchers and security engineers must collaborate closely, as the definitions of “cognitive integrity” need both clinical and technical grounding.</p>
+<h3 id="24-neural-re-identification-risk">2.4 Neural Re-identification Risk</h3>
+<p><strong>What it is:</strong> The possibility that “anonymized” neural data can be linked back to an individual because brain signals may be as unique as fingerprints, and unlike passwords, a person cannot change their neural signature.</p>
+<p><strong>Why existing analogs fail:</strong> GDPR Art. 9 classifies biometric data as a special category requiring additional protection. But it provides no provisions for the specific challenge of neural biometrics: the signal patterns used for authentication and security are the same patterns that enable re-identification. Standard anonymization techniques (k-anonymity, differential privacy) can destroy the security utility of neural data. And unlike other biometrics, there is no “reset” option if a neural signature is compromised.</p>
+<p><strong>What the risk looks like:</strong> A research dataset of “anonymized” EEG recordings is released for academic use. A motivated actor cross-references the neural signatures against a separate dataset (clinical, consumer, or law enforcement) and re-identifies participants. The participants cannot change their brain signatures.</p>
+<p><strong>Feasibility evidence:</strong> Calibrated differential privacy (epsilon-bounded noise injection) provides a mathematical framework for reducing re-identification risk while preserving signal utility. Cryptographic signal binding can enable authentication without exposing raw neural signatures. The optimal privacy-utility tradeoff for neural data is an open research question that requires input from privacy researchers, neuroscientists, and regulators.</p>
+<h3 id="25-right-to-disconnect">2.5 Right to Disconnect</h3>
+<p><strong>What it is:</strong> The right of a user to cease using a neural device, including turning it off, having it removed, or suspending its function, without losing critical capabilities that the device now mediates.</p>
+<p><strong>Why existing analogs fail:</strong> The CIA triad’s Availability assumes that a system can be taken offline for maintenance, patching, or replacement. For a neural prosthesis that has become the primary communication channel for a locked-in patient, “taking it offline” means the person cannot communicate. For a deep brain stimulator managing severe Parkinson’s symptoms, “turning it off” means immediate symptom return. The security concept of availability does not account for systems whose removal carries medical consequences.</p>
+<p><strong>What the risk looks like:</strong> A manufacturer discontinues support for an implanted device. The user faces a choice between continuing to use an unsupported, unpatched neural implant, or undergoing a craniotomy to remove it. Neither option appears in any IT security framework’s remediation guidance.</p>
+<p><strong>Feasibility evidence:</strong> Lifecycle obligation frameworks, abandonment prevention strategies, and graceful degradation modes (Full Function to Limited Function to Safe Mode to Standby to Removal) can be formally defined and documented. Lazaro-Munoz et al. (2022) provide empirical grounding from researcher and patient interviews. See <a href="POST_DEPLOYMENT_ETHICS.md">POST_DEPLOYMENT_ETHICS.md</a> for one approach to addressing the gap between IT availability (system uptime) and neural availability (cognitive function continuity).</p>
+<h3 id="26-surgical-update-constraint">2.6 Surgical Update Constraint</h3>
+<p><strong>What it is:</strong> The fact that security patches for implanted neural devices may require surgery, fundamentally changing the cost, risk, and feasibility of vulnerability remediation.</p>
+<p><strong>Why existing analogs fail:</strong> FDORA Section 3305 requires patching. Its framework assumes that patching is an operational activity (downloading and installing software). For an implanted BCI, a firmware update may require a clinical procedure. A critical vulnerability in an implant’s cryptographic module cannot be remediated by telling the user to “install the latest update.” The vulnerability management lifecycle must account for the difference between a software patch (minutes, no risk) and a surgical procedure (hours, medical risk, recovery time, cost).</p>
+<p><strong>What the risk looks like:</strong> A post-quantum cryptographic weakness is discovered in an implant’s key exchange protocol. The patch requires replacing a hardware security module that is physically located inside the patient’s skull. The cost of “patching” is a neurosurgical procedure.</p>
+<p><strong>Feasibility evidence:</strong> Crypto agility (algorithm substitution without re-keying) can allow cryptographic upgrades via software update for many scenarios, reducing the need for surgical intervention for cryptographic maintenance. Forward secrecy and long-lifecycle key management can minimize the window where surgical updates are necessary. Vulnerability severity scoring for implanted devices should incorporate surgical update costs as a distinct factor. These engineering principles are well-established in other embedded systems; their application to neural implants requires collaboration between security engineers and neurosurgeons.</p>
+<h3 id="27-cognitive-security-as-measurable-security-property">2.7 Cognitive Security as Measurable Security Property</h3>
+<p><strong>What it is:</strong> The ability to define, measure, test, and audit “cognitive integrity” as a formal security property, comparable to how confidentiality, integrity, and availability are measurable in IT security.</p>
+<p><strong>Why existing analogs fail:</strong> Ienca and Andorno (2017) define psychological continuity as a right. This is a philosophical and legal construct. No framework defines it as a measurable, testable security property. You cannot audit “cognitive integrity” compliance because there are no metrics, thresholds, or test procedures. A BCI manufacturer cannot demonstrate cognitive integrity protection because there is no standard for what that means technically.</p>
+<p><strong>What the risk looks like:</strong> A BCI manufacturer claims their device “protects cognitive integrity” in marketing materials. There is no standard against which this claim can be evaluated, no audit procedure to verify it, and no metric to measure it. The claim is unfalsifiable.</p>
+<p><strong>Feasibility evidence:</strong> Cognitive integrity can be defined as a scored metric with specific thresholds, making it auditable rather than purely aspirational. BCI-specific threat techniques can be evaluated against cognitive integrity impact. Signal coherence monitoring can provide real-time indicators of potential cognitive integrity violations. This is not a complete solution. The definition of cognitive integrity thresholds requires input from clinical neuroscientists, neuroethicists, and patients before any scoring system can claim validity. But the alternative, leaving “cognitive integrity” as an unmeasurable concept, guarantees that no compliance framework can address it.</p>
+<hr>
+<h2 id="3-the-five-structural-gaps">3. The Five Structural Gaps</h2>
+<p>Beyond the seven unaddressed properties, five structural gaps in existing regulation create specific failure modes for BCI security. For each: the legal context, the failure mode, the consequence, the solution direction, and who must act.</p>
+<h3 id="31-hipaa-real-time-stream-auditing">3.1 HIPAA: Real-Time Stream Auditing</h3>
+<p><strong>Legal context:</strong> HIPAA requires 6-year retention of access logs for Protected Health Information (PHI). 45 CFR Part 164 specifies administrative, physical, and technical safeguards. HIPAA applies to covered entities (providers, plans, clearinghouses) and their business associates. Consumer BCI devices sold direct-to-consumer outside the clinical setting may not fall under HIPAA’s scope, creating a coverage gap for the fastest-growing BCI market segment.</p>
+<p><strong>Failure mode:</strong> BCIs generate continuous neural streams at 500Hz to 2,000Hz. Logging every individual packet or “read” event for a continuous neural stream creates a data footprint larger than the neural data itself. Current HIPAA auditing assumes discrete access events (a doctor opens a patient record), not continuous streams (a BCI transmitting 2,000 data points per second, 24 hours a day).</p>
+<p><strong>Consequence:</strong> BCI manufacturers face an impossible choice: log every neural data access event (storage costs explode, system performance degrades) or aggregate logs (potentially non-compliant with HIPAA audit requirements). Neither option has been tested in enforcement.</p>
+<p><strong>Solution direction:</strong> Temporal Aggregation Logs (auditing sessions and changes in coherence state rather than individual data points) satisfy the intent of HIPAA without breaking storage budgets. Regulatory clarification is needed on how “streaming sovereignty” applies to continuous biometric data.</p>
+<p><strong>Who must act:</strong> HHS Office for Civil Rights (HIPAA enforcement), with input from NIST on technical standards for continuous data auditing.</p>
+<h3 id="32-gdpr-the-neural-fingerprinting-paradox">3.2 GDPR: The Neural Fingerprinting Paradox</h3>
+<p><strong>Legal context:</strong> GDPR requires “true anonymization” where data can no longer be linked to an individual. Art. 9 classifies biometric data as a special category. Whether neural data constitutes “biometric data” under Art. 9 has not been definitively settled by any Data Protection Authority or court. The classification is plausible but not established law.</p>
+<p><strong>Failure mode:</strong> Neural time-series data is inherently unique. A person’s coherence signature, spectral power distribution, and ERP timing can be used to re-identify them across sessions, much like a fingerprint. Stripping the data of all identifiable patterns often destroys the security signature needed to detect unauthorized neural injection. The same features that enable re-identification are the features that enable threat detection.</p>
+<p><strong>Consequence:</strong> BCI manufacturers must choose between anonymization (privacy-preserving but security-blind) and signal preservation (security-enabled but privacy-violating). GDPR provides no framework for resolving this tension.</p>
+<p><strong>Solution direction:</strong> Recognition of “neural uniqueness” as a special category where anonymization and security utility must be balanced through technical thresholds. Calibrated differential privacy (epsilon-bounded noise injection) provides a mathematical framework for this balance. Regulators need to define acceptable epsilon ranges for neural data.</p>
+<p><strong>Who must act:</strong> European Data Protection Board (EDPB) for GDPR interpretation, with technical input from IEEE or ISO on differential privacy standards for neural data.</p>
+<h3 id="33-ccpa--sb-1223-zero-case-law">3.3 CCPA / SB 1223: Zero Case Law</h3>
+<p><strong>Legal context:</strong> California SB 1223 (effective January 2025) adds “neural data” as sensitive personal information under CCPA and grants protections for “mental integrity,” “cognitive liberty,” and “psychological continuity.”</p>
+<p><strong>Failure mode:</strong> These are philosophical concepts that are now binding law, but no case has tested their technical boundaries. At what point does a targeted notification become a violation of cognitive liberty? When does a neural device’s autonomous threshold adjustment violate a user’s psychological continuity? When does aggregated neural data processing cross the line from analysis to “cognitive state inference” requiring explicit consent?</p>
+<p><strong>Consequence:</strong> BCI manufacturers have no technical baseline for compliance. California’s Attorney General has enforcement authority but no technical standards against which to evaluate violations. The first enforcement action will define the law’s scope, retroactively, potentially years after devices have shipped.</p>
+<p><strong>Solution direction:</strong> Technical standards that define “threshold of violation” for neurorights. NISS provides a model: each neuroright maps to scored metrics with defined thresholds. Test cases and technical legal standards are needed before the first enforcement action, not after.</p>
+<p><strong>Liability implications:</strong> The absence of case law creates uncertainty for everyone. BCI manufacturers cannot predict what “compliance” means. Plaintiffs’ attorneys have no precedent for neural data claims. Insurers cannot price the risk. Defense counsel cannot advise on safe harbors. The first case to test SB 1223’s neural data provisions will set precedent that applies retroactively to every device already on the market. Proactive technical standards reduce this uncertainty for all parties.</p>
+<p><strong>Who must act:</strong> California Attorney General’s office (enforcement guidance), with input from BCI industry and technical standards bodies on defining measurable compliance criteria.</p>
+<h3 id="34-fdora-no-neural-scoring-standard">3.4 FDORA: No Neural Scoring Standard</h3>
+<p><strong>Legal context:</strong> Section 524B of the FD&#x26;C Act (via FDORA) mandates threat modeling and cybersecurity documentation for all medical devices with software. FDA enforces a Refuse-to-Accept policy: submissions lacking cybersecurity documentation are rejected before review.</p>
+<p><strong>Failure mode:</strong> Section 524B mandates that manufacturers perform threat modeling but does not specify which threat taxonomy or scoring system to use for neural devices. The referenced standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) provide processes and scoring for general medical devices. None catalog neural-specific attack techniques. A manufacturer can satisfy FDORA by performing CVSS-based threat modeling that scores a neural injection attack identically to a web application SQL injection, both rated on the same scale with no neural-specific dimensions.</p>
+<p><strong>Consequence:</strong> FDA receives cybersecurity documentation that technically satisfies the requirement but fails to identify or score the most dangerous BCI-specific threats. A neural ransomware scenario scores the same as a data breach scenario because CVSS has no dimension for “biological harm” or “cognitive integrity loss.”</p>
+<p><strong>Solution direction:</strong> A neural impact scoring extension that adds BCI-specific dimensions to CVSS or establishes a parallel scoring system. NISS provides the reference model with five dimensions: biological impact, cognitive integrity, consent violation, reversibility, and neuroplasticity risk.</p>
+<p><strong>Who must act:</strong> FDA/CDRH (guidance update to reference neural-specific scoring), FIRST (CVSS extension or companion standard), with input from BCI manufacturers and clinical researchers.</p>
+<h3 id="35-international-soft-law-enforcement-vacuum">3.5 International: Soft Law Enforcement Vacuum</h3>
+<p><strong>Legal context:</strong> UNESCO’s Recommendation on the Ethics of Neurotechnology (November 2025) is the first global normative framework for neurotechnology, adopted by all 194 Member States. The OECD Responsible Innovation in Neurotechnology Principles (2019) provide additional guidance.</p>
+<p><strong>Failure mode:</strong> Both frameworks are “soft law”: they carry moral authority and set expectations but impose no binding legal penalties. A BCI manufacturer can claim “UNESCO alignment” in marketing materials while implementing none of the technical safeguards that would actually protect users. There is no audit procedure, no certification body, and no enforcement mechanism.</p>
+<p><strong>Consequence:</strong> The strongest global consensus on neurotechnology ethics has no teeth. Manufacturers that invest in genuine compliance are at a competitive disadvantage compared to those who claim alignment without implementation. The gap between stated principles and technical enforcement grows wider as the market scales.</p>
+<p><strong>Solution direction:</strong> Technical annexes to soft law frameworks that specify measurable security controls. Chile’s Law 21.383 (constitutional neurorights, October 2021) demonstrates that legislative action is possible, but even Chile lacks implementing technical standards. Binding international treaties with technical enforcement mechanisms are the long-term solution.</p>
+<p><strong>Who must act:</strong> UNESCO (technical annex development, partnering with NIST or ISO), OECD (cross-committee collaboration between cybersecurity and neurotechnology committees), national legislatures (implementing legislation with technical requirements), with support from IEEE and IEC for standards development.</p>
+<hr>
+<h2 id="4-why-proactive-not-reactive">4. Why Proactive, Not Reactive</h2>
+<h3 id="the-it-security-precedent">The IT Security Precedent</h3>
+<p>Information security governance was retrofitted. The internet shipped without security. Email shipped without encryption. Web applications shipped without input validation. The cost: decades of breach-driven compliance, trillions of dollars in damages, and a permanent gap between policy and enforcement.</p>
+<p>The timeline:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Year</th><th>Event</th><th>Years After Technology Shipped</th></tr></thead><tbody><tr><td>1969</td><td>ARPANET launches</td><td>0</td></tr><tr><td>1988</td><td>Morris Worm</td><td>19 years</td></tr><tr><td>1996</td><td>HIPAA enacted</td><td>27 years</td></tr><tr><td>2002</td><td>Sarbanes-Oxley</td><td>33 years</td></tr><tr><td>2004</td><td>PCI DSS v1.0</td><td>35 years</td></tr><tr><td>2013</td><td>NIST CSF v1.0</td><td>44 years</td></tr><tr><td>2016</td><td>GDPR adopted</td><td>47 years</td></tr><tr><td>2024</td><td>NIST CSF v2.0</td><td>55 years</td></tr></tbody></table>
+<p>IT security is still catching up. The BCI security window is different.</p>
+<h3 id="the-bci-window">The BCI Window</h3>
+<p>BCIs are early. The first commercial BCIs received FDA clearance in 2025. The consumer transition is projected for 2026-2030. Mass adoption is projected for 2030+. The window to build security into the foundation, rather than bolt it on after the first breach, is open right now.</p>
+<p>This window will not stay open. As BCIs scale from thousands of research participants to millions of consumers, the cost of retrofitting security will grow exponentially. Every device shipped without neural security becomes technical debt that must be remediated later, potentially through surgical procedures.</p>
+<h3 id="four-precedents">Four Precedents</h3>
+<p>Four security standardization efforts demonstrate that proactive, voluntary adoption can succeed:</p>
+<p><strong>PCI DSS (2004):</strong> Created by the payment card industry without government mandate. Prescriptive controls with compliance levels scaled by transaction volume drove universal adoption. Key insight: proportional requirements (different tiers for different risk levels) enable broad adoption. Neurosecurity application: scale requirements by device invasiveness.</p>
+<p><strong>MITRE ATT&#x26;CK (2013):</strong> A free, open taxonomy that described what adversaries actually do. Became the universal language for threat intelligence within 5 years. Key insight: shared vocabulary precedes coordinated defense. Neurosecurity application: TARA provides the seed taxonomy using the same model.</p>
+<p><strong>NIST CSF (2014):</strong> A voluntary framework with no legal mandate achieved near-universal adoption through market pressure (customers, insurers, investors required it). Key insight: usefulness drives adoption, not mandates. Neurosecurity application: IRBs, research ethics committees, and BCI insurers will drive adoption before government mandates.</p>
+<p><strong>IEC 62443 (2009):</strong> Bridged IT and OT security by defining trust boundaries at physical interfaces (zones and conduits). Key insight: physical interfaces define security boundaries, not network layers. Neurosecurity application: QIF’s hourglass model places the trust boundary at the neural interface (I0), where biology meets silicon.</p>
+<h3 id="the-cost-of-delay">The Cost of Delay</h3>
+<p>Two scenarios illustrate the cost of waiting for the first breach:</p>
+<p><strong>Neural ransomware:</strong> An attacker compromises a deep brain stimulator and threatens to alter stimulation parameters unless a ransom is paid. The patient cannot simply “disconnect” without medical consequences. There is no incident response playbook for this scenario. There is no CVSS score for “held hostage by your own implant.” There is no insurance product that covers this risk. Every one of these gaps must be addressed from scratch, under crisis conditions, after the damage is done.</p>
+<p><strong>Cognitive state inference at scale:</strong> A consumer BCI platform collects EEG data for “wellness” purposes. A data breach exposes neural recordings. The recordings reveal psychiatric conditions, emotional states, and cognitive decline patterns for millions of users. There is no notification framework for “your brain data was compromised.” There is no remediation possible because the users cannot change their neural signatures.</p>
+<h3 id="the-canary-a-bci-infrastructure-vulnerability-february-2026">The Canary: A BCI-Infrastructure Vulnerability (February 2026)</h3>
+<p>In February 2026, QIF disclosed the first BCI-infrastructure vulnerability in a widely used real-time data transport library for BCI research. The library is used in hundreds of research labs worldwide and carries live neural data.</p>
+<p>The vulnerability is real but affects a research tool, not a clinical implant. It is the canary. The next one may not be in a research library. It may be in a device implanted in a human brain. The time to build the frameworks, taxonomies, scoring systems, and incident response procedures is before that happens, not after.</p>
+<hr>
+<h1 id="part-ii-recommendations-by-audience">Part II: Recommendations by Audience</h1>
+<h2 id="5-standards-bodies">5. Standards Bodies</h2>
+<p>Each recommendation below is tiered by timeline: Near-term (2026-2028), Medium-term (2028-2031), and Long-term (2031+). These timelines reflect the reality of standards development cycles. Each recommendation has a low-cost entry point (convene a discussion, evaluate a gap) that does not commit the organization to a specific outcome.</p>
+<h3 id="51-nist-bci-security-profile-for-csf-20">5.1 NIST: BCI Security Profile for CSF 2.0</h3>
+<p><strong>The gap:</strong> NIST CSF 2.0’s six functions (Govern, Identify, Protect, Detect, Respond, Recover) are sector-agnostic. No healthcare or medical device community profile has been published for CSF 2.0. Neural-specific subcategories do not exist.</p>
+<p><strong>Recommendation:</strong> Explore a BCI Security Community Profile through NIST’s existing Community Profile program, which is designed for sector-specific adaptation of CSF 2.0.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Convene a BCI security working group under NIST’s Community Profile program, with representation from BCI manufacturers, FDA, neuroethics researchers, clinicians, and patient advocates</td><td>Working group charter</td></tr><tr><td><strong>Near-term</strong></td><td>Map existing CSF 2.0 subcategories to BCI-specific requirements and identify neural-specific gaps</td><td>Gap analysis document</td></tr><tr><td><strong>Medium-term</strong></td><td>Develop and publish a BCI Security Community Profile</td><td>CSF 2.0 profile with neural integrity, cognitive confidentiality, and biological impact subcategories</td></tr><tr><td><strong>Medium-term</strong></td><td>Develop a companion SP 800-series publication on neural data security</td><td>Technical guidance for implementing the profile</td></tr><tr><td><strong>Long-term</strong></td><td>Consider integrating neural security controls into future SP 800-53 revisions</td><td>Neural data classification, cognitive integrity controls added to core control catalog</td></tr></tbody></table>
+<p><strong>Available reference material:</strong> Open-source BCI security frameworks (including QIF) provide gap analysis data, metric definitions, and threat taxonomies that could inform the working group’s initial assessment.</p>
+<h3 id="52-mitre-neural-attck-sub-matrix">5.2 MITRE: Neural ATT&#x26;CK Sub-Matrix</h3>
+<p><strong>The gap:</strong> MITRE ATT&#x26;CK catalogs 594 enterprise techniques across 14 tactics. None address neural injection, cognitive exfiltration, neurostimulation manipulation, or signal dynamics disruption. BCI attacks have no TTP classification in any MITRE matrix (Enterprise, Mobile, ICS).</p>
+<p><strong>Recommendation:</strong> Evaluate BCI-specific threat techniques for potential inclusion in ATT&#x26;CK through MITRE’s established community contribution process.</p>
+<p>A critical distinction: ATT&#x26;CK catalogs <em>observed</em> adversary behavior, not theoretical possibilities. Of the techniques identified in published BCI security literature, approximately 49 are based on published research demonstrating real attacks or feasibility demonstrations (Martinovic et al. 2012, Bonaci et al. 2014, Lopez Bernal et al. 2021, among others). These literature-grounded techniques are the strongest candidates for ATT&#x26;CK contribution. Theoretical or recontextualized techniques would need additional evidence before meeting ATT&#x26;CK’s inclusion criteria.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>MITRE evaluates whether BCI threats warrant a dedicated matrix or can be accommodated within existing matrices (Enterprise, ICS)</td><td>Assessment report</td></tr><tr><td><strong>Near-term</strong></td><td>BCI security researchers submit literature-grounded techniques through MITRE’s community contribution process</td><td>Contributed techniques with published evidence</td></tr><tr><td><strong>Medium-term</strong></td><td>If warranted, develop a Neural Devices matrix with BCI-specific tactics and techniques</td><td>Public ATT&#x26;CK sub-matrix (or expansion of ICS matrix)</td></tr><tr><td><strong>Long-term</strong></td><td>Community-maintained contribution model as real-world BCI security incidents provide observed behavior data</td><td>Ongoing maintenance</td></tr></tbody></table>
+<p><strong>Available reference material:</strong> Published BCI security research provides approximately 49 techniques with empirical evidence. Open-source threat taxonomies (including TARA) provide additional recontextualized and theoretical techniques that may inform future ATT&#x26;CK expansion as evidence matures.</p>
+<h3 id="53-first-cvss-neural-impact-metrics">5.3 FIRST: CVSS Neural Impact Metrics</h3>
+<p><strong>The gap:</strong> CVSS v4.0 scores vulnerability severity across exploitability, scope, and impact. Impact metrics cover confidentiality, integrity, and availability. None address biological harm, cognitive integrity loss, consent violation severity, reversibility of neural damage, or neuroplasticity risk. A CVSS 9.8 web exploit and a CVSS 9.8 BCI exploit that causes permanent cognitive deficit are scored identically.</p>
+<p><strong>Recommendation:</strong> Explore whether a supplemental metric group or companion scoring system can address neural and biological impact dimensions that CVSS currently cannot express.</p>
+<p>CVSS is a consensus-driven standard maintained by hundreds of organizations. Proposing changes requires broad community buy-in and years of development. A more realistic path is to develop a complementary, domain-specific scoring system that can be used <em>alongside</em> CVSS for BCI vulnerability assessment, similar to how the DREAD model or OWASP Risk Rating complement CVSS in specific domains.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Form a special interest group (SIG) within FIRST to evaluate neural impact dimensions</td><td>SIG charter and initial membership</td></tr><tr><td><strong>Medium-term</strong></td><td>Develop a domain-specific scoring system for BCI vulnerabilities, designed to complement CVSS</td><td>Draft specification piloted against known BCI vulnerabilities</td></tr><tr><td><strong>Long-term</strong></td><td>If community consensus supports it, propose integration of neural dimensions into CVSS mainline or publish as a permanent supplemental standard</td><td>Final specification</td></tr></tbody></table>
+<p><strong>NISS dimensions for consideration:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>NISS Dimension</th><th>What It Scores</th><th>Why CVSS Cannot Express It</th></tr></thead><tbody><tr><td>Biological Impact (BI)</td><td>Physical harm to neural tissue</td><td>CVSS has no “tissue damage” metric</td></tr><tr><td>Cognitive Reconnaissance (CR)</td><td>Unauthorized neural data read access (thought decoding, inference)</td><td>CVSS “Integrity” means data integrity, not cognitive security</td></tr><tr><td>Cognitive Disruption (CD)</td><td>Unauthorized neural state modification (perception manipulation)</td><td>CVSS has no cognitive write-access metric</td></tr><tr><td>Consent Violation (CV)</td><td>Whether the attack bypasses user consent</td><td>CVSS has no consent dimension</td></tr><tr><td>Reversibility (RV)</td><td>Whether damage can be undone</td><td>CVSS assumes software remediation, not biological recovery</td></tr><tr><td>Neuroplasticity (NP)</td><td>Long-term neural adaptation risk</td><td>No equivalent in any scoring system</td></tr></tbody></table>
+<h3 id="54-ieee-bci-cybersecurity-standard">5.4 IEEE: BCI Cybersecurity Standard</h3>
+<p><strong>The gap:</strong> IEEE SA produces the P7700 series on neurotechnology ethics and P2794 on neural interface research reporting. IEEE Brain Initiative has working groups on BCI terminology (P2731) and standards roadmaps. No IEEE standard addresses BCI cybersecurity. Ethics and security are separate work streams with no bridge.</p>
+<p><strong>Recommendation:</strong> Produce a BCI Cybersecurity Standard (P27XX) under IEEE Brain Initiative that bridges P7700 ethics with security requirements.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Launch a BCI Cybersecurity Working Group under IEEE Brain</td><td>Working group charter, initial membership</td></tr><tr><td><strong>Medium-term</strong></td><td>Develop a standard covering threat modeling, security architecture, and compliance requirements for BCI devices</td><td>Draft standard for ballot</td></tr><tr><td><strong>Medium-term</strong></td><td>Align with P7700 ethics requirements and P2731 terminology</td><td>Cross-referencing between standards</td></tr><tr><td><strong>Long-term</strong></td><td>Publish the standard and develop a conformity assessment program</td><td>Published standard, assessor training</td></tr></tbody></table>
+<h3 id="55-isoiec-neural-security-extension">5.5 ISO/IEC: Neural Security Extension</h3>
+<p><strong>The gap:</strong> ISO 27001 provides 93 controls for information security management. ISO 27799 covers health informatics security but treats neural data as generic PHI. No ISO control addresses neural signal authenticity, cognitive integrity, or biological impact from cybersecurity incidents.</p>
+<p><strong>Recommendation:</strong> Add neural data classification tiers to ISO 27799 and publish a technical report (TR) on BCI security.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Propose a study period for neural data security within SC 27</td><td>Study period proposal</td></tr><tr><td><strong>Medium-term</strong></td><td>Develop ISO/IEC TR on BCI security controls (technical report, lower barrier than full standard)</td><td>Published TR with neural data classification, BCI-specific controls</td></tr><tr><td><strong>Long-term</strong></td><td>Integrate neural security controls into ISO 27001 revision or publish as ISO 27XXX</td><td>Full international standard</td></tr></tbody></table>
+<hr>
+<h2 id="6-regulators">6. Regulators</h2>
+<h3 id="61-fdacdrh-neural-threat-categories-in-524b-guidance">6.1 FDA/CDRH: Neural Threat Categories in 524B Guidance</h3>
+<p><strong>The gap:</strong> Section 524B mandates cybersecurity documentation but references generic frameworks (CVSS, IEC 62443). The February 2026 cybersecurity guidance implements the requirement with no neural-data-specific controls.</p>
+<p><strong>Recommendation:</strong> Update the 524B guidance to include neural-specific threat categories and require neural impact scoring alongside CVSS for BCI submissions.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Acknowledge neural devices as a distinct device class for cybersecurity purposes</td><td>Guidance update or FAQ clarifying neural-specific expectations</td></tr><tr><td><strong>Near-term</strong></td><td>Reference BCI-specific threat taxonomies in pre-submission guidance for BCI manufacturers</td><td>Updated pre-submission guidance</td></tr><tr><td><strong>Medium-term</strong></td><td>Require neural impact assessment as part of cybersecurity documentation for neural devices</td><td>524B guidance supplement for neural devices</td></tr><tr><td><strong>Medium-term</strong></td><td>Develop BCI-specific cybersecurity review criteria for Breakthrough Device submissions</td><td>Internal review guidance for CDRH</td></tr><tr><td><strong>Long-term</strong></td><td>Integrate neural security requirements into the next major revision of cybersecurity guidance</td><td>Unified guidance covering generic and neural-specific requirements</td></tr></tbody></table>
+<p><strong>The structural gap in current guidance:</strong> FDA’s cybersecurity guidance asks manufacturers to “identify cybersecurity risks” but provides no neural-specific risk categories. A BCI manufacturer can satisfy this requirement by identifying network-level threats (man-in-the-middle, denial of service, firmware tampering) while entirely missing neural-level threats (signal injection, cognitive exfiltration, neurostimulation manipulation). TARA’s 109 techniques provide the taxonomy that would make this requirement meaningful for neural devices.</p>
+<h3 id="62-ftc-consumer-bci-security-baseline">6.2 FTC: Consumer BCI Security Baseline</h3>
+<p><strong>The gap:</strong> FTC enforces against deceptive and unfair practices under Section 5 of the FTC Act. FTC has brought enforcement actions against health technology companies (Lumosity 2016, Practice Fusion 2020, BetterHelp 2023) but has no consumer BCI security baseline.</p>
+<p><strong>Recommendation:</strong> Publish consumer BCI security guidelines that define minimum security requirements for non-medical neural devices.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Issue a public statement classifying neural data as requiring heightened protection under Section 5</td><td>Policy statement or blog post</td></tr><tr><td><strong>Medium-term</strong></td><td>Publish consumer BCI security guidelines</td><td>FTC guidance document with minimum security requirements for consumer neural devices</td></tr><tr><td><strong>Medium-term</strong></td><td>Clarify the intersection of COPPA with pediatric BCI devices</td><td>Guidance on children’s neural data protection</td></tr><tr><td><strong>Long-term</strong></td><td>Establish enforcement precedents for inadequate consumer BCI security</td><td>Enforcement actions that define the standard of care</td></tr></tbody></table>
+<h3 id="63-eu-cross-reference-mdr-with-ai-act">6.3 EU: Cross-Reference MDR with AI Act</h3>
+<p><strong>The gap:</strong> Neural implants are classified as Class III under MDR Rule 8 (invasive, contact with CNS) and Rule 20 (brain stimulation). AI-enabled BCIs simultaneously fall under the EU AI Act as high-risk systems (Article 6(1) + Annex I). These two regulatory frameworks have overlapping cybersecurity requirements but no unified neural-data-specific security standard.</p>
+<p><strong>Recommendation:</strong> Develop a unified compliance pathway for BCI devices under both MDR and AI Act, with neural-specific cybersecurity requirements.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>MDCG (Medical Device Coordination Group) guidance on cybersecurity for AI-enabled BCIs</td><td>Guidance document addressing dual MDR/AI Act compliance</td></tr><tr><td><strong>Medium-term</strong></td><td>Harmonize MDR cybersecurity requirements with AI Act Article 15 for neural devices</td><td>Harmonized standard or guidance</td></tr><tr><td><strong>Medium-term</strong></td><td>Classify neural data within the EU AI Act’s data governance framework (Article 10)</td><td>Data governance guidance for neural data</td></tr><tr><td><strong>Long-term</strong></td><td>Include the upcoming EU Neurotechnology Legislative Package neural security requirements</td><td>Legislative provisions with technical standards references</td></tr></tbody></table>
+<h3 id="64-state-legislatures-model-legislation">6.4 State Legislatures: Model Legislation</h3>
+<p><strong>The gap:</strong> Four US states (Colorado, California, Montana, Connecticut) have enacted neural data protection laws. Each defines neural data differently, imposes different consent requirements, and specifies no technical security standards. The result is compliance fragmentation without actual security improvement.</p>
+<p><strong>Recommendation:</strong> Develop model legislation that includes technical security requirements alongside privacy protections.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>NCSL or similar body convenes a neural data legislation working group</td><td>Working group with technical advisors</td></tr><tr><td><strong>Medium-term</strong></td><td>Publish model legislation that references technical standards for neural data security (not just privacy)</td><td>Model bill with security requirements</td></tr><tr><td><strong>Long-term</strong></td><td>Federal preemption through the MIND Act (S. 2925) or successor legislation</td><td>Federal neural data law that harmonizes state-level fragmentation</td></tr></tbody></table>
+<h3 id="65-international-binding-treaties-with-technical-enforcement">6.5 International: Binding Treaties with Technical Enforcement</h3>
+<p><strong>The gap:</strong> International soft law frameworks (UNESCO 2025, OECD 2019) set ethical expectations but impose no binding obligations. Chile’s constitutional amendment (Law 21.383, 2021) demonstrates that binding legislation is possible but lacks implementing technical standards.</p>
+<p><strong>Recommendation:</strong> Develop binding international agreements that reference technical enforcement mechanisms.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Chile develops implementing technical standards for Law 21.383</td><td>Technical standards referenced in Chilean regulation</td></tr><tr><td><strong>Medium-term</strong></td><td>Council of Europe’s Strategic Action Plan on Neurotechnology (2025) develops binding protocols</td><td>Binding protocol under the Council of Europe framework</td></tr><tr><td><strong>Long-term</strong></td><td>UN treaty on neurotechnology governance with technical enforcement annexes</td><td>International treaty with technical standards</td></tr></tbody></table>
+<hr>
+<h2 id="7-industry">7. Industry</h2>
+<h3 id="71-bci-manufacturers-voluntary-security-baseline">7.1 BCI Manufacturers: Voluntary Security Baseline</h3>
+<p><strong>Recommendation:</strong> Adopt a voluntary BCI security baseline that addresses neural-specific threats beyond what generic medical device cybersecurity requires. A meaningful baseline should include:</p>
+<p><strong>Neural-specific threat modeling:</strong> Use a BCI-focused threat taxonomy (such as TARA or a future standards body equivalent) during device design. Map identified techniques to your device’s attack surface. Generic IT threat modeling misses the most dangerous BCI-specific scenarios.</p>
+<p><strong>Neural impact scoring:</strong> Score identified threats using dimensions that capture biological harm, cognitive impact, and reversibility. Standard CVSS scoring cannot express these dimensions. Until a formal standard exists, any domain-specific scoring approach is better than none.</p>
+<p><strong>Baseline security requirements:</strong> The following represent minimum security properties that any BCI should address:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Requirement</th><th>What It Means</th></tr></thead><tbody><tr><td>1</td><td>Security architecture documentation</td><td>Document your device’s security boundaries, including the neural-silicon interface</td></tr><tr><td>2</td><td>Signal authenticity verification</td><td>Implement some form of checking that neural signals are genuine, not injected</td></tr><tr><td>3</td><td>Authenticated neural interface</td><td>Authenticate before accepting or sending neural signals</td></tr><tr><td>4</td><td>End-to-end encryption for neural data</td><td>Encrypt neural data in transit and at rest, with post-quantum readiness for long-lived implants</td></tr><tr><td>5</td><td>Continuous monitoring</td><td>Implement anomaly detection for the neural signal chain</td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>BCI manufacturers review available threat taxonomies against their device architectures</td></tr><tr><td><strong>Near-term</strong></td><td>Explore neural-specific impact scoring for identified threats in FDORA cybersecurity submissions</td></tr><tr><td><strong>Medium-term</strong></td><td>Implement baseline neural security requirements (signal authentication, encryption, monitoring)</td></tr><tr><td><strong>Medium-term</strong></td><td>Participate in standards body working groups</td></tr><tr><td><strong>Long-term</strong></td><td>Full QIF-Clinical (R1-R10) or equivalent standard compliance</td></tr></tbody></table>
+<h3 id="72-cloud-and-platform-providers-neural-data-as-highest-tier">7.2 Cloud and Platform Providers: Neural Data as Highest Tier</h3>
+<p><strong>Recommendation:</strong> Cloud providers hosting BCI data should classify neural data at the highest sensitivity tier, above PII and PHI.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Requirement</th><th>Rationale</th></tr></thead><tbody><tr><td>Encrypt neural data with dedicated keys (not shared with other data types)</td><td>Neural data uniqueness means compromise affects a person permanently</td></tr><tr><td>Implement neural-data-specific access controls</td><td>Access to neural data should require additional authentication beyond standard PHI controls</td></tr><tr><td>Retain neural data audit logs for the lifetime of the patient, not a fixed retention period</td><td>The sensitivity of neural data does not decay over time</td></tr><tr><td>Prohibit neural data use for secondary purposes without explicit consent</td><td>Neural data can reveal psychiatric conditions, cognitive decline, and emotional state</td></tr></tbody></table>
+<h3 id="73-insurers-bci-security-as-underwriting-criterion">7.3 Insurers: BCI Security as Underwriting Criterion</h3>
+<p><strong>Recommendation:</strong> Cyber insurers and medical device insurers should incorporate BCI security assessment into underwriting.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Insurers develop BCI-specific risk questionnaires informed by emerging threat taxonomies</td></tr><tr><td><strong>Medium-term</strong></td><td>Offer premium discounts for devices meeting recognized BCI security standards</td></tr><tr><td><strong>Long-term</strong></td><td>Require minimum BCI security certification for neural device coverage</td></tr></tbody></table>
+<p>The insurance industry drove adoption of PCI DSS for payment card security, NIST CSF for enterprise security, and building codes for property insurance. The same market mechanism can drive BCI security adoption before government mandates exist.</p>
+<hr>
+<h2 id="8-academia-and-international-bodies">8. Academia and International Bodies</h2>
+<h3 id="81-unesco-technical-enforcement-for-the-2025-recommendation">8.1 UNESCO: Technical Enforcement for the 2025 Recommendation</h3>
+<p><strong>The gap:</strong> The UNESCO Recommendation on the Ethics of Neurotechnology (November 2025) establishes the global ethical framework. It defines values (human rights, health, diversity, sustainability, professional integrity) and principles (proportionality, freedom of thought, privacy, protection of children). It does not specify how to implement any of them technically.</p>
+<p><strong>Recommendation:</strong> Partner with a technical standards body (NIST, ISO, or IEEE) to produce a technical annex that maps each recommendation to specific, auditable security controls.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>UNESCO Element</th><th>Proposed Technical Control</th><th>Standards Body</th></tr></thead><tbody><tr><td>Freedom of thought</td><td>Neural firewall with consent enforcement</td><td>NIST (CSF profile)</td></tr><tr><td>Privacy</td><td>Differential privacy for neural data, post-quantum encryption</td><td>ISO (27799 extension)</td></tr><tr><td>Protection of children</td><td>Age-tiered neural access controls, pediatric consent protocols</td><td>IEEE (P27XX)</td></tr><tr><td>Proportionality</td><td>Graduated response based on anomaly severity</td><td>IEC (62443 neural profile)</td></tr></tbody></table>
+<h3 id="82-oecd-cross-committee-collaboration">8.2 OECD: Cross-Committee Collaboration</h3>
+<p><strong>The gap:</strong> The OECD has both a cybersecurity committee and a neurotechnology committee. They published neurotechnology principles in 2024 and AI/cybersecurity guidance separately. The committees do not collaborate.</p>
+<p><strong>Recommendation:</strong> Convene a joint working session between the OECD cybersecurity committee and the neurotechnology committee to produce a shared working paper on BCI security governance.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Joint session at the next committee meeting cycle</td></tr><tr><td><strong>Medium-term</strong></td><td>Working paper on “Cybersecurity for Neurotechnology: Connecting OECD Principles”</td></tr><tr><td><strong>Long-term</strong></td><td>Integrated OECD guidance covering both cybersecurity and neurotechnology</td></tr></tbody></table>
+<h3 id="83-irbs-and-bci-society-cybersecurity-in-research-ethics">8.3 IRBs and BCI Society: Cybersecurity in Research Ethics</h3>
+<p><strong>The gap:</strong> Institutional Review Boards (IRBs) evaluate BCI research protocols for ethical compliance. They assess informed consent, risk/benefit balance, and participant protection. They do not evaluate cybersecurity. A BCI research protocol can receive IRB approval while transmitting neural data in cleartext over an unencrypted wireless link.</p>
+<p><strong>Recommendation:</strong> Include cybersecurity review as part of IRB evaluation for BCI research protocols.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>BCI Society publishes a cybersecurity checklist for BCI researchers</td></tr><tr><td><strong>Medium-term</strong></td><td>IRBs add a cybersecurity assessment section to BCI research protocol review</td></tr><tr><td><strong>Medium-term</strong></td><td>BCI Conference (Graz and others) adds a security track for submissions</td></tr><tr><td><strong>Long-term</strong></td><td>Cybersecurity assessment becomes standard practice for BCI research ethics review</td></tr></tbody></table>
+<h3 id="84-international-neuroethics-society-technical-enforcement-working-group">8.4 International Neuroethics Society: Technical Enforcement Working Group</h3>
+<p><strong>The gap:</strong> The International Neuroethics Society (INS) is the premier academic society for neuroethics. Its members define the rights and principles that QIF and similar frameworks aim to enforce technically. No cybersecurity researchers participate in INS, and no INS working group addresses technical enforcement.</p>
+<p><strong>Recommendation:</strong> Establish a working group on technical enforcement of neurorights, with joint membership from neuroethics and cybersecurity.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timeline</th><th>Action</th></tr></thead><tbody><tr><td><strong>Near-term</strong></td><td>Invite security researchers to present at the INS annual meeting</td></tr><tr><td><strong>Medium-term</strong></td><td>Form a joint working group on “Technical Enforcement of Neurorights”</td></tr><tr><td><strong>Long-term</strong></td><td>Publish joint papers bridging neuroethics principles and security engineering</td></tr></tbody></table>
+<hr>
+<h1 id="part-iii-implementation-framework">Part III: Implementation Framework</h1>
+<h2 id="9-phased-timeline">9. Phased Timeline</h2>
+<h3 id="phase-1-exploration-2026-2028">Phase 1: Exploration (2026-2028)</h3>
+<p><strong>Goal:</strong> Establish vocabulary, convene discussions, begin voluntary pilot programs.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Owner</th><th>Success Criteria</th></tr></thead><tbody><tr><td>Open-source BCI threat taxonomies and scoring frameworks published for community review</td><td>BCI security researchers</td><td>Multiple frameworks available for evaluation</td></tr><tr><td>First standards body working group convened (NIST, IEEE, or ISO)</td><td>Standards body</td><td>Working group charter and initial membership</td></tr><tr><td>MITRE evaluates BCI-specific techniques through community contribution process</td><td>MITRE + BCI security researchers</td><td>Initial assessment report</td></tr><tr><td>BCI manufacturers begin voluntary neural-specific threat modeling</td><td>Industry</td><td>At least 2 manufacturers pilot BCI-specific threat assessments</td></tr><tr><td>FDA acknowledges neural devices as a distinct cybersecurity category</td><td>FDA/CDRH</td><td>Guidance clarification or public communication</td></tr><tr><td>BCI-adjacent streaming library vulnerability remediated and disclosure process documented</td><td>Maintainers/Community</td><td>CVE assigned, patch available</td></tr></tbody></table>
+<h3 id="phase-2-standardization-2028-2031">Phase 2: Standardization (2028-2031)</h3>
+<p><strong>Goal:</strong> Formal standards development, manufacturer pilots, first assessment criteria.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Owner</th><th>Success Criteria</th></tr></thead><tbody><tr><td>NIST publishes BCI Security Community Profile for CSF 2.0</td><td>NIST</td><td>Published profile with neural subcategories</td></tr><tr><td>BCI-specific techniques begin appearing in MITRE knowledge base</td><td>MITRE</td><td>Contributed techniques with evidence</td></tr><tr><td>Domain-specific BCI vulnerability scoring system published</td><td>FIRST SIG or independent body</td><td>Specification complementing CVSS</td></tr><tr><td>IEEE BCI cybersecurity standard enters development</td><td>IEEE SA</td><td>Draft standard in progress</td></tr><tr><td>FDA 524B guidance updated with neural-specific considerations</td><td>FDA/CDRH</td><td>Updated guidance document</td></tr><tr><td>First IRBs include cybersecurity assessment in BCI research review</td><td>Research institutions</td><td>At least 5 IRBs pilot cybersecurity checklist</td></tr><tr><td>UNESCO begins technical annex development</td><td>UNESCO + technical standards body</td><td>Joint project charter</td></tr></tbody></table>
+<h3 id="phase-3-maturation-2031">Phase 3: Maturation (2031+)</h3>
+<p><strong>Goal:</strong> Recognized standards, assessor ecosystem development, broader compliance adoption.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Owner</th><th>Success Criteria</th></tr></thead><tbody><tr><td>ISO publishes neural security technical report or standard</td><td>ISO/IEC JTC 1/SC 27</td><td>Published document</td></tr><tr><td>FDA requires neural-specific cybersecurity documentation</td><td>FDA/CDRH</td><td>Regulatory requirement, not just guidance</td></tr><tr><td>Qualified BCI security assessors begin training</td><td>Standards body + certification body</td><td>Assessor training program</td></tr><tr><td>Cyber insurance incorporates BCI security assessment</td><td>Insurance industry</td><td>BCI-specific risk questionnaires in use</td></tr><tr><td>BCI security becomes standard component of research ethics review</td><td>Research institutions</td><td>Widespread adoption</td></tr></tbody></table>
+<p><strong>Note:</strong> These timelines are optimistic projections. Standards development processes typically take 3-7 years from working group formation to published standard. Regulatory guidance updates can take 2-5 years. The timelines above assume that the urgency of BCI security will motivate faster-than-typical action, but delays should be expected.</p>
+<h3 id="timeline-visualization">Timeline Visualization</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2026     2027     2028     2029     2030     2031     2032+</span></span>
+<span class="line"><span>  |        |        |        |        |        |        |</span></span>
+<span class="line"><span>  |===== Phase 1: Exploration =======|                  |</span></span>
+<span class="line"><span>  |  Vocabulary, working groups,     |                  |</span></span>
+<span class="line"><span>  |  voluntary pilots, evaluation    |                  |</span></span>
+<span class="line"><span>  |                                  |                  |</span></span>
+<span class="line"><span>                    |========= Phase 2: Standardization =========|</span></span>
+<span class="line"><span>                    |  Formal development, manufacturer pilots,   |</span></span>
+<span class="line"><span>                    |  first assessment criteria, guidance updates|</span></span>
+<span class="line"><span>                    |                                             |</span></span>
+<span class="line"><span>                                              |======== Phase 3: Maturation =====></span></span>
+<span class="line"><span>                                              |  Recognized standards,</span></span>
+<span class="line"><span>                                              |  assessor ecosystem,</span></span>
+<span class="line"><span>                                              |  compliance adoption</span></span></code></pre>
+<hr>
+<h2 id="10-qif-as-reference-implementation">10. QIF as Reference Implementation</h2>
+<p>QIF is one early attempt to address the gaps described in this proposal. It is not the only approach, and it is not a finished product. It is presented here as evidence that the problems are technically tractable, not as a recommendation for adoption. Standards bodies should evaluate, adapt, build upon, or replace every component below based on their own assessment processes.</p>
+<h3 id="component-summary">Component Summary</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Component</th><th>What It Does</th><th>Validation Data</th><th>Availability</th></tr></thead><tbody><tr><td><strong>TARA</strong></td><td>BCI threat taxonomy: 109 techniques, 15 tactics, MITRE-compatible IDs</td><td>49 from published literature, 46 recontextualized from neuroscience, 5 chain syntheses, 6 theoretical, 3 neuroethics-formalized. Not independently peer-reviewed.</td><td>Apache 2.0, GitHub, PyPI (<code>qtara</code>)</td></tr><tr><td><strong>NISS</strong></td><td>Neural impact scoring: 5 dimensions CVSS cannot express</td><td>All TARA techniques scored. Dimensions informed by clinical research but not clinically validated.</td><td>Apache 2.0, GitHub</td></tr><tr><td><strong>Hourglass Model</strong></td><td>11-band security architecture: N7-N1 (neural), I0 (interface), S1-S3 (synthetic)</td><td>Architectural model. Mapped against 24 commercial BCI devices and IEC 62443 zones/conduits.</td><td>Apache 2.0, GitHub</td></tr><tr><td><strong>NSP</strong></td><td>Post-quantum BCI encryption protocol: ML-KEM + ML-DSA + AES-256-GCM-SIV</td><td>Estimated 3.25% power overhead at 40 mW in simulation. Uses NIST FIPS 203/204/205 primitives. Not tested on implantable hardware.</td><td>Apache 2.0, GitHub, Rust reference implementation</td></tr><tr><td><strong>Neurowall</strong></td><td>Real-time neural security monitor: 3-layer defense (signal boundary, inference guard, policy agent)</td><td>Detected all 15 simulated attack scenarios in controlled testing. 5% false positive rate. Tested against BrainFlow synthetic board (16 channels). Not tested against real adversaries or in clinical settings.</td><td>Apache 2.0, GitHub, Python</td></tr><tr><td><strong>Runemate</strong></td><td>Policy engine: DSL for neural security rules with prioritized rule-stack evaluation</td><td>5-rule stack with sustained window tracking. Validated in Neurowall simulation only.</td><td>Apache 2.0, GitHub, Rust compiler</td></tr></tbody></table>
+<h3 id="what-qif-is-not">What QIF Is Not</h3>
+<ul>
+<li>QIF is not a standards body. It does not claim authority to define binding requirements.</li>
+<li>QIF is not a certification authority. It proposes certification levels but does not issue certificates.</li>
+<li>QIF is not a complete solution. The validation data comes from simulation, not clinical deployment.</li>
+<li>QIF is not the only approach. Alternative architectures may address the same gaps differently.</li>
+</ul>
+<h3 id="what-qif-suggests-is-feasible">What QIF Suggests Is Feasible</h3>
+<ul>
+<li>Neural signal authenticity verification is technically approachable through coherence monitoring (demonstrated in simulation, not in clinical settings).</li>
+<li>BCI-specific threats can be systematically cataloged and scored (109 techniques cataloged, scoring framework defined, neither independently peer-reviewed).</li>
+<li>Post-quantum cryptography may be feasible on implantable power budgets (estimated 3.25% overhead in simulation, not tested on actual implant hardware).</li>
+<li>Neurorights can be mapped to technical security controls (mapping exists, clinical and legal validity not yet established).</li>
+<li>Adaptive policy enforcement can respond to neural threat levels dynamically (demonstrated in simulation only).</li>
+</ul>
+<h3 id="preprint-and-doi">Preprint and DOI</h3>
+<p>The QIF framework is documented in a Zenodo preprint (DOI: <a href="https://doi.org/10.5281/zenodo.18640105">10.5281/zenodo.18640105</a>), version 1.4 as of February 2026. The preprint covers the theoretical foundation, hourglass model, TARA taxonomy, NISS scoring, and validation results. All code is available on GitHub under Apache 2.0.</p>
+<hr>
+<h2 id="11-limitations-and-open-questions">11. Limitations and Open Questions</h2>
+<p>This proposal has limitations that should inform how readers evaluate its recommendations.</p>
+<h3 id="evidentiary-limitations">Evidentiary Limitations</h3>
+<p><strong>No clinical validation.</strong> All technical feasibility evidence comes from simulation and synthetic data. No component has been tested on real human neural data, real BCI hardware, or in clinical environments. The gap between simulation and clinical deployment is significant and uncertain.</p>
+<p><strong>No independent audit.</strong> The QIF framework referenced throughout has not been independently audited, peer-reviewed (beyond preprint), or evaluated by any standards body. The validation data is self-reported by the developer.</p>
+<p><strong>No adversarial testing.</strong> Simulated attack scenarios were designed by the same team that built the defenses. Real adversaries may find attack vectors that simulation does not anticipate. The 15 simulated scenarios should not be taken as comprehensive coverage of the BCI threat space.</p>
+<p><strong>Limited BCI incident data.</strong> Unlike IT security, where decades of breach data inform risk assessment, BCI security has almost no real-world incident data. The threat techniques, scoring weights, and risk assessments in this proposal are based on theoretical analysis and analogical reasoning, not observed attacks on deployed BCIs.</p>
+<h3 id="scope-limitations">Scope Limitations</h3>
+<p><strong>Single-author perspective.</strong> This proposal reflects one researcher’s analysis. It has not been developed through multi-stakeholder consultation, which is the standard process for legitimate policy recommendations. The recommendations should be treated as starting points for discussion, not as vetted policy positions.</p>
+<p><strong>US-centric regulatory analysis.</strong> While international frameworks (EU, Chile, UNESCO) are discussed, the regulatory analysis is most detailed for US frameworks (FDA, HIPAA, state laws). Readers in other jurisdictions should evaluate the recommendations against their own regulatory contexts.</p>
+<p><strong>No cost-benefit analysis.</strong> The proposal recommends actions without estimating their cost to the organizations involved. Standards development, regulatory guidance, and industry adoption all carry significant resource requirements. A complete policy analysis would include cost estimates and economic impact assessment.</p>
+<p><strong>No patient/user input.</strong> The recommendations affect people who use or will use BCIs. This proposal was written without direct input from BCI users, patients, or patient advocacy groups. Their perspectives are essential for legitimate policy development.</p>
+<h3 id="open-questions">Open Questions</h3>
+<ol>
+<li><strong>What is the right balance between neural data privacy and security utility?</strong> Differential privacy parameters for neural data have not been empirically validated.</li>
+<li><strong>How should “cognitive integrity” be defined for compliance purposes?</strong> The term appears in law (SB 1223) but has no technical definition that clinicians, engineers, and regulators agree on.</li>
+<li><strong>Are the proposed timelines realistic?</strong> Standards development often takes longer than projected. The phases above assume motivation; experience suggests friction.</li>
+<li><strong>Will voluntary adoption work?</strong> PCI DSS and NIST CSF succeeded as voluntary standards, but BCI security may require regulatory mandates if the market is too small to generate adoption pressure.</li>
+<li><strong>What happens when the first real BCI security incident occurs?</strong> This proposal assumes a proactive approach. A major incident could accelerate or distort the standardization process in unpredictable ways.</li>
+</ol>
+<hr>
+<h2 id="12-how-to-engage">12. How to Engage</h2>
+<h3 id="for-standards-bodies">For Standards Bodies</h3>
+<ul>
+<li>Review the TARA taxonomy and NISS scoring framework at <a href="https://github.com/qinnovates/qinnovate">github.com/qinnovates/qinnovate</a></li>
+<li>Contact the author to discuss working group participation</li>
+<li>Use any QIF component as reference material in standards development (Apache 2.0 license)</li>
+</ul>
+<h3 id="for-regulators">For Regulators</h3>
+<ul>
+<li>Reference this proposal when developing neural-device-specific guidance</li>
+<li>Engage with the BCI manufacturer community on technical security requirements</li>
+<li>Consider TARA and NISS as examples of neural-specific threat modeling and scoring</li>
+</ul>
+<h3 id="for-bci-manufacturers">For BCI Manufacturers</h3>
+<ul>
+<li>Run TARA against your device architecture to identify neural-specific threats</li>
+<li>Score identified threats with NISS to capture dimensions CVSS misses</li>
+<li>Implement QIF-Basic (R1-R5) as a starting point for neural security</li>
+<li>Participate in standards body working groups to shape the standards you will need to comply with</li>
+</ul>
+<h3 id="for-researchers">For Researchers</h3>
+<ul>
+<li>Include cybersecurity assessment in BCI research protocols</li>
+<li>Submit security-focused papers to BCI conferences</li>
+<li>Use the QIF framework as a teaching tool for interdisciplinary courses</li>
+</ul>
+<h3 id="for-everyone">For Everyone</h3>
+<ul>
+<li>The code is open source: <a href="https://github.com/qinnovates/qinnovate">github.com/qinnovates/qinnovate</a></li>
+<li>The preprint is open access: <a href="https://doi.org/10.5281/zenodo.18640105">doi.org/10.5281/zenodo.18640105</a></li>
+<li>Issues, feedback, and contributions are welcome on GitHub</li>
+</ul>
+<hr>
+<h2 id="appendix-a-complete-regulatory-coverage-matrix">Appendix A: Complete Regulatory Coverage Matrix</h2>
+<p>This matrix maps which frameworks address which security properties for BCIs. <strong>X</strong> = full coverage, <strong>~</strong> = partial coverage, empty = no coverage.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Security Property</th><th>FDA</th><th>FDORA</th><th>HIPAA</th><th>State Laws</th><th>Chile</th><th>EU MDR</th><th>EU AI Act</th><th>NIST 800-53</th><th>ISO 27001</th><th>IEC 62443</th><th>SOC 2</th><th>Neurorights</th><th>QIF</th></tr></thead><tbody><tr><td>Device safety</td><td>X</td><td></td><td></td><td></td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Software patching</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td><td>~</td><td></td><td>~</td><td></td><td></td><td></td></tr><tr><td>Data confidentiality</td><td></td><td></td><td>X</td><td>X</td><td>X</td><td></td><td></td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr><tr><td>Data integrity</td><td></td><td></td><td>~</td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td>X</td><td>X</td><td></td><td>X</td></tr><tr><td>Access control</td><td></td><td></td><td>X</td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td>X</td><td>X</td><td></td><td>X</td></tr><tr><td>Encryption</td><td></td><td></td><td>~</td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td>X</td><td></td><td></td><td>X</td></tr><tr><td>Audit logging</td><td></td><td></td><td>X</td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td></td><td>X</td><td></td><td>X</td></tr><tr><td>Consent</td><td></td><td></td><td>X</td><td>X</td><td>X</td><td></td><td></td><td></td><td></td><td></td><td>~</td><td>X</td><td>X</td></tr><tr><td><strong>Neural signal authenticity</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td><strong>Adversarial stimulation prevention</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td><strong>Cognitive state integrity</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>~</td><td><strong>X</strong></td></tr><tr><td><strong>Neural re-identification</strong></td><td></td><td></td><td></td><td>~</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>~</td><td><strong>X</strong></td></tr><tr><td><strong>Biological impact scoring</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td><strong>Consent violation severity</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr><tr><td><strong>Reversibility assessment</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>X</strong></td></tr></tbody></table>
+<p>Source: <a href="NEUROSECURITY_GOVERNANCE.md#2-the-grc-gap">NEUROSECURITY_GOVERNANCE.md, Section 2</a></p>
+<hr>
+<h2 id="appendix-b-25-organization-directory">Appendix B: 25-Organization Directory</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Organization</th><th>Domain</th><th>Type</th><th>Neurotech Engagement</th><th>Security Engagement</th><th>Bridge Potential</th><th>Specific Ask</th></tr></thead><tbody><tr><td>1</td><td>NIST</td><td>Security</td><td>Standards</td><td>None</td><td>Comprehensive</td><td>High</td><td>BCI Security Profile for CSF 2.0</td></tr><tr><td>2</td><td>ISO/IEC</td><td>Security</td><td>Standards</td><td>None</td><td>Comprehensive</td><td>Medium</td><td>Neural data classification in ISO 27799</td></tr><tr><td>3</td><td>IEEE SA</td><td>Security</td><td>Standards</td><td>Indirect</td><td>Comprehensive</td><td>High</td><td>BCI Cybersecurity Standard (P27XX)</td></tr><tr><td>4</td><td>MITRE</td><td>Security</td><td>Standards</td><td>None</td><td>Comprehensive</td><td>High</td><td>Neural ATT&#x26;CK sub-matrix</td></tr><tr><td>5</td><td>FIRST/CVSS</td><td>Security</td><td>Standards</td><td>None</td><td>Comprehensive</td><td>High</td><td>Neural impact metrics for CVSS</td></tr><tr><td>6</td><td>OWASP</td><td>Security</td><td>Industry</td><td>None</td><td>Comprehensive</td><td>Medium</td><td>BCI Security Top 10</td></tr><tr><td>7</td><td>IEC 62443</td><td>Security</td><td>Standards</td><td>None</td><td>Comprehensive</td><td>Medium</td><td>Map zones/conduits to BCI boundaries</td></tr><tr><td>8</td><td>CISA</td><td>Security</td><td>Regulatory</td><td>None</td><td>Comprehensive</td><td>Medium</td><td>Neural device threat intelligence</td></tr><tr><td>9</td><td>ENISA</td><td>Security</td><td>Regulatory</td><td>Minimal</td><td>Comprehensive</td><td>Medium</td><td>Neurotechnology threat report</td></tr><tr><td>10</td><td>ISC2</td><td>Security</td><td>Certification</td><td>None</td><td>Comprehensive</td><td>Low</td><td>Neurosecurity specialization</td></tr><tr><td>11</td><td>ISACA</td><td>Security</td><td>Certification</td><td>None</td><td>Comprehensive</td><td>Low</td><td>Neurotechnology governance in COBIT</td></tr><tr><td>12</td><td>PCI SSC</td><td>Security</td><td>Certification</td><td>None</td><td>Comprehensive</td><td>Low</td><td>Model for certification tiers</td></tr><tr><td>13</td><td>UNESCO</td><td>Neuroethics</td><td>Standards</td><td>Comprehensive</td><td>None</td><td>High</td><td>Technical annex for 2025 Recommendation</td></tr><tr><td>14</td><td>OECD</td><td>Neuroethics</td><td>Standards</td><td>Direct</td><td>Indirect</td><td>High</td><td>Cross-committee working paper</td></tr><tr><td>15</td><td>Neurorights Foundation</td><td>Neuroethics</td><td>Advocacy</td><td>Comprehensive</td><td>None</td><td>Medium</td><td>Map neurorights to security controls</td></tr><tr><td>16</td><td>Int’l Neuroethics Society</td><td>Neuroethics</td><td>Academic</td><td>Comprehensive</td><td>None</td><td>Medium</td><td>Joint security working group</td></tr><tr><td>17</td><td>BCI Society</td><td>Neuroethics</td><td>Academic</td><td>Comprehensive</td><td>Minimal</td><td>Medium</td><td>Security track at BCI Conference</td></tr><tr><td>18</td><td>Berman Institute (JHU)</td><td>Neuroethics</td><td>Academic</td><td>Direct</td><td>None</td><td>Medium</td><td>Security of abandoned devices</td></tr><tr><td>19</td><td>FDA/CDRH</td><td>Medical</td><td>Regulatory</td><td>Direct</td><td>Indirect</td><td>High</td><td>Neural threat categories in 524B</td></tr><tr><td>20</td><td>EU MDR/EMA</td><td>Medical</td><td>Regulatory</td><td>Indirect</td><td>Indirect</td><td>Medium</td><td>Unified MDR + AI Act pathway</td></tr><tr><td>21</td><td>Chile (Law 21.383)</td><td>Policy</td><td>Regulatory</td><td>Comprehensive</td><td>None</td><td>Medium</td><td>Technical implementation standards</td></tr><tr><td>22</td><td>Colorado/California</td><td>Policy</td><td>Regulatory</td><td>Direct</td><td>None</td><td>Low</td><td>Model legislation with security reqs</td></tr><tr><td>23</td><td>IEEE Brain Initiative</td><td>Security</td><td>Industry</td><td>Direct</td><td>Indirect</td><td>High</td><td>BCI cybersecurity working group</td></tr><tr><td>24</td><td>DARPA</td><td>Security</td><td>Regulatory</td><td>Comprehensive</td><td>Comprehensive</td><td>High</td><td>Dedicated BCI security research program</td></tr><tr><td>25</td><td>EFF</td><td>Policy</td><td>Advocacy</td><td>Minimal</td><td>Direct</td><td>Medium</td><td>Neurorights position paper</td></tr></tbody></table>
+<p>Source: <a href="../src/data/convergence-data.ts">convergence-data.ts</a></p>
+<hr>
+<h2 id="appendix-c-qif-technical-summary-card">Appendix C: QIF Technical Summary Card</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>QIF — Quantified Interconnection Framework for Neural Security</span></span>
+<span class="line"><span>Version: 4.0 (Hourglass Model)</span></span>
+<span class="line"><span>License: Apache 2.0</span></span>
+<span class="line"><span>Preprint: doi.org/10.5281/zenodo.18640105</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Architecture: 11-Band Hourglass (7-1-3)</span></span>
+<span class="line"><span>  N7 (Cortex) → N6 → N5 → N4 → N3 → N2 → N1 → I0 (Interface) → S1 → S2 → S3 (Cloud)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Components:</span></span>
+<span class="line"><span>  TARA    109 techniques | 15 tactics | MITRE-compatible IDs</span></span>
+<span class="line"><span>  NISS    5 neural impact dimensions | 0-10 scale | extends CVSS</span></span>
+<span class="line"><span>  NSP     Post-quantum encryption | ML-KEM + ML-DSA | 3.25% power overhead</span></span>
+<span class="line"><span>  Neurowall  3-layer defense | 15 attacks tested | 5% FPR | auto-calibrating</span></span>
+<span class="line"><span>  Runemate   Policy DSL | 5-rule stack | Rust compiler</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Validation (simulation only, not clinically validated):</span></span>
+<span class="line"><span>  Neurowall: 15 simulated attack scenarios detected, 5% FPR</span></span>
+<span class="line"><span>  NSP: Estimated 3.25% power overhead at 40 mW (FIPS 203/204/205)</span></span>
+<span class="line"><span>  TARA: 49 literature-sourced + 46 recontextualized + 14 novel</span></span>
+<span class="line"><span>  BrainFlow: 16-channel synthetic board validation</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Code: github.com/qinnovates/qinnovate</span></span>
+<span class="line"><span>PyPI: pip install qtara</span></span></code></pre>
+<hr>
+<h2 id="appendix-d-glossary">Appendix D: Glossary</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody><tr><td><strong>ATT&#x26;CK</strong></td><td>Adversarial Tactics, Techniques, and Common Knowledge. MITRE’s threat knowledge base.</td></tr><tr><td><strong>BCI</strong></td><td>Brain-Computer Interface. A device that reads from and/or writes to the brain.</td></tr><tr><td><strong>Coherence Metric (Cs)</strong></td><td>QIF’s signal trustworthiness score combining phase, transport, and gain variance. Range [0,1].</td></tr><tr><td><strong>CSF</strong></td><td>NIST Cybersecurity Framework. Six functions: Govern, Identify, Protect, Detect, Respond, Recover.</td></tr><tr><td><strong>CVSS</strong></td><td>Common Vulnerability Scoring System. Scores vulnerability severity on a 0-10 scale. Maintained by FIRST.</td></tr><tr><td><strong>Differential Privacy</strong></td><td>Mathematical framework for adding calibrated noise to data to prevent re-identification while preserving statistical utility.</td></tr><tr><td><strong>FDORA</strong></td><td>Food and Drug Omnibus Reform Act (2022). Section 3305 mandates cybersecurity for medical devices.</td></tr><tr><td><strong>GRC</strong></td><td>Governance, Risk, and Compliance. The organizational discipline connecting policy to implementation.</td></tr><tr><td><strong>Hourglass Model</strong></td><td>QIF’s 11-band security architecture: 7 neural bands (N7-N1), 1 interface band (I0), 3 synthetic bands (S1-S3).</td></tr><tr><td><strong>I0</strong></td><td>Interface Zero. The hourglass band where biology meets silicon. The critical trust boundary.</td></tr><tr><td><strong>ICS</strong></td><td>Industrial Control Systems. Physical systems controlled by software, analogous to BCIs.</td></tr><tr><td><strong>ML-KEM</strong></td><td>Module-Lattice-Based Key Encapsulation Mechanism. NIST FIPS 203. Post-quantum key exchange.</td></tr><tr><td><strong>ML-DSA</strong></td><td>Module-Lattice-Based Digital Signature Algorithm. NIST FIPS 204. Post-quantum signatures.</td></tr><tr><td><strong>Neurorights</strong></td><td>Rights proposed by Ienca &#x26; Andorno (2017): cognitive liberty, mental privacy, mental integrity, psychological continuity.</td></tr><tr><td><strong>Neurowall</strong></td><td>QIF’s real-time neural security monitor. Three layers: signal boundary, inference guard, policy agent.</td></tr><tr><td><strong>NISS</strong></td><td>Neural Impact Scoring System. Five neural-specific severity dimensions extending CVSS.</td></tr><tr><td><strong>NSP</strong></td><td>Neural Security Protocol. Post-quantum encryption protocol for BCI data links.</td></tr><tr><td><strong>PQC</strong></td><td>Post-Quantum Cryptography. Cryptographic algorithms resistant to quantum computing attacks.</td></tr><tr><td><strong>Runemate</strong></td><td>QIF’s policy engine. Domain-specific language for neural security rules.</td></tr><tr><td><strong>SB 1223</strong></td><td>California Senate Bill 1223 (2025). Adds neural data as sensitive personal information under CCPA.</td></tr><tr><td><strong>SPHINCS+</strong></td><td>Stateless Hash-Based Signature Scheme. NIST FIPS 205. Post-quantum signatures with large signature size.</td></tr><tr><td><strong>TARA</strong></td><td>Threat Assessment for Risk Analysis. QIF’s BCI threat taxonomy: 109 techniques, 15 tactics.</td></tr></tbody></table>
+<hr>
+<h2 id="appendix-e-references">Appendix E: References</h2>
+<h3 id="academic-and-research">Academic and Research</h3>
+<p>Bonaci, T., Calo, R., &#x26; Chizeck, H. J. (2014). App Stores for the Brain: Privacy and Security in Brain-Computer Interfaces. <em>IEEE Ethics in Engineering, Science and Technology</em>.</p>
+<p>Denning, T., Matsuoka, Y., &#x26; Kohno, T. (2009). Neurosecurity: Security and Privacy for Neural Devices. <em>Neurosurgical Focus</em>, 27(1), E7.</p>
+<p>Ienca, M., &#x26; Andorno, R. (2017). Towards new human rights in the age of neuroscience and neurotechnology. <em>Life Sciences, Society and Policy</em>, 13, 5.</p>
+<p>Lazaro-Munoz, G., Pham, M. T., Munoz, K. A., et al. (2022). Post-trial access in implanted neural device research: Device maintenance, abandonment, and cost. <em>Brain Stimulation</em>, 15(5), 1029-1036.</p>
+<p>Lopez Bernal, S., Celdran, A. H., &#x26; Perez, G. M. (2021). A Framework and Taxonomy of Attacks on Brain-Computer Interfaces. <em>arXiv preprint</em>.</p>
+<p>Martinovic, I., Davies, D., Frank, M., Perito, D., Ros, T., &#x26; Song, D. (2012). On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces. <em>USENIX Security Symposium</em>.</p>
+<p>Qi, K. (2026). Quantified Interconnection Framework for Neural Security. <em>Zenodo</em>. DOI: 10.5281/zenodo.18640105.</p>
+<p>Yuste, R., et al. (2017). Four ethical priorities for neurotechnologies and AI. <em>Nature</em>, 551, 159-163.</p>
+<h3 id="regulatory-and-standards">Regulatory and Standards</h3>
+<p>EU AI Act, Regulation (EU) 2024/1689 (2024).</p>
+<p>EU Medical Device Regulation (MDR) 2017/745 (2017).</p>
+<p>FDA. (2023). Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions. Guidance for Industry and FDA Staff.</p>
+<p>FDORA Section 3305 / PATCH Act. Food and Drug Omnibus Reform Act of 2022, Pub. L. 117-328.</p>
+<p>FIRST. (2023). Common Vulnerability Scoring System v4.0 Specification.</p>
+<p>HIPAA Security Rule, 45 CFR Part 164 (1996, amended).</p>
+<p>IEC 62443. Industrial communication networks: Network and system security (2009-present).</p>
+<p>ISO/IEC 27001:2022. Information security, cybersecurity and privacy protection.</p>
+<p>NIST. (2024). Cybersecurity Framework 2.0. NIST CSWP 29.</p>
+<p>NIST. (2020). Security and Privacy Controls for Information Systems and Organizations. SP 800-53 Rev. 5.</p>
+<h3 id="neurorights-and-ethics">Neurorights and Ethics</h3>
+<p>Chile Law 21.383 (2021). Constitutional amendment protecting cerebral activity.</p>
+<p>Colorado HB 24-1058 (2024). Protections for Biological and Neural Data.</p>
+<p>California SB 1223 (2025). Neural Data as Sensitive Personal Information.</p>
+<p>OECD. (2019). Recommendation on Responsible Innovation in Neurotechnology.</p>
+<p>UNESCO. (2025). Recommendation on the Ethics of Neurotechnology. 43rd General Conference.</p>
+<hr>
+<h2 id="document-history">Document History</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Version</th><th>Date</th><th>Changes</th></tr></thead><tbody><tr><td>1.2</td><td>2026-02-21</td><td>ChatGPT cross-AI review: legal accuracy caveats (FDA non-binding, HIPAA scope, GDPR unlitigated, state laws privacy-not-security), clinical research governance noted, existing standards adaptability acknowledged</td></tr><tr><td>1.1</td><td>2026-02-21</td><td>Gemini cross-AI review: conflict of interest disclosure, qualified validation claims, stretched timelines, audience routing expanded, tone recalibrated, limitations section added</td></tr><tr><td>1.0</td><td>2026-02-21</td><td>Initial publication</td></tr></tbody></table>
+<hr>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li><a href="NEUROSECURITY_GOVERNANCE.md">NEUROSECURITY_GOVERNANCE.md</a> (the analysis this proposal builds on)</li>
+<li><a href="POST_DEPLOYMENT_ETHICS.md">POST_DEPLOYMENT_ETHICS.md</a> (device lifecycle and abandonment)</li>
+<li><a href="INFORMED_CONSENT_FRAMEWORK.md">INFORMED_CONSENT_FRAMEWORK.md</a> (consent protocols)</li>
+<li><a href="../qif-framework/README.md">QIF Framework README</a> (technical framework overview)</li>
+<li><a href="../qif-framework/NSP-PROTOCOL-SPEC.md">NSP Protocol Spec</a> (encryption protocol)</li>
+<li><a href="../tools/neurowall/README.md">Neurowall</a> (neural security monitor)</li>
+</ul>
+<hr>
+<p><em>Published under <a href="../LICENSE">Apache 2.0</a> alongside the rest of the Qinnovate project.</em></p> </div> <footer class="mt-16 pt-8 border-t border-[var(--color-border)] flex items-center justify-between"> <a href="/governance/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+&larr; All governance documents
+</a> <a href="https://github.com/qinnovates/qinnovate/blob/main/governance/NEUROSECURITY_POLICY_PROPOSAL.md" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors flex items-center gap-1.5"> <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+View source on GitHub
+</a> </footer> </article> <footer class="border-t border-[var(--color-border)] mt-24 relative overflow-hidden" data-astro-cid-sz7xmlte> <!-- Background brand mark --> <div class="footer-brand-bg select-none pointer-events-none" aria-hidden="true" data-astro-cid-sz7xmlte> <span class="footer-brand font-bold font-[family-name:var(--font-heading)] leading-none bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent" data-astro-cid-sz7xmlte>
+QINNOVATE
+</span> </div> <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" data-astro-cid-sz7xmlte> <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-astro-cid-sz7xmlte> <!-- Brand column --> <div class="col-span-2 md:col-span-1" data-astro-cid-sz7xmlte> <a href="/" class="text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]" data-astro-cid-sz7xmlte>
+Qinnovate Open Neural Atlas
+</a> <p class="mt-3 text-sm text-[var(--color-text-muted)] leading-relaxed" data-astro-cid-sz7xmlte>
+Neurostandards — open frameworks for the governance of neurotechnology.
+</p> <p class="mt-4 text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+QIF v7.0 Hourglass &middot; Open Framework
+</p> </div> <div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Technology </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/framework/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Framework </a> </li><li data-astro-cid-sz7xmlte> <a href="/nsp/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NSP Protocol </a> </li><li data-astro-cid-sz7xmlte> <a href="/runemate/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Project Runemate </a> </li><li data-astro-cid-sz7xmlte> <a href="/TARA/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> TARA Atlas </a> </li><li data-astro-cid-sz7xmlte> <a href="/scoring/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> NISS Scoring </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Resources </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/whitepaper/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Latest Whitepaper (v6.2.1) </a> </li><li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates/qinnovate/blob/main/docs/docs/api.md" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> API Documentation </a> </li><li data-astro-cid-sz7xmlte> <a href="/news/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> News </a> </li><li data-astro-cid-sz7xmlte> <a href="/lab/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Lab </a> </li><li data-astro-cid-sz7xmlte> <a href="/rss.xml" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> RSS Feed </a> </li> </ul> </div><div data-astro-cid-sz7xmlte> <h3 class="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-4" data-astro-cid-sz7xmlte> Connect </h3> <ul class="space-y-3" data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte> <a href="/whitepaper/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> QIF Whitepaper </a> </li><li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> GitHub </a> </li><li data-astro-cid-sz7xmlte> <a href="/about/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> About </a> </li><li data-astro-cid-sz7xmlte> <a href="/licensing/" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" data-astro-cid-sz7xmlte> Licensing </a> </li><li data-astro-cid-sz7xmlte> <a href="https://github.com/qinnovates/qinnovate/tree/main/governance" class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte> Governance (GitHub) </a> </li> </ul> </div> </div> <div class="mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" data-astro-cid-sz7xmlte> <p class="text-xs text-[var(--color-text-faint)]" data-astro-cid-sz7xmlte>
+&copy; 2026 Qinnovate Open Neural Atlas. An open research framework.
+</p> </div> </div> </footer>   <!-- Scroll-driven reveal observer --> <script type="module">function o(){const t=new IntersectionObserver(e=>{e.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),t.unobserve(r.target))})},{threshold:.1,rootMargin:"0px 0px -40px 0px"});document.querySelectorAll(".reveal").forEach(e=>t.observe(e))}o();document.addEventListener("astro:after-swap",o);</script> </body> </html>
