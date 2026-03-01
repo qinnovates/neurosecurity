@@ -41,7 +41,7 @@ const essentialPosts = essentialSlugs
 
 ---
 
-<BaseLayout title="Qinnovate — Neural Security Atlas" description="Brain-computer interfaces can be hacked. No one had mapped what that means for patients. Qinnovate's Neural Atlas is an open research framework mapping BCI attack techniques to potential psychiatric outcomes and neurorights implications.">
+<BaseLayout title="Qinnovate — Your Brain Has Rights" description="5 neurorights recognized. Zero enforcement mechanisms. Qinnovate is the first open framework to operationalize neurorights for BCI security — mapping attack techniques to psychiatric outcomes and governance gaps.">
   <Nav />
 
   <!-- ═══ BEAT 1: THE INCIDENT — Hybrid Hero ═══ -->
@@ -59,21 +59,24 @@ const essentialPosts = essentialSlugs
       </p>
 
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
-        <span class="text-[var(--color-text-primary)]">In 2021, COVID and PTSD rewired my brain</span>
-        <br />
-        <span class="text-[var(--color-text-primary)]">through the same pathways a BCI exploit would use.</span>
+        <span class="text-[var(--color-text-primary)]">Your Brain Has Rights.</span>
         <br />
         <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-          So I mapped all of them.
+          No Engineering Exists to Enforce Them.
         </span>
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
-        {totalThreats} attack techniques. {dsm5Count} psychiatric outcomes. {neurorightsCount} neurorights at stake. No one had connected these dots. This is the open atlas that does.
+        {neurorightsCount} neurorights recognized. {totalThreats} attack techniques catalogued. Zero enforcement mechanisms.
+        The first open framework to close the gap between what neurorights promise and what BCI systems can actually protect.
       </p>
 
       <!-- Metrics -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10">
+        <a href="/neurogovernance/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-emerald-400/30 transition-all">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">{neurorightsCount}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">neurorights<br/>operationalized</p>
+        </a>
         <a href="/TARA/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalThreats}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">BCI attack techniques<br/>catalogued and scored</p>
@@ -86,19 +89,15 @@ const essentialPosts = essentialSlugs
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">{dsm5Count}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">psychiatric diagnoses<br/>mapped (awaiting validation)</p>
         </a>
-        <a href="/neurogovernance/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-emerald-400/30 transition-all">
-          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">{neurorightsCount}</p>
-          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">neurorights<br/>operationalized</p>
-        </a>
       </div>
 
       <!-- Dual-audience CTAs -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a
-          href="/case-studies/endogenous-attack-chain/"
-          class="px-6 py-3 rounded-lg bg-[var(--color-accent-secondary)] text-white font-medium hover:bg-[var(--color-accent-secondary)]/90 transition-colors"
+          href="/neurogovernance/"
+          class="px-6 py-3 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
-          Read the Full Story
+          Explore the Rights
         </a>
         <a
           href="/TARA/"
@@ -119,20 +118,22 @@ const essentialPosts = essentialSlugs
     </div>
   </section>
 
-  <!-- ═══ BEAT 2: THE QUESTION — What if this wasn't random? ═══ -->
+  <!-- ═══ BEAT 2: THE GAP — Unaltered vs Self-Originating ═══ -->
   <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="reveal">
-      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4 text-center">The Question</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">What if the damage wasn't random?</h2>
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4 text-center">The Gap</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">
+        "Unaltered" is not the same as "self-originating"
+      </h2>
       <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          After COVID collided with PTSD from a traumatic event years earlier, my cognition fragmented in specific, measurable ways: memory consolidation disrupted, threat detection hyperactivated, self-model corrupted. These weren't vague symptoms. They mapped to known neural pathways with precision that looked structural, not accidental.
+          Five neurorights have been proposed to protect your brain: Mental Privacy, Cognitive Liberty, Mental Integrity, Psychological Continuity, and Equal Access. Philosophical frameworks define what these rights mean. <strong class="text-[var(--color-text-primary)]">None specify how a BCI system would actually enforce them.</strong>
         </p>
         <p>
-          As a security engineer, I recognized the pattern. <strong class="text-[var(--color-text-primary)]">These were the same failure modes I'd expect from a targeted attack on a brain-computer interface</strong> — except no device was involved. The "attacker" was endogenous: inflammation from a virus and plasticity changes from trauma, operating on the same neural substrate that BCI devices read and write.
+          The critical gap is in Mental Integrity. Current formulations protect against <em>modification</em> of neural signals — tampering, injection, disruption. But we are building systems that can inject, simulate, or reshape neural signals. A perfectly intact signal that was never generated by your brain passes every integrity check and violates everything MI is supposed to protect. <strong class="text-[var(--color-text-primary)]">Governance models must distinguish between "unaltered" and "self-originating."</strong>
         </p>
         <p>
-          That raised a harder question: if biology can produce these failure modes naturally, <strong class="text-[var(--color-text-primary)]">what happens when we connect programmable devices to the same pathways?</strong>
+          That distinction requires engineering, not philosophy. It requires a metric that can verify whether a signal's statistical properties match your baseline neural signature. <strong class="text-[var(--color-text-primary)]">No framework had built that. So we did.</strong>
         </p>
       </div>
     </div>
@@ -384,7 +385,23 @@ const essentialPosts = essentialSlugs
     </a>
   </section>
 
-  <!-- ═══ BEAT 6: THE CALL — Why this matters before mass adoption ═══ -->
+  <!-- ═══ BEAT 6: THE ORIGIN — How I found this ═══ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">The Origin</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">How a security engineer found a neuroscience problem</h2>
+      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          In 2021, COVID collided with PTSD from a traumatic event years earlier. My cognition fragmented in specific, measurable ways: memory consolidation disrupted, threat detection hyperactivated, self-model corrupted. As a security engineer, I recognized the pattern. <strong class="text-[var(--color-text-primary)]">These were the same failure modes I'd expect from a targeted attack on a brain-computer interface</strong> — except no device was involved.
+        </p>
+        <p>
+          The "attacker" was endogenous: inflammation and neuroplasticity changes, operating on the same neural substrate that BCI devices read and write. If biology can produce these failure modes naturally, <strong class="text-[var(--color-text-primary)]">what happens when we connect programmable devices to the same pathways?</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BEAT 7: THE CALL — Why this matters before mass adoption ═══ -->
   <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="reveal">
       <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4 text-center">Why Now</p>
