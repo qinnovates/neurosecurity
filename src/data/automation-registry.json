@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-02-25T01:46:51.168Z",
+  "last_updated": "2026-03-02T01:43:35.645Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -11,7 +11,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/deploy.yml",
       "status": "active",
-      "last_triggered": "2026-02-25T00:23:06Z",
+      "last_triggered": "2026-03-01T21:03:38Z",
       "last_status": "success",
       "dependencies": [
         "src/",
@@ -31,8 +31,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/changelog.yml",
       "status": "active",
-      "last_triggered": "2026-02-25T00:22:25Z",
-      "last_status": "success",
+      "last_triggered": "2026-03-01T21:02:31Z",
+      "last_status": "unknown",
       "dependencies": [
         "scripts/changelog-update.mjs",
         "git log"
@@ -52,8 +52,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": "2026-02-22T05:09:56Z",
-      "last_status": "failure",
+      "last_triggered": "2026-03-01T08:13:42Z",
+      "last_status": "success",
       "dependencies": [
         ".github/security-audit/scripts/audit.py",
         ".github/security-audit/patterns/secrets.json"
@@ -73,8 +73,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-02-24T17:49:27Z",
-      "last_status": "success",
+      "last_triggered": "2026-03-01T17:13:53Z",
+      "last_status": "failure",
       "dependencies": [
         "scripts/fetch-news.mjs"
       ],
@@ -91,7 +91,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/verify-citations.yml",
       "status": "active",
-      "last_triggered": "2026-02-24T18:20:13Z",
+      "last_triggered": "2026-03-01T21:03:27Z",
       "last_status": "success",
       "dependencies": [
         "scripts/verify/run_all.py",
@@ -135,7 +135,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/timeline-check.yml",
       "status": "active",
-      "last_triggered": "2026-02-25T00:22:30Z",
+      "last_triggered": "2026-03-01T21:02:56Z",
       "last_status": "success",
       "dependencies": [
         "scripts/timeline-check.mjs",
@@ -154,7 +154,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/dependabot-auto-merge.yml",
       "status": "active",
-      "last_triggered": "2026-02-21T07:09:23Z",
+      "last_triggered": "2026-03-01T08:12:22Z",
       "last_status": "success",
       "dependencies": [
         "Dependabot PRs"
@@ -172,8 +172,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/field-journal-blog.yml",
       "status": "active",
-      "last_triggered": "2026-02-21T16:13:22Z",
-      "last_status": "success",
+      "last_triggered": "2026-02-28T19:13:32Z",
+      "last_status": "failure",
       "dependencies": [
         "scripts/field-journal-to-blog.mjs",
         "scripts/verify/fact_check_field_journal.py",
@@ -192,7 +192,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/publish-pypi.yml",
       "status": "active",
-      "last_triggered": "2026-02-21T17:07:58Z",
+      "last_triggered": "2026-02-26T11:50:36Z",
       "last_status": "success",
       "dependencies": [
         "shared/qtara/",
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-02-25T01:46:23Z",
+      "last_triggered": "2026-03-02T01:43:11Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
@@ -599,8 +599,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-intel.yml",
       "status": "active",
-      "last_triggered": "2026-02-22T17:23:32Z",
-      "last_status": "success",
+      "last_triggered": "2026-03-01T17:20:27Z",
+      "last_status": "failure",
       "dependencies": [
         "scripts/fetch-intel.mjs",
         "shared/bci-landscape.json"
