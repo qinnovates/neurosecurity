@@ -1,6 +1,42 @@
 [
   {
     "type": "external",
+    "title": "Brain-computer interface technology sees broader application, benefiting patients - Alwihda Info",
+    "date": "2026-03-03",
+    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQYkFFY05IZm1OTGhtc3Y5dXBnZHBZOWZZcXRVMVVJajk5ZlRwVFg0Z1BnSDVqbEJHUTBnQmdrQUlCOU9Qd1FINmplYW1XV1QwUjZydDlkMmFudmluZFdrYzBqRFF1TnQxYk54M1BBSElsU3dORmlWRWxmUUtCTUN4cXM4akszNzNBY0tlNHkzSUtRUnFkSFNBRFVKZk1qYTNTU3VxSEZJQlJqS0JRYVo0MVIwZ0NSZ0JXVE5YcVlR?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-computer interface technology sees broader application, benefiting patients&nbsp;&nbsp;Alwihda Info",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Korean YouTuber One Shot Hansol Applies for Neuralink Brain Chip Trial - 조선일보",
+    "date": "2026-03-03",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQaWhCX1V1WndvdUw1dWJyUTVaMlpxUDVGMUJTMGtTMkNsTndoRmp6M0lTdDVkbFUydFpZaWEtMnhQTlRDSGU1elB1dDZ5WHZRVTB4YlJYUkRrRkhKOW1CVWV4ZG44RkttcFVZTmx4Y3dBVHJTYjVCall0NEFSSnNMWGpRVFdURlht?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Korean YouTuber One Shot Hansol Applies for Neuralink Brain Chip Trial&nbsp;&nbsp;조선일보",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Inferring brain plasticity rule under long-term stimulation with structured recurrent dynamics",
+    "date": "2026-03-03",
+    "url": "https://arxiv.org/abs/2603.00213",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.00213v1 Announce Type: new \nAbstract: Understanding how long-term stimulation reshapes neural circuits requires uncovering the rules of brain plasticity. While short-term synaptic modificat",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "OpenAI’s &#8220;compromise&#8221; with the Pentagon is what Anthropic feared",
+    "date": "2026-03-02",
+    "url": "https://www.technologyreview.com/2026/03/02/1133850/openais-compromise-with-the-pentagon-is-what-anthropic-feared/",
+    "source": "MIT Technology Review",
+    "summary": "On February 28, OpenAI announced it had reached a deal that will allow the US military to use its technologies in classified settings. CEO Sam Altman said the negotiations, which the company began pur",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "China’s ultrasound brain tech race heats up - Fox News",
     "date": "2026-03-02",
     "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5YYU9JMU9IN0FiclJKUE9XVXk4WWg4VGdxT1RzZ3hXakpFX3hTLWg5Y3NTVGZGNnhOU3l3djYza0JHV3VFSk9yY0hDVlc3V3BnY1BpTFdqVy1zT2dBWjlWdVlSM0M0eFhMbDlTNjVlelVnV2VNVWh1YlNwONIBgAFBVV95cUxNTHlIUWFxa1ZXNXE4ZTF5Qm9aUXhaU3ZQWmxQOWhJdVNqRXNWZ3FwYWZURGV2ZUlDbWN1bHBnMEJNY21iSlRtaWo4R1h0RXZkaXgtT3dtUnFXSHlRLXVZbTc4cmtRZ0hKT3poczFVaXFQVm9Kdm1JWTlzWXpLbWFSOA?oc=5",
@@ -10,65 +46,11 @@
   },
   {
     "type": "external",
-    "title": "Visually Impaired YouTuber Applies for Neuralink Brain Chip Trial After 16 Years - 조선일보",
-    "date": "2026-03-02",
-    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPRFFmUVYwYUMxQ0NtaGFkeV85SnVOSDZISmp3V2VBN3BNNlN3d3dkUmNCbGhobjhCYVpoN0FmVEY2VWZNT21qWVRUby1fMHU0MVNzTmFHRXBnRGlMVlFvS1BmOHFfN01KWUFYSmEtRVBGWnBVbm16ZXNYT2JqRjV1QnRVSGpYd3NqYzM3RDJR?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Visually Impaired YouTuber Applies for Neuralink Brain Chip Trial After 16 Years&nbsp;&nbsp;조선일보",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-OF: An Omnifunctional Foundation Model for fMRI, EEG and MEG",
-    "date": "2026-03-02",
-    "url": "https://arxiv.org/abs/2602.23410",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2602.23410v1 Announce Type: cross \nAbstract: Brain foundation models have achieved remarkable advances across a wide range of neuroscience tasks. However, most existing models are limited to a s",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Spectral-Stimulus Information for Self-Supervised Stimulus Encoding",
-    "date": "2026-03-02",
-    "url": "https://arxiv.org/abs/2407.06195",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2407.06195v2 Announce Type: replace \nAbstract: Mammalian spatial navigation relies on specialized neurons, such as place and grid cells, which encode position based on self-motion and environmen",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink Exclusive: The First Monkey to Benefit from Groundbreaking Neuralink Advances Since 2021 - ipsnews.net",
-    "date": "2026-03-01",
-    "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOOXBCaGVXS0dYVUhkVjlmRGNIazlJSEo0anNtOE1VZ0gxM1I0T1lmUl9NNTJFaVBlVUlzQ0Z4VzNpOXBkTmg3czEtb2g5WE1IU0tmekladXJYQmNDbF81VGpfX1lYVlpBSWlTdUo2TXFpZkh1TkNEUzlVNjY3NGNzc29fTGFXNTN3Y0RodDBSbWRuSkZhdHozdjkwc19YZzktMGVzZFRrLVpzVGQycEJUNmlEc2pwT2tUOHQtVktGQmNKZDBHVHN0QV96Sl9LUnlBSTRUUQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Neuralink Exclusive: The First Monkey to Benefit from Groundbreaking Neuralink Advances Since 2021&nbsp;&nbsp;ipsnews.net",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "How AI can read our scrambled inner thoughts - BBC",
-    "date": "2026-02-27",
-    "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5UVDRwRVVRT1BrcE43RXphNXVYZmJDRGo3dU1EMXdmcG5OcHFVdWEyN1JGd1VGaTVKS2pNaTdDWG1pT1lYeUdPcXFUYWdBdDhhWkZzRzZlQ09SZUhKckRaTWJza0NmT3JGZ3BsSnhnNlVkYmVaMk91c2NFaEpRQQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "How AI can read our scrambled inner thoughts&nbsp;&nbsp;BBC",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Elon Musk's Neuralink plans $8.2M expansion of Austin-area facility, new hires - Austin American-Statesman",
     "date": "2026-02-27",
     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPNTVvTENIR1F0WktJVzRRaWJla2twOXhJc0plZFpQTE1CMFVkLWVZTzNZamxtc2NtTFpTQjlneWx4SzBHTFA3WEN5eVJqdGVLSE5Ea3IzZFZSWlVvcjRWZjVpR1FPTlVmTkhLcWxERllPVWhDU3BKdnFUV3RQcF9mY3J3bjZHcmV4NGNWb2NuMzE4bFhLQlFqQ2hB?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Elon Musk's Neuralink plans $8.2M expansion of Austin-area facility, new hires&nbsp;&nbsp;Austin American-Statesman",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink planning to expand operations in Del Valle - KVUE",
-    "date": "2026-02-27",
-    "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQcFVvRUxfTnhxZkNPZlB2Z3lNWHYzenRLa3VkQ2E5RUY3YTNFdGpHYUJ2Q242VUZJREV0UDJEOGxWSlNSWjlrbEJLYW00U3FvRkJNX3o5NlE0aXVleldRMEdKUGtNdV9MNEd5YTNYUUxWbVpHMXBDWVg1QTJJRENzaFhpOGkwNG9wMkhnU1JtbFZIUzZ4N1lJczZHa3R5WU1LVUFYbEhNMFpEQ1Q0VXRWNW93ODAyQnVqR25sUWloejFPRk5lYzBvVjk0Zw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink planning to expand operations in Del Valle&nbsp;&nbsp;KVUE",
     "category": "neurotechnology"
   },
   {
@@ -118,11 +100,38 @@
   },
   {
     "type": "external",
+    "title": "Investing in Merge Labs - OpenAI",
+    "date": "2026-01-15",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5wMlJraHhXX21BdThQN0w3MU51a3ZsdTBHRG1pYlh3UmtwV1RwTFh0aEVJTUdWT3dVdVZESUw4MWJRVEtpLXlLb1JEc2NScnlnUVBDNzFmYVF6YjMtUEE?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Investing in Merge Labs&nbsp;&nbsp;OpenAI",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs - WIRED",
     "date": "2026-01-15",
     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTEFDSTlqSVhUWDZObWhzRlAzSTJ6ZlhuQW5uUVVVTGQ2NTVoZzAwZTlLVzBqQ2picGlLMi0weUNBcHdNQWtXVDNxbG9nNXRvUnlfNDNsZnhfMXBpNHhXaVZOWDdTRUxkWFh3VFBHeHQ3Z0xvZndXY0NYOHFmS04xald6alUxSXRQSHNFaEdldE9aVndXR0Z3?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "OpenAI Invests in Sam Altman’s New Brain-Tech Startup Merge Labs&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says - Reuters",
+    "date": "2026-01-01",
+    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
+    "date": "2025-12-11",
+    "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
     "category": "neurotechnology"
   },
   {
@@ -177,15 +186,6 @@
     "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOX3czQ01Xb2REeUx1elVzSXI5UUhaSHhxUWthcG9teTl5Sk9NYTU4cmZnenN2aVRfemZnT3dvV0d2V194MzVvTGZWU0V1eUFEQWstWFpYZy13WFh3Tnk4TFdDSFZPc2VjZ3BYZWhacjFyemVqZm9zYTRSaUZSS0lGNTlCNm9xaWM?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Exclusive: Startup lets you query AI with silent speech&nbsp;&nbsp;Axios",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Exclusive | Apple to Support Brain-Implant Control of Its Devices - WSJ",
-    "date": "2025-05-13",
-    "url": "https://news.google.com/rss/articles/CBMi9wJBVV95cUxNTU1PTlRLQkxBanJsVDRiWUVGMFhpMUFFU0hHNHhONDRXcm1jOFM1TWZsOU1EdUpxaWNueGI1N3hPQTBnc3JXLUVtVTIwYkctLVdxVk5keW1LZEZvV0JMeWNWbTVJa0l2TjN0WGJKRjU1NVFwSFJJczVmUEpYcTE1VF94SjhyVHhrdlYtdXl1ODNkRTc3LVpYNUxEd0xnN0pWampHbThkMS1QTEJEdHU4Q2JIc1J0Z2pHUTNBQjVrcjFtaUtzUnVlMEVYZ1NIdm1Xa3dfMVdJRlpKWkl0M2RYVDUxVEJrSmE4dTBHSWtuemZCekJzbXBLRFRSZWJVeVI4ZVJPdWFia2RCUHJ2NFp1N3o0NWpEN3htbFVCeU9zOUEtRjNIbmpuLXotM1p3LVNUaEJVcjhxeEJkdUw3SVNwc2hhNmplTW50OUdyLWI2RXp0YmlZRWhxM2F0empyMDhwMXNHZ2FrODVESHl1d1k1NDNNOUkxSEE?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Exclusive | Apple to Support Brain-Implant Control of Its Devices&nbsp;&nbsp;WSJ",
     "category": "neurotechnology"
   }
 ]
