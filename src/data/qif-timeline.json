@@ -7,7 +7,7 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-02-27",
+    "as_of": "2026-03-04",
     "threat_techniques": 109,
     "bci_devices": 24,
     "brain_regions": 37,
@@ -24,7 +24,7 @@
     "derivation_log_entries": 70,
     "field_journal_entries": 20,
     "neurowall_version": "v0.8",
-    "blog_posts": 50,
+    "blog_posts": 59,
     "cross_ai_validations": 9,
     "research_sources": 255
   },
