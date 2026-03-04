@@ -31,6 +31,7 @@ const validationLinks = [
 const policyLinks = [
   { href: '/governance/', label: 'Governance', desc: 'Ethics, consent, and regulatory compliance' },
   { href: '/neurogovernance/', label: 'Neurorights Framework', desc: 'Five neurorights operationalized across threats' },
+  { href: '/landscape/', label: 'Neuroethics Landscape', desc: '23 frameworks, 12 institutions, and the Principles-to-Protocol Gap' },
   { href: '/psychiatric/', label: 'Psychiatric Mappings', desc: 'DSM-5 diagnostic outcome projections' },
 ];
 
@@ -45,7 +46,7 @@ const toolsLinks = [
 const isStoryActive = currentPath.startsWith('/about/') || currentPath.startsWith('/roadmap/') || currentPath === '/case-studies/endogenous-attack-chain/';
 const isFrameworkActive = ['/TARA/', '/scoring/', '/neurogovernance/', '/therapeutics/', '/security/', '/glossary/'].some(p => currentPath.startsWith(p)) || currentPath.startsWith('/framework/');
 const isValidationActive = ['/whitepaper/', '/case-studies/', '/lab/', '/bci/', '/bci-explorer/', '/bci-limits/', '/validation/'].some(p => currentPath.startsWith(p)) && !currentPath.startsWith('/case-studies/endogenous');
-const isPolicyActive = ['/governance/', '/psychiatric/'].some(p => currentPath.startsWith(p));
+const isPolicyActive = ['/governance/', '/psychiatric/', '/landscape/'].some(p => currentPath.startsWith(p));
 const isToolsActive = ['/tools/', '/nsp/', '/runemate/', '/explore/', '/explorer/'].some(p => currentPath.startsWith(p));
 const isBlogActive = currentPath.startsWith('/news/') || currentPath.startsWith('/publications/');
 ---
