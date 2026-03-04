@@ -5,9 +5,9 @@
 > validation agents (quantum physics, neuroscience, cybersecurity) during the
 > framework review conducted on 2026-02-02.
 >
-> **Last updated:** 2026-02-21
-> **Sources extracted from:** Three parallel validation agent sessions
-> **Total unique sources:** 226+
+> **Last updated:** 2026-03-04
+> **Sources extracted from:** Three parallel validation agent sessions + ongoing research
+> **Total unique sources:** 234+
 
 ---
 
@@ -467,7 +467,24 @@ Sources are organized by domain and sorted newest-first within each domain.
 | F5 | Schroder T, Sirbu R, Park S, Morley J et al. (2025). "Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations." Neuroethics 18. arXiv:2508.12571. | https://link.springer.com/article/10.1007/s12152-025-09607-3 | Preprint | Most comprehensive BCI security paper (Yale). Dual publication verified 2026-02-16. Key related work. |
 | F6 | Meng L, Lin CT, Jung TP, Wu D. (2023). "Adversarial Robustness Benchmark for EEG-Based Brain-Computer Interfaces." Future Generation Computer Systems 143:231-247. | https://doi.org/10.1016/j.future.2023.01.017 | Preprint v1.4 | EEG adversarial attack benchmark. Volume/pages corrected v1.4. |
 
-## 11. Neuroethics & Governance (JHU/CELLS Research)
+## 11. Biomedical Ethics & Neurorights Foundations
+
+> Sources added 2026-03-04. The ethical lineage: Beauchamp & Childress (1979) → Neuroethics (2002) → Neurorights (2017) → QIF (2025). These are the foundational works that QIF operationalizes.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| E1 | Beauchamp TL, Childress JF. (2019). "Principles of Biomedical Ethics." 8th ed. Oxford University Press. ISBN: 978-0190640873. | https://global.oup.com/academic/product/principles-of-biomedical-ethics-9780190640873 | Foundational | The four principles (autonomy, beneficence, non-maleficence, justice) that underpin all biomedical ethics. QIF's ethical foundation: NISS operationalizes non-maleficence, consent framework operationalizes autonomy, dual-use mapping operationalizes beneficence/non-maleficence boundary, open-source licensing operationalizes justice. |
+| E2 | Ienca M, Andorno R. (2017). "Towards New Human Rights in the Age of Neuroscience and Neurotechnology." Life Sciences, Society and Policy 13(1):5. | https://doi.org/10.1186/s40504-017-0050-1 | Foundational | Coined "neurorights." Four rights: cognitive liberty, mental privacy, mental integrity, psychological continuity. Argued Beauchamp & Childress principles are necessary but insufficient for neurotechnology. QIF's five neurorights derive from this framework. |
+| E3 | Yuste R, Goering S, Arcas BA, et al. (2017). "Four Ethical Priorities for Neurotechnologies and AI." Nature 551:159-163. | https://doi.org/10.1038/551159a | Foundational | Morningside Group: four priority areas (privacy/consent, agency/identity, augmentation, bias). Evolved into five neurorights via NeuroRights Foundation. Equal Access neuroright in QIF derives from this. |
+| E4 | Ienca M. (2021). "On Neurorights." Frontiers in Human Neuroscience 15:701258. | https://doi.org/10.3389/fnhum.2021.701258 | Foundational | Synthesis and critique of both Ienca/Andorno and Yuste frameworks. Warns against rights inflationism. Directly influenced QIF's decision to extend Mental Integrity rather than propose Cognitive Authenticity as a new right. |
+| E5 | Yuste R, Genser J, Herrmann S. (2021). "It's Time for Neuro-Rights." Horizons 18:154-164. | https://www.cirsd.org/en/horizons/horizons-winter-2021-issue-no-18/its-time-for-neuro--rights | Foundational | Expands 2017 four priorities into five neurorights. NeuroRights Foundation policy vehicle. Drove Chile's constitutional amendment. |
+| E6 | Farahany NA. (2023). "The Battle for Your Brain: Defending the Right to Think Freely in the Age of Neurotechnology." St. Martin's Press. ISBN: 978-1250272959. | https://us.macmillan.com/books/9781250272966/thebattleforyourbrain | Foundational | Cognitive liberty as unified right (legal-minimalist position vs. Yuste's treaty-maximalist). Argues existing law (1st/5th Amendment) can be extended to cover neural contexts. Counterpoint to rights multiplication. |
+| E7 | OECD. (2019). "Recommendation on Responsible Innovation in Neurotechnology." | https://www.oecd.org/sti/emerging-tech/recommendation-on-responsible-innovation-in-neurotechnology.htm | Policy | Nine-principle innovation governance framework. Principles-based (not rights-based). Targets governments and enterprises. QIF aligns with principles 2 (safety/consent), 7 (privacy/data), 8 (anticipating unintended uses). |
+| E8 | UNESCO. (2025). "Recommendation on the Ethics of Neurotechnology." Adopted Nov 12, 2025, 43rd General Conference. | https://www.unesco.org/en/ethics-neurotech/recommendation | Policy | First global normative framework on neurotechnology ethics. Rights-based. 194 member states. QIF aligns with mental privacy, freedom of thought, consent, proportionality, and vulnerable group protections. |
+
+---
+
+## 11b. Neuroethics & Governance (JHU/CELLS Research)
 
 > Sources added 2026-02-18 from Hopkins BCI ecosystem research for JHU MBE application.
 
@@ -549,13 +566,14 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Consumer Sensor Exploitation | 9 | 2021 | 2014 |
 | Wireless Sensing Security | 4 | 2025 | 2024 |
 | Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
+| Biomedical Ethics & Neurorights Foundations | 8 | 2025 | 1979 |
 | Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
 | Market & Investment Data | 15 | 2025 | 2024 |
 | Clinical Trials & Adverse Events | 2 | 2025 | 2018 |
 | Vulnerability & CVE Data | 1 | 2023 | 2023 |
 | Neurorights Legislation | 4 | 2025 | 2021 |
 | BCI Companies & Devices | 3 | 2025 | 2025 |
-| **Total** | **226** | | |
+| **Total** | **234** | | |
 
 | Source | Sources Found |
 |--------|---------------|
