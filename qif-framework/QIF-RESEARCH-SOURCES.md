@@ -7,7 +7,7 @@
 >
 > **Last updated:** 2026-03-04
 > **Sources extracted from:** Three parallel validation agent sessions + ongoing research
-> **Total unique sources:** 234+
+> **Total unique sources:** 255+
 
 ---
 
@@ -498,6 +498,36 @@ Sources are organized by domain and sorted newest-first within each domain.
 
 ---
 
+## 11c. Institutional Neuroethics Programs
+
+> Sources added 2026-03-04. Comprehensive survey of institutional neuroethics programs worldwide. 6 research agents conducted deep dives across North America, Europe, and international bodies. These institutions collectively define the WHY (principles), WHAT (rights), and HOW (protocols) layers of the neuroethics landscape.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| I1 | Farah MJ. (2015). "An Ethics Toolbox for Neurotechnology." Neuron 86(1):34-37. | https://doi.org/10.1016/j.neuron.2015.03.038 | Penn Neuroethics | Practical ethics toolbox for neurotechnology developers. Bridge from theory to implementation. |
+| I2 | Farah MJ. (2012). "Neuroethics: The Ethical, Legal, and Societal Impact of Neuroscience." Annual Review of Psychology 63:571-591. | https://doi.org/10.1146/annurev.psych.093008.100438 | Penn Neuroethics | Comprehensive field review establishing neuroethics as a discipline. |
+| I3 | Morse SJ. (2006). "Brain Overclaim Syndrome and Criminal Responsibility." Ohio State J Criminal Law 3:397. | https://papers.ssrn.com/sol3/papers.cfm?abstract_id=896753 | Penn Neurolaw | Foundational neuromodesty: warns against overclaiming neuroscience for legal conclusions. QIF rigor check. |
+| I4 | Chatterjee A. (2004). "Cosmetic Neurology." Neurology 63(6):968-974. | https://doi.org/10.1212/01.wnl.0000138438.88589.7c | Penn Neuroethics | Coined "cosmetic neurology." Enhancement vs. treatment boundary maps to QIF dual-use analysis. |
+| I5 | Moreno JD. (2012). "Mind Wars: Brain Science and the Military in the 21st Century." Bellevue Literary Press. | N/A | Penn Neuroethics | Military/defense neuroscience dual-use. Directly relevant to QIF's TARA threat modeling. |
+| I6 | Wexler A. (2024). "Neuroethics at a Crossroads." AJOB Neuroscience 15(2):77-79. | https://doi.org/10.1080/21507740.2024.2330570 | Penn Neuroethics | Skeptical assessment of neurorights movement. QIF rigor check: cautions against premature legislation without technical grounding. |
+| I7 | Greely HT. (2018). "Law and the Revolution in Neuroscience." J Neuroscience 38(50):10586-10588. | https://doi.org/10.1523/JNEUROSCI.2077-18.2018 | Stanford Neurolaw | Legal implications of neuroscience. Stanford Law + neuroscience intersection. |
+| I8 | Greely HT. (2019). "Neuroethics, Brain Science, and Society." Neuron 101(3):394-398. | https://doi.org/10.1016/j.neuron.2019.01.024 | Stanford Neurolaw | Integrating ethics into neuroscience practice. Standards development implications for QIF. |
+| I9 | Jwa AS, Poldrack RA. (2024). "The Spectrum of Brain Data." Neuroethics. | https://doi.org/10.1007/s12152-023-09534-1 | Stanford | Brain data classification spectrum. Neural data privacy framework relevant to QIF data governance. |
+| I10 | Farahany NA. (2012). "Incriminating Thoughts." Stanford Law Review 64:351-408. | https://www.stanfordlawreview.org/print/article/incriminating-thoughts/ | Duke Neurolaw | Fifth Amendment implications for brain-reading. Foundational neurolaw for cognitive liberty. |
+| I11 | Hendriks S, Grady C, et al. (2019). "Recommendations for Risk Assessments in Neuromodulation." JAMA Neurology 76(12):1506-1514. | https://doi.org/10.1001/jamaneurol.2019.3523 | NIH Neuroethics | Risk assessment framework for neuromodulation clinical trials. Directly informs QIF NISS scoring. |
+| I12 | Ienca M. (2022). "On the Responsible Development of Brain Data." Neuroethics 15:20. | https://doi.org/10.1007/s12152-022-09498-8 | ETH Zurich | Brain data governance. Anti-inflationist position on neurorights. QIF rigor check. |
+| I13 | Andorno R, Gkotsi GM. (2022). "Neurorights: From Philosophy to Law." Neuroethics. | https://doi.org/10.1007/s12152-022-09511-0 | Zurich Neurolaw | Philosophical-to-legal pathway for neurorights. Implementation pathway analysis. |
+| I14 | Ligthart S, Meynen G. (2023). "Minding Rights." Cambridge Q Healthcare Ethics 32(4):461-481. | https://doi.org/10.1017/S0963180123000245 | European Neurolaw | Systematic mapping of ethical/legal foundations of neurorights across jurisdictions. |
+| I15 | Lavazza A. (2023). "Mental Integrity and Its Violations." Neuroethics. | https://doi.org/10.1007/s12152-023-09517-2 | European Neuroethics | Mental integrity as neurorights foundation. Directly relevant to QIF's Mental Integrity neuroright. |
+| I16 | Savulescu J, Bostrom N. (2009). "Human Enhancement." Oxford University Press. | N/A | Oxford Neuroethics | Foundational anthology on cognitive enhancement ethics. Enhancement boundary for QIF governance. |
+| I17 | WHO. (2025). "Ethics and Governance of Neurotechnologies." ISBN 9789240109049. | https://www.who.int/publications/i/item/9789240109049 | WHO | First WHO guidance on neurotechnology. Six principles. International governance layer. |
+| I18 | O'Shaughnessy M, Schonfeld T. (2023). "Guidance for Neural Device Clinical Trials." J Law Biosciences 10(2):lsad025. | https://doi.org/10.1093/jlb/lsad025 | Clinical | Clinical trial guidance for neural devices. Informed consent challenges specific to BCIs. |
+| I19 | Kreitmair KV. (2019). "Ethical Direct-to-Consumer Neurotechnologies." AJOB Neuroscience 10(4):152-166. | https://doi.org/10.1080/21507740.2019.1665120 | DTC Ethics | Consumer neurotechnology oversight gaps. Regulatory blind spots QIF addresses. |
+| I20 | Shen FX, Wolf SM. (2020). "Neuroethics and the Law: Who Owns Neural Data?" Neuron 105(5):771-775. | https://doi.org/10.1016/j.neuron.2020.01.041 | Neurolaw | Neural data ownership. Legal framework for brain data governance. |
+| I21 | Mathews DJH, Balatbat CA, Dzau VJ. (2022). "Governance of Emerging Technologies." NEJM 386(23):2239-2242. | https://doi.org/10.1056/NEJMms2200907 | JHU/NAM | Three-tiered governance. QIF/TARA fills the missing Tier 3 (technical enforcement). |
+
+---
+
 ## 12. Market & Investment Data
 
 > Sources added 2026-02-21 from 6 parallel crawl agents for whitepaper v7.0 market trajectory analysis.
@@ -568,12 +598,13 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Neuroscience Foundations (Preprint) | 6 | 2025 | 2006 |
 | Biomedical Ethics & Neurorights Foundations | 8 | 2025 | 1979 |
 | Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
+| Institutional Neuroethics Programs | 21 | 2025 | 2004 |
 | Market & Investment Data | 15 | 2025 | 2024 |
 | Clinical Trials & Adverse Events | 2 | 2025 | 2018 |
 | Vulnerability & CVE Data | 1 | 2023 | 2023 |
 | Neurorights Legislation | 4 | 2025 | 2021 |
 | BCI Companies & Devices | 3 | 2025 | 2025 |
-| **Total** | **234** | | |
+| **Total** | **255** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -586,6 +617,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | BCI Security & Wireless Sensing Expansion (Feb 21) | ~24 |
 | CVE-to-TARA Mapping & Coverage Gap (Feb 21) | ~8 |
 | Market Trajectory Crawl Agents (Feb 21) | ~25 |
+| Neuroethics Landscape Survey (Mar 4) | ~21 |
 
 ---
 

@@ -26,7 +26,7 @@
     "neurowall_version": "v0.8",
     "blog_posts": 50,
     "cross_ai_validations": 9,
-    "research_sources": 193
+    "research_sources": 255
   },
   "milestones": [
     {
@@ -347,7 +347,7 @@
       "description": "All 109 techniques tagged with origin provenance (literature, qif_recontextualized, qif_chain_synthesis, qif_theoretical, neuroethics_formalized). Original authors credited. 6 new techniques added (T0104-T0109): 4 from Murcia/Lopez Bernal taxonomy gap, 1 neuromorphic mimicry, 1 data alignment exploitation. 24 new research sources added (165 to 193).",
       "stats_snapshot": {
         "threat_techniques": 109,
-        "research_sources": 193,
+        "research_sources": 255,
         "tara_version": "v1.7"
       }
     },
