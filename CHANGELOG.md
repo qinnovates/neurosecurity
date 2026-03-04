@@ -4,7 +4,28 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 023531382e0b3d2613b96b17cc9d84fd784b3ce4 -->
+<!-- changelog-marker: 0dc1877d8468ff7b59019adc197773a597522491 -->
+
+## 2026-03-04
+
+### Research
+- Neurogovernance: add ethical foundations lineage and 8 new citations ([0dc1877](https://github.com/qinnovates/qinnovate/commit/0dc1877))
+
+### Other
+- update news feed cache [skip ci-deploy] ([dd1a9c1](https://github.com/qinnovates/qinnovate/commit/dd1a9c1))
+
+## 2026-03-03
+
+### Other
+- update news feed cache [skip ci-deploy] ([50cedb7](https://github.com/qinnovates/qinnovate/commit/50cedb7))
+
+## 2026-03-02
+
+### Other
+- update news feed cache [skip ci-deploy] ([a699446](https://github.com/qinnovates/qinnovate/commit/a699446))
+
+
+
 
 ## 2026-03-01
 
