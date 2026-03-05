@@ -391,6 +391,25 @@ function renderRecallPrompt() {
 }
 
 
+function renderPersonCard(p) {
+  const mastery = calculateMastery(p.id);
+  const bookmarked = isBookmarked(p.id);
+  return `
+    <div class="card" onclick="window._openPerson('${p.id}')">
+      <div class="card-header">
+        <span class="card-header__emoji">${p.emoji}</span>
+        <div class="card-header__info">
+          <div class="card-header__name">${esc(p.name)}</div>
+          <div class="card-header__dates">${esc(p.years)}</div>
+        </div>
+      </div>
+      <div class="card-header__tagline">${esc(p.tagline)}</div>
+      ${p.fields ? `<div class="card-fields">${p.fields.map(f => `<span class="field-tag">${esc(f)}</span>`).join('')}</div>` : ''}
+      ${mastery > 0 ? `<div class="card-difficulty">${mastery}% mastery</div>` : ''}
+    </div>
+  `;
+}
+
 function renderCardGrid() {
   const grid = document.getElementById('cardGrid');
   if (!grid) return;
