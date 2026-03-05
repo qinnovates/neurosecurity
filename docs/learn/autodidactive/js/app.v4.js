@@ -625,12 +625,18 @@ function openPerson(personId) {
   overlay.scrollTop = 0;
 }
 
+// Lab file map — hardcoded to avoid CDN caching issues with data file paths
+const LAB_FILES = {
+  'calc-fundamentals': 'labs/calculus-fundamentals.html',
+  'calc-bci-limits': 'labs/calculus-bci-limits.html',
+  'calc-signals': 'labs/calculus-signals.html'
+};
+
 function openLab(labId) {
   const lab = CALCULUS_LABS.find(l => l.id === labId);
   if (!lab) return;
 
-  // Normalize src: strip leading ../ and ensure it resolves relative to app root
-  const labSrc = lab.src.replace(/^(\.\.\/)+/, 'labs/').replace(/^(?!labs\/)/, 'labs/');
+  const labSrc = LAB_FILES[labId] || lab.src.replace(/^(\.\.\/)+/, '').replace(/^(?!labs\/)/, 'labs/');
 
   const overlay = document.getElementById('modal-overlay');
   const body = document.getElementById('modal-body');
