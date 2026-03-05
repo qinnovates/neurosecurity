@@ -2700,21 +2700,40 @@
   "policy_timeline": [
     {
       "date": "2021-10",
-      "event": "Chile constitutional neurorights amendment",
+      "event": "Chile constitutional neurorights amendment (Art. 19 §1)",
       "type": "law",
-      "jurisdiction": "Chile"
+      "jurisdiction": "Chile",
+      "scope": "constitutional",
+      "note": "First country to constitutionally protect neurorights"
+    },
+    {
+      "date": "2022-12",
+      "event": "FDORA Section 3306: NIH neurotechnology ethics consideration",
+      "type": "law",
+      "jurisdiction": "USA (federal)",
+      "scope": "statute",
+      "note": "Requires NIH to consider neurotech ethics, but no binding BCI rules"
     },
     {
       "date": "2023-03",
       "event": "FDORA Section 524B: mandatory device cybersecurity",
       "type": "law",
-      "jurisdiction": "USA (federal)"
+      "jurisdiction": "USA (federal)",
+      "scope": "statute"
     },
     {
       "date": "2023-09",
       "event": "FDA updated premarket cybersecurity guidance",
       "type": "guidance",
       "jurisdiction": "USA (federal)"
+    },
+    {
+      "date": "2023-10",
+      "event": "Latin American Parliament Model Law on Neurorights",
+      "type": "law",
+      "jurisdiction": "Latin America (regional)",
+      "scope": "model-law",
+      "note": "Model legislation for member states; not binding"
     },
     {
       "date": "2023-11",
@@ -2724,15 +2743,63 @@
     },
     {
       "date": "2024-04",
-      "event": "Colorado neural data privacy law",
+      "event": "Colorado SB 24-058: neural data as sensitive data under state privacy law",
       "type": "law",
-      "jurisdiction": "USA (Colorado)"
+      "jurisdiction": "USA (Colorado)",
+      "scope": "state-statute"
+    },
+    {
+      "date": "2024-06",
+      "event": "China MoST BCI Ethics Guidelines",
+      "type": "guidance",
+      "jurisdiction": "China",
+      "scope": "national",
+      "note": "National BCI-specific ethics guidelines. Covers all BCI research and deployment. Ministry-level binding on state-funded research."
+    },
+    {
+      "date": "2024-07",
+      "event": "EU AI Act enacted (Regulation 2024/1689)",
+      "type": "law",
+      "jurisdiction": "EU",
+      "scope": "supranational",
+      "note": "Classifies neurotech as high-risk AI. Phased implementation 2025-2026."
+    },
+    {
+      "date": "2024-07",
+      "event": "UN Human Rights Council advisory mandate on neurotechnology",
+      "type": "resolution",
+      "jurisdiction": "International",
+      "scope": "advisory",
+      "note": "HRC advisory committee mandate to study neurotechnology and human rights"
     },
     {
       "date": "2024-09",
-      "event": "California SB 1223 neural data under CCPA",
+      "event": "California AB 1008: neural data under CCPA",
       "type": "law",
-      "jurisdiction": "USA (California)"
+      "jurisdiction": "USA (California)",
+      "scope": "state-statute"
+    },
+    {
+      "date": "2024-10",
+      "event": "Montana SB 214: neural data as biometric data",
+      "type": "law",
+      "jurisdiction": "USA (Montana)",
+      "scope": "state-statute"
+    },
+    {
+      "date": "2024-10",
+      "event": "Minnesota HF 1370: neural data as sensitive biometric data",
+      "type": "law",
+      "jurisdiction": "USA (Minnesota)",
+      "scope": "state-statute"
+    },
+    {
+      "date": "2024-10",
+      "event": "Global Privacy Assembly 46th Conference: neural data processing resolution",
+      "type": "resolution",
+      "jurisdiction": "International",
+      "scope": "advisory",
+      "note": "Non-binding resolution on neural data processing standards"
     },
     {
       "date": "2025-02",
@@ -2741,8 +2808,16 @@
       "jurisdiction": "EU"
     },
     {
+      "date": "2025-03",
+      "event": "MIND Act introduced: Mental Integrity in the Digital Age",
+      "type": "law",
+      "jurisdiction": "USA (federal)",
+      "scope": "proposed",
+      "note": "Not enacted. Still in committee. Would be first US federal BCI-specific legislation."
+    },
+    {
       "date": "2025-05",
-      "event": "Montana neural data privacy law",
+      "event": "Montana neural data privacy law effective",
       "type": "law",
       "jurisdiction": "USA (Montana)"
     },
@@ -2750,7 +2825,8 @@
       "date": "2025-06",
       "event": "Connecticut neural data privacy law",
       "type": "law",
-      "jurisdiction": "USA (Connecticut)"
+      "jurisdiction": "USA (Connecticut)",
+      "scope": "state-statute"
     },
     {
       "date": "2025-06",
