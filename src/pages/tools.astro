@@ -31,6 +31,7 @@ import {
           { href: '#detection', label: 'Detection Results' },
           { href: '#sovereignty', label: 'Sovereignty Attacks' },
           { href: '#policy-engine', label: 'Policy Engine' },
+          { href: '#tara-neurowall', label: 'TARA-Neurowall' },
           { href: '#nsp', label: 'NSP Protocol' },
           { href: '#runemate', label: 'Runemate' },
           { href: '#specs', label: 'Technical Specs' },
@@ -378,6 +379,76 @@ import {
         <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-tertiary);">
           <p class="text-sm text-[var(--color-text-muted)]">
             <strong class="text-[var(--color-text-primary)]">Policy-as-Code:</strong> Rules 1 and 4 also suppress outbound stimulation. Custom rule stacks can be provided programmatically or loaded from config. Future: compiled from <code>.staves</code> policy files via Runemate Forge, signed with ML-DSA, and hot-swapped on-chip without downtime.
+          </p>
+        </div>
+      </section>
+
+      <!-- TARA-Neurowall Vision -->
+      <section id="tara-neurowall" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">
+          TARA-Neurowall <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)] ml-2 align-middle">Future Vision</span>
+        </h2>
+        <div class="prose mb-8">
+          <p>
+            TARA is the threat intelligence. Neurowall is the active defense. TARA-Neurowall is the convergence: a Brain SIEM that combines threat knowledge with real-time neural security monitoring. The same architecture Kevin built at every company — identify signals, classify security events, deploy detections, tune for false positives — applied to the brain.
+          </p>
+        </div>
+
+        <!-- Planned Capabilities -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="glass rounded-xl p-5">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-2 text-[var(--color-accent-primary)]">Score Ingestion</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Ingest anonymized Cs scores from QIF-compliant devices. Raw neural data never leaves the device — only protected scores with differential privacy applied locally.</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-2 text-[var(--color-accent-primary)]">Fleet Monitoring</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Aggregate Cs trends across device populations to detect coordinated attacks, regional interference, or systematic device failures that single-device monitoring would miss.</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-2 text-[var(--color-accent-primary)]">Threat Correlation</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Cross-reference live anomaly patterns against TARA's 109-technique taxonomy. Map detected events to specific attack signatures with NISS severity scores and neurorights impact.</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-2 text-[var(--color-accent-primary)]">Federated Learning</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Improve detection models without centralizing data. Devices share encrypted gradients via secure aggregation — no individual neural patterns ever leave the device.</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-2 text-[var(--color-accent-primary)]">User Dashboard</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Personal Cs history, anomaly alerts, and privacy controls. Users see their own data, choose what to share, and can opt out of any external transmission at any time.</p>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-2 text-[var(--color-accent-primary)]">Regulatory Reporting</h3>
+            <p class="text-xs text-[var(--color-text-muted)]">Generate compliance reports for FDA, IEEE, and institutional review boards. Automated evidence packages mapping detected events to neurorights violations and clinical impact.</p>
+          </div>
+        </div>
+
+        <!-- Data Flow -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-4 text-[var(--color-text-faint)] uppercase tracking-wider">Data Flow</h3>
+          <div class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-muted)] leading-relaxed overflow-x-auto">
+            <pre class="whitespace-pre">QIF-Compliant Device          TARA-Neurowall Platform
+┌──────────────────┐          ┌──────────────────────────┐
+│ Raw Neural Data  │          │                          │
+│       ↓          │          │  Score Ingestion         │
+│ Local Processing │          │       ↓                  │
+│       ↓          │          │  Fleet Monitoring        │
+│ Cs Score + DP    │─────────→│       ↓                  │
+│                  │ Protected│  TARA Correlation        │
+│ NEVER LEAVES     │  Scores  │       ↓                  │
+│ the device:      │  Only    │  Alert Generation        │
+│ • Raw signals    │          │                          │
+│ • Decoded intent │          └────────────┬─────────────┘
+│ • Neural content │                       │
+└──────────────────┘                       ↓
+                              Categorical Alerts Only
+                              (LOW / MEDIUM / HIGH / CRITICAL)</pre>
+          </div>
+        </div>
+
+        <!-- Privacy constraint -->
+        <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-secondary);">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Privacy by Design:</strong> TARA-Neurowall inherits QIF's local-first mandate. Raw neural data never leaves the device. Users can opt out of all external transmission and run in fully local mode. The platform only receives what the device's anonymization layer releases — protected scores, not signals.
           </p>
         </div>
       </section>
