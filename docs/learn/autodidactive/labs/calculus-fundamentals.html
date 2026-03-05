@@ -143,6 +143,79 @@
   }
   .toc a:hover { color: #7faaff; }
   .toc a span { color: #444; margin-right: 6px; }
+
+  /* Section navigation */
+  .section-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #1a1a2a;
+    gap: 12px;
+  }
+  .section-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: #111128;
+    color: #7faaff;
+    text-decoration: none;
+    border: 1px solid #333;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  }
+  .section-nav a:hover {
+    background: #1a1a3a;
+    border-color: #7faaff;
+    transform: translateY(-1px);
+  }
+  .section-nav .spacer { flex: 1; }
+
+  /* Lab navigation bar */
+  .lab-nav {
+    margin-top: 60px;
+    padding: 30px 0;
+    border-top: 2px solid #1a1a2a;
+    text-align: center;
+  }
+  .lab-nav h3 {
+    color: #666;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .lab-nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .lab-nav-links a {
+    padding: 12px 24px;
+    background: #111128;
+    color: #888;
+    text-decoration: none;
+    border: 1px solid #222;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .lab-nav-links a:hover {
+    color: #7faaff;
+    border-color: #7faaff;
+    background: #1a1a3a;
+  }
+  .lab-nav-links a.current {
+    color: #7faaff;
+    border-color: #7faaff;
+    background: #1a1a3a;
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
@@ -543,6 +616,15 @@
 <div style="text-align:center; color:#444; padding: 40px 0 20px; font-size: 0.8rem;">
   Built with circles. No frameworks. No dependencies (except KaTeX for equations).<br>
   <a href="calculus-signals.html" style="color:#7faaff; text-decoration:none;">Next: Calculus of Neural Signals &rarr;</a>
+</div>
+
+<div class="lab-nav">
+  <h3>Calculus Labs</h3>
+  <div class="lab-nav-links">
+    <a href="calculus-fundamentals.html" class="current">Fundamentals</a>
+    <a href="calculus-signals.html">Signals</a>
+    <a href="calculus-bci-limits.html">BCI Limits</a>
+  </div>
 </div>
 
 </div><!-- /container -->
@@ -1220,6 +1302,38 @@
   draw();
 })();
 
+// ========== SECTION NAVIGATION ==========
+(() => {
+  const sections = [
+    { id: 'circle', label: 'The Unit Circle' },
+    { id: 'derivative', label: 'The Derivative' },
+    { id: 'where-derivatives-come-from', label: 'Where Derivatives Come From' },
+    { id: 'tangent', label: 'The Tangent Line' },
+    { id: 'rules', label: 'The Rules' },
+    { id: 'integral', label: 'The Integral' },
+    { id: 'euler', label: "Euler's Formula" },
+    { id: 'emc2', label: 'E = mc²' },
+    { id: 'rates', label: 'Rates of Change' },
+  ];
+  sections.forEach((sec, i) => {
+    const el = document.getElementById(sec.id);
+    if (!el) return;
+    const nav = document.createElement('div');
+    nav.className = 'section-nav';
+    let html = '';
+    if (i > 0) {
+      html += `<a href="#${sections[i-1].id}">\u2190 Back</a>`;
+    } else {
+      html += '<span class="spacer"></span>';
+    }
+    if (i < sections.length - 1) {
+      html += `<a href="#${sections[i+1].id}">Next \u2192</a>`;
+    }
+    nav.innerHTML = html;
+    el.appendChild(nav);
+  });
+})();
+
 // ========== 9: RATES OF CHANGE ==========
 (() => {
   const c = document.getElementById('rateCanvas');
@@ -1284,5 +1398,6 @@
   });
 })();
 </script>
+
 </body>
 </html>
