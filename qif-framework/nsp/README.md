@@ -1,4 +1,4 @@
-# NSP (Neural Security Protocol)
+# NSP (Neural Sensory Protocol)
 
 Post-quantum wire protocol for BCI data links. Designed for implant-class hardware with sub-4ms latency and under 4% power overhead on ARM Cortex-M4.
 

@@ -67,7 +67,7 @@
       "tiers": ["simulation"],
       "status": "pass",
       "summary": "Round-trip encryption/decryption PASS. 65-90% payload compression ratio.",
-      "methodology": "End-to-end simulation of the Neural Security Protocol transport layer. Test vectors include ML-KEM-768 key exchange, AES-256-GCM-SIV encryption, frame serialization, and payload compression benchmarks.",
+      "methodology": "End-to-end simulation of the Neural Sensory Protocol transport layer. Test vectors include ML-KEM-768 key exchange, AES-256-GCM-SIV encryption, frame serialization, and payload compression benchmarks.",
       "results": [
         "Round-trip encrypt/decrypt: PASS (all test vectors)",
         "65-90% compression ratio depending on signal type",

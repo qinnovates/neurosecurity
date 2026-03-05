@@ -898,7 +898,7 @@ PyPI: pip install qtara
 | **Neurorights** | Rights proposed by Ienca & Andorno (2017): cognitive liberty, mental privacy, mental integrity, psychological continuity. |
 | **Neurowall** | QIF's real-time neural security monitor. Three layers: signal boundary, inference guard, policy agent. |
 | **NISS** | Neural Impact Scoring System. Five neural-specific severity dimensions extending CVSS. |
-| **NSP** | Neural Security Protocol. Post-quantum encryption protocol for BCI data links. |
+| **NSP** | Neural Sensory Protocol. Post-quantum encryption protocol for BCI data links. |
 | **PQC** | Post-Quantum Cryptography. Cryptographic algorithms resistant to quantum computing attacks. |
 | **Runemate** | QIF's policy engine. Domain-specific language for neural security rules. |
 | **SB 1223** | California Senate Bill 1223 (2025). Adds neural data as sensitive personal information under CCPA. |

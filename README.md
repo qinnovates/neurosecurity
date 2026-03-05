@@ -182,7 +182,7 @@ The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocor
 - **Specification:** [qif-framework/](qif-framework/)
 - **Interactive explorer:** [qinnovate.com/lab/hourglass.html](https://qinnovate.com/lab/hourglass.html)
 
-### NSP (Neural Security Protocol)
+### NSP (Neural Sensory Protocol)
 
 The wire protocol (v0.5). Post-quantum encryption (ML-KEM-768, ML-DSA, AES-256-GCM-SIV) at the frame level. Designed for implant-class hardware: sub-4ms latency, under 4% power overhead on ARM Cortex-M4.
 
@@ -262,7 +262,7 @@ qinnovates/qinnovate/
 │   ├── framework/              # Architectural documents
 │   ├── tara-threat/            # TARA threat registry source
 │   ├── qif-lab/                # Equation testing
-│   ├── nsp/                    # Neural Security Protocol (Rust + spec)
+│   ├── nsp/                    # Neural Sensory Protocol (Rust + spec)
 │   │   └── nsp-core/           # Rust PQ-secure implementation
 │   ├── runemate/               # Runemate rendering pipeline
 │   │   └── forge/              # DSL compiler (Rust)

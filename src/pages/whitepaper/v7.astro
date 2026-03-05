@@ -34,7 +34,7 @@ const tacticColors: Record<string, string> = {
 ---
 
 <PageLayout
-  title="QIF Whitepaper v7.1"
+  title="QIF Whitepaper v6.3.5"
   description={`The Quantified Interconnection Framework — a proposed open security framework for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
@@ -43,7 +43,7 @@ const tacticColors: Record<string, string> = {
     <!-- Sidebar -->
     <aside class="hidden lg:block">
       <div class="sticky top-24">
-        <WhitepaperVersionSelector currentVersion="v7.1" />
+        <WhitepaperVersionSelector currentVersion="v6.3.5" />
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Table of Contents</p>
           {[
@@ -78,21 +78,21 @@ const tacticColors: Record<string, string> = {
         "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-18",
-        "dateModified": "2026-03-05",
+        "dateModified": "2026-02-21",
         "mainEntityOfPage": "https://qinnovate.com/whitepaper/",
-        "version": "7.1",
+        "version": "6.3.5",
       })} />
 
       <!-- ═══ Header ═══ -->
       <section class="mb-16">
         <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
-          The same technique that can harm a brain can also heal one.
+          Every technique that can harm a brain can also heal one.
         </h1>
         <p class="text-lg text-[var(--color-text-muted)] mb-3">
           QIF is a proposed open framework that maps BCI techniques to their security risks, clinical applications, and potential psychiatric outcomes in a single unified model.
         </p>
         <p class="text-base text-[var(--color-text-muted)] mb-6">
-          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 6 neural-specific scoring metrics. DSM-5-TR diagnostic category references (for threat modeling, not diagnostic claims). Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based references requiring validation by psychiatrists and neuroscientists.</em>
+          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 6 neural-specific scoring metrics. DSM-5-TR diagnostic mapping. Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based and await validation by psychiatrists and neuroscientists.</em>
         </p>
       </section>
 
@@ -287,7 +287,7 @@ const tacticColors: Record<string, string> = {
             The same physics that makes a BCI technique dangerous also makes it therapeutic. Transcranial magnetic stimulation treats depression and induces seizures. Deep brain stimulation manages Parkinson's and causes involuntary movement. The mechanism is identical. The difference is intent, dosage, and governance.
           </p>
           <p>
-            This is the central insight behind QIF: security and clinical safety are not separate problems. They are two views of the same system. A framework that only catalogs threats misses half the picture. A framework that only tracks therapies misses the risks. QIF maps both, for every technique, in a single proposed framework.
+            This is the central insight behind QIF: security and clinical safety are not separate problems. They are two views of the same system. A framework that only catalogs threats misses half the picture. A framework that only tracks therapies misses the risks. QIF maps both, for every technique, in a single standard.
           </p>
           <p>
             All publications are released under the Apache 2.0 license. Neural security standards are too critical to be proprietary. The people whose brains will be connected deserve to understand exactly how they are protected.
@@ -324,7 +324,7 @@ const tacticColors: Record<string, string> = {
               <strong class="text-[var(--color-text-primary)]">NSP without QIF</strong> encrypts data but cannot detect manipulation at the electrode-tissue boundary. A protocol without an underlying threat model provides protection without informed strategy.
             </p>
             <p>
-              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> encounter a significant bandwidth challenge. Post-quantum cryptographic keys &mdash; the mathematical structures that protect data from future quantum computers &mdash; are 18&ndash;46&times; larger than their classical equivalents. This overhead strains adoption on implants operating within a 40 mW power budget over Bluetooth Low Energy (BLE). Runemate&rsquo;s proposed Staves DSL compiler targets 65&ndash;90% compression of multimodal BCI content in benchmarks, aiming to make post-quantum security practical on constrained hardware. Unlike today&rsquo;s outward-only BCIs (Neuralink N1, BrainGate) where all rendering happens on a phone, Runemate targets next-generation implants that render content inward &mdash; directly to cortical tissue &mdash; requiring on-chip decode, safety-check, and render with no external device in the loop.
+              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> encounter a significant bandwidth challenge. Post-quantum cryptographic keys &mdash; the mathematical structures that protect data from future quantum computers &mdash; are 18&ndash;46&times; larger than their classical equivalents. This overhead strains adoption on implants operating within a 40 mW power budget over Bluetooth Low Energy (BLE). Runemate&rsquo;s native Staves DSL compiler (v1.0) compresses multimodal BCI content by 65&ndash;90%, making post-quantum security practical on today&rsquo;s constrained hardware. Unlike today&rsquo;s outward-only BCIs (Neuralink N1, BrainGate) where all rendering happens on a phone, Runemate targets next-generation implants that render content inward &mdash; directly to cortical tissue &mdash; requiring on-chip decode, safety-check, and render with no external device in the loop.
             </p>
           </div>
         </div>
@@ -443,7 +443,7 @@ const tacticColors: Record<string, string> = {
       <section id="tara" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">4. TARA Atlas</h2>
         <p class="text-lg font-medium text-[var(--color-text-muted)] mb-6 italic">
-          One proposed framework for both sides of the brain.
+          One standard for both sides of the brain.
         </p>
         <div class="prose mb-8">
           <p>
@@ -531,7 +531,7 @@ const tacticColors: Record<string, string> = {
               </div>
               <div class="glass rounded-lg p-4">
                 <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-secondary)] mb-2">Diagnostic Projection</p>
-                <p class="text-xs text-[var(--color-text-muted)]">Maps each technique through the Neural Impact Chain to corresponding DSM-5-TR diagnostic category references (for threat modeling purposes), risk class (acute, chronic, progressive), and the specific cognitive or motor function disrupted.</p>
+                <p class="text-xs text-[var(--color-text-muted)]">Maps each technique through the Neural Impact Chain to its corresponding DSM-5-TR diagnostic category, risk class (acute, chronic, progressive), and the specific cognitive or motor function disrupted.</p>
               </div>
               <div class="glass rounded-lg p-4">
                 <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-status-safe)] mb-2">Governance Projection</p>
@@ -539,7 +539,7 @@ const tacticColors: Record<string, string> = {
               </div>
             </div>
             <p>
-              <strong class="text-[var(--color-text-primary)]">Reading a cell:</strong> Click any technique to expand its full detail. The NISS vector (e.g., <span class="font-[family-name:var(--font-mono)] text-xs">BI:H/CR:H/CD:C/CV:H/RV:P/NP:T</span>) encodes all six scoring dimensions. The DSM-5-TR mapping shows which diagnostic category references the technique's impacts correspond to (for threat modeling purposes). The dual-use flag indicates whether the same mechanism has an established therapeutic application.
+              <strong class="text-[var(--color-text-primary)]">Reading a cell:</strong> Click any technique to expand its full detail. The NISS vector (e.g., <span class="font-[family-name:var(--font-mono)] text-xs">BI:H/CR:H/CD:C/CV:H/RV:P/NP:T</span>) encodes all six scoring dimensions. The DSM-5-TR mapping shows which diagnostic clusters the technique's impacts correspond to. The dual-use flag indicates whether the same mechanism has an established therapeutic application.
             </p>
             <p>
               <strong class="text-[var(--color-text-primary)]">Severity colors:</strong> <span class="text-[#ef4444] font-medium">Red</span> = critical (NISS &ge; 9.0), <span class="text-[#f97316] font-medium">Orange</span> = high (7.0&ndash;8.9), <span class="text-[#eab308] font-medium">Yellow</span> = medium (4.0&ndash;6.9), <span class="text-[#22c55e] font-medium">Green</span> = low (&lt; 4.0). The PINS flag (persistent involuntary neural stimulation) is shown separately &mdash; {stats.pinsCount} techniques carry this flag, indicating potential for ongoing harm after the initial exposure.
@@ -563,7 +563,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">5. NISS Scoring</h2>
         <div class="prose mb-8">
           <p>
-            The Neural Impact Scoring System (NISS) is a proposed vulnerability scoring system purpose-built for neural devices. In contrast to CVSS, which measures confidentiality, integrity, and availability, NISS quantifies six dimensions specifically relevant to brain-computer interfaces:
+            The Neural Impact Scoring System (NISS) is a purpose-built vulnerability scoring system for neural devices. In contrast to CVSS, which measures confidentiality, integrity, and availability, NISS quantifies six dimensions specifically relevant to brain-computer interfaces:
           </p>
         </div>
 
@@ -584,7 +584,7 @@ const tacticColors: Record<string, string> = {
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Reconnaissance (CR)</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Captures read-side attacks: neural data inference, signal pattern classification, and state estimation. Neural eavesdropping with partial state inference scores CR:L, while comprehensive neural data exfiltration scores CR:C. Techniques with no cognitive read impact score CR:N.
+              Captures read-side attacks: neural data inference, thought decoding, and intent extraction. Neural eavesdropping with partial intent decoding scores CR:L, while full thought stream extraction scores CR:C. Techniques with no cognitive read impact score CR:N.
             </p>
           </div>
           <div class="glass rounded-xl p-5">
@@ -678,7 +678,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="glass rounded-xl p-5 mt-8 mb-8 text-center" style="border-left: 3px solid var(--color-accent-secondary);">
           <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">For the full derivation</strong> &mdash; the QI equation, spectral decomposition pipeline, Coherence Metric derivation, coupling mechanisms, and falsifiability conditions &mdash; see <a href="/whitepaper/v5/" class="text-[var(--color-accent-primary)]">Whitepaper v5.2</a>. This section presents the scoring system; v5.2 presents the math.
+            <strong class="text-[var(--color-text-primary)]">For the full derivation</strong> &mdash; the QI equation, spectral decomposition pipeline, coherence metrics, coupling mechanisms, and falsifiability conditions &mdash; see <a href="/whitepaper/v5/" class="text-[var(--color-accent-primary)]">Whitepaper v5.2</a>. This section presents the scoring system; v5.2 presents the math.
           </p>
         </div>
 
@@ -708,10 +708,10 @@ const tacticColors: Record<string, string> = {
             The Neural Impact Chain (NIC) is a six-stage mapping that traces every technique from its physical mechanism to its potential clinical outcome for threat modeling purposes. For each entry in TARA, the chain identifies the targeted hourglass band, the affected neural structure, the disrupted cognitive or motor function, the resulting NISS severity score, and the corresponding DSM-5-TR diagnostic reference. These references illustrate the potential severity of sustained attack patterns; they are not diagnostic predictions.
           </p>
           <p>
-            To our knowledge, this represents a <strong>systematic mapping from cybersecurity severity to clinical outcome references</strong>. It traces a structured pathway: specific techniques, applied to specific neural bands, produce functional impacts that correspond to recognized clinical conditions. A security engineer can see that a technique targeting the limbic system (N6) with high cognitive integrity impact references mood and trauma-related disorders. A clinician can see that the same attack vector shares its mechanism with an FDA-approved therapy. These references must be interpreted with caution — neural correlates do not prove causation, and the brain's complexity means that identical stimulation can produce different outcomes across individuals.
+            To our knowledge, this represents the <strong>first systematic mapping from cybersecurity severity to clinical outcome references</strong>. It traces a structured pathway: specific techniques, applied to specific neural bands, produce functional impacts that correspond to recognized clinical conditions. A security engineer can see that a technique targeting the limbic system (N6) with high cognitive integrity impact references mood and trauma-related disorders. A clinician can see that the same attack vector shares its mechanism with an FDA-approved therapy. These references must be interpreted with caution — neural correlates do not prove causation, and the brain's complexity means that identical stimulation can produce different outcomes across individuals.
           </p>
           <p>
-            This is the bridge between cybersecurity and clinical neuroscience that we found missing from existing frameworks.
+            This is the bridge between cybersecurity and clinical neuroscience that did not previously exist.
           </p>
         </div>
 
@@ -727,16 +727,16 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mt-8">
           <p>
-            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) scores, corresponding to diagnostic categories such as brief psychotic disorder, delirium, and dissociative conditions (for threat modeling purposes).
+            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) scores, mapping to disorders such as brief psychotic disorder, delirium, and dissociative conditions.
           </p>
           <p>
-            <strong>Mood/Trauma</strong> ({stats.dsm5.clusters.mood_trauma} techniques) &mdash; Attacks that alter emotional state or violate autonomy. Driven by Consent Violation (CV) metrics, corresponding to categories including PTSD, acute stress disorder, and adjustment disorders.
+            <strong>Mood/Trauma</strong> ({stats.dsm5.clusters.mood_trauma} techniques) &mdash; Attacks that alter emotional state or violate autonomy. Driven by Consent Violation (CV) metrics, mapping to PTSD, acute stress disorder, and adjustment disorders.
           </p>
           <p>
-            <strong>Motor/Neurocognitive</strong> ({stats.dsm5.clusters.motor_neurocognitive} techniques) &mdash; Attacks that cause physical neural damage. Driven by Biological Impact (BI) scores, corresponding to neurocognitive disorder and movement condition categories.
+            <strong>Motor/Neurocognitive</strong> ({stats.dsm5.clusters.motor_neurocognitive} techniques) &mdash; Attacks that cause physical neural damage. Driven by Biological Impact (BI) scores, mapping to neurocognitive disorders and movement conditions.
           </p>
           <p>
-            <strong>Persistent/Personality</strong> ({stats.dsm5.clusters.persistent_personality} techniques) &mdash; Attacks that induce lasting neural reorganization. Driven by Neuroplasticity (NP) and Reversibility (RV) scores, corresponding to categories such as personality change due to medical condition and persistent functional alterations.
+            <strong>Persistent/Personality</strong> ({stats.dsm5.clusters.persistent_personality} techniques) &mdash; Attacks that induce lasting neural reorganization. Driven by Neuroplasticity (NP) and Reversibility (RV) scores, mapping to personality change due to medical condition and persistent functional alterations.
           </p>
           <p>
             <strong>Non-Diagnostic</strong> ({stats.dsm5.clusters.non_diagnostic} techniques) &mdash; Silicon-only attacks that lack a direct neural impact pathway.
@@ -748,7 +748,7 @@ const tacticColors: Record<string, string> = {
           <div class="grid sm:grid-cols-3 gap-4 text-sm text-[var(--color-text-muted)]">
             <div>
               <span class="inline-block w-2 h-2 rounded-full bg-[#ef4444] mr-1"></span>
-              <strong>{stats.dsm5.riskClass.direct} Direct</strong> &mdash; Mechanism corresponds directly to the mapped diagnostic category
+              <strong>{stats.dsm5.riskClass.direct} Direct</strong> &mdash; Capable of triggering or exacerbating the mapped diagnosis
             </div>
             <div>
               <span class="inline-block w-2 h-2 rounded-full bg-[#f59e0b] mr-1"></span>
@@ -784,7 +784,7 @@ const tacticColors: Record<string, string> = {
             Every technique in the TARA atlas is now mapped to the affected neurorights through a systematic, multi-layer process: UI category provides the primary signal, DSM-5-TR cluster adds overlays, and NISS vector components refine the result. This mapping is deterministic and reproducible &mdash; the same technique always maps to the same rights.
           </p>
           <p>
-            Running {stats.totalTechniques} techniques through this process confirmed all four established rights from Ienca &amp; Andorno (2017). QIF operationalizes Mental Integrity with engineering-level signal dynamics specifications and Mental Privacy with data-lifecycle specifications. QIF also maps these neurorights onto the CIA triad (MP = Confidentiality, MI = Integrity) and demonstrates both violations via a disclosed vulnerability in a BCI-adjacent streaming library. Cross-validated against six established frameworks (Ienca &amp; Andorno 2017, Yuste/NeuroRights Foundation 2017, Chile Law 21.383, UNESCO 2025 Recommendation, Farahany 2023, Bublitz 2022):
+            Running {stats.totalTechniques} techniques through this process confirmed all four established rights from Ienca &amp; Andorno (2017). QIF extends Mental Integrity with engineering-level signal dynamics protections and Mental Privacy with data-lifecycle protections. QIF also maps these neurorights onto the CIA triad (MP = Confidentiality, MI = Integrity) and provides the first concrete exploit chain demonstrating both violations via a disclosed vulnerability in a BCI-adjacent streaming library. Cross-validated against six established frameworks (Ienca &amp; Andorno 2017, Yuste/NeuroRights Foundation 2017, Chile Law 21.383, UNESCO 2025 Recommendation, Farahany 2023, Bublitz 2022):
           </p>
         </div>
 
@@ -797,7 +797,7 @@ const tacticColors: Record<string, string> = {
                   'bg-[var(--color-accent-primary)]/20 text-[var(--color-accent-primary)]'
                 }`}>{r.id}</span>
                 <span class="text-sm font-semibold text-[var(--color-text-primary)]">{r.name}</span>
-                {(r.id === 'MI' || r.id === 'MP') && <span class="text-[10px] uppercase tracking-wider text-[var(--color-accent-secondary)] font-semibold">QIF Operationalized</span>}
+                {(r.id === 'MI' || r.id === 'MP') && <span class="text-[10px] uppercase tracking-wider text-[var(--color-accent-secondary)] font-semibold">QIF Extended</span>}
               </div>
               <p class="text-xs text-[var(--color-text-muted)]">{r.count} of {stats.totalTechniques} techniques</p>
             </div>
@@ -809,10 +809,10 @@ const tacticColors: Record<string, string> = {
             <strong>CIA Triad Mapping:</strong> QIF maps Ienca &amp; Andorno's neurorights onto the CIA triad: Mental Privacy = Confidentiality (don't <em>read</em> my neural data), Mental Integrity = Integrity (don't <em>write</em> into my neural signals). A disclosed vulnerability in a BCI-adjacent streaming library demonstrates both violations in a single exploit chain: Phase 2 (exfiltrate neural data) = MP violation, Phase 3 (inject false signals) = MI violation.
           </p>
           <p>
-            <strong>Mental Integrity (MI) &mdash; QIF Operationalized:</strong> QIF provides engineering-level specifications for Mental Integrity (Ienca &amp; Andorno, 2017), including signal dynamics protections. Some attacks don't break neural function; they <em>retune</em> it. Gradual drift, neurofeedback falsification, and baseline adaptation poisoning reshape the brain's homeostatic equilibrium. QIF operationalizes MI with measurable specifications for detecting these dynamical retuning attacks. {stats.neurorights.rights.find(r => r.id === 'MI')?.count} techniques map to MI.
+            <strong>Mental Integrity (MI) &mdash; QIF Extended:</strong> Now includes signal dynamics protections. Some attacks don't break neural function; they <em>retune</em> it. Gradual drift, neurofeedback falsification, and baseline adaptation poisoning reshape the brain's homeostatic equilibrium. QIF extends MI with engineering-level specifications for detecting these dynamical retuning attacks. {stats.neurorights.rights.find(r => r.id === 'MI')?.count} techniques map to MI.
           </p>
           <p>
-            <strong>Mental Privacy (MP) &mdash; QIF Operationalized:</strong> QIF provides engineering-level specifications for Mental Privacy (Ienca &amp; Andorno, 2017), including data-lifecycle protections. Multi-modal biometric fusion attacks correlate neural data with gait, voice, and typing rhythm. QIF operationalizes MP to cover cross-modal re-identification and the right to consent to each data modality independently.
+            <strong>Mental Privacy (MP) &mdash; QIF Extended:</strong> Now includes data-lifecycle protections. Multi-modal biometric fusion attacks correlate neural data with gait, voice, and typing rhythm. QIF extends MP to cover cross-modal re-identification and the right to consent to each data modality independently.
           </p>
         </div>
 
@@ -987,7 +987,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            The Neural Sensory Protocol (NSP) is a proposed post-quantum security protocol specifically designed for BCI data links. It protects every neural data frame using ML-KEM key exchange (NIST&rsquo;s quantum-resistant replacement for classical key exchange, standardized as FIPS 203), ML-DSA digital signatures (the quantum-resistant replacement for RSA and ECDSA signing, FIPS 204), and AES-256-GCM authenticated encryption (which both encrypts data and cryptographically verifies it has not been tampered with in transit). Power modeling against the Neuralink N1 reference platform estimates an overhead of <strong>approximately 3.25%</strong> of a 40 mW implant budget.
+            The Neural Sensory Protocol (NSP) is a post-quantum security protocol specifically designed for BCI data links. It protects every neural data frame using ML-KEM key exchange (NIST&rsquo;s quantum-resistant replacement for classical key exchange, standardized as FIPS 203), ML-DSA digital signatures (the quantum-resistant replacement for RSA and ECDSA signing, FIPS 204), and AES-256-GCM authenticated encryption (which both encrypts data and cryptographically verifies it has not been tampered with in transit). Power modeling against the Neuralink N1 reference platform estimates an overhead of <strong>approximately 3.25%</strong> of a 40 mW implant budget.
           </p>
           <p>
             NSP defines five independent defense layers. Each layer operates independently &mdash; failure of one does not compromise the others:
