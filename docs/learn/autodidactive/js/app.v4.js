@@ -629,6 +629,9 @@ function openLab(labId) {
   const lab = CALCULUS_LABS.find(l => l.id === labId);
   if (!lab) return;
 
+  // Normalize src: strip leading ../ and ensure it resolves relative to app root
+  const labSrc = lab.src.replace(/^(\.\.\/)+/, 'labs/').replace(/^(?!labs\/)/, 'labs/');
+
   const overlay = document.getElementById('modal-overlay');
   const body = document.getElementById('modal-body');
 
@@ -639,7 +642,7 @@ function openLab(labId) {
       <div class="modal-tagline">${esc(lab.description)}</div>
     </div>
     <div class="lab-frame-container">
-      <iframe class="lab-frame" src="${lab.src}" title="${esc(lab.name)}" sandbox="allow-scripts allow-same-origin"></iframe>
+      <iframe class="lab-frame" src="${labSrc}" title="${esc(lab.name)}" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
   `;
 
