@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculus of Neural Signals</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 20px 0 5px;
+    color: #7faaff;
+  }
+  .subtitle {
+    text-align: center;
+    color: #888;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+  }
+  .section {
+    margin-bottom: 40px;
+  }
+  .section h2 {
+    color: #7faaff;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 5px;
+  }
+  .section p {
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+  .highlight { color: #ff6b6b; font-weight: 600; }
+  .highlight-blue { color: #7faaff; font-weight: 600; }
+  .highlight-green { color: #4ecdc4; font-weight: 600; }
+  .highlight-yellow { color: #ffd93d; font-weight: 600; }
+
+  canvas {
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    background: #111118;
+    cursor: crosshair;
+  }
+  .canvas-wrap {
+    position: relative;
+    margin: 15px auto;
+    width: fit-content;
+  }
+  .canvas-label {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 0.75rem;
+    color: #666;
+    pointer-events: none;
+  }
+
+  .controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 15px 0;
+  }
+  .controls label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #999;
+  }
+  .controls input[type="range"] {
+    width: 120px;
+    accent-color: #7faaff;
+  }
+  button {
+    background: #222;
+    color: #7faaff;
+    border: 1px solid #333;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  button:hover { background: #2a2a3a; border-color: #7faaff; }
+  button.active { background: #7faaff; color: #000; }
+
+  .info-box {
+    background: #111118;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .info-box code {
+    background: #1a1a2a;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #7faaff;
+    font-size: 0.85rem;
+  }
+
+  .readout {
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #666;
+    margin: 5px 0;
+    min-height: 20px;
+  }
+  .readout span { margin: 0 12px; }
+  .readout .val-signal { color: #ff6b6b; }
+  .readout .val-deriv { color: #4ecdc4; }
+  .readout .val-integral { color: #ffd93d; }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 8px 0;
+    font-size: 0.8rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin: 20px 0 10px;
+  }
+  .tab {
+    padding: 8px 20px;
+    border-radius: 6px 6px 0 0;
+  }
+
+  @media (max-width: 700px) {
+    canvas { width: 100% !important; height: auto !important; }
+    .controls { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Calculus of Neural Signals</h1>
+<p class="subtitle">How derivatives, integrals, and Fourier transforms describe your brain</p>
+
+<!-- ============ SECTION 1: THE BALL ON A HILL ============ -->
+<div class="section">
+  <h2>1. What is a derivative? (The Ball)</h2>
+  <p>A derivative measures <span class="highlight">how fast something is changing</span>. Not how much. How fast. Click and drag the ball to see its position, velocity (first derivative), and acceleration (second derivative) in real time.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="ballCanvas" width="900" height="250"></canvas>
+  </div>
+  <div class="readout" id="ballReadout">Drag the ball along the hill</div>
+
+  <div class="info-box">
+    <span class="highlight">Position</span> = where the ball is (the value)<br>
+    <span class="highlight-green">Velocity</span> = how fast it's moving (first derivative, <code>dx/dt</code>)<br>
+    <span class="highlight-yellow">Acceleration</span> = how fast the velocity is changing (second derivative, <code>d^2x/dt^2</code>)<br><br>
+    When the ball is at the <strong>top of a hill</strong>, velocity = 0 (it stopped climbing). That's a <strong>local maximum</strong>. Calculus finds these by setting the derivative to zero.
+  </div>
+</div>
+
+<!-- ============ SECTION 2: ACTION POTENTIAL ============ -->
+<div class="section">
+  <h2>2. The Action Potential (A Real Neural Signal)</h2>
+  <p>This is what a single neuron firing looks like. The <span class="highlight">red curve</span> is the voltage over time. The <span class="highlight-green">green curve</span> is its derivative: how fast the voltage is changing at each moment. Hover to explore.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="apCanvas" width="900" height="350"></canvas>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#ff6b6b"></span> Voltage (mV)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#4ecdc4"></span> dV/dt (rate of change)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ffd93d55"></span> Integral (total charge)</div>
+  </div>
+  <div class="readout" id="apReadout">Hover over the signal</div>
+
+  <div class="info-box">
+    <strong>Key moments:</strong><br>
+    <strong>t = 0.5ms:</strong> Derivative goes positive (voltage starts rising, Na+ channels opening)<br>
+    <strong>t = 1.0ms:</strong> Derivative is at MAXIMUM (fastest rise, positive feedback loop)<br>
+    <strong>t = 1.3ms:</strong> Derivative = 0 (voltage peaked at +30mV, <code>dV/dt = 0</code> means local max)<br>
+    <strong>t = 1.5ms:</strong> Derivative most negative (fastest fall, K+ channels fully open)<br>
+    <strong>t = 2.5ms:</strong> Everything returns to baseline<br><br>
+    The <span class="highlight-yellow">yellow shaded area</span> is the <strong>integral</strong>: total charge moved across the membrane. This must balance to zero (what goes in must come out), which is why there's a hyperpolarization dip after the spike.
+  </div>
+</div>
+
+<!-- ============ SECTION 3: WAVES AND FREQUENCY ============ -->
+<div class="section">
+  <h2>3. Waves, Frequency, and Your EEG</h2>
+  <p>Your brain produces waves at different frequencies. Adjust the sliders to mix them and see how complex signals are built from simple sine waves. This is what Fourier transforms decompose.</p>
+
+  <div class="controls">
+    <label>Delta (1-4 Hz) <input type="range" id="delta" min="0" max="100" value="20"></label>
+    <label>Theta (4-8 Hz) <input type="range" id="theta" min="0" max="100" value="30"></label>
+    <label>Alpha (8-13 Hz) <input type="range" id="alpha" min="0" max="100" value="80"></label>
+    <label>Beta (13-30 Hz) <input type="range" id="beta" min="0" max="100" value="10"></label>
+    <label>Gamma (30-100 Hz) <input type="range" id="gamma" min="0" max="100" value="5"></label>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="btnComponents">Components</button>
+    <button class="tab" id="btnCombined">Combined Signal</button>
+    <button class="tab" id="btnDerivative">Derivative</button>
+    <button class="tab" id="btnSpectrum">Frequency Spectrum</button>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="eegCanvas" width="900" height="300"></canvas>
+  </div>
+  <div class="readout" id="eegReadout"></div>
+
+  <div class="info-box" id="eegInfo">
+    <strong>Each band = a sine wave at a different frequency.</strong><br>
+    Your EEG is the <strong>sum</strong> of all of them. The Fourier transform (an integral: <code>\u222Bf(t)e^{-i2\u03C0ft}dt</code>) pulls them apart, telling you how much power is at each frequency. This is how the coherence metric Cs in QIF works: it measures whether these frequency components are stable and ordered, or noisy and chaotic.
+  </div>
+</div>
+
+<!-- ============ SECTION 4: DERIVATIVE = EDGE DETECTION ============ -->
+<div class="section">
+  <h2>4. Derivatives as Edge Detection</h2>
+  <p>Your brain uses derivatives constantly. Every time you detect a change (a sound starting, a light flickering, a touch beginning), your neurons are computing <span class="highlight-green">the derivative of the input</span>. Constant inputs fade (habituation). Changes pop out. Draw a signal and see its derivative.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="drawCanvas" width="900" height="300"></canvas>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#ff6b6b"></span> Your signal</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#4ecdc4"></span> Derivative (what neurons detect)</div>
+  </div>
+  <div style="text-align:center; margin: 8px 0;">
+    <button id="clearDraw">Clear</button>
+    <button id="presetStep">Step Function</button>
+    <button id="presetSpike">Spike</button>
+    <button id="presetSlow">Slow Drift</button>
+  </div>
+
+  <div class="info-box">
+    <strong>Try drawing:</strong><br>
+    A <strong>sharp step</strong>: big derivative spike (your brain notices sudden changes)<br>
+    A <strong>gradual slope</strong>: small constant derivative (you habituate to slow changes)<br>
+    A <strong>flat line then spike</strong>: derivative is zero, then huge (this is why a sudden sound startles you)<br><br>
+    This is why the <strong>boiling frog attack</strong> in Neurowall evades detection. The signal drifts so slowly that the derivative never exceeds the detection threshold. AC coupling (subtracting the mean) is mathematically the same as ignoring the zero-frequency component of the Fourier transform.
+  </div>
+</div>
+
+<!-- ============ SECTION 5: L = v/f ============ -->
+<div class="section">
+  <h2>5. L = v/f (The QIF Equation)</h2>
+  <p>Conduction velocity divided by frequency gives you the spatial wavelength: how far a signal travels in one oscillation cycle. Adjust the sliders to see how myelination (velocity) and brainwave frequency interact.</p>
+
+  <div class="controls">
+    <label>Velocity (m/s) <input type="range" id="velocity" min="1" max="120" value="50"></label>
+    <label>Frequency (Hz) <input type="range" id="frequency" min="1" max="100" value="10"></label>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="lvfCanvas" width="900" height="200"></canvas>
+  </div>
+  <div class="readout" id="lvfReadout"></div>
+
+  <div class="info-box">
+    <strong>What this means:</strong><br>
+    A myelinated axon at <code>v = 50 m/s</code> carrying a <code>10 Hz</code> alpha wave has a wavelength of <code>L = 5 meters</code>. The wave repeats every 5 meters along the axon.<br><br>
+    <strong>Demyelination</strong> (from B12 deficiency, MS) drops v. Same frequency, shorter wavelength. Signals from different brain regions arrive out of phase. That's <strong>desynchronization</strong>, and it's what makes thinking feel fragmented.<br><br>
+    <strong>Calculus connection:</strong> Velocity IS a derivative (<code>v = dx/dt</code>). Frequency is the derivative of phase (<code>f = d\u03C6/dt / 2\u03C0</code>). L = v/f is a relationship between two derivatives.
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ========== SECTION 1: BALL ON HILL ==========
+(() => {
+  const c = document.getElementById('ballCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('ballReadout');
+  let ballX = 450;
+  let dragging = false;
+  let prevX = 450;
+  let velocity = 0;
+  let prevVel = 0;
+
+  function hill(x) {
+    const nx = x / c.width;
+    return 80 + 60 * Math.sin(nx * Math.PI * 2.5) * (1 - 0.3 * Math.sin(nx * Math.PI * 1.2)) + 20 * Math.cos(nx * Math.PI * 5);
+  }
+
+  function hillDeriv(x) {
+    return (hill(x + 1) - hill(x - 1)) / 2;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, c.width, c.height);
+
+    // Hill
+    ctx.beginPath();
+    ctx.moveTo(0, c.height);
+    for (let x = 0; x <= c.width; x++) {
+      ctx.lineTo(x, c.height - hill(x));
+    }
+    ctx.lineTo(c.width, c.height);
+    ctx.closePath();
+    ctx.fillStyle = '#1a1a2a';
+    ctx.fill();
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let x = 0; x <= c.width; x++) {
+      x === 0 ? ctx.moveTo(x, c.height - hill(x)) : ctx.lineTo(x, c.height - hill(x));
+    }
+    ctx.stroke();
+
+    // Slope indicator
+    const slope = hillDeriv(ballX);
+    const ballY = c.height - hill(ballX);
+    const arrowLen = slope * 15;
+    ctx.strokeStyle = '#4ecdc4';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(ballX - 30, ballY + slope * 30);
+    ctx.lineTo(ballX + 30, ballY - slope * 30);
+    ctx.stroke();
+
+    // Velocity arrow
+    if (Math.abs(velocity) > 0.5) {
+      ctx.strokeStyle = '#4ecdc4';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(ballX, ballY - 30);
+      ctx.lineTo(ballX + velocity * 3, ballY - 30);
+      ctx.stroke();
+      // arrowhead
+      const dir = velocity > 0 ? 1 : -1;
+      ctx.beginPath();
+      ctx.moveTo(ballX + velocity * 3, ballY - 30);
+      ctx.lineTo(ballX + velocity * 3 - dir * 8, ballY - 36);
+      ctx.lineTo(ballX + velocity * 3 - dir * 8, ballY - 24);
+      ctx.closePath();
+      ctx.fillStyle = '#4ecdc4';
+      ctx.fill();
+    }
+
+    // Ball
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, 12, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff6b6b';
+    ctx.fill();
+    ctx.strokeStyle = '#ff8a8a';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = '#666';
+    ctx.font = '11px monospace';
+    ctx.fillText('position (value)', 10, 15);
+    ctx.fillStyle = '#4ecdc4';
+    ctx.fillText('velocity (derivative)', 10, 28);
+  }
+
+  function updateReadout() {
+    const accel = velocity - prevVel;
+    readout.innerHTML =
+      `<span class="val-signal">Position: ${hill(ballX).toFixed(1)}</span>` +
+      `<span class="val-deriv">Velocity: ${velocity.toFixed(1)}</span>` +
+      `<span class="val-integral">Acceleration: ${accel.toFixed(1)}</span>`;
+  }
+
+  c.addEventListener('mousedown', (e) => { dragging = true; });
+  c.addEventListener('mouseup', () => { dragging = false; });
+  c.addEventListener('mouseleave', () => { dragging = false; });
+  c.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const rect = c.getBoundingClientRect();
+    prevX = ballX;
+    prevVel = velocity;
+    ballX = Math.max(12, Math.min(c.width - 12, (e.clientX - rect.left) * (c.width / rect.width)));
+    velocity = ballX - prevX;
+    draw();
+    updateReadout();
+  });
+
+  // Touch support
+  c.addEventListener('touchstart', (e) => { e.preventDefault(); dragging = true; });
+  c.addEventListener('touchend', () => { dragging = false; });
+  c.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (!dragging) return;
+    const rect = c.getBoundingClientRect();
+    const touch = e.touches[0];
+    prevX = ballX;
+    prevVel = velocity;
+    ballX = Math.max(12, Math.min(c.width - 12, (touch.clientX - rect.left) * (c.width / rect.width)));
+    velocity = ballX - prevX;
+    draw();
+    updateReadout();
+  });
+
+  draw();
+})();
+
+
+// ========== SECTION 2: ACTION POTENTIAL ==========
+(() => {
+  const c = document.getElementById('apCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('apReadout');
+  const W = c.width, H = c.height;
+  const pad = { l: 60, r: 20, t: 20, b: 40 };
+  const gW = W - pad.l - pad.r;
+  const gH = H - pad.t - pad.b;
+
+  // Action potential model (Hodgkin-Huxley simplified)
+  function ap(t) {
+    // t in ms, 0 to 4
+    if (t < 0.5) return -70;
+    if (t < 0.8) return -70 + 15 * ((t - 0.5) / 0.3); // slow rise to threshold
+    if (t < 1.0) return -55 + 85 * ((t - 0.8) / 0.2) ** 0.8; // fast rise (Na+)
+    if (t < 1.3) return 30 - 50 * ((t - 1.0) / 0.3); // repolarization start
+    if (t < 1.7) return -20 - 60 * ((t - 1.3) / 0.4) ** 0.7; // fast fall (K+)
+    if (t < 2.5) return -80 + 10 * ((t - 1.7) / 0.8); // hyperpolarization recovery
+    return -70;
+  }
+
+  const tMin = 0, tMax = 4;
+  const vMin = -90, vMax = 50;
+
+  function tToX(t) { return pad.l + (t - tMin) / (tMax - tMin) * gW; }
+  function vToY(v) { return pad.t + (1 - (v - vMin) / (vMax - vMin)) * gH; }
+  function xToT(x) { return tMin + (x - pad.l) / gW * (tMax - tMin); }
+
+  // Compute derivative numerically
+  const dt = 0.005;
+  const samples = [];
+  for (let t = tMin; t <= tMax; t += dt) {
+    const v = ap(t);
+    const dv = (ap(t + dt) - ap(t - dt)) / (2 * dt);
+    samples.push({ t, v, dv });
+  }
+
+  // Compute integral (cumulative)
+  let integral = 0;
+  for (let i = 0; i < samples.length; i++) {
+    integral += (samples[i].v + 70) * dt; // relative to resting
+    samples[i].integral = integral;
+  }
+  const maxInt = Math.max(...samples.map(s => Math.abs(s.integral)));
+
+  function draw(hoverT) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid
+    ctx.strokeStyle = '#1a1a2a';
+    ctx.lineWidth = 1;
+    for (let v = -80; v <= 40; v += 20) {
+      ctx.beginPath();
+      ctx.moveTo(pad.l, vToY(v));
+      ctx.lineTo(W - pad.r, vToY(v));
+      ctx.stroke();
+    }
+    for (let t = 0; t <= 4; t += 0.5) {
+      ctx.beginPath();
+      ctx.moveTo(tToX(t), pad.t);
+      ctx.lineTo(tToX(t), H - pad.b);
+      ctx.stroke();
+    }
+
+    // Zero line
+    ctx.strokeStyle = '#333';
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(pad.l, vToY(0));
+    ctx.lineTo(W - pad.r, vToY(0));
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(pad.l, vToY(-70));
+    ctx.lineTo(W - pad.r, vToY(-70));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Integral fill
+    ctx.beginPath();
+    ctx.moveTo(tToX(samples[0].t), vToY(-70));
+    for (const s of samples) {
+      ctx.lineTo(tToX(s.t), vToY(s.v));
+    }
+    ctx.lineTo(tToX(samples[samples.length - 1].t), vToY(-70));
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255, 217, 61, 0.08)';
+    ctx.fill();
+
+    // Voltage curve
+    ctx.beginPath();
+    ctx.strokeStyle = '#ff6b6b';
+    ctx.lineWidth = 2.5;
+    for (let i = 0; i < samples.length; i++) {
+      const x = tToX(samples[i].t);
+      const y = vToY(samples[i].v);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Derivative curve (scaled to fit)
+    const maxDv = Math.max(...samples.map(s => Math.abs(s.dv)));
+    const dvScale = (gH * 0.3) / maxDv;
+    const dvBase = vToY(-70);
+    ctx.beginPath();
+    ctx.strokeStyle = '#4ecdc4';
+    ctx.lineWidth = 1.5;
+    for (let i = 0; i < samples.length; i++) {
+      const x = tToX(samples[i].t);
+      const y = dvBase - samples[i].dv * dvScale;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Axis labels
+    ctx.fillStyle = '#666';
+    ctx.font = '11px monospace';
+    ctx.textAlign = 'right';
+    for (let v = -80; v <= 40; v += 20) {
+      ctx.fillText(v + 'mV', pad.l - 5, vToY(v) + 4);
+    }
+    ctx.textAlign = 'center';
+    for (let t = 0; t <= 4; t += 1) {
+      ctx.fillText(t + 'ms', tToX(t), H - pad.b + 15);
+    }
+
+    // Annotations
+    ctx.font = '10px sans-serif';
+    ctx.fillStyle = '#ff6b6b88';
+    ctx.fillText('Na+ channels open', tToX(0.9), vToY(30) - 8);
+    ctx.fillText('K+ channels open', tToX(1.5), vToY(-10));
+    ctx.fillText('hyperpolarization', tToX(2.0), vToY(-85) + 12);
+    ctx.fillStyle = '#66666688';
+    ctx.fillText('resting -70mV', tToX(3.5), vToY(-70) - 5);
+    ctx.fillText('threshold -55mV', tToX(3.5), vToY(-55) - 5);
+
+    // Hover line
+    if (hoverT !== undefined && hoverT >= tMin && hoverT <= tMax) {
+      const x = tToX(hoverT);
+      ctx.strokeStyle = '#ffffff33';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x, pad.t);
+      ctx.lineTo(x, H - pad.b);
+      ctx.stroke();
+
+      // Find nearest sample
+      const idx = Math.round((hoverT - tMin) / dt);
+      if (idx >= 0 && idx < samples.length) {
+        const s = samples[idx];
+        // Dot on voltage
+        ctx.beginPath();
+        ctx.arc(tToX(s.t), vToY(s.v), 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#ff6b6b';
+        ctx.fill();
+        // Dot on derivative
+        ctx.beginPath();
+        ctx.arc(tToX(s.t), dvBase - s.dv * dvScale, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#4ecdc4';
+        ctx.fill();
+
+        readout.innerHTML =
+          `<span>t = ${s.t.toFixed(2)}ms</span>` +
+          `<span class="val-signal">V = ${s.v.toFixed(1)}mV</span>` +
+          `<span class="val-deriv">dV/dt = ${s.dv.toFixed(0)} mV/ms</span>` +
+          `<span class="val-integral">\u222B = ${s.integral.toFixed(1)}</span>`;
+      }
+    }
+  }
+
+  c.addEventListener('mousemove', (e) => {
+    const rect = c.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    draw(xToT(mx));
+  });
+  c.addEventListener('mouseleave', () => { draw(); readout.innerHTML = 'Hover over the signal'; });
+
+  draw();
+})();
+
+
+// ========== SECTION 3: EEG WAVES ==========
+(() => {
+  const c = document.getElementById('eegCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('eegReadout');
+  const info = document.getElementById('eegInfo');
+  const W = c.width, H = c.height;
+
+  const sliders = {
+    delta: document.getElementById('delta'),
+    theta: document.getElementById('theta'),
+    alpha: document.getElementById('alpha'),
+    beta: document.getElementById('beta'),
+    gamma: document.getElementById('gamma'),
+  };
+
+  const bands = [
+    { key: 'delta', freq: 2.5, color: '#ff6b6b', label: 'Delta (2.5 Hz)' },
+    { key: 'theta', freq: 6, color: '#ffd93d', label: 'Theta (6 Hz)' },
+    { key: 'alpha', freq: 10, color: '#7faaff', label: 'Alpha (10 Hz)' },
+    { key: 'beta', freq: 20, color: '#4ecdc4', label: 'Beta (20 Hz)' },
+    { key: 'gamma', freq: 50, color: '#c77dff', label: 'Gamma (50 Hz)' },
+  ];
+
+  let mode = 'components'; // components, combined, derivative, spectrum
+
+  document.getElementById('btnComponents').onclick = () => { mode = 'components'; updateTabs(); draw(); };
+  document.getElementById('btnCombined').onclick = () => { mode = 'combined'; updateTabs(); draw(); };
+  document.getElementById('btnDerivative').onclick = () => { mode = 'derivative'; updateTabs(); draw(); };
+  document.getElementById('btnSpectrum').onclick = () => { mode = 'spectrum'; updateTabs(); draw(); };
+
+  function updateTabs() {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('btn' + mode.charAt(0).toUpperCase() + mode.slice(1)).classList.add('active');
+
+    const infos = {
+      components: '<strong>Each band = a sine wave at a different frequency.</strong><br>Your EEG is the <strong>sum</strong> of all of them. The Fourier transform (an integral: <code>\u222Bf(t)e^{-i2\u03C0ft}dt</code>) pulls them apart, telling you how much power is at each frequency. This is how the coherence metric Cs in QIF works.',
+      combined: '<strong>This is what an EEG electrode actually measures.</strong><br>All frequencies superimposed. Looks messy, but the Fourier transform can perfectly decompose it back into the individual components. The <strong>integral</strong> of sine over a full cycle = 0, which is why each frequency can be extracted independently.',
+      derivative: '<strong>The derivative of the combined signal.</strong><br>Notice how higher frequencies dominate the derivative. A 50 Hz gamma wave has 5x the derivative of a 10 Hz alpha wave at the same amplitude, because <code>d/dt sin(2\u03C0ft) = 2\u03C0f cos(2\u03C0ft)</code>. The derivative amplifies fast changes. This is why gamma activity is hard to measure: tiny amplitude, but steep slopes.',
+      spectrum: '<strong>The frequency spectrum (Fourier transform output).</strong><br>Each bar shows how much power is at that frequency. This is what the QIF coherence metric operates on: it computes entropy across these frequency bins. Ordered spectrum = low entropy = high Cs. Flat/noisy spectrum = high entropy = low Cs.',
+    };
+    info.innerHTML = infos[mode];
+  }
+
+  function getAmps() {
+    return bands.map(b => sliders[b.key].value / 100);
+  }
+
+  function signal(t, amps) {
+    return bands.reduce((sum, b, i) => sum + amps[i] * Math.sin(2 * Math.PI * b.freq * t), 0);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const amps = getAmps();
+    const pad = { l: 50, r: 20, t: 15, b: 30 };
+    const gW = W - pad.l - pad.r;
+    const gH = H - pad.t - pad.b;
+    const tMax = 1; // 1 second
+    const dt = 1 / 500;
+
+    if (mode === 'components') {
+      const bandH = gH / bands.length;
+      bands.forEach((b, i) => {
+        const amp = amps[i];
+        const yBase = pad.t + bandH * (i + 0.5);
+        // Label
+        ctx.fillStyle = b.color;
+        ctx.font = '11px monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText(b.label, pad.l - 5, yBase + 4);
+        // Wave
+        ctx.beginPath();
+        ctx.strokeStyle = b.color;
+        ctx.lineWidth = 1.5;
+        for (let t = 0; t <= tMax; t += dt) {
+          const x = pad.l + (t / tMax) * gW;
+          const y = yBase - amp * (bandH * 0.4) * Math.sin(2 * Math.PI * b.freq * t);
+          t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        // Zero line
+        ctx.strokeStyle = '#222';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(pad.l, yBase);
+        ctx.lineTo(W - pad.r, yBase);
+        ctx.stroke();
+      });
+    } else if (mode === 'combined' || mode === 'derivative') {
+      const maxAmp = amps.reduce((a, b) => a + b, 0);
+      const scale = maxAmp > 0 ? (gH * 0.4) / maxAmp : 1;
+      const yBase = pad.t + gH / 2;
+
+      // Zero line
+      ctx.strokeStyle = '#222';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, yBase);
+      ctx.lineTo(W - pad.r, yBase);
+      ctx.stroke();
+
+      if (mode === 'combined') {
+        ctx.beginPath();
+        ctx.strokeStyle = '#ff6b6b';
+        ctx.lineWidth = 2;
+        for (let t = 0; t <= tMax; t += dt) {
+          const x = pad.l + (t / tMax) * gW;
+          const y = yBase - signal(t, amps) * scale;
+          t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      } else {
+        // Derivative
+        const derivSamples = [];
+        for (let t = 0; t <= tMax; t += dt) {
+          const dv = (signal(t + dt, amps) - signal(t - dt, amps)) / (2 * dt);
+          derivSamples.push(dv);
+        }
+        const maxDeriv = Math.max(...derivSamples.map(Math.abs));
+        const dScale = maxDeriv > 0 ? (gH * 0.4) / maxDeriv : 1;
+
+        ctx.beginPath();
+        ctx.strokeStyle = '#4ecdc4';
+        ctx.lineWidth = 2;
+        let i = 0;
+        for (let t = 0; t <= tMax; t += dt) {
+          const x = pad.l + (t / tMax) * gW;
+          const y = yBase - derivSamples[i] * dScale;
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          i++;
+        }
+        ctx.stroke();
+      }
+    } else if (mode === 'spectrum') {
+      const barW = gW / bands.length;
+      const maxAmp = Math.max(...amps, 0.01);
+      bands.forEach((b, i) => {
+        const barH = (amps[i] / maxAmp) * (gH - 30);
+        const x = pad.l + barW * i + barW * 0.15;
+        const w = barW * 0.7;
+        const y = H - pad.b - barH;
+
+        ctx.fillStyle = b.color + '88';
+        ctx.fillRect(x, y, w, barH);
+        ctx.strokeStyle = b.color;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(x, y, w, barH);
+
+        ctx.fillStyle = b.color;
+        ctx.font = '11px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(b.freq + ' Hz', x + w / 2, H - pad.b + 15);
+        ctx.fillText((amps[i] * 100).toFixed(0) + '%', x + w / 2, y - 5);
+      });
+    }
+
+    // Time axis for non-spectrum
+    if (mode !== 'spectrum') {
+      ctx.fillStyle = '#666';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'center';
+      for (let t = 0; t <= 1; t += 0.2) {
+        ctx.fillText((t * 1000).toFixed(0) + 'ms', pad.l + (t / tMax) * gW, H - pad.b + 15);
+      }
+    }
+  }
+
+  Object.values(sliders).forEach(s => s.addEventListener('input', draw));
+  draw();
+})();
+
+
+// ========== SECTION 4: DRAW YOUR OWN ==========
+(() => {
+  const c = document.getElementById('drawCanvas');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  let points = [];
+  let drawing = false;
+
+  const pad = { l: 30, r: 20, t: 20, b: 20 };
+  const gW = W - pad.l - pad.r;
+  const gH = H - pad.t - pad.b;
+  const midY = pad.t + gH / 2;
+
+  function clear() {
+    points = [];
+    draw();
+  }
+
+  function setPreset(type) {
+    points = [];
+    const n = 400;
+    for (let i = 0; i < n; i++) {
+      const t = i / n;
+      const x = pad.l + t * gW;
+      let y;
+      if (type === 'step') {
+        y = midY - (t < 0.3 ? 0 : t < 0.32 ? (t - 0.3) / 0.02 * 80 : 80);
+      } else if (type === 'spike') {
+        const spike = Math.exp(-((t - 0.5) ** 2) / 0.001) * 100;
+        y = midY - spike;
+      } else if (type === 'slow') {
+        y = midY - t * 60;
+      }
+      points.push({ x, y });
+    }
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Zero line
+    ctx.strokeStyle = '#222';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(pad.l, midY);
+    ctx.lineTo(W - pad.r, midY);
+    ctx.stroke();
+
+    if (points.length < 3) {
+      ctx.fillStyle = '#444';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Draw a signal with your mouse', W / 2, H / 2);
+      return;
+    }
+
+    // Signal
+    ctx.beginPath();
+    ctx.strokeStyle = '#ff6b6b';
+    ctx.lineWidth = 2;
+    points.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+    ctx.stroke();
+
+    // Derivative
+    const derivPoints = [];
+    for (let i = 1; i < points.length - 1; i++) {
+      const dx = points[i + 1].x - points[i - 1].x;
+      const dy = points[i + 1].y - points[i - 1].y;
+      if (dx !== 0) {
+        derivPoints.push({ x: points[i].x, dy: -dy / dx }); // negative because y is inverted
+      }
+    }
+
+    if (derivPoints.length > 2) {
+      const maxDy = Math.max(...derivPoints.map(d => Math.abs(d.dy)), 0.01);
+      const scale = (gH * 0.3) / maxDy;
+
+      ctx.beginPath();
+      ctx.strokeStyle = '#4ecdc4';
+      ctx.lineWidth = 1.5;
+      derivPoints.forEach((d, i) => {
+        const y = midY - d.dy * scale;
+        i === 0 ? ctx.moveTo(d.x, y) : ctx.lineTo(d.x, y);
+      });
+      ctx.stroke();
+    }
+  }
+
+  c.addEventListener('mousedown', (e) => {
+    drawing = true;
+    points = [];
+  });
+  c.addEventListener('mouseup', () => { drawing = false; });
+  c.addEventListener('mouseleave', () => { drawing = false; });
+  c.addEventListener('mousemove', (e) => {
+    if (!drawing) return;
+    const rect = c.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (W / rect.width);
+    const y = (e.clientY - rect.top) * (H / rect.height);
+    if (x >= pad.l && x <= W - pad.r) {
+      points.push({ x, y });
+      draw();
+    }
+  });
+
+  // Touch
+  c.addEventListener('touchstart', (e) => { e.preventDefault(); drawing = true; points = []; });
+  c.addEventListener('touchend', () => { drawing = false; });
+  c.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (!drawing) return;
+    const rect = c.getBoundingClientRect();
+    const touch = e.touches[0];
+    const x = (touch.clientX - rect.left) * (W / rect.width);
+    const y = (touch.clientY - rect.top) * (H / rect.height);
+    if (x >= pad.l && x <= W - pad.r) {
+      points.push({ x, y });
+      draw();
+    }
+  });
+
+  document.getElementById('clearDraw').onclick = clear;
+  document.getElementById('presetStep').onclick = () => setPreset('step');
+  document.getElementById('presetSpike').onclick = () => setPreset('spike');
+  document.getElementById('presetSlow').onclick = () => setPreset('slow');
+
+  draw();
+})();
+
+
+// ========== SECTION 5: L = v/f ==========
+(() => {
+  const c = document.getElementById('lvfCanvas');
+  const ctx = c.getContext('2d');
+  const readout = document.getElementById('lvfReadout');
+  const W = c.width, H = c.height;
+
+  const velSlider = document.getElementById('velocity');
+  const freqSlider = document.getElementById('frequency');
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const v = parseFloat(velSlider.value);
+    const f = parseFloat(freqSlider.value);
+    const L = v / f;
+
+    const pad = { l: 30, r: 30, t: 20, b: 40 };
+    const gW = W - pad.l - pad.r;
+    const gH = H - pad.t - pad.b;
+    const midY = pad.t + gH / 2;
+
+    // Axon line
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 20;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(pad.l, midY);
+    ctx.lineTo(W - pad.r, midY);
+    ctx.stroke();
+
+    // Myelin segments (thicker = more myelinated = higher v)
+    const myelinThickness = Math.min(v / 120 * 12, 12);
+    ctx.strokeStyle = '#ffd93d44';
+    ctx.lineWidth = 20 + myelinThickness * 2;
+    ctx.beginPath();
+    ctx.moveTo(pad.l, midY);
+    ctx.lineTo(W - pad.r, midY);
+    ctx.stroke();
+
+    // Wave along axon
+    // Scale: total axon length represents 10 meters
+    const axonLenM = 10;
+    const pxPerM = gW / axonLenM;
+    const wavelengthPx = L * pxPerM;
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#7faaff';
+    ctx.lineWidth = 2.5;
+    for (let px = 0; px <= gW; px++) {
+      const meters = px / pxPerM;
+      const phase = (meters / L) * 2 * Math.PI;
+      const amp = gH * 0.3;
+      const x = pad.l + px;
+      const y = midY - Math.sin(phase) * amp;
+      px === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Wavelength bracket
+    if (wavelengthPx > 20 && wavelengthPx < gW) {
+      const bY = midY + gH * 0.35 + 10;
+      ctx.strokeStyle = '#ff6b6b';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, bY);
+      ctx.lineTo(pad.l, bY - 8);
+      ctx.moveTo(pad.l, bY);
+      ctx.lineTo(pad.l + wavelengthPx, bY);
+      ctx.lineTo(pad.l + wavelengthPx, bY - 8);
+      ctx.stroke();
+
+      ctx.fillStyle = '#ff6b6b';
+      ctx.font = '12px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('L = ' + L.toFixed(2) + 'm', pad.l + wavelengthPx / 2, bY + 15);
+    }
+
+    // Labels
+    ctx.fillStyle = '#666';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('0m', pad.l, H - 5);
+    ctx.textAlign = 'right';
+    ctx.fillText('10m', W - pad.r, H - 5);
+    ctx.textAlign = 'center';
+    ctx.fillText('axon', W / 2, midY + 5);
+
+    // Myelin label
+    ctx.fillStyle = '#ffd93d88';
+    ctx.fillText('myelin', W / 2, midY - gH * 0.35 - 5);
+
+    readout.innerHTML =
+      `v = <span class="val-signal">${v} m/s</span> | ` +
+      `f = <span class="val-deriv">${f} Hz</span> | ` +
+      `<span class="val-integral">L = v/f = ${L.toFixed(2)} m</span>`;
+  }
+
+  velSlider.addEventListener('input', draw);
+  freqSlider.addEventListener('input', draw);
+  draw();
+})();
+</script>
+
+<div style="text-align:center; padding: 50px 20px 10px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+  <a href="calculus-fundamentals.html" style="display:inline-block; padding:20px 40px; background:#111128; color:#7faaff; text-decoration:none; border:2px solid #333; border-radius:14px; font-size:1.3rem; font-weight:700; transition:all 0.2s;">&larr; Back: Fundamentals</a>
+  <a href="calculus-bci-limits.html" style="display:inline-block; padding:20px 40px; background:#111128; color:#7faaff; text-decoration:none; border:2px solid #7faaff; border-radius:14px; font-size:1.3rem; font-weight:700; transition:all 0.2s;">Next: BCI Limits &rarr;</a>
+</div>
+
+</body>
+</html>
