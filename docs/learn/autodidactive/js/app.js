@@ -218,6 +218,7 @@ function hashColor(id) {
 // ── Router ──────────────────────────────────────────────────────────────────
 let currentView = 'home';
 let currentField = 'all';
+let currentConcept = null;
 
 function navigate(view) {
   currentView = view;
