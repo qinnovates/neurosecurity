@@ -4,7 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: d987e7052f0d5e456b077223ac098712a243a06d -->
+<!-- changelog-marker: 78613076908b62d9fbce6087762a3be91c2bfc7b -->
+
+## 2026-03-05
+
+### Updated
+- Add BrainFlow data source disclaimer to validation page ([7861307](https://github.com/qinnovates/qinnovate/commit/7861307))
+
 
 ## 2026-03-04
 
