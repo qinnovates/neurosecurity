@@ -1,0 +1,198 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const caseStudies = [
+  {
+    title: 'Endogenous Neural Attack Chain',
+    subtitle: 'When your body is the threat actor',
+    href: '/case-studies/endogenous-attack-chain/',
+    date: '2026-02-28',
+    type: 'Full Case Study',
+    tags: ['TARA', 'Neurorights', 'COVID', 'PTSD', 'Attack Chain'],
+    description: 'Five-phase attack chain mapped through QIF — B12 deficiency, neuroinflammation, isolation, PTSD replay, self-model corruption. No BCI involved. No external attacker. Every attack pattern held anyway.',
+    techniques: ['T0066', 'T0067', 'T0025', 'T0029', 'T0023', 'T0039', 'T0060', 'T0022'],
+    featured: true,
+  },
+  {
+    title: 'ANC Ear Canal Fingerprinting (T0079)',
+    subtitle: 'Your earbuds can fingerprint your ear canal',
+    href: '/case-studies/t0079-anc-fingerprint/',
+    date: '2026-02-11',
+    type: 'Hardware Validation',
+    tags: ['TARA', 'Sensor Exploitation', 'Biometrics', 'Real Hardware'],
+    description: 'Real hardware validation of covert ear canal biometric extraction via consumer ANC earbuds. 2 subjects, 2 devices, 6 sessions, >99% identification accuracy. Probe signal hidden 47 dB below music.',
+    techniques: ['T0079'],
+    featured: true,
+  },
+  {
+    title: 'Neurowall: 15 Attack Scenarios Tested',
+    subtitle: 'Building a neural firewall from scratch and testing it honestly',
+    href: '/publications/2026-02-21-neurowall-simulation-results/',
+    date: '2026-02-21',
+    type: 'Simulation Study',
+    tags: ['Neurowall', 'QIF', 'TARA', 'Signal Security', 'Simulation'],
+    description: 'Full 3-layer defense pipeline tested against 15 TARA-mapped attack scenarios including 5 adversarial-aware attacks. 13/15 detected. Honest reporting of the 2 that evade detection — boiling frog and phase replay.',
+    techniques: ['T0001', 'T0025', 'T0029', 'T0066', 'T0067'],
+    featured: true,
+  },
+  {
+    title: 'Neural Steganography Weaponization',
+    subtitle: 'How invisible display flicker controls your subconscious',
+    href: '/publications/2026-02-18-the-invisible-flicker-attack-when-your-display-becomes-a-weapon/',
+    date: '2026-02-18',
+    type: 'Threat Model',
+    tags: ['SSVEP', 'Neural Steganography', 'Attack Chain', 'SAIL Lab'],
+    description: 'Full threat model for SSVEP frequency hijack via imperceptible display flicker, chained with sensory-channel attacks. If a monitor flickers faster than 60 Hz, you cannot see it — but your brain still responds.',
+    techniques: [],
+  },
+  {
+    title: "TARA's First CVE: Realtek Audio Jack Retasking",
+    subtitle: 'A 9-year-old vulnerability hiding in every PC speaker',
+    href: '/publications/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/',
+    date: '2026-02-11',
+    type: 'Vulnerability Disclosure',
+    tags: ['TARA', 'CVE', 'Realtek', 'Audio Security', 'CWE-862'],
+    description: 'How a BCI threat framework found an unfiled CVE in Realtek audio codecs that turns your headphones into microphones. Not in a brain-computer interface — in your headphones.',
+    techniques: [],
+  },
+  {
+    title: 'The Neural Impact Chain',
+    subtitle: 'When security scores predict psychiatric diagnoses',
+    href: '/publications/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/',
+    date: '2026-02-13',
+    type: 'Research Analysis',
+    tags: ['TARA', 'DSM-5-TR', 'NISS', 'Psychiatry', 'RDoC'],
+    description: '99 BCI attack techniques mapped to DSM-5-TR diagnoses. NISS scores correlate with clinical categories. When a BCI attack disrupts your amygdala, what happens to your mental health?',
+    techniques: [],
+  },
+  {
+    title: 'How Malicious Apps Derive Your Biometrics',
+    subtitle: 'No health sensor required — 28 consumer sensor attack paths',
+    href: '/publications/2026-02-11-how-malicious-apps-derive-your-personal-biometrics/',
+    date: '2026-02-11',
+    type: 'Threat Analysis',
+    tags: ['TARA', 'Consumer Sensors', 'Biometrics', 'Privacy', 'S-Domain'],
+    description: '28 ways consumer sensors extract biometric, physiological, and cognitive data without dedicated health hardware. The attack chain ends at your brain.',
+    techniques: ['T0079'],
+  },
+];
+
+const typeColors: Record<string, { bg: string; text: string }> = {
+  'Full Case Study': { bg: 'var(--color-accent-primary)', text: '#fff' },
+  'Hardware Validation': { bg: '#10b981', text: '#fff' },
+  'Simulation Study': { bg: 'var(--color-accent-secondary)', text: '#fff' },
+  'Threat Model': { bg: '#f59e0b', text: '#1a1a2e' },
+  'Vulnerability Disclosure': { bg: '#ef4444', text: '#fff' },
+  'Research Analysis': { bg: '#8b5cf6', text: '#fff' },
+  'Threat Analysis': { bg: '#ec4899', text: '#fff' },
+};
+---
+
+<PageLayout
+  title="Case Studies"
+  description="Real-world threat analysis, hardware validation, and simulation results from the QIF framework. Each case study maps attacks to TARA techniques, neurorights violations, and clinical impact."
+  breadcrumbs={[{ label: 'Case Studies' }]}
+  maxWidth="wide"
+>
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Hero -->
+    <section class="mb-16">
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
+        Case Studies
+      </h1>
+      <p class="text-lg text-[var(--color-text-muted)] mb-2">
+        Theory gets tested here. Each case study maps real attacks to TARA techniques, scores them with NISS, and traces the impact through neurorights violations and clinical outcomes.
+      </p>
+      <p class="text-[var(--color-text-faint)]">
+        Some of these started as hardware experiments. Some started as threat models. One started as a personal health crisis. All of them made the framework stronger.
+      </p>
+    </section>
+
+    <!-- Featured Studies -->
+    <section class="mb-16">
+      <h2 class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-6">Featured</h2>
+      <div class="space-y-6">
+        {caseStudies.filter(s => s.featured).map(study => {
+          const colors = typeColors[study.type] ?? { bg: 'var(--color-border)', text: 'var(--color-text-primary)' };
+          return (
+            <a href={study.href} class="block glass rounded-xl p-6 sm:p-8 hover:border-[var(--color-accent-primary)] border border-transparent transition-colors group">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span
+                  class="text-xs font-semibold px-2.5 py-1 rounded-full"
+                  style={`background: ${colors.bg}; color: ${colors.text};`}
+                >
+                  {study.type}
+                </span>
+                <span class="text-xs text-[var(--color-text-faint)]">{study.date}</span>
+              </div>
+              <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+                {study.title}
+              </h3>
+              <p class="text-sm text-[var(--color-accent-primary)] mb-3">{study.subtitle}</p>
+              <p class="text-sm text-[var(--color-text-muted)] mb-4">{study.description}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {study.techniques.length > 0 && study.techniques.map(t => (
+                  <span class="text-xs font-[family-name:var(--font-mono)] px-2 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-text-faint)]">{t}</span>
+                ))}
+                {study.tags.map(tag => (
+                  <span class="text-xs px-2 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-text-faint)]">{tag}</span>
+                ))}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- All Studies -->
+    <section class="mb-16">
+      <h2 class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-6">All Studies</h2>
+      <div class="space-y-4">
+        {caseStudies.filter(s => !s.featured).map(study => {
+          const colors = typeColors[study.type] ?? { bg: 'var(--color-border)', text: 'var(--color-text-primary)' };
+          return (
+            <a href={study.href} class="block glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] border border-transparent transition-colors group">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-semibold px-2 py-0.5 rounded-full"
+                  style={`background: ${colors.bg}; color: ${colors.text};`}
+                >
+                  {study.type}
+                </span>
+                <span class="text-xs text-[var(--color-text-faint)]">{study.date}</span>
+              </div>
+              <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+                {study.title}
+              </h3>
+              <p class="text-sm text-[var(--color-text-muted)]">{study.description}</p>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mb-12">
+      <div class="glass rounded-xl p-6 text-center">
+        <p class="text-sm text-[var(--color-text-muted)] mb-3">
+          All case studies reference techniques from the TARA threat registry and are scored using the NISS system.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/TARA/" class="text-sm font-medium text-[var(--color-accent-primary)] hover:underline">
+            Browse TARA Atlas
+          </a>
+          <span class="text-[var(--color-text-faint)]">|</span>
+          <a href="/scoring/" class="text-sm font-medium text-[var(--color-accent-primary)] hover:underline">
+            NISS Scoring System
+          </a>
+          <span class="text-[var(--color-text-faint)]">|</span>
+          <a href="/tools/" class="text-sm font-medium text-[var(--color-accent-primary)] hover:underline">
+            Defense Tools
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>
