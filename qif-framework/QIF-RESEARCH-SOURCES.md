@@ -5,9 +5,9 @@
 > validation agents (quantum physics, neuroscience, cybersecurity) during the
 > framework review conducted on 2026-02-02.
 >
-> **Last updated:** 2026-03-04
+> **Last updated:** 2026-03-05
 > **Sources extracted from:** Three parallel validation agent sessions + ongoing research
-> **Total unique sources:** 255+
+> **Total unique sources:** 279+
 
 ---
 
@@ -349,6 +349,9 @@ Sources are organized by domain and sorted newest-first within each domain.
 | C71 | Ienca M, Haselager P. (2021). "Security in Brain-Computer Interfaces: State-of-the-Art, Opportunities, and Future Challenges." ACM Computing Surveys. | https://dl.acm.org/doi/10.1145/3427376 | Entry 71 | Qualitative BCI security survey by lifecycle phase. No CVE mapping. Referenced in coverage gap analysis (no prior work bridges neuro-layer taxonomy to CVE ecosystem). |
 | C72 | ISO 14708-3:2017 (confirmed 2023). "Active implantable medical devices — Implantable neurostimulators." | https://www.iso.org/standard/60539.html | Entry 71 | Neurostimulator standard covering electrical safety and biocompatibility. No cybersecurity content. No attack taxonomy. |
 | C73 | ISO/IEEE 11073-40102:2022. "Health informatics — Personal health device communication — Cybersecurity — Capabilities for mitigation." | https://www.iso.org/standard/83503.html | Entry 71 | Generic personal health device cybersecurity standard. Extended CIA triad, aligned with NIST/ENISA. Not BCI-specific. No attack taxonomy. |
+| C74 | Liu S, He T, Lu X, Zheng Y. (2024). "Professor X: Invisible Backdoor Attack on EEG Brain-Computer Interfaces." arXiv:2409.20158. | https://arxiv.org/abs/2409.20158 | Landscape Sync | Novel invisible backdoor attack mechanism targeting EEG-based BCI classifiers. Demonstrates trigger injection undetectable by standard anomaly detection. |
+| C75 | Yi Z, Ming D, Liu Y, Kong Y. (2024). "Brainprint Adversarial Attacks on EEG-Based Biometric Systems." ICME 2024. | N/A | Landscape Sync | Adversarial attacks on EEG brainprint biometrics. Demonstrates spoofing of neural biometric authentication systems. |
+| C76 | Jiang X, Fan L, Zhu J et al. (2023). "Cybersecurity of Neural Interfaces: A Comprehensive Survey of CNS and PNS Perspectives." Computers in Biology and Medicine. | N/A | Landscape Sync | First survey covering both central and peripheral nervous system interface cybersecurity. Comprehensive threat landscape across all neural interface modalities. |
 
 ---
 
@@ -571,6 +574,15 @@ Sources are organized by domain and sorted newest-first within each domain.
 | NL2 | California State Legislature. (2024). "SB 1223: California Consumer Privacy Act - Neural Data." | https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB1223 | Crawl: Neurorights | Adds "neural data" as CCPA sensitive personal information. Effective Jan 2025. Feeds Section 11.3. |
 | NL3 | US Senate. (2024). "MIND Act (S. 2925)." | https://www.congress.gov/bill/118th-congress/senate-bill/2925 | Crawl: Neurorights | Federal neural data standards proposal. Neurotechnology Advisory Committee. Cybersecurity requirements for neural devices. |
 | NL4 | Council of Europe. (2025). "Strategic Action Plan on Neurotechnology." | https://www.coe.int/en/web/bioethics/neurotechnology | Crawl: Neurorights | Human rights-based framework for 46 member states. Feeds international governance analysis in Section 10. |
+| NL5 | Montana State Legislature. (2024). "SB 214: Neural Data as Sensitive Biometric Data." | https://leg.mt.gov/bills/2025/billhtml/SB0214.htm | Landscape Sync | Montana classifies neural data as sensitive biometric information under state privacy law. |
+| NL6 | Minnesota State Legislature. (2024). "HF 1370: Neural Data as Sensitive Biometric Data." | https://www.revisor.mn.gov/bills/bill.php?b=House&f=HF1370&ssn=0&y=2023 | Landscape Sync | Minnesota includes neural data in biometric data protections. |
+| NL7 | Latin American Parliament (Parlatino). (2023). "Model Law on Neurorights." | N/A | Landscape Sync | Regional model law covering all five neurorights categories. Template for Latin American national legislation. |
+| NL8 | China Ministry of Science and Technology. (2024). "Ethical Guidelines for Brain-Computer Interface Research." | N/A | Landscape Sync | China's national BCI ethics guidelines covering mental privacy and integrity considerations. |
+| NL9 | UN Human Rights Council. (2024). "Advisory Committee Mandate on Neurotechnology and Human Rights." | https://www.ohchr.org/en/hr-bodies/hrc/advisory-committee/neurotechnology | Landscape Sync | UN-level mandate to study neurotechnology impacts on human rights. Advisory committee report expected. |
+| NL10 | US Congress. (2025). "MIND Act — Mental Integrity in the Digital Age." | https://www.congress.gov/bill/119th-congress/senate-bill/ | Landscape Sync | Reintroduced federal neural data protection bill. Establishes Neurotechnology Advisory Committee. |
+| NL11 | European Parliament. (2024). "EU AI Act, Regulation 2024/1689." | https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689 | Landscape Sync | Classifies neurotechnology as high-risk AI requiring conformity assessments and transparency obligations. |
+| NL12 | Global Privacy Assembly. (2024). "Resolution on the Processing of Neural Data — 46th Conference." | N/A | Landscape Sync | International privacy authority resolution establishing neural data processing principles. |
+| NL13 | IEEE Standards Association. (2024). "IEEE P2731 (BMI Unified Terminology) and IEEE P2794 (Brain Data Interoperability)." | N/A | Landscape Sync | Two IEEE working groups standardizing BCI terminology and brain data formats. Foundational for cross-framework interoperability. |
 
 ## 16. BCI Companies & Devices
 
@@ -582,6 +594,36 @@ Sources are organized by domain and sorted newest-first within each domain.
 
 ---
 
+## 17. Institutional Neuroethics Programs
+
+> Sources added 2026-03-05 from landscape page expansion — neuroethics centers and researchers.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| INP22 | UBC National Core for Neuroethics — Judy Illes, Director. | https://neuroethics.ubc.ca/ | Landscape Sync | Pioneer neuroethics center. Neuroimaging ethics, DBS identity impact, Indigenous neuroscience ethics. |
+| INP23 | Georgia State University Center for Neuroimaging & Neuroethics — Karen Rommelfanger, Director. | https://neuroscience.gsu.edu/ | Landscape Sync | Only US PhD concentration in neuroethics. Cross-cultural neuroethics research. |
+| INP24 | UCSF Decision Lab / BRAIN Neuroethics — Winston Chiong, PI. | https://decisionlab.ucsf.edu/ | Landscape Sync | NIH BRAIN Initiative-funded neuroethics. DBS decision-making and informed consent research. |
+| INP25 | Penn State Neuroethics & Society — Laura Cabrera. | https://rockethics.psu.edu/ | Landscape Sync | IEEE P7700 Neurotechnology Standards Working Group chair. Public attitudes toward neurotechnology. |
+| INP26 | INSERM/Sorbonne — Hervé Chneiweiss. | https://icm-institute.org/ | Landscape Sync | Co-chair of UNESCO Ad Hoc Expert Group on Ethics of Neurotechnology (2025). French INSERM neuroscience policy. |
+| INP27 | RHUNE Network — German National Hub for Responsible Use of Neurotechnologies. | N/A | Landscape Sync | BMBF-funded multi-institutional consortium for responsible neurotechnology governance in Germany. |
+| INP28 | Baylor College of Medicine — Amy McGuire. | https://www.bcm.edu/research/labs-and-centers/center-medical-ethics-health-policy | Landscape Sync | Neural data consent frameworks. Intersection of genomic and neural ethics. |
+
+---
+
+## 18. Neuroethics Foundations & Frameworks
+
+> Sources added 2026-03-05 — foundational neuroethics papers referenced in QIF epistemic integrity rules.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| E8 | Kellmeyer P. (2021). "Big Brain Data: On the Responsible Use of Brain Data from Clinical and Consumer-Directed Neurotechnological Devices." Neuroethics 14:83-98. | https://doi.org/10.1007/s12152-018-9371-x | Landscape Sync | Mental privacy and integrity conceptual analysis. Identified underspecification of core neuroethics concepts. Key reference in QIF epistemic integrity rules. |
+| E9 | Bublitz C. (2022). "Novel Neurorights: From Nonsense to Substance." Neuroethics 15(1):7. | https://doi.org/10.1007/s12152-022-09481-3 | Landscape Sync | Anti-inflationism perspective: existing rights may cover neural data without new "neurorights." Mental freedom and cognitive liberty framework. |
+| E10 | Racine E, Bar-Ilan O, Illes J. (2005). "fMRI in the Public Eye." Nature Reviews Neuroscience 6:159-164. | https://doi.org/10.1038/nrn1609 | Landscape Sync | Neurorealism triad: neuro-realism, neuro-essentialism, neuro-policy. Foundational for QIF epistemic guardrails. |
+| E11 | Poldrack RA. (2006). "Can Cognitive Processes Be Inferred from Neuroimaging Data?" Trends in Cognitive Sciences 10(2):59-63. | https://doi.org/10.1016/j.tics.2005.12.004 | Landscape Sync | Reverse inference fallacy. Brain region activation does not uniquely identify cognitive processes. Core methodological constraint in QIF. |
+| E12 | Tennison MN, Moreno JD. (2012). "Neuroscience, Ethics, and National Security: The State of the Art." PLoS Biology 10(3):e1001289. | https://doi.org/10.1371/journal.pbio.1001289 | Landscape Sync | Dual-use warning: security framing of neurotech risks enabling surveillance. Paired with QIF governance constraints. |
+
+---
+
 ## Appendix: Source Statistics
 
 | Domain | Count | Newest | Oldest |
@@ -589,7 +631,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Quantum Physics & Biology | 40 | 2026 | 1993 |
 | Neuroscience | 29 | 2026 | 2010 |
 | BCI Technology | 11 | 2026 | 1992 |
-| Cybersecurity & BCI Security | 73 | 2026 | 2012 |
+| Cybersecurity & BCI Security | 76 | 2026 | 2012 |
 | Electrode Technology | 7 | 2025 | 2018 |
 | Signal Coherence & Oscillations | 5 | 2015 | 1997 |
 | Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
@@ -602,9 +644,11 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Market & Investment Data | 15 | 2025 | 2024 |
 | Clinical Trials & Adverse Events | 2 | 2025 | 2018 |
 | Vulnerability & CVE Data | 1 | 2023 | 2023 |
-| Neurorights Legislation | 4 | 2025 | 2021 |
+| Neurorights Legislation | 13 | 2025 | 2021 |
 | BCI Companies & Devices | 3 | 2025 | 2025 |
-| **Total** | **255** | | |
+| Institutional Neuroethics Programs | 7 | 2025 | 2005 |
+| Neuroethics Foundations & Frameworks | 5 | 2022 | 2005 |
+| **Total** | **279** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -618,6 +662,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | CVE-to-TARA Mapping & Coverage Gap (Feb 21) | ~8 |
 | Market Trajectory Crawl Agents (Feb 21) | ~25 |
 | Neuroethics Landscape Survey (Mar 4) | ~21 |
+| Landscape Page Sync (Mar 5) | ~24 |
 
 ---
 
