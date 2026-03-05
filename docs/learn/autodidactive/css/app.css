@@ -584,6 +584,11 @@ h4 {
   margin-top: var(--space-md);
 }
 
+.card--lab {
+  border-left: 3px solid var(--primary, #10b981);
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(16, 185, 129, 0.04) 100%);
+}
+
 .card-header {
   display: flex;
   align-items: center;

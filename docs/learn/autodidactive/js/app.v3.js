@@ -392,6 +392,8 @@ function renderRecallPrompt() {
 
 
 function renderPersonCard(p) {
+  // Labs have a `src` property — route to lab card renderer
+  if (p.src) return renderLabCard(p);
   const mastery = calculateMastery(p.id);
   const bookmarked = isBookmarked(p.id);
   return `
@@ -406,6 +408,27 @@ function renderPersonCard(p) {
       <div class="card-header__tagline">${esc(p.tagline)}</div>
       ${p.fields ? `<div class="card-fields">${p.fields.map(f => `<span class="field-tag">${esc(f)}</span>`).join('')}</div>` : ''}
       ${mastery > 0 ? `<div class="card-difficulty">${mastery}% mastery</div>` : ''}
+    </div>
+  `;
+}
+
+function renderLabCard(lab) {
+  const difficultyColors = { beginner: '#10b981', intermediate: '#f59e0b', advanced: '#ef4444' };
+  const difficultyColor = difficultyColors[lab.difficulty] || '#6b7280';
+  return `
+    <div class="card card--lab" onclick="window._openLab('${lab.id}')">
+      <div class="card-header">
+        <span class="card-header__emoji">${lab.emoji}</span>
+        <div class="card-header__info">
+          <div class="card-header__name">${esc(lab.name)}</div>
+          <div class="card-header__dates" style="color: ${difficultyColor}; font-weight: 500;">${esc(lab.difficulty || '')}</div>
+        </div>
+      </div>
+      <div class="card-header__tagline">${esc(lab.tagline)}</div>
+      <div class="card-fields">
+        <span class="field-tag" style="background: var(--accent-glow, #d1fae5); color: #065f46;">Interactive Lab</span>
+        ${lab.topics ? lab.topics.map(t => `<span class="field-tag">${esc(t)}</span>`).join('') : ''}
+      </div>
     </div>
   `;
 }
