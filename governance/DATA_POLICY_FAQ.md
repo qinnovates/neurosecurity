@@ -6,44 +6,62 @@ order: 6
 
 # QIF Framework Data Policy & FAQ
 
-> **Comprehensive guide to data handling, privacy protections, and frequently asked questions about neural data security in the QIF Framework.**
+> **Guide to data handling philosophy, privacy architecture, and frequently asked questions about neural data security in the QIF Framework.**
 
-**Version:** 1.0
-**Last Updated:** 2026-02-10
+**Version:** 2.0
+**Last Updated:** 2026-03-05
 **Status:** Living Document
 
 ---
 
 ## Table of Contents
 
-1. [Data Collection Overview](#1-data-collection-overview)
-2. [Privacy Architecture](#2-privacy-architecture)
-3. [Anonymization & Known Vulnerabilities](#3-anonymization--known-vulnerabilities)
-4. [Frequently Asked Questions](#4-frequently-asked-questions)
-5. [User Rights](#5-user-rights)
-6. [Future Roadmap](#6-future-roadmap)
+1. [Current State](#1-current-state)
+2. [Data Handling Philosophy](#2-data-handling-philosophy)
+3. [Privacy Architecture (Design Specification)](#3-privacy-architecture-design-specification)
+4. [Anonymization & Known Vulnerabilities](#4-anonymization--known-vulnerabilities)
+5. [Frequently Asked Questions](#5-frequently-asked-questions)
+6. [User Rights (Design Requirements)](#6-user-rights-design-requirements)
+7. [Future Roadmap](#7-future-roadmap)
 
 ---
 
-## 1. Data Collection Overview
+## 1. Current State
 
-### What Data Does QIF Process?
+### What QIF and TARA Are Today
 
-| Data Type | Processed Locally | Transmitted to TARA | Notes |
-|-----------|-------------------|---------------------|-------|
-| Raw neural signals | ✅ Yes | ❌ **Never** | Waveforms, spike trains, ERP components |
-| Decoded thoughts/intentions | ✅ Yes | ❌ **Never** | Semantic content never extracted |
-| Coherence Score (Cₛ) | ✅ Yes | ⚠️ **With protections** | See anonymization section |
-| Delta (Δ) rate of change | ✅ Yes | ⚠️ **With protections** | Trend direction only |
-| Deviation (σ) from baseline | ✅ Yes | ⚠️ **With protections** | Anomaly magnitude |
-| Threshold alerts | ✅ Yes | ✅ Categorical only | LOW/MEDIUM/HIGH/CRITICAL |
-| Device health metrics | ✅ Yes | ✅ Aggregated | Battery, connection quality |
+**QIF** (Quantified Interconnection Framework) is a security architecture specification for brain-computer interfaces. It is a framework — a set of standards, threat models, and scoring systems. It is not a deployed product. There is no QIF software running on patient devices today.
+
+**TARA** (Threat Analysis & Risk Assessment) is a static threat registry. It catalogs 109 dual-use BCI attack-therapy techniques with neurorights mappings, severity scores, and clinical correlations. TARA is a JSON dataset and a web-based reference tool. **TARA does not collect, store, receive, or process any user data.** It is a lookup table, not a platform.
+
+**Cs (Coherence Score)** is a neurosecurity scoring metric validated on real EEG data sourced via BrainFlow. Validation was conducted on simulated signals. No human subjects were involved.
+
+**What exists today:**
+- A published threat taxonomy (109 techniques, open-source)
+- A scoring system (NISS v1.1, validated on real EEG data)
+- An architecture specification (11-band hourglass model)
+- Governance documents (this one included)
+- A preprint (DOI: 10.5281/zenodo.18640105)
+
+**What does not exist yet:**
+- Deployed software on any BCI device
+- A cloud platform receiving neural data
+- Federated learning infrastructure
+- User-facing settings or dashboards
+
+This document describes both what exists and what the architecture specifies for future implementations. Sections describing future capabilities are clearly labeled as design specifications.
+
+---
+
+## 2. Data Handling Philosophy
 
 ### Core Principle: Local-First Processing
 
+The QIF architecture mandates that raw neural data never leaves the device. All signal processing, scoring, and anomaly detection happens locally.
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     YOUR DEVICE (Local)                          │
+│                     DEVICE (Local Processing)                    │
 │                                                                  │
 │  Raw Neural Signals → Variance Calculation → Cₛ Score           │
 │         ↑                                        ↓               │
@@ -53,35 +71,46 @@ order: 6
 └──────────────────────────────────────────────────┼───────────────┘
                                                    │
                                                    ▼
-                                          TARA Portal (Scores Only)
+                                   Optional: Aggregated alerts only
+                                   (design spec — not yet implemented)
 ```
+
+### What the Architecture Prohibits
+
+| Data Type | Local Processing | External Transmission | Notes |
+|-----------|-----------------|----------------------|-------|
+| Raw neural signals | ✅ Yes | ❌ **Never** | Waveforms, spike trains, ERP components |
+| Decoded thoughts/intentions | ❌ Never extracted | ❌ **Never** | Semantic content never decoded |
+| Coherence Score (Cₛ) | ✅ Yes | ⚠️ With protections (future) | See anonymization section |
+| Threshold alerts | ✅ Yes | Categorical only (future) | LOW/MEDIUM/HIGH/CRITICAL |
+| Device health metrics | ✅ Yes | Aggregated only (future) | Battery, connection quality |
 
 ---
 
-## 2. Privacy Architecture
+## 3. Privacy Architecture (Design Specification)
+
+> **Note:** This section describes the privacy architecture that QIF-compliant implementations must follow. No implementation exists yet.
 
 ### Zero-Knowledge Monitoring
 
-TARA monitors neural security without accessing neural content:
+The architecture specifies monitoring neural security without accessing neural content:
 
 1. **Mathematical Reduction:** Raw signals → variance components → single Cₛ score
 2. **One-Way Transformation:** Cannot reconstruct signals from scores (mathematically proven)
 3. **Categorical Alerts:** Threshold breaches transmitted as categories, not values
 
-### Who Monitors the Data?
+### Data Access Model (Design Requirement)
 
 | Entity | Access Level | Purpose |
 |--------|--------------|---------|
 | **User** | Full | Complete access to all local data |
 | **Device** | Full | Local processing and protection |
-| **TARA Stack** | Scores only | Security monitoring, anomaly detection |
-| **AI Models** | Encrypted gradients only | Collective learning (federated) |
-| **Qinnovate Team** | Aggregate statistics only | Framework improvement |
+| **Monitoring (if enabled)** | Scores only | Security anomaly detection |
 | **Third Parties** | ❌ None | Never sold, shared, or accessed |
 
-### Federated AI Training
+### Federated AI Training (Future)
 
-AI models improve without centralizing data:
+The architecture specifies federated learning so AI models improve without centralizing data:
 
 ```
 Device A ──┐                    ┌── Improved Model
@@ -93,127 +122,70 @@ Device D ──┘       │                 all devices
            (sees no individual data)
 ```
 
+**Status:** Not implemented. This is a design requirement for future QIF-compliant systems.
+
 ---
 
-## 3. Anonymization & Known Vulnerabilities
+## 4. Anonymization & Known Vulnerabilities
 
-### ⚠️ CRITICAL: Score Fingerprinting Vulnerability
+### CRITICAL: Score Fingerprinting Vulnerability
 
-**The Problem:** Even without raw neural data, Cₛ scores over time can create identifiable patterns.
+**The Problem:** Even without raw neural data, Cₛ scores over time could create identifiable patterns. QIF documents this vulnerability openly.
 
 | Risk | Description | Severity |
 |------|-------------|----------|
-| **Neural Fingerprinting** | Unique variance patterns in how your coherence fluctuates | High |
+| **Neural Fingerprinting** | Unique variance patterns in how coherence fluctuates | High |
 | **Activity Inference** | Sudden Cₛ drops may correlate with specific cognitive states | Medium |
 | **Re-identification** | Matching score patterns across sessions to identify users | High |
 | **Temporal Correlation** | Time-series analysis revealing daily/weekly patterns | Medium |
 
 ### Why Simple Hashing Doesn't Work
 
-Hashing (SHA-256, etc.) would make scores incomparable. We need to:
-- Compare scores over time (trend detection)
-- Detect threshold breaches (Cₛ < 0.6)
-- Aggregate statistics across users
+Hashing (SHA-256, etc.) would make scores incomparable. Monitoring requires:
+- Comparing scores over time (trend detection)
+- Detecting threshold breaches (Cₛ < 0.6)
+- Aggregating statistics across users
 
 **Hashed scores = no useful monitoring.**
 
-### Implemented Mitigations
+### Specified Mitigations
 
 | Mitigation | How It Works | Trade-off |
 |------------|--------------|-----------|
 | **Differential Privacy** | Add calibrated Laplacian noise: Cₛ' = Cₛ + Lap(1/ε) | Slight accuracy loss (ε ≈ 1.0) |
-| **Bucketed Transmission** | Send LOW/MEDIUM/HIGH instead of 0.847 | Loses precision for trends |
+| **Bucketed Transmission** | Send LOW/MEDIUM/HIGH instead of exact values | Loses precision for trends |
 | **Temporal Aggregation** | 30-second windows for monitoring, 5-minute for training | Delayed detection |
 | **Session Unlinkability** | Rotating pseudonyms per session | Cannot track long-term trends |
 | **k-Anonymity** | Only transmit when indistinguishable from k-1 others | May delay alerts |
 
-### Recommended Configuration
-
-```python
-# Default privacy settings (can be adjusted by user)
-privacy_config = {
-    "differential_privacy": {
-        "enabled": True,
-        "epsilon": 1.0,  # Privacy budget
-    },
-    "bucketed_transmission": {
-        "enabled": True,
-        "buckets": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
-    },
-    "temporal_aggregation": {
-        "monitoring_window_seconds": 30,
-        "training_window_seconds": 300,
-    },
-    "session_unlinkability": {
-        "enabled": True,
-        "pseudonym_rotation_hours": 24,
-    },
-}
-```
-
 ---
 
-## 4. Frequently Asked Questions
+## 5. Frequently Asked Questions
 
 ### General Questions
 
 #### Q: What is the QIF Framework?
-**A:** QIF (Quantified Interconnection Framework) for Neural Security is an open-source security framework for brain-computer interfaces. It uses a 7-band hourglass architecture spanning silicon to synapse, providing standardized security measures at each level.
+**A:** QIF (Quantified Interconnection Framework) for Neural Security is an open-source security framework for brain-computer interfaces. It uses an 11-band hourglass architecture spanning silicon to synapse, with 7 neural bands (N7–N1), 1 interface band (I0), and 3 silicon bands (S1–S3).
 
 #### Q: Is QIF a surveillance tool?
-**A:** **No.** QIF is explicitly designed for **defense and protection**, not surveillance. The framework:
+**A:** **No.** QIF is a security architecture designed for defense and protection. The framework:
 - Never decodes thoughts or intentions
 - Never transmits raw neural data
 - Exists to protect users FROM unauthorized access
 - Prioritizes user sovereignty and cognitive freedom
 
-See our [Privacy & Ethics Statement](../README.md#privacy--ethics-statement) for our formal commitment.
-
 #### Q: Who created QIF?
-**A:** QIF was created by Kevin Qi (qikevinl) with AI assistance from Claude (Anthropic). It builds on academic research from the University of Washington (Kohno et al.), Columbia, Yale, and other institutions. All contributions are documented in our [Transparency Statement](TRANSPARENCY.md).
+**A:** QIF was created by Kevin Qi (Qinnovate) with AI assistance from Claude (Anthropic) and cross-validated by Gemini (Google) and ChatGPT (OpenAI). It builds on academic research from published BCI security literature. All contributions are documented in the [Transparency Statement](TRANSPARENCY.md).
 
 ---
 
 ### Data & Privacy Questions
 
-#### Q: Does TARA see my thoughts?
-**A:** **No.** TARA only receives mathematical scores (Cₛ, Δ, σ) that indicate signal quality and security status. These scores cannot be reverse-engineered into thoughts, memories, or neural content. It's like knowing someone's heart rate without knowing what they're thinking about.
+#### Q: Does TARA collect or store my data?
+**A:** **No.** TARA is a static threat taxonomy — a catalog of 109 BCI attack-therapy techniques. It is a reference database, like a dictionary. It does not receive, store, or process any user data, neural signals, or coherence scores.
 
-#### Q: Can my coherence scores identify me?
-**A:** **This is a known vulnerability we actively mitigate.** Time-series of Cₛ scores could theoretically create identifiable patterns. We address this through:
-- Differential privacy (adding calibrated noise)
-- Bucketed transmission (categories instead of exact values)
-- Temporal aggregation (windowed averages)
-- Session pseudonyms (rotating identifiers)
-
-See [Section 3](#3-anonymization--known-vulnerabilities) for full details.
-
-#### Q: Who can access my data?
-**A:**
-- **You:** Full access to all your data
-- **TARA Platform:** Anonymized scores only (with mitigations)
-- **AI Models:** Encrypted gradients only (federated learning)
-- **Third Parties:** Never. Data is never sold, shared, or accessed by external parties.
-
-#### Q: How long is my data retained?
-**A:**
-- **Local device:** User-controlled retention
-- **TARA platform:** Anonymized scores retained for 90 days for security analysis, then aggregated
-- **AI training:** Gradients are ephemeral (used once, then discarded)
-- **Aggregate statistics:** Retained indefinitely (fully anonymized)
-
-#### Q: Can I delete my data?
-**A:** Yes. Users have the right to:
-- Delete all local data at any time
-- Request deletion of TARA-side scores
-- Opt out of federated learning
-- Export all data in portable format
-
-See [Section 5: User Rights](#5-user-rights).
-
----
-
-### Technical Questions
+#### Q: Can the Coherence Score (Cₛ) identify me?
+**A:** **This is a known vulnerability we document openly.** Time-series of Cₛ scores could theoretically create identifiable patterns. The architecture specifies mitigations including differential privacy, bucketed transmission, temporal aggregation, and session pseudonyms. See [Section 4](#4-anonymization--known-vulnerabilities).
 
 #### Q: What is the Coherence Score (Cₛ)?
 **A:** The Coherence Score measures signal quality and trustworthiness:
@@ -232,17 +204,8 @@ Where:
 - 0.3 < Cₛ ≤ 0.6: MEDIUM coherence (verify context)
 - Cₛ ≤ 0.3: LOW coherence (reject or investigate)
 
-#### Q: How does federated learning work?
-**A:** Instead of sending data to a central server:
-1. AI models train **locally on your device**
-2. Only **encrypted model updates (gradients)** are shared
-3. A secure aggregation server combines updates **without seeing individual data**
-4. The improved model is sent back to all devices
-
-Your neural patterns never leave your device.
-
-#### Q: What attacks does QIF protect against?
-**A:** QIF addresses threats across all bands of the hourglass model:
+#### Q: What attacks does QIF address?
+**A:** QIF catalogs threats across all bands of the hourglass model:
 - **Signal Injection:** Malicious signals trying to influence neural activity
 - **Eavesdropping:** Unauthorized reading of neural data
 - **Denial of Service:** Blocking legitimate neural communication
@@ -250,7 +213,7 @@ Your neural patterns never leave your device.
 - **MRI/EMI Interference:** Environmental threats
 - **Replay Attacks:** Replaying recorded signals
 
-See [the QIF Hourglass Architecture](/framework/) for complete threat model.
+See the [TARA registry](/TARA/) for the full taxonomy of 109 techniques.
 
 #### Q: Is QIF open source?
 **A:** Yes. QIF is licensed under Apache 2.0:
@@ -264,7 +227,7 @@ See [the QIF Hourglass Architecture](/framework/) for complete threat model.
 ### Ethical Questions
 
 #### Q: How does QIF handle consent?
-**A:** QIF implements a **continuous consent model** based on Lázaro-Muñoz et al. research:
+**A:** QIF specifies a **continuous consent model** informed by Lázaro-Muñoz et al. research:
 - **Initial consent** before device activation
 - **Ongoing consent** for significant changes
 - **Granular scopes** (read, write, store, transmit)
@@ -274,7 +237,7 @@ See [the QIF Hourglass Architecture](/framework/) for complete threat model.
 See [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md).
 
 #### Q: What about children and vulnerable populations?
-**A:** QIF includes specific protections:
+**A:** QIF specifies protections:
 - **Minors (age 7-17):** Require both guardian consent AND child assent
 - **Incapacitated adults:** Supported decision-making model
 - **Transitional (age 16-17):** Increasing autonomy with guardian oversight
@@ -282,55 +245,52 @@ See [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md).
 See [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations).
 
 #### Q: How do I report security vulnerabilities?
-**A:** Please report security issues responsibly:
-- Email: [security contact to be established]
+**A:** Report security issues responsibly:
 - GitHub Security Advisories: [QIF Repository](https://github.com/qinnovates/qinnovate/security)
 - Do NOT disclose publicly until patched
 
 ---
 
-## 5. User Rights
+## 6. User Rights (Design Requirements)
 
-### Your Data Rights
+> **Note:** These are design requirements for future QIF-compliant implementations. No implementation exists with these features today.
 
-| Right | Description | How to Exercise |
-|-------|-------------|-----------------|
-| **Access** | View all data collected about you | Settings → Data → View My Data |
-| **Portability** | Export data in machine-readable format | Settings → Data → Export |
-| **Deletion** | Delete your data from all systems | Settings → Data → Delete All |
-| **Correction** | Correct inaccurate data | Contact support |
-| **Objection** | Opt out of specific processing | Settings → Privacy → Processing |
-| **Restriction** | Limit how data is used | Settings → Privacy → Restrictions |
+### Specified Data Rights
 
-### How to Opt Out
+| Right | Description |
+|-------|-------------|
+| **Access** | View all data collected about you |
+| **Portability** | Export data in machine-readable format |
+| **Deletion** | Delete your data from all systems |
+| **Correction** | Correct inaccurate data |
+| **Objection** | Opt out of specific processing |
+| **Restriction** | Limit how data is used |
 
-```
-Settings → Privacy → Opt Out Options:
-☐ Federated AI training (stop contributing to model improvement)
-☐ TARA monitoring (disable cloud security features)
-☐ Aggregate statistics (exclude from anonymized research)
-☐ All external transmission (fully local mode)
-```
+### Opt-Out Requirements
 
-**Note:** Opting out of TARA monitoring means you won't receive cloud-based security alerts. Local protection remains active.
+QIF-compliant implementations must support:
+- Opting out of any external data transmission
+- Fully local mode (no cloud dependency)
+- Disabling federated learning contribution
+- Excluding data from aggregate statistics
 
 ---
 
-## 6. Future Roadmap
+## 7. Future Roadmap
 
-### Planned Privacy Enhancements (M8: 2027 Q1)
+### Planned Privacy Enhancements
 
 | Feature | Status | Description |
 |---------|--------|-------------|
-| Federated AI Training | Planned | TensorFlow Federated / PySyft integration |
+| Federated AI Training | Design spec | TensorFlow Federated / PySyft integration |
 | Homomorphic Encryption | Research | Compute on encrypted scores |
 | Zero-Knowledge Proofs | Research | Prove compliance without revealing data |
-| On-Device ML | Planned | All inference local, no cloud dependency |
+| On-Device ML | Design spec | All inference local, no cloud dependency |
 
-### Research Questions We're Investigating
+### Open Research Questions
 
-1. Can Cₛ score time-series be used for fingerprinting? (Active mitigation)
-2. What's the optimal privacy budget (ε) for neural data?
+1. Can Cs score time-series be used for fingerprinting? (Active mitigation designed)
+2. What is the optimal privacy budget (ε) for neural data?
 3. How to handle non-IID neural data in federated learning?
 4. Can gradient inversion attacks reveal neural patterns?
 
@@ -353,12 +313,13 @@ Settings → Privacy → Opt Out Options:
 
 ---
 
-*This document is part of the QIF Framework governance documentation. For questions not covered here, please open a GitHub issue or contact the maintainers.*
+*This document is part of the QIF Framework governance documentation. For questions not covered here, please open a GitHub issue.*
 
 **Document History:**
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0 | 2026-01-26 | Initial release |
+| 2.0 | 2026-03-05 | Major revision: clarified TARA is a static registry (no data storage), distinguished current state from design specs, updated to 11-band hourglass, removed references to non-existent UI/platform |
 
 ---
 
