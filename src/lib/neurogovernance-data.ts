@@ -13,7 +13,8 @@ export interface NeurorightInfo {
   id: string;
   name: string;
   shortDef: string;
-  source: 'ienca-andorno' | 'qif-extended' | 'yuste';
+  source: 'ienca-andorno' | 'yuste';
+  qifOperationalized?: boolean;
   color: string;
   brainRegions: string[];
   threatCount: number;
@@ -44,11 +45,12 @@ export interface NeurogovernanceData {
   };
 }
 
-const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 'ienca-andorno' | 'qif-extended' | 'yuste'; color: string }> = {
+const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 'ienca-andorno' | 'yuste'; qifOperationalized?: boolean; color: string }> = {
   MP: {
     name: 'Mental Privacy',
     shortDef: 'Your thoughts are yours. No one should read, store, or re-link them without permission.',
-    source: 'qif-extended',
+    source: 'ienca-andorno',
+    qifOperationalized: true,
     color: '#3b82f6',
   },
   CL: {
@@ -60,7 +62,8 @@ const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 
   MI: {
     name: 'Mental Integrity',
     shortDef: 'Your brain should not be harmed, altered, or have its natural rhythms disrupted without consent.',
-    source: 'qif-extended',
+    source: 'ienca-andorno',
+    qifOperationalized: true,
     color: '#ef4444',
   },
   PC: {
@@ -132,6 +135,7 @@ export function getNeurogovernanceData(): NeurogovernanceData {
       name: def.name,
       shortDef: def.shortDef,
       source: def.source,
+      qifOperationalized: def.qifOperationalized,
       color: def.color,
       brainRegions: NEURORIGHT_BRAIN_MAP[r] ?? [],
       threatCount: techs.length,

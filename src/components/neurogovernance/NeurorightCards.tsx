@@ -49,7 +49,7 @@ export default function NeurorightCards({ neurorights }: Props) {
                   {nr.id}
                 </span>
               </div>
-              {nr.source === 'qif-extended' && (
+              {nr.qifOperationalized && (
                 <span
                   className="text-[10px] font-medium px-1.5 py-0.5 rounded"
                   style={{
@@ -58,7 +58,7 @@ export default function NeurorightCards({ neurorights }: Props) {
                     opacity: 0.9,
                   }}
                 >
-                  QIF Extended
+                  QIF Operationalized
                 </span>
               )}
             </div>

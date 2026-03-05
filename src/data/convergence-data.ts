@@ -439,7 +439,7 @@ export const CONVERGENCE_GAPS: ConvergenceGap[] = [
     existingAnalog: 'NIST PQC standards (ML-KEM, ML-DSA). TLS 1.3 with hybrid key exchange.',
     neuralDifference: 'Neural data has decades-long sensitivity (lifetime of the patient). Harvest-now-decrypt-later is an existential threat for BCIs. No BCI wire protocol uses PQC.',
     coveredBy: ['NIST PQC (algorithms only)'],
-    qifSolution: 'NSP (Neural Security Protocol) implements ML-KEM + ML-DSA with a 6-layer validation stack and physics-based signal authenticity.',
+    qifSolution: 'NSP (Neural Sensory Protocol) specifies ML-KEM + ML-DSA with a 6-layer validation stack and physics-based signal authenticity.',
   },
 ];
 

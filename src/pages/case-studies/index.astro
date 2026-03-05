@@ -3,6 +3,17 @@ import PageLayout from '../../layouts/PageLayout.astro';
 
 const caseStudies = [
   {
+    title: 'The Global Neural Data Governance Gap',
+    subtitle: '15+ jurisdictions compared. No one has solved it yet. The HNDL clock is ticking for everyone.',
+    href: '/case-studies/global-neural-data-governance/',
+    date: '2026-03-05',
+    type: 'Policy Analysis',
+    tags: ['Neurorights', 'Policy', 'PQC', 'HNDL', 'Global Governance'],
+    description: 'Comparative analysis of neurotechnology regulation across 15+ jurisdictions. Chile amended its constitution. China published national BCI ethics guidelines. The US has a patchwork. No one has solved the full problem. Every country has something to teach, and the quantum HNDL threat makes global coordination urgent.',
+    techniques: [],
+    featured: true,
+  },
+  {
     title: 'ANC Ear Canal Fingerprinting (T0079)',
     subtitle: 'Your earbuds can fingerprint your ear canal',
     href: '/case-studies/t0079-anc-fingerprint/',
@@ -74,6 +85,7 @@ const typeColors: Record<string, { bg: string; text: string }> = {
   'Vulnerability Disclosure': { bg: '#ef4444', text: '#fff' },
   'Research Analysis': { bg: '#8b5cf6', text: '#fff' },
   'Threat Analysis': { bg: '#ec4899', text: '#fff' },
+  'Policy Analysis': { bg: '#6366f1', text: '#fff' },
 };
 ---
 

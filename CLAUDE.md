@@ -51,7 +51,7 @@
   - `layouts/`: Page layouts
   - `lib/`: Utility functions and constants
 - `qif-framework/`: QIF specification + implementations
-  - `nsp/`: Neural Security Protocol (Rust + spec)
+  - `nsp/`: Neural Sensory Protocol (Rust + spec)
     - `nsp-core/`: PQ-secure Rust implementation
   - `runemate/forge/`: Runemate DSL compiler (Rust)
   - `archive/oni-framework/`: Legacy ONI 14-layer model

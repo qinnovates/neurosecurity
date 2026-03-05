@@ -226,7 +226,7 @@ WASM via WAMR: heavier (~280 KB) but more feature-complete.
 
 ### Layer 3: Cryptographic Defense (The Shield)
 
-**What it is:** Full NSP (Neural Security Protocol) implementation on the implant, providing:
+**What it is:** Full NSP (Neural Sensory Protocol) implementation on the implant, providing:
 - Post-quantum key exchange (ML-KEM-768/1024)
 - Authenticated encryption (AES-256-GCM-SIV)
 - Device authentication (ML-DSA-65/87 + SPHINCS+-SHA2-192s)
