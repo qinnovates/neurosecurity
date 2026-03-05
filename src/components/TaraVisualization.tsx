@@ -251,24 +251,27 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                     </div>
                 </div>
 
-                <div className="flex p-1.5 bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
-                    {(['modality', 'clinical', 'diagnostic', 'governance'] as ViewMode[]).map(mode => {
-                        const colors = getModeColor(mode);
-                        const isActive = viewMode === mode;
-                        return (
-                            <button
-                                key={mode}
-                                onClick={() => setViewMode(mode)}
-                                className={`px-8 py-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-2 ${isActive
-                                    ? `${colors.bg} text-white shadow-lg ${colors.shadow}`
-                                    : 'text-slate-400 hover:text-slate-600 hover:bg-white/50'
-                                    }`}
-                            >
-                                {isActive && <span className={`w-1.5 h-1.5 rounded-full ${colors.dot} animate-pulse`} />}
-                                {mode === 'governance' ? 'Neurorights' : mode.charAt(0).toUpperCase() + mode.slice(1)}
-                            </button>
-                        );
-                    })}
+                <div className="flex flex-col items-end gap-1.5">
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mr-2">View techniques by</span>
+                    <div className="flex p-1.5 bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                        {(['modality', 'clinical', 'diagnostic', 'governance'] as ViewMode[]).map(mode => {
+                            const colors = getModeColor(mode);
+                            const isActive = viewMode === mode;
+                            return (
+                                <button
+                                    key={mode}
+                                    onClick={() => setViewMode(mode)}
+                                    className={`px-8 py-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-2 ${isActive
+                                        ? `${colors.bg} text-white shadow-lg ${colors.shadow}`
+                                        : 'text-slate-400 hover:text-slate-600 hover:bg-white/50'
+                                        }`}
+                                >
+                                    {isActive && <span className={`w-1.5 h-1.5 rounded-full ${colors.dot} animate-pulse`} />}
+                                    {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
 

@@ -41,7 +41,7 @@ const essentialPosts = essentialSlugs
 
 ---
 
-<BaseLayout title="Qinnovate — Your Brain Has Rights" description="Brain-computer interfaces are shipping without security. 5 neurorights defined, 109 attack techniques catalogued, zero technical enforcement. QIF is the first open neurosecurity framework bridging neuroethics and BCI engineering.">
+<BaseLayout title="Qinnovate — No Security Framework Existed for the Brain-Computer Interface" description="An $8 billion industry by 2032. 109 catalogued attack techniques. Zero published security frameworks. QIF is the first open framework bridging neurosecurity and neuroethics.">
   <Nav />
 
   <!-- ═══ BEAT 1: THE INCIDENT — Hybrid Hero ═══ -->
@@ -59,16 +59,15 @@ const essentialPosts = essentialSlugs
       </p>
 
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
-        <span class="text-[var(--color-text-primary)]">Your Brain Has Rights.</span>
+        <span class="text-[var(--color-text-primary)]">No Security Framework Existed</span>
         <br />
         <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
-          No Engineering Exists to Protect Them.
+          for the Brain-Computer Interface.
         </span>
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
-        Brain-computer interfaces are shipping without security. {neurorightsCount} neurorights defined, {totalThreats} attack techniques catalogued, zero technical enforcement.
-        QIF is the first open neurosecurity framework — bridging neuroethics and BCI engineering to protect the people these devices are built for.
+        An <a href="/bci/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry by 2032</a>.* {totalThreats} attack techniques catalogued across 24 commercial devices. QIF is the first open framework bridging neurosecurity and neuroethics — from threat model to defense specification.
       </p>
 
       <!-- Metrics -->
@@ -94,18 +93,22 @@ const essentialPosts = essentialSlugs
       <!-- Dual-audience CTAs -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a
-          href="/neurogovernance/"
+          href="/TARA/"
           class="px-6 py-3 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
-          Explore the Rights
+          See the Threat Atlas
         </a>
         <a
           href="/whitepaper/"
           class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
         >
-          Read Whitepaper
+          Read the Framework
         </a>
       </div>
+
+      <p class="text-[10px] text-[var(--color-text-faint)] mt-4">
+        *Median estimate across <a href="/bci/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
+      </p>
 
       <TrustBar />
     </div>
