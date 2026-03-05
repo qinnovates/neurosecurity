@@ -141,7 +141,7 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 | **Cognitive Liberty** | Freedom from unauthorized interference with mental self-determination | [QIF](qif-framework/) (coherence metric detects injected signals), [Neurowall](tools/neurowall/) (blocks unauthorized stimulation at the hardware layer), [NISS](https://qinnovate.com/scoring/) CR/CD metrics (score cognitive read/write compromise severity) |
 | **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 109 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
 | **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
-| **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections), Project Firefly (privacy-first journaling for kids, coming soon) |
+| **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections) |
 | **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](https://github.com/qinnovates/macshield) (free workstation hardening) |
 
 Sources: [Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)
@@ -313,15 +313,14 @@ qinnovates/qinnovate/
 
 ---
 
-## Other Qinnovates Projects
-
-| Project | Description |
-|---------|-------------|
-| **Project Firefly** | Privacy-first journaling app for kids. Local-first architecture, COPPA/GDPR compliant. (Private, in development) |
-
 ### Learning Resources
 
-**[Autodidactive](docs/learn/autodidactive/)** — A standalone, mobile-first daily learning app covering 45 historical figures across 7 disciplines: Polymaths, Philosophy, Neuroethics, Neuroscience, Quantum Mechanics, Cybersecurity, and Calculus (3 interactive labs). Features daily discovery (seeded PRNG), spaced repetition (SM-2), a free-placement post-it note wall, and bookmarking. Pure HTML/CSS/JS with zero dependencies — open [index.html](docs/learn/autodidactive/index.html) or view the [README](docs/learn/autodidactive/README.html). PWA-ready.
+**[Autodidactive](https://qinnovate.com/learn/autodidactive/)** — A standalone, mobile-first daily learning app covering 45 historical figures across 7 disciplines: Polymaths, Philosophy, Neuroethics, Neuroscience, Quantum Mechanics, Cybersecurity, and Calculus. Features daily discovery (seeded PRNG), spaced repetition (SM-2), a free-placement post-it note wall, and bookmarking. Pure HTML/CSS/JS with zero dependencies. PWA-ready. ([Source](docs/learn/autodidactive/))
+
+**Calculus Labs** — Interactive labs connecting calculus to BCI security and signal analysis:
+- [Calculus Fundamentals](https://qinnovate.com/learn/autodidactive/labs/calculus-fundamentals.html) — Limits, derivatives, integrals
+- [Calculus & Signals](https://qinnovate.com/learn/autodidactive/labs/calculus-signals.html) — Signal processing with calculus
+- [Calculus & BCI Limits](https://qinnovate.com/learn/autodidactive/labs/calculus-bci-limits.html) — Calculus applied to BCI constraints
 
 **[Auditory Learning](docs/learn/autodidactive/auditory/)** — Learn while you work. AI-generated songs, guided meditations, and spoken-word content that encode real knowledge into formats you can absorb passively — while coding, commuting, exercising, or falling asleep. Planned: guided meditations, sleep hypnosis for spaced repetition, philosophy series, neuroscience fundamentals. Built with Suno, Mureka, and ElevenLabs.
 
