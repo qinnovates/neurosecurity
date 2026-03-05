@@ -173,7 +173,7 @@ function getDueRecallCard() {
     .sort((a, b) => a[1].nextReview - b[1].nextReview);
 
   if (due.length === 0) return null;
-  return ALL_PEOPLE.find(p => p.id === personId) || null;
+  return ALL_PEOPLE.find(p => p.id === due[0][0]) || null;
 }
 
 // ── Recall Question Generator ───────────────────────────────────────────────
@@ -416,10 +416,11 @@ function renderCardGrid() {
     if (conceptData) {
       people = ALL_PEOPLE.filter(p => conceptData.ids.includes(p.id));
     }
-  } else if (currentField !== 'All') {
-    people = ALL_PEOPLE.filter(p =>
-      p.fields.some(f => f.toLowerCase() === currentField.toLowerCase())
-    );
+  } else if (currentField && currentField !== 'all' && currentField !== 'All') {
+    const fieldDef = FIELDS.find(f => f.id === currentField);
+    if (fieldDef) {
+      people = fieldDef.data;
+    }
   }
 
   const conceptHeader = currentConcept

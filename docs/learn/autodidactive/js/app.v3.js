@@ -416,10 +416,11 @@ function renderCardGrid() {
     if (conceptData) {
       people = ALL_PEOPLE.filter(p => conceptData.ids.includes(p.id));
     }
-  } else if (currentField !== 'All') {
-    people = ALL_PEOPLE.filter(p =>
-      p.fields.some(f => f.toLowerCase() === currentField.toLowerCase())
-    );
+  } else if (currentField && currentField !== 'all' && currentField !== 'All') {
+    const fieldDef = FIELDS.find(f => f.id === currentField);
+    if (fieldDef) {
+      people = fieldDef.data;
+    }
   }
 
   const conceptHeader = currentConcept
