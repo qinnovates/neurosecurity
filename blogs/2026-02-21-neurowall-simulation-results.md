@@ -218,6 +218,8 @@ The engine was Gemini-validated (Phase 11): clean vs attack behavior confirmed, 
 
 All simulation code, ROC data, and charts are available in the [Neurowall repository](https://github.com/qinnovates/qinnovate/tree/main/tools/neurowall).
 
+**Dive deeper:** [TARA-Neurowall — the Brain SIEM vision](/tools/#tara-neurowall) combines this detection engine with TARA's threat intelligence into a full neurosecurity monitoring platform.
+
 ---
 
 Written with AI assistance (Claude). All claims verified by the author. Detection results are from actual simulation runs, not projections. The honest evasion results (boiling frog, phase replay) are as important as the detection successes.
