@@ -1,0 +1,243 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2026-03-05",
+    "description": "Paired neuroethics and neurosecurity guardrails for QIF research. Each neuroethics constraint from published literature maps to a neurosecurity scope limit that QIF enforces.",
+    "totalGuardrails": 8,
+    "totalComponentBounds": 4
+  },
+  "guardrails": [
+    {
+      "id": "G1",
+      "name": "Neuromodesty",
+      "category": "overclaim",
+      "source": {
+        "author": "Morse",
+        "year": 2006,
+        "work": "Brain Overclaim Syndrome",
+        "journal": "Ohio State J. Criminal Law / Mercer Law Review (2011)",
+        "researchSourceId": "E11"
+      },
+      "neuroethics": {
+        "constraint": "Neural correlates do not prove causation or eliminate agency. Neuroscience findings are routinely overclaimed when applied to law and policy.",
+        "violation": "Brain activity X proves cognitive state Y",
+        "correct": "Brain activity X is associated with / correlates with cognitive state Y"
+      },
+      "neurosecurity": {
+        "scope": "We score signal-level interference, not mental states. NISS measures physical amplitude disruption, not 'thought harm.'",
+        "components": ["NISS", "TARA"]
+      }
+    },
+    {
+      "id": "G2",
+      "name": "Reverse Inference Fallacy",
+      "category": "methodology",
+      "source": {
+        "author": "Poldrack",
+        "year": 2006,
+        "work": "Can cognitive processes be inferred from neuroimaging data?",
+        "journal": "Trends in Cognitive Sciences",
+        "researchSourceId": "E12"
+      },
+      "neuroethics": {
+        "constraint": "Brain region activation does not uniquely identify a cognitive process. Signal detection does not entail mental-state identification.",
+        "violation": "Activation of X means the person is experiencing Y",
+        "correct": "Activation of X is associated with multiple cognitive processes including Y"
+      },
+      "neurosecurity": {
+        "scope": "Signal detection does not entail mental-state identification. TARA catalogs physical interference patterns, not cognitive content.",
+        "components": ["TARA", "Cs"]
+      }
+    },
+    {
+      "id": "G3",
+      "name": "Neurorealism Triad",
+      "category": "framing",
+      "source": {
+        "author": "Racine & Illes",
+        "year": 2005,
+        "work": "Neuroethics rigor in neuroscience communication",
+        "journal": "Nature Reviews Neuroscience (related work)",
+        "researchSourceId": "E11"
+      },
+      "neuroethics": {
+        "constraint": "Brain images create three biases: neuro-realism (overcredibility), neuro-essentialism (reducing people to brains), neuropolicy (premature policy justification). Check all three.",
+        "violation": "BCI threats reveal that brain data reveals identity",
+        "correct": "Neural signals are partial, noisy representations, not transparent read-outs of selfhood"
+      },
+      "neurosecurity": {
+        "scope": "Documentation must not frame BCI threats as 'brain data reveals identity.' Neural signals are partial, noisy representations, not transparent read-outs of selfhood.",
+        "components": ["TARA", "NISS"]
+      }
+    },
+    {
+      "id": "G4",
+      "name": "Anti-Inflationism",
+      "category": "overclaim",
+      "source": {
+        "author": "Ienca & Bublitz",
+        "year": 2022,
+        "work": "Mental privacy / cognitive liberty",
+        "journal": "Various (Ienca 2021, Bublitz 2022)",
+        "researchSourceId": "E9"
+      },
+      "neuroethics": {
+        "constraint": "Existing human rights may cover neural data without inventing new neurorights. Don't assume new rights are needed without showing the gap.",
+        "violation": "We need 15 new neurorights for BCI security",
+        "correct": "We extend Mental Privacy and Mental Integrity with technical depth, not new rights. Five rights, not fifteen."
+      },
+      "neurosecurity": {
+        "scope": "We extend Mental Privacy and Mental Integrity with technical depth, not new rights. Five rights, not fifteen.",
+        "components": ["QIF"]
+      }
+    },
+    {
+      "id": "G5",
+      "name": "Conceptual Underspecification",
+      "category": "methodology",
+      "source": {
+        "author": "Kellmeyer",
+        "year": 2022,
+        "work": "Mental privacy and integrity concepts",
+        "journal": "Neuroethics (2022)",
+        "researchSourceId": "E9"
+      },
+      "neuroethics": {
+        "constraint": "'Mental privacy' and 'mental integrity' lack agreed operational definitions. Never use them as settled concepts.",
+        "violation": "NISS protects mental privacy (as if the term is well-defined)",
+        "correct": "NISS measures operationally defined properties: signal amplitude, frequency, coherence"
+      },
+      "neurosecurity": {
+        "scope": "We define operationally measurable properties (signal amplitude, frequency, coherence) rather than philosophically contested mental states.",
+        "components": ["NISS", "Cs"]
+      }
+    },
+    {
+      "id": "G6",
+      "name": "Brain Reading Limits",
+      "category": "framing",
+      "source": {
+        "author": "Ienca & Wexler",
+        "year": 2019,
+        "work": "Brain reading capability limits",
+        "journal": "Various (Ienca 2018, Wexler 2019)",
+        "researchSourceId": "E10"
+      },
+      "neuroethics": {
+        "constraint": "Current BCIs cannot 'read thoughts.' Decoded outputs are selected from known lists, require user cooperation, and need algorithm training.",
+        "violation": "Attackers can read victims' thoughts via BCI",
+        "correct": "Threat models must distinguish between current capabilities and projected future capabilities. We catalog what is technically possible, not what is science fiction."
+      },
+      "neurosecurity": {
+        "scope": "Threat models must distinguish between current capabilities and projected future capabilities. We catalog what is technically possible, not what is science fiction.",
+        "components": ["TARA"]
+      }
+    },
+    {
+      "id": "G7",
+      "name": "Dual-Use Trap",
+      "category": "framing",
+      "source": {
+        "author": "Tennison & Moreno",
+        "year": 2012,
+        "work": "Neuroscience, ethics, and national security",
+        "journal": "PLoS Biology",
+        "researchSourceId": "E13"
+      },
+      "neuroethics": {
+        "constraint": "Security framing of neurotech risks enabling surveillance. Always pair threat descriptions with governance constraints.",
+        "violation": "Here's how to attack a BCI (without defensive framing)",
+        "correct": "The framework specifies defensive clinical protections. Offensive applications are explicitly out of scope."
+      },
+      "neurosecurity": {
+        "scope": "The framework specifies defensive clinical protections. Offensive applications are explicitly out of scope. The threat catalog exists to inform defense, not enable attack.",
+        "components": ["TARA", "QIF"]
+      }
+    },
+    {
+      "id": "G8",
+      "name": "Statistical Inflation",
+      "category": "methodology",
+      "source": {
+        "author": "Vul et al. / Eklund et al.",
+        "year": 2009,
+        "work": "Neuroimaging false-positive rates",
+        "journal": "Various (Vul 2009, Eklund 2016)",
+        "researchSourceId": null
+      },
+      "neuroethics": {
+        "constraint": "Neuroimaging studies have high false-positive rates. Never cite fMRI correlations as strong evidence without noting methodological limitations.",
+        "violation": "Neuroimaging study X proves that BCI attack Y causes Z",
+        "correct": "Claims citing neuroimaging findings as ground truth must account for demonstrated validity failures in the underlying methods."
+      },
+      "neurosecurity": {
+        "scope": "Claims citing neuroimaging findings as ground truth must account for demonstrated validity failures in the underlying methods.",
+        "components": ["NISS", "TARA"]
+      }
+    }
+  ],
+  "componentBounds": [
+    {
+      "component": "NISS",
+      "fullName": "Neural Impact Scoring System",
+      "does": "Measures physical signal disruption: amplitude deviation, frequency shift, coherence degradation",
+      "doesNot": [
+        "Predict psychiatric diagnoses (corresponds to diagnostic categories for threat modeling)",
+        "Measure 'thought harm' or mental states",
+        "Claim clinical diagnostic validity"
+      ],
+      "guardrails": ["G1", "G3", "G5", "G8"],
+      "status": "proposed, unvalidated, in development"
+    },
+    {
+      "component": "TARA",
+      "fullName": "Threat Analysis & Risk Assessment Atlas",
+      "does": "Catalogs physical interference patterns, maps attack techniques to signal-level effects",
+      "doesNot": [
+        "Catalog cognitive content or mental states",
+        "Claim attacks that exceed current BCI capabilities without flagging as projected",
+        "Enable offensive applications (defensive framing only)"
+      ],
+      "guardrails": ["G1", "G2", "G6", "G7"],
+      "status": "proposed, unvalidated, in development"
+    },
+    {
+      "component": "NSP",
+      "fullName": "Neural Security Protocol",
+      "does": "Specifies post-quantum cryptographic protections for neural data in transit and at rest",
+      "doesNot": [
+        "Constitute legislation or regulatory mandate",
+        "Claim adoption by any standards body",
+        "Guarantee protection beyond the protocol's technical scope"
+      ],
+      "guardrails": ["G4"],
+      "status": "draft specification, not adopted"
+    },
+    {
+      "component": "Cs",
+      "fullName": "Coherence Metric",
+      "does": "Detects anomalous signal patterns via phase variance, temporal entropy, gain fluctuation, spectral drift",
+      "doesNot": [
+        "Read intent or identify thoughts",
+        "Uniquely identify cognitive processes from signal activation",
+        "Serve as a clinical diagnostic instrument"
+      ],
+      "guardrails": ["G2", "G5"],
+      "status": "proposed, validated on EEG data, not independently replicated"
+    }
+  ],
+  "categories": {
+    "overclaim": {
+      "label": "Overclaim & Scope",
+      "description": "Constraints on what QIF can claim about its scope and capabilities"
+    },
+    "methodology": {
+      "label": "Methodology",
+      "description": "Constraints on how QIF interprets and cites scientific evidence"
+    },
+    "framing": {
+      "label": "Framing",
+      "description": "Constraints on how QIF presents threats and capabilities"
+    }
+  }
+}
