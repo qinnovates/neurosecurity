@@ -12,9 +12,10 @@
 
 ## Entry Index
 
-### March (Entries 84+) — Privacy Architecture, Neuromodesty Audit
+### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails
 | Entry | Topic | Link |
 |-------|-------|------|
+| 85 | Research registry + triple-sync citation protocol + epistemic guardrail formalization | [Entry 85](#entry-85-research-registry-citation-sync) |
 | 84 | Privacy-preserving neural data architecture: HE, DP, data fiduciaries, consent provenance | [Entry 84](#entry-84-privacy-preserving-neural-data) |
 
 ### Late February (Entries 66-83) — Neurorights, Physics Boundaries, Market Analysis
@@ -375,6 +376,68 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 85: Research Registry + Triple-Sync Citation Protocol + Epistemic Guardrail Formalization {#entry-85-research-registry-citation-sync}
+
+**Date:** 2026-03-05
+**Classification:** INFRASTRUCTURE (research tooling + epistemic methodology)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 72 (BCI security gap validation), Entry 59 (hallucination audit), Entry 68 (guardrails synthesis)
+
+### Context
+
+The landscape page (`/bci/landscape`) underwent significant expansion (March 4-5) adding 4 new security researchers, 7 neuroethics institutions, 9 new standards/legislation entries, and 5 new frameworks. These additions were not synced to QIF-RESEARCH-SOURCES.md or paper/references.bib. This triggered a systematic sync and the creation of a new research infrastructure layer.
+
+### What Was Built
+
+**1. `shared/research-registry.json` — Structured Research Entity Registry**
+
+A new JSON file cataloguing all researchers, institutions, standards, and legislation relevant to QIF. Four top-level arrays with cross-references to QIF-RESEARCH-SOURCES.md IDs and references.bib keys:
+- 26 researchers (security + neuroethics, tagged by WHY/WHAT/HOW layer)
+- 27 institutions (labs, centers, standards bodies, foundations)
+- 14 standards (CVSS, ATT&CK, CWE, ISO, IEC, FDA, EU, UNESCO, OECD, IEEE)
+- 12 legislation entries (Chile through GPA, typed as constitutional/statute/model-law/policy/resolution)
+
+Each researcher entry includes: institution, country (ISO 3166-1), expertise tags, QIF-RESEARCH-SOURCES IDs, bibTeX keys, QIF relevance, and hourglass layer assignment.
+
+**2. Triple-Sync Citation Protocol**
+
+Established in CLAUDE.md: every new citation or source used anywhere in the project must update ALL THREE stores:
+1. `qif-framework/QIF-RESEARCH-SOURCES.md` — living catalog with IDs, URLs, relevance
+2. `paper/references.bib` — BibTeX for LaTeX/preprint
+3. `shared/research-registry.json` — structured JSON for cross-referencing and site features
+
+This closes the gap where landscape page content was decoupled from the citation system.
+
+**3. Epistemic Guardrails Formalized as Research Sources (E8-E12)**
+
+The foundational neuroethics papers that define QIF's epistemic guardrails (referenced in `rules/epistemic-integrity.md`) are now formally tracked:
+
+| ID | Author | Concept | Year |
+|----|--------|---------|------|
+| E8 | Kellmeyer | Mental privacy/integrity underspecification | 2021 |
+| E9 | Bublitz | Anti-inflationism — existing rights may suffice | 2022 |
+| E10 | Racine & Illes | Neurorealism triad (realism, essentialism, policy) | 2005 |
+| E11 | Poldrack | Reverse inference fallacy | 2006 |
+| E12 | Tennison & Moreno | Dual-use warning: security framing enables surveillance | 2012 |
+
+These are the same papers cited in the neuromodesty framework and neuroethics guardrails. By adding them to the citation system, the connection between QIF's self-imposed epistemic limits and the published literature is now traceable and auditable.
+
+### Why This Matters
+
+QIF's credibility depends on two things: (1) the science being right, and (2) the claims being calibrated. The hallucination audit (Entry 59) caught BBB=DLP and other analogy-driven errors. The neuromodesty checks (6 checks in epistemic-integrity.md) prevent overclaiming. But those guardrails were rules in a config file — they weren't traceable to the literature that established them.
+
+Now they are. A reviewer can follow E8-E12 from the rules file to the research sources to the actual papers. The research registry makes the entire QIF epistemic infrastructure queryable and cross-referenceable.
+
+### Counts After This Entry
+
+- Research sources: 226 → 250 (+24)
+- New cybersecurity papers: C74-C76 (Professor X backdoor, Brainprint adversarial, CNS+PNS survey)
+- New institutional entries: INP22-INP28 (UBC, GSU, UCSF, Penn State, INSERM, RHUNE, BCM)
+- New legislation: NL5-NL13 (Montana, Minnesota, LatAm, China, UN HRC, MIND Act, EU AI Act, GPA, IEEE)
+- New BibTeX entries: 22 (all tagged AI-suggested, needs verification)
 
 ---
 
