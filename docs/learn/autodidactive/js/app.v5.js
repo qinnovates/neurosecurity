@@ -86,6 +86,14 @@ function updateStreak() {
   return streak;
 }
 
+// ── Activity Tracking ──────────────────────────────────────────────────────
+function recordActivity() {
+  const today = new Date().toISOString().slice(0, 10);
+  const activities = JSON.parse(localStorage.getItem('autodidactive-activity') || '{}');
+  activities[today] = (activities[today] || 0) + 1;
+  localStorage.setItem('autodidactive-activity', JSON.stringify(activities));
+}
+
 // ── Stats Tracking ──────────────────────────────────────────────────────────
 const STATS_KEY = 'autodidactive-stats';
 
