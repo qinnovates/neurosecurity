@@ -412,6 +412,7 @@ function renderPersonCard(p) {
 
 function renderCardGrid() {
   const grid = document.getElementById('cardGrid');
+  console.log('[CardGrid] grid element:', grid, 'currentField:', currentField);
   if (!grid) return;
 
   if (currentField === 'Concepts') {
@@ -430,6 +431,7 @@ function renderCardGrid() {
 
   // Handle standard field filtering OR concept filtering
   let people = ALL_PEOPLE;
+  console.log('[CardGrid] ALL_PEOPLE.length:', ALL_PEOPLE.length, 'currentConcept:', currentConcept);
   if (currentConcept) {
     const conceptData = getConceptIndex().find(c => c.concept === currentConcept);
     if (conceptData) {
@@ -442,11 +444,28 @@ function renderCardGrid() {
     }
   }
 
+  console.log('[CardGrid] people.length:', people.length);
+  if (people.length > 0) {
+    try {
+      const firstCard = renderPersonCard(people[0]);
+      console.log('[CardGrid] first card output:', firstCard ? firstCard.substring(0, 100) : 'EMPTY/UNDEFINED');
+    } catch (e) {
+      console.error('[CardGrid] renderPersonCard threw:', e);
+    }
+  }
+
   const conceptHeader = currentConcept
     ? `<div class="concept-header"><button class="concept-back-btn" onclick="window._closeConcept()">← Concepts</button> <h2 class="concept-title">${esc(currentConcept)}</h2></div>`
     : '';
 
-  grid.innerHTML = conceptHeader + people.map(p => renderPersonCard(p)).join('');
+  try {
+    const html = conceptHeader + people.map(p => renderPersonCard(p)).join('');
+    console.log('[CardGrid] final html length:', html.length);
+    grid.innerHTML = html;
+    console.log('[CardGrid] grid.children.length after set:', grid.children.length);
+  } catch (e) {
+    console.error('[CardGrid] render error:', e);
+  }
 }
 
 function renderConceptIndex(container) {
