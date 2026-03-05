@@ -72,7 +72,7 @@ export const QI_CANDIDATES = {
 
 export const QIF_NAME = "Quantified Interconnection Framework";
 export const QIF_FULL_NAME = "Quantified Interconnection Framework (QIF)";
-export const QIF_DESCRIPTION = "The first open standard for brain-computer interface security, mapping the boundary where silicon meets neuron through an 11-band hourglass architecture.";
+export const QIF_DESCRIPTION = "A proposed open framework for brain-computer interface security, mapping the boundary where silicon meets neuron through an 11-band hourglass architecture.";
 
 /** Three pillars of Qinnovate */
 export const PILLARS = [

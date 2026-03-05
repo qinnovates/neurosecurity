@@ -94,8 +94,8 @@ const breadcrumbs = [
 ---
 
 <PageLayout
-  title="Psychiatric Impact Map — When BCI Attacks Become Diagnoses"
-  description={`${stats.withDsm5} of ${totalTechniques} BCI attack techniques map to DSM-5-TR diagnostic criteria based on known neuroanatomy. These clinical mappings are research-grade and await validation by psychiatrists and neuroscientists.`}
+  title="Psychiatric Risk References for Threat Modeling — BCI Attack Outcome Mapping"
+  description={`${stats.withDsm5} of ${totalTechniques} BCI attack techniques reference DSM-5-TR diagnostic criteria for threat modeling purposes. These mappings illustrate potential clinical outcomes based on known neuroanatomy. They are not diagnostic claims and require clinical validation.`}
   breadcrumbs={breadcrumbs}
   wide
 >
@@ -104,19 +104,18 @@ const breadcrumbs = [
   <section class="py-12 md:py-20">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="text-xs font-medium tracking-[0.2em] uppercase mb-4 text-[var(--color-text-faint)]">
-        Psychiatric Impact Map
+        Psychiatric Risk References for Threat Modeling
       </p>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
-        <span class="text-[var(--color-text-primary)]">When BCI Attacks</span>
+        <span class="text-[var(--color-text-primary)]">Clinical Outcome References</span>
         <br />
         <span class="bg-gradient-to-r from-red-500 via-amber-500 to-purple-500 bg-clip-text text-transparent">
-          Become Diagnoses.
+          for Threat Modeling.
         </span>
       </h1>
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
-        {stats.withDsm5} of {totalTechniques} catalogued BCI attack techniques map to symptoms
-        matching DSM-5-TR diagnostic criteria — based on known neuroanatomical pathways and functional neuroscience.
-        These mappings require clinical validation by psychiatrists and neuroscientists before informing clinical practice.
+        {stats.withDsm5} of {totalTechniques} catalogued BCI attack techniques reference symptoms
+        matching DSM-5-TR diagnostic criteria — for threat modeling purposes only. These references are based on known neuroanatomical pathways and functional neuroscience, but neuroscience's understanding of brain function remains incomplete. These are not diagnostic claims. They require clinical validation by psychiatrists and neuroscientists before informing any clinical practice.
       </p>
     </div>
 
@@ -157,13 +156,15 @@ const breadcrumbs = [
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
         </svg>
         <div>
-          <p class="text-sm font-semibold text-amber-500 mb-1">Research Status: Awaiting Clinical Validation</p>
+          <p class="text-sm font-semibold text-amber-500 mb-1">Threat Modeling Reference Only — Not Diagnostic Guidance</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+            These DSM-5-TR references are used strictly for security threat modeling — illustrating the potential clinical severity of sustained BCI attack patterns. They are <strong class="text-[var(--color-text-primary)]">not diagnostic claims and have not been reviewed or validated by psychiatrists or clinical neuroscientists.</strong>
+          </p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+            <strong class="text-[var(--color-text-primary)]">Neuromodest caveat (Morse, 2006):</strong> Neuroscience does not yet fully understand how the brain produces cognition, emotion, or consciousness. Neural correlates do not prove causation. The mappings here reflect current knowledge of neuroanatomical pathways and functional neuroscience, but this knowledge is incomplete and actively evolving. Any projection from signal-level disruption to psychiatric outcome carries inherent uncertainty that no framework can eliminate at this stage of the science.
+          </p>
           <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
-            These DSM-5-TR mappings are based on known neuroanatomy and published neuroscience, but they have
-            <strong class="text-[var(--color-text-primary)]">not been reviewed or validated by psychiatrists or clinical neuroscientists.</strong>
-            The mappings were developed by a single security researcher through literature review and threat modeling.
-            Clinical validation, interrater reliability studies, and expert panel review are needed before these
-            mappings can inform clinical decision-making. See
+            This page exists as a living research artifact — a precursor to the validated clinical mappings that will become possible as neuroscience matures. Clinical validation, interrater reliability studies, and expert panel review are required before these references can inform clinical decision-making. See
             <a href="https://doi.org/10.5281/zenodo.18640105" class="text-amber-500 hover:underline">Section 9 of the preprint</a>
             for the full limitations disclosure.
           </p>
@@ -196,8 +197,8 @@ const breadcrumbs = [
       </p>
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
         <strong class="text-[var(--color-text-primary)]">This is not diagnostic guidance.</strong> It is a
-        research mapping that helps clinicians understand what is technically possible when a neural device is
-        compromised — so that emerging symptom presentations can be evaluated in context.
+        threat modeling reference that helps clinicians understand what is technically possible when a neural device is
+        compromised — so that emerging symptom presentations can be evaluated in context. The brain's complexity means these projections are necessarily approximate; they map known pathways, not proven outcomes.
       </p>
     </div>
   </section>

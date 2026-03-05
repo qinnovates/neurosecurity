@@ -66,8 +66,9 @@ Even with perfect encryption, BLE packet timing reveals when a user is speaking,
 8. [Device Class Requirements](#8-device-class-requirements)
 9. [Power Budget](#9-power-budget)
 10. [Security Considerations](#10-security-considerations)
-11. [Test Vectors](#11-test-vectors)
-12. [References](#12-references)
+11. [Privacy-Preserving Computation](#11-privacy-preserving-computation)
+12. [Test Vectors](#12-test-vectors)
+13. [References](#13-references)
 
 ---
 
@@ -1456,11 +1457,165 @@ Section 6.5 acknowledges that sophisticated adversaries can craft signals that p
 
 ---
 
-## 11. Test Vectors
+## 11. Privacy-Preserving Computation
+
+> **Status:** DRAFT — This section specifies architectural requirements for privacy-preserving neural data processing. Implementation details and cipher suite parameters are pending.
+
+### 11.1 Motivation
+
+Neural data permits inferences about mental states, cognitive patterns, and psychiatric conditions. Even when encrypted in transit (Sections 3-5) and at rest, neural data may be exposed during processing — when a Neurowall filters signals, when a SIEM correlates patterns, or when research datasets are shared. This section specifies mechanisms to protect neural data during computation, sharing, and governance.
+
+The core principle: **the entity that processes neural data need not see it in plaintext.**
+
+### 11.2 Homomorphic Encryption (HE) for Neural Signal Processing
+
+#### 11.2.1 Use Case
+
+Neurowall and Brain SIEM operations — threshold detection, amplitude bounding, rate limiting, anomaly correlation — can be performed on encrypted neural signals using homomorphic encryption. This ensures that even a compromised processing node cannot extract raw neural data.
+
+#### 11.2.2 Scheme Selection
+
+NSP defines two HE modes based on device class:
+
+| Device Class | HE Scheme | Operations Supported | Rationale |
+|-------------|-----------|---------------------|-----------|
+| T1 (Consumer) | PHE (Paillier or ElGamal) | Addition, comparison | Low compute overhead; sufficient for threshold checks |
+| T2 (Clinical) | SHE (BGV/BFV) | Addition, limited multiplication | Supports correlation across channels |
+| T3 (Implanted) | NOT REQUIRED | N/A | HE is performed by the gateway, not the implant. Implant power budget cannot support HE. |
+
+**Architectural constraint:** For T3 devices, the implant encrypts with standard NSP (AES-256-GCM-SIV). The receiving gateway re-encrypts into HE ciphertext for downstream processing. The gateway is the trust boundary.
+
+#### 11.2.3 Handshake Extension
+
+The NSP handshake (Section 4) MAY include an `HE_PARAMS` extension in the ClientHello:
+
+```
+HE_PARAMS {
+    scheme:      uint8    // 0x01 = Paillier, 0x02 = BGV, 0x03 = CKKS
+    security:    uint8    // security parameter (128, 192, 256)
+    poly_degree: uint16   // polynomial ring degree (BGV/CKKS only)
+}
+```
+
+If the server supports HE, it echoes the negotiated parameters in ServerHello. If not, the extension is omitted and processing falls back to plaintext (standard NSP session).
+
+#### 11.2.4 Performance Constraints
+
+HE operations on neural data MUST complete within the real-time processing window:
+
+| Operation | Latency Target | Notes |
+|-----------|---------------|-------|
+| Threshold comparison (PHE) | < 10 ms | Neurowall amplitude bounds |
+| Channel correlation (SHE) | < 50 ms | Brain SIEM pattern detection |
+| Batch anomaly scoring | < 200 ms | Per-epoch (1s window) aggregate |
+
+Implementations that cannot meet these targets SHOULD fall back to trusted execution environments (TEE) as an alternative privacy mechanism (Section 11.5).
+
+### 11.3 Differential Privacy (DP) for Neural Data Sharing
+
+#### 11.3.1 Use Case
+
+Research datasets, aggregate safety reports, and population-level neural baselines require sharing neural data across institutional boundaries. Differential privacy ensures that no individual's neural signature can be reconstructed from shared data.
+
+#### 11.3.2 Requirements
+
+1. **Local DP:** Each device SHOULD add calibrated noise to neural telemetry before transmission when the data destination is a research aggregator (not a clinical system).
+2. **Central DP:** Aggregation servers MUST apply the Gaussian mechanism with privacy budget epsilon <= 1.0 for any publicly released neural dataset.
+3. **Composition accounting:** Multiple queries against the same neural dataset MUST track cumulative privacy loss using Renyi divergence-based composition (Mironov, 2017).
+
+#### 11.3.3 Neural-Specific Noise Calibration
+
+Neural signals have domain-specific sensitivity:
+
+| Signal Type | Sensitivity | Epsilon Range | Rationale |
+|------------|-------------|---------------|-----------|
+| Raw EEG/ECoG | Very high | 0.1 - 0.5 | Individual neural signatures are unique identifiers |
+| Band power (alpha, beta, etc.) | High | 0.5 - 1.0 | Aggregated but still individual-specific |
+| Event-related potentials | Medium | 1.0 - 2.0 | Stimulus-locked, less individual variation |
+| Population averages (n > 100) | Low | 2.0 - 5.0 | Aggregate statistics only |
+
+### 11.4 Consent Provenance via Distributed Ledger
+
+#### 11.4.1 Principle
+
+**The neural data itself MUST NEVER be stored on a blockchain or distributed ledger.** Ledger artifacts are visible to all participants and immutable — properties that are desirable for audit trails but catastrophic for neural data, which may become decryptable with future cryptanalytic advances.
+
+The ledger stores ONLY:
+- **Consent records:** Cryptographic commitments (hash of consent document + patient pseudonym + timestamp)
+- **Access logs:** Who accessed what category of data, when, for what stated purpose
+- **Integrity hashes:** SHA-256 hashes of encrypted data blobs, allowing verification that data was not tampered with without revealing the data
+
+#### 11.4.2 Ledger Requirements
+
+| Property | Requirement | Rationale |
+|----------|-------------|-----------|
+| Type | Permissioned (e.g., Hyperledger Fabric) | Implant latency; known participants; regulatory compliance |
+| Finality | < 2 seconds | Clinical workflow cannot wait for PoW consensus |
+| Participant roles | Patient, Provider, Fiduciary, Regulator | Minimum viable governance |
+| Data on-chain | Hashes and metadata ONLY | Neural data never on-chain |
+| Revocation | Patient CAN revoke consent; revocation is logged but does not erase prior legitimate processing | Immutability vs. right to withdraw |
+
+#### 11.4.3 Runemate Integration
+
+Consent policies expressed in the Runemate DSL (see Runemate specification) compile to verifiable consent records that are published to the permissioned ledger. A Runemate policy of the form:
+
+```
+CONSENT {
+  ALLOW read(eeg_raw) BY provider WHERE purpose = "clinical"
+  DENY  read(eeg_raw) BY researcher UNLESS anonymized = true
+  EXPIRE 365 days
+}
+```
+
+compiles to a consent commitment hash stored on-ledger. Neurowall verifies the consent chain before allowing data to flow to a given endpoint.
+
+### 11.5 Data Fiduciary Model
+
+#### 11.5.1 Separation of Concerns
+
+The device manufacturer MUST NOT hold decryption keys for patient neural data. NSP specifies a **data fiduciary** role: an independent entity that holds the master decryption keys and enforces access policies on behalf of the patient.
+
+| Entity | Holds | Does NOT Hold |
+|--------|-------|--------------|
+| Device manufacturer | Firmware signing keys, device identity keys | Patient data decryption keys |
+| Clinical provider | Session keys (time-limited) | Long-term data keys |
+| Data fiduciary | Master data decryption keys, consent registry | Device firmware, clinical decision authority |
+| Patient | Recovery key (split across fiduciary + personal device) | Firmware signing keys |
+
+#### 11.5.2 Key Escrow Architecture
+
+The patient's data master key is split using Shamir's Secret Sharing (k-of-n threshold, minimum k=2, n=3):
+
+- **Share 1:** Patient's personal device (smartphone, hardware token)
+- **Share 2:** Data fiduciary (independent institution)
+- **Share 3:** Clinical provider (for emergency access)
+
+Reconstruction requires any 2 of 3 shares. No single entity can unilaterally access the neural data.
+
+#### 11.5.3 Fiduciary Governance
+
+The data fiduciary:
+- MUST be legally independent of the device manufacturer
+- MUST be subject to regulatory audit
+- MUST publish transparency reports on data access requests
+- MUST NOT profit from the neural data it protects
+- SHOULD be structured as a non-profit or public trust
+
+> **Open question:** Governance structure for the fiduciary institution itself. How do you prevent regulatory capture by device manufacturers? This is a policy problem that requires input from legal scholars, bioethicists, and patient advocacy groups.
+
+### 11.6 Trusted Execution Environments (TEE) — Fallback
+
+When HE performance constraints cannot be met (Section 11.2.4), implementations MAY use hardware-based trusted execution environments (Intel SGX, ARM TrustZone, RISC-V Keystone) as an alternative privacy mechanism. TEE processing MUST be attested via remote attestation before neural data is provisioned.
+
+TEE is a weaker privacy guarantee than HE (the TEE operator can observe data during processing if the enclave is compromised), but provides practical privacy for current hardware constraints.
+
+---
+
+## 12. Test Vectors
 
 > **This section is a placeholder.** Test vectors will be provided in a future revision of this specification. The following categories of test vectors are planned:
 
-### 11.1 Planned Test Vector Categories
+### 12.1 Planned Test Vector Categories
 
 | Category | Description |
 |----------|-------------|
@@ -1473,7 +1628,7 @@ Section 6.5 acknowledges that sophisticated adversaries can craft signals that p
 | **HKDF Derivation** | Known IKM + salt + info producing expected key material. |
 | **Cipher Suite Negotiation** | ClientHello with specific suite lists and expected server selections. |
 
-### 11.2 Test Vector Format
+### 12.2 Test Vector Format
 
 Each test vector SHALL include:
 
@@ -1483,15 +1638,15 @@ Each test vector SHALL include:
 - **Expected outputs:** All expected outputs in hexadecimal.
 - **Intermediate values:** Key intermediate computation results for debugging.
 
-### 11.3 Compliance Testing
+### 12.3 Compliance Testing
 
 An implementation claiming NSP compliance MUST pass all mandatory test vectors for its device class tier. Test vectors will be published alongside the reference implementation.
 
 ---
 
-## 12. References
+## 13. References
 
-### 12.1 Normative References
+### 13.1 Normative References
 
 | Reference | Title |
 |-----------|-------|
@@ -1505,7 +1660,7 @@ An implementation claiming NSP compliance MUST pass all mandatory test vectors f
 | [RFC 8452] | Gueron, S. and Lindell, Y. "AES-GCM-SIV: Nonce Misuse-Resistant Authenticated Encryption." RFC 8452, April 2019. |
 | [RFC 9180] | Barnes, R., Bhargavan, K., Lipp, B., and C. Wood. "Hybrid Public Key Encryption." RFC 9180, February 2022. |
 
-### 12.2 Informative References
+### 13.2 Informative References
 
 | Reference | Title |
 |-----------|-------|
