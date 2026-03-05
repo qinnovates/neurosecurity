@@ -339,6 +339,97 @@ const timeline = [
     </div>
   </section>
 
+  <!-- ═══ NEUROSECURITY ═══ -->
+  <section class="py-12 md:py-16" id="neurosecurity">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        From Neuroethics to Neurosecurity
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto mb-8">
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+        Neuroethics asks: <em>what rights should people have over their own neural data and cognitive processes?</em>
+        Neurosecurity asks: <em>how do we technically enforce those rights against real attack vectors?</em>
+        One is philosophy. The other is engineering. Both are incomplete without the other.
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        Every neurorights violation maps to a concrete technical attack pattern. Mental Privacy is violated by eavesdropping.
+        Mental Integrity is violated by signal injection. Cognitive Liberty is violated by subliminal manipulation.
+        Neurosecurity is the discipline that builds the defenses — threat models, scoring systems, detection engines,
+        and cryptographic protocols — that turn rights on paper into protections in hardware.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto mb-8">
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-tertiary)] mb-3">Neuroethics</h3>
+        <ul class="space-y-2 text-xs text-[var(--color-text-muted)]">
+          <li>Defines the <strong class="text-[var(--color-text-primary)]">rights</strong> (Ienca & Andorno, Yuste, Farahany)</li>
+          <li>Establishes <strong class="text-[var(--color-text-primary)]">consent models</strong> (Beauchamp & Childress)</li>
+          <li>Writes <strong class="text-[var(--color-text-primary)]">policy</strong> (UNESCO, OECD, WHO, Chile)</li>
+          <li>Asks who should be protected and why</li>
+        </ul>
+      </div>
+      <div class="glass rounded-xl p-5 border border-[var(--color-accent-primary)]/30" style="background: rgba(37,99,235,0.04);">
+        <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-primary)] mb-3">Neurosecurity</h3>
+        <ul class="space-y-2 text-xs text-[var(--color-text-muted)]">
+          <li>Catalogs the <strong class="text-[var(--color-text-primary)]">attacks</strong> (<a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">109 TARA techniques</a>)</li>
+          <li>Scores the <strong class="text-[var(--color-text-primary)]">impact</strong> (<a href="/scoring/" class="text-[var(--color-accent-primary)] hover:underline">NISS vulnerability scoring</a>)</li>
+          <li>Builds the <strong class="text-[var(--color-text-primary)]">defenses</strong> (<a href="/tools/" class="text-[var(--color-accent-primary)] hover:underline">Neurowall, NSP, Runemate</a>)</li>
+          <li>Answers how to detect, prevent, and respond technically</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- How each right maps to security -->
+    <div class="max-w-4xl mx-auto">
+      <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-text-faint)] mb-4 text-center">
+        Rights &rarr; Threats &rarr; Defenses
+      </h3>
+      <div class="glass rounded-xl overflow-hidden">
+        <table class="w-full text-xs">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]">
+              <th class="text-left py-3 px-4 text-[var(--color-accent-secondary)] font-semibold">Neuroright</th>
+              <th class="text-left py-3 px-4 text-[var(--color-status-danger)] font-semibold">Threat Pattern</th>
+              <th class="text-left py-3 px-4 text-[var(--color-accent-primary)] font-semibold">QIF Defense</th>
+            </tr>
+          </thead>
+          <tbody class="text-[var(--color-text-muted)]">
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Mental Privacy</td>
+              <td class="py-2.5 px-4">Eavesdropping, side-channel extraction, neural fingerprinting</td>
+              <td class="py-2.5 px-4">NSP encryption, differential privacy, session pseudonyms</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Mental Integrity</td>
+              <td class="py-2.5 px-4">Signal injection, replay attacks, parameter tampering</td>
+              <td class="py-2.5 px-4">Neurowall L1/L2 filtering, Cs anomaly detection</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Cognitive Liberty</td>
+              <td class="py-2.5 px-4">Subliminal manipulation, sovereignty attacks, covert retuning</td>
+              <td class="py-2.5 px-4">SSVEP detection, adaptive spectral monitoring, policy engine</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Psychological Continuity</td>
+              <td class="py-2.5 px-4">Slow drift, homeostatic disruption, self-model corruption</td>
+              <td class="py-2.5 px-4">Cs trend monitoring, reference electrode validation</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Equal Access</td>
+              <td class="py-2.5 px-4">Device abandonment, vendor lock-in, enhancement inequality</td>
+              <td class="py-2.5 px-4">Open standards, interoperable protocols, vendor-neutral spec</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ RIGOR CHECKS ═══ -->
   <section class="py-12 md:py-16" id="rigor">
     <div class="flex items-center gap-4 mb-8">
