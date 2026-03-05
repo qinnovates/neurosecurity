@@ -4,9 +4,9 @@
     "description": "Curated milestones from the QIF Derivation Log. Powers the dynamic timeline on qinnovate.com. Add new entries as breakthroughs occur — the timeline renders automatically.",
     "source": "QIF-DERIVATION-LOG.md",
     "version": "1.1",
-    "last_updated": "2026-02-21",
-    "total_log_entries": 70,
-    "total_milestones": 30
+    "last_updated": "2026-03-05",
+    "total_log_entries": 71,
+    "total_milestones": 31
   },
   "milestones": [
     {
@@ -482,6 +482,23 @@
         "framework_version": "v6.2.1",
         "pages": 28,
         "figures": 6
+      }
+    },
+    {
+      "id": "M-031",
+      "entry": 71,
+      "date": "2026-03-05",
+      "title": "Research Registry + Citation Sync",
+      "short": "Structured research entity registry created",
+      "description": "Unified research-registry.json cataloguing 26 researchers, 27 institutions, 14 standards, 12 legislation entries across the QIF research ecosystem. 24 new citations synced from landscape page to QIF-RESEARCH-SOURCES.md (250 total) and references.bib. Triple-sync protocol established: every new citation updates all three stores. Neuroethics guardrails (Morse neuromodesty, Poldrack reverse inference, Racine neurorealism triad, Kellmeyer underspecification, Bublitz anti-inflationism, Tennison dual-use) formally tracked as research sources E8-E12.",
+      "category": "milestone",
+      "type": "milestone",
+      "metrics": {
+        "research_sources": 250,
+        "researchers_tracked": 26,
+        "institutions_tracked": 27,
+        "standards_tracked": 14,
+        "legislation_tracked": 12
       }
     }
   ],
