@@ -51,6 +51,8 @@ const institutions = [
   { name: 'OECD', lab: 'Neurotechnology Policy', leader: '38 Member States', layer: 'WHAT', contribution: 'Nine-principle innovation governance (2019)', color: 'secondary' },
   { name: 'WHO', lab: 'Ethics & Governance', leader: 'Global Health Body', layer: 'WHAT', contribution: 'First neurotechnology guidance document (2025)', color: 'secondary' },
   { name: 'Council of Europe', lab: 'Bioethics Committee', leader: '46 Member States', layer: 'WHAT', contribution: 'Strategic Action Plan on Neurotechnology (2025)', color: 'secondary' },
+  { name: 'Int\'l Neuroethics Society', lab: 'Professional Society', leader: 'Founded 2006', layer: 'WHY', contribution: 'First professional society for neuroethics. Founded at Asilomar by Gazzaniga, Farah, Illes, Wolpe', color: 'tertiary' },
+  { name: 'NeuroRights Foundation', lab: 'Columbia University', leader: 'Rafael Yuste', layer: 'WHAT', contribution: 'Policy vehicle driving Chile, California, Colorado legislation. 2025 consumer neurotech data audit', color: 'secondary' },
   { name: 'QIF / Qinnovate', lab: 'Open Neural Atlas', leader: 'Kevin Qi', layer: 'HOW', contribution: 'First technical security specification. NISS, TARA, Coherence Metric, NSP.', color: 'primary' },
 ];
 
@@ -64,8 +66,9 @@ const frameworks = [
   { name: 'WHO (2025)', type: 'Policy', cl: true, mp: true, mi: true, pc: false, ea: true },
   { name: 'Council of Europe (2025)', type: 'Policy', cl: true, mp: true, mi: true, pc: true, ea: false },
   { name: 'Chile Constitution (2021)', type: 'Law', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'Colorado HB 1058 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
   { name: 'California SB 1223 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
-  { name: 'US MIND Act (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
+  { name: 'EU AI Act (2024)', type: 'Law', cl: false, mp: true, mi: true, pc: false, ea: false },
   { name: 'Goering et al. (2021)', type: 'Ethics', cl: true, mp: true, mi: true, pc: true, ea: true },
   { name: 'Farah (2015)', type: 'Ethics', cl: false, mp: true, mi: true, pc: false, ea: false },
   { name: 'Morse (2006)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
@@ -77,24 +80,86 @@ const frameworks = [
   { name: 'Andorno & Gkotsi (2022)', type: 'Rights', cl: true, mp: true, mi: true, pc: true, ea: false },
   { name: 'Savulescu & Bostrom (2009)', type: 'Ethics', cl: false, mp: false, mi: false, pc: false, ea: true },
   { name: 'Kreitmair (2019)', type: 'Ethics', cl: false, mp: true, mi: false, pc: false, ea: true },
-  { name: 'QIF (2025)', type: 'HOW', cl: true, mp: true, mi: true, pc: true, ea: true },
+  { name: 'Kellmeyer (2022)', type: 'Rights', cl: false, mp: true, mi: true, pc: false, ea: false },
+  { name: 'Bublitz (2022)', type: 'Rigor', cl: true, mp: true, mi: true, pc: false, ea: false },
+  { name: 'Racine, Illes (2005)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
+  { name: 'Poldrack (2006)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
+  { name: 'Tennison & Moreno (2012)', type: 'Rigor', cl: true, mp: true, mi: true, pc: false, ea: false },
+  { name: 'QIF (in development)', type: 'HOW', cl: true, mp: true, mi: true, pc: true, ea: true },
+];
+
+const securityResearchers = [
+  { name: 'Tadayoshi Kohno', affiliation: 'University of Washington', contribution: 'Co-coined "neurosecurity" (2009). Foundational threat model for implantable neural devices.', paper: 'Denning, Matsuoka & Kohno, Neurosurgical Focus 27(1):E7' },
+  { name: 'Tamara Denning', affiliation: 'University of Washington', contribution: 'Lead author on the first neurosecurity paper. Defined attack surfaces for implantable BMIs.', paper: 'Denning et al. 2009' },
+  { name: 'Ivan Martinovic', affiliation: 'University of Oxford', contribution: 'First empirical BCI side-channel attack. Demonstrated P300-based extraction of PINs and locations from consumer EEG headsets.', paper: 'Martinovic et al., USENIX Security 2012' },
+  { name: 'Dawn Song', affiliation: 'UC Berkeley', contribution: 'Co-authored the landmark BCI side-channel paper. MacArthur Fellow, one of the most-cited researchers in computer security.', paper: 'Martinovic, Frank, Song et al., USENIX Security 2012' },
+  { name: 'Laurie Pycroft', affiliation: 'University of Oxford', contribution: 'Coined and systematized "brainjacking" — the first comprehensive threat model for implanted neurostimulators.', paper: 'Pycroft et al., World Neurosurgery 92:454-462, 2016' },
+  { name: 'Tamara Bonaci', affiliation: 'Northeastern / UW', contribution: 'BCI game attack vectors. Showed subliminal stimuli can extract private information during BCI use.', paper: 'Bonaci et al. 2014' },
+  { name: 'Howard Chizeck', affiliation: 'University of Washington', contribution: 'Neural engineering security. BCI privacy through signal obfuscation and access control.', paper: 'Chizeck & Bonaci 2014' },
+  { name: 'Kevin Fu', affiliation: 'Northeastern University', contribution: 'Medical device cybersecurity pioneer. Former FDA Acting Director of Medical Device Cybersecurity. $3.5M NSF grant for neural implant security.', paper: 'Archimedes Center for Medical Device Security' },
+  { name: 'Nitesh Saxena', affiliation: 'Texas A&M University', contribution: 'BCI authentication protocols. P300 brainwave attacks and neural biometric spoofing.', paper: 'Saxena et al. 2017' },
+  { name: 'Marcello Ienca', affiliation: 'TU Munich / ETH Zurich', contribution: 'Brain data governance at the security-ethics intersection. Neurorights taxonomy and anti-inflationism.', paper: 'Ienca & Andorno 2017; Ienca & Haselager, ACM Computing Surveys 2021' },
+  { name: 'Sergio Lopez Bernal', affiliation: 'University of Murcia', contribution: 'BCI cybersecurity survey and neural cyberattack taxonomy. "Eight Reasons" paper on why BCIs are not secure.', paper: 'Lopez Bernal et al., CACM 2023' },
+  { name: 'Tyler Schroder', affiliation: 'Yale Digital Ethics Center', contribution: 'Most comprehensive 2025 BCI cyber risk assessment. Measures for safeguarding brain implants.', paper: 'Schroder et al., Neuroethics (Springer) 2025' },
+  { name: 'Qiben Yan', affiliation: 'Michigan State University', contribution: 'Neural signal injection attacks. Electromagnetic interference on implantable stimulators.', paper: 'Yan et al. 2020' },
+];
+
+const securityInstitutions = [
+  { name: 'University of Washington', lab: 'Security & Privacy Research Lab', focus: 'Founded the neurosecurity field (2009). Implantable device threat modeling, BCI game attacks, neural signal privacy.', leaders: 'Kohno, Chizeck, Bonaci, Denning, Goering' },
+  { name: 'University of Oxford', lab: 'Functional Neurosurgery + InfoSec', focus: 'Brainjacking threat models for implanted DBS devices (Pycroft 2016). EEG side-channel attacks on consumer BCIs (Martinovic 2012).', leaders: 'Pycroft, Martinovic, Aziz' },
+  { name: 'Northeastern University', lab: 'Archimedes Center for Medical Device Security', focus: 'Medical device cybersecurity pioneer. $22M total research. Neural implant security under $3.5M NSF grant. Kevin Fu served as FDA Acting Director of Medical Device Cybersecurity.', leaders: 'Fu, Bonaci' },
+  { name: 'Yale University', lab: 'Digital Ethics Center', focus: 'Most comprehensive BCI cyber risk assessment (2025). Interdisciplinary approach bridging cybersecurity and neuroethics.', leaders: 'Floridi, Schroder' },
+  { name: 'UC Berkeley', lab: 'Computer Security Research', focus: 'Co-produced the first empirical BCI side-channel attack paper (USENIX 2012). Dawn Song is a MacArthur Fellow.', leaders: 'Song' },
+  { name: 'TU Munich / ETH Zurich', lab: 'Ethics of AI and Neuroscience', focus: 'Brain data governance, neurorights and security intersection, state-of-the-art BCI security survey (ACM 2021).', leaders: 'Ienca, Haselager' },
+  { name: 'University of Murcia', lab: 'BCI Cybersecurity Group', focus: 'Neural cyberattack taxonomy, "Eight Reasons" BCI insecurity paper (CACM 2023). Highest-volume BCI security publication group.', leaders: 'Lopez Bernal, Celdran, Perez' },
+  { name: 'Graz University of Technology', lab: 'Institute of Neural Engineering', focus: 'BCI conference venue and neural engineering research. EEG-based authentication and biosignal processing.', leaders: 'Muller-Putz' },
+  { name: 'Michigan State University', lab: 'SEIT Lab', focus: 'Electromagnetic injection attacks on neural implants, sensor security.', leaders: 'Yan' },
+  { name: 'Texas A&M University', lab: 'SPIES Lab / Global Cyber Research Institute', focus: 'BCI authentication, neural biometric security, brainwave spoofing, EEG disease inference.', leaders: 'Saxena' },
+  { name: 'Brown University', lab: 'BrainGate Consortium', focus: 'Intracortical BCI clinical trials. Security-relevant: first long-term human implant data on failure modes.', leaders: 'Hochberg, Donoghue' },
+];
+
+const standardsBodies = [
+  { name: 'IEEE', scope: 'BMI Standards Roadmap', contribution: 'Identified BCI-specific security standards as an open standardization gap. IEEE 2794 (brain data).', status: 'Active' },
+  { name: 'NIST', scope: 'Cybersecurity Framework', contribution: 'CSF 2.0 provides the security control baseline. No neurotech-specific profile exists yet.', status: 'Gap' },
+  { name: 'FDA', scope: 'Premarket Cybersecurity Guidance', contribution: 'Requires threat modeling for connected medical devices. No neural-specific requirements.', status: 'Partial' },
+  { name: 'ISO/IEC', scope: 'Medical Device Security', contribution: 'ISO 14708 (implants), IEC 62443 (industrial security). No BCI-specific standard exists.', status: 'Gap' },
+  { name: 'MITRE', scope: 'ATT&CK / CWE / CVE', contribution: 'Attack taxonomy and vulnerability classification. No neural device attack techniques catalogued.', status: 'Gap' },
+  { name: 'CISA', scope: 'Medical Device Advisories', contribution: 'Issues advisories for connected device vulnerabilities. Has not addressed neural implants.', status: 'Gap' },
+  { name: 'UNESCO', scope: 'Neurotech Ethics Recommendation', contribution: 'First global normative framework (2025). Ethics-focused, no technical security requirements.', status: 'Active' },
+  { name: 'OECD', scope: 'Responsible Innovation', contribution: 'Nine-principle governance framework (2019). Policy layer, no technical specification.', status: 'Active' },
+  { name: 'WHO', scope: 'Neurotechnology Guidance', contribution: 'First global health guidance on neurotech (2025). Safety-focused, no security specification.', status: 'Active' },
+  { name: 'Council of Europe', scope: 'Strategic Action Plan', contribution: 'Neurotechnology action plan (2025). Human rights approach, 46 member states.', status: 'Active' },
+  { name: 'Chile CNPT', scope: 'Neurotechnology Commission', contribution: 'First national neurotech regulatory body. Implements constitutional neurorights (2021).', status: 'Active' },
+  { name: 'EU AI Act', scope: 'High-Risk AI Classification', contribution: 'Classifies certain neurotech as high-risk AI systems (Regulation 2024/1689). Full application August 2026.', status: 'Active' },
+  { name: 'Global Privacy Assembly', scope: 'Neural Data Resolution', contribution: '46th Conference (2024) adopted resolution on principles for neural data processing and cognitive freedom.', status: 'Active' },
+  { name: 'FIRST / CVSS SIG', scope: 'Vulnerability Scoring', contribution: 'CVSS 4.0 scores IT vulnerabilities. No neural impact metrics exist in the standard.', status: 'Gap' },
 ];
 
 const timeline = [
-  { year: '1979', label: 'Beauchamp & Childress', desc: 'Four Principles of Biomedical Ethics' },
-  { year: '2002', label: 'Neuroethics coined', desc: 'San Francisco conference establishes the field' },
-  { year: '2006', label: 'Neuromodesty', desc: 'Morse warns against overclaiming' },
-  { year: '2017', label: 'Neurorights', desc: 'Ienca & Andorno + Yuste et al. independently propose rights' },
-  { year: '2019', label: 'OECD', desc: 'Nine-principle governance for neurotechnology' },
-  { year: '2021', label: 'Chile', desc: 'First country to constitutionally protect neurorights' },
-  { year: '2024', label: 'California', desc: 'Neural data added to CCPA' },
-  { year: '2025', label: 'UNESCO + WHO', desc: 'First global normative frameworks' },
-  { year: '2025', label: 'QIF', desc: 'First technical security specification' },
+  { year: '1927', label: 'Fritz Jahr coins "Bio-Ethik"', desc: 'First use of the term in Kosmos journal, proposing a bioethical imperative extending moral consideration to all living things' },
+  { year: '1947', label: 'Nuremberg Code', desc: 'First international ethics code for human experimentation, born from the Doctors\' Trial' },
+  { year: '1964', label: 'Declaration of Helsinki', desc: 'World Medical Association establishes ethical principles for medical research on humans' },
+  { year: '1970', label: 'Potter revives "Bioethics"', desc: 'Van Rensselaer Potter publishes "Bioethics: The Science of Survival" in Perspectives in Biology and Medicine' },
+  { year: '1974', label: 'National Research Act', desc: 'U.S. Congress creates the National Commission for the Protection of Human Subjects in response to the Tuskegee study' },
+  { year: '1979', label: 'Belmont Report', desc: 'Three core principles for human subjects research: respect for persons, beneficence, justice' },
+  { year: '1979', label: 'Beauchamp & Childress', desc: 'Principles of Biomedical Ethics: autonomy, beneficence, non-maleficence, justice' },
+  { year: '2002', label: '"Neuroethics" defined', desc: 'William Safire\'s keynote at the Dana Foundation conference establishes the modern field (Pontius used "neuro-ethics" in 1973 in a narrower clinical context)' },
+  { year: '2006', label: 'Brain Overclaim Syndrome', desc: 'Stephen Morse warns neuroscience claims are routinely overclaimed when applied to law (Ohio State J. Criminal Law). "Neuromodesty" follows in 2011' },
+  { year: '2006', label: 'Int\'l Neuroethics Society', desc: 'Founded at Asilomar by Gazzaniga, Farah, Illes, and Wolpe — first professional society for the discipline' },
+  { year: '2009', label: '"Neurosecurity" coined', desc: 'Denning, Matsuoka & Kohno define security for neural devices (Neurosurgical Focus 27(1):E7)' },
+  { year: '2012', label: 'First BCI side-channel attack', desc: 'Martinovic et al. (USENIX Security) demonstrate consumer EEG headsets can extract PINs and locations via P300 response' },
+  { year: '2016', label: '"Brainjacking" defined', desc: 'Pycroft et al. (Oxford) systematize threats to implanted neurostimulators (World Neurosurgery 92:454-462)' },
+  { year: '2017', label: 'Neurorights', desc: 'Ienca & Andorno (Life Sciences Society and Policy) and Yuste et al. (Nature) independently propose neurorights' },
+  { year: '2019', label: 'OECD', desc: 'Nine-principle governance for responsible innovation in neurotechnology (Recommendation #457)' },
+  { year: '2021', label: 'Chile', desc: 'First country to constitutionally protect neurorights (mental integrity)' },
+  { year: '2024', label: 'Colorado + California', desc: 'Colorado HB 1058 (first U.S. neural data law, April) and California SB 1223 (neural data added to CCPA, September)' },
+  { year: '2025', label: 'UNESCO', desc: 'First global normative framework on neurotechnology ethics, adopted by 194 member states' },
+  { year: 'Next', label: 'QIF', desc: 'First open technical security specification (in development)' },
 ];
 ---
 
 <PageLayout
-  title="The Neuroethics Landscape — 23 Frameworks, 1 Gap"
+  title="The Neuroethics Landscape — 28 Frameworks, 1 Gap"
   description="A comprehensive survey of neuroethics frameworks, institutions, and the Principles-to-Protocol Gap that QIF fills."
   breadcrumbs={breadcrumbs}
   wide
@@ -107,14 +172,14 @@ const timeline = [
         Neuroethics Survey
       </p>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
-        <span class="text-[var(--color-text-primary)]">23 Frameworks.</span>
+        <span class="text-[var(--color-text-primary)]">28 Frameworks.</span>
         <br />
         <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
           One Gap.
         </span>
       </h1>
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
-        46 years of neuroethics scholarship have converged on five universal principles.
+        Nearly a century of bioethics and neuroethics scholarship have converged on five universal principles.
         Every framework answers <strong class="text-[var(--color-text-primary)]">why</strong> we should protect neural rights
         or <strong class="text-[var(--color-text-primary)]">what</strong> those rights are.
         None answer <strong class="text-[var(--color-text-primary)]">how</strong> to enforce them technically.
@@ -235,6 +300,106 @@ const timeline = [
     </div>
   </section>
 
+  <!-- ═══ SECURITY LANDSCAPE ═══ -->
+  <section class="py-12 md:py-16" id="security-landscape">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        The Neurosecurity Field
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-6">
+      Neuroethics defines the rights. Neurosecurity builds the defenses. These are the researchers, labs, and standards bodies shaping BCI security.
+    </p>
+
+    <!-- Tab controls -->
+    <div class="flex justify-center gap-1 mb-8" role="tablist" aria-label="Security landscape tabs">
+      <button
+        role="tab"
+        aria-selected="true"
+        aria-controls="panel-researchers"
+        data-tab="researchers"
+        class="sec-tab px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border border-[var(--color-accent-primary)]/30"
+      >
+        Researchers
+      </button>
+      <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-labs"
+        data-tab="labs"
+        class="sec-tab px-4 py-2 rounded-lg text-xs font-semibold transition-all text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] border border-transparent"
+      >
+        Institutions
+      </button>
+      <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-standards"
+        data-tab="standards"
+        class="sec-tab px-4 py-2 rounded-lg text-xs font-semibold transition-all text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] border border-transparent"
+      >
+        Standards Bodies
+      </button>
+    </div>
+
+    <!-- Panel: Researchers -->
+    <div id="panel-researchers" role="tabpanel" class="sec-panel" data-panel="researchers">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-5xl mx-auto">
+        {securityResearchers.map((r) => (
+          <div class="glass rounded-xl p-4 border border-[var(--color-accent-primary)]/20">
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-sm font-bold text-[var(--color-text-primary)]">{r.name}</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">{r.affiliation}</span>
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">{r.contribution}</p>
+            <p class="text-[10px] text-[var(--color-text-faint)] italic">{r.paper}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Panel: Institutions -->
+    <div id="panel-labs" role="tabpanel" class="sec-panel hidden" data-panel="labs">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-5xl mx-auto">
+        {securityInstitutions.map((inst) => (
+          <div class="glass rounded-xl p-4 border border-[var(--color-accent-secondary)]/20">
+            <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">{inst.name}</h3>
+            <p class="text-[10px] text-[var(--color-accent-secondary)] font-semibold mb-2">{inst.lab}</p>
+            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">{inst.focus}</p>
+            <p class="text-[10px] text-[var(--color-text-faint)]">Key researchers: {inst.leaders}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Panel: Standards Bodies -->
+    <div id="panel-standards" role="tabpanel" class="sec-panel hidden" data-panel="standards">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-6xl mx-auto">
+        {standardsBodies.map((sb) => {
+          const statusColor = sb.status === 'Active' ? 'var(--color-status-safe)' : sb.status === 'Partial' ? 'var(--color-status-warn)' : 'var(--color-status-danger)';
+          return (
+            <div class="glass rounded-xl p-4 border border-[var(--color-border)]">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-sm font-bold text-[var(--color-text-primary)]">{sb.name}</h3>
+                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full" style={`color: ${statusColor}; background: ${statusColor}15;`}>{sb.status}</span>
+              </div>
+              <p class="text-[10px] text-[var(--color-accent-tertiary)] font-semibold mb-2">{sb.scope}</p>
+              <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{sb.contribution}</p>
+            </div>
+          );
+        })}
+      </div>
+      <p class="text-[10px] text-[var(--color-text-faint)] text-center mt-4 max-w-2xl mx-auto">
+        Status: <span class="font-semibold" style="color: var(--color-status-safe);">Active</span> = has BCI/neurotech-relevant work &middot;
+        <span class="font-semibold" style="color: var(--color-status-warn);">Partial</span> = general medical device coverage &middot;
+        <span class="font-semibold" style="color: var(--color-status-danger);">Gap</span> = no BCI-specific security standard
+      </p>
+    </div>
+  </section>
+
   <!-- ═══ FRAMEWORK COMPARISON ═══ -->
   <section class="py-12 md:py-16" id="comparison">
     <div class="flex items-center gap-4 mb-8">
@@ -308,7 +473,7 @@ const timeline = [
           or specified fire-resistant materials. That is the current state of neuroethics.
         </p>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-          23 frameworks define <strong class="text-[var(--color-text-primary)]">why</strong> neural rights matter and
+          25 frameworks define <strong class="text-[var(--color-text-primary)]">why</strong> neural rights matter and
           <strong class="text-[var(--color-text-primary)]">what</strong> those rights are.
           Zero provide <strong class="text-[var(--color-text-primary)]">how</strong> to enforce them technically:
           no threat models, no scoring systems, no detection mechanisms, no protocol specifications.
@@ -316,7 +481,7 @@ const timeline = [
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
           <div class="text-center p-3 rounded-lg bg-[var(--color-accent-tertiary)]/5 border border-[var(--color-accent-tertiary)]/20">
-            <p class="text-2xl font-bold text-[var(--color-accent-tertiary)]">22</p>
+            <p class="text-2xl font-bold text-[var(--color-accent-tertiary)]">24</p>
             <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider">WHY / WHAT</p>
           </div>
           <div class="text-center p-3 rounded-lg bg-[var(--color-text-faint)]/5 border border-[var(--color-text-faint)]/20">
@@ -352,29 +517,43 @@ const timeline = [
     <div class="max-w-3xl mx-auto mb-8">
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
         Neuroethics asks: <em>what rights should people have over their own neural data and cognitive processes?</em>
-        Neurosecurity asks: <em>how do we technically enforce those rights against real attack vectors?</em>
-        One is philosophy. The other is engineering. Both are incomplete without the other.
+        Neurogovernance asks: <em>what policies, standards, and compliance frameworks enforce those rights?</em>
+        Neurosecurity asks: <em>how do we technically defend against the attacks that violate them?</em>
       </p>
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-        Every neurorights violation maps to a concrete technical attack pattern. Mental Privacy is violated by eavesdropping.
-        Mental Integrity is violated by signal injection. Cognitive Liberty is violated by subliminal manipulation.
-        Neurosecurity is the discipline that builds the defenses — threat models, scoring systems, detection engines,
-        and cryptographic protocols — that turn rights on paper into protections in hardware.
+        These three layers are distinct but inseparable. Ethics without governance is aspiration. Governance without security is unenforceable.
+        Security without ethics has no compass. Every neurorights violation maps to a concrete attack pattern,
+        and every attack pattern requires both a policy response and a technical defense.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-5xl mx-auto mb-8">
       <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
         <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-tertiary)] mb-3">Neuroethics</h3>
+        <p class="text-[10px] text-[var(--color-text-faint)] mb-3 italic">What rights do people have?</p>
         <ul class="space-y-2 text-xs text-[var(--color-text-muted)]">
           <li>Defines the <strong class="text-[var(--color-text-primary)]">rights</strong> (Ienca & Andorno, Yuste, Farahany)</li>
           <li>Establishes <strong class="text-[var(--color-text-primary)]">consent models</strong> (Beauchamp & Childress)</li>
-          <li>Writes <strong class="text-[var(--color-text-primary)]">policy</strong> (UNESCO, OECD, WHO, Chile)</li>
+          <li>Provides the <strong class="text-[var(--color-text-primary)]">moral foundation</strong></li>
           <li>Asks who should be protected and why</li>
         </ul>
       </div>
+      <div class="glass rounded-xl p-5 border border-[var(--color-accent-secondary)]/30" style="background: rgba(16,185,129,0.04);">
+        <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-secondary)] mb-3">Neurogovernance</h3>
+        <p class="text-[10px] text-[var(--color-text-faint)] mb-3 italic">What policies enforce those rights?</p>
+        <ul class="space-y-2 text-xs text-[var(--color-text-muted)]">
+          <li>Writes <strong class="text-[var(--color-text-primary)]">policy and regulation</strong> (UNESCO, OECD, WHO, Chile)</li>
+          <li>Defines <strong class="text-[var(--color-text-primary)]">consent tiers</strong> and <a href="/neurogovernance/" class="text-[var(--color-accent-secondary)] hover:underline">data classification</a></li>
+          <li>Establishes <strong class="text-[var(--color-text-primary)]">compliance frameworks</strong> (FDA, NIST, ISO)</li>
+          <li>Bridges ethics to enforceable institutional rules</li>
+        </ul>
+        <div class="mt-3 pt-3 border-t border-[var(--color-border)]/30">
+          <p class="text-[10px] text-[var(--color-status-warning)] font-semibold">Gap: No neurotech-specific governance standard exists. Existing frameworks (HIPAA, GDPR, FDA) were not designed for neural data.</p>
+        </div>
+      </div>
       <div class="glass rounded-xl p-5 border border-[var(--color-accent-primary)]/30" style="background: rgba(37,99,235,0.04);">
         <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-primary)] mb-3">Neurosecurity</h3>
+        <p class="text-[10px] text-[var(--color-text-faint)] mb-3 italic">How do we technically defend against attacks?</p>
         <ul class="space-y-2 text-xs text-[var(--color-text-muted)]">
           <li>Catalogs the <strong class="text-[var(--color-text-primary)]">attacks</strong> (<a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">109 TARA techniques</a>)</li>
           <li>Scores the <strong class="text-[var(--color-text-primary)]">impact</strong> (<a href="/scoring/" class="text-[var(--color-accent-primary)] hover:underline">NISS vulnerability scoring</a>)</li>
@@ -387,46 +566,85 @@ const timeline = [
     <!-- How each right maps to security -->
     <div class="max-w-4xl mx-auto">
       <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-text-faint)] mb-4 text-center">
-        Rights &rarr; Threats &rarr; Defenses
+        Rights &rarr; Governance &rarr; Threats &rarr; Defenses
       </h3>
-      <div class="glass rounded-xl overflow-hidden">
+      <div class="glass rounded-xl overflow-x-auto">
         <table class="w-full text-xs">
           <thead>
             <tr class="border-b border-[var(--color-border)]">
-              <th class="text-left py-3 px-4 text-[var(--color-accent-secondary)] font-semibold">Neuroright</th>
-              <th class="text-left py-3 px-4 text-[var(--color-status-danger)] font-semibold">Threat Pattern</th>
-              <th class="text-left py-3 px-4 text-[var(--color-accent-primary)] font-semibold">QIF Defense</th>
+              <th class="text-left py-3 px-3 text-[var(--color-accent-tertiary)] font-semibold">Neuroright</th>
+              <th class="text-left py-3 px-3 text-[var(--color-accent-secondary)] font-semibold">Governance Gap</th>
+              <th class="text-left py-3 px-3 text-[var(--color-status-danger)] font-semibold">Threat Pattern</th>
+              <th class="text-left py-3 px-3 text-[var(--color-accent-primary)] font-semibold">QIF Defense</th>
             </tr>
           </thead>
           <tbody class="text-[var(--color-text-muted)]">
             <tr class="border-b border-[var(--color-border)]/30">
-              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Mental Privacy</td>
-              <td class="py-2.5 px-4">Eavesdropping, side-channel extraction, neural fingerprinting</td>
-              <td class="py-2.5 px-4">NSP encryption, differential privacy, session pseudonyms</td>
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Mental Privacy</td>
+              <td class="py-2.5 px-3">HIPAA/GDPR don't classify neural signals as protected health data</td>
+              <td class="py-2.5 px-3">Eavesdropping, side-channel extraction, neural fingerprinting</td>
+              <td class="py-2.5 px-3">NSP encryption, differential privacy, session pseudonyms</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/30">
-              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Mental Integrity</td>
-              <td class="py-2.5 px-4">Signal injection, replay attacks, parameter tampering</td>
-              <td class="py-2.5 px-4">Neurowall L1/L2 filtering, Cs anomaly detection</td>
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Mental Integrity</td>
+              <td class="py-2.5 px-3">No regulatory definition of "unauthorized neural modification"</td>
+              <td class="py-2.5 px-3">Signal injection, replay attacks, parameter tampering</td>
+              <td class="py-2.5 px-3">Neurowall L1/L2 filtering, Cs anomaly detection</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/30">
-              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Cognitive Liberty</td>
-              <td class="py-2.5 px-4">Subliminal manipulation, sovereignty attacks, covert retuning</td>
-              <td class="py-2.5 px-4">SSVEP detection, adaptive spectral monitoring, policy engine</td>
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Cognitive Liberty</td>
+              <td class="py-2.5 px-3">No compliance standard for subliminal influence via BCI</td>
+              <td class="py-2.5 px-3">Subliminal manipulation, sovereignty attacks, covert retuning</td>
+              <td class="py-2.5 px-3">SSVEP detection, adaptive spectral monitoring, policy engine</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/30">
-              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Psychological Continuity</td>
-              <td class="py-2.5 px-4">Slow drift, homeostatic disruption, self-model corruption</td>
-              <td class="py-2.5 px-4">Cs trend monitoring, reference electrode validation</td>
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Psychological Continuity</td>
+              <td class="py-2.5 px-3">FDA adverse event reporting doesn't cover cognitive drift</td>
+              <td class="py-2.5 px-3">Slow drift, homeostatic disruption, self-model corruption</td>
+              <td class="py-2.5 px-3">Cs trend monitoring, reference electrode validation</td>
             </tr>
             <tr>
-              <td class="py-2.5 px-4 font-medium text-[var(--color-text-primary)]">Equal Access</td>
-              <td class="py-2.5 px-4">Device abandonment, vendor lock-in, enhancement inequality</td>
-              <td class="py-2.5 px-4">Open standards, interoperable protocols, vendor-neutral spec</td>
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Equal Access</td>
+              <td class="py-2.5 px-3">No interoperability mandate for neurotech devices</td>
+              <td class="py-2.5 px-3">Device abandonment, vendor lock-in, enhancement inequality</td>
+              <td class="py-2.5 px-3">Open standards, interoperable protocols, vendor-neutral spec</td>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRIVACY-PRESERVING TECHNOLOGIES ═══ -->
+  <section class="py-8" id="privacy-tech">
+    <div class="glass rounded-xl p-6 sm:p-8 max-w-5xl mx-auto" style="border-left: 4px solid var(--color-accent-tertiary);">
+      <h3 class="text-base font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2">
+        Toward Privacy-Preserving Neural Data Governance
+      </h3>
+      <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-4">
+        Kellmeyer (2022) proposes establishing "trustworthy technological means and/or institutions — data fiduciaries — for handling any data that might allow for inferences on mental experience." Several technologies are emerging to address this:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Homomorphic Encryption</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Process neural signals without decrypting. Anomaly detection and filtering can operate on ciphertext.</p>
+        </div>
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Differential Privacy</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Share aggregate neural patterns for research without exposing individual neural signatures. Calibrated noise injection.</p>
+        </div>
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Consent Provenance</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Distributed ledger for audit trails — who consented to what, when. Neural data itself never on-chain; only hashes and metadata.</p>
+        </div>
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Data Fiduciaries</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Independent institutions that hold decryption keys on behalf of patients. Device manufacturers do not hold keys to patient neural data.</p>
+        </div>
+      </div>
+      <p class="text-[10px] text-[var(--color-text-faint)] mt-3">
+        NSP v0.5 specifies post-quantum encryption in transit. Section 11 of the NSP spec (draft) extends this with HE, DP, consent provenance, and data fiduciary requirements.
+      </p>
     </div>
   </section>
 
@@ -435,48 +653,126 @@ const timeline = [
     <div class="flex items-center gap-4 mb-8">
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
       <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
-        Rigor Checks
+        Rigor Checks &amp; Guardrails
       </h2>
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
     </div>
 
-    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
-      Not everyone agrees on the scope or urgency of neurorights. These voices sharpen the field.
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-4">
+      Good science requires active skepticism. These published critiques constrain how BCI security research should be framed.
+      QIF treats each as a guardrail, not an obstacle.
+    </p>
+    <p class="text-xs text-[var(--color-text-faint)] max-w-2xl mx-auto text-center mb-8">
+      Grouped by what they constrain: overclaim, scope, methodology, and framing.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+    <!-- Row 1: Overclaim & Scope -->
+    <h3 class="text-[10px] font-bold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-4 max-w-6xl mx-auto">Overclaim &amp; Scope</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto mb-6">
       <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
-        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-2">Neuromodesty</h3>
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Neuromodesty</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Morse 2006/2011 &middot; Ohio State J. Criminal Law / Mercer Law Review</p>
         <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
-          Stephen Morse (2006) warned that neuroscience claims are routinely overclaimed when applied to law.
-          "Brain Overclaim Syndrome" cautions against assuming neural correlates prove causation or eliminate agency.
+          "Brain Overclaim Syndrome": neural correlates do not prove causation or eliminate agency. Neuroscience findings are routinely overclaimed when applied to law and policy.
         </p>
         <p class="text-[10px] text-[var(--color-text-faint)]">
-          QIF response: we score signal-level interference, not mental states. NISS measures physical amplitude disruption,
-          not "thought harm."
+          QIF guardrail: we score signal-level interference, not mental states. NISS measures physical amplitude disruption, not "thought harm."
         </p>
       </div>
 
       <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
-        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-2">Premature Legislation</h3>
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Premature Legislation</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Wexler 2019/2024 &middot; Nature Biotechnology</p>
         <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
-          Anna Wexler (2024) argues the neurorights movement risks legislating solutions to problems that don't yet exist,
-          potentially creating regulatory barriers to beneficial research.
+          Consumer neurotechnology does not yet warrant the level of ethical alarm being raised. Legislating solutions to problems that don't yet exist risks blocking beneficial research.
         </p>
         <p class="text-[10px] text-[var(--color-text-faint)]">
-          QIF response: technical specifications are not legislation. Standards (like CVSS) inform but don't mandate.
-          Building the fire code doesn't close the building.
+          QIF guardrail: technical specifications are not legislation. Standards (like CVSS) inform but don't mandate. Building the fire code doesn't close the building.
         </p>
       </div>
 
       <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
-        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-2">Anti-Inflationism</h3>
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Anti-Inflationism</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Ienca 2021 &middot; Bublitz 2022 (Neuroethics)</p>
         <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
-          Marcello Ienca (2021) warned that multiplying neurorights beyond what existing human rights frameworks already cover
-          risks diluting protections. Better to extend existing rights than create new ones.
+          Multiplying neurorights beyond existing human rights frameworks dilutes protections (Ienca). Novel neurorights lack standard legal quality criteria and may constitute neuroexceptionalism (Bublitz).
         </p>
         <p class="text-[10px] text-[var(--color-text-faint)]">
-          QIF response: we extend Mental Privacy and Mental Integrity with technical depth, not new rights. Five rights, not fifteen.
+          QIF guardrail: we extend Mental Privacy and Mental Integrity with technical depth, not new rights. Five rights, not fifteen.
+        </p>
+      </div>
+    </div>
+
+    <!-- Row 2: Methodology -->
+    <h3 class="text-[10px] font-bold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-4 max-w-6xl mx-auto">Methodology</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto mb-6">
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Reverse Inference Fallacy</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Poldrack 2006 &middot; Trends in Cognitive Sciences</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Concluding that a specific cognitive process is occurring because a brain region activated is not deductively valid. Even Broca's area provides only weak evidence for language engagement.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: signal detection does not entail mental-state identification. TARA catalogs physical interference patterns, not cognitive content.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Statistical Inflation</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Vul et al. 2009 &middot; Eklund et al. 2016 (PNAS)</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Brain-behavior correlations in fMRI are routinely inflated by double-dipping (Vul). Common fMRI software produces up to 70% false-positive rates (Eklund). A dead salmon showed "significant" brain activation without correction (Bennett 2009).
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: claims citing neuroimaging findings as ground truth must account for demonstrated validity failures in the underlying methods.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Conceptual Underspecification</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Kellmeyer 2022 &middot; Cambridge University Press</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Mental privacy and mental integrity are conceptually "still under construction." Operational descriptions vary across philosophy, ethics, neuroscience, and psychology. No consensus model of self-experience or agency exists.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: we define operationally measurable properties (signal amplitude, frequency, coherence) rather than philosophically contested mental states.
+        </p>
+      </div>
+    </div>
+
+    <!-- Row 3: Framing -->
+    <h3 class="text-[10px] font-bold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-4 max-w-6xl mx-auto">Framing</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Neurorealism Triad</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Racine, Bar-Ilan & Illes 2005 &middot; Nature Reviews Neuroscience</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Three failure modes in public neuroscience communication: <strong>neuro-realism</strong> (brain scans as visual proof), <strong>neuro-essentialism</strong> (we are our brains), <strong>neuropolicy</strong> (using brain data to advance agendas without evidence).
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: documentation must not frame BCI threats as "brain data reveals identity." Neural signals are partial, noisy representations, not transparent read-outs of selfhood.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Brain Reading Limits</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Ienca et al. 2018 / Wexler 2019 &middot; Nature Biotechnology</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Even the paper raising BCI privacy concerns acknowledges consumer EEG "is not mind reading." Decoded images are selected from known lists, not freely read. Current devices require algorithm training, long-term data, and user cooperation.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: threat models must distinguish between current capabilities and projected future capabilities. We catalog what is technically possible, not what is science fiction.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">The Dual-Use Trap</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Tennison & Moreno 2012 &middot; PLOS Biology</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          BCIs are inherently dual-use: the same systems used for clinical treatment can be repurposed for military enhancement, deception detection, and interrogation. Framing BCI as a security domain risks enabling the very surveillance it aims to prevent.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: the framework specifies defensive clinical protections. Offensive applications are explicitly out of scope. The threat catalog exists to inform defense, not enable attack.
         </p>
       </div>
     </div>
@@ -509,5 +805,30 @@ const timeline = [
       </p>
     </div>
   </section>
+
+  <script>
+    const tabs = document.querySelectorAll('.sec-tab');
+    const panels = document.querySelectorAll('.sec-panel');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-tab');
+
+        tabs.forEach((t) => {
+          const isActive = t.getAttribute('data-tab') === target;
+          t.setAttribute('aria-selected', String(isActive));
+          t.classList.toggle('bg-[var(--color-accent-primary)]/10', isActive);
+          t.classList.toggle('text-[var(--color-accent-primary)]', isActive);
+          t.classList.toggle('border-[var(--color-accent-primary)]/30', isActive);
+          t.classList.toggle('text-[var(--color-text-faint)]', !isActive);
+          t.classList.toggle('border-transparent', !isActive);
+        });
+
+        panels.forEach((p) => {
+          p.classList.toggle('hidden', p.getAttribute('data-panel') !== target);
+        });
+      });
+    });
+  </script>
 
 </PageLayout>

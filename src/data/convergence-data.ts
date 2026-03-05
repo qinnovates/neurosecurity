@@ -429,7 +429,7 @@ export const CONVERGENCE_GAPS: ConvergenceGap[] = [
     id: 'dual-use-governance',
     property: 'Dual-use therapeutic/attack classification',
     existingAnalog: 'Wassenaar Arrangement for conventional arms. Export controls for cryptography. DARPA dual-use research policies.',
-    neuralDifference: 'Every therapeutic neurostimulation technique is also an attack vector. DBS for Parkinson is the same hardware path as forced motor control. TMS for depression uses the same physics as cognitive disruption. No framework classifies the dual-use boundary.',
+    neuralDifference: 'Therapeutic neurostimulation techniques share their physical mechanisms with potential attack vectors. DBS for Parkinson uses the same hardware path as forced motor control. TMS for depression uses the same physics as cognitive disruption. The boundary is consent, dosage, and clinical oversight — but no framework classifies it.',
     coveredBy: ['FDA (therapeutic side only)'],
     qifSolution: 'TARA classifies every technique as attack, therapeutic, or dual-use. Dual-use techniques require additional safeguards and informed consent documentation.',
   },

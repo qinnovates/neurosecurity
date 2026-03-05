@@ -12,6 +12,11 @@
 
 ## Entry Index
 
+### March (Entries 84+) — Privacy Architecture, Neuromodesty Audit
+| Entry | Topic | Link |
+|-------|-------|------|
+| 84 | Privacy-preserving neural data architecture: HE, DP, data fiduciaries, consent provenance | [Entry 84](#entry-84-privacy-preserving-neural-data) |
+
 ### Late February (Entries 66-83) — Neurorights, Physics Boundaries, Market Analysis
 | Entry | Topic | Link |
 |-------|-------|------|
@@ -324,6 +329,55 @@ Each entry follows this structure:
 
 ---
 
+## Entry 84: Privacy-Preserving Neural Data Architecture — HE, DP, Data Fiduciaries, Consent Provenance {#entry-84-privacy-preserving-neural-data}
+
+**Date:** 2026-03-05, ~03:00
+**Classification:** HYPOTHESIS
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 70 (wearable neural firewall), Entry 77 (thesis statement)
+**Inspiration:** Kellmeyer (2022) "Neurorights: A Human Rights-Based Approach for Governing Neurotechnologies" (Cambridge UP, DOI: 10.1017/9781009207898.032) — specifically the data fiduciary concept for neural data governance.
+
+### The Insight
+
+Kellmeyer proposes establishing "trustworthy technological means (such as blockchain technology, differential privacy, homomorphic encryption, and other techniques) and/or institutions — data fiduciaries — for handling any data of a person that might allow for inferences on mental experience."
+
+Kevin's NFT/blockchain experience provided the critical counterpoint: **blockchain leaves artifacts visible to all participants.** Neural data on a public ledger — even encrypted — creates an immutable record that future quantum computing or cryptanalytic advances could potentially decrypt. The insight: **blockchain is for provenance, not payload.** The neural data itself never touches the chain. Only consent records, access logs, and integrity hashes do.
+
+### Proposed Architecture (5-Layer Privacy Stack)
+
+| Layer | Technology | Role in Neural Data Protection |
+|-------|-----------|-------------------------------|
+| **Data at rest** | Homomorphic encryption (HE) | Process neural signals without decrypting — anomaly detection, SIEM correlation, and Neurowall filtering can operate on ciphertext |
+| **Data in transit** | NSP's PQ-TLS (already specified) | Post-quantum authenticated encryption for the wire. Already covers this layer. |
+| **Data sharing** | Differential privacy (DP) | Share aggregate neural patterns for research without exposing individual neural signatures. Calibrated noise injection per Dwork (2006). |
+| **Consent provenance** | Blockchain/DLT | Immutable audit trail of WHO consented to WHAT processing, WHEN. Not the data itself — only metadata, consent records, and integrity hashes. |
+| **Data governance** | Data fiduciary model | Independent entity holds decryption keys. Device manufacturer does NOT hold keys to patient neural data. Separation of concerns. |
+
+### Mapping to Existing QIF Components
+
+- **NSP:** Extend handshake to negotiate HE parameters for "compute-on-encrypted" mode. New cipher suite family for HE-capable sessions.
+- **Runemate:** Consent policies expressed in Runemate DSL compile to verifiable consent records (potentially smart contracts) on a permissioned ledger.
+- **Neurowall:** Operates on encrypted signals. Validates that incoming data has a valid consent chain before processing. Zero-knowledge proof of consent without revealing the consent content.
+
+### Open Questions
+
+1. **HE performance on implant hardware:** Current FHE schemes (CKKS, BGV) are computationally expensive. Can we use partially homomorphic encryption (PHE) for the subset of operations Neurowall needs (comparison, threshold detection)?
+2. **Which blockchain?** Permissioned (Hyperledger) vs permissionless. Implant latency constraints favor permissioned.
+3. **Data fiduciary governance:** Who governs the fiduciary? How do you prevent regulatory capture by device manufacturers?
+4. **Differential privacy epsilon:** What noise budget is acceptable for neural data without destroying clinical utility?
+
+### Human Decision
+
+Kevin identified the connection between his NFT work and Kellmeyer's data fiduciary concept. The blockchain-as-provenance-not-payload principle is a Kevin-originated architectural constraint. The 5-layer privacy stack and component mapping are co-derived with Claude.
+
+### AI Collaboration
+
+- **Model:** Claude Opus 4.6
+- **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
+- **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
 ## Entry 83: Heart as Natural Coherence Monitor — Cardiac Intrinsic Nervous System and QIF {#entry-83-heart-coherence-monitor}
 
 **Date:** 2026-02-28, ~13:30
@@ -492,21 +546,24 @@ None enumerate the attack surface, chain exploits, score severity per vector, mo
 
 Kevin: "Shows my mappings work very well outside of the BCI space and is designed at scale as intended."
 
-**Decision:** This is captured as HYPOTHESIS, not VERIFIED. The mapping is inferentially strong but has not been empirically validated by clinical neuroscience. The framework was not designed for this use case — it emerged from personal application. This needs:
-1. Literature review: does computational psychiatry have anything approaching this?
-2. Cross-AI validation: present the chain to Gemini/ChatGPT for adversarial review
-3. Clinical review: would a neurologist or psychiatrist find the chain mechanistically sound?
+**Decision:** This is captured as HYPOTHESIS, not VERIFIED. The mapping is inferentially strong but has not been empirically validated by clinical neuroscience. The framework was not designed for this use case — it emerged from personal application.
 
-### Potential Outputs
+### Retraction / Reframe (2026-03-05)
 
-- **Paper:** "QIF as a general neural threat taxonomy: endogenous attack chain case study"
-- **Blog post:** Personal narrative framing — "I built a framework to secure BCIs, then used it to understand what happened to my own nervous system"
-- **Book chapter:** For "From Kidnapped to Kingdom" — the moment the framework reflected back
-- **Framework scope revision:** Consider whether QIF v8.0 should formally acknowledge endogenous threat vectors (biochemical, experiential, autoimmune) as entry points that bypass the synthetic stack
+**Following review of Morse's neuromodesty principle (2006), this entry's framing has been retracted as overclaiming.**
 
-### Research Question Posed
+The original framing asserted that endogenous biological processes (PTSD, B12 deficiency) produce "the same failure modes" as BCI attacks, and positioned this as a validation of QIF's generalizability. Per Morse's "Brain Overclaim Syndrome," this conflates:
+- Neural correlates with proven causal mechanisms
+- Analogical pattern-matching with empirical validation
+- Personal experience with scientific demonstration
 
-**Do adversarial threat taxonomies generalize to endogenous neural failure modes?** If yes, security engineering and clinical neuroscience have been studying the same system from opposite ends — and neither field has the other's tools.
+**What was overclaimed:** That the TARA attack taxonomy "maps" endogenous failure modes, implying equivalence between biological disruption and adversarial BCI exploitation.
+
+**What remains valid:** The personal experience of cognitive disruption motivated the research question — "what happens when programmable devices connect to neural pathways that can already fail?" That question stands. The answer requires empirical work, not analogical assertion.
+
+**Reframe:** The endogenous experience is personal motivation (documented on the About page as memoir). It is not a technical validation of the framework. The case study page has been removed from the site. The attack chain table above is preserved in this log for historical record but should not be cited as framework validation.
+
+**Classification updated:** ~~HYPOTHESIS~~ → RETRACTED (overclaim per neuromodesty review)
 
 ### COVID as Second Threat Actor
 
