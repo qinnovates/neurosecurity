@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-03-05T01:43:05.428Z",
+  "last_updated": "2026-03-06T01:44:45.712Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -11,7 +11,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/deploy.yml",
       "status": "active",
-      "last_triggered": "2026-03-04T20:52:58Z",
+      "last_triggered": "2026-03-05T22:15:35Z",
       "last_status": "success",
       "dependencies": [
         "src/",
@@ -31,8 +31,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/changelog.yml",
       "status": "active",
-      "last_triggered": "2026-03-04T20:51:34Z",
-      "last_status": "unknown",
+      "last_triggered": "2026-03-05T22:14:53Z",
+      "last_status": "success",
       "dependencies": [
         "scripts/changelog-update.mjs",
         "git log"
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-03-04T17:29:51Z",
+      "last_triggered": "2026-03-05T18:37:06Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -91,7 +91,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/verify-citations.yml",
       "status": "active",
-      "last_triggered": "2026-03-04T20:50:55Z",
+      "last_triggered": "2026-03-05T22:15:43Z",
       "last_status": "failure",
       "dependencies": [
         "scripts/verify/run_all.py",
@@ -135,7 +135,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/timeline-check.yml",
       "status": "active",
-      "last_triggered": "2026-03-04T20:52:01Z",
+      "last_triggered": "2026-03-05T22:14:46Z",
       "last_status": "success",
       "dependencies": [
         "scripts/timeline-check.mjs",
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-03-05T01:42:39Z",
+      "last_triggered": "2026-03-06T01:44:21Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
