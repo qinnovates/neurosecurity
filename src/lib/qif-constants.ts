@@ -106,7 +106,7 @@ export const PILLARS = [
     fullName: 'Neural Sensory Protocol',
     tagline: 'The wire protocol',
     description: 'An RFC-style post-quantum protocol ensuring patient safety and data privacy — securing BCI data links with five defense layers at 3.25% power overhead.',
-    href: '/tools/nsp/',
+    href: '/guardrails/nsp/',
     icon: '&#9632;',
     color: 'var(--color-accent-secondary)',
     version: '0.4',

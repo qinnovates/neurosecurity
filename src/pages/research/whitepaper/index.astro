@@ -1047,7 +1047,7 @@ const tacticColors: Record<string, string> = {
             The protocol is specified across three device tiers: implanted (most constrained, &le;40 mW), wearable (moderate power budget), and external (unconstrained). Not all tiers require all layers &mdash; consumer wearables implement Layers 1&ndash;3, while implanted devices implement all five. Each tier uses the same cryptographic primitives but with different parameter sets and duty cycles.
           </p>
           <p>
-            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). <a href="/tools/runemate/" class="text-[var(--color-accent-primary)]">Runemate</a> &mdash; a purpose-built compression layer for BCI payloads &mdash; mitigates this by encoding neural interface content (visual, auditory, haptic) through a closed-vocabulary DSL, achieving 65&ndash;90% compression and net bandwidth savings over classical transport for typical BCI content exceeding 23&nbsp;KB.
+            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). <a href="/guardrails/runemate/" class="text-[var(--color-accent-primary)]">Runemate</a> &mdash; a purpose-built compression layer for BCI payloads &mdash; mitigates this by encoding neural interface content (visual, auditory, haptic) through a closed-vocabulary DSL, achieving 65&ndash;90% compression and net bandwidth savings over classical transport for typical BCI content exceeding 23&nbsp;KB.
           </p>
           <p>
             <strong>Scope:</strong> NSP secures the I0 data link &mdash; the wireless boundary between implant and external device. It does not address physical-layer failures such as electrode migration, chronic immune response, or biocompatibility degradation. These are clinical monitoring concerns outside the protocol&rsquo;s threat model.
@@ -1055,7 +1055,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <div class="text-center">
-          <a href="/tools/nsp/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
+          <a href="/guardrails/nsp/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
             Read the Full NSP Specification &rarr;
           </a>
         </div>
@@ -1123,7 +1123,7 @@ const tacticColors: Record<string, string> = {
               <h3 class="font-semibold font-[family-name:var(--font-heading)]">Engineers &amp; Implementers</h3>
             </div>
             <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
-              <li><strong>Post-quantum native.</strong> <a href="/tools/nsp/">NSP</a> and Runemate are designed PQC-first &mdash; no legacy cipher inheritance. NIST <a href="https://csrc.nist.gov/pubs/ir/8547/ipd">mandates</a> all legacy encryption deprecated by 2030 and disallowed by 2035 &mdash; and adversaries are already harvesting encrypted data today to crack later. Neural data has a lifetime shelf life; we&rsquo;re not shipping it with an expiration date.</li>
+              <li><strong>Post-quantum native.</strong> <a href="/guardrails/nsp/">NSP</a> and Runemate are designed PQC-first &mdash; no legacy cipher inheritance. NIST <a href="https://csrc.nist.gov/pubs/ir/8547/ipd">mandates</a> all legacy encryption deprecated by 2030 and disallowed by 2035 &mdash; and adversaries are already harvesting encrypted data today to crack later. Neural data has a lifetime shelf life; we&rsquo;re not shipping it with an expiration date.</li>
               <li>Employ the <a href="#hourglass">hourglass model</a> to structure threat assessments by architectural band</li>
               <li>Map your device's threat surface to <a href="/atlas/tara/">TARA categories</a></li>
               <li>All specifications are Apache 2.0 &mdash; fork, implement, contribute</li>
