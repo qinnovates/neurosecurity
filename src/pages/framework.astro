@@ -67,7 +67,7 @@ const tacticColors: Record<string, string> = {
           <ul>
             <li><strong>TARA Atlas</strong> (Therapeutic Applications &amp; Risk Assessment) &mdash; a dual-use atlas that classifies each BCI technique as both a security threat and a potential therapeutic application, maps techniques to DSM-5-TR psychiatric diagnoses through the Neural Impact Chain, and traces clinical outcomes from physical mechanism to cognitive function</li>
             <li><strong>NISS</strong> (Neural Impact Scoring System) &mdash; a purpose-built vulnerability scoring system that extends CVSS with six neural-specific metrics: biological impact, cognitive reconnaissance, cognitive disruption, consent violation, reversibility, and neuroplasticity</li>
-            <li><strong>NSP</strong> (Neural Sensory Protocol) &mdash; a five-layer, post-quantum wire protocol for securing BCI data links at 3.25% power overhead on implanted devices</li>
+            <li><strong>NSP</strong> (Neural Sensory Protocol) &mdash; a five-layer, post-quantum wire protocol for securing BCI data links at a modeled 3.25% power overhead on implanted devices (hardware validation pending)</li>
           </ul>
         </div>
       </section>
@@ -181,7 +181,7 @@ const tacticColors: Record<string, string> = {
         <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">Therapeutic Applications &amp; Risk Assessment &ensp;|&ensp; by Qinnovate</p>
         <div class="prose mb-6">
           <p>
-            TARA is a dual-use atlas where every entry is simultaneously a security threat, a clinical risk, and a potential therapeutic application. Developed by Qinnovate as the first classification system purpose-built for neural interfaces, TARA organizes {totalTechniques} techniques by the anatomical or functional <em>locus</em> where they operate, across {totalDomains} domains and {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
+            TARA is a dual-use atlas where every entry is simultaneously a security threat, a clinical risk, and a potential therapeutic application. Developed by Qinnovate as a classification system purpose-built for neural interfaces, TARA organizes {totalTechniques} techniques by the anatomical or functional <em>locus</em> where they operate, across {totalDomains} domains and {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
           </p>
           <p>
             Beyond threat classification, TARA maps each technique through four projections: modality (attack severity and coupling mechanism), clinical (therapeutic analog, FDA status, treated conditions), diagnostic (DSM-5-TR psychiatric mapping via the <a href="/whitepaper/#neural-impact">Neural Impact Chain</a>), and governance (consent tier and regulatory requirements). The result is a single atlas that security engineers, clinicians, and regulators can each read from their own perspective.
@@ -204,10 +204,10 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <h3 id="niss" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">NISS v1.1 Scoring</h3>
-        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">First CVSS v4.0 Extension for Neural Security &ensp;|&ensp; by Qinnovate</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">A Proposed CVSS v4.0 Extension for Neural Security &ensp;|&ensp; by Qinnovate</p>
         <div class="prose mb-6">
           <p>
-            Each technique is scored using <strong>NISS</strong> (Neural Impact Scoring System), the first CVSS v4.0 extension designed for neural security. Following FIRST.org's extension framework, NISS adds six neural-specific dimensions that CVSS structurally cannot express: Biological Impact, Cognitive Reconnaissance (read-side attacks), Cognitive Disruption (write-side attacks), Consent Violation, Reversibility, and Neuroplasticity. All TARA techniques have been mapped to both CVSS v4.0 base vectors and MITRE ATT&amp;CK-style technique IDs, empirically proving that 94.4% require NISS extension metrics for full-fidelity scoring.
+            Each technique is scored using <strong>NISS</strong> (Neural Impact Scoring System), a proposed CVSS v4.0 extension designed for neural security. Following FIRST.org's extension framework, NISS adds six neural-specific dimensions that CVSS structurally cannot express: Biological Impact, Cognitive Reconnaissance (read-side attacks), Cognitive Disruption (write-side attacks), Consent Violation, Reversibility, and Neuroplasticity. All TARA techniques have been mapped to both CVSS v4.0 base vectors and MITRE ATT&amp;CK-style technique IDs, showing that 94.4% require NISS extension metrics for full-fidelity scoring.
           </p>
         </div>
 

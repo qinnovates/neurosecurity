@@ -38,10 +38,6 @@ The right to protection from unauthorized alteration of neural function is found
 
 The right to maintain one's personal identity — memory, personality, sense of self — deserves protection in both technology and community. We create space for contributors to grow and change their views without being defined by past positions. We do not develop capabilities intended to alter identity without clinical justification and informed consent.
 
-### Mental Integrity
-
-The right to protection from unauthorized alteration of neural function (Ienca & Andorno, 2017). Our coherence metrics exist to help detect when signals may not be authentic to the user. In community, it means proper attribution, honest disclosure of AI assistance, and never claiming another's work or ideas as your own.
-
 These four principles are recognized in international neuroethics scholarship (Ienca & Andorno, 2017; Yuste et al., 2017) and codified in the [UNESCO Recommendation on the Ethics of Neurotechnology (2025)](/governance/UNESCO_ALIGNMENT/). They are not aspirational for this project. They are operational.
 
 ## Conduct

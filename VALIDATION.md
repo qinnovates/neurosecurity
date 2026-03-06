@@ -101,10 +101,10 @@
 **Status:** PASS
 **Date:** 2026-02-08
 
-**Methodology:** All 103 TARA techniques scored through the NISS engine. Verified severity escalation, PINS flag triggers, and context profile weight shifts.
+**Methodology:** All 109 TARA techniques scored through the NISS engine. Verified severity escalation, PINS flag triggers, and context profile weight shifts.
 
 **Results:**
-- 103/103 techniques scored without errors
+- 109/109 techniques scored without errors
 - PINS flag correctly triggered for all qualifying techniques
 - Severity thresholds verified
 - Context profiles shift weights correctly
@@ -246,7 +246,7 @@ These components require resources beyond what a solo researcher can provide. Th
 | Component | Why Not Tested | What's Needed |
 |-----------|---------------|---------------|
 | NISS Clinical Validation | Requires clinician review against real BCI incident data | Clinical BCI experts, incident database, IRB approval |
-| DSM-5-TR Diagnostic Mappings | 103 mappings need clinical psychiatrist review | Psychiatrist with BCI experience, case study data |
+| DSM-5-TR Diagnostic Mappings | 109 mappings need clinical psychiatrist review | Psychiatrist with BCI experience, case study data |
 | BCI Limits Equation | Novel integration of established physics; hypothesis status | BCI hardware lab, multi-site measurements, peer review |
 | NSP on Real Hardware | Protocol tested in software only | ARM Cortex-M4 dev board, real-time latency measurement, power profiling |
 | Real EEG Validation | All coherence monitoring uses synthetic signals | EEG equipment, IRB approval, baseline recording protocol |

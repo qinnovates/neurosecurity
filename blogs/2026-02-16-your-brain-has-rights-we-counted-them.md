@@ -164,3 +164,7 @@ All 102 technique mappings are in the [TARA registry](https://qinnovate.com/TARA
 **NISS:** Neural Impact Scoring System v1.1. Vector format: `NISS:1.1/BI:_/CR:_/CD:_/CV:_/RV:_/NP:_`. See the [whitepaper](https://doi.org/10.5281/zenodo.18640105) for methodology.
 
 *Cross-AI validated: Claude Opus 4.6 (analysis, implementation) + Gemini 2.5 Pro (validation, additional correlations). Human decision: Kevin Qi.*
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

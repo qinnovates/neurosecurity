@@ -1,6 +1,6 @@
 ---
-title: "The Neural Impact Chain: When Security Scores Predict Psychiatric Diagnoses"
-subtitle: "How we mapped 99 BCI attack techniques to DSM-5-TR diagnoses — and found that NISS scores correlate with the clinical categories"
+title: "The Neural Impact Chain: When Security Scores Map to Psychiatric Risk Categories"
+subtitle: "How we mapped 99 BCI attack techniques to DSM-5-TR diagnostic categories — and found that NISS scores correspond to clinical risk clusters (for threat modeling purposes)"
 date_posted: "2026-02-13"
 source: "https://qinnovate.com"
 tags: ["#TARA", "#DSM5TR", "#NeuralImpactChain", "#NISS", "#BCI", "#Psychiatry", "#Neuroethics", "#QIF", "#RDoC"]
@@ -32,11 +32,11 @@ Every technique now carries this mapping. Silicon-only techniques (S1-S3 bands, 
 
 ## The NISS-DSM Bridge: The Part That Surprised Us
 
-Here is what we did not expect: **NISS scores already predicted the diagnostic mapping.**
+Here is what we did not expect: **NISS scores already corresponded to the diagnostic categories.**
 
 NISS (Neural Impact Scoring System) has six metrics: BI (Biological Impact), CR (Cognitive Reconnaissance), CD (Cognitive Disruption), CV (Consent Violation), RV (Reversibility), and NP (Neuroplasticity). We designed these to quantify security impact. But when we laid them against DSM-5-TR chapters, the correspondence was immediate:
 
-| NISS Metric | Security Meaning | Diagnostic Prediction |
+| NISS Metric | Security Meaning | Diagnostic Category Correspondence |
 |-------------|------------------|----------------------|
 | BI (High/Critical) | Tissue damage | Motor/Neurocognitive disorders |
 | CR (High/Critical) | Thought decoding, neural data inference | Cognitive/Psychotic disorders |
@@ -45,9 +45,9 @@ NISS (Neural Impact Scoring System) has six metrics: BI (Biological Impact), CR 
 | NP (Structural) | Lasting neural change | Persistent/Personality disorders |
 | RV (Partial/Irreversible) | Poor recovery | Chronicity modifier |
 
-A technique with CV:E (Elevated) and CR:H/CD:H (High) doesn't just have a "high security impact." It specifically predicts mood/trauma and cognitive/psychotic risk — meaning PTSD, depression, and psychotic features are the primary clinical concerns.
+A technique with CV:E (Elevated) and CR:H/CD:H (High) doesn't just have a "high security impact." It specifically corresponds to mood/trauma and cognitive/psychotic risk categories — meaning PTSD, depression, and psychotic features are the primary clinical concerns for threat modeling purposes.
 
-NISS was designed as a security scoring system. It turns out it is also a psychiatric risk predictor. The same six metrics that tell a security researcher "this attack is dangerous" tell a clinician "this patient needs screening for these specific conditions."
+NISS was designed as a security scoring system. The same six metrics that tell a security researcher "this attack is dangerous" correspond to the diagnostic categories a clinician would consider — a structural observation requiring clinical validation, not a validated predictor.
 
 ## Five Clusters, Not Sixteen Chapters
 
@@ -67,7 +67,7 @@ These clusters are neurobiologically driven, not symptom-driven. They align with
 
 The 11-band hourglass model was designed as a security architecture. Each band represents a layer of the BCI stack, from neocortex (N7) through the electrode-tissue interface (I0) to silicon (S1-S3).
 
-What we discovered: each band naturally corresponds to specific brain structures, which naturally correspond to specific diagnoses. N6 (Limbic System) maps to hippocampus, amygdala, and insula — which map to depression, anxiety, PTSD, and dissociative disorders. N5 (Basal Ganglia) maps to striatum and substantia nigra — which map to ADHD, addiction, OCD, and tic disorders. The architecture predicted the clinical mapping.
+What we discovered: each band naturally corresponds to specific brain structures, which naturally correspond to specific diagnoses. N6 (Limbic System) maps to hippocampus, amygdala, and insula — which map to depression, anxiety, PTSD, and dissociative disorders. N5 (Basal Ganglia) maps to striatum and substantia nigra — which map to ADHD, addiction, OCD, and tic disorders. The architecture corresponded to the clinical mapping.
 
 This is the value of a well-designed taxonomy. It reveals relationships you did not design into it.
 

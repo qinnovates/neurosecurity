@@ -249,7 +249,7 @@ export const GOVERNING_BODIES: GoverningBody[] = [
     name: 'Neurorights Foundation',
     domain: 'neuroethics',
     type: 'advocacy',
-    produces: ['5 neurorights framework', 'Chile legislation support'],
+    produces: ['neurorights advocacy', 'Chile legislation support'],
     neurotechEngagement: 'comprehensive',
     securityEngagement: 'none',
     bridgePotential: 'medium',
@@ -396,7 +396,7 @@ export const CONVERGENCE_GAPS: ConvergenceGap[] = [
   {
     id: 'neural-threat-taxonomy',
     property: 'BCI-specific threat taxonomy',
-    existingAnalog: 'MITRE ATT&CK catalogs 594 enterprise techniques across 14 tactics.',
+    existingAnalog: 'MITRE ATT&CK catalogs hundreds of enterprise techniques across 14 tactics.',
     neuralDifference: 'No neural injection, cognitive exfiltration, neurostimulation manipulation, or signal dynamics disruption in any MITRE matrix. Neural attacks have no TTP classification.',
     coveredBy: ['MITRE ATT&CK (structure only)'],
     qifSolution: 'TARA provides 109 BCI techniques across 15 tactics with MITRE-compatible IDs and dual-use therapeutic mappings.',

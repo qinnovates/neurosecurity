@@ -77,7 +77,6 @@ const NEURORIGHT_LABELS: Record<string, string> = {
     CL: 'Cognitive Liberty',
     MI: 'Mental Integrity',
     PC: 'Psychological Continuity',
-    EA: 'Equal Access',
 };
 
 const NEURORIGHT_COLORS: Record<string, { bg: string; text: string; border: string }> = {
@@ -85,7 +84,6 @@ const NEURORIGHT_COLORS: Record<string, { bg: string; text: string; border: stri
     CL: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/20' },
     MI: { bg: 'bg-red-500/10', text: 'text-red-600', border: 'border-red-500/20' },
     PC: { bg: 'bg-amber-500/10', text: 'text-amber-600', border: 'border-amber-500/20' },
-    EA: { bg: 'bg-emerald-500/10', text: 'text-emerald-600', border: 'border-emerald-500/20' },
 };
 
 export default function TaraVisualization({ threats, bands }: TaraVisualizationProps) {

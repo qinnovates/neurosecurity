@@ -95,3 +95,6 @@ Neil was right: the challenge isn’t knowing enough to think you’re right, bu
 ---
 
 [From Macroscopic Quantum Tunneling to Quantum Keys: How the Nobel Prize Will Secure BCIs](https://cybersecuritywriteups.com/from-macroscopic-quantum-tunneling-to-quantum-keys-how-the-nobel-prize-will-secure-bcis-300f943faea1) was originally published in [Cyber Security Write-ups](https://cybersecuritywriteups.com) on Medium, where people are continuing the conversation by highlighting and responding to this story.
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

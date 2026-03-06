@@ -54,14 +54,14 @@
     {
       "id": "qif-whitepaper",
       "title": "QIF Whitepaper",
-      "version": "6.0",
+      "version": "7.0",
       "summary": "Proposed open security framework for brain-computer interfaces — hourglass architecture, threat modeling, neural impact scoring.",
       "href": "/whitepaper/"
     },
     {
       "id": "nsp-protocol",
       "title": "NSP Protocol",
-      "version": "0.3",
+      "version": "0.5",
       "summary": "Post-quantum neural security protocol. Five defense layers at 3.25% implant power budget.",
       "href": "/nsp/"
     },

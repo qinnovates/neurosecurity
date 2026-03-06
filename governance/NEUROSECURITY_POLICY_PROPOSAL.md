@@ -72,9 +72,9 @@ This is not a hypothetical gap. Across 25 mapped organizations and 13 regulatory
 The gap is fillable. Early research implementations demonstrate that technical approaches to each of these problems are feasible. For example, the open-source QIF project (one of several emerging efforts in this space) has produced:
 
 - A BCI-specific threat taxonomy with 109 techniques across 15 tactics
-- A neural impact scoring system with 5 dimensions that CVSS cannot express
+- A neural impact scoring system with 6 dimensions that CVSS cannot express
 - A post-quantum encryption protocol designed for implantable power budgets (estimated 3.25% overhead at 40 mW in simulation)
-- A real-time coherence monitoring system tested against 15 simulated attack scenarios
+- A real-time coherence monitoring system tested against 14 simulated attack scenarios
 
 These are early-stage proofs of concept, not production-ready systems. They have not been independently audited or clinically validated. Their value is in demonstrating that the problem space is tractable: technical approaches exist for problems the regulatory world has not yet named. The specific tools that ultimately fill these gaps should emerge from multi-stakeholder standards processes, not from any single project.
 
@@ -276,7 +276,7 @@ Beyond the seven unaddressed properties, five structural gaps in existing regula
 
 **Consequence:** FDA receives cybersecurity documentation that technically satisfies the requirement but fails to identify or score the most dangerous BCI-specific threats. A neural ransomware scenario scores the same as a data breach scenario because CVSS has no dimension for "biological harm" or "cognitive integrity loss."
 
-**Solution direction:** A neural impact scoring extension that adds BCI-specific dimensions to CVSS or establishes a parallel scoring system. NISS provides the reference model with five dimensions: biological impact, cognitive integrity, consent violation, reversibility, and neuroplasticity risk.
+**Solution direction:** A neural impact scoring extension that adds BCI-specific dimensions to CVSS or establishes a parallel scoring system. NISS provides the reference model with six dimensions: biological impact, cognitive reconnaissance, cognitive disruption, consent violation, reversibility, and neuroplasticity risk.
 
 **Who must act:** FDA/CDRH (guidance update to reference neural-specific scoring), FIRST (CVSS extension or companion standard), with input from BCI manufacturers and clinical researchers.
 
@@ -692,7 +692,7 @@ QIF is one early attempt to address the gaps described in this proposal. It is n
 | Component | What It Does | Validation Data | Availability |
 |-----------|-------------|----------------|--------------|
 | **TARA** | BCI threat taxonomy: 109 techniques, 15 tactics, MITRE-compatible IDs | 49 from published literature, 46 recontextualized from neuroscience, 5 chain syntheses, 6 theoretical, 3 neuroethics-formalized. Not independently peer-reviewed. | Apache 2.0, GitHub, PyPI (`qtara`) |
-| **NISS** | Neural impact scoring: 5 dimensions CVSS cannot express | All TARA techniques scored. Dimensions informed by clinical research but not clinically validated. | Apache 2.0, GitHub |
+| **NISS** | Neural impact scoring: 6 dimensions CVSS cannot express | All TARA techniques scored. Dimensions informed by clinical research but not clinically validated. | Apache 2.0, GitHub |
 | **Hourglass Model** | 11-band security architecture: N7-N1 (neural), I0 (interface), S1-S3 (synthetic) | Architectural model. Mapped against 24 commercial BCI devices and IEC 62443 zones/conduits. | Apache 2.0, GitHub |
 | **NSP** | Post-quantum BCI encryption protocol: ML-KEM + ML-DSA + AES-256-GCM-SIV | Estimated 3.25% power overhead at 40 mW in simulation. Uses NIST FIPS 203/204/205 primitives. Not tested on implantable hardware. | Apache 2.0, GitHub, Rust reference implementation |
 | **Neurowall** | Real-time neural security monitor: 3-layer defense (signal boundary, inference guard, policy agent) | Detected all 15 simulated attack scenarios in controlled testing. 5% false positive rate. Tested against BrainFlow synthetic board (16 channels). Not tested against real adversaries or in clinical settings. | Apache 2.0, GitHub, Python |
@@ -897,7 +897,7 @@ PyPI: pip install qtara
 | **ML-DSA** | Module-Lattice-Based Digital Signature Algorithm. NIST FIPS 204. Post-quantum signatures. |
 | **Neurorights** | Rights proposed by Ienca & Andorno (2017): cognitive liberty, mental privacy, mental integrity, psychological continuity. |
 | **Neurowall** | QIF's real-time neural security monitor. Three layers: signal boundary, inference guard, policy agent. |
-| **NISS** | Neural Impact Scoring System. Five neural-specific severity dimensions extending CVSS. |
+| **NISS** | Neural Impact Scoring System. Six neural-specific severity dimensions extending CVSS. |
 | **NSP** | Neural Sensory Protocol. Post-quantum encryption protocol for BCI data links. |
 | **PQC** | Post-Quantum Cryptography. Cryptographic algorithms resistant to quantum computing attacks. |
 | **Runemate** | QIF's policy engine. Domain-specific language for neural security rules. |

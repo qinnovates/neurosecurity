@@ -84,7 +84,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
 
 <PageLayout
   title="NISS Scoring"
-  description="Neural Impact Scoring System — the first CVSS v4.0 extension for brain-computer interface security."
+  description="Neural Impact Scoring System — a proposed CVSS v4.0 extension for brain-computer interface security."
   breadcrumbs={[{ label: 'NISS Scoring' }]}
   maxWidth="wide"
 >
@@ -141,7 +141,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
             When a vulnerability affects a brain, the severity score should reflect what happens to the patient — not just what happens to the device. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS rides <strong>alongside</strong> CVSS v4.0 base vectors. Every technique in the <a href="/TARA/">TARA atlas</a> carries both: how the attack works <em>and</em> what it does to the mind.
           </p>
           <p>
-            NISS serves as the technique-level scoring input to the <a href="#nsv2">Neurosecurity Score (NSv2.1)</a>, a multi-layer risk framework that aggregates NISS scores across five neurorights dimensions with physics-based feasibility gating and population-adjusted context baselines. NISS is the scoring metric; NSv2.1 is the validated risk framework.
+            NISS serves as the technique-level scoring input to the <a href="#nsv2">Neurosecurity Score (NSv2.1)</a>, a proposed multi-layer risk framework that aggregates NISS scores across four neurorights dimensions (Ienca &amp; Andorno, 2017) with physics-based feasibility gating and population-adjusted context baselines. NISS is the scoring metric; NSv2.1 is the risk framework.
           </p>
         </div>
 
@@ -454,10 +454,10 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
             NISS scores individual techniques. But a single technique score does not tell you the risk to a patient using a specific device in a specific context. That requires aggregation, feasibility gating, and population adjustment.
           </p>
           <p>
-            <strong>NISS is the scoring metric. NSv2.1 is the validated risk framework that demonstrates NISS in operational context.</strong>
+            <strong>NISS is the scoring metric. NSv2.1 is the risk framework that demonstrates NISS in operational context.</strong>
           </p>
           <p>
-            The Neurosecurity Score v2.1 (NSv2.1) consumes NISS technique scores as input and produces a device-level risk assessment across five neurorights dimensions.
+            The Neurosecurity Score v2.1 (NSv2.1) consumes NISS technique scores as input and produces a device-level risk assessment across four neurorights dimensions (Ienca &amp; Andorno, 2017).
           </p>
         </div>
 
@@ -469,9 +469,8 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
               { layer: '2', name: 'Base Neurosecurity Score', detail: 'Weighted geometric mean (CES, rho=0): NISS 0.40, DSM 0.40, CCI 0.20' },
               { layer: '3', name: 'Feasibility Gating', detail: 'ISO 31000 risk: Hazard x P_realize. Physics tiers gate speculative attacks (Tier 3 = 10% probability)' },
               { layer: '4', name: 'Per-Right Aggregation', detail: 'OWA (Yager 1988) with exponential weighting across techniques per neurorights dimension' },
-              { layer: '5', name: 'Overall Score', detail: 'Geometric mean across 5 neurorights dimensions (CL, MI, MP, PC, EA)' },
+              { layer: '5', name: 'Overall Score', detail: 'Geometric mean across 4 neurorights dimensions (CL, MI, MP, PC)' },
               { layer: '6', name: 'Population Adjustment', detail: 'Contextual Risk Baseline (CRB): multiplicative adjustment for vulnerable populations (children, elderly, ALS, autism)' },
-              { layer: '7', name: 'Equity Assessment', detail: 'System-level accessibility and affordability scoring (EA dimension)' },
             ].map(l => (
               <div class="flex gap-4 items-start">
                 <span class="shrink-0 w-7 h-7 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] flex items-center justify-center text-xs font-bold">{l.layer}</span>
@@ -485,7 +484,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
 
         <div class="glass rounded-xl p-6 mb-6">
-          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Five Neurorights Dimensions</h3>
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Four Neurorights Dimensions (Ienca &amp; Andorno, 2017)</h3>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
@@ -499,9 +498,8 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
                 {[
                   { code: 'CL', name: 'Cognitive Liberty', desc: 'Freedom from unauthorized cognitive interference or manipulation' },
                   { code: 'MI', name: 'Mental Integrity', desc: 'Protection against unauthorized alteration of neural states or processes' },
-                  { code: 'MP', name: 'Motoric Privacy', desc: 'Protection of neural data from unauthorized collection or inference' },
-                  { code: 'PC', name: 'Personal Consent', desc: 'Right to informed, meaningful consent over neural device operation' },
-                  { code: 'EA', name: 'Equity & Access', desc: 'System-level fairness in who benefits and who bears risk' },
+                  { code: 'MP', name: 'Mental Privacy', desc: 'Protection of neural data from unauthorized collection or inference' },
+                  { code: 'PC', name: 'Psychological Continuity', desc: 'Right to maintain personal identity, memory, and sense of self' },
                 ].map(r => (
                   <tr class="border-b border-[var(--color-border)]/50">
                     <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] font-semibold">{r.code}</td>

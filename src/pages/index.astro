@@ -20,8 +20,8 @@ const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
 const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
-const neurorightsSet = new Set<string>(['EA']); // Equal Access is structural, not threat-mapped
-techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
+const neurorightsSet = new Set<string>();
+techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => { if (r !== 'EA') neurorightsSet.add(r); }));
 const neurorightsCount = neurorightsSet.size;
 
 // Curated essential reading slugs (strongest posts for neuroethics audience)
@@ -41,7 +41,7 @@ const essentialPosts = essentialSlugs
 
 ---
 
-<BaseLayout title="Qinnovate — No Security Framework Existed for the Brain-Computer Interface" description="An $8 billion industry by 2032. 109 catalogued attack techniques. Zero published security frameworks. QIF is the first open framework bridging neurosecurity and neuroethics.">
+<BaseLayout title="Qinnovate — No Security Framework Existed for the Brain-Computer Interface" description="An $8 billion industry by 2032. 109 catalogued attack techniques. QIF is a proposed open framework bridging neurosecurity and neuroethics.">
   <Nav />
 
   <!-- ═══ BEAT 1: THE INCIDENT — Hybrid Hero ═══ -->
@@ -67,24 +67,24 @@ const essentialPosts = essentialSlugs
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
-        An <a href="/bci/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry by 2032</a>.* {totalThreats} attack techniques catalogued across 24 commercial devices. QIF is the first open framework bridging neurosecurity and neuroethics — from threat model to defense specification.
+        An <a href="/interface-risks/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry by 2032</a>.* {totalThreats} attack techniques catalogued across 24 commercial devices. QIF is a proposed open framework bridging neurosecurity and neuroethics — from threat model to defense specification.
       </p>
 
       <!-- Metrics -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10">
-        <a href="/neurogovernance/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-emerald-400/30 transition-all">
+        <a href="/neuroethics/rights/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-emerald-400/30 transition-all">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">{neurorightsCount}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">neurorights<br/>operationalized</p>
         </a>
-        <a href="/TARA/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all">
+        <a href="/threat-models/tara/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalThreats}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">BCI attack techniques<br/>catalogued and scored</p>
         </a>
-        <a href="/therapeutics/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-secondary)]/30 transition-all">
+        <a href="/neuroethics/therapeutics/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-secondary)]/30 transition-all">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{therapeuticCount}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic uses found<br/>in the same mechanisms</p>
         </a>
-        <a href="/psychiatric/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-tertiary)]/30 transition-all">
+        <a href="/neuroethics/clinical/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-tertiary)]/30 transition-all">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">{dsm5Count}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">clinical outcome references<br/>mapped for threat modeling</p>
         </a>
@@ -93,13 +93,13 @@ const essentialPosts = essentialSlugs
       <!-- Dual-audience CTAs -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a
-          href="/TARA/"
+          href="/threat-models/tara/"
           class="px-6 py-3 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           See the Threat Atlas
         </a>
         <a
-          href="/whitepaper/"
+          href="/research/whitepaper/"
           class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
         >
           Read the Framework
@@ -107,7 +107,7 @@ const essentialPosts = essentialSlugs
       </div>
 
       <p class="text-[10px] text-[var(--color-text-faint)] mt-4">
-        *Median estimate across <a href="/bci/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
+        *Median estimate across <a href="/interface-risks/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
       </p>
 
       <TrustBar />
@@ -130,13 +130,13 @@ const essentialPosts = essentialSlugs
       </h2>
       <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          Five neurorights have been proposed to protect your brain: Mental Privacy, Cognitive Liberty, Mental Integrity, Psychological Continuity, and Equal Access. Philosophical frameworks define what these rights mean. <strong class="text-[var(--color-text-primary)]">None specify how a BCI system would actually enforce them.</strong>
+          Four neurorights have been proposed to protect your brain: Mental Privacy, Cognitive Liberty, Mental Integrity, and Psychological Continuity (Ienca &amp; Andorno, 2017). Philosophical frameworks define what these rights mean. <strong class="text-[var(--color-text-primary)]">None specify how a BCI system would actually enforce them.</strong>
         </p>
         <p>
           The critical gap is in Mental Integrity. Current formulations protect against <em>modification</em> of neural signals — tampering, injection, disruption. But we are building systems that can inject, simulate, or reshape neural signals. A perfectly intact signal that was never generated by your brain passes every integrity check and violates everything MI is supposed to protect. <strong class="text-[var(--color-text-primary)]">Governance models must distinguish between "unaltered" and "self-originating."</strong>
         </p>
         <p>
-          That distinction requires engineering, not philosophy. It requires a metric that can verify whether a signal's statistical properties match your baseline neural signature. <strong class="text-[var(--color-text-primary)]">No framework had built that. So we did.</strong>
+          That distinction requires engineering, not philosophy. It requires a metric that can verify whether a signal's statistical properties match your baseline neural signature. <strong class="text-[var(--color-text-primary)]">We are unaware of a framework that had built that. So we did.</strong>
         </p>
       </div>
     </div>
@@ -186,7 +186,7 @@ const essentialPosts = essentialSlugs
 
     <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal reveal-stagger">
       <!-- Empirical validation -->
-      <a href="/case-studies/t0079-anc-fingerprint/" class="glass rounded-xl p-5 card-hover group text-left">
+      <a href="/threat-models/analysis/t0079-anc-fingerprint/" class="glass rounded-xl p-5 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
@@ -201,7 +201,7 @@ const essentialPosts = essentialSlugs
       </a>
 
       <!-- Dual-use discovery -->
-      <a href="/therapeutics/" class="glass rounded-xl p-5 card-hover group text-left">
+      <a href="/neuroethics/therapeutics/" class="glass rounded-xl p-5 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-emerald-400/10 flex items-center justify-center text-emerald-400">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
@@ -232,7 +232,7 @@ const essentialPosts = essentialSlugs
         </div>
         <div class="flex flex-col sm:flex-row gap-3 shrink-0">
           <a
-            href="/TARA/#diagnostic"
+            href="/threat-models/tara/#diagnostic"
             class="px-5 py-2.5 rounded-lg bg-[var(--color-accent-secondary)] text-white font-medium text-sm hover:bg-[var(--color-accent-secondary)]/90 transition-colors text-center"
           >
             Explore Diagnostic View
@@ -253,7 +253,7 @@ const essentialPosts = essentialSlugs
     <div class="text-center mb-10 reveal">
       <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4">The Framework</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">Three systems that connect what no one had connected</h2>
-      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Threats, outcomes, and rights — mapped together for the first time. Each system stands alone. Together they form a complete security posture for neurotechnology.</p>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Threats, outcomes, and rights — mapped together in a single framework. Each system stands alone. Together they form a complete security posture for neurotechnology.</p>
     </div>
     <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal">
       {PILLARS.map((pillar) => (
@@ -319,7 +319,7 @@ const essentialPosts = essentialSlugs
                 </div>
               )}
               <a
-                href={`/lab/hourglass.html#${band.id}`}
+                href={`/signal-security/hourglass/#${band.id}`}
                 class="flex items-center gap-3 py-[3px] group cursor-pointer rounded hover:bg-black/[0.03] transition-all"
                 title={band.description}
               >
@@ -344,7 +344,7 @@ const essentialPosts = essentialSlugs
     </div>
 
     <div class="text-center mt-8">
-      <a href="/lab/hourglass.html" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+      <a href="/signal-security/hourglass/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
         Explore the full interactive model &rarr;
       </a>
     </div>
@@ -352,7 +352,7 @@ const essentialPosts = essentialSlugs
 
   <!-- ═══ TOOLS — Project Runemate ═══ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <a href="/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
+    <a href="/tools/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
       <div class="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none" style="background: radial-gradient(circle, var(--color-accent-tertiary), transparent 70%);"></div>
       <div class="flex flex-col sm:flex-row sm:items-center gap-6">
         <div class="flex-1">
@@ -361,7 +361,7 @@ const essentialPosts = essentialSlugs
             Project Runemate
           </h2>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
-            A bytecode compiler that compresses BCI data 65-90%, making post-quantum encryption viable on low-power implantable devices. Protecting patients from unauthorized neural access requires encryption that fits within the power constraints of a brain implant. Runemate demonstrates this is feasible. Written in Rust. 200 KB on-chip.
+            A bytecode compiler targeting 65-90% BCI data compression (67.8% measured in simulation), making post-quantum encryption viable on low-power implantable devices. Protecting patients from unauthorized neural access requires encryption that fits within the power constraints of a brain implant. Runemate demonstrates this is feasible. Written in Rust. 200 KB on-chip.
           </p>
         </div>
         <div class="text-[var(--color-accent-tertiary)] opacity-60 group-hover:opacity-100 transition-opacity shrink-0">
@@ -381,7 +381,7 @@ const essentialPosts = essentialSlugs
     </div>
 
     <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal reveal-stagger">
-      <a href="/TARA/" class="glass rounded-xl p-6 card-hover group text-left">
+      <a href="/threat-models/tara/" class="glass rounded-xl p-6 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" /></svg>
@@ -395,7 +395,7 @@ const essentialPosts = essentialSlugs
         </p>
       </a>
 
-      <a href="/landscape/" class="glass rounded-xl p-6 card-hover group text-left">
+      <a href="/neuroethics/landscape/" class="glass rounded-xl p-6 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-[var(--color-accent-secondary)]/10 flex items-center justify-center text-[var(--color-accent-secondary)]">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21" /></svg>
@@ -432,7 +432,7 @@ const essentialPosts = essentialSlugs
         <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)]">Essential Reading</h2>
         <p class="text-sm text-[var(--color-text-muted)] mt-1">Start here to understand the research.</p>
       </div>
-      <a href="/news/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+      <a href="/open-research/writing/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
         All posts &rarr;
       </a>
     </div>
@@ -462,7 +462,7 @@ const essentialPosts = essentialSlugs
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href="/whitepaper/"
+          href="/research/whitepaper/"
           class="px-8 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           Read the Whitepaper

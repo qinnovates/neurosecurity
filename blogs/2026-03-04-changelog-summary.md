@@ -18,3 +18,7 @@ fact_check_notes: []
 ---
 
 *Auto-generated changelog summary. Review before publishing.*
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

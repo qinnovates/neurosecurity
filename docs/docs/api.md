@@ -149,7 +149,7 @@ curl https://qinnovate.com/api/tara.json
 
 **Endpoint:** `GET /api/stix.json`
 
-Returns TARA data formatted as STIX 2.1 (Structured Threat Information Expression) objects. Compatible with standard threat intelligence platforms (TIPs).
+Returns TARA data formatted as STIX 2.1 (Structured Threat Information Expression) objects. Formatted as STIX 2.1 bundle. Note: object IDs use QIF prefix format rather than RFC 4122 UUIDs; TIP import may require ID normalization.
 
 ```bash
 curl https://qinnovate.com/api/stix.json

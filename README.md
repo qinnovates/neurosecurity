@@ -31,6 +31,8 @@ Solo research, tested honestly. Full methodology and limitations at **[VALIDATIO
 
 This is early-stage research by a solo researcher. Empirical validation requires BCI hardware, IRB approval, and clinical expertise. The frameworks are published openly so research groups with those resources can test, validate, refute, or extend them. **[Reach out](mailto:kevin@qinnovate.com) if you're interested in collaborating.**
 
+> **About This Work:** The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively — for mathematical derivations, physics modeling, literature synthesis, code generation, and writing. All AI-derived claims, especially equations, engineering benchmarks, and clinical mappings, should be treated as **proposed and unvalidated** until independently verified by domain experts. The framework, threat taxonomy, and governance structure are the author's contributions. The math and physics require expert review.
+
 ---
 
 ## Table of Contents
@@ -104,7 +106,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | arXiv | Cross-post of preprint | 🔴 Blocked — pending academic partnership |
 | Graz BCI Conference | Submission for March 2026 deadline | 🔴 Blocked — pending academic partnership |
 | CVE Disclosure | Coordinated vulnerability disclosure (BCI-adjacent library) | 🟡 Response received, in progress |
-| FIRST.org CVSS SIG | NISS accepted for CVSS Resources repo; joined SIG as domain expert | 🟢 Active |
+| FIRST.org CVSS SIG | NISS proposed as CVSS v4.0 extension; outreach in progress | 🟡 In Progress |
 | Peer review / empirical validation | Requires collaborators, IRB, BCI hardware | 🔴 Blocked |
 
 ### Website
@@ -142,9 +144,10 @@ Everything Qinnovate builds traces back to five neurorights defined by Ienca & A
 | **Mental Privacy** | Neural data and mental states stay confidential | [NSP](qif-framework/nsp/) (PQ encryption of all BCI data in transit), [TARA](https://qinnovate.com/TARA/) (catalogues 109 data exfiltration vectors), [Data Policy](governance/DATA_POLICY_FAQ.md) (retention and deletion rules), [Informed Consent](governance/INFORMED_CONSENT_FRAMEWORK.md) |
 | **Mental Integrity** | Protection from unauthorized alteration of neural function | [QIF](qif-framework/) (signal coherence scoring flags anomalies), [NISS](https://qinnovate.com/scoring/) BI metric (quantifies tissue/pathway damage), [Neurowall](tools/neurowall/) (real-time anomaly detection pipeline), [Runemate](qif-framework/runemate/) (TARA validates every stimulation pattern before delivery) |
 | **Psychological Continuity** | Personal identity and sense of self remain intact | [NISS](https://qinnovate.com/scoring/) NP metric (tracks neuroplastic changes over time), [TARA](https://qinnovate.com/TARA/) dual-use mapping (bounds both attack severity and therapeutic safety), [Pediatric Considerations](governance/INFORMED_CONSENT_FRAMEWORK.md#pediatric--incapacity-considerations) (developing brains get extra protections) |
-| **Equal Access** | BCI security is not limited to those who can pay | Apache 2.0 license (all specs, code, and data are open), [Open API](https://qinnovate.com/api/tara.json) (free STIX feed, no auth), [qtara SDK](https://pypi.org/project/qtara/) (free Python package), [macshield](https://github.com/qinnovates/macshield) (free workstation hardening) |
 
-Sources: [Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)
+Sources: Ienca & Andorno (2017). [Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)
+
+> **Governance commitment:** BCI security is not limited to those who can pay. All specs, code, and data are open (Apache 2.0). Equitable access is implied by treating these four rights as universal.
 
 ---
 

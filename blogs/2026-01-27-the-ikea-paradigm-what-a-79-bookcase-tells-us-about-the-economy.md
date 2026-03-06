@@ -110,3 +110,7 @@ The options are limitless. There’s no right or wrong answer, so long as it sui
 
 What would you do?
 
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

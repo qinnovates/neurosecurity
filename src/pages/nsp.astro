@@ -228,7 +228,7 @@ import {
               <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">Power Budget</h3>
             </div>
             <p class="text-sm text-[var(--color-text-muted)]">
-              The hybrid key exchange (ECDH + ML-KEM) costs ~2 mW, but only fires at session start. Full SPHINCS+ signing costs ~10 mW but only fires at key rotation (every 30-90 days depending on tier). Steady-state crypto is AES-256-GCM-SIV on already-compressed payloads: ~0.1 mW with hardware acceleration. The pipeline order matters: compress first (3-5x reduction), then encrypt the smaller payload, then sign. Total steady-state overhead: 3.25% of a 40 mW budget.
+              The hybrid key exchange (ECDH + ML-KEM) costs ~2 mW, but only fires at session start. Full SPHINCS+ signing costs ~10 mW but only fires at key rotation (every 30-90 days depending on tier). Steady-state crypto is AES-256-GCM-SIV on already-compressed payloads: ~0.1 mW with hardware acceleration. The pipeline order matters: compress first (3-5x reduction), then encrypt the smaller payload, then sign. Total modeled steady-state overhead: 3.25% of a 40 mW budget (hardware validation pending).
             </p>
             <p class="text-xs text-[var(--color-text-faint)] mt-2 font-[family-name:var(--font-mono)]">Spec: Section 9 (Power Budget), Section 9.4 (Pipeline Order)</p>
           </div>

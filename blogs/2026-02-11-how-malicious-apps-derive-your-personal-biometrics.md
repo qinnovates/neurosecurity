@@ -141,3 +141,7 @@ They are not benign. They are dual-use. Just like every other technology in TARA
 14. Zhao, M., et al. (2018). Through-Wall Human Pose Estimation Using Radio Signals. *CVPR*.
 15. Arp, D., et al. (2017). Privacy Threats through Ultrasonic Side Channels on Mobile Devices. *IEEE EuroS&P*.
 16. Yuste, R., et al. (2017). Four Ethical Priorities for Neurotechnologies and AI. *Nature* 551, 159-163.
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*
