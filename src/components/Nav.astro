@@ -34,7 +34,6 @@ const newsLinks = [
 
 const aboutLinks = [
   { href: '/about/', label: 'About', desc: 'The researcher and the mission' },
-  { href: '/adopt/', label: 'Adopt QIF', desc: 'Implementation guides and getting started' },
   { href: '/licensing/', label: 'Licensing', desc: 'License terms and usage' },
   { href: '/governance/', label: 'Governance', desc: 'Ethics, consent, and regulatory compliance' },
 ];
@@ -43,7 +42,7 @@ const isFrameworkActive = ['/framework/', '/security/', '/glossary/'].some(p => 
 const isAtlasActive = currentPath.startsWith('/atlas/');
 const isResearchActive = currentPath.startsWith('/research/') && currentPath !== '/research/whitepaper/';
 const isNewsActive = currentPath.startsWith('/news/');
-const isAboutActive = ['/about/', '/adopt/', '/licensing/', '/governance/'].some(p => currentPath.startsWith(p));
+const isAboutActive = ['/about/', '/licensing/', '/governance/'].some(p => currentPath.startsWith(p));
 ---
 
 <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" transition:persist>
