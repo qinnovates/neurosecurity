@@ -159,7 +159,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     shortDef: 'RFC-style post-quantum wire protocol for BCI data links.',
     fullDef: 'A five-layer defense protocol securing BCI communication channels with post-quantum cryptography at 3.25% power overhead. Designed as an RFC-style specification for interoperability across BCI manufacturers.',
     relatedTerms: ['qif', 'runemate', 'post-quantum-cryptography'],
-    href: '/tools/nsp/',
+    href: '/guardrails/nsp/',
     tags: ['protocol', 'core'],
   },
   {
@@ -169,7 +169,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     shortDef: 'HTML-to-bytecode compiler achieving 65-90% compression.',
     fullDef: 'An HTML-to-Staves bytecode compiler achieving 65-90% size reduction. Makes post-quantum encryption viable on implants by compressing payloads before encryption. Runemate Forge is the compiler, Staves is the bytecode format, Scribe is the on-chip interpreter.',
     relatedTerms: ['nsp', 'staves-bytecode'],
-    href: '/tools/runemate/',
+    href: '/guardrails/runemate/',
     tags: ['component', 'core'],
   },
   {
