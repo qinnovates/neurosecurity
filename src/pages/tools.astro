@@ -152,7 +152,7 @@ import {
         <!-- How Neurowall uses NSP + Runemate -->
         <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-secondary);">
           <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">Integration:</strong> Neurowall does not build its own crypto or compression stack. L1 and L2 process raw signals on-device. All outbound data passes through <a href="/nsp/" class="text-[var(--color-accent-primary)] hover:underline">NSP</a> for post-quantum encryption and Merkle-authenticated transport. L3 policy rules are compiled by <a href="/runemate/" class="text-[var(--color-accent-primary)] hover:underline">Runemate's Forge</a>, signed with ML-DSA, and executed on-chip by the Scribe interpreter.
+            <strong class="text-[var(--color-text-primary)]">Integration:</strong> Neurowall does not build its own crypto or compression stack. L1 and L2 process raw signals on-device. All outbound data passes through <a href="/signal-security/nsp/" class="text-[var(--color-accent-primary)] hover:underline">NSP</a> for post-quantum encryption and Merkle-authenticated transport. L3 policy rules are compiled by <a href="/tools/runemate/" class="text-[var(--color-accent-primary)] hover:underline">Runemate's Forge</a>, signed with ML-DSA, and executed on-chip by the Scribe interpreter.
           </p>
         </div>
       </section>
@@ -335,7 +335,7 @@ import {
         <!-- Cognitive Liberty callout -->
         <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-tertiary);">
           <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">Cognitive Liberty:</strong> All four sovereignty attacks primarily violate Cognitive Liberty (CL) — any technique scoring Cognitive Disruption at High/Critical AND Consent Violation at Explicit/Implicit triggers a CL violation flag in the <a href="/scoring/" class="text-[var(--color-accent-primary)] hover:underline">NISS scoring system</a>. Full technique database with 109 NISS-scored attacks available in the <a href="/TARA/" class="text-[var(--color-accent-primary)] hover:underline">TARA Atlas</a>.
+            <strong class="text-[var(--color-text-primary)]">Cognitive Liberty:</strong> All four sovereignty attacks primarily violate Cognitive Liberty (CL) — any technique scoring Cognitive Disruption at High/Critical AND Consent Violation at Explicit/Implicit triggers a CL violation flag in the <a href="/threat-models/scoring/" class="text-[var(--color-accent-primary)] hover:underline">NISS scoring system</a>. Full technique database with 109 NISS-scored attacks available in the <a href="/threat-models/tara/" class="text-[var(--color-accent-primary)] hover:underline">TARA Atlas</a>.
           </p>
         </div>
       </section>
@@ -475,7 +475,7 @@ import {
           <div class="glass rounded-xl p-6">
             <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Key Properties</h3>
             <div class="space-y-2 text-sm text-[var(--color-text-muted)]">
-              <p>3.25% power overhead on 40mW budget</p>
+              <p>Modeled 3.25% power overhead on 40mW budget (hardware validation pending)</p>
               <p>Nonce-misuse resistant (safe after power loss)</p>
               <p>Merkle amortization: 3.3KB signatures reduced to 144 bytes/frame</p>
               <p>20-year key lifecycle with crypto agility</p>
@@ -483,7 +483,7 @@ import {
           </div>
         </div>
 
-        <a href="/nsp/" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent-primary)] hover:underline">
+        <a href="/signal-security/nsp/" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent-primary)] hover:underline">
           Full NSP specification
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -527,7 +527,7 @@ import {
           </p>
         </div>
 
-        <a href="/runemate/" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent-primary)] hover:underline">
+        <a href="/tools/runemate/" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent-primary)] hover:underline">
           Full Runemate specification
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

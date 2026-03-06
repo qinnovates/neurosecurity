@@ -138,3 +138,7 @@ But good science starts with someone saying: *that's weird. Let me write it down
 ---
 
 *Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

@@ -285,3 +285,7 @@ I hope this is the start of finding novel ways to fix the things we have been to
 ---
 
 *Follow the work: [Qinnovate](https://qinnovate.com) | [GitHub](https://github.com/qinnovates)*
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

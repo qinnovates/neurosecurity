@@ -1,5 +1,7 @@
 # Architectural Spec: Neurowall (Phase 1)
 
+> **Status:** Simulation only. All detection results are from synthetic EEG signals (BrainFlow Synthetic Board). No hardware prototype exists. Performance claims (TPR, FPR) are simulation-derived and require hardware validation.
+
 This document outlines the first-generation **Neurowall** architecture for non-intrusive BCI wearables (e.g., Smart Glasses, Subvocal EMG interfaces).
 
 ## Target Form Factors

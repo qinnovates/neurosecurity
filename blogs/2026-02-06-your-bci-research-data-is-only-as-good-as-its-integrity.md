@@ -212,3 +212,7 @@ More from this series coming soon. If you're doing BCI research and want to talk
 ---
 
 *Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

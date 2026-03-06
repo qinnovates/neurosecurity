@@ -21,7 +21,7 @@ order: 3
   - [Pre-Deployment Consent](#1-pre-deployment-consent)
   - [Continuous Consent Model](#2-continuous-consent-model)
   - [Understanding Requirements](#3-understanding-requirements)
-- [Consent Validation in QIF Framework](#consent-validation-in-oni-framework)
+- [Consent Validation in QIF Framework](#consent-validation-in-qif-framework)
   - [Integration with Neural Firewall (L8)](#integration-with-neural-firewall-l8)
   - [Consent as Authentication Requirement](#consent-as-authentication-requirement)
   - [Consent Revocation Rights](#consent-revocation-rights)
@@ -30,7 +30,7 @@ order: 3
   - [Automaticity and Control](#automaticity-and-control)
   - [Enhancement vs. Treatment](#enhancement-vs-treatment)
 - [Consent Documentation Requirements](#consent-documentation-requirements)
-- [Integration with QIF Modules](#integration-with-oni-modules)
+- [Integration with QIF Modules](#integration-with-qif-modules)
 - [Gaps and Future Work](#gaps-and-future-work)
 - [Pediatric & Incapacity Considerations](#pediatric--incapacity-considerations)
 - [References](#references)
@@ -231,9 +231,9 @@ Every consent record must include:
 
 | QIF Module | Consent Integration |
 |------------|---------------------|
-| `oni.firewall` | Consent state check before ACCEPT |
-| `oni.neurosecurity.anonymizer` | Consent scope defines allowlist |
-| `oni.neurosecurity.privacy_score` | Consent determines acceptable Pₛ thresholds |
+| `qif.firewall` | Consent state check before ACCEPT |
+| `qif.neurosecurity.anonymizer` | Consent scope defines allowlist |
+| `qif.neurosecurity.privacy_score` | Consent determines acceptable Pₛ thresholds |
 | `tara.nsam` | Consent violations trigger alerts |
 
 ---

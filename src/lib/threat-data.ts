@@ -427,14 +427,13 @@ export function getTechniquesByDiagCluster(cluster: DiagnosticCluster): ThreatVe
 }
 
 /** Neuroright codes */
-export type NeurorightCode = 'MP' | 'CL' | 'MI' | 'PC' | 'EA';
+export type NeurorightCode = 'MP' | 'CL' | 'MI' | 'PC';
 
 export const NEURORIGHT_LABELS: Record<NeurorightCode, string> = {
   MP: 'Mental Privacy',
   CL: 'Cognitive Liberty',
   MI: 'Mental Integrity',
   PC: 'Psychological Continuity',
-  EA: 'Equal Access',
 };
 
 /** Filter: techniques by neuroright code */
@@ -548,10 +547,10 @@ export function getTaraStats() {
 
 /** Neurorights statistics */
 export function getNeurorightStats() {
-  const RIGHTS = ['MP', 'CL', 'MI', 'PC', 'EA'] as const;
+  const RIGHTS = ['MP', 'CL', 'MI', 'PC'] as const;
   const NAMES: Record<string, string> = {
     MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity',
-    PC: 'Psychological Continuity', EA: 'Equal Access',
+    PC: 'Psychological Continuity',
   };
   const counts: Record<string, number> = {};
   for (const r of RIGHTS) counts[r] = 0;

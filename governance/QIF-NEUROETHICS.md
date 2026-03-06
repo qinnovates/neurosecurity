@@ -139,7 +139,7 @@ The quantum biometric is not just another biometric. It is a window into the qua
 - **Falls short:** Does not address quantum-level phenomena or the specific challenge of physically unclonable biometrics
 - **Gap:** Groundbreaking but still classical in its assumptions about what "neural data" means.
 
-##### 7. UNESCO Recommendation on the Ethics of Neurotechnology (2023)
+##### 7. UNESCO Recommendation on the Ethics of Neurotechnology (2025)
 
 - **Applies because:** Non-binding but influential framework for neurotechnology governance
 - **Covers:** Dignity, autonomy, privacy, equity, transparency, responsibility, sustainability

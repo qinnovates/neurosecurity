@@ -97,3 +97,7 @@ Three things need to happen before these devices scale beyond research:
 *The QIF framework, TARA threat registry, and NISS scoring system are documented in the preprint: [Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces](https://doi.org/10.5281/zenodo.18640105) (DOI: 10.5281/zenodo.18640105).*
 
 *If you work in neural prosthetics, rehabilitation engineering, or BCI security — I want to hear from you. The framework is open. The threat registry is public. The gap between "this device works" and "this device is secure" is where patients get hurt.*
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

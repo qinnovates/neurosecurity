@@ -12,9 +12,23 @@ export default defineConfig({
   site: 'https://qinnovate.com',
   publicDir: 'docs',
   redirects: {
-    '/threats/': '/TARA/',
-    '/niss/': '/scoring/',
+    '/threats/': '/threat-models/tara/',
+    '/niss/': '/threat-models/scoring/',
     '/advisory/': '/alliance/',
+
+    // 2026-03-05 Restructuring
+    '/neurogovernance/': '/neuroethics/rights/',
+    '/landscape/': '/neuroethics/landscape/',
+    '/psychiatric/': '/neuroethics/clinical/',
+    '/therapeutics/': '/neuroethics/therapeutics/',
+    '/TARA/': '/threat-models/tara/',
+    '/scoring/': '/threat-models/scoring/',
+    '/case-studies/': '/threat-models/analysis/',
+    '/security/': '/signal-security/hourglass/',
+    '/bci/': '/interface-risks/',
+    '/whitepaper/': '/research/whitepaper/',
+    '/news/': '/open-research/writing/',
+    '/lab/derivation-log/': '/open-research/derivation/',
   },
   integrations: [
     react(),

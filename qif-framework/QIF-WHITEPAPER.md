@@ -1,6 +1,6 @@
 # QIF Whitepaper v6.3.0
 
-The internet was built without security. That wasn't a mistake. It was necessary. The priority was connectivity, and it worked. But retrofitting security after the architecture was entrenched has cost trillions of dollars and decades of effort, and we're still not done.
+The internet was built without security as a primary concern. That wasn't a mistake. It was necessary. The priority was connectivity, and it worked. But security problems emerged almost immediately (the Morris worm struck in 1988, just five years after TCP/IP standardization), and retrofitting security after the architecture was entrenched has cost trillions of dollars and decades of effort, and we're still not done.
 
 BCI technology is early enough that we don't have to repeat that. If we could rebuild the internet knowing what we know now, we'd harden it from the start. The brain deserves at least that much forethought. QIF exists so that security is part of the foundation, not an afterthought bolted on after the first breach.
 
@@ -32,7 +32,7 @@ Securing a brain-computer interface is not a single problem --- it is three inte
 
 ### NSP --- Neural Sensory Protocol
 
-**The wire protocol.** A five-layer post-quantum specification that wraps every BCI data frame in ML-KEM key exchange, ML-DSA signatures, and AES-256-GCM encryption --- at 3.25% power overhead on implanted devices.
+**The wire protocol.** A five-layer post-quantum specification that wraps every BCI data frame in ML-KEM key exchange, ML-DSA signatures, and AES-256-GCM encryption --- at a modeled 3.25% power overhead on implanted devices (simulated, not hardware-validated).
 
 ### Runemate --- Project Runemate / Runemate Forge
 
@@ -46,7 +46,7 @@ Securing a brain-computer interface is not a single problem --- it is three inte
 
 **Both without Runemate** face a bandwidth wall. Post-quantum key sizes are 18--46x larger than classical equivalents. On a device with a 40 mW power budget transmitting over BLE, this overhead is the primary barrier to PQC adoption.
 
-**Together:** a fully post-quantum-secured BCI stack that is feasible today, on current hardware, at 3.25% power overhead, with net bandwidth savings for typical interface content. QIF defines *what* to protect. NSP defines *how* to protect it. Runemate makes that protection *practical*.
+**Together:** a fully post-quantum-secured BCI stack that is feasible today, on current hardware, at a modeled 3.25% power overhead (simulated, not hardware-validated), with net bandwidth savings for typical interface content. QIF defines *what* to protect. NSP defines *how* to protect it. Runemate makes that protection *practical*.
 
 > QIF --> threat model feeds --> NSP --> bandwidth unlocked by --> Runemate
 
@@ -96,7 +96,7 @@ Physics has always been part of BCI engineering. Individual physics checks exist
 
 ### 2.4 Statement of Novelty
 
-The core novelty of the Quantified Interconnection Framework is the **synthesis of three disparate research fields --- quantum biology, BCI security, and post-quantum cryptography --- into a single, unified, and empirically falsifiable architecture.** While prior work exists in each domain individually, QIF is the first framework to formally connect them.
+The core novelty of the Quantified Interconnection Framework is the **synthesis of three disparate research fields --- quantum biology, BCI security, and post-quantum cryptography --- into a single, unified, and empirically falsifiable architecture.** While prior work exists in each domain individually, QIF is, to our knowledge, a first attempt to formally connect them.
 
 Specifically, the contributions are not the individual components, but their integration:
 
@@ -636,7 +636,7 @@ QIF-T0065 -- NISS 8.7 (High) -- Status: Confirmed
 
 ### 6.6.1 The Attack
 
-An adversary can induce psychotic-spectrum experiences in a vulnerable user without writing a single line of exploit code. A recommendation algorithm profiles the user's psychological vulnerabilities through behavioral data --- watch time, engagement spikes, emotional triggers, search history --- then systematically curates content designed to destabilize cognitive function. The algorithm is both the reconnaissance tool and the delivery mechanism. No malware is installed. The platform functions exactly as designed.
+An adversary can produce effects corresponding to psychotic-spectrum symptom categories in a vulnerable user without writing a single line of exploit code. A recommendation algorithm profiles the user's psychological vulnerabilities through behavioral data --- watch time, engagement spikes, emotional triggers, search history --- then systematically curates content designed to destabilize cognitive function. The algorithm is both the reconnaissance tool and the delivery mechanism. No malware is installed. The platform functions exactly as designed.
 
 This is not hypothetical. Internal research from major social media platforms, leaked in 2021, documented that recommendation algorithms amplified content associated with eating disorders, self-harm, and suicidal ideation in adolescent users [88]. Longitudinal studies have linked algorithmic feed exposure to increased rates of anxiety, depression, and psychotic-spectrum experiences in vulnerable populations [89]. Sub-clinical psychotic experiences are common and exacerbated by environmental stressors [90], and the dopaminergic mechanisms underlying psychosis --- the system that assigns salience to stimuli --- are precisely what engagement-optimized algorithms exploit [91]. The algorithm does not need to "intend" harm --- optimization for engagement metrics produces the same outcome as a deliberate attack when the most engaging content is also the most destabilizing.
 
@@ -675,7 +675,7 @@ CVSS cannot score this attack. It has no concept of cognitive integrity, neuropl
 | CR (Cognitive Reconnaissance) | **Critical** | 10.0 | Full cognitive state reconstruction; thought patterns fully exposed |
 | CD (Cognitive Disruption) | **Critical** | 10.0 | Reality perception fundamentally altered; sense of agency compromised |
 | CV (Consent Violation) | **Implicit** | 10.0 | User never consented to psychological targeting; manipulation is covert --- ToS do not constitute informed consent |
-| RV (Reversibility) | **Partial** | 6.7 | Psychotic episodes can cause lasting cognitive changes; recovery not guaranteed |
+| RV (Reversibility) | **Partial** | 6.7 | Psychotic episodes can cause lasting cognitive changes; full recovery is not statistically guaranteed |
 | NP (Neuroplasticity) | **Structural** | 10.0 | Repeated exposure reshapes neural pathways via LTP/LTD; adolescent brains especially vulnerable |
 | **Exploitability Qualifiers** | | | |
 | AV (Attack Vector) | Network | --- | Delivered over the internet to any connected device |
@@ -701,7 +701,7 @@ This attack already works through a screen. A brain-computer interface makes it 
 
 ### 6.6.5 Implications
 
-**Intent is irrelevant to the score.** NISS produces the same 8.7 whether a nation-state deliberately weaponizes a feed to induce psychosis in a target population, or a platform negligently optimizes for engagement while ignoring psychiatric harm. This is a deliberate departure from traditional threat modeling, which assumes an adversary with intent. In BCI security, the outcome is the threat --- not the motivation behind it.
+**Intent is irrelevant to the score.** NISS produces the same 8.7 whether a nation-state deliberately weaponizes a feed to produce effects corresponding to psychotic-spectrum symptom categories in a target population, or a platform negligently optimizes for engagement while ignoring the potential for psychiatric harm. This is a deliberate departure from traditional threat modeling, which assumes an adversary with intent. In BCI security, the outcome is the threat --- not the motivation behind it.
 
 **The legal vacuum.** This attack operates in a regulatory gray area. Current frameworks for negligence and product liability have not been tested against cognitive manipulation at scale. Terms of service do not constitute informed consent for neurological targeting. QIF provides a formal language to describe the harm --- a prerequisite for future legal and regulatory frameworks that do not yet exist.
 
@@ -1131,7 +1131,7 @@ Time is the variable that constrains all of this. The devices are shipping. The 
 
 [84] Pycroft, L. et al. (2016). Brainjacking: implant security issues in invasive neuromodulation. *World Neurosurgery*, 92, 454--462. DOI: 10.1016/j.wneu.2016.05.010
 
-[85] Landau, O., Cohen, A., Gordon, S., & Nissim, N. (2020). Mind your mind: EEG-based brain-computer interfaces and their security in cyber space. *ACM Computing Surveys*, 53(1), Article 1. DOI: 10.1145/3372043
+[85] Landau, O., Puzis, R., & Nissim, N. (2020). Mind your mind: EEG-based brain-computer interfaces and their security in cyber space. *ACM Computing Surveys*, 53(1), Article 1. DOI: 10.1145/3372043
 
 [86] Lozano, A. M. et al. (2019). Deep brain stimulation: current challenges and future directions. *Nature Reviews Neurology*, 15(3), 148--160. DOI: 10.1038/s41582-018-0128-2
 

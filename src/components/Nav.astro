@@ -4,37 +4,39 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
 const currentPath = Astro.url.pathname;
 
-const researchLinks = [
-  { href: '/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification and research paper' },
-  { href: '/TARA/', label: 'TARA Atlas', desc: `${TARA_TECHNIQUES} BCI attack techniques, scored and mapped` },
-  { href: '/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring — extending CVSS for neural harm' },
-  { href: '/bci/', label: 'BCI Research', desc: 'Device dashboard, market landscape, and validation' },
-  { href: '/case-studies/', label: 'Case Studies', desc: 'Real-world threat analysis and hardware validation' },
-  { href: '/neurogovernance/', label: 'Neurorights', desc: 'Five neurorights mapped to threats and brain regions' },
-  { href: '/landscape/', label: 'Neuroethics Landscape', desc: '23 frameworks and the Principles-to-Protocol Gap' },
-  { href: '/psychiatric/', label: 'Psychiatric Risk References', desc: 'Clinical outcome references for threat modeling' },
-  { href: '/therapeutics/', label: 'Therapeutics', desc: 'Dual-use therapeutic analogs' },
-  { href: '/glossary/', label: 'Glossary', desc: 'QIF terminology reference' },
+const foundationsLinks = [
+  { href: '/neuroethics/foundations/', label: 'Foundations', desc: 'Core philosophy and why neurosecurity' },
+  { href: '/neuroethics/rights/', label: 'Neurorights', desc: 'Five neurorights mapped to threats and brain regions' },
+  { href: '/neuroethics/landscape/', label: 'Ethics Landscape', desc: '23 frameworks and the Principles-to-Protocol Gap' },
+  { href: '/neuroethics/clinical/', label: 'Clinical Risk', desc: 'Psychiatric outcome references for threat modeling' },
+  { href: '/neuroethics/therapeutics/', label: 'Therapeutics', desc: 'Dual-use therapeutic analogs' },
 ];
 
-const toolsLinks = [
-  { href: '/tools/', label: 'Tools Overview', desc: 'The QIF defense stack and how the tools connect' },
-  { href: '/explore/', label: 'Interactive Explorers', desc: 'Threat Explorer, Atlas Dashboard, and visualizations' },
-  { href: '/security/', label: 'The Hourglass', desc: 'Signal coherence and 11-band architecture' },
-  { href: '/lab/derivation-log/', label: 'Derivation Log', desc: 'Live research journal and hypothesis tracking' },
+const threatLinks = [
+  { href: '/threat-models/tara/', label: 'TARA Atlas', desc: `${TARA_TECHNIQUES} BCI attack techniques, scored and mapped` },
+  { href: '/threat-models/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring — extending CVSS for neural harm' },
+  { href: '/threat-models/analysis/', label: 'Threat Analysis', desc: 'Case studies and hardware validation' },
 ];
 
-const aboutLinks = [
-  { href: '/about/', label: 'About Kevin', desc: 'The researcher and the mission' },
+const engineeringLinks = [
+  { href: '/signal-security/hourglass/', label: 'Signal Security', desc: '11-band hourglass architecture' },
+  { href: '/interface-risks/', label: 'Interface Risks', desc: 'Device dashboard and market landscape' },
+  { href: '/tools/', label: 'Tools Overview', desc: 'The QIF defense stack' },
+  { href: '/research/validation/', label: 'Validation', desc: 'Methodology and testing results' },
+];
+
+const communityLinks = [
+  { href: '/open-research/writing/', label: 'Writing', desc: 'Field journals and research notes' },
+  { href: '/open-research/derivation/', label: 'Derivation Log', desc: 'Live research journal and hypothesis tracking' },
+  { href: '/open-research/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
   { href: '/governance/', label: 'Governance', desc: 'Ethics, consent, and regulatory compliance' },
-  { href: '/roadmap/', label: 'Roadmap', desc: 'Milestones, timeline, and version history' },
-  { href: '/news/', label: 'Writing', desc: 'Field journals, research notes, and blog posts' },
-  { href: '/licensing/', label: 'Licensing', desc: 'Open-source license and usage terms' },
+  { href: '/about/', label: 'About', desc: 'The researcher and the mission' },
 ];
 
-const isResearchActive = ['/whitepaper/', '/TARA/', '/scoring/', '/bci/', '/case-studies/', '/neurogovernance/', '/landscape/', '/psychiatric/', '/therapeutics/', '/glossary/', '/validation/'].some(p => currentPath.startsWith(p));
-const isToolsActive = ['/tools/', '/explore/', '/explorer/', '/atlas/', '/security/', '/lab/', '/nsp/', '/runemate/'].some(p => currentPath.startsWith(p));
-const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publications/', '/licensing/'].some(p => currentPath.startsWith(p));
+const isFoundationsActive = currentPath.startsWith('/neuroethics/');
+const isThreatsActive = currentPath.startsWith('/threat-models/');
+const isEngineeringActive = ['/signal-security/', '/interface-risks/', '/tools/', '/research/validation/'].some(p => currentPath.startsWith(p));
+const isCommunityActive = ['/open-research/', '/governance/', '/about/', '/licensing/'].some(p => currentPath.startsWith(p));
 ---
 
 <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" transition:persist>
@@ -50,18 +52,18 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-1">
-        <!-- Research dropdown -->
-        <div class="relative" data-dropdown="research">
+        <!-- Neuroethics dropdown -->
+        <div class="relative" data-dropdown="foundations">
           <a
-            href="/whitepaper/"
+            href="/neuroethics/foundations/"
             class:list={[
               "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isResearchActive
+              isFoundationsActive
                 ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
             ]}
           >
-            Research
+            Neuroethics
             <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
@@ -69,7 +71,7 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
           <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
             <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
               <div class="p-2">
-                {researchLinks.map((link) => (
+                {foundationsLinks.map((link) => (
                   <a
                     href={link.href}
                     class:list={[
@@ -88,26 +90,26 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
           </div>
         </div>
 
-        <!-- Tools dropdown -->
-        <div class="relative" data-dropdown="tools">
+        <!-- Threats dropdown -->
+        <div class="relative" data-dropdown="threats">
           <a
-            href="/tools/"
+            href="/threat-models/tara/"
             class:list={[
               "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isToolsActive
+              isThreatsActive
                 ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
             ]}
           >
-            Tools
+            Threats
             <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </a>
           <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden">
+            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
               <div class="p-2">
-                {toolsLinks.map((link) => (
+                {threatLinks.map((link) => (
                   <a
                     href={link.href}
                     class:list={[
@@ -126,31 +128,69 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
           </div>
         </div>
 
-        <!-- About dropdown -->
-        <div class="relative" data-dropdown="about">
+        <!-- Engineering dropdown -->
+        <div class="relative" data-dropdown="engineering">
           <a
-            href="/about/"
+            href="/signal-security/hourglass/"
             class:list={[
               "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isAboutActive
+              isEngineeringActive
                 ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
             ]}
           >
-            About
+            Engineering
             <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </a>
           <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-64 overflow-hidden">
+            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
               <div class="p-2">
-                {aboutLinks.map((link) => (
+                {engineeringLinks.map((link) => (
                   <a
                     href={link.href}
                     class:list={[
                       "block px-3 py-2.5 rounded-lg transition-colors",
-                      (link.href === '/about/' ? (currentPath === '/about/' || currentPath === '/about') : currentPath.startsWith(link.href))
+                      currentPath.startsWith(link.href)
+                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                    ]}
+                  >
+                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
+                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Community dropdown -->
+        <div class="relative" data-dropdown="community">
+          <a
+            href="/open-research/writing/"
+            class:list={[
+              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              isCommunityActive
+                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+            ]}
+          >
+            Community
+            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </a>
+          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
+            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
+              <div class="p-2">
+                {communityLinks.map((link) => (
+                  <a
+                    href={link.href}
+                    class:list={[
+                      "block px-3 py-2.5 rounded-lg transition-colors",
+                      currentPath.startsWith(link.href)
                         ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
                         : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
                     ]}
@@ -169,7 +209,7 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
       <div class="flex items-center gap-3">
         <!-- Persistent CTA (desktop) -->
         <a
-          href="/whitepaper/"
+          href="/research/whitepaper/"
           class="hidden md:inline-flex px-4 py-1.5 rounded-lg bg-[var(--color-accent-primary)] text-white text-sm font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           Read the Whitepaper
@@ -220,31 +260,31 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
       <!-- Mobile whitepaper CTA -->
       <div class="pb-2 mb-2 border-b border-[var(--color-border)]">
         <a
-          href="/whitepaper/"
+          href="/research/whitepaper/"
           class="block w-full px-4 py-2.5 rounded-lg bg-[var(--color-accent-primary)] text-white text-sm font-medium text-center hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           Read the Whitepaper
         </a>
       </div>
 
-      <!-- Mobile Research section -->
+      <!-- Mobile Foundations section -->
       <div>
         <button
-          data-mobile-toggle="research"
+          data-mobile-toggle="foundations"
           class:list={[
             "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isResearchActive
+            isFoundationsActive
               ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          Research
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="research" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          Neuroethics
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="foundations" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
-        <div data-mobile-list="research" class="hidden pl-3 space-y-0.5 mt-1">
-          {researchLinks.map((link) => (
+        <div data-mobile-list="foundations" class="hidden pl-3 space-y-0.5 mt-1">
+          {foundationsLinks.map((link) => (
             <a
               href={link.href}
               class:list={[
@@ -260,24 +300,24 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
         </div>
       </div>
 
-      <!-- Mobile Tools section -->
+      <!-- Mobile Threats section -->
       <div>
         <button
-          data-mobile-toggle="tools"
+          data-mobile-toggle="threats"
           class:list={[
             "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isToolsActive
+            isThreatsActive
               ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          Tools
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="tools" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          Threats
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="threats" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
-        <div data-mobile-list="tools" class="hidden pl-3 space-y-0.5 mt-1">
-          {toolsLinks.map((link) => (
+        <div data-mobile-list="threats" class="hidden pl-3 space-y-0.5 mt-1">
+          {threatLinks.map((link) => (
             <a
               href={link.href}
               class:list={[
@@ -293,29 +333,62 @@ const isAboutActive = ['/about/', '/governance/', '/roadmap/', '/news/', '/publi
         </div>
       </div>
 
-      <!-- Mobile About section -->
+      <!-- Mobile Engineering section -->
       <div>
         <button
-          data-mobile-toggle="about"
+          data-mobile-toggle="engineering"
           class:list={[
             "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isAboutActive
+            isEngineeringActive
               ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
           ]}
         >
-          About
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="about" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          Engineering
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="engineering" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
-        <div data-mobile-list="about" class="hidden pl-3 space-y-0.5 mt-1">
-          {aboutLinks.map((link) => (
+        <div data-mobile-list="engineering" class="hidden pl-3 space-y-0.5 mt-1">
+          {engineeringLinks.map((link) => (
             <a
               href={link.href}
               class:list={[
                 "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                (link.href === '/about/' ? (currentPath === '/about/' || currentPath === '/about') : currentPath.startsWith(link.href))
+                currentPath.startsWith(link.href)
+                  ? "text-[var(--color-accent-primary)]"
+                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mobile Community section -->
+      <div>
+        <button
+          data-mobile-toggle="community"
+          class:list={[
+            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            isCommunityActive
+              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+          ]}
+        >
+          Community
+          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="community" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div data-mobile-list="community" class="hidden pl-3 space-y-0.5 mt-1">
+          {communityLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
+                currentPath.startsWith(link.href)
                   ? "text-[var(--color-accent-primary)]"
                   : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
               ]}

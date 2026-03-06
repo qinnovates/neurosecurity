@@ -118,3 +118,7 @@ It’s only a matter of time.
 
 > *“One of the great challenges in life is knowing enough about a subject to think you’re right, but not enough about the subject to know you’re wrong”*
 
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

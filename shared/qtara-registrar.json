@@ -4,7 +4,7 @@
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
     "total_techniques": 109,
-    "total_tactics": 15,
+    "total_tactics": 16,
     "total_domains": 8,
     "by_tactic": {
       "QIF-N.IJ": 8,

@@ -18,7 +18,7 @@ const breadcrumbs = [
 
 <PageLayout
   title="Neurogovernance — Your Brain Has Rights"
-  description={`An interactive map of 5 neurorights, ${TARA_TECHNIQUES} BCI attack techniques, and the brain regions they protect. The first framework to quantify what neural security means for patients.`}
+  description={`An interactive map of 4 neurorights (Ienca & Andorno, 2017), ${TARA_TECHNIQUES} BCI attack techniques, and the brain regions they protect. A proposed framework to quantify what neural security means for patients.`}
   breadcrumbs={breadcrumbs}
   wide
 >
@@ -101,9 +101,8 @@ const breadcrumbs = [
             but a BCI that modifies cognition breaks that assumption. New rights were needed:
             <strong class="text-[var(--color-text-primary)]">mental privacy</strong>,
             <strong class="text-[var(--color-text-primary)]">cognitive liberty</strong>,
-            <strong class="text-[var(--color-text-primary)]">mental integrity</strong>,
-            <strong class="text-[var(--color-text-primary)]">psychological continuity</strong>, and
-            <strong class="text-[var(--color-text-primary)]">equal access</strong>.
+            <strong class="text-[var(--color-text-primary)]">mental integrity</strong>, and
+            <strong class="text-[var(--color-text-primary)]">psychological continuity</strong>.
             Chile enshrined them in its constitution in 2021 &mdash; the first country to do so.
           </p>
           <p class="text-[10px] text-[var(--color-text-faint)]">
@@ -178,9 +177,9 @@ const breadcrumbs = [
             </tr>
             <tr>
               <td class="py-2.5 pr-3 font-medium text-[var(--color-text-primary)]">Justice</td>
-              <td class="py-2.5 pr-3">Equal Access</td>
+              <td class="py-2.5 pr-3">Equitable access (governance principle)</td>
               <td class="py-2.5 pr-3">Open-source framework, Apache 2.0</td>
-              <td class="py-2.5">BCI safety cannot be proprietary. Patients deserve equitable protection</td>
+              <td class="py-2.5">BCI safety cannot be proprietary. Equitable access is a governance commitment, not a separate neuroright &mdash; it is implied by treating the four rights as universal</td>
             </tr>
           </tbody>
         </table>
@@ -193,7 +192,7 @@ const breadcrumbs = [
         The Institutional Landscape
       </h3>
       <p class="text-xs text-[var(--color-text-muted)] text-center mb-6">
-        23 frameworks from 12+ institutions worldwide converge on the same five themes.
+        23 frameworks from 12+ institutions worldwide converge on the same four themes.
         Every one answers <strong class="text-[var(--color-text-primary)]">why</strong> or
         <strong class="text-[var(--color-text-primary)]">what</strong>.
         None answer <strong class="text-[var(--color-text-primary)]">how</strong>.
@@ -244,7 +243,7 @@ const breadcrumbs = [
             The Principles-to-Protocol Gap
           </p>
           <p class="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
-            46 years of neuroethics. 23 frameworks. 12 institutions. 5 universal principles. Zero technical security specifications.
+            47 years of neuroethics. 23 frameworks. 12 institutions. 5 universal principles. Zero technical security specifications.
             Like having fire safety principles without fire codes, sprinkler specs, or building inspectors.
             <a href="/landscape/" class="text-[var(--color-accent-primary)] hover:underline">See the full landscape survey</a>.
           </p>
@@ -258,14 +257,14 @@ const breadcrumbs = [
     <div class="flex items-center gap-4 mb-8">
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
       <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
-        The 5 Neurorights
+        The 4 Neurorights
       </h2>
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
     </div>
 
     <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-6">
-      Four rights from Ienca &amp; Andorno (2017), plus Equal Access from Yuste et al. (2017).
-      QIF extends two existing rights &mdash; Mental Privacy and Mental Integrity &mdash; with engineering-level depth
+      Four rights from Ienca &amp; Andorno (2017): Mental Privacy, Cognitive Liberty, Mental Integrity, and Psychological Continuity.
+      QIF operationalizes two of these &mdash; Mental Privacy and Mental Integrity &mdash; with engineering-level specifications
       derived from {data.stats.totalThreats} attack techniques.
     </p>
 
@@ -554,7 +553,7 @@ const breadcrumbs = [
         <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
           <strong class="text-[var(--color-text-primary)]">No single organization</strong> currently bridges
           neurotechnology security and neuroethics governance. Security frameworks lack neural endpoints.
-          Neuroethics frameworks lack technical controls. QIF provides the first integrated framework.
+          Neuroethics frameworks lack technical controls. QIF proposes an integrated framework bridging both.
         </p>
       </div>
 
@@ -698,7 +697,7 @@ const breadcrumbs = [
           <div class="rounded-lg p-3 border border-[var(--color-border)]/30 bg-[var(--color-bg-secondary)]/50">
             <p class="text-[10px] font-bold text-[var(--color-text-faint)] uppercase tracking-wider mb-1">Exists</p>
             <p class="text-xs font-medium text-[var(--color-text-primary)]">MITRE ATT&CK</p>
-            <p class="text-[10px] text-[var(--color-text-muted)]">594 techniques across 14 enterprise tactics. The gold standard for IT threat modeling.</p>
+            <p class="text-[10px] text-[var(--color-text-muted)]">Hundreds of techniques across 14 enterprise tactics. The gold standard for IT threat modeling.</p>
           </div>
           <svg class="w-4 h-4 text-[var(--color-text-faint)] hidden sm:block shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
           <div class="rounded-lg p-3 border border-[var(--color-status-danger)]/30 bg-[var(--color-status-danger)]/5">
@@ -761,7 +760,7 @@ const breadcrumbs = [
           <div class="rounded-lg p-3 border border-[var(--color-border)]/30 bg-[var(--color-bg-secondary)]/50">
             <p class="text-[10px] font-bold text-[var(--color-text-faint)] uppercase tracking-wider mb-1">Exists</p>
             <p class="text-xs font-medium text-[var(--color-text-primary)]">Ienca &amp; Andorno Neurorights</p>
-            <p class="text-[10px] text-[var(--color-text-muted)]">Four rights (MP, CL, MI, PC) plus Equal Access. Philosophical foundation for neural governance.</p>
+            <p class="text-[10px] text-[var(--color-text-muted)]">Four rights: MP, CL, MI, PC (Ienca &amp; Andorno, 2017). Philosophical foundation for neural governance.</p>
           </div>
           <svg class="w-4 h-4 text-[var(--color-text-faint)] hidden sm:block shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
           <div class="rounded-lg p-3 border border-[var(--color-status-danger)]/30 bg-[var(--color-status-danger)]/5">

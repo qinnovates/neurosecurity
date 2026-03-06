@@ -272,3 +272,6 @@ The coherence metric is one piece of a larger framework I’ve been developing. 
 ---
 
 [Your Brain Has a Spam Filter. Can We Reverse-Engineer It?](https://cybersecuritywriteups.com/your-brain-has-a-spam-filter-can-we-reverse-engineer-it-799da714238e) was originally published in [Cyber Security Write-ups](https://cybersecuritywriteups.com) on Medium, where people are continuing the conversation by highlighting and responding to this story.
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

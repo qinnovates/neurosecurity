@@ -78,7 +78,7 @@ Everything I just described — subvocal speech decoding, cognitive state detect
 
 Here is the thing that keeps me up: subvocalization attacks are particularly insidious because the victim does not know they are happening. You are not typing on a keyboard that can be keylogged. You are not speaking words that can be overheard. You are thinking — and the attacker is decoding the faint muscular echoes of those thoughts. There is no behavioral indicator. No popup. No log entry. Just silent exfiltration of your inner voice.
 
-And this is not science fiction. The accuracy numbers are already there. MIT hit 92%. NASA hit 99%. Apple just spent $2 billion acquiring the company that can do it with infrared light from an earbud.
+And this is not science fiction. The accuracy numbers are already there. MIT hit 92%. NASA hit 99%. Apple reportedly spent ~$1.5-2 billion acquiring the company that can do it with infrared light from an earbud ([TechCrunch, Jan 2026](https://techcrunch.com/2026/01/29/apple-buys-israeli-startup-q-ai-as-the-ai-race-heats-up/)).
 
 Who wants eavesdropping to happen to their mind? Nobody. But the attack surface is growing with every new neural sensing device that ships without post-quantum encryption, without signal integrity validation, without the kind of security architecture that this data demands.
 

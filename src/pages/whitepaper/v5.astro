@@ -122,7 +122,7 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
             <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">NSP</h3>
             <p class="text-xs text-[var(--color-text-faint)] mb-3">Neural Sensory Protocol</p>
             <p class="text-sm text-[var(--color-text-muted)]">
-              <strong>The wire protocol.</strong> A five-layer post-quantum specification that wraps every BCI data frame in ML-KEM key exchange, ML-DSA signatures, and AES-256-GCM encryption &mdash; at 3.25% power overhead on implanted devices.
+              <strong>The wire protocol.</strong> A five-layer post-quantum specification that wraps every BCI data frame in ML-KEM key exchange, ML-DSA signatures, and AES-256-GCM encryption &mdash; at a modeled 3.25% power overhead on implanted devices (hardware validation pending).
             </p>
             <p class="text-xs text-[var(--color-text-faint)] mt-3"><a href="#nsp" class="text-[var(--color-accent-primary)]">&rarr; Section 7</a></p>
           </div>
@@ -151,7 +151,7 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
               <strong class="text-[var(--color-text-primary)]">Both without Runemate</strong> face a bandwidth wall. Post-quantum key sizes are 18&ndash;46&times; larger than classical equivalents. On a device with a 40 mW power budget transmitting over BLE, this overhead is the primary barrier to PQC adoption.
             </p>
             <p class="pt-2 border-t border-[var(--color-border)]">
-              <strong class="text-[var(--color-text-primary)]">Together:</strong> a fully post-quantum-secured BCI stack that is feasible today, on current hardware, at 3.25% power overhead, with net bandwidth savings for typical interface content. QIF defines <em>what</em> to protect. NSP defines <em>how</em> to protect it. Runemate makes that protection <em>practical</em>.
+              <strong class="text-[var(--color-text-primary)]">Together:</strong> a fully post-quantum-secured BCI stack that is feasible today, on current hardware, at a modeled 3.25% power overhead, with net bandwidth savings for typical interface content. QIF defines <em>what</em> to protect. NSP defines <em>how</em> to protect it. Runemate makes that protection <em>practical</em>.
             </p>
           </div>
         </div>
@@ -218,7 +218,7 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
             BCI electrode implantation <em>physically breaches</em> both layers, creating localized BBB disruption, immune cascades, glial scarring, and chronic neuronal loss <a href="#ref-82">[82]</a>. The classical physics of what this containment protects was formalized by Hodgkin and Huxley (1952) <a href="#ref-73">[73]</a>, whose conductance model treats ion channels as deterministic gates &mdash; effective, but incomplete at the nanoscale where quantum tunneling permits ion current through classically &ldquo;closed&rdquo; channels. Any containment architecture for BCIs must account for both classical and quantum-scale signal propagation.
           </p>
           <p>
-            QIF is, at its foundation, containment architecture for the electrode-tissue interface &mdash; the first proposed engineered boundary designed to attenuate harmful signals below a neural damage threshold while preserving the functional signaling the interface exists to measure. The 11-band hourglass is the architecture of that boundary. The QI equation is its measurement. NSP is the protocol that enforces it.
+            QIF is, at its foundation, containment architecture for the electrode-tissue interface &mdash; a proposed engineered boundary designed to attenuate harmful signals below a neural damage threshold while preserving the functional signaling the interface exists to measure. The 11-band hourglass is the architecture of that boundary. The QI equation is its measurement. NSP is the protocol that enforces it.
           </p>
         </div>
         </section>
@@ -255,7 +255,7 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">2.4 Statement of Novelty</h3>
         <div class="prose mb-8">
           <p>
-            The core novelty of the Quantified Interconnection Framework is the <strong>synthesis of three disparate research fields &mdash; quantum biology, BCI security, and post-quantum cryptography &mdash; into a single, unified, and empirically falsifiable architecture.</strong> While prior work exists in each domain individually, QIF is the first framework to formally connect them.
+            The core novelty of the Quantified Interconnection Framework is the <strong>synthesis of three disparate research fields &mdash; quantum biology, BCI security, and post-quantum cryptography &mdash; into a single, unified, and empirically falsifiable architecture.</strong> While prior work exists in each domain individually, we are unaware of another framework that formally connects them.
           </p>
           <p>
             Specifically, the contributions are not the individual components, but their integration:
@@ -263,10 +263,10 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
           <ul>
             <li><strong>From Physics to Protocol.</strong> QIF provides a continuous architectural path from quantum-scale phenomena at the electrode-tissue boundary (ion channel tunneling, decoherence dynamics) to a post-quantum cryptographic wire protocol (NSP). We are unaware of another framework that bridges this physical-to-digital gap.</li>
             <li><strong>A Unified Metric.</strong> The QI equation (QI = e<sup>&minus;S</sup>) provides a single mathematical object combining classical signal integrity with hypothesized quantum terms. It makes security a measurable, physics-based quantity at the neural interface itself, rather than a property of the downstream digital system alone.</li>
-            <li><strong>Mechanism-First Taxonomy.</strong> The TARA Taxonomy and TARA atlas are the first threat classification systems designed for the unique dual-use nature of neural interfaces, where attack vectors and therapeutic mechanisms share the same physics.</li>
+            <li><strong>Mechanism-First Taxonomy.</strong> The TARA Taxonomy and TARA atlas are threat classification systems designed for the unique dual-use nature of neural interfaces, where attack vectors and therapeutic mechanisms share the same physics.</li>
           </ul>
           <p>
-            Previous BCI security frameworks have treated the brain as a classical data source. QIF rejects this premise and builds a new architecture from the physical reality of the neural-synthetic boundary. This synthesis creates a new paradigm for neurosecurity engineering.
+            Previous BCI security frameworks have largely treated the brain as a classical data source. QIF takes a different approach, building architecture from the physical reality of the neural-synthetic boundary. This synthesis proposes a new approach to neurosecurity engineering.
           </p>
         </div>
 
@@ -295,7 +295,7 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
             Denning, Matsuoka and Kohno (2009) published the foundational paper &ldquo;Neurosecurity: Security and Privacy for Neural Devices&rdquo; in <em>Neurosurgical Focus</em>, coining the term &ldquo;neurosecurity&rdquo; and establishing BCI security as a formal research discipline <a href="#ref-83">[83]</a>. Martinovic et al. (2012) provided the first experimental demonstration, showing that commercial EEG-based BCIs could be exploited as side-channel attack vectors to extract private information from involuntary brain responses <a href="#ref-51">[51]</a>. Pycroft et al. (2016) coined &ldquo;brainjacking&rdquo; and enumerated 9 attack techniques specific to implanted neurostimulators <a href="#ref-84">[84]</a>. Bonaci et al. (2014) showed that subliminal stimuli embedded in BCI applications could extract private information without the user&rsquo;s awareness <a href="#ref-52">[52]</a>. Landau, Puzis and Nissim (2020) mapped attacks across BCI and communication layers in <em>ACM Computing Surveys</em> <a href="#ref-85">[85]</a>. Frank et al. (2017) provided the first systematic threat taxonomy for BCI systems <a href="#ref-53">[53]</a>. Bernal et al. (2022) built the most comprehensive taxonomy to date, cataloging BCI security vulnerabilities across wireless protocols, firmware, and signal processing pipelines <a href="#ref-54">[54]</a>.
           </p>
           <p>
-            This body of work established BCI security as a legitimate research area. However, the existing literature exhibits three gaps. First, no unified taxonomy organizes BCI threats the way MITRE ATT&amp;CK organizes traditional cybersecurity threats &mdash; techniques remain scattered across domain-specific papers. Second, none address quantum-scale phenomena at the electrode-tissue boundary. Third, none map the therapeutic dimension: the observation that many attack mechanisms share the same physics as established medical therapies. QIF addresses all three gaps. Spectral analysis &mdash; specifically the Fourier transform and its derivatives &mdash; is already foundational in network intrusion detection, side-channel analysis, and adversarial ML; QIF extends this paradigm to the neural-synthetic boundary, where frequency-domain decomposition becomes a security primitive (Section 5.4).
+            This body of work established BCI security as a legitimate research area. However, the existing literature exhibits three gaps. First, we are unaware of a unified taxonomy that organizes BCI threats the way MITRE ATT&amp;CK organizes traditional cybersecurity threats &mdash; techniques remain scattered across domain-specific papers. Second, to our knowledge none address quantum-scale phenomena at the electrode-tissue boundary. Third, none we reviewed map the therapeutic dimension: the observation that many attack mechanisms share the same physics as established medical therapies. QIF addresses all three gaps. Spectral analysis &mdash; specifically the Fourier transform and its derivatives &mdash; is already foundational in network intrusion detection, side-channel analysis, and adversarial ML; QIF extends this paradigm to the neural-synthetic boundary, where frequency-domain decomposition becomes a security primitive (Section 5.4).
           </p>
         </div>
 
@@ -874,7 +874,7 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
             Existing threat taxonomies (CAPEC, CWE) were designed for traditional IT systems. They classify attacks by what happens to <em>software and networks</em>. Brain-computer interfaces require a taxonomy that classifies attacks by what happens to <em>neural tissue, cognition, and human identity</em>. This is a fundamentally different attack surface.
           </p>
           <p>
-            The TARA Taxonomy, developed by Qinnovate, addresses this gap. It classifies attacks by the anatomical or functional <em>locus</em> where the attack operates &mdash; neural, cognitive, physiological, data, device, model, energy, or sensor domain. The taxonomy was derived from an analysis of all {totalTechniques} known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is the first threat classification system purpose-built for neural interfaces.
+            The TARA Taxonomy, developed by Qinnovate, addresses this gap. It classifies attacks by the anatomical or functional <em>locus</em> where the attack operates &mdash; neural, cognitive, physiological, data, device, model, energy, or sensor domain. The taxonomy was derived from an analysis of all {totalTechniques} known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. To our knowledge, it is a first threat classification system purpose-built for neural interfaces.
           </p>
         </div>
 
@@ -1009,7 +1009,7 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
       <!-- 6.5 NISS Scoring -->
       <section id="niss" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">6.5 NISS v1.1 &mdash; Neural Impact Scoring System</h2>
-        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-6">First CVSS v4.0 extension for neural security &ensp;|&ensp; {THREAT_VECTORS.length} techniques mapped to CVSS v4.0</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-6">A proposed CVSS v4.0 extension for neural security &ensp;|&ensp; {THREAT_VECTORS.length} techniques mapped to CVSS v4.0</p>
 
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-10 mb-4">6.5.1 Why Not CVSS?</h3>
         <div class="prose mb-8">
@@ -1025,10 +1025,10 @@ const pinsCount = THREAT_VECTORS.filter((t: any) => t.niss?.pins === true).lengt
             <li><strong>Neuroplasticity effects</strong> &mdash; can repeated exposure cause lasting changes to neural pathways?</li>
           </ul>
           <p>
-            NISS v1.1, developed by Qinnovate as the first CVSS v4.0 extension for neural security (following FIRST.org&rsquo;s extension framework, User Guide &sect;3.11), retains the 0&ndash;10 scoring scale familiar from CVSS but adds <strong>six BCI-native impact dimensions</strong> (Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Consent Violation, Reversibility, Neuroplasticity). NISS uses equal-weight default scoring with optional context profiles for deployment-specific prioritization.
+            NISS v1.1, developed by Qinnovate as a proposed CVSS v4.0 extension for neural security (following FIRST.org&rsquo;s extension framework, User Guide &sect;3.11), retains the 0&ndash;10 scoring scale familiar from CVSS but adds <strong>six BCI-native impact dimensions</strong> (Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Consent Violation, Reversibility, Neuroplasticity). NISS uses equal-weight default scoring with optional context profiles for deployment-specific prioritization.
           </p>
           <p>
-            Qinnovate&rsquo;s complete mapping of all {THREAT_VECTORS.length} TARA techniques to CVSS v4.0 base vectors empirically demonstrates that <strong>94.4% of BCI threat techniques cannot be fully scored by CVSS v4.0 alone</strong>, with 73.2% requiring metrics that exist only in NISS. This mapping represents the first systematic application of CVSS v4.0 and MITRE ATT&amp;CK-style technique classification to brain-computer interface security.
+            Qinnovate&rsquo;s complete mapping of all {THREAT_VECTORS.length} TARA techniques to CVSS v4.0 base vectors shows that <strong>94.4% of BCI threat techniques cannot be fully scored by CVSS v4.0 alone</strong>, with 73.2% requiring metrics that exist only in NISS. To our knowledge, this represents a first systematic application of CVSS v4.0 and MITRE ATT&amp;CK-style technique classification to brain-computer interface security.
           </p>
         </div>
 

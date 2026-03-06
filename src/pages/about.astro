@@ -23,6 +23,7 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
             <li><a href="#why-neuroethics" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Why Neuroethics</a></li>
             <li><a href="#what-i-built" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">What I Built</a></li>
             <li><a href="#the-hourglass" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">The Hourglass</a></li>
+            <li><a href="#about-this-work" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">About This Work</a></li>
             <li><a href="#how-ai-was-used" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">How AI Was Used</a></li>
             <li><a href="#what-comes-next" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">What Comes Next</a></li>
             <li><a href="#publications" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Publications</a></li>
@@ -71,7 +72,7 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
         This dual-use reality means BCI security is not an engineering problem. <strong>It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build governance before the harm, or after.
       </p>
       <p>
-        <strong>IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This atlas aims to fill that gap. Open source. Open data. Ready for peer review.
+        <strong>IEEE's BMI standards roadmap (<a href="https://brain.ieee.org/publications/ieee-brain-white-paper/" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">IEEE Brain Initiative, 2020</a>) identifies BCI-specific security standards as an open standardization gap.</strong> This atlas aims to fill that gap. Open source. Open data. Ready for peer review.
       </p>
 
       <h2 id="why-neuroethics">Why Neuroethics</h2>
@@ -90,7 +91,7 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
         I catalogued every known BCI attack technique I could find: 60 at first, merged from three inventories. Then I asked: <em>what do computers and neurons actually have in common?</em> The answer was physics. Signals operating at different scales, from electromagnetic fields up through cortical oscillations. That became QIF's layered architecture.
       </p>
       <p>
-        When I mapped those techniques across the frequency bands, gaps appeared everywhere. The catalogue grew to 103. I traced each technique through neural pathways, cognitive functions, and psychiatric outcomes. CVSS wasn't built for this. It can't express whether damage is reversible or whether the patient can detect the violation. So I designed NISS for neural harm.
+        When I mapped those techniques across the frequency bands, gaps appeared everywhere. The catalogue grew to 109. I traced each technique through neural pathways, cognitive functions, and psychiatric outcomes. CVSS wasn't built for this. It can't express whether damage is reversible or whether the patient can detect the violation. So I designed NISS for neural harm.
       </p>
       <p>
         <strong>78 of those 109 techniques have direct therapeutic counterparts.</strong> The same stimulation that causes involuntary motor activation as a side effect treats Parkinson's therapeutically. The boundary between risk and treatment is not the mechanism. It is consent, dosage, and oversight. That insight is what convinced me that BCI safety is fundamentally a governance problem, not just an engineering one.
@@ -98,18 +99,31 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 
       <h2 id="the-hourglass">The Hourglass</h2>
       <p>
-        The framework is an 11-band, 3-zone architecture with the Neural Interface (I0) at its waist. Biology above. Silicon below. The <a href="/TARA/">TARA Atlas</a> maps 109 techniques across this hierarchy, each scored and traced to clinical outcomes through the Neural Impact Chain.
+        The framework is an 11-band, 3-zone architecture with the Neural Interface (I0) at its waist. Biology above. Silicon below. The <a href="/threat-models/tara/">TARA Atlas</a> maps 109 techniques across this hierarchy, each scored and traced to clinical outcomes through the Neural Impact Chain.
       </p>
       <p>
         I was inspired by Francis Preston Venable's <em>The Development of the Periodic Law</em> (1896), found in a bookstore in Istanbul. It documented how the periodic table went through dozens of visual representations before arriving at the grid we know today. Mendeleev didn't just organize what was known. He left gaps for what wasn't. Those gaps predicted elements that were later discovered. QIF follows the same principle: organizing what we know, highlighting what we don't, evolving as discovery fills the gaps.
       </p>
+
+      <h2 id="about-this-work">About This Work</h2>
+      <div class="glass rounded-xl p-5 sm:p-6 my-4 not-prose" style="border-left: 4px solid var(--color-status-warning);">
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+          <strong class="text-[var(--color-text-primary)]">Transparency notice.</strong> I am not a mathematician, physicist, or neuroscientist. I am a security engineer with ~15 years of IT and security infrastructure experience who recognized that brain-computer interfaces have no published security framework and decided to build one.
+        </p>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+          AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively throughout this project: for mathematical derivations, physics modeling, literature synthesis, code generation, and writing. Every AI-derived claim — especially equations, engineering benchmarks, and clinical mappings — should be treated as <strong>proposed and unvalidated</strong> until independently verified by domain experts.
+        </p>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-0">
+          What I bring is the security architecture, threat modeling methodology, and the question that started it all: <em>what happens to the person when their neural interface is compromised?</em> The framework, threat taxonomy, and governance structure are my contributions. The math and physics require expert review. This work is offered in good faith as a starting point for that review.
+        </p>
+      </div>
 
       <h2 id="how-ai-was-used">How AI Was Used</h2>
       <p>
         AI (predominantly Claude, alongside Gemini and ChatGPT) helped me lay out ideas, validate research, and tie together pieces I mapped out. The architecture, scoring, clinical mappings, and cross-domain connections are mine. AI helped get the work out of my head and into a form others can evaluate.
       </p>
       <p>
-        The <a href="https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md">Transparency Statement</a> documents every AI interaction. The <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md">Derivation Log</a> traces 79 entries of human decision-making so any reviewer can follow the reasoning and challenge it.
+        The <a href="https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md">Transparency Statement</a> documents every AI interaction. The <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md">Derivation Log</a> traces 93 entries of human decision-making so any reviewer can follow the reasoning and challenge it.
       </p>
 
       <h2 id="what-comes-next">What Comes Next</h2>
@@ -164,15 +178,15 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 
       <div class="glass rounded-xl p-6 my-8 not-prose">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-          <a href="/whitepaper/" class="group">
+          <a href="/research/whitepaper/" class="group">
             <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)] group-hover:scale-110 transition-transform">{STATS.frameworkVersion}</div>
             <div class="text-xs text-[var(--color-text-faint)] mt-1 group-hover:text-[var(--color-accent-primary)] transition-colors">Framework</div>
           </a>
-          <a href="/news/" class="group">
+          <a href="/open-research/writing/" class="group">
             <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)] group-hover:scale-110 transition-transform">{STATS.publications}</div>
             <div class="text-xs text-[var(--color-text-faint)] mt-1 group-hover:text-[var(--color-accent-secondary)] transition-colors">Publications</div>
           </a>
-          <a href="/framework/" class="group">
+          <a href="/signal-security/hourglass/" class="group">
             <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-status-safe)] group-hover:scale-110 transition-transform">{QIF_BANDS}</div>
             <div class="text-xs text-[var(--color-text-faint)] mt-1 group-hover:text-[var(--color-status-safe)] transition-colors">Security Bands</div>
           </a>

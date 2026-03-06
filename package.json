@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.0.0",
   "scripts": {
-    "prebuild": "mkdir -p docs/data docs/papers && cp shared/qtara-registrar.json docs/data/qtara-registrar.json && cp shared/derivation-timeline.json docs/data/derivation-timeline.json && cp shared/validation-registry.json docs/data/validation-registry.json && [ -f paper/main.pdf ] && cp paper/main.pdf docs/papers/qif-bci-security-2026.pdf || true",
+    "prebuild": "mkdir -p docs/data docs/papers && cp shared/qtara-registrar.json docs/data/qtara-registrar.json && cp shared/derivation-timeline.json docs/data/derivation-timeline.json && cp shared/validation-registry.json docs/data/validation-registry.json && cp shared/research-registry.json docs/data/research-registry.json && [ -f paper/main.pdf ] && cp paper/main.pdf docs/papers/qif-bci-security-2026.pdf || true",
     "dev": "npm run prebuild && astro dev",
     "build": "npm run prebuild && astro build",
     "preview": "astro preview",
@@ -17,7 +17,9 @@
     "verify:blogs": "python3 scripts/verify/audit_blog_claims.py",
     "verify:crossrefs": "python3 scripts/verify/verify_crossrefs.py",
     "generate:ethics": "npx tsx scripts/generate-ethics-md.ts",
-    "changelog": "node scripts/changelog-update.mjs"
+    "changelog": "node scripts/changelog-update.mjs",
+    "citations": "node scripts/generate-citations.mjs",
+    "citations:check": "node scripts/generate-citations.mjs --check"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

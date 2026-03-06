@@ -193,3 +193,7 @@ QIF is a neurotech framework born from security — it maps the brain's architec
 - Lennie, P. (2003). The cost of cortical computation. *Current Biology*, 13(6), 493-497.
 - Levy, W. B., & Calvert, V. G. (2021). Communication consumes 35 times more energy than computation in the human cortex, but both costs are needed to predict synapse number. *PNAS*, 118(18). [doi:10.1073/pnas.2008173118](https://doi.org/10.1073/pnas.2008173118)
 - Sherman, S. M., & Guillery, R. W. (2006). *Exploring the Thalamus and Its Role in Cortical Function*. MIT Press.
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

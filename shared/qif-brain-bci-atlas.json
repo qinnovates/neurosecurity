@@ -3,7 +3,7 @@
     "title": "QIF Brain-BCI Unified Atlas",
     "version": "1.2.0",
     "created": "2026-02-18",
-    "description": "Comprehensive machine-readable atlas unifying brain regions (38 structures across QIF 7-1-3 hourglass), BCI hardware (24 devices), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
+    "description": "Comprehensive machine-readable atlas unifying brain regions (37 structures across QIF 7-1-3 hourglass), BCI hardware (24 devices), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
     "qif_version": "v4.0 Hourglass (7-1-3)",
     "primary_neuroanatomical_source": "Kandel ER, et al. Principles of Neural Science. 6th ed. McGraw Hill, 2021",
     "license": "CC-BY-4.0",
@@ -1315,7 +1315,7 @@
       "key": "kandel_2021",
       "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA. Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
       "type": "textbook",
-      "relevance": "Primary source for QIF 7-band neuroanatomical hierarchy and 38 brain region assignments."
+      "relevance": "Primary source for QIF 7-band neuroanatomical hierarchy and 37 brain region assignments."
     },
     {
       "key": "mendez_bertolo_2016",

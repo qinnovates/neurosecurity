@@ -203,3 +203,7 @@ The TARA registry, QIF framework, and all scoring methodologies are open at [qin
 6. Yuste, R., et al. (2017). Four Ethical Priorities for Neurotechnologies and AI. *Nature* 551, 159–163.
 7. Meta CTRL-labs acquisition (2019). EMG wristband technology. Neural Band shipped 2025.
 8. Qi, K. L. (2026). QIF: Quantified Interconnection Framework for BCI Security. *Zenodo preprint*. [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)
+
+---
+
+*Written with AI assistance (Claude). All claims verified by the author.*

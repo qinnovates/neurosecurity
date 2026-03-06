@@ -7,13 +7,13 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-03-05",
+    "as_of": "2026-03-04",
     "threat_techniques": 109,
     "bci_devices": 24,
     "brain_regions": 37,
     "physics_constraints": 13,
     "hourglass_bands": 11,
-    "tara_tactics": 13,
+    "tara_tactics": 16,
     "neurorights_mapped": 5,
     "dsm5_diagnoses_mapped": 68,
     "physics_constants_verified": 14,
@@ -26,7 +26,7 @@
     "neurowall_version": "v0.8",
     "blog_posts": 59,
     "cross_ai_validations": 9,
-    "research_sources": 279
+    "research_sources": 309
   },
   "milestones": [
     {
@@ -281,7 +281,7 @@
       "date": "2026-02-18",
       "type": "milestone",
       "title": "NSP Protocol Spec v0.5 Finalized",
-      "description": "Protocol core and handshake complete. 5-layer defense stack, 3 device tiers, power budget validated at 3.25% of 40 mW."
+      "description": "Protocol core and handshake complete. 5-layer defense stack, 3 device tiers, power budget modeled at 3.25% of 40 mW (hardware validation pending)."
     },
     {
       "date": "2026-02-21",
@@ -347,7 +347,7 @@
       "description": "All 109 techniques tagged with origin provenance (literature, qif_recontextualized, qif_chain_synthesis, qif_theoretical, neuroethics_formalized). Original authors credited. 6 new techniques added (T0104-T0109): 4 from Murcia/Lopez Bernal taxonomy gap, 1 neuromorphic mimicry, 1 data alignment exploitation. 24 new research sources added (165 to 193).",
       "stats_snapshot": {
         "threat_techniques": 109,
-        "research_sources": 255,
+        "research_sources": 277,
         "tara_version": "v1.7"
       }
     },

@@ -2,8 +2,1057 @@
   "metadata": {
     "version": "1.0",
     "lastUpdated": "2026-03-05",
-    "description": "Unified registry of researchers, institutions, standards, and legislation relevant to QIF neurosecurity research. Cross-references QIF-RESEARCH-SOURCES.md IDs and references.bib keys.",
+    "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md.",
     "totalEntities": 79
+  },
+  "explorer": [
+    {
+      "name": "Columbia University",
+      "subtitle": "NeuroRights Foundation",
+      "detail": "Rafael Yuste",
+      "contribution": "Five neurorights, Chile legislation, Nature call-to-action",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "Stanford University",
+      "subtitle": "Center for Law & Biosciences",
+      "detail": "Hank Greely",
+      "contribution": "Neurolaw, brain data spectrum, legal scholarship",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "UPenn",
+      "subtitle": "Center for Neuroscience & Society",
+      "detail": "Martha Farah",
+      "contribution": "Neuroethics toolbox, cosmetic neurology, neuromodesty",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "Duke University",
+      "subtitle": "Science & Society",
+      "detail": "Nita Farahany",
+      "contribution": "Cognitive liberty, Battle for Your Brain, incriminating thoughts",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "Johns Hopkins",
+      "subtitle": "Berman Institute / CELLS",
+      "detail": "Debra Mathews",
+      "contribution": "Three-tiered governance, device abandonment, NAM framework",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "ETH Zurich",
+      "subtitle": "Health Ethics & Policy Lab",
+      "detail": "Marcello Ienca",
+      "contribution": "Neurorights taxonomy, brain data governance, anti-inflationism",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "Oxford University",
+      "subtitle": "Uehiro Centre",
+      "detail": "Julian Savulescu",
+      "contribution": "Enhancement ethics, cognitive justice, philosophical foundations",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "UBC",
+      "subtitle": "National Core for Neuroethics",
+      "detail": "Judy Illes",
+      "contribution": "Neuroethics Canada. Neuroimaging ethics, DBS identity, Indigenous neuroscience ethics",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "Georgia State",
+      "subtitle": "Center for Neuroimaging & Neuroethics",
+      "detail": "Karen Rommelfanger",
+      "contribution": "Only US PhD concentration in neuroethics. Global Neuroethics Summit co-founder",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "UCSF",
+      "subtitle": "Decision Lab / BRAIN Neuroethics",
+      "detail": "Winston Chiong",
+      "contribution": "NIH BRAIN-funded neuroethics. DBS decision-making, dementia autonomy, clinical BCI ethics",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "Penn State",
+      "subtitle": "Neuroethics & Society",
+      "detail": "Laura Cabrera",
+      "contribution": "IEEE P7700 Neurotechnology chair. Public attitudes toward neurotech, neurostimulation ethics",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "INSERM / Sorbonne",
+      "subtitle": "Neuroscience Paris-Seine",
+      "detail": "Herv\u00e9 Chneiweiss",
+      "contribution": "Co-chaired UNESCO Ad Hoc Expert Group producing first global neurotech ethics framework (2025)",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "RHUNE Network",
+      "subtitle": "German National Hub",
+      "detail": "Multi-institution",
+      "contribution": "Responsible Use of Neurotechnologies for Europe. BMBF-funded, bridges Freiburg, T\u00fcbingen, Berlin",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "Baylor College of Medicine",
+      "subtitle": "Center for Medical Ethics",
+      "detail": "Amy McGuire",
+      "contribution": "Neural data consent, genomic/neural data ethics intersection, clinical neuroethics",
+      "domain": "ethics",
+      "category": "academia"
+    },
+    {
+      "name": "UNESCO",
+      "subtitle": "International Bioethics Committee",
+      "detail": "194 Member States",
+      "contribution": "First global neurotech ethics recommendation (2025)",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "OECD",
+      "subtitle": "Neurotechnology Policy",
+      "detail": "38 Member States",
+      "contribution": "Nine-principle innovation governance (2019)",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "WHO",
+      "subtitle": "Ethics & Governance",
+      "detail": "Global Health Body",
+      "contribution": "First neurotechnology guidance document (2025)",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Council of Europe",
+      "subtitle": "Bioethics Committee",
+      "detail": "46 Member States",
+      "contribution": "Strategic Action Plan on Neurotechnology (2025)",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Int'l Neuroethics Society",
+      "subtitle": "Professional Society",
+      "detail": "Founded 2006",
+      "contribution": "First professional society for neuroethics. Founded at Asilomar by Gazzaniga, Farah, Illes, Wolpe",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "NeuroRights Foundation",
+      "subtitle": "Columbia University",
+      "detail": "Rafael Yuste",
+      "contribution": "Policy vehicle driving Chile, California, Colorado legislation. 2025 consumer neurotech data audit",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Chile Constitution (2021)",
+      "subtitle": "First neurorights law",
+      "detail": "National Legislature",
+      "contribution": "First country to constitutionally protect neurorights (mental integrity)",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Colorado / California / Montana / Minnesota",
+      "subtitle": "US State Neural Data Laws (2024)",
+      "detail": "State Legislatures",
+      "contribution": "Four U.S. states enact neural data protections in 2024",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "UN Human Rights Council",
+      "subtitle": "Neurotechnology Mandate",
+      "detail": "Advisory Committee",
+      "contribution": "Final report on neurotechnology and human rights (September 2024)",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Latin American Parliament",
+      "subtitle": "Model Law on Neurorights (2023)",
+      "detail": "Regional Body",
+      "contribution": "Regional model law for harmonized neurorights legislation across Latin America",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Global Privacy Assembly",
+      "subtitle": "Neural Data Resolution",
+      "detail": "46th Conference (2024)",
+      "contribution": "Resolution on principles for neural data processing and cognitive freedom",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Tadayoshi Kohno",
+      "subtitle": "University of Washington",
+      "detail": "Neurosurgical Focus 27(1):E7",
+      "contribution": "Co-author of the foundational neurosecurity paper (Denning, Matsuoka, Kohno 2009). Threat model for implantable neural devices.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Tamara Denning",
+      "subtitle": "University of Washington",
+      "detail": "Denning et al. 2009",
+      "contribution": "Lead author on the first neurosecurity paper. Defined attack surfaces for implantable BMIs.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Ivan Martinovic",
+      "subtitle": "University of Oxford",
+      "detail": "USENIX Security 2012",
+      "contribution": "First empirical BCI side-channel attack. P300-based extraction of PINs and locations from consumer EEG.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Dawn Song",
+      "subtitle": "UC Berkeley",
+      "detail": "USENIX Security 2012",
+      "contribution": "Co-authored the landmark BCI side-channel paper. MacArthur Fellow, one of the most-cited in computer security.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Laurie Pycroft",
+      "subtitle": "University of Oxford",
+      "detail": "World Neurosurgery 92:454-462, 2016",
+      "contribution": "Coined and systematized \"brainjacking\" for implanted neurostimulators.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Tamara Bonaci",
+      "subtitle": "Northeastern / UW",
+      "detail": "Bonaci et al. 2014",
+      "contribution": "BCI game attack vectors. Subliminal stimuli can extract private information during BCI use.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Howard Chizeck",
+      "subtitle": "University of Washington",
+      "detail": "Chizeck & Bonaci 2014",
+      "contribution": "Neural engineering security. BCI privacy through signal obfuscation and access control.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Kevin Fu",
+      "subtitle": "Northeastern University",
+      "detail": "Archimedes Center for Medical Device Security",
+      "contribution": "Medical device cybersecurity pioneer. Former FDA Acting Director of Medical Device Cybersecurity.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Nitesh Saxena",
+      "subtitle": "Texas A&M University",
+      "detail": "Saxena et al. 2017",
+      "contribution": "BCI authentication protocols. P300 brainwave attacks and neural biometric spoofing.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Marcello Ienca",
+      "subtitle": "TU Munich / ETH Zurich",
+      "detail": "ACM Computing Surveys 2021",
+      "contribution": "Brain data governance at the security-ethics intersection. Neurorights taxonomy and anti-inflationism.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Sergio Lopez Bernal",
+      "subtitle": "University of Murcia",
+      "detail": "CACM 2023",
+      "contribution": "BCI cybersecurity survey and neural cyberattack taxonomy. \"Eight Reasons\" why BCIs are not secure.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Tyler Schroder",
+      "subtitle": "Yale Digital Ethics Center",
+      "detail": "Neuroethics (Springer) 2025",
+      "contribution": "Detailed 2025 BCI cyber risk assessment. Measures for safeguarding brain implants.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Qiben Yan",
+      "subtitle": "Michigan State University",
+      "detail": "Acoustic/ultrasonic sensor attacks",
+      "contribution": "Sensor injection attacks (acoustic, ultrasonic). SEIT lab. No verified BCI-specific neural publications \u2014 primary work targets voice assistants and IMU sensors.",
+      "domain": "security",
+      "category": "researcher",
+      "status": "Unverified-BCI"
+    },
+    {
+      "name": "Dongrui Wu",
+      "subtitle": "HUST / Zhejiang Lab",
+      "detail": "Scientific Review 2023; Information Fusion 2024",
+      "contribution": "Most prolific BCI security ML group. Backdoor attacks, evasion attacks, federated defense.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Bao-Liang Lu",
+      "subtitle": "Shanghai Jiao Tong University",
+      "detail": "arXiv:2409.20158, 2024",
+      "contribution": "Professor X: invisible backdoor attack on EEG BCI via clean-label poisoning.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Wanzeng Kong",
+      "subtitle": "Hangzhou Dianzi University",
+      "detail": "ICME 2024",
+      "contribution": "Brainprint adversarial attacks. Time-frequency perturbations that defeat EEG biometric authentication.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "Xinyu Jiang",
+      "subtitle": "Fudan University (co-authors at Penn State, Imperial)",
+      "detail": "Computers in Biology and Medicine, 2023",
+      "contribution": "First systematic cybersecurity survey across both central and peripheral neural interfaces.",
+      "domain": "security",
+      "category": "researcher"
+    },
+    {
+      "name": "University of Washington",
+      "subtitle": "Security & Privacy Research Lab",
+      "detail": "Kohno, Chizeck, Bonaci, Denning, Goering",
+      "contribution": "Founded the neurosecurity field (2009). Implantable device threat modeling, BCI game attacks, neural signal privacy.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "University of Oxford",
+      "subtitle": "Functional Neurosurgery + InfoSec",
+      "detail": "Pycroft, Martinovic, Aziz",
+      "contribution": "Brainjacking threat models for implanted DBS devices. EEG side-channel attacks on consumer BCIs.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Northeastern University",
+      "subtitle": "Archimedes Center for Medical Device Security",
+      "detail": "Fu, Bonaci",
+      "contribution": "Medical device cybersecurity pioneer. $22M total research. Neural implant security under $3.5M NSF grant.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Yale University",
+      "subtitle": "Digital Ethics Center",
+      "detail": "Floridi, Schroder",
+      "contribution": "Detailed BCI cyber risk assessment (2025). Interdisciplinary cybersecurity-neuroethics approach.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "UC Berkeley",
+      "subtitle": "Computer Security Research",
+      "detail": "Song",
+      "contribution": "Co-produced the first empirical BCI side-channel attack paper (USENIX 2012).",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "TU Munich / ETH Zurich",
+      "subtitle": "Ethics of AI and Neuroscience",
+      "detail": "Ienca, Haselager",
+      "contribution": "Brain data governance, neurorights and security intersection, state-of-the-art BCI security survey (ACM 2021).",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "University of Murcia",
+      "subtitle": "BCI Cybersecurity Group",
+      "detail": "Lopez Bernal, Celdran, Perez",
+      "contribution": "Neural cyberattack taxonomy. Highest-volume BCI security publication group.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Graz University of Technology",
+      "subtitle": "Institute of Neural Engineering",
+      "detail": "Muller-Putz",
+      "contribution": "BCI conference venue and neural engineering research. EEG-based authentication and biosignal processing.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Michigan State University",
+      "subtitle": "SEIT Lab",
+      "detail": "Yan",
+      "contribution": "Sensor injection attacks (acoustic, ultrasonic, EMI). No verified BCI-specific neural publications.",
+      "domain": "security",
+      "category": "academia",
+      "status": "Unverified-BCI"
+    },
+    {
+      "name": "Texas A&M University",
+      "subtitle": "SPIES Lab / Global Cyber Research Institute",
+      "detail": "Saxena",
+      "contribution": "BCI authentication, neural biometric security, brainwave spoofing.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Brown University",
+      "subtitle": "BrainGate Consortium",
+      "detail": "Hochberg, Donoghue",
+      "contribution": "Intracortical BCI clinical trials. First long-term human implant data on failure modes.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "HUST (Wuhan)",
+      "subtitle": "AI & Automation / MoE Key Lab",
+      "detail": "Wu, Meng, Chen",
+      "contribution": "Most prolific BCI ML-security group globally. Backdoor, evasion, federated defense.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Shanghai Jiao Tong University",
+      "subtitle": "BCMI Lab",
+      "detail": "Lu, Zheng",
+      "contribution": "Professor X invisible backdoor attack. SEED emotion dataset (most-used EEG dataset).",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Fudan University",
+      "subtitle": "Multi-institution Survey Group",
+      "detail": "Jiang, Fan, Zhu",
+      "contribution": "First cybersecurity survey covering both CNS and PNS neural interfaces.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "Zhejiang University",
+      "subtitle": "Qiushi Academy / BCI Group",
+      "detail": "Xu, Sun",
+      "contribution": "China's first human BCI implant (2020). Hardware-software security intersection.",
+      "domain": "security",
+      "category": "academia"
+    },
+    {
+      "name": "IEEE",
+      "subtitle": "BMI Standards Roadmap",
+      "detail": "P2731, P2794, P7700",
+      "contribution": "Identified BCI-specific security standards as an open standardization gap. IEEE 2794 (brain data).",
+      "domain": "security",
+      "category": "standards",
+      "status": "Active"
+    },
+    {
+      "name": "NIST",
+      "subtitle": "Cybersecurity Framework",
+      "detail": "CSF 2.0",
+      "contribution": "Provides the security control baseline. No neurotech-specific profile exists yet.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Gap"
+    },
+    {
+      "name": "FDA",
+      "subtitle": "Premarket Cybersecurity Guidance",
+      "detail": "Medical Devices",
+      "contribution": "Requires threat modeling for connected medical devices. No neural-specific requirements.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Partial"
+    },
+    {
+      "name": "ISO/IEC",
+      "subtitle": "Medical Device Security",
+      "detail": "ISO 14708, IEC 62443",
+      "contribution": "Implant standards and industrial security. No BCI-specific standard exists.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Gap"
+    },
+    {
+      "name": "MITRE",
+      "subtitle": "ATT&CK / CWE / CVE",
+      "detail": "Threat Taxonomy",
+      "contribution": "Attack taxonomy and vulnerability classification. No neural device attack techniques catalogued.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Gap"
+    },
+    {
+      "name": "CISA",
+      "subtitle": "Medical Device Advisories",
+      "detail": "US Cyber Agency",
+      "contribution": "Issues advisories for connected device vulnerabilities. Has not addressed neural implants.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Gap"
+    },
+    {
+      "name": "EU AI Act",
+      "subtitle": "High-Risk AI Classification",
+      "detail": "Regulation 2024/1689",
+      "contribution": "Classifies certain neurotech as high-risk AI systems. Full application August 2026.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Active"
+    },
+    {
+      "name": "FIRST / CVSS SIG",
+      "subtitle": "Vulnerability Scoring",
+      "detail": "CVSS 4.0",
+      "contribution": "Scores IT vulnerabilities. No neural impact metrics exist in the standard.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Gap"
+    },
+    {
+      "name": "China MoST",
+      "subtitle": "BCI Ethics Guidelines",
+      "detail": "February 2024",
+      "contribution": "First Chinese government-issued ethics guidelines for neural devices. Not binding regulation.",
+      "domain": "security",
+      "category": "standards",
+      "status": "Active"
+    },
+    {
+      "name": "Spain",
+      "subtitle": "Carta de Derechos Digitales (2021)",
+      "detail": "Section XXVI: Neurotechnologies",
+      "contribution": "First European nation to include neurorights in a digital rights charter",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Brazil",
+      "subtitle": "PEC 29/2023",
+      "detail": "Proposed Constitutional Amendment",
+      "contribution": "Proposes adding mental integrity and algorithmic transparency to fundamental rights",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "Mexico",
+      "subtitle": "GLNN (2024)",
+      "detail": "92-Article Neurorights Law",
+      "contribution": "Most comprehensive national neurorights legislation proposed (92 articles + 35 amendments)",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "EU Parliament STOA",
+      "subtitle": "Mental Privacy Study (2024)",
+      "detail": "EPRS_STU(2024)757807",
+      "contribution": "Study on protection of mental privacy in neuroscience",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "European Brain Council",
+      "subtitle": "Charter (2025)",
+      "detail": "Responsible Development",
+      "contribution": "Pan-European responsible development charter for neurotechnologies",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "France",
+      "subtitle": "National Charter (2023)",
+      "detail": "OECD Implementation",
+      "contribution": "French charter implementing OECD 2019 neurotechnology recommendation",
+      "domain": "ethics",
+      "category": "standards"
+    },
+    {
+      "name": "QIF / Qinnovate",
+      "subtitle": "Open Neural Atlas",
+      "detail": "Kevin Qi",
+      "contribution": "Proposed open security framework. NISS, TARA, Coherence Metric, NSP.",
+      "domain": "both",
+      "category": "standards",
+      "status": "Active"
+    }
+  ],
+  "timelines": {
+    "neuroethics": [
+      {
+        "year": "1927",
+        "label": "Fritz Jahr coins \"Bio-Ethik\"",
+        "desc": "First use of the term in Kosmos journal, proposing a bioethical imperative extending moral consideration to all living things"
+      },
+      {
+        "year": "1947",
+        "label": "Nuremberg Code",
+        "desc": "First international ethics code for human experimentation, born from the Doctors' Trial"
+      },
+      {
+        "year": "1964",
+        "label": "Declaration of Helsinki",
+        "desc": "World Medical Association establishes ethical principles for medical research on humans"
+      },
+      {
+        "year": "1970",
+        "label": "Potter revives \"Bioethics\"",
+        "desc": "Van Rensselaer Potter publishes \"Bioethics: The Science of Survival\" in Perspectives in Biology and Medicine"
+      },
+      {
+        "year": "1974",
+        "label": "National Research Act",
+        "desc": "U.S. Congress creates the National Commission for the Protection of Human Subjects in response to the Tuskegee study"
+      },
+      {
+        "year": "1979",
+        "label": "Belmont Report",
+        "desc": "Three core principles for human subjects research: respect for persons, beneficence, justice"
+      },
+      {
+        "year": "1979",
+        "label": "Beauchamp & Childress",
+        "desc": "Principles of Biomedical Ethics: autonomy, beneficence, non-maleficence, justice"
+      },
+      {
+        "year": "2002",
+        "label": "\"Neuroethics\" defined",
+        "desc": "William Safire's keynote at the Dana Foundation conference establishes the modern field"
+      },
+      {
+        "year": "2006",
+        "label": "Brain Overclaim Syndrome",
+        "desc": "Stephen Morse warns neuroscience claims are routinely overclaimed when applied to law. \"Neuromodesty\" follows in 2011"
+      },
+      {
+        "year": "2006",
+        "label": "Int'l Neuroethics Society",
+        "desc": "Founded at Asilomar by Gazzaniga, Farah, Illes, and Wolpe"
+      },
+      {
+        "year": "2017",
+        "label": "Neurorights",
+        "desc": "Ienca & Andorno and Yuste et al. (Nature) independently propose neurorights"
+      },
+      {
+        "year": "2019",
+        "label": "OECD Recommendation",
+        "desc": "Nine-principle governance for responsible innovation in neurotechnology"
+      },
+      {
+        "year": "2021",
+        "label": "Chile Constitution",
+        "desc": "First country to constitutionally protect neurorights (mental integrity)"
+      },
+      {
+        "year": "2023",
+        "label": "Latin American Model Law",
+        "desc": "Regional model law for harmonized neurorights legislation"
+      },
+      {
+        "year": "2024",
+        "label": "US State Neural Data Laws",
+        "desc": "Colorado, California, Montana, Minnesota enact neural data protections"
+      },
+      {
+        "year": "2024",
+        "label": "China BCI Ethics + UN HRC",
+        "desc": "China MoST BCI ethics guidelines. UN HRC advisory on neurotechnology. Global Privacy Assembly neural data resolution"
+      },
+      {
+        "year": "2025",
+        "label": "UNESCO + WHO + MIND Act",
+        "desc": "UNESCO global neurotech ethics framework (194 states). WHO neurotechnology guidance. US MIND Act"
+      }
+    ],
+    "neurosecurity": [
+      {
+        "year": "2009",
+        "label": "\"Neurosecurity\" coined",
+        "authors": "Denning, T., Matsuoka, Y., Kohno, T.",
+        "venue": "Neurosurgical Focus 27(1):E7",
+        "desc": "First formal definition of neurosecurity; wireless hijacking, malicious reprogramming, eavesdropping as threat classes."
+      },
+      {
+        "year": "2012",
+        "label": "EEG side-channel \u2014 PIN extraction",
+        "authors": "Martinovic, I., Davies, D., Frank, M., Perito, D., Ros, T., Song, D.",
+        "venue": "USENIX Security 2012, pp. 143-158",
+        "desc": "Consumer EEG headsets extract PINs and bank info via P300 responses to subliminal financial stimuli."
+      },
+      {
+        "year": "2014",
+        "label": "Subliminal stimulus \u2014 brain malware",
+        "authors": "Bonaci, T., Calo, R., Chizeck, H.",
+        "venue": "IEEE ETHICS 2014 \u2014 Best Paper",
+        "desc": "Malicious BCI app disguised as game harvests P300 responses to extract PINs, credit card numbers without consent."
+      },
+      {
+        "year": "2014",
+        "label": "Securing the Exocortex",
+        "authors": "Bonaci, T., Herron, J.A., Matlack, C., Chizeck, H.J.",
+        "venue": "IEEE Norbert Wiener Conference 2014",
+        "doi": "10.1109/NORBERT.2014.6893912",
+        "desc": "BCI as external cognitive layer. Security challenges for brain-computer symbiosis."
+      },
+      {
+        "year": "2015",
+        "label": "Early BCI security taxonomy",
+        "authors": "Li, Q., Ding, D., Conti, M.",
+        "venue": "IEEE CNS 2015, pp. 663-666",
+        "doi": "10.1109/CNS.2015.7346884",
+        "desc": "One of the first IEEE conference papers taxonomizing BCI security and privacy challenges."
+      },
+      {
+        "year": "2016",
+        "label": "Firewall for Brain \u2014 privacy BCI",
+        "authors": "Takabi, H.",
+        "venue": "IEEE CNS 2016, pp. 370-371",
+        "doi": "10.1109/CNS.2016.7860516",
+        "desc": "First 'firewall for brain' concept in published literature. Privacy-preserving BCI ecosystem."
+      },
+      {
+        "year": "2016",
+        "label": "Brainjacking \u2014 implant takeover",
+        "authors": "Pycroft, L., Boccard, S.G., Owen, S.L.F., Stein, J.F., Fitzgerald, J.J., Green, A.L., Aziz, T.Z.",
+        "venue": "World Neurosurgery 92:454-462",
+        "doi": "10.1016/j.wneu.2016.05.010",
+        "desc": "Threat taxonomy for DBS implants: therapy cessation, battery drain, motor impairment, mood alteration, pain induction."
+      },
+      {
+        "year": "2016",
+        "label": "BCI attack taxonomy",
+        "authors": "Ienca, M., Haselager, P.",
+        "venue": "Ethics and Information Technology 18:117-129",
+        "doi": "10.1007/s10676-016-9398-9",
+        "desc": "Four attack classes: neural data theft, unauthorized manipulation, privacy violation, brain-hacking."
+      },
+      {
+        "year": "2017",
+        "label": "Subliminal probing \u2014 sub-13ms stimulus",
+        "authors": "Frank, M., Hwu, T., Jain, S., Knight, R.T., Martinovic, I., Mittal, P., Perito, D., Sluganovic, I., Song, D.",
+        "venue": "ACM WPES 2017",
+        "doi": "10.1145/3139550.3139559",
+        "desc": "Subliminal EEG probing below conscious perception threshold (13.3ms) infers private information from 27 participants."
+      },
+      {
+        "year": "2018",
+        "label": "Wireless neurostimulator protocol attack",
+        "authors": "Marin, E., Singel\u00e9e, D., Yang, B., Volskiy, V., Vandenbosch, G., Nuttin, B., Preneel, B.",
+        "venue": "ACM CODASPY 2018",
+        "doi": "10.1145/3176258.3176310",
+        "desc": "Reverse-engineered unencrypted RF protocol of commercial neurostimulator; software-radio attacks alter stimulation parameters."
+      },
+      {
+        "year": "2019",
+        "label": "Adversarial ML \u2014 EEG CNN attack (first)",
+        "authors": "Zhang, X., Wu, D.",
+        "venue": "IEEE TNSRE 27:814-825",
+        "doi": "10.1109/TNSRE.2019.2908955",
+        "desc": "First study showing CNN classifiers in EEG-BCIs vulnerable to adversarial perturbations; cross-model transferability enables black-box attacks."
+      },
+      {
+        "year": "2020",
+        "label": "Neuronal flooding/scanning \u2014 miniature implants",
+        "authors": "L\u00f3pez Bernal, S., Huertas Celdr\u00e1n, A., Fernandez Maimo, L., Barros, M.T., Balasubramaniam, S., Mart\u00ednez P\u00e9rez, G.",
+        "venue": "IEEE Access 8:152204-152222",
+        "doi": "10.1109/ACCESS.2020.3017394",
+        "desc": "Introduces FLO and SCA attack primitives on micron-scale BCI implants. Parent paper for neural cyberattack simulation line."
+      },
+      {
+        "year": "2020",
+        "label": "EEG biometric spoofing \u2014 smartwatch correlation",
+        "authors": "Shukla, D., Kundu, P.P., Malapati, R., Poudel, S., Jin, Z., Phoha, V.V.",
+        "venue": "ACM DTRAP 1(2):Article 9",
+        "doi": "10.1145/3374137",
+        "desc": "EEG authentication bypassed using only smartwatch motion data correlated to victim hand movements."
+      },
+      {
+        "year": "2021",
+        "label": "Neuronal jamming \u2014 invasive BCI",
+        "authors": "L\u00f3pez Bernal, S., Huertas Celdr\u00e1n, A., Mart\u00ednez P\u00e9rez, G.",
+        "venue": "Computers & Security 112:102534",
+        "doi": "10.1016/j.cose.2021.102534",
+        "desc": "Invasive BCI attack prevents neuronal spike generation via jamming through compromised electrodes."
+      },
+      {
+        "year": "2021",
+        "label": "P300 signal spoofing \u2014 noise injection",
+        "authors": "Mart\u00ednez Beltr\u00e1n, E.T., Quiles P\u00e9rez, M., L\u00f3pez Bernal, S., Huertas Celdr\u00e1n, A., Mart\u00ednez P\u00e9rez, G.",
+        "venue": "Cluster Computing (Springer)",
+        "doi": "10.1007/s10586-021-03326-z",
+        "desc": "Four noise-based attacks generate fake P300 waves; 74% classification degradation in processing phase."
+      },
+      {
+        "year": "2022",
+        "label": "SSVEP signal injection \u2014 square wave",
+        "authors": "Bian, R., Meng, L., Wu, D.",
+        "venue": "Science China Information Sciences",
+        "doi": "10.1007/s11432-022-3440-5",
+        "desc": "Simple square waves fool CCA classifiers in SSVEP-based BCIs, requiring no model knowledge."
+      },
+      {
+        "year": "2023",
+        "label": "Backdoor / data poisoning \u2014 EEG classifier",
+        "authors": "Meng, L., Jiang, X., Huang, J., Zeng, Z., Yu, S., Jung, T-P., Lin, C-T., Chavarriaga, R., Wu, D.",
+        "venue": "IEEE TNSRE 31:2224-2234",
+        "doi": "10.1109/TNSRE.2023.3273214",
+        "desc": "Narrow-period-pulse poisoning embeds unsynchronized backdoor trigger in EEG training data."
+      },
+      {
+        "year": "2023",
+        "label": "Eight neural cyberattack classes",
+        "authors": "L\u00f3pez Bernal, S., Huertas Celdr\u00e1n, A., Mart\u00ednez P\u00e9rez, G.",
+        "venue": "Communications of the ACM 66(4):68-78",
+        "doi": "10.1145/3535509",
+        "desc": "Eight archetypes: Flooding, Jamming, Scanning, Selective Forwarding, Spoofing, Sybil, Sinkhole, Nonce."
+      },
+      {
+        "year": "2023",
+        "label": "RF physical-layer EEG takeover",
+        "authors": "Armengol-Urpi, A., Kovacs, R., Sarma, S.E.",
+        "venue": "ACM CPSIoTSec 2023 (CCS) \u2014 Best Paper",
+        "doi": "10.1145/3605758.3623497",
+        "desc": "Remote RF injection hijacks virtual keyboard speller, drone controller, and meditation app across three device classes."
+      },
+      {
+        "year": "2024",
+        "label": "Professor X invisible backdoor",
+        "authors": "Liu, Song, He, Lu, Zheng",
+        "venue": "arXiv:2409.20158",
+        "desc": "Clean-label poisoning on EEG BCI using RL-selected electrode injection. Invisible to inspection."
+      },
+      {
+        "year": "2024",
+        "label": "Brainprint adversarial attack",
+        "authors": "Yi, Ming, Liu, Kong",
+        "venue": "IEEE ICME 2024",
+        "desc": "Time-frequency perturbations defeat EEG biometric authentication systems."
+      },
+      {
+        "year": "2025",
+        "label": "Comprehensive BCI risk assessment",
+        "authors": "Schroder et al.",
+        "venue": "Neuroethics (Springer)",
+        "desc": "Detailed BCI cyber risk assessment covering multiple attack vectors and mitigations."
+      },
+      {
+        "year": "Next",
+        "label": "QIF",
+        "desc": "First open technical security specification for neural interfaces (in development)",
+        "detail": "NISS + TARA + Cs + NSP"
+      }
+    ],
+    "scholarship": [
+      {
+        "authors": "Ienca, M., Andorno, R.",
+        "year": "2017",
+        "title": "Towards New Human Rights in the Age of Neuroscience and Neurotechnology",
+        "venue": "Life Sciences, Society and Policy 13(1)",
+        "pmid": "28444626",
+        "desc": "Introduces cognitive liberty, mental privacy, mental integrity, psychological continuity as neurorights."
+      },
+      {
+        "authors": "Yuste, R., Goering, S. et al.",
+        "year": "2017",
+        "title": "Four ethical priorities for neurotechnologies and AI",
+        "venue": "Nature 551:159-163",
+        "desc": "Call-to-action for neurorights protections. Basis for Columbia NeuroRights Foundation."
+      },
+      {
+        "authors": "Ienca, M., Haselager, P.",
+        "year": "2016",
+        "title": "Hacking the Brain: Brain-Computer Interfacing Technology and the Ethics of Neurosecurity",
+        "venue": "Ethics and Information Technology 18:117-129",
+        "doi": "10.1007/s10676-016-9398-9",
+        "desc": "First systematic treatment of BCI attack vectors within an ethics framework."
+      },
+      {
+        "authors": "Ienca, M. et al. (20 authors)",
+        "year": "2022",
+        "title": "Towards a Governance Framework for Brain Data",
+        "venue": "Neuroethics 15:Article 20",
+        "doi": "10.1007/s12152-022-09498-8",
+        "desc": "Four regulatory areas for brain data: binding regulation, ethics/soft law, responsible innovation, human rights."
+      },
+      {
+        "authors": "Liv, N., Greenbaum, D.",
+        "year": "2023",
+        "title": "Cyberneurosecurity",
+        "venue": "In: Policy, Identity, and Neurotechnology (Springer)",
+        "doi": "10.1007/978-3-031-26801-4_13",
+        "desc": "Coined 'cyberneurosecurity' \u2014 ethical/policy issues from internet-enabled BCIs including neural manipulation and self-hacking."
+      },
+      {
+        "authors": "Robertson, L.J. et al.",
+        "year": "2025",
+        "title": "Ethical Governance Strategies for the Responsible Innovation of Neurotechnologies: A Scoping Review",
+        "venue": "Journal of Bioethical Inquiry",
+        "doi": "10.1007/s11673-025-10440-9",
+        "desc": "Scoping review of 51 articles identifying six governance strategies for neurotechnology."
+      },
+      {
+        "authors": "Cabrera, L.",
+        "year": "2026",
+        "title": "Neurotechnology Governance in the United States: Gaps and Opportunities",
+        "venue": "Bioethics (Wiley)",
+        "doi": "10.1111/bioe.70062",
+        "desc": "Reviews Colorado and California neural data rights legislation."
+      },
+      {
+        "authors": "Chavarriaga, R. et al.",
+        "year": "2021",
+        "title": "Standardization of Neurotechnology for Brain-Machine Interfacing: State of the Art and Recommendations",
+        "venue": "PMC 8846370",
+        "desc": "IEEE-affiliated review noting scarcity of mandatory BCI security standards."
+      },
+      {
+        "authors": "Haynes, J-D., Rees, G.",
+        "year": "2006",
+        "title": "Decoding mental states from brain activity in humans",
+        "venue": "Nature Reviews Neuroscience 7:523-534",
+        "doi": "10.1038/nrn1931",
+        "desc": "Foundational review of multivariate pattern analysis for neural decoding. Identified ethical issues with mental privacy."
+      },
+      {
+        "authors": "Kellmeyer, P.",
+        "year": "2019",
+        "title": "Big Brain Data: On the Responsible Use of Brain Data from Clinical and Consumer-Directed Neurotechnological Devices",
+        "venue": "Neuroethics 12(1):81-96",
+        "doi": "10.1007/s12152-018-9371-x",
+        "desc": "Brain data governance framework. Argued for treating brain data as a special protected category."
+      },
+      {
+        "authors": "Kellmeyer, P.",
+        "year": "2022",
+        "title": "Neurorights: A Human Rights-Based Approach for Governing Neurotechnologies",
+        "venue": "Cambridge Handbook of Responsible AI, Ch. 24",
+        "doi": "10.1017/9781009207898",
+        "desc": "Conceptual underspecification of mental privacy/integrity. Key QIF rigor check source."
+      },
+      {
+        "authors": "Bublitz, J.C.",
+        "year": "2022",
+        "title": "Novel Neurorights: From Nonsense to Substance",
+        "venue": "Neuroethics 15(1)",
+        "doi": "10.1007/s12152-022-09481-3",
+        "desc": "Anti-inflationism: proposed consolidating neurorights into mental self-determination."
+      },
+      {
+        "authors": "Wexler, A., Reiner, P.B.",
+        "year": "2019",
+        "title": "Oversight of Direct-to-Consumer Neurotechnologies",
+        "venue": "Science 363(6424):234-235",
+        "doi": "10.1126/science.aav0223",
+        "desc": "Policy commentary on oversight gaps for consumer neurotech. Previously misattributed to DOI 10.1007/s11948-020-00218-0 (which is Rainey et al.). Corrected 2026-03-05."
+      },
+      {
+        "authors": "Jwa, A.S., Martinez-Martin, N.",
+        "year": "2024",
+        "title": "Rationales and Approaches to Protecting Brain Data: A Scoping Review",
+        "venue": "Neuroethics 17:Article 2",
+        "doi": "10.1007/s12152-023-09534-1",
+        "desc": "Scoping review mapping gaps between existing brain data frameworks and emerging AI risks."
+      },
+      {
+        "authors": "Wu, D. et al.",
+        "year": "2023",
+        "title": "Adversarial Attacks and Defenses in Physiological Computing: A Systematic Review",
+        "venue": "National Science Open 2(1)",
+        "doi": "10.1360/nso/20220023",
+        "desc": "Systematic review of adversarial attacks across EEG, EMG, ECG, eye tracking modalities."
+      },
+      {
+        "authors": "Cornejo-Plaza, M.I., Cippitani, R., Pasquino, V.",
+        "year": "2024",
+        "title": "Chilean Supreme Court Ruling on the Protection of Brain Activity",
+        "venue": "Frontiers in Psychology",
+        "doi": "10.3389/fpsyg.2024.1330439",
+        "desc": "First Supreme Court neurorights ruling analysis. Landmark judicial interpretation of Chile's constitutional neurorights."
+      },
+      {
+        "authors": "Borb\u00f3n, D.",
+        "year": "2025",
+        "title": "Challenges of the Inconsistent Neurorights Framework in Latin America",
+        "venue": "Nature Neuroscience 28:1363-1364",
+        "doi": "10.1038/s41593-025-02001-5",
+        "desc": "Critique of inconsistencies across Latin American neurorights implementations."
+      },
+      {
+        "authors": "Matshabane, O.P. et al.",
+        "year": "2022",
+        "title": "Cultural Diversity is Crucial for African Neuroethics",
+        "venue": "Nature Human Behaviour 6:1185-1187",
+        "doi": "10.1038/s41562-022-01436-1",
+        "desc": "Ubuntu philosophy applied to neuroethics. Non-Western perspective."
+      },
+      {
+        "authors": "Rainey, S. et al.",
+        "year": "2020",
+        "title": "Is the European Data Protection Regulation Sufficient for Neurotechnology?",
+        "venue": "J Law and the Biosciences 7(1):lsaa051",
+        "doi": "10.1093/jlb/lsaa051",
+        "desc": "GDPR adequacy analysis for brain data. Identifies EU data protection gaps."
+      },
+      {
+        "authors": "Bublitz, J.C., Ligthart, S.",
+        "year": "2024",
+        "title": "The New Regulation of Non-Medical Neurotechnologies in the EU",
+        "venue": "J Law and the Biosciences 11(2):lsae021",
+        "doi": "10.1093/jlb/lsae021",
+        "desc": "EU regulatory gap analysis for non-medical neurotech."
+      },
+      {
+        "authors": "Bublitz, J.C.",
+        "year": "2024",
+        "title": "What an International Declaration on Neurotechnologies Could Look Like",
+        "venue": "AJOB Neuroscience 15(2):96-112",
+        "doi": "10.1080/21507740.2023.2270512",
+        "desc": "25 desiderata for UNESCO neurotechnology declaration."
+      },
+      {
+        "authors": "Hertz, N.",
+        "year": "2023",
+        "title": "Neurorights: Do We Need New Human Rights? Freedom of Thought Reconsideration",
+        "venue": "Neuroethics 16(1):Art. 5",
+        "doi": "10.1007/s12152-022-09511-0",
+        "desc": "Argues existing ICCPR Art. 18 may cover neurorights without new instruments."
+      },
+      {
+        "authors": "Wei, B., Cheng, S., Feng, Y.",
+        "year": "2025",
+        "title": "Neural Personal Information and Its Legal Protection: Evidence from China",
+        "venue": "J Law and the Biosciences 12(1):lsaf006",
+        "doi": "10.1093/jlb/lsaf006",
+        "desc": "Chinese neural data legal protection analysis."
+      }
+    ]
   },
   "researchers": [
     {
@@ -11,11 +1060,22 @@
       "name": "Tadayoshi Kohno",
       "institution": "University of Washington",
       "country": "US",
-      "expertise": ["neurosecurity", "medical-device-security", "privacy"],
-      "papers": ["C1"],
-      "bibKeys": ["kohno2009neurosecurity"],
+      "expertise": [
+        "neurosecurity",
+        "medical-device-security",
+        "privacy"
+      ],
+      "papers": [
+        "C1"
+      ],
+      "bibKeys": [
+        "kohno2009neurosecurity"
+      ],
       "qifRelevance": "Coined 'neurosecurity' in 2009. Foundational BCI security research.",
-      "tags": ["foundational", "bci-security"],
+      "tags": [
+        "foundational",
+        "bci-security"
+      ],
       "layer": "HOW"
     },
     {
@@ -23,11 +1083,21 @@
       "name": "Ivan Martinovic",
       "institution": "University of Oxford",
       "country": "GB",
-      "expertise": ["eeg-side-channels", "bci-attacks"],
-      "papers": ["C2"],
-      "bibKeys": ["martinovic2012feasibility"],
+      "expertise": [
+        "eeg-side-channels",
+        "bci-attacks"
+      ],
+      "papers": [
+        "C2"
+      ],
+      "bibKeys": [
+        "martinovic2012feasibility"
+      ],
       "qifRelevance": "First EEG side-channel attack demonstration (USENIX 2012).",
-      "tags": ["attack-research", "eeg"],
+      "tags": [
+        "attack-research",
+        "eeg"
+      ],
       "layer": "HOW"
     },
     {
@@ -35,11 +1105,23 @@
       "name": "Tamara Bonaci",
       "institution": "University of Washington",
       "country": "US",
-      "expertise": ["bci-privacy", "subliminal-attacks", "eeg-security"],
-      "papers": ["C3", "C4"],
-      "bibKeys": ["bonaci2015appstores"],
+      "expertise": [
+        "bci-privacy",
+        "subliminal-attacks",
+        "eeg-security"
+      ],
+      "papers": [
+        "C3",
+        "C4"
+      ],
+      "bibKeys": [
+        "bonaci2015appstores"
+      ],
       "qifRelevance": "BCI app store privacy model. Subliminal image attack on BCI.",
-      "tags": ["privacy", "attack-research"],
+      "tags": [
+        "privacy",
+        "attack-research"
+      ],
       "layer": "HOW"
     },
     {
@@ -47,11 +1129,26 @@
       "name": "Marcello Ienca",
       "institution": "ETH Zurich / TU Munich",
       "country": "CH",
-      "expertise": ["neurorights", "neuroethics", "bci-security", "cognitive-liberty"],
-      "papers": ["C5", "C71"],
-      "bibKeys": ["ienca2016hacking", "ienca2017neurorights"],
+      "expertise": [
+        "neurorights",
+        "neuroethics",
+        "bci-security",
+        "cognitive-liberty"
+      ],
+      "papers": [
+        "C5",
+        "C71"
+      ],
+      "bibKeys": [
+        "ienca2016hacking",
+        "ienca2017neurorights"
+      ],
       "qifRelevance": "Neurorights pioneer. Co-authored foundational neurorights paper (2017). BCI security lifecycle survey.",
-      "tags": ["neurorights", "neuroethics", "foundational"],
+      "tags": [
+        "neurorights",
+        "neuroethics",
+        "foundational"
+      ],
       "layer": "WHY"
     },
     {
@@ -59,11 +1156,21 @@
       "name": "Rafael Yuste",
       "institution": "Columbia University",
       "country": "US",
-      "expertise": ["neurorights", "neurotechnology-ethics", "cortical-circuits"],
+      "expertise": [
+        "neurorights",
+        "neurotechnology-ethics",
+        "cortical-circuits"
+      ],
       "papers": [],
-      "bibKeys": ["yuste2017four"],
+      "bibKeys": [
+        "yuste2017four"
+      ],
       "qifRelevance": "Four ethical priorities for neurotech (Nature 2017). Neurorights Foundation founder. Chile neurorights advisor.",
-      "tags": ["neurorights", "foundational", "policy"],
+      "tags": [
+        "neurorights",
+        "foundational",
+        "policy"
+      ],
       "layer": "WHY"
     },
     {
@@ -71,11 +1178,21 @@
       "name": "Nita Farahany",
       "institution": "Duke University",
       "country": "US",
-      "expertise": ["neuroethics", "cognitive-liberty", "neural-data-law"],
+      "expertise": [
+        "neuroethics",
+        "cognitive-liberty",
+        "neural-data-law"
+      ],
       "papers": [],
-      "bibKeys": ["farahany2023battle"],
+      "bibKeys": [
+        "farahany2023battle"
+      ],
       "qifRelevance": "Battle for Your Brain (2023). Leading voice on cognitive liberty and neural data rights.",
-      "tags": ["cognitive-liberty", "policy", "law"],
+      "tags": [
+        "cognitive-liberty",
+        "policy",
+        "law"
+      ],
       "layer": "WHY"
     },
     {
@@ -83,11 +1200,19 @@
       "name": "Sara Goering",
       "institution": "University of Washington",
       "country": "US",
-      "expertise": ["neuroethics", "responsible-neurotech"],
+      "expertise": [
+        "neuroethics",
+        "responsible-neurotech"
+      ],
       "papers": [],
-      "bibKeys": ["goering2021recommendations"],
+      "bibKeys": [
+        "goering2021recommendations"
+      ],
       "qifRelevance": "IEEE Neuroethics Framework contributor. Responsible BCI development guidelines.",
-      "tags": ["neuroethics", "governance"],
+      "tags": [
+        "neuroethics",
+        "governance"
+      ],
       "layer": "WHY"
     },
     {
@@ -95,11 +1220,22 @@
       "name": "Gabriel Lazaro-Munoz",
       "institution": "Harvard / Baylor College of Medicine",
       "country": "US",
-      "expertise": ["neuroethics", "dbs-ethics", "device-abandonment"],
+      "expertise": [
+        "neuroethics",
+        "dbs-ethics",
+        "device-abandonment"
+      ],
       "papers": [],
-      "bibKeys": ["lazaro2020researcher", "lazaro2022posttrial"],
+      "bibKeys": [
+        "lazaro2020researcher",
+        "lazaro2022posttrial"
+      ],
       "qifRelevance": "DBS post-trial access ethics. Device abandonment concerns.",
-      "tags": ["dbs", "neuroethics", "clinical"],
+      "tags": [
+        "dbs",
+        "neuroethics",
+        "clinical"
+      ],
       "layer": "WHY"
     },
     {
@@ -107,11 +1243,21 @@
       "name": "Lubin Meng",
       "institution": "Huazhong University of Science and Technology",
       "country": "CN",
-      "expertise": ["adversarial-ml", "eeg-robustness"],
-      "papers": ["C6"],
-      "bibKeys": ["meng2023adversarial"],
+      "expertise": [
+        "adversarial-ml",
+        "eeg-robustness"
+      ],
+      "papers": [
+        "C6"
+      ],
+      "bibKeys": [
+        "meng2023adversarial"
+      ],
       "qifRelevance": "EEG adversarial robustness benchmark. Systematic adversarial ML applied to BCI.",
-      "tags": ["adversarial-ml", "eeg"],
+      "tags": [
+        "adversarial-ml",
+        "eeg"
+      ],
       "layer": "HOW"
     },
     {
@@ -119,11 +1265,22 @@
       "name": "Tyler Schroder",
       "institution": "Yale Digital Ethics Center",
       "country": "US",
-      "expertise": ["bci-cyber-risks", "neuroethics"],
-      "papers": ["C1", "F5"],
-      "bibKeys": ["schroder2025cyberrisks"],
+      "expertise": [
+        "bci-cyber-risks",
+        "neuroethics"
+      ],
+      "papers": [
+        "C1",
+        "F5"
+      ],
+      "bibKeys": [
+        "schroder2025cyberrisks"
+      ],
       "qifRelevance": "Most comprehensive BCI security paper (2025). Neuroethics journal publication.",
-      "tags": ["bci-security", "comprehensive"],
+      "tags": [
+        "bci-security",
+        "comprehensive"
+      ],
       "layer": "HOW"
     },
     {
@@ -131,11 +1288,20 @@
       "name": "Deborah J.H. Mathews",
       "institution": "Johns Hopkins Berman Institute of Bioethics",
       "country": "US",
-      "expertise": ["governance", "emerging-tech-ethics"],
-      "papers": ["G1", "G2"],
+      "expertise": [
+        "governance",
+        "emerging-tech-ethics"
+      ],
+      "papers": [
+        "G1",
+        "G2"
+      ],
       "bibKeys": [],
       "qifRelevance": "Three-tiered governance framework for emerging tech. QIF as Tier 3 enforcement tool.",
-      "tags": ["governance", "jhu"],
+      "tags": [
+        "governance",
+        "jhu"
+      ],
       "layer": "WHY"
     },
     {
@@ -143,11 +1309,20 @@
       "name": "Juan Lopez Bernal",
       "institution": "University of Murcia",
       "country": "ES",
-      "expertise": ["bci-security-taxonomy", "iot-security"],
-      "papers": ["C10", "C11"],
+      "expertise": [
+        "bci-security-taxonomy",
+        "iot-security"
+      ],
+      "papers": [
+        "C10",
+        "C11"
+      ],
       "bibKeys": [],
       "qifRelevance": "BCI security taxonomy papers. 4 TARA techniques derived from taxonomy gap analysis.",
-      "tags": ["taxonomy", "bci-security"],
+      "tags": [
+        "taxonomy",
+        "bci-security"
+      ],
       "layer": "HOW"
     },
     {
@@ -155,11 +1330,22 @@
       "name": "Song Liu",
       "institution": "Tsinghua University",
       "country": "CN",
-      "expertise": ["eeg-backdoor-attacks", "adversarial-ml"],
-      "papers": ["C74"],
-      "bibKeys": ["lu2024professorx"],
+      "expertise": [
+        "eeg-backdoor-attacks",
+        "adversarial-ml"
+      ],
+      "papers": [
+        "C74"
+      ],
+      "bibKeys": [
+        "lu2024professorx"
+      ],
       "qifRelevance": "Professor X invisible backdoor attack on EEG BCI (2024). Novel invisible trigger mechanism.",
-      "tags": ["adversarial-ml", "backdoor", "eeg"],
+      "tags": [
+        "adversarial-ml",
+        "backdoor",
+        "eeg"
+      ],
       "layer": "HOW"
     },
     {
@@ -167,11 +1353,22 @@
       "name": "Yanjie Kong",
       "institution": "Beihang University",
       "country": "CN",
-      "expertise": ["brainprint", "adversarial-biometrics"],
-      "papers": ["C75"],
-      "bibKeys": ["kong2024brainprint"],
+      "expertise": [
+        "brainprint",
+        "adversarial-biometrics"
+      ],
+      "papers": [
+        "C75"
+      ],
+      "bibKeys": [
+        "kong2024brainprint"
+      ],
       "qifRelevance": "Brainprint adversarial attacks (ICME 2024). EEG biometric spoofing.",
-      "tags": ["biometrics", "adversarial", "eeg"],
+      "tags": [
+        "biometrics",
+        "adversarial",
+        "eeg"
+      ],
       "layer": "HOW"
     },
     {
@@ -179,11 +1376,22 @@
       "name": "Xue Jiang",
       "institution": "Huazhong University of Science and Technology",
       "country": "CN",
-      "expertise": ["neural-interface-cybersecurity", "cns-pns-security"],
-      "papers": ["C76"],
-      "bibKeys": ["jiang2023cybersecurity"],
+      "expertise": [
+        "neural-interface-cybersecurity",
+        "cns-pns-security"
+      ],
+      "papers": [
+        "C76"
+      ],
+      "bibKeys": [
+        "jiang2023cybersecurity"
+      ],
       "qifRelevance": "CNS+PNS neural interface cybersecurity survey (2023). Comprehensive threat landscape.",
-      "tags": ["survey", "cns-pns", "comprehensive"],
+      "tags": [
+        "survey",
+        "cns-pns",
+        "comprehensive"
+      ],
       "layer": "HOW"
     },
     {
@@ -191,11 +1399,23 @@
       "name": "Judy Illes",
       "institution": "University of British Columbia",
       "country": "CA",
-      "expertise": ["neuroimaging-ethics", "dbs-identity", "indigenous-neuroethics"],
-      "papers": ["INP22"],
-      "bibKeys": ["illes2010neuroethics"],
+      "expertise": [
+        "neuroimaging-ethics",
+        "dbs-identity",
+        "indigenous-neuroethics"
+      ],
+      "papers": [
+        "INP22"
+      ],
+      "bibKeys": [
+        "illes2010neuroethics"
+      ],
       "qifRelevance": "UBC National Core for Neuroethics director. Pioneer in neuroimaging ethics and Indigenous neuroscience ethics.",
-      "tags": ["neuroethics", "foundational", "neuroimaging"],
+      "tags": [
+        "neuroethics",
+        "foundational",
+        "neuroimaging"
+      ],
       "layer": "WHY"
     },
     {
@@ -203,11 +1423,22 @@
       "name": "Karen Rommelfanger",
       "institution": "Georgia State University",
       "country": "US",
-      "expertise": ["neuroethics", "neuroimaging", "neuroethics-education"],
-      "papers": ["INP23"],
-      "bibKeys": ["rommelfanger2019neuroethics"],
+      "expertise": [
+        "neuroethics",
+        "neuroimaging",
+        "neuroethics-education"
+      ],
+      "papers": [
+        "INP23"
+      ],
+      "bibKeys": [
+        "rommelfanger2019neuroethics"
+      ],
       "qifRelevance": "Only US PhD concentration in neuroethics. Center for Neuroimaging and Neuroethics director.",
-      "tags": ["neuroethics", "education"],
+      "tags": [
+        "neuroethics",
+        "education"
+      ],
       "layer": "WHY"
     },
     {
@@ -215,11 +1446,23 @@
       "name": "Winston Chiong",
       "institution": "University of California San Francisco",
       "country": "US",
-      "expertise": ["dbs-decision-making", "brain-neuroethics", "nih-brain"],
-      "papers": ["INP24"],
-      "bibKeys": ["chiong2021neuroethics"],
+      "expertise": [
+        "dbs-decision-making",
+        "brain-neuroethics",
+        "nih-brain"
+      ],
+      "papers": [
+        "INP24"
+      ],
+      "bibKeys": [
+        "chiong2021neuroethics"
+      ],
       "qifRelevance": "UCSF Decision Lab. NIH BRAIN Initiative neuroethics. DBS informed consent research.",
-      "tags": ["dbs", "neuroethics", "nih-brain"],
+      "tags": [
+        "dbs",
+        "neuroethics",
+        "nih-brain"
+      ],
       "layer": "WHY"
     },
     {
@@ -227,11 +1470,23 @@
       "name": "Laura Cabrera",
       "institution": "Penn State University",
       "country": "US",
-      "expertise": ["neuroethics", "public-attitudes", "ieee-neurotech"],
-      "papers": ["INP25"],
-      "bibKeys": ["cabrera2021attitudes"],
+      "expertise": [
+        "neuroethics",
+        "public-attitudes",
+        "ieee-neurotech"
+      ],
+      "papers": [
+        "INP25"
+      ],
+      "bibKeys": [
+        "cabrera2021attitudes"
+      ],
       "qifRelevance": "IEEE P7700 Neurotechnology Standards chair. Public attitudes toward neurotechnology research.",
-      "tags": ["standards", "neuroethics", "ieee"],
+      "tags": [
+        "standards",
+        "neuroethics",
+        "ieee"
+      ],
       "layer": "WHAT"
     },
     {
@@ -239,11 +1494,22 @@
       "name": "Herve Chneiweiss",
       "institution": "INSERM / Sorbonne Universite",
       "country": "FR",
-      "expertise": ["neuroscience-policy", "unesco-neuroethics"],
-      "papers": ["INP26"],
-      "bibKeys": ["chneiweiss2025unesco"],
+      "expertise": [
+        "neuroscience-policy",
+        "unesco-neuroethics"
+      ],
+      "papers": [
+        "INP26"
+      ],
+      "bibKeys": [
+        "chneiweiss2025unesco"
+      ],
       "qifRelevance": "Co-chair of UNESCO Ad Hoc Expert Group on Neurotechnology (2025). French neuroscience policy leadership.",
-      "tags": ["policy", "unesco", "international"],
+      "tags": [
+        "policy",
+        "unesco",
+        "international"
+      ],
       "layer": "WHY"
     },
     {
@@ -251,11 +1517,23 @@
       "name": "Amy McGuire",
       "institution": "Baylor College of Medicine",
       "country": "US",
-      "expertise": ["neural-data-consent", "genomic-ethics", "neuroethics"],
-      "papers": ["INP28"],
-      "bibKeys": ["mcguire2020consent"],
+      "expertise": [
+        "neural-data-consent",
+        "genomic-ethics",
+        "neuroethics"
+      ],
+      "papers": [
+        "INP28"
+      ],
+      "bibKeys": [
+        "mcguire2020consent"
+      ],
       "qifRelevance": "Neural data consent frameworks. Genomic-neural ethics intersection.",
-      "tags": ["consent", "neuroethics", "genomics"],
+      "tags": [
+        "consent",
+        "neuroethics",
+        "genomics"
+      ],
       "layer": "WHY"
     },
     {
@@ -263,11 +1541,22 @@
       "name": "Georg Kellmeyer",
       "institution": "University of Freiburg",
       "country": "DE",
-      "expertise": ["mental-privacy", "neuroethics", "bci-ethics"],
-      "papers": ["E8"],
-      "bibKeys": ["kellmeyer2022privacy"],
+      "expertise": [
+        "mental-privacy",
+        "neuroethics",
+        "bci-ethics"
+      ],
+      "papers": [
+        "E8"
+      ],
+      "bibKeys": [
+        "kellmeyer2022privacy"
+      ],
       "qifRelevance": "Mental privacy and integrity conceptual analysis. Highlighted underspecification of core neuroethics concepts.",
-      "tags": ["mental-privacy", "neuroethics"],
+      "tags": [
+        "mental-privacy",
+        "neuroethics"
+      ],
       "layer": "WHY"
     },
     {
@@ -275,11 +1564,22 @@
       "name": "Christoph Bublitz",
       "institution": "University of Hamburg",
       "country": "DE",
-      "expertise": ["cognitive-liberty", "mental-freedom", "neurolaw"],
-      "papers": ["E9"],
-      "bibKeys": ["bublitz2022freedom"],
+      "expertise": [
+        "cognitive-liberty",
+        "mental-freedom",
+        "neurolaw"
+      ],
+      "papers": [
+        "E9"
+      ],
+      "bibKeys": [
+        "bublitz2022freedom"
+      ],
       "qifRelevance": "Mental freedom and cognitive liberty framework. Anti-inflationism perspective on neurorights.",
-      "tags": ["cognitive-liberty", "neurolaw"],
+      "tags": [
+        "cognitive-liberty",
+        "neurolaw"
+      ],
       "layer": "WHY"
     },
     {
@@ -287,11 +1587,23 @@
       "name": "Eric Racine",
       "institution": "IRCM Montreal",
       "country": "CA",
-      "expertise": ["neuroethics", "neuroimaging-ethics", "neuroscience-communication"],
-      "papers": ["E10"],
-      "bibKeys": ["racine2005neuroethics"],
+      "expertise": [
+        "neuroethics",
+        "neuroimaging-ethics",
+        "neuroscience-communication"
+      ],
+      "papers": [
+        "E10"
+      ],
+      "bibKeys": [
+        "racine2005neuroethics"
+      ],
       "qifRelevance": "Neuro-realism, neuro-essentialism, neuro-policy triad (2005). Foundational neuroethics rigor.",
-      "tags": ["neuroethics", "foundational", "neurorealism"],
+      "tags": [
+        "neuroethics",
+        "foundational",
+        "neurorealism"
+      ],
       "layer": "WHY"
     },
     {
@@ -299,11 +1611,23 @@
       "name": "Russell Poldrack",
       "institution": "Stanford University",
       "country": "US",
-      "expertise": ["neuroimaging", "reverse-inference", "methodology"],
-      "papers": ["E11"],
-      "bibKeys": ["poldrack2006neuroimaging"],
+      "expertise": [
+        "neuroimaging",
+        "reverse-inference",
+        "methodology"
+      ],
+      "papers": [
+        "E11"
+      ],
+      "bibKeys": [
+        "poldrack2006neuroimaging"
+      ],
       "qifRelevance": "Reverse inference fallacy (2006). Foundational methodological constraint on brain imaging claims.",
-      "tags": ["methodology", "neuroimaging", "foundational"],
+      "tags": [
+        "methodology",
+        "neuroimaging",
+        "foundational"
+      ],
       "layer": "WHY"
     },
     {
@@ -311,11 +1635,22 @@
       "name": "Michael Tennison",
       "institution": "Georgetown University",
       "country": "US",
-      "expertise": ["neuroethics", "dual-use", "neurorights"],
-      "papers": ["E12"],
-      "bibKeys": ["tennison2012neurorights"],
+      "expertise": [
+        "neuroethics",
+        "dual-use",
+        "neurorights"
+      ],
+      "papers": [
+        "E12"
+      ],
+      "bibKeys": [
+        "tennison2012neurorights"
+      ],
       "qifRelevance": "Neuroethics and neurorights integration. Dual-use warning: security framing risks enabling surveillance.",
-      "tags": ["dual-use", "neurorights"],
+      "tags": [
+        "dual-use",
+        "neurorights"
+      ],
       "layer": "WHY"
     }
   ],
@@ -326,10 +1661,20 @@
       "fullName": "University of Washington Security and Privacy Research Lab",
       "country": "US",
       "lab": "Kohno/Roesner Lab",
-      "focus": ["neurosecurity", "medical-device-security", "privacy"],
-      "researchers": ["tadayoshi-kohno", "tamara-bonaci"],
+      "focus": [
+        "neurosecurity",
+        "medical-device-security",
+        "privacy"
+      ],
+      "researchers": [
+        "tadayoshi-kohno",
+        "tamara-bonaci"
+      ],
       "layer": "HOW",
-      "tags": ["foundational", "bci-security"]
+      "tags": [
+        "foundational",
+        "bci-security"
+      ]
     },
     {
       "id": "oxford-infosec",
@@ -337,10 +1682,17 @@
       "fullName": "University of Oxford Department of Computer Science",
       "country": "GB",
       "lab": "Systems Security Lab",
-      "focus": ["eeg-side-channels", "authentication"],
-      "researchers": ["ivan-martinovic"],
+      "focus": [
+        "eeg-side-channels",
+        "authentication"
+      ],
+      "researchers": [
+        "ivan-martinovic"
+      ],
       "layer": "HOW",
-      "tags": ["attack-research"]
+      "tags": [
+        "attack-research"
+      ]
     },
     {
       "id": "eth-zurich-hest",
@@ -348,10 +1700,19 @@
       "fullName": "ETH Zurich Department of Health Sciences and Technology",
       "country": "CH",
       "lab": "Digital Ethics Lab",
-      "focus": ["neurorights", "bci-ethics", "digital-ethics"],
-      "researchers": ["marcello-ienca"],
+      "focus": [
+        "neurorights",
+        "bci-ethics",
+        "digital-ethics"
+      ],
+      "researchers": [
+        "marcello-ienca"
+      ],
       "layer": "WHY",
-      "tags": ["neurorights", "neuroethics"]
+      "tags": [
+        "neurorights",
+        "neuroethics"
+      ]
     },
     {
       "id": "columbia-neurorights",
@@ -359,10 +1720,19 @@
       "fullName": "Columbia University NeuroRights Initiative / Neurotechnology Center",
       "country": "US",
       "lab": "Yuste Lab",
-      "focus": ["neurorights", "cortical-circuits", "neurotechnology-governance"],
-      "researchers": ["rafael-yuste"],
+      "focus": [
+        "neurorights",
+        "cortical-circuits",
+        "neurotechnology-governance"
+      ],
+      "researchers": [
+        "rafael-yuste"
+      ],
       "layer": "WHY",
-      "tags": ["neurorights", "foundational"]
+      "tags": [
+        "neurorights",
+        "foundational"
+      ]
     },
     {
       "id": "duke-neuroethics",
@@ -370,10 +1740,19 @@
       "fullName": "Duke University Initiative for Science and Society",
       "country": "US",
       "lab": "Farahany Lab",
-      "focus": ["cognitive-liberty", "neural-data-law", "neuroethics"],
-      "researchers": ["nita-farahany"],
+      "focus": [
+        "cognitive-liberty",
+        "neural-data-law",
+        "neuroethics"
+      ],
+      "researchers": [
+        "nita-farahany"
+      ],
       "layer": "WHY",
-      "tags": ["cognitive-liberty", "law"]
+      "tags": [
+        "cognitive-liberty",
+        "law"
+      ]
     },
     {
       "id": "jhu-berman",
@@ -381,10 +1760,19 @@
       "fullName": "Johns Hopkins Berman Institute of Bioethics / CELLS Center",
       "country": "US",
       "lab": "CELLS",
-      "focus": ["governance", "emerging-tech-ethics", "neuroethics"],
-      "researchers": ["deborah-mathews"],
+      "focus": [
+        "governance",
+        "emerging-tech-ethics",
+        "neuroethics"
+      ],
+      "researchers": [
+        "deborah-mathews"
+      ],
       "layer": "WHY",
-      "tags": ["governance", "jhu"]
+      "tags": [
+        "governance",
+        "jhu"
+      ]
     },
     {
       "id": "yale-digital-ethics",
@@ -392,10 +1780,17 @@
       "fullName": "Yale University Digital Ethics Center",
       "country": "US",
       "lab": "Floridi Group",
-      "focus": ["bci-cyber-risks", "digital-ethics"],
-      "researchers": ["tyler-schroder"],
+      "focus": [
+        "bci-cyber-risks",
+        "digital-ethics"
+      ],
+      "researchers": [
+        "tyler-schroder"
+      ],
       "layer": "HOW",
-      "tags": ["bci-security"]
+      "tags": [
+        "bci-security"
+      ]
     },
     {
       "id": "murcia-infosec",
@@ -403,10 +1798,17 @@
       "fullName": "University of Murcia Department of Information and Communications Engineering",
       "country": "ES",
       "lab": "Macia Group",
-      "focus": ["bci-security-taxonomy", "iot-security"],
-      "researchers": ["juan-lopez-bernal"],
+      "focus": [
+        "bci-security-taxonomy",
+        "iot-security"
+      ],
+      "researchers": [
+        "juan-lopez-bernal"
+      ],
       "layer": "HOW",
-      "tags": ["taxonomy"]
+      "tags": [
+        "taxonomy"
+      ]
     },
     {
       "id": "hust-ainet",
@@ -414,10 +1816,20 @@
       "fullName": "Huazhong University of Science and Technology",
       "country": "CN",
       "lab": "BCI Security Group",
-      "focus": ["adversarial-ml", "eeg-robustness", "neural-interface-security"],
-      "researchers": ["lubin-meng", "xue-jiang"],
+      "focus": [
+        "adversarial-ml",
+        "eeg-robustness",
+        "neural-interface-security"
+      ],
+      "researchers": [
+        "lubin-meng",
+        "xue-jiang"
+      ],
       "layer": "HOW",
-      "tags": ["adversarial-ml", "china"]
+      "tags": [
+        "adversarial-ml",
+        "china"
+      ]
     },
     {
       "id": "tsinghua-ai",
@@ -425,10 +1837,18 @@
       "fullName": "Tsinghua University Department of Computer Science",
       "country": "CN",
       "lab": "AI Security Lab",
-      "focus": ["backdoor-attacks", "adversarial-ml"],
-      "researchers": ["song-liu"],
+      "focus": [
+        "backdoor-attacks",
+        "adversarial-ml"
+      ],
+      "researchers": [
+        "song-liu"
+      ],
       "layer": "HOW",
-      "tags": ["adversarial-ml", "china"]
+      "tags": [
+        "adversarial-ml",
+        "china"
+      ]
     },
     {
       "id": "beihang-biometrics",
@@ -436,10 +1856,18 @@
       "fullName": "Beihang University School of Computer Science",
       "country": "CN",
       "lab": "Biometric Security Lab",
-      "focus": ["brainprint", "eeg-biometrics"],
-      "researchers": ["yanjie-kong"],
+      "focus": [
+        "brainprint",
+        "eeg-biometrics"
+      ],
+      "researchers": [
+        "yanjie-kong"
+      ],
       "layer": "HOW",
-      "tags": ["biometrics", "china"]
+      "tags": [
+        "biometrics",
+        "china"
+      ]
     },
     {
       "id": "ubc-neuroethics",
@@ -447,10 +1875,19 @@
       "fullName": "University of British Columbia National Core for Neuroethics",
       "country": "CA",
       "lab": "Illes Lab",
-      "focus": ["neuroimaging-ethics", "dbs-identity", "indigenous-neuroethics"],
-      "researchers": ["judy-illes"],
+      "focus": [
+        "neuroimaging-ethics",
+        "dbs-identity",
+        "indigenous-neuroethics"
+      ],
+      "researchers": [
+        "judy-illes"
+      ],
       "layer": "WHY",
-      "tags": ["neuroethics", "foundational"]
+      "tags": [
+        "neuroethics",
+        "foundational"
+      ]
     },
     {
       "id": "gsu-neuroethics",
@@ -458,10 +1895,19 @@
       "fullName": "Georgia State University Center for Neuroimaging and Neuroethics",
       "country": "US",
       "lab": "Rommelfanger Lab",
-      "focus": ["neuroethics", "neuroimaging", "neuroethics-education"],
-      "researchers": ["karen-rommelfanger"],
+      "focus": [
+        "neuroethics",
+        "neuroimaging",
+        "neuroethics-education"
+      ],
+      "researchers": [
+        "karen-rommelfanger"
+      ],
       "layer": "WHY",
-      "tags": ["neuroethics", "education"]
+      "tags": [
+        "neuroethics",
+        "education"
+      ]
     },
     {
       "id": "ucsf-decision-lab",
@@ -469,10 +1915,20 @@
       "fullName": "University of California San Francisco Decision Lab",
       "country": "US",
       "lab": "Chiong Lab",
-      "focus": ["dbs-decision-making", "nih-brain-neuroethics", "informed-consent"],
-      "researchers": ["winston-chiong"],
+      "focus": [
+        "dbs-decision-making",
+        "nih-brain-neuroethics",
+        "informed-consent"
+      ],
+      "researchers": [
+        "winston-chiong"
+      ],
       "layer": "WHY",
-      "tags": ["dbs", "nih-brain", "neuroethics"]
+      "tags": [
+        "dbs",
+        "nih-brain",
+        "neuroethics"
+      ]
     },
     {
       "id": "pennstate-neuroethics",
@@ -480,10 +1936,20 @@
       "fullName": "Penn State University Rock Ethics Institute, Neuroethics Program",
       "country": "US",
       "lab": "Cabrera Lab",
-      "focus": ["public-attitudes", "ieee-neurotech-standards", "neuroethics"],
-      "researchers": ["laura-cabrera"],
+      "focus": [
+        "public-attitudes",
+        "ieee-neurotech-standards",
+        "neuroethics"
+      ],
+      "researchers": [
+        "laura-cabrera"
+      ],
       "layer": "WHAT",
-      "tags": ["standards", "ieee", "neuroethics"]
+      "tags": [
+        "standards",
+        "ieee",
+        "neuroethics"
+      ]
     },
     {
       "id": "inserm-sorbonne",
@@ -491,10 +1957,20 @@
       "fullName": "INSERM U1127 / Institut du Cerveau, Sorbonne Universite",
       "country": "FR",
       "lab": "Chneiweiss Group",
-      "focus": ["neuroscience-policy", "unesco-neuroethics", "stem-cell-ethics"],
-      "researchers": ["herve-chneiweiss"],
+      "focus": [
+        "neuroscience-policy",
+        "unesco-neuroethics",
+        "stem-cell-ethics"
+      ],
+      "researchers": [
+        "herve-chneiweiss"
+      ],
       "layer": "WHY",
-      "tags": ["policy", "unesco", "international"]
+      "tags": [
+        "policy",
+        "unesco",
+        "international"
+      ]
     },
     {
       "id": "rhune-network",
@@ -502,10 +1978,18 @@
       "fullName": "Responsible Use of Neurotechnologies (BMBF-funded German National Hub)",
       "country": "DE",
       "lab": "Multi-institutional consortium",
-      "focus": ["responsible-neurotech", "governance", "public-engagement"],
+      "focus": [
+        "responsible-neurotech",
+        "governance",
+        "public-engagement"
+      ],
       "researchers": [],
       "layer": "WHY",
-      "tags": ["governance", "germany", "consortium"]
+      "tags": [
+        "governance",
+        "germany",
+        "consortium"
+      ]
     },
     {
       "id": "bcm-ethics",
@@ -513,10 +1997,20 @@
       "fullName": "Baylor College of Medicine Center for Medical Ethics and Health Policy",
       "country": "US",
       "lab": "McGuire Lab",
-      "focus": ["neural-data-consent", "genomic-ethics", "neuroethics"],
-      "researchers": ["amy-mcguire", "gabriel-lazaro-munoz"],
+      "focus": [
+        "neural-data-consent",
+        "genomic-ethics",
+        "neuroethics"
+      ],
+      "researchers": [
+        "amy-mcguire",
+        "gabriel-lazaro-munoz"
+      ],
       "layer": "WHY",
-      "tags": ["consent", "neuroethics"]
+      "tags": [
+        "consent",
+        "neuroethics"
+      ]
     },
     {
       "id": "freiburg-neuroethics",
@@ -524,10 +2018,18 @@
       "fullName": "University of Freiburg, Institute of Ethics and History of Medicine",
       "country": "DE",
       "lab": "Kellmeyer Group",
-      "focus": ["mental-privacy", "bci-ethics"],
-      "researchers": ["georg-kellmeyer"],
+      "focus": [
+        "mental-privacy",
+        "bci-ethics"
+      ],
+      "researchers": [
+        "georg-kellmeyer"
+      ],
       "layer": "WHY",
-      "tags": ["mental-privacy", "neuroethics"]
+      "tags": [
+        "mental-privacy",
+        "neuroethics"
+      ]
     },
     {
       "id": "hamburg-neurolaw",
@@ -535,10 +2037,19 @@
       "fullName": "University of Hamburg Faculty of Law",
       "country": "DE",
       "lab": "Bublitz Group",
-      "focus": ["cognitive-liberty", "neurolaw", "mental-freedom"],
-      "researchers": ["christoph-bublitz"],
+      "focus": [
+        "cognitive-liberty",
+        "neurolaw",
+        "mental-freedom"
+      ],
+      "researchers": [
+        "christoph-bublitz"
+      ],
       "layer": "WHY",
-      "tags": ["neurolaw", "cognitive-liberty"]
+      "tags": [
+        "neurolaw",
+        "cognitive-liberty"
+      ]
     },
     {
       "id": "ircm-neuroethics",
@@ -546,10 +2057,19 @@
       "fullName": "Institut de recherches cliniques de Montreal, Neuroethics Research Unit",
       "country": "CA",
       "lab": "Racine Lab",
-      "focus": ["neuroethics", "neurorealism", "science-communication"],
-      "researchers": ["eric-racine"],
+      "focus": [
+        "neuroethics",
+        "neurorealism",
+        "science-communication"
+      ],
+      "researchers": [
+        "eric-racine"
+      ],
       "layer": "WHY",
-      "tags": ["neuroethics", "foundational"]
+      "tags": [
+        "neuroethics",
+        "foundational"
+      ]
     },
     {
       "id": "stanford-poldrack",
@@ -557,10 +2077,18 @@
       "fullName": "Stanford University Department of Psychology",
       "country": "US",
       "lab": "Poldrack Lab",
-      "focus": ["neuroimaging-methodology", "cognitive-neuroscience"],
-      "researchers": ["russell-poldrack"],
+      "focus": [
+        "neuroimaging-methodology",
+        "cognitive-neuroscience"
+      ],
+      "researchers": [
+        "russell-poldrack"
+      ],
       "layer": "WHY",
-      "tags": ["methodology", "neuroimaging"]
+      "tags": [
+        "methodology",
+        "neuroimaging"
+      ]
     },
     {
       "id": "neurorights-foundation",
@@ -568,10 +2096,19 @@
       "fullName": "The Neurorights Foundation (Columbia University-affiliated)",
       "country": "US",
       "lab": "N/A",
-      "focus": ["neurorights-advocacy", "policy", "chile-neurorights"],
-      "researchers": ["rafael-yuste"],
+      "focus": [
+        "neurorights-advocacy",
+        "policy",
+        "chile-neurorights"
+      ],
+      "researchers": [
+        "rafael-yuste"
+      ],
       "layer": "WHY",
-      "tags": ["advocacy", "neurorights"]
+      "tags": [
+        "advocacy",
+        "neurorights"
+      ]
     },
     {
       "id": "first-org",
@@ -579,10 +2116,17 @@
       "fullName": "Forum of Incident Response and Security Teams",
       "country": "INT",
       "lab": "CVSS SIG",
-      "focus": ["vulnerability-scoring", "cvss", "incident-response"],
+      "focus": [
+        "vulnerability-scoring",
+        "cvss",
+        "incident-response"
+      ],
       "researchers": [],
       "layer": "WHAT",
-      "tags": ["standards", "cvss"]
+      "tags": [
+        "standards",
+        "cvss"
+      ]
     },
     {
       "id": "mitre",
@@ -590,10 +2134,16 @@
       "fullName": "The MITRE Corporation",
       "country": "US",
       "lab": "ATT&CK / CWE Programs",
-      "focus": ["threat-frameworks", "vulnerability-enumeration"],
+      "focus": [
+        "threat-frameworks",
+        "vulnerability-enumeration"
+      ],
       "researchers": [],
       "layer": "WHAT",
-      "tags": ["standards", "frameworks"]
+      "tags": [
+        "standards",
+        "frameworks"
+      ]
     },
     {
       "id": "ieee-sa",
@@ -601,10 +2151,19 @@
       "fullName": "Institute of Electrical and Electronics Engineers Standards Association",
       "country": "INT",
       "lab": "Neurotech Working Groups",
-      "focus": ["neurotech-standards", "bmi-terminology", "brain-data"],
-      "researchers": ["laura-cabrera"],
+      "focus": [
+        "neurotech-standards",
+        "bmi-terminology",
+        "brain-data"
+      ],
+      "researchers": [
+        "laura-cabrera"
+      ],
       "layer": "WHAT",
-      "tags": ["standards", "ieee"]
+      "tags": [
+        "standards",
+        "ieee"
+      ]
     },
     {
       "id": "unesco-neurotech",
@@ -612,10 +2171,19 @@
       "fullName": "UNESCO International Bioethics Committee / Ad Hoc Expert Group",
       "country": "INT",
       "lab": "IBC",
-      "focus": ["neurotechnology-ethics", "international-governance"],
-      "researchers": ["herve-chneiweiss"],
+      "focus": [
+        "neurotechnology-ethics",
+        "international-governance"
+      ],
+      "researchers": [
+        "herve-chneiweiss"
+      ],
       "layer": "WHY",
-      "tags": ["policy", "international", "governance"]
+      "tags": [
+        "policy",
+        "international",
+        "governance"
+      ]
     }
   ],
   "standards": [
@@ -628,7 +2196,10 @@
       "year": 2023,
       "url": "https://www.first.org/cvss/v4-0/cvss-v40-specification.pdf",
       "qifRelevance": "NISS extends CVSS v4.0 Extension Framework for neural-specific metrics",
-      "tags": ["scoring", "vulnerability"]
+      "tags": [
+        "scoring",
+        "vulnerability"
+      ]
     },
     {
       "id": "mitre-attack",
@@ -639,7 +2210,10 @@
       "year": 2013,
       "url": "https://attack.mitre.org/",
       "qifRelevance": "TARA taxonomy follows ATT&CK structure (tactics to techniques). No neural-specific coverage.",
-      "tags": ["threat-framework", "taxonomy"]
+      "tags": [
+        "threat-framework",
+        "taxonomy"
+      ]
     },
     {
       "id": "mitre-cwe",
@@ -650,7 +2224,10 @@
       "year": 2006,
       "url": "https://cwe.mitre.org/",
       "qifRelevance": "No CWE entries for BCI/neural interface weaknesses. Gap identified.",
-      "tags": ["weakness", "software"]
+      "tags": [
+        "weakness",
+        "software"
+      ]
     },
     {
       "id": "iso-14971",
@@ -661,7 +2238,10 @@
       "year": 2019,
       "url": "https://www.iso.org/standard/72704.html",
       "qifRelevance": "General medical device risk framework. No BCI-specific threat categories.",
-      "tags": ["medical-device", "risk-management"]
+      "tags": [
+        "medical-device",
+        "risk-management"
+      ]
     },
     {
       "id": "iec-62443",
@@ -672,7 +2252,10 @@
       "year": 2024,
       "url": "https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards",
       "qifRelevance": "Industrial security zones/conduits model. Adaptable to BCI but no neural coverage.",
-      "tags": ["ics", "security-zones"]
+      "tags": [
+        "ics",
+        "security-zones"
+      ]
     },
     {
       "id": "fda-524b",
@@ -683,7 +2266,11 @@
       "year": 2023,
       "url": "https://www.congress.gov/bill/117th-congress/house-bill/2617/text",
       "qifRelevance": "First mandatory cybersecurity requirements for medical devices including BCIs. TARA mapped to all provisions.",
-      "tags": ["regulatory", "fda", "medical-device"]
+      "tags": [
+        "regulatory",
+        "fda",
+        "medical-device"
+      ]
     },
     {
       "id": "eu-mdr-2017",
@@ -694,7 +2281,11 @@
       "year": 2017,
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745",
       "qifRelevance": "EU medical device framework. Cybersecurity mentioned but not BCI-specific.",
-      "tags": ["regulatory", "eu", "medical-device"]
+      "tags": [
+        "regulatory",
+        "eu",
+        "medical-device"
+      ]
     },
     {
       "id": "eu-ai-act",
@@ -705,7 +2296,12 @@
       "year": 2024,
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
       "qifRelevance": "Classifies neurotechnology as high-risk AI. Requires conformity assessments.",
-      "tags": ["regulatory", "eu", "ai", "high-risk"]
+      "tags": [
+        "regulatory",
+        "eu",
+        "ai",
+        "high-risk"
+      ]
     },
     {
       "id": "unesco-neurotech-rec",
@@ -716,7 +2312,11 @@
       "year": 2025,
       "url": "https://www.unesco.org/en/ethics-neurotech/recommendation",
       "qifRelevance": "First international ethical framework for neurotechnology. Adopted at 43rd General Conference.",
-      "tags": ["ethics", "international", "governance"]
+      "tags": [
+        "ethics",
+        "international",
+        "governance"
+      ]
     },
     {
       "id": "oecd-neurotech",
@@ -727,7 +2327,10 @@
       "year": 2019,
       "url": "https://legalinstruments.oecd.org/api/print?ids=658&Lang=en",
       "qifRelevance": "First intergovernmental standard on neurotechnology governance. 9 principles.",
-      "tags": ["governance", "international"]
+      "tags": [
+        "governance",
+        "international"
+      ]
     },
     {
       "id": "ieee-p2731",
@@ -738,7 +2341,11 @@
       "year": 2024,
       "url": null,
       "qifRelevance": "Standardized BCI/BMI terminology. Foundational for cross-framework communication.",
-      "tags": ["terminology", "ieee", "bci"]
+      "tags": [
+        "terminology",
+        "ieee",
+        "bci"
+      ]
     },
     {
       "id": "ieee-p2794",
@@ -749,7 +2356,11 @@
       "year": 2024,
       "url": null,
       "qifRelevance": "Brain data interoperability. Complements QIF data governance model.",
-      "tags": ["data", "interoperability", "ieee"]
+      "tags": [
+        "data",
+        "interoperability",
+        "ieee"
+      ]
     },
     {
       "id": "ieee-p7700",
@@ -760,7 +2371,11 @@
       "year": 2024,
       "url": null,
       "qifRelevance": "Neurotechnology-specific IEEE standard. Cabrera chairs the working group.",
-      "tags": ["neurotech", "ieee", "standards"]
+      "tags": [
+        "neurotech",
+        "ieee",
+        "standards"
+      ]
     },
     {
       "id": "coe-neurotech",
@@ -771,7 +2386,11 @@
       "year": 2025,
       "url": "https://www.coe.int/en/web/bioethics/neurotechnology",
       "qifRelevance": "Human rights-based neurotech governance for 46 countries.",
-      "tags": ["governance", "human-rights", "europe"]
+      "tags": [
+        "governance",
+        "human-rights",
+        "europe"
+      ]
     }
   ],
   "legislation": [
@@ -781,9 +2400,18 @@
       "jurisdiction": "Chile",
       "year": 2021,
       "type": "constitutional",
-      "neurorights": ["CL", "MP", "MI", "PC", "EA"],
+      "neurorights": [
+        "CL",
+        "MP",
+        "MI",
+        "PC",
+        "EA"
+      ],
       "status": "active",
-      "tags": ["first-mover", "constitutional"]
+      "tags": [
+        "first-mover",
+        "constitutional"
+      ]
     },
     {
       "id": "california-sb1223",
@@ -791,9 +2419,15 @@
       "jurisdiction": "California, US",
       "year": 2024,
       "type": "statute",
-      "neurorights": ["MP"],
+      "neurorights": [
+        "MP"
+      ],
       "status": "active",
-      "tags": ["privacy", "neural-data", "ccpa"]
+      "tags": [
+        "privacy",
+        "neural-data",
+        "ccpa"
+      ]
     },
     {
       "id": "colorado-hb1058",
@@ -801,9 +2435,15 @@
       "jurisdiction": "Colorado, US",
       "year": 2024,
       "type": "statute",
-      "neurorights": ["MP"],
+      "neurorights": [
+        "MP"
+      ],
       "status": "active",
-      "tags": ["privacy", "neural-data", "first-us-state"]
+      "tags": [
+        "privacy",
+        "neural-data",
+        "first-us-state"
+      ]
     },
     {
       "id": "mind-act",
@@ -811,9 +2451,16 @@
       "jurisdiction": "United States (federal)",
       "year": 2025,
       "type": "statute",
-      "neurorights": ["MP", "MI"],
+      "neurorights": [
+        "MP",
+        "MI"
+      ],
       "status": "proposed",
-      "tags": ["federal", "neural-data", "advisory-committee"]
+      "tags": [
+        "federal",
+        "neural-data",
+        "advisory-committee"
+      ]
     },
     {
       "id": "montana-sb214",
@@ -821,9 +2468,15 @@
       "jurisdiction": "Montana, US",
       "year": 2024,
       "type": "statute",
-      "neurorights": ["MP"],
+      "neurorights": [
+        "MP"
+      ],
       "status": "active",
-      "tags": ["privacy", "biometric", "neural-data"]
+      "tags": [
+        "privacy",
+        "biometric",
+        "neural-data"
+      ]
     },
     {
       "id": "minnesota-hf1370",
@@ -831,9 +2484,15 @@
       "jurisdiction": "Minnesota, US",
       "year": 2024,
       "type": "statute",
-      "neurorights": ["MP"],
+      "neurorights": [
+        "MP"
+      ],
       "status": "active",
-      "tags": ["privacy", "biometric", "neural-data"]
+      "tags": [
+        "privacy",
+        "biometric",
+        "neural-data"
+      ]
     },
     {
       "id": "latam-model-law",
@@ -841,9 +2500,19 @@
       "jurisdiction": "Latin America (model law)",
       "year": 2023,
       "type": "model-law",
-      "neurorights": ["CL", "MP", "MI", "PC", "EA"],
+      "neurorights": [
+        "CL",
+        "MP",
+        "MI",
+        "PC",
+        "EA"
+      ],
       "status": "adopted",
-      "tags": ["model-law", "regional", "comprehensive"]
+      "tags": [
+        "model-law",
+        "regional",
+        "comprehensive"
+      ]
     },
     {
       "id": "china-bci-ethics",
@@ -851,9 +2520,16 @@
       "jurisdiction": "China",
       "year": 2024,
       "type": "policy",
-      "neurorights": ["MP", "MI"],
+      "neurorights": [
+        "MP",
+        "MI"
+      ],
       "status": "active",
-      "tags": ["policy", "china", "bci"]
+      "tags": [
+        "policy",
+        "china",
+        "bci"
+      ]
     },
     {
       "id": "unhrc-neurotech",
@@ -861,19 +2537,36 @@
       "jurisdiction": "International (UN)",
       "year": 2024,
       "type": "resolution",
-      "neurorights": ["CL", "MP", "MI", "PC", "EA"],
+      "neurorights": [
+        "CL",
+        "MP",
+        "MI",
+        "PC",
+        "EA"
+      ],
       "status": "active",
-      "tags": ["international", "un", "mandate"]
+      "tags": [
+        "international",
+        "un",
+        "mandate"
+      ]
     },
     {
       "id": "eu-ai-act-neurotech",
-      "name": "EU AI Act (Regulation 2024/1689) — Neurotech as High-Risk",
+      "name": "EU AI Act (Regulation 2024/1689) \u2014 Neurotech as High-Risk",
       "jurisdiction": "European Union",
       "year": 2024,
       "type": "statute",
-      "neurorights": ["MP", "MI"],
+      "neurorights": [
+        "MP",
+        "MI"
+      ],
       "status": "active",
-      "tags": ["ai", "high-risk", "eu"]
+      "tags": [
+        "ai",
+        "high-risk",
+        "eu"
+      ]
     },
     {
       "id": "gpa-neural-data",
@@ -881,9 +2574,15 @@
       "jurisdiction": "International (GPA)",
       "year": 2024,
       "type": "resolution",
-      "neurorights": ["MP"],
+      "neurorights": [
+        "MP"
+      ],
       "status": "adopted",
-      "tags": ["privacy", "international", "neural-data"]
+      "tags": [
+        "privacy",
+        "international",
+        "neural-data"
+      ]
     },
     {
       "id": "fdora-524b",
@@ -893,7 +2592,11 @@
       "type": "statute",
       "neurorights": [],
       "status": "active",
-      "tags": ["cybersecurity", "medical-device", "fda"]
+      "tags": [
+        "cybersecurity",
+        "medical-device",
+        "fda"
+      ]
     }
   ]
 }
