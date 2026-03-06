@@ -15,6 +15,7 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails
 | Entry | Topic | Link |
 |-------|-------|------|
+| 87 | Framework page rewrite: honest derivation, guardrail-compliant prose, Whitepaper renamed to Research Proposal | [Entry 87](#entry-87-framework-page-rewrite) |
 | 86 | Epistemic reckoning: research compilation complete, major overhaul needed | [Entry 86](#entry-86-epistemic-reckoning) |
 | 85 | Research registry + triple-sync citation protocol + epistemic guardrail formalization | [Entry 85](#entry-85-research-registry-citation-sync) |
 | 84 | Privacy-preserving neural data architecture: HE, DP, data fiduciaries, consent provenance | [Entry 84](#entry-84-privacy-preserving-neural-data) |
@@ -377,6 +378,45 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 87: Framework Page Rewrite — Honest Derivation, Guardrail-Compliant Prose {#entry-87-framework-page-rewrite}
+
+**Date:** 2026-03-06
+**Classification:** DECISION (site architecture + epistemic compliance)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 86 (epistemic reckoning), Entry 14 (v3.0 hourglass), Entry 1 (OSI deprecated)
+
+### Context
+
+Entry 86 identified that the site needed a comprehensive wording overhaul to comply with neuromodesty and neuroethics guardrails. This entry documents the first major structural rewrite: the /framework/ page.
+
+### Changes
+
+1. **Framework page restructured with story-driven flow.** New sections: Research Question (Kevin's motivating question), Derivation (honest acknowledgment of how the hourglass was derived), static CSS Hourglass Model, 11 Bands (preserved), Threat Model with updated TARA/NISS prose, Signal Integrity (kept as Future Work, already correctly labeled on remote), new Status & Limitations evidence table, and Documents.
+
+2. **OSI consolidation gap acknowledged explicitly.** A callout box now states that consolidating OSI's 7 layers into 3 synthetic bands is a design choice, not a discovery. A reviewer could reasonably argue for more granularity. This is the kind of honest derivation note that builds credibility rather than undermining it.
+
+3. **3D Hourglass visualization removed.** The Hourglass3D React island (Three.js) was removed from the framework page. Replaced with a static CSS hourglass using the existing HOURGLASS_WIDTHS constants. The 3D component added visual complexity without adding informational value, and its React island increased page weight.
+
+4. **"Whitepaper" renamed to "Research Proposal" in all display text.** This affects Nav, Footer, index, framework, clinical, governance/rights, whitepaper pages (index, v7, v6), milestones.json, and glossary-constants.ts. All URL paths (/research/whitepaper/) are preserved to avoid breaking external links. The rename reflects the document's actual status: it is a research proposal, not an industry whitepaper.
+
+5. **TARA prose updated.** Changed "Developed by Qinnovate as a classification system purpose-built" to "a proposed classification system designed for neural interfaces." Added note about QIF-T0001 MITRE ATT&CK-style compatibility (without claiming MITRE affiliation).
+
+6. **NISS prose updated.** Added FIRST.org CVSS SIG context callout explaining that NISS has been submitted as a proposal to the SIG but this does not constitute endorsement or adoption.
+
+7. **Status & Limitations section added.** New evidence table explicitly listing what has and has not been accomplished: literature synthesis (complete), taxonomy and scoring (proposed), simulation testing (synthetic only), signal integrity (future work), real-world validation (no), clinical validation (no), third-party audit (no), standards adoption (no).
+
+8. **Signal Integrity section confirmed correct.** The remote version already correctly labeled this as Future Work with appropriate language about pending collaboration. Preserved as-is. Updated the "QIF Whitepaper" link text in this section to "Research Proposal."
+
+### Significance
+
+This is the first concrete deliverable from the Entry 86 decision to overhaul the site. The framework page is the most visited technical page and sets the tone for how the entire project is perceived. Every claim now passes the 6 neuromodesty checks and uses the 5-level evidence classification from rules/epistemic-integrity.md.
+
+### AI Collaboration
+
+Claude Opus 4.6 executed the rewrite based on Kevin's architectural decisions and the guardrail framework established in Entry 86. The page structure, section ordering, and specific wording choices for the OSI gap callout and FIRST.org context were designed to be defensible under peer review.
 
 ---
 

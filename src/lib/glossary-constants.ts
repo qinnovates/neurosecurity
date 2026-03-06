@@ -75,7 +75,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Signal Integrity (Coherence)',
     type: 'concept',
     shortDef: 'Proposed approach to measuring neural signal trustworthiness across phase, temporal, and spatial dimensions.',
-    fullDef: 'QIF identifies three dimensions for evaluating neural signal integrity: phase consistency, temporal stability, and spatial coherence. The mathematical formalization of how these combine into a composite security score is future work, pending collaboration with physicists and neuroscientists. Early explorations used the Boltzmann factor form (exponential decay over summed variances), documented in the QIF Whitepaper.',
+    fullDef: 'QIF identifies three dimensions for evaluating neural signal integrity: phase consistency, temporal stability, and spatial coherence. The mathematical formalization of how these combine into a composite security score is future work, pending collaboration with physicists and neuroscientists. Early explorations used the Boltzmann factor form (exponential decay over summed variances), documented in the QIF Research Proposal.',
     relatedTerms: ['phase-variance', 'transport-variance', 'gain-variance'],
     href: '/framework/#signal-integrity',
     tags: ['concept', 'security-core'],
