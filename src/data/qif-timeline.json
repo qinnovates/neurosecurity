@@ -211,8 +211,8 @@
     {
       "date": "2026-02-14",
       "type": "release",
-      "title": "Zenodo Preprint v1.0 Published",
-      "description": "First public preprint: 28 pages, 6 figures, CC-BY-4.0. DOI: 10.5281/zenodo.18640106. 3 fabricated citations discovered and disclosed."
+      "title": "Zenodo Working Paper v1.0 Published",
+      "description": "First public working paper: 28 pages, 6 figures, CC-BY-4.0. DOI: 10.5281/zenodo.18640106. 3 fabricated citations discovered and disclosed."
     },
     {
       "date": "2026-02-16",
@@ -274,7 +274,7 @@
     {
       "date": "2026-02-18",
       "type": "release",
-      "title": "Zenodo Preprint v1.4 Published",
+      "title": "Zenodo Working Paper v1.4 Published",
       "description": "NISS score corrections (arithmetic mean), TMS citation fix, dual-use label fix, Sherman & Guillery citation added. DOI: 10.5281/zenodo.18677997"
     },
     {
@@ -378,7 +378,7 @@
     {
       "date": "2026-02-26",
       "type": "release",
-      "title": "Zenodo Preprint v1.5 Published",
+      "title": "Zenodo Working Paper v1.5 Published",
       "description": "NISS v1.1 CR/CD split, weight normalization, 6 metrics. DOI: 10.5281/zenodo.18784513. All site documentation synced to v1.1."
     },
     {

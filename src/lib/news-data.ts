@@ -81,7 +81,7 @@ export const categories: Category[] = [
     name: 'Research & Academia',
     icon: '&#9830;',
     color: 'var(--color-text-muted)',
-    description: 'Published papers, preprints, and academic developments in neural security.',
+    description: 'Published papers, working papers, and academic developments in neural security.',
     sources: [
       { name: 'arXiv Neuroscience', url: 'https://arxiv.org/list/q-bio.NC/recent' },
       { name: 'Nature Neuroscience', url: 'https://www.nature.com/neuro/' },
