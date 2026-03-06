@@ -4,7 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: ad724ec942d1d5b9a65d3ddf2b5ae01473008edb -->
+<!-- changelog-marker: d3cad74438ad852ac67b231e5df52aa25fcfcb0c -->
+
+## 2026-03-06
+
+### Updated
+- Site consolidation: 5-pillar architecture, audit fixes, broken link repair ([d3cad74](https://github.com/qinnovates/qinnovate/commit/d3cad74))
+
 
 ## 2026-03-05
 
