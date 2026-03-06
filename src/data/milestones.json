@@ -53,7 +53,7 @@
   "specifications": [
     {
       "id": "qif-whitepaper",
-      "title": "QIF Whitepaper",
+      "title": "QIF Research Proposal",
       "version": "7.0",
       "summary": "Proposed open security framework for brain-computer interfaces — hourglass architecture, threat modeling, neural impact scoring.",
       "href": "/research/whitepaper/"
@@ -157,7 +157,7 @@
     {
       "date": "2026-02-12",
       "title": "DSM-5-TR Neural Impact Chain Mapping",
-      "description": "Research mapping from BCI security severity scores to psychiatric diagnostic categories. All techniques mapped to DSM-5-TR diagnostic clusters via the Neural Impact Chain. Requires clinical validation. See the whitepaper v6 or TARA changelog for details.",
+      "description": "Research mapping from BCI security severity scores to psychiatric diagnostic categories. All techniques mapped to DSM-5-TR diagnostic clusters via the Neural Impact Chain. Requires clinical validation. See the research proposal v6 or TARA changelog for details.",
       "category": "research",
       "icon": "brain",
       "href": "/news/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
