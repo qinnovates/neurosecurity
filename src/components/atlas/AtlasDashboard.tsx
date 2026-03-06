@@ -4,10 +4,13 @@
  * All data driven from JSON via atlas-data.ts.
  */
 
-import { Suspense, useState, useEffect, lazy } from 'react';
+import { Suspense, useState, useEffect, useCallback, lazy } from 'react';
 import { AtlasProvider, useAtlas, type ViewMode } from './AtlasContext';
 import HourglassVisualization from './HourglassVisualization';
 import AtlasDetailPanel from './AtlasDetailPanel';
+import ThreatMap from './ThreatMap';
+import { THREAT_VECTORS, THREAT_TACTICS } from '../../lib/threat-data';
+import { HOURGLASS_BANDS } from '../../lib/qif-constants';
 import type { AtlasData } from '../../lib/atlas-data';
 import type { BrainView } from '../../lib/brain-view-data';
 
@@ -108,10 +111,20 @@ function SafariDialog({ onDismiss }: { onDismiss: () => void }) {
   );
 }
 
+type DashboardView = 'hourglass' | 'threatmap';
+
 function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
   const { selectedBandId, activeTab, viewMode, selectBand, setActiveTab, setViewMode } = useAtlas();
   const [mobileTab, setMobileTab] = useState<'hourglass' | 'brain'>('hourglass');
   const [showSafariDialog, setShowSafariDialog] = useState(false);
+  const [dashView, setDashView] = useState<DashboardView>('hourglass');
+
+  const handleThreatMapBandHighlight = useCallback((bandIds: string[]) => {
+    // Highlight first band in the list
+    if (bandIds.length > 0 && !selectedBandId) {
+      // Don't auto-select, just let the threat map manage its own state
+    }
+  }, [selectedBandId]);
 
   useEffect(() => {
     const ua = navigator.userAgent;
@@ -134,116 +147,152 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
     <div className="space-y-4">
       {showSafariDialog && <SafariDialog onDismiss={() => setShowSafariDialog(false)} />}
 
-      {/* View mode toggle */}
-      <div className="flex items-center justify-center gap-1">
-        {VIEW_MODE_CONFIG.map(mode => {
-          const isActive = viewMode === mode.id;
-          return (
+      {/* Dashboard view toggle */}
+      <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center gap-1 rounded-full p-0.5" style={{ background: 'var(--color-bg-secondary)', border: '1px solid var(--color-border)' }}>
+          {([
+            { id: 'hourglass' as DashboardView, label: 'Hourglass' },
+            { id: 'threatmap' as DashboardView, label: 'Threat Map' },
+          ]).map(v => (
             <button
-              key={mode.id}
-              onClick={() => setViewMode(mode.id)}
-              className="px-4 py-2 rounded-full text-xs font-medium transition-all"
+              key={v.id}
+              onClick={() => setDashView(v.id)}
+              className="px-4 py-1.5 rounded-full text-xs font-medium transition-all"
               style={{
-                background: isActive ? `${mode.color}15` : 'transparent',
-                color: isActive ? mode.color : 'var(--color-text-faint)',
-                border: `1px solid ${isActive ? `${mode.color}30` : 'transparent'}`,
+                background: dashView === v.id ? 'var(--color-accent-primary)' : 'transparent',
+                color: dashView === v.id ? '#fff' : 'var(--color-text-faint)',
               }}
             >
-              {mode.label}
+              {v.label}
             </button>
-          );
-        })}
-      </div>
-
-      {/* Mobile tab switcher */}
-      <div className="flex lg:hidden items-center justify-center gap-1">
-        <button
-          onClick={() => setMobileTab('hourglass')}
-          className="px-4 py-1.5 rounded-full text-xs font-medium transition-all"
-          style={{
-            background: mobileTab === 'hourglass' ? 'var(--color-bg-secondary)' : 'transparent',
-            color: mobileTab === 'hourglass' ? 'var(--color-text-primary)' : 'var(--color-text-faint)',
-            border: `1px solid ${mobileTab === 'hourglass' ? 'var(--color-border)' : 'transparent'}`,
-          }}
-        >
-          Hourglass
-        </button>
-        <button
-          onClick={() => setMobileTab('brain')}
-          className="px-4 py-1.5 rounded-full text-xs font-medium transition-all"
-          style={{
-            background: mobileTab === 'brain' ? 'var(--color-bg-secondary)' : 'transparent',
-            color: mobileTab === 'brain' ? 'var(--color-text-primary)' : 'var(--color-text-faint)',
-            border: `1px solid ${mobileTab === 'brain' ? 'var(--color-border)' : 'transparent'}`,
-          }}
-        >
-          Brain
-        </button>
-      </div>
-
-      {/* Main visualization area */}
-      <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-        {/* Hourglass (40% desktop, full mobile when active) */}
-        <div className={`lg:w-[40%] shrink-0 ${mobileTab !== 'hourglass' ? 'hidden lg:block' : ''}`}>
-          <HourglassVisualization
-            bands={atlasData.bands}
-            selectedBandId={selectedBandId}
-            onBandSelect={selectBand}
-          />
+          ))}
         </div>
 
-        {/* Brain render (60% desktop, full mobile when active) */}
-        <div
-          className={`lg:w-[60%] ${mobileTab !== 'brain' ? 'hidden lg:block' : ''}`}
-          style={{ minHeight: '400px' }}
-        >
-          <Suspense fallback={
-            <div className="flex items-center justify-center h-full" style={{ minHeight: '400px' }}>
-              <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Loading 3D brain...</p>
-            </div>
-          }>
-            <BrainVisualization
-              views={brainViews}
-              defaultView={brainViewId}
-              externalActiveRegion={selectedBandId}
-              onRegionSelect={handleBrainRegionSelect}
-              externalViewId={brainViewId}
-              onViewChange={(id) => {
-                const mode = VIEW_MODE_CONFIG.find(v => v.brainViewId === id);
-                if (mode) setViewMode(mode.id);
+        {/* View mode toggle (only for hourglass view) */}
+        {dashView === 'hourglass' && (
+          <div className="flex items-center gap-1">
+            {VIEW_MODE_CONFIG.map(mode => {
+              const isActive = viewMode === mode.id;
+              return (
+                <button
+                  key={mode.id}
+                  onClick={() => setViewMode(mode.id)}
+                  className="px-4 py-2 rounded-full text-xs font-medium transition-all"
+                  style={{
+                    background: isActive ? `${mode.color}15` : 'transparent',
+                    color: isActive ? mode.color : 'var(--color-text-faint)',
+                    border: `1px solid ${isActive ? `${mode.color}30` : 'transparent'}`,
+                  }}
+                >
+                  {mode.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {dashView === 'hourglass' ? (
+        <>
+          {/* Mobile tab switcher */}
+          <div className="flex lg:hidden items-center justify-center gap-1">
+            <button
+              onClick={() => setMobileTab('hourglass')}
+              className="px-4 py-1.5 rounded-full text-xs font-medium transition-all"
+              style={{
+                background: mobileTab === 'hourglass' ? 'var(--color-bg-secondary)' : 'transparent',
+                color: mobileTab === 'hourglass' ? 'var(--color-text-primary)' : 'var(--color-text-faint)',
+                border: `1px solid ${mobileTab === 'hourglass' ? 'var(--color-border)' : 'transparent'}`,
               }}
-              hideViewToggle
+            >
+              Hourglass
+            </button>
+            <button
+              onClick={() => setMobileTab('brain')}
+              className="px-4 py-1.5 rounded-full text-xs font-medium transition-all"
+              style={{
+                background: mobileTab === 'brain' ? 'var(--color-bg-secondary)' : 'transparent',
+                color: mobileTab === 'brain' ? 'var(--color-text-primary)' : 'var(--color-text-faint)',
+                border: `1px solid ${mobileTab === 'brain' ? 'var(--color-border)' : 'transparent'}`,
+              }}
+            >
+              Brain
+            </button>
+          </div>
+
+          {/* Main visualization area */}
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
+            {/* Hourglass (40% desktop, full mobile when active) */}
+            <div className={`lg:w-[40%] shrink-0 ${mobileTab !== 'hourglass' ? 'hidden lg:block' : ''}`}>
+              <HourglassVisualization
+                bands={atlasData.bands}
+                selectedBandId={selectedBandId}
+                onBandSelect={selectBand}
+              />
+            </div>
+
+            {/* Brain render (60% desktop, full mobile when active) */}
+            <div
+              className={`lg:w-[60%] ${mobileTab !== 'brain' ? 'hidden lg:block' : ''}`}
+              style={{ minHeight: '400px' }}
+            >
+              <Suspense fallback={
+                <div className="flex items-center justify-center h-full" style={{ minHeight: '400px' }}>
+                  <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Loading 3D brain...</p>
+                </div>
+              }>
+                <BrainVisualization
+                  views={brainViews}
+                  defaultView={brainViewId}
+                  externalActiveRegion={selectedBandId}
+                  onRegionSelect={handleBrainRegionSelect}
+                  externalViewId={brainViewId}
+                  onViewChange={(id) => {
+                    const mode = VIEW_MODE_CONFIG.find(v => v.brainViewId === id);
+                    if (mode) setViewMode(mode.id);
+                  }}
+                  hideViewToggle
+                />
+              </Suspense>
+            </div>
+          </div>
+
+          {/* Detail panel */}
+          {selectedBand && (
+            <AtlasDetailPanel
+              band={selectedBand}
+              devices={atlasData.devices}
+              neurorights={atlasData.neurorights}
+              dsmClusters={atlasData.dsmClusters}
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+              threatDetail={threatDetails[selectedBand.id] ?? { total: 0, categories: {}, bySeverity: {}, avgNiss: 0 }}
             />
-          </Suspense>
-        </div>
-      </div>
+          )}
 
-      {/* Detail panel */}
-      {selectedBand && (
-        <AtlasDetailPanel
-          band={selectedBand}
-          devices={atlasData.devices}
-          neurorights={atlasData.neurorights}
-          dsmClusters={atlasData.dsmClusters}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-          threatDetail={threatDetails[selectedBand.id] ?? { total: 0, categories: {}, bySeverity: {}, avgNiss: 0 }}
+          {/* Empty state */}
+          {!selectedBand && (
+            <div
+              className="text-center py-8 rounded-xl border"
+              style={{ background: 'var(--color-bg-secondary)', borderColor: 'var(--color-border)' }}
+            >
+              <p className="text-sm" style={{ color: 'var(--color-text-faint)' }}>
+                Click a hourglass band or brain region to explore
+              </p>
+              <p className="text-xs mt-1" style={{ color: 'var(--color-text-faint)' }}>
+                11 bands, {atlasData.devices.length} devices, {atlasData.neurorights.length} neurorights
+              </p>
+            </div>
+          )}
+        </>
+      ) : (
+        /* Threat Map view */
+        <ThreatMap
+          threats={THREAT_VECTORS}
+          tactics={THREAT_TACTICS}
+          bands={HOURGLASS_BANDS.map(b => ({ id: b.id, name: b.name, zone: b.zone }))}
+          onBandHighlight={handleThreatMapBandHighlight}
         />
-      )}
-
-      {/* Empty state */}
-      {!selectedBand && (
-        <div
-          className="text-center py-8 rounded-xl border"
-          style={{ background: 'var(--color-bg-secondary)', borderColor: 'var(--color-border)' }}
-        >
-          <p className="text-sm" style={{ color: 'var(--color-text-faint)' }}>
-            Click a hourglass band or brain region to explore
-          </p>
-          <p className="text-xs mt-1" style={{ color: 'var(--color-text-faint)' }}>
-            11 bands, {atlasData.devices.length} devices, {atlasData.neurorights.length} neurorights
-          </p>
-        </div>
       )}
     </div>
   );
