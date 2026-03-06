@@ -15,6 +15,7 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails
 | Entry | Topic | Link |
 |-------|-------|------|
+| 86 | Epistemic reckoning: research compilation complete, major overhaul needed | [Entry 86](#entry-86-epistemic-reckoning) |
 | 85 | Research registry + triple-sync citation protocol + epistemic guardrail formalization | [Entry 85](#entry-85-research-registry-citation-sync) |
 | 84 | Privacy-preserving neural data architecture: HE, DP, data fiduciaries, consent provenance | [Entry 84](#entry-84-privacy-preserving-neural-data) |
 
@@ -376,6 +377,62 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 86: Epistemic Reckoning — Research Compiled, Major Overhaul Needed {#entry-86-epistemic-reckoning}
+
+**Date:** 2026-03-06
+**Classification:** DECISION (epistemic methodology + project direction)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 85 (epistemic guardrails), Entry 79 (ferritin correction), Entry 59 (hallucination audit)
+
+### Context
+
+After compiling 309+ verified research sources, running a full anti-hallucination audit across the site (7 parallel verification agents), and reviewing the neuroethics guardrails literature (Morse neuromodesty, Poldrack reverse inference, Racine neurorealism, Kellmeyer underspecification, Ienca anti-inflationism), Kevin identified a fundamental problem:
+
+**The QIF site and documentation make claims that violate the very neuroethics guidelines the project is built on.**
+
+Specific examples addressed in this session:
+
+1. **Scale-frequency "invariant"** — Presented as a QIF discovery. It is the wave equation (v = f x lambda), established physics. Kevin: "inaccurate and useless unless combined with other equations."
+2. **Coherence metric (Cs)** — Presented as a novel QIF equation. It is the Boltzmann factor (e^(-E)) applied to variance terms. The mathematical form is established; QIF's contribution is choosing which variance dimensions to track and applying it as a security metric. Kevin: "this is just the Boltzmann factor."
+3. **Multiple pages presented proposed, unvalidated work as operational systems** — calculators, threshold zones, and defense mappings built on equations that have not been validated against real hardware or biological data.
+
+### Decision
+
+Kevin decided:
+
+- **Remove all unvalidated math from the public site.** The scale-frequency sections, coherence calculators, and equation displays have been archived. Whitepapers (versioned historical documents) are preserved as-is.
+- **Replace with "future work" framing.** Signal integrity calculations will be developed through collaboration with physicists and neuroscientists. The site now says this explicitly.
+- **The research compilation phase is complete.** 309+ sources verified. The next phase is not adding more research — it is sorting through everything to ensure every claim is clearly articulated as either (a) established science being applied, (b) a QIF proposal requiring validation, or (c) future work.
+- **A major overhaul of the entire site and documentation structure is needed.** Wording throughout must be audited against the neuromodesty framework and the 7 neuroethics guardrails. This is not a cosmetic edit — it is a structural rethinking of how the project presents itself.
+
+### Significance
+
+This is the project's second major epistemic correction (the first was the hallucination audit in Entry 59 that caught 3 fabricated citations in preprint v1.0). But this one is deeper: it is not about individual false claims, it is about the framing of the entire project. Presenting established physics as novel discoveries and proposed tools as operational systems undermines the credibility the research is trying to build — and contradicts the neuromodesty principle that is supposed to govern everything QIF produces.
+
+The irony is not lost: a project centered on neuroethics was violating neuroethics presentation standards. Catching this before peer review or formal publication is the system working as intended.
+
+### Mitigation: Neuroethics Guidelines Baked into AI Instructions
+
+Kevin has embedded the neuromodesty framework (Morse 2006/2011), 7 neuroethics guardrails (Poldrack, Racine/Illes, Ienca, Kellmeyer, Wexler, Tennison/Moreno, Vul/Eklund), and a 5-level evidence classification system directly into Claude's project instructions (`rules/epistemic-integrity.md`). This means every AI-assisted output is checked against these constraints before it ships.
+
+**Kevin's assessment: it is not reliable, but it is better than before.** The guardrails catch some overclaims automatically, but they do not catch everything — the scale-frequency and Boltzmann factor issues both shipped despite the rules being in place. The system is a safety net, not a guarantee. Kevin is now going through the site manually to ensure what he has learned from the neuroethics literature is applied appropriately.
+
+### What This Means for the Project
+
+- The research base is solid (309+ verified sources, no fabrications after the v1.0 audit)
+- The threat taxonomy (TARA) and scoring system (NISS) are original contributions that stand on their own
+- The physics-derived equations need collaboration to validate — they are hypotheses, not results
+- The site needs a comprehensive wording overhaul, not just targeted fixes
+- **The more Kevin learns, the less confident he is in the current presentation** — which is itself evidence that the learning is working. The gap between "what I know" and "what I thought I knew" keeps widening, reinforcing the need for formal education rather than self-directed article stitching.
+
+### AI Collaboration
+
+- **Model:** Claude Opus 4.6
+- **Role:** Implementation of math removal, "future work" framing, site edits across 12 files
+- **Human-Decided:** Kevin identified both the scale-frequency and Boltzmann factor issues. Kevin decided to remove rather than reframe. Kevin set the direction: archive math, frame as future work pending collaboration with domain experts.
 
 ---
 

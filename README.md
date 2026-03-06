@@ -67,7 +67,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/whitepaper/)** | 11-band hourglass security architecture for BCIs | 🟢 v6.2.1 |
-| **[Preprint](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.5 |
+| **[Working Paper](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper ([DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) | 🟢 v1.5 |
 | **[TARA](https://qinnovate.com/TARA/)** | 109 BCI attack-therapy technique pairs, STIX 2.1 registry | 🟢 v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | 🟢 v0.2.0 |
 | **[NSP](https://qinnovate.com/nsp/)** | Post-quantum wire protocol for BCI data links | 🟡 v0.5, Secure Core done |
@@ -100,10 +100,10 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 | Component | Description | Status |
 |-----------|-------------|--------|
-| **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Preprint published, CC-BY 4.0, LaTeX source included | 🟢 Published |
+| **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Working paper published, CC-BY 4.0, LaTeX source included | 🟢 Published |
 | **[Research Sources](qif-framework/QIF-RESEARCH-SOURCES.md)** | Living bibliography: 193 verified sources across 9 domains | 🟢 Active |
 | **[CVE-TARA Mapping](shared/cve-technique-mapping.json)** | 55 NVD-verified CVEs mapped to 21 TARA techniques | 🟢 Published |
-| arXiv | Cross-post of preprint | 🔴 Blocked — pending academic partnership |
+| arXiv | Cross-post of working paper | 🔴 Blocked — pending academic partnership |
 | Graz BCI Conference | Submission for March 2026 deadline | 🔴 Blocked — pending academic partnership |
 | CVE Disclosure | Coordinated vulnerability disclosure (BCI-adjacent library) | 🟡 Response received, in progress |
 | FIRST.org CVSS SIG | NISS proposed as CVSS v4.0 extension; outreach in progress | 🟡 In Progress |
@@ -190,7 +190,7 @@ Three fields converge on BCIs. None of them covers the full problem alone.
 The security model. An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spinal Cord), a physical interface boundary (I0, the electrode-tissue interface), and 3 silicon bands (S1 Analog up to S3 Radio/Wireless).
 
 - **Whitepaper:** [qinnovate.com/whitepaper](https://qinnovate.com/whitepaper/) (v6.2.1)
-- **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) (28 pages, CC-BY 4.0, always latest version)
+- **Working Paper:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) (28 pages, CC-BY 4.0, always latest version)
 - **Specification:** [qif-framework/](qif-framework/)
 - **Interactive explorer:** [qinnovate.com/lab/hourglass.html](https://qinnovate.com/lab/hourglass.html)
 
@@ -295,7 +295,7 @@ qinnovates/qinnovate/
 │   └── archive/                # Deprecated data files
 │
 ├── paper/                      # Academic publications
-│   └── preprint/               # Zenodo preprint
+│   └── preprint/               # Zenodo working paper
 │
 ├── governance/                 # Neuroethics + policy documents
 │   ├── NEUROSECURITY_GOVERNANCE.md
