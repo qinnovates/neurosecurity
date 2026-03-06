@@ -6,9 +6,9 @@
 
 # Qinnovate
 
-**From brain-dumps to frameworks and tangible results.*
+**From brain-dumps to mind-maps.*
 
-Qinnovate develops open frameworks, protocols, and governance alignment with tools for securing brain-computer interfaces. Vendor-agnostic. Community-driven. Apache 2.0.
+Qinnovate research hopes to influence the development of open frameworks, protocols, and governance alignment with tools for securing brain-computer interfaces. Vendor-agnostic. Community-driven. Apache 2.0.
 
 The standards bodies that shaped the internet didn't build browsers. They built the rules that made browsers possible. Qinnovate does the same for neural interfaces.
 
