@@ -411,7 +411,7 @@ function DeviceDetail({ device, onClose }: { device: BciDevice; onClose: () => v
             </span>
           )}
           <a
-            href={`/interface-risks/#${device.id}`}
+            href={`/research/#${device.id}`}
             style={{
               fontSize: '0.6875rem',
               color: 'var(--color-accent-secondary)',

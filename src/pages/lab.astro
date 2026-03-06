@@ -10,7 +10,7 @@ const bands = [...HOURGLASS_BANDS];
   title="QIF Lab"
   description="Interactive reference implementations of QIF equations — coherence calculator, scale-frequency explorer, and equation sandbox."
   breadcrumbs={[{ label: 'Lab' }]}
-  maxWidth="wide"
+  wide={true}
 >
   <div class="mb-12">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">QIF Lab</h1>
@@ -21,21 +21,21 @@ const bands = [...HOURGLASS_BANDS];
 
   <!-- Tool Cards -->
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-    <a href="/open-research/derivation/hourglass.html" class="lab-card glass rounded-xl p-6 block group">
+    <a href="/news/derivation/hourglass.html" class="lab-card glass rounded-xl p-6 block group">
       <div class="text-2xl mb-3 text-[var(--color-status-warn)]">&#9632;</div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Layer Explorer</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
         Drill into all {bands.length} hourglass bands with attack vectors, BCI devices, and frequency spectrum.
       </p>
-      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /open-research/derivation/hourglass.html</span>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /news/derivation/hourglass.html</span>
     </a>
-    <a href="/threat-models/tara/" class="lab-card glass rounded-xl p-6 block group">
+    <a href="/atlas/tara/" class="lab-card glass rounded-xl p-6 block group">
       <div class="text-2xl mb-3 text-[var(--color-status-danger)]">&#9888;</div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Threat Map</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
         {THREAT_VECTORS.length} attack vectors mapped across bands and categories with severity heatmapping.
       </p>
-      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /threat-models/tara/</span>
+      <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; /atlas/tara/</span>
     </a>
   </div>
 
@@ -110,12 +110,12 @@ const bands = [...HOURGLASS_BANDS];
       <!-- Visual representation -->
       <div class="space-y-4 mb-8">
         {SCALE_FREQUENCY.bands.map((band) => {
-          const maxExtent = 20; @/ cm
+          const maxExtent = 20; // cm
           const extent = parseFloat(band.extent.replace(/[^0-9.]/g, ''));
           const percent = (extent / maxExtent) * 100;
           const freqParts = band.frequency.split('-');
           const maxFreq = parseFloat(freqParts[freqParts.length - 1]);
-          @/ Color intensity based on frequency
+          // Color intensity based on frequency
           const hue = maxFreq > 30 ? 280 : maxFreq > 8 ? 180 : maxFreq > 4 ? 200 : 220;
           return (
             <div>
@@ -178,7 +178,7 @@ const bands = [...HOURGLASS_BANDS];
 </PageLayout>
 
 <script>
-  @/ Coherence Calculator
+  // Coherence Calculator
   const sliders = ['sigma-phi', 'sigma-tau', 'sigma-gamma'].map((id) => ({
     input: document.getElementById(id) as HTMLInputElement,
     display: document.getElementById(`${id}-val`) as HTMLElement,

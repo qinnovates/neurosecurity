@@ -10,13 +10,13 @@ const totalTactics = THREAT_TACTICS.length;
 const totalDomains = (THREAT_DOMAINS as any[]).length;
 
 const tacticColors: Record<string, string> = {
-  'N': '#06b6d4',   @/ Neural → cyan
-  'C': '#f59e0b',   @/ Cognitive → amber
-  'P': '#ef4444',   @/ Physiological → red
-  'D': '#06b6d4',   @/ Data → cyan
-  'B': '#8b5cf6',   @/ BCI System → violet
-  'M': '#10b981',   @/ Model → emerald
-  'E': '#f97316',   @/ Energy → orange
+  'N': '#06b6d4',   // Neural → cyan
+  'C': '#f59e0b',   // Cognitive → amber
+  'P': '#ef4444',   // Physiological → red
+  'D': '#06b6d4',   // Data → cyan
+  'B': '#8b5cf6',   // BCI System → violet
+  'M': '#10b981',   // Model → emerald
+  'E': '#f97316',   // Energy → orange
 };
 ---
 
@@ -251,7 +251,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose">
           <p>
-            For the complete scoring methodology, see the <a href="/threat-models/scoring/">NISS Scoring page</a>. For the full technique atlas, explore the <a href="/threat-models/tara/">TARA Atlas</a>. The complete taxonomy derivation and metric definitions are in the <a href="/research/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a>.
+            For the complete scoring methodology, see the <a href="/atlas/scoring/">NISS Scoring page</a>. For the full technique atlas, explore the <a href="/atlas/tara/">TARA Atlas</a>. The complete taxonomy derivation and metric definitions are in the <a href="/research/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a>.
           </p>
         </div>
       </section>
@@ -301,7 +301,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <div class="text-center mt-6">
-          <a href="/explore/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+          <a href="/atlas/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
             Try the interactive coherence calculator in QIF Lab &rarr;
           </a>
         </div>
@@ -358,11 +358,11 @@ const tacticColors: Record<string, string> = {
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Whitepaper</h3>
             <p class="text-sm text-[var(--color-text-muted)]">Full derivation, taxonomy, and scoring methodology for the framework.</p>
           </a>
-          <a href="https:@/github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+          <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Security Guardrails</h3>
             <p class="text-sm text-[var(--color-text-muted)]">Physics-derived defense architecture for BCI systems, mapping coherence thresholds to per-band protection rules.</p>
           </a>
-          <a href="/threat-models/tara/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+          <a href="/atlas/tara/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">TARA Atlas</h3>
             <p class="text-sm text-[var(--color-text-muted)]">Browse all {TARA_TECHNIQUES}+ techniques across the hourglass, filterable by category and severity.</p>
           </a>

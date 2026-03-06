@@ -22,9 +22,9 @@ import {
   FORGE_TEST_STATUS,
 } from '@/lib/runemate-constants';
 
-const MAX_KB = 509.3; @/ largest classical total, used to scale chart bars
+const MAX_KB = 509.3; // largest classical total, used to scale chart bars
 
-@/ Dynamic research docs - rendered from markdown in qif-framework/research/
+// Dynamic research docs - rendered from markdown in qif-framework/research/
 const ferroceneEntry = await getEntry('research', 'ferrocene-exploration');
 const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
 ---
@@ -570,11 +570,11 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
             <ferroceneContent.Content />
           </div>
         ) : (
-          <p class="text-sm text-[var(--color-text-muted)]">Ferrocene research document not found. See <a href="https:@/github.com/qinnovates/qinnovate/blob/main/qif-framework/research/ferrocene-exploration.md" class="text-[var(--color-accent-primary)] hover:underline">the source document on GitHub</a>.</p>
+          <p class="text-sm text-[var(--color-text-muted)]">Ferrocene research document not found. See <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/research/ferrocene-exploration.md" class="text-[var(--color-accent-primary)] hover:underline">the source document on GitHub</a>.</p>
         )}
         <div class="mt-4 pt-3 border-t border-[var(--color-border)]">
           <p class="text-xs text-[var(--color-text-faint)]">
-            This section is rendered from <a href="https:@/github.com/qinnovates/qinnovate/blob/main/qif-framework/research/ferrocene-exploration.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">qif-framework/research/ferrocene-exploration.md</a>. Update the source document and rebuild to see changes here.
+            This section is rendered from <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/research/ferrocene-exploration.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">qif-framework/research/ferrocene-exploration.md</a>. Update the source document and rebuild to see changes here.
           </p>
         </div>
       </section>
@@ -775,7 +775,7 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
 
         <div class="glass rounded-xl p-6 sm:p-8 mb-6">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Repository</p>
-          <a href="https:@/github.com/qinnovates/qinnovate/tree/main/src/lib/runemate-forge" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[var(--color-accent-primary)] hover:underline font-[family-name:var(--font-mono)] text-sm mb-4">
+          <a href="https://github.com/qinnovates/qinnovate/tree/main/src/lib/runemate-forge" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[var(--color-accent-primary)] hover:underline font-[family-name:var(--font-mono)] text-sm mb-4">
             github.com/qinnovates/qinnovate &rarr; src/lib/runemate-forge
           </a>
           <div class="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
@@ -795,7 +795,7 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
           <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
             <div>
               <p class="font-semibold text-[var(--color-text-primary)] mb-1">1. Clone and build</p>
-              <pre class="bg-[var(--color-bg-secondary)] rounded-lg p-3 text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>git clone https:@/github.com/qinnovates/qinnovate.git
+              <pre class="bg-[var(--color-bg-secondary)] rounded-lg p-3 text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>git clone https://github.com/qinnovates/qinnovate.git
 cd qinnovate/src/lib/runemate-forge
 cargo build
 cargo test</code></pre>
@@ -824,7 +824,7 @@ cargo test</code></pre>
 
         <div class="glass rounded-xl p-6 sm:p-8 mt-6" style="border-left: 3px solid var(--color-accent-secondary);">
           <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">Academic collaboration:</strong> This is active research. As this work enters the academic landscape, formal collaboration will further solidify the compiler, safety proofs, and neuroscience foundations. If you're interested in contributing now &mdash; or exploring collaboration once institutional frameworks are in place &mdash; reach out via <a href="https:@/github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub Discussions</a> or open an issue on <a href="https:@/github.com/qinnovates/qinnovate/issues" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub</a>.
+            <strong class="text-[var(--color-text-primary)]">Academic collaboration:</strong> This is active research. As this work enters the academic landscape, formal collaboration will further solidify the compiler, safety proofs, and neuroscience foundations. If you're interested in contributing now &mdash; or exploring collaboration once institutional frameworks are in place &mdash; reach out via <a href="https://github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub Discussions</a> or open an issue on <a href="https://github.com/qinnovates/qinnovate/issues" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">GitHub</a>.
           </p>
         </div>
 

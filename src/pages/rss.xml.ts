@@ -14,7 +14,7 @@ export async function GET(context: APIContext) {
       title: brief.title,
       description: `${brief.summary}\n\nQIF Relevance: ${brief.relevance}`,
       pubDate: new Date(`${brief.date}-01`),
-      link: '/open-research/writing/',
+      link: '/news/',
       categories: cat ? [cat.name] : [],
     };
   });

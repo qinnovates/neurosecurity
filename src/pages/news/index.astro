@@ -1,0 +1,375 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import FeedCard from '@/components/FeedCard.astro';
+import { getCollection } from 'astro:content';
+import { categories, briefs } from '@/lib/news-data';
+import { getPostDate, readingTime, cleanTag } from '@/lib/utils';
+import { fetchExternalNews } from '@/lib/fetch-feeds';
+import type { FeedItem, PublicationItem, BriefItem } from '@/lib/feed-types';
+
+// --- Build all streams ---
+
+const allPosts = await getCollection('blog');
+
+function isFieldJournal(post: typeof allPosts[0]): boolean {
+  return post.data.tags.some((t: string) => t.toLowerCase().replace('#', '') === 'fieldjournal')
+    || post.id.includes('field-journal');
+}
+
+const regularPosts = allPosts.filter((p) => !isFieldJournal(p));
+const fieldJournalPosts = allPosts.filter((p) => isFieldJournal(p));
+
+// 1. Qinnovate blog posts (newest first)
+const blogItems: PublicationItem[] = regularPosts
+  .map((post) => {
+    const body = post.body || '';
+    const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
+    return {
+      type: 'publication' as const,
+      title: post.data.title,
+      date: getPostDate(post.data),
+      slug: post.id,
+      excerpt,
+      tags: post.data.tags.map(cleanTag),
+      readTime: readingTime(body),
+    };
+  })
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+// 2. Field journal entries (newest first)
+const fieldJournalItems = fieldJournalPosts
+  .map((post) => {
+    const body = post.body || '';
+    const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().slice(0, 140) + '...';
+    return {
+      type: 'publication' as const,
+      title: post.data.title,
+      date: getPostDate(post.data),
+      slug: post.id,
+      excerpt,
+      tags: post.data.tags.map(cleanTag),
+      readTime: readingTime(body),
+      source: post.data.source,
+    };
+  })
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+// 3. Intelligence briefs
+const briefItems: BriefItem[] = briefs.map((brief) => {
+  const cat = categories.find((c) => c.id === brief.category);
+  const date = brief.date.length === 7 ? `${brief.date}-15` : brief.date;
+  return {
+    type: 'brief' as const,
+    title: brief.title,
+    date,
+    category: brief.category,
+    categoryColor: cat?.color || 'var(--color-border)',
+    categoryName: cat?.name || brief.category,
+    summary: brief.summary,
+    relevance: brief.relevance,
+    url: brief.url,
+  };
+});
+
+// 4. External news
+const externalItems = await fetchExternalNews();
+
+// Industry stream: briefs + external, newest first
+const industryItems: FeedItem[] = [...briefItems, ...externalItems]
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+const totalCount = blogItems.length + fieldJournalItems.length + industryItems.length;
+
+// Category mapping for blog tags
+function inferCategory(tags: string[]): string {
+  const tagSet = new Set(tags.map((t) => t.toLowerCase()));
+  if (tagSet.has('bci') || tagSet.has('neurosecurity') || tagSet.has('neural ransomware')) return 'bci-security';
+  if (tagSet.has('neuralink') || tagSet.has('synchron') || tagSet.has('apple') || tagSet.has('openbci')) return 'neurotechnology';
+  if (tagSet.has('postquantum') || tagSet.has('quantum') || tagSet.has('qkd')) return 'quantum';
+  if (tagSet.has('neuroethics') || tagSet.has('neuralprivacy') || tagSet.has('mindact')) return 'neuroethics';
+  return 'research';
+}
+---
+
+<PageLayout
+  title="News"
+  description="Neural security research, industry intelligence, and the emerging BCI market — from Qinnovate and across the field."
+  breadcrumbs={[{ label: 'News' }]}
+  maxWidth="wide"
+>
+  <div class="mb-12 reveal">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">News</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-3xl">
+      Neural security research, industry intelligence, and the emerging BCI market.
+    </p>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="mb-10 flex flex-wrap gap-2 reveal" id="feed-filters">
+    <button
+      data-filter="all"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30"
+    >
+      All ({totalCount})
+    </button>
+    <button
+      data-filter="publication"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+    >
+      Qinnovate ({blogItems.length})
+    </button>
+    <button
+      data-filter="field-journal"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+    >
+      Field Journals ({fieldJournalItems.length})
+    </button>
+    <button
+      data-filter="industry"
+      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+    >
+      Industry ({industryItems.length})
+    </button>
+
+    {/* Category filters */}
+    <span class="w-px h-6 bg-[var(--color-border)] mx-1 self-center"></span>
+    {categories.map((cat) => (
+      <button
+        data-filter={`cat-${cat.id}`}
+        class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+      >
+        {cat.name}
+      </button>
+    ))}
+  </div>
+
+  <!-- ═══ SECTION 1: Qinnovate Blog Posts ═══ -->
+  <div id="section-blogs">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">From Qinnovate</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-16" id="feed-blogs">
+      {blogItems.map((item) => {
+        const dataCategory = inferCategory(item.tags);
+        return (
+          <div data-type="publication" data-category={dataCategory}>
+            <FeedCard item={item} />
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 2: Field Journals ═══ -->
+  <div id="section-journals">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2 reveal section-heading">Field Journals</h2>
+    <p class="text-sm text-[var(--color-text-muted)] mb-6 reveal journal-desc">
+      First-person research observations from the <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">QIF Field Journal</a>. These entries were originally written on the dates shown and retroactively published as blog posts.
+    </p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-16" id="feed-journals">
+      {fieldJournalItems.map((item) => {
+        const source = (item as any).source;
+        const dateObj = new Date(item.date);
+        const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        return (
+          <div data-type="field-journal" data-category="research">
+            <a href={`/research/papers/${item.slug}/`} class="block group">
+              <article class="glass rounded-xl p-6 card-hover h-full flex flex-col" style="border-left: 3px solid var(--color-accent-secondary);">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="text-[10px] font-semibold px-2 py-0.5 rounded-full border"
+                      style="color: var(--color-accent-secondary); border-color: var(--color-accent-secondary); background: color-mix(in srgb, var(--color-accent-secondary) 8%, transparent);"
+                    >
+                      Field Journal
+                    </span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
+                      Retroactively published
+                    </span>
+                  </div>
+                  <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] shrink-0">
+                    {formattedDate}
+                  </span>
+                </div>
+                <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
+                  {item.title}
+                </h3>
+                <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 line-clamp-2 flex-1">
+                  {item.excerpt}
+                </p>
+                <div class="flex items-center gap-3 text-xs text-[var(--color-text-faint)] mt-auto pt-3 border-t border-[var(--color-border)]">
+                  <span>{item.readTime}</span>
+                  {source && (
+                    <a
+                      href={source}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="ml-auto text-[var(--color-accent-primary)] hover:underline flex items-center gap-1"
+                      onclick="event.stopPropagation();"
+                    >
+                      Original source
+                      <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </article>
+            </a>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 3: Industry & Intel ═══ -->
+  <div id="section-industry">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">Industry &amp; Intel</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-industry">
+      {industryItems.map((item) => {
+        const dataType = item.type;
+        const dataCategory = item.type === 'brief' ? item.category : item.category;
+        return (
+          <div data-type={dataType} data-category={dataCategory}>
+            <FeedCard item={item} />
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Intelligence Sources (collapsed) -->
+  <details class="mt-16 glass rounded-xl reveal">
+    <summary class="p-6 cursor-pointer text-lg font-semibold font-[family-name:var(--font-heading)] hover:text-[var(--color-accent-primary)] transition-colors select-none">
+      Intelligence Sources
+      <span class="text-xs text-[var(--color-text-faint)] font-normal ml-2">({categories.reduce((sum, c) => sum + c.sources.length, 0)} sources across {categories.length} categories)</span>
+    </summary>
+    <div class="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {categories.map((cat) => (
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xl" style={`color: ${cat.color};`} set:html={cat.icon} />
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{cat.name}</h3>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">{cat.description}</p>
+          <ul class="space-y-2">
+            {cat.sources.map((src) => (
+              <li>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors flex items-center gap-1.5"
+                >
+                  {src.name}
+                  <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </details>
+
+  <!-- Subscribe Section -->
+  <div class="mt-16 glass rounded-xl p-8 reveal">
+    <div class="max-w-xl mx-auto text-center">
+      <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">Stay Informed</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        No spam. Neural security intel, delivered when it matters.
+      </p>
+
+      <form
+        action="https://buttondown.com/api/emails/embed-subscribe/qinnovate"
+        method="post"
+        target="_blank"
+        class="flex flex-col sm:flex-row gap-3 mb-4"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="flex-1 px-4 py-2.5 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-faint)] text-sm focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors"
+        />
+        <button
+          type="submit"
+          class="px-6 py-2.5 rounded-lg bg-[var(--color-accent-primary)] text-[var(--color-bg-primary)] text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer"
+        >
+          Subscribe
+        </button>
+      </form>
+
+      <a
+        href="/rss.xml"
+        class="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+        Subscribe via RSS
+      </a>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.feed-btn');
+  const sections = {
+    blogs: document.getElementById('section-blogs'),
+    journals: document.getElementById('section-journals'),
+    industry: document.getElementById('section-industry'),
+  };
+  const blogCards = document.querySelectorAll<HTMLElement>('#feed-blogs > div');
+  const journalCards = document.querySelectorAll<HTMLElement>('#feed-journals > div');
+  const industryCards = document.querySelectorAll<HTMLElement>('#feed-industry > div');
+  const allCards = [...blogCards, ...journalCards, ...industryCards];
+
+  const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
+  const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!;
+
+      // Update button styles
+      buttons.forEach((b) => {
+        b.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${inactiveClass} hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30`;
+      });
+      btn.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
+
+      // Section visibility map
+      const sectionMap: Record<string, string[]> = {
+        'all': ['blogs', 'journals', 'industry'],
+        'publication': ['blogs'],
+        'field-journal': ['journals'],
+        'industry': ['industry'],
+      };
+
+      // For category filters, show all sections but filter cards
+      const isCategory = filter.startsWith('cat-');
+      const visibleSections = isCategory ? ['blogs', 'journals', 'industry'] : (sectionMap[filter] || ['blogs', 'journals', 'industry']);
+
+      // Show/hide sections
+      for (const [key, el] of Object.entries(sections)) {
+        if (el) el.style.display = visibleSections.includes(key) ? '' : 'none';
+      }
+
+      // Filter cards within visible sections
+      if (filter === 'all') {
+        allCards.forEach((c) => c.style.display = '');
+      } else if (isCategory) {
+        const catId = filter.slice(4);
+        allCards.forEach((c) => {
+          c.style.display = c.dataset.category === catId ? '' : 'none';
+        });
+      } else {
+        // Section-level filtering already handles visibility
+        blogCards.forEach((c) => c.style.display = '');
+        journalCards.forEach((c) => c.style.display = '');
+        industryCards.forEach((c) => c.style.display = '');
+      }
+    });
+  });
+</script>

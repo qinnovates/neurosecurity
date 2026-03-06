@@ -4,34 +4,33 @@ const year = new Date().getFullYear();
 
 const sections = [
   {
-    title: 'Technology',
+    title: 'Framework',
     links: [
-      { href: '/signal-security/hourglass/', label: 'QIF Framework' },
-      { href: '/tools/tools/nsp/', label: 'NSP Protocol' },
-      { href: '/tools/tools/runemate/', label: 'Project Runemate' },
-      { href: '/threat-models/tara/', label: 'TARA Atlas' },
-      { href: '/threat-models/threat-models/scoring/', label: 'NISS Scoring' },
+      { href: '/framework/', label: 'QIF Framework' },
+      { href: '/security/', label: 'Signal Security' },
+      { href: '/atlas/tara/', label: 'TARA Atlas' },
+      { href: '/atlas/scoring/', label: 'NISS Scoring' },
+      { href: '/research/whitepaper/', label: 'Whitepaper' },
     ],
   },
   {
-    title: 'Resources',
+    title: 'Research',
     links: [
-      { href: '/research/research/whitepaper/', label: 'Latest Whitepaper (v6.2.1)' },
-      { href: 'https://github.com/qinnovates/qinnovate/blob/main/docs/docs/api.md', label: 'API Documentation' },
-      { href: '/open-research/writing/', label: 'News' },
-      { href: '/open-research/derivation/', label: 'QIF Lab' },
+      { href: '/research/landscape/', label: 'BCI Landscape' },
+      { href: '/research/bci-explorer/', label: 'BCI Explorer' },
+      { href: '/research/clinical/', label: 'Clinical Risk' },
+      { href: '/news/', label: 'News' },
       { href: '/rss.xml', label: 'RSS Feed' },
     ],
   },
   {
     title: 'Connect',
     links: [
-      { href: '/research/research/whitepaper/', label: 'QIF Whitepaper' },
-      { href: 'https://github.com/qinnovates', label: 'GitHub' },
-
       { href: '/about/', label: 'About' },
+      { href: '/adopt/', label: 'Adopt QIF' },
       { href: '/licensing/', label: 'Licensing' },
-      { href: 'https://github.com/qinnovates/qinnovate/tree/main/governance', label: 'Governance (GitHub)' },
+      { href: '/governance/', label: 'Governance' },
+      { href: 'https://github.com/qinnovates', label: 'GitHub' },
     ],
   },
 ];
@@ -82,7 +81,18 @@ const sections = [
       ))}
     </div>
 
-    <div class="mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <!-- AI Transparency Disclosure -->
+    <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
+      <p class="text-xs text-[var(--color-text-faint)] leading-relaxed max-w-3xl">
+        <strong class="text-[var(--color-text-muted)]">AI Transparency:</strong> This project was developed with AI assistance (Claude, Gemini, ChatGPT). All architectural decisions, threat mappings, and scoring are the author's. AI contributions are documented in the
+        <a href="https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md" class="underline hover:text-[var(--color-text-muted)] transition-colors" target="_blank" rel="noopener noreferrer">Transparency Statement</a>,
+        <a href="/news/derivation/" class="underline hover:text-[var(--color-text-muted)] transition-colors">Derivation Log</a>, and
+        <a href="/research/validation/" class="underline hover:text-[var(--color-text-muted)] transition-colors">Validation Status</a>.
+        QIF is a proposed, unvalidated framework. All results are simulation-only unless otherwise noted.
+      </p>
+    </div>
+
+    <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
       <p class="text-xs text-[var(--color-text-faint)]">
         &copy; {year} Qinnovate Open Neural Atlas. An open research framework.
       </p>

@@ -243,7 +243,7 @@ const typeEntries = Object.entries(TERM_TYPES);
         if (matchesFilter && matchesSearch) visibleCount++;
       });
 
-      @/ Hide empty letter groups
+      // Hide empty letter groups
       letterGroups.forEach((group) => {
         const visible = group.querySelectorAll('.term-card:not(.hidden-by-filter):not(.hidden-by-search)');
         group.classList.toggle('empty-group', visible.length === 0);
@@ -254,11 +254,11 @@ const typeEntries = Object.entries(TERM_TYPES);
       }
     }
 
-    @/ Filter buttons
+    // Filter buttons
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
-        @/ Activate all buttons with this filter value (desktop + mobile)
+        // Activate all buttons with this filter value (desktop + mobile)
         document.querySelectorAll<HTMLButtonElement>(`.filter-btn[data-filter="${btn.dataset.filter}"]`)
           .forEach(b => b.classList.add('active'));
         activeFilter = btn.dataset.filter || 'all';
@@ -266,7 +266,7 @@ const typeEntries = Object.entries(TERM_TYPES);
       });
     });
 
-    @/ Search
+    // Search
     searchInput?.addEventListener('input', () => {
       searchQuery = searchInput.value.toLowerCase().trim();
       updateVisibility();
