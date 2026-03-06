@@ -15,7 +15,7 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails
 | Entry | Topic | Link |
 |-------|-------|------|
-| 87 | Framework page rewrite: honest derivation, guardrail-compliant prose, Whitepaper renamed to Research Proposal | [Entry 87](#entry-87-framework-page-rewrite) |
+| 87 | Framework page rewrite: honest derivation, guardrail-compliant prose | [Entry 87](#entry-87-framework-page-rewrite) |
 | 86 | Epistemic reckoning: research compilation complete, major overhaul needed | [Entry 86](#entry-86-epistemic-reckoning) |
 | 85 | Research registry + triple-sync citation protocol + epistemic guardrail formalization | [Entry 85](#entry-85-research-registry-citation-sync) |
 | 84 | Privacy-preserving neural data architecture: HE, DP, data fiduciaries, consent provenance | [Entry 84](#entry-84-privacy-preserving-neural-data) |
@@ -400,7 +400,7 @@ Entry 86 identified that the site needed a comprehensive wording overhaul to com
 
 3. **3D Hourglass visualization removed.** The Hourglass3D React island (Three.js) was removed from the framework page. Replaced with a static CSS hourglass using the existing HOURGLASS_WIDTHS constants. The 3D component added visual complexity without adding informational value, and its React island increased page weight.
 
-4. **"Whitepaper" renamed to "Research Proposal" in all display text.** This affects Nav, Footer, index, framework, clinical, governance/rights, whitepaper pages (index, v7, v6), milestones.json, and glossary-constants.ts. All URL paths (/research/whitepaper/) are preserved to avoid breaking external links. The rename reflects the document's actual status: it is a research proposal, not an industry whitepaper.
+4. **"Whitepaper" label preserved.** The display text remains "Whitepaper" across Nav, Footer, index, framework, clinical, governance/rights, whitepaper pages (index, v7, v6), milestones.json, and glossary-constants.ts. Kevin's decision: keep the established terminology.
 
 5. **TARA prose updated.** Changed "Developed by Qinnovate as a classification system purpose-built" to "a proposed classification system designed for neural interfaces." Added note about QIF-T0001 MITRE ATT&CK-style compatibility (without claiming MITRE affiliation).
 
@@ -408,7 +408,7 @@ Entry 86 identified that the site needed a comprehensive wording overhaul to com
 
 7. **Status & Limitations section added.** New evidence table explicitly listing what has and has not been accomplished: literature synthesis (complete), taxonomy and scoring (proposed), simulation testing (synthetic only), signal integrity (future work), real-world validation (no), clinical validation (no), third-party audit (no), standards adoption (no).
 
-8. **Signal Integrity section confirmed correct.** The remote version already correctly labeled this as Future Work with appropriate language about pending collaboration. Preserved as-is. Updated the "QIF Whitepaper" link text in this section to "Research Proposal."
+8. **Signal Integrity section confirmed correct.** The remote version already correctly labeled this as Future Work with appropriate language about pending collaboration. Preserved as-is.
 
 ### Significance
 
