@@ -91,9 +91,9 @@ N1 & Spinal Cord       & Neural     & Cervical through sacral---reflexes, periph
 \midrule
 I0 & Neural Interface  & Interface  & Electrode-tissue boundary---the hourglass waist; all signals must cross \\
 \midrule
-S1 & Analog / Near-Field & Synthetic & Amplification, ADC, near-field EM (0--10\,kHz) \\
-S2 & Digital / Telemetry & Synthetic & Decoding, BLE/WiFi, telemetry (10\,kHz--1\,GHz) \\
-S3 & Radio / Wireless    & Synthetic & RF, directed energy, application layer (1\,GHz+) \\
+S1 & Near-Field / On-Device & Synthetic & Amplification, ADC, near-field EM coupling (0--10\,kHz) \\
+S2 & Guided-Wave / Host-Local & Synthetic & Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10\,kHz--1\,GHz) \\
+S3 & Far-Field / Wide-Area & Synthetic & RF transmission, directed energy, application layer (1\,GHz+) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -122,12 +122,16 @@ neural tissue, must pass through I0.
 
 \paragraph{Synthetic Zone (S1--S3).}
 The synthetic zone covers electronic and wireless systems from the analog
-front-end through digital processing to radio transmission. S1 handles analog
-signal conditioning and near-field electromagnetic effects. S2 encompasses
-digital processing, Bluetooth Low Energy, WiFi, and telemetry protocols.
-S3 covers radio frequency transmission, directed energy, and application-layer
-communication. Threats in this zone are closest to traditional IT security
-and are most amenable to conventional countermeasures.
+front-end through host-side computation to radio transmission, organized by
+propagation mode and spatial scale. S1 (Near-Field/On-Device) handles analog
+signal conditioning and near-field electromagnetic coupling at the sensor level.
+S2 (Guided-Wave/Host-Local) encompasses firmware, drivers, host compute, USB,
+signal decoding, and BLE/WiFi baseband---all processes that operate over
+guided-wave interconnects within the device-local environment. S3
+(Far-Field/Wide-Area) covers radio frequency transmission, directed energy,
+and application-layer communication at off-device ranges. Threats in this zone
+are closest to traditional IT security and are most amenable to conventional
+countermeasures.
 
 \subsection{Security Properties}
 

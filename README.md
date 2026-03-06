@@ -129,7 +129,7 @@ Three fields converge on BCIs. None covers the full problem alone.
 
 ### QIF (Quantified Interconnection Framework)
 
-An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spinal Cord), a physical interface boundary (I0, the electrode-tissue interface), and 3 silicon bands (S1 Analog up to S3 Radio/Wireless).
+An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spinal Cord), a physical interface boundary (I0, the electrode-tissue interface), and 3 synthetic bands organized by physics regime and spatial scale (S1 Near-Field/On-Device, S2 Guided-Wave/Host-Local, S3 Far-Field/Wide-Area).
 
 - **Site:** [qinnovate.com/framework](https://qinnovate.com/framework/)
 - **Whitepaper:** [qinnovate.com/research/whitepaper](https://qinnovate.com/research/whitepaper/) (v7.1)

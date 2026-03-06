@@ -15,6 +15,7 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails
 | Entry | Topic | Link |
 |-------|-------|------|
+| 88 | S-band relabel: physics regime + spatial scale, host compute gap closed | [Entry 88](#entry-88-s-band-relabel) |
 | 87 | Framework page rewrite: honest derivation, guardrail-compliant prose | [Entry 87](#entry-87-framework-page-rewrite) |
 | 86 | Epistemic reckoning: research compilation complete, major overhaul needed | [Entry 86](#entry-86-epistemic-reckoning) |
 | 85 | Research registry + triple-sync citation protocol + epistemic guardrail formalization | [Entry 85](#entry-85-research-registry-citation-sync) |
@@ -378,6 +379,81 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 88: S-Band Relabel — Physics Regime + Spatial Scale, Host Compute Gap Closed {#entry-88-s-band-relabel}
+
+**Date:** 2026-03-06
+**Classification:** VALIDATED (cross-AI consensus, 3/3 models)
+**AI Systems:** Claude Opus 4.6 (analysis, implementation), Gemini 2.5 Pro (independent review), GPT-5.3 via Codex CLI (independent review)
+**Human Decision:** Kevin identified the gap, rejected multiple proposals that broke physics or spatial scale, selected final option
+**Builds on:** Entry 42 (Synthetic Band Rationale), Entry 33 (v4.0 architecture decision), Entry 36 (Silicon-to-Synthetic rename)
+
+### The Problem
+
+Kevin identified that S1-S3 descriptions appeared to cover only wireless/RF attacks. Host-side compute attacks — malicious BCI application software, compromised OS/drivers, USB bus attacks, supply chain firmware backdoors, malicious SDK/API libraries — seemed to fall outside the framework.
+
+Investigation revealed the gap was descriptive, not architectural. 29 software-based TARA techniques were already mapped to S1-S3 bands. Entry 42 had explicitly defined S2 as covering "firmware exploits, fault injection, algorithm poisoning." The physics regime was sound; the labels did not reflect it.
+
+### Cross-AI Validation (3 models)
+
+All three models were asked independently for recommendations. Initial consensus: Option 1 (relabel S2, keep 11 bands). 3/3 agreed.
+
+Kevin then asked all three to propose 3-5 naming options that satisfy two simultaneous constraints:
+1. **Physics regime** (propagation mode): near-field, guided-wave, far-field
+2. **Spatial scale** (distance from I0): on-device, device-local, off-device
+
+13 total options were proposed across all three models (9 x 11-band, 4 x 12-band).
+
+### Kevin's Iterative Refinements
+
+Kevin rejected several proposals during the discussion:
+
+1. **"Digital Systems"** — rejected because digital signals exist in S1 (ADC output) and S3 (protocol stacks over RF). "Digital" does not belong to one band.
+2. **"Sensing / Processing / Transmission"** (Gemini G2) — rejected because functional labels break the physics spatial scale organizing principle.
+3. **"Guided-Wave / Far-Field"** pure physics labels — rejected because they also break spatial scale (guided-wave is a propagation mode, not a spatial scale).
+4. **"Transduction / Processing / Transmission"** — rejected for the same reason: functional, not physics-spatial.
+
+Each rejection sharpened the constraint set. The final requirement: labels must encode both propagation mode AND spatial scale without colliding with terms that apply across multiple bands.
+
+### OSI Layer Analysis
+
+Mapping OSI L1-L7 across the S-bands revealed that BLE/WiFi straddle S2 and S3: the RF PHY (L1) is far-field (S3 physics) but the link layer and driver run on-host (S2 spatial scale). This conflict is inherent to mapping a 7-layer protocol model onto a 3-band physics model.
+
+Resolution: **spatial scale is the tiebreaker**. If the L3/L4 stack runs on-host, it is S2. If it is a remote connection, it is S3. This principle was already implicit in the existing TARA mappings.
+
+### Decision: G1 (Gemini Option 1) — Dual-Axis Naming
+
+| Band | Old Name | New Name | Description |
+|------|----------|----------|-------------|
+| S1 | Analog / Near-Field | **Near-Field / On-Device** | Amplification, ADC, near-field EM coupling (0-10 kHz, on-device) |
+| S2 | Digital / Telemetry | **Guided-Wave / Host-Local** | Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10 kHz - 1 GHz, device-local) |
+| S3 | Radio / Wireless / DE | **Far-Field / Wide-Area** | RF transmission, directed energy, application layer (1 GHz+, off-device) |
+
+**Why this works:**
+- First term = physics regime (propagation mode): near-field, guided-wave, far-field
+- Second term = spatial scale (distance from I0): on-device, host-local, wide-area
+- "Host-Local" explicitly includes host compute, firmware, drivers, USB — closing the descriptive gap
+- "Digital" removed from band names — avoids the cross-band collision
+- 11-band (7-1-3) architecture preserved
+- All 29 existing software TARA technique mappings remain valid without remapping
+- Frequency boundaries unchanged (0-10 kHz, 10 kHz-1 GHz, 1 GHz+)
+
+### Files Updated
+
+- `src/lib/qif-constants.ts` — HOURGLASS_BANDS S1-S3 names and descriptions
+- `src/lib/glossary-constants.ts` — Synthetic Domain glossary entry
+- `src/components/whitepaper/HourglassChart.astro` — Chart band labels
+- `src/pages/research/whitepaper/index.astro` — Whitepaper prose (v7.1)
+- `src/pages/research/whitepaper/v7.astro` — Whitepaper prose (v7.0 snapshot)
+- `paper/sections/03-hourglass.tex` — LaTeX working paper table and paragraph
+
+Historical entries (v6.astro, derivation log Entry 42 ASCII diagram) left unchanged to preserve the record.
+
+### Key Insight
+
+The S-bands were always organized by propagation mode. The original names mixed physics terms ("Near-Field"), function terms ("Digital"), and technology terms ("Radio/Wireless"). The rename aligns all three bands on a consistent dual-axis scheme: physics regime + spatial scale. This makes the organizing principle visible in the name itself, rather than requiring the reader to consult Entry 42 for the rationale.
 
 ---
 

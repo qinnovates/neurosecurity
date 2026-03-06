@@ -37,7 +37,7 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
   // Split into zones for separators
   const neuralBands = bands.filter(b => b.zone === 'neural');
   const interfaceBands = bands.filter(b => b.zone === 'interface');
-  const siliconBands = bands.filter(b => b.zone === 'silicon');
+  const siliconBands = bands.filter(b => b.zone === 'synthetic');
 
   const renderBand = (band: AtlasBand) => {
     const isSelected = selectedBandId === band.id;
@@ -129,9 +129,9 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
       {/* Interface bands */}
       {interfaceBands.map(renderBand)}
 
-      {zoneSeparator('Silicon')}
+      {zoneSeparator('Synthetic')}
 
-      {/* Silicon bands */}
+      {/* Synthetic bands */}
       {siliconBands.map(renderBand)}
 
       {/* Bottom axis */}

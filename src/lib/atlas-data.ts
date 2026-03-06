@@ -24,7 +24,7 @@ import { THREAT_VECTORS, type ThreatVector, type BandId } from './threat-data';
 export interface AtlasBand {
   id: string;
   name: string;
-  zone: 'neural' | 'interface' | 'silicon';
+  zone: 'neural' | 'interface' | 'synthetic';
   color: string;
   width: number; // percentage width for hourglass rendering
   determinacy: string;
@@ -145,7 +145,7 @@ export function getAtlasData(): AtlasData {
     return {
       id: band.id,
       name: band.name,
-      zone: band.zone as 'neural' | 'interface' | 'silicon',
+      zone: band.zone as 'neural' | 'interface' | 'synthetic',
       color: band.color,
       width: HOURGLASS_WIDTHS[i],
       determinacy: atlasBand?.determinacy ?? '',
