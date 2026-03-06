@@ -53,7 +53,7 @@
   "specifications": [
     {
       "id": "qif-whitepaper",
-      "title": "QIF Research Proposal",
+      "title": "QIF Whitepaper",
       "version": "7.0",
       "summary": "Proposed open security framework for brain-computer interfaces — hourglass architecture, threat modeling, neural impact scoring.",
       "href": "/research/whitepaper/"
