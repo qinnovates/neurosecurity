@@ -131,7 +131,7 @@ export default function ClinicalDomainCards({ domains }: Props) {
                   {domain.topTechniques.map(t => (
                     <a
                       key={t.id}
-                      href={`/threat-models/tara/${t.id}/`}
+                      href={`/atlas/tara/${t.id}/`}
                       onClick={e => e.stopPropagation()}
                       className="flex items-center gap-2 hover:bg-white/5 rounded px-1 py-0.5 transition-colors"
                     >

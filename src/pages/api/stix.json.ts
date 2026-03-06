@@ -46,7 +46,7 @@ function convertToStix(threats: typeof THREAT_VECTORS) {
                 {
                     source_name: "QIF TARA",
                     external_id: t.id,
-                    url: `https://qinnovate.com/threat-models/tara/${t.id}`
+                    url: `https://qinnovate.com/atlas/tara/${t.id}`
                 }
             ],
             x_qif_severity: t.severity,

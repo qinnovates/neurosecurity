@@ -130,7 +130,7 @@ function buildSecurityView(): BrainView {
       details: top5.map(t => ({
         id: t.id,
         label: t.name,
-        href: `/threat-models/tara/${t.id}/`,
+        href: `/atlas/tara/${t.id}/`,
         color: severityColors[t.severity] ?? '#94a3b8',
       })),
     };
@@ -194,7 +194,7 @@ function buildClinicalView(): BrainView {
       details: top5.map(t => ({
         id: t.id,
         label: t.tara?.clinical?.therapeutic_analog ?? t.name,
-        href: `/threat-models/tara/${t.id}/`,
+        href: `/atlas/tara/${t.id}/`,
         color: evidenceColors[t.tara?.clinical?.evidence_level ?? 'N/A'] ?? '#94a3b8',
       })),
     };
@@ -233,7 +233,7 @@ function buildGovernanceView(): BrainView {
     const details = region.neurorights.map(nrId => ({
       id: nrId,
       label: NEURORIGHT_NAMES[nrId] ?? nrId,
-      href: '/neuroethics/rights/#rights',
+      href: '/governance/rights/#rights',
       color: NEURORIGHT_COLORS[nrId] ?? '#94a3b8',
     }));
 

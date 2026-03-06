@@ -1,6 +1,15 @@
 [
   {
     "type": "external",
+    "title": "Why the Brain Consolidates: Predictive Forgetting for Optimal Generalisation",
+    "date": "2026-03-06",
+    "url": "https://arxiv.org/abs/2603.04688",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.04688v1 Announce Type: new \nAbstract: Standard accounts of memory consolidation emphasise the stabilisation of stored representations, but struggle to explain representational drift, semant",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "BCI retinal implant medtech Science closes major $230M series C round - Fierce Biotech",
     "date": "2026-03-05",
     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOR0w0dXdMaGhhbnhEcEx4enZCbG0tektPZTJTWW9oa1pTaXcyZXlpN2VlRWxGSlpMUV9FX1VkMHVjY256MG5CMkwwdmdnNEpkSVBRUFVWanlFX1EzZzByUUpsYVl0QnF6R1JPaFhiVXRScWdWTzZld3k3eldtNlpzNHNtTFBzMjJ3U01fVVN5WGIybF8zMjE4by1BZXV6RVBpSmpFSm82QlNVUQ?oc=5",
@@ -28,21 +37,21 @@
   },
   {
     "type": "external",
+    "title": "Science Corp. closes $230M Series C to support BCI tech - MassDevice",
+    "date": "2026-03-05",
+    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5BMDJlOU16bGF3TzY1ZVU2eHkwX3dFOXE5cnJXeU14aHhGV1NjTzVtRmFqNjdDZ3pmOUdiU1ZZU0lJck02WndpU25EZnBBZllMWk9qZnJqWWNCVkVhWnY5aUdFS0tHQXY1cXZFbA?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Science Corp. closes $230M Series C to support BCI tech&nbsp;&nbsp;MassDevice",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Science Corp Secures $230M to Fast-Track Brain Implant Launch - The Tech Buzz",
     "date": "2026-03-05",
     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOa1NsR25HdmRlODdIckNFRWpPQXBDRzlLS2M2Sm1YRGxRM0wwMmtmUzNWT1JINXpmTWtCSzh0aUtmNzhqbkRERUN2U2RocnVkVzZvVmxrOG02VS1RX2pSWS05bU40ZXBnMVdMMmIxRUhmLTBhUW5mMW5aNVNHNVFhMTIyRTl5RFZKM3N4UzZYSUEzUWg4dndKUw?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Science Corp Secures $230M to Fast-Track Brain Implant Launch&nbsp;&nbsp;The Tech Buzz",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Non-Invasive Reconstruction of Intracranial EEG Across the Deep Temporal Lobe from Scalp EEG based on Conditional Normalizing Flow",
-    "date": "2026-03-05",
-    "url": "https://arxiv.org/abs/2603.03354",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.03354v1 Announce Type: new \nAbstract: Although obtaining deep brain activity from non-invasive scalp electroencephalography (sEEG) is crucial for neuroscience and clinical diagnosis, direct",
-    "category": "research"
   },
   {
     "type": "external",
@@ -60,15 +69,6 @@
     "url": "https://spectrum.ieee.org/cyborg-stem-cell-therapy-for-diabetes",
     "source": "IEEE Spectrum",
     "summary": "Lab-grown cell therapies for diabetes are edging toward the clinic. Researchers can now coax stem cells to behave like pancreatic islets, the tiny clusters of cells that regulate blood sugar. But even",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China’s ultrasound brain tech race heats up - Fox News",
-    "date": "2026-03-02",
-    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5YYU9JMU9IN0FiclJKUE9XVXk4WWg4VGdxT1RzZ3hXakpFX3hTLWg5Y3NTVGZGNnhOU3l3djYza0JHV3VFSk9yY0hDVlc3V3BnY1BpTFdqVy1zT2dBWjlWdVlSM0M0eFhMbDlTNjVlelVnV2VNVWh1YlNwONIBgAFBVV95cUxNTHlIUWFxa1ZXNXE4ZTF5Qm9aUXhaU3ZQWmxQOWhJdVNqRXNWZ3FwYWZURGV2ZUlDbWN1bHBnMEJNY21iSlRtaWo4R1h0RXZkaXgtT3dtUnFXSHlRLXVZbTc4cmtRZ0hKT3poczFVaXFQVm9Kdm1JWTlzWXpLbWFSOA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China’s ultrasound brain tech race heats up&nbsp;&nbsp;Fox News",
     "category": "neurotechnology"
   },
   {
@@ -109,15 +109,6 @@
   },
   {
     "type": "external",
-    "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
-    "date": "2026-01-28",
-    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
     "date": "2026-01-05",
     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
@@ -133,6 +124,15 @@
     "source": "Google News — Neuralink",
     "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times - The New York Times",
+    "date": "2025-11-18",
+    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Big Tech Wants Direct Access to Our Brains - The New York Times&nbsp;&nbsp;The New York Times",
+    "category": "neuroethics"
   },
   {
     "type": "external",

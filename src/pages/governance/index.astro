@@ -5,13 +5,13 @@ import { getCollection, render } from 'astro:content';
 const docs = await getCollection('governance');
 const sorted = docs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
-@/ Build lookup
+// Build lookup
 const byId: Record<string, typeof sorted[number]> = {};
 for (const doc of sorted) {
   byId[doc.id] = doc;
 }
 
-@/ Ordered sections for the wiki — each category groups related docs
+// Ordered sections for the wiki — each category groups related docs
 const categories = [
   {
     label: 'Core Governance Documents',
@@ -30,22 +30,22 @@ const categories = [
   },
 ];
 
-@/ Map content IDs to actual GitHub filenames
+// Map content IDs to actual GitHub filenames
 const idToFilename: Record<string, string> = {};
 for (const doc of sorted) {
-  @/ IDs with hyphens keep hyphens; IDs with underscores keep underscores
-  @/ The actual files are UPPERCASE with the original separator
+  // IDs with hyphens keep hyphens; IDs with underscores keep underscores
+  // The actual files are UPPERCASE with the original separator
   const name = doc.id.includes('-')
     ? doc.id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('-').toUpperCase()
     : doc.id.toUpperCase();
   idToFilename[doc.id] = `${name}.md`;
 }
-@/ Fix special cases where auto-mapping doesn't work
+// Fix special cases where auto-mapping doesn't work
 idToFilename['qif-neuroethics'] = 'QIF-NEUROETHICS.md';
 idToFilename['neurosecurity_governance'] = 'NEUROSECURITY_GOVERNANCE.md';
 idToFilename['neurosecurity_policy_proposal'] = 'NEUROSECURITY_POLICY_PROPOSAL.md';
 
-@/ Pre-render all docs
+// Pre-render all docs
 const rendered: Record<string, Awaited<ReturnType<typeof render>>> = {};
 for (const doc of sorted) {
   rendered[doc.id] = await render(doc);
@@ -54,21 +54,21 @@ for (const doc of sorted) {
 
 <PageLayout
   title="Governance Wiki"
-  description="Ethics, compliance, and transparency documents governing the QIF Framework and Qinnovate standards development."
+  description="Ethics, compliance, and transparency documents governing the QIF Framework and Qinnovate governance development."
   breadcrumbs={[{ label: 'Governance' }]}
   wide={true}
 >
   <div class="mb-8 reveal">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Governance</h1>
     <p class="text-lg text-[var(--color-text-muted)] max-w-3xl">
-      Ethics, compliance, and transparency documents governing the QIF Framework and Qinnovate standards development.
+      Ethics, compliance, and transparency documents governing the QIF Framework and Qinnovate governance development.
       It may not all be implemented fully yet, but this is the foundational work for what's to come.
     </p>
     <p class="text-sm text-[var(--color-text-faint)] mt-2 max-w-3xl">
       Initial drafts are synthesized by the author with AI assistance. Final versions require human collaborators and reviewers to identify gaps, errors, and cognitive biases. See the <a href="#transparency" class="text-[var(--color-accent-primary)] hover:underline">Transparency Statement</a> for a full audit trail.
     </p>
     <a
-      href="https:@/github.com/qinnovates/qinnovate/tree/main/governance"
+      href="https://github.com/qinnovates/qinnovate/tree/main/governance"
       target="_blank"
       rel="noopener noreferrer"
       class="inline-flex items-center gap-1.5 mt-3 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"
@@ -153,7 +153,7 @@ for (const doc of sorted) {
                     {doc.data.title}
                   </h3>
                   <a
-                    href={`https:@/github.com/qinnovates/qinnovate/blob/main/governance/${idToFilename[doc.id]}`}
+                    href={`https://github.com/qinnovates/qinnovate/blob/main/governance/${idToFilename[doc.id]}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="shrink-0 text-xs text-[var(--color-text-faint)] hover:text-[var(--color-accent-primary)] transition-colors flex items-center gap-1 mt-1"
