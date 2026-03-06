@@ -363,7 +363,7 @@ const tacticColors: Record<string, string> = {
             The physics that governs each regime is fundamentally different, and so are the threats. An anomalous 40 Hz gamma injection at N7 is detected differently than a firmware exploit at S2. The band boundaries are not arbitrary &mdash; they follow the relationship <span class="font-[family-name:var(--font-mono)]">L = v/f</span> (wavelength equals propagation velocity divided by frequency), where the physical scale of each structure matches its characteristic frequency. When a measured signal violates this constraint, it indicates injection from outside the expected regime.
           </p>
           <p class="text-xs text-[var(--color-text-faint)]">
-            The full scale-frequency derivation, spectral decomposition pipeline, and QI equation are specified in <a href="/research/whitepaper/v5/" class="text-[var(--color-accent-primary)]">Whitepaper v5.2, Sections 5.3&ndash;5.6</a>.
+            The mathematical formalization of signal integrity scoring is future work, pending collaboration with physicists and neuroscientists. See <a href="/research/physics/" class="text-[var(--color-accent-primary)]">BCI Physics Constraints</a> for the current constraint system.
           </p>
         </div>
 
@@ -678,7 +678,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="glass rounded-xl p-5 mt-8 mb-8 text-center" style="border-left: 3px solid var(--color-accent-secondary);">
           <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">For the full derivation</strong> &mdash; the QI equation, spectral decomposition pipeline, coherence metrics, coupling mechanisms, and falsifiability conditions &mdash; see <a href="/research/whitepaper/v5/" class="text-[var(--color-accent-primary)]">Whitepaper v5.2</a>. This section presents the scoring system; v5.2 presents the math.
+            <strong class="text-[var(--color-text-primary)]">Mathematical formalization</strong> &mdash; signal integrity equations, spectral decomposition, and coupling mechanisms &mdash; is future work pending collaboration with domain experts. This section presents the scoring system; the underlying physics constraints are documented at <a href="/research/physics/" class="text-[var(--color-accent-primary)]">BCI Physics Constraints</a>.
           </p>
         </div>
 
@@ -1446,8 +1446,7 @@ const tacticColors: Record<string, string> = {
           </p>
           <div class="flex gap-4">
             <a href="/research/whitepaper/v6/">v6.0</a>
-            <a href="/research/whitepaper/v5/">v5.2 (math-heavy)</a>
-            <a href="https://github.com/qinnovates/qinnovate/tree/main/src/pages/whitepaper" target="_blank" rel="noopener noreferrer">All older</a>
+            <a href="https://github.com/qinnovates/qinnovate/tree/main/src/pages/whitepaper" target="_blank" rel="noopener noreferrer">All older (archived)</a>
           </div>
         </div>
       </footer>

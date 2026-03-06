@@ -15,9 +15,9 @@ function getConstraintsByCategory(catId: string) {
 ---
 
 <PageLayout
-  title="BCI Limits Equation"
-  description="13 physics constraints that define the fundamental boundaries of brain-computer interface design. Thermodynamics, electromagnetism, scaling, safety, and signal detection."
-  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'Physics Limits' }]}
+  title="BCI Physics Constraints — Qinnovate"
+  description="13 physics constraints that define the fundamental boundaries of brain-computer interface design. Requires independent validation by physicists and neuroscientists."
+  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'Physics Constraints' }]}
   maxWidth="wide"
 >
   <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
@@ -45,15 +45,20 @@ function getConstraintsByCategory(catId: string) {
       <!-- Overview -->
       <section id="overview" class="mb-20">
         <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
-          BCI Limits Equation
+          BCI Physics Constraints
         </h1>
         <div class="flex items-center gap-3 mb-6">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
             13 Constraints
           </span>
-          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-status-safe)] text-[var(--color-status-safe)]">
-            Cross-Validated
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-status-warn)] text-[var(--color-status-warn)]">
+            Requires Validation
           </span>
+        </div>
+        <div class="glass rounded-lg p-4 border-l-4 border-[var(--color-status-warn)] mb-6">
+          <p class="text-sm text-[var(--color-text-muted)]">
+            <strong class="text-[var(--color-text-primary)]">Validation status:</strong> These constraints are derived from established physics literature and cross-validated with AI tools. Independent verification by physicists and neuroscientists is required before these can be considered validated. The constraint system, its parameterization, and its application to BCI design are the author's proposed formulation.
+          </p>
         </div>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
