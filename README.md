@@ -31,6 +31,7 @@ The framework, threat taxonomy, and governance structure are the author's contri
 - [Architecture](#architecture)
 - [Terminology](#terminology)
 - [Repository Structure](#repository-structure)
+- [Site Revision History](#site-revision-history)
 - [Collaboration](#collaboration)
 
 ---
@@ -210,6 +211,21 @@ qinnovates/qinnovate/
 ├── docs/                       # Built site / GitHub Pages output
 └── .github/workflows/          # CI/CD
 ```
+
+---
+
+## Site Revision History
+
+Each weekly snapshot is tagged in git. Click the tag to browse code at that point, or checkout locally to run the site (`git checkout <tag> && npm ci && npm run dev`).
+
+| Week | Date | Tag | Key Changes |
+|------|------|-----|-------------|
+| W10 | Mar 5 | [`site-archive-2026-03-05`](https://github.com/qinnovates/qinnovate/tree/site-archive-2026-03-05) | Academic review response, 5-pillar architecture, 404 redirects, scaffold framing, working paper rename |
+| W09 | Mar 2 | [`site-W09-2026-03-02`](https://github.com/qinnovates/qinnovate/tree/site-W09-2026-03-02) | NISS v1.1 CR/CD split, Zenodo v1.5, guardrails formalization, research landscape expansion |
+| W08 | Feb 23 | [`site-W08-2026-02-23`](https://github.com/qinnovates/qinnovate/tree/site-W08-2026-02-23) | Zenodo v1.4, skills hardening, epistemic integrity rules, CVE disclosure response |
+| W07 | Feb 16 | [`site-W07-2026-02-16`](https://github.com/qinnovates/qinnovate/tree/site-W07-2026-02-16) | NSP v0.5, NISS v1.0, Zenodo v1.0, Neurowall sim, T0079 ear canal case study |
+| W06 | Feb 9 | [`site-W06-2026-02-09`](https://github.com/qinnovates/qinnovate/tree/site-W06-2026-02-09) | 14-layer to hourglass migration, TARA atlas, OG social cards |
+| W05 | Feb 2 | [`site-W05-2026-02-02`](https://github.com/qinnovates/qinnovate/tree/site-W05-2026-02-02) | Initial launch: landing page, 9 blog posts |
 
 ---
 
