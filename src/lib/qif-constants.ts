@@ -25,9 +25,9 @@ export const HOURGLASS_BANDS = [
   { id: 'N2', name: 'Brainstem', zone: 'neural', color: '#9b6c1e', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
   { id: 'N1', name: 'Spinal Cord', zone: 'neural', color: '#ae6616', description: 'Cervical through sacral — reflexes, peripheral relay' },
   { id: 'I0', name: 'Neural Interface', zone: 'interface', color: '#f59e0b', description: 'Electrode-tissue boundary — measurement/collapse, quasi-quantum zone' },
-  { id: 'S1', name: 'Analog / Near-Field', zone: 'synthetic', color: '#93c5fd', description: 'Amplification, ADC, near-field EM (0-10 kHz)' },
-  { id: 'S2', name: 'Digital / Telemetry', zone: 'synthetic', color: '#60a5fa', description: 'Decoding, BLE/WiFi, telemetry (10 kHz - 1 GHz)' },
-  { id: 'S3', name: 'Radio / Wireless / DE', zone: 'synthetic', color: '#3b82f6', description: 'RF, directed energy, application layer (1 GHz+)' },
+  { id: 'S1', name: 'Near-Field / On-Device', zone: 'synthetic', color: '#93c5fd', description: 'Amplification, ADC, near-field EM coupling (0-10 kHz, on-device)' },
+  { id: 'S2', name: 'Guided-Wave / Host-Local', zone: 'synthetic', color: '#60a5fa', description: 'Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10 kHz - 1 GHz, device-local)' },
+  { id: 'S3', name: 'Far-Field / Wide-Area', zone: 'synthetic', color: '#3b82f6', description: 'RF transmission, directed energy, application layer (1 GHz+, off-device)' },
 ] as const;
 
 /** Hourglass band radii for 3D visualization (maps 1:1 to HOURGLASS_BANDS) */

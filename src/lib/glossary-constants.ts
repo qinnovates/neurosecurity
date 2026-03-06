@@ -63,7 +63,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Synthetic Domain (S1-S3)',
     type: 'architecture',
     shortDef: 'The three bands below I0 representing hardware and digital systems.',
-    fullDef: 'S1 (Analog/Near-Field): amplification, ADC, near-field EM. S2 (Digital/Telemetry): decoding, BLE/WiFi, telemetry. S3 (Radio/Wireless/DE): RF, directed energy, application layer. Traditional cybersecurity frameworks apply here, extended by QIF for neural context.',
+    fullDef: 'S1 (Near-Field/On-Device): amplification, ADC, near-field EM coupling. S2 (Guided-Wave/Host-Local): firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband. S3 (Far-Field/Wide-Area): RF transmission, directed energy, application layer. Traditional cybersecurity frameworks apply here, extended by QIF for neural context.',
     relatedTerms: ['hourglass-model', 'neural-domain'],
     href: '/framework/#bands',
     tags: ['architecture'],

@@ -28,9 +28,9 @@ N1  Spinal Cord          ─┘  simple · fast · fragile
 ─────────────────────────────
 I0  Neural Interface      ←  THE WAIST
 ─────────────────────────────
-S1  Analog Frontend      ─┐
-S2  Digital Processing    │  Silicon Domain
-S3  Radio/Wireless       ─┘  simplest · fastest · most exposed
+S1  Near-Field/On-Device  ─┐
+S2  Guided-Wave/Host-Local│  Synthetic Domain
+S3  Far-Field/Wide-Area  ─┘  simplest · fastest · most exposed
 ```
 
 The shape comes from Steve Deering's internet hourglass principle (IETF, 1998): the internet works because everything passes through one narrow waist — IP. I applied the same idea to BCIs: everything passes through I0, the physical boundary where biology meets silicon. That bottleneck is where security controls live.
