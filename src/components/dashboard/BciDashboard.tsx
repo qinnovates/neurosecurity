@@ -413,7 +413,7 @@ function ThreatProfilePanel({ device }: { device: BciDevice }) {
 
 function PhysicsPanel({ device }: { device: BciDevice }) {
   return (
-    <PanelShell title="Physics Constraints" deepLink="/atlas/explorer/" deepLinkLabel="Threat Explorer">
+    <PanelShell title="Physics Constraints" deepLink="/atlas/" deepLinkLabel="Threat Explorer">
       <SpecRow label="Thermal Budget" spec={device.thermalBudget} />
       <SpecRow label="Frequency Range" spec={device.frequencyRange} />
       <SpecRow label="Data Rate" spec={device.dataRate} />
