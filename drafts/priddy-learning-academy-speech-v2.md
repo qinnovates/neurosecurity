@@ -274,6 +274,9 @@ Thank you.
 - [ ] What subjects/programs do they offer now vs back then?
 - [ ] Any particular challenges the students face today that I should speak to?
 
+**Kevin's goals (share with Michael):**
+- [ ] I want to teach one day as an adjunct — neuroethics, cybersecurity, or both. The Priddys planted that seed. This talk is part of that journey. Would love any advice or connections he has in education.
+
 **Personal:**
 - [ ] Is there anything specific he wants me to cover or avoid?
 - [ ] Does he want me to mention the award, or is that separate?

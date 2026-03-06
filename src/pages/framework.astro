@@ -1,6 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import { HOURGLASS_BANDS, COHERENCE, SCALE_FREQUENCY, QIF_VERSION, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import { HOURGLASS_BANDS, QIF_VERSION, TARA_TECHNIQUES } from '@/lib/qif-constants';
 import Hourglass3D from '@/components/Hourglass3D';
 import { THREAT_VECTORS, THREAT_TACTICS, THREAT_DOMAINS, getTacticsWithCounts } from '@/lib/threat-data';
 
@@ -39,8 +39,7 @@ const tacticColors: Record<string, string> = {
           { href: '#threat-model', label: 'Threat Model' },
           { href: '#taxonomy', label: 'TARA Taxonomy' },
           { href: '#niss', label: 'NISS Scoring' },
-          { href: '#coherence', label: 'Coherence Metric' },
-          { href: '#scale-frequency', label: 'Scale-Frequency' },
+          { href: '#signal-integrity', label: 'Signal Integrity' },
           { href: '#documents', label: 'Documents' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
@@ -59,7 +58,7 @@ const tacticColors: Record<string, string> = {
         </h1>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            The **Quantified Interconnection Framework (QIF)** is a proposed open security framework for brain-computer interfaces. It defines the threat model, security architecture, and the Coherence Metric (Cs) for protecting neural data at every layer — from hardware to human identity.
+            The **Quantified Interconnection Framework (QIF)** is a proposed open security framework for brain-computer interfaces. It defines the threat model and security architecture for protecting neural data at every layer — from hardware to human identity.
           </p>
           <p>
             QIF addresses a question that existing frameworks have not yet systematically tackled: <em>how do you secure a system where one endpoint is a brain?</em> Existing cybersecurity models (OSI, Zero Trust) handle synthetic systems. Existing neuroethics frameworks handle consent and privacy. QIF bridges both with an engineering specification for the interface between them, including three original systems developed by Qinnovate:
@@ -256,97 +255,23 @@ const tacticColors: Record<string, string> = {
         </div>
       </section>
 
-      <!-- Coherence Metric -->
-      <section id="coherence" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Coherence Metric</h2>
+      <!-- Signal Integrity (Future Work) -->
+      <section id="signal-integrity" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Signal Integrity</h2>
         <div class="prose mb-8">
           <p>
-            The coherence metric provides a continuous, real-time measure of neural signal integrity. It collapses three variance dimensions — phase, temporal, and spatial — into a single security score between 0 and 1.
+            QIF's security model depends on the ability to distinguish authentic neural signals from injected or manipulated ones. The framework identifies three key dimensions for signal validation: phase consistency, temporal stability, and spatial coherence across electrode channels.
           </p>
-        </div>
-
-        <!-- Equation display -->
-        <div class="glass rounded-xl p-8 text-center mb-8">
-          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            {COHERENCE.formula}
-          </p>
-          <p class="text-sm text-[var(--color-text-faint)]">
-            where &sigma;&sup2;&psi; = phase variance, &sigma;&sup2;&tau; = temporal variance, &sigma;&sup2;&gamma; = spatial variance
-          </p>
-        </div>
-
-        <!-- Threshold zones -->
-        <div class="grid sm:grid-cols-3 gap-4">
-          <div class="glass rounded-lg p-5 border-l-3" style={`border-left: 3px solid ${COHERENCE.thresholds.safe.color};`}>
-            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.safe.color};`}>
-              C<sub>s</sub> &gt; 0.6
-            </div>
-            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.safe.label}</div>
-            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal integrity verified. Normal operating state.</p>
-          </div>
-          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.gateway.color};`}>
-            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.gateway.color};`}>
-              0.3 &le; C<sub>s</sub> &le; 0.6
-            </div>
-            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.gateway.label}</div>
-            <p class="text-xs text-[var(--color-text-muted)] mt-2">Anomalous variance detected. Enhanced monitoring.</p>
-          </div>
-          <div class="glass rounded-lg p-5" style={`border-left: 3px solid ${COHERENCE.thresholds.breach.color};`}>
-            <div class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${COHERENCE.thresholds.breach.color};`}>
-              C<sub>s</sub> &lt; 0.3
-            </div>
-            <div class="text-sm font-semibold mt-1">{COHERENCE.thresholds.breach.label}</div>
-            <p class="text-xs text-[var(--color-text-muted)] mt-2">Signal compromise indicated. Defensive response triggered.</p>
-          </div>
-        </div>
-
-        <div class="text-center mt-6">
-          <a href="/atlas/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
-            Try the interactive coherence calculator in QIF Lab &rarr;
-          </a>
-        </div>
-      </section>
-
-      <!-- Scale-Frequency -->
-      <section id="scale-frequency" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scale-Frequency Invariant</h2>
-        <div class="prose mb-8">
           <p>
-            Neural oscillations follow a fundamental relationship: the product of frequency and spatial extent is approximately constant. This scale-frequency invariant defines how neural signals propagate and sets the physical constraints that any BCI security model must respect.
+            These dimensions draw on established physics — the wave equation, Boltzmann statistics, and Fries' Communication Through Coherence theory (2005/2015) — applied to the BCI security context. The mathematical formalization of how these combine into a composite signal integrity score is future work, pending collaboration with physicists and neuroscientists who can validate the approach against real hardware and biological data.
           </p>
         </div>
 
-        <div class="glass rounded-xl p-8 text-center mb-8">
-          <p class="text-2xl font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            v = f &times; &lambda;
+        <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-tertiary)]">
+          <h3 class="text-sm font-bold uppercase text-[var(--color-text-faint)] mb-2">Future Work</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            Signal integrity calculations — including coherence scoring, frequency-band validation, and composite security metrics — will be developed through collaboration with domain experts in physics, neuroscience, and signal processing. Early explorations of these ideas are documented in the <a href="/research/whitepaper/" class="text-[var(--color-accent-primary)] hover:underline">QIF Whitepaper</a> and <a href="/news/derivation/" class="text-[var(--color-accent-primary)] hover:underline">Derivation Log</a>.
           </p>
-          <p class="text-sm text-[var(--color-text-faint)]">
-            k &asymp; 1&ndash;10 m/s (NOT 10&sup6;)
-          </p>
-        </div>
-
-        <!-- Band data table -->
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-[var(--color-border)]">
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Band</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Frequency</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Spatial Extent</th>
-                <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">k</th>
-              </tr>
-            </thead>
-            <tbody>
-              {SCALE_FREQUENCY.bands.map((band) => (
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-3 px-4 font-medium">{band.name}</td>
-                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.frequency}</td>
-                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">{band.extent}</td>
-                  <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{band.k}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </section>
 
@@ -360,7 +285,7 @@ const tacticColors: Record<string, string> = {
           </a>
           <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Security Guardrails</h3>
-            <p class="text-sm text-[var(--color-text-muted)]">Physics-derived defense architecture for BCI systems, mapping coherence thresholds to per-band protection rules.</p>
+            <p class="text-sm text-[var(--color-text-muted)]">Physics-derived defense architecture for BCI systems, mapping signal integrity constraints to per-band protection rules.</p>
           </a>
           <a href="/atlas/tara/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">TARA Atlas</h3>
@@ -368,7 +293,7 @@ const tacticColors: Record<string, string> = {
           </a>
           <a href="/tools/nsp/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">NSP Protocol</h3>
-            <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire security for neural interfaces with coherence-gated authentication.</p>
+            <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire security for neural interfaces with signal-gated authentication.</p>
           </a>
         </div>
       </section>
