@@ -1,8 +1,8 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import { briefs, categories } from '../lib/news-data';
-import { getPostDate, slugFromId } from '../lib/utils';
+import { briefs, categories } from '@/lib/news-data';
+import { getPostDate, slugFromId } from '@/lib/utils';
 
 export async function GET(context: APIContext) {
   const posts = await getCollection('blog');
@@ -14,7 +14,7 @@ export async function GET(context: APIContext) {
       title: brief.title,
       description: `${brief.summary}\n\nQIF Relevance: ${brief.relevance}`,
       pubDate: new Date(`${brief.date}-01`),
-      link: '/news/',
+      link: '/open-research/writing/',
       categories: cat ? [cat.name] : [],
     };
   });
@@ -27,7 +27,7 @@ export async function GET(context: APIContext) {
       title: post.data.title,
       description: post.data.subtitle || post.data.title,
       pubDate: new Date(dateStr),
-      link: `/publications/${slug}/`,
+      link: `/research/papers/${slug}/`,
       categories: post.data.tags.map((t: string) => t.replace(/^#/, '')),
     };
   });

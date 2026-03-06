@@ -172,6 +172,15 @@ Three fields converge on BCIs. None of them covers the full problem alone.
 
 [Read the full neurosecurity case](governance/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 109 techniques](shared/qtara-registrar.json)
 
+### Terminology
+
+| Term | Usage | Notes |
+|------|-------|-------|
+| **Neurosecurity** | The research discipline (Denning, Matsuoka & Kohno, 2009). Use when referencing the academic field and its scholarship. | Established term. |
+| **BCI security** | The applied engineering domain. Use when describing what QIF's tools and frameworks do in practice. | More precise, immediately understood. |
+| **Neuroethics** | The foundational scholarship that informs QIF's design constraints (rights, consent, harm definitions). Use when citing the ethical principles, not to describe QIF itself. | QIF is informed by neuroethics; QIF is not a neuroethics project. |
+| **Governance** | The policy bridge between security and ethics. Applies across the full stack (neural, interface, and synthetic), not just the neural side. | Do not use "neurogovernance" — governance spans all 11 bands. Use "governance" alone, or "BCI governance" / "governance of neurotechnology" when context requires it. |
+
 ---
 
 ## Architecture

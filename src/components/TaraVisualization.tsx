@@ -534,7 +534,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                                             <span className="text-2xl font-semibold text-slate-900">{t.niss?.score?.toFixed(1) || '0.0'}</span>
                                                         </div>
                                                         <a
-                                                            href={`/TARA/${t.id}`}
+                                                            href={`/threat-models/tara/${t.id}`}
                                                             onClick={(e) => e.stopPropagation()}
                                                             className="flex-1 text-center py-4 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-semibold hover:border-slate-900 transition-all"
                                                         >

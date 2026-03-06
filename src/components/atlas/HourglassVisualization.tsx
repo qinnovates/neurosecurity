@@ -1,5 +1,5 @@
 /**
- * HourglassVisualization — React port of the 2D hourglass from docs/lab/hourglass.html.
+ * HourglassVisualization — React port of the 2D hourglass from docs/open-research/derivation/hourglass.html.
  * Renders the 11-band QIF hourglass (7-1-3 asymmetric) with click interaction.
  * Designed for embedding in the Atlas Dashboard alongside the 3D brain.
  */

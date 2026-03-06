@@ -1,15 +1,15 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-import AtlasDashboard from '../components/atlas/AtlasDashboard';
-import { getAtlasData, getThreatsForBandDetail } from '../lib/atlas-data';
-import { getBrainViewData } from '../lib/brain-view-data';
-import { HOURGLASS_BANDS } from '../lib/qif-constants';
+import PageLayout from '@/layouts/PageLayout.astro';
+import AtlasDashboard from '@/components/atlas/AtlasDashboard';
+import { getAtlasData, getThreatsForBandDetail } from '@/lib/atlas-data';
+import { getBrainViewData } from '@/lib/brain-view-data';
+import { HOURGLASS_BANDS } from '@/lib/qif-constants';
 
-// Build-time data computation
+@/ Build-time data computation
 const atlasData = getAtlasData();
 const brainViews = getBrainViewData();
 
-// Pre-compute threat details per band
+@/ Pre-compute threat details per band
 const threatDetails: Record<string, any> = {};
 for (const band of HOURGLASS_BANDS) {
   threatDetails[band.id] = getThreatsForBandDetail(band.id);
@@ -38,7 +38,7 @@ for (const band of HOURGLASS_BANDS) {
 
   <div class="mt-12 mb-8">
     <p class="text-xs text-center" style="color: var(--color-text-faint);">
-      Data driven from JSON — atlas, ethics, DSM-5, security controls. <a href="/lab/hourglass.html" class="underline">Standalone hourglass</a> &middot; <a href="/TARA/" class="underline">TARA Atlas</a>
+      Data driven from JSON — atlas, ethics, DSM-5, security controls. <a href="/open-research/derivation/hourglass.html" class="underline">Standalone hourglass</a> &middot; <a href="/threat-models/tara/" class="underline">TARA Atlas</a>
     </p>
   </div>
 </PageLayout>

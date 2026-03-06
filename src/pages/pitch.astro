@@ -4,9 +4,9 @@
  * ~12 slides, 15-minute walkthrough, 15 min discussion
  * Reveal.js via CDN, Apple Keynote aesthetic (white, system-ui, crystal glass)
  */
-import { HOURGLASS_BANDS, QIF_VERSION, QIF_BANDS, PILLARS } from '../lib/qif-constants';
-import { getThreatStats, getTaraStats } from '../lib/threat-data';
-import { NSP_VERSION, NSP_LAYERS, NSP_POWER } from '../lib/nsp-constants';
+import { HOURGLASS_BANDS, QIF_VERSION, QIF_BANDS, PILLARS } from '@/lib/qif-constants';
+import { getThreatStats, getTaraStats } from '@/lib/threat-data';
+import { NSP_VERSION, NSP_LAYERS, NSP_POWER } from '@/lib/nsp-constants';
 
 const stats = getThreatStats();
 const taraStats = getTaraStats();
@@ -14,7 +14,7 @@ const taraStats = getTaraStats();
 const dualUseCount = taraStats.dualUse.confirmed + taraStats.dualUse.probable;
 const dualUsePct = Math.round((dualUseCount / taraStats.total) * 100);
 
-// Resolve pillar CSS var colors to hex for inline styles
+@/ Resolve pillar CSS var colors to hex for inline styles
 const colorMap: Record<string, string> = {
   'var(--color-accent-primary)': '#2563eb',
   'var(--color-accent-secondary)': '#0891b2',
@@ -22,7 +22,7 @@ const colorMap: Record<string, string> = {
 };
 function hex(c: string): string { return colorMap[c] ?? c; }
 
-// Short labels for NSP layers in the pitch deck (derived from scope)
+@/ Short labels for NSP layers in the pitch deck (derived from scope)
 const nspShortLabels: Record<number, string> = {
   1: 'SPHINCS+ boot',
   2: 'ML-KEM + ECDH',
@@ -40,9 +40,9 @@ const nspShortLabels: Record<number, string> = {
   <title>Qinnovate | Pitch</title>
   <meta name="robots" content="noindex, nofollow" />
 
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
+  <script src="https:@/cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <link rel="stylesheet" href="https:@/cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https:@/cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
 
   <style is:global>
     :root {
@@ -519,32 +519,32 @@ const nspShortLabels: Record<number, string> = {
 
   <!-- Flowing waves -->
   <div class="wave-layer" aria-hidden="true">
-    <svg class="wave-1" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="wave-1" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http:@/www.w3.org/2000/svg">
       <path d="M0,80 C180,30 360,130 540,70 C720,10 900,120 1080,80 C1260,40 1350,110 1440,80" fill="none" stroke="rgba(37,99,235,0.06)" stroke-width="2" stroke-linecap="round"/>
       <path d="M0,95 C200,50 400,140 600,85 C800,30 1000,130 1200,90 C1350,60 1400,100 1440,95" fill="none" stroke="rgba(8,145,178,0.04)" stroke-width="1.5" stroke-linecap="round"/>
       <path d="M0,65 C160,110 340,20 520,65 C700,110 880,25 1060,70 C1240,115 1380,40 1440,65" fill="none" stroke="rgba(37,99,235,0.03)" stroke-width="1" stroke-linecap="round"/>
     </svg>
-    <svg class="wave-2" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="wave-2" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http:@/www.w3.org/2000/svg">
       <path d="M0,90 C240,40 480,140 720,80 C960,20 1200,130 1440,90" fill="none" stroke="rgba(8,145,178,0.055)" stroke-width="2" stroke-linecap="round"/>
       <path d="M0,70 C300,120 600,30 900,75 C1200,120 1380,45 1440,70" fill="none" stroke="rgba(37,99,235,0.035)" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
-    <svg class="wave-3" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="wave-3" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http:@/www.w3.org/2000/svg">
       <path d="M0,75 C200,120 400,25 600,80 C800,135 1000,30 1200,75 C1360,110 1420,55 1440,75" fill="none" stroke="rgba(37,99,235,0.07)" stroke-width="2.5" stroke-linecap="round"/>
       <path d="M0,55 C260,100 520,10 780,60 C1040,110 1300,15 1440,55" fill="none" stroke="rgba(124,58,237,0.03)" stroke-width="1.5" stroke-linecap="round"/>
       <path d="M0,95 C180,50 360,130 540,90 C720,50 900,125 1080,85 C1260,45 1380,120 1440,95" fill="none" stroke="rgba(8,145,178,0.035)" stroke-width="1" stroke-linecap="round"/>
     </svg>
-    <svg class="wave-4" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="wave-4" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http:@/www.w3.org/2000/svg">
       <path d="M0,85 C300,30 600,140 900,80 C1200,20 1350,120 1440,85" fill="none" stroke="rgba(8,145,178,0.06)" stroke-width="2" stroke-linecap="round"/>
       <path d="M0,100 C220,60 440,135 660,95 C880,55 1100,130 1320,90 C1400,75 1440,100 1440,100" fill="none" stroke="rgba(37,99,235,0.04)" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
-    <svg class="wave-5" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="wave-5" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http:@/www.w3.org/2000/svg">
       <path d="M0,70 C160,120 340,20 540,75 C740,130 920,30 1100,80 C1280,130 1400,50 1440,70" fill="none" stroke="rgba(37,99,235,0.05)" stroke-width="2" stroke-linecap="round"/>
       <path d="M0,90 C280,45 560,135 840,85 C1120,35 1340,125 1440,90" fill="none" stroke="rgba(124,58,237,0.025)" stroke-width="1" stroke-linecap="round"/>
     </svg>
   </div>
 
   <!-- Noise texture -->
-  <svg class="noise-layer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <svg class="noise-layer" aria-hidden="true" xmlns="http:@/www.w3.org/2000/svg" width="100%" height="100%">
     <filter id="noise">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch" />
     </filter>
@@ -607,19 +607,19 @@ const nspShortLabels: Record<number, string> = {
           16 years of excellent research. No unified framework to connect it.
         </p>
         <div class="stats">
-          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">
             <div class="n" style="color: var(--warn);">~20</div>
             <div class="l">Published BCI<br />attack papers</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/framework/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/framework/" target="_blank">
             <div class="n" style="color: var(--danger);">0</div>
             <div class="l">Unified threat<br />frameworks</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/nsp/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/tools/nsp/" target="_blank">
             <div class="n" style="color: var(--danger);">0</div>
             <div class="l">Wire-level<br />BCI crypto</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/nsp/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/tools/nsp/" target="_blank">
             <div class="n" style="color: var(--danger);">0</div>
             <div class="l">Post-quantum<br />neural protocols</div>
           </a>
@@ -712,19 +712,19 @@ const nspShortLabels: Record<number, string> = {
           Every technique mapped to hourglass bands and scored with NISS &mdash; a neural-specific severity metric.
         </p>
         <div class="stats">
-          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">
             <div class="n accent">{stats.total}</div>
             <div class="l">Techniques<br />catalogued</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/framework/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/framework/" target="_blank">
             <div class="n cyan">{QIF_BANDS}</div>
             <div class="l">Hourglass<br />bands</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">
             <div class="n" style="color: var(--danger);">{stats.critical}</div>
             <div class="l">Critical<br />severity</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/scoring/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/scoring/" target="_blank">
             <div class="n purple">6</div>
             <div class="l">NISS scoring<br />dimensions</div>
           </a>
@@ -757,11 +757,11 @@ const nspShortLabels: Record<number, string> = {
           ))}
         </div>
         <div class="stats" style="margin-top: 10px;">
-          <a class="stat" href="https://qinnovate.com/nsp/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/tools/nsp/" target="_blank">
             <div class="n accent">{NSP_POWER.totalOverheadPercent}%</div>
             <div class="l">Power<br />overhead</div>
           </a>
-          <a class="stat" href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/NSP-PROTOCOL-SPEC.md" target="_blank">
+          <a class="stat" href="https:@/github.com/qinnovates/qinnovate/blob/main/qif-framework/NSP-PROTOCOL-SPEC.md" target="_blank">
             <div class="n accent">v{NSP_VERSION}</div>
             <div class="l">Draft RFC</div>
           </a>
@@ -826,19 +826,19 @@ const nspShortLabels: Record<number, string> = {
           </div>
         </div>
         <div class="stats" style="margin-top: 14px;">
-          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">
             <div class="n" style="color: var(--safe);">{taraStats.dualUse.confirmed}</div>
             <div class="l">Confirmed</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">
             <div class="n cyan">{taraStats.dualUse.probable}</div>
             <div class="l">Probable</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">
             <div class="n faint">{taraStats.dualUse.silicon_only}</div>
             <div class="l">Silicon only</div>
           </a>
-          <a class="stat" href="https://qinnovate.com/TARA/" target="_blank">
+          <a class="stat" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">
             <div class="n" style="color: var(--safe);">{taraStats.clinicalCount}</div>
             <div class="l">Clinical data</div>
           </a>
@@ -922,10 +922,10 @@ const nspShortLabels: Record<number, string> = {
           I'll do the work.
         </p>
         <div class="links" style="margin-top: 22px;">
-          <a class="link" href="https://qinnovate.com" target="_blank">qinnovate.com</a>
-          <a class="link" href="https://qinnovate.com/framework/" target="_blank">Framework</a>
-          <a class="link" href="https://qinnovate.com/TARA/" target="_blank">TARA Atlas</a>
-          <a class="link" href="https://github.com/qinnovates" target="_blank">GitHub</a>
+          <a class="link" href="https:@/qinnovate.com" target="_blank">qinnovate.com</a>
+          <a class="link" href="https:@/qinnovate.com/framework/" target="_blank">Framework</a>
+          <a class="link" href="https:@/qinnovate.com/threat-models/tara/" target="_blank">TARA Atlas</a>
+          <a class="link" href="https:@/github.com/qinnovates" target="_blank">GitHub</a>
         </div>
         <p style="font-size: 0.38em; margin-top: 22px;" class="faint">
           Kevin Qi &nbsp;|&nbsp; Qinnovate &nbsp;|&nbsp; Open Standard &nbsp;|&nbsp; Apache 2.0
@@ -950,11 +950,11 @@ const nspShortLabels: Record<number, string> = {
   <!-- SoundCloud Widget (hidden) -->
   <iframe id="sc-player"
     scrolling="no" frameborder="no" allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/keviano/kulhi-loach&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+    src="https:@/w.soundcloud.com/player/?url=https%3A@/soundcloud.com/keviano/kulhi-loach&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
   </iframe>
 
-  <script is:inline src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script is:inline src="https:@/cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script is:inline src="https:@/cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
   <script is:inline>
     var revealReady = Reveal.initialize({
       hash: true,
@@ -979,7 +979,7 @@ const nspShortLabels: Record<number, string> = {
   </script>
 
   <!-- SoundCloud Widget API -->
-  <script is:inline src="https://w.soundcloud.com/player/api.js"></script>
+  <script is:inline src="https:@/w.soundcloud.com/player/api.js"></script>
   <script is:inline>
     (function() {
       var toggle = document.getElementById('music-toggle');
@@ -1036,7 +1036,7 @@ const nspShortLabels: Record<number, string> = {
         }
       });
 
-      // Auto-play music on first slide advance (wait for Reveal to be ready)
+      @/ Auto-play music on first slide advance (wait for Reveal to be ready)
       var musicStarted = false;
       revealReady.then(function() {
         Reveal.on('slidechanged', function(event) {
@@ -1049,7 +1049,7 @@ const nspShortLabels: Record<number, string> = {
               toggle.classList.add('playing');
             }
           }
-          // Glass-pane parallax — background layers drift with slide index
+          @/ Glass-pane parallax — background layers drift with slide index
           var center = 6;
           var delta = event.indexh - center;
           var aurora = document.querySelector('.aurora-layer');
@@ -1078,19 +1078,19 @@ const nspShortLabels: Record<number, string> = {
     var W = window.innerWidth;
     var H = window.innerHeight;
 
-    // --- Renderer (alpha for HTML to show through) ---
+    @/ --- Renderer (alpha for HTML to show through) ---
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
     renderer.setSize(W, H);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 2.5;
 
-    // --- Scene & Camera ---
+    @/ --- Scene & Camera ---
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
     camera.position.set(0, 0, 5.5);
 
-    // --- Lighting (strong for visible specular on glass) ---
+    @/ --- Lighting (strong for visible specular on glass) ---
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
     var keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
     keyLight.position.set(2, 4, 5);
@@ -1102,13 +1102,13 @@ const nspShortLabels: Record<number, string> = {
     rimLight.position.set(0, -2, 4);
     scene.add(rimLight);
 
-    // --- Rich environment map for Fresnel reflections ---
+    @/ --- Rich environment map for Fresnel reflections ---
     var pmrem = new THREE.PMREMGenerator(renderer);
     pmrem.compileEquirectangularShader();
     var envScene = new THREE.Scene();
     envScene.background = new THREE.Color(0xe8edf5);
 
-    // Strong colored lights for visible reflections in glass
+    @/ Strong colored lights for visible reflections in glass
     var el1 = new THREE.PointLight(0x6390ff, 20, 25);
     el1.position.set(6, 4, 3);
     envScene.add(el1);
@@ -1122,7 +1122,7 @@ const nspShortLabels: Record<number, string> = {
     el4.position.set(0, 0, 8);
     envScene.add(el4);
 
-    // Bright reflective surfaces in env for glass to pick up
+    @/ Bright reflective surfaces in env for glass to pick up
     var sGeo = new THREE.SphereGeometry(1.0, 32, 32);
     var sMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0, metalness: 1 });
     [[-4, 2, -6], [4, -1, -6], [0, 4, -8]].forEach(function(pos) {
@@ -1130,7 +1130,7 @@ const nspShortLabels: Record<number, string> = {
       s.position.set(pos[0], pos[1], pos[2]);
       envScene.add(s);
     });
-    // Large white plane for broad soft reflection
+    @/ Large white plane for broad soft reflection
     var planeGeo = new THREE.PlaneGeometry(20, 20);
     var planeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3, metalness: 0 });
     var bgPlane = new THREE.Mesh(planeGeo, planeMat);
@@ -1140,7 +1140,7 @@ const nspShortLabels: Record<number, string> = {
     var envMap = pmrem.fromScene(envScene, 0, 0.1, 100).texture;
     pmrem.dispose();
 
-    // --- Glass material (reflective + visible Fresnel) ---
+    @/ --- Glass material (reflective + visible Fresnel) ---
     var glassMat = new THREE.MeshPhysicalMaterial({
       metalness: 0.1,
       roughness: 0.0,
@@ -1156,7 +1156,7 @@ const nspShortLabels: Record<number, string> = {
       depthWrite: false,
     });
 
-    // --- Rounded rectangle shape ---
+    @/ --- Rounded rectangle shape ---
     function roundedRect(w, h, r) {
       var s = new THREE.Shape();
       var hw = w / 2, hh = h / 2;
@@ -1172,7 +1172,7 @@ const nspShortLabels: Record<number, string> = {
       return s;
     }
 
-    // --- Create panes ---
+    @/ --- Create panes ---
     var SLIDES = 12;
     var PW = 3.8;
     var PH = 2.15;
@@ -1195,7 +1195,7 @@ const nspShortLabels: Record<number, string> = {
       var mesh = new THREE.Mesh(geo, mat);
       mesh.position.x = i * GAP;
 
-      // Bright edge wireframe (glass card border)
+      @/ Bright edge wireframe (glass card border)
       var edges = new THREE.EdgesGeometry(geo, 10);
       var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
         color: 0xffffff,
@@ -1209,7 +1209,7 @@ const nspShortLabels: Record<number, string> = {
     }
     scene.add(group);
 
-    // --- Animation state ---
+    @/ --- Animation state ---
     var targetX = 0;
     var animStartX = 0;
     var animStartTime = 0;
@@ -1226,7 +1226,7 @@ const nspShortLabels: Record<number, string> = {
       animStartTime = performance.now();
       targetX = -idx * GAP;
 
-      // Adjust per-pane appearance by distance
+      @/ Adjust per-pane appearance by distance
       panes.forEach(function(p, i) {
         var dist = Math.abs(i - idx);
         if (dist === 0) {
@@ -1253,20 +1253,20 @@ const nspShortLabels: Record<number, string> = {
       });
     }
 
-    // --- Render loop ---
+    @/ --- Render loop ---
     var clock = new THREE.Clock();
 
     function animate() {
       requestAnimationFrame(animate);
       var t = clock.getElapsedTime();
 
-      // Eased position transition
+      @/ Eased position transition
       var elapsed = performance.now() - animStartTime;
       var progress = Math.min(elapsed / animDuration, 1);
       var eased = easeOutExpo(progress);
       group.position.x = animStartX + (targetX - animStartX) * eased;
 
-      // Idle: subtle breathing rotation (glass catches light differently)
+      @/ Idle: subtle breathing rotation (glass catches light differently)
       panes.forEach(function(p, i) {
         if (!p.mesh.visible) return;
         var dist = Math.abs(i - currentSlide);
@@ -1279,7 +1279,7 @@ const nspShortLabels: Record<number, string> = {
     }
     animate();
 
-    // --- Resize ---
+    @/ --- Resize ---
     window.addEventListener('resize', function() {
       W = window.innerWidth;
       H = window.innerHeight;
@@ -1288,7 +1288,7 @@ const nspShortLabels: Record<number, string> = {
       renderer.setSize(W, H);
     });
 
-    // --- Hook Reveal ---
+    @/ --- Hook Reveal ---
     revealReady.then(function() {
       Reveal.on('slidechanged', function(e) {
         setSlide(e.indexh);

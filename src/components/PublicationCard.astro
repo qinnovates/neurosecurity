@@ -24,7 +24,7 @@ const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().s
 ---
 
 {compact ? (
-  <a href={`/publications/${slug}/`} class="block group">
+  <a href={`/research/papers/${slug}/`} class="block group">
     <article class="glass rounded-lg p-3 card-hover h-full flex flex-col">
       <div class="flex flex-wrap gap-1 mb-2">
         {tags.slice(0, 2).map((tag) => (
@@ -44,7 +44,7 @@ const excerpt = body.replace(/^#.*$/gm, '').replace(/[*_`[\]()!]/g, '').trim().s
     </article>
   </a>
 ) : (
-  <a href={`/publications/${slug}/`} class="block group">
+  <a href={`/research/papers/${slug}/`} class="block group">
     <article class="glass rounded-xl p-6 card-hover h-full flex flex-col">
       <div class="flex flex-wrap gap-1.5 mb-3">
         {tags.slice(0, 3).map((tag) => (

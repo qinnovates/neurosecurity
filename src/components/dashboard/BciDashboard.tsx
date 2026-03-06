@@ -270,7 +270,7 @@ function HourglassPositionPanel({ device, bands }: { device: BciDevice; bands: H
   const centerX = 150;
 
   return (
-    <PanelShell title="Hourglass Position" deepLink="/lab/hourglass.html" deepLinkLabel="Full Hourglass">
+    <PanelShell title="Hourglass Position" deepLink="/open-research/derivation/hourglass.html" deepLinkLabel="Full Hourglass">
       {device.qifBands.length === 0 ? (
         <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-faint)', fontStyle: 'italic' }}>No band mapping</div>
       ) : (
@@ -330,7 +330,7 @@ function ThreatProfilePanel({ device }: { device: BciDevice }) {
   const severity = device.threatsBySeverity;
 
   return (
-    <PanelShell title="Threat Profile" deepLink="/TARA/" deepLinkLabel="TARA Atlas">
+    <PanelShell title="Threat Profile" deepLink="/threat-models/tara/" deepLinkLabel="TARA Atlas">
       {total === 0 ? (
         <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-faint)', fontStyle: 'italic' }}>No mapped threats</div>
       ) : (

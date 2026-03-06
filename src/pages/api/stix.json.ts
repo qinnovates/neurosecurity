@@ -1,6 +1,6 @@
 
 import type { APIRoute } from 'astro';
-import { THREAT_VECTORS } from '../../lib/threat-data';
+import { THREAT_VECTORS } from '@/lib/threat-data';
 
 // --- Helper: Convert TARA to STIX 2.1 Objects ---
 function convertToStix(threats: typeof THREAT_VECTORS) {
@@ -46,7 +46,7 @@ function convertToStix(threats: typeof THREAT_VECTORS) {
                 {
                     source_name: "QIF TARA",
                     external_id: t.id,
-                    url: `https://qinnovate.com/TARA/${t.id}`
+                    url: `https://qinnovate.com/threat-models/tara/${t.id}`
                 }
             ],
             x_qif_severity: t.severity,

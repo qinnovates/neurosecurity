@@ -1,7 +1,7 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
 ---
 
 <BaseLayout
@@ -32,7 +32,7 @@ import Footer from '../components/Footer.astro';
 </BaseLayout>
 
 <script>
-  // Auto-resize iframe to content height
+  @/ Auto-resize iframe to content height
   const frame = document.getElementById('learningFrame') as HTMLIFrameElement;
   if (frame) {
     const resize = () => {
@@ -43,7 +43,7 @@ import Footer from '../components/Footer.astro';
     };
     frame.addEventListener('load', () => {
       resize();
-      // Re-check periodically as user expands sections
+      @/ Re-check periodically as user expands sections
       setInterval(resize, 2000);
     });
   }

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { THREAT_VECTORS, getRegistryStats, getChangelog } from '../../lib/threat-data';
+import { THREAT_VECTORS, getRegistryStats, getChangelog } from '@/lib/threat-data';
 
 export const GET: APIRoute = async () => {
     const data = {
