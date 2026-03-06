@@ -1,7 +1,7 @@
 /**
  * Neurosecurity GRC Convergence Data
  *
- * Structured data powering the convergence gap analysis on /neurogovernance/
+ * Structured data powering the convergence gap analysis on /neuroethics/rights/
  * and the unified governance doc NEUROSECURITY_GOVERNANCE.md.
  *
  * Source of truth for: governing bodies, convergence gaps, framework lessons,

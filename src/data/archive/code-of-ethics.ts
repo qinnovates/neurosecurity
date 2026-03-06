@@ -182,7 +182,7 @@ export const FRAMEWORK_LINKS = {
   helsinki: 'https://www.wma.net/policies-post/wma-declaration-of-helsinki/',
   chileNeurorights: 'https://courier.unesco.org/en/articles/chile-pioneering-protection-neurorights',
   gdpr9: 'https://gdpr-info.eu/art-9-gdpr/',
-  ieeeNeuroethics: 'https://brain.ieee.org/publications/ieee-neuroethics-framework/',
+  ieeeNeuroethics: 'https://brain.ieee.org/research/papers/ieee-neuroethics-framework/',
   budapest: 'https://rm.coe.int/1680081561',
   yuste: 'https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2021.701258/full',
   ienca: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11542783/',

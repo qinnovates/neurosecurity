@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
-import { THREAT_VECTORS, THREAT_CATEGORIES, THREAT_TACTICS, THREAT_DOMAINS, NISS_SPEC, TARA_SPEC, DSM5_SPEC, getRegistryStats, getChangelog, getTaraStats, getDsm5Stats, getPhysicsFeasibilityStats, getNeurorightStats, getRegulatoryStats } from '../../lib/threat-data';
-import { HOURGLASS_BANDS } from '../../lib/qif-constants';
-import { getBciDevices, getBciStats } from '../../lib/bci-data';
-import { BCI_CONSTRAINTS, BCI_CONSTRAINT_CATEGORIES, BCI_PHYSICS_CONSTANTS, BCI_VALIDATION } from '../../lib/bci-limits-constants';
+import { THREAT_VECTORS, THREAT_CATEGORIES, THREAT_TACTICS, THREAT_DOMAINS, NISS_SPEC, TARA_SPEC, DSM5_SPEC, getRegistryStats, getChangelog, getTaraStats, getDsm5Stats, getPhysicsFeasibilityStats, getNeurorightStats, getRegulatoryStats } from '@/lib/threat-data';
+import { HOURGLASS_BANDS } from '@/lib/qif-constants';
+import { getBciDevices, getBciStats } from '@/lib/bci-data';
+import { BCI_CONSTRAINTS, BCI_CONSTRAINT_CATEGORIES, BCI_PHYSICS_CONSTANTS, BCI_VALIDATION } from '@/lib/bci-limits-constants';
 import atlas from '@shared/qif-brain-bci-atlas.json';
-import timeline from '../../data/qif-timeline.json';
+import timeline from '@/data/qif-timeline.json';
 
 export const GET: APIRoute = async () => {
     const data = {

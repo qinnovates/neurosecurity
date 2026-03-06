@@ -1,7 +1,7 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-import { HOURGLASS_BANDS } from '../lib/qif-constants';
-import { THREAT_VECTORS, THREAT_TACTICS, SEVERITY_COLORS, STATUS_COLORS, ZONE_COLORS, getTacticName } from '../lib/threat-data';
+import PageLayout from '@/layouts/PageLayout.astro';
+import { HOURGLASS_BANDS } from '@/lib/qif-constants';
+import { THREAT_VECTORS, THREAT_TACTICS, SEVERITY_COLORS, STATUS_COLORS, ZONE_COLORS, getTacticName } from '@/lib/threat-data';
 
 const allThreatsJson = JSON.stringify(THREAT_VECTORS);
 const allTacticsJson = JSON.stringify(THREAT_TACTICS);
@@ -766,7 +766,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
 </style>
 
 <script define:vars={{ allThreatsJson, allTacticsJson, bandsJson }}>
-  // ═══ Data ═══
+  @/ ═══ Data ═══
   const ALL_THREATS = JSON.parse(allThreatsJson);
   const ALL_TACTICS = JSON.parse(allTacticsJson);
   const ALL_BANDS = JSON.parse(bandsJson);
@@ -780,7 +780,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     THREATS_BY_TACTIC[t.tactic].push(t);
   }
 
-  // Kill chain order
+  @/ Kill chain order
   const KILLCHAIN_ORDER = [
     'QIF-N.SC', 'QIF-B.IN', 'QIF-N.IJ', 'QIF-C.IM', 'QIF-B.EV',
     'QIF-D.HV', 'QIF-P.DS', 'QIF-N.MD', 'QIF-C.EX', 'QIF-E.RD', 'QIF-M.SV'
@@ -806,7 +806,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     synthetic: '#3b82f6',
   };
 
-  // ═══ DOM refs ═══
+  @/ ═══ DOM refs ═══
   const searchInput = document.getElementById('graph-search');
   const searchClear = document.getElementById('search-clear');
   const searchDropdown = document.getElementById('search-dropdown');
@@ -828,7 +828,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
   let searchHighlightIdx = -1;
   let firstSelection = true;
 
-  // ═══ Kill Chain Init ═══
+  @/ ═══ Kill Chain Init ═══
   function initKillChain() {
     kcPhases.innerHTML = '';
     for (const tacticId of KILLCHAIN_ORDER) {
@@ -843,12 +843,12 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
   }
   initKillChain();
 
-  // ═══ Edge Computation ═══
+  @/ ═══ Edge Computation ═══
   function computeEdges(centerThreat) {
     const edges = [];
     const neighborIds = new Set();
 
-    // 1. Secondary tactic links (strongest)
+    @/ 1. Secondary tactic links (strongest)
     if (centerThreat.crossRefs && centerThreat.crossRefs.secondary_tactics) {
       for (const tacticId of centerThreat.crossRefs.secondary_tactics) {
         const tacticThreats = THREATS_BY_TACTIC[tacticId] || [];
@@ -860,7 +860,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       }
     }
 
-    // Also check other threats whose secondary_tactics point to center's tactic
+    @/ Also check other threats whose secondary_tactics point to center's tactic
     for (const t of ALL_THREATS) {
       if (t.id === centerThreat.id || neighborIds.has(t.id)) continue;
       if (t.crossRefs && t.crossRefs.secondary_tactics && t.crossRefs.secondary_tactics.includes(centerThreat.tactic)) {
@@ -869,7 +869,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       }
     }
 
-    // 2. Tactic siblings (weak) — limit to 4 most severe
+    @/ 2. Tactic siblings (weak) — limit to 4 most severe
     const siblings = (THREATS_BY_TACTIC[centerThreat.tactic] || [])
       .filter(function(t) { return t.id !== centerThreat.id && !neighborIds.has(t.id); })
       .sort(function(a, b) { return b.niss.score - a.niss.score; })
@@ -879,7 +879,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       neighborIds.add(t.id);
     }
 
-    // 3. Band co-occurrence — techniques sharing 3+ bands, limit to 3
+    @/ 3. Band co-occurrence — techniques sharing 3+ bands, limit to 3
     const centerBands = new Set(centerThreat.bands);
     const bandMatches = ALL_THREATS
       .filter(function(t) {
@@ -898,13 +898,13 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     return { edges: edges, neighborIds: neighborIds };
   }
 
-  // ═══ Force Simulation ═══
+  @/ ═══ Force Simulation ═══
   function runForceLayout(centerNode, neighborNodes, edges, width, height) {
     const cx = width / 2;
     const cy = height / 2;
     const nodes = [centerNode].concat(neighborNodes);
 
-    // Initialize positions - center in middle, neighbors in circle
+    @/ Initialize positions - center in middle, neighbors in circle
     centerNode.x = cx;
     centerNode.y = cy;
     centerNode.fx = cx;
@@ -918,7 +918,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       n.y = cy + radius * Math.sin(angleStep * i - Math.PI / 2);
     }
 
-    // Edge index map
+    @/ Edge index map
     const edgeIndex = {};
     for (const e of edges) {
       if (!edgeIndex[e.source]) edgeIndex[e.source] = [];
@@ -927,11 +927,11 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       edgeIndex[e.target].push(e);
     }
 
-    // Simple force sim: 60 iterations
+    @/ Simple force sim: 60 iterations
     for (let iter = 0; iter < 60; iter++) {
       const damping = 0.9 * (1 - iter / 60);
 
-      // Repulsion between all nodes
+      @/ Repulsion between all nodes
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i];
@@ -947,7 +947,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
         }
       }
 
-      // Spring attraction along edges
+      @/ Spring attraction along edges
       for (const e of edges) {
         const a = nodes.find(function(n) { return n.id === e.source; });
         const b = nodes.find(function(n) { return n.id === e.target; });
@@ -963,14 +963,14 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
         if (!b.fx) { b.x -= fx * damping; b.y -= fy * damping; }
       }
 
-      // Center gravity
+      @/ Center gravity
       for (const n of nodes) {
         if (n.fx) continue;
         n.x += (cx - n.x) * 0.01 * damping;
         n.y += (cy - n.y) * 0.01 * damping;
       }
 
-      // Boundary constraint
+      @/ Boundary constraint
       const pad = 40;
       for (const n of nodes) {
         if (n.fx) continue;
@@ -982,7 +982,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     return nodes;
   }
 
-  // ═══ Rendering ═══
+  @/ ═══ Rendering ═══
   function getNodeColor(threat) {
     const band = ALL_BANDS.find(function(b) { return b.id === (threat.bands[0] || ''); });
     if (band) return ZONE_COLORS[band.zone] || '#94a3b8';
@@ -991,57 +991,57 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
 
   function getNodeRadius(threat) {
     const score = threat.niss ? threat.niss.score : 0;
-    return 14 + (score / 10) * 12; // 14-26px
+    return 14 + (score / 10) * 12; @/ 14-26px
   }
 
   function renderGraph(centerThreat) {
     currentCenter = centerThreat;
 
-    // Show container + panel FIRST so getBoundingClientRect gives final layout width
+    @/ Show container + panel FIRST so getBoundingClientRect gives final layout width
     emptyState.classList.add('xe-hidden');
     graphContainer.classList.remove('xe-hidden');
     detailPanel.classList.remove('xe-hidden');
     detailPanel.classList.add('mobile-open');
 
-    // Disable grid transition so panel-open snaps instantly (no mid-transition measurement)
+    @/ Disable grid transition so panel-open snaps instantly (no mid-transition measurement)
     explorerRoot.style.transition = 'none';
     explorerRoot.classList.add('panel-open');
 
-    // Force layout reflow at the FINAL grid state before measuring
+    @/ Force layout reflow at the FINAL grid state before measuring
     void explorerRoot.offsetHeight;
 
     const rect = graphContainer.getBoundingClientRect();
     const w = rect.width || 600;
     const h = Math.min(rect.height, window.innerHeight - 260) || 500;
 
-    // Re-enable transition for future changes
+    @/ Re-enable transition for future changes
     requestAnimationFrame(function() { explorerRoot.style.transition = ''; });
     graphSvg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
 
     const { edges, neighborIds } = computeEdges(centerThreat);
     const neighbors = Array.from(neighborIds).map(function(id) { return THREATS_BY_ID[id]; }).filter(Boolean);
 
-    // Build node objects
+    @/ Build node objects
     const centerNode = { id: centerThreat.id, threat: centerThreat, isCenter: true };
     const neighborNodes = neighbors.map(function(t) {
       return { id: t.id, threat: t, isCenter: false };
     });
 
-    // Force layout
+    @/ Force layout
     const allNodes = runForceLayout(centerNode, neighborNodes, edges, w, h);
     const nodeMap = {};
     for (const n of allNodes) nodeMap[n.id] = n;
 
-    // Clear
+    @/ Clear
     edgesGroup.innerHTML = '';
     nodesGroup.innerHTML = '';
 
-    // Draw edges
+    @/ Draw edges
     for (const e of edges) {
       const a = nodeMap[e.source];
       const b = nodeMap[e.target];
       if (!a || !b) continue;
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      const line = document.createElementNS('http:@/www.w3.org/2000/svg', 'line');
       line.setAttribute('x1', a.x);
       line.setAttribute('y1', a.y);
       line.setAttribute('x2', b.x);
@@ -1050,9 +1050,9 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       edgesGroup.appendChild(line);
     }
 
-    // Draw nodes
+    @/ Draw nodes
     for (const n of allNodes) {
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      const g = document.createElementNS('http:@/www.w3.org/2000/svg', 'g');
       g.classList.add('graph-node');
       g.dataset.threatId = n.id;
 
@@ -1060,7 +1060,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       const fill = getNodeColor(n.threat);
       const strokeColor = SEVERITY_COLORS[n.threat.severity] || '#94a3b8';
 
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      const circle = document.createElementNS('http:@/www.w3.org/2000/svg', 'circle');
       circle.setAttribute('cx', n.x);
       circle.setAttribute('cy', n.y);
       circle.setAttribute('r', r);
@@ -1070,8 +1070,8 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       circle.setAttribute('stroke-width', n.isCenter ? '2.5' : '1.5');
 
       if (n.isCenter) {
-        // Pulse animation for center node
-        const animate = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        @/ Pulse animation for center node
+        const animate = document.createElementNS('http:@/www.w3.org/2000/svg', 'animate');
         animate.setAttribute('attributeName', 'stroke-opacity');
         animate.setAttribute('values', '1;0.4;1');
         animate.setAttribute('dur', '2s');
@@ -1081,17 +1081,17 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
 
       g.appendChild(circle);
 
-      // Label
-      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      @/ Label
+      const label = document.createElementNS('http:@/www.w3.org/2000/svg', 'text');
       label.classList.add('node-label');
       label.setAttribute('x', n.x);
       label.setAttribute('y', n.y + r + 12);
-      // Truncate long names
+      @/ Truncate long names
       const displayName = n.threat.name.length > 22 ? n.threat.name.substring(0, 20) + '\u2026' : n.threat.name;
       label.textContent = displayName;
       g.appendChild(label);
 
-      // Interaction
+      @/ Interaction
       g.addEventListener('mouseenter', function(ev) { showTooltip(n.threat, ev); });
       g.addEventListener('mousemove', function(ev) { positionTooltip(ev); });
       g.addEventListener('mouseleave', hideTooltip);
@@ -1112,13 +1112,13 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       setTimeout(function() { graphHint.classList.add('xe-hidden'); }, 6000);
     }
 
-    // Update hourglass
+    @/ Update hourglass
     updateHourglass(centerThreat, neighbors);
 
-    // Update kill chain
+    @/ Update kill chain
     updateKillChain(centerThreat, neighbors);
 
-    // Open detail panel for center
+    @/ Open detail panel for center
     openDetailPanel(centerThreat);
   }
 
@@ -1129,7 +1129,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     searchClear.classList.add('xe-hidden');
   }
 
-  // ═══ Hourglass Update ═══
+  @/ ═══ Hourglass Update ═══
   function updateHourglass(centerThreat, neighbors) {
     const centerBands = new Set(centerThreat.bands);
     const neighborBands = new Set();
@@ -1148,7 +1148,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     });
   }
 
-  // ═══ Kill Chain Update ═══
+  @/ ═══ Kill Chain Update ═══
   function updateKillChain(centerThreat, neighbors) {
     const activeTactics = new Set([centerThreat.tactic]);
     if (centerThreat.crossRefs && centerThreat.crossRefs.secondary_tactics) {
@@ -1170,7 +1170,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     });
   }
 
-  // ═══ Detail Panel ═══
+  @/ ═══ Detail Panel ═══
   function openDetailPanel(threat) {
     const sevColor = SEVERITY_COLORS[threat.severity] || '#94a3b8';
     const statColor = STATUS_COLORS[threat.status] || '#94a3b8';
@@ -1178,7 +1178,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     const nissSeverity = threat.niss ? threat.niss.severity : 'none';
     const nissColor = SEVERITY_COLORS[nissSeverity] || '#94a3b8';
 
-    // Find tactic name
+    @/ Find tactic name
     const tactic = ALL_TACTICS.find(function(t) { return t.id === threat.tactic; });
     const tacticName = tactic ? tactic.name : threat.tactic;
     const phaseNum = KILLCHAIN_ORDER.indexOf(threat.tactic) + 1;
@@ -1191,14 +1191,14 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     html += '<span class="dp-badge" style="background:' + statColor + '20;color:' + statColor + ';border:1px solid ' + statColor + '40;">' + threat.status + '</span>';
     html += '</div>';
 
-    // NISS bar
+    @/ NISS bar
     html += '<div class="dp-niss-bar">';
     html += '<div class="dp-niss-label"><span style="color:var(--color-text-faint)">NISS</span><span style="color:' + nissColor + ';font-family:var(--font-mono);font-weight:700">' + nissScore.toFixed(1) + '</span></div>';
     html += '<div class="dp-niss-track"><div class="dp-niss-fill" style="width:' + (nissScore * 10) + '%;background:' + nissColor + '"></div></div>';
     html += '</div>';
     html += '</div>';
 
-    // Meta
+    @/ Meta
     html += '<div class="dp-section"><div class="dp-section-title">Details</div>';
     html += '<dl class="dp-meta">';
     html += '<dt>Tactic</dt><dd>' + escHtml(tacticName) + (phaseNum > 0 ? ' (Phase ' + phaseNum + ')' : '') + '</dd>';
@@ -1210,21 +1210,21 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     html += '<dt>Quantum</dt><dd style="color:#8b5cf6">' + escHtml(threat.quantumDetection) + '</dd>';
     html += '</dl></div>';
 
-    // Description
+    @/ Description
     html += '<div class="dp-section"><div class="dp-section-title">Description</div>';
     html += '<div class="dp-description">' + escHtml(threat.description) + '</div></div>';
 
-    // NISS vector
+    @/ NISS vector
     if (threat.niss && threat.niss.vector) {
       html += '<div class="dp-section"><div class="dp-section-title">NISS Vector</div>';
       html += '<div style="font-size:0.65rem;font-family:var(--font-mono);color:var(--color-text-faint);word-break:break-all;">' + escHtml(threat.niss.vector) + '</div></div>';
     }
 
-    // Connections
+    @/ Connections
     if (currentCenter && currentCenter.id === threat.id) {
       const { edges, neighborIds } = computeEdges(threat);
 
-      // Group by type
+      @/ Group by type
       const groups = { secondary: [], sibling: [], band: [] };
       const seen = new Set();
       for (const e of edges) {
@@ -1260,7 +1260,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       html += '</div></div>';
     }
 
-    // Sources
+    @/ Sources
     if (threat.sources && threat.sources.length > 0) {
       html += '<div class="dp-section"><div class="dp-section-title">Sources</div>';
       html += '<div class="dp-sources">' + escHtml(threat.sources.join('; ')) + '</div></div>';
@@ -1268,7 +1268,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
 
     detailContent.innerHTML = html;
 
-    // Wire up connection clicks
+    @/ Wire up connection clicks
     detailContent.querySelectorAll('.dp-conn').forEach(function(el) {
       el.addEventListener('click', function() {
         const tid = el.dataset.threatId;
@@ -1277,7 +1277,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
       });
     });
 
-    // Show panel
+    @/ Show panel
     detailPanel.classList.remove('xe-hidden');
     detailPanel.classList.add('mobile-open');
     explorerRoot.classList.add('panel-open');
@@ -1300,7 +1300,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
 
   detailClose.addEventListener('click', closeDetailPanel);
 
-  // ═══ Tooltip ═══
+  @/ ═══ Tooltip ═══
   function showTooltip(threat, ev) {
     const sevColor = SEVERITY_COLORS[threat.severity] || '#94a3b8';
     tooltip.innerHTML =
@@ -1323,7 +1323,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     tooltip.classList.remove('visible');
   }
 
-  // ═══ Search ═══
+  @/ ═══ Search ═══
   function fuzzyMatch(query, text) {
     return text.toLowerCase().includes(query.toLowerCase());
   }
@@ -1383,7 +1383,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     searchDropdown.classList.add('xe-hidden');
   });
 
-  // Keyboard nav in dropdown
+  @/ Keyboard nav in dropdown
   searchInput.addEventListener('keydown', function(e) {
     const items = searchDropdown.querySelectorAll('.search-result');
     if (items.length === 0) return;
@@ -1406,14 +1406,14 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     }
   });
 
-  // Close dropdown on outside click
+  @/ Close dropdown on outside click
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.search-bar')) {
       searchDropdown.classList.add('xe-hidden');
     }
   });
 
-  // ═══ Example Chips ═══
+  @/ ═══ Example Chips ═══
   document.querySelectorAll('.example-chip').forEach(function(chip) {
     chip.addEventListener('click', function() {
       const query = chip.dataset.query;
@@ -1426,7 +1426,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     });
   });
 
-  // ═══ Escape to close ═══
+  @/ ═══ Escape to close ═══
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeDetailPanel();
@@ -1434,7 +1434,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     }
   });
 
-  // ═══ Resize handler ═══
+  @/ ═══ Resize handler ═══
   let resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
@@ -1443,7 +1443,7 @@ const bandsJson = JSON.stringify(HOURGLASS_BANDS);
     }, 200);
   });
 
-  // ═══ HTML escape ═══
+  @/ ═══ HTML escape ═══
   function escHtml(str) {
     if (!str) return '';
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

@@ -21,7 +21,7 @@ const threatLinks = [
 const engineeringLinks = [
   { href: '/signal-security/hourglass/', label: 'Signal Security', desc: '11-band hourglass architecture' },
   { href: '/interface-risks/', label: 'Interface Risks', desc: 'Device dashboard and market landscape' },
-  { href: '/tools/', label: 'Tools Overview', desc: 'The QIF defense stack' },
+  { href: '/tools/overview/', label: 'Tools Overview', desc: 'The QIF defense stack' },
   { href: '/research/validation/', label: 'Validation', desc: 'Methodology and testing results' },
 ];
 
@@ -35,7 +35,7 @@ const communityLinks = [
 
 const isFoundationsActive = currentPath.startsWith('/neuroethics/');
 const isThreatsActive = currentPath.startsWith('/threat-models/');
-const isEngineeringActive = ['/signal-security/', '/interface-risks/', '/tools/', '/research/validation/'].some(p => currentPath.startsWith(p));
+const isEngineeringActive = ['/signal-security/', '/interface-risks/', '/tools/', '/research/research/validation/'].some(p => currentPath.startsWith(p));
 const isCommunityActive = ['/open-research/', '/governance/', '/about/', '/licensing/'].some(p => currentPath.startsWith(p));
 ---
 
@@ -209,7 +209,7 @@ const isCommunityActive = ['/open-research/', '/governance/', '/about/', '/licen
       <div class="flex items-center gap-3">
         <!-- Persistent CTA (desktop) -->
         <a
-          href="/research/whitepaper/"
+          href="/research/research/whitepaper/"
           class="hidden md:inline-flex px-4 py-1.5 rounded-lg bg-[var(--color-accent-primary)] text-white text-sm font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           Read the Whitepaper
@@ -260,7 +260,7 @@ const isCommunityActive = ['/open-research/', '/governance/', '/about/', '/licen
       <!-- Mobile whitepaper CTA -->
       <div class="pb-2 mb-2 border-b border-[var(--color-border)]">
         <a
-          href="/research/whitepaper/"
+          href="/research/research/whitepaper/"
           class="block w-full px-4 py-2.5 rounded-lg bg-[var(--color-accent-primary)] text-white text-sm font-medium text-center hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           Read the Whitepaper

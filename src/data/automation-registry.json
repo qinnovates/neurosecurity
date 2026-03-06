@@ -546,7 +546,7 @@
         "qif-framework/QIF-RESEARCH-SOURCES.md",
         "paper/references.bib",
         "blogs/",
-        "qif-framework/nsp/"
+        "qif-framework/tools/nsp/"
       ],
       "outputs": [
         "List of missing source entries"

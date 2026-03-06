@@ -931,7 +931,7 @@
     "category": "news",
     "tier": "free_rss",
     "url": "https://www.medtechdive.com",
-    "rss_url": "https://www.medtechdive.com/feeds/news/",
+    "rss_url": "https://www.medtechdive.com/feeds/open-research/writing/",
     "has_api": false,
     "notes": "Medical device industry news. Part of Industry Dive."
   },
@@ -958,7 +958,7 @@
     "category": "news",
     "tier": "free_rss",
     "url": "https://www.biopharmadive.com",
-    "rss_url": "https://www.biopharmadive.com/feeds/news/",
+    "rss_url": "https://www.biopharmadive.com/feeds/open-research/writing/",
     "has_api": false,
     "notes": "Pharmaceutical industry news. Part of Industry Dive."
   },
@@ -1290,7 +1290,7 @@
     "name": "Allen Institute Blog",
     "category": "newsletter",
     "tier": "free_web",
-    "url": "https://alleninstitute.org/news/",
+    "url": "https://alleninstitute.org/open-research/writing/",
     "rss_url": null,
     "has_api": false,
     "notes": "Allen Institute for Brain Science. Open datasets and tools."
@@ -1758,7 +1758,7 @@
     "name": "ScienceDaily Neuroscience",
     "category": "news",
     "tier": "free_rss",
-    "url": "https://www.sciencedaily.com/news/mind_brain/",
+    "url": "https://www.sciencedaily.com/open-research/writing/mind_brain/",
     "rss_url": "https://www.sciencedaily.com/rss/mind_brain.xml",
     "has_api": false,
     "notes": "Neuroscience research news digest. University press releases."

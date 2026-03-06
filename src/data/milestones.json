@@ -20,7 +20,7 @@
         "RealTek",
         "MITRE"
       ],
-      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
+      "href": "/open-research/writing/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "id": "neural-stream-01",
@@ -47,7 +47,7 @@
       "summary": "Formal proposal for NISS registration as a CVSS v4.0 extension under Section 3.11 of the User Guide.",
       "status": "submitted",
       "date": "2026-02-11",
-      "href": "/scoring/"
+      "href": "/threat-models/scoring/"
     }
   ],
   "specifications": [
@@ -56,21 +56,21 @@
       "title": "QIF Whitepaper",
       "version": "7.0",
       "summary": "Proposed open security framework for brain-computer interfaces — hourglass architecture, threat modeling, neural impact scoring.",
-      "href": "/whitepaper/"
+      "href": "/research/whitepaper/"
     },
     {
       "id": "nsp-protocol",
       "title": "NSP Protocol",
       "version": "0.5",
       "summary": "Post-quantum neural security protocol. Five defense layers at 3.25% implant power budget.",
-      "href": "/nsp/"
+      "href": "/tools/nsp/"
     },
     {
       "id": "niss-scoring",
       "title": "NISS Scoring System",
       "version": "1.1",
       "summary": "CVSS v4.0 extension for neural interfaces. Six metrics: Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Consent Violation, Reversibility, Neuroplasticity.",
-      "href": "/scoring/"
+      "href": "/threat-models/scoring/"
     }
   ],
   "timeline": [
@@ -88,7 +88,7 @@
       "description": "Post-quantum neural security protocol. Under 4% implant power budget. Wire-level encryption for BCI data streams.",
       "category": "protocol",
       "icon": "lock",
-      "href": "/nsp/"
+      "href": "/tools/nsp/"
     },
     {
       "date": "2026-01-28",
@@ -96,7 +96,7 @@
       "description": "Dual-use atlas mapping 71 attack techniques to therapeutic analogs. 60% of attack mechanisms have clinical counterparts.",
       "category": "research",
       "icon": "book",
-      "href": "/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/"
+      "href": "/open-research/writing/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/"
     },
     {
       "date": "2026-02-08",
@@ -104,7 +104,7 @@
       "description": "First CVSS v4.0 extension for neural interfaces. Six metrics: Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Consent Violation, Reversibility, Neuroplasticity.",
       "category": "scoring",
       "icon": "calculator",
-      "href": "/scoring/"
+      "href": "/threat-models/scoring/"
     },
     {
       "date": "2026-02-10",
@@ -112,7 +112,7 @@
       "description": "Every technique in the TARA Atlas mapped to a CVSS v4.0 base vector with companion NISS extension vector.",
       "category": "scoring",
       "icon": "map",
-      "href": "/scoring/"
+      "href": "/threat-models/scoring/"
     },
     {
       "date": "2026-02-11",
@@ -120,7 +120,7 @@
       "description": "Three-phase exploit chain against a widely-used BCI data streaming library. Responsible disclosure in progress.",
       "category": "security",
       "icon": "terminal",
-      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
+      "href": "/open-research/writing/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "date": "2026-02-11",
@@ -128,7 +128,7 @@
       "description": "Formal proposal sent to cvss@first.org for NISS registration as a CVSS v4.0 extension under Section 3.11 of the User Guide.",
       "category": "standards",
       "icon": "send",
-      "href": "/scoring/"
+      "href": "/threat-models/scoring/"
     },
     {
       "date": "2026-02-11",
@@ -136,7 +136,7 @@
       "description": "CWE-862 (Missing Authorization) on RealTek HD Audio codec jack retasking. 9-year-old unfiled vulnerability found through systematic gap analysis. Disclosed to TWCERT/CC, RealTek, and MITRE.",
       "category": "security",
       "icon": "alert",
-      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
+      "href": "/open-research/writing/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "date": "2026-02-11",
@@ -144,7 +144,7 @@
       "description": "New 8th domain (S) with 4 tactics and 8 initial techniques covering upstream consumer device attacks. Later expanded to 28 S-domain techniques (99 total).",
       "category": "framework",
       "icon": "shield",
-      "href": "/TARA/"
+      "href": "/threat-models/tara/"
     },
     {
       "date": "2026-02-11",
@@ -152,7 +152,7 @@
       "description": "20 new consumer sensor techniques across audio, optical, IMU, RF, thermal, and biometric categories. 5 chain techniques document multi-stage escalation paths. Registry reaches 99 techniques.",
       "category": "framework",
       "icon": "shield",
-      "href": "/TARA/"
+      "href": "/threat-models/tara/"
     },
     {
       "date": "2026-02-12",
@@ -160,7 +160,7 @@
       "description": "Research mapping from BCI security severity scores to psychiatric diagnostic categories. All techniques mapped to DSM-5-TR diagnostic clusters via the Neural Impact Chain. Requires clinical validation. See the whitepaper v6 or TARA changelog for details.",
       "category": "research",
       "icon": "brain",
-      "href": "/news/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
+      "href": "/open-research/writing/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
     },
     {
       "date": "2026-02-13",
@@ -168,7 +168,7 @@
       "description": "3 new consumer device side-channel techniques (T0100\u2013T0102): neural steganographic encoding, multi-modal keystroke inference, and screen photometry sensing. WiFi CSI consumer-grade capabilities merged into T0090. All confirmed dual-use with clinical applications.",
       "category": "framework",
       "icon": "shield",
-      "href": "/TARA/"
+      "href": "/threat-models/tara/"
     }
   ]
 }

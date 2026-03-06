@@ -7,7 +7,7 @@ import registrar from '../../shared/qtara-registrar.json';
 
 export const QIF_VERSION = '7.0';
 export const LATEST_WHITEPAPER_VERSION = '7.0';
-export const LATEST_WHITEPAPER_HREF = '/research/whitepaper/';
+export const LATEST_WHITEPAPER_HREF = '/research/research/whitepaper/';
 export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;
 export const QIF_ESTABLISHED = 2026;
@@ -82,7 +82,7 @@ export const PILLARS = [
     fullName: 'Quantified Interconnection Framework',
     tagline: 'The governance architecture',
     description: 'The OSI of Mind. An 11-band hourglass model mapping every surface — from neural tissue to synthetic systems — where security threats and ethical risks converge. One auditable framework for both.',
-    href: '/research/whitepaper/',
+    href: '/research/research/whitepaper/',
     icon: '&#9670;',
     color: 'var(--color-accent-primary)',
     version: QIF_VERSION,
@@ -106,7 +106,7 @@ export const PILLARS = [
     fullName: 'Neural Sensory Protocol',
     tagline: 'The wire protocol',
     description: 'An RFC-style post-quantum protocol ensuring patient safety and data privacy — securing BCI data links with five defense layers at 3.25% power overhead.',
-    href: '/signal-security/nsp/',
+    href: '/signal-security/tools/nsp/',
     icon: '&#9632;',
     color: 'var(--color-accent-secondary)',
     version: '0.4',

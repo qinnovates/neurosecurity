@@ -1,21 +1,21 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import TrustBar from '../components/TrustBar.astro';
-import PublicationCard from '../components/PublicationCard.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import TrustBar from '@/components/TrustBar.astro';
+import PublicationCard from '@/components/PublicationCard.astro';
 import { getCollection } from 'astro:content';
-import { getPostDate } from '../lib/utils';
-import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS, LATEST_WHITEPAPER_HREF } from '../lib/qif-constants';
-import HeroParticles from '../components/HeroParticles';
-import '../styles/global.css';
+import { getPostDate } from '@/lib/utils';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS, LATEST_WHITEPAPER_HREF } from '@/lib/qif-constants';
+import HeroParticles from '@/components/HeroParticles';
+import '@/styles/global.css';
 import registry from '@shared/qtara-registrar.json';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => new Date(getPostDate(b.data)).getTime() - new Date(getPostDate(a.data)).getTime())
   .slice(0, 6);
 
-// Compute hero metrics from registrar (build-time)
+@/ Compute hero metrics from registrar (build-time)
 const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
@@ -24,7 +24,7 @@ const neurorightsSet = new Set<string>();
 techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => { if (r !== 'EA') neurorightsSet.add(r); }));
 const neurorightsCount = neurorightsSet.size;
 
-// Curated essential reading slugs (strongest posts for neuroethics audience)
+@/ Curated essential reading slugs (strongest posts for neuroethics audience)
 const essentialSlugs = [
   '2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses',
   '2026-02-16-your-brain-has-rights-we-counted-them',
@@ -67,7 +67,7 @@ const essentialPosts = essentialSlugs
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
-        An <a href="/interface-risks/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry by 2032</a>.* {totalThreats} attack techniques catalogued across 24 commercial devices. QIF is a proposed open framework bridging neurosecurity and neuroethics — from threat model to defense specification.
+        An <a href="/interface-risks/neuroethics/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry by 2032</a>.* {totalThreats} attack techniques catalogued across 24 commercial devices. QIF is a proposed open framework bridging neurosecurity and neuroethics — from threat model to defense specification.
       </p>
 
       <!-- Metrics -->
@@ -80,7 +80,7 @@ const essentialPosts = essentialSlugs
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalThreats}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">BCI attack techniques<br/>catalogued and scored</p>
         </a>
-        <a href="/neuroethics/therapeutics/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-secondary)]/30 transition-all">
+        <a href="/neuroethics/neuroethics/therapeutics/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-secondary)]/30 transition-all">
           <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{therapeuticCount}</p>
           <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic uses found<br/>in the same mechanisms</p>
         </a>
@@ -99,7 +99,7 @@ const essentialPosts = essentialSlugs
           See the Threat Atlas
         </a>
         <a
-          href="/research/whitepaper/"
+          href="/research/research/whitepaper/"
           class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
         >
           Read the Framework
@@ -107,7 +107,7 @@ const essentialPosts = essentialSlugs
       </div>
 
       <p class="text-[10px] text-[var(--color-text-faint)] mt-4">
-        *Median estimate across <a href="/interface-risks/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
+        *Median estimate across <a href="/interface-risks/neuroethics/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
       </p>
 
       <TrustBar />
@@ -159,7 +159,7 @@ const essentialPosts = essentialSlugs
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">CISA</p>
-            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning. A board game for brainstorming, not a security framework.</p>
+            <p>Created a <a href="https:@/www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning. A board game for brainstorming, not a security framework.</p>
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">BCI Manufacturers</p>
@@ -201,7 +201,7 @@ const essentialPosts = essentialSlugs
       </a>
 
       <!-- Dual-use discovery -->
-      <a href="/neuroethics/therapeutics/" class="glass rounded-xl p-5 card-hover group text-left">
+      <a href="/neuroethics/neuroethics/therapeutics/" class="glass rounded-xl p-5 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-emerald-400/10 flex items-center justify-center text-emerald-400">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
@@ -238,7 +238,7 @@ const essentialPosts = essentialSlugs
             Explore Diagnostic View
           </a>
           <a
-            href="/publications/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
+            href="/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
             class="px-5 py-2.5 rounded-lg glass text-[var(--color-text-primary)] font-medium text-sm hover:bg-white/10 transition-colors text-center"
           >
             Read More
@@ -352,7 +352,7 @@ const essentialPosts = essentialSlugs
 
   <!-- ═══ TOOLS — Project Runemate ═══ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <a href="/tools/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
+    <a href="/tools/tools/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
       <div class="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none" style="background: radial-gradient(circle, var(--color-accent-tertiary), transparent 70%);"></div>
       <div class="flex flex-col sm:flex-row sm:items-center gap-6">
         <div class="flex-1">
@@ -395,7 +395,7 @@ const essentialPosts = essentialSlugs
         </p>
       </a>
 
-      <a href="/neuroethics/landscape/" class="glass rounded-xl p-6 card-hover group text-left">
+      <a href="/neuroethics/neuroethics/landscape/" class="glass rounded-xl p-6 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-[var(--color-accent-secondary)]/10 flex items-center justify-center text-[var(--color-accent-secondary)]">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21" /></svg>
@@ -409,7 +409,7 @@ const essentialPosts = essentialSlugs
         </p>
       </a>
 
-      <a href="/tools/" class="glass rounded-xl p-6 card-hover group text-left">
+      <a href="/tools/overview/" class="glass rounded-xl p-6 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-[var(--color-accent-tertiary)]/10 flex items-center justify-center text-[var(--color-accent-tertiary)]">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085" /></svg>
@@ -462,7 +462,7 @@ const essentialPosts = essentialSlugs
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href="/research/whitepaper/"
+          href="/research/research/whitepaper/"
           class="px-8 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           Read the Whitepaper

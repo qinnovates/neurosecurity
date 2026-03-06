@@ -149,7 +149,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDef: 'Developed by Qinnovate as the first CVSS v4.0 extension for neural security, following FIRST.org\'s extension framework (User Guide §3.11). Six equally-weighted extension metrics: Biological Impact (BI), Cognitive Reconnaissance (CR, read-side attacks), Cognitive Disruption (CD, write-side attacks), Consent Violation (CV), Reversibility (RV), Neuroplasticity (NP). The former Cognitive Integrity (CG) metric was split into CR and CD in NISS v1.1 to distinguish unauthorized neural data extraction from unauthorized neural state modification. Context profiles (Clinical, Research, Consumer, Military) provide domain-specific weighting. Every technique carries both a NISS extension vector and a CVSS v4.0 base vector. 94.4% of TARA techniques require NISS for full-fidelity scoring. PINS flag triggers when BI >= High or RV = Irreversible. Severity: Critical (9.0+), High (7.0-8.9), Medium (4.0-6.9), Low (0.1-3.9).',
     formula: 'NISS = (BI + CR + CD + CV + RV + NP) / 6',
     relatedTerms: ['tara-taxonomy', 'tara'],
-    href: '/scoring/',
+    href: '/threat-models/scoring/',
     tags: ['metric', 'original'],
   },
 
@@ -161,7 +161,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     shortDef: 'RFC-style post-quantum wire protocol for BCI data links.',
     fullDef: 'A five-layer defense protocol securing BCI communication channels with post-quantum cryptography at 3.25% power overhead. Designed as an RFC-style specification for interoperability across BCI manufacturers.',
     relatedTerms: ['qif', 'runemate', 'post-quantum-cryptography'],
-    href: '/nsp/',
+    href: '/tools/nsp/',
     tags: ['protocol', 'core'],
   },
   {
@@ -171,7 +171,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     shortDef: 'HTML-to-bytecode compiler achieving 65-90% compression.',
     fullDef: 'An HTML-to-Staves bytecode compiler achieving 65-90% size reduction. Makes post-quantum encryption viable on implants by compressing payloads before encryption. Runemate Forge is the compiler, Staves is the bytecode format, Scribe is the on-chip interpreter.',
     relatedTerms: ['nsp', 'staves-bytecode'],
-    href: '/runemate/',
+    href: '/tools/runemate/',
     tags: ['component', 'core'],
   },
   {
@@ -181,7 +181,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     shortDef: 'Interactive threat atlas mapping BCI attack vectors across four domains.',
     fullDef: 'A comprehensive threat atlas organizing BCI threats across Security, Clinical, Governance, and Engineering domains. Contains technique entries scored with NISS and classified using the TARA Taxonomy. Provides filterable, searchable access to the full QIF threat model.',
     relatedTerms: ['niss', 'tara-taxonomy'],
-    href: '/TARA/',
+    href: '/threat-models/tara/',
     tags: ['component', 'original'],
   },
   {

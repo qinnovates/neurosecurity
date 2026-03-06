@@ -1,25 +1,25 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import { QIF_VERSION, HOURGLASS_BANDS } from '../lib/qif-constants';
-import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
-import { THREAT_VECTORS } from '../lib/threat-data';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { QIF_VERSION, HOURGLASS_BANDS } from '@/lib/qif-constants';
+import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
+import { THREAT_VECTORS } from '@/lib/threat-data';
 const totalTechniques = THREAT_VECTORS.length;
-import '../styles/global.css';
+import '@/styles/global.css';
 
 const steps = [
   {
     number: '01',
     title: 'Read the Specification',
     description: 'The QIF whitepaper defines the 11-band hourglass architecture, Coherence Metric (Cs), and threat modeling methodology. Published under Apache 2.0.',
-    link: { href: '/whitepaper/', label: 'Read the Whitepaper' },
+    link: { href: '/research/whitepaper/', label: 'Read the Whitepaper' },
   },
   {
     number: '02',
     title: 'Assess Your Device',
     description: 'Map your neural device to QIF\'s 11-band model. Use TARA to identify relevant attack techniques across every band. Score findings with NISS.',
-    link: { href: '/TARA/', label: 'Browse TARA Atlas' },
+    link: { href: '/threat-models/tara/', label: 'Browse TARA Atlas' },
   },
   {
     number: '03',
@@ -206,7 +206,7 @@ const participationTiers = [
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <a href="/whitepaper/" class="glass rounded-xl p-6 card-hover group">
+      <a href="/research/whitepaper/" class="glass rounded-xl p-6 card-hover group">
         <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-3">Specification</p>
         <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
           QIF Whitepaper v{QIF_VERSION}
@@ -215,7 +215,7 @@ const participationTiers = [
           Full specification — 11-band architecture, Coherence Metric (Cs), and threat modeling methodology.
         </p>
       </a>
-      <a href="/TARA/" class="glass rounded-xl p-6 card-hover group">
+      <a href="/threat-models/tara/" class="glass rounded-xl p-6 card-hover group">
         <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-tertiary)] mb-3">Threat Atlas</p>
         <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-tertiary)] transition-colors">
           TARA Atlas
@@ -318,10 +318,10 @@ const participationTiers = [
       </div>
 
       <div class="flex items-center gap-4 text-sm">
-        <a href="/publications/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">
+        <a href="/research/papers/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/" class="text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">
           Read the full analysis &#8594;
         </a>
-        <a href="/TARA/" class="text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] transition-colors">
+        <a href="/threat-models/tara/" class="text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] transition-colors">
           View the TARA atlas &#8594;
         </a>
       </div>
@@ -414,7 +414,7 @@ const participationTiers = [
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
           Propose new TARA techniques, discuss NISS scoring methodology, debate neuroethics governance questions, or ask anything about QIF.
         </p>
-        <a href="https://github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">
+        <a href="https:@/github.com/qinnovates/qinnovate/discussions" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors font-medium">
           GitHub Discussions &#8594;
         </a>
       </div>

@@ -1,0 +1,812 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import registry from '@shared/research-registry.json';
+
+const breadcrumbs = [
+  { label: 'Framework', href: '/signal-security/hourglass/' },
+  { label: 'Neuroethics Landscape' },
+];
+
+const explorer = registry.explorer;
+const ethicsTimeline = registry.timelines.neuroethics;
+const securityTimeline = registry.timelines.neurosecurity;
+
+const pillars = [
+  {
+    name: 'Cognitive Liberty',
+    description: 'The right to mental self-determination. Freedom to alter, protect, or refuse to disclose your own mental states.',
+    sources: ['Ienca & Andorno 2017', 'Farahany 2023', 'Bublitz 2013'],
+    icon: 'M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18',
+  },
+  {
+    name: 'Mental Privacy',
+    description: 'Protection of neural data from unauthorized access, collection, or inference. Extends data privacy to brain signals.',
+    sources: ['Ienca & Andorno 2017', 'Yuste et al. 2017', 'Jwa & Poldrack 2024', 'Shen & Wolf 2020'],
+    icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z',
+  },
+  {
+    name: 'Mental Integrity',
+    description: 'The right to be free from unauthorized manipulation or alteration of neural processes. Protection against cognitive harm.',
+    sources: ['Ienca & Andorno 2017', 'Lavazza 2023', 'Ligthart & Meynen 2023'],
+    icon: 'M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z',
+  },
+  {
+    name: 'Psychological Continuity',
+    description: 'The right to maintain personal identity and sense of self. Protection against unauthorized alteration of personality, memory, or cognition.',
+    sources: ['Ienca & Andorno 2017', 'Goering et al. 2021'],
+    icon: 'M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3',
+  },
+];
+
+const frameworks = [
+  { name: 'Beauchamp & Childress (1979)', type: 'Ethics', cl: true, mp: true, mi: true, pc: false, ea: true },
+  { name: 'Ienca & Andorno (2017)', type: 'Rights', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'Yuste et al. / Nature (2017)', type: 'Rights', cl: true, mp: true, mi: true, pc: true, ea: true },
+  { name: 'Farahany (2023)', type: 'Rights', cl: true, mp: true, mi: false, pc: false, ea: false },
+  { name: 'OECD (2019)', type: 'Policy', cl: false, mp: true, mi: true, pc: false, ea: true },
+  { name: 'UNESCO (2025)', type: 'Policy', cl: true, mp: true, mi: true, pc: true, ea: true },
+  { name: 'WHO (2025)', type: 'Policy', cl: true, mp: true, mi: true, pc: false, ea: true },
+  { name: 'Council of Europe (2025)', type: 'Policy', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'Chile Constitution (2021)', type: 'Law', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'Colorado HB 1058 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
+  { name: 'California SB 1223 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
+  { name: 'EU AI Act (2024)', type: 'Law', cl: false, mp: true, mi: true, pc: false, ea: false },
+  { name: 'Goering et al. (2021)', type: 'Ethics', cl: true, mp: true, mi: true, pc: true, ea: true },
+  { name: 'Farah (2015)', type: 'Ethics', cl: false, mp: true, mi: true, pc: false, ea: false },
+  { name: 'Morse (2006)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
+  { name: 'Wexler (2024)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
+  { name: 'Ienca (2021/2022)', type: 'Rigor', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'Hendriks et al. (2019)', type: 'Ethics', cl: false, mp: false, mi: true, pc: false, ea: false },
+  { name: 'Ligthart & Meynen (2023)', type: 'Rights', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'Lavazza (2023)', type: 'Rights', cl: false, mp: false, mi: true, pc: true, ea: false },
+  { name: 'Andorno & Gkotsi (2022)', type: 'Rights', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'Savulescu & Bostrom (2009)', type: 'Ethics', cl: false, mp: false, mi: false, pc: false, ea: true },
+  { name: 'Kreitmair (2019)', type: 'Ethics', cl: false, mp: true, mi: false, pc: false, ea: true },
+  { name: 'Kellmeyer (2022)', type: 'Rights', cl: false, mp: true, mi: true, pc: false, ea: false },
+  { name: 'Bublitz (2022)', type: 'Rigor', cl: true, mp: true, mi: true, pc: false, ea: false },
+  { name: 'Racine, Illes (2005)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
+  { name: 'Poldrack (2006)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
+  { name: 'Tennison & Moreno (2012)', type: 'Rigor', cl: true, mp: true, mi: true, pc: false, ea: false },
+  { name: 'Montana SB 214 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
+  { name: 'Minnesota HF 1370 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
+  { name: 'Latin American Model Law (2023)', type: 'Law', cl: true, mp: true, mi: true, pc: true, ea: false },
+  { name: 'China MoST Guidelines (2024)', type: 'Policy', cl: false, mp: true, mi: true, pc: false, ea: true },
+  { name: 'UN HRC Advisory (2024)', type: 'Policy', cl: true, mp: true, mi: true, pc: true, ea: true },
+  { name: 'QIF (in development)', type: 'HOW', cl: true, mp: true, mi: true, pc: true, ea: true },
+];
+
+@/ Category counts for display
+const explorerCounts = {
+  ethics: explorer.filter(e => e.domain === 'ethics' || e.domain === 'both').length,
+  security: explorer.filter(e => e.domain === 'security' || e.domain === 'both').length,
+  academia: explorer.filter(e => e.category === 'academia').length,
+  researcher: explorer.filter(e => e.category === 'researcher').length,
+  standards: explorer.filter(e => e.category === 'standards').length,
+};
+
+---
+
+<PageLayout
+  title="The Neuroethics Landscape — 33 Frameworks, 1 Gap"
+  description="A comprehensive survey of neuroethics frameworks, institutions, and the Principles-to-Protocol Gap that QIF fills."
+  breadcrumbs={breadcrumbs}
+  wide
+>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="py-12 md:py-20">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="text-xs font-medium tracking-[0.2em] uppercase mb-4 text-[var(--color-text-faint)]">
+        Neuroethics Survey
+      </p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
+        <span class="text-[var(--color-text-primary)]">33 Frameworks.</span>
+        <br />
+        <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
+          One Gap.
+        </span>
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
+        Nearly a century of bioethics and neuroethics scholarship have converged on five universal principles.
+        Every framework answers <strong class="text-[var(--color-text-primary)]">why</strong> we should protect neural rights
+        or <strong class="text-[var(--color-text-primary)]">what</strong> those rights are.
+        None answer <strong class="text-[var(--color-text-primary)]">how</strong> to enforce them technically.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <section class="py-12 md:py-16" id="timeline">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Timeline
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <!-- Timeline domain toggle -->
+    <div class="flex justify-center gap-1 mb-8 p-1 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border)] w-fit mx-auto">
+      <button data-tl="ethics" class="tl-toggle px-4 py-1.5 rounded-md text-xs font-semibold transition-all bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)]">
+        Neuroethics
+      </button>
+      <button data-tl="security" class="tl-toggle px-4 py-1.5 rounded-md text-xs font-semibold transition-all text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)]">
+        Neurosecurity
+      </button>
+    </div>
+
+    <!-- Ethics timeline -->
+    <div id="tl-ethics" class="tl-panel max-w-4xl mx-auto">
+      <div class="relative">
+        <div class="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--color-accent-tertiary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)]"></div>
+        <div class="flex flex-col gap-6">
+          {ethicsTimeline.map((t, i) => (
+            <div class="flex items-start gap-4 sm:gap-6 pl-2">
+              <div class={`shrink-0 w-5 h-5 rounded-full border-2 mt-1 bg-[var(--color-bg-surface)] border-[var(--color-accent-tertiary)]`}></div>
+              <div>
+                <span class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-tertiary)]">{t.year}</span>
+                <h3 class="text-sm font-bold text-[var(--color-text-primary)]">{t.label}</h3>
+                <p class="text-xs text-[var(--color-text-muted)]">{t.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Security timeline -->
+    <div id="tl-security" class="tl-panel hidden max-w-4xl mx-auto">
+      <div class="relative">
+        <div class="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--color-accent-primary)]/30 via-[var(--color-accent-primary)] to-[var(--color-accent-primary)]"></div>
+        <div class="flex flex-col gap-6">
+          {securityTimeline.map((t, i) => (
+            <div class="flex items-start gap-4 sm:gap-6 pl-2">
+              <div class={`shrink-0 w-5 h-5 rounded-full border-2 mt-1 ${i === securityTimeline.length - 1 ? 'bg-[var(--color-accent-primary)] border-[var(--color-accent-primary)]' : 'bg-[var(--color-bg-surface)] border-[var(--color-accent-primary)]'}`}></div>
+              <div>
+                <span class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-primary)]">{t.year}</span>
+                <h3 class="text-sm font-bold text-[var(--color-text-primary)]">{t.label}</h3>
+                <p class="text-xs text-[var(--color-text-muted)]">{t.desc}</p>
+                {t.detail && <p class="text-[10px] text-[var(--color-text-faint)] italic mt-0.5">{t.detail}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FIVE PILLARS ═══ -->
+  <section class="py-12 md:py-16" id="pillars">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Five Universal Pillars
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
+      Despite different terminology, legal traditions, and institutional mandates, every major neuroethics framework
+      converges on these five themes.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+      {pillars.map((p) => (
+        <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-5 h-5 text-[var(--color-accent-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={p.icon} />
+            </svg>
+            <h3 class="text-sm font-bold text-[var(--color-text-primary)]">{p.name}</h3>
+          </div>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-3">{p.description}</p>
+          <div class="flex flex-wrap gap-1">
+            {p.sources.map((s) => (
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)]">{s}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ FIELD EXPLORER ═══ -->
+  <section class="py-12 md:py-16" id="explorer">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Who Built the Field
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-6">
+      Neuroethics defines the rights. Neurosecurity builds the defenses. Governance bridges them.
+      <span class="text-[var(--color-text-faint)] text-xs block mt-1">{explorer.length} entries across both domains.</span>
+    </p>
+
+    <!-- Controls: domain toggle + category filters -->
+    <div class="max-w-6xl mx-auto mb-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <!-- Domain toggle (left) -->
+        <div class="flex gap-1 p-1 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border)]" role="tablist" aria-label="Domain filter">
+          <button role="tab" aria-selected="true" data-domain="all" class="exp-domain px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)]">
+            All
+          </button>
+          <button role="tab" aria-selected="false" data-domain="ethics" class="exp-domain px-3 py-1.5 rounded-md text-xs font-semibold transition-all text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)]">
+            Neuroethics <span class="text-[10px] opacity-60">({explorerCounts.ethics})</span>
+          </button>
+          <button role="tab" aria-selected="false" data-domain="security" class="exp-domain px-3 py-1.5 rounded-md text-xs font-semibold transition-all text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)]">
+            Neurosecurity <span class="text-[10px] opacity-60">({explorerCounts.security})</span>
+          </button>
+        </div>
+
+        <!-- Category filters (right) -->
+        <div class="flex gap-1.5 flex-wrap" role="group" aria-label="Category filter">
+          <button data-category="all" class="exp-cat px-3 py-1.5 rounded-full text-[10px] font-semibold tracking-wide uppercase transition-all border border-[var(--color-accent-secondary)]/30 bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)]">
+            All
+          </button>
+          <button data-category="academia" class="exp-cat px-3 py-1.5 rounded-full text-[10px] font-semibold tracking-wide uppercase transition-all border border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] hover:border-[var(--color-border)]">
+            Academia ({explorerCounts.academia})
+          </button>
+          <button data-category="researcher" class="exp-cat px-3 py-1.5 rounded-full text-[10px] font-semibold tracking-wide uppercase transition-all border border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] hover:border-[var(--color-border)]">
+            Researchers ({explorerCounts.researcher})
+          </button>
+          <button data-category="standards" class="exp-cat px-3 py-1.5 rounded-full text-[10px] font-semibold tracking-wide uppercase transition-all border border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] hover:border-[var(--color-border)]">
+            Standards &amp; Policy ({explorerCounts.standards})
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result count -->
+    <p id="exp-count" class="text-[10px] text-[var(--color-text-faint)] max-w-6xl mx-auto mb-3">
+      Showing {explorer.length} of {explorer.length}
+    </p>
+
+    <!-- Card grid -->
+    <div id="exp-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-6xl mx-auto">
+      {explorer.map((e) => {
+        const domainColor = e.domain === 'ethics' ? 'var(--color-accent-tertiary)' : e.domain === 'security' ? 'var(--color-accent-primary)' : 'var(--color-accent-secondary)';
+        const domainLabel = e.domain === 'ethics' ? 'Ethics' : e.domain === 'security' ? 'Security' : 'Both';
+        const catLabel = e.category === 'academia' ? 'Academia' : e.category === 'researcher' ? 'Researcher' : 'Standards';
+        const statusColor = e.status === 'Active' ? 'var(--color-status-safe)' : e.status === 'Partial' ? 'var(--color-status-warn)' : e.status === 'Gap' ? 'var(--color-status-danger)' : '';
+        return (
+          <div class="exp-card glass rounded-xl p-4 border border-[var(--color-border)] transition-opacity duration-200" data-domain={e.domain} data-category={e.category}>
+            <div class="flex items-center gap-2 mb-2 flex-wrap">
+              <h3 class="text-xs font-bold text-[var(--color-text-primary)]">{e.name}</h3>
+              <span class="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded" style={`color: ${domainColor}; background: ${domainColor}12;`}>{domainLabel}</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-[var(--color-bg-surface)] text-[var(--color-text-faint)] border border-[var(--color-border)]">{catLabel}</span>
+              {e.status && (
+                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full" style={`color: ${statusColor}; background: ${statusColor}12;`}>{e.status}</span>
+              )}
+            </div>
+            <p class="text-[10px] text-[var(--color-text-faint)] mb-1">{e.subtitle} &middot; {e.detail}</p>
+            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{e.contribution}</p>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- ═══ FRAMEWORK COMPARISON ═══ -->
+  <section class="py-12 md:py-16" id="comparison">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Framework Comparison
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="glass rounded-2xl p-4 sm:p-6 max-w-6xl mx-auto overflow-x-auto">
+      <table class="w-full text-xs min-w-[600px]">
+        <thead>
+          <tr class="border-b border-[var(--color-border)]">
+            <th class="text-left py-2 pr-3 text-[var(--color-text-primary)] font-semibold">Framework</th>
+            <th class="text-center py-2 px-2 text-[var(--color-text-faint)] font-semibold">Type</th>
+            <th class="text-center py-2 px-2 text-[var(--color-accent-secondary)] font-semibold">CL</th>
+            <th class="text-center py-2 px-2 text-[var(--color-accent-secondary)] font-semibold">MP</th>
+            <th class="text-center py-2 px-2 text-[var(--color-accent-secondary)] font-semibold">MI</th>
+            <th class="text-center py-2 px-2 text-[var(--color-accent-secondary)] font-semibold">PC</th>
+            <th class="text-center py-2 px-2 text-[var(--color-accent-secondary)] font-semibold">EA</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-text-muted)]">
+          {frameworks.map((f) => (
+            <tr class={`border-b border-[var(--color-border)]/30 ${f.type === 'HOW' ? 'bg-[var(--color-accent-primary)]/5 font-medium' : ''}`}>
+              <td class="py-2 pr-3 text-[var(--color-text-primary)]">{f.name}</td>
+              <td class="text-center py-2 px-2">
+                <span class={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                  f.type === 'HOW' ? 'bg-[var(--color-accent-primary)]/15 text-[var(--color-accent-primary)]' :
+                  f.type === 'Law' ? 'bg-[var(--color-status-warn)]/15 text-[var(--color-status-warn)]' :
+                  f.type === 'Policy' ? 'bg-[var(--color-accent-secondary)]/15 text-[var(--color-accent-secondary)]' :
+                  f.type === 'Rigor' ? 'bg-[var(--color-text-faint)]/15 text-[var(--color-text-faint)]' :
+                  'bg-[var(--color-accent-tertiary)]/15 text-[var(--color-accent-tertiary)]'
+                }`}>{f.type}</span>
+              </td>
+              <td class="text-center py-2 px-2">{f.cl ? '\u2713' : ''}</td>
+              <td class="text-center py-2 px-2">{f.mp ? '\u2713' : ''}</td>
+              <td class="text-center py-2 px-2">{f.mi ? '\u2713' : ''}</td>
+              <td class="text-center py-2 px-2">{f.pc ? '\u2713' : ''}</td>
+              <td class="text-center py-2 px-2">{f.ea ? '\u2713' : ''}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div class="mt-4 pt-3 border-t border-[var(--color-border)]/50 text-[10px] text-[var(--color-text-faint)]">
+        CL = Cognitive Liberty &middot; MP = Mental Privacy &middot; MI = Mental Integrity &middot; PC = Psychological Continuity
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE GAP ═══ -->
+  <section class="py-12 md:py-16" id="gap">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        The Principles-to-Protocol Gap
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+      <div class="rounded-2xl p-6 sm:p-8 border border-[var(--color-status-warn)]/30" style="background: rgba(245,158,11,0.04);">
+        <h3 class="text-base font-bold text-[var(--color-text-primary)] mb-3">
+          The fire code problem
+        </h3>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+          Imagine if fire safety consisted only of the principle "buildings should not burn down" and the right
+          "people deserve safe buildings" &mdash; but no one had written fire codes, designed sprinkler systems,
+          or specified fire-resistant materials. That is the current state of neuroethics.
+        </p>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+          33 frameworks define <strong class="text-[var(--color-text-primary)]">why</strong> neural rights matter and
+          <strong class="text-[var(--color-text-primary)]">what</strong> those rights are.
+          Zero provide <strong class="text-[var(--color-text-primary)]">how</strong> to enforce them technically:
+          no threat models, no scoring systems, no detection mechanisms, no protocol specifications.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+          <div class="text-center p-3 rounded-lg bg-[var(--color-accent-tertiary)]/5 border border-[var(--color-accent-tertiary)]/20">
+            <p class="text-2xl font-bold text-[var(--color-accent-tertiary)]">33</p>
+            <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider">WHY / WHAT</p>
+          </div>
+          <div class="text-center p-3 rounded-lg bg-[var(--color-text-faint)]/5 border border-[var(--color-text-faint)]/20">
+            <p class="text-2xl font-bold text-[var(--color-text-faint)]">0</p>
+            <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider">HOW (before QIF)</p>
+          </div>
+          <div class="text-center p-3 rounded-lg bg-[var(--color-accent-primary)]/5 border border-[var(--color-accent-primary)]/20">
+            <p class="text-2xl font-bold text-[var(--color-accent-primary)]">1</p>
+            <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider">HOW (QIF)</p>
+          </div>
+        </div>
+
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          QIF fills this gap with: <strong class="text-[var(--color-text-primary)]">NISS</strong> (neural impact scoring),
+          the <strong class="text-[var(--color-text-primary)]">TARA Atlas</strong> (109 threat techniques),
+          the <strong class="text-[var(--color-text-primary)]">Coherence Metric</strong> (signal provenance verification),
+          and <strong class="text-[var(--color-text-primary)]">NSP</strong> (post-quantum secure neural communication).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TWO DOMAINS ═══ -->
+  <section class="py-12 md:py-16" id="neurosecurity">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Two Domains, One Bridge
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto mb-8">
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+        Neuroethics asks: <em>what rights should people have over their own neural data and cognitive processes?</em>
+        Neurosecurity asks: <em>how do we technically defend against the attacks that violate them?</em>
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        Governance spans both. Policy, regulation, and compliance frameworks translate ethical principles into enforceable rules
+        and give security controls their legal mandate. Ethics without security is aspiration.
+        Security without ethics has no compass. Governance connects them.
+      </p>
+    </div>
+
+    <!-- Two domains with governance bridge -->
+    <div class="max-w-5xl mx-auto mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-0 items-stretch">
+        <!-- Neuroethics -->
+        <div class="glass rounded-xl md:rounded-r-none p-5 border border-[var(--color-border)]">
+          <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-tertiary)] mb-3">Neuroethics</h3>
+          <p class="text-[10px] text-[var(--color-text-faint)] mb-3 italic">What rights do people have?</p>
+          <ul class="space-y-2 text-xs text-[var(--color-text-muted)]">
+            <li>Defines the <strong class="text-[var(--color-text-primary)]">four neurorights</strong> (Ienca & Andorno, 2017)</li>
+            <li>Establishes <strong class="text-[var(--color-text-primary)]">consent models</strong> (Beauchamp & Childress)</li>
+            <li>Provides the <strong class="text-[var(--color-text-primary)]">moral foundation</strong> and philosophical grounding</li>
+            <li>Publishes <strong class="text-[var(--color-text-primary)]">frameworks and principles</strong></li>
+            <li>Constrains what neurotechnology may do to people</li>
+          </ul>
+        </div>
+
+        <!-- Governance bridge -->
+        <div class="hidden md:flex flex-col items-center justify-center px-4 py-6 relative" style="min-width: 120px;">
+          <div class="absolute inset-y-8 w-px bg-gradient-to-b from-[var(--color-accent-tertiary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-primary)] left-1/2 -translate-x-1/2"></div>
+          <div class="relative z-10 bg-[var(--color-bg-surface)] border border-[var(--color-accent-secondary)]/40 rounded-lg px-3 py-2 text-center" style="background: rgba(8,145,178,0.06);">
+            <div class="text-[10px] font-bold tracking-[0.1em] uppercase text-[var(--color-accent-secondary)] mb-1">Governance</div>
+            <svg class="w-6 h-6 mx-auto text-[var(--color-accent-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>
+            <p class="text-[9px] text-[var(--color-text-faint)] mt-1 leading-tight max-w-[90px]">Policy, regulation, compliance</p>
+          </div>
+        </div>
+
+        <!-- Mobile governance bridge -->
+        <div class="md:hidden flex items-center justify-center py-3">
+          <div class="flex items-center gap-2 bg-[var(--color-bg-surface)] border border-[var(--color-accent-secondary)]/40 rounded-lg px-4 py-2" style="background: rgba(8,145,178,0.06);">
+            <svg class="w-4 h-4 text-[var(--color-accent-secondary)] rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>
+            <span class="text-[10px] font-bold tracking-[0.1em] uppercase text-[var(--color-accent-secondary)]">Governance</span>
+            <span class="text-[9px] text-[var(--color-text-faint)]">Policy, regulation, compliance</span>
+          </div>
+        </div>
+
+        <!-- Neurosecurity -->
+        <div class="glass rounded-xl md:rounded-l-none p-5 border border-[var(--color-accent-primary)]/30" style="background: rgba(37,99,235,0.04);">
+          <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-primary)] mb-3">Neurosecurity</h3>
+          <p class="text-[10px] text-[var(--color-text-faint)] mb-3 italic">How do we technically defend against attacks?</p>
+          <ul class="space-y-2 text-xs text-[var(--color-text-muted)]">
+            <li>Catalogs the <strong class="text-[var(--color-text-primary)]">attacks</strong> (<a href="/threat-models/tara/" class="text-[var(--color-accent-primary)] hover:underline">109 TARA techniques</a>)</li>
+            <li>Scores the <strong class="text-[var(--color-text-primary)]">impact</strong> (<a href="/threat-models/scoring/" class="text-[var(--color-accent-primary)] hover:underline">NISS vulnerability scoring</a>)</li>
+            <li>Builds the <strong class="text-[var(--color-text-primary)]">defenses</strong> (<a href="/tools/overview/" class="text-[var(--color-accent-primary)] hover:underline">Neurowall, NSP, Runemate</a>)</li>
+            <li>Verifies <strong class="text-[var(--color-text-primary)]">signal integrity</strong> (Coherence Metric)</li>
+            <li>Detects, prevents, and responds to neural interface threats</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Governance responsibilities callout -->
+      <div class="mt-4 rounded-xl p-4 border border-[var(--color-accent-secondary)]/20 max-w-3xl mx-auto" style="background: rgba(8,145,178,0.03);">
+        <h4 class="text-[10px] font-bold tracking-[0.1em] uppercase text-[var(--color-accent-secondary)] mb-2">Governance spans both domains</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[var(--color-text-muted)]">
+          <div>
+            <p class="text-[10px] font-semibold text-[var(--color-accent-tertiary)] mb-1">Ethics &rarr; Governance</p>
+            <p>Translates rights into policy (UNESCO, OECD, WHO, Chile). Defines consent tiers, data classification, and institutional oversight.</p>
+          </div>
+          <div>
+            <p class="text-[10px] font-semibold text-[var(--color-accent-primary)] mb-1">Governance &rarr; Security</p>
+            <p>Mandates technical controls (FDA, NIST, ISO). Specifies what must be auditable, enforceable, and measurable at the signal level.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How each right maps to security -->
+    <div class="max-w-4xl mx-auto">
+      <h3 class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-text-faint)] mb-4 text-center">
+        Rights &rarr; Threats &rarr; Defenses
+      </h3>
+      <div class="glass rounded-xl overflow-x-auto">
+        <table class="w-full text-xs">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]">
+              <th class="text-left py-3 px-3 text-[var(--color-accent-tertiary)] font-semibold">Neuroright (Ethics)</th>
+              <th class="text-left py-3 px-3 text-[var(--color-status-danger)] font-semibold">Threat Pattern (Security)</th>
+              <th class="text-left py-3 px-3 text-[var(--color-accent-primary)] font-semibold">QIF Defense (Security)</th>
+              <th class="text-left py-3 px-3 text-[var(--color-accent-secondary)] font-semibold">Governance Status</th>
+            </tr>
+          </thead>
+          <tbody class="text-[var(--color-text-muted)]">
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Mental Privacy</td>
+              <td class="py-2.5 px-3">Eavesdropping, side-channel extraction, neural fingerprinting</td>
+              <td class="py-2.5 px-3">NSP encryption, differential privacy, session pseudonyms</td>
+              <td class="py-2.5 px-3 text-[10px]">HIPAA/GDPR don't classify neural signals as protected health data</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Mental Integrity</td>
+              <td class="py-2.5 px-3">Signal injection, replay attacks, parameter tampering</td>
+              <td class="py-2.5 px-3">Neurowall L1/L2 filtering, Cs anomaly detection</td>
+              <td class="py-2.5 px-3 text-[10px]">No regulatory definition of "unauthorized neural modification"</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Cognitive Liberty</td>
+              <td class="py-2.5 px-3">Subliminal manipulation, sovereignty attacks, covert retuning</td>
+              <td class="py-2.5 px-3">SSVEP detection, adaptive spectral monitoring, policy engine</td>
+              <td class="py-2.5 px-3 text-[10px]">No compliance standard for subliminal influence via BCI</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Psychological Continuity</td>
+              <td class="py-2.5 px-3">Slow drift, homeostatic disruption, self-model corruption</td>
+              <td class="py-2.5 px-3">Cs trend monitoring, reference electrode validation</td>
+              <td class="py-2.5 px-3 text-[10px]">FDA adverse event reporting doesn't cover cognitive drift</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-medium text-[var(--color-text-primary)]">Equitable Access (governance)</td>
+              <td class="py-2.5 px-3">Device abandonment, vendor lock-in, enhancement inequality</td>
+              <td class="py-2.5 px-3">Open standards, interoperable protocols, vendor-neutral spec</td>
+              <td class="py-2.5 px-3 text-[10px]">No interoperability mandate for neurotech devices</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRIVACY-PRESERVING TECHNOLOGIES ═══ -->
+  <section class="py-8" id="privacy-tech">
+    <div class="glass rounded-xl p-6 sm:p-8 max-w-5xl mx-auto" style="border-left: 4px solid var(--color-accent-tertiary);">
+      <h3 class="text-base font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2">
+        Toward Privacy-Preserving Neural Data Governance
+      </h3>
+      <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-4">
+        Kellmeyer (2022) proposes establishing "trustworthy technological means and/or institutions — data fiduciaries — for handling any data that might allow for inferences on mental experience." Several technologies are emerging to address this:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Homomorphic Encryption</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Process neural signals without decrypting. Anomaly detection and filtering can operate on ciphertext.</p>
+        </div>
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Differential Privacy</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Share aggregate neural patterns for research without exposing individual neural signatures. Calibrated noise injection.</p>
+        </div>
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Consent Provenance</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Distributed ledger for audit trails — who consented to what, when. Neural data itself never on-chain; only hashes and metadata.</p>
+        </div>
+        <div class="rounded-lg bg-[var(--color-bg-surface)] p-3 border border-[var(--color-border)]">
+          <div class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-1">Data Fiduciaries</div>
+          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">Independent institutions that hold decryption keys on behalf of patients. Device manufacturers do not hold keys to patient neural data.</p>
+        </div>
+      </div>
+      <p class="text-[10px] text-[var(--color-text-faint)] mt-3">
+        NSP v0.5 specifies post-quantum encryption in transit. Section 11 of the NSP spec (draft) extends this with HE, DP, consent provenance, and data fiduciary requirements.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ RIGOR CHECKS ═══ -->
+  <section class="py-12 md:py-16" id="rigor">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Rigor Checks &amp; Guardrails
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-4">
+      Good science requires active skepticism. These published critiques constrain how BCI security research should be framed.
+      QIF treats each as a guardrail, not an obstacle.
+    </p>
+    <p class="text-xs text-[var(--color-text-faint)] max-w-2xl mx-auto text-center mb-8">
+      Grouped by what they constrain: overclaim, scope, methodology, and framing.
+    </p>
+
+    <!-- Row 1: Overclaim & Scope -->
+    <h3 class="text-[10px] font-bold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-4 max-w-6xl mx-auto">Overclaim &amp; Scope</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto mb-6">
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Neuromodesty</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Morse 2006/2011 &middot; Ohio State J. Criminal Law / Mercer Law Review</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          "Brain Overclaim Syndrome": neural correlates do not prove causation or eliminate agency. Neuroscience findings are routinely overclaimed when applied to law and policy.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: we score signal-level interference, not mental states. NISS measures physical amplitude disruption, not "thought harm."
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Premature Legislation</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Wexler 2019/2024 &middot; Nature Biotechnology</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Consumer neurotechnology does not yet warrant the level of ethical alarm being raised. Legislating solutions to problems that don't yet exist risks blocking beneficial research.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: technical specifications are not legislation. Standards (like CVSS) inform but don't mandate. Building the fire code doesn't close the building.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Anti-Inflationism</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Ienca 2021 &middot; Bublitz 2022 (Neuroethics)</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Multiplying neurorights beyond existing human rights frameworks dilutes protections (Ienca). Novel neurorights lack standard legal quality criteria and may constitute neuroexceptionalism (Bublitz).
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: we extend Mental Privacy and Mental Integrity with technical depth, not new rights. Five rights, not fifteen.
+        </p>
+      </div>
+    </div>
+
+    <!-- Row 2: Methodology -->
+    <h3 class="text-[10px] font-bold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-4 max-w-6xl mx-auto">Methodology</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto mb-6">
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Reverse Inference Fallacy</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Poldrack 2006 &middot; Trends in Cognitive Sciences</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Concluding that a specific cognitive process is occurring because a brain region activated is not deductively valid. Even Broca's area provides only weak evidence for language engagement.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: signal detection does not entail mental-state identification. TARA catalogs physical interference patterns, not cognitive content.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Statistical Inflation</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Vul et al. 2009 &middot; Eklund et al. 2016 (PNAS)</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Brain-behavior correlations in fMRI are routinely inflated by double-dipping (Vul). Common fMRI software produces up to 70% false-positive rates (Eklund). A dead salmon showed "significant" brain activation without correction (Bennett 2009).
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: claims citing neuroimaging findings as ground truth must account for demonstrated validity failures in the underlying methods.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Conceptual Underspecification</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Kellmeyer 2022 &middot; Cambridge University Press</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Mental privacy and mental integrity are conceptually "still under construction." Operational descriptions vary across philosophy, ethics, neuroscience, and psychology. No consensus model of self-experience or agency exists.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: we define operationally measurable properties (signal amplitude, frequency, coherence) rather than philosophically contested mental states.
+        </p>
+      </div>
+    </div>
+
+    <!-- Row 3: Framing -->
+    <h3 class="text-[10px] font-bold tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-4 max-w-6xl mx-auto">Framing</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Neurorealism Triad</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Racine, Bar-Ilan & Illes 2005 &middot; Nature Reviews Neuroscience</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Three failure modes in public neuroscience communication: <strong>neuro-realism</strong> (brain scans as visual proof), <strong>neuro-essentialism</strong> (we are our brains), <strong>neuropolicy</strong> (using brain data to advance agendas without evidence).
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: documentation must not frame BCI threats as "brain data reveals identity." Neural signals are partial, noisy representations, not transparent read-outs of selfhood.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">Brain Reading Limits</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Ienca et al. 2018 / Wexler 2019 &middot; Nature Biotechnology</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          Even the paper raising BCI privacy concerns acknowledges consumer EEG "is not mind reading." Decoded images are selected from known lists, not freely read. Current devices require algorithm training, long-term data, and user cooperation.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: threat models must distinguish between current capabilities and projected future capabilities. We catalog what is technically possible, not what is science fiction.
+        </p>
+      </div>
+
+      <div class="glass rounded-xl p-5 border border-[var(--color-border)]">
+        <h3 class="text-sm font-bold text-[var(--color-text-primary)] mb-1">The Dual-Use Trap</h3>
+        <p class="text-[10px] text-[var(--color-accent-secondary)] mb-2">Tennison & Moreno 2012 &middot; PLOS Biology</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">
+          BCIs are inherently dual-use: the same systems used for clinical treatment can be repurposed for military enhancement, deception detection, and interrogation. Framing BCI as a security domain risks enabling the very surveillance it aims to prevent.
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)]">
+          QIF guardrail: the framework specifies defensive clinical protections. Offensive applications are explicitly out of scope. The threat catalog exists to inform defense, not enable attack.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SOURCES ═══ -->
+  <section class="py-12 md:py-16" id="sources">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Sources
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto text-sm text-[var(--color-text-muted)]">
+      <p class="mb-4">
+        This landscape survey draws from 255+ verified research sources compiled in the
+        <a href="https:@/github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-RESEARCH-SOURCES.md"
+           class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">
+          QIF Research Sources Registry
+        </a>.
+        All citations have been verified via DOI resolution or publisher URL. See Sections 11, 11b, and 11c
+        for the full neuroethics bibliography.
+      </p>
+      <p class="text-xs text-[var(--color-text-faint)]">
+        Survey conducted 2026-03-04/05 by 9 parallel research agents covering: neuroethics institutions (Columbia, Stanford, Harvard/MIT, UPenn/Duke, UBC, Georgia State, UCSF, Penn State, INSERM/Sorbonne, Baylor),
+        neurosecurity labs (UW, Oxford, Northeastern, Yale, HUST, SJTU, Fudan, Murcia, Graz, MSU, Texas A&amp;M, Zhejiang),
+        governance bodies (UNESCO, OECD, IEEE, WHO, INS, UN HRC, China MoST, Latin American Parliament),
+        and European frameworks (ETH Zurich, Freiburg, RHUNE, Council of Europe). Citations spot-checked via DOI resolution.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    @/ Timeline toggle
+    const tlToggles = document.querySelectorAll('.tl-toggle');
+    const tlPanels = document.querySelectorAll('.tl-panel');
+    tlToggles.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tl');
+        tlToggles.forEach((b) => {
+          const active = b.getAttribute('data-tl') === target;
+          const isEthics = b.getAttribute('data-tl') === 'ethics';
+          const accentVar = isEthics ? '--color-accent-tertiary' : '--color-accent-primary';
+          const accent = getComputedStyle(document.documentElement).getPropertyValue(accentVar).trim();
+          if (active) {
+            b.style.backgroundColor = `color-mix(in srgb, ${accent} 10%, transparent)`;
+            b.style.color = accent;
+          } else {
+            b.style.backgroundColor = '';
+            b.style.color = '';
+          }
+          b.classList.toggle('text-[var(--color-text-faint)]', !active);
+        });
+        tlPanels.forEach((p) => {
+          p.classList.toggle('hidden', p.id !== `tl-${target}`);
+        });
+      });
+    });
+
+    @/ Explorer filtering
+    let activeDomain = 'all';
+    let activeCategory = 'all';
+
+    const domainBtns = document.querySelectorAll('.exp-domain');
+    const catBtns = document.querySelectorAll('.exp-cat');
+    const cards = document.querySelectorAll('.exp-card');
+    const countEl = document.getElementById('exp-count');
+    const totalCount = cards.length;
+
+    function applyFilters() {
+      let visible = 0;
+      cards.forEach((card) => {
+        const d = card.getAttribute('data-domain');
+        const c = card.getAttribute('data-category');
+        const domainMatch = activeDomain === 'all' || d === activeDomain || d === 'both';
+        const catMatch = activeCategory === 'all' || c === activeCategory;
+        const show = domainMatch && catMatch;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      if (countEl) countEl.textContent = `Showing ${visible} of ${totalCount}`;
+    }
+
+    domainBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeDomain = btn.getAttribute('data-domain') || 'all';
+        domainBtns.forEach((b) => {
+          const active = b === btn;
+          b.setAttribute('aria-selected', String(active));
+          b.classList.toggle('bg-[var(--color-accent-secondary)]/10', active);
+          b.classList.toggle('text-[var(--color-accent-secondary)]', active);
+          b.classList.toggle('text-[var(--color-text-faint)]', !active);
+        });
+        applyFilters();
+      });
+    });
+
+    catBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeCategory = btn.getAttribute('data-category') || 'all';
+        catBtns.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('border-[var(--color-accent-secondary)]/30', active);
+          b.classList.toggle('bg-[var(--color-accent-secondary)]/10', active);
+          b.classList.toggle('text-[var(--color-accent-secondary)]', active);
+          b.classList.toggle('border-transparent', !active);
+          b.classList.toggle('text-[var(--color-text-faint)]', !active);
+        });
+        applyFilters();
+      });
+    });
+  </script>
+
+</PageLayout>

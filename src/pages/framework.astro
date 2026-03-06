@@ -1,8 +1,8 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-import { HOURGLASS_BANDS, COHERENCE, SCALE_FREQUENCY, QIF_VERSION, TARA_TECHNIQUES } from '../lib/qif-constants';
-import Hourglass3D from '../components/Hourglass3D';
-import { THREAT_VECTORS, THREAT_TACTICS, THREAT_DOMAINS, getTacticsWithCounts } from '../lib/threat-data';
+import PageLayout from '@/layouts/PageLayout.astro';
+import { HOURGLASS_BANDS, COHERENCE, SCALE_FREQUENCY, QIF_VERSION, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import Hourglass3D from '@/components/Hourglass3D';
+import { THREAT_VECTORS, THREAT_TACTICS, THREAT_DOMAINS, getTacticsWithCounts } from '@/lib/threat-data';
 
 const tacticsWithCounts = getTacticsWithCounts();
 const totalTechniques = THREAT_VECTORS.length;
@@ -10,13 +10,13 @@ const totalTactics = THREAT_TACTICS.length;
 const totalDomains = (THREAT_DOMAINS as any[]).length;
 
 const tacticColors: Record<string, string> = {
-  'N': '#06b6d4',   // Neural → cyan
-  'C': '#f59e0b',   // Cognitive → amber
-  'P': '#ef4444',   // Physiological → red
-  'D': '#06b6d4',   // Data → cyan
-  'B': '#8b5cf6',   // BCI System → violet
-  'M': '#10b981',   // Model → emerald
-  'E': '#f97316',   // Energy → orange
+  'N': '#06b6d4',   @/ Neural → cyan
+  'C': '#f59e0b',   @/ Cognitive → amber
+  'P': '#ef4444',   @/ Physiological → red
+  'D': '#06b6d4',   @/ Data → cyan
+  'B': '#8b5cf6',   @/ BCI System → violet
+  'M': '#10b981',   @/ Model → emerald
+  'E': '#f97316',   @/ Energy → orange
 };
 ---
 
@@ -184,7 +184,7 @@ const tacticColors: Record<string, string> = {
             TARA is a dual-use atlas where every entry is simultaneously a security threat, a clinical risk, and a potential therapeutic application. Developed by Qinnovate as a classification system purpose-built for neural interfaces, TARA organizes {totalTechniques} techniques by the anatomical or functional <em>locus</em> where they operate, across {totalDomains} domains and {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
           </p>
           <p>
-            Beyond threat classification, TARA maps each technique through four projections: modality (attack severity and coupling mechanism), clinical (therapeutic analog, FDA status, treated conditions), diagnostic (DSM-5-TR psychiatric mapping via the <a href="/whitepaper/#neural-impact">Neural Impact Chain</a>), and governance (consent tier and regulatory requirements). The result is a single atlas that security engineers, clinicians, and regulators can each read from their own perspective.
+            Beyond threat classification, TARA maps each technique through four projections: modality (attack severity and coupling mechanism), clinical (therapeutic analog, FDA status, treated conditions), diagnostic (DSM-5-TR psychiatric mapping via the <a href="/research/whitepaper/#neural-impact">Neural Impact Chain</a>), and governance (consent tier and regulatory requirements). The result is a single atlas that security engineers, clinicians, and regulators can each read from their own perspective.
           </p>
         </div>
 
@@ -251,7 +251,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose">
           <p>
-            For the complete scoring methodology, see the <a href="/scoring/">NISS Scoring page</a>. For the full technique atlas, explore the <a href="/TARA/">TARA Atlas</a>. The complete taxonomy derivation and metric definitions are in the <a href="/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a>.
+            For the complete scoring methodology, see the <a href="/threat-models/scoring/">NISS Scoring page</a>. For the full technique atlas, explore the <a href="/threat-models/tara/">TARA Atlas</a>. The complete taxonomy derivation and metric definitions are in the <a href="/research/whitepaper/#taxonomy">QIF Whitepaper &sect;6.4&ndash;6.5</a>.
           </p>
         </div>
       </section>
@@ -354,19 +354,19 @@ const tacticColors: Record<string, string> = {
       <section id="documents" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Supporting Documents</h2>
         <div class="grid sm:grid-cols-2 gap-4">
-          <a href="/whitepaper/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+          <a href="/research/whitepaper/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Whitepaper</h3>
             <p class="text-sm text-[var(--color-text-muted)]">Full derivation, taxonomy, and scoring methodology for the framework.</p>
           </a>
-          <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+          <a href="https:@/github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Security Guardrails</h3>
             <p class="text-sm text-[var(--color-text-muted)]">Physics-derived defense architecture for BCI systems, mapping coherence thresholds to per-band protection rules.</p>
           </a>
-          <a href="/TARA/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+          <a href="/threat-models/tara/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">TARA Atlas</h3>
             <p class="text-sm text-[var(--color-text-muted)]">Browse all {TARA_TECHNIQUES}+ techniques across the hourglass, filterable by category and severity.</p>
           </a>
-          <a href="/nsp/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
+          <a href="/tools/nsp/" class="glass rounded-xl p-6 block group hover:translate-y-[-2px] transition-transform">
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">NSP Protocol</h3>
             <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire security for neural interfaces with coherence-gated authentication.</p>
           </a>

@@ -10,7 +10,7 @@ const { item } = Astro.props;
 // Determine link href and target
 const href =
   item.type === 'publication'
-    ? `/publications/${item.slug}/`
+    ? `/research/papers/${item.slug}/`
     : item.type === 'brief'
       ? item.url || undefined
       : item.url;

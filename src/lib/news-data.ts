@@ -109,7 +109,7 @@ export const briefs: Brief[] = [
     category: 'neurotechnology',
     summary: 'Apple\'s BCI Human Interface Device protocol, demonstrated with Synchron\'s Stentrode, makes neural signals a native input alongside touch and voice in iOS/iPadOS/visionOS. First public demo: ALS patient controlled iPad entirely by thought (Aug 2025). Meanwhile, OpenAI invested $250M in Merge Labs for non-invasive neural interfaces.',
     relevance: 'Billions of Apple devices become potential BCI endpoints. BCI-HID uses BLE transport with no PQ crypto. NSP device class tiers (T1/T2/T3) provide the compliance framework the MIND Act needs. QIF Band 3 and I0 threat models need Apple ecosystem-specific analysis.',
-    url: '/publications/2026-02-07-apple-just-made-brain-control-a-native-input-method-now-what/',
+    url: '/research/papers/2026-02-07-apple-just-made-brain-control-a-native-input-method-now-what/',
   },
   {
     date: '2026-02',
