@@ -297,60 +297,69 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         </div>
       )}
 
-      {/* HUD Overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
-        {/* Top-left */}
-        <div className="absolute top-4 left-4">
-          <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: `${hud.pri}cc` }}>
-            {hudTitle}
-          </p>
-          <p className="text-[11px]" style={{ color: `${hud.sec}`, opacity: 0.8 }}>
-            {hudSub}
-          </p>
-        </div>
+      {/* Left fade gradient for hero variant — seamless blend into page background */}
+      {!isGreen && fullBleed && (
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'linear-gradient(to right, #050a08 0%, #050a08 10%, transparent 55%)',
+        }} />
+      )}
 
-        {/* Top-right: info */}
-        <div className="absolute top-4 right-4 text-right">
-          <p className="text-[10px] tracking-wider" style={{ color: `${hud.pri}66` }}>640 x 480 @ 30fps</p>
-          <p className="text-[9px] mt-0.5" style={{ color: `${hud.pri}44` }}>307,200 point cloud</p>
-        </div>
-
-        {/* Bottom-left: Scan output */}
-        <div className="absolute bottom-4 left-4">
-          <p className="text-[10px] mb-1" style={{ color: `${hud.pri}`, opacity: 0.5 }}>
-            {'>'} {scanText}<span className="animate-pulse">_</span>
-          </p>
-          <p className="text-[9px]" style={{ color: `${hud.sec}`, opacity: 0.4 }}>
-            {hudBottom}
-          </p>
-        </div>
-
-        {/* Bottom-right */}
-        <div className="absolute bottom-4 right-4 text-right">
-          <p className="text-[9px] tracking-[0.15em] uppercase" style={{ color: hud.pri, opacity: 0.3 }}>
-            Runemate Neural Compiler
-          </p>
-          <p className="text-[8px]" style={{ color: hud.sec, opacity: 0.2 }}>
-            Proposed BCI rendering pipeline
-          </p>
-        </div>
-
-        {/* Crosshair */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="w-8 h-8 relative">
-            <div className="absolute top-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: `${hud.accent}33` }} />
-            <div className="absolute bottom-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: `${hud.accent}33` }} />
-            <div className="absolute top-1/2 left-0 w-2 h-px -translate-y-1/2" style={{ background: `${hud.accent}33` }} />
-            <div className="absolute top-1/2 right-0 w-2 h-px -translate-y-1/2" style={{ background: `${hud.accent}33` }} />
+      {/* HUD Overlay — green variant only */}
+      {isGreen && (
+        <div className="absolute inset-0 pointer-events-none" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
+          {/* Top-left */}
+          <div className="absolute top-4 left-4">
+            <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: `${hud.pri}cc` }}>
+              {hudTitle}
+            </p>
+            <p className="text-[11px]" style={{ color: `${hud.sec}`, opacity: 0.8 }}>
+              {hudSub}
+            </p>
           </div>
-        </div>
 
-        {/* Corner brackets */}
-        <div className="absolute top-2 left-2 w-4 h-4 border-t border-l" style={{ borderColor: `${hud.accent}22` }} />
-        <div className="absolute top-2 right-2 w-4 h-4 border-t border-r" style={{ borderColor: `${hud.accent}22` }} />
-        <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l" style={{ borderColor: `${hud.accent}22` }} />
-        <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r" style={{ borderColor: `${hud.accent}22` }} />
-      </div>
+          {/* Top-right: info */}
+          <div className="absolute top-4 right-4 text-right">
+            <p className="text-[10px] tracking-wider" style={{ color: `${hud.pri}66` }}>640 x 480 @ 30fps</p>
+            <p className="text-[9px] mt-0.5" style={{ color: `${hud.pri}44` }}>307,200 point cloud</p>
+          </div>
+
+          {/* Bottom-left: Scan output */}
+          <div className="absolute bottom-4 left-4">
+            <p className="text-[10px] mb-1" style={{ color: `${hud.pri}`, opacity: 0.5 }}>
+              {'>'} {scanText}<span className="animate-pulse">_</span>
+            </p>
+            <p className="text-[9px]" style={{ color: `${hud.sec}`, opacity: 0.4 }}>
+              {hudBottom}
+            </p>
+          </div>
+
+          {/* Bottom-right */}
+          <div className="absolute bottom-4 right-4 text-right">
+            <p className="text-[9px] tracking-[0.15em] uppercase" style={{ color: hud.pri, opacity: 0.3 }}>
+              Runemate Neural Compiler
+            </p>
+            <p className="text-[8px]" style={{ color: hud.sec, opacity: 0.2 }}>
+              Proposed BCI rendering pipeline
+            </p>
+          </div>
+
+          {/* Crosshair */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="w-8 h-8 relative">
+              <div className="absolute top-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: `${hud.accent}33` }} />
+              <div className="absolute bottom-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: `${hud.accent}33` }} />
+              <div className="absolute top-1/2 left-0 w-2 h-px -translate-y-1/2" style={{ background: `${hud.accent}33` }} />
+              <div className="absolute top-1/2 right-0 w-2 h-px -translate-y-1/2" style={{ background: `${hud.accent}33` }} />
+            </div>
+          </div>
+
+          {/* Corner brackets */}
+          <div className="absolute top-2 left-2 w-4 h-4 border-t border-l" style={{ borderColor: `${hud.accent}22` }} />
+          <div className="absolute top-2 right-2 w-4 h-4 border-t border-r" style={{ borderColor: `${hud.accent}22` }} />
+          <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l" style={{ borderColor: `${hud.accent}22` }} />
+          <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r" style={{ borderColor: `${hud.accent}22` }} />
+        </div>
+      )}
     </div>
   );
 }
