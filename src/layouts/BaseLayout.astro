@@ -91,9 +91,13 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
     gtag('config', 'G-DKB9RWW0C2');
   </script>
 
-  <!-- Theme initialization (prevent flash) -->
+  <!-- Theme + Vision mode initialization (prevent flash) -->
   <script is:inline>
-    (function(){ document.documentElement.setAttribute('data-theme', 'light'); })();
+    (function(){
+      var vision = localStorage.getItem('bci-vision') === 'on';
+      document.documentElement.setAttribute('data-theme', vision ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
+    })();
   </script>
 </head>
 <body class="min-h-screen">
@@ -111,7 +115,7 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach((el) => observer.observe(el));
     }
 
     initScrollReveal();
