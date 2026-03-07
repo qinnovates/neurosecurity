@@ -55,10 +55,15 @@ const VERTEX_SHADER = `
     // Also scale outward slightly for 3D depth pop
     float radialPush = 1.0 + r * uFisheye * 0.3;
 
+    // Constant subtle concave warp on edges — corners flare outward
+    float edgeX = xNorm * xNorm; // 0 center, 0.25 edges
+    float edgeY = yNorm * yNorm;
+    float cornerWarp = (edgeX + edgeY) * 180.0; // both sides, corners strongest
+
     vec4 pos = vec4(
       xNorm * radialPush * z * XtoZ,
       yNorm * radialPush * z * YtoZ,
-      -z + zOffset + barrel,
+      -z + zOffset + barrel + cornerWarp,
       1.0
     );
 
