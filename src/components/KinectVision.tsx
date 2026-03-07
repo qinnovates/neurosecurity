@@ -26,6 +26,9 @@ const VERTEX_SHADER = `
   const float XtoZ = 1.11146;
   const float YtoZ = 0.83359;
 
+  uniform float uFisheye;
+  uniform vec2 uMousePos;
+
   void main() {
     vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
     vUv = clamp(rawUv, vec2(0.0), vec2(1.0));
@@ -40,10 +43,22 @@ const VERTEX_SHADER = `
 
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
+    float xNorm = position.x / gridWidth - 0.5;
+    float yNorm = position.y / height - 0.5;
+
+    // Fisheye/concave distortion driven by mouse movement
+    // Distance from mouse position in normalized space
+    vec2 toMouse = vec2(xNorm, yNorm) - uMousePos * 0.5;
+    float r = length(toMouse);
+    // Barrel distortion: push vertices forward based on distance from center
+    float barrel = r * r * uFisheye * 600.0;
+    // Also scale outward slightly for 3D depth pop
+    float radialPush = 1.0 + r * uFisheye * 0.3;
+
     vec4 pos = vec4(
-      (position.x / gridWidth - 0.5) * z * XtoZ,
-      (position.y / height - 0.5) * z * YtoZ,
-      -z + zOffset,
+      xNorm * radialPush * z * XtoZ,
+      yNorm * radialPush * z * YtoZ,
+      -z + zOffset + barrel,
       1.0
     );
 
@@ -52,9 +67,10 @@ const VERTEX_SHADER = `
   }
 `;
 
-// Fragment shader: natural color with slight brightness lift
+// Fragment shader: natural color + purple/blue depth layers on mouse move
 const FRAGMENT_WHITE = `
   uniform sampler2D map;
+  uniform float uFisheye;
   varying vec2 vUv;
   varying float vDepth;
   varying float vFade;
@@ -63,6 +79,16 @@ const FRAGMENT_WHITE = `
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
     vec3 col = color.rgb * 1.1 + vec3(0.03);
+
+    // Depth-based purple/blue layers when fisheye is active
+    vec3 deepBlue = vec3(0.15, 0.2, 0.8);
+    vec3 purple = vec3(0.55, 0.15, 0.85);
+    // Near vertices get blue, far get purple
+    vec3 depthTint = mix(deepBlue, purple, vDepth);
+    col = mix(col, depthTint, uFisheye * 0.45);
+    // Brighten edges during distortion for glow effect
+    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2;
+
     float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
     gl_FragColor = vec4(col, alpha);
   }
@@ -175,6 +201,8 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
         zOffset: { value: 1000 },
+        uFisheye: { value: 0 },
+        uMousePos: { value: new THREE.Vector2(0, 0) },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
@@ -222,13 +250,28 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     // Orbit state (smoothed)
     const orbit = { theta: 0, phi: 0 };
-    const orbitRadius = 1500; // distance from center (0,0,-1000) to camera
+    const orbitRadius = 1500;
+    let fisheyeAmount = 0;
 
     // Animate: orbit camera around center based on mouse
     const animate = () => {
       // Decay mouse target back to center when not moving
       mouseRef.current.x *= 0.96;
       mouseRef.current.y *= 0.96;
+
+      // Fisheye intensity from mouse movement magnitude
+      const mouseSpeed = Math.sqrt(mouseRef.current.x ** 2 + mouseRef.current.y ** 2);
+      const targetFisheye = Math.min(mouseSpeed * 1.5, 1.0);
+      fisheyeAmount += (targetFisheye - fisheyeAmount) * 0.08;
+
+      // Update shader uniforms
+      if (materialRef.current) {
+        materialRef.current.uniforms.uFisheye.value = fisheyeAmount;
+        materialRef.current.uniforms.uMousePos.value.set(
+          mouseRef.current.x,
+          mouseRef.current.y
+        );
+      }
 
       // Target angles from mouse (-0.6 to 0.6 radians)
       const targetTheta = mouseRef.current.x * 0.6;
