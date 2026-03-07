@@ -85,6 +85,17 @@ export default function KinectVision({ className = '', fullBleed = false, varian
   const materialRef = useRef<THREE.ShaderMaterial | null>(null);
   const [scanText, setScanText] = useState('INITIALIZING DEPTH SENSOR...');
   const [videoReady, setVideoReady] = useState(false);
+  const [webglSupported, setWebglSupported] = useState(true);
+
+  useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) setWebglSupported(false);
+    } catch {
+      setWebglSupported(false);
+    }
+  }, []);
 
   const cleanup = useCallback(() => {
     if (frameRef.current) cancelAnimationFrame(frameRef.current);
@@ -287,11 +298,21 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       ...(fullBleed ? {} : { border: `1px solid ${hud.border}`, height: '480px' }),
       ...(fullBleed ? { height: '100%' } : {}),
     }}>
+      {/* WebGL not supported fallback */}
+      {!webglSupported && (
+        <div className="absolute inset-0 flex items-center justify-center z-20" style={{ fontFamily: 'var(--font-mono, monospace)', background: '#050a08' }}>
+          <div className="text-center px-6">
+            <p className="text-sm text-white mb-2">WebGL is not supported in this browser.</p>
+            <p className="text-xs text-zinc-400">For the full 3D experience, please use <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Chrome</a>, <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Firefox</a>, or <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Edge</a>.</p>
+          </div>
+        </div>
+      )}
+
       {/* Three.js canvas */}
       <div ref={containerRef} style={{ position: 'absolute', inset: 0 }} />
 
       {/* Loading state */}
-      {!videoReady && (
+      {!videoReady && webglSupported && (
         <div className="absolute inset-0 flex items-center justify-center" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
           <p className="text-[11px] animate-pulse" style={{ color: `${hud.pri}aa` }}>LOADING DEPTH SENSOR...</p>
         </div>
