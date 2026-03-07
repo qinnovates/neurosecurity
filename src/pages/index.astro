@@ -164,13 +164,13 @@ const bandZoneColor = (id: string) => {
 
     <div class="sticky top-16 z-40 text-center py-2 text-[10px] tracking-[0.15em] uppercase font-mono" style="background: rgba(139,92,246,0.1); border-bottom: 1px solid rgba(139,92,246,0.2); color: var(--color-accent-tertiary);">Theoretical Vision — Research directions and possibilities, not validated results</div>
 
-    <!-- VISION HERO: Kinect Depth Render -->
-    <section class="relative min-h-screen flex items-center px-4 overflow-hidden" style="background: #050a08;">
-      <div class="absolute inset-0 z-0">
+    <!-- VISION HERO: Kinect on right, text on left -->
+    <section class="relative min-h-screen flex items-center overflow-hidden" style="background: #050a08;">
+      <div class="absolute top-0 right-0 bottom-0 w-full lg:w-1/2 z-0">
         <KinectVision client:only="react" fullBleed={true} />
       </div>
-      <div class="relative z-10 max-w-7xl mx-auto w-full pt-24">
-        <div class="max-w-xl">
+      <div class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-24">
+        <div class="max-w-lg">
           <p class="text-xs font-mono tracking-[0.2em] uppercase mb-6 text-[var(--color-accent-tertiary)]">BCI Vision</p>
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
             <span class="text-white">The Future of</span><br /><span class="gradient-text">Neural Interface Security.</span>
@@ -489,7 +489,7 @@ const bandZoneColor = (id: string) => {
 
         <!-- Kinect-style Neural Vision Demo -->
         <div class="mb-12 reveal">
-          <KinectVision client:only="react" />
+          <KinectVision client:only="react" variant="green" />
           <div class="mt-4 text-center">
             <p class="text-xs text-[var(--color-text-faint)] italic">Conceptual visualization of proposed BCI rendering pipeline. A depth sensor captures the environment, AI OCR reconstructs faces, and Runemate compiles the visual stream for cortical delivery. Toggle between modes to explore.</p>
           </div>
