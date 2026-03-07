@@ -168,11 +168,11 @@ export default function KinectVision({ className = '' }: Props) {
       document.addEventListener('click', startVideo, { once: true });
     });
 
-    // Mouse parallax
+    // Mouse orbit (normalized -1 to 1 relative to container center)
     const onMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
-      mouseRef.current.x = (e.clientX - rect.left - rect.width / 2) * 8;
-      mouseRef.current.y = (e.clientY - rect.top - rect.height / 2) * 8;
+      mouseRef.current.x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      mouseRef.current.y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
     };
     container.addEventListener('mousemove', onMouseMove, { passive: true });
 
@@ -186,11 +186,26 @@ export default function KinectVision({ className = '' }: Props) {
     });
     resizeObserver.observe(container);
 
-    // Animate
+    // Orbit state (smoothed)
+    const orbit = { theta: 0, phi: 0 };
+    const orbitRadius = 1500; // distance from center (0,0,-1000) to camera
+
+    // Animate: orbit camera around center based on mouse
     const animate = () => {
-      camera.position.x += (mouseRef.current.x - camera.position.x) * 0.05;
-      camera.position.y += (-mouseRef.current.y - camera.position.y) * 0.05;
+      // Target angles from mouse (-0.6 to 0.6 radians)
+      const targetTheta = mouseRef.current.x * 0.6;
+      const targetPhi = -mouseRef.current.y * 0.4;
+
+      // Smooth interpolation
+      orbit.theta += (targetTheta - orbit.theta) * 0.05;
+      orbit.phi += (targetPhi - orbit.phi) * 0.05;
+
+      // Spherical to cartesian, orbiting around center
+      camera.position.x = center.x + orbitRadius * Math.sin(orbit.theta) * Math.cos(orbit.phi);
+      camera.position.y = center.y + orbitRadius * Math.sin(orbit.phi);
+      camera.position.z = center.z + orbitRadius * Math.cos(orbit.theta) * Math.cos(orbit.phi);
       camera.lookAt(center);
+
       renderer.render(scene, camera);
       frameRef.current = requestAnimationFrame(animate);
     };
