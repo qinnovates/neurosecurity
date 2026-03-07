@@ -55,10 +55,10 @@ const VERTEX_SHADER = `
     // Also scale outward slightly for 3D depth pop
     float radialPush = 1.0 + r * uFisheye * 0.3;
 
-    // Constant subtle concave warp on edges — corners flare outward
-    float edgeX = xNorm * xNorm; // 0 center, 0.25 edges
+    // Left-only concave warp — left edge flares forward, right stays flat
+    float leftDist = max(-xNorm, 0.0); // 0 at center/right, 0.5 at left edge
     float edgeY = yNorm * yNorm;
-    float cornerWarp = (edgeX + edgeY) * 180.0; // both sides, corners strongest
+    float cornerWarp = (leftDist * leftDist + edgeY * 0.3) * 180.0;
 
     vec4 pos = vec4(
       xNorm * radialPush * z * XtoZ,
@@ -84,6 +84,12 @@ const FRAGMENT_WHITE = `
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
     vec3 col = color.rgb * 1.1 + vec3(0.03);
+
+    // Boost greens/browns toward red to make leaves pop
+    float greenness = color.g - max(color.r, color.b);
+    float leafMask = smoothstep(0.02, 0.15, greenness);
+    col.r += leafMask * 0.4;
+    col.g *= 1.0 - leafMask * 0.15;
 
     // Depth-based purple/blue layers when fisheye is active
     vec3 deepBlue = vec3(0.15, 0.2, 0.8);
@@ -155,8 +161,15 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     // Scene
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 10000);
+    const cw = container.clientWidth;
+    const ch = container.clientHeight;
+    const camera = new THREE.PerspectiveCamera(50, cw / ch, 1, 10000);
     camera.position.set(0, 0, 500);
+    // Shift view right for hero: offset the frustum so cloud appears right-aligned
+    if (!isGreen) {
+      const shift = Math.round(cw * 0.3);
+      camera.setViewOffset(cw, ch, -shift, 0, cw, ch);
+    }
     const center = new THREE.Vector3(0, 0, -1000);
 
     // Video element with webm + mp4 fallback
@@ -248,6 +261,10 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
+      if (!isGreen) {
+        const shift = Math.round(w * 0.3);
+        camera.setViewOffset(w, h, -shift, 0, w, h);
+      }
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
