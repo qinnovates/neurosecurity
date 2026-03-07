@@ -366,10 +366,32 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     }}>
       {/* WebGL not supported fallback */}
       {!webglSupported && (
-        <div className="absolute inset-0 flex items-center justify-center z-20" style={{ fontFamily: 'var(--font-mono, monospace)', background: '#050a08' }}>
-          <div className="text-center px-6">
-            <p className="text-sm text-white mb-2">WebGL is not supported in this browser.</p>
-            <p className="text-xs text-zinc-400">For the full 3D experience, please use <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Chrome</a>, <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Firefox</a>, or <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Edge</a>.</p>
+        <div className="absolute inset-0 flex items-center justify-center z-20" style={{ background: 'rgba(5,10,8,0.95)' }}>
+          <div className="rounded-xl px-8 py-6 max-w-sm text-center" style={{
+            background: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            backdropFilter: 'blur(12px)',
+            fontFamily: 'var(--font-mono, monospace)',
+          }}>
+            <div className="text-2xl mb-3">⚠️</div>
+            <p className="text-sm text-white font-medium mb-2">WebGL Not Supported</p>
+            <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
+              This visualization requires WebGL to render 3D depth content. Please switch to a supported browser:
+            </p>
+            <div className="flex justify-center gap-3">
+              <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer"
+                className="px-3 py-1.5 text-[11px] rounded-md bg-blue-600 hover:bg-blue-500 text-white transition-colors">
+                Chrome
+              </a>
+              <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer"
+                className="px-3 py-1.5 text-[11px] rounded-md bg-orange-600 hover:bg-orange-500 text-white transition-colors">
+                Firefox
+              </a>
+              <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer"
+                className="px-3 py-1.5 text-[11px] rounded-md bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">
+                Edge
+              </a>
+            </div>
           </div>
         </div>
       )}
