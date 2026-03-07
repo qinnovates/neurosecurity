@@ -57,8 +57,9 @@ const FRAGMENT_SHADER = `
 
     vec4 color = texture2D(map, vUv);
 
-    // Tint toward cyan/green for the Kinect aesthetic
-    vec3 tinted = mix(color.rgb, vec3(0.0, color.g * 1.2, color.b * 0.8), 0.3);
+    // White/luminance tint
+    float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    vec3 tinted = mix(color.rgb, vec3(lum * 1.3), 0.6);
 
     // Soft edge
     float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
@@ -107,10 +108,10 @@ export default function KinectVision({ className = '', fullBleed = false }: Prop
 
     // Try webm first, fallback to mp4
     const sourceWebm = document.createElement('source');
-    sourceWebm.src = '/videos/service-dog.webm';
+    sourceWebm.src = '/videos/IMG_3445.webm';
     sourceWebm.type = 'video/webm';
     const sourceMp4 = document.createElement('source');
-    sourceMp4.src = '/videos/service-dog.mp4';
+    sourceMp4.src = '/videos/IMG_3445.mp4';
     sourceMp4.type = 'video/mp4';
     video.appendChild(sourceWebm);
     video.appendChild(sourceMp4);
@@ -237,13 +238,13 @@ export default function KinectVision({ className = '', fullBleed = false }: Prop
   useEffect(() => {
     const lines = [
       'DEPTH SENSOR ACTIVE...',
-      'OBJECT: Canis lupus familiaris',
-      'CLASS: Service dog (harnessed)',
-      'CONFIDENCE: 0.97',
-      'HARNESS: "SERVICE DOG" — DETECTED',
-      'RENDERING TO VISUAL CORTEX...',
+      'SCANNING ENVIRONMENT...',
       'POINT CLOUD: 307,200 vertices',
       'LUMINANCE DISPLACEMENT: ACTIVE',
+      'RENDERING TO VISUAL CORTEX...',
+      'DEPTH MAP: NEAR 850 / FAR 4000',
+      'SIGNAL PROCESSING: NOMINAL',
+      'NEURAL INTERFACE: STANDBY',
     ];
     let idx = 0;
     setScanText(lines[0]);
@@ -257,7 +258,7 @@ export default function KinectVision({ className = '', fullBleed = false }: Prop
   return (
     <div className={`relative w-full overflow-hidden ${fullBleed ? '' : 'rounded-2xl'} ${className}`} style={{
       background: '#050a08',
-      ...(fullBleed ? {} : { border: '1px solid rgba(0,255,136,0.15)', height: '480px' }),
+      ...(fullBleed ? {} : { border: '1px solid rgba(255,255,255,0.15)', height: '480px' }),
       ...(fullBleed ? { height: '100%' } : {}),
     }}>
       {/* Three.js canvas */}
@@ -266,7 +267,7 @@ export default function KinectVision({ className = '', fullBleed = false }: Prop
       {/* Loading state */}
       {!videoReady && (
         <div className="absolute inset-0 flex items-center justify-center" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
-          <p className="text-[11px] animate-pulse" style={{ color: '#00ff88' }}>LOADING DEPTH SENSOR...</p>
+          <p className="text-[11px] animate-pulse" style={{ color: '#ffffffaa' }}>LOADING DEPTH SENSOR...</p>
         </div>
       )}
 
@@ -274,36 +275,36 @@ export default function KinectVision({ className = '', fullBleed = false }: Prop
       <div className="absolute inset-0 pointer-events-none" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
         {/* Top-left */}
         <div className="absolute top-4 left-4">
-          <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: '#00ff88' }}>
-            KINECT DEPTH SENSOR: SERVICE DOG
+          <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: '#ffffffcc' }}>
+            DEPTH SENSOR ACTIVE
           </p>
-          <p className="text-[11px]" style={{ color: '#00cc6a', opacity: 0.8 }}>
-            For the blind — neural vision prosthetic
+          <p className="text-[11px]" style={{ color: '#ffffff88' }}>
+            Neural vision prosthetic
           </p>
         </div>
 
         {/* Top-right: info */}
         <div className="absolute top-4 right-4 text-right">
-          <p className="text-[10px] tracking-wider" style={{ color: '#00ff8866' }}>640 x 480 @ 30fps</p>
-          <p className="text-[9px] mt-0.5" style={{ color: '#00ff8844' }}>307,200 point cloud</p>
+          <p className="text-[10px] tracking-wider" style={{ color: '#ffffff66' }}>640 x 480 @ 30fps</p>
+          <p className="text-[9px] mt-0.5" style={{ color: '#ffffff44' }}>307,200 point cloud</p>
         </div>
 
         {/* Bottom-left: Scan output */}
         <div className="absolute bottom-4 left-4">
-          <p className="text-[10px] mb-1" style={{ color: '#00ff88', opacity: 0.5 }}>
+          <p className="text-[10px] mb-1" style={{ color: '#ffffffaa', opacity: 0.5 }}>
             {'>'} {scanText}<span className="animate-pulse">_</span>
           </p>
-          <p className="text-[9px]" style={{ color: '#00cc6a', opacity: 0.4 }}>
-            Object recognition via BCI visual cortex stimulation
+          <p className="text-[9px]" style={{ color: '#ffffff88', opacity: 0.4 }}>
+            BCI visual cortex rendering pipeline
           </p>
         </div>
 
         {/* Bottom-right */}
         <div className="absolute bottom-4 right-4 text-right">
-          <p className="text-[9px] tracking-[0.15em] uppercase" style={{ color: '#00ff88', opacity: 0.3 }}>
+          <p className="text-[9px] tracking-[0.15em] uppercase" style={{ color: '#ffffff', opacity: 0.3 }}>
             Runemate Neural Compiler
           </p>
-          <p className="text-[8px]" style={{ color: '#00cc6a', opacity: 0.2 }}>
+          <p className="text-[8px]" style={{ color: '#ffffff', opacity: 0.2 }}>
             Proposed BCI rendering pipeline
           </p>
         </div>
@@ -311,18 +312,18 @@ export default function KinectVision({ className = '', fullBleed = false }: Prop
         {/* Crosshair */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="w-8 h-8 relative">
-            <div className="absolute top-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: '#00ff8833' }} />
-            <div className="absolute bottom-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: '#00ff8833' }} />
-            <div className="absolute top-1/2 left-0 w-2 h-px -translate-y-1/2" style={{ background: '#00ff8833' }} />
-            <div className="absolute top-1/2 right-0 w-2 h-px -translate-y-1/2" style={{ background: '#00ff8833' }} />
+            <div className="absolute top-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: '#ffffff33' }} />
+            <div className="absolute bottom-0 left-1/2 w-px h-2 -translate-x-1/2" style={{ background: '#ffffff33' }} />
+            <div className="absolute top-1/2 left-0 w-2 h-px -translate-y-1/2" style={{ background: '#ffffff33' }} />
+            <div className="absolute top-1/2 right-0 w-2 h-px -translate-y-1/2" style={{ background: '#ffffff33' }} />
           </div>
         </div>
 
         {/* Corner brackets */}
-        <div className="absolute top-2 left-2 w-4 h-4 border-t border-l" style={{ borderColor: '#00ff8822' }} />
-        <div className="absolute top-2 right-2 w-4 h-4 border-t border-r" style={{ borderColor: '#00ff8822' }} />
-        <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l" style={{ borderColor: '#00ff8822' }} />
-        <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r" style={{ borderColor: '#00ff8822' }} />
+        <div className="absolute top-2 left-2 w-4 h-4 border-t border-l" style={{ borderColor: '#ffffff22' }} />
+        <div className="absolute top-2 right-2 w-4 h-4 border-t border-r" style={{ borderColor: '#ffffff22' }} />
+        <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l" style={{ borderColor: '#ffffff22' }} />
+        <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r" style={{ borderColor: '#ffffff22' }} />
       </div>
     </div>
   );
