@@ -2,12 +2,14 @@
 
 **Proposed by:** Kevin Qi
 **Date:** March 2026
-**Status:** DRAFT v0.2 — Working document for advisor feedback and institutional review.
+**Status:** DRAFT v0.3 — Working document for advisor feedback and institutional review.
 **Intended audience:** UNESCO International Bioethics Committee, U.S. Congress (Science & Technology committees), Columbia University NeuroRights Initiative, Republic of Chile Ministry of Science, and the global neuroethics research community.
 
 ---
 
-> **Disclosure:** This document was drafted with AI writing assistance (Claude, Anthropic). All principles, ethical positions, and policy arguments are the author's. Technical framework references (QIF, TARA, NISS) describe proposed, unvalidated research tools, not adopted standards. The author holds no institutional affiliation with UNESCO, Columbia University, or any government body referenced herein. Any claims derived from this document that appear in outward-facing publications must pass neuroethics guardrails (Morse 2006, neuromodesty framework) before publication.
+> **This document is a draft and contains theoretical proposals.** The five principles presented here are the author's proposed framework. They have not been peer-reviewed, institutionally endorsed, or adopted by any government, standards body, or academic institution. Technical implementation concepts (phosphene rendering pipelines, vector-based compression, semantic web adaptation) describe projected capabilities, not current systems. No working BCI-to-web-browser pipeline exists as of 2026. All claims about future technical feasibility are flagged as theoretical and require independent validation. This document is intended to provoke discussion, not to assert established fact.
+
+> **AI Disclosure:** This document was drafted with AI writing assistance (Claude, Anthropic). All principles, ethical positions, and policy arguments are the author's. Technical framework references (QIF, TARA, NISS) describe proposed, unvalidated research tools, not adopted standards. The author holds no institutional affiliation with UNESCO, Columbia University, or any government body referenced herein. Any claims derived from this document that appear in outward-facing publications must pass neuroethics guardrails (Morse 2006, neuromodesty framework) before publication.
 
 ---
 
@@ -72,6 +74,26 @@ Current accessibility standards (WCAG 2.2, EN 301 549, ADA Section 508) assume y
 Under the CRPD (Art. 9), state parties are obligated to ensure accessibility of information and communications technologies. If a BCI is the mechanism by which a person accesses visual information, then the accessibility of digital content through that mechanism is a CRPD concern. Under UNESCO's 2025 Recommendation, member states committed to protecting vulnerable populations in the context of neurotechnology. BCI patients undergoing vision restoration are, by definition, a vulnerable population (UNESCO UDBHR Art. 8).
 
 The obligation already exists in the instruments we have signed. What is missing is the recognition that it extends to the digital world, and the engineering to make it real.
+
+#### Technical Note: Where to Start — Text Rendering for Phosphene Arrays
+
+*The following describes theoretical engineering directions, not current capabilities. No working BCI-to-web-browser pipeline exists as of 2026. These proposals require independent validation.*
+
+Consider the simplest digital task: reading text on a screen. At current electrode counts (96-1024), rendering legible text through a phosphene array is among the hardest problems in cortical visual prosthetics. Letter recognition requires distinguishing fine spatial features — curves, serifs, spacing — at resolutions orders of magnitude below biological sight. If we can solve text legibility at 100-1000 phosphene resolution, we have solved the constraint that makes everything else harder.
+
+This suggests a sequencing strategy: start with text, then build outward. The reasoning:
+
+1. **Text as the minimal viable rendering target.** If a patient can read — even slowly, even imperfectly — they can access the internet, fill out forms, read messages, and participate in digital life. Text is the atomic unit of digital accessibility.
+
+2. **Vector-based rendering maps naturally to sparse electrode grids.** Modern fonts (TrueType, OpenType) are already defined as mathematical curves, not pixel grids. A letterform described as bezier curves can be rasterized to any resolution — including a 10x10 or 32x32 phosphene array — without information loss until the final rendering step. This is the same principle as SVG scaling: resolution-independent representation, rendered to the target at the last moment. Applying vector-graphic scaling to phosphene rendering is a theoretical but scientifically plausible approach.
+
+3. **The rest of the world builds around text.** Once text rendering works, the remaining visual tasks — object recognition, navigation, face perception — can leverage existing mature technologies (LiDAR, AI scene understanding, OCR) as pre-processing pipelines. These systems reduce complex visual scenes to simplified, high-contrast representations optimized for the electrode array. Lozano et al. (2020) developed Neurolight, a deep learning neural interface that optimizes how visual scenes are encoded into electrical stimulation patterns for cortical prostheses, demonstrating that intelligent pre-processing significantly improves the quality of prosthetic percepts compared to naive approaches.
+
+4. **What would the internet look like?** This is the question that must be answered. A BCI-adapted web would need to be a highly simplified, high-contrast, semantically structured representation — closer to a text-mode browser with spatial layout preserved and interactive elements clearly distinguished than to a visual rendering of a modern webpage. Current accessibility standards (WCAG contrast ratios, screen reader APIs) are irrelevant to this paradigm. A new standard for phosphene-legible digital content would need to be developed.
+
+5. **Compression as a rendering strategy.** The concept of a compressed side-process for image rendering parallels how screen readers already work — they extract semantic structure, not pixels. A BCI rendering pipeline would similarly need a semantic compression layer: extract what matters (text content, layout hierarchy, interactive elements), discard what does not (gradients, shadows, animations), and render the result to the phosphene grid. This is closer to scene understanding plus selective rendering than to traditional image compression (JPEG, H.264), but the vector scaling concept applies at the final rendering step.
+
+This approach — text first, vector rendering, semantic compression, existing tech for the physical world — is a theoretical engineering direction that aligns with where cortical prosthetics research is headed. It is not a claim that this pipeline exists or will exist on any specific timeline. It is a claim that the building blocks are mature in adjacent fields and that the integration gap is an engineering problem, not a physics problem.
 
 ### III. Perceptual Sovereignty
 
@@ -176,16 +198,17 @@ We just need to start building.
 8. Ienca M. (2021). "On Neurorights." *Frontiers in Human Neuroscience* 15:701258. DOI:10.3389/fnhum.2021.701258.
 9. Jotterand F. (2008). "Beyond Therapy and Enhancement: The Alteration of Human Nature." *NanoEthics* 2(1):15-23.
 10. Kellmeyer P. (2022). "'Neurorights': A Human Rights-Based Approach for Governing Neurotechnologies." In *Cambridge Handbook of Lawyering in the Digital Age*, 412-426.
-11. Morse SJ. (2006). "Brain Overclaim Syndrome and Criminal Responsibility." *Ohio State Journal of Criminal Law* 3:397-412.
-12. Qi K. (2026). "Quantum Intelligence Framework: A Security Framework for Brain-Computer Interfaces." Preprint. DOI:10.5281/zenodo.18640105. *Proposed framework, not peer-reviewed.*
-13. Republic of Chile. (2021). Constitutional Amendment Art. 19 + Law 21.383 on Neuroprotection.
-14. Towle VL, et al. (2021). "Toward the Development of a Color Visual Prosthesis." *Journal of Neural Engineering* 18(2). PMID:33339020.
-15. UNESCO. (2005). Universal Declaration on Bioethics and Human Rights.
-16. UNESCO. (2025). Recommendation on the Ethics of Neurotechnology. 43rd General Conference.
-17. United Nations. (2006). Convention on the Rights of Persons with Disabilities (CRPD).
-18. Wexler A. (2019). "Separating Neuroethics from Neurohype." *Science* 363(6424):234. DOI:10.1126/science.aav0223.
-19. Yuste R, Goering S, Arcas BA, et al. (2017). "Four Ethical Priorities for Neurotechnologies and AI." *Nature* 551:159-163. DOI:10.1038/551159a.
-20. Yuste R, Genser J, Herrmann S. (2021). "It's Time for Neuro-Rights." *Horizons* 18:154-164.
+11. Lozano A, Suarez JS, Soto-Sanchez C, et al. (2020). "Neurolight: A Deep Learning Neural Interface for Cortical Visual Prostheses." *International Journal of Neural Systems* 30(9):2050045. PMID:32689842. DOI:10.1142/S0129065720500458.
+12. Morse SJ. (2006). "Brain Overclaim Syndrome and Criminal Responsibility." *Ohio State Journal of Criminal Law* 3:397-412.
+13. Qi K. (2026). "Quantum Intelligence Framework: A Security Framework for Brain-Computer Interfaces." Preprint. DOI:10.5281/zenodo.18640105. *Proposed framework, not peer-reviewed.*
+14. Republic of Chile. (2021). Constitutional Amendment Art. 19 + Law 21.383 on Neuroprotection.
+15. Towle VL, et al. (2021). "Toward the Development of a Color Visual Prosthesis." *Journal of Neural Engineering* 18(2). PMID:33339020.
+16. UNESCO. (2005). Universal Declaration on Bioethics and Human Rights.
+17. UNESCO. (2025). Recommendation on the Ethics of Neurotechnology. 43rd General Conference.
+18. United Nations. (2006). Convention on the Rights of Persons with Disabilities (CRPD).
+19. Wexler A. (2019). "Separating Neuroethics from Neurohype." *Science* 363(6424):234. DOI:10.1126/science.aav0223.
+20. Yuste R, Goering S, Arcas BA, et al. (2017). "Four Ethical Priorities for Neurotechnologies and AI." *Nature* 551:159-163. DOI:10.1038/551159a.
+21. Yuste R, Genser J, Herrmann S. (2021). "It's Time for Neuro-Rights." *Horizons* 18:154-164.
 
 ---
 
