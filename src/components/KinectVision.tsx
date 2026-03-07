@@ -28,6 +28,7 @@ const VERTEX_SHADER = `
 
   uniform float uFisheye;
   uniform vec2 uMousePos;
+  uniform float uScrollWarp;
 
   void main() {
     vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
@@ -47,23 +48,35 @@ const VERTEX_SHADER = `
     float yNorm = position.y / height - 0.5;
 
     // Fisheye/concave distortion driven by mouse movement
-    // Distance from mouse position in normalized space
     vec2 toMouse = vec2(xNorm, yNorm) - uMousePos * 0.5;
     float r = length(toMouse);
-    // Barrel distortion: push vertices forward based on distance from center
     float barrel = r * r * uFisheye * 600.0;
-    // Also scale outward slightly for 3D depth pop
     float radialPush = 1.0 + r * uFisheye * 0.3;
 
-    // Left-only concave warp — left edge flares forward, right stays flat
-    float leftDist = max(-xNorm, 0.0); // 0 at center/right, 0.5 at left edge
+    // Left-only concave warp
+    float leftDist = max(-xNorm, 0.0);
     float edgeY = yNorm * yNorm;
     float cornerWarp = (leftDist * leftDist + edgeY * 0.3) * 180.0;
+
+    // Scroll warp: push top or bottom half outward on both sides
+    // uScrollWarp > 0 = top half warps out, < 0 = bottom half warps out
+    float scrollWarpZ = 0.0;
+    if (uScrollWarp > 0.0) {
+      // Top half: vertices with positive yNorm get pushed forward at edges
+      float topMask = smoothstep(0.0, 0.4, yNorm); // 0 at center, 1 at top
+      float edgeDist = abs(xNorm) * 2.0; // 0 at center, 1 at edges
+      scrollWarpZ = topMask * edgeDist * edgeDist * uScrollWarp * 800.0;
+    } else {
+      // Bottom half: vertices with negative yNorm get pushed forward at edges
+      float bottomMask = smoothstep(0.0, 0.4, -yNorm);
+      float edgeDist = abs(xNorm) * 2.0;
+      scrollWarpZ = bottomMask * edgeDist * edgeDist * (-uScrollWarp) * 800.0;
+    }
 
     vec4 pos = vec4(
       xNorm * radialPush * z * XtoZ,
       yNorm * radialPush * z * YtoZ,
-      -z + zOffset + barrel + cornerWarp,
+      -z + zOffset + barrel + cornerWarp + scrollWarpZ,
       1.0
     );
 
@@ -214,6 +227,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         zOffset: { value: 1000 },
         uFisheye: { value: 0 },
         uMousePos: { value: new THREE.Vector2(0, 0) },
+        uScrollWarp: { value: 0 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
@@ -249,6 +263,16 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     };
     container.addEventListener('mousemove', onMouseMove, { passive: true });
 
+    // Scroll warp: accumulate wheel delta, decay over time
+    let scrollWarpTarget = 0;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      // deltaY > 0 = scroll down = warp bottom, deltaY < 0 = scroll up = warp top
+      scrollWarpTarget += e.deltaY * 0.003;
+      scrollWarpTarget = Math.max(-1.0, Math.min(1.0, scrollWarpTarget));
+    };
+    container.addEventListener('wheel', onWheel, { passive: false });
+
     // Resize
     const resizeObserver = new ResizeObserver(() => {
       const w = container.clientWidth;
@@ -263,6 +287,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     const orbit = { theta: 0, phi: 0 };
     const orbitRadius = 1500;
     let fisheyeAmount = 0;
+    let scrollWarpAmount = 0;
 
     // Animate: orbit camera around center based on mouse
     const animate = () => {
@@ -275,6 +300,10 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       const targetFisheye = Math.min(mouseSpeed * 1.5, 1.0);
       fisheyeAmount += (targetFisheye - fisheyeAmount) * 0.08;
 
+      // Scroll warp: smooth toward target, then decay target back to 0
+      scrollWarpAmount += (scrollWarpTarget - scrollWarpAmount) * 0.1;
+      scrollWarpTarget *= 0.95; // decay target back to center
+
       // Update shader uniforms
       if (materialRef.current) {
         materialRef.current.uniforms.uFisheye.value = fisheyeAmount;
@@ -282,6 +311,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
           mouseRef.current.x,
           mouseRef.current.y
         );
+        materialRef.current.uniforms.uScrollWarp.value = scrollWarpAmount;
       }
 
       // Target angles from mouse (-0.6 to 0.6 radians)
@@ -305,6 +335,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     return () => {
       container.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('wheel', onWheel);
       resizeObserver.disconnect();
       video.pause();
       video.removeAttribute('src');
@@ -366,29 +397,28 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     }}>
       {/* WebGL not supported fallback */}
       {!webglSupported && (
-        <div className="absolute inset-0 flex items-center justify-center z-20" style={{ background: 'rgba(5,10,8,0.95)' }}>
-          <div className="rounded-xl px-8 py-6 max-w-sm text-center" style={{
-            background: 'rgba(255,255,255,0.05)',
+        <div className="absolute bottom-4 right-4 z-20">
+          <div className="rounded-xl px-6 py-4 max-w-xs text-center" style={{
+            background: 'rgba(0,0,0,0.8)',
             border: '1px solid rgba(255,255,255,0.15)',
             backdropFilter: 'blur(12px)',
             fontFamily: 'var(--font-mono, monospace)',
           }}>
-            <div className="text-2xl mb-3">⚠️</div>
-            <p className="text-sm text-white font-medium mb-2">WebGL Not Supported</p>
-            <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-              This visualization requires WebGL to render 3D depth content. Please switch to a supported browser:
+            <p className="text-xs text-white font-medium mb-1.5">⚠️ WebGL Not Supported</p>
+            <p className="text-[10px] text-zinc-400 mb-3 leading-relaxed">
+              3D visualization requires a supported browser:
             </p>
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-2">
               <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer"
-                className="px-3 py-1.5 text-[11px] rounded-md bg-blue-600 hover:bg-blue-500 text-white transition-colors">
+                className="px-2.5 py-1 text-[10px] rounded-md bg-blue-600 hover:bg-blue-500 text-white transition-colors">
                 Chrome
               </a>
               <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer"
-                className="px-3 py-1.5 text-[11px] rounded-md bg-orange-600 hover:bg-orange-500 text-white transition-colors">
+                className="px-2.5 py-1 text-[10px] rounded-md bg-orange-600 hover:bg-orange-500 text-white transition-colors">
                 Firefox
               </a>
               <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer"
-                className="px-3 py-1.5 text-[11px] rounded-md bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">
+                className="px-2.5 py-1 text-[10px] rounded-md bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">
                 Edge
               </a>
             </div>
