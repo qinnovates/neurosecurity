@@ -161,15 +161,8 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     // Scene
     const scene = new THREE.Scene();
-    const cw = container.clientWidth;
-    const ch = container.clientHeight;
-    const camera = new THREE.PerspectiveCamera(50, cw / ch, 1, 10000);
+    const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 10000);
     camera.position.set(0, 0, 500);
-    // Shift view right for hero: offset the frustum so cloud appears right-aligned
-    if (!isGreen) {
-      const shift = Math.round(cw * 0.3);
-      camera.setViewOffset(cw, ch, -shift, 0, cw, ch);
-    }
     const center = new THREE.Vector3(0, 0, -1000);
 
     // Video element with webm + mp4 fallback
@@ -261,10 +254,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
-      if (!isGreen) {
-        const shift = Math.round(w * 0.3);
-        camera.setViewOffset(w, h, -shift, 0, w, h);
-      }
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
@@ -385,8 +374,15 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         </div>
       )}
 
-      {/* Three.js canvas */}
-      <div ref={containerRef} style={{ position: 'absolute', inset: 0 }} />
+      {/* Three.js canvas — hero variant is wider and right-anchored so cloud sits right */}
+      <div ref={containerRef} style={{
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        ...(!isGreen && fullBleed
+          ? { right: 0, width: '160%' }
+          : { left: 0, right: 0 }),
+      }} />
 
       {/* Loading state */}
       {!videoReady && webglSupported && (
