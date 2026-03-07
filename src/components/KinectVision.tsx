@@ -44,21 +44,13 @@ const VERTEX_SHADER = `
   }
 `;
 
-// Fragment shader: synesthesia/phosphene colors — vivid shifting hues on mouse move
+// Fragment shader: natural color with mouse-driven blue/purple/red tint
 const FRAGMENT_WHITE = `
   uniform sampler2D map;
   uniform vec2 uMousePos;
   uniform float uMouseActive;
-  uniform float uTime;
   varying vec2 vUv;
   varying float vDepth;
-
-  vec3 hsv2rgb(vec3 c) {
-    vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
-    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-  }
-
   void main() {
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
@@ -66,28 +58,20 @@ const FRAGMENT_WHITE = `
     float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
     vec3 col = mix(color.rgb, vec3(lum * 1.3), 0.6);
 
-    // Phosphene hue: shifts based on mouse X position + depth + slow time drift
+    // Mouse-position-driven color: blue on left, purple in center, red on right
+    // Y axis blends warm (top) to cool (bottom)
     float mx = uMousePos.x * 0.5 + 0.5; // 0..1
-    float my = uMousePos.y * 0.5 + 0.5;
-    float hue = mx * 0.8 + vDepth * 0.3 + uTime * 0.02;
-    hue = fract(hue);
-    // Saturation higher at edges (phosphene bloom), lower at center
-    float edgeDist = length(vUv - vec2(0.5)) * 2.0;
-    float sat = 0.7 + edgeDist * 0.3;
-    float val = 0.6 + vDepth * 0.4;
-    vec3 phosphene = hsv2rgb(vec3(hue, sat, val));
+    float my = uMousePos.y * 0.5 + 0.5; // 0..1
+    vec3 blue = vec3(0.1, 0.15, 0.9);
+    vec3 purple = vec3(0.6, 0.1, 0.85);
+    vec3 red = vec3(0.9, 0.1, 0.2);
+    vec3 tintColor = mix(mix(blue, purple, mx), red, mx * mx);
+    // Y adds warmth — top is warmer
+    tintColor = mix(tintColor, vec3(0.9, 0.3, 0.15), (1.0 - my) * 0.3);
 
-    // Secondary phosphene ring — concentric glow based on depth bands
-    float ring = sin(vDepth * 12.0 + uTime * 0.5) * 0.5 + 0.5;
-    vec3 ringColor = hsv2rgb(vec3(fract(hue + 0.33), 0.8, ring * 0.5));
-
-    // Blend: mouse activity controls intensity, depth selects affected vertices
-    float depthMask = smoothstep(0.05, 0.4, lum);
-    vec3 synColor = mix(phosphene, phosphene + ringColor * 0.3, ring);
-    col = mix(col, col * 0.5 + synColor * 0.5, uMouseActive * depthMask * 0.7);
-
-    // Subtle constant phosphene shimmer even without mouse (very low intensity)
-    col += phosphene * 0.04 * depthMask;
+    // Apply tint based on depth and mouse activity
+    float depthFactor = smoothstep(0.1, 0.6, vDepth);
+    col = mix(col, col * 0.6 + tintColor * 0.4, uMouseActive * depthFactor * 0.6);
 
     float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
     gl_FragColor = vec4(col, alpha);
@@ -198,7 +182,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         zOffset: { value: 1000 },
         uMousePos: { value: new THREE.Vector2(0, 0) },
         uMouseActive: { value: 0 },
-        uTime: { value: 0 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
@@ -248,7 +231,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     const orbit = { theta: 0, phi: 0 };
     const orbitRadius = 1500;
     let mouseActivity = 0;
-    const startTime = performance.now();
 
     // Animate: orbit camera around center based on mouse
     const animate = () => {
@@ -268,7 +250,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
           mouseRef.current.y
         );
         materialRef.current.uniforms.uMouseActive.value = mouseActivity;
-        materialRef.current.uniforms.uTime.value = (performance.now() - startTime) * 0.001;
       }
 
       // Target angles from mouse (-0.6 to 0.6 radians)
