@@ -193,6 +193,10 @@ export default function KinectVision({ className = '', fullBleed = false }: Prop
 
     // Animate: orbit camera around center based on mouse
     const animate = () => {
+      // Decay mouse target back to center when not moving
+      mouseRef.current.x *= 0.96;
+      mouseRef.current.y *= 0.96;
+
       // Target angles from mouse (-0.6 to 0.6 radians)
       const targetTheta = mouseRef.current.x * 0.6;
       const targetPhi = -mouseRef.current.y * 0.4;
