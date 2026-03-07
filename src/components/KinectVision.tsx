@@ -227,17 +227,11 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     });
     resizeObserver.observe(container);
 
-    // Orbit state (smoothed)
-    const orbit = { theta: 0, phi: 0 };
-    const orbitRadius = 1500;
+    // Static camera — no orbit, no movement
+    camera.lookAt(center);
     let mouseActivity = 0;
 
-    // Animate: orbit camera around center based on mouse
     const animate = () => {
-      // Decay mouse target back to center when not moving
-      mouseRef.current.x *= 0.96;
-      mouseRef.current.y *= 0.96;
-
       // Track mouse activity for color effect intensity
       const mouseSpeed = Math.sqrt(mouseRef.current.x ** 2 + mouseRef.current.y ** 2);
       const targetActivity = Math.min(mouseSpeed * 2.0, 1.0);
@@ -251,20 +245,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         );
         materialRef.current.uniforms.uMouseActive.value = mouseActivity;
       }
-
-      // Target angles from mouse (-0.6 to 0.6 radians)
-      const targetTheta = mouseRef.current.x * 0.6;
-      const targetPhi = -mouseRef.current.y * 0.4;
-
-      // Smooth interpolation
-      orbit.theta += (targetTheta - orbit.theta) * 0.05;
-      orbit.phi += (targetPhi - orbit.phi) * 0.05;
-
-      // Spherical to cartesian, orbiting around center
-      camera.position.x = center.x + orbitRadius * Math.sin(orbit.theta) * Math.cos(orbit.phi);
-      camera.position.y = center.y + orbitRadius * Math.sin(orbit.phi);
-      camera.position.z = center.z + orbitRadius * Math.cos(orbit.theta) * Math.cos(orbit.phi);
-      camera.lookAt(center);
 
       renderer.render(scene, camera);
       frameRef.current = requestAnimationFrame(animate);
