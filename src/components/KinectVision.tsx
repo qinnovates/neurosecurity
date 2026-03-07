@@ -152,7 +152,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || !webglSupported) return;
 
     const W = 640;
     const H = 480;
@@ -318,7 +318,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         container.removeChild(renderer.domElement);
       }
     };
-  }, [cleanup, isGreen]);
+  }, [cleanup, isGreen, webglSupported]);
 
   // Scan text cycling
   useEffect(() => {
