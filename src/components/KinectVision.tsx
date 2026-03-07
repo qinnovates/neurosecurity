@@ -337,6 +337,11 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         }} />
       )}
 
+      {/* Watermark */}
+      <div className="absolute bottom-3 right-3 pointer-events-none z-10" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
+        <p className="text-[8px] tracking-[0.15em] uppercase" style={{ color: isGreen ? '#00ff8833' : '#ffffff33' }}>qinnovate</p>
+      </div>
+
       {/* HUD Overlay — green variant only */}
       {isGreen && (
         <div className="absolute inset-0 pointer-events-none" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
