@@ -176,7 +176,9 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 10000);
     camera.position.set(0, 0, 500);
-    const center = new THREE.Vector3(0, 0, -1000);
+    // Shift orbit center right for hero so point cloud sits on right half of viewport
+    const centerX = isGreen ? 0 : 400;
+    const center = new THREE.Vector3(centerX, 0, -1000);
 
     // Video element with webm + mp4 fallback
     const video = document.createElement('video');
@@ -431,9 +433,8 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         position: 'absolute',
         top: 0,
         bottom: 0,
-        ...(!isGreen && fullBleed
-          ? { right: 0, width: '160%' }
-          : { left: 0, right: 0 }),
+        left: 0,
+        right: 0,
       }} />
 
       {/* Loading state */}
