@@ -28,7 +28,6 @@ const VERTEX_SHADER = `
 
   uniform float uFisheye;
   uniform vec2 uMousePos;
-  uniform float uScrollWarp;
 
   void main() {
     vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
@@ -47,36 +46,10 @@ const VERTEX_SHADER = `
     float xNorm = position.x / gridWidth - 0.5;
     float yNorm = position.y / height - 0.5;
 
-    // Fisheye/concave distortion driven by mouse movement
-    vec2 toMouse = vec2(xNorm, yNorm) - uMousePos * 0.5;
-    float r = length(toMouse);
-    float barrel = r * r * uFisheye * 600.0;
-    float radialPush = 1.0 + r * uFisheye * 0.3;
-
-    // Left-only concave warp
-    float leftDist = max(-xNorm, 0.0);
-    float edgeY = yNorm * yNorm;
-    float cornerWarp = (leftDist * leftDist + edgeY * 0.3) * 180.0;
-
-    // Scroll warp: push top or bottom half outward on both sides
-    // uScrollWarp > 0 = top half warps out, < 0 = bottom half warps out
-    float scrollWarpZ = 0.0;
-    if (uScrollWarp > 0.0) {
-      // Top half: vertices with positive yNorm get pushed forward at edges
-      float topMask = smoothstep(0.0, 0.4, yNorm); // 0 at center, 1 at top
-      float edgeDist = abs(xNorm) * 2.0; // 0 at center, 1 at edges
-      scrollWarpZ = topMask * edgeDist * edgeDist * uScrollWarp * 800.0;
-    } else {
-      // Bottom half: vertices with negative yNorm get pushed forward at edges
-      float bottomMask = smoothstep(0.0, 0.4, -yNorm);
-      float edgeDist = abs(xNorm) * 2.0;
-      scrollWarpZ = bottomMask * edgeDist * edgeDist * (-uScrollWarp) * 800.0;
-    }
-
     vec4 pos = vec4(
-      xNorm * radialPush * z * XtoZ,
-      yNorm * radialPush * z * YtoZ,
-      -z + zOffset + barrel + cornerWarp + scrollWarpZ,
+      xNorm * z * XtoZ,
+      yNorm * z * YtoZ,
+      -z + zOffset,
       1.0
     );
 
@@ -96,6 +69,11 @@ const FRAGMENT_WHITE = `
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
+
+    // Discard dark pixels — removes background box
+    float brightness = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    if (brightness < 0.06) discard;
+
     vec3 col = color.rgb * 1.1 + vec3(0.03);
 
     // Boost greens/browns toward red to make leaves pop
@@ -104,14 +82,12 @@ const FRAGMENT_WHITE = `
     col.r += leafMask * 0.4;
     col.g *= 1.0 - leafMask * 0.15;
 
-    // Depth-based purple/blue layers — only on mouse move, only on bright pixels
-    float brightness = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-    float brightMask = smoothstep(0.05, 0.2, brightness); // skip dark/flat areas
+    // Depth-based purple/blue fisheye color — only on bright subject pixels
     vec3 deepBlue = vec3(0.15, 0.2, 0.8);
     vec3 purple = vec3(0.55, 0.15, 0.85);
     vec3 depthTint = mix(deepBlue, purple, vDepth);
-    col = mix(col, depthTint, uFisheye * 0.45 * brightMask);
-    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2 * brightMask;
+    col = mix(col, depthTint, uFisheye * 0.45);
+    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2;
 
     float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
     gl_FragColor = vec4(col, alpha);
@@ -227,7 +203,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         zOffset: { value: 1000 },
         uFisheye: { value: 0 },
         uMousePos: { value: new THREE.Vector2(0, 0) },
-        uScrollWarp: { value: 0 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
@@ -263,16 +238,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     };
     container.addEventListener('mousemove', onMouseMove, { passive: true });
 
-    // Scroll warp: accumulate wheel delta, decay over time
-    let scrollWarpTarget = 0;
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      // deltaY > 0 = scroll down = warp bottom, deltaY < 0 = scroll up = warp top
-      scrollWarpTarget += e.deltaY * 0.003;
-      scrollWarpTarget = Math.max(-1.0, Math.min(1.0, scrollWarpTarget));
-    };
-    container.addEventListener('wheel', onWheel, { passive: false });
-
     // Resize
     const resizeObserver = new ResizeObserver(() => {
       const w = container.clientWidth;
@@ -287,7 +252,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     const orbit = { theta: 0, phi: 0 };
     const orbitRadius = 1500;
     let fisheyeAmount = 0;
-    let scrollWarpAmount = 0;
 
     // Animate: orbit camera around center based on mouse
     const animate = () => {
@@ -300,10 +264,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       const targetFisheye = Math.min(mouseSpeed * 1.5, 1.0);
       fisheyeAmount += (targetFisheye - fisheyeAmount) * 0.08;
 
-      // Scroll warp: smooth toward target, then decay target back to 0
-      scrollWarpAmount += (scrollWarpTarget - scrollWarpAmount) * 0.1;
-      scrollWarpTarget *= 0.95; // decay target back to center
-
       // Update shader uniforms
       if (materialRef.current) {
         materialRef.current.uniforms.uFisheye.value = fisheyeAmount;
@@ -311,7 +271,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
           mouseRef.current.x,
           mouseRef.current.y
         );
-        materialRef.current.uniforms.uScrollWarp.value = scrollWarpAmount;
       }
 
       // Target angles from mouse (-0.6 to 0.6 radians)
@@ -329,13 +288,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
       camera.lookAt(center);
 
-      // Shift the entire render to the right margin without changing camera angle
-      // projectionMatrix[12] is the X translation in clip space (-1 to 1)
-      // Negative value slides content right on screen
-      if (!isGreen && fullBleed) {
-        camera.projectionMatrix.elements[12] += -0.5;
-      }
-
       renderer.render(scene, camera);
       frameRef.current = requestAnimationFrame(animate);
     };
@@ -343,7 +295,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     return () => {
       container.removeEventListener('mousemove', onMouseMove);
-      container.removeEventListener('wheel', onWheel);
       resizeObserver.disconnect();
       video.pause();
       video.removeAttribute('src');
