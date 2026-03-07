@@ -8,6 +8,7 @@ interface Props {
 }
 
 // Vertex shader: displace vertices based on video luminance (Kinect depth style)
+// Supports extended geometry — UVs outside 0..1 clamp to edge pixels
 const VERTEX_SHADER = `
   uniform sampler2D map;
   uniform float width;
@@ -16,26 +17,53 @@ const VERTEX_SHADER = `
   uniform float farClipping;
   uniform float pointSize;
   uniform float zOffset;
+  uniform float gridWidth;
 
   varying vec2 vUv;
   varying float vDepth;
+  varying float vFade;
 
   const float XtoZ = 1.11146;
   const float YtoZ = 0.83359;
 
+  uniform float uFisheye;
+  uniform vec2 uMousePos;
+
   void main() {
-    vUv = vec2(position.x / width, position.y / height);
+    vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
+    vUv = clamp(rawUv, vec2(0.0), vec2(1.0));
     vec4 color = texture2D(map, vUv);
 
     float depth = dot(color.rgb, vec3(0.299, 0.587, 0.114));
     vDepth = depth;
 
+    // Fade: 1.0 inside video frame, fading to 0.0 at extended edges
+    float distFromCenter = abs(rawUv.x - 0.5) * 2.0;
+    vFade = 1.0 - smoothstep(0.85, 1.4, distFromCenter);
+
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
+    float xNorm = position.x / gridWidth - 0.5;
+    float yNorm = position.y / height - 0.5;
+
+    // Fisheye/concave distortion driven by mouse movement
+    // Distance from mouse position in normalized space
+    vec2 toMouse = vec2(xNorm, yNorm) - uMousePos * 0.5;
+    float r = length(toMouse);
+    // Barrel distortion: push vertices forward based on distance from center
+    float barrel = r * r * uFisheye * 600.0;
+    // Also scale outward slightly for 3D depth pop
+    float radialPush = 1.0 + r * uFisheye * 0.3;
+
+    // Left-only concave warp — left edge flares forward, right stays flat
+    float leftDist = max(-xNorm, 0.0); // 0 at center/right, 0.5 at left edge
+    float edgeY = yNorm * yNorm;
+    float cornerWarp = (leftDist * leftDist + edgeY * 0.3) * 180.0;
+
     vec4 pos = vec4(
-      (position.x / width - 0.5) * z * XtoZ,
-      (position.y / height - 0.5) * z * YtoZ,
-      -z + zOffset,
+      xNorm * radialPush * z * XtoZ,
+      yNorm * radialPush * z * YtoZ,
+      -z + zOffset + barrel + cornerWarp,
       1.0
     );
 
@@ -44,34 +72,35 @@ const VERTEX_SHADER = `
   }
 `;
 
-// Fragment shader: color with blue/magenta depth layers on mouse move
+// Fragment shader: natural color + purple/blue depth layers on mouse move
 const FRAGMENT_WHITE = `
   uniform sampler2D map;
   uniform float uFisheye;
   varying vec2 vUv;
   varying float vDepth;
+  varying float vFade;
   void main() {
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
     vec3 col = color.rgb * 1.1 + vec3(0.03);
 
-    // Red leaf tint
+    // Boost greens/browns toward red to make leaves pop
     float greenness = color.g - max(color.r, color.b);
     float leafMask = smoothstep(0.02, 0.15, greenness);
     col.r += leafMask * 0.4;
     col.g *= 1.0 - leafMask * 0.15;
 
-    // Blue/magenta depth layers on mouse move (skip dark pixels)
-    float brightness = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-    float brightMask = smoothstep(0.05, 0.2, brightness);
+    // Depth-based purple/blue layers when fisheye is active
     vec3 deepBlue = vec3(0.15, 0.2, 0.8);
-    vec3 magenta = vec3(0.55, 0.15, 0.85);
-    vec3 depthTint = mix(deepBlue, magenta, vDepth);
-    col = mix(col, depthTint, uFisheye * 0.45 * brightMask);
-    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2 * brightMask;
+    vec3 purple = vec3(0.55, 0.15, 0.85);
+    // Near vertices get blue, far get purple
+    vec3 depthTint = mix(deepBlue, purple, vDepth);
+    col = mix(col, depthTint, uFisheye * 0.45);
+    // Brighten edges during distortion for glow effect
+    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2;
 
-    float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
+    float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
     gl_FragColor = vec4(col, alpha);
   }
 `;
@@ -81,12 +110,13 @@ const FRAGMENT_GREEN = `
   uniform sampler2D map;
   varying vec2 vUv;
   varying float vDepth;
+  varying float vFade;
   void main() {
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
     vec3 tinted = mix(color.rgb, vec3(0.0, color.g * 1.2, color.b * 0.8), 0.3);
-    float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
+    float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
     gl_FragColor = vec4(tinted, alpha);
   }
 `;
@@ -122,15 +152,24 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || !webglSupported) return;
+    if (!container) return;
 
     const W = 640;
     const H = 480;
+    // Extended grid: wider for hero variant to fill widescreen
+    const GRID_W = isGreen ? W : Math.round(W * 2.2);
 
     // Scene
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 10000);
+    const cw = container.clientWidth;
+    const ch = container.clientHeight;
+    const camera = new THREE.PerspectiveCamera(50, cw / ch, 1, 10000);
     camera.position.set(0, 0, 500);
+    // Shift view right for hero: offset the frustum so cloud appears right-aligned
+    if (!isGreen) {
+      const shift = Math.round(cw * 0.3);
+      camera.setViewOffset(cw, ch, -shift, 0, cw, ch);
+    }
     const center = new THREE.Vector3(0, 0, -1000);
 
     // Video element with webm + mp4 fallback
@@ -158,12 +197,13 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     texture.magFilter = THREE.NearestFilter;
     texture.generateMipmaps = false;
 
-    // Geometry: grid of vertices, one per pixel
+    // Geometry: grid of vertices — extended width for hero to fill viewport
     const geometry = new THREE.BufferGeometry();
-    const vertices = new Float32Array(W * H * 3);
+    const totalVerts = GRID_W * H;
+    const vertices = new Float32Array(totalVerts * 3);
     for (let i = 0, j = 0; i < vertices.length; i += 3, j++) {
-      vertices[i] = j % W;
-      vertices[i + 1] = Math.floor(j / W);
+      vertices[i] = j % GRID_W;
+      vertices[i + 1] = Math.floor(j / GRID_W);
       vertices[i + 2] = 0;
     }
     geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
@@ -174,11 +214,13 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         map: { value: texture },
         width: { value: W },
         height: { value: H },
+        gridWidth: { value: GRID_W },
         nearClipping: { value: 850 },
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
         zOffset: { value: 1000 },
         uFisheye: { value: 0 },
+        uMousePos: { value: new THREE.Vector2(0, 0) },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
@@ -219,24 +261,53 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
+      if (!isGreen) {
+        const shift = Math.round(w * 0.3);
+        camera.setViewOffset(w, h, -shift, 0, w, h);
+      }
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
     resizeObserver.observe(container);
 
-    // Static camera — no orbit
-    camera.lookAt(center);
+    // Orbit state (smoothed)
+    const orbit = { theta: 0, phi: 0 };
+    const orbitRadius = 1500;
     let fisheyeAmount = 0;
 
+    // Animate: orbit camera around center based on mouse
     const animate = () => {
-      // Mouse speed drives blue/magenta color intensity
+      // Decay mouse target back to center when not moving
+      mouseRef.current.x *= 0.96;
+      mouseRef.current.y *= 0.96;
+
+      // Fisheye intensity from mouse movement magnitude
       const mouseSpeed = Math.sqrt(mouseRef.current.x ** 2 + mouseRef.current.y ** 2);
       const targetFisheye = Math.min(mouseSpeed * 1.5, 1.0);
       fisheyeAmount += (targetFisheye - fisheyeAmount) * 0.08;
 
+      // Update shader uniforms
       if (materialRef.current) {
         materialRef.current.uniforms.uFisheye.value = fisheyeAmount;
+        materialRef.current.uniforms.uMousePos.value.set(
+          mouseRef.current.x,
+          mouseRef.current.y
+        );
       }
+
+      // Target angles from mouse (-0.6 to 0.6 radians)
+      const targetTheta = mouseRef.current.x * 0.6;
+      const targetPhi = -mouseRef.current.y * 0.4;
+
+      // Smooth interpolation
+      orbit.theta += (targetTheta - orbit.theta) * 0.05;
+      orbit.phi += (targetPhi - orbit.phi) * 0.05;
+
+      // Spherical to cartesian, orbiting around center
+      camera.position.x = center.x + orbitRadius * Math.sin(orbit.theta) * Math.cos(orbit.phi);
+      camera.position.y = center.y + orbitRadius * Math.sin(orbit.phi);
+      camera.position.z = center.z + orbitRadius * Math.cos(orbit.theta) * Math.cos(orbit.phi);
+      camera.lookAt(center);
 
       renderer.render(scene, camera);
       frameRef.current = requestAnimationFrame(animate);
@@ -258,7 +329,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         container.removeChild(renderer.domElement);
       }
     };
-  }, [cleanup, isGreen, webglSupported]);
+  }, [cleanup, isGreen]);
 
   // Scan text cycling
   useEffect(() => {
@@ -306,31 +377,10 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     }}>
       {/* WebGL not supported fallback */}
       {!webglSupported && (
-        <div className="absolute bottom-4 right-4 z-20">
-          <div className="rounded-xl px-6 py-4 max-w-xs text-center" style={{
-            background: 'rgba(0,0,0,0.8)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            backdropFilter: 'blur(12px)',
-            fontFamily: 'var(--font-mono, monospace)',
-          }}>
-            <p className="text-xs text-white font-medium mb-1.5">WebGL Not Supported</p>
-            <p className="text-[10px] text-zinc-400 mb-3 leading-relaxed">
-              3D visualization requires a supported browser:
-            </p>
-            <div className="flex justify-center gap-2">
-              <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer"
-                className="px-2.5 py-1 text-[10px] rounded-md bg-blue-600 hover:bg-blue-500 text-white transition-colors">
-                Chrome
-              </a>
-              <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer"
-                className="px-2.5 py-1 text-[10px] rounded-md bg-orange-600 hover:bg-orange-500 text-white transition-colors">
-                Firefox
-              </a>
-              <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer"
-                className="px-2.5 py-1 text-[10px] rounded-md bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">
-                Edge
-              </a>
-            </div>
+        <div className="absolute inset-0 flex items-center justify-center z-20" style={{ fontFamily: 'var(--font-mono, monospace)', background: '#050a08' }}>
+          <div className="text-center px-6">
+            <p className="text-sm text-white mb-2">WebGL is not supported in this browser.</p>
+            <p className="text-xs text-zinc-400">For the full 3D experience, please use <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Chrome</a>, <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Firefox</a>, or <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Edge</a>.</p>
           </div>
         </div>
       )}
@@ -345,7 +395,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         </div>
       )}
 
-      {/* Left fade gradient for hero variant */}
+      {/* Left fade gradient for hero variant — seamless blend into page background */}
       {!isGreen && fullBleed && (
         <div className="absolute inset-0 pointer-events-none" style={{
           background: 'linear-gradient(to right, #050a08 0%, #050a08 10%, transparent 55%)',
