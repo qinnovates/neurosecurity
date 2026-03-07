@@ -197,14 +197,19 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     texture.magFilter = THREE.NearestFilter;
     texture.generateMipmaps = false;
 
-    // Geometry: grid of vertices — extended width for hero to fill viewport
+    // Geometry: grid of vertices — skip every other pixel for softer look
+    const STEP = 2;
     const geometry = new THREE.BufferGeometry();
-    const totalVerts = GRID_W * H;
+    const cols = Math.floor(GRID_W / STEP);
+    const rows = Math.floor(H / STEP);
+    const totalVerts = cols * rows;
     const vertices = new Float32Array(totalVerts * 3);
-    for (let i = 0, j = 0; i < vertices.length; i += 3, j++) {
-      vertices[i] = j % GRID_W;
-      vertices[i + 1] = Math.floor(j / GRID_W);
-      vertices[i + 2] = 0;
+    for (let i = 0, idx = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++, idx++) {
+        vertices[idx * 3] = j * STEP;
+        vertices[idx * 3 + 1] = i * STEP;
+        vertices[idx * 3 + 2] = 0;
+      }
     }
     geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
 
@@ -217,7 +222,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         gridWidth: { value: GRID_W },
         nearClipping: { value: 850 },
         farClipping: { value: 4000 },
-        pointSize: { value: 2 },
+        pointSize: { value: 3 },
         zOffset: { value: 1000 },
         uFisheye: { value: 0 },
         uMousePos: { value: new THREE.Vector2(0, 0) },
