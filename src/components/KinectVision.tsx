@@ -26,6 +26,8 @@ const VERTEX_SHADER = `
   const float XtoZ = 1.11146;
   const float YtoZ = 0.83359;
 
+  uniform float concaveStrength;
+
   void main() {
     // Raw UV spans full extended grid
     vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
@@ -37,15 +39,25 @@ const VERTEX_SHADER = `
     vDepth = depth;
 
     // Fade factor: 1.0 inside video, fading to 0.0 at extended edges
-    float distFromCenter = abs(rawUv.x - 0.5) * 2.0; // 0 at center, 1 at video edge
+    float distFromCenter = abs(rawUv.x - 0.5) * 2.0;
     vFade = 1.0 - smoothstep(0.85, 1.4, distFromCenter);
 
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
+    float xNorm = position.x / gridWidth - 0.5;
+    float yNorm = position.y / height - 0.5;
+
+    // Concave warp: edges curve toward viewer (positive Z)
+    float edgeDist = xNorm * xNorm; // 0 at center, 0.25 at edges
+    float warpZ = edgeDist * concaveStrength * 4.0; // push edges forward
+    // Slight vertical curve too for bowl effect
+    float yEdge = yNorm * yNorm;
+    warpZ += yEdge * concaveStrength * 1.5;
+
     vec4 pos = vec4(
-      (position.x / gridWidth - 0.5) * z * XtoZ,
-      (position.y / height - 0.5) * z * YtoZ,
-      -z + zOffset,
+      xNorm * z * XtoZ,
+      yNorm * z * YtoZ,
+      -z + zOffset + warpZ,
       1.0
     );
 
@@ -178,6 +190,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
         zOffset: { value: 1000 },
+        concaveStrength: { value: isGreen ? 0 : 800 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
