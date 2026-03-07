@@ -52,7 +52,7 @@ export const CANONS: Canon[] = [
     number: 'I',
     title: 'Protect cognitive sovereignty',
     description: "Protect the individual's right to mental privacy, psychological continuity, and freedom of thought. Neural data belongs to the person it came from. Not the device manufacturer. Not the researcher. Not the state.",
-    sources: "Chile Neurorights Law, Yuste's 5 Neurorights, Ienca & Andorno (Right to Cognitive Liberty), OECD Principle 9, UNESCO UDBHR Art. 5",
+    sources: "Chile Neurorights Law, Yuste's 5 proposed neurorights (2021), Ienca & Andorno (Right to Cognitive Liberty, 2017), OECD Principle 9, UNESCO UDBHR Art. 5",
     color: '#3b82f6',
   },
   {
@@ -170,7 +170,7 @@ export const CROSS_REFERENCES: CrossRef[] = [
 
 export const INTRO_TEXT = 'This code adapts the structure and principles of the EC-Council Certified Ethical Hacker (CEH) Code of Ethics and the (ISC)² Code of Ethics for the neurosecurity domain. Ethical hacking already solved many governance problems for traditional systems. We are taking those lessons and applying them where the stakes are highest: the human brain.';
 
-export const FRAMEWORKS_TEXT = 'Each principle below is cross-referenced to the international frameworks that inform it: the OECD Recommendation on Neurotechnology (2019), UNESCO Recommendation on the Ethics of AI (2021), the Belmont Report (1979), the Declaration of Helsinki, the Chilean Neurorights Law (2021), GDPR Article 9, the IEEE Neuroethics Framework, Budapest Convention on Cybercrime, and the five neurorights proposed by Yuste et al. and Ienca & Andorno.';
+export const FRAMEWORKS_TEXT = 'Each principle below is cross-referenced to the international frameworks that inform it: the OECD Recommendation on Neurotechnology (2019), UNESCO Recommendation on the Ethics of AI (2021), the Belmont Report (1979), the Declaration of Helsinki, the Chilean Neurorights Law (2021), GDPR Article 9, the IEEE Neuroethics Framework, Budapest Convention on Cybercrime, and the proposed neurorights frameworks of Ienca & Andorno (4 rights, 2017) and Yuste et al. (5 rights, 2021).';
 
 /** Links used in the intro paragraphs on the web page */
 export const FRAMEWORK_LINKS = {
