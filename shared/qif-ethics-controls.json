@@ -9,7 +9,7 @@
     "MP": {
       "name": "Mental Privacy",
       "shortDef": "Your thoughts are yours. No one should read, store, or re-link them without permission.",
-      "source": "qif-extended",
+      "source": "ienca-andorno",
       "color": "#3b82f6",
       "bands": ["N7", "N6", "N1"],
       "frameworks": ["GDPR Art. 9", "Chile Neurorights Act 2021", "OECD Neurotechnology Principles 2024"]
@@ -25,7 +25,7 @@
     "MI": {
       "name": "Mental Integrity",
       "shortDef": "Your brain should not be harmed, altered, or have its natural rhythms disrupted without consent.",
-      "source": "qif-extended",
+      "source": "ienca-andorno",
       "color": "#ef4444",
       "bands": ["N7", "N6", "N5", "N3", "N2", "N1"],
       "frameworks": ["EU Charter Art. 3", "Chile Neurorights Act 2021", "Ienca & Andorno 2017"]
@@ -71,7 +71,7 @@
     { "id": "gdpr", "name": "GDPR Article 9 (Special Category Data)", "year": 2018, "status": "enacted", "scope": "regulation" },
     { "id": "ienca_andorno", "name": "Ienca & Andorno Framework", "year": 2017, "status": "academic", "scope": "proposal" },
     { "id": "oecd", "name": "OECD Recommendation on Neurotechnology", "year": 2024, "status": "adopted", "scope": "recommendation" },
-    { "id": "unesco", "name": "UNESCO Draft on Neurotechnology Ethics", "year": 2024, "status": "draft", "scope": "recommendation" },
+    { "id": "unesco", "name": "UNESCO Recommendation on the Ethics of Neurotechnology", "year": 2025, "status": "adopted", "scope": "recommendation" },
     { "id": "fdora", "name": "FDORA Section 3305 (Cyber Devices)", "year": 2023, "status": "enacted", "scope": "regulation" }
   ]
 }
