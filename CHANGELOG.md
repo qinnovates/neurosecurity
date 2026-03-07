@@ -4,7 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: b2df97c955677f249fb85192ff6cf2741b11d1a1 -->
+<!-- changelog-marker: 63fa824f0c00149fef3e0fe3132ae536ba66b182 -->
+
+## 2026-03-07
+
+### Updated
+- BCI Vision hero: ONI concentric spheres from original site ([63fa824](https://github.com/qinnovates/qinnovate/commit/63fa824))
+
 
 ## 2026-03-06
 
