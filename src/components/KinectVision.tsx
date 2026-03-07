@@ -26,38 +26,24 @@ const VERTEX_SHADER = `
   const float XtoZ = 1.11146;
   const float YtoZ = 0.83359;
 
-  uniform float concaveStrength;
-
   void main() {
-    // Raw UV spans full extended grid
     vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
-    // Clamp to video bounds so edge pixels extend outward
     vUv = clamp(rawUv, vec2(0.0), vec2(1.0));
     vec4 color = texture2D(map, vUv);
 
     float depth = dot(color.rgb, vec3(0.299, 0.587, 0.114));
     vDepth = depth;
 
-    // Fade factor: 1.0 inside video, fading to 0.0 at extended edges
+    // Fade: 1.0 inside video frame, fading to 0.0 at extended edges
     float distFromCenter = abs(rawUv.x - 0.5) * 2.0;
     vFade = 1.0 - smoothstep(0.85, 1.4, distFromCenter);
 
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
-    // Shift coordinate origin to right-aligned (0 = right edge, -1 = left edge)
-    float xNorm = position.x / gridWidth - 0.5;
-    float yNorm = position.y / height - 0.5;
-
-    // Asymmetric concave warp: left side curves more, right side subtle
-    float leftDist = max(-xNorm, 0.0);  // 0 at center/right, up to 0.5 at left edge
-    float rightDist = max(xNorm, 0.0);  // 0 at center/left, up to 0.5 at right edge
-    float warpZ = leftDist * leftDist * concaveStrength * 14.0   // left: 70% of original
-                + rightDist * rightDist * concaveStrength * 4.0;  // right: 20% intensity
-
     vec4 pos = vec4(
-      xNorm * z * XtoZ,
-      yNorm * z * YtoZ,
-      -z + zOffset + warpZ,
+      (position.x / gridWidth - 0.5) * z * XtoZ,
+      (position.y / height - 0.5) * z * YtoZ,
+      -z + zOffset,
       1.0
     );
 
@@ -66,7 +52,7 @@ const VERTEX_SHADER = `
   }
 `;
 
-// Fragment shader: color variant with boosted saturation
+// Fragment shader: natural color with slight brightness lift
 const FRAGMENT_WHITE = `
   uniform sampler2D map;
   varying vec2 vUv;
@@ -76,12 +62,9 @@ const FRAGMENT_WHITE = `
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
-    // Boost saturation and brightness for vivid depth aesthetic
-    float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-    vec3 saturated = mix(vec3(lum), color.rgb, 1.4); // 40% saturation boost
-    vec3 bright = saturated * 1.2 + vec3(0.05); // slight lift
-    float alpha = smoothstep(0.5, 0.2, dist) * 0.75 * vFade;
-    gl_FragColor = vec4(bright, alpha);
+    vec3 col = color.rgb * 1.1 + vec3(0.03);
+    float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
+    gl_FragColor = vec4(col, alpha);
   }
 `;
 
@@ -142,10 +125,8 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     // Scene
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 10000);
-    // Shift camera + orbit center right for hero so cloud fills right side
-    const xShift = isGreen ? 0 : 350;
-    camera.position.set(xShift, 0, 500);
-    const center = new THREE.Vector3(xShift, 0, -1000);
+    camera.position.set(0, 0, 500);
+    const center = new THREE.Vector3(0, 0, -1000);
 
     // Video element with webm + mp4 fallback
     const video = document.createElement('video');
@@ -194,7 +175,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
         zOffset: { value: 1000 },
-        concaveStrength: { value: isGreen ? 0 : 4000 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
