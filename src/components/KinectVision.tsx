@@ -8,6 +8,7 @@ interface Props {
 }
 
 // Vertex shader: displace vertices based on video luminance (Kinect depth style)
+// Supports extended geometry — UVs outside 0..1 clamp to edge pixels
 const VERTEX_SHADER = `
   uniform sampler2D map;
   uniform float width;
@@ -16,25 +17,33 @@ const VERTEX_SHADER = `
   uniform float farClipping;
   uniform float pointSize;
   uniform float zOffset;
+  uniform float gridWidth;
 
   varying vec2 vUv;
   varying float vDepth;
+  varying float vFade;
 
   const float XtoZ = 1.11146;
   const float YtoZ = 0.83359;
 
   void main() {
-    vUv = vec2(position.x / width, position.y / height);
+    // Raw UV spans full extended grid
+    vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
+    // Clamp to video bounds so edge pixels extend outward
+    vUv = clamp(rawUv, vec2(0.0), vec2(1.0));
     vec4 color = texture2D(map, vUv);
 
-    // Luminance from RGB
     float depth = dot(color.rgb, vec3(0.299, 0.587, 0.114));
     vDepth = depth;
+
+    // Fade factor: 1.0 inside video, fading to 0.0 at extended edges
+    float distFromCenter = abs(rawUv.x - 0.5) * 2.0; // 0 at center, 1 at video edge
+    vFade = 1.0 - smoothstep(0.85, 1.4, distFromCenter);
 
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
     vec4 pos = vec4(
-      (position.x / width - 0.5) * z * XtoZ,
+      (position.x / gridWidth - 0.5) * z * XtoZ,
       (position.y / height - 0.5) * z * YtoZ,
       -z + zOffset,
       1.0
@@ -50,13 +59,14 @@ const FRAGMENT_WHITE = `
   uniform sampler2D map;
   varying vec2 vUv;
   varying float vDepth;
+  varying float vFade;
   void main() {
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
     float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
     vec3 tinted = mix(color.rgb, vec3(lum * 1.3), 0.6);
-    float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
+    float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
     gl_FragColor = vec4(tinted, alpha);
   }
 `;
@@ -66,12 +76,13 @@ const FRAGMENT_GREEN = `
   uniform sampler2D map;
   varying vec2 vUv;
   varying float vDepth;
+  varying float vFade;
   void main() {
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
     vec3 tinted = mix(color.rgb, vec3(0.0, color.g * 1.2, color.b * 0.8), 0.3);
-    float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
+    float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
     gl_FragColor = vec4(tinted, alpha);
   }
 `;
@@ -111,6 +122,8 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     const W = 640;
     const H = 480;
+    // Extended grid: wider for hero variant to fill widescreen
+    const GRID_W = isGreen ? W : Math.round(W * 2.2);
 
     // Scene
     const scene = new THREE.Scene();
@@ -143,12 +156,13 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     texture.magFilter = THREE.NearestFilter;
     texture.generateMipmaps = false;
 
-    // Geometry: grid of vertices, one per pixel
+    // Geometry: grid of vertices — extended width for hero to fill viewport
     const geometry = new THREE.BufferGeometry();
-    const vertices = new Float32Array(W * H * 3);
+    const totalVerts = GRID_W * H;
+    const vertices = new Float32Array(totalVerts * 3);
     for (let i = 0, j = 0; i < vertices.length; i += 3, j++) {
-      vertices[i] = j % W;
-      vertices[i + 1] = Math.floor(j / W);
+      vertices[i] = j % GRID_W;
+      vertices[i + 1] = Math.floor(j / GRID_W);
       vertices[i + 2] = 0;
     }
     geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
@@ -159,6 +173,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         map: { value: texture },
         width: { value: W },
         height: { value: H },
+        gridWidth: { value: GRID_W },
         nearClipping: { value: 850 },
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
