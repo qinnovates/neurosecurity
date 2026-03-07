@@ -395,12 +395,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         </div>
       )}
 
-      {/* Left fade gradient for hero variant — seamless blend into page background */}
-      {!isGreen && fullBleed && (
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(to right, #050a08 0%, #050a08 10%, transparent 55%)',
-        }} />
-      )}
+
 
       {/* Watermark */}
       <div className="absolute bottom-3 right-3 pointer-events-none z-10" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
