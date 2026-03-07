@@ -176,9 +176,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 10000);
     camera.position.set(0, 0, 500);
-    // Shift orbit center right for hero so point cloud sits on right half of viewport
-    const centerX = isGreen ? 0 : 400;
-    const center = new THREE.Vector3(centerX, 0, -1000);
+    const center = new THREE.Vector3(0, 0, -1000);
 
     // Video element with webm + mp4 fallback
     const video = document.createElement('video');
@@ -328,7 +326,15 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       camera.position.x = center.x + orbitRadius * Math.sin(orbit.theta) * Math.cos(orbit.phi);
       camera.position.y = center.y + orbitRadius * Math.sin(orbit.phi);
       camera.position.z = center.z + orbitRadius * Math.cos(orbit.theta) * Math.cos(orbit.phi);
+
       camera.lookAt(center);
+
+      // Shift the entire render to the right margin without changing camera angle
+      // projectionMatrix[12] is the X translation in clip space (-1 to 1)
+      // Negative value slides content right on screen
+      if (!isGreen && fullBleed) {
+        camera.projectionMatrix.elements[12] += -0.5;
+      }
 
       renderer.render(scene, camera);
       frameRef.current = requestAnimationFrame(animate);
@@ -392,7 +398,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
   const hudBottom = isGreen ? 'Object recognition via BCI visual cortex stimulation' : 'BCI visual cortex rendering pipeline';
 
   return (
-    <div className={`relative w-full overflow-hidden ${fullBleed ? '' : 'rounded-2xl'} ${className}`} style={{
+    <div className={`relative w-full ${fullBleed ? '' : 'overflow-hidden rounded-2xl'} ${className}`} style={{
       background: '#050a08',
       ...(fullBleed ? {} : { border: `1px solid ${hud.border}`, height: '480px' }),
       ...(fullBleed ? { height: '100%' } : {}),
