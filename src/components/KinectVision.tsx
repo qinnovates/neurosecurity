@@ -104,14 +104,14 @@ const FRAGMENT_WHITE = `
     col.r += leafMask * 0.4;
     col.g *= 1.0 - leafMask * 0.15;
 
-    // Depth-based purple/blue layers when fisheye is active
+    // Depth-based purple/blue layers — only on mouse move, only on bright pixels
+    float brightness = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    float brightMask = smoothstep(0.05, 0.2, brightness); // skip dark/flat areas
     vec3 deepBlue = vec3(0.15, 0.2, 0.8);
     vec3 purple = vec3(0.55, 0.15, 0.85);
-    // Near vertices get blue, far get purple
     vec3 depthTint = mix(deepBlue, purple, vDepth);
-    col = mix(col, depthTint, uFisheye * 0.45);
-    // Brighten edges during distortion for glow effect
-    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2;
+    col = mix(col, depthTint, uFisheye * 0.45 * brightMask);
+    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2 * brightMask;
 
     float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
     gl_FragColor = vec4(col, alpha);
