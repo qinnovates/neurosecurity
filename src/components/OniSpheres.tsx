@@ -1,4 +1,4 @@
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -13,7 +13,6 @@ const LAYERS = [
   { id: 'N7', r: 0.82, c: [0.80, 0.55, 0.75], fp: 2.0, label: 'Cortical Target' },
 ];
 
-// Vertex shader: compute fresnel + pass world position
 const VERT = `
   varying vec3 vNormal;
   varying vec3 vViewPos;
@@ -27,7 +26,6 @@ const VERT = `
   }
 `;
 
-// Fragment shader: fresnel glow + electric pool ripple + thin-film blend
 const FRAG = `
   uniform vec3 uColor;
   uniform float uOpacity;
@@ -46,7 +44,6 @@ const FRAG = `
     float fresnel = pow(1.0 - NdotV, uFresnelPower);
     float shimmer = 1.0 + 0.08 * sin(uTime * 2.0 + vNormal.x * 12.0);
 
-    // Standard fresnel path
     float ripple1 = sin(vWorldPos.x * 4.0 + uTime * 0.8) * cos(vWorldPos.z * 3.5 + uTime * 0.6);
     float ripple2 = sin(vWorldPos.x * 6.0 - uTime * 0.5 + 1.7) * cos(vWorldPos.z * 5.0 + uTime * 0.4);
     float poolEffect = 0.5 + 0.3 * ripple1 + 0.2 * ripple2;
@@ -55,7 +52,6 @@ const FRAG = `
     vec3 stdCol = uColor * (1.0 + fresnel * uGlowIntensity);
     float stdAlpha = fresnel * uOpacity * shimmer * electricPool;
 
-    // Bubble thin-film path
     float thickness = NdotV * 2.5
       + sin(vWorldPos.x * 3.0 + vWorldPos.z * 2.0 + uTime * 0.2) * 0.3
       + sin(vWorldPos.y * 4.0 - vWorldPos.x * 1.5 + uTime * 0.15) * 0.2;
@@ -69,21 +65,17 @@ const FRAG = `
     bubbleCol += mix(filmColor, vec3(1.0), 0.5) * rim * 0.6;
     float bubbleAlpha = rim * 0.5 + (1.0 - fresnel) * 0.08 + fresnel * 0.35 * uOpacity;
 
-    // Purple inner glow on inner layers
     float purplePulse = 0.5 + 0.5 * sin(uTime * 0.5 + vWorldPos.y * 2.0);
     bubbleCol += vec3(0.85, 0.15, 0.95) * purplePulse * (1.0 - fresnel) * uBubbleMix * 1.4;
 
-    // White core glow
     float coreGlow = pow(NdotV, 3.0) * uBubbleMix * 0.35;
     bubbleCol += vec3(1.0) * coreGlow;
     bubbleAlpha += coreGlow * 0.3;
 
-    // White outer rim glow
     float outerRim = pow(fresnel, 1.5) * uBubbleMix * 0.7;
     bubbleCol += vec3(1.0) * outerRim;
     bubbleAlpha += outerRim * 0.5;
 
-    // Blend by bubble mix
     vec3 col = mix(stdCol, bubbleCol, uBubbleMix);
     float alpha = mix(stdAlpha, bubbleAlpha, uBubbleMix);
 
@@ -91,11 +83,15 @@ const FRAG = `
   }
 `;
 
-function Shell({ layer, index }: { layer: typeof LAYERS[number]; index: number }) {
+// Individual shell with scroll-driven Y offset
+function Shell({ layer, index, scrollExpand }: {
+  layer: typeof LAYERS[number];
+  index: number;
+  scrollExpand: React.MutableRefObject<number>;
+}) {
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const meshRef = useRef<THREE.Mesh>(null);
 
-  // Inner layers get more bubble effect
   const bubbleMix = useMemo(() => {
     return Math.max(0, 0.80 - (LAYERS.length - 1 - index) * 0.13);
   }, [index]);
@@ -112,6 +108,14 @@ function Shell({ layer, index }: { layer: typeof LAYERS[number]; index: number }
   useFrame(({ clock }) => {
     if (matRef.current) {
       matRef.current.uniforms.uTime.value = clock.elapsedTime;
+    }
+    if (meshRef.current) {
+      // Scroll-driven vertical expansion: outer layers move up, inner layers move down
+      // Center index (I0, index 3) stays put. Layers fan out from center.
+      const centerIdx = 3; // I0 is the gateway
+      const offset = (index - centerIdx) * scrollExpand.current * 0.6;
+      const targetY = offset;
+      meshRef.current.position.y += (targetY - meshRef.current.position.y) * 0.08;
     }
   });
 
@@ -132,7 +136,6 @@ function Shell({ layer, index }: { layer: typeof LAYERS[number]; index: number }
   );
 }
 
-// Ambient dust particles
 function Dust({ count = 200 }: { count?: number }) {
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
@@ -162,10 +165,9 @@ function Dust({ count = 200 }: { count?: number }) {
   );
 }
 
-function Scene() {
+function Scene({ scrollExpand }: { scrollExpand: React.MutableRefObject<number> }) {
   const groupRef = useRef<THREE.Group>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const { camera } = useThree();
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -178,20 +180,16 @@ function Scene() {
 
   useFrame((_, delta) => {
     if (groupRef.current) {
-      // Slow auto-rotation
       groupRef.current.rotation.y += delta * 0.08;
-
-      // Mouse parallax on the group
       const tx = mouseRef.current.x * 0.3;
       const ty = -mouseRef.current.y * 0.3;
-      groupRef.current.rotation.x += (ty - groupRef.current.rotation.x) * 0.02;
+      groupRef.current.rotation.x += (ty * 0.5 - groupRef.current.rotation.x) * 0.02;
       groupRef.current.position.x += (tx - groupRef.current.position.x) * 0.02;
     }
   });
 
   return (
     <>
-      {/* Lighting matching original ONI */}
       <ambientLight intensity={0.3} color="#1a2744" />
       <pointLight position={[4, 3, 5]} intensity={2.0} color="#3b82f6" distance={25} />
       <pointLight position={[-3, -2, 3]} intensity={1.2} color="#8b5cf6" distance={20} />
@@ -200,20 +198,48 @@ function Scene() {
 
       <group ref={groupRef} position={[0, 0.5, 0]}>
         {LAYERS.map((layer, i) => (
-          <Shell key={layer.id} layer={layer} index={i} />
+          <Shell key={layer.id} layer={layer} index={i} scrollExpand={scrollExpand} />
         ))}
       </group>
 
       <Dust />
-
-      <fog attach="fog" args={['#050a14', 5, 15]} />
+      <fog attach="fog" args={['#050a14', 5, 18]} />
     </>
   );
 }
 
 export default function OniSpheres({ className = '' }: { className?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollExpand = useRef(0);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      // Calculate how far through the section we've scrolled
+      // 0 = section just entered viewport from bottom
+      // 1 = section is leaving viewport from top
+      const sectionHeight = rect.height;
+      const scrolled = (vh - rect.top) / (sectionHeight + vh);
+      const progress = Math.max(0, Math.min(1, scrolled));
+
+      // Expansion curve: start collapsed (0), expand mid-scroll, collapse again at end
+      // Bell curve: peaks at 0.5
+      const bell = Math.sin(progress * Math.PI);
+      scrollExpand.current = bell * 2.5; // max expansion multiplier
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // initial
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <div className={className} style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+    <div ref={containerRef} className={className} style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
       <Canvas
         camera={{ position: [0, 1.07, 7.87], fov: 40, near: 0.1, far: 100 }}
         dpr={[1, 2]}
@@ -224,9 +250,9 @@ export default function OniSpheres({ className = '' }: { className?: string }) {
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
         }}
-        style={{ background: '#050a14' }}
+        style={{ background: 'transparent' }}
       >
-        <Scene />
+        <Scene scrollExpand={scrollExpand} />
       </Canvas>
     </div>
   );

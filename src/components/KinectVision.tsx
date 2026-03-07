@@ -3,6 +3,7 @@ import * as THREE from 'three';
 
 interface Props {
   className?: string;
+  fullBleed?: boolean;
 }
 
 // Vertex shader: displace vertices based on video luminance (Kinect depth style)
@@ -66,7 +67,7 @@ const FRAGMENT_SHADER = `
   }
 `;
 
-export default function KinectVision({ className = '' }: Props) {
+export default function KinectVision({ className = '', fullBleed = false }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const frameRef = useRef<number>(0);
@@ -250,10 +251,10 @@ export default function KinectVision({ className = '' }: Props) {
   }, []);
 
   return (
-    <div className={`relative w-full rounded-2xl overflow-hidden ${className}`} style={{
+    <div className={`relative w-full overflow-hidden ${fullBleed ? '' : 'rounded-2xl'} ${className}`} style={{
       background: '#050a08',
-      border: '1px solid rgba(0,255,136,0.15)',
-      height: '480px',
+      ...(fullBleed ? {} : { border: '1px solid rgba(0,255,136,0.15)', height: '480px' }),
+      ...(fullBleed ? { height: '100%' } : {}),
     }}>
       {/* Three.js canvas */}
       <div ref={containerRef} style={{ position: 'absolute', inset: 0 }} />
