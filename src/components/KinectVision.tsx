@@ -66,7 +66,7 @@ const VERTEX_SHADER = `
   }
 `;
 
-// Fragment shader: white luminance variant
+// Fragment shader: color variant with boosted saturation
 const FRAGMENT_WHITE = `
   uniform sampler2D map;
   varying vec2 vUv;
@@ -76,10 +76,12 @@ const FRAGMENT_WHITE = `
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
+    // Boost saturation and brightness for vivid depth aesthetic
     float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-    vec3 tinted = mix(color.rgb, vec3(lum * 1.3), 0.6);
-    float alpha = smoothstep(0.5, 0.2, dist) * 0.7 * vFade;
-    gl_FragColor = vec4(tinted, alpha);
+    vec3 saturated = mix(vec3(lum), color.rgb, 1.4); // 40% saturation boost
+    vec3 bright = saturated * 1.2 + vec3(0.05); // slight lift
+    float alpha = smoothstep(0.5, 0.2, dist) * 0.75 * vFade;
+    gl_FragColor = vec4(bright, alpha);
   }
 `;
 
