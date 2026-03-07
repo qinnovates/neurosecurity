@@ -117,6 +117,7 @@ This work investigates whether the Quantified Interconnection Framework (QIF) an
 
 | Date | Entry | Topic |
 |------|-------|-------|
+| 2026-03-07 | [Entry 19](#entry-19-neuroethics-principles) | Neuroethics Principles: equity-first framing, enhancement trap, right to remain unaugmented |
 | 2026-02-25 | [Entry 18](#entry-18-niss-v11-cr-cd) | NISS v1.1: CG → CR + CD migration |
 | 2026-02-24 | [Entry 17](#entry-17-crb-cross-ai) | CRB Cross-AI Review: ChatGPT + Gemini |
 | 2026-02-24 | [Entry 16](#entry-16-crb-mc-site) | CRB Monte Carlo Uncertainty + Site Integration |
@@ -135,6 +136,98 @@ This work investigates whether the Quantified Interconnection Framework (QIF) an
 | 2026-02-24 | [Entry 3](#entry-3-neurosecurity-score) | The Neurosecurity Score: Architecture and Naming |
 | 2026-02-24 | [Entry 2](#entry-2-research-foundations) | Research Foundations: What the Field Has and Hasn't Done |
 | 2026-02-24 | [Entry 1](#entry-1-the-reframe) | The Reframe: From Security-First to Rights-First |
+
+---
+
+<a id="entry-19-neuroethics-principles"></a>
+## Entry 19: Neuroethics Principles — Equity-First Framing, Enhancement Trap, Right to Remain Unaugmented {#entry-19-neuroethics-principles}
+
+**Date:** 2026-03-07, ~23:50
+**Classification:** HYPOTHESIS — original ethical framework synthesis, not validated or peer-reviewed
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** [QIF Derivation Log Entry 89](QIF-DERIVATION-LOG.md#entry-89-neuroethics-to-bci-vision) (neuroethics-to-BCI-vision arc, color science, equity-first framing), [QIF Entry 83](QIF-DERIVATION-LOG.md#entry-83-unaltered-vs-self-originating) (CA resolved as MI extension), [QIF Entry 68](QIF-DERIVATION-LOG.md#entry-68-ca-folded-into-mi) (CA folded into MI), [QIF Entry 58](QIF-DERIVATION-LOG.md#entry-58-neurorights-cross-validation) (neurorights cross-validation), [Neurorights Entry 12](#entry-12-alignment) (UNESCO/OECD/Chile alignment)
+
+### Context
+
+Kevin had a vision the night of March 6. The story arc for the entire project crystallized: it starts with neuroethics and ends with BCI vision. He began writing what he calls a "neuroethics bylaw" — a set of principles that extend existing neurorights proposals with constructive obligations. The naming may evolve (bylaw, principle, obligation, covenant), but the core argument is original.
+
+This entry documents the derivation of five neuroethics principles synthesized from Kevin's raw notes (March 6-7), the UNESCO policy proposal draft, the QIF derivation log, and the existing neurorights literature.
+
+### Kevin's Raw Notes (Typos and Grammar Corrected, Meaning Preserved)
+
+#### Note 1 (2026-03-06):
+
+> If BCIs can help cure blindness, then it is our rights as our rights, duties, responsibilities, and sole proprietorships of those who are protected under the neuroethics act(s) to help those who are vulnerable. Under [section X of Y article, page #, and cite it as an academic would], in neurorights and neuroethics publications [list related], it is our duty as fellow people who are willing and able to help others. Where "willing and able" is defined as those who want to and aspire to make a change from their heart, mind, and soul to help those vulnerable and physically deemed clinical-use FDA for BCIs — such as loss of vision and other uses in research that's approved today — we should protect their neurorights. I hope one day this becomes influence for some policy work and actual lawyers writing from it. There are so many angles this can be addressed as policies, hopefully after much-needed strict collaboration and review, to UNESCO. Needs a lot of work. This is my thesis too.
+
+> What I forgot to add is the purpose I started mentioning above is a basic simple question: if blind people are starting to see, how do we let them see the world AND the internet clearly? I ponder this philosophically as well, because what we learned from LLM model advancements lately is that AI was first able to identify letters, then images better than context initially, back in year X (reference MIT OCW 9.13). Then images for image generation models seemed to be different because of the LLMs being trained on a different set of datasets and algorithms. I wonder why image rendering isn't a separate module for some AI models, and then build compression so it runs like a compressed side process. When I say compression I mean like vector image scaling (vector in the image conversion sense) so it scales down while remaining lossless. Can use existing compression that already exists.
+
+> Wow — this also answers my idea of Runemate.
+
+> All of this ultimately leads to one day finding a way to allow blind people to see the internet, as I believe that's the next step as neuroethicists — to come together and collaborate to help those who need it the most (needs defining this scope, because where does the boundary lie). Also ethically, which groups are to say, if any at all?
+
+> I must write this as carefully as possible using my neuroethics guardrails.
+
+> What is an overstatement per Morse's [include citation] if technological trends, research space, industry intel, and financial funding all allude to the medical advancements? For instance, BCIs are curing vision, there are different ways — what is vision, and how do we make it inclusive for them? At what point also does it become supervision?
+
+#### Note 2 (2026-03-06):
+
+> Vision is already being repaired, and if we can map 3D environments using phones today — with wifi, lidar, anything waves and frequency, even sound like sonar — and that's how lidar on cars works, then that's probably what's already the direction most companies are heading. What would that look like in the visual cortex if it's a signal stimulated by your own neurons but with the assistance of a BCI? I presume having a car company that uses lidar and makes BCIs is totally doing this already, thus the other way to help them do it quicker is to look at angles where we know how Microsoft Kinect works [make one of the visualizations on the BCI site show the Three.js of Microsoft Kinect of a dog, and text showing "for blind and seeing eye dog," and examples using AI OCR to render more realistic-looking faces in real time]. Idea I just had was to make it easier to use Kinect to test, probably because there are already blogs. But I do know our eyes can generate what we can actually see because that's how the visual cortex works. It's more of a matter of how, and at what point does it become dangerous? That's what I tried to answer with TARA, and I needed a framework to try to see what the implications are from both sides. At what point do the risks outweigh the cons — I intentionally did not weigh this or do any math because it is not my say. NISS was phase 1 as it was the lowest-hanging fruit from a security perspective I could tackle with a higher confidence of having the proper framework for equation. However, I'm just basing it off of what security implications and only referencing DSM potentials as probable but not definitive derivatives. The probability is greater than 0, hence it warrants investigation per my hypothesis. There are many other factors.
+
+#### Note 3 (2026-03-07):
+
+> I had a vision last night. Now I know how to paint the story and get to the finish line. Starts with neuroethics and ends with my BCI vision. I started writing what I call neuroethics bylaw. I'm not sure if that's the proper naming for it, but given the neuroethics neurorights which aim to provide equal access, it is implicit that those who are willing and able in neurotechnology research should start with equity — by giving those who live in a world so connected the same freedom to explore our magnificent real world through the technological tools that allow us to connect first.
+
+> My main concern is at which point does this become too much of an advantage, like a superhuman vision that can be used for inhumane reasons. Per social pressure: there is concern that "equal access" might inadvertently create a "right to be enhanced," pressuring individuals to use these technologies just to remain competitive in work or education.
+
+### The Five Principles Derived
+
+From these notes, the UNESCO policy proposal, and the QIF derivation log, five neuroethics principles were synthesized. Full text is in `drafts/Neuroethics-Principles-DRAFT.md`.
+
+**1. Equity Before Enhancement**
+Clinical restoration before elective augmentation. Those who need neurotechnology most should not be an afterthought in a market racing toward enhancement products.
+- Grounded in: Yuste "Fair Access" (2021), CRPD Art. 9, Beauchamp & Childress justice principle
+
+**2. Digital Accessibility as a Neurorights Obligation**
+If we restore vision but leave patients unable to navigate the digital world, we have given them half a world. BCI-restored vision creates a perceptual category no existing accessibility standard addresses.
+- Grounded in: CRPD Arts. 9 and 21, UNESCO 2025 Recommendation, phosphene research (Fernandez et al. 2021, Towle et al. 2021)
+
+**3. Perceptual Sovereignty**
+No entity should have unilateral control over content rendered to a patient's visual cortex without informed, ongoing, revocable consent. Whoever controls the rendering pipeline controls reality.
+- Grounded in: Cognitive Liberty (Ienca), Mental Privacy (both frameworks), Chile Ley 21.383
+- Connected to: Kevin's question "At what point does it become supervision?"
+
+**4. The Right to Remain Unaugmented**
+Equal access means the option is available, not mandatory. No individual should face discrimination or competitive disadvantage for choosing not to adopt neurotechnology.
+- The enhancement trap: "equal access" can become coerced adoption when the unaugmented face social or economic penalty (the smartphone precedent)
+- The superhuman boundary: same hardware that restores sight can perceive infrared, record continuously, process faces at distance. The boundary is the capability envelope, not the technology.
+- Grounded in: Cognitive Liberty (Ienca — right to refuse), Bublitz (2022) anti-inflationism, Jotterand (2008) enhancement pressure
+- Gap identified: Chile's law protects against discrimination based on neural data but does not address discrimination against the unaugmented
+
+**5. Defensive Framing, Constructive Obligation**
+Existing neurorights are defensive (do not read, do not write, do not coerce, do not alter). This principle adds constructive obligations: ensure digital accessibility, sequence restoration before enhancement, protect the unaugmented.
+- Grounded in: UNESCO UDBHR Art. 8, Beauchamp & Childress beneficence, CRPD Art. 26
+
+### Key Insight: The Dual Obligation
+
+The missing piece in every existing neurorights framework is the dual-leg requirement:
+1. Those who want access should have it equitably.
+2. Those who refuse it should face no disadvantage for refusing.
+
+Neither Ienca nor Yuste explicitly operationalizes both legs. Cognitive Liberty contains the seed (right to accept or refuse), but it protects the decision, not the person from the consequences of the decision in a market that has moved on.
+
+### Open Questions
+
+- Is "bylaw" the right term? Bylaws are internal organizational rules. "Principles," "obligations," or "covenant" may fit better for a public-facing ethical framework.
+- How does the constructive obligation framing interact with Bublitz's anti-inflationism critique? Does adding positive obligations inflate neurorights beyond justifiable scope?
+- Where is the threshold between therapeutic restoration and superhuman enhancement? Defined by capability, intent, or outcome?
+- How do you enforce "no penalty for refusal" when the advantage is economic and emergent, not legally mandated?
+- The Runemate connection: Kevin's Note 1 connects vector-image compression to cortical prosthetic content delivery. This is an engineering hypothesis linking NSP/Runemate to the accessibility obligation. Needs development.
+
+### AI Collaboration
+
+- **Model:** Claude Opus 4.6
+- **Role:** Co-derivation (literature grounding, fact-checking color science claims, structuring principles from raw notes, derivation logging)
+- **Human-Decided:** The vision arc (neuroethics to BCI vision), the equity-first framing, the "bylaw" concept, the enhancement trap concern, the dual-leg requirement (access + refusal protection), the superhuman boundary question, the Runemate connection
 
 ---
 

@@ -15,6 +15,7 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails
 | Entry | Topic | Link |
 |-------|-------|------|
+| 89 | Vision: neuroethics to BCI vision arc, color science for cortical prosthetics, equity-first neurorights | [Entry 89](#entry-89-neuroethics-to-bci-vision) |
 | 88 | S-band relabel: physics regime + spatial scale, host compute gap closed | [Entry 88](#entry-88-s-band-relabel) |
 | 87 | Framework page rewrite: honest derivation, guardrail-compliant prose | [Entry 87](#entry-87-framework-page-rewrite) |
 | 86 | Epistemic reckoning: research compilation complete, major overhaul needed | [Entry 86](#entry-86-epistemic-reckoning) |
@@ -379,6 +380,89 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 89: Neuroethics to BCI Vision — The Story Arc, Color Science, and Equity-First Neurorights {#entry-89-neuroethics-to-bci-vision}
+
+**Date:** 2026-03-07, ~23:50
+**Classification:** HYPOTHESIS (vision statement + design direction, not validated claims)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** [Entry 83](#entry-83-unaltered-vs-self-originating), [Entry 68](#entry-68-ca-folded-into-mi), [Entry 58](#entry-58-neurorights-cross-validation)
+
+### The Vision
+
+Kevin had a vision the night before. The story arc for the entire project crystallized: it starts with neuroethics and ends with BCI vision. The full narrative path from ethical foundations to technical implementation became clear — this is how to paint the story and get to the finish line.
+
+### Color Science for Cortical Prosthetics
+
+The conversation explored what pixel colors are easiest for neural interfaces to produce. Key findings after fact-checking against the literature:
+
+- **Phosphenes from cortical stimulation are predominantly white/yellowish** at standard stimulation levels. At low current, faint colors (yellow, sepia, blue, red, violet) sometimes appear, but they desaturate to white as current increases (Towle et al. 2021, PMID 33339020; Fernandez et al. 2021, PMC8631600).
+- **No implantable device can produce controlled artificial color vision** as of 2024 (PMC11221215). Every active visual prosthesis (Second Sight Orion, Monash Gennaris) is luminance-only.
+- **Green (~555nm) is the most efficient color for human perception** — maximum perceived brightness per watt of radiant power (CIE photopic luminosity function V(lambda), peak 555nm).
+- **Blue is the hardest color to resolve at fine detail** — S-cones are only ~5-10% of retinal cones, and chromatic aberration blurs short wavelengths.
+- **Purple is non-spectral** — no single wavelength produces it. It is a neural construct from simultaneous L-cone and S-cone activation.
+- **Green terminal screens** were primarily a cost/phosphor-persistence choice (P1 phosphor), not an eye sensitivity optimization. NVG green phosphor does optimize for photopic sensitivity.
+
+**Fact-check corrections applied to my initial claims:**
+1. Phosphene color direction was inverted — colors appear at low stimulation, not high.
+2. "Lowest energy" framing was wrong — should be "most efficient." Red photons have lower energy than green.
+3. V1 blob targeting for color is a hypothesis, not established mechanism.
+
+**Implication for NSP content delivery:** Monochrome (luminance-only) is the only realistic output for cortical prosthetics in the near term. Color encoding is a future research frontier.
+
+### Neuroethics Bylaw — Equity-First Framing
+
+Kevin began writing what he calls a "neuroethics bylaw." The naming may evolve, but the core argument:
+
+> Given neurorights' aim to provide equal access, it is implicit that those who are willing and able in neurotechnology research should start with equity — by giving those who live in a world so connected the same freedom to explore the real world through the technological tools that allow us to connect first.
+
+The logic chain:
+1. Yuste's neurorights framework includes "Fair Access to Augmentation" as a proposed right (2021).
+2. If equal access is a neurorights commitment, then equity must be operationalized before augmentation ships — not retrofitted after.
+3. The obligation runs in both directions: those building neurotechnology owe the connected world equitable access to the physical world that technology mediates.
+4. This reframes neurorights from a defensive posture (protect the brain) to a constructive obligation (ensure the benefits reach everyone).
+
+**Classification:** HYPOTHESIS. This is Kevin's original framing. The connection between neurorights equity provisions and proactive access obligations has not been formally argued in the literature. It is a novel ethical argument that needs development and peer engagement.
+
+### The Enhancement Trap and the Right to Remain Unaugmented
+
+Kevin raised the critical concern: at what point does "equal access" become coerced adoption? If neurotechnology confers superhuman capabilities, the social pressure to augment could make refusal a competitive death sentence.
+
+**The two-sided problem:**
+1. **Superhuman threshold:** A cortical prosthetic that restores sight is therapeutic. The same hardware tuned to perceive infrared, process faces at distance, or record continuously is a surveillance capability. The boundary is not the technology — it is the capability envelope. Same mechanism, different parameters.
+2. **Social coercion:** "Equal access" can inadvertently create a "right to be enhanced," pressuring individuals to adopt neurotechnology to remain competitive in work, education, or military contexts. This already happened with smartphones — nobody is legally required to own one, but try functioning without one.
+
+**Existing framework coverage:**
+- Yuste's "Fair Access" prevents inequality (only the rich get augmented) but does not address the inverse: everyone being compelled to augment.
+- Ienca's Cognitive Liberty cuts both ways — the right to use neurotechnology AND the right to refuse it. This is the firewall against coerced adoption.
+- Chile's law protects against discrimination based on neural data but does not yet address discrimination against the unaugmented.
+- Bublitz (2022) warns against rights inflation — but the right to refuse augmentation without penalty may already be covered by Cognitive Liberty if properly interpreted.
+- Jotterand (2008) raises the enhancement pressure concern directly in the context of cognitive enhancement and social justice.
+
+**The gap Kevin's framework could fill:**
+The missing piece in every existing framework is an explicit right to remain unaugmented without penalty. Equal access means the option is available. It does not mean the option is mandatory. The equity-first framing needs both legs:
+
+1. Those who want access should have it equitably.
+2. Those who refuse it should face no disadvantage for refusing.
+
+That second leg — protection of the unaugmented — is the one nobody has operationalized. This is where Kevin's "bylaw" concept becomes distinct from existing neurorights proposals.
+
+**Classification:** HYPOTHESIS. The enhancement trap is well-documented in bioethics literature (Jotterand, Bostrom, Savulescu). The specific framing of a dual obligation (equitable access + protected refusal) as a single governance principle is Kevin's original synthesis.
+
+**Open questions:**
+- Is "bylaw" the right term? In governance, bylaws are internal rules of an organization. "Principles," "obligations," or "commitments" may be more appropriate for a public-facing ethical framework.
+- How does this relate to Bublitz's (2022) anti-inflationism critique? Adding equity obligations could be seen as expanding neurorights scope beyond what existing human rights cover.
+- Is there a distinction between "access to neurotechnology" (Yuste's framing) and "access to the world through technology" (Kevin's broader framing)?
+- Where is the threshold between therapeutic restoration and superhuman enhancement? Is it defined by capability (what it can do), intent (why it was implanted), or outcome (what advantage it confers)?
+- How do you enforce "no penalty for refusal" when the advantage is economic and emergent, not legally mandated? Smartphones were never required — the market made them mandatory.
+
+### AI Collaboration
+
+- **Model:** Claude Opus 4.6
+- **Role:** Co-derivation (color science research, fact-checking, derivation logging, enhancement trap analysis)
+- **Human-Decided:** The vision arc (neuroethics to BCI vision), the equity-first framing, the "bylaw" concept, the connection between neurorights equal access and proactive obligation, the superhuman concern, the dual-leg requirement (access + refusal protection)
 
 ---
 
