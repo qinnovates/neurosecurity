@@ -26,7 +26,7 @@ const VERTEX_SHADER = `
   const float XtoZ = 1.11146;
   const float YtoZ = 0.83359;
 
-  uniform float xOffset;
+  uniform float concaveStrength;
 
   void main() {
     // Raw UV spans full extended grid
@@ -44,13 +44,20 @@ const VERTEX_SHADER = `
 
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
+    // Shift coordinate origin to right-aligned (0 = right edge, -1 = left edge)
     float xNorm = position.x / gridWidth - 0.5;
     float yNorm = position.y / height - 0.5;
 
+    // Asymmetric concave warp: left side curves more, right side subtle
+    float leftDist = max(-xNorm, 0.0);  // 0 at center/right, up to 0.5 at left edge
+    float rightDist = max(xNorm, 0.0);  // 0 at center/left, up to 0.5 at right edge
+    float warpZ = leftDist * leftDist * concaveStrength * 14.0   // left: 70% of original
+                + rightDist * rightDist * concaveStrength * 4.0;  // right: 20% intensity
+
     vec4 pos = vec4(
-      (xNorm + xOffset) * z * XtoZ,
+      xNorm * z * XtoZ,
       yNorm * z * YtoZ,
-      -z + zOffset,
+      -z + zOffset + warpZ,
       1.0
     );
 
@@ -135,8 +142,10 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     // Scene
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 10000);
-    camera.position.set(0, 0, 500);
-    const center = new THREE.Vector3(0, 0, -1000);
+    // Shift camera + orbit center right for hero so cloud fills right side
+    const xShift = isGreen ? 0 : 350;
+    camera.position.set(xShift, 0, 500);
+    const center = new THREE.Vector3(xShift, 0, -1000);
 
     // Video element with webm + mp4 fallback
     const video = document.createElement('video');
@@ -185,7 +194,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
         zOffset: { value: 1000 },
-        xOffset: { value: isGreen ? 0 : 0.35 },
+        concaveStrength: { value: isGreen ? 0 : 4000 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
