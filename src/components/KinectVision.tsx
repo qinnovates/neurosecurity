@@ -44,34 +44,32 @@ const VERTEX_SHADER = `
   }
 `;
 
-// Fragment shader: natural color with mouse-driven blue/purple/red tint
+// Fragment shader: color with blue/magenta depth layers on mouse move
 const FRAGMENT_WHITE = `
   uniform sampler2D map;
-  uniform vec2 uMousePos;
-  uniform float uMouseActive;
+  uniform float uFisheye;
   varying vec2 vUv;
   varying float vDepth;
   void main() {
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     vec4 color = texture2D(map, vUv);
-    float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-    vec3 col = mix(color.rgb, vec3(lum * 1.3), 0.6);
+    vec3 col = color.rgb * 1.1 + vec3(0.03);
 
-    // Mouse-position-driven color: blue on left, purple in center, red on right
-    // Y axis blends warm (top) to cool (bottom)
-    float mx = uMousePos.x * 0.5 + 0.5; // 0..1
-    float my = uMousePos.y * 0.5 + 0.5; // 0..1
-    vec3 blue = vec3(0.1, 0.15, 0.9);
-    vec3 purple = vec3(0.6, 0.1, 0.85);
-    vec3 red = vec3(0.9, 0.1, 0.2);
-    vec3 tintColor = mix(mix(blue, purple, mx), red, mx * mx);
-    // Y adds warmth — top is warmer
-    tintColor = mix(tintColor, vec3(0.9, 0.3, 0.15), (1.0 - my) * 0.3);
+    // Red leaf tint
+    float greenness = color.g - max(color.r, color.b);
+    float leafMask = smoothstep(0.02, 0.15, greenness);
+    col.r += leafMask * 0.4;
+    col.g *= 1.0 - leafMask * 0.15;
 
-    // Apply tint based on depth and mouse activity
-    float depthFactor = smoothstep(0.1, 0.6, vDepth);
-    col = mix(col, col * 0.6 + tintColor * 0.4, uMouseActive * depthFactor * 0.6);
+    // Blue/magenta depth layers on mouse move (skip dark pixels)
+    float brightness = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    float brightMask = smoothstep(0.05, 0.2, brightness);
+    vec3 deepBlue = vec3(0.15, 0.2, 0.8);
+    vec3 magenta = vec3(0.55, 0.15, 0.85);
+    vec3 depthTint = mix(deepBlue, magenta, vDepth);
+    col = mix(col, depthTint, uFisheye * 0.45 * brightMask);
+    col += depthTint * uFisheye * (1.0 - vDepth) * 0.2 * brightMask;
 
     float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
     gl_FragColor = vec4(col, alpha);
@@ -180,8 +178,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
         zOffset: { value: 1000 },
-        uMousePos: { value: new THREE.Vector2(0, 0) },
-        uMouseActive: { value: 0 },
+        uFisheye: { value: 0 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
@@ -227,23 +224,18 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     });
     resizeObserver.observe(container);
 
-    // Static camera — no orbit, no movement
+    // Static camera — no orbit
     camera.lookAt(center);
-    let mouseActivity = 0;
+    let fisheyeAmount = 0;
 
     const animate = () => {
-      // Track mouse activity for color effect intensity
+      // Mouse speed drives blue/magenta color intensity
       const mouseSpeed = Math.sqrt(mouseRef.current.x ** 2 + mouseRef.current.y ** 2);
-      const targetActivity = Math.min(mouseSpeed * 2.0, 1.0);
-      mouseActivity += (targetActivity - mouseActivity) * 0.08;
+      const targetFisheye = Math.min(mouseSpeed * 1.5, 1.0);
+      fisheyeAmount += (targetFisheye - fisheyeAmount) * 0.08;
 
-      // Update color uniforms
       if (materialRef.current) {
-        materialRef.current.uniforms.uMousePos.value.set(
-          mouseRef.current.x,
-          mouseRef.current.y
-        );
-        materialRef.current.uniforms.uMouseActive.value = mouseActivity;
+        materialRef.current.uniforms.uFisheye.value = fisheyeAmount;
       }
 
       renderer.render(scene, camera);
