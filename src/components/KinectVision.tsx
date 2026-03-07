@@ -31,30 +31,15 @@ const VERTEX_SHADER = `
 
   void main() {
     vec2 rawUv = vec2(position.x / gridWidth, position.y / height);
-
-    // Mirror UV for left-side extension: reflects video content abstractly
-    vec2 sampleUv;
-    if (rawUv.x < 0.0) {
-      // Far left: mirror and offset for abstract art
-      sampleUv = vec2(-rawUv.x, rawUv.y + rawUv.x * 0.15);
-    } else if (rawUv.x > 1.0) {
-      // Far right: mirror
-      sampleUv = vec2(2.0 - rawUv.x, rawUv.y);
-    } else {
-      sampleUv = rawUv;
-    }
-    vUv = clamp(sampleUv, vec2(0.0), vec2(1.0));
+    vUv = clamp(rawUv, vec2(0.0), vec2(1.0));
     vec4 color = texture2D(map, vUv);
 
     float depth = dot(color.rgb, vec3(0.299, 0.587, 0.114));
     vDepth = depth;
 
-    // Fade: full in center, gradual fade on extensions
+    // Fade: 1.0 inside video frame, fading to 0.0 at extended edges
     float distFromCenter = abs(rawUv.x - 0.5) * 2.0;
-    // Softer fade on left (abstract art), sharper on right
-    float leftFade = rawUv.x < 0.5 ? 1.0 - smoothstep(0.7, 1.8, distFromCenter) : 1.0;
-    float rightFade = rawUv.x >= 0.5 ? 1.0 - smoothstep(0.85, 1.3, distFromCenter) : 1.0;
-    vFade = min(leftFade, rightFade);
+    vFade = 1.0 - smoothstep(0.85, 1.4, distFromCenter);
 
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
@@ -172,7 +157,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     const W = 640;
     const H = 480;
     // Extended grid: wider for hero variant to fill widescreen
-    const GRID_W = isGreen ? W : Math.round(W * 3.5);
+    const GRID_W = isGreen ? W : Math.round(W * 2.2);
 
     // Scene
     const scene = new THREE.Scene();
@@ -389,8 +374,15 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         </div>
       )}
 
-      {/* Three.js canvas */}
-      <div ref={containerRef} style={{ position: 'absolute', inset: 0 }} />
+      {/* Three.js canvas — hero variant is wider and right-anchored so cloud sits right */}
+      <div ref={containerRef} style={{
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        ...(!isGreen && fullBleed
+          ? { right: 0, width: '160%' }
+          : { left: 0, right: 0 }),
+      }} />
 
       {/* Loading state */}
       {!videoReady && webglSupported && (
