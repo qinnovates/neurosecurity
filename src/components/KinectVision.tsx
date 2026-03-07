@@ -44,15 +44,13 @@ const VERTEX_SHADER = `
 
     float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
 
+    // Shift coordinate origin to right-aligned (0 = right edge, -1 = left edge)
     float xNorm = position.x / gridWidth - 0.5;
     float yNorm = position.y / height - 0.5;
 
-    // Concave warp: edges curve toward viewer (positive Z)
-    float edgeDist = xNorm * xNorm; // 0 at center, 0.25 at edges
-    float warpZ = edgeDist * concaveStrength * 4.0; // push edges forward
-    // Slight vertical curve too for bowl effect
-    float yEdge = yNorm * yNorm;
-    warpZ += yEdge * concaveStrength * 1.5;
+    // Left-only concave warp: only negative xNorm (left side) curves forward
+    float leftDist = max(-xNorm, 0.0); // 0 at center/right, up to 0.5 at left edge
+    float warpZ = leftDist * leftDist * concaveStrength * 20.0;
 
     vec4 pos = vec4(
       xNorm * z * XtoZ,
@@ -190,7 +188,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         farClipping: { value: 4000 },
         pointSize: { value: 2 },
         zOffset: { value: 1000 },
-        concaveStrength: { value: isGreen ? 0 : 800 },
+        concaveStrength: { value: isGreen ? 0 : 4000 },
       },
       vertexShader: VERTEX_SHADER,
       fragmentShader: isGreen ? FRAGMENT_GREEN : FRAGMENT_WHITE,
