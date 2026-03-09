@@ -26,12 +26,12 @@ docs/data/
 scripts/verify/.cache/
 verify-report.json
 
-# Personal / sensitive
-drafts/*-statement-of-purpose*.md
-drafts/*-application-notes*.md
-drafts/*-email*.md
-drafts/*-cvss*.md
-drafts/priddy-learning-academy-speech*.md
+# Personal / sensitive — NEVER commit personal drafts
+# School applications, SOPs, personal emails, speeches, security assessments for individuals
+drafts/*
+!drafts/atlas-case-study-*.yaml
+!drafts/Neuroethics-Bylaws-Comprehensive-Survey.*
+!drafts/Neuroethics-Principles-DRAFT.md
 
 # Local
 _memory/
