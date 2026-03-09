@@ -1,0 +1,329 @@
+{
+  "songName": "Sawdust",
+  "generatedAt": "2026-02-24T11:13:08.092064",
+  "preset": "dark-gospel-blues",
+  "estimatedDurationMs": 300000,
+  "compositionPlan": {
+    "positiveGlobalStyles": [
+      "dark gospel blues",
+      "soulful",
+      "piano-driven",
+      "raw emotion",
+      "D minor",
+      "74 BPM",
+      "voice-first minimal production",
+      "call and response between gravelly male baritone and female blues alto",
+      "Nina Simone meets The Soulful Gentlemen",
+      "spiritual weight",
+      "harmony not unison on duet sections"
+    ],
+    "negativeGlobalStyles": [
+      "pop",
+      "electronic",
+      "bright",
+      "upbeat",
+      "synthetic",
+      "auto-tune",
+      "overproduced",
+      "busy arrangement",
+      "drum machine"
+    ],
+    "sections": [
+      {
+        "sectionName": "Intro",
+        "positiveLocalStyles": [
+          "dark atmospheric piano",
+          "whispered spoken word",
+          "reverb",
+          "D minor sustained chord",
+          "very slow",
+          "spiritual",
+          "two voices in darkness"
+        ],
+        "negativeLocalStyles": [
+          "rhythm section",
+          "drums",
+          "bass",
+          "bright"
+        ],
+        "durationMs": 9000,
+        "lines": [
+          "A dead man wrote it down so we wouldn't forget",
+          "Two thousand years and the dust still hasn't settled"
+        ]
+      },
+      {
+        "sectionName": "Verse 1",
+        "positiveLocalStyles": [
+          "slow gospel blues",
+          "piano and finger snaps only",
+          "gravelly male talk-sing lead",
+          "female blues alto response",
+          "call and response",
+          "intimate",
+          "conversational",
+          "raw"
+        ],
+        "negativeLocalStyles": [
+          "full arrangement",
+          "drums",
+          "organ",
+          "energetic"
+        ],
+        "durationMs": 50000,
+        "lines": [
+          "We come from men who built kingdoms with their hands",
+          "No king's decree just a calloused moon",
+          "Just sawdust and a plan",
+          "That's all they ever had",
+          "Built it from the floor up watched it all come down in flames",
+          "Swept the ash by morning light",
+          "And laid the first stone just the same",
+          "That's what the builders do",
+          "Some men don't talk about the fire they just walk through it and pray",
+          "Some lessons can't be taught baby",
+          "They get burned into your name",
+          "It ain't what happens to you its the story that you choose",
+          "The only thing you ever really own",
+          "Is what you refuse to lose"
+        ]
+      },
+      {
+        "sectionName": "Pre-Chorus 1",
+        "positiveLocalStyles": [
+          "building intensity",
+          "organ swell entering",
+          "piano opening up",
+          "male and female call and response rising",
+          "gospel build"
+        ],
+        "negativeLocalStyles": [
+          "full drums",
+          "saxophone",
+          "sparse"
+        ],
+        "durationMs": 20000,
+        "lines": [
+          "We can't control the weather or the way the river bends",
+          "Can't hold the ones who leave",
+          "Or make the broken whole again",
+          "No we never could",
+          "But we can change the ones who stare back from the glass",
+          "That's the only throne you get to keep",
+          "The only kingdom that will last"
+        ]
+      },
+      {
+        "sectionName": "Chorus 1",
+        "positiveLocalStyles": [
+          "powerful gospel blues chorus",
+          "organ swells",
+          "deep piano chords",
+          "male and female vocals in harmony",
+          "spiritual and heavy",
+          "congregation energy",
+          "raw and powerful"
+        ],
+        "negativeLocalStyles": [
+          "sparse",
+          "quiet",
+          "spoken",
+          "drums",
+          "saxophone"
+        ],
+        "durationMs": 28000,
+        "lines": [
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why you holding on to castle walls you couldn't mould",
+          "Let it go let it fall",
+          "There's sawdust at your feet",
+          "We're all just sawdust in the end",
+          "But God tonight",
+          "We're gonna build again"
+        ]
+      },
+      {
+        "sectionName": "Verse 2",
+        "positiveLocalStyles": [
+          "intimate gospel blues",
+          "piano only",
+          "gravelly male vocals lower register",
+          "strong female blues response teaching",
+          "contemplative",
+          "call and response"
+        ],
+        "negativeLocalStyles": [
+          "full arrangement",
+          "organ",
+          "drums",
+          "energetic"
+        ],
+        "durationMs": 40000,
+        "lines": [
+          "They'll put a crown on everything that doesn't last",
+          "Bow to kings who turn to bones",
+          "Before the century has passed",
+          "Every single one of them",
+          "Every empire every name carved into stone",
+          "Just a man who thought his kingdom would stand forever",
+          "Dying on a borrowed throne",
+          "So why we spending all this time on what we cannot hold",
+          "Trading peace for pride",
+          "Trading presence for control",
+          "And none of it was ever ours",
+          "That mountain they put in our path",
+          "Child that was the path",
+          "And the only wasted life is one we spend afraid"
+        ]
+      },
+      {
+        "sectionName": "Pre-Chorus 2",
+        "positiveLocalStyles": [
+          "building intensity",
+          "organ returning fuller",
+          "gospel build",
+          "male and female call and response",
+          "heavier than first pre-chorus"
+        ],
+        "negativeLocalStyles": [
+          "sparse",
+          "saxophone",
+          "quiet"
+        ],
+        "durationMs": 18000,
+        "lines": [
+          "We can't fix the world or all the noise inside our heads",
+          "Can't undo the years we lost",
+          "Or take back what we said",
+          "No that's gone now",
+          "But we can show up every morning with a steady hand",
+          "Do the work say the prayer",
+          "And trust there's already a plan"
+        ]
+      },
+      {
+        "sectionName": "Chorus 2",
+        "positiveLocalStyles": [
+          "powerful gospel blues chorus heavier",
+          "organ louder",
+          "male and female tight harmony",
+          "more conviction",
+          "building"
+        ],
+        "negativeLocalStyles": [
+          "sparse",
+          "quiet",
+          "drums",
+          "saxophone"
+        ],
+        "durationMs": 28000,
+        "lines": [
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why you holding on to castle walls you couldn't mould",
+          "Let it go let it fall",
+          "There's sawdust at your feet",
+          "We're all just sawdust in the end",
+          "But God tonight",
+          "We're gonna build again"
+        ]
+      },
+      {
+        "sectionName": "Bridge",
+        "positiveLocalStyles": [
+          "stripped confessional",
+          "solo piano single notes",
+          "blues saxophone enters midway low and mournful",
+          "raw vulnerable male vocals near whisper",
+          "strong female blues vocals carrying wisdom",
+          "very intimate",
+          "empty church confessional"
+        ],
+        "negativeLocalStyles": [
+          "full arrangement",
+          "drums",
+          "organ",
+          "energetic",
+          "fast"
+        ],
+        "durationMs": 55000,
+        "lines": [
+          "Some of us lost our legs before we learned to stand",
+          "Some of us lost our minds just trying to understand",
+          "One moment takes apart the man you thought you'd always be",
+          "But who you are was never finished",
+          "That's the mercy and the mystery",
+          "Set the glass down saw the world without the blur",
+          "Turns out the ones we're meant to be",
+          "Were waiting there beneath the hurt",
+          "No castle's built complete without a throne",
+          "And no king keeps his kingdom all alone",
+          "She's the one who guards the moat when the walls come caving in",
+          "The queen that holds the kingdom up from deep within",
+          "Every scar we ever carried we would choose them all again",
+          "Every sleepless night just made us who we are right now",
+          "Amen"
+        ]
+      },
+      {
+        "sectionName": "Final Chorus",
+        "positiveLocalStyles": [
+          "massive gospel climax",
+          "pounding piano",
+          "roaring organ",
+          "full drum hits first time",
+          "wailing blues saxophone",
+          "male and female vocals full power",
+          "cathedral energy",
+          "roles reverse midway female leads male responds",
+          "D minor building to resolution"
+        ],
+        "negativeLocalStyles": [
+          "quiet",
+          "sparse",
+          "restrained"
+        ],
+        "durationMs": 40000,
+        "lines": [
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why you holding on to castle walls you couldn't mould",
+          "Let it go let it fall",
+          "There's sawdust at your feet",
+          "Sawdust in the end but while we're here",
+          "See the king in the mirror finally clear",
+          "They built it once and life reduced it all to ash",
+          "We'll build it back three times",
+          "Yeah",
+          "We're just getting started"
+        ]
+      },
+      {
+        "sectionName": "Outro",
+        "positiveLocalStyles": [
+          "fading to silence",
+          "solo piano",
+          "D minor chord from intro",
+          "spoken male voice",
+          "whispered female response",
+          "long silence",
+          "piano note ring out and decay",
+          "spiritual"
+        ],
+        "negativeLocalStyles": [
+          "drums",
+          "organ",
+          "saxophone",
+          "energetic",
+          "singing"
+        ],
+        "durationMs": 12000,
+        "lines": [
+          "All this for a pile of dust",
+          "But look what you built"
+        ]
+      }
+    ]
+  }
+}
