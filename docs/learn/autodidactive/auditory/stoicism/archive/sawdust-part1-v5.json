@@ -1,0 +1,212 @@
+{
+  "model_id": "music_v1",
+  "composition_plan": {
+    "positive_global_styles": [
+      "dark gospel blues soul with cinematic orchestral weight",
+      "Steinway grand piano driven",
+      "raw emotion",
+      "D minor",
+      "74 BPM",
+      "voice-first production with cinematic and gospel influences",
+      "single male vocalist throughout",
+      "higher register raspy soul tenor voice with grit and raw power",
+      "voice cracks with emotion and feeling",
+      "gravel and honey mixed together",
+      "bluesy soul vocal delivery that aches and soars",
+      "cinematic builds from whisper to cathedral",
+      "staccato upper register piano motif throughout like amber pulses of light",
+      "dramatic tension and release",
+      "epic and intimate at the same time",
+      "everything sung melodically not spoken",
+      "spiritual weight"
+    ],
+    "negative_global_styles": [
+      "pop",
+      "electronic",
+      "bright",
+      "upbeat",
+      "synthetic",
+      "auto-tune",
+      "overproduced",
+      "busy arrangement",
+      "drum machine",
+      "clean polished vocals",
+      "smooth vocals",
+      "disney",
+      "musical theater",
+      "generic",
+      "happy",
+      "spoken word throughout",
+      "female vocals",
+      "duet",
+      "harmony vocals",
+      "backup singers",
+      "deep bass voice",
+      "baritone",
+      "low male voice"
+    ],
+    "sections": [
+      {
+        "section_name": "Instrumental Intro",
+        "positive_local_styles": [
+          "Steinway grand piano with orchestral strings underneath",
+          "low D minor sustained chord on piano",
+          "strings swell slowly dark and cinematic",
+          "staccato upper register piano notes scattered like flickering amber light",
+          "orchestral tension building low cellos and violas",
+          "single male vocal hum enters low and sustained",
+          "dark atmospheric",
+          "cinematic orchestral intro",
+          "reverb heavy room",
+          "epic film score energy from the first note"
+        ],
+        "negative_local_styles": [
+          "drums",
+          "bass",
+          "organ",
+          "saxophone",
+          "bright",
+          "fast",
+          "female voice"
+        ],
+        "duration_ms": 15000,
+        "lines": []
+      },
+      {
+        "section_name": "Spoken Intro",
+        "positive_local_styles": [
+          "whispered spoken word over piano",
+          "single male voice raspy and vulnerable",
+          "reverb heavy",
+          "intimate and haunting",
+          "cinematic spoken opening"
+        ],
+        "negative_local_styles": [
+          "singing",
+          "drums",
+          "bass",
+          "organ",
+          "bright",
+          "energetic",
+          "female voice"
+        ],
+        "duration_ms": 8000,
+        "lines": [
+          "A dead man wrote it down so we wouldn't forget",
+          "Two thousand years and the dust still hasn't settled"
+        ]
+      },
+      {
+        "section_name": "Verse 1",
+        "positive_local_styles": [
+          "slow gospel blues piano pattern",
+          "finger snaps on 2 and 4",
+          "staccato upper piano notes flutter at phrase endings",
+          "single male voice higher register raspy soul tenor raw and aching",
+          "voice cracks with feeling on emotional lines",
+          "intimate building to power",
+          "voice first piano supports never leads",
+          "solo vocal performance no other voices"
+        ],
+        "negative_local_styles": [
+          "full arrangement",
+          "drums",
+          "organ",
+          "spoken word",
+          "disney vocals",
+          "smooth",
+          "female voice",
+          "harmony",
+          "backup vocals"
+        ],
+        "duration_ms": 45000,
+        "lines": [
+          "We built this thing with splinters in our palms",
+          "No map no mercy",
+          "Just sawdust on the farm",
+          "And climbed the shelves to escape the fight",
+          "Watched it close in while we were trapped inside",
+          "And found our wisdom in the meditations",
+          "Started from the dust again",
+          "Blindfolded if we had to",
+          "Some of us don't talk about the fire we just swipe right by",
+          "Some lessons don't knock baby",
+          "They kick the door in",
+          "It ain't the fire it's who stayed when the air ran out",
+          "The only thing we ever really own",
+          "Is the love we keep fighting for"
+        ]
+      },
+      {
+        "section_name": "Pre-Chorus 1",
+        "positive_local_styles": [
+          "building intensity",
+          "piano chords opening up wider",
+          "organ fades in underneath on last lines only",
+          "staccato amber motif steadies into rhythm",
+          "male voice rising with power and conviction",
+          "raspy soul tenor belting with full chest",
+          "gospel build toward chorus",
+          "cinematic swell"
+        ],
+        "negative_local_styles": [
+          "full drums",
+          "saxophone",
+          "sparse",
+          "spoken",
+          "female voice",
+          "harmony vocals"
+        ],
+        "duration_ms": 18000,
+        "lines": [
+          "We can't tell the sky what to do with its rain",
+          "Can't hold back the flood",
+          "Or put these broken walls up again",
+          "No we never could",
+          "But we can lay every stone down where it matters most",
+          "That's the only thing that doesn't rot",
+          "The only kingdom that's complete"
+        ]
+      },
+      {
+        "section_name": "Chorus 1",
+        "positive_local_styles": [
+          "powerful gospel blues chorus",
+          "organ swells in",
+          "piano pounds deep chords",
+          "staccato motif moves in harmonic intervals",
+          "single male voice at full power belting with raspy soul conviction",
+          "voice soars and cracks on the high notes",
+          "spiritual and heavy",
+          "congregation energy",
+          "raw powerful and cinematic",
+          "epic chorus that builds to overwhelming",
+          "sung with everything he has"
+        ],
+        "negative_local_styles": [
+          "sparse",
+          "quiet",
+          "spoken",
+          "drums",
+          "restrained",
+          "disney",
+          "female voice",
+          "harmony vocals",
+          "backup singers"
+        ],
+        "duration_ms": 22000,
+        "lines": [
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why you gripping walls you never shaped",
+          "Let it go let it fall",
+          "There's sawdust at your feet",
+          "But God not tonight",
+          "We're gonna build again"
+        ]
+      }
+    ]
+  },
+  "enforce_section_duration": false,
+  "with_timestamps": true
+}

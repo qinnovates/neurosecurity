@@ -38,3 +38,6 @@ _memory/
 tools/macshield
 fact-check-report.json
 .vercel
+
+# Audio files (too large for git)
+docs/learn/autodidactive/auditory/**/*.mp3
