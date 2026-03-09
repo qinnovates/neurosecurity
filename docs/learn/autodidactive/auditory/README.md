@@ -27,8 +27,11 @@ The debut project. Dark gospel blues rooted in Stoic philosophy and personal nar
 | Track | Topic | Genre | Details |
 |-------|-------|-------|---------|
 | [Sawdust](stoicism/sawdust.md) | Stoicism, resilience, the dark room | Dark gospel blues / soul (Dm, ~74 BPM) | [Spotify](https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3) |
+| [Principals](neuroethics/principals.md) | Neuroethics, equity, the future we're building | Jazz-soul with gospel warmth (Eb, ~82 BPM) | In production |
 
 **Sawdust** encodes 10 Stoic teachings from Marcus Aurelius into a call-and-response gospel blues track. Three layers of meaning: surface (building and breaking), emotional (love as the reason to build), and hidden (a personal story encoded in the symbolism). Full lyric breakdown and symbolic analysis in [sawdust.md](stoicism/sawdust.md).
+
+**Principals** is the mission statement to Sawdust's origin story. Wordplay on principals (teachers who shaped us) and principles (ethics we derived). Encodes cognitive liberty, mental privacy, consent, dual-use, and neural equity into a jazz-soul track that builds from a living room to a UNESCO table. "Equality can't be spelled without the equity." Full lyrics and symbolic analysis in [principals.md](neuroethics/principals.md).
 
 ### Production History
 
