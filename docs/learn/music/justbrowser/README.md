@@ -2,7 +2,7 @@
 
 Music that starts with story. A way to share where I come from and express what drives this work through sound.
 
-[Listen on Spotify](https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3)
+[Listen on Spotify](https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3) · [SoundCloud](https://soundcloud.com/search?q=keviano%20kulhi)
 
 ## Why Music
 
