@@ -101,30 +101,22 @@ const bandZoneColor = (id: string) => {
         return;
       }
 
-      // Check WebGL
-      var hasWebGL = false;
-      try {
-        var canvas = document.createElement('canvas');
-        hasWebGL = !!(canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
-      } catch(e) {}
+      // Check WebGL — single fast check
+      var c = document.createElement('canvas');
+      var hasWebGL = !!(c.getContext('webgl2') || c.getContext('webgl'));
 
+      status.textContent = hasWebGL
+        ? 'WebGL supported. You\u2019re good to go.'
+        : 'WebGL not detected. 3D visuals may not render. Use Chrome, Firefox, or Edge.';
+      status.style.color = hasWebGL ? '#86efac' : '#fbbf24';
+      btn.disabled = false;
+      btn.textContent = hasWebGL ? 'I understand \u2014 let me explore' : 'Continue anyway';
+      btn.style.opacity = hasWebGL ? '1' : '0.7';
+      btn.style.cursor = 'pointer';
       if (hasWebGL) {
-        status.textContent = 'WebGL supported. You\u2019re good to go.';
-        status.style.color = '#86efac';
-        btn.disabled = false;
-        btn.textContent = 'I understand — let me explore';
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
         btn.style.background = 'rgba(139,92,246,0.3)';
         btn.onmouseenter = function() { btn.style.background = 'rgba(139,92,246,0.5)'; };
         btn.onmouseleave = function() { btn.style.background = 'rgba(139,92,246,0.3)'; };
-      } else {
-        status.textContent = 'WebGL not detected. 3D visualizations may not render. Use a modern browser (Chrome, Firefox, Edge) for the full experience.';
-        status.style.color = '#fbbf24';
-        btn.disabled = false;
-        btn.textContent = 'Continue anyway';
-        btn.style.opacity = '0.7';
-        btn.style.cursor = 'pointer';
       }
 
       btn.addEventListener('click', function() {
@@ -140,7 +132,7 @@ const bandZoneColor = (id: string) => {
 
   <!-- VISION HERO: Kinect on right, text on left -->
   <section class="relative min-h-screen flex items-center overflow-hidden" style="background: #050a08;" id="vision-hero">
-    <div class="absolute inset-0 z-0 parallax-layer" data-speed="0.3">
+    <div class="absolute inset-0 z-0">
       <KinectVision client:only="react" fullBleed={true} />
     </div>
     <!-- Ambient gradient orbs -->

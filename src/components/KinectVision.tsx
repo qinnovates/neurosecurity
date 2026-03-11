@@ -135,7 +135,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
   useEffect(() => {
     try {
       const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
       if (!gl) setWebglSupported(false);
     } catch {
       setWebglSupported(false);
@@ -275,44 +275,54 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     });
     resizeObserver.observe(container);
 
-    // Orbit state (smoothed)
-    const orbit = { theta: 0, phi: 0 };
-    const orbitRadius = 1500;
     let fisheyeAmount = 0;
+    let autoAngle = 0;
+    // Smoothed mouse for lerping (separate from raw input)
+    const smoothMouse = { x: 0, y: 0 };
+    // Smooth camera offsets for 3D depth parallax
+    const camOffset = { x: 0, y: 0 };
 
-    // Animate: orbit camera around center based on mouse
+    // Animate: fixed camera base + subtle parallax offset for 3D depth
     const animate = () => {
-      // Decay mouse target back to center when not moving
-      mouseRef.current.x *= 0.96;
-      mouseRef.current.y *= 0.96;
+      // Slow continuous auto-movement
+      autoAngle += 0.002;
+
+      // Smooth mouse lerp (slow follow, no snapping)
+      smoothMouse.x += (mouseRef.current.x - smoothMouse.x) * 0.04;
+      smoothMouse.y += (mouseRef.current.y - smoothMouse.y) * 0.04;
+
+      // Gentle decay of raw mouse back toward center when idle
+      mouseRef.current.x *= 0.985;
+      mouseRef.current.y *= 0.985;
 
       // Fisheye intensity from mouse movement magnitude
-      const mouseSpeed = Math.sqrt(mouseRef.current.x ** 2 + mouseRef.current.y ** 2);
-      const targetFisheye = Math.min(mouseSpeed * 1.5, 1.0);
-      fisheyeAmount += (targetFisheye - fisheyeAmount) * 0.08;
+      const mouseSpeed = Math.sqrt(smoothMouse.x ** 2 + smoothMouse.y ** 2);
+      const targetFisheye = Math.min(mouseSpeed * 1.2, 0.8);
+      fisheyeAmount += (targetFisheye - fisheyeAmount) * 0.06;
 
       // Update shader uniforms
       if (materialRef.current) {
         materialRef.current.uniforms.uFisheye.value = fisheyeAmount;
         materialRef.current.uniforms.uMousePos.value.set(
-          mouseRef.current.x,
-          mouseRef.current.y
+          smoothMouse.x,
+          smoothMouse.y
         );
       }
 
-      // Target angles from mouse (-0.6 to 0.6 radians)
-      const targetTheta = mouseRef.current.x * 0.6;
-      const targetPhi = -mouseRef.current.y * 0.4;
+      // Subtle auto-drift + mouse-driven parallax offset
+      const autoX = Math.sin(autoAngle) * 30;
+      const autoY = Math.cos(autoAngle * 0.7) * 15;
+      const targetX = autoX + smoothMouse.x * 80;
+      const targetY = autoY - smoothMouse.y * 50;
 
-      // Smooth interpolation
-      orbit.theta += (targetTheta - orbit.theta) * 0.05;
-      orbit.phi += (targetPhi - orbit.phi) * 0.05;
+      camOffset.x += (targetX - camOffset.x) * 0.03;
+      camOffset.y += (targetY - camOffset.y) * 0.03;
 
-      // Spherical to cartesian, orbiting around center
-      camera.position.x = center.x + orbitRadius * Math.sin(orbit.theta) * Math.cos(orbit.phi);
-      camera.position.y = center.y + orbitRadius * Math.sin(orbit.phi);
-      camera.position.z = center.z + orbitRadius * Math.cos(orbit.theta) * Math.cos(orbit.phi);
-      camera.lookAt(center);
+      // Apply offset to camera position (base at 0,0,500)
+      camera.position.x = camOffset.x;
+      camera.position.y = camOffset.y;
+      camera.position.z = 500;
+      camera.lookAt(center.x, center.y, center.z);
 
       renderer.render(scene, camera);
       frameRef.current = requestAnimationFrame(animate);
