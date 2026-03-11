@@ -81,7 +81,7 @@ He is wrong about the trajectory. The entire interview is a roadmap for making B
 
 This is not a criticism of Hodak's engineering. It is an observation that the security architecture needs to be designed now, while the bandwidth is low and the patient population is small, not after ultrasound-based consumer stimulation devices ship at scale.
 
-The proposed [TARA catalog](/atlas/tara/) does not claim these attacks are happening today. It maps the physical mechanisms so that defensive controls can be designed before the technology scales. Each technique is scored using [NISS](/atlas/scoring/) (Neural Impact Scoring System) to estimate signal-level disruption severity.
+The proposed [TARA catalog](/atlas/tara/) does not claim these attacks are happening today. It maps the physical mechanisms so that defensive controls can be designed before the technology scales. Each technique is scored using [NISS](/atlas/scoring/) to estimate signal-level disruption severity.
 
 ### The Takeaway
 
@@ -95,7 +95,7 @@ That is what [QIF](/framework/) is attempting to build.
 
 [Qinnovate](/) is an open research initiative building the security and governance layer for brain-computer interfaces. The BCI industry is moving fast -- restoring vision, decoding speech, stimulating cognition. But nobody is building the security architecture at the same pace.
 
-That is the gap Qinnovate exists to close. The [Quantitative Intelligence Framework (QIF)](/framework/) is a proposed 11-band security model that maps the full BCI stack from physical signal integrity to governance policy. The [TARA threat catalog](/atlas/tara/) maps [109 attack techniques](/atlas/tara/ttps/) across every neural band region, scored by the [Neural Impact Scoring System (NISS)](/atlas/scoring/). The [therapeutic overlap analysis](/atlas/therapeutics/) maps where clinical applications and attack techniques share the same physical mechanisms -- because the difference between treatment and threat is governance, not physics.
+That is the gap Qinnovate exists to close. [QIF](/framework/) is a proposed 11-band security model that maps the full BCI stack from physical signal integrity to governance policy. The [TARA threat catalog](/atlas/tara/) maps [109 attack techniques](/atlas/tara/ttps/) across every neural band region, scored by [NISS](/atlas/scoring/). The [therapeutic overlap analysis](/atlas/therapeutics/) maps where clinical applications and attack techniques share the same physical mechanisms -- because the difference between treatment and threat is governance, not physics.
 
 Every tool, dataset, and mapping is open source. Every AI contribution is [documented](/governance/). Every claim is classified by evidence level and held to [neuromodesty constraints](/research/validation/) -- because the field does not need more hype. It needs engineering.
 
