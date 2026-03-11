@@ -77,7 +77,7 @@ def parse_bibtex(text: str) -> list[dict]:
     """
     entries = []
     # Split on entry boundaries
-    pattern = r'@(\w+)\s*\{([^,]+),\s*(.*?)\n\}'
+    pattern = r'@(\w+)\s*\{([^,]+),\s*([\s\S]*?)\n\}'
     for match in re.finditer(pattern, text, re.DOTALL):
         entry_type = match.group(1).lower()
         key = match.group(2).strip()
@@ -86,7 +86,8 @@ def parse_bibtex(text: str) -> list[dict]:
         entry = {'entry_type': entry_type, 'key': key}
 
         # Extract fields: field = {value} or field = value
-        field_pattern = r'(\w+)\s*=\s*(?:\{((?:[^{}]|\{[^{}]*\})*)\}|(\S+))'
+        # Use non-greedy match with length cap to prevent ReDoS on malformed BibTeX
+        field_pattern = r'(\w+)\s*=\s*(?:\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}|(\S+))'
         for fm in re.finditer(field_pattern, body):
             field_name = fm.group(1).lower()
             value = fm.group(2) if fm.group(2) is not None else fm.group(3)

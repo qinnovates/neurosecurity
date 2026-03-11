@@ -26,7 +26,7 @@ import {
         <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">On this page</p>
         {[
           { href: '#overview', label: 'Overview' },
-          { href: '#defense-stack', label: 'Defense Stack' },
+          { href: '#defense-stack', label: 'Neurosecurity Stack' },
           { href: '#neurowall', label: 'Neurowall' },
           { href: '#detection', label: 'Detection Results' },
           { href: '#sovereignty', label: 'Sovereignty Attacks' },
@@ -58,19 +58,19 @@ import {
           </span>
         </div>
         <p class="text-lg text-[var(--color-text-muted)] mb-6">
-          QIF defines the threat model. These are proposed guardrails for how BCI security <em>should</em> work. Three components form a vertically integrated defense stack: a signal-layer firewall that guards inbound neural signals, a post-quantum wire protocol that secures data in transit, and an on-device compiler that enforces policy through safe bytecode execution.
+          QIF defines the threat model. These are proposed guardrails for how BCI security <em>should</em> work. Three components form a vertically integrated neurosecurity stack: a signal-layer firewall that guards inbound neural signals, a post-quantum wire protocol that secures data in transit, and an on-device compiler that enforces policy through safe bytecode execution.
         </p>
         <p class="text-[var(--color-text-muted)]">
           Each guardrail is independently useful, but they were designed to work together. Neurowall detects and filters attacks at the signal boundary. NSP encrypts and authenticates every frame that passes through. Runemate compiles policy rules into on-chip bytecode that Neurowall's L3 policy agent executes, and delivers secure UI content over NSP sessions.
         </p>
       </section>
 
-      <!-- Defense Stack -->
+      <!-- Neurosecurity Stack -->
       <section id="defense-stack" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Defense Stack</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Neurosecurity Stack</h2>
         <div class="prose mb-8">
           <p>
-            The QIF defense stack positions Neurowall and Runemate as sibling components at the I0 (Neural Interface) bottleneck of the hourglass model. Neurowall guards the inbound signal path. Runemate guards the outbound rendering path. Both rest on NSP for cryptographic transport.
+            The QIF neurosecurity stack positions Neurowall and Runemate as sibling components at the I0 (Neural Interface) bottleneck of the hourglass model. Neurowall guards the inbound signal path. Runemate guards the outbound rendering path. Both rest on NSP for cryptographic transport.
           </p>
         </div>
 

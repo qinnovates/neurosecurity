@@ -36,6 +36,8 @@ title: "AI Ethics: Principles, Frameworks, and the Governance of Artificial Inte
   - [Dual-Use](#8-dual-use)
   - [Environmental Impact](#9-environmental-impact)
 - [Part IV: Open Problems for BCI + AI](#part-iv-open-problems-for-bci--ai)
+  - [Neurorights](#neurorights)
+  - [Disability, Accessibility, and the Right to Repair](#disability-accessibility-and-the-right-to-repair)
   - [Neural Data as the Most Intimate Data](#10-neural-data-as-the-most-intimate-data)
   - [AI-Mediated Perception](#11-ai-mediated-perception)
   - [Adaptive Algorithms and Drift](#12-adaptive-algorithms-and-drift)
@@ -67,10 +69,11 @@ Isaac Asimov published "Runaround" in *Astounding Science Fiction* (March 1942),
 
 These laws are fiction, not engineering. But they are foundational because Asimov spent the next four decades writing stories that demonstrated exactly how rule-based AI ethics produces irresolvable edge cases. Every story is a proof by counterexample: the laws sound clean and the failures are always in the gaps between them. The same insight haunts modern AI alignment research.
 
-#### 1950 — Wiener's "The Human Use of Human Beings"
+#### 1948/1950 — Wiener's Cybernetics and "The Human Use of Human Beings"
 
-Norbert Wiener — the MIT mathematician who founded cybernetics while designing antiaircraft targeting systems during WWII — wrote the first serious philosophical treatment of machines, feedback loops, and moral responsibility. His argument: automation could harm society through dehumanization, and the humans who design feedback systems bear moral responsibility for their outcomes. Written half a century before the algorithm age, it directly anticipated the accountability and human-in-the-loop principles that every modern framework now espouses.
+Norbert Wiener — the MIT mathematician who founded cybernetics while designing antiaircraft targeting systems during WWII — published *Cybernetics: Or Control and Communication in the Animal and the Machine* in 1948, establishing the mathematical foundations of feedback systems. Two years later, *The Human Use of Human Beings* (1950) translated those ideas into their moral implications: automation could harm society through dehumanization, and the humans who design feedback systems bear moral responsibility for their outcomes. Written half a century before the algorithm age, it directly anticipated the accountability and human-in-the-loop principles that every modern framework now espouses.
 
+> Wiener, N. (1948). *Cybernetics: Or Control and Communication in the Animal and the Machine*. MIT Press.
 > Wiener, N. (1950). *The Human Use of Human Beings: Cybernetics and Society*. Houghton Mifflin.
 
 #### 1976 — Weizenbaum's "Computer Power and Human Reason"
@@ -78,6 +81,12 @@ Norbert Wiener — the MIT mathematician who founded cybernetics while designing
 Joseph Weizenbaum created ELIZA in 1966 — the first chatbot, a simple pattern-matching program that mimicked a Rogerian therapist. He was shaken when users formed genuine emotional attachments to a program he knew was empty. His 1976 book argued that there are things computers *ought not* to be made to do even if they can — and that delegating morally significant decisions to machines is a form of moral abdication. The first major insider critique of the AI field.
 
 > Weizenbaum, J. (1976). *Computer Power and Human Reason: From Judgment to Calculation*. W.H. Freeman.
+
+#### 1980 — Winner's "Do Artifacts Have Politics?"
+
+Before algorithmic bias had a name, political scientist Langdon Winner argued that technologies are never neutral — they embed social and political choices. His examples: Robert Moses designed Long Island overpasses too low for buses, effectively excluding public-transit-dependent communities (predominantly Black and poor). Winner's framework — that artifacts carry politics — is the intellectual ancestor of modern algorithmic fairness research. Every AI system embeds value choices in its architecture. The question is whether those choices are deliberate and disclosed.
+
+> Winner, L. (1980). "Do Artifacts Have Politics?" *Daedalus*, 109(1), 121-136.
 
 #### 2017 — The Asilomar AI Principles
 
@@ -152,7 +161,7 @@ Across 84+ frameworks analyzed (Jobin, Ienca & Vayena 2019), the same principles
 
 #### UNESCO Recommendation on the Ethics of AI (2021)
 
-The first global normative instrument on AI ethics. Adopted unanimously by all 193 member states on November 23, 2021.
+The first global normative instrument on AI ethics. Adopted unanimously by all 194 member states on November 23, 2021.
 
 **Four Core Values:** (1) Human rights and dignity, (2) Peaceful, just, interconnected societies, (3) Diversity and inclusiveness, (4) Environment and ecosystem flourishing.
 
@@ -165,11 +174,11 @@ The first global normative instrument on AI ethics. Adopted unanimously by all 1
 > URL: https://www.unesco.org/en/artificial-intelligence/recommendation-ethics
 > Full text: https://unesdoc.unesco.org/ark:/48223/pf0000380455
 
-#### UNESCO First Global Framework on Neurotechnology Ethics (January 2026)
+#### UNESCO First Global Framework on Neurotechnology Ethics (November 2025)
 
-Directly addresses the governance of devices that read and write neural data. The closest existing international instrument to what QIF proposes at the technical level.
+Adopted November 12, 2025 at the 43rd session of the General Conference. Directly addresses the governance of devices that read and write neural data. The closest existing international instrument to what QIF proposes at the technical level.
 
-> URL: https://www.globalpolicywatch.com/2026/01/unesco-adopts-first-global-framework-on-neurotechnology-ethics/
+> URL: https://www.unesco.org/en/articles/unesco-adopts-first-ever-global-framework-ethics-neurotechnology
 
 #### OECD AI Principles (2019, updated 2024)
 
@@ -197,6 +206,18 @@ Core obligations: legislative/administrative measures ensuring AI is consistent 
 International Code of Conduct for organizations developing advanced AI. Eleven key actions including red-teaming, vulnerability reporting, watermarking, content authentication, and technical standards for interoperability.
 
 > URL: https://digital-strategy.ec.europa.eu/en/library/hiroshima-process-international-code-conduct-advanced-ai-systems
+
+**Enforcement Taxonomy:**
+
+| Framework | Binding? | Enforcement Mechanism | Penalties |
+|-----------|----------|----------------------|-----------|
+| UNESCO AI (2021) | No | Readiness assessments, peer review | None |
+| UNESCO Neurotech (2025) | No | General Conference reporting | None |
+| OECD AI Principles (2019) | No | Country reviews, AI Policy Observatory tracking | None |
+| Council of Europe Convention (2024) | **Yes** | Treaty obligations, domestic implementation | Varies by signatory |
+| G7 Hiroshima Code of Conduct (2023) | No | Voluntary compliance, peer pressure | None |
+| EU AI Act (2024) | **Yes** | National supervisory authorities, EU AI Office | Up to 7% global revenue |
+| China GenAI Measures (2023) | **Yes** | Cyberspace Administration of China | Service shutdown, fines |
 
 ---
 
@@ -235,7 +256,7 @@ Five principles: (1) Safe and effective systems, (2) Algorithmic discrimination 
 
 **Trump EO 14179** (January 2025): Revoked Biden EO. Policy goal: "sustain and enhance America's global AI dominance." Directed development of an AI Action Plan.
 
-**Trump National Policy Framework EO** (December 2025): Establishes uniform federal standard to preempt conflicting state AI laws. Priorities: protecting children, preventing censorship, respecting copyright, safeguarding communities.
+**Trump National Policy Framework EO** (December 2025): Establishes uniform federal standard to preempt conflicting state AI laws. Contains preemption carve-outs for: protecting children, preventing censorship, respecting copyright, and safeguarding communities (these are areas where the federal framework explicitly limits state regulatory action).
 
 ---
 
@@ -283,6 +304,8 @@ The conceptual foundation for the EU AI Act. Seven key requirements: (1) Human a
 | **Canada** | Directive on Automated Decision-Making | 2019 | Binding (federal) | 4-level algorithmic impact assessment; Canada also launched CAISI (Nov 2024) |
 | **Australia** | AI Ethics Principles | 2019 | Voluntary | 8 principles including contestability; moving toward mandatory guardrails |
 | **Brazil** | AI Bill (PL 2338/2023) | Pending | Proposed | EU AI Act-influenced risk tiers; passed Senate Dec 2024, awaiting Chamber |
+| **India** | NITI Aayog Responsible AI Principles | 2021 | Non-binding | 7 principles; emphasis on inclusive growth and digital sovereignty |
+| **African Union** | AU AI Continental Strategy | 2024 | Non-binding | Pan-African AI governance; emphasizes Ubuntu ethics (communal well-being over individualism) |
 
 ---
 
@@ -324,6 +347,8 @@ Ten Good Machine Learning Practice (GMLP) principles finalized by IMDRF in Janua
 Algorithmic bias occurs when a model systematically produces unfair outcomes for a group defined by a protected characteristic. Bias enters through six pathways: **historical** (training data reflects past discrimination), **representation** (undersampled groups), **measurement** (biased proxy labels), **aggregation** (one model for heterogeneous populations), **evaluation** (benchmark doesn't represent deployment population), **deployment** (model used beyond its training distribution).
 
 **The Impossibility Theorems.** Kleinberg, Mullainathan, and Raghavan (2016) proved that no classifier can simultaneously satisfy calibration, balance for the negative class, and balance for the positive class — unless base rates are identical across groups or the classifier is perfect. Chouldechova (2017) independently proved the same incompatibility. These are not engineering failures. They are mathematical facts about the structure of fairness.
+
+**Critical scholars:** Ruha Benjamin (*Race After Technology*, 2019) introduced the concept of the "New Jim Code" — technology that reproduces existing inequities under the guise of objectivity. Safiya Umoja Noble (*Algorithms of Oppression*, 2018) documented racial and gender bias in search engine results. Virginia Eubanks (*Automating Inequality*, 2018) traced how automated systems target and punish poor communities. Cathy O'Neil (*Weapons of Math Destruction*, 2016) cataloged how opaque algorithmic models amplify inequality at scale. Abeba Birhane (Trinity College Dublin / Mozilla) has argued that large-scale datasets inherently encode societal biases and that the dataset auditing paradigm is insufficient.
 
 **Key cases:** COMPAS recidivism algorithm (ProPublica 2016), Gender Shades facial recognition disparity (Buolamwini & Gebru 2018), Amazon hiring tool downranking "women's" (2018).
 
@@ -391,13 +416,31 @@ The same capability serves beneficial and harmful applications. The same compute
 
 ### 9. Environmental Impact
 
-Strubell, Ganesh, and McCallum (2019) quantified the carbon cost: training a single large transformer emits approximately 626,155 lbs CO2 equivalent. GPT-3: ~500-552 metric tons. Microsoft's AI products consumed 6.4M cubic meters of water in fiscal 2023 (34% increase YoY).
+Strubell, Ganesh, and McCallum (2019) quantified the carbon cost: training a single large transformer emits approximately 626,155 lbs CO2 equivalent (this figure has been disputed by Google's Jeff Dean and others as reflecting worst-case NAS pipeline costs rather than typical training; the precise number is contested but the order-of-magnitude concern is well-established). GPT-3: ~500-552 metric tons. Microsoft's AI products consumed 6.4M cubic meters of water in fiscal 2023 (34% increase YoY).
 
 **BCI relevance:** An on-device Neural Firewall must be lightweight (compressed, quantized) for both power budget and environmental accountability. NSP's low-power design goal aligns with this.
 
 ---
 
 ## Part IV: Open Problems for BCI + AI
+
+### Neurorights
+
+Neurorights are proposed legal protections for the human mind in an era of neurotechnology. The concept was formalized by Rafael Yuste (Columbia University) and Sara Goering (University of Washington) in a 2017 *Nature* commentary calling for five new rights: (1) mental privacy, (2) personal identity, (3) free will, (4) fair access to cognitive enhancement, and (5) protection from algorithmic bias in neurotechnology.
+
+**Epistemic note:** Whether neurorights require entirely new legal instruments or can be covered by extending existing human rights frameworks is actively debated (see Ienca 2021, Bublitz 2022 — anti-inflationism). QIF takes a pragmatic position: regardless of the legal mechanism, the technical architecture must enforce the protections these rights describe.
+
+**Legislative milestones:** Chile amended its constitution in 2021 (the first country to constitutionally protect neurorights). Colorado (2024) and California (2024) classified neural data as sensitive personal information under state privacy law. Spain's Digital Rights Charter (2021) includes cognitive liberty provisions.
+
+### Disability, Accessibility, and the Right to Repair
+
+BCIs exist because disabled people need them. Any security framework that increases cost, complexity, or barriers to access for the primary patient population has failed its mission. Three critical tensions:
+
+1. **The cochlear implant controversy.** The Deaf community has long debated cochlear implants as a technology that frames deafness as a deficit to be fixed rather than an identity to be respected. BCI security frameworks must not repeat this mistake — the patient's autonomy includes the right to refuse, modify, or remove the device.
+2. **Crip technoscience** (Hamraie & Fritsch, 2019): disabled people should be designers of the technologies that affect their bodies, not passive recipients. QIF's patient-first design principle aligns with this, but the framework must go further — disability communities should be represented in standards governance.
+3. **Right to repair.** Neural devices that lock patients into vendor-controlled ecosystems create a dependency that is ethically distinct from other medical devices — the device mediates cognition. The UN Convention on the Rights of Persons with Disabilities (CRPD), Article 12, recognizes equal legal capacity for persons with disabilities. A BCI architecture that restricts the patient's ability to inspect, modify, or replace their own device may conflict with CRPD principles.
+
+**BCI relevance:** QIF's open architecture and patient audit rights are not just security features. They are accessibility features. Security through vendor lock-in is antithetical to disability justice.
 
 ### 10. Neural Data as the Most Intimate Data
 
@@ -435,9 +478,9 @@ No jurisdiction has answered this definitively. The secondary use problem: a lea
 
 ### 14. AI as Intermediary for Thought (Subvocalization)
 
-Subvocal speech decoding captures motor commands to laryngeal muscles during silent rehearsal. Current capabilities: AlterEgo (MIT, 92% on limited vocabulary from EMG), Chang lab (UCSF, 74% on 125K-word vocabulary from motor cortex), EEG-based (60-80% on constrained tasks).
+Subvocal speech decoding captures motor commands to laryngeal muscles during silent rehearsal. Current capabilities: AlterEgo (MIT, 92% on limited vocabulary from EMG), Willett et al. (Stanford, 62 words/min on 125K-word vocabulary from motor cortex), Chang/Metzger et al. (UCSF, 1,024-word vocabulary with 74% accuracy for facial expression classification), EEG-based (60-80% on constrained tasks).
 
-**The inner speech leakage problem:** The motor cortex targeted for speech decoding is active during inner monologue not intended for output. A Stanford 2025 study decoded participants' internal counting during a separate task — they did not intend to communicate the numbers. This is unprecedented: no prior technology could systematically breach the boundary between thought and expression.
+**The inner speech leakage problem:** The motor cortex targeted for speech decoding is active during inner monologue not intended for output. Kunz, Willett et al. (2025) decoded participants' internal counting during a separate task — they did not intend to communicate the numbers (Kunz et al., "A neural speech decoding framework leveraging deep learning and speech synthesis," *Cell*, August 14, 2025). This is unprecedented: no prior technology could systematically breach the boundary between thought and expression.
 
 **BCI relevance:** Subvocalization interception is a high-severity TARA technique. NSP must include a "subvocal privacy gate" as mandatory for speech BCI systems claiming NSP compliance.
 
@@ -544,7 +587,13 @@ Fastest-growing consumer application in history. Created immediate urgency for A
 | Extracting training data from LLMs | Carlini et al. | 2021 | USENIX Security | [arXiv:2012.07805](https://arxiv.org/abs/2012.07805) | Demonstrated verbatim data extraction from GPT-2 |
 | Calibrating noise to sensitivity (Differential Privacy) | Dwork et al. | 2006 | TCC | [10.1007/11681878_14](https://doi.org/10.1007/11681878_14) | Foundational DP framework |
 | Ethical significance of user-control in speech BCIs | van Stuijvenberg et al. | 2024 | Frontiers in Human Neuroscience | [10.3389/fnhum.2024.1420334](https://doi.org/10.3389/fnhum.2024.1420334) | Inner speech leakage and privacy gate requirements |
-| A high-performance speech neuroprosthesis | Willett et al. | 2023 | Nature | [10.1038/s41586-023-06377-x](https://doi.org/10.1038/s41586-023-06377-x) | 74% accuracy on 125K-word vocabulary from motor cortex |
+| Do Artifacts Have Politics? | Winner | 1980 | Daedalus | [JSTOR](https://www.jstor.org/stable/20024652) | Technologies embed political choices; foundational to algorithmic fairness |
+| Race After Technology | Benjamin | 2019 | Polity Press | ISBN 978-1509526406 | "New Jim Code": technology reproducing racial inequity under objectivity guise |
+| Algorithms of Oppression | Noble | 2018 | NYU Press | ISBN 978-1479837243 | Racial and gender bias in search engine results |
+| Automating Inequality | Eubanks | 2018 | St. Martin's Press | ISBN 978-1250074317 | Automated systems targeting and punishing poor communities |
+| Building and auditing fair algorithms (Birhane) | Birhane et al. | 2023 | FAccT | [10.1145/3593013.3594049](https://doi.org/10.1145/3593013.3594049) | Dataset auditing insufficient; relational ethics needed |
+| A high-performance speech neuroprosthesis | Willett et al. | 2023 | Nature | [10.1038/s41586-023-06377-x](https://doi.org/10.1038/s41586-023-06377-x) | 62 words/min on 125K-word vocabulary from motor cortex |
+| A high-performance neuroprosthesis for speech decoding and avatar control | Metzger et al. | 2023 | Nature | [10.1038/s41586-023-06443-4](https://doi.org/10.1038/s41586-023-06443-4) | 1,024-word vocabulary; 74% for facial expression classification |
 
 ---
 
@@ -567,13 +616,13 @@ Every AI ethics principle maps directly to a QIF architectural decision:
 | **Hallucination** | Design Principle #9: "AI honesty, not AI obscurity" — the system says "I don't know" when it doesn't know |
 | **Consent** | Dynamic consent for adaptive algorithms; model portability prohibition; drift detection as anomaly signal |
 
-**The difference between QIF and existing AI ethics frameworks:** Existing frameworks are policy documents. They say "AI should be transparent." QIF operationalizes that as kernel-level enforcement: policy says AI should be transparent; QIF says `runemate log --stream` shows every packet entering the nervous system. Policy can be ignored. A kernel cannot.
+**Where QIF sits relative to existing frameworks:** Most AI ethics frameworks are policy-level documents — they prescribe what AI systems *should* do but leave implementation to developers. QIF proposes a different layer: translating those principles into technical enforcement mechanisms. Whether technical enforcement can fully substitute for policy enforcement is an open question. The hypothesis is that architectural constraints (mandatory audit logging, amplitude bounds, consent gates) provide a compliance floor that policy alone cannot guarantee — but this remains to be validated through independent review and real-world deployment.
 
-But the regulatory landscape is converging. The Council of Europe Framework Convention (November 2025) is the first binding international AI treaty. The EU AI Act is enforceable law with €35M penalties. The UNESCO Neurotechnology Ethics Framework (January 2026) directly addresses neural devices. The FDA's PCCP framework governs how AI in medical devices can learn and adapt. These instruments will define the legal environment QIF operates within.
+The regulatory landscape is converging. The Council of Europe Framework Convention (November 2025) is the first binding international AI treaty. The EU AI Act is enforceable law with penalties up to 7% of global revenue. The UNESCO Neurotechnology Ethics Framework (November 2025) directly addresses neural devices. The FDA's PCCP framework governs how AI in medical devices can learn and adapt. These instruments will define the legal environment any BCI security framework operates within.
 
-QIF's architecture is designed to be compliant by default — not because compliance is the goal, but because the principles these frameworks encode (transparency, safety, human oversight, accountability, fairness) are the same principles that make a neural device trustworthy. When the regulatory environment catches up to the technology, an architecture designed from these principles will be ready. One designed without them will need to be rebuilt.
+QIF is designed to be compatible with these frameworks by default — not because compliance is the sole goal, but because the principles they encode (transparency, safety, human oversight, accountability, fairness) are the same principles that inform trustworthy neural device design. An architecture designed from these principles is more likely to be ready when regulation catches up to the technology. One designed without them may need to be rebuilt.
 
-That is the blank slate argument. Build it right the first time.
+That is the blank slate argument. The opportunity to embed these principles at the architectural level exists now, before deployment scale makes retrofitting prohibitively difficult.
 
 > **Epistemic note:** This document compiles AI ethics research for reference purposes. All citations have been verified through Crossref, publisher pages, or institutional records as noted. Framework descriptions are drawn from primary source documents. This is a living document that will be updated as new frameworks, papers, and regulatory instruments emerge. QIF's relationship to these frameworks is that of a proposed technical implementation, not a peer-reviewed contribution to the AI ethics literature itself.
 

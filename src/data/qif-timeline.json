@@ -281,7 +281,7 @@
       "date": "2026-02-18",
       "type": "milestone",
       "title": "NSP Protocol Spec v0.5 Finalized",
-      "description": "Protocol core and handshake complete. 5-layer defense stack, 3 device tiers, power budget modeled at 3.25% of 40 mW (hardware validation pending)."
+      "description": "Protocol core and handshake complete. 5-layer neurosecurity stack, 3 device tiers, power budget modeled at 3.25% of 40 mW (hardware validation pending)."
     },
     {
       "date": "2026-02-21",
