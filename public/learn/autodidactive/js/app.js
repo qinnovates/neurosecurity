@@ -10,11 +10,14 @@ import { CALCULUS_LABS } from './data/calculus.js';
 import { initNoteWall, getNotesForBackground } from './notewall.js';
 import { getRelated, getPathWithEdges, getAllNodes, getAllEdges } from './graph.js';
 import { search, highlightMatch, groupResults } from './search.js';
-import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js?v=3';
-import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext } from './canvas.js';
-import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js?v=3';
+import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js?v=7';
+import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext, syncNotes } from './canvas.js';
+import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js?v=7';
 import { renderEthicsTimeline } from './ethics-timeline.js';
 import { ETHICS_TIMELINE } from './data/ethics.js';
+import { renderNeuroanatomy } from './neuroanatomy.js';
+import { QIF_BANDS } from './data/neuroanatomy.js';
+import { renderMindmap } from './mindmap.js';
 
 // ── All People ──────────────────────────────────────────────────────────────
 const ALL_PEOPLE = [
@@ -26,6 +29,31 @@ const ALL_PEOPLE = [
   ...CYBERSECURITY
 ];
 
+// ── Category grid ───────────────────────────────────────────────────────────
+const SCIENCE_PEOPLE = [...POLYMATHS, ...NEUROSCIENCE, ...QUANTUM];
+
+const ETHICS_ALL = [...ETHICS_TIMELINE.filter(e => !e.isContext), ...PHILOSOPHERS, ...NEUROETHICS_PEOPLE];
+
+const CATEGORIES = [
+  { id: 'ethics', label: 'Ethics', icon: '⚖️', data: ETHICS_ALL, type: 'group',
+    subs: [
+      { id: 'ethics-timeline',    label: 'Timeline',     data: ETHICS_TIMELINE.filter(e => !e.isContext), type: 'timeline' },
+      { id: 'ethics-philosophy',  label: 'Philosophy',   data: PHILOSOPHERS,      type: 'people' },
+      { id: 'ethics-neuroethics', label: 'Neuroethics',  data: NEUROETHICS_PEOPLE, type: 'people' }
+    ]},
+  { id: 'neuroscience', label: 'Neuroscience', icon: '🧬', data: QIF_BANDS, type: 'group',
+    subs: [
+      { id: 'neuro-hourglass', label: 'QIF Hourglass', data: QIF_BANDS, type: 'neuroanatomy' },
+      { id: 'neuro-physics',   label: 'Why Hourglass?', data: QIF_BANDS, type: 'hourglass-physics' },
+      { id: 'neuro-vision',    label: 'Vision',        data: QIF_BANDS, type: 'vision' }
+    ]},
+  { id: 'security',  label: 'Security',  icon: '🔒', data: CYBERSECURITY,  type: 'people' },
+  { id: 'science',   label: 'Science',   icon: '🔬', data: SCIENCE_PEOPLE, type: 'people' },
+  { id: 'math',      label: 'Math',      icon: '📐', data: CALCULUS_LABS,   type: 'labs' },
+  { id: 'paths',     label: 'Paths',     icon: '🗺️', data: LEARNING_PATHS, type: 'paths' }
+];
+
+// Keep FIELDS for backward compat (search, etc.)
 const FIELDS = [
   { id: 'all', label: 'All', data: ALL_PEOPLE },
   { id: 'polymaths', label: 'Polymaths', data: POLYMATHS },
@@ -221,6 +249,9 @@ function hashColor(id) {
 // ── Router ──────────────────────────────────────────────────────────────────
 let currentView = 'home';
 let currentField = 'all';
+let currentConcept = null;
+let currentCategory = null; // null = show grid, string = show category content
+let currentSub = null;      // sub-pill within a grouped category
 
 function navigate(view) {
   currentView = view;
@@ -237,6 +268,7 @@ function navigate(view) {
   if (view === 'home') renderHome();
   if (view === 'learn') renderLearn();
   if (view === 'notewall') renderNoteWall();
+  if (view === 'audio') renderAudioView();
   if (view === 'profile') renderProfile();
 
   window.scrollTo(0, 0);
@@ -298,6 +330,17 @@ function renderLearn() {
   const stats = getStats();
   const viewCount = stats.viewed.length;
 
+  // If a category is selected, show its content
+  if (currentCategory) {
+    renderCategoryView(container, today, viewCount);
+    return;
+  }
+
+  // Otherwise show the category grid
+  const toolIds = new Set(['paths']);
+  const mainCats = CATEGORIES.filter(c => !toolIds.has(c.id));
+  const pathsCat = CATEGORIES.find(c => c.id === 'paths');
+
   container.innerHTML = `
     <div class="learn-header">
       <h2 class="learn-title">Learn</h2>
@@ -306,14 +349,6 @@ function renderLearn() {
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
-    </div>
-    <div class="field-chips" id="fieldChips">
-      ${FIELDS.map(f => `
-        <button class="chip ${f.id === currentField ? 'active' : ''}" data-field="${f.id}">
-          ${f.label}
-          <span class="chip-count">${f.data.length}</span>
-        </button>
-      `).join('')}
     </div>
     <div class="discovery-card" onclick="window._openPerson('${today.id}')">
       <div class="discovery-card-label">Daily Discovery</div>
@@ -328,21 +363,94 @@ function renderLearn() {
       ${today.quotes && today.quotes[0] ? `<div class="discovery-card-quote">"${esc(today.quotes[0].text)}"</div>` : ''}
     </div>
     ${viewCount >= 3 ? renderRecallPrompt() : ''}
+    <div class="category-grid">
+      ${mainCats.map(cat => `
+        <button class="category-card" data-cat="${cat.id}">
+          <span class="category-card-icon">${cat.icon}</span>
+          <span class="category-card-label">${cat.label}</span>
+          <span class="category-card-count">${cat.data.length}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div class="category-tools">
+    ${pathsCat ? `
+    <button class="category-card category-card--wide" data-cat="paths">
+      <span class="category-card-icon">${pathsCat.icon}</span>
+      <span class="category-card-label">${pathsCat.label}</span>
+      <span class="category-card-count">${pathsCat.data.length} guided journeys</span>
+    </button>` : ''}
+    </div>
+    <div class="evolving-note">
+      <p>Autodidactive will evolve as I stumble across more novel concepts that I find useful for newcomers to neurosecurity, neuroethics, and BCI work. It will grow as I go through school, helping me learn and understand more abstract concepts along the way.</p>
+    </div>
+  `;
+
+  // Category card click handlers
+  container.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', () => {
+      currentCategory = card.dataset.cat;
+      currentPath = null;
+      renderLearn();
+      window.scrollTo(0, 0);
+    });
+  });
+}
+
+function renderCategoryView(container, today, viewCount) {
+  const cat = CATEGORIES.find(c => c.id === currentCategory);
+  if (!cat) { currentCategory = null; renderLearn(); return; }
+
+  // For grouped categories, default to first sub
+  if (cat.subs && !currentSub) currentSub = cat.subs[0].id;
+
+  container.innerHTML = `
+    <div class="learn-header">
+      <button class="category-back-btn" id="catBackBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <h2 class="learn-title">${cat.icon} ${cat.label}</h2>
+      <button class="search-btn" onclick="window._openSearch()" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+    </div>
+    ${cat.subs ? `
+    <div class="field-chips" id="fieldChips">
+      ${cat.subs.map(sub => `
+        <button class="chip ${sub.id === currentSub ? 'active' : ''}" data-sub="${sub.id}">
+          ${sub.label}
+          <span class="chip-count">${sub.data.length}</span>
+        </button>
+      `).join('')}
+    </div>` : ''}
     <div class="card-grid" id="cardGrid"></div>
   `;
 
-  // Render cards
-  renderCardGrid();
-
-  // Field chip handlers
-  container.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      currentField = chip.dataset.field;
-      container.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      renderCardGrid();
-    });
+  // Back button
+  document.getElementById('catBackBtn').addEventListener('click', () => {
+    currentCategory = null;
+    currentSub = null;
+    currentPath = null;
+    renderLearn();
   });
+
+  // Sub-pill handlers
+  if (cat.subs) {
+    container.querySelectorAll('.chip[data-sub]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        currentSub = chip.dataset.sub;
+        container.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        renderCardGrid();
+      });
+    });
+  }
+
+  // Render content
+  renderCardGrid();
 }
 
 function renderRecallPrompt() {
@@ -397,17 +505,330 @@ function renderCardGrid() {
   const grid = document.getElementById('cardGrid');
   if (!grid) return;
 
-  if (currentField === 'ethics') {
+  const cat = CATEGORIES.find(c => c.id === currentCategory);
+  if (!cat) return;
+
+  // Grouped category (e.g. Ethics with sub-pills)
+  if (cat.type === 'group' && cat.subs) {
+    const sub = cat.subs.find(s => s.id === currentSub) || cat.subs[0];
+    renderByType(grid, sub.type, sub.data);
+    return;
+  }
+
+  // Simple category
+  renderByType(grid, cat.type, cat.data);
+}
+
+function renderAudioView() {
+  const container = document.getElementById('view-audio');
+  container.innerHTML = `
+    <div class="audio-view-wrapper">
+      <h2 class="audio-view-title">Auditory Learning</h2>
+      <div class="auditory-section">
+        <div class="auditory-intro">
+          <p>Music that encodes philosophy, neuroscience, and security thinking into something you can feel. Every track starts from a real story — the knowledge is woven into the lyrics, but the entry point is human experience.</p>
+        </div>
+        <div class="auditory-links">
+          <a href="https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3?si=5c88dbc432ef4f1b" target="_blank" rel="noopener noreferrer" class="auditory-link auditory-link--spotify">
+            <span class="auditory-link-icon">🎧</span>
+            <div>
+              <div class="auditory-link-title">Listen on Spotify</div>
+              <div class="auditory-link-desc">Sawdust album — Stoic philosophy meets dark gospel blues</div>
+            </div>
+          </a>
+          <a href="https://github.com/qinnovates/qinnovate/tree/main/principles-of-ethics/music/justbrowser" target="_blank" rel="noopener noreferrer" class="auditory-link auditory-link--github">
+            <span class="auditory-link-icon">📄</span>
+            <div>
+              <div class="auditory-link-title">Documentation</div>
+              <div class="auditory-link-desc">Lyrics, symbolic analysis, and methodology on GitHub</div>
+            </div>
+          </a>
+        </div>
+        <div class="auditory-tracks">
+          <h4 class="auditory-tracks-title">Released</h4>
+          <div class="auditory-track">
+            <span class="auditory-track-emoji">🪵</span>
+            <div>
+              <div class="auditory-track-name">Sawdust</div>
+              <div class="auditory-track-meta">Dark gospel blues (Dm, 74 BPM) — 10 Stoic teachings encoded</div>
+            </div>
+          </div>
+          <div class="auditory-track">
+            <span class="auditory-track-emoji">⚖️</span>
+            <div>
+              <div class="auditory-track-name">Principals of Ethics</div>
+              <div class="auditory-track-meta">Cinematic neo-soul gospel (Dm, 70 BPM) — cognitive liberty, neural equity</div>
+            </div>
+          </div>
+        </div>
+        <div class="auditory-why">
+          <h4 class="auditory-tracks-title">Why Auditory Learning</h4>
+          <ul>
+            <li>Emotional encoding improves retention</li>
+            <li>Dual coding across modalities strengthens recall</li>
+            <li>Songs you replay create natural spaced repetition</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderHourglassPhysics(container) {
+  container.innerHTML = `
+    <div class="vision-section">
+      <div class="vision-intro">
+        <p class="vision-qualifier" style="background:#fef3c7;border-left:3px solid #f59e0b;padding:12px 16px;border-radius:6px;margin-bottom:16px;">
+          <strong>Disclaimer:</strong> QIF is a proposed framework by Kevin Qi. It has not been peer-reviewed, independently validated, or adopted by any standards body. The physics and math referenced below are established science. The <em>mapping</em> of those principles to BCI security architecture is theoretical and requires independent verification. This page explains the reasoning, not settled fact.
+        </p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">The Problem I Was Trying to Solve</h4>
+        <p>Brain-computer interfaces connect two fundamentally different systems: a biological brain and a silicon computer. When I started looking at how to secure that connection, I realized no existing security model covers both sides. Network security models (OSI, TCP/IP) stop at the wire. Neuroscience models (Kandel's CNS hierarchy) stop at the tissue. Nothing spans the full stack from thought to application.</p>
+        <p>I needed a model that could map <em>where</em> an attack happens, <em>what kind</em> of signal is being attacked, and <em>how predictable</em> that signal is at each point. The shape of the answer turned out to be an hourglass.</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Step 1: The Bottleneck is Real</h4>
+        <p>The Internet protocol stack has an hourglass shape. Many applications at the top, many link technologies at the bottom, and IP as the "narrow waist" through which all traffic must pass (Deering, 1998). Every packet, no matter what it carries, transits IP.</p>
+        <p>BCIs have the same structure. Every signal -- whether neural or synthetic, whether reading or writing -- must cross the electrode-tissue boundary. That physical boundary is not optional. It is where biology ends and silicon begins. I called it <strong>I0</strong>.</p>
+        <p>This is not an analogy I chose for convenience. It is a physical constraint. There is no way to interface with neural tissue without crossing a boundary where the signal changes medium. That boundary is the narrowest point in the system, and it is where security matters most.</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Step 2: The Neural Side Has Layers</h4>
+        <p>Neuroscience already organizes the CNS into a functional hierarchy (Kandel et al., 2021). I mapped 7 bands to this hierarchy because each level has distinct signal properties that matter for security:</p>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Band</span><span>Structure</span><span>Why It Is Its Own Band</span></div>
+          <div class="vision-row"><span>N7</span><span>Neocortex (PFC, M1, V1)</span><span>Highest abstraction. Processes like decision-making and abstract thought involve the smallest-scale dynamics where quantum effects may be non-negligible.</span></div>
+          <div class="vision-row"><span>N6</span><span>Limbic (hippocampus, amygdala)</span><span>Emotion and memory encoding. Chaotic dynamics -- sensitive dependence on initial conditions (Lyapunov exponent > 0).</span></div>
+          <div class="vision-row"><span>N5</span><span>Basal Ganglia (striatum, STN)</span><span>Action selection and reward. Oscillatory loops with chaotic switching between states.</span></div>
+          <div class="vision-row"><span>N4</span><span>Diencephalon (thalamus)</span><span>The brain's router. 95% of LGN input is feedback from cortex, not sensory input. Acts as a biological firewall via the reticular thalamic nucleus (default-deny gating).</span></div>
+          <div class="vision-row"><span>N3</span><span>Cerebellum</span><span>Motor coordination. High-frequency, timing-precise, stochastic but relatively predictable.</span></div>
+          <div class="vision-row"><span>N2</span><span>Brainstem</span><span>Vital functions (breathing, heart rate). Rhythmic, stochastic, life-critical. Attacks here are immediately dangerous.</span></div>
+          <div class="vision-row"><span>N1</span><span>Spinal Cord</span><span>Reflexes. Nearly deterministic. Simple input-output arcs that are the most predictable neural signals.</span></div>
+        </div>
+        <p>These are not arbitrary divisions. Each corresponds to a real anatomical structure with measurably different signal properties (frequency bands, firing patterns, noise characteristics). An attacker targeting N7 faces fundamentally different physics than one targeting N1.</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Step 3: The Silicon Side Has Layers Too</h4>
+        <p>Below I0, the signal enters silicon. I mapped 3 bands because BCI hardware follows a clear processing chain:</p>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Band</span><span>Function</span><span>Physics Regime</span></div>
+          <div class="vision-row"><span>S1</span><span>Analog Front-End (amplification, ADC)</span><span>Near-field. Analog noise still present. Stochastic. On-device.</span></div>
+          <div class="vision-row"><span>S2</span><span>Digital Processing (decoding, algorithms)</span><span>Guided-wave. Fully deterministic. Device-local.</span></div>
+          <div class="vision-row"><span>S3</span><span>Application (software, cloud, storage)</span><span>Far-field. Fully deterministic. Off-device. Classical cybersecurity applies.</span></div>
+        </div>
+        <p>The organizing principle: <strong>physics regime + spatial scale</strong>. S1 is near-field (on the electrode), S2 is guided-wave (on the device), S3 is far-field (off the device into the network). The further from I0, the more classical and auditable the signal becomes.</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Step 4: Width = Unpredictability</h4>
+        <p>Here is where the hourglass shape comes from physics. The width of each band represents its <strong>state space</strong> -- how many possible states the system can occupy at that level. This maps directly to unpredictability, which maps directly to how hard it is to secure.</p>
+        <p>I identified four types of unpredictability, each with different security implications:</p>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Type</span><span>What It Means</span><span>Bands</span><span>Can an Attacker Predict It?</span></div>
+          <div class="vision-row"><span>Deterministic</span><span>Fully predictable given inputs</span><span>S2, S3</span><span>Yes, completely</span></div>
+          <div class="vision-row"><span>Stochastic</span><span>Random, but randomness is epistemic (from ignorance, not physics)</span><span>S1, N1-N3</span><span>Statistically, yes</span></div>
+          <div class="vision-row"><span>Chaotic</span><span>Deterministic equations, but tiny input differences explode exponentially</span><span>N4-N6</span><span>Short-term yes, long-term no</span></div>
+          <div class="vision-row"><span>Quantum uncertain</span><span>Fundamentally indeterminate. No hidden variables (Bell's theorem, 1964).</span><span>N7</span><span>No. Not even in principle.</span></div>
+        </div>
+        <p><strong>The key distinction:</strong> Chaotic systems have hidden variables -- if you knew them perfectly, you could predict the system. Quantum systems do not. Bell's theorem (1964) and its experimental confirmations (Aspect 1982, Hensen 2015) proved this. The unpredictability at N7 is not from lack of information. It is from physics.</p>
+        <p>This means the hourglass is widest at the top (N7, maximum state space, maximum unpredictability) and narrows monotonically down through the neural bands to I0 (measurement collapses state space to classical data), then widens again through silicon (S3 has the most classical attack surface -- APIs, networks, databases).</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Step 5: The Math That Supports This Shape</h4>
+        <p>Each claim above maps to established physics. None of these equations are mine. The <em>application</em> of them to BCI security architecture is what I am proposing.</p>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Equation</span><span>Status</span><span>What It Proves for QIF</span></div>
+          <div class="vision-row"><span>Schrodinger / Hamiltonian: iℏ(d/dt)|ψ> = H|ψ></span><span>Established</span><span>Neural quantum states evolve according to this equation. Qinnovate's early attempt at unifying these physics into a single metric starts here -- the idea is to derive one number per band that captures its indeterminacy. That work is ongoing and unvalidated.</span></div>
+          <div class="vision-row"><span>Decoherence: ρ_ij(t) ~ ρ_ij(0) * e^(-t/τ_D)</span><span>Established</span><span>Off-diagonal elements of the density matrix decay exponentially. τ_D ranges from 10^-13 s (fast decoherence) to hours (slow). This gradient maps to band width.</span></div>
+          <div class="vision-row"><span>Density matrix purity: Tr(ρ^2)</span><span>Established</span><span>Ranges from 1 (pure quantum state, maximum coherence) to 1/d (maximally mixed). Purity decreases as you move from neural domain through I0 to silicon. This IS the hourglass shape in mathematical terms.</span></div>
+          <div class="vision-row"><span>Shannon: C = B log2(1 + S/N)</span><span>Established</span><span>Information capacity at each band boundary is finite and measurable. The interface band I0 is the bandwidth bottleneck of the entire system.</span></div>
+          <div class="vision-row"><span>Hodgkin-Huxley: Cm(dV/dt) = -Σgi*m^p*h^q*(V-Ei) + Iext</span><span>Established</span><span>How neurons fire. Action potential dynamics are deterministic at the channel level but stochastic at the population level (synaptic release probability ~0.1-0.9, Borst 2010).</span></div>
+          <div class="vision-row"><span>Boltzmann: P proportional to e^(-E/kT)</span><span>Established</span><span>A neural spike is only detectable if E_spike / kT >> 1. This sets the physical floor on what any electrode can measure.</span></div>
+          <div class="vision-row"><span>No-Cloning Theorem</span><span>Established</span><span>You cannot copy an arbitrary unknown quantum state. If neural signals at N7 retain any quantum coherence, they cannot be perfectly cloned by an attacker.</span></div>
+          <div class="vision-row"><span>Heisenberg: ΔxΔp >= ℏ/2</span><span>Established</span><span>Measurement precision has fundamental limits. At I0, measuring a neural signal necessarily disturbs it. This is not instrument limitation -- it is physics.</span></div>
+          <div class="vision-row"><span>Tunneling: T ~ e^(-2κd)</span><span>Established</span><span>Ion channels are narrow enough (~0.3-0.5 nm selectivity filter) that quantum tunneling of ions is non-negligible. This contributes to stochasticity at N3+ bands.</span></div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Step 6: One Equation Governs the Full Stack</h4>
+        <p>This was the insight that unified everything: <strong>L = v / f</strong> (wavelength = propagation velocity / frequency).</p>
+        <p>This is not a QIF equation. It is basic wave physics. But it reveals something remarkable about BCI architecture:</p>
+        <div class="vision-stats">
+          <div class="vision-stat"><span class="vision-stat-num">0.1-0.5 m/s</span><span>Unmyelinated intracortical axons</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">5-30 m/s</span><span>Myelinated corticocortical fibers</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">~2x10^8 m/s</span><span>Copper PCB traces</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">3x10^8 m/s</span><span>RF wireless (speed of light)</span></div>
+        </div>
+        <p>Brain oscillations evolved at frequencies where wavelength matches brain structure size. Bluetooth Low Energy operates at frequencies where wavelength matches device proximity. Both converge on the human body scale (~15-20 cm). The brain and the BCI are physically coupled through the same equation, operating at compatible scales.</p>
+        <p>The electromagnetic wavelength (λ) and the neural spatial extent (S) are the same physical quantity: the length of one oscillation in its medium. This means one equation describes signal behavior across the entire hourglass -- from cortical oscillation to RF transmission.</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Step 7: The Bottleneck Determines Security</h4>
+        <p>I0 is where biology meets silicon. Measurement at this boundary collapses the wide neural state space into a narrow classical data stream. How much protection remains depends on where the electrode sits:</p>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Placement</span><span>Neural Layers Above</span><span>Risk Level</span></div>
+          <div class="vision-row"><span>I0-cortical (on brain surface)</span><span>0 -- bypasses all biological protection</span><span>Highest</span></div>
+          <div class="vision-row"><span>I0-subcortical (deep brain, e.g. DBS)</span><span>1-3 layers</span><span>High</span></div>
+          <div class="vision-row"><span>I0-spinal / peripheral</span><span>5-6 layers</span><span>Moderate</span></div>
+          <div class="vision-row"><span>I0-noninvasive (scalp EEG)</span><span>All 7 layers intact</span><span>Lowest</span></div>
+        </div>
+        <p>The thalamus at N4 acts as the brain's natural firewall. Its reticular thalamic nucleus implements something like a default-deny policy: it gates and suppresses signals before they reach cortex. Only ~50 bits per second of the 11 million bits of sensory information processed by the thalamus reach conscious awareness. A cortical implant (I0-cortical) bypasses this protection entirely.</p>
+        <p>This is why the hourglass model matters for security: the depth of the interface determines how many natural protection layers are bypassed, which determines the threat surface.</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">What This Does Not Claim</h4>
+        <p>Intellectual honesty requires stating what is <em>not</em> established:</p>
+        <ul style="margin:8px 0;padding-left:20px;line-height:1.7;">
+          <li>Qinnovate's approach to unifying these equations into a single per-band metric is <strong>an early-stage attempt, not a finished tool</strong>. The idea is to combine the physics above into one number that captures each band's indeterminacy. That work is ongoing and has not been independently validated.</li>
+          <li>Whether quantum coherence persists long enough to matter at N7 is an <strong>open question in quantum biology</strong>. Decoherence in warm, wet neural tissue is fast. Some researchers (Penrose, Hameroff) argue coherence matters; others strongly disagree.</li>
+          <li>The 7-1-3 split is <strong>one possible mapping</strong>. Other researchers might draw boundaries differently. The number of bands is a design choice informed by neuroanatomy, not dictated by it.</li>
+          <li>The security implications are <strong>theoretical</strong>. No adversary has, to my knowledge, exploited quantum properties of neural signals. The model anticipates a threat surface, it does not document active exploitation.</li>
+          <li>NISS scores, TARA techniques, and the Coherence Metric (Cs) built on top of this model are <strong>proposed tools that require independent validation</strong>.</li>
+        </ul>
+        <p>The physics is real. The architecture is proposed. The validation is ahead of us.</p>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Sources</h4>
+        <ul style="margin:8px 0;padding-left:20px;line-height:1.8;font-size:0.85rem;">
+          <li>Deering, S. (1998). "Watching the Waist of the Protocol Hourglass." IETF.</li>
+          <li>Kandel, E. et al. (2021). <em>Principles of Neural Science</em>, 6th ed. McGraw-Hill.</li>
+          <li>Bell, J.S. (1964). "On the Einstein Podolsky Rosen Paradox." <em>Physics</em> 1(3).</li>
+          <li>Aspect, A. et al. (1982). "Experimental Realization of EPR-Bohm Gedankenexperiment." <em>Phys. Rev. Lett.</em> 49(2).</li>
+          <li>Hensen, B. et al. (2015). "Loophole-free Bell inequality violation." <em>Nature</em> 526.</li>
+          <li>Hodgkin, A.L. & Huxley, A.F. (1952). "A quantitative description of membrane current." <em>J. Physiol.</em> 117(4).</li>
+          <li>Shannon, C.E. (1948). "A Mathematical Theory of Communication." <em>Bell System Tech. J.</em> 27.</li>
+          <li>Borst, J.G.G. (2010). "The low synaptic release probability in vivo." <em>TINS</em> 33(6).</li>
+          <li>Sherman, S.M. (2006). "Thalamocortical interactions." <em>Current Opinion in Neurobiology</em> 16(4).</li>
+          <li>Fries, P. (2015). "Rhythms for Cognition: Communication through Coherence." <em>Neuron</em> 88(1).</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderVision(container) {
+  container.innerHTML = `
+    <div class="vision-section">
+      <div class="vision-intro">
+        <p>How the brain sees -- and what it means for brain-computer interfaces. The visual system is the best-understood sensory pipeline in neuroscience and the most advanced target for BCI prosthetics.</p>
+        <a href="https://github.com/qinnovates/qinnovate/tree/main/public/learn/autodidactive/neuroscience/vision" target="_blank" rel="noopener noreferrer" class="vision-docs-link">Full documentation on GitHub</a>
+      </div>
+
+      <div class="vision-pipeline">
+        <h4 class="vision-heading">The Visual Pipeline</h4>
+        <div class="vision-stages">
+          <div class="vision-stage"><span class="vision-stage-icon">👁️</span><div><strong>Retina</strong><span>130M photoreceptors, 100:1 compression</span></div></div>
+          <div class="vision-arrow">→</div>
+          <div class="vision-stage"><span class="vision-stage-icon">⚡</span><div><strong>Optic Nerve</strong><span>~1.2M axons, ~10 Mbps</span></div></div>
+          <div class="vision-arrow">→</div>
+          <div class="vision-stage"><span class="vision-stage-icon">🚦</span><div><strong>LGN (Thalamus)</strong><span>95% feedback, 5% retinal input</span></div></div>
+          <div class="vision-arrow">→</div>
+          <div class="vision-stage"><span class="vision-stage-icon">🧠</span><div><strong>V1 Visual Cortex</strong><span>Orientation detection, Gabor filters</span></div></div>
+          <div class="vision-arrow">→</div>
+          <div class="vision-stage"><span class="vision-stage-icon">🎯</span><div><strong>Higher Areas</strong><span>V4 (color), MT (motion), IT (objects)</span></div></div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">The Computer Analogy</h4>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Biology</span><span>Computing</span></div>
+          <div class="vision-row"><span>Photoreceptors</span><span>Image sensor pixels</span></div>
+          <div class="vision-row"><span>Ganglion cells</span><span>Edge detector filters (first conv layer)</span></div>
+          <div class="vision-row"><span>Optic nerve</span><span>Serial data bus (~10 Mbps)</span></div>
+          <div class="vision-row"><span>LGN</span><span>Router with attention-gating policy</span></div>
+          <div class="vision-row"><span>V1 simple cells</span><span>Gabor filter bank (conv layer)</span></div>
+          <div class="vision-row"><span>V1 complex cells</span><span>Pooling layer (spatial invariance)</span></div>
+          <div class="vision-row"><span>IT cortex</span><span>Face embedding / classification layer</span></div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Retinal Cell Types</h4>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Type</span><span>Count</span><span>Role</span></div>
+          <div class="vision-row"><span>Rods</span><span>~120M</span><span>Low-light, peripheral</span></div>
+          <div class="vision-row"><span>Cones (L/M/S)</span><span>~6-7M</span><span>Color, fine detail</span></div>
+          <div class="vision-row"><span>Bipolar cells</span><span>~10M</span><span>ON/OFF edge splitting</span></div>
+          <div class="vision-row"><span>Ganglion cells</span><span>~1.2M</span><span>Output to optic nerve</span></div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">BCI Visual Prosthetics</h4>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Device</span><span>Approach</span><span>Status</span></div>
+          <div class="vision-row"><span>Argus II</span><span>Ganglion stim (downstream)</span><span>Discontinued</span></div>
+          <div class="vision-row"><span>PRIMA</span><span>Bipolar stim (upstream)</span><span>NEJM published</span></div>
+          <div class="vision-row"><span>Orion</span><span>V1 cortical surface</span><span>Feasibility trial</span></div>
+          <div class="vision-row"><span>BrainPort</span><span>Tongue sensory sub</span><span>FDA cleared</span></div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">Key Numbers</h4>
+        <div class="vision-stats">
+          <div class="vision-stat"><span class="vision-stat-num">~576 MP</span><span>Full-field resolution (with saccades)</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">100:1</span><span>Retinal compression ratio</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">~30%</span><span>Cortex devoted to vision</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">3-4/sec</span><span>Saccadic eye movements</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">~10 Mbps</span><span>Optic nerve bandwidth</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">199K/mm²</span><span>Foveal cone density</span></div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <h4 class="vision-heading">QIF Band Mapping</h4>
+        <div class="vision-table">
+          <div class="vision-row vision-row-header"><span>Band</span><span>Structure</span><span>Visual Role</span></div>
+          <div class="vision-row"><span>N7</span><span>V1, V4, MT, IT</span><span>All cortical visual processing</span></div>
+          <div class="vision-row"><span>N4</span><span>LGN (thalamus)</span><span>Relay + attention gating</span></div>
+          <div class="vision-row"><span>N2</span><span>Superior colliculus</span><span>Reflexes, blindsight</span></div>
+          <div class="vision-row"><span>I0</span><span>Electrode boundary</span><span>Prosthetic interface</span></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderByType(grid, type, data) {
+  if (type === 'timeline') {
     renderEthicsTimeline(grid);
     return;
   }
 
-  if (currentField === 'Concepts') {
-    renderConceptIndex(grid);
+  if (type === 'neuroanatomy') {
+    renderNeuroanatomy(grid);
     return;
   }
 
-  if (currentField === 'paths' || currentField === 'Paths') {
+  if (type === 'mindmap') {
+    renderMindmap(grid);
+    return;
+  }
+
+  if (type === 'hourglass-physics') {
+    renderHourglassPhysics(grid);
+    return;
+  }
+
+  if (type === 'vision') {
+    renderVision(grid);
+    return;
+  }
+
+
+  if (type === 'paths') {
     if (currentPath) {
       grid.innerHTML = renderPathDetail(currentPath);
     } else {
@@ -416,24 +837,24 @@ function renderCardGrid() {
     return;
   }
 
-  // Handle standard field filtering OR concept filtering
-  let people = ALL_PEOPLE;
-  if (currentConcept) {
-    const conceptData = getConceptIndex().find(c => c.concept === currentConcept);
-    if (conceptData) {
-      people = ALL_PEOPLE.filter(p => conceptData.ids.includes(p.id));
-    }
-  } else if (currentField !== 'All') {
-    people = ALL_PEOPLE.filter(p =>
-      p.fields.some(f => f.toLowerCase() === currentField.toLowerCase())
-    );
+  if (type === 'labs') {
+    grid.innerHTML = data.map(lab => `
+      <div class="person-card" onclick="window._openLab('${lab.id}')">
+        <div class="person-card-header">
+          <span class="person-card-emoji">${lab.emoji}</span>
+          <div>
+            <div class="person-card-name">${esc(lab.name)}</div>
+            <div class="person-card-tagline">${esc(lab.tagline || '')}</div>
+          </div>
+        </div>
+        <p class="person-card-desc">${esc(lab.description || '')}</p>
+      </div>
+    `).join('');
+    return;
   }
 
-  const conceptHeader = currentConcept
-    ? `<div class="concept-header"><button class="concept-back-btn" onclick="window._closeConcept()">← Concepts</button> <h2 class="concept-title">${esc(currentConcept)}</h2></div>`
-    : '';
-
-  grid.innerHTML = conceptHeader + people.map(p => renderPersonCard(p)).join('');
+  // Default: people cards
+  grid.innerHTML = data.map(p => renderPersonCard(p)).join('');
 }
 
 function renderConceptIndex(container) {
@@ -620,17 +1041,25 @@ let noteWallInitialized = false;
 
 function renderNoteWall() {
   const container = document.getElementById('view-notewall');
-  if (!noteWallInitialized) {
-    container.innerHTML = `
-      <div class="notewall-header">
-        <h2 class="notewall-title">Note Wall</h2>
-        <p class="notewall-hint">Tap anywhere to add a note</p>
-      </div>
+
+  container.innerHTML = `
+    <div class="notewall-header">
+      <h2 class="notewall-title">Notes</h2>
+    </div>
+    <div class="notes-section">
+      <h3 class="notes-section-label">Note Wall</h3>
+      <p class="notewall-hint">Tap anywhere to add a note</p>
       <div class="notewall-canvas" id="notewallCanvas"></div>
-    `;
-    initNoteWall(document.getElementById('notewallCanvas'));
-    noteWallInitialized = true;
-  }
+    </div>
+    <div class="notes-section notes-section--mindmap">
+      <h3 class="notes-section-label">Mind Map</h3>
+      <div id="mindmapContainer"></div>
+    </div>
+  `;
+
+  initNoteWall(document.getElementById('notewallCanvas'));
+  noteWallInitialized = true;
+  renderMindmap(document.getElementById('mindmapContainer'));
 }
 
 // ── AI Settings ──────────────────────────────────────────────────────────────
@@ -991,9 +1420,9 @@ let currentPath = null;
 
 function openPath(pathId) {
   navigate('learn');
-  currentField = 'paths';
+  currentCategory = 'paths';
   currentPath = pathId;
-  renderCardGrid();
+  renderLearn();
   // Close tutor panel if open
   const tutor = document.getElementById('tutor-panel');
   if (tutor && tutor.style.display !== 'none') closeTutor();
@@ -1001,8 +1430,8 @@ function openPath(pathId) {
 
 function showPaths() {
   currentPath = null;
-  currentField = 'paths';
-  renderCardGrid();
+  currentCategory = 'paths';
+  renderLearn();
 }
 
 // ── Canvas UI ───────────────────────────────────────────────────────────────
@@ -1161,8 +1590,38 @@ window._tutorAsk = async (query) => {
   await sendTutorMessage();
 };
 
-// ── Init ────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+// ── Consent Gate ────────────────────────────────────────────────────────────
+const CONSENT_KEY = 'autodidactive-consent';
+
+function showConsentModal() {
+  if (localStorage.getItem(CONSENT_KEY) === 'accepted') return false;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'consent-overlay';
+  overlay.innerHTML = `
+    <div class="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+      <h2 id="consent-title" class="consent-title">Welcome to Autodidactive</h2>
+      <div class="consent-body">
+        <p>This is an early-stage MVP and a placeholder for something bigger. Right now, it helps me stay on track with learning while I finish my applications. It is bare-bones by design.</p>
+        <p>The long-term goal is to build this into an accessible learning tool for anyone interested in neurosecurity, neuroethics, and BCI work — starting with full ADA/WCAG accessibility, then expanding toward BCI-compatible interfaces.</p>
+        <p>I see this being genuinely useful for students entering this field, and I plan to develop it further once my applications are done. For now, consider this a foundation.</p>
+        <p class="consent-storage">This app uses <strong>localStorage</strong> to save your notes, mindmaps, and learning progress. All data stays in your browser and is never transmitted to any server.</p>
+      </div>
+      <button class="consent-btn" id="consentAccept">I consent</button>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  document.getElementById('consentAccept').addEventListener('click', () => {
+    localStorage.setItem(CONSENT_KEY, 'accepted');
+    overlay.remove();
+    initApp();
+  });
+  document.getElementById('consentAccept').focus();
+  return true;
+}
+
+function initApp() {
   // Tab navigation
   document.querySelectorAll('.tab-nav__item').forEach(btn => {
     btn.addEventListener('click', () => navigate(btn.dataset.view));
@@ -1218,4 +1677,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init Tier 2 if opted in
   initTier2();
+}
+
+// ── Init ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  if (!showConsentModal()) {
+    initApp();
+  }
 });

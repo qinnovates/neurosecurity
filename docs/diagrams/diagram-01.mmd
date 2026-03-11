@@ -1,0 +1,205 @@
+graph TB
+    subgraph CORE["CORE RESEARCH"]
+        direction TB
+        QIF["QIF Framework<br/>11-Band Hourglass<br/>v7.0"]
+        TARA["TARA<br/>109 Attack-Therapy Techniques<br/>v1.7"]
+        NISS["NISS<br/>6 Neural Metrics<br/>v1.1"]
+        NIC["Neural Impact Chain<br/>Attack → Symptom Pathway"]
+        GUARD["Security Guardrails<br/>12/13 Physics Constraints"]
+        DSM["DSM-5-TR Mappings<br/>109 Techniques → Categories"]
+    end
+
+    subgraph IMPL["IMPLEMENTATIONS"]
+        direction TB
+        NSP["NSP Protocol<br/>Rust, PQ-Crypto<br/>ML-KEM-768 + ML-DSA"]
+        RUNE["Runemate Forge<br/>Rust DSL Compiler<br/>v1.0, 25/25 Tests"]
+        QTARA["qtara SDK<br/>Python, PyPI<br/>pip install qtara"]
+        NWALL["Neurowall<br/>Neural Firewall<br/>v0.8 Simulation"]
+        NSIM["Neurosim<br/>Attack Generators<br/>103 Patterns"]
+    end
+
+    subgraph DATA["DATA LAYER"]
+        direction TB
+        REG["qtara-registrar.json<br/>103 Techniques"]
+        DSMJ["qif-dsm-mappings.json"]
+        BRAIN["qif-brain-bci-atlas.json"]
+        CTRL["Security + Ethics Controls"]
+        CVE["cve-technique-mapping.json<br/>55 CVEs"]
+        SCORES["neurosecurity-scores.json"]
+        VALID["validation-registry.json"]
+        LAND["bci-landscape.json"]
+        RREG["research-registry.json<br/>309+ Sources"]
+    end
+
+    subgraph SITE["WEBSITE — qinnovate.com"]
+        direction TB
+
+        subgraph PILLAR1["Framework Pillar"]
+            PFW["/framework/"]
+            PSEC["/security/"]
+            PGLOSS["/glossary/"]
+        end
+
+        subgraph PILLAR2["Atlas Pillar"]
+            PATLAS["/atlas/"]
+            PTARA["/atlas/tara/ + /[id]"]
+            PNISS["/atlas/scoring/"]
+            PTHER["/atlas/therapeutics/"]
+            PCASE["/atlas/analysis/"]
+        end
+
+        subgraph PILLAR3["Research Pillar"]
+            PWP["/research/whitepaper/"]
+            PLAND["/research/landscape/"]
+            PBCI["/research/bci-explorer/"]
+            PNEURO["/research/neuroethics-landscape/"]
+            PCLIN["/research/clinical/"]
+            PVAL["/research/validation/"]
+        end
+
+        subgraph PILLAR4["News Pillar"]
+            PNEWS["/news/"]
+            PROAD["/news/roadmap/"]
+            PDERIV["/news/derivation/"]
+        end
+
+        subgraph PILLAR5["About Pillar"]
+            PABOUT["/about/"]
+            PGOV["/governance/"]
+            PRIGHTS["/governance/rights/"]
+            PLIC["/licensing/"]
+        end
+
+        subgraph TOOLS_P["Tools Pages"]
+            PTOOLS["/tools/"]
+            PNSP["/tools/nsp/"]
+            PRUNE["/tools/runemate/"]
+        end
+
+        subgraph API["API Endpoints"]
+            APITARA["/api/tara.json"]
+            APISTIX["/api/stix.json"]
+            APIQIF["/api/qif.json"]
+        end
+    end
+
+    subgraph PAPER["ACADEMIC OUTPUT"]
+        LATEX["LaTeX Paper<br/>10 Sections, v1.4"]
+        ZENODO["Zenodo DOI<br/>10.5281/zenodo.18640105"]
+        BIB["references.bib"]
+    end
+
+    subgraph GOV["GOVERNANCE DOCS"]
+        NEUGOV["Neurosecurity Governance"]
+        POLICY["Policy Proposal<br/>6 Orgs, 6 Asks"]
+        CONSENT["Informed Consent"]
+        TRANS["Transparency Statement"]
+    end
+
+    subgraph LOGS["RESEARCH LOGS"]
+        DLOG["Derivation Log<br/>86 Entries"]
+        FJOURNAL["Field Journal<br/>22 Entries"]
+        RSRC["Research Sources<br/>309+ Verified"]
+    end
+
+    subgraph INFRA["INFRASTRUCTURE"]
+        CI["11 Active Workflows"]
+        VERIFY["Verification Pipeline<br/>Citations, Facts, CrossRefs"]
+        PIPE["Data Pipeline<br/>populate-*.py Scripts"]
+    end
+
+    %% Core relationships
+    QIF --> TARA
+    QIF --> NISS
+    QIF --> GUARD
+    TARA --> NISS
+    TARA --> NIC
+    NIC --> DSM
+    GUARD --> QIF
+
+    %% Implementations consume core
+    NSP --> QIF
+    RUNE --> QIF
+    RUNE --> NSP
+    NWALL --> TARA
+    NWALL --> NISS
+    NWALL --> NSP
+    NWALL --> RUNE
+    NSIM --> TARA
+    QTARA --> TARA
+
+    %% Data feeds implementations
+    REG --> QTARA
+    REG --> NSIM
+    REG --> NWALL
+    DSMJ --> NIC
+    SCORES --> NISS
+    VALID --> NWALL
+
+    %% Site consumes data
+    REG --> PTARA
+    REG --> PATLAS
+    REG --> APITARA
+    REG --> APISTIX
+    DSMJ --> PCLIN
+    BRAIN --> PATLAS
+    LAND --> PLAND
+    LAND --> PBCI
+    SCORES --> PNISS
+    VALID --> PVAL
+    CVE --> PTARA
+    RREG --> PNEURO
+
+    %% Site pages map to core
+    PFW --> QIF
+    PSEC --> QIF
+    PTARA --> TARA
+    PNISS --> NISS
+    PTHER --> NIC
+    PCASE --> TARA
+    PNSP --> NSP
+    PRUNE --> RUNE
+
+    %% Academic output
+    QIF --> LATEX
+    TARA --> LATEX
+    NISS --> LATEX
+    LATEX --> ZENODO
+    BIB --> LATEX
+    RSRC --> BIB
+
+    %% Governance
+    NEUGOV --> PGOV
+    POLICY --> PGOV
+    CONSENT --> PGOV
+    TRANS --> PDERIV
+
+    %% Logs
+    DLOG --> PDERIV
+    FJOURNAL --> PNEWS
+    RSRC --> PLAND
+
+    %% Infrastructure
+    CI --> SITE
+    VERIFY --> RSRC
+    VERIFY --> BIB
+    PIPE --> DATA
+
+    %% Styles
+    classDef core fill:#1e3a5f,stroke:#3b82f6,color:#fff
+    classDef impl fill:#1a3a1a,stroke:#22c55e,color:#fff
+    classDef data fill:#3a2a1a,stroke:#f97316,color:#fff
+    classDef site fill:#2a1a3a,stroke:#a855f7,color:#fff
+    classDef paper fill:#3a1a1a,stroke:#ef4444,color:#fff
+    classDef gov fill:#1a2a3a,stroke:#06b6d4,color:#fff
+    classDef logs fill:#2a2a1a,stroke:#eab308,color:#fff
+    classDef infra fill:#1a1a1a,stroke:#6b7280,color:#fff
+
+    class QIF,TARA,NISS,NIC,GUARD,DSM core
+    class NSP,RUNE,QTARA,NWALL,NSIM impl
+    class REG,DSMJ,BRAIN,CTRL,CVE,SCORES,VALID,LAND,RREG data
+    class PFW,PSEC,PGLOSS,PATLAS,PTARA,PNISS,PTHER,PCASE,PWP,PLAND,PBCI,PNEURO,PCLIN,PVAL,PNEWS,PROAD,PDERIV,PABOUT,PGOV,PRIGHTS,PLIC,PTOOLS,PNSP,PRUNE,APITARA,APISTIX,APIQIF site
+    class LATEX,ZENODO,BIB paper
+    class NEUGOV,POLICY,CONSENT,TRANS gov
+    class DLOG,FJOURNAL,RSRC logs
+    class CI,VERIFY,PIPE infra

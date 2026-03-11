@@ -238,6 +238,11 @@ const VIEW_ICONS: Record<string, JSX.Element> = {
   ),
 };
 
+// Preload the GLB model as soon as this module is imported.
+// This fires during React.lazy() resolution, before the component mounts,
+// so the model is already cached by the time Canvas renders.
+useGLTF.preload('/models/brain.glb');
+
 export default function BrainVisualization({
   views,
   defaultView,

@@ -1,0 +1,40 @@
+graph LR
+    subgraph KEEP["KEEP — Essential"]
+        direction TB
+        K1["QIF Framework"]
+        K2["TARA Atlas (109 techniques)"]
+        K3["NISS Scoring"]
+        K4["NSP Protocol (Rust)"]
+        K5["Runemate Forge (Rust)"]
+        K6["qtara SDK (PyPI)"]
+        K7["Neurowall + Neurosim"]
+        K8["LaTeX Paper + Zenodo"]
+        K9["Derivation Log + Field Journal"]
+        K10["Research Sources (309+)"]
+        K11["All governance docs"]
+        K12["Verification pipeline"]
+        K13["13 JSON registries"]
+    end
+
+    subgraph CUT["CUT — Remove"]
+        direction TB
+        C1["/research/bci-dashboard/<br/>Duplicates BCI Explorer"]
+        C2["/lab/<br/>Empty after math removal"]
+        C3["Whitepaper v2, v3, v5<br/>Too old to matter"]
+        C4["8 disabled CI workflows<br/>Dead code"]
+    end
+
+    subgraph REVIEW["REVIEW — Decide"]
+        direction TB
+        R1["/atlas/explorer/<br/>Merge into /atlas/?"]
+        R2["/research/bci-limits/<br/>Overlaps guardrails?"]
+        R3["ONI archive<br/>Still needed?"]
+    end
+
+    classDef keep fill:#1a3a1a,stroke:#22c55e,color:#fff
+    classDef cut fill:#3a1a1a,stroke:#ef4444,color:#fff
+    classDef review fill:#3a2a1a,stroke:#f97316,color:#fff
+
+    class K1,K2,K3,K4,K5,K6,K7,K8,K9,K10,K11,K12,K13 keep
+    class C1,C2,C3,C4 cut
+    class R1,R2,R3 review

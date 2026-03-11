@@ -4,7 +4,7 @@
  * All data driven from JSON via atlas-data.ts.
  */
 
-import { Suspense, useState, useEffect, useCallback, lazy } from 'react';
+import { Component, Suspense, useState, useEffect, useCallback, lazy, type ReactNode } from 'react';
 import { AtlasProvider, useAtlas, type ViewMode } from './AtlasContext';
 import HourglassVisualization from './HourglassVisualization';
 import AtlasDetailPanel from './AtlasDetailPanel';
@@ -14,8 +14,47 @@ import { HOURGLASS_BANDS } from '../../lib/qif-constants';
 import type { AtlasData } from '../../lib/atlas-data';
 import type { BrainView } from '../../lib/brain-view-data';
 
-// Lazy-load BrainVisualization to avoid SSR issues with Three.js
-const BrainVisualization = lazy(() => import('../brain/BrainVisualization'));
+// Lazy-load with retry — if the chunk fails to load (network issue, stale cache),
+// retry up to 3 times with increasing delay before giving up.
+function lazyWithRetry<T extends { default: React.ComponentType<any> }>(
+  loader: () => Promise<T>,
+  retries = 3,
+): React.LazyExoticComponent<T['default']> {
+  return lazy(() => {
+    let attempt = 0;
+    const tryLoad = (): Promise<T> =>
+      loader().catch((err) => {
+        attempt++;
+        if (attempt >= retries) throw err;
+        // Increasing delay: 1s, 2s, 3s — gives cache/network time to recover
+        return new Promise<T>((resolve) =>
+          setTimeout(() => resolve(tryLoad()), attempt * 1000)
+        );
+      });
+    return tryLoad();
+  });
+}
+
+const BrainVisualization = lazyWithRetry(() => import('../brain/BrainVisualization'));
+
+// Error boundary — catches WebGL crashes, chunk load failures, and Three.js errors.
+// Shows a useful fallback instead of a blank page.
+interface ErrorBoundaryProps {
+  fallback: (props: { error: Error; retry: () => void }) => ReactNode;
+  children: ReactNode;
+}
+interface ErrorBoundaryState {
+  error: Error | null;
+}
+class WebGLErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  state: ErrorBoundaryState = { error: null };
+  static getDerivedStateFromError(error: Error) { return { error }; }
+  retry = () => { this.setState({ error: null }); };
+  render() {
+    if (this.state.error) return this.props.fallback({ error: this.state.error, retry: this.retry });
+    return this.props.children;
+  }
+}
 
 interface Props {
   atlasData: AtlasData;
@@ -236,24 +275,47 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
               className={`lg:w-[60%] ${mobileTab !== 'brain' ? 'hidden lg:block' : ''}`}
               style={{ minHeight: '400px' }}
             >
-              <Suspense fallback={
-                <div className="flex items-center justify-center h-full" style={{ minHeight: '400px' }}>
-                  <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Loading 3D brain...</p>
+              <WebGLErrorBoundary fallback={({ error, retry }) => (
+                <div className="flex flex-col items-center justify-center h-full gap-3" style={{ minHeight: '400px' }}>
+                  <p className="text-sm" style={{ color: 'var(--color-text-faint)' }}>
+                    3D visualization failed to load
+                  </p>
+                  <p className="text-xs max-w-xs text-center" style={{ color: 'var(--color-text-faint)' }}>
+                    {error.message.includes('WebGL')
+                      ? 'Your browser may not support WebGL. Try Chrome or Firefox.'
+                      : 'A loading error occurred. This can happen with cached or interrupted page loads.'}
+                  </p>
+                  <button
+                    onClick={retry}
+                    className="px-4 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                    style={{
+                      background: 'var(--color-accent-primary)',
+                      color: '#fff',
+                    }}
+                  >
+                    Retry
+                  </button>
                 </div>
-              }>
-                <BrainVisualization
-                  views={brainViews}
-                  defaultView={brainViewId}
-                  externalActiveRegion={selectedBandId}
-                  onRegionSelect={handleBrainRegionSelect}
-                  externalViewId={brainViewId}
-                  onViewChange={(id) => {
-                    const mode = VIEW_MODE_CONFIG.find(v => v.brainViewId === id);
-                    if (mode) setViewMode(mode.id);
-                  }}
-                  hideViewToggle
-                />
-              </Suspense>
+              )}>
+                <Suspense fallback={
+                  <div className="flex items-center justify-center h-full" style={{ minHeight: '400px' }}>
+                    <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Loading 3D brain...</p>
+                  </div>
+                }>
+                  <BrainVisualization
+                    views={brainViews}
+                    defaultView={brainViewId}
+                    externalActiveRegion={selectedBandId}
+                    onRegionSelect={handleBrainRegionSelect}
+                    externalViewId={brainViewId}
+                    onViewChange={(id) => {
+                      const mode = VIEW_MODE_CONFIG.find(v => v.brainViewId === id);
+                      if (mode) setViewMode(mode.id);
+                    }}
+                    hideViewToggle
+                  />
+                </Suspense>
+              </WebGLErrorBoundary>
             </div>
           </div>
 
