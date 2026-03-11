@@ -1,0 +1,106 @@
+{
+  "title": "Theta and Memory Encoding",
+  "topic": "How theta oscillations in the hippocampus drive memory formation",
+  "ambient_duration_sec": 1560,
+  "breathing_pacer_end_sec": 240,
+  "segments": [
+    {
+      "phase": "induction",
+      "text": "Allow your focus to soften... <break time=\"2.0s\" /> You don't need to stop what you're doing. <break time=\"1.5s\" /> Just let this voice become part of the background... <break time=\"2.0s\" /> like music in another room."
+    },
+    {
+      "phase": "induction",
+      "text": "There's nothing you need to do right now... <break time=\"1.5s\" /> except breathe. <break time=\"2.0s\" /> And notice how each exhale settles you a little deeper into wherever you already are."
+    },
+    {
+      "phase": "deepening",
+      "text": "Each breath takes you a little deeper into focus... <break time=\"4.0s\" /> And with each exhale... the noise around you matters less. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "deepening",
+      "text": "Your mind is already doing what it does best... <break time=\"3.0s\" /> making sense of what it hears... <break time=\"4.0s\" /> without any effort at all. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "content",
+      "text": "Deep in the center of your brain... there's a structure shaped like a seahorse. <break time=\"3.0s\" /> The HIPPOCAMPUS. <break time=\"5.0s\" /> It's where new memories are born.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "content",
+      "text": "The hippocampus speaks in waves... <break time=\"3.0s\" /> four to eight cycles per second. <break time=\"2.0s\" /> This rhythm is called THETA. <break time=\"5.0s\" /> Theta oscillations. <break time=\"3.0s\" /> The encoding rhythm.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "emphasis",
+      "text": "THETA DRIVES ENCODING. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "content",
+      "text": "When you hear something worth remembering... <break time=\"2.0s\" /> the hippocampus fires in theta waves. <break time=\"3.0s\" /> Each wave is a window... <break time=\"2.0s\" /> a moment when the door to long-term memory opens. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "content",
+      "text": "You might notice something interesting. <break time=\"2.0s\" /> Within each theta wave... <break time=\"2.0s\" /> there are faster bursts. <break time=\"3.0s\" /> GAMMA oscillations... thirty to a hundred cycles per second. <break time=\"5.0s\" /> Each gamma burst carries a single item. <break time=\"3.0s\" /> A single piece of what you're learning right now.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "emphasis",
+      "text": "THETA WAVES carry GAMMA BURSTS. <break time=\"3.0s\" /> Each burst... one memory item. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "content",
+      "text": "This is called THETA-GAMMA COUPLING. <break time=\"5.0s\" /> The slow wave organizes the fast bursts. <break time=\"3.0s\" /> Like a train with compartments. <break time=\"2.0s\" /> The theta wave is the train. <break time=\"2.0s\" /> Each gamma burst is a car. <break time=\"3.0s\" /> Four to seven cars per train. <break time=\"5.0s\" /> That's why working memory holds about four to seven items.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "content",
+      "text": "Picture it now. <break time=\"2.0s\" /> A wave... rolling through the hippocampus... <break time=\"3.0s\" /> four times each second. <break time=\"2.0s\" /> And riding on that wave... <break time=\"2.0s\" /> bursts of gamma. <break time=\"3.0s\" /> Each burst encoding a fragment of this moment. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "content",
+      "text": "Later tonight... when you sleep... <break time=\"3.0s\" /> the hippocampus will replay what it recorded. <break time=\"2.0s\" /> Compressed. <break time=\"2.0s\" /> Faster than real time. <break time=\"3.0s\" /> Sharp-wave ripples... eighty to a hundred and twenty hertz. <break time=\"5.0s\" /> Each replay strengthens the trace. <break time=\"3.0s\" /> The hippocampus teaches the cortex what it learned.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "emphasis",
+      "text": "ENCODING happens in THETA. <break time=\"3.0s\" /> CONSOLIDATION happens in SLEEP. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "content",
+      "text": "You might find that this feels familiar already. <break time=\"3.0s\" /> As if you've always known it. <break time=\"5.0s\" /> The hippocampus... shaped like a seahorse... <break time=\"2.0s\" /> speaking in theta... <break time=\"2.0s\" /> carrying gamma bursts like a train carries its cars. <break time=\"5.0s\" />"
+    },
+    {
+      "phase": "reinforcement",
+      "text": "Let's revisit what's already settling in. <break time=\"3.0s\" /> The hippocampus generates theta... four to eight hertz.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "reinforcement",
+      "text": "<break time=\"10.0s\" /> Theta waves carry gamma bursts. <break time=\"3.0s\" /> Each burst encodes one item.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "reinforcement",
+      "text": "<break time=\"15.0s\" /> Theta-gamma coupling. <break time=\"3.0s\" /> The encoding rhythm.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "reinforcement",
+      "text": "<break time=\"20.0s\" /> Sleep replays the recording. <break time=\"3.0s\" /> Sharp-wave ripples consolidate the memory.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "reinforcement",
+      "text": "<break time=\"20.0s\" /> Theta... gamma... coupling... consolidation. <break time=\"5.0s\" /> You know this now.",
+      "tmr_chime": true
+    },
+    {
+      "phase": "emergence",
+      "text": "Begin to bring your full attention back to whatever you were doing. <break time=\"2.0s\" /> Feeling clear. <break time=\"1.5s\" /> Focused. <break time=\"1.5s\" /> And carrying what you've absorbed."
+    },
+    {
+      "phase": "emergence",
+      "text": "These ideas are now woven into your understanding. <break time=\"2.0s\" /> The hippocampus... theta... gamma coupling... sleep consolidation. <break time=\"1.5s\" /> Part of what you know."
+    }
+  ]
+}
