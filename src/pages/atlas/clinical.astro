@@ -1,10 +1,13 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import ClinicalDashboard from '@/components/atlas/ClinicalDashboard';
+import BciKql from '@/components/bci/BciKql';
 import { getClinicalData } from '@/lib/clinical-data';
+import { getKqlTables } from '@/lib/kql-tables';
 
 // Build-time data compilation — all JSON sources merged dynamically
 const clinicalData = getClinicalData();
+const kqlTables = getKqlTables();
 ---
 
 <PageLayout
