@@ -100,11 +100,13 @@ C & Critical & 10.0 & Complete cognitive surveillance---all neural activity read
 \end{tabular}
 \end{table}
 
-\subsubsection{CD: Cognitive Disruption}
+\subsubsection{CD: Cognitive/Functional Disruption}
 
-Degree of unauthorized cognitive write access---perception manipulation, identity
-modification, cognitive coercion, false stimuli injection. CD maps to the Mental
-Integrity neurorights dimension.
+Degree of unauthorized disruption to cognitive processing, sensory perception,
+motor output, or autonomic regulation---including perception manipulation,
+identity modification, cognitive coercion, and false stimuli injection. CD maps
+to the Mental Integrity neurorights dimension and extends to ICD-10-CM chapters
+G~(nervous system), H~(eye/ear), and R~(symptoms/signs).
 
 \begin{table}[H]
 \centering
@@ -174,7 +176,8 @@ to rewire itself. This has no digital equivalent.
 \textbf{Value} & \textbf{Label} & \textbf{Score} & \textbf{Description} \\
 \midrule
 N & None       & 0.0  & No neuroplastic effect \\
-T & Temporary  & 5.0  & Short-term synaptic changes that decay within hours--days \\
+T & Temporary  & 3.3  & Short-term synaptic changes that decay within hours--weeks \\
+P & Partial    & 6.7  & Moderate synaptic reorganization persisting weeks to months \\
 S & Structural & 10.0 & Long-term or permanent neural pathway changes \\
 \bottomrule
 \end{tabular}
@@ -253,8 +256,8 @@ CVSS severity:
 \toprule
 \textbf{NISS Severity} & \textbf{Count} & \textbf{\%} \\
 \midrule
-High     & 21 & 19.3\% \\
-Medium   & 35 & 32.1\% \\
+High     & 19 & 17.4\% \\
+Medium   & 37 & 33.9\% \\
 Low      & 52 & 47.7\% \\
 None     &  1 &  0.9\% \\
 \bottomrule
@@ -275,3 +278,49 @@ Figure~\ref{fig:niss-gap} visualizes the gap between CVSS and NISS scoring.
   extension metrics CVSS cannot express.}
   \label{fig:niss-gap}
 \end{figure}
+
+\subsection{Neurological Extension (v1.1)}
+
+NISS v1.0 mapped technique outcomes exclusively to DSM-5-TR psychiatric
+categories. This created a systematic blind spot: neurological disruptions---loss
+of smell, tinnitus, vestibular dysfunction, motor tremor, autonomic
+dysregulation---have no DSM-5-TR entry because the DSM is a psychiatric manual,
+not a neurological reference.
+
+NISS v1.1 extends the impact chain to 42~neurological conditions drawn from
+ICD-10-CM chapters G~(diseases of the nervous system), H~(diseases of the eye
+and ear), and R~(symptoms and signs not elsewhere classified), using Adams \&
+Victor's \textit{Principles of Neurology} (12th~ed.)~as the primary clinical
+reference. These conditions are organized into seven categories:
+
+\begin{itemize}
+  \item \textbf{Sensory} (14 conditions): auditory (tinnitus, hearing loss),
+    visual (scotoma, cortical blindness), vestibular (vertigo, nystagmus),
+    olfactory (anosmia, parosmia), gustatory (ageusia, dysgeusia), and
+    somatosensory (paresthesia, allodynia)
+  \item \textbf{Motor} (8 conditions): tremor, dystonia, ataxia, spasticity,
+    fasciculations, myoclonus, bradykinesia, dyskinesia
+  \item \textbf{Autonomic} (6 conditions): orthostatic hypotension,
+    hyperhidrosis, cardiac arrhythmia, thermoregulatory dysfunction,
+    gastroparesis, neurogenic bladder
+  \item \textbf{Consciousness} (4 conditions): syncope, absence seizures,
+    altered sensorium, coma
+  \item \textbf{Speech/Language} (4 conditions): expressive aphasia, receptive
+    aphasia, dysarthria, alexia
+  \item \textbf{Reflex} (3 conditions): hyperreflexia, areflexia, abnormal
+    plantar response
+  \item \textbf{Pain} (3 conditions): neuropathic pain, trigeminal neuralgia,
+    central pain syndrome
+\end{itemize}
+
+Each condition maps to specific QIF hourglass bands, neural pathway
+dependencies, and NISS metrics. The CD metric was broadened from ``Cognitive
+Disruption'' to ``Cognitive/Functional Disruption'' to encompass sensory, motor,
+and autonomic disruption alongside cognitive interference. This definitional
+change preserves backward compatibility: all existing CD scores remain valid,
+and the scoring formula is unchanged. The extension adds coverage for
+neurological outcomes that were previously invisible to the scoring system.
+
+The neurological conditions are queryable via KQL as the
+\texttt{neurological\_conditions} table, enabling cross-correlation with TARA
+techniques, neural pathways, and hourglass bands.

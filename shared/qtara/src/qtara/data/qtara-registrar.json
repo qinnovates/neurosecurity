@@ -20785,7 +20785,8 @@
         "name": "Neuroplasticity",
         "values": {
           "N": 0.0,
-          "T": 5.0,
+          "T": 3.3,
+          "P": 6.7,
           "S": 10.0
         },
         "description": "Whether the attack causes lasting neural pathway changes"

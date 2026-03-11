@@ -1,0 +1,486 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "generated": "2026-03-11",
+    "source": "QIF research compilation",
+    "primary_sources": [
+      "StatPearls NCBI (NBK539882, NBK519007, NBK470578, NBK545142, NBK553183, NBK534861)",
+      "PMC7424030 (BBB tight junctions)",
+      "PMC8489939 (BBB regulation)",
+      "PMC6467070 (BBB transporters)",
+      "PMC10119111 (neurovascular coupling)",
+      "PMC5816146 (astrocyte Ca2+ and BOLD)",
+      "PMC4636982 (glymphatic system)",
+      "PMC8699870 (meningeal lymphatics)",
+      "PMC6261524 (glial responses to implanted electrodes)",
+      "PMC10186232 (pericytes in NVU)",
+      "PMC10676790 (microglia heterogeneity)"
+    ],
+    "notes": [
+      "QIF band assignments are functional estimates based on the hourglass model.",
+      "All DSM-5-TR or clinical references are for threat modeling purposes, not diagnostic claims.",
+      "M1/M2 microglia polarization is flagged as contested and oversimplified; spectrum model preferred."
+    ]
+  },
+  "blood_brain_barrier": {
+    "qif_band": "I0-N1 boundary",
+    "description": "Tight junction integrity at I0 determines what signals and substances reach N1-N3 biology. Pericyte-mediated capillary tone regulation influences local signal fidelity.",
+    "components": [
+      {
+        "name": "Brain Capillary Endothelial Cells",
+        "description": "Primary structural barrier. Extremely low transcytosis rate, lack of fenestrations, expression of tight junction complexes. Properties induced by contact with pericytes and astrocytic end-feet."
+      },
+      {
+        "name": "Pericytes",
+        "markers": ["PDGFRB", "ACTA2", "DES", "CD146", "CD13", "NG2"],
+        "coverage_percent": [70, 80],
+        "coverage_note": "Highest density of any tissue",
+        "signaling": "PDGFB/PDGFRb required for pericyte survival and BBB maintenance",
+        "functions": ["Regulate capillary tone", "BBB integrity", "Angiogenesis", "Local immune responses"],
+        "pathology": "Loss of pericytes associated with BBB breakdown in neurodegeneration (Alzheimer's, ALS)"
+      },
+      {
+        "name": "Astrocytic End-feet",
+        "coverage_percent": 99,
+        "key_protein": "AQP4",
+        "aqp4_localization": "Highly polarized square arrays on vascular-adjacent end-feet",
+        "signaling": ["TGF-b", "GDNF", "Ang1"],
+        "function": "BBB induction via signaling to endothelial cells; structural basis of glymphatic system"
+      }
+    ],
+    "tight_junction_proteins": [
+      {
+        "name": "Claudin-5",
+        "gene": "CLDN5",
+        "mw_kda": 26,
+        "structure": "Tetraspan; 2 extracellular loops, N+C cytoplasmic tails",
+        "function": "Primary paracellular seal; PDZ motif binds ZO-1 PDZ1 domain",
+        "regulation": "Phosphorylation at Y207 (Rho kinase) reduces TEER"
+      },
+      {
+        "name": "Occludin",
+        "gene": "OCLN",
+        "mw_kda": 65,
+        "structure": "MARVEL domain tetraspan; 2 ECLs; long C-terminal tail",
+        "function": "Assembly and stabilization; forms higher-order oligomers",
+        "regulation": "Redox-sensitive disulfide bonds on ECL2; phosphoserine/phosphothreonine supports integrity; phosphotyrosine disrupts it"
+      },
+      {
+        "name": "ZO-1",
+        "gene": "TJP1",
+        "mw_kda": 225,
+        "structure": "MAGUK family; 3 PDZ domains, SH3, GuK, proline-rich, actin-binding C-terminus",
+        "function": "Scaffolding; tethers claudins (PDZ1) and occludin (SH3-GuK) to actin cytoskeleton",
+        "regulation": "Phosphorylation at T770/772 modulates protein-protein interactions"
+      },
+      {
+        "name": "ZO-2",
+        "gene": "TJP2",
+        "mw_kda": 160,
+        "function": "Heterodimerizes with ZO-1 via PDZ2; redundant scaffolding"
+      },
+      {
+        "name": "JAM-A",
+        "gene": "F11R",
+        "mw_kda": 40,
+        "function": "Paracellular permeability regulation; leukocyte trafficking"
+      },
+      {
+        "name": "Tricellulin",
+        "gene": "MARVELD2",
+        "mw_kda": 64,
+        "function": "Seals tricellular contacts where three cells meet"
+      }
+    ],
+    "transport_proteins": [
+      {
+        "name": "P-glycoprotein",
+        "gene": "ABCB1",
+        "direction": "Efflux (luminal)",
+        "function": "Drug efflux",
+        "substrates": ["Lipophilic molecules", "Many CNS drugs", "Chemotherapeutics"],
+        "mechanism": "ATP-dependent"
+      },
+      {
+        "name": "BCRP",
+        "gene": "ABCG2",
+        "direction": "Efflux (luminal)",
+        "function": "Drug efflux",
+        "substrates": ["Broad substrate overlap with Pgp"]
+      },
+      {
+        "name": "GLUT1",
+        "gene": "SLC2A1",
+        "direction": "Bidirectional, facilitated",
+        "function": "Glucose transport",
+        "substrates": ["Glucose (sodium-independent)"]
+      },
+      {
+        "name": "LAT1",
+        "gene": "SLC7A5",
+        "direction": "Influx",
+        "function": "Amino acid transport",
+        "substrates": ["Large neutral amino acids", "L-DOPA", "Gabapentin", "Pregabalin"]
+      },
+      {
+        "name": "MCT1",
+        "gene": "SLC16A1",
+        "direction": "Influx/efflux",
+        "function": "Monocarboxylate transport",
+        "substrates": ["Lactate", "Pyruvate", "Monocarboxylates"]
+      },
+      {
+        "name": "Transferrin receptor (TfR1)",
+        "gene": "TFRC",
+        "direction": "Receptor-mediated transcytosis",
+        "function": "Iron transport",
+        "substrates": ["Transferrin-iron complex"]
+      },
+      {
+        "name": "Megalin (LRP2)",
+        "gene": "LRP2",
+        "direction": "Transcytosis",
+        "function": "Hormone/vitamin transport",
+        "substrates": ["Thyroid hormone", "Vitamins"]
+      }
+    ],
+    "permeability": {
+      "freely_crosses": "Small lipophilic molecules (<400-500 Da), O2, CO2, ethanol, some anesthetics",
+      "carrier_mediated": "Glucose (GLUT1), amino acids (LAT1), lactate (MCT1)",
+      "receptor_mediated_transcytosis": "Transferrin, insulin, LDL",
+      "does_not_cross": "Most drugs (>98%), large proteins (antibodies), hydrophilic molecules, charged particles"
+    },
+    "bci_relevance": "Implanted devices bypass BBB locally. FUS + microbubble cavitation transiently opens tight junctions by widening paracellular spaces and modulating claudin-5/occludin expression. Effect reversible within hours. Enables nanoparticle (3-15 nm optimal) and LNP-mRNA delivery. Proposed mechanism for both therapeutic and adversarial payload delivery to brain tissue."
+  },
+  "cerebral_blood_supply": {
+    "qif_band": "I0-N1",
+    "arterial_system": [
+      {
+        "name": "Internal carotid artery (ICA)",
+        "territory": "Anterior circulation",
+        "source": "Common carotid",
+        "regions": ["Enters skull via carotid canal"]
+      },
+      {
+        "name": "Anterior cerebral artery (ACA)",
+        "territory": "Anterior circulation",
+        "source": "ICA bifurcation",
+        "regions": ["Medial frontal lobe", "Medial parietal lobe", "Corpus callosum", "Paracentral lobule"]
+      },
+      {
+        "name": "Middle cerebral artery (MCA)",
+        "territory": "Anterior circulation",
+        "source": "ICA bifurcation",
+        "regions": ["Lateral frontal", "Lateral parietal", "Lateral temporal", "Primary motor cortex", "Primary somatosensory cortex", "Language areas (Broca/Wernicke)"]
+      },
+      {
+        "name": "Anterior communicating artery (AComA)",
+        "territory": "Anterior circulation",
+        "source": "Connects L/R ACA",
+        "regions": ["Collateral bridge anterior circulation"]
+      },
+      {
+        "name": "Posterior communicating artery (PComA)",
+        "territory": "Bridging",
+        "source": "ICA to PCA",
+        "regions": ["Bridges anterior/posterior circulation"]
+      },
+      {
+        "name": "Posterior cerebral artery (PCA)",
+        "territory": "Posterior circulation",
+        "source": "Basilar bifurcation",
+        "regions": ["Occipital lobes", "Thalamus", "Medial temporal"]
+      },
+      {
+        "name": "Basilar artery",
+        "territory": "Posterior circulation",
+        "source": "L+R vertebral junction",
+        "regions": ["Brainstem", "Cerebellum", "AICA", "PICA", "SCA"]
+      },
+      {
+        "name": "Vertebral arteries (VA)",
+        "territory": "Posterior circulation",
+        "source": "Subclavian",
+        "regions": ["Posterior fossa", "PICA"]
+      }
+    ],
+    "venous_drainage": [
+      {
+        "name": "Superior sagittal sinus (SSS)",
+        "function": "Drains cortical surface veins; primary site of CSF reabsorption via arachnoid granulations"
+      },
+      {
+        "name": "Inferior sagittal sinus (ISS)",
+        "function": "Joins straight sinus"
+      },
+      {
+        "name": "Straight sinus",
+        "function": "Confluence of ISS + great cerebral vein (of Galen)"
+      },
+      {
+        "name": "Transverse sinuses",
+        "function": "Paired; drain occipital/posterior regions"
+      },
+      {
+        "name": "Sigmoid sinuses",
+        "function": "Paired; S-shaped continuation to internal jugular vein (IJV)"
+      },
+      {
+        "name": "Cavernous sinuses",
+        "function": "Paired; surround sella turcica; contain CN III, IV, V1, V2, VI and ICA"
+      }
+    ],
+    "venous_outflow_path": "Sigmoid sinuses -> IJV -> subclavian vein -> superior vena cava",
+    "venous_note": "No valves -- allows bidirectional flow with pressure changes",
+    "circle_of_willis": {
+      "description": "Pentagonal anastomotic ring at the base of the brain connecting anterior and posterior circulations",
+      "classic_symmetric_prevalence": [0.20, 0.25],
+      "threat_note": "High individual variation is important for threat modeling of targeted neurovascular attack",
+      "segments": ["ICA", "ACA", "MCA", "AComA", "PComA", "PCA", "Basilar", "Vertebral arteries"]
+    },
+    "autoregulation": {
+      "normal_cbf_ml_per_100g_per_min": 50,
+      "map_range_mmhg": [50, 150],
+      "mechanisms": [
+        { "name": "Myogenic (Bayliss effect)", "mediator": "Vascular smooth muscle contraction in response to wall tension", "notes": "Intrinsic; primary autoregulatory mechanism" },
+        { "name": "Metabolic/CO2", "mediator": "PaCO2: every 1 mmHg increase = ~4% CBF increase (vasodilatory via pH drop)", "notes": "Most potent extrinsic regulator" },
+        { "name": "Metabolic/O2", "mediator": "Hypoxia -> vasodilation", "notes": "Less sensitive than CO2" },
+        { "name": "Nitric oxide (NO)", "mediator": "eNOS in endothelium; iNOS in astrocytes/microglia", "notes": "Vasodilation; also produced in neurovascular coupling" },
+        { "name": "Endothelin-1", "mediator": "Endothelium", "notes": "Potent vasoconstriction" },
+        { "name": "Thromboxane A2", "mediator": "Platelets/endothelium", "notes": "Vasoconstriction" }
+      ]
+    }
+  },
+  "neurovascular_coupling": {
+    "qif_band": "N1-N2",
+    "description": "Mechanistic basis of fMRI BOLD and fNIRS signals. Neural activity drives local blood flow changes via molecular signals from the neurovascular unit.",
+    "mechanisms": [
+      "Glutamate release from presynaptic neuron activates postsynaptic neurons and nearby astrocytes",
+      "Astrocyte metabotropic glutamate receptors (mGluRs) trigger IP3-mediated intracellular Ca2+ rise",
+      "Ca2+ activates phospholipase A2 (PLA2) -> arachidonic acid (AA) release",
+      "AA metabolized to PGE2 via COX-2, and to EET via CYP450",
+      "PGE2 and EETs act on smooth muscle cells -> vasodilation",
+      "Ca2+ also activates NOS -> NO -> vasodilation",
+      "K+ released from astrocytic end-feet acts on Kir channels on vascular smooth muscle -> vasodilation",
+      "Net result: increased CBF 3-5 seconds after neural activity onset (hemodynamic response function, HRF)"
+    ],
+    "cell_types": ["astrocytes", "pericytes", "endothelial cells", "vascular smooth muscle cells", "neurons", "interneurons"],
+    "vasomodulators": [
+      { "name": "PGE2", "source": "Astrocytes (via COX-2/AA)", "effect": "Vasodilation", "receptor": "EP2/EP4 on smooth muscle" },
+      { "name": "EET", "source": "Astrocytes (via CYP450/AA)", "effect": "Vasodilation", "receptor": "BKCa channels" },
+      { "name": "NO", "source": "Neurons (nNOS), endothelium (eNOS), astrocytes (iNOS)", "effect": "Vasodilation", "receptor": "sGC/cGMP" },
+      { "name": "K+", "source": "Astrocyte end-feet", "effect": "Vasodilation (BKCa-mediated hyperpolarization)", "receptor": "Kir channels on smooth muscle" },
+      { "name": "NPY, adenosine", "source": "Interneurons", "effect": "Vasoconstriction", "receptor": "Y1/A1 receptors" }
+    ],
+    "hemodynamic_delay_seconds": [3, 5],
+    "astrocyte_ca2_and_bold": {
+      "evoked_ca2": "Positive BOLD (increased CBF)",
+      "intrinsic_oscillations": "Negative BOLD (decreased CBF)",
+      "evidence_level": "Established at systems level (Petzold et al., Poskanzer et al.); precise quantitative relationship remains active research"
+    },
+    "bci_relevance": "fMRI-BCIs and fNIRS-BCIs measure hemodynamic response, not direct electrical activity. NVC introduces 3-5s delay between neural event and detectable signal. Disrupted NVC (aging, TBI, neurodegeneration) degrades BCI signal quality. Adversarial relevance: pharmaceutical agents targeting NVC pathways (COX-2 inhibitors, NOS inhibitors) could in principle alter BOLD signal interpretation without altering underlying neural activity (proposed threat vector, not documented attack)."
+  },
+  "meninges": [
+    {
+      "name": "Dura mater",
+      "alias": "Pachymeninx",
+      "derivation": "Mesoderm",
+      "layers": ["Periosteal (adhered to skull inner surface)", "Meningeal (inner, contiguous with arachnoid)"],
+      "composition": "Dense collagenous connective tissue, fibroblasts",
+      "dural_reflections": ["Falx cerebri", "Tentorium cerebelli", "Falx cerebelli", "Diaphragma sellae"],
+      "blood_supply": "Middle meningeal artery (MMA) from maxillary artery via foramen spinosum",
+      "innervation": ["Trigeminal (V1, V2)", "Vagus", "Cervical spinal nerves"],
+      "cell_types": ["Fibroblasts", "Macrophages", "Mast cells"],
+      "cell_subtypes_note": "Five transcriptionally distinct fibroblast populations identified: dural border cells, arachnoid barrier cells, two inner arachnoid types, pial/perivascular fibroblasts",
+      "sinuses": ["SSS", "ISS", "Straight", "Transverse", "Sigmoid", "Cavernous"],
+      "functions": ["Mechanical protection of brain", "Contains dural venous sinuses for venous drainage", "Dural reflections compartmentalize intracranial space"],
+      "clinical": "MMA rupture causes epidural hematoma"
+    },
+    {
+      "name": "Arachnoid mater",
+      "derivation": "Ectoderm (neural crest)",
+      "layers": ["Superficial mesothelial layer", "Central layer (junction proteins)", "Deep layer (loose collagen fibers)"],
+      "features": "Avascular; bridges sulci without following their contours",
+      "granulations": "Protrude into SSS; function as one-way ball-valves for CSF absorption into venous blood",
+      "functions": ["CSF containment in subarachnoid space", "CSF reabsorption via arachnoid granulations into SSS"]
+    },
+    {
+      "name": "Pia mater",
+      "alias": "Leptomeninx (with arachnoid)",
+      "derivation": "Ectoderm (neural crest)",
+      "layers": ["Epipial (collagen)", "Intima pia (elastic/reticular fibers)"],
+      "features": "Follows brain surface contours exactly (all sulci and gyri); highly vascularized",
+      "perivascular_spaces": "Forms Virchow-Robin spaces around penetrating vessels -- anatomical basis of glymphatic system",
+      "functions": ["Intimate covering of brain surface", "Formation of perivascular (Virchow-Robin) spaces", "Contains pial vasculature"]
+    }
+  ],
+  "meningeal_spaces": [
+    {
+      "name": "Epidural",
+      "type": "Potential",
+      "contents": "Empty normally (exists pathologically)",
+      "clinical": "Epidural hematoma from MMA rupture, temporal bone fracture; lens-shaped on CT",
+      "bci_relevance": "Epidural ECoG electrode placement site"
+    },
+    {
+      "name": "Subdural",
+      "type": "Potential",
+      "contents": "Empty normally",
+      "clinical": "Subdural hematoma from bridging vein rupture; crescentic on CT",
+      "bci_relevance": "Subdural ECoG electrode placement site; risk of subdural hematoma"
+    },
+    {
+      "name": "Subarachnoid",
+      "type": "Real",
+      "contents": "CSF",
+      "clinical": "Subarachnoid hemorrhage from Berry aneurysm rupture; communicates cisterns",
+      "bci_relevance": "ICP monitoring via subarachnoid bolt"
+    }
+  ],
+  "cerebrospinal_fluid": {
+    "production": "Choroid plexus (modified ependymal cells + capillaries) in lateral, third, and fourth ventricles",
+    "choroid_plexus_fraction": 0.80,
+    "secondary_production": "BBB endothelium, extrachoroidal ependyma (~20%)",
+    "production_mechanism": "Active transport: Na+/K+-ATPase drives Na+ into ventricle, water follows osmotically; carbonic anhydrase contributes HCO3-",
+    "production_ml_per_day": [400, 600],
+    "volume_ml": 150,
+    "turnover_per_day": 3.7,
+    "turnover_range": [4, 5],
+    "circulation_pathway": [
+      "Lateral ventricles",
+      "Foramina of Monro",
+      "Third ventricle",
+      "Cerebral aqueduct of Sylvius",
+      "Fourth ventricle",
+      "Foramen of Magendie (midline) + Foramina of Luschka (lateral)",
+      "Subarachnoid space",
+      "Spinal subarachnoid",
+      "Cisterns"
+    ],
+    "absorption": {
+      "classical": "Arachnoid granulations/villi into SSS (pressure gradient 3-5 mmHg; one-way ball-valve mechanism)",
+      "contemporary_routes": [
+        "Dural lymphatic vessels -> cervical lymph nodes",
+        "Perineural pathways (cranial/spinal nerves)",
+        "Perivascular lymphatics around basal cerebral arteries",
+        "Spinal nerve root sheaths"
+      ]
+    },
+    "composition": {
+      "opening_pressure_mmhg": [8, 15],
+      "opening_pressure_note": "Lumbar puncture lateral decubitus",
+      "appearance": "Clear, colorless",
+      "glucose_mg_dl": [50, 80],
+      "glucose_vs_serum": "CSF ~60-70% of serum glucose",
+      "protein_mg_dl": [15, 45],
+      "plasma_protein_mg_dl": [6000, 8000],
+      "sodium": "Higher than plasma (active transport by choroid plexus)",
+      "potassium": "Lower than plasma",
+      "chloride": "Higher than plasma",
+      "calcium": "Lower than plasma",
+      "wbc_per_ml": "<5",
+      "wbc_note": "Pleocytosis indicates infection/inflammation"
+    },
+    "functions": [
+      "Mechanical cushioning (buoyancy reduces effective brain weight from ~1400g to ~25g)",
+      "Chemical stability of CNS environment",
+      "Nutrient transport and waste removal",
+      "Intracranial pressure regulation"
+    ]
+  },
+  "glymphatic_system": {
+    "description": "Brain waste clearance system active primarily during sleep",
+    "discovered": "Nedergaard group, 2012-2013; published Science 2013 (Iliff et al.)",
+    "qif_band": "N1-N2",
+    "key_protein": "AQP4",
+    "mechanism": [
+      "CSF enters brain parenchyma via periarterial spaces (Virchow-Robin spaces), driven by arterial pulsatility",
+      "AQP4 on astrocytic end-feet (polarized to vascular surface) facilitates water movement from periarterial space into parenchyma",
+      "CSF mixes with interstitial fluid (ISF) in parenchyma",
+      "ISF + waste products drain via perivenous spaces",
+      "Perivenous outflow -> dural lymphatics -> cervical lymph nodes"
+    ],
+    "aqp4_details": {
+      "localization": "Square arrays specifically on vascular-adjacent astrocyte end-feet (highly polarized)",
+      "deletion_efficiency_loss": 0.65,
+      "amyloid_beta_clearance_reduction_on_deletion": 0.55,
+      "aging_change": "AQP4 localization lost with aging (redistribution to broader astrocyte processes) -- major driver of age-related glymphatic decline"
+    },
+    "sleep_dependence": {
+      "sleep_vs_wake_influx_ratio": 10,
+      "wake_influx_reduction": 0.90,
+      "interstitial_space_sleep": [0.22, 0.24],
+      "interstitial_space_wake": [0.13, 0.15],
+      "interstitial_space_unit": "fraction of brain volume",
+      "norepinephrine_effect": "Wakefulness marker; suppresses glymphatic activity",
+      "aging_efficiency_decline": "80-90%"
+    },
+    "waste_cleared": {
+      "amyloid_beta_clearance_rate_per_hour": 0.083,
+      "amyloid_beta_note": "8.3% per hour in healthy young adults",
+      "other_waste": ["Tau", "Other metabolic waste"],
+      "alzheimers_note": "Age-related glymphatic failure is a proposed mechanism underlying Alzheimer's disease progression"
+    },
+    "also_transports": ["Lipids (cholesterol via ApoE)", "Glucose", "Amino acids", "Neuroactive substances (volume transmission)"],
+    "bci_relevance": "Chronic implants may disrupt glymphatic flow. Sleep deprivation-induced glymphatic disruption is a plausible threat vector for degrading long-term BCI signal quality. Glymphatic failure = accumulation of waste in neural parenchyma that could alter signal coherence metrics."
+  },
+  "meningeal_lymphatics": {
+    "qif_band": "N1",
+    "discovered": "Louveau et al., 2015, Nature (independently: Aspelund et al., 2015)",
+    "citations": ">5,000 by April 2024",
+    "markers": ["LYVE1", "PROX1", "PDPN"],
+    "structure": "Conventional lymphatic vessels lined by LYVE-1+, PROX1+, PDPN+ lymphatic endothelial cells. Run parallel to dural venous sinuses and middle meningeal arteries.",
+    "drainage": "Deep cervical lymph nodes",
+    "functions": [
+      "Drain immune cells (T cells, B cells, dendritic cells), small molecules, and excess fluid from CNS",
+      "Bridge CNS and peripheral immune system",
+      "CSF absorption (major outflow route, co-equal with arachnoid granulations in current models)",
+      "Tumor surveillance (meningeal lymphatic impairment associated with worse glioblastoma outcomes)"
+    ],
+    "aging": "Meningeal lymphatics deteriorate with aging, contributing to impaired waste clearance and neuroinflammation -- parallels glymphatic decline",
+    "bci_relevance": "Meningeal lymphatics are a previously unknown route for CNS immune surveillance. Implant foreign body response (macrophage recruitment, T cell infiltration) may be modulated via meningeal lymphatic function. This is inferred, not directly demonstrated in electrode literature reviewed."
+  },
+  "clinical_conditions": [
+    {
+      "name": "Meningitis",
+      "mechanism": "Bacterial/viral invasion of subarachnoid space (S. pneumoniae, N. meningitidis)",
+      "icp_effect": "Elevated",
+      "bci_relevance": "Contraindication to implant; marker in CSF (pleocytosis, elevated protein)"
+    },
+    {
+      "name": "Hydrocephalus",
+      "mechanism": "Impaired CSF flow or absorption; ventricular enlargement",
+      "icp_effect": "Elevated",
+      "bci_relevance": "Can compress parenchyma; may preclude implant"
+    },
+    {
+      "name": "ICP elevation (general)",
+      "mechanism": "Mass effect, hemorrhage, cerebral edema, CSF obstruction",
+      "icp_threshold_mmhg": 20,
+      "bci_relevance": "Impairs CBF autoregulation; herniation risk"
+    },
+    {
+      "name": "Subdural hematoma",
+      "mechanism": "Bridging vein rupture (acute/chronic)",
+      "icp_effect": "Elevated",
+      "bci_relevance": "Risk of subdural electrode placement"
+    },
+    {
+      "name": "Subarachnoid hemorrhage",
+      "mechanism": "Aneurysm rupture (Berry aneurysm, ACA > MCA)",
+      "icp_effect": "Acute elevation",
+      "bci_relevance": "Vasospasm days 3-14 post-rupture; changes CBF"
+    },
+    {
+      "name": "IIH (Pseudotumor cerebri)",
+      "mechanism": "Idiopathic; >250 mmH2O CSF pressure",
+      "icp_effect": "Elevated",
+      "bci_relevance": "Optic nerve sheath distension; headache"
+    }
+  ],
+  "research_gaps": [
+    "Quantitative model linking gliosis progression timeline to Cs (coherence metric) degradation: no published mapping exists between foreign body response histology and coherence metric parameters.",
+    "Specific gene expression signatures for all five meningeal fibroblast subtypes: established from single-cell sequencing (Louveau/Kipnis group, 2018) but not fully extracted.",
+    "Verified DOI for original Nedergaard glymphatic 2013 Science paper (10.1126/science.1241224) was not independently resolved via Crossref API in this session."
+  ]
+}

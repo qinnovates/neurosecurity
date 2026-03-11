@@ -1,0 +1,387 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "generated": "2026-03-11",
+    "source": "QIF research compilation",
+    "primary_sources": [
+      "StatPearls NCBI (NBK545142, NBK519007)",
+      "PMC6261524 (glial responses to implanted electrodes)",
+      "PMC10676790 (microglia heterogeneity vs M1/M2)",
+      "PMC10159683 (tripartite synapse)",
+      "PMC10017161 (ependymal cells)",
+      "PMC9939976 (Schwann cell functions)"
+    ],
+    "notes": [
+      "M1/M2 microglia polarization is contested; spectrum model preferred (PMC10676790).",
+      "QIF band assignments are functional estimates, not validated mappings.",
+      "All BCI relevance statements are for threat modeling purposes.",
+      "Quantitative model linking gliosis progression to Cs degradation is a research gap."
+    ]
+  },
+  "glial_types": [
+    {
+      "id": "astrocyte",
+      "name": "Astrocytes",
+      "origin": "Ectoderm (neural tube, radial glia)",
+      "subtypes": [
+        {
+          "name": "Protoplasmic",
+          "location": "Gray matter, cortical layers II-VI",
+          "markers": ["GFAP", "S100B", "AQP4"],
+          "morphology": "Dense tortuous GFAP+ processes; domain organization (non-overlapping)",
+          "primary_function": "Synaptic modulation, BBB maintenance, K+ buffering"
+        },
+        {
+          "name": "Fibrous",
+          "location": "White matter tracts",
+          "markers": ["GFAP"],
+          "morphology": "Fewer foot processes than protoplasmic; larger soma",
+          "primary_function": "Metabolic/ionic homeostasis of white matter"
+        },
+        {
+          "name": "Interlaminar",
+          "location": "Primate-specific, cortical layer I",
+          "markers": ["GFAP"],
+          "morphology": "Long vertical cable-like processes (up to 1 mm) connecting layers I to III-IV",
+          "primary_function": "Interlaminar communication (primate CNS)"
+        },
+        {
+          "name": "Varicose projection",
+          "location": "Cortical layers V-VI",
+          "markers": ["GFAP"],
+          "morphology": "1-5 long processes (up to 1 mm), spiny branches, varicosities every 10 um",
+          "primary_function": "Long-range coordination"
+        },
+        {
+          "name": "Reactive",
+          "location": "Post-injury, any location",
+          "markers": ["GFAP (upregulated)"],
+          "morphology": "Hypertrophied, proliferative, GFAP upregulated",
+          "primary_function": "Scar formation; pro- and anti-inflammatory roles"
+        }
+      ],
+      "functions": [
+        "BBB maintenance via end-feet TGF-beta/GDNF/Ang1 signaling to endothelial cells",
+        "Glutamate-glutamine cycle (GLAST/GLT-1 uptake -> GS -> glutamine export to neurons via SNAT3/5)",
+        "K+ spatial buffering via Kir4.1 + AQP4 co-localization + gap junction syncytium redistribution",
+        "Tripartite synapse: mGluR-mediated Ca2+ rise triggers gliotransmitter release (glutamate, D-serine, ATP, GABA)",
+        "D-serine release required for hippocampal LTP induction (NMDAR glycine-site co-agonism)",
+        "Synaptogenesis via thrombospondin (TSP1/2) and glypican (GPC4/6) release",
+        "Lactate shuttle to neurons (ANLS) via MCT4 export",
+        "pH regulation via carbonic anhydrase (CO2 -> HCO3-)"
+      ],
+      "markers": ["GFAP", "S100B", "AQP4", "Cx43", "Cx30", "GLAST/EAAT1", "GLT-1/EAAT2", "Kir4.1", "Aldh1L1"],
+      "genes": ["GFAP", "S100B", "AQP4", "GJA1", "GJB6", "SLC1A3", "SLC1A2", "KCNJ10", "ALDH1L1", "THBS1", "THBS2", "GPC4", "GPC6"],
+      "molecular_markers": [
+        { "name": "GFAP", "gene": "GFAP", "notes": "Primary pan-astrocyte marker; intermediate filament; upregulated in reactive gliosis" },
+        { "name": "S100B", "gene": "S100B", "notes": "Ca2+-binding protein; predominantly protoplasmic (gray matter); absent in fibrous (white matter)" },
+        { "name": "AQP4", "gene": "AQP4", "notes": "Water channel; concentrated on vascular end-feet; glymphatic function" },
+        { "name": "GLAST/EAAT1", "gene": "SLC1A3", "notes": "Glutamate transporter; expressed near excitatory synapses" },
+        { "name": "GLT-1/EAAT2", "gene": "SLC1A2", "notes": "Major glutamate transporter (~80% synaptic glutamate clearance)" },
+        { "name": "Connexin 43", "gene": "GJA1", "notes": "Gap junction protein; astrocyte syncytium communication" },
+        { "name": "Connexin 30", "gene": "GJB6", "notes": "Gap junction protein; subtype-specific" },
+        { "name": "Kir4.1", "gene": "KCNJ10", "notes": "Inwardly-rectifying K+ channel; K+ spatial buffering" },
+        { "name": "Aldh1L1", "gene": "ALDH1L1", "notes": "Broadly expressed pan-astrocyte marker; useful when GFAP is low" },
+        { "name": "Thrombospondin-1/2", "gene": "THBS1/THBS2", "notes": "Released by astrocytes; promote synaptogenesis" },
+        { "name": "Glypican-4/6", "gene": "GPC4/GPC6", "notes": "Released by astrocytes; synapse formation/maturation" }
+      ],
+      "calcium_signaling": {
+        "wave_speed_um_per_s": [10, 30],
+        "mechanism": "IP3-mediated intracellular Ca2+ via mGluR activation",
+        "bold_coupling": "Evoked Ca2+ -> positive BOLD; intrinsic Ca2+ oscillations -> negative BOLD"
+      },
+      "bci_relevance": "HIGH",
+      "qif_band": "I0, N1, N2",
+      "security_implications": "Reactive gliosis at I0 is primary chronic BCI failure mode. GFAP upregulation is a measurable biomarker of implant-induced disruption. Calcium waves represent slow intercellular signaling not captured by electrode LFP. Gliotransmission modulation could alter synaptic plasticity without direct neuronal stimulation (inferred threat vector, not demonstrated)."
+    },
+    {
+      "id": "oligodendrocyte",
+      "name": "Oligodendrocytes",
+      "origin": "Ectoderm (neural tube, ventricular zone OPCs)",
+      "subtypes": [
+        {
+          "name": "OPC (Oligodendrocyte Precursor Cell)",
+          "location": "Throughout CNS, gray and white matter",
+          "markers": ["NG2", "PDGFRA", "Olig2"],
+          "notes": "Proliferative precursors; among first responders to electrode implantation (within 1 week)"
+        },
+        {
+          "name": "Immature oligodendrocyte",
+          "location": "CNS white and gray matter",
+          "markers": ["O4", "Olig2"],
+          "notes": "Transitional stage; committed to oligodendrocyte lineage"
+        },
+        {
+          "name": "Mature myelinating oligodendrocyte",
+          "location": "CNS white matter tracts",
+          "markers": ["MBP", "PLP", "MOG", "CC1"],
+          "notes": "Each cell myelinates up to 60 axon segments simultaneously"
+        }
+      ],
+      "functions": [
+        "CNS myelin production (up to 60 axon segments per cell)",
+        "Saltatory conduction: electrical insulation between nodes of Ranvier",
+        "Metabolic support to ensheathed axons",
+        "Axon-glial signaling via MAG/periaxonal membrane"
+      ],
+      "markers": ["NG2", "PDGFRa", "Olig2", "O4", "CC1", "MBP", "PLP", "MOG", "MAG", "CNP"],
+      "genes": ["CSPG4", "PDGFRA", "OLIG2", "PLP1", "MBP", "MOG", "MAG", "CNP"],
+      "molecular_markers": [
+        { "name": "NG2", "gene": "CSPG4", "notes": "OPC marker; chondroitin sulfate proteoglycan" },
+        { "name": "PDGFRa", "gene": "PDGFRA", "notes": "OPC marker; platelet-derived growth factor receptor alpha" },
+        { "name": "Olig2", "gene": "OLIG2", "notes": "Transcription factor; OPC and immature OL" },
+        { "name": "O4", "gene": "N/A (sulfatide antigen)", "notes": "Immature OL marker" },
+        { "name": "CC1", "gene": "APC (antibody clone CC1)", "notes": "Mature OL marker" }
+      ],
+      "myelin_proteins": [
+        { "name": "PLP (Proteolipid Protein)", "gene": "PLP1", "percent_of_myelin": 50, "function": "Structural compaction; membrane stabilization", "disease_association": "Pelizaeus-Merzbacher disease" },
+        { "name": "MBP (Myelin Basic Protein)", "gene": "MBP", "percent_of_myelin": 30, "function": "Cytoplasmic leaflet compaction; structural", "disease_association": "Marker of mature OL; intrinsically disordered protein" },
+        { "name": "MOG (Myelin Oligodendrocyte Glycoprotein)", "gene": "MOG", "percent_of_myelin": "<1 (outer surface)", "function": "Structural maintenance; immune target", "disease_association": "MOG antibody disease; MS-associated autoantigen" },
+        { "name": "MAG (Myelin-Associated Glycoprotein)", "gene": "MAG", "percent_of_myelin": 1, "function": "Axon-glial signaling; inhibits axon regeneration", "disease_association": "Periaxonal membrane; binds NgR" },
+        { "name": "CNP", "gene": "CNP", "percent_of_myelin": 4, "function": "Early OL marker; membrane maintenance; RNA metabolism", "disease_association": null }
+      ],
+      "saltatory_conduction": {
+        "velocity_myelinated_m_per_s": [70, 120],
+        "velocity_unmyelinated_m_per_s": [0.5, 2],
+        "node_of_ranvier_width_um": 1,
+        "sodium_channels": { "early_myelination": "Nav1.2", "mature": "Nav1.6" },
+        "potassium_channels": "Kv1"
+      },
+      "bci_relevance": "HIGH",
+      "qif_band": "N1, N2",
+      "security_implications": "Demyelination (MS, implant microtrauma) slows conduction velocity and alters signal timing, degrading coherence metric transport variance. FUS-mediated BBB opening protocols must avoid thermal/cavitation damage to white matter myelin. OPCs (NG2+) are among first responders to electrode implantation within 1 week."
+    },
+    {
+      "id": "microglia",
+      "name": "Microglia",
+      "origin": "Yolk-sac macrophage precursors (not bone marrow); colonize brain during embryonic development",
+      "subtypes": [
+        {
+          "name": "Homeostatic (surveilling)",
+          "location": "Throughout CNS parenchyma",
+          "markers": ["TMEM119", "P2RY12", "CX3CR1"],
+          "morphology": "Ramified; dynamic process extension/retraction",
+          "notes": "Contact every synapse approximately every hour"
+        },
+        {
+          "name": "Reactive (activated)",
+          "location": "Injury/pathology sites",
+          "markers": ["CD68", "CD11b", "IBA1 (upregulated)"],
+          "morphology": "Amoeboid; retracted processes",
+          "notes": "Pro-inflammatory cytokine release; phagocytic"
+        },
+        {
+          "name": "Disease-associated microglia (DAM)",
+          "location": "Neurodegenerative lesions",
+          "markers": ["Clec7a", "Trem2", "LPL", "ApoE (upregulated)"],
+          "morphology": "Context-dependent",
+          "notes": "Identified via single-cell RNA sequencing; associated with neurodegeneration"
+        }
+      ],
+      "m1_m2_polarization_note": "CONTESTED. M1 (pro-inflammatory) and M2 (anti-inflammatory) dichotomy is now considered an oversimplification. Single-cell RNA sequencing reveals a continuous spectrum of context-, region-, and time-dependent states. Use homeostatic, reactive, or state-specific descriptors rather than M1/M2. Source: PMC10676790.",
+      "functions": [
+        "Constant surveillance via dynamic process extension/retraction",
+        "Synaptic pruning: C1q marking -> C3 activation -> C3b opsonization -> CR3 (CD11b/CD18) phagocytosis",
+        "Trophic support: BDNF, IGF-1 production",
+        "Clearance of debris, dead cells, misfolded proteins",
+        "Cytokine release: pro-inflammatory (IL-1beta, IL-6, TNFalpha, MCP-1/CCL2, ROS, NO via iNOS)",
+        "Cytokine release: anti-inflammatory/repair (IL-10, TGF-beta, IGF-1)"
+      ],
+      "markers": ["IBA1", "TMEM119", "P2RY12", "CX3CR1", "CD68", "CD11b", "HexB"],
+      "genes": ["AIF1", "TMEM119", "P2RY12", "CX3CR1", "CD68", "ITGAM", "HEXB"],
+      "molecular_markers": [
+        { "name": "IBA1", "gene": "AIF1", "notes": "Actin-bundling protein; pan-microglia; upregulated in activated states; enables phagocytosis" },
+        { "name": "TMEM119", "gene": "TMEM119", "notes": "Highly specific to homeostatic microglia; downregulated in activated/reactive states" },
+        { "name": "P2RY12", "gene": "P2RY12", "notes": "Purinergic receptor; homeostatic marker; senses ADP from injury" },
+        { "name": "CX3CR1", "gene": "CX3CR1", "notes": "Fractalkine receptor; neuron-microglia communication via CX3CL1 on neurons" },
+        { "name": "CD68", "gene": "CD68", "notes": "Lysosomal marker; phagocytic activity indicator" },
+        { "name": "CD11b", "gene": "ITGAM", "notes": "Complement receptor 3 (CR3) beta chain; phagocytosis of C3-opsonized synapses" },
+        { "name": "HexB", "gene": "HEXB", "notes": "Pan-microglia marker independent of activation state" }
+      ],
+      "foreign_body_response_timeline": [
+        {
+          "phase": "Immediate",
+          "timing": "Hours",
+          "events": ["BBB disruption from electrode insertion", "Blood protein extravasation", "Microglia activation (ramified -> amoeboid morphology)"]
+        },
+        {
+          "phase": "Early",
+          "timing": "1 week",
+          "events": ["Microglia proliferation and migration to electrode", "Microglial encapsulation of electrode surface", "Cytokine storm: IL-1beta, IL-6, TNFalpha, MCP-1 (CCL2)", "Astrocyte activation begins", "OPC (NG2+) response at electrode-tissue interface"]
+        },
+        {
+          "phase": "Sub-acute",
+          "timing": "2-4 weeks",
+          "events": ["Astrocyte proliferation and hypertrophy", "GFAP upregulation", "Connexin 43 (Cx43) upregulation in astrocytes", "Ongoing OPC response"]
+        },
+        {
+          "phase": "Chronic",
+          "timing": "4-6 weeks to months/years",
+          "events": ["Dense glial scar formation", "Neuron loss from 50-100 um perimeter around electrode", "Frustrated phagocytosis (cannot remove electrode)", "Electrode impedance increases progressively", "Signal amplitude declines", "Local shift toward GABA (inhibitory) tone", "Negative correlation between non-neuronal density (NND) and recording quality"]
+        }
+      ],
+      "signal_degradation": {
+        "acute": "Daily amplitude shifts within first week (micromotion)",
+        "subacute": "Progressive unit loss over weeks",
+        "chronic": "Glial encapsulation increases electrode-tissue impedance; reactive glia shift toward inhibitory tone"
+      },
+      "mitigation_strategies": [
+        { "strategy": "Mechanical compliance (soft materials, <100 um features)", "evidence": "Animal model" },
+        { "strategy": "Feature sizes <10 um (below cellular attachment threshold)", "evidence": "In vitro + some in vivo" },
+        { "strategy": "Injectable mesh electronics (Lieber group)", "evidence": "Animal model, up to 1 year" },
+        { "strategy": "Anti-inflammatory coatings (dexamethasone eluting, IL-1beta blockade)", "evidence": "Some human evidence; transient improvement" }
+      ],
+      "bci_relevance": "CRITICAL",
+      "qif_band": "I0, N1",
+      "security_implications": "Foreign body response at I0 (electrode-tissue interface) is THE primary chronic failure mode for implanted BCIs. Microglia-mediated signal degradation directly impairs Cs over time by increasing transport variance (signal path integrity degradation) and gain variance (impedance rise, amplitude fall). Quantitative model linking gliosis progression to Cs degradation is NOT YET DEVELOPED -- this is a research gap."
+    },
+    {
+      "id": "ependymal",
+      "name": "Ependymal Cells",
+      "origin": "Ectoderm (neural tube, radial glia)",
+      "subtypes": [
+        {
+          "name": "Standard ependymal",
+          "location": "Ventricular lining (all four ventricles) and central canal of spinal cord",
+          "markers": ["S100B", "Vimentin", "FoxJ1", "CD24"],
+          "morphology": "Simple columnar (cuboidal in some regions); ~50 motile cilia + microvilli on apical surface",
+          "primary_function": "CSF propulsion via synchronous ciliary beating"
+        },
+        {
+          "name": "Choroid plexus epithelial (modified ependymal)",
+          "location": "Choroid plexus in lateral, third, and fourth ventricles",
+          "markers": ["Na+/K+-ATPase"],
+          "morphology": "Cuboidal; larger microvilli; fenestrated capillaries; Na+/K+-ATPase enrichment",
+          "primary_function": "Active CSF secretion (~80% of total CSF production)"
+        },
+        {
+          "name": "Tanycytes",
+          "location": "Floor of third ventricle (hypothalamus)",
+          "markers": ["Vimentin"],
+          "morphology": "Long basal processes extending to hypothalamic nuclei and median eminence",
+          "primary_function": "Chemosensing; transport between CSF and hypothalamic neurons; neuroendocrine regulation"
+        }
+      ],
+      "functions": [
+        "Synchronous ciliary beating propels CSF through ventricular system (lateral -> 3rd -> 4th -> subarachnoid)",
+        "Choroid plexus subtype: active CSF secretion via Na+/K+-ATPase driven transport (~80% of 400-600 mL/day)",
+        "Blood-CSF barrier function via tight junctions (choroid plexus)",
+        "Neural stem cell niche: adult SVZ ependymal cells contribute to neurogenesis (primarily rodents; less clear in humans)"
+      ],
+      "markers": ["S100B", "Vimentin", "FoxJ1", "CD24", "Na+/K+-ATPase"],
+      "genes": ["S100B", "VIM", "FOXJ1", "CD24", "ATP1A1", "ATP1B1"],
+      "molecular_markers": [
+        { "name": "S100B", "gene": "S100B", "notes": "Shared with astrocytes; expressed in ependyma" },
+        { "name": "Vimentin", "gene": "VIM", "notes": "Intermediate filament; ependymal and radial glia" },
+        { "name": "FoxJ1", "gene": "FOXJ1", "notes": "Transcription factor for motile ciliogenesis" },
+        { "name": "CD24", "gene": "CD24", "notes": "Glycoprotein; ependymal surface marker" },
+        { "name": "Na+/K+-ATPase", "gene": "ATP1A1/ATP1B1", "notes": "Enriched in choroid plexus subtype; drives CSF secretion" }
+      ],
+      "structural_features": {
+        "cilia_per_cell": 50,
+        "cilia_type": "Motile (9+2 microtubule arrangement)",
+        "junctions": {
+          "apical": "Tight junctions (zonula occludens)",
+          "lateral": "Adherens junctions and gap junctions"
+        },
+        "blood_csf_barrier": "Choroid plexus tight junctions form blood-CSF barrier (distinct from BBB)"
+      },
+      "clinical_relevance": "Loss of ependymal cilia function (primary ciliary dyskinesia) causes hydrocephalus in animal models. Ependymal injury from ventriculitis can cause hydrocephalus in humans.",
+      "bci_relevance": "LOW",
+      "qif_band": "N1",
+      "security_implications": "Ependymal cells regulate CSF pressure and composition, which indirectly affects all N-band structures via intracranial pressure dynamics. Disrupted ependymal function would alter the CSF microenvironment that all N-band neural tissue depends on. Indirect relevance to BCI signal quality through ICP changes."
+    },
+    {
+      "id": "schwann_cell",
+      "name": "Schwann Cells",
+      "origin": "Ectoderm (neural crest)",
+      "system": "PNS",
+      "subtypes": [
+        {
+          "name": "Myelinating Schwann cell",
+          "location": "Around large-diameter PNS axons (>1 um)",
+          "markers": ["P0/MPZ", "PMP22", "MBP (PNS isoforms)"],
+          "morphology": "Compact myelin wrapping; 1:1 ratio (one Schwann cell per one axon segment)",
+          "primary_function": "PNS myelin production and maintenance"
+        },
+        {
+          "name": "Non-myelinating (Remak) Schwann cell",
+          "location": "Around small unmyelinated C-fibers",
+          "markers": ["NCAM", "S100"],
+          "morphology": "Envelops multiple small axons without compact myelin",
+          "primary_function": "Structural and metabolic support of unmyelinated axons"
+        }
+      ],
+      "functions": [
+        "PNS myelin production (1:1 cell-to-axon-segment ratio)",
+        "Saltatory conduction in peripheral nerves",
+        "Trophic support to PNS axons",
+        "Post-injury: dedifferentiation, proliferation, Bungner band formation for axon regeneration guidance",
+        "Remyelination of regenerating axons"
+      ],
+      "markers": ["S100", "SOX10", "EGR2/Krox20", "MPZ/P0", "PMP22"],
+      "genes": ["S100B", "SOX10", "EGR2", "MPZ", "PMP22", "MBP"],
+      "molecular_markers": [
+        { "name": "S100", "gene": "S100B", "notes": "Pan-Schwann cell marker" },
+        { "name": "SOX10", "gene": "SOX10", "notes": "Transcription factor; neural crest-derived glia" },
+        { "name": "EGR2/Krox20", "gene": "EGR2", "notes": "Transcription factor required for myelination" },
+        { "name": "MPZ/P0", "gene": "MPZ", "notes": "Major PNS myelin protein; myelinating Schwann cells only" },
+        { "name": "PMP22", "gene": "PMP22", "notes": "PNS myelin; myelinating Schwann cells" }
+      ],
+      "pns_myelin_proteins": [
+        { "name": "P0 (MPZ)", "gene": "MPZ", "percent_of_pns_myelin": 50, "function": "Major structural protein; homophilic adhesion compacts extracellular leaflets", "disease_association": "CMT1B (Charcot-Marie-Tooth type 1B)" },
+        { "name": "PMP22", "gene": "PMP22", "percent_of_pns_myelin": 5, "function": "Membrane compaction and stability", "disease_association": "CMT1A (most common hereditary neuropathy; gene duplication)" },
+        { "name": "MBP (PNS isoforms)", "gene": "MBP", "percent_of_pns_myelin": "variable", "function": "Cytoplasmic leaflet compaction (shared with CNS but different dominant isoforms)", "disease_association": null }
+      ],
+      "key_distinction": "One Schwann cell myelinates one axon segment (1:1 ratio) vs. one oligodendrocyte myelinates up to 60 segments in CNS.",
+      "regeneration": {
+        "capable": true,
+        "mechanism": "Schwann cells dedifferentiate, proliferate, form Bungner bands to guide regenerating axons, then remyelinate",
+        "contrast_with_cns": "PNS injuries show better functional recovery than CNS white matter injuries due to Schwann cell regenerative capacity"
+      },
+      "bci_relevance": "MODERATE",
+      "qif_band": "Peripheral (pre-I0)",
+      "security_implications": "Peripheral/spinal BCI interfaces (Utah arrays in peripheral nerve, DRG stimulators, spinal cord stimulators) interact with Schwann cells. Peripheral nerve electrode foreign body response involves Schwann cell displacement and fibrous encapsulation, qualitatively similar to CNS gliosis but with greater regenerative potential. Relevant for peripheral BCI configurations tapping at spinal level before signals enter the I0 zone."
+    },
+    {
+      "id": "satellite_cell",
+      "name": "Satellite Glial Cells",
+      "origin": "Ectoderm (neural crest)",
+      "system": "PNS (ganglia)",
+      "subtypes": [
+        {
+          "name": "Satellite glial cell (standard)",
+          "location": "DRG (dorsal root ganglia), trigeminal ganglia, sympathetic and parasympathetic ganglia",
+          "markers": ["S100B", "GS", "GFAP (variable)"],
+          "morphology": "Tight, complete sheath around each ganglion neuron soma; gap-junction connected to neighboring satellite cells",
+          "primary_function": "Homeostatic support of ganglion neurons (analogous to astrocytes for DRG neuron soma)"
+        }
+      ],
+      "functions": [
+        "K+ buffering via Kir4.1 (analogous to astrocyte spatial buffering)",
+        "Metabolic and nutritional support to ganglion neuron soma",
+        "pH regulation",
+        "Bidirectional communication with encapsulated neuron via gap junctions, purinergic receptors (P2X, P2Y), and cytokine signaling",
+        "Chronic pain sensitization: peripheral injury -> Cx43 gap junction upregulation -> intercellular communication amplifies nociceptive signaling (spread of sensitization)"
+      ],
+      "markers": ["S100B", "GS", "GFAP", "Kir4.1", "Connexin 43", "P2X7", "P2Y"],
+      "genes": ["S100B", "GLUL", "GFAP", "KCNJ10", "GJA1", "P2RX7", "P2RY1", "P2RY2"],
+      "molecular_markers": [
+        { "name": "S100B", "gene": "S100B", "notes": "Shared with astrocytes; primary satellite cell marker" },
+        { "name": "GS (Glutamine Synthetase)", "gene": "GLUL", "notes": "Glutamate-glutamine cycle (analogous to astrocyte function)" },
+        { "name": "GFAP", "gene": "GFAP", "notes": "Variable expression; upregulated in reactive states" },
+        { "name": "Kir4.1", "gene": "KCNJ10", "notes": "K+ buffering (shared mechanism with astrocytes)" },
+        { "name": "Connexin 43", "gene": "GJA1", "notes": "Gap junctions; upregulated after peripheral injury -> amplifies nociceptive signaling" },
+        { "name": "P2X7", "gene": "P2RX7", "notes": "Purinergic receptor; bidirectional communication with encapsulated neuron" },
+        { "name": "P2Y", "gene": "P2RY1/P2RY2", "notes": "Purinergic receptors; neuron-satellite cell signaling" }
+      ],
+      "pain_sensitization": {
+        "mechanism": "After peripheral injury, satellite cells upregulate Cx43 gap junctions, enabling intercellular communication that amplifies nociceptive signaling and spreads sensitization across DRG neurons",
+        "clinical_relevance": "Contributes to chronic pain states; target for DRG stimulator parameter calibration"
+      },
+      "bci_relevance": "MODERATE",
+      "qif_band": "Peripheral (pre-I0)",
+      "security_implications": "DRG stimulators (Abbott Proclaim DRG, Boston Scientific Accuracy) interact with satellite glial cells. Reactive gliosis-like responses and gap junction upregulation occur post-implant, altering stimulation thresholds over time. Understanding satellite cell response is necessary for calibrating DRG stimulator parameters and predicting long-term device efficacy."
+    }
+  ]
+}

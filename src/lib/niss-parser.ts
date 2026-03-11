@@ -7,7 +7,7 @@
  *
  * v1.1 changes: Split CG (Cognitive Integrity) into two metrics:
  *   CR (Cognitive Reconnaissance) — read attacks: thought decoding, neural data inference
- *   CD (Cognitive Disruption) — write attacks: perception manipulation, identity modification
+ *   CD (Cognitive/Functional Disruption) — disruption of cognitive processing, sensory perception, motor output, or autonomic regulation
  * Formula: weighted mean with normalized cognitive weights
  * Default: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0
  * Normalization: CG split into CR+CD inflated cognitive weight from 20% to 33%.
@@ -29,7 +29,7 @@ export type BiCode = 'N' | 'L' | 'H' | 'C' | 'X';
 /** Code values for Cognitive Reconnaissance (read: decode, infer, extract) */
 export type CrCode = 'N' | 'L' | 'H' | 'C' | 'X';
 
-/** Code values for Cognitive Disruption (write: manipulate, alter, coerce) */
+/** Code values for Cognitive/Functional Disruption (cognitive, sensory, motor, autonomic disruption) */
 export type CdCode = 'N' | 'L' | 'H' | 'C' | 'X';
 
 /** Code values for Consent Violation */
@@ -39,7 +39,7 @@ export type CvCode = 'N' | 'P' | 'E' | 'I' | 'X';
 export type RvCode = 'F' | 'T' | 'P' | 'I' | 'X';
 
 /** Code values for Neuroplasticity */
-export type NpCode = 'N' | 'T' | 'S' | 'X';
+export type NpCode = 'N' | 'T' | 'P' | 'S' | 'X';
 
 /** Severity levels for NISS scores */
 export type NissSeverity = 'none' | 'low' | 'medium' | 'high' | 'critical';
@@ -127,7 +127,8 @@ const RV_VALUES: Record<RvCode, number | undefined> = {
 
 const NP_VALUES: Record<NpCode, number | undefined> = {
   N: 0.0,
-  T: 5.0,
+  T: 3.3,
+  P: 6.7,
   S: 10.0,
   X: undefined,
 };
@@ -138,7 +139,7 @@ const VALID_CR: ReadonlySet<string> = new Set(['N', 'L', 'H', 'C', 'X']);
 const VALID_CD: ReadonlySet<string> = new Set(['N', 'L', 'H', 'C', 'X']);
 const VALID_CV: ReadonlySet<string> = new Set(['N', 'P', 'E', 'I', 'X']);
 const VALID_RV: ReadonlySet<string> = new Set(['F', 'T', 'P', 'I', 'X']);
-const VALID_NP: ReadonlySet<string> = new Set(['N', 'T', 'S', 'X']);
+const VALID_NP: ReadonlySet<string> = new Set(['N', 'T', 'P', 'S', 'X']);
 
 /** Supported NISS versions */
 const SUPPORTED_VERSIONS: ReadonlySet<string> = new Set(['1.0', '1.1']);
@@ -467,7 +468,7 @@ export function parseAndScore(
 export const METRIC_NAMES: Record<string, string> = {
   bi: 'Biological Impact',
   cr: 'Cognitive Reconnaissance',
-  cd: 'Cognitive Disruption',
+  cd: 'Cognitive/Functional Disruption',
   cv: 'Consent Violation',
   rv: 'Reversibility',
   np: 'Neuroplasticity',
@@ -480,7 +481,7 @@ export const CODE_LABELS: Record<string, Record<string, string>> = {
   cd: { N: 'None', L: 'Low', H: 'High', C: 'Critical', X: 'Undefined' },
   cv: { N: 'None', P: 'Partial', E: 'Extensive', I: 'Involuntary', X: 'Undefined' },
   rv: { F: 'Fully Reversible', T: 'Treatable', P: 'Partially Reversible', I: 'Irreversible', X: 'Undefined' },
-  np: { N: 'None', T: 'Temporary', S: 'Structural', X: 'Undefined' },
+  np: { N: 'None', T: 'Temporary', P: 'Partial', S: 'Structural', X: 'Undefined' },
 } as const;
 
 /** Numeric value lookups keyed by metric id */

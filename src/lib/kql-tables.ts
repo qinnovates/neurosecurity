@@ -41,18 +41,12 @@ import hardwareRaw from '../../docs/bci-hardware-inventory.json';
 import intelFeedRaw from '@/data/bci-intel-feed.json';
 import intelSourcesRaw from '@/data/intel-sources.json';
 
-// New data lake sources (dynamic — gracefully handle if not yet present)
-let cranialNervesRaw: any = null;
-let neuroendocrineRaw: any = null;
-let glialRaw: any = null;
-let neurovascularRaw: any = null;
-let receptorsRaw: any = null;
-
-try { cranialNervesRaw = (await import('@shared/qif-cranial-nerves.json')).default; } catch {}
-try { neuroendocrineRaw = (await import('@shared/qif-neuroendocrine.json')).default; } catch {}
-try { glialRaw = (await import('@shared/qif-glial-cells.json')).default; } catch {}
-try { neurovascularRaw = (await import('@shared/qif-neurovascular.json')).default; } catch {}
-try { receptorsRaw = (await import('@shared/qif-receptors.json')).default; } catch {}
+// Extended neuroscience data
+import cranialNervesRaw from '@shared/qif-cranial-nerves.json';
+import neuroendocrineRaw from '@shared/qif-neuroendocrine.json';
+import glialRaw from '@shared/qif-glial-cells.json';
+import neurovascularRaw from '@shared/qif-neurovascular.json';
+import receptorsRaw from '@shared/qif-receptors.json';
 
 // ═══ Types ═══
 
@@ -73,6 +67,7 @@ export interface DataLakeStats {
   neuroendocrineAxes: number;
   glialCellTypes: number;
   dsmConditions: number;
+  neurologicalConditions: number;
   companies: number;
   devices: number;
 }
@@ -135,20 +130,42 @@ function buildHourglassBands(): Row[] {
   }));
 }
 
+function parseNissVector(vector: string): Record<string, string> {
+  const metrics: Record<string, string> = {};
+  if (!vector) return metrics;
+  for (const part of vector.split('/').slice(1)) {
+    const [code, value] = part.split(':');
+    metrics[code.toLowerCase()] = value;
+  }
+  return metrics;
+}
+
 function buildTechniques(): Row[] {
-  return (registrar.techniques || []).map((t: any) => ({
-    id: t.id,
-    name: t.attack || t.name,
-    tactic: t.tactic,
-    severity: t.severity,
-    status: t.status,
-    niss_score: t.niss?.score || 0,
-    bands: Array.isArray(t.bands) ? t.bands.join(', ') : (t.bands || ''),
-    ui_category: t.ui_category || '',
-    physics_tier: t.physics_tier || '',
-    dual_use: t.dual_use || '',
-    consent_tier: t.consent_tier || '',
-  }));
+  return (registrar.techniques || []).map((t: any) => {
+    const nv = parseNissVector(t.niss?.vector || '');
+    return {
+      id: t.id,
+      name: t.attack || t.name,
+      tactic: t.tactic,
+      severity: t.severity,
+      status: t.status,
+      niss_score: t.niss?.score || 0,
+      niss_vector: t.niss?.vector || '',
+      niss_severity: t.niss?.severity || '',
+      niss_pins: t.niss?.pins || false,
+      niss_bi: nv.bi || '',
+      niss_cr: nv.cr || '',
+      niss_cd: nv.cd || '',
+      niss_cv: nv.cv || '',
+      niss_rv: nv.rv || '',
+      niss_np: nv.np || '',
+      bands: Array.isArray(t.bands) ? t.bands.join(', ') : (t.bands || ''),
+      ui_category: t.ui_category || '',
+      physics_tier: t.physics_tier || '',
+      dual_use: t.dual_use || '',
+      consent_tier: t.consent_tier || '',
+    };
+  });
 }
 
 function buildTactics(): Row[] {
@@ -392,7 +409,7 @@ function buildNeuroendocrineReceptors(): Row[] {
 
 function buildGlialCells(): Row[] {
   if (!glialRaw) return [];
-  return (glialRaw.glial_cells || []).map((g: any) => ({
+  return (glialRaw.glial_types || []).map((g: any) => ({
     id: g.id,
     name: g.name,
     subtype_count: (g.subtypes || []).length,
@@ -408,7 +425,7 @@ function buildGlialCells(): Row[] {
 
 function buildGlialMarkers(): Row[] {
   if (!glialRaw) return [];
-  return (glialRaw.glial_cells || []).flatMap((g: any) =>
+  return (glialRaw.glial_types || []).flatMap((g: any) =>
     (g.molecular_markers || []).map((m: any) => ({
       marker: m.name,
       gene: m.gene || '',
@@ -424,52 +441,44 @@ function buildBBB(): Row[] {
   const bbb = neurovascularRaw.blood_brain_barrier;
   if (!bbb) return [];
   const rows: Row[] = [];
+  const band = bbb.qif_band || 'I0';
+  // Components (endothelial cells, pericytes, astrocytic end-feet)
   for (const comp of bbb.components || []) {
-    // Tight junction proteins
-    for (const tj of comp.tight_junction_proteins || []) {
-      rows.push({
-        category: 'tight_junction',
-        component: comp.name,
-        protein: tj.name,
-        gene: tj.gene || '',
-        function: 'BBB tight junction',
-        qif_band: bbb.qif_band || 'I0',
-      });
-    }
-    // Transport proteins
-    for (const tp of comp.transport_proteins || []) {
-      rows.push({
-        category: 'transporter',
-        component: comp.name,
-        protein: tp.name,
-        gene: tp.gene || '',
-        function: tp.function || '',
-        qif_band: bbb.qif_band || 'I0',
-      });
-    }
+    rows.push({
+      category: 'component', name: comp.name, gene: '', function: comp.description || comp.function || '', qif_band: band,
+    });
+  }
+  // Tight junction proteins (top-level in BBB object)
+  for (const tj of bbb.tight_junction_proteins || []) {
+    rows.push({
+      category: 'tight_junction', name: tj.name, gene: tj.gene || '', function: tj.function || '', qif_band: band,
+    });
+  }
+  // Transport proteins (top-level in BBB object)
+  for (const tp of bbb.transport_proteins || []) {
+    rows.push({
+      category: 'transporter', name: tp.name, gene: tp.gene || '', function: tp.function || '', qif_band: band,
+    });
   }
   return rows;
 }
 
 function buildMeningealSystem(): Row[] {
   if (!neurovascularRaw) return [];
-  const men = neurovascularRaw.meningeal_system;
-  if (!men) return [];
   const rows: Row[] = [];
-  for (const layer of men.layers || []) {
+  // Meninges (dura, arachnoid, pia)
+  for (const layer of neurovascularRaw.meninges || []) {
     rows.push({
-      category: 'meningeal_layer',
-      name: layer.name,
-      derivation: layer.derivation || '',
-      composition: layer.composition || '',
+      category: 'meningeal_layer', name: layer.name,
+      derivation: layer.derivation || '', composition: layer.composition || '',
+      functions: (layer.functions || []).join(', '),
     });
   }
-  for (const space of men.spaces || []) {
+  // Meningeal spaces
+  for (const space of neurovascularRaw.meningeal_spaces || []) {
     rows.push({
-      category: 'meningeal_space',
-      name: space.name,
-      contents: space.contents || '',
-      clinical: space.clinical || '',
+      category: 'meningeal_space', name: space.name,
+      contents: space.contents || '', clinical: space.clinical || '',
     });
   }
   return rows;
@@ -1044,7 +1053,7 @@ function computeStats(tables: KqlTables): DataLakeStats {
     neuroendocrineAxes: byTable['neuroendocrine_axes'] || 0,
     glialCellTypes: byTable['glial_cells'] || 0,
     dsmConditions: byTable['dsm5'] || 0,
-    neurologicalConditions: (byTable['neurological_conditions'] || 0) as any,
+    neurologicalConditions: byTable['neurological_conditions'] || 0,
     companies: byTable['companies'] || 0,
     devices: byTable['devices'] || 0,
   };

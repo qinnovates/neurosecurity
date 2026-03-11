@@ -1,0 +1,723 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "generated": "2026-03-11",
+    "source": "QIF research compilation",
+    "primary_sources": ["StatPearls NCBI", "Endotext NCBI", "PMC primary literature", "PMC6220752", "PMC8533829", "PMC7838595"],
+    "notes": [
+      "DSM associations are diagnostic category references for threat modeling purposes, not diagnostic claims.",
+      "BCI relevance ratings reflect current device landscape, not theoretical potential.",
+      "Confidence ratings: HIGH = established physiology, MEDIUM = well-characterized with some gaps, INFERRED = mechanistic inference from literature."
+    ]
+  },
+  "axes": [
+    {
+      "id": "hpa",
+      "name": "Hypothalamic-Pituitary-Adrenal",
+      "abbreviation": "HPA",
+      "pathway": "Hypothalamus (PVN) -> CRH -> Anterior Pituitary (corticotroph cells) -> ACTH -> Adrenal Cortex (zona fasciculata) -> Cortisol",
+      "hypothalamic_hormone": {
+        "name": "CRH",
+        "full_name": "Corticotropin-releasing hormone",
+        "gene": "CRH",
+        "chromosome": "8q13",
+        "peptide_length": 41,
+        "receptor": "CRHR1",
+        "receptor_chromosome": "17q21.31",
+        "receptor_type": "GPCR (Gs)",
+        "source": "Paraventricular nucleus (PVN)",
+        "secretion_pattern": "Pulsatile, circadian"
+      },
+      "co_releasing": {
+        "name": "AVP",
+        "full_name": "Arginine vasopressin",
+        "gene": "AVP",
+        "role": "Synergistic co-secretagogue — amplifies ACTH release with CRH"
+      },
+      "pituitary_hormone": {
+        "name": "ACTH",
+        "full_name": "Adrenocorticotropic hormone",
+        "gene": "POMC",
+        "chromosome": "2p23.3",
+        "precursor": "Proopiomelanocortin (266 amino acids)",
+        "co_products": ["alpha-MSH", "beta-endorphin", "CLIP"],
+        "cell_type": "Corticotroph"
+      },
+      "target_hormone": {
+        "name": "Cortisol",
+        "type": "Glucocorticoid",
+        "gland": "Adrenal cortex zona fasciculata",
+        "synthesis_from": "Cholesterol",
+        "key_enzymes": ["CYP11A1 (side-chain cleavage)", "CYP17A1 (17-hydroxylase)", "CYP11B1 (11-beta hydroxylase)"]
+      },
+      "receptors": [
+        {
+          "name": "CRH Receptor 1",
+          "gene": "CRHR1",
+          "chromosome": "17q21.31",
+          "type": "GPCR",
+          "g_protein": "Gs",
+          "location": "Pituitary, hypothalamus",
+          "function": "Initiates stress response"
+        },
+        {
+          "name": "CRH Receptor 2",
+          "gene": "CRHR2",
+          "chromosome": "7p15.3",
+          "type": "GPCR",
+          "g_protein": "Gs/Gq",
+          "location": "Limbic system, peripheral",
+          "function": "Modulates resolution of stress response"
+        },
+        {
+          "name": "ACTH Receptor (MC2R)",
+          "gene": "MC2R",
+          "type": "GPCR",
+          "g_protein": "Gs",
+          "signaling": "cAMP/PKA -> steroidogenesis",
+          "location": "Adrenocortical cells"
+        },
+        {
+          "name": "Glucocorticoid Receptor",
+          "gene": "NR3C1",
+          "chromosome": "5q31.3",
+          "type": "Nuclear",
+          "location": "Hypothalamus, pituitary, widespread",
+          "function": "Mediates negative feedback; suppresses CRH and POMC transcription"
+        },
+        {
+          "name": "Mineralocorticoid Receptor",
+          "gene": "NR3C2",
+          "type": "Nuclear",
+          "location": "Hippocampus, kidney",
+          "function": "Binds cortisol with higher affinity than NR3C1 at low concentrations"
+        }
+      ],
+      "feedback_type": "negative",
+      "feedback_details": {
+        "fast_negative": "Minutes: cortisol -> GR and MR in pituitary and hypothalamus -> suppresses CRH and ACTH release",
+        "slow_negative": "Hours: cortisol -> GR -> suppresses CRH and POMC gene transcription",
+        "short_loop": "ACTH feeds back on hypothalamus to suppress CRH",
+        "ultradian": "Coordinated GR/MR signaling generates 1-2 hour glucocorticoid pulses even at rest; disrupted in depression"
+      },
+      "qif_band": "N4",
+      "qif_notes": "Hypothalamus/PVN is the command node (N4). Pituitary at sella turcica (N4 floor). Adrenal gland is peripheral effector (N1-equivalent distance).",
+      "functions": ["stress response", "metabolism", "immune modulation", "circadian cortisol rhythm"],
+      "dsm_conditions": [
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "40-60% show hypercortisolemia, dexamethasone non-suppression, blunted CRH-ACTH response"},
+        {"code": "F43.10", "condition": "PTSD", "association": "Hypocortisolemia with enhanced negative feedback; blunted cortisol awakening response"},
+        {"code": "F31.x", "condition": "Bipolar disorder", "association": "Elevated cortisol awakening response (CAR) in both phases"},
+        {"code": "E24.0", "condition": "Cushing's disease", "association": "Excess ACTH from pituitary adenoma; depression, anxiety, cognitive impairment, psychosis at high cortisol"},
+        {"code": "E27.1", "condition": "Addison's disease", "association": "Adrenal insufficiency; depression, fatigue, psychosis (adrenal crisis)"},
+        {"code": "F20.x", "condition": "Schizophrenia", "association": "HPA hyperactivity documented; chronic antipsychotic use partially normalizes"},
+        {"code": "F41.1", "condition": "Generalized anxiety disorder", "association": "HPA hyperreactivity"},
+        {"code": "F41.0", "condition": "Panic disorder", "association": "HPA hyperreactivity"}
+      ],
+      "epigenetic_notes": "Childhood trauma permanently programs HPA axis reactivity via epigenetic methylation of NR3C1 promoter (Meaney-Szyf paradigm; replications mixed).",
+      "bci_relevance": "MEDIUM",
+      "bci_notes": "Hypothalamic DBS in early investigation. VNS (CN X) modulates NTS -> hypothalamus -> HPA axis, providing indirect HPA neuromodulation. Proposed mechanism for VNS antidepressant effects.",
+      "disruption_effects": ["Cushing's syndrome", "Addison's disease", "chronic stress pathology", "adrenal crisis"],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "hpt",
+      "name": "Hypothalamic-Pituitary-Thyroid",
+      "abbreviation": "HPT",
+      "pathway": "Hypothalamus (PVN/medial hypothalamus) -> TRH -> Anterior Pituitary (thyrotroph cells) -> TSH -> Thyroid follicular cells -> T4/T3",
+      "hypothalamic_hormone": {
+        "name": "TRH",
+        "full_name": "Thyrotropin-releasing hormone",
+        "gene": "TRH",
+        "chromosome": "3q22.1",
+        "peptide": "Tripeptide (pyroglutamyl-histidyl-proline amide)",
+        "receptor": "TRHR",
+        "receptor_chromosome": "8q23.1",
+        "receptor_type": "GPCR (Gq/11)",
+        "source": "PVN",
+        "additional_roles": "Also acts as a CNS neurotransmitter independent of the axis"
+      },
+      "pituitary_hormone": {
+        "name": "TSH",
+        "full_name": "Thyroid-stimulating hormone (thyrotropin)",
+        "gene": "TSHB (beta subunit), CGA (alpha subunit, shared with LH, FSH, hCG)",
+        "beta_chromosome": "1p13.2",
+        "structure": "Heterodimeric glycoprotein",
+        "cell_type": "Thyrotroph"
+      },
+      "target_hormone": {
+        "name": "T4/T3",
+        "gland": "Thyroid follicular cells",
+        "T4": {
+          "full_name": "Thyroxine (3,5,3',5'-tetraiodothyronine)",
+          "note": "Major secretory product (90%). Largely a prohormone, converted to T3 peripherally."
+        },
+        "T3": {
+          "full_name": "Triiodothyronine (3,5,3'-triiodothyronine)",
+          "note": "Biologically active form. Produced from T4 via deiodinase enzymes.",
+          "deiodinase_genes": ["DIO1", "DIO2", "DIO3"]
+        }
+      },
+      "receptors": [
+        {
+          "name": "TRH Receptor",
+          "gene": "TRHR",
+          "chromosome": "8q23.1",
+          "type": "GPCR",
+          "g_protein": "Gq/11",
+          "location": "Thyrotrophs and lactotrophs"
+        },
+        {
+          "name": "TSH Receptor",
+          "gene": "TSHR",
+          "chromosome": "14q31.1",
+          "type": "GPCR",
+          "g_protein": "Gs (primary), Gq (at high TSH)",
+          "signaling": "cAMP -> PKA -> thyroid hormone synthesis and secretion",
+          "location": "Thyroid follicular cells"
+        },
+        {
+          "name": "Thyroid Hormone Receptor Alpha",
+          "gene": "THRA",
+          "chromosome": "17q21.1",
+          "type": "Nuclear",
+          "subtypes": {"TRa1": "Mediates cardiac and temperature effects"}
+        },
+        {
+          "name": "Thyroid Hormone Receptor Beta",
+          "gene": "THRB",
+          "chromosome": "3p24.2",
+          "type": "Nuclear",
+          "subtypes": {
+            "TRb1": "Mediates hepatic and CNS effects",
+            "TRb2": "Specifically mediates negative feedback of T3 on TRH gene expression in hypothalamic PVN neurons"
+          },
+          "ligand_note": "T3 binds 10-15x higher affinity than T4"
+        }
+      ],
+      "feedback_type": "negative",
+      "feedback_details": {
+        "pituitary_negative": "T3 (and T4 converted to T3 by DIO2 in thyrotrophs) suppress TSH secretion",
+        "hypothalamic_negative": "T3 suppresses TRH gene transcription in PVN neurons via TRb2 binding",
+        "short_loop": "TSH has slight short-loop feedback on TRH (inferred; less well established)"
+      },
+      "cofactors": [
+        "Iodine (iodide transport by SLC5A5/NIS; incorporated into thyroglobulin by TPO)",
+        "Selenium (DIO2 is a selenoprotein)",
+        "Iron (TPO is heme-containing)"
+      ],
+      "key_genes": {
+        "iodide_transporter": "SLC5A5 (NIS)",
+        "thyroid_peroxidase": "TPO"
+      },
+      "qif_band": "N4",
+      "qif_notes": "Hypothalamus (PVN) is N4. TRH neurons in the PVN; pituitary at sella (N4/peripheral boundary).",
+      "functions": ["metabolic rate regulation", "thermogenesis", "CNS development", "cardiac function"],
+      "dsm_conditions": [
+        {"condition": "Hypothyroidism", "association": "Depression (often mistaken for MDD), cognitive slowing, psychosis in severe cases (myxedema madness)"},
+        {"condition": "Hyperthyroidism (including Graves disease)", "association": "Anxiety, agitation, irritability, mania-like episodes, insomnia"},
+        {"condition": "Subclinical hypothyroidism", "association": "Depression association documented; treatment trials show mixed results"},
+        {"condition": "Lithium-induced hypothyroidism", "association": "Lithium inhibits thyroid hormone release and blocks TSH signaling in up to 40% of bipolar patients on long-term lithium"},
+        {"condition": "Postpartum thyroiditis", "association": "Associated with postpartum depression"}
+      ],
+      "additional_notes": "TRH has independent CNS effects (antidepressant-like, analeptic) suggesting HPT dysregulation has direct neural consequences beyond metabolism.",
+      "bci_relevance": "LOW",
+      "bci_notes": "No direct BCI interfaces to the HPT axis. Hypothalamic neuromodulation (DBS research) could theoretically modulate TRH secretion (inferred, purely experimental).",
+      "disruption_effects": ["hypothyroidism", "hyperthyroidism", "Graves disease", "myxedema madness"],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "hpg",
+      "name": "Hypothalamic-Pituitary-Gonadal",
+      "abbreviation": "HPG",
+      "pathway": "Hypothalamus (GnRH neurons, mediobasal hypothalamus and preoptic area) -> GnRH (pulsatile) -> Anterior Pituitary (gonadotroph cells) -> LH + FSH -> Gonads -> Testosterone / Estradiol / Progesterone",
+      "hypothalamic_hormone": {
+        "name": "GnRH",
+        "full_name": "Gonadotropin-releasing hormone",
+        "gene": "GNRH1",
+        "chromosome": "8p21.2",
+        "peptide_length": 10,
+        "receptor": "GNRHR",
+        "receptor_chromosome": "4q21.2",
+        "receptor_type": "GPCR (Gq/11)",
+        "secretion_pattern": "Pulsatile — frequency encodes LH:FSH ratio",
+        "note": "Continuous GnRH exposure paradoxically suppresses gonadotropins (basis for GnRH agonist therapy)"
+      },
+      "co_releasing": {
+        "name": "Kisspeptin",
+        "gene": "KISS1",
+        "chromosome": "1q32.1",
+        "receptor_gene": "KISS1R (GPR54)",
+        "receptor_coupling": "Gq",
+        "source": "Kiss1 neurons in arcuate nucleus and AVPV",
+        "role": "Primary gating signal for puberty onset; drives pulsatile GnRH release"
+      },
+      "pituitary_hormone": {
+        "name": "LH + FSH",
+        "LH": {
+          "full_name": "Luteinizing hormone",
+          "gene": "LHB",
+          "chromosome": "19q13.32",
+          "alpha_gene": "CGA",
+          "receptor_gene": "LHCGR",
+          "receptor_coupling": "Gs"
+        },
+        "FSH": {
+          "full_name": "Follicle-stimulating hormone",
+          "gene": "FSHB",
+          "chromosome": "11p13",
+          "alpha_gene": "CGA",
+          "receptor_gene": "FSHR",
+          "receptor_coupling": "Gs"
+        }
+      },
+      "target_hormone": {
+        "name": "Testosterone / Estradiol / Progesterone",
+        "gland": "Gonads (testes / ovaries)",
+        "male": {
+          "primary": "Testosterone",
+          "source": "Leydig cells (LH-driven)",
+          "enzymes": ["CYP17A1", "HSD17B3"],
+          "fsh_target": "Sertoli cells -> spermatogenesis + Inhibin B (selectively inhibits FSH)"
+        },
+        "female": {
+          "follicular_phase": "FSH -> granulosa cells -> Estradiol (via aromatase, CYP19A1)",
+          "ovulation": "LH surge triggers ovulation",
+          "luteal_phase": "LH -> corpus luteum -> Progesterone (CYP11A1, HSD3B1)"
+        }
+      },
+      "receptors": [
+        {
+          "name": "GnRH Receptor",
+          "gene": "GNRHR",
+          "chromosome": "4q21.2",
+          "type": "GPCR",
+          "g_protein": "Gq/11",
+          "unique_feature": "No C-terminal tail (unique among GPCRs); does not internalize efficiently"
+        },
+        {
+          "name": "Androgen Receptor",
+          "gene": "AR",
+          "chromosome": "Xq11-12",
+          "type": "Nuclear",
+          "ligands": ["Testosterone", "DHT"]
+        },
+        {
+          "name": "Estrogen Receptor Alpha",
+          "gene": "ESR1",
+          "chromosome": "6q25.1",
+          "type": "Nuclear"
+        },
+        {
+          "name": "Estrogen Receptor Beta",
+          "gene": "ESR2",
+          "chromosome": "14q23.2",
+          "type": "Nuclear"
+        },
+        {
+          "name": "Progesterone Receptor",
+          "gene": "PGR",
+          "chromosome": "11q22.1",
+          "type": "Nuclear"
+        }
+      ],
+      "feedback_type": "negative (with positive feedback reversal in females)",
+      "feedback_details": {
+        "long_loop_negative": "Testosterone and estradiol suppress GnRH pulse frequency/amplitude and suppress LH/FSH release at pituitary",
+        "positive_feedback": "High estradiol (>200 pg/mL sustained 48h) triggers LH surge via positive feedback — unique reversal of negative feedback (pre-ovulatory, females only)",
+        "inhibin_b": "Selectively suppresses FSH (from Sertoli cells in males, granulosa cells in females)",
+        "positive_feedback_note": "Precise GnRH neuron circuitry for estradiol-induced LH surge remains incompletely characterized (inferred)"
+      },
+      "qif_band": "N4",
+      "qif_notes": "GnRH neurons span mediobasal hypothalamus and preoptic area (N4). Kiss1 neurons in arcuate nucleus and AVPV are key N4 nodes.",
+      "functions": ["reproductive function", "puberty onset", "sex hormone production", "gametogenesis"],
+      "dsm_conditions": [
+        {"condition": "Hypogonadism", "association": "Depression, cognitive decline, reduced motivation. Low testosterone associated with MDD in men."},
+        {"code": "N94.3", "condition": "Premenstrual dysphoric disorder (PMDD)", "association": "Luteal phase progesterone metabolite (allopregnanolone) acts on GABA-A receptors; abnormal sensitivity implicated"},
+        {"condition": "Postpartum depression", "association": "Rapid estrogen/progesterone withdrawal post-delivery"},
+        {"condition": "PCOS (Polycystic ovary syndrome)", "association": "LH hypersecretion, androgen excess; high prevalence of anxiety and depression"},
+        {"code": "F64.x", "condition": "Gender dysphoria", "association": "HPG axis is the pharmacological target for gender-affirming hormone therapy"},
+        {"code": "F50.0x", "condition": "Anorexia nervosa", "association": "Functional hypogonadism from weight loss suppressing kisspeptin/GnRH"}
+      ],
+      "genetic_conditions": [
+        {
+          "name": "Kallmann syndrome",
+          "description": "GnRH deficiency + anosmia",
+          "genes": ["KAL1 (anosmin)", "FGFR1", "GNRH1", "GNRHR"]
+        }
+      ],
+      "bci_relevance": "LOW",
+      "bci_notes": "No direct BCI interfaces. Hypothalamic neuromodulation affecting kisspeptin/GnRH pulse generation is theoretically possible but purely experimental.",
+      "disruption_effects": ["hypogonadism", "PCOS", "infertility", "precocious puberty"],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "hps",
+      "name": "Hypothalamic-Pituitary-Somatotropic",
+      "abbreviation": "HPS",
+      "pathway": "Hypothalamus (arcuate nucleus/PVN) -> GHRH (stimulatory) + Somatostatin (inhibitory) -> Anterior Pituitary (somatotroph cells) -> GH -> Liver (and other tissues) -> IGF-1",
+      "hypothalamic_hormone": {
+        "name": "GHRH",
+        "full_name": "Growth hormone-releasing hormone",
+        "gene": "GHRH",
+        "chromosome": "20q11.23",
+        "peptide_length": 44,
+        "receptor": "GHRHR",
+        "receptor_chromosome": "7p15.3",
+        "receptor_type": "GPCR (Gs)"
+      },
+      "inhibitory_hormone": {
+        "name": "Somatostatin (SRIH)",
+        "gene": "SST",
+        "chromosome": "3q27.3",
+        "receptor_genes": ["SSTR1", "SSTR2", "SSTR3", "SSTR4", "SSTR5"],
+        "receptor_coupling": "Gi",
+        "note": "Also inhibits TSH"
+      },
+      "peripheral_stimulator": {
+        "name": "Ghrelin",
+        "gene": "GHRL",
+        "chromosome": "3p25.3",
+        "source": "Gastric X/A cells (primarily)",
+        "receptor_gene": "GHSR",
+        "receptor_subtype": "GHS-R1a",
+        "receptor_coupling": "Gq",
+        "constitutive_activity": "GHSR has ~50% maximal ligand-independent activity"
+      },
+      "pituitary_hormone": {
+        "name": "GH",
+        "full_name": "Growth hormone (somatotropin)",
+        "gene": "GH1",
+        "chromosome": "17q23.3",
+        "amino_acids": 191,
+        "receptor_gene": "GHR",
+        "receptor_chromosome": "5p13.1-12",
+        "receptor_family": "Class I cytokine receptor superfamily",
+        "signaling": "JAK2/STAT5b",
+        "cell_type": "Somatotroph"
+      },
+      "target_hormone": {
+        "name": "IGF-1",
+        "full_name": "Insulin-like growth factor 1",
+        "gene": "IGF1",
+        "chromosome": "12q23.2",
+        "gland": "Liver (primarily, GH-responsive)",
+        "receptor_gene": "IGF1R",
+        "receptor_chromosome": "15q26.3",
+        "receptor_type": "Receptor tyrosine kinase",
+        "signaling": "PI3K/AKT and RAS/MAPK"
+      },
+      "receptors": [
+        {
+          "name": "GHRH Receptor",
+          "gene": "GHRHR",
+          "type": "GPCR",
+          "g_protein": "Gs"
+        },
+        {
+          "name": "Somatostatin Receptors 1-5",
+          "genes": ["SSTR1", "SSTR2", "SSTR3", "SSTR4", "SSTR5"],
+          "type": "GPCR",
+          "g_protein": "Gi"
+        },
+        {
+          "name": "GH Receptor",
+          "gene": "GHR",
+          "type": "Cytokine receptor",
+          "mechanism": "Homodimerization upon GH binding -> JAK2 phosphorylation -> STAT5b activation -> IGF-1 gene transcription in liver"
+        },
+        {
+          "name": "IGF-1 Receptor",
+          "gene": "IGF1R",
+          "type": "Receptor tyrosine kinase",
+          "signaling": "PI3K/AKT and RAS/MAPK"
+        },
+        {
+          "name": "Ghrelin Receptor (GHS-R1a)",
+          "gene": "GHSR",
+          "type": "GPCR",
+          "g_protein": "Gq"
+        }
+      ],
+      "feedback_type": "negative",
+      "feedback_details": {
+        "long_loop_negative": "IGF-1 inhibits GH release from pituitary (direct somatotroph inhibition) and stimulates somatostatin release from hypothalamus",
+        "short_loop": "GH feeds back on hypothalamus to stimulate somatostatin and inhibit GHRH",
+        "ultradian_rhythm": "GH released in pulses (every 3-4 hours), largest pulse during slow-wave sleep (N3). Somatostatin tonic inhibition between pulses.",
+        "ghrelin_interplay": "Ghrelin suppresses somatostatin indirectly, amplifying GH pulses"
+      },
+      "sleep_dependency": "Disrupted slow-wave sleep architecture impairs the major nocturnal GH pulse.",
+      "qif_band": "N4",
+      "qif_notes": "Arcuate nucleus and PVN are N4 nodes. Ghrelin signals from periphery to N4 hypothalamus.",
+      "functions": ["growth regulation", "metabolism", "body composition", "bone density"],
+      "dsm_conditions": [
+        {"condition": "GH deficiency (adult)", "association": "Depression, cognitive impairment, reduced quality of life. GH replacement improves mood in some trials."},
+        {"condition": "Acromegaly", "association": "GH excess from pituitary adenoma; anxiety, depression, cognitive changes; sleep apnea (genioglossus hypertrophy)"},
+        {"condition": "Sleep disorders (disrupted slow-wave sleep)", "association": "Disrupted GH pulses; associated with MDD, PTSD, insomnia disorder"},
+        {"code": "F50.x", "condition": "Eating disorders (ghrelin dysregulation)", "association": "Ghrelin dysregulation associated with anorexia nervosa and binge eating disorder"}
+      ],
+      "bci_relevance": "LOW",
+      "bci_notes": "Indirect. Hypothalamic neuromodulation targeting slow-wave sleep enhancement could modulate GH axis pulsatility (experimental, inferred). Ghrelin receptor (GHSR) investigated as pharmacological target in eating disorders.",
+      "disruption_effects": ["GH deficiency", "acromegaly", "gigantism", "Laron syndrome"],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "hp_prolactin",
+      "name": "Hypothalamic-Pituitary-Prolactin",
+      "abbreviation": "HP-Prolactin",
+      "pathway": "Hypothalamus (arcuate nucleus TIDA neurons) -> Dopamine (inhibitory) -> Anterior Pituitary (lactotroph cells) -> PRL (released when dopamine inhibition is lifted)",
+      "axis_type": "Tonic inhibition (unique: default state is suppression by dopamine)",
+      "hypothalamic_hormone": {
+        "name": "Dopamine (inhibitory)",
+        "source": "Tuberoinfundibular dopaminergic (TIDA) neurons in arcuate nucleus",
+        "synthesis": "Tyrosine -> TH -> DOPA -> DA",
+        "receptor": "DRD2",
+        "receptor_type": "GPCR (Gi)",
+        "mechanism": "Constitutively suppresses PRL synthesis and secretion"
+      },
+      "stimulatory_inputs": [
+        {"name": "TRH", "gene": "TRH", "note": "Also stimulates PRL release; explains elevated PRL in hypothyroidism when TRH rises"},
+        {"name": "VIP", "full_name": "Vasoactive intestinal peptide", "gene": "VIP", "note": "Stimulates PRL during suckling"},
+        {"name": "Oxytocin", "note": "Stimulatory input"},
+        {"name": "Angiotensin II", "note": "Stimulatory input"},
+        {"name": "NPY", "note": "Stimulatory input"}
+      ],
+      "pituitary_hormone": {
+        "name": "Prolactin (PRL)",
+        "gene": "PRL",
+        "chromosome": "6p22.3",
+        "amino_acids": 199,
+        "receptor_gene": "PRLR",
+        "receptor_chromosome": "5p13-14",
+        "receptor_family": "Class I cytokine receptor",
+        "signaling": "JAK2/STAT5a",
+        "cell_type": "Lactotroph"
+      },
+      "target_hormone": {
+        "name": "Prolactin (PRL)",
+        "gland": "No dedicated target gland",
+        "targets": "Mammary gland (milk production), hypothalamus (short-loop feedback), immune cells, liver"
+      },
+      "receptors": [
+        {
+          "name": "D2 Dopamine Receptor",
+          "gene": "DRD2",
+          "type": "GPCR",
+          "g_protein": "Gi",
+          "location": "Lactotrophs",
+          "role": "Primary inhibitory receptor"
+        },
+        {
+          "name": "Prolactin Receptor",
+          "gene": "PRLR",
+          "type": "Cytokine receptor",
+          "signaling": "JAK2/STAT5a",
+          "location": "Breast, liver, kidney, adrenal, testes, ovary, immune cells, brain"
+        }
+      ],
+      "feedback_type": "short-loop (unique: PRL inhibits its own inhibitor)",
+      "feedback_details": {
+        "short_loop": "PRL suppresses dopamine release from TIDA neurons (inhibits its own inhibitor -> allows sustained lactation)",
+        "suckling_reflex": "Sensory afferents from nipple -> vagal pathway -> hypothalamus -> suppresses dopamine (and stimulates oxytocin release simultaneously)",
+        "stress_response": "Any stress can transiently elevate PRL via reduced dopamine tone"
+      },
+      "cofactors": [
+        "Tyrosine (dopamine precursor)",
+        "BH4 (tetrahydrobiopterin, dopamine synthesis)",
+        "Vitamin B6 (pyridoxine, cofactor for AADC in dopamine synthesis)"
+      ],
+      "qif_band": "N4",
+      "qif_notes": "Arcuate nucleus TIDA neurons (N4). Dopaminergic control pathway bridges N4 to N5 (basal ganglia dopamine system interconnections).",
+      "functions": ["lactation", "reproductive function", "immune modulation", "dopaminergic tone regulation"],
+      "dsm_conditions": [
+        {"condition": "Hyperprolactinemia", "association": "Amenorrhea, galactorrhea, sexual dysfunction, depression, anxiety. Antipsychotic-induced: near-universal with typical antipsychotics (D2 antagonists), common with risperidone, amisulpride."},
+        {"condition": "Prolactinoma", "association": "Benign pituitary tumor; depression, sexual dysfunction, infertility"},
+        {"condition": "Postpartum psychosis", "association": "Rapid prolactin/estrogen fluctuations implicated"},
+        {"code": "F20.x", "condition": "Schizophrenia (treatment-related)", "association": "All D2-blocking antipsychotics elevate PRL — relevant to monitoring"}
+      ],
+      "bci_relevance": "LOW",
+      "bci_notes": "Indirect. Dopamine modulation from central neuromodulation (DBS, VNS) could affect TIDA tone and PRL. DBS targeting substantia nigra (Parkinson's) affects broader dopamine network with downstream PRL effects (inferred).",
+      "disruption_effects": ["hyperprolactinemia", "prolactinoma", "galactorrhea", "hypogonadism (secondary)"],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "neurohypophyseal",
+      "name": "Neurohypophyseal System (Posterior Pituitary)",
+      "abbreviation": "OXT/AVP",
+      "pathway": "Hypothalamus (magnocellular neurons in SON and PVN) -> axonal transport via supraoptico-hypophyseal tract -> Posterior Pituitary (neurohypophysis) -> systemic release of OXT and AVP",
+      "axis_type": "Direct neural release (not a classic three-tier axis)",
+      "hypothalamic_hormone": {
+        "name": "Oxytocin (OXT) and Vasopressin (AVP)",
+        "oxt_gene": "OXT",
+        "avp_gene": "AVP",
+        "chromosome": "20p13 (both genes, head-to-head tandem)",
+        "receptor": "OXTR (for OXT), AVPR1A/AVPR1B/AVPR2 (for AVP)",
+        "source": "Magnocellular neurons in supraoptic nucleus (SON) and paraventricular nucleus (PVN)"
+      },
+      "hormones": [
+        {
+          "name": "Oxytocin",
+          "abbreviation": "OXT",
+          "gene": "OXT",
+          "chromosome": "20p13",
+          "amino_acids": 9,
+          "sequence": "Cys-Tyr-Ile-Gln-Asn-Cys-Pro-Leu-Gly-NH2",
+          "release_triggers": ["Suckling (vagal afferents from nipple -> NTS -> SON/PVN)", "Uterine stretch (during labor — positive feedback loop)", "Social bonding behaviors", "Dendritic OXT release during social contexts (autocrine/paracrine)"]
+        },
+        {
+          "name": "Vasopressin",
+          "abbreviation": "AVP (ADH)",
+          "gene": "AVP",
+          "chromosome": "20p13",
+          "amino_acids": 9,
+          "sequence": "Cys-Tyr-Phe-Gln-Asn-Cys-Pro-Arg-Gly-NH2",
+          "release_triggers": ["Plasma osmolality increase above ~284 mOsmol/kg", "Blood pressure drop (>=5-10%)", "Stress, pain, nausea", "Immune mediators (IL-1beta, TNF-alpha)", "Circadian regulation via SCN projections"]
+        }
+      ],
+      "pituitary_hormone": {
+        "name": "OXT and AVP (released directly from posterior pituitary)",
+        "gene": "OXT, AVP"
+      },
+      "target_hormone": {
+        "name": "Oxytocin / Vasopressin",
+        "gland": "Posterior pituitary (neurohypophysis) — direct release, no target gland"
+      },
+      "receptors": [
+        {
+          "name": "Oxytocin Receptor",
+          "gene": "OXTR",
+          "chromosome": "3p25.3",
+          "type": "GPCR",
+          "g_protein": "Gq/11",
+          "location": "Uterus, breast, CNS (amygdala, hippocampus, hypothalamus, brainstem), immune cells"
+        },
+        {
+          "name": "Vasopressin V1a Receptor",
+          "gene": "AVPR1A",
+          "chromosome": "12q15",
+          "type": "GPCR",
+          "g_protein": "Gq/11",
+          "location": "Vascular smooth muscle, liver, platelets, CNS"
+        },
+        {
+          "name": "Vasopressin V1b Receptor",
+          "gene": "AVPR1B",
+          "chromosome": "1q32.1",
+          "type": "GPCR",
+          "g_protein": "Gq/11",
+          "location": "Pituitary corticotrophs",
+          "cross_axis": "Synergizes with CRH to release ACTH — bridges OXT/AVP system to HPA axis"
+        },
+        {
+          "name": "Vasopressin V2 Receptor",
+          "gene": "AVPR2",
+          "chromosome": "Xq28",
+          "type": "GPCR",
+          "g_protein": "Gs",
+          "location": "Renal collecting duct principal cells",
+          "mechanism": "Mediates antidiuretic effect via aquaporin-2 (AQP2) insertion"
+        }
+      ],
+      "feedback_type": "mixed (positive feedback for OXT during parturition; auto-inhibition for AVP)",
+      "feedback_details": {
+        "avp_auto_inhibition": "V1a receptors on vasopressinergic neurons",
+        "apelin": "Gene APLN; inversely regulated by osmotic stress; counters AVP during euhydration",
+        "oxt_positive_feedback": "Ferguson reflex during parturition: uterine stretch -> OXT -> contraction -> more stretch (rare positive feedback loop in physiology)"
+      },
+      "qif_band": "N4",
+      "qif_notes": "Hypothalamic SON and PVN are N4 nodes. Posterior pituitary is the terminal release site. V1bR on pituitary corticotrophs bridges N4 to HPA axis.",
+      "functions": ["social bonding", "parturition", "lactation", "water homeostasis (ADH)", "blood pressure regulation", "stress modulation"],
+      "dsm_conditions": [
+        {"condition": "Central diabetes insipidus", "association": "AVP deficiency; polyuria, polydipsia. Causes: trauma, surgery, tumors, autoimmune, Wolfram syndrome (WFS1 gene)."},
+        {"condition": "SIADH", "association": "Hyponatremia -> confusion, seizures, cerebral edema. Triggered by SSRIs (mechanism uncertain), carbamazepine, antipsychotics — highly relevant psychiatric medication interaction."},
+        {"code": "F84.x", "condition": "Autism spectrum disorder", "association": "Reduced OXT levels and OXTR polymorphisms documented; intranasal OXT trials ongoing (mixed results as of 2025)"},
+        {"condition": "Social anxiety disorder", "association": "OXT modulates amygdala fear responses"},
+        {"code": "F43.10", "condition": "PTSD", "association": "OXT administration shows anxiolytic effects in some trials"},
+        {"condition": "Postpartum depression", "association": "OXT dysregulation in context of parturition/lactation"},
+        {"code": "F20.x", "condition": "Schizophrenia", "association": "OXT studied as adjunctive treatment for social cognition deficits"}
+      ],
+      "bci_relevance": "MEDIUM",
+      "bci_notes": "Intranasal OXT administration demonstrates effects on social behavior, trust, and amygdala reactivity. Hypothalamic neuromodulation for OXT release is being explored. V1bR -> HPA axis connection means PVN-targeting BCI could modulate both OXT/AVP and HPA simultaneously — relevant multi-axis threat surface (inferred).",
+      "disruption_effects": ["central diabetes insipidus", "SIADH", "social bonding disruption", "labor dystocia"],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "pineal",
+      "name": "Pineal Gland / Melatonin Synthesis",
+      "abbreviation": "Pineal/Melatonin",
+      "pathway": "Retina (ipRGCs/melanopsin) -> retinohypothalamic tract -> SCN -> PVN -> intermediolateral cell column (spinal cord) -> superior cervical ganglion -> postganglionic sympathetic fibers -> pinealocytes -> Melatonin",
+      "axis_type": "Neuroendocrine transducer (not a hypothalamic-pituitary axis). Converts SCN-driven photic signals into melatonin secretion.",
+      "hypothalamic_hormone": {
+        "name": "SCN-driven sympathetic signal (norepinephrine)",
+        "source": "SCN -> PVN -> superior cervical ganglion -> pinealocytes",
+        "receptor": "ADRB1 (beta-1 adrenergic) + ADRA1A (alpha-1 adrenergic)",
+        "mechanism": "Norepinephrine activates beta1 + alpha1 -> cAMP + Ca2+ -> AANAT phosphorylation -> melatonin synthesis"
+      },
+      "synthesis_pathway": [
+        {"step": 1, "substrate": "Tryptophan", "product": "5-hydroxytryptophan (5-HTP)", "enzyme": "Tryptophan hydroxylase 1 (TPH1)", "gene": "TPH1", "chromosome": "11p15.1", "cofactors": ["BH4", "Iron", "Molecular oxygen"]},
+        {"step": 2, "substrate": "5-HTP", "product": "Serotonin (5-HT)", "enzyme": "Aromatic L-amino acid decarboxylase (AADC)", "gene": "DDC", "chromosome": "7p12.1", "cofactors": ["Pyridoxal phosphate (vitamin B6)"]},
+        {"step": 3, "substrate": "Serotonin", "product": "N-Acetylserotonin (NAS)", "enzyme": "Arylalkylamine N-acetyltransferase (AANAT)", "gene": "AANAT", "chromosome": "17q25.1", "rate_limiting": true, "activity_increase": "Up to 150-fold at night", "cofactors": ["Acetyl-CoA", "Vitamin B5 (pantothenic acid)"]},
+        {"step": 4, "substrate": "N-Acetylserotonin (NAS)", "product": "Melatonin (N-acetyl-5-methoxytryptamine)", "enzyme": "Acetylserotonin O-methyltransferase (ASMT / HIOMT)", "gene": "ASMT", "chromosome": "Xp22.32 / Yp11.2 (pseudoautosomal region)", "cofactors": ["S-adenosyl methionine (SAM)", "linked to folate/B12 methylation cycle"]}
+      ],
+      "pituitary_hormone": {
+        "name": "N/A (no pituitary involvement)",
+        "note": "Pineal axis bypasses pituitary entirely"
+      },
+      "target_hormone": {
+        "name": "Melatonin",
+        "gland": "Pineal gland (pinealocytes)"
+      },
+      "receptors": [
+        {
+          "name": "Melatonin Receptor 1 (MT1)",
+          "gene": "MTNR1A",
+          "chromosome": "4q35.2",
+          "type": "GPCR",
+          "g_protein": "Gi",
+          "function": "Circadian phase resetting, SCN signaling, vasoconstriction"
+        },
+        {
+          "name": "Melatonin Receptor 2 (MT2)",
+          "gene": "MTNR1B",
+          "chromosome": "11q21-22",
+          "type": "GPCR",
+          "g_protein": "Gi",
+          "function": "Circadian phase shifting, insulin secretion",
+          "gwas_note": "MTNR1B variants are GWAS-associated with type 2 diabetes"
+        },
+        {
+          "name": "MT3 (Quinone reductase 2)",
+          "gene": "NQO2",
+          "type": "Enzyme (not classic GPCR)",
+          "function": "Antioxidant role"
+        }
+      ],
+      "feedback_type": "photic regulation (not classic negative feedback)",
+      "feedback_details": {
+        "note": "Melatonin does not have a classic negative feedback loop. Regulation is primarily photic (light/dark cycle) via the SCN sympathetic pathway.",
+        "darkness_pathway": "NE release -> beta1-AR -> cAMP -> PKA -> AANAT phosphorylation + CREB activation -> melatonin peaks (midnight-3am)",
+        "light_suppression": "Photic signal suppresses SCN output -> no NE -> AANAT dephosphorylated and degraded by proteasome -> melatonin suppressed"
+      },
+      "key_regulatory_genes": {
+        "melanopsin": "OPN4",
+        "stabilizer_proteins": ["YWHAZ", "YWHAB"],
+        "14_3_3_note": "14-3-3 proteins stabilize phosphorylated AANAT, preventing proteasomal degradation"
+      },
+      "qif_band": "N4",
+      "qif_notes": "SCN is an N4 node; pineal gland is epithalamic (N4/N3 junction). Retinohypothalamic tract provides direct CN II -> N4 information channel outside classical visual pathway.",
+      "functions": ["circadian rhythm regulation", "sleep-wake cycle", "seasonal physiology", "antioxidant"],
+      "dsm_conditions": [
+        {"code": "F33.x", "condition": "Major depressive disorder (seasonal specifier / SAD)", "association": "Reduced melatonin amplitude and phase delays. Light therapy works by phase-advancing melatonin/SCN clock."},
+        {"condition": "Circadian rhythm sleep-wake disorders", "association": "Delayed and advanced sleep-wake phase disorders directly involve AANAT/melatonin timing dysregulation"},
+        {"code": "F31.x", "condition": "Bipolar disorder", "association": "Melatonin onset is a biological marker for mood states; phase advances in mania"},
+        {"code": "G47.0x", "condition": "Insomnia disorder", "association": "Melatonin supplementation has modest evidence; ramelteon (MT1/MT2 agonist) is FDA-approved"},
+        {"code": "F90.x", "condition": "ADHD", "association": "Delayed circadian phase documented; melatonin for sleep-onset insomnia in ADHD has pediatric evidence"},
+        {"code": "F20.x", "condition": "Schizophrenia", "association": "Disrupted circadian rhythms, reduced melatonin secretion"},
+        {"code": "F84.x", "condition": "Autism spectrum disorder", "association": "ASMT gene variants associated with ASD in some studies"}
+      ],
+      "bci_relevance": "MEDIUM",
+      "bci_notes": "Light therapy devices are approved interventions operating through CN II -> retinohypothalamic tract -> SCN -> pineal pathway (photic BCI at CN II/N4). Blue light from BCI screens/devices suppresses melatonin via melanopsin (OPN4) — relevant environmental threat surface.",
+      "disruption_effects": ["circadian rhythm disorders", "seasonal affective disorder", "jet lag", "shift work disorder"],
+      "confidence": "HIGH"
+    }
+  ]
+}

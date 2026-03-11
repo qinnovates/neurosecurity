@@ -931,7 +931,7 @@ const tacticColors: Record<string, string> = {
           <div class="glass rounded-xl p-5">
             <div class="flex items-center gap-2 mb-2">
               <span class="w-2 h-2 rounded-full bg-[#a855f7]"></span>
-              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive Disruption (CD)</h4>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Cognitive/Functional Disruption (CD)</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
               Captures write-side attacks: perception manipulation, identity modification, and cognitive coercion. A phantom sensory injection scores CD:H, while a technique that alters the subject's sense of agency scores CD:C. Techniques with no cognitive write impact score CD:N.
@@ -961,7 +961,7 @@ const tacticColors: Record<string, string> = {
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Neuroplasticity (NP)</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Reflects whether the technique induces physical reorganization of the brain. None (N) indicates no neural change, Temporary (T) signifies transient plasticity, and Structural (S) denotes permanent neural pathway alteration &mdash; effectively rewriting brain architecture.
+              Reflects whether the technique induces physical reorganization of the brain. None (N) indicates no neural change, Temporary (T) signifies transient plasticity, Partial (P) denotes moderate synaptic reorganization persisting weeks to months, and Structural (S) denotes permanent neural pathway alteration &mdash; effectively rewriting brain architecture.
             </p>
           </div>
           <div class="glass rounded-xl p-5 border-l-3 border-[#ef4444]/50">
@@ -992,7 +992,7 @@ const tacticColors: Record<string, string> = {
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CD</div>
-              <div class="text-[var(--color-text-faint)]">Cognitive Disruption</div>
+              <div class="text-[var(--color-text-faint)]">Cognitive/Functional Disruption</div>
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CV</div>
@@ -1068,7 +1068,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mt-8">
           <p>
-            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) scores, corresponding to diagnostic categories such as brief psychotic disorder, delirium, and dissociative conditions (for threat modeling purposes).
+            <strong>Cognitive/Psychotic</strong> ({stats.dsm5.clusters.cognitive_psychotic} techniques) &mdash; Attacks that disrupt perception, cognition, or reality testing. Primarily driven by high Cognitive Reconnaissance (CR) and Cognitive/Functional Disruption (CD) scores, corresponding to diagnostic categories such as brief psychotic disorder, delirium, and dissociative conditions (for threat modeling purposes).
           </p>
           <p>
             <strong>Mood/Trauma</strong> ({stats.dsm5.clusters.mood_trauma} techniques) &mdash; Attacks that alter emotional state or violate autonomy. Driven by Consent Violation (CV) metrics, corresponding to categories including PTSD, acute stress disorder, and adjustment disorders.
