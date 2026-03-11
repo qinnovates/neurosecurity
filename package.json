@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "fetch-news": "node scripts/fetch-news.mjs",
+    "fetch-intel": "node scripts/fetch-intel.mjs",
     "type-check": "tsc --noEmit",
     "sync": "node scripts/sync-agents.mjs",
     "verify": "python3 scripts/verify/run_all.py",

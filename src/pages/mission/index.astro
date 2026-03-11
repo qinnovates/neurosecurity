@@ -1,0 +1,85 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { TARA_TECHNIQUES, QIF_VERSION } from '@/lib/qif-constants';
+---
+
+<PageLayout
+  title="Mission — Qinnovate"
+  description="Creating a unified model for BCI risk identification, threat modeling, and informed consent to protect neurotechnology patients."
+  breadcrumbs={[{ label: 'Mission' }]}
+>
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-16">
+      <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-6">Our Mission</p>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-8" style="font-family: var(--font-heading);">
+        Security and equity for every brain-computer interface patient.
+      </h1>
+      <div class="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          No unified model existed for identifying risks at the boundary between silicon and neuron. The OSI model mapped network layers. Neural anatomy mapped brain structures. But the intersection — where electrodes meet tissue, where software meets cognition — had no security framework.
+        </p>
+        <p>
+          Qinnovate builds that model. The Quantified Interconnection Framework (QIF) maps every surface between neuron and silicon across 11 bands, from the neocortex to the cloud. The Threat Atlas (TARA) catalogs {TARA_TECHNIQUES}+ attack techniques and scores each for neural impact. Together, they create the foundation for policy and technical implementation that brings equity and awareness through informed consent to the BCI patients we exist to protect.
+        </p>
+        <p>
+          This is open research. Every technique, every score, every mapping is published, auditable, and open to critique. We believe informed consent requires informed security — and informed security requires transparency.
+        </p>
+      </div>
+    </div>
+
+    <!-- What we do -->
+    <div class="grid md:grid-cols-2 gap-6 mb-16">
+      <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <h3 class="text-lg font-bold mb-3">Identify Risks</h3>
+        <p class="text-sm text-[var(--color-text-muted)]">Map every attack surface across the bio-digital bridge. Catalog techniques, score severity, trace impact from signal to cognition.</p>
+      </div>
+      <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <h3 class="text-lg font-bold mb-3">Threat Model</h3>
+        <p class="text-sm text-[var(--color-text-muted)]">Provide structured threat intelligence in STIX 2.1 format. Enable security teams to assess BCI deployments against known attack patterns.</p>
+      </div>
+      <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <h3 class="text-lg font-bold mb-3">Inform Consent</h3>
+        <p class="text-sm text-[var(--color-text-muted)]">Give patients and clinicians the risk data they need. Every therapeutic BCI technique has a threat counterpart — consent requires knowing both.</p>
+      </div>
+      <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <h3 class="text-lg font-bold mb-3">Pave Policy</h3>
+        <p class="text-sm text-[var(--color-text-muted)]">Bridge the gap between security findings and regulatory frameworks. Map neurorights to technical controls. Translate threat data into governance.</p>
+      </div>
+    </div>
+
+    <!-- Code of Ethics -->
+    <div class="rounded-xl p-8 border mb-16" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+      <div class="flex items-center gap-3 mb-4">
+        <h2 class="text-xl font-bold">Code of Ethics</h2>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full border" style="color: var(--color-accent-tertiary); border-color: var(--color-accent-tertiary);">In Progress</span>
+      </div>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        Our ethical commitments guide every decision — from how we catalog threats to how we frame dual-use findings. The full governance framework is actively being developed.
+      </p>
+      <a href="/governance/" class="text-sm text-[var(--color-accent-primary)] hover:underline">View Governance Documents &rarr;</a>
+    </div>
+
+    <!-- Team -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">The Team</h2>
+      <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <h3 class="text-lg font-bold mb-1">Kevin L. Qi</h3>
+        <p class="text-xs text-[var(--color-text-faint)] mb-4">Founder & Principal Researcher</p>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+          A decade of building detection infrastructure, incident response, and security operations — from QRadar to Splunk ES across financial services, publishing, and consumer tech. The same architecture that detects network intrusions applies at the boundary between silicon and neuron. This work asks: given what neuroethics and neurorights research tells us about the stakes, what are the security implications — and what do we build?
+        </p>
+        <a href="/about/" class="text-sm text-[var(--color-accent-primary)] hover:underline">Full bio and background &rarr;</a>
+      </div>
+      <p class="text-xs text-[var(--color-text-faint)] mt-4 text-center">
+        Qinnovate is currently a solo research effort. Collaboration inquiries welcome.
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/vision/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">BCI Vision &rarr;</a>
+      <a href="/news/roadmap/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">Roadmap &rarr;</a>
+      <a href="/research/whitepaper/" class="px-6 py-3 rounded-xl bg-[var(--color-accent-primary)] text-white text-sm font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
+    </div>
+  </div>
+</PageLayout>

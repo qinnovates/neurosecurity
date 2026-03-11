@@ -163,15 +163,57 @@ A proposed CVSS v4.0 extension for neural interfaces. Six metrics that CVSS cann
 
 Post-quantum wire protocol (v0.5). ML-KEM-768, ML-DSA, AES-256-GCM-SIV at the frame level. Designed for implant-class hardware. Performance claims are from simulation only — hardware validation pending.
 
-- **Spec:** [qinnovate.com/tools/nsp](https://qinnovate.com/tools/nsp/)
+- **Spec:** [qinnovate.com/guardrails/nsp](https://qinnovate.com/guardrails/nsp/)
 - **Implementation:** [qif-framework/nsp/nsp-core/](qif-framework/nsp/nsp-core/) (Rust)
 
 ### Runemate
 
 Native DSL compiler (67.8% compression in simulation). Phase 2/3 goal: compile semantic content into electrode stimulation patterns for direct cortical rendering (vision restoration). This is speculative — the compiler exists, the cortical rendering does not.
 
-- **Spec:** [qinnovate.com/tools/runemate](https://qinnovate.com/tools/runemate/)
+- **Spec:** [qinnovate.com/guardrails/runemate](https://qinnovate.com/guardrails/runemate/)
 - **Compiler:** [qif-framework/runemate/forge/](qif-framework/runemate/forge/) (Rust)
+
+---
+
+## Automation & Data Pipelines
+
+### News Feed (Daily)
+
+Fetches 14 RSS feeds filtered for BCI/neurotech relevance. Maintains a rolling 30-item cache for the site's news page.
+
+| | |
+|---|---|
+| **Script** | `npm run fetch-news` → [`scripts/fetch-news.mjs`](scripts/fetch-news.mjs) |
+| **Schedule** | Daily at 17:00 UTC (noon EST) via [`update-news.yml`](.github/workflows/update-news.yml) |
+| **Output** | [`src/data/external-news-cache.json`](src/data/external-news-cache.json) (rolling 30 items) |
+| **Commit** | `chore: update news feed cache [skip ci-deploy]` (only if changed) |
+
+### Intel Feed (Weekly)
+
+Fetches 45+ RSS feeds plus 9 Google News queries. Auto-tags items (funding, product, regulatory, research, policy, patent, clinical, partnership), extracts company mentions from [`bci-landscape.json`](shared/bci-landscape.json), and fuzzy-deduplicates (Jaccard trigram similarity). Items accumulate — the feed grows over time.
+
+| | |
+|---|---|
+| **Script** | `npm run fetch-intel` → [`scripts/fetch-intel.mjs`](scripts/fetch-intel.mjs) |
+| **Schedule** | Weekly, Sunday 17:00 UTC via [`update-intel.yml`](.github/workflows/update-intel.yml) |
+| **Output** | [`src/data/bci-intel-feed.json`](src/data/bci-intel-feed.json) (accumulating) |
+| **Sources registry** | [`src/data/intel-sources.json`](src/data/intel-sources.json) (204 sources, 39 with RSS) |
+| **Commit** | `auto: update BCI intel feed [skip ci-deploy]` (only if new items after dedup) |
+
+**Feed source categories:** News & Press, Biotech/MedTech, Research/Academic, Market Research, VC Blogs/Newsletters, Regulatory (FDA, NIST), Google News (9 BCI-specific queries).
+
+Both pipelines use exit code 2 (no changes) to skip unnecessary commits. Manual runs: `workflow_dispatch` enabled on both.
+
+### Other Automated Workflows
+
+| Workflow | Schedule | Purpose |
+|----------|----------|---------|
+| [`deploy.yml`](.github/workflows/deploy.yml) | On push to main | Build and deploy site to GitHub Pages |
+| [`timeline-check.yml`](.github/workflows/timeline-check.yml) | On push | Verify `qif-timeline.json` stats are current |
+| [`update-registry.yml`](.github/workflows/update-registry.yml) | Daily | Sync automation registry |
+| [`security-audit.yml`](.github/workflows/security-audit.yml) | On push | `npm audit` for dependency vulnerabilities |
+| [`verify-citations.yml`](.github/workflows/verify-citations.yml) | On push | Check citation integrity |
+| [`changelog.yml`](.github/workflows/changelog.yml) | On push | Auto-generate changelog from git log |
 
 ---
 

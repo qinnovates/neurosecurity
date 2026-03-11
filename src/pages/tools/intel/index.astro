@@ -1,0 +1,307 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+interface IntelItem {
+  id: string;
+  title: string;
+  date: string;
+  url: string;
+  source: string;
+  source_category: string;
+  summary: string;
+  tags: string[];
+  companies: string[];
+  fetched: string;
+}
+
+// Read the intel feed data
+let items: IntelItem[] = [];
+try {
+  const raw = readFileSync(resolve(process.cwd(), 'src/data/bci-intel-feed.json'), 'utf-8');
+  items = JSON.parse(raw);
+} catch {
+  // Feed not yet populated — show empty state
+}
+
+// Sort by date descending
+items.sort((a, b) => b.date.localeCompare(a.date));
+
+// Build category stats
+const categoryMap = new Map<string, number>();
+for (const item of items) {
+  categoryMap.set(item.source_category, (categoryMap.get(item.source_category) || 0) + 1);
+}
+
+// Build source stats
+const sourceMap = new Map<string, number>();
+for (const item of items) {
+  sourceMap.set(item.source, (sourceMap.get(item.source) || 0) + 1);
+}
+const topSources = [...sourceMap.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+// Unique tags
+const tagCounts = new Map<string, number>();
+for (const item of items) {
+  for (const tag of item.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  }
+}
+
+// Date range
+const oldestDate = items.length > 0 ? items[items.length - 1].date : '';
+const newestDate = items.length > 0 ? items[0].date : '';
+
+// Category display config
+const categoryConfig: Record<string, { label: string; color: string }> = {
+  research: { label: 'Research', color: 'var(--color-text-muted)' },
+  product: { label: 'Product & Clinical', color: 'var(--color-accent-secondary)' },
+  regulatory: { label: 'Regulatory', color: 'var(--color-status-safe)' },
+  funding: { label: 'Funding & M&A', color: 'var(--color-accent-tertiary)' },
+  policy: { label: 'Policy & Ethics', color: '#a78bfa' },
+  security: { label: 'Security', color: 'var(--color-accent-primary)' },
+  general: { label: 'General', color: 'var(--color-text-faint)' },
+};
+---
+
+<PageLayout
+  title="Intel Feed"
+  description="Automated BCI intelligence feed aggregating 53+ sources across neurotechnology, medical device security, regulatory, and research domains. Updated weekly."
+  breadcrumbs={[{ label: 'Tools', href: '/research/api/' }, { label: 'Intel Feed' }]}
+  maxWidth="wide"
+>
+  <div class="mb-8 reveal">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">Intel Feed</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-2xl">
+      Automated intelligence aggregator crawling 53+ RSS feeds and Google News queries across neurotechnology, BCI security, medical devices, regulatory, and research domains.
+    </p>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 reveal">
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: var(--color-accent-primary);">{items.length}</div>
+      <div class="text-xs text-[var(--color-text-muted)]">Total Items</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: var(--color-accent-secondary);">{sourceMap.size}</div>
+      <div class="text-xs text-[var(--color-text-muted)]">Unique Sources</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: var(--color-accent-tertiary);">{categoryMap.size}</div>
+      <div class="text-xs text-[var(--color-text-muted)]">Categories</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: var(--color-status-safe);">Weekly</div>
+      <div class="text-xs text-[var(--color-text-muted)]">Update Cadence</div>
+    </div>
+  </div>
+
+  <!-- Filter controls -->
+  <div class="mb-8 flex flex-wrap gap-2 reveal" id="intel-filters">
+    <button
+      data-filter="all"
+      class="intel-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30"
+    >
+      All ({items.length})
+    </button>
+    {[...categoryMap.entries()].sort((a, b) => b[1] - a[1]).map(([cat, count]) => {
+      const conf = categoryConfig[cat] || { label: cat, color: 'var(--color-text-faint)' };
+      return (
+        <button
+          data-filter={cat}
+          class="intel-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
+        >
+          {conf.label} ({count})
+        </button>
+      );
+    })}
+  </div>
+
+  <!-- Search -->
+  <div class="mb-8 reveal">
+    <input
+      type="text"
+      id="intel-search"
+      placeholder="Search titles, sources, summaries..."
+      class="w-full sm:max-w-md px-4 py-2.5 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-faint)] text-sm focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors"
+    />
+  </div>
+
+  <!-- Feed items -->
+  {items.length === 0 ? (
+    <div class="glass rounded-xl p-12 text-center reveal">
+      <p class="text-lg font-semibold mb-2">No intel data yet</p>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        Run <code class="text-xs bg-[var(--color-bg-secondary)] px-2 py-0.5 rounded">npm run fetch-intel</code> to populate the feed.
+      </p>
+    </div>
+  ) : (
+    <div class="space-y-3 reveal" id="intel-feed">
+      {items.map((item) => {
+        const conf = categoryConfig[item.source_category] || { label: item.source_category, color: 'var(--color-text-faint)' };
+        const dateObj = new Date(item.date);
+        const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        return (
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="intel-item block group"
+            data-category={item.source_category}
+            data-search={`${item.title} ${item.source} ${item.summary} ${item.tags.join(' ')}`.toLowerCase()}
+          >
+            <article
+              class="glass rounded-xl px-5 py-4 card-hover flex flex-col sm:flex-row sm:items-start gap-3"
+              style={`border-left: 3px solid ${conf.color};`}
+            >
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                  <span
+                    class="text-[10px] font-semibold px-2 py-0.5 rounded-full border shrink-0"
+                    style={`color: ${conf.color}; border-color: ${conf.color}; background: color-mix(in srgb, ${conf.color} 8%, transparent);`}
+                  >
+                    {conf.label}
+                  </span>
+                  <span class="text-[10px] text-[var(--color-text-faint)]">{item.source}</span>
+                  {item.tags.slice(0, 3).map((tag) => (
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-[var(--color-bg-secondary)] text-[var(--color-text-faint)] border border-[var(--color-border)]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 class="text-sm font-semibold leading-snug mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+                  {item.title.trim()}
+                  <svg class="inline-block w-3 h-3 ml-1 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                </h3>
+                <p class="text-xs text-[var(--color-text-muted)] leading-relaxed line-clamp-2">
+                  {item.summary}
+                </p>
+              </div>
+              <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] shrink-0 sm:pt-1">
+                {formattedDate}
+              </span>
+            </article>
+          </a>
+        );
+      })}
+    </div>
+  )}
+
+  <!-- No results message (hidden by default) -->
+  <div id="intel-no-results" class="glass rounded-xl p-8 text-center hidden">
+    <p class="text-sm text-[var(--color-text-muted)]">No items match your search.</p>
+  </div>
+
+  <!-- Pipeline info -->
+  <details class="mt-16 glass rounded-xl reveal">
+    <summary class="p-6 cursor-pointer text-lg font-semibold font-[family-name:var(--font-heading)] hover:text-[var(--color-accent-primary)] transition-colors select-none">
+      Pipeline Details
+      <span class="text-xs text-[var(--color-text-faint)] font-normal ml-2">How the feed works</span>
+    </summary>
+    <div class="px-6 pb-6">
+      <div class="grid sm:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-base font-semibold mb-3">Sources ({sourceMap.size})</h3>
+          <div class="space-y-1.5">
+            {topSources.map(([source, count]) => (
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-[var(--color-text-muted)]">{source}</span>
+                <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">{count}</span>
+              </div>
+            ))}
+            {sourceMap.size > 10 && (
+              <p class="text-xs text-[var(--color-text-faint)] pt-2">+ {sourceMap.size - 10} more sources</p>
+            )}
+          </div>
+        </div>
+        <div>
+          <h3 class="text-base font-semibold mb-3">How It Works</h3>
+          <ol class="space-y-2 text-sm text-[var(--color-text-muted)] list-decimal list-inside">
+            <li>53+ RSS feeds and Google News queries are crawled weekly</li>
+            <li>Items are filtered by 90+ relevance keywords (BCI, neurosecurity, medical device, etc.)</li>
+            <li>Fuzzy deduplication removes near-duplicates (trigram Jaccard similarity)</li>
+            <li>New items are tagged by category, source, and topic</li>
+            <li>Feed accumulates over time (no rolling window)</li>
+          </ol>
+          <div class="mt-4 p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+            <p class="text-xs text-[var(--color-text-faint)]">
+              <strong>Schedule:</strong> Every Sunday at 17:00 UTC via GitHub Actions.
+              <br />
+              <strong>Manual:</strong> <code class="bg-[var(--color-bg-primary)] px-1 rounded">npm run fetch-intel</code>
+              <br />
+              <strong>Data:</strong> <code class="bg-[var(--color-bg-primary)] px-1 rounded">src/data/bci-intel-feed.json</code>
+            </p>
+          </div>
+        </div>
+      </div>
+      {oldestDate && newestDate && (
+        <p class="text-xs text-[var(--color-text-faint)] mt-6 text-center">
+          Coverage: {new Date(oldestDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })} &mdash; {new Date(newestDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+        </p>
+      )}
+    </div>
+  </details>
+
+  <!-- Related tools -->
+  <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 reveal">
+    <a href="/research/landscape/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent-primary)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+      <div class="text-base font-semibold mb-1" style="color: var(--color-text-primary);">KQL Data Lake</div>
+      <p class="text-xs text-[var(--color-text-muted)]">Query BCI devices, threats, and landscape data with KQL.</p>
+    </a>
+    <a href="/research/api/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent-primary)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+      <div class="text-base font-semibold mb-1" style="color: var(--color-text-primary);">APIs & Feeds</div>
+      <p class="text-xs text-[var(--color-text-muted)]">STIX 2.1, TARA JSON, QIF JSON, and Python SDK.</p>
+    </a>
+    <a href="/news/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent-primary)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+      <div class="text-base font-semibold mb-1" style="color: var(--color-text-primary);">News</div>
+      <p class="text-xs text-[var(--color-text-muted)]">Blog posts, field journals, and curated industry intel briefs.</p>
+    </a>
+  </div>
+</PageLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.intel-btn');
+  const items = document.querySelectorAll<HTMLElement>('.intel-item');
+  const searchInput = document.getElementById('intel-search') as HTMLInputElement | null;
+  const noResults = document.getElementById('intel-no-results');
+
+  const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
+  const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
+
+  let activeFilter = 'all';
+  let searchTerm = '';
+
+  function applyFilters() {
+    let visible = 0;
+    items.forEach((el) => {
+      const matchesCategory = activeFilter === 'all' || el.dataset.category === activeFilter;
+      const matchesSearch = !searchTerm || (el.dataset.search || '').includes(searchTerm);
+      const show = matchesCategory && matchesSearch;
+      el.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (noResults) {
+      noResults.classList.toggle('hidden', visible > 0);
+    }
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.filter || 'all';
+      buttons.forEach((b) => {
+        b.className = `intel-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${inactiveClass} hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30`;
+      });
+      btn.className = `intel-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
+      applyFilters();
+    });
+  });
+
+  searchInput?.addEventListener('input', () => {
+    searchTerm = searchInput.value.toLowerCase().trim();
+    applyFilters();
+  });
+</script>

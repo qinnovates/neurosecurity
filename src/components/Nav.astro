@@ -4,52 +4,81 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
 const currentPath = Astro.url.pathname;
 
-const frameworkLinks = [
-  { href: '/framework/', label: 'Framework Overview', desc: 'QIF architecture and core concepts' },
-  { href: '/security/', label: 'Signal Security', desc: '11-band hourglass architecture' },
-  { href: '/research/whitepaper/', label: 'Whitepaper', desc: 'Latest QIF specification' },
-  { href: '/glossary/', label: 'Glossary', desc: 'Terms and definitions' },
+const missionLinks = [
+  { href: '/mission/', label: 'Mission Statement', desc: 'Unified model for BCI risk, equity, and informed consent' },
+  { href: '/vision/', label: 'Vision', desc: 'The future of neural interface security' },
+  { href: '/about/', label: 'Team & Founder', desc: 'Kevin L. Qi — from detection infrastructure to neurosecurity' },
+  { href: '/news/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
+  { href: '/governance/', label: 'Code of Ethics', desc: 'Ethical commitments (in progress)' },
 ];
 
 const atlasLinks = [
-  { href: '/atlas/', label: 'Atlas Overview', desc: 'Threat landscape at a glance' },
-  { href: '/atlas/tara/', label: 'TARA Atlas', desc: `${TARA_TECHNIQUES} BCI attack techniques, scored and mapped` },
-{ href: '/atlas/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring — extending CVSS for neural harm' },
-  { href: '/atlas/analysis/', label: 'Threat Analysis', desc: 'Case studies and hardware validation' },
+  { href: '/atlas/', label: 'Atlas Overview', desc: 'Unified dashboard — hourglass, brain, and threat landscape' },
+  { href: '/framework/', label: 'QIF Framework', desc: '11-band hourglass architecture and signal security' },
+  { href: '/atlas/tara/', label: 'TARA', desc: `${TARA_TECHNIQUES} techniques scored with NISS` },
+  { href: '/atlas/tara/ttps/', label: 'TTPs Explained', desc: 'Tactics, techniques & procedures taxonomy' },
+  { href: '/atlas/tara/numbering/', label: 'QIF Numbering', desc: 'Technique IDs, tactic codes & band references' },
+  { href: '/atlas/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring — extending CVSS for neural harm' },
+  { href: '/atlas/analysis/', label: 'Threat Analysis & Case Studies', desc: 'Deep dives, hardware validation, and attack chain analysis' },
+  { href: '/research/bci-explorer/', label: 'BCI Explorer & Attack Map', desc: 'Interactive device explorer and threat visualization' },
 ];
 
-const guardrailLinks = [
-  { href: '/guardrails/', label: 'Overview', desc: 'Proposed defense stack for neural interfaces' },
+const researchLinks = [
+  { href: '/research/', label: 'Overview', desc: 'All research areas and methodology' },
+  { href: '/research/whitepaper/', label: 'Whitepaper', desc: 'Latest QIF specification with version history' },
+  { href: '/research/landscape/', label: 'BCI Landscape', desc: 'Market analysis and device landscape' },
+  { href: '/research/clinical/', label: 'Clinical', desc: 'Therapeutic applications and psychiatric mappings' },
+  { href: '/research/physics/', label: 'Physics', desc: 'Physical constraints on BCI systems' },
+  { href: '/research/validation/', label: 'Validation', desc: 'Methodology and testing results' },
+  { href: '/news/derivation/', label: 'Derivation Log', desc: 'Live research journal and hypothesis tracking' },
+  { href: '/news/', label: 'Field Journals', desc: 'Raw observations and research notes' },
+];
+
+const developmentLinks = [
+  { href: '/development/', label: 'Overview', desc: 'Proposed defense stack for neural interfaces' },
+  { href: '/guardrails/', label: 'Neurowall', desc: 'Signal-layer firewall at the neural interface boundary' },
   { href: '/guardrails/nsp/', label: 'NSP Protocol', desc: 'Post-quantum wire security for BCI data' },
   { href: '/guardrails/runemate/', label: 'Runemate', desc: 'On-device policy compiler and content delivery' },
 ];
 
-const researchLinks = [
-  { href: '/research/landscape/', label: 'Landscape', desc: 'BCI market and device landscape' },
-  { href: '/research/bci-explorer/', label: 'BCI Explorer', desc: 'Interactive device explorer' },
+const governanceLinks = [
+  { href: '/governance/', label: 'Overview', desc: 'How neuroethics and neurosecurity are governed' },
   { href: '/research/neuroethics-landscape/', label: 'Neuroethics Landscape', desc: 'Timeline of neurorights and neuroethics scholarship' },
-  { href: '/research/clinical/', label: 'Clinical Risk', desc: 'Psychiatric outcome references for threat modeling' },
-  { href: '/research/validation/', label: 'Validation', desc: 'Methodology and testing results' },
+  { href: '/governance/', label: 'Code of Ethics', desc: 'Ethical commitments and conduct standards' },
+  { href: '/governance/rights/', label: 'Neurorights', desc: '5 proposed neurorights mapped to hourglass bands' },
+  { href: '/governance/foundations/', label: 'Foundations', desc: 'Philosophical grounding for the framework' },
 ];
 
 const newsLinks = [
-  { href: '/news/', label: 'News', desc: 'Field journals and research notes' },
-  { href: '/news/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
-  { href: '/news/derivation/', label: 'Derivation Log', desc: 'Live research journal and hypothesis tracking' },
+  { href: '/news/', label: 'Blog', desc: 'Announcements, writeups, and commentary' },
 ];
 
-const aboutLinks = [
-  { href: '/about/', label: 'About', desc: 'The researcher and the mission' },
-  { href: '/licensing/', label: 'Licensing', desc: 'License terms and usage' },
-  { href: '/governance/', label: 'Governance', desc: 'Ethics, consent, and regulatory compliance' },
+const toolsLinks = [
+  { href: '/tools/intel/', label: 'Intel Feed', desc: 'Automated BCI intelligence from 53+ sources' },
+  { href: '/research/api/', label: 'APIs & Feeds', desc: 'STIX 2.1, TARA JSON, QIF JSON, Python SDK' },
+  { href: '/research/landscape/', label: 'KQL Data Lake', desc: 'Query the threat and device databases' },
+  { href: '/glossary/', label: 'Glossary', desc: 'Terms and definitions' },
+  { href: 'https://github.com/qinnovates', label: 'Other Resources', desc: 'Autodidactive, macshield, and more' },
 ];
 
-const isFrameworkActive = ['/framework/', '/security/', '/glossary/'].some(p => currentPath.startsWith(p)) || currentPath === '/research/whitepaper/';
-const isAtlasActive = currentPath.startsWith('/atlas/');
-const isGuardrailsActive = currentPath.startsWith('/guardrails/');
-const isResearchActive = currentPath.startsWith('/research/') && currentPath !== '/research/whitepaper/';
-const isNewsActive = currentPath.startsWith('/news/');
-const isAboutActive = ['/about/', '/licensing/', '/governance/'].some(p => currentPath.startsWith(p));
+const isMissionActive = ['/mission/', '/vision/', '/about/'].some(p => currentPath.startsWith(p));
+const isAtlasActive = currentPath.startsWith('/atlas/') || currentPath.startsWith('/framework/') || currentPath.startsWith('/security/');
+const isResearchActive = currentPath.startsWith('/research/') || currentPath === '/news/derivation/';
+const isDevelopmentActive = currentPath.startsWith('/development/') || currentPath.startsWith('/guardrails/');
+const isGovernanceActive = currentPath.startsWith('/governance/');
+const isNewsActive = currentPath.startsWith('/news/') && currentPath !== '/news/derivation/' && currentPath !== '/news/roadmap/';
+const isToolsActive = currentPath.startsWith('/tools/') || currentPath.startsWith('/glossary/');
+
+// Nav sections config for DRY rendering
+const navSections = [
+  { id: 'mission', label: 'Mission', href: '/mission/', links: missionLinks, isActive: isMissionActive },
+  { id: 'atlas', label: 'Neural Atlas', href: '/atlas/', links: atlasLinks, isActive: isAtlasActive },
+  { id: 'research', label: 'Research', href: '/research/', links: researchLinks, isActive: isResearchActive },
+  { id: 'development', label: 'Development', href: '/development/', links: developmentLinks, isActive: isDevelopmentActive },
+  { id: 'governance', label: 'Governance', href: '/governance/', links: governanceLinks, isActive: isGovernanceActive },
+  { id: 'news', label: 'News', href: '/news/', links: newsLinks, isActive: isNewsActive },
+  { id: 'tools', label: 'Tools', href: '/research/api/', links: toolsLinks, isActive: isToolsActive },
+];
 ---
 
 <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" transition:persist>
@@ -64,244 +93,69 @@ const isAboutActive = ['/about/', '/licensing/', '/governance/'].some(p => curre
       </a>
 
       <!-- Desktop links -->
-      <div class="hidden md:flex items-center gap-1">
-        <!-- Framework dropdown -->
-        <div class="relative" data-dropdown="framework">
-          <a
-            href="/framework/"
-            class:list={[
-              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isFrameworkActive
-                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-            ]}
-          >
-            Framework
-            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
-              <div class="p-2">
-                {frameworkLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "block px-3 py-2.5 rounded-lg transition-colors",
-                      currentPath.startsWith(link.href)
-                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-                    ]}
-                  >
-                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
-                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
-                  </a>
-                ))}
+      <div class="hidden lg:flex items-center gap-0.5">
+        {navSections.map((section) => (
+          <div class="relative" data-dropdown={section.id}>
+            <a
+              href={section.href}
+              class:list={[
+                "flex items-center gap-1 px-2.5 py-2 rounded-lg text-sm font-medium transition-colors",
+                section.isActive
+                  ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                  : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+              ]}
+            >
+              {section.label}
+              <svg class="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </a>
+            <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
+              <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden max-h-[70vh] overflow-y-auto">
+                <div class="p-2">
+                  {section.links.map((link) => (
+                    <a
+                      href={link.href}
+                      class:list={[
+                        "block px-3 py-2.5 rounded-lg transition-colors",
+                        currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                          ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                          : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                      ]}
+                    >
+                      <span class="text-sm font-medium block leading-snug">{link.label}</span>
+                      <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Atlas dropdown -->
-        <div class="relative" data-dropdown="atlas">
-          <a
-            href="/atlas/"
-            class:list={[
-              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isAtlasActive
-                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-            ]}
-          >
-            Atlas
-            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
-              <div class="p-2">
-                {atlasLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "block px-3 py-2.5 rounded-lg transition-colors",
-                      currentPath.startsWith(link.href)
-                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-                    ]}
-                  >
-                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
-                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Guardrails dropdown -->
-        <div class="relative" data-dropdown="guardrails">
-          <a
-            href="/guardrails/"
-            class:list={[
-              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isGuardrailsActive
-                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-            ]}
-          >
-            Guardrails
-            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
-              <div class="p-2">
-                {guardrailLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "block rounded-lg px-3 py-2 transition-colors",
-                      currentPath.startsWith(link.href)
-                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-                    ]}
-                  >
-                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
-                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Research dropdown -->
-        <div class="relative" data-dropdown="research">
-          <a
-            href="/research/landscape/"
-            class:list={[
-              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isResearchActive
-                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-            ]}
-          >
-            Research
-            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
-              <div class="p-2">
-                {researchLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "block px-3 py-2.5 rounded-lg transition-colors",
-                      currentPath.startsWith(link.href)
-                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-                    ]}
-                  >
-                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
-                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- News dropdown -->
-        <div class="relative" data-dropdown="news">
-          <a
-            href="/news/"
-            class:list={[
-              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isNewsActive
-                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-            ]}
-          >
-            News
-            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
-              <div class="p-2">
-                {newsLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "block px-3 py-2.5 rounded-lg transition-colors",
-                      currentPath.startsWith(link.href)
-                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-                    ]}
-                  >
-                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
-                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- About dropdown -->
-        <div class="relative" data-dropdown="about">
-          <a
-            href="/about/"
-            class:list={[
-              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isAboutActive
-                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-            ]}
-          >
-            About
-            <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-            <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden">
-              <div class="p-2">
-                {aboutLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "block px-3 py-2.5 rounded-lg transition-colors",
-                      currentPath.startsWith(link.href)
-                        ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-                    ]}
-                  >
-                    <span class="text-sm font-medium block leading-snug">{link.label}</span>
-                    <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
       <!-- Right side -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
+        <!-- BCI Vision toggle -->
+        <a
+          href="/vision/"
+          class:list={[
+            "hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all border",
+            currentPath === '/vision/'
+              ? "bg-[var(--color-accent-tertiary)]/15 text-[var(--color-accent-tertiary)] border-[var(--color-accent-tertiary)]/30"
+              : "bg-transparent text-[var(--color-text-faint)] border-[var(--color-border)] hover:text-[var(--color-accent-tertiary)] hover:border-[var(--color-accent-tertiary)]/30"
+          ]}
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] animate-pulse"></span>
+          BCI Vision
+        </a>
+
         <!-- Persistent CTA (desktop) -->
         <a
           href="/research/whitepaper/"
           class="hidden md:inline-flex px-4 py-1.5 rounded-lg bg-[var(--color-accent-primary)] text-white text-sm font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
-          Read the Whitepaper
+          Whitepaper
         </a>
 
         <!-- GitHub link -->
@@ -331,7 +185,7 @@ const isAboutActive = ['/about/', '/licensing/', '/governance/'].some(p => curre
         <!-- Mobile menu button -->
         <button
           id="mobile-menu-btn"
-          class="md:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
+          class="lg:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
           aria-label="Open menu"
           aria-expanded="false"
         >
@@ -344,7 +198,7 @@ const isAboutActive = ['/about/', '/licensing/', '/governance/'].some(p => curre
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="md:hidden hidden border-t border-[var(--color-border)]">
+  <div id="mobile-menu" class="lg:hidden hidden border-t border-[var(--color-border)] max-h-[80vh] overflow-y-auto">
     <div class="px-4 py-3 space-y-1">
       <!-- Mobile whitepaper CTA -->
       <div class="pb-2 mb-2 border-b border-[var(--color-border)]">
@@ -356,203 +210,54 @@ const isAboutActive = ['/about/', '/licensing/', '/governance/'].some(p => curre
         </a>
       </div>
 
-      <!-- Mobile Framework section -->
-      <div>
-        <button
-          data-mobile-toggle="framework"
-          class:list={[
-            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isFrameworkActive
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          Framework
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="framework" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div data-mobile-list="framework" class="hidden pl-3 space-y-0.5 mt-1">
-          {frameworkLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                currentPath.startsWith(link.href)
-                  ? "text-[var(--color-accent-primary)]"
-                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
-              ]}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
+      <!-- Mobile BCI Vision link -->
+      <a
+        href="/vision/"
+        class:list={[
+          "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+          currentPath === '/vision/'
+            ? "text-[var(--color-accent-tertiary)] bg-[var(--color-accent-tertiary)]/10"
+            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+        ]}
+      >
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] animate-pulse"></span>
+        BCI Vision
+      </a>
 
-      <!-- Mobile Atlas section -->
-      <div>
-        <button
-          data-mobile-toggle="atlas"
-          class:list={[
-            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isAtlasActive
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          Atlas
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="atlas" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div data-mobile-list="atlas" class="hidden pl-3 space-y-0.5 mt-1">
-          {atlasLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                currentPath.startsWith(link.href)
-                  ? "text-[var(--color-accent-primary)]"
-                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
-              ]}
-            >
-              {link.label}
-            </a>
-          ))}
+      <!-- Mobile nav sections -->
+      {navSections.map((section) => (
+        <div>
+          <button
+            data-mobile-toggle={section.id}
+            class:list={[
+              "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              section.isActive
+                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+            ]}
+          >
+            {section.label}
+            <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron={section.id} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+          <div data-mobile-list={section.id} class="hidden pl-3 space-y-0.5 mt-1">
+            {section.links.map((link) => (
+              <a
+                href={link.href}
+                class:list={[
+                  "block px-3 py-1.5 rounded-lg text-sm transition-colors",
+                  currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                    ? "text-[var(--color-accent-primary)]"
+                    : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
+                ]}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <!-- Mobile Guardrails section -->
-      <div>
-        <button
-          data-mobile-toggle="guardrails"
-          class:list={[
-            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isGuardrailsActive
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          Guardrails
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="guardrails" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div data-mobile-list="guardrails" class="hidden pl-3 space-y-0.5 mt-1">
-          {guardrailLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                currentPath.startsWith(link.href)
-                  ? "text-[var(--color-accent-primary)]"
-                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
-              ]}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <!-- Mobile Research section -->
-      <div>
-        <button
-          data-mobile-toggle="research"
-          class:list={[
-            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isResearchActive
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          Research
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="research" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div data-mobile-list="research" class="hidden pl-3 space-y-0.5 mt-1">
-          {researchLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                currentPath.startsWith(link.href)
-                  ? "text-[var(--color-accent-primary)]"
-                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
-              ]}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <!-- Mobile News section -->
-      <div>
-        <button
-          data-mobile-toggle="news"
-          class:list={[
-            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isNewsActive
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          News
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="news" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div data-mobile-list="news" class="hidden pl-3 space-y-0.5 mt-1">
-          {newsLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                currentPath.startsWith(link.href)
-                  ? "text-[var(--color-accent-primary)]"
-                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
-              ]}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <!-- Mobile About section -->
-      <div>
-        <button
-          data-mobile-toggle="about"
-          class:list={[
-            "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-            isAboutActive
-              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-          ]}
-        >
-          About
-          <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron="about" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div data-mobile-list="about" class="hidden pl-3 space-y-0.5 mt-1">
-          {aboutLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                currentPath.startsWith(link.href)
-                  ? "text-[var(--color-accent-primary)]"
-                  : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
-              ]}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
+      ))}
 
     </div>
   </div>

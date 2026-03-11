@@ -1,0 +1,196 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { HOURGLASS_BANDS } from '@/lib/qif-constants';
+import { THREAT_CATEGORIES, THREAT_VECTORS, getTacticsWithCounts, THREAT_DOMAINS } from '@/lib/threat-data';
+
+const tactics = getTacticsWithCounts();
+const totalTechniques = THREAT_VECTORS.length;
+
+// Group tactics by domain
+const domains = THREAT_DOMAINS.length > 0 ? THREAT_DOMAINS : [];
+const tacticsByDomain: Record<string, typeof tactics> = {};
+for (const tactic of tactics) {
+  const domain = tactic.domain || 'Unknown';
+  if (!tacticsByDomain[domain]) tacticsByDomain[domain] = [];
+  tacticsByDomain[domain].push(tactic);
+}
+
+// Severity distribution
+const severityCounts = { critical: 0, high: 0, medium: 0, low: 0 };
+for (const t of THREAT_VECTORS) {
+  if (t.severity in severityCounts) severityCounts[t.severity as keyof typeof severityCounts]++;
+}
+
+const SEVERITY_COLORS: Record<string, string> = {
+  critical: '#ef4444', high: '#f59e0b', medium: '#eab308', low: '#94a3b8',
+};
+
+const ZONE_COLORS: Record<string, { label: string; color: string }> = {
+  neural: { label: 'Neural Zone', color: '#22c55e' },
+  interface: { label: 'Interface Zone', color: '#f59e0b' },
+  synthetic: { label: 'Synthetic Zone', color: '#3b82f6' },
+};
+---
+
+<PageLayout
+  title="TTPs Explained — TARA Tactics, Techniques & Procedures"
+  description="How TARA organizes BCI attack techniques into tactics, techniques, and procedures across the QIF hourglass architecture."
+  breadcrumbs={[
+    { label: 'Neural Atlas', href: '/atlas/' },
+    { label: 'TARA', href: '/atlas/tara/' },
+    { label: 'TTPs Explained' },
+  ]}
+  wide={true}
+>
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16">
+      <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4">TARA Taxonomy</p>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-6" style="font-family: var(--font-heading);">
+        Tactics, Techniques & Procedures
+      </h1>
+      <p class="text-lg text-[var(--color-text-muted)] max-w-3xl leading-relaxed">
+        TARA organizes {totalTechniques} BCI attack techniques into a structured taxonomy. Each technique belongs to a <strong style="color: var(--color-text-primary);">tactic</strong> (the attacker's objective), has a unique <strong style="color: var(--color-text-primary);">technique ID</strong> (what is done), and includes <strong style="color: var(--color-text-primary);">procedures</strong> (how it is executed on specific hardware).
+      </p>
+    </div>
+
+    <!-- TTP Hierarchy -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-8" style="font-family: var(--font-heading);">The TTP Hierarchy</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">T</span>
+            <h3 class="text-lg font-bold">Tactic</h3>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">The attacker's strategic objective — <em>why</em> they act.</p>
+          <p class="text-xs text-[var(--color-text-faint)]">Example: <span class="font-mono text-[var(--color-accent-secondary)]">QIF-N.IJ</span> — Neural Injection. The goal is to inject false signals into the neural pathway.</p>
+        </div>
+        <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">T</span>
+            <h3 class="text-lg font-bold">Technique</h3>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">The specific method used — <em>what</em> the attacker does.</p>
+          <p class="text-xs text-[var(--color-text-faint)]">Example: <span class="font-mono text-[var(--color-accent-secondary)]">QIF-T0001</span> — tACS Phase Injection. Alternating current delivered to entrain neural oscillations at a target frequency.</p>
+        </div>
+        <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">P</span>
+            <h3 class="text-lg font-bold">Procedure</h3>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">The implementation detail — <em>how</em> on specific hardware.</p>
+          <p class="text-xs text-[var(--color-text-faint)]">Example: Delivering 10 Hz tACS through a compromised Emotiv EPOC+ device by overriding electrode impedance checks at the firmware level.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tactics Table -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-2" style="font-family: var(--font-heading);">TARA Tactics</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-8">{tactics.length} tactics organized by operational domain across the kill chain.</p>
+
+      <div class="space-y-8">
+        {Object.entries(tacticsByDomain).map(([domain, domainTactics]) => (
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider mb-3" style="color: var(--color-text-faint);">
+              {domain}
+            </h3>
+            <div class="rounded-xl border overflow-hidden" style="border-color: var(--color-border);">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr style="background: var(--color-bg-secondary);">
+                    <th class="text-left px-4 py-3 font-mono text-xs" style="color: var(--color-text-faint);">ID</th>
+                    <th class="text-left px-4 py-3 font-mono text-xs" style="color: var(--color-text-faint);">Action</th>
+                    <th class="text-left px-4 py-3 text-xs" style="color: var(--color-text-faint);">Tactic Name</th>
+                    <th class="text-left px-4 py-3 text-xs hidden sm:table-cell" style="color: var(--color-text-faint);">Description</th>
+                    <th class="text-right px-4 py-3 text-xs" style="color: var(--color-text-faint);">Techniques</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(domainTactics as any[]).map((tactic: any) => (
+                    <tr class="border-t" style="border-color: var(--color-border);">
+                      <td class="px-4 py-3 font-mono text-xs" style="color: var(--color-accent-secondary);">{tactic.id}</td>
+                      <td class="px-4 py-3 font-mono text-xs font-bold" style="color: var(--color-text-primary);">{tactic.action_code}</td>
+                      <td class="px-4 py-3 text-sm font-medium" style="color: var(--color-text-primary);">{tactic.name}</td>
+                      <td class="px-4 py-3 text-xs hidden sm:table-cell" style="color: var(--color-text-muted);">{tactic.description}</td>
+                      <td class="px-4 py-3 text-right font-mono text-xs" style="color: var(--color-text-faint);">{tactic.count}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Attack Categories -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-2" style="font-family: var(--font-heading);">Attack Categories</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-8">Each technique is also classified by attack category — the type of harm it produces.</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {THREAT_CATEGORIES.map((cat) => {
+          const count = THREAT_VECTORS.filter(t => t.category === cat.id).length;
+          return (
+            <div class="rounded-xl p-5 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-xs font-bold" style="color: var(--color-accent-secondary);">{cat.id}</span>
+                <span class="font-mono text-xs" style="color: var(--color-text-faint);">{count} techniques</span>
+              </div>
+              <h3 class="text-sm font-bold mb-1">{cat.name}</h3>
+              <p class="text-xs text-[var(--color-text-muted)]">{cat.description}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Severity & Band Distribution -->
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      <div>
+        <h2 class="text-xl font-bold mb-4" style="font-family: var(--font-heading);">Severity Distribution</h2>
+        <div class="space-y-3">
+          {Object.entries(severityCounts).map(([sev, count]) => (
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono w-16 capitalize" style={`color: ${SEVERITY_COLORS[sev]};`}>{sev}</span>
+              <div class="flex-1 h-6 rounded" style="background: var(--color-bg-secondary);">
+                <div
+                  class="h-full rounded"
+                  style={`width: ${(count / totalTechniques) * 100}%; background: ${SEVERITY_COLORS[sev]}; opacity: 0.7;`}
+                />
+              </div>
+              <span class="text-xs font-mono w-8 text-right" style="color: var(--color-text-faint);">{count}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-bold mb-4" style="font-family: var(--font-heading);">Hourglass Band Coverage</h2>
+        <div class="space-y-2">
+          {HOURGLASS_BANDS.map((band) => {
+            const count = THREAT_VECTORS.filter(t => t.bands.includes(band.id as any)).length;
+            return (
+              <a href={`/atlas/#${band.id}`} class="flex items-center gap-3 group">
+                <span class="text-xs font-mono w-6" style={`color: ${band.color};`}>{band.id}</span>
+                <div class="flex-1 h-4 rounded" style="background: var(--color-bg-secondary);">
+                  <div class="h-full rounded" style={`width: ${(count / totalTechniques) * 100}%; background: ${band.color}; opacity: 0.6;`} />
+                </div>
+                <span class="text-xs font-mono w-8 text-right" style="color: var(--color-text-faint);">{count}</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/atlas/tara/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">Browse All Techniques &rarr;</a>
+      <a href="/atlas/tara/numbering/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">QIF Numbering System &rarr;</a>
+      <a href="/atlas/scoring/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">NISS Scoring &rarr;</a>
+    </div>
+  </div>
+</PageLayout>

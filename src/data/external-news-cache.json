@@ -1,21 +1,57 @@
 [
   {
     "type": "external",
-    "title": "Neuralink: The Dawn of the Connected Mind or the Death of Private Thought? - vocal.media",
-    "date": "2026-03-05",
-    "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQbFVMajU2enAwZXlnYUdKb3duakN3c0pNWHFoak43SDNfX3JUeFNzWXR0ck5qMXZrZFQ4S09ERGRsRHhxTDlYODhEank2YVMtR2VxRUdMUXR6R0hRczROT3BlZG1lLUhXak9QY3NFN1RCdG1lRi0zNGVJY0k3Y3FMc3NCTjZqM2ZCdUJmb25Ya3R3WFhDRWlGOXN1RFNuQ1NwX2ZF?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink: The Dawn of the Connected Mind or the Death of Private Thought?&nbsp;&nbsp;vocal.media",
+    "title": "Compact Dynamical Mean-Field Theory of Oscillator Networks",
+    "date": "2026-03-11",
+    "url": "https://arxiv.org/abs/2603.09402",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.09402v1 Announce Type: new \nAbstract: We present a compact dynamical mean-field theory (DMFT) for large networks of coupled phase oscillators whose phases live on the circle $S^1$ and inter",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Tether is setting the standards for Brain-to-Text speech decoding with AI-augmented BCI implants - TechCrunch",
+    "date": "2026-03-10",
+    "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOLWM4eW9zMUJzS21NR1p1ZnBCZGphdlB2dy11eUJ0d24yX2V6NTYxdzBiZUVNaWQ4VmVMWVozN2pCSTJvQmttTmRhcFlsUTNGS1ZmaDNLc0hpZ3RsMmdnNEMtRlVQRXZkOHJWbGtIV1NoTllVZFp5Z2todnMwVkxfRXE0QmI3enc3ODZDcjFsOUNkajJkRzR2RXg2eXh6ZTAxZjA4eHhSMW1ia05fZm5ZdkRrbEtYZEtpMU5IaTBjUm5pajk1MFJaTmdXWEczZw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Tether is setting the standards for Brain-to-Text speech decoding with AI-augmented BCI implants&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Non-Invasive Reconstruction of Intracranial EEG Across the Deep Temporal Lobe from Scalp EEG based on Conditional Normalizing Flow",
+    "title": "ReVision Implant wins FDA breakthrough nod for vision-restoring BCI - MassDevice",
+    "date": "2026-03-09",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5mdFNyYVVaQVl1MXNrY1duaWVJS2VwX0gtaElWTVpkWlhCVjl5S0hSYVU3QjJkX3FVZFl5VzM5QUFISDEyTVdBY0ZNOWFMdGVzb3RPTW9GLUllNHRrcEZXTWMtT2M2VWZaZHVTWHlEMERBY3FocXE0cm1pby0?oc=5",
+    "source": "Google News — BCI",
+    "summary": "ReVision Implant wins FDA breakthrough nod for vision-restoring BCI&nbsp;&nbsp;MassDevice",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China could see widespread use of brain-computer tech in 3-5 years, expert says - Reuters",
+    "date": "2026-03-07",
+    "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOU3JyamFoOHZ6UnpmbWVJX0YzNVRiYTNNcXBxT2hVWHZhMlpUOUNTSUdWR1RxUGo3UUxmdDlFTS10TjZranpxc05jT0pQV28zbTltRzM1NW42VGpOeERDWDhqZnRobWx3VVJBQnEtWTZ4UC1USzlfZnRISWhCekluNW9IdjllMHdzR1dadjRXd1VVTF9lRnpxNHh5Mi1YeTdKdEVtdmtKVkd1TkxOMTNMdmRCRVhXalBxNE5xN2RnZmRnNlVqR3c?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China could see widespread use of brain-computer tech in 3-5 years, expert says&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C - Crunchbase News",
     "date": "2026-03-05",
-    "url": "https://arxiv.org/abs/2603.03354",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.03354v1 Announce Type: new \nAbstract: Although obtaining deep brain activity from non-invasive scalp electroencephalography (sEEG) is crucial for neuroscience and clinical diagnosis, direct",
-    "category": "research"
+    "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
+    "date": "2026-03-05",
+    "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -24,24 +60,6 @@
     "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNNXk3N3VyTk5ONU9McW9kQU5hczl4SVNURkpTd1JXX2VrUlZTVUVBVU9WaFpoMHAtOTFtWkU5RFpnZl82Si1vV3BWMW00VDU0d3NaQnd2cTVSek0zNW5xcm9ZaFdRandtRkNHWVdtS081ZkYwVkxWNVQyOUZnRk1ZSjdNWQ?oc=5",
     "source": "Google News — BCI",
     "summary": "What It’s Like to Have a Brain Implant for 5 Years&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "German technology company CorTec implants second human with its brain-computer interface - Robotics & Automation News",
-    "date": "2026-03-04",
-    "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQUUVfYzJRa1NkRVoyYTlvRmlPOW43VlRydEVNcTQtWjNvMmw3TjNCOVZ2OHliVkhTalJ0b1JWWmhkOEFFZTFVbWwwbVNRNnUzWDZ1YmtMandOYXFSdnJBZ2dmcHl3ZmhfQTFXNjZFUXVxWUtEbHFuRDJwMllKOWJ2ZUxsQmRMUHNtMFUtNlV4Z28yb0Jjeno0UnFBV1F1dDhiazRvVFI4YWdtUkJwM29JaHExTG05NVFmVDZ0dmkwU3o4clJJRzZWMjg0R0FmRFFxRnk5TnI0aXZuVDhY?oc=5",
-    "source": "Google News — BCI",
-    "summary": "German technology company CorTec implants second human with its brain-computer interface&nbsp;&nbsp;Robotics & Automation News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China accelerates brain-computer interface push - thenews.pk",
-    "date": "2026-03-04",
-    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOR3VyZFllUFVJOVRjeXJWV3p1VjNiZGxIMEhKdzBUcDJoRGlGZlpjakplWUM3aUpGUGZSWmhQX3hQa2RvdFhhM09VdWJrb0tmdHJFSW5XMUp3SzJJS1BYNE9uckd6cGpsbzM2eU95aHhCUEw0bmxpLWdULWhHcmkxNEUtb3JQZUVFLTd3eQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China accelerates brain-computer interface push&nbsp;&nbsp;thenews.pk",
     "category": "neurotechnology"
   },
   {
@@ -55,11 +73,20 @@
   },
   {
     "type": "external",
-    "title": "Global Implanted Brain-Computer Interface Devices Market to Observe Stupendous Growth at a CAGR of ~10% by 2032 | DelveInsight - Yahoo Finance",
+    "title": "China’s ultrasound brain tech race heats up - Fox News",
     "date": "2026-03-02",
-    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQcDd5N3lyMlBob2JhNHpMbFYyc0xZeWRvR3NOZTh0WUNuWDM0WklyQUcxMzBocldyNmVwczl1RjAxcVhTanFqcXh4MUNGZ2V0Qzh6SDBrOXBzQWZXWjFNX19INVY5c250X0JkSDhOZ1hZbTFabzFQSjRvYVNmbWZyRUdlV3puYzRTeGQ4c0hsSUk?oc=5",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5YYU9JMU9IN0FiclJKUE9XVXk4WWg4VGdxT1RzZ3hXakpFX3hTLWg5Y3NTVGZGNnhOU3l3djYza0JHV3VFSk9yY0hDVlc3V3BnY1BpTFdqVy1zT2dBWjlWdVlSM0M0eFhMbDlTNjVlelVnV2VNVWh1YlNwONIBgAFBVV95cUxNTHlIUWFxa1ZXNXE4ZTF5Qm9aUXhaU3ZQWmxQOWhJdVNqRXNWZ3FwYWZURGV2ZUlDbWN1bHBnMEJNY21iSlRtaWo4R1h0RXZkaXgtT3dtUnFXSHlRLXVZbTc4cmtRZ0hKT3poczFVaXFQVm9Kdm1JWTlzWXpLbWFSOA?oc=5",
     "source": "Google News — BCI",
-    "summary": "Global Implanted Brain-Computer Interface Devices Market to Observe Stupendous Growth at a CAGR of ~10% by 2032 | DelveInsight&nbsp;&nbsp;Yahoo Finance",
+    "summary": "China’s ultrasound brain tech race heats up&nbsp;&nbsp;Fox News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk's Neuralink plans $8.2M expansion of Austin-area facility, new hires - Austin American-Statesman",
+    "date": "2026-02-27",
+    "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPNTVvTENIR1F0WktJVzRRaWJla2twOXhJc0plZFpQTE1CMFVkLWVZTzNZamxtc2NtTFpTQjlneWx4SzBHTFA3WEN5eVJqdGVLSE5Ea3IzZFZSWlVvcjRWZjVpR1FPTlVmTkhLcWxERllPVWhDU3BKdnFUV3RQcF9mY3J3bjZHcmV4NGNWb2NuMzE4bFhLQlFqQ2hB?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk's Neuralink plans $8.2M expansion of Austin-area facility, new hires&nbsp;&nbsp;Austin American-Statesman",
     "category": "neurotechnology"
   },
   {
@@ -67,18 +94,18 @@
     "title": "China’s brain-computer interface industry is racing ahead - TechCrunch",
     "date": "2026-02-22",
     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdzI0cVRmWExrYWVqNFJubVNkZC1xN0x5RnZXcEFIcEt4QTNPZzFjOHYxdHJUekNGM3JxNjdpd1Y2SnVpdko5V19NaHFhOEVKV2tnZ19KeFJFdVJsbDBNdE1SMEY2Z2N5dEVqRHRkQzdVQjF1eDAxczdXLWdYNm43emVYam1OendkQ2QtWEJYaHg4dUJ1ZUE?oc=5",
-    "source": "Google News — BCI",
+    "source": "Google News — Neural Startups",
     "summary": "China’s brain-computer interface industry is racing ahead&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer. - CBS News",
-    "date": "2026-02-20",
-    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRDVMbXFjMmZmdGJyZXI1QVVxUFhPMlU0QTduS3gwMm84S1FhOEFRc0RRa281SklXOVlmTVo3Sm5VVW4taUZWUXhhM3RNT0E5VFpRdWx1UG9Nc05MZTdrbzlHb2kxR1JVakFnaTduWVV2amU2QmVwU09OSG4ycUZsTFNBWllRSFQ0SFNCd2wxZw?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer.&nbsp;&nbsp;CBS News",
-    "category": "neuroethics"
+    "title": "Beijing backs brain implant push to rival Elon Musk’s Neuralink - Financial Times",
+    "date": "2026-02-17",
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5HVjB3TndyUWNKZUw4OHZpYzRBd1RmVlNwX2hFTW40UFNGUnExT1MtUWE0VnZqTzVNbGd0SmdYLWRzNkx4ZWdMZHJpVlo0MkE0NzBMbWwxbTRPbldOVE8zNWlINGJKc0plUEN6UWtOQ0Q?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Beijing backs brain implant push to rival Elon Musk’s Neuralink&nbsp;&nbsp;Financial Times",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -100,6 +127,15 @@
   },
   {
     "type": "external",
+    "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
+    "date": "2026-01-28",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
     "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
     "date": "2026-01-05",
     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
@@ -109,21 +145,12 @@
   },
   {
     "type": "external",
-    "title": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says - Reuters",
-    "date": "2026-01-02",
-    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says - Fierce Biotech",
-    "date": "2026-01-02",
-    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQYXdTY3MxMnRVV1QtMjBFZFUtNFpHRWV4OHItaFFPRWFwQWl0b2dVNGJjbjVQZDFXYnNWekZjcVU4Sm5YeWFBSjF2dzBoRUpwQVVZckhXZDdRV29vYV9POFFsNjJIQnVQcGVrTkJfTGlPbkJucEpSckwtcElpaEJZZnYzVUE0cndZQ2VwVjluTnRwa0hiXzJBU0F0NlhPUXUzWkNuWG40MnBoUmRkM3JRUVBQSExvcGFvVDlkYXZ2X013dw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says&nbsp;&nbsp;Fierce Biotech",
-    "category": "neurotechnology"
+    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
+    "date": "2025-11-18",
+    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
+    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -133,15 +160,6 @@
     "source": "Google News — MIND Act",
     "summary": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology&nbsp;&nbsp;CSIS | Center for Strategic and International Studies",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Altman's Merge Labs pursues ultrasound brain interface - R&D World",
-    "date": "2025-10-28",
-    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPQk5YeS1YMzhtdmFELWFwcnFUa2dycG1YdWVkdS1QY0dwbHVDNDB1Vm1ZdEhEM3pjcGJMYlBHdzlnZUtBb1dOTDNUZF9wRzF5WEhHRG5jVVlMWHBtU1dLRDJabEVwVklId204czFhSW16VTF0MHBrUHVhcW0zTzhkOG41QkRKUzBFYnJfVzh6cnNVWDdZWVkwZHNmSkVyQVd4UFlZYWlB?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Altman's Merge Labs pursues ultrasound brain interface&nbsp;&nbsp;R&D World",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -169,23 +187,5 @@
     "source": "Google News — MIND Act",
     "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
-    "date": "2025-10-03",
-    "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Exclusive: Startup lets you query AI with silent speech - Axios",
-    "date": "2025-09-08",
-    "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOX3czQ01Xb2REeUx1elVzSXI5UUhaSHhxUWthcG9teTl5Sk9NYTU4cmZnenN2aVRfemZnT3dvV0d2V194MzVvTGZWU0V1eUFEQWstWFpYZy13WFh3Tnk4TFdDSFZPc2VjZ3BYZWhacjFyemVqZm9zYTRSaUZSS0lGNTlCNm9xaWM?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Exclusive: Startup lets you query AI with silent speech&nbsp;&nbsp;Axios",
-    "category": "neurotechnology"
   }
 ]
