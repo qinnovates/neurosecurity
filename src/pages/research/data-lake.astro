@@ -757,6 +757,45 @@ const bandColors: Record<string, string> = {
         ))}
       </div>
     </div>
+
+    <!-- Brain Regions per Band -->
+    <div class="glass rounded-xl p-5 mb-6">
+      <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Brain Regions by Hourglass Layer</h3>
+      <div class="space-y-4">
+        {qifBands.map((b: any) => {
+          const bandRegionList = brainRegions.filter((r: any) => r.qif_band === b.id);
+          if (bandRegionList.length === 0) return null;
+          return (
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded" style={`background: ${bandColors[b.id] || '#666'}20; color: ${bandColors[b.id] || '#666'}`}>{b.id}</span>
+                <span class="text-xs font-semibold text-[var(--color-text-primary)]">{b.name}</span>
+                <span class="text-[10px] text-[var(--color-text-faint)]">({bandRegionList.length} regions)</span>
+              </div>
+              <div class="space-y-1.5 ml-8">
+                {bandRegionList.map((r: any) => (
+                  <div class="glass rounded-lg p-2.5 flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3">
+                    <div class="flex items-center gap-1.5 shrink-0">
+                      <span class="font-mono text-[11px] font-bold" style={`color: ${bandColors[b.id] || '#666'}`}>{r.abbreviation || r.id}</span>
+                      <span class="text-xs font-semibold text-[var(--color-text-primary)]">{r.name}</span>
+                    </div>
+                    <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{r.function || '—'}</p>
+                    {r.connections && r.connections.length > 0 && (
+                      <div class="flex flex-wrap gap-1 shrink-0">
+                        {r.connections.slice(0, 4).map((c: string) => (
+                          <span class="text-[8px] font-mono px-1 py-0.5 rounded bg-[var(--color-bg-surface)] text-[var(--color-text-faint)]">{c}</span>
+                        ))}
+                        {r.connections.length > 4 && <span class="text-[8px] text-[var(--color-text-faint)]">+{r.connections.length - 4}</span>}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
