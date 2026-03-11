@@ -1,7 +1,7 @@
 // Learning Paths — Autodidactive v2
 // Path rendering, auto-generation, and progress tracking
 
-import { LEARNING_PATHS } from './data/paths.js';
+import { LEARNING_PATHS } from './data/paths.js?v=2';
 import { getRelated, getPeopleMap } from './graph.js';
 import { IMPLEMENT_PRACTICES } from './data/patterns.js';
 import { CALCULUS_LABS } from './data/calculus.js';
