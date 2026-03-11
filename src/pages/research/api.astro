@@ -3,14 +3,31 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { getBciStats } from '@/lib/bci-data';
 import { BCI_CONSTRAINTS } from '@/lib/bci-limits-constants';
 import { THREAT_VECTORS } from '@/lib/threat-data';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 const stats = getBciStats();
+
+// Intel feed stats
+interface IntelItem {
+  id: string;
+  title: string;
+  date: string;
+  source: string;
+  source_category: string;
+}
+let intelItems: IntelItem[] = [];
+try {
+  const raw = readFileSync(resolve(process.cwd(), 'src/data/bci-intel-feed.json'), 'utf-8');
+  intelItems = JSON.parse(raw);
+} catch { /* feed not yet populated */ }
+const intelSourceCount = new Set(intelItems.map(i => i.source)).size;
 ---
 
 <PageLayout
-  title="BCI Data API"
-  description="Open JSON API for QIF brain-computer interface data: device specs, threat techniques, brain atlas, and physics constraints. CORS-enabled, free to use."
-  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'API' }]}
+  title="APIs, Feeds & SDKs"
+  description="Open APIs, STIX 2.1 threat feeds, Python SDK, and automated intelligence for BCI security research. CORS-enabled, free to use."
+  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'APIs & Feeds' }]}
   maxWidth="wide"
 >
   <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
@@ -22,8 +39,11 @@ const stats = getBciStats();
           { href: '#overview', label: 'Overview' },
           { href: '#unified', label: 'Unified Endpoint' },
           { href: '#structure', label: 'Response Structure' },
-          { href: '#examples', label: 'Examples' },
-          { href: '#legacy', label: 'Legacy Endpoints' },
+          { href: '#python-sdk', label: 'Python SDK' },
+          { href: '#stix', label: 'STIX 2.1 Feed' },
+          { href: '#intel-feed', label: 'Intel Feed' },
+          { href: '#examples', label: 'Usage Examples' },
+          { href: '#legacy', label: 'All Endpoints' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
             {item.label}
@@ -37,19 +57,22 @@ const stats = getBciStats();
       <!-- Overview -->
       <section id="overview" class="mb-20">
         <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
-          BCI Data API
+          APIs, Feeds & SDKs
         </h1>
-        <div class="flex items-center gap-3 mb-6">
+        <div class="flex items-center gap-3 mb-6 flex-wrap">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-status-safe)] text-[var(--color-status-safe)]">
             Open Access
           </span>
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
             CORS Enabled
           </span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
+            STIX 2.1
+          </span>
         </div>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            One endpoint, everything QIF has produced. {THREAT_VECTORS.length} threat techniques, {stats.totalDevices} BCI devices, 38 brain regions, {BCI_CONSTRAINTS.length} physics constraints, and scoring systems. All cross-referenced by QIF hourglass band IDs.
+            Everything QIF produces is available as open data. {THREAT_VECTORS.length} threat techniques, {stats.totalDevices} BCI devices, 38 brain regions, {BCI_CONSTRAINTS.length} physics constraints, STIX 2.1 threat bundles, and a live intelligence feed from 74+ sources. Use the unified JSON API, the Python SDK, or raw data feeds to integrate into your own security platforms, research pipelines, and BCI firmware.
           </p>
           <p>
             Static JSON, generated at build time. No authentication required. Cache-friendly (1 hour TTL). Free to use in your own research, tools, or applications.
@@ -147,7 +170,178 @@ const stats = getBciStats();
         </div>
       </section>
 
-      <!-- Examples -->
+      <!-- Python SDK -->
+      <section id="python-sdk" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Python SDK</h2>
+        <p class="text-[var(--color-text-muted)] mb-6">
+          Install the official TARA SDK to load the registry, filter techniques, and export to STIX format.
+        </p>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <div class="glass rounded-lg p-4 overflow-x-auto mb-6">
+            <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]"><code>pip install qtara</code></pre>
+          </div>
+          <div class="glass rounded-lg p-4 overflow-x-auto">
+            <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`from qtara import TaraRegistry
+
+registry = TaraRegistry.load()
+techniques = registry.get_techniques()
+print(f"Loaded {len(techniques)} mappings")
+
+# Filter by severity
+critical = [t for t in techniques if t.severity == "critical"]
+
+# Export to STIX 2.1
+bundle = registry.to_stix()
+bundle.save("tara-bundle.json")`}</code></pre>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="https://pypi.org/project/qtara/" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 block group hover:translate-y-[-2px] transition-transform">
+            <p class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">PyPI Package</p>
+            <p class="text-xs text-[var(--color-text-faint)]">pypi.org/project/qtara</p>
+          </a>
+          <a href="https://github.com/qinnovates/qinnovate/tree/main/shared/qtara" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 block group hover:translate-y-[-2px] transition-transform">
+            <p class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">Source Code</p>
+            <p class="text-xs text-[var(--color-text-faint)]">shared/qtara/ on GitHub</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- STIX 2.1 -->
+      <section id="stix" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">STIX 2.1 Threat Feed</h2>
+        <p class="text-[var(--color-text-muted)] mb-6">
+          All {THREAT_VECTORS.length} TARA threat techniques are available as a STIX 2.1 bundle for integration with threat intelligence platforms (MISP, OpenCTI, Splunk ES, Microsoft Sentinel).
+        </p>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-1 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
+            <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">/api/stix.json</code>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">Returns a STIX 2.1 Bundle with attack-pattern objects for every TARA technique. Public, CORS-enabled, cached 1 hour.</p>
+          <div class="glass rounded-lg p-4 overflow-x-auto">
+            <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`# Count attack patterns
+curl -s https://qinnovate.com/api/stix.json | jq '.objects | length'
+
+# Python SDK
+pip install qtara
+python -m qtara stix --output tara-bundle.json
+
+# Import to OpenCTI / MISP
+curl -o tara-stix.json https://qinnovate.com/api/stix.json
+# OpenCTI: Data > Import > STIX 2.1 Bundle
+# MISP: Event Actions > Add STIX 2.1
+# Splunk ES: Threat Intelligence Management
+# Microsoft Sentinel: Threat Intelligence blade`}</code></pre>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">Bundle Contents</h3>
+        <div class="space-y-3">
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-primary);">
+            <p class="text-sm"><strong class="text-[var(--color-text-primary)]">Identity object</strong> <span class="text-[var(--color-text-muted)]">— Qinnovate as the source organization</span></p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-secondary);">
+            <p class="text-sm"><strong class="text-[var(--color-text-primary)]">{THREAT_VECTORS.length} Attack Patterns</strong> <span class="text-[var(--color-text-muted)]">— One per TARA technique, with kill chain phases, severity, band mapping, and dual-use classification</span></p>
+          </div>
+          <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-accent-tertiary);">
+            <p class="text-sm"><strong class="text-[var(--color-text-primary)]">Custom Properties</strong> <span class="text-[var(--color-text-muted)]">— <code class="text-xs">x_qif_severity</code>, <code class="text-xs">x_qif_bands</code>, <code class="text-xs">x_qif_dual_use</code></span></p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mt-6">
+          <a href="/api/stix.json" class="glass rounded-xl p-5 flex items-center justify-between group hover:translate-y-[-2px] transition-transform">
+            <span class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">STIX 2.1 Feed</span>
+            <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">JSON</span>
+          </a>
+          <a href="https://raw.githubusercontent.com/qinnovates/qinnovate/main/shared/qtara-registrar.json" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 flex items-center justify-between group hover:translate-y-[-2px] transition-transform">
+            <span class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">TARA Registrar</span>
+            <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">JSON</span>
+          </a>
+        </div>
+
+        <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-primary);">
+          <p class="text-xs text-[var(--color-text-muted)]">
+            All TARA techniques are mapped to MITRE-compatible IDs (QIF-T0001+) and include NISS v1.1 impact vectors for neural risk scoring.
+          </p>
+        </div>
+      </section>
+
+      <!-- Intel Feed -->
+      <section id="intel-feed" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Intel Feed</h2>
+        <p class="text-[var(--color-text-muted)] mb-6">
+          Automated intelligence aggregator crawling 74+ RSS feeds and Google News queries across neurotechnology, BCI security, medical devices, regulatory, and research domains. Updated weekly via GitHub Actions.
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-4 mb-6">
+          <div class="glass rounded-xl p-5 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: var(--color-accent-primary);">{intelItems.length}</div>
+            <div class="text-xs text-[var(--color-text-muted)]">Items Tracked</div>
+          </div>
+          <div class="glass rounded-xl p-5 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: var(--color-accent-secondary);">{intelSourceCount}</div>
+            <div class="text-xs text-[var(--color-text-muted)]">Unique Sources</div>
+          </div>
+          <div class="glass rounded-xl p-5 text-center">
+            <div class="text-2xl font-bold font-[family-name:var(--font-heading)]" style="color: var(--color-status-safe);">Weekly</div>
+            <div class="text-xs text-[var(--color-text-muted)]">Update Cadence</div>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-4">Pipeline</h3>
+          <ol class="space-y-2 text-sm text-[var(--color-text-muted)] list-decimal list-inside">
+            <li>74+ RSS feeds and Google News queries are crawled weekly</li>
+            <li>Items are filtered by 90+ relevance keywords (BCI, neurosecurity, medical device, etc.)</li>
+            <li>Fuzzy deduplication removes near-duplicates (trigram Jaccard similarity)</li>
+            <li>New items are tagged by category, source, and topic</li>
+            <li>Feed accumulates over time (no rolling window)</li>
+          </ol>
+          <div class="mt-4 p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+            <p class="text-xs text-[var(--color-text-faint)]">
+              <strong>Schedule:</strong> Every Sunday at 17:00 UTC via GitHub Actions.
+              <br />
+              <strong>Manual:</strong> <code class="bg-[var(--color-bg-primary)] px-1 rounded">npm run fetch-intel</code>
+              <br />
+              <strong>Data:</strong> <code class="bg-[var(--color-bg-primary)] px-1 rounded">src/data/bci-intel-feed.json</code>
+            </p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="/tools/intel/" class="glass rounded-xl p-5 block group hover:translate-y-[-2px] transition-transform">
+            <p class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">Browse Intel Feed</p>
+            <p class="text-xs text-[var(--color-text-faint)]">Search, filter, and explore the full feed</p>
+          </a>
+          <a href="/research/landscape/" class="glass rounded-xl p-5 block group hover:translate-y-[-2px] transition-transform">
+            <p class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">KQL Data Lake</p>
+            <p class="text-xs text-[var(--color-text-faint)]">Query BCI devices, threats, and landscape data</p>
+          </a>
+        </div>
+
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-8 mb-4">Source Categories</h3>
+        <div class="grid sm:grid-cols-2 gap-3">
+          {[
+            { label: 'Tech Journalism', desc: 'TechCrunch, Wired, The Verge, MIT Tech Review', color: 'var(--color-accent-primary)' },
+            { label: 'Biotech & MedTech', desc: 'STAT News, Fierce Biotech, MedCity News', color: 'var(--color-accent-secondary)' },
+            { label: 'Academic & Research', desc: 'arXiv, Nature Neuroscience, IEEE Spectrum, JNER', color: 'var(--color-accent-tertiary)' },
+            { label: 'Security & Standards', desc: 'NIST Cybersecurity, CISA Advisories, FDA MedWatch', color: 'var(--color-status-safe)' },
+            { label: 'Financial & VC', desc: 'GlobeNewswire, PR Newswire, Google News neurotech VC', color: '#a78bfa' },
+            { label: 'Google News Queries', desc: 'BCI, Neuralink, MIND Act, neural startups, neurotech patents', color: 'var(--color-text-faint)' },
+          ].map((cat) => (
+            <div class="glass rounded-xl p-4" style={`border-left: 3px solid ${cat.color};`}>
+              <p class="text-sm font-semibold mb-1">{cat.label}</p>
+              <p class="text-xs text-[var(--color-text-faint)]">{cat.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Usage Examples -->
       <section id="examples" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Usage Examples</h2>
 
@@ -177,7 +371,26 @@ console.log(criticalThreats.length, 'critical threats');`}</code></pre>
 
           <!-- Python -->
           <div class="glass rounded-xl p-6">
-            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Python</h3>
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Python (qtara SDK)</h3>
+            <div class="glass rounded-lg p-4 overflow-x-auto">
+              <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`from qtara import TaraRegistry
+
+registry = TaraRegistry.load()
+
+# Find all dual-use techniques (attack == therapy mechanism)
+dual_use = [t for t in registry.get_techniques() if t.dual_use]
+print(f"{len(dual_use)} dual-use techniques")
+
+# Export critical threats as STIX 2.1
+critical = registry.filter(severity="critical")
+bundle = critical.to_stix()
+bundle.save("critical-threats.json")`}</code></pre>
+            </div>
+          </div>
+
+          <!-- Python requests -->
+          <div class="glass rounded-xl p-6">
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Python (requests)</h3>
             <div class="glass rounded-lg p-4 overflow-x-auto">
               <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`import requests
 
@@ -209,6 +422,10 @@ curl -s https://qinnovate.com/api/qif.json \\
 curl -s https://qinnovate.com/api/qif.json \\
   | jq '[.devices.inventory[].name]'
 
+# Get STIX 2.1 attack pattern count
+curl -s https://qinnovate.com/api/stix.json \\
+  | jq '.objects | length'
+
 # Get physics constants
 curl -s https://qinnovate.com/api/qif.json \\
   | jq '.physics.constants'`}</code></pre>
@@ -217,16 +434,27 @@ curl -s https://qinnovate.com/api/qif.json \\
         </div>
       </section>
 
-      <!-- Legacy Endpoints -->
+      <!-- All Endpoints -->
       <section id="legacy" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Legacy Endpoints</h2>
-        <div class="prose mb-6">
-          <p>
-            The original single-purpose endpoints remain available for backwards compatibility. The unified endpoint is recommended for new integrations.
-          </p>
-        </div>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">All Endpoints</h2>
 
         <div class="space-y-4">
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
+              <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">/api/qif.json</code>
+            </div>
+            <p class="text-xs text-[var(--color-text-faint)]">Complete QIF dataset. Threats, devices, brain atlas, physics, specs. <strong>Recommended for new integrations.</strong></p>
+          </div>
+
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
+              <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">/api/stix.json</code>
+            </div>
+            <p class="text-xs text-[var(--color-text-faint)]">STIX 2.1 bundle. {THREAT_VECTORS.length} attack-pattern objects with kill chain phases, severity, and band mapping.</p>
+          </div>
+
           <div class="glass rounded-xl p-5">
             <div class="flex items-center gap-3 mb-2">
               <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
@@ -234,13 +462,23 @@ curl -s https://qinnovate.com/api/qif.json \\
             </div>
             <p class="text-xs text-[var(--color-text-faint)]">TARA threat techniques only. Same data as <code>qif.json</code> &gt; <code>threats</code> section.</p>
           </div>
+        </div>
 
-          <div class="glass rounded-xl p-5">
-            <div class="flex items-center gap-3 mb-2">
-              <span class="text-xs font-bold font-[family-name:var(--font-mono)] px-2 py-0.5 rounded bg-[var(--color-status-safe)]/10 text-[var(--color-status-safe)]">GET</span>
-              <code class="text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">/api/stix.json</code>
+        <div class="glass rounded-xl p-5 mt-6">
+          <h3 class="text-sm font-semibold mb-3">Raw Data (GitHub)</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-[var(--color-text-muted)]">TARA Registrar</span>
+              <code class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">shared/qtara-registrar.json</code>
             </div>
-            <p class="text-xs text-[var(--color-text-faint)]">STIX 2.1 bundle format of TARA techniques. For integration with threat intelligence platforms.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[var(--color-text-muted)]">Intel Feed Cache</span>
+              <code class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">src/data/bci-intel-feed.json</code>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-[var(--color-text-muted)]">Intel Sources</span>
+              <code class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">src/data/intel-sources.json</code>
+            </div>
           </div>
         </div>
       </section>
