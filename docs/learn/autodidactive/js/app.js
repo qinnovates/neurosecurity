@@ -12,7 +12,7 @@ import { getRelated, getPathWithEdges, getAllNodes, getAllEdges } from './graph.
 import { search, highlightMatch, groupResults } from './search.js';
 import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js?v=2';
 import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext } from './canvas.js';
-import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js';
+import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js?v=2';
 import { renderEthicsTimeline } from './ethics-timeline.js';
 import { ETHICS_TIMELINE } from './data/ethics.js';
 
