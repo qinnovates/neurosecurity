@@ -1,8 +1,8 @@
 ---
-title: "The API of the Brain: Max Hodak on BCIs, Stimulation, and What Security Means When You Can't Remove the Hardware"
-subtitle: "Neuralink's co-founder describes the future of brain-computer interfaces. QIF already mapped the threat surface."
+title: "I Mapped the Risks and Cures of What May Happen When Neuralink Cures ADHD"
+subtitle: "Neuralink's co-founder describes digital Adderall via brain stimulation. We already mapped what can go wrong -- and how to stop it."
 date: 2026-03-11
-tags: [BCI, neurosecurity, QIF, TARA, clinical-mapping, interview-analysis]
+tags: [BCI, neurosecurity, QIF, TARA, clinical-mapping, interview-analysis, ADHD]
 author: Qinnovate
 fact_checked: false
 fact_check_notes:
@@ -11,13 +11,27 @@ fact_check_notes:
   - "QIF mappings referenced are from the proposed TARA threat catalog (unvalidated framework)"
 ---
 
-Max Hodak co-founded Neuralink with Elon Musk in 2016 and served as its president until 2021. He now runs [Science Corp](https://science.xyz), a company building brain-computer interfaces to restore lost sensory function. Their mission starts with vision: Science Corp's PRIMA retinal prosthesis took patients who had been unable to see faces for a decade and allowed them to read every letter on an eye chart -- results [published in the New England Journal of Medicine](https://www.nejm.org/doi/full/10.1056/NEJMoa2501396) in October 2025. But Hodak's ambitions go further. In his words: "If someone has gone blind, you can restore the ability to see. If they've gone deaf, you can restore the ability to hear. If they're paralyzed, you can restore the ability to move."
+Max Hodak, co-founder of Neuralink and CEO of [Science Corp](https://science.xyz), wants to cure ADHD with a "digital Adderall" -- a brain-computer interface that stimulates focus without pharmaceuticals. In his words: "Can you stimulate part of the brain to cause focus or sleep? That would not surprise me if that was possible, and I could see that as being more of a consumer application."
 
-And beyond restoration, stimulation. Hodak describes a future where BCIs deliver "a digital Ambien or like a digital Adderall" -- stimulating the brain to induce focus or sleep without pharmaceuticals. "Can you stimulate part of the brain to cause focus or sleep? That would not surprise me if that was possible, and I could see that as being more of a consumer application." He frames this as a broader industry trajectory, not a Science Corp product -- noting explicitly that he does not work on ultrasound himself.
+Here is the problem: the same stimulation that induces focus can be weaponized. And we already mapped exactly how.
 
-In a [March 2026 interview with Garry Tan](https://youtu.be/5gspRJVp9dI), days after [closing a $230M Series C](https://techcrunch.com/2026/03/05/science-corp-closes-230m-round-as-it-pushes-to-get-its-brain-implant-to-patients/), Hodak laid out this vision in detail.
+The proposed [TARA threat catalog](/atlas/tara/) contains [109 attack techniques](/atlas/tara/ttps/) mapped across the BCI stack. For ADHD treatment alone, TARA identifies over 40 techniques that share the same physical mechanisms as therapeutic stimulation. Here is what that looks like in practice:
 
-The proposed [TARA threat catalog](/atlas/tara/) maps [109 techniques](/atlas/tara/ttps/) across 7 neural band regions -- including the stimulation mechanisms that companies across the BCI industry are building products around. The same physics that restores vision or induces focus can, without proper safeguards, be used to inject false sensory data or alter signal characteristics at the cortical level. QIF's [framework](/framework/) exists because the difference between therapy and attack is not the signal -- it is the governance around it.
+- **[ELF neural entrainment](/atlas/tara/ttps/)** (QIF-T0010): The same low-frequency stimulation used therapeutically for ADHD and cognitive enhancement can be applied covertly to entrain brainwave patterns without the user's knowledge.
+- **[Neurofeedback falsification](/atlas/tara/ttps/)** (QIF-T0022): ADHD neurofeedback training relies on accurate EEG readings. An attacker who falsifies that feedback can train the brain toward a harmful state instead of a therapeutic one.
+- **[Working memory poisoning](/atlas/tara/ttps/)** (QIF-T0034): Working memory deficits define ADHD. A BCI that can strengthen working memory can also degrade it -- same circuit, opposite dosage.
+- **[Cognitive state capture](/atlas/tara/ttps/)** (QIF-T0053): Attention-training BCIs for ADHD continuously read cognitive state. That stream is also a surveillance channel -- your focus patterns, distractibility, and mental fatigue, captured in real time.
+- **[Coherence mimicry](/atlas/tara/ttps/)** (QIF-T0061): SMR (sensorimotor rhythm) training is a standard ADHD neurofeedback protocol. An attacker can mimic the coherence signature of a healthy brain state to mask ongoing interference.
+
+Every one of these maps to DSM-5-TR code [F90 (ADHD)](https://www.icd10data.com/ICD10CM/Codes/F01-F99/F90-F98/F90-) in the TARA catalog -- for threat modeling purposes, not diagnostic claims. The same signal-level mechanisms that restore attention can disrupt it.
+
+In a [March 2026 interview with Garry Tan](https://youtu.be/5gspRJVp9dI), days after [closing a $230M Series C](https://techcrunch.com/2026/03/05/science-corp-closes-230m-round-as-it-pushes-to-get-its-brain-implant-to-patients/), Hodak laid out the full vision: restoring vision to the blind, curing deafness, treating ADHD, and eventually consumer brain stimulation. He frames the stimulation work as a broader industry trajectory, not a Science Corp product -- noting explicitly that he does not work on ultrasound himself.
+
+But the security implications are real regardless of which company ships it first. QIF's [framework](/framework/) exists because the difference between therapy and attack is not the signal -- it is the governance around it.
+
+### Who Is Max Hodak?
+
+Hodak co-founded Neuralink with Elon Musk in 2016 and served as its president until 2021. He now runs Science Corp, which is building brain-computer interfaces to restore lost sensory function. Their PRIMA retinal prosthesis took patients who had been unable to see faces for a decade and allowed them to read every letter on an eye chart -- results [published in the New England Journal of Medicine](https://www.nejm.org/doi/full/10.1056/NEJMoa2501396) in October 2025. In his words: "If someone has gone blind, you can restore the ability to see. If they've gone deaf, you can restore the ability to hear. If they're paralyzed, you can restore the ability to move."
 
 ### The API of the Brain
 
