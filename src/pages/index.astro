@@ -8,6 +8,11 @@ import { getCollection } from 'astro:content';
 import { getPostDate } from '../lib/utils';
 import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS, LATEST_WHITEPAPER_HREF } from '../lib/qif-constants';
 import HeroParticles from '../components/HeroParticles';
+import HourglassReveal from '../components/HourglassReveal';
+import ThreatAtlasViz from '../components/ThreatAtlasViz';
+import DualUseSplit from '../components/DualUseSplit';
+import NeurorightsPentagon from '../components/NeurorightsPentagon';
+import BciVisionToggle from '../components/BciVisionToggle';
 import '../styles/global.css';
 import registry from '@shared/qtara-registrar.json';
 
@@ -70,26 +75,6 @@ const essentialPosts = essentialSlugs
         An <a href="/bci/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry by 2032</a>.* {totalThreats} attack techniques catalogued across 24 commercial devices. QIF is the first open framework bridging neurosecurity and neuroethics — from threat model to defense specification.
       </p>
 
-      <!-- Metrics -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10">
-        <a href="/neurogovernance/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-emerald-400/30 transition-all">
-          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">{neurorightsCount}</p>
-          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">neurorights<br/>operationalized</p>
-        </a>
-        <a href="/TARA/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all">
-          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalThreats}</p>
-          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">BCI attack techniques<br/>catalogued and scored</p>
-        </a>
-        <a href="/therapeutics/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-secondary)]/30 transition-all">
-          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{therapeuticCount}</p>
-          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic uses found<br/>in the same mechanisms</p>
-        </a>
-        <a href="/psychiatric/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-tertiary)]/30 transition-all">
-          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">{dsm5Count}</p>
-          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">psychiatric diagnoses<br/>mapped (awaiting validation)</p>
-        </a>
-      </div>
-
       <!-- Dual-audience CTAs -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a
@@ -118,6 +103,86 @@ const essentialPosts = essentialSlugs
       <svg class="w-5 h-5 text-[var(--color-text-faint)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
       </svg>
+    </div>
+  </section>
+
+  <!-- ═══ THE DESCENT — Scroll-driven visual narrative ═══ -->
+
+  <!-- ACT 1: THE ARCHITECTURE -->
+  <section class="relative min-h-[80vh] flex flex-col items-center justify-center px-4 overflow-hidden">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-primary)] mb-3">The Architecture</p>
+      <h2 class="text-xl sm:text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-10">
+        We mapped every layer.
+      </h2>
+      <HourglassReveal
+        client:visible
+        bands={HOURGLASS_BANDS as unknown as any[]}
+        widths={HOURGLASS_WIDTHS as unknown as number[]}
+      />
+      <p class="text-sm text-[var(--color-text-muted)] mt-8 max-w-md mx-auto leading-relaxed">
+        11 bands. From neocortex to cloud. One framework.
+      </p>
+    </div>
+  </section>
+
+  <!-- ACT 2: THE ATLAS -->
+  <section class="relative min-h-[80vh] flex flex-col items-center justify-center px-4 overflow-hidden">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[#f97316] mb-3">The Atlas</p>
+      <h2 class="text-xl sm:text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-6">
+        {totalThreats} ways in.
+      </h2>
+      <ThreatAtlasViz
+        client:visible
+        total={totalThreats}
+        bySeverity={{ critical: 29, high: 60, medium: 17, low: 3 }}
+      />
+      <p class="text-sm text-[var(--color-text-muted)] mt-8 max-w-md mx-auto leading-relaxed">
+        Attack techniques catalogued, scored, and mapped across 11 bands.
+      </p>
+    </div>
+  </section>
+
+  <!-- ACT 3: THE MIRROR -->
+  <section class="relative min-h-[80vh] flex flex-col items-center justify-center px-4 overflow-hidden">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-emerald-500 mb-3">The Mirror</p>
+      <h2 class="text-xl sm:text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-6">
+        Every weapon has a cure.
+      </h2>
+      <DualUseSplit
+        client:visible
+        therapeutic={therapeuticCount}
+        siliconOnly={totalThreats - therapeuticCount}
+        total={totalThreats}
+      />
+      <p class="text-sm text-[var(--color-text-muted)] mt-8 max-w-md mx-auto leading-relaxed">
+        {therapeuticCount} of those same mechanisms are already used in medicine.
+      </p>
+    </div>
+  </section>
+
+  <!-- ACT 4: THE RIGHTS -->
+  <section class="relative min-h-[80vh] flex flex-col items-center justify-center px-4 overflow-hidden">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[#8b5cf6] mb-3">The Rights</p>
+      <h2 class="text-xl sm:text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-6">
+        Five rights. Quantified.
+      </h2>
+      <NeurorightsPentagon
+        client:visible
+        rights={[
+          { code: 'MI', name: 'Mental Integrity', count: 81, color: '#ef4444' },
+          { code: 'MP', name: 'Mental Privacy', count: 64, color: '#f59e0b' },
+          { code: 'CL', name: 'Cognitive Liberty', count: 60, color: '#3b82f6' },
+          { code: 'PC', name: 'Psychological Continuity', count: 28, color: '#8b5cf6' },
+          { code: 'EA', name: 'Equal Access', count: 0, color: '#10b981' },
+        ]}
+      />
+      <p class="text-sm text-[var(--color-text-muted)] mt-8 max-w-md mx-auto leading-relaxed">
+        Mental Integrity. Privacy. Liberty. Continuity. Access.
+      </p>
     </div>
   </section>
 
@@ -186,7 +251,7 @@ const essentialPosts = essentialSlugs
 
     <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal reveal-stagger">
       <!-- Empirical validation -->
-      <a href="/case-studies/t0079-anc-fingerprint/" class="glass rounded-xl p-5 card-hover group text-left">
+      <a href="/atlas/analysis/t0079-anc-fingerprint/" class="glass rounded-xl p-5 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
@@ -201,7 +266,7 @@ const essentialPosts = essentialSlugs
       </a>
 
       <!-- Endogenous case study -->
-      <a href="/case-studies/endogenous-attack-chain/" class="glass rounded-xl p-5 card-hover group text-left">
+      <a href="/atlas/analysis/" class="glass rounded-xl p-5 card-hover group text-left">
         <div class="flex items-center gap-2 mb-3">
           <div class="w-8 h-8 rounded-full bg-[var(--color-accent-secondary)]/10 flex items-center justify-center text-[var(--color-accent-secondary)]">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
@@ -253,7 +318,7 @@ const essentialPosts = essentialSlugs
             Explore Diagnostic View
           </a>
           <a
-            href="/publications/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
+            href="/research/clinical/"
             class="px-5 py-2.5 rounded-lg glass text-[var(--color-text-primary)] font-medium text-sm hover:bg-white/10 transition-colors text-center"
           >
             Read More
@@ -334,7 +399,7 @@ const essentialPosts = essentialSlugs
                 </div>
               )}
               <a
-                href={`/lab/hourglass.html#${band.id}`}
+                href={`/atlas/#${band.id}`}
                 class="flex items-center gap-3 py-[3px] group cursor-pointer rounded hover:bg-black/[0.03] transition-all"
                 title={band.description}
               >
@@ -359,7 +424,7 @@ const essentialPosts = essentialSlugs
     </div>
 
     <div class="text-center mt-8">
-      <a href="/lab/hourglass.html" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+      <a href="/atlas/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
         Explore the full interactive model &rarr;
       </a>
     </div>
@@ -367,7 +432,7 @@ const essentialPosts = essentialSlugs
 
   <!-- ═══ TOOLS — Project Runemate ═══ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <a href="/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
+    <a href="/guardrails/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
       <div class="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none" style="background: radial-gradient(circle, var(--color-accent-tertiary), transparent 70%);"></div>
       <div class="flex flex-col sm:flex-row sm:items-center gap-6">
         <div class="flex-1">
@@ -386,6 +451,135 @@ const essentialPosts = essentialSlugs
         </div>
       </div>
     </a>
+  </section>
+
+  <!-- ═══ WHAT THIS WORK IS / IS NOT ═══ -->
+  <section class="py-16" style="background: var(--color-bg-surface);">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-6 reveal-stagger reveal">
+        <div class="glass rounded-xl p-6">
+          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-4">What This Work Is</h3>
+          <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
+            <li>&#8250; Open-source research portfolio</li>
+            <li>&#8250; Proposed threat modeling methods</li>
+            <li>&#8250; Bridge between security and neurorights</li>
+          </ul>
+        </div>
+        <div class="glass rounded-xl p-6">
+          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-4">What This Work Is Not</h3>
+          <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
+            <li>&times; Not a clinical or diagnostic tool</li>
+            <li>&times; Not an adopted standard</li>
+            <li>&times; Not independently validated</li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-center mt-6 font-mono text-xs text-[var(--color-text-faint)] tracking-[0.1em] reveal">PROPOSED &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE</p>
+    </div>
+  </section>
+
+  <!-- ═══ NISS SCORING ═══ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center mb-12 reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-amber-500 mb-4">Severity Scoring</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">NISS: Neural Impact Severity Score</h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Every technique is scored by base severity, reversibility, and detectability.</p>
+    </div>
+    <div class="glass rounded-2xl p-8 max-w-lg mx-auto reveal-scale">
+      <p class="font-mono text-xs text-[var(--color-text-faint)] mb-4">Example: Signal Injection</p>
+      <div class="space-y-4">
+        <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">Base Severity</span><span class="font-mono">6.0</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-blue-500" style="width: 60%;"></div></div></div>
+        <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">+ Reversibility</span><span class="font-mono text-amber-500">+1.5</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-amber-500" style="width: 15%;"></div></div></div>
+        <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">+ Detectability</span><span class="font-mono text-amber-500">+0.7</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-amber-500" style="width: 7%;"></div></div></div>
+        <div class="pt-2 border-t" style="border-color: var(--color-border);"><div class="flex justify-between text-sm mb-1"><span class="font-semibold">Final NISS</span><span class="font-mono font-bold text-red-500">8.2 HIGH</span></div><div class="h-3 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-gradient-to-r from-red-500 to-red-400" style="width: 82%;"></div></div></div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-2 mt-12 text-[10px] font-mono text-[var(--color-text-faint)] reveal">
+      <span class="glass rounded px-2 py-1">Technique</span><span>&rarr;</span><span class="glass rounded px-2 py-1">Band</span><span>&rarr;</span><span class="glass rounded px-2 py-1">Anatomy</span><span>&rarr;</span><span class="glass rounded px-2 py-1">Function</span><span>&rarr;</span><span class="glass rounded px-2 py-1">NISS</span><span>&rarr;</span><span class="glass rounded px-2 py-1">DSM-5-TR*</span>
+    </div>
+    <p class="text-center text-[10px] text-[var(--color-text-faint)] mt-2">*Diagnostic category references for threat modeling, not diagnostic claims</p>
+  </section>
+
+  <!-- ═══ TWO BRANCHES OF NEUROETHICS ═══ -->
+  <section class="py-16" style="background: var(--color-bg-surface);">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8 reveal">
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4">The Scholarship</p>
+        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">Two branches, one name</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4 mb-12 reveal">
+        <div class="glass rounded-xl p-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full" style="background: #06b6d4;"></div>
+          <p class="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style="color: #06b6d4;">Ethics of Neuroscience</p>
+          <p class="text-sm font-semibold mb-2">The applied branch</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What ethical rules should govern brain research, neural devices, and clinical neurotechnology? This is the branch that asks about consent, privacy, cognitive liberty, and the rights of people using BCIs.</p>
+          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">This is where BCI security governance lives.</p>
+        </div>
+        <div class="glass rounded-xl p-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full" style="background: #8b5cf6;"></div>
+          <p class="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style="color: #8b5cf6;">Neuroscience of Ethics</p>
+          <p class="text-sm font-semibold mb-2">The philosophical branch</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What can brain science tell us about morality itself? How do neural processes produce moral judgments? This branch studies the biological basis of ethical reasoning, not the ethics of the tools.</p>
+          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">Same name, fundamentally different question.</p>
+        </div>
+      </div>
+
+      <!-- Five Neurorights -->
+      <div class="text-center mb-6 reveal">
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4">From Scholarship to Rights</p>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2">Five Proposed Neurorights</h3>
+        <p class="text-xs text-[var(--color-text-muted)]">Derived from Ienca & Andorno (2017), extended by subsequent scholarship</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-4xl mx-auto reveal-stagger reveal">
+        {['Mental Privacy', 'Cognitive Liberty', 'Mental Integrity', 'Psychological Continuity', 'Equal Access'].map((right) => (
+          <div class="glass rounded-xl p-4 text-center"><p class="text-sm font-semibold text-emerald-500 mb-1">{right}</p><p class="text-[10px] text-[var(--color-text-faint)]">Mapped to hourglass bands</p></div>
+        ))}
+      </div>
+      <div class="text-center mt-8"><a href="/neuroethics/rights/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Explore neurorights mapping &rarr;</a></div>
+    </div>
+  </section>
+
+  <!-- ═══ GOVERNANCE ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center mb-12 reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4">Policy Bridge</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">Governance Spans All 11 Bands</h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">The policy bridge connects security findings to regulatory frameworks.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
+      {[{ name: 'FDA', desc: 'Medical device cybersecurity' }, { name: 'EU AI Act', desc: 'High-risk AI compliance' }, { name: 'OECD', desc: 'Neurotechnology principles' }, { name: 'ISO', desc: 'Medical device standards' }].map((r) => (
+        <div class="glass rounded-xl p-5 card-hover"><p class="font-bold mb-1">{r.name}</p><p class="text-xs text-[var(--color-text-muted)]">{r.desc}</p></div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ GUARDRAIL ARCHITECTURE ═══ -->
+  <section class="py-20" style="background: var(--color-bg-surface);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4">Proposed Specifications</p>
+        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">The Guardrail Architecture</h2>
+        <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Three proposed specifications positioned at specific hourglass layers.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
+        <a href="/guardrails/" class="glass rounded-xl p-6 card-hover group">
+          <div class="flex items-center gap-2 mb-3"><span class="text-amber-500 text-lg">&#9632;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">I0</span></div>
+          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-amber-500 transition-colors">Neurowall</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Signal-layer firewall with blockchain chain-of-evidence at the neural interface boundary.</p>
+        </a>
+        <a href="/guardrails/nsp/" class="glass rounded-xl p-6 card-hover group">
+          <div class="flex items-center gap-2 mb-3"><span class="text-blue-500 text-lg">&#9670;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S1-S2</span></div>
+          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-blue-500 transition-colors">NSP</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire protocol securing BCI data links with five defense layers.</p>
+        </a>
+        <a href="/guardrails/runemate/" class="glass rounded-xl p-6 card-hover group">
+          <div class="flex items-center gap-2 mb-3"><span class="text-violet-500 text-lg">&#9650;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S2</span></div>
+          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-violet-500 transition-colors">Runemate</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">On-device policy compiler and content delivery specification for neural interfaces.</p>
+        </a>
+      </div>
+      <p class="text-center mt-6 font-mono text-[10px] text-[var(--color-text-faint)] tracking-[0.1em]">PROPOSED SPECIFICATIONS &middot; NOT PRODUCTION SOFTWARE</p>
+    </div>
   </section>
 
   <!-- ═══ BEAT 6: THE ORIGIN — How I found this ═══ -->
@@ -476,4 +670,5 @@ const essentialPosts = essentialSlugs
   </section>
 
   <Footer />
+  <BciVisionToggle client:idle />
 </BaseLayout>

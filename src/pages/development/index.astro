@@ -1,0 +1,157 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '@/lib/qif-constants';
+
+// Bands where each spec operates
+const specBands: Record<string, string[]> = {
+  neurowall: ['I0'],
+  nsp: ['S1', 'S2'],
+  runemate: ['S2', 'S3'],
+};
+
+const specColors: Record<string, string> = {
+  neurowall: '#f59e0b',
+  nsp: '#3b82f6',
+  runemate: '#8b5cf6',
+};
+---
+
+<PageLayout
+  title="Development — Qinnovate"
+  description="Proposed defense specifications for neural interfaces — Neurowall, NSP Protocol, and Runemate. Under active development."
+  breadcrumbs={[{ label: 'Development' }]}
+  wide={true}
+>
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-[10px] font-mono px-2.5 py-1 rounded-full border" style="color: var(--color-accent-tertiary); border-color: var(--color-accent-tertiary);">Under Development</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4" style="font-family: var(--font-heading);">
+        Defense Specifications
+      </h1>
+      <p class="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
+        Three proposed specifications positioned at specific hourglass layers. Designed to protect neural interfaces from signal injection to cognitive manipulation.
+      </p>
+      <p class="text-xs text-[var(--color-text-faint)] mt-4 font-mono tracking-[0.1em]">PROPOSED SPECIFICATIONS &middot; NOT PRODUCTION SOFTWARE</p>
+    </div>
+
+    <!-- Hourglass with spec positioning -->
+    <div class="mb-16 md:grid md:grid-cols-[1fr_300px_1fr] gap-8 items-start">
+      <!-- Left: Neurowall description -->
+      <div class="hidden md:flex flex-col justify-center h-full">
+        <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border); border-left: 3px solid #f59e0b;">
+          <h3 class="text-lg font-bold mb-2" style="color: #f59e0b;">Neurowall</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Signal-layer firewall at the neural interface boundary. Amplitude bounds, rate limiting, DoS detection.</p>
+          <p class="text-xs text-[var(--color-text-faint)]">Operates at I0 — where biology meets silicon.</p>
+        </div>
+      </div>
+
+      <!-- Center: Mini hourglass -->
+      <div class="space-y-1.5">
+        {HOURGLASS_BANDS.map((band, i) => {
+          const width = HOURGLASS_WIDTHS[i];
+          const isNeurowall = specBands.neurowall.includes(band.id);
+          const isNsp = specBands.nsp.includes(band.id);
+          const isRunemate = specBands.runemate.includes(band.id);
+          const hasSpec = isNeurowall || isNsp || isRunemate;
+          const specColor = isNeurowall ? specColors.neurowall : isNsp ? specColors.nsp : isRunemate ? specColors.runemate : '';
+
+          return (
+            <div
+              class:list={["rounded-lg px-3 py-2 mx-auto transition-all text-center", hasSpec ? "ring-2" : ""]}
+              style={`max-width: ${width}%; border-left: 3px solid ${band.color}; background: var(--color-bg-secondary); ${hasSpec ? `ring-color: ${specColor};` : ''}`}
+            >
+              <div class="flex items-center justify-center gap-2">
+                <span class="text-[10px] font-bold font-mono" style={`color: ${band.color};`}>{band.id}</span>
+                <span class="text-xs">{band.name}</span>
+                {hasSpec && (
+                  <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded" style={`color: ${specColor}; background: ${specColor}15;`}>
+                    {isNeurowall ? 'NEUROWALL' : isNsp ? 'NSP' : 'RUNEMATE'}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Right: NSP + Runemate descriptions -->
+      <div class="hidden md:flex flex-col justify-end h-full gap-4">
+        <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border); border-left: 3px solid #3b82f6;">
+          <h3 class="text-lg font-bold mb-2" style="color: #3b82f6;">NSP Protocol</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Post-quantum wire protocol. Five defense layers with NIST-standardized cryptography.</p>
+          <p class="text-xs text-[var(--color-text-faint)]">Operates at S1-S2 — transport and link security.</p>
+        </div>
+        <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border); border-left: 3px solid #8b5cf6;">
+          <h3 class="text-lg font-bold mb-2" style="color: #8b5cf6;">Runemate</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">On-device policy compiler and content delivery. Compression-first bytecode design.</p>
+          <p class="text-xs text-[var(--color-text-faint)]">Operates at S2-S3 — application and cloud layers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile cards (hidden on desktop where hourglass layout shows) -->
+    <div class="grid gap-6 mb-16 md:hidden">
+      <a href="/guardrails/" class="rounded-xl p-6 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border); border-left: 3px solid #f59e0b;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="font-mono text-[10px] text-[var(--color-text-faint)]">I0 — Interface</span>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-amber-500 transition-colors">Neurowall</h2>
+        <p class="text-sm text-[var(--color-text-muted)]">Signal-layer firewall with amplitude bounds, rate limiting, and DoS detection.</p>
+      </a>
+      <a href="/guardrails/nsp/" class="rounded-xl p-6 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border); border-left: 3px solid #3b82f6;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="font-mono text-[10px] text-[var(--color-text-faint)]">S1-S2 — Transport</span>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-blue-500 transition-colors">NSP Protocol</h2>
+        <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire protocol with five defense layers.</p>
+      </a>
+      <a href="/guardrails/runemate/" class="rounded-xl p-6 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border); border-left: 3px solid #8b5cf6;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="font-mono text-[10px] text-[var(--color-text-faint)]">S2 — Application</span>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-violet-500 transition-colors">Runemate</h2>
+        <p class="text-sm text-[var(--color-text-muted)]">On-device policy compiler and content delivery specification.</p>
+      </a>
+    </div>
+
+    <!-- Detail cards (desktop — clickable) -->
+    <div class="hidden md:grid md:grid-cols-3 gap-6 mb-16">
+      <a href="/guardrails/" class="rounded-xl p-8 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-amber-500 text-xl">&#9632;</span>
+          <span class="font-mono text-[10px] text-[var(--color-text-faint)]">I0 — Interface</span>
+        </div>
+        <h2 class="text-xl font-bold mb-3 group-hover:text-amber-500 transition-colors">Neurowall</h2>
+        <p class="text-sm text-[var(--color-text-muted)] mb-4">Signal-layer firewall with amplitude bounds, rate limiting, and DoS detection at the neural interface boundary.</p>
+        <span class="text-xs text-[var(--color-accent-primary)]">Full specification &rarr;</span>
+      </a>
+      <a href="/guardrails/nsp/" class="rounded-xl p-8 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-blue-500 text-xl">&#9670;</span>
+          <span class="font-mono text-[10px] text-[var(--color-text-faint)]">S1-S2 — Transport</span>
+        </div>
+        <h2 class="text-xl font-bold mb-3 group-hover:text-blue-500 transition-colors">NSP Protocol</h2>
+        <p class="text-sm text-[var(--color-text-muted)] mb-4">Post-quantum wire protocol securing BCI data links with five defense layers and NIST-standardized cryptography.</p>
+        <span class="text-xs text-[var(--color-accent-primary)]">Full specification &rarr;</span>
+      </a>
+      <a href="/guardrails/runemate/" class="rounded-xl p-8 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-violet-500 text-xl">&#9650;</span>
+          <span class="font-mono text-[10px] text-[var(--color-text-faint)]">S2 — Application</span>
+        </div>
+        <h2 class="text-xl font-bold mb-3 group-hover:text-violet-500 transition-colors">Runemate</h2>
+        <p class="text-sm text-[var(--color-text-muted)] mb-4">On-device policy compiler and content delivery specification for neural interfaces. Compression-first design.</p>
+        <span class="text-xs text-[var(--color-accent-primary)]">Full specification &rarr;</span>
+      </a>
+    </div>
+
+    <div class="text-center">
+      <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-accent-primary)] hover:underline">
+        View source on GitHub &rarr;
+      </a>
+    </div>
+  </div>
+</PageLayout>

@@ -1,0 +1,262 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { HOURGLASS_BANDS } from '@/lib/qif-constants';
+import { THREAT_CATEGORIES, THREAT_VECTORS, getTacticsWithCounts } from '@/lib/threat-data';
+
+const tactics = getTacticsWithCounts();
+
+// Example techniques for each pattern
+const exampleTechnique = THREAT_VECTORS[0];
+const exampleId = exampleTechnique?.id ?? 'QIF-T0001';
+const exampleTactic = exampleTechnique?.tactic ?? 'QIF-N.IJ';
+
+// Band zone groupings
+const neuralBands = HOURGLASS_BANDS.filter(b => b.id.startsWith('N'));
+const interfaceBands = HOURGLASS_BANDS.filter(b => b.id === 'I0');
+const syntheticBands = HOURGLASS_BANDS.filter(b => b.id.startsWith('S'));
+---
+
+<PageLayout
+  title="QIF Numbering System — How IDs, Bands & Codes Work"
+  description="Reference guide for QIF technique IDs, tactic codes, hourglass band identifiers, and attack category codes."
+  breadcrumbs={[
+    { label: 'Neural Atlas', href: '/atlas/' },
+    { label: 'TARA', href: '/atlas/tara/' },
+    { label: 'QIF Numbering' },
+  ]}
+  wide={true}
+>
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16">
+      <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4">Reference</p>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-6" style="font-family: var(--font-heading);">
+        QIF Numbering System
+      </h1>
+      <p class="text-lg text-[var(--color-text-muted)] max-w-3xl leading-relaxed">
+        Every element in the QIF framework has a structured identifier. This page explains how to read them.
+      </p>
+    </div>
+
+    <!-- Technique IDs -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Technique IDs</h2>
+      <div class="rounded-xl p-6 border mb-6" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <p class="text-xs font-mono text-[var(--color-text-faint)] mb-2">Format</p>
+        <div class="flex items-center gap-1 text-2xl font-mono font-bold mb-4">
+          <span style="color: var(--color-accent-primary);">QIF</span>
+          <span style="color: var(--color-text-faint);">-</span>
+          <span style="color: var(--color-accent-secondary);">T</span>
+          <span style="color: var(--color-accent-tertiary);">0001</span>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4 text-sm">
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-primary);">QIF</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Framework prefix. All IDs belong to the Quantified Interconnection Framework.</p>
+          </div>
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-secondary);">T</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Entity type. T = Technique. Future: D = Device, R = Right, C = Control.</p>
+          </div>
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-tertiary);">0001</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Sequential number. Assigned in order of cataloging. Gaps indicate retired or merged techniques.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-xs text-[var(--color-text-faint)]">
+        Range: QIF-T0001 through QIF-T{String(THREAT_VECTORS.length).padStart(4, '0')}+ (currently {THREAT_VECTORS.length} techniques).
+        IDs are stable — once assigned, a technique ID never changes or gets reassigned.
+      </p>
+    </div>
+
+    <!-- Tactic IDs -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Tactic IDs</h2>
+      <div class="rounded-xl p-6 border mb-6" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <p class="text-xs font-mono text-[var(--color-text-faint)] mb-2">Format</p>
+        <div class="flex items-center gap-1 text-2xl font-mono font-bold mb-4">
+          <span style="color: var(--color-accent-primary);">QIF</span>
+          <span style="color: var(--color-text-faint);">-</span>
+          <span style="color: #22c55e;">N</span>
+          <span style="color: var(--color-text-faint);">.</span>
+          <span style="color: var(--color-accent-secondary);">IJ</span>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4 text-sm">
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-primary);">QIF</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Framework prefix.</p>
+          </div>
+          <div>
+            <span class="font-mono font-bold" style="color: #22c55e;">N</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Domain code. N = Neural, B = Biological, C = Cognitive, D = Data, P = Physical, E = Exfiltration, M = Multi-vector.</p>
+          </div>
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-secondary);">IJ</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Action code. Two-letter abbreviation of the tactic action (IJ = Injection, SC = Scanning, EV = Evasion, etc.).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border overflow-hidden" style="border-color: var(--color-border);">
+        <table class="w-full text-sm">
+          <thead>
+            <tr style="background: var(--color-bg-secondary);">
+              <th class="text-left px-4 py-2.5 font-mono text-xs" style="color: var(--color-text-faint);">Tactic ID</th>
+              <th class="text-left px-4 py-2.5 text-xs" style="color: var(--color-text-faint);">Name</th>
+              <th class="text-left px-4 py-2.5 font-mono text-xs" style="color: var(--color-text-faint);">Action</th>
+              <th class="text-right px-4 py-2.5 text-xs" style="color: var(--color-text-faint);">Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tactics.map((t) => (
+              <tr class="border-t" style="border-color: var(--color-border);">
+                <td class="px-4 py-2 font-mono text-xs" style="color: var(--color-accent-secondary);">{t.id}</td>
+                <td class="px-4 py-2 text-sm" style="color: var(--color-text-primary);">{t.name}</td>
+                <td class="px-4 py-2 font-mono text-xs font-bold" style="color: var(--color-text-primary);">{t.action_code}</td>
+                <td class="px-4 py-2 text-right font-mono text-xs" style="color: var(--color-text-faint);">{t.count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Hourglass Band IDs -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Hourglass Band IDs</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        The QIF hourglass has 11 bands organized into three zones. Band IDs indicate the zone and depth.
+      </p>
+
+      <div class="space-y-6">
+        <!-- Neural -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-3 h-3 rounded-full" style="background: #22c55e;"></span>
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: #22c55e;">Neural Zone (N7-N1)</h3>
+          </div>
+          <p class="text-xs text-[var(--color-text-muted)] mb-3">Biological layers. N7 = outermost (neocortex), N1 = deepest (spinal cord). Higher numbers = higher-level cognitive function.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {neuralBands.map((band) => (
+              <a href={`/atlas/#${band.id}`} class="rounded-lg p-3 border transition-colors hover:border-emerald-500/30" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+                <span class="font-mono text-sm font-bold" style={`color: ${band.color};`}>{band.id}</span>
+                <p class="text-xs text-[var(--color-text-muted)] mt-1">{band.name}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Interface -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-3 h-3 rounded-full" style="background: #f59e0b;"></span>
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: #f59e0b;">Interface Zone (I0)</h3>
+          </div>
+          <p class="text-xs text-[var(--color-text-muted)] mb-3">The bottleneck. Where biological tissue meets silicon hardware. The narrowest band in the hourglass, representing the physical electrode-tissue boundary.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {interfaceBands.map((band) => (
+              <a href={`/atlas/#${band.id}`} class="rounded-lg p-3 border transition-colors hover:border-amber-500/30" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+                <span class="font-mono text-sm font-bold" style={`color: ${band.color};`}>{band.id}</span>
+                <p class="text-xs text-[var(--color-text-muted)] mt-1">{band.name}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Synthetic -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-3 h-3 rounded-full" style="background: #3b82f6;"></span>
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: #3b82f6;">Synthetic Zone (S1-S3)</h3>
+          </div>
+          <p class="text-xs text-[var(--color-text-muted)] mb-3">Silicon layers. S1 = nearest to interface (on-device), S3 = farthest (cloud/wide-area). Traditional cybersecurity territory.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {syntheticBands.map((band) => (
+              <a href={`/atlas/#${band.id}`} class="rounded-lg p-3 border transition-colors hover:border-blue-500/30" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+                <span class="font-mono text-sm font-bold" style={`color: ${band.color};`}>{band.id}</span>
+                <p class="text-xs text-[var(--color-text-muted)] mt-1">{band.name}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Codes -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Attack Category Codes</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        Two-letter codes classify the type of harm a technique produces. A technique belongs to exactly one category.
+      </p>
+      <div class="rounded-xl border overflow-hidden" style="border-color: var(--color-border);">
+        <table class="w-full text-sm">
+          <thead>
+            <tr style="background: var(--color-bg-secondary);">
+              <th class="text-left px-4 py-2.5 font-mono text-xs" style="color: var(--color-text-faint);">Code</th>
+              <th class="text-left px-4 py-2.5 text-xs" style="color: var(--color-text-faint);">Category</th>
+              <th class="text-left px-4 py-2.5 text-xs hidden sm:table-cell" style="color: var(--color-text-faint);">Description</th>
+              <th class="text-right px-4 py-2.5 text-xs" style="color: var(--color-text-faint);">Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {THREAT_CATEGORIES.map((cat) => {
+              const count = THREAT_VECTORS.filter(t => t.category === cat.id).length;
+              return (
+                <tr class="border-t" style="border-color: var(--color-border);">
+                  <td class="px-4 py-2 font-mono text-sm font-bold" style="color: var(--color-accent-primary);">{cat.id}</td>
+                  <td class="px-4 py-2 text-sm font-medium" style="color: var(--color-text-primary);">{cat.name}</td>
+                  <td class="px-4 py-2 text-xs hidden sm:table-cell" style="color: var(--color-text-muted);">{cat.description}</td>
+                  <td class="px-4 py-2 text-right font-mono text-xs" style="color: var(--color-text-faint);">{count}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reading a Full ID -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Reading a Full Technique Entry</h2>
+      <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <p class="text-xs font-mono text-[var(--color-text-faint)] mb-4">Example entry decoded</p>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-xs shrink-0 w-24 text-right" style="color: var(--color-text-faint);">Technique</span>
+            <span class="font-mono font-bold" style="color: var(--color-accent-secondary);">{exampleId}</span>
+            <span class="text-[var(--color-text-muted)]">{exampleTechnique?.name}</span>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-xs shrink-0 w-24 text-right" style="color: var(--color-text-faint);">Tactic</span>
+            <span class="font-mono font-bold" style="color: var(--color-accent-secondary);">{exampleTactic}</span>
+            <span class="text-[var(--color-text-muted)]">= the strategic objective</span>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-xs shrink-0 w-24 text-right" style="color: var(--color-text-faint);">Category</span>
+            <span class="font-mono font-bold" style="color: var(--color-accent-primary);">{exampleTechnique?.category}</span>
+            <span class="text-[var(--color-text-muted)]">= the type of harm</span>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-xs shrink-0 w-24 text-right" style="color: var(--color-text-faint);">Bands</span>
+            <span class="font-mono font-bold" style="color: #22c55e;">{exampleTechnique?.bands.join(', ')}</span>
+            <span class="text-[var(--color-text-muted)]">= hourglass layers affected</span>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-xs shrink-0 w-24 text-right" style="color: var(--color-text-faint);">NISS</span>
+            <span class="font-mono font-bold" style={`color: ${exampleTechnique?.niss.severity === 'critical' ? '#ef4444' : exampleTechnique?.niss.severity === 'high' ? '#f59e0b' : '#94a3b8'};`}>
+              {exampleTechnique?.niss.score.toFixed(1)} {exampleTechnique?.niss.severity.toUpperCase()}
+            </span>
+            <span class="text-[var(--color-text-muted)]">= neural impact score</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/atlas/tara/ttps/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">TTPs Explained &rarr;</a>
+      <a href="/atlas/tara/" class="px-6 py-3 rounded-xl bg-[var(--color-accent-primary)] text-white text-sm font-medium hover:opacity-90 transition-opacity">Browse All Techniques</a>
+    </div>
+  </div>
+</PageLayout>

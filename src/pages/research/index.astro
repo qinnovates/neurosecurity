@@ -1,0 +1,158 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { TARA_TECHNIQUES, QIF_VERSION } from '@/lib/qif-constants';
+---
+
+<PageLayout
+  title="Research — Qinnovate"
+  description="Open research on BCI security — whitepaper, threat landscape, clinical mappings, physics constraints, and validation methodology."
+  breadcrumbs={[{ label: 'Research' }]}
+  wide={true}
+>
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16 max-w-3xl">
+      <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4">Open Research</p>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-6" style="font-family: var(--font-heading);">
+        Research
+      </h1>
+      <p class="text-lg text-[var(--color-text-muted)] leading-relaxed">
+        Every claim is published with its evidence basis. Every source is verified. The full derivation trail — from first hypothesis to current framework — is open for review.
+      </p>
+    </div>
+
+    <!-- Primary: Whitepaper -->
+    <div class="mb-16">
+      <a href="/research/whitepaper/" class="block rounded-xl p-8 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <div class="md:flex md:items-center md:gap-8">
+          <div class="flex-1">
+            <span class="text-xs font-mono text-[var(--color-accent-primary)] mb-2 block">QIF v{QIF_VERSION}</span>
+            <h2 class="text-2xl font-bold mb-3 group-hover:text-[var(--color-accent-primary)] transition-colors" style="font-family: var(--font-heading);">Whitepaper</h2>
+            <p class="text-[var(--color-text-muted)] mb-4">
+              The complete QIF specification — hourglass architecture, TARA taxonomy, NISS scoring, and signal integrity model. Includes full derivation, methodology, and limitations.
+            </p>
+            <span class="text-sm text-[var(--color-accent-primary)]">Read the whitepaper &rarr;</span>
+          </div>
+          <div class="hidden md:block text-right">
+            <div class="inline-flex flex-col items-center gap-1 opacity-60">
+              <span class="text-4xl font-bold font-mono" style="color: var(--color-accent-primary);">v{QIF_VERSION}</span>
+              <span class="text-xs text-[var(--color-text-faint)]">Latest Version</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Research Areas Grid -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-8" style="font-family: var(--font-heading);">Research Areas</h2>
+
+      <!-- Row 1: Landscape + Clinical (alternating layout) -->
+      <div class="md:flex md:items-stretch gap-6 mb-6">
+        <a href="/research/landscape/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group mb-6 md:mb-0" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-[var(--color-accent-secondary)]"></span>
+            <span class="text-xs font-mono text-[var(--color-text-faint)]">Market & Industry</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">BCI Landscape</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Market analysis, device registry, funding data, and investment intelligence. Includes the KQL query engine for interactive data exploration.</p>
+          <span class="text-xs text-[var(--color-accent-primary)]">Explore landscape &rarr;</span>
+        </a>
+
+        <a href="/research/clinical/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
+            <span class="text-xs font-mono text-[var(--color-text-faint)]">Clinical & Therapeutic</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[#10b981] transition-colors">Clinical Mappings</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Therapeutic applications and DSM-5-TR psychiatric diagnostic category references (for threat modeling purposes). The dual-use mirror of the threat atlas.</p>
+          <span class="text-xs text-[var(--color-accent-primary)]">View clinical data &rarr;</span>
+        </a>
+      </div>
+
+      <!-- Row 2: Physics + Validation -->
+      <div class="md:flex md:items-stretch gap-6 mb-6">
+        <a href="/research/physics/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group mb-6 md:mb-0" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
+            <span class="text-xs font-mono text-[var(--color-text-faint)]">Physics & Constraints</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[#f59e0b] transition-colors">Physics</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Physical constraints on BCI systems — amplitude bounds, frequency limits, tissue heating thresholds, and wave propagation models.</p>
+          <span class="text-xs text-[var(--color-accent-primary)]">View physics constraints &rarr;</span>
+        </a>
+
+        <a href="/research/validation/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-[#8b5cf6]"></span>
+            <span class="text-xs font-mono text-[var(--color-text-faint)]">Methodology</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[#8b5cf6] transition-colors">Validation</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Testing methodology, validation registry, and verification status. What has been tested, what has not, and the current confidence level for each claim.</p>
+          <span class="text-xs text-[var(--color-accent-primary)]">View validation status &rarr;</span>
+        </a>
+      </div>
+
+      <!-- Row 3: Neuroethics + BCI Explorer -->
+      <div class="md:flex md:items-stretch gap-6">
+        <a href="/research/neuroethics-landscape/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group mb-6 md:mb-0" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-[#06b6d4]"></span>
+            <span class="text-xs font-mono text-[var(--color-text-faint)]">Ethics & Scholarship</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[#06b6d4] transition-colors">Neuroethics Landscape</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Timeline of neurorights scholarship, neuroethics milestones, and the regulatory landscape informing QIF's design constraints.</p>
+          <span class="text-xs text-[var(--color-accent-primary)]">Explore neuroethics &rarr;</span>
+        </a>
+
+        <a href="/research/bci-explorer/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>
+            <span class="text-xs font-mono text-[var(--color-text-faint)]">Hardware & Devices</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[#ef4444] transition-colors">BCI Hardware Explorer</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">24 BCI devices with hardware specs, brain region mappings, threat vectors, and physics constraints from FDA filings and datasheets.</p>
+          <span class="text-xs text-[var(--color-accent-primary)]">Explore devices &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Research Process -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-8" style="font-family: var(--font-heading);">Research Process</h2>
+      <div class="md:flex md:items-stretch gap-6">
+        <a href="/news/derivation/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group mb-6 md:mb-0" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">Derivation Log</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Live research journal. Every hypothesis, decision, and dead end is documented with timestamps and AI collaboration notes.</p>
+          <span class="text-xs text-[var(--color-accent-primary)] mt-3 block">Read the log &rarr;</span>
+        </a>
+
+        <a href="/news/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group mb-6 md:mb-0" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">Field Journals</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Raw observations and research notes from active investigation. Unpolished, timestamped, and honest about uncertainty.</p>
+          <span class="text-xs text-[var(--color-accent-primary)] mt-3 block">Browse journals &rarr;</span>
+        </a>
+
+        <a href="/research/api/" class="flex-1 block rounded-xl p-6 border transition-all hover:shadow-lg group" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+          <h3 class="text-lg font-bold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">APIs & Data Feeds</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">STIX 2.1, TARA JSON, QIF JSON, and Python SDK. Machine-readable threat intelligence for integration into existing security tools.</p>
+          <span class="text-xs text-[var(--color-accent-primary)] mt-3 block">View APIs &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Status callout -->
+    <div class="rounded-xl p-6 border-l-4 border-[var(--color-accent-tertiary)] mb-12" style="background: var(--color-bg-secondary);">
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        <strong class="text-[var(--color-text-primary)]">Status:</strong> QIF, NISS, TARA, and all related components are proposed, unvalidated, and in development. They have not been adopted by any standards body or independently peer-reviewed. See the <a href="/research/validation/" class="text-[var(--color-accent-primary)] hover:underline">Validation page</a> for a detailed breakdown of what has and has not been verified.
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/research/whitepaper/" class="px-6 py-3 rounded-xl bg-[var(--color-accent-primary)] text-white text-sm font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
+      <a href="/atlas/tara/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">Browse TARA Atlas &rarr;</a>
+      <a href="/research/landscape/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">Explore BCI Landscape &rarr;</a>
+    </div>
+  </div>
+</PageLayout>

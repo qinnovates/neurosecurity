@@ -55,9 +55,11 @@ const INTEL_FEEDS = [
 
   // Research / Academic
   { url: 'https://rss.arxiv.org/rss/q-bio.NC', name: 'arXiv Neuroscience', category: 'research', maxItems: 5 },
+  { url: 'https://rss.arxiv.org/rss/cs.NE', name: 'arXiv Neural Computing', category: 'research', maxItems: 5 },
   { url: 'https://www.nature.com/neuro.rss', name: 'Nature Neuroscience', category: 'research', maxItems: 5 },
+  { url: 'https://www.nature.com/natbiomedeng.rss', name: 'Nature Biomed Engineering', category: 'research', maxItems: 5 },
   { url: 'https://spectrum.ieee.org/feeds/topic/biomedical.rss', name: 'IEEE Spectrum', category: 'research', maxItems: 5 },
-  // Neuroscience News removed: captcha-gated, blocks automated fetch
+  { url: 'https://neurosciencenews.com/neuroscience-topics/neurotech/feed/', name: 'Neuroscience News Neurotech', category: 'research', maxItems: 10, skipKeywordFilter: true },
 
   // Market Research / Analyst (free blog RSS)
   // Gartner removed: bot-blocked (Akamai), no public RSS
@@ -74,38 +76,74 @@ const INTEL_FEEDS = [
   { url: 'https://www.exponentialview.co/feed', name: 'Exponential View', category: 'opinion', maxItems: 3 },
   { url: 'https://neurotechx.com/feed/', name: 'NeurotechX', category: 'news', maxItems: 5 },
 
-  // Regulatory
+  // Additional News Sources (synced from intel-sources.json)
+  { url: 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910', name: 'CNBC Tech', category: 'news', maxItems: 5 },
+  { url: 'https://www.biopharmadive.com/feeds/news/', name: 'BioPharma Dive', category: 'product', maxItems: 5 },
+  { url: 'https://www.sciencedaily.com/rss/mind_brain.xml', name: 'ScienceDaily Neuro', category: 'research', maxItems: 5 },
+  { url: 'https://hnrss.org/newest?q=BCI+OR+brain-computer+OR+neurotech', name: 'Hacker News BCI', category: 'news', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://techcrunch.com/category/startups/feed/', name: 'TechCrunch Startups', category: 'funding', maxItems: 5 },
+
+  // Regulatory & Medical Device Security
   { url: 'https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml', name: 'FDA Press Releases', category: 'regulatory', maxItems: 5 },
   { url: 'https://www.nist.gov/blogs/cybersecurity-insights/rss.xml', name: 'NIST Cybersecurity', category: 'regulatory', maxItems: 5 },
+  { url: 'https://www.cisa.gov/cybersecurity-advisories/ics-medical-advisories.xml', name: 'CISA ICS Medical', category: 'regulatory', maxItems: 10 },
+  { url: 'https://www.cisa.gov/cybersecurity-advisories/ics-advisories.xml', name: 'CISA ICS Advisories', category: 'regulatory', maxItems: 5 },
+  { url: 'https://www.healio.com/rss/neurology', name: 'Healio Neurology', category: 'research', maxItems: 5 },
 
   // Google News queries (pre-filtered, skip keyword check)
-  { url: 'https://news.google.com/rss/search?q=brain+computer+interface+funding&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI Funding', category: 'funding', maxItems: 10, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=neurotechnology+investment&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurotech Investment', category: 'funding', maxItems: 10, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=Neuralink+OR+Synchron+OR+Paradromics&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI Companies', category: 'product', maxItems: 10, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=brain+implant+FDA&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI FDA', category: 'regulatory', maxItems: 5, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=neurorights+OR+neural+privacy+OR+cognitive+liberty&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurorights', category: 'policy', maxItems: 5, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=BCI+patent+OR+neural+interface+patent&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI Patents', category: 'patent', maxItems: 5, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=brain+computer+interface+clinical+trial&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI Trials', category: 'clinical', maxItems: 5, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=EEG+headset+consumer&hl=en-US&gl=US&ceid=US:en', name: 'GN: Consumer EEG', category: 'product', maxItems: 5, skipKeywordFilter: true },
-  { url: 'https://news.google.com/rss/search?q=neurotechnology+regulation+EU+OR+US&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurotech Regulation', category: 'regulatory', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=brain+computer+interface+funding+OR+neurotech+funding&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI Funding', category: 'funding', maxItems: 10, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=Neuralink+OR+Synchron+OR+Paradromics+OR+Precision+Neuroscience+OR+Science+Corp&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI Companies', category: 'product', maxItems: 10, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=brain+implant+FDA+OR+neural+device+clearance&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI FDA', category: 'regulatory', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=neurorights+OR+neural+privacy+OR+cognitive+liberty+OR+neurodata+law&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurorights', category: 'policy', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=brain+computer+interface+clinical+trial+OR+neural+implant+trial&hl=en-US&gl=US&ceid=US:en', name: 'GN: BCI Trials', category: 'clinical', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=EEG+headset+consumer+OR+neurotech+wearable&hl=en-US&gl=US&ceid=US:en', name: 'GN: Consumer EEG', category: 'product', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=neurotechnology+regulation+EU+OR+US+OR+FDA+OR+PATCH+Act&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurotech Regulation', category: 'regulatory', maxItems: 5, skipKeywordFilter: true },
+  // New: Medical device security, emerging modalities, gov funding, M&A
+  { url: 'https://news.google.com/rss/search?q=medical+device+cybersecurity+OR+IoMT+security+OR+PATCH+Act+OR+FDA+524B&hl=en-US&gl=US&ceid=US:en', name: 'GN: MedDevice Security', category: 'regulatory', maxItems: 10, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=transcranial+ultrasound+BCI+OR+fNIRS+brain+computer+OR+focused+ultrasound+neuro&hl=en-US&gl=US&ceid=US:en', name: 'GN: Emerging Modalities', category: 'research', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=DARPA+neural+OR+NIH+brain+interface+OR+NSF+neurotechnology+grant&hl=en-US&gl=US&ceid=US:en', name: 'GN: Gov Funding Neuro', category: 'funding', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=neurotech+acquisition+OR+brain+device+IPO+OR+neural+interface+merger&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurotech M&A', category: 'funding', maxItems: 5, skipKeywordFilter: true },
 ];
 
 // --- Relevance Keywords (expanded from fetch-news.mjs) ---
 
 const RELEVANCE_KEYWORDS = [
+  // Core BCI / Neurotech
   'brain-computer', 'brain computer', 'bci', 'neural interface', 'neurotechnology', 'neurotech',
   'eeg', 'neuroprosthetic', 'brain implant', 'neural implant', 'neurostimulation', 'brain stimulation',
   'tdcs', 'deep brain', 'cortical implant', 'neural decoder', 'brain-machine',
+  // Companies
   'neuralink', 'synchron', 'merge labs', 'paradromics', 'blackrock neurotech', 'cortical', 'openbci',
   'emotiv', 'interaxon', 'muse headband', 'neurosity', 'brainco', 'kernel flow', 'cognixion',
-  'neurable', 'arctop', 'precision neuroscience', 'inbrain',
+  'neurable', 'arctop', 'precision neuroscience', 'inbrain', 'science corp', 'cortical labs',
+  'neuros medical', 'nalu medical',
+  // Quantum + Security
   'post-quantum', 'post quantum', 'quantum cryptography', 'quantum key',
+  'quantum neural', 'quantum bci', 'neuromorphic quantum',
+  // Neuroethics / Policy / Governance
   'neuroethics', 'neurorights', 'cognitive liberty', 'neural security', 'neural privacy', 'neural data',
-  'brain data', 'mind act', 'neuroprivacy',
+  'brain data', 'mind act', 'neuroprivacy', 'neural data protection', 'neurodata',
+  'mental privacy bill', 'brain data governance',
+  // Medical Device Security / IoMT
+  'iomt', 'internet of medical things', 'patch act', 'fdora', '524b',
+  'medical device cybersecurity', 'medical device vulnerability', 'sbom', 'software bill of materials',
+  // Regulatory / FDA
   'neurotech funding', 'fda breakthrough', 'fda clearance', 'fda approval', '510(k)', 'de novo',
+  // Signals / Measurement
   'brain signal', 'neural signal', 'brain activity', 'neural recording',
+  // Devices / Applications
   'cochlear implant', 'retinal implant', 'spinal cord stimulat',
   'neurofeedback', 'brain-to-text', 'speech neuroprosthesis', 'motor neuroprosthesis',
+  // Emerging Modalities
+  'fnirs', 'functional near-infrared', 'magnetoencephalography', 'meg neuroimaging',
+  'transcranial ultrasound', 'focused ultrasound', 'tfus', 'tus neuromodulation',
+  'optogenetics', 'functional ultrasound', 'ecog', 'electrocorticography',
+  // Financial / Investment
+  'series a', 'series b', 'series c', 'seed round', 'neurotech ipo',
+  'brain device acquisition', 'medtech merger', 'bioelectronics',
+  // Security Research
+  'neural adversarial', 'eeg attack', 'brain signal spoofing',
+  'neural injection', 'bci security',
 ];
 
 // --- Auto-Tagging Rules ---

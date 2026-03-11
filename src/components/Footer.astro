@@ -4,22 +4,23 @@ const year = new Date().getFullYear();
 
 const sections = [
   {
-    title: 'Framework',
+    title: 'Neural Atlas',
     links: [
+      { href: '/atlas/', label: 'Atlas Overview' },
       { href: '/framework/', label: 'QIF Framework' },
-      { href: '/security/', label: 'Signal Security' },
       { href: '/atlas/tara/', label: 'TARA Atlas' },
       { href: '/atlas/scoring/', label: 'NISS Scoring' },
       { href: '/research/whitepaper/', label: 'Whitepaper' },
     ],
   },
   {
-    title: 'Research',
+    title: 'Research & Development',
     links: [
+      { href: '/research/', label: 'Research Hub' },
       { href: '/research/landscape/', label: 'BCI Landscape' },
-      { href: '/research/bci-explorer/', label: 'BCI Explorer' },
-      { href: '/research/neuroethics-landscape/', label: 'Neuroethics Landscape' },
-      { href: '/research/clinical/', label: 'Clinical Risk' },
+      { href: '/guardrails/', label: 'Neurowall' },
+      { href: '/guardrails/nsp/', label: 'NSP Protocol' },
+      { href: '/guardrails/runemate/', label: 'Runemate' },
       { href: '/news/', label: 'News' },
       { href: '/rss.xml', label: 'RSS Feed' },
     ],
@@ -27,10 +28,11 @@ const sections = [
   {
     title: 'Connect',
     links: [
+      { href: '/mission/', label: 'Mission' },
       { href: '/about/', label: 'About' },
-      { href: '/licensing/', label: 'Licensing' },
       { href: '/governance/', label: 'Governance' },
       { href: 'https://github.com/qinnovates', label: 'GitHub' },
+      { href: 'https://github.com/qinnovates/qinnovate/blob/main/LICENSE', label: 'License (Apache 2.0)' },
     ],
   },
 ];
