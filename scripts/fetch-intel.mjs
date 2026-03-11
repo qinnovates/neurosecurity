@@ -24,6 +24,7 @@ const FEED_PATH = resolve(ROOT, 'src/data/bci-intel-feed.json');
 const LANDSCAPE_PATH = resolve(ROOT, 'shared/bci-landscape.json');
 
 const FETCH_TIMEOUT_MS = 10000;
+const MAX_RESPONSE_BYTES = 5 * 1024 * 1024; // 5 MB cap per feed response
 
 // --- RSS Feed Sources ---
 
@@ -222,9 +223,59 @@ function jaccardSimilarity(setA, setB) {
 
 const FUZZY_THRESHOLD = 0.6;
 
+// --- Security: Sanitization Helpers ---
+
+/** Defang a URL for safe storage: https://example.com → hxxps://example[.]com */
+function defangUrl(url) {
+  if (typeof url !== 'string' || !url) return '';
+  return url
+    .replace(/^https:\/\//i, 'hxxps://')
+    .replace(/^http:\/\//i, 'hxxp://')
+    .replace(/\./g, '[.]');
+}
+
+/** Validate URL scheme — only allow http(s). Rejects javascript:, data:, file:, etc. */
+function isValidUrl(url) {
+  if (typeof url !== 'string') return false;
+  return /^https?:\/\//i.test(url);
+}
+
+/** Strip HTML tags (iterative to handle nested/malformed), control chars, null bytes */
+function sanitizeText(str) {
+  if (typeof str !== 'string') return String(str || '');
+  let result = str;
+  // Strip HTML tags (loop handles nested tags like <a<script>>)
+  let prev;
+  do {
+    prev = result;
+    result = result.replace(/<[^>]*>/g, '');
+  } while (result !== prev);
+  // Strip null bytes and control characters (keep newlines/tabs for readability)
+  result = result.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+  // Collapse excessive whitespace
+  result = result.replace(/\s+/g, ' ').trim();
+  return result;
+}
+
+/** Sanitize a title — strip HTML, control chars, cap length */
+function sanitizeTitle(raw) {
+  return sanitizeText(raw).slice(0, 300);
+}
+
+/** Sanitize a summary — strip HTML, control chars, cap length */
+function sanitizeSummary(raw) {
+  return sanitizeText(raw).slice(0, 200);
+}
+
 // --- Helpers ---
 
-const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
+// Hardened XML parser: disable entity processing to prevent XXE / Billion Laughs
+const parser = new XMLParser({
+  ignoreAttributes: false,
+  attributeNamePrefix: '@_',
+  processEntities: false,
+  htmlEntities: false,
+});
 
 function generateId() {
   return randomBytes(4).toString('hex');
@@ -257,7 +308,6 @@ function extractCompanies(title, summary, companyNames) {
   const text = `${title} ${summary}`;
   const found = [];
   for (const name of companyNames) {
-    // Case-insensitive match, but require word boundary-ish matching
     const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const re = new RegExp(`\\b${escaped}\\b`, 'i');
     if (re.test(text)) {
@@ -267,16 +317,31 @@ function extractCompanies(title, summary, companyNames) {
   return found;
 }
 
-function stripHtml(str) {
-  if (typeof str !== 'string') return String(str || '');
-  let result = str;
-  while (/<[^>]*>/.test(result)) {
-    result = result.replace(/<[^>]*>/g, '');
-  }
-  return result.trim();
-}
-
 // --- XML Parsing (same approach as fetch-news.mjs) ---
+
+/** Build a sanitized + defanged feed item, or null if URL is invalid */
+function buildItem(rawTitle, rawSummary, rawUrl, rawDate, feed, companyNames) {
+  const title = sanitizeTitle(rawTitle);
+  const summary = sanitizeSummary(rawSummary);
+  const url = typeof rawUrl === 'string' ? rawUrl.trim() : String(rawUrl || '');
+
+  // Reject non-http(s) URLs — blocks javascript:, data:, file: injection
+  if (!isValidUrl(url)) return null;
+  if (!isRelevant(title, summary, feed)) return null;
+
+  return {
+    id: generateId(),
+    title,
+    date: parseDate(rawDate),
+    url: defangUrl(url),
+    source: feed.name,
+    source_category: feed.category,
+    summary,
+    tags: autoTag(title, summary),
+    companies: extractCompanies(title, summary, companyNames),
+    fetched: new Date().toISOString().slice(0, 10),
+  };
+}
 
 function extractItems(xml, feed, companyNames) {
   const parsed = parser.parse(xml);
@@ -289,20 +354,8 @@ function extractItems(xml, feed, companyNames) {
     for (const item of list.slice(0, feed.maxItems)) {
       const title = typeof item.title === 'string' ? item.title : String(item.title || '');
       const rawSummary = item.description || '';
-      const summary = stripHtml(rawSummary).slice(0, 200);
-      if (!isRelevant(title, summary, feed)) continue;
-      items.push({
-        id: generateId(),
-        title,
-        date: parseDate(item.pubDate),
-        url: item.link || '',
-        source: feed.name,
-        source_category: feed.category,
-        summary,
-        tags: autoTag(title, summary),
-        companies: extractCompanies(title, summary, companyNames),
-        fetched: new Date().toISOString().slice(0, 10),
-      });
+      const result = buildItem(title, rawSummary, item.link, item.pubDate, feed, companyNames);
+      if (result) items.push(result);
     }
     return items;
   }
@@ -315,23 +368,11 @@ function extractItems(xml, feed, companyNames) {
       const title = entry.title?.['#text'] || entry.title || '';
       const titleStr = typeof title === 'string' ? title : String(title);
       const rawSummary = entry.summary?.['#text'] || entry.summary || entry.content?.['#text'] || '';
-      const summary = stripHtml(rawSummary).slice(0, 200);
-      if (!isRelevant(titleStr, summary, feed)) continue;
       const link = Array.isArray(entry.link)
         ? entry.link.find((l) => l['@_rel'] === 'alternate')?.['@_href'] || entry.link[0]?.['@_href']
         : entry.link?.['@_href'] || entry.link || '';
-      items.push({
-        id: generateId(),
-        title: titleStr,
-        date: parseDate(entry.updated || entry.published),
-        url: typeof link === 'string' ? link : String(link),
-        source: feed.name,
-        source_category: feed.category,
-        summary,
-        tags: autoTag(titleStr, summary),
-        companies: extractCompanies(titleStr, summary, companyNames),
-        fetched: new Date().toISOString().slice(0, 10),
-      });
+      const result = buildItem(titleStr, rawSummary, link, entry.updated || entry.published, feed, companyNames);
+      if (result) items.push(result);
     }
     return items;
   }
@@ -343,20 +384,8 @@ function extractItems(xml, feed, companyNames) {
     for (const item of list.slice(0, feed.maxItems)) {
       const title = typeof item.title === 'string' ? item.title : String(item.title || '');
       const rawSummary = item.description || '';
-      const summary = stripHtml(rawSummary).slice(0, 200);
-      if (!isRelevant(title, summary, feed)) continue;
-      items.push({
-        id: generateId(),
-        title,
-        date: parseDate(item['dc:date'] || item.pubDate),
-        url: item.link || '',
-        source: feed.name,
-        source_category: feed.category,
-        summary,
-        tags: autoTag(title, summary),
-        companies: extractCompanies(title, summary, companyNames),
-        fetched: new Date().toISOString().slice(0, 10),
-      });
+      const result = buildItem(title, rawSummary, item.link, item['dc:date'] || item.pubDate, feed, companyNames);
+      if (result) items.push(result);
     }
     return items;
   }
@@ -381,7 +410,17 @@ async function fetchSingleFeed(feed, companyNames) {
       console.warn(`  [SKIP] ${feed.name}: HTTP ${res.status}`);
       return [];
     }
+    // Enforce response size limit to prevent memory exhaustion
+    const contentLength = parseInt(res.headers.get('content-length') || '0', 10);
+    if (contentLength > MAX_RESPONSE_BYTES) {
+      console.warn(`  [SKIP] ${feed.name}: response too large (${contentLength} bytes)`);
+      return [];
+    }
     const xml = await res.text();
+    if (xml.length > MAX_RESPONSE_BYTES) {
+      console.warn(`  [SKIP] ${feed.name}: response body too large (${xml.length} chars)`);
+      return [];
+    }
     const items = extractItems(xml, feed, companyNames);
     console.log(`  [OK]   ${feed.name}: ${items.length} items`);
     return items;
