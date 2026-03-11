@@ -35,17 +35,29 @@ mod tests {
     use super::*;
     use nsp_core::SessionParams;
 
+    /// Generate a deterministic test-only secret from a seed byte.
+    /// SAFETY: test-only placeholder — never use in production.
+    fn test_secret(seed: u8) -> [u8; 32] {
+        [seed; 32]
+    }
+
+    /// Generate a deterministic test-only nonce from a seed byte.
+    /// SAFETY: test-only placeholder — never use in production.
+    fn test_nonce(seed: u8) -> [u8; 12] {
+        [seed; 12]
+    }
+
     #[test]
     fn test_secure_compile_workflow() {
-        let shared_secret = [0x42; 32];
-        let session_id = [0x55; 32];
+        let shared_secret = test_secret(0x42);
+        let session_id = test_secret(0x55);
         let params = SessionParams::default();
         let session = Session::new(&shared_secret, session_id, params).unwrap();
 
         let source = r#"stave dashboard {
             heading(1) "Secure Implant Data"
         }"#;
-        let nonce = [0x99; 12];
+        let nonce = test_nonce(0x99);
 
         let (encrypted, result) = compile_and_encrypt(&session, source, &nonce).unwrap();
         assert!(!encrypted.is_empty());

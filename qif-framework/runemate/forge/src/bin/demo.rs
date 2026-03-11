@@ -1,6 +1,7 @@
 use nsp_core::{ClientHandshake, ServerHandshake, HandshakeState, SessionParams};
 use runemate_forge::secure::compile_and_encrypt;
 use runemate_forge::disasm;
+use rand::Rng;
 use std::time::Instant;
 
 const DEMO_SOURCE: &str = r#"
@@ -70,7 +71,7 @@ fn main() {
     println!("\n[1] Post-Quantum Handshake (ML-KEM-768 + ML-DSA-65)...");
     let start_handshake = Instant::now();
 
-    let client_id = [0xAA; 32];
+    let client_id: [u8; 32] = rand::thread_rng().r#gen();
     let mut client = ClientHandshake::new(client_id);
     let mut server = ServerHandshake::new();
 
@@ -95,12 +96,12 @@ fn main() {
     println!("  Handshake established in {:?}", start_handshake.elapsed());
 
     let session = client.session().unwrap();
-    println!("  Session ID: {:02X?}...", &session.id()[..8]);
+    println!("  Session ID: [REDACTED] ({} bytes)", session.id().len());
 
     // 2. Compile & Encrypt
     println!("\n[2] Compiling Staves DSL & Encrypting...");
     let start_compile = Instant::now();
-    let nonce = [0x11; 12];
+    let nonce: [u8; 12] = rand::thread_rng().r#gen();
 
     let (encrypted, result) = compile_and_encrypt(session, DEMO_SOURCE, &nonce)
         .expect("Secure compilation failed");
