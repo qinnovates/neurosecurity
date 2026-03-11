@@ -19,7 +19,7 @@ const DEFAULT_NOTE = {
   x: 15, y: 12,
   color: 0,
   rotation: -1.5,
-  created: Date.now()
+  timestamp: Date.now()
 };
 
 function sanitizeNote(n) {
@@ -94,7 +94,8 @@ function renderNote(note) {
   `;
 
   const time = new Date(note.timestamp);
-  const timeStr = time.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const timeStr = time.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    + ' ' + time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
   el.innerHTML = `
     <div class="post-it-content">${escapeHtml(note.text)}</div>

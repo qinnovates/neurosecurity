@@ -4837,14 +4837,43 @@ h4 {
   transform: translateY(-50%);
 }
 
-/* ── Notes Sections (Stacked Wall + Mindmap) ─────────────────────────────── */
+/* ── Notes Description & Sections ─────────────────────────────────────────── */
+.notes-description {
+  padding: 0 var(--space-lg, 16px) var(--space-md, 16px);
+}
+
+.notes-description-text {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0 0 var(--space-sm, 8px) 0;
+}
+
+.notes-how-it-works {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.notes-how-it-works summary {
+  font-weight: 600;
+  color: var(--accent, #10b981);
+  margin-bottom: var(--space-xs, 4px);
+}
+
+.notes-how-it-works p {
+  line-height: 1.5;
+  margin: var(--space-xs, 4px) 0;
+}
+
 .notes-section {
   margin-bottom: var(--space-md, 16px);
 }
 
 .notes-section--mindmap {
   border-top: 1px solid var(--border, #e2e8f0);
-  padding-top: var(--space-md, 16px);
+  padding: var(--space-md, 16px) var(--space-lg, 16px);
+  text-align: center;
 }
 
 .notes-section-label {
@@ -4863,6 +4892,135 @@ h4 {
   align-items: center;
   gap: var(--space-sm);
 }
+
+/* ── Mind My Business Button ─────────────────────────────────────────────── */
+.mindmap-trigger-btn {
+  display: inline-block;
+  padding: var(--space-md, 12px) var(--space-xl, 24px);
+  background: linear-gradient(135deg, var(--accent, #10b981), #059669);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg, 12px);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.mindmap-trigger-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+
+.mindmap-trigger-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.mindmap-trigger-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mindmap-trigger-hint {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin: var(--space-xs, 4px) 0 var(--space-md, 16px);
+}
+
+/* ── Mindmap Result ──────────────────────────────────────────────────────── */
+.mindmap-stats {
+  display: flex;
+  gap: var(--space-md, 12px);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-sm, 8px);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.mindmap-stats span {
+  padding: 2px 10px;
+  background: var(--bg-alt, #f8fafc);
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--border, #e2e8f0);
+}
+
+.mindmap-stats-time {
+  font-style: italic;
+}
+
+.mindmap-legend {
+  text-align: center;
+  margin-top: var(--space-sm, 8px);
+}
+
+.mindmap-legend-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin: 2px 0;
+}
+
+.mindmap-empty {
+  padding: var(--space-xl, 24px);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+}
+
+.mindmap-processing {
+  padding: var(--space-xl, 24px);
+  text-align: center;
+  color: var(--text-dim);
+}
+
+.mindmap-processing-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border, #e2e8f0);
+  border-top-color: var(--accent, #10b981);
+  border-radius: 50%;
+  margin: 0 auto var(--space-md, 12px);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── TARA Threat List ─────────────────────────────────────────────────────── */
+.tara-list { display: flex; flex-direction: column; gap: 12px; }
+.tara-technique { padding: 12px; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; background: var(--surface, #fff); }
+.tara-technique-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+.tara-id { font-family: var(--font-mono, monospace); font-size: 0.75rem; color: var(--text-dim); background: var(--surface-alt, #f1f5f9); padding: 2px 6px; border-radius: 4px; }
+.tara-severity { font-size: 0.7rem; color: #fff; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; font-weight: 600; }
+.tara-status { font-size: 0.72rem; color: var(--text-dim); }
+.tara-technique-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 4px; }
+.tara-technique-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
+.tara-technique-bands { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
+.tara-band { font-size: 0.7rem; background: var(--surface-alt, #f1f5f9); padding: 2px 6px; border-radius: 4px; color: var(--text-dim); }
+.tara-more { font-size: 0.82rem; color: var(--text-dim); padding: 8px 0; }
+.tara-more a { color: var(--primary); }
+
+/* ── Guardrail Cards ─────────────────────────────────────────────────────── */
+.guardrail-examples { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.guardrail-wrong { background: #fef2f2; border-left: 3px solid #ef4444; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; }
+.guardrail-right { background: #f0fdf4; border-left: 3px solid #22c55e; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; }
+
+/* ── Neurowall Stages ────────────────────────────────────────────────────── */
+.neurowall-stage { padding: 8px 0; border-bottom: 1px solid var(--border, #e2e8f0); }
+.neurowall-stage:last-child { border-bottom: none; }
+.neurowall-stage strong { font-size: 0.88rem; }
+.neurowall-stage p { font-size: 0.82rem; color: var(--text-dim); margin: 4px 0 0; }
+
+/* ── Governance Doc Cards ────────────────────────────────────────────────── */
+.governance-doc { padding: 12px 0; border-bottom: 1px solid var(--border, #e2e8f0); }
+.governance-doc:last-child { border-bottom: none; }
+.governance-doc-title { font-weight: 600; font-size: 0.9rem; color: var(--primary); text-decoration: none; display: block; margin-bottom: 4px; }
+.governance-doc-title:hover { text-decoration: underline; }
+.governance-doc p { font-size: 0.82rem; color: var(--text-dim); margin: 0 0 6px; }
+.governance-doc-topics { display: flex; gap: 4px; flex-wrap: wrap; }
 
 /* ── Audio View ───────────────────────────────────────────────────────────── */
 .audio-view-wrapper {

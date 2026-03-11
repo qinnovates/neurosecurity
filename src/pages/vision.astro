@@ -139,32 +139,37 @@ const bandZoneColor = (id: string) => {
   <div class="sticky top-16 z-40 text-center py-2 text-[10px] tracking-[0.15em] uppercase font-mono" style="background: rgba(139,92,246,0.1); border-bottom: 1px solid rgba(139,92,246,0.2); color: var(--color-accent-tertiary);">Theoretical Vision — Research directions and possibilities, not validated results</div>
 
   <!-- VISION HERO: Kinect on right, text on left -->
-  <section class="relative min-h-screen flex items-center overflow-hidden" style="background: #050a08;">
-    <div class="absolute inset-0 z-0">
+  <section class="relative min-h-screen flex items-center overflow-hidden" style="background: #050a08;" id="vision-hero">
+    <div class="absolute inset-0 z-0 parallax-layer" data-speed="0.3">
       <KinectVision client:only="react" fullBleed={true} />
     </div>
+    <!-- Ambient gradient orbs -->
+    <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+      <div class="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.04] parallax-layer" data-speed="0.15" style="background: radial-gradient(circle, var(--color-accent-primary), transparent 70%);"></div>
+      <div class="absolute -bottom-1/4 -right-1/4 w-[500px] h-[500px] rounded-full opacity-[0.06] parallax-layer" data-speed="0.1" style="background: radial-gradient(circle, var(--color-accent-tertiary), transparent 70%);"></div>
+    </div>
     <div class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-24">
-      <div class="max-w-lg">
-        <p class="text-xs font-mono tracking-[0.2em] uppercase mb-6 text-[var(--color-accent-tertiary)]">BCI Vision</p>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-          <span class="text-white">The Future of</span><br /><span class="gradient-text">Neural Interface Security.</span>
+      <div class="max-w-xl">
+        <p class="text-xs font-mono tracking-[0.2em] uppercase mb-8 text-[var(--color-accent-tertiary)] reveal-elastic" style="transition-delay: 0ms;">BCI Vision</p>
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[1.05] word-reveal" id="hero-headline">
+          <span class="text-white word">The </span><span class="text-white word">Future </span><span class="text-white word">of</span><br /><span class="gradient-text word">Neural </span><span class="gradient-text word">Interface </span><span class="gradient-text word">Security.</span>
         </h1>
-        <p class="text-lg text-zinc-400 mb-10 leading-relaxed">A theoretical vision of where BCI security research leads — from threat modeling to content delivery for cortical prosthetics.</p>
-        <div class="flex flex-wrap gap-4">
-          <a href="/research/whitepaper/" class="px-6 py-3 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
-          <a href="/atlas/" class="px-6 py-3 rounded-xl glass font-medium transition-colors">Explore the Atlas</a>
+        <p class="text-lg sm:text-xl text-zinc-400 mb-12 leading-relaxed reveal-elastic" style="transition-delay: 400ms;">A theoretical vision of where BCI security research leads — from threat modeling to content delivery for cortical prosthetics.</p>
+        <div class="flex flex-wrap gap-4 reveal-elastic" style="transition-delay: 600ms;">
+          <a href="/research/whitepaper/" class="magnetic px-8 py-3.5 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity text-base">Read the Whitepaper</a>
+          <a href="/atlas/" class="magnetic px-8 py-3.5 rounded-xl glass font-medium transition-colors text-base">Explore the Atlas</a>
         </div>
       </div>
     </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10"><svg class="w-5 h-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg></div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10" style="animation: float 3s ease-in-out infinite;"><svg class="w-5 h-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg></div>
   </section>
 
   <!-- TRANSPARENCY -->
   <section class="py-20" style="background: var(--color-bg-surface);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 gap-6 reveal-stagger reveal">
-        <div class="glass rounded-xl p-6"><h3 class="text-lg font-bold mb-4">What This Work Is</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>&#8250; Open-source research portfolio</li><li>&#8250; Proposed threat modeling methods</li><li>&#8250; Bridge between security and neurorights</li></ul></div>
-        <div class="glass rounded-xl p-6"><h3 class="text-lg font-bold mb-4">What This Work Is Not</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>&times; Not a clinical or diagnostic tool</li><li>&times; Not an adopted standard</li><li>&times; Not independently validated</li></ul></div>
+        <div class="glass rounded-xl p-6 glow-border"><h3 class="text-lg font-bold mb-4">What This Work Is</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>&#8250; Open-source research portfolio</li><li>&#8250; Proposed threat modeling methods</li><li>&#8250; Bridge between security and neurorights</li></ul></div>
+        <div class="glass rounded-xl p-6 glow-border"><h3 class="text-lg font-bold mb-4">What This Work Is Not</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>&times; Not a clinical or diagnostic tool</li><li>&times; Not an adopted standard</li><li>&times; Not independently validated</li></ul></div>
       </div>
       <p class="text-center mt-6 font-mono text-xs text-[var(--color-text-faint)] tracking-[0.1em] reveal">PROPOSED &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE</p>
     </div>
@@ -211,7 +216,7 @@ const bandZoneColor = (id: string) => {
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto reveal-stagger reveal">
         {sampleTechniques.map((t: any) => (
-          <a href={`/TARA/${t.id}/`} class="glass rounded-xl p-4 card-hover group relative overflow-hidden">
+          <a href={`/TARA/${t.id}/`} class="glass rounded-xl p-4 card-tilt glow-border card-hover group relative overflow-hidden">
             <div class="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={`background: ${bandZoneColor(t.band)};`}></div>
             <div class="flex items-center justify-between mb-2"><span class="font-mono text-[10px] text-[var(--color-text-faint)]">{t.id}</span><span class="font-mono text-[10px] px-1.5 py-0.5 rounded" style={`background: ${bandZoneColor(t.band)}15; color: ${bandZoneColor(t.band)};`}>{t.band}</span></div>
             <p class="text-sm font-semibold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">{t.name}</p>
@@ -344,7 +349,7 @@ const bandZoneColor = (id: string) => {
           },
         ].map((item, idx) => (
           <div class={`relative flex items-start mb-10 reveal ${item.side === 'left' ? 'sm:flex-row-reverse' : ''}`}>
-            <div class="absolute left-6 sm:left-1/2 w-3 h-3 rounded-full -translate-x-1/2 z-10 ring-4" style={`background: ${item.color}; ring-color: ${item.color}20;`}></div>
+            <div class="absolute left-6 sm:left-1/2 w-3 h-3 rounded-full -translate-x-1/2 z-10 ring-4 timeline-dot" style={`background: ${item.color}; ring-color: ${item.color}20; color: ${item.color};`}></div>
             <div class={`ml-14 sm:ml-0 sm:w-[calc(50%-2rem)] ${item.side === 'left' ? 'sm:mr-auto sm:pr-8' : 'sm:ml-auto sm:pl-8'}`}>
               <div class="glass rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-2">
@@ -409,9 +414,9 @@ const bandZoneColor = (id: string) => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 reveal"><p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4">Proposed Specifications</p><h2 class="text-3xl sm:text-4xl font-bold mb-4">The Guardrail Architecture</h2><p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Three proposed specifications positioned at specific hourglass layers.</p></div>
       <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
-        <a href="/guardrails/" class="glass rounded-xl p-6 card-hover gradient-border group"><div class="flex items-center gap-2 mb-3"><span class="text-amber-500 text-lg">&#9632;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">I0</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-amber-500 transition-colors">Neurowall</h3><p class="text-sm text-[var(--color-text-muted)]">Signal-layer firewall with blockchain chain-of-evidence at the neural interface boundary.</p></a>
-        <a href="/guardrails/nsp/" class="glass rounded-xl p-6 card-hover gradient-border group"><div class="flex items-center gap-2 mb-3"><span class="text-blue-500 text-lg">&#9670;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S1-S2</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-blue-500 transition-colors">NSP</h3><p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire protocol securing BCI data links with five defense layers.</p></a>
-        <a href="/guardrails/runemate/" class="glass rounded-xl p-6 card-hover gradient-border group"><div class="flex items-center gap-2 mb-3"><span class="text-violet-500 text-lg">&#9650;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S2</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-violet-500 transition-colors">Runemate</h3><p class="text-sm text-[var(--color-text-muted)]">On-device policy compiler and content delivery specification for neural interfaces.</p></a>
+        <a href="/guardrails/" class="glass rounded-xl p-6 card-tilt glow-border card-hover group"><div class="flex items-center gap-2 mb-3"><span class="text-amber-500 text-lg">&#9632;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">I0</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-amber-500 transition-colors">Neurowall</h3><p class="text-sm text-[var(--color-text-muted)]">Signal-layer firewall with blockchain chain-of-evidence at the neural interface boundary.</p></a>
+        <a href="/guardrails/nsp/" class="glass rounded-xl p-6 card-tilt glow-border card-hover group"><div class="flex items-center gap-2 mb-3"><span class="text-blue-500 text-lg">&#9670;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S1-S2</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-blue-500 transition-colors">NSP</h3><p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire protocol securing BCI data links with five defense layers.</p></a>
+        <a href="/guardrails/runemate/" class="glass rounded-xl p-6 card-tilt glow-border card-hover group"><div class="flex items-center gap-2 mb-3"><span class="text-violet-500 text-lg">&#9650;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S2</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-violet-500 transition-colors">Runemate</h3><p class="text-sm text-[var(--color-text-muted)]">On-device policy compiler and content delivery specification for neural interfaces.</p></a>
       </div>
       <p class="text-center mt-6 font-mono text-[10px] text-[var(--color-text-faint)] tracking-[0.1em]">PROPOSED SPECIFICATIONS &middot; NOT PRODUCTION SOFTWARE</p>
     </div>
@@ -421,13 +426,13 @@ const bandZoneColor = (id: string) => {
   <section class="py-24 vision-section-warm">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <p class="text-xs font-mono tracking-[0.15em] uppercase text-amber-500/70 mb-8 text-center reveal">The Origin</p>
-      <div class="space-y-8 text-lg sm:text-xl text-[var(--color-text-muted)] leading-relaxed">
-        <p class="reveal">In 2021, COVID collided with PTSD.</p>
-        <p class="reveal">My cognition fragmented in measurable ways — memory disrupted, threat detection hyperactivated, self-model corrupted.</p>
-        <p class="reveal">As a security engineer, I recognized the pattern.</p>
-        <p class="reveal text-xl sm:text-2xl font-semibold"><span class="gradient-text">The same failure modes I'd expect from a targeted BCI attack.</span></p>
-        <p class="reveal">Except no device was involved.</p>
-        <p class="reveal">That question became this research.</p>
+      <div class="space-y-10 text-xl sm:text-2xl text-[var(--color-text-muted)] leading-relaxed">
+        <p class="reveal-elastic" style="transition-delay: 0ms;">In 2021, COVID collided with PTSD.</p>
+        <p class="reveal-elastic" style="transition-delay: 100ms;">My cognition fragmented in measurable ways — memory disrupted, threat detection hyperactivated, self-model corrupted.</p>
+        <p class="reveal-elastic" style="transition-delay: 200ms;">As a security engineer, I recognized the pattern.</p>
+        <p class="reveal-elastic text-2xl sm:text-3xl font-semibold" style="transition-delay: 300ms;"><span class="gradient-text">The same failure modes I'd expect from a targeted BCI attack.</span></p>
+        <p class="reveal-elastic" style="transition-delay: 400ms;">Except no device was involved.</p>
+        <p class="reveal-elastic" style="transition-delay: 500ms;">That question became this research.</p>
       </div>
     </div>
   </section>
@@ -493,6 +498,14 @@ const bandZoneColor = (id: string) => {
     </section>
   )}
 
+  <!-- Float keyframe for scroll indicator -->
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+  </style>
+
   <!-- Reset theme on navigation away -->
   <script>
     document.addEventListener('astro:before-swap', () => {
@@ -502,6 +515,114 @@ const bandZoneColor = (id: string) => {
         document.documentElement.setAttribute('data-vision', 'off');
       }
     });
+  </script>
+
+  <!-- Vision premium motion -->
+  <script>
+    function initVisionMotion() {
+      // --- Parallax on scroll ---
+      const parallaxLayers = document.querySelectorAll<HTMLElement>('.parallax-layer');
+      let ticking = false;
+
+      function updateParallax() {
+        const scrollY = window.scrollY;
+        parallaxLayers.forEach((layer) => {
+          const speed = parseFloat(layer.dataset.speed || '0.2');
+          layer.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // --- Word reveal with stagger ---
+      const wordReveal = document.getElementById('hero-headline');
+      if (wordReveal) {
+        const words = wordReveal.querySelectorAll<HTMLElement>('.word');
+        words.forEach((word, i) => {
+          word.style.transitionDelay = `${200 + i * 100}ms`;
+        });
+        // Trigger after consent gate clears or immediately
+        function triggerWords() {
+          wordReveal.classList.add('revealed');
+        }
+        if (sessionStorage.getItem('vision-consent') === 'yes') {
+          setTimeout(triggerWords, 100);
+        } else {
+          // Watch for consent gate removal
+          const observer = new MutationObserver(() => {
+            const gate = document.getElementById('vision-consent');
+            if (gate && gate.style.display === 'none') {
+              setTimeout(triggerWords, 300);
+              observer.disconnect();
+            }
+          });
+          const gate = document.getElementById('vision-consent');
+          if (gate) observer.observe(gate, { attributes: true, attributeFilter: ['style'] });
+        }
+      }
+
+      // --- Elastic reveals (IntersectionObserver) ---
+      const elasticEls = document.querySelectorAll('.reveal-elastic');
+      const elasticObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            elasticObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      elasticEls.forEach((el) => elasticObs.observe(el));
+
+      // --- Card 3D tilt ---
+      document.querySelectorAll<HTMLElement>('.card-tilt').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)';
+        });
+      });
+
+      // --- Magnetic buttons ---
+      document.querySelectorAll<HTMLElement>('.magnetic').forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate(0, 0)';
+        });
+      });
+
+      // --- Timeline dot pulse on reveal ---
+      document.querySelectorAll('.timeline-dot').forEach((dot) => {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        obs.observe(dot);
+      });
+    }
+
+    initVisionMotion();
+    document.addEventListener('astro:after-swap', initVisionMotion);
   </script>
 
   <Footer />
