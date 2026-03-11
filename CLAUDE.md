@@ -66,6 +66,10 @@
   - `verify/`: Citation & fact verification pipeline
 - `tools/`: Security tools (macshield, neurowall)
 - `docs/`: Built site / GitHub Pages output
+- `blogs/`: Blog posts and case studies (Astro content collection `blog`)
+  - Posts with `type: case-study` in frontmatter are case studies
+  - All blog/case-study posts route to `/research/papers/[slug]/`
+  - Case studies should be tagged with `case-study` in tags AND `type: case-study` in frontmatter
 
 ## Tech Stack
 - Framework: Astro 5.x
