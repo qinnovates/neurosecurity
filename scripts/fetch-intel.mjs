@@ -61,6 +61,21 @@ const INTEL_FEEDS = [
   { url: 'https://spectrum.ieee.org/feeds/topic/biomedical.rss', name: 'IEEE Spectrum', category: 'research', maxItems: 5 },
   { url: 'https://neurosciencenews.com/neuroscience-topics/neurotech/feed/', name: 'Neuroscience News Neurotech', category: 'research', maxItems: 10, skipKeywordFilter: true },
 
+  // Scholarly Journals (BCI-specific)
+  { url: 'https://iopscience.iop.org/journal/rss/1741-2552', name: 'J Neural Engineering', category: 'research', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://ieeexplore.ieee.org/rss/TOC7333.XML', name: 'IEEE TNSRE', category: 'research', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://ieeexplore.ieee.org/rss/TOC10.XML', name: 'IEEE Trans Biomed Eng', category: 'research', maxItems: 5 },
+  { url: 'https://rss.sciencedirect.com/publication/science/1935861X', name: 'Brain Stimulation', category: 'research', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://rss.sciencedirect.com/publication/science/10538119', name: 'NeuroImage', category: 'research', maxItems: 5 },
+  { url: 'https://www.cell.com/neuron/current.rss', name: 'Neuron', category: 'research', maxItems: 5 },
+  { url: 'https://www.thelancet.com/action/showFeed?jc=laneur&type=etoc&feed=rss', name: 'Lancet Neurology', category: 'research', maxItems: 5 },
+  { url: 'https://www.frontiersin.org/journals/neuroscience/rss', name: 'Frontiers Neuroscience', category: 'research', maxItems: 5 },
+  { url: 'https://www.frontiersin.org/journals/human-neuroscience/rss', name: 'Frontiers Human Neuro', category: 'research', maxItems: 5 },
+  // J Neuroscience removed: HTTP 403, bot-blocked
+  { url: 'https://brain.ieee.org/feed/', name: 'IEEE Brain Initiative', category: 'research', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://bcisociety.org/feed/', name: 'BCI Society', category: 'research', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://www.pnas.org/action/showFeed?type=etoc&feed=rss&jc=PNAS', name: 'PNAS', category: 'research', maxItems: 3 },
+
   // Market Research / Analyst (free blog RSS)
   // Gartner removed: bot-blocked (Akamai), no public RSS
   // Forrester removed: endpoint returns 0 bytes
@@ -75,6 +90,12 @@ const INTEL_FEEDS = [
   { url: 'https://stratechery.com/feed/', name: 'Stratechery', category: 'opinion', maxItems: 3 },
   { url: 'https://www.exponentialview.co/feed', name: 'Exponential View', category: 'opinion', maxItems: 3 },
   { url: 'https://neurotechx.com/feed/', name: 'NeurotechX', category: 'news', maxItems: 5 },
+
+  // Financial / Startup / Press Wire (neurotech-filtered)
+  { url: 'https://medcitynews.com/feed/', name: 'MedCity News', category: 'funding', maxItems: 5 },
+  { url: 'https://www.globenewswire.com/RssFeed/industry/4573-Biotechnology/feedTitle/GlobeNewswire%20-%20Biotechnology', name: 'GlobeNewswire Biotech', category: 'funding', maxItems: 5 },
+  { url: 'https://www.globenewswire.com/RssFeed/industry/4535-Medical%20Equipment/feedTitle/GlobeNewswire%20-%20Medical%20Equipment', name: 'GlobeNewswire MedEquip', category: 'funding', maxItems: 5 },
+  { url: 'https://www.prnewswire.com/rss/news-releases-list.rss', name: 'PR Newswire', category: 'funding', maxItems: 5 },
 
   // Additional News Sources (synced from intel-sources.json)
   { url: 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910', name: 'CNBC Tech', category: 'news', maxItems: 5 },
@@ -103,6 +124,8 @@ const INTEL_FEEDS = [
   { url: 'https://news.google.com/rss/search?q=transcranial+ultrasound+BCI+OR+fNIRS+brain+computer+OR+focused+ultrasound+neuro&hl=en-US&gl=US&ceid=US:en', name: 'GN: Emerging Modalities', category: 'research', maxItems: 5, skipKeywordFilter: true },
   { url: 'https://news.google.com/rss/search?q=DARPA+neural+OR+NIH+brain+interface+OR+NSF+neurotechnology+grant&hl=en-US&gl=US&ceid=US:en', name: 'GN: Gov Funding Neuro', category: 'funding', maxItems: 5, skipKeywordFilter: true },
   { url: 'https://news.google.com/rss/search?q=neurotech+acquisition+OR+brain+device+IPO+OR+neural+interface+merger&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurotech M&A', category: 'funding', maxItems: 5, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=neurotech+venture+capital+OR+BCI+series+funding&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurotech VC', category: 'funding', maxItems: 10, skipKeywordFilter: true },
+  { url: 'https://news.google.com/rss/search?q=brain+implant+patent+filing+OR+neural+interface+patent&hl=en-US&gl=US&ceid=US:en', name: 'GN: Neurotech Patents', category: 'product', maxItems: 5, skipKeywordFilter: true },
 ];
 
 // --- Relevance Keywords (expanded from fetch-news.mjs) ---
