@@ -87,6 +87,43 @@ When contributing threat research or attack analysis:
 3. Label confidence levels honestly. Use the project's uncertainty tags — Verified, Inferred, Unverified, Hypothesis — so readers know what is established and what is not.
 4. Consider who benefits. If a contribution disproportionately advantages attackers over defenders, it needs revision or discussion with maintainers before merging.
 
+## BCI Security Testing Ethics
+
+The human brain is fragile, non-replaceable, and the seat of a person's identity. Security research on neural interfaces carries risks that do not exist in conventional IT security. All contributors must adhere to the following:
+
+### Testing Environments
+
+All BCI security testing MUST be conducted in **simulated, bench-top, or controlled laboratory environments**. Testing on devices connected to living tissue requires full IRB/ethics board approval and regulatory clearance. See [DISCLAIMER.md](/DISCLAIMER.md) Section 4 for the complete testing environment matrix and requirements.
+
+### Ethical Hacking Principles (Adapted for BCI)
+
+These principles adapt the EC-Council CEH Code of Ethics and OWASP Testing Guide for brain-computer interface contexts:
+
+1. **Obtain written authorization** before testing any system. For BCI devices, authorization must come from the system owner AND the device user/patient where applicable.
+2. **Define scope explicitly.** Neural data and biological interfaces are out of scope unless specifically authorized with ethics approval.
+3. **Minimize harm.** Use the least invasive technique. If a vulnerability can be demonstrated in simulation, do not escalate to hardware.
+4. **Never exfiltrate neural data.** Neural data encountered during testing must not be copied, stored, or transmitted beyond the minimum necessary for the finding.
+5. **Stop immediately** if any test produces unexpected interaction with biological systems.
+6. **Report defensively.** Every vulnerability must be paired with a mitigation or defensive control.
+
+### Responsible Disclosure
+
+When security research leads to the discovery of a real vulnerability:
+
+1. Report to the affected vendor first, using their published disclosure policy
+2. If no vendor policy exists, use [CISA Coordinated Vulnerability Disclosure](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
+3. Allow a minimum 90-day window before public disclosure
+4. Never publish exploit code targeting devices connected to human subjects without vendor coordination and a deployed mitigation
+5. Follow ISO/IEC 29147 (vulnerability disclosure) and ISO/IEC 30111 (vulnerability handling) where applicable
+
+### Regulatory Compliance
+
+Any application of this research to real devices or patients must comply with all applicable regulations including FDA device cybersecurity guidance, EU MDR, HIPAA, GDPR, applicable neural data laws (Colorado HB 24-1058, California SB 1223, Montana SB 163), and relevant computer fraud statutes (CFAA, Computer Misuse Act, EU Directive 2013/40). See [DISCLAIMER.md](/DISCLAIMER.md) Section 5 for the full regulatory reference matrix.
+
+### No Unauthorized Testing
+
+This project does not grant authorization to test any third-party BCI device, system, or network. The threat models and techniques are for **defensive research and education only**.
+
 ## AI Transparency
 
 This project uses artificial intelligence in research and development. The same standards of honesty we apply to human contributions apply to AI-assisted work:
