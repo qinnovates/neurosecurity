@@ -7,7 +7,7 @@
 >
 > **Last updated:** 2026-03-11
 > **Sources extracted from:** Three parallel validation agent sessions + ongoing research + landscape research agents
-> **Total unique sources:** 326+
+> **Total unique sources:** 328+
 
 ---
 
@@ -545,6 +545,8 @@ Sources are organized by domain and sorted newest-first within each domain.
 | F1 | Hallett M. (2007). "Transcranial Magnetic Stimulation: A Primer." Neuron 55(2):187-199. | https://pubmed.ncbi.nlm.nih.gov/17640522/ | Preprint v1.4 | TMS mechanism and clinical applications. Added v1.4 to replace mislabeled DBS citation. Key therapeutic technique in TARA. |
 | F2 | Sherman SM, Guillery RW. (2006). "Exploring the Thalamus and Its Role in Cortical Function." 2nd ed. MIT Press. | https://mitpress.mit.edu/9780123054609/ | Preprint v1.4 | Thalamocortical relay architecture. Added v1.4 for N4 (Diencephalon) band description. Thalamus as sensory gating mechanism. |
 | F3 | Kandel ER, Koester JD, Mack SH, Siegelbaum SA. (2021). "Principles of Neural Science." 6th ed. McGraw Hill. | N/A | Preprint | Foundational neuroscience textbook. Anatomical basis for QIF's 7-band neural hierarchy. |
+| F7 | Ropper AH, Samuels MA, Klein JP, Prasad S. (2023). "Adams and Victor's Principles of Neurology." 12th ed. McGraw Hill. ISBN: 978-1264264520. | https://openlibrary.org/isbn/9781264264520 | NISS v1.1 | Primary clinical reference for NISS neurological extension. 42 neurological conditions mapped across ICD-10-CM chapters G, H, R. |
+| F8 | CMS/NCHS. (2026). "ICD-10-CM Tabular List of Diseases and Injuries." Federal Register. | https://www.cms.gov/medicare/coding-billing/icd-10-codes | NISS v1.1 | Classification system for neurological conditions. Chapters G (nervous system), H (eye/ear), R (symptoms/signs) mapped to NISS metrics. |
 | F4 | Lozano AM, Lipsman N, Bergman H et al. (2019). "Deep Brain Stimulation: Current Challenges and Future Directions." Nature Reviews Neurology 15(3):148-160. | https://pubmed.ncbi.nlm.nih.gov/30683913/ | Preprint | DBS clinical review. 160,000+ patients implanted globally. Key therapeutic modality mapped in TARA. |
 | F5 | Schroder T, Sirbu R, Park S, Morley J et al. (2025). "Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations." Neuroethics 18. arXiv:2508.12571. | https://link.springer.com/article/10.1007/s12152-025-09607-3 | Preprint | Most comprehensive BCI security paper (Yale). Dual publication verified 2026-02-16. Key related work. |
 | F6 | Meng L, Lin CT, Jung TP, Wu D. (2023). "Adversarial Robustness Benchmark for EEG-Based Brain-Computer Interfaces." Future Generation Computer Systems 143:231-247. | https://doi.org/10.1016/j.future.2023.01.017 | Preprint v1.4 | EEG adversarial attack benchmark. Volume/pages corrected v1.4. |

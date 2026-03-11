@@ -1,125 +1,68 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import { getKqlTables, getDataLakeStats } from '@/lib/kql-tables';
 
-// Load all data sources
+// Raw JSON imports for nested display data (KQL flattens these)
 import landscapeRaw from '@shared/bci-landscape.json';
 import atlasRaw from '@shared/qif-brain-bci-atlas.json';
-import registrarRaw from '@shared/qtara-registrar.json';
 import dsmRaw from '@shared/qif-dsm-mappings.json';
 import ethicsRaw from '@shared/qif-ethics-controls.json';
-import cveRaw from '@shared/cve-technique-mapping.json';
 import controlsRaw from '@shared/qif-security-controls.json';
 import pathwaysRaw from '@shared/qif-neural-pathways.json';
 import neurotransmitterRaw from '@shared/qif-neurotransmitters.json';
 
 const landscape = landscapeRaw as any;
 const atlas = atlasRaw as any;
-const registrar = registrarRaw as any;
 const dsm = dsmRaw as any;
 const ethics = ethicsRaw as any;
-const cve = cveRaw as any;
 const controls = controlsRaw as any;
 const pathways = pathwaysRaw as any;
 
-// --- Compute all metrics ---
+// KQL data lake — counts & flat table access
+const kqlTables = getKqlTables();
+const stats = getDataLakeStats();
 
-// Companies
-const companies = landscape.companies || [];
-const totalCompanies = companies.length;
-const invasiveCount = companies.filter((c: any) => c.type === 'invasive').length;
-const nonInvasiveCount = companies.filter((c: any) => c.type === 'non_invasive').length;
-const semiInvasiveCount = companies.filter((c: any) => c.type === 'semi_invasive').length;
-const noSecCount = companies.filter((c: any) => c.security_posture === 'none_published').length;
-const totalDevices = companies.reduce((s: number, c: any) => s + (c.devices || []).length, 0);
-const totalFundingB = companies.reduce((s: number, c: any) => s + (c.funding_total_usd || 0), 0) / 1_000_000_000;
-const activeCompanies = companies.filter((c: any) => c.status === 'active').length;
+// --- Counts from KQL stats ---
+const totalCompanies = stats.companies;
+const totalDevices = stats.devices;
+const totalTechniques = stats.techniques;
+const totalRegions = stats.regions;
+const totalPathways = stats.pathways;
+const totalNeurotransmitters = stats.neurotransmitters;
 
-// Top funded companies
-const topFunded = [...companies]
-  .filter((c: any) => c.funding_total_usd > 0)
-  .sort((a: any, b: any) => (b.funding_total_usd || 0) - (a.funding_total_usd || 0))
+// --- Aggregations from KQL tables ---
+const companyRows = kqlTables.companies || [];
+const invasiveCount = companyRows.filter((c: any) => c.type === 'invasive').length;
+const nonInvasiveCount = companyRows.filter((c: any) => c.type === 'non_invasive').length;
+const semiInvasiveCount = companyRows.filter((c: any) => c.type === 'semi_invasive').length;
+const noSecCount = companyRows.filter((c: any) => c.security_posture === 'none_published').length;
+const activeCompanies = companyRows.filter((c: any) => c.status === 'active').length;
+const totalFundingB = companyRows.reduce((s: number, c: any) => s + (Number(c.funding_total_usd) || 0), 0) / 1_000_000_000;
+
+const topFunded = [...companyRows]
+  .filter((c: any) => Number(c.funding_total_usd) > 0)
+  .sort((a: any, b: any) => (Number(b.funding_total_usd) || 0) - (Number(a.funding_total_usd) || 0))
   .slice(0, 8)
   .map((c: any) => ({
-    name: c.name,
-    funding_M: Math.round((c.funding_total_usd || 0) / 1_000_000),
-    type: c.type,
-    security: c.security_posture,
+    name: c.name, funding_M: Math.round((Number(c.funding_total_usd) || 0) / 1_000_000),
+    type: c.type, security: c.security_posture,
   }));
 
-// Devices by type
-const allDevices = companies.flatMap((c: any) => (c.devices || []).map((d: any) => ({ ...d, company: c.name })));
+const deviceRows = kqlTables.devices || [];
 const devicesByType: Record<string, number> = {};
-for (const d of allDevices) {
-  const t = d.type || 'unknown';
-  devicesByType[t] = (devicesByType[t] || 0) + 1;
-}
+for (const d of deviceRows) { const t = (d as any).type || 'unknown'; devicesByType[t] = (devicesByType[t] || 0) + 1; }
 
-// Brain regions & bands
-const brainRegions = atlas.brain_regions || [];
-const qifBands = atlas.qif_bands || [];
-const totalRegions = brainRegions.length;
-const totalBands = qifBands.length;
-
-// Regions by band
-const regionsByBand: Record<string, number> = {};
-for (const r of brainRegions) {
-  const b = r.qif_band || 'unknown';
-  regionsByBand[b] = (regionsByBand[b] || 0) + 1;
-}
-
-// TARA
-const techniques = registrar.techniques || [];
-const tactics = registrar.tactics || [];
-const totalTechniques = techniques.length;
-const totalTactics = tactics.length;
-
-// Techniques by severity
+const techRows = kqlTables.techniques || [];
 const bySeverity: Record<string, number> = {};
-for (const t of techniques) {
-  const s = t.severity || 'unknown';
-  bySeverity[s] = (bySeverity[s] || 0) + 1;
-}
-
-// Techniques by status
+for (const t of techRows) { const s = (t as any).severity || 'unknown'; bySeverity[s] = (bySeverity[s] || 0) + 1; }
 const byStatus: Record<string, number> = {};
-for (const t of techniques) {
-  const s = t.status || 'unknown';
-  byStatus[s] = (byStatus[s] || 0) + 1;
-}
+for (const t of techRows) { const s = (t as any).status || 'unknown'; byStatus[s] = (byStatus[s] || 0) + 1; }
+const totalTactics = (kqlTables.tactics || []).length;
 
-// DSM-5
-const dsmClusters = dsm.diagnostic_clusters || {};
-const totalConditions = Object.values(dsmClusters).reduce((s: number, c: any) => s + (c.conditions || []).length, 0);
-const totalClusters = Object.keys(dsmClusters).length;
+const cveCount = (kqlTables.cve_mappings || []).length;
+const totalNeurorights = (kqlTables.neurorights || []).length;
 
-// Neural pathways
-const allPathways = pathways.pathways || [];
-const totalPathways = allPathways.length;
-const pathwayTypes = pathways.pathway_types || {};
-
-// Pathways by type
-const pathwaysByType: Record<string, number> = {};
-for (const p of allPathways) {
-  const t = p.type || 'unknown';
-  pathwaysByType[t] = (pathwaysByType[t] || 0) + 1;
-}
-
-// Pathways by neurotransmitter
-const pathwaysByNT: Record<string, number> = {};
-for (const p of allPathways) {
-  if (p.neurotransmitter) {
-    pathwaysByNT[p.neurotransmitter] = (pathwaysByNT[p.neurotransmitter] || 0) + 1;
-  }
-}
-
-// Neurorights
-const neurorights = ethics.neurorights || {};
-const totalNeurorights = Object.keys(neurorights).length;
-
-// CVEs
-const cveCount = (cve.mappings || []).length;
-
-// Security controls
+// Controls by band (nested structure from raw JSON)
 const controlsByBand: Record<string, number> = {};
 for (const [band, types] of Object.entries(controls.controls_by_band || {})) {
   const t = types as any;
@@ -127,23 +70,33 @@ for (const [band, types] of Object.entries(controls.controls_by_band || {})) {
 }
 const totalControls = Object.values(controlsByBand).reduce((s: number, c: number) => s + c, 0);
 
-// Market data
-const marketForecasts = landscape.market_data?.market_size_estimates || [];
-const fundingRounds = landscape.market_data?.major_funding_rounds || [];
-const vcDeals = landscape.market_data?.vc_aggregate_by_year || [];
+// Pathway aggregations from KQL flat rows
+const pathwayRows = kqlTables.neural_pathways || [];
+const pathwaysByType: Record<string, number> = {};
+for (const p of pathwayRows) { const t = (p as any).category || 'unknown'; pathwaysByType[t] = (pathwaysByType[t] || 0) + 1; }
+const pathwaysByNT: Record<string, number> = {};
+for (const p of pathwayRows) { const nt = (p as any).neurotransmitter; if (nt) pathwaysByNT[nt] = (pathwaysByNT[nt] || 0) + 1; }
 
-// Governance frameworks
-const frameworks = ethics.governance_frameworks || [];
+// Regions by band
+const regionsByBand: Record<string, number> = {};
+for (const r of kqlTables.brain_regions || []) { const b = (r as any).qif_band || 'unknown'; regionsByBand[b] = (regionsByBand[b] || 0) + 1; }
 
-// Neurotransmitters
-const ntData = neurotransmitterRaw as any;
-const allNeurotransmitters = ntData.neurotransmitters || [];
-const totalNeurotransmitters = allNeurotransmitters.length;
+// --- Nested JSON for template display ---
+const companies = landscape.companies || [];
+const brainRegions = atlas.brain_regions || [];
+const qifBands = atlas.qif_bands || [];
+const totalBands = qifBands.length;
+const dsmClusters = dsm.diagnostic_clusters || {};
+const totalConditions = Object.values(dsmClusters).reduce((s: number, c: any) => s + (c.conditions || []).length, 0);
+const totalClusters = Object.keys(dsmClusters).length;
+const allPathways = pathways.pathways || [];
+const allNeurotransmitters = (neurotransmitterRaw as any).neurotransmitters || [];
 const totalReceptors = allNeurotransmitters.reduce((s: number, nt: any) => s + (Array.isArray(nt.receptors) ? nt.receptors.length : 0), 0);
 const totalCofactors = allNeurotransmitters.reduce((s: number, nt: any) => s + (nt.cofactor_dependencies || []).length, 0);
 const totalSynthSteps = allNeurotransmitters.reduce((s: number, nt: any) => s + (nt.synthesis_pathway || []).length, 0);
+const frameworks = ethics.governance_frameworks || [];
 
-// Financial / Investor intelligence
+// Market/investor data (nested JSON)
 const investorIntel = landscape.market_data?.investor_intelligence || {};
 const crossPortfolioVCs = investorIntel.cross_portfolio_vcs || [];
 const sovereignFunds = investorIntel.sovereign_wealth_funds || [];
@@ -153,39 +106,26 @@ const intelDefense = investorIntel.intelligence_agencies_defense || [];
 const govGrants = landscape.market_data?.government_grants || [];
 const acquisitions = landscape.market_data?.acquisition_history || [];
 const totalTrackedFunding = landscape.market_data?.total_funding_tracked_usd || 0;
+const marketForecasts = landscape.market_data?.market_size_estimates || [];
+const fundingRounds = landscape.market_data?.major_funding_rounds || [];
+const vcDeals = landscape.market_data?.vc_aggregate_by_year || [];
+const topRounds = [...fundingRounds].sort((a: any, b: any) => (b.amount_usd || 0) - (a.amount_usd || 0)).slice(0, 10);
+const mesolimbicPathway = allPathways.find((p: any) => p.id === 'mesolimbic');
 
-// Top funding rounds
-const topRounds = [...fundingRounds]
-  .sort((a: any, b: any) => (b.amount_usd || 0) - (a.amount_usd || 0))
-  .slice(0, 10);
-
-// NT color map
+// Color maps
 const ntColors: Record<string, string> = {
   dopamine: '#22c55e', serotonin: '#3b82f6', norepinephrine: '#ef4444',
   acetylcholine: '#f59e0b', glutamate: '#ec4899', gaba: '#8b5cf6',
   glycine: '#06b6d4', histamine: '#f97316', endorphins: '#a78bfa',
   nitric_oxide: '#14b8a6', endocannabinoids: '#84cc16', adenosine: '#6366f1',
 };
-
-// --- Dopamine Reward Center Dependency Chain ---
-// This is a scientifically verified molecular dependency chain showing
-// how a QIF attack on the reward center cascades through biochemistry.
-const mesolimbicPathway = allPathways.find((p: any) => p.id === 'mesolimbic');
-
-// Color config
 const severityColors: Record<string, string> = {
-  critical: '#ef4444',
-  high: '#f59e0b',
-  medium: '#eab308',
-  low: '#22c55e',
-  info: '#3b82f6',
+  critical: '#ef4444', high: '#f59e0b', medium: '#eab308', low: '#22c55e', info: '#3b82f6',
 };
-
 const bandColors: Record<string, string> = {
   N7: '#ef4444', N6: '#f97316', N5: '#f59e0b', N4: '#eab308',
   N3: '#84cc16', N2: '#22c55e', N1: '#14b8a6',
-  I0: '#06b6d4',
-  S1: '#3b82f6', S2: '#6366f1', S3: '#8b5cf6',
+  I0: '#06b6d4', S1: '#3b82f6', S2: '#6366f1', S3: '#8b5cf6',
 };
 ---
 
@@ -198,7 +138,7 @@ const bandColors: Record<string, string> = {
   <div class="mb-8 reveal">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">QIF Data Lake</h1>
     <p class="text-base text-[var(--color-text-muted)] max-w-3xl">
-      Live metrics derived from {Object.keys(landscape).length + Object.keys(atlas).length + Object.keys(registrar).length} data sources. Spanning business intelligence (companies, funding, market trends) and clinical mapping (brain regions, neural pathways, molecular dependencies). All queryable via <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">KQL</a>.
+      Live metrics derived from {stats.totalTables} KQL tables ({stats.totalRows.toLocaleString()} rows). Spanning business intelligence (companies, funding, market trends) and clinical mapping (brain regions, neural pathways, molecular dependencies). All queryable via <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">KQL</a>.
     </p>
   </div>
 

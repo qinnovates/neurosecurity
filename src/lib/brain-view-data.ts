@@ -75,7 +75,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   DS: 'Denial of Service',
   PE: 'Privilege Escalation',
   CR: 'Cognitive Reconnaissance',
-  CD: 'Cognitive Disruption',
+  CD: 'Cognitive/Functional Disruption',
   PS: 'Physical Safety',
   EX: 'Data Exfiltration',
 };

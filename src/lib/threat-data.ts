@@ -18,7 +18,7 @@ export const THREAT_CATEGORIES = [
   { id: 'DS', name: 'Denial of Service', description: 'Disrupting BCI function' },
   { id: 'PE', name: 'Privilege Escalation', description: 'Gaining unauthorized access depth' },
   { id: 'CR', name: 'Cognitive Reconnaissance', description: 'Thought decoding, neural data inference, intent extraction' },
-  { id: 'CD', name: 'Cognitive Disruption', description: 'Perception manipulation, identity modification, cognitive coercion' },
+  { id: 'CD', name: 'Cognitive/Functional Disruption', description: 'Disruption to cognitive processing, sensory perception, motor output, or autonomic regulation' },
   { id: 'PS', name: 'Physical Safety', description: 'Tissue damage, seizures, involuntary movement' },
   { id: 'EX', name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
 ] as const;

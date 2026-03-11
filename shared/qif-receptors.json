@@ -1,0 +1,940 @@
+{
+  "_metadata": {
+    "title": "QIF Receptor and Ion Channel Database",
+    "version": "1.0.0",
+    "created": "2026-03-11",
+    "last_updated": "2026-03-11",
+    "description": "20 receptor/channel families with gene names, subunit composition, signaling mechanisms, pharmacological agents, and BCI/security relevance. For threat modeling purposes — not clinical diagnosis.",
+    "primary_sources": [
+      "IUPHAR/BPS Guide to Pharmacology",
+      "NCBI Gene",
+      "PMC primary literature",
+      "OMIM"
+    ],
+    "license": "CC-BY-4.0",
+    "notes": [
+      "Gene names follow HUGO Gene Nomenclature Committee (HGNC) conventions.",
+      "NCBI Gene IDs verified against NCBI Gene database.",
+      "DSM mappings are diagnostic category references for threat modeling purposes, not diagnostic claims.",
+      "BCI relevance reflects signal-level and pharmacological interactions, not cognitive claims.",
+      "Confidence: HIGH = multiple verified sources, MEDIUM = single verified source, LOW = inferred."
+    ]
+  },
+  "receptor_families": [
+    {
+      "id": "nmda",
+      "name": "NMDA Receptors",
+      "type": "ionotropic",
+      "superfamily": "Cys-loop",
+      "ligand": "glutamate",
+      "parent_neurotransmitter": "glutamate",
+      "gene_family": "GRIN",
+      "subunits": [
+        { "name": "GluN1", "alias": "NR1", "gene": "GRIN1", "ncbi_gene_id": "2902", "required": true, "notes": "Obligate subunit; glycine/D-serine co-agonist binding site" },
+        { "name": "GluN2A", "alias": "NR2A", "gene": "GRIN2A", "ncbi_gene_id": "2903", "expression": "Rises postnatally in cortex/hippocampus" },
+        { "name": "GluN2B", "alias": "NR2B", "gene": "GRIN2B", "ncbi_gene_id": "2904", "expression": "High embryonic; maintained in adult hippocampus" },
+        { "name": "GluN2C", "alias": "NR2C", "gene": "GRIN2C", "ncbi_gene_id": "2905", "expression": "Predominantly cerebellar granule cells" },
+        { "name": "GluN2D", "alias": "NR2D", "gene": "GRIN2D", "ncbi_gene_id": "2906", "expression": "Diencephalon, brainstem" },
+        { "name": "GluN3A", "gene": "GRIN3A", "ncbi_gene_id": "116443", "notes": "Modifies Ca2+ permeability; developmental" },
+        { "name": "GluN3B", "gene": "GRIN3B", "ncbi_gene_id": "116444", "notes": "Motor neurons; adult expression" }
+      ],
+      "ion_selectivity": "Ca2+, Na+, K+",
+      "activation_requirements": [
+        "Glutamate binding (GluN2)",
+        "Glycine/D-serine co-agonist (GluN1)",
+        "Membrane depolarization (Mg2+ block relief)"
+      ],
+      "signaling_mechanism": "Ligand-gated + voltage-dependent (coincidence detector). High Ca2+ permeability drives synaptic plasticity (LTP/LTD).",
+      "key_modulators": [
+        "Mg2+ (voltage-dependent block at resting potential)",
+        "Zn2+ (GluN2A inhibition via N-terminal domain)",
+        "Polyamines (spermine potentiation at GluN2B NTD)",
+        "Redox state"
+      ],
+      "dependency_chain": [
+        "GlyT1 (SLC6A9) and GlyT2 (SLC6A5) regulate glycine availability at co-agonist site",
+        "D-serine synthesized by serine racemase (SRR); degraded by D-amino acid oxidase (DAO)",
+        "Ca2+ influx activates CaMKII, triggering LTP"
+      ],
+      "brain_regions": ["cerebral cortex (layers II/III, V)", "hippocampus (CA1, CA3, dentate gyrus)", "striatum", "cerebellum", "amygdala"],
+      "function": "Coincidence detector for synaptic plasticity; critical for LTP, learning, memory formation, excitatory neurotransmission",
+      "pharmacological_agents": [
+        { "name": "Ketamine", "action": "channel blocker", "notes": "Dissociative anesthetic; rapid-acting antidepressant" },
+        { "name": "Memantine", "action": "channel blocker", "notes": "FDA-approved for Alzheimer's disease" },
+        { "name": "Phencyclidine (PCP)", "action": "channel blocker" },
+        { "name": "Ifenprodil", "action": "NR2B-selective antagonist" },
+        { "name": "Traxoprodil", "action": "NR2B-selective antagonist" },
+        { "name": "Kynurenic acid", "action": "glycine-site antagonist", "notes": "Endogenous" },
+        { "name": "L-701,324", "action": "glycine-site antagonist" },
+        { "name": "D-cycloserine", "action": "partial agonist at glycine site" }
+      ],
+      "dsm_conditions": [
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "NMDA hypofunction hypothesis", "qualifier": "for threat modeling purposes" },
+        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "Ketamine (NMDA antagonist) rapid antidepressant", "qualifier": "for threat modeling purposes" },
+        { "code": "F84.0", "name": "Autism Spectrum Disorder", "mechanism": "GRIN subunit variants", "qualifier": "for threat modeling purposes" },
+        { "code": "G30.x", "name": "Alzheimer's Disease", "mechanism": "Memantine indication", "qualifier": "for threat modeling purposes" },
+        { "name": "GRIN Disorder Encephalopathies", "mechanism": "GRIN1/2A/2B loss-of-function: DEE, intellectual disability, epilepsy", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "High. NMDA receptors gate synaptic plasticity underlying motor learning encoded by BCI feedback loops. Ketamine alters EEG power spectral density (increased gamma, decreased delta) in patterns measurable by BCI. Adversarial neurostimulation targeting coincidence-detection windows could theoretically disrupt LTP encoding.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "ampa",
+      "name": "AMPA Receptors",
+      "type": "ionotropic",
+      "ligand": "glutamate",
+      "parent_neurotransmitter": "glutamate",
+      "gene_family": "GRIA",
+      "subunits": [
+        { "name": "GluA1", "gene": "GRIA1", "ncbi_gene_id": "2890", "notes": "Both flip/flop variants; flip desensitizes slower" },
+        { "name": "GluA2", "gene": "GRIA2", "ncbi_gene_id": "2891", "notes": "Critical R/G editing site (unedited = Ca2+ permeable)" },
+        { "name": "GluA3", "gene": "GRIA3", "ncbi_gene_id": "2892", "notes": "X-linked" },
+        { "name": "GluA4", "gene": "GRIA4", "ncbi_gene_id": "2893", "notes": "High in cerebellar auditory brainstem" }
+      ],
+      "ion_selectivity": "Na+, K+ (Ca2+ permeable if GluA2 unedited)",
+      "activation_requirements": ["Glutamate binding"],
+      "signaling_mechanism": "Ionotropic; tetrameric. Ca2+ permeability determined by GluA2 RNA editing at Q/R site (codon 607). Edited GluA2 (R form, >99% adult brain) renders receptor Ca2+-impermeable. Flip variants desensitize slower than flop variants.",
+      "dependency_chain": [
+        "RNA editing by ADAR2 (ADARB1) at GluA2 Q607R site — near-universal in adult brain",
+        "TARPs (e.g., stargazin/CACNG2) required for membrane trafficking and gating",
+        "PICK1, GRIP proteins regulate surface expression and recycling"
+      ],
+      "brain_regions": ["hippocampus (GluA1/GluA2 predominant)", "cerebral cortex", "cerebellum (GluA4 in Purkinje/granule cells)", "striatum"],
+      "function": "Fast excitatory synaptic transmission; primary mediator of depolarization at excitatory synapses; AMPA receptor insertion drives LTP expression",
+      "pharmacological_agents": [
+        { "name": "NBQX", "action": "antagonist" },
+        { "name": "CNQX", "action": "antagonist" },
+        { "name": "Perampanel", "action": "antagonist", "notes": "FDA-approved antiepileptic" },
+        { "name": "CX614", "action": "positive allosteric modulator (AMPAkine)" },
+        { "name": "Aniracetam", "action": "positive allosteric modulator (AMPAkine)", "notes": "Cognitive enhancement research" }
+      ],
+      "dsm_conditions": [
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "Reduced GluA1/GluA2 in DLPFC", "qualifier": "for threat modeling purposes" },
+        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "AMPA/NMDA ratio hypothesis", "qualifier": "for threat modeling purposes" },
+        { "code": "G40.x", "name": "Epilepsy", "mechanism": "Perampanel indication", "qualifier": "for threat modeling purposes" },
+        { "name": "ALS", "mechanism": "GluA2 under-editing in motor neurons", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate-High. AMPA receptors mediate the fast depolarization component of ERPs measurable in EEG. AMPAkines have been explored to enhance BCI signal-to-noise during motor imagery tasks. Flip/flop ratio affects temporal resolution of neural coding.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "kainate",
+      "name": "Kainate Receptors",
+      "type": "ionotropic",
+      "ligand": "glutamate",
+      "parent_neurotransmitter": "glutamate",
+      "gene_family": "GRIK",
+      "subunits": [
+        { "name": "GluK1", "gene": "GRIK1", "ncbi_gene_id": "2897", "notes": "Functional homomers; epilepsy/pain" },
+        { "name": "GluK2", "gene": "GRIK2", "ncbi_gene_id": "2898", "notes": "Most abundant KAR subunit; epilepsy" },
+        { "name": "GluK3", "gene": "GRIK3", "ncbi_gene_id": "2899", "notes": "Dentate gyrus granule cells" },
+        { "name": "GluK4", "gene": "GRIK4", "ncbi_gene_id": "2900", "notes": "CA3 pyramidal neurons; obligate heteromer" },
+        { "name": "GluK5", "gene": "GRIK5", "ncbi_gene_id": "2901", "notes": "Obligate heteromer with GluK1-3" }
+      ],
+      "ion_selectivity": "Na+, K+, Ca2+ (GluK1-3 homomers Ca2+ permeable if unedited)",
+      "activation_requirements": ["Kainate/glutamate binding"],
+      "signaling_mechanism": "Dual role: ionotropic (fast excitation, Na+/K+/Ca2+ permeable) and metabotropic-like (presynaptic modulation via Gq/Gi signaling, PTX-sensitive G-protein). Presynaptically reduce GABA release in hippocampus (pro-epileptic).",
+      "brain_regions": ["hippocampus (GluK2/GluK5 widespread; GluK3 dentate gyrus; GluK4 CA3)", "amygdala", "olfactory bulb", "cerebellum (early development)", "cerebral cortex"],
+      "function": "Presynaptic modulation of glutamate and GABA release; mossy fiber LTP in CA3; regulation of network excitability",
+      "pharmacological_agents": [
+        { "name": "LY293558", "action": "antagonist (GluK1/AMPA)" },
+        { "name": "UBP302", "action": "GluK1-selective antagonist" },
+        { "name": "NS1209", "action": "antagonist", "notes": "Phase II trial for status epilepticus" },
+        { "name": "Kainate", "action": "agonist", "notes": "Tool compound; neurotoxic at high doses" }
+      ],
+      "dsm_conditions": [
+        { "code": "G40.x", "name": "Epilepsy", "mechanism": "GluK1, GluK2 mutations — focal, generalized", "qualifier": "for threat modeling purposes" },
+        { "name": "Intellectual Disability", "mechanism": "GluK2 mutations (X-linked)", "qualifier": "for threat modeling purposes" },
+        { "code": "F31.x", "name": "Bipolar Disorder", "mechanism": "GluK4/GluK5 linkage studies", "qualifier": "for threat modeling purposes" },
+        { "name": "Chronic Pain", "mechanism": "GluK1", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Low-moderate. Kainate receptor activation alters hippocampal theta oscillations detectable in intracranial EEG; relevant to memory BCI applications.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "mglur",
+      "name": "Metabotropic Glutamate Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class C GPCR",
+      "ligand": "glutamate",
+      "parent_neurotransmitter": "glutamate",
+      "gene_family": "GRM",
+      "subunits": [
+        { "name": "mGluR1", "gene": "GRM1", "group": "I", "g_protein": "Gq/11", "expression": "Cerebellum, hippocampus, substantia nigra" },
+        { "name": "mGluR5", "gene": "GRM5", "group": "I", "g_protein": "Gq/11", "expression": "Hippocampus, amygdala, striatum, NAc, dorsal horn" },
+        { "name": "mGluR2", "gene": "GRM2", "group": "II", "g_protein": "Gi/o", "expression": "Presynaptic; cerebral cortex, hippocampus" },
+        { "name": "mGluR3", "gene": "GRM3", "group": "II", "g_protein": "Gi/o", "expression": "Pre- and postsynaptic; glia; cortex, hippocampus" },
+        { "name": "mGluR4", "gene": "GRM4", "group": "III", "g_protein": "Gi/o", "expression": "Presynaptic; cerebellum, striatum, olfactory bulb" },
+        { "name": "mGluR6", "gene": "GRM6", "group": "III", "g_protein": "Gi/o", "expression": "Retinal ON bipolar cells (highly restricted)" },
+        { "name": "mGluR7", "gene": "GRM7", "group": "III", "g_protein": "Gi/o", "expression": "Presynaptic; hippocampus, amygdala, hypothalamus" },
+        { "name": "mGluR8", "gene": "GRM8", "group": "III", "g_protein": "Gi/o", "expression": "Presynaptic; olfactory bulb, lateral nucleus amygdala" }
+      ],
+      "signaling_mechanism": "Group I (GRM1, GRM5): Gq/11 → PLC → IP3 + DAG → Ca2+ release from ER + PKC activation. Postsynaptic; amplify NMDA responses. Groups II/III (GRM2-4, GRM6-8): Gi/o → inhibit adenylyl cyclase → reduced cAMP. Predominantly presynaptic autoreceptors; reduce glutamate release.",
+      "brain_regions": ["cerebral cortex", "hippocampus", "cerebellum", "striatum", "amygdala", "substantia nigra", "olfactory bulb"],
+      "function": "Group I: postsynaptic amplification of excitatory signaling, synaptic plasticity. Groups II/III: presynaptic autoreceptors reducing glutamate release.",
+      "pharmacological_agents": [
+        { "name": "MPEP", "action": "mGluR5 antagonist", "notes": "Research" },
+        { "name": "MTEP", "action": "mGluR5 antagonist", "notes": "Research" },
+        { "name": "Mavoglurant", "action": "mGluR5 antagonist", "notes": "Fragile X clinical trials" },
+        { "name": "Basimglurant", "action": "mGluR5 antagonist", "notes": "Fragile X clinical trials" },
+        { "name": "LY354740", "action": "mGluR2/3 agonist" },
+        { "name": "Pomaglumetad methionil", "action": "mGluR2/3 agonist", "notes": "Schizophrenia trials — failed Phase III" },
+        { "name": "JNJ16259685", "action": "mGluR1 antagonist", "notes": "Research" }
+      ],
+      "dsm_conditions": [
+        { "name": "Fragile X Syndrome/Autism", "mechanism": "mGluR5 overactivation; Bear mGluR theory", "qualifier": "for threat modeling purposes" },
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "mGluR2/3 target", "qualifier": "for threat modeling purposes" },
+        { "name": "Anxiety Disorders", "mechanism": "mGluR5, mGluR7", "qualifier": "for threat modeling purposes" },
+        { "name": "Addiction/Craving", "mechanism": "mGluR5", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate. mGluR5 modulates synaptic plasticity at theta-burst intervals used in TMS-BCI protocols. mGluR2/3 agonism reduces signal-to-noise in glutamatergic readout.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "gaba_a",
+      "name": "GABA-A Receptors",
+      "type": "ionotropic",
+      "superfamily": "Cys-loop",
+      "ligand": "GABA",
+      "parent_neurotransmitter": "GABA",
+      "gene_family": "GABR",
+      "subunits": [
+        { "name": "alpha1", "gene": "GABRA1", "class": "alpha", "notes": "Most widespread; BZD-sensitive" },
+        { "name": "alpha2", "gene": "GABRA2", "class": "alpha", "notes": "Limbic; anxiolytic-relevant; BZD-sensitive" },
+        { "name": "alpha3", "gene": "GABRA3", "class": "alpha", "notes": "BZD-sensitive" },
+        { "name": "alpha4", "gene": "GABRA4", "class": "alpha", "notes": "Dentate gyrus, thalamus; BZD-insensitive; tonic inhibition" },
+        { "name": "alpha5", "gene": "GABRA5", "class": "alpha", "notes": "Hippocampus (extrasynaptic); memory-relevant; BZD-sensitive" },
+        { "name": "alpha6", "gene": "GABRA6", "class": "alpha", "notes": "Cerebellar granule cells exclusively; BZD-insensitive" },
+        { "name": "beta1", "gene": "GABRB1", "class": "beta", "notes": "Required in all functional receptors" },
+        { "name": "beta2", "gene": "GABRB2", "class": "beta", "notes": "Required in all functional receptors" },
+        { "name": "beta3", "gene": "GABRB3", "class": "beta", "notes": "Required in all functional receptors" },
+        { "name": "gamma1", "gene": "GABRG1", "class": "gamma" },
+        { "name": "gamma2", "gene": "GABRG2", "class": "gamma", "notes": "Most abundant; required for synaptic targeting" },
+        { "name": "gamma3", "gene": "GABRG3", "class": "gamma" },
+        { "name": "delta", "gene": "GABRD", "class": "delta", "notes": "Extrasynaptic only; tonic inhibition" },
+        { "name": "epsilon", "gene": "GABRE", "class": "epsilon", "notes": "Expressed in hypothalamus" },
+        { "name": "pi", "gene": "GABRP", "class": "pi", "notes": "Uterus, limited CNS" },
+        { "name": "theta", "gene": "GABRQ", "class": "theta", "notes": "Limbic system" },
+        { "name": "rho1", "gene": "GABRR1", "class": "rho", "notes": "Retina (historically GABA-C); BZD/barbiturate insensitive" },
+        { "name": "rho2", "gene": "GABRR2", "class": "rho" },
+        { "name": "rho3", "gene": "GABRR3", "class": "rho" }
+      ],
+      "most_common_isoform": "alpha1-beta2-gamma2 (~43% of all GABA-A receptors)",
+      "ion_selectivity": "Cl- (hyperpolarizing in adults; depolarizing in early development due to KCC2/NKCC1 ratio)",
+      "signaling_mechanism": "Pentameric Cl- channel. Cl- influx → hyperpolarization → reduced firing probability. Multiple allosteric sites: BZD site (alpha+/gamma- interface), barbiturate site (beta TM domain), neurosteroid site (intramembrane alpha/beta), ethanol site (TM2-3 linker), picrotoxin site (channel pore).",
+      "allosteric_sites": [
+        { "name": "Benzodiazepine site", "location": "alpha+/gamma- interface", "mechanism": "PAM; increases Cl- channel open frequency", "requirements": "alpha1,2,3, or 5 + gamma2 subunit" },
+        { "name": "Barbiturate site", "location": "beta subunit TM domain", "mechanism": "Increases channel open duration; at high doses, directly activates" },
+        { "name": "Neurosteroid site", "location": "Intramembrane alpha/beta subunits", "mechanism": "Potentiated by allopregnanolone (ALLO), THDOC" },
+        { "name": "Ethanol site", "location": "TM2-3 linker of alpha/beta subunits" },
+        { "name": "Picrotoxin site", "location": "Channel pore", "mechanism": "Non-competitive antagonist" }
+      ],
+      "dependency_chain": [
+        "KCC2 (SLC12A5) extrusion of Cl- maintains hyperpolarizing gradient in adults; loss causes excitatory GABA",
+        "NKCC1 (SLC12A2) imports Cl- in immature neurons; targeted by bumetanide",
+        "Gephyrin scaffold protein required for synaptic clustering",
+        "GABARAP proteins required for trafficking"
+      ],
+      "brain_regions": [
+        "cortex (alpha1 most widespread)",
+        "hippocampus (alpha2 limbic; alpha5 extrasynaptic)",
+        "thalamus (alpha1, alpha4)",
+        "cerebellum (alpha6 granule cells exclusively)",
+        "dentate gyrus (alpha4, delta — tonic inhibition)"
+      ],
+      "function": "Primary fast inhibitory neurotransmission; sets E/I balance; multiple allosteric modulation sites for pharmacological intervention",
+      "pharmacological_agents": [
+        { "name": "Diazepam", "action": "benzodiazepine PAM" },
+        { "name": "Lorazepam", "action": "benzodiazepine PAM" },
+        { "name": "Clonazepam", "action": "benzodiazepine PAM" },
+        { "name": "Zolpidem", "action": "alpha1-selective PAM (Z-drug)", "notes": "Sleep" },
+        { "name": "Zopiclone", "action": "Z-drug PAM", "notes": "Sleep" },
+        { "name": "Phenobarbital", "action": "barbiturate", "notes": "Antiepileptic" },
+        { "name": "Brexanolone", "action": "neurosteroid", "notes": "FDA-approved postpartum depression" },
+        { "name": "Ganaxolone", "action": "neurosteroid", "notes": "FDA-approved for CDKL5 deficiency disorder" },
+        { "name": "Flumazenil", "action": "BZD antagonist", "notes": "Reversal agent" },
+        { "name": "Picrotoxin", "action": "channel blocker" }
+      ],
+      "dsm_conditions": [
+        { "name": "Anxiety Disorders", "mechanism": "alpha2 subunit", "qualifier": "for threat modeling purposes" },
+        { "name": "Insomnia", "mechanism": "alpha1 subunit", "qualifier": "for threat modeling purposes" },
+        { "code": "G40.x", "name": "Epilepsy", "mechanism": "GABRA1/B2/G2 mutations — Dravet syndrome, GEFS+", "qualifier": "for threat modeling purposes" },
+        { "code": "F10.x", "name": "Alcohol Use Disorder", "mechanism": "Ethanol potentiation", "qualifier": "for threat modeling purposes" },
+        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "Allopregnanolone/brexanolone", "qualifier": "for threat modeling purposes" },
+        { "name": "CDKL5 Deficiency Disorder", "mechanism": "Ganaxolone indication", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "High. GABA-A tone sets the E/I balance measurable as EEG oscillatory power (beta, alpha bands). Benzodiazepines profoundly alter EEG signatures used by BCI decoders. Neurosteroid modulation affects sleep-stage EEG patterns used in closed-loop neurostimulation. GABA-A is primary target of most anesthetic agents that confound intraoperative neural recording.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "gaba_b",
+      "name": "GABA-B Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class C GPCR",
+      "ligand": "GABA",
+      "parent_neurotransmitter": "GABA",
+      "gene_family": "GABBR",
+      "subunits": [
+        { "name": "GABA-B1", "gene": "GABBR1", "ncbi_gene_id": "2550", "notes": "Isoforms 1a (presynaptic, sushi domains, APP-interacting) and 1b (postsynaptic, dendritic). Chromosome 6p21.3 (HLA region)" },
+        { "name": "GABA-B2", "gene": "GABBR2", "ncbi_gene_id": "9568", "notes": "Chromosome 9q22. Required for obligate heterodimer" }
+      ],
+      "obligate_heterodimer": true,
+      "g_protein": "Gi/o",
+      "signaling_mechanism": "Gi/o coupling → inhibition of adenylyl cyclase + activation of GIRK (Kir3) K+ channels (postsynaptic hyperpolarization) + inhibition of voltage-gated Ca2+ channels (Cav2.1, Cav2.2; reduces neurotransmitter release presynaptically).",
+      "brain_regions": ["limbic system", "thalamus", "cerebral cortex", "hippocampus", "cerebellum"],
+      "function": "Slow inhibitory neurotransmission; presynaptic auto- and heteroreceptor modulation; postsynaptic hyperpolarization via GIRK channels",
+      "pharmacological_agents": [
+        { "name": "Baclofen", "action": "agonist", "notes": "FDA-approved muscle relaxant; alcohol use disorder adjunct" },
+        { "name": "CGP55845", "action": "antagonist", "notes": "Research tool" },
+        { "name": "SCH50911", "action": "antagonist", "notes": "Research tool" },
+        { "name": "GS39783", "action": "PAM", "notes": "In development" },
+        { "name": "BHFF", "action": "PAM", "notes": "In development" }
+      ],
+      "dsm_conditions": [
+        { "name": "Muscle Spasticity", "mechanism": "Intrathecal baclofen", "qualifier": "for threat modeling purposes" },
+        { "code": "F10.x", "name": "Alcohol Use Disorder", "mechanism": "GABA-B upregulation hypothesis", "qualifier": "for threat modeling purposes" },
+        { "name": "Anxiety", "mechanism": "GABA-B modulation", "qualifier": "for threat modeling purposes" },
+        { "code": "G40.x", "name": "Epilepsy", "mechanism": "GABA-B deficiency", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate. Presynaptic GABA-B autoreceptors and heteroreceptors set gain on glutamatergic and GABAergic transmission; relevant to BCI calibration stability over long sessions.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "nachr",
+      "name": "Nicotinic Acetylcholine Receptors",
+      "type": "ionotropic",
+      "superfamily": "Cys-loop",
+      "ligand": "acetylcholine",
+      "parent_neurotransmitter": "acetylcholine",
+      "gene_family": "CHRNA/CHRNB",
+      "subunits": [
+        { "name": "alpha2", "gene": "CHRNA2", "ncbi_gene_id": "1135" },
+        { "name": "alpha3", "gene": "CHRNA3", "ncbi_gene_id": "1136", "notes": "Autonomic ganglia primarily" },
+        { "name": "alpha4", "gene": "CHRNA4", "ncbi_gene_id": "1137", "notes": "Most abundant CNS subunit" },
+        { "name": "alpha5", "gene": "CHRNA5", "ncbi_gene_id": "1138", "notes": "Accessory subunit" },
+        { "name": "alpha6", "gene": "CHRNA6", "ncbi_gene_id": "8973", "notes": "Dopaminergic terminals" },
+        { "name": "alpha7", "gene": "CHRNA7", "ncbi_gene_id": "1139", "notes": "Homomeric; high Ca2+ permeability" },
+        { "name": "alpha9", "gene": "CHRNA9", "ncbi_gene_id": "55584", "notes": "Cochlear hair cells" },
+        { "name": "alpha10", "gene": "CHRNA10", "ncbi_gene_id": "57053", "notes": "Cochlear; auditory" },
+        { "name": "beta2", "gene": "CHRNB2", "ncbi_gene_id": "1141", "notes": "Most abundant CNS beta subunit" },
+        { "name": "beta3", "gene": "CHRNB3", "ncbi_gene_id": "1142", "notes": "Dopaminergic" },
+        { "name": "beta4", "gene": "CHRNB4", "ncbi_gene_id": "1143", "notes": "Autonomic, habenula" }
+      ],
+      "key_brain_subtypes": [
+        { "name": "alpha4-beta2", "composition": "(CHRNA4)2/(CHRNB2)3 or (CHRNA4)3/(CHRNB2)2", "notes": "Most abundant CNS nAChR; high-affinity nicotine binding site; cortex, thalamus, striatum" },
+        { "name": "alpha7", "composition": "(CHRNA7)5 homomeric pentamer", "notes": "High Ca2+ permeability (~NMDA); rapid desensitization; hippocampus, cortex, thalamus; cholinergic anti-inflammatory pathway" }
+      ],
+      "ion_selectivity": "Na+, K+, Ca2+ (non-selective cation)",
+      "signaling_mechanism": "Pentameric Cys-loop receptor. Ligand binding opens cation channel → depolarization. alpha7: high Ca2+ conductance (comparable to NMDA) and fast desensitization. alpha4-beta2: slow, sustained excitation; slower desensitization.",
+      "brain_regions": ["cortex", "thalamus", "striatum", "hippocampus", "basal forebrain", "midbrain dopaminergic neurons (alpha6)"],
+      "function": "Fast excitatory cholinergic neurotransmission; modulation of attention, arousal, and cognitive function; presynaptic facilitation of neurotransmitter release",
+      "pharmacological_agents": [
+        { "name": "Nicotine", "action": "non-selective agonist" },
+        { "name": "Varenicline", "action": "alpha4-beta2 partial agonist", "notes": "FDA-approved smoking cessation" },
+        { "name": "Cytisine", "action": "alpha4-beta2 partial agonist" },
+        { "name": "GTS-21", "action": "alpha7-selective agonist", "notes": "Cognitive enhancement trials" },
+        { "name": "PHA-543613", "action": "alpha7-selective agonist", "notes": "Cognitive enhancement trials" },
+        { "name": "PNU-120596", "action": "alpha7 PAM", "notes": "Research" },
+        { "name": "Mecamylamine", "action": "non-selective CNS antagonist" },
+        { "name": "alpha-Bungarotoxin", "action": "alpha7-selective antagonist", "notes": "Irreversible" }
+      ],
+      "dsm_conditions": [
+        { "code": "F17.x", "name": "Nicotine Use Disorder", "mechanism": "alpha4-beta2 (CHRNA4/CHRNB2)", "qualifier": "for threat modeling purposes" },
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "alpha7 CHRNA7 on chr 15q14 — schizophrenia susceptibility locus; reduced alpha7 in postmortem brains", "qualifier": "for threat modeling purposes" },
+        { "name": "ADHD", "mechanism": "Nicotinic modulation of attention", "qualifier": "for threat modeling purposes" },
+        { "code": "G30.x", "name": "Alzheimer's Disease", "mechanism": "Cholinergic degeneration", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "High. alpha7 nAChR modulates hippocampal theta/gamma coupling measurable in EEG; relevant to memory and attention BCIs. Nicotinic tone alters arousal-related EEG signatures (alpha suppression, gamma enhancement) used in closed-loop neurofeedback. Cholinergic depletion in Alzheimer's is a primary target for BCI-augmented cognitive neuroprosthetics.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "machr",
+      "name": "Muscarinic Acetylcholine Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class A GPCR",
+      "ligand": "acetylcholine",
+      "parent_neurotransmitter": "acetylcholine",
+      "gene_family": "CHRM",
+      "subunits": [
+        { "name": "M1", "gene": "CHRM1", "g_protein": "Gq/11", "expression": "Cortex (60% of total mAChR), hippocampus, striatum" },
+        { "name": "M2", "gene": "CHRM2", "g_protein": "Gi/o", "expression": "Cortex, hippocampus, heart; presynaptic autoreceptor" },
+        { "name": "M3", "gene": "CHRM3", "g_protein": "Gq/11", "expression": "Widely expressed; smooth muscle, cortex" },
+        { "name": "M4", "gene": "CHRM4", "g_protein": "Gi/o", "expression": "Striatum (high), cortex" },
+        { "name": "M5", "gene": "CHRM5", "g_protein": "Gq/11", "expression": "Dopaminergic neurons of substantia nigra (sparse)" }
+      ],
+      "signaling_mechanism": "M1, M3, M5 (odd-numbered): Gq/11 → PLC → IP3 + DAG → Ca2+ mobilization + PKC. M2, M4 (even-numbered): Gi/o → inhibit adenylyl cyclase + activate GIRK channels → hyperpolarization.",
+      "dependency_chain": [
+        "Acetylcholine synthesized by ChAT (CHAT gene)",
+        "Degraded by AChE (ACHE) and BuChE (BCHE)",
+        "CHRM1/CHRM3 mRNA significantly reduced in Alzheimer's disease cortex/hippocampus"
+      ],
+      "brain_regions": ["cerebral cortex (M1 dominant)", "hippocampus", "striatum (M4 high)", "substantia nigra (M5)"],
+      "function": "Modulation of cortical excitability, arousal, memory encoding; M1 gates cortical desynchronization; M2 presynaptic autoreceptor regulation",
+      "pharmacological_agents": [
+        { "name": "Atropine", "action": "non-selective antagonist" },
+        { "name": "Scopolamine", "action": "non-selective antagonist", "notes": "Cognitive impairment model tool" },
+        { "name": "BQCA", "action": "M1-selective PAM" },
+        { "name": "TAK-071", "action": "M1-selective PAM", "notes": "Alzheimer's clinical trial" },
+        { "name": "Methoctramine", "action": "M2-selective antagonist", "notes": "Research" },
+        { "name": "VU0152100", "action": "M4-selective PAM", "notes": "Schizophrenia research" },
+        { "name": "Donepezil", "action": "AChE inhibitor (indirect muscarinic agonist)", "notes": "FDA-approved Alzheimer's" },
+        { "name": "Rivastigmine", "action": "AChE inhibitor", "notes": "FDA-approved Alzheimer's" },
+        { "name": "Galantamine", "action": "AChE inhibitor", "notes": "FDA-approved Alzheimer's" },
+        { "name": "Xanomeline+Trospium", "action": "M1/M4 agonist + peripheral antagonist", "notes": "FDA-approved 2024 for schizophrenia" }
+      ],
+      "dsm_conditions": [
+        { "code": "G30.x", "name": "Alzheimer's Disease", "mechanism": "M1 loss — primary target; CHRM1/CHRM3 reduced", "qualifier": "for threat modeling purposes" },
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "M4 PAM as antipsychotic strategy; xanomeline+trospium FDA-approved 2024", "qualifier": "for threat modeling purposes" },
+        { "code": "F31.x", "name": "Bipolar Disorder", "mechanism": "M2 supersensitivity hypothesis", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "High. Muscarinic tone (particularly M1) gates cortical EEG desynchronization and arousal. Scopolamine produces EEG changes (increased theta, decreased alpha) mimicking early Alzheimer's — a confound for BCI systems relying on alpha-band motor imagery. M1 agonism is a primary target for cognitive neuroprosthetics.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class A GPCR",
+      "ligand": "dopamine",
+      "parent_neurotransmitter": "dopamine",
+      "gene_family": "DRD",
+      "subunits": [
+        { "name": "D1", "gene": "DRD1", "class": "D1-like", "g_protein": "Gs", "expression": "Striatum, NAc, cortex, thalamus, amygdala, SNr" },
+        { "name": "D5", "gene": "DRD5", "class": "D1-like", "g_protein": "Gs", "expression": "Hippocampus, hypothalamus, cortex (low abundance)" },
+        { "name": "D2", "gene": "DRD2", "class": "D2-like", "g_protein": "Gi/o", "expression": "Striatum, NAc, VTA, cortex; presynaptic autoreceptor" },
+        { "name": "D3", "gene": "DRD3", "class": "D2-like", "g_protein": "Gi/o", "expression": "NAc, limbic striatum, VTA, hippocampus" },
+        { "name": "D4", "gene": "DRD4", "class": "D2-like", "g_protein": "Gi/o", "expression": "Frontal cortex, hippocampus, retina, basal ganglia" }
+      ],
+      "signaling_mechanism": "D1-like (DRD1, DRD5): Gs → adenylyl cyclase activation → cAMP up → PKA → DARPP-32 phosphorylation, AMPA receptor trafficking, transcription (FosB, CREB). D2-like (DRD2, DRD3, DRD4): Gi/o → adenylyl cyclase inhibition → cAMP down + GIRK K+ channel activation + beta-arrestin 2 signaling (D2).",
+      "d2_splice_variants": "D2-short (presynaptic autoreceptor function); D2-long (postsynaptic); differ by 29 amino acids in 3rd intracellular loop",
+      "dependency_chain": [
+        "Dopamine synthesis: tyrosine → L-DOPA (TH gene) → dopamine (DDC gene)",
+        "Packaged by VMAT2 (SLC18A2)",
+        "Degraded by MAO-A/MAO-B (MAOA/MAOB), COMT",
+        "Reuptaken by DAT (SLC6A3)"
+      ],
+      "brain_regions": ["striatum", "nucleus accumbens", "VTA", "substantia nigra", "prefrontal cortex", "hippocampus", "amygdala"],
+      "function": "Reward processing, motor control, motivation, working memory, reinforcement learning",
+      "pharmacological_agents": [
+        { "name": "SKF-38393", "action": "D1/D5 agonist", "notes": "Research" },
+        { "name": "Haloperidol", "action": "D2 antagonist (antipsychotic)" },
+        { "name": "Risperidone", "action": "D2 antagonist (antipsychotic)" },
+        { "name": "Olanzapine", "action": "D2 antagonist (antipsychotic)" },
+        { "name": "Clozapine", "action": "D2 antagonist (antipsychotic)" },
+        { "name": "Pramipexole", "action": "D2/D3 agonist", "notes": "Parkinson's disease" },
+        { "name": "Ropinirole", "action": "D2/D3 agonist", "notes": "Parkinson's disease" },
+        { "name": "Aripiprazole", "action": "partial D2 agonist", "notes": "Antipsychotic/antidepressant" },
+        { "name": "Brexpiprazole", "action": "partial D2 agonist" },
+        { "name": "Cariprazine", "action": "partial D2 agonist" },
+        { "name": "L-745,870", "action": "D4-selective antagonist", "notes": "Research — failed schizophrenia trials" },
+        { "name": "Entacapone", "action": "COMT inhibitor", "notes": "Parkinson's" }
+      ],
+      "dsm_conditions": [
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "D2 hyperdopaminergia in mesolimbic; D1 hypodopaminergia in PFC", "qualifier": "for threat modeling purposes" },
+        { "code": "G20.x", "name": "Parkinson's Disease", "mechanism": "Nigrostriatal D2 loss", "qualifier": "for threat modeling purposes" },
+        { "name": "ADHD", "mechanism": "Mesocortical DA; DRD4 VNTR polymorphism", "qualifier": "for threat modeling purposes" },
+        { "name": "Addiction", "mechanism": "Mesolimbic D2/D3", "qualifier": "for threat modeling purposes" },
+        { "code": "F31.x", "name": "Bipolar Disorder", "mechanism": "Dopamine dysregulation", "qualifier": "for threat modeling purposes" },
+        { "name": "Tourette Syndrome", "mechanism": "D2 antagonism therapeutic", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "High. Dopamine gates motor cortex excitability and reward-related learning. D2 receptor occupancy by antipsychotics reduces beta-band activity in motor cortex — major confound for motor BCI users. Dopaminergic state modulates P300 amplitude (BCI control signal) and sensorimotor mu rhythm. Closed-loop DBS of basal ganglia directly modulates dopaminergic circuits (DBS for Parkinson's).",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "serotonin",
+      "name": "Serotonin Receptors",
+      "type": "mixed",
+      "ligand": "serotonin (5-HT)",
+      "parent_neurotransmitter": "serotonin",
+      "gene_family": "HTR",
+      "subunits": [
+        { "name": "5-HT1A", "gene": "HTR1A", "type": "GPCR", "g_protein": "Gi/o", "expression": "Cortex, hippocampus, raphe, amygdala, septum" },
+        { "name": "5-HT1B", "gene": "HTR1B", "type": "GPCR", "g_protein": "Gi/o", "expression": "Basal ganglia, cortex; presynaptic autoreceptor" },
+        { "name": "5-HT1D", "gene": "HTR1D", "type": "GPCR", "g_protein": "Gi/o", "expression": "Brainstem, cortex; migraine-relevant" },
+        { "name": "5-HT1E", "gene": "HTR1E", "type": "GPCR", "g_protein": "Gi/o", "expression": "Cortex, hippocampus (limited data)" },
+        { "name": "5-HT1F", "gene": "HTR1F", "type": "GPCR", "g_protein": "Gi/o", "expression": "Cortex, brainstem" },
+        { "name": "5-HT2A", "gene": "HTR2A", "type": "GPCR", "g_protein": "Gq/11", "expression": "Cortex (most abundant 5-HT receptor), amygdala" },
+        { "name": "5-HT2B", "gene": "HTR2B", "type": "GPCR", "g_protein": "Gq/11", "expression": "Predominantly peripheral (cardiac valves); limited CNS" },
+        { "name": "5-HT2C", "gene": "HTR2C", "type": "GPCR", "g_protein": "Gq/11", "expression": "Choroid plexus, limbic system, hypothalamus, cortex" },
+        { "name": "5-HT3A", "gene": "HTR3A", "type": "ionotropic", "expression": "Cortex, hippocampus, amygdala; GABAergic interneurons", "notes": "Required for functional 5-HT3; can form homomers" },
+        { "name": "5-HT3B", "gene": "HTR3B", "type": "ionotropic", "notes": "Modifies 3A gating; CNS + GI" },
+        { "name": "5-HT3C", "gene": "HTR3C", "type": "ionotropic", "notes": "Modifies 3A; CNS + GI" },
+        { "name": "5-HT3D", "gene": "HTR3D", "type": "ionotropic", "notes": "Accessory; predominantly GI" },
+        { "name": "5-HT3E", "gene": "HTR3E", "type": "ionotropic", "notes": "GI only (not CNS)" },
+        { "name": "5-HT4", "gene": "HTR4", "type": "GPCR", "g_protein": "Gs", "expression": "Striatum, hippocampus, cortex" },
+        { "name": "5-HT5A", "gene": "HTR5A", "type": "GPCR", "g_protein": "Gi/o (inferred)", "expression": "Cortex, hippocampus, cerebellum" },
+        { "name": "5-HT6", "gene": "HTR6", "type": "GPCR", "g_protein": "Gs", "expression": "Striatum, olfactory tubercle, cortex" },
+        { "name": "5-HT7", "gene": "HTR7", "type": "GPCR", "g_protein": "Gs", "expression": "Hippocampus, thalamus, cortex" }
+      ],
+      "ht3_note": "The only ionotropic serotonin receptor. Pentameric Cys-loop structure. Functional receptors require 5-HT3A subunit. HTR3D and HTR3E are predominantly or exclusively GI tract.",
+      "dependency_chain": [
+        "Serotonin synthesis: tryptophan → 5-HTP (TPH2 in brain; TPH1 in gut) → serotonin (DDC)",
+        "Reuptaken by SERT (SLC6A4)",
+        "Degraded by MAO-A",
+        "Tryptophan availability from diet is rate-limiting"
+      ],
+      "brain_regions": ["raphe nuclei (source)", "cortex", "hippocampus", "amygdala", "striatum", "thalamus", "hypothalamus"],
+      "function": "Mood regulation, anxiety modulation, sleep-wake cycle, appetite, pain processing, cognitive function",
+      "pharmacological_agents": [
+        { "name": "Buspirone", "action": "5-HT1A partial agonist", "notes": "Anxiolytic" },
+        { "name": "Psilocybin", "action": "5-HT2A agonist", "notes": "Psychedelic" },
+        { "name": "LSD", "action": "5-HT2A agonist", "notes": "Psychedelic" },
+        { "name": "Fluoxetine", "action": "SSRI (SERT blocker)" },
+        { "name": "Sertraline", "action": "SSRI" },
+        { "name": "Escitalopram", "action": "SSRI" },
+        { "name": "Venlafaxine", "action": "SNRI" },
+        { "name": "Duloxetine", "action": "SNRI" },
+        { "name": "Ondansetron", "action": "5-HT3 antagonist", "notes": "Antiemetic; studied in anxiety/addiction" },
+        { "name": "Lurasidone", "action": "5-HT7 antagonist + antipsychotic" },
+        { "name": "Prucalopride", "action": "5-HT4 agonist", "notes": "Constipation; cognitive effect research" },
+        { "name": "Sumatriptan", "action": "5-HT1B/1D agonist", "notes": "Triptan; migraine" }
+      ],
+      "dsm_conditions": [
+        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "HTR1A, SLC6A4", "qualifier": "for threat modeling purposes" },
+        { "name": "Anxiety Disorders", "mechanism": "5-HT1A, 5-HT2C", "qualifier": "for threat modeling purposes" },
+        { "code": "F42.x", "name": "OCD", "mechanism": "5-HT2C, SLC6A4", "qualifier": "for threat modeling purposes" },
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "5-HT2A — target of atypical antipsychotics", "qualifier": "for threat modeling purposes" },
+        { "name": "Migraine", "mechanism": "5-HT1B/1D", "qualifier": "for threat modeling purposes" },
+        { "code": "F43.1x", "name": "PTSD", "mechanism": "SSRIs; 5-HT2A involved in fear conditioning", "qualifier": "for threat modeling purposes" },
+        { "name": "Eating Disorders", "mechanism": "5-HT2C", "qualifier": "for threat modeling purposes" },
+        { "name": "Substance Use Disorders", "mechanism": "5-HT3", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate-High. 5-HT2A is the primary target of classic psychedelics (psilocybin, LSD), which produce profound broadband EEG changes (increased gamma entropy, decreased alpha power, disrupted DMN) that are now being mapped as altered BCI decoding states. SSRIs alter ERP components (P300, N200) used in BCI paradigms over weeks. 5-HT7 modulates hippocampal theta rhythm relevant to memory BCIs.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "adrenergic",
+      "name": "Adrenergic Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class A GPCR",
+      "ligand": "norepinephrine/epinephrine",
+      "parent_neurotransmitter": "norepinephrine",
+      "gene_family": "ADRA/ADRB",
+      "subunits": [
+        { "name": "alpha1A", "gene": "ADRA1A", "g_protein": "Gq/11", "expression": "Cortex, hippocampus, cerebellum", "notes": "Postsynaptic excitatory" },
+        { "name": "alpha1B", "gene": "ADRA1B", "g_protein": "Gq/11", "expression": "Cortex, basal ganglia, brainstem" },
+        { "name": "alpha1D", "gene": "ADRA1D", "g_protein": "Gq/11", "expression": "Cortex, olfactory bulb, retina" },
+        { "name": "alpha2A", "gene": "ADRA2A", "g_protein": "Gi/o", "expression": "Cortex, locus coeruleus; presynaptic autoreceptor", "notes": "Primary presynaptic NE regulator" },
+        { "name": "alpha2B", "gene": "ADRA2B", "g_protein": "Gi/o", "expression": "Thalamus, cortex, peripheral" },
+        { "name": "alpha2C", "gene": "ADRA2C", "g_protein": "Gi/o", "expression": "Striatum, hippocampus, cortex", "notes": "Modulates dopamine release" },
+        { "name": "beta1", "gene": "ADRB1", "g_protein": "Gs", "expression": "Cortex, hippocampus, cerebellum", "notes": "Neuroplasticity; learning" },
+        { "name": "beta2", "gene": "ADRB2", "g_protein": "Gs (can switch to Gi via PKA)", "expression": "Cortex, cerebellum, astrocytes", "notes": "Astrocytic glycogenolysis" },
+        { "name": "beta3", "gene": "ADRB3", "g_protein": "Gs", "expression": "Primarily adipose; limited CNS" }
+      ],
+      "signaling_mechanism": "alpha1 (ADRA1A/B/D): Gq/11 → PLC → IP3 + DAG → Ca2+ + PKC → postsynaptic excitation. alpha2 (ADRA2A/B/C): Gi/o → inhibit adenylyl cyclase → cAMP down + GIRK activation; primary presynaptic NE autoreceptor (ADRA2A dominant). beta1/2 (ADRB1/2): Gs → adenylyl cyclase → cAMP up → PKA; beta2 can switch to Gi via PKA phosphorylation (biased agonism).",
+      "dependency_chain": [
+        "NE synthesis: tyrosine → L-DOPA (TH) → dopamine (DDC) → NE (DBH gene)",
+        "Packaged by VMAT2 (SLC18A2)",
+        "Reuptaken by NET (SLC6A2)",
+        "Degraded by MAO-A/MAO-B and COMT"
+      ],
+      "brain_regions": ["locus coeruleus (source)", "cerebral cortex", "hippocampus", "thalamus", "amygdala", "cerebellum", "brainstem"],
+      "function": "Arousal, attention, stress response, working memory modulation, fight-or-flight",
+      "pharmacological_agents": [
+        { "name": "Clonidine", "action": "alpha2A agonist", "notes": "ADHD, PTSD, hypertension" },
+        { "name": "Guanfacine", "action": "alpha2A agonist", "notes": "ADHD, PTSD" },
+        { "name": "Yohimbine", "action": "alpha2 antagonist", "notes": "Anxiogenic; increases NE release" },
+        { "name": "Prazosin", "action": "alpha1 antagonist", "notes": "PTSD nightmares" },
+        { "name": "Propranolol", "action": "non-selective beta-blocker", "notes": "Performance anxiety" },
+        { "name": "Metoprolol", "action": "beta1-selective blocker" },
+        { "name": "Atomoxetine", "action": "NRI (NET blocker)", "notes": "ADHD" },
+        { "name": "Reboxetine", "action": "NRI" }
+      ],
+      "dsm_conditions": [
+        { "name": "ADHD", "mechanism": "alpha2A — guanfacine/clonidine; NET blockade", "qualifier": "for threat modeling purposes" },
+        { "code": "F43.1x", "name": "PTSD", "mechanism": "Prazosin alpha1 for nightmares; guanfacine alpha2A for hyperarousal", "qualifier": "for threat modeling purposes" },
+        { "name": "Anxiety Disorders", "mechanism": "Beta-blockers for performance anxiety; yohimbine challenge model", "qualifier": "for threat modeling purposes" },
+        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "NE component", "qualifier": "for threat modeling purposes" },
+        { "name": "Panic Disorder", "mechanism": "NE dysregulation", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate. NE (via alpha2A) modulates prefrontal cortex working memory representations; guanfacine used in ADHD BCI studies to stabilize attention signals. Beta-adrenergic activation (arousal/stress) increases EEG noise (muscle artifact, altered alpha) that degrades BCI performance. Closed-loop DBS for pain modulates NE circuits.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "opioid",
+      "name": "Opioid Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class A GPCR",
+      "ligand": "endorphins/enkephalins/dynorphins",
+      "parent_neurotransmitter": "opioid peptides",
+      "gene_family": "OPR",
+      "subunits": [
+        { "name": "mu-opioid (MOR)", "gene": "OPRM1", "common_name": "MOR-1", "g_protein": "Gi/o", "expression": "PAG, thalamus, cortex, limbic, NAc, dorsal horn" },
+        { "name": "delta-opioid (DOR)", "gene": "OPRD1", "common_name": "DOR-1", "g_protein": "Gi/o", "expression": "Cortex, NAc, amygdala, caudate, pontine nuclei" },
+        { "name": "kappa-opioid (KOR)", "gene": "OPRK1", "common_name": "KOR-1", "g_protein": "Gi/o", "expression": "Hypothalamus, VTA, NAc, amygdala, dorsal horn" },
+        { "name": "Nociceptin/OFQ (NOP)", "gene": "OPRL1", "common_name": "ORL1", "g_protein": "Gi/o", "expression": "Widespread: cortex, hippocampus, amygdala, midbrain" }
+      ],
+      "signaling_mechanism": "All four: Gi/o → inhibit adenylyl cyclase → cAMP down + activate GIRK K+ channels (hyperpolarization) + inhibit Cav2.2/Cav2.1 (reduce neurotransmitter release presynaptically). Beta-arrestin recruitment (especially OPRM1) mediates desensitization and receptor internalization.",
+      "dependency_chain": [
+        "Beta-arrestin 2 (ARRB2) mediates OPRM1 internalization and tolerance development; GRK2/3 phosphorylation initiates",
+        "RGS proteins (RGS4, RGS9-2) accelerate GTPase activity, terminate Gi signaling",
+        "PDYN (prodynorphin), PENK (proenkephalin), POMC (proopiomelanocortin) are endogenous ligand precursors",
+        "Processed by PC1/PC2 (PCSK1/PCSK2) enzymes"
+      ],
+      "endogenous_ligands": [
+        { "receptor": "MOR", "ligands": "Beta-endorphin (POMC-derived), enkephalins (PENK-derived)" },
+        { "receptor": "DOR", "ligands": "Enkephalins (PENK-derived), beta-endorphin" },
+        { "receptor": "KOR", "ligands": "Dynorphins (PDYN-derived)" },
+        { "receptor": "NOP", "ligands": "Nociceptin/orphanin FQ (PNOC-derived)" }
+      ],
+      "brain_regions": ["periaqueductal gray (PAG)", "thalamus", "cortex", "nucleus accumbens", "amygdala", "VTA", "hypothalamus", "dorsal horn"],
+      "function": "Pain modulation, reward processing, stress response, respiratory regulation, mood",
+      "pharmacological_agents": [
+        { "name": "Morphine", "action": "MOR agonist" },
+        { "name": "Oxycodone", "action": "MOR agonist" },
+        { "name": "Fentanyl", "action": "MOR agonist" },
+        { "name": "Methadone", "action": "MOR agonist" },
+        { "name": "Buprenorphine", "action": "MOR partial agonist", "notes": "Also KOR antagonist, DOR antagonist, NOP agonist" },
+        { "name": "Naloxone", "action": "antagonist (MOR > DOR > KOR)", "notes": "FDA-approved overdose reversal" },
+        { "name": "Naltrexone", "action": "antagonist", "notes": "Alcohol/opioid use disorder" },
+        { "name": "Salvinorin A", "action": "KOR agonist", "notes": "Salvia divinorum; dysphoria, hallucinations" },
+        { "name": "Aticaprant", "action": "KOR antagonist", "notes": "Phase III for MDD (JNJ-67953964)" }
+      ],
+      "dsm_conditions": [
+        { "code": "F11.x", "name": "Opioid Use Disorder", "mechanism": "OPRM1 A118G polymorphism — altered endorphin binding", "qualifier": "for threat modeling purposes" },
+        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "KOR antagonism — kappa tone mediates stress-induced dysphoria", "qualifier": "for threat modeling purposes" },
+        { "code": "F50.x", "name": "Anorexia Nervosa", "mechanism": "Opioid modulation of food reward", "qualifier": "for threat modeling purposes" },
+        { "code": "F43.1x", "name": "PTSD", "mechanism": "Endorphin hypothesis", "qualifier": "for threat modeling purposes" },
+        { "name": "Chronic Pain", "mechanism": "MOR/DOR/KOR pain pathways", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate. Opioid receptor activation alters consciousness and EEG state globally (mu rhythms desynchronize with opioid administration; high-dose opioids produce burst-suppression). Opioid-dependent patients using neural prosthetics represent a risk population. KOR modulation of dopaminergic tone in VTA affects reward-learning signals used in BCI training paradigms.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "endocannabinoid",
+      "name": "Endocannabinoid Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class A GPCR",
+      "ligand": "endocannabinoids (2-AG, anandamide)",
+      "parent_neurotransmitter": "endocannabinoids",
+      "gene_family": "CNR",
+      "subunits": [
+        { "name": "CB1", "gene": "CNR1", "notes": "Primary psychoactive target of THC; most abundant GPCR in brain" },
+        { "name": "CB2", "gene": "CNR2", "notes": "Immune cells; astroglia in brain (limited neuronal expression under normal conditions)" }
+      ],
+      "degradation_enzymes": [
+        { "name": "FAAH", "gene": "FAAH", "type": "serine hydrolase", "location": "postsynaptic", "substrate": "anandamide (AEA)" },
+        { "name": "MAGL", "gene": "MGLL", "type": "serine hydrolase", "location": "presynaptic", "substrate": "2-AG" }
+      ],
+      "g_protein": "Gi/o",
+      "signaling_mechanism": "CB1: Gi/o → inhibit adenylyl cyclase → cAMP down + inhibit Cav1/2 channels (reduce neurotransmitter release; primarily presynaptic retrograde signaling) + activate GIRK K+ channels. Operates via retrograde signaling: postsynaptic neurons synthesize 2-AG (via DAGL-alpha/DAGL-beta) or anandamide (via NAPE-PLD), which travel retrogradely to activate presynaptic CB1, suppressing further release (DSI/DSE).",
+      "dependency_chain": [
+        "2-AG synthesis: DAG → 2-AG (DAGL-alpha/DAGLB)",
+        "2-AG degradation: MAGL (primary), ABHD6, ABHD12",
+        "AEA synthesis: N-arachidonoyl phosphatidylethanolamine → AEA (NAPE-PLD)",
+        "AEA degradation: FAAH",
+        "COX-2 can also metabolize both endocannabinoids (oxylipin production)"
+      ],
+      "brain_regions": ["basal ganglia (highest CB1 density in CNS)", "cerebellum", "hippocampus", "prefrontal cortex", "amygdala", "hypothalamus", "midbrain"],
+      "function": "Retrograde synaptic signaling; gain control mechanism for synaptic plasticity; modulation of E/I balance; DSI/DSE; neuroprotection",
+      "pharmacological_agents": [
+        { "name": "THC", "action": "CB1/CB2 partial agonist" },
+        { "name": "WIN 55,212-2", "action": "full agonist", "notes": "Research" },
+        { "name": "Rimonabant", "action": "CB1 antagonist/inverse agonist", "notes": "Withdrawn due to psychiatric adverse effects (depression, suicidality)" },
+        { "name": "URB597", "action": "FAAH inhibitor", "notes": "Research" },
+        { "name": "PF-04457845", "action": "FAAH inhibitor", "notes": "PTSD Phase II" },
+        { "name": "JZL184", "action": "MAGL inhibitor", "notes": "Research" },
+        { "name": "CBD (Cannabidiol)", "action": "partial CB1 antagonist/inverse agonist; TRPV1 agonist; FAAH inhibitor", "notes": "FDA-approved (Epidiolex) for Dravet/Lennox-Gastaut syndrome" }
+      ],
+      "dsm_conditions": [
+        { "name": "Anxiety Disorders", "mechanism": "CB1 modulates fear extinction; anandamide tone in amygdala", "qualifier": "for threat modeling purposes" },
+        { "code": "F43.1x", "name": "PTSD", "mechanism": "FAAH inhibition reduces AEA degradation, reduces fear recall", "qualifier": "for threat modeling purposes" },
+        { "code": "F20.x", "name": "Schizophrenia Risk", "mechanism": "CNR1 genetic variants; heavy cannabis use increases risk via CB1 in developing brain", "qualifier": "for threat modeling purposes" },
+        { "code": "F12.x", "name": "Cannabis Use Disorder", "mechanism": "CB1 tolerance and dependence", "qualifier": "for threat modeling purposes" },
+        { "code": "G40.x", "name": "Epilepsy", "mechanism": "CBD/Epidiolex", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "High. CB1 is the most abundant GPCR in the brain. THC/cannabis use profoundly alters EEG (increased frontal theta, reduced beta coherence), degrading BCI decoding performance. The retrograde endocannabinoid system acts as a gain control mechanism for synaptic plasticity — directly relevant to BCI training and neural adaptation. FAAH genetic variants affect anandamide tone and may influence inter-individual variability in BCI performance.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "nav",
+      "name": "Voltage-Gated Sodium Channels",
+      "type": "voltage_gated_ion_channel",
+      "ligand": "voltage",
+      "ion_selectivity": "Na+",
+      "gene_family": "SCN",
+      "subunits": [
+        { "name": "Nav1.1", "gene": "SCN1A", "expression": "GABAergic interneurons (high); excitatory neurons (low)", "disease": "Dravet syndrome (haploinsufficiency), GEFS+" },
+        { "name": "Nav1.2", "gene": "SCN2A", "expression": "Excitatory neurons; axon initial segment → nodes of Ranvier", "disease": "Autism, epilepsy (GoF/LoF)" },
+        { "name": "Nav1.3", "gene": "SCN3A", "expression": "Fetal brain (high); adult brain (lower); excitatory neurons", "disease": "Pain, epilepsy" },
+        { "name": "Nav1.4", "gene": "SCN4A", "expression": "Skeletal muscle only", "disease": "Myotonia (not brain)", "brain_primary": false },
+        { "name": "Nav1.5", "gene": "SCN5A", "expression": "Cardiac; fetal brain only", "disease": "Cardiac arrhythmia (not brain)", "brain_primary": false },
+        { "name": "Nav1.6", "gene": "SCN8A", "expression": "Excitatory neurons; nodes of Ranvier (predominant); cerebellar Purkinje cells", "disease": "DEE (GoF), ataxia" },
+        { "name": "Nav1.7", "gene": "SCN9A", "expression": "DRG (primary); some CNS expression", "disease": "Pain syndromes (LoF = congenital insensitivity to pain)" },
+        { "name": "Nav1.8", "gene": "SCN10A", "expression": "DRG; peripheral pain fibers", "disease": "Pain (not brain-primary)", "brain_primary": false },
+        { "name": "Nav1.9", "gene": "SCN11A", "expression": "DRG; peripheral sensory", "disease": "Chronic pain (not brain-primary)", "brain_primary": false }
+      ],
+      "auxiliary_subunits": "Beta subunits: SCN1B, SCN2B, SCN3B, SCN4B",
+      "brain_primary_channels": ["SCN1A", "SCN2A", "SCN3A", "SCN8A"],
+      "signaling_mechanism": "Depolarization → activation gate opens → rapid Na+ influx → action potential upstroke → fast inactivation (N-type inactivation via inactivation particle) → Na+ influx stops → repolarization by K+ channels. Persistent Na+ current (INaP) from incomplete inactivation contributes to neuronal excitability.",
+      "brain_regions": ["cerebral cortex", "hippocampus", "cerebellum", "thalamus", "nodes of Ranvier throughout CNS"],
+      "function": "Action potential initiation and propagation; determines temporal precision of neural coding",
+      "pharmacological_agents": [
+        { "name": "Phenytoin", "action": "broad Nav blocker" },
+        { "name": "Carbamazepine", "action": "broad Nav blocker" },
+        { "name": "Lamotrigine", "action": "broad Nav blocker" },
+        { "name": "Lacosamide", "action": "slow inactivation enhancer" },
+        { "name": "Valproate", "action": "broad Nav blocker (among other mechanisms)" },
+        { "name": "Fenfluramine", "action": "Nav1.1 function enhancer", "notes": "FDA-approved for Dravet syndrome" },
+        { "name": "Stiripentol", "action": "Nav modulator", "notes": "Dravet adjunct" },
+        { "name": "NBI-921352", "action": "Nav1.6-selective inhibitor", "notes": "Phase III for SCN8A epilepsy" },
+        { "name": "Suzetrigine", "action": "Nav1.7-selective blocker", "notes": "FDA-approved 2025 for acute pain — first selective Nav1.7 blocker" },
+        { "name": "Lidocaine", "action": "local anesthetic (all Nav)" }
+      ],
+      "dsm_conditions": [
+        { "name": "Dravet Syndrome", "mechanism": "SCN1A haploinsufficiency — severe childhood epilepsy + autism features", "qualifier": "for threat modeling purposes" },
+        { "name": "SCN2A Epilepsy/Autism", "mechanism": "SCN2A GoF/LoF", "qualifier": "for threat modeling purposes" },
+        { "name": "SCN8A DEE", "mechanism": "SCN8A GoF — developmental epileptic encephalopathy", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate. Na+ channel dynamics determine action potential timing precision — directly constraining the temporal resolution of neural spike sorting in intracortical BCIs. SCN1A haploinsufficiency (Dravet) is increasingly managed with closed-loop neurostimulation; these patients represent an emerging BCI user population.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "cav",
+      "name": "Voltage-Gated Calcium Channels",
+      "type": "voltage_gated_ion_channel",
+      "ligand": "voltage",
+      "ion_selectivity": "Ca2+",
+      "gene_family": "CACNA1",
+      "subunits": [
+        { "name": "Cav1.1", "gene": "CACNA1S", "channel_type": "L-type", "expression": "Skeletal muscle; not brain", "disease": "Hypokalemic periodic paralysis", "brain_primary": false },
+        { "name": "Cav1.2", "gene": "CACNA1C", "channel_type": "L-type", "expression": "Cortex, hippocampus, amygdala; neuronal soma/dendrites", "disease": "Schizophrenia GWAS (strongest signal), Timothy syndrome" },
+        { "name": "Cav1.3", "gene": "CACNA1D", "channel_type": "L-type", "expression": "Cochlea, heart, midbrain DA neurons, amygdala", "disease": "ASD, ADHD" },
+        { "name": "Cav1.4", "gene": "CACNA1F", "channel_type": "L-type", "expression": "Retina (primary)", "disease": "CSNB2", "brain_primary": false },
+        { "name": "Cav2.1", "gene": "CACNA1A", "channel_type": "P/Q-type", "expression": "Presynaptic; cerebellar Purkinje cells, cortex, hippocampus", "disease": "Episodic ataxia type 2, FHM1, SCA6" },
+        { "name": "Cav2.2", "gene": "CACNA1B", "channel_type": "N-type", "expression": "Presynaptic (excitatory + inhibitory); cortex, hippocampus, DRG", "disease": "Pain (ziconotide target)" },
+        { "name": "Cav2.3", "gene": "CACNA1E", "channel_type": "R-type", "expression": "Presynaptic; hippocampus, cortex, basal ganglia", "disease": "Epilepsy, DEE" },
+        { "name": "Cav3.1", "gene": "CACNA1G", "channel_type": "T-type", "expression": "Thalamic relay neurons; Purkinje cells", "disease": "Absence epilepsy" },
+        { "name": "Cav3.2", "gene": "CACNA1H", "channel_type": "T-type", "expression": "Thalamus, hippocampus, cortex", "disease": "Absence epilepsy, childhood absence" },
+        { "name": "Cav3.3", "gene": "CACNA1I", "channel_type": "T-type", "expression": "Thalamus (reticular nucleus), cortex", "disease": "Sleep spindles, absence epilepsy" }
+      ],
+      "auxiliary_subunits": "alpha2-delta (CACNA2D1-4), beta (CACNB1-4), gamma (CACNG1-8)",
+      "alpha2delta_note": "alpha2-delta-1 and alpha2-delta-2 subunits are the binding sites for gabapentinoids (gabapentin, pregabalin). These drugs reduce trafficking of channels to synaptic membranes.",
+      "signaling_mechanism_by_type": {
+        "L-type": "Long-lasting; activated at higher voltages. Couples membrane depolarization to gene expression via CaM → CaMKII → CREB. Modulates AMPA receptor trafficking.",
+        "P_Q-type": "Dominant presynaptic channel at fast CNS synapses; triggers neurotransmitter release via SNARE complex interaction (syntaxin-1A).",
+        "N-type": "Presynaptic; major mediator of neurotransmitter release in cortex and hippocampus.",
+        "R-type": "Presynaptic; residual current after P/Q and N block; hippocampal LTP.",
+        "T-type": "Low voltage-activated; produce burst firing in thalamic neurons; generate sleep spindles and spike-wave discharges (absence seizures)."
+      },
+      "brain_regions": ["thalamus", "cerebral cortex", "hippocampus", "cerebellum", "amygdala", "basal ganglia", "midbrain"],
+      "function": "Neurotransmitter release (presynaptic P/Q and N-type), activity-dependent gene transcription (L-type), burst firing and oscillations (T-type), synaptic plasticity",
+      "pharmacological_agents": [
+        { "name": "Nimodipine", "action": "L-type blocker (dihydropyridine)", "notes": "CNS-relevant: vasospasm" },
+        { "name": "Agatoxin IVA", "action": "P/Q-type blocker", "notes": "Spider venom; research tool" },
+        { "name": "Ziconotide", "action": "N-type (Cav2.2) blocker", "notes": "FDA-approved intrathecal; conotoxin-derived" },
+        { "name": "Ethosuximide", "action": "T-type blocker", "notes": "FDA-approved for absence epilepsy" },
+        { "name": "Gabapentin", "action": "alpha2-delta modulator", "notes": "Reduces Cav trafficking; FDA-approved epilepsy, neuropathic pain" },
+        { "name": "Pregabalin", "action": "alpha2-delta modulator", "notes": "FDA-approved epilepsy, neuropathic pain, fibromyalgia" }
+      ],
+      "dsm_conditions": [
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "CACNA1C rs1006737 — strongest GWAS signal in psychiatry; also bipolar and MDD", "qualifier": "for threat modeling purposes" },
+        { "name": "Autism/ADHD", "mechanism": "CACNA1D variants", "qualifier": "for threat modeling purposes" },
+        { "code": "G40.x", "name": "Absence Epilepsy", "mechanism": "Cav3.1/3.2/3.3 T-type channels", "qualifier": "for threat modeling purposes" },
+        { "name": "Episodic Ataxia Type 2", "mechanism": "CACNA1A", "qualifier": "for threat modeling purposes" },
+        { "name": "Timothy Syndrome", "mechanism": "CACNA1C GoF — autism + QTc prolongation", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "High. T-type Cav3 channels in thalamus generate spindle oscillations detectable in EEG — used in sleep-stage BCI applications and closed-loop memory consolidation stimulation. CACNA1C is the strongest genetic risk locus for psychiatric disorders affecting BCI user populations. L-type Cav1.2/1.3 couple neural activity to plasticity-related gene expression, directly relevant to BCI training-induced plasticity.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "kv",
+      "name": "Voltage-Gated Potassium Channels",
+      "type": "voltage_gated_ion_channel",
+      "ligand": "voltage",
+      "ion_selectivity": "K+",
+      "gene_family": "KCN (multiple subfamilies)",
+      "subunits": [
+        { "name": "Kv1.1", "gene": "KCNA1", "family": "KCNA (Kv1)", "function": "Axonal repolarization; clustered at juxtaparanodes", "disease": "Episodic ataxia type 1, epilepsy" },
+        { "name": "Kv1.2", "gene": "KCNA2", "family": "KCNA (Kv1)", "function": "Axonal repolarization" },
+        { "name": "Kv2.1", "gene": "KCNB1", "family": "KCNB (Kv2)", "function": "Soma, large cortical/hippocampal neurons", "disease": "KCNB1 GoF — DEE, epilepsy" },
+        { "name": "Kv3.1", "gene": "KCNC1", "family": "KCNC (Kv3)", "function": "Fast-spiking PV+ interneurons; rapid repolarization", "disease": "KCNC1 — myoclonic epilepsy" },
+        { "name": "Kv4.2", "gene": "KCND2", "family": "KCND (Kv4)", "function": "Dendritic A-current; somatodendritic integration", "disease": "KCND2 autism/epilepsy" },
+        { "name": "Kv7.2", "gene": "KCNQ2", "family": "KCNQ (Kv7)", "function": "M-current; inhibits repetitive firing at AIS", "disease": "Neonatal seizures; KCNQ2 DEE" },
+        { "name": "Kv7.3", "gene": "KCNQ3", "family": "KCNQ (Kv7)", "function": "M-current; co-assembles with Kv7.2", "disease": "Neonatal seizures" },
+        { "name": "Kv7.5", "gene": "KCNQ5", "family": "KCNQ (Kv7)", "function": "Hippocampal neurons", "disease": "Epilepsy" },
+        { "name": "Kv10.1", "gene": "KCNH1", "family": "KCNH (Kv10-12)", "function": "Cortical development", "disease": "Temple-Baraitser syndrome" },
+        { "name": "TASK-1", "gene": "KCNK3", "family": "KCNK (K2P)", "function": "Leak/background; set resting potential" },
+        { "name": "TASK-3", "gene": "KCNK9", "family": "KCNK (K2P)", "function": "Leak/background; set resting potential", "disease": "KCNK9 imprinting syndrome" }
+      ],
+      "signaling_mechanism": "Activation at +20 to +40 mV (Kv1-4) → K+ efflux → membrane repolarization after action potential. M-current (Kv7.2/7.3): non-inactivating; activated near resting potential; major brake on repetitive firing. A-current (Kv4.2): rapidly inactivating; modulates dendritic signal propagation and temporal summation.",
+      "brain_regions": ["cerebral cortex", "hippocampus", "cerebellum", "basal ganglia", "thalamus"],
+      "function": "Action potential repolarization, firing frequency regulation, resting membrane potential maintenance, dendritic integration",
+      "pharmacological_agents": [
+        { "name": "Linopirdine", "action": "Kv7 (M-current) blocker", "notes": "Research; pro-cognitive but also pro-convulsant" },
+        { "name": "XE991", "action": "Kv7 blocker", "notes": "Research" },
+        { "name": "Retigabine/Ezogabine", "action": "Kv7 opener", "notes": "FDA-approved antiepileptic; withdrawn (pigmentation side effects)" },
+        { "name": "4-Aminopyridine (Dalfampridine)", "action": "broad Kv1 blocker", "notes": "Approved for multiple sclerosis (improved walking)" },
+        { "name": "Dendrotoxins (alpha-DTX)", "action": "Kv1.1/1.2/1.6 blocker", "notes": "Research tool" }
+      ],
+      "dsm_conditions": [
+        { "name": "Neonatal Seizures", "mechanism": "KCNQ2, KCNQ3", "qualifier": "for threat modeling purposes" },
+        { "name": "Episodic Ataxia Type 1", "mechanism": "KCNA1", "qualifier": "for threat modeling purposes" },
+        { "name": "DEE", "mechanism": "KCNB1, KCNQ2, KCNH1", "qualifier": "for threat modeling purposes" },
+        { "name": "Autism", "mechanism": "KCNQ2/KCNMA1/KCND2 variants", "qualifier": "for threat modeling purposes" },
+        { "name": "Myoclonic Epilepsy", "mechanism": "KCNC1", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Moderate. Kv channels determine action potential waveform shape and firing frequency — affecting spike sorting quality in intracortical BCIs. Kv3 channels in PV+ fast-spiking interneurons are essential for the gamma oscillations (40 Hz) used in BCI paradigms. Kv7/M-current is a therapeutic target in epilepsy patients using closed-loop neurostimulation.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "histamine",
+      "name": "Histamine Receptors",
+      "type": "metabotropic",
+      "superfamily": "Class A GPCR",
+      "ligand": "histamine",
+      "parent_neurotransmitter": "histamine",
+      "gene_family": "HRH",
+      "subunits": [
+        { "name": "H1", "gene": "HRH1", "g_protein": "Gq/11", "expression": "Cortex, hippocampus, thalamus; postsynaptic", "notes": "Wakefulness; first-gen antihistamines are sedating" },
+        { "name": "H2", "gene": "HRH2", "g_protein": "Gs", "expression": "Cortex, striatum, hippocampus", "notes": "cAMP-mediated LTP modulation" },
+        { "name": "H3", "gene": "HRH3", "g_protein": "Gi/o", "expression": "CNS presynaptic (auto + heteroreceptor); cortex, striatum, hypothalamus", "notes": "Controls NE, ACh, DA, 5-HT, GABA release" },
+        { "name": "H4", "gene": "HRH4", "g_protein": "Gi/o", "expression": "Immune cells; CNS expression low under normal conditions", "notes": "Anti-inflammatory CNS role" }
+      ],
+      "dependency_chain": [
+        "Histamine synthesized from histidine by histidine decarboxylase (HDC)",
+        "Stored in tuberomammillary nucleus (TMN) neurons (primary histaminergic nucleus)",
+        "Degraded by MAO-B and histamine N-methyltransferase (HNMT)"
+      ],
+      "brain_regions": ["tuberomammillary nucleus (source)", "cerebral cortex", "hippocampus", "thalamus", "striatum", "hypothalamus"],
+      "function": "Wakefulness/arousal, attention, learning/memory (H2 LTP modulation), presynaptic modulation of multiple neurotransmitters (H3)",
+      "pharmacological_agents": [
+        { "name": "Diphenhydramine", "action": "H1 antagonist (sedating/first gen)", "notes": "Crosses BBB" },
+        { "name": "Chlorphenamine", "action": "H1 antagonist (sedating/first gen)" },
+        { "name": "Cetirizine", "action": "H1 antagonist (non-sedating/second gen)", "notes": "Poor BBB penetration" },
+        { "name": "Fexofenadine", "action": "H1 antagonist (non-sedating/second gen)" },
+        { "name": "Famotidine", "action": "H2 antagonist", "notes": "Primarily GI acid" },
+        { "name": "Pitolisant", "action": "H3 antagonist/inverse agonist", "notes": "FDA-approved narcolepsy" },
+        { "name": "Thioperamide", "action": "H3 antagonist", "notes": "Research" },
+        { "name": "Imetit", "action": "H3 agonist", "notes": "Research — reduces NE/ACh release in cortex" }
+      ],
+      "dsm_conditions": [
+        { "name": "Narcolepsy", "mechanism": "Orexin/histamine — pitolisant H3 antagonist increases histamine tone, approved treatment", "qualifier": "for threat modeling purposes" },
+        { "name": "Insomnia", "mechanism": "H1 — diphenhydramine, doxepin at low doses", "qualifier": "for threat modeling purposes" },
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "H3 modulators as adjunctive cognition enhancers, in trials", "qualifier": "for threat modeling purposes" },
+        { "name": "ADHD", "mechanism": "Histamine modulates attention circuits", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Low-moderate. Histamine/H1 tone contributes to arousal state that determines EEG background oscillations (wakefulness vs. sleep). Antihistamine-induced sedation degrades BCI performance. H3 heteroreceptor modulation of multiple neurotransmitter systems makes H3 a potential BCI-adjacent target for state control.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "purinergic",
+      "name": "Purinergic Receptors",
+      "type": "mixed",
+      "ligand": "adenosine (P1) / ATP (P2)",
+      "parent_neurotransmitter": "purines",
+      "p1_receptors": [
+        { "name": "A1", "gene": "ADORA1", "type": "GPCR", "g_protein": "Gi/o", "expression": "Hippocampus (high), cortex, cerebellum", "notes": "Inhibits glutamate/GABA release; neuroprotective" },
+        { "name": "A2A", "gene": "ADORA2A", "type": "GPCR", "g_protein": "Gs", "expression": "Striatum (very high, co-expressed with D2R), cortex, hippocampus", "notes": "Caffeine's primary target" },
+        { "name": "A2B", "gene": "ADORA2B", "type": "GPCR", "g_protein": "Gs", "expression": "Low-affinity; widespread; astrocytes", "notes": "Inflammatory modulation" },
+        { "name": "A3", "gene": "ADORA3", "type": "GPCR", "g_protein": "Gi/o", "expression": "Cerebellum, cortex, testis; low CNS", "notes": "Neuroprotection in ischemia" }
+      ],
+      "p2_receptors": {
+        "p2x": {
+          "genes": "P2RX1-7",
+          "type": "ionotropic (ATP-gated cation channel, trimeric)",
+          "ion_selectivity": "Na+, K+, Ca2+",
+          "notes": "P2X4 and P2X7 highest in brain; P2X7 in microglia (neuroinflammation)"
+        },
+        "p2y": {
+          "genes": "P2RY1, P2RY2, P2RY4, P2RY6, P2RY11, P2RY12, P2RY13, P2RY14",
+          "type": "metabotropic (GPCR)",
+          "g_proteins": "Gq (P2Y1,2,4,6,11) or Gi (P2Y12,13,14)",
+          "notes": "P2Y12 in microglia (also antiplatelet target — clopidogrel)"
+        }
+      },
+      "signaling_mechanism": "A1 (ADORA1): Gi/o → adenylyl cyclase inhibition → cAMP down + GIRK activation → inhibition of excitatory transmission (presynaptic A1 inhibits glutamate release). A2A (ADORA2A): Gs → cAMP up → PKA; antagonizes D2R signaling in striatum (they form functional heteromers). P2X: trimeric ATP-gated cation channels. P2Y: metabotropic GPCRs.",
+      "brain_regions": ["hippocampus", "striatum (A2A)", "cerebral cortex", "cerebellum", "microglia (P2X7, P2Y12)"],
+      "function": "Sleep pressure regulation (adenosine accumulation), neuroprotection (A1), neuroinflammation (P2X7/P2Y12), modulation of dopaminergic signaling (A2A-D2R heteromers)",
+      "pharmacological_agents": [
+        { "name": "Caffeine", "action": "A1/A2A antagonist (non-selective)", "notes": "~50 mg per cup of coffee" },
+        { "name": "Istradefylline", "action": "A2A antagonist", "notes": "FDA-approved adjunct for Parkinson's OFF episodes" },
+        { "name": "CPA", "action": "A1 agonist", "notes": "Research — antiseizure, neuroprotective" },
+        { "name": "JNJ-47965567", "action": "P2X7 antagonist", "notes": "Neuroinflammation research; no FDA approval" },
+        { "name": "Clopidogrel", "action": "P2Y12 antagonist", "notes": "Antiplatelet — also P2Y12 in brain microglia" },
+        { "name": "Ticagrelor", "action": "P2Y12 antagonist", "notes": "Antiplatelet" }
+      ],
+      "dsm_conditions": [
+        { "code": "G20.x", "name": "Parkinson's Disease", "mechanism": "A2A-D2R interaction; istradefylline approved", "qualifier": "for threat modeling purposes" },
+        { "name": "Sleep Disorders", "mechanism": "A1/A2A adenosine accumulation during wakefulness — sleep pressure; caffeine blocks", "qualifier": "for threat modeling purposes" },
+        { "code": "G40.x", "name": "Epilepsy", "mechanism": "A1 endogenous anticonvulsant; A2A can be proconvulsant", "qualifier": "for threat modeling purposes" },
+        { "code": "G30.x", "name": "Alzheimer's/Neuroinflammation", "mechanism": "P2X7 in microglia activation", "qualifier": "for threat modeling purposes" },
+        { "name": "Pain", "mechanism": "P2X3, P2X4", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Low-moderate. Adenosine accumulation during sustained cognitive effort (neural fatigue) reduces signal amplitude via A1 receptor activation — directly relevant to BCI session duration limits. Caffeine (A2A antagonism) is ubiquitously used by BCI users; its EEG effects (reduced alpha, increased beta) must be accounted for in BCI calibration.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "glycine",
+      "name": "Glycine Receptors",
+      "type": "ionotropic",
+      "superfamily": "Cys-loop",
+      "ligand": "glycine",
+      "parent_neurotransmitter": "glycine",
+      "gene_family": "GLRA/GLRB",
+      "subunits": [
+        { "name": "alpha1", "gene": "GLRA1", "notes": "Adult dominant; primary site of strychnine binding" },
+        { "name": "alpha2", "gene": "GLRA2", "notes": "Fetal/neonatal predominant; adult persistence in cortex" },
+        { "name": "alpha3", "gene": "GLRA3", "notes": "Spinal cord pain processing" },
+        { "name": "alpha4", "gene": "GLRA4", "notes": "Limited CNS expression; mild KO phenotype" },
+        { "name": "beta", "gene": "GLRB", "notes": "Obligate for synaptic clustering; forms 3alpha:2beta pentamer" }
+      ],
+      "ion_selectivity": "Cl- (inhibitory, similar to GABA-A)",
+      "signaling_mechanism": "Glycine binding → Cl- influx → hyperpolarization. Also activated by beta-alanine and taurine. Competitively blocked by strychnine. Potentiated by ivermectin, ethanol, zinc.",
+      "dependency_chain": [
+        "GlyT1 (SLC6A9): Astrocytic and neuronal; clears glycine from synapse; also regulates NMDA co-agonist site glycine",
+        "GlyT2 (SLC6A5): Neuronal; reuptake into glycinergic terminals",
+        "Gephyrin (GPHN gene) required for synaptic clustering of both GlyR and GABA-A receptors"
+      ],
+      "brain_regions": ["spinal cord (primary)", "brainstem (primary)", "hippocampus", "cerebral cortex (limited)"],
+      "function": "Fast inhibitory neurotransmission in spinal cord and brainstem; regulation of motor neuron excitability; pain processing (alpha3)",
+      "pharmacological_agents": [
+        { "name": "Strychnine", "action": "antagonist", "notes": "Rat poison; convulsant" },
+        { "name": "Sarcosine", "action": "GlyT1 inhibitor", "notes": "Increases glycine → NMDA co-agonist site potentiation; schizophrenia adjunct research" },
+        { "name": "Ivermectin", "action": "potentiator", "notes": "Also GluCl in nematodes" },
+        { "name": "Bitopertin", "action": "GlyT1 inhibitor", "notes": "Roche; failed Phase III for schizophrenia negative symptoms" }
+      ],
+      "dsm_conditions": [
+        { "name": "Hyperekplexia", "mechanism": "GLRA1 mutations — startle disease; neonatal stiff baby syndrome", "qualifier": "for threat modeling purposes" },
+        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "GlyT1 inhibition as adjunct to enhance NMDA function via glycine site", "qualifier": "for threat modeling purposes" },
+        { "name": "Pain", "mechanism": "GlyR alpha3 in dorsal horn", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Low. Primarily relevant to spinal/brainstem BCIs for restoring motor function in spinal cord injury, where glycinergic inhibitory circuits are disrupted.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "trp",
+      "name": "TRP Channels (Transient Receptor Potential)",
+      "type": "voltage_gated_like_ion_channel",
+      "ligand": "polymodal (temperature, chemicals, lipids, voltage)",
+      "ion_selectivity": "Non-selective cation (Ca2+, Na+; variable ratio by subtype)",
+      "gene_family": "TRP (multiple subfamilies)",
+      "subunits": [
+        { "name": "TRPV1", "gene": "TRPV1", "activation": "Capsaicin, noxious heat (>43C), protons, anandamide", "expression": "DRG (primary); brainstem; hippocampus (limited)", "notes": "Pain; also endocannabinoid-activated" },
+        { "name": "TRPM8", "gene": "TRPM8", "activation": "Cool temperatures (<25C), menthol", "expression": "DRG (primary); trigeminal ganglion; limited CNS", "notes": "Cold sensing; pain" },
+        { "name": "TRPA1", "gene": "TRPA1", "activation": "Chemical irritants (AITC, cinnamaldehyde, acrolein), oxidative stress, cold", "expression": "DRG + TRPV1-positive neurons; trigeminal ganglion; hippocampus/cortex (limited)", "notes": "Pain + itch; oxidative stress sensor" },
+        { "name": "TRPC3/6/7", "gene": "TRPC3/TRPC6/TRPC7", "activation": "DAG (downstream of Gq); store-operated", "expression": "Widespread CNS", "notes": "Slow excitatory currents; plasticity" },
+        { "name": "TRPM2", "gene": "TRPM2", "activation": "H2O2, ADP-ribose; heat", "expression": "Striatum, cortex, hippocampus", "notes": "Oxidative stress; Ca2+ permeable" },
+        { "name": "TRPML1", "gene": "MCOLN1", "activation": "Lysosomal Ca2+ channel", "expression": "Ubiquitous", "notes": "Lysosomal storage; mucolipidosis IV" }
+      ],
+      "signaling_mechanism": "Polymodal activation (temperature, pH, lipids, capsaicin) → non-selective cation influx (Na+, Ca2+) → membrane depolarization → action potential in nociceptors → central pain signaling. AEA (endocannabinoid) is also a TRPV1 agonist — explaining paradoxical pro-nociceptive effects of endocannabinoids at high concentrations.",
+      "brain_regions": ["DRG/trigeminal ganglion (primary)", "brainstem", "hippocampus (limited)", "cortex (limited)", "striatum (TRPM2)"],
+      "function": "Thermosensation, chemosensation, nociception, oxidative stress detection, lysosomal Ca2+ homeostasis",
+      "pharmacological_agents": [
+        { "name": "Capsazepine", "action": "TRPV1 antagonist", "notes": "Research" },
+        { "name": "Capsaicin cream", "action": "TRPV1 desensitizer (paradoxical agonist)", "notes": "OTC + Rx" },
+        { "name": "Capsaicin 8% patch (Qutenza)", "action": "TRPV1 desensitizer", "notes": "FDA-approved neuropathic pain" },
+        { "name": "AMG 333", "action": "TRPM8 antagonist", "notes": "Phase II migraine — withdrawn" },
+        { "name": "HC-030031", "action": "TRPA1 antagonist", "notes": "Research" },
+        { "name": "CBD (Cannabidiol)", "action": "TRPV1 agonist", "notes": "Partial mechanism for analgesic/anticonvulsant effects" }
+      ],
+      "dsm_conditions": [
+        { "name": "Chronic Pain", "mechanism": "TRPV1, TRPA1, TRPM8 — major targets for novel analgesics", "qualifier": "for threat modeling purposes" },
+        { "name": "Migraine", "mechanism": "TRPM8, TRPV1", "qualifier": "for threat modeling purposes" },
+        { "name": "PTSD-related Pain Comorbidity", "mechanism": "TRP-mediated nociception", "qualifier": "for threat modeling purposes" }
+      ],
+      "bci_relevance": "Low-moderate. TRPV1 in brain (hippocampus, cortex, brainstem) modulates synaptic transmission and LTP via retrograde Ca2+ signaling. Pain BCIs (closed-loop spinal cord stimulation, intracortical pain decoding) are the primary BCI application where TRP channels are directly relevant.",
+      "confidence": "HIGH"
+    }
+  ]
+}

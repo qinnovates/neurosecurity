@@ -30,8 +30,8 @@ const extensionMetrics = [
     ],
   },
   {
-    id: 'CD', name: 'Cognitive Disruption', weight: 1.0,
-    description: 'Write-side attacks: impact on perception, decision-making, identity, and cognitive autonomy. CD captures active manipulation of cognitive function, from minor perceptual distortion to full identity modification.',
+    id: 'CD', name: 'Cognitive/Functional Disruption', weight: 1.0,
+    description: 'Write-side attacks: impact on perception, decision-making, identity, cognitive autonomy, motor output, and autonomic regulation. CD captures active manipulation of cognitive or functional state, from minor perceptual distortion to full identity modification.',
     values: [
       { code: 'N', label: 'None', score: '0.0', description: 'No cognitive write impact.' },
       { code: 'L', label: 'Low', score: '3.3', description: 'Minor perceptual distortion, transient confusion, or subtle decision bias.' },
@@ -64,7 +64,8 @@ const extensionMetrics = [
     description: 'Whether the attack exploits or induces neuroplastic changes — the brain\'s ability to rewire itself. Prolonged exposure to adversarial stimulation can cause lasting structural changes. This has no digital equivalent.',
     values: [
       { code: 'N', label: 'None', score: '0.0', description: 'No neuroplastic effect.' },
-      { code: 'T', label: 'Temporary', score: '5.0', description: 'Short-term synaptic changes that decay within hours to days.' },
+      { code: 'T', label: 'Temporary', score: '3.3', description: 'Short-term synaptic changes that decay within hours to weeks.' },
+      { code: 'P', label: 'Partial', score: '6.7', description: 'Moderate synaptic reorganization persisting weeks to months — some rewiring that may not reach permanent structural remodeling.' },
       { code: 'S', label: 'Structural', score: '10.0', description: 'Long-term or permanent neural pathway changes — synaptic consolidation, dendritic remodeling, cortical reorganization.' },
     ],
   },
@@ -135,7 +136,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
         <div class="prose">
           <p class="text-lg text-[var(--color-text-muted)]">
-            CVSS — the industry standard for scoring software vulnerabilities — was designed for servers, not skulls. It cannot express whether an attack is reversible to neural tissue, whether it crosses the consent boundary, or whether the cognitive damage is temporary or permanent. NISS adds the six dimensions that CVSS structurally cannot: Biological Impact, Cognitive Reconnaissance (read-side attacks), Cognitive Disruption (write-side attacks), Consent Violation, Reversibility, and Neuroplastic Potential.
+            CVSS — the industry standard for scoring software vulnerabilities — was designed for servers, not skulls. It cannot express whether an attack is reversible to neural tissue, whether it crosses the consent boundary, or whether the cognitive damage is temporary or permanent. NISS adds the six dimensions that CVSS structurally cannot: Biological Impact, Cognitive Reconnaissance (read-side attacks), Cognitive/Functional Disruption (write-side attacks), Consent Violation, Reversibility, and Neuroplastic Potential.
           </p>
           <p>
             When a vulnerability affects a brain, the severity score should reflect what happens to the patient — not just what happens to the device. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS rides <strong>alongside</strong> CVSS v4.0 base vectors. Every technique in the <a href="/atlas/tara/">TARA atlas</a> carries both: how the attack works <em>and</em> what it does to the mind.
@@ -232,10 +233,10 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <div class="grid gap-4 sm:grid-cols-2">
           {[
             { gap: 'No biological impact metric', detail: 'CVSS cannot distinguish between a server crash and a seizure. NISS adds Biological Impact (BI) with 4 severity levels.' },
-            { gap: 'No cognitive impact metrics', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Reconnaissance (CR) for read-side attacks and Cognitive Disruption (CD) for write-side attacks, each with 4 severity levels.' },
+            { gap: 'No cognitive impact metrics', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Reconnaissance (CR) for read-side attacks and Cognitive/Functional Disruption (CD) for write-side attacks, each with 4 severity levels.' },
             { gap: 'No consent model', detail: 'CVSS does not model informed consent or cognitive liberty. NISS adds Consent Violation (CV) — ordered by detectability, with covert violations ranked highest.' },
             { gap: 'No reversibility dimension', detail: 'IT assets restore from backup. Neural tissue cannot. NISS adds Reversibility (RV) with 4 levels from Full to Irreversible.' },
-            { gap: 'No neuroplasticity tracking', detail: 'Prolonged adversarial stimulation physically rewires the brain. NISS adds Neuroplasticity (NP) — None, Temporary, or Structural.' },
+            { gap: 'No neuroplasticity tracking', detail: 'Prolonged adversarial stimulation physically rewires the brain. NISS adds Neuroplasticity (NP) — None, Temporary, Partial, or Structural.' },
             { gap: 'Context-blind scoring', detail: 'CVSS uses one set of weights. NISS provides equal-weight defaults plus context profiles (Clinical, Research, Consumer, Military) that shift priorities by deployment context.' },
           ].map(item => (
             <div class="glass rounded-xl p-5">

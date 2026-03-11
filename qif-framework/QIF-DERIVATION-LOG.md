@@ -12,9 +12,10 @@
 
 ## Entry Index
 
-### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails
+### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint
 | Entry | Topic | Link |
 |-------|-------|------|
+| 90 | Data lake sprint: KQL-first architecture, security hardening, clinical drill-down, whitepaper v8, site revamp | [Entry 90](#entry-90-data-lake-sprint) |
 | 89 | Vision: neuroethics to BCI vision arc, color science for cortical prosthetics, equity-first neurorights | [Entry 89](#entry-89-neuroethics-to-bci-vision) |
 | 88 | S-band relabel: physics regime + spatial scale, host compute gap closed | [Entry 88](#entry-88-s-band-relabel) |
 | 87 | Framework page rewrite: honest derivation, guardrail-compliant prose | [Entry 87](#entry-87-framework-page-rewrite) |
@@ -380,6 +381,208 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 90: Data Lake Sprint — KQL-First Architecture, Security Hardening, Clinical Drill-Down, Whitepaper v8, Site Revamp {#entry-90-data-lake-sprint}
+
+**Date:** 2026-03-10 to 2026-03-11
+**Classification:** VERIFIED (engineering decisions, implemented and deployed)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** [Entry 89](#entry-89-neuroethics-to-bci-vision), [Entry 62](#entry-62-track-everything-unified-dashboard), [Entry 53](#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain)
+
+### Context
+
+48-hour build sprint converting the site from a collection of static pages into a unified data platform. 50+ commits across every layer: data, visualization, security, governance, and research. The goal: everything traces back to the data lake, and the data lake is queryable.
+
+### 1. KQL-First Architecture (DECISION)
+
+Established a new architectural rule: all dashboards consume data through `kql-tables.ts` as the single query interface. JSON files in `shared/` are the storage layer. KQL tables are the query layer. No dashboard page imports JSON directly.
+
+**Pattern:**
+```
+shared/*.json → kql-tables.ts (build time) → BciKql.tsx (browser)
+                                             → ClinicalDashboard.tsx
+                                             → AtlasDashboard.tsx
+                                             → data-lake.astro
+```
+
+**Why it matters:** One entry point for all data. Add a new JSON file, register it as a KQL table, and it appears in every dashboard automatically. Dynamic table discovery means dashboards show what exists and hide what does not.
+
+Built KQL v2 with hash indexes, JOIN operations, array-aware operators (`contains`, `has`), query reordering (where before sort before take), and extended `summarize` (sum, avg, min, max).
+
+### 2. KQL Security Hardening
+
+Full security audit of the query engine. Findings: no eval(), no database, no data modification endpoints, all client-side, read-only. Fundamentally safe by architecture. Added 4 hardening limits:
+
+| Protection | Limit | Prevents |
+|------------|-------|----------|
+| Query length cap | 4,096 chars | Memory abuse via giant strings |
+| Operation count cap | 12 ops | Pipe chain abuse |
+| Result row cap | 50,000 rows | Cartesian product DOS from JOINs |
+| Execution timeout | 2 seconds | Browser hang from slow queries |
+
+All API endpoints (qif.json, stix.json, tara.json) confirmed GET-only. No POST/PUT/DELETE. No data modification surface. Table names whitelist-validated. No injection vectors.
+
+### 3. Clinical Drill-Down: TARA Technique Entry Point
+
+Extended the ClinicalDashboard semantic zoom from 6 to 7 levels:
+
+```
+TARA Technique (109) → QIF Band (11) → Brain Region (37) → Neural Pathway (45) →
+  Neurotransmitter (18) → Receptor Subtypes → Molecular Dependencies
+```
+
+Added `TechniquesZoom` component: search, filter by severity and category, sorted by NISS score. Selecting a technique filters bands to only those it affects, with context banner showing technique name, NISS score, and status. Full breadcrumb navigation at every level.
+
+**Why molecular-level matters:** A BCI attack that disrupts neural activity at a specific brain region does not just affect "the brain" — it disrupts specific pathways that depend on specific neurotransmitters whose synthesis requires specific molecular cofactors. The full chain is documented in [`shared/QIF-DATA-MAPPING.md`](../shared/QIF-DATA-MAPPING.md):
+
+```
+L-tyrosine → tyrosine hydroxylase (TH) + [BH4, Fe2+, O2] → L-DOPA
+  → DOPA decarboxylase (DDC) + [PLP / vitamin B6] → dopamine
+```
+
+Clinical users can now trace from a TARA technique all the way down to the specific cofactor (e.g., Fe2+ for dopamine synthesis) and understand exactly what molecular dependency is at risk. This is the level of detail that makes the framework useful for clinical threat modeling, not just security categorization.
+
+### 4. Whitepaper v8 Working Draft
+
+Major additions to `QIF-WHITEPAPER-V8-DRAFT.md`:
+
+- **Section 19: Research Validation — Field Evidence.** Vulnerability disclosure story (unnamed library used by most BCIs, responsible disclosure, maintainer response). NISS offered for CVSS resource repository but declined pending independent review. Preprint status with citation fabrication transparency (3 citations in v1.0 were AI-fabricated, caught and corrected).
+- **Section 6.8: Beyond DSM-5-TR — Sensory and Neurological Weighting.** NISS v2.0 extension covering 8 sensory/neurological modalities not in DSM-5-TR: olfactory, gustatory, vestibular, somatosensory, auditory (tinnitus, hyperacusis), visual (cortical blindness, phosphenes), motor (dystonia, tremor, ataxia), pain (central pain syndrome, neuropathic pain). 5 new weighting factors: Reversibility (R), Functional Impact (FI), Pathway Specificity (PS), Clinical Evidence (CE), Modality Criticality (MC).
+- **Runemate neural OS vision** integrated into the document.
+- **Data Mapping documentation** (`shared/QIF-DATA-MAPPING.md`) showing the full macro-to-micro join chain with foreign key relationships across all 10 JSON files.
+
+### 5. Data Lake Expansion
+
+- **24 new BCI companies** added to landscape data with funding, security posture, and device specs.
+- **38 brain regions** enriched with detailed mechanics, functions, connections per band, and click-to-expand UI.
+- **Region aliases** system built to normalize region IDs across pathways, neurotransmitters, and atlas.
+- **Funding rounds, investor intel, neurotransmitter systems** added as new KQL tables.
+- **5 new JSON sources being compiled:** cranial nerves, neuroendocrine, glial cells, neurovascular, receptors (dynamic import with graceful fallback).
+- **Intel feed expanded** from 50 to 74 sources with scholarly and financial feeds. Feed schedule cadence updated for regular automated refreshes.
+
+### 6. Site Architecture Revamp
+
+- **Navigation restructured:** "Governance" renamed to "Neuroethics" (neurorights stem from neuroethics, not governance). "Team & Founder" renamed to "About Me." Nested group structure with mobile sub-accordions.
+- **Security hardening:** Red team audit resulted in 8 fixes across 13 files. XXE protection on feed scripts. URL defanging. CI workflow permissions tightened. .gitignore hardened.
+- **Atlas page redesigned** with brain.glb 3D model.
+- **APIs, Feeds, and SDKs consolidated** into `/research/api/`.
+- **STIX 2.1 integration** documented for threat intelligence export.
+- **Defense Stack renamed to Neurosecurity Stack** (consistent with terminology rules).
+
+### 7. Governance and Ethics
+
+- **Nav group "Governance" → "Neuroethics"** — Kevin decided neurorights stem from neuroethics, not governance. Governance is the policy bridge. Neuroethics is the foundational scholarship.
+- **Disclaimer, BCI testing ethics, and liability terms** added to the site.
+- **Ethics timeline wall** and Principles of Ethics artist statement published.
+- **Neurorights + Code of Ethics proposal** queued for this week (seed doc for UNESCO, MIND Act, state legislature, university applications, whitepaper).
+
+### 8. Blog and Content
+
+- **"How Ethical Hackers Can Cure Blindness"** case study: reframed from blog to case study, rewritten in Kevin's voice, woven with TARA clinical dual-lens, linked TARA technique IDs to detail pages, added Kinect sensor rabbit hole section, connected phosphene browser to Runemate concept.
+- **Max Hodak (Neuralink co-founder) blog post** published with citation sync. Hodak publicly discussed BCI clinical applications including dopaminergic pathway modulation — a direct clinical validation of TARA's dual-use mapping. QIF already maps these techniques (dopaminergic pathway disruption, prefrontal cortex modulation) with DSM-5-TR codes and therapeutic analogs. The fact that a Neuralink co-founder independently arrived at the same clinical targets that TARA already catalogs is field evidence that the mapping framework works.
+- **Autodidactive learning app** integrated with all QIF content, redesigned Notes with local AI mind mapping, auditory learning module with Deep Encode generator.
+
+### 9. Music and Creative
+
+- **"Principals of Ethics"** track released: neuroethics jazz-soul, full lyrics and symbolic analysis.
+- **Auditory learning README** updated with Sawdust album production history.
+
+### 10. Neurological Mapping Expansion — Clinical Drill-Down to Molecules
+
+The core neuroscience contribution of this sprint: enabling clinical users of the framework to drill from any QIF layer down to the molecular level. This required building out three data layers that did not previously exist:
+
+**Neurotransmitter systems (2,503 lines added to `qif-neurotransmitters.json`):** 18 neurotransmitter systems fully documented with synthesis pathways, cofactor dependencies, receptor subtypes, degradation enzymes, HGNC gene nomenclature, and DSM-5-TR condition mappings with mechanism detail. Each system traces from precursor amino acid through enzyme chain to final neurotransmitter.
+
+**Neural pathways (45 named circuits):** Origin and target brain regions, neurotransmitter involvement, DSM conditions, disruption effects, therapeutic applications, and BCI relevance scores. Categories: neurotransmitter, sensory ascending, motor descending, limbic circuit, cortical network, cerebellar loop, association tract, autonomic.
+
+**Clinical data compiler (`clinical-data.ts`, 404 lines):** Build-time cross-referencing engine that joins all datasets into typed clinical views. Produces: `ClinicalPathway`, `ClinicalNeurotransmitter`, `ClinicalRegion`, `ClinicalDsmCondition`, `NeuralImpactChain`, band-level aggregation. All computation runs at build time. React components receive typed props.
+
+**Max Hodak clinical validation:** The blog post analyzing Max Hodak's Y Combinator interview demonstrated the framework working in practice. Hodak discussed BCI clinical applications including dopaminergic pathway modulation. TARA already maps this: dopaminergic pathway disruption techniques (prefrontal cortex, basal ganglia, mesolimbic pathway) with DSM-5-TR codes and therapeutic analogs. A Neuralink co-founder independently arrived at the same clinical targets that TARA already catalogs. The attack-chain-equals-therapy-pipeline observation is the core dual-use insight: the 5-stage capture-process-encode-inject-replay chain for vision restoration maps 1:1 to an attack chain. The physics does not care about intent.
+
+**New data lake pages:** `research/data-lake.astro` (1,146 lines) — unified single-pane-of-glass view over all datasets. `atlas/clinical.astro` — clinical drill-down entry point. `research/whitepaper/v7-1.astro` — whitepaper v7.1 archived for reference.
+
+**Scale of changes:** 14,906 lines added/modified across 32 files in 50+ commits over 48 hours. 5 new JSON sources being compiled (cranial nerves, neuroendocrine, glial, neurovascular, receptors) with dynamic import and graceful fallback.
+
+### 11. NP (Neuroplasticity) Metric — Elevated to Standalone KQL Field
+
+The NP metric in NISS v1.1 measures whether an attack causes lasting neural pathway changes. Values: N (None/0), T (Temporary/5), S (Structural/10). Weight: 1.0 (equal to Biological Impact and Reversibility).
+
+**Why NP matters as a distinct metric:** Most security scoring systems measure damage at the moment of attack. NP measures damage that compounds over time. A technique with NP:S means the brain adapts to the malicious pattern — the attack literally rewires the victim. This is unique to neural systems and has no analogue in traditional cybersecurity. A firewall breach does not make future breaches easier by physically restructuring the target. A neural attack can.
+
+**NP in the KQL data lake:** Exposed as `niss_np` in the `techniques` table, queryable alongside all other NISS vector components (`niss_bi`, `niss_cr`, `niss_cd`, `niss_cv`, `niss_rv`). Example queries:
+```kql
+techniques | where niss_np == "S" | sort by niss_score desc
+techniques | summarize count() by niss_np
+```
+
+**Clinical relevance:** NP:S techniques are the highest-priority threats for long-term patient safety. They correspond to conditions where neuroplasticity is weaponized: maladaptive learning from false neurofeedback (QIF-T0107), persistent attack patterns that survive system resets by exploiting learned pathways, and chronic stimulation that reshapes cortical maps. These are the attacks where "turn it off" is not a sufficient remediation — the damage persists after the device is removed.
+
+**Connection to NISS v2.0:** The NP metric will feed into the extended NISS v2.0 Reversibility (R) and Functional Impact (FI) weighting factors. NP:S implies R approaches 1.0 (irreversible) and FI scales with exposure duration.
+
+### 12. NP Expanded to 4 Levels — Scoring Recalibration
+
+The original NP scale (N/T/S) was too coarse. A binary jump from T(5) to S(10) collapsed meaningfully different outcomes into the same bucket. Expanded to 4 levels:
+
+| Value | Score | Meaning |
+|-------|-------|---------|
+| N (None) | 0.0 | No lasting neural pathway changes |
+| T (Temporary) | 3.3 | Temporary plasticity changes resolving in days to weeks |
+| P (Partial) | 6.7 | Partial structural changes; some pathways reorganize, recovery possible with intervention |
+| S (Structural) | 10.0 | Permanent or long-lasting neural pathway reorganization |
+
+**P (Partial) fills the gap** between temporary disruption and permanent rewiring. Many real-world scenarios — chronic low-level neurofeedback drift, partial cortical map reorganization from sustained stimulation — are neither transient nor irreversible. P captures the middle ground where rehabilitation is possible but not guaranteed.
+
+**Updated across:** `niss-parser.ts`, `recalculate-niss.py`, `05-niss.tex`, `scoring.astro`, `whitepaper/index.astro`, both `qtara-registrar.json` copies.
+
+**All 109 TARA techniques recalculated.** Results:
+- 26 technique scores changed
+- 2 severity level shifts: motor hijacking and OTA firmware both dropped from high to medium (the finer NP granularity revealed their plasticity impact was partial, not structural)
+- Final severity distribution: 19 high, 37 medium, 52 low, 1 none
+
+### 13. NISS Neurological Extension — Full Documentation
+
+Published `qif-framework/NISS-NEUROLOGICAL-EXTENSION.md` documenting the complete neurological extension to NISS:
+
+- **42 neurological conditions** across 7 categories mapped to NISS metrics
+- **CD (Cognitive Disruption) broadening rationale** — CD now covers neurological disruption beyond cognitive processes
+- **NP expansion rationale** — why 3 levels was insufficient, clinical evidence for the 4-level scale
+- **QIF hourglass band mapping** — which bands each neurological condition category maps to
+- **Neural pathway dependencies** — which pathways must be intact for each condition category
+- **Impact chain documentation:** technique → band → pathway → condition → NISS metric. The full trace from a TARA threat technique through the QIF architecture to a specific neurological outcome with NISS scoring
+- **Data architecture diagram** showing how the extension integrates with existing JSON data files
+- **Backward compatibility notes** — existing NISS v1.1 scores remain valid; the extension is additive
+- **KQL query examples** using the new NISS metric columns
+
+### 14. KQL Column Expansion
+
+The `techniques` KQL table now exposes 8 new columns for direct NISS metric querying:
+
+```
+niss_vector, niss_severity, niss_pins, niss_bi, niss_cr, niss_cd, niss_cv, niss_rv, niss_np
+```
+
+This enables queries like:
+```kql
+techniques | where niss_np == "P" | project name, niss_score, niss_severity
+techniques | where niss_cd == "H" and niss_np in ("P", "S") | sort by niss_score desc
+techniques | summarize count() by niss_severity, niss_np
+```
+
+Previously, querying individual NISS metrics required parsing the vector string. Now each metric is a first-class column with direct filter/sort/group support.
+
+### Why This Sprint Matters
+
+This is the convergence point. The site is no longer a collection of pages — it is a queryable data platform. 14,906 lines across 32 files in 48 hours. The KQL engine sits at the center. Every data source feeds through it. Every dashboard reads from it. The whitepaper documents the research. The visualizations make it navigable. The security hardening makes it defensible. The governance restructuring makes the ethical foundations explicit.
+
+The through-line: neuroscience research → neuroethics principles → security engineering → BCI governance → everything codified in data → everything queryable → everything visible. That is the pipeline from research to product.
+
+### AI Collaboration
+
+- **Model:** Claude Opus 4.6
+- **Role:** Co-implementation (KQL engine, clinical drill-down, security audit), literature synthesis (DSM-5-TR gap analysis, ICD-11 sensory modality mapping), data compilation (brain regions, pathways, neurotransmitters)
+- **Human-Decided:** KQL-first architecture pattern, "Governance → Neuroethics" rename, NISS v2.0 weighting factors, vulnerability disclosure narrative framing, security limit values, Obsidian as planning system
 
 ---
 

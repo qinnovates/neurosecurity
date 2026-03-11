@@ -251,6 +251,10 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
     - Olfactory, somatosensory, gustatory, vestibular disruption
     - Neurological disorders absent from DSM but present in medical literature (ICD-11, neurology)
     - Expanded NISS weighting for sensory modality attacks
+  - 6.9 The Neuroplasticity Metric (NP) — Why Neural Attacks Compound (v8.0)
+    - NP:S = the attack rewires the victim; no analogue in traditional cybersecurity
+    - NP as discriminator between acute response vs longitudinal rehabilitation
+    - Connection to NISS v2.0 Reversibility and Functional Impact weighting
 - [7. Neural Sensory Protocol (NSP)](#7-neural-sensory-protocol-nsp)
   - 7.1 HNDL Threat, 7.2 Five-Layer Architecture, 7.3 Device Tiers
   - 7.4 STIX 2.1 Export, 7.5 qtara Python Package
@@ -1089,6 +1093,60 @@ This is not scope creep. It is scope correction. A scoring system for neural imp
 
 ---
 
+## 6.9 The Neuroplasticity Metric (NP) — Why Neural Attacks Compound
+
+Traditional cybersecurity scoring assumes attacks are discrete events. A SQL injection either succeeds or fails. A buffer overflow either executes or does not. The damage is bounded by the moment of exploitation.
+
+Neural attacks break this assumption. The brain is a learning system. It rewires itself in response to sustained input. An attack that delivers malicious stimulation patterns over time does not just cause momentary disruption — it causes the brain to *adapt* to the malicious pattern, creating lasting neural pathway changes that persist after the attack ends. The attack literally rewires the victim.
+
+NISS v1.1 captures this through the Neuroplasticity metric (NP), one of six scoring dimensions:
+
+| NISS Metric | What It Measures | Analogue in Traditional Security |
+|-------------|------------------|----------------------------------|
+| BI (Biological Impact) | Tissue damage severity | Physical destruction (hardware) |
+| CR (Cognitive Reconnaissance) | Unauthorized neural read access | Data exfiltration |
+| CD (Cognitive Disruption) | Unauthorized neural write access | Data manipulation |
+| CV (Consent Violation) | Neural data consent breach | Privacy violation |
+| RV (Reversibility) | Can the damage be undone? | Recovery time |
+| **NP (Neuroplasticity)** | **Does the attack rewire the brain?** | **No analogue** |
+
+NP values (expanded from 3 to 4 levels in v1.1.1):
+
+| Value | Score | Meaning |
+|-------|-------|---------|
+| N (None) | 0.0 | No lasting neural pathway changes |
+| T (Temporary) | 3.3 | Temporary plasticity changes that resolve over days to weeks |
+| P (Partial) | 6.7 | Partial structural changes; some pathway reorganization, recovery possible with intervention |
+| S (Structural) | 10.0 | Permanent or long-lasting neural pathway reorganization |
+
+The original 3-level scale (N/T/S) collapsed meaningfully different outcomes. The jump from T(5) to S(10) treated recoverable structural changes the same as permanent rewiring. The new P (Partial) level captures the clinical middle ground: chronic low-level neurofeedback drift, partial cortical map reorganization from sustained stimulation — scenarios where rehabilitation is possible but not guaranteed.
+
+Recalculating all 109 TARA techniques against the 4-level scale shifted 26 scores. Two techniques (motor hijacking, OTA firmware exploitation) dropped from high to medium severity — the finer NP granularity revealed their plasticity impact was partial, not structural. Final severity distribution: 19 high, 37 medium, 52 low, 1 none.
+
+**NP weight is 1.0** — equal to Biological Impact and Reversibility — because structural neuroplasticity represents a category of harm that no other metric captures: the attack persists in the victim's biology after the device is removed.
+
+### Why NP Has No Traditional Analogue
+
+A firewall breach does not make future breaches easier by physically restructuring the target network. A neural attack with NP:S does exactly that. The brain adapts to the malicious pattern through Hebbian learning ("neurons that fire together wire together"), making the attack's effects self-reinforcing. Examples:
+
+- **Maladaptive neurofeedback** (QIF-T0107): False feedback trains the brain to maintain pathological states. The patient's own neuroplasticity is weaponized against them.
+- **Neural nonce replay**: Persistent attack patterns survive system resets by exploiting learned neural pathways. The brain becomes the persistence mechanism.
+- **Chronic stimulation attacks**: Prolonged malicious stimulation reshapes cortical maps, causing the brain to reorganize around the attack pattern.
+
+For these techniques, "turn it off" is not sufficient remediation. The damage persists after the device is removed because the damage is encoded in the biology, not the technology.
+
+### NP in NISS v2.0
+
+In the proposed NISS v2.0 extension (Section 6.8), NP feeds directly into two of the five new weighting factors:
+- **Reversibility (R):** NP:S implies R approaches 1.0 (irreversible)
+- **Functional Impact (FI):** NP:S scales with exposure duration — longer exposure means deeper rewiring
+
+NP is also the primary discriminator between attacks that require *acute* response (stop the stimulation) versus attacks that require *longitudinal* rehabilitation (retrain the brain). This distinction is critical for clinical threat modeling, where the treatment plan depends on whether the damage is in the device or in the patient.
+
+*Note: NP is a proposed metric within an unvalidated scoring system. The claim that specific attacks cause structural neuroplasticity is grounded in the neuroscience literature on maladaptive plasticity (Pascual-Leone et al. 2005, Merzenich et al. 2014) but has not been validated in the specific context of BCI attack scenarios. The mapping from attack technique to NP score is the author's assessment, not an empirically calibrated measurement.*
+
+---
+
 ## 19. Research Validation: Field Evidence
 
 This framework was not built in isolation from real systems. During the initial research pass that led to QIF, the author discovered a previously undisclosed vulnerability in a widely deployed, open-source data transport protocol used by nearly all BCI research platforms. The protocol operates bidirectionally — it both reads from and writes to the endpoint — and the vulnerability exists at the endpoint layer, where no authentication, encryption, or integrity verification is enforced. Any device on the local network can inject arbitrary data streams indistinguishable from legitimate neural signals.
@@ -1158,6 +1216,133 @@ All data referenced in the whitepaper exists as machine-readable JSON in the rep
 4. Render updated visualizations for preprint PDF
 5. Update Zenodo preprint (DOI: 10.5281/zenodo.18640105)
 6. Update site whitepaper page
+
+---
+
+## Appendix C: Version History (v7.0 → v8.0)
+
+This appendix documents all major changes between v7.0 (February 21, 2026) and v8.0 (March 11, 2026). The derivation log entries referenced below are in `QIF-DERIVATION-LOG.md`.
+
+### v7.0 → v7.1 (February 21–26)
+
+**NISS v1.1 — Metric Split and Normalization**
+- Split the original CG (Cognitive) metric into two: **CR (Cognitive Reconnaissance)** and **CD (Cognitive Disruption)**, separating unauthorized neural read access from unauthorized neural write access. The original CG conflated passive surveillance with active manipulation — a distinction that matters for both threat modeling and governance response. (Entries 80–81)
+- Renormalized all 109 TARA technique scores against the new 6-metric vector (BI, CR, CD, CV, RV, NP). Published as preprint v1.5 on Zenodo.
+
+**Attack Primitive Decomposition**
+- Derived the five fundamental attack mechanisms from physics first principles rather than observed exploits. Every technique in the TARA registry decomposes into combinations of these primitives. (Entry 74)
+
+**CVE-to-TARA Mapping**
+- Mapped existing CVE entries with neural interface relevance to TARA technique IDs. Identified an 81.25% coverage gap — the vast majority of BCI-relevant attack surfaces have no CVE representation. (Entry 71)
+
+**Wearable Neural Firewall Design**
+- First architecture sketch of the Neurowall as a wearable device operating at the I0 (hardware-biology) boundary. Zero-trust enforcement: amplitude bounds, rate limiting, thermal monitoring, DoS detection. (Entry 70)
+
+**Market Trajectory Analysis**
+- Applied 5 economic frameworks (TAM/SAM/SOM, Porter's Five Forces, technology adoption lifecycle, regulatory impact modeling, investment flow analysis) to the BCI market. Estimated neurosecurity market emergence timeline. (Entry 73)
+
+### v7.1 → v7.2 (February 27 – March 4)
+
+**Endogenous Attack Chain Validation**
+- Proved that the TARA taxonomy applies to endogenous (body-originating) threats, not just exogenous (device-originating) ones. Endogenous attacks — the body attacking itself through the same neural pathways — validate that the threat model is grounded in biology, not just technology. (Entry 82)
+
+**Cognitive Authenticity Resolution**
+- Resolved the Cognitive Authenticity (CA) vs Mental Integrity (MI) debate. CA is an engineering extension of MI, not a competing concept. "Unaltered" (CA) maps to "self-originating" (MI) when the measurement target is the neural signal's origin rather than its content. (Entry 83)
+
+**Privacy-Preserving Neural Data Architecture**
+- Designed the data protection layer: homomorphic encryption for on-device computation, differential privacy for aggregate research, data fiduciaries for governance, consent provenance chains for audit. (Entry 84)
+
+**Neurogovernance Research Compilation**
+- Added 8 new citations from governance literature. Established the governance layer as a first-class concern spanning all 11 hourglass bands. (Changelog 2026-03-04)
+
+**Ferritin Magnetoreceptor Correction**
+- **Retracted** a claim about ferritin-based magnetoreception in neural tissue. The original claim was AI-derived and not supported by the literature on closer examination. Corrected in the derivation log as a transparency measure. (Entry 79)
+
+### v7.2 → v7.3 (March 5–8)
+
+**Epistemic Reckoning and Research Compilation**
+- Complete audit of all claims in the framework. Identified and flagged every claim that lacked sufficient evidence. Established the 5-level evidence classification (Verified, Established, Inferred, Theoretical, Unknown) and formalized the neuromodesty checks. (Entries 85–86)
+
+**Triple-Sync Citation Protocol**
+- After discovering citation drift between `QIF-RESEARCH-SOURCES.md`, `references.bib`, and `research-registry.json`, established a mandatory triple-sync protocol: every new citation must be added to all three stores simultaneously. (Entry 85)
+
+**Framework Page Rewrite**
+- Rewrote the public-facing framework description page to be guardrail-compliant. Removed overclaims, added epistemic qualifiers, aligned all language with the neuromodesty checks. (Entry 87)
+
+**S-Band Relabel**
+- Relabeled the S-band (silicon) layers to reflect physics regime and spatial scale rather than implementation specifics. Closed the "host compute gap" — the previously unnamed compute layer between the device radio and the cloud. (Entry 88)
+
+### v7.3 → v8.0 (March 9–11)
+
+**Whitepaper v8.0 Working Draft — Major Structural Expansion**
+- Added Sections 12–18 (Runemate CLI, NSP post-quantum protocol, governance model, neural OS architecture, vision restoration pipeline, neurorights ACL mapping). The v8.0 question shifted from "What are the threats?" to "Who decides, who controls, and who is accountable?"
+
+**Section 6.8: Beyond DSM-5-TR**
+- Extended NISS clinical outcome mapping beyond psychiatric categories (DSM-5-TR) to include neurological disorders (ICD-11 Chapter 8), sensory modality disruption (olfactory, gustatory, vestibular, somatosensory), and proposed 5 new NISS v2.0 weighting factors (Reversibility, Functional Impact, Pathway Specificity, Clinical Evidence, Modality Criticality).
+
+**Section 6.9: Neuroplasticity Metric (NP)**
+- Elevated NP from a field in the NISS vector to a documented standalone concept. NP captures a category of harm with no analogue in traditional cybersecurity: the attack rewires the victim's brain through Hebbian learning, persisting in biology after the device is removed.
+
+**KQL-First Architecture**
+- Established the KQL query engine as the universal data access layer for all site dashboards. Pattern: `shared/*.json → kql-tables.ts → dashboards`. All dashboards consume data through KQL queries rather than direct JSON imports. (Entry 90)
+
+**KQL Security Hardening**
+- Added 4 defense-in-depth limits to the in-browser KQL engine: query length (4096 chars), operation count (12), result row cap (50,000), execution timeout (2 seconds). The engine was already fundamentally safe (no eval, no database, client-side only), but hardening prevents abuse at the input boundary.
+
+**Clinical Drill-Down (7-Level Semantic Zoom)**
+- Built the clinical visualization pathway: Technique → Band → Region → Pathway → Neurotransmitter → Receptor → Molecular Dependencies. Enables clinical users to trace from a TARA threat technique down to the specific molecules involved.
+
+**Data Lake Expansion**
+- Expanded coverage to 24 BCI companies, 38 brain regions with functions and connections, 74 intel feed sources (up from 50), 18 neurotransmitter systems with synthesis pathways and cofactors, 38 neural pathways with clinical relevance annotations.
+
+**Intel Feed Cadence Update**
+- Updated the threat intelligence feed schedule with source-specific refresh cadences. Expanded from 50 to 74 sources across CVE/NVD, academic preprints, regulatory filings, and industry news.
+
+**Site Architecture Revamp**
+- Restructured navigation (renamed Governance group to Neuroethics, reordered pages). Added ethics disclaimers, consent gates for experimental features, and security hardening across the site.
+
+**Hodak Clinical Validation**
+- Max Hodak (Neuralink co-founder, Science Corp CEO) published findings aligning with TARA's neurotransmitter-to-clinical-outcome mappings, providing independent clinical validation of the framework's threat-to-impact chain. Documented as a case study.
+
+**Neurological Mapping Expansion**
+- Added molecular-level drill-down capability: neurotransmitter → synthesis pathway → cofactors → receptors → molecular dependencies. Clinical users can trace from dopamine depletion through phenylalanine hydroxylase to iron and BH4 cofactor requirements.
+
+**NP Metric Expanded to 4 Levels**
+- Added P (Partial, 6.7) between T (Temporary, 3.3) and S (Structural, 10.0). The original 3-level scale collapsed recoverable structural changes and permanent rewiring into the same bucket. Recalculated all 109 TARA techniques — 26 scores changed, 2 severity shifts. Updated across: niss-parser.ts, recalculate-niss.py, 05-niss.tex, scoring.astro, whitepaper/index.astro, both registrar copies.
+
+**NISS Neurological Extension Documentation**
+- Published `NISS-NEUROLOGICAL-EXTENSION.md`: 42 neurological conditions across 7 categories, CD broadening rationale, NP expansion rationale, impact chain documentation (technique → band → pathway → condition → NISS metric), data architecture, backward compatibility, KQL query examples.
+
+**KQL Column Expansion**
+- Techniques table now exposes 8 new columns for direct NISS metric querying: niss_vector, niss_severity, niss_pins, niss_bi, niss_cr, niss_cd, niss_cv, niss_rv, niss_np. Previously required parsing the vector string.
+
+### Derivation Log Entries (v7.0 → v8.0)
+
+| Entry | Date | Topic |
+|-------|------|-------|
+| 69 | 2026-02-21 | NIST/ISO hardened compliance mapping |
+| 70 | 2026-02-21 | Wearable neural firewall design |
+| 71 | 2026-02-21 | CVE-to-TARA mapping + hourglass coverage gap |
+| 73 | 2026-02-21 | Market trajectory analysis — 5 economic frameworks |
+| 74 | 2026-02-21 | Attack primitive decomposition from physics |
+| 75 | 2026-02-21 | Common denominator across disciplines |
+| 76 | 2026-02-21 | Calculus boundary — where continuous math fails |
+| 77 | 2026-02-22 | Thesis statement |
+| 78 | 2026-02-23 | Determinism gradient and free-will decomposition |
+| 79 | 2026-02-24 | Ferritin magnetoreceptor correction (retracted) |
+| 80 | 2026-02-25 | NISS v1.1: CG split into CR + CD |
+| 81 | 2026-02-26 | NISS v1.1: CR/CD weight normalization |
+| 82 | 2026-02-27 | Endogenous attack chain validation |
+| 83 | 2026-02-28 | Cognitive Authenticity resolved as MI extension |
+| 84 | 2026-03-05 | Privacy-preserving neural data architecture |
+| 85 | 2026-03-06 | Research registry + triple-sync citation protocol |
+| 86 | 2026-03-07 | Epistemic reckoning: research compilation complete |
+| 87 | 2026-03-08 | Framework page rewrite: guardrail-compliant prose |
+| 88 | 2026-03-09 | S-band relabel: physics regime + spatial scale |
+| 89 | 2026-03-10 | Vision: neuroethics to BCI vision arc |
+| 90 | 2026-03-11 | Data lake sprint: KQL-first, security, clinical drill-down, v8 |
+
+*20 derivation log entries across 19 days. 3 corrections/retractions documented transparently.*
 
 ---
 

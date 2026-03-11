@@ -33,7 +33,7 @@ const TABS: { id: DetailTab; label: string }[] = [
 
 const CATEGORY_LABELS: Record<string, string> = {
   SI: 'Signal Injection', SE: 'Signal Eavesdrop', DM: 'Data Manipulation',
-  DS: 'Denial of Service', PE: 'Privilege Escalation', CR: 'Cognitive Reconnaissance', CD: 'Cognitive Disruption',
+  DS: 'Denial of Service', PE: 'Privilege Escalation', CR: 'Cognitive Reconnaissance', CD: 'Cognitive/Functional Disruption',
   PS: 'Physical Safety', EX: 'Data Exfiltration',
 };
 

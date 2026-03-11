@@ -15,7 +15,50 @@ Auto-maintained by `scripts/changelog-update.mjs`.
 - Whitepaper v8 Section 19, Runemate neural OS vision, vision page UX, data mapping ([1257d1c](https://github.com/qinnovates/qinnovate/commit/1257d1c))
 - Data lake: brain regions with functions and connections per band ([7497f8b](https://github.com/qinnovates/qinnovate/commit/7497f8b))
 - Data lake dashboard: funding rounds, investor intel, neurotransmitter systems ([fd4cc29](https://github.com/qinnovates/qinnovate/commit/fd4cc29))
+- NP metric expanded to 4 levels: N(0), T(3.3), P(6.7), S(10.0) — new "Partial" level for recoverable structural changes
+- All 109 TARA techniques recalculated — 26 scores changed, 2 severity shifts (motor hijacking + OTA firmware: high → medium)
+- KQL techniques table: 8 new columns (niss_vector, niss_severity, niss_pins, niss_bi, niss_cr, niss_cd, niss_cv, niss_rv, niss_np)
+- Whitepaper v8: added Appendix C (Version History v7.0 → v8.0)
 
+### Added
+- NISS Neurological Extension documentation: 42 conditions across 7 categories, impact chains, KQL examples, backward compatibility
+
+### Fixed
+- Data lake integrity: region aliases, TARA IDs, DSM expansion ([ed87b1a](https://github.com/qinnovates/qinnovate/commit/ed87b1a))
+
+### Research
+- QIF Whitepaper v8.0 working draft ([6dbe537](https://github.com/qinnovates/qinnovate/commit/6dbe537))
+
+## 2026-03-10
+
+### Added
+- Autodidactive: auditory learning module with Deep Encode generator ([2e93b52](https://github.com/qinnovates/qinnovate/commit/2e93b52))
+- Disclaimer, BCI testing ethics, and liability terms ([bf6d44e](https://github.com/qinnovates/qinnovate/commit/bf6d44e))
+- Ethics timeline wall + Principles of Ethics artist statement ([d4f3e77](https://github.com/qinnovates/qinnovate/commit/d4f3e77))
+- Max Hodak blog post, citation sync, autodidactive updates, brain viz ([0cbdd29](https://github.com/qinnovates/qinnovate/commit/0cbdd29))
+- Site restructure: intel feed page, TARA sub-pages, pipeline alerting ([b737f33](https://github.com/qinnovates/qinnovate/commit/b737f33))
+
+### Updated
+- Consolidate APIs, Feeds & SDKs into /research/api/ ([8b25850](https://github.com/qinnovates/qinnovate/commit/8b25850))
+- About page: security engineer and BCI researcher identity ([2c96b14](https://github.com/qinnovates/qinnovate/commit/2c96b14))
+- About: AGFX was Photoshop/digital art community in Web 1.0 ([166316b](https://github.com/qinnovates/qinnovate/commit/166316b))
+- Intel feed: expand from 50 to 74 sources with scholarly + financial feeds ([562335b](https://github.com/qinnovates/qinnovate/commit/562335b))
+- Nav: nested group structure with mobile sub-accordions ([5c80ba6](https://github.com/qinnovates/qinnovate/commit/5c80ba6))
+- Atlas page redesign + commit brain.glb model ([682b786](https://github.com/qinnovates/qinnovate/commit/682b786))
+- Connect phosphene browser to Runemate concept ([3068ba8](https://github.com/qinnovates/qinnovate/commit/3068ba8))
+- Blog: rewrite in Kevin's voice, weave in TARA clinical dual-lens ([3897286](https://github.com/qinnovates/qinnovate/commit/3897286))
+- Blog: rewrite title and intro to lead with ADHD scenario + TARA mappings ([c12d959](https://github.com/qinnovates/qinnovate/commit/c12d959))
+- Reframe blog as case study: How Ethical Hackers Can Cure Blindness ([92f09ea](https://github.com/qinnovates/qinnovate/commit/92f09ea))
+- Autodidactive: integrate all QIF content + redesign Notes with local AI mind mapping ([809ce8f](https://github.com/qinnovates/qinnovate/commit/809ce8f))
+- Consolidate nav to 3 items, add Vision consent gate ([4495698](https://github.com/qinnovates/qinnovate/commit/4495698))
+
+### Fixed
+- Security hardening from red team audit — 8 fixes across 13 files ([9667f9c](https://github.com/qinnovates/qinnovate/commit/9667f9c))
+- Rename Defense Stack to Neurosecurity Stack + security hardening ([4b1e2cf](https://github.com/qinnovates/qinnovate/commit/4b1e2cf))
+- Harden feed scripts: XXE protection, URL defanging, input sanitization ([8cd95a4](https://github.com/qinnovates/qinnovate/commit/8cd95a4))
+- Harden CI workflows, secrets, and .gitignore from security scan ([7379240](https://github.com/qinnovates/qinnovate/commit/7379240))
+- Nav group "Governance" to "Neuroethics" — neurorights stem from neuroethics ([e70846c](https://github.com/qinnovates/qinnovate/commit/e70846c))
+- Nav label "Team & Founder" to "About Me" ([7f5c0e8](https://github.com/qinnovates/qinnovate/commit/7f5c0e8))
 
 ## 2026-03-07
 

@@ -1,0 +1,462 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "generated": "2026-03-11",
+    "source": "QIF research compilation",
+    "primary_sources": ["StatPearls NCBI", "PMC primary literature", "PMC7196013", "PMC9875195"],
+    "notes": [
+      "DSM associations are diagnostic category references for threat modeling purposes, not diagnostic claims.",
+      "QIF band assignments are inferred from framework ring model (05-PROPOSED-MODEL.md), not formally assigned.",
+      "BCI relevance ratings reflect current device landscape, not theoretical potential."
+    ]
+  },
+  "cranial_nerves": [
+    {
+      "id": "CN-I",
+      "number": 1,
+      "name": "Olfactory",
+      "type": "sensory",
+      "nuclei": ["olfactory bulb (telencephalic outgrowth, not brainstem)"],
+      "fiber_types": ["SVA"],
+      "neurotransmitters": ["glutamate", "GABA", "dopamine"],
+      "neurotransmitter_details": {
+        "glutamate": "Olfactory receptor neuron axons release glutamate onto mitral cells in olfactory bulb",
+        "GABA": "Granule cells in olfactory bulb provide lateral inhibition",
+        "dopamine": "Periglomerular cells in olfactory bulb"
+      },
+      "qif_band": "N4",
+      "qif_band_rationale": "Olfactory bulb is a telencephalic outgrowth (N4 diencephalon/prosencephalon boundary). Functionally bridges N4-N6 (limbic). Olfactory epithelium interface is at N2-equivalent periphery.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["smell", "odorant detection and discrimination"],
+      "course": "Olfactory receptor neurons (bipolar cells in olfactory epithelium) -> cribriform plate foramina -> olfactory bulb -> olfactory tract -> anterior perforated substance, piriform cortex, amygdala, entorhinal cortex",
+      "bci_relevance": "LOW",
+      "bci_devices": [],
+      "bci_notes": "No current approved BCI interfaces. Experimental olfactory prosthetics at research stage. Direct limbic connection makes this a theoretically high-value target for neuromodulation research.",
+      "dsm_conditions": [
+        {"code": "F20.x", "condition": "Schizophrenia", "association": "Olfactory identification deficits consistently documented (acuity threshold preserved)"},
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Reduced olfactory sensitivity"},
+        {"code": "F41.x", "condition": "Anxiety disorders", "association": "Olfactory dysfunction associated"},
+        {"code": "F31.x", "condition": "Bipolar disorder", "association": "Olfactory dysfunction associated"}
+      ],
+      "dsm_source": "PMC9875195",
+      "clinical_notes": "Anosmia from head trauma (shearing of olfactory fila at cribriform plate), viral infections (COVID-19), or neurodegenerative disease. Olfactory groove meningioma can compress olfactory bulb/tract. Phantosmia (olfactory hallucinations) indicates temporal lobe epilepsy. Direct cortical projection without thalamic relay (unique among cranial nerves)."
+    },
+    {
+      "id": "CN-II",
+      "number": 2,
+      "name": "Optic",
+      "type": "sensory",
+      "nuclei": ["retinal ganglion cells (primary neurons)", "lateral geniculate nucleus (LGN, thalamic relay)", "superior colliculus (reflex)", "pretectal nucleus (pupillary light reflex)"],
+      "fiber_types": ["SSA"],
+      "neurotransmitters": ["glutamate", "GABA", "dopamine", "acetylcholine"],
+      "neurotransmitter_details": {
+        "glutamate": "Primary excitatory neurotransmitter throughout visual pathway, from photoreceptors to V1",
+        "GABA": "Retinal inhibition, LGN interneurons",
+        "dopamine": "Amacrine cells in retina modulate retinal sensitivity to ambient light",
+        "acetylcholine": "Starburst amacrine cells provide direction selectivity"
+      },
+      "qif_band": "N4",
+      "qif_band_rationale": "Thalamic relay at LGN (N4). Cortical processing at N7 (neocortex/V1). Retina is peripheral (N1-equivalent for threat modeling).",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["vision", "visual information transmission", "pupillary light reflex (afferent)"],
+      "course": "Retina -> optic nerve (exits orbit via optic canal) -> optic chiasm (nasal fibers decussate, temporal fibers ipsilateral) -> optic tract -> LGN of thalamus -> optic radiations -> primary visual cortex (V1, Brodmann area 17, occipital lobe)",
+      "bci_relevance": "HIGH",
+      "bci_devices": [
+        {
+          "name": "PRIMA",
+          "manufacturer": "Science Corporation",
+          "type": "Photovoltaic subretinal implant",
+          "status": "Clinical trials; CE mark application submitted 2025",
+          "details": "Converts near-infrared light from glasses into electrical signals stimulating remaining retinal cells. 2024 trial: 38/38 participants showed improvement, average 4.6 additional lines on eye chart."
+        },
+        {
+          "name": "Argus II",
+          "manufacturer": "Second Sight",
+          "type": "Epiretinal implant",
+          "status": "FDA-approved 2013; commercially discontinued",
+          "details": "Pioneering retinal prosthesis."
+        },
+        {
+          "name": "ReVision Implant",
+          "manufacturer": "Occular",
+          "type": "Cortical visual prosthesis",
+          "status": "FDA Breakthrough Device Designation; clinical trials anticipated 2026-2027",
+          "details": "Stimulates V1 directly, bypassing the eye entirely."
+        }
+      ],
+      "bci_notes": "The optic nerve/retinal pathway is one of the most mature BCI targets clinically. Retinohypothalamic tract (ipRGCs with melanopsin/OPN4) also drives circadian regulation via SCN.",
+      "dsm_conditions": [
+        {"code": "F20.x", "condition": "Schizophrenia", "association": "Retinal ganglion cell thinning documented; correlates with visual hallucination severity. Glutamate NMDA receptor hypofunction hypothesis implicates the RGC-visual pathway."}
+      ],
+      "dsm_source": "PubMed 31353068",
+      "clinical_notes": "Optic neuritis (inflammation, associated with MS demyelination). Papilledema (disc swelling from raised ICP). Visual field defects: monocular blindness (optic nerve), bitemporal hemianopia (chiasm compression, e.g. pituitary adenoma), contralateral homonymous hemianopia (optic tract/radiation lesions). Technically a CNS tract (myelinated by oligodendrocytes, not Schwann cells)."
+    },
+    {
+      "id": "CN-III",
+      "number": 3,
+      "name": "Oculomotor",
+      "type": "motor",
+      "nuclei": ["oculomotor nucleus (GSE, rostral midbrain at level of superior colliculus)", "Edinger-Westphal nucleus (GVE parasympathetic, dorsal to oculomotor nucleus)"],
+      "fiber_types": ["GSE", "GVE"],
+      "neurotransmitters": ["acetylcholine"],
+      "neurotransmitter_details": {
+        "acetylcholine": "GSE motor end plate; GVE postganglionic parasympathetic to ciliary ganglion (nicotinic at ganglion, muscarinic at effectors)"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem midbrain. Pupillary light reflex is a fully mapped, deterministic brainstem reflex loop.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["eye movement (superior/inferior/medial rectus, inferior oblique)", "eyelid elevation", "pupillary constriction (miosis)", "lens accommodation"],
+      "course": "Exits ventral midbrain between posterior cerebral artery and superior cerebellar artery -> cavernous sinus -> superior orbital fissure -> superior division (levator palpebrae superioris, superior rectus) and inferior division (medial rectus, inferior rectus, inferior oblique, parasympathetic to ciliary ganglion)",
+      "bci_relevance": "MEDIUM",
+      "bci_devices": [],
+      "bci_notes": "Eye-tracking BCIs exploit CN III-mediated eye movements. Pupillometry used in closed-loop neuromodulation research to track arousal/cognitive load.",
+      "dsm_conditions": [
+        {"code": "F90.x", "condition": "ADHD", "association": "Convergence insufficiency associated (shared attention network)"},
+        {"code": "F20.x", "condition": "Schizophrenia", "association": "Pupillary hyporeactivity studied as biomarker (inferred from literature)"},
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Pupillary hyporeactivity studied as biomarker (inferred from literature)"}
+      ],
+      "dsm_source": "Inferred from neuropsychiatric literature",
+      "clinical_notes": "CN III palsy: ptosis, eye 'down and out' (unopposed CN IV/VI), fixed dilated pupil. Pupil-involving CN III palsy is a neurosurgical emergency (posterior communicating artery aneurysm). Pupil-sparing CN III palsy: typically diabetic microvascular disease."
+    },
+    {
+      "id": "CN-IV",
+      "number": 4,
+      "name": "Trochlear",
+      "type": "motor",
+      "nuclei": ["trochlear nucleus (caudal midbrain at level of inferior colliculus, ventral to periaqueductal gray)"],
+      "fiber_types": ["GSE"],
+      "neurotransmitters": ["acetylcholine"],
+      "neurotransmitter_details": {
+        "acetylcholine": "Neuromuscular junction"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem midbrain.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["intorsion and depression of adducted eye", "assists abduction"],
+      "course": "Exits dorsal midbrain (only cranial nerve to exit dorsally; fibers completely decussate before exiting) -> wraps around brainstem -> cavernous sinus -> superior orbital fissure (outside common tendinous ring) -> superior oblique muscle",
+      "bci_relevance": "LOW",
+      "bci_devices": [],
+      "bci_notes": "Minimal direct BCI interface. Trochlear nucleus used as landmark in deep brainstem electrode placement research.",
+      "dsm_conditions": [],
+      "dsm_source": "No direct DSM association. Diplopia may precipitate anxiety and functional limitations.",
+      "clinical_notes": "CN IV palsy: vertical diplopia, worse when looking down and inward. Patient compensates by head tilt away from lesion side (Bielschowsky sign). Most common cause of acquired vertical diplopia in adults. Only cranial nerve that exits dorsally and decussates completely. Longest intracranial course of any cranial nerve."
+    },
+    {
+      "id": "CN-V",
+      "number": 5,
+      "name": "Trigeminal",
+      "type": "mixed",
+      "nuclei": ["main sensory nucleus (pons, discriminative touch)", "spinal trigeminal nucleus (pons to C2, pain and temperature; subnuclei: oralis, interpolaris, caudalis)", "mesencephalic nucleus (midbrain, proprioception from jaw muscles; unique: primary sensory cell bodies within CNS)", "motor nucleus of CN V (pons, jaw muscles)"],
+      "fiber_types": ["GSA", "SVE"],
+      "neurotransmitters": ["glutamate", "substance_P", "CGRP", "GABA", "acetylcholine"],
+      "neurotransmitter_details": {
+        "glutamate": "Primary afferent transmission",
+        "substance_P": "Co-released from C-fibers and A-delta fibers, central to migraine pathophysiology",
+        "CGRP": "Calcitonin gene-related peptide, primary mediator in migraine pain",
+        "GABA": "Inhibitory interneurons in trigeminal nuclei",
+        "acetylcholine": "Motor to muscles of mastication"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem pons, with spinal nucleus extending into upper cervical cord. Corneal reflex is a fully mapped N2 reflex.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["facial sensation (V1 ophthalmic, V2 maxillary, V3 mandibular)", "corneal reflex (afferent arm)", "jaw-jerk reflex", "mastication", "sound transmission modulation via tensor tympani"],
+      "divisions": {
+        "V1_ophthalmic": "Forehead, upper eyelid, cornea, nose bridge. Exits via superior orbital fissure.",
+        "V2_maxillary": "Cheek, lower eyelid, upper lip, upper teeth. Exits via foramen rotundum.",
+        "V3_mandibular": "Lower face, lower teeth, anterior 2/3 of tongue (general sensation only, NOT taste), jaw muscles. Exits via foramen ovale."
+      },
+      "course": "Cell bodies in trigeminal (Gasserian) ganglion in Meckel's cave at petrous apex. Central processes enter the pons. Three divisions exit through separate skull foramina.",
+      "bci_relevance": "HIGH",
+      "bci_devices": [
+        {
+          "name": "Monarch eTNS",
+          "manufacturer": "NeuroSigma",
+          "type": "External trigeminal nerve stimulation",
+          "status": "FDA cleared (Australia TGA 2024 approval); clinical use",
+          "details": "Stimulation of V1 (ophthalmic branch) activates thalamo-cortical networks via NTS and locus coeruleus. Applications: epilepsy, ADHD, MDD, PTSD. Systematic review (Molecular Psychiatry 2023) confirmed efficacy in neurological and psychiatric disorders."
+        }
+      ],
+      "bci_notes": "One of the most BCI-relevant cranial nerves outside of CN X. eTNS mechanism works through V1 activation of NTS and locus coeruleus pathways.",
+      "dsm_conditions": [
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "High comorbidity with trigeminal neuralgia (chronic pain models)"},
+        {"code": "F41.x", "condition": "Anxiety disorders", "association": "High comorbidity with trigeminal neuralgia. CGRP pathway involvement in migraine linked to anxiety and depression."},
+        {"code": "F45.x", "condition": "Somatoform disorders", "association": "Orofacial pain associated"}
+      ],
+      "dsm_source": "Published neuropsychiatric literature; Molecular Psychiatry 2023",
+      "clinical_notes": "Trigeminal neuralgia: lancinating facial pain, V2/V3 distribution, often from vascular compression of nerve root. Herpes zoster ophthalmicus: VZV reactivation in V1 (Gasserian ganglion). Corneal reflex loss: early sign of CN V damage or pontine lesion."
+    },
+    {
+      "id": "CN-VI",
+      "number": 6,
+      "name": "Abducens",
+      "type": "motor",
+      "nuclei": ["abducens nucleus (caudal pons, dorsal tegmentum near facial colliculus; contains motor neurons + interneurons projecting via contralateral MLF to oculomotor nucleus)"],
+      "fiber_types": ["GSE"],
+      "neurotransmitters": ["acetylcholine"],
+      "neurotransmitter_details": {
+        "acetylcholine": "Neuromuscular junction"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem caudal pons.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["lateral eye movement (abduction)", "conjugate gaze coordination via interneurons to contralateral CN III nucleus"],
+      "course": "Exits ventral pons at pontomedullary junction -> long intracranial course along clivus -> Dorello's canal -> cavernous sinus -> superior orbital fissure through common tendinous ring -> lateral rectus",
+      "bci_relevance": "LOW",
+      "bci_devices": [],
+      "bci_notes": "Gaze-tracking BCIs depend on coordinated CN III/IV/VI function. Abducens nucleus is a key node in horizontal gaze control networks used in several BCI paradigms.",
+      "dsm_conditions": [
+        {"code": "F10.x", "condition": "Alcohol use disorder", "association": "Wernicke-Korsakoff syndrome (thiamine deficiency) causes CN VI palsy. Persistent diplopia may precipitate depression and anxiety."}
+      ],
+      "dsm_source": "Inferred from neuropsychiatric literature",
+      "clinical_notes": "CN VI palsy: horizontal diplopia, worse at distance; eye cannot abduct past midline. False localizing sign: raised ICP can stretch long intracranial course, causing CN VI palsy not indicative of pontine lesion. Wernicke encephalopathy (thiamine deficiency): CN VI palsy + gaze palsy."
+    },
+    {
+      "id": "CN-VII",
+      "number": 7,
+      "name": "Facial",
+      "type": "mixed",
+      "nuclei": ["facial nucleus (SVE, pons; upper face receives bilateral cortical input, lower face contralateral only)", "superior salivatory nucleus (GVE parasympathetic, pons)", "solitary nucleus (SVA, medulla; receives taste anterior 2/3 tongue)", "spinal trigeminal nucleus (GSA; small ear skin territory)"],
+      "fiber_types": ["SVE", "GVE", "SVA", "GSA"],
+      "neurotransmitters": ["acetylcholine", "glutamate", "VIP"],
+      "neurotransmitter_details": {
+        "acetylcholine": "SVE motor end plates; GVE parasympathetic (nicotinic at ganglia, muscarinic M3 at glands)",
+        "glutamate": "SVA taste afferents",
+        "VIP": "Vasoactive intestinal peptide co-released with acetylcholine at parasympathetic terminals; potentiates secretion"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem pons. Corneal blink reflex (afferent CN V, efferent CN VII) is a fully mapped N2 reflex pair.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["facial expression", "eye closure (corneal protection)", "sound attenuation via stapedius reflex", "lacrimation", "salivation (submandibular, sublingual)", "taste sensation anterior 2/3 tongue"],
+      "course": "Exits pons at cerebellopontine angle -> internal acoustic meatus with CN VIII -> facial canal in petrous bone (geniculate ganglion) -> exits via stylomastoid foramen -> parotid gland (parotid plexus) -> five terminal branches: Temporal, Zygomatic, Buccal, Marginal Mandibular, Cervical",
+      "bci_relevance": "MEDIUM",
+      "bci_devices": [],
+      "bci_notes": "Facial EMG used in assistive communication BCIs for locked-in syndrome. Chorda tympani taste pathway researched for electrogustatory BCI. Facial nerve stimulators exist for Bell's palsy rehabilitation.",
+      "dsm_conditions": [
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "High comorbidity with Bell's palsy (facial disfigurement/expression loss)"},
+        {"code": "F40.1", "condition": "Social anxiety disorder", "association": "Bell's palsy comorbidity"},
+        {"code": "F45.22", "condition": "Body dysmorphic disorder", "association": "Can be triggered by Bell's palsy"},
+        {"code": "F43.1", "condition": "PTSD", "association": "Hyperacusis associated with decreased sound tolerance in PTSD and anxiety disorders"}
+      ],
+      "dsm_source": "Published neuropsychiatric literature",
+      "clinical_notes": "Bell's palsy: idiopathic unilateral facial palsy (LMN), all branches affected, associated with HSV-1 reactivation in geniculate ganglion. Ramsay Hunt syndrome: VZV reactivation in geniculate ganglion (facial palsy + ear vesicles + SNHL). Central (UMN) facial palsy: lower face only (forehead spared)."
+    },
+    {
+      "id": "CN-VIII",
+      "number": 8,
+      "name": "Vestibulocochlear",
+      "type": "sensory",
+      "nuclei": ["cochlear nuclei (pons-medulla junction; AVCN, PVCN, DCN)", "vestibular nuclei (4 nuclei spanning caudal pons to rostral medulla: Medial/Schwalbe, Lateral/Deiters, Superior/Bechterew, Inferior/Roller)"],
+      "fiber_types": ["SSA"],
+      "neurotransmitters": ["glutamate", "acetylcholine", "GABA"],
+      "neurotransmitter_details": {
+        "glutamate": "Inner hair cells to spiral ganglion, auditory nerve to cochlear nuclei (primary excitatory)",
+        "acetylcholine": "Olivocochlear efferents (protective, reduce hair cell sensitivity during intense sound)",
+        "GABA": "Inhibitory interneurons in cochlear nuclei and vestibular nuclei"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem pons/medulla. VOR is a fully mapped N2 reflex. Auditory processing hierarchy extends to N7 (auditory cortex).",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["hearing (frequency analysis via tonotopic organization)", "head position and movement detection", "vestibulo-ocular reflex (VOR)", "vestibulo-spinal reflexes (postural control)"],
+      "course": "Cochlear: spiral ganglion cells -> internal acoustic meatus -> cochlear nuclei. Vestibular: Scarpa's ganglion -> vestibular nuclei. Both travel through internal acoustic meatus with CN VII.",
+      "bci_relevance": "HIGH",
+      "bci_devices": [
+        {
+          "name": "Nucleus Nexa",
+          "manufacturer": "Cochlear Americas",
+          "type": "Smart cochlear implant",
+          "status": "FDA-cleared 2025",
+          "details": "First smart cochlear implant with upgradeable firmware. Over 700,000 cochlear implants worldwide as of 2025."
+        },
+        {
+          "name": "HiRes Ultra",
+          "manufacturer": "Advanced Bionics",
+          "type": "Cochlear implant",
+          "status": "FDA-approved; clinical use",
+          "details": "Directly stimulates cochlear nerve, bypassing cochlear hair cells."
+        },
+        {
+          "name": "SYNCHRONY 2",
+          "manufacturer": "MED-EL",
+          "type": "Cochlear implant",
+          "status": "FDA-approved; clinical use",
+          "details": "Directly stimulates cochlear nerve, bypassing cochlear hair cells."
+        },
+        {
+          "name": "Auditory Brainstem Implant (ABI)",
+          "manufacturer": "Various",
+          "type": "Brainstem implant",
+          "status": "Clinical use for NF2 patients",
+          "details": "Bypasses cochlear nerve entirely, stimulating cochlear nuclei directly. Used when cochlear nerve is absent."
+        }
+      ],
+      "bci_notes": "Most clinically mature BCI interface for any cranial nerve. Galvanic vestibular stimulation (GVS) is a non-invasive research tool applied transcutaneously at mastoid.",
+      "dsm_conditions": [
+        {"code": "F20.x", "condition": "Schizophrenia", "association": "Auditory hallucinations involve central auditory processing pathway (superior temporal gyrus, Heschl's gyrus); CN VIII is the peripheral gateway"},
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Tinnitus strongly associated"},
+        {"code": "F41.1", "condition": "Generalized anxiety disorder", "association": "Tinnitus strongly associated"},
+        {"code": "F43.1", "condition": "PTSD", "association": "Hyperacusis and phonophobia"},
+        {"code": "F41.0", "condition": "Panic disorder", "association": "Vestibular dysfunction contributes (dizziness, balance anxiety)"}
+      ],
+      "dsm_source": "Published neuropsychiatric literature",
+      "clinical_notes": "Sensorineural hearing loss (noise, aminoglycosides, presbycusis). Vestibular neuritis (unilateral vestibular loss, vertigo). Acoustic neuroma (vestibular schwannoma). Meniere disease (endolymphatic hydrops, episodic vertigo, fluctuating hearing loss, tinnitus). BPPV (otolith displacement)."
+    },
+    {
+      "id": "CN-IX",
+      "number": 9,
+      "name": "Glossopharyngeal",
+      "type": "mixed",
+      "nuclei": ["nucleus ambiguus (SVE, medulla; motor to stylopharyngeus; shared with CN X, XI)", "inferior salivatory nucleus (GVE, medulla; preganglionic parasympathetics -> lesser petrosal nerve -> otic ganglion -> parotid gland)", "solitary nucleus (GVA + SVA, medulla; taste and visceral afferents from carotid body/sinus)", "spinal trigeminal nucleus (GSA; external ear skin)"],
+      "fiber_types": ["SVE", "GVE", "GVA", "SVA", "GSA"],
+      "neurotransmitters": ["acetylcholine", "glutamate", "substance_P"],
+      "neurotransmitter_details": {
+        "acetylcholine": "Motor to stylopharyngeus; GVE parasympathetic (nicotinic at otic ganglion, muscarinic M3 at parotid)",
+        "glutamate": "Afferent transmission to NTS",
+        "substance_P": "Carotid body afferents to NTS"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem medulla. Carotid body reflex is a fully mapped, continuous N2 physiological control loop. Gag reflex is a deterministic N2 reflex.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["pharyngeal (gag) reflex afferent arm", "carotid body/sinus chemoreception and baroreception", "parotid salivation", "taste posterior 1/3 tongue", "general sensation posterior 1/3 tongue and oropharynx"],
+      "course": "Exits medulla at postolivary sulcus -> jugular foramen (with CN X, XI, IJV) -> superior and inferior glossopharyngeal ganglia -> descends to tongue, pharynx, carotid region",
+      "bci_relevance": "LOW",
+      "bci_devices": [],
+      "bci_notes": "Limited direct BCI interface. Carotid sinus baroreceptor pathway (CN IX -> NTS) relevant to closed-loop cardiovascular neuromodulation research. Implantable carotid body stimulators in trials for heart failure.",
+      "dsm_conditions": [
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Dysphagia from CN IX/X damage can precipitate depression"},
+        {"code": "F41.x", "condition": "Anxiety disorders", "association": "Glossopharyngeal neuralgia has high comorbidity"}
+      ],
+      "dsm_source": "Inferred from neuropsychiatric literature",
+      "clinical_notes": "Glossopharyngeal neuralgia: severe lancinating pain in posterior tongue/oropharynx/ear, triggered by swallowing. CN IX lesions: loss of gag reflex afferent arm, loss of posterior tongue taste/sensation. Carotid sinus hypersensitivity: exaggerated baroreceptor response causing syncope. Jugular foramen syndrome (Vernet syndrome): CN IX, X, XI palsy together."
+    },
+    {
+      "id": "CN-X",
+      "number": 10,
+      "name": "Vagus",
+      "type": "mixed",
+      "nuclei": ["dorsal motor nucleus of CN X (GVE, medulla; preganglionic parasympathetic to heart, lungs, esophagus, stomach, small intestine, ascending/transverse colon)", "nucleus ambiguus (SVE, medulla; motor to pharyngeal constrictors, laryngeal muscles; shared with CN IX, XI)", "nucleus tractus solitarius / NTS (GVA + SVA, medulla; primary integrative hub for autonomic reflexes; projects to hypothalamus N4, locus coeruleus, parabrachial nucleus)", "spinal trigeminal nucleus (GSA; ear skin via Arnold's nerve)"],
+      "fiber_types": ["GVE", "SVE", "GSA", "GVA", "SVA"],
+      "neurotransmitters": ["acetylcholine", "glutamate", "CGRP", "substance_P", "nitric_oxide"],
+      "neurotransmitter_details": {
+        "acetylcholine": "GVE parasympathetic (nicotinic at ganglia, muscarinic M2 at heart, M3 at bronchi/GI)",
+        "glutamate": "GVA afferents to NTS",
+        "CGRP": "Visceral afferents",
+        "substance_P": "Visceral afferents",
+        "nitric_oxide": "Enteric nervous system modulation"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem medulla for nuclei. Most extensive peripheral reach of any cranial nerve. NTS -> hypothalamus projection bridges N2 to N4.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["parasympathetic innervation (heart, lungs, GI tract)", "heart rate reduction (SA node)", "bronchoconstriction", "GI motility and secretion", "laryngeal phonation", "pharyngeal swallowing", "visceral sensation (hunger, nausea, satiety, lung stretch)"],
+      "course": "Exits medulla at postolivary sulcus -> jugular foramen -> superior (jugular) ganglion + inferior (nodose) ganglion -> descends through carotid sheath -> pharyngeal plexus, superior laryngeal nerve, recurrent laryngeal nerve -> cardiac branches -> pulmonary branches -> esophageal plexus -> celiac plexus -> hepatic/gastric branches -> reaches to splenic flexure",
+      "bci_relevance": "HIGH",
+      "bci_devices": [
+        {
+          "name": "VNS Therapy",
+          "manufacturer": "LivaNova",
+          "type": "Implanted cervical VNS",
+          "status": "FDA-approved 1997 (epilepsy), 2005 (depression)",
+          "details": "Cuff electrode around left CN X. Most established psychiatric BCI."
+        },
+        {
+          "name": "Vivistim Paired VNS",
+          "manufacturer": "MicroTransponder",
+          "type": "Paired VNS for rehabilitation",
+          "status": "FDA-approved 2021",
+          "details": "Post-stroke upper limb rehabilitation. Paired with motor rehabilitation exercises."
+        },
+        {
+          "name": "ReStore",
+          "manufacturer": "Teliatry",
+          "type": "Batteryless wireless VNS",
+          "status": "FDA pilot study approval 2024",
+          "details": "For PTSD and spinal cord injury."
+        },
+        {
+          "name": "gammaCore",
+          "manufacturer": "electroCore",
+          "type": "Non-invasive transcutaneous cervical VNS",
+          "status": "FDA-cleared",
+          "details": "For cluster headache, migraine, COVID-related loss of respiratory drive."
+        },
+        {
+          "name": "taVNS (transcutaneous auricular VNS)",
+          "manufacturer": "Various",
+          "type": "Non-invasive auricular stimulation",
+          "status": "Multiple RCTs ongoing",
+          "details": "Stimulates auricular branch of CN X (Arnold's nerve) via the ear. Applications: depression, stroke, inflammatory conditions. 2025 meta-analysis confirmed efficacy for IBD, IBS, functional dyspepsia."
+        }
+      ],
+      "bci_notes": "Most BCI-active cranial nerve after CN VIII. RESET-RA trial (2025, Nature Medicine): implanted VNS for rheumatoid arthritis. Closed-loop wireless VNS (Mathews et al., 2025, Scientific Reports): heart rate-driven feedback for adaptive neuromodulation. NTS -> hypothalamus -> HPA axis connection is the proposed mechanism for VNS antidepressant effects.",
+      "dsm_conditions": [
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Vagal afferent pathway to NTS and locus coeruleus is primary neural basis for gut-brain axis dysregulation"},
+        {"code": "F43.1", "condition": "PTSD", "association": "Autonomic dysregulation, HRV reduction"},
+        {"code": "F41.1", "condition": "Generalized anxiety disorder", "association": "Vagal tone dysregulation"},
+        {"code": "F41.0", "condition": "Panic disorder", "association": "Autonomic dysregulation"},
+        {"code": "K58", "condition": "Irritable bowel syndrome", "association": "Comorbid with depression/anxiety via gut-brain axis (vagal afferents)"}
+      ],
+      "dsm_source": "Published neuropsychiatric literature; polyvagal theory (Porges, contested)",
+      "clinical_notes": "Wallenberg syndrome (lateral medullary syndrome): CN X nucleus ambiguus + spinothalamic + vestibular nuclei -> dysphagia, dysphonia, ipsilateral face numbness, contralateral body pain/temperature loss, Horner syndrome, ataxia. Unilateral recurrent laryngeal nerve palsy: hoarseness (left RLN more vulnerable). Vagal syncope (vasovagal)."
+    },
+    {
+      "id": "CN-XI",
+      "number": 11,
+      "name": "Spinal Accessory",
+      "type": "motor",
+      "nuclei": ["spinal accessory nucleus (lateral anterior horn, C1-C5 spinal cord; not a brainstem nucleus)"],
+      "fiber_types": ["GSE"],
+      "neurotransmitters": ["acetylcholine"],
+      "neurotransmitter_details": {
+        "acetylcholine": "Neuromuscular junction"
+      },
+      "qif_band": "N1-N2",
+      "qif_band_rationale": "Spinal cord origin at N1/spinal reflex level, exits in N2/brainstem context. Functionally a peripheral motor nerve for threat modeling.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["sternocleidomastoid (ipsilateral head tilt, contralateral head rotation)", "trapezius (shoulder elevation, scapular retraction)"],
+      "course": "Spinal roots from C1-C5 -> ascend through foramen magnum -> jugular foramen (exits with CN IX, X) -> posterior triangle of neck -> sternocleidomastoid (pierces it) -> trapezius",
+      "bci_relevance": "LOW",
+      "bci_devices": [],
+      "bci_notes": "Limited. CN XI monitoring used perioperatively. Sternocleidomastoid EMG has been used as signal source for single-switch BCI in patients with limited motor control.",
+      "dsm_conditions": [
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Chronic shoulder pain and functional limitation from CN XI palsy can precipitate depression"},
+        {"code": "F45.x", "condition": "Somatic symptom disorder", "association": "CN XI palsy-associated functional limitation"}
+      ],
+      "dsm_source": "Inferred from neuropsychiatric literature",
+      "clinical_notes": "CN XI palsy: most commonly iatrogenic (posterior triangle lymph node biopsy, jugular vein cannulation, carotid endarterectomy). Results in shoulder drop, weakness of shoulder shrug, winging of lower scapula. Jugular foramen tumors can involve CN IX, X, XI simultaneously (Vernet syndrome)."
+    },
+    {
+      "id": "CN-XII",
+      "number": 12,
+      "name": "Hypoglossal",
+      "type": "motor",
+      "nuclei": ["hypoglossal nucleus (medulla, dorsal tegmentum near midline, beneath floor of fourth ventricle at hypoglossal triangle)"],
+      "fiber_types": ["GSE"],
+      "neurotransmitters": ["acetylcholine"],
+      "neurotransmitter_details": {
+        "acetylcholine": "Neuromuscular junction"
+      },
+      "qif_band": "N2",
+      "qif_band_rationale": "Brainstem medulla.",
+      "qif_band_confidence": "INFERRED",
+      "functions": ["all tongue movements (protrusion, retraction, elevation, depression, lateral)", "speech articulation", "chewing", "swallowing"],
+      "course": "Rootlets exit medulla in preolivary sulcus (between pyramid and olive) -> hypoglossal canal (unique exit, not jugular foramen) -> loops laterally in neck -> loops anteriorly below mandible -> lingual muscles",
+      "bci_relevance": "HIGH",
+      "bci_devices": [
+        {
+          "name": "Inspire",
+          "manufacturer": "Inspire Medical Systems",
+          "type": "Hypoglossal nerve stimulator",
+          "status": "FDA-approved 2014",
+          "details": "Fully implanted upper airway stimulation system for obstructive sleep apnea. Stimulates CN XII during sleep to maintain genioglossus tone and keep airway open."
+        }
+      ],
+      "bci_notes": "Tongue-machine interfaces (TMI) are being developed as assistive communication devices using tongue electromyography.",
+      "dsm_conditions": [
+        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Dysarthria and dysphagia from CN XII damage impact quality of life"},
+        {"code": "F40.1", "condition": "Social anxiety disorder", "association": "Speech impairment from CN XII damage"},
+        {"code": "G47.33", "condition": "Obstructive sleep apnea", "association": "CN XII genioglossus hypotonia is the key muscle dysfunction. OSA linked to depression and major neurocognitive disorder."}
+      ],
+      "dsm_source": "Published neuropsychiatric literature",
+      "clinical_notes": "Unilateral CN XII palsy: tongue deviates toward side of lesion on protrusion. Bilateral CN XII palsy: dysarthria, dysphagia, inability to protrude tongue. ALS: hypoglossal nucleus affected, tongue fasciculations and atrophy are diagnostic signs. Obstructive sleep apnea: genioglossus hypotonia during sleep is the key mechanism."
+    }
+  ]
+}

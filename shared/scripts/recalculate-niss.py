@@ -33,7 +33,7 @@ METRIC_VALUES = {
     "CD": {"N": 0.0, "L": 3.3, "H": 6.7, "C": 10.0},  # Cognitive Disruption (write)
     "CV": {"N": 0.0, "P": 3.3, "E": 6.7, "I": 10.0},  # Reordered: Implicit highest
     "RV": {"F": 0.0, "T": 3.3, "P": 6.7, "I": 10.0},  # Added Temporary
-    "NP": {"N": 0.0, "T": 5.0, "S": 10.0},
+    "NP": {"N": 0.0, "T": 3.3, "P": 6.7, "S": 10.0},
 }
 
 METRIC_ORDER = ["BI", "CR", "CD", "CV", "RV", "NP"]
@@ -230,9 +230,9 @@ def main():
                     "description": "Degree of unauthorized cognitive read access: thought decoding, neural data inference, intent extraction",
                 },
                 "CD": {
-                    "name": "Cognitive Disruption",
+                    "name": "Cognitive/Functional Disruption",
                     "values": {"N": 0.0, "L": 3.3, "H": 6.7, "C": 10.0},
-                    "description": "Degree of unauthorized cognitive write access: perception manipulation, identity modification, cognitive coercion",
+                    "description": "Degree of unauthorized disruption to cognitive processing, sensory perception, motor output, or autonomic regulation",
                 },
                 "CV": {
                     "name": "Consent Violation",
@@ -246,7 +246,7 @@ def main():
                 },
                 "NP": {
                     "name": "Neuroplasticity",
-                    "values": {"N": 0.0, "T": 5.0, "S": 10.0},
+                    "values": {"N": 0.0, "T": 3.3, "P": 6.7, "S": 10.0},
                     "description": "Whether the attack causes lasting neural pathway changes",
                 },
             },
