@@ -2,10 +2,28 @@
 title: "How Ethical Hackers Can Cure Blindness"
 subtitle: "A capture-process-inject attack chain maps 1:1 to a vision restoration pipeline. I mapped every stage through TARA."
 date: 2026-03-11
-tags: [BCI, neurosecurity, QIF, TARA, clinical-mapping, vision-restoration, dual-use, interview-analysis]
+tags: [BCI, neurosecurity, QIF, TARA, clinical-mapping, vision-restoration, dual-use, interview-analysis, case-study]
+type: case-study
 author: Qinnovate
-fact_checked: false
+fact_checked: true
+fact_check_notes:
+  - "Source: 'How to Build the Future' interview with Max Hodak by Garry Tan (Y Combinator), published March 9, 2026"
+  - "All quotes attributed to Hodak are from the auto-generated transcript of the interview"
+  - "QIF mappings referenced are from the proposed TARA threat catalog (unvalidated framework)"
+  - "GeRaF citation removed — paper not found in NeurIPS 2025 proceedings or any indexed database. Replaced with verified GSRF reference."
+  - "Rayleigh diffraction claim softened — wavelength is correct but Rayleigh criterion is a physics misapplication for CSI-based WiFi sensing."
+  - "DensePose from WiFi — removed '5 GHz' qualifier (paper does not specify frequency band)."
+  - "BionicVisionXR — clarified 90 FPS is VR display rate, not phosphene computation benchmark."
+  - "eLife 2024 phosphene simulation — corrected lead author from Granley to van der Grinten."
+  - "FlexLED — corrected from 'cortical' to 'retinal (epiretinal)' stimulation."
+  - "PRIMA bandwidth — labeled as estimated calculation, not published specification."
+  - "de Ruyter van Steveninck 2022 — corrected mechanism description."
+  - "Elnabawy 2022 — corrected from 'geometric primitives' to 'simplified visual representations' (clip-art GAN)."
 ---
+
+Unreal Engine renders textures and objects without needing to know what it is simply using transform (position, rotation, scale). Who's to say this isn't possible. Your eyes are already rendering this screen. One day, the blind will be able to actually see a web browser and laugh at memes with the rest of us.
+
+When they do, what would that look like? Besides just more meme spamming, I mean... if we were to redesign the browser and optimize it for the brain, where do we start? Would it look like DOS? White phosphenes are easier to induce after all.
 
 Per a recent interview between Y Combinator and Max Hodak, co-founder of Neuralink, Big Pharma executives are now likely repositioning themselves for a digital future. [Full transcript](/learn/autodidactive/neuroscience/vision/max-hodak-bci-future-2026.md).
 
@@ -25,13 +43,20 @@ Here's the chain: capture the world with a sensor, process it into neural-compat
 
 My proposed [TARA threat catalog](/atlas/tara/) contains [109 attack techniques](/atlas/tara/ttps/) mapped across the BCI stack. When I traced the full capture-to-injection pipeline for vision, 11 TARA techniques formed a 5-stage chain -- and every single stage has a clinical analogue:
 
-| Stage | Function | TARA Technique | Band | Status |
-|-------|----------|---------------|------|--------|
-| **1. Capture** | Sense the physical environment | [QIF-T0090](/atlas/tara/QIF-T0090) WiFi CSI body sensing | S1→S3 | DEMONSTRATED |
-| **2. Eavesdrop** | Extract signal features | [QIF-T0003](/atlas/tara/QIF-T0003) Signal eavesdropping | S1→S2 | DEMONSTRATED |
-| **3. Encode** | Convert to neural-compatible format | [QIF-T0067](/atlas/tara/QIF-T0067) Phase dynamics replay | S1→I0→N1-N7 | DEMONSTRATED |
-| **4. Inject** | Deliver to neural tissue | [QIF-T0001](/atlas/tara/QIF-T0001), [T0009](/atlas/tara/QIF-T0009), [T0010](/atlas/tara/QIF-T0010), [T0014](/atlas/tara/QIF-T0014) | I0→N1-N7 | DEMONSTRATED |
-| **5. Replay** | Sustain continuous stimulation | [QIF-T0107](/atlas/tara/QIF-T0107) Neural nonce replay | I0→N1 | THEORETICAL |
+**Stage 1 — Capture** | Sense the physical environment
+[QIF-T0090](/atlas/tara/QIF-T0090) WiFi CSI body sensing | Band: S1→S3 | Status: DEMONSTRATED
+
+**Stage 2 — Eavesdrop** | Extract signal features
+[QIF-T0003](/atlas/tara/QIF-T0003) Signal eavesdropping | Band: S1→S2 | Status: DEMONSTRATED
+
+**Stage 3 — Encode** | Convert to neural-compatible format
+[QIF-T0067](/atlas/tara/QIF-T0067) Phase dynamics replay | Band: S1→I0→N1-N7 | Status: DEMONSTRATED
+
+**Stage 4 — Inject** | Deliver to neural tissue
+[QIF-T0001](/atlas/tara/QIF-T0001), [T0009](/atlas/tara/QIF-T0009), [T0010](/atlas/tara/QIF-T0010), [T0014](/atlas/tara/QIF-T0014) | Band: I0→N1-N7 | Status: DEMONSTRATED
+
+**Stage 5 — Replay** | Sustain continuous stimulation
+[QIF-T0107](/atlas/tara/QIF-T0107) Neural nonce replay | Band: I0→N1 | Status: THEORETICAL
 
 The pivot point is **T0067 -- phase dynamics replay**. In attack mode, it replays or synthesizes neural trajectories to spoof legitimate brain activity. In clinical mode, it's the exact mechanism cochlear implants and retinal prostheses use to encode sensory information into stimulation patterns the brain can interpret. Same physics. Different governance.
 
@@ -65,18 +90,18 @@ Now that I've laid out the chain and the sensor question, let me walk through ea
 
 **Stage 1: Capture — The Physics Ceiling**
 
-Cameras work. Every vision prosthesis in clinical trials uses a camera mounted on glasses. But WiFi Channel State Information ([T0090](/atlas/tara/QIF-T0090)) can reconstruct 3D body pose through walls -- DensePose from WiFi (CMU, 2023) achieves body-part UV mapping from standard 5 GHz signals, no camera required.
+Cameras work. Every vision prosthesis in clinical trials uses a camera mounted on glasses. But WiFi Channel State Information ([T0090](/atlas/tara/QIF-T0090)) can reconstruct 3D body pose through walls -- DensePose from WiFi (CMU, 2023) achieves body-part UV mapping from WiFi CSI signals, no camera required.
 
-The problem is resolution. WiFi at 5 GHz has a **hard resolution floor of ~6cm** based on the Rayleigh diffraction limit. Deep learning adds learned priors from training data, but it cannot exceed the physics -- it's hallucinating detail below the diffraction limit.
+The problem is resolution. WiFi at 5 GHz has a wavelength of ~6cm, which sets a practical resolution floor for RF-based sensing. Deep learning adds learned priors from training data, but it cannot exceed the physics -- below the wavelength scale, it's filling in gaps from training data, not measuring.
 
-| Frequency | Wavelength | Resolution Floor | Scene Capability |
-|-----------|-----------|-----------------|-----------------|
-| 2.4 GHz | 12.5 cm | ~12 cm | Room occupancy, breathing |
-| 5 GHz | 6 cm | ~6 cm | Body pose, gait, gestures |
-| 60 GHz (mmWave) | 5 mm | ~5 mm | Hand gestures, facial features |
-| 77 GHz (automotive radar) | 3.9 mm | ~4 mm | mm-level geometry (GeRaF, NeurIPS 2025) |
+**Resolution by frequency:**
 
-WiFi alone cannot produce the resolution needed for a visual scene. But mmWave radar at 77 GHz achieves millimeter-level geometry. GeRaF (NeurIPS 2025 Spotlight) achieved real-time 3D Gaussian Splatting from radar -- rendering novel views from radio signals alone, no camera. Feasible near-term, but not yet integrated into any BCI pipeline.
+- **2.4 GHz** (12.5 cm wavelength) — Room occupancy, breathing detection
+- **5 GHz** (6 cm wavelength) — Body pose, gait, gestures
+- **60 GHz / mmWave** (5 mm wavelength) — Hand gestures, facial features
+- **77 GHz / automotive radar** (3.9 mm wavelength) — mm-level geometry (PanoRadar, MobiCom 2024)
+
+WiFi alone cannot produce the resolution needed for a visual scene. But mmWave radar at 77 GHz achieves millimeter-level geometry. PanoRadar (MobiCom 2024) demonstrated panoramic 3D reconstruction from a single spinning radar. RF-based 3D Gaussian Splatting from radar is an active research area (GSRF, NeurIPS 2025) -- rendering novel views from radio signals alone, no camera. Feasible near-term, but not yet integrated into any BCI pipeline.
 
 *Camera capture = demonstrated and in clinical use. WiFi/radar capture for BCI = theoretically possible but resolution-limited. mmWave capture = feasible near-term but not yet coupled to neural encoding.*
 
@@ -84,11 +109,11 @@ WiFi alone cannot produce the resolution needed for a visual scene. But mmWave r
 
 If gaming engines can identify and create texture models based on an object's dimension, density (sheen, surface, hue, saturation, lighting, depth), and relation in vector space -- then the future is looking very positive. The tools already exist:
 
-- **BionicVisionXR** (Unity-based): Real-time phosphene simulation at 90 FPS. Renders what a prosthetic user would actually perceive through a given electrode array.
+- **BionicVisionXR** (Unity-based): Real-time phosphene simulation running at VR display rates. Renders what a prosthetic user would actually perceive through a given electrode array.
 - **3D Gaussian Splatting** (SIGGRAPH 2023): 100+ FPS photorealistic novel-view synthesis. Already has Unreal Engine plugins.
-- **4D Gaussian Splatting**: 82 FPS for dynamic scenes. Time-varying geometry.
+- **4D Gaussian Splatting** (CVPR 2024): 82 FPS for dynamic scenes. Time-varying geometry.
 
-Here's the counterintuitive finding: photorealism is **not what prosthetic vision needs.** Elnabawy et al. (2022) demonstrated that simplified geometric primitives -- high-contrast edges, basic shapes, reduced color palettes -- outperform photorealistic rendering for prosthetic users. The visual cortex, working with limited electrode resolution, does better with less information, not more.
+Here's the counterintuitive finding: photorealism is **not what prosthetic vision needs.** Elnabawy et al. (2022) demonstrated that simplified visual representations -- generated by a GAN to produce high-contrast, clip-art-style imagery -- outperform photorealistic rendering for prosthetic users. The visual cortex, working with limited electrode resolution, does better with less information, not more.
 
 The bottleneck is **live sensor to scene reconstruction** in real time. Material estimation takes ~3 seconds per object. The components exist separately -- sensors capture geometry, AI estimates materials, engines render -- but no integrated pipeline runs the full chain at the latency a prosthesis demands (<50ms). Each piece works. The plumbing between them doesn't exist yet.
 
@@ -100,23 +125,23 @@ This is where [T0067](/atlas/tara/QIF-T0067) (phase dynamics replay) sits. The s
 
 The encoding problem is not just "send a signal" -- it's "send a signal the brain will interpret as vision." AI is driving the real progress here:
 
-- **End-to-end deep autoencoders** (de Ruyter van Steveninck 2022): Learn the mapping from visual scene to stimulation pattern directly from neural response data.
+- **End-to-end optimization** (de Ruyter van Steveninck, *J Vision* 2022): Optimizes the visual scene-to-stimulation mapping using a differentiable phosphene simulator.
 - **Hybrid Neural Autoencoders** (Granley, NeurIPS 2022): Combine physics-based phosphene models with learned encoding.
 - **Human-in-the-Loop optimization** (Granley, NeurIPS 2023): Patient provides feedback to iteratively refine the encoding model. The patient is literally training the encoder.
-- **Differentiable phosphene simulation** (eLife 2024): Makes the entire pipeline end-to-end differentiable -- from image to stimulation to predicted percept -- so gradient descent can optimize the encoding.
+- **Differentiable phosphene simulation** (van der Grinten et al., *eLife* 2024): Makes the entire pipeline end-to-end differentiable -- from image to stimulation to predicted percept -- so gradient descent can optimize the encoding.
 
-Here's the bandwidth reality across delivery methods:
+**Bandwidth reality across delivery methods:**
 
-| Delivery Method | Channels | Bandwidth | Latency | Status |
-|----------------|----------|-----------|---------|--------|
-| PRIMA (photovoltaic) | 378 | ~3.8 kbps | <10ms | In pivotal trial |
-| Argus II (epiretinal) | 60 | ~600 bps | ~20ms | Defunct |
-| Utah array (cortical) | 96-1024 | ~10-100 kbps | <5ms | Research |
-| Optogenetic (FlexLED) | 8,192 | ~82 kbps | ~5ms | Preclinical |
+- **PRIMA** (photovoltaic, subretinal) — 378 channels | ~3.8 kbps estimated* | <10ms estimated* | In pivotal trial
+- **Argus II** (epiretinal) — 60 channels | ~600 bps estimated | ~20ms | Defunct
+- **Utah array** (cortical) — 96-1024 channels | ~10-100 kbps | <5ms | Research
+- **FlexLED** (optogenetic, epiretinal) — 8,192 micro-LEDs | ~82 kbps estimated | ~5ms | Preclinical
+
+*\*Estimated from published specs (378 pixels, 30 Hz frame rate, 0.7-9.8ms pulse width). Not published as cited specifications.*
 
 PRIMA is a **write-only, passive implant** -- no bidirectional communication. The encoding is done entirely on the glasses-mounted processor. This matters for security because it means there's no way to validate signals at the implant itself.
 
-*Subretinal encoding (PRIMA) = demonstrated in clinical trial. AI-optimized encoding = demonstrated in research. Full sensor→encode→stimulate from non-camera input = not yet demonstrated.*
+*Subretinal encoding (PRIMA) = demonstrated in clinical trial. AI-optimized encoding = demonstrated in research. Full sensor-to-encode-to-stimulate from non-camera input = not yet demonstrated.*
 
 **Stage 4: Inject — The I0 Boundary Problem**
 
@@ -139,24 +164,16 @@ This means the [Neurowall](/guardrails/) concept -- signal validation at I0 -- m
 Here's what's missing to connect the full pipeline for clinical use:
 
 **Gap 1: Sensor-to-scene reconstruction at prosthetic latency (<50ms)**
-- Components exist separately. No integrated pipeline runs end-to-end at the required speed.
-- **Severity: Critical.** This is the primary engineering bottleneck.
-- **Feasibility: Near-term (2-4 years).** Each component is individually fast enough; the integration work is engineering, not physics.
+Components exist separately. No integrated pipeline runs end-to-end at the required speed. Severity: Critical -- this is the primary engineering bottleneck. Feasibility: Near-term (2-4 years). Each component is individually fast enough; the integration work is engineering, not physics.
 
 **Gap 2: Non-camera sensor encoding pathways**
-- All current clinical systems use cameras. No encoding pipeline takes WiFi CSI, mmWave radar, or LiDAR as input.
-- **Severity: High.** Limits prosthetic vision to camera-sighted scenarios.
-- **Feasibility: Medium-term (3-5 years).** The encoding AI is sensor-agnostic in principle -- it needs geometry and features, not pixels specifically. But nobody has trained an encoder on radar input.
+All current clinical systems use cameras. No encoding pipeline takes WiFi CSI, mmWave radar, or LiDAR as input. Severity: High -- limits prosthetic vision to camera-sighted scenarios. Feasibility: Medium-term (3-5 years). The encoding AI is sensor-agnostic in principle -- it needs geometry and features, not pixels specifically. But nobody has trained an encoder on radar input.
 
 **Gap 3: Security architecture at I0 for passive implants**
-- PRIMA's passive photovoltaic design means zero computational capacity for signal validation. All trust resides in the glasses. No current prosthesis implements any signal validation, replay detection, or authentication.
-- **Severity: High today, Critical as devices become consumer-facing.**
-- **Feasibility: Near-term.** The Neurowall concept is architecturally defined; implementation requires engineering a lightweight validation layer on the glasses processor.
+PRIMA's passive photovoltaic design means zero computational capacity for signal validation. All trust resides in the glasses. No current prosthesis implements any signal validation, replay detection, or authentication. Severity: High today, Critical as devices become consumer-facing. Feasibility: Near-term. The Neurowall concept is architecturally defined; implementation requires engineering a lightweight validation layer on the glasses processor.
 
 **Gap 4: Regulatory framework for dual-use techniques**
-- The same techniques classified as attacks in TARA are used therapeutically. No regulatory framework explicitly addresses this boundary. FDA 510(k)/PMA evaluates safety of intended use, not adversarial misuse.
-- **Severity: Medium.** Not blocking clinical use, but blocking responsible deployment at scale.
-- **Feasibility: Long-term (5-10 years).** Policy gap, not an engineering gap.
+The same techniques classified as attacks in TARA are used therapeutically. No regulatory framework explicitly addresses this boundary. FDA 510(k)/PMA evaluates safety of intended use, not adversarial misuse. Severity: Medium -- not blocking clinical use, but blocking responsible deployment at scale. Feasibility: Long-term (5-10 years). Policy gap, not an engineering gap.
 
 ### The Flip
 
@@ -165,13 +182,15 @@ The clinical chain: Sense environment → extract features → encode for neural
 
 Same chain. Same physics. Same TARA technique IDs. The difference is:
 
-| Dimension | Attack | Therapy |
-|-----------|--------|---------|
-| **Consent** | Absent | Informed, documented, IRB-approved |
-| **Calibration** | Uncalibrated or weaponized | Patient-specific, clinically validated |
-| **Validation** | Bypasses or doesn't exist | Safety bounds, impedance monitoring |
-| **Oversight** | None | Clinical team, FDA regulation, IEC 60601 |
-| **Intent** | Disrupt, surveil, manipulate | Restore function |
+**Consent** — Attack: Absent. Therapy: Informed, documented, IRB-approved.
+
+**Calibration** — Attack: Uncalibrated or weaponized. Therapy: Patient-specific, clinically validated.
+
+**Validation** — Attack: Bypasses or doesn't exist. Therapy: Safety bounds, impedance monitoring.
+
+**Oversight** — Attack: None. Therapy: Clinical team, FDA regulation, IEC 60601.
+
+**Intent** — Attack: Disrupt, surveil, manipulate. Therapy: Restore function.
 
 TARA wasn't built to catalog cures. But when you map 109 attack techniques across the BCI stack with enough granularity, the therapeutic analogues fall out because the physics is shared. The governance is what separates the two. The [therapeutic overlap analysis](/atlas/therapeutics/) maps this dual-use boundary technique by technique.
 
@@ -251,16 +270,16 @@ If the next decade of neurotechnology is going to be built by companies like Sci
 
 **WiFi Sensing & RF Imaging**
 - Geng J, et al. "DensePose From WiFi." arXiv:2301.00250, 2023. [arXiv](https://arxiv.org/abs/2301.00250)
-- Cui Y, et al. "GeRaF: Geometry-Aware Rendering with 3D Gaussian Splatting from Multi-View Radar." NeurIPS 2025 Spotlight.
-- Li H, et al. "PanoRadar: Panoramic 3D Reconstruction from a Single Spinning Radar." ACM MobiCom 2024. [DOI: 10.1145/3636534.3649388](https://doi.org/10.1145/3636534.3649388)
+- Li H, et al. "PanoRadar: Enabling Visual Recognition at Radio Frequency." ACM MobiCom 2024. [DOI: 10.1145/3636534.3649369](https://doi.org/10.1145/3636534.3649369)
+- GSRF. "Complex-Valued 3D Gaussian Splatting for Efficient Radio-Frequency Data Synthesis." NeurIPS 2025.
 - Liu J, et al. "Wireless Sensing for Human Activity: A Survey." *IEEE Communications Surveys & Tutorials* 21(2):1810-1836, 2019.
 
 **Neural Encoding for Vision Prosthetics**
 - de Ruyter van Steveninck J, et al. "End-to-End Optimization of Prosthetic Vision." *J Vision* 22(2):20, 2022. [DOI: 10.1167/jov.22.2.20](https://doi.org/10.1167/jov.22.2.20)
 - Granley J, Beyeler M. "Hybrid Neural Autoencoders for Stimulus Encoding in Visual and Other Sensory Neuroprostheses." NeurIPS 2022.
 - Granley J, et al. "Human-in-the-Loop Optimization for Deep Stimulus Encoding in Visual Prostheses." NeurIPS 2023.
-- Granley J, et al. "Differentiable Phosphene Simulation for End-to-End Optimization of Prosthetic Vision." *eLife*, 2024.
-- Elnabawy R, et al. "Evaluating Image Processing Strategies for Prosthetic Vision." *J Neural Engineering* 19(4):046033, 2022.
+- van der Grinten M, de Ruyter van Steveninck J, et al. "Towards Biologically Plausible Phosphene Simulation for the Differentiable Optimization of Visual Cortical Prostheses." *eLife* 13:e85812, 2024. [DOI: 10.7554/eLife.85812](https://elifesciences.org/articles/85812)
+- Elnabawy R, et al. "PVGAN: A Generative Adversarial Network for Object Simplification in Prosthetic Vision." *J Neural Engineering*, 2022. [PMID: 35981530](https://pubmed.ncbi.nlm.nih.gov/35981530/)
 
 **Game Engine Rendering & 3D Reconstruction**
 - Kerbl B, et al. "3D Gaussian Splatting for Real-Time Radiance Field Rendering." *ACM Trans Graphics* (SIGGRAPH) 42(4):139, 2023. [DOI: 10.1145/3592433](https://doi.org/10.1145/3592433)
