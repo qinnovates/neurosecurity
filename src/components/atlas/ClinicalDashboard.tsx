@@ -17,6 +17,7 @@ import type {
   ClinicalDsmCondition,
   NeuralImpactChain,
 } from '../../lib/clinical-data';
+import { THREAT_VECTORS, type ThreatVector, type BandId } from '../../lib/threat-data';
 
 // ═══ Types ═══
 
@@ -24,10 +25,11 @@ type ViewTab = 'zoom' | 'chain' | 'pathways' | 'neurotransmitters' | 'dsm';
 type ChainDirection = 'attack' | 'therapy' | 'dual';
 
 /** Semantic zoom levels — from macro (band) to micro (synapse) */
-type ZoomLevel = 'bands' | 'regions' | 'pathways' | 'neurotransmitters' | 'receptors' | 'molecular';
+type ZoomLevel = 'techniques' | 'bands' | 'regions' | 'pathways' | 'neurotransmitters' | 'receptors' | 'molecular';
 
 interface ZoomState {
   level: ZoomLevel;
+  techniqueId: string | null;
   bandId: string | null;
   regionId: string | null;
   pathwayId: string | null;
@@ -36,6 +38,7 @@ interface ZoomState {
 }
 
 const ZOOM_LEVELS: { id: ZoomLevel; label: string; icon: string; color: string }[] = [
+  { id: 'techniques', label: 'Techniques', icon: '!', color: '#dc2626' },
   { id: 'bands', label: 'QIF Bands', icon: '◇', color: '#f59e0b' },
   { id: 'regions', label: 'Brain Regions', icon: '◈', color: '#10b981' },
   { id: 'pathways', label: 'Neural Pathways', icon: '⟶', color: '#8b5cf6' },
@@ -160,7 +163,8 @@ function TabBar({ active, onChange }: { active: ViewTab; onChange: (t: ViewTab) 
 
 function SemanticZoomView({ data }: { data: ClinicalData }) {
   const [zoom, setZoom] = useState<ZoomState>({
-    level: 'bands',
+    level: 'techniques',
+    techniqueId: null,
     bandId: null,
     regionId: null,
     pathwayId: null,
@@ -170,15 +174,23 @@ function SemanticZoomView({ data }: { data: ClinicalData }) {
 
   // Breadcrumb trail
   const breadcrumbs = useMemo(() => {
+    const resetZoom: ZoomState = { level: 'techniques', techniqueId: null, bandId: null, regionId: null, pathwayId: null, neurotransmitterId: null, receptorId: null };
     const crumbs: { label: string; level: ZoomLevel; onClick: () => void }[] = [
       {
-        label: 'All Bands',
-        level: 'bands',
-        onClick: () => setZoom({ level: 'bands', bandId: null, regionId: null, pathwayId: null, neurotransmitterId: null, receptorId: null }),
+        label: 'All Techniques',
+        level: 'techniques',
+        onClick: () => setZoom(resetZoom),
       },
     ];
+    if (zoom.techniqueId) {
+      const tech = THREAT_VECTORS.find((t) => t.id === zoom.techniqueId);
+      crumbs.push({
+        label: tech ? (tech.name.length > 20 ? tech.name.slice(0, 20) + '...' : tech.name) : zoom.techniqueId,
+        level: 'bands',
+        onClick: () => setZoom({ ...resetZoom, level: 'bands', techniqueId: zoom.techniqueId }),
+      });
+    }
     if (zoom.bandId) {
-      const bandData = data.bandClinicalData[zoom.bandId];
       crumbs.push({
         label: zoom.bandId,
         level: 'regions',
@@ -268,7 +280,21 @@ function SemanticZoomView({ data }: { data: ClinicalData }) {
       </div>
 
       {/* Content based on zoom level */}
-      {zoom.level === 'bands' && <BandsZoom data={data} onSelect={(bandId) => setZoom({ ...zoom, level: 'regions', bandId })} />}
+      {zoom.level === 'techniques' && (
+        <TechniquesZoom
+          data={data}
+          onSelect={(techniqueId) => setZoom({ ...zoom, level: 'bands', techniqueId })}
+          onSkip={() => setZoom({ ...zoom, level: 'bands', techniqueId: null })}
+        />
+      )}
+      {zoom.level === 'bands' && (
+        <BandsZoom
+          data={data}
+          techniqueId={zoom.techniqueId}
+          onSelect={(bandId) => setZoom({ ...zoom, level: 'regions', bandId })}
+          onBack={zoom.techniqueId ? () => setZoom({ ...zoom, level: 'techniques', techniqueId: null, bandId: null }) : undefined}
+        />
+      )}
       {zoom.level === 'regions' && zoom.bandId && (
         <RegionsZoom
           data={data}
@@ -317,12 +343,188 @@ function SemanticZoomView({ data }: { data: ClinicalData }) {
 
 // ═══ Zoom Sub-Views ═══
 
-function BandsZoom({ data, onSelect }: { data: ClinicalData; onSelect: (bandId: string) => void }) {
-  const bandOrder = ['N7', 'N6', 'N5', 'N4', 'N3', 'N2', 'N1', 'I0', 'S1', 'S2', 'S3'];
+function TechniquesZoom({ data, onSelect, onSkip }: {
+  data: ClinicalData;
+  onSelect: (techniqueId: string) => void;
+  onSkip: () => void;
+}) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedSeverity, setSelectedSeverity] = useState<string | null>(null);
+
+  const techniques = useMemo(() => {
+    let filtered = THREAT_VECTORS;
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(
+        (t) => t.name.toLowerCase().includes(term) || t.id.toLowerCase().includes(term) || t.description.toLowerCase().includes(term)
+      );
+    }
+    if (selectedCategory) {
+      filtered = filtered.filter((t) => t.category === selectedCategory);
+    }
+    if (selectedSeverity) {
+      filtered = filtered.filter((t) => t.severity === selectedSeverity);
+    }
+    return filtered.sort((a, b) => b.niss.score - a.niss.score);
+  }, [searchTerm, selectedCategory, selectedSeverity]);
+
+  const categories = useMemo(() => {
+    const catMap = new Map<string, number>();
+    for (const t of THREAT_VECTORS) {
+      catMap.set(t.category, (catMap.get(t.category) ?? 0) + 1);
+    }
+    return Array.from(catMap.entries()).sort((a, b) => b[1] - a[1]);
+  }, []);
 
   return (
+    <div>
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <input
+          type="text"
+          placeholder="Search techniques by name, ID, or description..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="px-3 py-1.5 rounded-lg text-xs flex-1 min-w-[200px]"
+          style={{
+            background: 'var(--color-bg-secondary)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-text-primary)',
+          }}
+        />
+        <button
+          onClick={onSkip}
+          className="px-3 py-1.5 rounded-lg text-[11px] font-medium"
+          style={{ background: 'var(--color-bg-secondary)', color: 'var(--color-text-faint)', border: '1px solid var(--color-border)' }}
+        >
+          Skip to Bands →
+        </button>
+      </div>
+
+      {/* Severity + Category filters */}
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {(['critical', 'high', 'medium', 'low'] as const).map((sev) => (
+          <button
+            key={sev}
+            onClick={() => setSelectedSeverity(selectedSeverity === sev ? null : sev)}
+            className="px-2 py-1 rounded-full text-[10px] font-medium"
+            style={{
+              background: selectedSeverity === sev ? `${SEVERITY_COLORS[sev]}20` : 'var(--color-bg-secondary)',
+              color: selectedSeverity === sev ? SEVERITY_COLORS[sev] : 'var(--color-text-faint)',
+            }}
+          >
+            {sev}
+          </button>
+        ))}
+        <span className="text-[10px] self-center mx-1" style={{ color: 'var(--color-text-faint)' }}>|</span>
+        {categories.map(([cat, count]) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(selectedCategory === cat ? null : cat)}
+            className="px-2 py-1 rounded-full text-[10px] font-medium"
+            style={{
+              background: selectedCategory === cat ? 'var(--color-accent-primary)' : 'var(--color-bg-secondary)',
+              color: selectedCategory === cat ? '#fff' : 'var(--color-text-faint)',
+            }}
+          >
+            {cat} ({count})
+          </button>
+        ))}
+      </div>
+
+      <div className="text-[10px] mb-3" style={{ color: 'var(--color-text-faint)' }}>
+        {techniques.length} technique{techniques.length !== 1 ? 's' : ''} | Select one to trace its full neural impact chain
+      </div>
+
+      {/* Technique grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[600px] overflow-y-auto pr-1">
+        {techniques.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => onSelect(t.id)}
+            className="text-left rounded-lg p-3 transition-all hover:shadow-md group"
+            style={{ background: 'var(--color-bg-primary)', border: `1px solid var(--color-border)` }}
+          >
+            <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="w-2 h-2 rounded-full shrink-0" style={{ background: SEVERITY_COLORS[t.severity] }} />
+                <span className="text-xs font-bold truncate" style={{ color: 'var(--color-text-primary)' }}>
+                  {t.name}
+                </span>
+              </div>
+              <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-1" style={{ color: 'var(--color-accent-primary)' }}>
+                Drill in →
+              </span>
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[10px] font-mono" style={{ color: 'var(--color-text-faint)' }}>{t.id}</span>
+              <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: `${SEVERITY_COLORS[t.severity]}12`, color: SEVERITY_COLORS[t.severity] }}>
+                {t.niss.score}
+              </span>
+              <span className="text-[10px]" style={{ color: 'var(--color-text-faint)' }}>{t.category}</span>
+              <span className="text-[10px] px-1 py-0.5 rounded" style={{ background: 'var(--color-bg-secondary)', color: 'var(--color-text-faint)' }}>
+                {t.status}
+              </span>
+            </div>
+            {/* Band pills */}
+            <div className="flex flex-wrap gap-1">
+              {t.bands.map((b) => (
+                <span
+                  key={b}
+                  className="px-1 py-0.5 rounded text-[9px] font-mono"
+                  style={{ background: `${BAND_COLORS[b] ?? '#6b7280'}12`, color: BAND_COLORS[b] ?? '#6b7280' }}
+                >
+                  {b}
+                </span>
+              ))}
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {techniques.length === 0 && (
+        <p className="text-sm text-center py-6" style={{ color: 'var(--color-text-faint)' }}>
+          No techniques match your filters.
+        </p>
+      )}
+    </div>
+  );
+}
+
+function BandsZoom({ data, techniqueId, onSelect, onBack }: {
+  data: ClinicalData;
+  techniqueId?: string | null;
+  onSelect: (bandId: string) => void;
+  onBack?: () => void;
+}) {
+  const bandOrder = ['N7', 'N6', 'N5', 'N4', 'N3', 'N2', 'N1', 'I0', 'S1', 'S2', 'S3'];
+  const technique = techniqueId ? THREAT_VECTORS.find((t) => t.id === techniqueId) : null;
+  const filteredBands = technique ? bandOrder.filter((b) => technique.bands.includes(b as BandId)) : bandOrder;
+
+  return (
+    <div>
+      {onBack && (
+        <button onClick={onBack} className="text-xs mb-3 flex items-center gap-1" style={{ color: 'var(--color-accent-primary)' }}>
+          ← Back to techniques
+        </button>
+      )}
+      {technique && (
+        <div className="rounded-lg p-3 mb-4" style={{ background: 'var(--color-bg-secondary)', border: '1px solid var(--color-border)' }}>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="w-2 h-2 rounded-full" style={{ background: SEVERITY_COLORS[technique.severity] }} />
+            <span className="text-xs font-bold" style={{ color: 'var(--color-text-primary)' }}>{technique.name}</span>
+            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: `${SEVERITY_COLORS[technique.severity]}15`, color: SEVERITY_COLORS[technique.severity] }}>
+              NISS {technique.niss.score}
+            </span>
+            <span className="text-[10px] font-mono" style={{ color: 'var(--color-text-faint)' }}>{technique.id}</span>
+          </div>
+          <p className="text-[10px]" style={{ color: 'var(--color-text-faint)' }}>
+            Showing {filteredBands.length} affected band{filteredBands.length !== 1 ? 's' : ''} | {technique.category} | {technique.status}
+          </p>
+        </div>
+      )}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {bandOrder.map((bandId) => {
+      {filteredBands.map((bandId) => {
         const bcd = data.bandClinicalData[bandId];
         if (!bcd) return null;
         const color = BAND_COLORS[bandId] ?? '#6b7280';
@@ -383,6 +585,7 @@ function BandsZoom({ data, onSelect }: { data: ClinicalData; onSelect: (bandId: 
           </button>
         );
       })}
+    </div>
     </div>
   );
 }
