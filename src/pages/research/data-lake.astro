@@ -9,7 +9,6 @@ import dsmRaw from '@shared/qif-dsm-mappings.json';
 import ethicsRaw from '@shared/qif-ethics-controls.json';
 import controlsRaw from '@shared/qif-security-controls.json';
 import pathwaysRaw from '@shared/qif-neural-pathways.json';
-import neurotransmitterRaw from '@shared/qif-neurotransmitters.json';
 
 const landscape = landscapeRaw as any;
 const atlas = atlasRaw as any;
@@ -90,10 +89,6 @@ const dsmClusters = dsm.diagnostic_clusters || {};
 const totalConditions = Object.values(dsmClusters).reduce((s: number, c: any) => s + (c.conditions || []).length, 0);
 const totalClusters = Object.keys(dsmClusters).length;
 const allPathways = pathways.pathways || [];
-const allNeurotransmitters = (neurotransmitterRaw as any).neurotransmitters || [];
-const totalReceptors = allNeurotransmitters.reduce((s: number, nt: any) => s + (Array.isArray(nt.receptors) ? nt.receptors.length : 0), 0);
-const totalCofactors = allNeurotransmitters.reduce((s: number, nt: any) => s + (nt.cofactor_dependencies || []).length, 0);
-const totalSynthSteps = allNeurotransmitters.reduce((s: number, nt: any) => s + (nt.synthesis_pathway || []).length, 0);
 const frameworks = ethics.governance_frameworks || [];
 
 // Market/investor data (nested JSON)
@@ -113,12 +108,6 @@ const topRounds = [...fundingRounds].sort((a: any, b: any) => (b.amount_usd || 0
 const mesolimbicPathway = allPathways.find((p: any) => p.id === 'mesolimbic');
 
 // Color maps
-const ntColors: Record<string, string> = {
-  dopamine: '#22c55e', serotonin: '#3b82f6', norepinephrine: '#ef4444',
-  acetylcholine: '#f59e0b', glutamate: '#ec4899', gaba: '#8b5cf6',
-  glycine: '#06b6d4', histamine: '#f97316', endorphins: '#a78bfa',
-  nitric_oxide: '#14b8a6', endocannabinoids: '#84cc16', adenosine: '#6366f1',
-};
 const severityColors: Record<string, string> = {
   critical: '#ef4444', high: '#f59e0b', medium: '#eab308', low: '#22c55e', info: '#3b82f6',
 };
@@ -456,89 +445,7 @@ const bandColors: Record<string, string> = {
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 3: NEUROTRANSMITTER SYSTEMS                        -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-
-  <section class="mb-10 reveal">
-    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Neurotransmitter Systems</h2>
-    <p class="text-xs text-[var(--color-text-faint)] mb-6">
-      {totalNeurotransmitters} neurotransmitters with {totalSynthSteps} synthesis steps, {totalCofactors} cofactor dependencies, and {totalReceptors} receptor subtypes mapped
-    </p>
-
-    <div class="glass rounded-xl p-5 mb-6">
-      <div class="overflow-x-auto">
-        <table class="w-full text-xs">
-          <thead>
-            <tr class="border-b border-[var(--color-border)]/30">
-              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Neurotransmitter</th>
-              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Class</th>
-              <th class="text-center py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Synth Steps</th>
-              <th class="text-center py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Receptors</th>
-              <th class="text-center py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Cofactors</th>
-              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Key Enzymes</th>
-              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">QIF Bands</th>
-            </tr>
-          </thead>
-          <tbody class="text-[var(--color-text-muted)]">
-            {allNeurotransmitters.map((nt: any) => {
-              const synthSteps = (nt.synthesis_pathway || []).length;
-              const receptorCount = Array.isArray(nt.receptors) ? nt.receptors.length : 0;
-              const cofactorCount = (nt.cofactor_dependencies || []).length;
-              const enzymes = (nt.synthesis_pathway || []).map((s: any) => s.enzyme_gene).filter(Boolean).slice(0, 3);
-              const bands = nt.primary_qif_bands || [];
-              const color = ntColors[nt.id] || '#94a3b8';
-              return (
-                <tr class="border-b border-[var(--color-border)]/10">
-                  <td class="py-2 px-2">
-                    <div class="flex items-center gap-2">
-                      <span class="w-2 h-2 rounded-full shrink-0" style={`background: ${color}`} />
-                      <span class="font-semibold" style={`color: ${color}`}>{nt.name}</span>
-                      {nt.abbreviation && <span class="text-[9px] text-[var(--color-text-faint)]">({nt.abbreviation})</span>}
-                    </div>
-                  </td>
-                  <td class="py-2 px-2 text-[var(--color-text-faint)]">{nt.chemical_class || '—'}</td>
-                  <td class="py-2 px-2 text-center font-mono">{synthSteps}</td>
-                  <td class="py-2 px-2 text-center font-mono text-cyan-400">{receptorCount}</td>
-                  <td class="py-2 px-2 text-center font-mono text-amber-400">{cofactorCount}</td>
-                  <td class="py-2 px-2 text-[10px] text-[var(--color-text-faint)]">{enzymes.join(', ') || '—'}</td>
-                  <td class="py-2 px-2">
-                    <div class="flex flex-wrap gap-1">
-                      {bands.slice(0, 4).map((b: string) => (
-                        <span class="text-[9px] font-mono px-1 py-0.5 rounded" style={`background: ${bandColors[b] || '#666'}20; color: ${bandColors[b] || '#666'}`}>{b}</span>
-                      ))}
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- NT summary stats -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-      <div class="glass rounded-lg p-4 text-center">
-        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-green-400">{totalNeurotransmitters}</p>
-        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Neurotransmitters</p>
-      </div>
-      <div class="glass rounded-lg p-4 text-center">
-        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-cyan-400">{totalReceptors}</p>
-        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Receptor Subtypes</p>
-      </div>
-      <div class="glass rounded-lg p-4 text-center">
-        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-amber-400">{totalCofactors}</p>
-        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Cofactor Dependencies</p>
-      </div>
-      <div class="glass rounded-lg p-4 text-center">
-        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-purple-400">{totalSynthSteps}</p>
-        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Synthesis Steps</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 4: THREAT LANDSCAPE                                -->
+  <!-- SECTION 3: THREAT LANDSCAPE                                -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <section class="mb-10 reveal">
