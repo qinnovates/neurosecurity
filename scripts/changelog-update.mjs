@@ -4,10 +4,12 @@
  * changelog-update.mjs
  *
  * Parses git log since last changelog update, classifies commits by prefix tag,
- * and appends entries to CHANGELOG.md. Generates blog drafts for tier 2+ commits
- * and release metadata for tier 3.
+ * and appends entries to CHANGELOG.md. Optionally generates release metadata
+ * for tier 3 commits.
  *
  * Usage: node scripts/changelog-update.mjs [--dry-run]
+ *
+ * Also invoked automatically by the PostToolUse hook after git commits.
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
@@ -18,7 +20,6 @@ import { execSync } from 'child_process';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const CHANGELOG_PATH = join(ROOT, 'CHANGELOG.md');
-const BLOGS_DIR = join(ROOT, 'blogs');
 const DIST_DIR = join(ROOT, 'dist');
 const DRY_RUN = process.argv.includes('--dry-run');
 const REPO_URL = 'https://github.com/qinnovates/qinnovate';
@@ -172,65 +173,6 @@ function formatDateSection(date, commits) {
 }
 
 /**
- * Generate a blog draft for tier 2+ commits on a given date.
- */
-function generateBlogDraft(date, commits) {
-  const tier2Plus = commits.filter(c => c.tier >= 2);
-  if (tier2Plus.length === 0) return null;
-
-  const tags = new Set(['#Changelog', '#Release']);
-  for (const c of tier2Plus) {
-    const lower = c.subject.toLowerCase();
-    if (lower.includes('bci') || lower.includes('eeg')) tags.add('#BCI');
-    if (lower.includes('tara') || lower.includes('niss')) tags.add('#TARA');
-    if (lower.includes('neurowall')) tags.add('#Neurowall');
-    if (lower.includes('validation')) tags.add('#Validation');
-    if (lower.includes('nsp')) tags.add('#NSP');
-    if (lower.includes('dashboard')) tags.add('#Dashboard');
-  }
-
-  const tagArray = JSON.stringify([...tags]);
-
-  let body = '';
-  for (const c of tier2Plus) {
-    const shortHash = c.hash.substring(0, 7);
-    body += `- **${c.display}** ([${shortHash}](${REPO_URL}/commit/${shortHash}))`;
-    if (c.body) {
-      // Pull first meaningful line from commit body
-      const bodyLines = c.body.split('\n').filter(l => l.trim() && !l.startsWith('Co-Authored'));
-      if (bodyLines.length > 0) {
-        body += `\n  ${bodyLines[0].trim()}`;
-      }
-    }
-    body += '\n';
-  }
-
-  const frontmatter = `---
-title: "Project Update: ${date}"
-subtitle: "Recent changes and improvements"
-date_posted: "${date}"
-source: "${REPO_URL}/commits/main"
-tags: ${tagArray}
-author: "Kevin Qi"
-fact_checked: false
-fact_check_date: ""
-fact_check_notes: []
----`;
-
-  const content = `${frontmatter}
-
-## What Changed
-
-${body}
----
-
-*Auto-generated changelog summary. Review before publishing.*
-`;
-
-  return content;
-}
-
-/**
  * Generate release metadata JSON for tier 3 commits.
  */
 function generateReleaseMeta(date, commits) {
@@ -271,7 +213,6 @@ function main() {
   // Build new changelog sections
   let newSections = '';
   let maxTier = 0;
-  let blogDraftsCreated = 0;
 
   for (const date of dates) {
     const dateCommits = byDate[date];
@@ -280,26 +221,6 @@ function main() {
     // Track max tier
     for (const c of dateCommits) {
       if (c.tier > maxTier) maxTier = c.tier;
-    }
-
-    // Blog draft for tier 2+
-    const draft = generateBlogDraft(date, dateCommits);
-    if (draft) {
-      const filename = `${date}-changelog-summary.md`;
-      const filepath = join(BLOGS_DIR, filename);
-
-      // Skip if draft already exists for this date
-      if (existsSync(filepath)) {
-        console.log(`  blog draft already exists: ${filename}`);
-      } else if (DRY_RUN) {
-        console.log(`  would create blog draft: ${filename}`);
-        blogDraftsCreated++;
-      } else {
-        if (!existsSync(BLOGS_DIR)) mkdirSync(BLOGS_DIR, { recursive: true });
-        writeFileSync(filepath, draft, 'utf-8');
-        console.log(`  created blog draft: ${filename}`);
-        blogDraftsCreated++;
-      }
     }
 
     // Release metadata for tier 3
@@ -333,7 +254,6 @@ function main() {
     console.log('\n--- DRY RUN: Would add to CHANGELOG.md ---');
     console.log(newSections);
     console.log(`\nMax tier: ${maxTier}`);
-    console.log(`Blog drafts: ${blogDraftsCreated}`);
     if (maxTier >= 3) console.log('Would create GitHub Release');
   } else {
     let existing = '';
@@ -377,9 +297,8 @@ function main() {
 
   // Output tier info for CI
   console.log(`\nmax_tier=${maxTier}`);
-  console.log(`blog_drafts=${blogDraftsCreated}`);
 
-  return { maxTier, blogDraftsCreated };
+  return { maxTier };
 }
 
 const result = main();

@@ -8,26 +8,36 @@ Auto-maintained by `scripts/changelog-update.mjs`.
 
 ## 2026-03-11
 
-### Updated
-- KQL security limits, table extraction, clinical techniques zoom, pathway DSM mappings ([2049e9e](https://github.com/qinnovates/qinnovate/commit/2049e9e))
-- KQL engine v2: indexes, joins, array-aware operators, query optimization ([03e0c2e](https://github.com/qinnovates/qinnovate/commit/03e0c2e))
-- Brain atlas: detailed mechanics for all 38 regions with click-to-expand UI ([10e6c85](https://github.com/qinnovates/qinnovate/commit/10e6c85))
-- Whitepaper v8 Section 19, Runemate neural OS vision, vision page UX, data mapping ([1257d1c](https://github.com/qinnovates/qinnovate/commit/1257d1c))
-- Data lake: brain regions with functions and connections per band ([7497f8b](https://github.com/qinnovates/qinnovate/commit/7497f8b))
-- Data lake dashboard: funding rounds, investor intel, neurotransmitter systems ([fd4cc29](https://github.com/qinnovates/qinnovate/commit/fd4cc29))
-- NP metric expanded to 4 levels: N(0), T(3.3), P(6.7), S(10.0) — new "Partial" level for recoverable structural changes
-- All 109 TARA techniques recalculated — 26 scores changed, 2 severity shifts (motor hijacking + OTA firmware: high → medium)
-- KQL techniques table: 8 new columns (niss_vector, niss_severity, niss_pins, niss_bi, niss_cr, niss_cd, niss_cv, niss_rv, niss_np)
-- Whitepaper v8: added Appendix C (Version History v7.0 → v8.0)
-
 ### Added
-- NISS Neurological Extension documentation: 42 conditions across 7 categories, impact chains, KQL examples, backward compatibility
+- **Brain Map SIEM dashboard** — new default tab on Clinical View with 3-panel SOC-style layout ([888a6e1](https://github.com/qinnovates/qinnovate/commit/888a6e1))
+  - HourglassSpine: compact vertical 11-band display with threat counts
+  - BrainSvg: medial brain view with 38 clickable region hotspots, animated connection lines
+  - CascadePanelStack: drill-down panels (Pathways, Neurotransmitters, Molecules, DSM Outcomes)
+  - HeatmapMatrix: Technique x Band and Technique x DSM correlation grids with cross-highlighting
+  - BreadcrumbBar: selection path navigation (Band > Region > Pathway > NT > DSM)
+- **KQL query engine on all atlas pages** — index, clinical, scoring, TARA, therapeutics ([888a6e1](https://github.com/qinnovates/qinnovate/commit/888a6e1))
+- Neuroscience data expansion: receptors (83KB), glial cells, cranial nerves, neurovascular, neuroendocrine — 6 new JSON sources ([4addb6f](https://github.com/qinnovates/qinnovate/commit/4addb6f))
+- KQL table support for clinical dashboard ([6890a99](https://github.com/qinnovates/qinnovate/commit/6890a99))
+- NISS Neurological Extension documentation: 42 conditions across 7 categories, impact chains, KQL examples
+
+### Updated
+- KQL engine v2: hash indexes, joins, array-aware operators, security limits (4KB/12ops/50K rows/2s) ([03e0c2e](https://github.com/qinnovates/qinnovate/commit/03e0c2e))
+- KQL security limits, table extraction, clinical techniques zoom, pathway DSM mappings ([2049e9e](https://github.com/qinnovates/qinnovate/commit/2049e9e))
+- Brain atlas: detailed mechanics for all 38 regions with click-to-expand UI ([10e6c85](https://github.com/qinnovates/qinnovate/commit/10e6c85))
+- Whitepaper v8 Section 19, Runemate neural OS vision, vision page UX ([1257d1c](https://github.com/qinnovates/qinnovate/commit/1257d1c))
+- Data lake dashboard: funding rounds, investor intel, neurotransmitter systems ([fd4cc29](https://github.com/qinnovates/qinnovate/commit/fd4cc29))
+- NP metric expanded to 4 levels: N(0), T(3.3), P(6.7), S(10.0)
+- All 109 TARA techniques recalculated — 26 scores changed, 2 severity shifts
+- KQL techniques table: 8 new NISS columns
 
 ### Fixed
 - Data lake integrity: region aliases, TARA IDs, DSM expansion ([ed87b1a](https://github.com/qinnovates/qinnovate/commit/ed87b1a))
+- BCI funding chart: logarithmic visualization, iframe 404 ([1f47c30](https://github.com/qinnovates/qinnovate/commit/1f47c30))
+- GitHub Pages actions: stable tags replacing broken SHAs ([0337d3b](https://github.com/qinnovates/qinnovate/commit/0337d3b))
 
 ### Research
 - QIF Whitepaper v8.0 working draft ([6dbe537](https://github.com/qinnovates/qinnovate/commit/6dbe537))
+- Whitepaper v8: Appendix C (Version History v7.0 → v8.0)
 
 ## 2026-03-10
 
