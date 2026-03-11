@@ -1,5 +1,5 @@
 /**
- * NISS (Neural Impact Scoring System) Vector Parser v1.1
+ * NISS (Neural Impact Scoring System) Vector Parser v2.0
  *
  * Pure TypeScript parser for NISS vector strings used throughout the
  * QIF threat registry. Handles parsing, validation, serialization,
@@ -142,7 +142,7 @@ const VALID_RV: ReadonlySet<string> = new Set(['F', 'T', 'P', 'I', 'X']);
 const VALID_NP: ReadonlySet<string> = new Set(['N', 'T', 'P', 'S', 'X']);
 
 /** Supported NISS versions */
-const SUPPORTED_VERSIONS: ReadonlySet<string> = new Set(['1.0', '1.1']);
+const SUPPORTED_VERSIONS: ReadonlySet<string> = new Set(['1.0', '1.1', '2.0']);
 
 // ═══════════════════════════════════════════════════════════════════
 // Context Profiles (optional weight overrides)
