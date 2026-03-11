@@ -6,7 +6,8 @@
     "url": "https://www.crunchbase.com",
     "rss_url": null,
     "has_api": true,
-    "notes": "REST API requires Enterprise plan. Free tier: 5 profile views/day."
+    "notes": "REST API requires Enterprise plan. Free tier: 5 profile views/day.",
+    "intel_feed": true
   },
   {
     "name": "PitchBook",
@@ -132,7 +133,8 @@
     "url": "https://www.theinformation.com",
     "rss_url": "https://www.theinformation.com/feed",
     "has_api": false,
-    "notes": "Premium tech journalism. Subscriber-only deep dives."
+    "notes": "Premium tech journalism. Subscriber-only deep dives.",
+    "intel_feed": true
   },
   {
     "name": "Sifted",
@@ -141,7 +143,8 @@
     "url": "https://sifted.eu",
     "rss_url": "https://sifted.eu/feed",
     "has_api": false,
-    "notes": "European startup news backed by Financial Times."
+    "notes": "European startup news backed by Financial Times.",
+    "intel_feed": true
   },
   {
     "name": "BetaKit",
@@ -150,7 +153,8 @@
     "url": "https://betakit.com",
     "rss_url": "https://betakit.com/feed/",
     "has_api": false,
-    "notes": "Canadian startup and tech ecosystem news."
+    "notes": "Canadian startup and tech ecosystem news.",
+    "intel_feed": true
   },
   {
     "name": "TechCrunch (Startups)",
@@ -159,7 +163,8 @@
     "url": "https://techcrunch.com/category/startups/",
     "rss_url": "https://techcrunch.com/category/startups/feed/",
     "has_api": false,
-    "notes": "Startup-specific TechCrunch vertical."
+    "notes": "Startup-specific TechCrunch vertical.",
+    "intel_feed": true
   },
   {
     "name": "VentureBeat (Business)",
@@ -168,7 +173,8 @@
     "url": "https://venturebeat.com",
     "rss_url": "https://venturebeat.com/feed/",
     "has_api": false,
-    "notes": "AI and enterprise tech news."
+    "notes": "AI and enterprise tech news.",
+    "intel_feed": true
   },
   {
     "name": "Silicon Republic",
@@ -177,7 +183,8 @@
     "url": "https://www.siliconrepublic.com",
     "rss_url": "https://www.siliconrepublic.com/feed",
     "has_api": false,
-    "notes": "Irish/European tech and startup news."
+    "notes": "Irish/European tech and startup news.",
+    "intel_feed": true
   },
   {
     "name": "StartupBlink",
@@ -222,7 +229,8 @@
     "url": "https://news.crunchbase.com",
     "rss_url": "https://news.crunchbase.com/feed/",
     "has_api": false,
-    "notes": "Funding news and startup analysis. Free to read."
+    "notes": "Funding news and startup analysis. Free to read.",
+    "intel_feed": true
   },
   {
     "name": "PitchBook Blog",
@@ -402,7 +410,8 @@
     "url": "https://www.grandviewresearch.com",
     "rss_url": "https://www.grandviewresearch.com/feeds/all-press-releases",
     "has_api": false,
-    "notes": "Market reports with free summaries and TOC. Full reports paid."
+    "notes": "Market reports with free summaries and TOC. Full reports paid.",
+    "intel_feed": true
   },
   {
     "name": "Fortune Business Insights",
@@ -492,7 +501,8 @@
     "url": "https://www.mckinsey.com/insights",
     "rss_url": "https://www.mckinsey.com/insights/rss",
     "has_api": false,
-    "notes": "Free research articles and industry perspectives."
+    "notes": "Free research articles and industry perspectives.",
+    "intel_feed": true
   },
   {
     "name": "Deloitte Insights",
@@ -807,7 +817,8 @@
     "url": "https://techcrunch.com",
     "rss_url": "https://techcrunch.com/feed/",
     "has_api": false,
-    "notes": "Leading tech news. Full-text RSS."
+    "notes": "Leading tech news. Full-text RSS.",
+    "intel_feed": true
   },
   {
     "name": "VentureBeat",
@@ -816,7 +827,8 @@
     "url": "https://venturebeat.com",
     "rss_url": "https://venturebeat.com/feed/",
     "has_api": false,
-    "notes": "AI, gaming, and enterprise tech news."
+    "notes": "AI, gaming, and enterprise tech news.",
+    "intel_feed": true
   },
   {
     "name": "The Verge",
@@ -825,7 +837,8 @@
     "url": "https://www.theverge.com",
     "rss_url": "https://www.theverge.com/rss/index.xml",
     "has_api": false,
-    "notes": "Consumer tech and science coverage."
+    "notes": "Consumer tech and science coverage.",
+    "intel_feed": true
   },
   {
     "name": "Wired",
@@ -834,7 +847,8 @@
     "url": "https://www.wired.com",
     "rss_url": "https://www.wired.com/feed/rss",
     "has_api": false,
-    "notes": "Long-form tech and science journalism."
+    "notes": "Long-form tech and science journalism.",
+    "intel_feed": true
   },
   {
     "name": "MIT Technology Review",
@@ -852,7 +866,8 @@
     "url": "https://arstechnica.com",
     "rss_url": "https://feeds.arstechnica.com/arstechnica/index",
     "has_api": false,
-    "notes": "In-depth science and tech reporting."
+    "notes": "In-depth science and tech reporting.",
+    "intel_feed": true
   },
   {
     "name": "Fast Company",
@@ -861,7 +876,8 @@
     "url": "https://www.fastcompany.com",
     "rss_url": "https://www.fastcompany.com/latest/rss",
     "has_api": false,
-    "notes": "Business innovation and technology."
+    "notes": "Business innovation and technology.",
+    "intel_feed": true
   },
   {
     "name": "Reuters Technology",
@@ -888,7 +904,8 @@
     "url": "https://www.cnbc.com",
     "rss_url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",
     "has_api": false,
-    "notes": "Business and tech news. CNBC Technology RSS feed."
+    "notes": "Business and tech news. CNBC Technology RSS feed.",
+    "intel_feed": true
   },
   {
     "name": "Financial Times",
@@ -915,7 +932,8 @@
     "url": "https://www.statnews.com",
     "rss_url": "https://www.statnews.com/feed/",
     "has_api": false,
-    "notes": "Health, medicine, and life sciences reporting. Some STAT+ paywalled."
+    "notes": "Health, medicine, and life sciences reporting. Some STAT+ paywalled.",
+    "intel_feed": true
   },
   {
     "name": "Fierce Biotech",
@@ -924,7 +942,8 @@
     "url": "https://www.fiercebiotech.com",
     "rss_url": "https://www.fiercebiotech.com/rss/xml",
     "has_api": false,
-    "notes": "Biotech industry news and analysis."
+    "notes": "Biotech industry news and analysis.",
+    "intel_feed": true
   },
   {
     "name": "MedTech Dive",
@@ -933,7 +952,8 @@
     "url": "https://www.medtechdive.com",
     "rss_url": "https://www.medtechdive.com/feeds/open-research/writing/",
     "has_api": false,
-    "notes": "Medical device industry news. Part of Industry Dive."
+    "notes": "Medical device industry news. Part of Industry Dive.",
+    "intel_feed": true
   },
   {
     "name": "Medical Device Network",
@@ -942,7 +962,8 @@
     "url": "https://www.medicaldevice-network.com",
     "rss_url": "https://www.medicaldevice-network.com/feed/",
     "has_api": false,
-    "notes": "Medical device news and analysis."
+    "notes": "Medical device news and analysis.",
+    "intel_feed": true
   },
   {
     "name": "Endpoints News",
@@ -951,7 +972,8 @@
     "url": "https://endpts.com",
     "rss_url": "https://endpts.com/feed/",
     "has_api": false,
-    "notes": "Biopharma and clinical trial news."
+    "notes": "Biopharma and clinical trial news.",
+    "intel_feed": true
   },
   {
     "name": "BioPharma Dive",
@@ -960,7 +982,8 @@
     "url": "https://www.biopharmadive.com",
     "rss_url": "https://www.biopharmadive.com/feeds/open-research/writing/",
     "has_api": false,
-    "notes": "Pharmaceutical industry news. Part of Industry Dive."
+    "notes": "Pharmaceutical industry news. Part of Industry Dive.",
+    "intel_feed": true
   },
   {
     "name": "Neuroscience News",
@@ -969,7 +992,8 @@
     "url": "https://neurosciencenews.com",
     "rss_url": null,
     "has_api": false,
-    "notes": "Neuroscience research news aggregator."
+    "notes": "Neuroscience research news aggregator.",
+    "intel_feed": true
   },
   {
     "name": "IEEE Spectrum",
@@ -978,7 +1002,8 @@
     "url": "https://spectrum.ieee.org",
     "rss_url": "https://spectrum.ieee.org/feeds/feed.rss",
     "has_api": false,
-    "notes": "Engineering and technology magazine. BCI and biomedical coverage."
+    "notes": "Engineering and technology magazine. BCI and biomedical coverage.",
+    "intel_feed": true
   },
   {
     "name": "Nature Neuroscience",
@@ -987,7 +1012,8 @@
     "url": "https://www.nature.com/neuro/",
     "rss_url": "https://www.nature.com/neuro.rss",
     "has_api": false,
-    "notes": "Top neuroscience journal. RSS shows latest articles, full text paywalled."
+    "notes": "Top neuroscience journal. RSS shows latest articles, full text paywalled.",
+    "intel_feed": true
   },
   {
     "name": "bioRxiv Neuroscience",
@@ -996,7 +1022,8 @@
     "url": "https://www.biorxiv.org/collection/neuroscience",
     "rss_url": "https://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
     "has_api": false,
-    "notes": "Neuroscience preprints. Full open access."
+    "notes": "Neuroscience preprints. Full open access.",
+    "intel_feed": true
   },
   {
     "name": "medRxiv",
@@ -1005,7 +1032,8 @@
     "url": "https://www.medrxiv.org",
     "rss_url": "https://connect.medrxiv.org/medrxiv_xml.php?subject=Health_Informatics",
     "has_api": false,
-    "notes": "Medical preprints. Neurology collection for BCI clinical research."
+    "notes": "Medical preprints. Neurology collection for BCI clinical research.",
+    "intel_feed": true
   },
   {
     "name": "arXiv q-bio.NC (Neurons and Cognition)",
@@ -1014,7 +1042,8 @@
     "url": "https://arxiv.org/list/q-bio.NC/recent",
     "rss_url": "https://rss.arxiv.org/rss/q-bio.NC",
     "has_api": false,
-    "notes": "Computational neuroscience preprints."
+    "notes": "Computational neuroscience preprints.",
+    "intel_feed": true
   },
   {
     "name": "NIST Cybersecurity Blog",
@@ -1023,7 +1052,8 @@
     "url": "https://www.nist.gov/blogs/cybersecurity-insights",
     "rss_url": "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml",
     "has_api": false,
-    "notes": "NIST cybersecurity standards and framework updates."
+    "notes": "NIST cybersecurity standards and framework updates.",
+    "intel_feed": true
   },
   {
     "name": "FDA Press Releases",
@@ -1032,7 +1062,8 @@
     "url": "https://www.fda.gov/medical-devices",
     "rss_url": "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml",
     "has_api": false,
-    "notes": "General press releases including device approvals; no device-specific RSS feed exists"
+    "notes": "General press releases including device approvals; no device-specific RSS feed exists",
+    "intel_feed": true
   },
   {
     "name": "NeurotechX News",
@@ -1041,7 +1072,8 @@
     "url": "https://neurotechx.com",
     "rss_url": "https://neurotechx.com/feed/",
     "has_api": false,
-    "notes": "Open neurotech community. Events and project news."
+    "notes": "Open neurotech community. Events and project news.",
+    "intel_feed": true
   },
   {
     "name": "Axios",
@@ -1050,7 +1082,8 @@
     "url": "https://www.axios.com/newsletters/axios-pro-rata",
     "rss_url": "https://api.axios.com/feed/",
     "has_api": false,
-    "notes": "VC and deals newsletter by Dan Primack."
+    "notes": "VC and deals newsletter by Dan Primack.",
+    "intel_feed": true
   },
   {
     "name": "Science",
@@ -1059,7 +1092,8 @@
     "url": "https://www.science.org",
     "rss_url": null,
     "has_api": false,
-    "notes": "AAAS flagship journal. Most content paywalled. News section partially free."
+    "notes": "AAAS flagship journal. Most content paywalled. News section partially free.",
+    "intel_feed": true
   },
   {
     "name": "The Lancet Digital Health",
@@ -1077,7 +1111,8 @@
     "url": "https://www.notboring.co",
     "rss_url": "https://www.notboring.co/feed",
     "has_api": false,
-    "notes": "Strategy and tech business deep dives. Substack."
+    "notes": "Strategy and tech business deep dives. Substack.",
+    "intel_feed": true
   },
   {
     "name": "Stratechery by Ben Thompson",
@@ -1086,7 +1121,8 @@
     "url": "https://stratechery.com",
     "rss_url": "https://stratechery.com/feed/",
     "has_api": false,
-    "notes": "Tech strategy analysis. Free weekly articles, paid daily updates."
+    "notes": "Tech strategy analysis. Free weekly articles, paid daily updates.",
+    "intel_feed": true
   },
   {
     "name": "Exponential View by Azeem Azhar",
@@ -1095,7 +1131,8 @@
     "url": "https://www.exponentialview.co",
     "rss_url": "https://www.exponentialview.co/feed",
     "has_api": false,
-    "notes": "AI, biotech, and exponential technology trends."
+    "notes": "AI, biotech, and exponential technology trends.",
+    "intel_feed": true
   },
   {
     "name": "The Neuron (Newsletter)",
@@ -1104,7 +1141,8 @@
     "url": "https://www.theneurondaily.com",
     "rss_url": null,
     "has_api": false,
-    "notes": "Daily AI newsletter with BCI/neurotech crossover."
+    "notes": "Daily AI newsletter with BCI/neurotech crossover.",
+    "intel_feed": true
   },
   {
     "name": "CB Insights Newsletter",
@@ -1464,7 +1502,8 @@
     "url": "https://neurotechx.com",
     "rss_url": null,
     "has_api": false,
-    "notes": "Open neurotech community. Local chapters, hackathons, events."
+    "notes": "Open neurotech community. Local chapters, hackathons, events.",
+    "intel_feed": true
   },
   {
     "name": "BRAIN Initiative Conference",
@@ -1626,7 +1665,8 @@
     "url": "https://brain.ieee.org",
     "rss_url": null,
     "has_api": false,
-    "notes": "IEEE's brain science initiative. Workshops and webinars."
+    "notes": "IEEE's brain science initiative. Workshops and webinars.",
+    "intel_feed": true
   },
   {
     "name": "Neuroscience Gateway",
@@ -1752,7 +1792,8 @@
     "url": "https://news.ycombinator.com",
     "rss_url": "https://hnrss.org/newest?q=BCI+OR+brain-computer+OR+neurotech",
     "has_api": true,
-    "notes": "YC tech news aggregator. Firebase API available. Custom RSS via hnrss.org."
+    "notes": "YC tech news aggregator. Firebase API available. Custom RSS via hnrss.org.",
+    "intel_feed": true
   },
   {
     "name": "ScienceDaily Neuroscience",
@@ -1761,7 +1802,8 @@
     "url": "https://www.sciencedaily.com/open-research/writing/mind_brain/",
     "rss_url": "https://www.sciencedaily.com/rss/mind_brain.xml",
     "has_api": false,
-    "notes": "Neuroscience research news digest. University press releases."
+    "notes": "Neuroscience research news digest. University press releases.",
+    "intel_feed": true
   },
   {
     "name": "PubMed (NCBI)",
@@ -1834,5 +1876,75 @@
     "rss_url": null,
     "has_api": false,
     "notes": "SfN annual meeting. Abstract submission and registration info."
+  },
+  {
+    "name": "NeuroImage",
+    "category": "news",
+    "tier": "free",
+    "url": "https://www.sciencedirect.com/journal/neuroimage",
+    "rss_url": "https://rss.sciencedirect.com/publication/science/10538119",
+    "has_api": false,
+    "notes": "Elsevier neuroimaging journal. RSS feed active.",
+    "intel_feed": true
+  },
+  {
+    "name": "PNAS",
+    "category": "news",
+    "tier": "free",
+    "url": "https://www.pnas.org",
+    "rss_url": "https://www.pnas.org/action/showFeed?type=etoc&feed=rss&jc=PNAS",
+    "has_api": false,
+    "notes": "Multidisciplinary. Filtered for neuro/BCI keywords.",
+    "intel_feed": true
+  },
+  {
+    "name": "GlobeNewswire Biotech",
+    "category": "deal_tracking",
+    "tier": "free",
+    "url": "https://www.globenewswire.com",
+    "rss_url": "https://www.globenewswire.com/RssFeed/industry/4573-Biotechnology",
+    "has_api": false,
+    "notes": "Biotech press releases. Filtered for neuro keywords.",
+    "intel_feed": true
+  },
+  {
+    "name": "GlobeNewswire MedEquip",
+    "category": "deal_tracking",
+    "tier": "free",
+    "url": "https://www.globenewswire.com",
+    "rss_url": "https://www.globenewswire.com/RssFeed/industry/4535-Medical%20Equipment",
+    "has_api": false,
+    "notes": "Medical device press releases. Filtered for neuro keywords.",
+    "intel_feed": true
+  },
+  {
+    "name": "Healio Neurology",
+    "category": "news",
+    "tier": "free",
+    "url": "https://www.healio.com/neurology",
+    "rss_url": "https://www.healio.com/rss/neurology",
+    "has_api": false,
+    "notes": "Clinical neurology news.",
+    "intel_feed": true
+  },
+  {
+    "name": "CISA ICS Medical",
+    "category": "news",
+    "tier": "free",
+    "url": "https://www.cisa.gov/cybersecurity-advisories",
+    "rss_url": "https://www.cisa.gov/cybersecurity-advisories/ics-medical-advisories.xml",
+    "has_api": false,
+    "notes": "Medical device ICS advisories.",
+    "intel_feed": true
+  },
+  {
+    "name": "CISA ICS Advisories",
+    "category": "news",
+    "tier": "free",
+    "url": "https://www.cisa.gov/cybersecurity-advisories",
+    "rss_url": "https://www.cisa.gov/cybersecurity-advisories/ics-advisories.xml",
+    "has_api": false,
+    "notes": "Industrial control system advisories.",
+    "intel_feed": true
   }
 ]

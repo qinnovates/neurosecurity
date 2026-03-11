@@ -28,6 +28,20 @@ try {
 // Active feed count (from fetch-intel.mjs)
 const INTEL_FEED_COUNT = 74;
 
+/** Refang a defanged URL for display: hxxps://example[.]com → https://example.com */
+function refangUrl(url: string): string {
+  if (!url) return '';
+  return url
+    .replace(/^hxxps:\/\//i, 'https://')
+    .replace(/^hxxp:\/\//i, 'http://')
+    .replace(/\[\.]/g, '.');
+}
+
+// Refang URLs for rendering (stored defanged for safety)
+for (const item of items) {
+  item.url = refangUrl(item.url);
+}
+
 // Sort by date descending
 items.sort((a, b) => b.date.localeCompare(a.date));
 

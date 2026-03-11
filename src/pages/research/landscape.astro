@@ -28,6 +28,15 @@ const cve = cveRaw as any;
 const timeline = timelineRaw as any;
 const news = newsRaw as any;
 const controls = controlsRaw as any;
+
+/** Refang a defanged URL: hxxps://example[.]com → https://example.com */
+function refangUrl(url: string): string {
+  if (!url) return '';
+  return url
+    .replace(/^hxxps:\/\//i, 'https://')
+    .replace(/^hxxp:\/\//i, 'http://')
+    .replace(/\[\.]/g, '.');
+}
 const validation = validationRaw as any;
 const automation = automationRaw as any;
 const hardware = hardwareRaw as any;
@@ -264,7 +273,7 @@ const klqNews = (Array.isArray(news) ? news : []).map((n: any) => ({
   date: n.date,
   source: n.source,
   category: n.category,
-  url: n.url,
+  url: refangUrl(n.url || ''),
 }));
 
 // Tactics from registrar
@@ -689,7 +698,7 @@ const klqIntelFeed = (intelFeedRaw as any[]).map((item: any) => ({
   source_category: item.source_category,
   tags: (item.tags || []).join(', '),
   companies: (item.companies || []).join(', '),
-  url: item.url,
+  url: refangUrl(item.url || ''),
 }));
 
 const klqIntelSources = (intelSourcesRaw as any[]).map((s: any) => ({

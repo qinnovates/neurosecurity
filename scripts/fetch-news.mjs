@@ -52,10 +52,48 @@ const RELEVANCE_KEYWORDS = [
 
 const MAX_EXTERNAL_ITEMS = 30;
 const FETCH_TIMEOUT_MS = 8000;
+const MAX_RESPONSE_BYTES = 5 * 1024 * 1024; // 5 MB cap per feed response
+
+// --- Security: Sanitization Helpers ---
+
+/** Defang a URL for safe storage: https://example.com → hxxps://example[.]com */
+function defangUrl(url) {
+  if (typeof url !== 'string' || !url) return '';
+  return url
+    .replace(/^https:\/\//i, 'hxxps://')
+    .replace(/^http:\/\//i, 'hxxp://')
+    .replace(/\./g, '[.]');
+}
+
+/** Validate URL scheme — only allow http(s). Rejects javascript:, data:, file:, etc. */
+function isValidUrl(url) {
+  if (typeof url !== 'string') return false;
+  return /^https?:\/\//i.test(url);
+}
+
+/** Strip HTML tags (iterative), control chars, null bytes, collapse whitespace */
+function sanitizeText(str) {
+  if (typeof str !== 'string') return String(str || '');
+  let result = str;
+  let prev;
+  do {
+    prev = result;
+    result = result.replace(/<[^>]*>/g, '');
+  } while (result !== prev);
+  result = result.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+  result = result.replace(/\s+/g, ' ').trim();
+  return result;
+}
 
 // --- Logic (mirrors fetch-feeds.ts) ---
 
-const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
+// Hardened XML parser: disable entity processing to prevent XXE / Billion Laughs
+const parser = new XMLParser({
+  ignoreAttributes: false,
+  attributeNamePrefix: '@_',
+  processEntities: false,
+  htmlEntities: false,
+});
 
 function isRelevant(title, summary, feed) {
   if (feed.skipKeywordFilter) return true;
@@ -78,17 +116,18 @@ function extractItems(xml, feed) {
   if (rssItems) {
     const list = Array.isArray(rssItems) ? rssItems : [rssItems];
     for (const item of list.slice(0, feed.maxItems)) {
-      const title = item.title || '';
+      const title = typeof item.title === 'string' ? item.title : String(item.title || '');
       const summary = item.description || '';
       if (!isRelevant(title, summary, feed)) continue;
+      const rawUrl = typeof item.link === 'string' ? item.link.trim() : String(item.link || '');
+      if (!isValidUrl(rawUrl)) continue;
       items.push({
         type: 'external',
-        title: typeof title === 'string' ? title : String(title),
+        title: sanitizeText(title).slice(0, 300),
         date: parseDate(item.pubDate),
-        url: item.link || '',
+        url: defangUrl(rawUrl),
         source: feed.name,
-        summary: (typeof summary === 'string' ? summary : String(summary))
-          .replace(/<[^>]*>/g, '').trim().slice(0, 200),
+        summary: sanitizeText(summary).slice(0, 200),
         category: feed.category,
       });
     }
@@ -106,14 +145,15 @@ function extractItems(xml, feed) {
       const link = Array.isArray(entry.link)
         ? entry.link.find((l) => l['@_rel'] === 'alternate')?.['@_href'] || entry.link[0]?.['@_href']
         : entry.link?.['@_href'] || entry.link || '';
+      const rawUrl = typeof link === 'string' ? link.trim() : String(link);
+      if (!isValidUrl(rawUrl)) continue;
       items.push({
         type: 'external',
-        title: typeof title === 'string' ? title : String(title),
+        title: sanitizeText(typeof title === 'string' ? title : String(title)).slice(0, 300),
         date: parseDate(entry.updated || entry.published),
-        url: typeof link === 'string' ? link : String(link),
+        url: defangUrl(rawUrl),
         source: feed.name,
-        summary: (typeof summary === 'string' ? summary : String(summary))
-          .replace(/<[^>]*>/g, '').trim().slice(0, 200),
+        summary: sanitizeText(typeof summary === 'string' ? summary : String(summary)).slice(0, 200),
         category: feed.category,
       });
     }
@@ -127,12 +167,27 @@ async function fetchSingleFeed(feed) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
-    const res = await fetch(feed.url, { signal: controller.signal });
+    const res = await fetch(feed.url, {
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'QinnovateBCINewsBot/1.0 (research)',
+        Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml',
+      },
+    });
     if (!res.ok) {
       console.warn(`  [SKIP] ${feed.name}: HTTP ${res.status}`);
       return [];
     }
+    const contentLength = parseInt(res.headers.get('content-length') || '0', 10);
+    if (contentLength > MAX_RESPONSE_BYTES) {
+      console.warn(`  [SKIP] ${feed.name}: response too large (${contentLength} bytes)`);
+      return [];
+    }
     const xml = await res.text();
+    if (xml.length > MAX_RESPONSE_BYTES) {
+      console.warn(`  [SKIP] ${feed.name}: response body too large (${xml.length} chars)`);
+      return [];
+    }
     const items = extractItems(xml, feed);
     console.log(`  [OK]   ${feed.name}: ${items.length} items`);
     return items;
