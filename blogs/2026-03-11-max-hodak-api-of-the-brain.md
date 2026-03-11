@@ -194,6 +194,24 @@ Same chain. Same physics. Same TARA technique IDs. The difference is:
 
 TARA wasn't built to catalog cures. But when you map 109 attack techniques across the BCI stack with enough granularity, the therapeutic analogues fall out because the physics is shared. The governance is what separates the two. The [therapeutic overlap analysis](/atlas/therapeutics/) maps this dual-use boundary technique by technique.
 
+### What Would a Phosphene Browser Look Like?
+
+So let's say we get there. The pipeline works. Someone who was blind can now perceive the world through a prosthetic visual system. What does a web browser look like through 378 phosphenes?
+
+Start with the math. PRIMA's implant is roughly a 19x20 grid of light points. That's less resolution than a Commodore 64 character cell. You're not rendering Chrome. You're not rendering a modern UI at all. You're working with something closer to pixel art -- or cave paintings.
+
+And that's where art comes in. Art has always been about compression. A Japanese calligrapher conveys an entire concept in three brushstrokes. Mondrian built a visual language out of rectangles and primary colors. Cave paintings at Lascaux told stories with outlines and negative space. The entire history of visual art is a masterclass in how to communicate maximum meaning through minimum signal. That's exactly the design problem a phosphene display presents.
+
+The research backs this up. Elnabawy's GAN-based simplification (2022) showed that stripping images down to high-contrast clip-art-style representations improved recognition for prosthetic users. The brain doesn't need photorealism -- it needs edges, contrast, and structure. An artist already knows this instinctively. A painter decides what to leave out. A phosphene display forces the same decision computationally.
+
+So the first phosphene browser wouldn't look like Safari. It might look like a woodcut. Bold outlines. High contrast. Negative space doing the heavy lifting. Text rendered as shapes the brain can learn to associate with letters -- not pixel-perfect fonts, but gestures toward letterforms that plasticity fills in over time. Navigation through spatial memory and gesture, not scrolling through a feed.
+
+But here's where the terminal matters. If an AI is deciding what to show you through 378 points of light -- compressing the entire visual world into a grid smaller than a QR code -- the user needs a way to override it. To say "show me more detail here" or "switch to text mode" or "why did you filter that out." A terminal interface at that resolution would be brutally minimal -- maybe 6-8 characters per line, white-on-black, monospaced. But it would give the user direct control over the AI encoding pipeline. No black box between them and their own vision.
+
+This is a security architecture question as much as a design question. The AI that compresses the visual world into phosphene patterns has enormous power over what the user perceives. If the user can't inspect, override, or audit that AI's decisions, they've traded one form of blindness for another -- seeing only what an algorithm decides to show them. The terminal is the escape hatch. It's the user saying "I am in control of this system, not the other way around."
+
+White phosphenes are easier to induce -- lower current thresholds, more reliable perception. A monochrome terminal leverages that directly. High contrast. No color complexity. Every pixel of that 19x20 grid doing maximum perceptual work. DOS didn't die because it was bad. It died because we had more pixels. At 378 phosphenes, the design constraints bring you right back to where computing started -- and that's not a limitation. That's a feature.
+
 ### Digital Adderall, Digital Ambien
 
 The vision pipeline isn't the only place the dual-lens shows up. Hodak's most commercially significant observation: non-invasive brain stimulation could deliver "a digital Ambien or like a digital Adderall" -- targeting specific brain regions to induce focus or sleep without pharmaceuticals, potentially as a consumer device that does not require surgery. He frames this as an industry direction, not a Science Corp project -- Hodak explicitly states "I don't work on ultrasound."
