@@ -17,11 +17,12 @@ import type {
   ClinicalDsmCondition,
   NeuralImpactChain,
 } from '../../lib/clinical-data';
+import BrainMapView from './brainmap/BrainMapView';
 import { THREAT_VECTORS, type ThreatVector, type BandId } from '../../lib/threat-data';
 
 // ═══ Types ═══
 
-type ViewTab = 'zoom' | 'chain' | 'pathways' | 'neurotransmitters' | 'dsm';
+type ViewTab = 'brainmap' | 'zoom' | 'chain' | 'pathways' | 'neurotransmitters' | 'dsm';
 type ChainDirection = 'attack' | 'therapy' | 'dual';
 
 /** Semantic zoom levels — from macro (band) to micro (synapse) */
@@ -126,6 +127,7 @@ function StatsBanner({ stats }: { stats: ClinicalData['stats'] }) {
 // ═══ Tab Bar ═══
 
 const TABS: { id: ViewTab; label: string; icon: string }[] = [
+  { id: 'brainmap', label: 'Brain Map', icon: '◎' },
   { id: 'zoom', label: 'Drill-Down', icon: '⊕' },
   { id: 'chain', label: 'Impact Chain', icon: '⟶' },
   { id: 'pathways', label: 'Pathways', icon: '◈' },
@@ -1944,13 +1946,14 @@ function DsmView({ data }: { data: ClinicalData }) {
 // ═══ Main Component ═══
 
 export default function ClinicalDashboard({ data }: Props) {
-  const [activeTab, setActiveTab] = useState<ViewTab>('zoom');
+  const [activeTab, setActiveTab] = useState<ViewTab>('brainmap');
 
   return (
     <div>
       <StatsBanner stats={data.stats} />
       <TabBar active={activeTab} onChange={setActiveTab} />
 
+      {activeTab === 'brainmap' && <BrainMapView data={data} />}
       {activeTab === 'zoom' && <SemanticZoomView data={data} />}
       {activeTab === 'chain' && <ImpactChainView data={data} />}
       {activeTab === 'pathways' && <PathwaysView data={data} />}

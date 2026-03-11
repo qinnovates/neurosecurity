@@ -1,14 +1,17 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasDashboard from '@/components/atlas/AtlasDashboard';
+import BciKql from '@/components/bci/BciKql';
 import PublicationCard from '@/components/PublicationCard.astro';
 import { getAtlasData, getThreatsForBandDetail } from '@/lib/atlas-data';
 import { getBrainViewData } from '@/lib/brain-view-data';
+import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '@/lib/utils';
 
 // Build-time data computation
+const kqlTables = getKqlTables();
 const atlasData = getAtlasData();
 const brainViews = getBrainViewData();
 
@@ -201,6 +204,16 @@ const iconSvg: Record<string, string> = {
       </div>
     </div>
   )}
+
+  <!-- KQL Query Engine -->
+  <div class="mt-12">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="flex-1 h-px" style="background: var(--color-border);" />
+      <span class="text-[10px] uppercase tracking-[0.12em] font-mono" style="color: var(--color-text-faint);">Query Engine</span>
+      <div class="flex-1 h-px" style="background: var(--color-border);" />
+    </div>
+    <BciKql client:only="react" tables={kqlTables} />
+  </div>
 
   <!-- Footer note -->
   <div class="mt-8 mb-4 text-center">

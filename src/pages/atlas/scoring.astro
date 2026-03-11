@@ -1,7 +1,10 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import BciKql from '@/components/bci/BciKql';
+import { getKqlTables } from '@/lib/kql-tables';
 import { NISS_SPEC, THREAT_VECTORS, getNissStats } from '@/lib/threat-data';
 
+const kqlTables = getKqlTables();
 const spec = NISS_SPEC as any;
 const nissStats = getNissStats();
 const totalTechniques = THREAT_VECTORS.length;
@@ -607,5 +610,15 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
       </section>
 
     </div>
+  </div>
+
+  <!-- KQL Query Engine -->
+  <div class="mt-12">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="flex-1 h-px" style="background: var(--color-border);" />
+      <span class="text-[10px] uppercase tracking-[0.12em] font-mono" style="color: var(--color-text-faint);">Query Engine</span>
+      <div class="flex-1 h-px" style="background: var(--color-border);" />
+    </div>
+    <BciKql client:only="react" tables={kqlTables} />
   </div>
 </PageLayout>
