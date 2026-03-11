@@ -10,9 +10,9 @@ import { CALCULUS_LABS } from './data/calculus.js';
 import { initNoteWall, getNotesForBackground } from './notewall.js';
 import { getRelated, getPathWithEdges, getAllNodes, getAllEdges } from './graph.js';
 import { search, highlightMatch, groupResults } from './search.js';
-import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js?v=2';
+import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js?v=3';
 import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext } from './canvas.js';
-import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js?v=2';
+import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js?v=3';
 import { renderEthicsTimeline } from './ethics-timeline.js';
 import { ETHICS_TIMELINE } from './data/ethics.js';
 
