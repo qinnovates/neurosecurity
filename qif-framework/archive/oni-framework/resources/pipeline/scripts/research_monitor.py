@@ -163,7 +163,7 @@ class ResearchMonitor:
                 query = quote_plus(term)
                 cat_filter = "+OR+".join([f"cat:{cat}" for cat in categories])
                 url = (
-                    f"http://export.arxiv.org/api/query?"
+                    f"https://export.arxiv.org/api/query?"
                     f"search_query=all:{query}+AND+({cat_filter})&"
                     f"start=0&max_results=10&"
                     f"sortBy=submittedDate&sortOrder=descending"

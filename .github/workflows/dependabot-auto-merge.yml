@@ -9,8 +9,25 @@ permissions:
   pull-requests: write
 
 jobs:
+  # Gate: ensure CI passes before auto-merging
+  ci-check:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Install and build
+        run: npm ci && npm run build
+
   auto-merge:
     runs-on: ubuntu-latest
+    needs: [ci-check]
     if: github.actor == 'dependabot[bot]'
 
     steps:

@@ -41,3 +41,12 @@ fact-check-report.json
 
 # Audio files (too large for git)
 docs/learn/autodidactive/auditory/**/*.mp3
+*.wav
+
+# Secrets & credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.*

@@ -54,9 +54,11 @@ jobs:
       - name: Fact-check blog posts
         if: steps.check.outputs.has_changes == 'true'
         id: factcheck
+        env:
+          NEW_POSTS: ${{ steps.check.outputs.new_posts }}
         run: |
-          if [ -n "${{ steps.check.outputs.new_posts }}" ]; then
-            python3 scripts/verify/fact_check_field_journal.py --inject --ci --posts ${{ steps.check.outputs.new_posts }}
+          if [ -n "$NEW_POSTS" ]; then
+            python3 scripts/verify/fact_check_field_journal.py --inject --ci --posts $NEW_POSTS
           else
             python3 scripts/verify/fact_check_field_journal.py --inject --ci
           fi
