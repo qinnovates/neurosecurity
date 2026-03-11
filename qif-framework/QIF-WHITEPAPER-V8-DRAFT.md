@@ -247,6 +247,10 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
   - 6.6 Case Study: Algorithmic Psychosis Induction
   - 6.7 TARA — Therapeutic Atlas of Risks and Applications
     - Dual-use observation, mechanism-first architecture, regulatory context (FDORA/524B)
+  - 6.8 Beyond DSM-5-TR: Sensory and Neurological Weighting (v8.0)
+    - Olfactory, somatosensory, gustatory, vestibular disruption
+    - Neurological disorders absent from DSM but present in medical literature (ICD-11, neurology)
+    - Expanded NISS weighting for sensory modality attacks
 - [7. Neural Sensory Protocol (NSP)](#7-neural-sensory-protocol-nsp)
   - 7.1 HNDL Threat, 7.2 Five-Layer Architecture, 7.3 Device Tiers
   - 7.4 STIX 2.1 Export, 7.5 qtara Python Package
@@ -294,6 +298,10 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
   - 18.2 Neuroethics and Neurorights Mapping (5 rights → governance questions)
   - 18.3 Open Source Neural Atlas Proposal (interoperable hardware standard)
   - 18.4 Open Questions (30+ governance questions for society)
+
+- [19. Research Validation: Field Evidence](#19-research-validation-field-evidence)
+  - 19.1 NISS and the Standards Community (CVSS SIG invitation, deliberate restraint)
+  - 19.2 Preprint and Publication Status (Zenodo DOI, citation fabrication transparency)
 
 ### Appendices (v8.0)
 
@@ -1017,6 +1025,96 @@ These are not QIF's questions to answer. They are society's. QIF provides the te
 
 ---
 
+## 6.8 Beyond DSM-5-TR: Sensory and Neurological Weighting
+
+The current NISS scoring maps attack outcomes to DSM-5-TR diagnostic categories for threat modeling purposes. This mapping is useful but incomplete. DSM-5-TR is a psychiatric classification system. It was not designed to capture the full spectrum of neurological disruption that a BCI attack could produce.
+
+Consider what is missing:
+
+**Sensory modality disruption.** A BCI attack that corrupts olfactory processing — causing phantosmia (phantom smells), anosmia (loss of smell), or parosmia (distorted smell) — has no primary DSM-5-TR diagnostic category. The same is true for gustatory hallucinations, vestibular disruption (vertigo, spatial disorientation, loss of balance), and somatosensory attacks (phantom pain, numbness, proprioceptive confusion). These are clinically documented neurological conditions with established medical literature, ICD-11 codes, and known neural pathway correlates. They are not psychiatric disorders. DSM-5-TR does not cover them because it is not intended to.
+
+But a BCI that interfaces with sensory cortex — as vision restoration, cochlear implants, and somatosensory feedback systems already do — creates attack surfaces at each of these modalities. If an attacker can inject signals into primary somatosensory cortex (S1), the result is not a psychiatric condition. It is a neurological one: phantom sensation, proprioceptive disruption, or neuropathic pain. The clinical literature on these outcomes exists in neurology, not psychiatry.
+
+**Neurological disorders absent from DSM.** Conditions like tinnitus, central pain syndrome, cortical blindness, prosopagnosia (face blindness), spatial neglect, and movement disorders (dystonia, tremor, ataxia) are well-characterized in neurology and have known neural substrates. A BCI attack targeting the relevant circuits could induce or exacerbate any of them. NISS must be able to score these outcomes with the same rigor as the DSM-5-TR mapped conditions.
+
+**v8.0 expansion.** NISS v2.0 will extend the clinical outcome mapping beyond DSM-5-TR to include:
+
+| Source | Coverage | What It Adds |
+|--------|----------|-------------|
+| **ICD-11 Chapter 8** (Diseases of the nervous system) | Neurological disorders with known neural substrates | Tinnitus, neuropathic pain, vestibular disorders, movement disorders, sensory processing disorders |
+| **ICD-11 Chapter 22** (Symptoms and signs involving the nervous system) | Symptom-level outcomes | Anosmia, phantosmia, paresthesia, proprioceptive dysfunction, spatial disorientation |
+| **Published neurology literature** | Mechanism-level evidence | Cortical stimulation studies documenting sensory disruption as a known side effect of therapeutic BCI use |
+
+Each sensory modality will receive a weighting factor in NISS v2.0 reflecting five dimensions:
+
+| Factor | Symbol | Range | Description |
+|--------|--------|-------|-------------|
+| **Reversibility** | R | 0.0–1.0 | 0 = fully reversible on signal removal, 1 = permanent neurological damage |
+| **Functional Impact** | FI | 0.0–1.0 | Context-dependent daily functioning impairment. Anosmia is disabling for a chef; less so for others. Vestibular failure is life-threatening for anyone. |
+| **Pathway Specificity** | PS | 0.0–1.0 | How precisely the modality can be targeted. Higher specificity = higher weaponization risk. Olfactory bulb stimulation is specific; diffuse cortical stimulation is not. |
+| **Clinical Evidence** | CE | 0.0–1.0 | 0 = theoretical, 0.5 = reported in DBS/cortical stimulation studies, 1.0 = documented in BCI clinical trials |
+| **Modality Criticality** | MC | 0.0–1.0 | How critical the modality is to patient safety. Vestibular/proprioceptive disruption causes falls. Olfactory disruption does not. |
+
+The extended NISS v2.0 vector appends these factors to the existing scoring:
+
+```
+NISS:2.0/BI:H/CR:H/RE:M/SC:L/DSM:F32.x/ICD:AB32/R:0.7/FI:0.8/PS:0.6/CE:0.5/MC:0.9
+```
+
+**Severity scale for non-DSM neurological outcomes:**
+
+| Score | Severity | Example |
+|-------|----------|---------|
+| 9.0–10.0 | Critical | Cortical blindness, complete vestibular failure, central pain syndrome |
+| 7.0–8.9 | High | Persistent tinnitus, chronic neuropathic pain, dystonia, proprioceptive loss |
+| 4.0–6.9 | Medium | Phantosmia, paresthesia, mild tremor, hyperacusis |
+| 1.0–3.9 | Low | Transient phosphenes, temporary ageusia, mild spatial disorientation |
+| 0.1–0.9 | Informational | Silicon-only effects, no neurological impact |
+
+**What is not yet mapped (research gaps):**
+
+| Domain | Gap | Why It Matters |
+|--------|-----|---------------|
+| Autonomic | Heart rate, blood pressure, thermoregulation | Hypothalamic and brainstem BCI targets |
+| Neuroendocrine | Hormonal cascade disruption (cortisol, oxytocin, melatonin) | HPA axis attacks via limbic stimulation |
+| Circadian | Sleep architecture disruption | Suprachiasmatic nucleus stimulation |
+| Immunological | Neuroimmune interactions | Vagus nerve stimulation effects |
+| Developmental | Long-term neuroplasticity effects of chronic stimulation | Pediatric BCI deployment |
+
+These gaps are acknowledged, not deferred. They represent the frontier of where NISS must expand as the clinical evidence base grows and as BCI devices target deeper brain structures.
+
+This is not scope creep. It is scope correction. A scoring system for neural impact that only measures psychiatric outcomes is like a vulnerability scanner that only checks web applications — it misses the network, the firmware, and the physical layer. The brain is not just a mind. It is also a body interface. NISS must score both.
+
+*Note: All ICD-11 and neurological disorder mappings are for threat modeling purposes. NISS produces severity scores corresponding to clinical outcome categories, not clinical diagnoses. The distinction between "this attack technique correlates with outcomes in the tinnitus category" and "this attack causes tinnitus" is maintained throughout.*
+
+---
+
+## 19. Research Validation: Field Evidence
+
+This framework was not built in isolation from real systems. During the initial research pass that led to QIF, the author discovered a previously undisclosed vulnerability in a widely deployed, open-source data transport protocol used by nearly all BCI research platforms. The protocol operates bidirectionally — it both reads from and writes to the endpoint — and the vulnerability exists at the endpoint layer, where no authentication, encryption, or integrity verification is enforced. Any device on the local network can inject arbitrary data streams indistinguishable from legitimate neural signals.
+
+The author performed responsible disclosure to the protocol's maintainers. The maintainers acknowledged the finding and characterized the lack of security as "by design" — the protocol was built for laboratory convenience, not adversarial environments. The disclosure resulted in maintainer discussions about developing a secure variant of the protocol. The protocol's name is withheld here as the underlying architecture remains unchanged in production deployments.
+
+This single finding validates the core thesis of this paper: the most widely used BCI infrastructure was never designed with security in mind, and the transition from laboratory to clinical deployment does not magically add the security properties that were never there. The vulnerability is not exotic. It is the kind of basic endpoint exposure that would fail a first-year penetration test in enterprise IT. That it persists in a protocol handling neural data underscores how far behind the BCI ecosystem is on security fundamentals.
+
+### 19.1 NISS and the Standards Community
+
+The Neural Impact Scoring System (NISS) proposed in Section 6.5 attracted attention from the FIRST.org community responsible for maintaining CVSS (Common Vulnerability Scoring System), the global standard for vulnerability severity scoring. The author was invited to contribute NISS to the CVSS Resources repository as a domain-specific extension for neural interface vulnerabilities.
+
+The author declined — temporarily. NISS is currently a single-author derivation. The mathematical model has not been independently reviewed, replicated, or stress-tested by another researcher. Contributing it to a standards resource repository before that independent validation would be premature and would risk lending unearned authority to unvalidated math.
+
+This is a deliberate choice. The scoring system works — it produces severity distributions that align with clinical intuition and surface the 81.25% gap in CVE coverage for neural-specific impacts. But "works" and "validated" are not the same thing. The author will contribute NISS to the CVSS ecosystem after at least one independent researcher has reviewed the scoring methodology, attempted to break it, and either confirmed its soundness or identified corrections.
+
+The invitation itself is validation that the problem NISS addresses is recognized by the standards community. The restraint in accepting it is validation that this project prioritizes rigor over recognition.
+
+### 19.2 Preprint and Publication Status
+
+The academic preprint of this framework is published on Zenodo (DOI: [10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105), v1.4 as of February 2026, CC-BY 4.0). arXiv submission is pending endorsement.
+
+The preprint history includes a transparency note: v1.0 shipped with 3 fabricated citations that were AI-generated and not caught before publication. These were corrected in v1.1 and the incident is disclosed in the paper's AI collaboration section. This is mentioned not as a disclaimer but as evidence that the verification protocol described in this paper (Section 9.7) exists because the author learned the hard way that AI-generated citations cannot be trusted without independent resolution.
+
+---
+
 ## Integration Status
 
 ### What v8.0 Adds to the Story
@@ -1040,6 +1138,9 @@ The new sections (12-18) complete the arc:
 | Runemate compression (Section 7.6) | Vision restoration pipeline shows the full content→cortex pathway (Section 17) |
 | Falsifiability (Section 8) | Governance questions are the ethical equivalent — what would change the framework (Section 18.4) |
 | Future work (Section 10) | Open Source Neural Atlas is the hardware interoperability target (Section 18.3) |
+| NISS maps to DSM-5-TR only | v8.0 extends to ICD-11, neurology, sensory modalities — smell, touch, vestibular, pain (Section 6.8) |
+| Threat model (theoretical) | Field evidence validates it: real vulnerability found, responsibly disclosed (Section 19) |
+| NISS scoring (proposed math) | Standards community recognized it; author held back until independently validated (Section 19.1) |
 
 ### Visualization Assets Available
 
