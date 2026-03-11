@@ -9,7 +9,7 @@ const spec = NISS_SPEC as any;
 const nissStats = getNissStats();
 const totalTechniques = THREAT_VECTORS.length;
 
-// NISS v1.1 Extension Metrics (6 metrics that extend CVSS v4.0)
+// NISS v2.0 Extension Metrics (6 metrics that extend CVSS v4.0)
 // Reconciled: equal weights (1.0 all), context profiles available separately
 const extensionMetrics = [
   {
@@ -88,7 +88,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
 
 <PageLayout
   title="NISS Scoring"
-  description="Neural Impact Scoring System — a proposed CVSS v4.0 extension for brain-computer interface security."
+  description="Neural Impact Scoring System v2.0 — a proposed CVSS v4.0 extension for brain-computer interface security with neurological condition mapping."
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'NISS Scoring' }]}
   maxWidth="wide"
 >
@@ -107,6 +107,8 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
           { href: '#severity', label: 'Severity Levels' },
           { href: '#vector', label: 'Vector Format' },
           { href: '#examples', label: 'Examples' },
+          { href: '#v2-weights', label: 'v2.0 Weighting Factors' },
+          { href: '#neurological', label: 'Neurological Extension' },
           { href: '#nsv2', label: 'NSv2.1 Framework' },
           { href: '#validation', label: 'Validation' },
           { href: '#source', label: 'Source & Derivation' },
@@ -124,7 +126,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
       <!-- Overview -->
       <section id="overview" class="mb-20">
         <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
-          Neural Impact Scoring System <span class="text-[var(--color-accent-primary)]">v1.1</span>
+          Neural Impact Scoring System <span class="text-[var(--color-accent-primary)]">v2.0</span>
         </h1>
         <div class="flex flex-wrap items-center gap-3 mb-6">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
@@ -193,8 +195,8 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
             <p class="text-xs text-[var(--color-text-faint)] mt-2">How the attack works: vector, complexity, privileges, user interaction, system impact</p>
           </div>
           <div class="glass rounded-xl p-5 border-l-4 border-[var(--color-accent-tertiary)]">
-            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS v1.1 Extension Vector</p>
-            <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-tertiary)] break-all">NISS:1.1/BI:&lt;V&gt;/CR:&lt;V&gt;/CD:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;</p>
+            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS v2.0 Extension Vector</p>
+            <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-tertiary)] break-all">NISS:2.0/BI:&lt;V&gt;/CR:&lt;V&gt;/CD:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;</p>
             <p class="text-xs text-[var(--color-text-faint)] mt-2">What it does to the patient: biological harm, cognitive impact, consent violation, reversibility, neuroplasticity</p>
           </div>
         </div>
@@ -395,8 +397,15 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <div class="glass rounded-xl p-6 mb-4">
           <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-2">NISS Extension Vector</p>
           <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all">
-            NISS:1.1/BI:&lt;V&gt;/CR:&lt;V&gt;/CD:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;
+            NISS:2.0/BI:&lt;V&gt;/CR:&lt;V&gt;/CD:&lt;V&gt;/CV:&lt;V&gt;/RV:&lt;V&gt;/NP:&lt;V&gt;
           </p>
+        </div>
+        <div class="glass rounded-xl p-6 mb-4">
+          <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-2">Extended NISS v2.0 Vector (with neurological weighting)</p>
+          <p class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent-tertiary)] break-all">
+            NISS:2.0/BI:H/CR:H/CD:M/CV:E/RV:P/NP:T/R:0.7/FI:0.8/PS:0.6/CE:0.5/MC:0.9
+          </p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">v2.0 appends 5 weighting factors (R, FI, PS, CE, MC) for neurological condition severity assessment</p>
         </div>
         <div class="glass rounded-xl p-6 mb-6">
           <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-2">Companion CVSS v4.0 Base Vector</p>
@@ -446,6 +455,139 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <div class="mt-8 prose">
           <p>
             All {totalTechniques} techniques are scored and browsable in the <a href="/atlas/tara/">TARA Atlas</a>. The scoring methodology is documented in the <a href="/research/whitepaper/#niss">QIF Whitepaper §6.5</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- v2.0 Weighting Factors -->
+      <section id="v2-weights" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">v2.0 Weighting Factors</h2>
+        <p class="text-sm text-[var(--color-text-faint)] mb-6">5 new dimensions &ensp;|&ensp; Neurological condition severity &ensp;|&ensp; Range 0.0–1.0</p>
+        <div class="prose mb-6">
+          <p>
+            NISS v1.1 scored technique-level neural impact using 6 core metrics. v2.0 adds five weighting factors that quantify the severity of neurological outcomes beyond what DSM-5-TR psychiatric categories capture. These factors are appended to the core vector when a technique maps to neurological conditions (ICD-10-CM).
+          </p>
+        </div>
+
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Factor</th>
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Symbol</th>
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Range</th>
+                <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { name: 'Reversibility', sym: 'R', range: '0.0–1.0', desc: '0 = permanent damage (worst), 1.0 = fully reversible. Distinct from the core RV metric: R weighs the neurological outcome, not the attack mechanism.' },
+                { name: 'Functional Impact', sym: 'FI', range: '0.0–1.0', desc: '0 = no functional impairment, 1.0 = complete loss of function in the affected modality (e.g., total blindness, complete paralysis).' },
+                { name: 'Pathway Specificity', sym: 'PS', range: '0.0–1.0', desc: '0 = diffuse (many pathways affected), 1.0 = highly specific (single pathway). Higher specificity means more targeted damage.' },
+                { name: 'Clinical Evidence', sym: 'CE', range: '0.0–1.0', desc: '0 = theoretical, 0.5 = reported in DBS/cortical stimulation studies, 1.0 = documented in BCI clinical trials.' },
+                { name: 'Modality Criticality', sym: 'MC', range: '0.0–1.0', desc: 'How critical the affected modality is to patient safety. Vestibular/proprioceptive disruption causes falls (high). Olfactory disruption does not (low).' },
+              ].map(f => (
+                <tr class="border-b border-[var(--color-border)]/50">
+                  <td class="py-2 px-3 font-semibold text-[var(--color-text-primary)]">{f.name}</td>
+                  <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] font-semibold">{f.sym}</td>
+                  <td class="py-2 px-3 font-[family-name:var(--font-mono)]">{f.range}</td>
+                  <td class="py-2 px-3 text-[var(--color-text-muted)]">{f.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)]">
+          <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">v1.1 to v2.0 Migration</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            All v1.1 vectors remain valid. The 6 core metrics (BI, CR, CD, CV, RV, NP) and their scoring formula are unchanged. v2.0 extends the vector with optional weighting factors for neurological outcome assessment. Techniques without neurological mappings use the standard 6-metric vector.
+          </p>
+        </div>
+      </section>
+
+      <!-- Neurological Extension -->
+      <section id="neurological" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Neurological Extension</h2>
+        <p class="text-sm text-[var(--color-text-faint)] mb-6">42 conditions &ensp;|&ensp; 7 categories &ensp;|&ensp; ICD-10-CM mapped</p>
+        <div class="prose mb-6">
+          <p>
+            NISS v1.0 mapped technique outcomes exclusively to DSM-5-TR psychiatric categories. The DSM is a psychiatric manual. It does not cover neurological disruptions: loss of smell, tinnitus, vestibular dysfunction, motor tremor, autonomic dysregulation, cortical blindness, neuropathic pain. These are real clinical outcomes of neural interface attacks that had no representation in the scoring system.
+          </p>
+          <p>
+            v2.0 extends clinical outcome mapping to include ICD-10-CM neurological codes (chapters G, H, R) alongside the existing DSM-5-TR psychiatric codes. 42 neurological conditions across 7 categories, drawn from Adams & Victor's <em>Principles of Neurology</em> (12th ed., Ropper et al. 2023).
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-8">
+          {[
+            { cat: 'Sensory', count: 14, examples: 'Tinnitus, anosmia, cortical blindness, vertigo, paresthesia', color: '#3b82f6' },
+            { cat: 'Motor', count: 8, examples: 'Tremor, dystonia, ataxia, spasticity', color: '#f59e0b' },
+            { cat: 'Autonomic', count: 6, examples: 'Orthostatic hypotension, cardiac arrhythmia, thermoregulatory dysfunction', color: '#ef4444' },
+            { cat: 'Consciousness', count: 4, examples: 'Syncope, absence seizures, altered sensorium', color: '#8b5cf6' },
+            { cat: 'Speech/Language', count: 4, examples: 'Expressive aphasia, receptive aphasia, dysarthria, alexia', color: '#06b6d4' },
+            { cat: 'Reflex', count: 3, examples: 'Hyperreflexia, areflexia, abnormal plantar response', color: '#10b981' },
+            { cat: 'Pain', count: 3, examples: 'Neuropathic pain, trigeminal neuralgia, central pain syndrome', color: '#f97316' },
+          ].map(c => (
+            <div class="glass rounded-xl p-4 border-t-4" style={`border-top-color: ${c.color};`}>
+              <div class="flex items-baseline justify-between mb-1">
+                <span class="text-sm font-semibold">{c.cat}</span>
+                <span class="text-lg font-bold font-[family-name:var(--font-heading)]" style={`color: ${c.color};`}>{c.count}</span>
+              </div>
+              <p class="text-[11px] text-[var(--color-text-faint)]">{c.examples}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Impact Chain</h3>
+          <div class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-muted)] space-y-1">
+            <p>TARA Technique (e.g., QIF-T0045: Sensory Channel Injection)</p>
+            <p class="pl-4">&#8594; Targets band N3 (Brainstem) + N4 (Thalamus)</p>
+            <p class="pl-8">&#8594; Disrupts vestibular pathway + auditory pathway</p>
+            <p class="pl-12">&#8594; Causes vertigo (H81.x), tinnitus (H93.1)</p>
+            <p class="pl-16">&#8594; NISS: BI:L, CD:H, RV:T, NP:T</p>
+            <p class="pl-20">&#8594; ICD-10-CM: H81.x, H93.1</p>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 mb-6">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Hourglass Band Mapping</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Band</th>
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Region</th>
+                  <th class="py-2 px-3 text-left font-semibold text-xs text-[var(--color-text-faint)]">Neurological Conditions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { band: 'N7', region: 'Neocortex', conditions: 'Cortical blindness, expressive/receptive aphasia, alexia, central pain' },
+                  { band: 'N6', region: 'Limbic', conditions: 'Altered sensorium, emotional dysregulation, autonomic conditions' },
+                  { band: 'N5', region: 'Basal Ganglia', conditions: 'Tremor, dystonia, bradykinesia, dyskinesia, chorea' },
+                  { band: 'N4', region: 'Thalamus', conditions: 'Tinnitus, paresthesia, central pain syndrome' },
+                  { band: 'N3', region: 'Brainstem', conditions: 'Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope' },
+                  { band: 'N2', region: 'Cerebellum', conditions: 'Ataxia, intention tremor, dysmetria' },
+                  { band: 'N1', region: 'Spinal Cord', conditions: 'Spasticity, hyperreflexia, areflexia, neurogenic bladder' },
+                  { band: 'I0', region: 'Interface', conditions: 'All conditions (hardware-biology boundary)' },
+                ].map(b => (
+                  <tr class="border-b border-[var(--color-border)]/50">
+                    <td class="py-2 px-3 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] font-semibold">{b.band}</td>
+                    <td class="py-2 px-3 font-semibold">{b.region}</td>
+                    <td class="py-2 px-3 text-[var(--color-text-muted)]">{b.conditions}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)]">
+          <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">CD Metric Broadened</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            In v2.0, CD was renamed from "Cognitive Disruption" to "Cognitive/Functional Disruption" to encompass sensory, motor, and autonomic disruption alongside cognitive interference. This is a definitional change only. All existing CD scores remain valid. The scoring formula is unchanged.
           </p>
         </div>
       </section>
@@ -585,7 +727,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
 
           <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-81-niss-v11-weight-normalization" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
             <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">NISS Derivation Log</h3>
-            <p class="text-xs text-[var(--color-text-muted)]">Full derivation history: Entry 43 (original NISS rationale), Entry 80 (CR/CD split), Entry 81 (v1.1 weight normalization, cross-AI validated).</p>
+            <p class="text-xs text-[var(--color-text-muted)]">Full derivation history: Entry 43 (original NISS rationale), Entry 80 (CR/CD split), Entry 81 (v1.1 weight normalization), Entry 90 (v2.0 NP expansion, neurological extension).</p>
             <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">qif-framework/QIF-DERIVATION-LOG.md</span>
           </a>
 
@@ -597,7 +739,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
 
           <a href="https://doi.org/10.5281/zenodo.18640105" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 hover:border-[var(--color-accent-primary)] transition-colors group block">
             <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-primary)]">Working Paper (Zenodo)</h3>
-            <p class="text-xs text-[var(--color-text-muted)]">Sections 5-5.6 cover NISS in detail. v1.5 includes NISS v1.1 CR/CD split and weight normalization.</p>
+            <p class="text-xs text-[var(--color-text-muted)]">Sections 5-5.6 cover NISS in detail. v8.0 includes NISS v2.0 NP expansion and neurological extension.</p>
             <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] mt-2 block">DOI: 10.5281/zenodo.18640105</span>
           </a>
 

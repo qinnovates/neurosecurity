@@ -1,7 +1,7 @@
 /**
  * QIF Threat Data — adapter over shared/qtara-registrar.json
  * Single source of truth: all techniques from the QIF TARA Taxonomy.
- * Scoring: NISS v1.1 (Neural Impact Scoring System)
+ * Scoring: NISS v2.0 (Neural Impact Scoring System)
  * TARA: Therapeutic Applications & Risk Assessment (four-projection overlay)
  * Projections: Modality (merged Security+Engineering), Clinical, Diagnostic (DSM-5-TR), Governance
  * Neural Impact Chain (NIC): Technique → Band → Structure → Function → NISS + DSM
@@ -152,7 +152,7 @@ export interface ThreatVector {
   description: string;
   /** Original band string from hourglass data */
   bandsStr: string;
-  /** NISS v1.1 scoring data (extension metrics: BI, CR, CD, CV, RV, NP) */
+  /** NISS v2.0 scoring data (extension metrics: BI, CR, CD, CV, RV, NP) */
   niss: NissScore;
   /** CVSS v4.0 scoring data (base + supplemental metrics) */
   cvss: CvssScore | null;
