@@ -614,6 +614,32 @@
       "brodmann_areas": null
     },
     {
+      "id": "vta",
+      "name": "Ventral Tegmental Area",
+      "abbreviation": "VTA",
+      "qif_band": "N5",
+      "parent_structure": "midbrain",
+      "depth_class": "subcortical",
+      "hemisphere": "bilateral",
+      "function": "Dopamine production — origin of mesolimbic and mesocortical pathways. Primary reward and motivation center.",
+      "primary_function": "Dopaminergic neurotransmission, reward processing",
+      "response_latency_ms": {
+        "value": 100,
+        "range": [50, 200],
+        "measure": "VTA dopamine neuron burst latency to reward cue",
+        "notes": "VTA dopamine neurons show phasic burst firing 50-200ms after reward-predictive cue. Longer latency than SNc due to mesolimbic projection targets.",
+        "citations": [
+          "Schultz 1998 (J Neurophysiol): Dopamine neuron temporal dynamics",
+          "Cohen et al. 2012 (Nature): VTA dopamine neuron reward prediction error signals"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)"],
+      "connections": ["striatum", "pfc", "bla", "hippocampus", "acc"],
+      "allen_atlas_id": null,
+      "brodmann_areas": null
+    },
+    {
       "id": "thalamus",
       "name": "Thalamus",
       "abbreviation": "Thal",
@@ -1022,6 +1048,48 @@
       "brodmann_areas": null
     }
   ],
+
+  "region_aliases": {
+    "_note": "Maps full-name region IDs (used in qif-neural-pathways.json and qif-neurotransmitters.json) to abbreviated atlas IDs (used in brain_regions above). Enables cross-file region normalization.",
+    "prefrontal_cortex": "pfc",
+    "primary_motor_cortex": "m1",
+    "primary_visual_cortex": "v1",
+    "primary_auditory_cortex": "a1",
+    "primary_somatosensory_cortex": "s1_cortex",
+    "premotor_cortex": "pmc",
+    "supplementary_motor_area": "sma",
+    "posterior_parietal_cortex": "ppc",
+    "anterior_cingulate_cortex": "acc",
+    "insular_cortex": "insula",
+    "basolateral_amygdala": "bla",
+    "central_amygdala": "cea",
+    "ventral_tegmental_area": "vta",
+    "subthalamic_nucleus": "stn",
+    "globus_pallidus_internus": "gpi",
+    "ventral_intermediate_nucleus": "vim",
+    "cerebellar_cortex": "cerebellum_cortex",
+    "deep_cerebellar_nuclei": "cerebellum_nuclei",
+    "cerebellar_vermis": "vermis",
+    "medulla_oblongata": "medulla",
+    "cervical_spinal_cord": "cervical_cord",
+    "thoracic_spinal_cord": "thoracic_cord",
+    "lumbar_spinal_cord": "lumbar_cord",
+    "sacral_spinal_cord": "sacral_cord",
+    "nucleus_accumbens": "striatum",
+    "cortex": "pfc",
+    "brainstem": "pons",
+    "cerebellum": "cerebellum_cortex",
+    "amygdala": "bla",
+    "basal_ganglia": "striatum",
+    "lateral_hypothalamus": "hypothalamus",
+    "PVN_hypothalamus": "hypothalamus",
+    "SON_hypothalamus": "hypothalamus",
+    "tuberomammillary_nucleus": "hypothalamus",
+    "C1-C3_medullary_neurons": "medulla",
+    "spinal_cord": "cervical_cord",
+    "spinal_dorsal_horn": "cervical_cord",
+    "PAG": "midbrain"
+  },
 
   "bci_devices": "SEE docs/bci-hardware-inventory.json — 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",
 

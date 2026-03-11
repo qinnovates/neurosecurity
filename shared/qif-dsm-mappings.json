@@ -1,9 +1,10 @@
 {
   "_metadata": {
     "title": "QIF DSM-5-TR Diagnostic Mappings",
-    "version": "1.0.0",
-    "description": "Psychiatric conditions mapped to QIF hourglass bands and brain regions, with diagnostic clusters from the TARA DSM-5-TR overlay.",
-    "license": "CC-BY-4.0"
+    "version": "1.1.0",
+    "description": "Psychiatric conditions mapped to QIF hourglass bands and brain regions, with diagnostic clusters from the TARA DSM-5-TR overlay. Diagnostic category references for threat modeling purposes — not diagnostic claims.",
+    "license": "CC-BY-4.0",
+    "note": "All DSM-5-TR mappings are diagnostic category references for threat modeling purposes, not diagnostic claims. Band assignments derived from neural pathway disruption data in qif-neural-pathways.json and require clinical validation."
   },
   "diagnostic_clusters": {
     "cognitive_psychotic": {
@@ -27,20 +28,67 @@
         { "code": "F31.x", "name": "Bipolar disorder", "bands": ["N7", "N6"] },
         { "code": "F43.10", "name": "PTSD", "bands": ["N6", "N7"] },
         { "code": "F41.1", "name": "Generalized anxiety disorder", "bands": ["N7", "N6"] },
-        { "code": "F42.x", "name": "OCD", "bands": ["N7", "N5", "N6"] }
+        { "code": "F42.x", "name": "OCD", "bands": ["N7", "N5", "N6"] },
+        { "code": "F40.x", "name": "Phobic anxiety disorders", "bands": ["N6", "N7"] },
+        { "code": "F41.0", "name": "Panic disorder", "bands": ["N6", "N7"] },
+        { "code": "F43.0", "name": "Acute stress reaction", "bands": ["N6", "N7"] },
+        { "code": "F93.0", "name": "Separation anxiety disorder", "bands": ["N6", "N7"] }
+      ]
+    },
+    "substance_impulse": {
+      "label": "Substance/Impulse",
+      "color": "#f97316",
+      "bands": ["N5", "N6", "N7"],
+      "description": "Substance-related disorders and impulse control disorders involving reward circuit dysregulation.",
+      "conditions": [
+        { "code": "F14.x", "name": "Cocaine-related disorders", "bands": ["N5", "N6"] },
+        { "code": "F63.0", "name": "Pathological gambling", "bands": ["N5", "N6"] },
+        { "code": "F63.x", "name": "Impulse control disorders", "bands": ["N5", "N7"] }
+      ]
+    },
+    "neurodevelopmental": {
+      "label": "Neurodevelopmental",
+      "color": "#06b6d4",
+      "bands": ["N7", "N6", "N5", "N3"],
+      "description": "Neurodevelopmental disorders affecting cognition, attention, social communication, or motor tics.",
+      "conditions": [
+        { "code": "F84.0", "name": "Autism spectrum disorder", "bands": ["N7", "N6", "N5"] },
+        { "code": "F90.x", "name": "ADHD", "bands": ["N7", "N5"] },
+        { "code": "F95.2", "name": "Tourette syndrome", "bands": ["N5", "N3"] }
+      ]
+    },
+    "somatic_sleep": {
+      "label": "Somatic/Sleep",
+      "color": "#8b5cf6",
+      "bands": ["N7", "N6", "N5", "N4", "N2"],
+      "description": "Somatic symptom disorders, eating disorders, and sleep-wake disturbances.",
+      "conditions": [
+        { "code": "F45.x", "name": "Somatic symptom disorders", "bands": ["N7", "N6"] },
+        { "code": "F50.x", "name": "Eating disorders", "bands": ["N6", "N5"] },
+        { "code": "F51.x", "name": "Sleep disorders", "bands": ["N4", "N2"] }
       ]
     },
     "motor_neurocognitive": {
       "label": "Motor/Neurocognitive",
       "color": "#ef4444",
-      "bands": ["N5", "N3", "N2", "N1"],
-      "description": "Movement disorders and neurocognitive decline.",
+      "bands": ["N7", "N6", "N5", "N4", "N3", "N2", "N1"],
+      "description": "Movement disorders, neurocognitive decline, neurological pain, and structural brain conditions.",
       "conditions": [
         { "code": "G20", "name": "Parkinson's disease", "bands": ["N5", "N3"] },
         { "code": "G35", "name": "Multiple sclerosis", "bands": ["N7", "N3", "N1"] },
         { "code": "G40.x", "name": "Epilepsy", "bands": ["N7", "N6", "N4"] },
         { "code": "G30.x", "name": "Alzheimer's disease", "bands": ["N7", "N6"] },
-        { "code": "G12.21", "name": "ALS", "bands": ["N7", "N2", "N1"] }
+        { "code": "G12.21", "name": "ALS", "bands": ["N7", "N2", "N1"] },
+        { "code": "G11.x", "name": "Hereditary ataxia", "bands": ["N3"] },
+        { "code": "G24.x", "name": "Dystonia", "bands": ["N5", "N3"] },
+        { "code": "G25.0", "name": "Essential tremor", "bands": ["N5", "N3"] },
+        { "code": "G25.x", "name": "Extrapyramidal and movement disorders", "bands": ["N5", "N3"] },
+        { "code": "G44.x", "name": "Other headache syndromes", "bands": ["N7"] },
+        { "code": "G47.2", "name": "Circadian rhythm sleep disorders", "bands": ["N4", "N2"] },
+        { "code": "G47.x", "name": "Sleep disorders, neurological", "bands": ["N4", "N2"] },
+        { "code": "G89.x", "name": "Pain, not elsewhere classified", "bands": ["N7", "N4", "N2"] },
+        { "code": "G93.1", "name": "Anoxic brain damage", "bands": ["N7", "N6", "N5", "N4", "N3", "N2", "N1"] },
+        { "code": "R41.3", "name": "Other amnesia", "bands": ["N6"] }
       ]
     },
     "persistent_personality": {
@@ -50,7 +98,9 @@
       "description": "Personality disorders and persistent behavioral patterns.",
       "conditions": [
         { "code": "F60.x", "name": "Personality disorders", "bands": ["N7", "N6"] },
-        { "code": "F48.1", "name": "Depersonalization/derealization", "bands": ["N7", "N6", "N4"] }
+        { "code": "F48.1", "name": "Depersonalization/derealization", "bands": ["N7", "N6", "N4"] },
+        { "code": "F60.2", "name": "Antisocial personality disorder", "bands": ["N7", "N6"] },
+        { "code": "F60.3", "name": "Borderline personality disorder", "bands": ["N6", "N7"] }
       ]
     },
     "non_diagnostic": {
@@ -62,13 +112,13 @@
     }
   },
   "band_conditions": {
-    "N7": ["F20.x", "F32.x", "F31.x", "F43.10", "F41.1", "F42.x", "G35", "G40.x", "G30.x", "G12.21", "F60.x", "F48.1"],
-    "N6": ["F20.x", "F32.x", "F31.x", "F43.10", "F41.1", "F42.x", "G40.x", "G30.x", "F60.x", "F48.1"],
-    "N5": ["G20", "F32.x", "F42.x"],
-    "N4": ["F20.x", "F05", "F06.2", "G40.x", "F48.1"],
-    "N3": ["G20", "G35"],
-    "N2": ["G12.21", "F05"],
-    "N1": ["G35", "G12.21"],
+    "N7": ["F20.x", "F32.x", "F31.x", "F43.10", "F41.1", "F42.x", "G35", "G40.x", "G30.x", "G12.21", "F60.x", "F48.1", "F40.x", "F41.0", "F43.0", "F93.0", "F63.x", "F84.0", "F90.x", "F45.x", "F60.2", "F60.3", "G44.x", "G89.x", "G93.1"],
+    "N6": ["F20.x", "F32.x", "F31.x", "F43.10", "F41.1", "F42.x", "G40.x", "G30.x", "F60.x", "F48.1", "F40.x", "F41.0", "F43.0", "F93.0", "F14.x", "F63.0", "F84.0", "F50.x", "F60.2", "F60.3", "R41.3", "G93.1"],
+    "N5": ["G20", "F32.x", "F42.x", "F14.x", "F63.0", "F63.x", "F84.0", "F90.x", "F95.2", "F50.x", "G24.x", "G25.0", "G25.x", "G93.1"],
+    "N4": ["F20.x", "F05", "F06.2", "G40.x", "F48.1", "F51.x", "G47.2", "G47.x", "G89.x", "G93.1"],
+    "N3": ["G20", "G35", "F95.2", "G11.x", "G24.x", "G25.0", "G25.x", "G93.1"],
+    "N2": ["G12.21", "F05", "F51.x", "G47.2", "G47.x", "G89.x", "G93.1"],
+    "N1": ["G35", "G12.21", "G93.1"],
     "I0": [],
     "S1": [],
     "S2": [],

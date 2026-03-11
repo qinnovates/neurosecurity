@@ -119,18 +119,34 @@ export interface ClinicalData {
   }>;
 }
 
+// ═══ Region ID Normalization ═══
+
+/** Maps full-name region IDs (from pathways/neurotransmitters) to abbreviated atlas IDs */
+const regionAliases: Record<string, string> = (atlas as any).region_aliases ?? {};
+
+/** Normalize a region ID through the alias map. Returns the atlas ID if an alias exists, otherwise the original. */
+function normalizeRegionId(id: string): string {
+  return regionAliases[id] ?? id;
+}
+
+// ═══ Memoization Cache ═══
+
+let _pathwaysCache: ClinicalPathway[] | null = null;
+let _neurotransmittersCache: ClinicalNeurotransmitter[] | null = null;
+
 // ═══ Helpers ═══
 
 function getPathways(): ClinicalPathway[] {
+  if (_pathwaysCache) return _pathwaysCache;
   const raw = (pathwayData as any).pathways ?? [];
-  return raw.map((p: any) => ({
+  _pathwaysCache = raw.map((p: any) => ({
     id: p.id,
     name: p.name,
     type: p.type,
     neurotransmitter: p.neurotransmitter ?? null,
-    originRegions: p.origin ?? [],
+    originRegions: (p.origin ?? []).map(normalizeRegionId),
     originBand: p.origin_band ?? '',
-    targetRegions: p.targets ?? [],
+    targetRegions: (p.targets ?? []).map(normalizeRegionId),
     targetBands: p.target_bands ?? [],
     function: p.function ?? '',
     bciRelevance: p.bci_relevance ?? '',
@@ -140,17 +156,21 @@ function getPathways(): ClinicalPathway[] {
     therapeuticApplications: p.therapeutic_applications ?? [],
     confidence: p.confidence ?? 'MEDIUM',
   }));
+  return _pathwaysCache;
 }
 
 function getNeurotransmitters(): ClinicalNeurotransmitter[] {
+  if (_neurotransmittersCache) return _neurotransmittersCache;
   const raw = (neurotransmitterData as any).neurotransmitters ?? [];
-  return raw.map((nt: any) => ({
+  _neurotransmittersCache = raw.map((nt: any) => ({
     id: nt.id,
     name: nt.name,
     abbreviation: nt.abbreviation ?? nt.id,
     chemicalClass: nt.chemical_class ?? '',
     primaryBands: nt.primary_qif_bands ?? [],
-    primaryRegions: Array.isArray(nt.primary_regions) ? nt.primary_regions : [],
+    primaryRegions: Array.isArray(nt.primary_regions)
+      ? nt.primary_regions.map(normalizeRegionId)
+      : [],
     receptorCount: Array.isArray(nt.receptors) ? nt.receptors.length : 0,
     receptorIds: Array.isArray(nt.receptors) ? nt.receptors.map((r: any) => r.id) : [],
     cofactors: (nt.cofactor_dependencies ?? []).map((c: any) => ({
@@ -168,6 +188,7 @@ function getNeurotransmitters(): ClinicalNeurotransmitter[] {
     keyEnzymes: (nt.synthesis_pathway ?? []).map((s: any) => s.enzyme_gene).filter(Boolean),
     confidence: nt.confidence ?? 'MEDIUM',
   }));
+  return _neurotransmittersCache;
 }
 
 function getRegions(): ClinicalRegion[] {
