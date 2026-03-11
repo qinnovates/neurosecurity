@@ -1,0 +1,1066 @@
+/**
+ * Universal KQL Table Builder — the QIF Data Lake query layer.
+ *
+ * ALL dashboards consume data through this single interface.
+ * JSON files in shared/ are the storage layer. This file flattens them
+ * into queryable KQL tables. Add a new JSON → add its table builder here
+ * → it appears in every dashboard automatically.
+ *
+ * Architecture:
+ *   shared/*.json  →  kql-tables.ts (build time)  →  BciKql.tsx (browser)
+ *                                                  →  ClinicalDashboard.tsx
+ *                                                  →  AtlasDashboard.tsx
+ *                                                  →  data-lake.astro
+ */
+
+// ═══ Imports: Storage Layer ═══
+// Core anatomy & threats
+import atlasRaw from '@shared/qif-brain-bci-atlas.json';
+import registrarRaw from '@shared/qtara-registrar.json';
+import pathwaysRaw from '@shared/qif-neural-pathways.json';
+import neurotransmitterRaw from '@shared/qif-neurotransmitters.json';
+import dsmRaw from '@shared/qif-dsm-mappings.json';
+import neuroRaw from '@shared/qif-neurological-mappings.json';
+
+// Devices & industry
+import landscapeRaw from '@shared/bci-landscape.json';
+import cveRaw from '@shared/cve-technique-mapping.json';
+
+// Governance & security
+import ethicsRaw from '@shared/qif-ethics-controls.json';
+import controlsRaw from '@shared/qif-security-controls.json';
+import guardrailsRaw from '@shared/qif-guardrails.json';
+import scoresRaw from '@shared/neurosecurity-scores.json';
+
+// Additional sources (site data + docs)
+import timelineRaw from '@/data/qif-timeline.json';
+import newsRaw from '@/data/external-news-cache.json';
+import validationRaw from '@shared/validation-registry.json';
+import automationRaw from '@/data/automation-registry.json';
+import hardwareRaw from '../../docs/bci-hardware-inventory.json';
+import intelFeedRaw from '@/data/bci-intel-feed.json';
+import intelSourcesRaw from '@/data/intel-sources.json';
+
+// New data lake sources (dynamic — gracefully handle if not yet present)
+let cranialNervesRaw: any = null;
+let neuroendocrineRaw: any = null;
+let glialRaw: any = null;
+let neurovascularRaw: any = null;
+let receptorsRaw: any = null;
+
+try { cranialNervesRaw = (await import('@shared/qif-cranial-nerves.json')).default; } catch {}
+try { neuroendocrineRaw = (await import('@shared/qif-neuroendocrine.json')).default; } catch {}
+try { glialRaw = (await import('@shared/qif-glial-cells.json')).default; } catch {}
+try { neurovascularRaw = (await import('@shared/qif-neurovascular.json')).default; } catch {}
+try { receptorsRaw = (await import('@shared/qif-receptors.json')).default; } catch {}
+
+// ═══ Types ═══
+
+export type Row = Record<string, unknown>;
+export type KqlTables = Record<string, Row[]>;
+
+export interface DataLakeStats {
+  totalTables: number;
+  totalRows: number;
+  byTable: Record<string, number>;
+  // Summary counts
+  techniques: number;
+  regions: number;
+  pathways: number;
+  neurotransmitters: number;
+  receptorFamilies: number;
+  cranialNerves: number;
+  neuroendocrineAxes: number;
+  glialCellTypes: number;
+  dsmConditions: number;
+  companies: number;
+  devices: number;
+}
+
+// ═══ Helpers ═══
+
+const atlas = atlasRaw as any;
+const registrar = registrarRaw as any;
+const landscape = landscapeRaw as any;
+const dsm = dsmRaw as any;
+const ethics = ethicsRaw as any;
+const cve = cveRaw as any;
+const controls = controlsRaw as any;
+const pathways = pathwaysRaw as any;
+const ntData = neurotransmitterRaw as any;
+const timeline = timelineRaw as any;
+const news = newsRaw as any;
+const validation = validationRaw as any;
+const automation = automationRaw as any;
+const hardware = hardwareRaw as any;
+const intelFeed = intelFeedRaw as any;
+const intelSources = intelSourcesRaw as any;
+const neuro = neuroRaw as any;
+
+/** Refang a defanged URL */
+function refangUrl(url: string): string {
+  if (!url) return '';
+  return url
+    .replace(/^hxxps:\/\//i, 'https://')
+    .replace(/^hxxp:\/\//i, 'http://')
+    .replace(/\[\.]/g, '.');
+}
+
+// ═══ Table Builders ═══
+// Each function returns Row[]. Tables are named by convention.
+// Dynamic pattern: if source data is null/empty, table is omitted.
+
+function buildBrainRegions(): Row[] {
+  return (atlas.brain_regions || []).map((r: any) => ({
+    id: r.id,
+    name: r.name,
+    abbreviation: r.abbreviation || r.id,
+    qif_band: r.qif_band || '',
+    parent_structure: r.parent_structure || '',
+    depth_class: r.depth_class || '',
+    function: r.function || r.primary_function || '',
+    response_latency_ms: r.response_latency_ms?.value ?? r.response_latency_ms ?? '',
+    connections: (r.connections || []).join(', '),
+  }));
+}
+
+function buildHourglassBands(): Row[] {
+  return (atlas.qif_bands || []).map((b: any) => ({
+    id: b.id,
+    name: b.name,
+    zone: b.zone,
+    determinacy: b.determinacy || '',
+    qi_range: (b.qi_range || []).join('-'),
+    severity_if_compromised: b.severity_if_compromised || '',
+  }));
+}
+
+function buildTechniques(): Row[] {
+  return (registrar.techniques || []).map((t: any) => ({
+    id: t.id,
+    name: t.attack || t.name,
+    tactic: t.tactic,
+    severity: t.severity,
+    status: t.status,
+    niss_score: t.niss?.score || 0,
+    bands: Array.isArray(t.bands) ? t.bands.join(', ') : (t.bands || ''),
+    ui_category: t.ui_category || '',
+    physics_tier: t.physics_tier || '',
+    dual_use: t.dual_use || '',
+    consent_tier: t.consent_tier || '',
+  }));
+}
+
+function buildTactics(): Row[] {
+  return (registrar.tactics || []).map((t: any) => ({
+    id: t.id,
+    name: t.name,
+    domain: t.domain,
+    domain_code: t.domain_code,
+    action_code: t.action_code,
+    description: t.description || '',
+  }));
+}
+
+function buildNeuralPathways(): Row[] {
+  return (pathways.pathways || []).map((p: any) => ({
+    id: p.id,
+    name: p.name,
+    type: p.type || '',
+    neurotransmitter: p.neurotransmitter || '',
+    origin: (p.origin || []).join(', '),
+    origin_band: p.origin_band || '',
+    targets: (p.targets || []).join(', '),
+    target_bands: (p.target_bands || []).join(', '),
+    function: p.function || '',
+    bci_relevance: p.bci_relevance || '',
+    dsm_conditions: (p.dsm_conditions || []).join(', '),
+    confidence: p.confidence || '',
+  }));
+}
+
+function buildNeurotransmitters(): Row[] {
+  return (ntData.neurotransmitters || []).map((nt: any) => ({
+    id: nt.id,
+    name: nt.name,
+    abbreviation: nt.abbreviation || nt.id,
+    chemical_class: nt.chemical_class || '',
+    primary_bands: (nt.primary_qif_bands || []).join(', '),
+    primary_regions: (nt.primary_regions || []).join(', '),
+    receptor_count: Array.isArray(nt.receptors) ? nt.receptors.length : 0,
+    cofactor_count: (nt.cofactor_dependencies || []).length,
+    synthesis_steps: (nt.synthesis_pathway || []).length,
+    dsm_condition_count: (nt.dsm_conditions || []).length,
+    bci_relevance: nt.bci_relevance || '',
+    confidence: nt.confidence || '',
+  }));
+}
+
+function buildNeurotransmitterReceptors(): Row[] {
+  // Flatten receptors from neurotransmitter data
+  return (ntData.neurotransmitters || []).flatMap((nt: any) =>
+    (nt.receptors || []).map((r: any) => ({
+      receptor_id: r.id || r.name || '',
+      neurotransmitter: nt.name,
+      neurotransmitter_id: nt.id,
+      type: r.type || '',
+      gene: r.gene || '',
+      mechanism: r.mechanism || '',
+      location: r.primary_location || r.location || '',
+    }))
+  );
+}
+
+function buildCofactors(): Row[] {
+  // Flatten cofactors from neurotransmitter data
+  const seen = new Set<string>();
+  return (ntData.neurotransmitters || []).flatMap((nt: any) =>
+    (nt.cofactor_dependencies || []).map((c: any) => {
+      const key = `${c.cofactor}:${nt.id}`;
+      if (seen.has(key)) return null;
+      seen.add(key);
+      return {
+        cofactor: c.cofactor,
+        neurotransmitter: nt.name,
+        neurotransmitter_id: nt.id,
+        role: c.role || '',
+        deficiency_effect: c.deficiency_effect || '',
+      };
+    }).filter(Boolean)
+  ) as Row[];
+}
+
+function buildDsm5(): Row[] {
+  return Object.entries(dsm.diagnostic_clusters || {}).flatMap(([clusterId, cluster]: [string, any]) =>
+    (cluster.conditions || []).map((c: any) => ({
+      code: c.code,
+      diagnosis: c.name,
+      cluster: cluster.label || clusterId,
+      cluster_id: clusterId,
+      qif_bands: (c.bands || []).join(', '),
+      color: cluster.color || '',
+    }))
+  );
+}
+
+function buildNeurologicalConditions(): Row[] {
+  return (neuro.conditions || []).map((c: any) => ({
+    id: c.id,
+    code: c.code,
+    name: c.name,
+    category: c.category,
+    subcategory: c.subcategory || '',
+    definition: c.definition || '',
+    pathway_ids: (c.pathway_ids || []).join(', '),
+    qif_bands: (c.bands || []).join(', '),
+    bci_attack_vector: c.bci_attack_vector || '',
+    niss_primary: c.niss_primary || '',
+    niss_affected: (c.niss_affected || []).join(', '),
+    confidence: c.confidence || '',
+  }));
+}
+
+function buildCves(): Row[] {
+  return (cve.mappings || []).map((m: any) => ({
+    cve_id: m.cve_id,
+    product: m.product,
+    cvss: m.cvss?.score || 0,
+    category: m.category || '',
+    technique_ids: (m.tara_techniques || []).join(', '),
+    cwe: (m.cwe || []).join(', '),
+  }));
+}
+
+function buildCompanies(): Row[] {
+  return (landscape.companies || []).map((c: any) => ({
+    name: c.name,
+    type: c.type,
+    category: c.company_category || '',
+    founded: c.founded,
+    status: c.status,
+    security_posture: c.security_posture,
+    funding_total_usd: c.funding_total_usd || 0,
+    valuation_usd: c.valuation_usd || 0,
+    device_count: (c.devices || []).length,
+    attack_surface_count: (c.tara_attack_surface || []).length,
+  }));
+}
+
+function buildDevices(): Row[] {
+  return (landscape.companies || []).flatMap((c: any) =>
+    (c.devices || []).map((d: any) => ({
+      device: d.name,
+      company: c.name,
+      type: d.type,
+      channels: d.channels || 0,
+      electrode_type: d.electrode_type || '',
+      fda_status: d.fda_status || 'none',
+      units_deployed: d.units_deployed || '',
+      first_human: d.first_human || '',
+      target_use: d.target_use || '',
+    }))
+  );
+}
+
+function buildNeurorights(): Row[] {
+  return Object.entries(ethics.neurorights || {}).map(([id, r]: [string, any]) => ({
+    id,
+    name: r.name,
+    shortDef: r.shortDef,
+    bands: (r.bands || []).join(', '),
+    frameworks: (r.frameworks || []).join(', '),
+  }));
+}
+
+function buildControls(): Row[] {
+  return Object.entries(controls.controls_by_band || {}).flatMap(([band, types]: [string, any]) =>
+    ['detection', 'prevention', 'response'].flatMap(type =>
+      (types[type] || []).map((control: string) => ({
+        band,
+        type,
+        control,
+      }))
+    )
+  );
+}
+
+function buildNeurosecurityScores(): Row[] {
+  return ((scoresRaw as any).scores || []).map((s: any) => ({
+    device: s.device || s.name || '',
+    overall_score: s.overall_score || s.score || 0,
+    authentication: s.authentication || '',
+    encryption: s.encryption || '',
+    firmware: s.firmware || '',
+    physical: s.physical || '',
+  }));
+}
+
+// ═══ NEW DATA LAKE TABLES (dynamic — only built if data exists) ═══
+
+function buildCranialNerves(): Row[] {
+  if (!cranialNervesRaw) return [];
+  return (cranialNervesRaw.cranial_nerves || []).map((cn: any) => ({
+    id: cn.id,
+    number: cn.number,
+    name: cn.name,
+    type: cn.type,
+    fiber_components: (cn.fiber_components || []).join(', '),
+    function: cn.function || '',
+    qif_band: cn.qif_band || '',
+    qif_band_confidence: cn.qif_band_confidence || '',
+    neurotransmitters: (cn.neurotransmitters || []).join(', '),
+    bci_relevance: cn.bci_relevance || '',
+    bci_devices: (cn.bci_devices || []).join(', '),
+    clinical_significance: cn.clinical_significance || '',
+    confidence: cn.confidence || '',
+  }));
+}
+
+function buildNeuroendocrineAxes(): Row[] {
+  if (!neuroendocrineRaw) return [];
+  return (neuroendocrineRaw.axes || []).map((ax: any) => ({
+    id: ax.id,
+    name: ax.name,
+    abbreviation: ax.abbreviation || '',
+    releasing_hormone: ax.releasing_hormone?.name || '',
+    releasing_gene: ax.releasing_hormone?.gene || '',
+    pituitary_hormone: ax.pituitary_hormone?.name || '',
+    pituitary_gene: ax.pituitary_hormone?.gene || '',
+    target_hormone: ax.target_hormone?.name || '',
+    receptor_count: (ax.receptors || []).length,
+    qif_bands: (ax.qif_bands || []).join(', '),
+    dsm_condition_count: (ax.dsm_conditions || []).length,
+    bci_relevance: ax.bci_relevance || '',
+    confidence: ax.confidence || '',
+  }));
+}
+
+function buildNeuroendocrineReceptors(): Row[] {
+  if (!neuroendocrineRaw) return [];
+  return (neuroendocrineRaw.axes || []).flatMap((ax: any) =>
+    (ax.receptors || []).map((r: any) => ({
+      receptor_id: r.id,
+      axis: ax.name,
+      axis_id: ax.id,
+      gene: r.gene || '',
+      type: r.type || '',
+      g_protein: r.g_protein || '',
+      location: r.location || '',
+    }))
+  );
+}
+
+function buildGlialCells(): Row[] {
+  if (!glialRaw) return [];
+  return (glialRaw.glial_cells || []).map((g: any) => ({
+    id: g.id,
+    name: g.name,
+    subtype_count: (g.subtypes || []).length,
+    marker_count: (g.molecular_markers || []).length,
+    function_count: (g.functions || []).length,
+    functions: (g.functions || []).join('; '),
+    qif_bands: (g.qif_bands || []).join(', '),
+    bci_relevance: g.bci_relevance || '',
+    security_relevance: g.security_relevance || '',
+    confidence: g.confidence || '',
+  }));
+}
+
+function buildGlialMarkers(): Row[] {
+  if (!glialRaw) return [];
+  return (glialRaw.glial_cells || []).flatMap((g: any) =>
+    (g.molecular_markers || []).map((m: any) => ({
+      marker: m.name,
+      gene: m.gene || '',
+      glial_type: g.name,
+      glial_id: g.id,
+      notes: m.notes || '',
+    }))
+  );
+}
+
+function buildBBB(): Row[] {
+  if (!neurovascularRaw) return [];
+  const bbb = neurovascularRaw.blood_brain_barrier;
+  if (!bbb) return [];
+  const rows: Row[] = [];
+  for (const comp of bbb.components || []) {
+    // Tight junction proteins
+    for (const tj of comp.tight_junction_proteins || []) {
+      rows.push({
+        category: 'tight_junction',
+        component: comp.name,
+        protein: tj.name,
+        gene: tj.gene || '',
+        function: 'BBB tight junction',
+        qif_band: bbb.qif_band || 'I0',
+      });
+    }
+    // Transport proteins
+    for (const tp of comp.transport_proteins || []) {
+      rows.push({
+        category: 'transporter',
+        component: comp.name,
+        protein: tp.name,
+        gene: tp.gene || '',
+        function: tp.function || '',
+        qif_band: bbb.qif_band || 'I0',
+      });
+    }
+  }
+  return rows;
+}
+
+function buildMeningealSystem(): Row[] {
+  if (!neurovascularRaw) return [];
+  const men = neurovascularRaw.meningeal_system;
+  if (!men) return [];
+  const rows: Row[] = [];
+  for (const layer of men.layers || []) {
+    rows.push({
+      category: 'meningeal_layer',
+      name: layer.name,
+      derivation: layer.derivation || '',
+      composition: layer.composition || '',
+    });
+  }
+  for (const space of men.spaces || []) {
+    rows.push({
+      category: 'meningeal_space',
+      name: space.name,
+      contents: space.contents || '',
+      clinical: space.clinical || '',
+    });
+  }
+  return rows;
+}
+
+function buildReceptorFamilies(): Row[] {
+  if (!receptorsRaw) return [];
+  return (receptorsRaw.receptor_families || []).map((rf: any) => ({
+    id: rf.id,
+    name: rf.name,
+    type: rf.type || '',
+    ligand: rf.ligand || '',
+    parent_neurotransmitter: rf.parent_neurotransmitter || '',
+    subunit_count: (rf.subunits || []).length,
+    ion_selectivity: rf.ion_selectivity || '',
+    signaling_mechanism: rf.signaling_mechanism || '',
+    brain_regions: (rf.brain_regions || []).join(', '),
+    dsm_condition_count: (rf.dsm_conditions || []).length,
+    bci_relevance: rf.bci_relevance || '',
+    confidence: rf.confidence || '',
+  }));
+}
+
+function buildReceptorSubunits(): Row[] {
+  if (!receptorsRaw) return [];
+  return (receptorsRaw.receptor_families || []).flatMap((rf: any) =>
+    (rf.subunits || []).map((su: any) => ({
+      subunit: su.name,
+      gene: su.gene || '',
+      ncbi_gene_id: su.ncbi_gene_id || '',
+      receptor_family: rf.name,
+      receptor_id: rf.id,
+      expression: su.expression || '',
+      notes: su.notes || '',
+    }))
+  );
+}
+
+// ═══ Market & Business Tables ═══
+
+function buildFunding(): Row[] {
+  return (landscape.market_data?.major_funding_rounds || []).map((r: any) => ({
+    company: r.company,
+    amount_usd: r.amount_usd,
+    date: r.date,
+    series: r.series || '',
+    lead_investors: (r.lead_investors || []).join(', ') || r.investors || '',
+    valuation: r.post_money_valuation_usd || 0,
+  }));
+}
+
+function buildMarketForecasts(): Row[] {
+  return (landscape.market_data?.market_size_estimates || []).map((m: any) => ({
+    year: m.year,
+    value_billion_usd: m.value_billion_usd,
+    source: m.source || '',
+    cagr_percent: m.cagr_percent || '',
+  }));
+}
+
+function buildConsentTiers(): Row[] {
+  return Object.entries(ethics.consent_tiers || {}).map(([id, t]: [string, any]) => ({
+    id,
+    label: t.label,
+    description: t.description || '',
+    bands: Array.isArray(t.bands) ? t.bands.join(', ') : (t.bands || ''),
+  }));
+}
+
+function buildFrameworks(): Row[] {
+  return (ethics.governance_frameworks || []).map((f: any) => ({
+    id: f.id,
+    name: f.name,
+    year: f.year,
+    status: f.status,
+    scope: f.scope || '',
+  }));
+}
+
+// ═══ Landscape: Additional Market & Intel Tables ═══
+
+function buildGrants(): Row[] {
+  return (landscape.market_data?.government_grants || []).map((g: any) => ({
+    program: g.program, total_usd: g.total_usd, period: g.period, note: g.note || '',
+  }));
+}
+
+function buildAcquisitions(): Row[] {
+  return (landscape.market_data?.acquisition_history || []).map((a: any) => ({
+    target: a.target, acquirer: a.acquirer, date: a.date,
+    price_usd_estimate: a.price_usd_estimate || 0, note: a.note || '',
+  }));
+}
+
+function buildPolicy(): Row[] {
+  return (landscape.policy_timeline || []).map((p: any) => ({
+    date: p.date, event: p.event, type: p.type, jurisdiction: p.jurisdiction,
+  }));
+}
+
+function buildPublications(): Row[] {
+  return (landscape.publication_trends || []).map((t: any) => ({
+    year: t.year, pubmed_bci: t.pubmed_bci, security_bci: t.security_bci,
+    security_pct: t.pubmed_bci > 0 ? Number(((t.security_bci / t.pubmed_bci) * 100).toFixed(2)) : 0,
+  }));
+}
+
+function buildVcDeals(): Row[] {
+  return (landscape.market_data?.vc_aggregate_by_year || []).map((v: any) => ({
+    year: v.year, deals: v.deals, total_usd: v.total_usd, source: v.source || '', note: v.note || '',
+  }));
+}
+
+function buildSecurityGap(): Row[] {
+  return (landscape.market_data?.security_gap?.comparison_markets || []).map((c: any) => ({
+    market: c.market, size_2025_usd: c.size_2025_usd, cagr_percent: c.cagr_percent, source: c.source || '',
+  }));
+}
+
+function buildAdjacentMarkets(): Row[] {
+  return [
+    ...(landscape.market_data?.broader_neurotech_market || []).map((m: any) => ({
+      market: 'Neurotechnology (all)', year: m.year, value_billion_usd: m.value_billion_usd,
+      cagr_percent: m.cagr_percent || '', source: m.source || '',
+    })),
+    ...(landscape.market_data?.eeg_devices_market || []).map((m: any) => ({
+      market: 'EEG Devices', year: m.year, value_billion_usd: m.value_billion_usd,
+      cagr_percent: m.cagr_percent || '', source: m.source || '',
+    })),
+    ...(landscape.market_data?.bci_implant_market || []).map((m: any) => ({
+      market: 'BCI Implants (invasive only)', year: m.year, value_billion_usd: m.value_billion_usd,
+      cagr_percent: m.cagr_percent || '', source: m.source || '',
+    })),
+  ];
+}
+
+function buildSources(): Row[] {
+  return [
+    ...(landscape.market_data?.security_gap?.key_sources || []).map((s: any) => ({
+      title: s.title, url: s.url || '', date: s.date || '', category: 'security_gap',
+    })),
+    ...(landscape.market_data?.market_size_estimates || []).filter((m: any) => m.source_url).map((m: any) => ({
+      title: m.source, url: m.source_url, date: String(m.year), category: 'market_forecast',
+    })),
+    ...(landscape.market_data?.major_funding_rounds || []).filter((r: any) => r.source_url).map((r: any) => ({
+      title: `${r.company} ${r.series}`, url: r.source_url, date: r.date, category: 'funding_round',
+    })),
+  ];
+}
+
+// Investor Intelligence
+function buildCrossPortfolio(): Row[] {
+  const intel = landscape.market_data?.investor_intelligence || {};
+  return (intel.cross_portfolio_vcs || []).map((v: any) => ({
+    firm: v.firm, type: v.type || 'VC', aum_B: v.aum_billions || '',
+    bci_companies: (v.bci_investments || []).map((i: any) => i.company).join(', '),
+    bci_bet_count: (v.bci_investments || []).length, signal: v.signal || '',
+  }));
+}
+
+function buildSovereignFunds(): Row[] {
+  const intel = landscape.market_data?.investor_intelligence || {};
+  return (intel.sovereign_wealth_funds || []).map((s: any) => ({
+    fund: s.fund, country: s.country || '', aum_B: s.aum_billions || '',
+    bci_investments: (s.bci_investments || []).map((i: any) => `${i.company} (${i.round})`).join(', '),
+    signal: s.signal || '',
+  }));
+}
+
+function buildBigTechBci(): Row[] {
+  const intel = landscape.market_data?.investor_intelligence || {};
+  return (intel.big_tech_corporate_venture || []).map((t: any) => ({
+    company: t.company, type: t.type || '', bci_investment: t.bci_investment || '',
+    amount: t.amount || '', strategy: t.strategy || '',
+  }));
+}
+
+function buildPeFirms(): Row[] {
+  const intel = landscape.market_data?.investor_intelligence || {};
+  return (intel.pe_firms || []).map((p: any) => ({
+    firm: p.firm, type: p.type || 'PE', bci_investment: p.bci_investment || '',
+    amount: p.amount || '', signal: p.signal || '',
+  }));
+}
+
+function buildIntelDefense(): Row[] {
+  const intel = landscape.market_data?.investor_intelligence || {};
+  return (intel.intelligence_agencies_defense || []).map((i: any) => ({
+    entity: i.entity, type: i.type || '', bci_investment: i.bci_investment || '',
+    round: i.round || '', signal: i.signal || '',
+  }));
+}
+
+function buildNotableInvestors(): Row[] {
+  const intel = landscape.market_data?.investor_intelligence || {};
+  return (intel.notable_individual_investors || []).map((n: any) => ({
+    name: n.name, role: n.role || '', bci_investments: (n.bci_investments || []).join(', '),
+    signal: n.signal || '',
+  }));
+}
+
+function buildInvestmentPatterns(): Row[] {
+  const intel = landscape.market_data?.investor_intelligence || {};
+  return (intel.key_patterns || []).map((p: any, i: number) => ({
+    id: i + 1, pattern: p.pattern || '', evidence: p.evidence || '', implication: p.implication || '',
+  }));
+}
+
+// Hardware, Comms & Ops
+function buildHardwareSpecs(): Row[] {
+  return (hardware.devices || []).map((d: any) => ({
+    id: d.id, manufacturer: d.manufacturer, device_name: d.device_name,
+    device_type: d.device_type || '', fda_status: (d.fda_status || '').slice(0, 40),
+    channels: d.core_specs?.channel_count?.value ?? '',
+    power_mw: d.core_specs?.power_consumption_total?.value ?? '',
+    directionality: d.core_specs?.directionality?.value ?? '',
+  }));
+}
+
+function buildComms(): Row[] {
+  return (hardware.devices || []).map((d: any) => {
+    const pc = d.physics_constraints || {};
+    const wp = pc.wireless_protocol || {};
+    const wpVal = typeof wp === 'string' ? wp : (wp.value || '');
+    const wpLower = wpVal.toLowerCase();
+    let rf_band = '';
+    if (wpLower.includes('ble') || wpLower.includes('bluetooth')) rf_band = '2.4 GHz ISM';
+    else if (wpLower.includes('wifi')) rf_band = '2.4/5 GHz';
+    else if (wpLower.includes('near-field') || wpLower.includes('nfc') || wpLower.includes('inductive')) rf_band = 'Near-field';
+    else if (wpLower.includes('near-infrared') || wpLower.includes('optical')) rf_band = 'NIR optical';
+    else if (wpLower.includes('wired') || wpLower.includes('percutaneous')) rf_band = 'N/A (wired)';
+    const data_link_risk = wpLower.includes('ble') || wpLower.includes('bluetooth') ? 'HIGH (BLE sniffable)'
+      : wpLower.includes('wifi') ? 'HIGH (WiFi interceptable)'
+      : wpLower.includes('wired') || wpLower.includes('percutaneous') ? 'LOW (physical access)'
+      : wpLower.includes('near-infrared') || wpLower.includes('optical') ? 'LOW (line-of-sight)'
+      : wpLower.includes('near-field') || wpLower.includes('nfc') ? 'MEDIUM (proximity)' : 'UNKNOWN';
+    return {
+      device: d.device_name, manufacturer: d.manufacturer, wireless_protocol: wpVal || 'Unknown',
+      rf_band: rf_band || 'Unknown', data_link_risk,
+    };
+  });
+}
+
+function buildNspLayers(): Row[] {
+  return (controls.nsp_layers || []).map((l: any) => ({
+    layer: l.layer, name: l.name, bands: (l.bands || []).join(', '), overhead_pct: l.overhead || '',
+  }));
+}
+
+function buildValidations(): Row[] {
+  return (validation.entries || []).map((v: any) => ({
+    id: v.id, component: v.component, category: v.category,
+    tiers: (v.tiers || []).join(', '), status: v.status, summary: v.summary || '', date: v.date || '',
+  }));
+}
+
+function buildAutomations(): Row[] {
+  return (automation.entries || []).map((a: any) => ({
+    id: a.id, name: a.name, trigger: a.trigger || '', type: a.type || '',
+    status: a.status, category: a.category || '',
+  }));
+}
+
+function buildMilestones(): Row[] {
+  return (timeline.milestones || []).map((m: any) => ({
+    date: m.date, title: m.title, type: m.type, description: m.description || '',
+  }));
+}
+
+function buildNews(): Row[] {
+  return (Array.isArray(news) ? news : []).map((n: any) => ({
+    title: n.title, date: n.date, source: n.source, category: n.category, url: refangUrl(n.url || ''),
+  }));
+}
+
+function buildIntelFeed(): Row[] {
+  return (Array.isArray(intelFeed) ? intelFeed : []).map((item: any) => ({
+    id: item.id, title: item.title, date: item.date, source: item.source,
+    source_category: item.source_category, tags: (item.tags || []).join(', '),
+    companies: (item.companies || []).join(', '), url: refangUrl(item.url || ''),
+  }));
+}
+
+function buildIntelSources(): Row[] {
+  return (Array.isArray(intelSources) ? intelSources : []).map((s: any) => ({
+    name: s.name, category: s.category, tier: s.tier, url: s.url, has_rss: !!s.rss_url, has_api: !!s.has_api,
+  }));
+}
+
+// Computed Analysis
+function buildTamSamSom(): Row[] {
+  const base2024 = (landscape.market_data?.market_size_estimates || [])
+    .filter((m: any) => m.year === 2024).map((m: any) => m.value_billion_usd).sort((a: number, b: number) => a - b);
+  const median2024 = base2024.length > 0 ? base2024[Math.floor(base2024.length / 2)] : 2.3;
+  const cagrs = (landscape.market_data?.market_size_estimates || [])
+    .filter((m: any) => m.cagr_percent).map((m: any) => m.cagr_percent).sort((a: number, b: number) => a - b);
+  const medianCagr = cagrs.length > 0 ? cagrs[Math.floor(cagrs.length / 2)] : 15.0;
+  const rows: Row[] = [];
+  for (let yr = 2024; yr <= 2035; yr++) {
+    const yO = yr - 2024;
+    const bci = median2024 * Math.pow(1 + medianCagr / 100, yO);
+    const tam = bci * 0.065; const sam = tam * 0.70;
+    const somPct = yr <= 2024 ? 0 : Math.min(0.25, 0.05 + (yr - 2025) * 0.04);
+    rows.push({ year: yr, bci_market_B: Number(bci.toFixed(2)), tam_M: Math.round(tam * 1000),
+      sam_M: Math.round(sam * 1000), som_pct: `${(somPct * 100).toFixed(0)}%`,
+      som_M: Math.round(sam * somPct * 1000), median_cagr: `${medianCagr}%` });
+  }
+  return rows;
+}
+
+function buildConvergence(): Row[] {
+  return [
+    { year: 2019, market: 'Automotive Cyber', event: 'Pre-regulation baseline', value_B: 1.7, security_spend_B: 1.7 },
+    { year: 2020, market: 'Automotive Cyber', event: 'UN R155 adopted', value_B: 2.0, security_spend_B: 2.0 },
+    { year: 2022, market: 'Automotive Cyber', event: 'Mandatory new types', value_B: 3.0, security_spend_B: 3.0 },
+    { year: 2025, market: 'Automotive Cyber', event: 'Mature market', value_B: 4.7, security_spend_B: 4.7 },
+    { year: 2023, market: 'BCI (actual)', event: 'FDORA 524B', value_B: 1.8, security_spend_B: 0 },
+    { year: 2025, market: 'BCI (actual)', event: 'GAO: no BCI privacy law', value_B: 2.8, security_spend_B: 0 },
+    { year: 2026, market: 'BCI (projected)', event: 'Pre-regulation', value_B: 3.3, security_spend_B: 0 },
+    { year: 2028, market: 'BCI (projected)', event: 'FDA BCI guidance', value_B: 4.4, security_spend_B: 0.05 },
+    { year: 2030, market: 'BCI (projected)', event: 'Security spend emerges', value_B: 5.8, security_spend_B: 0.38 },
+  ];
+}
+
+function buildMomentum(): Row[] {
+  const vc = landscape.market_data?.vc_aggregate_by_year || [];
+  let cum = 0;
+  return vc.map((v: any, i: number) => {
+    cum += v.total_usd;
+    const prev = i > 0 ? vc[i - 1].total_usd : null;
+    return {
+      year: v.year, total_invested_M: Math.round(v.total_usd / 1e6), deals: v.deals,
+      yoy_growth: prev ? ((v.total_usd - prev) / prev * 100).toFixed(0) + '%' : 'N/A',
+      cumulative_invested_M: Math.round(cum / 1e6),
+    };
+  });
+}
+
+function buildRiskProfile(): Row[] {
+  return buildCompanies().map((c: any) => {
+    const fB = (c.funding_total_usd || 0) / 1e9;
+    const ss = c.security_posture === 'none_published' ? 0 : c.security_posture === 'minimal' ? 1
+      : c.security_posture === 'basic' ? 2 : c.security_posture === 'moderate' ? 3 : 4;
+    return {
+      company: c.name, type: c.type, funding_B: Number(fB.toFixed(2)),
+      devices: c.device_count, security_posture: c.security_posture,
+      security_score: `${ss}/4`, attack_surfaces: c.attack_surface_count,
+      risk_index: Number((fB * Math.max(c.device_count, 1) * (5 - ss)).toFixed(2)),
+    };
+  }).sort((a: any, b: any) => (b.risk_index as number) - (a.risk_index as number));
+}
+
+// ═══ Cross-Reference: Impact Chain ═══
+
+export interface ImpactChainLink {
+  technique_id: string;
+  technique_name: string;
+  severity: string;
+  niss_score: number;
+  band_id: string;
+  band_name: string;
+  region_id: string;
+  region_name: string;
+  pathway_id: string;
+  pathway_name: string;
+  neurotransmitter: string;
+  dsm_code: string;
+  dsm_name: string;
+  dsm_cluster: string;
+}
+
+function buildImpactChains(): Row[] {
+  const techniques = registrar.techniques || [];
+  const bands = atlas.qif_bands || [];
+  const regions = atlas.brain_regions || [];
+  const allPathways = pathways.pathways || [];
+  const dsmClusters = dsm.diagnostic_clusters || {};
+
+  const chains: Row[] = [];
+
+  for (const tech of techniques) {
+    for (const bandId of tech.band_ids || []) {
+      const band = bands.find((b: any) => b.id === bandId);
+      const bandRegions = regions.filter((r: any) => r.qif_band === bandId);
+
+      for (const region of bandRegions) {
+        // Find pathways through this region
+        const regionPathways = allPathways.filter((p: any) =>
+          (p.origin || []).includes(region.id) || (p.targets || []).includes(region.id)
+        );
+
+        for (const pw of regionPathways) {
+          // Find clinical conditions for this pathway (DSM-5-TR + neurological)
+          for (const condCode of pw.dsm_conditions || []) {
+            let condName = condCode;
+            let clusterName = '';
+            // Try DSM clusters first
+            for (const [cId, cluster] of Object.entries(dsmClusters)) {
+              const c = cluster as any;
+              const match = (c.conditions || []).find((cond: any) => cond.code === condCode);
+              if (match) {
+                condName = match.name;
+                clusterName = c.label || cId;
+                break;
+              }
+            }
+            // Fall back to neurological mappings
+            if (!clusterName) {
+              const neuroMatch = (neuro.conditions || []).find((nc: any) => nc.code === condCode);
+              if (neuroMatch) {
+                condName = neuroMatch.name;
+                clusterName = `Neurological/${neuroMatch.category}`;
+              }
+            }
+
+            chains.push({
+              technique_id: tech.id,
+              technique_name: tech.attack || tech.name,
+              severity: tech.severity,
+              niss_score: tech.niss?.score || 0,
+              band_id: bandId,
+              band_name: band?.name || bandId,
+              region_id: region.id,
+              region_name: region.name,
+              pathway_id: pw.id,
+              pathway_name: pw.name,
+              neurotransmitter: pw.neurotransmitter || '',
+              dsm_code: condCode,
+              dsm_name: condName,
+              dsm_cluster: clusterName,
+            });
+          }
+        }
+      }
+    }
+  }
+
+  return chains;
+}
+
+// ═══ Main Builder ═══
+
+let _cache: { tables: KqlTables; stats: DataLakeStats } | null = null;
+
+/**
+ * Build all KQL tables from the data lake.
+ * Cached after first call (build-time memoization).
+ * Returns only non-empty tables — dashboards auto-discover what's available.
+ */
+export function getKqlTables(): KqlTables {
+  if (_cache) return _cache.tables;
+
+  const allTables: Record<string, Row[]> = {
+    // Core anatomy
+    brain_regions: buildBrainRegions(),
+    hourglass_bands: buildHourglassBands(),
+    neural_pathways: buildNeuralPathways(),
+    neurotransmitters: buildNeurotransmitters(),
+    nt_receptors: buildNeurotransmitterReceptors(),
+    cofactors: buildCofactors(),
+
+    // Threats
+    techniques: buildTechniques(),
+    tactics: buildTactics(),
+    cves: buildCves(),
+    impact_chains: buildImpactChains(),
+
+    // Clinical
+    dsm5: buildDsm5(),
+    neurological_conditions: buildNeurologicalConditions(),
+
+    // Devices & industry
+    companies: buildCompanies(),
+    devices: buildDevices(),
+    funding: buildFunding(),
+    market_forecasts: buildMarketForecasts(),
+    grants: buildGrants(),
+    acquisitions: buildAcquisitions(),
+    vc_deals: buildVcDeals(),
+    adjacent_markets: buildAdjacentMarkets(),
+    security_gap: buildSecurityGap(),
+    sources: buildSources(),
+
+    // Investor intelligence
+    cross_portfolio: buildCrossPortfolio(),
+    sovereign_funds: buildSovereignFunds(),
+    big_tech_bci: buildBigTechBci(),
+    pe_firms: buildPeFirms(),
+    intel_defense: buildIntelDefense(),
+    notable_investors: buildNotableInvestors(),
+    investment_patterns: buildInvestmentPatterns(),
+
+    // Hardware & comms
+    hardware_specs: buildHardwareSpecs(),
+    comms: buildComms(),
+
+    // Governance
+    neurorights: buildNeurorights(),
+    controls: buildControls(),
+    consent_tiers: buildConsentTiers(),
+    frameworks: buildFrameworks(),
+    neurosecurity_scores: buildNeurosecurityScores(),
+    nsp_layers: buildNspLayers(),
+    policy: buildPolicy(),
+
+    // Ops & timeline
+    validations: buildValidations(),
+    automations: buildAutomations(),
+    milestones: buildMilestones(),
+    publications: buildPublications(),
+    news: buildNews(),
+    intel_feed: buildIntelFeed(),
+    intel_sources: buildIntelSources(),
+
+    // Computed analysis
+    tam_sam_som: buildTamSamSom(),
+    convergence: buildConvergence(),
+    momentum: buildMomentum(),
+    risk_profile: buildRiskProfile(),
+
+    // New data lake sources (dynamic)
+    cranial_nerves: buildCranialNerves(),
+    neuroendocrine_axes: buildNeuroendocrineAxes(),
+    neuroendocrine_receptors: buildNeuroendocrineReceptors(),
+    glial_cells: buildGlialCells(),
+    glial_markers: buildGlialMarkers(),
+    bbb_proteins: buildBBB(),
+    meningeal_system: buildMeningealSystem(),
+    receptor_families: buildReceptorFamilies(),
+    receptor_subunits: buildReceptorSubunits(),
+  };
+
+  // Filter out empty tables — dynamic discovery
+  const tables: KqlTables = {};
+  for (const [name, rows] of Object.entries(allTables)) {
+    if (rows.length > 0) {
+      tables[name] = rows;
+    }
+  }
+
+  const stats = computeStats(tables);
+  _cache = { tables, stats };
+  return tables;
+}
+
+/**
+ * Get data lake statistics. Call after getKqlTables().
+ */
+export function getDataLakeStats(): DataLakeStats {
+  if (!_cache) getKqlTables();
+  return _cache!.stats;
+}
+
+function computeStats(tables: KqlTables): DataLakeStats {
+  const byTable: Record<string, number> = {};
+  let totalRows = 0;
+  for (const [name, rows] of Object.entries(tables)) {
+    byTable[name] = rows.length;
+    totalRows += rows.length;
+  }
+
+  return {
+    totalTables: Object.keys(tables).length,
+    totalRows,
+    byTable,
+    techniques: byTable['techniques'] || 0,
+    regions: byTable['brain_regions'] || 0,
+    pathways: byTable['neural_pathways'] || 0,
+    neurotransmitters: byTable['neurotransmitters'] || 0,
+    receptorFamilies: byTable['receptor_families'] || 0,
+    cranialNerves: byTable['cranial_nerves'] || 0,
+    neuroendocrineAxes: byTable['neuroendocrine_axes'] || 0,
+    glialCellTypes: byTable['glial_cells'] || 0,
+    dsmConditions: byTable['dsm5'] || 0,
+    neurologicalConditions: (byTable['neurological_conditions'] || 0) as any,
+    companies: byTable['companies'] || 0,
+    devices: byTable['devices'] || 0,
+  };
+}
+
+/**
+ * Get the list of all available table names.
+ * Dashboards use this to dynamically build UI — no hardcoded sections.
+ */
+export function getAvailableTableNames(): string[] {
+  return Object.keys(getKqlTables());
+}
+
+/**
+ * Get a specific table by name. Returns empty array if not found.
+ */
+export function getTable(name: string): Row[] {
+  return getKqlTables()[name] || [];
+}

@@ -471,6 +471,17 @@ interface QueryResult {
   error: string | null;
 }
 
+// --- Security Limits ---
+
+/** Max query string length (bytes) */
+const MAX_QUERY_LENGTH = 4096;
+/** Max piped operations per query */
+const MAX_OPERATIONS = 12;
+/** Max result rows before truncation */
+const MAX_RESULT_ROWS = 50_000;
+/** Max query execution time (ms) */
+const MAX_EXECUTION_MS = 2000;
+
 function executeQuery(
   query: string,
   tables: TableData,
@@ -479,8 +490,18 @@ function executeQuery(
   const trimmed = query.trim();
   if (!trimmed) return { rows: [], tableName: '', error: null };
 
+  // --- Security: query length limit ---
+  if (trimmed.length > MAX_QUERY_LENGTH) {
+    return { rows: [], tableName: '', error: `Query too long (${trimmed.length} chars). Maximum: ${MAX_QUERY_LENGTH}.` };
+  }
+
   const segments = trimmed.split('|').map(s => s.trim());
   const tableName = segments[0];
+
+  // --- Security: operation count limit ---
+  if (segments.length - 1 > MAX_OPERATIONS) {
+    return { rows: [], tableName, error: `Too many operations (${segments.length - 1}). Maximum: ${MAX_OPERATIONS}.` };
+  }
 
   if (!tables[tableName]) {
     const available = Object.keys(tables).join(', ');
@@ -488,6 +509,7 @@ function executeQuery(
   }
 
   try {
+    const startTime = performance.now();
     const ops = parseOperations(segments);
     // Reorder: where (0) → join (1) → distinct (2) → summarize (3) → project (4) → sort (5) → take (6) → count (7)
     ops.sort((a, b) => a.priority - b.priority);
@@ -496,12 +518,21 @@ function executeQuery(
     let rows = [...allTableRows];
 
     for (const op of ops) {
+      // --- Security: execution timeout ---
+      if (performance.now() - startTime > MAX_EXECUTION_MS) {
+        return { rows: rows.slice(0, MAX_RESULT_ROWS), tableName, error: `Query timed out after ${MAX_EXECUTION_MS}ms. Results truncated.` };
+      }
+
       switch (op.type) {
         case 'where':
           rows = applyWhere(rows, op.arg, tableName, indexes, allTableRows);
           break;
         case 'join':
           rows = applyJoin(rows, op.arg, tables);
+          // --- Security: cap rows after join to prevent Cartesian explosion ---
+          if (rows.length > MAX_RESULT_ROWS) {
+            rows = rows.slice(0, MAX_RESULT_ROWS);
+          }
           break;
         case 'sort':
           rows = applySort(rows, op.arg);
@@ -509,7 +540,7 @@ function executeQuery(
         case 'take': {
           const n = parseInt(op.arg, 10);
           if (isNaN(n)) throw new Error(`Invalid take/limit value: ${op.arg}`);
-          rows = rows.slice(0, n);
+          rows = rows.slice(0, Math.min(n, MAX_RESULT_ROWS));
           break;
         }
         case 'project':
@@ -525,6 +556,11 @@ function executeQuery(
           rows = [{ count: rows.length }];
           break;
       }
+    }
+
+    // --- Security: final row cap ---
+    if (rows.length > MAX_RESULT_ROWS) {
+      rows = rows.slice(0, MAX_RESULT_ROWS);
     }
 
     return { rows, tableName, error: null };
