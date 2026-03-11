@@ -208,7 +208,11 @@ function extractCompanies(title, summary, companyNames) {
 
 function stripHtml(str) {
   if (typeof str !== 'string') return String(str || '');
-  return str.replace(/<[^>]*>/g, '').trim();
+  let result = str;
+  while (/<[^>]*>/.test(result)) {
+    result = result.replace(/<[^>]*>/g, '');
+  }
+  return result.trim();
 }
 
 // --- XML Parsing (same approach as fetch-news.mjs) ---

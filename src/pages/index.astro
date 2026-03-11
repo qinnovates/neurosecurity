@@ -1,528 +1,479 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import Nav from '@/components/Nav.astro';
-import Footer from '@/components/Footer.astro';
-import BciVisionToggle from '@/components/BciVisionToggle';
-import ScrollCounter from '@/components/ScrollCounter';
-import KinectVision from '@/components/KinectVision';
-import HeroParticles from '@/components/HeroParticles';
-import OniSpheres from '@/components/OniSpheres';
-import PublicationCard from '@/components/PublicationCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import TrustBar from '../components/TrustBar.astro';
+import PublicationCard from '../components/PublicationCard.astro';
 import { getCollection } from 'astro:content';
-import { getPostDate } from '@/lib/utils';
-import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, PILLARS, TARA_TECHNIQUES } from '@/lib/qif-constants';
-import '@/styles/global.css';
+import { getPostDate } from '../lib/utils';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, STATS, PILLARS, LATEST_WHITEPAPER_HREF } from '../lib/qif-constants';
+import HeroParticles from '../components/HeroParticles';
+import '../styles/global.css';
 import registry from '@shared/qtara-registrar.json';
-
-const techniques = (registry as any).techniques ?? [];
-const totalThreats = techniques.length;
-const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
-const neurorightsSet = new Set<string>();
-techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
-const neurorightsCount = neurorightsSet.size;
-
-const sampleTechniques = techniques.slice(0, 9).map((t: any) => ({
-  id: t.id,
-  name: t.name,
-  band: t.tara?.primary_band || 'I0',
-  niss: t.niss?.final_score || 0,
-}));
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => new Date(getPostDate(b.data)).getTime() - new Date(getPostDate(a.data)).getTime())
-  .slice(0, 4);
+  .slice(0, 6);
 
-const bandZoneColor = (id: string) => {
-  if (id.startsWith('N')) return '#22c55e';
-  if (id === 'I0') return '#f59e0b';
-  return '#3b82f6';
-};
+// Compute hero metrics from registrar (build-time)
+const techniques = (registry as any).techniques ?? [];
+const totalThreats = techniques.length;
+const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
+const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
+const neurorightsSet = new Set<string>(['EA']); // Equal Access is structural, not threat-mapped
+techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
+const neurorightsCount = neurorightsSet.size;
+
+// Curated essential reading slugs (strongest posts for neuroethics audience)
+const essentialSlugs = [
+  '2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses',
+  '2026-02-16-your-brain-has-rights-we-counted-them',
+  '2026-02-11-how-malicious-apps-derive-your-personal-biometrics',
+  '2026-02-17-your-smart-glasses-are-one-sensor-away-from-hearing-your-thoughts',
+  '2026-02-09-tara-therapeutic-atlas-of-risks-and-applications',
+  '2026-02-11-tara-first-cve-realtek-audio-jack-retasking',
+];
+
+const allPosts = await getCollection('blog');
+const essentialPosts = essentialSlugs
+  .map(slug => allPosts.find(p => p.id === slug))
+  .filter(Boolean) as typeof allPosts;
+
 ---
 
-<BaseLayout title="Qinnovate — Neural Interface Security and Governance Research" description="A security engineer's research portfolio studying how neural-interface risks can be modeled, communicated, and governed responsibly.">
+<BaseLayout title="Qinnovate — No Security Framework Existed for the Brain-Computer Interface" description="An $8 billion industry by 2032. 109 catalogued attack techniques. Zero published security frameworks. QIF is the first open framework bridging neurosecurity and neuroethics.">
   <Nav />
-  <BciVisionToggle client:idle />
 
-  <!-- ╔══════════════════════════════════════════════════════════╗ -->
-  <!-- ║                  ACADEMIC MODE (Default)                 ║ -->
-  <!-- ╚══════════════════════════════════════════════════════════╝ -->
-  <div class="academic-only">
+  <!-- ═══ BEAT 1: THE INCIDENT — Hybrid Hero ═══ -->
+  <section class="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
+    <!-- Gradient background -->
+    <div class="absolute inset-0 bg-[var(--color-bg-deep)]">
+      <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse at 50% 30%, rgba(59,130,246,0.15) 0%, transparent 60%), radial-gradient(ellipse at 30% 70%, rgba(6,182,212,0.1) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.08) 0%, transparent 50%);"></div>
+    </div>
 
-    <section class="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden" style="background: var(--color-bg-deep);">
-      <HeroParticles client:only="react" />
-      <div class="relative z-10 text-center max-w-4xl mx-auto pt-24">
-        <p class="text-xs font-medium tracking-[0.2em] uppercase mb-6 text-[var(--color-text-faint)]"><strong>Neural Interface Security Research by</strong> Kevin L. Qi</p>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.15]">
-          <span class="text-[var(--color-text-primary)]">Modeling Security Risks</span><br />
-          <span class="gradient-text">for Brain-Computer Interfaces.</span>
-        </h1>
-        <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">{totalThreats} attack techniques catalogued across 24 commercial devices. A proposed framework bridging neurosecurity and neuroethics.</p>
-        <div class="grid grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto mb-10">
-          <a href="/governance/rights/" class="glass rounded-xl p-4 text-center card-hover"><p class="text-2xl sm:text-3xl font-bold text-emerald-500">{neurorightsCount}</p><p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">neurorights<br/>mapped</p></a>
-          <a href="/atlas/tara/" class="glass rounded-xl p-4 text-center card-hover"><p class="text-2xl sm:text-3xl font-bold text-[var(--color-accent-primary)]">{totalThreats}</p><p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">attack techniques<br/>catalogued</p></a>
-          <a href="/atlas/therapeutics/" class="glass rounded-xl p-4 text-center card-hover"><p class="text-2xl sm:text-3xl font-bold text-[var(--color-accent-secondary)]">{therapeuticCount}</p><p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic analogs<br/>identified</p></a>
-        </div>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <a href="/atlas/tara/" class="px-6 py-3 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">Explore the Threat Atlas</a>
-          <a href="/research/whitepaper/" class="px-6 py-3 rounded-xl glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors">Read the Whitepaper</a>
-        </div>
+    <HeroParticles client:idle />
+
+    <div class="relative z-10 text-center max-w-4xl mx-auto pt-24">
+      <p class="text-xs font-medium tracking-[0.2em] uppercase mb-6 text-[var(--color-text-faint)]">
+        <strong>Brain-Computer Interface Research by</strong> Kevin L. Qi
+      </p>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
+        <span class="text-[var(--color-text-primary)]">No Security Framework Existed</span>
+        <br />
+        <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
+          for the Brain-Computer Interface.
+        </span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
+        An <a href="/bci/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry by 2032</a>.* {totalThreats} attack techniques catalogued across 24 commercial devices. QIF is the first open framework bridging neurosecurity and neuroethics — from threat model to defense specification.
+      </p>
+
+      <!-- Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10">
+        <a href="/neurogovernance/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-emerald-400/30 transition-all">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">{neurorightsCount}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">neurorights<br/>operationalized</p>
+        </a>
+        <a href="/TARA/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-primary)]/30 transition-all">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{totalThreats}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">BCI attack techniques<br/>catalogued and scored</p>
+        </a>
+        <a href="/therapeutics/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-secondary)]/30 transition-all">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{therapeuticCount}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic uses found<br/>in the same mechanisms</p>
+        </a>
+        <a href="/psychiatric/" class="glass rounded-lg p-4 text-center hover:ring-1 hover:ring-[var(--color-accent-tertiary)]/30 transition-all">
+          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">{dsm5Count}</p>
+          <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">psychiatric diagnoses<br/>mapped (awaiting validation)</p>
+        </a>
       </div>
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"><svg class="w-5 h-5 text-[var(--color-text-faint)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg></div>
-    </section>
 
-    <section class="py-16" style="background: var(--color-bg-surface);">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 reveal">
-          <div><h2 class="text-xl font-bold mb-5">What This Work Is</h2><ul class="space-y-3 text-sm text-[var(--color-text-muted)] leading-relaxed"><li class="flex items-start gap-2"><span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#8250;</span>A transparent research portfolio — open source, open data, open to critique.</li><li class="flex items-start gap-2"><span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#8250;</span>Proposed methods for threat modeling and risk scoring in neural-interface contexts.</li><li class="flex items-start gap-2"><span class="text-[var(--color-accent-primary)] mt-0.5 shrink-0">&#8250;</span>A bridge between technical security and neurorights/policy discussions.</li></ul></div>
-          <div><h2 class="text-xl font-bold mb-5">What This Work Is Not</h2><ul class="space-y-3 text-sm text-[var(--color-text-muted)] leading-relaxed"><li class="flex items-start gap-2"><span class="text-[var(--color-text-faint)] mt-0.5 shrink-0">&times;</span>Not a clinical tool or diagnostic instrument.</li><li class="flex items-start gap-2"><span class="text-[var(--color-text-faint)] mt-0.5 shrink-0">&times;</span>Not a regulatory standard or adopted specification.</li><li class="flex items-start gap-2"><span class="text-[var(--color-text-faint)] mt-0.5 shrink-0">&times;</span>Not independently validated on clinical data.</li></ul></div>
-        </div>
+      <!-- Dual-audience CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <a
+          href="/TARA/"
+          class="px-6 py-3 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
+        >
+          See the Threat Atlas
+        </a>
+        <a
+          href="/whitepaper/"
+          class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
+        >
+          Read the Framework
+        </a>
       </div>
-    </section>
 
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="text-center mb-10 reveal"><p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4">How It Connects</p><h2 class="text-2xl sm:text-3xl font-bold mb-3">Three proposed systems, one security posture</h2><p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Each system stands alone. Together they form a proposed security architecture for neurotechnology.</p></div>
-      <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
-        {PILLARS.map((pillar) => (
-          <a href={pillar.href} class="glass rounded-xl p-5 card-hover group text-left">
-            <div class="flex items-center gap-2 mb-3"><div class="text-xl" style={`color: ${pillar.color}`} set:html={pillar.icon} /><h3 class="text-base font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">{pillar.name}</h3></div>
-            <p class="text-xs text-[var(--color-text-faint)] mb-1.5 font-medium">{pillar.tagline}</p>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{pillar.description}</p>
-          </a>
-        ))}
+      <p class="text-[10px] text-[var(--color-text-faint)] mt-4">
+        *Median estimate across <a href="/bci/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
+      </p>
+
+      <TrustBar />
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-5 h-5 text-[var(--color-text-faint)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══ BEAT 2: THE GAP — Unaltered vs Self-Originating ═══ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4 text-center">The Gap</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">
+        "Unaltered" is not the same as "self-originating"
+      </h2>
+      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          Five neurorights have been proposed to protect your brain: Mental Privacy, Cognitive Liberty, Mental Integrity, Psychological Continuity, and Equal Access. Philosophical frameworks define what these rights mean. <strong class="text-[var(--color-text-primary)]">None specify how a BCI system would actually enforce them.</strong>
+        </p>
+        <p>
+          The critical gap is in Mental Integrity. Current formulations protect against <em>modification</em> of neural signals — tampering, injection, disruption. But we are building systems that can inject, simulate, or reshape neural signals. A perfectly intact signal that was never generated by your brain passes every integrity check and violates everything MI is supposed to protect. <strong class="text-[var(--color-text-primary)]">Governance models must distinguish between "unaltered" and "self-originating."</strong>
+        </p>
+        <p>
+          That distinction requires engineering, not philosophy. It requires a metric that can verify whether a signal's statistical properties match your baseline neural signature. <strong class="text-[var(--color-text-primary)]">No framework had built that. So we did.</strong>
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="py-20" style="background: var(--color-bg-surface);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 reveal"><h2 class="text-3xl font-bold mb-4">The Hourglass Architecture</h2><p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Every threat and neurorights mapping traces to specific bands of this proposed 11-layer model.</p></div>
-        <div class="max-w-xl mx-auto reveal">
-          <div class="flex items-stretch gap-4">
-            <div class="flex flex-col items-center justify-between py-2 shrink-0 w-6"><span class="text-[10px] text-[var(--color-text-faint)]">&uarr;</span><span class="text-[10px] text-[var(--color-text-faint)] [writing-mode:vertical-rl] rotate-180 tracking-[0.12em] uppercase">Indeterministic</span><span class="text-[10px] text-[var(--color-text-faint)] [writing-mode:vertical-rl] rotate-180 tracking-[0.12em] uppercase mt-1">Deterministic</span><span class="text-[10px] text-[var(--color-text-faint)]">&darr;</span></div>
-            <div class="flex-1 flex flex-col gap-0">
-              <div class="flex items-center gap-2 py-1"><div class="flex-1 h-px bg-[var(--color-border)]"></div><span class="text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-faint)] whitespace-nowrap">Neural Domain</span><div class="flex-1 h-px bg-[var(--color-border)]"></div></div>
-              {HOURGLASS_BANDS.map((band, i) => (<>
-                {band.id === 'I0' && (<div class="flex items-center gap-2 py-1"><div class="flex-1 h-px bg-[var(--color-border)]"></div><span class="text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-faint)] whitespace-nowrap">I0 — Interface Bottleneck</span><div class="flex-1 h-px bg-[var(--color-border)]"></div></div>)}
-                {band.id === 'S1' && (<div class="flex items-center gap-2 py-1"><div class="flex-1 h-px bg-[var(--color-border)]"></div><span class="text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-faint)] whitespace-nowrap">Synthetic Domain</span><div class="flex-1 h-px bg-[var(--color-border)]"></div></div>)}
-                <a href={`/atlas/#${band.id}`} class="flex items-center gap-3 py-[3px] group cursor-pointer rounded hover:bg-black/[0.03] transition-all" title={band.description}>
-                  <span class="text-xs text-[var(--color-text-faint)] w-7 text-right font-mono shrink-0">{band.id}</span>
-                  <div class="flex-1 flex justify-center"><div class="h-7 rounded-[3px] transition-all group-hover:scale-[1.03]" style={`width: ${HOURGLASS_WIDTHS[i]}%; background: ${band.color}30; border: 1px solid ${band.color}50;`}></div></div>
-                  <span class="text-xs text-[var(--color-text-muted)] w-28 shrink-0 truncate group-hover:text-[var(--color-text-primary)] transition-colors">{band.name}</span>
-                </a>
-              </>))}
-              <div class="text-center pt-3 pb-1"><div class="text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-faint)]">&larr; Spatial Scale &rarr;</div></div>
-            </div>
+  <!-- ═══ BEAT 3: THE DISCOVERY — I mapped every known attack ═══ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">The Discovery</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">No one had catalogued the threats</h2>
+      <div class="space-y-4 text-sm text-[var(--color-text-muted)] leading-relaxed">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="glass rounded-lg p-4">
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">FDA</p>
+            <p>Requires medical device cybersecurity assessments, but has <strong class="text-[var(--color-text-primary)]">no BCI-specific attack taxonomy</strong>. Guidance says "assess risk per ISO 14971" without defining what BCI threats look like.</p>
+          </div>
+          <div class="glass rounded-lg p-4">
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">MITRE</p>
+            <p>Published a medical device threat modeling playbook (2021), but it is methodology-generic. <strong class="text-[var(--color-text-primary)]">No neural-specific techniques. No BCI entries in ATT&CK.</strong></p>
+          </div>
+          <div class="glass rounded-lg p-4">
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">CISA</p>
+            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning. A board game for brainstorming, not a security framework.</p>
+          </div>
+          <div class="glass rounded-lg p-4">
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">BCI Manufacturers</p>
+            <p>Neuralink, Synchron, Blackrock, Precision Neuroscience: <strong class="text-[var(--color-text-primary)]">zero public security documentation.</strong> No threat models, no vulnerability disclosure policies.</p>
           </div>
         </div>
-        <div class="text-center mt-8"><a href="/atlas/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Explore the full interactive atlas &rarr;</a></div>
-      </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <a href="/guardrails/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-6">
-          <div class="flex-1"><p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-2">Proposed Guardrails</p><h2 class="text-xl sm:text-2xl font-bold mb-3 group-hover:text-[var(--color-accent-tertiary)] transition-colors">Neurowall + NSP + Runemate</h2><p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-2xl">Three proposed guardrails for BCI defense: a signal-layer firewall, a post-quantum wire protocol, and an on-device policy compiler.</p></div>
-          <div class="text-[var(--color-accent-tertiary)] opacity-60 group-hover:opacity-100 transition-opacity shrink-0"><svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg></div>
+        <div class="glass rounded-lg p-4" style="border-left: 3px solid var(--color-accent-primary);">
+          <p class="font-semibold text-[var(--color-text-primary)] mb-1">So I built it</p>
+          <p>I catalogued every known way to attack a brain-computer interface, scored each one for neural impact, traced the affected brain regions to psychiatric outcomes, and mapped the neurorights each technique could violate. <strong class="text-[var(--color-text-primary)]">{totalThreats} techniques. {dsm5Count} diagnostic outcomes. {neurorightsCount} neurorights operationalized.</strong></p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BEAT 4: THE TEST — Can it be falsified? ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4 text-center">The Test</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3 text-center">Does the framework hold up?</h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-8 text-center">
+        A framework that can't be tested is a story. Here's how the atlas validates against real hardware, real physics, and real neuroscience.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal reveal-stagger">
+      <!-- Empirical validation -->
+      <a href="/case-studies/t0079-anc-fingerprint/" class="glass rounded-xl p-5 card-hover group text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+          </div>
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">
+            Hardware Validation
+          </h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          28 consumer sensor exploitation techniques validated with real devices. ANC earbuds extract ear canal biometrics at &minus;47 dB below music. No firmware exploit. Just physics.
+        </p>
       </a>
-    </section>
 
-    {posts.length > 0 && (
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="flex items-center justify-between mb-8 reveal"><div><h2 class="text-3xl font-bold">Latest Work</h2><p class="text-sm text-[var(--color-text-muted)] mt-1">Field journals and research notes.</p></div><a href="/news/" class="text-sm text-[var(--color-accent-primary)]">All posts &rarr;</a></div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal-stagger reveal">{posts.map((post) => (<PublicationCard title={post.data.title} date={post.data.date_posted || post.data.date || new Date()} tags={post.data.tags} slug={post.id} body={post.body || ''} compact />))}</div>
-      </section>
-    )}
-
-    <section class="py-16" style="background: var(--color-bg-surface);">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
-        <h2 class="text-xl font-bold mb-6">For Reviewers</h2>
-        <ol class="space-y-2 text-sm text-[var(--color-text-muted)]">
-          <li class="flex items-start gap-3"><span class="text-[var(--color-accent-primary)] font-mono font-bold shrink-0">1.</span><a href="/research/whitepaper/">Research Question and Derivation</a></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--color-accent-primary)] font-mono font-bold shrink-0">2.</span><a href="/research/landscape/">Literature and Prior Work</a></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--color-accent-primary)] font-mono font-bold shrink-0">3.</span><a href="/atlas/tara/">Methods (taxonomy + scoring)</a></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--color-accent-primary)] font-mono font-bold shrink-0">4.</span><a href="/research/validation/">Validation</a></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--color-accent-primary)] font-mono font-bold shrink-0">5.</span><a href="/research/whitepaper/#limitations">Limitations</a></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--color-accent-primary)] font-mono font-bold shrink-0">6.</span><a href="/governance/">Policy Translation</a></li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center reveal">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-4">The research is open. Start anywhere.</h2>
-      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-8">No login, no paywall. Published for researchers, clinicians, and policymakers to evaluate and build upon.</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="/research/whitepaper/" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
-        <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-xl glass font-medium">View on GitHub</a>
-      </div>
-    </section>
-  </div>
-
-  <!-- ╔══════════════════════════════════════════════════════════╗ -->
-  <!-- ║                BCI VISION MODE (Toggle ON)               ║ -->
-  <!-- ╚══════════════════════════════════════════════════════════╝ -->
-  <div class="vision-only">
-
-    <div class="sticky top-16 z-40 text-center py-2 text-[10px] tracking-[0.15em] uppercase font-mono" style="background: rgba(139,92,246,0.1); border-bottom: 1px solid rgba(139,92,246,0.2); color: var(--color-accent-tertiary);">Theoretical Vision — Research directions and possibilities, not validated results</div>
-
-    <!-- VISION HERO: Kinect on right, text on left -->
-    <section class="relative min-h-screen flex items-center overflow-hidden" style="background: #050a08;">
-      <div class="absolute inset-0 z-0">
-        <KinectVision client:only="react" fullBleed={true} />
-      </div>
-      <div class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-24">
-        <div class="max-w-lg">
-          <p class="text-xs font-mono tracking-[0.2em] uppercase mb-6 text-[var(--color-accent-tertiary)]">BCI Vision</p>
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-            <span class="text-white">The Future of</span><br /><span class="gradient-text">Neural Interface Security.</span>
-          </h1>
-          <p class="text-lg text-zinc-400 mb-10 leading-relaxed">A theoretical vision of where BCI security research leads — from threat modeling to content delivery for cortical prosthetics.</p>
-          <div class="flex flex-wrap gap-4">
-            <a href="/research/whitepaper/" class="px-6 py-3 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
-            <a href="/atlas/" class="px-6 py-3 rounded-xl glass font-medium transition-colors">Explore the Atlas</a>
+      <!-- Endogenous case study -->
+      <a href="/case-studies/endogenous-attack-chain/" class="glass rounded-xl p-5 card-hover group text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-[var(--color-accent-secondary)]/10 flex items-center justify-center text-[var(--color-accent-secondary)]">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
           </div>
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-secondary)] transition-colors">
+            Endogenous Case Study
+          </h3>
         </div>
-      </div>
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10"><svg class="w-5 h-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg></div>
-    </section>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          The framework's first test case: COVID + PTSD as a dual-vector endogenous attack chain. Same neural pathways, same failure modes, no device required.
+        </p>
+      </a>
 
-    <!-- TRANSPARENCY -->
-    <section class="py-20" style="background: var(--color-bg-surface);">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-6 reveal-stagger reveal">
-          <div class="glass rounded-xl p-6"><h3 class="text-lg font-bold mb-4">What This Work Is</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>&#8250; Open-source research portfolio</li><li>&#8250; Proposed threat modeling methods</li><li>&#8250; Bridge between security and neurorights</li></ul></div>
-          <div class="glass rounded-xl p-6"><h3 class="text-lg font-bold mb-4">What This Work Is Not</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>&times; Not a clinical or diagnostic tool</li><li>&times; Not an adopted standard</li><li>&times; Not independently validated</li></ul></div>
-        </div>
-        <p class="text-center mt-6 font-mono text-xs text-[var(--color-text-faint)] tracking-[0.1em] reveal">PROPOSED &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE</p>
-      </div>
-    </section>
-
-    <!-- QIF HOURGLASS -->
-    <section class="py-20 vision-section-cool">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal">
-          <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4">The Framework</p>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-4">11 bands. Every surface mapped.</h2>
-          <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">The Quantified Interconnection Framework maps every surface between neuron and silicon.</p>
-        </div>
-        <div class="max-w-3xl mx-auto">
-          <div class="flex flex-col gap-1 reveal-stagger reveal">
-            <div class="flex items-center gap-2 py-1 mb-2"><div class="flex-1 h-px" style="background: rgba(34,197,94,0.3);"></div><span class="text-[10px] uppercase tracking-[0.12em] text-emerald-500/70 font-mono">Neural Domain</span><div class="flex-1 h-px" style="background: rgba(34,197,94,0.3);"></div></div>
-            {HOURGLASS_BANDS.map((band, i) => (<>
-              {band.id === 'I0' && (<div class="flex items-center gap-2 py-2 my-1"><div class="flex-1 h-px" style="background: rgba(245,158,11,0.4);"></div><span class="text-[10px] uppercase tracking-[0.12em] text-amber-500/80 font-mono">I0 — The Bottleneck</span><div class="flex-1 h-px" style="background: rgba(245,158,11,0.4);"></div></div>)}
-              {band.id === 'S1' && (<div class="flex items-center gap-2 py-2 my-1"><div class="flex-1 h-px" style="background: rgba(59,130,246,0.3);"></div><span class="text-[10px] uppercase tracking-[0.12em] text-blue-500/70 font-mono">Synthetic Domain</span><div class="flex-1 h-px" style="background: rgba(59,130,246,0.3);"></div></div>)}
-              <a href={`/atlas/#${band.id}`} class="flex items-center gap-4 py-1 group rounded-lg px-2 transition-all hover:bg-white/[0.02]" title={band.description}>
-                <span class="text-xs font-mono w-8 text-right shrink-0" style={`color: ${band.color}99;`}>{band.id}</span>
-                <div class="flex-1 flex justify-center"><div class="h-9 rounded transition-all group-hover:scale-[1.02]" style={`width: ${HOURGLASS_WIDTHS[i]}%; background: ${band.color}15; border: 1px solid ${band.color}30;`}></div></div>
-                <span class="text-xs w-32 shrink-0 truncate text-[var(--color-text-muted)] group-hover:text-[var(--color-text-primary)] transition-colors">{band.name}</span>
-              </a>
-            </>))}
+      <!-- Dual-use discovery -->
+      <a href="/therapeutics/" class="glass rounded-xl p-5 card-hover group text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-400/10 flex items-center justify-center text-emerald-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
           </div>
-          <div class="text-center mt-6"><a href="/research/whitepaper/" class="text-sm text-[var(--color-accent-primary)]">Read the full specification &rarr;</a></div>
+          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-emerald-400 transition-colors">
+            Dual-Use Discovery
+          </h3>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          {therapeuticCount} of {totalThreats} attack techniques have direct therapeutic counterparts. The same mechanism that treats Parkinson's can, if misconfigured, cause psychiatric harm.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ MILESTONE CALLOUT: Neural Impact Chain ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="glass rounded-xl p-6 sm:p-8 reveal" style="border-left: 4px solid var(--color-accent-secondary);">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+        <div class="flex-1">
+          <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-2">Key Finding</p>
+          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2">
+            The Neural Impact Chain
+          </h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+            A six-stage research mapping that traces BCI attack techniques from their physical mechanism through the affected neural structure to their potential psychiatric outcome. {dsm5Count} techniques map to symptoms matching DSM-5-TR criteria — from acute stress disorder to neurocognitive impairment. These mappings require clinical validation.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <a
+            href="/TARA/#diagnostic"
+            class="px-5 py-2.5 rounded-lg bg-[var(--color-accent-secondary)] text-white font-medium text-sm hover:bg-[var(--color-accent-secondary)]/90 transition-colors text-center"
+          >
+            Explore Diagnostic View
+          </a>
+          <a
+            href="/publications/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
+            class="px-5 py-2.5 rounded-lg glass text-[var(--color-text-primary)] font-medium text-sm hover:bg-white/10 transition-colors text-center"
+          >
+            Read More
+          </a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- TARA ATLAS -->
-    <section class="py-20" style="background: var(--color-bg-surface);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 reveal">
-          <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4">Threat Intelligence</p>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-4">The TARA Atlas</h2>
-          <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Every technique scored, every device mapped, every neuroright traced.</p>
-        </div>
-        <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16 reveal">
-          <div class="text-center"><p class="text-4xl sm:text-5xl font-bold text-[var(--color-accent-primary)]"><ScrollCounter client:idle end={totalThreats} suffix="+" /></p><p class="text-xs text-[var(--color-text-muted)] mt-2">techniques</p></div>
-          <div class="text-center"><p class="text-4xl sm:text-5xl font-bold text-[var(--color-accent-secondary)]"><ScrollCounter client:idle end={24} /></p><p class="text-xs text-[var(--color-text-muted)] mt-2">devices</p></div>
-          <div class="text-center"><p class="text-4xl sm:text-5xl font-bold text-emerald-500"><ScrollCounter client:idle end={neurorightsCount} /></p><p class="text-xs text-[var(--color-text-muted)] mt-2">neurorights</p></div>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto reveal-stagger reveal">
-          {sampleTechniques.map((t: any) => (
-            <a href={`/TARA/${t.id}/`} class="glass rounded-xl p-4 card-hover group relative overflow-hidden">
-              <div class="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={`background: ${bandZoneColor(t.band)};`}></div>
-              <div class="flex items-center justify-between mb-2"><span class="font-mono text-[10px] text-[var(--color-text-faint)]">{t.id}</span><span class="font-mono text-[10px] px-1.5 py-0.5 rounded" style={`background: ${bandZoneColor(t.band)}15; color: ${bandZoneColor(t.band)};`}>{t.band}</span></div>
-              <p class="text-sm font-semibold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">{t.name}</p>
-              <div class="flex items-center gap-2"><div class="flex-1 h-1.5 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full" style={`width: ${Math.min(t.niss * 10, 100)}%; background: ${t.niss >= 7 ? '#ef4444' : t.niss >= 4 ? '#f59e0b' : '#10b981'};`}></div></div><span class="text-[10px] font-mono text-[var(--color-text-faint)]">{t.niss?.toFixed?.(1) || '—'}</span></div>
-            </a>
-          ))}
-        </div>
-        <div class="text-center mt-8"><a href="/atlas/tara/" class="text-sm text-[var(--color-accent-primary)]">Explore the full atlas &rarr;</a></div>
-      </div>
-    </section>
-
-    <!-- NISS SCORING -->
-    <section class="py-20 vision-section-warm">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 reveal">
-          <p class="text-xs font-mono tracking-[0.15em] uppercase text-amber-500 mb-4">Severity Scoring</p>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-4">NISS: Neural Impact Severity Score</h2>
-          <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Every technique is scored by base severity, reversibility, and detectability.</p>
-        </div>
-        <div class="glass rounded-2xl p-8 max-w-lg mx-auto reveal-scale">
-          <p class="font-mono text-xs text-[var(--color-text-faint)] mb-4">Example: Signal Injection</p>
-          <div class="space-y-4">
-            <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">Base Severity</span><span class="font-mono">6.0</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-blue-500" style="width: 60%;"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">+ Reversibility</span><span class="font-mono text-amber-500">+1.5</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-amber-500" style="width: 15%;"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">+ Detectability</span><span class="font-mono text-amber-500">+0.7</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-amber-500" style="width: 7%;"></div></div></div>
-            <div class="pt-2 border-t" style="border-color: var(--color-border);"><div class="flex justify-between text-sm mb-1"><span class="font-semibold">Final NISS</span><span class="font-mono font-bold text-red-500">8.2 HIGH</span></div><div class="h-3 rounded-full" style="background: var(--color-bg-elevated);"><div class="h-full rounded-full bg-gradient-to-r from-red-500 to-red-400" style="width: 82%;"></div></div></div>
+  <!-- ═══ BEAT 5: THE FRAMEWORK — Three pillars + Hourglass (earned) ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="text-center mb-10 reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4">The Framework</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">Three systems that connect what no one had connected</h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Threats, outcomes, and rights — mapped together for the first time. Each system stands alone. Together they form a complete security posture for neurotechnology.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal">
+      {PILLARS.map((pillar) => (
+        <a href={pillar.href} class="glass rounded-xl p-5 card-hover group text-left">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="text-xl" style={`color: ${pillar.color}`} set:html={pillar.icon} />
+            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">
+              {pillar.name}
+            </h3>
           </div>
+          <p class="text-xs text-[var(--color-text-faint)] mb-1.5 font-medium">{pillar.tagline}</p>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+            {pillar.description}
+          </p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ HOURGLASS ARCHITECTURE (earned after narrative) ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="text-center mb-12 reveal">
+      <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">The Hourglass Architecture</h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">
+        Every threat, therapeutic, and neurorights violation maps to specific bands of this 11-layer model. Biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails.
+      </p>
+    </div>
+
+    <!-- Flat interactive hourglass preview -->
+    <div class="max-w-xl mx-auto reveal" id="hourglass-preview">
+      <div class="flex items-stretch gap-4">
+        <!-- Y-axis label -->
+        <div class="flex flex-col items-center justify-between py-2 shrink-0 w-6">
+          <span class="text-[10px] text-[var(--color-text-faint)]">&uarr;</span>
+          <span class="text-[10px] text-[var(--color-text-faint)] [writing-mode:vertical-rl] rotate-180 tracking-[0.12em] uppercase">Indeterministic</span>
+          <span class="text-[10px] text-[var(--color-text-faint)] [writing-mode:vertical-rl] rotate-180 tracking-[0.12em] uppercase mt-1">Deterministic</span>
+          <span class="text-[10px] text-[var(--color-text-faint)]">&darr;</span>
         </div>
-        <div class="flex flex-wrap items-center justify-center gap-2 mt-12 text-[10px] font-mono text-[var(--color-text-faint)] reveal">
-          <span class="glass rounded px-2 py-1">Technique</span><span>&rarr;</span><span class="glass rounded px-2 py-1">Band</span><span>&rarr;</span><span class="glass rounded px-2 py-1">Anatomy</span><span>&rarr;</span><span class="glass rounded px-2 py-1">Function</span><span>&rarr;</span><span class="glass rounded px-2 py-1">NISS</span><span>&rarr;</span><span class="glass rounded px-2 py-1">DSM-5-TR*</span>
-        </div>
-        <p class="text-center text-[10px] text-[var(--color-text-faint)] mt-2">*Diagnostic category references for threat modeling, not diagnostic claims</p>
-      </div>
-    </section>
 
-    <!-- NEUROETHICS: ORIGIN + TIMELINE (with ONI Spheres behind) -->
-    <section class="relative py-20 overflow-hidden" style="background: #050a14;">
-      <OniSpheres client:only="react" />
-      <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal">
-          <p class="text-xs font-mono tracking-[0.15em] uppercase text-emerald-500 mb-4">Where It Started</p>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-6">Neuroethics Is Younger Than You Think</h2>
-          <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">The field that governs how we think about brains, privacy, and technology was formally named in 2002 — just over two decades ago. Here's the lineage all of us inherit.</p>
-        </div>
+        <!-- Bands -->
+        <div class="flex-1 flex flex-col gap-0">
+          <!-- Neural Domain separator -->
+          <div class="flex items-center gap-2 py-1">
+            <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+            <span class="text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-faint)] whitespace-nowrap">Neural Domain</span>
+            <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+          </div>
 
-        <!-- Visual Timeline -->
-        <div class="relative mb-16">
-          <!-- Vertical spine -->
-          <div class="absolute left-6 sm:left-1/2 top-0 bottom-0 w-px" style="background: linear-gradient(to bottom, transparent, rgba(16,185,129,0.4), rgba(16,185,129,0.4), transparent);"></div>
-
-          {[
-            {
-              year: '2002',
-              title: 'The Field Is Named',
-              body: 'William Safire opens the Dana Foundation conference "Neuroethics: Mapping the Field" in San Francisco. In his keynote, he defines neuroethics as "the examination of what is right and wrong, good and bad about the treatment of, perfection of, or unwelcome invasion of and worrisome manipulation of the human brain." The modern field begins here.',
-              side: 'right',
-              color: '#10b981',
-              accent: 'Dana Foundation, San Francisco',
-            },
-            {
-              year: '2002',
-              title: 'Two Branches, One Name',
-              body: 'At the same conference, philosopher Adina Roskies draws a distinction that still defines the field. Ethics of neuroscience asks: "What ethical rules should govern neuroscience research and its clinical applications?" Neuroscience of ethics asks: "What can brain science teach us about morality itself?" Both branches share a name, but they ask fundamentally different questions.',
-              side: 'left',
-              color: '#06b6d4',
-              accent: 'Roskies (2002)',
-            },
-            {
-              year: '2005',
-              title: 'The Discipline Formalizes',
-              body: 'The International Neuroethics Society (INS) is founded, establishing neuroethics as a professional academic discipline with its own conferences, journals, and research programs.',
-              side: 'right',
-              color: '#10b981',
-              accent: 'International Neuroethics Society',
-            },
-            {
-              year: '2006',
-              title: 'Neuromodesty',
-              body: 'Legal scholar Stephen Morse publishes "Brain Overclaim Syndrome," warning against using neuroscience findings to make claims the science doesn\'t support. His principle — neuromodesty — becomes a cornerstone: don\'t confuse brain scans with mind reading.',
-              side: 'left',
-              color: '#f59e0b',
-              accent: 'Morse, Ohio State J Criminal Law',
-            },
-            {
-              year: '2017',
-              title: 'Neurorights Proposed',
-              body: 'Ienca and Andorno publish "Towards New Human Rights in the Age of Neuroscience and Neurotechnology," proposing four new rights: cognitive liberty, mental privacy, mental integrity, and psychological continuity. They argue existing human rights are insufficient for the neurotechnology era.',
-              side: 'right',
-              color: '#8b5cf6',
-              accent: 'Life Sciences, Society and Policy',
-            },
-            {
-              year: '2021',
-              title: 'Chile Leads',
-              body: 'Chile becomes the first country to enshrine neuroprotection in its constitution. The theoretical becomes legislative. The question shifts from "should we protect mental privacy?" to "how do we enforce it technically?"',
-              side: 'left',
-              color: '#ec4899',
-              accent: 'Chilean Constitutional Amendment',
-            },
-            {
-              year: '2024',
-              title: 'Colorado — First U.S. State',
-              body: 'Colorado passes HB 24-1058, classifying neural data as "sensitive data" under its existing privacy framework. Effective August 7, 2024, the law requires explicit opt-in consent for collection and use of neural data. The first U.S. state to legislate neural data protection.',
-              side: 'right',
-              color: '#3b82f6',
-              accent: 'HB 24-1058, Colorado Privacy Act',
-            },
-            {
-              year: '2024',
-              title: 'California Follows',
-              body: 'California amends the California Consumer Privacy Act (CCPA) to include "neural data" in the definition of "sensitive personal information." Consumers gain the right to limit the use and disclosure of their neural data — the largest population covered by neural data law in the U.S.',
-              side: 'left',
-              color: '#3b82f6',
-              accent: 'CCPA Amendment, SB 1223',
-            },
-            {
-              year: '2025',
-              title: 'Montana Expands the Scope',
-              body: 'Montana passes SB 163, amending the Genetic Information Privacy Act (GIPA) to cover neural data. It becomes the third U.S. state with neural data legislation — and the first to include "mental augmentation" within its scope, acknowledging enhancement alongside protection.',
-              side: 'right',
-              color: '#3b82f6',
-              accent: 'SB 163, Montana GIPA Amendment',
-            },
-            {
-              year: 'Future',
-              title: 'All of US',
-              body: 'Two decades of neuroethics scholarship built the principles. Now the engineering has to catch up. If neurotechnology can read, write, and modulate neural signals — who builds the security? Who writes the policies? The answer is everyone working at this intersection.',
-              side: 'right',
-              color: '#10b981',
-              accent: 'The bridge is being built',
-            },
-          ].map((item, idx) => (
-            <div class={`relative flex items-start mb-10 reveal ${item.side === 'left' ? 'sm:flex-row-reverse' : ''}`}>
-              {/* Dot on spine */}
-              <div class="absolute left-6 sm:left-1/2 w-3 h-3 rounded-full -translate-x-1/2 z-10 ring-4" style={`background: ${item.color}; ring-color: ${item.color}20;`}></div>
-
-              {/* Content card */}
-              <div class={`ml-14 sm:ml-0 sm:w-[calc(50%-2rem)] ${item.side === 'left' ? 'sm:mr-auto sm:pr-8' : 'sm:ml-auto sm:pl-8'}`}>
-                <div class="glass rounded-xl p-5">
-                  <div class="flex items-center gap-3 mb-2">
-                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded" style={`background: ${item.color}15; color: ${item.color};`}>{item.year}</span>
-                    <h3 class="text-sm font-bold">{item.title}</h3>
-                  </div>
-                  <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{item.body}</p>
-                  <p class="text-[10px] font-mono" style={`color: ${item.color}; opacity: 0.6;`}>{item.accent}</p>
+          {HOURGLASS_BANDS.map((band, i) => (
+            <>
+              {band.id === 'I0' && (
+                <div class="flex items-center gap-2 py-1">
+                  <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+                  <span class="text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-faint)] whitespace-nowrap">I0 — Interface Bottleneck</span>
+                  <div class="flex-1 h-px bg-[var(--color-border)]"></div>
                 </div>
-              </div>
-            </div>
+              )}
+              {band.id === 'S1' && (
+                <div class="flex items-center gap-2 py-1">
+                  <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+                  <span class="text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-faint)] whitespace-nowrap">Synthetic Domain</span>
+                  <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+                </div>
+              )}
+              <a
+                href={`/lab/hourglass.html#${band.id}`}
+                class="flex items-center gap-3 py-[3px] group cursor-pointer rounded hover:bg-black/[0.03] transition-all"
+                title={band.description}
+              >
+                <span class="text-xs text-[var(--color-text-faint)] w-7 text-right font-mono shrink-0">{band.id}</span>
+                <div class="flex-1 flex justify-center">
+                  <div
+                    class="h-7 rounded-[3px] transition-all group-hover:scale-[1.03] group-hover:brightness-110"
+                    style={`width: ${HOURGLASS_WIDTHS[i]}%; background: ${band.color}30; border: 1px solid ${band.color}50;`}
+                  ></div>
+                </div>
+                <span class="text-xs text-[var(--color-text-muted)] w-28 shrink-0 truncate group-hover:text-[var(--color-text-primary)] transition-colors">{band.name}</span>
+              </a>
+            </>
           ))}
-        </div>
 
-        <!-- The Two Branches visual -->
-        <div class="grid sm:grid-cols-2 gap-4 mb-12 reveal">
-          <div class="glass rounded-xl p-6 relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full" style="background: #06b6d4;"></div>
-            <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #06b6d4;">Ethics of Neuroscience</p>
-            <p class="text-sm font-semibold mb-2">The applied branch</p>
-            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What ethical rules should govern brain research, neural devices, and clinical neurotechnology? This is the branch that asks about consent, privacy, cognitive liberty, and the rights of people using BCIs.</p>
-            <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">This is where BCI security governance lives.</p>
-          </div>
-          <div class="glass rounded-xl p-6 relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full" style="background: #8b5cf6;"></div>
-            <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #8b5cf6;">Neuroscience of Ethics</p>
-            <p class="text-sm font-semibold mb-2">The philosophical branch</p>
-            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What can brain science tell us about morality itself? How do neural processes produce moral judgments? This branch studies the biological basis of ethical reasoning, not the ethics of the tools.</p>
-            <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">Same name, fundamentally different question.</p>
-          </div>
-        </div>
-
-        <!-- Neurorights cards (kept) -->
-        <div class="text-center mb-6 reveal">
-          <p class="text-xs font-mono tracking-[0.15em] uppercase text-emerald-500 mb-4">From Scholarship to Rights</p>
-          <h3 class="text-xl font-bold mb-2">Five Proposed Neurorights</h3>
-          <p class="text-xs text-[var(--color-text-muted)]">Derived from Ienca & Andorno (2017), extended by subsequent scholarship</p>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-4xl mx-auto reveal-stagger reveal">
-          {['Mental Privacy', 'Cognitive Liberty', 'Mental Integrity', 'Psychological Continuity', 'Equal Access'].map((right) => (
-            <div class="glass rounded-xl p-4 text-center"><p class="text-sm font-semibold text-emerald-500 mb-1">{right}</p><p class="text-[10px] text-[var(--color-text-faint)]">Mapped to hourglass bands</p></div>
-          ))}
-        </div>
-        <div class="text-center mt-8"><a href="/neuroethics/rights/" class="text-sm text-[var(--color-accent-primary)]">Explore neurorights mapping &rarr;</a></div>
-      </div>
-    </section>
-
-    <!-- GOVERNANCE -->
-    <section class="py-20 vision-section-purple">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 reveal"><p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4">Policy Bridge</p><h2 class="text-3xl sm:text-4xl font-bold mb-4">Governance Spans All 11 Bands</h2><p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">The policy bridge connects security findings to regulatory frameworks.</p></div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
-          {[{ name: 'FDA', desc: 'Medical device cybersecurity' }, { name: 'EU AI Act', desc: 'High-risk AI compliance' }, { name: 'OECD', desc: 'Neurotechnology principles' }, { name: 'ISO', desc: 'Medical device standards' }].map((r) => (
-            <div class="glass rounded-xl p-5 card-hover"><p class="font-bold mb-1">{r.name}</p><p class="text-xs text-[var(--color-text-muted)]">{r.desc}</p></div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- GUARDRAILS -->
-    <section class="py-20" style="background: var(--color-bg-surface);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 reveal"><p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4">Proposed Specifications</p><h2 class="text-3xl sm:text-4xl font-bold mb-4">The Guardrail Architecture</h2><p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Three proposed specifications positioned at specific hourglass layers.</p></div>
-        <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
-          <a href="/guardrails/" class="glass rounded-xl p-6 card-hover gradient-border group"><div class="flex items-center gap-2 mb-3"><span class="text-amber-500 text-lg">&#9632;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">I0</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-amber-500 transition-colors">Neurowall</h3><p class="text-sm text-[var(--color-text-muted)]">Signal-layer firewall with blockchain chain-of-evidence at the neural interface boundary.</p></a>
-          <a href="/guardrails/nsp/" class="glass rounded-xl p-6 card-hover gradient-border group"><div class="flex items-center gap-2 mb-3"><span class="text-blue-500 text-lg">&#9670;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S1-S2</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-blue-500 transition-colors">NSP</h3><p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire protocol securing BCI data links with five defense layers.</p></a>
-          <a href="/guardrails/runemate/" class="glass rounded-xl p-6 card-hover gradient-border group"><div class="flex items-center gap-2 mb-3"><span class="text-violet-500 text-lg">&#9650;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S2</span></div><h3 class="text-lg font-bold mb-2 group-hover:text-violet-500 transition-colors">Runemate</h3><p class="text-sm text-[var(--color-text-muted)]">On-device policy compiler and content delivery specification for neural interfaces.</p></a>
-        </div>
-        <p class="text-center mt-6 font-mono text-[10px] text-[var(--color-text-faint)] tracking-[0.1em]">PROPOSED SPECIFICATIONS &middot; NOT PRODUCTION SOFTWARE</p>
-      </div>
-    </section>
-
-    <!-- THE ORIGIN -->
-    <section class="py-24 vision-section-warm">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p class="text-xs font-mono tracking-[0.15em] uppercase text-amber-500/70 mb-8 text-center reveal">The Origin</p>
-        <div class="space-y-8 text-lg sm:text-xl text-[var(--color-text-muted)] leading-relaxed">
-          <p class="reveal">In 2021, COVID collided with PTSD.</p>
-          <p class="reveal">My cognition fragmented in measurable ways — memory disrupted, threat detection hyperactivated, self-model corrupted.</p>
-          <p class="reveal">As a security engineer, I recognized the pattern.</p>
-          <p class="reveal text-xl sm:text-2xl font-semibold"><span class="gradient-text">The same failure modes I'd expect from a targeted BCI attack.</span></p>
-          <p class="reveal">Except no device was involved.</p>
-          <p class="reveal">That question became this research.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- THE DESTINATION -->
-    <section class="py-24" style="background: var(--color-bg-surface);">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4 reveal">The Destination</p>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-6 reveal">If a neural interface can restore vision...</h2>
-          <p class="text-xl text-[var(--color-text-muted)] reveal">...how does a web page reach the visual cortex?</p>
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-12 reveal-stagger reveal">
-          {[
-            { label: 'HTML Content', band: 'S3', desc: 'Web page markup', color: '#3b82f6' },
-            { label: 'Runemate', band: 'S2', desc: 'Neural compiler', color: '#8b5cf6' },
-            { label: 'NSP', band: 'S1', desc: 'PQ encryption', color: '#06b6d4' },
-            { label: 'Neurowall', band: 'I0', desc: 'Signal integrity', color: '#f59e0b' },
-            { label: 'Visual Cortex', band: 'N7', desc: 'Patient perceives', color: '#22c55e' },
-          ].map((node) => (
-            <div class="glass rounded-xl p-3 sm:p-4 text-center" style={`border-color: ${node.color}30;`}>
-              <p class="font-mono text-[10px] mb-1" style={`color: ${node.color};`}>{node.band}</p>
-              <p class="text-xs sm:text-sm font-semibold mb-1">{node.label}</p>
-              <p class="text-[10px] text-[var(--color-text-faint)] hidden sm:block">{node.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <!-- Kinect-style Neural Vision Demo -->
-        <div class="mb-12 reveal">
-          <KinectVision client:only="react" variant="green" />
-          <div class="mt-4 text-center">
-            <p class="text-xs text-[var(--color-text-faint)] italic">Conceptual visualization of proposed BCI rendering pipeline. A depth sensor captures the environment, AI OCR reconstructs faces, and Runemate compiles the visual stream for cortical delivery. Toggle between modes to explore.</p>
-          </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
-          <div class="glass rounded-xl p-6"><h3 class="text-lg font-bold mb-4 text-[var(--color-accent-primary)]">Security Engineering</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>Authentication and access control</li><li>Signal integrity verification</li><li>Tamper detection and rate limiting</li><li>Content validation before delivery</li></ul><p class="mt-4 text-xs text-[var(--color-text-faint)] italic">Who can send content to a patient's brain?</p></div>
-          <div class="glass rounded-xl p-6"><h3 class="text-lg font-bold mb-4 text-emerald-500">Ethical Governance</h3><ul class="space-y-2 text-sm text-[var(--color-text-muted)]"><li>Informed consent protocols</li><li>Cognitive liberty protections</li><li>Mental privacy safeguards</li><li>Right to disconnect</li></ul><p class="mt-4 text-xs text-[var(--color-text-faint)] italic">Who decides what a patient perceives?</p></div>
-        </div>
-
-        <div class="max-w-3xl mx-auto text-center reveal">
-          <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-6">Every layer of this proposed pipeline requires both. Security without ethics is surveillance. Ethics without security is aspiration.</p>
-          <p class="text-base text-[var(--color-text-muted)] leading-relaxed mb-6">To build neural content delivery safely — to give a blind patient the ability to browse the web through a cortical prosthetic — requires security policies informed by neuroethics research. To get there, the science needs governance to do it responsibly.</p>
-          <p class="text-base text-[var(--color-text-muted)] leading-relaxed mb-6">A security engineer who spent a decade building SIEM infrastructure — detecting threats, classifying signals, writing detections — recognized the same architecture applies at the boundary between silicon and neuron. But the security framework alone isn't enough. The ethical governance to deploy it responsibly doesn't exist yet.</p>
-          <p class="text-xl font-semibold gradient-text mb-8">Neurosecurity needs neuroethics. Neuroethics needs neurosecurity.<br/>That's the bridge this research is building.</p>
-          <p class="font-mono text-[10px] text-[var(--color-text-faint)] tracking-[0.1em] mb-12">THEORETICAL VISION &middot; EARLY RESEARCH &middot; THE FRAMEWORKS ARE BEING BUILT NOW</p>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/research/whitepaper/" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
-            <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-xl glass font-medium">View on GitHub</a>
+          <!-- X-axis label -->
+          <div class="text-center pt-3 pb-1">
+            <div class="text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-faint)]">&larr; Spatial Scale &rarr;</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    {posts.length > 0 && (
-      <section class="py-20 vision-section-cool">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex items-center justify-between mb-8 reveal"><div><h2 class="text-3xl font-bold">Latest Work</h2><p class="text-sm text-[var(--color-text-muted)] mt-1">Field journals and research notes.</p></div><a href="/news/" class="text-sm text-[var(--color-accent-primary)]">All posts &rarr;</a></div>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal-stagger reveal">{posts.map((post) => (<PublicationCard title={post.data.title} date={post.data.date_posted || post.data.date || new Date()} tags={post.data.tags} slug={post.id} body={post.body || ''} compact />))}</div>
+    <div class="text-center mt-8">
+      <a href="/lab/hourglass.html" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+        Explore the full interactive model &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ TOOLS — Project Runemate ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <a href="/runemate/" class="block glass rounded-2xl p-8 sm:p-10 card-hover group relative overflow-hidden reveal" style="border: 1px solid rgba(139,92,246,0.2); background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(59,130,246,0.05) 100%);">
+      <div class="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none" style="background: radial-gradient(circle, var(--color-accent-tertiary), transparent 70%);"></div>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+        <div class="flex-1">
+          <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-2">Applied Research</p>
+          <h2 class="text-xl sm:text-2xl font-bold font-[family-name:var(--font-heading)] mb-3 group-hover:text-[var(--color-accent-tertiary)] transition-colors">
+            Project Runemate
+          </h2>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
+            A bytecode compiler that compresses BCI data 65-90%, making post-quantum encryption viable on low-power implantable devices. Protecting patients from unauthorized neural access requires encryption that fits within the power constraints of a brain implant. Runemate demonstrates this is feasible. Written in Rust. 200 KB on-chip.
+          </p>
         </div>
-      </section>
-    )}
-  </div>
+        <div class="text-[var(--color-accent-tertiary)] opacity-60 group-hover:opacity-100 transition-opacity shrink-0">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ═══ BEAT 6: THE ORIGIN — How I found this ═══ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">The Origin</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">How a security engineer found a neuroscience problem</h2>
+      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          In 2021, COVID collided with PTSD from a traumatic event years earlier. My cognition fragmented in specific, measurable ways: memory consolidation disrupted, threat detection hyperactivated, self-model corrupted. As a security engineer, I recognized the pattern. <strong class="text-[var(--color-text-primary)]">These were the same failure modes I'd expect from a targeted attack on a brain-computer interface</strong> — except no device was involved.
+        </p>
+        <p>
+          The "attacker" was endogenous: inflammation and neuroplasticity changes, operating on the same neural substrate that BCI devices read and write. If biology can produce these failure modes naturally, <strong class="text-[var(--color-text-primary)]">what happens when we connect programmable devices to the same pathways?</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BEAT 7: THE CALL — Why this matters before mass adoption ═══ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4 text-center">Why Now</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">Before mass adoption, not after</h2>
+      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          Neuralink has implanted chips in human patients. Synchron's Stentrode is in FDA trials. Consumer EEG headsets sit on store shelves. These devices are tested for safety and efficacy — but <strong class="text-[var(--color-text-primary)]">no public framework exists to audit what they can do to a mind.</strong>
+        </p>
+        <p>
+          This dual-use reality means BCI security is not an engineering problem. <strong class="text-[var(--color-text-primary)]">It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build governance before the harm, or after.
+        </p>
+        <p>
+          <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This atlas is the first attempt to fill it. Open source. Open data. Ready for peer review.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ESSENTIAL READING ═══ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="flex items-center justify-between mb-8 reveal">
+      <div>
+        <h2 class="text-3xl font-bold font-[family-name:var(--font-heading)]">Essential Reading</h2>
+        <p class="text-sm text-[var(--color-text-muted)] mt-1">Start here to understand the research.</p>
+      </div>
+      <a href="/news/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+        All posts &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 reveal reveal-stagger">
+      {essentialPosts.map((post) => (
+        <PublicationCard
+          title={post.data.title}
+          date={post.data.date_posted || post.data.date || new Date()}
+          tags={post.data.tags}
+          slug={post.id}
+          body={post.body || ''}
+          compact
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ CLOSING CTA ═══ -->
+  <section class="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center reveal">
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">
+        The research is open. Start anywhere.
+      </h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-8">
+        No login, no paywall. Read the whitepaper, explore the threat atlas, or browse the governance framework. Everything is published for researchers, clinicians, and policymakers to evaluate, critique, and build upon.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/whitepaper/"
+          class="px-8 py-3.5 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
+        >
+          Read the Whitepaper
+        </a>
+        <a
+          href="/governance/"
+          class="px-8 py-3.5 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
+        >
+          Explore Governance
+        </a>
+      </div>
+    </div>
+  </section>
 
   <Footer />
 </BaseLayout>
