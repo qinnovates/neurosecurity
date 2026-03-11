@@ -10,6 +10,7 @@ import ethicsRaw from '@shared/qif-ethics-controls.json';
 import cveRaw from '@shared/cve-technique-mapping.json';
 import controlsRaw from '@shared/qif-security-controls.json';
 import pathwaysRaw from '@shared/qif-neural-pathways.json';
+import neurotransmitterRaw from '@shared/qif-neurotransmitters.json';
 
 const landscape = landscapeRaw as any;
 const atlas = atlasRaw as any;
@@ -133,6 +134,38 @@ const vcDeals = landscape.market_data?.vc_aggregate_by_year || [];
 
 // Governance frameworks
 const frameworks = ethics.governance_frameworks || [];
+
+// Neurotransmitters
+const ntData = neurotransmitterRaw as any;
+const allNeurotransmitters = ntData.neurotransmitters || [];
+const totalNeurotransmitters = allNeurotransmitters.length;
+const totalReceptors = allNeurotransmitters.reduce((s: number, nt: any) => s + (Array.isArray(nt.receptors) ? nt.receptors.length : 0), 0);
+const totalCofactors = allNeurotransmitters.reduce((s: number, nt: any) => s + (nt.cofactor_dependencies || []).length, 0);
+const totalSynthSteps = allNeurotransmitters.reduce((s: number, nt: any) => s + (nt.synthesis_pathway || []).length, 0);
+
+// Financial / Investor intelligence
+const investorIntel = landscape.market_data?.investor_intelligence || {};
+const crossPortfolioVCs = investorIntel.cross_portfolio_vcs || [];
+const sovereignFunds = investorIntel.sovereign_wealth_funds || [];
+const bigTechBCI = investorIntel.big_tech_corporate_venture || [];
+const peFirms = investorIntel.pe_firms || [];
+const intelDefense = investorIntel.intelligence_agencies_defense || [];
+const govGrants = landscape.market_data?.government_grants || [];
+const acquisitions = landscape.market_data?.acquisition_history || [];
+const totalTrackedFunding = landscape.market_data?.total_funding_tracked_usd || 0;
+
+// Top funding rounds
+const topRounds = [...fundingRounds]
+  .sort((a: any, b: any) => (b.amount_usd || 0) - (a.amount_usd || 0))
+  .slice(0, 10);
+
+// NT color map
+const ntColors: Record<string, string> = {
+  dopamine: '#22c55e', serotonin: '#3b82f6', norepinephrine: '#ef4444',
+  acetylcholine: '#f59e0b', glutamate: '#ec4899', gaba: '#8b5cf6',
+  glycine: '#06b6d4', histamine: '#f97316', endorphins: '#a78bfa',
+  nitric_oxide: '#14b8a6', endocannabinoids: '#84cc16', adenosine: '#6366f1',
+};
 
 // --- Dopamine Reward Center Dependency Chain ---
 // This is a scientifically verified molecular dependency chain showing
@@ -321,10 +354,251 @@ const bandColors: Record<string, string> = {
         </div>
       </div>
     )}
+
+    <!-- Top Funding Rounds -->
+    {topRounds.length > 0 && (
+      <div class="glass rounded-xl p-5 mb-6">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Top Funding Rounds</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]/30">
+                <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Company</th>
+                <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Round</th>
+                <th class="text-right py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Amount</th>
+                <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Date</th>
+                <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Lead Investor</th>
+              </tr>
+            </thead>
+            <tbody class="text-[var(--color-text-muted)]">
+              {topRounds.map((r: any, i: number) => (
+                <tr class={`border-b border-[var(--color-border)]/10 ${i === 0 ? 'bg-green-500/5' : ''}`}>
+                  <td class="py-2 px-2 font-semibold text-[var(--color-text-primary)]">{r.company}</td>
+                  <td class="py-2 px-2">{r.round}</td>
+                  <td class="py-2 px-2 text-right font-mono text-green-400">${Math.round((r.amount_usd || 0) / 1_000_000)}M</td>
+                  <td class="py-2 px-2 text-[var(--color-text-faint)]">{r.date || '—'}</td>
+                  <td class="py-2 px-2 text-[var(--color-text-faint)] truncate max-w-[150px]">{r.lead_investor || '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-3">Total tracked funding: ${Math.round(totalTrackedFunding / 1_000_000_000 * 100) / 100}B across {fundingRounds.length} rounds</p>
+      </div>
+    )}
+
+    <!-- VC Deal Flow by Year -->
+    {vcDeals.length > 0 && (
+      <div class="glass rounded-xl p-5 mb-6">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">VC Deal Flow by Year</h3>
+        <div class="flex items-end gap-3 h-32">
+          {vcDeals.map((y: any) => {
+            const maxDeals = Math.max(...vcDeals.map((v: any) => v.total_deals || 0));
+            const pct = maxDeals > 0 ? ((y.total_deals || 0) / maxDeals) * 100 : 0;
+            return (
+              <div class="flex flex-col items-center flex-1">
+                <span class="text-[10px] font-mono text-green-400 mb-1">{y.total_deals}</span>
+                <div class="w-full rounded-t" style={`height: ${pct}%; background: linear-gradient(to top, var(--color-accent-primary), #22c55e)`} />
+                <span class="text-[9px] text-[var(--color-text-faint)] mt-1">{y.year}</span>
+                <span class="text-[8px] font-mono text-[var(--color-text-faint)]">${Math.round((y.total_invested_usd || 0) / 1_000_000)}M</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <!-- Investor Intelligence -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+      <!-- Cross-Portfolio VCs -->
+      {crossPortfolioVCs.length > 0 && (
+        <div class="glass rounded-xl p-5">
+          <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Cross-Portfolio VCs</h3>
+          <p class="text-[10px] text-[var(--color-text-faint)] mb-3">VCs with 2+ BCI investments</p>
+          <div class="space-y-2">
+            {crossPortfolioVCs.slice(0, 8).map((vc: any) => (
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-[var(--color-text-muted)] truncate mr-2">{vc.name}</span>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="font-mono text-cyan-400">{(vc.portfolio || []).length} cos</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p class="text-[10px] text-[var(--color-text-faint)] mt-2">{crossPortfolioVCs.length} tracked cross-portfolio VCs</p>
+        </div>
+      )}
+
+      <!-- Sovereign Wealth & Big Tech -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Sovereign & Big Tech</h3>
+        {sovereignFunds.length > 0 && (
+          <div class="mb-3">
+            <p class="text-[10px] text-amber-400 font-semibold uppercase tracking-wider mb-2">Sovereign Wealth</p>
+            <div class="space-y-1.5">
+              {sovereignFunds.map((f: any) => (
+                <div class="flex justify-between text-xs">
+                  <span class="text-[var(--color-text-muted)] truncate mr-2">{f.name}</span>
+                  <span class="font-mono text-amber-400 shrink-0">{(f.bci_investments || []).length}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {bigTechBCI.length > 0 && (
+          <div>
+            <p class="text-[10px] text-purple-400 font-semibold uppercase tracking-wider mb-2">Big Tech / Corporate</p>
+            <div class="space-y-1.5">
+              {bigTechBCI.map((b: any) => (
+                <div class="flex justify-between text-xs">
+                  <span class="text-[var(--color-text-muted)] truncate mr-2">{b.parent || b.name}</span>
+                  <span class="text-[var(--color-text-faint)] text-[10px] truncate max-w-[100px]">{b.focus || '—'}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- PE, Intel/Defense, Gov Grants -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Other Investors</h3>
+        {peFirms.length > 0 && (
+          <div class="mb-3">
+            <p class="text-[10px] text-green-400 font-semibold uppercase tracking-wider mb-2">Private Equity</p>
+            <div class="space-y-1.5">
+              {peFirms.map((f: any) => (
+                <div class="text-xs text-[var(--color-text-muted)]">{f.name}</div>
+              ))}
+            </div>
+          </div>
+        )}
+        {intelDefense.length > 0 && (
+          <div class="mb-3">
+            <p class="text-[10px] text-red-400 font-semibold uppercase tracking-wider mb-2">Intel / Defense</p>
+            <div class="space-y-1.5">
+              {intelDefense.map((d: any) => (
+                <div class="text-xs text-[var(--color-text-muted)]">{d.name} <span class="text-[var(--color-text-faint)]">({d.focus || d.type})</span></div>
+              ))}
+            </div>
+          </div>
+        )}
+        {govGrants.length > 0 && (
+          <div>
+            <p class="text-[10px] text-blue-400 font-semibold uppercase tracking-wider mb-2">Government Grants</p>
+            <div class="space-y-1.5">
+              {govGrants.slice(0, 4).map((g: any) => (
+                <div class="text-xs text-[var(--color-text-muted)] truncate">{g.program || g.agency}: {g.recipient || '—'}</div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Acquisitions -->
+    {acquisitions.length > 0 && (
+      <div class="glass rounded-xl p-5 mb-6">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Acquisition History</h3>
+        <div class="flex flex-wrap gap-2">
+          {acquisitions.map((a: any) => (
+            <span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg glass">
+              <span class="font-semibold text-[var(--color-text-primary)]">{a.acquirer}</span>
+              <span class="text-[var(--color-text-faint)]">&larr;</span>
+              <span class="text-[var(--color-text-muted)]">{a.target}</span>
+              {a.year && <span class="text-[9px] text-[var(--color-text-faint)]">({a.year})</span>}
+              {a.amount_usd && <span class="font-mono text-green-400 text-[10px]">${Math.round(a.amount_usd / 1_000_000)}M</span>}
+            </span>
+          ))}
+        </div>
+      </div>
+    )}
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 3: THREAT LANDSCAPE                                -->
+  <!-- SECTION 3: NEUROTRANSMITTER SYSTEMS                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Neurotransmitter Systems</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">
+      {totalNeurotransmitters} neurotransmitters with {totalSynthSteps} synthesis steps, {totalCofactors} cofactor dependencies, and {totalReceptors} receptor subtypes mapped
+    </p>
+
+    <div class="glass rounded-xl p-5 mb-6">
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Neurotransmitter</th>
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Class</th>
+              <th class="text-center py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Synth Steps</th>
+              <th class="text-center py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Receptors</th>
+              <th class="text-center py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Cofactors</th>
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Key Enzymes</th>
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">QIF Bands</th>
+            </tr>
+          </thead>
+          <tbody class="text-[var(--color-text-muted)]">
+            {allNeurotransmitters.map((nt: any) => {
+              const synthSteps = (nt.synthesis_pathway || []).length;
+              const receptorCount = Array.isArray(nt.receptors) ? nt.receptors.length : 0;
+              const cofactorCount = (nt.cofactor_dependencies || []).length;
+              const enzymes = (nt.synthesis_pathway || []).map((s: any) => s.enzyme_gene).filter(Boolean).slice(0, 3);
+              const bands = nt.primary_qif_bands || [];
+              const color = ntColors[nt.id] || '#94a3b8';
+              return (
+                <tr class="border-b border-[var(--color-border)]/10">
+                  <td class="py-2 px-2">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full shrink-0" style={`background: ${color}`} />
+                      <span class="font-semibold" style={`color: ${color}`}>{nt.name}</span>
+                      {nt.abbreviation && <span class="text-[9px] text-[var(--color-text-faint)]">({nt.abbreviation})</span>}
+                    </div>
+                  </td>
+                  <td class="py-2 px-2 text-[var(--color-text-faint)]">{nt.chemical_class || '—'}</td>
+                  <td class="py-2 px-2 text-center font-mono">{synthSteps}</td>
+                  <td class="py-2 px-2 text-center font-mono text-cyan-400">{receptorCount}</td>
+                  <td class="py-2 px-2 text-center font-mono text-amber-400">{cofactorCount}</td>
+                  <td class="py-2 px-2 text-[10px] text-[var(--color-text-faint)]">{enzymes.join(', ') || '—'}</td>
+                  <td class="py-2 px-2">
+                    <div class="flex flex-wrap gap-1">
+                      {bands.slice(0, 4).map((b: string) => (
+                        <span class="text-[9px] font-mono px-1 py-0.5 rounded" style={`background: ${bandColors[b] || '#666'}20; color: ${bandColors[b] || '#666'}`}>{b}</span>
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NT summary stats -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-green-400">{totalNeurotransmitters}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Neurotransmitters</p>
+      </div>
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-cyan-400">{totalReceptors}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Receptor Subtypes</p>
+      </div>
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-amber-400">{totalCofactors}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Cofactor Dependencies</p>
+      </div>
+      <div class="glass rounded-lg p-4 text-center">
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-purple-400">{totalSynthSteps}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Synthesis Steps</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: THREAT LANDSCAPE                                -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <section class="mb-10 reveal">
