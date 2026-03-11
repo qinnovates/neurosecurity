@@ -2,6 +2,13 @@
  * BciKql — KLQ (Kevin's Landscape Query) engine.
  * In-browser KQL-inspired query engine over all BCI datasets.
  * Pipe-based syntax: table | where field op value | sort by field | project fields
+ *
+ * Optimizations (v2):
+ *  - Hash indexes for common filter fields (type, band, severity, security_posture)
+ *  - Array-aware `contains` / `has` operators
+ *  - `join` operator for cross-table queries
+ *  - Query operator reordering (where → distinct → summarize → sort → take)
+ *  - Extended `summarize` with sum(), avg(), min(), max()
  */
 
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
@@ -10,6 +17,7 @@ import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 
 type Row = Record<string, unknown>;
 type TableData = Record<string, Row[]>;
+type HashIndex = Record<string, Record<string, number[]>>; // field → value → row indices
 
 interface BciKqlProps {
   tables: TableData;
@@ -157,6 +165,34 @@ const BADGE_FIELDS: Record<string, Record<string, { bg: string; fg: string }>> =
   },
 };
 
+// --- Indexing ---
+
+/** Fields worth indexing for equality lookups */
+const INDEXED_FIELDS = ['type', 'severity', 'security_posture', 'status', 'qif_band', 'band', 'zone', 'fda_status', 'category', 'cluster', 'tier'];
+
+function buildIndexes(tables: TableData): Record<string, HashIndex> {
+  const indexes: Record<string, HashIndex> = {};
+  for (const [tableName, rows] of Object.entries(tables)) {
+    const tableIdx: HashIndex = {};
+    for (const field of INDEXED_FIELDS) {
+      // Only index if at least one row has this field
+      if (rows.length > 0 && field in rows[0]) {
+        const fieldIdx: Record<string, number[]> = {};
+        for (let i = 0; i < rows.length; i++) {
+          const v = String(rows[i][field] ?? '');
+          if (!fieldIdx[v]) fieldIdx[v] = [];
+          fieldIdx[v].push(i);
+        }
+        tableIdx[field] = fieldIdx;
+      }
+    }
+    if (Object.keys(tableIdx).length > 0) {
+      indexes[tableName] = tableIdx;
+    }
+  }
+  return indexes;
+}
+
 // --- Query Parser & Executor ---
 
 function parseValue(raw: string): string | number | boolean {
@@ -189,7 +225,22 @@ function toStr(v: unknown): string {
   return String(v);
 }
 
-function applyWhere(rows: Row[], clause: string): Row[] {
+/** Array-aware containment check */
+function valueContains(rv: unknown, val: string): boolean {
+  if (Array.isArray(rv)) {
+    const lower = val.toLowerCase();
+    return rv.some(item => String(item).toLowerCase().includes(lower));
+  }
+  return toStr(rv).toLowerCase().includes(val.toLowerCase());
+}
+
+function applyWhere(
+  rows: Row[],
+  clause: string,
+  tableName?: string,
+  indexes?: Record<string, HashIndex>,
+  allTableRows?: Row[],
+): Row[] {
   const ops = ['!=', '>=', '<=', '==', '>', '<', '!contains', 'contains', 'startswith', 'has'];
   let matchedOp = '';
   let opIdx = -1;
@@ -203,7 +254,6 @@ function applyWhere(rows: Row[], clause: string): Row[] {
         opIdx = idx + 1;
         break;
       }
-      // Also try without spaces for tight syntax like "channels>100"
       const tightIdx = clause.indexOf(op);
       if (tightIdx > 0 && opIdx < 0) {
         matchedOp = op;
@@ -228,6 +278,16 @@ function applyWhere(rows: Row[], clause: string): Row[] {
   const rawVal = clause.slice(opIdx + matchedOp.length).trim();
   const val = parseValue(rawVal);
 
+  // Try hash index for equality lookups on full unfiltered table
+  if (matchedOp === '==' && tableName && indexes && allTableRows && rows === allTableRows) {
+    const tableIdx = indexes[tableName];
+    if (tableIdx && tableIdx[field]) {
+      const indices = tableIdx[field][String(val)];
+      if (indices) return indices.map(i => allTableRows[i]);
+      return []; // No matches in index
+    }
+  }
+
   return rows.filter(row => {
     const rv = getField(row, field);
     switch (matchedOp) {
@@ -237,10 +297,10 @@ function applyWhere(rows: Row[], clause: string): Row[] {
       case '<': return toNum(rv) < toNum(val);
       case '>=': return toNum(rv) >= toNum(val);
       case '<=': return toNum(rv) <= toNum(val);
-      case 'contains': return toStr(rv).toLowerCase().includes(String(val).toLowerCase());
-      case '!contains': return !toStr(rv).toLowerCase().includes(String(val).toLowerCase());
+      case 'contains': return valueContains(rv, String(val));
+      case '!contains': return !valueContains(rv, String(val));
       case 'startswith': return toStr(rv).toLowerCase().startsWith(String(val).toLowerCase());
-      case 'has': return toStr(rv).toLowerCase().includes(String(val).toLowerCase());
+      case 'has': return valueContains(rv, String(val));
       default: return true;
     }
   });
@@ -271,17 +331,47 @@ function applyProject(rows: Row[], clause: string): Row[] {
 }
 
 function applySummarize(rows: Row[], clause: string): Row[] {
-  const match = clause.match(/count\(\)\s+by\s+(.+)/i);
-  if (!match) throw new Error(`Invalid summarize: "${clause}". Expected: count() by field`);
-  const field = match[1].trim();
-  const groups = new Map<string, number>();
-  for (const row of rows) {
-    const key = toStr(getField(row, field));
-    groups.set(key, (groups.get(key) || 0) + 1);
+  // Extended: count() by field, sum(field) by field, avg(field) by field, min(field) by field, max(field) by field
+  const countMatch = clause.match(/count\(\)\s+by\s+(.+)/i);
+  if (countMatch) {
+    const field = countMatch[1].trim();
+    const groups = new Map<string, number>();
+    for (const row of rows) {
+      const key = toStr(getField(row, field));
+      groups.set(key, (groups.get(key) || 0) + 1);
+    }
+    return Array.from(groups.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([key, count]) => ({ [field]: key, count }));
   }
-  return Array.from(groups.entries())
-    .sort((a, b) => b[1] - a[1])
-    .map(([key, count]) => ({ [field]: key, count }));
+
+  // sum/avg/min/max(numField) by groupField
+  const aggMatch = clause.match(/(sum|avg|min|max)\((\w+)\)\s+by\s+(.+)/i);
+  if (aggMatch) {
+    const [, fn, numField, groupField] = aggMatch;
+    const gf = groupField.trim();
+    const groups = new Map<string, number[]>();
+    for (const row of rows) {
+      const key = toStr(getField(row, gf));
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key)!.push(toNum(getField(row, numField)));
+    }
+    return Array.from(groups.entries())
+      .map(([key, vals]) => {
+        let result: number;
+        switch (fn.toLowerCase()) {
+          case 'sum': result = vals.reduce((a, b) => a + b, 0); break;
+          case 'avg': result = vals.reduce((a, b) => a + b, 0) / vals.length; break;
+          case 'min': result = Math.min(...vals); break;
+          case 'max': result = Math.max(...vals); break;
+          default: result = 0;
+        }
+        return { [gf]: key, [fn.toLowerCase()]: Number(result.toFixed(2)), count: vals.length };
+      })
+      .sort((a, b) => (b[fn.toLowerCase()] as number) - (a[fn.toLowerCase()] as number));
+  }
+
+  throw new Error(`Invalid summarize: "${clause}". Expected: count() by field, or sum/avg/min/max(field) by field`);
 }
 
 function applyDistinct(rows: Row[], clause: string): Row[] {
@@ -298,13 +388,94 @@ function applyDistinct(rows: Row[], clause: string): Row[] {
   return out;
 }
 
+function applyJoin(rows: Row[], clause: string, tables: TableData): Row[] {
+  // Syntax: join other_table on field [, field2]
+  const match = clause.match(/^(\w+)\s+on\s+(.+)/i);
+  if (!match) throw new Error(`Invalid join: "${clause}". Expected: join table on field`);
+
+  const [, otherTable, onClause] = match;
+  if (!tables[otherTable]) {
+    throw new Error(`Join table "${otherTable}" not found. Available: ${Object.keys(tables).join(', ')}`);
+  }
+
+  const otherRows = tables[otherTable];
+  const fields = onClause.split(',').map(f => f.trim());
+
+  // Build hash of other table rows by join key
+  const otherIndex = new Map<string, Row[]>();
+  for (const oRow of otherRows) {
+    const key = fields.map(f => String(oRow[f] ?? '')).join('|');
+    if (!otherIndex.has(key)) otherIndex.set(key, []);
+    otherIndex.get(key)!.push(oRow);
+  }
+
+  // Join
+  const result: Row[] = [];
+  for (const row of rows) {
+    const key = fields.map(f => String(row[f] ?? '')).join('|');
+    const matches = otherIndex.get(key);
+    if (matches) {
+      for (const oRow of matches) {
+        // Merge, prefixing conflicting fields from right table
+        const merged: Row = { ...row };
+        for (const [k, v] of Object.entries(oRow)) {
+          if (k in merged && !fields.includes(k)) {
+            merged[`${otherTable}_${k}`] = v;
+          } else {
+            merged[k] = v;
+          }
+        }
+        result.push(merged);
+      }
+    }
+  }
+  return result;
+}
+
+interface ParsedOp {
+  type: 'where' | 'sort' | 'take' | 'project' | 'summarize' | 'distinct' | 'count' | 'join';
+  arg: string;
+  priority: number; // lower = execute first
+}
+
+function parseOperations(segments: string[]): ParsedOp[] {
+  const ops: ParsedOp[] = [];
+  for (let i = 1; i < segments.length; i++) {
+    const seg = segments[i];
+    if (seg.startsWith('where ')) {
+      ops.push({ type: 'where', arg: seg.slice(6), priority: 0 });
+    } else if (seg.startsWith('join ')) {
+      ops.push({ type: 'join', arg: seg.slice(5), priority: 1 });
+    } else if (seg.startsWith('distinct ')) {
+      ops.push({ type: 'distinct', arg: seg.slice(9), priority: 2 });
+    } else if (seg.startsWith('summarize ')) {
+      ops.push({ type: 'summarize', arg: seg.slice(10), priority: 3 });
+    } else if (seg.startsWith('project ')) {
+      ops.push({ type: 'project', arg: seg.slice(8), priority: 4 });
+    } else if (seg.startsWith('sort by ')) {
+      ops.push({ type: 'sort', arg: seg.slice(8), priority: 5 });
+    } else if (seg.startsWith('take ') || seg.startsWith('limit ')) {
+      ops.push({ type: 'take', arg: seg.split(' ')[1], priority: 6 });
+    } else if (seg === 'count') {
+      ops.push({ type: 'count', arg: '', priority: 7 });
+    } else {
+      throw new Error(`Unknown operation: "${seg}"`);
+    }
+  }
+  return ops;
+}
+
 interface QueryResult {
   rows: Row[];
   tableName: string;
   error: string | null;
 }
 
-function executeQuery(query: string, tables: TableData): QueryResult {
+function executeQuery(
+  query: string,
+  tables: TableData,
+  indexes: Record<string, HashIndex>,
+): QueryResult {
   const trimmed = query.trim();
   if (!trimmed) return { rows: [], tableName: '', error: null };
 
@@ -316,37 +487,51 @@ function executeQuery(query: string, tables: TableData): QueryResult {
     return { rows: [], tableName, error: `Unknown table "${tableName}". Available: ${available}` };
   }
 
-  let rows = [...tables[tableName]];
+  try {
+    const ops = parseOperations(segments);
+    // Reorder: where (0) → join (1) → distinct (2) → summarize (3) → project (4) → sort (5) → take (6) → count (7)
+    ops.sort((a, b) => a.priority - b.priority);
 
-  for (let i = 1; i < segments.length; i++) {
-    const seg = segments[i];
-    try {
-      if (seg.startsWith('where ')) {
-        rows = applyWhere(rows, seg.slice(6));
-      } else if (seg.startsWith('sort by ')) {
-        rows = applySort(rows, seg.slice(8));
-      } else if (seg.startsWith('take ') || seg.startsWith('limit ')) {
-        const n = parseInt(seg.split(' ')[1], 10);
-        if (isNaN(n)) throw new Error(`Invalid take/limit value: ${seg}`);
-        rows = rows.slice(0, n);
-      } else if (seg.startsWith('project ')) {
-        rows = applyProject(rows, seg.slice(8));
-      } else if (seg.startsWith('summarize ')) {
-        rows = applySummarize(rows, seg.slice(10));
-      } else if (seg.startsWith('distinct ')) {
-        rows = applyDistinct(rows, seg.slice(9));
-      } else if (seg === 'count') {
-        rows = [{ count: rows.length }];
-      } else {
-        throw new Error(`Unknown operation: "${seg}"`);
+    const allTableRows = tables[tableName];
+    let rows = [...allTableRows];
+
+    for (const op of ops) {
+      switch (op.type) {
+        case 'where':
+          rows = applyWhere(rows, op.arg, tableName, indexes, allTableRows);
+          break;
+        case 'join':
+          rows = applyJoin(rows, op.arg, tables);
+          break;
+        case 'sort':
+          rows = applySort(rows, op.arg);
+          break;
+        case 'take': {
+          const n = parseInt(op.arg, 10);
+          if (isNaN(n)) throw new Error(`Invalid take/limit value: ${op.arg}`);
+          rows = rows.slice(0, n);
+          break;
+        }
+        case 'project':
+          rows = applyProject(rows, op.arg);
+          break;
+        case 'summarize':
+          rows = applySummarize(rows, op.arg);
+          break;
+        case 'distinct':
+          rows = applyDistinct(rows, op.arg);
+          break;
+        case 'count':
+          rows = [{ count: rows.length }];
+          break;
       }
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : String(e);
-      return { rows: [], tableName, error: msg };
     }
-  }
 
-  return { rows, tableName, error: null };
+    return { rows, tableName, error: null };
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return { rows: [], tableName, error: msg };
+  }
 }
 
 // --- Styles ---
@@ -570,13 +755,16 @@ export default function BciKql({ tables }: BciKqlProps) {
   const [syntaxOpen, setSyntaxOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Build indexes once on mount
+  const indexes = useMemo(() => buildIndexes(tables), [tables]);
+
   const tableStats = useMemo(() => {
     return Object.entries(tables).map(([name, rows]) => ({ name, count: rows.length }));
   }, [tables]);
 
   const totalRecords = useMemo(() => tableStats.reduce((s, t) => s + t.count, 0), [tableStats]);
 
-  const result = useMemo(() => executeQuery(query, tables), [query, tables]);
+  const result = useMemo(() => executeQuery(query, tables, indexes), [query, tables, indexes]);
 
   const displayRows = useMemo(() => {
     if (!sortCol || result.error) return result.rows;
@@ -728,13 +916,18 @@ TABLES:
   ${Object.keys(tables).join(', ')}
 
 OPERATORS:
-  where field op value    Filter rows (op: ==, !=, >, <, >=, <=, contains, !contains, startswith, has)
-  sort by field [asc|desc]  Sort results
-  take N / limit N        Return first N rows
-  project field1, field2  Select specific columns
-  summarize count() by field  Group and count
-  distinct field          Unique values
-  count                   Total row count
+  where field op value       Filter rows (op: ==, !=, >, <, >=, <=, contains, !contains, startswith, has)
+  sort by field [asc|desc]   Sort results
+  take N / limit N           Return first N rows
+  project field1, field2     Select specific columns
+  summarize count() by field Group and count
+  summarize sum(f) by field  Group and sum numeric field
+  summarize avg(f) by field  Group and average
+  summarize min(f) by field  Group and find minimum
+  summarize max(f) by field  Group and find maximum
+  distinct field             Unique values
+  count                      Total row count
+  join table on field        Join with another table on shared field(s)
 
 EXAMPLES:
   devices | where channels > 100 | sort by channels desc
@@ -742,11 +935,15 @@ EXAMPLES:
   companies | where security_posture == "none_published" | project name, type, funding_total_usd
   cves | sort by cvss desc | take 10
   brain_regions | where zone == "neural" | sort by qif_band asc
+  controls | join hourglass_bands on band | project band, name, type, control
+  funding | summarize sum(amount_usd) by company | sort by sum desc
 
 NOTES:
   String values must be quoted: "invasive", "critical"
   Numeric values are unquoted: 100, 1024
   Pipe character | separates operations
+  Arrays (bands, tags, etc.) work with contains/has operators
+  Queries are auto-optimized: where clauses run before sort/take
   Click column headers to sort results`}</pre>
         </div>
       </details>
