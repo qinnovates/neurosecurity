@@ -1,9 +1,12 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import BciKql from '@/components/bci/BciKql';
+import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
 import { THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
 import TaraVisualization from '@/components/TaraVisualization';
 
+const kqlTables = getKqlTables();
 const statusStats = getStatusStats();
 const nrStats = getNeurorightStats();
 const bands = [...HOURGLASS_BANDS];
@@ -76,6 +79,16 @@ const THREAT_CATEGORIES = [
             categories={THREAT_CATEGORIES} 
             bands={bands} 
           />
+        </div>
+
+        <!-- KQL Query Engine -->
+        <div class="mt-16">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex-1 h-px" style="background: var(--color-border);" />
+            <span class="text-[10px] uppercase tracking-[0.12em] font-mono" style="color: var(--color-text-faint);">Query Engine</span>
+            <div class="flex-1 h-px" style="background: var(--color-border);" />
+          </div>
+          <BciKql client:only="react" tables={kqlTables} />
         </div>
 
         <div class="mt-32 pt-16 border-t border-slate-100 max-w-5xl">
