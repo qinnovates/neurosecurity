@@ -47,6 +47,18 @@ If hackers can create a realistic digital map today using Bluetooth or Wi-Fi, th
 
 If gaming engines can identify and create texture models based on an object's dimension, density (sheen, surface, hue, saturation, lighting, depth), and relation in vector space -- then the future is looking very positive.
 
+### The Sensor Rabbit Hole
+
+This is where I went down a rabbit hole with the Kinect. I started experimenting with depth sensors -- taking video, converting it to point clouds, and rendering it in 3D with shaders. The [depth visualizations I built](/vision) take a standard video feed and displace every pixel based on luminance to reconstruct spatial depth. It's rough, but the principle is sound: all you need is a sensor and the right processing pipeline to reconstruct a usable representation of the world.
+
+And that got me thinking. Theoretically, the phone already in someone's pocket has everything you need -- LiDAR on newer iPhones, the TrueDepth camera, accelerometers, gyroscopes. You don't need a dedicated depth sensor bolted to someone's head. The phone is always with them. It's always collecting spatial data. Pair that with OCR and AI models and you have a real-time rendering pipeline that could feed a visual prosthesis.
+
+But here's the security engineering perspective: the moment you make the phone the sensor for a BCI vision system, you've introduced an attack surface that didn't exist before. The phone connects to cell towers, Wi-Fi, Bluetooth. It runs third-party apps. It syncs to the cloud. Every one of those is a vector. An attacker who compromises the phone now has a pathway to manipulate what gets fed to the implant -- and by extension, what the user sees.
+
+That's exactly why I'm approaching this from security first. For the sake of demonstrating from a security engineering perspective, I used the Kinect as a controlled sensor -- isolated, no network stack, no app store. It lets me show the vision reconstruction concept without introducing the risks that come with a consumer device. But make no mistake: the industry will reach for the phone. And when it does, the security architecture needs to already be there.
+
+This maps directly to what TARA catalogs at the [I0 boundary](/framework/) -- the interface between external hardware and biology. Whether the sensor is a Kinect, a phone, or AR glasses, the signal has to pass through a trust boundary before it reaches the implant. That's where [Neurowall](/guardrails/) sits.
+
 ### Digital Adderall, Digital Ambien
 
 Hodak's most commercially significant observation: non-invasive brain stimulation could deliver "a digital Ambien or like a digital Adderall" -- targeting specific brain regions to induce focus or sleep without pharmaceuticals, potentially as a consumer device that does not require surgery. He frames this as an industry direction, not a Science Corp project -- Hodak explicitly states "I don't work on ultrasound."
