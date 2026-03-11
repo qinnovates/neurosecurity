@@ -1,0 +1,49 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import ClinicalDashboard from '@/components/atlas/ClinicalDashboard';
+import { getClinicalData } from '@/lib/clinical-data';
+
+// Build-time data compilation — all JSON sources merged dynamically
+const clinicalData = getClinicalData();
+---
+
+<PageLayout
+  title="Clinical View — QIF Atlas"
+  description="Neural Impact Chain visualization — trace attack techniques through QIF bands, neural pathways, brain regions, and DSM-5-TR diagnostic categories. For threat modeling purposes."
+  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Clinical View' }]}
+  wide={true}
+>
+  <!-- Hero -->
+  <div class="mb-8">
+    <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #10b981;">Neural Impact Chain</p>
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3" style="color: var(--color-text-primary);">
+      Clinical View
+    </h1>
+    <p class="text-base max-w-3xl" style="color: var(--color-text-muted);">
+      Trace the full chain from attack technique to clinical outcome. Every threat mapped through QIF hourglass bands,
+      neural pathways, neurotransmitter systems, brain regions, and DSM-5-TR diagnostic categories.
+    </p>
+    <p class="text-xs mt-2 italic" style="color: var(--color-text-faint);">
+      Diagnostic category references for threat modeling purposes. Not clinical diagnosis. Requires clinical validation.
+    </p>
+  </div>
+
+  <!-- Clinical Dashboard -->
+  <ClinicalDashboard
+    client:only="react"
+    data={clinicalData}
+  />
+
+  <!-- Footer -->
+  <div class="mt-12 mb-4 text-center">
+    <p class="text-xs" style="color: var(--color-text-faint);">
+      Data compiled from {clinicalData.stats.totalPathways} neural pathways, {clinicalData.stats.totalNeurotransmitters} neurotransmitters, {clinicalData.stats.totalRegions} brain regions.
+      <a href="/atlas/" class="underline ml-1">Back to Atlas</a> &middot;
+      <a href="/atlas/tara/" class="underline">TARA</a> &middot;
+      <a href="/atlas/therapeutics/" class="underline">Therapeutics</a>
+    </p>
+    <p class="text-[10px] font-mono mt-2 tracking-[0.08em]" style="color: var(--color-text-faint);">
+      PROPOSED FRAMEWORK &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE
+    </p>
+  </div>
+</PageLayout>

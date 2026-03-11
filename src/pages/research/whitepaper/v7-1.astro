@@ -34,8 +34,8 @@ const tacticColors: Record<string, string> = {
 ---
 
 <PageLayout
-  title="QIF Whitepaper v8.0 — Working Draft"
-  description={`The Quantified Interconnection Framework — a proposed open security framework for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics. v8.0 adds Author's Note, Claims & Disclaimers, Defense Paradox, Design Principles, AI Ethics regulatory landscape, and BCI industry landscape.`}
+  title="QIF Whitepaper v7.1"
+  description={`The Quantified Interconnection Framework — a proposed open security framework for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
 >
@@ -43,16 +43,10 @@ const tacticColors: Record<string, string> = {
     <!-- Sidebar -->
     <aside class="hidden lg:block">
       <div class="sticky top-24">
-        <WhitepaperVersionSelector currentVersion="v8.0" />
+        <WhitepaperVersionSelector currentVersion="v7.1" />
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Table of Contents</p>
           {[
-            { href: '#authors-note', label: "Author's Note" },
-            { href: '#claims', label: 'Claims & Disclaimers' },
-            { href: '#proposal', label: 'The Proposal' },
-            { href: '#defense-paradox', label: 'Defense Paradox' },
-            { href: '#design-principles', label: 'Design Principles' },
-            { href: '#landscape', label: 'BCI Landscape' },
             { href: '#problem', label: 'The Problem' },
             { href: '#approach', label: 'Our Approach' },
             { href: '#hourglass', label: 'The Hourglass' },
@@ -61,7 +55,6 @@ const tacticColors: Record<string, string> = {
             { href: '#neural-impact', label: 'Neural Impact Chain' },
             { href: '#neurorights', label: 'Neurorights Mapping' },
             { href: '#governance', label: 'Governance' },
-            { href: '#ai-ethics', label: 'AI Ethics Landscape' },
             { href: '#nsp', label: 'NSP Protocol' },
             { href: '#adopt', label: 'How to Help' },
             { href: '#roadmap', label: "What's Next" },
@@ -80,349 +73,15 @@ const tacticColors: Record<string, string> = {
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "QIF Whitepaper v8.0: A Proposed Open Security Framework for Brain-Computer Interfaces",
+        "headline": "QIF Whitepaper v7.1: A Proposed Open Security Framework for Brain-Computer Interfaces",
         "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics. A proposed open security framework purpose-built for neural devices.`,
-        "author": { "@type": "Person", "name": "Kevin Qi", "url": "https://qinnovate.com/about/" },
+        "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-18",
-        "dateModified": "2026-03-11",
+        "dateModified": "2026-03-05",
         "mainEntityOfPage": "https://qinnovate.com/research/whitepaper/",
-        "version": "8.0",
+        "version": "7.1",
       })} />
-
-      <!-- ═══ v8.0 Working Draft Banner ═══ -->
-      <div class="glass rounded-xl p-4 mb-8 border-l-4 border-amber-500">
-        <div class="flex items-center gap-3">
-          <span class="text-amber-500 text-lg shrink-0">&#9888;</span>
-          <div>
-            <p class="text-sm font-semibold text-[var(--color-text-primary)]">Working Draft — v8.0</p>
-            <p class="text-xs text-[var(--color-text-muted)]">This version is under active development. Content may change. The <a href="/research/whitepaper/v7-1/" class="text-[var(--color-accent-primary)] hover:underline">archived v7.1</a> remains the last stable release.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ AUTHOR'S NOTE ═══ -->
-      <section id="authors-note" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Author's Note</h2>
-        <div class="prose">
-          <p>
-            This paper proposes a secure BCI architecture derived from security engineering and ethics.
-          </p>
-          <p>
-            It started with a question: what would threat modeling for the human mind look like? That question led me into the world of brain-computer interfaces &mdash; and quickly made clear that you cannot build for the brain the way you build for a screen. The technical architecture alone is not enough. To do this right from the design phase, I applied two decades of security instincts and went deep into the disciplines that should inform every decision at this layer: neuroethics, AI ethics, and the emerging fields of neurorights and neuroprivacy.
-          </p>
-          <p>
-            I believe it is vital for the adoption of BCIs &mdash; and in the best interest of every company building them &mdash; that we embed ethics and security by design. The last thing we should do in pursuit of cures for the sick and the unable is introduce vulnerabilities to an already vulnerable mind. It is our duty as engineers and architects to understand the full scope in which a clinical remedy may introduce more risk than reward, and to design systems that make that calculus transparent.
-          </p>
-          <p>
-            That is the mission behind this paper.
-          </p>
-          <p>
-            The concepts here span neuroscience, security architecture, ethics, law, and clinical medicine. Some are well-established; many are proposed and unvalidated. I have worked to distill them into a single coherent framework, and to be explicit about where the evidence is strong and where the work is still theoretical.
-          </p>
-          <p class="text-[var(--color-text-faint)] italic">
-            &mdash; Kevin Qi
-          </p>
-        </div>
-      </section>
-
-
-      <!-- ═══ CLAIMS & DISCLAIMERS ═══ -->
-      <section id="claims" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Claims and Disclaimers</h2>
-
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">What This Paper Claims</h3>
-        <div class="space-y-3 mb-8">
-          <div class="glass rounded-xl p-5 flex gap-4">
-            <div class="w-1 rounded-full bg-[#10b981] shrink-0"></div>
-            <div>
-              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">BCI security is under-addressed</p>
-              <p class="text-xs text-[var(--color-text-muted)]">The threat surface of neural interfaces has not received the same architectural rigor as enterprise IT, mobile, or IoT security. The attack techniques cataloged in TARA are derived from published neuroscience, signal processing, and cybersecurity literature.</p>
-            </div>
-          </div>
-          <div class="glass rounded-xl p-5 flex gap-4">
-            <div class="w-1 rounded-full bg-[#10b981] shrink-0"></div>
-            <div>
-              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Security and ethics are inseparable at this layer</p>
-              <p class="text-xs text-[var(--color-text-muted)]">A BCI security architecture that ignores neuroethics will fail its patients. A neuroethics framework that ignores security engineering will remain aspirational. This paper attempts to bridge both.</p>
-            </div>
-          </div>
-          <div class="glass rounded-xl p-5 flex gap-4">
-            <div class="w-1 rounded-full bg-[#10b981] shrink-0"></div>
-            <div>
-              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">The blank slate window is closing</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Designing from a blank slate is possible now, and will not be later. Once devices ship at scale with baked-in architectural decisions, changing those decisions becomes exponentially harder.</p>
-            </div>
-          </div>
-        </div>
-
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">What This Paper Does Not Claim</h3>
-        <div class="space-y-3 mb-8">
-          <div class="glass-subtle rounded-lg p-4">
-            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">QIF is not a standard</p>
-            <p class="text-xs text-[var(--color-text-muted)]">It is a proposed framework. Not adopted by any standards body, not independently peer-reviewed, not validated in clinical deployment. All components (TARA, NISS, NSP, Runemate) are proposals.</p>
-          </div>
-          <div class="glass-subtle rounded-lg p-4">
-            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS does not measure cognitive harm</p>
-            <p class="text-xs text-[var(--color-text-muted)]">NISS scores physical signal-level disruption. DSM-5-TR category mappings are for threat modeling purposes only &mdash; diagnostic category references, not diagnostic claims.</p>
-          </div>
-          <div class="glass-subtle rounded-lg p-4">
-            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">This paper does not read minds</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Current BCI technology cannot "read thoughts." Decoded outputs are selected from constrained vocabularies, require user cooperation, and depend on individually trained algorithms.</p>
-          </div>
-          <div class="glass-subtle rounded-lg p-4">
-            <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Engineering benchmarks are unverified</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Quantitative claims about NSP compression, power overhead, and latency are AI-derived estimates, not empirical measurements. They require independent engineering validation.</p>
-          </div>
-        </div>
-
-        <!-- Epistemic Framework -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">Epistemic Framework</h3>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm border-collapse">
-            <thead>
-              <tr class="border-b border-[var(--color-border)]">
-                <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">Level</th>
-                <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">Meaning</th>
-                <th class="text-left py-2 text-[var(--color-text-faint)] font-medium text-xs uppercase">Example</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-[var(--color-border)]/50">
-                <td class="py-2 pr-4 font-semibold text-[#10b981]">Verified</td>
-                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Peer-reviewed, resolved DOI</td>
-                <td class="py-2 text-[var(--color-text-muted)] text-xs">Published attack techniques, cited neuroscience</td>
-              </tr>
-              <tr class="border-b border-[var(--color-border)]/50">
-                <td class="py-2 pr-4 font-semibold text-[#06b6d4]">Established</td>
-                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Strong consensus, official docs</td>
-                <td class="py-2 text-[var(--color-text-muted)] text-xs">NIST AI RMF, EU AI Act, CVSS methodology</td>
-              </tr>
-              <tr class="border-b border-[var(--color-border)]/50">
-                <td class="py-2 pr-4 font-semibold text-[#f59e0b]">Inferred</td>
-                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Logical deduction from verified premises</td>
-                <td class="py-2 text-[var(--color-text-muted)] text-xs">Threat chain mappings, architectural implications</td>
-              </tr>
-              <tr class="border-b border-[var(--color-border)]/50">
-                <td class="py-2 pr-4 font-semibold text-[#a855f7]">Theoretical</td>
-                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Author's proposed framework</td>
-                <td class="py-2 text-[var(--color-text-muted)] text-xs">QIF hourglass, NISS, Cs metric, NSP, Runemate</td>
-              </tr>
-              <tr class="border-b border-[var(--color-border)]/50">
-                <td class="py-2 pr-4 font-semibold text-[#94a3b8]">Unknown</td>
-                <td class="py-2 pr-4 text-[var(--color-text-muted)]">Insufficient evidence</td>
-                <td class="py-2 text-[var(--color-text-muted)] text-xs">Open questions stated explicitly</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-
-      <!-- ═══ THE PROPOSAL ═══ -->
-      <section id="proposal" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Proposal</h2>
-        <div class="prose mb-8">
-          <p>
-            Every transformative technology gets one chance to build its foundation right. The internet did not take that chance. TCP/IP shipped without authentication. HTTP shipped without encryption. DNS shipped without integrity verification. We spent the next four decades bolting on security after the fact &mdash; TLS, DNSSEC, OAuth, zero-trust architectures &mdash; each one a patch on a foundation that was never designed to be secure.
-          </p>
-          <p>
-            Brain-computer interfaces are at that same inflection point. The first cortical implants are in human skulls. The first commercial devices are shipping. And the security architecture is, once again, an afterthought. The difference this time is that the attack surface is not a credit card number or a social security record. It is the human nervous system. There are no rollbacks for neural tissue damage. There is no &ldquo;change your password&rdquo; for a compromised sensory cortex.
-          </p>
-          <p>
-            This is not a warning. It is a proposal.
-          </p>
-        </div>
-
-        <!-- The Blank Slate -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-primary);">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Blank Slate</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            We are building from a blank slate &mdash; and that is the advantage. We have full knowledge of every security failure that preceded us. The goal is to design a BCI security architecture that introduces as little technical debt as possible. Every layer is intentional. Every protocol earns its place. Where the internet added security as middleware, this architecture embeds it at the kernel level. Where medical devices shipped firmware as proprietary black boxes, this architecture proposes open-source auditability from day one.
-          </p>
-        </div>
-
-        <!-- The Vision -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-secondary);">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Vision</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            QIF proposes a BCI security architecture designed to stand the test of time &mdash; not for a product cycle, but for the full span of a human life. A person implanted at 30 may carry that device for 70 years. The architecture must outlast the company that built it, the protocol standard it launched with, and the threat landscape it was designed against. Second Sight ceased operations in 2020, leaving Argus II patients with unsupported hardware in their eyes. That cannot happen again.
-          </p>
-        </div>
-
-        <!-- The Direction -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-tertiary);">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">Patient-First Equity</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            The starting point is the patient. The people who need BCIs most urgently &mdash; those with severe motor impairment, blindness, locked-in syndrome &mdash; are also the most vulnerable to exploitation by closed systems they cannot inspect, modify, or leave. Building patient sovereignty into the architecture is not a feature. It is a prerequisite for equitable access. The patient can inspect every signal entering their nervous system. The patient can disconnect without asking a cloud service for permission. The patient can switch hardware without being locked into a vendor's ecosystem.
-          </p>
-        </div>
-      </section>
-
-
-      <!-- ═══ THE DEFENSE PARADOX ═══ -->
-      <section id="defense-paradox" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Defense Paradox</h2>
-        <div class="prose mb-8">
-          <p>
-            Every security defense introduces new attack surface. This is inevitable. SSL was designed to secure the web &mdash; and gave us Heartbleed. Firewalls were designed to filter traffic &mdash; and became misconfiguration targets. Password managers were designed to store credentials &mdash; and LastPass was breached. The defense paradox is not an argument against defense. It is a design constraint: <strong>minimize the number of layers, because each layer is a place the paradox can bite.</strong>
-          </p>
-        </div>
-
-        <!-- Stubborn Eyelash Analogy -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid #f59e0b;">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Stubborn Eyelash</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            Think of trying to remove a stray eyelash that has half fallen off and is poking at your eyeball. Using your fingers to surgically extract it pushes it deeper into the eye. The tool you reach for creates the problem you are trying to solve. Precision and technique matter more than force. The same principle applies to BCI security: adding more layers without precision creates more surfaces for the paradox to exploit.
-          </p>
-        </div>
-
-        <!-- Armor → Steel → Kevlar -->
-        <div class="glass rounded-xl p-6 mb-6">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-4">From Armor to Kevlar: Security Through Innovation</h3>
-          <div class="grid sm:grid-cols-3 gap-4 mb-4">
-            <div class="glass-subtle rounded-lg p-4 text-center">
-              <div class="text-3xl mb-2">&#x1F6E1;</div>
-              <p class="text-sm font-semibold text-[var(--color-text-primary)]">Armor</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Piling on layers &mdash; brute-force protection. Heavy, slow, vulnerable at joints.</p>
-            </div>
-            <div class="glass-subtle rounded-lg p-4 text-center">
-              <div class="text-3xl mb-2">&#x2694;</div>
-              <p class="text-sm font-semibold text-[var(--color-text-primary)]">Steel</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Iron + carbon. A material innovation that replaced brute thickness with engineered strength.</p>
-            </div>
-            <div class="glass-subtle rounded-lg p-4 text-center">
-              <div class="text-3xl mb-2">&#x1F9EA;</div>
-              <p class="text-sm font-semibold text-[var(--color-text-primary)]">Kevlar</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Synthetic aramid polymer (Kwolek, DuPont, 1965). Moved beyond carbon entirely. Lighter, stronger, engineered at the molecular level.</p>
-            </div>
-          </div>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            We are not trying to fabricate steel from iron ore. We are engineering a metaphorical polymer. <strong>AI can be the synthetic polymer</strong> &mdash; providing guardrails designed by industry experts with precision that static rules cannot match. But the challenge is ensuring patients remain in full control and that <strong>configuration drift</strong> does not occur. Drift is too common in code, and at wide scale with neural devices, it would be catastrophic.
-          </p>
-        </div>
-
-        <!-- Golden Image Model -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-primary);">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-4">Golden Image: Hardening at Every Layer</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm border-collapse">
-              <thead>
-                <tr class="border-b border-[var(--color-border)]">
-                  <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">Layer</th>
-                  <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">QIF Component</th>
-                  <th class="text-left py-2 text-[var(--color-text-faint)] font-medium text-xs uppercase">Golden Image Mechanism</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Hardware</td>
-                  <td class="py-2 pr-4 text-[var(--color-text-muted)]">Neurowall</td>
-                  <td class="py-2 text-[var(--color-text-muted)] text-xs">Cryptographic firmware attestation (SPHINCS+). Secure boot chain. Any deviation from the signed image = reject.</td>
-                </tr>
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Software</td>
-                  <td class="py-2 pr-4 text-[var(--color-text-muted)]">NSP + Runemate</td>
-                  <td class="py-2 text-[var(--color-text-muted)] text-xs">Protocol-level integrity checks. Every frame authenticated with AES-256-GCM. Content compiled to deterministic bytecode.</td>
-                </tr>
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Configuration</td>
-                  <td class="py-2 pr-4 text-[var(--color-text-muted)]">Tiers 3&ndash;5</td>
-                  <td class="py-2 text-[var(--color-text-muted)] text-xs">Explicit reconsent for any model update. Drift detection via coherence metric time series. Anomaly signals on deviation.</td>
-                </tr>
-                <tr class="border-b border-[var(--color-border)]/50">
-                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Biomarker</td>
-                  <td class="py-2 pr-4 text-[var(--color-text-muted)]">Baseline</td>
-                  <td class="py-2 text-[var(--color-text-muted)] text-xs">Per-patient neural baseline established at calibration. Adaptive model bounded within consented envelope. Drift beyond bounds = alert.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- ═══ DESIGN PRINCIPLES ═══ -->
-      <section id="design-principles" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Design Principles</h2>
-        <p class="text-sm text-[var(--color-text-muted)] mb-6">Nine principles governing every architectural decision in this framework.</p>
-        <div class="grid sm:grid-cols-3 gap-3 mb-8">
-          {[
-            { n: '1', title: 'Zero technical debt', desc: 'Every protocol earns its place. No inherited assumptions from screen-based computing.' },
-            { n: '2', title: 'Patient sovereignty by default', desc: 'Inspect, disconnect, switch. Not aspirational. Architectural.' },
-            { n: '3', title: 'Minimize perimeter', desc: 'Fewer layers = fewer attack surfaces = fewer places the defense paradox can bite.' },
-            { n: '4', title: 'Security enables medicine', desc: 'NSP is not the brake. It is the safety certification that makes clinical BCI possible.' },
-            { n: '5', title: 'Dual-use registry', desc: 'Every attack technique has a therapeutic analog. The boundary is consent, dosage, and oversight.' },
-            { n: '6', title: 'Post-quantum from day one', desc: 'Neural data has a lifetime shelf life. Harvest Now, Decrypt Later is not theoretical.' },
-            { n: '7', title: 'Open by default', desc: 'Apache 2.0. Neural security standards are too critical to be proprietary.' },
-            { n: '8', title: 'Ethics by architecture', desc: 'Neuroethics, AI ethics, and neurorights encoded as kernel-level constraints, not policy documents.' },
-            { n: '9', title: 'AI honesty, not AI obscurity', desc: 'The system says "I don\'t know" when it doesn\'t know. Trust through verifiability.' },
-          ].map((p) => (
-            <div class="glass rounded-lg p-4">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="text-xs font-mono font-bold text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10 px-2 py-0.5 rounded">{p.n}</span>
-                <h4 class="text-sm font-semibold text-[var(--color-text-primary)]">{p.title}</h4>
-              </div>
-              <p class="text-xs text-[var(--color-text-muted)]">{p.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-      <!-- ═══ BCI LANDSCAPE ═══ -->
-      <section id="landscape" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">BCI Industry Landscape</h2>
-        <p class="text-sm text-[var(--color-text-muted)] mb-6">
-          Over $5 billion in disclosed funding deployed into BCI companies. None have published security documentation. This section surveys the current landscape of companies building neural interface technology.
-        </p>
-
-        <div class="glass rounded-xl p-5 sm:p-6 mb-8" style="border-left: 4px solid #ef4444;">
-          <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">The security gap:</strong> No BCI manufacturer &mdash; Neuralink, Synchron, Blackrock Neurotech, Science Corp, OpenBCI, or Emotiv &mdash; has published an independent security audit or a full wireless security specification. Emotiv's AES-128-ECB encryption was <a href="https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode" class="text-[var(--color-accent-primary)]">publicly broken in 2010</a>. OpenBCI's protocol documentation contains zero mentions of encryption.
-          </p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          <div class="glass rounded-xl p-5">
-            <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Neuralink</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">$363M+ &middot; Implantable &middot; Bidirectional</p>
-            <p class="text-xs text-[var(--color-text-muted)]">N1 implant (1,024 electrodes). First human implants 2024. Motor intent decoding. Telepathy app for device control.</p>
-          </div>
-          <div class="glass rounded-xl p-5">
-            <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Synchron</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">$145M+ &middot; Endovascular &middot; Read</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Stentrode deployed via blood vessels (no open-brain surgery). FDA Breakthrough designation. Motor-impaired patients controlling devices.</p>
-          </div>
-          <div class="glass rounded-xl p-5">
-            <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Paradromics</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">$103M+ &middot; Implantable &middot; Read</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Connexus Direct Data Interface. 65,000+ electrodes. High-bandwidth cortical recording for speech prosthesis.</p>
-          </div>
-          <div class="glass rounded-xl p-5">
-            <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Precision Neuroscience</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">$93M+ &middot; Implantable &middot; Read</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Layer 7 Cortical Interface &mdash; thin-film electrode array placed on the brain surface. Minimally invasive, high-resolution recording.</p>
-          </div>
-          <div class="glass rounded-xl p-5">
-            <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Science Corp</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">$552M+ &middot; Implantable &middot; Write</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Founded by Max Hodak (Neuralink co-founder). PRIMA retinal implant (2,378 photovoltaic pixels). Acquired Pixium Vision (2024). Vision restoration via subretinal stimulation.</p>
-          </div>
-          <div class="glass rounded-xl p-5">
-            <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Blackrock Neurotech</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">$10M+ &middot; Implantable &middot; Bidirectional</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Utah Array &mdash; the most widely used implanted BCI in research. Over 30 years of human implant data. Foundation for BrainGate trials.</p>
-          </div>
-        </div>
-
-        <div class="glass rounded-xl p-5 mb-8 border-l-4 border-amber-500">
-          <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-amber-500">Disclaimer:</strong> This is not an exhaustive list. Other players are actively emerging in the BCI space &mdash; including companies in stimulation therapy, consumer EEG, neurofeedback, and BCI-adjacent neural data. The landscape is evolving rapidly and this section will be updated as new entrants are identified and researched.
-          </p>
-        </div>
-      </section>
-
 
       <!-- ═══ Header ═══ -->
       <section class="mb-16">
@@ -1295,64 +954,6 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- AI ETHICS REGULATORY LANDSCAPE                              -->
-      <!-- ═══════════════════════════════════════════════════════════ -->
-      <section id="ai-ethics" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">AI Ethics: The Regulatory Landscape</h2>
-        <div class="prose mb-8">
-          <p>
-            BCIs that use AI for stimulation decisions, signal decoding, or adaptive learning are subject to an emerging regulatory landscape that spans AI ethics, medical device law, and neurotechnology governance. This section maps the frameworks that will define the legal environment QIF operates within.
-          </p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 gap-4 mb-8">
-          <div class="glass rounded-xl p-5" style="border-left: 3px solid #3b82f6;">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-2">NIST AI RMF 1.0</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">January 2023 &middot; US Federal &middot; Voluntary</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Four core functions: GOVERN, MAP, MEASURE, MANAGE. Seven properties of trustworthy AI. Increasingly referenced as compliance safe harbor.</p>
-          </div>
-          <div class="glass rounded-xl p-5" style="border-left: 3px solid #06b6d4;">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-2">UNESCO AI Ethics</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">November 2021 &middot; 194 member states &middot; Voluntary</p>
-            <p class="text-xs text-[var(--color-text-muted)]">First global normative instrument on AI ethics. 10 core principles, 11 policy areas. Universal adoption but no enforcement mechanism.</p>
-          </div>
-          <div class="glass rounded-xl p-5" style="border-left: 3px solid #8b5cf6;">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-2">UNESCO Neurotechnology Ethics</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">November 12, 2025 &middot; Global &middot; Voluntary</p>
-            <p class="text-xs text-[var(--color-text-muted)]">Directly addresses devices that read and write neural data. The closest international instrument to what QIF proposes at the technical level.</p>
-          </div>
-          <div class="glass rounded-xl p-5" style="border-left: 3px solid #10b981;">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-2">EU AI Act</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">August 2024 &middot; EU &middot; <strong>Binding</strong></p>
-            <p class="text-xs text-[var(--color-text-muted)]">First comprehensive AI law. Risk tiers: Unacceptable (banned), High (conformity assessment), Limited (transparency), Minimal. Neural interfaces with AI likely classified as high-risk. Penalties up to 7% of global revenue.</p>
-          </div>
-          <div class="glass rounded-xl p-5" style="border-left: 3px solid #f59e0b;">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-2">Council of Europe Convention</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">November 1, 2025 &middot; 58 signatories &middot; <strong>Binding treaty</strong></p>
-            <p class="text-xs text-[var(--color-text-muted)]">First legally binding international AI treaty. Requires human rights safeguards, procedural transparency, discrimination prevention, and remedy for affected persons.</p>
-          </div>
-          <div class="glass rounded-xl p-5" style="border-left: 3px solid #ef4444;">
-            <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-2">FDA SaMD / PCCP</h4>
-            <p class="text-xs text-[var(--color-text-faint)] mb-2">Ongoing &middot; US &middot; <strong>Binding</strong></p>
-            <p class="text-xs text-[var(--color-text-muted)]">Predetermined Change Control Plan: AI medical devices can adapt within pre-specified guardrails without new regulatory submissions. Directly applicable to adaptive BCIs.</p>
-          </div>
-        </div>
-
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-tertiary);">
-          <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">Why this matters for architecture:</strong> Policy says &ldquo;AI should be transparent.&rdquo; The question is whether a technical framework can operationalize that as an architectural constraint &mdash; not a suggestion, but a requirement enforced by the system itself. QIF proposes that it can, through mandatory audit logging, amplitude bounds, and consent gates. Whether this approach is sufficient is an open question requiring independent validation.
-          </p>
-        </div>
-
-        <div class="text-center">
-          <a href="/governance/ai-ethics/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
-            Read the Full AI Ethics Reference &rarr;
-          </a>
-        </div>
-      </section>
-
-
-      <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- 8. NSP PROTOCOL                                           -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="nsp" class="mb-20">
@@ -1511,7 +1112,7 @@ const tacticColors: Record<string, string> = {
               <li>Use the <a href="/atlas/tara/">TARA atlas</a> to identify risk profiles for BCI techniques in your studies</li>
               <li>Apply <a href="/atlas/scoring/">NISS scoring</a> to quantify neural impact in vulnerability reports</li>
               <li>Reference the <a href="#neural-impact">Neural Impact Chain</a> for technique-to-diagnosis mapping</li>
-              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v8.0. Qinnovate. Available at qinnovate.com</code></li>
+              <li>Cite: <code class="text-xs">Qi, K. (2026). QIF v7.1. Qinnovate. Available at qinnovate.com</code></li>
             </ul>
           </div>
 
@@ -1833,10 +1434,10 @@ const tacticColors: Record<string, string> = {
       <footer class="border-t border-[var(--color-border)] pt-8 pb-20">
         <div class="flex flex-col gap-4 text-xs text-[var(--color-text-faint)]">
           <div class="flex flex-wrap items-center gap-3">
-            <span class="text-xs font-semibold px-3 py-1 rounded-full border border-amber-500 text-amber-500">
-              v8.0 Working Draft
+            <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">
+              v7.1
             </span>
-            <span class="text-xs text-[var(--color-text-faint)]">2026-03-11</span>
+            <span class="text-xs text-[var(--color-text-faint)]">2026-02-21</span>
             <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
           </div>
           <p class="text-sm text-[var(--color-text-muted)]">
@@ -1844,7 +1445,6 @@ const tacticColors: Record<string, string> = {
             <strong>Organization:</strong> <a href="/">Qinnovate</a>
           </p>
           <div class="flex gap-4">
-            <a href="/research/whitepaper/v7-1/">v7.1</a>
             <a href="/research/whitepaper/v6/">v6.0</a>
             <a href="https://github.com/qinnovates/qinnovate/tree/main/src/pages/whitepaper" target="_blank" rel="noopener noreferrer">All older (archived)</a>
           </div>

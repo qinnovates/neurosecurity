@@ -1,0 +1,755 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+
+// Load all data sources
+import landscapeRaw from '@shared/bci-landscape.json';
+import atlasRaw from '@shared/qif-brain-bci-atlas.json';
+import registrarRaw from '@shared/qtara-registrar.json';
+import dsmRaw from '@shared/qif-dsm-mappings.json';
+import ethicsRaw from '@shared/qif-ethics-controls.json';
+import cveRaw from '@shared/cve-technique-mapping.json';
+import controlsRaw from '@shared/qif-security-controls.json';
+import pathwaysRaw from '@shared/qif-neural-pathways.json';
+
+const landscape = landscapeRaw as any;
+const atlas = atlasRaw as any;
+const registrar = registrarRaw as any;
+const dsm = dsmRaw as any;
+const ethics = ethicsRaw as any;
+const cve = cveRaw as any;
+const controls = controlsRaw as any;
+const pathways = pathwaysRaw as any;
+
+// --- Compute all metrics ---
+
+// Companies
+const companies = landscape.companies || [];
+const totalCompanies = companies.length;
+const invasiveCount = companies.filter((c: any) => c.type === 'invasive').length;
+const nonInvasiveCount = companies.filter((c: any) => c.type === 'non_invasive').length;
+const semiInvasiveCount = companies.filter((c: any) => c.type === 'semi_invasive').length;
+const noSecCount = companies.filter((c: any) => c.security_posture === 'none_published').length;
+const totalDevices = companies.reduce((s: number, c: any) => s + (c.devices || []).length, 0);
+const totalFundingB = companies.reduce((s: number, c: any) => s + (c.funding_total_usd || 0), 0) / 1_000_000_000;
+const activeCompanies = companies.filter((c: any) => c.status === 'active').length;
+
+// Top funded companies
+const topFunded = [...companies]
+  .filter((c: any) => c.funding_total_usd > 0)
+  .sort((a: any, b: any) => (b.funding_total_usd || 0) - (a.funding_total_usd || 0))
+  .slice(0, 8)
+  .map((c: any) => ({
+    name: c.name,
+    funding_M: Math.round((c.funding_total_usd || 0) / 1_000_000),
+    type: c.type,
+    security: c.security_posture,
+  }));
+
+// Devices by type
+const allDevices = companies.flatMap((c: any) => (c.devices || []).map((d: any) => ({ ...d, company: c.name })));
+const devicesByType: Record<string, number> = {};
+for (const d of allDevices) {
+  const t = d.type || 'unknown';
+  devicesByType[t] = (devicesByType[t] || 0) + 1;
+}
+
+// Brain regions & bands
+const brainRegions = atlas.brain_regions || [];
+const qifBands = atlas.qif_bands || [];
+const totalRegions = brainRegions.length;
+const totalBands = qifBands.length;
+
+// Regions by band
+const regionsByBand: Record<string, number> = {};
+for (const r of brainRegions) {
+  const b = r.qif_band || 'unknown';
+  regionsByBand[b] = (regionsByBand[b] || 0) + 1;
+}
+
+// TARA
+const techniques = registrar.techniques || [];
+const tactics = registrar.tactics || [];
+const totalTechniques = techniques.length;
+const totalTactics = tactics.length;
+
+// Techniques by severity
+const bySeverity: Record<string, number> = {};
+for (const t of techniques) {
+  const s = t.severity || 'unknown';
+  bySeverity[s] = (bySeverity[s] || 0) + 1;
+}
+
+// Techniques by status
+const byStatus: Record<string, number> = {};
+for (const t of techniques) {
+  const s = t.status || 'unknown';
+  byStatus[s] = (byStatus[s] || 0) + 1;
+}
+
+// DSM-5
+const dsmClusters = dsm.diagnostic_clusters || {};
+const totalConditions = Object.values(dsmClusters).reduce((s: number, c: any) => s + (c.conditions || []).length, 0);
+const totalClusters = Object.keys(dsmClusters).length;
+
+// Neural pathways
+const allPathways = pathways.pathways || [];
+const totalPathways = allPathways.length;
+const pathwayTypes = pathways.pathway_types || {};
+
+// Pathways by type
+const pathwaysByType: Record<string, number> = {};
+for (const p of allPathways) {
+  const t = p.type || 'unknown';
+  pathwaysByType[t] = (pathwaysByType[t] || 0) + 1;
+}
+
+// Pathways by neurotransmitter
+const pathwaysByNT: Record<string, number> = {};
+for (const p of allPathways) {
+  if (p.neurotransmitter) {
+    pathwaysByNT[p.neurotransmitter] = (pathwaysByNT[p.neurotransmitter] || 0) + 1;
+  }
+}
+
+// Neurorights
+const neurorights = ethics.neurorights || {};
+const totalNeurorights = Object.keys(neurorights).length;
+
+// CVEs
+const cveCount = (cve.mappings || []).length;
+
+// Security controls
+const controlsByBand: Record<string, number> = {};
+for (const [band, types] of Object.entries(controls.controls_by_band || {})) {
+  const t = types as any;
+  controlsByBand[band] = (t.detection || []).length + (t.prevention || []).length + (t.response || []).length;
+}
+const totalControls = Object.values(controlsByBand).reduce((s: number, c: number) => s + c, 0);
+
+// Market data
+const marketForecasts = landscape.market_data?.market_size_estimates || [];
+const fundingRounds = landscape.market_data?.major_funding_rounds || [];
+const vcDeals = landscape.market_data?.vc_aggregate_by_year || [];
+
+// Governance frameworks
+const frameworks = ethics.governance_frameworks || [];
+
+// --- Dopamine Reward Center Dependency Chain ---
+// This is a scientifically verified molecular dependency chain showing
+// how a QIF attack on the reward center cascades through biochemistry.
+const mesolimbicPathway = allPathways.find((p: any) => p.id === 'mesolimbic');
+
+// Color config
+const severityColors: Record<string, string> = {
+  critical: '#ef4444',
+  high: '#f59e0b',
+  medium: '#eab308',
+  low: '#22c55e',
+  info: '#3b82f6',
+};
+
+const bandColors: Record<string, string> = {
+  N7: '#ef4444', N6: '#f97316', N5: '#f59e0b', N4: '#eab308',
+  N3: '#84cc16', N2: '#22c55e', N1: '#14b8a6',
+  I0: '#06b6d4',
+  S1: '#3b82f6', S2: '#6366f1', S3: '#8b5cf6',
+};
+---
+
+<PageLayout
+  title="QIF Data Lake Dashboard"
+  description="Live metrics dashboard across the QIF data lake: BCI companies, devices, TARA threats, brain regions, neural pathways, DSM-5 mappings, molecular dependencies, and business intelligence."
+  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'Data Lake' }]}
+  wide={true}
+>
+  <div class="mb-8 reveal">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">QIF Data Lake</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-3xl">
+      Live metrics derived from {Object.keys(landscape).length + Object.keys(atlas).length + Object.keys(registrar).length} data sources. Spanning business intelligence (companies, funding, market trends) and clinical mapping (brain regions, neural pathways, molecular dependencies). All queryable via <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">KQL</a>.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1: OVERVIEW STATS                                  -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="glass rounded-xl p-6 sm:p-8 mb-10 reveal">
+    <h2 class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-5">Data Lake Overview</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 text-center">
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{totalCompanies}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Companies</p>
+      </div>
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{totalDevices}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Devices</p>
+      </div>
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">{totalTechniques}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">TARA Techniques</p>
+      </div>
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-cyan-400">{totalRegions}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Brain Regions</p>
+      </div>
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-purple-400">{totalPathways}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Neural Pathways</p>
+      </div>
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-amber-400">{totalConditions}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">DSM-5 Conditions</p>
+      </div>
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-red-400">{totalControls}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Security Controls</p>
+      </div>
+      <div class="glass rounded-lg p-3">
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-green-400">{cveCount}</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">CVE Mappings</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: BUSINESS INTELLIGENCE                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Business Intelligence</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">BCI industry tracking: companies, investments, market trends, security posture</p>
+
+    <div class="grid lg:grid-cols-2 gap-6 mb-6">
+      <!-- Funding bar chart -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Top Funded Companies</h3>
+        <div class="space-y-2">
+          {topFunded.map((c) => {
+            const maxFunding = topFunded[0]?.funding_M || 1;
+            const pct = Math.round((c.funding_M / maxFunding) * 100);
+            const isInsecure = c.security === 'none_published';
+            return (
+              <div class="flex items-center gap-3">
+                <span class="text-xs text-[var(--color-text-muted)] w-28 shrink-0 truncate">{c.name}</span>
+                <div class="flex-1 h-5 bg-[var(--color-bg-surface)] rounded-full overflow-hidden relative">
+                  <div
+                    class="h-full rounded-full transition-all"
+                    style={`width: ${pct}%; background: ${isInsecure ? 'linear-gradient(90deg, #ef4444, #f97316)' : 'linear-gradient(90deg, #22c55e, #10b981)'}`}
+                  />
+                </div>
+                <span class="text-xs font-mono text-[var(--color-text-faint)] w-16 text-right">${c.funding_M}M</span>
+                {isInsecure && <span class="text-[8px] text-red-400 uppercase">No Sec</span>}
+              </div>
+            );
+          })}
+        </div>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-3">
+          Total tracked funding: <span class="font-mono text-[var(--color-accent-primary)]">${totalFundingB.toFixed(1)}B</span>
+          &middot; <span class="text-red-400">{noSecCount}/{totalCompanies}</span> have no published security docs
+        </p>
+      </div>
+
+      <!-- Company breakdown -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Industry Breakdown</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">By Modality</p>
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-[var(--color-text-muted)]">Invasive</span>
+                <span class="font-mono text-red-400">{invasiveCount}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-[var(--color-text-muted)]">Non-invasive</span>
+                <span class="font-mono text-cyan-400">{nonInvasiveCount}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-[var(--color-text-muted)]">Semi-invasive</span>
+                <span class="font-mono text-amber-400">{semiInvasiveCount}</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">By Status</p>
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-[var(--color-text-muted)]">Active</span>
+                <span class="font-mono text-green-400">{activeCompanies}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-[var(--color-text-muted)]">Acquired</span>
+                <span class="font-mono text-purple-400">{companies.filter((c: any) => c.status === 'acquired').length}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-[var(--color-text-muted)]">Defunct</span>
+                <span class="font-mono text-[var(--color-text-faint)]">{companies.filter((c: any) => c.status === 'defunct' || c.status === 'dissolved').length}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-[var(--color-border)]/30 my-4" />
+
+        <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">Devices by Type</p>
+        <div class="flex flex-wrap gap-2">
+          {Object.entries(devicesByType).sort((a, b) => b[1] - a[1]).map(([type, count]) => (
+            <span class="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full glass">
+              <span class="w-1.5 h-1.5 rounded-full" style={`background: ${type === 'invasive' ? '#ef4444' : type === 'non_invasive' ? '#06b6d4' : '#f59e0b'}`} />
+              {type.replace(/_/g, '-')}: <span class="font-mono">{count}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Market data -->
+    {marketForecasts.length > 0 && (
+      <div class="glass rounded-xl p-5 mb-6">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Market Projections</h3>
+        <div class="overflow-x-auto">
+          <div class="flex gap-3 min-w-max">
+            {marketForecasts.slice(0, 8).map((m: any) => (
+              <div class="text-center glass rounded-lg p-3 min-w-[90px]">
+                <p class="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">${m.value_billion_usd}B</p>
+                <p class="text-[10px] text-[var(--color-text-faint)] mt-0.5">{m.year}</p>
+                {m.cagr_percent && <p class="text-[9px] text-green-400">{m.cagr_percent}% CAGR</p>}
+                {m.source && <p class="text-[8px] text-[var(--color-text-faint)] mt-1 truncate max-w-[80px]">{m.source}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: THREAT LANDSCAPE                                -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Threat Landscape</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">TARA threat catalog: {totalTechniques} techniques across {totalTactics} tactics</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Severity distribution -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">By Severity</h3>
+        <div class="space-y-2">
+          {Object.entries(bySeverity).sort((a, b) => {
+            const order = ['critical', 'high', 'medium', 'low', 'info'];
+            return order.indexOf(a[0]) - order.indexOf(b[0]);
+          }).map(([sev, count]) => (
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full" style={`background: ${severityColors[sev] || '#666'}`} />
+              <span class="text-xs text-[var(--color-text-muted)] capitalize flex-1">{sev}</span>
+              <div class="w-24 h-3 bg-[var(--color-bg-surface)] rounded-full overflow-hidden">
+                <div class="h-full rounded-full" style={`width: ${(count / totalTechniques) * 100}%; background: ${severityColors[sev] || '#666'}`} />
+              </div>
+              <span class="text-xs font-mono text-[var(--color-text-faint)] w-8 text-right">{count}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Status distribution -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">By Status</h3>
+        <div class="space-y-2">
+          {Object.entries(byStatus).sort((a, b) => b[1] - a[1]).map(([status, count]) => (
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full" style={`background: ${status === 'demonstrated' ? '#ef4444' : status === 'theoretical' ? '#f59e0b' : status === 'projected' ? '#3b82f6' : '#666'}`} />
+              <span class="text-xs text-[var(--color-text-muted)] capitalize flex-1">{status}</span>
+              <span class="text-xs font-mono text-[var(--color-text-faint)]">{count}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CVE + Controls summary -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Security Posture</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-[var(--color-text-muted)]">CVE Mappings</span>
+            <span class="text-sm font-mono text-red-400">{cveCount}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-[var(--color-text-muted)]">Security Controls</span>
+            <span class="text-sm font-mono text-green-400">{totalControls}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-[var(--color-text-muted)]">Neurorights Mapped</span>
+            <span class="text-sm font-mono text-purple-400">{totalNeurorights}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-[var(--color-text-muted)]">Governance Frameworks</span>
+            <span class="text-sm font-mono text-cyan-400">{frameworks.length}</span>
+          </div>
+          <hr class="border-[var(--color-border)]/30" />
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-[var(--color-text-muted)]">Companies w/ No Security</span>
+            <span class="text-sm font-mono text-red-400">{noSecCount}/{totalCompanies}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: CLINICAL MAPPING                                -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Clinical Mapping</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">Brain regions, neural pathways, and DSM-5-TR diagnostic category references mapped to QIF hourglass bands. For threat modeling purposes &mdash; not diagnostic claims.</p>
+
+    <div class="grid lg:grid-cols-2 gap-6 mb-6">
+      <!-- Hourglass band distribution -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Brain Regions by QIF Band</h3>
+        <div class="space-y-2">
+          {qifBands.map((b: any) => {
+            const count = regionsByBand[b.id] || 0;
+            const maxRegions = Math.max(...Object.values(regionsByBand) as number[]);
+            const pct = maxRegions > 0 ? (count / maxRegions) * 100 : 0;
+            return (
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono w-6 shrink-0" style={`color: ${bandColors[b.id] || '#666'}`}>{b.id}</span>
+                <span class="text-xs text-[var(--color-text-muted)] w-24 shrink-0 truncate">{b.name}</span>
+                <div class="flex-1 h-4 bg-[var(--color-bg-surface)] rounded-full overflow-hidden">
+                  <div class="h-full rounded-full" style={`width: ${pct}%; background: ${bandColors[b.id] || '#666'}`} />
+                </div>
+                <span class="text-xs font-mono text-[var(--color-text-faint)] w-6 text-right">{count}</span>
+              </div>
+            );
+          })}
+        </div>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-3">{totalRegions} brain structures across {totalBands} QIF hourglass bands</p>
+      </div>
+
+      <!-- Neural pathways breakdown -->
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Neural Pathways</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">By Type</p>
+            <div class="space-y-1.5">
+              {Object.entries(pathwaysByType).sort((a, b) => b[1] - a[1]).map(([type, count]) => (
+                <div class="flex justify-between text-xs">
+                  <span class="text-[var(--color-text-muted)] truncate mr-2">{type.replace(/_/g, ' ')}</span>
+                  <span class="font-mono text-purple-400">{count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">By Neurotransmitter</p>
+            <div class="space-y-1.5">
+              {Object.entries(pathwaysByNT).sort((a, b) => b[1] - a[1]).map(([nt, count]) => (
+                <div class="flex justify-between text-xs">
+                  <span class="text-[var(--color-text-muted)] capitalize">{nt}</span>
+                  <span class="font-mono text-cyan-400">{count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-3">{totalPathways} named pathways, tracts, and circuits</p>
+      </div>
+    </div>
+
+    <!-- DSM-5 Clusters -->
+    <div class="glass rounded-xl p-5 mb-6">
+      <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">DSM-5-TR Diagnostic Category Mappings</h3>
+      <p class="text-[10px] text-[var(--color-text-faint)] mb-3 italic">Diagnostic category references for threat modeling purposes &mdash; not diagnostic claims.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+        {Object.entries(dsmClusters).map(([id, cluster]: [string, any]) => (
+          <div class="glass rounded-lg p-3">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full" style={`background: ${cluster.color}`} />
+              <span class="text-xs font-semibold text-[var(--color-text-primary)]">{cluster.label}</span>
+            </div>
+            <div class="space-y-1">
+              {(cluster.conditions || []).map((c: any) => (
+                <div class="flex justify-between text-[10px]">
+                  <span class="text-[var(--color-text-muted)] truncate mr-1">{c.name}</span>
+                  <span class="font-mono text-[var(--color-text-faint)] shrink-0">{c.code}</span>
+                </div>
+              ))}
+            </div>
+            <p class="text-[9px] text-[var(--color-text-faint)] mt-2">Bands: {(cluster.bands || []).join(', ')}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: MOLECULAR DEPENDENCY CHAIN                      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Molecular Dependency Mapping</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">QIF maps attacks from the hourglass band level down to molecular structure. This section demonstrates how a single pathway disruption cascades through biochemical dependencies.</p>
+
+    <!-- Reward center attack example -->
+    <div class="glass rounded-xl p-5 sm:p-8 mb-6 border-l-4 border-purple-500">
+      <h3 class="text-base font-bold text-[var(--color-text-primary)] mb-2">Case Study: Reward Center Attack &mdash; Dopamine Dependency Chain</h3>
+      <p class="text-xs text-[var(--color-text-faint)] italic mb-4">For threat modeling purposes. Diagnostic category references, not diagnostic claims.</p>
+
+      {mesolimbicPathway && (
+        <div class="glass rounded-lg p-4 mb-5">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">{mesolimbicPathway.id}</span>
+            <span class="text-sm font-semibold text-[var(--color-text-primary)]">{mesolimbicPathway.name}</span>
+          </div>
+          <p class="text-xs text-[var(--color-text-muted)] mb-2">{mesolimbicPathway.function}</p>
+          <div class="flex flex-wrap gap-2 text-[10px]">
+            <span class="px-1.5 py-0.5 rounded glass">Origin: VTA ({mesolimbicPathway.origin_band})</span>
+            <span class="px-1.5 py-0.5 rounded glass">Targets: NAc, Amygdala, Hippocampus ({(mesolimbicPathway.target_bands || []).join(', ')})</span>
+            <span class="px-1.5 py-0.5 rounded glass text-cyan-400">NT: Dopamine</span>
+          </div>
+        </div>
+      )}
+
+      <!-- Dopamine Synthesis Dependency Chain -->
+      <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Dopamine Synthesis: Molecular Dependency Chain</h4>
+      <p class="text-xs text-[var(--color-text-muted)] mb-4">Each step in dopamine synthesis depends on specific enzymes, cofactors, and minerals. Disrupting any link breaks the chain.</p>
+
+      <!-- Visual chain -->
+      <div class="overflow-x-auto mb-6">
+        <div class="flex items-center gap-1 min-w-max px-2">
+          <!-- Step 1: Phenylalanine -->
+          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-blue-400">
+            <p class="text-xs font-bold text-blue-400">Phenylalanine</p>
+            <p class="text-[9px] text-[var(--color-text-faint)]">Essential amino acid</p>
+            <p class="text-[9px] text-[var(--color-text-faint)]">(dietary intake)</p>
+          </div>
+          <div class="flex flex-col items-center gap-0.5 shrink-0">
+            <span class="text-[var(--color-text-faint)]">&rarr;</span>
+            <span class="text-[8px] text-amber-400 text-center leading-tight">PAH<br/>+ BH4, Fe&sup2;&plus;</span>
+          </div>
+
+          <!-- Step 2: Tyrosine -->
+          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-cyan-400">
+            <p class="text-xs font-bold text-cyan-400">Tyrosine</p>
+            <p class="text-[9px] text-[var(--color-text-faint)]">Non-essential amino acid</p>
+            <p class="text-[9px] text-[var(--color-text-faint)]">(also from diet)</p>
+          </div>
+          <div class="flex flex-col items-center gap-0.5 shrink-0">
+            <span class="text-[var(--color-text-faint)]">&rarr;</span>
+            <span class="text-[8px] text-red-400 text-center leading-tight font-semibold">TH<br/>+ BH4, Fe&sup2;&plus;, O&sub2;</span>
+          </div>
+
+          <!-- Step 3: L-DOPA -->
+          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-amber-400">
+            <p class="text-xs font-bold text-amber-400">L-DOPA</p>
+            <p class="text-[9px] text-[var(--color-text-faint)]">Rate-limiting step</p>
+            <p class="text-[9px] text-red-400 font-semibold">TH = bottleneck</p>
+          </div>
+          <div class="flex flex-col items-center gap-0.5 shrink-0">
+            <span class="text-[var(--color-text-faint)]">&rarr;</span>
+            <span class="text-[8px] text-green-400 text-center leading-tight">AADC<br/>+ PLP (B6)</span>
+          </div>
+
+          <!-- Step 4: Dopamine -->
+          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-green-400 ring-1 ring-green-400/30">
+            <p class="text-xs font-bold text-green-400">Dopamine</p>
+            <p class="text-[9px] text-[var(--color-text-faint)]">Active neurotransmitter</p>
+            <p class="text-[9px] text-[var(--color-text-faint)]">→ reward, motivation</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cofactor dependency table -->
+      <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Critical Cofactors &amp; Dependencies</h4>
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full text-xs">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]/30">
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Cofactor</th>
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Required By</th>
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">Role</th>
+              <th class="text-left py-2 px-2 text-[var(--color-text-faint)] font-semibold uppercase tracking-wider text-[10px]">If Depleted</th>
+            </tr>
+          </thead>
+          <tbody class="text-[var(--color-text-muted)]">
+            <tr class="border-b border-[var(--color-border)]/10">
+              <td class="py-2 px-2 font-semibold text-red-400">Iron (Fe&sup2;&plus;)</td>
+              <td class="py-2 px-2">Tyrosine Hydroxylase (TH)</td>
+              <td class="py-2 px-2">TH is an iron-dependent monooxygenase. Fe&sup2;&plus; is coordinated by His331, His336, and Glu376 in a facial triad at the active site. Requirement is absolute &mdash; no other divalent metal substitutes.</td>
+              <td class="py-2 px-2 text-red-400">Dopamine synthesis halts at tyrosine. TH cannot convert tyrosine to L-DOPA without iron.</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/10">
+              <td class="py-2 px-2 font-semibold text-amber-400">Tetrahydrobiopterin (BH4)</td>
+              <td class="py-2 px-2">TH &amp; PAH</td>
+              <td class="py-2 px-2">Electron donor cofactor. Regenerated by dihydrobiopterin reductase (DHBR). Required for both phenylalanine &rarr; tyrosine and tyrosine &rarr; L-DOPA.</td>
+              <td class="py-2 px-2 text-amber-400">Both conversion steps fail. Hyperphenylalaninemia + dopamine depletion.</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/10">
+              <td class="py-2 px-2 font-semibold text-green-400">Pyridoxal Phosphate (PLP/B6)</td>
+              <td class="py-2 px-2">AADC (Aromatic L-Amino Acid Decarboxylase)</td>
+              <td class="py-2 px-2">PLP-dependent decarboxylase. Removes carboxyl group from L-DOPA to produce dopamine.</td>
+              <td class="py-2 px-2 text-green-400">L-DOPA accumulates but cannot convert to dopamine. Also affects serotonin synthesis (same enzyme).</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]/10">
+              <td class="py-2 px-2 font-semibold text-cyan-400">Molecular Oxygen (O&sub2;)</td>
+              <td class="py-2 px-2">TH (hydroxylation reaction)</td>
+              <td class="py-2 px-2">TH is a monooxygenase &mdash; inserts one oxygen atom into tyrosine to produce L-DOPA.</td>
+              <td class="py-2 px-2 text-cyan-400">Hypoxia impairs dopamine synthesis. Relevant to cerebrovascular BCI complications.</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-2 font-semibold text-blue-400">Ferritin</td>
+              <td class="py-2 px-2">Iron storage &amp; buffering</td>
+              <td class="py-2 px-2">Ferritin <strong>stores</strong> iron (up to 4,500 Fe&sup3;&plus; atoms per molecule). Releases Fe&sup2;&plus; when needed. Does NOT "need" iron &mdash; it <em>provides</em> iron to TH.</td>
+              <td class="py-2 px-2 text-blue-400">Low ferritin = low iron reserves = eventual TH inactivation. Serum ferritin &lt;30 ng/mL associated with restless legs syndrome (dopaminergic).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QIF Attack Scenario -->
+      <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">QIF Attack Scenario: Reward Circuit Disruption</h4>
+      <p class="text-xs text-[var(--color-text-muted)] mb-4">A TARA technique targeting the mesolimbic pathway at band N5 (Basal Ganglia) would cascade through these molecular dependencies:</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        <div class="glass rounded-lg p-3 border-l-2 border-red-400">
+          <p class="text-[10px] text-red-400 font-semibold uppercase tracking-wider mb-1">Layer 1: Signal</p>
+          <p class="text-xs text-[var(--color-text-muted)]">DBS or TMS disrupts VTA &rarr; NAc dopaminergic signaling at the electrical/magnetic level</p>
+          <p class="text-[9px] text-[var(--color-text-faint)] mt-1">Band: N2 &rarr; N5</p>
+        </div>
+        <div class="glass rounded-lg p-3 border-l-2 border-amber-400">
+          <p class="text-[10px] text-amber-400 font-semibold uppercase tracking-wider mb-1">Layer 2: Synaptic</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Altered firing rate in VTA dopamine neurons changes vesicular dopamine release at NAc synapses</p>
+          <p class="text-[9px] text-[var(--color-text-faint)] mt-1">Mechanism: frequency-dependent release</p>
+        </div>
+        <div class="glass rounded-lg p-3 border-l-2 border-purple-400">
+          <p class="text-[10px] text-purple-400 font-semibold uppercase tracking-wider mb-1">Layer 3: Molecular</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Sustained disruption alters TH phosphorylation (Ser40), changing enzyme activity. Chronic over-stimulation depletes BH4 and iron cofactors.</p>
+          <p class="text-[9px] text-[var(--color-text-faint)] mt-1">Dependency: Fe&sup2;&plus; &rarr; TH &rarr; L-DOPA &rarr; DA</p>
+        </div>
+        <div class="glass rounded-lg p-3 border-l-2 border-cyan-400">
+          <p class="text-[10px] text-cyan-400 font-semibold uppercase tracking-wider mb-1">Layer 4: Clinical</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Anhedonia, motivational deficit, or reward hypersensitivity. Corresponds to DSM-5-TR diagnostic categories for depressive, substance use, or impulse control disorders.</p>
+          <p class="text-[9px] text-[var(--color-text-faint)] mt-1">DSM refs: F32.x, F14.x, F63.0</p>
+        </div>
+      </div>
+
+      <!-- Iron-Ferritin direction clarification -->
+      <div class="glass-subtle rounded-lg p-4 border-l-2 border-blue-400">
+        <p class="text-xs text-[var(--color-text-primary)] font-semibold mb-1">Clarification: Ferritin &harr; Iron Direction</p>
+        <p class="text-xs text-[var(--color-text-muted)]">
+          Ferritin does not "need" iron. The relationship is: <strong>Ferritin stores iron</strong> (as Fe&sup3;&plus;) and <strong>releases it</strong> (as Fe&sup2;&plus;) when enzymes like Tyrosine Hydroxylase require it. The correct dependency chain is:
+        </p>
+        <p class="text-xs font-mono text-[var(--color-accent-primary)] mt-2 text-center">
+          Dietary iron &rarr; Transferrin (blood transport) &rarr; Transferrin receptor (neuronal uptake) &rarr; Ferritin (intracellular storage) &rarr; Fe&sup2;&plus; release &rarr; TH active site &rarr; Dopamine synthesis
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-2">
+          Sources: Daubner et al. (2011) "Tyrosine Hydroxylase and Regulation of Dopamine Synthesis" <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3065393/" class="text-[var(--color-accent-primary)]">PMC3065393</a>;
+          Matak et al. (2016) "Disrupted iron homeostasis causes dopaminergic neurodegeneration" <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4822577/" class="text-[var(--color-accent-primary)]">PMC4822577</a>;
+          Erikson et al. (2000) "Iron-restricted diet affects brain ferritin and dopamine metabolism" <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5434142/" class="text-[var(--color-accent-primary)]">PMC5434142</a>;
+          Kandel et al., Principles of Neural Science, 6th ed.; Stahl, Essential Psychopharmacology, 5th ed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: HOURGLASS BAND CONTROLS                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Security Controls by Band</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">Detection, prevention, and response controls mapped across the 11-band QIF hourglass</p>
+
+    <div class="glass rounded-xl p-5">
+      <div class="space-y-2">
+        {qifBands.map((b: any) => {
+          const count = controlsByBand[b.id] || 0;
+          const maxControls = Math.max(...Object.values(controlsByBand) as number[]);
+          const pct = maxControls > 0 ? (count / maxControls) * 100 : 0;
+          return (
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono w-6 shrink-0" style={`color: ${bandColors[b.id] || '#666'}`}>{b.id}</span>
+              <span class="text-xs text-[var(--color-text-muted)] w-28 shrink-0 truncate">{b.name}</span>
+              <div class="flex-1 h-4 bg-[var(--color-bg-surface)] rounded-full overflow-hidden">
+                <div class="h-full rounded-full" style={`width: ${pct}%; background: ${bandColors[b.id] || '#666'}`} />
+              </div>
+              <span class="text-xs font-mono text-[var(--color-text-faint)] w-8 text-right">{count}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 7: DATA LAKE SCOPE                                 -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <section class="mb-12 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Data Lake Scope</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">The QIF data lake spans two domains: business intelligence and clinical mapping. All tables are queryable via <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">KQL</a>.</p>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-[var(--color-accent-primary)] mb-3">Business Intelligence</h3>
+        <div class="space-y-2 text-xs text-[var(--color-text-muted)]">
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)] mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Company Profiles:</strong> {totalCompanies} companies with founding date, HQ, modality, funding, valuation, employee count, security posture</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)] mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Device Registry:</strong> {totalDevices} devices with channel count, electrode type, FDA status, deployment numbers, pricing</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)] mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Funding &amp; Investment:</strong> Individual rounds, VC cross-portfolio analysis, sovereign wealth funds, PE firms, Big Tech bets, defense/intelligence investors</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)] mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Market Intelligence:</strong> TAM/SAM/SOM projections, security gap analysis, automotive convergence timeline, risk quantification per company</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)] mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Wireless/Comms Attack Surface:</strong> Protocol, RF band, encryption, firmware, data link risk rating for every tracked device</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl p-5">
+        <h3 class="text-sm font-semibold text-purple-400 mb-3">Clinical Mapping</h3>
+        <div class="space-y-2 text-xs text-[var(--color-text-muted)]">
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Brain Anatomy:</strong> {totalRegions} brain structures mapped to {totalBands} QIF hourglass bands with function, latency, and zone classification</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Neural Pathways:</strong> {totalPathways} named pathways &mdash; neurotransmitter-specific, sensory, motor, limbic, cortical networks, and cerebellar loops. Each mapped to origin/target bands, DSM conditions, and BCI relevance</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Molecular Dependencies:</strong> Synthesis pathways for dopamine, serotonin, norepinephrine, GABA, glutamate &mdash; mapping enzymes, cofactors (iron, BH4, PLP), and metabolic bottlenecks to hourglass band disruption</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">DSM-5-TR Overlay:</strong> {totalConditions} diagnostic categories across {totalClusters} clusters, each mapped to affected QIF bands (for threat modeling, not diagnostic claims)</div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <div><strong class="text-[var(--color-text-primary)]">Neurorights &amp; Governance:</strong> {totalNeurorights} neurorights mapped to bands, {frameworks.length} governance frameworks, consent tiers, and {totalControls} security controls spanning all 11 bands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 glass-subtle rounded-lg p-4">
+      <p class="text-xs text-[var(--color-text-muted)]">
+        <strong class="text-[var(--color-text-primary)]">Query everything:</strong> All data above is queryable via the <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">KQL engine</a> on the BCI Landscape page. Use pipe-based syntax: <code class="text-[10px] px-1 py-0.5 rounded bg-[var(--color-bg-surface)]">companies | where funding_total_usd > 100000000 | sort by funding_total_usd desc</code>
+      </p>
+    </div>
+  </section>
+</PageLayout>

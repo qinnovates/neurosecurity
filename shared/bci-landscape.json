@@ -1111,6 +1111,783 @@
         }
       ],
       "company_category": "startup"
+    },
+    {
+      "name": "Science Corporation",
+      "type": "invasive",
+      "modality": "cortical_stimulation",
+      "founded": "2020",
+      "headquarters": "Alameda, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 552000000,
+      "valuation_usd": 1500000000,
+      "employees_approx": 100,
+      "security_posture": "none_published",
+      "security_notes": "Founded by Max Hodak (Neuralink co-founder). Vision restoration via cortical and retinal stimulation. PRIMA retinal implant (2,378 pixels, photovoltaic). No public security documentation. Write-capable implant with stimulation protocol — elevated TARA attack surface for injection/manipulation.",
+      "tara_attack_surface": [
+        "T0001",
+        "T0003",
+        "T0005",
+        "T0008",
+        "T0010",
+        "T0015",
+        "T0021",
+        "T0023",
+        "T0025",
+        "T0030",
+        "T0041",
+        "T0043",
+        "T0045",
+        "T0048",
+        "T0061",
+        "T0063",
+        "T0065",
+        "T0081",
+        "T0085"
+      ],
+      "devices": [
+        {
+          "name": "PRIMA Retinal Implant",
+          "type": "invasive",
+          "channels": 2378,
+          "electrode_type": "photovoltaic_subretinal",
+          "fda_status": "clinical_trial",
+          "units_deployed": "<50 (clinical trials)",
+          "first_human": "2018-01",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Photovoltaic pixel array implanted subretinally. Wireless power via near-infrared projection glasses. Originally developed by Pixium Vision (acquired 2024)."
+        }
+      ],
+      "funding_rounds": [
+        { "round": "Series A", "date": "2021-01", "amount_usd": 38000000 },
+        { "round": "Series B", "date": "2022-06", "amount_usd": 159000000 },
+        { "round": "Pixium Vision acquisition", "date": "2024-04", "amount_usd": 125000000 },
+        { "round": "Series C", "date": "2026-03", "amount_usd": 230000000 }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Cortigent",
+      "type": "invasive",
+      "modality": "cortical_surface_electrode",
+      "founded": "2023",
+      "headquarters": "Los Angeles, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 6400000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Invasive cortical visual prosthesis with 60-electrode subdural occipital grid. Write-capable stimulation device with no published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Orion Visual Cortex Prosthesis",
+          "type": "invasive",
+          "channels": 60,
+          "electrode_type": "subdural_occipital_grid",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Pixium Vision",
+      "type": "semi_invasive",
+      "modality": "subretinal_photovoltaic_chip",
+      "founded": "2011",
+      "headquarters": "Paris, France",
+      "status": "defunct",
+      "acquired_by": "Science Corporation",
+      "funding_total_usd": 65000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Acquired by Science Corporation April 2024. PRIMA IP transferred. No published security documentation prior to acquisition.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "PRIMA Subretinal Implant",
+          "type": "semi_invasive",
+          "channels": null,
+          "electrode_type": "photovoltaic_subretinal",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "defunct"
+    },
+    {
+      "name": "GenSight Biologics",
+      "type": "non_invasive",
+      "modality": "optogenetic_gene_therapy",
+      "founded": "2012",
+      "headquarters": "Paris, France",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 98000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "AAV optogenetic gene therapy with light goggles for vision restoration. Novel modality combining gene therapy and external light device. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "GS030 Optogenetic Vision Restoration",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "optogenetic_goggles",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Nano Retina",
+      "type": "semi_invasive",
+      "modality": "wireless_subretinal_microchip",
+      "founded": "2009",
+      "headquarters": "Herzliya, Israel",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Wireless inductive subretinal microchip. Wireless power transfer creates RF attack surface. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "NR600 Retinal Implant",
+          "type": "semi_invasive",
+          "channels": null,
+          "electrode_type": "wireless_subretinal",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "Subsense",
+      "type": "non_invasive",
+      "modality": "magnetic_nanoparticle_bci",
+      "founded": "2022",
+      "headquarters": "Israel/USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 27000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Inhalable nanoparticles magnetically steered to brain regions. Novel delivery mechanism with unique biosecurity implications. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Nanoparticle BCI Platform",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "magnetic_nanoparticle",
+          "fda_status": "preclinical",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "Motif Neurotech",
+      "type": "invasive",
+      "modality": "cortical_microstimulation",
+      "founded": "2022",
+      "headquarters": "Houston, Texas, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 30000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "DOT miniature wireless cortical microstimulator for depression. Write-capable implant with wireless interface. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "DOT Microstimulator",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "cortical_microstimulator",
+          "fda_status": "preclinical",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "Axoft",
+      "type": "invasive",
+      "modality": "soft_polymer_neural_implant",
+      "founded": "2022",
+      "headquarters": "Cambridge, Massachusetts, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 8000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Ultra-soft compliant polymer neural implant. FDA Breakthrough Device designation. Novel materials approach. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Soft Neural Implant Array",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "polymer_flexible",
+          "fda_status": "breakthrough_device",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "Forest Neurotech",
+      "type": "non_invasive",
+      "modality": "focused_ultrasound_bci",
+      "founded": "2023",
+      "headquarters": "Los Angeles, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 34000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Low-intensity focused ultrasound (LIFU) with genetic sensitization. Write-capable neuromodulation via ultrasound. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Forest 1 Ultrasound BCI",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "focused_ultrasound",
+          "fda_status": "preclinical",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "CorTec GmbH",
+      "type": "invasive",
+      "modality": "fully_implantable_closed_loop_bci",
+      "founded": "2010",
+      "headquarters": "Freiburg, Germany",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Fully implantable wireless closed-loop BCI. First human implant July 2025. Bidirectional read/write with wireless telemetry. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Brain Interchange System",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "implantable_wireless",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": "2025-07",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Medtronic DBS",
+      "type": "invasive",
+      "modality": "adaptive_deep_brain_stimulation",
+      "founded": "1949",
+      "headquarters": "Dublin, Ireland",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Closed-loop adaptive DBS with BrainSense technology. FDA approved Feb 2025. Public company (NYSE:MDT). Major medical device manufacturer with no BCI-specific published security posture.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "BrainSense Adaptive DBS",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "deep_brain_electrode",
+          "fda_status": "fda_approved",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "established"
+    },
+    {
+      "name": "Abbott Neuromodulation",
+      "type": "invasive",
+      "modality": "closed_loop_dbs",
+      "founded": "1888",
+      "headquarters": "Abbott Park, Illinois, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Closed-loop DBS with remote programming capability. FDA approved Jan 2024. Public company (NYSE:ABT). Remote programming introduces network attack surface. No BCI-specific published security posture.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Liberta RC DBS",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "deep_brain_electrode",
+          "fda_status": "fda_approved",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "established"
+    },
+    {
+      "name": "Boston Scientific Neuromodulation",
+      "type": "invasive",
+      "modality": "directional_dbs",
+      "founded": "1979",
+      "headquarters": "Marlborough, Massachusetts, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Directional-lead DBS with 16-contact electrode. Public company (NYSE:BSX). No BCI-specific published security posture.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Vercise Genus DBS",
+          "type": "invasive",
+          "channels": 16,
+          "electrode_type": "directional_deep_brain",
+          "fda_status": "fda_approved",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "established"
+    },
+    {
+      "name": "Saluda Medical",
+      "type": "invasive",
+      "modality": "closed_loop_spinal_cord_stimulation",
+      "founded": "2013",
+      "headquarters": "Sydney, Australia",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 250000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Closed-loop SCS with ECAP (evoked compound action potential) feedback control. First objective closed-loop pain management. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Evoke SCS System",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "spinal_cord_electrode",
+          "fda_status": "fda_approved",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Galvani Bioelectronics",
+      "type": "semi_invasive",
+      "modality": "implanted_nerve_stimulation",
+      "founded": "2016",
+      "headquarters": "Stevenage, United Kingdom",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 540000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Implanted splenic nerve stimulation for rheumatoid arthritis. GSK + Verily (Google) joint venture. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Splenic Neuromodulation for RA",
+          "type": "semi_invasive",
+          "channels": null,
+          "electrode_type": "nerve_cuff",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "ONWARD Medical",
+      "type": "invasive",
+      "modality": "cortical_spinal_cord_stimulation",
+      "founded": "2014",
+      "headquarters": "Eindhoven, Netherlands",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 55000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "ARC-BCI system combining WIMAGINE cortical implant with epidural spinal cord stimulation. FDA Breakthrough Device. Dual-implant architecture with wireless cortical recording. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "ARC-BCI System",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "cortical_epidural",
+          "fda_status": "breakthrough_device",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "NeuroXess",
+      "type": "invasive",
+      "modality": "flexible_intracortical_electrode",
+      "founded": "2021",
+      "headquarters": "Shanghai, China",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Flexible intracortical electrode with implanted battery. 54 human implants by early 2026. Fully implanted system with no published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Fully Implanted BCI Chip",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "flexible_intracortical",
+          "fda_status": "unknown",
+          "units_deployed": "54+",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Neuracle Technology",
+      "type": "non_invasive",
+      "modality": "eeg_bci",
+      "founded": "2017",
+      "headquarters": "Beijing, China",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "EEG-based BCI and ECoG research systems. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "EEG/BCI Research Systems",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "eeg",
+          "fda_status": "none",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Zhiran Medical",
+      "type": "invasive",
+      "modality": "flexible_intracortical_electrode",
+      "founded": "2022",
+      "headquarters": "China",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Flexible high-throughput intracortical electrodes. HongShan Capital backed. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Flexible Neural Electrode Array",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "flexible_intracortical",
+          "fda_status": "unknown",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "BrainsWay",
+      "type": "non_invasive",
+      "modality": "deep_tms",
+      "founded": "2003",
+      "headquarters": "Jerusalem, Israel",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Deep TMS with H-coil technology. Public company (NASDAQ+TASE). 100K+ patients treated, 3 FDA indications. Write-capable neuromodulation with no BCI-specific published security posture.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Deep TMS System",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "deep_tms_hcoil",
+          "fda_status": "fda_approved",
+          "units_deployed": "100000+ patients",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "established"
+    },
+    {
+      "name": "Alpha Omega Engineering",
+      "type": "semi_invasive",
+      "modality": "intraoperative_mer_dbs",
+      "founded": "1993",
+      "headquarters": "Nazareth, Israel",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Intraoperative MER with ML-assisted DBS targeting. First FDA/CE cleared ML algorithm for DBS electrode placement. ML decision-making in neurosurgery with no published security posture.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "NeuroOmega System + HaGuide ML",
+          "type": "semi_invasive",
+          "channels": null,
+          "electrode_type": "microelectrode_recording",
+          "fda_status": "fda_approved",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "established"
+    },
+    {
+      "name": "Neuroelectrics",
+      "type": "non_invasive",
+      "modality": "hd_tdcs_eeg",
+      "founded": "2011",
+      "headquarters": "Barcelona, Spain",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 17000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Multichannel HD-tDCS and EEG platform (Starstim/Enobio). Combined read (EEG) and write (tCS) capability. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Starstim tCS+EEG Platform",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "hd_tdcs_eeg",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Flow Neuroscience",
+      "type": "non_invasive",
+      "modality": "at_home_tdcs",
+      "founded": "2016",
+      "headquarters": "Malmö, Sweden",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 11900000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "At-home tDCS headset with app-guided CBT. FDA approved Dec 2025. Consumer device with app connectivity. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Flow tDCS Headset",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "tdcs",
+          "fda_status": "fda_approved",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "consumer",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Openwater",
+      "type": "non_invasive",
+      "modality": "focused_ultrasound",
+      "founded": "2016",
+      "headquarters": "San Francisco, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 100000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Low-intensity focused ultrasound (LIFU) platform. Founded by Mary Lou Jepsen. Write-capable neuromodulation via ultrasound. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Open-LIFU 2.0",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "focused_ultrasound",
+          "fda_status": "preclinical",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Soterix Medical",
+      "type": "non_invasive",
+      "modality": "hd_tdcs_tacs_trns",
+      "founded": "2010",
+      "headquarters": "Woodbridge, New Jersey, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "HD-tDCS, tACS, and tRNS neurostimulation systems. Write-capable multi-modality stimulation. No published security documentation.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Depression LTE System",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "hd_tdcs",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
     }
   ],
   "adjacent_tech": [
