@@ -1,0 +1,2503 @@
+{
+  "_metadata": {
+    "title": "QIF Neurotransmitter Systems Database",
+    "version": "1.0.0",
+    "created": "2026-03-11",
+    "description": "Comprehensive neurotransmitter database with synthesis pathways, cofactor dependencies, receptor subtypes, transporters, and degradation enzymes. Mapped to QIF hourglass bands and DSM-5-TR diagnostic categories. For threat modeling purposes — not clinical diagnosis.",
+    "primary_sources": [
+      "Stahl SM. Stahl's Essential Psychopharmacology. 5th ed. Cambridge University Press, 2021",
+      "Kandel ER, et al. Principles of Neural Science. 6th ed. McGraw Hill, 2021",
+      "NCBI StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing, 2026",
+      "Purves D, et al. Neuroscience. 6th ed. Sinauer Associates, 2018"
+    ],
+    "license": "CC-BY-4.0",
+    "notes": [
+      "Gene names follow HUGO Gene Nomenclature Committee (HGNC) conventions.",
+      "Receptor subtypes include IUPHAR/BPS Guide to Pharmacology classifications.",
+      "DSM mappings are diagnostic category references for threat modeling, not diagnostic claims.",
+      "Dependency chains show cofactors required for synthesis — disruption of any cofactor can impair neurotransmitter production.",
+      "Confidence: HIGH = primary literature/textbook, MEDIUM = review paper, LOW = inferred."
+    ]
+  },
+  "chemical_classes": {
+    "monoamine": "Neurotransmitters derived from aromatic amino acids (tyrosine, tryptophan, histidine)",
+    "catecholamine": "Monoamine subclass: dopamine, norepinephrine, epinephrine (all from tyrosine)",
+    "indolamine": "Monoamine subclass: serotonin (from tryptophan)",
+    "amino_acid": "Amino acids acting as neurotransmitters (glutamate, GABA, glycine)",
+    "peptide": "Neuropeptides (endorphins, substance P, orexin, etc.)",
+    "purine": "ATP and adenosine signaling",
+    "lipid": "Endocannabinoids (anandamide, 2-AG)",
+    "gas": "Gaseous neurotransmitters (nitric oxide)",
+    "acetylcholine": "Quaternary amine — sole member of its class"
+  },
+  "neurotransmitters": [
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "abbreviation": "DA",
+      "chemical_class": "catecholamine",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "L-Phenylalanine",
+          "product": "L-Tyrosine",
+          "enzyme": "Phenylalanine Hydroxylase",
+          "enzyme_gene": "PAH",
+          "cofactors": [
+            "BH4 (tetrahydrobiopterin)",
+            "Fe2+ (iron)",
+            "O2"
+          ],
+          "notes": "Can also come directly from dietary tyrosine"
+        },
+        {
+          "step": 2,
+          "substrate": "L-Tyrosine",
+          "product": "L-DOPA",
+          "enzyme": "Tyrosine Hydroxylase",
+          "enzyme_gene": "TH",
+          "cofactors": [
+            "BH4 (tetrahydrobiopterin)",
+            "Fe2+ (iron)",
+            "O2"
+          ],
+          "notes": "Rate-limiting step of catecholamine synthesis. TH requires iron as prosthetic group."
+        },
+        {
+          "step": 3,
+          "substrate": "L-DOPA",
+          "product": "Dopamine",
+          "enzyme": "Aromatic L-Amino Acid Decarboxylase",
+          "enzyme_gene": "DDC",
+          "cofactors": [
+            "PLP (pyridoxal phosphate / vitamin B6)"
+          ],
+          "notes": "Also called DOPA decarboxylase"
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "Monoamine Oxidase B",
+          "enzyme_gene": "MAOB",
+          "product": "DOPAC (3,4-dihydroxyphenylacetic acid)",
+          "cofactors": [
+            "FAD (flavin adenine dinucleotide)"
+          ],
+          "notes": "MAO-B is the predominant form in striatum. MAO-A also degrades DA in some regions."
+        },
+        {
+          "enzyme": "Catechol-O-Methyltransferase",
+          "enzyme_gene": "COMT",
+          "product": "3-Methoxytyramine (3-MT)",
+          "cofactors": [
+            "SAM (S-adenosylmethionine)",
+            "Mg2+"
+          ],
+          "notes": "COMT Val158Met polymorphism affects PFC dopamine levels. Val = fast degradation, Met = slow."
+        },
+        {
+          "final_metabolite": "Homovanillic acid (HVA)",
+          "notes": "Final common metabolite of dopamine, measurable in CSF and urine"
+        }
+      ],
+      "transporter": {
+        "name": "Dopamine Transporter",
+        "gene": "SLC6A3",
+        "alias": "DAT",
+        "mechanism": "Na+/Cl- dependent reuptake",
+        "primary_regions": [
+          "striatum",
+          "nucleus_accumbens"
+        ],
+        "pharmacology": [
+          "Cocaine (blocker)",
+          "Amphetamine (reverser)",
+          "Methylphenidate (blocker)"
+        ],
+        "notes": "DAT density is low in PFC — COMT and NET handle PFC dopamine clearance instead"
+      },
+      "vesicular_transporter": {
+        "name": "Vesicular Monoamine Transporter 2",
+        "gene": "SLC18A2",
+        "alias": "VMAT2",
+        "pharmacology": [
+          "Reserpine (inhibitor)",
+          "Tetrabenazine (inhibitor)"
+        ]
+      },
+      "receptors": [
+        {
+          "id": "D1",
+          "gene": "DRD1",
+          "family": "D1-like",
+          "type": "metabotropic",
+          "g_protein": "Gs/Golf",
+          "signaling": "Increases cAMP via adenylyl cyclase",
+          "expression": [
+            "striatum",
+            "pfc",
+            "nucleus_accumbens",
+            "olfactory_tubercle"
+          ],
+          "function": "Motor activation, reward, working memory facilitation",
+          "clinical": "Inverted-U dose-response for working memory in PFC"
+        },
+        {
+          "id": "D2",
+          "gene": "DRD2",
+          "family": "D2-like",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "signaling": "Decreases cAMP, opens K+ channels, reduces Ca2+ entry",
+          "expression": [
+            "striatum",
+            "nucleus_accumbens",
+            "vta",
+            "substantia_nigra",
+            "pituitary"
+          ],
+          "function": "Motor inhibition, reward modulation, presynaptic autoreceptor",
+          "splice_variants": [
+            "D2S (short — presynaptic autoreceptor)",
+            "D2L (long — postsynaptic)"
+          ],
+          "clinical": "Primary target of all antipsychotics. Blockade reduces psychotic symptoms but causes EPS."
+        },
+        {
+          "id": "D3",
+          "gene": "DRD3",
+          "family": "D2-like",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "signaling": "Decreases cAMP",
+          "expression": [
+            "nucleus_accumbens",
+            "islands_of_calleja",
+            "ventral_striatum"
+          ],
+          "function": "Reward, motivation, cognitive flexibility",
+          "clinical": "Target of cariprazine (partial agonist) for bipolar depression"
+        },
+        {
+          "id": "D4",
+          "gene": "DRD4",
+          "family": "D2-like",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "signaling": "Decreases cAMP",
+          "expression": [
+            "pfc",
+            "hippocampus",
+            "retina"
+          ],
+          "function": "Attention, novelty seeking, cognitive modulation",
+          "clinical": "DRD4 7-repeat VNTR polymorphism associated with ADHD (research-based association)"
+        },
+        {
+          "id": "D5",
+          "gene": "DRD5",
+          "family": "D1-like",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "signaling": "Increases cAMP",
+          "expression": [
+            "hippocampus",
+            "hypothalamus",
+            "pfc"
+          ],
+          "function": "Blood pressure regulation, hippocampal plasticity",
+          "clinical": "Higher affinity for DA than D1; may contribute to tonic DA signaling"
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Iron (Fe2+)",
+          "role": "Prosthetic group for TH; rate-limiting for DA synthesis",
+          "deficiency_effect": "Reduced DA synthesis → fatigue, cognitive impairment, restless legs syndrome"
+        },
+        {
+          "cofactor": "BH4 (Tetrahydrobiopterin)",
+          "role": "Cofactor for TH and PAH",
+          "deficiency_effect": "Phenylketonuria-like syndrome, DA/5-HT/NE deficiency"
+        },
+        {
+          "cofactor": "Vitamin B6 (PLP)",
+          "role": "Cofactor for AADC (DOPA → DA conversion)",
+          "deficiency_effect": "Impaired DA and 5-HT synthesis"
+        },
+        {
+          "cofactor": "Magnesium (Mg2+)",
+          "role": "Required for COMT activity",
+          "deficiency_effect": "Altered DA clearance in PFC"
+        },
+        {
+          "cofactor": "SAM (S-adenosylmethionine)",
+          "role": "Methyl donor for COMT",
+          "deficiency_effect": "Impaired DA methylation; SAM synthesis requires B12, folate (B9), methionine"
+        }
+      ],
+      "primary_qif_bands": [
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "striatum",
+        "nucleus_accumbens",
+        "vta",
+        "substantia_nigra",
+        "pfc"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F20.x",
+          "name": "Schizophrenia",
+          "mechanism": "Mesolimbic DA excess (positive symptoms), mesocortical DA deficit (negative symptoms)"
+        },
+        {
+          "code": "G20",
+          "name": "Parkinson's disease",
+          "mechanism": "Nigrostriatal DA neuron degeneration (>80% loss before motor symptoms)"
+        },
+        {
+          "code": "F90.x",
+          "name": "ADHD",
+          "mechanism": "Reduced DA signaling in PFC and striatum"
+        },
+        {
+          "code": "F32.x",
+          "name": "Major depression",
+          "mechanism": "Reduced mesolimbic DA (anhedonia component)"
+        },
+        {
+          "code": "F14.x",
+          "name": "Cocaine use disorder",
+          "mechanism": "DAT blockade → DA accumulation in nucleus accumbens"
+        },
+        {
+          "code": "F15.x",
+          "name": "Amphetamine use disorder",
+          "mechanism": "DAT reversal → massive DA release"
+        }
+      ],
+      "bci_relevance": "HIGH — DBS of STN modulates DA circuits in Parkinson's. Closed-loop DBS adjusts stimulation based on beta oscillations in basal ganglia (DA-dependent).",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "serotonin",
+      "name": "Serotonin",
+      "abbreviation": "5-HT",
+      "chemical_class": "indolamine",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "L-Tryptophan",
+          "product": "5-Hydroxytryptophan (5-HTP)",
+          "enzyme": "Tryptophan Hydroxylase",
+          "enzyme_gene": "TPH1 (peripheral) / TPH2 (brain)",
+          "cofactors": [
+            "BH4 (tetrahydrobiopterin)",
+            "Fe2+ (iron)",
+            "O2"
+          ],
+          "notes": "Rate-limiting step. TPH2 is brain-specific. Tryptophan competes with other large neutral amino acids (LNAAs) for BBB transport via LAT1."
+        },
+        {
+          "step": 2,
+          "substrate": "5-HTP",
+          "product": "Serotonin (5-HT)",
+          "enzyme": "Aromatic L-Amino Acid Decarboxylase",
+          "enzyme_gene": "DDC",
+          "cofactors": [
+            "PLP (pyridoxal phosphate / vitamin B6)"
+          ],
+          "notes": "Same enzyme (AADC/DDC) as dopamine synthesis"
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "Monoamine Oxidase A",
+          "enzyme_gene": "MAOA",
+          "product": "5-Hydroxyindoleacetic acid (5-HIAA)",
+          "cofactors": [
+            "FAD"
+          ],
+          "notes": "MAO-A is predominant for 5-HT. Low MAOA activity linked to aggression (Brunner syndrome, MAOA-L variant)."
+        }
+      ],
+      "transporter": {
+        "name": "Serotonin Transporter",
+        "gene": "SLC6A4",
+        "alias": "SERT",
+        "mechanism": "Na+/Cl-/K+ dependent reuptake",
+        "primary_regions": [
+          "raphe_nuclei",
+          "cortex",
+          "hippocampus",
+          "amygdala"
+        ],
+        "pharmacology": [
+          "SSRIs (fluoxetine, sertraline — blockers)",
+          "MDMA (reverser + releaser)",
+          "TCAs (blockers)"
+        ],
+        "notes": "5-HTTLPR polymorphism (short/long) affects SERT expression. Short allele = reduced SERT, stress sensitivity."
+      },
+      "vesicular_transporter": {
+        "name": "Vesicular Monoamine Transporter 2",
+        "gene": "SLC18A2",
+        "alias": "VMAT2"
+      },
+      "receptors": [
+        {
+          "id": "5-HT1A",
+          "gene": "HTR1A",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "signaling": "Decreases cAMP, opens K+ channels (GIRK)",
+          "expression": [
+            "raphe_nuclei (autoreceptor)",
+            "hippocampus",
+            "pfc",
+            "amygdala"
+          ],
+          "function": "Anxiolysis, mood regulation; somatodendritic autoreceptor on raphe neurons",
+          "clinical": "Target of buspirone (partial agonist) for anxiety. SSRI therapeutic delay partly due to 5-HT1A autoreceptor desensitization."
+        },
+        {
+          "id": "5-HT1B",
+          "gene": "HTR1B",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "expression": [
+            "striatum",
+            "globus_pallidus",
+            "cerebral_arteries"
+          ],
+          "function": "Presynaptic terminal autoreceptor, vasoconstriction",
+          "clinical": "Target of triptans for migraine (vasoconstriction)"
+        },
+        {
+          "id": "5-HT2A",
+          "gene": "HTR2A",
+          "type": "metabotropic",
+          "g_protein": "Gq/G11",
+          "signaling": "Activates PLC → IP3 + DAG → Ca2+ release",
+          "expression": [
+            "pfc (layer V pyramidal neurons)",
+            "visual_cortex",
+            "claustrum"
+          ],
+          "function": "Sensory gating, perception, cortical excitability",
+          "clinical": "Primary target of classic psychedelics (LSD, psilocybin). Atypical antipsychotics (clozapine, olanzapine) are 5-HT2A antagonists."
+        },
+        {
+          "id": "5-HT2C",
+          "gene": "HTR2C",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "choroid_plexus",
+            "hypothalamus",
+            "nucleus_accumbens"
+          ],
+          "function": "Appetite regulation, CSF production, DA modulation",
+          "clinical": "Lorcaserin (agonist, withdrawn) for obesity. RNA editing of HTR2C affects receptor function."
+        },
+        {
+          "id": "5-HT3",
+          "gene": "HTR3A/HTR3B",
+          "type": "ionotropic",
+          "ion_permeability": "Na+, K+, Ca2+",
+          "expression": [
+            "area_postrema",
+            "nts",
+            "hippocampus",
+            "amygdala"
+          ],
+          "function": "Fast excitatory transmission, emesis trigger",
+          "clinical": "Ondansetron (antagonist) for chemotherapy-induced nausea"
+        },
+        {
+          "id": "5-HT4",
+          "gene": "HTR4",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "expression": [
+            "hippocampus",
+            "striatum",
+            "GI_tract"
+          ],
+          "function": "Memory facilitation, GI motility",
+          "clinical": "Prucalopride (agonist) for constipation"
+        },
+        {
+          "id": "5-HT6",
+          "gene": "HTR6",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "expression": [
+            "striatum",
+            "hippocampus",
+            "cortex"
+          ],
+          "function": "Cognition, memory",
+          "clinical": "Investigational target for cognitive enhancement in Alzheimer's"
+        },
+        {
+          "id": "5-HT7",
+          "gene": "HTR7",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "expression": [
+            "hypothalamus",
+            "thalamus",
+            "hippocampus"
+          ],
+          "function": "Circadian rhythm regulation, thermoregulation, mood",
+          "clinical": "Involved in antidepressant action of some atypicals (lurasidone)"
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Iron (Fe2+)",
+          "role": "Prosthetic group for TPH2",
+          "deficiency_effect": "Reduced 5-HT synthesis → mood disturbance, sleep disruption"
+        },
+        {
+          "cofactor": "BH4 (Tetrahydrobiopterin)",
+          "role": "Cofactor for TPH2",
+          "deficiency_effect": "Combined DA/5-HT/NE deficiency"
+        },
+        {
+          "cofactor": "Vitamin B6 (PLP)",
+          "role": "Cofactor for AADC",
+          "deficiency_effect": "Impaired 5-HT and DA synthesis"
+        },
+        {
+          "cofactor": "Tryptophan",
+          "role": "Essential amino acid precursor (dietary only)",
+          "deficiency_effect": "Acute tryptophan depletion → transient mood lowering in vulnerable individuals"
+        },
+        {
+          "cofactor": "Folate (B9) / B12",
+          "role": "BH4 regeneration via DHFR pathway; SAM cycle",
+          "deficiency_effect": "Impaired BH4 recycling → reduced monoamine synthesis"
+        }
+      ],
+      "primary_qif_bands": [
+        "N2",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "raphe_nuclei",
+        "hippocampus",
+        "pfc",
+        "amygdala",
+        "hypothalamus"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F32.x",
+          "name": "Major depression",
+          "mechanism": "Reduced 5-HT signaling (monoamine hypothesis component)"
+        },
+        {
+          "code": "F41.1",
+          "name": "Generalized anxiety disorder",
+          "mechanism": "5-HT1A hypofunction in limbic circuits"
+        },
+        {
+          "code": "F42.x",
+          "name": "OCD",
+          "mechanism": "Serotonergic dysfunction in CSTC loop; responds to SSRIs"
+        },
+        {
+          "code": "F43.10",
+          "name": "PTSD",
+          "mechanism": "5-HT dysregulation in amygdala-PFC circuit"
+        },
+        {
+          "code": "F50.x",
+          "name": "Eating disorders",
+          "mechanism": "5-HT2C and 5-HT1A in hypothalamic appetite circuits"
+        }
+      ],
+      "bci_relevance": "MEDIUM — Raphe nuclei are deep structures, not directly accessible by non-invasive BCI. However, cortical 5-HT effects (via 5-HT2A on PFC pyramidal neurons) are measurable via EEG changes.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "norepinephrine",
+      "name": "Norepinephrine",
+      "abbreviation": "NE",
+      "chemical_class": "catecholamine",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "Dopamine",
+          "product": "Norepinephrine",
+          "enzyme": "Dopamine Beta-Hydroxylase",
+          "enzyme_gene": "DBH",
+          "cofactors": [
+            "Ascorbic acid (vitamin C)",
+            "Cu2+ (copper)",
+            "O2"
+          ],
+          "notes": "Occurs inside synaptic vesicles (not cytoplasm). DBH is a copper-containing enzyme."
+        }
+      ],
+      "precursor_pathway": "Full chain: L-Phe → L-Tyr (PAH, BH4+Fe) → L-DOPA (TH, BH4+Fe) → DA (DDC, B6) → NE (DBH, Cu+VitC)",
+      "degradation": [
+        {
+          "enzyme": "Monoamine Oxidase A",
+          "enzyme_gene": "MAOA",
+          "product": "DHPG (dihydroxyphenylglycol)",
+          "cofactors": [
+            "FAD"
+          ]
+        },
+        {
+          "enzyme": "Catechol-O-Methyltransferase",
+          "enzyme_gene": "COMT",
+          "product": "Normetanephrine",
+          "cofactors": [
+            "SAM",
+            "Mg2+"
+          ]
+        },
+        {
+          "final_metabolite": "MHPG (3-methoxy-4-hydroxyphenylglycol) → VMA (vanillylmandelic acid)"
+        }
+      ],
+      "transporter": {
+        "name": "Norepinephrine Transporter",
+        "gene": "SLC6A2",
+        "alias": "NET",
+        "mechanism": "Na+/Cl- dependent reuptake",
+        "primary_regions": [
+          "locus_coeruleus",
+          "pfc",
+          "hippocampus"
+        ],
+        "pharmacology": [
+          "SNRIs (venlafaxine, duloxetine)",
+          "Atomoxetine (selective NRI)",
+          "TCAs (imipramine, desipramine)"
+        ],
+        "notes": "NET also clears dopamine in PFC (where DAT density is low)"
+      },
+      "vesicular_transporter": {
+        "name": "Vesicular Monoamine Transporter 2",
+        "gene": "SLC18A2",
+        "alias": "VMAT2"
+      },
+      "receptors": [
+        {
+          "id": "alpha-1",
+          "genes": [
+            "ADRA1A",
+            "ADRA1B",
+            "ADRA1D"
+          ],
+          "subtypes": [
+            "α1A",
+            "α1B",
+            "α1D"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "signaling": "PLC → IP3 + DAG → Ca2+ release",
+          "function": "Vasoconstriction, arousal, PFC modulation at high NE",
+          "clinical": "Prazosin (antagonist) for PTSD nightmares"
+        },
+        {
+          "id": "alpha-2",
+          "genes": [
+            "ADRA2A",
+            "ADRA2B",
+            "ADRA2C"
+          ],
+          "subtypes": [
+            "α2A",
+            "α2B",
+            "α2C"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "signaling": "Decreases cAMP, opens K+ channels, reduces Ca2+ entry",
+          "function": "Presynaptic autoreceptor (reduces NE release); postsynaptic in PFC enhances working memory",
+          "clinical": "Clonidine, guanfacine (α2A agonists) for ADHD, PTSD, hypertension"
+        },
+        {
+          "id": "beta-1",
+          "gene": "ADRB1",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "signaling": "Increases cAMP",
+          "expression": [
+            "heart",
+            "cortex",
+            "hippocampus"
+          ],
+          "function": "Heart rate increase, memory consolidation (amygdala-dependent)",
+          "clinical": "Propranolol (antagonist) blocks emotional memory reconsolidation"
+        },
+        {
+          "id": "beta-2",
+          "gene": "ADRB2",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "expression": [
+            "lung",
+            "cerebellum",
+            "astrocytes"
+          ],
+          "function": "Bronchodilation, glycogenolysis in astrocytes",
+          "clinical": "Salbutamol (agonist) for asthma"
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Copper (Cu2+)",
+          "role": "Essential metal for DBH enzyme",
+          "deficiency_effect": "Menkes disease: copper deficiency → NE synthesis failure → neurodegeneration"
+        },
+        {
+          "cofactor": "Vitamin C (ascorbic acid)",
+          "role": "Electron donor for DBH",
+          "deficiency_effect": "Impaired NE synthesis (scurvy neuropsychiatric symptoms)"
+        },
+        {
+          "cofactor": "Iron (Fe2+)",
+          "role": "Required for upstream TH step",
+          "deficiency_effect": "Reduced catecholamine synthesis chain"
+        },
+        {
+          "cofactor": "BH4",
+          "role": "Required for upstream TH step",
+          "deficiency_effect": "Combined catecholamine deficiency"
+        },
+        {
+          "cofactor": "Vitamin B6",
+          "role": "Required for upstream AADC step",
+          "deficiency_effect": "Impaired DA→NE precursor conversion"
+        }
+      ],
+      "primary_qif_bands": [
+        "N2",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "locus_coeruleus",
+        "pfc",
+        "hippocampus",
+        "amygdala",
+        "hypothalamus"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F32.x",
+          "name": "Major depression",
+          "mechanism": "NE hypofunction (fatigue, psychomotor retardation component)"
+        },
+        {
+          "code": "F43.10",
+          "name": "PTSD",
+          "mechanism": "LC hyperactivation → NE excess → hyperarousal, nightmares"
+        },
+        {
+          "code": "F90.x",
+          "name": "ADHD",
+          "mechanism": "NE hypofunction in PFC → inattention"
+        },
+        {
+          "code": "F40.10",
+          "name": "Social anxiety",
+          "mechanism": "Excessive NE-mediated sympathetic activation"
+        }
+      ],
+      "bci_relevance": "MEDIUM — LC is deep brainstem, not directly accessible. But LC-NE system modulates cortical arousal detectable by EEG (P300 amplitude, pupil-linked arousal).",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "acetylcholine",
+      "name": "Acetylcholine",
+      "abbreviation": "ACh",
+      "chemical_class": "acetylcholine",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "Choline + Acetyl-CoA",
+          "product": "Acetylcholine",
+          "enzyme": "Choline Acetyltransferase",
+          "enzyme_gene": "CHAT",
+          "cofactors": [],
+          "notes": "Choline from diet (lecithin/phosphatidylcholine) or recycled from ACh breakdown. Acetyl-CoA from mitochondrial metabolism (glucose → pyruvate → Acetyl-CoA). Choline uptake via CHT1 (SLC5A7) is rate-limiting."
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "Acetylcholinesterase",
+          "enzyme_gene": "ACHE",
+          "product": "Choline + Acetate",
+          "notes": "Extremely fast enzyme — hydrolyzes ACh in <1ms. Present at all cholinergic synapses."
+        },
+        {
+          "enzyme": "Butyrylcholinesterase",
+          "enzyme_gene": "BCHE",
+          "product": "Choline + Acetate",
+          "notes": "Plasma/glial cholinesterase. Backup for AChE."
+        }
+      ],
+      "transporter": {
+        "name": "High-Affinity Choline Transporter",
+        "gene": "SLC5A7",
+        "alias": "CHT1",
+        "mechanism": "Na+-dependent choline reuptake (not ACh reuptake — ACh is degraded extracellularly)",
+        "notes": "Unlike monoamines, ACh has no reuptake transporter. Instead, AChE degrades it and choline is recycled."
+      },
+      "vesicular_transporter": {
+        "name": "Vesicular Acetylcholine Transporter",
+        "gene": "SLC18A3",
+        "alias": "VAChT"
+      },
+      "receptors": [
+        {
+          "id": "nAChR_alpha4beta2",
+          "genes": [
+            "CHRNA4",
+            "CHRNB2"
+          ],
+          "type": "ionotropic",
+          "ion_permeability": "Na+, K+, Ca2+",
+          "expression": [
+            "thalamus",
+            "cortex",
+            "hippocampus",
+            "striatum"
+          ],
+          "function": "Attention, arousal, cognitive enhancement",
+          "clinical": "Most abundant brain nAChR. Target of nicotine. Mutations cause autosomal dominant nocturnal frontal lobe epilepsy (ADNFLE)."
+        },
+        {
+          "id": "nAChR_alpha7",
+          "gene": "CHRNA7",
+          "type": "ionotropic",
+          "ion_permeability": "Na+, K+, Ca2+ (high Ca2+ permeability)",
+          "expression": [
+            "hippocampus",
+            "pfc",
+            "vta"
+          ],
+          "function": "Synaptic plasticity, anti-inflammatory (cholinergic anti-inflammatory pathway), working memory",
+          "clinical": "Reduced in schizophrenia. Target for cognitive enhancement research."
+        },
+        {
+          "id": "M1",
+          "gene": "CHRM1",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "cortex",
+            "hippocampus",
+            "striatum"
+          ],
+          "function": "Memory, learning, cortical excitability",
+          "clinical": "Key target for Alzheimer's cognitive enhancement. Xanomeline (M1/M4 agonist) in clinical trials."
+        },
+        {
+          "id": "M2",
+          "gene": "CHRM2",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "heart",
+            "brainstem",
+            "cortex (presynaptic)"
+          ],
+          "function": "Presynaptic autoreceptor, cardiac deceleration",
+          "clinical": "Vagal tone mediator. Atropine (antagonist) blocks cardiac M2."
+        },
+        {
+          "id": "M3",
+          "gene": "CHRM3",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "smooth_muscle",
+            "glands",
+            "hypothalamus"
+          ],
+          "function": "Smooth muscle contraction, glandular secretion",
+          "clinical": "Anticholinergic side effects of antipsychotics (dry mouth, constipation)"
+        },
+        {
+          "id": "M4",
+          "gene": "CHRM4",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "striatum",
+            "cortex"
+          ],
+          "function": "Motor inhibition, DA modulation in striatum",
+          "clinical": "M4 PAMs (positive allosteric modulators) as novel antipsychotics (reduce DA without D2 blockade)"
+        },
+        {
+          "id": "M5",
+          "gene": "CHRM5",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "vta",
+            "substantia_nigra",
+            "cerebral_vasculature"
+          ],
+          "function": "Cerebral vasodilation, DA release modulation in VTA",
+          "clinical": "Least abundant mAChR. Role in reward/addiction via VTA DA modulation."
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Choline (dietary)",
+          "role": "Direct precursor — essential nutrient",
+          "deficiency_effect": "Impaired ACh synthesis, fatty liver, neural tube defects in pregnancy"
+        },
+        {
+          "cofactor": "Acetyl-CoA",
+          "role": "Acetyl group donor from mitochondrial metabolism",
+          "deficiency_effect": "Glucose deprivation → reduced Acetyl-CoA → impaired ACh synthesis (brain vulnerability to hypoglycemia)"
+        },
+        {
+          "cofactor": "Thiamine (vitamin B1)",
+          "role": "Required for pyruvate dehydrogenase → Acetyl-CoA production",
+          "deficiency_effect": "Wernicke-Korsakoff syndrome: B1 deficiency → reduced ACh → memory impairment"
+        }
+      ],
+      "primary_qif_bands": [
+        "N2",
+        "N4",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "basal_forebrain",
+        "pedunculopontine_nucleus",
+        "hippocampus",
+        "cortex",
+        "striatum"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "G30.x",
+          "name": "Alzheimer's disease",
+          "mechanism": "Basal forebrain cholinergic neuron degeneration (nucleus basalis of Meynert)"
+        },
+        {
+          "code": "G20",
+          "name": "Parkinson's dementia",
+          "mechanism": "Cholinergic loss compounds DA loss → cognitive decline"
+        },
+        {
+          "code": "F05",
+          "name": "Delirium",
+          "mechanism": "Acute cholinergic deficit (anticholinergic drugs are #1 cause)"
+        },
+        {
+          "code": "F17.x",
+          "name": "Nicotine use disorder",
+          "mechanism": "nAChR (α4β2) desensitization and upregulation"
+        }
+      ],
+      "bci_relevance": "MEDIUM — Cholinergic modulation affects EEG oscillations (theta in hippocampus, gamma in cortex). DBS in nucleus basalis of Meynert explored for Alzheimer's.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "glutamate",
+      "name": "Glutamate",
+      "abbreviation": "Glu",
+      "chemical_class": "amino_acid",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "Glutamine",
+          "product": "Glutamate",
+          "enzyme": "Glutaminase",
+          "enzyme_gene": "GLS / GLS2",
+          "cofactors": [
+            "Phosphate"
+          ],
+          "notes": "Primary synthesis route in neurons. Glutamine is supplied by astrocytes (glutamate-glutamine cycle)."
+        },
+        {
+          "step": 2,
+          "substrate": "Alpha-ketoglutarate (from Krebs cycle)",
+          "product": "Glutamate",
+          "enzyme": "Glutamate dehydrogenase / transaminases",
+          "enzyme_gene": "GLUD1 / various aminotransferases",
+          "cofactors": [
+            "NAD+/NADP+",
+            "PLP (B6 for transaminases)"
+          ],
+          "notes": "Links excitatory neurotransmission to energy metabolism"
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "Glutamine Synthetase",
+          "enzyme_gene": "GLUL",
+          "product": "Glutamine",
+          "location": "Astrocytes only",
+          "cofactors": [
+            "ATP",
+            "Mg2+",
+            "Mn2+"
+          ],
+          "notes": "Glutamate-glutamine cycle: neurons release Glu → astrocytes convert to Gln → Gln shuttled back to neurons"
+        }
+      ],
+      "transporter": {
+        "name": "Excitatory Amino Acid Transporters",
+        "genes": [
+          "SLC1A2 (EAAT2/GLT-1)",
+          "SLC1A3 (EAAT1/GLAST)",
+          "SLC1A1 (EAAT3)"
+        ],
+        "alias": "EAATs",
+        "mechanism": "Na+/K+/H+ dependent uptake (primarily into astrocytes)",
+        "notes": "EAAT2/GLT-1 handles ~90% of glutamate clearance. Astrocytic. Loss of EAAT2 → excitotoxicity."
+      },
+      "vesicular_transporter": {
+        "name": "Vesicular Glutamate Transporters",
+        "genes": [
+          "SLC17A7 (VGLUT1)",
+          "SLC17A6 (VGLUT2)",
+          "SLC17A8 (VGLUT3)"
+        ],
+        "notes": "VGLUT1: cortex, hippocampus. VGLUT2: thalamus, brainstem. VGLUT3: serotonergic/cholinergic neurons (co-release)."
+      },
+      "receptors": [
+        {
+          "id": "NMDA",
+          "genes": [
+            "GRIN1 (NR1, obligatory)",
+            "GRIN2A (NR2A)",
+            "GRIN2B (NR2B)",
+            "GRIN2C (NR2C)",
+            "GRIN2D (NR2D)",
+            "GRIN3A (NR3A)",
+            "GRIN3B (NR3B)"
+          ],
+          "type": "ionotropic",
+          "ion_permeability": "Na+, K+, Ca2+ (high Ca2+)",
+          "gating": "Voltage-dependent Mg2+ block at resting potential; requires simultaneous glutamate + glycine/D-serine co-agonist binding AND membrane depolarization",
+          "expression": [
+            "hippocampus",
+            "cortex",
+            "thalamus",
+            "ubiquitous"
+          ],
+          "function": "Synaptic plasticity (LTP/LTD), memory formation, coincidence detection",
+          "modulatory_sites": [
+            "Glycine/D-serine (co-agonist, GRIN1)",
+            "Zn2+ (inhibitory, GRIN2A)",
+            "Polyamines (GRIN2B)",
+            "Mg2+ (voltage-dependent block)",
+            "Ifenprodil site (GRIN2B selective)"
+          ],
+          "clinical": "Anti-NMDAR encephalitis (autoimmune). Ketamine (channel blocker) for treatment-resistant depression. Memantine for Alzheimer's. Phencyclidine (PCP) causes schizophrenia-like psychosis via NMDA blockade.",
+          "dependencies": [
+            "Mg2+ (voltage-dependent block)",
+            "Zn2+ (modulatory)",
+            "Glycine or D-serine (obligatory co-agonist)"
+          ]
+        },
+        {
+          "id": "AMPA",
+          "genes": [
+            "GRIA1 (GluA1)",
+            "GRIA2 (GluA2)",
+            "GRIA3 (GluA3)",
+            "GRIA4 (GluA4)"
+          ],
+          "type": "ionotropic",
+          "ion_permeability": "Na+, K+ (Ca2+ only if GluA2-lacking)",
+          "expression": [
+            "ubiquitous — all excitatory synapses"
+          ],
+          "function": "Fast excitatory transmission (milliseconds). AMPA receptor trafficking is the primary mechanism of LTP expression.",
+          "clinical": "Perampanel (antagonist) for epilepsy. AMPAkines investigated for cognitive enhancement.",
+          "notes": "GluA2 subunit contains Q/R editing (by ADAR2 enzyme) that makes the channel Ca2+-impermeable. Failure of GluA2 editing → excitotoxicity."
+        },
+        {
+          "id": "Kainate",
+          "genes": [
+            "GRIK1 (GluK1)",
+            "GRIK2 (GluK2)",
+            "GRIK3 (GluK3)",
+            "GRIK4 (GluK4)",
+            "GRIK5 (GluK5)"
+          ],
+          "type": "ionotropic",
+          "ion_permeability": "Na+, K+",
+          "expression": [
+            "hippocampus (CA3 mossy fibers)",
+            "DRG",
+            "cortex"
+          ],
+          "function": "Presynaptic modulation of glutamate and GABA release, hippocampal mossy fiber transmission",
+          "clinical": "GluK2 mutations linked to intellectual disability. Kainate injection causes temporal lobe epilepsy model."
+        },
+        {
+          "id": "mGluR_Group_I",
+          "genes": [
+            "GRM1 (mGluR1)",
+            "GRM5 (mGluR5)"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "function": "Postsynaptic excitation, synaptic plasticity, LTD at cerebellar parallel fiber synapses",
+          "clinical": "mGluR5 NAMs investigated for Fragile X syndrome. mGluR5 implicated in addiction (glutamatergic drive)."
+        },
+        {
+          "id": "mGluR_Group_II",
+          "genes": [
+            "GRM2 (mGluR2)",
+            "GRM3 (mGluR3)"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "function": "Presynaptic inhibition of glutamate release (autoreceptor)",
+          "clinical": "mGluR2/3 agonists investigated for schizophrenia (reduce excess glutamate release)"
+        },
+        {
+          "id": "mGluR_Group_III",
+          "genes": [
+            "GRM4 (mGluR4)",
+            "GRM6 (mGluR6)",
+            "GRM7 (mGluR7)",
+            "GRM8 (mGluR8)"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "function": "Presynaptic inhibition. mGluR6 is unique — ON bipolar cells in retina (inverts glutamate signal for light response).",
+          "clinical": "mGluR4 PAMs investigated for Parkinson's (reduce STN overactivity)"
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Vitamin B6 (PLP)",
+          "role": "Cofactor for transaminases in Glu synthesis and for GAD (Glu → GABA)",
+          "deficiency_effect": "Altered Glu/GABA balance"
+        },
+        {
+          "cofactor": "Magnesium (Mg2+)",
+          "role": "NMDA receptor voltage-dependent block; glutamine synthetase cofactor",
+          "deficiency_effect": "NMDA hyperactivation → excitotoxicity, seizures"
+        },
+        {
+          "cofactor": "Zinc (Zn2+)",
+          "role": "NMDA receptor modulation (inhibits GRIN2A-containing NMDARs)",
+          "deficiency_effect": "Altered NMDA function, potential excitotoxicity"
+        },
+        {
+          "cofactor": "Manganese (Mn2+)",
+          "role": "Cofactor for glutamine synthetase",
+          "deficiency_effect": "Impaired glutamate recycling in astrocytes"
+        }
+      ],
+      "primary_qif_bands": [
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "everywhere — glutamate is the brain's primary excitatory neurotransmitter"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "G40.x",
+          "name": "Epilepsy",
+          "mechanism": "Excitatory/inhibitory imbalance favoring glutamate"
+        },
+        {
+          "code": "F20.x",
+          "name": "Schizophrenia",
+          "mechanism": "NMDA receptor hypofunction hypothesis (Olney & Farber 1995)"
+        },
+        {
+          "code": "G30.x",
+          "name": "Alzheimer's disease",
+          "mechanism": "Glutamate excitotoxicity (memantine targets this)"
+        },
+        {
+          "code": "G12.21",
+          "name": "ALS",
+          "mechanism": "EAAT2 loss → motor neuron excitotoxicity (riluzole reduces glutamate release)"
+        }
+      ],
+      "bci_relevance": "HIGH — Glutamatergic activity underlies all EEG-recordable cortical potentials. ERPs, SSVEPs, motor imagery — all are glutamatergic oscillations. Direct electrical stimulation activates glutamatergic circuits.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "gaba",
+      "name": "Gamma-Aminobutyric Acid",
+      "abbreviation": "GABA",
+      "chemical_class": "amino_acid",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "Glutamate",
+          "product": "GABA",
+          "enzyme": "Glutamic Acid Decarboxylase",
+          "enzyme_gene": "GAD1 (GAD67) / GAD2 (GAD65)",
+          "cofactors": [
+            "PLP (pyridoxal phosphate / vitamin B6)"
+          ],
+          "notes": "GAD67 (cytoplasmic, constitutive) and GAD65 (synaptic vesicle-associated, activity-dependent). GAD67 synthesizes ~90% of brain GABA."
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "GABA Transaminase",
+          "enzyme_gene": "ABAT",
+          "product": "Succinic semialdehyde → Succinate (enters Krebs cycle)",
+          "cofactors": [
+            "PLP (vitamin B6)"
+          ],
+          "notes": "GABA shunt: GABA → SSA → Succinate → Krebs cycle. Links inhibition to energy metabolism."
+        }
+      ],
+      "transporter": {
+        "name": "GABA Transporters",
+        "genes": [
+          "SLC6A1 (GAT-1)",
+          "SLC6A13 (GAT-2)",
+          "SLC6A11 (GAT-3)",
+          "SLC6A12 (BGT-1)"
+        ],
+        "alias": "GATs",
+        "notes": "GAT-1 is primary neuronal/glial transporter. Tiagabine (GAT-1 inhibitor) is an antiepileptic."
+      },
+      "vesicular_transporter": {
+        "name": "Vesicular GABA Transporter",
+        "gene": "SLC32A1",
+        "alias": "VGAT/VIAAT",
+        "notes": "Also transports glycine — hence called Vesicular Inhibitory Amino Acid Transporter"
+      },
+      "receptors": [
+        {
+          "id": "GABA-A",
+          "genes": [
+            "GABRA1-6 (α1-6)",
+            "GABRB1-3 (β1-3)",
+            "GABRG1-3 (γ1-3)",
+            "GABRD (δ)",
+            "GABRE (ε)",
+            "GABRP (π)",
+            "GABRQ (θ)",
+            "GABRR1-3 (ρ1-3)"
+          ],
+          "type": "ionotropic",
+          "ion_permeability": "Cl- (inhibitory in adults; excitatory in neonates due to high intracellular Cl-)",
+          "subunit_composition": "Most common: α1β2γ2 (60% of brain GABA-A receptors)",
+          "modulatory_sites": {
+            "benzodiazepine": "α/γ interface. Requires γ2 subunit. α1 = sedation, α2 = anxiolysis, α3 = muscle relaxation, α5 = memory",
+            "barbiturate": "β subunit transmembrane domain. Prolongs Cl- channel opening",
+            "neurosteroid": "δ-containing extrasynaptic receptors. Allopregnanolone, THDOC",
+            "ethanol": "Low-dose: δ-containing extrasynaptic receptors. High-dose: synaptic receptors",
+            "picrotoxin": "Channel blocker (convulsant)",
+            "zinc": "Inhibitory modulation at some subtypes"
+          },
+          "expression": [
+            "ubiquitous — primary fast inhibition throughout brain"
+          ],
+          "function": "Fast inhibitory transmission (phasic: synaptic α1βγ2; tonic: extrasynaptic α4/6βδ)",
+          "clinical": "Benzodiazepines (anxiety, seizures, insomnia), barbiturates, propofol (anesthesia), brexanolone (PPD — neurosteroid at δ-containing). GABRA1 mutations → epilepsy."
+        },
+        {
+          "id": "GABA-B",
+          "genes": [
+            "GABBR1",
+            "GABBR2"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "signaling": "Decreases cAMP, activates GIRK K+ channels (postsynaptic), inhibits Ca2+ channels (presynaptic)",
+          "expression": [
+            "cortex",
+            "thalamus",
+            "hippocampus",
+            "cerebellum"
+          ],
+          "function": "Slow inhibition, presynaptic inhibition of transmitter release, thalamic oscillation gating",
+          "clinical": "Baclofen (agonist) for spasticity. GABA-B dysfunction in absence epilepsy (thalamic T-type Ca2+ channel interaction)."
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Vitamin B6 (PLP)",
+          "role": "Obligatory cofactor for GAD (Glu → GABA) AND GABA-T (GABA degradation)",
+          "deficiency_effect": "CRITICAL — B6 deficiency causes seizures in neonates (pyridoxine-dependent epilepsy). Adults: anxiety, irritability, seizure susceptibility"
+        },
+        {
+          "cofactor": "Zinc (Zn2+)",
+          "role": "Modulates GABA-A receptor function",
+          "deficiency_effect": "Altered GABAergic tone"
+        }
+      ],
+      "primary_qif_bands": [
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "everywhere — GABA is the brain's primary inhibitory neurotransmitter (~20% of cortical neurons are GABAergic interneurons)"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "G40.x",
+          "name": "Epilepsy",
+          "mechanism": "GABA deficit → excitatory/inhibitory imbalance"
+        },
+        {
+          "code": "F41.1",
+          "name": "Generalized anxiety",
+          "mechanism": "Reduced GABAergic tone in amygdala and cortex"
+        },
+        {
+          "code": "F10.x",
+          "name": "Alcohol use disorder",
+          "mechanism": "Ethanol potentiates GABA-A (tolerance → withdrawal seizures from GABA downregulation)"
+        },
+        {
+          "code": "F51.0",
+          "name": "Insomnia",
+          "mechanism": "Insufficient GABAergic sleep promotion"
+        }
+      ],
+      "bci_relevance": "HIGH — GABAergic interneurons generate cortical oscillations (gamma band = PV+ interneurons, theta = SOM+ interneurons). All EEG rhythms depend on GABA-mediated synchronization. tDCS modulates GABA levels (measurable via MRS).",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "glycine",
+      "name": "Glycine",
+      "abbreviation": "Gly",
+      "chemical_class": "amino_acid",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "Serine",
+          "product": "Glycine",
+          "enzyme": "Serine Hydroxymethyltransferase",
+          "enzyme_gene": "SHMT1 / SHMT2",
+          "cofactors": [
+            "THF (tetrahydrofolate / folate)",
+            "PLP (vitamin B6)"
+          ],
+          "notes": "Reversible reaction. Also produced from threonine and glyoxylate."
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "Glycine Cleavage System",
+          "enzyme_gene": "GLDC, AMT, GCSH, DLD",
+          "notes": "Mitochondrial complex. Deficiency causes nonketotic hyperglycinemia (glycine encephalopathy)."
+        }
+      ],
+      "transporter": {
+        "name": "Glycine Transporters",
+        "genes": [
+          "SLC6A9 (GlyT1)",
+          "SLC6A5 (GlyT2)"
+        ],
+        "notes": "GlyT1: astrocytic, regulates glycine at NMDA receptor glycine site. GlyT2: neuronal, recycles glycine at inhibitory synapses. GlyT1 inhibitors (sarcosine) investigated as NMDA enhancers for schizophrenia."
+      },
+      "receptors": [
+        {
+          "id": "GlyR",
+          "genes": [
+            "GLRA1 (α1)",
+            "GLRA2 (α2)",
+            "GLRA3 (α3)",
+            "GLRA4 (α4, pseudogene in humans)",
+            "GLRB (β)"
+          ],
+          "type": "ionotropic",
+          "ion_permeability": "Cl- (inhibitory)",
+          "expression": [
+            "spinal_cord",
+            "brainstem",
+            "retina"
+          ],
+          "function": "Fast inhibition in spinal cord and brainstem (analogous to GABA-A in brain)",
+          "clinical": "Strychnine (antagonist) → convulsions. GLRA1 mutations → hyperekplexia (startle disease). Autoimmune anti-GlyR encephalitis."
+        },
+        {
+          "id": "NMDA_glycine_site",
+          "role": "Obligatory co-agonist at NMDA receptor GRIN1 subunit",
+          "notes": "Glycine (or D-serine from astrocytes) must bind for NMDA channel to open. This is NOT the inhibitory glycine receptor."
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Folate (B9/THF)",
+          "role": "Cofactor for SHMT (serine → glycine)",
+          "deficiency_effect": "Impaired glycine/one-carbon metabolism"
+        },
+        {
+          "cofactor": "Vitamin B6 (PLP)",
+          "role": "Cofactor for SHMT",
+          "deficiency_effect": "Altered glycine/serine interconversion"
+        }
+      ],
+      "primary_qif_bands": [
+        "N1",
+        "N2"
+      ],
+      "primary_regions": [
+        "spinal_cord",
+        "brainstem",
+        "retina"
+      ],
+      "dsm_conditions": [],
+      "bci_relevance": "LOW — Primarily spinal/brainstem. Relevant for spinal cord BCI interfaces.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "histamine",
+      "name": "Histamine",
+      "abbreviation": "HA",
+      "chemical_class": "monoamine",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "L-Histidine",
+          "product": "Histamine",
+          "enzyme": "Histidine Decarboxylase",
+          "enzyme_gene": "HDC",
+          "cofactors": [
+            "PLP (pyridoxal phosphate / vitamin B6)"
+          ],
+          "notes": "Histidine is an essential amino acid. All brain histamine neurons are in the tuberomammillary nucleus (TMN) of posterior hypothalamus."
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "Histamine N-Methyltransferase",
+          "enzyme_gene": "HNMT",
+          "product": "tele-Methylhistamine",
+          "cofactors": [
+            "SAM (S-adenosylmethionine)"
+          ],
+          "notes": "Primary CNS degradation route (not MAO). Then MAO-B converts tele-methylhistamine to tele-methylimidazoleacetic acid."
+        }
+      ],
+      "transporter": {
+        "name": "No specific reuptake transporter identified",
+        "notes": "Histamine is primarily cleared by HNMT (enzymatic degradation), not reuptake. OCT3 (SLC22A3) may contribute to non-specific uptake."
+      },
+      "receptors": [
+        {
+          "id": "H1",
+          "gene": "HRH1",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "cortex",
+            "hippocampus",
+            "thalamus",
+            "hypothalamus"
+          ],
+          "function": "Wakefulness, cortical arousal, allergic response",
+          "clinical": "First-gen antihistamines (diphenhydramine) cause drowsiness by blocking brain H1. Second-gen (loratadine) don't cross BBB."
+        },
+        {
+          "id": "H2",
+          "gene": "HRH2",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "expression": [
+            "hippocampus",
+            "amygdala",
+            "basal_ganglia",
+            "stomach"
+          ],
+          "function": "Gastric acid secretion, synaptic plasticity",
+          "clinical": "Ranitidine/famotidine (H2 blockers) for GERD"
+        },
+        {
+          "id": "H3",
+          "gene": "HRH3",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "striatum",
+            "cortex",
+            "hippocampus",
+            "TMN"
+          ],
+          "function": "Presynaptic autoreceptor (inhibits histamine release) AND heteroreceptor (inhibits other NT release: ACh, DA, 5-HT, NE, Glu)",
+          "clinical": "Pitolisant (H3 inverse agonist) for narcolepsy — increases histamine release → wakefulness"
+        },
+        {
+          "id": "H4",
+          "gene": "HRH4",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "immune_cells",
+            "minimal brain expression"
+          ],
+          "function": "Immune modulation, chemotaxis",
+          "clinical": "Primarily peripheral immune function"
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "Vitamin B6 (PLP)",
+          "role": "Cofactor for HDC",
+          "deficiency_effect": "Impaired histamine synthesis → drowsiness, altered circadian regulation"
+        }
+      ],
+      "primary_qif_bands": [
+        "N4"
+      ],
+      "primary_regions": [
+        "tuberomammillary_nucleus",
+        "hypothalamus"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "G47.4",
+          "name": "Narcolepsy",
+          "mechanism": "Reduced histaminergic wakefulness drive (compounds orexin loss)"
+        },
+        {
+          "code": "F51.0",
+          "name": "Insomnia",
+          "mechanism": "Excessive histaminergic arousal (suvorexant works on orexin, not histamine)"
+        }
+      ],
+      "bci_relevance": "LOW — TMN is deep hypothalamic. Histamine's effect on cortical arousal affects EEG state (wake vs sleep signatures).",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "endorphins",
+      "name": "Endorphins / Enkephalins / Dynorphins",
+      "abbreviation": "Endogenous Opioids",
+      "chemical_class": "peptide",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "POMC (Pro-opiomelanocortin) gene product",
+          "product": "β-endorphin, ACTH, α-MSH",
+          "enzyme": "Prohormone Convertases",
+          "enzyme_gene": "PCSK1 (PC1), PCSK2 (PC2)",
+          "notes": "POMC → different products depending on tissue: pituitary anterior lobe (ACTH + β-lipotropin), intermediate lobe (α-MSH + β-endorphin), hypothalamus (β-endorphin)"
+        },
+        {
+          "step": 2,
+          "substrate": "PENK (Proenkephalin) gene product",
+          "product": "Met-enkephalin, Leu-enkephalin",
+          "enzyme": "Prohormone Convertases"
+        },
+        {
+          "step": 3,
+          "substrate": "PDYN (Prodynorphin) gene product",
+          "product": "Dynorphin A, Dynorphin B, α-neoendorphin",
+          "enzyme": "Prohormone Convertases"
+        }
+      ],
+      "degradation": [
+        {
+          "enzyme": "Enkephalinase (Neprilysin)",
+          "enzyme_gene": "MME",
+          "notes": "Also: aminopeptidase N (ANPEP), dipeptidyl peptidase III"
+        }
+      ],
+      "receptors": [
+        {
+          "id": "mu",
+          "gene": "OPRM1",
+          "alias": "MOR",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "preferred_ligand": "β-endorphin > enkephalins > dynorphin",
+          "expression": [
+            "PAG",
+            "nucleus_accumbens",
+            "thalamus",
+            "spinal_dorsal_horn",
+            "locus_coeruleus"
+          ],
+          "function": "Analgesia, euphoria, reward, respiratory depression",
+          "clinical": "Target of morphine, fentanyl, heroin. OPRM1 A118G polymorphism affects opioid sensitivity."
+        },
+        {
+          "id": "delta",
+          "gene": "OPRD1",
+          "alias": "DOR",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "preferred_ligand": "Enkephalins > β-endorphin > dynorphin",
+          "expression": [
+            "cortex",
+            "amygdala",
+            "olfactory_areas",
+            "striatum"
+          ],
+          "function": "Analgesia (less potent than mu), anxiolysis, mood regulation",
+          "clinical": "Less abuse potential than mu agonists. Investigated for depression."
+        },
+        {
+          "id": "kappa",
+          "gene": "OPRK1",
+          "alias": "KOR",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "preferred_ligand": "Dynorphin >> enkephalins > β-endorphin",
+          "expression": [
+            "hypothalamus",
+            "PAG",
+            "striatum",
+            "substantia_nigra"
+          ],
+          "function": "Analgesia, dysphoria, stress response, anti-reward (opposes DA in NAcc)",
+          "clinical": "KOR activation causes dysphoria (salvinorin A, pentazocine). KOR antagonists investigated for depression and addiction."
+        },
+        {
+          "id": "nociceptin",
+          "gene": "OPRL1",
+          "alias": "NOP",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "preferred_ligand": "Nociceptin/Orphanin FQ (PNOC gene)",
+          "expression": [
+            "cortex",
+            "amygdala",
+            "hippocampus",
+            "hypothalamus"
+          ],
+          "function": "Anxiety modulation, pain modulation (complex — can be pro or anti-nociceptive), stress response",
+          "clinical": "Investigational target for anxiety and pain"
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "None specific",
+          "role": "Opioid peptides are gene-encoded and processed by prohormone convertases",
+          "deficiency_effect": "Not cofactor-dependent — regulated by gene expression and enzymatic processing"
+        }
+      ],
+      "primary_qif_bands": [
+        "N2",
+        "N4",
+        "N5",
+        "N6"
+      ],
+      "primary_regions": [
+        "PAG",
+        "nucleus_accumbens",
+        "hypothalamus",
+        "spinal_dorsal_horn",
+        "amygdala"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F11.x",
+          "name": "Opioid use disorder",
+          "mechanism": "Exogenous opioids hijack mu receptor reward signaling"
+        },
+        {
+          "code": "F32.x",
+          "name": "Major depression",
+          "mechanism": "Endogenous opioid system dysregulation (kappa system hyperactivation)"
+        }
+      ],
+      "bci_relevance": "LOW — Deep brainstem/subcortical. DBS of PAG used for intractable pain.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "substance_p",
+      "name": "Substance P",
+      "abbreviation": "SP",
+      "chemical_class": "peptide",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "TAC1 (Preprotachykinin A) gene product",
+          "product": "Substance P (11 amino acid peptide)",
+          "enzyme": "Prohormone Convertases"
+        }
+      ],
+      "receptors": [
+        {
+          "id": "NK1",
+          "gene": "TACR1",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "spinal_dorsal_horn",
+            "nucleus_accumbens",
+            "amygdala",
+            "PAG",
+            "area_postrema"
+          ],
+          "function": "Pain transmission (especially sustained/burning pain), emesis, neuroinflammation, anxiety",
+          "clinical": "Aprepitant (NK1 antagonist) for chemotherapy nausea. NK1 antagonists investigated for depression and PTSD."
+        }
+      ],
+      "primary_qif_bands": [
+        "N1",
+        "N2",
+        "N6"
+      ],
+      "primary_regions": [
+        "spinal_dorsal_horn",
+        "amygdala",
+        "nucleus_accumbens",
+        "brainstem"
+      ],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "orexin",
+      "name": "Orexin / Hypocretin",
+      "abbreviation": "OX",
+      "chemical_class": "peptide",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "HCRT (Prepro-hypocretin) gene product",
+          "product": "Orexin-A (OX-A / Hypocretin-1) and Orexin-B (OX-B / Hypocretin-2)",
+          "enzyme": "Prohormone Convertases",
+          "notes": "Produced ONLY by ~70,000 neurons in the lateral hypothalamus. Loss of these neurons causes narcolepsy type 1."
+        }
+      ],
+      "receptors": [
+        {
+          "id": "OX1R",
+          "gene": "HCRTR1",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "locus_coeruleus",
+            "raphe_nuclei",
+            "VTA"
+          ],
+          "function": "Wakefulness, arousal, reward"
+        },
+        {
+          "id": "OX2R",
+          "gene": "HCRTR2",
+          "type": "metabotropic",
+          "g_protein": "Gq/Gi",
+          "expression": [
+            "TMN",
+            "VTA",
+            "hypothalamus"
+          ],
+          "function": "Sleep/wake regulation (primary wakefulness maintainer)",
+          "clinical": "Suvorexant, lemborexant (dual OX1R/OX2R antagonists) for insomnia"
+        }
+      ],
+      "primary_qif_bands": [
+        "N4"
+      ],
+      "primary_regions": [
+        "lateral_hypothalamus"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "G47.4",
+          "name": "Narcolepsy type 1",
+          "mechanism": "Autoimmune destruction of orexin neurons (>90% loss). CSF orexin-A <110 pg/mL is diagnostic."
+        }
+      ],
+      "bci_relevance": "LOW — Deep hypothalamic. But orexin system modulates cortical arousal detectable by EEG.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "oxytocin",
+      "name": "Oxytocin",
+      "abbreviation": "OT",
+      "chemical_class": "peptide",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "OXT gene product (prepro-oxytocin)",
+          "product": "Oxytocin (9 amino acid cyclic peptide)",
+          "enzyme": "Prohormone Convertases",
+          "notes": "Synthesized in magnocellular neurons of PVN and SON of hypothalamus. Released from posterior pituitary (peripheral) AND from dendrites (central — volume transmission)."
+        }
+      ],
+      "receptors": [
+        {
+          "id": "OXTR",
+          "gene": "OXTR",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "amygdala",
+            "hippocampus",
+            "nucleus_accumbens",
+            "uterus",
+            "mammary"
+          ],
+          "function": "Social bonding, trust, maternal behavior, anxiolysis, uterine contraction",
+          "clinical": "Intranasal oxytocin investigated for autism, social anxiety, PTSD. Pitocin for labor induction."
+        }
+      ],
+      "primary_qif_bands": [
+        "N4",
+        "N6"
+      ],
+      "primary_regions": [
+        "PVN_hypothalamus",
+        "SON_hypothalamus",
+        "amygdala"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F84.0",
+          "name": "Autism spectrum disorder",
+          "mechanism": "Oxytocin system differences (research-based association, not causal claim)"
+        }
+      ],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "vasopressin",
+      "name": "Vasopressin (ADH)",
+      "abbreviation": "AVP",
+      "chemical_class": "peptide",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "AVP gene product (prepro-vasopressin)",
+          "product": "Arginine Vasopressin (9 amino acid cyclic peptide)",
+          "enzyme": "Prohormone Convertases",
+          "notes": "Synthesized in magnocellular (PVN, SON) and parvocellular (PVN) hypothalamic neurons. Released from posterior pituitary."
+        }
+      ],
+      "receptors": [
+        {
+          "id": "V1a",
+          "gene": "AVPR1A",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "liver",
+            "vascular_smooth_muscle",
+            "amygdala",
+            "hippocampus",
+            "lateral_septum"
+          ],
+          "function": "Vasoconstriction, aggression, pair bonding, social recognition",
+          "clinical": "V1a promoter polymorphism linked to pair-bonding behavior (prairie vole studies)"
+        },
+        {
+          "id": "V1b",
+          "gene": "AVPR1B",
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "expression": [
+            "anterior_pituitary",
+            "hippocampus",
+            "amygdala"
+          ],
+          "function": "ACTH release (HPA axis), stress response, social memory",
+          "clinical": "V1b antagonists investigated for stress-related disorders"
+        },
+        {
+          "id": "V2",
+          "gene": "AVPR2",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "expression": [
+            "kidney_collecting_duct"
+          ],
+          "function": "Water reabsorption (aquaporin-2 insertion)",
+          "clinical": "Desmopressin (V2 agonist) for diabetes insipidus and enuresis"
+        }
+      ],
+      "primary_qif_bands": [
+        "N4"
+      ],
+      "primary_regions": [
+        "PVN_hypothalamus",
+        "SON_hypothalamus",
+        "lateral_septum"
+      ],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "nitric_oxide",
+      "name": "Nitric Oxide",
+      "abbreviation": "NO",
+      "chemical_class": "gas",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "L-Arginine + O2",
+          "product": "Nitric Oxide + L-Citrulline",
+          "enzyme": "Nitric Oxide Synthase",
+          "enzyme_gene": "NOS1 (nNOS, neuronal) / NOS3 (eNOS, endothelial) / NOS2 (iNOS, inducible)",
+          "cofactors": [
+            "BH4 (tetrahydrobiopterin)",
+            "NADPH",
+            "FAD",
+            "FMN",
+            "Ca2+/Calmodulin",
+            "Heme (iron)"
+          ],
+          "notes": "nNOS activated by Ca2+ influx through NMDA receptors. NO is not stored in vesicles — synthesized on demand and diffuses freely through membranes."
+        }
+      ],
+      "degradation": [
+        {
+          "mechanism": "Spontaneous oxidation to NO2- and NO3-",
+          "half_life": "~1-5 seconds",
+          "notes": "Also reacts with superoxide (O2-) to form peroxynitrite (ONOO-) — toxic in excess"
+        }
+      ],
+      "receptors": [
+        {
+          "id": "sGC",
+          "gene": "GUCY1A1 / GUCY1B1",
+          "type": "Soluble guanylyl cyclase (intracellular, NOT membrane receptor)",
+          "signaling": "NO → activates sGC → GTP → cGMP → PKG activation",
+          "function": "Vasodilation, synaptic plasticity (retrograde messenger at glutamatergic synapses), LTP modulation",
+          "notes": "NO is a retrograde messenger — released from postsynaptic neuron, diffuses back to presynaptic terminal to enhance glutamate release"
+        }
+      ],
+      "cofactor_dependencies": [
+        {
+          "cofactor": "BH4",
+          "role": "Essential NOS cofactor — NOS without BH4 produces superoxide instead of NO (uncoupled NOS)",
+          "deficiency_effect": "Oxidative stress, endothelial dysfunction"
+        },
+        {
+          "cofactor": "Iron (heme)",
+          "role": "NOS contains heme prosthetic group",
+          "deficiency_effect": "Impaired NO production"
+        },
+        {
+          "cofactor": "L-Arginine",
+          "role": "Substrate",
+          "deficiency_effect": "Reduced NO production"
+        },
+        {
+          "cofactor": "Calcium",
+          "role": "Ca2+/Calmodulin activates nNOS and eNOS",
+          "deficiency_effect": "Reduced activity-dependent NO synthesis"
+        }
+      ],
+      "primary_qif_bands": [
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "cerebellum",
+        "hippocampus",
+        "cortex",
+        "cerebral_vasculature"
+      ],
+      "bci_relevance": "MEDIUM — NO-mediated neurovascular coupling is the basis of fMRI BOLD signal and fNIRS. Disrupting NO affects BCI systems that rely on hemodynamic signals.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "endocannabinoids",
+      "name": "Endocannabinoids",
+      "abbreviation": "eCB",
+      "chemical_class": "lipid",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "Membrane phospholipids (phosphatidylethanolamine)",
+          "product": "Anandamide (AEA)",
+          "enzyme": "NAPE-PLD (N-acyl phosphatidylethanolamine-specific phospholipase D)",
+          "enzyme_gene": "NAPEPLD",
+          "notes": "Synthesized on demand from membrane lipids (not stored in vesicles). Released postsynaptically, acts as retrograde messenger."
+        },
+        {
+          "step": 2,
+          "substrate": "Membrane phospholipids (diacylglycerol)",
+          "product": "2-Arachidonoylglycerol (2-AG)",
+          "enzyme": "Diacylglycerol Lipase",
+          "enzyme_gene": "DAGLA / DAGLB",
+          "notes": "2-AG is more abundant than AEA in brain. Primary retrograde messenger at most synapses."
+        }
+      ],
+      "degradation": [
+        {
+          "substrate": "Anandamide",
+          "enzyme": "Fatty Acid Amide Hydrolase",
+          "enzyme_gene": "FAAH",
+          "product": "Arachidonic acid + Ethanolamine",
+          "notes": "FAAH inhibitors (under investigation) prolong AEA signaling"
+        },
+        {
+          "substrate": "2-AG",
+          "enzyme": "Monoacylglycerol Lipase",
+          "enzyme_gene": "MGLL",
+          "product": "Arachidonic acid + Glycerol"
+        }
+      ],
+      "receptors": [
+        {
+          "id": "CB1",
+          "gene": "CNR1",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "signaling": "Decreases cAMP, inhibits presynaptic Ca2+ channels, activates GIRK K+ channels",
+          "expression": [
+            "cortex",
+            "hippocampus",
+            "basal_ganglia",
+            "cerebellum",
+            "amygdala"
+          ],
+          "function": "Retrograde inhibition of neurotransmitter release (both glutamate and GABA — called DSE and DSI respectively). Pain modulation, appetite, memory modulation.",
+          "clinical": "THC (Δ9-THC) is CB1 partial agonist. Rimonabant (CB1 inverse agonist, withdrawn) caused depression/suicidality.",
+          "notes": "CB1 is the most abundant GPCR in the brain"
+        },
+        {
+          "id": "CB2",
+          "gene": "CNR2",
+          "type": "metabotropic",
+          "g_protein": "Gi/Go",
+          "expression": [
+            "microglia",
+            "immune_cells",
+            "low_brain_expression"
+          ],
+          "function": "Immune modulation, neuroinflammation regulation",
+          "clinical": "CB2 agonists investigated for neuroinflammation without psychoactive effects"
+        }
+      ],
+      "primary_qif_bands": [
+        "N3",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "cortex",
+        "hippocampus",
+        "cerebellum",
+        "basal_ganglia"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F12.x",
+          "name": "Cannabis use disorder",
+          "mechanism": "Exogenous CB1 activation → reward system hijacking and CB1 downregulation"
+        }
+      ],
+      "bci_relevance": "LOW — Endocannabinoid signaling modulates synaptic plasticity but is not directly detectable by current BCI.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "adenosine",
+      "name": "Adenosine / ATP (Purinergic)",
+      "abbreviation": "Ado/ATP",
+      "chemical_class": "purine",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "ATP (released from neurons and astrocytes)",
+          "product": "ADP → AMP → Adenosine",
+          "enzyme": "Ecto-nucleotidases (CD39/ENTPD1, CD73/NT5E)",
+          "notes": "ATP is co-released with classical neurotransmitters. Extracellular ATP is rapidly degraded to adenosine."
+        },
+        {
+          "step": 2,
+          "substrate": "SAH (S-adenosylhomocysteine, from methylation reactions)",
+          "product": "Adenosine",
+          "enzyme": "SAH Hydrolase (AHCY)",
+          "notes": "Intracellular adenosine production linked to methylation activity"
+        }
+      ],
+      "receptors": [
+        {
+          "id": "A1",
+          "gene": "ADORA1",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "cortex",
+            "hippocampus",
+            "cerebellum",
+            "thalamus"
+          ],
+          "function": "Inhibition of neurotransmitter release, sleep promotion, neuroprotection",
+          "clinical": "Caffeine is A1 (and A2A) antagonist → wakefulness by blocking adenosine sleep drive"
+        },
+        {
+          "id": "A2A",
+          "gene": "ADORA2A",
+          "type": "metabotropic",
+          "g_protein": "Gs/Golf",
+          "expression": [
+            "striatum (highest)",
+            "nucleus_accumbens",
+            "olfactory_tubercle"
+          ],
+          "function": "Modulates DA D2 signaling (A2A-D2 heterodimer), motor function, wakefulness",
+          "clinical": "Istradefylline (A2A antagonist) for Parkinson's (reduces off-time). Caffeine's motor-activating effect partly via striatal A2A."
+        },
+        {
+          "id": "P2X7",
+          "gene": "P2RX7",
+          "type": "ionotropic (ATP-gated)",
+          "expression": [
+            "microglia",
+            "astrocytes"
+          ],
+          "function": "Neuroinflammation, inflammasome activation, IL-1β release",
+          "clinical": "P2X7 antagonists investigated for neuroinflammatory conditions, depression"
+        }
+      ],
+      "primary_qif_bands": [
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "ubiquitous — adenosine acts as neuromodulator throughout brain"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F51.0",
+          "name": "Insomnia",
+          "mechanism": "Adenosine accumulates during waking → promotes sleep via A1 and A2A in basal forebrain and VLPO"
+        },
+        {
+          "code": "F15.9",
+          "name": "Caffeine use disorder",
+          "mechanism": "Chronic A1/A2A antagonism → receptor upregulation → withdrawal symptoms"
+        }
+      ],
+      "bci_relevance": "LOW — Purinergic signaling is diffuse and not directly measured by current BCI.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "neuropeptide_y",
+      "name": "Neuropeptide Y",
+      "abbreviation": "NPY",
+      "chemical_class": "peptide",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "NPY gene product (prepro-NPY)",
+          "product": "Neuropeptide Y (36 amino acid peptide)",
+          "enzyme": "Prohormone Convertases"
+        }
+      ],
+      "receptors": [
+        {
+          "id": "Y1",
+          "gene": "NPY1R",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "cortex",
+            "hippocampus",
+            "amygdala"
+          ],
+          "function": "Anxiolysis, appetite stimulation, vasoconstriction"
+        },
+        {
+          "id": "Y2",
+          "gene": "NPY2R",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "hippocampus",
+            "hypothalamus"
+          ],
+          "function": "Presynaptic inhibition, antiepileptic, appetite regulation"
+        },
+        {
+          "id": "Y5",
+          "gene": "NPY5R",
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "expression": [
+            "hypothalamus"
+          ],
+          "function": "Appetite stimulation (orexigenic)"
+        }
+      ],
+      "primary_qif_bands": [
+        "N4",
+        "N6",
+        "N7"
+      ],
+      "primary_regions": [
+        "hypothalamus",
+        "amygdala",
+        "hippocampus",
+        "cortex"
+      ],
+      "dsm_conditions": [
+        {
+          "code": "F43.10",
+          "name": "PTSD",
+          "mechanism": "Low NPY levels associated with PTSD vulnerability (resilience biomarker)"
+        },
+        {
+          "code": "G40.x",
+          "name": "Epilepsy",
+          "mechanism": "NPY is endogenous anticonvulsant — Y2 receptor activation inhibits glutamate release"
+        }
+      ],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "epinephrine",
+      "name": "Epinephrine",
+      "abbreviation": "Epi",
+      "chemical_class": "catecholamine",
+      "synthesis_pathway": [
+        {
+          "step": 1,
+          "substrate": "Norepinephrine",
+          "product": "Epinephrine",
+          "enzyme": "Phenylethanolamine N-Methyltransferase",
+          "enzyme_gene": "PNMT",
+          "cofactors": [
+            "SAM (S-adenosylmethionine)"
+          ],
+          "notes": "PNMT expression in brain is very limited — mostly in C1-C3 neurons of medulla. Brain epinephrine is minor compared to peripheral (adrenal medulla)."
+        }
+      ],
+      "precursor_pathway": "Full chain: L-Phe → L-Tyr → L-DOPA → DA → NE → Epi (PNMT, SAM)",
+      "receptors": [
+        {
+          "id": "alpha-1",
+          "genes": [
+            "ADRA1A",
+            "ADRA1B",
+            "ADRA1D"
+          ],
+          "subtypes": [
+            "α1A",
+            "α1B",
+            "α1D"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gq",
+          "signaling": "PLC → IP3 + DAG → Ca2+ release",
+          "function": "Vasoconstriction, arousal, PFC modulation at high NE",
+          "clinical": "Prazosin (antagonist) for PTSD nightmares"
+        },
+        {
+          "id": "alpha-2",
+          "genes": [
+            "ADRA2A",
+            "ADRA2B",
+            "ADRA2C"
+          ],
+          "subtypes": [
+            "α2A",
+            "α2B",
+            "α2C"
+          ],
+          "type": "metabotropic",
+          "g_protein": "Gi",
+          "signaling": "Decreases cAMP, opens K+ channels, reduces Ca2+ entry",
+          "function": "Presynaptic autoreceptor (reduces NE release); postsynaptic in PFC enhances working memory",
+          "clinical": "Clonidine, guanfacine (α2A agonists) for ADHD, PTSD, hypertension"
+        },
+        {
+          "id": "beta-1",
+          "gene": "ADRB1",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "signaling": "Increases cAMP",
+          "expression": [
+            "heart",
+            "cortex",
+            "hippocampus"
+          ],
+          "function": "Heart rate increase, memory consolidation (amygdala-dependent)",
+          "clinical": "Propranolol (antagonist) blocks emotional memory reconsolidation"
+        },
+        {
+          "id": "beta-2",
+          "gene": "ADRB2",
+          "type": "metabotropic",
+          "g_protein": "Gs",
+          "expression": [
+            "lung",
+            "cerebellum",
+            "astrocytes"
+          ],
+          "function": "Bronchodilation, glycogenolysis in astrocytes",
+          "clinical": "Salbutamol (agonist) for asthma"
+        }
+      ],
+      "primary_qif_bands": [
+        "N2"
+      ],
+      "primary_regions": [
+        "adrenal_medulla",
+        "C1-C3_medullary_neurons"
+      ],
+      "notes": "Minor neurotransmitter in brain. Primary role is peripheral (adrenal medulla → fight-or-flight). Included for completeness.",
+      "confidence": "HIGH"
+    }
+  ],
+  "cofactor_master_list": [
+    {
+      "id": "iron",
+      "name": "Iron (Fe2+/Fe3+)",
+      "dependent_systems": [
+        "dopamine (TH)",
+        "serotonin (TPH2)",
+        "norepinephrine (TH)",
+        "nitric_oxide (NOS heme)",
+        "all catecholamines"
+      ],
+      "transport": "Transferrin (TF) in blood → Transferrin Receptor 1 (TFRC) at BBB → Ferroportin (SLC40A1) export. Brain iron stored in ferritin (FTH1, FTL). Ferritin requires iron for assembly.",
+      "deficiency_conditions": [
+        "Restless legs syndrome",
+        "ADHD-like symptoms",
+        "Fatigue",
+        "Cognitive impairment",
+        "Impaired myelination in infants"
+      ],
+      "excess_conditions": [
+        "Neurodegeneration (iron accumulation in substantia nigra in Parkinson's, NBIA disorders)"
+      ],
+      "daily_requirement": "8-18 mg dietary",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "bh4",
+      "name": "Tetrahydrobiopterin (BH4)",
+      "chemical_name": "(6R)-5,6,7,8-tetrahydrobiopterin",
+      "synthesis": "GTP → GTP cyclohydrolase I (GCH1) → dihydroneopterin triphosphate → PTPS (PTS) → 6-pyruvoyltetrahydropterin → sepiapterin reductase (SPR) → BH4",
+      "recycling": "BH4 → BH2 (during hydroxylation) → BH4 via dihydropteridine reductase (QDPR) requiring NADH",
+      "dependent_systems": [
+        "TH (dopamine/NE/Epi synthesis)",
+        "TPH1/2 (serotonin synthesis)",
+        "PAH (phenylalanine → tyrosine)",
+        "NOS (nitric oxide synthesis)"
+      ],
+      "deficiency_conditions": [
+        "BH4-responsive PKU",
+        "DOPA-responsive dystonia (Segawa disease, GCH1 mutation)",
+        "Combined monoamine + NO deficiency"
+      ],
+      "notes": "BH4 is THE master cofactor for monoamine synthesis. Folate cycle supports BH4 regeneration.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "vitamin_b6",
+      "name": "Vitamin B6 / Pyridoxal Phosphate (PLP)",
+      "dependent_systems": [
+        "GABA (GAD)",
+        "dopamine (AADC/DDC)",
+        "serotonin (AADC/DDC)",
+        "histamine (HDC)",
+        "glycine (SHMT)",
+        "GABA degradation (ABAT)",
+        "many transaminases"
+      ],
+      "deficiency_conditions": [
+        "Neonatal seizures (pyridoxine-dependent epilepsy)",
+        "Peripheral neuropathy",
+        "Depression",
+        "Confusion"
+      ],
+      "notes": "PLP is cofactor for >140 enzymes. Critical for amino acid metabolism including neurotransmitter synthesis and degradation.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "folate_b9",
+      "name": "Folate (Vitamin B9) / Tetrahydrofolate (THF)",
+      "dependent_systems": [
+        "BH4 recycling",
+        "SAM cycle (methylation)",
+        "glycine synthesis (SHMT)",
+        "purine/pyrimidine synthesis (DNA/RNA)"
+      ],
+      "synthesis_of_active_form": "Dietary folate → DHF → THF (via DHFR) → 5,10-MTHF → 5-MTHF (via MTHFR)",
+      "deficiency_conditions": [
+        "Neural tube defects (pregnancy)",
+        "Megaloblastic anemia",
+        "Depression (impaired SAM/BH4)",
+        "Cognitive impairment"
+      ],
+      "notes": "MTHFR C677T polymorphism reduces enzyme activity → impaired folate metabolism → elevated homocysteine. 5-MTHF donates methyl group to homocysteine → methionine (requires B12).",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "vitamin_b12",
+      "name": "Vitamin B12 (Cobalamin)",
+      "dependent_systems": [
+        "SAM cycle (methionine synthase: homocysteine + 5-MTHF → methionine, gene: MTR, requires B12)",
+        "methylmalonyl-CoA mutase (energy metabolism)"
+      ],
+      "deficiency_conditions": [
+        "Subacute combined degeneration of spinal cord",
+        "Megaloblastic anemia",
+        "Peripheral neuropathy",
+        "Cognitive impairment / dementia",
+        "Depression"
+      ],
+      "notes": "B12 deficiency impairs SAM cycle → affects ALL methylation reactions including COMT, DNA methylation, myelin synthesis. B12 is cobalt-containing.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "copper",
+      "name": "Copper (Cu2+)",
+      "dependent_systems": [
+        "norepinephrine (DBH)",
+        "cytochrome c oxidase (mitochondrial respiration)",
+        "superoxide dismutase (SOD1, antioxidant)",
+        "ceruloplasmin (iron metabolism)"
+      ],
+      "transport": "Ceruloplasmin (CP) in blood. CTR1 (SLC31A1) for cellular uptake. ATP7A (Menkes), ATP7B (Wilson) for intracellular trafficking.",
+      "deficiency_conditions": [
+        "Menkes disease (ATP7A mutation → copper deficiency → NE synthesis failure → neurodegeneration)",
+        "Anemia (ceruloplasmin needed for iron mobilization)"
+      ],
+      "excess_conditions": [
+        "Wilson disease (ATP7B mutation → copper accumulation → liver + brain damage, basal ganglia degeneration)"
+      ],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "zinc",
+      "name": "Zinc (Zn2+)",
+      "dependent_systems": [
+        "NMDA receptor modulation (inhibits GRIN2A)",
+        "GABA-A receptor modulation",
+        "carbonic anhydrase",
+        "SOD1",
+        "many transcription factors (zinc fingers)"
+      ],
+      "transport": "ZnT (SLC30A) family exports zinc. ZIP (SLC39A) family imports zinc. ZnT3 (SLC30A3) loads zinc into synaptic vesicles at glutamatergic synapses.",
+      "brain_role": "Synaptically released zinc from glutamatergic vesicles modulates NMDA, AMPA, GABA-A receptors and glycine receptors. Particularly enriched in hippocampal mossy fibers.",
+      "deficiency_conditions": [
+        "Impaired synaptic plasticity",
+        "Immune dysfunction",
+        "Altered taste/smell"
+      ],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "magnesium",
+      "name": "Magnesium (Mg2+)",
+      "dependent_systems": [
+        "NMDA receptor voltage-dependent block",
+        "COMT (dopamine degradation)",
+        "glutamine synthetase",
+        "ATP-dependent enzymes (all kinases)"
+      ],
+      "deficiency_conditions": [
+        "NMDA receptor hyperactivation → excitotoxicity",
+        "Seizure susceptibility",
+        "Migraine",
+        "Anxiety",
+        "Muscle cramps"
+      ],
+      "notes": "Mg2+ blocks NMDA channel at resting potential. Depolarization relieves Mg2+ block → Ca2+ influx. This makes NMDA a coincidence detector.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "calcium",
+      "name": "Calcium (Ca2+)",
+      "dependent_systems": [
+        "ALL synaptic vesicle release (Ca2+-dependent exocytosis via synaptotagmin)",
+        "nNOS activation (Ca2+/calmodulin)",
+        "CaMKII (synaptic plasticity)",
+        "Calcineurin (LTD)",
+        "muscle contraction"
+      ],
+      "channels": [
+        "Voltage-gated Ca2+ channels (Cav1-3)",
+        "NMDA receptor",
+        "nAChR α7",
+        "IP3 receptors (ER)",
+        "Ryanodine receptors (ER)"
+      ],
+      "notes": "Intracellular Ca2+ is THE universal second messenger for neurotransmitter release. Maintained at ~100nM (10,000x lower than extracellular).",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "vitamin_c",
+      "name": "Vitamin C (Ascorbic Acid)",
+      "dependent_systems": [
+        "norepinephrine (DBH electron donor)",
+        "collagen synthesis",
+        "antioxidant protection"
+      ],
+      "transport": "SVCT2 (SLC23A2) transporter concentrates vitamin C in brain (10x plasma levels). Brain has highest concentration of any organ.",
+      "deficiency_conditions": [
+        "Scurvy (neuropsychiatric symptoms: depression, fatigue)",
+        "Impaired NE synthesis"
+      ],
+      "confidence": "HIGH"
+    },
+    {
+      "id": "vitamin_b1",
+      "name": "Thiamine (Vitamin B1)",
+      "dependent_systems": [
+        "Pyruvate dehydrogenase (glucose → Acetyl-CoA → ACh substrate)",
+        "α-ketoglutarate dehydrogenase (Krebs cycle, glutamate metabolism)",
+        "Transketolase (pentose phosphate pathway)"
+      ],
+      "deficiency_conditions": [
+        "Wernicke encephalopathy (acute: confusion, ophthalmoplegia, ataxia)",
+        "Korsakoff syndrome (chronic: amnesia, confabulation)",
+        "Beriberi"
+      ],
+      "notes": "Thiamine deficiency selectively damages mammillary bodies, medial thalamus, periaqueductal gray. Common in alcoholism.",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "sam",
+      "name": "S-Adenosylmethionine (SAM)",
+      "synthesis": "Methionine + ATP → SAM (via MAT/methionine adenosyltransferase)",
+      "dependent_systems": [
+        "COMT (dopamine/NE degradation)",
+        "PNMT (NE → Epi)",
+        "HNMT (histamine degradation)",
+        "DNA methylation",
+        "Histone methylation",
+        "Myelin maintenance"
+      ],
+      "regeneration": "SAM → SAH → Homocysteine → Methionine (requires B12 + folate) → SAM. This is the methyl cycle.",
+      "deficiency_conditions": [
+        "Depression (SAMe supplementation has antidepressant evidence)",
+        "Impaired methylation → broad neuropsychiatric effects"
+      ],
+      "notes": "SAM donates methyl groups for >100 methylation reactions. Its regeneration requires B12, folate, and methionine — linking nutrition to neurotransmitter metabolism.",
+      "confidence": "HIGH"
+    }
+  ]
+}
