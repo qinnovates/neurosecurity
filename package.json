@@ -32,7 +32,7 @@
     "@tailwindcss/vite": "^4.0.0",
     "@types/katex": "^0.16.0",
     "@types/three": "^0.172.0",
-    "astro": "^5.17.0",
+    "astro": "^6.0.2",
     "astro-pagefind": "^1.8.5",
     "fast-xml-parser": "^5.3.6",
     "katex": "^0.16.0",
