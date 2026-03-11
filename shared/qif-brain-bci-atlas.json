@@ -13,25 +13,31 @@
       "BCI device specs sourced from FDA filings, manufacturer datasheets, and peer-reviewed papers.",
       "null values indicate data not publicly available.",
       "Brain region IDs use snake_case. Device IDs use kebab-case."
-    ]
+    ],
+    "detailed_regions": 38
   },
-
   "qif_bands": [
     {
       "id": "N7",
       "name": "Neocortex",
       "zone": "neural",
       "determinacy": "Quantum Uncertain",
-      "qi_range": [0.3, 0.5],
+      "qi_range": [
+        0.3,
+        0.5
+      ],
       "severity_if_compromised": "HIGH (cognitive)",
-      "description": "Highest cortical processing — executive function, motor planning, sensory integration, language. Most complex and indeterminate neural band."
+      "description": "Highest cortical processing \u2014 executive function, motor planning, sensory integration, language. Most complex and indeterminate neural band."
     },
     {
       "id": "N6",
       "name": "Limbic System",
       "zone": "neural",
-      "determinacy": "Chaotic → QU",
-      "qi_range": [0.2, 0.4],
+      "determinacy": "Chaotic \u2192 QU",
+      "qi_range": [
+        0.2,
+        0.4
+      ],
       "severity_if_compromised": "SEVERE (emotional/memory)",
       "description": "Emotion regulation, memory formation, interoception. Bridges cognitive and autonomic processing."
     },
@@ -40,7 +46,10 @@
       "name": "Basal Ganglia",
       "zone": "neural",
       "determinacy": "Chaotic",
-      "qi_range": [0.15, 0.35],
+      "qi_range": [
+        0.15,
+        0.35
+      ],
       "severity_if_compromised": "SEVERE (motor selection)",
       "description": "Motor selection, habit formation, reward processing. Primary target of DBS for Parkinson's."
     },
@@ -48,8 +57,11 @@
       "id": "N4",
       "name": "Diencephalon",
       "zone": "neural",
-      "determinacy": "Stochastic → Chaotic",
-      "qi_range": [0.1, 0.3],
+      "determinacy": "Stochastic \u2192 Chaotic",
+      "qi_range": [
+        0.1,
+        0.3
+      ],
       "severity_if_compromised": "CRITICAL (relay/gating)",
       "description": "Thalamic relay and gating of all ascending sensory traffic. Hypothalamic homeostasis. The brain's firewall layer."
     },
@@ -58,7 +70,10 @@
       "name": "Cerebellum",
       "zone": "neural",
       "determinacy": "Stochastic",
-      "qi_range": [0.1, 0.25],
+      "qi_range": [
+        0.1,
+        0.25
+      ],
       "severity_if_compromised": "HIGH (coordination)",
       "description": "Motor coordination, timing, error correction, procedural learning. Contains >50% of the brain's neurons."
     },
@@ -67,16 +82,22 @@
       "name": "Brainstem",
       "zone": "neural",
       "determinacy": "Stochastic",
-      "qi_range": [0.05, 0.15],
+      "qi_range": [
+        0.05,
+        0.15
+      ],
       "severity_if_compromised": "LETHAL (vital functions)",
-      "description": "Vital functions — respiration, heart rate, blood pressure, arousal. Compromise is life-threatening."
+      "description": "Vital functions \u2014 respiration, heart rate, blood pressure, arousal. Compromise is life-threatening."
     },
     {
       "id": "N1",
       "name": "Spinal Cord",
       "zone": "neural",
       "determinacy": "Stochastic",
-      "qi_range": [0.01, 0.1],
+      "qi_range": [
+        0.01,
+        0.1
+      ],
       "severity_if_compromised": "HIGH (motor/sensory)",
       "description": "Motor output and sensory input pathway. Local reflex arcs. Lowest neural band in the hourglass."
     },
@@ -85,7 +106,10 @@
       "name": "Neural Interface",
       "zone": "interface",
       "determinacy": "Quasi-quantum",
-      "qi_range": [0.01, 0.1],
+      "qi_range": [
+        0.01,
+        0.1
+      ],
       "severity_if_compromised": "CRITICAL (measurement/collapse)",
       "description": "Electrode-tissue boundary where biological signals become electronic. The bottleneck of the hourglass. Measurement collapses neural state space."
     },
@@ -94,7 +118,10 @@
       "name": "Analog Front-End",
       "zone": "silicon",
       "determinacy": "Stochastic (analog noise)",
-      "qi_range": [0.001, 0.01],
+      "qi_range": [
+        0.001,
+        0.01
+      ],
       "severity_if_compromised": "MEDIUM (signal integrity)",
       "description": "Amplification, filtering, ADC/DAC conversion. Analog noise introduces residual stochasticity."
     },
@@ -103,7 +130,10 @@
       "name": "Digital Processing",
       "zone": "silicon",
       "determinacy": "Deterministic",
-      "qi_range": [0, 0],
+      "qi_range": [
+        0,
+        0
+      ],
       "severity_if_compromised": "MEDIUM (algorithm integrity)",
       "description": "Decoding algorithms, classification, digital signal processing. Fully deterministic."
     },
@@ -112,12 +142,14 @@
       "name": "Application",
       "zone": "silicon",
       "determinacy": "Deterministic",
-      "qi_range": [0, 0],
+      "qi_range": [
+        0,
+        0
+      ],
       "severity_if_compromised": "LOW-MEDIUM (software)",
       "description": "Clinical software, user interface, data storage, network. Classical IT security domain."
     }
   ],
-
   "brain_regions": [
     {
       "id": "pfc",
@@ -130,7 +162,10 @@
       "function": "Executive function, decision-making, working memory, personality, social behavior, planning",
       "response_latency_ms": {
         "value": 150,
-        "range": [100, 300],
+        "range": [
+          100,
+          300
+        ],
         "measure": "Visual stimulus to PFC neuronal onset",
         "notes": "Highly variable by task and stimulus type. Visual motion onset 40-60ms in frontal eye fields; decision-related activity 150-300ms.",
         "citations": [
@@ -139,10 +174,59 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["m1", "broca", "wernicke", "hippocampus", "bla", "insula", "acc", "thalamus", "striatum"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "alpha (8-13 Hz)",
+        "beta (13-30 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "m1",
+        "broca",
+        "wernicke",
+        "hippocampus",
+        "bla",
+        "insula",
+        "acc",
+        "thalamus",
+        "striatum"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [9, 10, 11, 12, 46, 47]
+      "brodmann_areas": [
+        9,
+        10,
+        11,
+        12,
+        46,
+        47
+      ],
+      "how_it_works": "The PFC is the seat of executive function \u2014 the brain's CEO. It maintains information in working memory (holding a phone number in mind), inhibits impulses (not eating the cake), plans sequences (packing for a trip), and makes decisions by weighing options. It does this through sustained neural firing \u2014 PFC neurons can hold activity for seconds without ongoing input, unlike sensory neurons that fire only during stimulation. The PFC has extensive connections to every other cortical area and to subcortical structures (amygdala, basal ganglia, thalamus), making it the central hub for top-down control. It's the last brain region to fully myelinate, not completing until age ~25, which is why teenagers make impulsive decisions.",
+      "sub_structures": [
+        {
+          "name": "Dorsolateral PFC (dlPFC)",
+          "role": "Working memory, cognitive flexibility, planning. 'Cold' executive function."
+        },
+        {
+          "name": "Ventromedial PFC (vmPFC)",
+          "role": "Decision-making, emotional regulation, value assessment. 'Hot' executive function."
+        },
+        {
+          "name": "Orbitofrontal Cortex (OFC)",
+          "role": "Reward valuation, social behavior, impulse control. Damage \u2192 personality change (Phineas Gage)."
+        },
+        {
+          "name": "Anterior PFC (Brodmann 10)",
+          "role": "Metacognition \u2014 thinking about thinking. Prospective memory, multitasking."
+        },
+        {
+          "name": "Frontal Eye Fields (FEF)",
+          "role": "Voluntary eye movements (saccades). Visual attention direction."
+        }
+      ],
+      "processing_pipeline": "Sensory input (all modalities) \u2192 Posterior cortex \u2192 PFC integration \u2192 Working memory maintenance (persistent firing) \u2192 Decision computation (vmPFC value signals + dlPFC rule maintenance) \u2192 Motor output via PMC/SMA \u2192 M1 execution. Feedback loops: PFC \u2194 Basal ganglia (action selection), PFC \u2194 Amygdala (emotional regulation), PFC \u2194 Hippocampus (memory retrieval).",
+      "signal_type": "Integrative \u2014 sustained firing patterns encoding rules, goals, and abstract representations",
+      "bci_relevance_detail": "PFC signals encode abstract intentions and decisions, making it valuable for high-level BCI control (selecting between options, error detection). However, PFC signals are noisier and more variable than motor cortex signals, making reliable decoding harder.",
+      "clinical_notes": "PFC damage \u2192 executive dysfunction: poor planning, impulsivity, flat affect, social inappropriateness. ADHD linked to PFC hypofunction (dopamine deficit in dlPFC). Depression linked to vmPFC/OFC dysfunction. Schizophrenia: dlPFC working memory deficits."
     },
     {
       "id": "m1",
@@ -155,7 +239,10 @@
       "function": "Voluntary motor execution, somatotopic motor map (homunculus)",
       "response_latency_ms": {
         "value": 20,
-        "range": [10, 30],
+        "range": [
+          10,
+          30
+        ],
         "measure": "Corticospinal conduction time to hand muscles",
         "notes": "Central motor conduction time (CMCT) measured via TMS: ~20ms to hand. Cortical motor neurons activate ~100-150ms before movement onset.",
         "citations": [
@@ -164,10 +251,51 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["beta (13-30 Hz)", "gamma (30-100 Hz)", "mu (8-12 Hz)"],
-      "connections": ["pfc", "sma", "pmc", "s1_cortex", "cerebellum_cortex", "striatum", "thalamus"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)",
+        "gamma (30-100 Hz)",
+        "mu (8-12 Hz)"
+      ],
+      "connections": [
+        "pfc",
+        "sma",
+        "pmc",
+        "s1_cortex",
+        "cerebellum_cortex",
+        "striatum",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [4]
+      "brodmann_areas": [
+        4
+      ],
+      "how_it_works": "M1 contains the motor homunculus \u2014 a body map where each area controls specific muscles. Large pyramidal neurons (Betz cells) in Layer 5 send axons down the corticospinal tract to synapse on motor neurons in the spinal cord. The signal chain: PFC (decision to move) \u2192 SMA/PMC (motor planning, sequence) \u2192 M1 (execution command) \u2192 corticospinal tract \u2192 spinal motor neurons \u2192 neuromuscular junction \u2192 muscle contraction. M1 doesn't encode individual muscles in isolation \u2014 it encodes movement direction and force through population coding. Each neuron has a 'preferred direction' and the population vector determines actual movement direction.",
+      "sub_structures": [
+        {
+          "name": "Layer 5 (Betz cells)",
+          "role": "Giant pyramidal neurons. Direct corticospinal projection to spinal motor neurons."
+        },
+        {
+          "name": "Motor homunculus",
+          "role": "Somatotopic body map. Hand/face get disproportionate cortical area."
+        },
+        {
+          "name": "Hand knob",
+          "role": "Omega-shaped region for hand control. Primary target for motor BCIs."
+        },
+        {
+          "name": "Face area",
+          "role": "Controls facial muscles, jaw, tongue, larynx."
+        },
+        {
+          "name": "Leg area",
+          "role": "Medial surface. Controls hip, knee, ankle, foot."
+        }
+      ],
+      "processing_pipeline": "PFC (intention) \u2192 SMA (sequence planning) \u2192 PMC (spatial planning) \u2192 M1 Layer 5 (execution) \u2192 Corticospinal tract \u2192 Pyramidal decussation (crossing in medulla) \u2192 Lateral corticospinal tract \u2192 Spinal motor neuron \u2192 Neuromuscular junction (acetylcholine) \u2192 Muscle contraction",
+      "signal_type": "Motor \u2014 efferent electrical signals encoding movement direction and force",
+      "bci_relevance_detail": "Motor BCIs decode intended movement from M1 neural activity. Utah arrays in the hand knob area can decode individual finger movements. Population vector decoding: each neuron's firing rate \u00d7 preferred direction, summed across population = decoded movement. BrainGate, Neuralink, and Blackrock focus here.",
+      "clinical_notes": "Stroke in M1 causes contralateral hemiparesis/hemiplegia. ALS progressively destroys motor neurons, making M1 a key BCI target (locked-in patients). Damage to left M1 affects right body and vice versa (pyramidal decussation)."
     },
     {
       "id": "v1",
@@ -177,10 +305,13 @@
       "parent_structure": "occipital_lobe",
       "depth_class": "cortical",
       "hemisphere": "bilateral",
-      "function": "Primary visual processing — edge detection, orientation, spatial frequency, color",
+      "function": "Primary visual processing \u2014 edge detection, orientation, spatial frequency, color",
       "response_latency_ms": {
         "value": 56,
-        "range": [56, 100],
+        "range": [
+          56,
+          100
+        ],
         "measure": "Visual stimulus to V1 ERP onset (C1 component)",
         "notes": "C1 component (N75): 56-100ms post-stimulus. Mean onset ~56ms (earliest reported). Intracranial: category decoding by 100ms.",
         "citations": [
@@ -190,10 +321,50 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["alpha (8-13 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["lgn_thalamus", "v2_extrastriate", "ppc"],
+      "oscillation_bands": [
+        "alpha (8-13 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "lgn_thalamus",
+        "v2_extrastriate",
+        "ppc"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [17]
+      "brodmann_areas": [
+        17
+      ],
+      "how_it_works": "Light enters the eye and hits the retina, where ~120 million rod cells (dim light) and ~6 million cone cells (color: red/green/blue) convert photons into electrical signals. These signals pass through retinal ganglion cells, travel via the optic nerve to the Lateral Geniculate Nucleus (LGN) in the thalamus, and then project to V1. V1 is organized into 6 layers. Layer 4 receives input from the LGN and contains simple cells that detect oriented edges at specific angles. Layers 2/3 combine these into complex cells that detect edges regardless of exact position. V1 creates a retinotopic map \u2014 neighboring points in the visual field map to neighboring neurons. The fovea (center of gaze) gets disproportionately more cortical area (cortical magnification).",
+      "sub_structures": [
+        {
+          "name": "Layer 4C",
+          "role": "Receives direct LGN input. Simple cells detect oriented edges."
+        },
+        {
+          "name": "Layers 2/3",
+          "role": "Complex cells combine edge signals. Feed forward to V2."
+        },
+        {
+          "name": "Layer 6",
+          "role": "Feedback to LGN, modulating incoming signals."
+        },
+        {
+          "name": "Blob regions",
+          "role": "Color processing (cytochrome oxidase blobs). Wavelength-selective."
+        },
+        {
+          "name": "Interblob regions",
+          "role": "Orientation and spatial frequency processing."
+        },
+        {
+          "name": "Ocular dominance columns",
+          "role": "Alternating columns for left/right eye input. Basis of binocular vision."
+        }
+      ],
+      "processing_pipeline": "Photons \u2192 Retina (rods/cones) \u2192 Retinal ganglion cells \u2192 Optic nerve \u2192 Optic chiasm (partial crossing) \u2192 LGN (thalamus) \u2192 V1 Layer 4C \u2192 V1 Layers 2/3 \u2192 V2 \u2192 Ventral stream (V4 \u2192 IT: object recognition, 'what') + Dorsal stream (V3 \u2192 MT/V5 \u2192 PPC: motion/spatial, 'where')",
+      "signal_type": "Visual \u2014 electromagnetic radiation (380-740nm wavelength)",
+      "bci_relevance_detail": "Visual BCIs (cortical prostheses like Orion/PRIMA) stimulate V1 directly to create phosphenes. Resolution limited by electrode spacing vs. cortical magnification factor. Current devices produce ~600 phosphenes, far below the ~1 million needed for natural vision.",
+      "clinical_notes": "Damage to V1 causes cortical blindness. Damage to specific areas causes scotomas (blind spots). Lesions in ventral stream \u2192 visual agnosia (can't recognize objects). Lesions in dorsal stream \u2192 optic ataxia (can't reach for objects)."
     },
     {
       "id": "a1",
@@ -203,23 +374,61 @@
       "parent_structure": "temporal_lobe",
       "depth_class": "cortical",
       "hemisphere": "bilateral",
-      "function": "Primary auditory processing — tonotopic frequency mapping, sound onset detection",
+      "function": "Primary auditory processing \u2014 tonotopic frequency mapping, sound onset detection",
       "response_latency_ms": {
         "value": 40,
-        "range": [25, 80],
+        "range": [
+          25,
+          80
+        ],
         "measure": "Auditory stimulus to cortical onset (Pa/high-gamma)",
         "notes": "Middle-latency response Pa: 25-40ms. High-gamma (70-150 Hz) cortical response ~40ms. Full cortical processing: Na 12-27ms, Pa 25-40ms.",
         "citations": [
-          "Liégeois-Chauvel et al. 1994 (J Neurosci): First-spike timing in auditory cortex",
+          "Li\u00e9geois-Chauvel et al. 1994 (J Neurosci): First-spike timing in auditory cortex",
           "Nourski et al. 2022 (PMC9773383): Time-locked high-gamma responses at ~40ms",
           "Picton et al. 2010 (PMC9443762): Middle-latency auditory response norms"
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)", "high-gamma (70-150 Hz)"],
-      "connections": ["mgn_thalamus", "wernicke", "pfc", "hippocampus"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "gamma (30-100 Hz)",
+        "high-gamma (70-150 Hz)"
+      ],
+      "connections": [
+        "mgn_thalamus",
+        "wernicke",
+        "pfc",
+        "hippocampus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [41, 42]
+      "brodmann_areas": [
+        41,
+        42
+      ],
+      "how_it_works": "Sound waves vibrate the eardrum (tympanic membrane), which transmits vibration through three tiny bones (malleus, incus, stapes) in the middle ear to the cochlea. Inside the cochlea, ~3,500 inner hair cells are arranged along the basilar membrane in a tonotopic gradient \u2014 high frequencies near the base, low frequencies at the apex. Hair cell deflection opens ion channels, generating electrical signals. These travel via the auditory nerve to the cochlear nucleus, then through the superior olive (sound localization) and inferior colliculus (integration) to the Medial Geniculate Nucleus (MGN) of the thalamus, and finally to A1. A1 maintains the tonotopic map: different frequencies activate different cortical columns.",
+      "sub_structures": [
+        {
+          "name": "Core (A1/R)",
+          "role": "Primary tonotopic map. Frequency-tuned neurons in columns."
+        },
+        {
+          "name": "Belt areas",
+          "role": "Complex sound features \u2014 harmonics, spectral shape, bandwidth."
+        },
+        {
+          "name": "Parabelt",
+          "role": "Higher-order processing. Feeds into ventral ('what') and dorsal ('where') auditory streams."
+        },
+        {
+          "name": "Tonotopic columns",
+          "role": "Each column responds to a specific frequency. Low frequencies anterior, high frequencies posterior."
+        }
+      ],
+      "processing_pipeline": "Sound waves \u2192 Eardrum \u2192 Ossicles (malleus/incus/stapes) \u2192 Cochlea (hair cells on basilar membrane) \u2192 Auditory nerve \u2192 Cochlear nucleus \u2192 Superior olive (binaural localization) \u2192 Inferior colliculus \u2192 MGN (thalamus) \u2192 A1 \u2192 Belt \u2192 Parabelt \u2192 Ventral stream (sound identity) + Dorsal stream (sound location)",
+      "signal_type": "Auditory \u2014 mechanical pressure waves (20Hz-20kHz)",
+      "bci_relevance_detail": "Cochlear implants bypass damaged hair cells, directly stimulating the auditory nerve with ~22 electrode channels (vs. 3,500 hair cells). Auditory BCIs for brainstem-level deafness stimulate the cochlear nucleus directly. Current challenge: frequency resolution far below natural hearing.",
+      "clinical_notes": "Damage to A1 causes cortical deafness. Wernicke's area (adjacent) processes speech comprehension. Tinnitus linked to reorganization of tonotopic map after hearing loss \u2014 phantom signals from deafferented frequency regions."
     },
     {
       "id": "broca",
@@ -232,19 +441,54 @@
       "function": "Speech production, syntactic processing, language planning",
       "response_latency_ms": {
         "value": 200,
-        "range": [150, 450],
+        "range": [
+          150,
+          450
+        ],
         "measure": "Three sequential processing waves during linguistic tasks (human intracranial)",
-        "notes": "Unique three-wave pattern: ~200ms (lexical), ~320ms (grammatical), ~450ms (phonological) — Flinker et al. 2015, intracranial EEG. High-gamma (70-150 Hz) during speech production and perception.",
+        "notes": "Unique three-wave pattern: ~200ms (lexical), ~320ms (grammatical), ~450ms (phonological) \u2014 Flinker et al. 2015, intracranial EEG. High-gamma (70-150 Hz) during speech production and perception.",
         "citations": [
           "Flinker et al. 2015 (PNAS): Three-wave pattern ~200/320/450ms in Broca's area",
           "Sahin et al. 2009 (Science): Intracranial recordings lexical ~200ms, grammatical ~320ms, phonological ~450ms"
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["pfc", "wernicke", "sma", "m1", "insula"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "beta (13-30 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "pfc",
+        "wernicke",
+        "sma",
+        "m1",
+        "insula"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [44, 45]
+      "brodmann_areas": [
+        44,
+        45
+      ],
+      "how_it_works": "Broca's area is the brain's speech production center. It doesn't just control mouth muscles \u2014 it constructs the grammatical structure of sentences before you speak. When you want to say something, Wernicke's area formulates the meaning, then Broca's area sequences the phonemes, applies grammatical rules, and programs the precise motor movements of the tongue, lips, jaw, and larynx needed to produce speech. This motor programming is sent to the face/mouth region of M1 for execution. Broca's area also processes syntax when listening \u2014 it's activated by grammatically complex sentences ('the dog that the cat chased ran away') even when you're not speaking. It shows lateralization: left-hemisphere dominant in 95% of right-handed and 70% of left-handed people.",
+      "sub_structures": [
+        {
+          "name": "Pars opercularis (BA 44)",
+          "role": "Phonological processing and motor programming of speech. Articulatory planning."
+        },
+        {
+          "name": "Pars triangularis (BA 45)",
+          "role": "Semantic and syntactic processing. Sentence comprehension and construction."
+        },
+        {
+          "name": "Mirror neuron system",
+          "role": "Broca's area contains mirror neurons \u2014 fire both when performing an action and observing it. Basis for imitation learning and possibly language evolution."
+        }
+      ],
+      "processing_pipeline": "Conceptual intention (PFC) \u2192 Semantic formulation (Wernicke's area) \u2192 Arcuate fasciculus (white matter tract connecting Wernicke's \u2192 Broca's) \u2192 Grammatical structuring (BA 45) \u2192 Articulatory motor planning (BA 44) \u2192 M1 face/mouth area \u2192 Cranial nerves VII, X, XII \u2192 Lips, tongue, larynx, jaw \u2192 Speech output",
+      "signal_type": "Language production \u2014 syntactic structuring, articulatory motor programming",
+      "bci_relevance_detail": "Speech BCIs aim to decode speech intentions from Broca's area activity before motor execution. Recent work (Willett et al. 2023, Nature) decoded attempted speech at 62 words/min from a paralyzed participant by recording from the ventral premotor cortex near Broca's area. This is among the most promising BCI applications for locked-in patients.",
+      "clinical_notes": "Broca's aphasia: damage produces telegraphic speech \u2014 patient understands language but can't produce fluent sentences. Says 'want... coffee... now' instead of 'I would like some coffee please.' Comprehension relatively preserved. Frustration is common because the patient knows what they want to say but can't produce it."
     },
     {
       "id": "wernicke",
@@ -257,7 +501,10 @@
       "function": "Language comprehension, semantic processing, speech reception",
       "response_latency_ms": {
         "value": 50,
-        "range": [50, 400],
+        "range": [
+          50,
+          400
+        ],
         "measure": "Auditory speech to posterior STG high-gamma onset (human intracranial)",
         "notes": "High-gamma onset in posterior STG: ~50-100ms (intracranial, Mesgarani & Chang 2012). N400 semantic component peaks ~400ms. MMN at ~100-200ms for deviant phonemes.",
         "citations": [
@@ -266,10 +513,42 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["a1", "broca", "hippocampus", "angular_gyrus"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "alpha (8-13 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "a1",
+        "broca",
+        "hippocampus",
+        "angular_gyrus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [22, 39, 40]
+      "brodmann_areas": [
+        22,
+        39,
+        40
+      ],
+      "how_it_works": "Wernicke's area is the brain's language comprehension center \u2014 it extracts meaning from heard speech and read text. When you hear a sentence, the auditory cortex (A1) processes the raw sounds, then Wernicke's area maps those sounds onto stored word meanings (the mental lexicon). It performs phoneme-to-word mapping, semantic retrieval, and sentence-level comprehension. It connects to Broca's area via the arcuate fasciculus (a white matter highway), forming the language loop: Wernicke's decodes meaning \u2192 Broca's encodes speech \u2192 M1 produces speech. Wernicke's area also activates during reading (visual word form \u2192 semantic meaning) and inner speech (thinking in words).",
+      "sub_structures": [
+        {
+          "name": "Posterior superior temporal gyrus (BA 22)",
+          "role": "Core Wernicke's area. Phoneme discrimination, word recognition, sentence comprehension."
+        },
+        {
+          "name": "Angular gyrus (BA 39)",
+          "role": "Cross-modal integration. Reading (visual \u2192 phonological \u2192 semantic). Semantic associations."
+        },
+        {
+          "name": "Supramarginal gyrus (BA 40)",
+          "role": "Phonological processing. Sound-to-meaning mapping. Short-term verbal memory."
+        }
+      ],
+      "processing_pipeline": "Auditory input \u2192 A1 (raw sound) \u2192 Auditory association cortex (phoneme extraction) \u2192 Wernicke's area (word recognition, semantic retrieval) \u2192 Angular gyrus (cross-modal integration) \u2192 Arcuate fasciculus \u2192 Broca's area (if speaking). READING: Visual cortex \u2192 Visual Word Form Area (VWFA, fusiform gyrus) \u2192 Wernicke's area (meaning extraction).",
+      "signal_type": "Language comprehension \u2014 phoneme discrimination, semantic retrieval, sentence parsing",
+      "bci_relevance_detail": "Wernicke's area signals contain semantic content \u2014 the meaning behind words. Decoding semantic representations could enable BCIs that understand what the user is thinking about (not just motor intentions). Current research is in early stages; semantic decoding is harder than motor decoding.",
+      "clinical_notes": "Wernicke's aphasia: fluent but meaningless speech \u2014 patient speaks in grammatically correct but nonsensical sentences ('the slithy toves did gyre and gimble'). Cannot comprehend spoken or written language. Often unaware of their deficit (anosognosia). Conduction aphasia: arcuate fasciculus damage \u2192 can understand and speak but cannot repeat phrases."
     },
     {
       "id": "pmc",
@@ -282,7 +561,10 @@
       "function": "Motor planning, movement preparation, sensorimotor integration",
       "response_latency_ms": {
         "value": 120,
-        "range": [80, 200],
+        "range": [
+          80,
+          200
+        ],
         "measure": "Visual cue to premotor neuron firing onset",
         "notes": "Premotor neurons fire 80-200ms before movement onset. Visually guided reach: ~120ms.",
         "citations": [
@@ -290,10 +572,40 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["beta (13-30 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["m1", "sma", "pfc", "ppc", "cerebellum_cortex"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "m1",
+        "sma",
+        "pfc",
+        "ppc",
+        "cerebellum_cortex"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [6]
+      "brodmann_areas": [
+        6
+      ],
+      "how_it_works": "The premotor cortex plans WHERE in space a movement will go. While M1 executes the movement and SMA plans the sequence, PMC is responsible for selecting movements based on external cues \u2014 reaching for an object you see, ducking when something flies at you. It has two divisions: dorsal PMC (PMd) plans reaching movements guided by visual spatial information, and ventral PMC (PMv) plans grasping movements guided by object shape. PMv contains mirror neurons that fire both when grasping an object and when observing someone else grasp it, suggesting a role in understanding others' actions.",
+      "sub_structures": [
+        {
+          "name": "Dorsal premotor (PMd)",
+          "role": "Visually guided reaching. Spatial trajectory planning. Integrates visual target location with motor plan."
+        },
+        {
+          "name": "Ventral premotor (PMv)",
+          "role": "Grasp planning. Object-oriented hand shaping. Mirror neuron system for action understanding."
+        },
+        {
+          "name": "Mirror neurons (in PMv)",
+          "role": "Fire during both action execution and action observation. May underlie imitation, empathy, and language evolution."
+        }
+      ],
+      "processing_pipeline": "Visual target (PPC spatial processing) \u2192 PMd (reach trajectory computation) + Object recognition (ventral stream) \u2192 PMv (grasp configuration) \u2192 M1 (execution) \u2192 Corticospinal tract \u2192 Muscles. MIRROR SYSTEM: Observed action \u2192 PMv mirror neurons \u2192 Action understanding without executing.",
+      "signal_type": "Motor planning \u2014 spatial trajectory, grasp configuration, sensorimotor transformation",
+      "bci_relevance_detail": "PMC is a strong candidate for motor BCIs because it encodes movement intention before execution \u2014 giving the decoder a head start. PMd signals predict reach direction 100-200ms before M1 activation. Combined PMC+M1 recording improves BCI decode accuracy.",
+      "clinical_notes": "PMC lesions \u2192 ideomotor apraxia: knows what to do but can't translate intention to action. Can describe how to use a hammer but fumbles when trying. Mirror neuron dysfunction hypothesized in autism spectrum disorder (difficulty understanding others' intentions), though this remains debated."
     },
     {
       "id": "sma",
@@ -306,7 +618,10 @@
       "function": "Motor sequence planning, bimanual coordination, internally generated movements",
       "response_latency_ms": {
         "value": 500,
-        "range": [300, 1500],
+        "range": [
+          300,
+          1500
+        ],
         "measure": "Bereitschaftspotential (readiness potential) before movement",
         "notes": "Readiness potential begins ~1500ms before voluntary movement onset. SMA proper activates ~500ms before movement.",
         "citations": [
@@ -314,10 +629,35 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["beta (13-30 Hz)"],
-      "connections": ["m1", "pmc", "pfc", "striatum", "cerebellum_cortex"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)"
+      ],
+      "connections": [
+        "m1",
+        "pmc",
+        "pfc",
+        "striatum",
+        "cerebellum_cortex"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [6]
+      "brodmann_areas": [
+        6
+      ],
+      "how_it_works": "The SMA plans WHEN and in what ORDER movements happen. It specializes in internally generated movement sequences \u2014 actions you initiate yourself rather than reactions to external stimuli. When a pianist plays a memorized piece from memory, the SMA is driving the sequence. It creates a motor program (the full plan) before execution begins. The 'readiness potential' \u2014 a slow brain wave that starts 1-2 seconds before a voluntary movement \u2014 originates primarily in the SMA. This signal represents the brain 'deciding' to move before you're consciously aware of the decision (Libet's famous experiment on free will).",
+      "sub_structures": [
+        {
+          "name": "SMA proper",
+          "role": "Motor sequence execution. Internally generated movements. Bimanual coordination."
+        },
+        {
+          "name": "Pre-SMA",
+          "role": "Higher-level sequence planning. Decision to act. Switches between motor plans. Working memory for actions."
+        }
+      ],
+      "processing_pipeline": "Internal motor intention \u2192 Pre-SMA (action selection, sequence planning) \u2192 SMA proper (motor program assembly, timing) \u2192 M1 (execution). Readiness potential: Pre-SMA/SMA \u2192 builds activity 1-2 seconds before movement \u2192 Peaks at M1 activation \u2192 Movement onset. SEQUENCE LEARNING: initial (cortical/conscious) \u2192 practiced (SMA-basal ganglia loop) \u2192 automatic (cerebellar).",
+      "signal_type": "Motor sequencing \u2014 readiness potential, internally generated movement timing",
+      "bci_relevance_detail": "The readiness potential from SMA is one of the earliest detectable signals of movement intention, making it valuable for BCIs that need to anticipate movement. SMA activity is used in EEG-based BCIs for detecting self-initiated movement vs. rest states.",
+      "clinical_notes": "SMA lesions \u2192 motor neglect (failure to use contralateral limbs despite intact strength). Alien hand syndrome (medial frontal variant): hand performs purposeful but unintended actions. SMA seizures: bilateral asymmetric tonic posturing, fencing posture, preserved consciousness."
     },
     {
       "id": "ppc",
@@ -330,7 +670,10 @@
       "function": "Spatial awareness, sensorimotor integration, attention, reach planning",
       "response_latency_ms": {
         "value": 45,
-        "range": [45, 150],
+        "range": [
+          45,
+          150
+        ],
         "measure": "Visual stimulus to LIP neuron onset (macaque single-unit); human intracranial ~60ms",
         "notes": "Mean latency 45.2ms in macaque area LIP (Bisley et al. 2004). Human posterior IPS: ~60ms (Hertz et al. 2018, intracranial). P1 ERP component over parietal cortex: ~100ms.",
         "citations": [
@@ -339,10 +682,52 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["alpha (8-13 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["v1", "m1", "pmc", "pfc", "thalamus"],
+      "oscillation_bands": [
+        "alpha (8-13 Hz)",
+        "beta (13-30 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "v1",
+        "m1",
+        "pmc",
+        "pfc",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [5, 7, 39, 40]
+      "brodmann_areas": [
+        5,
+        7,
+        39,
+        40
+      ],
+      "how_it_works": "The PPC is the brain's spatial computing center \u2014 it builds and maintains a model of where things are in space relative to your body. It transforms sensory coordinates (where you SEE something) into motor coordinates (where to REACH for it). This sensorimotor transformation is critical for all goal-directed action. The PPC also processes attention \u2014 damage causes hemispatial neglect, where patients ignore one entire half of space (they eat food only from the right side of the plate, shave only the right side of the face). It integrates visual, somatosensory, and proprioceptive signals to create a unified spatial representation.",
+      "sub_structures": [
+        {
+          "name": "Superior parietal lobule (SPL/BA 5,7)",
+          "role": "Proprioceptive integration. Body schema. Reach planning. Updates limb position in space."
+        },
+        {
+          "name": "Inferior parietal lobule (IPL/BA 39,40)",
+          "role": "Spatial attention. Multisensory integration. Damage \u2192 hemispatial neglect."
+        },
+        {
+          "name": "Lateral intraparietal area (LIP)",
+          "role": "Eye movement planning (saccades). Visual attention map. Salience computation."
+        },
+        {
+          "name": "Anterior intraparietal area (AIP)",
+          "role": "Object shape processing for grasping. Feeds PMv for grasp configuration."
+        },
+        {
+          "name": "Medial intraparietal area (MIP)",
+          "role": "Reach target encoding. Visual-to-motor coordinate transformation for arm movements."
+        }
+      ],
+      "processing_pipeline": "Visual input (V1 \u2192 Dorsal stream) \u2192 PPC spatial map (MIP: reach targets, LIP: saccade targets, AIP: grasp targets) \u2192 Coordinate transformation (eye-centered \u2192 hand-centered) \u2192 PMC/M1 (execution). ATTENTION: Sensory input \u2192 IPL (salience detection) \u2192 Attentional spotlight \u2192 Enhanced processing of attended location \u2192 Biased competition in visual cortex.",
+      "signal_type": "Spatial computing \u2014 coordinate transformation, attentional selection, body schema",
+      "bci_relevance_detail": "PPC encodes movement intentions in a cognitive format (goals rather than muscle commands), making it attractive for high-level BCIs. PPC recordings can decode intended reach targets even in paralyzed patients who cannot actually reach. Andersen lab (Caltech) demonstrated thought-controlled cursor from PPC signals.",
+      "clinical_notes": "Right PPC damage \u2192 left hemispatial neglect (ignores left side of space \u2014 not blind, but unaware). Optic ataxia: can see objects but can't reach accurately for them (impaired visuomotor transformation). Balint syndrome (bilateral PPC): can only perceive one object at a time (simultanagnosia), can't direct gaze voluntarily."
     },
     {
       "id": "s1_cortex",
@@ -355,7 +740,10 @@
       "function": "Tactile sensation, proprioception, somatotopic sensory map (homunculus)",
       "response_latency_ms": {
         "value": 20,
-        "range": [14, 50],
+        "range": [
+          14,
+          50
+        ],
         "measure": "Somatosensory evoked potential (SEP) N20 component",
         "notes": "N20 component at ~20ms post-median nerve stimulus. Earliest cortical SEP. P14 (subcortical) at ~14ms.",
         "citations": [
@@ -364,10 +752,50 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["mu (8-12 Hz)", "beta (13-30 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["thalamus_vpl", "m1", "ppc", "insula"],
+      "oscillation_bands": [
+        "mu (8-12 Hz)",
+        "beta (13-30 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "thalamus_vpl",
+        "m1",
+        "ppc",
+        "insula"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [1, 2, 3]
+      "brodmann_areas": [
+        1,
+        2,
+        3
+      ],
+      "how_it_works": "Touch, pressure, temperature, and pain receptors in the skin generate signals that travel through peripheral nerves to the spinal cord. There are 4 main receptor types: Meissner's corpuscles (light touch, texture), Merkel cells (pressure, fine detail), Pacinian corpuscles (deep pressure, vibration), and Ruffini endings (skin stretch). Signals ascend via the dorsal column-medial lemniscus pathway (touch/proprioception) or the spinothalamic tract (pain/temperature) to the ventral posterolateral nucleus (VPL) of the thalamus, then project to S1. S1 contains the sensory homunculus \u2014 a distorted body map where areas with high receptor density (fingers, lips, tongue) get more cortical space.",
+      "sub_structures": [
+        {
+          "name": "Brodmann Area 3a",
+          "role": "Proprioception from muscles and joints."
+        },
+        {
+          "name": "Brodmann Area 3b",
+          "role": "Primary touch processing. Fine tactile discrimination."
+        },
+        {
+          "name": "Brodmann Area 1",
+          "role": "Texture perception. Integrates across fingers."
+        },
+        {
+          "name": "Brodmann Area 2",
+          "role": "Size, shape, and joint position. Object recognition by touch."
+        },
+        {
+          "name": "Sensory homunculus",
+          "role": "Distorted body map. Fingers and lips have disproportionately large representation."
+        }
+      ],
+      "processing_pipeline": "Skin receptors (Meissner/Merkel/Pacinian/Ruffini) \u2192 Peripheral nerve \u2192 Dorsal root ganglion \u2192 Spinal cord dorsal column \u2192 Medulla (nucleus gracilis/cuneatus) \u2192 Medial lemniscus \u2192 VPL thalamus \u2192 S1 (Areas 3a/3b \u2192 1 \u2192 2) \u2192 S2 (bilateral integration) \u2192 PPC (spatial awareness)",
+      "signal_type": "Somatosensory \u2014 mechanical deformation, thermal, nociceptive",
+      "bci_relevance_detail": "Somatosensory BCIs provide artificial touch feedback for prosthetic limbs. Intracortical microstimulation of S1 can create naturalistic touch sensations. Key challenge: matching the receptor-type specificity (pressure vs. vibration vs. temperature) with electrical stimulation patterns.",
+      "clinical_notes": "Damage to S1 causes loss of fine touch discrimination (astereognosis). Phantom limb pain occurs from cortical reorganization \u2014 neighboring body map areas invade the deafferented region. The homunculus can reorganize after amputation within weeks."
     },
     {
       "id": "hippocampus",
@@ -380,7 +808,10 @@
       "function": "Episodic memory formation, spatial navigation, memory consolidation",
       "response_latency_ms": {
         "value": 204,
-        "range": [101, 500],
+        "range": [
+          101,
+          500
+        ],
         "measure": "Visual stimulus to hippocampal single-neuron response (human intracranial)",
         "notes": "Median onset 204ms for visually responsive neurons (Mormann et al. 2008, human intracranial). Hierarchical: parahippocampal cortex ~101ms, entorhinal cortex ~206ms, hippocampus ~204ms. Sharp-wave ripples (SWR): 80-200 Hz, ~50-100ms duration.",
         "citations": [
@@ -389,10 +820,47 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)", "sharp-wave ripples (100-250 Hz)"],
-      "connections": ["entorhinal_cortex", "bla", "pfc", "acc", "thalamus"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "gamma (30-100 Hz)",
+        "sharp-wave ripples (100-250 Hz)"
+      ],
+      "connections": [
+        "entorhinal_cortex",
+        "bla",
+        "pfc",
+        "acc",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The hippocampus is the brain's memory encoder \u2014 it converts short-term experiences into long-term memories through a process called consolidation. Information flows through a trisynaptic circuit: Entorhinal Cortex \u2192 Dentate Gyrus (pattern separation \u2014 making similar memories distinct) \u2192 CA3 (pattern completion \u2014 retrieving full memories from partial cues, autoassociative network) \u2192 CA1 (comparison and output) \u2192 back to Entorhinal Cortex. Long-term potentiation (LTP) \u2014 the strengthening of synapses through repeated activation \u2014 was first discovered here and is the cellular mechanism of learning. Place cells in the hippocampus fire at specific locations, creating a cognitive map of the environment (Nobel Prize, O'Keefe 2014).",
+      "sub_structures": [
+        {
+          "name": "Dentate Gyrus (DG)",
+          "role": "Pattern separation. Makes similar inputs distinguishable. One of only two brain areas with adult neurogenesis."
+        },
+        {
+          "name": "CA3",
+          "role": "Autoassociative network. Pattern completion \u2014 retrieves full memory from partial cue. Recurrent connections."
+        },
+        {
+          "name": "CA1",
+          "role": "Comparator \u2014 detects novelty by comparing CA3 output with entorhinal cortex input. Primary output layer."
+        },
+        {
+          "name": "Subiculum",
+          "role": "Output relay to cortex, hypothalamus, and mammillary bodies."
+        },
+        {
+          "name": "Entorhinal Cortex",
+          "role": "Grid cells (Nobel Prize, Moser & Moser 2014). Spatial coordinate system. Main input/output gateway."
+        }
+      ],
+      "processing_pipeline": "Experience \u2192 Sensory cortices \u2192 Perirhinal/Parahippocampal cortex \u2192 Entorhinal Cortex (grid cells) \u2192 DG (pattern separation) \u2192 CA3 (pattern completion) \u2192 CA1 (comparison) \u2192 Subiculum \u2192 Neocortex (long-term storage). Consolidation: during sleep (sharp-wave ripples), CA3 replays memories to neocortex for permanent storage.",
+      "signal_type": "Memory encoding \u2014 theta oscillations (4-8Hz) during encoding, sharp-wave ripples (80-120Hz) during consolidation",
+      "bci_relevance_detail": "Memory prostheses aim to restore hippocampal function by recording CA3 activity patterns and replaying them to CA1. DARPA RAM program demonstrated proof-of-concept in epilepsy patients. Closed-loop stimulation during theta can enhance memory encoding by ~15-25%.",
+      "clinical_notes": "Bilateral hippocampal damage \u2192 anterograde amnesia (can't form new memories; patient H.M.). Alzheimer's disease attacks the hippocampus first \u2014 early symptom is memory loss. Chronic stress shrinks hippocampal dendrites via cortisol. PTSD: hippocampus fails to contextualize fear memories, so they replay inappropriately."
     },
     {
       "id": "bla",
@@ -405,18 +873,51 @@
       "function": "Fear conditioning, emotional valence assignment, associative learning. Cortical-like architecture.",
       "response_latency_ms": {
         "value": 74,
-        "range": [74, 200],
+        "range": [
+          74,
+          200
+        ],
         "measure": "Visual threat stimulus to amygdala response (intracranial EEG)",
-        "notes": "Fastest documented: ~74ms via intracranial EEG (Mendez-Bertolo et al. 2016). NOT 12ms — no source exists for sub-20ms amygdala response. The 'fast path' bypasses thalamic gating but still requires ~74ms.",
+        "notes": "Fastest documented: ~74ms via intracranial EEG (Mendez-Bertolo et al. 2016). NOT 12ms \u2014 no source exists for sub-20ms amygdala response. The 'fast path' bypasses thalamic gating but still requires ~74ms.",
         "citations": [
           "Mendez-Bertolo et al. 2016 (Nature Neuroscience): Amygdala response to fear at 74ms via intracranial EEG"
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["hippocampus", "pfc", "acc", "insula", "cea", "thalamus", "v1"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "hippocampus",
+        "pfc",
+        "acc",
+        "insula",
+        "cea",
+        "thalamus",
+        "v1"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The amygdala is the brain's threat detector and emotional significance tagger. The basolateral amygdala (BLA) receives sensory input from all modalities and evaluates it for emotional relevance \u2014 is this dangerous? rewarding? novel? It uses two pathways: a fast 'low road' (thalamus \u2192 amygdala, ~12ms) that triggers immediate defensive responses before conscious awareness, and a slow 'high road' (thalamus \u2192 cortex \u2192 amygdala, ~30-40ms) that provides detailed analysis. BLA neurons form fear associations through Pavlovian conditioning: a neutral stimulus paired with a threat creates a permanent synaptic strengthening, so the neutral stimulus alone triggers fear responses.",
+      "sub_structures": [
+        {
+          "name": "Lateral nucleus",
+          "role": "Sensory input gateway. Receives thalamic and cortical projections. Fear conditioning occurs here."
+        },
+        {
+          "name": "Basal nucleus",
+          "role": "Integrates with PFC and hippocampus. Context-dependent emotional processing."
+        },
+        {
+          "name": "Accessory basal nucleus",
+          "role": "Projects to ventral striatum. Links emotion to motivated behavior."
+        }
+      ],
+      "processing_pipeline": "Threat stimulus \u2192 Thalamus \u2192 LOW ROAD: direct to BLA lateral nucleus (12ms, crude but fast) + HIGH ROAD: via sensory cortex to BLA (30-40ms, detailed analysis) \u2192 Central Amygdala (CeA) \u2192 Hypothalamus (stress hormones) + Periaqueductal gray (freezing) + Nucleus basalis (arousal) + Locus coeruleus (norepinephrine) + Brainstem (startle reflex)",
+      "signal_type": "Emotional valence \u2014 rapid threat assessment, fear/reward learning signals",
+      "bci_relevance_detail": "DBS of the amygdala has been explored for treatment-resistant PTSD and anxiety. Key security concern: BCI signals near the amygdala could inadvertently trigger fear responses or suppress threat detection. Amygdala activity is a proposed biomarker for emotional state decoding in affective BCIs.",
+      "clinical_notes": "Bilateral amygdala damage \u2192 inability to recognize fear in faces, poor threat assessment (patient S.M.). PTSD: amygdala hyperactivation \u2014 threat detector stuck on high. Anxiety disorders: lowered amygdala activation threshold. Psychopathy: reduced amygdala response to distress cues."
     },
     {
       "id": "insula",
@@ -429,7 +930,10 @@
       "function": "Interoception, pain processing, emotional awareness, taste, autonomic regulation",
       "response_latency_ms": {
         "value": 200,
-        "range": [200, 350],
+        "range": [
+          200,
+          350
+        ],
         "measure": "Auditory stimulus to insular HFA onset (human intracranial EEG)",
         "notes": "Intracranial EEG: 200-350ms for auditory stimuli. Visual P300-like component in anterior insula: 250-338ms. Substantially slower than primary sensory cortices, consistent with higher-order integrative role.",
         "citations": [
@@ -438,10 +942,45 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)", "beta (13-30 Hz)"],
-      "connections": ["bla", "acc", "pfc", "thalamus", "s1_cortex", "a1"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "alpha (8-13 Hz)",
+        "beta (13-30 Hz)"
+      ],
+      "connections": [
+        "bla",
+        "acc",
+        "pfc",
+        "thalamus",
+        "s1_cortex",
+        "a1"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [13, 14, 15, 16]
+      "brodmann_areas": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "how_it_works": "The insula is the brain's interoceptive cortex \u2014 it creates your sense of how your body feels from the inside. It maps internal body states: heart rate, gut feelings, muscle tension, temperature, itch, pain, hunger, thirst. The posterior insula receives raw interoceptive signals, and the anterior insula integrates them into a unified 'feeling state' \u2014 this is the neural basis of subjective emotional experience. When you feel anxious, the insula is registering elevated heart rate, shallow breathing, and muscle tension and constructing the feeling 'I am anxious.' It also processes disgust (both physical \u2014 rotten food \u2014 and moral \u2014 unfair behavior) and contains von Economo neurons for rapid intuitive judgments.",
+      "sub_structures": [
+        {
+          "name": "Posterior insula",
+          "role": "Primary interoceptive cortex. Receives visceral, thermal, and nociceptive input. Raw body signals."
+        },
+        {
+          "name": "Anterior insula",
+          "role": "Integrates interoception with cognition and emotion. Subjective feeling states. Self-awareness."
+        },
+        {
+          "name": "Von Economo neurons",
+          "role": "Rapid intuitive processing. Social emotions. Present in humans and great apes only."
+        }
+      ],
+      "processing_pipeline": "Internal body state (heart, gut, lungs, muscles) \u2192 Vagus nerve + spinal afferents \u2192 Brainstem nuclei (NTS, parabrachial) \u2192 Thalamus (VMpo, VMb) \u2192 Posterior insula (raw interoceptive map) \u2192 Anterior insula (integrated feeling state + prediction of future body states) \u2192 ACC/PFC (conscious awareness and decision-making based on body signals).",
+      "signal_type": "Interoceptive \u2014 internal body state mapping, subjective feeling construction",
+      "bci_relevance_detail": "Insular activity is a key target for affective BCIs \u2014 decoding emotional states from interoceptive processing. Insular stimulation during epilepsy surgery produces vivid visceral sensations (nausea, warmth, tingling). Security concern: disrupting insular processing could alter body awareness and emotional experience.",
+      "clinical_notes": "Insular stroke \u2192 loss of body awareness, inability to recognize emotions. Anterior insula damage \u2192 loss of disgust response, empathy deficits. Addiction: insula lesions can eliminate cigarette cravings instantly (suggesting insula maintains interoceptive urges). Anxiety disorders: insula hyperactivation amplifies body signals into threat."
     },
     {
       "id": "acc",
@@ -454,7 +993,10 @@
       "function": "Conflict monitoring, error detection, pain processing, motivation, autonomic regulation",
       "response_latency_ms": {
         "value": 200,
-        "range": [100, 400],
+        "range": [
+          100,
+          400
+        ],
         "measure": "ERN (Error-Related Negativity) onset",
         "notes": "Error-related negativity (ERN) peaks ~80-150ms post-error. Conflict monitoring (N2): ~200-350ms. Pain processing: ~150-250ms.",
         "citations": [
@@ -462,10 +1004,44 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "alpha (8-13 Hz)"],
-      "connections": ["pfc", "bla", "hippocampus", "insula", "m1", "striatum"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "alpha (8-13 Hz)"
+      ],
+      "connections": [
+        "pfc",
+        "bla",
+        "hippocampus",
+        "insula",
+        "m1",
+        "striatum"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [24, 25, 32, 33]
+      "brodmann_areas": [
+        24,
+        25,
+        32,
+        33
+      ],
+      "how_it_works": "The ACC is the brain's conflict monitor and error detector. When you're doing a Stroop task (reading 'RED' written in blue ink), the ACC detects the conflict between reading and color-naming and signals the PFC to increase cognitive control. It fires when you make errors, when outcomes are worse than expected, and when you experience physical pain or social rejection (the same ACC regions activate for both \u2014 'social pain' is neurologically real). The ACC integrates cognitive and emotional information, sitting at the intersection of the PFC (rational) and limbic (emotional) systems. It contains von Economo neurons (spindle cells) \u2014 large, fast-conducting neurons found only in humans and great apes, thought to enable rapid intuitive judgments.",
+      "sub_structures": [
+        {
+          "name": "Dorsal ACC (dACC)",
+          "role": "Cognitive division. Conflict monitoring, error detection, response selection. Activates when you need to override a habitual response."
+        },
+        {
+          "name": "Ventral/Subgenual ACC (sgACC)",
+          "role": "Emotional division. Mood regulation, autonomic control. Hyperactive in depression \u2014 target for DBS."
+        },
+        {
+          "name": "Von Economo neurons",
+          "role": "Large spindle-shaped neurons for rapid, intuitive decision-making. Found only in ACC and insula in humans/great apes."
+        }
+      ],
+      "processing_pipeline": "Response conflict (competing responses active simultaneously) \u2192 dACC detects conflict (ERN/theta oscillations at 200ms post-response) \u2192 Signals dlPFC to increase top-down control \u2192 dlPFC adjusts attention/inhibition \u2192 Reduced conflict on next trial. PAIN pathway: Nociceptive input \u2192 Thalamus \u2192 dACC (suffering/unpleasantness component, distinct from S1 sensory-discriminative component).",
+      "signal_type": "Conflict/error monitoring \u2014 theta oscillations (4-8Hz), error-related negativity (ERN)",
+      "bci_relevance_detail": "ACC signals can be used as error detection in BCIs \u2014 when the user's intended action doesn't match the decoded output, the ACC generates an error signal that can be used to correct the decoder in real-time. DBS of sgACC is an experimental treatment for treatment-resistant depression (Brodmann area 25 DBS).",
+      "clinical_notes": "Depression: sgACC hyperactivity (rumination, excessive self-monitoring). OCD: dACC hyperactivity (persistent error signal \u2014 'something is wrong' feeling that won't resolve). Anterior cingulotomy (lesioning ACC) is a last-resort treatment for intractable OCD and chronic pain. Akinetic mutism: bilateral ACC damage \u2192 loss of motivation to speak or move despite intact motor ability."
     },
     {
       "id": "cingulate",
@@ -478,7 +1054,10 @@
       "function": "Default mode network hub, self-referential processing, memory retrieval, spatial orientation",
       "response_latency_ms": {
         "value": 250,
-        "range": [150, 400],
+        "range": [
+          150,
+          400
+        ],
         "measure": "Task-related deactivation/activation",
         "notes": "Part of default mode network. Deactivation during task onset: ~200-300ms. Memory-related activation: variable.",
         "citations": [
@@ -486,10 +1065,43 @@
         ],
         "confidence": "LOW"
       },
-      "oscillation_bands": ["alpha (8-13 Hz)", "theta (4-8 Hz)"],
-      "connections": ["hippocampus", "pfc", "acc", "ppc", "thalamus"],
+      "oscillation_bands": [
+        "alpha (8-13 Hz)",
+        "theta (4-8 Hz)"
+      ],
+      "connections": [
+        "hippocampus",
+        "pfc",
+        "acc",
+        "ppc",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": [23, 29, 30, 31]
+      "brodmann_areas": [
+        23,
+        29,
+        30,
+        31
+      ],
+      "how_it_works": "The posterior cingulate cortex (PCC) is a central hub of the default mode network (DMN) \u2014 the brain's resting-state network that activates when you're not focused on the external world. When your mind wanders, remembers the past, imagines the future, or thinks about yourself and others, the PCC is highly active. It deactivates sharply when you focus on an external task. The PCC integrates internal and external attention, acting as a switch between self-referential thought and focused engagement. It also plays a role in spatial memory, navigation, and assessing the personal significance of stimuli.",
+      "sub_structures": [
+        {
+          "name": "Posterior cingulate cortex (PCC)",
+          "role": "Default mode network hub. Self-referential thought, mind-wandering, autobiographical memory."
+        },
+        {
+          "name": "Retrosplenial cortex",
+          "role": "Spatial memory and navigation. Translates between egocentric (body-relative) and allocentric (world-relative) coordinates."
+        },
+        {
+          "name": "Precuneus",
+          "role": "Self-awareness, episodic memory retrieval, visuospatial processing. One of the most metabolically active brain regions at rest."
+        }
+      ],
+      "processing_pipeline": "Rest/mind-wandering \u2192 PCC activates (DMN hub) \u2192 Integrates hippocampus (memory), mPFC (self-reference), angular gyrus (semantic) \u2192 Internal mentation. TASK ONSET: External stimulus \u2192 PCC deactivates \u2192 Dorsal attention network activates \u2192 Focused processing. NAVIGATION: Spatial cues \u2192 Retrosplenial cortex (coordinate transformation) \u2192 Hippocampus (cognitive map) \u2192 PPC (spatial planning).",
+      "signal_type": "Default mode \u2014 self-referential processing, internal mentation, attention switching",
+      "bci_relevance_detail": "PCC/DMN deactivation is a reliable neural marker of attention and engagement \u2014 useful for BCIs that monitor cognitive state. Neurofeedback targeting PCC activity has been explored for meditation training and ADHD. Disruption of DMN is associated with psychedelic states and some psychiatric conditions.",
+      "clinical_notes": "PCC is among the first regions affected in Alzheimer's disease \u2014 shows hypometabolism on PET years before symptoms. Damage to retrosplenial cortex \u2192 topographical disorientation (lost in familiar places). The precuneus is one of the last brain regions to lose activity under anesthesia and one of the first to recover \u2014 possibly related to consciousness itself."
     },
     {
       "id": "striatum",
@@ -502,7 +1114,10 @@
       "function": "Motor selection, habit learning, reward prediction, action initiation",
       "response_latency_ms": {
         "value": 100,
-        "range": [60, 300],
+        "range": [
+          60,
+          300
+        ],
         "measure": "Reward-related or movement-related striatal firing",
         "notes": "Reward prediction error: ~100ms post-outcome. Movement-related: ~60-200ms before movement in putamen. Caudate: 100-300ms for cognitive tasks.",
         "citations": [
@@ -510,10 +1125,46 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["beta (13-30 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["pfc", "m1", "sma", "acc", "gpi", "gpe", "stn", "substantia_nigra", "thalamus"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "pfc",
+        "m1",
+        "sma",
+        "acc",
+        "gpi",
+        "gpe",
+        "stn",
+        "substantia_nigra",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The striatum is the input station of the basal ganglia \u2014 the brain's action selection system. It works like a voting machine: cortical areas 'propose' actions by sending glutamate signals to the striatum, and the striatum selects which action to execute by disinhibiting the appropriate thalamic pathway. It uses two opposing pathways: the Direct pathway (D1 receptors, dopamine excites \u2192 GO signal, facilitates selected action) and the Indirect pathway (D2 receptors, dopamine inhibits \u2192 STOP signal, suppresses competing actions). Dopamine from the substantia nigra tips the balance: more dopamine \u2192 more action initiation. This is why Parkinson's (dopamine loss) causes inability to initiate movement, and why cocaine/amphetamine (dopamine excess) causes hyperactivity.",
+      "sub_structures": [
+        {
+          "name": "Caudate nucleus",
+          "role": "Cognitive and eye movement circuits. Goal-directed behavior. Learning stimulus-response associations."
+        },
+        {
+          "name": "Putamen",
+          "role": "Sensorimotor circuits. Habitual/automatic movement. Most affected in Parkinson's disease."
+        },
+        {
+          "name": "Nucleus Accumbens (NAc)",
+          "role": "Ventral striatum. Reward processing, motivation, addiction. 'Pleasure center.' Receives dopamine from VTA."
+        },
+        {
+          "name": "Medium spiny neurons (MSNs)",
+          "role": "95% of striatal neurons. D1-MSNs (direct pathway, GO) and D2-MSNs (indirect pathway, STOP)."
+        }
+      ],
+      "processing_pipeline": "Cortex (action proposals via glutamate) \u2192 Striatum (MSNs integrate cortical votes) \u2192 DIRECT: D1-MSNs \u2192 inhibit GPi \u2192 disinhibit thalamus \u2192 cortex \u2192 GO. INDIRECT: D2-MSNs \u2192 inhibit GPe \u2192 disinhibit STN \u2192 excite GPi \u2192 inhibit thalamus \u2192 STOP. Dopamine from SNc/VTA modulates the balance: D1 activation (GO) + D2 inhibition (less STOP) = net facilitation of movement.",
+      "signal_type": "Action selection \u2014 integration of cortical inputs, dopamine-modulated output via direct/indirect pathways",
+      "bci_relevance_detail": "DBS of the striatum (specifically STN or GPi) is the primary treatment for advanced Parkinson's disease. Closed-loop DBS systems detect pathological beta oscillations (13-30Hz) in the striatum and deliver stimulation only when needed. Security: disrupting striatal dopamine signaling could alter reward processing (addiction) or motor control (dyskinesia).",
+      "clinical_notes": "Parkinson's disease: loss of dopamine neurons in SNc \u2192 striatal dopamine depletion \u2192 inability to initiate movement (bradykinesia), rigidity, tremor. Huntington's disease: degeneration of striatal MSNs \u2192 involuntary movements (chorea) + cognitive decline. OCD: hyperactive caudate \u2192 repetitive action loops. Addiction: hijacked NAc reward circuitry."
     },
     {
       "id": "gpi",
@@ -526,18 +1177,47 @@
       "function": "Primary output nucleus of basal ganglia (inhibitory). Major DBS target for dystonia.",
       "response_latency_ms": {
         "value": 15,
-        "range": [10, 30],
+        "range": [
+          10,
+          30
+        ],
         "measure": "Striatal input to GPi output latency",
-        "notes": "Direct pathway: striatum → GPi ~10-15ms. GPi tonic firing rate: 60-80 Hz. Pause latency during movement: ~15ms.",
+        "notes": "Direct pathway: striatum \u2192 GPi ~10-15ms. GPi tonic firing rate: 60-80 Hz. Pause latency during movement: ~15ms.",
         "citations": [
           "Kita & Kita 2011 (J Neurosci): Basal ganglia circuit timing"
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["beta (13-30 Hz)"],
-      "connections": ["striatum", "stn", "thalamus", "gpe"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)"
+      ],
+      "connections": [
+        "striatum",
+        "stn",
+        "thalamus",
+        "gpe"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The GPi is the primary output nucleus of the basal ganglia \u2014 it acts as the final gate between the striatum's action selection and the thalamus. In its resting state, the GPi tonically inhibits the thalamus, preventing all movements. When the direct pathway (D1-MSNs from striatum) inhibits specific GPi neurons, those thalamic targets are released from inhibition \u2014 allowing the selected movement to proceed while all other movements remain suppressed. This 'release from inhibition' mechanism (double negative = positive) is how the basal ganglia select one action from many competing options.",
+      "sub_structures": [
+        {
+          "name": "Motor territory",
+          "role": "Receives from putamen. Controls voluntary movement via thalamus (VA/VL) \u2192 M1/SMA."
+        },
+        {
+          "name": "Associative territory",
+          "role": "Receives from caudate. Cognitive action selection via thalamus \u2192 PFC."
+        },
+        {
+          "name": "Limbic territory",
+          "role": "Receives from ventral striatum/NAc. Emotional/motivational action selection."
+        }
+      ],
+      "processing_pipeline": "RESTING STATE: GPi \u2192 tonic GABA inhibition \u2192 Thalamus silenced \u2192 No movement. DIRECT PATHWAY: Cortex \u2192 Striatum (D1-MSNs) \u2192 INHIBITS GPi \u2192 Thalamus released \u2192 Cortex activated \u2192 Selected movement executes. INDIRECT PATHWAY: Cortex \u2192 Striatum (D2-MSNs) \u2192 GPe \u2192 STN \u2192 EXCITES GPi \u2192 Thalamus more inhibited \u2192 Competing movements suppressed.",
+      "signal_type": "Inhibitory gate \u2014 tonic GABAergic inhibition of thalamus, released by striatal direct pathway",
+      "bci_relevance_detail": "DBS of the GPi is FDA-approved for Parkinson's disease (reduces rigidity and dyskinesia) and primary generalized dystonia. GPi-DBS works by disrupting pathological oscillatory patterns rather than simply inhibiting or exciting \u2014 the mechanism is still debated.",
+      "clinical_notes": "Parkinson's: GPi hyperactive (excess inhibition of thalamus \u2192 bradykinesia). Dystonia: GPi firing patterns become irregular \u2192 sustained muscle contractions. Hemiballismus: damage to STN \u2192 GPi loses excitatory input \u2192 thalamus disinhibited \u2192 wild flinging movements of contralateral limbs."
     },
     {
       "id": "gpe",
@@ -550,7 +1230,10 @@
       "function": "Indirect pathway relay, tonic inhibition of STN, basal ganglia modulation",
       "response_latency_ms": {
         "value": 15,
-        "range": [10, 25],
+        "range": [
+          10,
+          25
+        ],
         "measure": "Striatal input to GPe relay",
         "notes": "Similar timing to GPi. Tonic firing rate: 50-70 Hz. Indirect pathway involves additional STN relay.",
         "citations": [
@@ -558,10 +1241,36 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["beta (13-30 Hz)"],
-      "connections": ["striatum", "stn", "gpi", "thalamus"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)"
+      ],
+      "connections": [
+        "striatum",
+        "stn",
+        "gpi",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The GPe is a critical relay in the indirect pathway of the basal ganglia. It normally inhibits the STN, keeping it in check. When the indirect pathway is activated (D2-MSNs from striatum inhibit GPe), the GPe stops inhibiting the STN, which then excites the GPi, which increases thalamic inhibition \u2014 resulting in movement suppression. The GPe also has direct connections to the striatum (the 'arkypallidal' pathway, discovered recently), suggesting it plays a more complex role than simple relay \u2014 it may actively reshape striatal activity patterns and contribute to action cancellation (stopping a movement mid-execution).",
+      "sub_structures": [
+        {
+          "name": "Prototypic neurons (~70%)",
+          "role": "Project to STN and GPi. Classic indirect pathway relay. Provide tonic inhibition of STN."
+        },
+        {
+          "name": "Arkypallidal neurons (~25%)",
+          "role": "Project BACK to striatum. Recently discovered. May enable rapid action cancellation by resetting striatal activity."
+        },
+        {
+          "name": "Cortically-projecting neurons (~5%)",
+          "role": "Direct GPe \u2192 cortex projection (discovered 2015). Function still being characterized."
+        }
+      ],
+      "processing_pipeline": "INDIRECT PATHWAY: Cortex \u2192 Striatum (D2-MSNs) \u2192 INHIBIT GPe prototypic neurons \u2192 STN released from inhibition \u2192 STN excites GPi \u2192 GPi increases thalamic inhibition \u2192 Movement suppressed. ARKYPALLIDAL: GPe arkypallidal neurons \u2192 Back to striatum \u2192 Reset ongoing activity \u2192 Action cancellation (stop signal).",
+      "signal_type": "Inhibitory relay \u2014 GABAergic modulation of STN, striatal feedback via arkypallidal projection",
+      "bci_relevance_detail": "GPe is not a common DBS target but is increasingly recognized as important for understanding basal ganglia computation. GPe-STN circuit dynamics generate pathological beta oscillations in Parkinson's \u2014 understanding this could improve closed-loop DBS algorithms.",
+      "clinical_notes": "GPe lesions \u2192 poorly characterized in isolation (rare). GPe dysfunction contributes to Parkinson's pathophysiology \u2014 loss of dopamine shifts balance toward indirect pathway dominance \u2192 GPe hypoactive \u2192 STN hyperactive \u2192 excessive movement suppression."
     },
     {
       "id": "stn",
@@ -574,7 +1283,10 @@
       "function": "Hyperdirect pathway hub, motor urgency signal, stop-signal processing. Primary DBS target for Parkinson's.",
       "response_latency_ms": {
         "value": 5,
-        "range": [5, 70],
+        "range": [
+          5,
+          70
+        ],
         "measure": "Cortical stimulation to STN response (antidromic/orthodromic)",
         "notes": "Short-latency (antidromic via hyperdirect pathway): 5-10ms. Medium-latency (antidromic cortical): 2-15ms. Long-latency (orthodromic polysynaptic): 20-70ms. Beta oscillations (15-30 Hz) pathological in PD.",
         "citations": [
@@ -584,10 +1296,38 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["beta (13-30 Hz)", "theta (4-8 Hz)"],
-      "connections": ["gpe", "gpi", "substantia_nigra", "cortex_hyperdirect", "thalamus"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)",
+        "theta (4-8 Hz)"
+      ],
+      "connections": [
+        "gpe",
+        "gpi",
+        "substantia_nigra",
+        "cortex_hyperdirect",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The STN is the only excitatory (glutamatergic) nucleus in the basal ganglia \u2014 everything else uses GABA. It acts as an emergency brake on movement. When activated, it broadly excites the GPi, which increases inhibition of the thalamus, suppressing all motor output. This 'hyperdirect' pathway (cortex \u2192 STN \u2192 GPi) is faster than the direct or indirect pathways, allowing rapid cancellation of all movements before the slower selection pathways can choose an action. This is why you can freeze mid-reach when you notice something wrong. In Parkinson's disease, the STN becomes hyperactive (excessive braking), contributing to the difficulty initiating movement.",
+      "sub_structures": [
+        {
+          "name": "Motor territory (dorsolateral)",
+          "role": "Receives from M1/PMC. The DBS target for Parkinson's disease."
+        },
+        {
+          "name": "Associative territory (ventromedial)",
+          "role": "Receives from PFC. Cognitive control, decision conflict."
+        },
+        {
+          "name": "Limbic territory (medial tip)",
+          "role": "Receives from ACC/OFC. Emotional impulsivity. DBS here \u2192 impulsive behavior side effect."
+        }
+      ],
+      "processing_pipeline": "HYPERDIRECT PATHWAY (fastest, ~10ms): Cortex \u2192 STN (glutamate, excitatory) \u2192 GPi (broadly excited) \u2192 Thalamus (broadly inhibited) \u2192 ALL movements paused. Then DIRECT pathway (slower) releases the selected action. This creates a 'pause-then-select' mechanism: brake everything first, then release the intended movement. IN PARKINSON'S: dopamine loss \u2192 D2 indirect pathway overactive \u2192 GPe inhibited \u2192 STN hyperactive \u2192 excessive GPi activation \u2192 thalamus over-inhibited \u2192 bradykinesia.",
+      "signal_type": "Excitatory brake \u2014 glutamatergic broad-stop signal, hyperdirect pathway terminus",
+      "bci_relevance_detail": "STN-DBS is the gold standard surgical treatment for Parkinson's disease. High-frequency stimulation (~130Hz) disrupts pathological beta oscillations. Adaptive/closed-loop DBS detects beta power in real-time and stimulates only when needed \u2014 reduces side effects and extends battery life. The STN is the most studied DBS target in neuroscience.",
+      "clinical_notes": "STN-DBS for Parkinson's: reduces tremor, rigidity, and bradykinesia. Allows L-DOPA dose reduction by ~50%. Side effects: speech difficulty, impulsivity (limbic territory stimulation), mood changes. STN lesion \u2192 hemiballismus (violent flinging movements \u2014 loss of the 'brake'). Adaptive DBS (Medtronic Percept PC) now available clinically."
     },
     {
       "id": "substantia_nigra",
@@ -600,7 +1340,10 @@
       "function": "Dopamine production (SNc, pars compacta) and basal ganglia output (SNr, pars reticulata). Degeneration causes Parkinson's.",
       "response_latency_ms": {
         "value": 20,
-        "range": [10, 50],
+        "range": [
+          10,
+          50
+        ],
         "measure": "Dopamine burst latency to unexpected reward",
         "notes": "SNc dopamine neurons: burst response to unexpected reward ~10-20ms. SNr inhibitory output timing similar to GPi.",
         "citations": [
@@ -608,10 +1351,36 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["beta (13-30 Hz)"],
-      "connections": ["striatum", "stn", "gpi", "thalamus"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)"
+      ],
+      "connections": [
+        "striatum",
+        "stn",
+        "gpi",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The substantia nigra ('black substance,' named for its dark neuromelanin pigment) contains dopamine-producing neurons that are critical for movement initiation. The pars compacta (SNc) produces dopamine that modulates the striatum's direct/indirect pathways. Each SNc neuron branches extensively, with a single neuron innervating up to 75,000 striatal neurons. The pars reticulata (SNr) is an output nucleus of the basal ganglia, sending GABAergic inhibition to the thalamus and superior colliculus. The SNc neurons fire in two modes: tonic (steady, background dopamine for normal function) and phasic bursts (reward prediction error signals \u2014 fire when reward is unexpected, pause when expected reward is absent).",
+      "sub_structures": [
+        {
+          "name": "Pars Compacta (SNc)",
+          "role": "Dopamine production. Projects to dorsal striatum. Loss of these neurons \u2192 Parkinson's disease."
+        },
+        {
+          "name": "Pars Reticulata (SNr)",
+          "role": "GABAergic output nucleus. Inhibits thalamus and superior colliculus. Functionally similar to GPi."
+        },
+        {
+          "name": "Neuromelanin",
+          "role": "Dark pigment (dopamine metabolite). Accumulates with age. Lost in Parkinson's \u2014 visible on MRI as depigmentation."
+        }
+      ],
+      "processing_pipeline": "SNc dopamine neurons \u2192 nigrostriatal pathway \u2192 Dorsal striatum (caudate/putamen). Firing pattern: TONIC (~4Hz baseline) maintains normal dopamine tone for movement. PHASIC BURST (reward prediction error): unexpected reward \u2192 burst \u2192 increased dopamine \u2192 reinforces preceding action. Expected reward absent \u2192 pause \u2192 decreased dopamine \u2192 weakens preceding action. This is the cellular mechanism of reinforcement learning.",
+      "signal_type": "Dopaminergic \u2014 tonic baseline for motor function, phasic bursts for reward prediction error",
+      "bci_relevance_detail": "Loss of SNc neurons is the defining pathology of Parkinson's. DBS downstream (STN/GPi) compensates but doesn't restore dopamine. Cell replacement therapies and optogenetic stimulation of remaining SNc neurons are active research areas. BCI security: disrupting SNc output mimics Parkinson's symptoms.",
+      "clinical_notes": "Parkinson's disease: >60% SNc neuron loss before symptoms appear. Progressive \u2014 no cure, DBS and L-DOPA are symptomatic treatments. L-DOPA is converted to dopamine by remaining neurons, compensating for loss. Over time, fewer neurons \u2192 L-DOPA dose increases \u2192 dyskinesia (involuntary movements from excess dopamine)."
     },
     {
       "id": "vta",
@@ -621,11 +1390,14 @@
       "parent_structure": "midbrain",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
-      "function": "Dopamine production — origin of mesolimbic and mesocortical pathways. Primary reward and motivation center.",
+      "function": "Dopamine production \u2014 origin of mesolimbic and mesocortical pathways. Primary reward and motivation center.",
       "primary_function": "Dopaminergic neurotransmission, reward processing",
       "response_latency_ms": {
         "value": 100,
-        "range": [50, 200],
+        "range": [
+          50,
+          200
+        ],
         "measure": "VTA dopamine neuron burst latency to reward cue",
         "notes": "VTA dopamine neurons show phasic burst firing 50-200ms after reward-predictive cue. Longer latency than SNc due to mesolimbic projection targets.",
         "citations": [
@@ -634,10 +1406,38 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["theta (4-8 Hz)", "gamma (30-100 Hz)"],
-      "connections": ["striatum", "pfc", "bla", "hippocampus", "acc"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)",
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "striatum",
+        "pfc",
+        "bla",
+        "hippocampus",
+        "acc"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The VTA is the origin of the brain's reward and motivation system. Its dopamine neurons project to the nucleus accumbens (mesolimbic pathway \u2014 reward, motivation, addiction) and prefrontal cortex (mesocortical pathway \u2014 working memory, executive function). VTA neurons encode reward prediction errors: they burst-fire when something unexpectedly good happens and pause when an expected reward doesn't arrive. This signal teaches the brain what actions lead to reward. Every addictive substance increases dopamine release from VTA neurons \u2014 cocaine blocks reuptake, amphetamine reverses the transporter, opioids disinhibit VTA neurons by suppressing local GABA interneurons.",
+      "sub_structures": [
+        {
+          "name": "Dopamine neurons (~60%)",
+          "role": "Project to NAc (mesolimbic) and PFC (mesocortical). Encode reward prediction error."
+        },
+        {
+          "name": "GABA neurons (~35%)",
+          "role": "Local inhibitory interneurons. Regulate dopamine neuron firing. Opioids suppress these \u2192 disinhibit dopamine release."
+        },
+        {
+          "name": "Glutamate neurons (~5%)",
+          "role": "Co-release glutamate with dopamine. Modulate excitatory/inhibitory balance in target areas."
+        }
+      ],
+      "processing_pipeline": "Reward stimulus \u2192 Lateral hypothalamus/PFC/amygdala \u2192 VTA dopamine neurons \u2192 MESOLIMBIC: VTA \u2192 NAc (motivation, wanting, reward salience) \u2192 PFC (decision-making about reward). MESOCORTICAL: VTA \u2192 PFC (working memory, cognitive control). Reward prediction error: Expected reward present \u2192 no change. Unexpected reward \u2192 burst \u2192 dopamine surge \u2192 'this was good, do it again.' Expected reward absent \u2192 pause \u2192 dopamine dip \u2192 'this was bad, avoid.'",
+      "signal_type": "Dopaminergic \u2014 reward prediction error, motivation, incentive salience",
+      "bci_relevance_detail": "VTA is the target of the mesolimbic pathway \u2014 the primary reward circuit. DBS of the VTA has been explored for treatment-resistant depression. Security concern: VTA stimulation could create artificial reward signals, potentially inducing compulsive device use or addiction-like states. This is one of the most ethically sensitive BCI targets.",
+      "clinical_notes": "Depression: VTA hypoactivity \u2192 reduced motivation and anhedonia. Addiction: VTA hijacked by drugs \u2192 natural rewards become insufficient. Schizophrenia (positive symptoms): excessive VTA dopamine in mesolimbic pathway. ADHD: insufficient VTA dopamine in mesocortical pathway to PFC."
     },
     {
       "id": "thalamus",
@@ -650,8 +1450,11 @@
       "function": "Central relay station for all sensory modalities (except olfaction). Gating via reticular thalamic nucleus (TRN) implements default-deny on ascending traffic.",
       "response_latency_ms": {
         "value": 4,
-        "range": [3, 20],
-        "measure": "LGN relay latency (retina → LGN → V1)",
+        "range": [
+          3,
+          20
+        ],
+        "measure": "LGN relay latency (retina \u2192 LGN \u2192 V1)",
         "notes": "LGN visual relay: ~4.2ms (retinogeniculate delay). VPL somatosensory relay: ~14ms (median nerve). MGN auditory relay: ~6-8ms. TRN gating adds ~2-5ms.",
         "citations": [
           "Sherman & Guillery 2006 (Exploring the Thalamus and Its Role in Cortical Function): Thalamic relay timing",
@@ -659,10 +1462,51 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["alpha (8-13 Hz)", "sleep spindles (11-15 Hz)", "delta (0.5-4 Hz)"],
-      "connections": ["all_cortical_areas", "striatum", "cerebellum_nuclei", "reticular_formation", "hypothalamus"],
+      "oscillation_bands": [
+        "alpha (8-13 Hz)",
+        "sleep spindles (11-15 Hz)",
+        "delta (0.5-4 Hz)"
+      ],
+      "connections": [
+        "all_cortical_areas",
+        "striatum",
+        "cerebellum_nuclei",
+        "reticular_formation",
+        "hypothalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The thalamus is the brain's central relay station \u2014 nearly ALL sensory information (except smell) passes through it before reaching the cortex. But it's not a passive relay. The thalamus actively gates what reaches conscious awareness by switching between two modes: tonic mode (steady firing, passes information faithfully) and burst mode (rhythmic firing, blocks information \u2014 this happens during sleep and absence seizures). Each sensory modality has its own thalamic nucleus: LGN for vision, MGN for hearing, VPL/VPM for touch. The thalamus also receives massive feedback from the cortex (10x more cortical\u2192thalamic connections than thalamic\u2192cortical), making it a dynamic filter that the cortex uses to control its own input.",
+      "sub_structures": [
+        {
+          "name": "Lateral Geniculate Nucleus (LGN)",
+          "role": "Visual relay. 6 layers: magnocellular (motion) and parvocellular (detail/color). Receives retinal ganglion cell axons."
+        },
+        {
+          "name": "Medial Geniculate Nucleus (MGN)",
+          "role": "Auditory relay. Tonotopic organization preserved from cochlea."
+        },
+        {
+          "name": "Ventral Posterolateral (VPL)",
+          "role": "Somatosensory relay for body. Touch, pressure, proprioception from medial lemniscus."
+        },
+        {
+          "name": "Ventral Posteromedial (VPM)",
+          "role": "Somatosensory relay for face. Trigeminal nerve input."
+        },
+        {
+          "name": "Pulvinar",
+          "role": "Largest thalamic nucleus. Visual attention, multisensory integration. Directs cortical attention."
+        },
+        {
+          "name": "Reticular nucleus",
+          "role": "Surrounds the thalamus like a shell. GABAergic \u2014 inhibits other thalamic nuclei. Controls the 'gate' of consciousness."
+        }
+      ],
+      "processing_pipeline": "Sensory receptors \u2192 Sensory nerves \u2192 Specific thalamic nucleus (LGN/MGN/VPL) \u2192 Thalamocortical radiations \u2192 Layer 4 of corresponding cortical area. Gating mechanism: Reticular nucleus receives cortical feedback \u2192 inhibits thalamic relay neurons \u2192 blocks sensory input from reaching cortex (selective attention). During sleep: thalamic neurons enter burst mode \u2192 thalamocortical oscillations \u2192 sleep spindles (12-15Hz) = memory consolidation.",
+      "signal_type": "Relay and gating \u2014 tonic mode (faithful transmission) vs. burst mode (rhythmic blocking)",
+      "bci_relevance_detail": "DBS of the thalamus (VIM nucleus) is FDA-approved for essential tremor. Thalamic stimulation can modulate consciousness level in minimally conscious patients. The thalamic gate is a critical security concern: disrupting thalamic relay could alter all conscious sensory experience simultaneously.",
+      "clinical_notes": "Thalamic stroke \u2192 thalamic pain syndrome (severe, chronic pain from damaged sensory relay). Absence seizures: thalamocortical circuits enter pathological burst oscillation (3Hz spike-and-wave). Fatal familial insomnia: prion disease destroying thalamus \u2192 complete inability to sleep \u2192 death."
     },
     {
       "id": "hypothalamus",
@@ -672,21 +1516,59 @@
       "parent_structure": "diencephalon",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
-      "function": "Homeostatic regulation — temperature, hunger, thirst, circadian rhythm, hormone release, autonomic output",
+      "function": "Homeostatic regulation \u2014 temperature, hunger, thirst, circadian rhythm, hormone release, autonomic output",
       "response_latency_ms": {
         "value": 7,
-        "range": [7, 20],
+        "range": [
+          7,
+          20
+        ],
         "measure": "Lateral hypothalamus evoked potential to sciatic nerve stimulation (cat)",
-        "notes": "Lateral hypothalamus: ~7ms (cat, evoked potential). Acoustic/somatosensory: <15-20ms across mammals. Homeostatic outputs operate on seconds-to-hours timescale. CAUTION: 7ms value from animal data — human intracranial data extremely limited.",
+        "notes": "Lateral hypothalamus: ~7ms (cat, evoked potential). Acoustic/somatosensory: <15-20ms across mammals. Homeostatic outputs operate on seconds-to-hours timescale. CAUTION: 7ms value from animal data \u2014 human intracranial data extremely limited.",
         "citations": [
           "Yamamoto et al. 2020 (Physiol Behav, DOI: 10.1016/j.physbeh.2020.113100): Fast sensory responses in lateral hypothalamus review"
         ],
         "confidence": "LOW"
       },
-      "oscillation_bands": ["slow oscillations (<1 Hz)", "theta (4-8 Hz)"],
-      "connections": ["thalamus", "bla", "brainstem_autonomic", "pituitary"],
+      "oscillation_bands": [
+        "slow oscillations (<1 Hz)",
+        "theta (4-8 Hz)"
+      ],
+      "connections": [
+        "thalamus",
+        "bla",
+        "brainstem_autonomic",
+        "pituitary"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The hypothalamus is the brain's master regulator of homeostasis \u2014 it keeps your body alive by controlling temperature, hunger, thirst, sleep/wake cycles, hormones, and the autonomic nervous system. Despite being only ~4 grams (about the size of an almond), it controls the entire endocrine system through the pituitary gland. It works by sensing blood chemistry directly (glucose, osmolarity, temperature, hormones) and adjusting outputs to maintain set points. When you're cold, the hypothalamus triggers shivering and vasoconstriction. When you're dehydrated, it releases ADH to retain water. The suprachiasmatic nucleus (SCN) is the master circadian clock, entrained by light via the retinohypothalamic tract.",
+      "sub_structures": [
+        {
+          "name": "Suprachiasmatic Nucleus (SCN)",
+          "role": "Master circadian clock. ~20,000 neurons with autonomous 24-hour firing rhythms. Entrained by retinal light input."
+        },
+        {
+          "name": "Paraventricular Nucleus (PVN)",
+          "role": "Stress response (CRH \u2192 pituitary \u2192 ACTH \u2192 cortisol). Also produces oxytocin and vasopressin."
+        },
+        {
+          "name": "Lateral Hypothalamus",
+          "role": "Hunger/feeding center. Contains orexin/hypocretin neurons (loss \u2192 narcolepsy)."
+        },
+        {
+          "name": "Ventromedial Hypothalamus",
+          "role": "Satiety center. Damage \u2192 hyperphagia (uncontrollable eating)."
+        },
+        {
+          "name": "Preoptic Area",
+          "role": "Thermoregulation and sleep promotion (VLPO sleep switch)."
+        }
+      ],
+      "processing_pipeline": "Blood chemistry sensors (glucose, osmolarity, temperature, hormones) \u2192 Hypothalamic nuclei \u2192 TWO output pathways: (1) Endocrine: hypothalamus \u2192 releasing hormones \u2192 pituitary gland \u2192 target endocrine glands (thyroid, adrenal, gonads) \u2192 systemic hormones. (2) Autonomic: hypothalamus \u2192 brainstem autonomic centers \u2192 sympathetic/parasympathetic nervous system \u2192 heart rate, blood pressure, digestion, pupils.",
+      "signal_type": "Homeostatic \u2014 chemical sensing and neuroendocrine/autonomic output",
+      "bci_relevance_detail": "DBS of the hypothalamus has been explored for cluster headaches (posterior hypothalamus) and obesity (ventromedial). Security concern: hypothalamic disruption via BCI could alter fundamental homeostatic set points \u2014 body temperature, hunger, sleep-wake cycles, stress response. This represents a particularly dangerous attack surface because effects are systemic and potentially life-threatening.",
+      "clinical_notes": "Hypothalamic tumors \u2192 precocious puberty, diabetes insipidus, thermoregulation failure. Narcolepsy: loss of orexin neurons in lateral hypothalamus. Cushing's disease: excess CRH from PVN \u2192 chronic cortisol elevation."
     },
     {
       "id": "vim",
@@ -699,7 +1581,10 @@
       "function": "Cerebellar relay to motor cortex. Primary DBS target for essential tremor.",
       "response_latency_ms": {
         "value": 8,
-        "range": [5, 15],
+        "range": [
+          5,
+          15
+        ],
         "measure": "Cerebellothalamic conduction time",
         "notes": "Dentate nucleus to VIM: ~5-8ms. VIM to motor cortex: ~3-5ms. Total cerebellar loop: ~20-40ms.",
         "citations": [
@@ -707,10 +1592,33 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["tremor frequency (4-6 Hz)", "beta (13-30 Hz)"],
-      "connections": ["cerebellum_nuclei", "m1", "pmc", "sma"],
+      "oscillation_bands": [
+        "tremor frequency (4-6 Hz)",
+        "beta (13-30 Hz)"
+      ],
+      "connections": [
+        "cerebellum_nuclei",
+        "m1",
+        "pmc",
+        "sma"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The VIM is a specific nucleus within the thalamus that relays cerebellar output to the motor cortex. Cerebellar signals carrying movement corrections pass through the VIM on their way to M1 and PMC. The VIM plays a critical role in tremor because pathological oscillations in the cerebello-thalamo-cortical loop are amplified through this nucleus. In essential tremor (the most common movement disorder, affecting ~5% of people over 65), the VIM becomes locked in rhythmic oscillatory firing at 4-12Hz, which drives the characteristic action tremor.",
+      "sub_structures": [
+        {
+          "name": "VIM proper",
+          "role": "Cerebellar relay to motor cortex. Target for tremor DBS and focused ultrasound (FUS)."
+        },
+        {
+          "name": "Adjacent VOp (ventral oral posterior)",
+          "role": "Pallidal relay. Receives from GPi. Sends to SMA/PMC. Sometimes included in DBS targeting."
+        }
+      ],
+      "processing_pipeline": "Cerebellum (deep nuclei) \u2192 Superior cerebellar peduncle \u2192 Crosses midline (decussation) \u2192 VIM thalamus \u2192 Thalamocortical projections \u2192 M1/PMC (motor correction applied). IN TREMOR: pathological oscillation in cerebellum \u2194 VIM \u2194 cortex loop \u2192 rhythmic motor output \u2192 visible tremor. DBS at 130Hz disrupts this oscillation.",
+      "signal_type": "Motor relay \u2014 cerebellar correction signals to cortex, pathological tremor oscillations when dysfunctional",
+      "bci_relevance_detail": "VIM-DBS is the most established DBS target (FDA-approved 1997 for essential tremor). VIM-targeted focused ultrasound (Insightec Exablate Neuro) provides lesion-free tremor treatment. Closed-loop VIM stimulation triggered by tremor detection is an active research area.",
+      "clinical_notes": "Essential tremor: VIM-DBS reduces tremor by 60-90%. Focused ultrasound thalamotomy (FUS): non-invasive, one-session treatment, FDA-approved 2016. Risk: VIM is small (~4mm) and adjacent to sensory thalamus \u2014 miss by 1-2mm \u2192 numbness or paresthesias."
     },
     {
       "id": "ant",
@@ -723,7 +1631,10 @@
       "function": "Limbic relay, memory circuits (Papez circuit). DBS target for drug-resistant epilepsy.",
       "response_latency_ms": {
         "value": 10,
-        "range": [5, 20],
+        "range": [
+          5,
+          20
+        ],
         "measure": "Hippocampal input relay time",
         "notes": "Mammillothalamic tract conduction to ANT: ~5-10ms. ANT to cingulate cortex: ~5-10ms.",
         "citations": [
@@ -731,10 +1642,36 @@
         ],
         "confidence": "LOW"
       },
-      "oscillation_bands": ["theta (4-8 Hz)"],
-      "connections": ["hippocampus", "mammillary_bodies", "cingulate", "pfc"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)"
+      ],
+      "connections": [
+        "hippocampus",
+        "mammillary_bodies",
+        "cingulate",
+        "pfc"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The ANT is a thalamic nucleus that sits at the crossroads of the limbic system's memory circuit (the Papez circuit). It relays information from the hippocampus (via the mammillary bodies and mammillothalamic tract) to the cingulate cortex, creating a loop critical for episodic memory and spatial navigation. The ANT contains head direction cells \u2014 neurons that fire when the animal faces a specific direction, regardless of location. These work alongside hippocampal place cells and entorhinal grid cells to create the brain's internal GPS.",
+      "sub_structures": [
+        {
+          "name": "Anteroventral (AV)",
+          "role": "Head direction cell cluster. Spatial orientation signaling."
+        },
+        {
+          "name": "Anteromedial (AM)",
+          "role": "Memory processing. Mammillothalamic tract input."
+        },
+        {
+          "name": "Anterodorsal (AD)",
+          "role": "Dense head direction cell population. Vestibular integration for directional sense."
+        }
+      ],
+      "processing_pipeline": "Hippocampus (memory encoding) \u2192 Fornix \u2192 Mammillary bodies \u2192 Mammillothalamic tract \u2192 ANT \u2192 Cingulate cortex (PCC) \u2192 Parahippocampal gyrus \u2192 back to Hippocampus (Papez circuit complete). HEAD DIRECTION: Vestibular input \u2192 Brainstem \u2192 Lateral mammillary nucleus \u2192 ANT (AD) \u2192 Retrosplenial cortex \u2192 Spatial orientation signal.",
+      "signal_type": "Limbic relay \u2014 memory circuit (Papez circuit), head direction signals",
+      "bci_relevance_detail": "ANT-DBS is FDA-approved for drug-resistant epilepsy (SANTE trial, Medtronic). Stimulation modulates seizure propagation through the limbic circuit. The ANT is also being explored as a target for memory enhancement \u2014 stimulation during specific memory phases may strengthen encoding.",
+      "clinical_notes": "ANT-DBS reduces seizure frequency by ~40-70% in drug-resistant epilepsy. Korsakoff syndrome (thiamine deficiency, often from alcoholism): mammillary body/ANT damage \u2192 severe anterograde amnesia and confabulation. ANT lesions in animal models impair spatial memory and navigation."
     },
     {
       "id": "cerebellum_cortex",
@@ -747,19 +1684,56 @@
       "function": "Motor coordination, error correction, timing, procedural learning. Purkinje cells are the sole output.",
       "response_latency_ms": {
         "value": 20,
-        "range": [10, 50],
+        "range": [
+          10,
+          50
+        ],
         "measure": "Mossy fiber input to Purkinje cell response",
-        "notes": "Climbing fiber input: ~10ms. Mossy fiber → granule cell → parallel fiber → Purkinje cell: ~15-25ms. Complex spike latency: ~10ms from IO input. Purkinje cells fire at 30-100 Hz tonic.",
+        "notes": "Climbing fiber input: ~10ms. Mossy fiber \u2192 granule cell \u2192 parallel fiber \u2192 Purkinje cell: ~15-25ms. Complex spike latency: ~10ms from IO input. Purkinje cells fire at 30-100 Hz tonic.",
         "citations": [
           "Heck et al. 2013 (PubMed 23970855): Purkinje cell rebound timing",
           "Johansson et al. 2014 (PNAS): Memory trace timing in Purkinje cells"
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["gamma (30-100 Hz)"],
-      "connections": ["cerebellum_nuclei", "pons_nuclei", "inferior_olive", "m1_via_thalamus"],
+      "oscillation_bands": [
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "cerebellum_nuclei",
+        "pons_nuclei",
+        "inferior_olive",
+        "m1_via_thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The cerebellum contains more neurons than the rest of the brain combined (~69 billion vs. ~17 billion in cerebral cortex) yet takes up only 10% of brain volume. It's the brain's real-time error correction system for movement. The cerebellar cortex has a remarkably uniform circuit: mossy fibers carry motor commands from the cortex (via pons), climbing fibers carry error signals from the inferior olive, and Purkinje cells (the sole output) integrate both to compute corrections. The circuit works as a forward model \u2014 it predicts the sensory consequences of a movement and compares the prediction with actual sensory feedback. The difference (error signal) updates the model via long-term depression at the parallel fiber-Purkinje cell synapse. This is why you get better at throwing darts with practice \u2014 the cerebellum is continuously reducing error.",
+      "sub_structures": [
+        {
+          "name": "Molecular layer",
+          "role": "Contains parallel fibers (granule cell axons) and Purkinje cell dendrites. Computation happens here."
+        },
+        {
+          "name": "Purkinje cell layer",
+          "role": "Single row of Purkinje cells \u2014 the sole output. Largest neurons in the brain. Each receives ~200,000 parallel fiber inputs."
+        },
+        {
+          "name": "Granular layer",
+          "role": "Most densely packed neurons in the brain. Granule cells receive mossy fiber input, send parallel fibers up."
+        },
+        {
+          "name": "Climbing fibers",
+          "role": "From inferior olive. Carry error signals. One climbing fiber per Purkinje cell. Triggers complex spikes."
+        },
+        {
+          "name": "Mossy fibers",
+          "role": "From pontine nuclei (cortical motor commands) and spinal cord (proprioception). Divergent input to granule cells."
+        }
+      ],
+      "processing_pipeline": "Motor cortex (planned movement) \u2192 Pontine nuclei \u2192 Mossy fibers \u2192 Granule cells \u2192 Parallel fibers \u2192 Purkinje cells (prediction). SIMULTANEOUSLY: Actual movement \u2192 Sensory feedback \u2192 Inferior olive \u2192 Climbing fibers \u2192 Purkinje cells (error signal). MISMATCH: climbing fiber error \u2192 long-term depression at parallel fiber synapse \u2192 updated prediction \u2192 smoother movement next time. Output: Purkinje cells (inhibitory) \u2192 Deep cerebellar nuclei \u2192 Thalamus \u2192 Motor cortex (corrected motor commands).",
+      "signal_type": "Error correction \u2014 forward model prediction vs. sensory feedback comparison",
+      "bci_relevance_detail": "Cerebellar stimulation (tDCS/TMS) can enhance motor learning speed. Cerebellar BCIs could augment coordination in real-time. Less explored than cortical BCIs but the uniform circuit architecture makes it theoretically tractable.",
+      "clinical_notes": "Cerebellar damage \u2192 ataxia (uncoordinated movement), dysmetria (overshooting targets), intention tremor, slurred speech (dysarthria). Cerebellar cognitive affective syndrome: damage to posterior cerebellum causes executive dysfunction, spatial cognition deficits, personality changes \u2014 showing the cerebellum does more than just motor control."
     },
     {
       "id": "cerebellum_nuclei",
@@ -772,7 +1746,10 @@
       "function": "Cerebellar output nuclei (dentate, interposed, fastigial). Relay to thalamus and brainstem.",
       "response_latency_ms": {
         "value": 15,
-        "range": [5, 30],
+        "range": [
+          5,
+          30
+        ],
         "measure": "Purkinje cell inhibition to nuclear rebound firing",
         "notes": "Rebound firing after Purkinje cell pause: ~15ms. Dentate nucleus to thalamus: ~5-8ms.",
         "citations": [
@@ -780,10 +1757,36 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["beta (13-30 Hz)"],
-      "connections": ["cerebellum_cortex", "vim", "thalamus", "reticular_formation"],
+      "oscillation_bands": [
+        "beta (13-30 Hz)"
+      ],
+      "connections": [
+        "cerebellum_cortex",
+        "vim",
+        "thalamus",
+        "reticular_formation"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The deep cerebellar nuclei (DCN) are the cerebellum's output stations \u2014 almost all cerebellar output passes through them. Purkinje cells in the cerebellar cortex are inhibitory (GABAergic), so they work by modulating the tonic excitatory output of the DCN. When a Purkinje cell fires, it suppresses its target DCN neuron; when the Purkinje cell pauses, the DCN neuron fires and sends corrective signals to the motor system. This 'release from inhibition' mechanism allows precise timing of motor corrections \u2014 the pause in Purkinje firing IS the correction signal.",
+      "sub_structures": [
+        {
+          "name": "Dentate nucleus",
+          "role": "Largest DCN. Projects to thalamus \u2192 motor and prefrontal cortex. Involved in motor planning AND cognition."
+        },
+        {
+          "name": "Interposed nuclei (emboliform + globose)",
+          "role": "Project to red nucleus \u2192 rubrospinal tract. Limb movement corrections. Error-based motor learning."
+        },
+        {
+          "name": "Fastigial nucleus",
+          "role": "Projects to vestibular nuclei and reticular formation. Balance, posture, eye movements, autonomic function."
+        }
+      ],
+      "processing_pipeline": "Cerebellar cortex (Purkinje cells, inhibitory) \u2192 DCN (release from inhibition = corrective signal) \u2192 DENTATE: Thalamus (VL) \u2192 M1/PMC/PFC (motor correction and cognitive modulation). INTERPOSED: Red nucleus \u2192 Rubrospinal tract \u2192 Spinal motor neurons (limb correction). FASTIGIAL: Vestibular nuclei \u2192 Balance reflexes; Reticular formation \u2192 Posture; Autonomic centers \u2192 Heart rate, blood pressure.",
+      "signal_type": "Motor output \u2014 corrective signals timed by Purkinje cell inhibition patterns",
+      "bci_relevance_detail": "DCN stimulation is being explored for motor rehabilitation after stroke \u2014 amplifying cerebellar corrective signals to help relearn movement. The dentate nucleus's connections to PFC suggest cerebellar neuromodulation could enhance cognitive functions beyond motor control.",
+      "clinical_notes": "Dentate lesions \u2192 intention tremor (tremor that worsens as you approach a target) + dysmetria (overshooting). Fastigial lesions \u2192 truncal ataxia (inability to sit/stand without swaying). Cerebellar cognitive affective syndrome: DCN damage affecting cognitive circuits \u2192 executive dysfunction, personality changes."
     },
     {
       "id": "vermis",
@@ -796,7 +1799,10 @@
       "function": "Axial motor control, balance, gait, vestibular integration, emotional regulation",
       "response_latency_ms": {
         "value": 20,
-        "range": [10, 40],
+        "range": [
+          10,
+          40
+        ],
         "measure": "Vestibular input to vermis response",
         "notes": "Vestibulocerebellar projections: ~10-20ms. Vermis involved in both motor and emotional processing (Schmahmann dysmetria of thought).",
         "citations": [
@@ -804,10 +1810,36 @@
         ],
         "confidence": "LOW"
       },
-      "oscillation_bands": ["theta (4-8 Hz)"],
-      "connections": ["vestibular_nuclei", "fastigial_nucleus", "reticular_formation", "spinal_cord"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)"
+      ],
+      "connections": [
+        "vestibular_nuclei",
+        "fastigial_nucleus",
+        "reticular_formation",
+        "spinal_cord"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The cerebellar vermis (Latin for 'worm') is the midline structure of the cerebellum that controls trunk/axial muscles, balance, and posture. While the lateral cerebellar hemispheres handle limb coordination, the vermis keeps your body upright and stable. It receives vestibular input (balance signals from the inner ear), proprioceptive input from trunk muscles, and visual motion signals. The vermis is also increasingly recognized for its role in emotional regulation \u2014 it has connections to limbic structures, and vermis abnormalities are found in autism, schizophrenia, and mood disorders.",
+      "sub_structures": [
+        {
+          "name": "Anterior vermis (lobules I-V)",
+          "role": "Spinal input. Trunk and proximal limb coordination. Postural reflexes."
+        },
+        {
+          "name": "Posterior vermis (lobules VI-IX)",
+          "role": "Vestibular and visual input. Balance, gaze stabilization. Emotional regulation via fastigial nucleus \u2192 limbic."
+        },
+        {
+          "name": "Flocculonodular lobe (lobule X)",
+          "role": "Vestibulocerebellum. Vestibulo-ocular reflex (VOR). Balance during head movement."
+        }
+      ],
+      "processing_pipeline": "Vestibular organs (semicircular canals, otoliths) \u2192 Vestibular nuclei \u2192 Vermis (balance computation) \u2192 Fastigial nucleus \u2192 Vestibular nuclei (VOR correction) + Reticular formation (postural tone) + Spinal cord (balance reflexes). EMOTIONAL: Vermis \u2192 Fastigial nucleus \u2192 Hypothalamus/Amygdala (emotional modulation).",
+      "signal_type": "Balance and axial motor \u2014 vestibular integration, postural control, emotional modulation",
+      "bci_relevance_detail": "Vermis stimulation (tDCS/TMS) is being explored for ataxia rehabilitation and emotional regulation. Less relevant for typical motor BCIs but important for vestibular prostheses and balance-related applications.",
+      "clinical_notes": "Vermis lesions \u2192 truncal ataxia (wide-based staggering gait, like being drunk). Medulloblastoma (childhood brain tumor) commonly arises in the vermis \u2192 balance problems as presenting symptom. Vermis hypoplasia found in some cases of autism \u2014 may contribute to motor clumsiness and emotional dysregulation."
     },
     {
       "id": "medulla",
@@ -817,10 +1849,13 @@
       "parent_structure": "brainstem",
       "depth_class": "infratentorial",
       "hemisphere": "midline",
-      "function": "Vital autonomic centers — respiratory rhythm, cardiac center, blood pressure (vasomotor), vomiting reflex",
+      "function": "Vital autonomic centers \u2014 respiratory rhythm, cardiac center, blood pressure (vasomotor), vomiting reflex",
       "response_latency_ms": {
         "value": 2,
-        "range": [1, 4],
+        "range": [
+          1,
+          4
+        ],
         "measure": "BAEP Wave II (cochlear nuclei in rostral medulla)",
         "notes": "Brainstem auditory evoked potential Wave II: 2-4ms post-stimulus. Cochlear nuclei generate Wave II. Medullary autonomic reflexes: 5-20ms.",
         "citations": [
@@ -829,10 +1864,46 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["respiratory rhythm (~0.2-0.5 Hz)", "cardiac rhythm (~1 Hz)"],
-      "connections": ["pons", "spinal_cord", "vermis", "thalamus", "hypothalamus"],
+      "oscillation_bands": [
+        "respiratory rhythm (~0.2-0.5 Hz)",
+        "cardiac rhythm (~1 Hz)"
+      ],
+      "connections": [
+        "pons",
+        "spinal_cord",
+        "vermis",
+        "thalamus",
+        "hypothalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The medulla oblongata is the most vital brain structure \u2014 it keeps you alive by controlling breathing, heart rate, and blood pressure automatically. It contains the cardiovascular center (adjusts heart rate and blood vessel diameter), the respiratory center (generates the rhythm of breathing \u2014 you don't have to think about breathing because the medulla does it), and the vomiting center. All motor and sensory pathways between the brain and spinal cord pass through the medulla. The pyramidal decussation occurs here \u2014 where 90% of corticospinal motor fibers cross from one side to the other, which is why the left brain controls the right body. Cranial nerves IX (glossopharyngeal), X (vagus), XI (accessory), and XII (hypoglossal) originate here.",
+      "sub_structures": [
+        {
+          "name": "Cardiovascular center",
+          "role": "Controls heart rate (vagus nerve \u2192 slow, sympathetic \u2192 fast) and blood vessel tone. Baroreceptor reflex."
+        },
+        {
+          "name": "Respiratory center",
+          "role": "Pre-B\u00f6tzinger complex generates breathing rhythm (~12-20 breaths/min). Chemoreceptors detect CO\u2082/pH."
+        },
+        {
+          "name": "Area postrema",
+          "role": "Vomiting center. Outside blood-brain barrier \u2014 can detect toxins in blood directly."
+        },
+        {
+          "name": "Nucleus tractus solitarius (NTS)",
+          "role": "Receives ALL visceral sensory input (vagus nerve). Integrates taste, blood pressure, respiration, gut signals."
+        },
+        {
+          "name": "Pyramidal decussation",
+          "role": "Where corticospinal tract crosses midline. 90% of motor fibers cross here."
+        }
+      ],
+      "processing_pipeline": "BREATHING: Pre-B\u00f6tzinger complex (pacemaker neurons) \u2192 Phrenic nerve \u2192 Diaphragm contraction \u2192 Inspiration. Chemoreceptors detect high CO\u2082 \u2192 increase respiratory rate. HEART: Baroreceptors (carotid/aortic) detect blood pressure \u2192 NTS \u2192 Cardiovascular center \u2192 Vagus nerve (parasympathetic, slows heart) or sympathetic nerves (speeds heart). ALL MOTOR: Cortex \u2192 Internal capsule \u2192 Cerebral peduncle \u2192 Pyramidal decussation (crossing) \u2192 Lateral corticospinal tract \u2192 Spinal motor neurons.",
+      "signal_type": "Autonomic \u2014 rhythmic pattern generation for vital functions, visceral sensory integration",
+      "bci_relevance_detail": "Vagus nerve stimulation (VNS) \u2014 an FDA-approved neuromodulation therapy \u2014 targets medullary circuits for epilepsy and depression. The medulla is generally avoided in invasive BCI placement due to risk of respiratory/cardiac arrest. Security: any BCI disruption reaching the medulla could be life-threatening.",
+      "clinical_notes": "Medullary stroke \u2192 life-threatening: respiratory failure, cardiac arrest, or Wallenberg syndrome (lateral medullary syndrome \u2014 difficulty swallowing, vertigo, loss of pain/temperature sensation on one side). Brainstem death = death \u2014 when the medulla stops functioning, there is no spontaneous breathing or heartbeat."
     },
     {
       "id": "pons",
@@ -845,7 +1916,10 @@
       "function": "Relay between cortex and cerebellum, REM sleep regulation, auditory relay (superior olivary complex)",
       "response_latency_ms": {
         "value": 4,
-        "range": [3, 5],
+        "range": [
+          3,
+          5
+        ],
         "measure": "BAEP Wave III (superior olivary complex in caudal pons)",
         "notes": "BAEP Wave III: 3-5ms. Superior olivary complex generates Wave III. Pontine nuclei relay cortical signals to cerebellum.",
         "citations": [
@@ -854,10 +1928,44 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["pontine waves (PGO spikes during REM)"],
-      "connections": ["medulla", "midbrain", "cerebellum_cortex", "thalamus"],
+      "oscillation_bands": [
+        "pontine waves (PGO spikes during REM)"
+      ],
+      "connections": [
+        "medulla",
+        "midbrain",
+        "cerebellum_cortex",
+        "thalamus"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The pons (Latin for 'bridge') connects the cerebral cortex to the cerebellum and relays signals between upper and lower brain structures. It plays a critical role in sleep regulation \u2014 the pontine reticular formation generates REM sleep by activating the cortex (dreams) while simultaneously paralyzing voluntary muscles (REM atonia) to prevent acting out dreams. The locus coeruleus, located in the pons, is the brain's primary source of norepinephrine \u2014 it fires rapidly during alertness and stress (fight-or-flight), moderately during waking, and goes silent during REM sleep. The pons also contains nuclei for cranial nerves V (trigeminal \u2014 facial sensation), VI (abducens \u2014 lateral eye movement), VII (facial \u2014 facial expression), and VIII (vestibulocochlear \u2014 hearing and balance).",
+      "sub_structures": [
+        {
+          "name": "Locus coeruleus",
+          "role": "Primary norepinephrine source. ~50,000 neurons project throughout entire brain. Alertness, attention, stress response, fight-or-flight."
+        },
+        {
+          "name": "Pontine reticular formation",
+          "role": "REM sleep generation. Activates cortex for dreaming while triggering muscle atonia."
+        },
+        {
+          "name": "Pontine nuclei",
+          "role": "Relay cortical motor commands to cerebellum via middle cerebellar peduncle. Critical for motor learning."
+        },
+        {
+          "name": "Raphe nuclei (pontine)",
+          "role": "Serotonin production. Mood, sleep-wake, pain modulation. Antidepressants (SSRIs) target this system."
+        },
+        {
+          "name": "Parabrachial nucleus",
+          "role": "Relays visceral/taste/pain signals to forebrain. Involved in breathing control and arousal."
+        }
+      ],
+      "processing_pipeline": "SLEEP: Pontine reticular formation \u2192 Acetylcholine release \u2192 Cortical activation (dreams) + Glycine/GABA to spinal motor neurons \u2192 Muscle paralysis (REM atonia). AROUSAL: Locus coeruleus \u2192 Norepinephrine to entire cortex \u2192 Increased alertness, attention, vigilance. MOTOR RELAY: Cortex \u2192 Pontine nuclei \u2192 Middle cerebellar peduncle \u2192 Cerebellar cortex (motor command copy for error correction).",
+      "signal_type": "Modulatory \u2014 noradrenergic arousal, serotonergic mood regulation, cholinergic REM generation",
+      "bci_relevance_detail": "Locus coeruleus-norepinephrine system modulates attention and arousal globally \u2014 important for BCI performance (alertness affects signal quality). Pontine DBS has been explored for disorders of consciousness. Security: disrupting pontine sleep circuits could cause REM behavior disorder (acting out dreams) or narcolepsy-like episodes.",
+      "clinical_notes": "Pontine stroke \u2192 locked-in syndrome (conscious but completely paralyzed except eye movements \u2014 basis for BCI communication). REM behavior disorder: loss of REM atonia \u2192 violent dream enactment, often precedes Parkinson's by years. Central pontine myelinolysis: rapid sodium correction \u2192 demyelination \u2192 quadriplegia."
     },
     {
       "id": "midbrain",
@@ -870,7 +1978,10 @@
       "function": "Visual/auditory reflexes (superior/inferior colliculi), dopaminergic pathways (VTA, SNc), pain modulation (PAG)",
       "response_latency_ms": {
         "value": 8,
-        "range": [7, 9],
+        "range": [
+          7,
+          9
+        ],
         "measure": "BAEP Wave V (inferior colliculus vicinity)",
         "notes": "BAEP Wave V: 7-9ms. Inferior colliculus response. Superior colliculus visual saccade response: ~40-70ms.",
         "citations": [
@@ -879,10 +1990,46 @@
         ],
         "confidence": "HIGH"
       },
-      "oscillation_bands": ["gamma (30-100 Hz)"],
-      "connections": ["pons", "thalamus", "substantia_nigra", "stn", "superior_colliculus", "pag"],
+      "oscillation_bands": [
+        "gamma (30-100 Hz)"
+      ],
+      "connections": [
+        "pons",
+        "thalamus",
+        "substantia_nigra",
+        "stn",
+        "superior_colliculus",
+        "pag"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The midbrain (mesencephalon) is the smallest brainstem segment but contains critical nuclei for movement, pain, reward, and arousal. The superior colliculus directs rapid eye movements (saccades) and visual orienting reflexes \u2014 when something flashes in your peripheral vision, the superior colliculus snaps your gaze toward it before you're consciously aware. The inferior colliculus is a mandatory relay for auditory processing. The periaqueductal gray (PAG) is the brain's pain control center \u2014 it can suppress pain signals through descending inhibition and is the reason why soldiers sometimes don't feel wounds during battle.",
+      "sub_structures": [
+        {
+          "name": "Superior colliculus",
+          "role": "Visual orienting. Saccadic eye movements. Multisensory integration map (visual + auditory + tactile)."
+        },
+        {
+          "name": "Inferior colliculus",
+          "role": "Auditory relay. All ascending auditory information passes through. Sound localization integration."
+        },
+        {
+          "name": "Periaqueductal gray (PAG)",
+          "role": "Pain suppression center. Descending pain modulation via endogenous opioids. Also: defensive behaviors (fight/flight/freeze)."
+        },
+        {
+          "name": "Red nucleus",
+          "role": "Motor control via rubrospinal tract. Receives cerebellar corrections (interposed nuclei). Arm/hand movement (in primates)."
+        },
+        {
+          "name": "Cerebral peduncles",
+          "role": "Massive fiber bundle carrying all corticospinal and corticopontine tracts. Motor highway between cortex and brainstem/spinal cord."
+        }
+      ],
+      "processing_pipeline": "VISUAL ORIENTING: Peripheral stimulus \u2192 Retina \u2192 Superior colliculus (spatial map) \u2192 Saccade command \u2192 Brainstem saccade generator \u2192 Eye muscles \u2192 Gaze shift (~200ms total). PAIN MODULATION: Threatening stimulus \u2192 PAG activation \u2192 Releases endorphins \u2192 Inhibits dorsal horn pain neurons (spinal cord) \u2192 Pain signals blocked from reaching brain. DBS of PAG mimics this.",
+      "signal_type": "Multimodal integration \u2014 visual orienting, auditory relay, pain modulation, motor relay",
+      "bci_relevance_detail": "PAG-DBS is used for chronic pain management. Superior colliculus signals could inform gaze-tracking BCIs. The midbrain contains the SNc and VTA (covered separately) which are the dopaminergic nuclei relevant to movement and reward BCIs.",
+      "clinical_notes": "Midbrain stroke (Weber syndrome): ipsilateral oculomotor nerve palsy (drooping eyelid, dilated pupil) + contralateral hemiparesis. Parinaud syndrome (dorsal midbrain lesion): inability to look upward, convergence problems. PAG lesions \u2192 increased pain sensitivity (hyperalgesia)."
     },
     {
       "id": "reticular_formation",
@@ -895,7 +2042,10 @@
       "function": "Arousal, consciousness, sleep-wake transitions, pain modulation, postural tone",
       "response_latency_ms": {
         "value": 10,
-        "range": [5, 50],
+        "range": [
+          5,
+          50
+        ],
         "measure": "Stimulus to arousal response",
         "notes": "Reticular activating system (RAS) response to salient stimuli: ~10-50ms. Startle reflex (reticulospinal): ~14ms. Muscle tone modulation: 10-20ms.",
         "citations": [
@@ -904,10 +2054,36 @@
         ],
         "confidence": "MEDIUM"
       },
-      "oscillation_bands": ["variable (state-dependent)"],
-      "connections": ["thalamus", "hypothalamus", "all_brainstem_nuclei", "spinal_cord"],
+      "oscillation_bands": [
+        "variable (state-dependent)"
+      ],
+      "connections": [
+        "thalamus",
+        "hypothalamus",
+        "all_brainstem_nuclei",
+        "spinal_cord"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The reticular formation is a diffuse network of neurons extending through the entire brainstem, functioning as the brain's arousal and consciousness system. The ascending reticular activating system (ARAS) keeps the cortex awake and alert \u2014 without it, you fall into coma. It works by sending widespread excitatory projections to the thalamus and cortex using multiple neurotransmitters (acetylcholine, norepinephrine, serotonin, dopamine, histamine). During sleep, ARAS activity decreases and the thalamus switches to burst mode, blocking sensory input from reaching the cortex. The reticular formation also coordinates complex motor patterns like walking, chewing, and breathing.",
+      "sub_structures": [
+        {
+          "name": "Ascending reticular activating system (ARAS)",
+          "role": "Consciousness and arousal. Projects to thalamus and cortex. Damage \u2192 coma."
+        },
+        {
+          "name": "Pedunculopontine nucleus (PPN)",
+          "role": "Cholinergic arousal. REM sleep generation. Locomotion initiation \u2014 'mesencephalic locomotor region.'"
+        },
+        {
+          "name": "Gigantocellular reticular nucleus",
+          "role": "Motor pattern generation. Coordinates postural adjustments during locomotion. Contains reticulospinal tract neurons."
+        }
+      ],
+      "processing_pipeline": "AROUSAL: Sensory input (pain, sound, light) \u2192 Reticular formation \u2192 ARAS \u2192 Thalamus (switches tonic mode, opens sensory gate) + Cortex (widespread depolarization) \u2192 Wakefulness. SLEEP: Reduced sensory input + VLPO (hypothalamus) inhibits ARAS \u2192 Thalamus enters burst mode \u2192 Cortex disconnected from sensory input \u2192 Sleep. COMA: ARAS destroyed bilaterally \u2192 Cortex receives no activation signal \u2192 Unconscious despite intact cortex.",
+      "signal_type": "Arousal modulation \u2014 multi-neurotransmitter ascending activation, consciousness gating",
+      "bci_relevance_detail": "DBS of the reticular formation/ARAS has been explored for disorders of consciousness (minimally conscious state, vegetative state). Central thalamic DBS (which targets ARAS projections) has shown some success in promoting arousal. Understanding ARAS is critical for BCIs in non-responsive patients.",
+      "clinical_notes": "Bilateral ARAS damage \u2192 coma (cortex intact but not activated). Brainstem death = irreversible ARAS destruction = legal death in most jurisdictions. Narcolepsy involves dysregulation of reticular arousal systems. General anesthesia works partly by suppressing ARAS activity."
     },
     {
       "id": "cervical_cord",
@@ -920,7 +2096,10 @@
       "function": "Upper limb motor innervation, diaphragm (C3-C5), neck muscles, upper limb sensation",
       "response_latency_ms": {
         "value": 6,
-        "range": [5, 10],
+        "range": [
+          5,
+          10
+        ],
         "measure": "Corticospinal tract to cervical motor neuron",
         "notes": "Central motor conduction time to upper limbs: ~6-8ms (TMS). Peripheral conduction adds ~10-15ms.",
         "citations": [
@@ -929,9 +2108,40 @@
         "confidence": "HIGH"
       },
       "oscillation_bands": null,
-      "connections": ["medulla", "brainstem", "peripheral_nerves_upper"],
+      "connections": [
+        "medulla",
+        "brainstem",
+        "peripheral_nerves_upper"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The cervical spinal cord (C1-C8) carries motor commands to the arms, hands, and diaphragm, and returns sensory information from these areas to the brain. It's organized with white matter (myelinated axons, long-distance pathways) on the outside and gray matter (neuronal cell bodies, local processing) in a butterfly-shaped center. Motor neurons in the ventral horn send signals to muscles. Sensory neurons enter through the dorsal horn. The cervical enlargement (C5-T1) contains extra motor neurons for the complex hand movements that distinguish humans from other primates. The phrenic nerve (C3-C5) controls the diaphragm \u2014 'C3, 4, 5 keeps the diaphragm alive' is a medical mnemonic.",
+      "sub_structures": [
+        {
+          "name": "Ventral horn",
+          "role": "Motor neuron cell bodies. Alpha motor neurons \u2192 skeletal muscle. Gamma motor neurons \u2192 muscle spindles."
+        },
+        {
+          "name": "Dorsal horn",
+          "role": "Sensory processing. Receives pain, temperature, touch input. Gate control theory of pain operates here."
+        },
+        {
+          "name": "Lateral corticospinal tract",
+          "role": "Crossed motor pathway from M1. Voluntary fine motor control, especially hands and fingers."
+        },
+        {
+          "name": "Dorsal columns",
+          "role": "Ascending sensory pathway. Fine touch, proprioception, vibration. Fasciculus gracilis (legs) and cuneatus (arms)."
+        },
+        {
+          "name": "Cervical enlargement (C5-T1)",
+          "role": "Expanded gray matter for arm/hand motor control. Contains motor neuron pools for biceps, triceps, hand muscles."
+        }
+      ],
+      "processing_pipeline": "MOTOR: M1 \u2192 Corticospinal tract \u2192 Pyramidal decussation (medulla) \u2192 Lateral corticospinal tract \u2192 Ventral horn motor neurons (C5-T1) \u2192 Peripheral nerve \u2192 Neuromuscular junction \u2192 Arm/hand muscle contraction. SENSORY: Skin/joint receptors \u2192 Peripheral nerve \u2192 Dorsal root ganglion \u2192 Dorsal horn (pain/temp via spinothalamic) or Dorsal columns (touch/proprioception) \u2192 Brainstem \u2192 Thalamus \u2192 S1. REFLEX: Tendon stretch \u2192 Muscle spindle \u2192 Dorsal root \u2192 Direct synapse on ventral horn motor neuron \u2192 Muscle contraction (monosynaptic reflex arc, ~30ms).",
+      "signal_type": "Motor/sensory relay \u2014 corticospinal commands down, somatosensory signals up, local reflex arcs",
+      "bci_relevance_detail": "Spinal cord injury at C4-C5 is the most common BCI indication \u2014 patients retain brain activity but lose motor output. Epidural spinal stimulation below the injury can reactivate spinal circuits for standing/stepping. BCI bridges: decode motor intent from M1 \u2192 stimulate spinal cord below lesion \u2192 restore movement. Onward Medical and others targeting this.",
+      "clinical_notes": "C4-C5 injury \u2192 quadriplegia (most common SCI level). Above C3 \u2192 ventilator-dependent (phrenic nerve destroyed). Central cord syndrome: hyperextension injury \u2192 hand weakness > leg weakness (central gray matter damage). Brown-S\u00e9quard: hemisection \u2192 ipsilateral paralysis + contralateral pain/temp loss."
     },
     {
       "id": "thoracic_cord",
@@ -944,16 +2154,42 @@
       "function": "Trunk muscles, sympathetic outflow, intercostal muscles for respiration",
       "response_latency_ms": {
         "value": 10,
-        "range": [8, 15],
+        "range": [
+          8,
+          15
+        ],
         "measure": "Corticospinal conduction to thoracic segments",
         "notes": "Longer conduction distance than cervical. Sympathetic preganglionic neurons here.",
         "citations": [],
         "confidence": "LOW"
       },
       "oscillation_bands": null,
-      "connections": ["cervical_cord", "lumbar_cord", "sympathetic_chain"],
+      "connections": [
+        "cervical_cord",
+        "lumbar_cord",
+        "sympathetic_chain"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The thoracic spinal cord (T1-T12) controls trunk muscles (intercostals for breathing, abdominals for posture) and contains the intermediolateral cell column (IML) \u2014 the origin of all sympathetic nervous system output. Every sympathetic 'fight-or-flight' response (increased heart rate, dilated pupils, sweating, adrenaline release) starts with preganglionic sympathetic neurons in the thoracic IML. Sensory input from the trunk (chest, abdomen, back) enters through thoracic dorsal roots.",
+      "sub_structures": [
+        {
+          "name": "Intermediolateral column (IML)",
+          "role": "Sympathetic preganglionic neurons. ENTIRE sympathetic nervous system originates here (T1-L2). Fight-or-flight."
+        },
+        {
+          "name": "Clarke's column (nucleus dorsalis)",
+          "role": "Proprioceptive relay. Sends lower limb proprioception to cerebellum via dorsal spinocerebellar tract."
+        },
+        {
+          "name": "Lateral horn",
+          "role": "Contains IML. Only present at thoracic and upper lumbar levels. Autonomic motor output."
+        }
+      ],
+      "processing_pipeline": "SYMPATHETIC: Hypothalamus/brainstem \u2192 Descending autonomic pathways \u2192 IML (T1-L2) \u2192 Preganglionic sympathetic axons \u2192 Sympathetic chain ganglia \u2192 Postganglionic axons \u2192 Target organs (heart, lungs, blood vessels, sweat glands, pupils, adrenal medulla). MOTOR: Corticospinal tract \u2192 Thoracic ventral horn \u2192 Intercostal nerves \u2192 Respiratory muscles (T1-T12) and abdominal muscles.",
+      "signal_type": "Autonomic/motor \u2014 sympathetic fight-or-flight origin, trunk motor control, respiratory muscles",
+      "bci_relevance_detail": "Thoracic SCI eliminates sympathetic control below the lesion \u2192 autonomic dysreflexia (dangerous blood pressure spikes from uncontrolled sympathetic responses below injury). Epidural stimulation at thoracic levels is being explored for autonomic function restoration (blood pressure, bladder, sexual function).",
+      "clinical_notes": "T6 SCI \u2192 paraplegia with intact arms. Above T6: risk of autonomic dysreflexia (uncontrolled sympathetic response to below-level stimuli \u2192 hypertensive crisis). Thoracic disc herniation is rare (<1% of disc herniations) but can cause myelopathy. Horner syndrome: T1 sympathetic disruption \u2192 ipsilateral ptosis, miosis, anhidrosis."
     },
     {
       "id": "lumbar_cord",
@@ -966,7 +2202,10 @@
       "function": "Lower limb motor innervation, patellar reflex, lower limb sensation",
       "response_latency_ms": {
         "value": 14,
-        "range": [12, 20],
+        "range": [
+          12,
+          20
+        ],
         "measure": "Corticospinal conduction to lumbar motor neurons",
         "notes": "Central motor conduction time to lower limbs: ~14-16ms (TMS). Patellar reflex arc: ~15-30ms total.",
         "citations": [
@@ -975,9 +2214,32 @@
         "confidence": "MEDIUM"
       },
       "oscillation_bands": null,
-      "connections": ["thoracic_cord", "sacral_cord", "peripheral_nerves_lower"],
+      "connections": [
+        "thoracic_cord",
+        "sacral_cord",
+        "peripheral_nerves_lower"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The lumbar spinal cord (L1-L5) contains the lumbar enlargement \u2014 expanded gray matter housing motor neurons for the lower extremities (hip, knee, ankle, foot). The lumbar cord contains central pattern generators (CPGs) \u2014 neural circuits that can generate rhythmic walking movements even without input from the brain. This is why epidural stimulation below a spinal cord injury can restore stepping movements \u2014 the CPGs are intact, they just need activation. The lumbar cord also contains sensory processing circuits for the legs and handles the knee-jerk (patellar) reflex at L3-L4.",
+      "sub_structures": [
+        {
+          "name": "Lumbar enlargement (L2-S1)",
+          "role": "Motor neuron pools for quadriceps, hamstrings, tibialis anterior, gastrocnemius. Leg movement."
+        },
+        {
+          "name": "Central pattern generators (CPGs)",
+          "role": "Rhythmic locomotion circuits. Generate alternating flexion-extension patterns for walking WITHOUT brain input."
+        },
+        {
+          "name": "Dorsal horn (lumbar)",
+          "role": "Sensory processing for legs. Pain gate control. Referred pain processing."
+        }
+      ],
+      "processing_pipeline": "VOLUNTARY: Cortex \u2192 Corticospinal tract \u2192 Lumbar ventral horn motor neurons \u2192 Femoral nerve (L2-L4, knee extension), Sciatic nerve (L4-S3, hip extension/knee flexion/ankle) \u2192 Leg muscles. REFLEX: Patellar tendon tap \u2192 Muscle spindle stretch \u2192 L3-L4 dorsal root \u2192 Monosynaptic reflex \u2192 Quadriceps motor neuron \u2192 Knee jerk (~25ms). CPG: Tonic descending input (or epidural stimulation) \u2192 Lumbar CPG activation \u2192 Alternating L/R flexor-extensor patterns \u2192 Rhythmic stepping.",
+      "signal_type": "Motor/CPG \u2014 voluntary leg control, central pattern generation for locomotion, lower limb reflexes",
+      "bci_relevance_detail": "Lumbar epidural stimulation is a leading BCI approach for restoring walking after SCI. STIMO (Courtine lab, EPFL) demonstrated that targeted epidural stimulation of lumbar CPGs enables SCI patients to walk with assistance. Combined with brain-spine interfaces (BSI), decoded motor cortex signals wirelessly trigger lumbar stimulation in real-time.",
+      "clinical_notes": "Lumbar SCI \u2192 paraplegia with preserved arms and trunk. Cauda equina syndrome (below L1-L2): LMN injury \u2192 flaccid paralysis, bladder/bowel dysfunction, saddle anesthesia \u2014 surgical emergency. Lumbar stenosis: compression of lumbar nerves \u2192 neurogenic claudication (leg pain/weakness with walking)."
     },
     {
       "id": "sacral_cord",
@@ -990,16 +2252,42 @@
       "function": "Bladder, bowel, sexual function, perineal sensation, parasympathetic outflow",
       "response_latency_ms": {
         "value": 18,
-        "range": [15, 25],
+        "range": [
+          15,
+          25
+        ],
         "measure": "Corticospinal conduction to sacral segments",
         "notes": "Longest corticospinal conduction. Pudendal nerve latency: ~35-40ms total (central + peripheral).",
         "citations": [],
         "confidence": "LOW"
       },
       "oscillation_bands": null,
-      "connections": ["lumbar_cord", "cauda_equina", "parasympathetic_outflow"],
+      "connections": [
+        "lumbar_cord",
+        "cauda_equina",
+        "parasympathetic_outflow"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The sacral spinal cord (S1-S5) contains the parasympathetic nervous system's lower division \u2014 controlling bladder, bowel, and sexual function. The sacral micturition center (S2-S4, Onuf's nucleus) coordinates urination through a complex reflex: when the bladder fills, stretch receptors signal the sacral cord, which (with brainstem approval via the pontine micturition center) triggers detrusor muscle contraction and sphincter relaxation. Sacral segments also control the muscles of the pelvic floor, lower limb muscles (foot intrinsics), and carry sensory information from the perineum.",
+      "sub_structures": [
+        {
+          "name": "Onuf's nucleus (S2-S4)",
+          "role": "Motor neurons for external urethral and anal sphincters. Voluntary continence control."
+        },
+        {
+          "name": "Sacral parasympathetic nucleus (S2-S4)",
+          "role": "Parasympathetic preganglionic neurons. Bladder contraction, bowel motility, sexual arousal (erection)."
+        },
+        {
+          "name": "Pudendal nerve origin (S2-S4)",
+          "role": "Mixed nerve. Sensory from perineum, motor to pelvic floor muscles, parasympathetic to genitalia."
+        }
+      ],
+      "processing_pipeline": "MICTURITION: Bladder stretch receptors \u2192 Pelvic nerve \u2192 Sacral cord (S2-S4) \u2192 Ascending to pontine micturition center (permission signal) \u2192 Descending back to sacral parasympathetic nucleus \u2192 Detrusor contraction + Internal sphincter relaxation \u2192 Onuf's nucleus relaxes external sphincter \u2192 Urination. SEXUAL: Psychogenic (cortex \u2192 thoracolumbar sympathetic) + Reflexogenic (genital stimulation \u2192 sacral parasympathetic S2-S4) \u2192 Erection/lubrication.",
+      "signal_type": "Parasympathetic/somatic \u2014 bladder/bowel/sexual autonomic control, pelvic floor motor",
+      "bci_relevance_detail": "Sacral nerve stimulation (InterStim, Medtronic) is FDA-approved for overactive bladder and fecal incontinence. Sacral neuromodulation is a major quality-of-life target for SCI patients \u2014 surveys consistently show bladder/bowel/sexual function recovery is ranked higher than walking recovery by SCI patients.",
+      "clinical_notes": "SCI above sacral cord \u2192 neurogenic bladder (loss of voluntary control, reflex voiding). Conus medullaris syndrome (S1-S5 damage): areflexic bladder/bowel, saddle anesthesia, erectile dysfunction. Cauda equina syndrome: similar presentation but involves nerve roots, not cord \u2014 potentially reversible if decompressed within 48 hours."
     },
     {
       "id": "cauda_equina",
@@ -1019,9 +2307,32 @@
         "confidence": "LOW"
       },
       "oscillation_bands": null,
-      "connections": ["lumbar_cord", "sacral_cord", "peripheral_nerves"],
+      "connections": [
+        "lumbar_cord",
+        "sacral_cord",
+        "peripheral_nerves"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The cauda equina ('horse's tail') is not a spinal cord structure \u2014 it's a bundle of nerve roots (L2-S5) that dangle below where the spinal cord ends (conus medullaris, at ~L1-L2 vertebral level). These are peripheral nerves, not central nervous system, which means they can potentially regenerate (unlike spinal cord). The cauda equina carries motor commands to the legs, feet, bladder, bowel, and sexual organs, and returns sensory information from these areas. Because the nerve roots float freely in cerebrospinal fluid within the spinal canal, they're vulnerable to compression from disc herniation, tumors, or spinal stenosis.",
+      "sub_structures": [
+        {
+          "name": "Lumbar nerve roots (L2-L5)",
+          "role": "Motor: hip flexion, knee extension, ankle dorsiflexion, foot eversion. Sensory: anterior/lateral thigh, shin, dorsal foot."
+        },
+        {
+          "name": "Sacral nerve roots (S1-S5)",
+          "role": "Motor: ankle plantarflexion, toe flexion, pelvic floor. Sensory: posterior thigh, sole of foot, perineum."
+        },
+        {
+          "name": "Filum terminale",
+          "role": "Thin filament anchoring conus medullaris to coccyx. Contains no neural tissue. Tethered cord if abnormally tight."
+        }
+      ],
+      "processing_pipeline": "MOTOR: Spinal cord (conus medullaris) \u2192 Ventral roots \u2192 Cauda equina nerve roots \u2192 Exit at respective vertebral foramina \u2192 Peripheral nerves (femoral, sciatic, pudendal) \u2192 Muscles. SENSORY: Receptors (legs, perineum, bladder) \u2192 Peripheral nerves \u2192 Dorsal roots in cauda equina \u2192 Enter spinal cord (or ascend to higher cord levels) \u2192 Brain. DAMAGE PATTERN: Unlike cord injury (UMN signs), cauda equina injury \u2192 LMN signs (flaccid weakness, areflexia) because these are peripheral nerve roots.",
+      "signal_type": "Peripheral motor/sensory \u2014 lower limb and pelvic nerve root bundle",
+      "bci_relevance_detail": "Cauda equina nerve roots are peripheral (potential regeneration), making them targets for nerve root stimulation and peripheral nerve interfaces. Less relevant for cortical BCIs but important for understanding the full neural pathway from brain to muscle.",
+      "clinical_notes": "Cauda equina syndrome: SURGICAL EMERGENCY. Compression (usually massive disc herniation) \u2192 bilateral leg weakness, saddle anesthesia, bladder retention, bowel incontinence. Must decompress within 48 hours or risk permanent deficit. Key differentiator from conus medullaris: cauda equina = LMN signs (flaccid, areflexic), conus = UMN signs (spastic, hyperreflexic)."
     },
     {
       "id": "cea",
@@ -1034,7 +2345,10 @@
       "function": "Autonomic fear output, conditioned fear responses, pain modulation. Subcortical architecture (unlike BLA).",
       "response_latency_ms": {
         "value": 100,
-        "range": [80, 200],
+        "range": [
+          80,
+          200
+        ],
         "measure": "BLA input to CeA autonomic output",
         "notes": "CeA receives processed input from BLA. Output drives autonomic responses (heart rate, freezing) with ~100-200ms latency from stimulus.",
         "citations": [
@@ -1042,13 +2356,38 @@
         ],
         "confidence": "LOW"
       },
-      "oscillation_bands": ["theta (4-8 Hz)"],
-      "connections": ["bla", "hypothalamus", "brainstem_autonomic", "pag"],
+      "oscillation_bands": [
+        "theta (4-8 Hz)"
+      ],
+      "connections": [
+        "bla",
+        "hypothalamus",
+        "brainstem_autonomic",
+        "pag"
+      ],
       "allen_atlas_id": null,
-      "brodmann_areas": null
+      "brodmann_areas": null,
+      "how_it_works": "The central amygdala (CeA) is the OUTPUT station of the amygdala \u2014 while the BLA evaluates whether something is threatening, the CeA executes the fear response. It sends commands to brainstem nuclei that produce every component of the fear reaction: hypothalamus (stress hormones \u2014 cortisol, adrenaline), periaqueductal gray (freezing behavior), lateral hypothalamus (sympathetic activation \u2014 elevated heart rate, blood pressure), parabrachial nucleus (breathing changes), and nucleus basalis (cortical arousal). The CeA is also critical for learned fear \u2014 after Pavlovian fear conditioning, the CeA autonomously drives defensive behaviors without requiring cortical involvement.",
+      "sub_structures": [
+        {
+          "name": "CeL (lateral division)",
+          "role": "Gate control. Contains 'fear-on' and 'fear-off' neurons that regulate CeM output. Extinction learning modifies CeL activity."
+        },
+        {
+          "name": "CeM (medial division)",
+          "role": "Primary output. Projects to brainstem fear effectors. Drives all autonomic and behavioral fear responses."
+        },
+        {
+          "name": "Intercalated cells (ITCs)",
+          "role": "GABAergic gate between BLA and CeA. Extinction training strengthens ITC inhibition of CeM \u2192 reduced fear expression."
+        }
+      ],
+      "processing_pipeline": "BLA (threat detected) \u2192 CeA (CeL gate \u2192 CeM output) \u2192 MULTIPLE PARALLEL OUTPUTS: Hypothalamus PVN (HPA axis \u2192 cortisol), Lateral hypothalamus (sympathetic activation \u2192 heart rate, blood pressure), PAG (freezing/fight/flight behavior), Parabrachial nucleus (respiratory rate change), Nucleus basalis (acetylcholine \u2192 cortical arousal/vigilance), Dorsal vagal complex (gastrointestinal response \u2014 'gut feeling'). EXTINCTION: PFC (infralimbic) \u2192 ITCs \u2192 Inhibit CeM \u2192 Reduced fear expression.",
+      "signal_type": "Fear output \u2014 autonomic, endocrine, and behavioral fear response execution",
+      "bci_relevance_detail": "CeA is not a typical BCI target due to its deep location and functional criticality. However, understanding CeA output pathways is important for BCI safety \u2014 inadvertent stimulation near the amygdala could trigger full autonomic fear responses. Relevant for affective state monitoring in emotional BCIs.",
+      "clinical_notes": "CeA hyperactivation \u2192 panic attacks (full autonomic fear cascade without actual threat). PTSD: CeA fails to extinguish \u2014 fear responses persist despite safety. Anxiety disorders: lowered CeA activation threshold. CeA lesions in animals \u2192 fearlessness, inability to learn danger associations."
     }
   ],
-
   "region_aliases": {
     "_note": "Maps full-name region IDs (used in qif-neural-pathways.json and qif-neurotransmitters.json) to abbreviated atlas IDs (used in brain_regions above). Enables cross-file region normalization.",
     "prefrontal_cortex": "pfc",
@@ -1090,209 +2429,342 @@
     "spinal_dorsal_horn": "cervical_cord",
     "PAG": "midbrain"
   },
-
-  "bci_devices": "SEE docs/bci-hardware-inventory.json — 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",
-
+  "bci_devices": "SEE docs/bci-hardware-inventory.json \u2014 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",
   "device_region_mappings": [
     {
       "device_id": "neuralink-n1",
-      "target_regions": ["m1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "read",
       "notes": "1024-channel cortical implant in motor cortex. Read-only (recording spikes + LFP)."
     },
     {
       "device_id": "neuralink-n2",
-      "target_regions": ["m1", "v1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1",
+        "v1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "bidirectional",
       "notes": "Next-gen: motor + visual cortex targets. Stimulation planned for vision restoration."
     },
     {
       "device_id": "blackrock-utah-array",
-      "target_regions": ["m1", "s1_cortex"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1",
+        "s1_cortex"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "bidirectional",
       "notes": "96-128 channels, penetrating electrodes. SIROF variant enables stimulation. Gold standard for cortical recording."
     },
     {
       "device_id": "braingate",
-      "target_regions": ["m1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "read",
       "notes": "Uses Utah Arrays. Wireless variant: 48 Mbps, >36h battery. First home-use wireless intracortical BCI."
     },
     {
       "device_id": "neuropace-rns",
-      "target_regions": ["hippocampus", "bla", "cerebellum_cortex"],
-      "qif_bands": ["N6", "N3"],
+      "target_regions": [
+        "hippocampus",
+        "bla",
+        "cerebellum_cortex"
+      ],
+      "qif_bands": [
+        "N6",
+        "N3"
+      ],
       "i0_depth": "I0-subcortical",
       "interface_type": "bidirectional",
       "notes": "Responsive neurostimulation at seizure foci. Depth electrodes reach hippocampus, amygdala. Surface strips for cortical foci."
     },
     {
       "device_id": "medtronic-percept-pc",
-      "target_regions": ["stn", "gpi", "vim"],
-      "qif_bands": ["N5", "N4"],
+      "target_regions": [
+        "stn",
+        "gpi",
+        "vim"
+      ],
+      "qif_bands": [
+        "N5",
+        "N4"
+      ],
       "i0_depth": "I0-subcortical",
       "interface_type": "bidirectional",
       "notes": "DBS + BrainSense LFP recording. Primary targets: STN (PD), GPi (dystonia), VIM (tremor)."
     },
     {
       "device_id": "medtronic-percept-rc",
-      "target_regions": ["stn", "gpi", "vim"],
-      "qif_bands": ["N5", "N4"],
+      "target_regions": [
+        "stn",
+        "gpi",
+        "vim"
+      ],
+      "qif_bands": [
+        "N5",
+        "N4"
+      ],
       "i0_depth": "I0-subcortical",
       "interface_type": "bidirectional",
       "notes": "Rechargeable variant. Same brain targets as Percept PC. >15 year service life."
     },
     {
       "device_id": "synchron-stentrode",
-      "target_regions": ["m1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "read",
       "notes": "Endovascular (superior sagittal sinus). Adjacent to motor cortex but inside blood vessel. No direct tissue contact."
     },
     {
       "device_id": "cochlear-nucleus-profile-plus",
-      "target_regions": ["a1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "a1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-spinal/peripheral",
       "interface_type": "write",
       "notes": "Cochlear implant stimulates auditory nerve (CN VIII). Signal reaches A1 via brainstem auditory pathway. 22 electrodes."
     },
     {
       "device_id": "medel-cochlear",
-      "target_regions": ["a1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "a1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-spinal/peripheral",
       "interface_type": "write",
       "notes": "Cochlear implant. 12 channels, longest electrode arrays (up to 34mm) for complete cochlear coverage."
     },
     {
       "device_id": "boston-scientific-vercise",
-      "target_regions": ["stn", "gpi", "vim"],
-      "qif_bands": ["N5", "N4"],
+      "target_regions": [
+        "stn",
+        "gpi",
+        "vim"
+      ],
+      "qif_bands": [
+        "N5",
+        "N4"
+      ],
       "i0_depth": "I0-subcortical",
       "interface_type": "write",
       "notes": "DBS stimulation only (no sensing). 16-contact directional leads (Cartesia). 25-year rechargeable battery."
     },
     {
       "device_id": "abbott-infinity-dbs",
-      "target_regions": ["stn", "gpi", "vim"],
-      "qif_bands": ["N5", "N4"],
+      "target_regions": [
+        "stn",
+        "gpi",
+        "vim"
+      ],
+      "qif_bands": [
+        "N5",
+        "N4"
+      ],
       "i0_depth": "I0-subcortical",
       "interface_type": "write",
       "notes": "DBS with directional stimulation. Smallest non-rechargeable DBS device at launch. 8-contact segmented leads."
     },
     {
       "device_id": "emotiv-epoc-x",
-      "target_regions": ["pfc", "ppc", "v1", "a1", "m1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc",
+        "ppc",
+        "v1",
+        "a1",
+        "m1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "14-channel consumer EEG. Scalp recording. Volume conduction limits spatial resolution to ~cm scale. Saline felt sensors."
     },
     {
       "device_id": "emotiv-insight",
-      "target_regions": ["pfc", "ppc"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc",
+        "ppc"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "5-channel consumer EEG. Minimal coverage: frontal + temporal + parietal."
     },
     {
       "device_id": "openbci-cyton",
-      "target_regions": ["pfc", "m1", "ppc", "v1", "a1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc",
+        "m1",
+        "ppc",
+        "v1",
+        "a1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "8-channel (expandable to 16) open-source EEG. ADS1299 24-bit ADC. Research-grade for non-invasive BCI."
     },
     {
       "device_id": "openbci-ganglion",
-      "target_regions": ["pfc", "m1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc",
+        "m1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "4-channel entry-level open-source EEG. BLE. 18-bit effective resolution."
     },
     {
       "device_id": "muse-2",
-      "target_regions": ["pfc"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "4-channel consumer EEG headband. Frontal + temporal positions. Dry electrodes. Primary use: meditation."
     },
     {
       "device_id": "muse-s",
-      "target_regions": ["pfc"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "4 EEG + 2 auxiliary channels. Sleep tracking focus. Same electrode positions as Muse 2."
     },
     {
       "device_id": "corticom",
-      "target_regions": ["broca", "m1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "broca",
+        "m1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "read",
       "notes": "128-channel ECoG (subdural). Speech + hand motor areas. Temporary (6-month) implantation. Hopkins consortium."
     },
     {
       "device_id": "paradromics-connexus",
-      "target_regions": ["m1", "broca"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1",
+        "broca"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "read",
       "notes": "421-1681 channels. Intracortical microwires (1.5mm depth). Near-infrared optical data link (not RF)."
     },
     {
       "device_id": "precision-layer7",
-      "target_regions": ["m1", "s1_cortex"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1",
+        "s1_cortex"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-cortical",
       "interface_type": "bidirectional",
       "notes": "1024-channel thin-film cortical array (5um thick). Minimally invasive: inserted through <1mm slit. 510(k) cleared for intraoperative use."
     },
     {
       "device_id": "gtec-unicorn",
-      "target_regions": ["pfc", "m1", "ppc"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc",
+        "m1",
+        "ppc"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "8-channel research EEG. Hybrid dry/gel electrodes. 24-bit ADC. Bluetooth."
     },
     {
       "device_id": "kernel-flow",
-      "target_regions": ["pfc", "m1", "ppc", "v1", "a1"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "pfc",
+        "m1",
+        "ppc",
+        "v1",
+        "a1"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "read",
       "notes": "2000+ optical channels (TD-fNIRS). Hemodynamic imaging (not electrical). 52 modules. Whole-head coverage."
     },
     {
       "device_id": "darpa-n3",
-      "target_regions": ["m1", "pfc"],
-      "qif_bands": ["N7"],
+      "target_regions": [
+        "m1",
+        "pfc"
+      ],
+      "qif_bands": [
+        "N7"
+      ],
       "i0_depth": "I0-noninvasive",
       "interface_type": "bidirectional",
       "notes": "Research program (5 teams). Target: 16 channels in 16mm3 within 50ms. Approaches: acousto-optical, magnetoelectric nanotransducers, OPMs."
     }
   ],
-
   "interhemispheric_transfer": {
     "structure": "corpus_callosum",
     "ihtt_ms": {
       "value": 3.5,
-      "range": [3, 4],
+      "range": [
+        3,
+        4
+      ],
       "measure": "Crossed-Uncrossed Difference (CUD) in reaction time",
       "notes": "Visual IHTT via splenium of corpus callosum. Measured by P100 ERP laterality or CUD in reaction time. Correlates with myelination integrity.",
       "citations": [
@@ -1302,7 +2774,6 @@
       "confidence": "HIGH"
     }
   },
-
   "physics_constraints_global": {
     "thermal_limit": {
       "value": 1.0,
@@ -1344,7 +2815,6 @@
       "source": "QIF derivation (Entry 60, validated against Intel Pentium-to-Arrow Lake and Nvidia Tesla-to-Blackwell)"
     }
   },
-
   "external_atlas_references": [
     {
       "name": "Allen Brain Atlas API",
@@ -1377,7 +2847,6 @@
       "notes": "Standard brain parcellation. Available via Python nilearn.datasets.fetch_atlas_aal."
     }
   ],
-
   "source_bibliography": [
     {
       "key": "kandel_2021",

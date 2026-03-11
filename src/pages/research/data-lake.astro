@@ -772,23 +772,101 @@ const bandColors: Record<string, string> = {
                 <span class="text-xs font-semibold text-[var(--color-text-primary)]">{b.name}</span>
                 <span class="text-[10px] text-[var(--color-text-faint)]">({bandRegionList.length} regions)</span>
               </div>
-              <div class="space-y-1.5 ml-8">
+              <div class="space-y-2 ml-8">
                 {bandRegionList.map((r: any) => (
-                  <div class="glass rounded-lg p-2.5 flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3">
-                    <div class="flex items-center gap-1.5 shrink-0">
-                      <span class="font-mono text-[11px] font-bold" style={`color: ${bandColors[b.id] || '#666'}`}>{r.abbreviation || r.id}</span>
+                  <details class="glass rounded-lg group">
+                    <summary class="p-3 cursor-pointer flex items-center gap-2 hover:bg-[var(--color-bg-surface)]/50 rounded-lg transition-colors">
+                      <span class="font-mono text-[11px] font-bold shrink-0" style={`color: ${bandColors[b.id] || '#666'}`}>{r.abbreviation || r.id}</span>
                       <span class="text-xs font-semibold text-[var(--color-text-primary)]">{r.name}</span>
-                    </div>
-                    <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{r.function || '—'}</p>
-                    {r.connections && r.connections.length > 0 && (
-                      <div class="flex flex-wrap gap-1 shrink-0">
-                        {r.connections.slice(0, 4).map((c: string) => (
-                          <span class="text-[8px] font-mono px-1 py-0.5 rounded bg-[var(--color-bg-surface)] text-[var(--color-text-faint)]">{c}</span>
-                        ))}
-                        {r.connections.length > 4 && <span class="text-[8px] text-[var(--color-text-faint)]">+{r.connections.length - 4}</span>}
+                      <span class="text-[10px] text-[var(--color-text-muted)] flex-1 truncate hidden sm:inline">{r.function || ''}</span>
+                      <span class="text-[10px] text-[var(--color-text-faint)] shrink-0 group-open:rotate-90 transition-transform">&#9654;</span>
+                    </summary>
+                    <div class="px-4 pb-4 pt-1 space-y-4 border-t border-[var(--color-border)]/20">
+                      {/* Function summary */}
+                      <div>
+                        <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider font-semibold mb-1">Function</p>
+                        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{r.function || '—'}</p>
                       </div>
-                    )}
-                  </div>
+
+                      {/* How it works */}
+                      {r.how_it_works && (
+                        <div>
+                          <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider font-semibold mb-1">How It Works</p>
+                          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{r.how_it_works}</p>
+                        </div>
+                      )}
+
+                      {/* Sub-structures */}
+                      {r.sub_structures && r.sub_structures.length > 0 && (
+                        <div>
+                          <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider font-semibold mb-2">Sub-Structures</p>
+                          <div class="space-y-1.5">
+                            {r.sub_structures.map((s: any) => (
+                              <div class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-2 glass-subtle rounded-md p-2">
+                                <span class="text-[11px] font-semibold text-[var(--color-text-primary)] shrink-0">{s.name}</span>
+                                <span class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{s.role}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Processing Pipeline */}
+                      {r.processing_pipeline && (
+                        <div>
+                          <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider font-semibold mb-1">Processing Pipeline</p>
+                          <p class="text-[10px] font-mono text-[var(--color-accent-primary)] leading-relaxed bg-[var(--color-bg-surface)]/50 rounded-md p-2.5">{r.processing_pipeline}</p>
+                        </div>
+                      )}
+
+                      {/* Signal Type */}
+                      {r.signal_type && (
+                        <div class="flex items-start gap-2">
+                          <span class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider font-semibold shrink-0">Signal:</span>
+                          <span class="text-[10px] text-[var(--color-text-muted)]">{r.signal_type}</span>
+                        </div>
+                      )}
+
+                      {/* BCI Relevance */}
+                      {r.bci_relevance_detail && (
+                        <div>
+                          <p class="text-[10px] text-cyan-400 uppercase tracking-wider font-semibold mb-1">BCI Relevance</p>
+                          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{r.bci_relevance_detail}</p>
+                        </div>
+                      )}
+
+                      {/* Clinical Notes */}
+                      {r.clinical_notes && (
+                        <div>
+                          <p class="text-[10px] text-amber-400 uppercase tracking-wider font-semibold mb-1">Clinical Notes</p>
+                          <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed italic">{r.clinical_notes}</p>
+                        </div>
+                      )}
+
+                      {/* Connections + Metadata */}
+                      <div class="flex flex-wrap gap-3 pt-1 border-t border-[var(--color-border)]/10">
+                        {r.connections && r.connections.length > 0 && (
+                          <div class="flex items-center gap-1.5">
+                            <span class="text-[9px] text-[var(--color-text-faint)]">Connects to:</span>
+                            <div class="flex flex-wrap gap-1">
+                              {r.connections.map((c: string) => (
+                                <span class="text-[8px] font-mono px-1 py-0.5 rounded bg-[var(--color-bg-surface)] text-[var(--color-text-faint)]">{c}</span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {r.response_latency_ms && (
+                          <span class="text-[9px] text-[var(--color-text-faint)]">Latency: <span class="font-mono">{r.response_latency_ms.value}ms</span></span>
+                        )}
+                        {r.oscillation_bands && r.oscillation_bands.length > 0 && (
+                          <span class="text-[9px] text-[var(--color-text-faint)]">Oscillations: {r.oscillation_bands.join(', ')}</span>
+                        )}
+                        {r.brodmann_areas && r.brodmann_areas.length > 0 && (
+                          <span class="text-[9px] text-[var(--color-text-faint)]">Brodmann: {r.brodmann_areas.join(', ')}</span>
+                        )}
+                      </div>
+                    </div>
+                  </details>
                 ))}
               </div>
             </div>
