@@ -8,6 +8,8 @@
 
 Open security research for brain-computer interfaces. Vendor-agnostic. Apache 2.0.
 
+> **By using this repository, you consent to the terms in [DISCLAIMER.md](DISCLAIMER.md).** This project is early-stage research in active development — not a validated standard, not a clinical tool, not production software. All security testing must be conducted in simulated or controlled laboratory environments. The human brain is not a test environment. See the full [Disclaimer, Terms of Use & Responsible Research Policy](DISCLAIMER.md), [Code of Conduct](governance/CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md) before contributing or applying any material from this project.
+
 This project asks a question that existing frameworks have not yet systematically addressed: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
 
 ---
