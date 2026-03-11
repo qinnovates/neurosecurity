@@ -476,9 +476,21 @@ impl ServerHandshake {
 mod tests {
     use super::*;
 
+    /// Generate a deterministic test-only identifier from a seed byte.
+    /// SAFETY: test-only placeholder — never use in production.
+    fn test_id(seed: u8) -> [u8; 32] {
+        [seed; 32]
+    }
+
+    /// Generate a deterministic test-only nonce from a seed byte.
+    /// SAFETY: test-only placeholder — never use in production.
+    fn test_nonce(seed: u8) -> [u8; 12] {
+        [seed; 12]
+    }
+
     #[test]
     fn test_full_handshake_flow() {
-        let client_id = [0x11; 32];
+        let client_id = test_id(0x11);
         let mut client = ClientHandshake::new(client_id);
         let mut server = ServerHandshake::new();
         
@@ -521,7 +533,7 @@ mod tests {
         assert_eq!(client_session.id(), server_session.id());
         
         // Final sanity check: try encrypting with one and decrypting with the other
-        let nonce = [0x99; 12];
+        let nonce = test_nonce(0x99);
         let data = b"Neural signal established";
         let encrypted = client_session.encrypt(&nonce, data).unwrap();
         let decrypted = server_session.decrypt(&nonce, &encrypted).unwrap();
@@ -530,7 +542,7 @@ mod tests {
 
     #[test]
     fn test_handshake_invalid_signature() {
-        let client_id = [0x22; 32];
+        let client_id = test_id(0x22);
         let mut client = ClientHandshake::new(client_id);
         let mut server = ServerHandshake::new();
         
@@ -551,7 +563,7 @@ mod tests {
 
     #[test]
     fn test_handshake_timestamp_expiry() {
-        let client_id = [0x33; 32];
+        let client_id = test_id(0x33);
         let mut client = ClientHandshake::new(client_id);
         let mut server = ServerHandshake::new();
         

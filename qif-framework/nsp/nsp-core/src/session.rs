@@ -126,10 +126,22 @@ impl Drop for Session {
 mod tests {
     use super::*;
 
+    /// Generate a deterministic test-only secret from a seed byte.
+    /// SAFETY: test-only placeholder — never use in production.
+    fn test_secret(seed: u8) -> [u8; 32] {
+        [seed; 32]
+    }
+
+    /// Generate a deterministic test-only nonce from a seed byte.
+    /// SAFETY: test-only placeholder — never use in production.
+    fn test_nonce(seed: u8) -> [u8; 12] {
+        [seed; 12]
+    }
+
     #[test]
     fn test_session_creation() {
-        let shared_secret = [1u8; 32];
-        let session_id = [2u8; 32];
+        let shared_secret = test_secret(1);
+        let session_id = test_secret(2);
         let params = SessionParams::default();
         
         let session = Session::new(&shared_secret, session_id, params).unwrap();
@@ -141,8 +153,8 @@ mod tests {
 
     #[test]
     fn test_key_derivation_deterministic() {
-        let shared_secret = [3u8; 32];
-        let session_id = [4u8; 32];
+        let shared_secret = test_secret(3);
+        let session_id = test_secret(4);
         let params = SessionParams::default();
         
         let session1 = Session::new(&shared_secret, session_id, params.clone()).unwrap();
@@ -154,9 +166,9 @@ mod tests {
 
     #[test]
     fn test_key_derivation_unique() {
-        let shared_secret = [5u8; 32];
-        let session_id1 = [6u8; 32];
-        let session_id2 = [7u8; 32];
+        let shared_secret = test_secret(5);
+        let session_id1 = test_secret(6);
+        let session_id2 = test_secret(7);
         let params = SessionParams::default();
         
         let session1 = Session::new(&shared_secret, session_id1, params.clone()).unwrap();
@@ -168,13 +180,13 @@ mod tests {
 
     #[test]
     fn test_encrypt_decrypt() {
-        let shared_secret = [8u8; 32];
-        let session_id = [9u8; 32];
+        let shared_secret = test_secret(8);
+        let session_id = test_secret(9);
         let params = SessionParams::default();
-        
+
         let session = Session::new(&shared_secret, session_id, params).unwrap();
-        
-        let nonce = [10u8; 12];
+
+        let nonce = test_nonce(10);
         let plaintext = b"Neural signal data frame 0x42";
         
         // Encrypt
@@ -188,19 +200,19 @@ mod tests {
 
     #[test]
     fn test_session_expiration() {
-        let shared_secret = [11u8; 32];
-        let session_id = [12u8; 32];
+        let shared_secret = test_secret(11);
+        let session_id = test_secret(12);
         let mut params = SessionParams::default();
         params.timeout_seconds = 0; // Expire immediately
-        
+
         let session = Session::new(&shared_secret, session_id, params).unwrap();
-        
+
         // Session should be expired
         assert!(session.is_expired());
         assert_eq!(session.remaining_lifetime(), 0);
-        
+
         // Encryption should fail on expired session
-        let nonce = [13u8; 12];
+        let nonce = test_nonce(13);
         let plaintext = b"test";
         let result = session.encrypt(&nonce, plaintext);
         assert!(result.is_err());
@@ -208,8 +220,8 @@ mod tests {
 
     #[test]
     fn test_key_zeroization() {
-        let shared_secret = [14u8; 32];
-        let session_id = [15u8; 32];
+        let shared_secret = test_secret(14);
+        let session_id = test_secret(15);
         let params = SessionParams::default();
         
         let key_copy = {
