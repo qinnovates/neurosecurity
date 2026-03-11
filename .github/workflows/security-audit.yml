@@ -114,7 +114,7 @@ jobs:
 
       - name: Comment on PR with results
         if: github.event_name == 'pull_request' && always()
-        uses: actions/github-script@v8 # TODO: pin to SHA
+        uses: actions/github-script@v8.0.0 # TODO: pin to SHA
         with:
           script: |
             const fs = require('fs');
