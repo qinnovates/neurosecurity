@@ -46,6 +46,96 @@ const bandZoneColor = (id: string) => {
     document.documentElement.setAttribute('data-vision', 'on');
   </script>
 
+  <!-- Consent Gate -->
+  <div id="vision-consent" class="fixed inset-0 z-[200] flex items-center justify-center" style="background: radial-gradient(ellipse at center, #0a0f0d 0%, #050805 100%);">
+    <div class="max-w-lg mx-auto px-6 text-center">
+      <div class="mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(139,92,246,0.3)] mb-6" style="background: rgba(139,92,246,0.08);">
+          <span class="w-2 h-2 rounded-full bg-violet-500 animate-pulse"></span>
+          <span class="text-[10px] font-mono tracking-[0.2em] uppercase text-violet-400">Entering Theoretical Space</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6 leading-snug">Before you step in</h2>
+        <div class="space-y-4 text-sm text-zinc-400 leading-relaxed text-left">
+          <p>What you're about to see is an <span class="text-white font-medium">active investigation</span>, not a finished product. This vision reflects my current understanding of where BCI security and neuroethics intersect — an understanding that is growing, shifting, and far from complete.</p>
+          <p>None of this is a claim of what I've built. It's a map of <span class="text-white font-medium">what I believe needs to exist</span> — drawn by someone learning in public, revising constantly, and following wherever the research leads.</p>
+          <p>New ideas will emerge. Assumptions will break. The scope will expand. That's the point.</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl p-4 mb-8 text-left" style="border-color: rgba(139,92,246,0.2);">
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-violet-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a9 9 0 11-18 0V5.25" />
+          </svg>
+          <div>
+            <p class="text-xs text-zinc-300 font-medium mb-1">Technical requirement</p>
+            <p class="text-xs text-zinc-500" id="webgl-status">This page uses WebGL for 3D visualizations. Checking your browser...</p>
+          </div>
+        </div>
+      </div>
+
+      <button
+        id="consent-btn"
+        disabled
+        class="px-8 py-3 rounded-xl text-sm font-semibold transition-all cursor-not-allowed opacity-40"
+        style="background: rgba(139,92,246,0.2); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3);"
+      >
+        Checking WebGL...
+      </button>
+
+      <p class="text-[10px] text-zinc-600 mt-6 font-mono tracking-[0.08em]">
+        PROPOSED &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE
+      </p>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function() {
+      var consent = document.getElementById('vision-consent');
+      var btn = document.getElementById('consent-btn');
+      var status = document.getElementById('webgl-status');
+
+      // Skip if already consented this session
+      if (sessionStorage.getItem('vision-consent') === 'yes') {
+        if (consent) consent.style.display = 'none';
+        return;
+      }
+
+      // Check WebGL
+      var hasWebGL = false;
+      try {
+        var canvas = document.createElement('canvas');
+        hasWebGL = !!(canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+      } catch(e) {}
+
+      if (hasWebGL) {
+        status.textContent = 'WebGL supported. You\u2019re good to go.';
+        status.style.color = '#86efac';
+        btn.disabled = false;
+        btn.textContent = 'I understand — let me explore';
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+        btn.style.background = 'rgba(139,92,246,0.3)';
+        btn.onmouseenter = function() { btn.style.background = 'rgba(139,92,246,0.5)'; };
+        btn.onmouseleave = function() { btn.style.background = 'rgba(139,92,246,0.3)'; };
+      } else {
+        status.textContent = 'WebGL not detected. 3D visualizations may not render. Use a modern browser (Chrome, Firefox, Edge) for the full experience.';
+        status.style.color = '#fbbf24';
+        btn.disabled = false;
+        btn.textContent = 'Continue anyway';
+        btn.style.opacity = '0.7';
+        btn.style.cursor = 'pointer';
+      }
+
+      btn.addEventListener('click', function() {
+        sessionStorage.setItem('vision-consent', 'yes');
+        consent.style.transition = 'opacity 0.4s ease';
+        consent.style.opacity = '0';
+        setTimeout(function() { consent.style.display = 'none'; }, 400);
+      });
+    })();
+  </script>
+
   <div class="sticky top-16 z-40 text-center py-2 text-[10px] tracking-[0.15em] uppercase font-mono" style="background: rgba(139,92,246,0.1); border-bottom: 1px solid rgba(139,92,246,0.2); color: var(--color-accent-tertiary);">Theoretical Vision — Research directions and possibilities, not validated results</div>
 
   <!-- VISION HERO: Kinect on right, text on left -->
