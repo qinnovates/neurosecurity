@@ -4,7 +4,18 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: d659ab705a331192df4f90966393432dc0585701 -->
+<!-- changelog-marker: 2049e9ef8825768a343f826df09bd1518587c71d -->
+
+## 2026-03-11
+
+### Updated
+- KQL security limits, table extraction, clinical techniques zoom, pathway DSM mappings ([2049e9e](https://github.com/qinnovates/qinnovate/commit/2049e9e))
+- KQL engine v2: indexes, joins, array-aware operators, query optimization ([03e0c2e](https://github.com/qinnovates/qinnovate/commit/03e0c2e))
+- Brain atlas: detailed mechanics for all 38 regions with click-to-expand UI ([10e6c85](https://github.com/qinnovates/qinnovate/commit/10e6c85))
+- Whitepaper v8 Section 19, Runemate neural OS vision, vision page UX, data mapping ([1257d1c](https://github.com/qinnovates/qinnovate/commit/1257d1c))
+- Data lake: brain regions with functions and connections per band ([7497f8b](https://github.com/qinnovates/qinnovate/commit/7497f8b))
+- Data lake dashboard: funding rounds, investor intel, neurotransmitter systems ([fd4cc29](https://github.com/qinnovates/qinnovate/commit/fd4cc29))
+
 
 ## 2026-03-07
 
