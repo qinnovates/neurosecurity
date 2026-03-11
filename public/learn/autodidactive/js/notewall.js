@@ -13,12 +13,42 @@ let notes = [];
 let wallEl = null;
 let dragState = null;
 
+const DEFAULT_NOTE = {
+  id: 'default-welcome',
+  text: 'Hello world! Feel free to drop a note here.',
+  x: 15, y: 12,
+  color: 0,
+  rotation: -1.5,
+  created: Date.now()
+};
+
+function sanitizeNote(n) {
+  if (!n || typeof n !== 'object') return null;
+  if (typeof n.id !== 'string' || n.id.length > 30) return null;
+  return {
+    id: n.id,
+    text: typeof n.text === 'string' ? n.text.slice(0, 500) : '',
+    x: typeof n.x === 'number' && Number.isFinite(n.x) ? n.x : 15,
+    y: typeof n.y === 'number' && Number.isFinite(n.y) ? n.y : 12,
+    color: typeof n.color === 'number' && n.color >= 0 && n.color < NOTE_COLORS.length ? n.color : 0,
+    rotation: typeof n.rotation === 'number' || typeof n.rotation === 'string' ? Number(n.rotation) || 0 : 0,
+    author: typeof n.author === 'string' ? n.author.slice(0, 30) : '',
+    timestamp: typeof n.timestamp === 'number' ? n.timestamp : Date.now(),
+    pinned: n.pinned === true,
+    canvasPinned: n.canvasPinned === true
+  };
+}
+
 function loadNotes() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    notes = raw ? JSON.parse(raw) : [];
+    if (!raw) { notes = [DEFAULT_NOTE]; return notes; }
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) { notes = [DEFAULT_NOTE]; return notes; }
+    notes = parsed.map(sanitizeNote).filter(Boolean).slice(0, 200);
+    if (notes.length === 0) notes = [DEFAULT_NOTE];
   } catch {
-    notes = [];
+    notes = [DEFAULT_NOTE];
   }
   return notes;
 }
@@ -254,11 +284,20 @@ export function initNoteWall(container) {
   });
 
   // Global move handlers for drag
+  function findNoteEl(noteId) {
+    // Safe lookup — avoid selector injection by iterating instead of querySelector
+    const els = wallEl.querySelectorAll('.post-it');
+    for (const el of els) {
+      if (el.dataset.noteId === noteId) return el;
+    }
+    return null;
+  }
+
   const onMove = (clientX, clientY) => {
     if (!dragState) return;
     const x = clientX - dragState.wallLeft - dragState.offsetX + wallEl.scrollLeft;
     const y = clientY - dragState.wallTop - dragState.offsetY + wallEl.scrollTop;
-    const el = wallEl.querySelector(`[data-note-id="${dragState.noteId}"]`);
+    const el = findNoteEl(dragState.noteId);
     if (el) {
       el.style.left = `${Math.max(0, x)}px`;
       el.style.top = `${Math.max(0, y)}px`;
@@ -275,7 +314,7 @@ export function initNoteWall(container) {
       note.y = Math.max(0, y);
       saveNotes();
     }
-    const el = wallEl.querySelector(`[data-note-id="${dragState.noteId}"]`);
+    const el = findNoteEl(dragState.noteId);
     if (el) el.classList.remove('dragging');
     dragState = null;
   };

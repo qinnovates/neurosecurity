@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Kinect Depth Shader Preview</title>
+<style>
+  body { margin: 0; background: #050a08; color: #00ff88; font-family: monospace; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .cell { position: relative; overflow: hidden; height: 50vh; }
+  .cell canvas { width: 100% !important; height: 100% !important; }
+  .label { position: absolute; top: 8px; left: 8px; font-size: 11px; z-index: 10; opacity: 0.7; }
+  .src-label { position: absolute; bottom: 8px; right: 8px; font-size: 9px; z-index: 10; opacity: 0.4; }
+</style>
+</head>
+<body>
+<div class="grid" id="grid"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const VIDEOS = [
+  { webm: 'service-dog.webm', mp4: 'service-dog.mp4', label: 'Service Dog (original)' },
+  { webm: 'IMG_3822.webm', mp4: 'IMG_3822.mp4', label: 'IMG_3822' },
+  { webm: 'IMG_3445.webm', mp4: 'IMG_3445.mp4', label: 'IMG_3445' },
+  { webm: 'IMG_3592.webm', mp4: 'IMG_3592.mp4', label: 'IMG_3592' },
+  { webm: 'IMG_1625.webm', mp4: 'IMG_1625.mp4', label: 'IMG_1625' },
+];
+
+const VERT = `
+  uniform sampler2D map;
+  uniform float width;
+  uniform float height;
+  uniform float nearClipping;
+  uniform float farClipping;
+  uniform float pointSize;
+  uniform float zOffset;
+  varying vec2 vUv;
+  varying float vDepth;
+  const float XtoZ = 1.11146;
+  const float YtoZ = 0.83359;
+  void main() {
+    vUv = vec2(position.x / width, position.y / height);
+    vec4 color = texture2D(map, vUv);
+    float depth = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    vDepth = depth;
+    float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping;
+    vec4 pos = vec4(
+      (position.x / width - 0.5) * z * XtoZ,
+      (position.y / height - 0.5) * z * YtoZ,
+      -z + zOffset,
+      1.0
+    );
+    gl_PointSize = pointSize;
+    gl_Position = projectionMatrix * modelViewMatrix * pos;
+  }
+`;
+
+const FRAG = `
+  uniform sampler2D map;
+  varying vec2 vUv;
+  varying float vDepth;
+  void main() {
+    float dist = length(gl_PointCoord - vec2(0.5));
+    if (dist > 0.5) discard;
+    vec4 color = texture2D(map, vUv);
+    vec3 tinted = mix(color.rgb, vec3(0.0, color.g * 1.2, color.b * 0.8), 0.3);
+    float alpha = smoothstep(0.5, 0.2, dist) * 0.7;
+    gl_FragColor = vec4(tinted, alpha);
+  }
+`;
+
+const W = 640, H = 480;
+const grid = document.getElementById('grid');
+
+function createCell(vid) {
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  const lbl = document.createElement('div');
+  lbl.className = 'label';
+  lbl.textContent = vid.label;
+  cell.appendChild(lbl);
+  const src = document.createElement('div');
+  src.className = 'src-label';
+  src.textContent = vid.webm;
+  cell.appendChild(src);
+  grid.appendChild(cell);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, cell.clientWidth / cell.clientHeight, 1, 10000);
+  camera.position.set(0, 0, 500);
+  const center = new THREE.Vector3(0, 0, -1000);
+
+  const video = document.createElement('video');
+  video.crossOrigin = 'anonymous';
+  video.loop = true;
+  video.muted = true;
+  video.playsInline = true;
+  const sw = document.createElement('source');
+  sw.src = vid.webm; sw.type = 'video/webm';
+  const sm = document.createElement('source');
+  sm.src = vid.mp4; sm.type = 'video/mp4';
+  video.appendChild(sw);
+  video.appendChild(sm);
+
+  const texture = new THREE.VideoTexture(video);
+  texture.minFilter = THREE.NearestFilter;
+  texture.magFilter = THREE.NearestFilter;
+  texture.generateMipmaps = false;
+
+  const geometry = new THREE.BufferGeometry();
+  const vertices = new Float32Array(W * H * 3);
+  for (let i = 0, j = 0; i < vertices.length; i += 3, j++) {
+    vertices[i] = j % W;
+    vertices[i + 1] = Math.floor(j / W);
+    vertices[i + 2] = 0;
+  }
+  geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      map: { value: texture },
+      width: { value: W },
+      height: { value: H },
+      nearClipping: { value: 850 },
+      farClipping: { value: 4000 },
+      pointSize: { value: 2 },
+      zOffset: { value: 1000 },
+    },
+    vertexShader: VERT,
+    fragmentShader: FRAG,
+    blending: THREE.AdditiveBlending,
+    depthTest: false,
+    depthWrite: false,
+    transparent: true,
+  });
+
+  scene.add(new THREE.Points(geometry, material));
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(cell.clientWidth, cell.clientHeight);
+  renderer.setClearColor(0x000000, 0);
+  cell.appendChild(renderer.domElement);
+
+  video.play().catch(() => {
+    document.addEventListener('click', () => video.play(), { once: true });
+  });
+
+  const mouse = { x: 0, y: 0 };
+  const orbit = { theta: 0, phi: 0 };
+  cell.addEventListener('mousemove', (e) => {
+    const rect = cell.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    mouse.y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  }, { passive: true });
+
+  function animate() {
+    mouse.x *= 0.96;
+    mouse.y *= 0.96;
+    orbit.theta += (mouse.x * 0.6 - orbit.theta) * 0.05;
+    orbit.phi += (-mouse.y * 0.4 - orbit.phi) * 0.05;
+    camera.position.x = center.x + 1500 * Math.sin(orbit.theta) * Math.cos(orbit.phi);
+    camera.position.y = center.y + 1500 * Math.sin(orbit.phi);
+    camera.position.z = center.z + 1500 * Math.cos(orbit.theta) * Math.cos(orbit.phi);
+    camera.lookAt(center);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  new ResizeObserver(() => {
+    camera.aspect = cell.clientWidth / cell.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(cell.clientWidth, cell.clientHeight);
+  }).observe(cell);
+}
+
+VIDEOS.forEach(createCell);
+</script>
+</body>
+</html>

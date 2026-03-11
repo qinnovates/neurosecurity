@@ -1,9 +1,9 @@
 {
   "metadata": {
     "version": "1.0",
-    "lastUpdated": "2026-03-05",
+    "lastUpdated": "2026-03-11",
     "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md.",
-    "totalEntities": 79
+    "totalEntities": 97
   },
   "explorer": [
     {
@@ -281,7 +281,7 @@
     {
       "name": "Marcello Ienca",
       "subtitle": "TU Munich / ETH Zurich",
-      "detail": "ACM Computing Surveys 2021",
+      "detail": "Ethics & IT 2016; Neurorights 2017",
       "contribution": "Brain data governance at the security-ethics intersection. Neurorights taxonomy and anti-inflationism.",
       "domain": "security",
       "category": "researcher"
@@ -1051,6 +1051,142 @@
         "venue": "J Law and the Biosciences 12(1):lsaf006",
         "doi": "10.1093/jlb/lsaf006",
         "desc": "Chinese neural data legal protection analysis."
+      },
+      {
+        "authors": "Holz, F.G., Le Mer, Y., Muqit, M.M.K. et al.",
+        "year": "2026",
+        "title": "Subretinal Photovoltaic Implant to Restore Vision in Geographic Atrophy Due to AMD",
+        "venue": "NEJM 394(3):232-242",
+        "doi": "10.1056/NEJMoa2501396",
+        "desc": "PRIMA pivotal trial — first form vision restoration via subretinal BCI; validates stimulation-based neural interface clinical pathway."
+      },
+      {
+        "authors": "Muqit, M.M.K., Le Mer, Y., Olmos de Koo, L., Holz, F.G., Sahel, J.A., Palanker, D.",
+        "year": "2024",
+        "title": "Prosthetic Visual Acuity with the PRIMA Subretinal Microchip at 4 Years Follow-up",
+        "venue": "Ophthalmology Science 4(5):100510",
+        "doi": "10.1016/j.xops.2024.100510",
+        "desc": "Long-term retinal BCI safety/efficacy data; informs TARA technique longevity assumptions."
+      },
+      {
+        "authors": "Brown, J., Zappitelli, K.M., Dawson, P.M. et al.",
+        "year": "2024",
+        "title": "Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior",
+        "venue": "bioRxiv",
+        "doi": "10.1101/2024.11.22.624907",
+        "desc": "First preclinical demonstration of bio-hybrid neural interface with living neurons — permanent attack surface at I0 boundary."
+      },
+      {
+        "authors": "Sanguinetti, J.L., Hameroff, S., Smith, E.E., Sato, T., Daft, C.M.W., Tyler, W.J., Allen, J.J.B.",
+        "year": "2020",
+        "title": "Transcranial Focused Ultrasound to the Right Prefrontal Cortex Improves Mood",
+        "venue": "Front Hum Neurosci 14:52",
+        "doi": "10.3389/fnhum.2020.00052",
+        "desc": "Establishes non-invasive ultrasound cognitive/mood modulation pathway — dual-use overlap with TARA stimulation techniques."
+      },
+      {
+        "authors": "Sarica, C., Nankoo, J-F., Fomenko, A. et al.",
+        "year": "2022",
+        "title": "Human Studies of Transcranial Ultrasound Neuromodulation: A Systematic Review of Effectiveness and Safety",
+        "venue": "Brain Stimulation 15(3):737-746",
+        "doi": "10.1016/j.brs.2022.05.002",
+        "desc": "35-study systematic review of tFUS safety/efficacy in humans; baseline for consumer stimulation threat modeling."
+      },
+      {
+        "authors": "Kim, T.D., Hong, G., Kim, J., Yoon, S.",
+        "year": "2019",
+        "title": "Cognitive Enhancement Using Transcranial Magnetic Stimulation (TMS): A Review",
+        "venue": "Exp Neurobiol 28(1):1-16",
+        "doi": "10.5607/en.2019.28.1.1",
+        "desc": "TMS cognitive enhancement across clinical and healthy populations; off-label enhancement as dual-use pathway."
+      },
+      {
+        "authors": "Kostick-Quenet, K., Kalwani, L., Koenig, B. et al.",
+        "year": "2022",
+        "title": "Researchers' Ethical Concerns About Using Adaptive Deep Brain Stimulation for Enhancement",
+        "venue": "Front Hum Neurosci 16:813922",
+        "doi": "10.3389/fnhum.2022.813922",
+        "desc": "Documents researcher-identified dual-use concerns for closed-loop DBS — mood/cognition modulation beyond therapeutic intent."
+      },
+      {
+        "authors": "Boufidis, D., Garg, R., Angelopoulos, E., Cullen, D.K., Vitale, F.",
+        "year": "2025",
+        "title": "Bio-inspired Electronics: Soft, Biohybrid, and Living Neural Interfaces",
+        "venue": "Nature Communications 16:1861",
+        "doi": "10.1038/s41467-025-57016-0",
+        "desc": "Comprehensive review of living neural interfaces incorporating biological cells; maps trajectory toward permanent bio-hybrid implants."
+      },
+      {
+        "authors": "Boulingre, M., Portillo-Lara, R., Green, R.A.",
+        "year": "2023",
+        "title": "Biohybrid Neural Interfaces: Improving the Biological Integration of Neural Implants",
+        "venue": "Chem Commun 59(100):14745-14758",
+        "doi": "10.1039/d3cc05006h",
+        "desc": "Foreign body response as barrier to chronic implant stability; relevant to signal degradation and long-term security."
+      },
+      {
+        "authors": "Willett, F.R., Kunz, E.M., Fan, C. et al.",
+        "year": "2023",
+        "title": "A High-Performance Speech Neuroprosthesis",
+        "venue": "Nature 620:1031-1036",
+        "doi": "10.1038/s41586-023-06377-x",
+        "desc": "62 wpm speech decoding from intracortical recordings; demonstrates practical read-interface bandwidth."
+      },
+      {
+        "authors": "Xu, L., Xu, M., Jung, T-P., Ming, D.",
+        "year": "2021",
+        "title": "Review of Brain Encoding and Decoding Mechanisms for EEG-based BCI",
+        "venue": "Cogn Neurodynamics 15(4):569-584",
+        "doi": "10.1007/s11571-021-09676-z",
+        "desc": "Reviews bidirectional encoding paradigms constituting the BCI read/write interface layer."
+      },
+      {
+        "authors": "Humayun, M.S., Dorn, J.D., da Cruz, L. et al.",
+        "year": "2012",
+        "title": "Interim Results from the International Trial of Second Sight's Visual Prosthesis",
+        "venue": "Ophthalmology 119(4):779-788",
+        "doi": "10.1016/j.ophtha.2011.09.028",
+        "desc": "First FDA-approved retinal prosthesis clinical trial; baseline for BCI visual stimulation capabilities and limitations."
+      },
+      {
+        "authors": "Tennison, M.N., Moreno, J.D.",
+        "year": "2012",
+        "title": "Neuroscience, Ethics, and National Security: The State of the Art",
+        "venue": "PLoS Biol 10(3):e1001289",
+        "doi": "10.1371/journal.pbio.1001289",
+        "desc": "Foundational dual-use framework — same technologies that restore function can enable surveillance/coercion."
+      },
+      {
+        "authors": "Denning, T., Matsuoka, Y., Kohno, T.",
+        "year": "2009",
+        "title": "Neurosecurity: Security and Privacy for Neural Devices",
+        "venue": "Neurosurg Focus 27(1):E7",
+        "doi": "10.3171/2009.4.FOCUS0985",
+        "desc": "Coined 'neurosecurity' — defines threat surface for implanted neural devices. Foundational paper for the entire field."
+      },
+      {
+        "authors": "Pycroft, L., Boccard, S.G., Owen, S.L.F., Stein, J.F., Fitzgerald, J.J., Green, A.L., Aziz, T.Z.",
+        "year": "2016",
+        "title": "Brainjacking: Implant Security Issues in Invasive Neuromodulation",
+        "venue": "World Neurosurgery 92:454-462",
+        "doi": "10.1016/j.wneu.2016.05.010",
+        "desc": "Coined and systematized 'brainjacking' for implanted neurostimulators."
+      },
+      {
+        "authors": "L\u00f3pez Bernal, S., Huertas Celdr\u00e1n, A., Mart\u00ednez P\u00e9rez, G., Barros, M.T., Balasubramaniam, S.",
+        "year": "2021",
+        "title": "Security in Brain-Computer Interfaces: State-of-the-Art, Opportunities, and Future Challenges",
+        "venue": "ACM Computing Surveys 54(1):1-35",
+        "doi": "10.1145/3427376",
+        "desc": "Comprehensive BCI security survey covering lifecycle phases, attack vectors, and defense mechanisms."
+      },
+      {
+        "authors": "Meng, L., Jiang, X., Huang, J., Zeng, Z., Yu, S., Jung, T-P., Lin, C-T., Chavarriaga, R., Wu, D.",
+        "year": "2023",
+        "title": "EEG-Based Brain-Computer Interfaces are Vulnerable to Backdoor Attacks",
+        "venue": "IEEE TNSRE 31:2224-2234",
+        "doi": "10.1109/TNSRE.2023.3273214",
+        "desc": "Narrow-period-pulse poisoning embeds unsynchronized backdoor trigger in EEG training data."
       }
     ]
   },
@@ -1137,13 +1273,13 @@
       ],
       "papers": [
         "C5",
-        "C71"
+        "C96"
       ],
       "bibKeys": [
         "ienca2016hacking",
         "ienca2017neurorights"
       ],
-      "qifRelevance": "Neurorights pioneer. Co-authored foundational neurorights paper (2017). BCI security lifecycle survey.",
+      "qifRelevance": "Neurorights pioneer. Co-authored foundational neurorights paper (2017). BCI attack taxonomy (Ethics & IT 2016).",
       "tags": [
         "neurorights",
         "neuroethics",

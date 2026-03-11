@@ -5,9 +5,9 @@
 > validation agents (quantum physics, neuroscience, cybersecurity) during the
 > framework review conducted on 2026-02-02.
 >
-> **Last updated:** 2026-03-05
+> **Last updated:** 2026-03-11
 > **Sources extracted from:** Three parallel validation agent sessions + ongoing research + landscape research agents
-> **Total unique sources:** 309+
+> **Total unique sources:** 326+
 
 ---
 
@@ -213,6 +213,29 @@ Sources are organized by domain and sorted newest-first within each domain.
 |---|----------|-----|--------|---------------|
 | B11 | (2026). "Emerging Threats in Neuromorphic Systems: A Comprehensive Survey." arXiv:2601.16589. | https://arxiv.org/abs/2601.16589 | BCI Review | Survey of security threats specific to neuromorphic computing systems. Covers adversarial attacks on spiking neural networks, hardware trojans, and side-channel vulnerabilities in neuromorphic chips. Maps to TARA neuromorphic system threat techniques. |
 
+### Retinal & Visual Prostheses
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| B12 | Holz FG, Le Mer Y, Muqit MMK et al. (2026). "Subretinal Photovoltaic Implant to Restore Vision in Geographic Atrophy Due to AMD." NEJM 394(3):232-242. DOI:10.1056/NEJMoa2501396. | https://www.nejm.org/doi/full/10.1056/NEJMoa2501396 | Verified: PubMed PMID:41124203 | PRIMA pivotal trial — first form vision restoration via subretinal BCI; validates stimulation-based neural interface clinical pathway. |
+| B13 | Muqit MMK, Le Mer Y, Olmos de Koo L, Holz FG, Sahel JA, Palanker D. (2024). "Prosthetic Visual Acuity with the PRIMA Subretinal Microchip at 4 Years Follow-up." Ophthalmology Science 4(5):100510. DOI:10.1016/j.xops.2024.100510. | https://pubmed.ncbi.nlm.nih.gov/38881600/ | Verified: PubMed PMID:38881600 | Long-term retinal BCI safety/efficacy data; informs TARA technique longevity assumptions. |
+| B14 | Humayun MS, Dorn JD, da Cruz L et al. (2012). "Interim Results from the International Trial of Second Sight's Visual Prosthesis." Ophthalmology 119(4):779-788. DOI:10.1016/j.ophtha.2011.09.028. | https://pubmed.ncbi.nlm.nih.gov/22244176/ | Verified: PubMed PMID:22244176 | First FDA-approved retinal prosthesis clinical trial; baseline for BCI visual stimulation capabilities and limitations. |
+
+### Bio-Hybrid & Living Neural Interfaces
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| B15 | Brown J, Zappitelli KM, Dawson PM et al. (2024). "Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior." bioRxiv. DOI:10.1101/2024.11.22.624907. | https://www.biorxiv.org/content/10.1101/2024.11.22.624907v1 | Verified: bioRxiv | First preclinical demonstration of bio-hybrid neural interface with living neurons — permanent attack surface at I0 boundary. |
+| B16 | Boufidis D, Garg R, Angelopoulos E, Cullen DK, Vitale F. (2025). "Bio-inspired Electronics: Soft, Biohybrid, and Living Neural Interfaces." Nat Commun 16:1861. DOI:10.1038/s41467-025-57016-0. | https://www.nature.com/articles/s41467-025-57016-0 | Verified: Crossref API | Comprehensive review of living neural interfaces incorporating biological cells; maps trajectory toward permanent bio-hybrid implants. |
+| B17 | Boulingre M, Portillo-Lara R, Green RA. (2023). "Biohybrid Neural Interfaces: Improving the Biological Integration of Neural Implants." Chem Commun 59(100):14745-14758. DOI:10.1039/d3cc05006h. | https://pmc.ncbi.nlm.nih.gov/articles/PMC10720954/ | Verified: PubMed PMID:37991846 | Foreign body response as barrier to chronic implant stability; relevant to signal degradation and long-term security. |
+
+### Speech & Decoding BCIs
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| B18 | Willett FR, Kunz EM, Fan C et al. (2023). "A High-Performance Speech Neuroprosthesis." Nature 620:1031-1036. DOI:10.1038/s41586-023-06377-x. | https://www.nature.com/articles/s41586-023-06377-x | Verified: PubMed | 62 wpm speech decoding from intracortical recordings; demonstrates practical read-interface bandwidth. |
+| B19 | Xu L, Xu M, Jung TP, Ming D. (2021). "Review of Brain Encoding and Decoding Mechanisms for EEG-based BCI." Cogn Neurodynamics 15(4):569-584. DOI:10.1007/s11571-021-09676-z. | https://pmc.ncbi.nlm.nih.gov/articles/PMC8286913/ | Verified: PubMed PMID:34367361 | Reviews bidirectional encoding paradigms constituting the BCI read/write interface layer. |
+
 ---
 
 ## 4. Cybersecurity & BCI Security
@@ -346,7 +369,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | C68 | GAO (2024). "Brain-Computer Interfaces: Applications, Challenges, and Policy Options." GAO-25-106952. | https://www.gao.gov/products/gao-25-106952 | Entry 71 | US Government Accountability Office policy assessment (Dec 2024). Identifies regulatory gaps for nonmedical BCIs outside FDA scope. Calls for unified privacy framework. Not a technical threat taxonomy. |
 | C69 | CISA (2023). "Secure Tomorrow Series: Alternative Futures — Brain-Computer Interfaces." | https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces | Entry 71 | Strategic foresight matrix game for critical infrastructure planning. Not a technical threat assessment. Contains game board, players' guide, controller guide. |
 | C70 | IEEE Brain Initiative. "Overview of the IEEE Standards Roadmap on Neurotechnologies for Brain-Machine Interfacing." | https://brain.ieee.org/newsletter/2020-issue-1/overview-of-the-ieee-standards-roadmap-on-neurotechnologies-for-brain-machine-interfacing/ | Entry 71 | IEEE's own review of BMI standards landscape. Explicitly identifies cybersecurity as a top priority gap. States the field is "borrowing" from existing standards. Calls for BMI-specific security standards. Confirms open standardization gap. |
-| C71 | Ienca M, Haselager P. (2021). "Security in Brain-Computer Interfaces: State-of-the-Art, Opportunities, and Future Challenges." ACM Computing Surveys. | https://dl.acm.org/doi/10.1145/3427376 | Entry 71 | Qualitative BCI security survey by lifecycle phase. No CVE mapping. Referenced in coverage gap analysis (no prior work bridges neuro-layer taxonomy to CVE ecosystem). |
+| C71 | López Bernal S, Huertas Celdrán A, Martínez Pérez G, Barros MT, Balasubramaniam S. (2021). "Security in Brain-Computer Interfaces: State-of-the-Art, Opportunities, and Future Challenges." ACM Computing Surveys 54(1):1-35. DOI:10.1145/3427376. | https://dl.acm.org/doi/10.1145/3427376 | Entry 71 | Qualitative BCI security survey by lifecycle phase. No CVE mapping. Referenced in coverage gap analysis (no prior work bridges neuro-layer taxonomy to CVE ecosystem). |
 | C72 | ISO 14708-3:2017 (confirmed 2023). "Active implantable medical devices — Implantable neurostimulators." | https://www.iso.org/standard/60539.html | Entry 71 | Neurostimulator standard covering electrical safety and biocompatibility. No cybersecurity content. No attack taxonomy. |
 | C73 | ISO/IEEE 11073-40102:2022. "Health informatics — Personal health device communication — Cybersecurity — Capabilities for mitigation." | https://www.iso.org/standard/83503.html | Entry 71 | Generic personal health device cybersecurity standard. Extended CIA triad, aligned with NIST/ENISA. Not BCI-specific. No attack taxonomy. |
 | C74 | Frank M, Hwu T, Jain S, Knight RT, Martinovic I, Mittal P, Perito D, Sluganovic I, Song D. (2017). "Using EEG-Based BCI Devices to Subliminally Probe for Private Information." ACM WPES 2017. DOI:10.1145/3139550.3139559. | https://doi.org/10.1145/3139550.3139559 | BCI Security | Subliminal EEG probing below conscious perception threshold (13.3ms) infers private information from 27 participants. Extends Martinovic 2012 with sub-perceptual stimuli. Maps to TARA subliminal probing techniques. |
@@ -390,6 +413,24 @@ Sources are organized by domain and sorted newest-first within each domain.
 | C107 | Lopez Bernal S, Huertas Celdran A, Fernandez Maimo L, Barros MT, Balasubramaniam S, Martinez Perez G. (2020). "Cyberattacks on Miniature Brain Implants to Disrupt Spontaneous Neural Signaling." IEEE Access 8:152204-152222. DOI:10.1109/ACCESS.2020.3017394. | https://ieeexplore.ieee.org/document/9169881/ | Verified: IEEE Xplore, arXiv | Introduces Neuronal Flooding (FLO) and Scanning (SCA) attack primitives on micron-scale BCI implants. Parent paper for entire neural cyberattack simulation line. |
 | C108 | OECD. (2024). "Neurotechnology Toolkit: To Support Policymakers in Implementing the OECD Recommendation on Responsible Innovation in Neurotechnology." | https://www.oecd.org/content/dam/oecd/en/topics/policy-sub-issues/emerging-technologies/neurotech-toolkit.pdf | Verified: OECD | 13 thematic implementation goals for the OECD Neurotechnology Recommendation. Policy toolkit for QIF governance alignment. |
 | C109 | UN Secretary-General's Scientific Advisory Board. (2025). "Science Brief: Neurotechnology." | https://www.un.org/scientific-advisory-board/en/neurotechnology | Verified: UN SAB | UN-level scientific brief on neurotechnology governance. International policy context for QIF. |
+
+### Foundational Neurosecurity & Dual-Use
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| C110 | Denning T, Matsuoka Y, Kohno T. (2009). "Neurosecurity: Security and Privacy for Neural Devices." Neurosurg Focus 27(1):E7. DOI:10.3171/2009.4.FOCUS0985. | https://thejns.org/focus/view/journals/neurosurg-focus/27/1/2009.4.focus0985.xml | Verified: Crossref API | Coined "neurosecurity" — defines threat surface for implanted neural devices. Foundational paper for the entire field. |
+| C111 | Tennison MN, Moreno JD. (2012). "Neuroscience, Ethics, and National Security: The State of the Art." PLoS Biol 10(3):e1001289. DOI:10.1371/journal.pbio.1001289. | https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001289 | Verified: PubMed | Foundational dual-use framework — same technologies that restore function can enable surveillance/coercion. |
+| C112 | Pycroft L, Boccard SG, Owen SLF, Stein JF, Fitzgerald JJ, Green AL, Aziz TZ. (2016). "Brainjacking: Implant Security Issues in Invasive Neuromodulation." World Neurosurgery 92:454-462. DOI:10.1016/j.wneu.2016.05.010. | https://doi.org/10.1016/j.wneu.2016.05.010 | Verified: PubMed PMID:27184896 | Coined and systematized "brainjacking" for implanted neurostimulators. |
+| C113 | Meng L, Jiang X, Huang J, Zeng Z, Yu S, Jung TP, Lin CT, Chavarriaga R, Wu D. (2023). "EEG-Based Brain-Computer Interfaces are Vulnerable to Backdoor Attacks." IEEE TNSRE 31:2224-2234. DOI:10.1109/TNSRE.2023.3273214. | https://doi.org/10.1109/TNSRE.2023.3273214 | Verified: PubMed PMID:37145943 | Narrow-period-pulse poisoning embeds unsynchronized backdoor trigger in EEG training data. Training-time attack on BCI classifiers. |
+
+### Neuromodulation & Stimulation Dual-Use
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| C114 | Sanguinetti JL, Hameroff S, Smith EE, Sato T, Daft CMW, Tyler WJ, Allen JJB. (2020). "Transcranial Focused Ultrasound to the Right Prefrontal Cortex Improves Mood." Front Hum Neurosci 14:52. DOI:10.3389/fnhum.2020.00052. | https://pmc.ncbi.nlm.nih.gov/articles/PMC7058635/ | Verified: PubMed PMID:32184714 | Establishes non-invasive ultrasound cognitive/mood modulation pathway — dual-use overlap with TARA stimulation techniques. |
+| C115 | Sarica C, Nankoo JF, Fomenko A et al. (2022). "Human Studies of Transcranial Ultrasound Neuromodulation: A Systematic Review of Effectiveness and Safety." Brain Stimulation 15(3):737-746. DOI:10.1016/j.brs.2022.05.002. | https://pubmed.ncbi.nlm.nih.gov/35533835/ | Verified: PubMed PMID:35533835 | 35-study systematic review of tFUS safety/efficacy in humans; baseline for consumer stimulation threat modeling. |
+| C116 | Kim TD, Hong G, Kim J, Yoon S. (2019). "Cognitive Enhancement Using Transcranial Magnetic Stimulation: A Review." Exp Neurobiol 28(1):1-16. DOI:10.5607/en.2019.28.1.1. | https://pmc.ncbi.nlm.nih.gov/articles/PMC6401552/ | Verified: PubMed PMID:30853820 | TMS cognitive enhancement across clinical and healthy populations; off-label enhancement as dual-use pathway. |
+| C117 | Kostick-Quenet K, Kalwani L, Koenig B et al. (2022). "Researchers' Ethical Concerns About Using Adaptive Deep Brain Stimulation for Enhancement." Front Hum Neurosci 16:813922. DOI:10.3389/fnhum.2022.813922. | https://pmc.ncbi.nlm.nih.gov/articles/PMC9050172/ | Verified: PubMed PMID:35496073 | Documents researcher-identified dual-use concerns for closed-loop DBS — mood/cognition modulation beyond therapeutic intent. |
 
 ---
 
@@ -655,8 +696,8 @@ Sources are organized by domain and sorted newest-first within each domain.
 |--------|-------|--------|--------|
 | Quantum Physics & Biology | 40 | 2026 | 1993 |
 | Neuroscience | 29 | 2026 | 2010 |
-| BCI Technology | 11 | 2026 | 1992 |
-| Cybersecurity & BCI Security | 108 | 2026 | 2009 |
+| BCI Technology | 19 | 2026 | 1992 |
+| Cybersecurity & BCI Security | 116 | 2026 | 2009 |
 | Electrode Technology | 7 | 2025 | 2018 |
 | Signal Coherence & Oscillations | 5 | 2015 | 1997 |
 | Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
@@ -672,7 +713,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Neurorights Legislation | 4 | 2025 | 2021 |
 | Global Neuroethics Policy & Governance | 19 | 2025 | 2020 |
 | BCI Companies & Devices | 3 | 2025 | 2025 |
-| **Total** | **309** | | |
+| **Total** | **326** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -688,6 +729,7 @@ Sources are organized by domain and sorted newest-first within each domain.
 | Neuroethics Landscape Survey (Mar 4) | ~21 |
 | Multi-Source Gap Analysis — Policy (Mar 5) | ~19 |
 | Multi-Source Gap Analysis — Security (Mar 5) | ~13 |
+| BCI/Stimulation/Dual-Use Citation Sync (Mar 11) | ~18 |
 
 ---
 

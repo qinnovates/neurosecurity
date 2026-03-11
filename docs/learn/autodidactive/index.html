@@ -12,8 +12,8 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/app.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css?v=7">
 </head>
 <body>
   <div class="app">
@@ -22,6 +22,7 @@
       <div id="view-home" class="view active"></div>
       <div id="view-learn" class="view"></div>
       <div id="view-notewall" class="view view-notewall"></div>
+      <div id="view-audio" class="view"></div>
       <div id="view-profile" class="view"></div>
     </main>
   </div>
@@ -98,6 +99,14 @@
       </svg>
       <span class="tab-nav__label">Notes</span>
     </button>
+    <button class="tab-nav__item" data-view="audio" aria-label="Audio">
+      <svg class="tab-nav__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18V5l12-2v13"/>
+        <circle cx="6" cy="18" r="3"/>
+        <circle cx="18" cy="16" r="3"/>
+      </svg>
+      <span class="tab-nav__label">Audio</span>
+    </button>
     <button class="tab-nav__item" data-view="profile" aria-label="Profile">
       <svg class="tab-nav__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
@@ -107,6 +116,6 @@
     </button>
   </nav>
 
-  <script type="module" src="js/app.js?v=3"></script>
+  <script type="module" src="js/app.js?v=7"></script>
 </body>
 </html>
