@@ -4,7 +4,7 @@ subtitle: "Neuralink's co-founder describes digital Adderall via brain stimulati
 date: 2026-03-11
 tags: [BCI, neurosecurity, QIF, TARA, clinical-mapping, interview-analysis, ADHD]
 author: Qinnovate
-fact_checked: false
+fact_checked: true
 fact_check_notes:
   - "Source: 'How to Build the Future' interview with Max Hodak by Garry Tan (Y Combinator), published March 9, 2026"
   - "All quotes attributed to Hodak are from the auto-generated transcript of the interview"
@@ -17,7 +17,7 @@ Over the past 3 months, I've asked how a security engineer with an admiration fo
 
 During my endeavors, I realized what now is clearly obvious -- that by mapping and threat modeling attacks with a risk score using what's already in the DSM provides a dual-lens perspective that may potentially provide therapeutic analogues. You can see the full [clinical TARA view here](/atlas/therapeutics/).
 
-The same stimulation that Max alludes to in the interview to stimulate dopamine receptors can introduce threat vectors. That's where my work is different because rather than entering BCI research through the front door, I am entering through the backdoor. That's how my brain was trained by design. The Romans didn't invent the Trojan Horse to go through the front door, but rather, to climb a barrier that they couldn't get through.
+The same stimulation that Max alludes to in the interview to stimulate dopamine receptors can introduce threat vectors. That's where my work is different because rather than entering BCI research through the front door, I am entering through the backdoor. That's how my brain was trained by design. The Greeks didn't build the Trojan Horse to go through the front door, but rather, to get past a barrier they couldn't breach head-on.
 
 For me, this is my metaphorical barrier -- using security-backed research and science. I don't come from the world of BCIs but the past 3 months have taught me immensely that while the industry is busy bringing medical equity to the subset of our population that need it the most, my goal is to ensure we have not only the security frameworks that BCI companies can reference, but also identify how unique backgrounds can bring a fresh perspective to the engineering world of BCIs.
 
@@ -35,9 +35,9 @@ Every one of these maps to DSM-5-TR code F90 (ADHD) in the TARA catalog -- for t
 
 ### The API of the Brain
 
-Hodak explains the retina as a layered compression pipeline: 150 million rods and cones connect to bipolar cells, which compress down to 1.5 million retinal ganglion cells that form the optic nerve -- roughly a 100x compression before the signal even reaches the brain. (Hodak cites 100 million bipolar cells; standard estimates vary, but the compression ratio holds.)
+Hodak explains the retina as a layered compression pipeline: roughly 126 million rods and cones connect to bipolar cells, which compress down to about 1.2-1.5 million retinal ganglion cells that form the optic nerve -- roughly a 100x compression before the signal even reaches the brain. (Hodak cites higher figures in the interview; standard neuroscience estimates are ~120M rods + 6M cones. The compression ratio holds either way.)
 
-Science Corp's retinal prosthesis bypasses the dead rods and cones to stimulate the bipolar cells directly -- upstream of the compression layer. In the PRIMAvera pivotal trial (38 patients), the mean improvement was 23 letters of visual acuity, with the best patient gaining 59 letters. This dramatically outperformed Second Sight's Argus II, which stimulated the ganglion cells downstream of the compression and produced limited real-world utility -- and eventually left 350+ patients with obsolete, unsupported devices.
+Science Corp's retinal prosthesis bypasses the dead rods and cones to stimulate the bipolar cells directly -- upstream of the compression layer. In the PRIMAvera pivotal trial (38 patients), the final NEJM results showed a mean improvement of 25.5 letters of visual acuity, with the best patient gaining 59 letters. This dramatically outperformed Second Sight's Argus II, which stimulated the ganglion cells downstream of the compression and produced limited real-world utility -- and eventually left 350+ patients with obsolete, unsupported devices.
 
 Hodak puts it simply: "You can think of that as like the API of the brain." If you can characterize the signal representations at each layer, you can write to them. The brain handles the rest through plasticity.
 
@@ -79,9 +79,9 @@ The same cross-domain transfer applies to neurosecurity. What cybersecurity has 
 
 ### Bio-Hybrid: The Permanent Attack Surface
 
-Hodak's bio-hybrid neural interfaces program is building probes that grow into the brain using living neurons. Preclinical results showed engrafted optogenetically-enabled neurons survived, integrated with host brain tissue, and transmitted information enabling goal-directed behavior in mice. The pitch: biological integration eliminates the foreign-body immune response that degrades conventional electrodes over time.
+Hodak's bio-hybrid neural interfaces program is building probes that grow into the brain using living neurons. A preprint (not yet peer-reviewed) showed engrafted optogenetically-enabled neurons survived, integrated with host brain tissue, and transmitted information enabling goal-directed behavior in mice. The pitch: biological integration eliminates the foreign-body immune response that degrades conventional electrodes over time.
 
-The security implication: a bio-hybrid implant cannot be removed without destroying the neural tissue it has integrated with. Every conventional BCI at least has a theoretical extraction path. Bio-hybrid interfaces are permanent by design. Hodak himself wrote about this boundary as early as 2016: at sufficient bandwidth, "the border around a brain" becomes ambiguous. He put it more directly in a December 2025 interview: "You could really, in a very fundamental sense, talk about redrawing the border around a brain, possibly to include four hemispheres, or a device, or a whole group of people."
+The security implication: a bio-hybrid implant cannot be removed without destroying the neural tissue it has integrated with. Every conventional BCI at least has a theoretical extraction path. Bio-hybrid interfaces are permanent by design. Hodak has written about this boundary since 2016, when he explored where the line between a person and their device blurs at high bandwidth. By December 2025, he put it more directly: "You could really, in a very fundamental sense, talk about redrawing the border around a brain, possibly to include four hemispheres, or a device, or a whole group of people."
 
 In [QIF terms](/framework/), this is the I0 boundary -- the hardware-biology interface where silicon meets tissue. The proposed [neural firewall](/guardrails/) concept sits at exactly this boundary because it is the last point where signal validation is technically possible before the signal becomes biology.
 
