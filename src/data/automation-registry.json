@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-03-10T01:26:56.413Z",
+  "last_updated": "2026-03-11T01:27:08.667Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -11,7 +11,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/deploy.yml",
       "status": "active",
-      "last_triggered": "2026-03-09T23:41:15Z",
+      "last_triggered": "2026-03-11T01:06:37Z",
       "last_status": "success",
       "dependencies": [
         "src/",
@@ -31,7 +31,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/changelog.yml",
       "status": "active",
-      "last_triggered": "2026-03-09T23:40:42Z",
+      "last_triggered": "2026-03-11T01:05:52Z",
       "last_status": "success",
       "dependencies": [
         "scripts/changelog-update.mjs",
@@ -52,8 +52,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": "2026-03-09T05:01:40Z",
-      "last_status": "success",
+      "last_triggered": "2026-03-11T00:41:30Z",
+      "last_status": "failure",
       "dependencies": [
         ".github/security-audit/scripts/audit.py",
         ".github/security-audit/patterns/secrets.json"
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-03-09T17:39:23Z",
+      "last_triggered": "2026-03-10T17:37:53Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -91,7 +91,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/verify-citations.yml",
       "status": "active",
-      "last_triggered": "2026-03-09T04:50:57Z",
+      "last_triggered": "2026-03-11T00:46:20Z",
       "last_status": "failure",
       "dependencies": [
         "scripts/verify/run_all.py",
@@ -135,7 +135,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/timeline-check.yml",
       "status": "active",
-      "last_triggered": "2026-03-09T23:40:41Z",
+      "last_triggered": "2026-03-11T01:05:48Z",
       "last_status": "success",
       "dependencies": [
         "scripts/timeline-check.mjs",
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-03-10T01:26:31Z",
+      "last_triggered": "2026-03-11T01:26:41Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
