@@ -4,53 +4,90 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
 const currentPath = Astro.url.pathname;
 
-// --- Mission: identity, vision, governance, ethics ---
-const missionLinks = [
-  { href: '/mission/', label: 'Mission Statement', desc: 'Unified model for BCI risk, equity, and informed consent' },
-  { href: '/vision/', label: 'Vision', desc: 'The future of neural interface security' },
-  { href: '/about/', label: 'Team & Founder', desc: 'Kevin L. Qi — from detection infrastructure to neurosecurity' },
-  { href: '/news/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
-  { href: '', label: 'divider' },
-  { href: '/governance/', label: 'Code of Ethics', desc: 'Ethical commitments and conduct standards' },
-  { href: '/governance/rights/', label: 'Neurorights', desc: '5 proposed neurorights mapped to hourglass bands' },
-  { href: '/governance/foundations/', label: 'Foundations', desc: 'Philosophical grounding for the framework' },
-  { href: '/research/neuroethics-landscape/', label: 'Neuroethics Landscape', desc: 'Timeline of neurorights and neuroethics scholarship' },
+// --- Nav structure: sections > groups > links ---
+interface NavLink { href: string; label: string; desc?: string }
+interface NavGroup { title: string; links: NavLink[] }
+interface NavSection { id: string; label: string; href: string; groups: NavGroup[]; isActive?: boolean }
+
+const missionGroups: NavGroup[] = [
+  {
+    title: 'About',
+    links: [
+      { href: '/mission/', label: 'Mission Statement', desc: 'Unified model for BCI risk, equity, and informed consent' },
+      { href: '/vision/', label: 'Vision', desc: 'The future of neural interface security' },
+      { href: '/about/', label: 'Team & Founder', desc: 'Kevin L. Qi — from detection infrastructure to neurosecurity' },
+      { href: '/news/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
+    ],
+  },
+  {
+    title: 'Governance',
+    links: [
+      { href: '/governance/', label: 'Code of Ethics', desc: 'Ethical commitments and conduct standards' },
+      { href: '/governance/rights/', label: 'Neurorights', desc: '5 proposed neurorights mapped to hourglass bands' },
+      { href: '/governance/foundations/', label: 'Foundations', desc: 'Philosophical grounding for the framework' },
+      { href: '/research/neuroethics-landscape/', label: 'Neuroethics Landscape', desc: 'Timeline of neurorights scholarship' },
+    ],
+  },
 ];
 
-// --- Atlas: explore devices, threats, data, tools ---
-const atlasLinks = [
-  { href: '/atlas/', label: 'Atlas Overview', desc: 'Unified dashboard — hourglass, brain, and threat landscape' },
-  { href: '/framework/', label: 'QIF Framework', desc: '11-band hourglass architecture and signal security' },
-  { href: '/atlas/tara/', label: 'TARA', desc: `${TARA_TECHNIQUES} techniques scored with NISS` },
-  { href: '/atlas/tara/ttps/', label: 'TTPs Explained', desc: 'Tactics, techniques & procedures taxonomy' },
-  { href: '/atlas/tara/numbering/', label: 'QIF Numbering', desc: 'Technique IDs, tactic codes & band references' },
-  { href: '/atlas/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring — extending CVSS for neural harm' },
-  { href: '/atlas/analysis/', label: 'Threat Analysis & Case Studies', desc: 'Deep dives, hardware validation, and attack chain analysis' },
-  { href: '/research/bci-explorer/', label: 'BCI Explorer & Attack Map', desc: 'Interactive device explorer and threat visualization' },
-  { href: '', label: 'divider' },
-  { href: '/tools/intel/', label: 'Intel Feed', desc: 'Automated BCI intelligence from 53+ sources' },
-  { href: '/research/api/', label: 'APIs & Feeds', desc: 'STIX 2.1, TARA JSON, QIF JSON, Python SDK' },
-  { href: '/research/landscape/', label: 'KQL Data Lake', desc: 'Query the threat and device databases' },
-  { href: '/glossary/', label: 'Glossary', desc: 'Terms and definitions' },
-  { href: 'https://github.com/qinnovates', label: 'Other Resources', desc: 'Autodidactive, macshield, and more' },
+const atlasGroups: NavGroup[] = [
+  {
+    title: 'Framework',
+    links: [
+      { href: '/atlas/', label: 'Atlas Dashboard', desc: 'Unified hourglass, brain, and threat landscape' },
+      { href: '/framework/', label: 'QIF Framework', desc: '11-band hourglass architecture' },
+      { href: '/atlas/tara/', label: 'TARA Catalog', desc: `${TARA_TECHNIQUES} techniques scored with NISS` },
+      { href: '/atlas/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring — extending CVSS' },
+    ],
+  },
+  {
+    title: 'Analysis',
+    links: [
+      { href: '/atlas/tara/ttps/', label: 'TTPs Explained', desc: 'Tactics, techniques & procedures' },
+      { href: '/atlas/tara/numbering/', label: 'QIF Numbering', desc: 'Technique IDs and tactic codes' },
+      { href: '/atlas/analysis/', label: 'Case Studies', desc: 'Deep dives and attack chain analysis' },
+      { href: '/research/bci-explorer/', label: 'BCI Explorer', desc: 'Interactive device and threat map' },
+    ],
+  },
+  {
+    title: 'Tools',
+    links: [
+      { href: '/tools/intel/', label: 'Intel Feed', desc: 'Automated BCI intelligence from 53+ sources' },
+      { href: '/research/api/', label: 'APIs & Feeds', desc: 'STIX 2.1, TARA JSON, Python SDK' },
+      { href: '/research/landscape/', label: 'KQL Data Lake', desc: 'Query the threat and device databases' },
+      { href: '/glossary/', label: 'Glossary', desc: 'Terms and definitions' },
+    ],
+  },
 ];
 
-// --- R&D: research, specs, development, news ---
-const rndLinks = [
-  { href: '/research/', label: 'Research Overview', desc: 'All research areas and methodology' },
-  { href: '/research/whitepaper/', label: 'Whitepaper', desc: 'Latest QIF specification with version history' },
-  { href: '/research/landscape/', label: 'BCI Landscape', desc: 'Market analysis and device landscape' },
-  { href: '/research/clinical/', label: 'Clinical', desc: 'Therapeutic applications and psychiatric mappings' },
-  { href: '/research/physics/', label: 'Physics', desc: 'Physical constraints on BCI systems' },
-  { href: '/research/validation/', label: 'Validation', desc: 'Methodology and testing results' },
-  { href: '', label: 'divider' },
-  { href: '/development/', label: 'Defense Stack', desc: 'Proposed defense stack for neural interfaces' },
-  { href: '/guardrails/', label: 'Neurowall', desc: 'Signal-layer firewall at the neural interface boundary' },
-  { href: '/guardrails/nsp/', label: 'NSP Protocol', desc: 'Post-quantum wire security for BCI data' },
-  { href: '/guardrails/runemate/', label: 'Runemate', desc: 'On-device policy compiler and content delivery' },
-  { href: '', label: 'divider' },
-  { href: '/news/', label: 'Blog & Field Journals', desc: 'Announcements, writeups, and research notes' },
-  { href: '/news/derivation/', label: 'Derivation Log', desc: 'Live research journal and hypothesis tracking' },
+const rndGroups: NavGroup[] = [
+  {
+    title: 'Research',
+    links: [
+      { href: '/research/', label: 'Overview', desc: 'All research areas and methodology' },
+      { href: '/research/whitepaper/', label: 'Whitepaper', desc: 'Latest QIF specification' },
+      { href: '/research/landscape/', label: 'BCI Landscape', desc: 'Market analysis and device landscape' },
+      { href: '/research/clinical/', label: 'Clinical', desc: 'Therapeutic applications' },
+      { href: '/research/physics/', label: 'Physics', desc: 'Physical constraints on BCI systems' },
+    ],
+  },
+  {
+    title: 'Defense Stack',
+    links: [
+      { href: '/development/', label: 'Overview', desc: 'Proposed defense stack for neural interfaces' },
+      { href: '/guardrails/', label: 'Neurowall', desc: 'Signal-layer firewall at I0' },
+      { href: '/guardrails/nsp/', label: 'NSP Protocol', desc: 'Post-quantum wire security' },
+      { href: '/guardrails/runemate/', label: 'Runemate', desc: 'On-device policy compiler' },
+    ],
+  },
+  {
+    title: 'Updates',
+    links: [
+      { href: '/news/', label: 'Blog & Field Journals', desc: 'Announcements and research notes' },
+      { href: '/news/derivation/', label: 'Derivation Log', desc: 'Live research journal' },
+      { href: '/research/validation/', label: 'Validation', desc: 'Methodology and testing results' },
+    ],
+  },
 ];
 
 const isMissionActive = ['/mission/', '/vision/', '/about/'].some(p => currentPath.startsWith(p))
@@ -61,11 +98,10 @@ const isAtlasActive = currentPath.startsWith('/atlas/') || currentPath.startsWit
 const isRndActive = currentPath.startsWith('/research/') || currentPath.startsWith('/development/')
   || currentPath.startsWith('/guardrails/') || (currentPath.startsWith('/news/') && !currentPath.startsWith('/news/roadmap/'));
 
-// Nav sections config for DRY rendering
-const navSections = [
-  { id: 'mission', label: 'Mission', href: '/mission/', links: missionLinks, isActive: isMissionActive },
-  { id: 'atlas', label: 'Atlas', href: '/atlas/', links: atlasLinks, isActive: isAtlasActive },
-  { id: 'rnd', label: 'R&D', href: '/research/', links: rndLinks, isActive: isRndActive },
+const navSections: NavSection[] = [
+  { id: 'mission', label: 'Mission', href: '/mission/', groups: missionGroups, isActive: isMissionActive },
+  { id: 'atlas', label: 'Atlas', href: '/atlas/', groups: atlasGroups, isActive: isAtlasActive },
+  { id: 'rnd', label: 'R&D', href: '/research/', groups: rndGroups, isActive: isRndActive },
 ];
 ---
 
@@ -99,25 +135,32 @@ const navSections = [
               </svg>
             </a>
             <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-              <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl w-80 overflow-hidden max-h-[70vh] overflow-y-auto">
-                <div class="p-2">
-                  {section.links.map((link) => (
-                    link.label === 'divider' ? (
-                      <div class="my-1.5 mx-3 border-t border-[var(--color-border)]" />
-                    ) : (
-                      <a
-                        href={link.href}
-                        class:list={[
-                          "block px-3 py-2.5 rounded-lg transition-colors",
-                          currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                            ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-                        ]}
-                      >
-                        <span class="text-sm font-medium block leading-snug">{link.label}</span>
-                        <span class="text-xs text-[var(--color-text-faint)] block mt-0.5 leading-snug">{link.desc}</span>
-                      </a>
-                    )
+              <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl overflow-hidden max-h-[75vh] overflow-y-auto"
+                style={`width: ${section.groups.length > 2 ? '640px' : '420px'};`}
+              >
+                <div class={`p-3 ${section.groups.length > 2 ? 'grid grid-cols-3 gap-3' : section.groups.length === 2 ? 'grid grid-cols-2 gap-3' : ''}`}>
+                  {section.groups.map((group) => (
+                    <div>
+                      <p class="text-[10px] font-semibold uppercase tracking-[0.12em] px-2 py-1.5 mb-1" style="color: var(--color-text-faint);">
+                        {group.title}
+                      </p>
+                      {group.links.map((link) => (
+                        <a
+                          href={link.href}
+                          class:list={[
+                            "block px-2 py-2 rounded-lg transition-colors",
+                            currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                              : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                          ]}
+                        >
+                          <span class="text-sm font-medium block leading-snug">{link.label}</span>
+                          {link.desc && (
+                            <span class="text-[11px] block mt-0.5 leading-snug" style="color: var(--color-text-faint);">{link.desc}</span>
+                          )}
+                        </a>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -216,16 +259,16 @@ const navSections = [
         BCI Vision
       </a>
 
-      <!-- Mobile nav sections -->
+      <!-- Mobile nav sections with nested groups -->
       {navSections.map((section) => (
-        <div>
+        <div class="border-t border-[var(--color-border)] pt-1 mt-1">
           <button
             data-mobile-toggle={section.id}
             class:list={[
-              "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
               section.isActive
                 ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                : "text-[var(--color-text-primary)] hover:bg-black/5"
             ]}
           >
             {section.label}
@@ -233,28 +276,40 @@ const navSections = [
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </button>
-          <div data-mobile-list={section.id} class="hidden pl-3 space-y-0.5 mt-1">
-            {section.links.map((link) => (
-              link.label === 'divider' ? (
-                <div class="my-1 mx-3 border-t border-[var(--color-border)]" />
-              ) : (
-                <a
-                  href={link.href}
-                  class:list={[
-                    "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                    currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                      ? "text-[var(--color-accent-primary)]"
-                      : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
-                  ]}
+
+          <div data-mobile-list={section.id} class="hidden mt-1 space-y-1">
+            {section.groups.map((group) => (
+              <div class="ml-2">
+                <button
+                  data-mobile-group={`${section.id}-${group.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  class="flex items-center justify-between w-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] rounded-lg transition-colors hover:bg-black/5"
+                  style="color: var(--color-text-faint);"
                 >
-                  {link.label}
-                </a>
-              )
+                  {group.title}
+                  <svg class="w-3 h-3 opacity-50 transition-transform" data-group-chevron={`${section.id}-${group.title.toLowerCase().replace(/\s+/g, '-')}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
+                <div data-mobile-group-list={`${section.id}-${group.title.toLowerCase().replace(/\s+/g, '-')}`} class="hidden ml-2 space-y-0.5 mt-0.5 mb-1">
+                  {group.links.map((link) => (
+                    <a
+                      href={link.href}
+                      class:list={[
+                        "block px-3 py-1.5 rounded-lg text-sm transition-colors",
+                        currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                          ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/5"
+                          : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]"
+                      ]}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       ))}
-
     </div>
   </div>
 </nav>
@@ -292,7 +347,6 @@ const navSections = [
       let timeout: ReturnType<typeof setTimeout>;
 
       function show() {
-        // Close any other open dropdowns first
         document.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(m => {
           if (m !== menu) m.classList.add('hidden');
         });
@@ -316,7 +370,7 @@ const navSections = [
       });
     });
 
-    // Mobile accordion toggles
+    // Mobile section accordion toggles
     document.querySelectorAll<HTMLElement>('[data-mobile-toggle]').forEach((btn) => {
       const key = btn.getAttribute('data-mobile-toggle');
       const list = document.querySelector<HTMLElement>(`[data-mobile-list="${key}"]`);
@@ -325,6 +379,18 @@ const navSections = [
       btn.addEventListener('click', () => {
         list?.classList.toggle('hidden');
         chevron?.classList.toggle('rotate-180');
+      });
+    });
+
+    // Mobile group sub-accordion toggles
+    document.querySelectorAll<HTMLElement>('[data-mobile-group]').forEach((btn) => {
+      const key = btn.getAttribute('data-mobile-group');
+      const list = document.querySelector<HTMLElement>(`[data-mobile-group-list="${key}"]`);
+      const chevron = document.querySelector<HTMLElement>(`[data-group-chevron="${key}"]`);
+
+      btn.addEventListener('click', () => {
+        list?.classList.toggle('hidden');
+        chevron?.classList.toggle('rotate-90');
       });
     });
 
