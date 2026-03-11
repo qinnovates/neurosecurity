@@ -25,6 +25,9 @@ try {
   // Feed not yet populated — show empty state
 }
 
+// Active feed count (from fetch-intel.mjs)
+const INTEL_FEED_COUNT = 50;
+
 // Sort by date descending
 items.sort((a, b) => b.date.localeCompare(a.date));
 
@@ -67,14 +70,14 @@ const categoryConfig: Record<string, { label: string; color: string }> = {
 
 <PageLayout
   title="Intel Feed"
-  description="Automated BCI intelligence feed aggregating 53+ sources across neurotechnology, medical device security, regulatory, and research domains. Updated weekly."
+  description={`Automated BCI intelligence feed aggregating ${INTEL_FEED_COUNT}+ sources across neurotechnology, medical device security, regulatory, and research domains. Updated weekly. STIX 2.1 export available.`}
   breadcrumbs={[{ label: 'Tools', href: '/research/api/' }, { label: 'Intel Feed' }]}
   maxWidth="wide"
 >
   <div class="mb-8 reveal">
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">Intel Feed</h1>
     <p class="text-base text-[var(--color-text-muted)] max-w-2xl">
-      Automated intelligence aggregator crawling 53+ RSS feeds and Google News queries across neurotechnology, BCI security, medical devices, regulatory, and research domains.
+      Automated intelligence aggregator crawling {INTEL_FEED_COUNT}+ RSS feeds and Google News queries across neurotechnology, BCI security, medical devices, regulatory, and research domains.
     </p>
   </div>
 
@@ -221,7 +224,7 @@ const categoryConfig: Record<string, { label: string; color: string }> = {
         <div>
           <h3 class="text-base font-semibold mb-3">How It Works</h3>
           <ol class="space-y-2 text-sm text-[var(--color-text-muted)] list-decimal list-inside">
-            <li>53+ RSS feeds and Google News queries are crawled weekly</li>
+            <li>{INTEL_FEED_COUNT}+ RSS feeds and Google News queries are crawled weekly</li>
             <li>Items are filtered by 90+ relevance keywords (BCI, neurosecurity, medical device, etc.)</li>
             <li>Fuzzy deduplication removes near-duplicates (trigram Jaccard similarity)</li>
             <li>New items are tagged by category, source, and topic</li>
@@ -243,6 +246,76 @@ const categoryConfig: Record<string, { label: string; color: string }> = {
           Coverage: {new Date(oldestDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })} &mdash; {new Date(newestDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
         </p>
       )}
+    </div>
+  </details>
+
+  <!-- STIX 2.1 Integration -->
+  <details class="mt-6 glass rounded-xl reveal">
+    <summary class="p-6 cursor-pointer text-lg font-semibold font-[family-name:var(--font-heading)] hover:text-[var(--color-accent-primary)] transition-colors select-none">
+      STIX 2.1 Integration
+      <span class="text-xs text-[var(--color-text-faint)] font-normal ml-2">Export threat data for your SIEM</span>
+    </summary>
+    <div class="px-6 pb-6 space-y-6">
+      <p class="text-sm text-[var(--color-text-muted)]">
+        All 109 TARA threat techniques are available as a STIX 2.1 bundle for integration with threat intelligence platforms (MISP, OpenCTI, Splunk ES, Microsoft Sentinel, etc.).
+      </p>
+
+      <div>
+        <h4 class="text-sm font-semibold mb-2">Live API Endpoint</h4>
+        <div class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+          <code class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] break-all">GET https://qinnovate.com/api/stix.json</code>
+        </div>
+        <p class="text-xs text-[var(--color-text-faint)] mt-2">Returns a STIX 2.1 Bundle with attack-pattern objects for every TARA technique. Public, CORS-enabled, cached 1 hour.</p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-semibold mb-2">Quick Start</h4>
+        <div class="space-y-3">
+          <div>
+            <p class="text-xs text-[var(--color-text-faint)] mb-1">curl</p>
+            <pre class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>curl -s https://qinnovate.com/api/stix.json | jq '.objects | length'</code></pre>
+          </div>
+          <div>
+            <p class="text-xs text-[var(--color-text-faint)] mb-1">Python (qtara SDK)</p>
+            <pre class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>{`pip install qtara
+python -m qtara stix --output tara-bundle.json`}</code></pre>
+          </div>
+          <div>
+            <p class="text-xs text-[var(--color-text-faint)] mb-1">Import to OpenCTI / MISP</p>
+            <pre class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>{`# Download the bundle
+curl -o tara-stix.json https://qinnovate.com/api/stix.json
+
+# OpenCTI: Import via Data > Import > STIX 2.1 Bundle
+# MISP: Import via Event Actions > Add STIX 2.1
+
+# Splunk ES: Use Threat Intelligence Management
+# to ingest the JSON endpoint directly
+
+# Microsoft Sentinel: Upload via Threat Intelligence blade
+# or connect via TAXII-compatible feed`}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-semibold mb-2">What's in the Bundle</h4>
+        <div class="space-y-1.5 text-sm text-[var(--color-text-muted)]">
+          <p><strong>Identity object</strong> — Qinnovate as the source organization</p>
+          <p><strong>109 Attack Patterns</strong> — One per TARA technique, with kill chain phases, severity, band mapping, and dual-use classification</p>
+          <p><strong>External References</strong> — Each object links back to its TARA detail page</p>
+          <p><strong>Custom Properties</strong> — <code class="text-xs bg-[var(--color-bg-secondary)] px-1 rounded">x_qif_severity</code>, <code class="text-xs bg-[var(--color-bg-secondary)] px-1 rounded">x_qif_bands</code>, <code class="text-xs bg-[var(--color-bg-secondary)] px-1 rounded">x_qif_dual_use</code></p>
+        </div>
+      </div>
+
+      <div class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+        <p class="text-xs text-[var(--color-text-faint)]">
+          <strong>Source Code:</strong> <a href="https://github.com/qinnovates/qinnovate/blob/main/src/pages/api/stix.json.ts" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">stix.json.ts</a>
+          <br />
+          <strong>Python SDK:</strong> <a href="https://github.com/qinnovates/qinnovate/tree/main/shared/qtara" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">shared/qtara/</a> — <code class="bg-[var(--color-bg-primary)] px-1 rounded">pip install qtara</code>
+          <br />
+          <strong>Spec:</strong> <a href="https://docs.oasis-open.org/cti/stix/v2.1/stix-v2.1.html" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">OASIS STIX 2.1</a>
+        </p>
+      </div>
     </div>
   </details>
 
