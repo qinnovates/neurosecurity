@@ -1,0 +1,161 @@
+{
+  "model_id": "music_v1",
+  "composition_plan": {
+    "positive_global_styles": [
+      "dark gospel blues",
+      "soulful",
+      "piano-driven",
+      "raw emotion",
+      "D minor",
+      "74 BPM",
+      "voice-first minimal production",
+      "spiritual weight",
+      "high dynamic male tenor voice that soars with power and range",
+      "voice shifts between vulnerable high notes and powerful belting",
+      "emotionally expressive tenor with grit and passion",
+      "vocal style like emo rock anthems high passionate and dramatic",
+      "female voice warm soulful blues alto grounded and powerful",
+      "rap section aggressive rhythmic commanding with vocal flare and emphasis"
+    ],
+    "negative_global_styles": [
+      "pop",
+      "electronic",
+      "bright",
+      "upbeat",
+      "synthetic",
+      "auto-tune",
+      "overproduced",
+      "busy arrangement",
+      "drum machine",
+      "clean polished vocals",
+      "smooth male vocals",
+      "deep bass male voice",
+      "baritone",
+      "low male vocals",
+      "mid range voice",
+      "broadway",
+      "theatrical",
+      "disney"
+    ],
+    "sections": [
+      {
+        "section_name": "Golden Climax First Half",
+        "positive_local_styles": [
+          "massive gospel climax",
+          "pounding piano",
+          "roaring organ",
+          "full drum hits",
+          "wailing blues saxophone",
+          "high dynamic male tenor vocals soaring with passion and power",
+          "voice pushes to highest notes with raw emotion and cracks",
+          "female blues alto full power answering",
+          "cathedral energy",
+          "raw and triumphant",
+          "D minor building to resolution"
+        ],
+        "negative_local_styles": [
+          "quiet",
+          "sparse",
+          "restrained",
+          "clean vocals",
+          "polished",
+          "smooth",
+          "deep male voice",
+          "bass vocals",
+          "baritone",
+          "broadway",
+          "theatrical"
+        ],
+        "duration_ms": 18000,
+        "lines": [
+          "We're all just sawdust in the end",
+          "What you build will break what breaks you build again",
+          "Why you holding on to castle walls you couldn't mould",
+          "Let it go let it fall",
+          "There's sawdust at your feet"
+        ]
+      },
+      {
+        "section_name": "Raspy Voice Enters",
+        "positive_local_styles": [
+          "raspy soulful male tenor voice enters raw and powerful",
+          "mid-range tenor with raw soul grit and ache",
+          "voice cracks with feeling deeper and grittier than the first voice",
+          "female blues alto still answering underneath",
+          "pounding piano continues",
+          "organ sustains",
+          "drums continue driving",
+          "saxophone wailing",
+          "massive gospel energy continues",
+          "second male voice takes over the lead with soul power"
+        ],
+        "negative_local_styles": [
+          "quiet",
+          "sparse",
+          "restrained",
+          "clean vocals",
+          "polished",
+          "broadway",
+          "theatrical"
+        ],
+        "duration_ms": 16000,
+        "lines": [
+          "Sawdust in the end but while we're here",
+          "See the king in the mirror finally clear",
+          "They built it once and life reduced it all to ash",
+          "We'll build it back three times",
+          "Yeah"
+        ]
+      },
+      {
+        "section_name": "Kanye Rap",
+        "positive_local_styles": [
+          "energy shifts to aggressive rap delivery",
+          "male voice rapping with commanding rhythmic flow",
+          "vocal flare and emphasis on key words with dynamic and expressive delivery inspired by iconic hip-hop artists",
+          "voice punches hard on god and fight and wind",
+          "rhythmic staccato delivery with dramatic pauses between phrases",
+          "piano becomes percussive stabs",
+          "drums harder and more rhythmic",
+          "snare hits sharp",
+          "confident confrontational wake up call energy",
+          "rap delivery that emphasizes syllables with power",
+          "voice rises in pitch on emphasized words then drops back",
+          "aggressive but soulful rap not monotone",
+          "hip hop gospel fusion"
+        ],
+        "negative_local_styles": [
+          "singing",
+          "soft",
+          "gentle",
+          "whispered",
+          "sparse",
+          "disney",
+          "smooth",
+          "broadway",
+          "restrained",
+          "monotone rap",
+          "mumble rap"
+        ],
+        "duration_ms": 35000,
+        "lines": [
+          "God we couldn't write the wrongs",
+          "Light it wouldn't even have it",
+          "Fight we made it past it",
+          "Nobody said it'd be easy",
+          "But hell we would make it breezy",
+          "Nu uh no not that breezy",
+          "The wind that's what hit it",
+          "The Clair I met that had me off it right",
+          "Every crown they gave was made of dust",
+          "Every throne was built on bones they couldn't trust",
+          "So why we spending all this time building walls alone",
+          "That mountain they put in our path",
+          "Child that was the path"
+        ]
+      }
+    ]
+  },
+  "enforce_section_duration": false,
+  "with_timestamps": true
+}

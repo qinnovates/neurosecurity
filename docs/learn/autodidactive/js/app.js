@@ -13,6 +13,8 @@ import { search, highlightMatch, groupResults } from './search.js';
 import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js';
 import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext } from './canvas.js';
 import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js';
+import { renderEthicsTimeline } from './ethics-timeline.js';
+import { ETHICS_TIMELINE } from './data/ethics.js';
 
 // ── All People ──────────────────────────────────────────────────────────────
 const ALL_PEOPLE = [
@@ -32,6 +34,7 @@ const FIELDS = [
   { id: 'neuroscience', label: 'Neuroscience', data: NEUROSCIENCE },
   { id: 'quantum', label: 'Quantum', data: QUANTUM },
   { id: 'cybersecurity', label: 'Cybersecurity', data: CYBERSECURITY },
+  { id: 'ethics', label: 'Ethics', data: ETHICS_TIMELINE.filter(e => !e.isContext) },
   { id: 'calculus', label: 'Calculus', data: CALCULUS_LABS },
   { id: 'paths', label: 'Paths', data: LEARNING_PATHS }
 ];
@@ -393,6 +396,11 @@ function renderRecallPrompt() {
 function renderCardGrid() {
   const grid = document.getElementById('cardGrid');
   if (!grid) return;
+
+  if (currentField === 'ethics') {
+    renderEthicsTimeline(grid);
+    return;
+  }
 
   if (currentField === 'Concepts') {
     renderConceptIndex(grid);
