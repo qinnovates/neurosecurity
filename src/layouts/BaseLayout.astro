@@ -77,6 +77,11 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml" />
 
+  <!-- Security headers (GitHub Pages does not support HTTP headers, so use meta tags) -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+
   <title>{title} | Qinnovate</title>
 
   <!-- View Transitions -->
@@ -94,9 +99,14 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <!-- Theme + Vision mode initialization (prevent flash) -->
   <script is:inline>
     (function(){
-      var vision = localStorage.getItem('bci-vision') === 'on';
-      document.documentElement.setAttribute('data-theme', vision ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
+      try {
+        var vision = localStorage.getItem('bci-vision') === 'on';
+        document.documentElement.setAttribute('data-theme', vision ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
+      } catch(e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.setAttribute('data-vision', 'off');
+      }
     })();
   </script>
 </head>

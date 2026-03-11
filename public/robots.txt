@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /governance/processes/
+Disallow: /governance/outreach-tracker/
+
+Sitemap: https://qinnovate.com/sitemap-index.xml

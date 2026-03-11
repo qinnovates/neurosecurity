@@ -10,7 +10,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'fs';
-import { execSync } from 'child_process';
+import { execSync, execFileSync } from 'child_process';
 import { resolve, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,8 +24,17 @@ function getWorkflowFilename(sourcePath) {
 
 function fetchLastRun(workflowFilename) {
   try {
-    const cmd = `gh run list --workflow="${workflowFilename}" --limit=1 --json status,conclusion,updatedAt`;
-    const output = execSync(cmd, {
+    // Validate workflow filename to prevent shell injection
+    if (!/^[\w.\-]+\.yml(\.disabled)?$/.test(workflowFilename)) {
+      console.warn(`  [SKIP] Invalid workflow filename: ${workflowFilename}`);
+      return null;
+    }
+    const output = execFileSync('gh', [
+      'run', 'list',
+      '--workflow', workflowFilename,
+      '--limit', '1',
+      '--json', 'status,conclusion,updatedAt',
+    ], {
       encoding: 'utf-8',
       timeout: 15_000,
       stdio: ['pipe', 'pipe', 'pipe'],
