@@ -81,7 +81,7 @@ No published paper unifies all 13 of these constraints into a single system. Thi
 
 **URL:** [qinnovate.com/bci/guardrails](https://qinnovate.com/bci/guardrails/)
 
-The on-device defense stack that QIF proposes for BCI signal integrity. Four layers:
+The on-device neurosecurity stack that QIF proposes for BCI signal integrity. Four layers:
 
 - **L0: Impedance Guard** - Hardware-level electrode impedance monitoring. Detects physical tampering, electrode degradation, and injection attacks at the analog front-end.
 - **L1: Coherence Monitor** - The core of Neurowall. Computes a real-time coherence score (Cs) from phase variance, spectral entropy, and cross-channel correlation. Detects signal injection, spectral manipulation, and feedback loop attacks.
@@ -205,7 +205,7 @@ The BCI Research Hub builds on several other QIF components that are also public
 
 - **[QIF Security Model](https://qinnovate.com/security/)** - The 11-band hourglass model, coherence scoring pipeline, and the four-step Map-Score-Protect-Deliver framework.
 
-- **[Neural Security Protocol (NSP)](https://qinnovate.com/nsp/)** - Post-quantum secure transport protocol for neural data. ML-KEM-768 key exchange, ML-DSA-65 signatures, 5-layer defense stack. [Rust implementation](https://github.com/qinnovates/qinnovate/tree/main/qif-framework/nsp/nsp-core) available.
+- **[Neural Security Protocol (NSP)](https://qinnovate.com/nsp/)** - Post-quantum secure transport protocol for neural data. ML-KEM-768 key exchange, ML-DSA-65 signatures, 5-layer neurosecurity stack. [Rust implementation](https://github.com/qinnovates/qinnovate/tree/main/qif-framework/nsp/nsp-core) available.
 
 - **[Neurowall](https://qinnovate.com/publications/2026-02-21-neurowall-simulation-results/)** - Signal integrity monitor simulation. 7 of 9 attack types detected at 15 seconds, 9 of 9 at 30 seconds. ROC-optimized operating point: 5% false positive rate, 100% true positive rate at threshold=12, duration=20s.
 

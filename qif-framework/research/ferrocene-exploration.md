@@ -30,7 +30,7 @@ Ferrocene operates at the **compiler layer**; Runemate operates at the **applica
 
 **Formal specification:** The Ferrocene Language Specification (FLS) is the only formal specification of the Rust language. For a safety case argument submitted to the FDA, "the language behaves as specified in the FLS" is a concrete, auditable claim. Without a formal spec, there is no baseline to argue against.
 
-## Layered Defense Stack
+## Layered Neurosecurity Stack
 
 | Layer | Component | Function |
 |-------|-----------|----------|

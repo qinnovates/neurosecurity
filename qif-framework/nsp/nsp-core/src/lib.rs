@@ -58,13 +58,14 @@ impl Kem {
         
         let (ct, ss) = pk.try_encaps()
             .map_err(|_| NspError::CryptoError("Encapsulation failed".to_string()))?;
-        
-        // The ciphertext and shared secret both have into_bytes() methods
-        // CT should be 1088 bytes, SS should be 32 bytes
-        let ct_arr = ct.into_bytes();
-        let ss_arr = ss.into_bytes();
-        // Return (ciphertext, shared_secret) - swapped because into_bytes seems to return opposite
-        Ok((ss_arr.to_vec(), ct_arr.to_vec()))
+
+        // ml-kem's try_encaps returns (ct, ss) but into_bytes() sizes are:
+        //   ct.into_bytes() = 32 bytes (shared secret in ml-kem's internal layout)
+        //   ss.into_bytes() = 1088 bytes (ciphertext in ml-kem's internal layout)
+        // So we swap to return (ciphertext=1088B, shared_secret=32B)
+        let ct_bytes = ss.into_bytes(); // 1088 bytes — actual ciphertext
+        let ss_bytes = ct.into_bytes(); // 32 bytes — actual shared secret
+        Ok((ct_bytes.to_vec(), ss_bytes.to_vec()))
     }
 
     pub fn decapsulate(&self, ct: &[u8]) -> Result<Vec<u8>, NspError> {

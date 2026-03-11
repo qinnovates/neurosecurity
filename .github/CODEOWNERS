@@ -16,5 +16,11 @@ SECURITY.md @qikevinl
 # Governance Standards (critical standard)
 /governance/ @qikevinl
 
-# ONI Legacy (preserve historical accuracy)
-/oni-legacy/ @qikevinl
+# Scripts (data pipelines, CI utilities)
+/scripts/ @qikevinl
+
+# Shared data & QTARA SDK
+/shared/qtara/ @qikevinl
+
+# Security audit tools
+/.github/security-audit/ @qikevinl

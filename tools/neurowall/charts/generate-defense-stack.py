@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate the QIF Neural Defense Stack architecture diagram.
+Generate the QIF Neurosecurity Stack architecture diagram.
 Neural Cartography aesthetic: dark field, precise chromatic taxonomy,
 clinical typography, concentric defense mapping.
 
@@ -122,7 +122,7 @@ RM_W = 680
 FULL_W = NW_W + GAP + RM_W
 
 # ── Title ─────────────────────────────────────────────────────────────────
-tx(M+10, 18, "QIF NEURAL DEFENSE STACK", f_title, TEXT_PRIMARY)
+tx(M+10, 18, "QIF NEUROSECURITY STACK", f_title, TEXT_PRIMARY)
 tx(M+10, 50, "Architecture: Neurowall + Runemate + NSP Transport", f_sub, TEXT_SECONDARY)
 
 # Badges

@@ -53,8 +53,13 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
           { href: '#neuroscience', label: 'Neuroscience' },
           { href: '#multimodal', label: 'Multimodal' },
           { href: '#onchip', label: 'On-Chip Requirements' },
-          { href: '#architecture', label: 'Defense Stack' },
+          { href: '#architecture', label: 'Neurosecurity Stack' },
           { href: '#vision', label: 'Vision' },
+          { href: '#terminal', label: 'The Terminal' },
+          { href: '#autonomy', label: 'Autonomy Guardrails' },
+          { href: '#steering', label: 'The Steering Argument' },
+          { href: '#security-arch', label: 'Security Architecture' },
+          { href: '#neural-os', label: 'Neural OS' },
           { href: '#contribute', label: 'Contribute' },
         ].map((item) => (
           <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
@@ -694,16 +699,16 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
         </div>
       </section>
 
-      <!-- Defense Stack Architecture -->
+      <!-- Neurosecurity Stack Architecture -->
       <section id="architecture" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">QIF Neural Defense Stack</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">QIF Neurosecurity Stack</h2>
         <p class="text-[var(--color-text-muted)] mb-6">
           Runemate and <a href="/guardrails/" class="text-[var(--color-accent-primary)] hover:underline">Neurowall</a> are sibling defense components within the QIF framework. Neurowall protects inbound signals (the moat), Runemate protects outbound content rendering (the castle), and NSP secures the wire between them. Both operate at the I0 neural interface bottleneck.
         </p>
         <div class="rounded-xl overflow-hidden border border-[var(--color-border)]">
           <img
             src="/images/neurowall/qif-defense-stack.png"
-            alt="QIF Neural Defense Stack architecture diagram showing Neurowall (3-layer inbound signal defense) and Runemate (content rendering defense) as sibling components connected by the RunematePolicy DSL, both feeding into NSP post-quantum transport"
+            alt="QIF Neurosecurity Stack architecture diagram showing Neurowall (3-layer inbound signal defense) and Runemate (content rendering defense) as sibling components connected by the RunematePolicy DSL, both feeding into NSP post-quantum transport"
             width="2400"
             height="1650"
             loading="lazy"
@@ -761,6 +766,451 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
               Expansion beyond explicit constructs into direct semantic encoding. Layouts are replaced by <em>perceptual intents</em> mapped through topographic cortical coordinates, making {RUNEMATE_OUTPUT_FORMAT} a proposed native language for high-bandwidth neural interfaces.
             </p>
           </div>
+        </div>
+      </section>
+
+      <!-- The Terminal -->
+      <section id="terminal" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Terminal: Patient Control</h2>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-8" style="border-left: 3px solid var(--color-accent-primary);">
+          <p class="text-base text-[var(--color-text-primary)] mb-3">
+            A sighted person opens a browser. A person with a cortical visual prosthesis needs something fundamentally different &mdash; not a browser, but a <strong>terminal</strong>.
+          </p>
+          <p class="text-base text-[var(--color-text-primary)] mb-3">
+            Browsers are rendering engines for screens. They parse HTML, execute JavaScript, composite layers, and paint pixels. None of that maps to electrode arrays on V1. {RUNEMATE_PROJECT_NAME} replaces the browser entirely &mdash; compiling semantic content directly into electrode-addressable stimulation patterns.
+          </p>
+          <p class="text-base text-[var(--color-text-primary)]">
+            But the interface is not just about rendering. It is about <strong>control</strong>.
+          </p>
+        </div>
+
+        <!-- Why no browser -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Why no browser or app store</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            Browsers and app stores are middlemen. Each middleman is an additional layer, and each additional layer is an additional attack surface.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left border-b border-[var(--color-border)]">
+                  <th class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Layer</th>
+                  <th class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">What It Adds</th>
+                  <th class="py-2 font-semibold text-[var(--color-text-primary)]">What It Risks</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-text-muted)]">
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Browser engine</td>
+                  <td class="py-2 pr-4">HTML/CSS/JS parsing, V8, compositor</td>
+                  <td class="py-2">XSS, CSRF, memory corruption, supply chain, extension attacks</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">App store</td>
+                  <td class="py-2 pr-4">Distribution, review, payment</td>
+                  <td class="py-2">Censorship, surveillance, forced updates, vendor lock-in</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">OS window manager</td>
+                  <td class="py-2 pr-4">Display server, input routing</td>
+                  <td class="py-2">Privilege escalation, screen capture, clipboard interception</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mt-4">
+            None of these layers exist in a neural interface. {RUNEMATE_PROJECT_NAME} eliminates all three. Content goes from source to compiler to encrypted bytecode to cortical stimulation. <strong>The fewer layers between the user and their experience, the fewer places an attacker can intervene.</strong>
+          </p>
+        </div>
+
+        <!-- Patient rights -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Patient self-sovereignty</p>
+          <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
+            <p>
+              <strong class="text-[var(--color-text-primary)]">Right to repair.</strong> When a cortical implant IS your visual system, you cannot wait for a manufacturer's scheduled update to fix a rendering artifact. A terminal lets you adjust stimulation parameters, recalibrate electrode mappings, and verify firmware updates.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">Right to inspect.</strong> Every packet entering your nervous system should be auditable. <code>runemate log --stream</code> is the neural equivalent of <code>tcpdump</code>.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">Right to customize.</strong> A patient should adjust contrast curves, phosphene brightness, temporal refresh rates, and spatial resolution through direct parameter control &mdash; not through a settings menu designed by someone who can see.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">Right to disconnect.</strong> <code>runemate --offline</code> should work. The device must function without a network connection, without a cloud service, and without phoning home.
+            </p>
+            <p>
+              <strong class="text-[var(--color-text-primary)]">Autodidactic navigation.</strong> With a terminal, each patient designs their own way of navigating information &mdash; based on their preferences and cognitive style, not a prescribed interface. One person might prefer spatial audio cues. Another might use haptic pulses as navigation anchors. A third might develop an interaction pattern no UX designer anticipated. The terminal provides primitives for users to compose their own experience.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Autonomy Guardrails -->
+      <section id="autonomy" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Autonomy Guardrails: The Lane-Keep Problem</h2>
+
+        <div class="prose text-sm text-[var(--color-text-muted)] mb-8">
+          <p>A car with lane-keep assist nudges you back into your lane. You can override it. A car with full autonomous driving does not ask. Where is the line for a neural interface?</p>
+        </div>
+
+        <!-- Autonomy spectrum -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">The autonomy spectrum</p>
+          <div class="space-y-2">
+            {[
+              { level: '0', car: 'No assist', neural: 'Raw BCI, no correction', who: 'Patient 100%', color: 'rgba(34,197,94,0.15)', border: 'rgba(34,197,94,0.5)' },
+              { level: '1', car: 'Lane-keep assist', neural: 'Gait correction for nerve damage', who: 'Patient steers, system nudges', color: 'rgba(34,197,94,0.1)', border: 'rgba(34,197,94,0.4)' },
+              { level: '2', car: 'Lane-keep control', neural: 'Active motor pattern stabilization', who: 'System steers, patient overrides', color: 'rgba(245,158,11,0.1)', border: 'rgba(245,158,11,0.4)' },
+              { level: '3', car: 'Highway autopilot', neural: 'AI manages routine motor function', who: 'System steers, patient supervises', color: 'rgba(245,158,11,0.15)', border: 'rgba(245,158,11,0.5)' },
+              { level: '4', car: 'Full autonomous', neural: 'AI modifies thought patterns', who: 'System drives, patient is cargo', color: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.5)' },
+            ].map((row) => (
+              <div class="rounded-lg p-3 flex flex-col sm:flex-row sm:items-center gap-2" style={`background: ${row.color}; border-left: 3px solid ${row.border};`}>
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] w-8 shrink-0">L{row.level}</span>
+                <span class="text-xs text-[var(--color-text-faint)] w-32 shrink-0">{row.car}</span>
+                <span class="text-sm text-[var(--color-text-primary)] flex-1">{row.neural}</span>
+                <span class="text-xs text-[var(--color-text-muted)] sm:text-right">{row.who}</span>
+              </div>
+            ))}
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mt-4">
+            Levels 1&ndash;2 are clearly therapeutic. Level 4 is clearly a violation. <strong class="text-[var(--color-text-primary)]">The war is fought at Level 3.</strong>
+          </p>
+        </div>
+
+        <!-- Escalation -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">The escalation problem</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">A patient with nerve damage receives a BCI to walk again. Then:</p>
+          <div class="space-y-3">
+            {[
+              { step: '1', title: 'Walk assistance', region: 'Motor cortex (M1)', note: 'Clear medical need. Measurable physical outcome.' },
+              { step: '2', title: 'Quit painkillers', region: 'Reward circuits, prefrontal', note: 'Crosses from motor to limbic. Same neurons, different territory.' },
+              { step: '3', title: 'Quit alcohol', region: 'Behavioral patterns', note: 'The crutch for walking becomes a governor for decisions.' },
+              { step: '4', title: 'Run faster than body allows', region: 'Motor cortex, exceeding limits', note: 'Overriding fatigue can damage tendons, joints, tissue.' },
+            ].map((s) => (
+              <div class="flex gap-3 items-start">
+                <span class="text-xs font-bold font-[family-name:var(--font-mono)] w-6 h-6 rounded-full flex items-center justify-center shrink-0" style="background: var(--color-bg-secondary); color: var(--color-accent-primary);">{s.step}</span>
+                <div>
+                  <p class="text-sm font-semibold text-[var(--color-text-primary)]">{s.title} <span class="font-normal text-[var(--color-text-faint)]">({s.region})</span></p>
+                  <p class="text-xs text-[var(--color-text-muted)]">{s.note}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mt-4">
+            Each step is reasonable in isolation. Together, they are a ramp from assistive tool to autonomous controller.
+          </p>
+        </div>
+
+        <!-- Ghost in the Shell -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6" style="border-left: 3px solid var(--color-accent-tertiary);">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Ghost in the Shell</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            If the kernel has immutable rules the patient cannot override, then the patient's consciousness (the ghost) is constrained by a system (the shell) that answers to someone else.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            The resolution: <strong class="text-[var(--color-text-primary)]">the kernel protects the hardware, not the software.</strong>
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            A seatbelt does not control where you drive. It prevents the physics of a crash from killing you. Immutable kernel limits are <em>amplitude ceilings</em> (tissue damage threshold), <em>rate limits</em> (neural refractory period), and <em>thermal bounds</em> (protein denaturation). They do not say "you cannot think that." They say "the signal cannot physically exceed what your tissue can survive."
+          </p>
+        </div>
+
+        <!-- Five-tier model -->
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">The five-tier guardrail model</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left border-b border-[var(--color-border)]">
+                  <th class="py-2 pr-3 font-semibold text-[var(--color-text-primary)]">Tier</th>
+                  <th class="py-2 pr-3 font-semibold text-[var(--color-text-primary)]">Domain</th>
+                  <th class="py-2 pr-3 font-semibold text-[var(--color-text-primary)]">Immutable?</th>
+                  <th class="py-2 font-semibold text-[var(--color-text-primary)]">Authority</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-text-muted)]">
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-3 font-bold text-[var(--color-accent-primary)]">1</td>
+                  <td class="py-2 pr-3">Hardware safety</td>
+                  <td class="py-2 pr-3 font-semibold" style="color: var(--color-status-safe);">Yes &mdash; kernel</td>
+                  <td class="py-2">Physics/biology. Not negotiable.</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-3 font-bold text-[var(--color-accent-primary)]">2</td>
+                  <td class="py-2 pr-3">Biological safety</td>
+                  <td class="py-2 pr-3 font-semibold" style="color: var(--color-status-safe);">Yes &mdash; kernel</td>
+                  <td class="py-2">Clinical evidence. Clinician + patient co-sign.</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-3 font-bold text-[var(--color-accent-secondary)]">3</td>
+                  <td class="py-2 pr-3">Therapeutic bounds</td>
+                  <td class="py-2 pr-3">Configurable</td>
+                  <td class="py-2">Clinician sets range. Patient adjusts within it.</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-3 font-bold text-[var(--color-accent-secondary)]">4</td>
+                  <td class="py-2 pr-3">Behavioral scope</td>
+                  <td class="py-2 pr-3">Consent-gated</td>
+                  <td class="py-2">Patient decides. Separate consent per domain.</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-3 font-bold text-[var(--color-accent-tertiary)]">5</td>
+                  <td class="py-2 pr-3">Enhancement limits</td>
+                  <td class="py-2 pr-3">Policy layer</td>
+                  <td class="py-2">Patient + clinician + regulatory. Evolving.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-4">
+            The five-tier model is proposed within QIF. Specific thresholds (especially Tiers 2&ndash;3) are subjects of active neuroscience research. No clinical validation has been performed.
+          </p>
+        </div>
+      </section>
+
+      <!-- The Steering Argument -->
+      <section id="steering" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Steering Argument</h2>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-8" style="border-left: 3px solid var(--color-accent-tertiary);">
+          <p class="text-lg text-[var(--color-text-primary)] font-semibold mb-4" style="font-style: italic;">
+            If you're not steering the car, you're cargo.
+          </p>
+          <p class="text-base text-[var(--color-text-primary)] mb-3">
+            If we don't have free will through consent and agency, then who is driving the car if you're not steering? That is the analogy most people will understand. And it is the design principle behind every layer of this architecture.
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">AI as tool, not driver</p>
+          <div class="prose text-sm text-[var(--color-text-muted)]">
+            <p class="mb-3">
+              In a neural OS, the user controls AI through methods like <strong class="text-[var(--color-text-primary)]">subvocalization</strong> &mdash; thinking commands rather than typing them. The AI processes, suggests, retrieves, compiles, renders. But the decision to act, the consent to a thought becoming an action, the creative impulse that initiates a query or dismisses a suggestion &mdash; that is the human.
+            </p>
+            <p class="mb-3">
+              Without this boundary, AI does not augment human capability. It replaces it. The patient becomes a passenger in their own perceptual system &mdash; receiving whatever the algorithm decides to deliver, with no mechanism to inspect, reject, or redirect.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid rgba(34,197,94,0.6);">
+            <p class="text-xs font-bold tracking-wider uppercase mb-3" style="color: var(--color-status-safe);">A tool</p>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              "Show me what's on this webpage." Patient initiates, AI compiles, {RUNEMATE_PROJECT_NAME} delivers. Every interaction begins with patient intent. Every delivery requires patient consent.
+            </p>
+          </div>
+          <div class="glass rounded-xl p-6" style="border-left: 3px solid rgba(239,68,68,0.6);">
+            <p class="text-xs font-bold tracking-wider uppercase mb-3" style="color: var(--color-status-critical);">A feed</p>
+            <p class="text-sm text-[var(--color-text-muted)]">
+              Content streams continuously, selected by an algorithm, with no patient-initiated gate. The user receives. The user does not choose.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Protecting creativity</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            Creativity requires agency &mdash; the ability to combine ideas in unexpected ways, to follow a thought no algorithm would predict, to say "no, show me something else." If the AI drives and the patient rides, creativity dies. Not because AI cannot generate &mdash; but because the human loses the muscle of choosing. And a muscle you do not use atrophies.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            Neurorights (MP, CL, MI, PC, EA) are the formal expression of this principle. But the terminal is what makes them <strong class="text-[var(--color-text-primary)]">enforceable</strong>. Without a CLI, neurorights are policy. With a CLI, they are access control.
+          </p>
+        </div>
+      </section>
+
+      <!-- Security Architecture -->
+      <section id="security-arch" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Security Architecture</h2>
+
+        <div class="prose text-sm text-[var(--color-text-muted)] mb-8">
+          <p>A neural device cannot use passwords. The patient may not have the motor function to type one. And a password transmitted to an implanted chip is a password that can be intercepted. The security architecture is passwordless by design.</p>
+        </div>
+
+        <!-- PQKC -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Factor 1: Post-Quantum Key Cryptography</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            The NSP handshake uses <strong class="text-[var(--color-text-primary)]">ML-KEM-768</strong> (NIST FIPS 203) for key encapsulation and <strong class="text-[var(--color-text-primary)]">ML-DSA-65</strong> (NIST FIPS 204) for digital signatures. The device's identity is a hardware-bound keypair provisioned at implantation. No password to remember. No token to carry. No credential to phish.
+          </p>
+          <div class="bg-[var(--color-bg-secondary)] rounded-lg p-4 text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] overflow-x-auto">
+            <pre>Patient Device ---- ML-KEM-768 ----&gt; Gateway
+     |                                    |
+     '---- ML-DSA-65 signature ----------&gt;|
+           (hardware-bound key)           |
+                                          |
+     &lt;---- Encrypted session key ---------'
+           (AES-256-GCM-SIV)</pre>
+          </div>
+        </div>
+
+        <!-- Biomarker MFA -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Factor 2: Biomarker MFA</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            The second factor is the patient themselves. Neural biomarkers &mdash; unique patterns in EEG/ECoG signals that are as individual as fingerprints &mdash; provide continuous authentication without any conscious action.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left border-b border-[var(--color-border)]">
+                  <th class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Biomarker</th>
+                  <th class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Signal</th>
+                  <th class="py-2 font-semibold text-[var(--color-text-primary)]">Uniqueness</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-text-muted)]">
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Resting-state EEG</td>
+                  <td class="py-2 pr-4">Alpha rhythm signature (8&ndash;13 Hz)</td>
+                  <td class="py-2">Stable across sessions, unique to individual</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Evoked potentials</td>
+                  <td class="py-2 pr-4">P300/N170 response patterns</td>
+                  <td class="py-2">Stimulus-locked, difficult to spoof</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Neural handwriting</td>
+                  <td class="py-2 pr-4">Motor cortex activation patterns</td>
+                  <td class="py-2">Behavioral biometric, continuous</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Coherence profile</td>
+                  <td class="py-2 pr-4">Cross-channel phase synchrony</td>
+                  <td class="py-2">Structural, tied to individual connectome</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mt-4">
+            This is continuous, passive verification &mdash; not a login ceremony. If biomarker drift exceeds the patient's baseline envelope, the device locks sensitive operations while maintaining basic function. A screen lock, not a shutdown.
+          </p>
+        </div>
+
+        <!-- Capability-based access -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Capability-based access control</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            The terminal does not grant root. Each session, script, and command has explicitly declared capabilities:
+          </p>
+          <div class="space-y-3">
+            <div class="bg-[var(--color-bg-secondary)] rounded-lg p-4 text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">
+              <p class="text-[var(--color-accent-primary)] mb-1"># Patient session</p>
+              <p>capabilities: [perceive.*, config.*, log.read, device.status]</p>
+            </div>
+            <div class="bg-[var(--color-bg-secondary)] rounded-lg p-4 text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">
+              <p class="text-[var(--color-accent-secondary)] mb-1"># Clinician session</p>
+              <p>capabilities: [calibrate.*, log.read, log.export, device.diagnostics]</p>
+            </div>
+            <div class="bg-[var(--color-bg-secondary)] rounded-lg p-4 text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">
+              <p class="text-[var(--color-accent-tertiary)] mb-1"># Firmware update</p>
+              <p>capabilities: [firmware.apply]</p>
+              <p>requires: [device.owner.approval, manufacturer.signature]</p>
+            </div>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mt-4">
+            No command can exceed its declared capabilities. This is not <code>sudo</code> &mdash; it is a capability token system where escalation requires multi-party cryptographic consent.
+          </p>
+        </div>
+
+        <!-- Neurorights as ACL -->
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Neurorights as access control flags</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left border-b border-[var(--color-border)]">
+                  <th class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Neuroright</th>
+                  <th class="py-2 pr-4 font-semibold text-[var(--color-text-primary)]">Flag</th>
+                  <th class="py-2 font-semibold text-[var(--color-text-primary)]">Controls</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-text-muted)]">
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4">Mental Privacy</td>
+                  <td class="py-2 pr-4 font-[family-name:var(--font-mono)] text-xs">privacy.*</td>
+                  <td class="py-2">Whether neural data can be read, exported, or shared</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4">Cognitive Liberty</td>
+                  <td class="py-2 pr-4 font-[family-name:var(--font-mono)] text-xs">liberty.*</td>
+                  <td class="py-2">Whether stimulation patterns can be externally imposed</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4">Mental Integrity</td>
+                  <td class="py-2 pr-4 font-[family-name:var(--font-mono)] text-xs">integrity.*</td>
+                  <td class="py-2">Whether device parameters can be modified without consent</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]/30">
+                  <td class="py-2 pr-4">Psychological Continuity</td>
+                  <td class="py-2 pr-4 font-[family-name:var(--font-mono)] text-xs">continuity.*</td>
+                  <td class="py-2">Whether changes can alter baseline perceptual experience</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4">Equal Access</td>
+                  <td class="py-2 pr-4 font-[family-name:var(--font-mono)] text-xs">access.*</td>
+                  <td class="py-2">Whether content or capabilities can be restricted by provider</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-4">
+            Neurorights as a concept are proposed and under active academic debate (Yuste et al. 2017, Ienca &amp; Andorno 2017). These operational definitions are QIF-specific mappings for threat modeling purposes, not settled legal or philosophical standards.
+          </p>
+        </div>
+      </section>
+
+      <!-- Neural OS -->
+      <section id="neural-os" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Neural OS: Linux for the Mind</h2>
+
+        <div class="prose text-sm text-[var(--color-text-muted)] mb-8">
+          <p>{RUNEMATE_PROJECT_NAME} is the userspace layer of a proposed neural operating system &mdash; open-source, auditable, patient-controlled. The architecture maps directly to Linux:</p>
+        </div>
+
+        <div class="space-y-3 mb-8">
+          {[
+            { linux: 'Kernel', neural: 'Neurowall', component: 'Zero-trust at I0. Amplitude bounds, rate limiting, DoS detection', color: 'var(--color-accent-primary)' },
+            { linux: 'Drivers', neural: 'NSP', component: 'Encrypted wire protocol. PQ key exchange, session management', color: 'var(--color-accent-secondary)' },
+            { linux: 'Userspace', neural: 'Runemate', component: 'Content compilation, rendering, multimodal delivery', color: 'var(--color-accent-tertiary)' },
+            { linux: 'Shell', neural: 'Terminal', component: 'Patient CLI. Inspect, configure, script, troubleshoot', color: '#f59e0b' },
+            { linux: 'Permissions', neural: 'Neurorights', component: 'MP, CL, MI, PC, EA as capability-based ACL flags', color: '#8b5cf6' },
+          ].map((row) => (
+            <div class="glass rounded-xl p-5 flex flex-col sm:flex-row sm:items-center gap-3" style={`border-left: 3px solid ${row.color};`}>
+              <div class="flex items-center gap-3 sm:w-48 shrink-0">
+                <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-faint)] w-20">{row.linux}</span>
+                <span class="text-sm font-bold text-[var(--color-text-primary)]">{row.neural}</span>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)]">{row.component}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Why open source -->
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Why open source &mdash; the same reasons Linux won</p>
+          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+            <p><strong class="text-[var(--color-text-primary)]">Auditability.</strong> Anyone can read the code that runs inside a patient's skull. No black boxes.</p>
+            <p><strong class="text-[var(--color-text-primary)]">No vendor lock-in.</strong> A patient's perceptual system should not be tied to a single manufacturer's proprietary stack.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Community security.</strong> More eyes on the code means more vulnerabilities found before they reach patients.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Longevity.</strong> Implants outlast companies. Open-source code outlasts both.</p>
+            <p><strong class="text-[var(--color-text-primary)]">Right to fork.</strong> If the maintainers make decisions a patient disagrees with, the patient (or their advocate) can fork the stack and run their own.</p>
+          </div>
+        </div>
+
+        <!-- CLI security -->
+        <div class="glass rounded-xl p-6 sm:p-8">
+          <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-4">Does the CLI introduce new attack surface?</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">
+            <strong class="text-[var(--color-text-primary)]">No.</strong> {RUNEMATE_PROJECT_NAME} already executes bytecode &mdash; the Scribe interpreter processes arbitrary compiled content. A CLI is a structured, capability-gated interface to that same execution engine. It is a <em>subset</em> of what the interpreter already does, constrained by explicit capability tokens.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            The Rust <code>no_std</code> runtime eliminates the class of vulnerabilities that make traditional shells dangerous: no buffer overflows (borrow checker), no heap corruption, no shell injection (no <code>exec()</code>). A capability-based shell is strictly less powerful than the bytecode interpreter it sits on top of.
+          </p>
         </div>
       </section>
 
