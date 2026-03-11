@@ -4,7 +4,7 @@
 
 import { search } from './search.js';
 import { getRelated, getPathWithEdges, getPeopleMap } from './graph.js';
-import { LEARNING_PATHS, generatePath, renderPathDetail } from './paths.js';
+import { LEARNING_PATHS, generatePath, renderPathDetail } from './paths.js?v=2';
 import { addPathToCanvas, addNodeToCanvas } from './canvas.js';
 import { IMPLEMENT_PRACTICES, PATTERNS, ACTION_EXAMPLES } from './data/patterns.js';
 import { CALCULUS_LABS } from './data/calculus.js';
