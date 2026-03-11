@@ -2148,7 +2148,7 @@ function openModal(person) {
         <p>Without scrolling up — what was ${person.name.split(' ')[0]}'s core framework? What was their defining struggle?</p>
         <button class="recall-btn" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Reveal Summary</button>
         <div class="recall-reveal">
-          <p><strong>Framework:</strong> ${person.framework[0].replace(/<[^>]+>/g, '')}</p>
+          <p><strong>Framework:</strong> ${(() => { let s = person.framework[0]; while (/<[^>]+>/.test(s)) s = s.replace(/<[^>]+>/g, ''); return s; })()}</p>
           <p><strong>Struggle:</strong> ${person.struggle.split('.').slice(0,2).join('.')+'.'}</p>
         </div>
       </div>
