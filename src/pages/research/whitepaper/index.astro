@@ -445,13 +445,23 @@ const tacticColors: Record<string, string> = {
         </p>
         <div class="glass rounded-xl overflow-hidden mb-2" style="height: 580px;">
           <iframe
-            src="/charts/business/funding-timeline-interactive.html"
+            id="funding-chart-frame"
             width="100%"
             height="100%"
             style="border: none; background: #0f172a;"
             title="BCI Industry Cumulative Funding Timeline"
-            loading="lazy"
           ></iframe>
+          <script is:inline>
+            // Set iframe src after DOM load to bypass Astro View Transitions router
+            (function() {
+              var f = document.getElementById('funding-chart-frame');
+              if (f && !f.src) f.src = '/charts/business/funding-timeline-interactive.html';
+              document.addEventListener('astro:page-load', function() {
+                var f2 = document.getElementById('funding-chart-frame');
+                if (f2 && !f2.getAttribute('src')) f2.src = '/charts/business/funding-timeline-interactive.html';
+              });
+            })();
+          </script>
         </div>
         <p class="text-xs text-[var(--color-text-faint)] text-center">
           Source: QIF BCI Landscape Database v2.0. Hover to inspect, click to expand.
