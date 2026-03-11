@@ -1281,7 +1281,7 @@
     {
       "name": "Allen Brain Atlas API",
       "format": "JSON",
-      "url": "http://api.brain-map.org/api/v2/structure_graph_download/1.json",
+      "url": "https://api.brain-map.org/api/v2/structure_graph_download/1.json",
       "notes": "Mouse brain ontology. Human brain atlas also available. Direct JSON download of structure hierarchy."
     },
     {

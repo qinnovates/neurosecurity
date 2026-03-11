@@ -56,7 +56,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           # Get list of changed files in the PR
-          git diff --name-only origin/${{ github.base_ref }}...HEAD > changed_files.txt
+          git diff --name-only "origin/${{ github.base_ref }}...HEAD" > changed_files.txt
           echo "Changed files:"
           cat changed_files.txt
           echo "files=$(cat changed_files.txt | tr '\n' ' ')" >> $GITHUB_OUTPUT
@@ -64,27 +64,32 @@ jobs:
       - name: Run security audit (PR - changed files only)
         if: github.event_name == 'pull_request'
         id: audit-pr
+        env:
+          AUDIT_SEVERITY: ${{ inputs.severity || 'low' }}
+          CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
         run: |
           echo "Scanning changed files in PR..."
           python .github/security-audit/scripts/audit.py \
             --config .github/security-audit/patterns/secrets.json \
             --format text \
-            --severity ${{ inputs.severity || 'low' }} \
+            --severity "$AUDIT_SEVERITY" \
             --fail-on high \
-            ${{ steps.changed-files.outputs.files }} \
+            $CHANGED_FILES \
             2>&1 | tee audit-results.txt
         continue-on-error: true
 
       - name: Run security audit (Push/Schedule - all files)
         if: github.event_name != 'pull_request'
         id: audit-full
+        env:
+          AUDIT_SEVERITY: ${{ inputs.severity || 'low' }}
         run: |
           echo "Scanning all tracked files..."
           python .github/security-audit/scripts/audit.py \
             --all \
             --config .github/security-audit/patterns/secrets.json \
             --format text \
-            --severity ${{ inputs.severity || 'low' }} \
+            --severity "$AUDIT_SEVERITY" \
             --fail-on high \
             2>&1 | tee audit-results.txt
         continue-on-error: true

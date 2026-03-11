@@ -37,9 +37,13 @@ DP_SENSITIVITY = 1.0           # L∞ sensitivity of one sample
 
 # Phase 0: Pre-shared test key (32 bytes = AES-256)
 # ⚠️  Replace with HKDF output from ML-KEM session in Phase 1
-NSP_KEY = bytes.fromhex(
-    "0000000000000000000000000000000000000000000000000000000000000000"
-)
+_key_hex = os.environ.get("NSP_KEY_HEX")
+if not _key_hex or len(_key_hex) != 64:
+    raise EnvironmentError(
+        "Set NSP_KEY_HEX env var to a 64-char hex string (32 bytes AES-256). "
+        "Example: export NSP_KEY_HEX=$(python3 -c 'import secrets; print(secrets.token_hex(32))')"
+    )
+NSP_KEY = bytes.fromhex(_key_hex)
 
 # ─── Mock NISS Source (stub) ───────────────────────────────────────────────────
 # In Phase 1: replace with inference engine output
