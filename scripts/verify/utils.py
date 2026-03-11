@@ -166,11 +166,37 @@ def _is_bot_blocked(url: str) -> bool:
         return False
 
 
+def _is_private_url(url: str) -> bool:
+    """Block requests to private/internal IP ranges (SSRF prevention)."""
+    import ipaddress
+    from urllib.parse import urlparse
+    try:
+        host = urlparse(url).hostname or ''
+        # Block non-http(s) schemes
+        if not urlparse(url).scheme in ('http', 'https'):
+            return True
+        # Resolve hostname to IP and check if private
+        import socket
+        for info in socket.getaddrinfo(host, None):
+            addr = ipaddress.ip_address(info[4][0])
+            if addr.is_private or addr.is_loopback or addr.is_link_local or addr.is_reserved:
+                return True
+    except Exception:
+        pass
+    return False
+
+
 def check_url(url: str) -> dict:
     """Check if URL is reachable. HEAD then GET fallback."""
     cached = cache_get(f'url:{url}')
     if cached:
         return cached
+
+    # SSRF prevention: block private/internal IPs and non-http(s) schemes
+    if _is_private_url(url):
+        result = {'status': 'blocked', 'error': 'Private/internal IP or non-http(s) scheme'}
+        cache_set(f'url:{url}', result)
+        return result
 
     _rate_limit()
     for method in ['HEAD', 'GET']:

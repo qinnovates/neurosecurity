@@ -26,7 +26,9 @@ function convertToStix(threats: typeof THREAT_VECTORS) {
         // STIX IDs must be UUIDv4 - for stability we'd hash the ID, 
         // but here we'll use a deterministic prefix for demo durability
         // (In production, use UUIDv5 with namespace)
-        const attackId = `attack-pattern--${t.id.toLowerCase().replace(/-/g, '')}`;
+        // Validate technique ID to prevent injection into STIX identifiers
+        const safeId = t.id.replace(/[^a-zA-Z0-9\-]/g, '');
+        const attackId = `attack-pattern--${safeId.toLowerCase().replace(/-/g, '')}`;
 
         const stixAttack = {
             type: "attack-pattern",
@@ -73,9 +75,8 @@ export const GET: APIRoute = async () => {
         status: 200,
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*', // Public API
-            'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
-            'X-Generator': 'Qinnovate-QIF-Stix-Engine/1.0'
+            'Access-Control-Allow-Origin': '*', // NOTE: wildcard CORS is intentional for public data. Do NOT add credentials support without restricting origin.
+            'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400'
         }
     });
 };

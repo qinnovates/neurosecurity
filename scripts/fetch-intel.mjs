@@ -240,12 +240,20 @@ function isValidUrl(url) {
   return /^https?:\/\//i.test(url);
 }
 
-/** Strip HTML tags (iterative to handle nested/malformed), control chars, null bytes */
+/** Strip HTML tags (iterative to handle nested/malformed), decode entities, strip control chars */
 function sanitizeText(str) {
   if (typeof str !== 'string') return String(str || '');
   let result = str;
   // Strip HTML tags (loop handles nested tags like <a<script>>)
   let prev;
+  do {
+    prev = result;
+    result = result.replace(/<[^>]*>/g, '');
+  } while (result !== prev);
+  // Decode common HTML entities that could hide script tags
+  result = result.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&#39;/g, "'");
+  // Strip tags again after entity decoding
   do {
     prev = result;
     result = result.replace(/<[^>]*>/g, '');

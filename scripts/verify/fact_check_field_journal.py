@@ -282,7 +282,14 @@ def run(post_paths=None, inject=False) -> dict:
     all_details = []
 
     if post_paths:
-        paths = [(REPO_ROOT / p).resolve() if not Path(p).is_absolute() else Path(p) for p in post_paths]
+        paths = []
+        for p in post_paths:
+            resolved = (REPO_ROOT / p).resolve() if not Path(p).is_absolute() else Path(p).resolve()
+            # Prevent path traversal outside repo root
+            if not str(resolved).startswith(str(REPO_ROOT.resolve())):
+                all_details.append({'level': 'error', 'message': f'Path escapes repo root: {p}'})
+                continue
+            paths.append(resolved)
     else:
         if not BLOGS_DIR.exists():
             return make_result(0, 1, [{'level': 'warning', 'message': 'blogs/ directory not found'}])

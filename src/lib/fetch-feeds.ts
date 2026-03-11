@@ -29,11 +29,18 @@ function isValidUrl(url: string): boolean {
   return /^https?:\/\//i.test(url);
 }
 
-/** Strip HTML tags (iterative), control chars, null bytes, collapse whitespace */
+/** Strip HTML tags (iterative), decode entities, strip control chars, collapse whitespace */
 function sanitizeText(str: string): string {
   if (typeof str !== 'string') return String(str || '');
   let result = str;
   let prev: string;
+  do {
+    prev = result;
+    result = result.replace(/<[^>]*>/g, '');
+  } while (result !== prev);
+  // Decode common HTML entities that could hide script tags
+  result = result.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&#39;/g, "'");
   do {
     prev = result;
     result = result.replace(/<[^>]*>/g, '');
