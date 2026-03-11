@@ -17,7 +17,51 @@ import { renderEthicsTimeline } from './ethics-timeline.js';
 import { ETHICS_TIMELINE } from './data/ethics.js';
 import { renderNeuroanatomy } from './neuroanatomy.js';
 import { QIF_BANDS } from './data/neuroanatomy.js';
-import { renderMindmap } from './mindmap.js';
+import { generateMindmapFromNotes, renderSavedMindmap } from './mindmap.js';
+import { renderTARA, renderNISS, renderNeurowall, renderGuardrails, renderGovernance, renderBCIDevices, renderBrainAtlas } from './qif-views.js';
+import { GUARDRAILS, DSM5_CLUSTERS, NEURORIGHTS } from './data/guardrails.js';
+import { NEUROWALL } from './data/neurowall.js';
+import { GOVERNANCE_DOCS, REGULATORY_LANDSCAPE } from './data/governance.js';
+
+// Lazy-loaded data (large files loaded on demand)
+let _TARA_TECHNIQUES = null;
+let _TARA_STATS = null;
+let _NISS_DEVICES = null;
+let _BCI_COMPANIES = null;
+let _BRAIN_REGIONS = null;
+
+async function loadTARA() {
+  if (!_TARA_TECHNIQUES) {
+    const m = await import('./data/tara.js');
+    _TARA_TECHNIQUES = m.TARA_TECHNIQUES;
+    _TARA_STATS = m.TARA_STATS;
+  }
+  return { techniques: _TARA_TECHNIQUES, stats: _TARA_STATS };
+}
+
+async function loadNISS() {
+  if (!_NISS_DEVICES) {
+    const m = await import('./data/niss.js');
+    _NISS_DEVICES = m.NISS_DEVICES;
+  }
+  return _NISS_DEVICES;
+}
+
+async function loadBCICompanies() {
+  if (!_BCI_COMPANIES) {
+    const m = await import('./data/bci-devices.js');
+    _BCI_COMPANIES = m.BCI_COMPANIES;
+  }
+  return _BCI_COMPANIES;
+}
+
+async function loadBrainAtlas() {
+  if (!_BRAIN_REGIONS) {
+    const m = await import('./data/brain-atlas.js');
+    _BRAIN_REGIONS = m.BRAIN_REGIONS;
+  }
+  return _BRAIN_REGIONS;
+}
 
 // ── All People ──────────────────────────────────────────────────────────────
 const ALL_PEOPLE = [
@@ -39,15 +83,25 @@ const CATEGORIES = [
     subs: [
       { id: 'ethics-timeline',    label: 'Timeline',     data: ETHICS_TIMELINE.filter(e => !e.isContext), type: 'timeline' },
       { id: 'ethics-philosophy',  label: 'Philosophy',   data: PHILOSOPHERS,      type: 'people' },
-      { id: 'ethics-neuroethics', label: 'Neuroethics',  data: NEUROETHICS_PEOPLE, type: 'people' }
+      { id: 'ethics-neuroethics', label: 'Neuroethics',  data: NEUROETHICS_PEOPLE, type: 'people' },
+      { id: 'ethics-guardrails',  label: 'Guardrails',   data: GUARDRAILS,         type: 'guardrails' },
+      { id: 'ethics-governance',  label: 'Governance',   data: GOVERNANCE_DOCS,    type: 'governance' }
     ]},
   { id: 'neuroscience', label: 'Neuroscience', icon: '🧬', data: QIF_BANDS, type: 'group',
     subs: [
       { id: 'neuro-hourglass', label: 'QIF Hourglass', data: QIF_BANDS, type: 'neuroanatomy' },
       { id: 'neuro-physics',   label: 'Why Hourglass?', data: QIF_BANDS, type: 'hourglass-physics' },
-      { id: 'neuro-vision',    label: 'Vision',        data: QIF_BANDS, type: 'vision' }
+      { id: 'neuro-vision',    label: 'Vision',        data: QIF_BANDS, type: 'vision' },
+      { id: 'neuro-atlas',     label: 'Brain Atlas',   data: QIF_BANDS, type: 'brain-atlas' },
+      { id: 'neuro-devices',   label: 'BCI Devices',   data: QIF_BANDS, type: 'bci-devices' }
     ]},
-  { id: 'security',  label: 'Security',  icon: '🔒', data: CYBERSECURITY,  type: 'people' },
+  { id: 'security', label: 'Security', icon: '🔒', data: CYBERSECURITY, type: 'group',
+    subs: [
+      { id: 'sec-people',    label: 'Pioneers',   data: CYBERSECURITY,  type: 'people' },
+      { id: 'sec-tara',      label: 'TARA Threats', data: CYBERSECURITY, type: 'tara' },
+      { id: 'sec-niss',      label: 'NISS Scoring', data: CYBERSECURITY, type: 'niss' },
+      { id: 'sec-neurowall', label: 'Neurowall',    data: CYBERSECURITY, type: 'neurowall' }
+    ]},
   { id: 'science',   label: 'Science',   icon: '🔬', data: SCIENCE_PEOPLE, type: 'people' },
   { id: 'math',      label: 'Math',      icon: '📐', data: CALCULUS_LABS,   type: 'labs' },
   { id: 'paths',     label: 'Paths',     icon: '🗺️', data: LEARNING_PATHS, type: 'paths' }
@@ -801,6 +855,23 @@ function renderVision(container) {
   `;
 }
 
+function renderPersonCard(p) {
+  const mastery = calculateMastery(p.id);
+  return `
+    <div class="person-card" onclick="window._openPerson('${esc(p.id)}')">
+      <div class="person-card-header">
+        <span class="person-card-emoji">${p.emoji || '👤'}</span>
+        <div>
+          <div class="person-card-name">${esc(p.name)}</div>
+          <div class="person-card-tagline">${esc(p.tagline || (p.born ? p.born + (p.died ? ' – ' + p.died : '') : ''))}</div>
+        </div>
+      </div>
+      <p class="person-card-desc">${esc(p.description || '')}</p>
+      ${mastery > 0 ? `<div class="person-card-mastery"><div class="person-card-mastery-bar" style="width:${mastery}%"></div></div>` : ''}
+    </div>
+  `;
+}
+
 function renderByType(grid, type, data) {
   if (type === 'timeline') {
     renderEthicsTimeline(grid);
@@ -813,7 +884,7 @@ function renderByType(grid, type, data) {
   }
 
   if (type === 'mindmap') {
-    renderMindmap(grid);
+    renderSavedMindmap(grid);
     return;
   }
 
@@ -824,6 +895,45 @@ function renderByType(grid, type, data) {
 
   if (type === 'vision') {
     renderVision(grid);
+    return;
+  }
+
+  if (type === 'tara') {
+    grid.innerHTML = '<p style="padding:20px;color:var(--text-dim);">Loading threat atlas...</p>';
+    loadTARA().then(({ techniques, stats }) => renderTARA(grid, techniques, stats));
+    return;
+  }
+
+  if (type === 'niss') {
+    grid.innerHTML = '<p style="padding:20px;color:var(--text-dim);">Loading NISS scores...</p>';
+    loadNISS().then(devices => renderNISS(grid, devices));
+    return;
+  }
+
+  if (type === 'neurowall') {
+    renderNeurowall(grid);
+    return;
+  }
+
+  if (type === 'guardrails') {
+    renderGuardrails(grid);
+    return;
+  }
+
+  if (type === 'governance') {
+    renderGovernance(grid);
+    return;
+  }
+
+  if (type === 'bci-devices') {
+    grid.innerHTML = '<p style="padding:20px;color:var(--text-dim);">Loading BCI landscape...</p>';
+    loadBCICompanies().then(companies => renderBCIDevices(grid, companies));
+    return;
+  }
+
+  if (type === 'brain-atlas') {
+    grid.innerHTML = '<p style="padding:20px;color:var(--text-dim);">Loading brain atlas...</p>';
+    loadBrainAtlas().then(regions => renderBrainAtlas(grid, regions));
     return;
   }
 
@@ -1041,25 +1151,46 @@ let noteWallInitialized = false;
 
 function renderNoteWall() {
   const container = document.getElementById('view-notewall');
+  const noteCount = (JSON.parse(localStorage.getItem('autodidactive-notes') || '[]')).length;
 
   container.innerHTML = `
     <div class="notewall-header">
       <h2 class="notewall-title">Notes</h2>
     </div>
+    <div class="notes-description">
+      <p class="notes-description-text"><strong>Your thinking space.</strong> Drop notes as they come to you — each one is timestamped automatically. When you're ready, hit the button below and the app will analyze your notes locally to find the hidden connections between your ideas. No data leaves your device.</p>
+      <details class="notes-how-it-works">
+        <summary>How does this work?</summary>
+        <p>Your notes are analyzed using <strong>TF-IDF cosine similarity</strong> — a lightweight natural language processing technique that runs entirely in your browser. It extracts meaningful words from each note, weights them by importance, then measures how similar any two notes are based on shared concepts.</p>
+        <p>Notes are also checked against Autodidactive's knowledge graph to find connections through shared thinkers, concepts, or fields. Time-based clustering groups notes taken in the same session together.</p>
+        <p><strong>Privacy by design:</strong> All analysis runs client-side in JavaScript. Your notes live in localStorage. Nothing is transmitted to any server. At scale, this approach works with WebLLM or Transformers.js for richer local AI — same principle, bigger models, still on your device.</p>
+      </details>
+    </div>
     <div class="notes-section">
-      <h3 class="notes-section-label">Note Wall</h3>
-      <p class="notewall-hint">Tap anywhere to add a note</p>
+      <p class="notewall-hint">Tap anywhere to add a note. Each note is auto-timestamped.</p>
       <div class="notewall-canvas" id="notewallCanvas"></div>
     </div>
     <div class="notes-section notes-section--mindmap">
-      <h3 class="notes-section-label">Mind Map</h3>
+      <button class="mindmap-trigger-btn" id="mindMyBusiness" ${noteCount < 2 ? 'disabled' : ''}>
+        Let's mind my business!
+      </button>
+      <p class="mindmap-trigger-hint">${noteCount < 2 ? 'Add at least 2 notes first.' : `${noteCount} notes ready to map.`}</p>
       <div id="mindmapContainer"></div>
     </div>
   `;
 
   initNoteWall(document.getElementById('notewallCanvas'));
   noteWallInitialized = true;
-  renderMindmap(document.getElementById('mindmapContainer'));
+
+  // Show last generated map if one exists
+  renderSavedMindmap(document.getElementById('mindmapContainer'));
+
+  // "Let's mind my business!" button
+  document.getElementById('mindMyBusiness').addEventListener('click', () => {
+    const allNotes = JSON.parse(localStorage.getItem('autodidactive-notes') || '[]');
+    const valid = allNotes.filter(n => n && typeof n.text === 'string' && n.text.trim().length > 0);
+    generateMindmapFromNotes(valid, document.getElementById('mindmapContainer'));
+  });
 }
 
 // ── AI Settings ──────────────────────────────────────────────────────────────

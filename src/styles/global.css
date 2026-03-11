@@ -403,6 +403,132 @@ code, pre {
               var(--color-bg-deep);
 }
 
+/* ═══ Vision Page — Premium Motion ═══ */
+
+/* Elastic reveal (outBack easing) */
+.reveal-elastic {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal-elastic.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Word-by-word text reveal */
+.word-reveal .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.word-reveal.revealed .word {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card 3D tilt on hover */
+.card-tilt {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card-tilt:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+              0 0 20px var(--color-glow-primary);
+}
+
+/* Parallax layer (set --parallax-speed via inline style) */
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* SVG line draw animation */
+.line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.line-draw.revealed {
+  stroke-dashoffset: 0;
+}
+
+/* Timeline dot pulse */
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 8px transparent; }
+}
+
+.timeline-dot {
+  animation: dot-pulse 2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.timeline-dot.revealed {
+  animation-play-state: running;
+}
+
+/* Gradient border glow on hover */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-tertiary));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.glow-border:hover::before {
+  opacity: 0.3;
+}
+
+/* Section overlap gradient bleed */
+.section-bleed-top {
+  position: relative;
+}
+
+.section-bleed-top::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--color-bg-surface));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Smooth number counter */
+@keyframes count-in {
+  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.count-animate {
+  animation: count-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Magnetic hover shift */
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 /* ═══ CRT Scanline Effect (Easter Egg) ═══ */
 @keyframes crt-flicker {
   0% { opacity: 1; }
