@@ -17,11 +17,11 @@ Here is the problem: the same stimulation that induces focus can be weaponized. 
 
 The proposed [TARA threat catalog](/atlas/tara/) contains [109 attack techniques](/atlas/tara/ttps/) mapped across the BCI stack. For ADHD treatment alone, TARA identifies over 40 techniques that share the same physical mechanisms as therapeutic stimulation. Here is what that looks like in practice:
 
-- **[ELF neural entrainment](/atlas/tara/ttps/)** (QIF-T0010): The same low-frequency stimulation used therapeutically for ADHD and cognitive enhancement can be applied covertly to entrain brainwave patterns without the user's knowledge.
-- **[Neurofeedback falsification](/atlas/tara/ttps/)** (QIF-T0022): ADHD neurofeedback training relies on accurate EEG readings. An attacker who falsifies that feedback can train the brain toward a harmful state instead of a therapeutic one.
-- **[Working memory poisoning](/atlas/tara/ttps/)** (QIF-T0034): Working memory deficits define ADHD. A BCI that can strengthen working memory can also degrade it -- same circuit, opposite dosage.
-- **[Cognitive state capture](/atlas/tara/ttps/)** (QIF-T0053): Attention-training BCIs for ADHD continuously read cognitive state. That stream is also a surveillance channel -- your focus patterns, distractibility, and mental fatigue, captured in real time.
-- **[Coherence mimicry](/atlas/tara/ttps/)** (QIF-T0061): SMR (sensorimotor rhythm) training is a standard ADHD neurofeedback protocol. An attacker can mimic the coherence signature of a healthy brain state to mask ongoing interference.
+- **ELF neural entrainment** ([QIF-T0010](/atlas/tara/QIF-T0010)): The same low-frequency stimulation used therapeutically for ADHD and cognitive enhancement can be applied covertly to entrain brainwave patterns without the user's knowledge.
+- **Neurofeedback falsification** ([QIF-T0022](/atlas/tara/QIF-T0022)): ADHD neurofeedback training relies on accurate EEG readings. An attacker who falsifies that feedback can train the brain toward a harmful state instead of a therapeutic one.
+- **Working memory poisoning** ([QIF-T0034](/atlas/tara/QIF-T0034)): Working memory deficits define ADHD. A BCI that can strengthen working memory can also degrade it -- same circuit, opposite dosage.
+- **Cognitive state capture** ([QIF-T0053](/atlas/tara/QIF-T0053)): Attention-training BCIs for ADHD continuously read cognitive state. That stream is also a surveillance channel -- your focus patterns, distractibility, and mental fatigue, captured in real time.
+- **Coherence mimicry** ([QIF-T0061](/atlas/tara/QIF-T0061)): SMR (sensorimotor rhythm) training is a standard ADHD neurofeedback protocol. An attacker can mimic the coherence signature of a healthy brain state to mask ongoing interference.
 
 Every one of these maps to DSM-5-TR code [F90 (ADHD)](https://www.icd10data.com/ICD10CM/Codes/F01-F99/F90-F98/F90-) in the TARA catalog -- for threat modeling purposes, not diagnostic claims. The same signal-level mechanisms that restore attention can disrupt it.
 
