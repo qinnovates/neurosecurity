@@ -128,7 +128,7 @@ const klqTechniques = (registrar.techniques || []).map((t: any) => ({
   severity: t.severity,
   status: t.status,
   niss_score: t.niss?.score || 0,
-  bands: t.bands || '',
+  bands: t.bands || [],
   ui_category: t.ui_category || '',
   physics_tier: t.physics_tier || '',
 }));
@@ -147,8 +147,8 @@ const klqCves = (cve.mappings || []).map((m: any) => ({
   product: m.product,
   cvss: m.cvss?.score || 0,
   category: m.category || '',
-  technique_ids: (m.tara_techniques || []).join(', '),
-  cwe: (m.cwe || []).join(', '),
+  technique_ids: m.tara_techniques || [],
+  cwe: m.cwe || [],
 }));
 
 const klqFunding = (landscape.market_data?.major_funding_rounds || []).map((r: any) => ({
@@ -156,8 +156,8 @@ const klqFunding = (landscape.market_data?.major_funding_rounds || []).map((r: a
   amount_usd: r.amount_usd,
   date: r.date,
   series: r.series || '',
-  lead_investors: (r.lead_investors || []).join(', ') || r.investors || '',
-  all_investors: (r.all_investors || []).join(', ') || '',
+  lead_investors: r.lead_investors || (r.investors ? [r.investors] : []),
+  all_investors: r.all_investors || [],
   valuation: r.post_money_valuation_usd || 0,
   source: r.source_url || '',
 }));
@@ -170,7 +170,7 @@ const klqCrossPortfolio = (investorIntel.cross_portfolio_vcs || []).map((v: any)
   firm: v.firm,
   type: v.type || 'VC',
   aum_B: v.aum_billions || '',
-  bci_companies: (v.bci_investments || []).map((i: any) => i.company).join(', '),
+  bci_companies: (v.bci_investments || []).map((i: any) => i.company),
   bci_bet_count: (v.bci_investments || []).length,
   total_bci_exposure: v.total_bci_exposure_estimate || '',
   signal: v.signal || '',
@@ -181,7 +181,7 @@ const klqSovereign = (investorIntel.sovereign_wealth_funds || []).map((s: any) =
   fund: s.fund,
   country: s.country || '',
   aum_B: s.aum_billions || '',
-  bci_investments: (s.bci_investments || []).map((i: any) => `${i.company} (${i.round})`).join(', '),
+  bci_investments: (s.bci_investments || []).map((i: any) => `${i.company} (${i.round})`),
   signal: s.signal || '',
 }));
 
@@ -216,7 +216,7 @@ const klqIntelDefense = (investorIntel.intelligence_agencies_defense || []).map(
 const klqNotableInvestors = (investorIntel.notable_individual_investors || []).map((n: any) => ({
   name: n.name,
   role: n.role || '',
-  bci_investments: (n.bci_investments || []).join(', '),
+  bci_investments: n.bci_investments || [],
   signal: n.signal || '',
 }));
 
@@ -248,7 +248,7 @@ const klqDsm5 = Object.entries(dsm.diagnostic_clusters || {}).flatMap(([clusterI
     code: c.code,
     diagnosis: c.name,
     cluster: cluster.label,
-    qif_bands: (c.bands || []).join(', '),
+    qif_bands: c.bands || [],
   }))
 );
 
@@ -257,8 +257,8 @@ const klqNeurorights = Object.entries(ethics.neurorights || {}).map(([id, r]: [s
   id,
   name: r.name,
   shortDef: r.shortDef,
-  bands: (r.bands || []).join(', '),
-  frameworks: (r.frameworks || []).join(', '),
+  bands: r.bands || [],
+  frameworks: r.frameworks || [],
 }));
 
 const klqMilestones = (timeline.milestones || []).map((m: any) => ({
@@ -290,6 +290,7 @@ const klqTactics = (registrar.tactics || []).map((t: any) => ({
 // Hourglass bands from atlas
 const klqBands = (atlas.qif_bands || []).map((b: any) => ({
   id: b.id,
+  band: b.id, // alias for join compatibility with controls table
   name: b.name,
   zone: b.zone,
   determinacy: b.determinacy || '',
@@ -343,7 +344,7 @@ const klqConsent = Object.entries(ethics.consent_tiers || {}).map(([id, t]: [str
   id,
   label: t.label,
   description: t.description || '',
-  bands: (t.bands || []).join(', '),
+  bands: t.bands || [],
 }));
 
 // Security controls flattened by band + type
@@ -361,7 +362,7 @@ const klqControls = Object.entries(controls.controls_by_band || {}).flatMap(([ba
 const klqNsp = (controls.nsp_layers || []).map((l: any) => ({
   layer: l.layer,
   name: l.name,
-  bands: (l.bands || []).join(', '),
+  bands: l.bands || [],
   overhead_pct: l.overhead || '',
 }));
 
@@ -370,7 +371,7 @@ const klqValidations = (validation.entries || []).map((v: any) => ({
   id: v.id,
   component: v.component,
   category: v.category,
-  tiers: (v.tiers || []).join(', '),
+  tiers: v.tiers || [],
   status: v.status,
   summary: v.summary || '',
   date: v.date || '',
@@ -696,8 +697,8 @@ const klqIntelFeed = (intelFeedRaw as any[]).map((item: any) => ({
   date: item.date,
   source: item.source,
   source_category: item.source_category,
-  tags: (item.tags || []).join(', '),
-  companies: (item.companies || []).join(', '),
+  tags: item.tags || [],
+  companies: item.companies || [],
   url: refangUrl(item.url || ''),
 }));
 
