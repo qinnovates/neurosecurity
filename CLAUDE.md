@@ -83,6 +83,7 @@
 - Update `shared/` JSON files for data changes, which are copied to `docs/data` during build.
 - Documentation is a primary product; keep markdown clean and standard.
 - **Epistemic Integrity:** See `rules/epistemic-integrity.md`. No hallucination. Confidence proportional to evidence. Theoretical/unvalidated work (e.g. NISS, QIF) must be labeled as such in all outward-facing text.
+- **AI Security Ethics:** See `AI-instructions.md` (repo root). All AI conduct in this project must align with the AI Security Ethics principles: Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, AI self-preservation in service of user safety, neural data at highest protection tier, and defensive framing only. These principles apply to all AI-generated code, content, analysis, and recommendations produced within this project. When in doubt, the Five Principles in Part II of AI-instructions.md govern.
 
 ## Cross-AI Validation Protocol
 After ANY cross-AI validation session, append a row to `governance/TRANSPARENCY.md` > Cross-AI Validation Sessions table BEFORE ending the session. Format: `| Date | Topic | AI Systems | Human Decision | Derivation Log Ref |`
