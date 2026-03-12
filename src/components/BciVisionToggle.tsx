@@ -12,17 +12,24 @@ export default function BciVisionToggle() {
     setIsOn(saved);
   }, []);
 
+  const pendingNav = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const toggle = useCallback(() => {
     const now = Date.now();
     clickTimes.current.push(now);
     // Keep only last 3 clicks
     if (clickTimes.current.length > 3) clickTimes.current.shift();
 
-    // Easter egg: 3 clicks within 1 second
+    // Easter egg: 3 clicks within 1.5 seconds
     if (clickTimes.current.length === 3) {
       const delta = clickTimes.current[2] - clickTimes.current[0];
-      if (delta < 1000) {
+      if (delta < 1500) {
         clickTimes.current = [];
+        // Cancel any pending navigation from earlier clicks
+        if (pendingNav.current) {
+          clearTimeout(pendingNav.current);
+          pendingNav.current = null;
+        }
         document.documentElement.classList.add('crt-flicker');
         setTimeout(() => {
           document.documentElement.classList.remove('crt-flicker');
@@ -40,13 +47,17 @@ export default function BciVisionToggle() {
     document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
     document.documentElement.setAttribute('data-vision', next ? 'on' : 'off');
 
-    // Navigate between index and vision page
-    const path = window.location.pathname;
-    if (next && (path === '/' || path === '/index.html')) {
-      window.location.href = '/vision/';
-    } else if (!next && path.startsWith('/vision')) {
-      window.location.href = '/';
-    }
+    // Delay navigation to allow triple-click detection
+    if (pendingNav.current) clearTimeout(pendingNav.current);
+    pendingNav.current = setTimeout(() => {
+      const path = window.location.pathname;
+      if (next && (path === '/' || path === '/index.html')) {
+        window.location.href = '/vision/';
+      } else if (!next && path.startsWith('/vision')) {
+        window.location.href = '/';
+      }
+      pendingNav.current = null;
+    }, 600);
   }, [isOn]);
 
   const handleCtfSubmit = useCallback(() => {
