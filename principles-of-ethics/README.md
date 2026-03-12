@@ -50,8 +50,6 @@ I took an oath to become an American at the age of seventeen. I stood in a room 
 
 On 9/11, I would sit there to take in the emotions that I remember. My classmates who lost their parents. The dark clouds of the thousands of souls that were lost. The freedom that we as a nation seek to protect, stripped away before our very eyes. What followed in the months after was a rude awakening — a moment of compassion that proved to the world we could all come together and be united. It shouldn't take a tragedy to get there, but those who remember the history can understand the sorrows that pain the people today, in a world so connected yet so divided.
 
-If I were still in China, I would be on a government watch list — my post removed from the internet, and more.
-
 ## Shape of Grace
 
 I start the song with "Shape of Grace," alluding to my late grandmother who passed from Alzheimer's. It's amazing what spirituality and sheer determination of will can do, even when the mind can no longer physically eat or digest food without assistance. It's miraculous that the sense of self in its most innate form still persists when the mind is completely broken and shattered. I think this is what the ancient Egyptians alluded to when they chose to preserve the heart and never the brain.
