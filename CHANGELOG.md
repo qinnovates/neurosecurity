@@ -4,7 +4,17 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 4f1628def5b03b6c8ff077b93552ed19b36daa3f -->
+<!-- changelog-marker: 9f2b47e86118b808650efd1468296562e7cb92d4 -->
+
+## 2026-03-12
+
+### Updated
+- Whitepaper: add consent-based vision restoration and legislative engagement section ([9f2b47e](https://github.com/qinnovates/qinnovate/commit/9f2b47e))
+
+### Other
+- update news feed cache [skip ci-deploy] ([3d98638](https://github.com/qinnovates/qinnovate/commit/3d98638))
+
+
 
 ## 2026-03-11
 
