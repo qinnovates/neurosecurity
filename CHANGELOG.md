@@ -4,7 +4,30 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 888a6e1 -->
+<!-- changelog-marker: 34fd47d7484b5a23ab649c1ea984a44c57bb377d -->
+
+## 2026-03-12
+
+### Added
+- AI Security Ethics v0.1 — ethical AI conduct proposal for neural security ([a6b849d](https://github.com/qinnovates/qinnovate/commit/a6b849d))
+
+### Updated
+- Unify all timelines through KQL, fix Kinect claims, add AI ethics sidebar ([6be7f48](https://github.com/qinnovates/qinnovate/commit/6be7f48))
+- Remove glossary page from website, keep in whitepaper only ([8d3cf35](https://github.com/qinnovates/qinnovate/commit/8d3cf35))
+- NISS v1.1 in whitepaper, The Gap section, BCI Vision toggle persistent ([8b47778](https://github.com/qinnovates/qinnovate/commit/8b47778))
+- Whitepaper: add consent-based vision restoration and legislative engagement section ([9f2b47e](https://github.com/qinnovates/qinnovate/commit/9f2b47e))
+
+### Fixed
+- BCI Vision toggle: CTF triple-click now works, AI Security Ethics tagline ([832a9b7](https://github.com/qinnovates/qinnovate/commit/832a9b7))
+
+### Docs
+- add Spotify link to Principles of Ethics ([34fd47d](https://github.com/qinnovates/qinnovate/commit/34fd47d))
+
+### Other
+- deps(npm): Bump devalue from 5.6.3 to 5.6.4 (#29) ([a8b56e4](https://github.com/qinnovates/qinnovate/commit/a8b56e4))
+- update news feed cache [skip ci-deploy] ([3d98638](https://github.com/qinnovates/qinnovate/commit/3d98638))
+
+
 
 ## 2026-03-11
 
