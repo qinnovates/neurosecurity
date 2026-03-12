@@ -39,6 +39,14 @@ export default function BciVisionToggle() {
     localStorage.setItem('bci-vision', next ? 'on' : 'off');
     document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
     document.documentElement.setAttribute('data-vision', next ? 'on' : 'off');
+
+    // Navigate between index and vision page
+    const path = window.location.pathname;
+    if (next && (path === '/' || path === '/index.html')) {
+      window.location.href = '/vision/';
+    } else if (!next && path.startsWith('/vision')) {
+      window.location.href = '/';
+    }
   }, [isOn]);
 
   const handleCtfSubmit = useCallback(() => {

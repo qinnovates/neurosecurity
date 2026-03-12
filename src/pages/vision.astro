@@ -2,9 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import BciVisionToggle from '../components/BciVisionToggle';
 import KinectVision from '../components/KinectVision';
 import ScrollCounter from '../components/ScrollCounter';
-import OniSpheres from '../components/OniSpheres';
 import PublicationCard from '../components/PublicationCard.astro';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '../lib/utils';
@@ -120,8 +120,6 @@ const bandZoneColor = (id: string) => {
     </div>
     <!-- Ambient gradient orbs -->
     <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      <div class="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.04] parallax-layer" data-speed="0.15" style="background: radial-gradient(circle, var(--color-accent-primary), transparent 70%);"></div>
-      <div class="absolute -bottom-1/4 -right-1/4 w-[500px] h-[500px] rounded-full opacity-[0.06] parallax-layer" data-speed="0.1" style="background: radial-gradient(circle, var(--color-accent-tertiary), transparent 70%);"></div>
     </div>
     <div class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-24">
       <div class="max-w-xl">
@@ -229,7 +227,6 @@ const bandZoneColor = (id: string) => {
 
   <!-- NEUROETHICS: ORIGIN + TIMELINE (with ONI Spheres behind) -->
   <section class="relative py-20 overflow-hidden" style="background: #050a14;">
-    <OniSpheres client:only="react" />
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 reveal">
         <p class="text-xs font-mono tracking-[0.15em] uppercase text-emerald-500 mb-4">Where It Started</p>
@@ -601,4 +598,5 @@ const bandZoneColor = (id: string) => {
   </script>
 
   <Footer />
+  <BciVisionToggle client:idle />
 </BaseLayout>
