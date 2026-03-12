@@ -68,6 +68,16 @@ Depending on the listener, it can also allude to the growth that comes from over
 
 ## Duality
 
+## A Note on Stockholm Syndrome
+
+"Stockholm syndrome" is not a formal psychiatric diagnosis — it does not appear in the DSM-5-TR and never has. The term was coined by criminologist Nils Bejerot in 1973 after the Norrmalmstorg bank robbery in Stockholm, and he never interviewed the hostages. An FBI study of over 4,700 hostage cases found only ~8% showed any signs of the described bonding behavior. Researchers have argued the concept lacks a consistent operational definition, making it scientifically difficult to validate (Namnyak et al., 2008).
+
+What is real is trauma bonding — attachment to an abuser as a survival mechanism, driven by intermittent reinforcement, power asymmetry, and perceived inability to escape. The experience is documented across research in abuse, captivity, and coercive control. It may be better described by existing frameworks like complex PTSD or coercive control than by a standalone "syndrome" named after a bank robbery.
+
+I reference it in the song not as clinical truth, but as a paradox to be overcome — a pattern that can be unlearned through awareness and agency. The label is imperfect. The experience is not.
+
+## Duality
+
 Depending on how I listen to the song, it has different meanings. It can be happy. It can be dark.
 
 I used a female voice to help speak from the inequality that women face when their voices are left unheard. As an Asian American, I can only try to understand, but I can never truly grasp the challenges that women face day to day. I think survivors — particularly those of human trafficking — will hear the words very differently than others. My goal is to empower and remind us all that although there may be injustices in this world, our country is only 250 years young, and we are writing history with each tweet, TikTok, YouTube video, blog post, song, and work of art.
@@ -75,6 +85,17 @@ I used a female voice to help speak from the inequality that women face when the
 ---
 
 That's the beauty of art — its interpretation is left up to you. We all see the world differently, because our experience is what makes us so uniquely our own.
+
+## Hidden Meanings
+
+**"Chalkboard and line"** carries more than one meaning:
+
+- Children who fought and have died for this country. A friend came back from war and was never the same.
+- These are the people who rely on BCIs most.
+- These are the people I know, the people that make me, the people who keep me fighting for their rights when I can hardly stand.
+- I use this when I need motivation and drive to help me push through to the finish.
+
+**"Principles lock from within"** — security guardrails for AI-powered BCIs where the user must grant consent, whether it be subconscious but still a part of their free will and agency.
 
 ---
 
