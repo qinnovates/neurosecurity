@@ -651,6 +651,35 @@ graph LR
     style J fill:#f39c12,color:#fff
 ```
 
+### The Consent Question: Vision Restoration and Public Safety
+
+AI-assisted vision restoration carries an obvious fear: surveillance. If a neural device can process visual input, can it also record, transmit, or be subpoenaed? The instinct is to reject any connection between prosthetic vision and law enforcement outright — and that instinct is correct as a default. No BCI user should have their sensory experience surveilled without explicit, informed, revocable consent.
+
+But there is a harder question underneath the easy one.
+
+Children go missing every day. Families are destroyed by abduction, trafficking, and violence that goes unsolved because no one was watching. If a person with a BCI-restored visual prosthesis could *choose* — voluntarily, with full informed consent, with the ability to revoke at any time — to contribute anonymized pattern-matching data to missing persons databases, should that option exist?
+
+This is not a hypothetical I arrived at through theory. Children were being taken in the 1990s — that was the world before mass surveillance, before the post-9/11 security apparatus, before we traded privacy for the promise of safety. We grew up with that fear and then watched freedom get redefined around us. What does "free" even mean now? Is it safety? Is it security? For me, freedom is the ability to express your thoughts and ideas without fear of repercussion, so long as it is done with ethics. That is the freedom neurosecurity must protect.
+
+So the question is not whether BCI vision data *can* be used for public safety. The question is whether the people whose bodies carry these devices should have the *choice* — on their own terms, revocable, with no penalty for saying no. That lived experience of walking streets at night and fearing strangers is what moved me from reflexive opposition to asking honestly: if the people we are building these devices *for* want to help bring justice to torn families, do we have the right to deny them that agency? Consider the deterrent effect alone. Trafficking networks, predators operating in plain sight for decades — the systems that protected them relied on one thing: no one was watching. A voluntary, consent-based network of BCI users who *chose* to participate in missing persons detection would fundamentally change that calculus. Not through mass surveillance, but through the collective decision of individuals who said: *I have the ability to help, and I choose to.*
+
+The answer QIF proposes is not "yes, enable surveillance." The answer is: **consent is the mechanism, not the technology.** The same framework that distinguishes therapeutic signal injection from adversarial attack (Section 6.7) applies here. The physical capability is neutral. What matters is:
+
+1. **Consent** — opt-in only, never default-on, revocable without penalty
+2. **Data minimization** — pattern hashes, not raw visual streams
+3. **Purpose limitation** — missing persons alerts only, never general surveillance
+4. **Architectural enforcement** — these constraints must be enforced at the protocol level (NSP), not by policy alone
+
+Current visual prostheses operate at extremely low resolution — far below what would be useful for identification tasks today. But the question of consent architecture must be settled *before* the technology matures, not after. Building the governance constraints into the protocol stack now ensures that when higher-fidelity vision restoration arrives, the framework for ethical use already exists.
+
+There is a honest admission required here: this question is bigger than any single framework author. Surveillance scares me. It should scare anyone paying attention. But when you have lived on the other side of it — when you have been the person who needed someone to be watching and no one was — you start to understand that the fear of surveillance and the fear of being unprotected are the same fear, viewed from different positions.
+
+And let us be honest about the present reality: broad surveillance already happens at a scale most people do not fully appreciate. Location data is sold. Facial recognition runs in real time in public spaces. Phone metadata is collected in bulk. The infrastructure exists. What does not exist is accountability, transparency, or consent architecture around any of it. So the question is not whether surveillance will touch neural devices — it will. The question is whether we build the governance *first* or bolt it on after the damage is done, the way we did with every previous generation of technology.
+
+The answer is legislative engagement. These questions must be raised with local legislators, state privacy boards, and federal regulators *now*, while the technology is still in its early stages. The technical constraints QIF proposes — consent, data minimization, purpose limitation, architectural enforcement — are engineering specifications. They need legal counterparts: statutory protections for neural data, clear prohibitions on non-consensual BCI data collection, and independent oversight mechanisms. The engineering and the law must be built together, or neither one holds.
+
+This is what neurosecurity governance looks like in practice: not a blanket prohibition, not uncritical adoption, but a consent-centered architecture that gives agency to the people whose bodies are involved — backed by legislation that ensures no one can quietly remove that agency later.
+
 ## 6.8 NISS: Neural Impact Scoring System
 
 The **NISS v1.1** extends CVSS v4.0 with six dimensions specific to human-digital interconnection.
