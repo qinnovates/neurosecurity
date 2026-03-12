@@ -21,7 +21,7 @@ fact_check_notes:
   - "Elnabawy 2022 — corrected from 'geometric primitives' to 'simplified visual representations' (clip-art GAN)."
 ---
 
-Unreal Engine renders textures and objects without needing to know what it is simply using transform (position, rotation, scale). Who's to say this isn't possible. Your eyes are already rendering this screen. One day, the blind will be able to actually see a web browser and laugh at memes with the rest of us.
+Unreal Engine renders textures and objects without needing to know what they are -- just transform data (position, rotation, scale). Who's to say this isn't possible for neural rendering? Your eyes are already rendering this screen. One day, the blind will be able to actually see a web browser and laugh at memes with the rest of us.
 
 When they do, what would that look like? Besides just more meme spamming, I mean... if we were to redesign the browser and optimize it for the brain, where do we start? Would it look like DOS? White phosphenes are easier to induce after all.
 
@@ -68,9 +68,9 @@ Science Corp's retinal prosthesis bypasses the dead rods and cones to stimulate 
 
 Hodak puts it simply: "You can think of that as like the API of the brain." If you can characterize the signal representations at each layer, you can write to them. The brain handles the rest through plasticity.
 
-The brain is not a black box -- it is a layered signal processing system, and each layer has discoverable input/output characteristics. A Stanford team decoded speech at 62 words per minute from intracortical recordings. Neuralink's PRIME study achieved wireless motor decoding at 8.0 bits/second in their first human participant. The engineering challenge is getting the right signals into the right layer at the right resolution.
+The brain is not a black box -- it is a layered signal processing system, and each layer has discoverable input/output characteristics. A Stanford team decoded speech at 62 words per minute from intracortical recordings (Willett et al. 2023, *Nature*; 23.8% word error rate -- imperfect, but approaching natural conversation speed). Neuralink's PRIME study reported wireless motor decoding at 8.0 bits/second in their first human participant (Neuralink blog, 2024). The engineering challenge is getting the right signals into the right layer at the right resolution.
 
-If hackers can create a realistic digital map today using Bluetooth or Wi-Fi, then who is to say we can't couple it with OCR and AI to render the world. We have the full capability to do it -- it's just a matter of ethics and safety. That's why clinical testing takes so long, but it's exciting to see where the world is heading.
+If researchers can reconstruct 3D body pose through walls using WiFi signals alone (DensePose from WiFi, CMU 2023), and if mmWave radar can produce millimeter-level 3D geometry (PanoRadar, MobiCom 2024), then the sensor capability to capture the physical world for a vision pipeline already exists. Coupling it with OCR and AI scene understanding to produce a neural-compatible render is an integration challenge, not a physics barrier. The components exist -- it's the safety, ethics, and latency engineering that determine when and how they come together. That's why clinical testing takes so long, but it's exciting to see where the world is heading.
 
 ### The Sensor Rabbit Hole
 
@@ -96,7 +96,7 @@ Now that I've laid out the chain and the sensor question, let me walk through ea
 
 Cameras work. Every vision prosthesis in clinical trials uses a camera mounted on glasses. But WiFi Channel State Information ([T0090](/atlas/tara/QIF-T0090)) can reconstruct 3D body pose through walls -- DensePose from WiFi (CMU, 2023) achieves body-part UV mapping from WiFi CSI signals, no camera required.
 
-The problem is resolution. WiFi at 5 GHz has a wavelength of ~6cm, which sets a practical resolution floor for RF-based sensing. Deep learning adds learned priors from training data, but it cannot exceed the physics -- below the wavelength scale, it's filling in gaps from training data, not measuring.
+The problem is resolution. Standard WiFi operates at 2.4 GHz (~12.5 cm wavelength) and 5 GHz (~6 cm wavelength). These wavelengths set a practical resolution floor for RF-based sensing -- you cannot resolve features smaller than the wavelength of the signal you're using. Deep learning adds learned priors from training data, but it cannot exceed the physics -- below the wavelength scale, it's filling in gaps from statistical inference, not measuring.
 
 **Resolution by frequency:**
 
@@ -105,7 +105,7 @@ The problem is resolution. WiFi at 5 GHz has a wavelength of ~6cm, which sets a 
 - **60 GHz / mmWave** (5 mm wavelength) — Hand gestures, facial features
 - **77 GHz / automotive radar** (3.9 mm wavelength) — mm-level geometry (PanoRadar, MobiCom 2024)
 
-WiFi alone cannot produce the resolution needed for a visual scene. But mmWave radar at 77 GHz achieves millimeter-level geometry. PanoRadar (MobiCom 2024) demonstrated panoramic 3D reconstruction from a single spinning radar. RF-based 3D Gaussian Splatting from radar is an active research area (GSRF, NeurIPS 2025) -- rendering novel views from radio signals alone, no camera. Feasible near-term, but not yet integrated into any BCI pipeline.
+WiFi alone cannot produce the resolution needed for a visual scene. But mmWave radar at 77 GHz achieves millimeter-level geometry. PanoRadar (MobiCom 2024) demonstrated panoramic 3D reconstruction from a single spinning radar. RF-based 3D Gaussian Splatting from radar is an active research area -- rendering novel views from radio signals alone, no camera. Feasible near-term, but not yet integrated into any BCI pipeline.
 
 *Camera capture = demonstrated and in clinical use. WiFi/radar capture for BCI = theoretically possible but resolution-limited. mmWave capture = feasible near-term but not yet coupled to neural encoding.*
 
@@ -212,7 +212,7 @@ So the first phosphene browser wouldn't look like Safari. It might look like a w
 
 The primary experience should be art, not a command line. Nobody wants to wake up and see a terminal. Imagine your OS for seeing the world boots up and it bluescreens. Your vision just... crashes. A cursor blinking in a void where the world used to be. That cannot happen. The default experience has to be beautiful, intuitive, and human -- something closer to watercolor than to a shell prompt.
 
-That's what I set out to answer with the [Runemate](/framework/) concept. Pairing the old with the new. Like a Rosetta Stone but without all the baggage of legacy. Traditional computing crashes because it was built on layers of abstraction that assume the user can reboot, reinstall, or switch devices. You can't reboot an implant. You can't reinstall someone's vision. Runemate is a proposed domain-specific language designed from scratch for the neural interface boundary -- no inherited failure modes from systems that were never built to touch biology.
+That's what I set out to answer with the [Runemate](/framework/) concept. Pairing the old with the new. Like a Rosetta Stone but without all the baggage of legacy. Traditional computing crashes because it was built on layers of abstraction that assume the user can reboot, reinstall, or switch devices. Rebooting or restarting a neural implant is not a viable recovery strategy -- it introduces a cascade of safety and security implications. Power cycling disrupts therapeutic stimulation schedules, may worsen glial scarring at the electrode-tissue boundary, and does nothing to reverse any neuroplastic rewiring that occurred during the failure. The implant restarts; the brain does not. Any neural pathway changes that happened while the system was compromised persist in the patient's biology regardless of the device's operational state. There is no "reinstall" for vision that the brain has already adapted around. Runemate is a proposed domain-specific language designed from scratch for the neural interface boundary -- no inherited failure modes from systems that were never built to touch biology.
 
 But a terminal can still come in handy for troubleshooting, so the user is always in control of the AI. If an AI is deciding what to show you through 378 points of light -- compressing the entire visual world into a grid smaller than a QR code -- the user needs a way to override it when something goes wrong. To say "show me more detail here" or "switch modes" or "why did you filter that out." Not as the daily experience. As the escape hatch. The same way most people never open a terminal on their Mac, but the ones who do are the ones who actually understand what their machine is doing.
 
@@ -297,7 +297,7 @@ If the next decade of neurotechnology is going to be built by companies like Sci
 **WiFi Sensing & RF Imaging**
 - Geng J, et al. "DensePose From WiFi." arXiv:2301.00250, 2023. [arXiv](https://arxiv.org/abs/2301.00250)
 - Li H, et al. "PanoRadar: Enabling Visual Recognition at Radio Frequency." ACM MobiCom 2024. [DOI: 10.1145/3636534.3649369](https://doi.org/10.1145/3636534.3649369)
-- GSRF. "Complex-Valued 3D Gaussian Splatting for Efficient Radio-Frequency Data Synthesis." NeurIPS 2025.
+- GSRF. "Complex-Valued 3D Gaussian Splatting for Efficient Radio-Frequency Data Synthesis." Reported as NeurIPS 2025. *Note: No DOI or indexed URL located at time of publication. Citation retained based on conference program reference; independent verification pending.*
 - Liu J, et al. "Wireless Sensing for Human Activity: A Survey." *IEEE Communications Surveys & Tutorials* 21(2):1810-1836, 2019.
 
 **Neural Encoding for Vision Prosthetics**
