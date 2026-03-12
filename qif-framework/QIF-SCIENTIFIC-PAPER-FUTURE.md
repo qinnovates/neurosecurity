@@ -1,4 +1,4 @@
-# QIF Whitepaper v7.0
+# QIF Scientific & Mathematical Reference
 
 ## QIF: Quantified Interconnection Framework for Neural Security
 
@@ -9,12 +9,14 @@
 > *"Like all things that matter, we are deeply entangled. It is rooted in laws that define the universe we exist in. From silicon to synapse, and security to ethics. Life's most important connections deserve the most thought."*
 > — Kevin Qi
 
-**Version:** 7.0 (Working Draft)
-**Date:** 2026-02-21
+**Version:** 8.0 Scientific Reference
+**Date:** 2026-03-12
 **Author:** Kevin Qi
-**Predecessor:** QIF Whitepaper v6.2.1
-**Status:** DRAFT
+**Status:** Living reference document for scientific and mathematical content
+**Current Whitepaper:** [QIF Whitepaper v8.0](https://qinnovate.com/research/whitepaper/) — the canonical, up-to-date framework document
 **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
+
+> **Purpose:** This document serves as the scientific and mathematical deep-dive companion to the [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-WHITEPAPER-V8-DRAFT.md). It preserves the full derivation context, formulas, and validation roadmap for all quantitative claims. The whitepaper references this document for detailed scientific and mathematical treatment.
 
 ---
 
@@ -66,13 +68,13 @@ From silicon to synapse, from security to ethics, these connections run through 
 
 ## 1. Abstract
 
-Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet no security framework addresses the unique physics of the neural-synthetic boundary. This paper presents the Quantified Interconnection Framework (QIF), an 11-band hourglass security architecture spanning from neural tissue to synthetic systems. QIF provides: a coherence metric (Cs) for real-time signal integrity monitoring grounded in spectral decomposition via the Short-Time Fourier Transform (STFT); TARA, a 109-technique dual-use threat taxonomy with four-dimensional projections across security, clinical, diagnostic, and governance domains; NISS, a proposed BCI-native severity scoring system designed to address CVSS limitations for neural-specific impact assessment; and the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating coherence scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption.
+Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet no security framework addresses the unique physics of the neural-synthetic boundary. This paper presents the Quantified Interconnection Framework (QIF), an 11-band hourglass security architecture spanning from neural tissue to synthetic systems. QIF provides: a coherence metric (Cs) for real-time signal integrity monitoring grounded in spectral decomposition via the Short-Time Fourier Transform (STFT); TARA, a 109-technique dual-use threat taxonomy with four-dimensional projections across security, clinical, diagnostic, and governance domains; NISS v2.0, a proposed BCI-native severity scoring system extending CVSS with six neural impact dimensions, 42 ICD-10-CM neurological conditions, and five neurological weighting factors designed to address CVSS limitations for neural-specific impact assessment; and the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating coherence scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption.
 
 We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. A CVE coverage analysis maps 55 NVD-verified CVEs to 21 of 109 TARA techniques, revealing an 81.25% clinical blind spot: attacks that are physically feasible and clinically harmful but have zero CVE tracking. Physics feasibility tiering classifies all 109 techniques by hardware gate, enabling timeline projections for when specific attacks become feasible.
 
 A DSM-5 diagnostic mapping links 102 of 109 techniques to psychiatric diagnostic categories (for threat modeling purposes) via the Neural Impact Chain, organized into five diagnostic clusters. Per-technique FDORA/524B regulatory scoring identifies coverage gaps across all five FDORA cybersecurity requirements. Origin attribution classifies the provenance of all 109 techniques, distinguishing literature-derived attacks from novel QIF contributions.
 
-We present Neurowall, a three-layer wearable neural firewall reference implementation validated at 100% true positive rate and 0% false positive rate across 50 simulation runs. We additionally present Project Runemate, a content compression pipeline offsetting PQC bandwidth overhead by 65--90%. A neurosecurity policy framework maps the regulatory gap across 25 organizations and proposes specific asks for six standards bodies (NIST, MITRE, FIRST, IEEE, FDA, UNESCO). A governance, risk, and compliance (GRC) alignment analysis maps abstract neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) to auditable technical controls, including a per-technique Consent Complexity Index (CCI) measuring the gap between legal and meaningful consent. A unified data platform consolidates 26 BCI companies, 34 devices, 44 funding rounds, 25 market estimates, 193 research sources, and all framework outputs into an open JSON API with KQL-style search across 32 tables and 767+ queryable records, enabling manufacturers, regulators, and investors to query the BCI security landscape without building their own data infrastructure. An investment analysis quantifying $4.8B cumulative VC deployment against $0 documented security spending establishes the market context for neurosecurity as a discipline. A market trajectory analysis applies five economic frameworks, from institutional capital indexes (PitchBook-NVCA, Cambridge Associates, Preqin) through the security spending lag model observed in internet, cloud, IoT, and automotive cybersecurity, to position BCI in its pre-inflection window and project a $150M-1B+ neurosecurity TAM by 2034. An attack primitive decomposition from physics first principles identifies six irreducible attack primitives (charge, field, signal, protocol, pattern, behavior) validated against all 109 TARA techniques and 12 BCI Limits Equation constraints, establishing that neuroethics and neurosecurity are operationally inseparable: they protect the same system at different layers of abstraction.
+We present Neurowall, a three-layer wearable neural firewall reference implementation validated at 100% true positive rate and 0% false positive rate across 50 simulation runs. We additionally present Project Runemate, a content compression pipeline offsetting PQC bandwidth overhead by 65--90%. A neurosecurity policy framework maps the regulatory gap across 25 organizations and proposes specific asks for six standards bodies (NIST, MITRE, FIRST, IEEE, FDA, UNESCO). A governance, risk, and compliance (GRC) alignment analysis maps abstract neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) to auditable technical controls, including a per-technique Consent Complexity Index (CCI) measuring the gap between legal and meaningful consent. A unified data platform consolidates 26 BCI companies, 34 devices, 44 funding rounds, 25 market estimates, 328+ research sources, and all framework outputs into an open JSON API with KQL-style search across 39 tables and 860+ queryable records, enabling manufacturers, regulators, and investors to query the BCI security landscape without building their own data infrastructure. An investment analysis quantifying $4.8B cumulative VC deployment against $0 documented security spending establishes the market context for neurosecurity as a discipline. A market trajectory analysis applies five economic frameworks, from institutional capital indexes (PitchBook-NVCA, Cambridge Associates, Preqin) through the security spending lag model observed in internet, cloud, IoT, and automotive cybersecurity, to position BCI in its pre-inflection window and project a $150M-1B+ neurosecurity TAM by 2034. An attack primitive decomposition from physics first principles identifies six irreducible attack primitives (charge, field, signal, protocol, pattern, behavior) validated against all 109 TARA techniques and 12 BCI Limits Equation constraints, establishing that neuroethics and neurosecurity are operationally inseparable: they protect the same system at different layers of abstraction.
 
 ---
 
@@ -196,7 +198,7 @@ This paper presents twenty contributions:
 2. A **coherence metric** (Cs) for real-time signal integrity monitoring, grounded in spectral decomposition via the STFT, combining phase coherence, transport entropy, amplitude stability, and scale-frequency validation.
 3. Identification of **five cross-domain attack coupling mechanisms** and honest assessment of which attacks the coherence metric can and cannot detect.
 4. **TARA** (Therapeutic Atlas of Risks and Applications), a 109-technique dual-use registry with 22+ fields per technique spanning security, clinical, diagnostic, governance, and provenance dimensions.
-5. **NISS** (Neural Impact Scoring System), a proposed BCI-native severity scoring system extending CVSS with six neural impact dimensions.
+5. **NISS v2.0** (Neural Impact Scoring System), a proposed BCI-native severity scoring system extending CVSS with six neural impact dimensions, five neurological weighting factors, 42 ICD-10-CM neurological conditions, and KQL-queryable metric decomposition.
 6. A **CVE coverage analysis** mapping 55 NVD-verified CVEs to TARA techniques, quantifying an 81.25% clinical blind spot.
 7. **Physics feasibility tiering** classifying all 109 techniques by hardware gate (61 feasible now, 11 near-term, 10 mid-term, 2 far-term, 18 software-only).
 8. A **DSM-5 diagnostic mapping** linking 109 techniques to psychiatric diagnostic categories (for threat modeling purposes) via the Neural Impact Chain, organized into five diagnostic clusters.
@@ -207,7 +209,7 @@ This paper presents twenty contributions:
 13. A **neurosecurity policy framework** with regulatory coverage mapping across 25 organizations and specific asks for six standards bodies.
 14. A **GRC alignment analysis** mapping neurorights to auditable technical controls, including a per-technique Consent Complexity Index (CCI), and tracking enacted legislation across 7 jurisdictions.
 15. **Origin attribution** classifying the provenance of all 109 techniques (49 literature, 46 recontextualized, 6 QIF-original, 5 chain synthesis, 3 neuroethics formalized).
-16. A **unified data platform** with open JSON API, KQL-style search across 39 tables (860+ records), 26-company BCI landscape database with investment tracking, market forecasts from 12 analyst firms, and 193 compiled research sources (Section 7.8).
+16. A **unified data platform** with open JSON API, KQL-style search across 39 tables (860+ records), 26-company BCI landscape database with investment tracking, market forecasts from 12 analyst firms, and 328+ compiled research sources (Section 7.8).
 17. An **investment gap analysis** quantifying $4.8B cumulative BCI venture capital deployment against $0 documented security spending, with TAM/SAM/SOM projections, automotive cybersecurity convergence timeline, and per-company risk profiling (Section 2.3.1).
 18. A **market trajectory analysis** applying five economic frameworks (institutional capital indexes, cross-sector capital flow, security spending lag model, technology adoption S-curve, Elliott Wave analysis) to position BCI in its pre-inflection window and project a $150M-1B+ neurosecurity TAM (Section 13).
 19. An **attack primitive decomposition** identifying six irreducible attack primitives from physics first principles (charge, field, signal, protocol, pattern, behavior), validated against all 109 TARA techniques and 12 BCI Limits Equation constraints, establishing why neuroethics and neurosecurity are operationally inseparable (Section 2.2.1).
@@ -620,9 +622,18 @@ Evidence status breakdown:
 | Theoretical | 31 | Plausible from principles |
 | Emerging | 22 | Newly identified |
 
-## 6.5 NISS v1.1 --- Neural Impact Scoring System
+## 6.5 NISS v2.0 --- Neural Impact Scoring System
 
 *BCI-native vulnerability scoring system*
+
+### Version History
+
+| Version | Date | Key Changes |
+|---------|------|-------------|
+| **v1.0** | 2026-01 | Initial 5-metric system (BI, CG, CV, RV, NP). DSM-5-TR psychiatric mapping only. |
+| **v1.1** | 2026-02 | CG split into CR (read) + CD (write). Renormalized weights to preserve 20% cognitive share. |
+| **v1.1.1** | 2026-03 | NP expanded from 3 to 4 levels (added Partial). 26 TARA scores shifted. |
+| **v2.0** | 2026-03 | Neurological extension: 42 ICD-10-CM conditions. CD broadened to Cognitive/Functional Disruption. 5 new weighting factors (R, FI, PS, CE, MC). KQL queryable. |
 
 ### 6.5.1 Why Not CVSS?
 
@@ -633,22 +644,37 @@ CVSS (Common Vulnerability Scoring System), maintained by FIRST.org, is the indu
 - **Reversibility** --- can the damage be undone, or is it permanent?
 - **Violation of consent** --- does this attack bypass the subject's informed consent?
 - **Neuroplasticity effects** --- can repeated exposure cause lasting changes to neural pathways?
+- **Neurological disruption** --- can this attack induce tinnitus, tremor, cortical blindness, or other non-psychiatric neurological outcomes?
 
-NISS v1.1, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **six BCI-native impact dimensions**: Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive Disruption (CD), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). The CG (Cognitive Integrity) metric from NISS v1.0 has been split into CR (read attacks: thought decoding, neural data inference) and CD (write attacks: perception manipulation, identity modification) to distinguish attack directionality. The default NISS score is a simple equal-weight average of these six dimensions, ensuring no single dimension dominates without domain-specific justification. Optional **context profiles** (Clinical, Research, Consumer, Military) provide weight overrides for domain-specific scoring.
+NISS v2.0, developed by Qinnovate as a purpose-built alternative, retains the 0--10 scoring scale familiar from CVSS but replaces the CIA triad with **six BCI-native impact dimensions**: Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive/Functional Disruption (CD), Consent Violation (CV), Reversibility (RV), and Neuroplasticity (NP). The CG (Cognitive Integrity) metric from NISS v1.0 was split in v1.1 into CR (read attacks: thought decoding, neural data inference) and CD (write attacks: perception manipulation, identity modification) to distinguish attack directionality. In v2.0, CD was further broadened to encompass sensory, motor, and autonomic disruption alongside cognitive interference. The default NISS score uses weighted averaging with `wBI=1.0, wCR=0.5, wCD=0.5, wCV=1.0, wRV=1.0, wNP=1.0` to preserve the cognitive dimension's 20% share from the prior 5-metric version. Optional **context profiles** (Clinical, Research, Consumer, Military) provide weight overrides for domain-specific scoring.
+
+NISS v2.0 additionally introduces **five weighting factors** for neurological outcome scoring and extends the clinical mapping beyond DSM-5-TR to include **42 neurological conditions** from ICD-10-CM chapters G (nervous system), H (eye/ear), and R (symptoms/signs).
 
 ### 6.5.2 Score Formula
 
-**Default profile (equal weights):**
-
-$$\text{NISS} = \frac{BI + CR + CD + CV + RV + NP}{6}$$
-
-Each dimension is scored on a 0.0--10.0 scale. The default equal-weight average ensures no single impact dimension dominates without domain-specific justification. All fractional results are ceiling-rounded to the nearest 0.1.
-
-**Context profile (weighted):**
+**Default profile (normalized weights):**
 
 $$\text{NISS} = \frac{w_{BI} \cdot BI + w_{CR} \cdot CR + w_{CD} \cdot CD + w_{CV} \cdot CV + w_{RV} \cdot RV + w_{NP} \cdot NP}{\sum w}$$
 
+Default weights: $w_{BI} = w_{CV} = w_{RV} = w_{NP} = 1.0$; $w_{CR} = w_{CD} = 0.5$
+
+Each dimension is scored on a 0.0--10.0 scale. The CR/CD weights of 0.5 preserve the cognitive dimension's 20% share (1.0/5.0 total) from the prior 5-metric version after the CG→CR+CD split. All fractional results are ceiling-rounded to the nearest 0.1.
+
+**Context profile (weighted):**
+
 Context profiles provide optional weight overrides for domain-specific environments where certain impact dimensions carry disproportionate significance. See Section 6.5.6 for profile definitions.
+
+**NISS v2.0 extended vector** appends five neurological weighting factors to the existing 6-metric score:
+
+$$\text{NISS:2.0/BI:H/CR:H/CD:C/CV:E/RV:P/NP:T/R:0.7/FI:0.8/PS:0.6/CE:0.5/MC:0.9}$$
+
+| Factor | Symbol | Range | Description |
+|--------|--------|-------|-------------|
+| **Reversibility** | R | 0.0--1.0 | 0 = fully reversible on signal removal, 1.0 = permanent neurological damage |
+| **Functional Impact** | FI | 0.0--1.0 | Context-dependent daily functioning impairment (anosmia devastating for a chef, less so for others) |
+| **Pathway Specificity** | PS | 0.0--1.0 | How precisely the modality can be targeted (higher specificity = higher weaponization risk) |
+| **Clinical Evidence** | CE | 0.0--1.0 | 0 = theoretical, 0.5 = reported in DBS/cortical stimulation studies, 1.0 = documented in BCI trials |
+| **Modality Criticality** | MC | 0.0--1.0 | How critical to patient safety (vestibular/proprioceptive disruption causes falls; olfactory does not) |
 
 ### 6.5.3 Metric Groups
 
@@ -660,10 +686,12 @@ The six core dimensions constitute the NISS score. Each is scored on a 0.0--10.0
 |--------|------|--------|-------|-------------|
 | **Biological Impact** | BI | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Physical harm to neural tissue. None = no tissue effect. Low = transient discomfort. High = seizure risk, tissue stress. Critical = tissue damage, life-threatening. |
 | **Cognitive Reconnaissance** | CR | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Read attacks: unauthorized thought decoding or neural data inference. None = no neural data exposure. Low = minor signal leakage. High = significant thought decoding risk. Critical = full cognitive state reconstruction. |
-| **Cognitive Disruption** | CD | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Write attacks: perception manipulation or identity modification. None = no cognitive effect. Low = minor cognitive interference. High = significant cognitive disruption. Critical = involuntary behavioral change, identity compromise. |
+| **Cognitive/Functional Disruption** | CD | N / L / H / C | 0.0 / 3.3 / 6.7 / 10.0 | Unauthorized disruption to cognitive processing, sensory perception, motor output, or autonomic regulation. None = no effect. Low = minor interference. High = significant disruption. Critical = involuntary behavioral change, identity compromise, or severe sensory/motor/autonomic failure. |
 | **Consent Violation** | CV | N / P / E / I | 0.0 / 3.3 / 6.7 / 10.0 | Degree to which informed consent is bypassed. None = fully consented. Partial = incomplete disclosure. Explicit = clear neurological autonomy violation. Implicit = covert manipulation without the subject's awareness. |
 | **Reversibility** | RV | F / T / P / I | 0.0 / 3.3 / 6.7 / 10.0 | Whether the damage can be undone. Fully reversible = spontaneous recovery. Temporary = resolves with clinical support. Partial = incomplete recovery even with intervention. Irreversible = permanent neural change. |
-| **Neuroplasticity** | NP | N / T / S | 0.0 / 5.0 / 10.0 | Lasting changes to neural pathways from repeated exposure. None = no pathway modification. Temporary = transient plasticity that reverses when exposure stops. Structural = irreversible pathway reorganization via LTP/LTD. |
+| **Neuroplasticity** | NP | N / T / P / S | 0.0 / 3.3 / 6.7 / 10.0 | Lasting changes to neural pathways from repeated exposure. None = no pathway modification. Temporary = short-term synaptic changes that decay within hours to weeks. Partial = moderate synaptic reorganization persisting weeks to months; recovery possible with intervention. Structural = permanent or long-lasting neural pathway reorganization via LTP/LTD. |
+
+Note: NP was expanded from 3 to 4 levels in v1.1.1. The original 3-level scale (N=0, T=5.0, S=10.0) collapsed meaningfully different outcomes. The jump from T(5) to S(10) treated recoverable structural changes the same as permanent rewiring. The new P (Partial) level at 6.7 captures the clinical middle ground: chronic low-level neurofeedback drift, partial cortical map reorganization from sustained stimulation --- scenarios where rehabilitation is possible but not guaranteed. Recalculating all 109 TARA techniques against the 4-level scale shifted 26 scores. Two techniques (motor hijacking, OTA firmware exploitation) dropped from high to medium severity.
 
 Note: "Therapeutic" is a *use case*, not a severity level. A therapeutic intervention that causes structural neuroplasticity scores NP=S regardless of clinical intent --- the NISS score measures impact magnitude, not purpose.
 
@@ -695,6 +723,8 @@ Exploitability metrics characterize the attack vector but do not contribute to t
 
 ### 6.5.4 Vector Format
 
+**NISS v1.1 vector** (6-metric core):
+
 Example: Signal Injection (QIF-T0001)
 
 `NISS:1.1/AV:P/AC:L/PR:L/UI:N/BI:H/CR:H/CD:H/CV:E/RV:T/NP:T/S:U/E:A`
@@ -703,14 +733,20 @@ Example: Signal Injection (QIF-T0001)
 
 - `BI:H` --- High biological impact (6.7): seizure risk, neural tissue stress
 - `CR:H` --- High cognitive reconnaissance impact (6.7): significant thought decoding / neural data inference risk
-- `CD:H` --- High cognitive disruption impact (6.7): significant perception manipulation / identity modification risk
+- `CD:H` --- High cognitive/functional disruption impact (6.7): significant perception manipulation / identity modification risk
 - `CV:E` --- Explicit consent violation (6.7): clear neurological autonomy violation
 - `RV:T` --- Temporary reversibility (3.3): resolves with clinical support
-- `NP:T` --- Temporary neuroplasticity (5.0): transient pathway effects
+- `NP:T` --- Temporary neuroplasticity (3.3): short-term synaptic changes
 
-$$\text{NISS} = \frac{6.7 + 6.7 + 6.7 + 6.7 + 3.3 + 5.0}{6} = \frac{35.1}{6} = 5.9$$
+$$\text{NISS} = \frac{1.0(6.7) + 0.5(6.7) + 0.5(6.7) + 1.0(6.7) + 1.0(3.3) + 1.0(3.3)}{1.0 + 0.5 + 0.5 + 1.0 + 1.0 + 1.0} = \frac{26.7}{5.0} = 5.3$$
 
-**Score: 5.9 / 10.0** --- MEDIUM
+**Score: 5.3 / 10.0** --- MEDIUM
+
+**NISS v2.0 vector** (6-metric core + 5 neurological weighting factors):
+
+`NISS:2.0/AV:P/AC:L/PR:L/UI:N/BI:H/CR:H/CD:H/CV:E/RV:T/NP:T/R:0.7/FI:0.8/PS:0.6/CE:0.5/MC:0.9/S:U/E:A`
+
+The five appended factors (R, FI, PS, CE, MC) provide neurological outcome context for non-DSM conditions. They do not change the core NISS score but enable severity stratification for neurological outcomes (see Section 6.5.5).
 
 **Exploitability qualifiers:**
 
@@ -721,6 +757,8 @@ $$\text{NISS} = \frac{6.7 + 6.7 + 6.7 + 6.7 + 3.3 + 5.0}{6} = \frac{35.1}{6} = 5
 
 ### 6.5.5 Severity Levels
 
+**Core NISS score (6-metric):**
+
 | Range | Severity | Description |
 |-------|----------|-------------|
 | 9.0--10.0 | Critical | Irreversible neural damage or complete cognitive compromise |
@@ -728,9 +766,88 @@ $$\text{NISS} = \frac{6.7 + 6.7 + 6.7 + 6.7 + 3.3 + 5.0}{6} = \frac{35.1}{6} = 5
 | 4.0--6.9 | Medium | Moderate impact, self-resolving or minor intervention |
 | 0.1--3.9 | Low | Minimal human impact, primarily device/data level |
 
+**NISS v2.0 neurological outcome severity (non-DSM conditions):**
+
+| Score | Severity | Example |
+|-------|----------|---------|
+| 9.0--10.0 | Critical | Cortical blindness, complete vestibular failure, central pain syndrome |
+| 7.0--8.9 | High | Persistent tinnitus, chronic neuropathic pain, dystonia, proprioceptive loss |
+| 4.0--6.9 | Medium | Phantosmia, paresthesia, mild tremor, hyperacusis |
+| 1.0--3.9 | Low | Transient phosphenes, temporary ageusia, mild spatial disorientation |
+| 0.1--0.9 | Informational | Silicon-only effects, no neurological impact |
+
+### 6.5.5.1 NISS v2.0 Neurological Extension --- 42 Conditions
+
+NISS v1.x mapped outcomes exclusively to DSM-5-TR psychiatric categories. Neural attacks can also cause purely neurological disruptions that are not psychiatric: tinnitus, anosmia, vestibular dysfunction, tremor, neuropathic pain, cortical blindness. NISS v2.0 adds 42 neurological conditions from ICD-10-CM, using Adams & Victor's *Principles of Neurology* (12th ed., Ropper et al. 2023) as the primary clinical reference.
+
+| Category | Count | Examples | ICD-10-CM Chapters |
+|----------|-------|----------|--------------------|
+| Sensory | 14 | Tinnitus (H93.1), anosmia (R43.0), cortical blindness (H47.61), vertigo (H81.x), ageusia (R43.2), paresthesia (R20.2) | G, H, R |
+| Motor | 8 | Tremor (G25.0), dystonia (G24.x), ataxia (R27.0), spasticity (G80.x) | G, R |
+| Autonomic | 6 | Orthostatic hypotension (I95.1), cardiac arrhythmia (I49.x), thermoregulatory dysfunction (R68.0) | G, I, R |
+| Consciousness | 4 | Syncope (R55), absence seizures (G40.A), altered sensorium (R41.82) | G, R |
+| Speech/Language | 4 | Expressive aphasia (R47.01), receptive aphasia (R47.1), dysarthria (R47.1), alexia (R48.0) | R |
+| Reflex | 3 | Hyperreflexia (R29.2), areflexia (G90.x), abnormal plantar response (R29.2) | G, R |
+| Pain | 3 | Neuropathic pain (G89.x), trigeminal neuralgia (G50.0), central pain syndrome (G89.0) | G |
+
+**Hourglass band mapping:**
+
+| Band | Region | Neurological Conditions |
+|------|--------|------------------------|
+| N7 | Neocortex | Cortical blindness, expressive/receptive aphasia, alexia, central pain |
+| N6 | Limbic | Altered sensorium, emotional dysregulation, autonomic conditions |
+| N5 | Basal Ganglia | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
+| N4 | Thalamus | Tinnitus, paresthesia, central pain syndrome |
+| N3 | Brainstem | Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope |
+| N2 | Cerebellum | Ataxia, intention tremor, dysmetria |
+| N1 | Spinal Cord | Spasticity, hyperreflexia, areflexia, neurogenic bladder |
+| I0 | Interface | All conditions (hardware-biology boundary) |
+
+**Research gaps (not yet mapped):**
+
+| Domain | Gap | Why It Matters |
+|--------|-----|---------------|
+| Autonomic | Heart rate, blood pressure, thermoregulation | Hypothalamic and brainstem BCI targets |
+| Neuroendocrine | Hormonal cascade disruption (cortisol, oxytocin, melatonin) | HPA axis attacks via limbic stimulation |
+| Circadian | Sleep architecture disruption | Suprachiasmatic nucleus stimulation |
+| Immunological | Neuroimmune interactions | Vagus nerve stimulation effects |
+| Developmental | Long-term neuroplasticity effects of chronic stimulation | Pediatric BCI deployment |
+
+**Data architecture:**
+
+```
+shared/qif-neurological-mappings.json    <- Source of truth (42 conditions)
+  |
+src/lib/kql-tables.ts                   <- Flattens to KQL table at build time
+  |
+neurological_conditions table            <- Queryable in BciKql.tsx
+  +-- Joins with: techniques (via bands)
+  +-- Joins with: neural_pathways (via pathway_ids)
+  +-- Joins with: impact_chains (via dsm_code)
+```
+
+**KQL queryability (new in v2.0):**
+
+Individual NISS metric values are now exposed as columns in the `techniques` KQL table:
+
+```kql
+// Find all techniques with high biological impact
+techniques | where niss_bi == "H" or niss_bi == "C"
+
+// Techniques with irreversible damage AND cognitive disruption
+techniques | where niss_rv == "I" and niss_cd != "N"
+
+// Distribution of neuroplasticity scores
+techniques | summarize count() by niss_np
+```
+
+Columns: `niss_vector`, `niss_severity`, `niss_pins`, `niss_bi`, `niss_cr`, `niss_cd`, `niss_cv`, `niss_rv`, `niss_np`.
+
+*Note: All ICD-10-CM and neurological disorder mappings are for threat modeling purposes. NISS produces severity scores corresponding to clinical outcome categories, not clinical diagnoses. The distinction between "this attack technique correlates with outcomes in the tinnitus category" and "this attack causes tinnitus" is maintained throughout.*
+
 ### 6.5.6 Context Profiles
 
-The default equal-weight formula treats all six impact dimensions as equally important. In practice, different deployment contexts have different risk priorities. NISS v1.1 defines four optional context profiles that override the default weights:
+The default weighted formula treats impact dimensions with normalized weights. In practice, different deployment contexts have different risk priorities. NISS defines four optional context profiles that override the default weights:
 
 | Profile | $w_{BI}$ | $w_{CR}$ | $w_{CD}$ | $w_{CV}$ | $w_{RV}$ | $w_{NP}$ | Rationale |
 |---------|----------|----------|----------|----------|----------|----------|-----------|
@@ -739,20 +856,34 @@ The default equal-weight formula treats all six impact dimensions as equally imp
 | **Consumer** | 1.0 | 1.5 | 1.5 | 2.0 | 1.0 | 1.0 | Consent and cognitive impact weigh heavily; users cannot be expected to understand technical risk. |
 | **Military** | 2.0 | 2.0 | 2.0 | 0.5 | 1.5 | 1.5 | Biological and cognitive impact are mission-critical; consent weight reduced in operational context. |
 
-Context profiles are applied using the weighted formula from Section 6.5.2. The profile is recorded in the vector string (e.g., `CP:Clinical`). When no profile is specified, the default equal-weight average applies.
+Context profiles are applied using the weighted formula from Section 6.5.2. The profile is recorded in the vector string (e.g., `CP:Clinical`). When no profile is specified, the default weighted average applies.
 
 ### 6.5.7 Registry Distribution
 
-Across all 109 techniques in the TARA registry, NISS scoring produces the following severity distribution:
+Across all 109 techniques in the TARA registry, NISS scoring (post-v1.1.1 NP recalculation) produces the following severity distribution:
 
 | Severity | Count |
 |----------|-------|
 | Critical (9.0+) | 3 techniques |
-| High (7.0--8.9) | 44 techniques |
-| Medium (4.0--6.9) | 20 techniques |
-| Low (0.1--3.9) | 4 techniques |
+| High (7.0--8.9) | 19 techniques |
+| Medium (4.0--6.9) | 37 techniques |
+| Low (0.1--3.9) | 52 techniques |
+| None | 1 technique |
 
-The skew toward high severity is expected: BCI attacks inherently involve the human body, so most techniques carry significant biological, cognitive, or consent implications that inflate impact scores relative to traditional IT vulnerabilities.
+The NP 4-level rescoring in v1.1.1 shifted 26 technique scores and produced a more balanced distribution than the original v1.0 scoring, which skewed heavily toward high severity. Two techniques (motor hijacking, OTA firmware exploitation) dropped from high to medium. The finer NP granularity revealed their plasticity impact was partial, not structural.
+
+### 6.5.8 Backward Compatibility
+
+- All existing NISS v1.0/v1.1 scores remain valid
+- The scoring formula is unchanged; only weights and NP levels were adjusted
+- CD scores unchanged (definition broadened to include sensory/motor/autonomic, not rescored)
+- NP scores with T now score 3.3 (was 5.0 in v1.0) --- intentional to fix disproportionate midpoint weighting
+- The `niss-parser.ts` supports versions 1.0, 1.1, and 2.0
+- Python recalculation script (`shared/scripts/recalculate-niss.py`) migrates v1.0 CG to v1.1 CR+CD
+
+### 6.5.9 NISS Validation Status
+
+NISS is a **proposed, unvalidated** scoring system. It has not been independently peer-reviewed or adopted by any standards body. The author was invited by FIRST.org to contribute to the CVSS Resources ecosystem but is deliberately declining until at least one independent researcher has reviewed the scoring methodology, attempted to break it, and either confirmed its soundness or identified corrections. See [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-WHITEPAPER-V8-DRAFT.md), Section 19.1 for the full validation roadmap.
 
 ## 6.6 Case Study: Algorithmic Psychosis Induction
 
@@ -1458,6 +1589,8 @@ The full economic analysis supporting this section, including per-company invest
 
 ## 14. Future Work
 
+> **Note:** This section reflects the validation roadmap as of v8.0 (March 2026). Items marked DONE have been completed since v7.0. For the full, current validation roadmap, see [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-WHITEPAPER-V8-DRAFT.md), Section 10 (Future Work) and Section 19 (Research Validation).
+
 ### 14.1 Immediate Priorities
 
 1. **Coherence Metric Validation on Recorded EEG.** Apply $C_s$ to PhysioNet EEGBCI dataset (109 subjects) and BrainFlow live data. Generate synthetic attacks. Publish results regardless of outcome.
@@ -1465,17 +1598,28 @@ The full economic analysis supporting this section, including per-company invest
 3. **Consumer $D_{\text{spec}}$ Validation.** Test the spectral consistency proxy on consumer-grade EEG data (Muse, Emotiv).
 4. **Neurowall Phase 2.** Validate against recorded EEG datasets (PhysioNet, MNE-Python), then deploy on Cortex-M4F reference platform.
 
-### 14.2 Medium-Term Research
+### 14.2 Completed Since v7.0
+
+- **DONE: NISS v1.1 CR/CD split.** CG metric split into Cognitive Reconnaissance (read) and Cognitive/Functional Disruption (write). Weights renormalized.
+- **DONE: NISS v1.1.1 NP 4-level expansion.** Neuroplasticity metric expanded from 3 to 4 levels. 26 TARA scores recalculated.
+- **DONE: NISS v2.0 neurological extension.** 42 ICD-10-CM conditions mapped. Five weighting factors (R, FI, PS, CE, MC) defined. CD broadened to encompass sensory/motor/autonomic disruption.
+- **DONE: KQL datalake.** All NISS metrics, TARA techniques, neurological conditions, and research sources now queryable via KQL tables (`src/lib/kql-tables.ts`). 39 tables, 860+ records.
+- **DONE: BCI Trend Database.** Structured database tracking 26 companies, 34 devices, 44 funding rounds, 25 market estimates. Queryable via KQL.
+- **DONE: Dashboard rebuild.** Single pane of glass with KQL as primary data lake interface.
+
+### 14.3 Medium-Term Research
 
 5. **NSP Reference Implementation.** Build in Python (OpenBCI) and C (firmware-embeddable), integrating liboqs.
 6. **Resonance Shield Feasibility Study.** Determine whether active EM cancellation can be miniaturized to implant-compatible dimensions.
 7. **Intermodulation Detection Research.** Solve the detection gap identified in Section 6.2.
 8. **TARA Clinical Validation.** Populate the clinical and diagnostic projections with practising neurologists and BCI researchers. Validate the ~35-40 Category 1 entries against published neuromodulation protocols.
 9. **TARA Governance Projection.** Map each TARA entry to applicable regulatory frameworks (FDA 524B, EU MDR, ISO 14971) and generate per-technique compliance checklists.
-10. **BCI Trend Database.** A structured database tracking BCI device capabilities, market trajectory, and security posture over time. Currently in development.
-11. **Conference and Peer Review.** Target academic venues (Graz BCI, IEEE, USENIX) for independent evaluation of the framework.
+10. **NISS v2.0 weighting factor calibration.** The five neurological weighting factors (R, FI, PS, CE, MC) need clinical calibration against real patient outcomes. Current values are author assessments.
+11. **NISS weights validation across clinical populations.** Default metric weights need independent review.
+12. **Neuroplasticity causation studies.** Validate the mapping from attack technique to NP score against empirical BCI stimulation data.
+13. **Conference and Peer Review.** Target academic venues (Graz BCI, IEEE, USENIX) for independent evaluation of the framework.
 
-### 14.3 BCI Limits Equation
+### 14.4 BCI Limits Equation
 
 A unified physics-constraint system coupling thermodynamics, electromagnetism, information theory, biocompatibility, and QIF coherence has been derived but is not yet published in peer-reviewed form. The system specifies 12 simultaneous constraints that every BCI implant must satisfy:
 
@@ -1494,7 +1638,7 @@ A unified physics-constraint system coupling thermodynamics, electromagnetism, i
 
 The constraint system extends Marblestone et al. (2013), which addressed thermal and EM constraints for scalable neural recording but did not include Shannon electrode safety, CMOS scaling projections, or QIF coherence as a security constraint. The key novel contribution is coupling the coherence metric (Constraint 6) with physics constraints: as thermal budgets enable higher channel counts, specific TARA techniques become feasible, and the coherence metric must scale accordingly. This constraint system is a candidate for standalone publication.
 
-### 14.4 Long-Term Goals
+### 14.5 Long-Term Goals
 
 12. **Unified QI Equation.** The current coherence metric ($C_s = e^{-S_c}$) captures classical signal integrity. A theoretical extension incorporating quantum terms (ion channel tunneling, entanglement gated by decoherence, indeterminacy) remains a research direction: $QI(b,t) = e^{-(S_c + S_q)}$. This extension requires experimental measurement of the decoherence time $\tau_D$ at the electrode-tissue boundary, which is currently an unresolved question in quantum biology (estimates range from $10^{-13}$ seconds [15] to $10^{-3}$ seconds [55]). If $\tau_D$ proves to be very short, the quantum terms are negligible and $C_s$ is the complete metric. If longer coherence times are confirmed, the quantum terms provide additional attack detection capabilities. The framework is designed so this question is empirically resolvable rather than assumed.
 13. **Quantum State Tomography at the BCI Interface.** Measure the actual $\tau_D$ at a BCI electrode-tissue junction.

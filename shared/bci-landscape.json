@@ -3520,6 +3520,22 @@
       ]
     }
   },
+  "industry_timeline": [
+    { "year": 2004, "label": "BrainGate first implant", "type": "milestone" },
+    { "year": 2012, "label": "Emotiv EPOC launch", "type": "company" },
+    { "year": 2016, "label": "Neuralink founded", "type": "company" },
+    { "year": 2017, "label": "Kernel founded", "type": "company" },
+    { "year": 2019, "label": "CTRL-Labs acquired by Meta ($500M+)", "type": "milestone" },
+    { "year": 2022, "label": "NextMind acquired by Snap", "type": "milestone" },
+    { "year": 2022.3, "label": "Synchron first US implant", "type": "milestone" },
+    { "year": 2023, "label": "FDA FDORA cybersecurity mandate", "type": "regulatory" },
+    { "year": 2023.3, "label": "FDA Neuralink IDE approved", "type": "regulatory" },
+    { "year": 2024, "label": "Neuralink first human implant", "type": "milestone" },
+    { "year": 2024.3, "label": "Colorado neural data law", "type": "regulatory" },
+    { "year": 2024.6, "label": "California SB 1223", "type": "regulatory" },
+    { "year": 2025, "label": "UNESCO neurotechnology recommendation", "type": "regulatory" },
+    { "year": 2026, "label": "QIF/TARA published", "type": "security" }
+  ],
   "policy_timeline": [
     {
       "date": "2021-10",

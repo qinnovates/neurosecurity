@@ -42,6 +42,11 @@ interface BciLandscapeProps {
     year: number;
     value_billion_usd: number;
   }>;
+  industryTimeline?: Array<{
+    year: number;
+    label: string;
+    type: string;
+  }>;
 }
 
 // --- Constants ---
@@ -72,7 +77,7 @@ const EVENT_COLORS: Record<string, string> = {
   security: '#ef4444',
 };
 
-const TIMELINE_EVENTS = [
+const TIMELINE_EVENTS_FALLBACK = [
   { year: 2004, label: 'BrainGate first implant', type: 'milestone' },
   { year: 2012, label: 'Emotiv EPOC launch', type: 'company' },
   { year: 2016, label: 'Neuralink founded', type: 'company' },
@@ -318,7 +323,8 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
   );
 }
 
-function IndustryTimeline() {
+function IndustryTimeline({ events }: { events: typeof TIMELINE_EVENTS_FALLBACK }) {
+  const TIMELINE_EVENTS = events;
   const [hoverEvent, setHoverEvent] = useState<number | null>(null);
 
   const minYear = 2004;
@@ -606,12 +612,13 @@ function FundingGap({
 // --- Main Component ---
 
 export default function BciLandscape(props: BciLandscapeProps) {
-  const { publicationTrends, companies, fundingRounds, marketSize } = props;
+  const { publicationTrends, companies, fundingRounds, marketSize, industryTimeline } = props;
+  const timelineEvents = industryTimeline && industryTimeline.length > 0 ? industryTimeline : TIMELINE_EVENTS_FALLBACK;
 
   return (
     <div className="bg-gray-950 text-gray-100 space-y-6">
       <PublicationChart data={publicationTrends} />
-      <IndustryTimeline />
+      <IndustryTimeline events={timelineEvents} />
       <SecurityPostureGrid companies={companies} />
       <FundingGap fundingRounds={fundingRounds} marketSize={marketSize} />
     </div>
