@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCI Industry Funding</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  h2 { font-size: 14px; color: #94a3b8; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .chart { position: relative; }
+  .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 2px 0;
+    transition: background 0.15s;
+  }
+  .row:hover { background: rgba(255,255,255,0.04); }
+  .label {
+    width: 160px;
+    min-width: 160px;
+    font-size: 11px;
+    color: #cbd5e1;
+    text-align: right;
+    padding-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-container {
+    flex: 1;
+    height: 18px;
+    position: relative;
+    border-radius: 3px;
+    overflow: visible;
+  }
+  .bar {
+    height: 100%;
+    border-radius: 3px;
+    position: relative;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 2px;
+  }
+  .amount {
+    font-size: 10px;
+    color: #94a3b8;
+    margin-left: 8px;
+    white-space: nowrap;
+    min-width: 60px;
+  }
+  .row:hover .amount { color: #e2e8f0; }
+  .tooltip {
+    display: none;
+    position: fixed;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #e2e8f0;
+    z-index: 100;
+    pointer-events: none;
+    max-width: 280px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .tooltip.visible { display: block; }
+  .tooltip .tt-name { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .tooltip .tt-amount { color: #06b6d4; font-weight: 600; }
+  .tooltip .tt-security { color: #f59e0b; font-size: 11px; margin-top: 4px; }
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #94a3b8;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .axis-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(148, 163, 184, 0.12);
+    pointer-events: none;
+  }
+  .axis-label {
+    position: absolute;
+    bottom: -18px;
+    font-size: 9px;
+    color: #64748b;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .scale-note {
+    font-size: 10px;
+    color: #64748b;
+    text-align: right;
+    margin-bottom: 6px;
+  }
+  .no-security { opacity: 0.85; }
+  .total-bar {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #334155;
+  }
+  .total-bar .label { font-weight: 600; color: #06b6d4; }
+  .total-bar .amount { color: #06b6d4; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background: #06b6d4;"></div> Invasive (implanted)</div>
+  <div class="legend-item"><div class="legend-dot" style="background: #8b5cf6;"></div> Non-invasive (wearable)</div>
+  <div class="legend-item"><div class="legend-dot" style="background: #f59e0b;"></div> Therapeutic / Stimulation</div>
+  <div class="legend-item"><div class="legend-dot" style="background: #64748b;"></div> Other / Acquired</div>
+  <div class="legend-item" style="margin-left: auto;"><span style="color: #ef4444;">&#9679;</span> No public security docs</div>
+</div>
+<div class="scale-note">Logarithmic scale</div>
+
+<div class="chart" id="chart"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const companies = [
+  { name: "Neuralink", funding: 1290000000, type: "invasive", security: false },
+  { name: "Science Corp", funding: 552000000, type: "invasive", security: false },
+  { name: "Galvani Bioelectronics", funding: 540000000, type: "therapeutic", security: false },
+  { name: "BrainCo", funding: 370000000, type: "noninvasive", security: false },
+  { name: "Synchron", funding: 345000000, type: "invasive", security: false },
+  { name: "MindMaze", funding: 330000000, type: "noninvasive", security: false },
+  { name: "Merge Labs", funding: 252000000, type: "other", security: false },
+  { name: "Saluda Medical", funding: 250000000, type: "therapeutic", security: false },
+  { name: "Blackrock Neurotech", funding: 210000000, type: "invasive", security: false },
+  { name: "Precision Neuroscience", funding: 183000000, type: "invasive", security: false },
+  { name: "Kernel", funding: 158000000, type: "noninvasive", security: false },
+  { name: "Paradromics", funding: 127000000, type: "invasive", security: false },
+  { name: "Openwater", funding: 100000000, type: "noninvasive", security: false },
+  { name: "GenSight Biologics", funding: 98000000, type: "therapeutic", security: false },
+  { name: "INBRAIN Neuroelectronics", funding: 82800000, type: "invasive", security: false },
+  { name: "CTRL-Labs", funding: 67000000, type: "noninvasive", security: false, note: "Acquired by Meta" },
+  { name: "Neurable", funding: 65000000, type: "noninvasive", security: false },
+  { name: "Pixium Vision", funding: 65000000, type: "invasive", security: false, note: "Acquired by Science Corp" },
+  { name: "InteraXon (Muse)", funding: 60000000, type: "noninvasive", security: false },
+  { name: "ONWARD Medical", funding: 55000000, type: "therapeutic", security: false },
+  { name: "Forest Neurotech", funding: 34000000, type: "invasive", security: false },
+  { name: "Motif Neurotech", funding: 30000000, type: "therapeutic", security: false },
+  { name: "Cognixion", funding: 29000000, type: "noninvasive", security: false },
+  { name: "Subsense", funding: 27000000, type: "invasive", security: false },
+  { name: "Neuroelectrics", funding: 17000000, type: "therapeutic", security: false },
+  { name: "Arctop", funding: 16300000, type: "noninvasive", security: false },
+  { name: "NeuroSky", funding: 15000000, type: "noninvasive", security: false },
+  { name: "Emotiv", funding: 12000000, type: "noninvasive", security: false },
+  { name: "Flow Neuroscience", funding: 11900000, type: "therapeutic", security: false },
+  { name: "Axoft", funding: 8000000, type: "invasive", security: false },
+  { name: "Cortigent", funding: 6400000, type: "invasive", security: false, note: "Second Sight successor" },
+  { name: "NextMind", funding: 5000000, type: "noninvasive", security: false, note: "Acquired by Snap" },
+  { name: "Neurosity", funding: 4000000, type: "noninvasive", security: false },
+  { name: "OpenBCI", funding: 2060000, type: "noninvasive", security: false }
+];
+
+const typeColors = {
+  invasive: "#06b6d4",
+  noninvasive: "#8b5cf6",
+  therapeutic: "#f59e0b",
+  other: "#64748b"
+};
+
+const total = companies.reduce((s, c) => s + c.funding, 0);
+
+function fmt(n) {
+  if (n >= 1e9) return "$" + (n / 1e9).toFixed(2) + "B";
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(0) + "M";
+  return "$" + (n / 1e3).toFixed(0) + "K";
+}
+
+// Logarithmic scale: map log10(funding) to bar width percentage
+const minLog = Math.log10(Math.min(...companies.map(c => c.funding)));
+const maxLog = Math.log10(Math.max(...companies.map(c => c.funding)));
+const logRange = maxLog - minLog;
+
+function logWidth(funding) {
+  const pct = (Math.log10(funding) - minLog) / logRange;
+  return Math.max(2, pct * 100);
+}
+
+// Log scale axis ticks
+const ticks = [1e6, 1e7, 1e8, 1e9];
+
+const chart = document.getElementById("chart");
+const tooltip = document.getElementById("tooltip");
+
+// Build axis grid
+const axisContainer = document.createElement("div");
+axisContainer.style.cssText = "position:relative;margin-left:160px;height:0;margin-bottom:0;";
+ticks.forEach(t => {
+  const pct = (Math.log10(t) - minLog) / logRange * 100;
+  const line = document.createElement("div");
+  line.className = "axis-line";
+  line.style.left = pct + "%";
+  line.style.height = (companies.length * 23 + 40) + "px";
+  axisContainer.appendChild(line);
+});
+chart.appendChild(axisContainer);
+
+// Build rows
+companies.forEach((c, i) => {
+  const row = document.createElement("div");
+  row.className = "row" + (c.security ? "" : " no-security");
+
+  const label = document.createElement("div");
+  label.className = "label";
+  label.textContent = c.name;
+
+  const barContainer = document.createElement("div");
+  barContainer.className = "bar-container";
+
+  const bar = document.createElement("div");
+  bar.className = "bar";
+  const color = typeColors[c.type];
+  bar.style.background = `linear-gradient(90deg, ${color}cc, ${color}88)`;
+  bar.style.width = "0%";
+  setTimeout(() => { bar.style.width = logWidth(c.funding) + "%"; }, 50 + i * 20);
+
+  // Security indicator dot
+  if (!c.security) {
+    const dot = document.createElement("span");
+    dot.style.cssText = "position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#ef4444;";
+    bar.appendChild(dot);
+  }
+
+  barContainer.appendChild(bar);
+
+  const amount = document.createElement("div");
+  amount.className = "amount";
+  amount.textContent = fmt(c.funding);
+
+  row.appendChild(label);
+  row.appendChild(barContainer);
+  row.appendChild(amount);
+
+  row.addEventListener("mouseenter", (e) => {
+    const tt = document.getElementById("tooltip");
+    tt.innerHTML = `
+      <div class="tt-name">${c.name}</div>
+      <div class="tt-amount">${fmt(c.funding)}</div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:2px;">${c.type === 'invasive' ? 'Invasive (implanted)' : c.type === 'noninvasive' ? 'Non-invasive (wearable)' : c.type === 'therapeutic' ? 'Therapeutic / Stimulation' : 'Other'}</div>
+      ${c.note ? '<div style="font-size:10px;color:#64748b;margin-top:2px;">' + c.note + '</div>' : ''}
+      <div class="tt-security">${c.security ? '&#10003; Has security documentation' : '&#10007; No published security documentation'}</div>
+    `;
+    tt.classList.add("visible");
+  });
+  row.addEventListener("mousemove", (e) => {
+    const tt = document.getElementById("tooltip");
+    tt.style.left = Math.min(e.clientX + 12, window.innerWidth - 300) + "px";
+    tt.style.top = (e.clientY - 10) + "px";
+  });
+  row.addEventListener("mouseleave", () => {
+    tooltip.classList.remove("visible");
+  });
+
+  chart.appendChild(row);
+});
+
+// Axis labels
+const axisLabels = document.createElement("div");
+axisLabels.style.cssText = "position:relative;margin-left:160px;height:22px;margin-top:4px;";
+ticks.forEach(t => {
+  const pct = (Math.log10(t) - minLog) / logRange * 100;
+  const lbl = document.createElement("div");
+  lbl.className = "axis-label";
+  lbl.style.left = pct + "%";
+  lbl.textContent = fmt(t);
+  axisLabels.appendChild(lbl);
+});
+chart.appendChild(axisLabels);
+
+// Total row
+const totalRow = document.createElement("div");
+totalRow.className = "row total-bar";
+totalRow.innerHTML = `
+  <div class="label">TOTAL (${companies.length} companies)</div>
+  <div class="bar-container"><div class="bar" style="width:100%;background:linear-gradient(90deg, #06b6d4, #8b5cf6, #f59e0b);height:100%;border-radius:3px;"></div></div>
+  <div class="amount">${fmt(total)}</div>
+`;
+chart.appendChild(totalRow);
+</script>
+</body>
+</html>
