@@ -2,6 +2,10 @@
 
 **A song by Kevin L. Qi**
 
+## Listen
+
+[![Spotify](https://img.shields.io/badge/Spotify-Listen-1DB954?logo=spotify&logoColor=white)](https://open.spotify.com/track/4QPE871AOoNlc8qO8iUbWJ)
+
 ## Inspiration
 
 In Hierocles' *Elements of Ethics*, he alludes to the idea that the societal structure of lines and boundaries in relationships is one where we must pull all layers closer toward the self. Life is very much like looking in a rearview mirror — we're much closer than we appear. We must see friends as family, strangers as friends, humanity as family, and so on. We are all connected in the universe and should not place ourselves at the center of it. Just as humans realized the Earth is no longer the center of the universe, we are still learning what constitutes the self and the relationships among the society in which we reside.
