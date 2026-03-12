@@ -146,6 +146,7 @@ const explorerCounts = {
               <div>
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-tertiary)]">{t.year}</span>
                 <h3 class="text-sm font-bold text-[var(--color-text-primary)]">{t.label}</h3>
+                {t.authors && <p class="text-[10px] text-[var(--color-text-faint)] italic">{t.authors}</p>}
                 <p class="text-xs text-[var(--color-text-muted)]">{t.desc}</p>
               </div>
             </div>
@@ -165,6 +166,7 @@ const explorerCounts = {
               <div>
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-[var(--color-accent-primary)]">{t.year}</span>
                 <h3 class="text-sm font-bold text-[var(--color-text-primary)]">{t.label}</h3>
+                {t.authors && <p class="text-[10px] text-[var(--color-text-faint)] italic">{t.authors}</p>}
                 <p class="text-xs text-[var(--color-text-muted)]">{t.desc}</p>
                 {t.detail && <p class="text-[10px] text-[var(--color-text-faint)] italic mt-0.5">{t.detail}</p>}
               </div>

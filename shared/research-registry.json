@@ -608,86 +608,103 @@
       {
         "year": "1927",
         "label": "Fritz Jahr coins \"Bio-Ethik\"",
+        "authors": "Jahr, F.",
         "desc": "First use of the term in Kosmos journal, proposing a bioethical imperative extending moral consideration to all living things"
       },
       {
         "year": "1947",
         "label": "Nuremberg Code",
+        "authors": "Nuremberg Military Tribunals",
         "desc": "First international ethics code for human experimentation, born from the Doctors' Trial"
       },
       {
         "year": "1964",
         "label": "Declaration of Helsinki",
+        "authors": "World Medical Association",
         "desc": "World Medical Association establishes ethical principles for medical research on humans"
       },
       {
         "year": "1970",
         "label": "Potter revives \"Bioethics\"",
+        "authors": "Potter, V.R.",
         "desc": "Van Rensselaer Potter publishes \"Bioethics: The Science of Survival\" in Perspectives in Biology and Medicine"
       },
       {
         "year": "1974",
         "label": "National Research Act",
-        "desc": "U.S. Congress creates the National Commission for the Protection of Human Subjects in response to the Tuskegee study"
+        "authors": "U.S. Congress",
+        "desc": "Creates the National Commission for the Protection of Human Subjects in response to the Tuskegee study"
       },
       {
         "year": "1979",
         "label": "Belmont Report",
+        "authors": "National Commission for the Protection of Human Subjects",
         "desc": "Three core principles for human subjects research: respect for persons, beneficence, justice"
       },
       {
         "year": "1979",
         "label": "Beauchamp & Childress",
+        "authors": "Beauchamp, T.L., Childress, J.F.",
         "desc": "Principles of Biomedical Ethics: autonomy, beneficence, non-maleficence, justice"
       },
       {
         "year": "2002",
         "label": "\"Neuroethics\" defined",
+        "authors": "Safire, W.",
         "desc": "William Safire's keynote at the Dana Foundation conference establishes the modern field"
       },
       {
         "year": "2006",
         "label": "Brain Overclaim Syndrome",
-        "desc": "Stephen Morse warns neuroscience claims are routinely overclaimed when applied to law. \"Neuromodesty\" follows in 2011"
+        "authors": "Morse, S.J.",
+        "desc": "Warns neuroscience claims are routinely overclaimed when applied to law. \"Neuromodesty\" follows in 2011"
       },
       {
         "year": "2006",
         "label": "Int'l Neuroethics Society",
-        "desc": "Founded at Asilomar by Gazzaniga, Farah, Illes, and Wolpe"
+        "authors": "Gazzaniga, M., Farah, M., Illes, J., Wolpe, P.R.",
+        "desc": "Founded at Asilomar to advance understanding of the ethical implications of neuroscience"
       },
       {
         "year": "2017",
         "label": "Neurorights",
+        "authors": "Ienca, M., Andorno, R.; Yuste, R. et al.",
         "desc": "Ienca & Andorno and Yuste et al. (Nature) independently propose neurorights"
       },
       {
         "year": "2019",
         "label": "OECD Recommendation",
+        "authors": "OECD",
         "desc": "Nine-principle governance for responsible innovation in neurotechnology"
       },
       {
         "year": "2021",
         "label": "Chile Constitution",
+        "authors": "Republic of Chile",
         "desc": "First country to constitutionally protect neurorights (mental integrity)"
       },
       {
         "year": "2023",
         "label": "Latin American Model Law",
+        "authors": "Latin American Parliament (Parlatino)",
         "desc": "Regional model law for harmonized neurorights legislation"
       },
       {
         "year": "2024",
         "label": "US State Neural Data Laws",
+        "authors": "Colorado, California, Montana, Minnesota legislatures",
         "desc": "Colorado, California, Montana, Minnesota enact neural data protections"
       },
       {
         "year": "2024",
         "label": "China BCI Ethics + UN HRC",
+        "authors": "China MoST; UN Human Rights Council; Global Privacy Assembly",
         "desc": "China MoST BCI ethics guidelines. UN HRC advisory on neurotechnology. Global Privacy Assembly neural data resolution"
       },
       {
         "year": "2025",
         "label": "UNESCO + WHO + MIND Act",
+        "authors": "UNESCO; WHO; US Congress",
         "desc": "UNESCO global neurotech ethics framework (194 states). WHO neurotechnology guidance. US MIND Act"
       }
     ],
@@ -868,6 +885,24 @@
         "desc": "First open technical security specification for neural interfaces (in development)",
         "detail": "NISS + TARA + Cs + NSP"
       }
+    ],
+    "ai_ethics": [
+      { "year": "1942", "label": "Asimov's Three Laws", "authors": "Asimov, I.", "desc": "Three Laws of Robotics proposed in 'Runaround'" },
+      { "year": "1950", "label": "Turing's Computing Machinery", "authors": "Turing, A.", "desc": "Alan Turing asks 'Can machines think?' — foundational AI ethics question" },
+      { "year": "1979", "label": "Belmont Report", "authors": "National Commission for the Protection of Human Subjects", "desc": "Respect for persons, beneficence, justice — backbone of research ethics" },
+      { "year": "2004", "label": "Automation Bias", "authors": "Cummings, M.L.", "desc": "Identifies automation bias as a systemic failure mode in human-AI systems" },
+      { "year": "2006", "label": "Neuromodesty", "authors": "Morse, S.J.", "desc": "Warns against brain overclaim syndrome — neuroscience overpromising to law and policy" },
+      { "year": "2017", "label": "Neurorights Proposed", "authors": "Ienca, M., Andorno, R.; Yuste, R. et al.", "desc": "Four neurorights proposed; Yuste et al. publish in Nature" },
+      { "year": "2017", "label": "Off-Switch Problem", "authors": "Hadfield-Menell, D. et al.", "desc": "Formalizes the challenge of safely shutting down AI systems" },
+      { "year": "2018", "label": "Industry Charters", "authors": "Google; OpenAI; Floridi, L. et al.", "desc": "Google AI Principles, OpenAI Charter, AI4People framework" },
+      { "year": "2019", "label": "OECD AI Principles", "authors": "OECD; Jobin, A., Ienca, M., Vayena, E.", "desc": "5 values adopted by G20; survey of 84 AI ethics guidelines" },
+      { "year": "2021", "label": "Chile Neurorights", "authors": "Republic of Chile", "desc": "First country to constitutionally protect neurorights (Law 21.383)" },
+      { "year": "2021", "label": "UNESCO AI Ethics", "authors": "UNESCO", "desc": "193 member states adopt the Recommendation on the Ethics of AI" },
+      { "year": "2022", "label": "Microsoft RAI v2", "authors": "Microsoft", "desc": "Operationalizes responsible AI into a standard with measurable requirements" },
+      { "year": "2023", "label": "NIST AI RMF 1.0 + Anthropic RSP", "authors": "NIST; Anthropic", "desc": "Govern-Map-Measure-Manage framework; Responsible Scaling Policy published" },
+      { "year": "2024", "label": "EU AI Act", "authors": "European Parliament", "desc": "Risk-tiered regulation enters force. Article 14 mandates human oversight for high-risk AI" },
+      { "year": "2025", "label": "MIND Act", "authors": "US Congress", "desc": "Proposed US federal neural data protection for BCIs and wearable neurotech" },
+      { "year": "2026", "label": "AI Security Ethics v0.1", "authors": "Qi, K.", "desc": "Asimov reframed for AI at the neural interface — this proposal" }
     ],
     "scholarship": [
       {

@@ -26,6 +26,9 @@ const policyTimeline = landscape.policy_timeline?.map((p: any) => ({
 const marketSize = landscape.market_data?.market_size_estimates?.map((m: any) => ({
   year: m.year, value_billion_usd: m.value_billion_usd,
 })) || [];
+const industryTimeline = landscape.industry_timeline?.map((t: any) => ({
+  year: t.year, label: t.label, type: t.type,
+})) || [];
 
 // Summary stats from KQL data lake
 const totalCompanies = stats.companies;
@@ -83,6 +86,7 @@ const policyCount = policyTimeline.length;
     fundingRounds={fundingRounds}
     policyTimeline={policyTimeline}
     marketSize={marketSize}
+    industryTimeline={industryTimeline}
   />
 
   <!-- KQL: Query Engine (all tables from data lake) -->

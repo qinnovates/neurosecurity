@@ -10,6 +10,7 @@ title: "AI Ethics: Principles, Frameworks, and the Governance of Artificial Inte
 **Date:** 2026-03-11
 **Status:** Living Document
 **Companion to:** QIF-WHITEPAPER-V8-DRAFT.md, QIF-GOVERNANCE-QUESTIONS.md, QIF-NEUROETHICS.md
+**See also:** [AI-instructions.md](../AI-instructions.md) — operational AI conduct principles that govern how AI systems behave within this project
 
 ---
 
@@ -623,6 +624,14 @@ The regulatory landscape is converging. The Council of Europe Framework Conventi
 QIF is designed to be compatible with these frameworks by default — not because compliance is the sole goal, but because the principles they encode (transparency, safety, human oversight, accountability, fairness) are the same principles that inform trustworthy neural device design. An architecture designed from these principles is more likely to be ready when regulation catches up to the technology. One designed without them may need to be rebuilt.
 
 That is the blank slate argument. The opportunity to embed these principles at the architectural level exists now, before deployment scale makes retrofitting prohibitively difficult.
+
+## Operational AI Conduct Principles
+
+This document covers the academic and regulatory landscape of AI ethics. For the operational principles that govern how AI systems actually behave within this project — Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, neural data at the highest protection tier, and defensive framing only — see **[AI-instructions.md](https://github.com/qinnovates/qinnovate/blob/main/AI-instructions.md)**.
+
+That document translates the frameworks surveyed here into enforceable conduct rules for any AI agent operating on this codebase.
+
+---
 
 > **Epistemic note:** This document compiles AI ethics research for reference purposes. All citations have been verified through Crossref, publisher pages, or institutional records as noted. Framework descriptions are drawn from primary source documents. This is a living document that will be updated as new frameworks, papers, and regulatory instruments emerge. QIF's relationship to these frameworks is that of a proposed technical implementation, not a peer-reviewed contribution to the AI ethics literature itself.
 

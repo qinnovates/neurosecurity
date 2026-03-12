@@ -23,6 +23,51 @@ Sources are organized by domain and sorted newest-first within each domain.
 
 ---
 
+## Querying via KQL Datalake
+
+As this sources list has grown past 328 entries, maintaining and navigating a flat markdown catalog has become expensive — both in terms of context window cost for AI agents and cognitive load for human readers. To address this, research citations are now mirrored into the project's KQL datalake, making them queryable alongside all other project data (TARA techniques, NISS scores, landscape intel, etc.).
+
+### Available Tables
+
+| Table | Description | Data Source |
+|-------|-------------|-------------|
+| `sources` | Market and security gap citations | `shared/landscape.json` |
+| `intel_sources` | 200+ intelligence feed sources with tier/category | `src/data/intel-sources.json` |
+| `research_registry` | Structured researcher/institution/standard entities | `shared/research-registry.json` |
+
+### How to Query
+
+All KQL queries run through the `BciKql` component on the site or programmatically via `src/lib/kql-tables.ts`.
+
+**Basic examples:**
+
+```kql
+-- All sources sorted by category
+sources | sort by category asc
+
+-- Intelligence sources with free RSS feeds
+intel_sources | where tier == "free_rss"
+
+-- Filter paid platforms only
+intel_sources | where tier == "paid"
+
+-- All intel sources by category
+intel_sources | sort by category asc
+```
+
+**Adding new data:** New citations should still be added to all three canonical stores (this file, `paper/references.bib`, and `shared/research-registry.json`). The KQL tables are built from the JSON sources at runtime — update the JSON, and the datalake reflects it automatically.
+
+### Why a Datalake
+
+- **Cost:** A 700+ line markdown file consumes significant tokens every time an AI agent needs to search or reference citations. KQL queries return only the rows that match, keeping context lean.
+- **Cross-referencing:** KQL lets you join citations against TARA techniques, NISS scores, and landscape data in a single query — something a flat file cannot do.
+- **Filtering:** Need only quantum biology papers? Cybersecurity sources? A KQL `where` clause beats Ctrl+F on a growing markdown catalog.
+- **Single interface:** The datalake unifies all project data behind one query language. No more switching between JSON files, markdown tables, and BibTeX entries to find what you need.
+
+This markdown file remains the human-readable catalog of record. The KQL datalake is the programmatic query layer on top of it.
+
+---
+
 ## 1. Quantum Physics & Quantum Biology
 
 ### Decoherence in Biological Systems

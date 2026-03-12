@@ -41,6 +41,10 @@ import hardwareRaw from '../../docs/bci-hardware-inventory.json';
 import intelFeedRaw from '@/data/bci-intel-feed.json';
 import intelSourcesRaw from '@/data/intel-sources.json';
 
+// Research & derivation
+import registryRaw from '@shared/research-registry.json';
+import derivationTimelineRaw from '@shared/derivation-timeline.json';
+
 // Extended neuroscience data
 import cranialNervesRaw from '@shared/qif-cranial-nerves.json';
 import neuroendocrineRaw from '@shared/qif-neuroendocrine.json';
@@ -90,6 +94,8 @@ const automation = automationRaw as any;
 const hardware = hardwareRaw as any;
 const intelFeed = intelFeedRaw as any;
 const intelSources = intelSourcesRaw as any;
+const registry = registryRaw as any;
+const derivationTimeline = derivationTimelineRaw as any;
 const neuro = neuroRaw as any;
 
 /** Refang a defanged URL */
@@ -768,6 +774,41 @@ function buildIntelSources(): Row[] {
   }));
 }
 
+// ═══ Timelines: Unified ═══
+
+function buildNeuroethicsTimeline(): Row[] {
+  return (registry.timelines?.neuroethics || []).map((t: any) => ({
+    year: t.year, label: t.label, authors: t.authors || '', desc: t.desc, domain: 'neuroethics',
+  }));
+}
+
+function buildNeurosecurityTimeline(): Row[] {
+  return (registry.timelines?.neurosecurity || []).map((t: any) => ({
+    year: t.year, label: t.label, authors: t.authors || '', venue: t.venue || '',
+    doi: t.doi || '', desc: t.desc, detail: t.detail || '', domain: 'neurosecurity',
+  }));
+}
+
+function buildAiEthicsTimeline(): Row[] {
+  return (registry.timelines?.ai_ethics || []).map((t: any) => ({
+    year: t.year, label: t.label, authors: t.authors || '', desc: t.desc, domain: 'ai_ethics',
+  }));
+}
+
+function buildIndustryTimeline(): Row[] {
+  return (landscape.industry_timeline || []).map((t: any) => ({
+    year: t.year, label: t.label, type: t.type, domain: 'industry',
+  }));
+}
+
+function buildDerivationMilestones(): Row[] {
+  return (derivationTimeline.milestones || []).map((m: any) => ({
+    id: m.id || '', entry: m.entry || '', date: m.date, title: m.title,
+    description: m.description || '', category: m.category || '', type: m.type || '',
+    domain: 'derivation',
+  }));
+}
+
 // Computed Analysis
 function buildTamSamSom(): Row[] {
   const base2024 = (landscape.market_data?.market_size_estimates || [])
@@ -998,6 +1039,13 @@ export function getKqlTables(): KqlTables {
     convergence: buildConvergence(),
     momentum: buildMomentum(),
     risk_profile: buildRiskProfile(),
+
+    // Timelines (unified)
+    neuroethics_timeline: buildNeuroethicsTimeline(),
+    neurosecurity_timeline: buildNeurosecurityTimeline(),
+    ai_ethics_timeline: buildAiEthicsTimeline(),
+    industry_timeline: buildIndustryTimeline(),
+    derivation_milestones: buildDerivationMilestones(),
 
     // New data lake sources (dynamic)
     cranial_nerves: buildCranialNerves(),
