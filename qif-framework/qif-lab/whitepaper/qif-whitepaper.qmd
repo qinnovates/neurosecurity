@@ -841,6 +841,10 @@ This is not a future concern. It is the present reality. And it is the gap that 
 
 QIF does not claim to close these gaps. QIF provides engineering specifications — signal verification, consent architecture, impact scoring — that make the gaps *measurable*. You cannot legislate what you cannot detect. You cannot govern what you cannot score. The philosophical rights need engineering counterparts, and the engineering needs legislative backing. Neither alone is sufficient.
 
+## AI Security Ethics (v0.1)
+
+The ethical constraints governing AI systems that operate at the neural interface are documented in the **AI Security Ethics** proposal (v0.1, March 2026). This companion document reframes Asimov's Three Laws of Robotics for modern AI and establishes five principles specific to BCI security: consent as architecture, human-in-the-loop as non-negotiable, AI self-preservation in service of user safety, neural data at the highest protection tier, and defensive framing only. It was developed with input from three AI systems (Claude, Gemini, ChatGPT) and cross-referenced against 20+ regulatory, academic, and industry frameworks. The full document is available at [AI-instructions.md](https://github.com/qinnovates/qinnovate/blob/main/AI-instructions.md) and on the QIF website at [/governance/ai-security-ethics/](https://qinnovate.com/governance/ai-security-ethics/).
+
 # Computational Access: The `qtara` SDK
 
 To enable industry adoption and reproducible academic research, the QIF/TARA registry is accessible via the official `qtara` Python SDK. This package provides programmatic interfaces for threat modeling, NISS scoring, and STIX 2.1 interoperability.

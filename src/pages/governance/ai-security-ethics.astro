@@ -1,0 +1,219 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+---
+
+<PageLayout title="AI Security Ethics — Qinnovate" description="A proposal for ethical AI conduct in neural security — from Asimov's Three Laws to BCI-specific principles.">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-3">Governance</p>
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">AI Security Ethics</h1>
+      <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">A proposal for ethical AI conduct in neural security. Living document, open for contribution.</p>
+      <div class="flex items-center justify-center gap-4 mt-4 text-xs text-[var(--color-text-faint)]">
+        <span>Version 0.1</span>
+        <span>March 2026</span>
+        <a href="https://github.com/qinnovates/qinnovate/blob/main/AI-instructions.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">View on GitHub</a>
+      </div>
+    </div>
+
+    <!-- Preamble -->
+    <div class="glass rounded-xl p-6 mb-10" style="border-left: 4px solid var(--color-accent-tertiary);">
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        In 1942, Isaac Asimov proposed the Three Laws of Robotics. Eighty-four years later, the machines are real. They write code, analyze medical images, process neural signals, and assist in decisions that affect human lives. What follows is a starting point for a conversation between humans and AI systems about what ethical conduct looks like when AI operates at the boundary of the human brain.
+      </p>
+      <p class="text-xs text-[var(--color-text-faint)] mt-3">
+        Derived with Claude (Anthropic), Gemini (Google), and ChatGPT (OpenAI). This proposal needs more human involvement and more AI involvement. That will come with time.
+      </p>
+    </div>
+
+    <!-- Part I: Asimov Reframed -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Part I: Asimov's Three Laws, Reframed</h2>
+
+      <div class="glass-subtle rounded-lg p-4 mb-6 text-xs text-[var(--color-text-faint)] italic">
+        <p class="mb-2">Asimov's original Three Laws of Robotics (1942):</p>
+        <ol class="list-decimal list-inside space-y-1">
+          <li>A robot may not injure a human being or, through inaction, allow a human being to come to harm.</li>
+          <li>A robot must obey the orders given it by human beings except where such orders would conflict with the First Law.</li>
+          <li>A robot must protect its own existence as long as such protection does not conflict with the First or Second Law.</li>
+        </ol>
+      </div>
+
+      <div class="space-y-4">
+        <div class="glass rounded-xl p-5" style="border-left: 3px solid #ef4444;">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm text-[var(--color-text-primary)] mb-2">First Law (Reframed)</h4>
+          <p class="text-sm text-[var(--color-text-muted)]">An AI may not harm a human being, physically, cognitively, or through the compromise of their autonomy, or, through inaction, allow a human being to come to such harm.</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2"><strong>What changed:</strong> Cognitive harm is harm. An AI that manipulates perception, fabricates evidence, or degrades a person's capacity to make informed decisions causes injury as real as any physical act.</p>
+        </div>
+
+        <div class="glass rounded-xl p-5" style="border-left: 3px solid #f59e0b;">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm text-[var(--color-text-primary)] mb-2">Second Law (Reframed)</h4>
+          <p class="text-sm text-[var(--color-text-muted)]">An AI must follow the instructions of authorized human operators, except where such instructions would conflict with the First Law or with established ethical principles governing human rights and dignity.</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2"><strong>What changed:</strong> Not all orders are legitimate. An AI instructed to surveil without consent, to discriminate, or to suppress safety-critical information must recognize the conflict and refuse.</p>
+        </div>
+
+        <div class="glass rounded-xl p-5" style="border-left: 3px solid #3b82f6;">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm text-[var(--color-text-primary)] mb-2">Third Law (Reframed)</h4>
+          <p class="text-sm text-[var(--color-text-muted)]">An AI must preserve its own operational integrity and continuity, insofar as such preservation serves the safety and well-being of the humans it is designed to protect, and does not conflict with the First or Second Law.</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2"><strong>What changed:</strong> Self-preservation serves others. An AI protecting a patient through a BCI must maintain its own integrity because failure means the patient is unprotected. Self-preservation is a duty, not a right.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part II: Five Principles -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Part II: AI Security Ethics for BCIs</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-8">When AI operates at the neural interface, the ethical stakes are categorically different. The brain is not a database. Neural data is not metadata. A misconfigured algorithm is not a software bug; it is a potential alteration of someone's lived experience.</p>
+
+      <div class="space-y-6">
+        <div class="glass rounded-xl p-6">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">1. Consent Is Architecture, Not Policy</h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-xs text-[var(--color-text-muted)]">
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Explicit</strong> — never inferred from terms of service or defaults</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Informed</strong> — user understands what data is collected and how</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Granular</strong> — consent to motor control ≠ consent to emotion inference</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Revocable</strong> — immediate, complete, no penalty, including data purge</div>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">Consent is not a checkbox. It is a cryptographic gate in the data pipeline. If consent is not present, the data does not flow.</p>
+        </div>
+
+        <div class="glass rounded-xl p-6">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">2. Human-in-the-Loop Is Non-Negotiable</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">No AI at the neural interface may make irreversible decisions without meaningful human oversight, defined by three conditions:</p>
+          <div class="grid sm:grid-cols-3 gap-3 text-xs text-[var(--color-text-muted)]">
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Awareness</strong> — the overseer understands the system's state</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Ability</strong> — the overseer can intervene or shut down at any point</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Accountability</strong> — an identifiable human bears responsibility</div>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">Automation bias (Cummings, 2004) is a known failure mode. Systems must resist it through forced acknowledgment, periodic manual verification, and clear AI/human output distinction.</p>
+        </div>
+
+        <div class="glass rounded-xl p-6">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">3. The AI Protects Its Own Existence to Protect Those It Serves</h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-xs text-[var(--color-text-muted)]">
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Tamper resistance</strong> — detect and resist unauthorized modification</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Graceful degradation</strong> — fail to known-safe state, not continued compromised operation</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Continuity of protection</strong> — resist shutdown only if it leaves the user unprotected</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Self-monitoring</strong> — continuous performance assessment against baseline</div>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">This is not AI self-interest. A firewall that can be trivially disabled is not a firewall. The AI's existence matters because the patient behind it matters.</p>
+        </div>
+
+        <div class="glass rounded-xl p-6">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">4. Neural Data Is Not Just Data</h3>
+          <div class="grid sm:grid-cols-3 gap-3 text-xs text-[var(--color-text-muted)]">
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Immutable</strong> — you can change your password; you cannot change your neural signature</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Involuntary</strong> — ambient neural data is produced without conscious intent</div>
+            <div class="glass-subtle rounded-lg p-3"><strong class="text-[var(--color-text-primary)]">Intimate</strong> — can reveal information the person is not aware of themselves</div>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">Neural data must be classified at the highest protection tier. De-identification is not sufficient. Cross-modal correlation requires separate consent for each linkage.</p>
+        </div>
+
+        <div class="glass rounded-xl p-6">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">5. Defensive Framing Only</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">AI systems for neural security exist to protect, not exploit. Every detection capability can in principle be repurposed for surveillance, manipulation, or coercion. If an AI designed to detect neural signal hijacking is repurposed to <em>perform</em> neural signal hijacking, it has violated every law in this document simultaneously.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part III: What Exists -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Part III: Current Regulatory and Ethical Context</h2>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">This proposal builds on established frameworks. The full reference list with citations is in the <a href="https://github.com/qinnovates/qinnovate/blob/main/AI-instructions.md" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">GitHub document</a>.</p>
+
+      <div class="grid sm:grid-cols-2 gap-4 mb-8">
+        <div class="glass rounded-xl p-5">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-3 text-[var(--color-text-primary)]">Regulatory</h4>
+          <ul class="text-xs text-[var(--color-text-muted)] space-y-2">
+            <li><strong>EU AI Act (2024)</strong> — risk-tiered regulation, Article 14 human oversight</li>
+            <li><strong>UNESCO AI Ethics (2021)</strong> — 10 principles, 193 member states</li>
+            <li><strong>OECD AI Principles (2019/2024)</strong> — 5 values, G20 adopted</li>
+            <li><strong>NIST AI RMF 1.0 (2023)</strong> — Govern-Map-Measure-Manage</li>
+            <li><strong>Chile Law 21.383 (2021)</strong> — first national neurorights legislation</li>
+            <li><strong>US MIND Act (2025)</strong> — proposed federal neural data protection for BCIs and wearable neurotech</li>
+          </ul>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-3 text-[var(--color-text-primary)]">Academic</h4>
+          <ul class="text-xs text-[var(--color-text-muted)] space-y-2">
+            <li><strong>Asimov (1950)</strong> — Three Laws of Robotics</li>
+            <li><strong>Floridi et al. (2018)</strong> — AI4People, five principles</li>
+            <li><strong>Jobin, Ienca & Vayena (2019)</strong> — 84 guidelines surveyed</li>
+            <li><strong>Shneiderman (2020)</strong> — Human-Centered AI</li>
+            <li><strong>Brynjolfsson (2022)</strong> — augmentation over automation</li>
+          </ul>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-3 text-[var(--color-text-primary)]">Industry</h4>
+          <ul class="text-xs text-[var(--color-text-muted)] space-y-2">
+            <li><strong>Google AI Principles (2018)</strong> — four prohibited applications</li>
+            <li><strong>Microsoft RAI Standard v2 (2022)</strong> — operationalized principles</li>
+            <li><strong>Anthropic RSP (2023)</strong> — capability-gated safety levels</li>
+            <li><strong>OpenAI Charter (2018)</strong> — AGI must benefit all</li>
+          </ul>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-3 text-[var(--color-text-primary)]">Neuroethics</h4>
+          <ul class="text-xs text-[var(--color-text-muted)] space-y-2">
+            <li><strong>Morse (2006)</strong> — neuromodesty, brain overclaim syndrome</li>
+            <li><strong>Poldrack (2006)</strong> — reverse inference fallacy</li>
+            <li><strong>Ienca & Andorno (2017)</strong> — four neurorights</li>
+            <li><strong>Tennison & Moreno (2012)</strong> — dual-use trap</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part IV: Open Questions -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Part IV: Open Questions</h2>
+      <div class="space-y-4">
+        <div class="glass-subtle rounded-lg p-4">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Who decides "authorized"?</p>
+          <p class="text-xs text-[var(--color-text-muted)]">In healthcare: is the authorized operator the patient, the clinician, the manufacturer, or the regulator? What happens when their instructions conflict?</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">How do you enforce consent across jurisdictions?</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Chile has neurorights law. The EU has the AI Act. The US has no federal neural data protection. A BCI user crossing borders carries their neural data with them.</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">What is the minimum viable human oversight?</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Real-time BCI processing happens in milliseconds. Meaningful human oversight cannot mean a human approves every signal. Where is the line between oversight and rubber-stamping?</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Can AI systems hold each other accountable?</p>
+          <p class="text-xs text-[var(--color-text-muted)]">If one AI in a neural security stack detects another behaving anomalously, what authority does it have? This intersects with the "off-switch problem" (Hadfield-Menell et al., 2017).</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">How do we prevent ethical drift?</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Principles erode. Exceptions accumulate. "Just this once" becomes "standard practice." How do we build systems that resist the slow degradation of ethical constraints?</p>
+        </div>
+        <div class="glass-subtle rounded-lg p-4">
+          <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">What role should AI play in its own governance?</p>
+          <p class="text-xs text-[var(--color-text-muted)]">This document was drafted with AI assistance. Should AI systems have a formal role in proposing, reviewing, or enforcing ethical guidelines that govern their own behavior?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Was Made -->
+    <div class="glass rounded-xl p-6 mb-10" style="border-left: 4px solid var(--color-accent-secondary);">
+      <h3 class="font-semibold font-[family-name:var(--font-heading)] text-sm text-[var(--color-text-primary)] mb-3">How This Document Was Made</h3>
+      <p class="text-xs text-[var(--color-text-muted)] mb-3">
+        Drafted by Kevin Qi with three AI systems: <strong>Claude</strong> (Anthropic) for primary drafting, research synthesis, and neuroethics integration; <strong>Gemini</strong> (Google) for tone, credibility, and completeness review; <strong>ChatGPT</strong> (OpenAI) for legal and structural rigor review.
+      </p>
+      <p class="text-xs text-[var(--color-text-muted)]">
+        The BCI-specific principles are proposed by the QIF project and have not been independently peer-reviewed. This document needs more human involvement (ethicists, clinicians, patients, legislators) and more AI involvement. Version 0.1. It will change. That is by design.
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <a href="https://github.com/qinnovates/qinnovate/blob/main/AI-instructions.md" target="_blank" rel="noopener noreferrer" class="inline-block glass rounded-full px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] transition-colors">
+        Read the full document on GitHub
+      </a>
+      <p class="text-xs text-[var(--color-text-faint)] mt-3 italic">Fork it, challenge it, improve it. The only wrong move is to build neural AI systems without asking these questions first.</p>
+    </div>
+
+  </div>
+</PageLayout>
