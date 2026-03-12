@@ -682,29 +682,59 @@ This is what neurosecurity governance looks like in practice: not a blanket proh
 
 ## 6.8 NISS: Neural Impact Scoring System
 
-The **NISS v1.1** extends CVSS v4.0 with six dimensions specific to human-digital interconnection.
+**NISS v1.1** extends CVSS v4.0 with six dimensions specific to human-digital interconnection. The original v1.0 used five metrics, with a single "Cognitive Integrity" (CG) dimension. v1.1 splits CG into two distinct attack vectors — **Cognitive Reconnaissance (CR)** for read-side attacks (neural data inference, signal classification, state estimation) and **Cognitive/Functional Disruption (CD)** for write-side attacks (perception manipulation, identity modification, cognitive coercion). This split reflects a fundamental difference in both mechanism and mitigation: defending against neural eavesdropping requires different controls than defending against neural injection.
+
+The six NISS v1.1 metrics:
+
+| Metric | Code | What It Measures | Scale |
+|--------|------|-----------------|-------|
+| Biological Impact | BI | Physical damage to neural tissue | N / L / H / C |
+| Cognitive Reconnaissance | CR | Unauthorized neural read access | N / L / H / C |
+| Cognitive/Functional Disruption | CD | Unauthorized disruption to cognition, sensory, motor, or autonomic function | N / L / H / C |
+| Consent Violation | CV | Degree of autonomy compromise | N / P / E / I |
+| Reversibility | RV | Whether damage can be undone | F / T / P / I |
+| Neuroplasticity | NP | Whether the brain is physically reorganized | N / T / P / S |
+
+**Scoring formula:**
+
+$$\text{NISS} = \frac{\sum w_i \times M_i}{\sum w_i}$$
+
+Default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0. CR and CD are weighted at 0.5 each to maintain backward compatibility with v1.0's single CG dimension — keeping the cognitive contribution at 20% of the total score rather than inflating it to 33%.
+
+Four optional **context profiles** override these defaults for domain-specific scoring:
+
+| Profile | BI | CR | CD | CV | RV | NP | Use Case |
+|---------|----|----|----|----|----|----|----------|
+| Clinical | 2.0 | 1.0 | 2.0 | 1.0 | 2.0 | 1.0 | Patient safety emphasis |
+| Research | 1.0 | 2.0 | 1.5 | 2.0 | 1.0 | 1.5 | Consent and cognition focus |
+| Consumer | 1.0 | 2.0 | 1.0 | 2.0 | 1.0 | 1.0 | Privacy and consent focus |
+| Military | 2.0 | 2.0 | 2.0 | 0.5 | 1.5 | 1.5 | Dual-use threat focus |
+
+**PINS (Potential Impact to Neural Safety):** A binary flag triggered when BI ∈ {H, C} or RV = I. Across 109 catalogued techniques, 33 carry this flag (30.3%).
+
+**Neurological Extension (v1.1):** NISS now maps to 42 neurological conditions across 7 categories (sensory, motor, autonomic, consciousness, speech/language, reflex, pain) using ICD-10-CM chapters G, H, and R — extending beyond the original DSM-5-TR psychiatric mappings. The NP metric was expanded from 3 to 4 levels, adding Temporary (T) between None and Partial to capture short-term synaptic changes that decay within hours to weeks.
 
 ```{python}
 #| label: fig-niss-radar
-#| fig-cap: "NISS Radar Chart: A profile of a 'Neural Signal Hijacking' event. Values represent impact severity (0-10)."
+#| fig-cap: "NISS Radar Chart: A profile of a 'Neural Signal Hijacking' event. Values represent impact severity (0-10) across all six v1.1 dimensions."
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-labels = ['Biological (BI)', 'Cognitive (CG)', 'Consent (CV)', 'Reversibility (RV)', 'Neuroplasticity (NP)']
-stats = [8, 9, 10, 4, 7] # Example profile
+labels = ['Biological (BI)', 'Cognitive Recon (CR)', 'Cognitive Disruption (CD)', 'Consent (CV)', 'Reversibility (RV)', 'Neuroplasticity (NP)']
+stats = [8, 7, 9, 10, 4, 7] # Example profile: Neural Signal Hijacking
 
 angles = np.linspace(0, 2*np.pi, len(labels), endpoint=False).tolist()
 stats += stats[:1]
 angles += angles[:1]
 
-fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+fig, ax = plt.subplots(figsize=(7, 7), subplot_kw=dict(polar=True))
 ax.fill(angles, stats, color='#9b59b6', alpha=0.3)
 ax.plot(angles, stats, color='#9b59b6', linewidth=2)
 ax.set_yticklabels([])
 ax.set_xticks(angles[:-1])
-ax.set_xticklabels(labels, fontsize=10, fontweight='bold')
-ax.set_title('Neural Impact Profile (NISS)', size=15, pad=20)
+ax.set_xticklabels(labels, fontsize=9, fontweight='bold')
+ax.set_title('Neural Impact Profile (NISS v1.1)', size=15, pad=20)
 plt.show()
 ```
 
@@ -753,6 +783,63 @@ predictions = [
 
 pd.DataFrame(predictions, columns=["#", "Prediction", "How to Test", "Expected Outcome"])
 ```
+
+# The Gap
+
+```{python}
+#| label: fig-neurorights-pentagon
+#| fig-cap: "Neurorights Pentagon: Technique counts across 109 TARA techniques mapped to each of the five proposed neurorights. Mental Integrity (81) and Mental Privacy (64) are operationalized by QIF with engineering-level specifications. Equal Access (0) is a distributive justice concern addressed at the governance layer."
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+rights = ['Mental\nIntegrity', 'Mental\nPrivacy', 'Cognitive\nLiberty', 'Psychological\nContinuity', 'Equal\nAccess']
+counts = [81, 64, 60, 28, 0]
+colors = ['#ef4444', '#f59e0b', '#3b82f6', '#8b5cf6', '#10b981']
+
+angles = np.linspace(0, 2*np.pi, len(rights), endpoint=False).tolist()
+counts_plot = counts + counts[:1]
+angles += angles[:1]
+
+fig, ax = plt.subplots(figsize=(7, 7), subplot_kw=dict(polar=True))
+ax.fill(angles, counts_plot, color='#8b5cf6', alpha=0.15)
+ax.plot(angles, counts_plot, color='#8b5cf6', linewidth=2)
+
+for i, (angle, count, color, right) in enumerate(zip(angles[:-1], counts, colors, rights)):
+    ax.scatter(angle, count, color=color, s=120, zorder=5, edgecolors='white', linewidth=2)
+    offset = 8 if count > 0 else 3
+    ax.annotate(str(count), xy=(angle, count), fontsize=12, fontweight='bold',
+                ha='center', va='bottom', color=color,
+                xytext=(0, offset), textcoords='offset points')
+
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(rights, fontsize=10, fontweight='bold')
+ax.set_yticklabels([])
+ax.set_ylim(0, 95)
+ax.set_title('Neurorights Pentagon: Five Rights, Quantified', size=14, pad=25, fontweight='bold')
+plt.tight_layout()
+plt.show()
+```
+
+Five neurorights have been proposed to protect the brain: Mental Privacy, Cognitive Liberty, Mental Integrity, Psychological Continuity, and Equal Access. Philosophical frameworks define what these rights mean. None specify how a BCI system would actually enforce them.
+
+## Mental Integrity: "Unaltered" Is Not "Self-Originating"
+
+The critical gap is in Mental Integrity. Current formulations protect against *modification* of neural signals — tampering, injection, disruption. But we are building systems that can inject, simulate, or reshape neural signals as a core function. A perfectly intact signal that was never generated by your brain passes every integrity check and violates everything Mental Integrity is supposed to protect.
+
+This is not a theoretical edge case. Deep Brain Stimulation injects synthetic signals as therapy. Sensory prostheses generate neural patterns the brain never produced. Neurofeedback systems reshape baseline activity over time. In each case, the signal arrives "unaltered" at the point of measurement — it was never tampered with because it was synthetic from the start.
+
+Governance models must distinguish between "unaltered" and "self-originating." That distinction requires engineering, not philosophy. It requires a metric that can verify whether a signal's statistical properties match your baseline neural signature — whether the signal belongs to you or was placed there. No framework had built that. QIF's Coherence Metric and NISS consent dimension are a first attempt at operationalizing this distinction, but they remain proposed and unvalidated.
+
+## Equal Access: The Gap We Already Know
+
+The Equal Access gap is the most visible and the least technical. BCI technology is expensive, concentrated in wealthy institutions, and advancing fastest in military and consumer entertainment applications. The people who need it most — patients with locked-in syndrome, spinal cord injuries, treatment-resistant neurological conditions — are the last to benefit and the least represented in design decisions.
+
+This is not a future concern. It is the present reality. And it is the gap that requires the least engineering and the most political will to close. Equal Access is a distributive justice problem: who gets the technology, who designs the interfaces, who sets the prices, and who decides what "access" means when the device is inside your skull. No amount of protocol design solves this without legislative and economic intervention.
+
+## What The Gap Means for QIF
+
+QIF does not claim to close these gaps. QIF provides engineering specifications — signal verification, consent architecture, impact scoring — that make the gaps *measurable*. You cannot legislate what you cannot detect. You cannot govern what you cannot score. The philosophical rights need engineering counterparts, and the engineering needs legislative backing. Neither alone is sufficient.
 
 # Computational Access: The `qtara` SDK
 

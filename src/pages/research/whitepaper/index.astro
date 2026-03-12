@@ -298,7 +298,7 @@ const tacticColors: Record<string, string> = {
             </div>
           </div>
           <p class="text-sm text-[var(--color-text-muted)]">
-            We are not trying to fabricate steel from iron ore. We are engineering a metaphorical polymer. <strong>AI can be the synthetic polymer</strong> &mdash; providing guardrails designed by industry experts with precision that static rules cannot match. But the challenge is ensuring patients remain in full control and that <strong>configuration drift</strong> does not occur. Drift is too common in code, and at wide scale with neural devices, it would be catastrophic.
+            We are not trying to fabricate steel from iron ore. We are engineering a metaphorical polymer. <strong>AI has the potential to be that polymer</strong> &mdash; but only if it is crafted with precision. The fundamentals are non-negotiable: human-in-the-loop oversight at every decision boundary, consent that is explicit and informed rather than implicit or buried in terms of service, and neurorights enforced at the architecture level rather than assumed by policy. Without these constraints, AI-driven neural security becomes AI-driven neural surveillance. The difference between the two is not the technology &mdash; it is the governance. Beyond ethics, the engineering challenge is equally unforgiving: <strong>configuration drift</strong> must not occur. Drift is too common in code, and at wide scale with neural devices, it would be catastrophic.
           </p>
         </div>
 
@@ -622,7 +622,7 @@ const tacticColors: Record<string, string> = {
           <p class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2">The gap in numbers</p>
           <p class="text-sm text-[var(--color-text-muted)]">
             Of the catalogued techniques, {stats.nissGapPercentage}% possess neural-specific impacts that CVSS v4.0 cannot adequately express.
-            Prior to NISS, critical dimensions such as biological impact, cognitive integrity, consent violation, reversibility, and neuroplastic change were not quantifiable within existing vulnerability scoring frameworks.
+            Prior to NISS, critical dimensions such as biological impact, cognitive reconnaissance, cognitive disruption, consent violation, reversibility, and neuroplastic change were not quantifiable within existing vulnerability scoring frameworks.
           </p>
         </div>
       </section>
@@ -989,39 +989,45 @@ const tacticColors: Record<string, string> = {
         <!-- NISS Formula -->
         <div class="glass rounded-xl p-6 mb-8">
           <p class="text-center font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4 text-lg">
-            NISS = (BI + CR + CD + CV + RV + NP) / 6
+            NISS = &Sigma;(w<sub>i</sub> &times; M<sub>i</sub>) / &Sigma;(w<sub>i</sub>)
           </p>
           <div class="grid grid-cols-6 gap-3 text-center text-xs">
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">BI</div>
               <div class="text-[var(--color-text-faint)]">Biological Impact</div>
+              <div class="text-[var(--color-text-faint)] opacity-60">w=1.0</div>
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CR</div>
               <div class="text-[var(--color-text-faint)]">Cognitive Reconnaissance</div>
+              <div class="text-[var(--color-text-faint)] opacity-60">w=0.5</div>
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CD</div>
               <div class="text-[var(--color-text-faint)]">Cognitive/Functional Disruption</div>
+              <div class="text-[var(--color-text-faint)] opacity-60">w=0.5</div>
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">CV</div>
               <div class="text-[var(--color-text-faint)]">Consent Violation</div>
+              <div class="text-[var(--color-text-faint)] opacity-60">w=1.0</div>
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">RV</div>
               <div class="text-[var(--color-text-faint)]">Reversibility</div>
+              <div class="text-[var(--color-text-faint)] opacity-60">w=1.0</div>
             </div>
             <div>
               <div class="text-sm font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">NP</div>
               <div class="text-[var(--color-text-faint)]">Neuroplasticity</div>
+              <div class="text-[var(--color-text-faint)] opacity-60">w=1.0</div>
             </div>
           </div>
         </div>
 
         <div class="prose mb-8">
           <p>
-            NISS scores are computed as an equal-weighted average of all assessed metrics, normalized to a 0&ndash;10 scale. Severity bands align with CVSS thresholds: 0.0 (None), 0.1&ndash;3.9 (Low), 4.0&ndash;6.9 (Medium), 7.0&ndash;8.9 (High), and 9.0&ndash;10.0 (Critical). Optional context profiles (clinical, research, consumer, military) allow for differentiated weighting of each metric.
+            NISS scores are computed as a weighted average of all assessed metrics, normalized to a 0&ndash;10 scale. Default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0. CR and CD are weighted at 0.5 each to maintain backward compatibility with v1.0&rsquo;s single Cognitive Integrity dimension &mdash; keeping cognitive contribution at 20% of the total score. Severity bands align with CVSS thresholds: 0.0 (None), 0.1&ndash;3.9 (Low), 4.0&ndash;6.9 (Medium), 7.0&ndash;8.9 (High), and 9.0&ndash;10.0 (Critical). Four context profiles (Clinical, Research, Consumer, Military) override these defaults for domain-specific scoring.
           </p>
         </div>
 
@@ -1184,6 +1190,34 @@ const tacticColors: Record<string, string> = {
           <p>
             Three additional neurorights proposed by Yuste and the NeuroRights Foundation (2017) and reinforced by UNESCO's 2025 Recommendation &mdash; <strong>equitable access to mental augmentation</strong>, <strong>protection from algorithmic bias</strong>, and <strong>free will</strong> &mdash; are not mapped in the threat taxonomy. These are distributive justice and governance concerns: no attack technique directly violates &ldquo;fair access,&rdquo; and algorithmic bias arises from systems processing neural data, not from attacks on the interface itself. Free will substantially overlaps with Cognitive Liberty in the context of threat-to-harm mappings. These rights are addressed at QIF's governance layer rather than the security layer. See <a href="/governance/">Governance &rarr; Neuroethics Alignment</a> for the full mapping.
           </p>
+        </div>
+
+        <!-- The Gap -->
+        <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid #ef4444;">
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">The Gap</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            Five neurorights have been proposed. Philosophical frameworks define what they mean. None specify how a BCI system would actually enforce them.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Mental Integrity: &ldquo;unaltered&rdquo; is not &ldquo;self-originating&rdquo;</p>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                Current MI formulations protect against <em>modification</em> of neural signals &mdash; tampering, injection, disruption. But we are building systems that inject, simulate, or reshape neural signals as a core function. A perfectly intact signal that was never generated by your brain passes every integrity check and violates everything MI is supposed to protect. Deep Brain Stimulation injects synthetic signals as therapy. Sensory prostheses generate neural patterns the brain never produced. The signal arrives &ldquo;unaltered&rdquo; at the point of measurement because it was synthetic from the start. Governance must distinguish between &ldquo;unaltered&rdquo; and &ldquo;self-originating.&rdquo; That distinction requires engineering, not philosophy &mdash; a metric that verifies whether a signal's statistical properties match your baseline neural signature. QIF's Coherence Metric and NISS consent dimension are a first attempt at operationalizing this distinction.
+              </p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Equal Access: the gap we already know</p>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                BCI technology is expensive, concentrated in wealthy institutions, and advancing fastest in military and consumer entertainment. The people who need it most &mdash; patients with locked-in syndrome, spinal cord injuries, treatment-resistant neurological conditions &mdash; are the last to benefit and the least represented in design decisions. This is not a future concern. It is the present reality. Equal Access is a distributive justice problem that requires the least engineering and the most political will to close. No amount of protocol design solves this without legislative and economic intervention.
+              </p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">What the gap means</p>
+              <p class="text-xs text-[var(--color-text-muted)]">
+                QIF does not claim to close these gaps. QIF provides engineering specifications &mdash; signal verification, consent architecture, impact scoring &mdash; that make the gaps <em>measurable</em>. You cannot legislate what you cannot detect. You cannot govern what you cannot score. The philosophical rights need engineering counterparts, and the engineering needs legislative backing. Neither alone is sufficient.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1571,8 +1605,8 @@ const tacticColors: Record<string, string> = {
           <div class="glass rounded-xl p-5 flex gap-4">
             <div class="w-1 rounded-full bg-[var(--color-accent-primary)] shrink-0"></div>
             <div>
-              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-1">NISS v1.1</h4>
-              <p class="text-xs text-[var(--color-text-muted)]">Refine scoring weights based on clinical validation. Explore temporal metrics for techniques that escalate over time.</p>
+              <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-1">NISS v2.0</h4>
+              <p class="text-xs text-[var(--color-text-muted)]">Five new weighting factors (reversibility severity, functional impact domains, pathway specificity, clinical evidence strength, modality criticality). Extended clinical outcome mapping across 5 sensory modalities with ICD-10-CM coverage. Calibrate weights via expert elicitation and interrater reliability studies.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -1640,7 +1674,7 @@ const tacticColors: Record<string, string> = {
           </div>
           <div class="glass-subtle rounded-lg p-4">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">NISS weights not calibrated</p>
-            <p class="text-xs text-[var(--color-text-muted)]">All six NISS metrics use equal weights (1.0) in the default profile. Context profiles (Clinical, Research, Consumer, Military) propose differential weights, but these have not been calibrated against empirical data or expert elicitation.</p>
+            <p class="text-xs text-[var(--color-text-muted)]">Default weights (BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0) were set analytically to maintain backward compatibility with v1.0, not derived from empirical data. Context profiles (Clinical, Research, Consumer, Military) propose differential weights, but none have been calibrated against clinical outcomes or expert elicitation.</p>
           </div>
           <div class="glass-subtle rounded-lg p-4">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">No interrater reliability study</p>
