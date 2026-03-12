@@ -90,7 +90,7 @@ That's the beauty of art — its interpretation is left up to you. We all see th
 
 **"Chalkboard and line"** carries more than one meaning:
 
-- Children who fought and have died for this country. A friend came back from war and was never the same.
+- Young men who signed their lives to fight for the freedom we live. A friend came back from war and was never the same.
 - These are the people who rely on BCIs most.
 - These are the people I know, the people that make me, the people who keep me fighting for their rights when I can hardly stand.
 - I use this when I need motivation and drive to help me push through to the finish.
