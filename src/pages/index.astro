@@ -29,20 +29,16 @@ const neurorightsSet = new Set<string>(['EA']); // Equal Access is structural, n
 techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
 const neurorightsCount = neurorightsSet.size;
 
-// Curated essential reading slugs (strongest posts for neuroethics audience)
-const essentialSlugs = [
-  '2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses',
-  '2026-02-16-your-brain-has-rights-we-counted-them',
-  '2026-02-11-how-malicious-apps-derive-your-personal-biometrics',
-  '2026-02-17-your-smart-glasses-are-one-sensor-away-from-hearing-your-thoughts',
-  '2026-02-09-tara-therapeutic-atlas-of-risks-and-applications',
-  '2026-02-11-tara-first-cve-realtek-audio-jack-retasking',
-];
-
+// Essential reading: latest 6 non-changelog posts (excludes auto-generated summaries)
 const allPosts = await getCollection('blog');
-const essentialPosts = essentialSlugs
-  .map(slug => allPosts.find(p => p.id === slug))
-  .filter(Boolean) as typeof allPosts;
+const essentialPosts = allPosts
+  .filter(p => !p.id.includes('changelog-summary'))
+  .sort((a, b) => {
+    const dateA = new Date(a.data.date_posted || a.data.date || 0);
+    const dateB = new Date(b.data.date_posted || b.data.date || 0);
+    return dateB.getTime() - dateA.getTime();
+  })
+  .slice(0, 6);
 
 ---
 
