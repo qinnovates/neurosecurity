@@ -20,7 +20,8 @@
     "generate:ethics": "npx tsx scripts/generate-ethics-md.ts",
     "changelog": "node scripts/changelog-update.mjs",
     "citations": "node scripts/generate-citations.mjs",
-    "citations:check": "node scripts/generate-citations.mjs --check"
+    "citations:check": "node scripts/generate-citations.mjs --check",
+    "compute:chains": "node shared/scripts/compute-impact-chains.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",
