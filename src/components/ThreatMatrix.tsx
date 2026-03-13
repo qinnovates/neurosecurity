@@ -46,31 +46,31 @@ interface ThreatMatrixProps {
 /* ── Constants ── */
 const SEV_ORDER = ['critical', 'high', 'medium', 'low'] as const;
 
-const SEV_COLORS: Record<string, { fill: string; text: string; glow: string }> = {
-  critical: { fill: 'rgba(239, 68, 68, 0.55)', text: '#fca5a5', glow: 'rgba(239, 68, 68, 0.3)' },
-  high:     { fill: 'rgba(245, 158, 11, 0.45)', text: '#fcd34d', glow: 'rgba(245, 158, 11, 0.2)' },
-  medium:   { fill: 'rgba(234, 179, 8, 0.30)', text: '#fde68a', glow: 'rgba(234, 179, 8, 0.15)' },
-  low:      { fill: 'rgba(148, 163, 184, 0.20)', text: '#cbd5e1', glow: 'rgba(148, 163, 184, 0.1)' },
+const SEV_COLORS: Record<string, { bg: string; bgStrong: string; text: string; border: string }> = {
+  critical: { bg: 'rgba(239, 68, 68, 0.08)',  bgStrong: 'rgba(239, 68, 68, 0.14)', text: '#dc2626', border: 'rgba(239, 68, 68, 0.25)' },
+  high:     { bg: 'rgba(245, 158, 11, 0.08)', bgStrong: 'rgba(245, 158, 11, 0.14)', text: '#d97706', border: 'rgba(245, 158, 11, 0.25)' },
+  medium:   { bg: 'rgba(234, 179, 8, 0.06)',  bgStrong: 'rgba(234, 179, 8, 0.12)',  text: '#ca8a04', border: 'rgba(234, 179, 8, 0.2)' },
+  low:      { bg: 'rgba(100, 116, 139, 0.06)', bgStrong: 'rgba(100, 116, 139, 0.12)', text: '#64748b', border: 'rgba(100, 116, 139, 0.15)' },
 };
 
 const SEV_BADGE: Record<string, { bg: string; text: string }> = {
-  critical: { bg: 'rgba(239, 68, 68, 0.18)', text: '#ef4444' },
-  high:     { bg: 'rgba(245, 158, 11, 0.18)', text: '#f59e0b' },
-  medium:   { bg: 'rgba(234, 179, 8, 0.18)', text: '#eab308' },
-  low:      { bg: 'rgba(148, 163, 184, 0.18)', text: '#94a3b8' },
+  critical: { bg: 'rgba(239, 68, 68, 0.1)', text: '#dc2626' },
+  high:     { bg: 'rgba(245, 158, 11, 0.1)', text: '#d97706' },
+  medium:   { bg: 'rgba(234, 179, 8, 0.08)', text: '#ca8a04' },
+  low:      { bg: 'rgba(100, 116, 139, 0.08)', text: '#64748b' },
 };
 
 const STATUS_BADGE: Record<string, { bg: string; text: string }> = {
-  CONFIRMED:   { bg: 'rgba(239, 68, 68, 0.12)', text: '#ef4444' },
-  DEMONSTRATED: { bg: 'rgba(245, 158, 11, 0.12)', text: '#f59e0b' },
-  THEORETICAL: { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' },
-  EMERGING:    { bg: 'rgba(139, 92, 246, 0.12)', text: '#8b5cf6' },
+  CONFIRMED:    { bg: 'rgba(239, 68, 68, 0.08)', text: '#dc2626' },
+  DEMONSTRATED: { bg: 'rgba(245, 158, 11, 0.08)', text: '#d97706' },
+  THEORETICAL:  { bg: 'rgba(100, 116, 139, 0.08)', text: '#64748b' },
+  EMERGING:     { bg: 'rgba(139, 92, 246, 0.08)', text: '#7c3aed' },
 };
 
-const ZONE_STYLES: Record<string, { label: string; accent: string; bg: string }> = {
-  neural:    { label: 'Neural Zone',    accent: '#22c55e', bg: 'rgba(34, 197, 94, 0.04)' },
-  interface: { label: 'Interface Zone', accent: '#f59e0b', bg: 'rgba(245, 158, 11, 0.06)' },
-  synthetic: { label: 'Synthetic Zone', accent: '#3b82f6', bg: 'rgba(59, 130, 246, 0.04)' },
+const ZONE_META: Record<string, { label: string; accent: string; bg: string }> = {
+  neural:    { label: 'Neural Zone',    accent: '#16a34a', bg: 'rgba(22, 163, 74, 0.04)' },
+  interface: { label: 'Interface Zone', accent: '#d97706', bg: 'rgba(217, 119, 6, 0.04)' },
+  synthetic: { label: 'Synthetic Zone', accent: '#2563eb', bg: 'rgba(37, 99, 235, 0.04)' },
 };
 
 /* ── Component ── */
@@ -81,29 +81,20 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
   const [search, setSearch] = useState('');
   const [hoveredCell, setHoveredCell] = useState<{ band: string; cat: string } | null>(null);
 
-  // Pre-compute the matrix data
   const matrix = useMemo(() => {
     const grid: Record<string, Record<string, Technique[]>> = {};
     for (const band of bands) {
       grid[band.id] = {};
-      for (const cat of categories) {
-        grid[band.id][cat.id] = [];
-      }
+      for (const cat of categories) grid[band.id][cat.id] = [];
     }
     for (const t of techniques) {
       for (const bandId of t.bands) {
-        if (grid[bandId]) {
-          const catId = t.category;
-          if (grid[bandId][catId]) {
-            grid[bandId][catId].push(t);
-          }
-        }
+        if (grid[bandId]?.[t.category]) grid[bandId][t.category].push(t);
       }
     }
     return grid;
   }, [techniques, bands, categories]);
 
-  // Apply filters to get visible techniques
   const filteredTechniques = useMemo(() => {
     let filtered = techniques;
     if (sevFilter) filtered = filtered.filter(t => t.severity === sevFilter);
@@ -119,7 +110,6 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
     return new Set(filtered.map(t => t.id));
   }, [techniques, sevFilter, statusFilter, search]);
 
-  // Get filtered cell data
   const getCellData = useCallback((bandId: string, catId: string) => {
     const all = matrix[bandId]?.[catId] ?? [];
     const visible = all.filter(t => filteredTechniques.has(t.id));
@@ -127,16 +117,17 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
     for (const s of SEV_ORDER) {
       if (visible.some(t => t.severity === s)) { maxSev = s; break; }
     }
-    return { count: visible.length, total: all.length, maxSev, techniques: visible };
+    const avgNiss = visible.length > 0
+      ? visible.reduce((sum, t) => sum + (t.niss?.score ?? 0), 0) / visible.length
+      : 0;
+    return { count: visible.length, total: all.length, maxSev, techniques: visible, avgNiss };
   }, [matrix, filteredTechniques]);
 
-  // Selected cell techniques
   const selectedTechniques = useMemo(() => {
     if (!selectedCell) return [];
     return getCellData(selectedCell.band, selectedCell.cat).techniques;
   }, [selectedCell, getCellData]);
 
-  // Stats
   const stats = useMemo(() => {
     const visible = techniques.filter(t => filteredTechniques.has(t.id));
     const bySev: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0 };
@@ -144,7 +135,6 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
     return { total: visible.length, bySev };
   }, [techniques, filteredTechniques]);
 
-  // Group bands by zone
   const bandsByZone = useMemo(() => {
     const zones: { zone: string; bands: Band[] }[] = [];
     let currentZone = '';
@@ -178,43 +168,39 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
   const hasFilters = sevFilter || statusFilter || search;
 
   return (
-    <div style={{ fontFamily: 'var(--font-sans, system-ui)', color: 'var(--color-text-primary, #e2e8f0)' }}>
+    <div>
       {/* Filter Bar */}
-      <div style={{
-        display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center',
-        marginBottom: '1rem', padding: '0.75rem 1rem',
-        background: 'var(--color-bg-secondary, rgba(15, 20, 35, 0.6))',
-        borderRadius: '0.75rem', border: '1px solid var(--color-border, rgba(100, 140, 200, 0.1))',
+      <div className="flex flex-wrap gap-2 items-center mb-4 px-4 py-3 rounded-xl" style={{
+        background: 'var(--color-glass-bg)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid var(--color-border)',
       }}>
-        {/* Search */}
         <input
           type="text"
           placeholder="Search techniques..."
           value={search}
           onChange={e => setSearch(e.target.value)}
+          className="px-3 py-1.5 text-sm rounded-lg outline-none"
           style={{
-            padding: '0.375rem 0.75rem', fontSize: '0.8125rem',
-            fontFamily: 'var(--font-mono, monospace)',
-            background: 'rgba(30, 40, 60, 0.8)',
-            border: '1px solid rgba(100, 140, 200, 0.2)',
-            borderRadius: '0.375rem', color: '#e2e8f0',
-            width: '180px', outline: 'none',
+            fontFamily: 'var(--font-mono)',
+            background: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-text-primary)',
+            width: '180px',
           }}
         />
 
-        {/* Severity filter pills */}
-        <div style={{ display: 'flex', gap: '0.25rem', marginLeft: '0.5rem' }}>
+        {/* Severity pills */}
+        <div className="flex gap-1 ml-2">
           {SEV_ORDER.map(s => (
             <button
               key={s}
               onClick={() => setSevFilter(sevFilter === s ? null : s)}
+              className="px-2.5 py-1 text-[11px] font-semibold rounded-md capitalize transition-all"
               style={{
-                padding: '0.25rem 0.5rem', fontSize: '0.6875rem', fontWeight: 600,
-                borderRadius: '0.25rem', cursor: 'pointer', textTransform: 'capitalize',
-                border: `1px solid ${sevFilter === s ? SEV_BADGE[s].text : 'rgba(100, 140, 200, 0.15)'}`,
+                border: `1px solid ${sevFilter === s ? SEV_BADGE[s].text : 'var(--color-border)'}`,
                 background: sevFilter === s ? SEV_BADGE[s].bg : 'transparent',
-                color: sevFilter === s ? SEV_BADGE[s].text : 'rgba(200, 210, 240, 0.5)',
-                transition: 'all 0.15s',
+                color: sevFilter === s ? SEV_BADGE[s].text : 'var(--color-text-faint)',
               }}
             >
               {s}
@@ -222,19 +208,17 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
           ))}
         </div>
 
-        {/* Status filter pills */}
-        <div style={{ display: 'flex', gap: '0.25rem', marginLeft: '0.5rem' }}>
+        {/* Status pills */}
+        <div className="flex gap-1 ml-2">
           {(['CONFIRMED', 'DEMONSTRATED', 'THEORETICAL', 'EMERGING'] as const).map(s => (
             <button
               key={s}
               onClick={() => setStatusFilter(statusFilter === s ? null : s)}
+              className="px-2.5 py-1 text-[11px] font-semibold rounded-md transition-all"
               style={{
-                padding: '0.25rem 0.5rem', fontSize: '0.6875rem', fontWeight: 600,
-                borderRadius: '0.25rem', cursor: 'pointer',
-                border: `1px solid ${statusFilter === s ? STATUS_BADGE[s].text : 'rgba(100, 140, 200, 0.15)'}`,
+                border: `1px solid ${statusFilter === s ? STATUS_BADGE[s].text : 'var(--color-border)'}`,
                 background: statusFilter === s ? STATUS_BADGE[s].bg : 'transparent',
-                color: statusFilter === s ? STATUS_BADGE[s].text : 'rgba(200, 210, 240, 0.5)',
-                transition: 'all 0.15s',
+                color: statusFilter === s ? STATUS_BADGE[s].text : 'var(--color-text-faint)',
               }}
             >
               {s.slice(0, 4)}
@@ -245,12 +229,11 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
         {hasFilters && (
           <button
             onClick={clearFilters}
+            className="ml-auto px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors"
             style={{
-              marginLeft: 'auto', padding: '0.25rem 0.5rem',
-              fontSize: '0.6875rem', fontWeight: 600,
-              borderRadius: '0.25rem', cursor: 'pointer',
-              border: '1px solid rgba(100, 140, 200, 0.2)',
-              background: 'transparent', color: 'rgba(200, 210, 240, 0.5)',
+              border: '1px solid var(--color-border)',
+              background: 'transparent',
+              color: 'var(--color-text-faint)',
             }}
           >
             Clear
@@ -258,11 +241,9 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
         )}
 
         {/* Stats */}
-        <div style={{
+        <div className="flex gap-3 text-xs font-mono" style={{
           marginLeft: hasFilters ? '0.5rem' : 'auto',
-          display: 'flex', gap: '0.75rem', fontSize: '0.75rem',
-          fontFamily: 'var(--font-mono, monospace)',
-          color: 'rgba(200, 210, 240, 0.5)',
+          color: 'var(--color-text-faint)',
         }}>
           <span>{stats.total} techniques</span>
           {Object.entries(stats.bySev).map(([s, n]) => n > 0 && (
@@ -271,38 +252,40 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
         </div>
       </div>
 
-      {/* Matrix */}
-      <div style={{ overflowX: 'auto', marginBottom: selectedCell ? '0' : '1rem' }}>
+      {/* Matrix Grid */}
+      <div className="overflow-x-auto rounded-xl" style={{
+        border: '1px solid var(--color-border)',
+        marginBottom: selectedCell ? 0 : '1rem',
+      }}>
         <table style={{
-          width: '100%', borderCollapse: 'separate', borderSpacing: '2px',
+          width: '100%', borderCollapse: 'collapse',
           tableLayout: 'fixed', minWidth: '900px',
         }}>
-          {/* Column headers */}
           <thead>
-            <tr>
+            <tr style={{ background: 'var(--color-bg-surface)' }}>
               <th style={{
-                width: '140px', padding: '0.5rem', textAlign: 'left',
-                fontSize: '0.625rem', fontWeight: 600, textTransform: 'uppercase',
-                letterSpacing: '0.08em', color: 'rgba(100, 140, 200, 0.5)',
-                verticalAlign: 'bottom',
+                width: '140px', padding: '0.625rem 0.75rem', textAlign: 'left',
+                fontSize: '0.625rem', fontWeight: 700, textTransform: 'uppercase',
+                letterSpacing: '0.1em', color: 'var(--color-text-faint)',
+                borderBottom: '1px solid var(--color-border)',
               }}>
                 Band / Category
               </th>
               {categories.map(cat => (
                 <th key={cat.id} style={{
-                  padding: '0.5rem 0.25rem', textAlign: 'center',
-                  verticalAlign: 'bottom',
+                  padding: '0.625rem 0.25rem', textAlign: 'center',
+                  borderBottom: '1px solid var(--color-border)',
+                  borderLeft: '1px solid var(--color-border)',
                 }}>
                   <div style={{
-                    fontSize: '0.6875rem', fontWeight: 700,
-                    fontFamily: 'var(--font-mono, monospace)',
-                    color: 'var(--color-text-primary, #e2e8f0)',
-                    marginBottom: '0.125rem',
+                    fontSize: '0.75rem', fontWeight: 700,
+                    fontFamily: 'var(--font-mono)',
+                    color: 'var(--color-text-primary)',
                   }}>
                     {cat.id}
                   </div>
                   <div style={{
-                    fontSize: '0.5625rem', color: 'rgba(200, 210, 240, 0.4)',
+                    fontSize: '0.5625rem', color: 'var(--color-text-faint)',
                     lineHeight: 1.2, maxWidth: '80px', margin: '0 auto',
                   }}>
                     {cat.name}
@@ -314,51 +297,67 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
           <tbody>
             {bandsByZone.map(({ zone, bands: zoneBands }) => (
               <>
-                {/* Zone header row */}
+                {/* Zone divider */}
                 <tr key={`zone-${zone}`}>
                   <td
                     colSpan={categories.length + 1}
                     style={{
-                      padding: '0.375rem 0.5rem', fontSize: '0.5625rem',
+                      padding: '0.5rem 0.75rem', fontSize: '0.625rem',
                       fontWeight: 700, textTransform: 'uppercase',
                       letterSpacing: '0.1em',
-                      color: ZONE_STYLES[zone]?.accent ?? '#94a3b8',
-                      background: ZONE_STYLES[zone]?.bg ?? 'transparent',
-                      borderLeft: `2px solid ${ZONE_STYLES[zone]?.accent ?? '#94a3b8'}`,
+                      color: ZONE_META[zone]?.accent ?? 'var(--color-text-faint)',
+                      background: ZONE_META[zone]?.bg ?? 'transparent',
+                      borderBottom: '1px solid var(--color-border)',
+                      borderTop: '1px solid var(--color-border)',
                     }}
                   >
-                    {ZONE_STYLES[zone]?.label ?? zone}
+                    <span style={{
+                      display: 'inline-block',
+                      width: '3px', height: '12px',
+                      borderRadius: '2px',
+                      background: ZONE_META[zone]?.accent,
+                      marginRight: '0.5rem',
+                      verticalAlign: 'middle',
+                    }} />
+                    {ZONE_META[zone]?.label ?? zone}
                   </td>
                 </tr>
                 {/* Band rows */}
                 {zoneBands.map(band => (
-                  <tr key={band.id}>
-                    {/* Band label */}
+                  <tr key={band.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td style={{
-                      padding: '0.375rem 0.5rem',
-                      borderLeft: `2px solid ${band.color}`,
-                      background: 'var(--color-bg-secondary, rgba(15, 20, 35, 0.3))',
+                      padding: '0.5rem 0.75rem',
+                      borderRight: '1px solid var(--color-border)',
                     }}>
-                      <div style={{
-                        fontSize: '0.75rem', fontWeight: 700,
-                        fontFamily: 'var(--font-mono, monospace)',
-                        color: band.color,
-                      }}>
-                        {band.id}
-                      </div>
-                      <div style={{
-                        fontSize: '0.5625rem', color: 'rgba(200, 210, 240, 0.4)',
-                        lineHeight: 1.2, marginTop: '0.125rem',
-                      }}>
-                        {band.name}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span style={{
+                          width: '3px', height: '20px',
+                          borderRadius: '2px', flexShrink: 0,
+                          background: band.color,
+                        }} />
+                        <div>
+                          <div style={{
+                            fontSize: '0.75rem', fontWeight: 700,
+                            fontFamily: 'var(--font-mono)',
+                            color: band.color,
+                          }}>
+                            {band.id}
+                          </div>
+                          <div style={{
+                            fontSize: '0.5625rem', color: 'var(--color-text-faint)',
+                            lineHeight: 1.2,
+                          }}>
+                            {band.name}
+                          </div>
+                        </div>
                       </div>
                     </td>
-                    {/* Cells */}
                     {categories.map(cat => {
                       const cell = getCellData(band.id, cat.id);
                       const isSelected = selectedCell?.band === band.id && selectedCell?.cat === cat.id;
                       const isHovered = hoveredCell?.band === band.id && hoveredCell?.cat === cat.id;
                       const isEmpty = cell.count === 0;
+                      const sev = cell.maxSev ? SEV_COLORS[cell.maxSev] : null;
 
                       return (
                         <td
@@ -367,48 +366,56 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
                           onMouseEnter={() => !isEmpty && setHoveredCell({ band: band.id, cat: cat.id })}
                           onMouseLeave={() => setHoveredCell(null)}
                           style={{
-                            padding: 0,
+                            padding: '3px',
                             textAlign: 'center',
                             cursor: isEmpty ? 'default' : 'pointer',
-                            position: 'relative',
+                            borderLeft: '1px solid var(--color-border)',
                           }}
                         >
                           <div style={{
                             padding: '0.5rem 0.25rem',
-                            borderRadius: '0.375rem',
+                            borderRadius: '0.5rem',
+                            minHeight: '40px',
+                            display: 'flex', flexDirection: 'column',
+                            alignItems: 'center', justifyContent: 'center',
                             background: isEmpty
-                              ? 'rgba(30, 40, 60, 0.15)'
-                              : cell.maxSev
-                                ? SEV_COLORS[cell.maxSev].fill
-                                : 'rgba(30, 40, 60, 0.3)',
+                              ? 'transparent'
+                              : (isHovered || isSelected)
+                                ? sev?.bgStrong ?? 'var(--color-bg-elevated)'
+                                : sev?.bg ?? 'var(--color-bg-surface)',
                             border: isSelected
-                              ? `2px solid ${cell.maxSev ? SEV_COLORS[cell.maxSev].text : '#60a5fa'}`
+                              ? `2px solid ${sev?.text ?? 'var(--color-accent-primary)'}`
                               : '2px solid transparent',
                             boxShadow: isHovered && !isEmpty
-                              ? `0 0 12px ${cell.maxSev ? SEV_COLORS[cell.maxSev].glow : 'transparent'}`
+                              ? `0 2px 8px ${sev?.border ?? 'transparent'}`
                               : 'none',
                             transition: 'all 0.15s ease',
-                            transform: isHovered && !isEmpty ? 'scale(1.05)' : 'scale(1)',
-                            minHeight: '36px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                            transform: isHovered && !isEmpty ? 'scale(1.08)' : 'scale(1)',
                           }}>
                             {!isEmpty && (
                               <>
                                 <div style={{
-                                  fontSize: '0.875rem', fontWeight: 700,
-                                  fontFamily: 'var(--font-mono, monospace)',
-                                  color: cell.maxSev ? SEV_COLORS[cell.maxSev].text : '#94a3b8',
+                                  fontSize: '0.9375rem', fontWeight: 700,
+                                  fontFamily: 'var(--font-mono)',
+                                  color: sev?.text ?? 'var(--color-text-faint)',
                                   lineHeight: 1,
                                 }}>
                                   {cell.count}
                                 </div>
+                                {cell.avgNiss > 0 && (
+                                  <div style={{
+                                    fontSize: '0.5625rem', fontWeight: 600,
+                                    fontFamily: 'var(--font-mono)',
+                                    color: sev?.text ?? 'var(--color-text-faint)',
+                                    marginTop: '2px', opacity: 0.7,
+                                  }}>
+                                    {cell.avgNiss.toFixed(1)}
+                                  </div>
+                                )}
                                 {cell.count !== cell.total && (
                                   <div style={{
-                                    fontSize: '0.5rem', color: 'rgba(200, 210, 240, 0.3)',
-                                    marginTop: '0.125rem',
+                                    fontSize: '0.5rem', color: 'var(--color-text-faint)',
+                                    marginTop: '1px', opacity: 0.5,
                                   }}>
                                     /{cell.total}
                                   </div>
@@ -427,55 +434,39 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
         </table>
       </div>
 
-      {/* Expanded Cell Detail Panel */}
+      {/* Expanded Cell Detail */}
       {selectedCell && selectedTechniques.length > 0 && (
-        <div style={{
-          marginTop: '0.5rem', marginBottom: '1rem',
-          padding: '1rem 1.25rem',
-          background: 'var(--color-bg-secondary, rgba(15, 20, 35, 0.8))',
-          borderRadius: '0.75rem',
-          border: '1px solid var(--color-border, rgba(100, 140, 200, 0.15))',
+        <div className="rounded-xl mt-2 mb-4 p-5" style={{
+          background: 'var(--color-glass-bg)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid var(--color-border)',
         }}>
-          {/* Panel header */}
-          <div style={{
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-            marginBottom: '0.75rem',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{
-                fontSize: '0.75rem', fontWeight: 700,
-                fontFamily: 'var(--font-mono, monospace)',
-                color: bands.find(b => b.id === selectedCell.band)?.color ?? '#60a5fa',
+          {/* Header */}
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-bold font-mono" style={{
+                color: bands.find(b => b.id === selectedCell.band)?.color,
               }}>
                 {selectedCell.band}
               </span>
-              <span style={{ fontSize: '0.625rem', color: 'rgba(200, 210, 240, 0.3)' }}>&times;</span>
-              <span style={{
-                fontSize: '0.75rem', fontWeight: 700,
-                fontFamily: 'var(--font-mono, monospace)',
-                color: 'var(--color-accent-secondary, #06b6d4)',
-              }}>
+              <span style={{ color: 'var(--color-text-faint)', fontSize: '0.75rem' }}>/</span>
+              <span className="text-sm font-bold font-mono" style={{ color: 'var(--color-accent-secondary)' }}>
                 {selectedCell.cat}
               </span>
-              <span style={{
-                fontSize: '0.6875rem', color: 'rgba(200, 210, 240, 0.5)',
-              }}>
-                &mdash; {categories.find(c => c.id === selectedCell.cat)?.name}
+              <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                {categories.find(c => c.id === selectedCell.cat)?.name}
               </span>
-              <span style={{
-                fontSize: '0.625rem', fontFamily: 'var(--font-mono, monospace)',
-                color: 'rgba(200, 210, 240, 0.35)',
-              }}>
-                ({selectedTechniques.length} technique{selectedTechniques.length !== 1 ? 's' : ''})
+              <span className="text-xs font-mono" style={{ color: 'var(--color-text-faint)' }}>
+                ({selectedTechniques.length})
               </span>
             </div>
             <button
               onClick={() => setSelectedCell(null)}
+              className="px-3 py-1 text-xs font-medium rounded-lg transition-colors"
               style={{
-                padding: '0.25rem 0.5rem', fontSize: '0.6875rem',
-                borderRadius: '0.25rem', cursor: 'pointer',
-                border: '1px solid rgba(100, 140, 200, 0.2)',
-                background: 'transparent', color: 'rgba(200, 210, 240, 0.5)',
+                border: '1px solid var(--color-border)',
+                background: 'var(--color-bg-surface)',
+                color: 'var(--color-text-muted)',
               }}
             >
               Close
@@ -485,135 +476,109 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
           {/* Technique cards */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '0.5rem',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: '0.75rem',
           }}>
-            {selectedTechniques.map(t => (
-              <a
-                key={t.id}
-                href={`/atlas/tara/${t.id}/`}
-                style={{
-                  display: 'block', textDecoration: 'none', color: 'inherit',
-                  padding: '0.75rem', borderRadius: '0.5rem',
-                  background: 'rgba(30, 40, 60, 0.5)',
-                  border: `1px solid ${SEV_BADGE[t.severity]?.text ?? '#94a3b8'}20`,
-                  transition: 'all 0.15s',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = `${SEV_BADGE[t.severity]?.text ?? '#94a3b8'}60`;
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = `${SEV_BADGE[t.severity]?.text ?? '#94a3b8'}20`;
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                }}
-              >
-                {/* Top row: ID + badges */}
-                <div style={{
-                  display: 'flex', alignItems: 'center', gap: '0.375rem',
-                  marginBottom: '0.375rem', flexWrap: 'wrap',
-                }}>
-                  <span style={{
-                    fontSize: '0.6875rem', fontWeight: 700,
-                    fontFamily: 'var(--font-mono, monospace)',
-                    color: 'var(--color-accent-secondary, #06b6d4)',
-                  }}>
-                    {t.id}
-                  </span>
-                  <span style={{
-                    fontSize: '0.5625rem', fontWeight: 600,
-                    padding: '0.0625rem 0.375rem', borderRadius: '9999px',
-                    textTransform: 'capitalize',
-                    background: SEV_BADGE[t.severity]?.bg ?? 'rgba(148, 163, 184, 0.18)',
-                    color: SEV_BADGE[t.severity]?.text ?? '#94a3b8',
-                  }}>
-                    {t.severity}
-                  </span>
-                  <span style={{
-                    fontSize: '0.5625rem', fontWeight: 600,
-                    padding: '0.0625rem 0.375rem', borderRadius: '9999px',
-                    background: STATUS_BADGE[t.status]?.bg ?? 'rgba(148, 163, 184, 0.12)',
-                    color: STATUS_BADGE[t.status]?.text ?? '#94a3b8',
-                  }}>
-                    {t.status}
-                  </span>
-                  {t.niss.score > 0 && (
-                    <span style={{
-                      fontSize: '0.5625rem', fontWeight: 700,
-                      fontFamily: 'var(--font-mono, monospace)',
-                      marginLeft: 'auto',
-                      color: SEV_BADGE[t.niss.severity]?.text ?? '#94a3b8',
-                    }}>
-                      NISS {t.niss.score.toFixed(1)}
+            {selectedTechniques.map(t => {
+              const sev = SEV_BADGE[t.severity];
+              const status = STATUS_BADGE[t.status];
+              return (
+                <a
+                  key={t.id}
+                  href={`/atlas/tara/${t.id}/`}
+                  className="block rounded-xl p-4 transition-all hover:-translate-y-0.5"
+                  style={{
+                    textDecoration: 'none', color: 'inherit',
+                    background: 'var(--color-bg-surface)',
+                    border: `1px solid var(--color-border)`,
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = sev?.text ?? 'var(--color-border-hover)';
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 12px ${sev?.bg ?? 'rgba(0,0,0,0.05)'}`;
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)';
+                    (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                  }}
+                >
+                  {/* ID + badges */}
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className="text-xs font-bold font-mono" style={{ color: 'var(--color-accent-secondary)' }}>
+                      {t.id}
                     </span>
-                  )}
-                </div>
-                {/* Name */}
-                <div style={{
-                  fontSize: '0.8125rem', fontWeight: 600,
-                  color: 'var(--color-text-primary, #e2e8f0)',
-                  marginBottom: '0.25rem', lineHeight: 1.3,
-                }}>
-                  {t.name}
-                </div>
-                {/* Description (truncated) */}
-                <div style={{
-                  fontSize: '0.6875rem', color: 'rgba(200, 210, 240, 0.5)',
-                  lineHeight: 1.4,
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                }}>
-                  {t.description}
-                </div>
-                {/* Bottom row: dual-use + bands */}
-                <div style={{
-                  display: 'flex', alignItems: 'center', gap: '0.375rem',
-                  marginTop: '0.375rem', flexWrap: 'wrap',
-                }}>
-                  {t.tara?.dual_use && t.tara.dual_use !== 'silicon_only' && (
-                    <span style={{
-                      fontSize: '0.5rem', fontWeight: 600,
-                      padding: '0.0625rem 0.25rem', borderRadius: '0.125rem',
-                      background: 'rgba(16, 185, 129, 0.12)', color: '#10b981',
-                      textTransform: 'uppercase', letterSpacing: '0.05em',
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full capitalize" style={{
+                      background: sev?.bg, color: sev?.text,
                     }}>
-                      Dual-use
+                      {t.severity}
                     </span>
-                  )}
-                  <span style={{
-                    fontSize: '0.5625rem', fontFamily: 'var(--font-mono, monospace)',
-                    color: 'rgba(200, 210, 240, 0.3)', marginLeft: 'auto',
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{
+                      background: status?.bg, color: status?.text,
+                    }}>
+                      {t.status}
+                    </span>
+                    {t.niss.score > 0 && (
+                      <span className="text-[10px] font-bold font-mono ml-auto" style={{
+                        color: SEV_BADGE[t.niss.severity]?.text ?? 'var(--color-text-faint)',
+                      }}>
+                        NISS {t.niss.score.toFixed(1)}
+                      </span>
+                    )}
+                  </div>
+                  {/* Name */}
+                  <div className="text-sm font-semibold mb-1.5" style={{
+                    color: 'var(--color-text-primary)', lineHeight: 1.3,
                   }}>
-                    {t.bandsStr}
-                  </span>
-                </div>
-              </a>
-            ))}
+                    {t.name}
+                  </div>
+                  {/* Description */}
+                  <div className="text-xs leading-relaxed" style={{
+                    color: 'var(--color-text-muted)',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}>
+                    {t.description}
+                  </div>
+                  {/* Footer */}
+                  <div className="flex items-center gap-2 mt-2 flex-wrap">
+                    {t.tara?.dual_use && t.tara.dual_use !== 'silicon_only' && (
+                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider" style={{
+                        background: 'rgba(16, 185, 129, 0.08)', color: '#059669',
+                      }}>
+                        Dual-use
+                      </span>
+                    )}
+                    <span className="text-[10px] font-mono ml-auto" style={{ color: 'var(--color-text-faint)' }}>
+                      {t.bandsStr}
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       )}
 
       {/* Legend */}
-      <div style={{
-        display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center',
-        padding: '0.625rem 0.75rem', fontSize: '0.6875rem',
-        color: 'rgba(200, 210, 240, 0.4)',
+      <div className="flex flex-wrap gap-4 items-center px-3 py-2.5 text-xs" style={{
+        color: 'var(--color-text-faint)',
       }}>
-        <span style={{ fontWeight: 600, fontSize: '0.625rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-          Severity:
-        </span>
+        <span className="text-[10px] font-bold uppercase tracking-wider">Severity:</span>
         {SEV_ORDER.map(s => (
-          <div key={s} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+          <div key={s} className="flex items-center gap-1.5">
             <div style={{
-              width: '12px', height: '12px', borderRadius: '0.125rem',
-              background: SEV_COLORS[s].fill,
+              width: '14px', height: '14px', borderRadius: '4px',
+              background: SEV_COLORS[s].bg,
+              border: `1px solid ${SEV_COLORS[s].border}`,
             }} />
-            <span style={{ textTransform: 'capitalize', color: SEV_COLORS[s].text }}>{s}</span>
+            <span className="capitalize font-medium" style={{ color: SEV_COLORS[s].text }}>{s}</span>
           </div>
         ))}
-        <span style={{ color: 'rgba(200, 210, 240, 0.25)', marginLeft: '0.5rem' }}>
+        <span style={{ color: 'var(--color-text-faint)', borderLeft: '1px solid var(--color-border)', paddingLeft: '0.75rem', marginLeft: '0.25rem' }}>
+          Cell: count / avg NISS
+        </span>
+        <span className="ml-2" style={{ color: 'var(--color-text-faint)' }}>
           Click any cell to explore techniques
         </span>
       </div>
