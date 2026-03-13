@@ -19,6 +19,24 @@
   },
   {
     "type": "external",
+    "title": "The macaque IT cortex but not current artificial vision networks encode object position in perceptually aligned coordinates",
+    "date": "2026-03-13",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]11248",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.11248v1 Announce Type: new Abstract: Efficient interaction with the visual world requires not only accurate object identification but also precise localization of objects in space. While sp",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
+    "date": "2026-03-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Chinese BCI startup Gestala raises $21.6M for non-invasive ultrasound brain tech - The Next Web",
     "date": "2026-03-12",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMickFVX3lxTE1Pb3ZQVV9ZVGdpd1B3OFVDMENFNlpMX0VZQlhOZVpLWkxZbXFFQ0ItcDVfeExLMjRQNklmRDVlV2lTUExDTnR0NGp4MFRiZlBPVDhOaXNYLXdkTmZzU0tpYW5ZWXFFSnlURWE4RWVhV2h5Zw?oc=5",
@@ -37,15 +55,6 @@
   },
   {
     "type": "external",
-    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
-    "date": "2026-03-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Chinese ultrasound-based BCI startup Gestala raises $21.7M - MassDevice",
     "date": "2026-03-12",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNN1VVNzZ4Q0dnNzFqNDB4Z3ZfU2V5b0hzWjh5cXp4cTNqWW1BeGVJNXEwaTlScmJHdGNYb2RjSGlMVFBNVkZJamM4dUNLeGRkM3lGdkYyam1OU3BmTUlULUxxZEtuSEoybjU5eGt0YW4wTEdJcnhwZDZkY05xY1hvRk1pdU9uUmNDVGZaUlRB?oc=5",
@@ -55,30 +64,12 @@
   },
   {
     "type": "external",
-    "title": "JEDI: Jointly Embedded Inference of Neural Dynamics",
+    "title": "Chinese brain interface startup Gestala raises $21.6m - Tech in Asia",
     "date": "2026-03-12",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]10489",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.10489v1 Announce Type: new Abstract: Animal brains flexibly and efficiently achieve many behavioral tasks with a single neural network. A core goal in modern neuroscience is to map the mech",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Uncovering statistical structure in large-scale neural activity with Restricted Boltzmann Machines",
-    "date": "2026-03-12",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]11032",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.11032v1 Announce Type: new Abstract: Large-scale electrophysiological recordings now allow simultaneous monitoring of thousands of neurons across multiple brain regions, revealing structure",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Cross-Species Transfer Learning for Electrophysiology-to-Transcriptomics Mapping in Cortical GABAergic Interneurons",
-    "date": "2026-03-12",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]11000",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.11000v1 Announce Type: cross Abstract: Single-cell electrophysiological recordings provide a powerful window into neuronal functional diversity and offer an interpretable route for linking ",
-    "category": "research"
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPREF3U010LV9takhMRjluaXFfNmxSdkRlamltYXFsNDJvUFZTR0xJalVnVWdxZVAySTN4dDR6eW9JU0FfZV9Nd0Y1SzgzeWJwQ0psUFhFb0NLRWx0amsyM2wwUTFWT3JUc293bmR6dFM1MjNjdzBkclBvWVNqaDhDY2ZXckc3YUlfckMw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Chinese brain interface startup Gestala raises $21.6m&nbsp;&nbsp;Tech in Asia",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -96,24 +87,6 @@
     "url": "hxxps://spectrum[.]ieee[.]org/cyborg-stem-cell-therapy-for-diabetes",
     "source": "IEEE Spectrum",
     "summary": "Lab-grown cell therapies for diabetes are edging toward the clinic. Researchers can now coax stem cells to behave like pancreatic islets, the tiny clusters of cells that regulate blood sugar. But even",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China’s brain-computer interface industry is racing ahead - TechCrunch",
-    "date": "2026-02-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxPdzI0cVRmWExrYWVqNFJubVNkZC1xN0x5RnZXcEFIcEt4QTNPZzFjOHYxdHJUekNGM3JxNjdpd1Y2SnVpdko5V19NaHFhOEVKV2tnZ19KeFJFdVJsbDBNdE1SMEY2Z2N5dEVqRHRkQzdVQjF1eDAxczdXLWdYNm43emVYam1OendkQ2QtWEJYaHg4dUJ1ZUE?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China’s brain-computer interface industry is racing ahead&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {

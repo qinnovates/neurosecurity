@@ -182,10 +182,10 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     // Try webm first, fallback to mp4
     const sourceWebm = document.createElement('source');
-    sourceWebm.src = isGreen ? '/videos/service-dog.webm' : '/videos/IMG_3445.webm';
+    sourceWebm.src = isGreen ? '/videos/service-dog.webm' : '/videos/IMG_3445_wide.webm';
     sourceWebm.type = 'video/webm';
     const sourceMp4 = document.createElement('source');
-    sourceMp4.src = isGreen ? '/videos/service-dog.mp4' : '/videos/IMG_3445.mp4';
+    sourceMp4.src = isGreen ? '/videos/service-dog.mp4' : '/videos/IMG_3445_wide.mp4';
     sourceMp4.type = 'video/mp4';
     video.appendChild(sourceWebm);
     video.appendChild(sourceMp4);
@@ -197,8 +197,8 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     texture.magFilter = THREE.NearestFilter;
     texture.generateMipmaps = false;
 
-    // Geometry: grid of vertices — skip pixels for performance + softer look
-    const STEP = 3;
+    // Geometry: grid of vertices — skip every other pixel for softer look
+    const STEP = 2;
     const geometry = new THREE.BufferGeometry();
     const cols = Math.floor(GRID_W / STEP);
     const rows = Math.floor(H / STEP);
@@ -222,7 +222,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         gridWidth: { value: GRID_W },
         nearClipping: { value: 850 },
         farClipping: { value: 4000 },
-        pointSize: { value: 4 },
+        pointSize: { value: 3 },
         zOffset: { value: 1000 },
         uFisheye: { value: 0 },
         uMousePos: { value: new THREE.Vector2(0, 0) },

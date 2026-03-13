@@ -101,8 +101,8 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
     (function(){
       try {
         var path = window.location.pathname;
-        var visionPages = path === '/' || path === '/index.html' || path.startsWith('/vision');
-        var vision = visionPages && localStorage.getItem('bci-vision') === 'on';
+        var isVisionPage = path.startsWith('/vision');
+        var vision = isVisionPage && localStorage.getItem('bci-vision') === 'on';
         document.documentElement.setAttribute('data-theme', vision ? 'dark' : 'light');
         document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
       } catch(e) {
