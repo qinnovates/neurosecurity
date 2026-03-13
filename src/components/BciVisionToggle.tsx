@@ -1,23 +1,27 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 
 export default function BciVisionToggle() {
-  const [isOn, setIsOn] = useState(false);
+  const [isOn, setIsOn] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('bci-vision') === 'on';
+    }
+    return false;
+  });
   const clickTimes = useRef<number[]>([]);
   const [showCtf, setShowCtf] = useState(false);
   const [passphrase, setPassphrase] = useState('');
   const [ctfState, setCtfState] = useState<'prompt' | 'denied' | 'granted'>('prompt');
+  const pendingNav = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Sync with localStorage on mount (covers SSR hydration mismatch)
   useEffect(() => {
     const saved = localStorage.getItem('bci-vision') === 'on';
     setIsOn(saved);
   }, []);
 
-  const pendingNav = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const toggle = useCallback(() => {
     const now = Date.now();
     clickTimes.current.push(now);
-    // Keep only last 3 clicks
     if (clickTimes.current.length > 3) clickTimes.current.shift();
 
     // Easter egg: 3 clicks within 1.5 seconds
@@ -25,7 +29,6 @@ export default function BciVisionToggle() {
       const delta = clickTimes.current[2] - clickTimes.current[0];
       if (delta < 1500) {
         clickTimes.current = [];
-        // Cancel any pending navigation from earlier clicks
         if (pendingNav.current) {
           clearTimeout(pendingNav.current);
           pendingNav.current = null;
@@ -41,7 +44,10 @@ export default function BciVisionToggle() {
       }
     }
 
-    const next = !isOn;
+    // Read current state directly from localStorage to avoid stale closures
+    const current = localStorage.getItem('bci-vision') === 'on';
+    const next = !current;
+
     setIsOn(next);
     localStorage.setItem('bci-vision', next ? 'on' : 'off');
     document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
@@ -58,7 +64,7 @@ export default function BciVisionToggle() {
       }
       pendingNav.current = null;
     }, 600);
-  }, [isOn]);
+  }, []);
 
   const handleCtfSubmit = useCallback(() => {
     if (passphrase.toLowerCase().trim() === 'kulhi loaches') {
