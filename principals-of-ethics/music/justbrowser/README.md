@@ -20,7 +20,7 @@ Every track starts from a real story. The knowledge is woven into the lyrics, bu
 
 ## Sawdust (Album)
 
-The debut project. Dark gospel blues rooted in Stoic philosophy and personal narrative.
+The debut project. Sawdust was an experiment using modern music to see which style gets the most listens — from pop to gospel to blues — to understand what has the most impact and reach.
 
 ### Tracks
 
