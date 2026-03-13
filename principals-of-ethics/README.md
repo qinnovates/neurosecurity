@@ -6,7 +6,7 @@
 
 **"Chalkboard and line"** carries more than one meaning:
 
-- Young men who signed their lives to fight for the freedom we live. A friend came back from war and was never the same.
+- Young men and women who signed their lives to fight for the freedom we live. A friend came back from war and was never the same.
 - These are the people who rely on BCIs most.
 - These are the people I know, the people that make me, the people who keep me fighting for their rights when I can hardly stand.
 - I use this when I need motivation and drive to help me push through to the finish.
@@ -70,7 +70,7 @@ I start the song with "Shape of Grace," alluding to my late grandmother who pass
 
 Sometimes we forget that the heart has its own nervous system — roughly 40,000 neurons forming the intrinsic cardiac nervous system. More signals travel from the heart to the brain than the brain sends to the heart.
 
-I remember growing up, raised by the women in my family who shaped my heart. I remember hiking up mountaintops, often without steps or a path, to ancient temples of worship. My grandmother on my dad's side still did this every year until her legs finally gave out a few years ago. What's admirable is that the family knows she still secretly walks to her temple every week without telling anyone, just to pay an offering for our protection. She lost control on the right side of her face following a stroke decades ago, and when she heard that I want to help those who can no longer see — over video call — you should've seen the way her face lit up.
+I remember growing up, raised by the women in my family who shaped my heart. I remember hiking up mountaintops, often without steps or a path, to ancient temples of worship. My grandmother on my dad's side still did this every year until her legs finally gave out a few years ago. What's admirable is that the family knows she still secretly finds her way to her temple every week without telling anyone, just to pay an offering for our protection. She lost control on the right side of her face following a stroke decades ago, and when she heard that I want to help those who can no longer see — over video call — you should've seen the way her face lit up.
 
 ## "Help Those Who Plant the Seed"
 
@@ -102,7 +102,7 @@ That's the beauty of art — its interpretation is left up to you. We all see th
 
 **"Chalkboard and line"** carries more than one meaning:
 
-- Young men who signed their lives to fight for the freedom we live. A friend came back from war and was never the same.
+- Young men and women who signed their lives to fight for the freedom we live. A friend came back from war and was never the same.
 - These are the people who rely on BCIs most.
 - These are the people I know, the people that make me, the people who keep me fighting for their rights when I can hardly stand.
 - I use this when I need motivation and drive to help me push through to the finish.
