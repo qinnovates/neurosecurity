@@ -103,6 +103,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Working paper, CC-BY 4.0, LaTeX source included | Published |
 | **[Research Sources](qif-framework/QIF-RESEARCH-SOURCES.md)** | 309+ verified sources across 9 domains | Active |
 | **[CVE-TARA Mapping](shared/cve-technique-mapping.json)** | 55 NVD-verified CVEs mapped to 21 TARA techniques | Published |
+| **[EEG Data Pipeline](shared/EEG-DATA-PIPELINE.md)** | Curated EEG datasets, synthetic generation, KQL tagging, license verification | Active |
 | FIRST.org CVSS SIG | NISS proposed as CVSS v4.0 extension; outreach in progress | In progress |
 | Peer review / empirical validation | Requires collaborators, IRB, BCI hardware | Blocked |
 

@@ -157,4 +157,23 @@ and revising it until it holds up to scrutiny. There is a lot more to do.
         for NISS context profile weights
   \item \textbf{Conference paper}: Condensed version for submission to Graz BCI
         Conference 2026
+  \item \textbf{EEG data pipeline for component validation}: We have assembled a
+        curated registry of openly licensed EEG datasets (including the Mendeley
+        ADHD Adult Resting State dataset, CC~BY~4.0, 79 subjects; PhysioNet
+        motor imagery and epilepsy datasets, ODC-BY; and UCI alcoholism data,
+        CC~BY~4.0) alongside synthetic data generated through BrainFlow and
+        custom attack simulators. All datasets are tagged with provenance,
+        licensing, condition metadata, and DSM-5-TR diagnostic category references
+        in a KQL-queryable data lake. This pipeline enables validation of QIF
+        components (Spectrum/Signal Analyzer, Neurowall, threat detection) against
+        both normal and attack-scenario EEG signals. A potential research direction
+        is using spectral analysis of condition-tagged datasets to produce
+        pattern-match confidence scores---statistical similarity measures against
+        reference distributions---that could complement behavioral assessment for
+        conditions such as ADHD and autism spectrum disorder, where diagnostic
+        overlap and behavioral masking (camouflaging) present challenges for
+        traditional assessment instruments (Hull et~al.\ 2017, Lai et~al.\ 2017).
+        This requires independent clinical validation, larger and more diverse
+        datasets, and formal sensitivity/specificity analysis before any clinical
+        application. Documentation: \url{https://github.com/qinnovates/qinnovate/blob/main/shared/EEG-DATA-PIPELINE.md}
 \end{enumerate}
