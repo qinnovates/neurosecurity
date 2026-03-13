@@ -481,11 +481,11 @@ const bandZoneColor = (id: string) => {
     }
   </style>
 
-  <!-- Reset theme on navigation away -->
+  <!-- Reset theme on navigation away — always go light unless navigating to another vision page -->
   <script>
-    document.addEventListener('astro:before-swap', () => {
-      const saved = localStorage.getItem('bci-vision') === 'on';
-      if (!saved) {
+    document.addEventListener('astro:before-swap', (e: any) => {
+      const nextUrl = e?.to?.url?.pathname || '';
+      if (!nextUrl.startsWith('/vision')) {
         document.documentElement.setAttribute('data-theme', 'light');
         document.documentElement.setAttribute('data-vision', 'off');
       }
