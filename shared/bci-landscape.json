@@ -625,37 +625,59 @@
     {
       "name": "Merge Labs",
       "type": "non_invasive",
-      "modality": null,
-      "founded": "2023",
+      "modality": "functional_ultrasound",
+      "founded": "2025",
       "headquarters": "San Francisco, California, USA",
       "status": "active",
       "acquired_by": null,
       "funding_total_usd": 252000000,
       "valuation_usd": 850000000,
-      "employees_approx": 10,
+      "employees_approx": 40,
       "security_posture": "none_published",
-      "security_notes": "Early-stage. BCI headphones concept. No security information available.",
+      "security_notes": "Public Benefit Corporation spun out of Forest Neurotech (nonprofit FRO, est. 2023) in late 2025, publicly launched Jan 15, 2026. Co-founded by Sam Altman (OpenAI CEO), Alex Blania (Tools for Humanity CEO), Mikhail Shapiro (Caltech, HHMI), Sumner Norman (Forest Neurotech CEO), Tyson Aflalo (Forest Neurotech CSO), Sandro Herbig (Tools for Humanity). $252M seed led by OpenAI — largest BCI seed round ever. Also backed by Bain Capital, Interface Fund, Fifty Years, Gabe Newell (Valve). Core approach: functional ultrasound (fUS) imaging + genetically encoded molecular reporters (gas vesicle proteins) delivered via AAV gene therapy. ~100um spatial resolution, surface-to-deep-brain coverage claimed. No electrode penetration — ultrasound transducers sit on/near skull. Altman/OpenAI dual role has drawn conflict-of-interest scrutiny. Nature published scientific credibility assessment (2026). No device announced yet; Forest 1 (predecessor) is in NHS trial. No public security documentation. Gene therapy delivery vector (AAV) introduces novel TARA attack surface for genetic manipulation and viral vector integrity. OpenAI as investor raises AI-BCI convergence questions.",
       "tara_attack_surface": [
         "QIF-T0005",
         "QIF-T0008",
+        "QIF-T0010",
         "QIF-T0021",
         "QIF-T0023",
+        "QIF-T0025",
         "QIF-T0041",
-        "QIF-T0081"
+        "QIF-T0043",
+        "QIF-T0061",
+        "QIF-T0081",
+        "QIF-T0085"
       ],
       "devices": [
         {
-          "name": "Merge BCI Headphones",
+          "name": "Ultrasound Neural Interface (unnamed)",
           "type": "non_invasive",
           "channels": null,
-          "electrode_type": "dry",
-          "fda_status": "none",
-          "units_deployed": "0 (concept/prototype)",
+          "electrode_type": "ultrasound_transducer",
+          "fda_status": "preclinical",
+          "units_deployed": "0 (no device announced)",
           "first_human": null,
           "price_usd": null,
-          "target_use": "consumer",
-          "cves_known": []
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Proposed non-implanted ultrasound-based neural interface. Miniaturized fUS transducers (Butterfly Network ultrasound-on-chip lineage) detect hemodynamic changes at ~100um resolution. Combined with AAV-delivered gas vesicle protein molecular reporters that reflect ultrasound ~38x better than normal tissue. Hardware sits on/near skull, not penetrating brain. No prototype publicly demonstrated. Bandwidth claims ('several orders of magnitude' over electrodes) are unvalidated. Pre-clinical stage — estimated 3-5 years to human trials, 10-15 years to commercial product."
+        },
+        {
+          "name": "Forest 1",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "ultrasound_transducer",
+          "fda_status": "clinical_trial",
+          "units_deployed": "0 (trial enrolling)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Research-grade fUS scanner from Forest Neurotech (predecessor nonprofit). Smaller than a key fob. Enables functional brain imaging and neuromodulation from surface to deep structures. Currently in NCT06429735 NHS trial (30 patients with craniectomies, skull defect provides acoustic window). Funded by ARIA (UK) at GBP 6.5M. First human brain imaging using ultrasound-on-chip demonstrated at UCLA Neuro-ICU and Cedars-Sinai. Cognitive motor dissociation detected in comatose patients. Target applications: depression, mood disorders, addiction, OCD, epilepsy."
         }
+      ],
+      "funding_rounds": [
+        { "round": "Seed", "date": "2026-01", "amount_usd": 252000000 }
       ],
       "company_category": "startup"
     },
@@ -1160,17 +1182,17 @@
     },
     {
       "name": "Science Corporation",
-      "type": "invasive",
-      "modality": "cortical_stimulation",
-      "founded": "2020",
+      "type": "semi_invasive",
+      "modality": "retinal_stimulation",
+      "founded": "2021",
       "headquarters": "Alameda, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 552000000,
-      "valuation_usd": 1500000000,
-      "employees_approx": 100,
+      "funding_total_usd": 490000000,
+      "valuation_usd": 1250000000,
+      "employees_approx": 150,
       "security_posture": "none_published",
-      "security_notes": "Founded by Max Hodak (Neuralink co-founder). Vision restoration via cortical and retinal stimulation. PRIMA retinal implant (2,378 pixels, photovoltaic). No public security documentation. Write-capable implant with stimulation protocol — elevated TARA attack surface for injection/manipulation.",
+      "security_notes": "Founded by Max Hodak (Neuralink co-founder/president, left 2021) and Alan Mardinly PhD (CSO, former Neuralink). Three device programs spanning retinal to cortical. PRIMA: 378-pixel subretinal photovoltaic implant, wireless NIR power, write-capable stimulation — elevated TARA attack surface for injection/manipulation. Science Eye: 8,192-pixel supra-retinal micro-LED + optogenetic gene therapy (deferred until post-PRIMA approval). Biohybrid: cortical surface interface using stem cell-derived living neurons in silicon scaffold (~90,000 microwells, early rodent PoC). NEJM published PRIMAvera pivotal results Oct 2025 (DOI: 10.1056/NEJMoa2501396). CE mark + FDA submissions June 2025. IQT (CIA/IC venture arm) participated in Series C — national security implications noted. No public security documentation for any device program.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0003",
@@ -1195,22 +1217,48 @@
       "devices": [
         {
           "name": "PRIMA Retinal Implant",
-          "type": "invasive",
-          "channels": 2378,
+          "type": "semi_invasive",
+          "channels": 378,
           "electrode_type": "photovoltaic_subretinal",
-          "fda_status": "clinical_trial",
-          "units_deployed": "<50 (clinical trials)",
+          "fda_status": "submitted",
+          "units_deployed": "38 (PRIMAvera pivotal trial)",
           "first_human": "2018-01",
           "price_usd": null,
           "target_use": "medical",
           "cves_known": [],
-          "note": "Photovoltaic pixel array implanted subretinally. Wireless power via near-infrared projection glasses. Originally developed by Pixium Vision (acquired 2024)."
+          "note": "2mm x 2mm x 30um crystalline silicon photovoltaic array, 378 pixels at 100um each. Implanted subretinally for geographic atrophy (dry AMD). Wireless power via near-infrared projection glasses + pocket processor. Originally developed by Prof. Daniel Palanker (Stanford); commercialized by Pixium Vision (acquired April 2024 from Paris Commercial Court liquidation). PRIMAvera trial: 38 patients, 17 sites, 5 EU countries — mean +25.5 ETDRS letters at 12 months, 80% achieved logMAR 0.2+ improvement. NEJM Oct 2025 (DOI: 10.1056/NEJMoa2501396, PMID: 41124203). CE mark application June 2025 (Germany first market, decision expected mid-2026). FDA application June 2025 (decision pending). Clinical trial IDs: NCT04676854 (PRIMAvera EU pivotal), NCT03392324 (US feasibility, UPMC Pittsburgh)."
+        },
+        {
+          "name": "Science Eye",
+          "type": "semi_invasive",
+          "channels": 8192,
+          "electrode_type": "supra_retinal_micro_led",
+          "fda_status": "preclinical",
+          "units_deployed": "0 (deferred)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "30um thin flexible wireless micro-LED display (FlexLED) applied to retinal surface + optogenetic gene therapy to make retinal ganglion cells light-sensitive. 8,192 pixels (~8x iPhone 13 Super Retina density). Targets retinitis pigmentosa and dry AMD where photoreceptors are dead but RGCs survive. Display moves with the eye (constant pixel-to-cell mapping). Wireless power coil under conjunctiva. Deferred until PRIMA receives first regulatory approval. bioRxiv preprint Feb 2023 (doi:10.1101/2023.01.31.526482v2)."
+        },
+        {
+          "name": "Biohybrid Neural Interface",
+          "type": "invasive",
+          "channels": 90000,
+          "electrode_type": "biohybrid_living_neuron",
+          "fda_status": "preclinical",
+          "units_deployed": "0 (rodent PoC only)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Cortical surface interface using stem cell-derived living neurons embedded in silicon scaffold with ~90,000 microwells (~5mm square). Neurons grow into brain tissue forming biological synaptic connections — avoids penetrating electrodes. LEDs for optical stimulation, electrical contacts for recording. Potential for ~1 billion synapses with host cortex. Rodent behavior guidance demonstrated (bioRxiv Nov 2024, Brown et al.). Led by Alan Mardinly (CSO) and Yifan Kong. Estimated decade+ before human trials. Future applications: cognition and mobility restoration."
         }
       ],
       "funding_rounds": [
-        { "round": "Series A", "date": "2021-01", "amount_usd": 38000000 },
-        { "round": "Series B", "date": "2022-06", "amount_usd": 159000000 },
-        { "round": "Pixium Vision acquisition", "date": "2024-04", "amount_usd": 125000000 },
+        { "round": "Seed", "date": "2021-07", "amount_usd": 47000000 },
+        { "round": "Pixium Vision acquisition", "date": "2024-04", "amount_usd": null },
+        { "round": "Convertible Note", "date": "2025-04", "amount_usd": 104000000 },
         { "round": "Series C", "date": "2026-03", "amount_usd": 230000000 }
       ],
       "company_category": "growth_stage"
