@@ -628,6 +628,30 @@
         "src/data/bci-intel-feed.json"
       ],
       "category": "data"
+    },
+    {
+      "id": "gh-quarterly-intel",
+      "name": "Quarterly BCI Intel Report",
+      "description": "Auto-generates a draft BCI Intelligence Report scaffold with data metrics from the QIF datalake, regenerates the valuation chart, and opens a PR for human review. Runs on the first day of each quarter (Jan, Apr, Jul, Oct).",
+      "trigger": "cron (quarterly: 1st of Jan/Apr/Jul/Oct), workflow_dispatch",
+      "type": "github_action",
+      "source_file": ".github/workflows/quarterly-intel-report.yml",
+      "status": "active",
+      "last_triggered": null,
+      "last_status": null,
+      "dependencies": [
+        "shared/bci-landscape.json",
+        "shared/qtara-registrar.json",
+        "shared/neurosecurity-scores.json",
+        "shared/cve-technique-mapping.json",
+        "scripts/generate-valuation-chart.py"
+      ],
+      "outputs": [
+        "Draft blog post (blogs/YYYY-MM-DD-qN-YYYY-bci-intelligence-report.md)",
+        "Valuation chart (docs/images/bci-valuation-qN-YYYY.png)",
+        "Pull request for review"
+      ],
+      "category": "reporting"
     }
   ]
 }

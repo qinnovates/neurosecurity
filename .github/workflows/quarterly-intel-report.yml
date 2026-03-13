@@ -1,0 +1,199 @@
+name: Quarterly BCI Intel Report
+
+# Runs on the first day of each quarter (Jan 1, Apr 1, Jul 1, Oct 1)
+on:
+  schedule:
+    - cron: '0 12 1 1,4,7,10 *'  # Noon UTC on Q start
+  workflow_dispatch:  # Manual trigger for testing
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install matplotlib numpy
+
+      - name: Determine quarter
+        id: quarter
+        run: |
+          MONTH=$(date +%m)
+          YEAR=$(date +%Y)
+          if [ "$MONTH" -le 3 ]; then
+            # Running Apr 1 = report for Q1
+            QUARTER="Q1"
+            PREV_QUARTER="Q1"
+          elif [ "$MONTH" -le 6 ]; then
+            QUARTER="Q2"
+            PREV_QUARTER="Q2"
+          elif [ "$MONTH" -le 9 ]; then
+            QUARTER="Q3"
+            PREV_QUARTER="Q3"
+          else
+            QUARTER="Q4"
+            PREV_QUARTER="Q4"
+          fi
+          # The report covers the PREVIOUS quarter
+          # Apr 1 run covers Q1, Jul 1 covers Q2, etc.
+          if [ "$QUARTER" = "Q1" ]; then
+            REPORT_QUARTER="Q4"
+            REPORT_YEAR=$((YEAR - 1))
+          elif [ "$QUARTER" = "Q2" ]; then
+            REPORT_QUARTER="Q1"
+            REPORT_YEAR=$YEAR
+          elif [ "$QUARTER" = "Q3" ]; then
+            REPORT_QUARTER="Q2"
+            REPORT_YEAR=$YEAR
+          else
+            REPORT_QUARTER="Q3"
+            REPORT_YEAR=$YEAR
+          fi
+          echo "quarter=$REPORT_QUARTER" >> $GITHUB_OUTPUT
+          echo "year=$REPORT_YEAR" >> $GITHUB_OUTPUT
+          echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: Generate valuation chart
+        run: python3 scripts/generate-valuation-chart.py
+
+      - name: Compute data metrics
+        id: metrics
+        run: |
+          python3 -c "
+          import json
+
+          with open('shared/bci-landscape.json') as f:
+              landscape = json.load(f)
+          with open('shared/qtara-registrar.json') as f:
+              tara = json.load(f)
+          with open('shared/neurosecurity-scores.json') as f:
+              niss = json.load(f)
+          with open('shared/cve-technique-mapping.json') as f:
+              cves = json.load(f)
+
+          companies = landscape.get('companies', [])
+          active = [c for c in companies if c.get('status') == 'active']
+          funded = [c for c in companies if c.get('funding_total_usd') and c['funding_total_usd'] > 0]
+          total_funding = sum(c['funding_total_usd'] for c in funded) / 1e9
+
+          no_security = len([c for c in companies if c.get('security_posture') in ('none_published', None)])
+          pct_no_security = round(no_security / len(companies) * 100)
+
+          stats = tara.get('statistics', {})
+          techniques = stats.get('total_techniques', 0)
+          tactics = stats.get('total_tactics', 0)
+
+          devices_scored = len(niss.get('devices', []))
+          total_cves = cves.get('total_cves', 0)
+
+          print(f'companies={len(companies)}')
+          print(f'active={len(active)}')
+          print(f'funded_companies={len(funded)}')
+          print(f'total_funding={total_funding:.2f}')
+          print(f'no_security_pct={pct_no_security}')
+          print(f'techniques={techniques}')
+          print(f'tactics={tactics}')
+          print(f'devices_scored={devices_scored}')
+          print(f'total_cves={total_cves}')
+          " | tee /tmp/metrics.txt
+
+          # Export as step outputs
+          while IFS='=' read -r key value; do
+            echo "$key=$value" >> $GITHUB_OUTPUT
+          done < /tmp/metrics.txt
+
+      - name: Create report draft stub
+        run: |
+          QUARTER=${{ steps.quarter.outputs.quarter }}
+          YEAR=${{ steps.quarter.outputs.year }}
+          DATE=${{ steps.quarter.outputs.date }}
+          QUARTER_LOWER=$(echo $QUARTER | tr '[:upper:]' '[:lower:]')
+
+          FILENAME="blogs/${DATE}-${QUARTER_LOWER}-${YEAR}-bci-intelligence-report.md"
+
+          cat > "$FILENAME" << EOF
+          ---
+          title: "${QUARTER} ${YEAR} BCI Intelligence Report"
+          date: ${DATE}
+          tags: [neurosecurity, threat-intelligence, bci-security, research, report]
+          type: case-study
+          description: "Quarterly threat intelligence report — ${QUARTER} ${YEAR}."
+          draft: true
+          ---
+
+          # ${QUARTER} ${YEAR} BCI Intelligence Report
+
+          **Published:** ${DATE}
+          **Classification:** PUBLIC — Qinnovate Threat Intelligence
+          **Status:** DRAFT — Requires human review before publication.
+
+          ---
+
+          ## Data Snapshot
+
+          | Metric | Value |
+          |--------|-------|
+          | Companies tracked | ${{ steps.metrics.outputs.companies }} |
+          | Total funding tracked | \$${{ steps.metrics.outputs.total_funding }}B |
+          | Companies with no security docs | ${{ steps.metrics.outputs.no_security_pct }}% |
+          | TARA techniques | ${{ steps.metrics.outputs.techniques }} |
+          | TARA tactics | ${{ steps.metrics.outputs.tactics }} |
+          | Devices scored (NISS) | ${{ steps.metrics.outputs.devices_scored }} |
+          | CVEs mapped | ${{ steps.metrics.outputs.total_cves }} |
+
+          ---
+
+          > **This is an auto-generated draft.** The data metrics above are computed from the QIF datalake. The narrative sections require human analysis and writing. Run \`claude\` to complete the report using the Q1 2026 report as a template.
+
+          ---
+
+          **AI Disclosure:** Data metrics auto-generated from QIF datalake. Narrative sections require human authorship.
+          EOF
+
+          echo "Created draft: $FILENAME"
+
+      - name: Create PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          QUARTER=${{ steps.quarter.outputs.quarter }}
+          YEAR=${{ steps.quarter.outputs.year }}
+          BRANCH="intel-report/${YEAR}-${QUARTER}"
+
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "[Research] ${QUARTER} ${YEAR} BCI Intel Report — draft scaffold
+
+          Auto-generated data snapshot from QIF datalake.
+          Requires human review and narrative writing.
+
+          Co-Authored-By: GitHub Actions <noreply@github.com>"
+
+          git push -u origin "$BRANCH"
+
+          gh pr create \
+            --title "${QUARTER} ${YEAR} BCI Intelligence Report — Draft" \
+            --body "## Auto-generated quarterly intel report scaffold
+
+          - Data metrics computed from \`shared/*.json\`
+          - Valuation chart regenerated
+          - Draft blog post created with data snapshot
+          - **Requires:** Human narrative writing, fact-checking, and publication
+
+          ### Data Sources
+          - \`shared/bci-landscape.json\` (companies, funding, devices)
+          - \`shared/qtara-registrar.json\` (threat techniques)
+          - \`shared/neurosecurity-scores.json\` (NISS device scores)
+          - \`shared/cve-technique-mapping.json\` (CVE mappings)
+
+          🤖 Generated by quarterly-intel-report workflow" \
+            --base main
