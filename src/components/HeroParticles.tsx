@@ -6,7 +6,7 @@ const SEPARATION = 100;
 const AMOUNTX = 50;
 const AMOUNTY = 50;
 
-function WavePoints() {
+function WavePoints({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -48,10 +48,10 @@ function WavePoints() {
 
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
-    uColorLow: { value: new THREE.Color('#0f172a') },
-    uColorMid: { value: new THREE.Color('#2563eb') },
-    uColorHigh: { value: new THREE.Color('#7dd3fc') },
-  }), []);
+    uColorLow: { value: new THREE.Color(variant === 'dark' ? '#1a0a2e' : '#0f172a') },
+    uColorMid: { value: new THREE.Color(variant === 'dark' ? '#8b5cf6' : '#2563eb') },
+    uColorHigh: { value: new THREE.Color(variant === 'dark' ? '#c4b5fd' : '#7dd3fc') },
+  }), [variant]);
 
   useFrame((state) => {
     if (!pointsRef.current || !materialRef.current) return;
@@ -151,7 +151,11 @@ function WavePoints() {
   );
 }
 
-export default function HeroParticles() {
+interface HeroParticlesProps {
+  variant?: 'light' | 'dark';
+}
+
+export default function HeroParticles({ variant = 'light' }: HeroParticlesProps) {
   return (
     <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
       <Canvas
@@ -160,7 +164,7 @@ export default function HeroParticles() {
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
       >
-        <WavePoints />
+        <WavePoints variant={variant} />
       </Canvas>
     </div>
   );
