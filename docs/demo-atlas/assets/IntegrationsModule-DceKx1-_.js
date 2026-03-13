@@ -1,4 +1,4 @@
-import{i as e,n as t,o as n,t as r}from"./jsx-runtime-Bopvv_z3.js";import{i,r as a}from"./index-DOEvgMos.js";import{n as o,t as s}from"./ModuleShell-CuKJhwVA.js";function c(){let[e,t]=(0,d.useState)(`techniques
+import{i as e,n as t,o as n,t as r}from"./jsx-runtime-Bopvv_z3.js";import{i,r as a}from"./index-O-k8mSyX.js";import{n as o,t as s}from"./ModuleShell-CuKJhwVA.js";function c(){let[e,t]=(0,d.useState)(`techniques
 | where severity >= 7
 | project technique_id, name, severity, bands
 | order by severity desc
