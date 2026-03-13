@@ -52,6 +52,12 @@ import glialRaw from '@shared/qif-glial-cells.json';
 import neurovascularRaw from '@shared/qif-neurovascular.json';
 import receptorsRaw from '@shared/qif-receptors.json';
 
+// NeuroSIM simulation data
+import neurosimRaw from '@shared/qif-neurosim.json';
+
+// EEG sample registry
+import eegSamplesRaw from '@shared/eeg-samples.json';
+
 // Precomputed tables (eliminates O(n⁴) build-time computation)
 import impactChainsRaw from '@shared/impact-chains.json';
 
@@ -77,6 +83,10 @@ export interface DataLakeStats {
   neurologicalConditions: number;
   companies: number;
   devices: number;
+  neuronTypes: number;
+  oscillationBands: number;
+  whiteMatterTracts: number;
+  eegElectrodes: number;
 }
 
 // ═══ Helpers ═══
@@ -100,6 +110,7 @@ const intelSources = intelSourcesRaw as any;
 const registry = registryRaw as any;
 const derivationTimeline = derivationTimelineRaw as any;
 const neuro = neuroRaw as any;
+const neurosim = neurosimRaw as any;
 
 /** Refang a defanged URL */
 function refangUrl(url: string): string {
@@ -903,6 +914,216 @@ function buildImpactChains(): Row[] {
   return (impactChainsRaw as any) as Row[];
 }
 
+// ═══ NeuroSIM Tables ═══
+
+function buildNeuronTypes(): Row[] {
+  if (!neurosim?.neuronTypes) return [];
+  return neurosim.neuronTypes.map((n: any) => ({
+    id: n.id,
+    name: n.name,
+    category: n.category,
+    neurotransmitter: n.neurotransmitter,
+    regions: n.regions.join(', '),
+    proportion: n.proportion,
+    soma_size_um: n.morphology.somaSize_um,
+    soma_shape: n.morphology.somaShape,
+    spine_count: n.morphology.spineCount,
+    axon_length_um: n.morphology.axon.length_um,
+    axon_myelinated: n.morphology.axon.myelinated,
+    axon_collaterals: n.morphology.axon.collaterals,
+    resting_potential_mV: n.electrophysiology.restingPotential_mV,
+    threshold_mV: n.electrophysiology.threshold_mV,
+    peak_amplitude_mV: n.electrophysiology.peakAmplitude_mV,
+    ap_duration_ms: n.electrophysiology.apDuration_ms,
+    firing_rate_min_Hz: n.electrophysiology.firingRate_Hz.min,
+    firing_rate_typical_Hz: n.electrophysiology.firingRate_Hz.typical,
+    firing_rate_max_Hz: n.electrophysiology.firingRate_Hz.max,
+    refractory_absolute_ms: n.electrophysiology.refractoryAbsolute_ms,
+  }));
+}
+
+function buildCorticalLayers(): Row[] {
+  if (!neurosim?.corticalLayers) return [];
+  return neurosim.corticalLayers.map((l: any) => ({
+    id: l.id,
+    name: l.name,
+    thickness_um: l.thickness_um,
+    cell_types: l.cellTypes.join(', '),
+    description: l.description,
+  }));
+}
+
+function buildActionPotentialPhases(): Row[] {
+  if (!neurosim?.actionPotential?.phases) return [];
+  return neurosim.actionPotential.phases.map((p: any) => ({
+    id: p.id,
+    label: p.label,
+    voltage_mV: p.voltage_mV,
+    duration_ms: p.duration_ms,
+    description: p.description,
+  }));
+}
+
+function buildIonChannels(): Row[] {
+  if (!neurosim?.actionPotential?.ionChannels) return [];
+  return neurosim.actionPotential.ionChannels.map((ch: any) => ({
+    id: ch.id,
+    name: ch.name,
+    ion: ch.ion,
+    direction: ch.direction,
+    activation: ch.activation,
+    conductance_pS: ch.conductance_pS,
+  }));
+}
+
+function buildSimReceptors(): Row[] {
+  if (!neurosim?.receptors) return [];
+  return neurosim.receptors.map((r: any) => ({
+    id: r.id,
+    name: r.name,
+    type: r.type,
+    neurotransmitter: r.neurotransmitter,
+    ions: r.ions.join(', '),
+    conductance_pS: r.conductance_pS,
+    kinetics: r.kinetics,
+    notes: r.notes || '',
+  }));
+}
+
+function buildDendriticSpines(): Row[] {
+  if (!neurosim?.spineTypes) return [];
+  return neurosim.spineTypes.map((s: any) => ({
+    id: s.id,
+    name: s.name,
+    head_diameter_um: s.headDiameter_um,
+    neck_length_um: s.neckLength_um,
+    neck_diameter_um: s.neckDiameter_um,
+    stability: s.stability,
+    ampa_count: s.ampaCount,
+  }));
+}
+
+function buildBrainNetworks(): Row[] {
+  if (!neurosim?.networks) return [];
+  return neurosim.networks.map((n: any) => ({
+    id: n.id,
+    name: n.name,
+    regions: n.regions.join(', '),
+    tract: n.tract,
+  }));
+}
+
+function buildConductionVelocities(): Row[] {
+  if (!neurosim?.conductionVelocities) return [];
+  return neurosim.conductionVelocities.map((cv: any) => ({
+    fiber_type: cv.fiberType,
+    myelinated: cv.myelinated,
+    diameter_um: cv.diameter_um,
+    velocity_ms: cv.velocity_ms,
+    function: cv.function,
+  }));
+}
+
+function buildSynapseParameters(): Row[] {
+  if (!neurosim?.synapse) return [];
+  const s = neurosim.synapse;
+  return [
+    { parameter: 'cleft_width_nm', value: s.cleftWidth_nm, category: 'structure' },
+    { parameter: 'presynaptic_diameter_um', value: s.presynapticTerminal.diameter_um, category: 'structure' },
+    { parameter: 'vesicle_count_rrp', value: s.presynapticTerminal.vesicleCount_rrp, category: 'vesicles' },
+    { parameter: 'vesicle_count_reserve', value: s.presynapticTerminal.vesicleCount_reserve, category: 'vesicles' },
+    { parameter: 'vesicle_diameter_nm', value: s.presynapticTerminal.vesicle_diameter_nm, category: 'vesicles' },
+    { parameter: 'psd_diameter_nm', value: s.postsynapticDensity.diameter_nm, category: 'structure' },
+    { parameter: 'psd_thickness_nm', value: s.postsynapticDensity.thickness_nm, category: 'structure' },
+    ...Object.entries(s.timing).map(([k, v]) => ({
+      parameter: k,
+      value: v as number,
+      category: 'timing',
+    })),
+  ];
+}
+
+function buildOscillationBands(): Row[] {
+  if (!neurosim?.oscillationBands) return [];
+  return neurosim.oscillationBands.map((ob: any) => ({
+    id: ob.id,
+    name: ob.name,
+    frequency_min_Hz: ob.frequency_min_Hz,
+    frequency_max_Hz: ob.frequency_max_Hz,
+    amplitude_uV: ob.amplitude_uV,
+    regions: ob.regions.join(', '),
+    function: ob.function,
+    clinical: ob.clinical,
+    bci_relevance: ob.bci_relevance,
+  }));
+}
+
+function buildWhiteMatterTracts(): Row[] {
+  if (!neurosim?.whitematterTracts) return [];
+  return neurosim.whitematterTracts.map((t: any) => ({
+    id: t.id,
+    name: t.name,
+    type: t.type,
+    connects: t.connects.join(', '),
+    fiber_count_million: t.fiberCount_million,
+    function: t.function,
+    clinical: t.clinical,
+  }));
+}
+
+function buildSynapticPlasticity(): Row[] {
+  if (!neurosim?.synapticPlasticity) return [];
+  return neurosim.synapticPlasticity.map((sp: any) => ({
+    id: sp.id,
+    name: sp.name,
+    mechanism: sp.mechanism,
+    induction: sp.induction,
+    requires: sp.requires,
+    duration: sp.duration,
+    protein_synthesis: sp.protein_synthesis,
+    structural: sp.structural,
+  }));
+}
+
+function buildEegElectrodes(): Row[] {
+  if (!neurosim?.eegElectrodes) return [];
+  return neurosim.eegElectrodes.map((e: any) => ({
+    id: e.id,
+    name: e.name,
+    lobe: e.lobe,
+    hemisphere: e.hemisphere,
+    function: e.function,
+    bci_use: e.bci_use,
+  }));
+}
+
+// ═══ EEG Sample Registry ═══
+
+function buildEegSamples(): Row[] {
+  const samples = (eegSamplesRaw as any)?.samples;
+  if (!Array.isArray(samples)) return [];
+  return samples.map((s: any) => ({
+    id: s.id,
+    name: s.name,
+    source: s.source,
+    source_url: s.sourceUrl ?? '',
+    type: s.type,
+    conditions: Array.isArray(s.condition) ? s.condition.join(', ') : '',
+    dsm5_code: s.dsm5Code ?? '',
+    channels: s.channels ?? 0,
+    channel_names: Array.isArray(s.channelNames) ? s.channelNames.join(', ') : '',
+    sampling_rate_hz: s.samplingRateHz ?? 0,
+    format: s.format,
+    license: s.license,
+    redistributable: s.redistributable ? 'yes' : 'no',
+    subjects: s.subjects ?? 0,
+    subject_breakdown: s.subjectBreakdown ?? '',
+    paradigm: s.paradigm ?? '',
+    tara_id: s.taraId ?? '',
+    notes: s.notes ?? '',
+  }));
+}
+
 // ═══ Main Builder ═══
 
 let _cache: { tables: KqlTables; stats: DataLakeStats } | null = null;
@@ -1000,6 +1221,24 @@ export function getKqlTables(): KqlTables {
     meningeal_system: buildMeningealSystem(),
     receptor_families: buildReceptorFamilies(),
     receptor_subunits: buildReceptorSubunits(),
+
+    // NeuroSIM simulation
+    neuron_types: buildNeuronTypes(),
+    cortical_layers: buildCorticalLayers(),
+    action_potential_phases: buildActionPotentialPhases(),
+    ion_channels: buildIonChannels(),
+    sim_receptors: buildSimReceptors(),
+    dendritic_spines: buildDendriticSpines(),
+    brain_networks: buildBrainNetworks(),
+    conduction_velocities: buildConductionVelocities(),
+    synapse_parameters: buildSynapseParameters(),
+    oscillation_bands: buildOscillationBands(),
+    white_matter_tracts: buildWhiteMatterTracts(),
+    synaptic_plasticity: buildSynapticPlasticity(),
+    eeg_electrodes: buildEegElectrodes(),
+
+    // EEG sample registry (tagged datasets)
+    eeg_samples: buildEegSamples(),
   };
 
   // Filter out empty tables — dynamic discovery
@@ -1047,6 +1286,10 @@ function computeStats(tables: KqlTables): DataLakeStats {
     neurologicalConditions: byTable['neurological_conditions'] || 0,
     companies: byTable['companies'] || 0,
     devices: byTable['devices'] || 0,
+    neuronTypes: byTable['neuron_types'] || 0,
+    oscillationBands: byTable['oscillation_bands'] || 0,
+    whiteMatterTracts: byTable['white_matter_tracts'] || 0,
+    eegElectrodes: byTable['eeg_electrodes'] || 0,
   };
 }
 

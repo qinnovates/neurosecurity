@@ -1,0 +1,48 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import NeuroSIM from '@/components/neurosim/NeuroSIM';
+import neurosimRaw from '@shared/qif-neurosim.json';
+
+const simData = neurosimRaw as any;
+---
+
+<PageLayout
+  title="NeuroSIM — Neural Simulation"
+  description="Interactive neuron simulation — visualize brain networks, cortical columns, individual neurons, synaptic transmission, and molecular machinery down to ion channels and receptors."
+  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'NeuroSIM' }]}
+  wide={true}
+>
+  <!-- Hero -->
+  <div class="mb-8">
+    <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #8b5cf6;">Neural Simulation</p>
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3" style="color: var(--color-text-primary);">
+      NeuroSIM
+    </h1>
+    <p class="text-base max-w-3xl" style="color: var(--color-text-muted);">
+      Interactive visualization of neural architecture from brain networks down to individual synapses and molecular machinery.
+      Navigate five zoom levels — network, cortical layers, neuron morphology, synaptic transmission, and molecular detail.
+      All parameters from published neuroscience literature.
+    </p>
+  </div>
+
+  <NeuroSIM client:load simData={simData} />
+
+  <!-- Sources -->
+  <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+    <h3 class="text-sm font-mono font-semibold mb-3" style="color: var(--color-text-muted);">Data Sources</h3>
+    <ul class="text-xs space-y-1" style="color: var(--color-text-muted);">
+      <li>Pyramidal neuron morphology: PMC11094408 (2024)</li>
+      <li>Dendritic spine clustering: PMC6060563 (PLOS Computational Biology)</li>
+      <li>Action potential physiology: StatPearls NBK538143</li>
+      <li>Cortical microcircuit: Blue Brain Project NMC Portal (EPFL)</li>
+      <li>Synaptic vesicle dynamics: PMC8054220</li>
+      <li>SNARE complex: PMC3570063</li>
+      <li>Receptor kinetics: StatPearls NBK519495</li>
+      <li>Network organization: Human Connectome Project</li>
+    </ul>
+    <p class="text-xs mt-3 italic" style="color: var(--color-text-muted);">
+      Simulation parameters are simplified for visualization. Biophysical models with full Hodgkin-Huxley dynamics
+      are available in NEURON simulator (ModelDB) and the Blue Brain Project portal.
+    </p>
+  </div>
+</PageLayout>

@@ -1,0 +1,13 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import VisionSensorModule from '@/components/atlas/vision-sensor/VisionSensorModule';
+---
+
+<PageLayout
+  title="Vision Sensor Module — Open Neural Atlas"
+  description="RF-to-cortical vision simulation: WiFi CSI and BLE sensing mapped to phosphene perception through the visual cortex processing hierarchy."
+>
+  <main class="mx-auto max-w-6xl px-4 py-8">
+    <VisionSensorModule client:only="react" />
+  </main>
+</PageLayout>

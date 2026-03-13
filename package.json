@@ -21,7 +21,10 @@
     "changelog": "node scripts/changelog-update.mjs",
     "citations": "node scripts/generate-citations.mjs",
     "citations:check": "node scripts/generate-citations.mjs --check",
-    "compute:chains": "node shared/scripts/compute-impact-chains.mjs"
+    "compute:chains": "node shared/scripts/compute-impact-chains.mjs",
+    "eeg:list": "python3 shared/scripts/download-eeg-samples.py --list",
+    "eeg:download": "python3 shared/scripts/download-eeg-samples.py --all",
+    "eeg:download:adhd": "python3 shared/scripts/download-eeg-samples.py --dataset adhd-mendeley-resting"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

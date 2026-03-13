@@ -1,0 +1,326 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "Neuron simulation parameters for NeuroSIM module. All values from published literature.",
+    "sources": [
+      "PMC11094408 (human pyramidal morphology)",
+      "PMC6060563 (dendritic spine clustering)",
+      "StatPearls NBK538143 (action potential physiology)",
+      "Blue Brain Project NMC Portal (microcircuit)",
+      "Allen Brain Atlas (cell types)"
+    ]
+  },
+  "neuronTypes": [
+    {
+      "id": "pyramidal",
+      "name": "Pyramidal Neuron",
+      "category": "excitatory",
+      "neurotransmitter": "glutamate",
+      "regions": ["cortex", "hippocampus"],
+      "proportion": 0.80,
+      "morphology": {
+        "somaSize_um": 20,
+        "somaShape": "triangular",
+        "apicalDendrite": { "length_um": 500, "branches": 8, "diameter_um": 4.0 },
+        "basalDendrites": { "count": 5, "length_um": 200, "branches": 4, "diameter_um": 1.5 },
+        "axon": { "length_um": 1000, "myelinated": true, "collaterals": 6, "diameter_um": 1.0 },
+        "spineCount": 7000,
+        "color": "#3b82f6"
+      },
+      "electrophysiology": {
+        "restingPotential_mV": -70,
+        "threshold_mV": -55,
+        "peakAmplitude_mV": 40,
+        "afterHyperpolarization_mV": -80,
+        "apDuration_ms": 2.0,
+        "firingRate_Hz": { "min": 0.1, "typical": 5, "max": 100 },
+        "refractoryAbsolute_ms": 1.5,
+        "refractoryRelative_ms": 3.5
+      }
+    },
+    {
+      "id": "interneuron_basket",
+      "name": "Basket Cell (Interneuron)",
+      "category": "inhibitory",
+      "neurotransmitter": "gaba",
+      "regions": ["cortex"],
+      "proportion": 0.08,
+      "morphology": {
+        "somaSize_um": 15,
+        "somaShape": "round",
+        "apicalDendrite": null,
+        "basalDendrites": { "count": 6, "length_um": 150, "branches": 5, "diameter_um": 1.0 },
+        "axon": { "length_um": 500, "myelinated": false, "collaterals": 12, "diameter_um": 0.5 },
+        "spineCount": 200,
+        "color": "#ef4444"
+      },
+      "electrophysiology": {
+        "restingPotential_mV": -70,
+        "threshold_mV": -50,
+        "peakAmplitude_mV": 35,
+        "afterHyperpolarization_mV": -85,
+        "apDuration_ms": 0.7,
+        "firingRate_Hz": { "min": 40, "typical": 100, "max": 200 },
+        "refractoryAbsolute_ms": 0.5,
+        "refractoryRelative_ms": 1.5
+      }
+    },
+    {
+      "id": "purkinje",
+      "name": "Purkinje Cell",
+      "category": "inhibitory",
+      "neurotransmitter": "gaba",
+      "regions": ["cerebellum"],
+      "proportion": 0.001,
+      "morphology": {
+        "somaSize_um": 30,
+        "somaShape": "round",
+        "apicalDendrite": { "length_um": 400, "branches": 40, "diameter_um": 3.0 },
+        "basalDendrites": null,
+        "axon": { "length_um": 2000, "myelinated": true, "collaterals": 3, "diameter_um": 1.5 },
+        "spineCount": 150000,
+        "color": "#8b5cf6"
+      },
+      "electrophysiology": {
+        "restingPotential_mV": -68,
+        "threshold_mV": -52,
+        "peakAmplitude_mV": 35,
+        "afterHyperpolarization_mV": -75,
+        "apDuration_ms": 1.5,
+        "firingRate_Hz": { "min": 30, "typical": 60, "max": 100 },
+        "refractoryAbsolute_ms": 1.0,
+        "refractoryRelative_ms": 3.0
+      }
+    },
+    {
+      "id": "granule",
+      "name": "Granule Cell",
+      "category": "excitatory",
+      "neurotransmitter": "glutamate",
+      "regions": ["cerebellum", "hippocampus"],
+      "proportion": 0.50,
+      "morphology": {
+        "somaSize_um": 6,
+        "somaShape": "round",
+        "apicalDendrite": null,
+        "basalDendrites": { "count": 4, "length_um": 15, "branches": 1, "diameter_um": 0.3 },
+        "axon": { "length_um": 3000, "myelinated": false, "collaterals": 0, "diameter_um": 0.2 },
+        "spineCount": 20,
+        "color": "#10b981"
+      },
+      "electrophysiology": {
+        "restingPotential_mV": -75,
+        "threshold_mV": -55,
+        "peakAmplitude_mV": 40,
+        "afterHyperpolarization_mV": -80,
+        "apDuration_ms": 1.5,
+        "firingRate_Hz": { "min": 0, "typical": 10, "max": 1000 },
+        "refractoryAbsolute_ms": 1.0,
+        "refractoryRelative_ms": 3.0
+      }
+    },
+    {
+      "id": "medium_spiny",
+      "name": "Medium Spiny Neuron",
+      "category": "inhibitory",
+      "neurotransmitter": "gaba",
+      "regions": ["basal_ganglia"],
+      "proportion": 0.95,
+      "morphology": {
+        "somaSize_um": 15,
+        "somaShape": "round",
+        "apicalDendrite": null,
+        "basalDendrites": { "count": 7, "length_um": 250, "branches": 6, "diameter_um": 1.2 },
+        "axon": { "length_um": 800, "myelinated": true, "collaterals": 4, "diameter_um": 0.8 },
+        "spineCount": 5000,
+        "color": "#f59e0b"
+      },
+      "electrophysiology": {
+        "restingPotential_mV": -80,
+        "threshold_mV": -50,
+        "peakAmplitude_mV": 30,
+        "afterHyperpolarization_mV": -85,
+        "apDuration_ms": 2.5,
+        "firingRate_Hz": { "min": 0, "typical": 1, "max": 50 },
+        "refractoryAbsolute_ms": 2.0,
+        "refractoryRelative_ms": 5.0
+      }
+    },
+    {
+      "id": "dopaminergic",
+      "name": "Dopaminergic Neuron",
+      "category": "modulatory",
+      "neurotransmitter": "dopamine",
+      "regions": ["substantia_nigra", "vta"],
+      "proportion": 0.001,
+      "morphology": {
+        "somaSize_um": 20,
+        "somaShape": "round",
+        "apicalDendrite": null,
+        "basalDendrites": { "count": 4, "length_um": 300, "branches": 5, "diameter_um": 1.5 },
+        "axon": { "length_um": 5000, "myelinated": false, "collaterals": 20, "diameter_um": 0.5 },
+        "spineCount": 500,
+        "color": "#f97316"
+      },
+      "electrophysiology": {
+        "restingPotential_mV": -65,
+        "threshold_mV": -50,
+        "peakAmplitude_mV": 30,
+        "afterHyperpolarization_mV": -75,
+        "apDuration_ms": 3.0,
+        "firingRate_Hz": { "min": 3, "typical": 5, "max": 25 },
+        "refractoryAbsolute_ms": 2.0,
+        "refractoryRelative_ms": 5.0
+      }
+    }
+  ],
+  "corticalLayers": [
+    { "id": "I", "name": "Molecular Layer", "thickness_um": 125, "cellTypes": ["interneuron_basket"], "description": "Sparse cells, mostly dendritic processes and feedback fibers", "color": "#f0fdf4" },
+    { "id": "II", "name": "External Granular", "thickness_um": 150, "cellTypes": ["pyramidal", "interneuron_basket"], "description": "Small pyramidal cells, stellate cells; intracortical connections", "color": "#dcfce7" },
+    { "id": "III", "name": "External Pyramidal", "thickness_um": 250, "cellTypes": ["pyramidal", "interneuron_basket"], "description": "Medium pyramidal neurons; corticocortical output", "color": "#bbf7d0" },
+    { "id": "IV", "name": "Internal Granular", "thickness_um": 150, "cellTypes": ["granule", "interneuron_basket"], "description": "Stellate cells; primary thalamocortical input target", "color": "#86efac" },
+    { "id": "V", "name": "Internal Pyramidal", "thickness_um": 300, "cellTypes": ["pyramidal", "interneuron_basket"], "description": "Large pyramidal neurons (Betz cells in M1); subcortical output", "color": "#4ade80" },
+    { "id": "VI", "name": "Multiform Layer", "thickness_um": 250, "cellTypes": ["pyramidal", "interneuron_basket"], "description": "Small pyramidal, fusiform cells; thalamic feedback projection", "color": "#22c55e" }
+  ],
+  "synapse": {
+    "cleftWidth_nm": 25,
+    "presynapticTerminal": {
+      "diameter_um": 1.0,
+      "vesicleCount_rrp": 12,
+      "vesicleCount_reserve": 200,
+      "vesicleCount_recycling": 30,
+      "vesicle_diameter_nm": 40
+    },
+    "postsynapticDensity": {
+      "diameter_nm": 300,
+      "thickness_nm": 30
+    },
+    "timing": {
+      "vesicleReplenish_ms": 14,
+      "vesicleUndock_ms": 100,
+      "fusionLatency_ms": 0.5,
+      "ntClearance_glutamate_ms": 5,
+      "ntClearance_gaba_ms": 5,
+      "ntClearance_dopamine_ms": 500,
+      "ampaRise_ms": 1.5,
+      "ampaDecay_ms": 10,
+      "nmdaRise_ms": 7,
+      "nmdaDecay_ms": 100,
+      "gabaARise_ms": 2,
+      "gabaADecay_ms": 20
+    }
+  },
+  "actionPotential": {
+    "phases": [
+      { "id": "resting", "label": "Resting", "voltage_mV": -70, "duration_ms": 0, "description": "Na+/K+-ATPase maintains −70mV. K+ leak channels dominate.", "color": "#64748b" },
+      { "id": "depolarization", "label": "Depolarization", "voltage_mV": 40, "duration_ms": 1.0, "description": "Threshold reached (−55mV). Voltage-gated Na+ channels open. Positive feedback → +40mV.", "color": "#ef4444" },
+      { "id": "repolarization", "label": "Repolarization", "voltage_mV": -70, "duration_ms": 1.2, "description": "Na+ channels inactivate. Delayed K+ channels open. K+ efflux drives voltage down.", "color": "#3b82f6" },
+      { "id": "hyperpolarization", "label": "Undershoot", "voltage_mV": -80, "duration_ms": 1.5, "description": "K+ channels still open past resting potential. Brief overshoot.", "color": "#8b5cf6" },
+      { "id": "recovery", "label": "Recovery", "voltage_mV": -70, "duration_ms": 3.0, "description": "Na+/K+-ATPase restores gradients. Refractory period ends.", "color": "#10b981" }
+    ],
+    "ionChannels": [
+      { "id": "nav", "name": "Voltage-gated Na+", "ion": "Na+", "direction": "in", "activation": "depolarization", "color": "#ef4444", "conductance_pS": 20 },
+      { "id": "kv", "name": "Voltage-gated K+", "ion": "K+", "direction": "out", "activation": "delayed", "color": "#3b82f6", "conductance_pS": 8 },
+      { "id": "cav", "name": "Voltage-gated Ca2+", "ion": "Ca2+", "direction": "in", "activation": "presynaptic", "color": "#f59e0b", "conductance_pS": 15 },
+      { "id": "kleak", "name": "K+ Leak", "ion": "K+", "direction": "out", "activation": "always", "color": "#6366f1", "conductance_pS": 0.5 }
+    ],
+    "equilibriumPotentials": {
+      "Na": 60,
+      "K": -85,
+      "Ca": 120,
+      "Cl": -65
+    }
+  },
+  "receptors": [
+    { "id": "ampa", "name": "AMPA", "type": "ionotropic", "neurotransmitter": "glutamate", "ions": ["Na+", "K+"], "conductance_pS": 35, "kinetics": "fast", "color": "#10b981" },
+    { "id": "nmda", "name": "NMDA", "type": "ionotropic", "neurotransmitter": "glutamate", "ions": ["Na+", "K+", "Ca2+"], "conductance_pS": 50, "kinetics": "slow", "color": "#3b82f6", "notes": "Mg2+ block at resting potential; coincidence detector for LTP" },
+    { "id": "gaba_a", "name": "GABA-A", "type": "ionotropic", "neurotransmitter": "gaba", "ions": ["Cl-"], "conductance_pS": 30, "kinetics": "fast", "color": "#8b5cf6" },
+    { "id": "gaba_b", "name": "GABA-B", "type": "metabotropic", "neurotransmitter": "gaba", "ions": ["K+"], "conductance_pS": 10, "kinetics": "slow", "color": "#a855f7" },
+    { "id": "d1", "name": "D1", "type": "metabotropic", "neurotransmitter": "dopamine", "ions": [], "conductance_pS": 0, "kinetics": "slow", "color": "#f59e0b", "notes": "Gs → cAMP → PKA → DARPP-32" },
+    { "id": "d2", "name": "D2", "type": "metabotropic", "neurotransmitter": "dopamine", "ions": [], "conductance_pS": 0, "kinetics": "slow", "color": "#f97316", "notes": "Gi/o → inhibit cAMP" },
+    { "id": "5ht1a", "name": "5-HT1A", "type": "metabotropic", "neurotransmitter": "serotonin", "ions": ["K+"], "conductance_pS": 5, "kinetics": "slow", "color": "#06b6d4" },
+    { "id": "nachr", "name": "nAChR", "type": "ionotropic", "neurotransmitter": "acetylcholine", "ions": ["Na+", "K+"], "conductance_pS": 25, "kinetics": "fast", "color": "#14b8a6" }
+  ],
+  "spineTypes": [
+    { "id": "mushroom", "name": "Mushroom", "headDiameter_um": 1.0, "neckLength_um": 0.8, "neckDiameter_um": 0.15, "stability": "high", "ampaCount": 80, "color": "#3b82f6" },
+    { "id": "thin", "name": "Thin", "headDiameter_um": 0.4, "neckLength_um": 1.2, "neckDiameter_um": 0.10, "stability": "low", "ampaCount": 15, "color": "#10b981" },
+    { "id": "stubby", "name": "Stubby", "headDiameter_um": 0.5, "neckLength_um": 0.1, "neckDiameter_um": 0.5, "stability": "medium", "ampaCount": 30, "color": "#f59e0b" },
+    { "id": "filopodium", "name": "Filopodium", "headDiameter_um": 0.2, "neckLength_um": 2.0, "neckDiameter_um": 0.08, "stability": "transient", "ampaCount": 5, "color": "#ef4444" }
+  ],
+  "brainRegions": [
+    { "id": "prefrontal_cortex", "name": "Prefrontal Cortex", "dominantNeurons": ["pyramidal", "interneuron_basket"], "function": "Executive function, decision-making, working memory", "firingRate_Hz": 5, "position": { "x": 0.35, "y": 0.2 } },
+    { "id": "motor_cortex", "name": "Motor Cortex", "dominantNeurons": ["pyramidal"], "function": "Voluntary movement initiation", "firingRate_Hz": 15, "position": { "x": 0.45, "y": 0.15 } },
+    { "id": "somatosensory_cortex", "name": "Somatosensory Cortex", "dominantNeurons": ["pyramidal", "interneuron_basket"], "function": "Touch, proprioception, temperature", "firingRate_Hz": 10, "position": { "x": 0.55, "y": 0.15 } },
+    { "id": "visual_cortex", "name": "Visual Cortex", "dominantNeurons": ["pyramidal", "interneuron_basket"], "function": "Visual processing", "firingRate_Hz": 20, "position": { "x": 0.8, "y": 0.35 } },
+    { "id": "auditory_cortex", "name": "Auditory Cortex", "dominantNeurons": ["pyramidal"], "function": "Sound processing", "firingRate_Hz": 12, "position": { "x": 0.65, "y": 0.45 } },
+    { "id": "hippocampus", "name": "Hippocampus", "dominantNeurons": ["pyramidal", "granule"], "function": "Memory formation, spatial navigation", "firingRate_Hz": 8, "position": { "x": 0.55, "y": 0.55 } },
+    { "id": "thalamus", "name": "Thalamus", "dominantNeurons": ["pyramidal"], "function": "Sensory relay, consciousness gating", "firingRate_Hz": 25, "position": { "x": 0.5, "y": 0.45 } },
+    { "id": "cerebellum", "name": "Cerebellum", "dominantNeurons": ["purkinje", "granule"], "function": "Motor coordination, timing, learning", "firingRate_Hz": 60, "position": { "x": 0.75, "y": 0.7 } },
+    { "id": "basal_ganglia", "name": "Basal Ganglia", "dominantNeurons": ["medium_spiny", "dopaminergic"], "function": "Action selection, reward processing", "firingRate_Hz": 5, "position": { "x": 0.45, "y": 0.5 } },
+    { "id": "amygdala", "name": "Amygdala", "dominantNeurons": ["pyramidal", "interneuron_basket"], "function": "Fear, emotion, threat detection", "firingRate_Hz": 10, "position": { "x": 0.4, "y": 0.6 } },
+    { "id": "brainstem", "name": "Brainstem", "dominantNeurons": ["dopaminergic"], "function": "Vital functions, arousal, monoamine projection", "firingRate_Hz": 5, "position": { "x": 0.55, "y": 0.8 } }
+  ],
+  "networks": [
+    { "id": "dmn", "name": "Default Mode Network", "regions": ["prefrontal_cortex", "hippocampus"], "tract": "Cingulum bundle", "color": "#3b82f6" },
+    { "id": "salience", "name": "Salience Network", "regions": ["amygdala", "prefrontal_cortex"], "tract": "Uncinate fasciculus", "color": "#ef4444" },
+    { "id": "cen", "name": "Central Executive Network", "regions": ["prefrontal_cortex", "somatosensory_cortex"], "tract": "Superior longitudinal fasciculus", "color": "#10b981" },
+    { "id": "motor", "name": "Motor Circuit", "regions": ["motor_cortex", "basal_ganglia", "thalamus", "cerebellum"], "tract": "Corticospinal tract", "color": "#f59e0b" },
+    { "id": "visual", "name": "Visual Pathway", "regions": ["visual_cortex", "thalamus"], "tract": "Optic radiation", "color": "#8b5cf6" },
+    { "id": "limbic", "name": "Limbic Circuit", "regions": ["hippocampus", "amygdala", "thalamus", "prefrontal_cortex"], "tract": "Papez circuit", "color": "#ec4899" }
+  ],
+  "conductionVelocities": [
+    { "fiberType": "A-alpha", "myelinated": true, "diameter_um": 16, "velocity_ms": 100, "function": "Motor, proprioception" },
+    { "fiberType": "A-beta", "myelinated": true, "diameter_um": 9, "velocity_ms": 55, "function": "Touch, pressure" },
+    { "fiberType": "A-delta", "myelinated": true, "diameter_um": 3, "velocity_ms": 15, "function": "Sharp pain, temperature" },
+    { "fiberType": "C", "myelinated": false, "diameter_um": 0.8, "velocity_ms": 1, "function": "Slow pain, postganglionic" }
+  ],
+  "oscillationBands": [
+    { "id": "delta", "name": "Delta", "frequency_min_Hz": 0.5, "frequency_max_Hz": 4, "amplitude_uV": "20-200", "regions": ["cortex_diffuse", "thalamus"], "function": "Deep sleep (N3), homeostatic restoration, cortical inhibition", "clinical": "Excess: encephalopathy, brain injury. Deficit: insomnia", "bci_relevance": "Sleep staging, anesthesia depth monitoring", "color": "#6366f1" },
+    { "id": "theta", "name": "Theta", "frequency_min_Hz": 4, "frequency_max_Hz": 8, "amplitude_uV": "5-100", "regions": ["hippocampus", "prefrontal_cortex", "anterior_cingulate"], "function": "Memory encoding/retrieval, spatial navigation, REM sleep, working memory", "clinical": "Excess frontal: ADHD, cognitive slowing. Hippocampal: essential for place cell sequences", "bci_relevance": "Memory BCI, cognitive workload detection, drowsiness monitoring", "color": "#8b5cf6" },
+    { "id": "alpha", "name": "Alpha", "frequency_min_Hz": 8, "frequency_max_Hz": 13, "amplitude_uV": "20-60", "regions": ["occipital_cortex", "parietal_cortex", "thalamus"], "function": "Relaxed wakefulness, cortical idling, sensory gating, inhibition timing", "clinical": "Reduced: anxiety, PTSD. Posterior dominant rhythm (PDR) is primary clinical EEG marker", "bci_relevance": "Most common BCI control signal (mu rhythm = sensorimotor alpha). Eyes-closed alpha used for calibration", "color": "#3b82f6" },
+    { "id": "beta", "name": "Beta", "frequency_min_Hz": 13, "frequency_max_Hz": 30, "amplitude_uV": "5-30", "regions": ["motor_cortex", "prefrontal_cortex", "basal_ganglia"], "function": "Active thinking, motor planning, sensorimotor integration, sustained attention", "clinical": "Excess: anxiety, OCD, stimulant effect. Beta rebound after movement = motor cortex inhibition", "bci_relevance": "Motor imagery BCI (beta desynchronization = movement intent). Event-related desynchronization/synchronization (ERD/ERS)", "color": "#10b981" },
+    { "id": "gamma", "name": "Gamma", "frequency_min_Hz": 30, "frequency_max_Hz": 100, "amplitude_uV": "2-10", "regions": ["cortex_diffuse", "hippocampus", "thalamus"], "function": "Perceptual binding, consciousness, cross-modal integration, attention", "clinical": "Reduced: schizophrenia, Alzheimer's. Requires high-density EEG to detect (often contaminated by muscle artifact)", "bci_relevance": "High-gamma (70-150Hz) from ECoG/intracortical arrays = best motor decoding signal. Auditory steady-state response (ASSR)", "color": "#ef4444" },
+    { "id": "high_gamma", "name": "High Gamma", "frequency_min_Hz": 70, "frequency_max_Hz": 150, "amplitude_uV": "1-5", "regions": ["cortex_focal"], "function": "Local cortical processing, speech production, fine motor control", "clinical": "Only detectable with intracranial electrodes (ECoG/depth). Gold standard for neural decoding", "bci_relevance": "Primary signal for invasive BCI motor/speech decoding (Neuralink, BrainGate). Highest spatial specificity", "color": "#dc2626" }
+  ],
+  "whitematterTracts": [
+    { "id": "corpus_callosum", "name": "Corpus Callosum", "type": "commissural", "connects": ["left_hemisphere", "right_hemisphere"], "fiberCount_million": 250, "function": "Interhemispheric transfer of sensory, motor, and cognitive information", "clinical": "Agenesis: disconnection syndrome. Split-brain studies (Sperry 1968)", "color": "#3b82f6" },
+    { "id": "corticospinal", "name": "Corticospinal Tract", "type": "projection", "connects": ["motor_cortex", "spinal_cord"], "fiberCount_million": 1, "function": "Voluntary movement commands from M1 to spinal motor neurons", "clinical": "Lesion: upper motor neuron signs (spasticity, hyperreflexia, Babinski)", "color": "#10b981" },
+    { "id": "arcuate_fasciculus", "name": "Arcuate Fasciculus", "type": "association", "connects": ["broca_area", "wernicke_area"], "fiberCount_million": 0.5, "function": "Language production-comprehension loop (phonological processing)", "clinical": "Lesion: conduction aphasia (can comprehend and produce but cannot repeat)", "color": "#f59e0b" },
+    { "id": "uncinate_fasciculus", "name": "Uncinate Fasciculus", "type": "association", "connects": ["prefrontal_cortex", "temporal_pole", "amygdala"], "fiberCount_million": 0.3, "function": "Emotional regulation, episodic memory retrieval, social cognition", "clinical": "Reduced integrity: psychopathy, temporal lobe epilepsy, PTSD", "color": "#ef4444" },
+    { "id": "cingulum", "name": "Cingulum Bundle", "type": "association", "connects": ["prefrontal_cortex", "posterior_cingulate", "hippocampus", "parahippocampal_gyrus"], "fiberCount_million": 0.4, "function": "Default mode network backbone, emotional processing, memory consolidation", "clinical": "Disrupted in Alzheimer's (earliest white matter change), depression", "color": "#8b5cf6" },
+    { "id": "slf", "name": "Superior Longitudinal Fasciculus", "type": "association", "connects": ["prefrontal_cortex", "parietal_cortex"], "fiberCount_million": 0.6, "function": "Spatial attention, working memory, executive function (CEN backbone)", "clinical": "Damage: hemispatial neglect (right SLF), attention deficits", "color": "#06b6d4" },
+    { "id": "ifof", "name": "Inferior Fronto-Occipital Fasciculus", "type": "association", "connects": ["prefrontal_cortex", "occipital_cortex"], "fiberCount_million": 0.3, "function": "Visual recognition, semantic processing, reading", "clinical": "Lesion: visual agnosia, semantic paraphasia", "color": "#ec4899" },
+    { "id": "optic_radiation", "name": "Optic Radiation", "type": "projection", "connects": ["thalamus", "visual_cortex"], "fiberCount_million": 1.2, "function": "Visual information relay from LGN to V1 (retinotopic organization preserved)", "clinical": "Lesion: contralateral homonymous hemianopia (visual field loss)", "color": "#a855f7" },
+    { "id": "fornix", "name": "Fornix", "type": "projection", "connects": ["hippocampus", "mammillary_bodies", "thalamus"], "fiberCount_million": 1.2, "function": "Primary hippocampal output pathway (Papez circuit). Memory consolidation", "clinical": "Damage: anterograde amnesia. Korsakoff syndrome (mammillary body degeneration)", "color": "#14b8a6" },
+    { "id": "internal_capsule", "name": "Internal Capsule", "type": "projection", "connects": ["thalamus", "cortex", "brainstem"], "fiberCount_million": 2, "function": "Major superhighway: all thalamocortical and corticofugal fibers pass through here", "clinical": "Lacunar stroke here = pure motor hemiparesis (most common stroke syndrome)", "color": "#f97316" }
+  ],
+  "synapticPlasticity": [
+    { "id": "ltp_early", "name": "Early-phase LTP (E-LTP)", "mechanism": "CaMKII activation → AMPAR phosphorylation (GluA1-S831) → increased single-channel conductance + lateral diffusion of AMPA receptors into PSD", "induction": "High-frequency stimulation (100 Hz, 1s tetanus) or theta-burst (4 pulses at 100 Hz, repeated at 5 Hz)", "requires": "NMDA receptor activation, postsynaptic Ca2+ rise >5 uM in spine", "duration": "1-3 hours", "protein_synthesis": false, "structural": "Spine head enlargement within minutes (actin polymerization)", "color": "#10b981" },
+    { "id": "ltp_late", "name": "Late-phase LTP (L-LTP)", "mechanism": "PKA → CREB phosphorylation → new gene transcription → synthesis of plasticity-related proteins (Arc, BDNF, CaMKII) → new AMPA receptor insertion + synapse growth", "induction": "Repeated tetanic stimulation (4+ trains with 5-10 min intervals) or strong theta-burst with dopamine", "requires": "Nuclear signaling, new protein synthesis (blocked by anisomycin), BDNF", "duration": "Hours to lifetime", "protein_synthesis": true, "structural": "New spine formation, PSD enlargement, presynaptic bouton growth", "color": "#3b82f6" },
+    { "id": "ltd_nmdar", "name": "NMDAR-dependent LTD", "mechanism": "PP1/PP2B (calcineurin) activation → AMPAR dephosphorylation (GluA1-S845) → clathrin-mediated AMPAR endocytosis → reduced synaptic AMPA", "induction": "Low-frequency stimulation (1-5 Hz for 10-15 min)", "requires": "NMDA receptor activation with smaller Ca2+ rise (<1 uM), preferential calcineurin activation over CaMKII", "duration": "30 min to hours", "protein_synthesis": false, "structural": "Spine head shrinkage, spine elimination (prolonged)", "color": "#f59e0b" },
+    { "id": "ltd_mglur", "name": "mGluR-dependent LTD", "mechanism": "mGluR1/5 activation → Gq → PLCbeta → IP3 → ER Ca2+ release + DAG → PKC. In cerebellum: climbing fiber + parallel fiber → Purkinje cell LTD (motor learning)", "induction": "Paired low-frequency stimulation, DHPG application, or climbing fiber conjunction (cerebellum)", "requires": "mGluR5 (hippocampus) or mGluR1 (cerebellum), local protein synthesis from dendritic mRNA", "duration": "Hours", "protein_synthesis": true, "structural": "AMPAR internalization, spine remodeling", "color": "#ef4444" },
+    { "id": "stdp", "name": "Spike-Timing-Dependent Plasticity (STDP)", "mechanism": "Pre-before-post (within ~20ms): back-propagating AP meets NMDAR-bound glutamate → supralinear Ca2+ in spine → LTP. Post-before-pre: subthreshold Ca2+ → LTD", "induction": "Causal pairing: presynaptic spike 1-20ms before postsynaptic → LTP. Anti-causal: post before pre → LTD. |Δt| > 40ms → no change", "requires": "Back-propagating action potentials in dendrites, NMDA receptors, voltage-gated Ca2+ channels", "duration": "Matches E-LTP or LTD depending on Ca2+ level", "protein_synthesis": false, "structural": "Bidirectional spine volume changes correlated with Δt sign", "color": "#8b5cf6" }
+  ],
+  "eegElectrodes": [
+    { "id": "Fp1", "name": "Left Frontopolar", "lobe": "frontal", "hemisphere": "left", "position": { "x": 0.35, "y": 0.12 }, "function": "Executive function, emotional regulation", "bci_use": "Frontal asymmetry (mood), blink artifact reference" },
+    { "id": "Fp2", "name": "Right Frontopolar", "lobe": "frontal", "hemisphere": "right", "position": { "x": 0.65, "y": 0.12 }, "function": "Executive function, social cognition", "bci_use": "Frontal asymmetry, EOG artifact detection" },
+    { "id": "F7", "name": "Left Inferior Frontal", "lobe": "frontal", "hemisphere": "left", "position": { "x": 0.2, "y": 0.28 }, "function": "Language production (Broca)", "bci_use": "Language BCI, speech intent" },
+    { "id": "F3", "name": "Left Frontal", "lobe": "frontal", "hemisphere": "left", "position": { "x": 0.36, "y": 0.28 }, "function": "Left prefrontal, approach motivation", "bci_use": "Frontal alpha asymmetry (F3-F4 = valence classifier)" },
+    { "id": "Fz", "name": "Midline Frontal", "lobe": "frontal", "hemisphere": "midline", "position": { "x": 0.5, "y": 0.28 }, "function": "Supplementary motor area, response monitoring", "bci_use": "Error-related negativity (ERN), N200 (inhibition)" },
+    { "id": "F4", "name": "Right Frontal", "lobe": "frontal", "hemisphere": "right", "position": { "x": 0.64, "y": 0.28 }, "function": "Right prefrontal, withdrawal motivation", "bci_use": "Frontal alpha asymmetry" },
+    { "id": "F8", "name": "Right Inferior Frontal", "lobe": "frontal", "hemisphere": "right", "position": { "x": 0.8, "y": 0.28 }, "function": "Right homologue of Broca, prosody", "bci_use": "Emotional speech processing" },
+    { "id": "T3", "name": "Left Temporal", "lobe": "temporal", "hemisphere": "left", "position": { "x": 0.1, "y": 0.5 }, "function": "Auditory processing, language comprehension", "bci_use": "Auditory BCI, ASSR" },
+    { "id": "C3", "name": "Left Central", "lobe": "central", "hemisphere": "left", "position": { "x": 0.36, "y": 0.5 }, "function": "Right-hand sensorimotor cortex", "bci_use": "Motor imagery BCI (mu/beta desync = right hand movement intent). Most important electrode for motor BCI" },
+    { "id": "Cz", "name": "Midline Central", "lobe": "central", "hemisphere": "midline", "position": { "x": 0.5, "y": 0.5 }, "function": "Leg/foot motor cortex, vertex", "bci_use": "P300 speller (target component), leg motor imagery" },
+    { "id": "C4", "name": "Right Central", "lobe": "central", "hemisphere": "right", "position": { "x": 0.64, "y": 0.5 }, "function": "Left-hand sensorimotor cortex", "bci_use": "Motor imagery BCI (left hand). C3-C4 pair = standard 2-class motor imagery" },
+    { "id": "T4", "name": "Right Temporal", "lobe": "temporal", "hemisphere": "right", "position": { "x": 0.9, "y": 0.5 }, "function": "Right auditory, music processing", "bci_use": "Auditory BCI, tonal processing" },
+    { "id": "T5", "name": "Left Posterior Temporal", "lobe": "temporal", "hemisphere": "left", "position": { "x": 0.2, "y": 0.72 }, "function": "Language comprehension (Wernicke), visual word form", "bci_use": "Language processing BCI" },
+    { "id": "P3", "name": "Left Parietal", "lobe": "parietal", "hemisphere": "left", "position": { "x": 0.36, "y": 0.72 }, "function": "Spatial attention, somatosensory association", "bci_use": "P300 component detection" },
+    { "id": "Pz", "name": "Midline Parietal", "lobe": "parietal", "hemisphere": "midline", "position": { "x": 0.5, "y": 0.72 }, "function": "Parietal association, attention", "bci_use": "P300 speller (maximum amplitude here). Most important P300 electrode" },
+    { "id": "P4", "name": "Right Parietal", "lobe": "parietal", "hemisphere": "right", "position": { "x": 0.64, "y": 0.72 }, "function": "Spatial awareness, visuospatial processing", "bci_use": "P300, spatial attention BCI" },
+    { "id": "T6", "name": "Right Posterior Temporal", "lobe": "temporal", "hemisphere": "right", "position": { "x": 0.8, "y": 0.72 }, "function": "Face recognition, visual processing", "bci_use": "N170 (face detection), visual processing" },
+    { "id": "O1", "name": "Left Occipital", "lobe": "occipital", "hemisphere": "left", "position": { "x": 0.36, "y": 0.88 }, "function": "Left visual field processing", "bci_use": "SSVEP BCI (steady-state visually evoked potentials). Alpha (eyes closed)" },
+    { "id": "Oz", "name": "Midline Occipital", "lobe": "occipital", "hemisphere": "midline", "position": { "x": 0.5, "y": 0.88 }, "function": "Central visual processing, V1", "bci_use": "SSVEP BCI (primary site). Alpha dominant rhythm. Visual P100" },
+    { "id": "O2", "name": "Right Occipital", "lobe": "occipital", "hemisphere": "right", "position": { "x": 0.64, "y": 0.88 }, "function": "Right visual field processing", "bci_use": "SSVEP BCI. Alpha rhythm" }
+  ]
+}
