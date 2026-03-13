@@ -104,44 +104,48 @@ const breadcrumbs = [
   <!-- ═══ HERO ═══ -->
   <section class="py-12 md:py-20">
     <div class="text-center max-w-3xl mx-auto mb-12">
-      <p class="text-xs font-medium tracking-[0.2em] uppercase mb-4 text-[var(--color-text-faint)]">
-        Psychiatric Risk References for Threat Modeling
+      <p class="text-xs font-medium tracking-[0.2em] uppercase mb-4 text-emerald-500">
+        Clinical &amp; Therapeutic Research
       </p>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
         <span class="text-[var(--color-text-primary)]">Clinical Outcome References</span>
         <br />
-        <span class="bg-gradient-to-r from-red-500 via-amber-500 to-purple-500 bg-clip-text text-transparent">
+        <span class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
           for Threat Modeling.
         </span>
       </h1>
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
         {stats.withDsm5} of {totalTechniques} catalogued BCI attack techniques reference symptoms
-        matching DSM-5-TR diagnostic criteria — for threat modeling purposes only. These references are based on known neuroanatomical pathways and functional neuroscience, but neuroscience's understanding of brain function remains incomplete. These are not diagnostic claims. They require clinical validation by psychiatrists and neuroscientists before informing any clinical practice.
+        matching DSM-5-TR diagnostic criteria — for threat modeling purposes only. Many of these techniques also have
+        therapeutic analogs: the same mechanisms used in FDA-recognized treatments. The dual-use mappings and clinical
+        outcome references are based on known neuroanatomical pathways and functional neuroscience, but these claims
+        have not been independently validated. They require clinical review by psychiatrists and neuroscientists before
+        informing any clinical practice.
       </p>
     </div>
 
     <!-- Stats bar -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-12">
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-red-500">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-500">
           {stats.withDsm5}
         </p>
-        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">techniques with<br/>psychiatric outcomes</p>
+        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">techniques with<br/>clinical outcomes</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-amber-500">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-teal-500">
           {uniqueDiagnoses}
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">DSM-5-TR<br/>diagnoses linked</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-purple-500">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-cyan-500">
           {Object.keys(stats.clusters).filter(k => stats.clusters[k as DiagnosticCluster] > 0).length}
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">diagnostic<br/>clusters</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-red-400">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-green-500">
           {stats.riskClass.direct}
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">direct-risk<br/>pathways</p>
@@ -150,8 +154,7 @@ const breadcrumbs = [
     <div class="flex justify-center">
       <a
         href="/atlas/clinical/"
-        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90"
-        style="background: var(--color-accent-primary);"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90 bg-emerald-600"
       >
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -550,7 +553,7 @@ const breadcrumbs = [
         return (
           <a
             href={`/atlas/tara/${t.id}/`}
-            class="glass rounded-lg p-4 hover:ring-1 hover:ring-red-500/20 transition-all group"
+            class="glass rounded-lg p-4 hover:ring-1 hover:ring-emerald-500/20 transition-all group"
           >
             <div class="flex items-start justify-between gap-2 mb-2">
               <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
@@ -561,7 +564,7 @@ const breadcrumbs = [
                 {clusterLabel}
               </span>
             </div>
-            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-red-500 transition-colors">
+            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-emerald-500 transition-colors">
               {t.name}
             </p>
             <p class="text-xs text-[var(--color-text-faint)] mb-3 line-clamp-1">
