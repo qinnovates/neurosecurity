@@ -76,8 +76,17 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 | Component | Description | Status |
 |-----------|-------------|--------|
+| **[Demo Atlas](https://qinnovate.com/demo-atlas/)** | Browser-based neural monitoring demo with sample EEG data | Published |
 | **[Neurowall](./tools/neurowall/)** | Neural firewall prototype (differential privacy + NISS + policy engine) | In development, v0.8 |
 | **[macshield](https://github.com/qinnovates/macshield)** | macOS workstation hardening for public WiFi | v0.4.1 |
+
+**Demo Atlas — Built With:**
+| Technology | Purpose |
+|-----------|---------|
+| BrainFlow | 40+ BCI devices |
+| React + Vite | Frontend |
+| Web Workers | In-browser engine |
+| FFT | Client-side PSD analysis |
 
 ### Governance
 
