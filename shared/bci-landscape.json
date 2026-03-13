@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated": "2026-02-21",
+  "generated": "2026-03-12",
   "description": "Comprehensive BCI industry landscape tracker. Tracks companies, devices, security posture, funding, regulatory milestones, and publication trends. Part of the QIF project's mission to map the BCI security gap.",
   "companies": [
     {
@@ -11,11 +11,11 @@
       "headquarters": "Fremont, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 1290000000,
-      "valuation_usd": 9000000000,
+      "funding_total_usd": 1940000000,
+      "valuation_usd": 9600000000,
       "employees_approx": 400,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Implantable N1 chip with 1024 electrodes and wireless BLE telemetry. FDA IDE approved May 2023. First human implant Jan 2024. ~3 patients enrolled in PRIME study.",
+      "security_notes": "No public security documentation. Implantable N1 chip with 1024 electrodes and wireless BLE telemetry. FDA IDE approved May 2023. First human implant Jan 2024. 21 participants globally as of Jan 2026 across PRIME (US), CAN-PRIME (Canada, Nov 2024), GB-PRIME (UK, Jul 2025). PMA application filed Nov 2024. Series E $650M closed Jun 2025. FDA Emergency Use Authorization for calibration software in acute locked-in syndrome (Apr 2025).",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0003",
@@ -47,7 +47,7 @@
           "channels": 1024,
           "electrode_type": "penetrating",
           "fda_status": "IDE",
-          "units_deployed": "~3 implanted (PRIME study)",
+          "units_deployed": "21 implanted globally (PRIME/CAN-PRIME/GB-PRIME, Jan 2026)",
           "first_human": "2024-01",
           "price_usd": null,
           "target_use": "medical",
@@ -80,7 +80,7 @@
       "valuation_usd": null,
       "employees_approx": 120,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. ~10 patients.",
+      "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. 10 patients across US and Australia trials. First human 2019 (Melbourne, Australia); first US human Jul 2022. IQT (In-Q-Tel, CIA/IC venture arm) joined Series D (Nov 2025). Next-gen transcatheter whole-brain interface in early development. AI decoding team established in NYC.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0005",
@@ -123,7 +123,7 @@
       "valuation_usd": 350000000,
       "employees_approx": 60,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Utah Array is the most implanted cortical electrode in history (35+ patients since 2004). Used in BrainGate clinical trials.",
+      "security_notes": "No public security documentation. Utah Array is the most implanted cortical electrode in history (40+ patients since 2004). Used in BrainGate clinical trials. Tether invested $200M for majority stake (Apr 2024). MoveAgain BCI has FDA Breakthrough Device Designation. Launched Axon-R non-invasive AR-enabled BCI headset (partnership with Cognixion, May 2025).",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0003",
@@ -146,7 +146,7 @@
           "channels": 96,
           "electrode_type": "penetrating",
           "fda_status": "IDE",
-          "units_deployed": "35+ implanted since 2004",
+          "units_deployed": "40+ implanted since 2004",
           "first_human": "2004-06",
           "price_usd": null,
           "target_use": "research",
@@ -157,7 +157,7 @@
           "type": "invasive",
           "channels": 96,
           "electrode_type": "penetrating",
-          "fda_status": "IDE",
+          "fda_status": "breakthrough_device",
           "units_deployed": "<10",
           "first_human": "2023-01",
           "price_usd": null,
@@ -179,7 +179,7 @@
       "valuation_usd": 500000000,
       "employees_approx": 80,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Layer 7 thin-film electrode array with 1024 channels. Minimally invasive placement (sits on cortical surface).",
+      "security_notes": "No public security documentation. Layer 7 thin-film electrode array with 1024 channels. Minimally invasive placement (sits on cortical surface). FDA 510(k) cleared Mar 30, 2025 (K242618) — first high-density cortical BCI to receive full regulatory clearance. 37 patients as of clearance filing. Clearance covers electrode array for up to 30-day implantation.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0005",
@@ -197,8 +197,8 @@
           "type": "invasive",
           "channels": 1024,
           "electrode_type": "surface",
-          "fda_status": "IDE",
-          "units_deployed": "<5 temporary placements",
+          "fda_status": "510k_cleared",
+          "units_deployed": "37 patients (as of FDA clearance filing)",
           "first_human": "2023-01",
           "price_usd": null,
           "target_use": "medical",
@@ -219,7 +219,7 @@
       "valuation_usd": null,
       "employees_approx": 40,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Connexus DDI targets 65,000 electrode channels. Pre-clinical.",
+      "security_notes": "No public security documentation. Connexus DDI: 421 channels per cortical module, up to 4 modules (1,684 channels max). The 65,000-channel figure from early roadmaps was a long-term aspiration, not current spec. FDA IDE approved Nov 2025 for Connect-One Early Feasibility Study (first IDE for speech restoration with a fully implantable BCI). First-in-human implant Sep 2025.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0003",
@@ -236,11 +236,11 @@
         {
           "name": "Connexus Direct Data Interface",
           "type": "invasive",
-          "channels": 65000,
+          "channels": 1684,
           "electrode_type": "penetrating",
-          "fda_status": "none",
-          "units_deployed": "0 (pre-clinical)",
-          "first_human": null,
+          "fda_status": "IDE",
+          "units_deployed": "1 (first-in-human Sep 2025)",
+          "first_human": "2025-09",
           "price_usd": null,
           "target_use": "medical",
           "cves_known": []
@@ -1071,11 +1071,11 @@
       "headquarters": "Barcelona, Spain",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 82800000,
+      "funding_total_usd": 87200000,
       "valuation_usd": null,
       "employees_approx": 50,
       "security_posture": "none_published",
-      "security_notes": "Graphene-based invasive BCI. Smallest neural implant. EU government-backed. No public security documentation.",
+      "security_notes": "Graphene-based invasive BCI. Smallest neural implant. EU government-backed. World's first human graphene-based BCI procedure completed Sep 2024 (during brain tumor resection). €4M PERTE Chip grant (Spain, May 2025). Series B $50M closed Oct 2024. No public security documentation.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0003",
@@ -1093,9 +1093,9 @@
           "type": "invasive",
           "channels": 64,
           "electrode_type": "graphene",
-          "fda_status": "pre-clinical",
-          "units_deployed": "research",
-          "first_human": null,
+          "fda_status": "first_in_human",
+          "units_deployed": "1+ (first human procedure Sep 2024)",
+          "first_human": "2024-09",
           "price_usd": null,
           "target_use": "therapeutic",
           "cves_known": []
@@ -1493,9 +1493,10 @@
           "type": "non_invasive",
           "channels": null,
           "electrode_type": "focused_ultrasound",
-          "fda_status": "preclinical",
-          "units_deployed": "unknown",
+          "fda_status": "clinical_trial",
+          "units_deployed": "0 (NHS trial enrolling, NCT06429735)",
           "first_human": null,
+          "note": "30-patient NHS trial at BHR University Hospitals, funded by ARIA (£6.5M). Patients with craniectomies (skull defect provides acoustic window). First human brain imaging using ultrasound-on-chip demonstrated at UCLA Neuro-ICU and Cedars-Sinai. Spun out commercially as Merge Labs (Jan 2026).",
           "price_usd": null,
           "target_use": "medical",
           "cves_known": []
@@ -1661,11 +1662,11 @@
       "headquarters": "Stevenage, United Kingdom",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 540000000,
+      "funding_total_usd": 715000000,
       "valuation_usd": null,
       "employees_approx": null,
       "security_posture": "none_published",
-      "security_notes": "Implanted splenic nerve stimulation for rheumatoid arthritis. GSK + Verily (Google) joint venture. No published security documentation.",
+      "security_notes": "Implanted splenic nerve stimulation for rheumatoid arthritis. GSK (55%) + Verily (45%) joint venture. £540M GBP (~$715M USD at 2016 rate) committed over 7 years, contingent on milestone achievement. No published security documentation.",
       "tara_attack_surface": [],
       "devices": [
         {
@@ -1982,6 +1983,247 @@
         }
       ],
       "company_category": "growth_stage"
+    },
+    {
+      "name": "NeuroPace",
+      "type": "invasive",
+      "modality": "responsive_neurostimulation",
+      "founded": "2003",
+      "headquarters": "Mountain View, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "RNS System is a read-write closed-loop cortical BCI — continuously reads ECoG and delivers responsive stimulation. FDA PMA approved Nov 2013 (P100026) for drug-resistant focal epilepsy. Commercially deployed with thousands of patients — the most mature closed-loop BCI in clinical use. FDA Breakthrough Device Designation for idiopathic generalized epilepsy expansion. Direct TARA attack surface: closed-loop read-write device with stimulation capability. No public security documentation.",
+      "tara_attack_surface": [
+        "QIF-T0001",
+        "QIF-T0003",
+        "QIF-T0005",
+        "QIF-T0008",
+        "QIF-T0010",
+        "QIF-T0015",
+        "QIF-T0021",
+        "QIF-T0023",
+        "QIF-T0025",
+        "QIF-T0030",
+        "QIF-T0041",
+        "QIF-T0043",
+        "QIF-T0045",
+        "QIF-T0061",
+        "QIF-T0063",
+        "QIF-T0081",
+        "QIF-T0085"
+      ],
+      "devices": [
+        {
+          "name": "RNS System",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "cortical_closed_loop",
+          "fda_status": "fda_approved",
+          "units_deployed": "thousands (commercial, since 2014)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Responsive neurostimulation for drug-resistant focal epilepsy. Continuously monitors ECoG, detects seizure onset patterns, delivers targeted stimulation. FDA PMA P100026 (Nov 2013). Up to 2 epileptogenic foci. The most commercially deployed closed-loop cortical BCI."
+        }
+      ],
+      "company_category": "established"
+    },
+    {
+      "name": "LivaNova",
+      "type": "semi_invasive",
+      "modality": "vagus_nerve_stimulation",
+      "founded": "2015",
+      "headquarters": "London, United Kingdom",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "VNS Therapy is the longest-deployed neurostimulation system in history. 100,000+ patients implanted since FDA approval in 1997. Semi-invasive: pulse generator implanted in chest, lead wrapped around left vagus nerve. Approved for epilepsy (1997) and treatment-resistant depression (2005). Nasdaq: LIVN (public company, formed from Sorin Group + Cyberonics merger 2015). No public security documentation. Peripheral nerve modality — distinct TARA attack surface from cortical devices.",
+      "tara_attack_surface": [
+        "QIF-T0005",
+        "QIF-T0008",
+        "QIF-T0021",
+        "QIF-T0041",
+        "QIF-T0061",
+        "QIF-T0081"
+      ],
+      "devices": [
+        {
+          "name": "VNS Therapy System",
+          "type": "semi_invasive",
+          "channels": null,
+          "electrode_type": "nerve_cuff",
+          "fda_status": "fda_approved",
+          "units_deployed": "100,000+ patients since 1997",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Vagus nerve stimulation for epilepsy (1997) and treatment-resistant depression (2005). Pulse generator implanted subclavicularly, lead wrapped around left vagus nerve. Longest-deployed neurostimulation system in clinical history."
+        }
+      ],
+      "company_category": "public"
+    },
+    {
+      "name": "Cognito Therapeutics",
+      "type": "non_invasive",
+      "modality": "gamma_entrainment",
+      "founded": "2016",
+      "headquarters": "Cambridge, Massachusetts, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 233000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "MIT spinout. Sensory gamma entrainment (40Hz visual + auditory stimulation) for Alzheimer's disease. $105M Series C (Mar 2026). HOPE Study: largest medical device trial focused solely on Alzheimer's (70 sites, randomized, sham-controlled). Non-invasive neuromodulation via entrainment — consumer-adjacent attack surface. No public security documentation.",
+      "tara_attack_surface": [
+        "QIF-T0005",
+        "QIF-T0008",
+        "QIF-T0021",
+        "QIF-T0041",
+        "QIF-T0081"
+      ],
+      "devices": [
+        {
+          "name": "Spectris",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "sensory_entrainment",
+          "fda_status": "clinical_trial",
+          "units_deployed": "unknown (HOPE trial enrolling)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Combined visual + auditory 40Hz gamma frequency stimulation headset. HOPE Study is the largest AD-focused device trial. Based on MIT Li-Huei Tsai lab research on gamma entrainment reducing amyloid plaques in mouse models."
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Inner Cosmos",
+      "type": "invasive",
+      "modality": "cortical_microstimulation",
+      "founded": "2020",
+      "headquarters": "San Diego, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 10000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Minimally invasive cortical implant for treatment-resistant depression. Electrodes placed in skull bone, not penetrating cortex — novel minimally invasive category between EEG and deep cortical implants. FDA Early Feasibility Study completed Nov 2025, all safety/feasibility endpoints met. Proceeding to pivotal trial (US + Australia). Psychiatric indication raises distinct neuroethics considerations for TARA coverage of psychiatric targeting. No public security documentation.",
+      "tara_attack_surface": [
+        "QIF-T0001",
+        "QIF-T0005",
+        "QIF-T0008",
+        "QIF-T0021",
+        "QIF-T0023",
+        "QIF-T0041",
+        "QIF-T0061",
+        "QIF-T0081"
+      ],
+      "devices": [
+        {
+          "name": "Cortical Implant for Depression",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "skull_mounted_cortical",
+          "fda_status": "clinical_trial",
+          "units_deployed": "EFS completed (Nov 2025)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Minimally invasive: electrodes in skull bone targeting cortex without penetrating brain tissue. EFS completed Nov 2025 with all endpoints met. Pivotal trial planned for US and Australia."
+        }
+      ],
+      "company_category": "startup"
+    },
+    {
+      "name": "Magnus Medical",
+      "type": "non_invasive",
+      "modality": "accelerated_tms",
+      "founded": "2019",
+      "headquarters": "Palo Alto, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 89000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Stanford spinout. SAINT Neuromodulation System (accelerated TMS with fMRI-guided individualized targeting). FDA 510(k) cleared Sep 2022 (K220177). Breakthrough Device Designation. Commercial launch Apr 2024. $64M venture round Mar 2025 + $23.7M Series B-II May 2025. Precision targeting via fMRI raises distinct threat considerations (session manipulation, targeting drift). No public security documentation.",
+      "tara_attack_surface": [
+        "QIF-T0005",
+        "QIF-T0008",
+        "QIF-T0021",
+        "QIF-T0041",
+        "QIF-T0081"
+      ],
+      "devices": [
+        {
+          "name": "SAINT Neuromodulation System",
+          "type": "non_invasive",
+          "channels": null,
+          "electrode_type": "tms",
+          "fda_status": "510k_cleared",
+          "units_deployed": "commercial (since Apr 2024)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Accelerated TMS protocol (SAINT) with fMRI-guided individualized targeting for treatment-resistant depression. FDA 510(k) K220177 cleared Sep 2022. Based on Stanford SAINT protocol research. Commercial launch April 2024."
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Rune Labs",
+      "type": "non_invasive",
+      "modality": "digital_biomarker_dbs_software",
+      "founded": "2019",
+      "headquarters": "San Francisco, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 12000000,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Software layer on top of implanted DBS devices. StrivePD is FDA-cleared 510(k) software integrating Apple Watch data with Medtronic Percept PC DBS neural sensing data. Represents the neural data pipeline/exfiltration TARA attack surface — not the implant itself, but the data pathway from implant to cloud. $12M Series A (Jan 2024, Nexus NeuroTech lead). No public security documentation.",
+      "tara_attack_surface": [
+        "QIF-T0005",
+        "QIF-T0008",
+        "QIF-T0021",
+        "QIF-T0023",
+        "QIF-T0041",
+        "QIF-T0061",
+        "QIF-T0081",
+        "QIF-T0085"
+      ],
+      "devices": [
+        {
+          "name": "StrivePD",
+          "type": "non_invasive",
+          "channels": 0,
+          "electrode_type": "software",
+          "fda_status": "510k_cleared",
+          "units_deployed": "commercial",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "FDA-cleared software ecosystem integrating Apple Watch movement data with Medtronic Percept PC DBS neural sensing. Digital biomarkers for Parkinson's disease management. The data pipeline from implanted DBS to cloud analytics represents a distinct TARA attack surface for neural data exfiltration."
+        }
+      ],
+      "company_category": "startup"
     }
   ],
   "adjacent_tech": [
@@ -3004,7 +3246,7 @@
       }
     ],
     "investor_intelligence": {
-      "generated": "2026-02-21",
+      "generated": "2026-03-12",
       "cross_portfolio_vcs": [
         {
           "investor": "Founders Fund",
