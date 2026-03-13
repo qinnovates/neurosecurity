@@ -2,17 +2,6 @@
 
 **A song by Kevin L. Qi**
 
-## Hidden Meanings
-
-**"Chalkboard and line"** carries more than one meaning:
-
-- Young men and women who signed their lives to fight for the freedom we live. A friend came back from war and was never the same.
-- These are the people who rely on BCIs most.
-- These are the people I know, the people that make me, the people who keep me fighting for their rights when I can hardly stand.
-- I use this when I need motivation and drive to help me push through to the finish.
-
-**"Principles lock from within"** — security guardrails for AI-powered BCIs where the user must grant consent, whether it be subconscious but still a part of their free will and agency.
-
 ## Listen
 
 [![Spotify](https://img.shields.io/badge/Spotify-Listen-1DB954?logo=spotify&logoColor=white)](https://open.spotify.com/track/4QPE871AOoNlc8qO8iUbWJ)
@@ -108,6 +97,10 @@ That's the beauty of art — its interpretation is left up to you. We all see th
 - I use this when I need motivation and drive to help me push through to the finish.
 
 **"Principles lock from within"** — security guardrails for AI-powered BCIs where the user must grant consent, whether it be subconscious but still a part of their free will and agency.
+
+It shows how young our country still is — and we're writing it every day. This is not something most have the privilege to do elsewhere. Someone like me, a Chinese American, can make a difference as much as any others, so long as we do it with passion and ethics grounding to clearly articulate our voices to bring a world of justice and equity.
+
+In the words of Marcus Aurelius' *Meditations*: "At some point, you have to recognize what world it is that you belong to, what power rules it and from what source you spring; that there is a limit to the time assigned to you, and if you don't use it to free yourself it will be gone and never return."
 
 ---
 
