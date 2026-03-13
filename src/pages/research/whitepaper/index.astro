@@ -1621,6 +1621,9 @@ const tacticColors: Record<string, string> = {
             <div>
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-1">Runemate Forge v1.0</h4>
               <p class="text-xs text-[var(--color-text-muted)]">Native Staves DSL compiler with multimodal support (visual, auditory, haptic). Hand-rolled lexer, recursive descent parser, TARA safety bounds at compile time. 67.8% compression, 430&micro;s compile+encrypt (simulation). Targeting IEC 62304 Class C. Today&rsquo;s BCIs are outward-only (Neuralink, BrainGate); Runemate targets the next generation of inward-rendering implants.</p>
+              <p class="text-xs text-[var(--color-text-muted)] mt-2">
+                <strong>Hardware-first rendering architecture:</strong> The vision restoration pipeline uses depth sensors (Kinect-class hardware) as the primary spatial input, with AI operating as a color reconstruction layer on top &mdash; not as the sole rendering engine. This is intentional by design. Hardware sensors return deterministic geometry: distance, surface, edges. AI uses depth and transforms (much like Unreal Engine) to infer and render color back into the scene rather than generating the full environment from scratch. We propose this as a <strong>human-continuity guardrail</strong>: the principle that a patient&rsquo;s primary sensory experience must never fully depend on software that can fail, be corrupted, or go offline. The hardware provides that continuity. If the AI layer fails or goes offline during system upgrades or patches, the spatial environment is still visually represented through hardware sensor data alone. Color may not exist temporarily during outages &mdash; but vision itself persists from the depth data. You lose the paint, not the canvas.
+              </p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
