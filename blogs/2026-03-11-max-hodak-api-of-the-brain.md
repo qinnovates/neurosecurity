@@ -21,7 +21,9 @@ fact_check_notes:
   - "Elnabawy 2022 — corrected from 'geometric primitives' to 'simplified visual representations' (clip-art GAN)."
 ---
 
-Unreal Engine renders textures and objects without needing to know what they are -- just transform data (position, rotation, scale). Who's to say this isn't possible for neural rendering? Your eyes are already rendering this screen. One day, the blind will be able to actually see a web browser and laugh at memes with the rest of us.
+One day, the blind will be able to see their service dogs, and even share memes with the rest of us.
+
+Unreal Engine renders textures and objects without needing to know what they are -- just transform data (position, rotation, scale). Who's to say this isn't possible for neural rendering? Your eyes are already rendering this screen.
 
 When they do, what would that look like? Besides just more meme spamming, I mean... if we were to redesign the browser and optimize it for the brain, where do we start? Would it look like DOS? White phosphenes are easier to induce after all.
 
@@ -77,6 +79,10 @@ If researchers can reconstruct 3D body pose through walls using WiFi signals alo
 This is where I went down a rabbit hole inspired by depth sensors like the Kinect. I built a prototype using Three.js shaders that simulates the principle behind depth-sensing hardware -- taking a standard video feed and displacing every pixel based on luminance to reconstruct spatial depth. The [depth visualizations I built](/vision) are rough, but the principle is sound: all you need is a sensor and the right processing pipeline to reconstruct a usable representation of the world.
 
 During this research, I discovered that white phosphenes are the easiest visual percept to induce electrically -- most cortical and retinal prostheses start there because the threshold is lowest and the response is most reliable. That's why the depth visualization renders in grayscale. But a grayscale world is not enough. So I used AI to reintroduce color -- the model infers what colors the environment should contain based on object recognition and scene context, then maps them back onto the depth field. The result is a simulation of what a vision restoration pipeline could look like: capture in whatever modality the sensor provides, reconstruct depth, then let AI fill in the color information that the raw stimulation cannot carry.
+
+The AI here works the same way Unreal Engine does -- it uses depth and transforms to reconstruct a scene, not raw pixel data. The choice to model this around a Kinect-style depth sensor is intentional. Hardware sensors return geometry -- distance, surface, edges -- and that data is deterministic. A Kinect doesn't hallucinate a wall that isn't there. AI sits on top as a color reconstruction layer, not as the rendering engine itself. It infers what colors should be present based on object recognition and scene context, then paints them onto the depth field. But the depth field exists with or without the AI.
+
+I'm proposing this as a guardrail for human-continuity: a patient's primary sensory experience should never fully depend on software that can crash, be corrupted, or go offline for a patch. Think about what that means in practice. A vision prosthesis running a software update at 2 AM -- does the patient go blind for 90 seconds? With a hardware-first architecture, no. The AI color layer drops out, so the world goes grayscale temporarily. But the depth sensor is still feeding spatial data. The patient still sees the room, the doorway, the stairs. Color comes back when the update finishes. You lose the paint, not the canvas.
 
 None of this requires inventing new rendering technology. Physics simulations, particle shaders, ray-tracing -- all of it already exists in gaming engines like Unreal and Unity. The same GPU pipelines that render photorealistic game worlds in real time can reconstruct a visual scene from sensor data. The tooling is mature, optimized, and battle-tested across millions of devices. The gap is not in rendering capability. It is in the interface between the render output and the biological system that needs to receive it.
 
