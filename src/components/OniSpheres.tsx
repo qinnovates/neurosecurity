@@ -1,6 +1,7 @@
 import { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useWebGLSupport, WebGLFallback } from './WebGLCheck';
 
 // ONI Layer config — 7 concentric spheres from the original ONI Framework site
 const LAYERS = [
@@ -209,6 +210,7 @@ function Scene({ scrollExpand }: { scrollExpand: React.MutableRefObject<number> 
 }
 
 export default function OniSpheres({ className = '' }: { className?: string }) {
+  const webglSupported = useWebGLSupport();
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollExpand = useRef(0);
 
@@ -237,6 +239,8 @@ export default function OniSpheres({ className = '' }: { className?: string }) {
     onScroll(); // initial
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  if (!webglSupported) return null;
 
   return (
     <div ref={containerRef} className={className} style={{ position: 'absolute', inset: 0, zIndex: 0 }}>

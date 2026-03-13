@@ -10,6 +10,9 @@ import { useState, useCallback, useRef, useEffect, useMemo, Suspense } from 'rea
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import { useWebGLSupport, WebGLFallback } from '../WebGLCheck';
+import SWCNeuron from './SWCNeuron';
+import PDBMolecule from './PDBMolecule';
 
 // ═══ Types ═══
 
@@ -564,190 +567,22 @@ function CorticalColumn3D({ layers }: { layers: CorticalLayer[] }) {
   );
 }
 
-// --- Neuron Scene ---
+// --- Neuron Scene (SWC-based with procedural fallback) ---
 
 function Neuron3D({ neuron, isAnimating, phaseColor }: {
   neuron: NeuronType;
   isAnimating: boolean;
   phaseColor: string;
 }) {
-  const somaRef = useRef<THREE.Mesh>(null);
-  const apGlowRef = useRef<THREE.Mesh>(null);
-
-  const geometry = useMemo(() => {
-    const m = neuron.morphology;
-    const apical = m.apicalDendrite ? new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0, 0.8, 0),
-      new THREE.Vector3(0.15, 2.5, 0.1),
-      new THREE.Vector3(-0.1, 4.5, -0.05),
-      new THREE.Vector3(0.05, 6.5, 0.08),
-      new THREE.Vector3(0, 8, 0),
-    ]) : null;
-
-    const apicalBranches: THREE.CatmullRomCurve3[] = [];
-    if (m.apicalDendrite) {
-      const bc = Math.min(m.apicalDendrite.branches, 5);
-      for (let i = 0; i < bc; i++) {
-        const a = ((i / bc) * Math.PI - Math.PI / 2);
-        const bl = 1.2 + (i % 2) * 0.4;
-        apicalBranches.push(new THREE.CatmullRomCurve3([
-          new THREE.Vector3(0, 8, 0),
-          new THREE.Vector3(Math.cos(a) * bl * 0.5, 8.4 + bl * 0.2, Math.sin(a) * bl * 0.3),
-          new THREE.Vector3(Math.cos(a) * bl, 8.2, Math.sin(a) * bl * 0.5),
-        ]));
-      }
-    }
-
-    const basals: THREE.CatmullRomCurve3[] = [];
-    if (m.basalDendrites) {
-      const c = Math.min(m.basalDendrites.count, 5);
-      for (let i = 0; i < c; i++) {
-        const a = ((i / (c - 1 || 1)) * Math.PI * 0.8 + Math.PI * 0.6);
-        const l = m.basalDendrites.length_um * 0.004;
-        basals.push(new THREE.CatmullRomCurve3([
-          new THREE.Vector3(0, -0.3, 0),
-          new THREE.Vector3(Math.cos(a) * l * 0.5, -0.6, Math.sin(a) * l * 0.4),
-          new THREE.Vector3(Math.cos(a) * l, -0.9, Math.sin(a) * l * 0.7),
-        ]));
-      }
-    }
-
-    const axonLen = Math.min(m.axon.length_um * 0.003, 6);
-    const axon = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0, -0.7, 0),
-      new THREE.Vector3(0.05, -axonLen * 0.3, 0.05),
-      new THREE.Vector3(-0.05, -axonLen * 0.6, -0.03),
-      new THREE.Vector3(0, -axonLen, 0),
-    ]);
-
-    const spines: THREE.Vector3[] = [];
-    if (apical) {
-      for (let i = 0; i < Math.min(Math.floor(m.spineCount / 1000), 15); i++) {
-        const t = 0.1 + Math.random() * 0.8;
-        const pt = apical.getPoint(t);
-        spines.push(pt.clone().add(new THREE.Vector3((Math.random() - 0.5) * 0.25, 0, (Math.random() - 0.5) * 0.25)));
-      }
-    }
-
-    const terminals: THREE.Vector3[] = [];
-    const tc = Math.min(m.axon.collaterals, 5);
-    for (let i = 0; i < tc; i++) {
-      const a = ((i / (tc - 1 || 1)) * Math.PI * 0.7 + Math.PI * 0.65);
-      const tl = 0.8 + i * 0.2;
-      terminals.push(new THREE.Vector3(Math.cos(a) * tl, -axonLen - tl * 0.3, Math.sin(a) * tl * 0.5));
-    }
-
-    return { apical, apicalBranches, basals, axon, axonLen, spines, terminals };
-  }, [neuron]);
-
-  useFrame((state) => {
-    if (somaRef.current) somaRef.current.rotation.y += 0.003;
-    if (isAnimating && apGlowRef.current && geometry.axon) {
-      const t = (state.clock.elapsedTime * 0.4) % 1;
-      const pt = geometry.axon.getPoint(t);
-      apGlowRef.current.position.copy(pt);
-    }
-  });
-
-  const color = neuron.morphology.color;
-
   return (
     <group>
-      {/* Soma */}
-      <mesh ref={somaRef}>
-        {neuron.morphology.somaShape === 'triangular'
-          ? <icosahedronGeometry args={[0.7, 1]} />
-          : <sphereGeometry args={[0.6, 16, 16]} />
-        }
-        <meshStandardMaterial
-          color={color}
-          transparent opacity={0.75}
-          emissive={isAnimating ? phaseColor : '#000000'}
-          emissiveIntensity={isAnimating ? 0.5 : 0}
-        />
-      </mesh>
-      {/* Nucleus */}
-      <mesh>
-        <sphereGeometry args={[0.2, 10, 10]} />
-        <meshStandardMaterial color={color} transparent opacity={0.25} />
-      </mesh>
-
-      {/* Apical dendrite */}
-      {geometry.apical && (
-        <mesh>
-          <tubeGeometry args={[geometry.apical, 30, 0.06, 8, false]} />
-          <meshStandardMaterial color={color} transparent opacity={0.55} />
-        </mesh>
-      )}
-      {/* Apical branches */}
-      {geometry.apicalBranches.map((curve, i) => (
-        <mesh key={`ab-${i}`}>
-          <tubeGeometry args={[curve, 12, 0.04, 6, false]} />
-          <meshStandardMaterial color={color} transparent opacity={0.4} />
-        </mesh>
-      ))}
-
-      {/* Basal dendrites */}
-      {geometry.basals.map((curve, i) => (
-        <mesh key={`bd-${i}`}>
-          <tubeGeometry args={[curve, 16, 0.05, 6, false]} />
-          <meshStandardMaterial color={color} transparent opacity={0.45} />
-        </mesh>
-      ))}
-
-      {/* Axon */}
-      <mesh>
-        <tubeGeometry args={[geometry.axon, 20, 0.035, 6, false]} />
-        <meshStandardMaterial color={color} transparent opacity={0.45} />
-      </mesh>
-
-      {/* Myelin sheaths */}
-      {neuron.morphology.axon.myelinated && Array.from({ length: 5 }).map((_, i) => {
-        const t = (i + 1) / 6;
-        const pt = geometry.axon.getPoint(t);
-        return (
-          <mesh key={`my-${i}`} position={pt}>
-            <cylinderGeometry args={[0.1, 0.1, 0.5, 8]} />
-            <meshStandardMaterial color={color} transparent opacity={0.15} />
-          </mesh>
-        );
-      })}
-
-      {/* Spines */}
-      {geometry.spines.map((pos, i) => (
-        <mesh key={`sp-${i}`} position={pos}>
-          <sphereGeometry args={[0.04, 4, 4]} />
-          <meshBasicMaterial color={color} transparent opacity={0.5} />
-        </mesh>
-      ))}
-
-      {/* Axon terminals */}
-      {geometry.terminals.map((pos, i) => (
-        <group key={`at-${i}`}>
-          <mesh position={[0, -geometry.axonLen, 0]}>
-            <tubeGeometry args={[new THREE.LineCurve3(new THREE.Vector3(0, 0, 0), pos.clone().sub(new THREE.Vector3(0, -geometry.axonLen, 0))), 8, 0.025, 4, false]} />
-            <meshStandardMaterial color={color} transparent opacity={0.3} />
-          </mesh>
-          <mesh position={pos}>
-            <sphereGeometry args={[0.1, 8, 8]} />
-            <meshStandardMaterial
-              color={isAnimating ? '#f59e0b' : color}
-              transparent opacity={0.5}
-              emissive={isAnimating ? '#f59e0b' : '#000000'}
-              emissiveIntensity={isAnimating ? 0.3 : 0}
-            />
-          </mesh>
-        </group>
-      ))}
-
-      {/* Action potential glow */}
-      {isAnimating && (
-        <mesh ref={apGlowRef}>
-          <sphereGeometry args={[0.15, 8, 8]} />
-          <meshBasicMaterial color={phaseColor} transparent opacity={0.9} />
-          <pointLight color={phaseColor} intensity={3} distance={2} />
-        </mesh>
-      )}
+      {/* Real neuron morphology from NeuroMorpho.org SWC data */}
+      <SWCNeuron
+        url="/models/neuron.swc"
+        scale={0.012}
+        isAnimating={isAnimating}
+        phaseColor={phaseColor}
+      />
     </group>
   );
 }
@@ -868,92 +703,30 @@ function Synapse3D({ synapse, receptors, isReleasing }: {
   );
 }
 
-// --- Molecular Scene ---
+// --- Molecular Scene (PDB-based real molecular structures) ---
 
-function Molecular3D({ channels, spine }: {
+const PDB_MODELS: Record<string, { url: string; label: string }> = {
+  ampa: { url: '/models/ampa-receptor.pdb', label: 'AMPA Receptor (7LDD)' },
+  kchannel: { url: '/models/k-channel.pdb', label: 'K+ Channel (2R9R)' },
+  nmda: { url: '/models/nmda-receptor.pdb', label: 'NMDA Receptor (4PE5)' },
+};
+
+function Molecular3D({ channels, spine, moleculeId }: {
   channels: IonChannel[];
   spine: SpineType;
+  moleculeId: string;
 }) {
-  const ionRefs = useRef<(THREE.Mesh | null)[]>([]);
-
-  useFrame((state) => {
-    const t = state.clock.elapsedTime;
-    ionRefs.current.forEach((mesh, i) => {
-      if (!mesh) return;
-      mesh.position.y = Math.sin(t * 1.5 + i * 1.2) * 0.5;
-      mesh.scale.setScalar(0.7 + Math.sin(t * 2 + i) * 0.15);
-    });
-  });
-
+  const model = PDB_MODELS[moleculeId] || PDB_MODELS.ampa;
   return (
     <group>
-      {/* Ion channels */}
-      {channels.map((ch, i) => {
-        const x = (i - (channels.length - 1) / 2) * 1.6;
-        return (
-          <group key={ch.id} position={[x, 0, 0]}>
-            {/* Pore */}
-            <mesh>
-              <cylinderGeometry args={[0.22, 0.22, 1.4, 8, 1, true]} />
-              <meshStandardMaterial color={ch.color} transparent opacity={0.3} side={THREE.DoubleSide} />
-            </mesh>
-            {/* Top gate */}
-            <mesh position={[0, 0.7, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[0.22, 0.035, 8, 16]} />
-              <meshStandardMaterial color={ch.color} />
-            </mesh>
-            {/* Bottom gate */}
-            <mesh position={[0, -0.7, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[0.22, 0.035, 8, 16]} />
-              <meshStandardMaterial color={ch.color} />
-            </mesh>
-            {/* Ion particle */}
-            <mesh ref={el => { ionRefs.current[i] = el; }}>
-              <sphereGeometry args={[0.07, 6, 6]} />
-              <meshBasicMaterial color={ch.color} />
-            </mesh>
-            {/* Direction arrow */}
-            <mesh position={[0, ch.direction === 'in' ? -0.9 : 0.9, 0]}>
-              <coneGeometry args={[0.08, 0.15, 6]} />
-              <meshStandardMaterial color={ch.color} transparent opacity={0.5} />
-            </mesh>
-          </group>
-        );
-      })}
-
-      {/* Spine head */}
-      <group position={[0, -3, 0]}>
-        <mesh>
-          <sphereGeometry args={[spine.headDiameter_um * 1.5, 16, 16]} />
-          <meshStandardMaterial color={spine.color} transparent opacity={0.2} />
-        </mesh>
-        {/* PSD arc */}
-        <mesh position={[0, spine.headDiameter_um * 1.2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[spine.headDiameter_um * 0.9, 0.04, 8, 16, Math.PI]} />
-          <meshStandardMaterial color="#8b5cf6" />
-        </mesh>
-        {/* AMPA dots */}
-        {Array.from({ length: Math.min(Math.floor(spine.ampaCount / 10), 8) }).map((_, i) => {
-          const a = (i / 7) * Math.PI - Math.PI / 2;
-          const r = spine.headDiameter_um * 1.0;
-          return (
-            <mesh key={i} position={[Math.cos(a) * r, spine.headDiameter_um * 0.9, Math.sin(a) * r * 0.5]}>
-              <sphereGeometry args={[0.05, 6, 6]} />
-              <meshBasicMaterial color="#10b981" />
-            </mesh>
-          );
-        })}
-        {/* Spine neck */}
-        <mesh position={[0, -(spine.neckLength_um * 2.5), 0]}>
-          <cylinderGeometry args={[spine.neckDiameter_um * 2, spine.neckDiameter_um * 2, spine.neckLength_um * 5, 8]} />
-          <meshStandardMaterial color={spine.color} transparent opacity={0.15} />
-        </mesh>
-        {/* Ca2+ store */}
-        <mesh position={[0, 0, 0]}>
-          <sphereGeometry args={[spine.headDiameter_um * 0.5, 8, 8]} />
-          <meshBasicMaterial color="#f59e0b" transparent opacity={0.1} wireframe />
-        </mesh>
-      </group>
+      {/* Real molecular structure from RCSB PDB */}
+      <PDBMolecule
+        url={model.url}
+        backboneOnly={true}
+        colorMode="chain"
+        atomScale={0.35}
+        sceneScale={0.055}
+      />
     </group>
   );
 }
@@ -1213,6 +986,7 @@ interface NeuroSIMProps {
 }
 
 export default function NeuroSIM({ simData }: NeuroSIMProps) {
+  const webglSupported = useWebGLSupport();
   const [zoom, setZoom] = useState<ZoomLevel>('network');
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
@@ -1223,6 +997,7 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
   const [isReleasing, setIsReleasing] = useState(false);
   const [selectedSpine, setSelectedSpine] = useState<string>('mushroom');
   const [selectedReceptor, setSelectedReceptor] = useState<string | null>(null);
+  const [selectedMolecule, setSelectedMolecule] = useState<string>('ampa');
   const animRef = useRef<number>(0);
   const timeRef = useRef(0);
 
@@ -1332,7 +1107,7 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
           {/* Three.js Canvas */}
           <div className="flex-1 min-w-0">
             <GlassCard style={{ height: 550 }} className="overflow-hidden cursor-grab active:cursor-grabbing">
-              <Canvas
+              {!webglSupported ? <WebGLFallback feature="neural simulation" /> : <Canvas
                 gl={{ alpha: true, antialias: true }}
                 camera={{ position: [0, 5, 50], fov: 50 }}
               >
@@ -1353,11 +1128,11 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
                   {zoom === 'region' && <CorticalColumn3D layers={simData.corticalLayers} />}
                   {zoom === 'neuron' && <Neuron3D neuron={neuron} isAnimating={isAnimatingAP} phaseColor={currentPhase.color} />}
                   {zoom === 'synapse' && <Synapse3D synapse={simData.synapse} receptors={simData.receptors} isReleasing={isReleasing} />}
-                  {zoom === 'molecular' && <Molecular3D channels={simData.actionPotential.ionChannels} spine={spine} />}
+                  {zoom === 'molecular' && <Molecular3D channels={simData.actionPotential.ionChannels} spine={spine} moleculeId={selectedMolecule} />}
 
                   <SceneControls zoom={zoom} />
                 </Suspense>
-              </Canvas>
+              </Canvas>}
             </GlassCard>
 
             {/* Controls bar */}
@@ -1409,9 +1184,13 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
               )}
               {zoom === 'molecular' && (
                 <PillSelector
-                  options={simData.spineTypes.map(s => ({ id: s.id, label: s.name, color: s.color }))}
-                  value={selectedSpine}
-                  onChange={setSelectedSpine}
+                  options={[
+                    { id: 'ampa', label: 'AMPA Receptor', color: '#3b82f6' },
+                    { id: 'nmda', label: 'NMDA Receptor', color: '#10b981' },
+                    { id: 'kchannel', label: 'K+ Channel', color: '#f59e0b' },
+                  ]}
+                  value={selectedMolecule}
+                  onChange={setSelectedMolecule}
                 />
               )}
               <span className="text-[10px] ml-auto" style={{ color: 'var(--color-text-faint)' }}>

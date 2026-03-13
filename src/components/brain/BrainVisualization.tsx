@@ -2,6 +2,7 @@ import { Suspense, useState, useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import { useWebGLSupport, WebGLFallback } from '../WebGLCheck';
 import type { BrainView, BrainViewRegion } from '../../lib/brain-view-data';
 
 interface Props {
@@ -255,6 +256,7 @@ export default function BrainVisualization({
   const [internalViewId, setInternalViewId] = useState(defaultView ?? views[0]?.id ?? 'security');
   const [internalRegion, setInternalRegion] = useState<string | null>(null);
   const [lockedRegion, setLockedRegion] = useState<string | null>(null);
+  const webglSupported = useWebGLSupport();
   const isSafari = useSafariDetect();
   const [dismissed, setDismissed] = useState(false);
 
@@ -285,6 +287,14 @@ export default function BrainVisualization({
     if (onRegionSelect) onRegionSelect(newId);
     else setInternalRegion(newId);
   };
+
+  if (!webglSupported) {
+    return <WebGLFallback feature="3D brain visualization" />;
+  }
+
+  if (!webglSupported) {
+    return <WebGLFallback feature="3D brain visualization" />;
+  }
 
   return (
     <div className="relative">
