@@ -273,6 +273,46 @@ Each weekly snapshot is tagged in git. Click the tag to browse code at that poin
 
 ---
 
+## Browse the Full History
+
+Every decision, revision, and deleted line in this repository is preserved in git. You can time-travel to any point in the project's history using GitHub's native tools.
+
+**Browse the repo at any point in time:**
+```
+https://github.com/qinnovates/qinnovate/tree/<COMMIT_SHA>
+```
+Go to [Commits](https://github.com/qinnovates/qinnovate/commits/main), click any commit, then **Browse files** to see the entire repo as it existed at that moment.
+
+**Get a permanent link to any file:**
+Press `Y` on any file page in GitHub. The URL converts from a branch reference (which moves) to a commit SHA permalink (which never changes). Append `#L10-L20` to link to specific lines.
+
+**Compare any two points:**
+```
+https://github.com/qinnovates/qinnovate/compare/v1.0...v2.0
+```
+Replace `v1.0` and `v2.0` with any two tags, branches, or commit SHAs. GitHub renders a full diff of everything that changed between them.
+
+**Visual file history:**
+Replace `github.com` with `github.githistory.xyz` in any file URL to see an animated diff of every commit that touched that file. Example:
+```
+https://github.githistory.xyz/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md
+```
+
+**Permanent archive (survives repo deletion):**
+This repository is archived by [Software Heritage](https://archive.softwareheritage.org/browse/origin/https://github.com/qinnovates/qinnovate/). Software Heritage assigns ISO-standard identifiers (SWHID) to every commit, directory, and file. If this repo ever disappears from GitHub, the archive persists.
+
+**Full reference guide:** [`archive/README.md`](archive/README.md) — complete docs on all history tools, security scanning references, and key documents to track.
+
+### Why This Matters
+
+The same git history that lets you trace how a security framework evolved is the same history that bug bounty hunters use to find leaked secrets in force-pushed commits. Tools like [TruffleHog](https://github.com/trufflesecurity/trufflehog) and [Gitleaks](https://github.com/gitleaks/gitleaks) scan git history to surface credentials that developers thought they deleted. The mechanism is identical. The difference is consent and intent.
+
+This is the same principle that runs through the entire project. TARA documents 109 BCI techniques where the attack mechanism and the therapeutic mechanism are physically identical. Signal injection is how you compromise a neural interface. It is also how you treat Parkinson's disease. The tool does not determine the use. The boundary is always consent, oversight, and intent.
+
+We publish full history because transparency is the foundation of trust in security research. Every claim in this repo can be traced to the commit where it was introduced, the source that informed it, and the [derivation log entry](qif-framework/QIF-DERIVATION-LOG.md) where the decision was made. If something was wrong, you can see when it was corrected and why.
+
+---
+
 ## Collaboration
 
 This work needs collaborators. The research base is compiled (309+ verified sources). The threat taxonomy and scoring system exist. What comes next — empirical validation, clinical mappings, signal integrity formalization — requires domain expertise the author does not have alone.
