@@ -52,6 +52,9 @@ import glialRaw from '@shared/qif-glial-cells.json';
 import neurovascularRaw from '@shared/qif-neurovascular.json';
 import receptorsRaw from '@shared/qif-receptors.json';
 
+// Precomputed tables (eliminates O(n⁴) build-time computation)
+import impactChainsRaw from '@shared/impact-chains.json';
+
 // ═══ Types ═══
 
 export type Row = Record<string, unknown>;
@@ -891,73 +894,13 @@ export interface ImpactChainLink {
   dsm_cluster: string;
 }
 
+/**
+ * Impact chains are precomputed by shared/scripts/compute-impact-chains.mjs
+ * to eliminate the O(n⁴) nested-loop computation at build time.
+ * Regenerate with: node shared/scripts/compute-impact-chains.mjs
+ */
 function buildImpactChains(): Row[] {
-  const techniques = registrar.techniques || [];
-  const bands = atlas.qif_bands || [];
-  const regions = atlas.brain_regions || [];
-  const allPathways = pathways.pathways || [];
-  const dsmClusters = dsm.diagnostic_clusters || {};
-
-  const chains: Row[] = [];
-
-  for (const tech of techniques) {
-    for (const bandId of tech.band_ids || []) {
-      const band = bands.find((b: any) => b.id === bandId);
-      const bandRegions = regions.filter((r: any) => r.qif_band === bandId);
-
-      for (const region of bandRegions) {
-        // Find pathways through this region
-        const regionPathways = allPathways.filter((p: any) =>
-          (p.origin || []).includes(region.id) || (p.targets || []).includes(region.id)
-        );
-
-        for (const pw of regionPathways) {
-          // Find clinical conditions for this pathway (DSM-5-TR + neurological)
-          for (const condCode of pw.dsm_conditions || []) {
-            let condName = condCode;
-            let clusterName = '';
-            // Try DSM clusters first
-            for (const [cId, cluster] of Object.entries(dsmClusters)) {
-              const c = cluster as any;
-              const match = (c.conditions || []).find((cond: any) => cond.code === condCode);
-              if (match) {
-                condName = match.name;
-                clusterName = c.label || cId;
-                break;
-              }
-            }
-            // Fall back to neurological mappings
-            if (!clusterName) {
-              const neuroMatch = (neuro.conditions || []).find((nc: any) => nc.code === condCode);
-              if (neuroMatch) {
-                condName = neuroMatch.name;
-                clusterName = `Neurological/${neuroMatch.category}`;
-              }
-            }
-
-            chains.push({
-              technique_id: tech.id,
-              technique_name: tech.attack || tech.name,
-              severity: tech.severity,
-              niss_score: tech.niss?.score || 0,
-              band_id: bandId,
-              band_name: band?.name || bandId,
-              region_id: region.id,
-              region_name: region.name,
-              pathway_id: pw.id,
-              pathway_name: pw.name,
-              neurotransmitter: pw.neurotransmitter || '',
-              dsm_code: condCode,
-              dsm_name: condName,
-              dsm_cluster: clusterName,
-            });
-          }
-        }
-      }
-    }
-  }
-
-  return chains;
+  return (impactChainsRaw as any) as Row[];
 }
 
 // ═══ Main Builder ═══

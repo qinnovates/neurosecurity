@@ -26,6 +26,7 @@
 - **Type Check**: `npm run type-check`
 - **Sync Context**: `npm run sync` (Refreshes this file)
 - **Changelog**: `npm run changelog` (Generate changelog from git log; `--dry-run` to preview)
+- **Impact Chains**: `npm run compute:chains` (Precompute impact_chains table from source JSON; `--dry-run` to preview)
 
 ## Commit Prefix Convention
 - `[Add]` -- New feature, page, or component (tier 2: changelog + blog draft)
@@ -51,6 +52,8 @@
   - `components/`: React/Astro components
   - `layouts/`: Page layouts
   - `lib/`: Utility functions and constants
+    - `kql-tables.ts`: Universal KQL table builder (data lake → flat tables)
+    - `kql-engine.ts`: Query engine (parser, executor, indexes — zero React deps)
 - `qif-framework/`: QIF specification + implementations
   - `nsp/`: Neural Sensory Protocol (Rust + spec)
     - `nsp-core/`: PQ-secure Rust implementation
@@ -60,7 +63,7 @@
   - `processes/`: Standards development lifecycle
 - `shared/`: Cross-cutting data + tools (Source of Truth)
   - `qtara/`: Python SDK (pip install qtara)
-  - `scripts/`: Data pipeline scripts (TARA, NISS, DSM-5)
+  - `scripts/`: Data pipeline scripts (TARA, NISS, DSM-5, impact chains precompute)
   - `archive/`: Deprecated/merged data files
 - `paper/`: Academic publications (preprint)
 - `scripts/`: Site scripts + CI utilities
