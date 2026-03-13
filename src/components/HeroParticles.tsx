@@ -1,6 +1,7 @@
 import { useRef, useMemo, useCallback, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useWebGLSupport } from './WebGLCheck';
 
 const SEPARATION = 100;
 const AMOUNTX = 50;
@@ -156,6 +157,9 @@ interface HeroParticlesProps {
 }
 
 export default function HeroParticles({ variant = 'light' }: HeroParticlesProps) {
+  const webglSupported = useWebGLSupport();
+  if (!webglSupported) return null;
+
   return (
     <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
       <Canvas

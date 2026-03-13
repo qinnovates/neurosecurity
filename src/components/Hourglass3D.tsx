@@ -2,6 +2,7 @@ import { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Text } from '@react-three/drei';
 import * as THREE from 'three';
+import { useWebGLSupport, WebGLFallback } from './WebGLCheck';
 import { HOURGLASS_BANDS, HOURGLASS_RADII } from '../lib/qif-constants';
 
 /** Map zone names to domain labels for the info panel */
@@ -156,6 +157,7 @@ interface Hourglass3DProps {
 }
 
 export default function Hourglass3D({ highlightBandId, onBandClick, className }: Hourglass3DProps) {
+  const webglSupported = useWebGLSupport();
   const [hoveredBand, setHoveredBand] = useState<number | null>(null);
 
   // Determine active band: prop overrides local hover
@@ -167,6 +169,14 @@ export default function Hourglass3D({ highlightBandId, onBandClick, className }:
   }, [highlightBandId, hoveredBand]);
 
   const band = activeIndex !== null && activeIndex !== -1 ? BANDS[activeIndex] : null;
+
+  if (!webglSupported) {
+    return (
+      <div className={className} style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <WebGLFallback feature="hourglass visualization" />
+      </div>
+    );
+  }
 
   return (
     <div className={className} style={{ position: 'relative', width: '100%', height: '100%' }}>
