@@ -1,6 +1,17 @@
-# Principles of Ethics
+# Principals of Ethics
 
 **A song by Kevin L. Qi**
+
+## Hidden Meanings
+
+**"Chalkboard and line"** carries more than one meaning:
+
+- Young men who signed their lives to fight for the freedom we live. A friend came back from war and was never the same.
+- These are the people who rely on BCIs most.
+- These are the people I know, the people that make me, the people who keep me fighting for their rights when I can hardly stand.
+- I use this when I need motivation and drive to help me push through to the finish.
+
+**"Principles lock from within"** — security guardrails for AI-powered BCIs where the user must grant consent, whether it be subconscious but still a part of their free will and agency.
 
 ## Listen
 
@@ -43,11 +54,13 @@ I hadn't been back to China in nearly two decades. I was afraid to see the very 
 
 While I was in China, I spoke with my grandmother. My entire extended family is still there. I had never spoken to my grandmother about her childhood to the extent that I did following my own past experiences. She has ninety years of wisdom. She never brought it up herself, but there was a time when Japan came into conversation — I was looking to travel there to help renew my six-month China visa. I recall my cousins asking if I knew what Japan had done to China, and I said the most I'd learned was the Rape of Nanjing in high school.
 
-I asked my grandma what it was like, and I could see in her eyes that she was holding back the repressed memory — a look I'm all too familiar with. I steered the conversation and reminded my family that governments and people are not the same. I see governments as a business that provides for the people — at least, that was Washington's dream. It's hard to lie to myself these days, seeing what's happening to the very country whose backbone is freedom, liberty, and justice for all. Indivisible.
+While I was there, I saw what the other side of the coin looks like for "surveillance state." Although a very controversial topic, what I can state with facts is that I've never seen so many women, children, and elderly walk and sit outside at night — even in the most impoverished areas. Even in the wealthiest areas in the States, I have yet to see this without a slight bit of hesitation from the residents.
+
+I asked my grandma what it was like, and I could see in her eyes that she was holding back the repressed memory — a look I'm all too familiar with. I steered the conversation and reminded my family that governments and people are not the same. I see governments as an organization that provides for the people — at least, that was Washington's dream. It's hard to lie to myself these days, seeing what's happening to the very country whose backbone is freedom, liberty, and justice for all. Indivisible.
 
 ## The Oath
 
-I took an oath to become an American at the age of seventeen. I stood in a room among others like me who had to recite our history, learn the very meaning of what it means to be American. My apartment faced the Freedom Tower. My backyard was the Statue of Liberty. Every year I lived in that apartment, I was reminded of the day our freedom was attacked — reminded by the monuments and the two beaming lights, ghosts of the shadows of the past. A reminder that we will not forget our history, to help us remain strong and united.
+I took an oath to become an American at the age of seventeen. I stood in a room among others like me who had to recite our history, learn the very meaning of what it means to be American. I remember the emotions I shared with everyone in that room. I felt it the most from my mom, who stood to my right as we raised our right hands and recited our promise under the Oath of Allegiance (Form M-478). I promised to defend the U.S. Constitution and its laws. This is my promise being fulfilled — the U.S. is united with the people and the hearts that help make it complete. How I get there is policy and innovation through design and technology — the heart of what makes us stand out from the rest of the world. No country can replace the uniqueness that makes us whole from the diversity that makes us one. My apartment faced the Freedom Tower. My backyard was the Statue of Liberty. Every year I lived in that apartment, I was reminded of the day our freedom was attacked — reminded by the monuments and the two beaming lights, ghosts of the shadows of the past. A reminder that we will not forget our history, to help us remain strong and united.
 
 On 9/11, I would sit there to take in the emotions that I remember. My classmates who lost their parents. The dark clouds of the thousands of souls that were lost. The freedom that we as a nation seek to protect, stripped away before our very eyes. What followed in the months after was a rude awakening — a moment of compassion that proved to the world we could all come together and be united. It shouldn't take a tragedy to get there, but those who remember the history can understand the sorrows that pain the people today, in a world so connected yet so divided.
 
