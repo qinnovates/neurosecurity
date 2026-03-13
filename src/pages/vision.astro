@@ -117,7 +117,7 @@ const bandZoneColor = (id: string) => {
 
   <!-- VISION HERO: Kinect on right, text on left -->
   <section class="relative min-h-screen flex items-center overflow-hidden" style="background: #050a08;" id="vision-hero">
-    <HeroParticles client:idle variant="dark" />
+    <HeroParticles client:visible variant="dark" />
     <div class="absolute inset-0 z-0">
       <KinectVision client:only="react" fullBleed={true} />
     </div>
@@ -439,7 +439,7 @@ const bandZoneColor = (id: string) => {
 
       <!-- Kinect-style Neural Vision Demo -->
       <div class="mb-12 reveal">
-        <KinectVision client:only="react" variant="green" />
+        <KinectVision client:visible variant="green" />
         <div class="mt-4 text-center">
           <p class="text-xs text-[var(--color-text-faint)] italic">Conceptual visualization of proposed BCI rendering pipeline. A depth sensor captures the environment, AI OCR reconstructs faces, and Runemate compiles the visual stream for cortical delivery. Toggle between modes to explore.</p>
         </div>
