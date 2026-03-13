@@ -3,21 +3,20 @@ import PageLayout from '@/layouts/PageLayout.astro';
 ---
 
 <PageLayout
-  title="Open Neural Atlas — Live Neural Monitoring Platform"
-  description="Connect BCI devices, stream live EEG, analyze frequency spectra, and test TARA attack techniques — all in the browser."
-  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Open Neural Atlas' }]}
+  title="Demo Atlas — Open Neural Monitoring Platform"
+  description="Explore EEG signal analysis, frequency spectra, and TARA attack techniques with sample data — all in the browser. No hardware required."
+  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Demo Atlas' }]}
 >
   <main class="mx-auto max-w-4xl px-4 py-8">
     <!-- Hero -->
     <div class="mb-10">
-      <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #22d3ee;">Live Platform</p>
+      <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #22d3ee;">Demo Platform</p>
       <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3" style="color: var(--color-text-primary);">
-        Open Neural Atlas
+        Demo Atlas
       </h1>
       <p class="text-base max-w-2xl" style="color: var(--color-text-muted);">
-        A next-gen neural monitoring platform by Qinnovate. Connect a brain-computer interface (or use synthetic data),
-        stream live EEG, analyze frequency bands, test security defenses with the TARA Scanner, and explore
-        the full BrainFlow API — all in the browser.
+        Explore the Open Neural Atlas with pre-loaded sample data. Stream EEG signals,
+        analyze frequency bands, run the TARA Scanner, and navigate the full QIF knowledge base — no hardware, no setup, no risk.
       </p>
     </div>
 
@@ -46,7 +45,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
         },
         {
           title: 'NeuroSIM',
-          description: 'BrainFlow integration hub — connect 40+ devices, explore the API, load sample datasets.',
+          description: 'Simulation hub — load sample datasets, explore neuron models, and browse the full EEG electrode map.',
           color: '#22d3ee',
         },
         {
@@ -95,6 +94,38 @@ import PageLayout from '@/layouts/PageLayout.astro';
       <p class="text-xs mt-3" style="color: var(--color-text-faint);">
         Open source. Run locally with <code class="font-mono px-1 py-0.5 rounded" style="background: var(--color-bg-elevated);">npm run dev</code> + <code class="font-mono px-1 py-0.5 rounded" style="background: var(--color-bg-elevated);">uvicorn</code>.
       </p>
+    </div>
+
+    <!-- Why Sample Data -->
+    <div class="glass rounded-xl p-6 mb-10" style="border: 1px solid #f59e0b20;">
+      <h2 class="text-lg font-bold mb-3" style="color: var(--color-text-primary);">Why Sample Data?</h2>
+      <p class="text-sm leading-relaxed mb-3" style="color: var(--color-text-muted);">
+        Building secure neurotechnology infrastructure takes time. The QIF framework itself is fully open — every threat model,
+        every scoring methodology, every line of code. But a tool that connects directly to brain-computer interfaces
+        carries a responsibility most software doesn't: protecting biometric data that can never be changed.
+      </p>
+      <p class="text-sm leading-relaxed mb-3" style="color: var(--color-text-muted);">
+        This demo ships with sample EEG data so you can explore the full platform without risking your own neural signals.
+        No accidental data leaks. No unencrypted streams leaving your device. Just the science, the security models, and the tools — ready to learn from.
+      </p>
+      <p class="text-sm leading-relaxed mb-5" style="color: var(--color-text-muted);">
+        A full version with live BCI device connectivity, advanced signal processing, and enterprise-grade data protection is in development.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-3" style="border-top: 1px solid var(--color-border);">
+        <a
+          href="mailto:kevin@qinnovate.com?subject=Atlas%20—%20Full%20Version%20Inquiry"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
+          style="background: #f59e0b; color: #0a0e17;"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+          Inquire About the Full Version
+        </a>
+        <span class="text-xs" style="color: var(--color-text-faint);">
+          kevin@qinnovate.com — serious inquiries only
+        </span>
+      </div>
     </div>
 
     <!-- Tech Stack -->
