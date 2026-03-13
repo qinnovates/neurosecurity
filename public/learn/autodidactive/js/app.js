@@ -583,7 +583,7 @@ function renderAudioView() {
           <p>Music that encodes philosophy, neuroscience, and security thinking into something you can feel. Every track starts from a real story — the knowledge is woven into the lyrics, but the entry point is human experience.</p>
         </div>
         <div class="auditory-links">
-          <a href="https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3?si=5c88dbc432ef4f1b" target="_blank" rel="noopener noreferrer" class="auditory-link auditory-link--spotify">
+          <a href="https://open.spotify.com/album/1s3McB6Rcd9LdZrKiNlH6N?si=UMRzS2qATF-e_6hkon5VgQ" target="_blank" rel="noopener noreferrer" class="auditory-link auditory-link--spotify">
             <span class="auditory-link-icon">🎧</span>
             <div>
               <div class="auditory-link-title">Listen on Spotify</div>

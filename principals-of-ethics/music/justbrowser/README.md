@@ -2,7 +2,7 @@
 
 Music that starts with story. A way to share where I come from and express what drives this work through sound.
 
-[Listen on Spotify](https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3) · [SoundCloud](https://soundcloud.com/search?q=keviano%20kulhi)
+[Listen on Spotify](https://open.spotify.com/album/1s3McB6Rcd9LdZrKiNlH6N?si=UMRzS2qATF-e_6hkon5VgQ) · [SoundCloud](https://soundcloud.com/search?q=keviano%20kulhi)
 
 ## Why Music
 
@@ -26,7 +26,7 @@ The debut project. Sawdust was an experiment using modern music to see which sty
 
 | Track | Topic | Genre | Details |
 |-------|-------|-------|---------|
-| [Sawdust](stoicism/sawdust.md) | Stoicism, resilience, the dark room | Dark gospel blues / soul (Dm, ~74 BPM) | [Spotify](https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3) |
+| [Sawdust](stoicism/sawdust.md) | Stoicism, resilience, the dark room | Dark gospel blues / soul (Dm, ~74 BPM) | [Spotify](https://open.spotify.com/album/1s3McB6Rcd9LdZrKiNlH6N?si=UMRzS2qATF-e_6hkon5VgQ) |
 | [Principals of Ethics](neuroethics/principals-of-ethics.md) | Neuroethics, equity, calling all who want to help provide equity to those who need it most | Cinematic neo-soul gospel (Dm, 70 BPM) | Released |
 
 **Sawdust** encodes 10 Stoic teachings from Marcus Aurelius into a call-and-response gospel blues track. Three layers of meaning: surface (building and breaking), emotional (love as the reason to build), and hidden (a personal story encoded in the symbolism).
