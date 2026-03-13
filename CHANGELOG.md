@@ -28,6 +28,7 @@ Auto-maintained by `scripts/changelog-update.mjs`.
 - update news feed cache [skip ci-deploy] ([3d98638](https://github.com/qinnovates/qinnovate/commit/3d98638))
 
 
+<!-- changelog-marker: 888a6e1 -->
 
 ## 2026-03-11
 
