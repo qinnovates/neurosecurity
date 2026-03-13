@@ -3,8 +3,8 @@ import PageLayout from '@/layouts/PageLayout.astro';
 ---
 
 <PageLayout
-  title="Demo Atlas — Open Neural Monitoring Platform"
-  description="Explore EEG signal analysis, frequency spectra, and TARA attack techniques with sample data — all in the browser. No hardware required."
+  title="Demo Atlas — Open Neurosecurity Stack"
+  description="Explore signal monitoring, threat analysis, and governance tooling for brain-computer interfaces with sample data — all in the browser. No hardware required."
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Demo Atlas' }]}
 >
   <main class="mx-auto max-w-4xl px-4 py-8">
@@ -27,36 +27,47 @@ import PageLayout from '@/layouts/PageLayout.astro';
           title: 'Signal Monitor',
           description: 'Watch live brain signals from all channels in real time — like a heart monitor for the brain.',
           color: '#10b981',
+          icon: '<path d="M2 12 L5 12 L7 5 L9 19 L11 8 L13 16 L15 10 L17 14 L19 12 L22 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
         },
         {
           title: 'Spectrum Analyzer',
           description: 'Break down signals into Delta, Theta, Alpha, Beta, and Gamma bands. Includes experimental DSM pattern analysis.',
           color: '#a855f7',
+          icon: '<line x1="3" y1="20" x2="3" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="6.5" y1="20" x2="6.5" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="20" x2="10" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13.5" y1="20" x2="13.5" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="17" y1="20" x2="17" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="20.5" y1="20" x2="20.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
         },
         {
           title: 'TARA Scanner',
           description: 'Penetration testing for BCI — scan, replay, and compare 13 attack techniques across 6 categories.',
           color: '#f59e0b',
+          icon: '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="1" fill="currentColor"/><line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="1.5"/><line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="1.5"/><line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="1.5"/>',
         },
         {
           title: 'Alert Center',
           description: 'Every anomaly detection event with timestamps, severity levels, and channel identification.',
           color: '#ef4444',
+          icon: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><line x1="12" y1="3" x2="12" y2="1" stroke="currentColor" stroke-width="1.5"/>',
         },
         {
           title: 'NeuroSIM',
           description: 'Simulation hub — load sample datasets, explore neuron models, and browse the full EEG electrode map.',
           color: '#22d3ee',
+          icon: '<rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M6 10 L9 10 L10 6 L12 14 L14 8 L15 10 L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="1.5"/>',
         },
         {
           title: 'Integrations',
           description: 'Connect to APIs, data feeds, and the QIF knowledge base with KQL.',
           color: '#6366f1',
+          icon: '<circle cx="5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="19" cy="6" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="5" cy="18" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="19" cy="18" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="7.5" y1="6" x2="16.5" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="5" y1="8.5" x2="5" y2="15.5" stroke="currentColor" stroke-width="1.5"/><line x1="19" y1="8.5" x2="19" y2="15.5" stroke="currentColor" stroke-width="1.5"/><line x1="7.5" y1="18" x2="16.5" y2="18" stroke="currentColor" stroke-width="1.5"/><line x1="7" y1="7.5" x2="17" y2="16.5" stroke="currentColor" stroke-width="1.5"/>',
         },
       ].map((mod) => (
         <div class="glass rounded-xl p-5" style={`border-left: 3px solid ${mod.color};`}>
-          <h3 class="text-sm font-bold mb-1" style={`color: ${mod.color};`}>{mod.title}</h3>
-          <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">{mod.description}</p>
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" style={`color: ${mod.color};`} set:html={mod.icon} />
+            <div>
+              <h3 class="text-sm font-bold mb-1" style={`color: ${mod.color};`}>{mod.title}</h3>
+              <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">{mod.description}</p>
+            </div>
+          </div>
         </div>
       ))}
     </div>
@@ -64,15 +75,37 @@ import PageLayout from '@/layouts/PageLayout.astro';
     <!-- Sample Data -->
     <div class="glass rounded-xl p-6 mb-10">
       <h2 class="text-lg font-bold mb-2" style="color: var(--color-text-primary);">10 Sample EEG Datasets Included</h2>
-      <p class="text-sm mb-4" style="color: var(--color-text-muted);">
-        Synthetic datasets generated from known EEG patterns — no hardware needed. 16 channels (10-20 system), 250 Hz.
+      <p class="text-sm mb-3" style="color: var(--color-text-muted);">
+        Synthetic datasets generated from published EEG research paradigms — no hardware needed. 16 channels (10-20 system), 250 Hz.
       </p>
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+      <p class="text-sm mb-4" style="color: var(--color-text-muted);">
+        Real EEG recordings from peer-reviewed research were used as reference templates to generate physiologically accurate synthetic data.
+        Signal characteristics — band power distributions, spatial correlations, artifact morphology — are modeled from established paradigms
+        so the simulation behaves like real neural data without exposing actual brain recordings. AI-assisted generation expanded coverage
+        across conditions. More training data means better simulation fidelity.
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4">
         {['Eyes Closed', 'Eyes Open', 'Motor Imagery', 'P300 Oddball', 'SSVEP 12Hz', 'Sleep N2', 'Eye Blink', 'Seizure', 'Meditation', 'Motor Right'].map((name) => (
           <div class="px-3 py-2 rounded-lg text-center text-xs font-medium" style="background: var(--color-bg-elevated); color: var(--color-text-muted);">
             {name}
           </div>
         ))}
+      </div>
+      <div style="border-top: 1px solid var(--color-border);" class="pt-3">
+        <h3 class="text-xs font-semibold mb-2" style="color: var(--color-text-muted);">Data Sources & Attribution</h3>
+        <ul class="text-[11px] space-y-1.5" style="color: var(--color-text-faint);">
+          <li>
+            <a href="https://data.mendeley.com/datasets/6k4g25fhzg/1" target="_blank" rel="noopener noreferrer" class="underline hover:no-underline" style="color: var(--color-text-muted);">Nasrabadi et al. (2023)</a>
+            — ADHD adult resting-state & cognitive EEG dataset. 79 subjects, 5 channels, 256 Hz. Mendeley Data, CC BY 4.0.
+          </li>
+          <li>
+            <a href="https://brainflow.org" target="_blank" rel="noopener noreferrer" class="underline hover:no-underline" style="color: var(--color-text-muted);">BrainFlow</a>
+            — Open-source biosignal acquisition library. Synthetic board patterns used as baseline signal templates.
+          </li>
+          <li>
+            Signal paradigms based on: Berger (1929), Pfurtscheller & Lopes da Silva (1999), Sutton et al. (1965), Farwell & Donchin (1988), Regan (1989), De Gennaro & Ferrara (2003).
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -116,22 +149,27 @@ import PageLayout from '@/layouts/PageLayout.astro';
         This demo ships with sample EEG data so you can explore the full platform without risking your own neural signals.
         No accidental data leaks. No unencrypted streams leaving your device. Just the science, the security models, and the tools — ready to learn from.
       </p>
+      <p class="text-sm leading-relaxed mb-3" style="color: var(--color-text-muted);">
+        <strong style="color: var(--color-text-primary);">In production, we never transmit non-anonymized brain data.</strong>
+        The synthetic datasets here demonstrate how we approach anonymization — stripping identifiable signal characteristics
+        while preserving the physiological patterns needed for security analysis. Every dataset is generated, not recorded.
+      </p>
       <p class="text-sm leading-relaxed mb-5" style="color: var(--color-text-muted);">
         A full version with live BCI device connectivity, advanced signal processing, and enterprise-grade data protection is in development.
       </p>
       <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-3" style="border-top: 1px solid var(--color-border);">
         <a
-          href="mailto:kevin@qinnovate.com?subject=Atlas%20—%20Full%20Version%20Inquiry"
+          href="https://github.com/qinnovates/neurosim/discussions"
+          target="_blank"
+          rel="noopener noreferrer"
           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
           style="background: #f59e0b; color: #0a0e17;"
         >
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-          </svg>
-          Inquire About the Full Version
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          Inquire via GitHub Discussions
         </a>
         <span class="text-xs" style="color: var(--color-text-faint);">
-          kevin@qinnovate.com — serious inquiries only
+          Serious inquiries only
         </span>
       </div>
     </div>
@@ -143,8 +181,8 @@ import PageLayout from '@/layouts/PageLayout.astro';
         {[
           { name: 'BrainFlow', detail: '40+ BCI devices' },
           { name: 'React + Vite', detail: 'Frontend' },
-          { name: 'FastAPI', detail: 'WebSocket backend' },
-          { name: 'SciPy', detail: 'Welch PSD analysis' },
+          { name: 'Web Workers', detail: 'In-browser engine' },
+          { name: 'FFT', detail: 'Client-side PSD analysis' },
         ].map((tech) => (
           <div class="text-center">
             <p class="text-sm font-semibold" style="color: var(--color-text-primary);">{tech.name}</p>
