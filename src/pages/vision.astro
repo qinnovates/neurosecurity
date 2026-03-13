@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import BciVisionToggle from '../components/BciVisionToggle';
+import HeroParticles from '../components/HeroParticles';
 import KinectVision from '../components/KinectVision';
 import ScrollCounter from '../components/ScrollCounter';
 import PublicationCard from '../components/PublicationCard.astro';
@@ -115,6 +116,7 @@ const bandZoneColor = (id: string) => {
 
   <!-- VISION HERO: Kinect on right, text on left -->
   <section class="relative min-h-screen flex items-center overflow-hidden" style="background: #050a08;" id="vision-hero">
+    <HeroParticles client:idle variant="dark" />
     <div class="absolute inset-0 z-0">
       <KinectVision client:only="react" fullBleed={true} />
     </div>
