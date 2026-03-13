@@ -60,20 +60,12 @@ const subPages = [
     color: '#3b82f6',
   },
   {
-    title: 'Clinical View',
-    description: 'Neural Impact Chain — trace techniques through pathways, regions, neurotransmitters to DSM outcomes.',
+    title: 'Clinical & Therapeutics',
+    description: 'Neural Impact Chain, dual-use mappings, FDA status, clinical domains — the full clinical picture.',
     href: '/atlas/clinical/',
     icon: 'brain',
     stat: `${atlasData.bands.reduce((s, b) => s + b.brainRegions.length, 0)} regions`,
     color: '#10b981',
-  },
-  {
-    title: 'Therapeutics',
-    description: 'The dual-use map — every attack technique paired with its therapeutic analog.',
-    href: '/atlas/therapeutics/',
-    icon: 'heart',
-    stat: 'Dual-use',
-    color: '#06b6d4',
   },
 ];
 
@@ -226,7 +218,7 @@ const iconSvg: Record<string, string> = {
       <a href="/atlas/tara/" class="underline ml-1">TARA Atlas</a> &middot;
       <a href="/atlas/scoring/" class="underline">NISS Scoring</a> &middot;
       <a href="/atlas/analysis/" class="underline">Case Studies</a> &middot;
-      <a href="/atlas/therapeutics/" class="underline">Therapeutics</a>
+      <a href="/atlas/clinical/#therapeutics" class="underline">Therapeutics</a>
     </p>
     <p class="text-[10px] font-mono mt-2 tracking-[0.08em]" style="color: var(--color-text-faint);">
       PROPOSED FRAMEWORK &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE
