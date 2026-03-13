@@ -43,6 +43,12 @@ fact-check-report.json
 docs/learn/autodidactive/auditory/**/*.mp3
 *.wav
 
+# EEG data files (downloaded via shared/scripts/download-eeg-samples.py)
+qif-framework/qif-lab/data/
+*.edf
+*.bdf
+*.mat
+
 # Secrets & credentials
 .env
 .env.*
