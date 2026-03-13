@@ -1,7 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasDashboard from '@/components/atlas/AtlasDashboard';
-import VisionSensorModule from '@/components/atlas/vision-sensor/VisionSensorModule';
 import BciKql from '@/components/bci/BciKql';
 import PublicationCard from '@/components/PublicationCard.astro';
 import { getAtlasData, getThreatsForBandDetail } from '@/lib/atlas-data';
@@ -175,16 +174,6 @@ const iconSvg: Record<string, string> = {
     brainViews={brainViews}
     threatDetails={threatDetails}
   />
-
-  <!-- Vision Sensor Module -->
-  <div class="mt-12">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="flex-1 h-px" style="background: var(--color-border);" />
-      <span class="text-[10px] uppercase tracking-[0.12em] font-mono" style="color: var(--color-text-faint);">Vision Sensor</span>
-      <div class="flex-1 h-px" style="background: var(--color-border);" />
-    </div>
-    <VisionSensorModule client:only="react" />
-  </div>
 
   <!-- Recent Research -->
   {posts.length > 0 && (
