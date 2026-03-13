@@ -1,0 +1,68 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+---
+
+<PageLayout title="BCI Intel Reports | Qinnovate" description="Quarterly threat intelligence publications covering the BCI industry's security posture, funding, regulatory milestones, and emerging attack surfaces.">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
+      BCI Intelligence Reports
+    </h1>
+    <p class="text-lg text-[var(--color-text-muted)] mb-8 max-w-2xl">
+      Quarterly threat intelligence publications covering the BCI industry's security posture, capital activity, regulatory milestones, and emerging attack surfaces. Data-driven analysis from the QIF datalake.
+    </p>
+
+    <div class="space-y-6">
+      <!-- 2026 -->
+      <div class="glass rounded-xl border border-[var(--color-border)] p-6">
+        <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[var(--color-accent-secondary)]"></span>
+          2026
+        </h2>
+        <div class="space-y-3">
+          <a href="/research/intel/2026/q1/" class="block glass rounded-lg border border-[var(--color-border)] p-4 hover:border-[var(--color-accent-primary)]/40 transition-colors group">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-primary)] transition-colors">
+                  Q1 2026 BCI Intelligence Report
+                </h3>
+                <p class="text-sm text-[var(--color-text-muted)] mt-1">
+                  57 companies, $5.93B tracked funding, $482M Q1 activity. 109 attack techniques, 81% CVE blind spot. Intelligence community enters BCI.
+                </p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0 ml-4">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
+                  PUBLISHED
+                </span>
+                <span class="text-xs text-[var(--color-text-faint)]">Mar 13, 2026</span>
+              </div>
+            </div>
+          </a>
+
+          <div class="block glass rounded-lg border border-[var(--color-border)]/50 p-4 opacity-50">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-base font-semibold text-[var(--color-text-muted)]">
+                  Q2 2026 BCI Intelligence Report
+                </h3>
+                <p class="text-sm text-[var(--color-text-faint)] mt-1">
+                  Scheduled for July 2026.
+                </p>
+              </div>
+              <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-[var(--color-text-faint)]/10 text-[var(--color-text-faint)] border border-[var(--color-text-faint)]/20">
+                UPCOMING
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology note -->
+    <div class="mt-10 glass rounded-xl border border-[var(--color-border)] p-5">
+      <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Methodology</h3>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        Reports are generated from the QIF datalake: BCI Landscape Tracker (57+ companies), TARA threat catalog (109 techniques), NISS device scoring (20 devices), CVE-Technique mapping (55 CVEs), and the BCI Intel Feed (215+ items). All funding figures, regulatory milestones, and device specifications are verified against primary sources. Coverage is expanding each quarter.
+      </p>
+    </div>
+  </div>
+</PageLayout>

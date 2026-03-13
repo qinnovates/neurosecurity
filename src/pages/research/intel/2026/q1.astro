@@ -1,0 +1,27 @@
+---
+import PublicationLayout from '@/layouts/PublicationLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+const posts = await getCollection('blog');
+const post = posts.find(p => p.id.includes('q1-2026-bci-intelligence-report'));
+
+if (!post) {
+  return Astro.redirect('/research/intel/');
+}
+
+const { Content } = await render(post);
+const date = post.data.date instanceof Date
+  ? post.data.date.toISOString().split('T')[0]
+  : String(post.data.date);
+---
+
+<PublicationLayout
+  title={post.data.title}
+  date={date}
+  tags={post.data.tags}
+  subtitle="Quarterly Threat Intelligence Publication"
+  factChecked={true}
+  factCheckDate="2026-03-13"
+>
+  <Content />
+</PublicationLayout>

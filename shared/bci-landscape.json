@@ -1,6 +1,8 @@
 {
-  "version": "2.0",
-  "generated": "2026-03-12",
+  "version": "2.1",
+  "generated": "2026-03-13",
+  "last_crawled": "2026-03-13",
+  "last_verified": "2026-03-13",
   "description": "Comprehensive BCI industry landscape tracker. Tracks companies, devices, security posture, funding, regulatory milestones, and publication trends. Part of the QIF project's mission to map the BCI security gap.",
   "companies": [
     {
@@ -11,11 +13,12 @@
       "headquarters": "Fremont, California, USA",
       "status": "active",
       "acquired_by": null,
-      "funding_total_usd": 1940000000,
+      "funding_total_usd": 1340000000,
+      "funding_note": "~$1.29-1.34B across 6 rounds per Sacra/Tracxn/PitchBook. Series E $650M (May 2025). Verified 2026-03-13.",
       "valuation_usd": 9600000000,
       "employees_approx": 400,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Implantable N1 chip with 1024 electrodes and wireless BLE telemetry. FDA IDE approved May 2023. First human implant Jan 2024. 21 participants globally as of Jan 2026 across PRIME (US), CAN-PRIME (Canada, Nov 2024), GB-PRIME (UK, Jul 2025). PMA application filed Nov 2024. Series E $650M closed Jun 2025. FDA Emergency Use Authorization for calibration software in acute locked-in syndrome (Apr 2025).",
+      "security_notes": "No public security documentation. Implantable N1 chip with 1024 electrodes and wireless BLE telemetry. FDA IDE approved May 2023. First human implant Jan 2024. ~20 participants globally as of Dec 2025 (12 confirmed by Sep 2025, 7 in UK GB-PRIME) across PRIME (US), CAN-PRIME (Canada, Nov 2024), GB-PRIME (UK, Jul 2025). PMA application filed Nov 2024. Series E $650M closed Jun 2025. FDA Emergency Use Authorization for calibration software in acute locked-in syndrome (Apr 2025). Verified 2026-03-13 via CNBC, Neurapod, Neuralink updates.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0003",
@@ -47,7 +50,7 @@
           "channels": 1024,
           "electrode_type": "penetrating",
           "fda_status": "IDE",
-          "units_deployed": "21 implanted globally (PRIME/CAN-PRIME/GB-PRIME, Jan 2026)",
+          "units_deployed": "~20 implanted globally (PRIME/CAN-PRIME/GB-PRIME, Dec 2025)",
           "first_human": "2024-01",
           "price_usd": null,
           "target_use": "medical",
@@ -80,7 +83,7 @@
       "valuation_usd": null,
       "employees_approx": 120,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. 10 patients across US and Australia trials. First human 2019 (Melbourne, Australia); first US human Jul 2022. IQT (In-Q-Tel, CIA/IC venture arm) joined Series D (Nov 2025). Next-gen transcatheter whole-brain interface in early development. AI decoding team established in NYC.",
+      "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. 10 patients across US and Australia trials. First human 2019 (Melbourne, Australia); first US human Jul 2022. $200M Series D (Nov 2025) led by Double Point Ventures; IQT (In-Q-Tel, CIA/IC venture arm), Bezos Expeditions, QIA, and others participated. Next-gen transcatheter whole-brain interface in early development. AI decoding team established in NYC. Verified 2026-03-13.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0005",
@@ -219,7 +222,7 @@
       "valuation_usd": null,
       "employees_approx": 40,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Connexus DDI: 421 channels per cortical module, up to 4 modules (1,684 channels max). The 65,000-channel figure from early roadmaps was a long-term aspiration, not current spec. FDA IDE approved Nov 2025 for Connect-One Early Feasibility Study (first IDE for speech restoration with a fully implantable BCI). First-in-human implant Sep 2025.",
+      "security_notes": "No public security documentation. Connexus DDI: 421 channels per cortical module, up to 4 modules (1,684 channels max). The 65,000-channel figure from early roadmaps was a long-term aspiration, not current spec. First-in-human acute recording May 14, 2025 at University of Michigan (Dr. Matthew Willsey, 20-min procedure during epilepsy surgery, device implanted and removed). FDA IDE approved Nov 2025 for Connect-One Early Feasibility Study (first IDE for speech restoration with a fully implantable BCI). Chronic clinical study planned Q1 2026. Verified 2026-03-13 via CNBC, Paradromics PR, Michigan Medicine.",
       "tara_attack_surface": [
         "QIF-T0001",
         "QIF-T0003",
@@ -239,8 +242,8 @@
           "channels": 1684,
           "electrode_type": "penetrating",
           "fda_status": "IDE",
-          "units_deployed": "1 (first-in-human Sep 2025)",
-          "first_human": "2025-09",
+          "units_deployed": "1 (first-in-human acute recording May 2025, University of Michigan)",
+          "first_human": "2025-05",
           "price_usd": null,
           "target_use": "medical",
           "cves_known": []
@@ -1189,7 +1192,7 @@
       "status": "active",
       "acquired_by": null,
       "funding_total_usd": 490000000,
-      "valuation_usd": 1250000000,
+      "valuation_usd": 1500000000,
       "employees_approx": 150,
       "security_posture": "none_published",
       "security_notes": "Founded by Max Hodak (Neuralink co-founder/president, left 2021) and Alan Mardinly PhD (CSO, former Neuralink). Three device programs spanning retinal to cortical. PRIMA: 378-pixel subretinal photovoltaic implant, wireless NIR power, write-capable stimulation — elevated TARA attack surface for injection/manipulation. Science Eye: 8,192-pixel supra-retinal micro-LED + optogenetic gene therapy (deferred until post-PRIMA approval). Biohybrid: cortical surface interface using stem cell-derived living neurons in silicon scaffold (~90,000 microwells, early rodent PoC). NEJM published PRIMAvera pivotal results Oct 2025 (DOI: 10.1056/NEJMoa2501396). CE mark + FDA submissions June 2025. IQT (CIA/IC venture arm) participated in Series C — national security implications noted. No public security documentation for any device program.",
