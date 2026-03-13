@@ -4,7 +4,7 @@
 
 <div align="center">
 
-*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:08)*
+*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Spotify](https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3) | [Apple Music](https://music.apple.com/us/album/principals-of-ethics-single/1883981256) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:08)*
 
 </div>
 
@@ -64,4 +64,4 @@ If you work with neural data, BCI design, neuroethics, health policy, or regulat
 
 ---
 
-*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:08)*
+*Connect: [GitHub](https://github.com/qikevinl) | [Medium](https://medium.com/@qikevinl) | [Spotify](https://open.spotify.com/artist/4gZIMNI8AKnuGoYbcOzZc3) | [Apple Music](https://music.apple.com/us/album/principals-of-ethics-single/1883981256) | [Vibe Check](https://soundcloud.com/keviano/kulhi-loach#t=0:08)*
