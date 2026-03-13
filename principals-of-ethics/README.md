@@ -5,6 +5,7 @@
 ## Listen
 
 [![Spotify](https://img.shields.io/badge/Spotify-Listen-1DB954?logo=spotify&logoColor=white)](https://open.spotify.com/track/4QPE871AOoNlc8qO8iUbWJ)
+[![Apple Music](https://img.shields.io/badge/Apple%20Music-Listen-FA243C?logo=apple-music&logoColor=white)](https://music.apple.com/us/album/principals-of-ethics-single/1883981256)
 
 ## Inspiration
 
