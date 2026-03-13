@@ -4,7 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: b85707efe5414c2fc72d57e6413956e13663ef7e -->
+<!-- changelog-marker: 144621aae82142f7e1f27f411545de4be0523501 -->
+
+## 2026-03-13
+
+### Fixed
+- Scope BCI Vision dark mode to homepage and /vision/ only ([144621a](https://github.com/qinnovates/qinnovate/commit/144621a))
+
 
 ## 2026-03-12
 
