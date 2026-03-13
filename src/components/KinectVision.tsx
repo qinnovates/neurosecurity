@@ -197,8 +197,8 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     texture.magFilter = THREE.NearestFilter;
     texture.generateMipmaps = false;
 
-    // Geometry: grid of vertices — skip every other pixel for softer look
-    const STEP = 2;
+    // Geometry: grid of vertices — skip pixels for performance + softer look
+    const STEP = 3;
     const geometry = new THREE.BufferGeometry();
     const cols = Math.floor(GRID_W / STEP);
     const rows = Math.floor(H / STEP);
@@ -222,7 +222,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         gridWidth: { value: GRID_W },
         nearClipping: { value: 850 },
         farClipping: { value: 4000 },
-        pointSize: { value: 3 },
+        pointSize: { value: 4 },
         zOffset: { value: 1000 },
         uFisheye: { value: 0 },
         uMousePos: { value: new THREE.Vector2(0, 0) },
