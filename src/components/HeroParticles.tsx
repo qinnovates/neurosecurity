@@ -2,6 +2,7 @@ import { useRef, useMemo, useCallback, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useWebGLSupport } from './WebGLCheck';
+import { useReducedMotion } from '../lib/useReducedMotion';
 
 const SEPARATION = 100;
 const AMOUNTX = 50;
@@ -12,6 +13,7 @@ function WavePoints({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const { camera } = useThree();
+  const reducedMotion = useReducedMotion();
   const numParticles = AMOUNTX * AMOUNTY;
 
   // Initialize static attributes
@@ -56,6 +58,7 @@ function WavePoints({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
 
   useFrame((state) => {
     if (!pointsRef.current || !materialRef.current) return;
+    if (reducedMotion) return;
 
     // Camera movement (kept for interactivity)
     camera.position.x += (mouseRef.current.x * 0.5 - camera.position.x) * 0.05;

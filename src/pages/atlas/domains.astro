@@ -1,0 +1,20 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import DomainMatrix from '../../components/atlas/DomainMatrix';
+import { THREAT_VECTORS } from '../../lib/threat-data';
+---
+<PageLayout
+  title="TARA Domain Matrix | Qinnovate"
+  description="{THREAT_VECTORS.length} techniques organized by biological domain and interaction mode"
+  breadcrumbs={[
+    { label: 'Atlas', href: '/atlas/' },
+    { label: 'Domain Matrix' }
+  ]}
+  wide={true}
+>
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--color-text-primary)">TARA Domain Matrix</h1>
+    <p class="text-sm mb-8" style="color: var(--color-text-muted)">{THREAT_VECTORS.length} techniques organized by biological domain and interaction mode</p>
+    <DomainMatrix client:load techniques={THREAT_VECTORS} />
+  </div>
+</PageLayout>

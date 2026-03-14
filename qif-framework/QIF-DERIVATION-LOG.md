@@ -15,6 +15,12 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint
 | Entry | Topic | Link |
 |-------|-------|------|
+| 96 | 6-expert cross-domain review: Mode F (failure), Operational Readiness tiers, evidence prominence, clinical gaps | [Entry 96](#entry-96-six-expert-review) |
+| 95 | Drift metric: proposed for NISS, corrected to TARA — describes technique temporal behavior, not patient impact | [Entry 95](#entry-95-niss-cognitive-drift) |
+| 94 | Cross-AI clinical review: clinicians think indication→target→parameter→outcome, not domain→mode | [Entry 94](#entry-94-clinical-review) |
+| 93 | TARA domain taxonomy reframe: biological domains × interaction modes for dual clinical/security atlas | [Entry 93](#entry-93-tara-domain-taxonomy) |
+| 92 | Vision prosthesis sensor hierarchy: camera-first, not depth-first. ML classification is the bottleneck, not resolution | [Entry 92](#entry-92-sensor-hierarchy) |
+| 91 | QIF-LiDAR field test: iPhone LiDAR sensor limitations, fur-scattering problem, pivot to multi-sensor/Oculus | [Entry 91](#entry-91-lidar-sensor-limitations) |
 | 90 | Data lake sprint: KQL-first architecture, security hardening, clinical drill-down, whitepaper v8, site revamp | [Entry 90](#entry-90-data-lake-sprint) |
 | 89 | Vision: neuroethics to BCI vision arc, color science for cortical prosthetics, equity-first neurorights | [Entry 89](#entry-89-neuroethics-to-bci-vision) |
 | 88 | S-band relabel: physics regime + spatial scale, host compute gap closed | [Entry 88](#entry-88-s-band-relabel) |
@@ -381,6 +387,606 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 96: Six-Expert Cross-Domain Review — Mode F, Operational Readiness, Clinical Gaps {#entry-96-six-expert-review}
+
+**Date:** 2026-03-14, ~06:30
+**Classification:** INFERRED (6 Claude subagents with domain-specific personas reviewing the TARA taxonomy proposal)
+**AI Systems:** Claude Opus 4.6 (6 parallel subagents: marketing strategist, data engineer, security architect, clinical neurologist, academic researcher, UX/product designer)
+**Connected entries:** Entry 95 (drift metric), Entry 94 (clinical review), Entry 93 (TARA domain taxonomy)
+
+### Context
+
+After the TARA domain taxonomy proposal reached implementation-ready status (134 techniques, 11+1 domains, 3 modes, drift metadata, v2 schema, attack chains, evidence tiers, clinical extensions), Kevin requested a comprehensive cross-domain expert review. Six subagents were launched in parallel, each with a specific domain persona, to identify gaps, problems, and improvements from perspectives the security/clinical reviews had not covered.
+
+### The Three Structural Additions
+
+**1. Mode F (Failure) — from Clinical Neurologist**
+
+The taxonomy has 3 modes: R (Reconnaissance), M (Manipulation), D (Disruption). All assume an adversary. But the clinical neurologist pointed out that the harms that actually injure patients every week have NO adversary — they are spontaneous device and biological failures:
+
+- Infection (3-6% for DBS hardware)
+- Intracranial hemorrhage (1-2% per lead)
+- Lead migration/fracture
+- Battery end-of-life (abrupt symptom return)
+- MRI-induced electrode heating
+- Wound complications (erosion, seroma)
+- Tolerance/habituation (therapeutic effect diminution)
+- Withdrawal/rebound (DBS withdrawal syndrome)
+
+Without Mode F, the "dual atlas" claim overpromises to clinicians. A neurologist looking at a taxonomy that catalogs 134 adversarial techniques but ignores the complications that dominate their practice will dismiss it as an academic exercise.
+
+**Decision:** Add Mode F (Failure) as a 4th mode. This makes the matrix 11 domains x 4 modes = 44 cells. F-mode techniques describe non-adversarial failures with the same schema (domain, drift, NISS scoring, detection, mitigations) so they integrate seamlessly.
+
+**2. Operational Readiness Tiers (OR-1 to OR-4) — from Security Architect**
+
+The taxonomy presents 134 techniques with detection methods and mitigations as if they were all at the same readiness level. They are not. Some detections are existing clinical practice (impedance monitoring). Others rely on proposed metrics (Cs) that have never been tested. A CISO needs to know which techniques can be defended against TODAY.
+
+| Level | Meaning |
+|---|---|
+| OR-1 | Detection and mitigation available with commercial tools today |
+| OR-2 | Detection possible with custom engineering; mitigation requires device manufacturer cooperation |
+| OR-3 | Detection requires research-grade instrumentation; mitigation is theoretical |
+| OR-4 | No known detection method; mitigation requires fundamental research |
+
+Approximately 35 techniques (SIL domain) are OR-1. The remaining ~96 biological techniques range from OR-2 to OR-4. Being honest about this is what makes the taxonomy credible rather than aspirational.
+
+**Decision:** Add `operational_readiness` field (OR-1 through OR-4) to every technique.
+
+**3. Evidence Tier Visual Prominence — from UX Designer + Academic Researcher**
+
+Speculative techniques (quantum tunneling exploits) presented with the same visual weight as validated techniques (DBS for Parkinson's) poisons trust in the entire catalog. The evidence tier must be the most prominent visual element everywhere a technique appears — full-width banner on detail pages, distinct visual treatment in matrix and list views.
+
+**Decision:** Evidence tier becomes a first-class visual element, not metadata tucked in a collapsible card.
+
+### Additional Findings by Expert
+
+**Marketing Strategist:**
+- Buyer is VP of Regulatory at BCI companies. FDA compliance is the fastest path to adoption.
+- Need "TARA for FDA Submission" template mapping techniques to FDA premarket cybersecurity requirements.
+- Lead with defense, not offense. Start conversations with SIL domain (traditional cyber CISOs already understand), then bridge to biology.
+- Three-tier naming: display name (consequence-oriented for product pages) + technical name + clinical name.
+- Drift dimension is the single strongest competitive differentiator vs MITRE ATT&CK.
+- "MITRE ATT&CK told you how attackers compromise networks. TARA tells you how they compromise neural interfaces."
+
+**Data Engineer:**
+- `tara_alias` should be PROVISIONAL for 6 months, then locked after external clinical reviewer validates domain assignments. Wrong aliases are worse than no aliases.
+- Phase migration in 4 stages: (1) field rename + domain/mode, (2) drift + tags, (3) evidence + detection, (4) new techniques.
+- Extract therapeutic modalities into a reference table to prevent update anomalies (tDCS appears in 3+ techniques; when FDA status changes, update one place not many).
+- At 300 techniques, split to one-file-per-technique. At 1000+, move to SQLite. Not yet needed.
+- Compute derived fields (`revocability`, `dual_use_risk`) at query time, not as stored fields.
+- Split registrar payload into summary (for KQL/list views) and detail (loaded per technique page) to manage browser payload size.
+
+**Security Architect:**
+- Missing attack classes: supply chain (counterfeit electrodes, compromised firmware images), insider threat (malicious clinician), social engineering, regulatory/legal attacks, economic/availability attacks.
+- Map SIL techniques to ATT&CK IDs for SIEM integration. SOC teams already have ATT&CK in their workflows.
+- Add chain roles: privilege_escalation, defense_evasion, staging (missing from current role list).
+- ~30-40% of biological techniques are fundamentally undetectable with current technology. Be honest — tier detections by maturity.
+- FDA 2023 cybersecurity guidance mapping is the regulatory adoption path.
+- Publish single-number precedence rule for NISS vs CVSS to avoid SOC confusion.
+
+**Clinical Neurologist:**
+- Non-adversarial failures dominate actual clinical practice. Zero documented malicious attacks on implanted neurostimulators vs thousands of patients harmed by infection, hemorrhage, hardware failure.
+- Pharmacological interactions are a major gap: levodopa + STN-DBS co-titration, SSRIs + limbic stimulation, AEDs + RNS detection algorithms.
+- Need MedDRA preferred terms for adverse effects (not free-text strings) for EMR integration.
+- Revocability should be 4-level (fully reversible / partially reversible / reversible with intervention / irreversible), not binary.
+- Drift model needs a 5th category: S (State-dependent) — effects manifest only under specific physiological/environmental conditions (dysarthria worsens with fatigue, balance worsens in dark).
+- Consent tags need "assent" (pediatric) and "surrogate" (incapacitated patients).
+
+**Academic Researcher:**
+- Novelty is in the organizational principle (domain x mode x drift with dual-use bridging), not the technique catalog.
+- Frame as "framework for organizing neurotechnology techniques" not "complete catalog of 134 attacks."
+- Gap-filling to complete the domain x mode matrix looks like taxonomy driving science, not science driving taxonomy. Evidence tiers must be surfaced as a core methodological feature.
+- Cross-AI validation is not a publishable methodology. Need systematic review (PRISMA-style) + independent expert panel classification with inter-rater reliability (Cohen's kappa).
+- Major citation omissions: Pycroft et al. 2016 ("Brainjacking"), Denning et al. 2009 (neurosecurity), Ienca & Andorno 2017 (neurorights), Yuste et al. 2017, Li et al. 2015 BCI security survey.
+- Responsible disclosure section needed — the taxonomy is more specific than ATT&CK (targets biology, not silicon) but less dangerous than gain-of-function research (requires physical proximity and specialized hardware).
+
+**UX/Product Designer:**
+- 3-level navigation: matrix lobby (11x3 heatmap) → filtered card list → technique detail page.
+- Persona lens toggle (Security/Clinical) in header affecting terminology, columns, sort order, collapse state. Not tabs — a mode switch with cross-fade animation.
+- Domain x mode matrix as HTML table heatmap, sensory-to-abstract row order, SIL visually separated.
+- Detail page: structured header band + two-column card body with progressive disclosure. Cards collapse/expand based on active lens.
+- Attack chain visualization: horizontal stepped flow with domain boundary markers at the SIL→biology crossing.
+- 4 primary filters (domain, mode, severity, drift) + 4 secondary behind "More filters."
+- PWA with offline cache for bedside clinical use.
+
+### Classification
+
+- Mode F (non-adversarial failure): **INFERRED** (clinically well-established that device failures dominate actual harm; the organizational insight that these should share the same schema is novel)
+- Operational Readiness tiers: **INFERRED** (standard security maturity model applied to BCI context)
+- Evidence prominence as trust mechanism: **INFERRED** (UX best practice applied to mixed-evidence catalogs)
+- Missing technique classes (supply chain, insider, pharma interactions): **VERIFIED** (documented in security and clinical literature)
+- Publication strategy: **INFERRED** (academic persona assessment of venue fit and reviewer expectations)
+
+### Documents Updated
+- TARA taxonomy proposal: `docs/research/tara-domain-taxonomy-proposal.md`
+- Pending: Mode F implementation, OR field addition, evidence banner design
+
+---
+
+## Entry 95: NISS 3.0 — Cognitive Drift (DR) as 7th Impact Metric {#entry-95-niss-cognitive-drift}
+
+**Date:** 2026-03-14, ~03:00
+**Classification:** INFERRED (derived from clinical gap analysis during TARA taxonomy reframe)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 94 (clinical review), Entry 93 (TARA domain taxonomy)
+
+### How This Was Derived
+
+During the TARA domain taxonomy reframe (Entries 93-94), Kevin was stress-testing the classification system by tracing a real clinical use case: fixing blindness through a visual prosthesis pipeline. This led to asking "what's missing from the classification?" — systematically checking what dimensions exist vs what's absent.
+
+The candidate list included invasiveness, temporal profile, modality, detection, and controls. Kevin's first instinct was invasiveness — but he immediately self-corrected: "actually maybe it doesn't make sense for NISS as vulns don't care about invasive." This is correct. NISS scores IMPACT (what happens to the patient), not ACCESS (how you get to the patient). CVSS already handles access vectors (AV:P/L/A/N). The separation is intentional.
+
+Kevin then looked at temporal profile and recognized it fills a real gap: "this may be useful for NISS tho." The insight: NISS has Reversibility (can damage be undone?) and Neuroplasticity (does the brain rewire?), but neither captures WHEN the impact manifests. A latent cumulative effect that creeps up over months is far more dangerous than an acute effect you notice immediately — because by the time you detect it, neuroplastic changes may already be structural. This is a clinically critical distinction that the current 6-metric NISS cannot express.
+
+Kevin named it **Cognitive Drift** — measuring how neural impact drifts from the moment of exposure to manifestation. The name captures the essence: it's not about the damage itself (that's BI, CD), not about whether it heals (that's RV, NP), but about the drift between cause and effect. The longer the drift, the harder to detect, attribute, and stop.
+
+### The Gap
+
+| Scenario | RV (Reversibility) | NP (Neuroplasticity) | Missing |
+|----------|----|----|---------|
+| DBS turned off, tremor returns immediately | F (fully reversible) | N (none) | Acute — instant onset, instant offset |
+| Repeated tDCS sessions gradually shift mood baseline | T (temporary) | P (partial) | Cumulative — each session adds |
+| Training data poisoning, patient doesn't notice for months | P (partial) | P (partial) | Latent — delayed onset |
+| Single seizure event causes permanent epileptogenic focus | I (irreversible) | S (structural) | Persistent — one exposure, permanent |
+
+RV and NP are both "what is the state after?" — neither captures "when does the patient know?"
+
+### The New Metric: DR (Cognitive Drift)
+
+```
+DR (Cognitive Drift): A, C, L, P
+  A = Acute       — immediate onset, immediate offset when exposure stops
+  C = Cumulative   — builds with repeated exposure over sessions/days/weeks
+  L = Latent       — delayed onset, hours to months before impact manifests
+  P = Persistent   — continues or worsens after exposure stops
+```
+
+Cognitive Drift measures the distance between cause and effect — how far the impact drifts from the moment of exposure. The longer the drift, the harder to detect, attribute, and stop.
+
+Numeric scores follow existing NISS pattern:
+- A = 0.0 (least dangerous — patient notices immediately, can act)
+- C = 3.3 (moderate — builds gradually, harder to attribute)
+- L = 6.7 (high — patient unaware during exposure window)
+- P = 10.0 (critical — self-sustaining after single or limited exposure)
+
+### NISS v1.2 Vector Format
+
+**v1.1 (current):** `NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T`
+**v3.0 (proposed):** `NISS:3.0/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T/DR:C`
+
+### Why This Matters
+
+1. **Clinical safety:** A clinician needs to know "will my patient notice this immediately or will it creep up?" to design monitoring protocols.
+2. **Threat assessment:** A latent attack (DR:L) is harder to detect and attribute than an acute one (DR:A). This changes the risk calculus.
+3. **Consent implications:** Cumulative drift (DR:C) may fall outside original consent scope — the patient consented to one session, not to gradual baseline drift over 50 sessions.
+4. **Forensics:** If a patient reports symptoms months after BCI exposure, DR:L or DR:C tells investigators to look at historical exposure, not just current device state.
+5. **No overlap with existing metrics:** RV = can it be undone? NP = does the brain rewire? DR = when does it show up? Three independent questions about the same impact.
+
+### Scoring Formula Update
+
+Default weights for v1.2: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0, DR=1.0
+
+DR gets weight 1.0 (same as BI, CV, RV, NP) because cognitive drift directly impacts patient safety — a drifting effect you can't detect is worse than an obvious one you can stop.
+
+Total weight sum: 5.0 → 6.0. Formula structure unchanged, just one more term.
+
+### Cross-AI Math Validation (Codex GPT-5.2 + Gemini)
+
+Both models independently verified the DR metric. Key findings:
+
+**1. No double-counting.** DR, RV, and NP are confirmed orthogonal:
+- RV = can the harm be undone?
+- NP = did the brain physically rewire?
+- DR = when does the impact manifest?
+- A technique can be RV:F (fully reversible), NP:N (no rewiring), DR:L (latent onset). That combination is real and wasn't expressible before.
+
+**2. Score dilution is real but intentional.** Adding DR at weight 1.0 changes the formula:
+```
+NISS_v3.0 = (5/6) × NISS_v2.1 + (DR / 6)
+```
+
+Example: technique with BI:H, CR:H, CD:H, CV:E, RV:P, NP:T
+- v2.1: sum=30.1, score = 30.1/5.0 = **6.02 (Medium)**
+- v3.0 with DR:A (0.0): score = 30.1/6.0 = **5.02 (Medium)** — drops 1 point
+- v3.0 with DR:C (3.3): score = 33.4/6.0 = **5.57 (Medium)** — drops 0.45
+- v3.0 with DR:L (6.7): score = 36.8/6.0 = **6.13 (Medium)** — roughly preserves
+- v3.0 with DR:P (10.0): score = 40.1/6.0 = **6.68 (Medium)** — slightly increases
+
+**3. Critical (9.0-10.0) becomes harder to reach.** With DR:A (0.0), max possible score is 50/6 = 8.33 — critical is mathematically unreachable. This is a feature, not a bug.
+
+**4. Weight debate:**
+- Codex recommended DR = 0.5 to minimize dilution and preserve v2.1 comparability
+- Gemini recommended DR = 1.0, arguing DR is a structural metric like RV and NP — same tier deserves same weight
+
+**Decision: DR = 1.0, no threshold recalibration.**
+
+Gemini's argument won: "Accept that v3.0 tightens the Critical category, reserving it for techniques that have both high immediate impact AND high temporal persistence. This aligns with prioritizing long-term systemic neural safety."
+
+A technique that hits hard but you notice immediately (DR:A) SHOULD score lower than one that hits hard and you don't notice for months (DR:L). The old scoring couldn't distinguish those. Now it can. Downgrading old scores is the correct behavior — those scores were overestimating severity by ignoring temporal detectability.
+
+**5. A/C/L/P at 0/3.3/6.7/10 confirmed correct.** Both models agreed the 4-step linear scale maintains consistency with all other NISS metrics. Gemini noted: mapping Acute to 0.0 is correct for "drift" — an immediate attack has zero drift. If we wanted Acute = high risk, the metric would need a different name, but for Cognitive Drift the current mapping is semantically correct.
+
+**6. Version: NISS 3.0** (not 1.2). Current registrar is v2.1. Adding a 7th metric is a major structural change warranting a major version bump.
+
+### What This Does NOT Change
+
+- All existing v2.1 vectors remain valid (DR defaults to X/undefined for backward compatibility)
+- QIF-T IDs unchanged
+- TARA aliases unchanged
+- All other NISS metrics unchanged
+- PINS flag unchanged (still triggered by BI >= H or RV == I)
+- Severity thresholds unchanged (intentionally tighter under v3.0)
+
+### NISS 3.0 Vector Format
+
+```
+NISS:3.0/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T/DR:C
+```
+
+Default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0, DR=1.0 (total 6.0)
+
+### Classification
+
+- Drift as independent temporal dimension: **VERIFIED** (confirmed orthogonal to RV and NP by both Codex and Gemini)
+- A/C/L/P scale: **PROPOSED** (consistent, clinically mappable, not yet validated against clinical data)
+- Score dilution is intentional: **VERIFIED** (cross-AI consensus that tighter critical threshold improves patient safety)
+- DR weight = 1.0: **INFERRED** (Gemini argument accepted — structural metric deserves structural weight)
+- Gap in current NISS: **CORRECTED** — see below
+
+### Correction: Drift Belongs in TARA, Not NISS
+
+After further analysis including a clinical persona review from Codex (GPT-5.2), Kevin identified that drift describes the **technique's temporal behavior**, not the **patient's impact severity**. A latent technique and an acute technique can cause identical damage — the impact is the same, only the onset timing differs. That makes drift a technique characteristic, not an impact score.
+
+Additionally, the "patient can't tell it's happening" concern is already captured by CV (Consent Violation) — a covert attack scores CV:I (10.0), an overt one scores lower. Patient awareness is already in NISS.
+
+**Decision: Drift moves to TARA as technique metadata. NISS stays at 6 metrics.**
+
+```json
+{
+  "tara_drift": "C",
+  "tara_drift_label": "Cumulative",
+  "tara_drift_window": "weeks to months"
+}
+```
+
+The A/C/L/P classification is still valid:
+- **A (Acute):** immediate onset, immediate offset
+- **C (Cumulative):** builds over sessions/weeks
+- **L (Latent):** delayed onset, hours to months
+- **P (Persistent):** continues after exposure stops
+
+It just lives in the right place — describing the technique in TARA, not scoring the patient in NISS.
+
+**What this preserves:**
+- NISS at 6 metrics, no dilution, no threshold changes, no version bump needed
+- All cross-AI math validation still applies to the scale itself
+- Clinical mappings (DBS speech deterioration = C, rTMS seizure = A, etc.) still valid
+- Codex clinical review finding that "Cognitive" is a misnomer accepted — the field is named `tara_drift`, no "cognitive" qualifier
+
+**What this teaches:**
+Not every valid dimension belongs in a scoring system. NISS measures harm. TARA describes techniques. The temporal onset pattern is real and clinically useful — for monitoring protocols, attribution, and consent design — but it's an operational characteristic, not a severity multiplier.
+
+---
+
+## Entry 94: Cross-AI Clinical Review — Indication-Target-Parameter-Outcome Gap {#entry-94-clinical-review}
+
+**Date:** 2026-03-14, ~02:30
+**Classification:** INFERRED (cross-AI review with clinical persona, GPT-5.2 Codex)
+**AI Systems:** Claude Opus 4.6 (drafter), Gemini (reviewer), GPT-5.2 Codex (clinical reviewer)
+**Connected entries:** Entry 93 (TARA domain taxonomy), Entry 92 (sensor hierarchy)
+
+### Context
+
+After the TARA domain taxonomy reframe (Entry 93), three-model cross-AI review was conducted. Gemini reviewed for completeness and scalability (4.2/5). Codex reviewed for technical soundness (3.6/5). A third Codex review was then run with a clinical neurologist/neuromodulation specialist persona to identify gaps from the clinician's perspective.
+
+### The Core Clinical Insight
+
+Clinicians do not think in domains and modes. They think in **indication → target → parameters → outcome**:
+- "I'm treating Parkinson's (indication), targeting STN (target), at 130Hz/3.5V/60μs (parameters), measuring UPDRS-III improvement (outcome)."
+
+The TARA domain taxonomy (VIS, MOT, EMO, etc.) is useful for navigation but does not map to how neurology and neurosurgery actually reason about neuromodulation. Without indication-target-parameter-outcome metadata, the taxonomy remains an academic exercise rather than a clinical tool.
+
+### Key Clinical Pushbacks
+
+1. **Domain assignments are oversimplified.** DBS for Parkinson's isn't just MOT — STN/GPi stimulation causes mood changes (EMO), impulse control disorders (COG+EMO), and cognitive slowing (COG). Clinicians expect multi-domain tagging as standard.
+
+2. **R/M/D mode needs clinical precision:**
+   - DBS = Manipulation (M) — modulates pathological oscillations, does not destroy tissue
+   - Lesioning (RF, MRgFUS, radiosurgery) = Disruption (D) — irreversible tissue ablation
+   - RNS for epilepsy = Manipulation (M), NOT Disruption — it modulates seizure networks
+   - The mode distinction maps to reversibility, which is a critical clinical and ethical parameter
+
+3. **Terminology would alienate clinicians and trigger IRB scrutiny:**
+   - "Neural ransomware," "neural sybil," "nonce replay" — security metaphors with no clinical meaning
+   - "Memory implant," "thought decoding" — overclaim current capabilities
+   - "Cognitive warfare," "algorithmic psychosis induction" — sensational framing
+   - "Identity (IDN)" as a domain — philosophical, not a recognized clinical category
+
+4. **Missing clinical modalities:** VNS, RNS, rTMS, ECT, MRgFUS thalamotomy, spinal cord stimulation, DRG stimulation, peripheral nerve stimulation, intrathecal pumps — all absent as explicit therapeutic analogs.
+
+5. **Missing adverse effects as first-class data:** Dysarthria, gait imbalance, impulse control disorders, apathy, stimulation-induced seizures, paresthesias, autonomic instability.
+
+6. **DSM-5 mappings risk oversimplification** unless tied to validated clinical endpoints (MADRS for depression, Y-BOCS for OCD, UPDRS for Parkinson's).
+
+### Decision: Clinical Extension Schema
+
+The TARA alias stays simple (TARA-VIS-M-002). The registrar gets enriched with clinical metadata:
+
+```json
+{
+  "tara_clinical": {
+    "indications": ["Parkinson's", "essential tremor"],
+    "targets": ["STN", "GPi", "Vim"],
+    "parameters": "130Hz, 3.5V, 60μs (typical)",
+    "endpoints": ["UPDRS-III", "tremor rating scale"],
+    "adverse_effects": ["dysarthria", "impulse control", "depression"],
+    "fda_class": "III",
+    "evidence_tier": "standard-of-care"
+  }
+}
+```
+
+This gives clinicians what they need without changing the taxonomy structure. Security sees domain+mode. Clinical sees indication+target+parameters+outcome. Same technique, two complete views.
+
+### Cross-AI Review Summary
+
+| Reviewer | Model | Rating | Key Contribution |
+|----------|-------|--------|------------------|
+| Gemini | Gemini | 4.2/5 | R/M/D maps to CIA triad. Add OLF, ARL, INC, NOC domains |
+| Codex (technical) | GPT-5.2 | 3.6/5 | Intent tags over 4th mode. Capability laundering risk. Add consent/oversight tags |
+| Codex (clinical) | GPT-5.2 | N/A | Indication-target-parameter-outcome gap. Terminology alienation. IRB risk |
+
+**Consensus across all 3 reviews:**
+- R/M/D is sufficient (no 4th mode)
+- COG is too broad, EMO too narrow
+- SIL belongs but should be filterable
+- Multi-domain tagging is essential (most techniques span 2-3 systems)
+
+**Decisions from Kevin:**
+- No ARL domain — arousal is cross-cutting (dopamine, cortisol, NE, orexin, histamine, ACh, GABA all contribute). Sleep/anesthesia techniques go in AUT
+- No OLF domain yet — insufficient BCI techniques to justify standalone. Dual-tag SOM/EMO when needed
+- No NOC or INC domains — hold as sub-tags until technique count justifies
+- Clinical extension schema to be designed and added to registrar
+
+### Classification
+
+- Clinician thinking model (indication→target→parameter→outcome): **VERIFIED** (standard clinical workflow)
+- Terminology alienation risk: **INFERRED** (clinical persona review, not actual clinician feedback)
+- Clinical extension schema design: **PROPOSED** (not yet implemented)
+- IRB concerns: **INFERRED** (plausible but not confirmed by actual IRB review)
+
+### Documents
+
+- TARA taxonomy proposal: `docs/research/tara-domain-taxonomy-proposal.md`
+- Cross-AI review prompt: `docs/research/tara-taxonomy-cross-ai-review-prompt.md`
+- Pending: clinical extension schema design, registrar implementation
+
+---
+
+## Entry 93: TARA Domain Taxonomy Reframe — Biological Domains × Interaction Modes {#entry-93-tara-domain-taxonomy}
+
+**Date:** 2026-03-14, ~01:00
+**Classification:** INFERRED (architectural redesign informed by field test, clinical literature, and military research)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 92 (sensor hierarchy), Entry 91 (LiDAR field test), Entry 89 (BCI vision arc)
+
+### Context
+
+While working on the QIF-LiDAR app and testing the computer vision sensor pipeline, Kevin identified that TARA's current organization by attack method (Neural Injection, Data Harvest, Cognitive Exploitation, etc.) privileges the security perspective and makes it hard for clinicians to navigate. The field test (Entry 91) showed that the LiDAR prototype is fundamentally about what biological systems are affected, not how they're attacked. This prompted a full taxonomy reframe.
+
+Kevin's framing: "Reframe TARA TTPs based on senses and emotions, rather than injections and attacks so it has proper dual-use. Security knows it has to do with vision, clinical do too." Then: "Keep QIF-T for technical and use TARA for clinical. QIF is the technical and TARA is the dual-use."
+
+### The Reframe
+
+**Old taxonomy:** 16 tactic categories organized by attack method (how do you attack?)
+**New taxonomy:** 11 biological domains × 3 interaction modes (what system is affected, and how?)
+
+**11 Domains:**
+| Code | Domain | Scope |
+|------|--------|-------|
+| VIS | Vision | Visual cortex, retina, optic nerve, LGN |
+| AUD | Audition | Auditory cortex, cochlea, auditory nerve |
+| SOM | Somatosensory | Touch, pain, temperature, proprioception |
+| VES | Vestibular | Balance, spatial orientation |
+| MOT | Motor | Voluntary movement, coordination, basal ganglia |
+| EMO | Affect | Mood, fear, reward, motivation, limbic system |
+| COG | Cognition | Attention, executive function, decision-making |
+| MEM | Memory | Encoding, consolidation, retrieval, hippocampus |
+| LNG | Language | Speech production, comprehension |
+| AUT | Autonomic | Vital functions, HR, respiration, sleep, neuroendocrine |
+| IDN | Identity | Psychological continuity, self-model, agency |
+| SIL | Silicon | Firmware, protocols, cloud, ML models (no biological target) |
+
+**3 Modes:**
+| Mode | Security View | Clinical View |
+|------|--------------|---------------|
+| R (Reconnaissance) | Reading/extracting data | Decoding/monitoring function |
+| M (Manipulation) | Altering system output | Therapeutic modulation |
+| D (Disruption) | Destroying/blocking function | Ablating pathological circuits |
+
+**Key design decision:** The boundary between attack and therapy is consent, dosage, and oversight — not the technique itself. Same mechanism, different governance.
+
+### Dual ID System
+
+- **QIF-T#### remains permanent** — the technical/security identifier. Sequential, stable, never renumbered.
+- **TARA-XXX-X-NNN is the new clinical alias** — domain + mode + sequence. Human-readable, dual-use framing.
+- Both resolve to the same entry in `qtara-registrar.json`. Two views of one dataset.
+
+Example: QIF-T0001 (Signal injection) = TARA-SOM-M-001 (Somatosensory, Manipulation, technique 1)
+
+### Complete Mapping
+
+All 109 existing techniques were mapped to the new taxonomy. Distribution:
+
+| Domain | Total | R | M | D |
+|--------|-------|---|---|---|
+| VIS | 4 | 2 | 2 | 0 |
+| AUD | 4 | 2 | 2 | 0 |
+| SOM | 8 | 1 | 6 | 2 |
+| VES | 0 → 5 | 0→1 | 0→3 | 0→1 |
+| MOT | 7 | 2 | 2 | 3 |
+| EMO | 1 | 1 | 0 | 0 |
+| COG | 29 | 12 | 11 | 4 |
+| MEM | 3 | 1 | 2 | 0 |
+| LNG | 1 | 1 | 0 | 0 |
+| AUT | 9 | 7 | 1 | 1 |
+| IDN | 8 | 4 | 3 | 1 |
+| SIL | 35 | 15 | 19 | 2 |
+
+### Critical Gap: VES (Vestibular) — Zero to Five
+
+The vestibular domain had ZERO techniques. This is a real blind spot:
+
+- **Lockheed Martin** actively researches galvanic vestibular stimulation (GVS) for military training — can induce motion illusions, spatial disorientation, and accelerate motor learning.
+- **Cochlear implants already cause vestibular disruption** as a documented adverse effect (PubMed: 310472). All CI subjects showed abnormal postural stability. This is a deployed medical device with a known vestibular attack surface.
+- **GVS parameter research** is extensive — a 2025 Frontiers systematic review covers clinical settings.
+
+Five VES techniques proposed (QIF-T0110–T0114):
+1. TARA-VES-R-001: Vestibular balance profiling
+2. TARA-VES-M-001: GVS motion illusion injection
+3. TARA-VES-M-002: Vestibular-ocular reflex manipulation
+4. TARA-VES-M-003: Cochlear-vestibular crosstalk exploitation
+5. TARA-VES-D-001: Vestibular overload (vertigo induction)
+
+### Other Gaps Identified
+
+- **EMO (Affect):** Only 1 technique as primary domain. DBS for depression is the most prominent neurostimulation therapy — EMO-M and EMO-D are empty.
+- **LNG (Language):** Only 1 technique. DBS literature documents dysarthria and word-finding problems. Speech BCIs (Willett, Chang) create new attack surface.
+- **VIS-D, AUD-D, MEM-D:** No disruption-mode techniques for vision, hearing, or memory.
+- **COG is overloaded (29 techniques):** May need future split into attention/executive/perception sub-domains.
+
+### What This Solves
+
+1. **Dual-use framing** — no attack language in the primary taxonomy. Security and clinical share one vocabulary.
+2. **Natural navigation** — clinicians find techniques by body system, security researchers find by target.
+3. **Tennison & Moreno compliance** — every threat is contextualized by its clinical counterpart.
+4. **Scalability** — new techniques slot into domain + mode without renumbering.
+5. **The "dual atlas view"** — same data, two lenses. Toggle between security risk view and clinical therapeutic view.
+
+### What Does NOT Change
+
+- QIF-T IDs (permanent)
+- Hourglass bands (domains map to bands, don't replace them)
+- NISS scoring (per-technique, independent of taxonomy)
+- DSM-5 mappings, CVE mappings, neurorights mappings
+- Governance/consent tiers
+
+### Classification
+
+- 11 biological domains cover neural functional systems: **VERIFIED** (standard neuroscience classification)
+- R/M/D mode taxonomy: **INFERRED** (logical from dual-use principle, not externally validated)
+- Technique domain assignments: **INFERRED** (mapping based on mechanism + clinical analog, some edge cases ambiguous)
+- VES gap and Lockheed Martin GVS: **VERIFIED** (published research, documented CI adverse effects)
+- EMO/LNG/VIS-D gaps: **VERIFIED** (absence confirmed by audit of all 109 techniques)
+
+### Documents
+
+- Full mapping: `docs/research/tara-domain-taxonomy-proposal.md`
+- Pending: cross-AI review for scalability and completeness
+
+---
+
+## Entry 92: Vision Prosthesis Sensor Hierarchy — Camera-First, Not Depth-First {#entry-92-sensor-hierarchy}
+
+**Date:** 2026-03-14, ~00:30
+**Classification:** INFERRED (from field test observations + prosthesis literature + architectural reasoning)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 91 (LiDAR limitations), Entry 89 (BCI vision arc)
+
+### Context
+
+During QIF-LiDAR field testing (Entry 91), the iPhone LiDAR sensor proved inadequate for guide dog detection (fur scatters IR, 256x192 resolution too sparse). This prompted a deeper question: what is the correct sensor hierarchy for a vision prosthesis pipeline?
+
+### Key Insight
+
+**The sensor pipeline for prosthetic vision is camera-first, not depth-first.** This inverts the original QIF-LiDAR assumption that depth sensing would be the primary input.
+
+The reasoning:
+
+1. **Current prostheses produce 60-378 phosphenes.** Even next-gen devices (1000+ channels) will not approach camera resolution. The output is fundamentally low-resolution. Therefore, the bottleneck is NOT sensor resolution — it is ML classification. The question is not "how many pixels can we capture" but "can we correctly label what matters in the scene."
+
+2. **The pipeline is reductive, not preservative:**
+   ```
+   High-res camera → ML classification → simplified scene map → low-res phosphene output
+   ```
+   The camera captures everything. ML decides what matters. The output to the brain is just labeled points: "dog at 2m center, wall at 4m left, car at 15m right." Full spatial detail is never transmitted — it is compressed into semantically meaningful objects with positions.
+
+3. **Three range zones require different sensors:**
+   - **Long-range (5-50m):** "What's ahead on the sidewalk." RGB camera only — no consumer depth sensor reaches this range. ML object detection (YOLO, etc.) handles classification.
+   - **Medium-range (1-5m):** "Where are walls, furniture, people." Stereo depth from two cameras works well here. LiDAR works but is overkill given the low output resolution.
+   - **Close-range (<1m):** "Where is the harness handle, the curb edge." High spatial precision needed. LiDAR is decent here (sub-cm at close range) but stereo + ML segmentation may suffice.
+
+4. **Correct sensor hierarchy for prosthetic vision:**
+   - **Primary:** Wide-angle RGB camera (ML object detection at all ranges)
+   - **Secondary:** Stereo depth estimation (distance without dedicated depth sensor)
+   - **Supplementary:** IMU (orientation, motion context, fall detection)
+   - **Optional:** LiDAR/ToF (close-range precision, but not required)
+
+5. **Platform implications:**
+   - Meta Quest has all three primary sensors in a head-mounted form factor that matches the prosthesis use case
+   - iPhone has RGB + LiDAR + IMU but is handheld (wrong form factor) and the LiDAR is the weakest link
+   - The ideal research platform is head-mounted with stereo RGB cameras — this matches how a prosthesis patient would actually wear a device
+
+### Why This Matters for QIF
+
+This reframes the entire sensor-to-stimulation pipeline in the tech spec. The original framing (Section 2) positioned LiDAR as the primary sensor. The correct architecture positions the RGB camera as primary, with depth as supplementary context. This has security implications:
+
+- **Attack surface shifts.** If the camera is primary, adversarial attacks on the visual classifier (adversarial patches, perturbation attacks — TARA techniques) become the highest-priority threat, not depth spoofing.
+- **Sensor fusion creates redundancy.** An attacker who can fool the RGB classifier still has to contend with depth data contradicting the classification. Multi-sensor fusion is a defense layer.
+- **The ML model IS the prosthesis.** The patient does not see camera pixels. They see what the model classifies. A compromised model is a compromised sense. This makes model integrity a patient safety issue, not just a cybersecurity issue.
+
+### Classification
+
+- Prosthesis output is 60-378 phosphenes (current): **VERIFIED** (Argus II spec, Orion spec, PRIMA spec)
+- Camera-first hierarchy for prosthetic vision: **INFERRED** (logical from output resolution constraint + field test)
+- ML model as primary attack surface: **INFERRED** (follows from camera-first architecture)
+- Quest as better research platform: **INFERRED** (spec comparison, not yet tested)
+
+---
+
+## Entry 91: QIF-LiDAR Field Test — iPhone LiDAR Sensor Limitations, Pivot to Multi-Sensor {#entry-91-lidar-sensor-limitations}
+
+**Date:** 2026-03-14, ~17:30
+**Classification:** VERIFIED (direct observation, first-hand device testing)
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** Entry 89 (BCI vision arc), Entry 26 (LiDAR concept)
+
+### Context
+
+First real-device field test of QIF-LiDAR on iPhone 16 Pro Max. App successfully deployed after resolving Developer Mode, motion permission, and orientation issues. Tested all display modes with real LiDAR data.
+
+### Observations
+
+1. **iPhone LiDAR resolution is severely limiting.** 256x192 pixels (0.05MP) stretched across a 1290x2796 screen. Visible grid patterns from the VCSEL dot array. Apple's interpolation smooths but doesn't hide the sparsity. The depth map looks like there's a filter over the camera — that IS the sensor's actual capability.
+
+2. **Fur scatters infrared light.** White dog was not reliably detected by LiDAR depth. IR photons penetrate fur, scatter at different depths, return noisy or not at all. This is documented in autonomous vehicle research — animals are among the hardest objects for LiDAR. The HarnessDetector (LiDAR-based harness handle detection via depth protrusion) is unreliable if the dog itself is a depth hole.
+
+3. **iPhone LiDAR is not feasible for vision prosthesis research.** The resolution, grid artifacts, and material-dependent failures (fur, transparent surfaces, dark objects) make it unsuitable as a primary sensor for BCI-mediated spatial awareness.
+
+### Decision
+
+**Need to leverage more sensors than just iPhone LiDAR.** The Oculus (Meta Quest) headset is a better platform for computer vision research:
+- Stereo RGB cameras with passthrough — higher resolution spatial awareness
+- Built-in hand/body tracking
+- Head-mounted = matches the actual use case for vision prosthesis (worn device)
+- Spatial computing SDK with depth estimation from stereo vision
+- Already a platform people wear on their face (closer to BCI form factor)
+
+iPhone LiDAR remains useful for:
+- Quick depth measurements (tap-to-measure works fine)
+- General-purpose 3D scanning at room scale
+- Proof-of-concept demos
+
+But it is NOT the right sensor for guide dog detection or vision prosthesis prototyping.
+
+### Classification
+
+- iPhone LiDAR = 256x192 dToF: **VERIFIED** (Apple spec, observed)
+- Fur-scattering IR limitation: **VERIFIED** (observed with Kevin's dog, consistent with AV literature)
+- Oculus as better platform: **INFERRED** (reasonable from specs, not yet tested)
 
 ---
 

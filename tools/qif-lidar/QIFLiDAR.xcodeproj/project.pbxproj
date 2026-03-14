@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,13 +34,13 @@
 		2172D02A02A914D2C1C70532 /* DepthRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthRenderer.swift; sourceTree = "<group>"; };
 		27AEE13BADC9728D036E8B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		53AEB572AF8CBFF8E3538F32 /* SegmentationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentationService.swift; sourceTree = "<group>"; };
-		5674CC8BA6D0B3219FD38567 /* YOLOv8n.mlpackage */ = {isa = PBXFileReference; path = YOLOv8n.mlpackage; sourceTree = "<group>"; };
+		5674CC8BA6D0B3219FD38567 /* YOLOv8n.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = YOLOv8n.mlpackage; sourceTree = "<group>"; };
 		5BC15961C5B1006E8F1D89C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9138CD677816EFE61402374F /* PrivacyGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyGuard.swift; sourceTree = "<group>"; };
 		99BF4275E89C51DA93DA1CE6 /* GuideDogDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDogDetector.swift; sourceTree = "<group>"; };
-		9D49E66374B882B47E47DDBD /* DogReID.mlpackage */ = {isa = PBXFileReference; path = DogReID.mlpackage; sourceTree = "<group>"; };
+		9D49E66374B882B47E47DDBD /* DogReID.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = DogReID.mlpackage; sourceTree = "<group>"; };
 		A86F2E05033134B179A2A884 /* DogEmbeddingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogEmbeddingService.swift; sourceTree = "<group>"; };
-		A9BC7A2FDBBDC35A572A7013 /* QIFLiDAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = QIFLiDAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9BC7A2FDBBDC35A572A7013 /* QIFLiDAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QIFLiDAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39BD183B944B91C992275EC /* QIFLiDARApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QIFLiDARApp.swift; sourceTree = "<group>"; };
 		C9105A01D18A6BE81E4E1794 /* HarnessDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarnessDetector.swift; sourceTree = "<group>"; };
 		ECBD2F4BF56575C07231CDEE /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
@@ -190,11 +190,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1600;
-				TargetAttributes = {
-					888F9A794BE0A48167C5340A = {
-						DevelopmentTeam = "";
-					};
-				};
 			};
 			buildConfigurationList = 5751E7DCD491148957490D18 /* Build configuration list for PBXProject "QIFLiDAR" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -206,7 +201,6 @@
 			);
 			mainGroup = 030BF2777EC42CBF33F921A1;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -248,6 +242,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = YV3K7QT6K4;
 				INFOPLIST_FILE = QIFLiDAR/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -323,6 +318,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = YV3K7QT6K4;
 				INFOPLIST_FILE = QIFLiDAR/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

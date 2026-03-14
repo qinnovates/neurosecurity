@@ -11,7 +11,7 @@
   --color-accent-tertiary: #8b5cf6;
   --color-text-primary: #09090b;
   --color-text-muted: #52525b;
-  --color-text-faint: #a1a1aa;
+  --color-text-faint: #71717a;
   --color-border: rgba(0, 0, 0, 0.06);
   --color-border-hover: rgba(0, 0, 0, 0.12);
   --color-status-safe: #10b981;
@@ -708,4 +708,10 @@ code, pre {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ═══ Focus Visible ═══ */
+:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
 }

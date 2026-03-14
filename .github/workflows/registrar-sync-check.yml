@@ -1,0 +1,94 @@
+name: Registrar Sync Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'shared/qtara-registrar.json'
+      - 'src/lib/threat-data.ts'
+      - 'src/lib/kql-tables.ts'
+      - 'shared/qtara/src/qtara/models.py'
+  pull_request:
+    paths:
+      - 'shared/qtara-registrar.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-registrar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: '20'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate registrar JSON
+        run: python3 -c "import json; d=json.load(open('shared/qtara-registrar.json')); print(f'Valid JSON: {len(d[\"techniques\"])} techniques')"
+
+      - name: Check technique field presence
+        run: |
+          python3 -c "
+          import json, sys
+          d = json.load(open('shared/qtara-registrar.json'))
+          errors = []
+          for t in d['techniques']:
+              tid = t.get('id', 'UNKNOWN')
+              if 'technique' not in t and 'attack' not in t:
+                  errors.append(f'{tid}: missing both technique and attack fields')
+              if 'tara_alias' in t and not t['tara_alias'].startswith('TARA-'):
+                  errors.append(f'{tid}: tara_alias must start with TARA-')
+              if 'tara_domain_primary' in t:
+                  valid = ['VIS','AUD','SOM','VES','MOT','EMO','COG','MEM','LNG','AUT','IDN','SIL']
+                  if t['tara_domain_primary'] not in valid:
+                      errors.append(f'{tid}: invalid domain {t[\"tara_domain_primary\"]}')
+              if 'tara_mode' in t:
+                  if t['tara_mode'] not in ['R','M','D']:
+                      errors.append(f'{tid}: invalid mode {t[\"tara_mode\"]}')
+              if 'tara_drift' in t and t['tara_drift']:
+                  if t['tara_drift'] not in ['A','C','L','P']:
+                      errors.append(f'{tid}: invalid drift {t[\"tara_drift\"]}')
+          if errors:
+              for e in errors:
+                  print(f'::error::{e}')
+              sys.exit(1)
+          print(f'All {len(d[\"techniques\"])} techniques valid')
+          "
+
+      - name: Check SDK copy in sync
+        run: |
+          if [ -f shared/qtara/src/qtara/data/qtara-registrar.json ]; then
+            if ! diff -q shared/qtara-registrar.json shared/qtara/src/qtara/data/qtara-registrar.json > /dev/null 2>&1; then
+              echo "::error::SDK bundled registrar is out of sync with source. Copy shared/qtara-registrar.json to shared/qtara/src/qtara/data/"
+              exit 1
+            fi
+            echo "SDK copy in sync"
+          else
+            echo "::warning::SDK bundled registrar not found at shared/qtara/src/qtara/data/qtara-registrar.json"
+          fi
+
+      - name: Check technique count matches timeline
+        run: |
+          python3 -c "
+          import json
+          reg = json.load(open('shared/qtara-registrar.json'))
+          timeline = json.load(open('src/data/qif-timeline.json'))
+          reg_count = len(reg['techniques'])
+          tl_count = timeline.get('stats', {}).get('threat_techniques', 0)
+          if reg_count != tl_count:
+              print(f'::warning::Registrar has {reg_count} techniques but timeline says {tl_count}. Run timeline-check.mjs --fix')
+          else:
+              print(f'Technique count in sync: {reg_count}')
+          "
+
+      - name: Type check
+        run: |
+          npm ci --ignore-scripts 2>/dev/null || true
+          npx tsc --noEmit 2>&1 || echo "::warning::TypeScript type check found issues"

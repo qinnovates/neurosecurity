@@ -2,8 +2,8 @@ import SwiftUI
 import MetalKit
 import ARKit
 
-/// Metal-backed renderer that displays LiDAR depth data as a colored point cloud.
-/// This is the failsafe layer — it renders from raw depth without any AI dependency.
+/// Metal-backed renderer that displays LiDAR depth data as a colored point cloud,
+/// optionally layered over the live camera feed (dual-layer mode).
 struct DepthRendererView: UIViewRepresentable {
     let depthMap: CVPixelBuffer?
     let confidenceMap: CVPixelBuffer?
@@ -16,7 +16,7 @@ struct DepthRendererView: UIViewRepresentable {
         let view = MTKView()
         view.device = MTLCreateSystemDefaultDevice()
         view.colorPixelFormat = .bgra8Unorm
-        view.clearColor = MTLClearColor(red: 0.05, green: 0.05, blue: 0.1, alpha: 1.0)
+        view.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
         view.delegate = context.coordinator
         view.preferredFramesPerSecond = 60
         view.isPaused = false
@@ -47,12 +47,14 @@ struct DepthRendererView: UIViewRepresentable {
 
         private var device: MTLDevice?
         private var commandQueue: MTLCommandQueue?
-        private var pipelineState: MTLRenderPipelineState?
+        private var depthPipelineState: MTLRenderPipelineState?
+        private var cameraPipelineState: MTLRenderPipelineState?
         private var textureCache: CVMetalTextureCache?
 
         // Buffers
         private var depthDataBuffer: MTLBuffer?
         private var uniformsBuffer: MTLBuffer?
+        private var quadVertexBuffer: MTLBuffer?
 
         // Animation
         private var startTime: Date = Date()
@@ -64,6 +66,7 @@ struct DepthRendererView: UIViewRepresentable {
             var screenSize: SIMD2<Float>
             var time: Float
             var focalLength: Float
+            var orientation: Int32
         }
 
         override init() {
@@ -80,24 +83,44 @@ struct DepthRendererView: UIViewRepresentable {
 
             guard let library = device.makeDefaultLibrary() else { return }
 
-            let descriptor = MTLRenderPipelineDescriptor()
-            descriptor.vertexFunction = library.makeFunction(name: "depthVertex")
-            descriptor.fragmentFunction = library.makeFunction(name: "depthFragment")
-            descriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+            // Depth particle pipeline
+            let depthDescriptor = MTLRenderPipelineDescriptor()
+            depthDescriptor.vertexFunction = library.makeFunction(name: "depthVertex")
+            depthDescriptor.fragmentFunction = library.makeFunction(name: "depthFragment")
+            depthDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+            depthDescriptor.colorAttachments[0].isBlendingEnabled = true
+            depthDescriptor.colorAttachments[0].rgbBlendOperation = .add
+            depthDescriptor.colorAttachments[0].alphaBlendOperation = .add
+            depthDescriptor.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha
+            depthDescriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
+            depthDescriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
+            depthDescriptor.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
+            depthPipelineState = try? device.makeRenderPipelineState(descriptor: depthDescriptor)
 
-            // Enable alpha blending for soft particle glow
-            descriptor.colorAttachments[0].isBlendingEnabled = true
-            descriptor.colorAttachments[0].rgbBlendOperation = .add
-            descriptor.colorAttachments[0].alphaBlendOperation = .add
-            descriptor.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha
-            descriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
-            descriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
-            descriptor.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
-
-            pipelineState = try? device.makeRenderPipelineState(descriptor: descriptor)
+            // Camera passthrough pipeline (full-screen textured quad)
+            let cameraDescriptor = MTLRenderPipelineDescriptor()
+            cameraDescriptor.vertexFunction = library.makeFunction(name: "cameraVertex")
+            cameraDescriptor.fragmentFunction = library.makeFunction(name: "cameraFragment")
+            cameraDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+            cameraPipelineState = try? device.makeRenderPipelineState(descriptor: cameraDescriptor)
 
             // Uniforms buffer
-            uniformsBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.size, options: .storageModeShared)
+            uniformsBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.stride, options: .storageModeShared)
+
+            // Full-screen quad vertices (position xy + texcoord uv)
+            // Portrait: camera feed needs 90° rotation to match screen
+            let quadVertices: [Float] = [
+                // pos x,  y,    tex u, v
+                -1.0, -1.0,    1.0, 1.0,   // bottom-left
+                 1.0, -1.0,    1.0, 0.0,   // bottom-right
+                -1.0,  1.0,    0.0, 1.0,   // top-left
+                 1.0,  1.0,    0.0, 0.0,   // top-right
+            ]
+            quadVertexBuffer = device.makeBuffer(
+                bytes: quadVertices,
+                length: quadVertices.count * MemoryLayout<Float>.size,
+                options: .storageModeShared
+            )
         }
 
         func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
@@ -106,16 +129,34 @@ struct DepthRendererView: UIViewRepresentable {
             guard let device = device,
                   let drawable = view.currentDrawable,
                   let descriptor = view.currentRenderPassDescriptor,
-                  let commandBuffer = commandQueue?.makeCommandBuffer(),
-                  let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor),
-                  let pipelineState = pipelineState else {
+                  let commandBuffer = commandQueue?.makeCommandBuffer() else {
                 return
             }
 
-            if let depthMap = depthMap {
+            let drawableSize = view.drawableSize
+            let isPortrait = drawableSize.height > drawableSize.width
+
+            // === Layer 1: Camera passthrough (background) ===
+            if displayMode == .colorFusion,
+               let cameraFrame = cameraFrame,
+               let cameraPipeline = cameraPipelineState,
+               let cameraTexture = makeTexture(from: cameraFrame) {
+
+                let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)!
+                encoder.setRenderPipelineState(cameraPipeline)
+                encoder.setVertexBuffer(quadVertexBuffer, offset: 0, index: 0)
+                encoder.setFragmentTexture(cameraTexture, index: 0)
+                encoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
+                encoder.endEncoding()
+
+                // For the depth overlay, don't clear (load existing content)
+                descriptor.colorAttachments[0].loadAction = .load
+            }
+
+            // === Layer 2: Depth particles (overlay) ===
+            if let depthMap = depthMap, let depthPipeline = depthPipelineState {
                 let depthData = extractDepthData(depthMap)
 
-                // Upload depth to GPU
                 if depthDataBuffer == nil || depthDataBuffer!.length != depthData.count * MemoryLayout<Float>.size {
                     depthDataBuffer = device.makeBuffer(
                         bytes: depthData,
@@ -129,29 +170,43 @@ struct DepthRendererView: UIViewRepresentable {
                     )
                 }
 
-                // Update uniforms with current time + screen size
-                let drawableSize = view.drawableSize
                 var uniforms = Uniforms(
                     resolution: SIMD2<Float>(256, 192),
                     depthRange: SIMD2<Float>(0.1, 5.0),
                     screenSize: SIMD2<Float>(Float(drawableSize.width), Float(drawableSize.height)),
                     time: Float(Date().timeIntervalSince(startTime)),
-                    focalLength: 240.0
+                    focalLength: 240.0,
+                    orientation: isPortrait ? 0 : 1
                 )
-                uniformsBuffer?.contents().copyMemory(from: &uniforms, byteCount: MemoryLayout<Uniforms>.size)
+                uniformsBuffer?.contents().copyMemory(from: &uniforms, byteCount: MemoryLayout<Uniforms>.stride)
 
-                encoder.setRenderPipelineState(pipelineState)
+                let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)!
+                encoder.setRenderPipelineState(depthPipeline)
                 encoder.setVertexBuffer(depthDataBuffer, offset: 0, index: 0)
                 encoder.setVertexBuffer(uniformsBuffer, offset: 0, index: 1)
-
-                // Draw one point per depth pixel as soft particles
-                let vertexCount = 256 * 192
-                encoder.drawPrimitives(type: .point, vertexStart: 0, vertexCount: vertexCount)
+                encoder.drawPrimitives(type: .point, vertexStart: 0, vertexCount: 256 * 192)
+                encoder.endEncoding()
             }
 
-            encoder.endEncoding()
             commandBuffer.present(drawable)
             commandBuffer.commit()
+        }
+
+        /// Create a Metal texture from a CVPixelBuffer (camera frame)
+        private func makeTexture(from pixelBuffer: CVPixelBuffer) -> MTLTexture? {
+            guard let textureCache = textureCache else { return nil }
+
+            let width = CVPixelBufferGetWidth(pixelBuffer)
+            let height = CVPixelBufferGetHeight(pixelBuffer)
+
+            var cvTexture: CVMetalTexture?
+            let status = CVMetalTextureCacheCreateTextureFromImage(
+                nil, textureCache, pixelBuffer, nil,
+                .bgra8Unorm, width, height, 0, &cvTexture
+            )
+
+            guard status == kCVReturnSuccess, let texture = cvTexture else { return nil }
+            return CVMetalTextureGetTexture(texture)
         }
 
         /// Extract raw float depth values from CVPixelBuffer

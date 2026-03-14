@@ -28,26 +28,39 @@ final class GuideDogDetector: ObservableObject {
     private let dogClassLabel = "dog"
 
     init() {
-        loadYOLO()
+        // Defer model loading to avoid crash on init
+        print("[GuideDogDetector] init — will load model on first detect call")
     }
 
-    private func loadYOLO() {
-        let urls: [(String, String)] = [
-            ("YOLOv8n", "mlmodelc"),
-            ("YOLOv8n", "mlpackage")
-        ]
+    private func loadYOLOIfNeeded() {
+        guard yoloModel == nil else { return }
 
-        for (name, ext) in urls {
-            guard let url = Bundle.main.url(forResource: name, withExtension: ext) else { continue }
+        print("[GuideDogDetector] Loading YOLOv8n...")
+
+        // Try compiled model first, then mlpackage
+        if let url = Bundle.main.url(forResource: "YOLOv8n", withExtension: "mlmodelc") {
             do {
-                let compiled = ext == "mlmodelc" ? url : try MLModel.compileModel(at: url)
-                let mlModel = try MLModel(contentsOf: compiled)
+                let mlModel = try MLModel(contentsOf: url)
                 yoloModel = try VNCoreMLModel(for: mlModel)
+                print("[GuideDogDetector] Loaded YOLOv8n from mlmodelc")
                 return
             } catch {
-                continue
+                print("[GuideDogDetector] mlmodelc failed: \(error)")
             }
         }
+
+        if let url = Bundle.main.url(forResource: "YOLOv8n", withExtension: "mlpackage") {
+            do {
+                let compiled = try MLModel.compileModel(at: url)
+                let mlModel = try MLModel(contentsOf: compiled)
+                yoloModel = try VNCoreMLModel(for: mlModel)
+                print("[GuideDogDetector] Loaded YOLOv8n from mlpackage")
+                return
+            } catch {
+                print("[GuideDogDetector] mlpackage failed: \(error)")
+            }
+        }
+
         print("[GuideDogDetector] YOLOv8n model not found in bundle")
     }
 

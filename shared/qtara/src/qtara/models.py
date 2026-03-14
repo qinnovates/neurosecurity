@@ -1,5 +1,5 @@
 from typing import List, Optional, Dict, Any, Union
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 class DSM5Primary(BaseModel):
     code: str
@@ -77,8 +77,11 @@ class CrossReferences(BaseModel):
     related_ids: List[str] = []
 
 class ThreatTechnique(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
     id: str
     attack: str # This is the 'name' in the JSON
+    technique: Optional[str] = None  # v2 alias for attack; backward compat
     tactic: str
     bands: str # String representation like "I0-N1"
     band_ids: List[str] = Field(default_factory=list)
@@ -101,6 +104,11 @@ class ThreatTechnique(BaseModel):
     neurorights: Optional[NeurorightsMapped] = None
     regulatory: Optional[RegulatoryData] = None
     cross_references: Optional[CrossReferences] = None
+
+    @property
+    def canonical_name(self) -> str:
+        """Return the canonical technique name, preferring v2 `technique` over legacy `attack`."""
+        return self.technique or self.attack
 
 class TaraRegistry(BaseModel):
     version: str
