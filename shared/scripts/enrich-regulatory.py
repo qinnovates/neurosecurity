@@ -26,7 +26,7 @@ import json
 from pathlib import Path
 from collections import Counter
 
-REGISTRAR = Path(__file__).parent.parent / "shared" / "qtara-registrar.json"
+REGISTRAR = Path(__file__).parent.parent / "qtara-registrar.json"
 
 # --- Prong classification rules ---
 
