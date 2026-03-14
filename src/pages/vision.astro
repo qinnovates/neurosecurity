@@ -49,7 +49,8 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
     (function() {
       var consent = document.getElementById('vision-consent');
       var btn = document.getElementById('consent-btn');
-      if (sessionStorage.getItem('vision-consent') === 'yes') {
+      // First-visit only — localStorage persists across sessions
+      if (localStorage.getItem('vision-consent-seen') === 'yes') {
         if (consent) consent.style.display = 'none';
         return;
       }
@@ -58,7 +59,7 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
       btn.onfocus = function() { btn.style.background = 'rgba(139,92,246,0.5)'; btn.style.outline = '2px solid #a78bfa'; btn.style.outlineOffset = '2px'; };
       btn.onblur = function() { btn.style.background = 'rgba(139,92,246,0.3)'; btn.style.outline = 'none'; };
       btn.addEventListener('click', function() {
-        sessionStorage.setItem('vision-consent', 'yes');
+        localStorage.setItem('vision-consent-seen', 'yes');
         consent.style.transition = 'opacity 0.4s ease';
         consent.style.opacity = '0';
         setTimeout(function() { consent.style.display = 'none'; }, 400);
@@ -326,31 +327,44 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
   </section>
 
 
-  <!-- ═══ THE CROSSING: Security engineer → neuroscience ═══ -->
+  <!-- ═══ THE CROSSING ═══ -->
   <section class="relative py-24">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="space-y-8 text-lg sm:text-xl text-[var(--color-text-muted)] leading-relaxed">
-        <p class="reveal-elastic">After fifteen years building defensive infrastructure — SIEM platforms, threat detection, incident response — I started studying the nervous system.</p>
-        <p class="reveal-elastic" style="transition-delay: 120ms;">The patterns were not metaphorical. They were architectural. Signal degradation. Unauthorized access. Integrity failures. The same failure modes, running on a different substrate.</p>
-        <p class="reveal-elastic" style="transition-delay: 240ms;">Attack the spinal cord: involuntary movement. Attack the thalamus: altered perception. Attack the neocortex: thought extraction. Each layer has a distinct threat profile because each brain region has a distinct function.</p>
-        <p class="reveal-elastic text-xl sm:text-2xl font-semibold text-[var(--color-text-primary)]" style="transition-delay: 360ms;">The security architecture IS the neuroanatomy.</p>
+        <p class="reveal-elastic">I was looking at a diagram of the thalamus when it hit me.</p>
+        <p class="reveal-elastic" style="transition-delay: 120ms;">Every signal entering the cortex passes through this one relay. If you compromise it, you control what a person perceives. I had built the exact same chokepoint — in network security. A SIEM correlation engine. All signals in, one classification out. Compromise the engine, and the analyst sees whatever you want them to see.</p>
+        <p class="reveal-elastic" style="transition-delay: 240ms;">That wasn't a metaphor. That was architecture.</p>
       </div>
 
-      <div class="mt-16 text-[var(--color-text-muted)] leading-relaxed reveal">
-        <p class="mb-6">AI has already proven that other disciplines can transform neuroscience. Deep learning decodes speech at 62 words per minute from cortical recordings. Neural networks reconstruct vision from electrode arrays. GANs synthesize neural trajectories for prosthetic control.</p>
-        <p class="mb-6">But AI solved the <em>understanding</em> problem. Nobody solved the <em>protection</em> problem. And the same AI capabilities that enable healing also enable attack.</p>
-
-        <!-- Single comparison -->
-        <div class="grid sm:grid-cols-2 gap-4 mt-8">
-          <div class="rounded-xl p-5 text-left" style="background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.15);">
-            <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-3">What AI built</p>
-            <p class="text-sm">Speech decoding, 62 wpm. Vision restoration via phosphene encoding. Subvocal thought detection at 92% accuracy. Neural trajectory synthesis.</p>
-            <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">The capabilities crossed over.</p>
+      <div class="mt-12 glass rounded-xl p-6 reveal" style="border-color: rgba(59,130,246,0.15);">
+        <div class="grid sm:grid-cols-3 gap-4 text-center text-sm">
+          <div>
+            <p class="text-[var(--color-text-primary)] font-semibold mb-1">Attack the spinal cord</p>
+            <p class="text-xs text-[var(--color-text-faint)]">Involuntary movement</p>
           </div>
-          <div class="rounded-xl p-5 text-left" style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15);">
-            <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-red-500 mb-3">What security hasn't</p>
-            <p class="text-sm">Zero published BCI threat models. No neural-specific severity scoring. No entries in MITRE ATT&CK. No post-quantum BCI encryption standard.</p>
-            <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">The security didn't.</p>
+          <div>
+            <p class="text-[var(--color-text-primary)] font-semibold mb-1">Attack the thalamus</p>
+            <p class="text-xs text-[var(--color-text-faint)]">Altered perception</p>
+          </div>
+          <div>
+            <p class="text-[var(--color-text-primary)] font-semibold mb-1">Attack the neocortex</p>
+            <p class="text-xs text-[var(--color-text-faint)]">Thought extraction</p>
+          </div>
+        </div>
+        <p class="text-center text-xs text-[var(--color-text-faint)] mt-4">Each layer has a distinct threat profile because each brain region has a distinct function.</p>
+      </div>
+
+      <div class="mt-16 space-y-6 text-[var(--color-text-muted)] leading-relaxed reveal">
+        <p>AI already proved that other disciplines can transform neuroscience. Deep learning decodes speech at 62 words per minute. Neural networks reconstruct vision from electrode arrays. The understanding problem is being solved.</p>
+        <p>But understanding is not protection. And the same AI that enables healing enables attack.</p>
+        <div class="grid sm:grid-cols-2 gap-4 mt-6">
+          <div class="rounded-xl p-5" style="background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.15);">
+            <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-3">What AI built</p>
+            <p class="text-sm">Speech decoding. Vision restoration. Subvocal thought detection. Neural trajectory synthesis.</p>
+          </div>
+          <div class="rounded-xl p-5" style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15);">
+            <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-red-500 mb-3">What nobody built</p>
+            <p class="text-sm">Zero BCI threat models. No neural severity scoring. No MITRE entries. No encryption standard.</p>
           </div>
         </div>
       </div>
@@ -594,27 +608,51 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
   </section>
 
 
-  <!-- ═══ THE CLOSE: New field, call to act ═══ -->
+  <!-- ═══ THE CLOSE ═══ -->
   <section class="relative py-24">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed mb-12 reveal">
-        <p class="text-lg">This work does not fit neatly into cybersecurity, neuroscience, or biomedical engineering. It is the intersection of all three, applied to devices that are already in human skulls.</p>
-        <p class="text-xl text-[var(--color-text-primary)] font-semibold"><span class="text-emerald-500">Neurosecurity engineering</span>: securing the interface between silicon and the human nervous system, using the same physics that makes attacks possible to make therapies safe.</p>
-        <p class="text-lg">AI brought the understanding. Security brings the protection. Together they build the neural interfaces that patients can actually trust.</p>
+      <div class="space-y-8 text-[var(--color-text-muted)] leading-relaxed mb-12">
+        <p class="text-lg reveal-elastic">This work does not fit neatly into cybersecurity, neuroscience, or biomedical engineering.</p>
+        <p class="text-lg reveal-elastic" style="transition-delay: 100ms;">It is the intersection of all three, applied to devices that are already in human skulls. We are calling it <span class="text-emerald-500 font-semibold">neurosecurity engineering</span> — securing the interface between silicon and the human nervous system, using the same physics that makes attacks possible to make therapies safe.</p>
+        <p class="text-xl font-semibold text-[var(--color-text-primary)] reveal-elastic" style="transition-delay: 200ms;">This cannot be built alone.</p>
       </div>
 
-      <div class="text-center mb-16 reveal">
-        <p class="font-mono text-[10px] text-[var(--color-text-faint)] tracking-[0.1em] mb-8">PROPOSED &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE</p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="/research/whitepaper/" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
-          <a href="/research/neuroethics-landscape/" class="px-8 py-3.5 rounded-xl glass font-medium hover:bg-white/10 transition-colors">Explore the scholarship &rarr;</a>
-          <a href="/guardrails/" class="px-8 py-3.5 rounded-xl glass font-medium hover:bg-white/10 transition-colors">See the specifications &rarr;</a>
+      <!-- Call for collaborators -->
+      <div class="glass rounded-2xl p-8 mb-16 reveal" style="border-color: rgba(16,185,129,0.2);">
+        <h3 class="text-lg font-bold text-emerald-500 mb-6">If this resonates, there's a place for you here.</h3>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm text-[var(--color-text-muted)]">
+          <div>
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">Security engineers</p>
+            <p>Red-team the framework. Find what we missed. Build the detections. The threat atlas has {totalThreats} techniques — every one of them needs validation against real hardware.</p>
+          </div>
+          <div>
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">Neuroscientists</p>
+            <p>Validate the clinical mappings. Tell us where the anatomy is wrong, where the therapeutic analogues break down, where the scoring needs recalibration.</p>
+          </div>
+          <div>
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">Patients and families</p>
+            <p>You are who this is for. Your experience with BCI devices, your concerns about safety, your feedback on what informed consent should actually look like — that shapes everything.</p>
+          </div>
+          <div>
+            <p class="font-semibold text-[var(--color-text-primary)] mb-1">Policymakers</p>
+            <p>The legislative momentum is real. Chile, Colorado, California, Montana. The frameworks need technical infrastructure to enforce. We are building it.</p>
+          </div>
         </div>
+        <div class="mt-6 pt-4 border-t border-emerald-500/10 text-center">
+          <a href="https://github.com/qinnovates/qinnovate" target="_blank" rel="noopener noreferrer" class="text-sm text-emerald-500 hover:text-emerald-400 transition-colors">Contribute on GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <div class="text-center reveal">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <a href="/research/whitepaper/" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent-primary)] text-white font-medium hover:opacity-90 transition-opacity">Read the Whitepaper</a>
+          <a href="/TARA/" class="px-8 py-3.5 rounded-xl glass font-medium hover:bg-white/10 transition-colors">Explore the Atlas &rarr;</a>
+          <a href="/guardrails/" class="px-8 py-3.5 rounded-xl glass font-medium hover:bg-white/10 transition-colors">See the Specifications &rarr;</a>
+        </div>
+        <p class="font-mono text-[10px] text-[var(--color-text-faint)] tracking-[0.1em]">PROPOSED &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE</p>
       </div>
     </div>
   </section>
-
-
 
 
   <!-- ═══ TRANSPARENCY ═══ -->
