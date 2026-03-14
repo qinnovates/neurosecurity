@@ -652,7 +652,7 @@ const tacticColors: Record<string, string> = {
         <div class="grid sm:grid-cols-3 gap-4 mb-8">
           {PILLARS.map((pillar) => (
             <a href={pillar.href} class="glass rounded-xl p-6 card-hover" style={`border-top: 3px solid ${pillar.color};`}>
-              <div class="text-2xl mb-3" style={`color: ${pillar.color};`} set:html={pillar.icon} />
+              <div class="text-2xl mb-3" style={`color: ${pillar.color};`} >{pillar.icon}</div>
               <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">{pillar.name}</h3>
               <p class="text-xs text-[var(--color-text-faint)] mb-3">{pillar.fullName}</p>
               <p class="text-sm text-[var(--color-text-muted)]">
@@ -1623,6 +1623,9 @@ const tacticColors: Record<string, string> = {
               <p class="text-xs text-[var(--color-text-muted)]">Native Staves DSL compiler with multimodal support (visual, auditory, haptic). Hand-rolled lexer, recursive descent parser, TARA safety bounds at compile time. 67.8% compression, 430&micro;s compile+encrypt (simulation). Targeting IEC 62304 Class C. Today&rsquo;s BCIs are outward-only (Neuralink, BrainGate); Runemate targets the next generation of inward-rendering implants.</p>
               <p class="text-xs text-[var(--color-text-muted)] mt-2">
                 <strong>Hardware-first rendering architecture:</strong> The vision restoration pipeline uses depth sensors (Kinect-class hardware) as the primary spatial input, with AI operating as a color reconstruction layer on top &mdash; not as the sole rendering engine. This is intentional by design. Hardware sensors return deterministic geometry: distance, surface, edges. AI uses depth and transforms (much like Unreal Engine) to infer and render color back into the scene rather than generating the full environment from scratch. We propose this as a <strong>human-continuity guardrail</strong>: the principle that a patient&rsquo;s primary sensory experience must never fully depend on software that can fail, be corrupted, or go offline. The hardware provides that continuity. If the AI layer fails or goes offline during system upgrades or patches, the spatial environment is still visually represented through hardware sensor data alone. Color may not exist temporarily during outages &mdash; but vision itself persists from the depth data. You lose the paint, not the canvas.
+              </p>
+              <p class="text-xs text-[var(--color-text-muted)] mt-2">
+                <strong>Lesson from prototyping:</strong> During development of the depth-sensor visualization on this site, we discovered that sensor-to-vector-space mapping does not require high-fidelity source video. A heavily compressed, low-resolution depth feed produced the same spatial point cloud as the original high-quality capture. This reinforces the architecture: sensors capture geometry in vector space &mdash; points, distances, surfaces &mdash; not pixels. The AI rendering layer reconstructs visual quality from that spatial data. This means the bandwidth and processing requirements for the sensor-to-device link are significantly lower than a traditional video pipeline, because the bottleneck is spatial accuracy, not pixel density.
               </p>
             </div>
           </div>

@@ -157,6 +157,32 @@ and revising it until it holds up to scrutiny. There is a lot more to do.
         for NISS context profile weights
   \item \textbf{Conference paper}: Condensed version for submission to Graz BCI
         Conference 2026
+  \item \textbf{Blockchain chain-of-evidence for I0 kernels}: Hardware-level
+        system kernels at the I0 interface band enforce immutable safety constraints
+        (amplitude bounds, rate limiting, DoS prevention). We propose extending
+        Neurowall with a blockchain-based chain-of-evidence layer that logs every
+        kernel state change, firmware configuration update, and access event to a
+        tamper-proof ledger. This creates a verifiable audit trail: patients and
+        clinicians can cryptographically verify that no unauthorized modification
+        has occurred at the hardware boundary. The design follows the principle that
+        security-critical state at the biology boundary must be independently
+        verifiable, not merely trusted. Implementation would use a lightweight
+        append-only hash chain suitable for resource-constrained implantable
+        devices, not a full distributed consensus protocol. This requires
+        hardware-software co-design research and power budget analysis for
+        on-device cryptographic operations
+  \item \textbf{Neural terminal interface paradigm}: Regardless of how networked
+        computing evolves beyond current web architectures, neural interfaces will
+        require a terminal---a minimal, reliable rendering surface for patient
+        interaction. White phosphene stimulation provides the simplest, most
+        power-efficient rendering primitive for cortical visual prosthetics. We
+        propose the neural terminal as a design target: a BCI-native interactive
+        surface that gives patients full control over their AI assistants, data
+        access, and device configuration, with blockchain-verified access logs
+        ensuring tamper-proof transparency. The terminal paradigm is deliberately
+        agnostic to application-layer evolution---terminals have persisted across
+        every computing paradigm shift (CLI, GUI, mobile, spatial) and represent
+        the most robust interface primitive for safety-critical neural applications
   \item \textbf{EEG data pipeline for component validation}: We have assembled a
         curated registry of openly licensed EEG datasets (including the Mendeley
         ADHD Adult Resting State dataset, CC~BY~4.0, 79 subjects; PhysioNet

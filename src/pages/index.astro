@@ -314,7 +314,7 @@ const essentialPosts = allPosts
       {PILLARS.map((pillar) => (
         <a href={pillar.href} class="glass rounded-xl p-5 card-hover group text-left">
           <div class="flex items-center gap-2 mb-3">
-            <div class="text-xl" style={`color: ${pillar.color}`} set:html={pillar.icon} />
+            <div class="text-xl" style={`color: ${pillar.color}`}>{pillar.icon}</div>
             <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">
               {pillar.name}
             </h3>
@@ -479,38 +479,49 @@ const essentialPosts = allPosts
   <section class="py-16" style="background: var(--color-bg-surface);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-8 reveal">
-        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4">The Scholarship</p>
-        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">Two branches, one name</h2>
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4">The Governance Foundation</p>
+        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">Built on 20+ years of neuroethics scholarship</h2>
+        <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">Neuroethics scholarship defined the rights. This framework operationalizes them.</p>
       </div>
       <div class="grid sm:grid-cols-2 gap-4 mb-12 reveal">
         <div class="glass rounded-xl p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-1 h-full" style="background: #06b6d4;"></div>
           <p class="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style="color: #06b6d4;">Ethics of Neuroscience</p>
-          <p class="text-sm font-semibold mb-2">The applied branch</p>
-          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What ethical rules should govern brain research, neural devices, and clinical neurotechnology? This is the branch that asks about consent, privacy, cognitive liberty, and the rights of people using BCIs.</p>
-          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">This is where BCI security governance lives.</p>
+          <p class="text-sm font-semibold mb-2">Defines the rules</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What ethical principles should govern brain research and neural devices? Consent, privacy, cognitive liberty, and the rights of people using BCIs.</p>
+          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 font-semibold">BCI security governance lives here.</p>
         </div>
         <div class="glass rounded-xl p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-1 h-full" style="background: #8b5cf6;"></div>
           <p class="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style="color: #8b5cf6;">Neuroscience of Ethics</p>
-          <p class="text-sm font-semibold mb-2">The philosophical branch</p>
-          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What can brain science tell us about morality itself? How do neural processes produce moral judgments? This branch studies the biological basis of ethical reasoning, not the ethics of the tools.</p>
-          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">Same name, fundamentally different question.</p>
+          <p class="text-sm font-semibold mb-2">Informs the design</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What can brain science tell us about moral reasoning? How neural processes produce ethical judgments shapes the constraints we build into the framework.</p>
+          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 font-semibold">Same name, fundamentally different question.</p>
         </div>
       </div>
 
-      <!-- Five Neurorights -->
+      <!-- Five Neurorights as compliance targets -->
       <div class="text-center mb-6 reveal">
-        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4">From Scholarship to Rights</p>
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2">Five Proposed Neurorights</h3>
-        <p class="text-xs text-[var(--color-text-muted)]">Derived from Ienca & Andorno (2017), extended by subsequent scholarship</p>
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4">Compliance Targets</p>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-2">Five Neurorights Your BCI Must Not Violate</h3>
+        <p class="text-xs text-[var(--color-text-muted)]">Each right is mapped to hourglass bands and scored by technique count</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-4xl mx-auto reveal-stagger reveal">
-        {['Mental Privacy', 'Cognitive Liberty', 'Mental Integrity', 'Psychological Continuity', 'Equal Access'].map((right) => (
-          <div class="glass rounded-xl p-4 text-center"><p class="text-sm font-semibold text-emerald-500 mb-1">{right}</p><p class="text-[10px] text-[var(--color-text-faint)]">Mapped to hourglass bands</p></div>
+        {[
+          { name: 'Mental Integrity', count: 81, color: '#ef4444' },
+          { name: 'Mental Privacy', count: 64, color: '#f59e0b' },
+          { name: 'Cognitive Liberty', count: 60, color: '#3b82f6' },
+          { name: 'Psychological Continuity', count: 28, color: '#8b5cf6' },
+          { name: 'Equal Access', count: 0, color: '#10b981' },
+        ].map((right) => (
+          <div class="glass rounded-xl p-4 text-center">
+            <p class="text-2xl font-bold mb-1" style={`color: ${right.color};`}>{right.count}</p>
+            <p class="text-xs font-semibold text-[var(--color-text-primary)] mb-1">{right.name}</p>
+            <p class="text-[10px] text-[var(--color-text-faint)]">techniques that could violate</p>
+          </div>
         ))}
       </div>
-      <div class="text-center mt-8"><a href="/neuroethics/rights/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Explore neurorights mapping &rarr;</a></div>
+      <div class="text-center mt-8"><a href="/research/neuroethics-landscape/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Explore neurorights mapping &rarr;</a></div>
     </div>
   </section>
 
@@ -519,12 +530,34 @@ const essentialPosts = allPosts
     <div class="text-center mb-12 reveal">
       <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4">Policy Bridge</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">Governance Spans All 11 Bands</h2>
-      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">The policy bridge connects security findings to regulatory frameworks.</p>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">The policy bridge connects security findings to regulatory frameworks. The world is already moving.</p>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
+
+    <!-- Regulatory frameworks -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12 reveal-stagger reveal">
       {[{ name: 'FDA', desc: 'Medical device cybersecurity' }, { name: 'EU AI Act', desc: 'High-risk AI compliance' }, { name: 'OECD', desc: 'Neurotechnology principles' }, { name: 'ISO', desc: 'Medical device standards' }].map((r) => (
         <div class="glass rounded-xl p-5 card-hover"><p class="font-bold mb-1">{r.name}</p><p class="text-xs text-[var(--color-text-muted)]">{r.desc}</p></div>
       ))}
+    </div>
+
+    <!-- Legislative momentum -->
+    <div class="max-w-3xl mx-auto reveal">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-6 text-center">Neural Data Legislation Is Accelerating</p>
+      <div class="flex flex-col sm:flex-row items-stretch gap-2">
+        {[
+          { year: '2021', place: 'Chile', desc: 'Constitutional neuroprotection', color: '#ec4899' },
+          { year: '2024', place: 'Colorado', desc: 'Neural data as sensitive data', color: '#3b82f6' },
+          { year: '2024', place: 'California', desc: 'CCPA neural data amendment', color: '#3b82f6' },
+          { year: '2025', place: 'Montana', desc: 'GIPA neural data + augmentation', color: '#3b82f6' },
+        ].map((item) => (
+          <div class="flex-1 glass rounded-lg p-3 text-center">
+            <p class="font-mono text-[10px] font-bold mb-1" style={`color: ${item.color};`}>{item.year}</p>
+            <p class="text-xs font-semibold text-[var(--color-text-primary)]">{item.place}</p>
+            <p class="text-[10px] text-[var(--color-text-faint)]">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-[10px] text-[var(--color-text-faint)] mt-3 italic">Standards need to be ready before the next state acts.</p>
     </div>
   </section>
 
@@ -586,7 +619,7 @@ const essentialPosts = allPosts
           This dual-use reality means BCI security is not an engineering problem. <strong class="text-[var(--color-text-primary)]">It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build governance before the harm, or after.
         </p>
         <p>
-          <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This atlas is the first attempt to fill it. Open source. Open data. Ready for peer review.
+          <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This atlas is an attempt to fill it. Open source. Open data. Ready for peer review.
         </p>
       </div>
     </div>

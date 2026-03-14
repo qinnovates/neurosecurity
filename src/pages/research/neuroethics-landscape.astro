@@ -67,7 +67,7 @@ const frameworks = [
   { name: 'Racine, Illes (2005)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
   { name: 'Poldrack (2006)', type: 'Rigor', cl: false, mp: false, mi: false, pc: false, ea: false },
   { name: 'Tennison & Moreno (2012)', type: 'Rigor', cl: true, mp: true, mi: true, pc: false, ea: false },
-  { name: 'Montana SB 214 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
+  { name: 'Montana SB 163 (2025)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
   { name: 'Minnesota HF 1370 (2024)', type: 'Law', cl: false, mp: true, mi: false, pc: false, ea: false },
   { name: 'Latin American Model Law (2023)', type: 'Law', cl: true, mp: true, mi: true, pc: true, ea: false },
   { name: 'China MoST Guidelines (2024)', type: 'Policy', cl: false, mp: true, mi: true, pc: false, ea: true },
@@ -173,6 +173,141 @@ const explorerCounts = {
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOUNDATIONAL MILESTONES — Narrative Timeline ═══ -->
+  <section class="py-12 md:py-16" id="milestones">
+    <div class="flex items-center gap-4 mb-8">
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+      <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
+        Foundational Milestones
+      </h2>
+      <div class="h-px flex-1 bg-[var(--color-border)]"></div>
+    </div>
+
+    <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-12">
+      The field that governs how we think about brains, privacy, and technology was formally named in 2002. Here is the lineage all of us inherit.
+    </p>
+
+    <!-- Visual Timeline -->
+    <div class="relative max-w-4xl mx-auto mb-12">
+      <div class="absolute left-6 sm:left-1/2 top-0 bottom-0 w-px" style="background: linear-gradient(to bottom, transparent, rgba(16,185,129,0.4), rgba(16,185,129,0.4), transparent);"></div>
+
+      {[
+        {
+          year: '2002',
+          title: 'The Field Is Named',
+          body: 'William Safire opens the Dana Foundation conference "Neuroethics: Mapping the Field" in San Francisco. In his keynote, he defines neuroethics as "the examination of what is right and wrong, good and bad about the treatment of, perfection of, or unwelcome invasion of and worrisome manipulation of the human brain." The modern field begins here.',
+          side: 'right',
+          color: '#10b981',
+          accent: 'Dana Foundation, San Francisco',
+        },
+        {
+          year: '2002',
+          title: 'Two Branches, One Name',
+          body: 'At the same conference, philosopher Adina Roskies draws a distinction that still defines the field. Ethics of neuroscience asks: "What ethical rules should govern neuroscience research and its clinical applications?" Neuroscience of ethics asks: "What can brain science teach us about morality itself?" Both branches share a name, but they ask fundamentally different questions.',
+          side: 'left',
+          color: '#06b6d4',
+          accent: 'Roskies (2002)',
+        },
+        {
+          year: '2005',
+          title: 'The Discipline Formalizes',
+          body: 'The International Neuroethics Society (INS) is founded, establishing neuroethics as a professional academic discipline with its own conferences, journals, and research programs.',
+          side: 'right',
+          color: '#10b981',
+          accent: 'International Neuroethics Society',
+        },
+        {
+          year: '2006',
+          title: 'Neuromodesty',
+          body: 'Legal scholar Stephen Morse publishes "Brain Overclaim Syndrome," warning against using neuroscience findings to make claims the science doesn\'t support. His principle — neuromodesty — becomes a cornerstone: don\'t confuse brain scans with mind reading.',
+          side: 'left',
+          color: '#f59e0b',
+          accent: 'Morse, Ohio State J Criminal Law',
+        },
+        {
+          year: '2017',
+          title: 'Neurorights Proposed',
+          body: 'Ienca and Andorno publish "Towards New Human Rights in the Age of Neuroscience and Neurotechnology," proposing four new rights: cognitive liberty, mental privacy, mental integrity, and psychological continuity. They argue existing human rights are insufficient for the neurotechnology era.',
+          side: 'right',
+          color: '#8b5cf6',
+          accent: 'Life Sciences, Society and Policy',
+        },
+        {
+          year: '2021',
+          title: 'Chile Leads',
+          body: 'Chile becomes the first country to enshrine neuroprotection in its constitution. The theoretical becomes legislative. The question shifts from "should we protect mental privacy?" to "how do we enforce it technically?"',
+          side: 'left',
+          color: '#ec4899',
+          accent: 'Chilean Constitutional Amendment',
+        },
+        {
+          year: '2024',
+          title: 'Colorado — First U.S. State',
+          body: 'Colorado passes HB 24-1058, classifying neural data as "sensitive data" under its existing privacy framework. Effective August 7, 2024, the law requires explicit opt-in consent for collection and use of neural data. The first U.S. state to legislate neural data protection.',
+          side: 'right',
+          color: '#3b82f6',
+          accent: 'HB 24-1058, Colorado Privacy Act',
+        },
+        {
+          year: '2024',
+          title: 'California Follows',
+          body: 'California amends the California Consumer Privacy Act (CCPA) to include "neural data" in the definition of "sensitive personal information." Consumers gain the right to limit the use and disclosure of their neural data — the largest population covered by neural data law in the U.S.',
+          side: 'left',
+          color: '#3b82f6',
+          accent: 'CCPA Amendment, SB 1223',
+        },
+        {
+          year: '2025',
+          title: 'Montana Expands the Scope',
+          body: 'Montana passes SB 163, amending the Genetic Information Privacy Act (GIPA) to cover neural data. It becomes the third U.S. state with neural data legislation — and the first to include "mental augmentation" within its scope, acknowledging enhancement alongside protection.',
+          side: 'right',
+          color: '#3b82f6',
+          accent: 'SB 163, Montana GIPA Amendment',
+        },
+        {
+          year: 'Future',
+          title: 'All of Us',
+          body: 'Two decades of neuroethics scholarship built the principles. Now the engineering has to catch up. If neurotechnology can read, write, and modulate neural signals — who builds the security? Who writes the policies? The answer is everyone working at this intersection.',
+          side: 'right',
+          color: '#10b981',
+          accent: 'The bridge is being built',
+        },
+      ].map((item) => (
+        <div class={`relative flex items-start mb-10 reveal ${item.side === 'left' ? 'sm:flex-row-reverse' : ''}`}>
+          <div class="absolute left-6 sm:left-1/2 w-3 h-3 rounded-full -translate-x-1/2 z-10 ring-4" style={`background: ${item.color}; ring-color: ${item.color}20;`}></div>
+          <div class={`ml-14 sm:ml-0 sm:w-[calc(50%-2rem)] ${item.side === 'left' ? 'sm:mr-auto sm:pr-8' : 'sm:ml-auto sm:pl-8'}`}>
+            <div class="glass rounded-xl p-5">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="font-mono text-xs font-bold px-2 py-0.5 rounded" style={`background: ${item.color}15; color: ${item.color};`}>{item.year}</span>
+                <h3 class="text-sm font-bold">{item.title}</h3>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{item.body}</p>
+              <p class="text-[10px] font-mono" style={`color: ${item.color}; opacity: 0.6;`}>{item.accent}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- The Two Branches visual -->
+    <div class="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto mb-12 reveal">
+      <div class="glass rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1 h-full" style="background: #06b6d4;"></div>
+        <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #06b6d4;">Ethics of Neuroscience</p>
+        <p class="text-sm font-semibold mb-2">The applied branch</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What ethical rules should govern brain research, neural devices, and clinical neurotechnology? This is the branch that asks about consent, privacy, cognitive liberty, and the rights of people using BCIs.</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">This is where BCI security governance lives.</p>
+      </div>
+      <div class="glass rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1 h-full" style="background: #8b5cf6;"></div>
+        <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #8b5cf6;">Neuroscience of Ethics</p>
+        <p class="text-sm font-semibold mb-2">The philosophical branch</p>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What can brain science tell us about morality itself? How do neural processes produce moral judgments? This branch studies the biological basis of ethical reasoning, not the ethics of the tools.</p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-3 italic">Same name, fundamentally different question.</p>
       </div>
     </div>
   </section>

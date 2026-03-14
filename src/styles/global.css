@@ -477,6 +477,28 @@ code, pre {
   animation-play-state: running;
 }
 
+/* Floating orbs — fixed background for BCI Vision, lens flare with color shift */
+@keyframes orbDrift1 {
+  0%   { transform: translate(0, 0); filter: blur(80px) hue-rotate(0deg); }
+  50%  { transform: translate(40px, 25px); filter: blur(80px) hue-rotate(60deg); }
+  100% { transform: translate(0, 0); filter: blur(80px) hue-rotate(0deg); }
+}
+@keyframes orbDrift2 {
+  0%   { transform: translate(0, 0); filter: blur(70px) hue-rotate(0deg); }
+  50%  { transform: translate(-30px, 20px); filter: blur(70px) hue-rotate(-40deg); }
+  100% { transform: translate(0, 0); filter: blur(70px) hue-rotate(0deg); }
+}
+@keyframes orbDrift4 {
+  0%   { transform: translate(0, 0); filter: blur(90px) hue-rotate(0deg); }
+  50%  { transform: translate(-20px, -30px); filter: blur(90px) hue-rotate(50deg); }
+  100% { transform: translate(0, 0); filter: blur(90px) hue-rotate(0deg); }
+}
+@keyframes orbDrift5 {
+  0%   { transform: translate(0, 0); filter: blur(60px) hue-rotate(0deg); }
+  50%  { transform: translate(30px, -20px); filter: blur(60px) hue-rotate(-50deg); }
+  100% { transform: translate(0, 0); filter: blur(60px) hue-rotate(0deg); }
+}
+
 /* Gradient border glow on hover */
 .glow-border {
   position: relative;

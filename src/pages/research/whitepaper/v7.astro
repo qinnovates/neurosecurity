@@ -310,7 +310,7 @@ const tacticColors: Record<string, string> = {
         <div class="grid sm:grid-cols-3 gap-4 mb-8">
           {PILLARS.map((pillar) => (
             <a href={pillar.href} class="glass rounded-xl p-6 card-hover" style={`border-top: 3px solid ${pillar.color};`}>
-              <div class="text-2xl mb-3" style={`color: ${pillar.color};`} set:html={pillar.icon} />
+              <div class="text-2xl mb-3" style={`color: ${pillar.color};`} >{pillar.icon}</div>
               <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">{pillar.name}</h3>
               <p class="text-xs text-[var(--color-text-faint)] mb-3">{pillar.fullName}</p>
               <p class="text-sm text-[var(--color-text-muted)]">
