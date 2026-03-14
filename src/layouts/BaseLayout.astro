@@ -80,21 +80,13 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <!-- Security headers (GitHub Pages does not support HTTP headers, so use meta tags) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
 
   <title>{title} | Qinnovate</title>
 
   <!-- View Transitions -->
   <ViewTransitions />
 
-  <!-- Google Analytics 4 -->
-  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DKB9RWW0C2"></script>
-  <script is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DKB9RWW0C2');
-  </script>
 
   <!-- Theme + Vision mode + Lens initialization (prevent flash) -->
   <script is:inline>
