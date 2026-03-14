@@ -52,8 +52,19 @@ struct DepthRendererView: UIViewRepresentable {
 
         // Buffers
         private var depthDataBuffer: MTLBuffer?
-        private var resolutionBuffer: MTLBuffer?
-        private var depthRangeBuffer: MTLBuffer?
+        private var uniformsBuffer: MTLBuffer?
+
+        // Animation
+        private var startTime: Date = Date()
+
+        // Uniforms struct — must match Metal shader
+        struct Uniforms {
+            var resolution: SIMD2<Float>
+            var depthRange: SIMD2<Float>
+            var screenSize: SIMD2<Float>
+            var time: Float
+            var focalLength: Float
+        }
 
         override init() {
             super.init()
@@ -65,7 +76,6 @@ struct DepthRendererView: UIViewRepresentable {
             self.device = device
             self.commandQueue = device.makeCommandQueue()
 
-            // Texture cache for converting CVPixelBuffers to Metal textures
             CVMetalTextureCacheCreate(nil, nil, device, nil, &textureCache)
 
             guard let library = device.makeDefaultLibrary() else { return }
@@ -75,14 +85,19 @@ struct DepthRendererView: UIViewRepresentable {
             descriptor.fragmentFunction = library.makeFunction(name: "depthFragment")
             descriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
 
+            // Enable alpha blending for soft particle glow
+            descriptor.colorAttachments[0].isBlendingEnabled = true
+            descriptor.colorAttachments[0].rgbBlendOperation = .add
+            descriptor.colorAttachments[0].alphaBlendOperation = .add
+            descriptor.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha
+            descriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
+            descriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
+            descriptor.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
+
             pipelineState = try? device.makeRenderPipelineState(descriptor: descriptor)
 
-            // Static buffers
-            var resolution = SIMD2<Float>(256, 192)
-            resolutionBuffer = device.makeBuffer(bytes: &resolution, length: MemoryLayout<SIMD2<Float>>.size)
-
-            var depthRange = SIMD2<Float>(0.1, 5.0)  // 0.1m to 5m
-            depthRangeBuffer = device.makeBuffer(bytes: &depthRange, length: MemoryLayout<SIMD2<Float>>.size)
+            // Uniforms buffer
+            uniformsBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.size, options: .storageModeShared)
         }
 
         func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
@@ -114,12 +129,22 @@ struct DepthRendererView: UIViewRepresentable {
                     )
                 }
 
+                // Update uniforms with current time + screen size
+                let drawableSize = view.drawableSize
+                var uniforms = Uniforms(
+                    resolution: SIMD2<Float>(256, 192),
+                    depthRange: SIMD2<Float>(0.1, 5.0),
+                    screenSize: SIMD2<Float>(Float(drawableSize.width), Float(drawableSize.height)),
+                    time: Float(Date().timeIntervalSince(startTime)),
+                    focalLength: 240.0
+                )
+                uniformsBuffer?.contents().copyMemory(from: &uniforms, byteCount: MemoryLayout<Uniforms>.size)
+
                 encoder.setRenderPipelineState(pipelineState)
                 encoder.setVertexBuffer(depthDataBuffer, offset: 0, index: 0)
-                encoder.setVertexBuffer(resolutionBuffer, offset: 0, index: 1)
-                encoder.setVertexBuffer(depthRangeBuffer, offset: 0, index: 2)
+                encoder.setVertexBuffer(uniformsBuffer, offset: 0, index: 1)
 
-                // Draw one point per depth pixel
+                // Draw one point per depth pixel as soft particles
                 let vertexCount = 256 * 192
                 encoder.drawPrimitives(type: .point, vertexStart: 0, vertexCount: vertexCount)
             }
