@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import BciKql from '@/components/bci/BciKql';
 import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
@@ -31,6 +32,7 @@ const THREAT_CATEGORIES = [
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'TARA' }]}
   wide={true}
 >
+  <AtlasViewSwitcher current="/atlas/tara/" />
   <div id="tara-command-center" class="min-h-screen -mt-4 pt-4">
     <div class="max-w-[1400px] mx-auto">
       <div class="mb-12">

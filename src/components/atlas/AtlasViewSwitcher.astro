@@ -1,0 +1,73 @@
+---
+interface Props {
+  current: string;
+}
+
+const { current } = Astro.props;
+
+const tabs = [
+  { label: 'Hub', href: '/atlas/' },
+  { label: 'Catalog', href: '/atlas/tara/' },
+  { label: 'Scoring', href: '/atlas/scoring/' },
+  { label: 'Clinical', href: '/atlas/clinical/' },
+  { label: 'Domains', href: '/atlas/domains/' },
+  { label: 'Explorer', href: '/atlas/explorer/' },
+  { label: 'Devices', href: '/atlas/device-filter/' },
+  { label: 'Chains', href: '/atlas/chains/' },
+];
+
+function isActive(href: string, currentPath: string): boolean {
+  const norm = currentPath.replace(/\/$/, '') || '/';
+  const tabNorm = href.replace(/\/$/, '') || '/';
+  return norm === tabNorm;
+}
+---
+
+<nav
+  class="atlas-view-switcher sticky z-30 -mx-4 px-4 py-2 overflow-x-auto scrollbar-hide"
+  style="top: var(--nav-height, 64px); background: color-mix(in srgb, var(--color-glass-bg) 85%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-glass-border);"
+  aria-label="Atlas sub-navigation"
+>
+  <div class="flex items-center gap-1.5 min-w-max">
+    {tabs.map((tab) => {
+      const active = isActive(tab.href, current);
+      return (
+        <a
+          href={tab.href}
+          class:list={[
+            'atlas-tab inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap',
+            active ? 'atlas-tab--active' : 'atlas-tab--inactive',
+          ]}
+          aria-current={active ? 'page' : undefined}
+        >
+          {tab.label}
+        </a>
+      );
+    })}
+  </div>
+</nav>
+
+<style>
+  .atlas-tab--active {
+    background: var(--color-accent-primary);
+    color: #fff;
+    box-shadow: 0 1px 6px color-mix(in srgb, var(--color-accent-primary) 30%, transparent);
+  }
+  .atlas-tab--inactive {
+    background: var(--color-glass-bg);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-glass-border);
+  }
+  .atlas-tab--inactive:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-accent-primary);
+    background: color-mix(in srgb, var(--color-accent-primary) 8%, var(--color-glass-bg));
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>

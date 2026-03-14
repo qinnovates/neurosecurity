@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import ClinicalDashboard from '@/components/atlas/ClinicalDashboard';
 import BciKql from '@/components/bci/BciKql';
 import { getClinicalData } from '@/lib/clinical-data';
@@ -316,6 +317,8 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Clinical View' }]}
   wide={true}
 >
+
+  <AtlasViewSwitcher current="/atlas/clinical/" />
 
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- HERO                                                   -->

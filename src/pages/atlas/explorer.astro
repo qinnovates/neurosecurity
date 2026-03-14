@@ -1,8 +1,10 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import TaraExplorer from '../../components/atlas/TaraExplorer';
 import { THREAT_VECTORS } from '../../lib/threat-data';
 ---
 <PageLayout title="TARA Explorer | Qinnovate" breadcrumbs={[{label:'Atlas',href:'/atlas/'},{label:'Explorer'}]}>
+  <AtlasViewSwitcher current="/atlas/explorer/" />
   <TaraExplorer client:load techniques={THREAT_VECTORS} />
 </PageLayout>

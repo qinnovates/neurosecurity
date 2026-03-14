@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import BciKql from '@/components/bci/BciKql';
 import { getKqlTables } from '@/lib/kql-tables';
 import { NISS_SPEC, THREAT_VECTORS, getNissStats } from '@/lib/threat-data';
@@ -92,6 +93,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'NISS Scoring' }]}
   maxWidth="wide"
 >
+  <AtlasViewSwitcher current="/atlas/scoring/" />
   <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
     <!-- Sidebar (sticky TOC) -->
     <aside class="hidden lg:block">
