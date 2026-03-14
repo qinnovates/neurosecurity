@@ -1,0 +1,147 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Privacy Policy — Qinnovate"
+  description="How qinnovate.com handles your data. Plain language, no legalese."
+  breadcrumbs={[{ label: 'Privacy' }]}
+  wide
+>
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-8">Privacy Policy</h1>
+
+    <div class="max-w-3xl space-y-8">
+      <p class="text-sm text-[var(--color-text-faint)]">Last updated: March 14, 2026</p>
+
+      <p>Plain language. No legalese. Here's exactly what happens with your data when you use qinnovate.com or any qinnovate tool.</p>
+
+      <!-- Who we are -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Who we are</h2>
+        <p>Qinnovate is a personal open-source research project maintained by Kevin Qi. It is not a company or registered business entity. All tools are provided under the Apache 2.0 license.</p>
+        <p class="mt-2">Contact: Open an issue at <a href="https://github.com/qinnovates/qinnovate/issues" class="text-[var(--color-accent)] hover:underline">github.com/qinnovates/qinnovate/issues</a> or reach out through the <a href="/about" class="text-[var(--color-accent)] hover:underline">About page</a>.</p>
+      </section>
+
+      <!-- Site -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">qinnovate.com (this website)</h2>
+        <ul class="space-y-2 list-disc pl-6">
+          <li><strong>No analytics.</strong> This site does not run any analytics service. No Google Analytics, no tracking pixels, no usage monitoring.</li>
+          <li><strong>No cookies.</strong> This site does not set any cookies. Your browser may store a theme preference in localStorage (light/dark mode) — this never leaves your device.</li>
+          <li><strong>No accounts.</strong> No login, no user accounts, no passwords.</li>
+          <li><strong>No data collection.</strong> We don't collect your name, email, or any personal information through the site.</li>
+          <li><strong>Open source.</strong> The site code is public at <a href="https://github.com/qinnovates/qinnovate" class="text-[var(--color-accent)] hover:underline">github.com/qinnovates/qinnovate</a>. You can verify every claim on this page.</li>
+        </ul>
+      </section>
+
+      <!-- Hosting & third parties -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Hosting & third-party services</h2>
+        <p class="mb-4">While qinnovate itself collects no data, the infrastructure that delivers this site to you does process some information:</p>
+        <ul class="space-y-2 list-disc pl-6">
+          <li><strong>GitHub Pages</strong> hosts this site. GitHub (Microsoft) may collect server access logs including your IP address, browser type, and pages requested per their <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" class="text-[var(--color-accent)] hover:underline">privacy statement</a>. Qinnovate does not have access to these logs.</li>
+          <li><strong>GitHub</strong> hosts the source code and issue tracker. If you open an issue or submit a pull request, GitHub collects your GitHub account information per their privacy policy.</li>
+        </ul>
+      </section>
+
+      <!-- Quorum -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Quorum (Claude Code plugin)</h2>
+        <p class="mb-4">Quorum is a plugin for Claude Code and Cowork. Qinnovate never sees your queries, your data, or your results. However, your queries are processed by Anthropic's infrastructure:</p>
+
+        <table class="w-full text-sm border-collapse mb-4">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]">
+              <th class="text-left py-2 pr-4">Action</th>
+              <th class="text-left py-2 pr-4">When</th>
+              <th class="text-left py-2 pr-4">Who processes it</th>
+              <th class="text-left py-2">How to prevent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-[var(--color-border)]">
+              <td class="py-2 pr-4">Your query + agent prompts</td>
+              <td class="py-2 pr-4">Every run</td>
+              <td class="py-2 pr-4">Anthropic (Claude API)</td>
+              <td class="py-2">Inherent to using Claude</td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]">
+              <td class="py-2 pr-4">Web searches</td>
+              <td class="py-2 pr-4">Research mode</td>
+              <td class="py-2 pr-4">Search provider via Claude</td>
+              <td class="py-2"><code>--no-web</code></td>
+            </tr>
+            <tr class="border-b border-[var(--color-border)]">
+              <td class="py-2 pr-4">Session report</td>
+              <td class="py-2 pr-4">After every run</td>
+              <td class="py-2 pr-4">Saved locally on your machine</td>
+              <td class="py-2"><code>--no-save</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="p-4 rounded-lg bg-[var(--color-surface-alt)] border border-[var(--color-border)]">
+          <p class="font-bold mb-2">What qinnovate does NOT do:</p>
+          <ul class="space-y-1 list-disc pl-6 text-sm">
+            <li>We never receive, store, or have access to your queries</li>
+            <li>We never see your Quorum reports or results</li>
+            <li>We never collect usage analytics from the plugin</li>
+            <li>The plugin makes no network calls to qinnovate.com — zero telemetry</li>
+          </ul>
+        </div>
+
+        <p class="mt-4"><strong>Anthropic's role:</strong> Your queries are processed by Anthropic's Claude API. Anthropic's handling of your data is governed by <a href="https://www.anthropic.com/privacy" class="text-[var(--color-accent)] hover:underline">Anthropic's privacy policy</a>. Qinnovate has no control over and no access to data processed by Anthropic.</p>
+
+        <p class="mt-2">For maximum privacy: <code class="text-sm bg-[var(--color-surface-alt)] px-2 py-0.5 rounded">/quorum "query" --no-web --no-save</code></p>
+        <p class="mt-2">Full technical details: <a href="https://github.com/qinnovates/quorum/blob/main/docs/SAFETY.md" class="text-[var(--color-accent)] hover:underline">SAFETY.md on GitHub</a></p>
+      </section>
+
+      <!-- Other tools -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Other qinnovate tools</h2>
+        <ul class="space-y-2 list-disc pl-6">
+          <li><strong>NeuroSIM:</strong> Runs locally. No data leaves your machine. No telemetry.</li>
+          <li><strong>macshield:</strong> Runs locally. No telemetry. No network calls to qinnovate.</li>
+        </ul>
+      </section>
+
+      <!-- Open source & forks -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Open source & third-party modifications</h2>
+        <p>All qinnovate tools are open source under Apache 2.0. The privacy commitments on this page apply only to software obtained from official qinnovate sources (<a href="https://github.com/qinnovates" class="text-[var(--color-accent)] hover:underline">github.com/qinnovates</a> and this website).</p>
+        <p class="mt-2">Qinnovate has no control over and accepts no responsibility for forks, modifications, or redistributions by third parties. If you obtained a qinnovate tool from a source other than the official GitHub organization, verify its integrity before use.</p>
+        <p class="mt-2">All tools are provided as-is for research and educational purposes, with no warranty. See the <a href="https://github.com/qinnovates/qinnovate/blob/main/LICENSE" class="text-[var(--color-accent)] hover:underline">Apache 2.0 LICENSE</a> for full terms.</p>
+      </section>
+
+      <!-- Research & neural data -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Research & neural data ethics</h2>
+        <ul class="space-y-2 list-disc pl-6">
+          <li>All research is open-access under Apache 2.0 or CC-BY-4.0</li>
+          <li>AI collaboration is fully disclosed in every publication (see <a href="/governance" class="text-[var(--color-accent)] hover:underline">Transparency Statement</a>)</li>
+          <li><strong>No human subjects data</strong> is collected, stored, or used. All published datasets are synthetic or derived from public sources</li>
+          <li><strong>Neural data is treated as the highest-sensitivity data category.</strong> If any future qinnovate tool handles real BCI data, it will implement consent-first architecture with explicit opt-in. This commitment is documented in the project's <a href="https://github.com/qinnovates/qinnovate/blob/main/AI-instructions.md" class="text-[var(--color-accent)] hover:underline">AI Ethics guidelines</a></li>
+        </ul>
+      </section>
+
+      <!-- Your rights -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Your rights</h2>
+        <p>Under GDPR (EU), CCPA (California), LGPD (Brazil), PIPA (South Korea), and other privacy laws, you have rights including access, correction, deletion, and portability of your personal data.</p>
+        <p class="mt-2">Since qinnovate does not collect personal data through this site or its tools, there is typically nothing to access, correct, or delete. If you believe we hold any data about you, contact us and we will address it promptly.</p>
+        <p class="mt-2">You also have the right to lodge a complaint with your local data protection authority.</p>
+      </section>
+
+      <!-- Changes -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Changes to this policy</h2>
+        <p>If this policy changes, the "last updated" date at the top will be updated. For material changes (new data collection, new third-party services), the change will be noted in the project's <a href="https://github.com/qinnovates/qinnovate/commits/main" class="text-[var(--color-accent)] hover:underline">commit history</a>.</p>
+      </section>
+
+      <!-- Contact -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Questions</h2>
+        <p>If you have questions about this policy, open an issue at <a href="https://github.com/qinnovates/quorum/issues" class="text-[var(--color-accent)] hover:underline">github.com/qinnovates/quorum/issues</a> or reach out through the <a href="/about" class="text-[var(--color-accent)] hover:underline">About page</a>.</p>
+      </section>
+    </div>
+</PageLayout>
