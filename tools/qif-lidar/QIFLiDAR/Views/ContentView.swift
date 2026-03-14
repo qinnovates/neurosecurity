@@ -7,6 +7,7 @@ struct ContentView: View {
     @State private var isRecording = false
     @State private var ocrEnabled = false
     @State private var segmentationMask: [UInt8]? = nil
+    @State private var tapDepthInfo: TapDepthInfo? = nil
 
     private let segmentationService = SegmentationService()
     private let exporter = SessionExporter()
@@ -23,6 +24,16 @@ struct ContentView: View {
                 guideDogBBox: guideDogDetector.isDetected ? guideDogDetector.boundingBox : nil
             )
             .ignoresSafeArea()
+            .onTapGesture { location in
+                tapDepthInfo = queryDepth(at: location)
+            }
+
+            // Tap depth overlay
+            if let info = tapDepthInfo {
+                DepthTapOverlay(info: info) {
+                    tapDepthInfo = nil
+                }
+            }
 
             // Controls overlay
             VStack {
@@ -216,11 +227,157 @@ struct ContentView: View {
         exporter.exportManifest(manifest)
     }
 
+    // MARK: - Tap to Measure Depth
+
+    private func queryDepth(at screenPoint: CGPoint) -> TapDepthInfo? {
+        guard let depthMap = sessionManager.depthMap else { return nil }
+
+        CVPixelBufferLockBaseAddress(depthMap, .readOnly)
+        defer { CVPixelBufferUnlockBaseAddress(depthMap, .readOnly) }
+
+        let depthWidth = CVPixelBufferGetWidth(depthMap)
+        let depthHeight = CVPixelBufferGetHeight(depthMap)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(depthMap)
+
+        guard let baseAddress = CVPixelBufferGetBaseAddress(depthMap) else { return nil }
+
+        // Map screen tap to depth buffer coordinates
+        let screenSize = UIScreen.main.bounds.size
+        let normX = screenPoint.x / screenSize.width
+        let normY = screenPoint.y / screenSize.height
+        let depthX = Int(normX * CGFloat(depthWidth))
+        let depthY = Int(normY * CGFloat(depthHeight))
+
+        guard depthX >= 0, depthX < depthWidth, depthY >= 0, depthY < depthHeight else { return nil }
+
+        let ptr = baseAddress.assumingMemoryBound(to: Float32.self)
+        let floatsPerRow = bytesPerRow / MemoryLayout<Float32>.size
+        let depth = ptr[depthY * floatsPerRow + depthX]
+
+        guard depth > 0, depth < 10.0 else { return nil }
+
+        // Get confidence at this point
+        var confidence: String = "—"
+        if let confMap = sessionManager.confidenceMap {
+            CVPixelBufferLockBaseAddress(confMap, .readOnly)
+            defer { CVPixelBufferUnlockBaseAddress(confMap, .readOnly) }
+            if let confBase = CVPixelBufferGetBaseAddress(confMap) {
+                let confPtr = confBase.assumingMemoryBound(to: UInt8.self)
+                let confBytesPerRow = CVPixelBufferGetBytesPerRow(confMap)
+                let confVal = confPtr[depthY * confBytesPerRow + depthX]
+                confidence = confVal == 0 ? "Low" : confVal == 1 ? "Medium" : "High"
+            }
+        }
+
+        // Get AI class at this point if segmentation is active
+        var objectClass: String? = nil
+        if let mask = segmentationMask, displayMode == .aiClassification {
+            let maskSize = 513  // DeepLabV3 output size
+            let maskX = Int(normX * CGFloat(maskSize))
+            let maskY = Int(normY * CGFloat(maskSize))
+            let idx = maskY * maskSize + maskX
+            if idx >= 0, idx < mask.count {
+                let classID = mask[idx]
+                objectClass = SegmentationClass(rawValue: Int(classID))?.label
+            }
+        }
+
+        return TapDepthInfo(
+            screenPoint: screenPoint,
+            depthMeters: depth,
+            depthFeet: depth * 3.28084,
+            confidence: confidence,
+            objectClass: objectClass
+        )
+    }
+
     private var confidenceSummary: String {
         let h = sessionManager.confidenceHistogram
         let total = max(h.low + h.medium + h.high, 1)
         let highPct = (h.high * 100) / total
         return "\(highPct)%"
+    }
+}
+
+// MARK: - Tap Depth Data
+
+struct TapDepthInfo {
+    let screenPoint: CGPoint
+    let depthMeters: Float
+    let depthFeet: Float
+    let confidence: String
+    let objectClass: String?
+}
+
+// MARK: - Tap Depth Overlay
+
+struct DepthTapOverlay: View {
+    let info: TapDepthInfo
+    let onDismiss: () -> Void
+
+    var body: some View {
+        VStack {
+            Spacer()
+
+            // Measurement card
+            VStack(spacing: 8) {
+                // Distance (large)
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text(String(format: "%.2f", info.depthMeters))
+                        .font(.system(size: 42, weight: .bold, design: .monospaced))
+                        .foregroundStyle(.white)
+                    Text("m")
+                        .font(.title3.bold())
+                        .foregroundStyle(.white.opacity(0.6))
+
+                    Spacer()
+
+                    // Feet
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text(String(format: "%.1f ft", info.depthFeet))
+                            .font(.title3.monospaced().bold())
+                            .foregroundStyle(.white.opacity(0.8))
+                        Text(String(format: "%.0f in", info.depthFeet * 12))
+                            .font(.caption.monospaced())
+                            .foregroundStyle(.white.opacity(0.5))
+                    }
+                }
+
+                // Details row
+                HStack(spacing: 16) {
+                    Label(info.confidence, systemImage: "signal.bars")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.7))
+
+                    if let obj = info.objectClass {
+                        Label(obj, systemImage: "cube.fill")
+                            .font(.caption.bold())
+                            .foregroundStyle(.cyan)
+                    }
+
+                    Spacer()
+
+                    Button("Dismiss") {
+                        onDismiss()
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.5))
+                }
+            }
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.ultraThinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(.white.opacity(0.1), lineWidth: 1)
+                    )
+            )
+            .padding(.horizontal, 16)
+            .padding(.bottom, 120)
+        }
+        .transition(.move(edge: .bottom).combined(with: .opacity))
+        .animation(.spring(response: 0.3), value: info.depthMeters)
     }
 }
 
