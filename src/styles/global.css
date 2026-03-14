@@ -664,6 +664,43 @@ code, pre {
   font-family: var(--font-body) !important;
 }
 
+/* ═══ Atlas Command Center ═══ */
+
+/* Subtle pulse for status indicators and active bands */
+@keyframes atlas-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.atlas-status-live span:first-child {
+  animation: atlas-pulse 2s ease-in-out infinite;
+}
+
+/* Data grid background for Atlas panels (dark mode only) */
+:root[data-theme="dark"] .atlas-grid-bg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+}
+
+/* Glow effect for severity indicators */
+.atlas-severity-glow {
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* Atlas panel hover lift */
+.atlas-panel {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.atlas-panel:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+:root[data-theme="dark"] .atlas-panel:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
 /* ═══ Reduced Motion ═══ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

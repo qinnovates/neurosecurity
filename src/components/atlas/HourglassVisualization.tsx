@@ -43,13 +43,15 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
     const isSelected = selectedBandId === band.id;
     const isHovered = hoveredBand === band.id;
     const active = isSelected || isHovered;
+    const isI0 = band.id === 'I0';
 
     return (
       <div
         key={band.id}
-        className="flex items-center gap-2 py-[3px] cursor-pointer rounded transition-colors group"
+        className="flex items-center gap-2 py-[3px] cursor-pointer rounded-lg transition-all duration-200 group"
         style={{
           background: isSelected ? `${band.color}12` : 'transparent',
+          transform: isHovered ? 'scale(1.01)' : 'scale(1)',
         }}
         onClick={() => onBandSelect(band.id)}
         onMouseEnter={() => setHoveredBand(band.id)}
@@ -58,7 +60,10 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
         {/* Band ID */}
         <span
           className="w-7 text-right font-mono text-[11px] font-semibold shrink-0 transition-colors"
-          style={{ color: active ? band.color : 'var(--color-text-faint)' }}
+          style={{
+            color: active ? band.color : 'var(--color-text-faint)',
+            textShadow: active ? `0 0 8px ${band.color}50` : 'none',
+          }}
         >
           {band.id}
         </span>
@@ -66,16 +71,43 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
         {/* Bar */}
         <div className="flex-1 flex justify-center">
           <div
-            className="rounded-[3px] transition-all"
+            className="rounded-[3px] transition-all duration-300 relative"
             style={{
-              width: `${band.width}%`,
-              height: '24px',
-              background: band.color,
+              width: active ? `${Math.min(band.width + 3, 100)}%` : `${band.width}%`,
+              height: active ? '28px' : '24px',
+              background: isI0
+                ? `linear-gradient(90deg, ${band.color}, ${band.color}cc)`
+                : band.color,
               opacity: active ? 1 : 0.7,
               filter: active ? 'brightness(1.2)' : 'none',
-              boxShadow: isSelected ? `0 0 12px ${band.color}40` : 'none',
+              boxShadow: isSelected
+                ? `0 0 16px ${band.color}50, inset 0 1px 0 rgba(255,255,255,0.15)`
+                : isI0
+                  ? `0 0 8px ${band.color}30`
+                  : 'none',
             }}
-          />
+          >
+            {/* I0 bottleneck glow indicator */}
+            {isI0 && (
+              <div
+                className="absolute inset-0 rounded-[3px]"
+                style={{
+                  background: `linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)`,
+                  animation: 'pulse 3s ease-in-out infinite',
+                }}
+              />
+            )}
+            {/* Selected band pulse ring */}
+            {isSelected && (
+              <div
+                className="absolute inset-[-2px] rounded-[4px]"
+                style={{
+                  border: `1px solid ${band.color}40`,
+                  animation: 'pulse 2s ease-in-out infinite',
+                }}
+              />
+            )}
+          </div>
         </div>
 
         {/* Name + extras */}
@@ -90,8 +122,8 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
 
         {/* Threat count */}
         <span
-          className="w-8 text-right font-mono text-[10px] shrink-0"
-          style={{ color: 'var(--color-text-faint)' }}
+          className="w-8 text-right font-mono text-[10px] shrink-0 transition-colors"
+          style={{ color: active ? band.color : 'var(--color-text-faint)' }}
         >
           {band.threatCount > 0 ? band.threatCount : ''}
         </span>
@@ -99,13 +131,16 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
     );
   };
 
-  const zoneSeparator = (label: string) => (
-    <div className="flex items-center gap-2 py-1 my-0.5">
-      <div className="flex-1 h-px" style={{ background: 'var(--color-border)' }} />
-      <span className="text-[9px] uppercase tracking-[0.1em]" style={{ color: 'var(--color-text-faint)' }}>
+  const zoneSeparator = (label: string, color: string) => (
+    <div className="flex items-center gap-2 py-1.5 my-0.5">
+      <div className="flex-1 h-px" style={{ background: `linear-gradient(to right, transparent, ${color}40)` }} />
+      <span
+        className="text-[9px] uppercase tracking-[0.12em] font-mono px-2 py-0.5 rounded-full"
+        style={{ color, background: `${color}10`, border: `1px solid ${color}15` }}
+      >
         {label}
       </span>
-      <div className="flex-1 h-px" style={{ background: 'var(--color-border)' }} />
+      <div className="flex-1 h-px" style={{ background: `linear-gradient(to left, transparent, ${color}40)` }} />
     </div>
   );
 
@@ -124,12 +159,12 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
       {/* Neural bands */}
       {neuralBands.map(renderBand)}
 
-      {zoneSeparator('Interface')}
+      {zoneSeparator('Interface', '#f59e0b')}
 
       {/* Interface bands */}
       {interfaceBands.map(renderBand)}
 
-      {zoneSeparator('Synthetic')}
+      {zoneSeparator('Synthetic', '#3b82f6')}
 
       {/* Synthetic bands */}
       {siliconBands.map(renderBand)}
@@ -150,34 +185,46 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
         if (!band) return null;
         return (
           <div
-            className="mt-4 px-3 py-2.5 rounded-lg border"
+            className="mt-4 px-3 py-3 rounded-lg border relative overflow-hidden"
             style={{
-              background: `${band.color}08`,
-              borderColor: `${band.color}25`,
+              background: `${band.color}06`,
+              borderColor: `${band.color}20`,
+              boxShadow: `0 0 20px ${band.color}10`,
             }}
           >
-            <div className="flex items-center gap-2 mb-1">
-              <span className="font-semibold text-xs" style={{ color: band.color }}>
-                {band.id}
-              </span>
-              <span className="text-xs font-medium" style={{ color: 'var(--color-text-primary)' }}>
-                {band.name}
-              </span>
-              {getSeverityBadge(band.severity)}
-            </div>
-            <p className="text-[11px] leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-              {band.description}
-            </p>
-            <div className="flex gap-3 mt-1.5">
-              <span className="text-[10px]" style={{ color: 'var(--color-text-faint)' }}>
-                {band.threatCount} threats
-              </span>
-              <span className="text-[10px]" style={{ color: 'var(--color-text-faint)' }}>
-                {band.brainRegions.length} regions
-              </span>
-              <span className="text-[10px]" style={{ color: 'var(--color-text-faint)' }}>
-                QI: {band.qiRange[0]}-{band.qiRange[1]}
-              </span>
+            <div
+              className="absolute inset-0 opacity-30"
+              style={{
+                backgroundImage: `radial-gradient(circle at 0% 0%, ${band.color}15 0%, transparent 50%)`,
+              }}
+            />
+            <div className="relative">
+              <div className="flex items-center gap-2 mb-1">
+                <span
+                  className="font-semibold text-xs font-mono"
+                  style={{ color: band.color, textShadow: `0 0 6px ${band.color}40` }}
+                >
+                  {band.id}
+                </span>
+                <span className="text-xs font-medium" style={{ color: 'var(--color-text-primary)' }}>
+                  {band.name}
+                </span>
+                {getSeverityBadge(band.severity)}
+              </div>
+              <p className="text-[11px] leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                {band.description}
+              </p>
+              <div className="flex gap-3 mt-2">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ color: band.color, background: `${band.color}10` }}>
+                  {band.threatCount} threats
+                </span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ color: band.color, background: `${band.color}10` }}>
+                  {band.brainRegions.length} regions
+                </span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ color: band.color, background: `${band.color}10` }}>
+                  QI: {band.qiRange[0]}-{band.qiRange[1]}
+                </span>
+              </div>
             </div>
           </div>
         );

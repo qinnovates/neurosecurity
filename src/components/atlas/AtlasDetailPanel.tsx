@@ -46,29 +46,49 @@ export default function AtlasDetailPanel({
 
   return (
     <div
-      className="rounded-xl border overflow-hidden"
-      style={{ background: 'var(--color-bg-secondary)', borderColor: 'var(--color-border)' }}
+      className="rounded-xl overflow-hidden glass"
+      style={{
+        backgroundImage: 'radial-gradient(circle, var(--color-border) 0.5px, transparent 0.5px)',
+        backgroundSize: '20px 20px',
+      }}
     >
+      {/* Terminal header */}
+      <div
+        className="flex items-center justify-between px-4 py-2 border-b"
+        style={{ borderColor: 'var(--color-border)', background: 'var(--color-glass-bg)' }}
+      >
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full" style={{ background: band.color, boxShadow: `0 0 6px ${band.color}60` }} />
+          <span className="text-[10px] font-mono uppercase tracking-[0.1em]" style={{ color: band.color }}>
+            {band.id} &mdash; {band.name}
+          </span>
+        </div>
+        <span className="text-[9px] font-mono" style={{ color: 'var(--color-text-faint)' }}>
+          {band.zone.toUpperCase()} ZONE
+        </span>
+      </div>
+
       {/* Tab bar */}
       <div
         className="flex border-b overflow-x-auto"
-        style={{ borderColor: 'var(--color-border)' }}
+        style={{ borderColor: 'var(--color-border)', background: 'var(--color-glass-bg)' }}
       >
         {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className="px-4 py-2.5 text-xs font-medium whitespace-nowrap transition-colors relative"
+            className="px-4 py-2.5 text-xs font-medium whitespace-nowrap transition-all relative"
             style={{
               color: activeTab === tab.id ? band.color : 'var(--color-text-faint)',
               background: activeTab === tab.id ? `${band.color}08` : 'transparent',
+              textShadow: activeTab === tab.id ? `0 0 8px ${band.color}40` : 'none',
             }}
           >
             {tab.label}
             {activeTab === tab.id && (
               <div
                 className="absolute bottom-0 left-0 right-0 h-0.5"
-                style={{ background: band.color }}
+                style={{ background: band.color, boxShadow: `0 0 8px ${band.color}60` }}
               />
             )}
           </button>
@@ -76,7 +96,7 @@ export default function AtlasDetailPanel({
       </div>
 
       {/* Tab content */}
-      <div className="p-4 min-h-[200px]">
+      <div className="p-4 min-h-[200px]" style={{ background: 'var(--color-glass-bg)' }}>
         {activeTab === 'overview' && <OverviewTab band={band} />}
         {activeTab === 'devices' && <DevicesTab devices={bandDevices} band={band} />}
         {activeTab === 'controls' && <ControlsTab band={band} neurorights={bandNeurorights} />}
@@ -449,27 +469,39 @@ function SecurityTab({
             Top Threats by NISS
           </h4>
           <div className="space-y-1">
-            {band.topThreats.map(t => (
-              <a
-                key={t.id}
-                href={`/atlas/tara/${t.id}/`}
-                className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 transition-colors text-xs"
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full shrink-0"
-                  style={{ background: sevColors[t.severity] ?? '#94a3b8' }}
-                />
-                <span className="flex-1 truncate" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.name}
-                </span>
-                <span className="font-mono text-[10px]" style={{ color: 'var(--color-text-faint)' }}>
-                  {t.id}
-                </span>
-                <span className="font-mono text-[10px] font-semibold" style={{ color: band.color }}>
-                  {t.niss}
-                </span>
-              </a>
-            ))}
+            {band.topThreats.map(t => {
+              const sevColor = sevColors[t.severity] ?? '#94a3b8';
+              return (
+                <a
+                  key={t.id}
+                  href={`/atlas/tara/${t.id}/`}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-xs group/threat"
+                  style={{ border: '1px solid transparent' }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = `${sevColor}25`;
+                    (e.currentTarget as HTMLAnchorElement).style.background = `${sevColor}08`;
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = 'transparent';
+                    (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+                  }}
+                >
+                  <span
+                    className="w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{ background: sevColor, boxShadow: `0 0 4px ${sevColor}60` }}
+                  />
+                  <span className="flex-1 truncate" style={{ color: 'var(--color-text-muted)' }}>
+                    {t.name}
+                  </span>
+                  <span className="font-mono text-[10px]" style={{ color: 'var(--color-text-faint)' }}>
+                    {t.id}
+                  </span>
+                  <span className="font-mono text-[10px] font-bold" style={{ color: sevColor }}>
+                    {t.niss}
+                  </span>
+                </a>
+              );
+            })}
           </div>
         </div>
       )}
@@ -482,13 +514,17 @@ function SecurityTab({
 function StatCard({ label, value, color }: { label: string; value: string; color: string }) {
   return (
     <div
-      className="px-3 py-2 rounded-lg border"
-      style={{ background: 'var(--color-bg-primary)', borderColor: 'var(--color-border)' }}
+      className="px-3 py-2.5 rounded-lg border relative overflow-hidden group transition-all hover:scale-[1.02]"
+      style={{ background: `${color}06`, borderColor: `${color}18` }}
     >
-      <p className="text-[9px] uppercase tracking-wider mb-0.5" style={{ color: 'var(--color-text-faint)' }}>
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: `radial-gradient(circle at 50% 50%, ${color}12 0%, transparent 70%)` }}
+      />
+      <p className="text-[9px] uppercase tracking-wider mb-0.5 relative" style={{ color: 'var(--color-text-faint)' }}>
         {label}
       </p>
-      <p className="text-sm font-semibold" style={{ color, fontFamily: 'var(--font-heading)' }}>
+      <p className="text-sm font-bold font-mono relative" style={{ color, textShadow: `0 0 8px ${color}30` }}>
         {value}
       </p>
     </div>

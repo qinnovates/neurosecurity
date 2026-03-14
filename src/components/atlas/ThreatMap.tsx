@@ -274,8 +274,8 @@ export default function ThreatMap({ threats, tactics, bands, onBandHighlight }: 
       {/* Search bar */}
       <div className="relative mb-3">
         <div
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl"
-          style={{ background: 'var(--color-bg-secondary)', border: '1px solid var(--color-border)' }}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl glass"
+          style={{ backgroundImage: 'radial-gradient(circle at 0% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 50%)' }}
         >
           <svg className="w-4 h-4 shrink-0" style={{ color: 'var(--color-text-faint)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -339,10 +339,10 @@ export default function ThreatMap({ threats, tactics, bands, onBandHighlight }: 
       {/* Graph area */}
       <div
         ref={containerRef}
-        className="flex-1 relative rounded-xl overflow-hidden"
+        className="flex-1 relative rounded-xl overflow-hidden glass"
         style={{
-          background: 'var(--color-bg-deep)',
-          border: '1px solid var(--color-border)',
+          backgroundImage: 'radial-gradient(circle, var(--color-border) 0.5px, transparent 0.5px)',
+          backgroundSize: '24px 24px',
           minHeight: '400px',
         }}
       >
@@ -490,10 +490,10 @@ export default function ThreatMap({ threats, tactics, bands, onBandHighlight }: 
       </div>
 
       {/* Kill chain bar */}
-      <div className="flex items-center gap-1.5 mt-2 overflow-x-auto pb-1">
+      <div className="flex items-center gap-1.5 mt-2 overflow-x-auto pb-1 px-2 py-1.5 rounded-lg glass">
         <span
-          className="text-xs shrink-0 uppercase tracking-wide"
-          style={{ color: 'var(--color-text-faint)', fontSize: '0.6rem', letterSpacing: '0.08em' }}
+          className="text-xs shrink-0 uppercase tracking-wide font-mono"
+          style={{ color: 'var(--color-accent-secondary)', fontSize: '0.6rem', letterSpacing: '0.08em' }}
         >
           Kill Chain
         </span>
@@ -522,62 +522,81 @@ export default function ThreatMap({ threats, tactics, bands, onBandHighlight }: 
       </div>
 
       {/* Detail card for center threat */}
-      {centerThreat && (
-        <div
-          className="mt-3 rounded-xl p-4"
-          style={{ background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }}
-        >
-          <div className="flex items-start justify-between gap-3 mb-2">
-            <div>
-              <h3
-                className="text-base font-bold"
-                style={{ color: 'var(--color-text-primary)', fontFamily: 'var(--font-heading)' }}
-              >
-                {centerThreat.name}
-              </h3>
-              <span className="text-xs" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>
-                {centerThreat.id}
+      {centerThreat && (() => {
+        const sevColor = SEVERITY_COLORS[centerThreat.severity] ?? '#94a3b8';
+        return (
+          <div
+            className="mt-3 rounded-xl p-4 glass relative overflow-hidden"
+            style={{ boxShadow: `0 0 20px ${sevColor}10` }}
+          >
+            <div
+              className="absolute inset-0 opacity-40"
+              style={{
+                backgroundImage: `radial-gradient(circle at 100% 0%, ${sevColor}10 0%, transparent 40%)`,
+              }}
+            />
+            {/* Terminal header bar */}
+            <div className="flex items-center gap-2 mb-3 relative">
+              <span className="w-2 h-2 rounded-full" style={{ background: sevColor, boxShadow: `0 0 6px ${sevColor}80` }} />
+              <span className="text-[9px] font-mono uppercase tracking-[0.1em]" style={{ color: 'var(--color-text-faint)' }}>
+                THREAT INTELLIGENCE REPORT
               </span>
             </div>
-            <div className="flex gap-1.5 shrink-0">
-              <span
-                className="text-xs px-2 py-0.5 rounded-full font-semibold"
-                style={{
-                  background: `${SEVERITY_COLORS[centerThreat.severity]}20`,
-                  color: SEVERITY_COLORS[centerThreat.severity],
-                  border: `1px solid ${SEVERITY_COLORS[centerThreat.severity]}40`,
-                }}
-              >
-                {centerThreat.severity}
-              </span>
-              <span
-                className="text-xs px-2 py-0.5 rounded-full font-semibold"
-                style={{ color: 'var(--color-text-faint)', border: '1px solid var(--color-border)' }}
-              >
-                NISS {centerThreat.niss.score.toFixed(1)}
-              </span>
+            <div className="relative">
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div>
+                  <h3
+                    className="text-base font-bold"
+                    style={{ color: 'var(--color-text-primary)', fontFamily: 'var(--font-heading)' }}
+                  >
+                    {centerThreat.name}
+                  </h3>
+                  <span className="text-xs" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>
+                    {centerThreat.id}
+                  </span>
+                </div>
+                <div className="flex gap-1.5 shrink-0">
+                  <span
+                    className="text-xs px-2 py-0.5 rounded-full font-semibold"
+                    style={{
+                      background: `${sevColor}20`,
+                      color: sevColor,
+                      border: `1px solid ${sevColor}40`,
+                      boxShadow: `0 0 8px ${sevColor}25`,
+                    }}
+                  >
+                    {centerThreat.severity}
+                  </span>
+                  <span
+                    className="text-xs px-2 py-0.5 rounded-full font-bold font-mono"
+                    style={{ color: 'var(--color-accent-secondary)', border: '1px solid rgba(6, 182, 212, 0.2)', background: 'rgba(6, 182, 212, 0.06)' }}
+                  >
+                    NISS {centerThreat.niss.score.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: 'var(--color-text-muted)' }}>
+                {centerThreat.description}
+              </p>
+              <div className="flex items-center gap-3 pt-2" style={{ borderTop: '1px solid var(--color-border)' }}>
+                <span className="text-xs font-mono" style={{ color: 'var(--color-text-faint)' }}>
+                  {nodes.length - 1} connected
+                </span>
+                <span className="text-xs font-mono" style={{ color: 'var(--color-text-faint)' }}>
+                  Bands: {centerThreat.bands.join(', ')}
+                </span>
+                <a
+                  href={`/atlas/tara/${centerThreat.id}/`}
+                  className="text-xs ml-auto transition-colors font-medium"
+                  style={{ color: 'var(--color-accent-secondary)' }}
+                >
+                  Full technique page &rarr;
+                </a>
+              </div>
             </div>
           </div>
-          <p className="text-xs leading-relaxed mb-2" style={{ color: 'var(--color-text-muted)' }}>
-            {centerThreat.description}
-          </p>
-          <div className="flex items-center gap-3">
-            <span className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
-              {nodes.length - 1} connected techniques
-            </span>
-            <span className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
-              Bands: {centerThreat.bands.join(', ')}
-            </span>
-            <a
-              href={`/atlas/tara/${centerThreat.id}/`}
-              className="text-xs ml-auto transition-colors"
-              style={{ color: 'var(--color-accent-secondary)' }}
-            >
-              Full technique page &rarr;
-            </a>
-          </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
