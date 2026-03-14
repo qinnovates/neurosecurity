@@ -248,6 +248,50 @@ const hasGovernance = nr || reg;
         </div>
       </div>
 
+        <!-- DSM-5-TR Diagnostic Mappings -->
+        {threat.tara?.dsm5 && (threat.tara.dsm5.primary?.length > 0 || threat.tara.dsm5.secondary?.length > 0) && (
+          <div class="glass rounded-xl p-4 mb-6">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">DSM-5-TR Diagnostic Mappings</h3>
+            <p class="text-[10px] text-[var(--color-text-faint)] mb-3">Diagnostic category references for threat modeling, not diagnostic claims.</p>
+            <div class="flex flex-wrap gap-1.5 mb-2">
+              {(threat.tara.dsm5.primary ?? []).map((d: any) => (
+                <span
+                  class={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    d.confidence === 'established'
+                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                      : d.confidence === 'probable'
+                        ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                        : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-dashed border-[var(--color-text-faint)]/30'
+                  }`}
+                >
+                  {d.code} {d.name}
+                </span>
+              ))}
+              {(threat.tara.dsm5.secondary ?? []).map((d: any) => (
+                <span
+                  class={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    d.confidence === 'established'
+                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                      : d.confidence === 'probable'
+                        ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                        : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-dashed border-[var(--color-text-faint)]/30'
+                  }`}
+                >
+                  {d.code} {d.name}
+                </span>
+              ))}
+            </div>
+            {threat.tara.dsm5.pathway && (
+              <p class="text-[10px] text-[var(--color-text-faint)] mt-2 leading-relaxed">
+                <span class="font-semibold">Pathway:</span> {threat.tara.dsm5.pathway}
+              </p>
+            )}
+            <p class="text-[10px] mt-2" style="color: var(--color-text-faint)">
+              Following Poldrack (2006), brain region disruption does not uniquely predict psychiatric outcomes.
+            </p>
+          </div>
+        )}
+
       <!-- RIGHT COLUMN (40%): Scoring, Governance, Population Vulnerability, Validation -->
       <div class="lg:col-span-2">
         <!-- Scoring -->

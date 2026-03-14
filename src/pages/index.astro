@@ -25,6 +25,9 @@ const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
 const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
+const confirmed = techniques.filter((t: any) => t.status === 'CONFIRMED').length;
+const demonstrated = techniques.filter((t: any) => t.status === 'DEMONSTRATED').length;
+const theoretical = techniques.filter((t: any) => ['THEORETICAL', 'EMERGING', 'PLAUSIBLE', 'SPECULATIVE'].includes(t.status)).length;
 const neurorightsSet = new Set<string>(['EA']); // Equal Access is structural, not threat-mapped
 techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
 const neurorightsCount = neurorightsSet.size;
@@ -98,6 +101,7 @@ const essentialPosts = allPosts
       <p class="text-[10px] text-[var(--color-text-faint)] mt-4">
         *Median estimate across <a href="/bci/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
       </p>
+      <p class="text-[10px] mt-1" style="color: var(--color-text-faint)">{confirmed} confirmed · {demonstrated} demonstrated · {theoretical} theoretical</p>
 
       <TrustBar />
     </div>
@@ -291,6 +295,9 @@ const essentialPosts = allPosts
           </h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
             A six-stage research mapping that traces BCI attack techniques from their physical mechanism through the affected neural structure to their potential psychiatric outcome. {dsm5Count} techniques map to symptoms matching DSM-5-TR criteria — from acute stress disorder to neurocognitive impairment. These mappings require clinical validation.
+          </p>
+          <p class="text-[10px] mt-2" style="color: var(--color-text-faint)">
+            Following Poldrack (2006), brain region disruption does not uniquely predict psychiatric outcomes. These mappings are research hypotheses requiring clinical validation.
           </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-3 shrink-0">

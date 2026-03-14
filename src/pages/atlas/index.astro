@@ -9,6 +9,7 @@ import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '@/lib/utils';
+import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -126,6 +127,8 @@ const iconSvg: Record<string, string> = {
   breadcrumbs={[{ label: 'Atlas' }]}
   wide={true}
 >
+  <AtlasViewSwitcher current="/atlas/" />
+
   <!-- Hero Section -->
   <div class="mb-10">
     <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
