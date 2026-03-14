@@ -69,17 +69,17 @@ This opt-in model also demonstrates that privacy and public safety are not in co
 
 **Status:** This is a long-term research direction, not a current deliverable. It is documented here to establish the ethical reasoning before the technical pressure to "just add face detection" arrives. When prosthesis resolution supports face rendering (estimated: 1,000+ channels, not yet commercially available), the consent framework must already exist.
 
-### 1.4 "BCI Community Watch" — Consent-Gated Playbook Architecture
+### 1.4 "BCI Knight's Watch" — Consent-Gated Playbook Architecture
 
 The Amber Alert opt-in is not a simple feature toggle. It is a **conditional playbook** that executes only when a chain of criteria are met. This follows the same pattern Apple uses for Face ID — all biometric computation stays on-device, nothing leaves unless the user explicitly acts.
 
-**Design principle:** Like Apple Face ID, where the Secure Enclave stores the facial geometry on-device and never transmits it, the BCI Community Watch feature stores nothing and transmits nothing unless every gate in the playbook passes. The patient's device is not a surveillance tool. It is a locked safe that only opens under specific, user-consented conditions.
+**Design principle:** Like Apple Face ID, where the Secure Enclave stores the facial geometry on-device and never transmits it, the BCI Knight's Watch feature stores nothing and transmits nothing unless every gate in the playbook passes. The patient's device is not a surveillance tool. It is a locked safe that only opens under specific, user-consented conditions.
 
 **Playbook execution chain (ALL gates must pass in sequence):**
 
 ```
 Gate 0: USER CONSENT
-  └─ Patient has explicitly enrolled in "BCI Community Watch"
+  └─ Patient has explicitly enrolled in "BCI Knight's Watch"
      (not a default, not a prompt — a deliberate opt-in with full disclosure)
      └─ If NO → playbook never activates. No compute. No scanning. Full stop.
 

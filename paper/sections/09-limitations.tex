@@ -202,4 +202,46 @@ and revising it until it holds up to scrutiny. There is a lot more to do.
         This requires independent clinical validation, larger and more diverse
         datasets, and formal sensitivity/specificity analysis before any clinical
         application. Documentation: \url{https://github.com/qinnovates/qinnovate/blob/main/shared/EEG-DATA-PIPELINE.md}
+  \item \textbf{LiDAR-to-BCI Bridge --- vision prosthesis security prototype}:
+        We are developing a commodity-hardware prototype that uses iPhone LiDAR to
+        demonstrate the sensor-to-classification pipeline required by neural vision
+        prostheses. The prototype captures real-time spatial depth data, classifies
+        objects using on-device AI (Core ML), and exports privacy-stripped data---all
+        without network connectivity. The initial clinical use-case is guide dog
+        detection: a single-class, safety-critical classifier that helps a vision
+        prosthesis patient locate their guide dog in the visual field. The guide dog
+        is the failsafe anchor---the one object the system must identify reliably,
+        because early prostheses will not produce sufficient visual quality for
+        independent navigation. The prototype includes phosphene simulation modes
+        (PRIMA 378-pixel, Orion 60-electrode) to visualize what a prosthesis patient
+        would perceive, and an adversarial testing framework mapped to TARA techniques
+        T0001 (signal injection), T0010 (replay attack), T0015 (stimulation parameter
+        manipulation), T0025 (data poisoning), and T0030 (side-channel leakage). Raw
+        depth data serves as a defense-in-depth failsafe: if the AI classification
+        layer fails, the patient still receives spatial information from the depth
+        sensor. This work bridges TARA from a theoretical threat catalog to a testable
+        security framework applied to a clinical vision restoration scenario. Phase~3
+        requires clinical collaboration with vision prosthesis researchers and guide
+        dog training organizations. Full technical specification:
+        \url{https://github.com/qinnovates/qinnovate/blob/main/docs/research/lidar-bci-bridge-technical-spec.md}
+  \item \textbf{BCI Knight's Watch --- consent-gated public safety}: Looking further
+        ahead, if prosthesis resolution reaches a level that supports face rendering
+        (estimated 1,000+ channels), a future capability emerges: patients could
+        voluntarily opt in to help identify missing children via Amber Alerts. We
+        propose the \emph{BCI Knight's Watch}, a consent-gated execution chain where
+        facial comparison activates \emph{only} when all of the following gates pass:
+        (1)~the patient has explicitly enrolled in ``BCI Community Watch'' through a
+        deliberate informed consent process, (2)~a verified Amber Alert has been
+        received, (3)~the device is in the relevant geographic area, (4)~a
+        non-biometric physical profile pre-screen (height, weight via LiDAR depth)
+        matches the alert parameters, and (5)~only then does a 1:1 on-device facial
+        comparison occur against the single missing child's embedding. No biometric
+        data is ever stored or transmitted---only the patient's own location, if they
+        choose to report. The playbook is COPPA-compliant by design: no child's
+        biometric data is collected, stored, or transmitted at any stage. This is not a
+        current deliverable---it is documented to establish the consent architecture
+        before the technical capability arrives. Face detection is deliberately
+        excluded from all current prototype phases (see technical specification for
+        rationale). Implementation would require IRB approval, BIPA/GDPR~Article~9
+        compliance review, and coordination with NCMEC
 \end{enumerate}
