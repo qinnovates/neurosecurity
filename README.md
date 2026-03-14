@@ -43,7 +43,7 @@ The framework, threat taxonomy, and governance structure are the author's contri
 
 | Tool | What It Does | Install |
 |------|-------------|---------|
-| **[Conductor](https://github.com/qinnovates/conductor)** | Orchestrate a swarm of AI experts on any question. Multiple specialists debate, research, validate — then a supervisor delivers the verdict. | `claude install qinnovates/conductor` |
+| **[Quorum](https://github.com/qinnovates/quorum)** | Orchestrate a swarm of AI experts on any question. Multiple specialists debate, research, validate — then a supervisor delivers the verdict. | `claude install qinnovates/quorum` |
 | **[NeuroSIM](https://github.com/qinnovates/neurosim)** | Neural Security Operations Simulator. BCI signal processing meets security operations. | See repo |
 | **[macshield](https://github.com/qinnovates/macshield)** | Network-aware macOS security hardening. | `brew install qinnovates/tools/macshield` |
 
