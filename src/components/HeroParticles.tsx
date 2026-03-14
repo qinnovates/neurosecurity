@@ -5,8 +5,11 @@ import { useWebGLSupport } from './WebGLCheck';
 import { useReducedMotion } from '../lib/useReducedMotion';
 
 const SEPARATION = 100;
-const AMOUNTX = 50;
-const AMOUNTY = 50;
+
+function getParticleCounts() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  return { amountX: isMobile ? 30 : 50, amountY: isMobile ? 30 : 50 };
+}
 
 function WavePoints({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   const pointsRef = useRef<THREE.Points>(null);
@@ -14,7 +17,8 @@ function WavePoints({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   const mouseRef = useRef({ x: 0, y: 0 });
   const { camera } = useThree();
   const reducedMotion = useReducedMotion();
-  const numParticles = AMOUNTX * AMOUNTY;
+  const { amountX, amountY } = useMemo(() => getParticleCounts(), []);
+  const numParticles = amountX * amountY;
 
   // Initialize static attributes
   const { positions, originalIndices } = useMemo(() => {
@@ -22,11 +26,11 @@ function WavePoints({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
     const indices = new Float32Array(numParticles * 2); // ix, iy
 
     let i = 0;
-    for (let ix = 0; ix < AMOUNTX; ix++) {
-      for (let iy = 0; iy < AMOUNTY; iy++) {
-        pos[i * 3] = ix * SEPARATION - (AMOUNTX * SEPARATION) / 2;
+    for (let ix = 0; ix < amountX; ix++) {
+      for (let iy = 0; iy < amountY; iy++) {
+        pos[i * 3] = ix * SEPARATION - (amountX * SEPARATION) / 2;
         pos[i * 3 + 1] = 0;
-        pos[i * 3 + 2] = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
+        pos[i * 3 + 2] = iy * SEPARATION - (amountY * SEPARATION) / 2;
 
         indices[i * 2] = ix;
         indices[i * 2 + 1] = iy;
@@ -43,6 +47,7 @@ function WavePoints({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   }, []);
 
   useEffect(() => {
+    if ('ontouchstart' in window) return;
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     return () => {
       window.removeEventListener('pointermove', onPointerMove);
