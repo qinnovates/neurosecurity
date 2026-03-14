@@ -80,6 +80,14 @@ const industryItems: FeedItem[] = [...briefItems, ...externalItems]
 
 const totalCount = blogItems.length + fieldJournalItems.length + industryItems.length;
 
+// Featured = latest blog post
+const featured = blogItems[0];
+const remainingBlog = blogItems.slice(1);
+
+// Top 3 field journals
+const topJournals = fieldJournalItems.slice(0, 3);
+const remainingJournals = fieldJournalItems.slice(3);
+
 // Category mapping for blog tags
 function inferCategory(tags: string[]): string {
   const tagSet = new Set(tags.map((t) => t.toLowerCase()));
@@ -89,6 +97,11 @@ function inferCategory(tags: string[]): string {
   if (tagSet.has('neuroethics') || tagSet.has('neuralprivacy') || tagSet.has('mindact')) return 'neuroethics';
   return 'research';
 }
+
+// Format date helper
+function fmtDate(d: string) {
+  return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
 ---
 
 <PageLayout
@@ -97,221 +110,287 @@ function inferCategory(tags: string[]): string {
   breadcrumbs={[{ label: 'News' }]}
   maxWidth="wide"
 >
-  <div class="mb-12 reveal">
-    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">News</h1>
-    <p class="text-lg text-[var(--color-text-muted)] max-w-3xl">
-      Neural security research, industry intelligence, and the emerging BCI market.
-    </p>
-  </div>
 
-  <!-- Filter bar -->
-  <div class="mb-10 flex flex-wrap gap-2 reveal" id="feed-filters">
-    <button
-      data-filter="all"
-      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30"
-    >
-      All ({totalCount})
-    </button>
-    <button
-      data-filter="publication"
-      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
-    >
-      Qinnovate ({blogItems.length})
-    </button>
-    <button
-      data-filter="field-journal"
-      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
-    >
-      Field Journals ({fieldJournalItems.length})
-    </button>
-    <button
-      data-filter="industry"
-      class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
-    >
-      Industry ({industryItems.length})
-    </button>
+  <!-- ═══ HERO: Featured Story ═══ -->
+  {featured && (
+    <a href={`/research/papers/${featured.slug}/`} class="block group mb-12 reveal">
+      <article class="relative rounded-2xl overflow-hidden p-8 sm:p-12 min-h-[280px] flex flex-col justify-end"
+        style="background: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.08) 50%, rgba(16,185,129,0.06) 100%); backdrop-filter: blur(40px) saturate(200%); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.05);">
+        <!-- Decorative gradient orb -->
+        <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20 pointer-events-none"
+          style="background: radial-gradient(circle, var(--color-accent-primary) 0%, transparent 70%); filter: blur(60px);"></div>
 
-    {/* Category filters */}
-    <span class="w-px h-6 bg-[var(--color-border)] mx-1 self-center"></span>
-    {categories.map((cat) => (
-      <button
-        data-filter={`cat-${cat.id}`}
-        class="feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors text-[var(--color-text-muted)] border-[var(--color-border)] hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30"
-      >
-        {cat.name}
-      </button>
-    ))}
-  </div>
-
-  <!-- ═══ SECTION 1: Qinnovate Blog Posts ═══ -->
-  <div id="section-blogs">
-    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">From Qinnovate</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-16" id="feed-blogs">
-      {blogItems.map((item) => {
-        const dataCategory = inferCategory(item.tags);
-        return (
-          <div data-type="publication" data-category={dataCategory}>
-            <FeedCard item={item} />
-          </div>
-        );
-      })}
-    </div>
-  </div>
-
-  <!-- ═══ SECTION 2: Field Journals ═══ -->
-  <div id="section-journals">
-    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2 reveal section-heading">Field Journals</h2>
-    <p class="text-sm text-[var(--color-text-muted)] mb-6 reveal journal-desc">
-      First-person research observations from the <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">QIF Field Journal</a>. These entries were originally written on the dates shown and retroactively published as blog posts.
-    </p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger mb-16" id="feed-journals">
-      {fieldJournalItems.map((item) => {
-        const source = (item as any).source;
-        const dateObj = new Date(item.date);
-        const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-        return (
-          <div data-type="field-journal" data-category="research">
-            <a href={`/research/papers/${item.slug}/`} class="block group">
-              <article class="glass rounded-xl p-6 card-hover h-full flex flex-col" style="border-left: 3px solid var(--color-accent-secondary);">
-                <div class="flex items-center justify-between gap-2 mb-3">
-                  <div class="flex items-center gap-2">
-                    <span
-                      class="text-[10px] font-semibold px-2 py-0.5 rounded-full border"
-                      style="color: var(--color-accent-secondary); border-color: var(--color-accent-secondary); background: color-mix(in srgb, var(--color-accent-secondary) 8%, transparent);"
-                    >
-                      Field Journal
-                    </span>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-faint)]">
-                      Retroactively published
-                    </span>
-                  </div>
-                  <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] shrink-0">
-                    {formattedDate}
-                  </span>
-                </div>
-                <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] leading-snug mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
-                  {item.title}
-                </h3>
-                <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 line-clamp-2 flex-1">
-                  {item.excerpt}
-                </p>
-                <div class="flex items-center gap-3 text-xs text-[var(--color-text-faint)] mt-auto pt-3 border-t border-[var(--color-border)]">
-                  <span>{item.readTime}</span>
-                  {source && (
-                    <a
-                      href={source}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="ml-auto text-[var(--color-accent-primary)] hover:underline flex items-center gap-1"
-                      onclick="event.stopPropagation();"
-                    >
-                      Original source
-                      <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                      </svg>
-                    </a>
-                  )}
-                </div>
-              </article>
-            </a>
-          </div>
-        );
-      })}
-    </div>
-  </div>
-
-  <!-- ═══ SECTION 3: Industry & Intel ═══ -->
-  <div id="section-industry">
-    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-6 reveal section-heading">Industry &amp; Intel</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal reveal-stagger" id="feed-industry">
-      {industryItems.map((item) => {
-        const dataType = item.type;
-        const dataCategory = item.type === 'brief' ? item.category : item.category;
-        return (
-          <div data-type={dataType} data-category={dataCategory}>
-            <FeedCard item={item} />
-          </div>
-        );
-      })}
-    </div>
-  </div>
-
-  <!-- Intelligence Sources (collapsed) -->
-  <details class="mt-16 glass rounded-xl reveal">
-    <summary class="p-6 cursor-pointer text-lg font-semibold font-[family-name:var(--font-heading)] hover:text-[var(--color-accent-primary)] transition-colors select-none">
-      Intelligence Sources
-      <span class="text-xs text-[var(--color-text-faint)] font-normal ml-2">({categories.reduce((sum, c) => sum + c.sources.length, 0)} sources across {categories.length} categories)</span>
-    </summary>
-    <div class="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {categories.map((cat) => (
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-xl" style={`color: ${cat.color};`} set:html={cat.icon} />
-            <h3 class="text-base font-semibold font-[family-name:var(--font-heading)]">{cat.name}</h3>
-          </div>
-          <p class="text-sm text-[var(--color-text-muted)] mb-4">{cat.description}</p>
-          <ul class="space-y-2">
-            {cat.sources.map((src) => (
-              <li>
-                <a
-                  href={src.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors flex items-center gap-1.5"
-                >
-                  {src.name}
-                  <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                  </svg>
-                </a>
-              </li>
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full"
+              style="background: rgba(59,130,246,0.15); color: var(--color-accent-primary); border: 1px solid rgba(59,130,246,0.2); backdrop-filter: blur(8px);">
+              Latest
+            </span>
+            <span class="text-xs text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">{fmtDate(featured.date)}</span>
+            {featured.tags.slice(0, 3).map((tag) => (
+              <span class="text-[10px] px-2 py-0.5 rounded-full text-[var(--color-text-muted)]"
+                style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+                {tag}
+              </span>
             ))}
-          </ul>
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-heading)] leading-tight mb-3 group-hover:text-[var(--color-accent-primary)] transition-colors">
+            {featured.title}
+          </h1>
+          <p class="text-base text-[var(--color-text-muted)] max-w-2xl leading-relaxed line-clamp-2">
+            {featured.excerpt}
+          </p>
+          <div class="flex items-center gap-4 mt-4 text-xs text-[var(--color-text-faint)]">
+            <span>{featured.readTime}</span>
+            <span class="group-hover:text-[var(--color-accent-primary)] transition-colors flex items-center gap-1">
+              Read article
+              <svg class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </span>
+          </div>
         </div>
+      </article>
+    </a>
+  )}
+
+  <!-- ═══ FILTER BAR (liquid glass pill) ═══ -->
+  <div class="mb-10 reveal">
+    <div class="inline-flex flex-wrap gap-1.5 p-1.5 rounded-2xl" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.06);" id="feed-filters">
+      <button data-filter="all"
+        class="feed-btn text-xs font-medium px-4 py-2 rounded-xl transition-all bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]"
+        style="backdrop-filter: blur(8px);">
+        All ({totalCount})
+      </button>
+      <button data-filter="publication"
+        class="feed-btn text-xs font-medium px-4 py-2 rounded-xl transition-all text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/5">
+        Research ({blogItems.length})
+      </button>
+      <button data-filter="field-journal"
+        class="feed-btn text-xs font-medium px-4 py-2 rounded-xl transition-all text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/5">
+        Field Journals ({fieldJournalItems.length})
+      </button>
+      <button data-filter="industry"
+        class="feed-btn text-xs font-medium px-4 py-2 rounded-xl transition-all text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/5">
+        Industry ({industryItems.length})
+      </button>
+
+      <span class="w-px h-6 self-center mx-1" style="background: rgba(255,255,255,0.08);"></span>
+
+      {categories.map((cat) => (
+        <button data-filter={`cat-${cat.id}`}
+          class="feed-btn text-xs font-medium px-3 py-2 rounded-xl transition-all text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/5">
+          {cat.name}
+        </button>
       ))}
     </div>
-  </details>
-
-  <!-- Subscribe Section -->
-  <div class="mt-16 glass rounded-xl p-8 reveal">
-    <div class="max-w-xl mx-auto text-center">
-      <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">Stay Informed</h2>
-      <p class="text-sm text-[var(--color-text-muted)] mb-6">
-        No spam. Neural security intel, delivered when it matters.
-      </p>
-
-      <form
-        action="https://buttondown.com/api/emails/embed-subscribe/qinnovate"
-        method="post"
-        target="_blank"
-        class="flex flex-col sm:flex-row gap-3 mb-4"
-      >
-        <input
-          type="email"
-          name="email"
-          placeholder="your@email.com"
-          required
-          class="flex-1 px-4 py-2.5 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-faint)] text-sm focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors"
-        />
-        <button
-          type="submit"
-          class="px-6 py-2.5 rounded-lg bg-[var(--color-accent-primary)] text-[var(--color-bg-primary)] text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer"
-        >
-          Subscribe
-        </button>
-      </form>
-
-      <a
-        href="/rss.xml"
-        class="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors"
-      >
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
-        </svg>
-        Subscribe via RSS
-      </a>
-    </div>
   </div>
+
+  <!-- ═══ MAIN GRID: 2/3 content + 1/3 sidebar ═══ -->
+  <div class="lg:grid lg:grid-cols-[1fr_340px] lg:gap-8">
+
+    <!-- LEFT COLUMN: Articles -->
+    <div>
+
+      <!-- ═══ SECTION 1: Research Articles ═══ -->
+      <div id="section-blogs">
+        <div class="flex items-center gap-3 mb-6 reveal">
+          <div class="w-1 h-6 rounded-full bg-[var(--color-accent-primary)]"></div>
+          <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] section-heading">Research</h2>
+          <div class="flex-1 h-px" style="background: linear-gradient(90deg, rgba(59,130,246,0.2) 0%, transparent 100%);"></div>
+        </div>
+
+        <div class="space-y-4 reveal mb-12" id="feed-blogs">
+          {remainingBlog.map((item) => {
+            const dataCategory = inferCategory(item.tags);
+            return (
+              <div data-type="publication" data-category={dataCategory}>
+                <a href={`/research/papers/${item.slug}/`} class="block group">
+                  <article class="rounded-xl p-5 flex gap-5 transition-all hover:scale-[1.005]"
+                    style="background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 2px 8px rgba(0,0,0,0.06);"
+                    onmouseenter="this.style.background='rgba(59,130,246,0.04)'; this.style.borderColor='rgba(59,130,246,0.15)'"
+                    onmouseleave="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.05)'">
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2 mb-2">
+                        {item.tags.slice(0, 2).map((tag) => (
+                          <span class="text-[10px] font-medium px-2 py-0.5 rounded-full"
+                            style="background: rgba(59,130,246,0.08); color: var(--color-accent-primary); border: 1px solid rgba(59,130,246,0.12);">
+                            {tag}
+                          </span>
+                        ))}
+                        <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] ml-auto shrink-0">{fmtDate(item.date)}</span>
+                      </div>
+                      <h3 class="text-base font-semibold leading-snug mb-1.5 group-hover:text-[var(--color-accent-primary)] transition-colors line-clamp-2">
+                        {item.title}
+                      </h3>
+                      <p class="text-sm text-[var(--color-text-muted)] line-clamp-2 leading-relaxed">{item.excerpt}</p>
+                      <span class="text-xs text-[var(--color-text-faint)] mt-2 inline-block">{item.readTime}</span>
+                    </div>
+                  </article>
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- ═══ SECTION 2: Industry & Intel ═══ -->
+      <div id="section-industry">
+        <div class="flex items-center gap-3 mb-6 reveal">
+          <div class="w-1 h-6 rounded-full bg-[var(--color-accent-secondary)]"></div>
+          <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] section-heading">Industry &amp; Intel</h2>
+          <div class="flex-1 h-px" style="background: linear-gradient(90deg, rgba(16,185,129,0.2) 0%, transparent 100%);"></div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 reveal" id="feed-industry">
+          {industryItems.slice(0, 12).map((item) => {
+            const dataType = item.type;
+            const dataCategory = item.category;
+            const isExternal = item.type === 'external' || (item.type === 'brief' && item.url?.startsWith('http'));
+            const href = item.type === 'brief' ? item.url : item.url;
+            return (
+              <div data-type={dataType} data-category={dataCategory}>
+                <a href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined} class="block group">
+                  <article class="rounded-xl p-4 h-full flex flex-col transition-all"
+                    style="background: rgba(255,255,255,0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.04);"
+                    onmouseenter="this.style.background='rgba(16,185,129,0.03)'; this.style.borderColor='rgba(16,185,129,0.12)'"
+                    onmouseleave="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.04)'">
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full"
+                        style={`color: ${item.type === 'brief' ? item.categoryColor : 'var(--color-text-faint)'}; background: ${item.type === 'brief' ? `color-mix(in srgb, ${item.categoryColor} 10%, transparent)` : 'rgba(255,255,255,0.04)'}; border: 1px solid ${item.type === 'brief' ? `color-mix(in srgb, ${item.categoryColor} 20%, transparent)` : 'rgba(255,255,255,0.06)'};`}>
+                        {item.type === 'brief' ? item.categoryName : 'External'}
+                      </span>
+                      <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)] ml-auto">{fmtDate(item.date)}</span>
+                    </div>
+                    <h3 class="text-sm font-semibold leading-snug mb-1.5 group-hover:text-[var(--color-accent-primary)] transition-colors line-clamp-2 flex-1">
+                      {item.title}
+                      {isExternal && (
+                        <svg class="inline w-2.5 h-2.5 ml-1 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                      )}
+                    </h3>
+                    <p class="text-xs text-[var(--color-text-muted)] line-clamp-2 leading-relaxed">
+                      {item.type === 'brief' ? item.summary : item.summary}
+                    </p>
+                  </article>
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="hidden lg:block">
+      <div class="sticky top-24 space-y-6">
+
+        <!-- Field Journals panel -->
+        <div id="section-journals" class="rounded-2xl p-5" style="background: rgba(255,255,255,0.02); backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-1 h-5 rounded-full" style="background: var(--color-accent-secondary);"></div>
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] section-heading">Field Journals</h3>
+          </div>
+          <div class="space-y-3" id="feed-journals">
+            {topJournals.map((item) => {
+              const source = (item as any).source;
+              return (
+                <div data-type="field-journal" data-category="research">
+                  <a href={`/research/papers/${item.slug}/`} class="block group">
+                    <div class="rounded-lg p-3 transition-all"
+                      style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);"
+                      onmouseenter="this.style.background='rgba(139,92,246,0.04)'; this.style.borderColor='rgba(139,92,246,0.15)'"
+                      onmouseleave="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.04)'">
+                      <span class="text-[10px] text-[var(--color-text-faint)] font-[family-name:var(--font-mono)]">{fmtDate(item.date)}</span>
+                      <h4 class="text-sm font-medium leading-snug mt-1 group-hover:text-[var(--color-accent-primary)] transition-colors line-clamp-2">
+                        {item.title}
+                      </h4>
+                    </div>
+                  </a>
+                </div>
+              );
+            })}
+            {remainingJournals.length > 0 && (
+              <a href="#" class="text-xs text-[var(--color-accent-primary)] hover:underline flex items-center gap-1 pl-3 pt-1"
+                id="show-all-journals">
+                View all {fieldJournalItems.length} entries
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            )}
+          </div>
+        </div>
+
+        <!-- Live stats ticker -->
+        <div class="rounded-2xl p-5" style="background: rgba(255,255,255,0.02); backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(255,255,255,0.06);">
+          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+            Live Metrics
+          </h3>
+          <div class="space-y-3">
+            {[
+              { label: 'Research Articles', value: String(blogItems.length), color: 'var(--color-accent-primary)' },
+              { label: 'Field Journals', value: String(fieldJournalItems.length), color: 'var(--color-accent-secondary)' },
+              { label: 'Intel Sources', value: String(categories.reduce((sum, c) => sum + c.sources.length, 0)), color: 'var(--color-accent-tertiary)' },
+              { label: 'Industry Items', value: String(industryItems.length), color: '#f59e0b' },
+            ].map((stat) => (
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-[var(--color-text-muted)]">{stat.label}</span>
+                <span class="text-sm font-bold font-[family-name:var(--font-mono)]" style={`color: ${stat.color};`}>{stat.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Subscribe (compact) -->
+        <div class="rounded-2xl p-5" style="background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(139,92,246,0.04) 100%); backdrop-filter: blur(16px); border: 1px solid rgba(59,130,246,0.1);">
+          <h3 class="text-sm font-semibold mb-2">Stay Informed</h3>
+          <p class="text-xs text-[var(--color-text-muted)] mb-3">Neural security intel, delivered when it matters.</p>
+          <form action="https://buttondown.com/api/emails/embed-subscribe/qinnovate" method="post" target="_blank" class="space-y-2">
+            <input type="email" name="email" placeholder="your@email.com" required
+              class="w-full px-3 py-2 rounded-lg text-sm bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors" />
+            <button type="submit"
+              class="w-full px-4 py-2 rounded-lg bg-[var(--color-accent-primary)] text-[var(--color-bg-primary)] text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer">
+              Subscribe
+            </button>
+          </form>
+          <a href="/rss.xml" class="inline-flex items-center gap-1 text-xs text-[var(--color-text-faint)] hover:text-[var(--color-accent-primary)] mt-2 transition-colors">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/></svg>
+            RSS
+          </a>
+        </div>
+
+        <!-- Intel Sources (compact) -->
+        <details class="rounded-2xl" style="background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05);">
+          <summary class="p-4 cursor-pointer text-sm font-semibold hover:text-[var(--color-accent-primary)] transition-colors select-none flex items-center justify-between">
+            Intel Sources
+            <span class="text-[10px] text-[var(--color-text-faint)] font-normal">{categories.reduce((sum, c) => sum + c.sources.length, 0)}</span>
+          </summary>
+          <div class="px-4 pb-4 space-y-4">
+            {categories.map((cat) => (
+              <div>
+                <p class="text-xs font-semibold mb-1.5" style={`color: ${cat.color};`}>{cat.name}</p>
+                <ul class="space-y-1">
+                  {cat.sources.map((src) => (
+                    <li>
+                      <a href={src.url} target="_blank" rel="noopener noreferrer"
+                        class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors">
+                        {src.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </details>
+
+      </div>
+    </aside>
+  </div>
+
 </PageLayout>
 
 <script>
@@ -326,20 +405,16 @@ function inferCategory(tags: string[]): string {
   const industryCards = document.querySelectorAll<HTMLElement>('#feed-industry > div');
   const allCards = [...blogCards, ...journalCards, ...industryCards];
 
-  const activeClass = 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30';
-  const inactiveClass = 'text-[var(--color-text-muted)] border-[var(--color-border)]';
+  const activeStyle = 'feed-btn text-xs font-medium px-4 py-2 rounded-xl transition-all bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]';
+  const inactiveStyle = 'feed-btn text-xs font-medium px-4 py-2 rounded-xl transition-all text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)]/5';
 
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter!;
 
-      // Update button styles
-      buttons.forEach((b) => {
-        b.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${inactiveClass} hover:text-[var(--color-accent-primary)] hover:border-[var(--color-accent-primary)]/30`;
-      });
-      btn.className = `feed-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${activeClass}`;
+      buttons.forEach((b) => b.className = inactiveStyle);
+      btn.className = activeStyle;
 
-      // Section visibility map
       const sectionMap: Record<string, string[]> = {
         'all': ['blogs', 'journals', 'industry'],
         'publication': ['blogs'],
@@ -347,16 +422,13 @@ function inferCategory(tags: string[]): string {
         'industry': ['industry'],
       };
 
-      // For category filters, show all sections but filter cards
       const isCategory = filter.startsWith('cat-');
       const visibleSections = isCategory ? ['blogs', 'journals', 'industry'] : (sectionMap[filter] || ['blogs', 'journals', 'industry']);
 
-      // Show/hide sections
       for (const [key, el] of Object.entries(sections)) {
         if (el) el.style.display = visibleSections.includes(key) ? '' : 'none';
       }
 
-      // Filter cards within visible sections
       if (filter === 'all') {
         allCards.forEach((c) => c.style.display = '');
       } else if (isCategory) {
@@ -365,7 +437,6 @@ function inferCategory(tags: string[]): string {
           c.style.display = c.dataset.category === catId ? '' : 'none';
         });
       } else {
-        // Section-level filtering already handles visibility
         blogCards.forEach((c) => c.style.display = '');
         journalCards.forEach((c) => c.style.display = '');
         industryCards.forEach((c) => c.style.display = '');
