@@ -45,6 +45,12 @@ const BRAIN_REGIONS = [
 
 // ═══ Clinical domain definitions (reused from therapeutics page) ═══
 
+// TODO: migrate to var(--color-clinical-*) CSS custom properties from global.css
+// These colors are used at build time (Astro SSR) so they can't reference CSS vars directly.
+// To migrate: switch to data-domain attributes + CSS selectors, or use a shared color constants module
+// that is also used to generate the CSS custom properties.
+// Canonical tokens: --color-clinical-movement, --color-clinical-seizure, --color-clinical-mood,
+// --color-clinical-cognitive, --color-clinical-pain, --color-clinical-sleep, --color-clinical-comms
 const CLINICAL_DOMAINS = [
   { id: 'movement', label: 'Movement & Motor', color: '#22c55e', keywords: ['parkinson', 'tremor', 'dystonia', 'motor', 'paralysis', 'spinal cord', 'stroke', 'gait', 'spasticity', 'tetraplegia', 'limb prosth', 'multiple sclerosis motor', 'balance', 'movement disorder', 'FES'] },
   { id: 'seizure', label: 'Seizure & Epilepsy', color: '#ef4444', keywords: ['epilepsy', 'seizure', 'excitab', 'status epilepticus'] },
@@ -96,7 +102,7 @@ function buildSecurityView(): BrainView {
     const threats = getThreatsForRegion(region.id);
     const count = threats.length;
 
-    // Color by severity — red / orange / yellow (consistent across all views)
+    // TODO: migrate to var(--color-severity-*) — build-time code, can't use CSS vars directly
     const color =
       count >= 40 ? '#ef4444'
       : count >= 25 ? '#f97316'
