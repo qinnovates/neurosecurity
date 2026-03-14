@@ -156,8 +156,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     const W = 640;
     const H = 480;
-    // Extended grid: wider for hero variant to fill widescreen
-    const GRID_W = isGreen ? W : Math.round(W * 2.2);
+    const GRID_W = W;
 
     // Scene
     const scene = new THREE.Scene();
@@ -165,11 +164,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
     const ch = container.clientHeight;
     const camera = new THREE.PerspectiveCamera(50, cw / ch, 1, 10000);
     camera.position.set(0, 0, 500);
-    // Shift view right for hero: offset the frustum so cloud appears right-aligned
-    if (!isGreen) {
-      const shift = Math.round(cw * 0.3);
-      camera.setViewOffset(cw, ch, -shift, 0, cw, ch);
-    }
     const center = new THREE.Vector3(0, 0, -1000);
 
     // Video element with webm + mp4 fallback
@@ -182,10 +176,10 @@ export default function KinectVision({ className = '', fullBleed = false, varian
 
     // Try webm first, fallback to mp4
     const sourceWebm = document.createElement('source');
-    sourceWebm.src = isGreen ? '/videos/service-dog.webm' : '/videos/IMG_3445_wide.webm';
+    sourceWebm.src = isGreen ? '/videos/service-dog.webm' : '/videos/IMG_3445.webm';
     sourceWebm.type = 'video/webm';
     const sourceMp4 = document.createElement('source');
-    sourceMp4.src = isGreen ? '/videos/service-dog.mp4' : '/videos/IMG_3445_wide.mp4';
+    sourceMp4.src = isGreen ? '/videos/service-dog.mp4' : '/videos/IMG_3445.mp4';
     sourceMp4.type = 'video/mp4';
     video.appendChild(sourceWebm);
     video.appendChild(sourceMp4);
@@ -266,10 +260,6 @@ export default function KinectVision({ className = '', fullBleed = false, varian
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
-      if (!isGreen) {
-        const shift = Math.round(w * 0.3);
-        camera.setViewOffset(w, h, -shift, 0, w, h);
-      }
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
