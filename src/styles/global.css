@@ -43,12 +43,37 @@
   --color-text-faint: #71717a;
   --color-border: rgba(255, 255, 255, 0.06);
   --color-border-hover: rgba(255, 255, 255, 0.12);
-  --color-glass-bg: rgba(255, 255, 255, 0.04);
-  --color-glass-border: rgba(255, 255, 255, 0.06);
+  --color-glass-bg: rgba(255, 255, 255, 0.035);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
   --color-glow-primary: rgba(59, 130, 246, 0.2);
   --color-glow-secondary: rgba(6, 182, 212, 0.15);
   --color-glow-tertiary: rgba(139, 92, 246, 0.15);
   color-scheme: dark;
+}
+
+/* ═══ Command Center Grid Overlay (Dark Mode Only) ═══ */
+:root[data-theme="dark"] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dark mode glass enhancements */
+:root[data-theme="dark"] .glass {
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.04);
+}
+:root[data-theme="dark"] .glass:hover {
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.08), 0 0 20px rgba(59, 130, 246, 0.06);
+}
+
+/* Dark mode mono typography */
+:root[data-theme="dark"] .font-mono {
+  letter-spacing: 0.03em;
+  font-feature-settings: 'liga' 0, 'calt' 0;
 }
 
 /* ═══ Variable Fonts ═══ */
@@ -101,6 +126,18 @@ body {
   border: 1px solid var(--color-glass-border);
 }
 
+/* Light mode glass refinement — premium depth */
+:root:not([data-theme="dark"]) .glass {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04),
+              0 4px 12px rgba(0, 0, 0, 0.03),
+              inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+:root:not([data-theme="dark"]) .glass:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06),
+              0 8px 24px rgba(0, 0, 0, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
 .nav-dropdown {
   background: rgba(255, 255, 255, 0.92);
 }
@@ -126,9 +163,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: var(--color-text-primary);
 }
+h1 { letter-spacing: -0.03em; }
 
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
@@ -158,8 +196,8 @@ code, pre {
 }
 
 .card-hover:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08), 0 0 16px var(--color-glow-primary);
+  transform: translateY(-3px) scale(1.005);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--color-accent-primary);
   border-color: var(--color-accent-primary);
 }
 
@@ -316,8 +354,8 @@ code, pre {
 /* ═══ Scroll Reveal Animations ═══ */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.revealed {
