@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-03-13T01:42:14.220Z",
+  "last_updated": "2026-03-14T01:28:57.898Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -11,7 +11,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/deploy.yml",
       "status": "active",
-      "last_triggered": "2026-03-13T01:40:13Z",
+      "last_triggered": "2026-03-14T01:23:34Z",
       "last_status": "success",
       "dependencies": [
         "src/",
@@ -31,7 +31,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/changelog.yml",
       "status": "active",
-      "last_triggered": "2026-03-13T01:39:34Z",
+      "last_triggered": "2026-03-14T01:22:51Z",
       "last_status": "success",
       "dependencies": [
         "scripts/changelog-update.mjs",
@@ -52,7 +52,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": "2026-03-12T15:35:22Z",
+      "last_triggered": "2026-03-14T00:24:53Z",
       "last_status": "success",
       "dependencies": [
         ".github/security-audit/scripts/audit.py",
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-03-12T17:40:35Z",
+      "last_triggered": "2026-03-13T17:26:26Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -91,7 +91,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/verify-citations.yml",
       "status": "active",
-      "last_triggered": "2026-03-13T00:11:55Z",
+      "last_triggered": "2026-03-14T01:16:14Z",
       "last_status": "failure",
       "dependencies": [
         "scripts/verify/run_all.py",
@@ -135,7 +135,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/timeline-check.yml",
       "status": "active",
-      "last_triggered": "2026-03-13T01:39:32Z",
+      "last_triggered": "2026-03-14T01:22:48Z",
       "last_status": "success",
       "dependencies": [
         "scripts/timeline-check.mjs",
@@ -154,7 +154,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/dependabot-auto-merge.yml",
       "status": "active",
-      "last_triggered": "2026-03-12T15:35:13Z",
+      "last_triggered": "2026-03-14T00:24:37Z",
       "last_status": "failure",
       "dependencies": [
         "Dependabot PRs"
@@ -172,7 +172,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/field-journal-blog.yml",
       "status": "active",
-      "last_triggered": "2026-03-07T07:38:51Z",
+      "last_triggered": "2026-03-14T01:15:11Z",
       "last_status": "success",
       "dependencies": [
         "scripts/field-journal-to-blog.mjs",
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-03-13T01:41:43Z",
+      "last_triggered": "2026-03-14T01:28:30Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
