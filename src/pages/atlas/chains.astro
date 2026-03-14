@@ -1,0 +1,28 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import AttackChainViz from '../../components/atlas/AttackChainViz';
+import fs from 'node:fs';
+import path from 'node:path';
+
+let chainData: { chains: any[] } = { chains: [] };
+try {
+  const raw = fs.readFileSync(path.resolve('shared/tara-chains.json'), 'utf-8');
+  chainData = JSON.parse(raw);
+} catch {
+  // Fall through with empty chains
+}
+---
+<PageLayout title="Attack Chains | Qinnovate" breadcrumbs={[{label:'Atlas',href:'/atlas/'},{label:'Attack Chains'}]}>
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--color-text-primary)">Attack Chains</h1>
+    <p class="text-sm mb-8" style="color: var(--color-text-muted)">Multi-step attack sequences traversing silicon to biological domains</p>
+    {chainData.chains.map((chain: any) => (
+      <div class="mb-12">
+        <AttackChainViz client:load chain={chain} />
+      </div>
+    ))}
+    {chainData.chains.length === 0 && (
+      <p style="color: var(--color-text-faint)">No chains defined yet.</p>
+    )}
+  </div>
+</PageLayout>

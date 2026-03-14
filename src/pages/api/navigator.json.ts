@@ -14,7 +14,8 @@ function severityToColor(severity: Severity): string {
 }
 
 export const GET: APIRoute = async () => {
-  const techniques = THREAT_VECTORS.map((t) => ({
+  const enrichedVectors = THREAT_VECTORS.filter((t) => t.enriched);
+  const techniques = enrichedVectors.map((t) => ({
     techniqueID: t.id,
     tactic: t.tactic,
     color: severityToColor(t.severity),

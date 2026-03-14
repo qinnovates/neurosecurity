@@ -4,9 +4,11 @@ import BrainVisualization from '@/components/brain/BrainVisualization.tsx';
 import EvidenceTierBanner from '../../../components/atlas/EvidenceTierBanner';
 import NissVectorChips from '../../../components/niss/NissVectorChips';
 import NissScoreBadge from '../../../components/niss/NissScoreBadge';
+import NissRadarChart from '../../../components/niss/NissRadarChart';
 import PinsBadge from '../../../components/niss/PinsBadge';
 import DriftBadge from '../../../components/tara/DriftBadge';
 import { THREAT_VECTORS, SEVERITY_COLORS } from '@/lib/threat-data';
+import { parseNiss } from '@/lib/niss-parser';
 import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, VALIDATION_TIERS } from '@/lib/validation-data';
 import type { ValidationTierId } from '@/lib/validation-data';
 import type { BrainView, BrainViewRegion } from '@/lib/brain-view-data';
@@ -104,6 +106,10 @@ function crbSeverityColor(sev: string): string {
 }
 
 const nissBase = threat.niss?.score ?? 0;
+let nissVector = null;
+try {
+  if (threat.niss?.vector) nissVector = parseNiss(threat.niss.vector);
+} catch { /* vector may be empty or unparseable */ }
 const populationRows = CRB_POPULATIONS.map(pop => {
   const adj = crbAdjust(nissBase, pop.crb);
   const baseSev = nissSeverity(nissBase);
@@ -258,6 +264,16 @@ const hasGovernance = nr || reg;
             <NissScoreBadge client:load score={threat.niss?.score ?? 0} severity={threat.niss?.severity ?? 'low'} />
           </div>
           {threat.niss?.pins && <PinsBadge client:load pins={true} size="md" showExplanation={true} />}
+          {nissVector && (
+            <div class="mt-4">
+              <NissRadarChart
+                client:load
+                vector={nissVector}
+                severity={threat.niss.severity || 'low'}
+                size={200}
+              />
+            </div>
+          )}
         </div>
 
         <!-- Governance & FDORA -->
