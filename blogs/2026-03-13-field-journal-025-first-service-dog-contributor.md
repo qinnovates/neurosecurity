@@ -24,6 +24,8 @@ It took about twenty minutes. Treat on the key. Paw on the treat. Paw on the key
 
 He's officially Qinnovate's first service dog contributor.
 
+One small paw for dogs. One giant leap for mankind.
+
 I know how that sounds. But here's the thing that got me.
 
 The entire vision restoration pipeline exists so that someone who has never seen their service dog can finally see them. That's not an abstraction. That's a person and their dog. The dog guides them across streets, alerts them to obstacles, gives them independence. And the person has never seen the face of the animal that does all of that for them.
