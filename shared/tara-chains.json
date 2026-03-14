@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "chains": [
+    {
+      "chain_id": "CHAIN-VIS-001",
+      "chain_name": "Vision prosthesis calibration compromise",
+      "objective": "Permanently corrupt patient's visual perception mapping during prosthesis calibration period",
+      "drift_profile": "C\u2192P (cumulative calibration poisoning becomes persistent neural rewiring)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0057",
+          "tara_alias": "TARA-SIL-R-006",
+          "role": "reconnaissance",
+          "action": "Map BCI network topology and identify calibration endpoints",
+          "detection_window": "passive \u2014 no patient-visible effect"
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0049",
+          "tara_alias": "TARA-SIL-M-012",
+          "role": "initial_access",
+          "action": "Bypass wireless authentication to gain device control",
+          "detection_window": "device logs show unauthorized connection"
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0058",
+          "tara_alias": "TARA-SIL-M-014",
+          "role": "pivot",
+          "action": "Poison calibration parameters during prosthesis learning phase",
+          "detection_window": "subtle \u2014 patient may notice slightly off percepts"
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0067",
+          "tara_alias": "TARA-VIS-M-001",
+          "role": "objective",
+          "action": "Inject false visual percepts aligned with corrupted calibration",
+          "detection_window": "patient perceives incorrect scene \u2014 may attribute to prosthesis limitations"
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0062",
+          "tara_alias": "TARA-COG-M-009",
+          "role": "persistence",
+          "action": "Gradual drift ensures neural adaptation encodes corrupted mapping permanently",
+          "detection_window": "months \u2014 by the time drift is noticed, neuroplastic changes are structural"
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Normal prosthesis calibration and adaptation",
+        "note": "camera\u2192processing\u2192calibration\u2192perception\u2192adaptation. The attack exploits the same pipeline the therapy requires."
+      },
+      "defenses": [
+        "Cryptographic device authentication (breaks step 2)",
+        "Calibration checksum validation (breaks step 3)",
+        "Cs coherence monitoring during calibration window (detects step 4)",
+        "Longitudinal perception testing against ground truth (detects step 5)"
+      ]
+    }
+  ]
+}

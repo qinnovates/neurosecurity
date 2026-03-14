@@ -95,7 +95,10 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
         var path = window.location.pathname;
         var isVisionPage = path.startsWith('/vision');
         var vision = isVisionPage && localStorage.getItem('bci-vision') === 'on';
-        document.documentElement.setAttribute('data-theme', vision ? 'dark' : 'light');
+        // Theme: vision pages force dark when vision is on, otherwise use saved preference or system
+        var savedTheme = localStorage.getItem('theme');
+        var theme = vision ? 'dark' : (savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
         var lens = localStorage.getItem('qif-lens') || 'security';
         document.documentElement.setAttribute('data-lens', lens);

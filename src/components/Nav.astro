@@ -1,5 +1,6 @@
 ---
 import Search from 'astro-pagefind/components/Search';
+import ThemeToggle from './ThemeToggle.astro';
 import LensToggle from './LensToggle.tsx';
 import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
@@ -172,6 +173,7 @@ const navSections: NavSection[] = [
 
       <!-- Right side -->
       <div class="flex items-center gap-2">
+        <ThemeToggle />
         <LensToggle client:idle />
         <!-- BCI Vision toggle -->
         <a
