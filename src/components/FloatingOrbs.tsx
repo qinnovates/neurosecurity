@@ -67,6 +67,20 @@ export default function FloatingOrbs() {
         }}
       />
 
+      {/* Cyan accent — lower right */}
+      <div
+        style={{
+          position: 'absolute',
+          width: '400px',
+          height: '400px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(6,182,212,0.08) 0%, rgba(6,182,212,0.02) 40%, transparent 65%)',
+          bottom: '15%',
+          right: '10%',
+          animation: 'orbDrift2 60s ease-in-out infinite reverse',
+        }}
+      />
+
       {/* Keyframes in global.css — drift + hue-rotate for blue↔magenta shift */}
     </div>
   );
