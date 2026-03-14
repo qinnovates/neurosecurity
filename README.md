@@ -71,6 +71,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
 | **[Runemate](https://qinnovate.com/tools/runemate/)** | Native DSL compiler (67.8% compression in simulation) | v1.0 Compiler |
 | **[Security Guardrails](qif-framework/qif-sec-guardrails.md)** | Physics-derived defense architecture for BCIs | Concept |
+| **[Knight's Watch](https://qinnovate.com/vision/)** | Opt-in community deterrence mesh for missing children and anti-trafficking. Privacy-first (no raw data leaves device), COPPA-compliant by architecture, blockchain-auditable participation. Inherits NSP/Neurowall/Runemate stack | Concept |
 
 ### Tools
 
