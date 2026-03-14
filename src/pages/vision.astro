@@ -15,8 +15,22 @@ const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therap
 const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
 ---
 
-<BaseLayout title="BCI Vision — Qinnovate" description="AI taught neuroscience how the brain works. Security engineering will teach it how to protect what it builds.">
+<BaseLayout title="BCI Vision — Qinnovate" description="Nobody should go through what I lived through. I will not stop until I build a world where we can feel safe." ogImage="/images/og-bci-vision.png">
   <Nav />
+
+  <!-- Scroll progress indicator -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] z-50" style="width: 0%; background: linear-gradient(to right, #3b82f6, #8b5cf6, #22c55e);"></div>
+  <script is:inline>
+    (function() {
+      var bar = document.getElementById('scroll-progress');
+      window.addEventListener('scroll', function() {
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+      });
+    })();
+  </script>
 
   <script is:inline>
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -85,6 +99,7 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
         <p class="reveal-elastic text-base" style="transition-delay: 600ms;">But vision restoration is just the beginning. {therapeuticCount} of {totalThreats} attack techniques have therapeutic counterparts. Blindness. Parkinson's. Depression. Tinnitus. Dementia. Every one of these conditions has a security counterpart in the atlas — and every one of them deserves the same protection.</p>
         <p class="reveal-elastic text-base" style="transition-delay: 700ms;">That's why this framework is open source. Not because it's finished — because it can't be finished by one person. The world needs to explore what's here.</p>
         <p class="reveal-elastic text-center text-xl font-semibold text-[var(--color-text-primary)]" style="transition-delay: 800ms;">Help those who need us the most, first.<br/>I will never lose sight of that north star.</p>
+        <p class="reveal-elastic text-center mt-4" style="transition-delay: 900ms;"><a href="/research/papers/2026-02-06-field-journal-004-the-all-nighter-seven-layers-neural-protocols-and-the-vision/" class="text-xs text-[var(--color-accent-primary)] hover:underline">Read the all-night session that started this &rarr;</a></p>
       </div>
     </div>
 
@@ -316,6 +331,7 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
           Same electrode. Same current. Same physics.<br/>
           <span class="bg-gradient-to-r from-red-500 via-amber-500 to-emerald-500 bg-clip-text text-transparent">Different intent.</span>
         </p>
+        <p class="reveal-elastic mt-4" style="transition-delay: 750ms;"><a href="/research/papers/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/" class="text-xs text-[var(--color-accent-primary)] hover:underline">Read how the dual-use discovery unfolded &rarr;</a></p>
       </div>
 
       <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto reveal">
@@ -382,14 +398,22 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto mb-12 reveal">
         <p class="text-[var(--color-text-muted)] leading-relaxed mb-6">A threat registry that is also a capabilities catalog for medicine. I did not plan this. The physics showed it.</p>
-        <p class="text-[var(--color-text-muted)] leading-relaxed mb-6"><span class="text-[var(--color-text-primary)] font-semibold">Therapeutic Atlas of Risks and Applications.</span> Therapeutics leads. "Atlas" signals exploration. "Risks" instead of "exploits" — the people funding this work should see a map, not a weapon.</p>
-        <p class="text-[var(--color-text-muted)] leading-relaxed"><span class="text-amber-500">Tara</span> (तारा) means "star" in Sanskrit. In Tibetan Buddhism, Tara is the bodhisattva of compassion and protection. Therapeutic use is the default. Adversarial use is the deviation — following the IAEA model where peaceful use is presumed.</p>
+        <details class="glass rounded-xl overflow-hidden mt-2" style="border-color: rgba(245,158,11,0.15); background: rgba(245,158,11,0.03);">
+          <summary class="cursor-pointer px-6 py-4 flex items-center gap-3 text-[var(--color-text-primary)] font-semibold select-none hover:bg-[rgba(245,158,11,0.05)] transition-colors list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-amber-500 transition-transform duration-300 text-xs tara-chevron">&#9654;</span>
+            <span>Why the name Tara? (तारा)</span>
+          </summary>
+          <div class="px-6 pb-5 pt-3 border-t border-[rgba(245,158,11,0.1)]">
+            <p class="text-[var(--color-text-muted)] leading-relaxed mb-4"><span class="text-[var(--color-text-primary)] font-semibold">Therapeutic Atlas of Risks and Applications.</span> Therapeutics leads. "Atlas" signals exploration. "Risks" instead of "exploits" — the people funding this work should see a map, not a weapon.</p>
+            <p class="text-[var(--color-text-muted)] leading-relaxed"><span class="text-amber-500">Tara</span> (तारा) means "star" in Sanskrit. In Tibetan Buddhism, Tara is the bodhisattva of compassion and protection. Therapeutic use is the default. Adversarial use is the deviation — following the IAEA model where peaceful use is presumed.</p>
+          </div>
+        </details>
       </div>
 
       <!-- Attack ↔ Therapy visualization -->
       <div class="max-w-3xl mx-auto reveal">
-        <div class="grid grid-cols-[1fr_auto_1fr] gap-0 items-stretch">
-          <div class="rounded-l-xl p-5 space-y-4" style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15);">
+        <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-0 items-stretch">
+          <div class="rounded-t-xl sm:rounded-t-none sm:rounded-l-xl p-5 space-y-4" style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15);">
             <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-red-500 mb-3">Attack Vector</p>
             {[
               { name: 'Signal Injection', desc: 'Spoof identity via electrode' },
@@ -399,14 +423,13 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
               <div><p class="text-xs font-semibold text-red-400">{t.name}</p><p class="text-[10px] text-[var(--color-text-faint)]">{t.desc}</p></div>
             ))}
           </div>
-          <div class="flex flex-col items-center justify-center px-3 sm:px-6 relative" style="background: rgba(245,158,11,0.04);">
-            <div class="w-px h-full absolute" style="background: linear-gradient(to bottom, rgba(239,68,68,0.3), rgba(245,158,11,0.5), rgba(16,185,129,0.3));"></div>
-            <div class="relative z-10 bg-[var(--color-bg-deep)] rounded-lg px-2 py-3 text-center border border-amber-500/20">
-              <p class="text-[9px] font-mono tracking-wider uppercase text-amber-500">Same</p>
-              <p class="text-[9px] font-mono tracking-wider uppercase text-amber-500">Physics</p>
+          <div class="flex flex-row sm:flex-col items-center justify-center py-3 sm:py-0 px-6 sm:px-6 relative" style="background: rgba(245,158,11,0.04);">
+            <div class="h-px w-full sm:h-full sm:w-px absolute" style="background: linear-gradient(to right, rgba(239,68,68,0.3), rgba(245,158,11,0.5), rgba(16,185,129,0.3));"></div>
+            <div class="relative z-10 bg-[var(--color-bg-deep)] rounded-lg px-3 py-2 sm:px-2 sm:py-3 text-center border border-amber-500/20">
+              <p class="text-[9px] font-mono tracking-wider uppercase text-amber-500 sm:mb-0">Same Physics</p>
             </div>
           </div>
-          <div class="rounded-r-xl p-5 space-y-4" style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.15);">
+          <div class="rounded-b-xl sm:rounded-b-none sm:rounded-r-xl p-5 space-y-4" style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.15);">
             <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-emerald-500 mb-3">Therapeutic Application</p>
             {[
               { name: 'Deep Brain Stimulation', desc: '160,000 Parkinson\'s patients' },
@@ -435,7 +458,7 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
       </div>
 
       <!-- Pipeline flow -->
-      <div class="max-w-3xl mx-auto mb-4 reveal">
+      <div class="max-w-3xl mx-auto mb-4" id="pipeline-flow">
         <div class="flex flex-col gap-0">
           {[
             { label: 'Depth Sensor + AI', band: 'S3', desc: 'Camera captures environment, AI reconstructs scene. The sensor itself is the hardware failsafe — it operates independently of AI, so if the model fails, raw depth data still flows', color: '#3b82f6', consent: 'What is captured' },
@@ -444,13 +467,13 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
             { label: 'Neurowall', band: 'I0', desc: 'Hardware-level signal integrity — amplitude bounds, rate limiting, immutable kernels', color: '#f59e0b', consent: 'What passes through' },
             { label: 'Visual Cortex', band: 'N7', desc: 'Patient perceives the world', color: '#22c55e', consent: 'What is perceived' },
           ].map((node, i) => (
-            <div class="flex items-stretch gap-4 group">
-              <div class="w-28 sm:w-36 shrink-0 flex items-center justify-end">
+            <div class="flex items-stretch gap-4 group pipeline-node" data-pipeline-index={i}>
+              <div class="hidden sm:flex w-28 sm:w-36 shrink-0 items-center justify-end">
                 <p class="text-[9px] font-mono text-right tracking-wider uppercase" style={`color: ${node.color}60;`}>{node.consent}</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-3 h-3 rounded-full ring-2 shrink-0" style={`background: ${node.color}; ring-color: ${node.color}40;`}></div>
-                {i < 4 && <div class="w-px flex-1 min-h-[40px]" style={`background: linear-gradient(to bottom, ${node.color}40, ${['#8b5cf6','#06b6d4','#f59e0b','#22c55e'][i]}40);`}></div>}
+                <div class="w-3 h-3 rounded-full ring-2 shrink-0 pipeline-dot" style={`background: ${node.color}; ring-color: ${node.color}40;`}></div>
+                {i < 4 && <div class="w-px flex-1 min-h-[40px] pipeline-line" style={`background: linear-gradient(to bottom, ${node.color}40, ${['#8b5cf6','#06b6d4','#f59e0b','#22c55e'][i]}40);`}></div>}
               </div>
               <div class="flex-1 pb-6">
                 <div class="flex items-center gap-2 mb-1">
@@ -521,6 +544,7 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
         <p class="text-lg"><strong class="text-[var(--color-text-primary)]">57 million people</strong> globally live with dementia. The brain has systems that survive what other systems can't — procedural memory persists when explicit memory is gone.</p>
         <p class="text-lg">If a BCI could one day support hippocampal function — help form new memories, reinforce fading ones — the security around that intervention would need to be absolute.</p>
         <p class="text-xl sm:text-2xl font-semibold text-[var(--color-text-primary)]">You don't get to be careless with someone's last remaining memories.</p>
+        <p class="mt-4"><a href="/research/papers/2026-02-09-field-journal-008-she-never-forgot-how-to-pray/" class="text-xs text-[var(--color-accent-primary)] hover:underline">Read Field Journal #008 &rarr;</a></p>
       </div>
 
       <div class="mt-12 glass rounded-2xl p-8 reveal" style="border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.03);">
@@ -689,6 +713,24 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
       }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
       elasticEls.forEach((el) => elasticObs.observe(el));
 
+      // Pipeline flow scroll animation
+      const pipelineNodes = document.querySelectorAll<HTMLElement>('.pipeline-node');
+      if (pipelineNodes.length > 0) {
+        const pipelineObs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const node = entry.target as HTMLElement;
+              const index = parseInt(node.dataset.pipelineIndex || '0', 10);
+              setTimeout(() => {
+                node.classList.add('pipeline-lit');
+              }, index * 200);
+              pipelineObs.unobserve(node);
+            }
+          });
+        }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
+        pipelineNodes.forEach((node) => pipelineObs.observe(node));
+      }
+
       document.querySelectorAll<HTMLElement>('.card-tilt').forEach((card) => {
         card.addEventListener('mousemove', (e) => {
           const rect = card.getBoundingClientRect();
@@ -704,6 +746,43 @@ const dualUsePercent = Math.round((therapeuticCount / totalThreats) * 100);
     initVisionMotion();
     document.addEventListener('astro:after-swap', initVisionMotion);
   </script>
+
+  <style>
+    /* Tara naming collapsible chevron */
+    details[open] .tara-chevron {
+      transform: rotate(90deg);
+    }
+
+    /* Pipeline scroll animation */
+    .pipeline-node {
+      opacity: 0.3;
+      transform: scale(0.97);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pipeline-node.pipeline-lit {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .pipeline-node .pipeline-dot {
+      transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pipeline-node.pipeline-lit .pipeline-dot {
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    .pipeline-node .pipeline-line {
+      opacity: 0;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+
+    .pipeline-node.pipeline-lit .pipeline-line {
+      opacity: 1;
+    }
+  </style>
 
   <Footer />
   <BciVisionToggle client:idle />
