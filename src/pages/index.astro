@@ -623,6 +623,43 @@ const essentialPosts = allPosts
           Explore Governance
         </a>
       </div>
+
+      <div class="mt-8 max-w-md mx-auto">
+        <p class="text-sm mb-3" style="color: var(--color-text-muted)">Get notified when the framework updates</p>
+        <form action="https://formspree.io/f/placeholder" method="POST" class="flex gap-2">
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="your@email.com"
+            class="flex-1 px-4 py-2.5 rounded-lg text-sm"
+            style="background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); color: var(--color-text-primary); backdrop-filter: blur(8px)"
+            aria-label="Email address for framework updates"
+          />
+          <button
+            type="submit"
+            class="px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            style="background: var(--color-accent-primary); color: white"
+          >
+            Notify me
+          </button>
+        </form>
+        <p class="text-xs mt-2" style="color: var(--color-text-faint)">No spam. Only major releases and research milestones.</p>
+      </div>
+
+      <div class="mt-4 text-center">
+        <button
+          onclick="navigator.clipboard.writeText(`@misc{qi2026qif,\n  author = {Qi, Kevin L.},\n  title = {QIF: Quantified Interconnection Framework for Brain-Computer Interface Security},\n  year = {2026},\n  doi = {10.5281/zenodo.18640105},\n  url = {https://qinnovate.com},\n  note = {Proposed framework, not yet peer-reviewed}\n}`).then(() => this.textContent = 'Copied!')"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-colors"
+          style="background: var(--color-bg-elevated); border: 1px solid var(--color-border); color: var(--color-text-muted)"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+          </svg>
+          Cite this work (BibTeX)
+        </button>
+      </div>
     </div>
   </section>
 

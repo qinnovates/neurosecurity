@@ -69,7 +69,8 @@ function convertToStix(threats: typeof THREAT_VECTORS) {
 }
 
 export const GET: APIRoute = async () => {
-    const stixBundle = convertToStix(THREAT_VECTORS);
+    const enrichedVectors = THREAT_VECTORS.filter((t) => t.enriched);
+    const stixBundle = convertToStix(enrichedVectors);
 
     return new Response(JSON.stringify(stixBundle, null, 2), {
         status: 200,

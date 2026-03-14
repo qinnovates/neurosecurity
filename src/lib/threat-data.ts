@@ -130,6 +130,8 @@ export interface ThreatVector {
   id: string;
   /** Display name */
   name: string;
+  /** Clinical-facing display name (from therapeutic analog, falls back to attack name) */
+  nameClinical: string;
   /** UI category for grid column */
   category: CategoryId;
   /** TARA Tactic ID (e.g. QIF-N.IJ) */
@@ -164,12 +166,15 @@ export interface ThreatVector {
   tara: TaraProjection | null;
   /** Physics feasibility tier (constraint system analysis) */
   physicsFeasibility: PhysicsFeasibility | null;
+  /** Whether this technique has full TARA enrichment (not a skeleton stub) */
+  enriched: boolean;
 }
 
 /** Transform registry techniques → ThreatVector[] */
 export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) => ({
   id: t.id,
   name: t.attack,
+  nameClinical: t.tara?.clinical?.therapeutic_analog || t.attack,
   category: t.ui_category as CategoryId,
   tactic: t.tactic,
   bands: t.band_ids as unknown as BandId[],
@@ -187,6 +192,7 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   sources: t.sources ?? [],
   tara: t.tara ?? null,
   physicsFeasibility: t.physics_feasibility ?? null,
+  enriched: !t.tara_enrichment_pending,
   neurorights: t.neurorights ?? null,
   regulatory: t.regulatory ?? null,
 }));
